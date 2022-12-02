@@ -207,5 +207,22 @@
   "toasts": "Toasts（吐司）",
   "tooltips": "Tooltips（工具提示）",
   "treeviews": "Treeviews（树形视图）",
-  "virtual-scroll": "Virtual scroll（虚拟滚动条）"
+  "virtual-scroll": "Virtual scroll（虚拟滚动条）",
+  "Material Design Breakpoints": "Material Design 断点",
+  "Device": "设备",
+  "Code": "代码",
+  "Type": "类型",
+  "Range": "像素范围",
+  "Extra small": "Extra small (超小号)",
+  "Small to large phone": "小型号到大型号的手机",
+  "Small": "Small (小号)",
+  "Small to medium tablet": "小型号到中型号的平板",
+  "Medium": "Medium (中号)",
+  "Large tablet to laptop": "大型号平板到手提电脑",
+  "Large": "Large (大号)",
+  "Desktop": "桌面端",
+  "Extra large": "Extra large (超大号)",
+  "4k and ultra-wide": "4K 和超宽屏幕",
+  "Specification": "规格",
+  "* -16px on desktop for browser scrollbar": "桌面端上浏览器滚动条的宽度为 * -16px"
 }

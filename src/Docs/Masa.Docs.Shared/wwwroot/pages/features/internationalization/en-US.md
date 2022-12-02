@@ -179,8 +179,6 @@ void Example()
 
 ### Support MasaI18n in Blazor WebAssembly project
 
-<br/>
-
 - Since the Blazor WebAssembly code is executed on the browser side, it is necessary to use an http request to read the i18n resource file. The program.cs code is as follows:
 
 ```csharp

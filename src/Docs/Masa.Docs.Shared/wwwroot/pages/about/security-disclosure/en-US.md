@@ -10,8 +10,6 @@ To report a security issue, please email [opensource@masastack.com]() and includ
 
 The MASA Blazor team will send a response explaining the next steps in processing your report. The MASA Blazor team will send a response explaining the next steps in processing your report. After an initial response to your report, the security team will keep you informed of the progress of the repair and the complete announcement, and may ask you to provide additional information or guidance. 
 
-<br>
-
 ## Disclosure policy
 
 When the security team receives a security vulnerability report, they will assign it to a primary processor. This person will coordinate the repair and release procedures, involving the following steps:
@@ -19,8 +17,6 @@ When the security team receives a security vulnerability report, they will assig
 - Identify the problem and determine the affected version.
 - Audit the code to discover any potential similar issues. 
 - Prepare fixes for all versions that are still under maintenance. These fixes will be published as soon as possible. 
-
-<br>
 
 ## Suggestions for this policy
 

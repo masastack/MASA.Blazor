@@ -6,15 +6,11 @@
 
 MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6.0</a>。
 
-<br/>
-
 ## 演示视频
 
 视频内容为 MASA Blazor 模板创建 Blazor Server 演示视频，可选择查看或者直接查看 CLI 创建部分。
 
 <video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
-
-<br/>
 
 ## 安装 Masa.Template 模板
 
@@ -23,10 +19,6 @@ Masa.Template,包含 MASA 系列所有项目模板。MASA Blazor 对应模板名
 ```shell
 dotnet new --install Masa.Template
 ```
-
-<br/>
-
-
 ### 创建项目
 
 根据项目模板名创建项目，并指定输出目录，即项目的根文件夹。
@@ -37,15 +29,10 @@ dotnet new masab -o MasaBlazorApp
 
 > 默认为 Server 模式，通过参数--mode WebAssembly 创建 WebAssembly 模式项目。
 
-<br/>
-
 ### 启动项目
 
 通过命令`cd MasaBlazorApp`切换到 MasaBlazorApp 目录下 。
 `dotnet run`启动项目，根据程序输出打开对应网址，即可看到 MASA Blazor 模板项目的效果。
-
-<br/>
-
 
 ## 手动创建
 
@@ -65,15 +52,11 @@ dotnet new blazorwasm -o BlazorApp
 
 > `blazorserver`为 Blazor Server App 短名称。`blazorwasm`为 Blazor WebAssembly App 短名称
 
-<br/>
-
 ### 安装 NuGet 包
 
 ```shell
 dotnet add package Masa.Blazor
 ```
-
-<br/>
 
 ### 引入资源文件
 
@@ -94,8 +77,6 @@ dotnet add package Masa.Blazor
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 
-<br/>
-
 #### Blazor WebAssembly
 
 在`wwwroot\index.html`中引入资源文件：
@@ -110,8 +91,6 @@ dotnet add package Masa.Blazor
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 
-<br/>
-
 ### 注入相关服务
 
 在 Program.cs 中添加 Masa.Blazor 相关服务：
@@ -120,8 +99,6 @@ dotnet add package Masa.Blazor
 // Add services to the container.
 builder.Services.AddMasaBlazor();
 ```
-
-<br/>
 
 ### 全局引用
 
@@ -137,8 +114,6 @@ builder.Services.AddMasaBlazor();
 ```html
 <MApp> //layout </MApp>
 ```
-
-<br/>
 
 ## 使用
 

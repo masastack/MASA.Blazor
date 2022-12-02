@@ -6,17 +6,11 @@ Let's start with MASA Blazor. MASA Blazor is the UI component library of the .NE
 
 All products of the MASA series are developed based on .Net 6.0, please make sure that you have installed <a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6.0</a> 。
 
-<br/>
-
-
 ## Presentation
 
 The video content is the MASA Blazor template to create the Blazor Server demo video, you can choose to view or directly view the CLI creation part. 
 
 <video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
-
-<br/>
-
 
 ## CLI Creation
 
@@ -27,10 +21,6 @@ Masa.Template, contains all project templates of the MASA series. The correspond
 ```shell
 dotnet new --install Masa.Template
 ```
-
-<br/>
-
-
 ### Create project
 
 Create a project based on the project template name and specify the output directory, which is the root folder of the project. 
@@ -41,15 +31,10 @@ dotnet new masab -o MasaBlazorApp
 
 > The default is Server mode, through the parameter --mode WebAssembly to create a WebAssembly mode project. 
 
-<br/>
-
 ### Startup project
 
 Switch to the MasaBlazorApp directory by command `cd MasaBlazorApp`. 
 Start the project with `dotnet run`, open the corresponding URL according to the program output, and you can see the effect of the MASA Blazor template project. 
-
-<br/>
-
 
 ## Create manually
 
@@ -69,15 +54,11 @@ dotnet new blazorwasm -o BlazorApp
 
 > `blazorserver` is Blazor Server App template shortname。`blazorwasm` is Blazor WebAssembly App template shortname
 
-<br/>
-
 ### Install NuGet package
 
 ```shell
 dotnet add package Masa.Blazor
 ```
-
-<br/>
 
 ### Import resource files
 
@@ -96,8 +77,6 @@ in `Pages/_Layout.cshtml` import resource files：
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 
-<br/>
-
 #### Blazor WebAssembly
 
 in `wwwroot\index.html` import resource files：
@@ -111,9 +90,6 @@ in `wwwroot\index.html` import resource files：
 
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
-
-<br/>
-
 ### Inject services 
 
 Program.cs file add Masa.Blazor related services：
@@ -122,9 +98,6 @@ Program.cs file add Masa.Blazor related services：
 // Add services to the container.
 builder.Services.AddMasaBlazor();
 ```
-
-<br/>
-
 ### Global reference
 
 update `_Imports.razor` file,Add:
@@ -139,9 +112,6 @@ update `Shared/MainLayout.razor` file，set MApp as root element：
 ```html
 <MApp> //layout </MApp>
 ```
-
-<br/>
-
 ## Use
 
 Refer to official documents [Component](https://masa-blazor-docs-dev.lonsid.cn/components/application),Add related components。
