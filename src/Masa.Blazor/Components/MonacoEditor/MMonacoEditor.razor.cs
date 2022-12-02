@@ -23,7 +23,8 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [Parameter]
     public StringNumber MaxHeight { get; set; }
 
-    [Parameter] public EditorOptions EditorOptions { get; set; } = new();
+    [Parameter] 
+    private EditorOptions EditorOptions { get; set; } = new();
 
     private IJSObjectReference _monaco;
 

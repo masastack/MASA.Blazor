@@ -20,21 +20,21 @@
     private MMonacoEditor _editor;
 
     public EditorOptions _EditorOptions { get; set; } = new()
-        {
-            Value = @"using System;\r\n
-                        namespace HelloWorldApplication\r\n
-                        {\r\n
-                            class HelloWorld\r\n
-                            {\r\n
-                                static void Main(string[] args)\r\n
-                                {\r\n
-                                    Console.WriteLine();\r\n
-                                    Console.ReadKey();\r\n
-                                }\r\n
-                            }\r\n
-                        }",
-            Language = "csharp"
-        };
+    {
+        Value = @"using System;
+                  namespace HelloWorldApplication
+                  {
+                        class HelloWorld
+                        {
+                            static void Main(string[] args)
+                            {
+                                Console.WriteLine();
+                                Console.ReadKey();
+                            }
+                         }
+                  }",
+        Language = "csharp"
+    };
 
 
     private async Task SetLanguage()
