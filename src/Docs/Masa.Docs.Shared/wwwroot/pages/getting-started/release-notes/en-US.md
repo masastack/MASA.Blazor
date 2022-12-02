@@ -1,5 +1,4 @@
 ---
-order: 5
 title: Release Notes
 ---
 

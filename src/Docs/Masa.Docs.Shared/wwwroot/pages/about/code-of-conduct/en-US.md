@@ -1,5 +1,4 @@
 ﻿---
-order: 3
 title: Code of conduct
 ---
 

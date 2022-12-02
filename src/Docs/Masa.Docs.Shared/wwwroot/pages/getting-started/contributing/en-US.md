@@ -1,5 +1,4 @@
 ---
-order: 7
 title: Contributing
 ---
 
