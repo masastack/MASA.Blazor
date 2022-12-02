@@ -7,21 +7,18 @@
 
     public EditorOptions _EditorOptions { get; set; } = new()
         {
-            Value = "using System;\r\n"+
-                    "namespace HelloWorldApplication\r\n"+
-                    "{\r\n"+
-                    "    /* 类名为 HelloWorld */\r\n"+
-                    "    class HelloWorld\r\n"+
-                    "    {\r\n"+
-                    "        /* main函数 */\r\n"+
-                    "        static void Main(string[] args)\r\n"+
-                    "        {\r\n"+
-                    "            /* 我的第一个 C# 程序 */\r\n"+
-                    "            Console.WriteLine(\"Hello World!\");\r\n"+
-                    "            Console.ReadKey();\r\n"+
-                    "        }\r\n"+
-                    "    }\r\n"+
-                    "}",
+            Value = @"using System;\r\n
+                        namespace HelloWorldApplication\r\n
+                        {\r\n
+                            class HelloWorld\r\n
+                            {\r\n
+                                static void Main(string[] args)\r\n
+                                {\r\n
+                                    Console.WriteLine();\r\n
+                                    Console.ReadKey();\r\n
+                                }\r\n
+                            }\r\n
+                        }",
             Language = "csharp"
         };
 

@@ -3,9 +3,6 @@
 public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 {
     [Inject]
-    protected I18n I18n { get; set; }
-
-    [Inject]
     protected MonacoEditorJSModule Module { get; set; }
 
     [Parameter]
@@ -26,47 +23,12 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [Parameter]
     public StringNumber MaxHeight { get; set; }
 
-    [Parameter]
-    public object Option { get; set; } = new { };
-
-    [Parameter]
-    public bool Light { get; set; }
-
-    [Parameter]
-    public bool Dark { get; set; }
-
-    [Parameter]
-    public string Theme { get; set; }
-
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [Parameter] public EditorOptions EditorOptions { get; set; } = new();
 
     private IJSObjectReference _monaco;
 
     private bool _isMonacoEditorDisposed = false;
-
-    private object _prevOption;
-
-    public string ComputedTheme
-    {
-        get
-        {
-            if (Theme is not null)
-            {
-                return Theme;
-            }
-
-            if (Dark)
-            {
-                return "dark";
-            }
-
-            return null;
-        }
-    }
-
+    
     protected override void SetComponentClass()
     {
         CssProvider
@@ -84,7 +46,6 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 
     protected override async Task OnInitializedAsync()
     {
-
         await InitMonaco();
         await base.OnInitializedAsync();
     }

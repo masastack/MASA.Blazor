@@ -1,17 +1,17 @@
 ﻿<MCard>
-    <MButton OnClick="()=>SetLanguage()">切换语法</MButton>
-    <MButton OnClick="()=>GetValue()">获取到编辑器的值</MButton>
+    <MButton OnClick="()=>SetLanguage()">Switch the grammar</MButton>
+    <MButton OnClick="()=>GetValue()">Access to the editor's value</MButton>
     <MDivider></MDivider>
     <MTextField @bind-Value="_EditorOptions.Language"
-                Label="语法支持"
+                Label="Syntax support"
                 Outlined></MTextField>
 
-    <MMonacoEditor @ref="_editor"EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
+    <MMonacoEditor @ref="_editor" EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
 
 
 </MCard>
 
-<MDivider>获取值显示</MDivider>
+<MDivider>Get the value displayed</MDivider>
 <MCard>
     @_EditorOptions.Value
 </MCard>
@@ -21,21 +21,18 @@
 
     public EditorOptions _EditorOptions { get; set; } = new()
         {
-            Value = "using System;\r\n"+
-                    "namespace HelloWorldApplication\r\n"+
-                    "{\r\n"+
-                    "    /* 类名为 HelloWorld */\r\n"+
-                    "    class HelloWorld\r\n"+
-                    "    {\r\n"+
-                    "        /* main函数 */\r\n"+
-                    "        static void Main(string[] args)\r\n"+
-                    "        {\r\n"+
-                    "            /* 我的第一个 C# 程序 */\r\n"+
-                    "            Console.WriteLine(\"Hello World!\");\r\n"+
-                        "            Console.ReadKey();\r\n"+
-                        "        }\r\n"+
-                        "    }\r\n"+
-                        "}",
+            Value = @"using System;\r\n
+                        namespace HelloWorldApplication\r\n
+                        {\r\n
+                            class HelloWorld\r\n
+                            {\r\n
+                                static void Main(string[] args)\r\n
+                                {\r\n
+                                    Console.WriteLine();\r\n
+                                    Console.ReadKey();\r\n
+                                }\r\n
+                            }\r\n
+                        }",
             Language = "csharp"
         };
 
@@ -48,6 +45,5 @@
     private async Task GetValue()
     {
         _EditorOptions.Value = await _editor.GetValue();
-        StateHasChanged();
     }
 }

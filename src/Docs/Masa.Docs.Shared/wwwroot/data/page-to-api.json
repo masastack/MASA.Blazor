@@ -69,9 +69,6 @@
     "MRangeSlider",
     "MSlider"
   ],
-  "monaco-editor": [
-    "MMonacoEditor"
-  ],
   "button-groups": [
     "MButtonGroup",
     "MButton"
