@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 <ErrorBoundary>
     <ChildContent>
-        @*<MApp>*@
+        <MApp>
             <div class="page">
                 <div class="sidebar">
                     <NavMenu />
@@ -17,7 +17,7 @@
                     </article>
                 </main>
             </div>
-        @*</MApp>*@
+        </MApp>
     </ChildContent>
     <ErrorContent>
         @context.ToString()

@@ -21,12 +21,12 @@ public static class MauiProgram
 #endif
         builder.Services.AddSingleton<WeatherForecastService>();
         builder.Services.AddMasaBlazor();
-        //AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
-        return builder.Build();
+		//AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
+		return builder.Build();
 	}
 
     private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"********************************** UNHANDLED EXCEPTION! Details: {e.Exception.ToString()}");
+        System.Diagnostics.Debug.WriteLine($"********************************** UNHANDLED EXCEPTION! Details: {e.Exception.Message}");
     }
 }
