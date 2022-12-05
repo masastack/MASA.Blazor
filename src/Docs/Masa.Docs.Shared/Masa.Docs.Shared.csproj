@@ -38,10 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ExamplesSourceFile Remove="Examples\getting-started\browser-support\BrowserSupportTable.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 
