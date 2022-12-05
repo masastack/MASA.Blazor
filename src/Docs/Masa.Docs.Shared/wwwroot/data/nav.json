@@ -12,7 +12,7 @@
     "icon": "mdi-flash",
     "items": [
       "installation",
-      "brower-support",
+      "browser-support",
       "release-notes",
       "upgrade-guide",
       "contributing"

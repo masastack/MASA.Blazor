@@ -1,7 +1,7 @@
 {
   "$DefaultCulture": "true",
   "introduction": "介绍",
-  "brower-support": "浏览器支持",
+  "browser-support": "浏览器支持",
   "release-notes": "发行说明",
   "upgrade-guide": "升级指南",
   "contributing": "贡献",
@@ -228,6 +228,6 @@
   "Browser": "浏览器",
   "Support Status": "支持状态",
   "Supported": "支持",
-  "Supported with polyfill": "需要 polyfill",
+  "Supported with polyfill": "由 polyfill 支持",
   "Not supported": "不支持"
 }

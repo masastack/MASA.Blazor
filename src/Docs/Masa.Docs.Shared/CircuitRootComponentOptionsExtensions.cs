@@ -14,7 +14,7 @@ public static class CircuitRootComponentOptionsExtensions
 
         options.RegisterCustomElement<Masa.Docs.Shared.Examples.about.meet_the_team.TeamMembers>("team-members");
         options.RegisterCustomElement<Masa.Docs.Shared.Examples.features.breakpoints.BreakpointTable>("breakpoint-table");
-        options.RegisterCustomElement<Masa.Docs.Shared.Examples.getting_started.brower_support.BrowerSupportTable>("brower-support-table");
+        options.RegisterCustomElement<Masa.Docs.Shared.Examples.getting_started.browser_support.BrowserSupportTable>("browser-support-table");
 
         options.RegisterCustomElement<ExampleComponents.alerts.Usage>("alerts-usage");
         options.RegisterCustomElement<ExampleComponents.avatars.Usage>("avatars-usage");

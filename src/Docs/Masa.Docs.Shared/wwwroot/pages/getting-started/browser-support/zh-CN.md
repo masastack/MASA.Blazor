@@ -6,4 +6,4 @@ MASA Blazor 是一个渐进式的框架，试图将 Web 开发推向新的高度
 
 ## 浏览器
 
-<brower-support-table></brower-support-table>
+<browser-support-table></browser-support-table>

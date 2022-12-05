@@ -38,7 +38,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\getting-started\browser-support\BrowserSupportTable.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\pages\getting-started\browser-support\examples\" />
   </ItemGroup>
 
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
