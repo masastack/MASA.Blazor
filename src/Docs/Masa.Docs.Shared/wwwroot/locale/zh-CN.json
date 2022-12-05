@@ -224,5 +224,10 @@
   "Extra large": "Extra large (超大号)",
   "4k and ultra-wide": "4K 和超宽屏幕",
   "Specification": "规格",
-  "* -16px on desktop for browser scrollbar": "桌面端上浏览器滚动条的宽度为 * -16px"
+  "* -16px on desktop for browser scrollbar": "桌面端上浏览器滚动条的宽度为 * -16px",
+  "Browser": "浏览器",
+  "Support Status": "支持状态",
+  "Supported": "支持",
+  "Supported with polyfill": "需要 polyfill",
+  "Not supported": "不支持"
 }
