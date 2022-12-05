@@ -1,0 +1,57 @@
+﻿@namespace Masa.Blazor.Presets
+
+<MMenu OpenOnHover
+       CloseOnContentClick="false"
+       AllowOverflow
+       Disabled="_isDisabled"
+       Bottom="Bottom"
+       ContentClass="@($"m-ellipsis-text__tooltip {TooltipClass}")"
+       ContentStyle="@TooltipStyle"
+       OffsetY="OffsetY"
+       OffsetX="OffsetX"
+       Left="Left"
+       Right="Right"
+       Top="Top"
+       NudgeBottom="NudgeBottom"
+       NudgeLeft="NudgeLeft"
+       NudgeRight="NudgeRight"
+       NudgeTop="NudgeTop"
+       NudgeWidth="NudgeWidth"
+       MaxWidth="MaxWidth"
+       MaxHeight="MaxHeight"
+       MinWidth="MinWidth">
+    <ActivatorContent>
+        @if (ActivatorContent is null)
+        {
+            <span class="d-inline-block text-truncate"
+                  style="width: 100%; cursor: auto; vertical-align: top"
+                  @ref="_spanReference"
+                  @attributes="@context.Attrs">
+                @ChildContent
+            </span>
+        }
+        else
+        {
+            if (_activatorRefProps is null)
+            {
+                _activatorRefProps = new ActivatorRefProps(context.Attrs);
+            }
+            else
+            {
+                _activatorRefProps.Attrs = context.Attrs;
+            }
+
+            @ActivatorContent.Invoke(_activatorRefProps)
+        }
+    </ActivatorContent>
+    <ChildContent>
+        @if (string.IsNullOrWhiteSpace(Tooltip))
+        {
+            @ChildContent
+        }
+        else
+        {
+            @Tooltip
+        }
+    </ChildContent>
+</MMenu>
