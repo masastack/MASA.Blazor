@@ -5,11 +5,6 @@
   ],
   "Props": [
     {
-      "Name": "BackgroundColor",
-      "Type": "String",
-      "Description": ""
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",

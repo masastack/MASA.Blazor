@@ -53,7 +53,7 @@
         public OrderDetailValidator(I18n i18n)
         {
             RuleFor(o => o.Title).NotEmpty();
-            RuleFor(o => o.Price).InclusiveBetween(0,20);
+            RuleFor(o => o.Price).InclusiveBetween(0, 20);
             RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
         }
     }
@@ -63,14 +63,14 @@
         public CustomerValidator()
         {
             RuleFor(o => o.Name).NotEmpty();
-            RuleFor(o => o.Age).InclusiveBetween(25,100);
+            RuleFor(o => o.Age).InclusiveBetween(25, 100);
             RuleFor(o => o.Address.ResidentialAddress).NotEmpty().MinimumLength(5).MaximumLength(10);
         }
     }
 
     private OrderDetail _orderDetail = new()
-    {
-        Customers = new List<Customer>
+        {
+            Customers = new List<Customer>
         {
             new Customer
             {
@@ -81,7 +81,7 @@
                 Id=2
             }
         }
-    };
+        };
 
     public async Task SubmitOrder(FormContext context)
     {
