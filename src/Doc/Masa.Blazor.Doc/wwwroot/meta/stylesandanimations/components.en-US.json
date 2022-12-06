@@ -3,7 +3,7 @@
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0443184+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.072992+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -82,7 +82,7 @@
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0453182+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0739881+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -128,7 +128,7 @@
     "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0463124+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0759844+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -174,7 +174,7 @@
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.048322+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0779807+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -209,7 +209,7 @@
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0493187+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0779807+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -354,7 +354,7 @@
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0525588+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0819931+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -389,7 +389,7 @@
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0537011+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0839426+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -424,7 +424,7 @@
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0553108+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0859674+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -481,7 +481,7 @@
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0593209+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0899321+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -615,7 +615,7 @@
     "Desc": "<p>Smooth animations help make a UI feel great. Using MASA Blazor transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0633117+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0939574+08:00",
     "DemoList": [
       {
         "Order": 0,
