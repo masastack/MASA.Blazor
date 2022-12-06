@@ -9,8 +9,6 @@ Blazor is a framework that uses .NET to generate interactive client-side Web UI:
 - Render the UI as HTML and CSS to support many browsers, including mobile browsers.
 - Integrate with modern hosting platforms (such as Docker).
 
-<br/>
-
 Using .NET for client-side web development provides the following advantages:
 - Use C# instead of JavaScript to write code.
 - Leverage the existing .NET library ecosystem.
@@ -19,13 +17,9 @@ Using .NET for client-side web development provides the following advantages:
 - Use Visual Studio on Windows, Linux, and macOS to stay productive.
 - It is generated based on a set of stable, feature-rich and easy-to-use common languages, frameworks and tools.
 
-<br/>
-
 ## MASA Blazor What is it?
 
 Provide a standard basic component library based on Material Design design and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, shorten the development cycle, improve development efficiency, and provide a complete set of Web solutions-MASA Blazor Pro.
-
-<br/>
 
 ## Why choose MASA Blazor?
 
@@ -34,8 +28,6 @@ MASA Blazor is based on Material design specifications, and each component is ca
 MASA Blazor is regularly maintained and upgraded by a professional full-time technical team, efficient response speed, diversified solutions, and enterprise-level support. At present, it has been used in well-known companies, and the MASA Stack product line developed by the MASA team will continue to be used. In addition to ensuring the quality of the project, it can also continue to add new components and functions.
 
 In addition to providing developers with many middle- and Taiwan-based open source projects, MASA Stack, one of its most basic components, MASA Blazor, also hopes to be the most practical component library.
-
-<br/>
 
 ## Advantage:
 

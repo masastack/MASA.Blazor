@@ -1,7 +1,6 @@
----
-title: Text And Typography
-desc: "Control text size, alignment, wrapping, overflow, transforms and more."
----
+# Text And Typography
+
+Control text size, alignment, wrapping, overflow, transforms and more.
 
 ## Examples
 

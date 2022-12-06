@@ -1,7 +1,6 @@
----
-title: Text And Typography（文本和排版）
-desc: "控制文本大小、对齐、换行、溢出、变形等等。"
----
+# Text And Typography（文本和排版）
+
+控制文本大小、对齐、换行、溢出、变形等等。
 
 ## 示例
 

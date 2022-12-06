@@ -192,3 +192,7 @@ h7.m-heading {
     color: #A3AED0;
     opacity: 0.5;
 }
+
+ul:not([class]), ol:not([class]) {
+    margin-bottom: 16px;
+}

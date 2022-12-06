@@ -11,7 +11,21 @@
     "title": "getting-started",
     "icon": "mdi-flash",
     "items": [
-      "installation"
+      "installation",
+      "browser-support",
+      "release-notes",
+      "upgrade-guide",
+      "contributing"
+    ]
+  },
+  {
+    "title": "features",
+    "icon": "mdi-image-edit",
+    "items": [
+      "breakpoints",
+      "icon-fonts",
+      "internationalization",
+      "layouts"
     ]
   },
   {
@@ -207,6 +221,15 @@
       "tooltips",
       "treeviews",
       "virtual-scroll"
+    ]
+  },
+  {
+    "title": "about",
+    "icon": "mdi-information",
+    "items": [
+      "meet-the-team",
+      "security-disclosure",
+      "code-of-conduct"
     ]
   }
 ]

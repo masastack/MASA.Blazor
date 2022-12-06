@@ -1,7 +1,6 @@
----
-title: Flex
-desc: "Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities."
----
+# Flex
+
+Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.
 
 ## Examples
 

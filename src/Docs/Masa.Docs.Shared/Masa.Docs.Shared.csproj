@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.CustomElements" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
   </ItemGroup>
@@ -40,7 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
-	
+
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

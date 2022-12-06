@@ -1,0 +1,42 @@
+﻿@inject I18n I18n
+
+<div class="overflow-hidden mb-4 m-sheet m-sheet--outlined theme--light rounded">
+    <div class="m-data-table theme--light">
+        <div class="m-data-table__wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>@I18n.T("browser")</th>
+                        <th>@I18n.T("support-status")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chromium (Chrome, Edge Insider)</td>
+                        <td>@I18n.T("supported")</td>
+                    </tr>
+                    <tr>
+                        <td>Edge</td>
+                        <td>@I18n.T("supported")</td>
+                    </tr>
+                    <tr>
+                        <td>Firefox</td>
+                        <td>@I18n.T("supported")</td>
+                    </tr>
+                    <tr>
+                        <td>Safari 10+</td>
+                        <td>@I18n.T("supported")</td>
+                    </tr>
+                    <tr>
+                        <td>IE11/Safari 9</td>
+                        <td>@I18n.T("supported-with-polyfill")</td>
+                    </tr>
+                    <tr>
+                        <td>IE9 / IE10</td>
+                        <td>@I18n.T("not-supported")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
