@@ -7,7 +7,7 @@ MASA Blazor is not a solo show. We have a very active and dedicated team, consta
 MASA（company）Is a full-time company engaged in open source work.
 
 <team-members name="doddgu" 
-              position="CTO @ ShuShan" 
+              position="CTO @ MASA" 
               city="Hangzhou,CN" 
               nationality="Chinese" 
               github-url="https://github.com/doddgu" 
@@ -27,10 +27,10 @@ The core development team are open source developers who help guide the directio
               avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/avatar3.png">
 </team-members>
 
-<team-members name="wangzengxing" 
+<team-members name="codding-y" 
               position="Developer" 
               city="Hangzhou,CN" 
               nationality="Chinese" 
-              github-url="https://github.com/wangzengxing" 
-              avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/avatar2.png">
+              github-url="https://github.com/codding-y" 
+              avatar="https://cdn.masastack.com/stack/images/avatar/mr.yan.svg">
 </team-members>

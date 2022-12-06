@@ -38,7 +38,4 @@
 
 ## 归属
 
-This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://contributor-covenant.org/version/1/4
-
-
-
+本行为准则改编自《贡献者公约》1.4版，可在 https://contributor-covenant.org/version/1/4 查找

@@ -6,7 +6,7 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
 
 数闪科技（公司）是一家全职从事开源工作的企业。
 <team-members name="鬼谷子" 
-              position="CTO @ ShuShan" 
+              position="CTO @ MASA" 
               city="Hangzhou,CN" 
               nationality="Chinese" 
               github-url="https://github.com/doddgu" 
@@ -25,10 +25,10 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
               avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/avatar3.png">
 </team-members>
 
-<team-members name="王增星" 
+<team-members name="codding-y" 
               position="Developer" 
               city="Hangzhou,CN" 
               nationality="Chinese" 
-              github-url="https://github.com/wangzengxing" 
-              avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/avatar2.png">
+              github-url="https://github.com/codding-y" 
+              avatar="https://cdn.masastack.com/stack/images/avatar/mr.yan.svg">
 </team-members>
