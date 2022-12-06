@@ -11,6 +11,7 @@
             <MCardText>
                 <MTextField @bind-Value="customer.Name" Label="Name"></MTextField>
                 <MTextField @bind-Value="customer.Age" Label="Age" Type="number"></MTextField>
+                <MTextField @bind-Value="customer.Address.ResidentialAddress" Label="ResidentialAddress"></MTextField>
             </MCardText>
         </MCard>
     }
@@ -36,6 +37,15 @@
         public string Name { get; set; }
 
         public int Age { get; set; }
+
+        public Address Address { get; set; } = new();
+    }
+
+    class Address
+    {
+        public string ResidentialAddress { get; set; }
+
+        public string HouseholdRegistration { get; set; }
     }
 
     class OrderDetailValidator : AbstractValidator<OrderDetail>
@@ -43,7 +53,7 @@
         public OrderDetailValidator(I18n i18n)
         {
             RuleFor(o => o.Title).NotEmpty();
-            RuleFor(o => o.Price).InclusiveBetween(0,20);
+            RuleFor(o => o.Price).InclusiveBetween(0, 20);
             RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
         }
     }
@@ -53,7 +63,8 @@
         public CustomerValidator()
         {
             RuleFor(o => o.Name).NotEmpty();
-            RuleFor(o => o.Age).InclusiveBetween(25,100);
+            RuleFor(o => o.Age).InclusiveBetween(25, 100);
+            RuleFor(o => o.Address.ResidentialAddress).NotEmpty().MinimumLength(5).MaximumLength(10);
         }
     }
 
