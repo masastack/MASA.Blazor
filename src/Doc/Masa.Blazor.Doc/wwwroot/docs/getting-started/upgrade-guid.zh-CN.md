@@ -42,6 +42,23 @@ services.AddMasaBlazor(options =>
 - **Validate**，**Reset** 和 **ResetValidation** 更改为同步方法。
 - 将 `ChildContent` 的上下文类型从 **EditContext** 改为 **FormContext**。
 
+### 升级后无法正常编译
+
+本地SDK版本经过升级则会提示缺少 **Runtime**，需要安装 `wasm-tools` 以及执行 `dotnet restore` 命令，通过以下方式进行解决：
+
+1. 项目中添加并配置 `global.json` 文件，可以参考 [global.json概述](https://learn.microsoft.com/zh-cn/dotnet/core/tools/global-json)。
+```json
+{
+  "sdk": {
+    "version": "6.0.200", // 对应 runtime版本为 6.0.400
+    "rollForward": "latestFeature"
+  }
+}
+```
+2. 安装 `global.json` 文件中对应的SDK版本。可以指定为已存在的 SDK 版本，或按照提示的 Runtime 版本进行安装。**（但注意，Dotnet SDK 和 Dotnet Runtime 的小版本可能并不对应）**
+3. 执行 `dotnet workload install wasm-tools` 命令.
+4. 执行 `dotnet restore` 命令
+
 ## 从 v0.4.x 升级到 v0.5.x
 
 v0.5.x 包含了不兼容的破坏性更改，包括以下变更：
