@@ -29,7 +29,6 @@ public class Usage : Masa.Docs.Shared.Components.Usage
         builder.AddAttribute(7, nameof(MRadio<string>.Label), "Radio 3");
         builder.AddAttribute(8, nameof(MRadio<string>.Value), "3");
         builder.CloseComponent();
-
     };
 
     public Usage() : base(typeof(MRadioGroup<string>))

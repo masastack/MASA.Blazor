@@ -21,6 +21,11 @@ public class ParameterList<TValue> : IEnumerable<ParameterItem<TValue>>
         _list.Add(new ParameterItem<TValue>(key, value));
     }
 
+    public void Insert(int index, ParameterItem<TValue> item)
+    {
+        _list.Insert(index, item);
+    }
+
     public void Remove(string key)
     {
         var value = _list.FirstOrDefault(item => item.Key.Equals(key, StringComparison.OrdinalIgnoreCase));

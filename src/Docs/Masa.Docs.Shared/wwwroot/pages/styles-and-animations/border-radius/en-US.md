@@ -1,7 +1,6 @@
----
-title: Border radius
-desc: "Use the border radius auxiliary style to quickly apply the `border-radius` style to the element"
----
+# Border radius
+
+Use the border radius auxiliary style to quickly apply the `border-radius` style to the element
 
 ## Usage
 

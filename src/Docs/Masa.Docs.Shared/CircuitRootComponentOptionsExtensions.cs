@@ -12,6 +12,10 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppLink>("app-link");
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppAlert>("app-alerts");
 
+        options.RegisterCustomElement<Masa.Docs.Shared.Examples.about.meet_the_team.TeamMembers>("team-members");
+        options.RegisterCustomElement<Masa.Docs.Shared.Examples.features.breakpoints.BreakpointTable>("breakpoint-table");
+        options.RegisterCustomElement<Masa.Docs.Shared.Examples.getting_started.browser_support.BrowserSupportTable>("browser-support-table");
+
         options.RegisterCustomElement<ExampleComponents.alerts.Usage>("alerts-usage");
         options.RegisterCustomElement<ExampleComponents.avatars.Usage>("avatars-usage");
         options.RegisterCustomElement<ExampleComponents.badges.Usage>("badges-usage");
@@ -73,7 +77,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.ratings.Usage>("ratings-usage");
         options.RegisterCustomElement<ExampleComponents.sheets.Usage>("sheets-usage");
         options.RegisterCustomElement<ExampleComponents.skeleton_loaders.Usages.Usage>("skeleton-loaders-usage");
-        options.RegisterCustomElement<ExampleComponents.snackbars.Usages.Usage>("snackbars-usage");
         options.RegisterCustomElement<ExampleComponents.steppers.Usage>("steppers-usage");
         options.RegisterCustomElement<ExampleComponents.subheaders.Usage>("subheaders-usage");
         options.RegisterCustomElement<ExampleComponents.data_iterators.Usage>("data-iterators-usage");

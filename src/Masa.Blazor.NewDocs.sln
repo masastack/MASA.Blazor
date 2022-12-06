@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Server", "Docs\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Shared", "Docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{4BB2660A-0722-43C0-9227-1D4F9D6F5846}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.WebAssembly", "Docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj", "{3CD005E0-B246-4757-A010-C31CCBCA9571}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.WebAssembly", "Docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj", "{3CD005E0-B246-4757-A010-C31CCBCA9571}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

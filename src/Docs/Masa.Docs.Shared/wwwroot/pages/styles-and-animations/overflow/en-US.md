@@ -1,7 +1,6 @@
----
-title: Overflow
-desc: "Configure how content overflows when it becomes out of container bounds."
----
+# Overflow
+
+Configure how content overflows when it becomes out of container bounds.
 
 ### Misc
 

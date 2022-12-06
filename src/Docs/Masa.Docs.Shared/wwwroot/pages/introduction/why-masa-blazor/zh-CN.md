@@ -16,15 +16,9 @@ Blazor 是一个使用 .NET 生成交互式客户端 Web UI 的框架：
 - 在 Windows、Linux 和 macOS 上使用 Visual Studio 保持高效工作。
 - 以一组稳定、功能丰富且易用的通用语言、框架和工具为基础来进行生成。
 
-<br/>
-
-
 ## MASA Blazor 是什么？
 
 基于Material Design设计和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，缩短开发周期，提高开发效率，并提供一整套Web解决方案 - MASA Blazor Pro。
-
-<br/>
-
 
 ## 为什么选择 MASA Blazor？
 
@@ -33,9 +27,6 @@ Blazor 是一个使用 .NET 生成交互式客户端 Web UI 的框架：
 &emsp;MASA Blazor 是由一支专业的全职技术团队进行定期维护升级，高效的响应速度，多元化的解决方案，并提供企业级支持。目前已在知名企业使用，且MASA团队自研的MASA Stack产品线也将持续使用，除了可以保证项目质量，还可以持续的增加新的组件和功能。
 
 &emsp;MASA Stack除了为开发者提供众多中台类开源项目，其最基础的组成部分之一MASA Blazor也希望可以打造成最实用的组件库。
-
-<br/>
-
 
 ## 优势：
 - 丰富组件：包含Vuetify 1:1还原的基础组件，以及很多实用的预置组件和.Net深度集成功能，包括Url、面包屑、导航三联动，高级搜索，i18n等。

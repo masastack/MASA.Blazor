@@ -109,6 +109,7 @@ h7.m-heading {
 
 .emphasize2-color {
     color: #323D6F !important;
+    caret-color: #323D6F !important;
 }
 
 .secondary-emphasis-text {
@@ -122,6 +123,11 @@ h7.m-heading {
     font-size: 1rem;
     line-height: 1.5rem;
     color: #485585;
+}
+
+.subordinary-color {
+    color: #7681AB !important;
+    caret-color: #7681AB !important;
 }
 
 .black-text {
@@ -152,4 +158,41 @@ h7.m-heading {
     display: flex;
     height: 100% !important;
     align-items: center;
+}
+
+#github-issuse {
+    height: 32px;
+    background: rgba(233, 237, 247, 0.5);
+    line-height: 32px;
+    font-size: 14px;
+}
+
+    #github-issuse a {
+        text-decoration: none;
+        color: #1B2559 !important;
+    }
+
+        #github-issuse a:hover {
+            color: #4318FF !important;
+        }
+
+    #github-issuse > a > i {
+        color: inherit !important;
+    }
+
+
+.toc-content {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #A3AED0;
+    opacity: 0.5;
+}
+
+ul:not([class]), ol:not([class]) {
+    margin-bottom: 16px;
 }

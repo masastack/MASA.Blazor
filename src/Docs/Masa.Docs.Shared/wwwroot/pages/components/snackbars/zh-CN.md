@@ -3,7 +3,7 @@ title: Snackbars（消息条）
 desc: "MSnackbar 组件用于向用户显示快速消息。 Snackbars 支持定位、移除延迟和回调。"
 related:
   - /components/buttons
-  - /stylesandanimations/colors
+  - /styles-and-animations/colors
   - /components/forms
 ---
 
@@ -11,7 +11,7 @@ related:
 
 **MSnackbar** 以最简单的形式向用户显示一个临时且可关闭的通知。
 
-<snackbars-usage></snackbars-usage>
+<masa-example file="Examples.components.snackbars.Usage"></masa-example>
 
 ## 示例
 

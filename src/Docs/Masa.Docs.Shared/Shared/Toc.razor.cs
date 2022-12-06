@@ -98,7 +98,7 @@ public partial class Toc : NextTickComponentBase
         }
         else
         {
-            builder.Append(" text--secondary");
+            builder.Append(" subordinary-color");
         }
 
         return builder.ToString();

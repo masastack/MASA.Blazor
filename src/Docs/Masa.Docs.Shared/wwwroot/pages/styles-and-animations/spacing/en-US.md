@@ -1,7 +1,6 @@
----
-title: Spacing
-desc: "Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements."
----
+# Spacing
+
+Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements.
 
 ## Start
 

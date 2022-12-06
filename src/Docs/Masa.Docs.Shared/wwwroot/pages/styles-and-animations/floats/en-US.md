@@ -1,7 +1,6 @@
----
-title: Float
-desc: "Applies a custom float across any breakpoint with responsive float utilities."
----
+# Float
+
+Applies a custom float across any breakpoint with responsive float utilities.
 
 ### Misc
 

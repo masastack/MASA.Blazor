@@ -3,7 +3,7 @@ title: Snackbars
 desc: "The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks."
 related:
   - /components/buttons
-  - /stylesandanimations/colors
+  - /styles-and-animations/colors
   - /components/forms
 ---
 
@@ -11,7 +11,7 @@ related:
 
 **MSnackbar** displays a temporary and closeable notification to the user in the simplest form.
 
-<snackbars-usage></snackbars-usage>
+<masa-example file="Examples.components.snackbars.Usage"></masa-example>
 
 ## Examples
 
