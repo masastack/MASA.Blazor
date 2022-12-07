@@ -13,9 +13,23 @@ public partial class AppService
     // };
 
     public const int AppBarHeight = 96;
+    public const int MobileAppBarHeight = 64;
+
+    public static List<(string Title, string URL, string Target)> TopNavMenus => new()
+    {
+        ("Document","",""),
+        ("Getting started","",""),
+        ("Components","/components/alerts",""),
+        ("Pro","http://blazor-pro.masastack.com","_blank"),
+        ("Blog","https://blogs.masastack.com/categories/NET/Blazor","_blank"),
+        ("Community","",""),
+        ("Official website","","")
+    };
 
     private readonly Lazy<Task<List<NavItem>>> _navs;
     private List<MarkdownItTocContent>? _toc;
+
+
 
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
 

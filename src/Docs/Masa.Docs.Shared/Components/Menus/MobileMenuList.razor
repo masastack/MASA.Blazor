@@ -1,0 +1,50 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Class="nihao"
+                   Width="240"
+                   Right
+                   App
+                   Floating
+                   Temporary>
+    <MList Nav>
+        <MListItemGroup>
+            @foreach (var item in AppService.TopNavMenus)
+            {
+                <MListItem Href="@item.URL" Target="@item.Target">
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T(item.Title)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+            <MDivider />
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle>@I18n.T("settings")</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle>Github</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle>Gitee</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        </MListItemGroup>
+    </MList>
+</MNavigationDrawer>
+
+@code {
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+}

@@ -229,5 +229,6 @@
   "support-status": "支持状态",
   "supported": "支持",
   "supported-with-polyfill": "由 polyfill 支持",
-  "not-supported": "不支持"
+  "not-supported": "不支持",
+  "settings": "设置"
 }

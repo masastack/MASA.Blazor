@@ -1,18 +1,9 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 
-<MTabs>
-    <MTab Class="text-none secondary-emphasis-text">@I18n.T("Document")</MTab>
-    <MTab Class="text-none secondary-emphasis-text">@I18n.T("Getting started")</MTab>
-    <MTab Class="text-none secondary-emphasis-text" Href="/components/alerts">@I18n.T("Components")</MTab>
-    <MTab Class="text-none secondary-emphasis-text" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
-    <MTab Class="text-none secondary-emphasis-text" Target="_blank" Href="https://blogs.masastack.com/categories/NET/Blazor/">@I18n.T("Blog")</MTab>
-    <MTab Class="text-none secondary-emphasis-text">@I18n.T("Community")</MTab>
-    <MTab Class="text-none secondary-emphasis-text">@I18n.T("Official website")</MTab>
+<MTabs Style="display: contents;">
+    @foreach (var item in AppService.TopNavMenus)
+    {
+        <MTab Class="text-none secondary-emphasis-text" Href="@item.URL" Target="@item.Target">@I18n.T(item.Title)</MTab>
+    }
 </MTabs>
-
-@code {
-
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
-}

@@ -7,9 +7,10 @@
          Flat
          ClippedRight
          Color="white"
-         Height="AppService.AppBarHeight">
-    <MAppBarNavIcon Class="hidden-sm-and-up" />
-    <AppBarItems OnCultureChanged="OnCultureChanged"></AppBarItems>
+         Height="@(MasaBlazor.Breakpoint.Xs ? AppService.MobileAppBarHeight : AppService.AppBarHeight)">
+    <MAppBarNavIcon Class="hidden-lg-and-up emphasize2-color" @onclick="OnAppBarNavIconClecked" />
+    <AppBarItems OnCultureChanged="OnCultureChanged"
+                 OnDotClicked="OnDotClicked"></AppBarItems>
 </MAppBar>
 
 @code {
@@ -19,5 +20,11 @@
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnAppBarNavIconClecked { get; set; }
+
+    [Parameter]
+    public EventCallback OnDotClicked { get; set; }
 
 }
