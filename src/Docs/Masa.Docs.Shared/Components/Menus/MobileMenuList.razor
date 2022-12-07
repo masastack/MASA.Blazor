@@ -3,36 +3,36 @@
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
-                   Class="nihao"
+                   Class="pt-2"
                    Width="240"
                    Right
                    App
                    Floating
                    Temporary>
-    <MList Nav>
+    <MList Nav @key="Value">
         <MListItemGroup>
             @foreach (var item in AppService.TopNavMenus)
             {
                 <MListItem Href="@item.URL" Target="@item.Target">
                     <MListItemContent>
-                        <MListItemTitle>@I18n.T(item.Title)</MListItemTitle>
+                        <MListItemTitle Class="emphasize1-color">@I18n.T(item.Title)</MListItemTitle>
                     </MListItemContent>
                 </MListItem>
             }
             <MDivider />
             <MListItem>
                 <MListItemContent>
-                    <MListItemTitle>@I18n.T("settings")</MListItemTitle>
+                    <MListItemTitle Class="emphasize1-color">@I18n.T("settings")</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MListItem>
+            <MListItem Href="https://github.com/blazorcomponent/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle>Github</MListItemTitle>
+                    <MListItemTitle Class="emphasize1-color">Github</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MListItem>
+            <MListItem Href="ttps://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle>Gitee</MListItemTitle>
+                    <MListItemTitle Class="emphasize1-color">Gitee</MListItemTitle>
                 </MListItemContent>
             </MListItem>
         </MListItemGroup>
