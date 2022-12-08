@@ -214,5 +214,6 @@
   "support-status": "Support Status",
   "supported": "Supported",
   "supported-with-polyfill": "Supported with polyfill",
-  "not-supported": "Not supported"
+  "not-supported": "Not supported",
+  "settings": "Settings"
 }

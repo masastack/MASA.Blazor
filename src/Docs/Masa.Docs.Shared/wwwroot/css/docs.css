@@ -1,4 +1,22 @@
-﻿.flex-1-1-auto {
+﻿::-webkit-scrollbar-track {
+    border-radius: 15px;
+    margin: 12px 0 0 0;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 5px;
+    margin: 5px 0;
+}
+
+::-webkit-scrollbar-thumb {
+    margin: 5px 0;
+    border-radius: 4px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #E4E8F3), color-stop(0.72, #E4E8F3), color-stop(0.86, #E4E8F3));
+}
+
+
+.flex-1-1-auto {
     flex: 1 1 auto !important;
 }
 

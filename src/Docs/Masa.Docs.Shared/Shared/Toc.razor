@@ -10,7 +10,13 @@
                    Floating
                    Width="300">
     <PrependContent>
-        <GitHubIssues />
+        <ErrorBoundary>
+            <ChildContent>
+                <GitHubIssues />
+            </ChildContent>
+            <ErrorContent>
+            </ErrorContent>
+        </ErrorBoundary>
     </PrependContent>
 
     <ChildContent>

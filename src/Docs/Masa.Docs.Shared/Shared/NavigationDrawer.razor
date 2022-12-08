@@ -1,13 +1,19 @@
 ﻿@using System.Text;
 @inject AppService AppService
+@inject MasaBlazor MasaBlazor
 
-<MNavigationDrawer Id="nav-drawer"
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Id="nav-drawer"
                    Right="RTL"
                    App
                    Floating
                    Width="300">
     <PrependContent>
-        <DefaultDrawerPrepend />
+        @if (MasaBlazor.Breakpoint.LgAndUp)
+        {
+            <DefaultDrawerPrepend />
+        }
     </PrependContent>
     <ChildContent>
         <DefaultList Linkage Items="Navs" />
@@ -23,6 +29,12 @@
 
     [CascadingParameter]
     public CultureInfo Culture { get; set; } = null!;
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
 
     private List<NavItem> Navs { get; set; } = new();
 

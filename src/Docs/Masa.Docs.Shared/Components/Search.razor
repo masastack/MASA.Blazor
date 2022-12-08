@@ -1,11 +1,11 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 
-<div class="search-inupt">
+<div class="search-inupt flex-1-1-auto d-flex justify-end">
     <MTextField @bind-Value="_value"
                 BackgroundColor="#F6F8FD"
                 Class="@($"rounded-lg {Class}")"
-                Style="min-width: 340px"
+                Style="max-width: 340px"
                 Placeholder="@I18n.T("Search")"
                 Clearable
                 ClearIcon="mdi-close-circle"
