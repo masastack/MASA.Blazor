@@ -6,8 +6,8 @@
 <MApp>
     <CascadingValue Value="@I18n.Culture">
         <AppBar OnCultureChanged="@OnCultureChanged"
-                OnAppBarNavIconClecked="OnAppBarNavIconClecked"
-                OnDotClicked="OnDotClicked" />
+                OnAppBarNavIconClick="OnAppBarNavIconClick"
+                OnDotClick="OnDotClick" />
         <NavigationDrawer @bind-Value="_showDrawer" />
         <MErrorHandler>
             <MMain>@Body</MMain>
@@ -47,12 +47,12 @@
         I18n.SetCulture(_culture);
     }
 
-    private void OnAppBarNavIconClecked()
+    private void OnAppBarNavIconClick()
     {
         _showDrawer = !_showDrawer;
     }
 
-    private void OnDotClicked()
+    private void OnDotClick()
     {
         _showMobileMenuList = !_showMobileMenuList;
     }

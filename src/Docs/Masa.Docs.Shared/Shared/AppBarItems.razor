@@ -25,7 +25,7 @@
     }
     else
     {
-        <MobileToolIcons OnDotClicked="OnDotClicked" />
+        <MobileToolIcons OnDotClick="OnDotClick" />
     }
 </div>
 
@@ -36,6 +36,6 @@
     public EventCallback<string> OnCultureChanged { get; set; }
 
     [Parameter]
-    public EventCallback OnDotClicked { get; set; }
+    public EventCallback OnDotClick { get; set; }
 
 }

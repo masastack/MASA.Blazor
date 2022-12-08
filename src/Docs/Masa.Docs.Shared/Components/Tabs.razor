@@ -7,3 +7,10 @@
         <MTab Class="text-none secondary-emphasis-text" Href="@item.URL" Target="@item.Target">@I18n.T(item.Title)</MTab>
     }
 </MTabs>
+
+@code{
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+}
