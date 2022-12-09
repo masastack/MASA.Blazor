@@ -12,27 +12,27 @@ public class MonacoEditorJSModule : JSModule
     public async ValueTask<string> GetValue(IJSObjectReference id)
         => await InvokeAsync<string>("getValue", id);
 
-    public async ValueTask<bool> SetValue(IJSObjectReference id, string value)
-        => await InvokeAsync<bool>("setValue", id, value);
+    public async ValueTask SetValue(IJSObjectReference id, string value)
+        => await InvokeVoidAsync("setValue", id, value);
 
-    public async ValueTask<bool> SetTheme(IJSObjectReference id, string theme)
-        => await InvokeAsync<bool>("setTheme", id, theme);
+    public async ValueTask SetTheme(string theme)
+        => await InvokeVoidAsync("setTheme", theme);
 
-    public async ValueTask<TextModelOptions[]> GetModels(IJSObjectReference id)
-        => await InvokeAsync<TextModelOptions[]>("getModels", id);
+    public async ValueTask<TextModelOptions[]> GetModels()
+        => await InvokeAsync<TextModelOptions[]>("getModels");
 
-    public async ValueTask<TextModelOptions> GetModel(IJSObjectReference id, Uri uri)
-        => await InvokeAsync<TextModelOptions>("getModel", id, uri);
+    public async ValueTask<TextModelOptions> GetModel(IJSObjectReference id)
+        => await InvokeAsync<TextModelOptions>("getModel", id);
 
     public async ValueTask SetModelLanguage(IJSObjectReference id, string languageId)
         => await InvokeVoidAsync("setModelLanguage", id, languageId);
 
-    public async ValueTask RemeasureFonts(IJSObjectReference id)
-        => await InvokeVoidAsync("remeasureFonts", id);
+    public async ValueTask RemeasureFonts()
+        => await InvokeVoidAsync("remeasureFonts");
 
-    public async ValueTask AddKeybindingRules(IJSObjectReference id, KeybindingRule[] rules)
-        => await InvokeVoidAsync("addKeybindingRules", id, rules);
+    public async ValueTask AddKeybindingRules(KeybindingRule[] rules)
+        => await InvokeVoidAsync("addKeybindingRules", rules);
 
-    public async ValueTask AddKeybindingRule(IJSObjectReference id, KeybindingRule rule)
-        => await InvokeVoidAsync("addKeybindingRules", id, rule);
+    public async ValueTask AddKeybindingRule(KeybindingRule rule)
+        => await InvokeVoidAsync("addKeybindingRules", rule);
 }

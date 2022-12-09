@@ -66,39 +66,39 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
         await Module.SetModelLanguage(_monaco, language);
     }
 
-    public async Task<bool> SetValue(string newValue)
+    public async Task SetValue(string newValue)
     {
-        return await Module.SetValue(_monaco, newValue);
+        await Module.SetValue(_monaco, newValue);
     }
 
-    public async Task<bool> SetTheme(string newTheme)
+    public async Task SetTheme(string newTheme)
     {
-        return await Module.SetTheme(_monaco, newTheme);
+        await Module.SetTheme(newTheme);
     }
 
     public async Task<TextModelOptions[]> GetModels()
     {
-        return await Module.GetModels(_monaco);
+        return await Module.GetModels();
     }
 
-    public async Task<TextModelOptions> GetModel(Uri uri)
+    public async Task<TextModelOptions> GetModel()
     {
-        return await Module.GetModel(_monaco, uri);
+        return await Module.GetModel(_monaco);
     }
 
     public async Task RemeasureFonts()
     {
-        await Module.RemeasureFonts(_monaco);
+        await Module.RemeasureFonts();
     }
 
     public async Task AddKeybindingRules(KeybindingRule[] rules)
     {
-        await Module.AddKeybindingRules(_monaco, rules);
+        await Module.AddKeybindingRules( rules);
     }
 
     public async Task AddKeybindingRules(KeybindingRule rule)
     {
-        await Module.AddKeybindingRule(_monaco, rule);
+        await Module.AddKeybindingRule(rule);
     }
 
 
