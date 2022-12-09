@@ -1,0 +1,39 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<MTextField Value="Value"
+            ValueChanged="@ValueChanged"
+            BackgroundColor="grey lighten-3"
+            Flat="@(!isFocused)"
+            Class="rounded-lg"
+            Dense
+            HideDetails="true"
+            Solo
+            Clearable="@Clearable"
+            Label="@Label">
+    <PrependInnerContent>
+        <MIcon Color="@(isFocused ? "grey" : "")" Class="mr-2">
+            @Icon
+        </MIcon>
+    </PrependInnerContent>
+</MTextField>
+
+@code {
+
+    [Parameter]
+    public bool Clearable { get; set; }
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public string? Icon { get; set; }
+
+    [Parameter]
+    public string? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private bool isFocused;
+
+}

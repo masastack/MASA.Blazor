@@ -1,0 +1,36 @@
+﻿<div class="text-center">
+    <MBottomSheet
+        @bind-Value="sheet"
+        Persistent>
+        <ActivatorContent>
+            <MButton
+                Color="green"
+                Dark
+                @attributes="@context.Attrs">
+                Open Persistent
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MSheet
+                Class="text-center"
+                Height="200">
+                <MButton
+                    Class="mt-6"
+                    Text
+                    Color="error"
+                    OnClick="() => sheet = !sheet">
+                    close
+                </MButton>
+                <div class="py-3">
+                    This is a bottom sheet using the persistent prop
+                </div>
+            </MSheet>
+        </ChildContent>
+    </MBottomSheet>
+</div>
+
+@code {
+
+    bool sheet;
+
+}

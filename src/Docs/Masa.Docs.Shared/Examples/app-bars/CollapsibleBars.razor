@@ -1,0 +1,20 @@
+﻿<MCard Class="overflow-hidden">
+    <MAppBar Collapse="!collapseOnScroll"
+             CollapseOnScroll="collapseOnScroll"
+             Absolute
+             Color="deep-purple accent-4"
+             Dark
+             ScrollTarget="#scrolling-sheet-1">
+        <MAppBarNavIcon></MAppBarNavIcon>
+        <MAppBarTitle>Collapsing Bar</MAppBarTitle>
+        <MSpacer></MSpacer>
+        <MCheckbox @bind-Value="collapseOnScroll" Color="white" HideDetails="true"></MCheckbox>
+    </MAppBar>
+    <MSheet Class="overflow-y-auto" MaxHeight="600" Id="scrolling-sheet-1">
+        <MContainer Style="height: 1000px;"></MContainer>
+    </MSheet>
+</MCard>
+
+@code {
+    bool collapseOnScroll = true;
+}

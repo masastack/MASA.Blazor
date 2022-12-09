@@ -1,0 +1,26 @@
+﻿<MRow Justify="@JustifyTypes.Center" Align="AlignTypes.Center">
+    <MChipGroup ActiveClass="primary--text"
+                Column>
+        @foreach (var tag in _tags)
+        {
+            <MChip>
+                @tag
+            </MChip>
+        }
+    </MChipGroup>
+</MRow>
+
+@code {
+    private string[] _tags = new string[]
+        {
+        "Work",
+        "Home Improvement",
+        "Vacation",
+        "Food",
+        "Drawers",
+        "Shopping",
+        "Art",
+        "Tech",
+        "Creative Writing"
+        };
+}

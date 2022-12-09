@@ -1,0 +1,147 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MSwitch @bind-Value="throwException" Label="throw exception when calling OnSave"></MSwitch>
+
+<MButton OnClick="ShowModal">Show Modal</MButton>
+@if (user != null)
+{
+    <div>
+        @System.Text.Json.JsonSerializer.Serialize(user)
+        <MButton Color="primary" Text OnClick="EditModal">edit</MButton>
+    </div>
+}
+
+<PDrawer @bind-Value="value"
+         FormModel="userModel"
+         Persistent
+         Title="Title"
+         Width="500"
+         OnSave="HandleOnSave"
+         OnCancel="HandleOnCancel">
+    <MRow>
+        <MCol Cols="12">
+            <MTextField @bind-Value="userModel.UserName"
+                        Label="UserName"
+                        Dense
+                        Outlined
+                        HideDetails="@("auto")" />
+        </MCol>
+        <MCol Cols="12">
+            <MTextField @bind-Value="userModel.City"
+                        Label="City"
+                        Dense
+                        Outlined
+                        HideDetails="@("auto")" />
+        </MCol>
+        <MCol Cols="12">
+            <MRadioGroup @bind-Value="userModel.Gender"
+                         Label="Gender:"
+                         Row
+                         Dense
+                         Style="margin-top: 0"
+                         HideDetails="@("auto")">
+                <MRadio Label="Male" Value="0"></MRadio>
+                <MRadio Label="Female" Value="1"></MRadio>
+            </MRadioGroup>
+        </MCol>
+        <MCol Cols="12">
+            <MAutocomplete @bind-Value="userModel.Favorites"
+                           Items="favorites"
+                           Label="Favorites"
+                           Multiple
+                           ItemValue="r => r"
+                           ItemText="r => r"
+                           Dense
+                           Outlined
+                           HideDetails="@("auto")">
+            </MAutocomplete>
+        </MCol>
+        @if (exception != null)
+        {
+            <MCol Cols="12">
+                @exception.Message
+            </MCol>
+        }
+    </MRow>
+</PDrawer>
+
+@code {
+
+    readonly List<string> favorites = new() { "Basketball", "Football", "Ping-pong", "Badminton" };
+
+    User user;
+    User userModel;
+
+    private bool value;
+    private bool throwException;
+    private Exception exception;
+
+    private void ShowModal()
+    {
+        userModel = new User();
+        value = true;
+    }
+
+    private void EditModal()
+    {
+        userModel = user.ShallowCopy();
+        value = true;
+    }
+
+    private async Task HandleOnSave(ModalActionEventArgs args)
+    {
+        try
+        {
+            // logic in real world here
+            await Task.Delay(1000);
+
+            if (throwException)
+            {
+                throw new Exception("Something wrong here!");
+            }
+
+            user = userModel.ShallowCopy();
+
+            value = false;
+        }
+        catch (Exception e)
+        {
+            args.Cancel();
+            exception = e;
+        }
+    }
+
+    private void HandleOnCancel()
+    {
+        value = false;
+        exception = null;
+    }
+
+    public class User : IShallowCopy<User>
+    {
+        [Required]
+        public string UserName { get; set; }
+
+        [Range(0, 1)]
+        public int Gender { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public List<string> Favorites { get; set; }
+
+        public User ShallowCopy()
+        {
+            var user = (User)this.MemberwiseClone();
+            user.Favorites = Favorites;
+            return user;
+        }
+    }
+
+    public interface IShallowCopy<T> where T : new() 
+    {
+        T ShallowCopy();
+    }
+
+}

@@ -1,0 +1,104 @@
+﻿<MCard Class="mx-auto mt-12" MaxWidth="450">
+    <MSystemBar></MSystemBar>
+
+    <MToolbar Flat Color="transparent">
+        <MButton Icon>
+            <MIcon>mdi-arrow-left</MIcon>
+        </MButton>
+
+        <MTextField @bind-Value="search" AppendIcon="mdi-magnify" Label="Search News" SingleLine></MTextField>
+    </MToolbar>
+
+    <MCardText Class="py-0">
+        @foreach (var keyword in Keywords())
+        {
+            <MChip Class="mr-2">@keyword</MChip>
+        }
+    </MCardText>
+
+    <MList ThreeLine>
+        @foreach (var item in Searching())
+        {
+            <MListItem Ripple OnClick="() => {}">
+                <MImage Src="@item.Image" Class="mr-4" MaxWidth="64" MinWidth="64"></MImage>
+
+                <MListItemContent>
+                    <span class="text-uppercase font-weight-regular text-caption">@item.Category</span>
+                    <div>@item.Title</div>
+                </MListItemContent>
+            </MListItem>
+        }
+    </MList>
+</MCard>
+
+@code
+{
+    private string search = string.Empty;
+    private class DataDemo
+    {
+        public string Image { get; set; }
+        public string Title { get; set; }
+        public string Category { get; set; }
+        public string KeyWord { get; set; }
+    }
+    private List<DataDemo> Items = new()
+    {
+        new()
+        {
+            Image = "https://cdn-images-1.medium.com/max/1024/1*9C9hLji68wV373tk8okLYA.jpeg",
+            Title = "TBI’s 5 Best: SF Mocktails to Finish Dry January Strong",
+            Category = "Travel",
+            KeyWord = "Drinks"
+        },
+        new()
+        {
+            Image = "https://cdn-images-1.medium.com/max/1024/1*BBNtYUieAqHoXKjiJ2mMjQ.png",
+            Title = "PWAs on iOS 12.2 beta: the good, the bad, and the “not sure yet if good”",
+            Category = "Technology",
+            KeyWord = "Phones"
+        },
+        new()
+        {
+            Image = "https://cdn-images-1.medium.com/max/1024/1*rTEtei1UEmNqbq6evRsExw.jpeg",
+            Title = "How to Get Media Mentions for Your Business",
+            Category = "Media",
+            KeyWord = "Social"
+        },
+        new()
+        {
+            Image = "https://cdn-images-1.medium.com/max/1024/1*FD2nkJewVeQnGf0ommQfrw.jpeg",
+            Title = "The Pitfalls Of Outsourcing Self-Awareness To Artificial Intelligence",
+            Category = "Technology",
+            KeyWord = "Military"
+        },
+        new()
+        {
+            Image = "https://cdn-images-1.medium.com/max/1024/1*eogFpsVgNzXQLCVgFzT_-A.jpeg",
+            Title = "Degrees of Freedom and Sudoko",
+            Category = "Travel",
+            KeyWord = "Social"
+        }
+    };
+
+    private List<string> Keywords()
+    {
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            return new List<string>();
+        }
+
+        return Searching()?.Select(x => x.KeyWord).ToList();
+    }
+
+    private List<DataDemo> Searching()
+    {
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            return Items;
+        }
+
+        var searchLow = search.ToLower();
+
+        return Items.Where(x => x.Title.ToLower().Contains(searchLow)).ToList();
+    }
+}

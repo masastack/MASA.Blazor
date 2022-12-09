@@ -1,0 +1,32 @@
+﻿@using Masa.Docs.Shared.ApiGenerator
+@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+@if (Data is not null && Data.Any())
+{
+    <section id="@Name.ToLower()">
+        <AppHeading Level="2" Href="@($"#{Name.ToLower()}")" Content="@(I18n.T(Name))"></AppHeading>
+
+        <div>
+            <div class="d-flex mb-2">
+                <AppTextField @bind-Value="filter" Icon="mdi-magnify" Clearable Label="Filter"></AppTextField>
+            </div>
+
+            <ApiDatatable Field="@Name" Data="Data" Filter="@filter" />
+        </div>
+    </section>
+}
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string Name { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public List<ParameterInfo>? Data { get; set; }
+
+    private string filter;
+
+}

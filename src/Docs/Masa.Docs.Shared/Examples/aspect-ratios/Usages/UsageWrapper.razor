@@ -1,0 +1,15 @@
+﻿@namespace Masa.Docs.Shared.Examples.aspect_ratios
+@implements Masa.Docs.Shared.Components.IUsageWrapper
+
+<div>
+    <MCard>
+        @ChildContent
+    </MCard>
+</div>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+}

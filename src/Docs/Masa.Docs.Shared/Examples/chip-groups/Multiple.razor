@@ -1,0 +1,33 @@
+﻿<MRow Justify="@JustifyTypes.SpaceAround">
+    <MCol Cols="12"
+          Sm="10"
+          Md="8">
+        <MSheet Elevation="10"
+                Class="py-4 px-1">
+            <MChipGroup Multiple
+                        ActiveClass="primary--text">
+                @foreach (var tag in _tags)
+                {
+                    <MChip>
+                        @tag
+                    </MChip>
+                }
+            </MChipGroup>
+        </MSheet>
+    </MCol>
+</MRow>
+
+@code{
+    private string[] _tags = new string[]
+    {
+        "Work",
+        "Home Improvement",
+        "Vacation",
+        "Food",
+        "Drawers",
+        "Shopping",
+        "Art",
+        "Tech",
+        "Creative Writing"
+    };
+}

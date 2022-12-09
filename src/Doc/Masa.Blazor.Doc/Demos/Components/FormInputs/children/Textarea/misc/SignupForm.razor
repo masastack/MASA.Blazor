@@ -41,6 +41,7 @@
         </MButton>
     </MToolbar>
     <MForm
+        @bind-Value="isValid"
         @ref="form"
         Model="model"
         Class="pa-4 pt-6"
@@ -102,12 +103,12 @@
         </MButton>
         <MSpacer></MSpacer>
         <MButton
-            Disabled="!IsValid"
+            Disabled="!isValid"
             Class="white--text"
             Color="deep-purple accent-4"
             Depressed
-            OnClick="() => form.EditContext.Validate()">
-            Submit
+            OnClick="() => form.Validate()">
+            Submit @isValid
         </MButton>
     </MCardActions>
     <MDialog
@@ -149,7 +150,7 @@
     MForm form;
     Signup model = new() {Bio = bio};
 
-    bool IsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate(); // is right usage?
+    bool isValid;
 
     public class Signup
     {

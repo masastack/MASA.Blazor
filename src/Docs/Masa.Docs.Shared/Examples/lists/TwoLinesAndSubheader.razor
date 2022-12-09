@@ -1,0 +1,123 @@
+﻿<MCard MaxWidth="600"
+       Class="mx-auto">
+    <MToolbar Color="light-blue"
+              Dark>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>My files</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+
+        <MButton Icon>
+            <MIcon>mdi-view-module</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MList Subheader
+           TwoLine>
+        <MSubheader Inset>Folders</MSubheader>
+
+        @foreach (var item in _folders)
+        {
+            <MListItem>
+                <MListItemAvatar>
+                    <MIcon Class="grey lighten-1"
+                           Dark>
+                        mdi-folder
+                    </MIcon>
+                </MListItemAvatar>
+
+                <MListItemContent>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+
+                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>
+                </MListItemContent>
+
+                <MListItemAction>
+                    <MButton Icon>
+                        <MIcon Color="grey lighten-1">mdi-information</MIcon>
+                    </MButton>
+                </MListItemAction>
+            </MListItem>
+
+        }
+
+
+        <MDivider Inset></MDivider>
+
+        <MSubheader Inset>Files</MSubheader>
+
+        @foreach (var item in _files)
+        {
+            <MListItem>
+                <MListItemAvatar>
+                    <MIcon Class="@item.Color"
+                           Dark>@item.Icon</MIcon>
+                </MListItemAvatar>
+
+                <MListItemContent>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+
+                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>
+                </MListItemContent>
+
+                <MListItemAction>
+                    <MButton Icon>
+                        <MIcon Color="grey lighten-1">mdi-information</MIcon>
+                    </MButton>
+                </MListItemAction>
+            </MListItem>
+        }
+    </MList>
+</MCard>
+
+@code{
+    private Item[] _files = new Item[]
+    {
+       new Item 
+       {
+          Color= "blue",
+          Icon= "mdi-clipboard-text",
+          SubTitle= "Jan 20, 2014",
+          Title= "Vacation itinerary",
+       },
+        new Item 
+        {
+          Color= "amber",
+          Icon= "mdi-gesture-tap-button",
+          SubTitle= "Jan 10, 2014",
+          Title= "Kitchen remodel",
+        }
+    };
+
+    private Item[] _folders = new Item[]
+    {
+       new Item 
+       {
+          SubTitle= "Jan 9, 2014",
+          Title= "Photos",
+       },
+       new Item 
+       {
+          SubTitle= "Jan 17, 2014",
+          Title= "Recipes",
+       },
+       new Item
+       {
+          SubTitle= "Jan 28, 2014",
+          Title= "Work",
+       },
+    };
+
+    class Item
+    {
+        public string Color { get; set; }
+        public string Icon { get; set; }
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+    }
+}

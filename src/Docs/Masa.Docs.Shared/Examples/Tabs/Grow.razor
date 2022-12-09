@@ -1,0 +1,46 @@
+﻿<MCard Color="basil">
+    <MCardTitle Class="text-center justify-center py-6">
+        <h1 class="font-weight-bold text-h2 basil--text">BASiL</h1>
+    </MCardTitle>
+
+    <MTabs @bind-Value="tab"
+           BackgroundColor="transparent"
+           Color="basil"
+           Grow>
+        @foreach (var item in items)
+        {
+            <MTab Value="@item">@item</MTab>
+        }
+    </MTabs>
+
+    <MTabsItems Value="@tab">
+        @foreach (var item in items)
+        {
+            <MTabItem Value="@item">
+                <MCard Color="basil" Flat>
+                    <MCardText>@text</MCardText>
+                </MCard>
+            </MTabItem>
+        }
+    </MTabsItems>
+</MCard>
+
+<style>
+/* Helper classes */
+.basil {
+  background-color: #FFFBE6 !important;
+}
+.basil--text {
+  color: #356859 !important;
+}
+</style>
+
+@code {
+
+    StringNumber tab;
+
+    List<string> items = new List<string>() {"petizers", "Entrees", "Deserts", "Cocktails"};
+
+    string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+}

@@ -1,0 +1,26 @@
+﻿<MCard Class="mx-auto elevation-20" Color="purple" Dark Style="max-width: 400px;">
+    <MRow Justify="JustifyTypes.SpaceBetween">
+        <MCol Cols="8">
+            <MCardTitle>
+                <div>
+                    <div class="text-h5">Halycon Days</div>
+                    <div>Ellie Goulding</div>
+                    <div>(2013)</div>
+                </div>
+            </MCardTitle>
+        </MCol>
+        <MImage Class="shrink ma-2" Contain Height="125" Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png" Style="flex-basis: 125px"></MImage>
+    </MRow>
+    <MDivider Dark></MDivider>
+    <MCardActions Class="pa-4">
+        Rate this album
+        <MSpacer></MSpacer>
+        <span class="grey--text text--lighten-2 text-caption mr-2">(@_rating)</span>
+        <MRating @bind-Value="_rating" BackgroundColor="white" Color="yellow accent-4" Dense HalfIncrements Hover Size="18"></MRating>
+    </MCardActions>
+</MCard>
+
+@code
+{
+    private double _rating = 4.3;
+}

@@ -1,0 +1,34 @@
+﻿<MCard MaxWidth="300" Class="mx-auto" Tile>
+    <MBorder Offset Border="_border" Rounded="true" Class="elevation-2" WrapperStyle="display:inline-block">
+        <MBorder Tag="span" Color="pink" Style="border-radius:0;height:50%;margin: auto 0;">
+            <MCardTitle>Card Title</MCardTitle>
+            <MCardSubtitle>Card Subtitle</MCardSubtitle>
+        </MBorder>
+        <MCardText>
+            <p>Greyhound divisively hello coldly wonderfully marginally far upon excluding. </p>
+        </MCardText>
+        <MCardActions>
+            <MButton Text Color="primary">
+                <MIcon Small>fas fa-edit</MIcon>
+                edit
+            </MButton>
+            <MButton Text Color="primary">
+                <MIcon Small>fas fa-share-square</MIcon>
+                share
+            </MButton>
+        </MCardActions>
+    </MBorder>
+</MCard>
+
+<div style="display:flex;justify-content:center;">
+    <MRadioGroup TValue="Borders" @bind-Value="_border" Row>
+        <MRadio Value="Borders.Left" Label="left"></MRadio>
+        <MRadio Value="Borders.Top" Label="top"></MRadio>
+        <MRadio Value="Borders.Right" Label="right"></MRadio>
+        <MRadio Value="Borders.Bottom" Label="bottom"></MRadio>
+    </MRadioGroup>
+</div>
+
+@code {
+    private Borders _border = Borders.Bottom;
+}

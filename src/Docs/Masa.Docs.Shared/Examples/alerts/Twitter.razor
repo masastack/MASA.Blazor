@@ -1,0 +1,27 @@
+﻿<div>
+    <div>
+        <MAlert @bind-Value="_alert"
+                Dismissible
+                Color="cyan"
+                Border="Borders.Left"
+                Elevation="2"
+                ColoredBorder
+                Icon="@("mdi-twitter")">
+            You've got <strong>5</strong> new updates on your timeline!
+        </MAlert>
+
+        <div class="text-center">
+            @if (!_alert)
+            {
+                <MButton Dark
+                         OnClick="() => _alert = true">
+                    Reset Alert
+                </MButton>
+            }
+        </div>
+    </div>
+</div>
+
+@code{
+    private bool _alert = true;
+}
