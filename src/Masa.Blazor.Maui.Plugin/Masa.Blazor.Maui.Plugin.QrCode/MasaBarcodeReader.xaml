@@ -5,10 +5,10 @@
              x:Class="Masa.Blazor.Maui.Plugin.QrCode.MasaBarcodeReader"
              Title="MasaBarcodeReader">
 
-	<Grid RowDefinitions="1*,3*,1*">
+	<Grid RowDefinitions="2*,4*,1*,1*">
 
 		<zxing:CameraBarcodeReaderView 
-			Grid.Row="0" Grid.RowSpan="3"
+			Grid.Row="0" Grid.RowSpan="4"
 			x:Name="BarcodeReader"
 		
 			BarcodesDetected="CameraBarcodeReaderView_BarcodesDetected"/>
@@ -16,17 +16,22 @@
 		<Grid
 			Grid.Row="0"
 			BackgroundColor="#aa000000">
-			<Label Text="请扫描二维码或条形码" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+			<Label Grid.Column="0" Text="请扫描二维码或条形码" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+			
+		</Grid>
+
+		<Grid
+			Grid.Row="2"
+			BackgroundColor="#aa000000" ColumnDefinitions="Auto,*,Auto">
+			<Button  BackgroundColor="#aa000000" Text="💡"  Grid.Column="1" CornerRadius="8" FontSize="18" TextColor="White" Clicked="TorchButton_Clicked" />
 		</Grid>
 
 		<Grid
 			Grid.Row="3"
-			BackgroundColor="#aa000000"
-			
-			ColumnDefinitions="Auto,*,Auto">
-
-			<Button  BackgroundColor="#aa000000" Text="返回" Grid.Column="1" CornerRadius="8" FontSize="18" TextColor="White" Clicked="ReturnToBlazor_Clicked" />
+			BackgroundColor="#aa000000" ColumnDefinitions="Auto,*,Auto">
+			<Button  BackgroundColor="#aa000000" Text="返回"  Grid.Column="1" CornerRadius="8" FontSize="18" TextColor="White" Clicked="ReturnToBlazor_Clicked" />
 		</Grid>
+
 
 	</Grid>
 	
