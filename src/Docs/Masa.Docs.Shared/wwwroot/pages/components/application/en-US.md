@@ -22,33 +22,7 @@ as long as you apply the app property. The key component to making your page con
 is **MMain**. The **MMain** component will be dynamically sized depending upon the structure of your designated app components. 
 You can use combinations of any or all of the above components including **MBottomNavigation**.
 
-```cshtml
-<!-- MainLayout.razor -->
-@inherits LayoutComponentBase
-
-<MApp>
-  <MNavigationDrawer App>
-    <!-- -->
-  </MNavigationDrawer>
-
-  <MAppBar App>
-    <!-- -->
-  </MAppBar>
-
-  <!-- Sizes your content based upon application components -->
-  <MMain>
-    <!-- Provides the application the proper gutter -->
-    <MContainer Fluid>
-        @Body
-    </MContainer>
-  </MMain>
-
-  <MFooter App>
-    <!-- -->
-  </MFooter>
-</MApp>
-
-```
+<default-app-markup></default-app-markup>
 
 <app-alerts type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 
 you can overwrite this functionality by using the `Absolute` prop."></app-alerts>
@@ -72,24 +46,13 @@ Each of these application components have a designated location and priority tha
 The application service is used to configure your MASA Blazor layout. It communicates with the **MMain** component so that it's able to properly size the application content. 
 It has a number of properties that can be accessed:
 
-```csharp
-double Bar { get; }
-double Bottom { get; }
-double Footer { get; }
-double InsetFooter { get; }
-double Left { get; }
-double Right { get; }
-double Top { get; }
-```
+<app-property></app-property>
 
 These values are automatically updated when you add and remove components with the `App` prop. They are NOT editable and exist in a READONLY state. 
 You can access these values by referencing the `Application` property.
 
-```csharp
- [Inject] public MasaBlazor MasaBlazor { get; set; }
- 
- Console.WriteLine(MasaBlazor.Application.Footer); // 60
-```
+<use-property></use-property>
+
 <app-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. "></app-alerts>
 
 

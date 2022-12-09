@@ -93,5 +93,8 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.drawers.Usage>("drawers-usage");
         options.RegisterCustomElement<ExampleComponents.carousels.Usage>("carousels-usage");
         options.RegisterCustomElement<ExampleComponents.copyable_text.Usage>("copyable-text-usage");
+        options.RegisterCustomElement<ExampleComponents.application.DefaultAppMarkup>("default-app-markup");
+        options.RegisterCustomElement<ExampleComponents.application.Property>("app-property");
+        options.RegisterCustomElement<ExampleComponents.application.UseProperty>("use-property");
     }
 }

@@ -1,0 +1,29 @@
+﻿<Markup Code="@_code" Language="razor" Rounded="@("sm")"></Markup>
+
+@code {
+    string _code = @"<!-- MainLayout.razor -->
+@inherits LayoutComponentBase
+
+<MApp>
+  <MNavigationDrawer App>
+    <!-- -->
+  </MNavigationDrawer>
+
+  <MAppBar App>
+    <!-- -->
+  </MAppBar>
+
+  <!-- Sizes your content based upon application components -->
+  <MMain>
+    <!-- Provides the application the proper gutter -->
+    <MContainer Fluid>
+        @Body
+    </MContainer>
+  </MMain>
+
+  <MFooter App>
+    <!-- -->
+  </MFooter>
+</MApp>
+";
+}
