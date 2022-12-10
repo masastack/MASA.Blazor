@@ -1,0 +1,36 @@
+﻿using Android.App;
+using AndroidX.Core.App;
+
+namespace Masa.Blazor.Maui.Plugin.Badger
+{
+    // All the code in this file is included in all platforms.
+    public static partial class MasaMauiBadgerService
+    {
+        public static void PlatformSetNotificationCount(int count)
+        {
+            ME.Leolin.Shortcutbadger.ShortcutBadger.ApplyCount(Android.App.Application.Context, count);
+            NotificationCompat.Builder builder = new(Android.App.Application.Context, $"{Android.App.Application.Context.PackageName}.channel");
+            builder.SetNumber(count);
+            builder.SetContentTitle("hello");
+            builder.SetContentText("hhhhh");
+            builder.SetSmallIcon(Android.Resource.Drawable.SymDefAppIcon);
+            var notification = builder.Build();
+            var notificationManager = NotificationManager.FromContext(Android.App.Application.Context);
+            PlatformCreateNotificationChannel();
+            notificationManager?.Notify((int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), notification);
+        }
+
+        private static void PlatformCreateNotificationChannel()
+        {
+            if (OperatingSystem.IsAndroidVersionAtLeast(26))
+            {
+                using var channel = new NotificationChannel($"{Android.App.Application.Context.PackageName}.channel", "Notification channel", NotificationImportance.Default)
+                {
+                    Description = "Default notification channel"
+                };
+                var notificationManager = NotificationManager.FromContext(Android.App.Application.Context);
+                notificationManager?.CreateNotificationChannel(channel);
+            }
+        }
+    }
+}
