@@ -16,17 +16,17 @@ namespace Masa.Blazor.Maui.Plugin.Badger
             builder.SetSmallIcon(Android.Resource.Drawable.SymDefAppIcon);
             var notification = builder.Build();
             var notificationManager = NotificationManager.FromContext(Android.App.Application.Context);
-            PlatformCreateNotificationChannel();
+            CreateNotificationChannel();
             notificationManager?.Notify((int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), notification);
         }
 
-        private static void PlatformCreateNotificationChannel()
+        private static void CreateNotificationChannel()
         {
             if (OperatingSystem.IsAndroidVersionAtLeast(26))
             {
                 using var channel = new NotificationChannel($"{Android.App.Application.Context.PackageName}.channel", "Notification channel", NotificationImportance.Default)
                 {
-                    Description = "Default notification channel"
+                    Description = "Masa notification channel"
                 };
                 var notificationManager = NotificationManager.FromContext(Android.App.Application.Context);
                 notificationManager?.CreateNotificationChannel(channel);

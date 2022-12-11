@@ -1,19 +1,27 @@
 ﻿@page "/"
 @using Masa.Blazor.Maui.Plugin.Badger;
 
-<h1>Hello, world!</h1>
+<h1>Masa blazor badger sample</h1>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
-<button @onclick="OnIncrementClicked">Add One</button>
+Masa blazor badger sample.
+<div>
+	<button @onclick="OnIncrementClicked">Add</button>
+</div>
+<div>
+	<button @onclick="OnClearClicked">Clear</button>
+</div>
 
 @code{
 	int count;
 	private void OnIncrementClicked()
 	{
 		count++;
-		
+
+		MasaMauiBadgerService.SetNotificationCount(count);
+	}
+	private void OnClearClicked()
+	{
+		count = 0;
 		MasaMauiBadgerService.SetNotificationCount(count);
 	}
 }
