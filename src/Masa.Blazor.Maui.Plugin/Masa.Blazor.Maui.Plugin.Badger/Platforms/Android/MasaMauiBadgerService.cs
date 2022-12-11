@@ -11,8 +11,8 @@ namespace Masa.Blazor.Maui.Plugin.Badger
             ME.Leolin.Shortcutbadger.ShortcutBadger.ApplyCount(Android.App.Application.Context, count);
             NotificationCompat.Builder builder = new(Android.App.Application.Context, $"{Android.App.Application.Context.PackageName}.channel");
             builder.SetNumber(count);
-            builder.SetContentTitle("hello");
-            builder.SetContentText("hhhhh");
+            builder.SetContentTitle(" ");
+            builder.SetContentText("");
             builder.SetSmallIcon(Android.Resource.Drawable.SymDefAppIcon);
             var notification = builder.Build();
             var notificationManager = NotificationManager.FromContext(Android.App.Application.Context);

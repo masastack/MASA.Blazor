@@ -17,7 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
-	  <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.BadgerBinding\Masa.Blazor.Maui.Plugin.BadgerBinding.csproj" />
+		<ProjectReference Include="..\Masa.Blazor.Maui.Plugin.BadgerBinding\Masa.Blazor.Maui.Plugin.BadgerBinding.csproj" />
 	</ItemGroup>
 
 </Project>

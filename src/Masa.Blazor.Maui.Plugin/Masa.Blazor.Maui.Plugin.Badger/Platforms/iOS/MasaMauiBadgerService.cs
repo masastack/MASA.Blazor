@@ -2,7 +2,6 @@
 using UserNotifications;
 namespace Masa.Blazor.Maui.Plugin.Badger
 {
-		// All the code in this file is only included on iOS.
 	public static partial class MasaMauiBadgerService
 	{
         private static void PlatformSetNotificationCount(int count)
@@ -15,5 +14,4 @@ namespace Masa.Blazor.Maui.Plugin.Badger
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = count;
 		}
 	}
-
 }
