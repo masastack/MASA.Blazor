@@ -6,7 +6,7 @@ namespace Masa.Blazor.Maui.Plugin.Badger
     // All the code in this file is included in all platforms.
     public static partial class MasaMauiBadgerService
     {
-        public static void PlatformSetNotificationCount(int count)
+        private static void PlatformSetNotificationCount(int count)
         {
             ME.Leolin.Shortcutbadger.ShortcutBadger.ApplyCount(Android.App.Application.Context, count);
             NotificationCompat.Builder builder = new(Android.App.Application.Context, $"{Android.App.Application.Context.PackageName}.channel");

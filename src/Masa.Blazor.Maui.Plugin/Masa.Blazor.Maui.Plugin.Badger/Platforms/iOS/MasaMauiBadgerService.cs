@@ -5,7 +5,7 @@ namespace Masa.Blazor.Maui.Plugin.Badger
 		// All the code in this file is only included on iOS.
 	public static partial class MasaMauiBadgerService
 	{
-		public static void PlatformSetNotificationCount(int count)
+        private static void PlatformSetNotificationCount(int count)
 		{
 			// Requests the user’s authorization to allow local and remote notifications for your app.
 			UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Badge, (r, e) =>{});

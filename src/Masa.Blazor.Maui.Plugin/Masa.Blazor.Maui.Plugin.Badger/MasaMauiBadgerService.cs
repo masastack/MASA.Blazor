@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration;
-
-namespace Masa.Blazor.Maui.Plugin.Badger
+﻿namespace Masa.Blazor.Maui.Plugin.Badger
 {
     // All the code in this file is included in all platforms.
     public static partial class MasaMauiBadgerService

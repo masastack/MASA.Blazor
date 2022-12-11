@@ -17,12 +17,6 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
-	  <PackageReference Include="Xamarin.AndroidX.Core">
-	    <Version>1.9.0</Version>
-	  </PackageReference>
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
 	  <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.BadgerBinding\Masa.Blazor.Maui.Plugin.BadgerBinding.csproj" />
 	</ItemGroup>
 
