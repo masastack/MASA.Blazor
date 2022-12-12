@@ -90,6 +90,7 @@ You can access these values by referencing the `Application` property.
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
+
 <app-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. "></app-alerts>
 
 

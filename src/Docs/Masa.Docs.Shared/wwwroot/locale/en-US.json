@@ -215,5 +215,6 @@
   "supported": "Supported",
   "supported-with-polyfill": "Supported with polyfill",
   "not-supported": "Not supported",
-  "settings": "Settings"
+  "settings": "Settings",
+  "wireframes": "Wireframes"
 }
