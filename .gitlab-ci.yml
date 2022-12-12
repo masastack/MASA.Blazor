@@ -75,7 +75,8 @@ deploy-dev:
     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
   retry: 2
-
+  when: manual
+  
 deploy-dev-ydy:
   image: portainer/kubectl-shell
   stage: deploy-dev
@@ -85,7 +86,7 @@ deploy-dev-ydy:
     - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor-dev
   retry: 2
-  when: manual
+
 
 deploy-test:
   image: portainer/kubectl-shell
