@@ -17,7 +17,28 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 这是一个默认应用标记的例子。 只要设置 **App** 属性，你可以将布局元素放在任何地方。此处的关键组件是 **MMain** 。它将会根据您分配的应用程序
 组件结构动态、灵活地调整大小。你可以使用上述所有组件的组合，包括 **MBottomNavigation** 。
 
-<default-app-markup></default-app-markup>
+```cshtml
+<!-- MainLayout.razor -->
+@inherits LayoutComponentBase
+<MApp>
+  <MNavigationDrawer App>
+    <!-- -->
+  </MNavigationDrawer>
+  <MAppBar App>
+    <!-- -->
+  </MAppBar>
+  <!-- Sizes your content based upon application components -->
+  <MMain>
+    <!-- Provides the application the proper gutter -->
+    <MContainer Fluid>
+        @Body
+    </MContainer>
+  </MMain>
+  <MFooter App>
+    <!-- -->
+  </MFooter>
+</MApp>
+```
 
 <app-alerts type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></app-alerts>
 
@@ -38,11 +59,23 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 
 应用服务用于配置你的布局。 它与 **MMain** 组件通信，以便它能够正确地调整应用内容。 它有一些可以访问的属性：
 
-<app-property></app-property>
+```csharp
+double Bar { get; }
+double Bottom { get; }
+double Footer { get; }
+double InsetFooter { get; }
+double Left { get; }
+double Right { get; }
+double Top { get; }
+```
 
 当你使用 **App** 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 **Application** 对象的应用属性来访问这些值。
 
-<use-property></use-property>
+```csharp
+ [Inject] public MasaBlazor MasaBlazor { get; set; }
+ 
+ Console.WriteLine(MasaBlazor.Application.Footer); // 60
+```
 
 <app-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
 Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></app-alerts>

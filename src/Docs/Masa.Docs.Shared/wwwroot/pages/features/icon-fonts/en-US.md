@@ -6,6 +6,14 @@ MASA Blazor supports booting Material Design icons, Material icons, Font Awesome
 
 You can use `MIcon`, `MAlert`, `MBadge` and other components to display icons. example:
 
-<use-icon></use-icon>
+```html
+<MIcon>mdi-alarm</MIcon>
+
+<MAlert Color="#2A3B4D" Icon="@("mdi-firework")">
+    Hello World!
+</MAlert>
+
+<MBadge Color="error" Icon="mdi-lock"></MBadge>
+```
 
 If you want to change the font library or custom icons, this feature is not currently supported. Please be patient, we will continue to improve.

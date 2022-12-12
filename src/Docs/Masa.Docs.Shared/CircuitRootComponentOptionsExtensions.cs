@@ -14,7 +14,6 @@ public static class CircuitRootComponentOptionsExtensions
 
         options.RegisterCustomElement<Masa.Docs.Shared.Examples.about.meet_the_team.TeamMembers>("team-members");
         options.RegisterCustomElement<Masa.Docs.Shared.Examples.features.breakpoints.BreakpointTable>("breakpoint-table");
-        options.RegisterCustomElement<Masa.Docs.Shared.Examples.features.font_icons.Usage>("use-icon");
         options.RegisterCustomElement<Masa.Docs.Shared.Examples.getting_started.browser_support.BrowserSupportTable>("browser-support-table");
 
         options.RegisterCustomElement<ExampleComponents.alerts.Usage>("alerts-usage");
@@ -95,7 +94,5 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.carousels.Usage>("carousels-usage");
         options.RegisterCustomElement<ExampleComponents.copyable_text.Usage>("copyable-text-usage");
         options.RegisterCustomElement<ExampleComponents.application.DefaultAppMarkup>("default-app-markup");
-        options.RegisterCustomElement<ExampleComponents.application.Property>("app-property");
-        options.RegisterCustomElement<ExampleComponents.application.UseProperty>("use-property");
     }
 }

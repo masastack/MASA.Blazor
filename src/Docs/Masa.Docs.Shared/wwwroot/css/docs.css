@@ -214,3 +214,20 @@ h7.m-heading {
 ul:not([class]), ol:not([class]) {
     margin-bottom: 16px;
 }
+
+.bottom-btn {
+    z-index: 6;
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+}
+
+.m-application code:not(.m-code-highlight__code) {
+    background-color: #f0f3f9 !important;
+    color: #1B2559;
+    font-family: 'Roboto';
+}
+
+.m-code-highlight__pre .m-code-highlight__code {
+    padding: 0 !important;
+}
