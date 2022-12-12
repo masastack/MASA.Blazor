@@ -1,0 +1,26 @@
+{
+  "props": {
+    "disableItemsPerPage": "禁用每页下拉菜单项",
+    "disablePagination": "禁用分页按钮",
+    "firstIcon": "第一个图标",
+    "itemsPerPageAllText": "每页下拉菜单中 'All' 选项的文本",
+    "itemsPerPageOptions": "每页项目下拉列表中显示的选项数组",
+    "itemsPerPageText": "每页项目的文本下拉菜单",
+    "lastIcon": "最后一个图标",
+    "nextIcon": "下一图标",
+    "options": "数据选项",
+    "pageText": "",
+    "pagination": "数据分页",
+    "parameters": "",
+    "prevIcon": "上一个图标",
+    "showCurrentPage": "在 上一个/下一个 图标之间显示当前页码",
+    "showFirstLastPage": "显示 第一个/最后一个 图标"
+  },
+  "events": {
+    "onOptionsUpdate": ""
+  },
+  "contents": {
+    "pageTextContent": "定义每页项目文本的内容",
+    "prependContent": ""
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "props": {
+    "items": "Array of items to display",
+    "itemSize": "How many pieces of data to display at a time",
+    "overscanCount": "How many pieces of data to prepare in advance"
+  },
+  "events": {},
+  "contents": {
+    "footerContent": "",
+    "itemContent": ""
+  }
+}

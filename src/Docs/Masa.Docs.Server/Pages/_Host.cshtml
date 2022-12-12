@@ -16,16 +16,19 @@
     <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
     <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
+    <link href="Masa.Docs.Server.styles.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/fonts/roboto/roboto.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/docsearch/docsearch.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/prism-themes/1.9.0/prism-material-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/prism-themes/1.9.0/prism-duotone-dark.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/gridstack.js/7.1.0/gridstack.min.css" rel="stylesheet">
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
@@ -45,12 +48,12 @@
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
-    <script src="_content/Masa.Blazor.Doc/echarts/theme/vintage.js"></script>
+    <script src="_content/Masa.Docs.Shared/echarts/theme/vintage.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js"></script>
     <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
-    <script src="_content/Masa.Blazor.Doc/quill/quill-blot-formatter.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/quill/quill-blot-formatter.min.js"></script>
     <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
     <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/prism/9000.0.1/prism.min.js"></script>

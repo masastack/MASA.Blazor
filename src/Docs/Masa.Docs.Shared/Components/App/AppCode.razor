@@ -1,13 +1,14 @@
 ﻿@namespace Masa.Docs.Shared.Components
 
-<MSheet Color="@(IsDark ? "#1F1F1F" : "grey lighten-5")"
+@*TODO: Color support dark*@
+<MSheet Color="#1B2559"
         Dark="IsDark"
         Rounded="Rounded"
         Class="@($"app-code overflow-hidden {Class}")"
         Outlined>
-    @ChildContent
-
-    <AppCopyButton Class="mr-n2 mt-n2"></AppCopyButton>
+    @*TODO:Style color support dark*@
+    <MHighlight Class="white--text overflow-x-auto overflow-y-hidden" Code="@Code" Language="@Language" IgnorePreCssOfTheme></MHighlight>
+    <AppCopyButton Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
 </MSheet>
 
 @code {
@@ -22,6 +23,11 @@
     public StringBoolean Rounded { get; set; } = true;
 
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [EditorRequired]
+    public string? Code { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string? Language { get; set; }
 
 }

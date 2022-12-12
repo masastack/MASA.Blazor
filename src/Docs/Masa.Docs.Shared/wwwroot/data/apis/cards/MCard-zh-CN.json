@@ -1,0 +1,18 @@
+{
+  "props": {
+    "disabled": "移除组件的单击或 target 功能。",
+    "flat": "移除卡片的海拔。",
+    "hover": "悬停时将应用 4dp 的海拔（默认值为 2dp）。您可以在 [elevation page](styles-and-animations/elevation) 找到更多信息。",
+    "img": "指定卡片的图像背景。对于更高级的实现，建议您使用 [MImage](/components/images) 组件。",
+    "loaderHeight": "指定加载器的高度。",
+    "loading": "显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 `Color`（由色彩属性设置——如果它被组件支持的话）还可以是原色。",
+    "outlined": "使背景透明并使用薄边框。",
+    "raised": "指定较高的默认海拔（8dp）。您可以在 [elevation page](styles-and-animations/elevation) 找到更多信息。",
+    "show": "Show"
+  },
+  "contents": {
+    "progressContent": "自定义进度线的插槽（`Loading`属性不等于布尔值False时显示)"
+  },
+  "events": {},
+  "functions": {}
+}

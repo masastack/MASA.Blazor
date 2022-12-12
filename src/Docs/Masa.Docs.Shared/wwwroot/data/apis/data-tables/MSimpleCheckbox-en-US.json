@@ -1,0 +1,12 @@
+{
+  "props": {
+    "indeterminate": "为简单复选框设置一个不确定的状态。",
+    "indeterminateIcon": "处于不确定状态时使用的图标。",
+    "offIcon": "处于不活动状态时使用的图标。",
+    "onIcon": "处于激活状态时使用的图标。",
+    "readonly": "",
+    "value": "一个 boolean，表示简单的复选框是否被选中。"
+  },
+  "events": {},
+  "contents": {}
+}

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "centerActive": "强制选择的纸片居中",
+    "column": "删除水平分页并根据需要包装项目",
+    "max": "设置可以选择的最大数量。",
+    "multiple": "允许多个选择。",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prevIcon": "指定用于上一个图标的图标",
+    "showArrows": "强制显示分页箭头",
+    "targetGroup": "",
+    "value": "组件的指定 model 值。",
+    "values": "组件的指定 model 值。"
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {
+    "nextContent": "",
+    "prevContent": ""
+  }
+}

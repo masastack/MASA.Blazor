@@ -1,0 +1,12 @@
+{
+  "props": {
+    "children": "",
+    "items": "",
+    "nav": "",
+    "shaped": "",
+    "title": "",
+    "value": ""
+  },
+  "events": {},
+  "contents": {}
+}

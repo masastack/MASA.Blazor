@@ -1,0 +1,13 @@
+{
+  "props": {
+    "max": "Sets a maximum number of selections that can be made.",
+    "multiple": "Allow multiple selections. ",
+    "targetGroup": "",
+    "value": "The designated model value for the component.",
+    "values": "The designated model value for the component."
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {}
+}

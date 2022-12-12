@@ -1,7 +1,7 @@
 [
   {
     "title": "introduction",
-    "icon": "mdi-book",
+    "icon": "mdi-bookmark",
     "items": [
       "why-masa-blazor",
       "roadmap"
@@ -9,14 +9,44 @@
   },
   {
     "title": "getting-started",
-    "icon": "mdi-lightning-bolt",
+    "icon": "mdi-flash",
     "items": [
-      "installation"
+      "installation",
+      "browser-support",
+      "release-notes",
+      "upgrade-guide",
+      "contributing"
+    ]
+  },
+  {
+    "title": "features",
+    "icon": "mdi-image-edit",
+    "items": [
+      "breakpoints",
+      "icon-fonts",
+      "internationalization",
+      "layouts"
+    ]
+  },
+  {
+    "title": "styles-and-animations",
+    "icon": "mdi-palette",
+    "items": [
+      "border-radius",
+      "color",
+      "display-helpers",
+      "elevation",
+      "flex",
+      "floats",
+      "overflow",
+      "spacing",
+      "text-and-typography",
+      "transitions"
     ]
   },
   {
     "title": "ui-components",
-    "icon": "mdi-cards-variant",
+    "icon": "mdi-layers-triple",
     "group": "components",
     "items": [
       "alerts",
@@ -34,7 +64,10 @@
           "system-bars"
         ]
       },
-      "block-text",
+      {
+        "title": "block-text",
+        "tag": "preset"
+      },
       "borders",
       "bottom-navigation",
       "bottom-sheets",
@@ -43,33 +76,51 @@
       "cards",
       "carousels",
       "chips",
-      "copyable-text",
-      "cron",
+      {
+        "title": "copyable-text",
+        "tag": "preset"
+      },
+      {
+        "title": "cron",
+        "tag": "preset"
+      },
       "dialogs",
       "dividers",
-      "drag-zone",
-      "drawers",
-      "echarts",
-      "editor",
+      {
+        "title": "drag-zone",
+        "tag": "js-proxy"
+      },
+      {
+        "title": "drawers",
+        "tag": "preset"
+      },
+      {
+        "title": "echarts",
+        "tag": "js-proxy"
+      },
+      {
+        "title": "editors",
+        "tag": "js-proxy"
+      },
       "error-handler",
       "expansion-panels",
       "floating-action-buttons",
       "footers",
       {
-        "title": "form-inputs-and-ontrols",
+        "title": "form-inputs-and-controls",
         "group": "components",
         "items": [
-          "autocomplete",
+          "autocompletes",
           "cascaders",
-          "checkboxes",
+          "checkboxs",
           "file-inputs",
           "forms",
           "otp-input",
-          "radio",
+          "radios",
           "range-sliders",
           "selects",
           "sliders",
-          "switches",
+          "switchs",
           "textareas",
           "text-fields"
         ]
@@ -89,11 +140,17 @@
       },
       "hover",
       "icons",
-      "image-captcha",
+      {
+        "title": "image-captcha",
+        "tag": "preset"
+      },
       "images",
       "infinite-scroll",
       "lists",
-      "markdown",
+      {
+        "title": "markdowns",
+        "tag": "js-proxy"
+      },
       "menus",
       {
         "title": "mobiles",
@@ -103,17 +160,24 @@
           "mobile-date-pickers",
           "mobile-date-time-pickers",
           "mobile-pickers",
-          "mobil-picker-views",
+          "mobile-picker-views",
           "mobile-time-pickers"
-        ]
+        ],
+        "tag": "preset"
       },
-      "modals",
-      "navigation-drawers",
-      "not-grouped",
-      "overlays",
-      "pagination",
       {
-        "title": "Pickers",
+        "title": "modals",
+        "tag": "preset"
+      },
+      "navigation-drawers",
+      {
+        "title": "not-grouped",
+        "tag": "preset"
+      },
+      "overlays",
+      "paginations",
+      {
+        "title": "pickers",
         "group": "components",
         "items": [
           "date-pickers",
@@ -121,7 +185,10 @@
           "time-pickers"
         ]
       },
-      "popup-service",
+      {
+        "title": "popup-service",
+        "tag": "service"
+      },
       {
         "title": "progress",
         "group": "components",
@@ -147,10 +214,22 @@
       },
       "tabs",
       "timelines",
-      "toast",
+      {
+        "title": "toasts",
+        "tag": "preset"
+      },
       "tooltips",
-      "treeview",
+      "treeviews",
       "virtual-scroll"
+    ]
+  },
+  {
+    "title": "about",
+    "icon": "mdi-information",
+    "items": [
+      "meet-the-team",
+      "security-disclosure",
+      "code-of-conduct"
     ]
   }
 ]

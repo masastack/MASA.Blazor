@@ -13,7 +13,7 @@ public class NavItem : IDefaultItem<NavItem>
         Title = title;
     }
 
-    public string Title { get; set; } = null!;
+    public string? Title { get; set; }
 
     public StringNumber Value { get; set; }
 
@@ -28,6 +28,8 @@ public class NavItem : IDefaultItem<NavItem>
     public string? Href { get; set; }
 
     public string? Icon { get; set; }
+
+    public string? Tag { get; set; }
 
     public string Segment => (Group ?? Title);
 }

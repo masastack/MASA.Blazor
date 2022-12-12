@@ -1,0 +1,26 @@
+{
+  "props": {
+    "alignWithTitle": "",
+    "centerActive": "",
+    "centered": "",
+    "closeIcon": "",
+    "fixedTabs": "",
+    "grow": "",
+    "hideSlider": "",
+    "iconsAndText": "",
+    "items": "",
+    "mobileBreakpoint": "",
+    "nextIcon": "",
+    "optional": "",
+    "prevIcon": "",
+    "showArrows": "",
+    "sliderColor": "",
+    "sliderSize": "",
+    "value": "",
+    "vertical": ""
+  },
+  "events": {},
+  "contents": {
+    "tabContent": ""
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "props": {
+    "allowOverflow": "Removes overflow re-positioning for the content",
+    "attach": "Specifies which DOM element that this component should detach to.String can be any valid querySelector and Object can be any valid Node. This will attach to the root (MApp)[/components/apps] component by default.",
+    "contentClass": "Applies a custom class to the detached element. This is useful because the content is moved to the beginning of the (MApp)[/components/apps] component (unless the `Attach` prop is provided) and is not targettable by classes passed directly on the component.",
+    "contentStyle": "",
+    "disabled": "Disables the tooltip",
+    "externalActivator": "Designates whether to use an internal activator",
+    "nudgeBottom": "Nudge the content to the bottom",
+    "nudgeLeft": "Nudge the content to the left",
+    "nudgeRight": "Nudge the content to the right",
+    "nudgeTop": "Nudge the content to the top",
+    "nudgeWidth": "Nudge the content width",
+    "offsetOverflow": "Causes the component to flip to the opposite side when repositioned due to overflow",
+    "offsetX": "",
+    "offsetY": "",
+    "openOnClick": "Designates whether the tooltip should open on activator click",
+    "openOnFocus": "",
+    "openOnHover": "Designates whether the tooltip should open on activator hover",
+    "positionX": "Used to position the content when not using an activator slot",
+    "positionY": "Used to position the content when not using an activator slot",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "events": {},
+  "contents": {
+    "activatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation."
+  }
+}

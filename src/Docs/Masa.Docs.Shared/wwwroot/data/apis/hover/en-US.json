@@ -1,0 +1,8 @@
+{
+  "props": {
+    "disabled": "Turns off hover functionality",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "events": {},
+  "contents": {}
+}

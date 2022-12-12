@@ -1,0 +1,32 @@
+name: pr-docs-next
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/Docs/**
+  workflow_dispatch:
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: git pull
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
+    - run: git submodule foreach git checkout main
+    - name: setting dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          6.0.x
+          7.0.x
+        include-prerelease: true
+    - name: setting tools
+      run: dotnet workload install wasm-tools
+    - name: check tools
+      run: dotnet workload list
+    - name: build
+      run: dotnet build src/Masa.Blazor.NewDocs.sln

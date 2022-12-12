@@ -1,13 +1,16 @@
 ﻿@using System.Globalization
+@inject MasaBlazor MasaBlazor
+
 <MAppBar Id="app-bar"
          App
          Class="m-bar--underline"
          Flat
          ClippedRight
          Color="white"
-         Height="@AppService.AppBarHeight">
-    <MAppBarNavIcon Class="hidden-lg-and-up"></MAppBarNavIcon>
-    <AppBarItems OnCultureChanged="OnCultureChanged"></AppBarItems>
+         Height="@(MasaBlazor.Breakpoint.Xs ? AppService.MobileAppBarHeight : AppService.AppBarHeight)">
+    <MAppBarNavIcon Class="hidden-lg-and-up emphasize2-color" @onclick="OnAppBarNavIconClick" />
+    <AppBarItems OnCultureChanged="OnCultureChanged"
+                 OnDotClick="OnDotClick"></AppBarItems>
 </MAppBar>
 
 @code {
@@ -17,5 +20,11 @@
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnAppBarNavIconClick { get; set; }
+
+    [Parameter]
+    public EventCallback OnDotClick { get; set; }
 
 }

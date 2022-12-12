@@ -20,8 +20,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.0-preview.256" />
-		<PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.0-preview.256" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
+		<PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.3" />
 	</ItemGroup>
 
 	<ItemGroup>

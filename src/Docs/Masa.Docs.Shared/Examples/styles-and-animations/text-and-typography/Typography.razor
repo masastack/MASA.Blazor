@@ -1,0 +1,96 @@
+﻿<MItemGroup Mandatory>
+    <MSheet Class="overflow-y-auto" MaxHeight=600 Tile>
+        @foreach (var item in _classes)
+        {
+            var c = item[0];
+            var text = item[1];
+            var size = item[2];
+            var weight = item[3];
+            var spacing = item[4];
+            var margin = item[5];
+
+            <MItem>
+                <MSheet Color="@(context.Active ? (GloabIsDark ? "grey darken-3" : "grey lighten-4") : "")"
+                    Class="px-4 pt-4 pb-3"
+                    Tile
+                    Style="cursor: pointer;"
+                    @onclick="context.Toggle">
+
+                    <div class="@("text-"+c) @(context.Active ? $"mb-{margin}" : "") transition-swing">
+                        @text
+                    </div>
+
+                    <ExpandTransition>
+                        <MResponsive Show="@context.Active" MaxWidth=350>
+                            <div class="d-flex justify-space-between text-caption">
+                                <div>
+                                    <div class="grey--text mb-2">
+                                        Font
+                                    </div>
+
+                                    <div class="font-weight-medium">
+                                        Roboto
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="grey--text mb-2">
+                                        Weight
+                                    </div>
+
+                                    <div class="font-weight-medium">
+                                        @weight
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="grey--text mb-2">
+                                        Size
+                                    </div>
+
+                                    <div class="font-weight-medium">
+                                        @size
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="grey--text text-darken-1 mb-2">
+                                        Letter spacing
+                                    </div>
+
+                                    <div class="font-weight-medium">
+                                        @spacing
+                                    </div>
+                                </div>
+                            </div>
+                        </MResponsive>
+
+                    </ExpandTransition>
+
+                </MSheet>
+            </MItem>
+        }
+    </MSheet>
+</MItemGroup>
+
+@code {
+
+    bool GloabIsDark = false;
+
+    string[][] _classes = new string[][]
+    {
+        new string[] {"h1", "Heading 1", "6rem", "300", "-.015625em", "-1"},
+        new string[] {"h2", "Heading 2", "3.75rem", "300", "-.0083333333em", "0"},
+        new string[] {"h3", "Heading 3", "3rem", "400", "normal", "1"},
+        new string[] {"h4", "Heading 4", "2.125rem", "400", ".0073529412em", "2"},
+        new string[] {"h5", "Heading 5", "1.5rem", "400", "normal", "2"},
+        new string[] {"h6", "Heading 6", "1.25rem", "500", ".0125em", "3"},
+        new string[] {"subtitle-1", "Subtitle 1", "1rem", "400", ".009375em", "4"},
+        new string[] {"subtitle-2", "Subtitle 2", "0.875rem", "500", ".0071428571em", "4"},
+        new string[] {"body-1", "Body 1", "1rem", "400", ".03125em", "4"},
+        new string[] {"body-2", "Body 2", "0.875rem", "400", ".0178571429em", "4"},
+        new string[] {"button", "Button", "0.875rem", "500", ".0892857143em", "4"},
+        new string[] {"caption", "Caption", "0.75rem", "400", ".0333333333em", "4"},
+        new string[] {"overline", "Overline", "0.75rem", "500", ".1666666667em", "4"},
+   };
+}

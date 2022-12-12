@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="keywords" content="Masa.Blazor,Masa Blazor,Blazor,BlazorComponent,Blazor组件库,dotnet,Material Design,数闪,组件库,webassembly,wasm" />
+    <meta name="description" content="基于Material Design和BlazorComponent的交互能力提供标准的Blazor组件库。Provide standard blazor component library based on the interaction ability of material design and BlazorComponent" />
+    <title>MASA Blazor</title>
+    <base href="/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
+    <link href="Masa.Docs.WebAssembly.styles.css" rel="stylesheet" />
+    <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/fonts/roboto/roboto.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/docsearch/docsearch.css" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/prism-themes/1.9.0/prism-duotone-dark.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/gridstack.js/7.1.0/gridstack.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/echarts/theme/vintage.js"></script>
+    <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill.js"></script>
+    <script src="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js"></script>
+    <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js"></script>
+    <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/quill/quill-blot-formatter.min.js"></script>
+    <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
+    <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prism/9000.0.1/prism.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prism/9000.0.1/components/prism-csharp.min.js"></script>
+    <script src="js/prism-cshtml.min.js"></script>
+    <script src="js/prism-normalize-whitespace.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
+    <script>
+        Blazor.start().then(function () {
+            Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
+        });
+    </script>
+</body>
+
+</html>

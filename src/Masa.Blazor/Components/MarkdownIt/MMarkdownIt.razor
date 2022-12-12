@@ -1,0 +1,13 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+@if (NoWrapper)
+{
+    @((MarkupString)_mdHtml)
+}
+else
+{
+    <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" @attributes="@Attributes" @ref="Ref">
+        @((MarkupString)_mdHtml)
+    </div>
+}

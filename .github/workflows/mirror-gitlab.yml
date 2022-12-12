@@ -1,14 +1,23 @@
 name: Mirror to Giltab
 on:
   push:
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   delete:
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   create:
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   workflow_dispatch:
-  
+
 jobs:
   to_gitlab:
     runs-on: ubuntu-latest
-    steps:                                            
+    steps:
       - uses: actions/checkout@v1
       - name: config git
         run: git config --global http.postBuffer 524288000
@@ -17,4 +26,4 @@ jobs:
           REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor1.git'
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
-          
+

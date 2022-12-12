@@ -1,0 +1,24 @@
+{
+  "props": {
+    "checkboxColor": "",
+    "disableSort": "切换排序按钮的渲染方式。",
+    "everyItem": "表示是否选择了表格中的所有项目。",
+    "headers": "要显示的表头数组。",
+    "isMobile": "渲染表头的移动视图。",
+    "multiSort": "",
+    "options": "选项对象。与 [MDataTable](components/data-tables/api/MDataTable) 上的相同。",
+    "showGroupBy": "显示分组按钮。",
+    "singleSelect": "切换全选框的渲染方式。",
+    "someItems": "表示是否选择了表格中的一个或多个数据项。",
+    "sortIcon": "排序按钮的图标。"
+  },
+  "events": {
+    "onGroup": "",
+    "onSort": "",
+    "onToggleSelectAll": ""
+  },
+  "contents": {
+    "dataTableSelectContent": "",
+    "headerColContent": ""
+  }
+}

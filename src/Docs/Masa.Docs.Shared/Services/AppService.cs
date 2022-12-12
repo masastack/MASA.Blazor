@@ -12,10 +12,24 @@ public partial class AppService
     //     { "styles", ("mdi-palette-outline", "deep-purple accent-4") },
     // };
 
-    public const int AppBarHeight = 64;
+    public const int AppBarHeight = 96;
+    public const int MobileAppBarHeight = 64;
+
+    public static List<(string Title, string URL, string Target)> TopNavMenus => new()
+    {
+        ("Document","",""),
+        ("Getting started","",""),
+        ("Components","/components/alerts",""),
+        ("Pro","http://blazor-pro.masastack.com","_blank"),
+        ("Blog","https://blogs.masastack.com/categories/NET/Blazor","_blank"),
+        ("Community","",""),
+        ("Official website","","")
+    };
 
     private readonly Lazy<Task<List<NavItem>>> _navs;
     private List<MarkdownItTocContent>? _toc;
+
+
 
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
 
@@ -33,7 +47,7 @@ public partial class AppService
             return navs ?? new List<NavItem>();
         });
     }
-    
+
     public List<MarkdownItTocContent>? Toc
     {
         get => _toc;

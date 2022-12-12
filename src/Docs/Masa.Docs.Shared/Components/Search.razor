@@ -1,0 +1,32 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<div class="search-inupt flex-1-1-auto d-flex justify-end">
+    <MTextField @bind-Value="_value"
+                BackgroundColor="#F6F8FD"
+                Class="@($"rounded-lg {Class}")"
+                Style="max-width: 340px"
+                Placeholder="@I18n.T("Search")"
+                Clearable
+                ClearIcon="mdi-close-circle"
+                HideDetails="true"
+                TValue="string"
+                Filled
+                Rounded
+                Dense
+                Height="48">
+        <PrependInnerContent>
+            <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
+        </PrependInnerContent>
+    </MTextField>
+</div>
+
+@code {
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+    [Parameter]
+    public string Class { get; set; } = "mr-6";
+
+    private string _value = string.Empty;
+}

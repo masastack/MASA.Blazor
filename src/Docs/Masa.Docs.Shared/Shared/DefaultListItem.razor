@@ -1,26 +1,23 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListItem Href="@Item.Href"
-           Class="m-list-item--default"
-           Color="primary">
-    @if (Item.Icon is not null)
+<MListItem Href="@Item?.Href"
+           Class="m-list-item--default">
+    @if (Item?.Icon is not null)
     {
         <MListItemIcon>
             <MIcon>@Item.Icon</MIcon>
         </MListItemIcon>
     }
 
-    <MListItemContent>
-        <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
-    </MListItemContent>
+    <NavItemContent Item="Item" />
+
 </MListItem>
 
 @code {
 
     [Parameter, EditorRequired]
-    public TItem Item { get; set; }
+    public TItem? Item { get; set; }
 
-    private string Href => "/todo";
-
+    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
 }

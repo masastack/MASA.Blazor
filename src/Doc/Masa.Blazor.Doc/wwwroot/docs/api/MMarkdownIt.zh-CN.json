@@ -35,11 +35,6 @@
       "Description": ""
     },
     {
-      "Name": "Key",
-      "Type": "String",
-      "Description": ""
-    },
-    {
       "Name": "LangPrefix",
       "Type": "String",
       "Description": ""
@@ -57,6 +52,11 @@
     {
       "Name": "Quotes",
       "Type": "String[]",
+      "Description": ""
+    },
+    {
+      "Name": "Scope",
+      "Type": "String",
       "Description": ""
     },
     {

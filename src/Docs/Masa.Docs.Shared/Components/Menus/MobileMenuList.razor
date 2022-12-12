@@ -1,0 +1,50 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Class="pt-2"
+                   Width="240"
+                   Right
+                   App
+                   Floating
+                   Temporary>
+    <MList Nav @key="Value">
+        <MListItemGroup>
+            @foreach (var item in AppService.TopNavMenus)
+            {
+                <MListItem Href="@item.URL" Target="@item.Target">
+                    <MListItemContent>
+                        <MListItemTitle Class="emphasize1-color">@I18n.T(item.Title)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+            <MDivider />
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle Class="emphasize1-color">@I18n.T("settings")</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem Href="https://github.com/blazorcomponent/MASA.Blazor" Target="_blank">
+                <MListItemContent>
+                    <MListItemTitle Class="emphasize1-color">Github</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem Href="ttps://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank">
+                <MListItemContent>
+                    <MListItemTitle Class="emphasize1-color">Gitee</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        </MListItemGroup>
+    </MList>
+</MNavigationDrawer>
+
+@code {
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+}

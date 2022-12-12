@@ -1,0 +1,16 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<MTabs Style="display: contents;">
+    @foreach (var item in AppService.TopNavMenus)
+    {
+        <MTab Class="text-none secondary-emphasis-text" Href="@item.URL" Target="@item.Target">@I18n.T(item.Title)</MTab>
+    }
+</MTabs>
+
+@code{
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+}

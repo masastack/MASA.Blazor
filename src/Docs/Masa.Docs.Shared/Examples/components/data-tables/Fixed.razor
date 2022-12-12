@@ -1,0 +1,306 @@
+﻿<MDataTable FixedRight
+            Headers="_headers"
+            Items="_desserts"
+            Width="@("120%")"
+            ItemKey="r=>r.Name"
+            Class="elevation-1">
+    <ItemColContent>
+        @if (context.Header.Value == "actions")
+        {
+            <MIcon Small
+                   Class="mr-2"
+                   OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
+            <MIcon Small
+                   OnClick="()=>DeleteItem(context.Item)">mdi-delete</MIcon>
+        }
+        else
+        {
+            @context.Value
+        }
+    </ItemColContent>
+</MDataTable>
+<MDialog @bind-Value="_dialog"
+         MaxWidth="500">
+    <MCard>
+        <MCardTitle>
+            <span class="text-h5">@FormTitle</span>
+        </MCardTitle>
+
+        <MCardText>
+            <MContainer>
+                <MRow>
+                    <MCol Cols="12"
+                          Sm="6"
+                          Md="4">
+                        <MTextField @bind-Value="_editedItem.Name"
+                                    Label="Dessert name"></MTextField>
+                    </MCol>
+                    <MCol Cols="12"
+                          Sm="6"
+                          Md="4">
+                        <MTextField @bind-Value="_editedItem.Calories"
+                                    Label="Calories"></MTextField>
+                    </MCol>
+                    <MCol Cols="12"
+                          Sm="6"
+                          Md="4">
+                        <MTextField @bind-Value="_editedItem.Fat"
+                                    Label="Fat (g)"></MTextField>
+                    </MCol>
+                    <MCol Cols="12"
+                          Sm="6"
+                          Md="4">
+                        <MTextField @bind-Value="_editedItem.Carbs"
+                                    Label="Carbs (g)"></MTextField>
+                    </MCol>
+                    <MCol Cols="12"
+                          Sm="6"
+                          Md="4">
+                        <MTextField @bind-Value="_editedItem.Protein"
+                                    Label="Protein (g)"></MTextField>
+                    </MCol>
+                </MRow>
+            </MContainer>
+        </MCardText>
+
+        <MCardActions>
+            <MSpacer></MSpacer>
+            <MButton Color="blue darken-1"
+                     Text
+                     OnClick="Close">
+                Cancel
+            </MButton>
+            <MButton Color="blue darken-1"
+                     Text
+                     OnClick="Save">
+                Save
+            </MButton>
+        </MCardActions>
+    </MCard>
+</MDialog>
+<MDialog @bind-Value="_dialogDelete" MaxWidth="500">
+    <MCard>
+        <MCardTitle Class="text-h5">Are you sure you want to delete this item?</MCardTitle>
+        <MCardActions>
+            <MSpacer></MSpacer>
+            <MButton Color="blue darken-1" Text OnClick="CloseDelete">Cancel</MButton>
+            <MButton Color="blue darken-1" Text OnClick="DeleteItemConfirm">OK</MButton>
+            <MSpacer></MSpacer>
+        </MCardActions>
+    </MCard>
+</MDialog>
+
+@code {
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public int Sodium { get; set; }
+
+        public string Calcium { get; set; }
+
+        public string Iron { get; set; }
+    }
+
+    private List<DataTableHeader<Dessert>> _headers = new List<DataTableHeader<Dessert>>
+        {
+           new ()
+           {
+            Text= "Dessert (100g serving)",
+            Align= DataTableHeaderAlign.Start,
+            Sortable= false,
+            Value= nameof(Dessert.Name)
+          },
+          new (){ Text= "Calories", Value= nameof(Dessert.Calories)},
+          new (){ Text= "Fat (g)", Value= nameof(Dessert.Fat)},
+          new (){ Text= "Carbs (g)", Value= nameof(Dessert.Carbs)},
+          new (){ Text= "Protein (g)", Value= nameof(Dessert.Protein)},
+          new (){ Text= "Actions", Value= "actions",Sortable=false,Width="100px",Align=DataTableHeaderAlign.Center, }
+        };
+
+    private List<Dessert> _desserts = new List<Dessert>
+        {
+           new Dessert
+           {
+              Name= "Frozen Yogurt",
+              Calories= 159,
+              Fat= 6.0,
+              Carbs= 24,
+              Protein= 4.0,
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Ice cream sandwich",
+              Calories= 237,
+              Fat= 9.0,
+              Carbs= 37,
+              Protein= 4.3,
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Eclair",
+              Calories= 262,
+              Fat= 16.0,
+              Carbs= 23,
+              Protein= 6.0,
+              Iron= "7%",
+            },
+            new Dessert
+            {
+              Name= "Cupcake",
+              Calories= 305,
+              Fat= 3.7,
+              Carbs= 67,
+              Protein= 4.3,
+              Iron= "8%",
+            },
+            new Dessert
+            {
+                Name= "Gingerbread",
+                Calories= 356,
+                Fat= 16.0,
+                Carbs= 49,
+                Protein= 3.9,
+                Iron= "16%"
+            },
+            new Dessert
+            {
+                Name= "Jelly bean",
+                Calories= 375,
+                Fat= 0.0,
+                Carbs= 94,
+                Protein= 0.0,
+                Iron= "0%",
+            },
+            new Dessert
+            {
+                Name= "Lollipop",
+                Calories= 392,
+                Fat= 0.2,
+                Carbs= 98,
+                Protein= 0,
+                Iron= "2%",
+            },
+            new Dessert
+            {
+                Name= "Honeycomb",
+                Calories= 408,
+                Fat= 3.2,
+                Carbs= 87,
+                Protein= 6.5,
+                Iron= "45%",
+            },
+            new Dessert
+            {
+                Name= "Donut",
+                Calories= 452,
+                Fat= 25.0,
+                Carbs= 51,
+                Protein= 4.9,
+                Iron= "22%",
+            },
+            new Dessert
+            {
+                Name= "KitKat",
+                Calories= 518,
+                Fat= 26.0,
+                Carbs= 65,
+                Protein= 7,
+                Iron= "6%",
+            }
+        };
+    private int _editedIndex;
+    private bool _dialog;
+    private bool _dialogDelete;
+    private Dessert _editedItem = new Dessert
+        {
+            Name = "",
+            Calories = 0,
+            Fat = 0,
+            Carbs = 0,
+            Protein = 0,
+        };
+    public string FormTitle
+    {
+        get
+        {
+            return _editedIndex == -1 ? "New Item" : "Edit Item";
+        }
+    }
+
+    public void Close()
+    {
+        _dialog = false;
+        _editedItem = new Dessert();
+        _editedIndex = -1;
+    }
+
+    public void Save()
+    {
+        if (_editedIndex > -1)
+        {
+            var item = _desserts[_editedIndex];
+            item.Fat = _editedItem.Fat;
+            item.Protein = _editedItem.Protein;
+            item.Calories = _editedItem.Calories;
+            item.Carbs = _editedItem.Carbs;
+            item.Name = _editedItem.Name;
+        }
+        else
+        {
+            _desserts.Add(_editedItem);
+        }
+        Close();
+    }
+
+    public void EditItem(Dessert item)
+    {
+        _editedIndex = _desserts.IndexOf(item);
+        _editedItem = new Dessert()
+            {
+                Calories = item.Calories,
+                Carbs = item.Carbs,
+                Fat = item.Fat,
+                Name = item.Name,
+                Protein = item.Protein
+            };
+        _dialog = true;
+    }
+
+    public void DeleteItem(Dessert item)
+    {
+        _editedIndex = _desserts.IndexOf(item);
+        _editedItem = new Dessert()
+            {
+                Calories = item.Calories,
+                Carbs = item.Carbs,
+                Fat = item.Fat,
+                Name = item.Name,
+                Protein = item.Protein
+            };
+        _dialogDelete = true;
+    }
+
+    public void DeleteItemConfirm()
+    {
+        _desserts.RemoveAt(_editedIndex);
+        CloseDelete();
+    }
+
+    public void CloseDelete()
+    {
+        _dialogDelete = false;
+        _editedItem = new();
+        _editedIndex = -1;
+    }
+}

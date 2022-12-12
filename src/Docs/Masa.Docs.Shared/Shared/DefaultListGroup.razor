@@ -1,24 +1,18 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListGroup Group="@GenGroup(Item.Children)"
-            AppendIcon="mdi-menu-down"
+<MListGroup Group="@group"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup">
     <ActivatorContent>
-        <MListItemContent>
-            @if (Item.Title is not null)
-            {
-                <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
-            }
-        </MListItemContent>
+        <NavItemContent Item="Item" />
     </ActivatorContent>
     <PrependIconContent>
-        <MIcon Color="primary">@Item.Icon</MIcon>
+        <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item?.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
     </PrependIconContent>
     <ChildContent>
-        @foreach (var child in Item.Children)
+        @foreach (var child in Item?.Children ?? new())
         {
             if (child.Heading is not null)
             {
@@ -51,17 +45,28 @@
     [Parameter]
     public bool SubGroup { get; set; }
 
+    private List<string> group = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        group = GenGroup(Item.Children);
+    }
+
+    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
+
     List<string> GenGroup(List<TItem>? items)
     {
-        if (items == null || !items.Any()) return new List<string>();
+        if (items == null || !items.Any()) return new List<string?>();
 
-        var groups = new List<string>();
+        var groups = new List<string?>();
 
         foreach (var item in items)
         {
             groups.AddRange(GenGroup(item.Children));
             if (item.HasChildren()) continue;
-            groups.Add(item.Href);
+            groups.Add(item?.Href);
         }
 
         return groups;
