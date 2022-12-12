@@ -25,13 +25,16 @@ You can use combinations of any or all of the above components including **MBott
 ```cshtml
 <!-- MainLayout.razor -->
 @inherits LayoutComponentBase
+
 <MApp>
   <MNavigationDrawer App>
     <!-- -->
   </MNavigationDrawer>
+
   <MAppBar App>
     <!-- -->
   </MAppBar>
+
   <!-- Sizes your content based upon application components -->
   <MMain>
     <!-- Provides the application the proper gutter -->
@@ -39,10 +42,12 @@ You can use combinations of any or all of the above components including **MBott
         @Body
     </MContainer>
   </MMain>
+
   <MFooter App>
     <!-- -->
   </MFooter>
 </MApp>
+
 ```
 
 <app-alerts type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 

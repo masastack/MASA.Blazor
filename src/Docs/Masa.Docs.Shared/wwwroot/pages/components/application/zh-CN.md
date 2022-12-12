@@ -20,24 +20,29 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 ```cshtml
 <!-- MainLayout.razor -->
 @inherits LayoutComponentBase
+
 <MApp>
   <MNavigationDrawer App>
     <!-- -->
   </MNavigationDrawer>
+
   <MAppBar App>
     <!-- -->
   </MAppBar>
-  <!-- Sizes your content based upon application components -->
+
+  <!-- 根据应用组件来调整你的内容 -->
   <MMain>
-    <!-- Provides the application the proper gutter -->
+    <!-- 给应用提供合适的间距 -->
     <MContainer Fluid>
         @Body
     </MContainer>
   </MMain>
+
   <MFooter App>
     <!-- -->
   </MFooter>
 </MApp>
+
 ```
 
 <app-alerts type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></app-alerts>

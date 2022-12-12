@@ -230,5 +230,6 @@
   "supported": "支持",
   "supported-with-polyfill": "由 polyfill 支持",
   "not-supported": "不支持",
-  "settings": "设置"
+  "settings": "设置",
+  "wireframes": "预设布局"
 }
