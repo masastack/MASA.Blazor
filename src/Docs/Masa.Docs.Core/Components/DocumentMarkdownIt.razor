@@ -1,8 +1,6 @@
-﻿@namespace Masa.Docs.Shared.Components
-
-<div class="ordinary-text">
+﻿<div class="ordinary-text">
     <MMarkdownIt Source="@Source"
-                 AnchorOptions="@AnchorOptions"
+                 AnchorOptions="@s_anchorOptions"
                  OnTocParsed="@OnTocParsed"
                  OnFrontMatterParsed="@OnFrontMatterParsed"
                  Html
@@ -24,10 +22,11 @@
     [Parameter]
     public EventCallback<string?> OnFrontMatterParsed { get; set; }
 
-    private static readonly MarkdownItAnchorOptions AnchorOptions = new()
+    private static readonly MarkdownItAnchorOptions s_anchorOptions = new()
     {
         Level = 1,
         PermalinkClass = "",
         PermalinkSymbol = ""
     };
+
 }

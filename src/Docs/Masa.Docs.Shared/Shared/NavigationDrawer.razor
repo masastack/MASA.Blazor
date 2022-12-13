@@ -111,7 +111,7 @@
         {
             if (((IDefaultItem<NavItem>)navItem).HasChildren())
             {
-                SetHref(navItem.Children, navItem.Segment, rootSegment);
+                SetHref(navItem.Children!, navItem.Segment, rootSegment);
             }
             else
             {

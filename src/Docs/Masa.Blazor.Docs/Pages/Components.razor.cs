@@ -133,7 +133,7 @@ public partial class Components
 
     private void NavigateToTab(string tab)
     {
-        NavigationManager.NavigateTo($"/components/{Page}/{tab}");
+        NavigationManager.NavigateTo($"/blazor/components/{Page}/{tab}");
     }
 
     private void OnFrontMatterParsed(string? yaml)
