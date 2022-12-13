@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+    <ProjectReference Include="..\Masa.Blazor.Docs\Masa.Blazor.Docs.csproj" />
   </ItemGroup>
 
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">

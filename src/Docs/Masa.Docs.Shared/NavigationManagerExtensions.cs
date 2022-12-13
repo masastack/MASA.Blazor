@@ -9,13 +9,21 @@ public static class NavigationManagerExtensions
 
     public static void ReplaceWithHash(this NavigationManager navigationManager, string hash)
     {
-        var uri = new Uri(navigationManager.Uri);
-        navigationManager.Replace($"{uri.AbsolutePath}{hash}");
+        navigationManager.Replace($"{navigationManager.GetAbsolutePath()}{hash}");
     }
 
     public static string GetAbsolutePath(this NavigationManager navigationManager)
     {
-        var uri = new Uri(navigationManager.Uri);
-        return uri.AbsolutePath;
+        return navigationManager.ToUri().AbsolutePath;
+    }
+
+    public static string[] GetSegments(this NavigationManager navigationManager)
+    {
+        return navigationManager.ToUri().Segments;
+    }
+
+    private static Uri ToUri(this NavigationManager navigationManager)
+    {
+        return new Uri(navigationManager.Uri);
     }
 }

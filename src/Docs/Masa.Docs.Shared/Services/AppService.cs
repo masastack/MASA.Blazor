@@ -26,27 +26,9 @@ public partial class AppService
         ("Official website","","")
     };
 
-    private readonly Lazy<Task<List<NavItem>>> _navs;
     private List<MarkdownItTocContent>? _toc;
 
-
-
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
-
-    public AppService(IHttpClientFactory factory)
-    {
-        var httpClient = factory.CreateClient("masa-docs");
-
-        _navs = new Lazy<Task<List<NavItem>>>(async () =>
-        {
-            var navs = await httpClient.GetFromJsonAsync<List<NavItem>>("_content/Masa.Docs.Shared/data/nav.json", new JsonSerializerOptions()
-            {
-                Converters = { new NavItemsJsonConverter() }
-            });
-
-            return navs ?? new List<NavItem>();
-        });
-    }
 
     public List<MarkdownItTocContent>? Toc
     {
@@ -56,10 +38,5 @@ public partial class AppService
             _toc = value;
             TocChanged?.Invoke(this, value);
         }
-    }
-
-    public async Task<List<NavItem>> GetNavs()
-    {
-        return await _navs.Value;
     }
 }

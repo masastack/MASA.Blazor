@@ -22,6 +22,9 @@ public partial class Components
     private CultureInfo Culture { get; set; } = null!;
 
     [Parameter]
+    public string Project { get; set; } = null!;
+
+    [Parameter]
     public string Page { get; set; } = null!;
 
     [Parameter]
@@ -150,7 +153,7 @@ public partial class Components
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync("components", Page);
+            _md = await DocService.ReadDocumentAsync(Project, "components", Page);
         }
         catch (HttpRequestException e)
         {
