@@ -1,0 +1,99 @@
+﻿@page "/Examples/wireframes/inbox"
+@layout EmptyLayout
+
+<MApp Id="inspire">
+    <MSystemBar App>
+        <MSpacer></MSpacer>
+
+        <MIcon>mdi-square</MIcon>
+
+        <MIcon>mdi-circle</MIcon>
+
+        <MIcon>mdi-triangle</MIcon>
+    </MSystemBar>
+
+    <MNavigationDrawer @bind-Value="_drawer"
+                       App>
+        <MSheet Color="grey lighten-4"
+                Class="pa-4">
+            <MAvatar Class="mb-4"
+                     Color="grey darken-1"
+                     Size="64"></MAvatar>
+
+            <div>opensource@masastack.com</div>
+        </MSheet>
+
+        <MDivider></MDivider>
+
+        <MList>
+            @foreach (var item in _links)
+            {
+                <MListItem Link>
+                    <MListItemIcon>
+                        <MIcon>@item.Icon</MIcon>
+                    </MListItemIcon>
+
+                    <MListItemContent>
+                        <MListItemTitle>@item.Text</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </MNavigationDrawer>
+
+    <MMain>
+        <MContainer Class="py-8 px-6"
+                    Fluid>
+            <MRow>
+                @foreach (var item in _cards)
+                {
+                    <MCol Cols="12">
+                        <MCard>
+                            <MSubheader>@item</MSubheader>
+
+                            <MList TwoLine>
+                                @for (int i = 1; i <= 6; i++)
+                                {
+                                    <MListItem @key="i">
+                                        <MListItemAvatar Color="grey darken-1">
+                                        </MListItemAvatar>
+
+                                        <MListItemContent>
+                                            <MListItemTitle>Message @i</MListItemTitle>
+
+                                            <MListItemSubtitle>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus distinctio similique
+                                            </MListItemSubtitle>
+                                        </MListItemContent>
+                                    </MListItem>
+
+                                    @if (i != 6)
+                                    {
+                                        <MDivider @key="@($"divider-{i}")"
+                                                  Inset></MDivider>
+                                    }
+                                }
+                            </MList>
+                        </MCard>
+                    </MCol>
+                }
+            </MRow>
+        </MContainer>
+    </MMain>
+</MApp>
+
+@code {
+    bool _drawer;
+    List<(string Icon, string Text)> _links = new()
+    {
+        ("mdi-inbox-arrow-down","Inbox"),
+        ("mdi-send","Send"),
+        ("mdi-delete","Trash"),
+        ("mdi-alert-octagon","Spam")
+    };
+    List<string> _cards = new()
+    {
+        "Today",
+        "Yesterday"
+    };
+}

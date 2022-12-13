@@ -1,0 +1,26 @@
+﻿@page "/Examples/wireframes/side-navigation"
+@layout EmptyLayout
+
+<mapp Id="inspire">
+    <MNavigationDrawer @bind-Value="_drawer"
+                       App
+                       Class="pt-4"
+                       Color="grey lighten-3"
+                       MiniVariant>
+        @for (int i = 1; i <= 6; i++)
+        {
+            <MAvatar @key="i"
+                     Color="@($"grey {(i == 1 ? "darken" : "lighten")}-1")"
+                     Size="@(i == 1 ? 36 : 20)"
+                     Class="d-block text-center mx-auto mb-9"></MAvatar>
+        }
+    </MNavigationDrawer>
+
+    <MMain>
+        <!-- Your content -->
+    </MMain>
+</mapp>
+
+@code {
+    bool _drawer;
+}

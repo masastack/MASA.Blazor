@@ -5,7 +5,7 @@
 
     @Body
 
-    <MButton Dark Fab Class="bottom-btn" Href="@_url" Color="primary" OnClick="OnGithubClick">
+    <MButton Dark Fab Class="bottom-btn" Target="_blank" Href="@_url" Color="primary">
         <MIcon>mdi-github</MIcon>
     </MButton>
 </MApp>
@@ -15,10 +15,13 @@
     const string? _baseUrl = "https://github.com/BlazorComponent/MASA.Blazor/tree/feature/application/src/Docs/Masa.Docs.Shared/";
     string? _url;
 
-    private void OnGithubClick()
+    protected override void OnAfterRender(bool firstRender)
     {
-        string pageUrl = NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length);
-        
-        _url = _baseUrl + pageUrl;
+        if (firstRender)
+        {
+            string pageUrl = NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length);
+
+            _url = _baseUrl + pageUrl;
+        }
     }
 }

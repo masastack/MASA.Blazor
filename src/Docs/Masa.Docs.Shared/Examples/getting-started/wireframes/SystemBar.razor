@@ -1,0 +1,52 @@
+﻿@page "/Examples/wireframes/system-bar"
+@layout EmptyLayout
+
+<MApp Id="inspire">
+    <MSystemBar App>
+        <MSpacer></MSpacer>
+
+        <MIcon>mdi-square</MIcon>
+
+        <MIcon>mdi-circle</MIcon>
+
+        <MIcon>mdi-triangle</MIcon>
+    </MSystemBar>
+
+    <MAppBar App>
+        <MAppBarNavMIcon @onclick="()=>_drawer = !_drawer"></MAppBarNavMIcon>
+
+        <MToolbarTitle>Application</MToolbarTitle>
+    </MAppBar>
+
+    <MNavigationDrawer @bind-Value="_drawer"
+                       Fixed
+                       Temporary>
+        <!-- Your content -->
+    </MNavigationDrawer>
+
+    <MMain Class="grey lighten-2">
+        <MContainer>
+            <MRow>
+                @for (int i = 0; i < 4; i++)
+                {
+                    <MCol Class="mt-2"
+                          Cols="12">
+                        <strong>Category @i</strong>
+                    </MCol>
+
+                    @for (int j = 0; j < 6; j++)
+                    {
+                        <MCol Cols="6"
+                              Md="2">
+                            <MSheet Height="150"></MSheet>
+                        </MCol>
+                    }
+                }
+            </MRow>
+        </MContainer>
+    </MMain>
+</MApp>
+
+@code {
+    bool _drawer;
+}
