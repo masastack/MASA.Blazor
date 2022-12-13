@@ -1,6 +1,8 @@
 ﻿using BlazorComponent.JSInterop;
 using Microsoft.JSInterop;
 using System.Text;
+using BlazorComponent;
+using BlazorComponent.I18n;
 
 namespace Masa.Docs.Shared.Shared;
 

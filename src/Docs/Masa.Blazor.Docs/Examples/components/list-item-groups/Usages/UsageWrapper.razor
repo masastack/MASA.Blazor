@@ -1,0 +1,16 @@
+﻿@namespace Masa.Blazor.Docs.Examples.components.list_item_groups
+@implements Masa.Blazor.Docs.Components.IUsageWrapper
+
+<MCard Class="mx-auto" MaxWidth="500">
+    <MList MaxWidth="500">
+        @ChildContent
+    </MList>
+</MCard>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+}

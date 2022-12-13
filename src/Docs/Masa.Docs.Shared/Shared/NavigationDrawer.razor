@@ -62,7 +62,7 @@
         {
             var segments = NavigationManager.GetSegments();
             var secondSegment = segments.ElementAtOrDefault(1);
-            secondSegment?.TrimEnd('/');
+            secondSegment = secondSegment?.TrimEnd('/');
 
             _lastSecondSegment = secondSegment;
 
@@ -70,7 +70,7 @@
 
             if (secondSegment is null)
             {
-    // TODO: overview page
+                // TODO: overview page
             }
             else
             {
@@ -92,7 +92,8 @@
 
             if (secondSegment is null)
             {
-                Navs.Clear();
+                // Navs.Clear();
+                Navs = new();
             }
             else if (_projectMap.ContainsKey(secondSegment))
             {
