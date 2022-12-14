@@ -3,14 +3,13 @@
         <MImage @attributes="Attributes" Src="@Src"></MImage>
     </MSheet>
 
-    @if (ChildContent is not null)
-    {
-        @ChildContent
-    }
-
-    @if (!string.IsNullOrWhiteSpace(Name) && ChildContent is null)
+    @if (!string.IsNullOrWhiteSpace(Name))
     {
         <figcaption class="text-subtitle-2 text-center text-capitalize mt-3">@Name</figcaption>
+    }
+    else
+    {
+        @ChildContent
     }
 </figure>
 

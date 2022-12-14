@@ -217,7 +217,7 @@ ul:not([class]), ol:not([class]) {
 
 .bottom-btn {
     z-index: 6;
-    position: absolute;
+    position: fixed;
     bottom: 24px;
     right: 24px;
 }

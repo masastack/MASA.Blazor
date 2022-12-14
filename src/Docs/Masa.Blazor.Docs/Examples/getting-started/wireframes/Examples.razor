@@ -2,7 +2,7 @@
     @foreach (var name in _wireframes)
     {
         <MCol Cols="12" Md="6" Lg="4">
-            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}Examples/wireframes/{HandleWireframeName(name)}")">
+            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}examples/wireframes/{HandleWireframeName(name)}")">
                 <AppFigure alt="@($"{name} layout")"
                            aspect-ratio="16/9"
                            Name="@name"
