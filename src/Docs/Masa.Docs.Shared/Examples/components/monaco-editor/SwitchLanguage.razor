@@ -6,7 +6,7 @@
                 Label="Syntax support"
                 Outlined></MTextField>
 
-    <MMonacoEditor @ref="_editor" EditorOptions="@_EditorOptions" Width="@("100%")" Height="@("500px")" />
+    <MMonacoEditor @ref="_editor" EditorOptions="@_EditorOptions" Width="@("100%")" Height="@("300px")" />
 
 
 </MCard>
@@ -22,17 +22,17 @@
     public EditorOptions _EditorOptions { get; set; } = new()
     {
         Value = @"using System;
-                  namespace HelloWorldApplication
-                  {
-                        class HelloWorld
-                        {
-                            static void Main(string[] args)
-                            {
-                                Console.WriteLine();
-                                Console.ReadKey();
-                            }
-                         }
-                  }",
+namespace HelloWorldApplication
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+    }
+}",
         Language = "csharp"
     };
 

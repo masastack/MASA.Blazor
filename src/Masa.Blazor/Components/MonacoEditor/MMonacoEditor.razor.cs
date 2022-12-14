@@ -24,11 +24,9 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     public StringNumber MaxHeight { get; set; }
 
     [Parameter] 
-    private EditorOptions EditorOptions { get; set; } = new();
+    public EditorOptions EditorOptions { get; set; } = new();
 
     private IJSObjectReference _monaco;
-
-    private bool _isMonacoEditorDisposed = false;
     
     protected override void SetComponentClass()
     {
@@ -101,20 +99,13 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     {
         await Module.AddKeybindingRule(rule);
     }
-
-
-    public async Task DisposeECharts()
-    {
-
-        _isMonacoEditorDisposed = true;
-    }
+    
 
     public async ValueTask DisposeAsync()
     {
         try
         {
-            await DisposeECharts();
-
+            await Task.CompletedTask;
         }
         catch
         {

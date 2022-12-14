@@ -1,14 +1,8 @@
 ---
-title: monaco-editor编辑器
+title: Monaco编辑器
 desc: "对于操作一些代码或者编辑一些文本的时候提供语法高亮和语法提示，支持自定义语法提示，支持语法动态切换，让你的编辑框更高级！"
 tag: js-proxy
-related:
-  - /components/monaco-editor
 ---
-
-## 使用
-
-多功能编辑器使用
 
 ## css文件
 
