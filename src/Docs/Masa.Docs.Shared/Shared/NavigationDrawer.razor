@@ -9,19 +9,11 @@
                    Right="RTL"
                    App
                    Floating
-                   Width="300">
-    <PrependContent>
-        @if (MasaBlazor.Breakpoint.LgAndUp)
-        {
-            <DefaultDrawerPrepend />
-        }
-    </PrependContent>
-    <ChildContent>
-        <DefaultList Linkage Items="Navs" />
-        <div class=pt-12></div>
-    </ChildContent>
+                   Width="300"
+                   Style="@Style">
+    <DefaultList Linkage Items="Navs" />
+    <div class="pt-12"></div>
 </MNavigationDrawer>
-
 
 @code {
 
@@ -42,6 +34,8 @@
 
     private string? _lastProject;
     private List<NavItem> Navs { get; set; } = new();
+
+    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
 
     protected override async Task OnParametersSetAsync()
     {

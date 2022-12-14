@@ -1,107 +1,20 @@
 ﻿@inherits LayoutComponentBase
-@implements IDisposable
-@inject I18n I18n
-@inject MasaBlazor MasaBlazor
-@inject DocService DocService
-@inject NavigationManager NavigationManager
+@layout BaseLayout
 
-<MApp>
-    <CascadingValue Value="@I18n.Culture">
-        <CascadingValue Value="@_project" Name="project">
-            <AppBar OnCultureChanged="@OnCultureChanged"
-                    OnAppBarNavIconClick="OnAppBarNavIconClick"
-                    OnDotClick="OnDotClick" />
-            <NavigationDrawer @bind-Value="_showDrawer" />
-            <MErrorHandler>
-                <MMain>@Body</MMain>
-            </MErrorHandler>
-            <Toc />
-            <MobileMenuList @bind-Value="_showMobileMenuList" />
-        </CascadingValue>
-    </CascadingValue>
-</MApp>
+<MMain>
+    @Body
+</MMain>
 
 @code {
 
-    private CultureInfo? _culture;
-    private bool _isMobile;
-    private bool _showDrawer;
-    private bool _showMobileMenuList;
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        MasaBlazor.Breakpoint.OnUpdate += OnBreakpointUpdate;
-        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-    }
+        base.OnAfterRender(firstRender);
 
-    private string? _project;
-
-    private Dictionary<string, string> _projectMap = new();
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            _projectMap = await DocService.ReadProjectMapAsync();
-
-            var segments = NavigationManager.GetSegments();
-            var secondSegment = segments.ElementAtOrDefault(1);
-            secondSegment = secondSegment?.TrimEnd('/');
-            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
-            {
-                _project = secondSegment;
-            }
-        }
-    }
-
-    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
-        secondSegment = secondSegment?.TrimEnd('/');
-
-        if (_project != secondSegment)
-        {
-            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
-            {
-                _project = secondSegment;
-                InvokeAsync(StateHasChanged);
-            }
-        }
-    }
-
-    private Task OnBreakpointUpdate()
-    {
-        if (MasaBlazor.Breakpoint.Mobile || _isMobile != MasaBlazor.Breakpoint.Mobile)
-        {
-            _isMobile = MasaBlazor.Breakpoint.Mobile;
-            InvokeAsync(StateHasChanged);
-        }
-
-        return Task.CompletedTask;
-    }
-
-    private void OnCultureChanged(string cultureName)
-    {
-        _culture = new CultureInfo(cultureName);
-        I18n.SetCulture(_culture);
-    }
-
-    private void OnAppBarNavIconClick()
-    {
-        _showDrawer = !_showDrawer;
-    }
-
-    private void OnDotClick()
-    {
-        _showMobileMenuList = !_showMobileMenuList;
-    }
-
-    public void Dispose()
-    {
-        MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointUpdate;
-        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+        BaseLayout.HideAppBarNavIcon();
     }
 
 }

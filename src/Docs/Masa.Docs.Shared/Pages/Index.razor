@@ -1,3 +1,71 @@
 ﻿@page "/"
+@layout MainLayout
+@inject DocService DocService
 
-<MButton Href="/blazor/introduction/why-masa-blazor">MASA Blazor</MButton>
+<MResponsive Class="mx-auto overflow-visible" Style="padding-top: 80px" MaxWidth="1260">
+    <MButton Href="/blazor/introduction/why-masa-blazor">MASA Blazor</MButton>
+    @if (_loading)
+    {
+        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+    }
+    else
+    {
+        @foreach (var (key, value) in _dictionary)
+        {
+            <div>
+                <div>@key</div>
+                @foreach (var navItem in value)
+                {
+                    @if (navItem.Children is not null && navItem.Children.Count > 0)
+                    {
+                        <div>@navItem.Title</div>
+                        <MCard Outlined Flat>
+                            <MRow Dense NoGutters>
+                                @foreach (var subItem in navItem.Children)
+                                {
+                                    <MCol Cols="4">
+                                        @subItem.Title
+                                    </MCol>
+                                }
+                            </MRow>
+                        </MCard>
+                    }
+                    else
+                    {
+                        <div>@navItem.Title</div>
+                    }
+                }
+            </div>
+        }
+    }
+</MResponsive>
+
+@code {
+
+    private readonly Dictionary<string, List<NavItem>> _dictionary = new();
+
+    private bool _loading;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _loading = true;
+            
+            StateHasChanged();
+
+            var projectMap = await DocService.ReadProjectMapAsync();
+
+            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) => { _dictionary[project] = await DocService.ReadNavsAsync(project); });
+
+            _loading = false;
+
+            StateHasChanged();
+        }
+    }
+
+}
