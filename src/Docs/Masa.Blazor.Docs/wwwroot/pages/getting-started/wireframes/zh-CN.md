@@ -10,4 +10,4 @@
 
 <app-alerts type="info" 
 			content=" 如果您正在寻找有关这些模板结构的附加信息，请参阅 [Application page](/blazor/components/application/)。">
-</app-alerts>
+</app-alerts>1
