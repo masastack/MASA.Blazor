@@ -2,18 +2,22 @@
 @implements IDisposable
 @inject I18n I18n
 @inject MasaBlazor MasaBlazor
+@inject DocService DocService
+@inject NavigationManager NavigationManager
 
 <MApp>
     <CascadingValue Value="@I18n.Culture">
-        <AppBar OnCultureChanged="@OnCultureChanged"
-                OnAppBarNavIconClick="OnAppBarNavIconClick"
-                OnDotClick="OnDotClick" />
-        <NavigationDrawer @bind-Value="_showDrawer" />
-        <MErrorHandler>
-            <MMain>@Body</MMain>
-        </MErrorHandler>
-        <Toc />
-        <MobileMenuList @bind-Value="_showMobileMenuList" />
+        <CascadingValue Value="@_project" Name="project">
+            <AppBar OnCultureChanged="@OnCultureChanged"
+                    OnAppBarNavIconClick="OnAppBarNavIconClick"
+                    OnDotClick="OnDotClick" />
+            <NavigationDrawer @bind-Value="_showDrawer" />
+            <MErrorHandler>
+                <MMain>@Body</MMain>
+            </MErrorHandler>
+            <Toc />
+            <MobileMenuList @bind-Value="_showMobileMenuList" />
+        </CascadingValue>
     </CascadingValue>
 </MApp>
 
@@ -27,6 +31,44 @@
     protected override void OnInitialized()
     {
         MasaBlazor.Breakpoint.OnUpdate += OnBreakpointUpdate;
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    private string? _project;
+
+    private Dictionary<string, string> _projectMap = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _projectMap = await DocService.ReadProjectMapAsync();
+
+            var segments = NavigationManager.GetSegments();
+            var secondSegment = segments.ElementAtOrDefault(1);
+            secondSegment = secondSegment?.TrimEnd('/');
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+            }
+        }
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+
+        if (_project != secondSegment)
+        {
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+                InvokeAsync(StateHasChanged);
+            }
+        }
     }
 
     private Task OnBreakpointUpdate()
@@ -59,5 +101,7 @@
     public void Dispose()
     {
         MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointUpdate;
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
+
 }
