@@ -1,21 +1,39 @@
 ﻿<MRow>
-    @foreach (var item in _wireframes)
+    @foreach (var name in _wireframes)
     {
-        //TODO
+        <MCol Cols="12" Md="6" Lg="4">
+            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}examples/wireframes/{HandleWireframeName(name)}")">
+                <AppFigure alt="@($"{name} layout")"
+                           AspectRatio="@("16/9")"
+                           Name="@name"
+                           Outlined
+                           Src="@($"https://cdn.vuetifyjs.com/docs/images/wireframes/{HandleWireframeName(name)}.svg")">
+                    @*TODO: Replace masa cdn*@
+                </AppFigure>
+            </a>
+        </MCol>
     }
 </MRow>
 
 
 @code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
     List<string> _wireframes = new List<string>
     {
-        "base",
-        "extended-toolbar",
-        "system-bar",
-        "inbox",
-        "constrained",
-        "side-navigation",
-        "three-column",
-        "discord"
+        "Base",
+        "Extended Toolbar",
+        "System Bar",
+        "Inbox",
+        "Constrained",
+        "Side Navigation",
+        "Three Column",
+        "Discord"
     };
+
+    string HandleWireframeName(string name)
+    {
+        return name.ToLower().Replace(" ", "-");
+    }
 }

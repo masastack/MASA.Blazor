@@ -217,7 +217,7 @@ ul:not([class]), ol:not([class]) {
 
 .bottom-btn {
     z-index: 6;
-    position: absolute;
+    position: fixed;
     bottom: 24px;
     right: 24px;
 }
@@ -230,4 +230,9 @@ ul:not([class]), ol:not([class]) {
 
 .m-code-highlight__pre .m-code-highlight__code {
     padding: 0 !important;
+}
+
+a.text-dec-none {
+    text-decoration: none !important;
+    color: inherit !important;
 }
