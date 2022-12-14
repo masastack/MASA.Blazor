@@ -1,6 +1,6 @@
 ﻿<figure>
     <MSheet Outlined="Outlined">
-        <MImage @attributes="Attributes" Src="@Src"></MImage>
+        <MImage @attributes="Attributes" AspectRatio="AspectRatio" Src="@Src"></MImage>
     </MSheet>
 
     @if (!string.IsNullOrWhiteSpace(Name))
@@ -19,6 +19,9 @@
 
     [Parameter, EditorRequired]
     public string Src { get; set; } = null!;
+
+    [Parameter]
+    public StringNumber? AspectRatio { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
