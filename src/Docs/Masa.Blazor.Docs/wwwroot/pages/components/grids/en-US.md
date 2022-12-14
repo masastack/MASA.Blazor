@@ -2,9 +2,9 @@
 title: Grid System
 desc: "Masa.Blazor comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application’s content. It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, xs, sm, md, lg and xl. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](features/breakpoints)"
 related:
-  - /stylesandanimations/flex                      
+  - /styles-and-animations/flex                      
   - /features/breakpoints
-  - /stylesandanimations/display-helpers
+  - /styles-and-animations/display-helpers
 ---
 
 <div
@@ -296,7 +296,7 @@ column width of the **MCol** by using the cols prop and providing a value from `
 
 #### Margin helpers
 
-Using the [auto margin helper utilities](/stylesandanimations/flex) you can force sibling columns away from each other.
+Using the [auto margin helper utilities](/blazor/styles-and-animations/flex) you can force sibling columns away from each other.
 
 <masa-example file="Examples.components.grids.MarginHelpers"></masa-example>
 

@@ -25,19 +25,19 @@ related:
 
 #### 增长
 
-使用 `Grow` 参数强制 [MButton](/components/buttons) 组件填充所有可用空间。根据[底部导航MD规范](https://material.io/components/bottom-navigation#specs)，按钮的最大宽度为 **168px**。
+使用 `Grow` 参数强制 [MButton](/blazor/components/buttons) 组件填充所有可用空间。根据[底部导航MD规范](https://material.io/components/bottom-navigation#specs)，按钮的最大宽度为 **168px**。
 
 <masa-example file="Examples.components.bottom_navigation.Grow"></masa-example>
 
 #### 滚动时隐藏
 
-使用 `HideOnScroll` 参数时，**MBottomNavigation** 组件在向上滚动时隐藏。这类似于[MAppBar](/components/app-bars)中支持的[滚动技术](https://material.io/archive/guidelines/patterns/scrolling-techniques.html)。在下面的示例中，上下滚动以查看此行为。
+使用 `HideOnScroll` 参数时，**MBottomNavigation** 组件在向上滚动时隐藏。这类似于[MAppBar](/blazor/components/app-bars)中支持的[滚动技术](https://material.io/archive/guidelines/patterns/scrolling-techniques.html)。在下面的示例中，上下滚动以查看此行为。
 
 <masa-example file="Examples.components.bottom_navigation.HideOnScroll"></masa-example>
 
 #### 水平布局
 
-使用 `Horizontal` 参数调整按钮和图标的样式。此选项将按钮文本定位为与提供的[MIcon](/components/icons)内联。
+使用 `Horizontal` 参数调整按钮和图标的样式。此选项将按钮文本定位为与提供的[MIcon](/blazor/components/icons)内联。
 
 <masa-example file="Examples.components.bottom_navigation.Horizontal"></masa-example>
 

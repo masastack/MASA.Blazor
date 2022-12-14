@@ -9,9 +9,9 @@
     "filterIcon": "更改用于 `Filter` 纸片的默认图标。",
     "label": "移除圆形边缘。",
     "link": "明确地将纸片定义为链接。",
-    "pill": "移除 [MAvatar](/components/avatars) 的边距。",
+    "pill": "移除 [MAvatar](/blazor/components/avatars) 的边距。",
     "textColor": "将指定的颜色应用于控件文本。",
-    "value": "[MChipGroup](/components/chipGroups) 的子组时使用的值。"
+    "value": "[MChipGroup](/blazor/components/chipGroups) 的子组时使用的值。"
   },
   "contents": {},
   "events": {},

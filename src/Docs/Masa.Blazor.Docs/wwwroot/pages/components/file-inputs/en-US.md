@@ -9,7 +9,7 @@ related:
 
 ## Usage
 
-At its core, the `MFileInput` component is a basic container that extends [MTextField](/components/text-fields).
+At its core, the `MFileInput` component is a basic container that extends [MTextField](/blazor/components/text-fields).
 
 <file-inputs-usage></file-inputs-usage>
 
@@ -25,7 +25,7 @@ At its core, the `MFileInput` component is a basic container that extends [MText
 
 #### Chips
 
-A selected file can be displayed as a [chip](/components/chips). When using the `Chips` and `Multiple` props, each chip will be displayed (as opposed to the file count).
+A selected file can be displayed as a [chip](/blazor/components/chips). When using the `Chips` and `Multiple` props, each chip will be displayed (as opposed to the file count).
 
 <masa-example file="Examples.components.file_inputs.Chips"></masa-example>
 
@@ -49,7 +49,7 @@ The **MFileInput** can contain **Multiple** files at the same time when using th
 
 #### PrependIcon
 
-The **MFileInput** has a default `PrependIcon` that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/features/icon-fonts).
+The **MFileInput** has a default `PrependIcon` that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/blazor/features/icon-fonts).
 
 <masa-example file="Examples.components.file_inputs.PrependIcon"></masa-example>
 
@@ -69,7 +69,7 @@ Similar to other inputs, you can use the rules prop to create your own custom va
 
 #### Selection
 
-Using the **SelectionContent**, you can customize the appearance of your input selections. This is typically done with [chips](/en-US/components/chips), however any component or markup can be used.
+Using the **SelectionContent**, you can customize the appearance of your input selections. This is typically done with [chips](/blazor/blazor/components/chips), however any component or markup can be used.
 
 <masa-example file="Examples.components.file_inputs.Selection"></masa-example>
 

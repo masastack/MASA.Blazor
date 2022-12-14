@@ -4,7 +4,7 @@ desc: "**MMenu** 组件在激活它的元素的位置上展示一个菜单。"
 related:
   - /components/dialogs
   - /components/tooltips
-  - /stylesandanimations/transitions
+  - /styles-and-animations/transitions
 ---
 
 ## 使用
@@ -67,7 +67,7 @@ related:
 
 #### 圆角
 
-菜单可以通过 `Rounded` 属性设置为圆角。关于圆角样式的其他信息在 [Border Radius](/stylesandanimations/border-radius) 页。
+菜单可以通过 `Rounded` 属性设置为圆角。关于圆角样式的其他信息在 [Border Radius](/blazor/styles-and-animations/border-radius) 页。
 
 <masa-example file="Examples.components.menus.Rounded"></masa-example>
 

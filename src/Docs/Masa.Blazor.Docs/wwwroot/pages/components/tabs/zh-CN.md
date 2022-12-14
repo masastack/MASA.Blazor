@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-**MTabs** 组件是 [MItemGroup](/components/item-groups) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
+**MTabs** 组件是 [MItemGroup](/blazor/components/item-groups) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
 
 <tabs-usage></tabs-usage>
 

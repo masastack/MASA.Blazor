@@ -17,10 +17,10 @@ related:
 
 #### MAppBarNavIcon
 
-专门为与 [MToolbar](/components/toolbars) 和 **MAppBar** 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。
+专门为与 [MToolbar](/blazor/components/toolbars) 和 **MAppBar** 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。
 
 #### MAppBarTitle
-修改过的 [MToolbarTitle](/components/toolbars) 组件 ，用于配合 `ShrinkOnScroll` 属性使用。 在小屏幕上，**MToolbarTitle**
+修改过的 [MToolbarTitle](/blazor/components/toolbars) 组件 ，用于配合 `ShrinkOnScroll` 属性使用。 在小屏幕上，**MToolbarTitle**
 将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 `ShrinkOnScroll` 属性时使用 **MAppBarTitle** 组件。
 确实是因为向此组件添加了 `resize` 事件，并进行了很多额外的计算。
 

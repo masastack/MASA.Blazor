@@ -13,10 +13,6 @@ Tooltips can wrap any element.
 
 <tooltips-usage></tooltips-usage>
 
-## API
-
-- [MTooltip](/api/MTooltip)
-
 ## Caveats
 
 <app-alerts type="info" content="In order to correctly position **MTooltip**, a position support (`Top` | `Bottom ` |`Left ` | `Right`) is required."></app-alerts>

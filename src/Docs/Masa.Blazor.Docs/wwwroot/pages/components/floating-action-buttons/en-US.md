@@ -5,7 +5,7 @@ desc: "The **MButton** component can be used as a floating action button. This p
 related:
   - /components/button
   - /components/icons
-  - /stylesandanimations/transitions
+  - /styles-and-animations/transitions
 ---
 
 ## Usage

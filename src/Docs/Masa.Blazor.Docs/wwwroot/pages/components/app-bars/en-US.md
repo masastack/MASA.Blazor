@@ -17,8 +17,8 @@ The **MAppBar** component is used for application-wide actions and information.
 
 ## SubComponents
 
-- **MAppBarNavIcon** ：A stylized icon button component created specifically for use with [MToolbar](/components/toolbars) and **AppBar**. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.
-- **MAppBarTitle** ：The modified [MToolbarTitle](/components/toolbars) component is used in conjunction with the `shrinkonscroll` attribute. On the small screen, **MToolbarTitle**
+- **MAppBarNavIcon** ：A stylized icon button component created specifically for use with [MToolbar](/blazor/components/toolbars) and **AppBar**. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.
+- **MAppBarTitle** ：The modified [MToolbarTitle](/blazor/components/toolbars) component is used in conjunction with the `shrinkonscroll` attribute. On the small screen, **MToolbarTitle**
 Will be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the **MAppbarTitle** component without using the `shrinkonscroll` attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.
 
 ## Caveats
@@ -101,6 +101,6 @@ You can easily extend the functionality of app bar by adding **MMenu** there. Cl
 #### Toggle navigation drawers
 
 Using the functional component **MAppBarNavIcon** you can toggle the state of other components such as
-a [MNavigationDrawer](/components/navigation-drawers).
+a [MNavigationDrawer](/blazor/components/navigation-drawers).
 
 <masa-example file="Examples.components.app_bars.ToggleNavigationDrawers"></masa-example>

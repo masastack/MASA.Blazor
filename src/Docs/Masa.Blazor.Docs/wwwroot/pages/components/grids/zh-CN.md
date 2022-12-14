@@ -2,9 +2,9 @@
 title: Grid System（网格系统）
 desc: "Masa.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。"
 related:
-  - /stylesandanimations/flex                      
+  - /styles-and-animations/flex                      
   - /features/breakpoints
-  - /stylesandanimations/display-helpers
+  - /styles-and-animations/display-helpers
 ---
 
 <div
@@ -288,7 +288,7 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 
 #### 外边距辅助
 
-使用[外边距工具类](/stylesandanimations/flex)可以强行把同级列分开。
+使用[外边距工具类](/blazor/styles-and-animations/flex)可以强行把同级列分开。
 
 <masa-example file="Examples.components.grids.MarginHelpers"></masa-example>
 

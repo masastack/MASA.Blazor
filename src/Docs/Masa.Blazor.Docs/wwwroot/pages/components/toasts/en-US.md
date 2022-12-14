@@ -9,7 +9,7 @@ related:
 
 ## Usage
 
-The **PToast** component can be used by PopupService, see the documentation of [PopupService](/components/popup-service) for details.
+The **PToast** component can be used by PopupService, see the documentation of [PopupService](/blazor/components/popup-service) for details.
 
 <toast-usage></toast-usage>
 

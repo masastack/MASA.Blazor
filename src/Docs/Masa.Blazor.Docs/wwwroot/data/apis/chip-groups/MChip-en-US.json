@@ -9,9 +9,9 @@
     "filterIcon": "Change the default icon used for filter chips.",
     "label": "Removes circle edges.",
     "link": "Explicitly define the chip as a link.",
-    "pill": "Remove [MAvatar](/components/avatars).",
+    "pill": "Remove [MAvatar](/blazor/components/avatars).",
     "textColor": "Applies a specified color to the control text.",
-    "value": "The value used when a child of a [MChipGroup](/components/chipGroups)."
+    "value": "The value used when a child of a [MChipGroup](/blazor/components/chipGroups)."
   },
   "contents": {},
   "events": {},

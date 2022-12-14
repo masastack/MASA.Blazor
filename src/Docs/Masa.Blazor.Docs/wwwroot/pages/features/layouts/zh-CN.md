@@ -18,7 +18,7 @@ MASA Blazor有两个主要布局组件， MApp 和 MMain。 MApp 组件是您的
 </MApp>
 ```
 
-模板中没有布局组件, MMain 不需要调整其大小, 而是要占用整个页面。 让我们在 MMain 元素上面添加 [MAppBar](/components/app-bars) 来更改布局：
+模板中没有布局组件, MMain 不需要调整其大小, 而是要占用整个页面。 让我们在 MMain 元素上面添加 [MAppBar](/blazor/components/app-bars) 来更改布局：
 
 ```html
 <MApp>

@@ -2,7 +2,7 @@
   "props": {
     "activeClass": "`ActiveClass` 在子组件被激活时应用。",
     "borderless": "移除按钮组的边框。",
-    "group": "通常用于 [MToolbar](/components/toolbar) 和 [MAppbar](/components/appbar)。删除背景颜色、边框并增加按钮的间距",
+    "group": "通常用于 [MToolbar](/blazor/components/toolbar) 和 [MAppbar](/blazor/components/appbar)。删除背景颜色、边框并增加按钮的间距",
     "mandatory": "强制始终选择一个值（如果可用）。",
     "multiple": "允许多个选择。",
     "targetGroup": "targetGroup",

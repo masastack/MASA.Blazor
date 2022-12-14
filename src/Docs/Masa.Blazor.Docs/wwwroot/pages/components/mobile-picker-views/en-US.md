@@ -7,7 +7,7 @@ related:
   - /components/mobile-time-pickers
 ---
 
-**MMobilePickerView** is the content area of [PMobilePicker](/components/mobile-pickers).
+**MMobilePickerView** is the content area of [PMobilePicker](/blazor/components/mobile-pickers).
 
 ## Examples
 

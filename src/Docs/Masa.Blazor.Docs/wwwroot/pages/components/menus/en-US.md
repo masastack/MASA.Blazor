@@ -4,7 +4,7 @@ desc: "The **MMenu** component shows a menu at the position of the element used 
 related:
   - /components/dialogs
   - /components/tooltips
-  - /stylesandanimations/transitions
+  - /styles-and-animations/transitions
 ---
 
 ## Usage
@@ -69,7 +69,7 @@ Menus can be accessed using hover instead of clicking with the `OpenOnHover` pro
 #### Rounded
 
 Menus can have their border-radius set by the `Rounded` prop. Additional information about rounded classes is on the
-[Border Radius](/stylesandanimations/border-radius) page.
+[Border Radius](/blazor/styles-and-animations/border-radius) page.
 
 <masa-example file="Examples.components.menus.Rounded"></masa-example>
 

@@ -1,10 +1,10 @@
 ---
 title: Sheets（工作表）
-desc: "**MSheet** 组件是许多组件的基础，如 [MCard](/components/cards), [MToolbar](/components/toolbars)等等。 可用属性是Material Design的基础 - 纸和立面（阴影）的概念。"
+desc: "**MSheet** 组件是许多组件的基础，如 [MCard](/blazor/components/cards), [MToolbar](/blazor/components/toolbars)等等。 可用属性是Material Design的基础 - 纸和立面（阴影）的概念。"
 related:
   - /components/cards
   - /components/grid-system
-  - /stylesandanimations/elevation
+  - /styles-and-animations/elevation
 ---
 
 ## 使用
@@ -22,7 +22,7 @@ related:
 
 纸张和基于它们的部件可以有不同的尺寸和颜色。
 
-**MSheet** 组件接受自定义[Material Design Color](/stylesandanimations/colors)值，例如 `warning`、`amber darken-3`
+**MSheet** 组件接受自定义[Material Design Color](/blazor/styles-and-animations/colors)值，例如 `warning`、`amber darken-3`
 和 `deep-purple accent`，以及 *rgb*、*rgba*和*十六进制*值。
 
 <masa-example file="Examples.components.sheets.Color"></masa-example>
@@ -41,6 +41,6 @@ MD [Elevation Design Specification](https://material.io/design/environment/eleva
 纸张和基于它们的部件可以有不同的尺寸和颜色。
 
 `Rounded` 增加了默认 _4px_ 的 `border-radius`。 默认情况下， **MSheet** 组件没有边框半径。 通过提供自定义的圆角值来定义半径的大小和位置；例如，圆角值 _tr-xl_ _l-pill_ 等于
-_rounded-tr-xl_ _rounded-l-pill_。 关于圆角样式的其他信息在 [Border Radius](/stylesandanimations/border-radius) 页。
+_rounded-tr-xl_ _rounded-l-pill_。 关于圆角样式的其他信息在 [Border Radius](/blazor/styles-and-animations/border-radius) 页。
 
 <masa-example file="Examples.components.sheets.Rounded"></masa-example>

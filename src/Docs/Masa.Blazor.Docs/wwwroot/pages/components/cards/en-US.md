@@ -4,7 +4,7 @@ desc: "The MCard component is a versatile component that can be used for anythin
 related:
   - /components/buttons
   - /components/images
-  - /stylesandanimations/text-and-typography
+  - /styles-and-animations/text-and-typography
 ---
 
 ## 使用
@@ -40,7 +40,7 @@ Provide default font size and padding for card subtitles. Font size can be overw
 
 #### Loading
 
-Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate  [MProgressLinear](/components/progress-linear)
+Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate  [MProgressLinear](/blazor/components/progress-linear)
 
 <masa-example file="Examples.components.cards.Loading"></masa-example>
 
@@ -54,7 +54,7 @@ An outlined card has 0 elevation and contains a soft border.
 
 #### Card Reveal
 
-Using [ExpandTransition](/stylesandanimations/transitions) and a @click event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+Using [ExpandTransition](/blazor/styles-and-animations/transitions) and a @click event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <masa-example file="Examples.components.cards.CardReveal"></masa-example>
 

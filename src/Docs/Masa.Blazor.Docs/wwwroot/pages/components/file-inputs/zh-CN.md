@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-**MFileInput** 组件的核心是一个基于 [MTextField](/components/text-fields) 拓展的基本容器。
+**MFileInput** 组件的核心是一个基于 [MTextField](/blazor/components/text-fields) 拓展的基本容器。
 
 <file-inputs-usage></file-inputs-usage>
 
@@ -25,7 +25,7 @@ related:
 
 #### 纸片
 
-上传的文件可以作为 [chip（纸片）](/components/chips) 显示。同时启用 `Chips`（纸片）和 `Multiple`（多选）属性时，每个文件作为一个纸片显示（与选中文件数相反）。
+上传的文件可以作为 [chip（纸片）](/blazor/components/chips) 显示。同时启用 `Chips`（纸片）和 `Multiple`（多选）属性时，每个文件作为一个纸片显示（与选中文件数相反）。
 
 <masa-example file="Examples.components.file_inputs.Chips"></masa-example>
 
@@ -49,7 +49,7 @@ related:
 
 #### 前置图标
 
-**MFileInput** 拥有一个默认 `PrependIcon`属性可以直接在组件上设置Icon图标或者全局调整。 有关更改全局组件的更多信息，请参见[自定义图标页面](/features/icon-fonts)。
+**MFileInput** 拥有一个默认 `PrependIcon`属性可以直接在组件上设置Icon图标或者全局调整。 有关更改全局组件的更多信息，请参见[自定义图标页面](/blazor/features/icon-fonts)。
 
 <masa-example file="Examples.components.file_inputs.PrependIcon"></masa-example>
 
@@ -69,7 +69,7 @@ related:
 
 #### 选项
 
-使用 **SelectionContent**，您可以自定义输入选择的外观。 通常使用 [chips](/components/chips)完成，但您可以使用任何组件或标记。
+使用 **SelectionContent**，您可以自定义输入选择的外观。 通常使用 [chips](/blazor/components/chips)完成，但您可以使用任何组件或标记。
 
 <masa-example file="Examples.components.file_inputs.Selection"></masa-example>
 
