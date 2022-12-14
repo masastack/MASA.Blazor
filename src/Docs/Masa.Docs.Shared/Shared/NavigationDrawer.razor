@@ -1,6 +1,8 @@
 ﻿@using System.Text;
 @inject AppService AppService
+@inject DocService DocService
 @inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
@@ -24,6 +26,9 @@
 
 @code {
 
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+
     [Parameter]
     public bool RTL { get; set; }
 
@@ -36,7 +41,18 @@
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; }
 
+    private string? _lastSecondSegment;
+
+    private Dictionary<string, string> _projectMap = new();
+
     private List<NavItem> Navs { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -44,25 +60,69 @@
 
         if (firstRender)
         {
-            Navs = await AppService.GetNavs();
-            SetHref(Navs);
-            StateHasChanged();
+            var segments = NavigationManager.GetSegments();
+            var secondSegment = segments.ElementAtOrDefault(1);
+            secondSegment = secondSegment?.TrimEnd('/');
+
+            _lastSecondSegment = secondSegment;
+
+            _projectMap = await DocService.ReadProjectMapAsync();
+
+            if (secondSegment is null)
+            {
+                // TODO: overview page
+            }
+            else
+            {
+                Navs = await DocService.ReadNavsAsync(secondSegment);
+                SetHref(Navs, rootSegment: secondSegment);
+                StateHasChanged();
+            }
         }
     }
 
-    private void SetHref(List<NavItem> navItems, string? segment = null)
+    private async void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+
+        if (_lastSecondSegment != secondSegment)
+        {
+            _lastSecondSegment = secondSegment;
+
+            if (secondSegment is null)
+            {
+                // Navs.Clear();
+                Navs = new();
+            }
+            else if (_projectMap.ContainsKey(secondSegment))
+            {
+                Navs = await DocService.ReadNavsAsync(secondSegment);
+                SetHref(Navs, rootSegment: secondSegment);
+            }
+
+            _ = InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void SetHref(List<NavItem> navItems, string? segment = null, string? rootSegment = null)
     {
         foreach (var navItem in navItems)
         {
             if (((IDefaultItem<NavItem>)navItem).HasChildren())
             {
-                SetHref(navItem.Children, navItem.Segment);
+                SetHref(navItem.Children!, navItem.Segment, rootSegment);
             }
             else
             {
-                navItem.Href = segment + "/" + navItem.Segment;
+                navItem.Href = $"{rootSegment}/{segment}/{navItem.Segment}";
             }
         }
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 
 }

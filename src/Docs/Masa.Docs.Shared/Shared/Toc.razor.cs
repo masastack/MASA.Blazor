@@ -1,6 +1,8 @@
 ﻿using BlazorComponent.JSInterop;
 using Microsoft.JSInterop;
 using System.Text;
+using BlazorComponent;
+using BlazorComponent.I18n;
 
 namespace Masa.Docs.Shared.Shared;
 
@@ -104,8 +106,10 @@ public partial class Toc : NextTickComponentBase
         return builder.ToString();
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
+        base.Dispose(disposing);
+
         AppService.TocChanged -= AppServiceOnTocChanged;
         _objRef?.Dispose();
     }

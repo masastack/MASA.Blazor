@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Shared", "Docs\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.WebAssembly", "Docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj", "{3CD005E0-B246-4757-A010-C31CCBCA9571}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs", "Docs\Masa.Blazor.Docs\Masa.Blazor.Docs.csproj", "{ABFEA5BB-2A3E-4917-AC4B-618130388A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Core", "Docs\Masa.Docs.Core\Masa.Docs.Core.csproj", "{36C9041A-134E-448D-959D-822DD317685A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Masa.Docs.Template", "Masa.Docs.Template", "{6D52B20D-5559-4E10-8386-4B6AD391A6A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +45,25 @@ Global
 		{3CD005E0-B246-4757-A010-C31CCBCA9571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CD005E0-B246-4757-A010-C31CCBCA9571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CD005E0-B246-4757-A010-C31CCBCA9571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFEA5BB-2A3E-4917-AC4B-618130388A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFEA5BB-2A3E-4917-AC4B-618130388A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFEA5BB-2A3E-4917-AC4B-618130388A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFEA5BB-2A3E-4917-AC4B-618130388A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C9041A-134E-448D-959D-822DD317685A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C9041A-134E-448D-959D-822DD317685A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C9041A-134E-448D-959D-822DD317685A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C9041A-134E-448D-959D-822DD317685A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F25C776-A200-4DEB-8F8B-9D1FA2CDC740}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36C9041A-134E-448D-959D-822DD317685A} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
+		{080CB203-DC2E-4DC5-A836-8683BC6C68B7} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
+		{4BB2660A-0722-43C0-9227-1D4F9D6F5846} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
+		{3CD005E0-B246-4757-A010-C31CCBCA9571} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
 	EndGlobalSection
 EndGlobal

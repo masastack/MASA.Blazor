@@ -1,3 +1,5 @@
+using Masa.Blazor.Docs;
+using Masa.Docs.Core;
 using Masa.Docs.Shared;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
@@ -7,6 +9,7 @@ builder.Services.AddServerSideBlazor(options =>
 {
     options.RootComponents.MaxJSRootComponents = 500;
     options.RootComponents.RegisterCustomElementsOfMasaDocs();
+    options.RootComponents.RegisterCustomElementsOfMasaBlazorDocs();
 });
 builder.Services.AddHealthChecks();
 

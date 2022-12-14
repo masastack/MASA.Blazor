@@ -1,5 +1,7 @@
+using Masa.Blazor.Docs;
+using Masa.Docs.Core;
 using Masa.Docs.Shared;
-using Masa.Docs.Shared.Services;
+using Masa.Docs.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
@@ -25,5 +27,6 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.RootComponents.RegisterCustomElementsOfMasaDocs();
+builder.RootComponents.RegisterCustomElementsOfMasaBlazorDocs();
 
 await builder.Build().RunAsync();

@@ -1,4 +1,7 @@
-﻿namespace Masa.Docs.Shared;
+﻿using Masa.Blazor.Docs;
+using Masa.Docs.Shared.Models;
+
+namespace Masa.Docs.Shared;
 
 public static class ServiceCollectionExtensions
 {
@@ -6,7 +9,8 @@ public static class ServiceCollectionExtensions
     {
         BlazorMode.Current = mode;
 
-        string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68";
+        var userAgent =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68";
         services.AddHttpClient("masa-docs", httpClient =>
         {
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
@@ -23,7 +27,7 @@ public static class ServiceCollectionExtensions
 
         services.AddMemoryCache();
 
-        ApiGenerator.ApiGenerator.Run();
+        services.AddMasaBlazorDocs();
 
         return services;
     }

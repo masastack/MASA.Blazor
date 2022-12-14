@@ -1,0 +1,49 @@
+﻿@page "/{project}/components/{page}/{tab?}/{api?}"
+
+<MContainer Class="pa-4 pa-sm-6 pa-md-8"
+            Fluid
+            Tag="section">
+    <MResponsive MaxWidth="960"
+                 Class="mx-auto overflow-visible">
+        @if (_frontMatterMeta is not null)
+        {
+            <FrontMatter Meta="_frontMatterMeta"></FrontMatter>
+        }
+        else
+        {
+            <MSkeletonLoader Type="article"></MSkeletonLoader>
+        }
+
+        <MTabs Value="IsApiTab.ToString()" Class="m-bar--underline mb-12">
+            <MTab Class="ordinary-text" Value="@("False")" OnClick="@(() => NavigateToTab(""))">DEMO</MTab>
+            <MTab Class="ordinary-text" Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
+        </MTabs>
+
+        @if (IsApiTab && _apiData.Count == 0)
+        {
+            <MSkeletonLoader Type="table"></MSkeletonLoader>
+        }
+        else if (!IsApiTab && _md == null)
+        {
+            <MSkeletonLoader Type="article,card"></MSkeletonLoader>
+        }
+        else
+        {
+            <FadeTransition LeaveAbsolute>
+                <ShowTransitionElement Tag="div" Value="@IsApiTab">
+                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
+                </ShowTransitionElement>
+                <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
+                    <DocumentMarkdownIt Source="@_md"
+                                        OnTocParsed="@OnTocParsed"
+                                        OnFrontMatterParsed="@OnFrontMatterParsed" />
+
+                    @if (_frontMatterMeta is not null)
+                    {
+                        <BackMatter Related="@_frontMatterMeta.Related"></BackMatter>
+                    }
+                </ShowTransitionElement>
+            </FadeTransition>
+        }
+    </MResponsive>
+</MContainer>
