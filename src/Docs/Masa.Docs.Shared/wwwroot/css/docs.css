@@ -231,3 +231,8 @@ ul:not([class]), ol:not([class]) {
 .m-code-highlight__pre .m-code-highlight__code {
     padding: 0 !important;
 }
+
+a.text-dec-none {
+    text-decoration: none !important;
+    color: inherit !important;
+}
