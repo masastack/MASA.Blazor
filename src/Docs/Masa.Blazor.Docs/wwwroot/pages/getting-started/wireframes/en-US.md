@@ -9,5 +9,5 @@ These templates are known as **wireframes** and are designed to provide a consis
 <wireframe-examples></wireframe-examples>
 
 <app-alerts type="info" 
-			content=" Additional information on how these templates are structured is located on the [Application page](/components/application/).">
+            content=" Additional information on how these templates are structured is located on the [Application page](/blazor/components/application/).">
 </app-alerts>
