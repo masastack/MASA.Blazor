@@ -216,5 +216,9 @@
   "supported-with-polyfill": "Supported with polyfill",
   "not-supported": "Not supported",
   "settings": "Settings",
-  "wireframes": "Wireframes"
+  "wireframes": "Wireframes",
+  "product.blazor": "MASA Blazor",
+  "product.stack": "MASA Stack",
+  "product.framework": "MASA Framework",
+  "all": "All components"
 }

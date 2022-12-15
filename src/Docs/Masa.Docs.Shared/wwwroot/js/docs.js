@@ -60,14 +60,10 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
   if (scope === "document") {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
-  }
-  else if (scope === "desc") {
+    addCodeRules(markdownIt);
+  } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
-
-  addHeadingRules(markdownIt);
-  addLinkRules(markdownIt);
-  addCodeRules(markdownIt);
 
   function addHeadingRules(md) {
     md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
@@ -110,7 +106,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
 
   function addCodeRules(md) {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-      if (tokens[idx].markup==="```") {
+      if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
         const info = tokens[idx].info;
 

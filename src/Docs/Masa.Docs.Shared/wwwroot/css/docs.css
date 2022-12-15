@@ -137,10 +137,10 @@ h7.m-heading {
 }
 
 .ordinary-text {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #485585;
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+    color: #485585 !important;
 }
 
 .subordinary-color {
@@ -235,4 +235,35 @@ ul:not([class]), ol:not([class]) {
 a.text-dec-none {
     text-decoration: none !important;
     color: inherit !important;
+}
+
+.heading-5 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 2.25em;
+    letter-spacing: 0em;
+}
+
+.overview {
+    padding-top: 64px;
+}
+
+.overview .project {
+    margin-bottom: 48px;
+}
+
+.overview .project-content {
+    margin-bottom: 16px;
+}
+
+.overview .project-content__title {
+    margin-bottom: 8px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #1B2559 !important;
+    caret-color: #1B2559 !important;
+}
+
+.m-card.m-card--doc {
+    border-color: #E4E8F3;
 }

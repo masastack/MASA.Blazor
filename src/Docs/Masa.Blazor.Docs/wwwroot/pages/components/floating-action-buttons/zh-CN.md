@@ -4,7 +4,7 @@ desc: "**MButton** 组件可以用作浮动动作按钮。 这提供了一个具
 related:
   - /components/button
   - /components/icons
-  - /stylesandanimations/transitions
+  - /styles-and-animations/transitions
 ---
 
 ## 使用

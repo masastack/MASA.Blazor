@@ -64,6 +64,16 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "tag":
                                 navItem.Tag = reader.GetString();
                                 break;
+                            case "tiling":
+                                var tilingStr = reader.GetString();
+                                navItem.Tiling = tilingStr switch
+                                {
+                                    "some" => NavItemTiling.Some,
+                                    "visible" => NavItemTiling.Visible,
+                                    "invisible" => NavItemTiling.Invisible,
+                                    _ => null
+                                };
+                                break;
                             case "items":
                                 navItem.Children = ReadSubItems(ref reader);
                                 break;

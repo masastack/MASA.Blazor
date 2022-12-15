@@ -13,7 +13,7 @@
   },
   "contents": {
     "extensionContent": "槽位直接位于工具栏的主要内容下。可以使用 `ExtensionHeight` 属性显式设置高度。如果该插槽没有内容，可以使用 `Extended` 属性代替。",
-    "imgContent": "需要 [MImage](/components/images) 组件。范围内的 props 应该与 @bind-value=\"props\" 一起使用。"
+    "imgContent": "需要 [MImage](/blazor/components/images) 组件。范围内的 props 应该与 @bind-value=\"props\" 一起使用。"
   },
   "events": {},
   "functions": {}

@@ -25,19 +25,19 @@ The `Color` parameter applies a color to the background of the bottom navigation
 
 #### Grow
 
-Using the `Grow` property forces [MButton](/components/buttons) components to fill all available space. Buttons have a maximum width of 168px per the [Bottom Navigation MD specification](https://material.io/components/bottom-navigation#specs).
+Using the `Grow` property forces [MButton](/blazor/components/buttons) components to fill all available space. Buttons have a maximum width of 168px per the [Bottom Navigation MD specification](https://material.io/components/bottom-navigation#specs).
 
 <masa-example file="Examples.components.bottom_navigation.Grow"></masa-example>
 
 #### Hide on scroll
 
-The **MBottomNavigation** component hides when scrolling up when using the `HideOnScroll` parameter. This is similar to the [scrolling techniques](https://material.io/archive/guidelines/patterns/scrolling-techniques.html) that are supported in [MAppBar](/components/app-bars). In the following example, scroll up and down to see this behavior.
+The **MBottomNavigation** component hides when scrolling up when using the `HideOnScroll` parameter. This is similar to the [scrolling techniques](https://material.io/archive/guidelines/patterns/scrolling-techniques.html) that are supported in [MAppBar](/blazor/components/app-bars). In the following example, scroll up and down to see this behavior.
 
 <masa-example file="Examples.components.bottom_navigation.HideOnScroll"></masa-example>
 
 #### Horizontal
 
-Adjust the style of buttons and icons by using the `Horizontal` parameter. This positions button text inline with the provided [MIcon](/components/icons).
+Adjust the style of buttons and icons by using the `Horizontal` parameter. This positions button text inline with the provided [MIcon](/blazor/components/icons).
 
 <masa-example file="Examples.components.bottom_navigation.Horizontal"></masa-example>
 

@@ -72,7 +72,7 @@ This applies a `Striped` background over the value portion of the **MProgressLin
 #### Default
 
 The **MProgressLinear** component will be responsive to user input when using `@bind-Value`. You can use the default
-slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [MSlider](/components/sliders).
+slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [MSlider](/blazor/components/sliders).
 
 <masa-example file="Examples.components.progress_linear.Default"></masa-example>
 

@@ -16,7 +16,7 @@ minimum height of the item and can also be controlled from `MList` with the same
 
 ## Caveats
 
-<app-alerts type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)。"></app-alerts>
+<app-alerts type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alerts>
 
 ## Examples
 
@@ -82,7 +82,7 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 #### Expansion Lists
 
 A list can contain a group of items which will display on click utilizing **MListGroup**'s `ActivatorContent`. Expansion
-lists are also used within the [MNavigationDrawer](/components/navigation-drawers) component.
+lists are also used within the [MNavigationDrawer](/blazor/components/navigation-drawers) component.
 
 <masa-example file="Examples.components.lists.ExpansionLists"></masa-example>
 
@@ -90,7 +90,7 @@ lists are also used within the [MNavigationDrawer](/components/navigation-drawer
 
 #### Action and item groups
 
-A **ThreeLine** list with actions. Utilizing [MListItemGroup](/components/list-item-groups), easily connect actions to your tiles.
+A **ThreeLine** list with actions. Utilizing [MListItemGroup](/blazor/components/list-item-groups), easily connect actions to your tiles.
 
 <masa-example file="Examples.components.lists.ActionsAndItemGroups"></masa-example>
 

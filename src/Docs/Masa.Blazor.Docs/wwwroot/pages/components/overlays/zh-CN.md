@@ -39,7 +39,7 @@ related:
 
 #### 高级版
 
-使用 [MHover](/components/hover) 作为背景，添加进度组件来轻松创建自定义加载器。
+使用 [MHover](/blazor/components/hover) 作为背景，添加进度组件来轻松创建自定义加载器。
 
 <masa-example file="Examples.components.overlays.Advanced"></masa-example>
 

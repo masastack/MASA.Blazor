@@ -29,5 +29,14 @@ public class NavItem : IDefaultItem<NavItem>
 
     public string? Tag { get; set; }
 
+    public NavItemTiling? Tiling { get; set; }
+
     public string Segment => (Group ?? Title);
+}
+
+public enum NavItemTiling
+{
+    Visible,
+    Some,
+    Invisible
 }

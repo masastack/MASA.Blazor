@@ -18,7 +18,7 @@ To better illustrate this, let’s create a basic Vuetify layout:
 </MApp>
 ```
 
-With no layout components in the template, MMain doesn’t need to adjust its size and instead takes up the entire page. Let’s change that by adding a [MAppBar](/components/app-bars)above the MMain element:
+With no layout components in the template, MMain doesn’t need to adjust its size and instead takes up the entire page. Let’s change that by adding a [MAppBar](/blazor/components/app-bars)above the MMain element:
 
 ```html
 <MApp>

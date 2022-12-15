@@ -19,7 +19,7 @@ related:
 
 #### 颜色
 
-**MSwitch** 可以使用 `Color` 属性设置颜色 颜色可以是[内置颜色](/stylesandanimations/colors)或自定义来着色。
+**MSwitch** 可以使用 `Color` 属性设置颜色 颜色可以是[内置颜色](/blazor/styles-and-animations/colors)或自定义来着色。
 
 <masa-example file="Examples.components.switches.Color"></masa-example>
 

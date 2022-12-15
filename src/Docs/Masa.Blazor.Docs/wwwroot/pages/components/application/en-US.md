@@ -61,11 +61,11 @@ swap them out and the layout will accommodate.
 
 Each of these application components have a designated location and priority that it affects within the layout system.
 
-- [MAppBar](/components/app-bars): Is always placed at the top of an application with a lower priority than **MSystemBar**.
+- [MAppBar](/blazor/components/app-bars): Is always placed at the top of an application with a lower priority than **MSystemBar**.
 - MBottomNavigation: Is always placed at the bottom of an application with a higher priority than **MFooter**.
-- [MFooter](/components/footers): Is always placed at the bottom of an application with a lower priority than **MBottomNavigation** .
-- [MNavigationDrawer](/components/navigation-drawers): Can be placed on the left or right side of an application and can be configured to sit next to or below **MAppBar** .
-- [MSystemBar](/components/system-bars): Is always placed at the top of an application with higher priority than  **MAppBar** .
+- [MFooter](/blazor/components/footers): Is always placed at the bottom of an application with a lower priority than **MBottomNavigation** .
+- [MNavigationDrawer](/blazor/components/navigation-drawers): Can be placed on the left or right side of an application and can be configured to sit next to or below **MAppBar** .
+- [MSystemBar](/blazor/components/system-bars): Is always placed at the top of an application with higher priority than  **MAppBar** .
 
 ## Application service
 

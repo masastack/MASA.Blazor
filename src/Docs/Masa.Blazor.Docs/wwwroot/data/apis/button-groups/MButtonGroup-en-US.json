@@ -2,7 +2,7 @@
   "props": {
     "activeClass": "`ActiveClass` is applied when the child component is activated.",
     "borderless": "Removes the group’s border.",
-    "group": "Generally used in [MToolbar](/components/toolbar) and [MAppbar](/components/appbar). Removes background color, border and increases space between the buttons",
+    "group": "Generally used in [MToolbar](/blazor/components/toolbar) and [MAppbar](/blazor/components/appbar). Removes background color, border and increases space between the buttons",
     "mandatory": "Force to always select a value (if available).",
     "multiple": "Allow multiple selections.",
     "targetGroup": "targetGroup",

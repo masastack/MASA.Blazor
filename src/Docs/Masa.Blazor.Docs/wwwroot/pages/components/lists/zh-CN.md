@@ -15,7 +15,7 @@ related:
 
 ## 注意
 
-<app-alerts type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/list-item-groups)。"></app-alerts>
+<app-alerts type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alerts>
 
 ## 示例
 
@@ -79,7 +79,7 @@ related:
 
 #### 可展开的列表
 
-列表可以包含一组项目，这些项目将在单击**MListGroup**的`ActivatorContent`时显示。扩展列表也用于 [MNavigationDrawer](/components/navigation-drawers) 组件中。
+列表可以包含一组项目，这些项目将在单击**MListGroup**的`ActivatorContent`时显示。扩展列表也用于 [MNavigationDrawer](/blazor/components/navigation-drawers) 组件中。
 
 <masa-example file="Examples.components.lists.ExpansionLists"></masa-example>
 
@@ -87,7 +87,7 @@ related:
 
 #### 操作和项目组
 
-可操作的 **ThreeLine** 列表。 利用 [MListItemGroup](/components/list-item-groups)，轻松将动作连接到图块。
+可操作的 **ThreeLine** 列表。 利用 [MListItemGroup](/blazor/components/list-item-groups)，轻松将动作连接到图块。
 
 <masa-example file="Examples.components.lists.ActionsAndItemGroups"></masa-example>
 

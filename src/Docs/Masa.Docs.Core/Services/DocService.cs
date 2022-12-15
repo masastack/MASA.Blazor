@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 using System.Text.Json;
 using Masa.Docs.Core.JsonConverters;
 
@@ -71,11 +72,45 @@ public class DocService
 
         return await s_projectNavsCache.GetOrAdd(project, async _ =>
         {
-            var navs = await _httpClient.GetFromJsonAsync<List<NavItem>>($"_content/{projectFullName}/data/nav.json", new JsonSerializerOptions()
+            try
             {
-                Converters = { new NavItemsJsonConverter() }
-            });
-            return navs ?? new List<NavItem>();
+                var navs = await _httpClient.GetFromJsonAsync<List<NavItem>>($"_content/{projectFullName}/data/nav.json", new JsonSerializerOptions()
+                {
+                    Converters = { new NavItemsJsonConverter() }
+                });
+
+                if (navs is not null)
+                {
+                    SetHref(navs, rootSegment: project);
+                }
+
+                return navs ?? new List<NavItem>();
+            }
+            catch (HttpRequestException e)
+            {
+                if (e.StatusCode == HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine(e);
+                    return new List<NavItem>();
+                }
+
+                throw;
+            }
         });
+    }
+
+    private static void SetHref(List<NavItem> navItems, string? segment = null, string? rootSegment = null)
+    {
+        foreach (var navItem in navItems)
+        {
+            if (((IDefaultItem<NavItem>)navItem).HasChildren())
+            {
+                SetHref(navItem.Children!, navItem.Segment, rootSegment);
+            }
+            else
+            {
+                navItem.Href = $"{rootSegment}/{segment}/{navItem.Segment}";
+            }
+        }
     }
 }

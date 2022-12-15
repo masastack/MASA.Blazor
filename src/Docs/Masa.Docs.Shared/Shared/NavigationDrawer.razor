@@ -2,7 +2,6 @@
 @inject AppService AppService
 @inject DocService DocService
 @inject MasaBlazor MasaBlazor
-@implements IDisposable
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
@@ -10,24 +9,13 @@
                    Right="RTL"
                    App
                    Floating
-                   Width="300">
-    <PrependContent>
-        @if (MasaBlazor.Breakpoint.LgAndUp)
-        {
-            <DefaultDrawerPrepend />
-        }
-    </PrependContent>
-    <ChildContent>
-        <DefaultList Linkage Items="Navs" />
-        <div class=pt-12></div>
-    </ChildContent>
+                   Width="300"
+                   Style="@Style">
+    <DefaultList Linkage Items="Navs" />
+    <div class="pt-12"></div>
 </MNavigationDrawer>
 
-
 @code {
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
 
     [Parameter]
     public bool RTL { get; set; }
@@ -35,73 +23,35 @@
     [CascadingParameter]
     public CultureInfo Culture { get; set; } = null!;
 
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
     [Parameter]
     public bool Value { get; set; }
 
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; }
 
-    private string? _lastSecondSegment;
-
-    private Dictionary<string, string> _projectMap = new();
-
+    private string? _lastProject;
     private List<NavItem> Navs { get; set; } = new();
 
-    protected override void OnInitialized()
+    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
+
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnInitialized();
+        await base.OnParametersSetAsync();
 
-        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
+        if (_lastProject != Project)
         {
-            var segments = NavigationManager.GetSegments();
-            var secondSegment = segments.ElementAtOrDefault(1);
-            secondSegment = secondSegment?.TrimEnd('/');
-
-            _lastSecondSegment = secondSegment;
-
-            _projectMap = await DocService.ReadProjectMapAsync();
-
-            if (secondSegment is null)
+            _lastProject = Project;
+            if (Project is null)
             {
-                // TODO: overview page
-            }
-            else
-            {
-                Navs = await DocService.ReadNavsAsync(secondSegment);
-                SetHref(Navs, rootSegment: secondSegment);
-                StateHasChanged();
-            }
-        }
-    }
-
-    private async void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
-        secondSegment = secondSegment?.TrimEnd('/');
-
-        if (_lastSecondSegment != secondSegment)
-        {
-            _lastSecondSegment = secondSegment;
-
-            if (secondSegment is null)
-            {
-                // Navs.Clear();
                 Navs = new();
-            }
-            else if (_projectMap.ContainsKey(secondSegment))
-            {
-                Navs = await DocService.ReadNavsAsync(secondSegment);
-                SetHref(Navs, rootSegment: secondSegment);
+                return;
             }
 
-            _ = InvokeAsync(StateHasChanged);
+            Navs = await DocService.ReadNavsAsync(Project);
+            SetHref(Navs, rootSegment: Project);
         }
     }
 
@@ -118,11 +68,6 @@
                 navItem.Href = $"{rootSegment}/{segment}/{navItem.Segment}";
             }
         }
-    }
-
-    public void Dispose()
-    {
-        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 
 }

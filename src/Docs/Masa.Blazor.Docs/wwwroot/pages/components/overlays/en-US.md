@@ -13,11 +13,6 @@ In its simplest form, the **MOverlay** component will add a dimmed layer over yo
 
 <overlays-usage></overlays-usage>
 
-
-## API
-
-- [MOverlay](/api/MOverlay)
-
 ## Examples
 
 ### Props
@@ -44,7 +39,7 @@ In its simplest form, the **MOverlay** component will add a dimmed layer over yo
 
 #### Advanced
 
-Using the [MHover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
+Using the [MHover](/blazor/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
 
 <masa-example file="Examples.components.overlays.Advanced"></masa-example>
 

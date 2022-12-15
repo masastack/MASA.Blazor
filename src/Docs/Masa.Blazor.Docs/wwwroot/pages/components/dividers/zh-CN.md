@@ -13,10 +13,6 @@ related:
 
 <dividers-usage></dividers-usage>
 
-## API
-
-- [MDivider](/api/MDivider)
-
 ## 示例
 
 ### 属性

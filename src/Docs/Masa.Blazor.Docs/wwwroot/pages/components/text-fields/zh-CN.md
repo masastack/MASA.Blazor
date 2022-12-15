@@ -97,7 +97,7 @@ related:
 
 #### 形状
 
-`Shaped` 文本字段如果是 `Outlined` 则是圆角的；如果是 `Filled`，则具有更高的   [border-radius](/stylesandanimations/border-radius)
+`Shaped` 文本字段如果是 `Outlined` 则是圆角的；如果是 `Filled`，则具有更高的   [border-radius](/blazor/styles-and-animations/border-radius)
 
 <masa-example file="Examples.components.text_fields.Shaped"></masa-example>
 

@@ -1,0 +1,83 @@
+﻿@layout BaseLayout
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject DocService DocService
+@implements IDisposable
+
+<CascadingValue Value="@_project" Name="project">
+    <NavigationDrawer Value="_showDrawer"
+                      ValueChanged="OnNavDrawerValueChanged" />
+
+    <MErrorHandler>
+        <MMain>@Body</MMain>
+    </MErrorHandler>
+
+    <Toc />
+</CascadingValue>
+
+@code {
+
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
+    private bool _showDrawer;
+    private string? _project;
+    private Dictionary<string, string> _projectMap = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showDrawer = val; });
+
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _projectMap = await DocService.ReadProjectMapAsync();
+
+            var segments = NavigationManager.GetSegments();
+            var secondSegment = segments.ElementAtOrDefault(1);
+            secondSegment = secondSegment?.TrimEnd('/');
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+            }
+            StateHasChanged();
+        }
+
+        BaseLayout.ShowAppBarNavIcon();
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+
+        if (_project != secondSegment)
+        {
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+
+    private void OnNavDrawerValueChanged(bool val)
+    {
+        _showDrawer = val;
+        BaseLayout.ShowDrawer = val;
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+}

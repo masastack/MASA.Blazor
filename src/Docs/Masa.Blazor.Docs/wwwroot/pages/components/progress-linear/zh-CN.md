@@ -69,7 +69,7 @@ related:
 
 #### 默认值
 
-**MProgressLinear** 组件将在使用 `@bind-Value` 时响应用户输入。 您可以使用默认插槽或绑定本地model在进度内显示。 如果您在寻找线性组件上的高级功能，请查看 [MSlider](/components/sliders)。
+**MProgressLinear** 组件将在使用 `@bind-Value` 时响应用户输入。 您可以使用默认插槽或绑定本地model在进度内显示。 如果您在寻找线性组件上的高级功能，请查看 [MSlider](/blazor/components/sliders)。
 
 <masa-example file="Examples.components.progress_linear.Default"></masa-example>
 
