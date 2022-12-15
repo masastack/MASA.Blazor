@@ -17,7 +17,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return _bluetoothAdapter is { IsEnabled: true };
         }
 
-        private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName="")
+        private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
             time1 = DateTime.Now;
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             {
                 Task.Run(async () =>
                 {
-                    await Task.Delay(10000);
+                    await Task.Delay(7000);
                     _eventWaitHandle.Set();
                 });
 
@@ -120,7 +120,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             public void WaitOnlyOne(string deviceName)
             {
-                scanDeviceName=deviceName;
+                scanDeviceName = deviceName;
                 _eventWaitHandle.WaitOne();
             }
 
@@ -133,7 +133,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             public override void OnScanResult(ScanCallbackType callbackType, ScanResult result)
             {
-                
+
                 System.Diagnostics.Debug.WriteLine("OnScanResult");
                 if (string.IsNullOrEmpty(scanDeviceName))
                 {
@@ -151,13 +151,13 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     }
                     else
                     {
-                        if ((DateTime.Now- time1).Seconds>20)
+                        if (time1 > DateTime.MinValue && (DateTime.Now - time1).Seconds > 10)
                         {
                             _eventWaitHandle.Set();
+                            time1 = DateTime.MinValue;
                         }
                     }
                 }
-
 
                 base.OnScanResult(callbackType, result);
             }

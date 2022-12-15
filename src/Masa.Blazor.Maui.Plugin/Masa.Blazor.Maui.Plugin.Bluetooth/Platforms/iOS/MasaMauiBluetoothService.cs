@@ -54,9 +54,17 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 {
                     AllowDuplicatesKey = true,
                 });
-
-                await Task.Run(() => { _delegate.WaitOne(); });
-
+                if (string.IsNullOrEmpty(deviceName))
+                {
+                    await Task.Run(() => { _delegate.WaitOne(); });
+                }
+                else
+                {
+                    await Task.Run(() =>
+                    {
+                        _delegate.WaitOnlyOne(deviceName);
+                    });
+                }
                 _manager.StopScan();
                 _discoveredDevices = _delegate.Devices.AsReadOnly();
             }
@@ -160,7 +168,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     }
                     else
                     {
-                        if ((DateTime.Now - time1).Seconds > 20)
+                        if ((DateTime.Now - time1).Seconds > 10)
                         {
                             _eventWaitHandle.Set();
                         }
