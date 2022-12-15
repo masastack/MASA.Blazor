@@ -1,50 +1,66 @@
 ﻿@page "/"
 @layout MainLayout
 @inject DocService DocService
+@inject I18n I18n
 
-<MResponsive Class="mx-auto overflow-visible" Style="padding-top: 80px" MaxWidth="1260">
-    <MButton Href="/blazor/introduction/why-masa-blazor">MASA Blazor</MButton>
-    @if (_loading)
-    {
-        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-        <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-    }
-    else
-    {
-        @foreach (var (key, value) in _dictionary)
+<MContainer Fluid>
+    <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
+        @if (_loading)
         {
-            <div>
-                <div>@key</div>
-                @foreach (var navItem in value)
-                {
-                    @if (navItem.Children is not null && navItem.Children.Count > 0)
-                    {
-                        <div>@navItem.Title</div>
-                        <MCard Outlined Flat>
-                            <MRow Dense NoGutters>
-                                @foreach (var subItem in navItem.Children)
-                                {
-                                    <MCol Cols="4">
-                                        @subItem.Title
-                                    </MCol>
-                                }
-                            </MRow>
-                        </MCard>
-                    }
-                    else
-                    {
-                        <div>@navItem.Title</div>
-                    }
-                }
-            </div>
+            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
         }
-    }
-</MResponsive>
+        else
+        {
+            @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+            {
+                <div class="project">
+                    <div class="heading-5">@I18n.T("product", project)</div>
+                    @foreach (var navItem in navs)
+                    {
+                        if (navItem.Tiling is NavItemTiling.Invisible)
+                        {
+                            continue;
+                        }
+
+                        if (navItem.Children is not null && navItem.Children.Count > 0)
+                        {
+                            var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                            <div class="project-content">
+                                <div class="project-content__title">@I18n.T(navItem.Title)</div>
+                                <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
+                                    <MRow Dense NoGutters>
+                                        @foreach (var subItem in children)
+                                        {
+                                            <MCol Cols="4">
+                                                <MButton Text Href="@subItem.Href" Class="ordinary-text text-none">@I18n.T(subItem.Title)</MButton>
+                                            </MCol>
+                                        }
+                                    </MRow>
+                                </MCard>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="project-content">
+                                <div class="project-content__title">@I18n.T(navItem.Title)</div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+    </MResponsive>
+</MContainer>
 
 @code {
 
-    private readonly Dictionary<string, List<NavItem>> _dictionary = new();
+    [CascadingParameter]
+    private CultureInfo Culture { get; set; } = null!;
+
+    private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
     private bool _loading;
 
@@ -55,12 +71,12 @@
         if (firstRender)
         {
             _loading = true;
-            
+
             StateHasChanged();
 
             var projectMap = await DocService.ReadProjectMapAsync();
 
-            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) => { _dictionary[project] = await DocService.ReadNavsAsync(project); });
+            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) => { _projectToNavs[project] = await DocService.ReadNavsAsync(project); });
 
             _loading = false;
 

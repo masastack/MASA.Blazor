@@ -49,7 +49,12 @@
     "title": "ui-components",
     "icon": "mdi-layers-triple",
     "group": "components",
+    "tiling": "some",
     "items": [
+      {
+        "title": "all",
+        "tiling": "visible"
+      },
       "alerts",
       "application",
       "aspect-ratios",
