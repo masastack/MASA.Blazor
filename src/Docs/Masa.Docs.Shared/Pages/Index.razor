@@ -10,43 +10,42 @@
             <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
             <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
             <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
         }
         else
         {
+            <div class="project">
+                <div class="heading-5">@I18n.T("getting-started")</div>
+                @ProductCard(s_gettingStartedNavs)
+            </div>
+
             @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
             {
                 <div class="project">
                     <div class="heading-5">@I18n.T("product", project)</div>
-                    @foreach (var navItem in navs)
-                    {
-                        if (navItem.Tiling is NavItemTiling.Invisible)
+
+                    @{
+                        var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
+                        var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
+                        if (groupNavsWithoutChildren is not null)
                         {
-                            continue;
+                            @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
                         }
 
-                        if (navItem.Children is not null && navItem.Children.Count > 0)
+                        var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
+                        if (groupNavsWithChildren is not null)
                         {
-                            var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+                            foreach (var navItem in groupNavsWithChildren)
+                            {
+                                if (navItem.Tiling is NavItemTiling.Invisible)
+                                {
+                                    continue;
+                                }
 
-                            <div class="project-content">
-                                <div class="project-content__title">@I18n.T(navItem.Title)</div>
-                                <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-                                    <MRow Dense NoGutters>
-                                        @foreach (var subItem in children)
-                                        {
-                                            <MCol Cols="4">
-                                                <MButton Text Href="@subItem.Href" Class="ordinary-text text-none">@I18n.T(subItem.Title)</MButton>
-                                            </MCol>
-                                        }
-                                    </MRow>
-                                </MCard>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="project-content">
-                                <div class="project-content__title">@I18n.T(navItem.Title)</div>
-                            </div>
+                                var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                                @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
+                            }
                         }
                     }
                 </div>
@@ -59,6 +58,11 @@
 
     [CascadingParameter]
     private CultureInfo Culture { get; set; } = null!;
+
+    private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
+    {
+        ("why-masa-blazor", "/blazor/introduction/why-masa-blazor")
+    };
 
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
@@ -76,12 +80,47 @@
 
             var projectMap = await DocService.ReadProjectMapAsync();
 
-            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) => { _projectToNavs[project] = await DocService.ReadNavsAsync(project); });
+            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) =>
+            {
+                try
+                {
+                    _projectToNavs[project] = await DocService.ReadNavsAsync(project);
+                }
+                catch (Exception)
+                {
+                    _projectToNavs.Remove(project);
+                }
+            });
 
             _loading = false;
 
             StateHasChanged();
         }
     }
+
+    private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
+    {
+        <div class="project-content">
+            @if (group is not null)
+            {
+                <div class="project-content__title">@I18n.T(group)</div>
+            }
+            <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
+                <MRow Dense NoGutters>
+                    @foreach (var (title, href) in items)
+                    {
+                        <MCol Cols="4">
+                            @LinkableTitle(title, href)
+                        </MCol>
+                    }
+                </MRow>
+            </MCard>
+        </div>
+    };
+
+    private RenderFragment LinkableTitle(string title, string href) => __builder =>
+    {
+        <MButton Text Href="@href" Class="ordinary-text text-none">@I18n.T(title)</MButton>
+    };
 
 }
