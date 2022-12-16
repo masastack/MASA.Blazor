@@ -9,7 +9,7 @@ public static class CircuitRootComponentOptionsExtensions
     {
         options.RegisterCustomElement<Masa.Blazor.Docs.Components.Example>("masa-example");
 
-        options.RegisterCustomElement<Masa.Blazor.Docs.Examples.about.meet_the_team.TeamMembers>("team-members");
+        options.RegisterCustomElement<Masa.Blazor.Docs.Examples.about.meet_the_team.TeamMember>("team-member");
         options.RegisterCustomElement<Masa.Blazor.Docs.Examples.features.breakpoints.BreakpointTable>("breakpoint-table");
         options.RegisterCustomElement<Masa.Blazor.Docs.Examples.getting_started.browser_support.BrowserSupportTable>("browser-support-table");
         options.RegisterCustomElement<Masa.Blazor.Docs.Examples.getting_started.wireframes.Examples>("wireframe-examples");
