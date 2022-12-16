@@ -11,7 +11,7 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
              nationality="Chinese" 
              github-url="https://github.com/doddgu" 
              avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs1.png">
-</team-members>
+</team-member>
 
 ## 核心团队
 
@@ -23,7 +23,7 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
              nationality="Chinese" 
              github-url="https://github.com/capdiem" 
              avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/avatar3.png">
-</team-members>
+</team-member>
 
 <team-member name="codding-y" 
              position="Developer" 
@@ -31,4 +31,4 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
              nationality="Chinese" 
              github-url="https://github.com/codding-y" 
              avatar="https://cdn.masastack.com/stack/images/avatar/mr.yan.svg">
-</team-members>
+</team-member>
