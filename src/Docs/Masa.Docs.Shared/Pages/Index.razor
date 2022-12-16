@@ -7,10 +7,10 @@
     <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
         @if (_loading)
         {
-            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
-            <MSkeletonLoader Type="card" Class="mb-2"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
         }
         else
         {
@@ -94,7 +94,7 @@
 
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
-    private bool _loading;
+    private bool _loading = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -108,17 +108,10 @@
 
             var projectMap = await DocService.ReadProjectMapAsync();
 
-            await Parallel.ForEachAsync(projectMap.Keys, async (project, _) =>
+            foreach (var key in projectMap.Keys)
             {
-                try
-                {
-                    _projectToNavs[project] = await DocService.ReadNavsAsync(project);
-                }
-                catch (Exception)
-                {
-                    _projectToNavs.Remove(project);
-                }
-            });
+                _projectToNavs[key] = await DocService.ReadNavsAsync(key);
+            }
 
             _loading = false;
 
