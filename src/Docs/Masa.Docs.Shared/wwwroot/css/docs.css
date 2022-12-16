@@ -225,7 +225,6 @@ ul:not([class]), ol:not([class]) {
 .m-application code:not(.m-code-highlight__code) {
     background-color: #f0f3f9 !important;
     color: #1B2559;
-    font-family: 'Roboto';
 }
 
 .m-code-highlight__pre .m-code-highlight__code {
@@ -240,8 +239,7 @@ a.text-dec-none {
 .heading-5 {
     font-size: 24px;
     font-weight: 700;
-    line-height: 2.25em;
-    letter-spacing: 0em;
+    line-height: 36px;
 }
 
 .overview {
@@ -253,7 +251,7 @@ a.text-dec-none {
 }
 
 .overview .project-content {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .overview .project-content__title {
