@@ -42,15 +42,6 @@ public class DocService
 
         var projectFullName = projectMap[project];
 
-        await s_projectNavsCache.GetOrAdd(project, async _ =>
-        {
-            var navs = await _httpClient.GetFromJsonAsync<List<NavItem>>($"_content/{projectFullName}/data/nav.json", new JsonSerializerOptions()
-            {
-                Converters = { new NavItemsJsonConverter() }
-            });
-            return navs ?? new List<NavItem>();
-        });
-
         var key = $"{category}/{title}:{_i18n.Culture.Name}";
         return await s_documentCache.GetOrAdd(key,
             async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{_i18n.Culture.Name}.md"));
