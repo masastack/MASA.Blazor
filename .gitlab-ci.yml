@@ -26,6 +26,7 @@ packer:
   only:
     - main
   script:
+    - id 
     - ls src/
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
