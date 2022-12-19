@@ -12,7 +12,7 @@ namespace Masa.Blazor
         public IPopupService PopupService { get; set; }
 
         [Parameter]
-        public Func<Exception, Task> OnErrorHandleAsync { get; set; }
+        public Func<Exception, Task<bool>> OnErrorHandleAsync { get; set; }
 
         [Parameter]
         public bool ShowAlert { get; set; } = true;
@@ -21,6 +21,8 @@ namespace Masa.Blazor
         public bool ShowDetail { get; set; }
 
         private bool _thrownInLifecycles;
+
+        private bool _handled = false;
 
         protected override void OnParametersSet()
         {
@@ -65,9 +67,11 @@ namespace Masa.Blazor
 
             if (OnErrorHandleAsync != null)
             {
-                await OnErrorHandleAsync(exception);
+                _handled = await OnErrorHandleAsync(exception);
+                StateHasChanged();
             }
-            else
+
+            if (!_handled)
             {
                 if (ShowAlert)
                 {
@@ -110,7 +114,9 @@ namespace Masa.Blazor
                 }
             }
 
-            builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
+            if (!_handled)
+                builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
+
             builder.CloseComponent();
         }
 
