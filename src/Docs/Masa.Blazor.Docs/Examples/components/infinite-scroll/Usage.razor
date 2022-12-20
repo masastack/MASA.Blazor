@@ -1,7 +1,4 @@
-﻿@namespace Masa.Blazor.Docs.Examples.components.infinite_scroll
-@implements Masa.Blazor.Docs.Components.IUsageWrapper
-
-<div class="text-center">
+﻿<div class="text-center">
     <MSwitch Value="_throw" ValueChanged="ValueChanged"
              Label="@("throw exception when loading more")"
              Disabled="_items.Count == 0"
@@ -14,22 +11,21 @@
     <MList>
         @foreach (var item in _items)
         {
-                <MListItem>
-                    <MListItemContent>
-                        <MListItemTitle>@item</MListItemTitle>
-                    </MListItemContent>
-                </MListItem>
-                <MDivider />
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle>@item</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MDivider />
         }
     </MList>
-    @ChildContent
+    <MInfiniteScroll HasMore="@_hasMore"
+                     OnLoadMore="@LoadMore"
+                     Parent="@_card.Ref">
+    </MInfiniteScroll>
 </MCard>
 
 @code {
-
-    [Parameter]
-    [EditorRequired]
-    public RenderFragment ChildContent { get; set; } = null!;
 
     private bool _throw;
 
