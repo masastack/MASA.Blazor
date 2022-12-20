@@ -25,6 +25,10 @@
     <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Examples\components\windows\Usages\UsageWrapper.razor" />
+  </ItemGroup>
+
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

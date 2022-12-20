@@ -85,7 +85,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.toast.Usages.Usage>("toast-usage");
         options.RegisterCustomElement<ExampleComponents.tooltips.Usage>("tooltips-usage");
         options.RegisterCustomElement<ExampleComponents.treeview.Usage>("treeview-usage");
-        options.RegisterCustomElement<ExampleComponents.virtual_scroll.Usages.Usage>("virtual-scroll-usage");
         options.RegisterCustomElement<ExampleComponents.aspect_ratios.Usage>("aspect-ratios-usage");
         options.RegisterCustomElement<ExampleComponents.block_text.Usage>("block-text-usage");
         options.RegisterCustomElement<ExampleComponents.drawers.Usage>("drawers-usage");
