@@ -33,16 +33,7 @@
                         MinHeight="400"
                         MaxHeight="400"
                         Rounded="@("t")">
-                    @if (UsageWrapperType is null)
-                    {
-                        <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
-                    }
-                    else
-                    {
-                        <WrapperComponent Type="UsageWrapperType">
-                            <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
-                        </WrapperComponent>
-                    }
+                    <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
                 </MSheet>
             </MCol>
             <MCol Cols="12" Md="4">

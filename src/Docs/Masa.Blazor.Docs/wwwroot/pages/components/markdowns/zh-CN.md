@@ -8,7 +8,7 @@ tag: js-proxy
 
 Markdown编辑器示例
 
-<markdown-usage></markdown-usage>
+<masa-example file="Examples.components.markdown.Usage"></masa-example>
 
 ## css文件
 
