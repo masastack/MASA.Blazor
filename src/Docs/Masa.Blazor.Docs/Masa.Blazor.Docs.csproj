@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Examples\components\windows\Usages\UsageWrapper.razor" />
+    <_ContentIncludedByDefault Remove="Examples\components\skeleton-loaders\Usages\UsageWrapper.razor" />
   </ItemGroup>
 
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">

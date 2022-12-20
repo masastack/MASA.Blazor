@@ -9,9 +9,9 @@ related:
 
 ## 使用
 
-**MSnackbar** 以最简单的形式向用户显示一个临时且可关闭的通知。
+**MSkeletonLoader** 组件为用户提供了一个内容即将到来/加载的视觉指示器。 这比传统的全屏加载器要好。
 
-<skeleton-loaders-usage></skeleton-loaders-usage>
+<masa-example file="Examples.components.skeleton_loaders.Usage"></masa-example>
 
 ## 示例
 
