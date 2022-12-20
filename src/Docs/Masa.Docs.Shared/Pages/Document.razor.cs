@@ -26,6 +26,8 @@ public partial class Document : IDisposable
 
     [Parameter] public string Page { get; set; } = null!;
 
+    [Parameter] public string? SubPage { get; set; }
+
     private string? _md;
     private CultureInfo? _prevCulture;
     private string? _prevAbsolutePath;
@@ -82,7 +84,7 @@ public partial class Document : IDisposable
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync(Project, Category, Page);
+            _md = await DocService.ReadDocumentAsync(Project, Category, Page, SubPage);
         }
         catch (HttpRequestException e)
         {

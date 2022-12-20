@@ -2,6 +2,7 @@
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
 <MListItem Href="@Item?.Href"
+           Exact
            Class="m-list-item--default">
     @if (Item?.Icon is not null)
     {
