@@ -53,7 +53,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.button_groups.Usage>("button-groups-usage");
         options.RegisterCustomElement<ExampleComponents.chip_groups.Usage>("chip-groups-usage");
         options.RegisterCustomElement<ExampleComponents.item_groups.Usage>("item-groups-usage");
-        options.RegisterCustomElement<ExampleComponents.list_item_groups.Usage>("list-item-groups-usage");
         options.RegisterCustomElement<ExampleComponents.slide_groups.Usage>("slide-groups-usage");
         options.RegisterCustomElement<ExampleComponents.hover.Usage>("hover-usage");
         options.RegisterCustomElement<ExampleComponents.icons.Usage>("icons-usage");

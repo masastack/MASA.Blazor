@@ -11,7 +11,7 @@ related:
 
 最简单形式的副标题显示带有默认主题的副标题。
 
-<list-item-groups-usage></list-item-groups-usage>
+<masa-example file="Examples.components.list_item_groups.Usage"></masa-example>
 
 ## 示例
 
