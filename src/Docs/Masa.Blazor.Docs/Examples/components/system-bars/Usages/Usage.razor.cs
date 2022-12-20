@@ -2,11 +2,11 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
-    public Usage() : base(typeof(MToolbar))
+    public Usage() : base(typeof(AdvanceUsage))
     {
     }
 
-    protected override Type UsageWrapperType => typeof(UsageWrapper);
+    protected override string ComponentName => nameof(MSystemBar);
 
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
@@ -23,34 +23,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MSystemBar.LightsOut), new CheckboxParameter("false", true) }
     };
 
-    protected override RenderFragment GenChildContent() => builder =>
+    protected override Dictionary<string, object>? GenAdditionalParameters() => new()
     {
-        builder.OpenComponent<MIcon>(0);
-        builder.AddAttribute(1, "ChildContent", (RenderFragment)(b => b.AddContent(0, "mdi-message")));
-        builder.CloseComponent();
-
-        builder.OpenElement(2, "span");
-        builder.AddContent(3, "10 unread messages");
-        builder.CloseComponent();
-
-        builder.OpenComponent<MSpacer>(4);
-        builder.CloseComponent();
-
-        builder.OpenComponent<MIcon>(5);
-        builder.AddAttribute(6, "ChildContent", (RenderFragment)(b => b.AddContent(0, "mdi-wifi-strength-4")));
-        builder.CloseComponent();
-
-        builder.OpenComponent<MIcon>(7);
-        builder.AddAttribute(8, "ChildContent", (RenderFragment)(b => b.AddContent(0, "mdi-signal-cellular-outline")));
-        builder.CloseComponent();
-
-        builder.OpenComponent<MIcon>(9);
-        builder.AddAttribute(10, "ChildContent", (RenderFragment)(b => b.AddContent(0, "mdi-battery")));
-        builder.CloseComponent();
-
-        builder.OpenElement(11, "span");
-        builder.AddContent(12, "12:30");
-        builder.CloseComponent();
+        { nameof(MSystemBar.Color), "orange" }
     };
 
     protected override object? CastValue(ParameterItem<object?> parameter)
