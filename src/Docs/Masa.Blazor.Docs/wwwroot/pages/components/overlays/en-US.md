@@ -11,7 +11,7 @@ related:
 
 In its simplest form, the **MOverlay** component will add a dimmed layer over your application.
 
-<overlays-usage></overlays-usage>
+<masa-example file="Examples.components.overlays.Usage"></masa-example>
 
 ## Examples
 

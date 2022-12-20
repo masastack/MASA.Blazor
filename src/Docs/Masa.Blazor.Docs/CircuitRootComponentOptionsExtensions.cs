@@ -63,7 +63,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.menus.Usage>("menus-usage");
         options.RegisterCustomElement<ExampleComponents.modals.Usage>("modals-usage");
         options.RegisterCustomElement<ExampleComponents.navigation_drawers.Usage>("navigation-drawers-usage");
-        options.RegisterCustomElement<ExampleComponents.overlays.Usages.Usage>("overlays-usage");
         options.RegisterCustomElement<ExampleComponents.pagination.Usage>("pagination-usage");
         options.RegisterCustomElement<ExampleComponents.date_pickers.Usage>("date-pickers-usage");
         options.RegisterCustomElement<ExampleComponents.date_pickers_month.Usage>("date-pickers-month-usage");

@@ -11,7 +11,7 @@ related:
 
 以最简单的形式，**MOverlay** 组件将在您的应用程序上添加暗淡的图层。
 
-<overlays-usage></overlays-usage>
+<masa-example file="Examples.components.overlays.Usage"></masa-example>
 
 ## 示例
 
