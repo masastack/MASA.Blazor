@@ -6,16 +6,18 @@ namespace Masa.Blazor
     {
         private readonly string[] _applicationProperties = new string[]
         {
-            "Bottom","Left","Right"
+            "Bottom", "Left", "Right"
         };
-
-
 
         [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool App { get; set; }
+        public bool App
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public string Color { get; set; }
@@ -27,13 +29,21 @@ namespace Masa.Blazor
         public bool Fixed { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; } = "auto";
+        public StringNumber Height
+        {
+            get => GetValue((StringNumber)"auto");
+            set => SetValue(value);
+        }
 
         [Parameter]
         public StringNumber Width { get; set; }
 
         [Parameter]
-        public bool Inset { get; set; }
+        public bool Inset
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public StringNumber MaxHeight { get; set; }
@@ -91,7 +101,21 @@ namespace Masa.Blazor
         protected override void OnInitialized()
         {
             base.OnInitialized();
+
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+
+            Watcher.Watch<bool>(nameof(App), (_, prev) =>
+                   {
+                       if (prev)
+                       {
+                           RemoveApplication(true);
+                       }
+                       else
+                       {
+                           CallUpdate();
+                       }
+                   }, immediate: true).Watch<StringNumber>(nameof(Height), CallUpdate)
+                   .Watch<bool>(nameof(Inset), CallUpdate);
         }
 
         private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -134,9 +158,12 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task OnParametersSetAsync()
+        private async void CallUpdate()
         {
-            await UpdateApplicationAsync();
+            await NextTickIf(async () =>
+            {
+                await UpdateApplicationAsync();
+            }, () => Ref.Context is null);
         }
 
         protected async Task UpdateApplicationAsync()
@@ -155,7 +182,7 @@ namespace Masa.Blazor
 
         private async Task<double> GetClientHeightAsync()
         {
-            if (Ref.Id == null)
+            if (Ref.Context == null)
             {
                 return 0;
             }
@@ -170,9 +197,9 @@ namespace Masa.Blazor
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         }
 
-        private void RemoveApplication()
+        private void RemoveApplication(bool force = false)
         {
-            if (!App)
+            if (!force && !App)
             {
                 return;
             }

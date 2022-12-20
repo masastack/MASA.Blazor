@@ -433,8 +433,6 @@ namespace Masa.Blazor
             base.CallUpdate();
 
             await UpdateApplicationAsync();
-
-            StateHasChanged();
         }
 
         protected async Task UpdateApplicationAsync()
