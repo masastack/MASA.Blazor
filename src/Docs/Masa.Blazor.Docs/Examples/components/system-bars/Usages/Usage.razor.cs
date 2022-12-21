@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.system_bars;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(AdvanceUsage))

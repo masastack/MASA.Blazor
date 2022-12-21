@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.cards;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(MCard))

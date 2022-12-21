@@ -3,6 +3,7 @@ using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Docs.Examples.components.block_text;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(PBlockText))

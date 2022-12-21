@@ -19,8 +19,8 @@ The **MToolbarTitle** is used for displaying a title and **MToolbarItems** allow
 
 ## Caveats
 
-<app-alerts type="warning" content="When **MButton** with `Icon` prop is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
-If you choose to wrap your buttons in any container, such as `div` , you need to apply a negative margin to the container for proper alignment."></app-alerts>
+<app-alert type="warning" content="When **MButton** with `Icon` prop is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
+If you choose to wrap your buttons in any container, such as `div` , you need to apply a negative margin to the container for proper alignment."></app-alert>
 
 ## Examples
 

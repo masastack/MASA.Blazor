@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.range_sliders;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override ParameterList<bool> GenToggleParameters() => new()

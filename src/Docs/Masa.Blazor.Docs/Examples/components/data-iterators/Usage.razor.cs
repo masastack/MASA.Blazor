@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.data_iterators;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Components.Usage
 {
     public Usage() : base(typeof(MDataIterator<Dessert>))

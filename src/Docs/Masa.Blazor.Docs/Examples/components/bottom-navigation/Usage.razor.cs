@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.bottom_navigation
 {
+    [JSCustomElement(IncludeNamespace = true)]
     public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         // TODO: the text of UserTemplate need to insert to the example code. 

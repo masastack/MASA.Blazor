@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.tabs;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Components.Usage
 {
     public Usage() : base(typeof(MTabs))

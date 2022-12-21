@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.subheaders;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Components.Usage
 {
     public Usage() : base(typeof(MSubheader))

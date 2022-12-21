@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.timelines;
 
+[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Components.Usage
 {
     public Usage() : base(typeof(MTimeline))
