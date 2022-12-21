@@ -53,19 +53,15 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.button_groups.Usage>("button-groups-usage");
         options.RegisterCustomElement<ExampleComponents.chip_groups.Usage>("chip-groups-usage");
         options.RegisterCustomElement<ExampleComponents.item_groups.Usage>("item-groups-usage");
-        options.RegisterCustomElement<ExampleComponents.list_item_groups.Usage>("list-item-groups-usage");
         options.RegisterCustomElement<ExampleComponents.slide_groups.Usage>("slide-groups-usage");
         options.RegisterCustomElement<ExampleComponents.hover.Usage>("hover-usage");
         options.RegisterCustomElement<ExampleComponents.icons.Usage>("icons-usage");
         options.RegisterCustomElement<ExampleComponents.image_captcha.Usage>("image-captcha-usage");
         options.RegisterCustomElement<ExampleComponents.images.Usage>("images-usage");
-        options.RegisterCustomElement<ExampleComponents.infinite_scroll.Usage>("infinite-scroll-usage");
         options.RegisterCustomElement<ExampleComponents.lists.Usage>("lists-usage");
-        options.RegisterCustomElement<ExampleComponents.markdown.usages.Usage>("markdown-usage");
         options.RegisterCustomElement<ExampleComponents.menus.Usage>("menus-usage");
         options.RegisterCustomElement<ExampleComponents.modals.Usage>("modals-usage");
         options.RegisterCustomElement<ExampleComponents.navigation_drawers.Usage>("navigation-drawers-usage");
-        options.RegisterCustomElement<ExampleComponents.overlays.Usages.Usage>("overlays-usage");
         options.RegisterCustomElement<ExampleComponents.pagination.Usage>("pagination-usage");
         options.RegisterCustomElement<ExampleComponents.date_pickers.Usage>("date-pickers-usage");
         options.RegisterCustomElement<ExampleComponents.date_pickers_month.Usage>("date-pickers-month-usage");
@@ -74,7 +70,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.progress_linear.Usage>("progress-linear-usage");
         options.RegisterCustomElement<ExampleComponents.ratings.Usage>("ratings-usage");
         options.RegisterCustomElement<ExampleComponents.sheets.Usage>("sheets-usage");
-        options.RegisterCustomElement<ExampleComponents.skeleton_loaders.Usages.Usage>("skeleton-loaders-usage");
         options.RegisterCustomElement<ExampleComponents.steppers.Usage>("steppers-usage");
         options.RegisterCustomElement<ExampleComponents.subheaders.Usage>("subheaders-usage");
         options.RegisterCustomElement<ExampleComponents.data_iterators.Usage>("data-iterators-usage");
@@ -82,10 +77,8 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.simple_tables.Usage>("simple-tables-usage");
         options.RegisterCustomElement<ExampleComponents.tabs.Usage>("tabs-usage");
         options.RegisterCustomElement<ExampleComponents.timelines.Usage>("timelines-usage");
-        options.RegisterCustomElement<ExampleComponents.toast.Usages.Usage>("toast-usage");
         options.RegisterCustomElement<ExampleComponents.tooltips.Usage>("tooltips-usage");
         options.RegisterCustomElement<ExampleComponents.treeview.Usage>("treeview-usage");
-        options.RegisterCustomElement<ExampleComponents.virtual_scroll.Usages.Usage>("virtual-scroll-usage");
         options.RegisterCustomElement<ExampleComponents.aspect_ratios.Usage>("aspect-ratios-usage");
         options.RegisterCustomElement<ExampleComponents.block_text.Usage>("block-text-usage");
         options.RegisterCustomElement<ExampleComponents.drawers.Usage>("drawers-usage");

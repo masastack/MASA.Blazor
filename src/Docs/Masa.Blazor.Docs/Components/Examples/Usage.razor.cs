@@ -86,7 +86,7 @@ public partial class Usage : NextTickComponentBase
     }
 
     protected virtual Type? UsageWrapperType => null;
-
+    protected virtual string ComponentName => GetComponentName(_type);
     protected virtual ParameterList<bool> GenToggleParameters() => new();
     protected virtual ParameterList<CheckboxParameter> GenCheckboxParameters() => new();
     protected virtual ParameterList<SliderParameter> GenSliderParameters() => new();
@@ -120,8 +120,6 @@ public partial class Usage : NextTickComponentBase
     {
         get
         {
-            var componentName = GetComponentName(_type);
-
             var parameterList = new List<string>();
             parameterList.AddRange(ActiveToggleParameters.Select(item => item.Key));
             parameterList.AddRange(ActiveCheckboxParameters.Select(item =>
@@ -132,8 +130,8 @@ public partial class Usage : NextTickComponentBase
             var parameters = string.Join($"{Environment.NewLine}\t", parameterList);
 
             return parameterList.Count == 0
-                ? $"<{componentName}></{componentName}>"
-                : $"<{componentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{componentName}>";
+                ? $"<{ComponentName}></{ComponentName}>"
+                : $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{ComponentName}>";
         }
     }
 

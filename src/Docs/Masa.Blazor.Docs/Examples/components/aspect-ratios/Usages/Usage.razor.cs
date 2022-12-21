@@ -1,29 +1,21 @@
-﻿
-namespace Masa.Blazor.Docs.Examples.components.aspect_ratios;
+﻿namespace Masa.Blazor.Docs.Examples.components.aspect_ratios;
 
 public class Usage : Components.Usage
 {
-    protected override Type UsageWrapperType => typeof(UsageWrapper);
-
-    public Usage() : base(typeof(MResponsive))
+    public Usage() : base(typeof(AdvanceUsage))
     {
     }
 
+    protected override string ComponentName => nameof(MResponsive);
+
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
-        { nameof(MResponsive.AspectRatio), new SelectParameter(new List<string>() { "16/9D", "4/3D" },"16/9D") },
+        { nameof(MResponsive.AspectRatio), new SelectParameter(new List<string>() { "16/9", "4/3" }, "16/9") },
     };
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(MResponsive.ContentClass), new CheckboxParameter("false", false) },
-    };
-
-    protected override RenderFragment? GenChildContent() => builder =>
-    {
-        builder.OpenComponent<MCardText>(0);
-        builder.AddChildContent(1, "\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!");
-        builder.CloseComponent();
+        { nameof(MResponsive.ContentClass), new CheckboxParameter("primary white--text", false) },
     };
 
     protected override object? CastValue(ParameterItem<object?> parameter)
@@ -33,10 +25,21 @@ public class Usage : Components.Usage
             return parameter.Value;
         }
 
-        return parameter.Key switch
+        switch (parameter.Key)
         {
-            nameof(MResponsive.AspectRatio) => (StringNumber)(string)parameter.Value,
-            _ => parameter.Value
-        };
+            case nameof(MResponsive.AspectRatio):
+                var str = parameter.Value.ToString();
+                if (str is not null && str.Contains('/'))
+                {
+                    var res = str.Split('/');
+                    var v1 = Convert.ToDouble(res[0]);
+                    var v2 = Convert.ToDouble(res[1]);
+                    return (StringNumber)(v1 / v2);
+                }
+
+                return parameter.Value;
+            default:
+                return parameter.Value;
+        }
     }
 }

@@ -11,7 +11,7 @@ related:
 
 **PToast** 组件可以通过PopupService来使用，具体请查看 [PopupService](/blazor/components/popup-service) 的文档。
 
-<toast-usage></toast-usage>
+<masa-example file="Examples.components.toast.Usage"></masa-example>
 
 ## 示例
 

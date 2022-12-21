@@ -11,6 +11,8 @@ related:
 
 Designed to easily cycle through content, **MWindow** provides a simple interface to create truly custom implementations.
 
+<masa-example file="Examples.components.windows.Usage"></masa-example>
+
 ## Examples
 
 ### Props

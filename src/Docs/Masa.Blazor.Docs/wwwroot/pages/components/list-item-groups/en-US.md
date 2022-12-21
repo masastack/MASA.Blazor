@@ -11,7 +11,7 @@ related:
 
 By default, the `ListItemGroup` operates similarly to **ItemGroup**. If a `Value` is not provided, the group will provide a default based upon its index.
 
-<list-item-groups-usage></list-item-groups-usage>
+<masa-example file="Examples.components.list_item_groups.Usage"></masa-example>
 
 ## Examples
 

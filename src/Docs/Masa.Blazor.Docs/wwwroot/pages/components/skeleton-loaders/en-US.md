@@ -10,9 +10,9 @@ related:
 
 ## Usage
 
-The `Vertical` property allows you to stack the contents of **MSnackbar**.
+The **MSkeletonLoader** component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.
 
-<skeleton-loaders-usage></skeleton-loaders-usage>
+<masa-example file="Examples.components.skeleton_loaders.Usage"></masa-example>
 
 ## Examples
 

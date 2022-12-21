@@ -25,12 +25,6 @@
     <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="Components\Api\ApiDatatable.razor" />
-    <AdditionalFiles Include="Components\Api\Apis.razor" />
-    <AdditionalFiles Include="Components\Api\ApiSection.razor" />
-  </ItemGroup>
-
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

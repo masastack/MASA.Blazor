@@ -11,7 +11,7 @@ related:
 
 The **PToast** component can be used by PopupService, see the documentation of [PopupService](/blazor/components/popup-service) for details.
 
-<toast-usage></toast-usage>
+<masa-example file="Examples.components.toast.Usage"></masa-example>
 
 ## Examples
 

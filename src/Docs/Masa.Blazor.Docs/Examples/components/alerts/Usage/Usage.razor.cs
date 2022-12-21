@@ -2,9 +2,11 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
-    public Usage() : base(typeof(MAlert))
+    public Usage() : base(typeof(AdvanceUsage))
     {
     }
+
+    protected override string ComponentName => nameof(MAlert);
 
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
