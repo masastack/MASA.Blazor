@@ -1,7 +1,7 @@
-﻿using System.Net;
+﻿using Masa.Docs.Core.JsonConverters;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
-using Masa.Docs.Core.JsonConverters;
 
 namespace Masa.Docs.Core.Services;
 
@@ -36,15 +36,20 @@ public class DocService
         });
     }
 
-    public async Task<string> ReadDocumentAsync(string project, string category, string title)
+    public async Task<string> ReadDocumentAsync(string project, string category, string title, string? subTitle = null)
     {
         var projectMap = await ReadProjectMapAsync();
 
         var projectFullName = projectMap[project];
 
-        var key = $"{category}/{title}:{_i18n.Culture.Name}";
+        if (subTitle != null)
+        {
+            subTitle += "/";
+        }
+
+        var key = $"{category}/{title}/{subTitle}:{_i18n.Culture.Name}";
         return await s_documentCache.GetOrAdd(key,
-            async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{_i18n.Culture.Name}.md"));
+            async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{subTitle}{_i18n.Culture.Name}.md"));
     }
 
     public async Task<Dictionary<string, string>> ReadProjectMapAsync()
@@ -96,11 +101,12 @@ public class DocService
         {
             if (((IDefaultItem<NavItem>)navItem).HasChildren())
             {
-                SetHref(navItem.Children!, navItem.Segment, rootSegment);
+                var seg = navItem.Group is null ? $"{segment}/{navItem.Title}" : segment;
+                SetHref(navItem.Children!, seg, rootSegment);
             }
             else
             {
-                navItem.Href = $"{rootSegment}/{segment}/{navItem.Segment}";
+                navItem.Href = $"{rootSegment}/{segment?.Trim('/')}/{navItem.Segment}";
             }
         }
     }

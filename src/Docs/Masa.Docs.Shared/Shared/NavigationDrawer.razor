@@ -51,22 +51,6 @@
             }
 
             Navs = await DocService.ReadNavsAsync(Project);
-            SetHref(Navs, rootSegment: Project);
-        }
-    }
-
-    private void SetHref(List<NavItem> navItems, string? segment = null, string? rootSegment = null)
-    {
-        foreach (var navItem in navItems)
-        {
-            if (((IDefaultItem<NavItem>)navItem).HasChildren())
-            {
-                SetHref(navItem.Children!, navItem.Segment, rootSegment);
-            }
-            else
-            {
-                navItem.Href = $"{rootSegment}/{segment}/{navItem.Segment}";
-            }
         }
     }
 
