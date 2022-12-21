@@ -37,11 +37,11 @@ packer:
 #     - docker --version
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
 #     - dotnet workload install wasm-tools
-    - /usr/bin/dotnet workload list  &&  dotnet build src/Masa.Blazor.sln
+    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln
 #     - dotnet pack pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
-    - /usr/bin/dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
-    - /usr/bin/dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
-    - /usr/bin/dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json --skip-duplicate
+    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
+    - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
+    - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json --skip-duplicate
   after_script:
     - git config --global --unset https.proxy
     - git config --global --unset http.proxy
