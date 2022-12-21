@@ -4,15 +4,13 @@
 <MButton OnClick="AddToast"> Add Toast </MButton>
 
 @code {
-    PToast _toast;
-
-    Random random = new Random();
+    PToast? _toast;
 
     private Task AddToast()
     {
         var now = DateTime.Now.ToString("HH:mm:ss.fff");
-        var alertType = random.NextInt64(0, 5);
-        var dark = random.NextInt64(0, 2);
+        var alertType = Random.Shared.NextInt64(0, 5);
+        var dark = Random.Shared.NextInt64(0, 2);
         var config = new ToastConfig()
         {
             Title = $"Add Toast by Click",
@@ -21,7 +19,7 @@
             Type = (AlertTypes)alertType
         };
 
-        _toast.AddToast(config);
+        _toast?.AddToast(config);
 
         return Task.CompletedTask;
     }
