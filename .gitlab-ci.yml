@@ -21,7 +21,7 @@ variables:
 packer:
 #   image:  registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.201_wasm
   tags:
-    - ydy
+    - 51-132
   stage: packer
   only:
     - main
