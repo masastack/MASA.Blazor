@@ -4,7 +4,7 @@
 	branch = main
 [submodule "src/MASA.Docs"]
 	path = src/MASA.Docs
-	url = https://github.com/masastack/MASA.Docs.git
+	url = git@github.com:masastack/MASA.Docs.git
 	branch = main
 [submodule "src/Docs/Masa.Stack.Docs/MASA.Docs"]
 	path = src/Docs/Masa.Stack.Docs/MASA.Docs
