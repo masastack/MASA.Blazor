@@ -1,10 +1,10 @@
-﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">   
+﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">
     <MButton OnClick="BtnClick" Class="@colorClass">Custom handler exception test</MButton>
     <MButton OnClick="BtnReset">Reset</MButton>
 </MErrorHandler>
 @code
 {
-    private string colorClass= "white black--text";
+    private string colorClass = "white black--text";
     private void BtnClick()
     {
         throw new Exception("throw error!");
@@ -12,14 +12,14 @@
 
     private void BtnReset()
     {
-        colorClass= "white black--text";
+        colorClass = "white black--text";
     }
 
-    private async Task CustomErrorHandleAsync(Exception exception)
+    private Task<bool> CustomErrorHandleAsync(Exception exception)
     {
         //todo
         colorClass = "red white--text";
         StateHasChanged();
-        await Task.CompletedTask;
+        return Task.FromResult(true);
     }
 }
