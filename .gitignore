@@ -219,5 +219,5 @@ Thunbs.db
 packages/
 .vscode/
 
-# Masa.Docs
-src/Docs/Masa.Docs.Shared/wwwroot/pages/**/examples
+# source code text of Examples in Docs
+src/Docs/**/wwwroot/pages/**/examples

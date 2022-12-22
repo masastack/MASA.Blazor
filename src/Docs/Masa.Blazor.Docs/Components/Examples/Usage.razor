@@ -1,0 +1,113 @@
+﻿@namespace Masa.Blazor.Docs.Components
+@inherits NextTickComponentBase
+
+@if (_rendered)
+{
+    <AppSheet Class="mb-12">
+        <MRow NoGutters>
+            <MCol Cols="12" Md="8">
+                <MResponsive Class="d-flex" Height="44">
+                    @if (_toggleParameters.Any())
+                    {
+                        <MSlideGroup ActiveClass="primary--text" Mandatory Value="_toggleValue" ValueChanged="ToggleValueChanged">
+                            @foreach (var item in _toggleParameters)
+                            {
+                                <MSlideItem @key="item" Value="@item.Key">
+                                    <MButton IsActive="@context.Active"
+                                             Depressed
+                                             Height="44"
+                                             Text
+                                             Tile
+                                             OnClick="() => context.Toggle()">
+                                        @item.Key
+                                    </MButton>
+                                </MSlideItem>
+                            }
+                        </MSlideGroup>
+                    }
+                </MResponsive>
+
+                <MDivider />
+
+                <MSheet Class="overflow-y-auto fill-height d-flex align-center justify-center pa-14"
+                        MinHeight="400"
+                        MaxHeight="400"
+                        Rounded="@("t")">
+                    <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
+                </MSheet>
+            </MCol>
+            <MCol Cols="12" Md="4">
+                <div class="d-flex align-center">
+                    <MDivider Vertical />
+
+                    <Headline />
+
+                    <div class="pa-1 ms-auto">
+                        <AppTooltipButton Icon="mdi-invert-colors" Path="invert-example-colors" />
+                    </div>
+                </div>
+
+                <MDivider />
+
+                <div class="d-flex">
+                    <MDivider Vertical />
+
+                    <MResponsive Class="overflow-y-auto pa-3"
+                                 Height="@("100%")"
+                                 MaxHeight="400"
+                                 MinHeight="400">
+                        @foreach (var (item, i) in _checkboxParameters.Select((item, i) => (item, i)))
+                        {
+                            <MCheckbox @key="item"
+                                       @bind-Value="@item.Value.Value"
+                                       Label="@item.Key"
+                                       Class="@(i == 0 ? "mt-0" : "")"
+                                       Dense
+                                       HideDetails="true"
+                                       Inset>
+                            </MCheckbox>
+                        }
+
+                        @foreach (var item in _sliderParameters)
+                        {
+                            <MSlider @key="item"
+                                     @bind-Value="@item.Value.Value"
+                                     Label="@item.Key"
+                                     Max="@item.Value.Max"
+                                     Min="@item.Value.Min"
+                                     Step="@item.Value.Step"
+                                     Class="my-2"
+                                     HideDetails="true">
+                            </MSlider>
+                        }
+
+                        @foreach (var item in _selectParameters)
+                        {
+                            <MSelect Items="@item.Value.Items"
+                                     @bind-Value="@item.Value.Value"
+                                     ItemValue="i => i"
+                                     ItemText="i => i"
+                                     Label="@item.Key"
+                                     Class="my-2"
+                                     Clearable
+                                     Dense
+                                     Filled
+                                     HideDetails="true">
+                            </MSelect>
+                        }
+                    </MResponsive>
+                </div>
+            </MCol>
+            <MCol Cols="12">
+                <MDivider />
+            </MCol>
+            <MCol Cols="12">
+                <Markup Code="@SourceCode" Language="razor" Rounded="@("b")"></Markup>
+            </MCol>
+        </MRow>
+    </AppSheet>
+}
+else
+{
+    <MSkeletonLoader MinHeight="490" MaxHeight="490" Type="card"></MSkeletonLoader>
+}

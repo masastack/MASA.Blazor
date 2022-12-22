@@ -1,5 +1,6 @@
 ﻿@using System.Text;
 @inject AppService AppService
+@inject DocService DocService
 @inject MasaBlazor MasaBlazor
 
 <MNavigationDrawer Value="Value"
@@ -8,19 +9,11 @@
                    Right="RTL"
                    App
                    Floating
-                   Width="300">
-    <PrependContent>
-        @if (MasaBlazor.Breakpoint.LgAndUp)
-        {
-            <DefaultDrawerPrepend />
-        }
-    </PrependContent>
-    <ChildContent>
-        <DefaultList Linkage Items="Navs" />
-        <div class=pt-12></div>
-    </ChildContent>
+                   Width="300"
+                   Style="@Style">
+    <DefaultList Linkage Items="Navs" />
+    <div class="pt-12"></div>
 </MNavigationDrawer>
-
 
 @code {
 
@@ -30,38 +23,34 @@
     [CascadingParameter]
     public CultureInfo Culture { get; set; } = null!;
 
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
     [Parameter]
     public bool Value { get; set; }
 
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; }
 
+    private string? _lastProject;
     private List<NavItem> Navs { get; set; } = new();
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
+    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
 
-        if (firstRender)
-        {
-            Navs = await AppService.GetNavs();
-            SetHref(Navs);
-            StateHasChanged();
-        }
-    }
-
-    private void SetHref(List<NavItem> navItems, string? segment = null)
+    protected override async Task OnParametersSetAsync()
     {
-        foreach (var navItem in navItems)
+        await base.OnParametersSetAsync();
+
+        if (_lastProject != Project)
         {
-            if (((IDefaultItem<NavItem>)navItem).HasChildren())
+            _lastProject = Project;
+            if (Project is null)
             {
-                SetHref(navItem.Children, navItem.Segment);
+                Navs = new();
+                return;
             }
-            else
-            {
-                navItem.Href = segment + "/" + navItem.Segment;
-            }
+
+            Navs = await DocService.ReadNavsAsync(Project);
         }
     }
 

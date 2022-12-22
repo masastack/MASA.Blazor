@@ -1,0 +1,104 @@
+﻿@page "/examples/wireframes/discord"
+@layout WireframeLayout
+
+<MApp Id="inspire">
+    <MSystemBar App>
+        <MSpacer></MSpacer>
+
+        <MIcon>mdi-square</MIcon>
+
+        <MIcon>mdi-circle</MIcon>
+
+        <MIcon>mdi-triangle</MIcon>
+    </MSystemBar>
+
+    <MAppBar App
+             ClippedRight
+             Flat
+             Height="72">
+        <MSpacer></MSpacer>
+
+        <MResponsive MaxHeight="156">
+            <MTextField Dense
+                        Flat
+                        HideDetails="@("true")"
+                        Rounded
+                        SoloInverted
+                        Value="@("")"></MTextField>
+        </MResponsive>
+    </MAppBar>
+
+    <MNavigationDrawer @bind-Value="_drawer"
+                       App
+                       Width="300">
+        <MNavigationDrawer @bind-Value="_drawer"
+                           Absolute
+                           Color="grey lighten-3"
+                           MiniVariant>
+            <MAvatar Class="d-block text-center mx-auto mt-4"
+                     Color="grey darken-1"
+                     Size="36"></MAvatar>
+
+            <MDivider Class="mx-3 my-5"></MDivider>
+
+            @for (int i = 0; i < 6; i++)
+            {
+                <MAvatar Class="d-block text-center mx-auto mb-9"
+                         Color="grey lighten-1"
+                         Size="28"></MAvatar>
+            }
+        </MNavigationDrawer>
+
+        <MSheet Color="grey lighten-5"
+                Height="128"
+                Width="@("100%")"></MSheet>
+
+        <MList Class="pl-14"
+               Shaped>
+            @for (int i = 0; i < 5; i++)
+            {
+                <MListItem Link>
+                    <MListItemContent>
+                        <MListItemTitle>Item @i</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </MNavigationDrawer>
+
+    <MNavigationDrawer App
+                       Clipped
+                       Right>
+        <MList>
+            @for (int i = 0; i < 5; i++)
+            {
+                <MListItem Link>
+                    <MListItemContent>
+                        <MListItemTitle>Item @i</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </MNavigationDrawer>
+
+    <MMain>
+        <!-- Your content -->
+    </MMain>
+
+    <MFooter App
+             Color="transparent"
+             Height="72"
+             Inset>
+        <MTextField BackgroundColor="grey lighten-1"
+                    Dense
+                    Flat
+                    HideDetails="@("true")"
+                    Value="@("")"
+                    Rounded
+                    Solo></MTextField>
+    </MFooter>
+</MApp>
+
+@code {
+    bool _drawer;
+}

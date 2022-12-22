@@ -1,64 +1,20 @@
 ﻿@inherits LayoutComponentBase
-@implements IDisposable
-@inject I18n I18n
-@inject MasaBlazor MasaBlazor
+@layout BaseLayout
 
-<MApp>
-    <CascadingValue Value="@I18n.Culture">
-        <AppBar OnCultureChanged="@OnCultureChanged"
-                OnAppBarNavIconClick="OnAppBarNavIconClick"
-                OnDotClick="OnDotClick" />
-        <NavigationDrawer @bind-Value="_showDrawer" />
-        <MErrorHandler>
-            <MMain>@Body</MMain>
-        </MErrorHandler>
-        <Toc />
-        <MobileMenuList @bind-Value="_showMobileMenuList" />
-    </CascadingValue>
-</MApp>
+<MMain>
+    @Body
+</MMain>
 
 @code {
 
-    private CultureInfo _culture;
-    private bool _isMobile;
-    private bool _showDrawer;
-    private bool _showMobileMenuList;
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
 
-
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        MasaBlazor.Breakpoint.OnUpdate += OnBreakpointUpdate;
+        base.OnAfterRender(firstRender);
+
+        BaseLayout.HideAppBarNavIcon();
     }
 
-    private Task OnBreakpointUpdate()
-    {
-        if (MasaBlazor.Breakpoint.Mobile || _isMobile != MasaBlazor.Breakpoint.Mobile)
-        {
-            _isMobile = MasaBlazor.Breakpoint.Mobile;
-            InvokeAsync(StateHasChanged);
-        }
-
-        return Task.CompletedTask;
-    }
-
-    private void OnCultureChanged(string cultureName)
-    {
-        _culture = new CultureInfo(cultureName);
-        I18n.SetCulture(_culture);
-    }
-
-    private void OnAppBarNavIconClick()
-    {
-        _showDrawer = !_showDrawer;
-    }
-
-    private void OnDotClick()
-    {
-        _showMobileMenuList = !_showMobileMenuList;
-    }
-
-    public void Dispose()
-    {
-        MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointUpdate;
-    }
 }

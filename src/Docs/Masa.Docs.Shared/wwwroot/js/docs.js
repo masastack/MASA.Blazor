@@ -60,13 +60,10 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
   if (scope === "document") {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
-  }
-  else if (scope === "desc") {
+    addCodeRules(markdownIt);
+  } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
-
-  addHeadingRules(markdownIt);
-  addLinkRules(markdownIt);
 
   function addHeadingRules(md) {
     md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
@@ -104,6 +101,21 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       tokens[idx].tag = "app-link";
 
       return self.renderToken(tokens, idx, options);
+    };
+  }
+
+  function addCodeRules(md) {
+    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+      if (tokens[idx].markup === "```") {
+        const content = tokens[idx].content;
+        const info = tokens[idx].info;
+
+        tokens[idx].tag = "default-app-markup";
+        tokens[idx].attrSet("code", content);
+        tokens[idx].attrSet("language", info);
+
+        return self.renderToken(tokens, idx, options);
+      }
     };
   }
 };

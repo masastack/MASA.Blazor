@@ -1,0 +1,68 @@
+﻿@inherits LayoutComponentBase
+@inject I18n I18n
+
+<MApp>
+    <CascadingValue Value="@I18n.Culture">
+        <AppBar OnCultureChanged="@OnCultureChanged"
+                OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                OnDotClick="HandleOnDotClick"
+                HideAppBarNavIcon="@_hideAppBarNavIcon" />
+
+        <CascadingValue Value="this" IsFixed>
+            @Body
+        </CascadingValue>
+
+        <MobileMenuList @bind-Value="_showMobileMenuList" />
+    </CascadingValue>
+</MApp>
+
+@code {
+
+    private CultureInfo? _culture;
+    private bool _showMobileMenuList;
+    private bool _hideAppBarNavIcon;
+
+    internal bool ShowDrawer;
+
+    internal EventCallback<bool> OnAppBarNavIconClick { get; set; }
+
+    private void OnCultureChanged(string cultureName)
+    {
+        _culture = new CultureInfo(cultureName);
+        I18n.SetCulture(_culture);
+    }
+
+    private void HandleOnAppBarNavIconClick()
+    {
+        ShowDrawer = !ShowDrawer;
+        OnAppBarNavIconClick.InvokeAsync(ShowDrawer);
+    }
+
+    private void HandleOnDotClick()
+    {
+        _showMobileMenuList = !_showMobileMenuList;
+    }
+
+    internal void HideAppBarNavIcon()
+    {
+        if (_hideAppBarNavIcon)
+        {
+            return;
+        }
+
+        _hideAppBarNavIcon = true;
+        StateHasChanged();
+    }
+
+    internal void ShowAppBarNavIcon()
+    {
+        if (_hideAppBarNavIcon is false)
+        {
+            return;
+        }
+
+        _hideAppBarNavIcon = false;
+        StateHasChanged();
+    }
+
+}

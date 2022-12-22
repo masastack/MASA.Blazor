@@ -1,0 +1,25 @@
+{
+  "props": {
+    "attach": "使组件脱离当前节点并且指向一个新的DOM元素。可以是任何document. querySelector 有效的字符串或者任何有效的节点。将默认指定并附加到根节点[MApp](/blazor/components/apps)下。",
+    "closeDelay": "关闭组件前等待的毫秒数。 仅适用于悬停和焦点事件。",
+    "contentClass": "将自定义的class应用于被分离的此元素。由于此元素的内容将被附加到[MApp](/blazor/components/apps)组件开头(除非你设置了`Attach`属性)，并且class属性不会将css类直接传递给组件，所以这个实行非常有用。",
+    "eager": "将强制组件内容在加载时呈现。如果存在内容的话，则不会在 DOM 中渲染，如果你想优化 SEO，这是非常有用的。",
+    "inset": "将对话框内容最大宽度减少到 70％",
+    "openDelay": "打开组件前等待的毫秒数。 仅适用于悬停和焦点事件。",
+    "openOnClick": "openOnClick",
+    "openOnFocus": "openOnFocus",
+    "openOnHover": "openOnHover",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "overlayScrimClass": "overlayScrimClass",
+    "persistent": "点击元素外面或按下 **esc** 键将不会关闭它。",
+    "scrollable": "当设置为 true 时，期望有一个 [MCard](components/cards) 和一个 [MCardText](components/cardTexts) 组件，并有指定的高度。更多信息，请查看 [可滚动示例](components/dialogs/#scrollable)。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](styles-and-animations/transitions) 或者是自己自定义的。",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "contents": {},
+  "events": {
+    "iputValueChanged": "",
+    "valuesChanged": ""
+  },
+  "functions": {}
+}

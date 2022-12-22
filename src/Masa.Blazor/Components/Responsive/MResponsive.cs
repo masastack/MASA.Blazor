@@ -2,8 +2,6 @@
 {
     public class MResponsive : BResponsive
     {
-        public Dimensions Dimensions { get; set; }
-
         protected override void SetComponentClass()
         {
             CssProvider
@@ -23,14 +21,14 @@
                 })
                 .Apply("sizer", cssBuilder => { cssBuilder.Add("m-responsive__sizer"); }, styleBuilder =>
                 {
-                    var respSizerStyle = GenerateRespSizerStyle(AspectRatio, Dimensions);
+                    var respSizerStyle = GenAspectStyle(AspectRatio);
                     styleBuilder
                         .AddIf(respSizerStyle, () => !string.IsNullOrEmpty(respSizerStyle));
                 })
                 .Apply("resp_content", cssBuilder =>
                 {
                     cssBuilder.Add("m-responsive__content")
-                        .AddIf(ContentClass, () => !string.IsNullOrEmpty(ContentClass));
+                              .AddIf(ContentClass, () => !string.IsNullOrEmpty(ContentClass));
                 });
 
             AbstractProvider
@@ -39,25 +37,11 @@
                 .Apply(typeof(BResponsiveSizer<>), typeof(BResponsiveSizer<MResponsive>));
         }
 
-        protected string GenerateRespSizerStyle(StringNumber aspectRatio, Dimensions dimensions)
+        private string GenAspectStyle(StringNumber aspectRatio)
         {
-            double ratio = 2;
-            if (aspectRatio == null)
-            {
-                if (dimensions == null)
-                {
-                    return "";
-                }
+            var (isNumber, ratio) = aspectRatio.TryGetNumber();
 
-                if (dimensions.Height != 0 && dimensions.Width != 0)
-                {
-                    ratio = dimensions.Width / dimensions.Height;
-                }
-            }
-            else if (aspectRatio.TryGetNumber().isNumber)
-            {
-                ratio = aspectRatio.TryGetNumber().number;
-            }
+            if (!isNumber) return null;
 
             var paddingBottom = (1 / ratio).ToString("P2");
 

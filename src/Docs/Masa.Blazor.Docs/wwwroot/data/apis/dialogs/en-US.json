@@ -1,0 +1,25 @@
+{
+  "props": {
+    "attach": "Specifies which DOM element that this component should detach to.String can be any valid querySelector and Object can be any valid Node. This will attach to the root [MApp](/blazor/components/apps) component by default.",
+    "closeDelay": "Closing master delay time.",
+    "contentClass": "Applies a custom class to the detached element. This is useful because the content is moved to the beginning of the [MApp](/blazor/components/apps) component (unless the `Attach` prop is provided) and is not targettable by classes passed directly on the component.",
+    "disabled": "Disables the ability to open the component.",
+    "openDelay": "Open master delay time",
+    "openOnClick": "Designates whether the component should activate when its activator is clicked.",
+    "openOnFocus": "Designates whether the component should activate when its activator is cursor selected.",
+    "openOnHover": "Designates whether component should activate when its activator is hovered.",
+    "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
+    "overlayScrimClass": "overlayScrimClass",
+    "persistent": "Clicking outside of the element will not deactivate it.",
+    "scrollable": "When set to true, expects a v-card and a v-card-text component with a designated height. ",
+    "transition": "Sets the component transition. Can be one of the [built in transitions](styles-and-animations/transitions) or one your own.",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "contents": {
+    "activatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation."
+  },
+  "events": {
+    "onOutsideClick": "Event that fires when clicking outside an active dialog."
+  },
+  "functions": {}
+}

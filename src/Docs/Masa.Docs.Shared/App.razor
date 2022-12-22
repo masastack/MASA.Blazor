@@ -8,11 +8,11 @@
         AdditionalAssemblies="@lazyLoadedAssemblies"
         OnNavigateAsync="@OnNavigateAsync">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(DocLayout)" />
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
+        <LayoutView Layout="@typeof(DocLayout)">
             <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
@@ -20,7 +20,10 @@
 
 @code {
 
-    private List<Assembly> lazyLoadedAssemblies = new();
+    private List<Assembly> lazyLoadedAssemblies = new()
+    {
+        typeof(Masa.Blazor.Docs.ServiceCollectionExtensions).Assembly
+    };
 
     private async Task OnNavigateAsync(NavigationContext args)
     {
