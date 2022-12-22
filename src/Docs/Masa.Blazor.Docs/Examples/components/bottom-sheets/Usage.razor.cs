@@ -2,7 +2,6 @@
 
 namespace Masa.Blazor.Docs.Examples.components.bottom_sheets;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(MBottomSheet))

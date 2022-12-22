@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.date_pickers_month;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(MDatePicker<DateOnly>))

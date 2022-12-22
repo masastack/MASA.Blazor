@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.selects;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override ParameterList<bool> GenToggleParameters() => new()

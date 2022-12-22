@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.aspect_ratios;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Components.Usage
 {
     public Usage() : base(typeof(AdvanceUsage))

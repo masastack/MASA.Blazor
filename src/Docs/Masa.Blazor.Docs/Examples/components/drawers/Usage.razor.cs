@@ -1,7 +1,6 @@
 ﻿using Masa.Blazor.Presets;
 namespace Masa.Blazor.Docs.Examples.components.drawers;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(PDrawer))

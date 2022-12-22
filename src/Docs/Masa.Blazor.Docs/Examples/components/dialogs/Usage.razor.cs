@@ -2,7 +2,6 @@
 
 namespace Masa.Blazor.Docs.Examples.components.dialogs;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(MDialog))

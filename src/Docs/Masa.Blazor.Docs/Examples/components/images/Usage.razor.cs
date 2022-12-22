@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.images;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()

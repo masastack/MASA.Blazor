@@ -1,7 +1,6 @@
 ﻿using Masa.Blazor.Presets;
 namespace Masa.Blazor.Docs.Examples.components.copyable_text;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(PCopyableText))

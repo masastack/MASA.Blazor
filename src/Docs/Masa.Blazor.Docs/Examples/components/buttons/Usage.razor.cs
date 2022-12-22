@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.buttons;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     public Usage() : base(typeof(MButton))

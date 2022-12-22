@@ -1,6 +1,5 @@
 ﻿namespace Masa.Blazor.Docs.Examples.components.simple_tables;
 
-[JSCustomElement(IncludeNamespace = true)]
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override RenderFragment GenChildContent() => builder =>

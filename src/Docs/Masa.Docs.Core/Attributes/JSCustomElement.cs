@@ -2,7 +2,7 @@
 
 namespace Masa.Docs.Core;
 
-[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+[AttributeUsage(AttributeTargets.Class)]
 public class JSCustomElementAttribute : Attribute
 {
     public JSCustomElementAttribute()
