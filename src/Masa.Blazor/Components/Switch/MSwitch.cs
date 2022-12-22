@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MSwitch : MSelectable, ISwitch
+    public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue>
     {
         [Parameter]
         public bool Flat { get; set; }
@@ -11,13 +11,13 @@ namespace Masa.Blazor
         public bool Inset { get; set; }
 
         [Parameter]
-        public string LeftText { get; set; }
+        public string? LeftText { get; set; }
 
         [Parameter]
-        public string RightText { get; set; }
+        public string? RightText { get; set; }
 
         [Parameter]
-        public string TrackColor { get; set; }
+        public string? TrackColor { get; set; }
 
         // according to spec, should still show
         // a color when disabled and active
@@ -48,7 +48,7 @@ namespace Masa.Blazor
 
         public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
-        protected override void OnInternalValueChange(bool val)
+        protected override void OnInternalValueChange(TValue val)
         {
             base.OnInternalValueChange(val);
 
@@ -118,15 +118,15 @@ namespace Masa.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<,>), typeof(BSwitchDefaultSlot))
-                .Apply(typeof(BSwitchSwitch<>), typeof(BSwitchSwitch<MSwitch>))
-                .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MSwitch>))
-                .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch>))
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BSwitchDefaultSlot<TValue>))
+                .Apply(typeof(BSwitchSwitch<,>), typeof(BSwitchSwitch<MSwitch<TValue>, TValue>))
+                .Apply(typeof(BSelectableInput<,>), typeof(BSelectableInput<MSwitch<TValue>, TValue>))
+                .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch<TValue>>))
                 .Apply<BProgressCircular, MProgressCircular>(attrs =>
                 {
                     if (!IsLoading) return;
 
-                    string color = null;
+                    string? color = null;
 
                     Loading.Match(
                         s => color = s,
@@ -143,7 +143,7 @@ namespace Masa.Blazor
                     attrs[nameof(MProgressCircular.Size)] = (StringNumber)16;
                     attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 })
-                .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
+                .Apply(typeof(BSwitchProgress<,>), typeof(BSwitchProgress<MSwitch<TValue>, TValue>));
         }
     }
 }

@@ -10,6 +10,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
