@@ -20,16 +20,15 @@ cols: 1
 
 #### 自定义异常处理
 
-自定义异常处理 `Func<Exception,Task>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
+自定义异常处理 `Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
 
 <masa-example file="Examples.components.error_handler.OnErrorHandleAsync"></masa-example>
 
 #### 是否显示告警
 
- `true`显示错误信息，并保留当前已填写的表单内容，`false`不显示错误，将异常向上传递到ErrorBoundry处理错误；
- 如果在生命周期加载过程发生了错误，当前razor是否被包含在上级的Error handler中：
- 1. 包含，将先显示异常，并将当前页面内容呈现为默认的ErrorBoundry错误处理处理内容；
- 2. 不包含，当前页面直接内容呈现为默认的ErrorBoundry错误处理内容；
+ 自定义异常处理`Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景色变为红色文字颜色改为白色。
+1. 返回值为：`True`，则不再进行异常信息的提示，直接进行异常的处理，建议实现自定义异常处理后，自行进行异常信息的暂时，返回值设置为`True`;
+2. 返回值为：`False`，会先进行异常信息的提示，再进行异常的处理。
 
 <masa-example file="Examples.components.error_handler.ShowAlert"></masa-example>
 
