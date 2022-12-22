@@ -101,7 +101,7 @@ public class DocService
         {
             if (((IDefaultItem<NavItem>)navItem).HasChildren())
             {
-                var seg = navItem.Group is null ? $"{segment}/{navItem.Title}" : segment;
+                var seg = navItem.Group ?? $"{segment}/{navItem.Title}";
                 SetHref(navItem.Children!, seg, rootSegment);
             }
             else
