@@ -175,5 +175,10 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             return tcs.Task;
         }
+
+        bool PlatformRequestMtu(int mtu)
+        {
+            return false;
+        }
     }
 }

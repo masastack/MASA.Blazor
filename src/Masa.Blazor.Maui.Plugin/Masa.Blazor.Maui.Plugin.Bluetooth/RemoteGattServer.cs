@@ -87,5 +87,16 @@
         {
             return PlatformReadRssi();
         }
+
+        /// <summary>
+        /// Request the maximum transmission unit (MTU) size.
+        /// </summary>
+        /// <param name="mtu">mtu size from 0 to 512</param>
+        /// <returns>true if succesful.</returns>
+        /// <remarks>Currently supported only on Android.</remarks>
+        public bool RequestMtu(int mtu)
+        {
+            return PlatformRequestMtu(mtu);
+        }
     }
 }

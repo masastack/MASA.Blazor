@@ -156,7 +156,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                             _eventWaitHandle.Set();
                             time1 = DateTime.MinValue;
                         }
-                    }
+                    } 
                 }
 
                 base.OnScanResult(callbackType, result);

@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorComponent.I18n
+@using System.Globalization
+@inherits LayoutComponentBase
 <ErrorBoundary>
     <ChildContent>
         <MApp>
@@ -23,3 +25,13 @@
         @context.ToString()
     </ErrorContent>
 </ErrorBoundary>
+
+@code
+{
+    [Inject] private I18n I18n { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        I18n.SetCulture(new CultureInfo("zh-CN"));
+        await base.OnInitializedAsync();
+    }
+}
