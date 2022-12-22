@@ -23,11 +23,11 @@ A **Checkbox** in its simplest form provides a toggle between 2 values.
 
 <masa-example file="Examples.components.checkboxes.Color"></masa-example>
 
-#### Boolean
+#### Custom truthy and falsy state
 
-A single **MCheckbox** will have a boolean value as its `value`.
+**MCheckbox** will have a typed value as its `Value`.
 
-<masa-example file="Examples.components.checkboxes.Boolean"></masa-example>
+<masa-example file="Examples.components.checkboxes.CustomState"></masa-example>
 
 #### States
 

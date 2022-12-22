@@ -23,6 +23,12 @@ related:
 
 <masa-example file="Examples.components.switches.Color"></masa-example>
 
+#### 自定义真假值
+
+**MSwitch** 将有一个类型化的值作为其 `Value`。
+
+<masa-example file="Examples.components.switches.CustomState"></masa-example>
+
 #### 扁平
 
 您可以使用 `Flat` 属性渲染没有高度(z轴)的开关。
