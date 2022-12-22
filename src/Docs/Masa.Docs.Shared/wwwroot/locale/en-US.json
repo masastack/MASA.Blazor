@@ -220,5 +220,14 @@
   "product.blazor": "MASA Blazor",
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
-  "all": "All components"
+  "all": "All components",
+  "basic-concepts": "Basic concepts",
+  "best-practices": "Best practices",
+  "faq": "FAQ",
+  "get-started": "Get started",
+  "introduce": "Introduce",
+  "related-agreements": "Related agreements",
+  "sdk-instance": "SDK instance",
+  "pm": "PM",
+  "dcc": "DCC"
 }

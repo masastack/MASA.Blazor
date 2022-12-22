@@ -235,5 +235,14 @@
   "product.blazor": "MASA Blazor",
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
-  "all": "所有组件"
+  "all": "所有组件",
+  "basic-concepts": "基础概念",
+  "best-practices": "最佳实践",
+  "faq": "常见问题",
+  "get-started": "开始使用",
+  "introduce": "介绍",
+  "related-agreements": "相关协议",
+  "sdk-instance": "SDK 示例",
+  "pm": "项目管理",
+  "dcc": "分布式配置中心"
 }
