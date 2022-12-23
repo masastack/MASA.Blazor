@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-<block-text-usage></block-text-usage>
+<masa-example file="Examples.components.block_text.Usage"></masa-example>
 
 ## 示例
 
