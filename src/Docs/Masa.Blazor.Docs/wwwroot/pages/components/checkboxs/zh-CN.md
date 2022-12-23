@@ -23,11 +23,11 @@ related:
 
 <masa-example file="Examples.components.checkboxes.Color"></masa-example>
 
-#### 布尔值
+#### 自定义真假值
 
-单个 **MChecbox** 将有一个布尔值作为其 `value`。
+**MCheckbox** 将有一个类型化的值作为其 `Value`。
 
-<masa-example file="Examples.components.checkboxes.Boolean"></masa-example>
+<masa-example file="Examples.components.checkboxes.CustomState"></masa-example>
 
 #### 状态
 

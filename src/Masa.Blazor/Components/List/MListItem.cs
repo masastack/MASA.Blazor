@@ -40,7 +40,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool Ripple { get; set; }
 
-        private bool ComputedRipple => IsDirtyParameter<bool>(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
+        private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
         protected override void OnParametersSet()
         {

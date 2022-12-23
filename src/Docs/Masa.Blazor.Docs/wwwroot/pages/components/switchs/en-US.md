@@ -23,6 +23,12 @@ Switches can be colored by using any of the builtin colors and contextual names 
 
 <masa-example file="Examples.components.switches.Color"></masa-example>
 
+#### Custom truthy and falsy state
+
+**MSwitch** have a typed value as its `Value`.
+
+<masa-example file="Examples.components.switches.CustomState"></masa-example>
+
 #### Flat
 
 You can make switch render without elevation of thumb using `Flat` property.
