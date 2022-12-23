@@ -4,7 +4,7 @@ public class CheckboxParameter
 {
     public bool Value { get; set; }
 
-    public string ParameterValue { get; set; }
+    public string? ParameterValue { get; set; }
 
     public bool IsBoolean { get; set; }
 
@@ -13,5 +13,10 @@ public class CheckboxParameter
         Value = value;
         IsBoolean = isBoolean;
         ParameterValue = parameterValue;
+    }
+
+    public CheckboxParameter()
+    {
+        IsBoolean = true;
     }
 }
