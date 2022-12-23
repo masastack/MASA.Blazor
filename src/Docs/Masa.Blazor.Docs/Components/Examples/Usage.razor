@@ -32,7 +32,8 @@
                 <MSheet Class="overflow-y-auto fill-height d-flex align-center justify-center pa-14"
                         MinHeight="400"
                         MaxHeight="400"
-                        Rounded="@("t")">
+                        Rounded="@("t")"
+                        Dark="_dark">
                     <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
                 </MSheet>
             </MCol>
@@ -43,7 +44,7 @@
                     <Headline />
 
                     <div class="pa-1 ms-auto">
-                        <AppTooltipButton Icon="mdi-invert-colors" Path="invert-example-colors" />
+                        <AppTooltipButton Icon="mdi-invert-colors" Path="invert-example-colors" OnClick="() => _dark = !_dark" />
                     </div>
                 </div>
 

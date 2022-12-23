@@ -14,6 +14,7 @@ public partial class Usage : NextTickComponentBase
 
     private bool _rendered;
     private StringNumber? _toggleValue;
+    private bool _dark;
 
     public Usage(Type type)
     {
