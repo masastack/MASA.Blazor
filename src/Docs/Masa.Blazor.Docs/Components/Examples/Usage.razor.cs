@@ -15,7 +15,8 @@ public partial class Usage : NextTickComponentBase
 
     private bool _rendered;
     private StringNumber? _toggleValue;
-    private bool _dark;
+
+    private bool HasRightOptions => _checkboxParameters.Any() || _sliderParameters.Any() || _selectParameters.Any();
 
     public Usage(Type type)
     {
@@ -87,7 +88,6 @@ public partial class Usage : NextTickComponentBase
         }
     }
 
-    protected virtual Type? UsageWrapperType => null;
     protected virtual string ComponentName => GetComponentName(_type);
     protected virtual ParameterList<bool> GenToggleParameters() => new();
     protected virtual ParameterList<CheckboxParameter> GenCheckboxParameters() => new();
