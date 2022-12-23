@@ -11,7 +11,7 @@ related:
 
 The **MAppBar** component is used for application-wide actions and information.
 
-<appBars-usage></app-bars-usage>
+<app-bars-usage></app-bars-usage>
 
 ## Anatomy
 
