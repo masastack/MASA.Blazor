@@ -5,6 +5,7 @@
         private Android.Bluetooth.BluetoothGatt _gatt;
         private Android.Bluetooth.BluetoothGattCallback _gattCallback;
         private bool _servicesDiscovered = false;
+        private int requestedMtu;
         private void PlatformInit()
         {
             // android default - replaced by callback after request or change
@@ -33,11 +34,13 @@
         internal class GattCallback : Android.Bluetooth.BluetoothGattCallback
         {
             private readonly RemoteGattServer _owner;
-
+            
             internal GattCallback(RemoteGattServer owner)
             {
                 _owner = owner;
             }
+
+            
 
             public override void OnMtuChanged(Android.Bluetooth.BluetoothGatt gatt, int mtu, Android.Bluetooth.GattStatus status)
             {
@@ -239,6 +242,19 @@
             {
                 return Task.FromResult((short)0);
             }
+        }
+
+        
+
+        bool PlatformRequestMtu(int mtu)
+        {
+            requestedMtu = mtu;
+            if (IsConnected)
+            {
+                return _gatt.RequestMtu(mtu);
+            }
+
+            return false;
         }
     }
 

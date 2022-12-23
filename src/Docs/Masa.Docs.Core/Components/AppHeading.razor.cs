@@ -1,5 +1,8 @@
-﻿namespace Masa.Docs.Core.Components;
+﻿using BlazorComponent.Attributes;
 
+namespace Masa.Docs.Core.Components;
+
+[JSCustomElement]
 public class AppHeading : ComponentBase
 {
     [Inject]
