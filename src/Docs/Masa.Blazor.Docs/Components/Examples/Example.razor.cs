@@ -2,6 +2,7 @@
 
 namespace Masa.Blazor.Docs.Components;
 
+[JSCustomElement("masa-example")]
 public partial class Example : NextTickComponentBase
 {
     [Inject]

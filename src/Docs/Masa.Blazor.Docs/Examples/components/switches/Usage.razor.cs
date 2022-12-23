@@ -4,24 +4,24 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
-        { nameof(MSwitch.Inset), false },
-        { nameof(MSwitch.Dense), false },
-        { nameof(MSwitch.Flat), false },
+        { nameof(MSwitch<bool>.Inset), false },
+        { nameof(MSwitch<bool>.Dense), false },
+        { nameof(MSwitch<bool>.Flat), false },
     };
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(MSwitch.Disabled), new CheckboxParameter("false",true) },
-        { nameof(MSwitch.Loading), new CheckboxParameter("false",true) },
+        { nameof(MSwitch<bool>.Disabled), new CheckboxParameter("false",true) },
+        { nameof(MSwitch<bool>.Loading), new CheckboxParameter("false",true) },
     };
 
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
-        { nameof(MSwitch.Color), new SelectParameter(new List<string>() { "red", "indigo", "orange","primary","success","warning" }) },
+        { nameof(MSwitch<bool>.Color), new SelectParameter(new List<string>() { "red", "indigo", "orange","primary","success","warning" }) },
     };
 
 
-    public Usage() : base(typeof(MSwitch))
+    public Usage() : base(typeof(MSwitch<bool>))
     {
     }
 
@@ -43,7 +43,7 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         return new Dictionary<string, object>()
         {
-            { nameof(MSwitch.Label), "Switch" },
+            { nameof(MSwitch<bool>.Label), "Switch" },
         };
     }
 }

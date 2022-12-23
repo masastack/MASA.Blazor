@@ -15,7 +15,7 @@ related:
 
 ## 注意
 
-<app-alerts type="info" content="默认情况下，**MBreadcrumbs** 将禁用路由联动。可以通过 `Linkage` 属性开启路由联动。"></app-alerts>
+<app-alert type="info" content="默认情况下，**MBreadcrumbs** 将禁用路由联动。可以通过 `Linkage` 属性开启路由联动。"></app-alert>
 
 ## Examples
 

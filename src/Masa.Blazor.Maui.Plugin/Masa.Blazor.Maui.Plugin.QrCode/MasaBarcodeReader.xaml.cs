@@ -1,3 +1,4 @@
+using ZXing;
 using ZXing.Net.Maui;
 
 namespace Masa.Blazor.Maui.Plugin.QrCode;
@@ -10,7 +11,7 @@ public partial class MasaBarcodeReader : ContentPage
     public MasaBarcodeReader()
     {
         InitializeComponent();
-        barcodeReader.Options = new BarcodeReaderOptions
+        BarcodeReader.Options = new BarcodeReaderOptions
         {
             Formats = BarcodeFormats.All,
             AutoRotate = true,
@@ -41,6 +42,11 @@ public partial class MasaBarcodeReader : ContentPage
     }
     private void ReturnToBlazor_Clicked(object sender, EventArgs e)
     {
+        BarcodeReader.IsTorchOn = false;
         CloseReader();
+    }
+    void TorchButton_Clicked(object sender, EventArgs e)
+    {
+        BarcodeReader.IsTorchOn = !BarcodeReader.IsTorchOn;
     }
 }

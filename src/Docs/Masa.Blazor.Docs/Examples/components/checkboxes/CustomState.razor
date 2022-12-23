@@ -1,17 +1,21 @@
 ﻿<MContainer Fluid>
     <MCheckbox
         @bind-Value="checkbox1"
-        Label="@($"Checkbox 1: {checkbox1.ToString()}")">
+        TrueValue='"Yes"'
+        FalseValue='"No"'
+        Label="@($"Checkbox 1: {checkbox1}")">
     </MCheckbox>
     <MCheckbox
         @bind-Value="checkbox2"
+        TrueValue="1"
+        FalseValue="0"
         Label="@($"Checkbox 2: {checkbox2.ToString()}")">
     </MCheckbox>
 </MContainer>
 
 @code {
 
-    bool checkbox1 = true;
-    bool checkbox2 = false;
+    string checkbox1 = "Yes";
+    int checkbox2 = 1;
 
 }

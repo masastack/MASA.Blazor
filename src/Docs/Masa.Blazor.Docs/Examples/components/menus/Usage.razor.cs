@@ -1,5 +1,4 @@
-﻿
-namespace Masa.Blazor.Docs.Examples.components.menus;
+﻿namespace Masa.Blazor.Docs.Examples.components.menus;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {

@@ -4,10 +4,10 @@
     {
         protected override ParameterList<bool> GenToggleParameters() => new()
         {
-            { nameof(MCheckbox.Dense), false },
+            { nameof(MCheckbox<bool>.Dense), false },
         };
 
-        public Usage() : base(typeof(MCheckbox)) { }
+        public Usage() : base(typeof(MCheckbox<bool>)) { }
 
         bool _checkbox = true;
 
@@ -17,12 +17,12 @@
         {
             return new Dictionary<string, object>()
             {
-              { nameof(MCheckbox.Value), _checkbox },
-              { nameof(MCheckbox.ValueChanged), EventCallback.Factory.Create<bool>(this, val =>
+              { nameof(MCheckbox<bool>.Value), _checkbox },
+              { nameof(MCheckbox<bool>.ValueChanged), EventCallback.Factory.Create<bool>(this, val =>
               {
                     _checkbox = val;
               }) },
-              { nameof(MCheckbox.Label), label },
+              { nameof(MCheckbox<bool>.Label), label },
             };
         }
     }
