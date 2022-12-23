@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.Components;
 
+[JSCustomElement(IncludeNamespace = true)]
 public partial class Usage : NextTickComponentBase
 {
     private const string DefaultKey = "default";

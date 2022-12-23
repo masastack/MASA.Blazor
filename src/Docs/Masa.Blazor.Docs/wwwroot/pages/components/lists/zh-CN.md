@@ -15,7 +15,7 @@ related:
 
 ## 注意
 
-<app-alerts type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alerts>
+<app-alert type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alert>
 
 ## 示例
 

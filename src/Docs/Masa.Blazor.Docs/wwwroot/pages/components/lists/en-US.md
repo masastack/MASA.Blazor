@@ -16,7 +16,7 @@ minimum height of the item and can also be controlled from `MList` with the same
 
 ## Caveats
 
-<app-alerts type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alerts>
+<app-alert type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alert>
 
 ## Examples
 

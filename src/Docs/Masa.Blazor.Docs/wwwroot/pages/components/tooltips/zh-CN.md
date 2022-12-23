@@ -15,7 +15,7 @@ related:
 
 ## 注意
 
-<app-alerts type="info" content="为了正确定位 **MTooltip**，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。"></app-alerts>
+<app-alert type="info" content="为了正确定位 **MTooltip**，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。"></app-alert>
 
 ## 示例
 
