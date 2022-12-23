@@ -11,7 +11,7 @@ related:
 
 分页默认根据设置的 `Length` 属性显示页数，两边有 `Prev` 和 `Next` 按钮帮助导航。
 
-<pagination-usage></pagination-usage>
+<masa-example file="Examples.components.pagination.Usage"></masa-example>
 
 ## 示例
 

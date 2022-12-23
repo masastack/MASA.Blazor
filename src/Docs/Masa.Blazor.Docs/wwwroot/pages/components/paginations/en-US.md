@@ -11,7 +11,7 @@ related:
 
 By default, paging displays the number of pages according to the set `Length` property, and there are `Prev` and `Next` buttons on both sides to help navigation.
 
-<pagination-usage></pagination-usage>
+<masa-example file="Examples.components.pagination.Usage"></masa-example>
 
 ## Examples
 
