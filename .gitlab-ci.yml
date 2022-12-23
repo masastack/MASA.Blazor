@@ -15,7 +15,7 @@ stages:
   - tag
 
 variables:
-  IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
+  IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor:0.2.$CI_PIPELINE_ID
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
@@ -67,16 +67,16 @@ docker:
     - docker rmi  $IMAGE
   retry: 2
 
-deploy-dev:
-  image: portainer/kubectl-shell
-  stage: deploy-dev
-  only:
-    - main
-  script:
-    - echo $KUBE_CONFIG_DEV | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
-  retry: 2
-  when: manual
+# deploy-dev:
+#   image: portainer/kubectl-shell
+#   stage: deploy-dev
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+#   retry: 2
+#   when: manual
   
 deploy-dev-ydy:
   image: portainer/kubectl-shell
@@ -85,31 +85,31 @@ deploy-dev-ydy:
     - main
   script:
     - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor-dev
+    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masastack-dev
   retry: 2
 
 
-deploy-test:
-  image: portainer/kubectl-shell
-  stage: deploy-test
-  only:
-    - main
-  script:
-    - echo $KUBE_CONFIG_DEV | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
-  retry: 2
-  when: manual
+# deploy-test:
+#   image: portainer/kubectl-shell
+#   stage: deploy-test
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
+#   retry: 2
+#   when: manual
 
-deploy-test-ydy:
-  image: portainer/kubectl-shell
-  stage: deploy-test
-  only:
-    - main
-  script:
-    - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor-test
-  retry: 2
-  when: manual
+# deploy-test-ydy:
+#   image: portainer/kubectl-shell
+#   stage: deploy-test
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor-test
+#   retry: 2
+#   when: manual
 
 packer-prd:
   stage: packer-prd
