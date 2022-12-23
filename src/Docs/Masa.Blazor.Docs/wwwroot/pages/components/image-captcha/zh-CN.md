@@ -10,6 +10,8 @@ related:
 
 **PImageCaptcha** 是使用`SkiaSharp` 生成的图片，在Linux环境中，需要安装 `libfontconfig1`，如Dockerfile中增加 `RUN apt-get update && apt-get install -y libfontconfig1`。
 
+<masa-example file="Examples.components.image_captcha.Usage"></masa-example>
+
 ## 示例
 
 ### 属性
