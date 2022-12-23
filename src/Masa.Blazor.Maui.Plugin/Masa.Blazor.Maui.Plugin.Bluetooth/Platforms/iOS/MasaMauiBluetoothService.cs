@@ -13,6 +13,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             ShowPowerAlert = true,
         });
+        private static DateTime time1;
         private static bool availability = false;
         internal static event EventHandler UpdatedState;
         internal static event EventHandler<CBPeripheralEventArgs> ConnectedPeripheral;
@@ -20,7 +21,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         internal static event EventHandler<CBDiscoveredPeripheralEventArgs> DiscoveredPeripheral;
         internal static event EventHandler<CBPeripheralErrorEventArgs> FailedToConnectPeripheral;
 
-        public static bool PlatformIsEnabledIsEnabled()
+        public static bool PlatformIsEnabled()
         {
             return _manager.State == CBManagerState.PoweredOn;
         }
@@ -44,17 +45,26 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return status;
         }
 
-        private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices()
+        private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            time1 = DateTime.Now;
             if (!_manager.IsScanning)
             {
                 _manager.ScanForPeripherals(new CBUUID[] { }, new PeripheralScanningOptions
                 {
                     AllowDuplicatesKey = true,
                 });
-
-                await Task.Run(() => { _delegate.WaitOne(); });
-
+                if (string.IsNullOrEmpty(deviceName))
+                {
+                    await Task.Run(() => { _delegate.WaitOne(); });
+                }
+                else
+                {
+                    await Task.Run(() =>
+                    {
+                        _delegate.WaitOnlyOne(deviceName);
+                    });
+                }
                 _manager.StopScan();
                 _discoveredDevices = _delegate.Devices.AsReadOnly();
             }
@@ -65,26 +75,54 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
             BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
-
+            if (!blueDevice.Gatt.IsConnected)
+            {
+                await blueDevice.Gatt.ConnectAsync();
+            }
+            
             var primaryServices = await blueDevice.Gatt.GetPrimaryServicesAsync();
             var primaryService = primaryServices.First(o => o.Uuid.Value == servicesUuid);
-
+            
             var characteristics = await primaryService.GetCharacteristicsAsync();
             var characteristic = characteristics.FirstOrDefault(o => (o.Properties & GattCharacteristicProperties.Write) != 0);
             if (characteristicsUuid != null)
             {
                 characteristic = characteristics.FirstOrDefault(o => o.Uuid.Value == characteristicsUuid);
             }
+            var reTryCount = 5;
+            var isFailed = false;
+            while (reTryCount > 0)
+            {
 
-            await characteristic.StartNotificationsAsync();
+                try
+                {
+                    await characteristic.StartNotificationsAsync();
+                    reTryCount = 0;
+                }
+                catch (OperationCanceledException ex)
+                {
+                    reTryCount--;
+                    if (reTryCount == 0)
+                    {
+                        isFailed = true;
+                    }
+                }
+                await Task.Delay(500);
+            }
+
+            if (isFailed)
+            {
+                throw new OperationCanceledException();
+            }
+     
             characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
-            await characteristic.WriteValueWithResponseAsync(dataBytes);
+            await characteristic.WriteValueWithoutResponseAsync(dataBytes);
         }
 
         private class BluetoothDelegate : CBCentralManagerDelegate
         {
             private EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
-
+            private string scanDeviceName;
             public  List<BluetoothDevice> Devices { get; } = new();
 
             public  void WaitOne()
@@ -98,6 +136,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 _eventWaitHandle.WaitOne();
             }
 
+            public void WaitOnlyOne(string deviceName)
+            {
+                scanDeviceName = deviceName;
+                _eventWaitHandle.WaitOne();
+            }
+
             public  override void DiscoveredPeripheral(CBCentralManager central, CBPeripheral peripheral,
                 NSDictionary advertisementData,
                 NSNumber RSSI)
@@ -107,18 +151,30 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             
                 //var sss = $"{string.Join(",", advertisementData.Keys.ToList())}";
                 var device = (BluetoothDevice) peripheral;
-                if (!Devices.Contains(device))
-                {
-                    Devices.Add(device);
-                    //if (sss.Contains("LocalName"))
-                    //{
-                    //    System.Diagnostics.Debug.WriteLine(123);
-                    //    device.LocalName = advertisementData["kCBAdvDataLocalName"].ToString();
-                    //    System.Diagnostics.Debug.WriteLine("device.LocalName:"+ device.LocalName);
-                    //}
 
+                if (string.IsNullOrEmpty(scanDeviceName))
+                {
+                    if (!Devices.Contains(device))
+                    {
+                        Devices.Add(device);
+                    }
                 }
- 
+                else
+                {
+                    if (device?.Name == scanDeviceName)
+                    {
+                        Devices.Add(device);
+                        _eventWaitHandle.Set();
+                    }
+                    else
+                    {
+                        if ((DateTime.Now - time1).Seconds > 10)
+                        {
+                            _eventWaitHandle.Set();
+                        }
+                    }
+                }
+
                 System.Diagnostics.Debug.WriteLine($"{String.Join(",", Devices.Select(o => o.Name).Distinct().ToList())}");
             }
             public override void UpdatedState(CBCentralManager central)

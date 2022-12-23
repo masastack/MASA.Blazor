@@ -16,9 +16,9 @@ interface for organizing groups of content.
 
 ## Caveats
 
-<app-alerts type="warning" content="When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white. "></app-alerts>
+<app-alert type="warning" content="When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white. "></app-alert>
 
-<app-alerts type="warning" content="When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible."></app-alerts>
+<app-alert type="warning" content="When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible."></app-alert>
 
 ## Examples
 

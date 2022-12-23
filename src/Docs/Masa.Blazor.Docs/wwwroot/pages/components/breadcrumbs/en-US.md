@@ -15,7 +15,7 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 ## Caveats
 
-<app-alerts type="info" content="By default **MBreadcrumbs** will disable the linkage with router. You can enable the feature by using `Linkage` prop."></app-alerts>
+<app-alert type="info" content="By default **MBreadcrumbs** will disable the linkage with router. You can enable the feature by using `Linkage` prop."></app-alert>
 
 ## Examples
 
