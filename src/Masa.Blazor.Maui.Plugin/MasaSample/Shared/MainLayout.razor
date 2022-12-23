@@ -1,7 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorComponent.I18n
+@using System.Globalization
+@inherits LayoutComponentBase
 <ErrorBoundary>
     <ChildContent>
-        @*<MApp>*@
+        <MApp>
             <div class="page">
                 <div class="sidebar">
                     <NavMenu />
@@ -17,9 +19,19 @@
                     </article>
                 </main>
             </div>
-        @*</MApp>*@
+        </MApp>
     </ChildContent>
     <ErrorContent>
         @context.ToString()
     </ErrorContent>
 </ErrorBoundary>
+
+@code
+{
+    [Inject] private I18n I18n { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        I18n.SetCulture(new CultureInfo("zh-CN"));
+        await base.OnInitializedAsync();
+    }
+}

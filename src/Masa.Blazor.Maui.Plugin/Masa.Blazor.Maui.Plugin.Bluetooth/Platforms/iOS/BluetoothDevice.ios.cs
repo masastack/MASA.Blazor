@@ -40,5 +40,15 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             return _gatt;
         }
+
+#if __IOS__
+        /// <summary>
+        /// Specifies whether to request Apple Notification Center Services to allow access to notifications from the remote device when connecting.
+        /// </summary>
+        public bool RequiresAncs
+        {
+            get; set;
+        }
+#endif
     }
 }
