@@ -11,7 +11,7 @@ related:
 
 Toggle buttons allow you to create a styled group of buttons that can be selected or toggled under `@bind-Value(s)`.
 
-<button-groups-usage></button-groups-usage>
+<masa-example file="Examples.components.button_groups.Usage"></masa-example>
 
 ## Examples
 
