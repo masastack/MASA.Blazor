@@ -11,7 +11,7 @@ related:
 
 Month pickers come in two orientation variations, portrait (default) and landscape.
 
-<date-pickers-month-usage></date-pickers-month-usage>
+<masa-example file="Examples.components.date_pickers_month.Usage"></masa-example>
 
 ## Caveats
 

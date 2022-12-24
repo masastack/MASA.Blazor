@@ -13,7 +13,7 @@ Date pickers come in two orientation variations, portrait (default) and landscap
 By default they are emitting input event when the day (for date picker) or month (for month picker), 
 but with `Reactive` prop they can update the model even after clicking year/month.
 
-<date-pickers-usage></date-pickers-usage>
+<masa-example file="Examples.components.date_pickers.Usage"></masa-example>
 
 ## Caveats
 

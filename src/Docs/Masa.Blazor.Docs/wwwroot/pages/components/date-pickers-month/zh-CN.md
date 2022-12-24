@@ -11,7 +11,7 @@ related:
 
 月份选择器有两种方向变化：纵向 (默认) 和横向。
 
-<date-pickers-month-usage></date-pickers-month-usage>
+<masa-example file="Examples.components.date_pickers_month.Usage"></masa-example>
 
 ## 注意
 
