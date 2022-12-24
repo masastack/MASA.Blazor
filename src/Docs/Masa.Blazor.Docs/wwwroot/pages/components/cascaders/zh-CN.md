@@ -1,6 +1,5 @@
 ---
-title: Cascaders（级联菜单）
-desc: "级联选择器"
+title: Cascaders（级联选择器）
 related:
 - /components/treeview
 - /components/forms
@@ -11,7 +10,7 @@ related:
 
 级联选择器用于选择省市区
 
-<cascaders-usage></cascaders-usage>
+<masa-example file="Examples.components.cascaders.Usage"></masa-example>
 
 ## 示例
 

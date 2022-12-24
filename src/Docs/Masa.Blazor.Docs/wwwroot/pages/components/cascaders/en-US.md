@@ -1,6 +1,5 @@
 ---
 title: Cascaders
-desc: "The **MCascader** component is used for multiple select link."
 related:
 - /components/treeview
 - /components/forms
@@ -11,7 +10,7 @@ related:
 
 The cascade selector is used to select provinces and municipalities
 
-<cascaders-usage></cascaders-usage>
+<masa-example file="Examples.components.cascaders.Usage"></masa-example>
 
 ## Examples
 
