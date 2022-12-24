@@ -2,6 +2,8 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
+    private StringNumber _value;
+
     public Usage() : base(typeof(MChipGroup))
     {
     }
@@ -17,6 +19,13 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MChipGroup.Mandatory), new CheckboxParameter("false", true) },
         { nameof(MChipGroup.Multiple), new CheckboxParameter("false", true) },
         { nameof(MChipGroup.ShowArrows), new CheckboxParameter("false", true) },
+    };
+
+    protected override Dictionary<string, object>? GenAdditionalParameters() => new()
+    {
+        { nameof(MChipGroup.ActiveClass), "primary--text" },
+        { nameof(MChipGroup.Value), _value },
+        { nameof(MChipGroup.ValueChanged), EventCallback.Factory.Create<StringNumber>(this, val => _value = val) }
     };
 
     protected override object? CastValue(ParameterItem<object?> parameter)
@@ -45,6 +54,34 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         builder.OpenComponent<MChip>(4);
         builder.AddChildContent(5, "Chip3");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(6);
+        builder.AddChildContent(7, "Chip4");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(8);
+        builder.AddChildContent(9, "Chip5");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(10);
+        builder.AddChildContent(11, "Chip6");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(12);
+        builder.AddChildContent(13, "Chip7");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(14);
+        builder.AddChildContent(15, "Chip8");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(16);
+        builder.AddChildContent(17, "Chip9");
+        builder.CloseComponent();
+
+        builder.OpenComponent<MChip>(18);
+        builder.AddChildContent(19, "Chip10");
         builder.CloseComponent();
     };
 }
