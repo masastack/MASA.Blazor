@@ -11,7 +11,7 @@ related:
 
 最简单形式的 **MFooter** 组件是一个容器。
 
-<footers-usage></footers-usage>
+<masa-example file="Examples.components.footers.Usage"></masa-example>
 
 ## 示例
 

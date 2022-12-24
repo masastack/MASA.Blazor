@@ -11,7 +11,7 @@ related:
 
 The **MFooter** component in its simplest form is a container.
 
-<footers-usage></footers-usage>
+<masa-example file="Examples.components.footers.Usage"></masa-example>
 
 ## Examples
 
