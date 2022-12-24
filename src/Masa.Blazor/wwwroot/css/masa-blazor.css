@@ -19491,6 +19491,13 @@ html.overflow-y-hidden {
 .m-text-field.m-input--has-state > .m-input__control > .m-input__slot:before {
     border-color: currentColor;
 }
+.m-text-field .m-input__icon--clear {
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+.m-text-field.m-input--is-focused .m-input__icon--clear, .m-text-field.m-input--is-dirty:hover .m-input__icon--clear {
+    opacity: 1;
+}
 .theme--light.m-select .m-select__selections {
     color: rgba(0, 0, 0, 0.87);
     min-height: 10px;
