@@ -4,15 +4,11 @@ desc: "对于操作一些代码或者编辑一些文本的时候提供语法高�
 tag: js-proxy
 ---
 
-## css文件
+## css文件 js文件 (注意引用顺序)
 
 ```html
 <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.css">
-```
 
-## js文件 (注意引用顺序)
-
-```html
 <script>var require = { paths: { 'vs': 'https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs' } };</script>
 <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/loader.js"></script>
 <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.nls.js"></script>

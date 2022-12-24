@@ -1,27 +1,114 @@
 ﻿<MCard>
-    <MButton OnClick="()=>SetLanguage()">Switch the grammar</MButton>
-    <MButton OnClick="()=>GetValue()">Access to the editor's value</MButton>
-    <MDivider></MDivider>
-    <MTextField @bind-Value="_EditorOptions.Language"
-                Label="Syntax support"
-                Outlined></MTextField>
+    <MRow>
+
+        <MCol Cols="4">
+            <MSelect @bind-Value="@language"
+                     Label="Language"
+                     Items="@Languages"
+                     ItemText="u => u"
+                     ItemValue="u => u">
+            </MSelect>
+        </MCol>
+        <MCol Cols="4">
+            <MSelect @bind-Value="@theme"
+                     Label="Theme"
+                     Items="@Themes"
+                     ItemText="u => u"
+                     ItemValue="u => u">
+            </MSelect>
+        </MCol>
+
+    </MRow>
 
     <MMonacoEditor @ref="_editor" EditorOptions="@_EditorOptions" Width="@("100%")" Height="@("300px")" />
 
 
 </MCard>
 
-<MDivider>Get the value displayed</MDivider>
-<MCard>
-    @_EditorOptions.Value
-</MCard>
-
 @code {
     private MMonacoEditor _editor;
 
-    public EditorOptions _EditorOptions { get; set; } = new()
+    private string language
     {
-        Value = @"using System;
+        get
+        {
+            return _EditorOptions.Language;
+        }
+        set
+        {
+            _EditorOptions.Language = value;
+            _editor.SetModelLanguage(_EditorOptions.Language);
+        }
+    }
+
+    private string theme
+    {
+        get
+        {
+            return _EditorOptions.Theme;
+        }
+        set
+        {
+            _EditorOptions.Theme = value;
+            _editor.SetTheme(_EditorOptions.Theme);
+        }
+    }
+
+
+
+    private List<string> Languages = new List<string>()
+    {
+        "abap",
+        "aes",
+        "apex",
+        "azcli",
+        "bat",
+        "bicep",
+        "c",
+        "cameligo",
+        "clojure",
+        "coffeescript",
+        "cpp",
+        "csharp",
+        "csp",
+        "css",
+        "cypher",
+        "dart",
+        "dockerfile",
+        "ecl",
+        "elixir",
+        "flow9",
+        "freemarker2",
+        "freemarker2.tag-angle.interpolation-bracket",
+        "freemarker2.tag-angle.interpolation-dollar",
+        "freemarker2.tag-auto.interpolation-bracket",
+        "freemarker2.tag-auto.interpolation-dollar",
+        "freemarker2.tag-bracket.interpolation-bracket",
+        "freemarker2.tag-bracket.interpolation-dollar",
+        "fsharp",
+        "go",
+        "graphql",
+        "handlebars",
+        "hcl",
+        "html",
+        "ini",
+        "java",
+        "javascript",
+        "json",
+        "julia",
+        "kotlin",
+    };
+
+    private List<string> Themes = new List<string>()
+    {
+    "vs",
+    "vs-dark",
+    "hc-black"
+    };
+
+    public EditorOptions _EditorOptions { get; set; } = new()
+        {
+            Value = @"using System;
 namespace HelloWorldApplication
 {
     class HelloWorld
@@ -33,17 +120,9 @@ namespace HelloWorldApplication
         }
     }
 }",
-        Language = "csharp"
-    };
+            Language = "csharp",
+            Theme = "Visual Studio"
+        };
 
 
-    private async Task SetLanguage()
-    {
-        await _editor.SetModelLanguage(_EditorOptions.Language);
-    }
-
-    private async Task GetValue()
-    {
-        _EditorOptions.Value = await _editor.GetValue();
-    }
 }

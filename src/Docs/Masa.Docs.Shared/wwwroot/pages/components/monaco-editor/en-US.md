@@ -4,15 +4,11 @@ desc: "For the operation of some code or edit some text when providing syntax hi
 tag: js-proxy
 ---
 
-## css file
+## css file js files (note the order of references)
 
 ```html
 <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.css">
-```
 
-## js files (note the order of references)
-
-```html
 <script>var require = { paths: { 'vs': 'https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs' } };</script>
 <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/loader.js"></script>
 <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.nls.js"></script>
