@@ -11,7 +11,7 @@ related:
 
 A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.
 
-<steppers-usage></steppers-usage>
+<masa-example file="Examples.components.steppers.Usage"></masa-example>
 
 ## Examples
 

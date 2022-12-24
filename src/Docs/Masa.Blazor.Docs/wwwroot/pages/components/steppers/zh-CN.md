@@ -11,7 +11,7 @@ related:
 
 一个步骤组件适用于多种场景，包括购物车、创建记录等等。
 
-<steppers-usage></steppers-usage>
+<masa-example file="Examples.components.steppers.Usage"></masa-example>
 
 ## 示例
 

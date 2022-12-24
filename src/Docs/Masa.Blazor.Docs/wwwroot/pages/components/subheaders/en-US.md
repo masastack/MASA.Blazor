@@ -11,7 +11,7 @@ related:
 
 `Subheaders` in their simplest form display a subheading with default theme.
 
-<subheaders-usage></subheaders-usage>
+<masa-example file="Examples.components.subheaders.Usage"></masa-example>
 
 ## Examples
 
