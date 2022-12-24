@@ -1,29 +1,41 @@
-﻿namespace Masa.Blazor.Docs.Examples.components.icons;
+﻿using YamlDotNet.Core.Tokens;
+
+namespace Masa.Blazor.Docs.Examples.components.icons;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
-    public Usage() : base(typeof(MIcon)) { }
+    private const string InternalIconParameter = "Icon";
+
+    public Usage() : base(typeof(MIcon))
+    {
+    }
+
+    protected override ParameterList<bool> GenToggleParameters() => new()
+    {
+        { nameof(MIcon.XSmall), false },
+        { nameof(MIcon.Small), false },
+        { nameof(MIcon.Dense), false },
+        { nameof(MIcon.Large), false },
+        { nameof(MIcon.XLarge), false },
+    };
 
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
-        //{ nameof(MIcon.ChildContent), new SelectParameter(new List<string>() { "mdi-plus", "mdi-minus", "mdi-access-point", "mdi-antenna"}, "mdi-heart") },
+        { InternalIconParameter, new SelectParameter(new List<string>() { "mdi-plus", "mdi-minus", "mdi-access-point", "mdi-antenna" }) },
         { nameof(MIcon.Color), new SelectParameter(new List<string>() { "red", "orange", "yellow", "green", "blue", "purple" }) },
-        { nameof(MIcon.Size), new SelectParameter(new List<string>() { "XSmall", "Small", "Large", "XLarge" }) },
     };
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
         { nameof(MIcon.Disabled), new CheckboxParameter("false", true) },
-        { nameof(MIcon.Dense), new CheckboxParameter("false", true) },
     };
 
-    protected override RenderFragment GenChildContent() => builder =>
-    {
-        builder.AddContent(0, "mdi-heart");
-        //builder.CloseComponent();
-        //builder.OpenComponent<UsageTemplate>(1);
-        //builder.CloseComponent();
-    };
+    protected override IEnumerable<ParameterItem<SelectParameter>> ActiveSelectParameters =>
+        base.ActiveSelectParameters.Where(p => p.Key != InternalIconParameter);
+
+    private string? Icon => base.ActiveSelectParameters.FirstOrDefault(p => p.Key == InternalIconParameter)?.Value.Value ?? "mdi-heart";
+
+    protected override RenderFragment GenChildContent() => builder => { builder.AddContent(0, Icon); };
 
     protected override object? CastValue(ParameterItem<object?> parameter)
     {
@@ -35,16 +47,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         return parameter.Key switch
         {
             nameof(MIcon.Size) => (StringNumber)(string)parameter.Value,
-            //nameof(MIcon.ChildContent) => new RenderFragment(builder => builder.AddContent(0, parameter.Value)),
             _ => parameter.Value
         };
     }
 
-    protected override Dictionary<string, object>? GenAdditionalParameters()
-    {
-        return new Dictionary<string, object>()
-        {
-            //{nameof(MIcon.Icon), "mdi-plus"},
-        };
-    }
+    protected override string? ChildContentSourceCode => Icon;
 }

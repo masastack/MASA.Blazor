@@ -118,6 +118,8 @@ public partial class Usage : NextTickComponentBase
     protected virtual IEnumerable<ParameterItem<SelectParameter>> ActiveSelectParameters =>
         _selectParameters.Where(item => item.Value.Value != null);
 
+    protected virtual string? ChildContentSourceCode => null;
+
     private string SourceCode
     {
         get
@@ -132,8 +134,10 @@ public partial class Usage : NextTickComponentBase
             var parameters = string.Join($"{Environment.NewLine}\t", parameterList);
 
             return parameterList.Count == 0
-                ? $"<{ComponentName}></{ComponentName}>"
-                : $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{ComponentName}>";
+                ? $"<{ComponentName}>{ChildContentSourceCode}</{ComponentName}>"
+                : ChildContentSourceCode is null
+                    ? $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{ComponentName}>"
+                    : $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}\t{ChildContentSourceCode}{Environment.NewLine}</{ComponentName}>";
         }
     }
 
