@@ -11,7 +11,7 @@ related:
 
 内部 **MForm** 组件可以很容易地为表单输入添加验证。 所有输入组件都有一个规则道具，它接受类型函数、布尔值和字符串的混合数组。 这些允许您指定输入有效或无效的条件。 每当输入的值发生更改时，数组中的每个函数都将接收新值并评估每个数组元素。 如果函数或数组元素返回 false 或字符串，则验证失败，字符串值将显示为错误消息。
 
-<forms-usage></forms-usage>
+<masa-example file="Examples.components.forms.Usage"></masa-example>
 
 ## 示例
 
