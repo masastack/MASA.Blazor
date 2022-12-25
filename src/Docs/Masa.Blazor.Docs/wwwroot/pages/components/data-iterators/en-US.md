@@ -7,7 +7,7 @@ related:
   - /components/toolbars
 ---
 
-## Uasge
+## Usage
 
 <data-iterators-usage></data-iterators-usage>
 
