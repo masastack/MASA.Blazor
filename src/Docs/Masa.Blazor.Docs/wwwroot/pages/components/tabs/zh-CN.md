@@ -11,7 +11,7 @@ related:
 
 **MTabs** 组件是 [MItemGroup](/blazor/components/item-groups) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
 
-<tabs-usage></tabs-usage>
+<masa-example file="Examples.components.tabs.Usage"></masa-example>
 
 ## 注意
 

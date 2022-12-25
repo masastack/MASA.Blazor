@@ -12,7 +12,7 @@ related:
 The **MTabs** component is a styled extension of [MItemGroup](/blazor/components/item-groups). It provides an easy to use
 interface for organizing groups of content.
 
-<tabs-usage></tabs-usage>
+<masa-example file="Examples.components.tabs.Usage"></masa-example>
 
 ## Caveats
 
