@@ -11,7 +11,7 @@ related:
 
 简单表格组件是 `<table>` 元素的封装组件。
 
-<simple-tables-usage></simple-tables-usage>
+<masa-example file="Examples.components.simple_tables.Usage"></masa-example>
 
 ## 示例
 
