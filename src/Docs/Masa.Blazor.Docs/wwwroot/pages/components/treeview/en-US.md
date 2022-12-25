@@ -9,6 +9,7 @@ related:
 
 ## Usage
 
+<masa-example file="Examples.components.treeview.Usage"></masa-example>
 
 ## Examples
 

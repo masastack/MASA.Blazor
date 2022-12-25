@@ -11,7 +11,7 @@ related:
 
 Tooltips can wrap any element.
 
-<tooltips-usage></tooltips-usage>
+<masa-example file="Examples.components.tooltips.Usage"></masa-example>
 
 ## Caveats
 
