@@ -11,7 +11,7 @@ related:
 
 The standard data-table will by default render your data as simple rows.
 
-<data-iterators-usage></data-iterators-usage>
+<masa-example file="Examples.components.data_tables.Usage"></masa-example>
 
 ## Examples
 

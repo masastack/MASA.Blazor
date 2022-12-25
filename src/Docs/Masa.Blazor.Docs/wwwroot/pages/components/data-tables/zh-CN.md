@@ -11,7 +11,7 @@ related:
 
 标准数据表格默认会将数据呈现为简单的行。
 
-<data-tables-usage></data-tables-usage>
+<masa-example file="Examples.components.data_tables.Usage"></masa-example>
 
 ## 示例
 
