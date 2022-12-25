@@ -11,7 +11,7 @@ related:
 
 **MTimeline** displays a vertical time axis in its simplest form, and it should contain at least one **MTimelineItem**.
 
-<timelines-usage></timelines-usage>
+<masa-example file="Examples.components.timelines.Usage"></masa-example>
 
 ## Examples
 
