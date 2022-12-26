@@ -1,0 +1,47 @@
+﻿@inject I18n I18n
+@inject NavigationManager Navigation;
+
+<MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="300">
+    <PrependContent>
+        <MToolbar Flat Height="80">
+            <h3>
+                @I18n.T("settings")
+            </h3>
+        </MToolbar>
+    </PrependContent>
+    <ChildContent>
+        <MContainer>
+            <div style="padding-left:4px">
+                <h5>@I18n.T("Mode")</h5>
+                <MButtonGroup Value="BlazorMode.Current" Style="margin-top:4px">
+                    <MButton Value="BlazorMode.Server" Text Color="primary" Width="135"
+                             OnClick="NavigateToServer">
+                        Server
+                    </MButton>
+                    <MButton Value="BlazorMode.Wasm" Text Color="primary" Width="135"
+                             OnClick="NavigateToWasm">
+                        Wasm
+                    </MButton>
+                </MButtonGroup>
+            </div>
+        </MContainer>
+    </ChildContent>
+</MNavigationDrawer>
+
+@code {
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    void NavigateToServer()
+    {
+        //TODO: Navigate to server site
+    }
+
+    void NavigateToWasm()
+    {
+        //TODO: Navigate to WASM site
+    }
+}

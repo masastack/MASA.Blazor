@@ -21,7 +21,7 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <ToolIcons />
+        <ToolIcons OnSettingsClick="OnSettingsClick" />
     }
     else
     {
@@ -37,5 +37,8 @@
 
     [Parameter]
     public EventCallback OnDotClick { get; set; }
+
+    [Parameter]
+    public EventCallback OnSettingsClick { get; set; }
 
 }
