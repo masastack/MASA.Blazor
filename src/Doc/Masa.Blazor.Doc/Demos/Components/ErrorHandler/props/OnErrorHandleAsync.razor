@@ -15,11 +15,11 @@
         colorClass= "white black--text";
     }
 
-    private async Task CustomErrorHandleAsync(Exception exception)
+    private Task<bool> CustomErrorHandleAsync(Exception exception)
     {
         //todo
         colorClass = "red white--text";
         StateHasChanged();
-        await Task.CompletedTask;
+        return Task.FromResult(true);
     }
 }

@@ -20,8 +20,9 @@ You can also configure other options to display exception stack or customize exc
 
 #### OnErrorHandleAsync
 
-Custom exception handling `Func<Exception, Task >`, after clicking the button triggers the exception, 
-the button background color changes to red and the text color changes to white.
+Custom exception handling `Func<Exception, Task<bool>>`, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.
+If the return value is `True`, the exception information will not be displayed, and the exception will be handled directly. It is recommended that after implementing custom exception handling, the exception information will be temporarily reset by itself, and the return value will be set to `True`;
+The return value is: `False`, the exception information will be prompted first, and then the exception will be handled.
 
 <masa-example file="Examples.components.error_handler.OnErrorHandleAsync"></masa-example>
 

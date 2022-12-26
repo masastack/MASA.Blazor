@@ -11,7 +11,7 @@
     },
     {
       "Name": "OnErrorHandleAsync",
-      "Type": "Func<Exception,Task>",
+      "Type": "Func<Exception,Task`1>",
       "Default": "null",
       "Description": "Customize error message handling"
     },
