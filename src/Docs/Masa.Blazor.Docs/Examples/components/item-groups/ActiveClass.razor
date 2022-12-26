@@ -1,4 +1,4 @@
-﻿<MItemGroup ActiveClass="error">
+﻿<MItemGroup ActiveClass="error white--text">
     <MContainer>
         <MRow>
             @foreach (var n in Enumerable.Range(0, 3))
@@ -10,15 +10,12 @@
                     <MItem>
                         <MCard
                             Class="@($"d-flex align-center {context.ActiveClass}")"
-                            Dark
                             Height="200"
                             OnClick="context.Toggle"
                             RefBack="context.Ref">
-                            <ScrollYTransition>
-                                <ShowTransitionElement Value="context.Active" Class="text-h2 flex-grow-1 text-center">
-                                    Active
-                                </ShowTransitionElement>
-                            </ScrollYTransition>
+                            <div class="text-h3 flex-grow-1 text-center">
+                                @(context.Active ? "Selected" : "Click Me!")
+                            </div>
                         </MCard>
                     </MItem>
                 </MCol>
