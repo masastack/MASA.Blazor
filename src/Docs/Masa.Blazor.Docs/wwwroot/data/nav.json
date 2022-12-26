@@ -225,7 +225,7 @@
         "tag": "preset"
       },
       "tooltips",
-      "treeviews",
+      "treeview",
       "virtual-scroll"
     ]
   },

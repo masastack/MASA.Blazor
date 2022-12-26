@@ -10,7 +10,7 @@ related:
 
 ## Usage
 
-<modals-usage></modals-usage>
+<masa-example file="Examples.components.modals.Usage"></masa-example>
 
 ## Examples
 

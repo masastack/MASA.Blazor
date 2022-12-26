@@ -11,7 +11,7 @@ related:
 
 Similar to the **MWindow** component, **MSideGroup** lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.
 
-<slide-groups-usage></slide-groups-usage>
+<masa-example file="Examples.components.slide_groups.Usage"></masa-example>
 
 ## Examples
 

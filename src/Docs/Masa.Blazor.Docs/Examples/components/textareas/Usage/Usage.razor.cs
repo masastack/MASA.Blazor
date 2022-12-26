@@ -2,6 +2,12 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
+    public Usage() : base(typeof(AdvanceUsage))
+    {
+    }
+
+    protected override string ComponentName => nameof(MTextarea);
+
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
         { nameof(MTextarea.Outlined), false },
@@ -11,13 +17,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(MTextarea.PrependIcon), new CheckboxParameter("false",false) },
-        { nameof(MTextarea.Clearable), new CheckboxParameter("false",true) },
+        { nameof(MTextarea.PrependIcon), new CheckboxParameter("mdi-heart", false) },
+        { nameof(MTextarea.Clearable), new CheckboxParameter("false", true) },
     };
-
-    public Usage() : base(typeof(MTextarea))
-    {
-    }
 
     protected override Dictionary<string, object>? GenAdditionalParameters()
     {

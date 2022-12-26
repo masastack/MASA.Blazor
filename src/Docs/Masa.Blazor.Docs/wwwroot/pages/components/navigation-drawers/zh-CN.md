@@ -11,7 +11,7 @@ related:
 
 最简单形式的副标题显示带有默认主题的副标题。
 
-<navigation-drawers-usage></navigation-drawers-usage>
+<masa-example file="Examples.components.navigation_drawers.Usage"></masa-example>
 
 ## 注意
 

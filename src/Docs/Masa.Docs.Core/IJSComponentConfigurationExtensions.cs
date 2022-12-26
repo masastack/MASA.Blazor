@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Masa.Docs.Core;
 
@@ -55,7 +54,8 @@ public static class IJSComponentConfigurationExtensions
 
     private static string ToKebab(string name)
     {
-        var split = Regex.Split(name, @"(?<!^)(?=[A-Z])").Select(s => s.Trim('-'));
+        var split = GeneratedRegexes.SingleCamelCase().Split(name).Select(s => s.Trim('-'));
         return string.Join("-", split).ToLowerInvariant();
     }
+
 }

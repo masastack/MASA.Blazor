@@ -6,7 +6,6 @@
         {
             { nameof(MBanner.SingleLine), false },
             { nameof(MBanner.Sticky), false },
-            { nameof(MBanner.Dark), false },
         };
 
         protected override ParameterList<SliderParameter> GenSliderParameters() => new()

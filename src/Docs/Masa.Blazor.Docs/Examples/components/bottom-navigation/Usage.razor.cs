@@ -2,7 +2,18 @@
 {
     public class Usage : Masa.Blazor.Docs.Components.Usage
     {
-        // TODO: the text of UserTemplate need to insert to the example code. 
+        public Usage() : base(typeof(MBottomNavigation))
+        {
+        }
+
+        protected override ParameterList<bool> GenToggleParameters()
+        {
+            return new ParameterList<bool>()
+            {
+                { nameof(MBottomNavigation.Grow), false },
+                { nameof(MBottomNavigation.Shift), false }
+            };
+        }
 
         protected override RenderFragment GenChildContent() => builder =>
         {
@@ -25,9 +36,5 @@
                 builder.CloseRegion();
             });
         };
-
-        public Usage() : base(typeof(MBottomNavigation))
-        {
-        }
     }
 }

@@ -11,7 +11,7 @@ related:
 
 The simple table is a wrapper component around the `<table>` element.
 
-<simple-tables-usage></simple-tables-usage>
+<masa-example file="Examples.components.simple_tables.Usage"></masa-example>
 
 ## Examples
 

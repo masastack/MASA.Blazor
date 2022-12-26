@@ -12,7 +12,7 @@ related:
 Navigation navigation is mainly used to host links to pages in your application. It is common to pair drawers with
 the [MList](/blazor/components/lists) component using the **Nav** property.
 
-<navigation-drawers-usage></navigation-drawers-usage>
+<masa-example file="Examples.components.navigation_drawers.Usage"></masa-example>
 
 ## Caveats
 

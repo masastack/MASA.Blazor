@@ -16,6 +16,8 @@ public partial class Usage : NextTickComponentBase
     private bool _rendered;
     private StringNumber? _toggleValue;
 
+    private bool HasRightOptions => _checkboxParameters.Any() || _sliderParameters.Any() || _selectParameters.Any();
+
     public Usage(Type type)
     {
         _type = type;
@@ -86,7 +88,6 @@ public partial class Usage : NextTickComponentBase
         }
     }
 
-    protected virtual Type? UsageWrapperType => null;
     protected virtual string ComponentName => GetComponentName(_type);
     protected virtual ParameterList<bool> GenToggleParameters() => new();
     protected virtual ParameterList<CheckboxParameter> GenCheckboxParameters() => new();
@@ -117,6 +118,8 @@ public partial class Usage : NextTickComponentBase
     protected virtual IEnumerable<ParameterItem<SelectParameter>> ActiveSelectParameters =>
         _selectParameters.Where(item => item.Value.Value != null);
 
+    protected virtual string? ChildContentSourceCode => null;
+
     private string SourceCode
     {
         get
@@ -131,8 +134,10 @@ public partial class Usage : NextTickComponentBase
             var parameters = string.Join($"{Environment.NewLine}\t", parameterList);
 
             return parameterList.Count == 0
-                ? $"<{ComponentName}></{ComponentName}>"
-                : $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{ComponentName}>";
+                ? $"<{ComponentName}>{ChildContentSourceCode}</{ComponentName}>"
+                : ChildContentSourceCode is null
+                    ? $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}</{ComponentName}>"
+                    : $"<{ComponentName}{Environment.NewLine}\t{parameters}>{Environment.NewLine}\t{ChildContentSourceCode}{Environment.NewLine}</{ComponentName}>";
         }
     }
 

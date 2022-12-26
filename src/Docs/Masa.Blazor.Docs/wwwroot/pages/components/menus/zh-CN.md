@@ -11,7 +11,7 @@ related:
 
 请记住将激活菜单的元素放置在 **ActivatorContent** 中。
 
-<menus-usage></menus-usage>
+<masa-example file="Examples.components.menus.Usage"></masa-example>
 
 ## 示例
 

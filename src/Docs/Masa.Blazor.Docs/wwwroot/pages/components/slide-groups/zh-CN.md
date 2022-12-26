@@ -11,7 +11,7 @@ related:
 
 类似于 **MWindow** 组件，**MSideGroup** 允许项目根据需要占用尽可能多的空间，允许用户在提供的信息中水平移动。
 
-<slide-groups-usage></slide-groups-usage>
+<masa-example file="Examples.components.slide_groups.Usage"></masa-example>
 
 ## 示例
 

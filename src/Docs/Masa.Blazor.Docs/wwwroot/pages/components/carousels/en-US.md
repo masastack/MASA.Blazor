@@ -19,7 +19,7 @@ The **MCarousel** component expands upon MWindow by providing additional feature
 
 #### Custom delimiters
 
-Use any available icon as your carousel¡¯s slide delimiter.
+Use any available icon as your carouselâ€™s slide delimiter.
 
 <masa-example file="Examples.components.carousels.CustomDelimiters"></masa-example>
 

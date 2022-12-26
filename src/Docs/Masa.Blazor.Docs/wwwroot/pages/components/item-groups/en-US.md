@@ -11,7 +11,7 @@ related:
 
 The core usage of the **MItemGroup** is to create groups of anything that should be controlled by a `Value`.
 
-<item-groups-usage></item-groups-usage>
+<masa-example file="Examples.components.item_groups.Usage"></masa-example>
 
 ## Examples
 

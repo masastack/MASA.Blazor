@@ -11,7 +11,7 @@ related:
 
 最简单形式的副标题显示带有默认主题的副标题。
 
-<subheaders-usage></subheaders-usage>
+<masa-example file="Examples.components.subheaders.Usage"></masa-example>
 
 ## 示例
 

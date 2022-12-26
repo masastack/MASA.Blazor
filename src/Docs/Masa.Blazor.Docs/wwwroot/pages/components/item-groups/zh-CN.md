@@ -11,7 +11,7 @@ related:
 
 **MItemGroup** 的核心用法是创建由 `Value` 控制的任何对象的组。
 
-<item-groups-usage></item-groups-usage>
+<masa-example file="Examples.components.item_groups.Usage"></masa-example>
 
 ## 示例
 

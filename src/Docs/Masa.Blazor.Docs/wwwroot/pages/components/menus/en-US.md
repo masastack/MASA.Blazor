@@ -11,7 +11,7 @@ related:
 
 Remember to put the element that activates the menu in the **ActivatorContent**.
 
-<menus-usage></menus-usage>
+<masa-example file="Examples.components.menus.Usage"></masa-example>
 
 ## Examples
 

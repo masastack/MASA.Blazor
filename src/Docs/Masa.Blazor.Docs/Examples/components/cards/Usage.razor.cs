@@ -15,8 +15,8 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(MCard.Disabled), new CheckboxParameter("false", true) },
-        { nameof(MCard.Loading), new CheckboxParameter("false", true) },
+        { nameof(MCard.Disabled), new CheckboxParameter() },
+        { nameof(MCard.Loading), new CheckboxParameter() },
     };
 
     protected override ParameterList<SliderParameter> GenSliderParameters() => new()
@@ -24,19 +24,17 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MButton.Elevation), new SliderParameter(2, 0, 24) }
     };
 
-    private bool _sheet;
-
     protected override RenderFragment GenChildContent() => builder =>
     {
         builder.OpenComponent<MCardTitle>(0);
         builder.AddChildContent(1, "Card title");
         builder.CloseComponent();
 
-        builder.OpenComponent<MCardTitle>(2);
+        builder.OpenComponent<MCardSubtitle>(2);
         builder.AddChildContent(3, "Subtitle text");
         builder.CloseComponent();
 
-        builder.OpenComponent<MCardTitle>(4);
+        builder.OpenComponent<MCardText>(4);
         builder.AddChildContent(5, "Greyhound divisively hello coldly wonderfully marginally far upon excluding.");
         builder.CloseComponent();
 
@@ -70,8 +68,8 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         return parameter.Key switch
         {
-            nameof(MButton.Elevation) => (StringNumber)(double)parameter.Value,
-            nameof(MButton.Loading) => (StringBoolean)(bool)parameter.Value,
+            nameof(MCard.Elevation) => (StringNumber)(double)parameter.Value,
+            nameof(MCard.Loading) => (StringBoolean)(bool)parameter.Value,
             _ => parameter.Value
         };
     }

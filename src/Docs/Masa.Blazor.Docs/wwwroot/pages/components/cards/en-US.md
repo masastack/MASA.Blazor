@@ -7,9 +7,9 @@ related:
   - /styles-and-animations/text-and-typography
 ---
 
-## 使用
+## Usage
 
-卡中有4个基本组件。 `MCardTitle`, `MCardSubtitle`, `MCardText` 和 `MCardActions`
+A card has four basic components, `MCardTitle`, `MCardSubtitle`, `MCardText` 和 `MCardActions`.
 
 <cards-usage></cards-usage>
 

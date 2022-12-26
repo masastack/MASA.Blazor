@@ -15,7 +15,7 @@ related:
 
 **MTimeline** 以最简单的形式显示了一个垂直时间轴, 它至少应该包含一个 **MTimelineItem**。
 
-<timelines-usage></timelines-usage>
+<masa-example file="Examples.components.timelines.Usage"></masa-example>
 
 ## 示例
 

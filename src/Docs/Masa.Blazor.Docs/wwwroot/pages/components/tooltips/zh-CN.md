@@ -11,7 +11,7 @@ related:
 
 提示组件可以包装任何元素。
 
-<tooltips-usage></tooltips-usage>
+<masa-example file="Examples.components.tooltips.Usage"></masa-example>
 
 ## 注意
 
