@@ -51,7 +51,6 @@ packer:
       - ./src/BlazorComponent
   retry: 2
 
-
 docker:
   stage: docker
   tags:
