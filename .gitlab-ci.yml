@@ -4,7 +4,6 @@
 #     file: 'devops/sonar-scanner.yml'
 
 stages:
-#   - sonarqube
   - packer
   - docker
   - deploy-dev
@@ -13,7 +12,7 @@ stages:
   - docker-prd
   - deploy-prd
   - tag
-
+  
 variables:
   IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor:0.2.$CI_PIPELINE_ID
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
