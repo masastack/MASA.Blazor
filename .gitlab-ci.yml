@@ -19,6 +19,7 @@ variables:
 
 packer:
 #   image:  registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.201_wasm
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm
   tags:
     - 51-132
   stage: packer
@@ -33,7 +34,7 @@ packer:
     - git config --global http.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-    - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
+#     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
 #     - dotnet workload install wasm-tools
     - dotnet workload list  &&  dotnet build src/Masa.Blazor.NewDocs.sln
 #     - dotnet pack pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
