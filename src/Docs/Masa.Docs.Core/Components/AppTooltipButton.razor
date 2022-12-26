@@ -10,6 +10,7 @@
                      Href="@Href"
                      Target="@Target"
                      OnClick="OnClick"
+                     Class="@Class"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
                 <MIcon Class="emphasize1-color">@Icon</MIcon>
@@ -37,6 +38,9 @@
 
     [Parameter]
     public string? Target { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
 
     [Parameter]
     public EventCallback OnClick { get; set; }

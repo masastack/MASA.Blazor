@@ -20,7 +20,8 @@
     }
 
     <AppBarItems OnCultureChanged="OnCultureChanged"
-                 OnDotClick="OnDotClick">
+                 OnDotClick="OnDotClick" 
+                 OnSettingsClick="OnSettingsClick">
     </AppBarItems>
 </MAppBar>
 
@@ -40,5 +41,8 @@
 
     [Parameter]
     public bool HideAppBarNavIcon { get; set; }
+
+    [Parameter]
+    public EventCallback OnSettingsClick { get; set; }
 
 }

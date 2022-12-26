@@ -6,12 +6,14 @@
         <AppBar OnCultureChanged="@OnCultureChanged"
                 OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
                 OnDotClick="HandleOnDotClick"
+                OnSettingsClick="HandleSettingsClick"
                 HideAppBarNavIcon="@_hideAppBarNavIcon" />
 
         <CascadingValue Value="this" IsFixed>
             @Body
         </CascadingValue>
 
+        <Settings @bind-Value="_showSettings" />
         <MobileMenuList @bind-Value="_showMobileMenuList" />
     </CascadingValue>
 </MApp>
@@ -21,6 +23,7 @@
     private CultureInfo? _culture;
     private bool _showMobileMenuList;
     private bool _hideAppBarNavIcon;
+    private bool _showSettings;
 
     internal bool ShowDrawer;
 
@@ -41,6 +44,11 @@
     private void HandleOnDotClick()
     {
         _showMobileMenuList = !_showMobileMenuList;
+    }
+
+    private void HandleSettingsClick()
+    {
+        _showSettings = !_showSettings;
     }
 
     internal void HideAppBarNavIcon()
