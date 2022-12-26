@@ -11,6 +11,6 @@ ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 WORKDIR /app
 COPY . .
-RUN dotnet build src/Doc/Masa.Blazor.Doc.Server -c Release
+RUN dotnet build src/Docs/Masa.Docs.Server -c Release
 ENTRYPOINT ["dotnet","./src/Doc/Masa.Blazor.Doc.Server/bin/Release/net6.0/Masa.Blazor.Doc.Server.dll"]
 
