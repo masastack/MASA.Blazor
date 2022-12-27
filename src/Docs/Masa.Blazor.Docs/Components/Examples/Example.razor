@@ -16,11 +16,12 @@
                                       Path="@tooltip.Path"
                                       Href="@tooltip.href"
                                       Target="@(tooltip.href != null ? "_blank" : null)"
+                                      Class="mx-2"
                                       OnClick="() => tooltip.OnClick?.Invoke()" />
                 }
             </div>
 
-            <MDivider />
+            <MDivider Style="border-color: #E4E8F3" />
 
             <MSheet Class="pa-4" Rounded="true" Dark="_dark">
                 @if (_type is not null)
@@ -29,7 +30,7 @@
                 }
             </MSheet>
 
-            <MDivider />
+            <MDivider Style="border-color: #E4E8F3" />
 
             <ExpandTransition>
                 <ShowTransitionElement Value="_expand">
@@ -40,6 +41,7 @@
                                 <MButton Class="mr-2"
                                          IsActive="@context.Active"
                                          Text
+                                         Color="primary"
                                          OnClick="@context.Toggle">
                                     @item.Language
                                 </MButton>

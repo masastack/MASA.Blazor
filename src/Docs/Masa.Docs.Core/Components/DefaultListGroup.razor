@@ -9,7 +9,14 @@
         <NavItemContent Item="Item" />
     </ActivatorContent>
     <PrependIconContent>
-        <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item?.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
+        @if (string.IsNullOrWhiteSpace(Item?.Icon))
+        {
+            <MIcon>mdi-menu-down</MIcon>
+        }
+        else
+        {
+            <MIcon Color="primary">@Item.Icon</MIcon>
+        }
     </PrependIconContent>
     <ChildContent>
         @foreach (var child in Item?.Children ?? new())
