@@ -3,9 +3,9 @@
 title: Floating Action Buttons
 desc: "The **MButton** component can be used as a floating action button. This provides an application with a main point of action. Combined with the `MSpeedDial` component, you can create a diverse set of functions available for your users."
 related:
-  - /components/button
-  - /components/icons
-  - /styles-and-animations/transitions
+  - /blazor/components/button
+  - /blazor/components/icons
+  - /blazor/styles-and-animations/transitions
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Navigation drawers（导航抽屉）
 desc: "**MNavigationDrawer** 是用于导航应用程序的组件。 通常被包装在 **MCard** 元素中使用。"
 related:
-  - /components/lists
-  - /components/icons
-  - /getting-started/wireframes
+  - /blazor/components/lists
+  - /blazor/components/icons
+  - /blazor/getting-started/wireframes
 ---
 
 ## 使用

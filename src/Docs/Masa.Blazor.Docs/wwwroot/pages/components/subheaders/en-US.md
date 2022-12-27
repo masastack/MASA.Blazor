@@ -2,9 +2,9 @@
 title: Subheaders
 desc: "The `Subheader` component is used to separate sections of lists."
 related:
-  - /components/cards
-  - /components/grid-system
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/grid-system
+  - /blazor/components/lists
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Menus（菜单）
 desc: "**MMenu** 组件在激活它的元素的位置上展示一个菜单。"
 related:
-  - /components/dialogs
-  - /components/tooltips
-  - /styles-and-animations/transitions
+  - /blazor/components/dialogs
+  - /blazor/components/tooltips
+  - /blazor/styles-and-animations/transitions
 ---
 
 ## 使用

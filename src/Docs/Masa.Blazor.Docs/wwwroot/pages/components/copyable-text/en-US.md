@@ -2,9 +2,9 @@
 title: Copyable text
 desc: "Append a button that provides copy feature to the content."
 related:
-  - /components/icons
-  - /components/tooltips
-  - /components/block-text
+  - /blazor/components/icons
+  - /blazor/components/tooltips
+  - /blazor/components/block-text
 ---
 
 ## Usage

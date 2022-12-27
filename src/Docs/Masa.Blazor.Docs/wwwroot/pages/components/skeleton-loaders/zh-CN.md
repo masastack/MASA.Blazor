@@ -2,9 +2,9 @@
 title: Skeleton loaders（骨架装载器）
 desc: "**MSkeletonLoader** 组件是一个多功能工具，可以在一个项目中填充许多角色。 在其核心部分，该组件向用户提供了一个指示，指出某些东西即将出现但尚未可用。 有超过30个预先定义的选项，可以组合成定制的示例。"
 related:
-  - /components/cards
-  - /components/progress-circular
-  - /components/buttons
+  - /blazor/components/cards
+  - /blazor/components/progress-circular
+  - /blazor/components/buttons
 ---
 
 ## 使用

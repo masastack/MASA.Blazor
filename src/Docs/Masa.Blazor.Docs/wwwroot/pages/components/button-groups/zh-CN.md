@@ -2,9 +2,9 @@
 title: Button Groups（按钮组）
 desc: "**MButtonGroup** 组件是专门针对 **MButton** 构建的 **MItemGroup** 的简单包装器。"
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/selection-controls
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/selection-controls
 ---
 
 ## 使用

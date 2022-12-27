@@ -2,9 +2,9 @@
 title: Chip Groups
 desc: "The **MChipGroup** supercharges the **MChip** component by providing groupable functionality. It is used for creating groups of selections using chips."
 related:
-  - /components/chips
-  - /components/slide-groups
-  - /components/item-groups
+  - /blazor/components/chips
+  - /blazor/components/slide-groups
+  - /blazor/components/item-groups
 ---
 
 ## Usage

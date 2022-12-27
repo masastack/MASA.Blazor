@@ -2,9 +2,9 @@
 title: Not Grouped
 tag: preset
 related:
-  - /components/buttons
-  - /components/text-fields
-  - /components/lists
+  - /blazor/components/buttons
+  - /blazor/components/text-fields
+  - /blazor/components/lists
 ---
 
 ## Examples

@@ -2,9 +2,9 @@
 title: Chip Groups（纸片组）
 desc: "**MChipGroup** 通过提供可分组的功能来增强 **MChip** 组件。 它使用纸片来创建选择组。"
 related:
-  - /components/chips
-  - /components/slide-groups
-  - /components/item-groups
+  - /blazor/components/chips
+  - /blazor/components/slide-groups
+  - /blazor/components/item-groups
 ---
 
 ## 使用

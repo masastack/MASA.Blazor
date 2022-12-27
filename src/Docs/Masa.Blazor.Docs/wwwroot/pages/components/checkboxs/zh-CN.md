@@ -2,9 +2,9 @@
 title: Checkboxes（复选框）
 desc: "**MCheckbox** 组件使用户能够在两个不同的值之间进行选择。它们非常类似于开关，可以用在复杂的表单和检查表中。"
 related:
-  - /components/switches
-  - /components/forms
-  - /components/text-fields
+  - /blazor/components/switches
+  - /blazor/components/forms
+  - /blazor/components/text-fields
 ---
 
 ## 使用

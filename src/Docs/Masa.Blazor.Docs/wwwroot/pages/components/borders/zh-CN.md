@@ -2,9 +2,9 @@
 title: Borders (边框)
 desc: "边框组件可以给任何内容添加一个额外的边框。"
 related:
-  - /components/cards
-  - /components/lists
-  - /components/radio
+  - /blazor/components/cards
+  - /blazor/components/lists
+  - /blazor/components/radio
 ---
 
 ## 示例

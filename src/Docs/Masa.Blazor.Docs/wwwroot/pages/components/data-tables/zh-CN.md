@@ -2,9 +2,9 @@
 title: Data tables（数据表格）
 desc: "`MDataTable` 组件用于显示表格数据。 功能包括排序，搜索，分页，内容编辑和行选择。"
 related:
-  - /components/data-iterators
-  - /components/simple-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/simple-tables
+  - /blazor/components/lists
 ---
 
 ## 使用

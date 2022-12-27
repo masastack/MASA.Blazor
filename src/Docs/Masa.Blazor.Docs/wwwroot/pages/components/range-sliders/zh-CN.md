@@ -2,9 +2,9 @@
 title: Range sliders（范围滑块）
 desc: "**MRangeSlider** 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。"
 related:
-  - /components/forms
-  - /components/selects
-  - /components/sliders
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/sliders
 ---
 
 ## 使用

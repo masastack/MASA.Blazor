@@ -2,9 +2,9 @@
 title: Mobile pickers
 desc: "A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection."
 related:
-  - /components/mobile-picker-views
-  - /components/mobile-date-time-views
-  - /components/mobile-time-pickers
+  - /blazor/components/mobile-picker-views
+  - /blazor/components/mobile-date-time-views
+  - /blazor/components/mobile-time-pickers
 ---
 
 ## Examples

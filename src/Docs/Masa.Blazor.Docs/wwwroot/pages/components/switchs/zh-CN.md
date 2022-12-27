@@ -2,9 +2,9 @@
 title: Switches（开关）
 desc: "**MSwitch** 组件使用户能够在两个不同的值之间进行选择。 它们非常类似于一个切换或者开关，虽然视觉上不同于一个复选框。"
 related:
-  - /components/checkboxes
-  - /components/forms
-  - /components/radio
+  - /blazor/components/checkboxes
+  - /blazor/components/forms
+  - /blazor/components/radio
 ---
 
 ## 使用

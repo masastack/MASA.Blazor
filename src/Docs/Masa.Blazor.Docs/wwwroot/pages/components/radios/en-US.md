@@ -2,9 +2,9 @@
 title: Radio
 desc: "The **MRadio** component is a simple radio button. When combined with the **MRadioGroup** component you can provide groupable functionality to allow users to select from a predefined set of options."
 related:
-  - /components/button-groups
-  - /components/forms
-  - /components/checkboxes
+  - /blazor/components/button-groups
+  - /blazor/components/forms
+  - /blazor/components/checkboxes
 ---
 
 ## Usage

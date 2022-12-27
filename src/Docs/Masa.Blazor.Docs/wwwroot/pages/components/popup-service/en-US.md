@@ -2,9 +2,9 @@
 title: Popup service
 tag: service
 related:
-  - /components/dialogs
-  - /components/buttons
-  - /components/snackbars
+  - /blazor/components/dialogs
+  - /blazor/components/buttons
+  - /blazor/components/snackbars
 ---
 
 ## Examples

@@ -2,9 +2,9 @@
 title: Dialogs（对话框）
 desc: "**Dialog** 组件通知用户有关特定任务，且可能包含关键信息、需要决策或涉及多个任务。减少使用对话框的频率，因为它们具有干扰性。"
 related:
-  - /components/buttons
-  - /components/cards
-  - /components/menus
+  - /blazor/components/buttons
+  - /blazor/components/cards
+  - /blazor/components/menus
 ---
 
 ## 使用

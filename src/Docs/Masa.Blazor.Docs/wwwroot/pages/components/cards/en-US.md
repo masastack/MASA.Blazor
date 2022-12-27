@@ -2,9 +2,9 @@
 title: Cards
 desc: "The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use MASA Blazor functional component option for faster rendering and serve as markup sugar to make building easier."
 related:
-  - /components/buttons
-  - /components/images
-  - /styles-and-animations/text-and-typography
+  - /blazor/components/buttons
+  - /blazor/components/images
+  - /blazor/styles-and-animations/text-and-typography
 ---
 
 ## Usage

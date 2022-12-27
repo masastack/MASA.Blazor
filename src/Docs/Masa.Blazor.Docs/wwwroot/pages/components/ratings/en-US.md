@@ -2,9 +2,9 @@
 title: Ratings
 desc: "Semantic vector graphics."
 related:
-  - /components/cards
-  - /components/icons
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/icons
+  - /blazor/components/lists
 ---
 
 ## Usage

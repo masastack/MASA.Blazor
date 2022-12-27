@@ -2,9 +2,9 @@
 title: Range sliders
 desc: "The **MRangeSlider**  component is a better visualization of the number input. It is used for gathering numerical user data."
 related:
-  - /components/forms
-  - /components/selects
-  - /components/sliders
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/sliders
 ---
 
 ## Usage

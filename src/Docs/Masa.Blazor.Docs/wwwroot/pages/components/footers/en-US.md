@@ -2,9 +2,9 @@
 title: Footers
 desc: "The **MFooter** component is used to display public information that users may want to access from any page in the website."
 related:
-  - /components/grid-system
-  - /components/buttons
-  - /components/toolbars
+  - /blazor/components/grid-system
+  - /blazor/components/buttons
+  - /blazor/components/toolbars
 ---
 
 ## Usage

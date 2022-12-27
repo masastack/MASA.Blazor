@@ -2,9 +2,9 @@
 title: Selects
 desc: "The **Select** component is used for collecting user provided information from a list of options."
 related:
-  - /components/autocompletes
-  - /components/combobox
-  - /components/forms
+  - /blazor/components/autocompletes
+  - /blazor/components/combobox
+  - /blazor/components/forms
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Mobile pickers（移动端选择器）
 desc: "专为移动设备设计的选择器。提供多个选项集合供用户选择，支持单列选择、多列选择和级联选择。"
 related:
-  - /components/mobile-picker-views
-  - /components/mobile-date-time-views
-  - /components/mobile-time-pickers
+  - /blazor/components/mobile-picker-views
+  - /blazor/components/mobile-date-time-views
+  - /blazor/components/mobile-time-pickers
 ---
 
 

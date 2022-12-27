@@ -2,9 +2,9 @@
 title: Mobile cascader（移动端级联）
 desc: "为移动端设计的级联选择器。"
 related:
-  - /components/lists
-  - /components/tabs
-  - /components/buttons
+  - /blazor/components/lists
+  - /blazor/components/tabs
+  - /blazor/components/buttons
 ---
 
 ## 示例

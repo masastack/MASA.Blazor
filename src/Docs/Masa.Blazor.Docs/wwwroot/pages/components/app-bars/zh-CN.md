@@ -2,9 +2,9 @@
 title: App bars（应用栏）
 desc: "**MAppBar** 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。**MAppBar** 和 **MNavigationDrawer** 结合在一起为应用程序提供站点导航。"
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/toolbars
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/toolbars
 ---
 
 ## 使用

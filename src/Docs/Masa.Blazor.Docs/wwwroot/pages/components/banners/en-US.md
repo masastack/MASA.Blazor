@@ -2,9 +2,9 @@
 title: Banners
 desc: "The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions."
 related:
-  - /components/alerts
-  - /components/icons
-  - /components/snackbars
+  - /blazor/components/alerts
+  - /blazor/components/icons
+  - /blazor/components/snackbars
 ---
 
 ## Usage

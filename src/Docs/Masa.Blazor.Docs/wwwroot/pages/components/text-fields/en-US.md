@@ -2,9 +2,9 @@
 title: Text fields
 desc: "Text fields components are used for collecting user provided information."
 related:
-  - /components/forms
-  - /components/selects
-  - /components/textareas
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/textareas
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Dialogs
 desc: "The **Dialog** component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive."
 related:
-  - /components/buttons
-  - /components/cards
-  - /components/menus
+  - /blazor/components/buttons
+  - /blazor/components/cards
+  - /blazor/components/menus
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Mobile picker views（移动端选择视图）
 desc: "专为移动设备设计的选择视图。提供多个选项集合供用户选择，支持单列选择、多列选择和级联选择。"
 related:
-  - /components/mobile-pickers
-  - /components/mobile-date-time-pickers
-  - /components/mobile-time-pickers
+  - /blazor/components/mobile-pickers
+  - /blazor/components/mobile-date-time-pickers
+  - /blazor/components/mobile-time-pickers
 ---
 
 **MMobilePickerView** is the content area of [PMobilePicker](/blazor/components/mobile-pickers).

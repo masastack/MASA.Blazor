@@ -2,9 +2,9 @@
 title: Borders
 desc: "The Border component can add an extra border to anything."
 related:
-  - /components/cards
-  - /components/lists
-  - /components/radio
+  - /blazor/components/cards
+  - /blazor/components/lists
+  - /blazor/components/radio
 ---
 
 ## Examples

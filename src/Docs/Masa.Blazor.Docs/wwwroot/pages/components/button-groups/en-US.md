@@ -2,9 +2,9 @@
 title: Button Groups
 desc: "The **MButtonGroup** component is a simple wrapper for **MItemGroup** built specifically to work with **MButton**."
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/selection-controls
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/selection-controls
 ---
 
 ## Usage

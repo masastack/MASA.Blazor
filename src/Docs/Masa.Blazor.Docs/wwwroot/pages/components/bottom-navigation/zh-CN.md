@@ -2,9 +2,9 @@
 title: Bottom navigation (底部导航栏)
 desc: "**MBottomNavigation** 组件是侧边栏的替代品，它主要用于移动应用程序。"
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/tabs
 ---
 
 ## 使用

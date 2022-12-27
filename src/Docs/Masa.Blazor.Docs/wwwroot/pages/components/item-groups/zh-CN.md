@@ -2,9 +2,9 @@
 title: Item Groups（项目组）
 desc: "**MItemGroup** 提供从任何组件中创建一组可选项的功能。 这是 **MTabs** 和 **Mcarousel** 等组件的基本功能。"
 related:
-  - /components/button-groups
-  - /components/carousels
-  - /components/tabs
+  - /blazor/components/button-groups
+  - /blazor/components/carousels
+  - /blazor/components/tabs
 ---
 
 ## 使用

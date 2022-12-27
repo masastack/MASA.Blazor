@@ -2,9 +2,9 @@
 title: Sliders
 desc: "The **MSlider** component is a better visualization of the number input. It is used for gathering numerical user data."
 related:
-  - /components/forms
-  - /components/selects
-  - /components/range-sliders
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/range-sliders
 ---
 
 ## Usage

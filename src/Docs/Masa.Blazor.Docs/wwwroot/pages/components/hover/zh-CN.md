@@ -2,9 +2,9 @@
 title: Hover（悬停）
 desc: "**MHover** 组件提供了一个干净的界面用来处理任何组件的悬停状态。"
 related:
-  - /components/cards
-  - /components/images
-  - /components/tooltips
+  - /blazor/components/cards
+  - /blazor/components/images
+  - /blazor/components/tooltips
 ---
 
 ## 使用

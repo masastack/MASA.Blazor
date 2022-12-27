@@ -2,9 +2,9 @@
 title: Data iterators（数据迭代器）
 desc: "**MDataIterator** 组件用于显示数据，并且与 **MDataTable** 组件共享其大部分功能。 功能包括排序、搜索、分页和选择。"
 related:
-  - /components/data-tables
-  - /components/simple-tables
-  - /components/toolbars
+  - /blazor/components/data-tables
+  - /blazor/components/simple-tables
+  - /blazor/components/toolbars
 ---
 
 ## 使用

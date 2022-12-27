@@ -2,9 +2,9 @@
 title: Badges
 desc: "The **MBadge** component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons."
 related:
-- /components/avatars
-- /components/icons
-- /components/toolbars
+  - /blazor/components/avatars
+  - /blazor/components/icons
+  - /blazor/components/toolbars
 ---
 
 ## Usage

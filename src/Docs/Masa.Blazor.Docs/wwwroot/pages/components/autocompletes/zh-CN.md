@@ -2,9 +2,9 @@
 title: Autocompletes（自动补全）
 desc: "**MAutocomplete** 组件提供简单且灵活的自动补全功能 且支持查找大规模数据甚至是从API请求的动态数据"
 related:
-  - /components/combobox
-  - /components/forms
-  - /components/selects
+  - /blazor/components/combobox
+  - /blazor/components/forms
+  - /blazor/components/selects
 ---
 
 ## 使用

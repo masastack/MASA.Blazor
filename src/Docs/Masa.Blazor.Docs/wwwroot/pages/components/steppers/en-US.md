@@ -2,9 +2,9 @@
 title: Steppers
 desc: "The **MStepper** component displays progress through numbered steps."
 related:
-  - /components/tabs
-  - /components/buttons
-  - /components/windows
+  - /blazor/components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/windows
 ---
 
 ## Usage

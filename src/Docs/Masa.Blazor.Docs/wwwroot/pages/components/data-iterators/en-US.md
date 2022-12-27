@@ -2,9 +2,9 @@
 title: Data iterators
 desc: "The **MDataIterator** component is used for displaying data, and shares a majority of its functionality with the **MDataTable** component. Features include sorting, searching, pagination, and selection."
 related:
-  - /components/data-tables
-  - /components/simple-tables
-  - /components/toolbars
+  - /blazor/components/data-tables
+  - /blazor/components/simple-tables
+  - /blazor/components/toolbars
 ---
 
 ## Usage

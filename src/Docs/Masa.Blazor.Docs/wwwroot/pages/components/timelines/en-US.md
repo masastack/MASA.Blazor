@@ -2,9 +2,9 @@
 title: Timeline
 desc: "**MTimeline** is very useful for displaying chronological information."
 related:
-  - /components/cards
-  - /components/icons
-  - /components/grid-system
+  - /blazor/components/cards
+  - /blazor/components/icons
+  - /blazor/components/grid-system
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Expansion panels（扩展面板）
 desc: "**MExpansionPanel** 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 `Multiple` 属性后，扩展面板可以保持打开，直到显式地关闭。"
 related:
-  - /components/cards
-  - /components/data-tables
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/data-tables
+  - /blazor/components/lists
 ---
 
 ## 使用

@@ -2,9 +2,9 @@
 title: Date pickers（日期选择器）
 desc: "**MDatePicker** 是一个功能齐全的日期选择组件, 它让用户选择一个日期或日期范围。"
 related:
-  - /components/buttons
-  - /components/text-fields
-  - /components/time-pickers
+  - /blazor/components/buttons
+  - /blazor/components/text-fields
+  - /blazor/components/time-pickers
 ---
 
 ## 使用

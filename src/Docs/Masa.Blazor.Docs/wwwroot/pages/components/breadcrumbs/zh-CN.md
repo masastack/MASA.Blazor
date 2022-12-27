@@ -2,9 +2,9 @@
 title: Breadcrumbs（面包屑导航）
 desc: "**MBreadcrumbs** 组件适用于页面层级导航"
 related:
-  - /components/buttons
-  - /components/navigation-drawers
-  - /components/icons
+  - /blazor/components/buttons
+  - /blazor/components/navigation-drawers
+  - /blazor/components/icons
 ---
 
 ## 使用

@@ -2,9 +2,9 @@
 title: Slide Groups
 desc: "The **MSlideGroup** component is used to display pseudo paginated information. It uses [MItemGroup](/blazor/components/item-groups) at its core and provides a baseline for components such as [MTabs](/blazor/components/tabs) and [MChipGroup](/blazor/components/chip-groups)."
 related:
-  - /components/icons
-  - /components/carousels
-  - /components/tabs
+  - /blazor/components/icons
+  - /blazor/components/carousels
+  - /blazor/components/tabs
 ---
 
 ## Usage

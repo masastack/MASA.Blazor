@@ -2,9 +2,9 @@
 title: Subheaders（副标题）
 desc: "用于分隔列表的各个部分。"
 related:
-  - /components/cards
-  - /components/grid-system
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/grid-system
+  - /blazor/components/lists
 ---
 
 ## 使用

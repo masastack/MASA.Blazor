@@ -2,9 +2,9 @@
 title: Footers（页脚）
 desc: "**MFooter** 组件用于显示用户可能想要从网站中的任何页面都能访问到的公共信息。"
 related:
-  - /components/grid-system
-  - /components/buttons
-  - /components/toolbars
+  - /blazor/components/grid-system
+  - /blazor/components/buttons
+  - /blazor/components/toolbars
 ---
 
 ## 使用

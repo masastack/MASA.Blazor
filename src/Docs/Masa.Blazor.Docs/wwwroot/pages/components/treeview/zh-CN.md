@@ -2,9 +2,9 @@
 title: Treeview（树形视图）
 desc: "MTreeview 组件适用于显示大量嵌套数据。"
 related:
-  - /components/lists
-  - /components/list-item-groups
-  - /components/timelines
+  - /blazor/components/lists
+  - /blazor/components/list-item-groups
+  - /blazor/components/timelines
 ---
 
 ## 使用

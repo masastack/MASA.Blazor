@@ -2,9 +2,9 @@
 title: Hover
 desc: "The **MHover** component provides a clean interface for handling the hover state of any component."
 related:
-  - /components/cards
-  - /components/images
-  - /components/tooltips
+  - /blazor/components/cards
+  - /blazor/components/images
+  - /blazor/components/tooltips
 ---
 
 ## Usage

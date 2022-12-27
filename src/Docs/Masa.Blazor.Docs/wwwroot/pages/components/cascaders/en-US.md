@@ -1,9 +1,9 @@
 ---
 title: Cascaders
 related:
-- /components/treeview
-- /components/forms
-- /components/selects
+  - /blazor/components/treeview
+  - /blazor/components/forms
+  - /blazor/components/selects
 ---
 
 ## Usage

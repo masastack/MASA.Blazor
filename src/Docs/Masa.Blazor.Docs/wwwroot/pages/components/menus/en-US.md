@@ -2,9 +2,9 @@
 title: Menus
 desc: "The **MMenu** component shows a menu at the position of the element used to activate it."
 related:
-  - /components/dialogs
-  - /components/tooltips
-  - /styles-and-animations/transitions
+  - /blazor/components/dialogs
+  - /blazor/components/tooltips
+  - /blazor/styles-and-animations/transitions
 ---
 
 ## Usage

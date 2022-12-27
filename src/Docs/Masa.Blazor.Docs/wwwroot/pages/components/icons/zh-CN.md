@@ -2,9 +2,9 @@
 title: Icons（图标）
 desc: "**MIcon** 组件提供了大量字形来为应用程序的各个方面提供上下文。 对有关所有可用图标的列表，请访问官方[Material Design 图标](https://materialdesignicons.com/) 页面。如果要使用这些图标，只需使用 **mdi-** 前缀再加上图标名称即可。"
 related:
-  - /features/icon-fonts
-  - /components/buttons
-  - /components/cards
+  - /blazor/features/icon-fonts
+  - /blazor/components/buttons
+  - /blazor/components/cards
 ---
 
 ## 使用

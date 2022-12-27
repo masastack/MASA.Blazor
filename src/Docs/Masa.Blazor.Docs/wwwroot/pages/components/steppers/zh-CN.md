@@ -2,9 +2,9 @@
 title: Steppers（步骤条）
 desc: "**MStepper** 组件通过数字步骤显示进度。"
 related:
-  - /components/tabs
-  - /components/buttons
-  - /components/windows
+  - /blazor/components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/windows
 ---
 
 ## 使用

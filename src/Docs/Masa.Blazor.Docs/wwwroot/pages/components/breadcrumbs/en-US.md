@@ -2,9 +2,9 @@
 title: Breadcrumbs
 desc: "Breadcrumbs component is suitable for page-level navigation."
 related:
-  - /components/buttons
-  - /components/navigation-drawers
-  - /components/icons
+  - /blazor/components/buttons
+  - /blazor/components/navigation-drawers
+  - /blazor/components/icons
 ---
 
 ## Usage

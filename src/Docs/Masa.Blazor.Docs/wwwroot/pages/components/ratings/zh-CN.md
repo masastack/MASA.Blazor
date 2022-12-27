@@ -2,9 +2,9 @@
 title: Ratings（评级）
 desc: "评级组件是构建用户小部件的一个特殊但至关重要的部分。 通过评级收集用户反馈是一种简单的分析工具，可以为您的产品或应用程序提供大量反馈。"
 related:
-  - /components/cards
-  - /components/icons
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/icons
+  - /blazor/components/lists
 ---
 
 ## 使用

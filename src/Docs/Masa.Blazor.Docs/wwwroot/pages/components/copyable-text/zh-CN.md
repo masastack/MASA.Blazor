@@ -2,9 +2,9 @@
 title: Copyable text（可复制的文本）
 desc: "在文本后提供可以复制内容的图标按钮。"
 related:
-  - /components/icons
-  - /components/tooltips
-  - /components/block-text
+  - /blazor/components/icons
+  - /blazor/components/tooltips
+  - /blazor/components/block-text
 ---
 
 ## 使用

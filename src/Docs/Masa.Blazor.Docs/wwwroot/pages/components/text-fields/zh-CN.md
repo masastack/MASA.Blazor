@@ -2,9 +2,9 @@
 title: Text fields（文本框）
 desc: "文本框组件用于收集用户提供的信息。"
 related:
-  - /components/forms
-  - /components/selects
-  - /components/textareas
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/textareas
 ---
 
 ## 使用

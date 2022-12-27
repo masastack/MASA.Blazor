@@ -2,9 +2,9 @@
 title: Checkboxes
 desc: "The **MCheckbox** component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists."
 related:
-  - /components/switches
-  - /components/forms
-  - /components/text-fields
+  - /blazor/components/switches
+  - /blazor/components/forms
+  - /blazor/components/text-fields
 ---
 
 ## Usage

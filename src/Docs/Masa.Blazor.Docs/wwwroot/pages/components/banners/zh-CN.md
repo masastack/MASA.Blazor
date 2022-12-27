@@ -2,9 +2,9 @@
 title: Banners（横幅）
 desc: "**MBanner** 组件被用来作为向用户发送1-2动作的中间段描述信息。 它有两个变量单行和多行（默认展示多行）。 这些图标可以与您的消息和操作一起使用。" 
 related:
-  - /components/alerts
-  - /components/icons
-  - /components/snackbars
+  - /blazor/components/alerts
+  - /blazor/components/icons
+  - /blazor/components/snackbars
 ---
 
 ## 使用
