@@ -34,6 +34,7 @@
   "props": "Props",
   "contents": "Contents",
   "events": "Events",
+  "methods": "Methods",
   "tag": {
     "preset": "preset",
     "service": "service",

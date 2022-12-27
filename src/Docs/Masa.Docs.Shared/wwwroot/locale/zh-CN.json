@@ -33,6 +33,7 @@
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
+  "methods": "方法",
   "tag": {
     "preset": "预置",
     "service": "服务",
