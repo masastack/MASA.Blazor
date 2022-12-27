@@ -2,9 +2,9 @@
 title: Toolbars
 desc: "The **MToolbar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.The toolbar component works great in conjunction with [MNavigationDrawer](/blazor/components/navigation-drawers) and [MCard](/blazor/components/cards)."
 related:
-  - /components/buttons
-  - /components/footers
-  - /components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/footers
+  - /blazor/components/tabs
 ---
 
 ## Usage

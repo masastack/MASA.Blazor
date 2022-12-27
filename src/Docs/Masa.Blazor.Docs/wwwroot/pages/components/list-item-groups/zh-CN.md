@@ -2,9 +2,9 @@
 title: List Item Groups（列表项目组）
 desc: "**MListItemGroup** 提供创建一组可选择的 **MListItem** 的能力。**MListItemGroup** 组件利用其核心的 **MItemGroup** 来为交互式列表提供一个简洁的接口。"
 related:
-  - /components/lists
-  - /components/item-groups
-  - /components/cards
+  - /blazor/components/lists
+  - /blazor/components/item-groups
+  - /blazor/components/cards
 ---
 
 ## 使用

@@ -2,9 +2,9 @@
 title: Sliders（滑块）
 desc: "**MSlider** 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。"
 related:
-  - /components/forms
-  - /components/selects
-  - /components/range-sliders
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/range-sliders
 ---
 
 ## 使用

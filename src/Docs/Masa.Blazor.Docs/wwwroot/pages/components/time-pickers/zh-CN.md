@@ -2,9 +2,9 @@
 title: Time pickers（时间选择器）
 desc: "**MTimePicker** 是独立的组件，可以用于许多现有的 MASA Blazor 组件。 它为用户提供了选择时间的视觉表现。"
 related:
-  - /components/buttons
-  - /components/date-pickers
-  - /components/text-fields
+  - /blazor/components/buttons
+  - /blazor/components/date-pickers
+  - /blazor/components/text-fields
 ---
 
 ## 使用

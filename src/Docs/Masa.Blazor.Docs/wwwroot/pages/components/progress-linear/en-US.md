@@ -2,9 +2,9 @@
 title: Progress linear
 desc: "The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading."
 related:
-  - /components/cards
-  - /components/progress-circular
-  - /components/lists
+  - /blazor/components/cards
+  - /blazor/components/progress-circular
+  - /blazor/components/lists
 ---
 
 ## Usage

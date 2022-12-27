@@ -2,9 +2,9 @@
 title: Mobile picker views
 desc: "A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection."
 related:
-  - /components/mobile-pickers
-  - /components/mobile-date-time-pickers
-  - /components/mobile-time-pickers
+  - /blazor/components/mobile-pickers
+  - /blazor/components/mobile-date-time-pickers
+  - /blazor/components/mobile-time-pickers
 ---
 
 **MMobilePickerView** is the content area of [PMobilePicker](/blazor/components/mobile-pickers).

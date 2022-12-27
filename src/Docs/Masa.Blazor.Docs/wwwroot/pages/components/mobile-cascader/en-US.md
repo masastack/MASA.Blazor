@@ -2,9 +2,9 @@
 title: Mobile cascader
 desc: "A cascade selector designed for the mobile."
 related:
-  - /components/lists
-  - /components/tabs
-  - /components/buttons
+  - /blazor/components/lists
+  - /blazor/components/tabs
+  - /blazor/components/buttons
 ---
 
 ## Examples

@@ -2,9 +2,9 @@
 title: Block Text（文本块）
 desc: "将相同类型的两个数据并排显示。"
 related:
-  - /components/chips
-  - /components/copyable-text
-  - /components/ellipsis-text
+  - /blazor/components/chips
+  - /blazor/components/copyable-text
+  - /blazor/components/ellipsis-text
 ---
 
 ## 使用

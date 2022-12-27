@@ -2,8 +2,8 @@
 title: Image Captcha
 tag: preset
 related:
-  - /components/text-fields
-  - /components/image
+  - /blazor/components/text-fields
+  - /blazor/components/image
 ---
 
 ## Usage

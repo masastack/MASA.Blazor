@@ -2,9 +2,9 @@
 title: App bars
 desc: "**MAppBar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation."
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/toolbars
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/toolbars
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Tooltip
 desc: "The **MTooltip** component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `@bind-Value`. When activated, tooltips display a text label identifying an element, such as a description of its function."
 related:
-  - /components/badges
-  - /components/icons
-  - /components/menus
+  - /blazor/components/badges
+  - /blazor/components/icons
+  - /blazor/components/menus
 ---
 
 ## Usage

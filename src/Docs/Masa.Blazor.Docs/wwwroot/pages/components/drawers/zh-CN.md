@@ -2,9 +2,9 @@
 title: Drawers（抽屉）
 desc: ""
 related:
-  - /components/dialogs
-  - /components/buttons
-  - /components/icons
+  - /blazor/components/dialogs
+  - /blazor/components/buttons
+  - /blazor/components/icons
 ---
 
 ## 使用

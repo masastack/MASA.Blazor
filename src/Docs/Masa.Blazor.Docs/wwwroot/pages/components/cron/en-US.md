@@ -2,9 +2,9 @@
 title: Cron Expression Generator
 desc: ""
 related:
-  - /components/text-fields
-  - /components/select
-  - /components/radio-button
+  - /blazor/components/text-fields
+  - /blazor/components/select
+  - /blazor/components/radio-button
 ---
 
 ## Usage

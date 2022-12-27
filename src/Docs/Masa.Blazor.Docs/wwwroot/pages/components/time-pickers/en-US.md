@@ -2,9 +2,9 @@
 title: Time pickers
 desc: "The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time."
 related:
-  - /components/buttons
-  - /components/date-pickers
-  - /components/text-fields
+  - /blazor/components/buttons
+  - /blazor/components/date-pickers
+  - /blazor/components/text-fields
 ---
 
 ## Usage

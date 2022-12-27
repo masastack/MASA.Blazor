@@ -2,9 +2,9 @@
 title: Carousels（轮播）
 desc: "**MCarousel** 组件用于在循环计时器上显示大量可视内容。"
 related:
-  - /components/parallax
-  - /components/images
-  - /components/windows
+  - /blazor/components/parallax
+  - /blazor/components/images
+  - /blazor/components/windows
 ---
 
 ## 使用

@@ -2,9 +2,9 @@
 title: Block Text
 desc: "Display two data of the same type side by side."
 related:
-  - /components/chips
-  - /components/copyable-text
-  - /components/ellipsis-text
+  - /blazor/components/chips
+  - /blazor/components/copyable-text
+  - /blazor/components/ellipsis-text
 ---
 
 ## Usage

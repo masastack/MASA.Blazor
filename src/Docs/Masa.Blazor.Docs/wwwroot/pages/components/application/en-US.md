@@ -2,9 +2,9 @@
 title: Application
 desc: "In MASA Blazor, the MApp component and the app prop on components like **MNavigationDrawer**, **MAppBar**, **MFooter** and more, help bootstrap your application with the proper sizing around <MMain> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The **MApp** component is REQUIRED for all applications. This is the mount point for many of MASA Blazor's components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. **MApp** should only be rendered within your application ONCE."
 related:
-  - /features/theme
-  - /components/app-bars
-  - /components/navigation-drawers
+  - /blazor/features/theme
+  - /blazor/components/app-bars
+  - /blazor/components/navigation-drawers
 ---
 
 <app-alert type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. This component is required for ensuring 

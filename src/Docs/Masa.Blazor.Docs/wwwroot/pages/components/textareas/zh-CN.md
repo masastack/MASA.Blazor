@@ -2,9 +2,9 @@
 title: Textareas（多行文本框）
 desc: "多行文本框组件用于收集大量文本数据。"
 related:
-  - /components/forms
-  - /components/selects
-  - /components/text-fields
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/text-fields
 ---
 
 ## 使用

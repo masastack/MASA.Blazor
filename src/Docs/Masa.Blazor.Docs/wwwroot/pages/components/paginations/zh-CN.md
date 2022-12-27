@@ -2,9 +2,9 @@
 title: Pagination（分页）
 desc: "**MPagination** 组件用于分离长数据集，以便用户消化信息。 根据提供的数据量，分页组件将自动缩放。 要维护当前页面，只需提供 Value 属性。"
 related:
-  - /components/data-iterators
-  - /components/data-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/data-tables
+  - /blazor/components/lists
 ---
 
 ## 使用

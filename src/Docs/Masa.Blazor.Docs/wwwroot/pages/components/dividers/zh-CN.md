@@ -2,9 +2,9 @@
 title: Dividers（分隔线）
 desc: "**MDivider** 组件用于分隔列表或布局的各个部分。"
 related:
-  - /components/lists
-  - /components/navigation-drawers
-  - /components/toolbars
+  - /blazor/components/lists
+  - /blazor/components/navigation-drawers
+  - /blazor/components/toolbars
 ---
 
 ## 使用

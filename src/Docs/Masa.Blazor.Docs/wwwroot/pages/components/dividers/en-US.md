@@ -2,9 +2,9 @@
 title: Dividers
 desc: "The MDivider component is used to separate sections of lists or layouts."
 related:
-  - /components/lists
-  - /components/navigation-drawers
-  - /components/toolbars
+  - /blazor/components/lists
+  - /blazor/components/navigation-drawers
+  - /blazor/components/toolbars
 ---
 
 ## Usage

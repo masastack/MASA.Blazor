@@ -2,9 +2,9 @@
 title: Buttons（按钮）
 desc: "**MButton**（按钮）组件采 Material Design 设计主题风格，并增加众多的配置选项替换了标准的 html 按钮。 任何颜色助手类都可以用来改变背景或文字颜色。"
 related:
-  - /components/button-groups
-  - /components/icons
-  - /components/floating-action-buttons
+  - /blazor/components/button-groups
+  - /blazor/components/icons
+  - /blazor/components/floating-action-buttons
 ---
 
 ## 使用

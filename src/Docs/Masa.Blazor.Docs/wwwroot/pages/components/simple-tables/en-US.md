@@ -2,9 +2,9 @@
 title: Simple tables
 desc: "The MSimpleTable component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc."
 related:
-  - /components/data-iterators
-  - /components/data-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/data-tables
+  - /blazor/components/lists
 ---
 
 ## Usage

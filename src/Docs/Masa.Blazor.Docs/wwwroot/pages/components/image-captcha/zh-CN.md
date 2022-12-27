@@ -2,8 +2,8 @@
 title: Image Captcha（图片验证码）
 tag: preset
 related:
-  - /components/text-fields
-  - /components/image
+  - /blazor/components/text-fields
+  - /blazor/components/image
 ---
 
 ## 使用

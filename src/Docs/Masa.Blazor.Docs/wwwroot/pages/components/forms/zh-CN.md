@@ -2,9 +2,9 @@
 title: Forms（表单）
 desc: "在表单验证方面，**MASA Blazor** 具有大量集成和内置功能。"
 related:
-  - /components/selects
-  - /components/selection-controls
-  - /components/text-fields
+  - /blazor/components/selects
+  - /blazor/components/selection-controls
+  - /blazor/components/text-fields
 ---
 
 ## 使用

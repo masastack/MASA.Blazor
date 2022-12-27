@@ -2,9 +2,9 @@
 title: Navigation drawers
 desc: "**MNavigationDrawer** is a component used to navigate applications. It is usually wrapped and used in the **MCard** element."
 related:
-  - /components/lists
-  - /components/icons
-  - /getting-started/wireframes
+  - /blazor/components/lists
+  - /blazor/components/icons
+  - /blazor/getting-started/wireframes
 ---
 
 ## Usage

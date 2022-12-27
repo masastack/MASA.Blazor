@@ -2,9 +2,9 @@
 title: Date pickers
 desc: "**MDatePicker** is a fully featured date selection component that lets users select a date, or range of dates."
 related:
-  - /components/buttons
-  - /components/text-fields
-  - /components/time-pickers
+  - /blazor/components/buttons
+  - /blazor/components/text-fields
+  - /blazor/components/time-pickers
 ---
 
 ## Usage

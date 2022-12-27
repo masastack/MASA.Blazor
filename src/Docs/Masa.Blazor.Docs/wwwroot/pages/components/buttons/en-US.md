@@ -2,9 +2,9 @@
 title: Buttons
 desc: "The **MButton** component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color."
 related:
-  - /components/button-groups
-  - /components/icons
-  - /components/floating-action-buttons
+  - /blazor/components/button-groups
+  - /blazor/components/icons
+  - /blazor/components/floating-action-buttons
 ---
 
 ## Usage

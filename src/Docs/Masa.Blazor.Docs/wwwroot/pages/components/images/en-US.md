@@ -2,9 +2,9 @@
 title: Images
 desc: "The **MImage** component is packed with features to support rich media."
 related:
-  - /components/grid-system
-  - /components/aspect-ratios
-  - /components/parallax
+  - /blazor/components/grid-system
+  - /blazor/components/aspect-ratios
+  - /blazor/components/parallax
 ---
 
 ## Usage

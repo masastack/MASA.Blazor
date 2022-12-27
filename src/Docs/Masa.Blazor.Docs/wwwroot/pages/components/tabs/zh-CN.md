@@ -2,9 +2,9 @@
 title: Tabs（选项卡）
 desc: "**MTabs** 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。"
 related:
-  - /components/icons
-  - /components/toolbars
-  - /components/windows
+  - /blazor/components/icons
+  - /blazor/components/toolbars
+  - /blazor/components/windows
 ---
 
 ## 使用

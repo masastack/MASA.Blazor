@@ -2,9 +2,9 @@
 title: Pagination（分页）
 desc: "The **MPagination** component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily."
 related:
-  - /components/data-iterators
-  - /components/data-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/data-tables
+  - /blazor/components/lists
 ---
 
 ## Usage

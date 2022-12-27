@@ -2,9 +2,9 @@
 title: Virtual scroller
 desc: "The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically."
 related:
-  - /components/lists
-  - /components/data-tables
-  - /components/data-iterators
+  - /blazor/components/lists
+  - /blazor/components/data-tables
+  - /blazor/components/data-iterators
 --- 
 
 ## Anatomy

@@ -2,9 +2,9 @@
 title: Mobile date pickers（移动端日期选择器）
 desc: "专为移动设备设计的日期选择器。"
 related:
-  - /components/mobile-pickers
-  - /components/mobile-time-views
-  - /components/mobile-date-time-pickers
+  - /blazor/components/mobile-pickers
+  - /blazor/components/mobile-time-views
+  - /blazor/components/mobile-date-time-pickers
 ---
 
 ## 示例

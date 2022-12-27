@@ -1,5 +1,7 @@
-﻿@namespace Masa.Docs.Core.Components
+﻿@using System.Globalization
+@namespace Masa.Docs.Core.Components
 @inject AppService AppService
+@inject I18n I18n
 
 <AppSheet MinHeight="@((StringNumber)61)">
     <MListItem Href="@Href" Disabled="@Disabled">
@@ -8,7 +10,7 @@
         </MListItemIcon>
 
         <MListItemContent>
-            <MListItemTitle>@Title</MListItemTitle>
+            <MListItemTitle>@I18n.T(Title)</MListItemTitle>
             <MListItemSubtitle>@Subtitle</MListItemSubtitle>
         </MListItemContent>
     </MListItem>
@@ -16,18 +18,27 @@
 
 @code {
 
+    [CascadingParameter]
+    private CultureInfo Culture { get; set; } = null!;
+
+    /// <summary>
+    /// The href.
+    /// </summary>
+    /// <example>/{category}/{title}</example>
+    [EditorRequired]
+    [Parameter]
+    public string Href { get; set; }
+
     #region Unsupport hrefs
 
     // TODO: Delete the code if unsupported hrefs is empty.
 
     readonly List<string> _unsupportedHrefs = new()
     {
-        "/getting-started/wireframes",
-        "/features/theme",
-        "/components/parallax",
-        "/components/selection-controls",
-        "/components/ellipsis-text",
-        "/components/combobox"
+        "/blazor/features/theme",
+        "/blazor/components/parallax",
+        "/blazor/components/selection-controls",
+        "/blazor/components/combobox"
     };
 
     bool Disabled => _unsupportedHrefs.Contains(Href);
@@ -48,25 +59,17 @@
         { "themes", ("mdi-script-text-outline", "pink") },
     };
 
-    /// <summary>
-    /// The href.
-    /// </summary>
-    /// <example>/{category}/{title}</example>
-    [EditorRequired]
-    [Parameter]
-    public string Href { get; set; }
+    private string? Title => Href.Split("/").ElementAtOrDefault(3);
 
-    private string Title => UpperFirst(Href.Split("/")[2]).Replace("-", " ");
+    public string? Section => Href.Split("/").ElementAtOrDefault(2);
 
-    public string Section => Href.Split("/")[1];
-
-    private string Subtitle => UpperFirst(Section);
+    private string? Subtitle => UpperFirst(Section);
 
     private string? Color => _categories.TryGetValue(Section, out var value) ? value.color : null;
 
     private string? Icon => _categories.TryGetValue(Section, out var value) ? value.icon : null;
 
-    string UpperFirst(string str)
+    string? UpperFirst(string? str)
     {
         if (str == null) return str;
 

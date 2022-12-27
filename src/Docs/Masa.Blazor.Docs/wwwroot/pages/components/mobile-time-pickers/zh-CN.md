@@ -2,9 +2,9 @@
 title: Mobile time pickers（移动端时间选择器）
 desc: "专为移动设备设计的时间选择器。"
 related:
-  - /components/mobile-pickers
-  - /components/mobile-date-time-pickers
-  - /components/mobile-date-pickers
+  - /blazor/components/mobile-pickers
+  - /blazor/components/mobile-date-time-pickers
+  - /blazor/components/mobile-date-pickers
 ---
 
 ## 示例

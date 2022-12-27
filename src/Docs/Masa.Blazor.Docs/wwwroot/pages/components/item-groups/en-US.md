@@ -2,9 +2,9 @@
 title: Item Groups
 desc: "The **MItemGroup** provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as **MTabs** and **MCarousel**."
 related:
-  - /components/button-groups
-  - /components/carousels
-  - /components/tabs
+  - /blazor/components/button-groups
+  - /blazor/components/carousels
+  - /blazor/components/tabs
 ---
 
 ## Usage

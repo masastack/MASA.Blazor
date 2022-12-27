@@ -2,9 +2,9 @@
 title: Lists（列表）
 desc: "**MList** 组件用于显示信息。 它可以包含头像、内容、操作、列表组标题等等。 列表以易于在集合中识别特定项目的方式显示内容。 它们为组织一组文本和图像提供了一致的样式。"
 related:
-  - /components/item-groups
-  - /components/list-item-groups
-  - /components/subheaders
+  - /blazor/components/item-groups
+  - /blazor/components/list-item-groups
+  - /blazor/components/subheaders
 ---
 
 ## 使用

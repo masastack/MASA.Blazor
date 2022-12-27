@@ -2,9 +2,9 @@
 title: Sheets
 desc: "The **MSheet** component is the baseline for numerous components such as MCard, MToolbar, and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows)."
 related:
-  - /components/cards
-  - /components/grid-system
-  - /styles-and-animations/elevation
+  - /blazor/components/cards
+  - /blazor/components/grid-system
+  - /blazor/styles-and-animations/elevation
 ---
 
 ## Usage

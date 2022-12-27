@@ -2,9 +2,9 @@
 title: Cards（卡片）
 desc: "**MCard** 组件是一个可用于从面板到静态图像的多功能组件。 **MCard** 组件有许多帮助程序组件来尽可能简单地进行标记。 没有列出选项的组件使用Blazor的功能组件来更快渲染并充当标记糖以使构建变得更加容易。"
 related:
-  - /components/buttons
-  - /components/images
-  - /styles-and-animations/text-and-typography
+  - /blazor/components/buttons
+  - /blazor/components/images
+  - /blazor/styles-and-animations/text-and-typography
 ---
 
 ## 使用

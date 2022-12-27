@@ -2,9 +2,9 @@
 title: Infinite scroll
 desc: "Scrolling to the bottom of the list automatically loads more data."
 related:
-  - /components/lists
-  - /components/progress-circular
-  - /components/virtual-scroller
+  - /blazor/components/lists
+  - /blazor/components/progress-circular
+  - /blazor/components/virtual-scroller
 ---
 
 ## Usage

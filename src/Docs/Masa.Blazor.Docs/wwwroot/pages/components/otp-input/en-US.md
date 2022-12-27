@@ -2,9 +2,9 @@
 title: OTP Input
 desc: "The OTP input is used for MFA procedure of authenticating users by a one-time password."
 related:
-  - /components/textareas
-  - /components/text-fields
-  - /components/forms
+  - /blazor/components/textareas
+  - /blazor/components/text-fields
+  - /blazor/components/forms
 ---
 
 ## Usage

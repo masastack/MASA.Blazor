@@ -2,9 +2,9 @@
 title: Bottom navigation
 desc: "The **MBottomNavigation** component is an alternative to the sidebar. It is primarily used for mobile applications ."
 related:
-  - /components/buttons
-  - /components/icons
-  - /components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/icons
+  - /blazor/components/tabs
 ---
 
 ## Usage

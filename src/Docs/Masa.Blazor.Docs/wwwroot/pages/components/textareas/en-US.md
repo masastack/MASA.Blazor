@@ -2,9 +2,9 @@
 title: Textareas
 desc: "Textarea components are used for collecting large amounts of textual data."
 related:
-  - /components/forms
-  - /components/selects
-  - /components/text-fields
+  - /blazor/components/forms
+  - /blazor/components/selects
+  - /blazor/components/text-fields
 ---
 
 ## Usage

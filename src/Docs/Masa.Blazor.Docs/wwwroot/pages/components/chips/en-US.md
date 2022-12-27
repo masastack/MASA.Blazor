@@ -2,9 +2,9 @@
 title: Chips
 desc: "The **MChip** component is used to convey small pieces of information. Using the close property, the chip becomes interactive, allowing user interaction. This component is used by the [MChipGroup](/blazor/components/chip-groups) for advanced selection options."
 related:
-  - /components/avatars
-  - /components/icons
-  - /components/selects
+  - /blazor/components/avatars
+  - /blazor/components/icons
+  - /blazor/components/selects
 ---
 
 ## Usage

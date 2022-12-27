@@ -2,9 +2,9 @@
 title: Avatars
 desc: "The **MAvatar** component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. The `tile` variable can be used to display an avatar with no border radius."
 related:
-  - /components/badges
-  - /components/icons
-  - /components/lists
+  - /blazor/components/badges
+  - /blazor/components/icons
+  - /blazor/components/lists
 ---
 
 ## Usage

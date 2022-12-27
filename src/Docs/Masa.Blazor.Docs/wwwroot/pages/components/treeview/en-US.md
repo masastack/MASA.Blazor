@@ -2,9 +2,9 @@
 title: Treeview
 desc: "The **MTreeview** component is useful for displaying large amounts of nested data."
 related:
-  - /components/lists
-  - /components/list-item-groups
-  - /components/timelines
+  - /blazor/components/lists
+  - /blazor/components/list-item-groups
+  - /blazor/components/timelines
 ---
 
 ## Usage

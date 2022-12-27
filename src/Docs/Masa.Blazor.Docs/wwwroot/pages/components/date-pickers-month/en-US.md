@@ -2,9 +2,9 @@
 title: Date pickers month
 desc: "**MDatePicker** can be used as a standalone month picker component."
 related:
-  - /components/date-pickers
-  - /components/menus
-  - /components/time-pickers
+  - /blazor/components/date-pickers
+  - /blazor/components/menus
+  - /blazor/components/time-pickers
 ---
 
 ## Usage

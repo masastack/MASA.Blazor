@@ -2,9 +2,9 @@
 title: Images（图像）
 desc: "**MImage**组件包含支持丰富媒体的功能。"
 related:
-  - /components/grid-system
-  - /components/aspect-ratios
-  - /components/parallax
+  - /blazor/components/grid-system
+  - /blazor/components/aspect-ratios
+  - /blazor/components/parallax
 ---
 
 ## 使用

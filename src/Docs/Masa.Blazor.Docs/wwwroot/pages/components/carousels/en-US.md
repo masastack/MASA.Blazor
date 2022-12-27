@@ -2,9 +2,9 @@
 title: Carousels
 desc: "The **MCarousel** component is used to display large numbers of visual content on a rotating timer."
 related:
-  - /components/parallax
-  - /components/images
-  - /components/windows
+  - /blazor/components/parallax
+  - /blazor/components/images
+  - /blazor/components/windows
 ---
 
 ## Usage

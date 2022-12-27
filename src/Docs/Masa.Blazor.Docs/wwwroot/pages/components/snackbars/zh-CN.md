@@ -2,9 +2,9 @@
 title: Snackbars（消息条）
 desc: "MSnackbar 组件用于向用户显示快速消息。 Snackbars 支持定位、移除延迟和回调。"
 related:
-  - /components/buttons
-  - /styles-and-animations/colors
-  - /components/forms
+  - /blazor/components/buttons
+  - /blazor/styles-and-animations/colors
+  - /blazor/components/forms
 ---
 
 ## 使用

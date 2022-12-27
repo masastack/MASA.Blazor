@@ -2,9 +2,9 @@
 title: Overlays（遮罩层）
 desc: "**Overlay** 组件用于强调特定元素或其中的一部分。 它向用户发出应用程序内状态更改的信号，可用于创建加载程序，对话框等。"
 related:
-  - /components/cards
-  - /components/sheets
-  - /components/dialogs
+  - /blazor/components/cards
+  - /blazor/components/sheets
+  - /blazor/components/dialogs
 ---
 
 ## 使用

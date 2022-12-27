@@ -2,9 +2,9 @@
 title: Timelines（时间轴）
 desc: "**MTimeline** 对于显示时间顺序信息非常有用。"
 related:
-  - /components/cards
-  - /components/icons
-  - /components/grid-system
+  - /blazor/components/cards
+  - /blazor/components/icons
+  - /blazor/components/grid-system
 ---
 
 # Timelines（时间轴）

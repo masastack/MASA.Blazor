@@ -2,9 +2,9 @@
 title: Date pickers month（月份选择器）
 desc: "**MDatePicker**  可以用作一个独立的月份选择器组件。"
 related:
-  - /components/date-pickers
-  - /components/menus
-  - /components/time-pickers
+  - /blazor/components/date-pickers
+  - /blazor/components/menus
+  - /blazor/components/time-pickers
 ---
 
 ## 使用

@@ -2,9 +2,9 @@
 title: Snackbars
 desc: "The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks."
 related:
-  - /components/buttons
-  - /styles-and-animations/colors
-  - /components/forms
+  - /blazor/components/buttons
+  - /blazor/styles-and-animations/colors
+  - /blazor/components/forms
 ---
 
 ## Usage

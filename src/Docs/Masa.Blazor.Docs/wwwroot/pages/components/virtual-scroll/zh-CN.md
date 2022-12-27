@@ -2,9 +2,9 @@
 title: Virtual scroller（虚拟滚动条）
 desc: "MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。"
 related:
-  - /components/lists
-  - /components/data-tables
-  - /components/data-iterators
+  - /blazor/components/lists
+  - /blazor/components/data-tables
+  - /blazor/components/data-iterators
 ---
 
 ## 解剖学

@@ -2,9 +2,9 @@
 title: Sheets（工作表）
 desc: "**MSheet** 组件是许多组件的基础，如 [MCard](/blazor/components/cards), [MToolbar](/blazor/components/toolbars)等等。 可用属性是Material Design的基础 - 纸和立面（阴影）的概念。"
 related:
-  - /components/cards
-  - /components/grid-system
-  - /styles-and-animations/elevation
+  - /blazor/components/cards
+  - /blazor/components/grid-system
+  - /blazor/styles-and-animations/elevation
 ---
 
 ## 使用

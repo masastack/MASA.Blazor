@@ -2,9 +2,9 @@
 title: Autocompletes
 desc: "The **MAutocomplete** component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API." 
 related:
-  - /components/combobox
-  - /components/forms
-  - /components/selects
+  - /blazor/components/combobox
+  - /blazor/components/forms
+  - /blazor/components/selects
 ---
 
 ## Usage

@@ -2,9 +2,9 @@
 title: Data tables
 desc: "The MDataTable component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection."
 related:
-  - /components/data-iterators
-  - /components/simple-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/simple-tables
+  - /blazor/components/lists
 ---
 
 ## Usage

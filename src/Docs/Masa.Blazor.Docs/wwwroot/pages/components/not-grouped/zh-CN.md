@@ -3,9 +3,9 @@ title: Not Grouped（未分组的）
 tag: preset
 related:
 
-- /components/buttons
-- /components/text-fields
-- /components/lists
+  - /blazor/components/buttons
+  - /blazor/components/text-fields
+  - /blazor/components/lists
 
 ---
 

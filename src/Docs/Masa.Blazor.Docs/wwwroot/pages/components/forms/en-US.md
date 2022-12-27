@@ -2,9 +2,9 @@
 title: Forms
 desc: "When it comes to form validation, MASA Blazor has a multitude of integrations and baked in functionality."
 related:
-  - /components/selects
-  - /components/selection-controls
-  - /components/text-fields
+  - /blazor/components/selects
+  - /blazor/components/selection-controls
+  - /blazor/components/text-fields
 ---
 
 ## Usage

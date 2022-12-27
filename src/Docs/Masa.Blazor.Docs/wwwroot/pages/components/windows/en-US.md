@@ -2,9 +2,9 @@
 title: Windows
 desc: "The **MWindow** component provides the baseline functionality for transitioning content from 1 pane to another. Other components such as **MTabs**, **MCarousel** and **MStepper** utilize this component at their core."
 related:
-  - /components/carousels
-  - /components/steppers
-  - /components/tabs
+  - /blazor/components/carousels
+  - /blazor/components/steppers
+  - /blazor/components/tabs
 ---
 
 ## Usage

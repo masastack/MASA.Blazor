@@ -2,9 +2,9 @@
 title: OTP Input（一次性密码输入）
 desc: "OTP 输入用于通过一次性密码对用户进行身份验证的 MFA 程序"
 related:
-  - /components/textareas
-  - /components/text-fields
-  - /components/forms
+  - /blazor/components/textareas
+  - /blazor/components/text-fields
+  - /blazor/components/forms
 ---
 
 ## 使用

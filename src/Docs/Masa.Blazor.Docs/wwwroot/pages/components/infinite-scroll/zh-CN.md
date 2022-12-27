@@ -2,9 +2,9 @@
 title: Infinite scroll（无限滚动）
 desc: "列表滚动到底部自动加载更多数据。"
 related:
-  - /components/lists
-  - /components/progress-circular
-  - /components/virtual-scroller
+  - /blazor/components/lists
+  - /blazor/components/progress-circular
+  - /blazor/components/virtual-scroller
 ---
 
 ## 使用

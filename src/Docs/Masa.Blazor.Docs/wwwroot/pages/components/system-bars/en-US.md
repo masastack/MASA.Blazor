@@ -1,9 +1,9 @@
 ---
 desc: "The **MSystemBar** component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text."
 related:
-  - /components/buttons
-  - /components/toolbars
-  - /components/tabs
+  - /blazor/components/buttons
+  - /blazor/components/toolbars
+  - /blazor/components/tabs
 ---
 
 ## Usage

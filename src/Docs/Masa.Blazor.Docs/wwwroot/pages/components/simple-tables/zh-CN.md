@@ -2,9 +2,9 @@
 title: Simple tables（简单表格）
 desc: "**MSimpleTable**组件是 table 元素的简单封装组件。 在组件中，你可以使用所有常规表元素，如 **thead**，**tbody**，**tr** 等。"
 related:
-  - /components/data-iterators
-  - /components/data-tables
-  - /components/lists
+  - /blazor/components/data-iterators
+  - /blazor/components/data-tables
+  - /blazor/components/lists
 ---
 
 ## 使用

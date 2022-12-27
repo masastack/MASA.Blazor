@@ -2,9 +2,9 @@
 title: Mobile time pickers
 desc: "A time picker designed for the mobile."
 related:
-  - /components/mobile-pickers
-  - /components/mobile-date-time-pickers
-  - /components/mobile-date-pickers
+  - /blazor/components/mobile-pickers
+  - /blazor/components/mobile-date-time-pickers
+  - /blazor/components/mobile-date-pickers
 ---
 
 ## Examples
