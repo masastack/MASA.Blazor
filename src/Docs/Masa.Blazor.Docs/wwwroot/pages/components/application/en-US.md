@@ -57,15 +57,17 @@ you can overwrite this functionality by using the `Absolute` prop."></app-alert>
 
 Below is a list of all the components that support the `App` prop and can be used as layout elements in your application. 
 These can be mixed and matched and only one of each particular component should exist at any time. You can, however, 
-swap them out and the layout will accommodate. 
+swap them out and the layout will accommodate. For some examples displaying how you can build various layouts, checkout the [Pre-made layouts](/blazor/getting-started/wireframes) page.
 
 Each of these application components have a designated location and priority that it affects within the layout system.
 
 - [MAppBar](/blazor/components/app-bars): Is always placed at the top of an application with a lower priority than **MSystemBar**.
-- MBottomNavigation: Is always placed at the bottom of an application with a higher priority than **MFooter**.
+- [MBottomNavigation](/blazor/components/bottom-navigation): Is always placed at the bottom of an application with a higher priority than **MFooter**.
 - [MFooter](/blazor/components/footers): Is always placed at the bottom of an application with a lower priority than **MBottomNavigation** .
 - [MNavigationDrawer](/blazor/components/navigation-drawers): Can be placed on the left or right side of an application and can be configured to sit next to or below **MAppBar** .
 - [MSystemBar](/blazor/components/system-bars): Is always placed at the top of an application with higher priority than  **MAppBar** .
+
+![app](http://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
 
 ## Application service
 
