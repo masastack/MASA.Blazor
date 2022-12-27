@@ -50,15 +50,17 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 ## 应用组件
 
 以下是所有支持 **App** 属性的组件列表，这些组件可以在你的应用中用作布局元素。 这些组件可以混合和匹配，并且每个特定组件在任何时候都只能存在一个。 不过，你可以把它们换掉，布局也能适应。
-有关如何构建各种布局的一些示例，请查看预制布局页面。
+有关如何构建各种布局的一些示例，请查看[预置布局](/blazor/getting-started/wireframes)页面。
 
 每一个应用组件都有一个指定的位置和优先级，影响布局系统中的位置。
 
 - [MAppBar](/blazor/components/app-bars)：总是放在应用顶部，优先级低于 **MSystemBar**。
-- MBottomNavigation：总是放在应用底部，优先级高于 **MFooter**。
+- [MBottomNavigation](/blazor/components/bottom-navigation)：总是放在应用底部，优先级高于 **MFooter**。
 - [MFooter](/blazor/components/footers)：总是放在应用底部，优先级低于 `MBottomNavigation`。
 - [MNavigationDrawer](/blazor/components/navigation-drawers)：可以放置在应用的左边或右边，并且可以配置在 **MAppBar** 的旁边或下面。
 - [MSystemBar](/blazor/components/system-bars)：总是放在应用顶部，优先级高于 **MAppBar** 。
+
+![app](http://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
 
 ## 应用服务
 

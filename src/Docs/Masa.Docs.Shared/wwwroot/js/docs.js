@@ -61,6 +61,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
     addCodeRules(markdownIt);
+    addImageRules(markdownIt)
   } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
@@ -117,6 +118,13 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
         return self.renderToken(tokens, idx, options);
       }
     };
+  }
+
+  function addImageRules(md) {
+    md.renderer.rules.image = (tokens, idx, options, env, self) => {
+      tokens[idx].attrSet("width", "100%");
+      return self.renderToken(tokens, idx, options);
+    }
   }
 };
 
