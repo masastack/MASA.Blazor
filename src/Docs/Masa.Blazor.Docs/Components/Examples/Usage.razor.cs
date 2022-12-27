@@ -118,6 +118,8 @@ public partial class Usage : NextTickComponentBase
     protected virtual IEnumerable<ParameterItem<SelectParameter>> ActiveSelectParameters =>
         _selectParameters.Where(item => item.Value.Value != null);
 
+    protected virtual IEnumerable<string> AdditionalParameters => Enumerable.Empty<string>();
+
     protected virtual string? ChildContentSourceCode => null;
 
     private string SourceCode
@@ -125,6 +127,8 @@ public partial class Usage : NextTickComponentBase
         get
         {
             var parameterList = new List<string>();
+            parameterList.AddRange(AdditionalParameters);
+
             parameterList.AddRange(ActiveToggleParameters.Select(item => item.Key));
             parameterList.AddRange(ActiveCheckboxParameters.Select(item =>
                 item.Value.IsBoolean ? item.Key : $"{item.Key}=\"{FormatValue(item.Key, item.Value.ParameterValue)}\""));

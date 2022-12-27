@@ -2,6 +2,8 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
+    private IList<double> _value = new List<double>() { -25, 25 };
+
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
         { nameof(MRangeSlider<double>.Dense), false },
@@ -10,11 +12,11 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(MRangeSlider<double>.Disabled), new CheckboxParameter("false",true) },
-        { nameof(MRangeSlider<double>.HideDetails), new CheckboxParameter("false",true) },
-        { nameof(MRangeSlider<double>.InverseLabel), new CheckboxParameter("false",true) },
-        { nameof(MRangeSlider<double>.PersistentHint), new CheckboxParameter("false",true) },
-        { nameof(MRangeSlider<double>.Readonly), new CheckboxParameter("false",true) },
+        { nameof(MRangeSlider<double>.Disabled), new CheckboxParameter() },
+        { nameof(MRangeSlider<double>.HideDetails), new CheckboxParameter("true", false) },
+        { nameof(MRangeSlider<double>.InverseLabel), new CheckboxParameter() },
+        { nameof(MRangeSlider<double>.PersistentHint), new CheckboxParameter() },
+        { nameof(MRangeSlider<double>.Readonly), new CheckboxParameter() },
     };
 
     protected override ParameterList<SliderParameter> GenSliderParameters() => new()
@@ -36,10 +38,12 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         return parameter.Key switch
         {
-            nameof(MRangeSlider<double>.HideDetails) => (StringBoolean)(bool)parameter.Value,
+            nameof(MRangeSlider<double>.HideDetails) => (StringBoolean)(parameter.Value.ToString() == "true"),
             _ => parameter.Value
         };
     }
+
+    protected override IEnumerable<string> AdditionalParameters => new[] { "Hint=\"Im a hint\"" };
 
     protected override Dictionary<string, object>? GenAdditionalParameters()
     {
@@ -47,7 +51,8 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         {
             { nameof(MRangeSlider<double>.Hint), "Im a hint" },
             { nameof(MRangeSlider<double>.Label), "Range Slider" },
-            { nameof(MRangeSlider<double>.Value), new List<double>(){-25,25 } }
+            { nameof(MRangeSlider<double>.Value), _value },
+            { nameof(MRangeSlider<double>.ValueChanged), EventCallback.Factory.Create<IList<double>>(this, val => _value = val) }
         };
     }
 }
