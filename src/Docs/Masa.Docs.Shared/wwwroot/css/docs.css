@@ -246,22 +246,31 @@ a.text-dec-none {
     padding-top: 64px;
 }
 
-.overview .project {
-    margin-bottom: 48px;
-}
+    .overview .project {
+        margin-bottom: 48px;
+    }
 
-.overview .project-content {
-    margin-bottom: 24px;
-}
+    .overview .project-content {
+        margin-bottom: 24px;
+    }
 
-.overview .project-content__title {
-    margin-bottom: 8px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #1B2559 !important;
-    caret-color: #1B2559 !important;
-}
+    .overview .project-content__title {
+        margin-bottom: 8px;
+        font-weight: 700;
+        line-height: 24px;
+        color: #1B2559 !important;
+        caret-color: #1B2559 !important;
+    }
 
 .m-card.m-card--doc {
     border-color: #E4E8F3;
+}
+
+.m-markdown-it img {
+    max-width: 100%;
+    border-radius: 0.75rem;
+}
+
+.m-example.theme--light.m-sheet--outlined {
+    border: thin solid #E4E8F3;
 }
