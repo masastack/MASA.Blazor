@@ -1,7 +1,7 @@
 ﻿<div class="d-flex flex-column align-center justify-center">
-    <MECharts Option="option" Theme="@theme" Width="@("100%")" @ref="echarts"></MECharts>
+    <MECharts Option="option" Theme="@theme" Width="@("100%")" MinHeight="300"></MECharts>
 
-    <MRadioGroup TValue="string" Value="theme" ValueChanged="SetTheme" Row>
+    <MRadioGroup TValue="string" @bind-Value="theme" Row>
         <MRadio Label="default"
                 Value="@("")">
         </MRadio>
@@ -18,7 +18,6 @@
 </div>
 
 @code{
-    private MECharts echarts;
     private string theme = string.Empty;
 
     private object option = new
@@ -49,15 +48,5 @@
             }
         }
     };
-
-    private async Task SetTheme(string val)
-    {
-        if (theme != null && echarts != null)
-        {
-            await echarts.DisposeECharts();
-        }
-
-        theme = val;
-    }
 
 }
