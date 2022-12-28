@@ -37,12 +37,6 @@ You can make **MButtonGroup** rounded using the **Rounded** prop.
 
 ### Misc
 
-#### Toolbar(TODO:OverflowButton)
-
-Easily integrate customized button solutions with a **MToolbar**.
-
-<masa-example file="Examples.components.button_groups.Toolbar"></masa-example>
-
 #### WYSIWYG
 
 Group similar actions and design your own WYSIWYG component.

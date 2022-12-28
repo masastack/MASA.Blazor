@@ -37,12 +37,6 @@ related:
 
 ### 其他
 
-#### 工具栏(TODO:OverflowButton)
-
-可与 **MToolbar** 轻松集成自定义按钮方案。
-
-<masa-example file="Examples.components.button_groups.Toolbar"></masa-example>
-
 #### WYSIWYG/所见即所得
 
 对类似的操作进行分组，并设计自己的 WYSIWYG 组件。
