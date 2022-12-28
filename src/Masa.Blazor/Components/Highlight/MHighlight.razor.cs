@@ -54,7 +54,7 @@ public partial class MHighlight : BDomComponentBase
     {
         await base.OnParametersSetAsync();
 
-        if (_prevCode != Code)
+        if (_prevCode is not null && _prevCode != Code)
         {
             _prevCode = Code;
 
@@ -68,7 +68,11 @@ public partial class MHighlight : BDomComponentBase
 
         if (firstRender)
         {
+            _prevCode = Code;
+
             await TryHighlight();
+
+            StateHasChanged();
         }
     }
 
@@ -77,7 +81,5 @@ public partial class MHighlight : BDomComponentBase
         if (Code == null) return;
 
         _codeHtml = await MarkdownItJSModule.Highlight(Code, Language);
-
-        StateHasChanged();
     }
 }

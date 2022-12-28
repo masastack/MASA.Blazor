@@ -1,10 +1,5 @@
-using System.Reflection;
-using Masa.Blazor.Docs;
-using Masa.Blazor.Docs.Components;
 using Masa.Docs.Core;
 using Masa.Docs.Shared;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +8,8 @@ builder.Services.AddServerSideBlazor(options =>
 {
     options.RootComponents.MaxJSRootComponents = 500;
     options.RootComponents.RegisterCustomElementsUsedJSCustomElementAttribute();
-});
+})
+       .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024);
 builder.Services.AddHealthChecks();
 
 builder.Services.AddScoped<LazyAssemblyLoader>();
