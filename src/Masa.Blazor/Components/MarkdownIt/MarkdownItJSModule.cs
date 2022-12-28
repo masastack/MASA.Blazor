@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using System.Diagnostics.Contracts;
+
+namespace Masa.Blazor;
 
 public class MarkdownItJSModule : JSModule
 {
@@ -10,12 +12,20 @@ public class MarkdownItJSModule : JSModule
         MarkdownItAnchorOptions? anchorOptions = null, string scope = null)
         => await InvokeAsync<IJSObjectReference>("create", options, enableHeaderSections, anchorOptions, scope);
 
-    public async ValueTask<string> Parse(IJSObjectReference instance, string source) 
+    public async ValueTask<string> Parse(IJSObjectReference instance, string source)
         => await InvokeAsync<string>("parse", instance, source);
 
-    public async ValueTask<MarkdownItParsedResult> ParseAll(IJSObjectReference instance, string source) 
+    public async ValueTask<MarkdownItParsedResult> ParseAll(IJSObjectReference instance, string source)
         => await InvokeAsync<MarkdownItParsedResult>("parseAll", instance, source);
 
-    public async ValueTask<string> Highlight(string code, string language)
+    public async ValueTask<string> Highlight(string code, string language) 
         => await InvokeAsync<string>("highlight", code, language);
+
+    public async ValueTask HighlightStream(string code, string language)
+    {
+        var byteArray = Encoding.UTF8.GetBytes(code);
+        using var stream = new MemoryStream(byteArray);
+        using var streamRef = new DotNetStreamReference(stream);
+        await InvokeAsync<Stream>("highlightStream", streamRef, language);
+    }
 }
