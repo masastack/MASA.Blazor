@@ -27,7 +27,7 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools-net6
+      run: dotnet workload install wasm-tools
     - name: build
       run: dotnet build src/Masa.Blazor.NewDocs.sln
     - name: publish
@@ -39,6 +39,6 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Release/net6.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
 
 
