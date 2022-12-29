@@ -1,6 +1,7 @@
-﻿<MCard class="e4">
+﻿<MCard Class="slider-append-textfield">
     <MResponsive Style="@($"background: rgb({_red}, {_green}, {_blue})")"
-                 Height="@("300px")"></MResponsive>
+                 Height="@("300px")">
+    </MResponsive>
 
     <MCardText>
         <MContainer Fluid>
@@ -14,7 +15,8 @@
                             <MTextField @bind-Value="_red"
                                         Class="mt-0 pt-0"
                                         Type="number"
-                                        Style="width: 60px"></MTextField>
+                                        Style="width: 60px">
+                            </MTextField>
                         </AppendContent>
                     </MSlider>
                 </MCol>
@@ -28,7 +30,8 @@
                             <MTextField @bind-Value="_green"
                                         Class="mt-0 pt-0"
                                         Type="number"
-                                        Style="width: 60px"></MTextField>
+                                        Style="width: 60px">
+                            </MTextField>
                         </AppendContent>
                     </MSlider>
                 </MCol>
@@ -42,7 +45,8 @@
                             <MTextField @bind-Value="_blue"
                                         Class="mt-0 pt-0"
                                         Type="number"
-                                        Style="width: 60px"></MTextField>
+                                        Style="width: 60px">
+                            </MTextField>
                         </AppendContent>
                     </MSlider>
                 </MCol>
@@ -51,8 +55,15 @@
     </MCardText>
 </MCard>
 
-  @code {
+<style>
+    .slider-append-textfield {
+        width: 400px;
+        margin: auto;
+    }
+</style>
+
+@code {
     private double _red = 64;
     private double _green = 128;
     private double _blue = 0;
-  }
+}
