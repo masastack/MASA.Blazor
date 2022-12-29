@@ -6,8 +6,6 @@ tag: js-proxy
 
 ## Usage
 
-Examples
-
 <echarts-usage></echarts-usage>
 
 <app-alert type="info" content='You need to reference the package of ECharts before using it: `<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`.'></app-alert>
@@ -39,5 +37,3 @@ Specify the locale. For more information, please refer to ECharts official docum
 Specify the theme. Light and dark themes are supported by default. You can use [custom themes](https://echarts.apache.org/handbook/en/concepts/style/#theme). In this example, the **vintage** theme can be set after importing the vintage.js file in HTML.
 
 <masa-example file="Examples.components.echarts.Theme"></masa-example>
-
-
