@@ -11,7 +11,7 @@
 
         <MListItemContent>
             <MListItemTitle>@I18n.T(Title)</MListItemTitle>
-            <MListItemSubtitle>@Subtitle</MListItemSubtitle>
+            <MListItemSubtitle>@I18n.T(Subtitle)</MListItemSubtitle>
         </MListItemContent>
     </MListItem>
 </AppSheet>
@@ -55,27 +55,16 @@
         { "introduction", ("mdi-script-text-outline","green") },
         { "about", ("mi-masa","primary") },
         { "resources", ("mdi-human-male-board","pink") },
-        { "styles", ("mdi-palette-outline","deep-purple accent-4") },
+        { "styles-and-animations", ("mdi-palette-outline","deep-purple accent-4") },
         { "themes", ("mdi-script-text-outline", "pink") },
     };
 
     private string? Title => Href.Split("/").ElementAtOrDefault(3);
 
-    public string? Section => Href.Split("/").ElementAtOrDefault(2);
+    public string? Subtitle => Href.Split("/").ElementAtOrDefault(2);
 
-    private string? Subtitle => UpperFirst(Section);
+    private string? Color => Subtitle is not null && _categories.TryGetValue(Subtitle, out var value) ? value.color : null;
 
-    private string? Color => _categories.TryGetValue(Section, out var value) ? value.color : null;
-
-    private string? Icon => _categories.TryGetValue(Section, out var value) ? value.icon : null;
-
-    string? UpperFirst(string? str)
-    {
-        if (str == null) return str;
-
-        var chr = str[0];
-
-        return chr.ToString().ToUpper() + str[1..];
-    }
+    private string? Icon => Subtitle is not null && _categories.TryGetValue(Subtitle, out var value) ? value.icon : null;
 
 }
