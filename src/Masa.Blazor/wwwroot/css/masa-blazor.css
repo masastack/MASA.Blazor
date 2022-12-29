@@ -28151,12 +28151,12 @@ html.overflow-y-hidden {
     font-size: 1.5rem;
     color: inherit;
 }
-.m-stepper__step.m-stepper__step--error .m-stepper__label {
+.m-stepper .m-stepper__step.m-stepper__step--error .m-stepper__label {
     color: inherit;
     text-shadow: none;
     font-weight: 500;
 }
-.m-stepper__step.m-stepper__step--error .m-stepper__label small {
+.m-stepper .m-stepper__step.m-stepper__step--error .m-stepper__label small {
     color: inherit;
 }
 .m-stepper__label {
