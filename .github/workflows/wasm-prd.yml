@@ -3,7 +3,7 @@ name: deploy-wasm-prd
 on:
   release:
     types: [ created ]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: 'recursive'
     - run: git submodule foreach git checkout main
-    - name: setting dotnet 
+    - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
@@ -22,11 +22,11 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools-net6
+      run: dotnet workload install wasm-tools
     - name: build
-      run: dotnet build src/Masa.Blazor.sln
+      run: dotnet build src/Masa.Blazor.NewDocs.sln
     - name: publish
-      run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj
+      run: dotnet publish src/Docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
       with:
@@ -34,4 +34,4 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Debug/net7.0/publish/wwwroot/ oss://masa-blazor-wasm/
