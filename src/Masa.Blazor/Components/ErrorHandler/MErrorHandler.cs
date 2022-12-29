@@ -22,8 +22,6 @@ namespace Masa.Blazor
 
         private bool _thrownInLifecycles;
 
-        private bool _handled = false;
-
         protected override void OnParametersSet()
         {
             if (CurrentException is not null)
@@ -65,6 +63,7 @@ namespace Masa.Blazor
                 _thrownInLifecycles = true;
             }
 
+            var _handled = false;
             if (OnErrorHandleAsync != null)
             {
                 _handled = await OnErrorHandleAsync(exception);
@@ -96,7 +95,7 @@ namespace Masa.Blazor
             builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
 
             var content = ChildContent;
-
+            var showChildContent = true;
             if (CurrentException is not null)
             {
                 if (ErrorContent is not null)
@@ -105,6 +104,7 @@ namespace Masa.Blazor
                 }
                 else if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert))
                 {
+                    showChildContent = false;
                     content = cb =>
                     {
                         cb.OpenElement(0, "div");
@@ -114,7 +114,7 @@ namespace Masa.Blazor
                 }
             }
 
-            if (!_handled)
+            if (showChildContent)
                 builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
 
             builder.CloseComponent();
