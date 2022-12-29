@@ -1,7 +1,7 @@
 ﻿<MRow>
     <MCol Cols="12" Sm="6" Class="py-2">
         <p>Exclusive</p>
-        <MButtonGroup @bind-Value="toggleExclusive">
+        <MButtonGroup @bind-Value="_toggleExclusive">
             <MButton>
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -18,7 +18,11 @@
     </MCol>
     <MCol Cols="12" Sm="6" Class="py-2">
         <p>Multiple</p>
-        <MButtonGroup Dense BackgroundColor="primary" Dark Multiple @bind-Values="toggleMultiple">
+        <MButtonGroup @bind-Values="_toggleMultiple"
+                      Dense
+                      BackgroundColor="primary"
+                      Dark
+                      Multiple>
             <MButton>
                 <MIcon>mdi-format-bold</MIcon>
             </MButton>
@@ -35,7 +39,7 @@
     </MCol>
     <MCol Cols="12" Sm="6" Class="py-2">
         <p>No Options Selected</p>
-        <MButtonGroup @bind-Value="toggleNone">
+        <MButtonGroup @bind-Value="_toggleNone">
             <MButton>
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -52,7 +56,9 @@
     </MCol>
     <MCol Cols="12" Sm="6" Class="py-2">
         <p>Mandatory</p>
-        <MButtonGroup Shaped Mandatory @bind-Value="toggleOne">
+        <MButtonGroup @bind-Value="_toggleOne"
+                      Shaped
+                      Mandatory>
             <MButton Value="@("left")">
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -69,7 +75,10 @@
     </MCol>
     <MCol Cols="12" Class="py-2">
         <p>Text Options</p>
-        <MButtonGroup Tile Color="deep-purple accent-3" Group @bind-Value="text">
+        <MButtonGroup @bind-Value="_text"
+                      Tile
+                      Color="deep-purple accent-3"
+                      Group>
             <MButton Value="@("left")">
                 Left
             </MButton>
@@ -86,7 +95,8 @@
     </MCol>
     <MCol Cols="12" Class="py-2">
         <p>Text &amp; Icon Options</p>
-        <MButtonGroup Borderless @bind-Value="icon">
+        <MButtonGroup @bind-Value="_icon"
+                      Borderless>
             <MButton Value="@("left")">
                 <span class="hidden-sm-and-down">Left</span>
                 <MIcon Right>
@@ -116,10 +126,10 @@
 </MRow>
 
 @code {
-    StringNumber text = "center";
-    StringNumber icon = "justify";
-    StringNumber toggleNone;
-    StringNumber toggleOne = 0;
-    StringNumber toggleExclusive = 2;
-    List<StringNumber> toggleMultiple = new() { 0, 1, 2 };
+    StringNumber _text = "center";
+    StringNumber _icon = "justify";
+    StringNumber _toggleNone;
+    StringNumber _toggleOne = 0;
+    StringNumber _toggleExclusive = 2;
+    List<StringNumber> _toggleMultiple = new() { 0, 1, 2 };
 }

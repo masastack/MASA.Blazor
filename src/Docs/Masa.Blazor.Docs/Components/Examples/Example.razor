@@ -32,37 +32,40 @@
 
             <AppDivider />
 
-            <ExpandTransition>
-                <ShowTransitionElement Value="_expand">
-                    <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                        @foreach (var item in _sections)
-                        {
-                            <MItem>
-                                <MButton Class="mr-2"
-                                         IsActive="@context.Active"
-                                         Text
-                                         Color="primary"
-                                         OnClick="@context.Toggle">
-                                    @item.Language
-                                </MButton>
-                            </MItem>
-                        }
-                    </MItemGroup>
+            @if (_showExpands)
+            {
+                <ExpandTransition>
+                    <ShowTransitionElement Value="_expand">
+                        <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
+                            @foreach (var item in _sections)
+                            {
+                                <MItem>
+                                    <MButton Class="mr-2"
+                                             IsActive="@context.Active"
+                                             Text
+                                             Color="primary"
+                                             OnClick="@context.Toggle">
+                                        @item.Language
+                                    </MButton>
+                                </MItem>
+                            }
+                        </MItemGroup>
 
-                    <MDivider />
+                        <AppDivider />
 
-                    <MWindow Value="_selected" Class="grey lighten-5">
-                        @foreach (var item in _sections)
-                        {
-                            <MWindowItem>
-                                <Markup Code="@item.Code" Language="@item.Language" Rounded="false" />
-                            </MWindowItem>
-                        }
-                    </MWindow>
+                        <MWindow Value="_selected" Class="grey lighten-5">
+                            @foreach (var item in _sections)
+                            {
+                                <MWindowItem>
+                                    <Markup Code="@item.Code" Language="@item.Language" Rounded="false" />
+                                </MWindowItem>
+                            }
+                        </MWindow>
 
-                    <MDivider />
-                </ShowTransitionElement>
-            </ExpandTransition>
+                        <AppDivider />
+                    </ShowTransitionElement>
+                </ExpandTransition>
+            }
         </div>
     </MSheet>
 }

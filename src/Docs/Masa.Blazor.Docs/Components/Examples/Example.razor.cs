@@ -22,6 +22,7 @@ public partial class Example : NextTickComponentBase
     private bool _rendered;
     private bool _dark;
     private bool _expand;
+    private bool _showExpands;
     private StringNumber _selected = 0;
     private Type? _type;
     private List<(string Icon, string Path, Action? OnClick, string? href)> _tooltips = new();
@@ -41,7 +42,7 @@ public partial class Example : NextTickComponentBase
         {
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
             new("mdi-github", "view-in-github", null, "https://github.com/BlazorComponent"), // todo:dynamic
-            new("mdi-code-tags", "view-source", () => _expand = !_expand, null)
+            new("mdi-code-tags", "view-source", ToggleCode, null)
         };
     }
 
@@ -95,6 +96,21 @@ public partial class Example : NextTickComponentBase
         }
     }
 
+    private void ToggleCode()
+    {
+        if (!_showExpands)
+        {
+            _showExpands = true;
+            StateHasChanged();
+
+            _expand = true;
+        }
+        else
+        {
+            _expand = !_expand;
+        }
+    }
+    
     private static(string? Razor, string? cs, string? css) ResolveSourceCode(string sourceCode)
     {
         string? razor = null;
