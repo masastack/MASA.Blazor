@@ -45,8 +45,28 @@ public static class ApiGenerator
                 { "contents", contentParameters },
             };
 
+            var publicMethods = type.GetMethods()
+                                    .Where(prop => prop.CustomAttributes.Any(attr => attr.AttributeType == typeof(PublicMethodAttribute)))
+                                    .ToList();
+
+            if (publicMethods.Any())
+            {
+                value.Add("methods", publicMethods.Select(MapToParameterInfo).ToList());
+            }
+
             parametersCache.Add(typeName, value);
         }
+    }
+
+    static ParameterInfo MapToParameterInfo(MethodInfo methodInfo)
+    {
+        var instance = new ParameterInfo()
+        {
+            Name = methodInfo.Name,
+            Type = GetMethodType(methodInfo)
+        };
+
+        return instance;
     }
 
     static ParameterInfo MapToParameterInfo(PropertyInfo propertyInfo)
@@ -97,6 +117,14 @@ public static class ApiGenerator
         return Keyword(type.Name);
     }
 
+    static string GetMethodType(MethodInfo methodInfo)
+    {
+        var parameters = string.Join(", ", methodInfo.GetParameters().Select(Parameter));
+        var returnType = Keyword(methodInfo.ReturnType.Name);
+
+        return $"({parameters}) => {returnType}";
+    }
+
     static string? GetValueOfDefaultValueAttribute(CustomAttributeData data)
     {
         var argument = data.ConstructorArguments.First();
@@ -133,8 +161,18 @@ public static class ApiGenerator
         return new[] { "Attributes", "RefBack" }.Contains(name);
     }
 
+    static string Parameter(System.Reflection.ParameterInfo info)
+    {
+        return $"{Keyword(info.ParameterType.Name)} {info.Name}";
+    }
+
     static string Keyword(string typeName)
     {
+        if (typeName == typeof(void).Name)
+        {
+            return "void";
+        }
+        
         return typeName switch
         {
             nameof(String) => "string",
