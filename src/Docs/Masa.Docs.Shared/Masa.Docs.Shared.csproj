@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MASA.Docs\src\Masa.Framework.Docs\Masa.Framework.Docs.csproj" />
     <ProjectReference Include="..\..\MASA.Docs\src\Masa.Stack.Docs\Masa.Stack.Docs.csproj" />
     <ProjectReference Include="..\Masa.Blazor.Docs\Masa.Blazor.Docs.csproj" />
   </ItemGroup>
