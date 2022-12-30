@@ -17,9 +17,9 @@ related:
 
 <app-alert type="info" content="默认情况下，**MBreadcrumbs** 将禁用路由联动。可以通过 `Linkage` 属性开启路由联动。"></app-alert>
 
-## Examples
+## 示例
 
-### Props
+### 属性
 
 #### 分割线
 

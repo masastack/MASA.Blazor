@@ -2,9 +2,13 @@
 @inject I18n I18n
 
 <MTabs Style="display: contents;">
-    @foreach (var item in AppService.TopNavMenus)
+    @foreach (var item in AppService.GetNavMenus(Project))
     {
-        <MTab Class="text-none secondary-emphasis-text" Href="@item.URL" Target="@item.Target">@I18n.T(item.Title)</MTab>
+        <MTab Class="text-none secondary-emphasis-text"
+              Href="@item.URL"
+              Target="@item.Target">
+            @I18n.T(item.Title)
+        </MTab>
     }
 </MTabs>
 
@@ -12,5 +16,8 @@
 
     [CascadingParameter]
     public CultureInfo Culture { get; set; } = null!;
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
 
 }
