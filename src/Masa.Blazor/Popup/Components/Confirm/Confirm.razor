@@ -25,7 +25,7 @@
             </MCardText>
         }
 
-        <MCardActions Class="@ActionsClass" Style="@($"justify-content:end; {ActionsStyle}")">
+        <MCardActions Class="@ActionsClass" Style="@($"justify-content:flex-end; {ActionsStyle}")">
             <ModalButton Props="ComputedCancelButtonProps"
                          Disabled="_okLoading"
                          OnClick="HandleOnCancel">
