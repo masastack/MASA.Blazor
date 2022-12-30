@@ -11,12 +11,6 @@ related:
 
 ### Props
 
-#### Confirm
-
-Provides a standard type of confirmation dialog.
-
-<masa-example file="Examples.components.not_grouped.Confirm"></masa-example>
-
 #### PageHeader
 
 A more general header, including title, subtitle, action buttons and search bar.
