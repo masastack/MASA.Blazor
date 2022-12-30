@@ -111,11 +111,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
         const content = tokens[idx].content;
         const info = tokens[idx].info;
 
-        tokens[idx].tag = "default-app-markup";
-        tokens[idx].attrSet("code", content);
-        tokens[idx].attrSet("language", info);
-
-        return self.renderToken(tokens, idx, options);
+        return `<default-app-markup code="${content.replaceAll('"', "&quot;")}" language="${info}"></default-app-markup>\n`;
       }
     };
   }
