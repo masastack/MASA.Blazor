@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Playground", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Stack.Docs", "MASA.Docs\src\Masa.Stack.Docs\Masa.Stack.Docs.csproj", "{135ED7DC-8201-4B6D-9A6C-5B4018613281}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Framework.Docs", "MASA.Docs\src\Masa.Framework.Docs\Masa.Framework.Docs.csproj", "{B5AB302E-2357-467E-B085-E64892E2814F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{135ED7DC-8201-4B6D-9A6C-5B4018613281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{135ED7DC-8201-4B6D-9A6C-5B4018613281}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{135ED7DC-8201-4B6D-9A6C-5B4018613281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5AB302E-2357-467E-B085-E64892E2814F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5AB302E-2357-467E-B085-E64892E2814F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5AB302E-2357-467E-B085-E64892E2814F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5AB302E-2357-467E-B085-E64892E2814F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
