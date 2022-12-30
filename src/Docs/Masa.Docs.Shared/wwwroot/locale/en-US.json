@@ -42,12 +42,14 @@
     "updated": "updated",
     "js-proxy": "JS proxy"
   },
-
-  "Home": "Home",
-  "Docs": "Docs",
-  "Blog": "Blog",
-  "Team": "Team",
+  "home": "Home",
+  "docs": "Documents",
+  
+  "blog": "Blog",
+  "pro": "Pro",
+  "team": "Team",
   "Search": "Search",
+  "official-website": "Official website",
   "MASABlazorDescription": "Provide standard basic component library based on the interaction ability of Material Design and BlazorComponent. It provides preset components for standard scenarios such as layout, pop-up frame standard, loading, global exception handling, etc.",
   "GetStarted": "Get Started",
   "VideoTeaching": "Video teaching",

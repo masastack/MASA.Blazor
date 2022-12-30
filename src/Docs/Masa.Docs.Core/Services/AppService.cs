@@ -1,27 +1,9 @@
 ﻿namespace Masa.Docs.Core.Services;
 
-public partial class AppService
+public class AppService
 {
-    // private static readonly Dictionary<string, (string Icon, string color)> Categories = new()
-    // {
-    //     { "components", ("mdi-view-dashboard-outline", "indigo darken-1") },
-    //     { "features", ("mdi-image-edit-outline", "red") },
-    //     { "styles", ("mdi-palette-outline", "deep-purple accent-4") },
-    // };
-
     public const int AppBarHeight = 96;
     public const int MobileAppBarHeight = 64;
-
-    public static List<(string Title, string URL, string Target)> TopNavMenus => new()
-    {
-        ("Document", "", ""),
-        ("Getting started", "", ""),
-        ("Components", "/components/alerts", ""),
-        ("Pro", "http://blazor-pro.masastack.com", "_blank"),
-        ("Blog", "https://blogs.masastack.com/categories/NET/Blazor", "_blank"),
-        ("Community", "", ""),
-        ("Official website", "", "")
-    };
 
     private List<MarkdownItTocContent>? _toc;
 
@@ -35,5 +17,39 @@ public partial class AppService
             _toc = value;
             TocChanged?.Invoke(this, value);
         }
+    }
+
+    public static List<(string Title, string URL, string Target)> GetNavMenus(string? project)
+    {
+        var list = new List<(string Title, string URL, string Target)>()
+        {
+            new("docs", "/", "")
+        };
+
+        if (project == "blazor")
+        {
+            list.Add(("getting-started", "/blazor/getting-started/installation", ""));
+            list.Add(("ui-components", "/blazor/components/alerts", ""));
+            list.Add(("pro", "https://blazor-pro.masastack.com", "_blank"));
+            list.Add(("blog", "https://blogs.masastack.com/tags/Blazor/", "_blank"));
+            list.Add(("official-website", "https://www.masastack.com/blazor", "_blank"));
+        }
+        else if (project == "framework")
+        {
+            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Framework/", "_blank"));
+            list.Add(("official-website", "https://www.masastack.com/framework", "_blank"));
+        }
+        else if (project == "stack")
+        {
+            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Stack/", "_blank"));
+            list.Add(("official-website", "https://www.masastack.com/stack", "_blank"));
+        }
+        else
+        {
+            list.Add(("blog", "https://blogs.masastack.com", "_blank"));
+            list.Add(("official-website", "https://www.masastack.com", "_blank"));
+        }
+
+        return list;
     }
 }
