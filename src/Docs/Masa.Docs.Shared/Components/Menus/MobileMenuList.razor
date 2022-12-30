@@ -11,7 +11,7 @@
                    Temporary>
     <MList Nav @key="Value">
         <MListItemGroup>
-            @foreach (var item in AppService.TopNavMenus)
+            @foreach (var item in AppService.GetNavMenus(Project))
             {
                 <MListItem Href="@item.URL" Target="@item.Target">
                     <MListItemContent>
@@ -40,6 +40,9 @@
 </MNavigationDrawer>
 
 @code {
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
 
     [Parameter]
     public bool Value { get; set; }

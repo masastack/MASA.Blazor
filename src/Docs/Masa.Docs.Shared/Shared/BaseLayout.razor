@@ -1,20 +1,27 @@
 ﻿@inherits LayoutComponentBase
 @inject I18n I18n
+@inject NavigationManager NavigationManager
+@inject DocService DocService
+@implements IDisposable
 
 <MApp>
     <CascadingValue Value="@I18n.Culture">
-        <AppBar OnCultureChanged="@OnCultureChanged"
-                OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
-                OnDotClick="HandleOnDotClick"
-                OnSettingsClick="HandleSettingsClick"
-                HideAppBarNavIcon="@_hideAppBarNavIcon" />
+        <CascadingValue Value="@_project" Name="project">
+            <MErrorHandler>
+                <AppBar OnCultureChanged="@OnCultureChanged"
+                        OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                        OnDotClick="HandleOnDotClick"
+                        OnSettingsClick="HandleSettingsClick"
+                        HideAppBarNavIcon="@_hideAppBarNavIcon" />
 
-        <CascadingValue Value="this" IsFixed>
-            @Body
+                <CascadingValue Value="this" IsFixed>
+                    @Body
+                </CascadingValue>
+
+                <Settings @bind-Value="_showSettings" />
+                <MobileMenuList @bind-Value="_showMobileMenuList" />
+            </MErrorHandler>
         </CascadingValue>
-
-        <Settings @bind-Value="_showSettings" />
-        <MobileMenuList @bind-Value="_showMobileMenuList" />
     </CascadingValue>
 </MApp>
 
@@ -24,10 +31,55 @@
     private bool _showMobileMenuList;
     private bool _hideAppBarNavIcon;
     private bool _showSettings;
+    private string? _project;
+
+    private Dictionary<string, string> _projectMap = new();
 
     internal bool ShowDrawer;
 
     internal EventCallback<bool> OnAppBarNavIconClick { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _projectMap = await DocService.ReadProjectMapAsync();
+
+            var segments = NavigationManager.GetSegments();
+            var secondSegment = segments.ElementAtOrDefault(1);
+            secondSegment = secondSegment?.TrimEnd('/');
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+            }
+
+            StateHasChanged();
+        }
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+
+        if (_project != secondSegment)
+        {
+            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+            {
+                _project = secondSegment;
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
 
     private void OnCultureChanged(string cultureName)
     {
@@ -71,6 +123,11 @@
 
         _hideAppBarNavIcon = false;
         StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 
 }
