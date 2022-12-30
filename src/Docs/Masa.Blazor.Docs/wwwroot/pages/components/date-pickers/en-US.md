@@ -96,10 +96,6 @@ Use the `Width` prop You can specify the picker’s width or make it full width.
 
 ### Event
 
-#### Date buttons(TODO)
-
-<masa-example file="Examples.components.date_pickers.DateButtons"></masa-example>
-
 #### DateEvents(TODO)
 
 <masa-example file="Examples.components.date_pickers.DateEvents"></masa-example>

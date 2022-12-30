@@ -90,10 +90,6 @@ related:
 
 ### 事件
 
-#### 日期按钮(TODO)
-
-<masa-example file="Examples.components.date_pickers.DateButtons"></masa-example>
-
 #### 日期事件(TODO)
 
 <masa-example file="Examples.components.date_pickers.DateEvents"></masa-example>
