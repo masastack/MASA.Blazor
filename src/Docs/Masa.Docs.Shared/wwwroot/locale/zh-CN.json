@@ -275,6 +275,10 @@
   "local-event": "进程内事件",
   "integration-event": "集成事件",
   "caching": "缓存",
+  "minimal-apis": "最小APIs",
+  "caller": "服务调用",
+  "httpclient": "HttpClient",
+  "daprclient": "DaprClient",
   
   "best-practices": "最佳实践",
   "get-started": "开始使用",
