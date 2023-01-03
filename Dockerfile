@@ -12,5 +12,4 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 WORKDIR /app
 COPY . .
 RUN dotnet build src/Docs/Masa.Docs.Server -c Release
-ENTRYPOINT ["dotnet","./src/Doc/Masa.Blazor.Doc.Server/bin/Release/net6.0/Masa.Blazor.Doc.Server.dll"]
-
+ENTRYPOINT ["dotnet","./src/Docs/Masa.Docs.Server/bin/Release/net7.0/Masa.Docs.Server.dll"]
