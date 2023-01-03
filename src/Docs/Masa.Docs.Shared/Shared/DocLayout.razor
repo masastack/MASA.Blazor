@@ -62,7 +62,7 @@
 
     private async Task ToTopAsync()
     {
-        await Js.InvokeVoidAsync("backTop", null);
+        await Js.InvokeVoidAsync("backTop");
     }
 
     public async ValueTask DisposeAsync()

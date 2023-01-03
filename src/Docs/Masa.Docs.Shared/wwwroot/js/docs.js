@@ -169,7 +169,7 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
     const currentOffset =
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
-    if (currentOffset <= 1) {
+    if (currentOffset === 0) {
       await dotnet.invokeMethodAsync("UpdateHash", "")
       return
     }
@@ -224,7 +224,7 @@ function slideTo(targetPageY) {
       document.documentElement.scrollTop = 0;
       clearInterval(timer);
     } else {
-        window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
+      window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
     }
   }, 10);
 }
