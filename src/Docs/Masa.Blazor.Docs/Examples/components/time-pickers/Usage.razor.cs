@@ -6,6 +6,12 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
     }
 
+    protected override ParameterList<bool> GenToggleParameters() => new()
+    {
+        { nameof(MTimePicker.Landscape), false },
+        { nameof(MTimePicker.Scrollable), false }
+    };
+
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
         { nameof(MTimePicker.AmPmInTitle),new CheckboxParameter("false",true)},
