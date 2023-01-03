@@ -2,22 +2,14 @@
 title: Not Grouped（未分组的）
 tag: preset
 related:
-
   - /blazor/components/buttons
   - /blazor/components/text-fields
   - /blazor/components/lists
-
 ---
 
 ## 示例
 
 ### 属性
-
-#### 确认框
-
-提供标准类型的确认对话框
-
-<masa-example file="Examples.components.not_grouped.Confirm"></masa-example>
 
 #### 页头
 

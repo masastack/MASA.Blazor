@@ -6,9 +6,7 @@ tag: js-proxy
 
 ## 使用
 
-富文本编辑器示例
-
-<editor-usage></editor-usage>
+<masa-example file="Examples.components.editor.Usage"></masa-example>
 
 ## css文件
 
