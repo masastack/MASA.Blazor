@@ -8,6 +8,12 @@ namespace Masa.Blazor
         public bool Disabled { get; set; }
 
         [Parameter]
+        public OneOf<DateOnly[], Func<DateOnly, bool>>? Events { get; set; }
+
+        [Parameter]
+        public OneOf<string, Func<DateOnly, string>, Func<DateOnly, string[]>>? EventColor { get; set; }
+
+        [Parameter]
         public Func<DateOnly, bool> AllowedDates { get; set; }
 
         [Parameter]
