@@ -6,9 +6,16 @@
     <MSheet Class="mb-9 m-example"
             Outlined
             Rounded="true">
-        @*TODO: Lazy component*@
-
         <div style="min-height: 52px">
+            <MSheet Class="pa-4" Rounded="true" Dark="_dark">
+                @if (_type is not null)
+                {
+                    <DynamicComponent Type="_type"></DynamicComponent>
+                }
+            </MSheet>
+
+            <AppDivider />
+
             <div class="text-end pa-2">
                 @foreach (var tooltip in _tooltips)
                 {
@@ -21,19 +28,10 @@
                 }
             </div>
 
-            <AppDivider />
-
-            <MSheet Class="pa-4" Rounded="true" Dark="_dark">
-                @if (_type is not null)
-                {
-                    <DynamicComponent Type="_type"></DynamicComponent>
-                }
-            </MSheet>
-
-            <AppDivider />
-
             @if (_showExpands)
             {
+                <AppDivider />
+
                 <ExpandTransition>
                     <ShowTransitionElement Value="_expand">
                         <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
