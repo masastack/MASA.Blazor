@@ -74,12 +74,12 @@
     pointer-events: none;
 }
 
-.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe > td {
-    background-color: #fafafa;
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
+    background: #fafafa;
 }
 
-.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td {
-    background: #eeeeee;
+.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
+    background: #212121;
 }
 
 .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {

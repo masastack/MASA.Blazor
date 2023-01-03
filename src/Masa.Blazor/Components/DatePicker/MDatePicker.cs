@@ -81,6 +81,12 @@ namespace Masa.Blazor
         public bool Disabled { get; set; }
 
         [Parameter]
+        public OneOf<DateOnly[], Func<DateOnly, bool>>? Events { get; set; }
+
+        [Parameter]
+        public OneOf<string, Func<DateOnly, string>, Func<DateOnly, string[]>>? EventColor { get; set; }
+
+        [Parameter]
         public int FirstDayOfWeek { get; set; }
 
         [Parameter]
@@ -370,6 +376,8 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
                     attrs[nameof(MDatePickerDateTable<TValue>.Dark)] = Dark;
                     attrs[nameof(MDatePickerDateTable<TValue>.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Events)] = Events;
+                    attrs[nameof(MDatePickerDateTable<TValue>.EventColor)] = EventColor;
                     attrs[nameof(MDatePickerDateTable<TValue>.FirstDayOfWeek)] = FirstDayOfWeek;
                     attrs[nameof(MDatePickerDateTable<TValue>.Format)] = DayFormat;
                     attrs[nameof(MDatePickerDateTable<TValue>.Light)] = Light;
@@ -393,6 +401,8 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Dark)] = Dark;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Events)] = Type == DatePickerType.Month ? Events : default;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.EventColor)] = Type == DatePickerType.Month ? EventColor : default;
                     attrs[nameof(MDatePickerDateTable<TValue>.Format)] = MonthFormat;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Light)] = Light;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Min)] = MinMonth;

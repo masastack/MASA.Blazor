@@ -111,11 +111,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
         const content = tokens[idx].content;
         const info = tokens[idx].info;
 
-        tokens[idx].tag = "default-app-markup";
-        tokens[idx].attrSet("code", content);
-        tokens[idx].attrSet("language", info);
-
-        return self.renderToken(tokens, idx, options);
+        return `<default-app-markup code="${content.replaceAll('"', "&quot;")}" language="${info}"></default-app-markup>\n`;
       }
     };
   }
@@ -214,3 +210,21 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
     _timeout = setTimeout(findActiveIndex, 17);
   }
 };
+
+window.backTop = function () {
+  slideTo(0);
+}
+
+function slideTo(targetPageY) {
+  var timer = setInterval(function () {
+    var currentY = document.documentElement.scrollTop || document.body.scrollTop;
+    var distance = targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
+    var speed = Math.ceil(distance / 10);
+    if (currentY == targetPageY || currentY == 1) {
+      document.documentElement.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
+    }
+  }, 10);
+}

@@ -6,9 +6,7 @@ tag: js-proxy
 
 ## Usage
 
-Examples
-
-<editor-usage></editor-usage>
+<masa-example file="Examples.components.editor.Usage"></masa-example>
 
 ## CSS file
 
