@@ -50,7 +50,9 @@
                 var first = FirstDayOfWeek;
 
                 var range = Enumerable.Range(0, 7);
-                return WeekdayFormatter != null ? range.Select(i => WeekdayFormat(DateOnly.Parse($"2017-01-{first + i + 15}"))) : range.Select(i => new[] { "S", "M", "T", "W", "T", "F", "S" }[(i + first) % 7]);
+                return WeekdayFormatter != null
+                    ? range.Select(i => WeekdayFormat(DateOnly.Parse($"2017-01-{first + i + 15}")))
+                    : range.Select(i => new[] { "S", "M", "T", "W", "T", "F", "S" }[(i + first) % 7]);
             }
         }
 
@@ -85,6 +87,16 @@
                 {
                     cssBuilder
                         .Add("m-date-picker-table--date__week");
+                })
+                .Apply("events", cssBuilder => { cssBuilder.Add("m-date-picker-table__events"); })
+                .Apply("event", cssBuilder =>
+                {
+                    var color = (string)cssBuilder.Data;
+                    cssBuilder.AddBackgroundColor(color);
+                }, styleBuilder =>
+                {
+                    var color =  (string)styleBuilder.Data;
+                    styleBuilder.AddBackgroundColor(color);
                 });
 
             AbstractProvider

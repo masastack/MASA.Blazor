@@ -96,11 +96,9 @@ Use the `Width` prop You can specify the picker’s width or make it full width.
 
 ### Event
 
-#### Date buttons(TODO)
+#### DateEvents
 
-<masa-example file="Examples.components.date_pickers.DateButtons"></masa-example>
-
-#### DateEvents(TODO)
+You can specify events using arrays or functions. To change the default color of the event use `EventColor` parameter. Your `Events` function can return an array of colors (material or css) in case you want to display multiple event indicators.
 
 <masa-example file="Examples.components.date_pickers.DateEvents"></masa-example>
 

@@ -90,11 +90,9 @@ related:
 
 ### 事件
 
-#### 日期按钮(TODO)
+#### 日期事件
 
-<masa-example file="Examples.components.date_pickers.DateButtons"></masa-example>
-
-#### 日期事件(TODO)
+您可以使用数组或函数指定事件。要更改事件的默认颜色，请使用`EventColor`参数。如果您想显示多个事件指示器，您的`Events`函数可以返回一个颜色数组(material或css)。
 
 <masa-example file="Examples.components.date_pickers.DateEvents"></masa-example>
 
