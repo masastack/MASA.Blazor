@@ -64,6 +64,9 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "tag":
                                 navItem.Tag = reader.GetString();
                                 break;
+                            case "state":
+                                navItem.State = reader.GetString();
+                                break;
                             case "tiling":
                                 var tilingStr = reader.GetString();
                                 navItem.Tiling = tilingStr switch

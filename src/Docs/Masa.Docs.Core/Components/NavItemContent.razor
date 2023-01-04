@@ -17,12 +17,12 @@
     }
 </MListItemContent>
 
-@if (HasTag)
+@if (HasState)
 {
-    string color = GetColor(Item!.Tag!);
+    string color = GetColor(Item!.State!);
     if (Item!.HasChildren())
     {
-        <MChip Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"tag.{Item.Tag}")</MChip>
+        <MChip Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
     }
     else
     {
@@ -34,9 +34,9 @@
     [Parameter, EditorRequired]
     public TItem? Item { get; set; }
 
-    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
+    bool HasState => !string.IsNullOrEmpty(Item?.State);
 
-    private static Dictionary<string, string> _tagColors = new()
+    private static Dictionary<string, string> _stateColors = new()
     {
         { "new", "#05CD99" },
         { "pwd", "#FF5252" }
@@ -44,7 +44,7 @@
 
     string GetColor(string tag)
     {
-        return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
+        return _stateColors.ContainsKey(tag) ? _stateColors[tag] : "primary";
     }
 
     string? GetSubtitle(string? title)

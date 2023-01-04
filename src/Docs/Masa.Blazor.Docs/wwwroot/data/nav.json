@@ -50,7 +50,7 @@
     "icon": "mdi-layers-triple",
     "group": "components",
     "tiling": "some",
-    "tag": "new",
+    "state": "new",
     "items": [
       {
         "title": "all",
@@ -73,24 +73,45 @@
       },
       {
         "title": "block-text",
-        "tag": "new"
+        "tag": "preset"
       },
       "borders",
-      "bottom-navigation",
+      {
+        "title": "bottom-navigation",
+        "state": "new"
+      },
       "bottom-sheets",
       "breadcrumbs",
       "buttons",
       "cards",
       "carousels",
       "chips",
-      "copyable-text",
-      "cron",
+      {
+        "title": "copyable-text",
+        "tag": "preset"
+      },
+      {
+        "title": "cron",
+        "tag": "preset"
+      },
       "dialogs",
       "dividers",
-      "drag-zone",
-      "drawers",
-      "echarts",
-      "editors",
+      {
+        "title": "drag-zone",
+        "tag": "js-proxy"
+      },
+      {
+        "title": "drawers",
+        "tag": "preset"
+      },
+      {
+        "title": "echarts",
+        "tag": "js-proxy"
+      },
+      {
+        "title": "editors",
+        "tag": "js-proxy"
+      },
       "error-handler",
       "expansion-panels",
       "floating-action-buttons",
@@ -129,11 +150,17 @@
       },
       "hover",
       "icons",
-      "image-captcha",
+      {
+        "title": "image-captcha",
+        "tag": "preset"
+      },
       "images",
       "infinite-scroll",
       "lists",
-      "markdowns",
+      {
+        "title": "markdowns",
+        "tag": "js-proxy"
+      },
       "menus",
       {
         "title": "mobiles",
@@ -145,11 +172,18 @@
           "mobile-pickers",
           "mobile-picker-views",
           "mobile-time-pickers"
-        ]
+        ],
+        "tag": "preset"
       },
-      "modals",
+      {
+        "title": "modals",
+        "tag": "preset"
+      },
       "navigation-drawers",
-      "not-grouped",
+      {
+        "title": "not-grouped",
+        "tag": "preset"
+      },
       "overlays",
       "paginations",
       {
@@ -161,7 +195,10 @@
           "time-pickers"
         ]
       },
-      "popup-service",
+      {
+        "title": "popup-service",
+        "tag": "service"
+      },
       {
         "title": "progress",
         "group": "components",
@@ -187,7 +224,10 @@
       },
       "tabs",
       "timelines",
-      "toasts",
+      {
+        "title": "toasts",
+        "tag": "preset"
+      },
       "tooltips",
       "treeview",
       "virtual-scroll"

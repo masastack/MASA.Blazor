@@ -34,10 +34,16 @@
   "contents": "插槽",
   "events": "事件",
   "methods": "方法",
-  "tag": {
+  "state": {
     "new": "NEW",
     "pwd": "PWD"
   },
+  "tag": {
+    "preset": "预置",
+    "service": "服务",
+    "js-proxy": "JS代理"
+  },
+
   "home": "首页",
   "docs": "文档中心",
   "sponsors": "赞助商",

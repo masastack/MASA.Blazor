@@ -35,10 +35,16 @@
   "contents": "Contents",
   "events": "Events",
   "methods": "Methods",
-  "tag": {
+  "state": {
     "new": "NEW",
     "pwd": "PWD"
   },
+  "tag": {
+    "preset": "Preset",
+    "service": "Service", 
+    "js-proxy": "JS proxy"
+  },
+
   "home": "Home",
   "docs": "Documents",
   "sponsors": "SPONSORS",
