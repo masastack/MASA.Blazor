@@ -61,9 +61,6 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "group":
                                 navItem.Group = reader.GetString();
                                 break;
-                            case "tag":
-                                navItem.Tag = reader.GetString();
-                                break;
                             case "state":
                                 navItem.State = reader.GetString();
                                 break;

@@ -1,6 +1,7 @@
 ---
 title: Block Text
 desc: "Display two data of the same type side by side."
+tag: "Preset"
 related:
   - /blazor/components/chips
   - /blazor/components/copyable-text

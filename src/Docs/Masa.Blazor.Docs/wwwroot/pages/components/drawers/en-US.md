@@ -1,6 +1,7 @@
 ---
 title: Drawers
 desc: ""
+tag: "Preset"
 related:
   - /blazor/components/dialogs
   - /blazor/components/buttons

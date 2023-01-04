@@ -1,6 +1,6 @@
 ---
 title: Popup service
-tag: service
+tag: Service
 related:
   - /blazor/components/dialogs
   - /blazor/components/buttons

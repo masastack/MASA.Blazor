@@ -303,5 +303,6 @@
   "client": "客户端",
   "identity-resource": "身份资源",
   "user-claim": "用户申明",
-  "basic-concepts": "基础概念"
+  "basic-concepts": "基础概念",
+  "demo": "示例"
 }

@@ -1,7 +1,7 @@
 ---
 title: ECharts
 desc: "[ECharts](https://echarts.apache.org/examples/en/index.html)"
-tag: js-proxy
+tag: "JsProxy"
 ---
 
 ## Usage

@@ -1,6 +1,6 @@
 ---
 title: Image Captcha（图片验证码）
-tag: preset
+tag: 预置
 related:
   - /blazor/components/text-fields
   - /blazor/components/image

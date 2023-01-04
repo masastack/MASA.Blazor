@@ -12,8 +12,6 @@ public interface IDefaultItem<TItem>
 
     string? Title { get; set; }
 
-    string? Tag { get; set; }
-
     string? State { get; set; }
 
     StringNumber Value { get; set; }
