@@ -36,15 +36,13 @@
   "events": "Events",
   "methods": "Methods",
   "tag": {
-    "preset": "preset",
-    "service": "service",
-    "new": "new",
-    "updated": "updated",
-    "js-proxy": "JS proxy"
+    "new": "NEW",
+    "pwd": "PWD"
   },
   "home": "Home",
   "docs": "Documents",
-  
+  "sponsors": "SPONSORS",
+
   "blog": "Blog",
   "pro": "Pro",
   "team": "Team",
@@ -239,7 +237,6 @@
   "permission": "Permission",
   "user": "User",
   "role": "Role",
-  "team": "Team",
   "position": "Position",
   "org": "Organization",
   "operation-log": "Operation Log",

@@ -156,28 +156,6 @@ h7.m-heading {
     margin-left: 0 !important;
 }
 
-.m-list-group.m-list-group--default .m-list-item__title {
-    font-weight: 500;
-    font-size: 1rem;
-}
-
-.m-list-item.m-list-item--default {
-    margin-bottom: 0px !important;
-}
-
-.m-list-group.m-list-group--default .m-list-item {
-    margin-bottom: 0px !important;
-    height: 48px !important;
-}
-
-.m-list-group.m-list-group--default .m-list-item__icon {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    display: flex;
-    height: 100% !important;
-    align-items: center;
-}
-
 #github-issuse {
     height: 32px;
     background: rgba(233, 237, 247, 0.5);
@@ -274,3 +252,46 @@ a.text-dec-none {
 .m-example.theme--light.m-sheet--outlined {
     border: thin solid #E4E8F3;
 }
+
+.doc-list-nav {
+    padding-left: 0 !important;
+}
+
+    .doc-list-nav .m-list-group.m-list-group--default .m-list-item__title {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .doc-list-nav .m-list-item.m-list-item--default {
+        margin-bottom: 0px !important;
+    }
+
+    .doc-list-nav .m-list-group.m-list-group--default .m-list-item {
+        margin-bottom: 0px !important;
+        height: 48px !important;
+    }
+
+    .doc-list-nav .m-list-group.m-list-group--default .m-list-item__icon {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        display: flex;
+        height: 100% !important;
+        align-items: center;
+    }
+
+    .doc-list-nav a.m-list-item--active .m-list-item__title {
+        color: #fff;
+    }
+
+    .doc-list-nav a.m-list-item--active .m-list-item__subtitle {
+        color: rgb(255 255 255 / 60%) !important;
+    }
+
+    .doc-list-nav a.m-list-item--active {
+        background-color: #4318FF;
+        color: #fff !important;
+    }
+
+    .doc-list-nav .m-list-item, .doc-list-nav .m-list-item:before {
+        border-radius: 0 4px 4px 0 !important;
+    }

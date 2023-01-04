@@ -19,7 +19,15 @@
 
 @if (HasTag)
 {
-    <ColorChip Color="@GetColor(Item!.Tag!)" Small>@I18n.T($"tag.{Item.Tag}")</ColorChip>
+    string color = GetColor(Item!.Tag!);
+    if (Item!.HasChildren())
+    {
+        <MChip Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"tag.{Item.Tag}")</MChip>
+    }
+    else
+    {
+        <MIcon Size="12" Color="@color">mdi-circle</MIcon>
+    }
 }
 
 @code {
@@ -30,11 +38,8 @@
 
     private static Dictionary<string, string> _tagColors = new()
     {
-        { "preset", "blue" },
-        { "service", "purple" },
-        { "new", "green" },
-        { "updated", "red" },
-        { "js-proxy", "pink" }
+        { "new", "#05CD99" },
+        { "pwd", "#FF5252" }
     };
 
     string GetColor(string tag)
