@@ -50,6 +50,7 @@
     "icon": "mdi-layers-triple",
     "group": "components",
     "tiling": "some",
+    "state": "new",
     "items": [
       {
         "title": "all",
@@ -75,7 +76,10 @@
         "tag": "preset"
       },
       "borders",
-      "bottom-navigation",
+      {
+        "title": "bottom-navigation",
+        "state": "new"
+      },
       "bottom-sheets",
       "breadcrumbs",
       "buttons",

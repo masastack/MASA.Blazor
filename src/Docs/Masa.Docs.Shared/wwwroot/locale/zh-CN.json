@@ -28,22 +28,25 @@
   "features": "特性",
   "breakpoints": "响应式显示",
   "icon-fonts": "图标字体",
-  "internationalization": "国际化（i18n）",
+  "internationalization": "国际化",
   "layouts": "布局",
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
   "methods": "方法",
+  "state": {
+    "new": "NEW",
+    "pwd": "PWD"
+  },
   "tag": {
     "preset": "预置",
     "service": "服务",
-    "new": "新增",
-    "updated": "更新",
     "js-proxy": "JS代理"
   },
 
   "home": "首页",
   "docs": "文档中心",
+  "sponsors": "赞助商",
   "blog": "博客",
   "pro": "Pro",
   "team": "团队",
@@ -237,8 +240,8 @@
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
   "all": "所有组件",
-  
-  
+
+
   "concepts": "基础概念",
   "overview": "概述",
   "building-blocks": "构建块",
@@ -250,13 +253,12 @@
   "authentication": "认证",
   "oidc": "OpenIdConnect",
   "identity": "用户身份",
-  "blazor-server":"Blazor Server",
-  "blazor-wasm":"Blazor Wasm",
-  "web":"ASP.NET Core",
-  "distributed-lock": "",
+  "blazor-server": "Blazor Server",
+  "blazor-wasm": "Blazor Wasm",
+  "web": "ASP.NET Core",
   "configuration": "配置",
   "configuration-local": "本地配置",
-  "configuration-dcc":"分布式配置DCC",
+  "configuration-dcc": "分布式配置DCC",
   "distributed-lock": "分布式锁",
   "lock-local": "本地锁",
   "medallion": "Medallion分布式锁",
@@ -275,7 +277,7 @@
   "local-event": "进程内事件",
   "integration-event": "集成事件",
   "caching": "缓存",
-  
+
   "best-practices": "最佳实践",
   "get-started": "开始使用",
   "introduce": "介绍",
@@ -289,7 +291,6 @@
   "permission": "权限",
   "user": "用户",
   "role": "角色",
-  "team": "团队",
   "position": "职位",
   "org": "组织架构",
   "operation-log": "操作日志",
@@ -301,5 +302,6 @@
   "api-scope": "Api范围",
   "client": "客户端",
   "identity-resource": "身份资源",
-  "user-claim": "用户申明"
+  "user-claim": "用户申明",
+  "basic-concepts": "基础概念"
 }
