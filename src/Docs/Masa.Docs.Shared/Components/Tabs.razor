@@ -5,7 +5,6 @@
     @foreach (var item in AppService.GetNavMenus(Project))
     {
         <MTab Class="text-none secondary-emphasis-text"
-              Link
               Href="@item.URL"
               Target="@item.Target">
             @I18n.T(item.Title)
@@ -13,7 +12,7 @@
     }
 </MTabs>
 
-@code{
+@code {
 
     [CascadingParameter]
     public CultureInfo Culture { get; set; } = null!;
