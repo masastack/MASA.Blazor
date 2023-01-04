@@ -14,6 +14,8 @@ public interface IDefaultItem<TItem>
 
     string? Tag { get; set; }
 
+    string? State { get; set; }
+
     StringNumber Value { get; set; }
 
     List<TItem>? Children { get; }

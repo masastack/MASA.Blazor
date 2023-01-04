@@ -2,6 +2,7 @@
 
 <MList Expand
        Nav
+       Class="@Class"
        Linkage="Linkage">
 
     @foreach (var item in Items)
@@ -41,4 +42,6 @@
     [Parameter]
     public bool Linkage { get; set; }
 
+    [Parameter]
+    public string Class { get; set; }
 }

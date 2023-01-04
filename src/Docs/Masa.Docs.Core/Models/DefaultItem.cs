@@ -14,6 +14,8 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public string? Tag { get; set; }
 
+    public string? State { get; set; }
+
     public StringNumber Value { get; set; }
 
     public List<DefaultItem>? Children { get; set; }
