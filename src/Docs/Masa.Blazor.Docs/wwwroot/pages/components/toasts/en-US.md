@@ -11,7 +11,7 @@ related:
 
 The **PToast** component can be used by PopupService, see the documentation of [PopupService](/blazor/components/popup-service) for details.
 
-<masa-example file="Examples.components.toast.Usage"></masa-example>
+<masa-example file="Examples.components.toasts.Usage"></masa-example>
 
 ## Examples
 
@@ -19,22 +19,22 @@ The **PToast** component can be used by PopupService, see the documentation of [
 
 #### Duration (default 4000ms)
 
-<masa-example file="Examples.components.toast.Duration"></masa-example>
+<masa-example file="Examples.components.toasts.Duration"></masa-example>
 
 #### MaxCount
 
 `MaxCount` prop Set the maximum number of impressions。
 
-<masa-example file="Examples.components.toast.MaxCount"></masa-example>
+<masa-example file="Examples.components.toasts.MaxCount"></masa-example>
 
 #### Toast Position
 
 `Value` prop Set the location of the message popup。
 
-<masa-example file="Examples.components.toast.Position"></masa-example>
+<masa-example file="Examples.components.toasts.Position"></masa-example>
 
 ### Event
 
 #### Custom Toast content
 
-<masa-example file="Examples.components.toast.CustomToast"></masa-example>
+<masa-example file="Examples.components.toasts.CustomToast"></masa-example>
