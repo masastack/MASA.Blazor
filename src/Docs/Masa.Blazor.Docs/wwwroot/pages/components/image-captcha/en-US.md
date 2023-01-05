@@ -1,6 +1,6 @@
 ---
 title: Image Captcha
-tag: preset
+tag: Preset
 related:
   - /blazor/components/text-fields
   - /blazor/components/image

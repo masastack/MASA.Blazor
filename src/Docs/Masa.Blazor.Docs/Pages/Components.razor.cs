@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Docs.ApiGenerator;
+﻿using BlazorComponent.I18n;
+using Masa.Blazor.Docs.ApiGenerator;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
@@ -20,6 +21,9 @@ public partial class Components
 
     [Inject]
     private AppService AppService { get; set; } = null!;
+
+    [Inject]
+    private I18n I18n { get; set; } = null!;
 
     [CascadingParameter]
     private CultureInfo Culture { get; set; } = null!;

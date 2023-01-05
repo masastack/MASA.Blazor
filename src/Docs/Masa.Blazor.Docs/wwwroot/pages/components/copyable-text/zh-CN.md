@@ -1,6 +1,7 @@
 ---
 title: Copyable text（可复制的文本）
 desc: "在文本后提供可以复制内容的图标按钮。"
+tag: "预置"
 related:
   - /blazor/components/icons
   - /blazor/components/tooltips

@@ -1,6 +1,7 @@
 ---
 title: Mobile time pickers
 desc: "A time picker designed for the mobile."
+tag: Preset
 related:
   - /blazor/components/mobile-pickers
   - /blazor/components/mobile-date-time-pickers

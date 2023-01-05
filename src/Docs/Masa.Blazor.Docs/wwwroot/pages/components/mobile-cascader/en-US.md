@@ -1,6 +1,7 @@
 ---
 title: Mobile cascader
 desc: "A cascade selector designed for the mobile."
+tag: Preset
 related:
   - /blazor/components/lists
   - /blazor/components/tabs

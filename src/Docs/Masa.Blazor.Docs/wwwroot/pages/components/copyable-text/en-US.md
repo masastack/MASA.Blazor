@@ -1,6 +1,7 @@
 ---
 title: Copyable text
 desc: "Append a button that provides copy feature to the content."
+tag: "Preset"
 related:
   - /blazor/components/icons
   - /blazor/components/tooltips

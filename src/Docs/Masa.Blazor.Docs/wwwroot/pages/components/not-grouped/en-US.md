@@ -1,6 +1,6 @@
 ---
 title: Not Grouped
-tag: preset
+tag: Preset
 related:
   - /blazor/components/buttons
   - /blazor/components/text-fields
