@@ -1,6 +1,6 @@
 ---
 title: Not Grouped（未分组的）
-tag: preset
+tag: 预置
 related:
   - /blazor/components/buttons
   - /blazor/components/text-fields

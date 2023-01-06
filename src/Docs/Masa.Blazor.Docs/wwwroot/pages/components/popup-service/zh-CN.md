@@ -1,7 +1,7 @@
 ---
 title: Popup service（弹出层服务）
 desc: "提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。"
-tag: service
+tag: 服务
 related:
   - /blazor/components/dialogs
   - /blazor/components/buttons

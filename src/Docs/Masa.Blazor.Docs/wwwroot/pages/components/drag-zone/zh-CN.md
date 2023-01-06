@@ -1,7 +1,7 @@
 ---
 title: DragZone（拖放）
 desc: "**MDragZone** 组件基于[Sorttable.js](https://github.com/SortableJS/Sortable)实现的可拖放功能"
-tag: js-proxy
+tag: "Js代理"
 ---
 
 ## 使用

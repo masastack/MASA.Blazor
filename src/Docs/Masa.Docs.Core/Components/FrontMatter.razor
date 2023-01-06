@@ -1,4 +1,10 @@
-﻿<h1 class="m-heading text-h3 text-sm-h3 mb-4">@Meta.Title</h1>
+﻿<div class="d-flex align-center mb-4">
+    <h1 class="m-heading text-h3 text-sm-h3 ">@Meta.Title</h1>
+    @if (!string.IsNullOrWhiteSpace(Meta.Tag))
+    {
+        <MChip Class="tag-chip px-4 ml-4" Label Color="primary" TextColor="white">@Meta.Tag</MChip>
+    }
+</div>
 <div class="ordinary-text">
     <MMarkdownIt Source="@Meta.Description" NoWrapper Scope="desc"></MMarkdownIt>
 </div>

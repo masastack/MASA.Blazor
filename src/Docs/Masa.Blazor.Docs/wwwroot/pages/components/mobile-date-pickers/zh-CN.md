@@ -1,6 +1,7 @@
 ---
 title: Mobile date pickers（移动端日期选择器）
 desc: "专为移动设备设计的日期选择器。"
+tag: "预置"
 related:
   - /blazor/components/mobile-pickers
   - /blazor/components/mobile-time-views
