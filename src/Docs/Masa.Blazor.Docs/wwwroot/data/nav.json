@@ -75,10 +75,7 @@
           "system-bars"
         ]
       },
-      {
-        "title": "block-text",
-        "tag": "preset"
-      },
+      "block-text",
       "borders",
       {
         "title": "bottom-navigation",
@@ -90,32 +87,14 @@
       "cards",
       "carousels",
       "chips",
-      {
-        "title": "copyable-text",
-        "tag": "preset"
-      },
-      {
-        "title": "cron",
-        "tag": "preset"
-      },
+      "copyable-text",
+      "cron",
       "dialogs",
       "dividers",
-      {
-        "title": "drag-zone",
-        "tag": "js-proxy"
-      },
-      {
-        "title": "drawers",
-        "tag": "preset"
-      },
-      {
-        "title": "echarts",
-        "tag": "js-proxy"
-      },
-      {
-        "title": "editors",
-        "tag": "js-proxy"
-      },
+      "drag-zone",
+      "drawers",
+      "echarts", 
+      "editors",
       "error-handler",
       "expansion-panels",
       "floating-action-buttons",
@@ -154,17 +133,11 @@
       },
       "hover",
       "icons",
-      {
-        "title": "image-captcha",
-        "tag": "preset"
-      },
+      "image-captcha",
       "images",
       "infinite-scroll",
       "lists",
-      {
-        "title": "markdowns",
-        "tag": "js-proxy"
-      },
+      "markdowns",
       "menus",
       {
         "title": "mobiles",
@@ -176,18 +149,11 @@
           "mobile-pickers",
           "mobile-picker-views",
           "mobile-time-pickers"
-        ],
-        "tag": "preset"
+        ]
       },
-      {
-        "title": "modals",
-        "tag": "preset"
-      },
+      "modals",
       "navigation-drawers",
-      {
-        "title": "not-grouped",
-        "tag": "preset"
-      },
+      "not-grouped",
       "overlays",
       "paginations",
       {
@@ -199,10 +165,7 @@
           "time-pickers"
         ]
       },
-      {
-        "title": "popup-service",
-        "tag": "service"
-      },
+      "popup-service",
       {
         "title": "progress",
         "group": "components",
@@ -228,10 +191,7 @@
       },
       "tabs",
       "timelines",
-      {
-        "title": "toasts",
-        "tag": "preset"
-      },
+      "toasts",
       "tooltips",
       "treeview",
       "virtual-scroll"

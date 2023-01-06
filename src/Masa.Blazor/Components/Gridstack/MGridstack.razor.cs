@@ -166,7 +166,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         }
     }
 
-    private async Task Reload()
+    public async Task Reload()
     {
         if (_gridstackInstance is null) return;
         _gridstackInstance = await Module.Reload(_gridstackInstance);

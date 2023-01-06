@@ -1,7 +1,7 @@
 ---
 title: Markdown（Markdown编辑器）
 desc: "基于[vditor](https://github.com/Vanessa219/vditor)封装"
-tag: js-proxy
+tag: Js代理
 ---
 
 ## 使用
