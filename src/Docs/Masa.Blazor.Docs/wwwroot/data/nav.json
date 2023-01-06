@@ -56,7 +56,11 @@
         "title": "all",
         "tiling": "visible"
       },
-      "alerts",
+      {
+        "title": "alerts",
+        "description": "alerts-desc",
+        "img-url": "https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+      },
       "application",
       "aspect-ratios",
       "avatars",

@@ -11,6 +11,8 @@ related:
 
 图标有两个主题（浅色和深色）和五种不同的尺寸（`x-small`、`small`、`medium`（默认）、`large` 和 `x-large`）。
 
+<icons-usage></icons-usage>
+
 ## 示例
 
 ### 属性

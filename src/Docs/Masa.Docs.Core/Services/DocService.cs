@@ -95,6 +95,22 @@ public class DocService
         });
     }
 
+
+    public static async Task<List<NavItem>> GetAllComponentsAsync()
+    {
+        var valueTaskResult = new ValueTask<List<NavItem>>();
+        bool success = s_projectNavsCache.TryGetValue("blazor", out valueTaskResult);
+
+        var result = new List<NavItem>();
+        if (success)
+        {
+            var blazorNavs = await valueTaskResult.ConfigureAwait(false);
+            result = blazorNavs.Where(nav => nav.Title == "ui-components").SelectMany(nav => nav.Children).ToList();
+        }
+
+        return result;
+    }
+
     private static void SetHref(List<NavItem> navItems, string? segment = null, string? rootSegment = null)
     {
         foreach (var navItem in navItems)

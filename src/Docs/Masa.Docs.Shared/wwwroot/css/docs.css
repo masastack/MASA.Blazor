@@ -1,6 +1,7 @@
 ﻿::-webkit-scrollbar-track {
-    border-radius: 15px;
+    border-radius: 10px;
     margin: 12px 0 0 0;
+    background-color: #F6F8FD;
 }
 
 ::-webkit-scrollbar {
@@ -12,9 +13,8 @@
 ::-webkit-scrollbar-thumb {
     margin: 5px 0;
     border-radius: 4px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #E4E8F3), color-stop(0.72, #E4E8F3), color-stop(0.86, #E4E8F3));
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #A3AED0), color-stop(0.72, #A3AED0), color-stop(0.86, #A3AED0));
 }
-
 
 .flex-1-1-auto {
     flex: 1 1 auto !important;
@@ -277,6 +277,7 @@ a.text-dec-none {
         display: flex;
         height: 100% !important;
         align-items: center;
+        min-width: 0 !important;
     }
 
     .doc-list-nav a.m-list-item--active .m-list-item__title {
@@ -294,4 +295,72 @@ a.text-dec-none {
 
     .doc-list-nav .m-list-item, .doc-list-nav .m-list-item:before {
         border-radius: 0 4px 4px 0 !important;
+    }
+
+.tag-chip {
+    border-radius: 6px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+}
+
+.fit-width {
+    width: fit-content !important;
+}
+
+.fixed-slider .m-tabs-slider-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+    .fixed-slider .m-tabs-slider-wrapper .m-tabs-slider {
+        width: 34px !important;
+        border-radius: 4px !important;
+    }
+
+.default-tabs .m-tab {
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+    color: #485585 !important;
+}
+
+.default-tabs .m-tab--active {
+    color: #4318FF !important;
+}
+
+    .default-tabs .m-tab--active:focus::before {
+        opacity: 0 !important;
+    }
+
+.m-tabs-l .m-tab {
+    padding-left: 0 !important;
+    justify-content: start !important;
+}
+
+
+.search-input .m-input__prepend-inner {
+    height: 100% !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.search-input .m-input__slot {
+    padding: 0 12px !important;
+}
+
+.search-input .m-icon.emphasize2-color {
+    color: #1B2559 !important;
+}
+
+.search-input .m-icon {
+    font-size: 20px !important;
+}
+
+.search-input .m-icon {
+    color: #A3AED0 !important;
+}
+
+    .search-input .m-icon.primary--text {
+        color: #4318FF !important;
     }
