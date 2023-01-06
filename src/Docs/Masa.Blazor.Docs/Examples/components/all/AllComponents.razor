@@ -6,7 +6,7 @@
             BackgroundColor="#F6F8FD"
             Class="search-input rounded-lg"
             Placeholder="@I18n.T("Search")"
-            OnInput="OnSearchAsync"
+            OnInput="OnSearch"
             TValue="string"
             Clearable
             ClearIcon="mdi-close-circle"
@@ -42,12 +42,14 @@
 @code {
     string _value = string.Empty;
     List<NavItem> _allComponents = new();
+    List<NavItem> _originalAllComponent = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await InitDataAsync();
+            _originalAllComponent = new List<NavItem>(_allComponents.ToArray());
 
             StateHasChanged();
         }
@@ -81,15 +83,15 @@
         return result;
     }
 
-    async Task OnSearchAsync()
+    void OnSearch()
     {
         if (string.IsNullOrEmpty(_value))
         {
-            await InitDataAsync();
+            _allComponents = _originalAllComponent;
         }
         else
         {
-            _allComponents = _allComponents.Where(nav => I18n.T(nav.Title).Contains(_value.ToLower())).ToList();
+            _allComponents = _originalAllComponent.Where(nav => I18n.T(nav.Title).ToLower().Contains(_value.ToLower())).ToList();
         }
     }
 }
