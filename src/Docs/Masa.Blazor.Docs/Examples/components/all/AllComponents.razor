@@ -1,0 +1,95 @@
+﻿@using System.Globalization;
+@attribute [JSCustomElement]
+@inject I18n I18n
+
+<MTextField @bind-Value="_value"
+            BackgroundColor="#F6F8FD"
+            Class="search-input rounded-lg"
+            Placeholder="@I18n.T("Search")"
+            OnInput="OnSearchAsync"
+            TValue="string"
+            Clearable
+            ClearIcon="mdi-close-circle"
+            HideDetails="true"
+            OnClearClick="InitDataAsync"
+            Filled
+            Rounded
+            Dense
+            Height="48">
+    <PrependInnerContent>
+        <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
+    </PrependInnerContent>
+</MTextField>
+
+<MRow Class="mt-9">
+    @foreach (var component in _allComponents)
+    {
+        <MCol Md="4" Sm="12" Class="justify-center">
+            <MCard Href="@component.Href" Class="rounded-2" Elevation="0" Color="#F6F8FD" Height="200" Width="300">
+                <div class="d-flex justify-center align-center" style="height: 100%; width: 100%;">
+                    <img class="rounded-0"
+                         src="@($"https://cdn.masastack.com/stack/doc/blazor/all-components/{component.Title}.png")"
+                         onerror="this.src='_content/Masa.Blazor.Docs/img/default-img.png'" />
+                    @*TODO: onerror url replace default img url*@
+                </div>
+            </MCard>
+            <p class="component-title mt-2">@I18n.T(component.Title)</p>
+            <p class="component-desc mt-1">@I18n.T($"all-components.{component.Title}")</p>
+        </MCol>
+    }
+</MRow>
+
+@code {
+    string _value = string.Empty;
+    List<NavItem> _allComponents = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitDataAsync();
+
+            StateHasChanged();
+        }
+    }
+
+    async Task InitDataAsync()
+    {
+        var allComponents = await DocService.GetAllComponentsAsync();
+        // remove all-components
+        allComponents.RemoveAt(0);
+
+        _allComponents = HandlerAllComponentsData(allComponents);
+    }
+
+    List<NavItem> HandlerAllComponentsData(List<NavItem>? navs)
+    {
+        var result = new List<NavItem>();
+
+        foreach (var nav in navs)
+        {
+            if (nav.Children is not null && nav.Children.Any())
+            {
+                result.AddRange(HandlerAllComponentsData(nav.Children));
+            }
+            else
+            {
+                result.Add(nav);
+            }
+        }
+
+        return result;
+    }
+
+    async Task OnSearchAsync()
+    {
+        if (string.IsNullOrEmpty(_value))
+        {
+            await InitDataAsync();
+        }
+        else
+        {
+            _allComponents = _allComponents.Where(nav => I18n.T(nav.Title).Contains(_value.ToLower())).ToList();
+        }
+    }
+}
