@@ -11,7 +11,7 @@ related:
 
 对话框包含两个插槽，一个用于它的激活器，另一个用于它的内容（默认）。 有利于隐私政策。
 
-<dialogs-usage></dialogs-usage>
+<masa-example file="Examples.components.dialogs.Usage"></masa-example>
 
 ## 示例
 
