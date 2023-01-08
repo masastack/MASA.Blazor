@@ -177,7 +177,7 @@ namespace Masa.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = false,
+            CloseOnClick = true, // TODO: 如果使用触发器的outsideclick，则需要开启这个，应该设置为不能修改
             CloseOnContentClick = false,
             DisableKeys = true,
             OpenOnClick = false,
@@ -214,12 +214,22 @@ namespace Masa.Blazor
             }
         }
 
+        // TODO: refactor this ...
+        private bool _firstRender = true;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
+            if (!_firstRender)
+            {
+                await GenMenu();
+            }
+
             if (firstRender)
             {
+                _firstRender = false;
+
                 var keys = new List<string> { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape };
 
                 if (EnableSpaceKeDownPreventDefault)
@@ -229,8 +239,6 @@ namespace Masa.Blazor
 
                 await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown", keys);
             }
-
-            await GenMenu();
         }
 
         protected override void OnWatcherInitialized()
@@ -291,17 +299,30 @@ namespace Masa.Blazor
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
+                
+                // TODO: focus也能触发outsideClick...
+                
+                // MMenu.ResetActivator2()
+                
+                // MMenu.ResetActivator2(MMenu.ActivatorSelector);
+                MMenu.ResetActivator2(InputSlotElement.GetSelector());
+
+                MMenu.DisableDefaultOutsideClickEvent = true;
                 MMenu.CloseConditional = CloseConditional;
                 MMenu.Handler = Blur;
 
                 if (!MMenu.Attached && InputSlotAttrs.Keys.Count > 0)
                 {
-                    await MMenu.RemoveOutsideClickEventListener();
+                    MMenu.RegisterPopupEvents();
+
+                    // todo: activator refactor...
+
+                    // await MMenu.RemoveOutsideClickEventListener();
 
                     // Before the select menu element is generated,
                     // some scenarios still need to trigger outside-click events,
                     // such as when input is focused through the tab key.
-                    await MMenu.AddOutsideClickEventListener();
+                    // await MMenu.AddOutsideClickEventListener();
                 }
 
                 MMenu.AfterShowContent = OnMenuAfterShowContent;
@@ -336,13 +357,13 @@ namespace Masa.Blazor
             StateHasChanged();
         }
 
-        private async Task<bool> CloseConditional(ClickOutsideArgs args)
+        private async Task<bool> CloseConditional()
         {
-            if (!IsMenuActive) return true;
+            return IsMenuActive;
 
-            var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
-
-            return !contains;
+            // var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
+            //
+            // return !contains;
         }
 
         public async Task Blur()
