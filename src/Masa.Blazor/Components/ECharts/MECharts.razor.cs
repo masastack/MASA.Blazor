@@ -49,6 +49,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     private IJSObjectReference _echarts;
     private bool _isEChartsDisposed = false;
     private object _prevOption;
+    private string _prevComputedTheme;
 
     public string ComputedTheme
     {
@@ -60,6 +61,16 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
             }
 
             if (Dark)
+            {
+                return "dark";
+            }
+
+            if (Light)
+            {
+                return "light";
+            }
+
+            if (CascadingIsDark)
             {
                 return "dark";
             }
@@ -83,11 +94,20 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
             });
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
+        await base.OnParametersSetAsync();
+
         InitOptions?.Invoke(DefaultInitOptions);
 
         DefaultInitOptions.Locale ??= I18n.Culture.TwoLetterISOLanguageName.ToUpperInvariant();
+
+        if (_prevComputedTheme != ComputedTheme)
+        {
+            _prevComputedTheme = ComputedTheme;
+
+            await DisposeECharts();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

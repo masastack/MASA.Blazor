@@ -1,0 +1,9 @@
+{
+  "props": {
+    "left": "Designates that the avatar is on the left side of a component. This is hooked into by components such as [MChip](/blazor/components/chips) and [MButton](/blazor/components/buttons).",
+    "right": "Designates that the avatar is on the right side of a component. This is hooked into by components such as [MChip](/blazor/components/chips) and [MButton](/blazor/components/buttons)."
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

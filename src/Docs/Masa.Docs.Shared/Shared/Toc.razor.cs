@@ -1,6 +1,8 @@
 ﻿using BlazorComponent.JSInterop;
 using Microsoft.JSInterop;
 using System.Text;
+using BlazorComponent;
+using BlazorComponent.I18n;
 
 namespace Masa.Docs.Shared.Shared;
 
@@ -59,6 +61,7 @@ public partial class Toc : NextTickComponentBase
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
 
+        await JsRuntime.InvokeVoidAsync("setHash");
         NavigationManager.ReplaceWithHash($"#{elementId}");
         await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
     }
@@ -98,14 +101,16 @@ public partial class Toc : NextTickComponentBase
         }
         else
         {
-            builder.Append(" text--secondary");
+            builder.Append(" subordinary-color");
         }
 
         return builder.ToString();
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
+        base.Dispose(disposing);
+
         AppService.TocChanged -= AppServiceOnTocChanged;
         _objRef?.Dispose();
     }

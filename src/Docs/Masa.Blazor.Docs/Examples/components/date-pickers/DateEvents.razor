@@ -1,0 +1,62 @@
+﻿<MRow Justify="JustifyTypes.SpaceBetween">
+    <div>
+        <div class="subheading">
+            Defined by array
+        </div>
+        <MDatePicker @bind-Value="date1"
+                     Events="_arrayEvents"
+                     EventColor='"green lighten-1"'>
+        </MDatePicker>
+    </div>
+    <div>
+        <div class="subheading">
+            Defined by function
+        </div>
+        <MDatePicker @bind-Value="date2"
+                     Events="(Func<DateOnly, bool>)FunctionEvents"
+                     EventColor="(Func<DateOnly, string[]>)FunctionEventColor">
+        </MDatePicker>
+    </div>
+</MRow>
+
+@code {
+
+    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);
+    private DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);
+
+    private DateOnly[] _arrayEvents;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _arrayEvents = Enumerable.Range(0, 6).Select(_ =>
+        {
+            var day = (int)Math.Ceiling(Random.Shared.NextDouble() * 30);
+            Console.WriteLine($"day {day}");
+            var now = DateTime.Now;
+            return new DateOnly(now.Year, now.Month, day);
+        }).ToArray();
+    }
+
+    private bool FunctionEvents(DateOnly date)
+    {
+        return true;
+    }
+
+    private string[] FunctionEventColor(DateOnly date)
+    {
+        if (new[] { 1, 19, 22 }.Contains(date.Day))
+        {
+            return new[] { "red", "#00f" };
+        }
+
+        if (new[] { 12, 17, 28 }.Contains(date.Day))
+        {
+            return new[] { date.ToString("yyyy-MM-dd")[9] % 2 == 1 ? "red" : "yellow" };
+        }
+
+        return Array.Empty<string>();
+    }
+
+}

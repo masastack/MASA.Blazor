@@ -1,0 +1,16 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<MApp>
+
+    @Body
+
+    <MButton Dark Fab Class="bottom-btn" Href="@(_baseUrl + NavigationManager.GetAbsolutePath())" Color="primary">
+        <MIcon>mdi-github</MIcon>
+    </MButton>
+</MApp>
+
+
+@code {
+    const string? _baseUrl = "https://github.com/BlazorComponent/MASA.Blazor/tree/feature/application/src/Docs/Masa.Docs.Shared";
+}

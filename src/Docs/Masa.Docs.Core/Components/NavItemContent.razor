@@ -1,0 +1,78 @@
+﻿@typeparam TItem where TItem : IDefaultItem<TItem>
+@inject I18n I18n
+
+<MListItemContent>
+    @{
+        var title = I18n.T(Item?.Title);
+        var newTitle = GetTitle(title);
+        var subtitle = GetSubtitle(title);
+        if (!string.IsNullOrWhiteSpace(newTitle))
+        {
+            <MListItemTitle>@newTitle</MListItemTitle>
+        }
+        if (!string.IsNullOrWhiteSpace(subtitle))
+        {
+            <MListItemSubtitle>@subtitle</MListItemSubtitle>
+        }
+    }
+</MListItemContent>
+
+@if (HasState)
+{
+    string color = GetColor(Item!.State!);
+    if (Item!.HasChildren())
+    {
+        <MChip Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
+    }
+    else
+    {
+        <MIcon Size="12" Color="@color">mdi-circle</MIcon>
+    }
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public TItem? Item { get; set; }
+
+    bool HasState => !string.IsNullOrEmpty(Item?.State);
+
+    private static Dictionary<string, string> _stateColors = new()
+    {
+        { "new", "#05CD99" },
+        { "pwd", "#FF5252" }
+    };
+
+    string GetColor(string tag)
+    {
+        return _stateColors.ContainsKey(tag) ? _stateColors[tag] : "primary";
+    }
+
+    string? GetSubtitle(string? title)
+    {
+        return HandleTitle(title, false);
+    }
+
+    string? GetTitle(string? title)
+    {
+        return HandleTitle(title);
+    }
+
+    string HandleTitle(string? title, bool getFirst = true)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return string.Empty;
+        }
+
+        string[] titles = title.Split("（");
+
+        if (getFirst)
+        {
+            return titles?.FirstOrDefault() ?? title;
+        }
+        else
+        {
+            return titles.Length < 2 ? string.Empty : titles.LastOrDefault()?.Replace("）", "") ?? title;
+        }
+    }
+}

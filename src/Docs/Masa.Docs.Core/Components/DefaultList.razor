@@ -1,0 +1,47 @@
+﻿@typeparam TItem where TItem : IDefaultItem<TItem>
+
+<MList Expand
+       Nav
+       Class="@Class"
+       Linkage="Linkage">
+
+    @foreach (var item in Items)
+    {
+        if (item.Heading is not null)
+        {
+            <MSubheader Class="text--primary font-weight-black text-uppercase">@item.Heading</MSubheader>
+        }
+        else if (item.Divider)
+        {
+            <MDivider Class="mt-3 mb-2 ml-2 mr-n2" />
+        }
+        else if (item.HasChildren())
+        {
+            <DefaultListGroup Item="item" />
+        }
+        else if (ItemContent != null)
+        {
+            @ItemContent.Invoke(item)
+        }
+        else
+        {
+            <DefaultListItem Item="item" />
+        }
+    }
+
+</MList>
+
+@code {
+
+    [Parameter]
+    public List<TItem> Items { get; set; } = new();
+
+    [Parameter]
+    public RenderFragment<TItem>? ItemContent { get; set; }
+
+    [Parameter]
+    public bool Linkage { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+}

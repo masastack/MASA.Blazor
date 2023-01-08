@@ -38,6 +38,27 @@
         /// </summary>
         public int Mtu { get; internal set; }
 
+
+        /// <summary>
+        /// Open a connection to the remote GATT server.
+        /// </summary>
+        /// <returns></returns>
+        public Task ConnectAsync()
+        {
+            return PlatformConnect();
+        }
+
+        /// <summary>
+        /// Disconnects the remote GATT server.
+        /// </summary>
+        /// <remarks>Some platforms do not have an explicit Disconnect and will keep the connection open until there are no references to associated services and characteristics.</remarks>
+        public void Disconnect()
+        {
+            PlatformDisconnect();
+            Device.OnGattServerDisconnected();
+            PlatformCleanup();
+        }
+
         /// <summary>
         /// Returns the primary service matching the specified UUID.
         /// </summary>
@@ -65,6 +86,17 @@
         public Task<short> ReadRssi()
         {
             return PlatformReadRssi();
+        }
+
+        /// <summary>
+        /// Request the maximum transmission unit (MTU) size.
+        /// </summary>
+        /// <param name="mtu">mtu size from 0 to 512</param>
+        /// <returns>true if succesful.</returns>
+        /// <remarks>Currently supported only on Android.</remarks>
+        public bool RequestMtu(int mtu)
+        {
+            return PlatformRequestMtu(mtu);
         }
     }
 }

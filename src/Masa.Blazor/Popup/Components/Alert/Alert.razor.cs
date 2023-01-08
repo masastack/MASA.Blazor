@@ -33,7 +33,7 @@ public partial class Alert : AlertingPopupComponentBase
 
     [Parameter] public bool? Right { get; set; }
 
-    [Parameter] public bool? Rounded { get; set; }
+    [Parameter] public StringBoolean? Rounded { get; set; }
 
     [Parameter] public bool? Shaped { get; set; }
 

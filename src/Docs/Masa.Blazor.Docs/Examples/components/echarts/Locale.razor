@@ -1,0 +1,108 @@
+﻿@using BlazorComponent.I18n
+@inject I18n I18n
+
+<div class="d-flex flex-column align-center justify-center">
+    <MECharts Option="option"
+              InitOptions="opt => opt.Locale = locale"
+              Width="@("100%")"
+              MinHeight="300"
+              @ref="echarts">
+    </MECharts>
+
+    <MRadioGroup TValue="string" Value="locale" ValueChanged="SetLocale" Row>
+        <MRadio Label="ZH"
+                Value="@("zh")">
+        </MRadio>
+        <MRadio Label="EN"
+                Value="@("en")">
+        </MRadio>
+    </MRadioGroup>
+</div>
+
+@code{
+    private MECharts echarts;
+    private string locale;
+
+    private object option = new();
+
+    private async Task SetLocale(string val)
+    {
+        if (locale != val && echarts is not null)
+        {
+            await echarts.DisposeECharts();
+        }
+
+        locale = val;
+    }
+
+    protected override void OnInitialized()
+    {
+        locale = I18n.Culture.TwoLetterISOLanguageName;
+
+        var data = new List<Data>();
+        for (int i = 0; i < 1000; i++)
+        {
+            data.Add(RandomData());
+        }
+
+        option = new
+        {
+            Title = new
+            {
+                text = "Time Axis"
+            },
+            Tooltip = new
+            {
+                Trigger = "axis",
+                axisPointer = new
+                {
+                    animation = false
+                }
+            },
+            xAxis = new
+            {
+                type = "time",
+                splitLine = new
+                {
+                    show = false
+                }
+            },
+            yAxis = new
+            {
+                type = "value",
+                boundaryGap = new object[] { 0, "100%" },
+                splitLine = new
+                {
+                    show = false
+                }
+            },
+            series = new object[]
+            {
+                new
+                {
+                    name = "Fake Data",
+                    type = "line",
+                    showSymbol = false,
+                    data = data
+                }
+            }
+        };
+    }
+
+
+    private DateTime _now = new DateTime(1997, 9, 3);
+
+    private Random _ran = new();
+
+    private int _lastRandomValue = 10;
+
+    private Data RandomData()
+    {
+        _now = _now.AddDays(1);
+        _lastRandomValue += _ran.Next(1, 100) - 50;
+        return new Data(_now.ToString("yyyy/MM/dd"), new object[] { _now.ToString("yyyy/MM/dd"), _lastRandomValue });
+    }
+
+    private record Data(string Name, object[] Value);
+
+}

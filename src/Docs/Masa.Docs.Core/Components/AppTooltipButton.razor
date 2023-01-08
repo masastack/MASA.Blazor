@@ -1,0 +1,48 @@
+﻿@inject I18n I18n
+
+<span class="m-app-tooltip-btn d-inline-block">
+    <MTooltip Bottom
+              ContentClass="m-app-tooltip-btn__content"
+              OpenDelay="200">
+        <ActivatorContent>
+            <MButton Icon
+                     Disabled="Disabled"
+                     Href="@Href"
+                     Target="@Target"
+                     OnClick="OnClick"
+                     Class="@Class"
+                     aria-label="@Path"
+                     @attributes="@context.Attrs">
+                <MIcon Class="emphasize1-color">@Icon</MIcon>
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            @I18n.T(Path)
+        </ChildContent>
+    </MTooltip>
+</span>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string Icon { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string? Path { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public string? Href { get; set; }
+
+    [Parameter]
+    public string? Target { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+}

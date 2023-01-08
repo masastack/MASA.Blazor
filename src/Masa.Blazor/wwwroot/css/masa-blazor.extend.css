@@ -74,12 +74,12 @@
     pointer-events: none;
 }
 
-.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe > td {
-    background-color: #fafafa;
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
+    background: #fafafa;
 }
 
-.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td {
-    background: #eeeeee;
+.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
+    background: #212121;
 }
 
 .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
@@ -730,4 +730,20 @@ input[type=number] {
 
 .m-infinite-scroll *:last-child {
     margin-left: 4px;
+}
+
+/* ellipsis text */
+
+.m-ellipsis-text__tooltip {
+    background: rgba(97,97,97,.9);
+    color: #FFF;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 5px 16px;
+    opacity: 0;
+    word-break: break-all;
+}
+
+.m-ellipsis-text__tooltip.menuable__content__active {
+    opacity: .9;
 }

@@ -19,9 +19,14 @@ public partial class Document : IDisposable
     private CultureInfo Culture { get; set; } = null!;
 
     [Parameter]
+    public string Project { get; set; } = null!;
+
+    [Parameter]
     public string Category { get; set; } = null!;
 
     [Parameter] public string Page { get; set; } = null!;
+
+    [Parameter] public string? SubPage { get; set; }
 
     private string? _md;
     private CultureInfo? _prevCulture;
@@ -79,7 +84,7 @@ public partial class Document : IDisposable
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync(Category, Page);
+            _md = await DocService.ReadDocumentAsync(Project, Category, Page, SubPage);
         }
         catch (HttpRequestException e)
         {

@@ -1,0 +1,105 @@
+﻿@using Masa.Blazor.Docs.ApiGenerator
+
+@namespace Masa.Blazor.Docs.Components
+
+<AppSheet Class="mb-9">
+    <MSimpleTable Class="api-table">
+        <thead>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th class="@header">
+                    <div class="text-capitalize">@header</div>
+                </th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Items)
+        {
+            <tr class="grey lighten-3">
+                @foreach (var header in Headers)
+                {
+                    if (header == "name")
+                    {
+                        <td>
+                            <span class="name-item text-mono">
+                                <span class="font-weight-bold">
+                                    <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
+                                        <BadgeContent>
+                                            <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
+                                        </BadgeContent>
+                                        <ChildContent>
+                                            @item.Name
+                                        </ChildContent>
+                                    </MBadge>
+                                </span>
+                            </span>
+                        </td>
+                    }
+                    else if (header == "type")
+                    {
+                        <td>
+                            <span class="name-item text-mono">
+                                <MHighlight Inline Code="@item.Type" Language="cs"></MHighlight>
+                            </span>
+                        </td>
+                    }
+                    else if (header == "default")
+                    {
+                        <td>
+                            <span class="name-item text-mono">
+                                <MHighlight Inline Code="@item.DefaultValue" Language="cs"></MHighlight>
+                            </span>
+                        </td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <span class="text--mono">
+                        @if (string.IsNullOrWhiteSpace(item.Description))
+                        {
+                            <div>
+                                MISSING DESCRIPTION
+                            </div>
+                        }
+                        else
+                        {
+                            <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
+                        }
+                    </span>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </MSimpleTable>
+</AppSheet>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string Field { get; set; } = null!;
+
+    [Parameter]
+    public List<ParameterInfo> Data { get; set; }
+
+    [Parameter]
+    public string? Filter { get; set; }
+
+    static readonly Dictionary<string, string[]> HeaderMaps = new()
+    {
+        { "props", new[] { "name", "type", "default" } },
+        { "methods", new[] { "name", "type" } },
+        { "events", new[] { "name", "type" } },
+        { "contents", new[] { "name", "type" } }
+    };
+
+    private string[] Headers => HeaderMaps[Field];
+
+    private IEnumerable<ParameterInfo> Items => string.IsNullOrWhiteSpace(Filter)
+        ? Data.OrderBy(item => item.Name)
+        : Data.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) || item.Type.Contains(Filter, StringComparison.OrdinalIgnoreCase) || (item.DefaultValue != null && item.DefaultValue.Contains(Filter, StringComparison.OrdinalIgnoreCase))).OrderBy(item => item.Name);
+
+}

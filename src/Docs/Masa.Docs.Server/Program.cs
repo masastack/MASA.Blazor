@@ -1,13 +1,18 @@
+using Masa.Docs.Core;
 using Masa.Docs.Shared;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+// https://github.com/dotnet/aspnetcore/issues/38212
+builder.WebHost.UseStaticWebAssets();
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor(options =>
 {
     options.RootComponents.MaxJSRootComponents = 500;
-    options.RootComponents.RegisterCustomElementsOfMasaDocs();
+    options.RootComponents.RegisterCustomElementsUsedJSCustomElementAttribute();
 });
+
 builder.Services.AddHealthChecks();
 
 builder.Services.AddScoped<LazyAssemblyLoader>();

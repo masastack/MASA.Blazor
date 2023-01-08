@@ -1,0 +1,20 @@
+{
+  "props": {
+    "activeClass": "该类在激活时会被应用到一个 [MButton](/blazor/components/buttons)。",
+    "backgroundColor": "更改组件的背景颜色。",
+    "horizontal": "使用 [MButton](/blazor/components/buttons) 的替代横向样式。",
+    "inputValue": "控制组件是否可见。支持 .sync 修饰符。",
+    "mandatory": "强制始终选择一个值（如果可用）。",
+    "max": "Max。",
+    "multiple": "Multiple。",
+    "shift": "当 [MButton](/blazor/components/buttons) 未激活时隐藏它们的文本。",
+    "value": "保存当前激活了的 [MButton](/blazor/components/buttons) 的值。若按钮没有值，则使用其索引号。",
+    "values": "values"
+  },
+  "contents": {},
+  "events": {
+    "iputValueChanged": "",
+    "valuesChanged": ""
+  },
+  "functions": {}
+}

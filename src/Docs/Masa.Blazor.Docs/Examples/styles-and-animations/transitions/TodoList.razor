@@ -1,0 +1,133 @@
+﻿<MContainer Style="max-width: 500px">
+
+    <MTextField @bind-Value=_newTask
+                Label="What are you working on?"
+                Solo
+                OnKeyDown="OnEnterKeyDown">
+        <AppendContent>
+            <FadeTransition >
+                <MIcon If="@(!string.IsNullOrEmpty(_newTask))"
+                       OnClick="Create">
+                    add_circle
+                </MIcon>
+            </FadeTransition>
+        </AppendContent>
+    </MTextField>
+
+    <h2 class="text-h4 success--text pl-4">
+        Tasks:&nbsp;
+        <FadeTransition LeaveAbsolute>
+            <KeyTransitionElement Tag="span" Value="@($"task-{_tasks.Count}")">
+                @_tasks.Count
+            </KeyTransitionElement>
+        </FadeTransition>
+    </h2>
+
+    <MDivider></MDivider>
+
+    <MRow Class="my-1" Align=AlignTypes.Center>
+
+        <strong class="mx-4 info--text text--darken-2">
+            Remaining: @RemainingTasks
+        </strong>
+
+        <MDivider Vertical></MDivider>
+
+        <strong class="mx-4 success--text text--darken-2">
+            Completed: @CompletedTasks
+        </strong>
+
+        <MSpacer></MSpacer>
+
+        <MProgressCircular Value=Progress Class="mr-2"></MProgressCircular>
+
+    </MRow>
+
+    <MDivider Class="mb-4"></MDivider>
+
+    @if (_tasks.Count > 0)
+    {
+        <MCard>
+            <SlideYTransition>
+                @*//TODO: group*@
+                @for (var i = 0; i < _tasks.Count; i++)
+                {
+                    var task = _tasks[i];
+                    if (i != 0)
+                    {
+                        <MDivider></MDivider>
+                    }
+
+                    <MListItem>
+
+                        <MListItemAction>
+                            <MCheckbox TValue="bool" Value="@task.Done"
+                                       ValueChanged="@(v => task.Done = v)"
+                                       Color="@(task.Done ? "grey" : "primary")">
+                                <LabelContent>
+                                    <div class="@(task.Done ? "grey--text" : "primary--text") ml-4">
+                                        @task.Text
+                                    </div>
+                                </LabelContent>
+                            </MCheckbox>
+                        </MListItemAction>
+
+                        <MSpacer></MSpacer>
+
+                        <ScrollXTransition>
+                            <MIcon If="@task.Done" Color="success">
+                                mdi-check
+                            </MIcon>
+                        </ScrollXTransition>
+
+                    </MListItem>
+                }
+            </SlideYTransition>
+        </MCard>
+    }
+
+</MContainer>
+
+
+@code {
+    string _newTask = "";
+
+    readonly List<ToDo> _tasks = new()
+    {
+        new ToDo(false, "Foobar"),
+        new ToDo(false, "Fizzbuzz")
+    };
+
+    int CompletedTasks => _tasks.Count(t => t.Done);
+
+    float Progress => (CompletedTasks * 100f) / _tasks.Count;
+
+    int RemainingTasks => _tasks.Count - CompletedTasks;
+
+    void OnEnterKeyDown(KeyboardEventArgs eventArgs)
+    {
+        if (eventArgs.Key == "Enter")
+        {
+            Create();
+        }
+    }
+
+    void Create()
+    {
+        _tasks.Add(new(false, _newTask));
+        _newTask = "";
+    }
+
+    class ToDo
+    {
+        public bool Done { get; set; }
+        public string Text { get; set; }
+
+        public ToDo(bool done, string text)
+        {
+            Done = done;
+            Text = text;
+        }
+    }
+
+}

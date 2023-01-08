@@ -1,5 +1,6 @@
+using Masa.Docs.Core;
 using Masa.Docs.Shared;
-using Masa.Docs.Shared.Services;
+using Masa.Docs.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
@@ -24,6 +25,6 @@ builder.Services.AddMasaDocs(builder.HostEnvironment.BaseAddress, BlazorMode.Was
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.RootComponents.RegisterCustomElementsOfMasaDocs();
+builder.RootComponents.RegisterCustomElementsUsedJSCustomElementAttribute();
 
 await builder.Build().RunAsync();

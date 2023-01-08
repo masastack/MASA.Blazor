@@ -1,0 +1,67 @@
+﻿@page "/examples/wireframes/three-column"
+@layout WireframeLayout
+@inject MasaBlazor MasaBlazor
+
+<MApp Id="inspire">
+    <MAppBar App
+             Color="white"
+             Flat>
+        <MAvatar Color="@(MasaBlazor.Breakpoint.SmAndDown ? "grey darken-1" : "transparent")"
+                 Size="32"></MAvatar>
+
+        <MTabs Centered
+               Class="ml-n9"
+               Color="grey darken-1">
+            @foreach (var link in _links)
+            {
+                <MTab>
+                    @link
+                </MTab>
+            }
+        </MTabs>
+
+        <MAvatar Class="hidden-sm-and-down"
+                 Color="grey darken-1 shrink"
+                 Size="32"></MAvatar>
+    </MAppBar>
+
+    <MMain Class="grey lighten-3">
+        <MContainer>
+            <MRow>
+                <MCol Cols="12"
+                      Sm="2">
+                    <MSheet Rounded="@("lg")"
+                            MinHeight="268">
+                        <!-- Your content -->
+                    </MSheet>
+                </MCol>
+
+                <MCol Cols="12"
+                      Sm="8">
+                    <MSheet MinHeight="@("70vh")"
+                            Rounded="@("lg")">
+                        <!-- Your content -->
+                    </MSheet>
+                </MCol>
+
+                <MCol Cols="12"
+                      Sm="2">
+                    <MSheet Rounded="@("lg")"
+                            MinHeight="268">
+                        <!-- Your content -->
+                    </MSheet>
+                </MCol>
+            </MRow>
+        </MContainer>
+    </MMain>
+</MApp>
+
+@code {
+    List<string> _links = new()
+    {
+        "Dashboard",
+        "Messages",
+        "Profile",
+        "Updates"
+    };
+}

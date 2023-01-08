@@ -1,0 +1,5 @@
+﻿{
+  "blazor": "Masa.Blazor.Docs",
+  "framework": "Masa.Framework.Docs",
+  "stack": "Masa.Stack.Docs"
+}

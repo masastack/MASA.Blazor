@@ -1,0 +1,37 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<AppTooltipButton Href="https://github.com/BlazorComponent/Masa.Blazor"
+                  Target="_blank"
+                  Icon="fab fa-github"
+                  Path="github"
+                  Class="mr-3 ml-2">
+</AppTooltipButton>
+
+<MTooltip Bottom
+          ContentClass="m-app-tooltip-btn__content"
+          OpenDelay="200">
+    <ActivatorContent>
+        <MButton Icon
+                 Href="https://gitee.com/blazorcomponent/MASA.Blazor"
+                 Target="_blank"
+                 Class="mr-3"
+                 @attributes="@context.Attrs">
+            <img style="width:24px;height:24px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/gitee.png" />
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        gitee
+    </ChildContent>
+</MTooltip>
+
+<AppTooltipButton OnClick="OnSettingsClick"
+                  Icon="mdi-cog"
+                  Path="settings"
+                  Class="mr-8">
+</AppTooltipButton>
+
+@code {
+    [Parameter]
+    public EventCallback OnSettingsClick { get; set; }
+}

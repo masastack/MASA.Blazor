@@ -1,15 +1,4 @@
-﻿/*
- * NavigationMananger.NavigateTo always scrolls page to the top.
- * The following `window.scrollTo` would be invoked.
- * When NavigationManager.NavigateTo invoked, the x and y is zero.
- */
-const origScrollTo = window.scrollTo;
-window.scrollTo = function (x, y) {
-  if (x === 0 && y === 0) return;
-  return origScrollTo.apply(this, arguments);
-};
-
-window.setCookie = function (name, value) {
+﻿window.setCookie = function (name, value) {
   document.cookie = `$ {
                 name
             } = $ {
@@ -33,6 +22,28 @@ window.getCurrentDocSearchLanguage = function () {
     return "zh";
   }
   return "en";
+};
+
+// Because the following window.scrollTo causes the NavigateTo not to
+// scroll to the top of the page, the state of the isHash is required
+let isHash;
+
+window.setHash = function (){
+  isHash = true;
+}
+
+/*
+ * NavigationMananger.NavigateTo always scrolls page to the top.
+ * The following `window.scrollTo` would be invoked.
+ * When NavigationManager.NavigateTo invoked, the x and y is zero.
+ */
+const origScrollTo = window.scrollTo;
+window.scrollTo = function (x, y) {
+  if (isHash && x === 0 && y === 0) {
+    isHash = false;
+    return;
+  }
+  return origScrollTo.apply(this, arguments);
 };
 
 window.addDoSearch = function (isMobile) {
@@ -60,13 +71,11 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
   if (scope === "document") {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
-  }
-  else if (scope === "desc") {
+    addCodeRules(markdownIt);
+    addImageRules(markdownIt)
+  } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
-
-  addHeadingRules(markdownIt);
-  addLinkRules(markdownIt);
 
   function addHeadingRules(md) {
     md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
@@ -105,6 +114,24 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
 
       return self.renderToken(tokens, idx, options);
     };
+  }
+
+  function addCodeRules(md) {
+    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+      if (tokens[idx].markup === "```") {
+        const content = tokens[idx].content;
+        const info = tokens[idx].info;
+
+        return `<default-app-markup code="${content.replaceAll('"', "&quot;")}" language="${info}"></default-app-markup>\n`;
+      }
+    };
+  }
+
+  function addImageRules(md) {
+    md.renderer.rules.image = (tokens, idx, options, env, self) => {
+      tokens[idx].attrSet("width", "100%");
+      return self.renderToken(tokens, idx, options);
+    }
   }
 };
 
@@ -154,6 +181,7 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
     if (currentOffset === 0) {
+      setHash();
       await dotnet.invokeMethodAsync("UpdateHash", "")
       return
     }
@@ -177,6 +205,7 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
     _scrolling = true;
 
+    setHash();
     await dotnet.invokeMethodAsync("UpdateHash", hash);
 
     _scrolling = false;
@@ -194,3 +223,21 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
     _timeout = setTimeout(findActiveIndex, 17);
   }
 };
+
+window.backTop = function () {
+  slideTo(0);
+}
+
+function slideTo(targetPageY) {
+  var timer = setInterval(function () {
+    var currentY = document.documentElement.scrollTop || document.body.scrollTop;
+    var distance = targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
+    var speed = Math.ceil(distance / 10);
+    if (currentY == targetPageY || currentY == 1) {
+      document.documentElement.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
+    }
+  }, 10);
+}

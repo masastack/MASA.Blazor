@@ -1,0 +1,22 @@
+﻿@attribute [JSCustomElement]
+
+<MAlert Type="@AlertType" Text>
+    <MMarkdownIt Source="@Content" NoWrapper Scope="desc"></MMarkdownIt>
+</MAlert>
+
+@code {
+    [Parameter]
+    public string Type { get; set; }
+
+    [Parameter]
+    public string Content { get; set; }
+
+    private AlertTypes AlertType => Type switch
+    {
+        "info" => AlertTypes.Info,
+        "error" => AlertTypes.Error,
+        "success" => AlertTypes.Success,
+        "warning" => AlertTypes.Warning,
+        _ => AlertTypes.None
+    };
+}

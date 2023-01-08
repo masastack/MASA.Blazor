@@ -1,0 +1,82 @@
+﻿@page "/examples/wireframes/constrained"
+@layout WireframeLayout
+
+<MApp Id="inspire">
+    <MAppBar App
+             Color="white"
+             Flat>
+        <MContainer Class="py-0 fill-height">
+            <MAvatar Class="mr-10"
+                     Color="grey darken-1"
+                     Size="32"></MAvatar>
+
+            @foreach (var link in _links)
+            {
+                <MButton Text>
+                    @link
+                </MButton>
+            }
+
+            <MSpacer></MSpacer>
+
+            <MResponsive MaxWidth="260">
+                <MTextField Dense
+                            Flat
+                            HideDetails="true"
+                            Rounded
+                            SoloInverted
+                            Value="@("")"></MTextField>
+            </MResponsive>
+        </MContainer>
+    </MAppBar>
+
+    <MMain Class="grey lighten-3">
+        <MContainer>
+            <MRow>
+                <MCol Cols="2">
+                    <MSheet Rounded="@("lg")">
+                        <MList>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <MListItem Link>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            List Item @i
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </MListItem>
+                            }
+
+                            <MDivider Class="my-2"></MDivider>
+
+                            <MListItem Link>
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        Refresh
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                        </MList>
+                    </MSheet>
+                </MCol>
+
+                <MCol>
+                    <MSheet MinHeight="@("70vh")"
+                            Rounded="@("lg")">
+                        <!-- Your content -->
+                    </MSheet>
+                </MCol>
+            </MRow>
+        </MContainer>
+    </MMain>
+</MApp>
+
+@code {
+    List<string> _links = new List<string>
+    {
+        "Dashboard",
+        "Messages",
+        "Profile",
+        "Updates"
+    };
+}

@@ -1,0 +1,67 @@
+﻿<MContainer fluid>
+    <MRow Class="dark--text">
+        <MCol Cols="6">
+            on
+        </MCol>
+        <MCol Cols="6">
+            off
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols="6">
+            <MSwitch
+                Color="primary"
+                @bind-Value="switch1">
+            </MSwitch>
+        </MCol>
+        <MCol Cols="6">
+            <MSwitch Color="primary" TValue="bool"></MSwitch>
+        </MCol>
+    </MRow>
+    <MRow Class="dark--text">
+        <MCol Cols="6">
+            on disabled
+        </MCol>
+        <MCol Cols="6">
+            off disabled
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols="6">
+            <MSwitch
+                Color="primary"
+                @bind-Value="switch2"
+                Disabled>
+            </MSwitch>
+        </MCol>
+        <MCol Cols="6">
+            <MSwitch Disabled TValue="bool"></MSwitch>
+        </MCol>
+    </MRow>
+    <MRow Class="dark--text">
+        <MCol Cols="6">
+            on loading
+        </MCol>
+        <MCol Cols="6">
+            off loading
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols="6">
+            <MSwitch
+                Loading="warning"
+                @bind-Value="switch3">
+            </MSwitch>
+        </MCol>
+        <MCol Cols="6">
+            <MSwitch Loading="warning" TValue="bool"></MSwitch>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    bool switch1 = true;
+    bool switch2 = true;
+    bool switch3 = true;
+    StringBoolean warning = "warning";
+}
