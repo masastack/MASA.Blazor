@@ -364,3 +364,55 @@ a.text-dec-none {
     .search-input .m-icon.primary--text {
         color: #4318FF !important;
     }
+
+app-alert p {
+    margin-bottom: 0 !important;
+}
+
+.m-markdown-it table {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    border-collapse: collapse;
+}
+
+    .m-markdown-it table tr {
+        border-width: 2px;
+        border-style: solid;
+        --tw-border-opacity: 1;
+        border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+    }
+
+    .m-markdown-it table th {
+        --tw-bg-opacity: 1;
+        background-color: rgba(243, 244, 245, var(--tw-bg-opacity));
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .m-markdown-it table td, table th {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+        .m-markdown-it table td:not(:last-child), table th:not(:last-child) {
+            border-right-width: 2px;
+            border-style: solid;
+            --tw-border-opacity: 1;
+            border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+        }
+
+.text-truncate.m-btn {
+    max-width: 110px;
+    width: auto;
+}
+
+.text-truncate .m-btn__content {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: inline !important;
+    width: 100%;
+}

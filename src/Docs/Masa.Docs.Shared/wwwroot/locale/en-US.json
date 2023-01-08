@@ -347,5 +347,7 @@
     "tooltips": "The Tooltips component is useful for conveying information when a user hovers over an element",
     "treeview": "The Treeview component is useful for displaying large amounts of nested data.",
     "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list"
-  }
+  },
+  "0.6.0": "0.6.0",
+  "0.7.0": "0.7.0"
 }
