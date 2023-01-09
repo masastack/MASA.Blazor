@@ -30,7 +30,6 @@
                     <img class="rounded-0"
                          src="@($"https://cdn.masastack.com/stack/doc/blazor/all-components/{component.Title}.png")"
                          onerror="this.src='_content/Masa.Blazor.Docs/img/default-img.png'" />
-                    @*TODO: onerror url replace default img url*@
                 </div>
             </MCard>
             <p class="component-title mt-2">@I18n.T(component.Title)</p>
@@ -42,14 +41,13 @@
 @code {
     string _value = string.Empty;
     List<NavItem> _allComponents = new();
-    List<NavItem> _originalAllComponent = new();
+    List<NavItem> _originalAllComponents = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await InitDataAsync();
-            _originalAllComponent = new List<NavItem>(_allComponents.ToArray());
+            await InitDataAsync();            
 
             StateHasChanged();
         }
@@ -58,13 +56,18 @@
     async Task InitDataAsync()
     {
         var allComponents = await DocService.GetAllComponentsAsync();
-        // remove all-components
-        allComponents.RemoveAt(0);
+        
+        if (allComponents!=null && allComponents.Any())
+        {
+            // remove all-components
+            allComponents.RemoveAt(0);
+            _allComponents = ResolveAllComponentsData(allComponents);
 
-        _allComponents = HandlerAllComponentsData(allComponents);
+            _originalAllComponents = new List<NavItem>(_allComponents.ToArray());
+        }
     }
 
-    List<NavItem> HandlerAllComponentsData(List<NavItem>? navs)
+    List<NavItem> ResolveAllComponentsData(List<NavItem> navs)
     {
         var result = new List<NavItem>();
 
@@ -72,7 +75,7 @@
         {
             if (nav.Children is not null && nav.Children.Any())
             {
-                result.AddRange(HandlerAllComponentsData(nav.Children));
+                result.AddRange(ResolveAllComponentsData(nav.Children));
             }
             else
             {
@@ -87,11 +90,11 @@
     {
         if (string.IsNullOrEmpty(_value))
         {
-            _allComponents = _originalAllComponent;
+            _allComponents = _originalAllComponents;
         }
         else
         {
-            _allComponents = _originalAllComponent.Where(nav => I18n.T(nav.Title).Contains(_value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            _allComponents = _originalAllComponents.Where(nav => I18n.T(nav.Title).Contains(_value, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
     }
 }
