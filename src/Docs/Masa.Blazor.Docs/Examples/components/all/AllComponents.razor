@@ -91,7 +91,7 @@
         }
         else
         {
-            _allComponents = _originalAllComponent.Where(nav => I18n.T(nav.Title).ToLower().Contains(_value.ToLower())).ToList();
+            _allComponents = _originalAllComponent.Where(nav => I18n.T(nav.Title).Contains(_value, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
     }
 }
