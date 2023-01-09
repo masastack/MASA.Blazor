@@ -177,7 +177,6 @@ namespace Masa.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = true, // TODO: 如果使用触发器的outsideclick，则需要开启这个，应该设置为不能修改
             CloseOnContentClick = false,
             DisableKeys = true,
             OpenOnClick = false,
@@ -214,21 +213,20 @@ namespace Masa.Blazor
             }
         }
 
-        // TODO: refactor this ...
-        private bool _firstRender = true;
+        private bool _isFirstRender = true;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (!_firstRender)
+            if (!_isFirstRender)
             {
                 await GenMenu();
             }
 
             if (firstRender)
             {
-                _firstRender = false;
+                _isFirstRender = false;
 
                 var keys = new List<string> { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape };
 
@@ -299,13 +297,8 @@ namespace Masa.Blazor
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
-                
-                // TODO: focus也能触发outsideClick...
-                
-                // MMenu.ResetActivator2()
-                
-                // MMenu.ResetActivator2(MMenu.ActivatorSelector);
-                MMenu.ResetActivator2(InputSlotElement.GetSelector());
+
+                MMenu.ResetActivator(InputSlotElement.GetSelector());
 
                 MMenu.DisableDefaultOutsideClickEvent = true;
                 MMenu.CloseConditional = CloseConditional;
@@ -314,15 +307,6 @@ namespace Masa.Blazor
                 if (!MMenu.Attached && InputSlotAttrs.Keys.Count > 0)
                 {
                     MMenu.RegisterPopupEvents();
-
-                    // todo: activator refactor...
-
-                    // await MMenu.RemoveOutsideClickEventListener();
-
-                    // Before the select menu element is generated,
-                    // some scenarios still need to trigger outside-click events,
-                    // such as when input is focused through the tab key.
-                    // await MMenu.AddOutsideClickEventListener();
                 }
 
                 MMenu.AfterShowContent = OnMenuAfterShowContent;
@@ -357,14 +341,7 @@ namespace Masa.Blazor
             StateHasChanged();
         }
 
-        private async Task<bool> CloseConditional()
-        {
-            return IsMenuActive;
-
-            // var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
-            //
-            // return !contains;
-        }
+        private ValueTask<bool> CloseConditional() => new(IsFocused || IsMenuActive);
 
         public async Task Blur()
         {
@@ -442,11 +419,14 @@ namespace Masa.Blazor
                 {
                     var dic = new Dictionary<string, object>();
 
-                    // Don't allow the dropdown icon to be focused
-                    var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
-                    if (onClick.HasDelegate)
+                    if (attrs.Data is not null)
                     {
-                        dic["tabindex"] = -1;
+                        // Don't allow the dropdown icon to be focused
+                        var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
+                        if (onClick.HasDelegate)
+                        {
+                            dic["tabindex"] = -1;
+                        }
                     }
 
                     dic["aria-hidden"] = "true";
@@ -465,7 +445,7 @@ namespace Masa.Blazor
                     });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
-                    attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
+                    attrs[nameof(MMenu.CloseOnClick)] = true;
                     attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
                     attrs[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
                     attrs[nameof(MMenu.Left)] = ComputedMenuProps.Left;
@@ -979,7 +959,7 @@ namespace Masa.Blazor
             }
             catch
             {
-                func = item => default;
+                func = _ => default;
             }
 
             return func;
