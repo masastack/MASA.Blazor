@@ -404,15 +404,17 @@ app-alert p {
             border-color: rgba(234, 236, 239, var(--tw-border-opacity));
         }
 
-.text-truncate.m-btn {
-    max-width: 110px;
-    width: auto;
-}
+@media screen and (max-width: 600px) {
+    .text-truncate.m-btn {
+        max-width: 110px;
+        width: auto;
+    }
 
-.text-truncate .m-btn__content {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: inline !important;
-    width: 100%;
+    .text-truncate .m-btn__content {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: inline !important;
+        width: 100%;
+    }
 }

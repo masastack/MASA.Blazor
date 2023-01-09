@@ -1,9 +1,10 @@
 ﻿@attribute [JSCustomElement]
 
-<a href="@ComputedHref"
+<a href="@Href"
    target="@_target"
    class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
    @onclick="@OnClick"
+   @onclick:preventDefault="IsSamePage"
    @attributes="@Attributes">
     @Content
 
