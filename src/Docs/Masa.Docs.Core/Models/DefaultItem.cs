@@ -12,7 +12,7 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public string? Title { get; set; }
 
-    public string? Tag { get; set; }
+    public string? State { get; set; }
 
     public StringNumber Value { get; set; }
 

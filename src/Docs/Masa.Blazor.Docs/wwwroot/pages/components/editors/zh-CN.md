@@ -1,7 +1,7 @@
 ---
 title: Editor（富文本编辑器）
 desc: "基于[Quill](https://quilljs.com/)封装的富文本编辑器"
-tag: js-proxy
+tag: "Js代理"
 ---
 
 ## 使用

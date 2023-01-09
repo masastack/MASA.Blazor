@@ -1,6 +1,7 @@
 ---
 title: Block Text（文本块）
 desc: "将相同类型的两个数据并排显示。"
+tag: "预置"
 related:
   - /blazor/components/chips
   - /blazor/components/copyable-text

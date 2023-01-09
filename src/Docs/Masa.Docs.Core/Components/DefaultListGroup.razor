@@ -61,8 +61,6 @@
         group = GenGroup(Item.Children);
     }
 
-    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
-
     List<string> GenGroup(List<TItem>? items)
     {
         if (items == null || !items.Any()) return new List<string?>();

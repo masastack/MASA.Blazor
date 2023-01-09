@@ -1,15 +1,4 @@
-﻿/*
- * NavigationMananger.NavigateTo always scrolls page to the top.
- * The following `window.scrollTo` would be invoked.
- * When NavigationManager.NavigateTo invoked, the x and y is zero.
- */
-const origScrollTo = window.scrollTo;
-window.scrollTo = function (x, y) {
-  if (x === 0 && y === 0) return;
-  return origScrollTo.apply(this, arguments);
-};
-
-window.setCookie = function (name, value) {
+﻿window.setCookie = function (name, value) {
   document.cookie = `$ {
                 name
             } = $ {
@@ -33,6 +22,28 @@ window.getCurrentDocSearchLanguage = function () {
     return "zh";
   }
   return "en";
+};
+
+// Because the following window.scrollTo causes the NavigateTo not to
+// scroll to the top of the page, the state of the isHash is required
+let isHash;
+
+window.setHash = function (){
+  isHash = true;
+}
+
+/*
+ * NavigationMananger.NavigateTo always scrolls page to the top.
+ * The following `window.scrollTo` would be invoked.
+ * When NavigationManager.NavigateTo invoked, the x and y is zero.
+ */
+const origScrollTo = window.scrollTo;
+window.scrollTo = function (x, y) {
+  if (isHash && x === 0 && y === 0) {
+    isHash = false;
+    return;
+  }
+  return origScrollTo.apply(this, arguments);
 };
 
 window.addDoSearch = function (isMobile) {
@@ -61,7 +72,8 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
     addCodeRules(markdownIt);
-    addImageRules(markdownIt)
+    addImageRules(markdownIt);
+    addBlockquoteRules(markdownIt);
   } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
@@ -122,6 +134,25 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       return self.renderToken(tokens, idx, options);
     }
   }
+
+  function addBlockquoteRules(md) {
+    md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
+      const next = tokens[idx + 2];
+      const content = next.content;
+
+      tokens[idx].tag = "app-alert";
+      tokens[idx].attrSet("content", content);
+      tokens[idx].attrSet("type", "info");
+      tokens[idx].attrSet("border", "left");
+
+      return self.renderToken(tokens, idx, options);
+    };
+    md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
+      tokens[idx].tag = "app-alert";
+
+      return self.renderToken(tokens, idx, options);
+    };
+  }
 };
 
 window.registerWindowScrollEventForToc = function (dotnet, tocId) {
@@ -170,6 +201,7 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
     if (currentOffset === 0) {
+      setHash();
       await dotnet.invokeMethodAsync("UpdateHash", "")
       return
     }
@@ -193,6 +225,7 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
     _scrolling = true;
 
+    setHash();
     await dotnet.invokeMethodAsync("UpdateHash", hash);
 
     _scrolling = false;

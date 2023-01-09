@@ -27,7 +27,7 @@ public class NavItem : IDefaultItem<NavItem>
 
     public string? Icon { get; set; }
 
-    public string? Tag { get; set; }
+    public string? State { get; set; }
 
     public NavItemTiling? Tiling { get; set; }
 

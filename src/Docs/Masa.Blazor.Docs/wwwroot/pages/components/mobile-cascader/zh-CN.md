@@ -1,6 +1,7 @@
 ---
 title: Mobile cascader（移动端级联）
 desc: "为移动端设计的级联选择器。"
+tag: "预置"
 related:
   - /blazor/components/lists
   - /blazor/components/tabs

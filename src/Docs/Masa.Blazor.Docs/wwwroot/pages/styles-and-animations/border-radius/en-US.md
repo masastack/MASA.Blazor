@@ -20,7 +20,7 @@ You can use the `.rounded-pill` class to create pills, and the `.rounded-circle`
 
 #### Removing Border Radius
 
-Use the `.rounded-0` helper class to remove all radii of elements or the radius selected by corners; for example. `.rounded-l-0` and `.rounded-tr-0`.
+Use the `.rounded-0` helper class to remove all of an elements radius or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.
 
 <masa-example file="Examples.styles_and_animations.border_radius.Remove"></masa-example>
 
