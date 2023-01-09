@@ -11,7 +11,7 @@ builder.Services.AddServerSideBlazor(options =>
 {
     options.RootComponents.MaxJSRootComponents = 500;
     options.RootComponents.RegisterCustomElementsUsedJSCustomElementAttribute();
-});
+}).AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024);
 
 builder.Services.AddHealthChecks();
 
