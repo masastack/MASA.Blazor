@@ -14,10 +14,13 @@
             <MSkeletonLoader Type="article"></MSkeletonLoader>
         }
 
-        <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
-            <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
-            <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
-        </MTabs>
+        @if (Page.ToLower() != "all")
+        {
+            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
+                <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
+                <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
+            </MTabs>
+        }
 
         @if (IsApiTab && _apiData.Count == 0)
         {

@@ -22,7 +22,7 @@
     string color = GetColor(Item!.State!);
     if (Item!.HasChildren())
     {
-        <MChip Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
+        <MChip Style="height: 20px" Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
     }
     else
     {

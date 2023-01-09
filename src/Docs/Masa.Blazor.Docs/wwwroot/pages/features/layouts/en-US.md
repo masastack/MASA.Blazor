@@ -8,7 +8,7 @@ MASA Blazor comes with a built-in layout system that just works out of the box. 
 
 There are 2 primary layout components in MASA Blazor， MApp and MMain。The MApp  component is the root of your application，`<MApp>//other layout</MApp>`。The MMain component is a semantic replacement for the main HTML element and the root of your application’s content. When  Blazor mounts to the DOM, any MASA Blazor component that is part of the layout registers its current height and/or width with the framework core. The MMain component then takes these values and adjusts its container size.
 
-To better illustrate this, let’s create a basic Vuetify layout:
+To better illustrate this, let’s create a basic MASA Blazor layout:
 
 ```html
 <MApp>

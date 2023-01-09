@@ -1,6 +1,6 @@
 # Wireframes
 
-The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
+The MASA Blazor **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
 
 ## Examples
 

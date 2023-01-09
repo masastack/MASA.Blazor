@@ -49,7 +49,7 @@ related:
 
 <masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
 
-#### 通过 **FluentValidation** 验证集合
+#### 通过 FluentValidation 验证集合
 
 **MForm** 支持 **FluentValidation** 验证集合
 

@@ -72,7 +72,8 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
     addHeadingRules(markdownIt);
     addLinkRules(markdownIt);
     addCodeRules(markdownIt);
-    addImageRules(markdownIt)
+    addImageRules(markdownIt);
+    addBlockquoteRules(markdownIt);
   } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
@@ -132,6 +133,25 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       tokens[idx].attrSet("width", "100%");
       return self.renderToken(tokens, idx, options);
     }
+  }
+
+  function addBlockquoteRules(md) {
+    md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
+      const next = tokens[idx + 2];
+      const content = next.content;
+
+      tokens[idx].tag = "app-alert";
+      tokens[idx].attrSet("content", content);
+      tokens[idx].attrSet("type", "info");
+      tokens[idx].attrSet("border", "left");
+
+      return self.renderToken(tokens, idx, options);
+    };
+    md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
+      tokens[idx].tag = "app-alert";
+
+      return self.renderToken(tokens, idx, options);
+    };
   }
 };
 
