@@ -130,7 +130,7 @@
                 <MRow Dense NoGutters>
                     @foreach (var (title, href) in items)
                     {
-                        <MCol Cols="4">
+                        <MCol Cols="4" Class="rounded text-truncate">
                             @LinkableTitle(title, href)
                         </MCol>
                     }
@@ -141,7 +141,7 @@
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
     {
-        <MButton Text Href="@href" Class="ordinary-text text-none">@I18n.T(title)</MButton>
+        <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
 
 }
