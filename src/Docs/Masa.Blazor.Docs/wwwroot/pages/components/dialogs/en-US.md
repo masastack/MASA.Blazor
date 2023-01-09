@@ -11,7 +11,7 @@ related:
 
 A dialog contains two slots, one for its activator and one for its content (default). Good for Privacy Policies.
 
-<dialogs-usage></dialogs-usage>
+<masa-example file="Examples.components.dialogs.Usage"></masa-example>
 
 ## Examples
 
