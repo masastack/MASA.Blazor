@@ -1,4 +1,6 @@
-﻿::-webkit-scrollbar-track {
+﻿@import url(standard.css);
+
+::-webkit-scrollbar-track {
     border-radius: 10px;
     margin: 12px 0 0 0;
     background-color: #F6F8FD;
@@ -397,12 +399,16 @@ app-alert p {
         padding-bottom: 0.75rem;
     }
 
-        .m-markdown-it table td:not(:last-child), table th:not(:last-child) {
-            border-right-width: 2px;
-            border-style: solid;
-            --tw-border-opacity: 1;
-            border-color: rgba(234, 236, 239, var(--tw-border-opacity));
-        }
+    .m-markdown-it table td:not(:last-child) {
+        border-right-width: 2px;
+        border-style: solid;
+        --tw-border-opacity: 1;
+        border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+    }
+
+    .api-table table td p {
+        margin-bottom: 0px !important;
+    }
 
 @media screen and (max-width: 600px) {
     .text-truncate.m-btn {

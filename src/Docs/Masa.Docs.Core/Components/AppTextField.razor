@@ -1,15 +1,16 @@
 ﻿<MTextField Value="Value"
             ValueChanged="@ValueChanged"
-            BackgroundColor="grey lighten-3"
+            BackgroundColor="@(BackgroundColor ?? "grey lighten-3")"
             Flat="@(!isFocused)"
             Class="rounded-lg"
             Dense
             HideDetails="true"
-            Solo
+            Solo           
             Clearable="@Clearable"
+            ClearIcon="@ClearIcon"
             Label="@Label">
     <PrependInnerContent>
-        <MIcon Color="@(isFocused ? "grey" : "")" Class="mr-2">
+        <MIcon Color="@(isFocused ? "grey" : "")" Size=16 Class="mr-2">
             @Icon
         </MIcon>
     </PrependInnerContent>
@@ -31,6 +32,12 @@
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public string? BackgroundColor { get; set; }
+
+    [Parameter]
+    public string ClearIcon { get; set; } = "mdi-close-circle";
 
     private bool isFocused;
 

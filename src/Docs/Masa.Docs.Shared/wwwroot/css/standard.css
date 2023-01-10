@@ -1,0 +1,527 @@
+﻿/*
+    color of background
+*/
+
+.masa {
+    font-family: roboto,"Noto Sans SC","Microsoft YaHei" !important;
+    font-size: 16px;
+}
+
+    .masa .primary {
+        background-color: #4318FF !important;
+    }
+
+    .masa .primary-hover {
+        background-color: #6956FF !important;
+    }
+
+    .masa .primary-clicked {
+        background-color: #3613CC !important;
+    }
+
+    .masa .primary-disabled {
+        background-color: #A18BFF !important;
+    }
+
+    .masa .primary-special {
+        background-color: #D9D1FF !important;
+    }
+
+    .masa .primary-lighten {
+        background-color: #ECE8FF !important;
+    }
+
+    .masa .default {
+        background-color: #000000 !important;
+    }
+
+    .masa .emphasis {
+        background-color: #1B2559 !important;
+    }
+
+    .masa .emphasis2 {
+        background-color: #323D6F !important;
+    }
+
+    .masa .regular {
+        background-color: #485585 !important;
+    }
+
+    .masa .regular2 {
+        background-color: #7681AB !important;
+    }
+
+    .masa .regular3 {
+        background-color: #A3AED0 !important;
+    }
+
+    .masa .fill {
+        background-color: #FFFFFF !important;
+    }
+
+    .masa .fill-lighten {
+        background-color: #FAFBFE !important;
+    }
+
+    .masa .fill-hover {
+        background-color: #F6F8FD !important;
+    }
+
+    .masa .fill-background {
+        background-color: #F0F3FA !important;
+    }
+
+    .masa .fill-disabled {
+        background-color: #E9EDF7 !important;
+    }
+
+    .masa .fill-line {
+        background-color: #E2E7F4 !important;
+    }
+
+    .masa .fill-overlay {
+        background-color: #141726 !important;
+    }
+
+    .masa .success {
+        background-color: #00B42A !important;
+    }
+
+    .masa .success-hover {
+        background-color: #23C343 !important;
+    }
+
+    .masa .success-clicked {
+        background-color: #009A29 !important;
+    }
+
+    .masa .success-disabled {
+        background-color: #7BE188 !important;
+    }
+
+    .masa .success-special {
+        background-color: #AFF0B5 !important;
+    }
+
+    .masa .success-lighten {
+        background-color: #E8FFEA !important;
+    }
+
+    .masa .remind {
+        background-color: #FF7D00 !important;
+    }
+
+    .masa .remind-hover {
+        background-color: #FF9A2E !important;
+    }
+
+    .masa .remind-clicked {
+        background-color: #D25F00 !important;
+    }
+
+    .masa .remind-disabled {
+        background-color: #FFCF8B !important;
+    }
+
+    .masa .remind-special {
+        background-color: #FFE4BA !important;
+    }
+
+    .masa .remind-lighten {
+        background-color: #FFF7E8 !important;
+    }
+
+    .masa .warning {
+        background-color: #FF5252 !important;
+    }
+
+    .masa .warning-hover {
+        background-color: #FF8A80 !important;
+    }
+
+    .masa .warning-clicked {
+        background-color: #B71C1C !important;
+    }
+
+    .masa .warning-disabled {
+        background-color: #FBACA3 !important;
+    }
+
+    .masa .warning-special {
+        background-color: #FDCDC5 !important;
+    }
+
+    .masa .warning-lighten {
+        background-color: #FFECE8 !important;
+    }
+
+    .masa .info {
+        background-color: #37A7FF !important;
+    }
+
+    .masa .info-hover {
+        background-color: #5FB9FF !important;
+    }
+
+    .masa .info-clicked {
+        background-color: #2C86CC !important;
+    }
+
+    .masa .info-disabled {
+        background-color: #9BD3FF !important;
+    }
+
+    .masa .info-special {
+        background-color: #D7EDFF !important;
+    }
+
+    .masa .info-lighten {
+        background-color: #EBF6FF !important;
+    }
+
+    .masa .yellow {
+        background-color: #FFB547 !important;
+    }
+
+    .masa .yellow-hover {
+        background-color: #FFC46C !important;
+    }
+
+    .masa .yellow-clicked {
+        background-color: #CC9139 !important;
+    }
+
+    .masa .yellow-disabled {
+        background-color: #FFDAA3 !important;
+    }
+
+    .masa .yellow-special {
+        background-color: #FFF0DA !important;
+    }
+
+    .masa .yellow-lighten {
+        background-color: #FFF8ED !important;
+    }
+
+    .masa .green {
+        background-color: #05CD99 !important;
+    }
+
+    .masa .green-hover {
+        background-color: #37D7AD !important;
+    }
+
+    .masa .green-clicked {
+        background-color: #04A47A !important;
+    }
+
+    .masa .green-disabled {
+        background-color: #82E6CC !important;
+    }
+
+    .masa .green-special {
+        background-color: #CDF5EB !important;
+    }
+
+    .masa .green-lighten {
+        background-color: #E6FAF5 !important;
+    }
+
+    /*
+    color of text
+*/
+
+    .masa .primary--text {
+        color: #4318FF !important;
+    }
+
+    .masa .primary-hover--text {
+        color: #6956FF !important;
+    }
+
+    .masa .primary-clicked--text {
+        color: #3613CC !important;
+    }
+
+    .masa .primary-disabled--text {
+        color: #A18BFF !important;
+    }
+
+    .masa .primary-special--text {
+        color: #D9D1FF !important;
+    }
+
+    .masa .primary-lighten--text {
+        color: #ECE8FF !important;
+    }
+
+    .masa .default--text {
+        color: #000000 !important;
+    }
+
+    .masa .emphasis--text {
+        color: #1B2559 !important;
+    }
+
+    .masa .emphasis2--text {
+        color: #323D6F !important;
+    }
+
+    .masa .regular--text {
+        color: #485585 !important;
+    }
+
+    .masa .regular2--text {
+        color: #7681AB !important;
+    }
+
+    .masa .regular3--text {
+        color: #A3AED0 !important;
+    }
+
+    .masa .fill--text {
+        color: #FFFFFF !important;
+    }
+
+    .masa .fill-lighten--text {
+        color: #FAFBFE !important;
+    }
+
+    .masa .fill-hover--text {
+        color: #F6F8FD !important;
+    }
+
+    .masa .fill-background--text {
+        color: #F0F3FA !important;
+    }
+
+    .masa .fill-disabled--text {
+        color: #E9EDF7 !important;
+    }
+
+    .masa .fill-line--text {
+        color: #E2E7F4 !important;
+    }
+
+    .masa .fill-overlay--text {
+        color: #141726 !important;
+    }
+
+    .masa .yellow--text {
+        color: #FFB547 !important;
+    }
+
+    .masa .yellow-hover--text {
+        color: #FFC46C !important;
+    }
+
+    .masa .yellow-clicked--text {
+        color: #CC9139 !important;
+    }
+
+    .masa .yellow-disabled--text {
+        color: #FFDAA3 !important;
+    }
+
+    .masa .yellow-special--text {
+        color: #FFF0DA !important;
+    }
+
+    .masa .yellow-lighten--text {
+        color: #FFF8ED !important;
+    }
+
+    .masa .green--text {
+        color: #05CD99 !important;
+    }
+
+    .masa .green-hover--text {
+        color: #37D7AD !important;
+    }
+
+    .masa .green-clicked--text {
+        color: #04A47A !important;
+    }
+
+    .masa .green-disabled--text {
+        color: #82E6CC !important;
+    }
+
+    .masa .green-special--text {
+        color: #CDF5EB !important;
+    }
+
+    .masa .green-lighten--text {
+        color: #E6FAF5 !important;
+    }
+    /*
+    font
+*/
+    .masa .h1 {
+        font-size: 6rem !important;
+        font-weight: 300 !important;
+        line-height: 7rem !important;
+        letter-spacing: -0.0946875em !important;
+    }
+
+    .masa .h2 {
+        font-size: 3.75rem !important;
+        font-weight: 300 !important;
+        line-height: 4.75rem !important;
+        letter-spacing: -0.03125em !important;
+    }
+
+    .masa .h3 {
+        font-size: 3rem !important;
+        font-weight: 900 !important;
+        line-height: 3.5rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .h4 {
+        font-size: 2.125rem !important;
+        font-weight: 700 !important;
+        line-height: 3.1875rem !important;
+        letter-spacing: 0.02em !important;
+    }
+
+    .masa .h5 {
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        line-height: 2.25rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .h6 {
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        line-height: 1.875rem !important;
+        letter-spacing: 0.01em !important;
+    }
+
+    .masa .h7 {
+        font-size: 1.125rem !important;
+        font-weight: 500 !important;
+        line-height: 1.6875rem !important;
+        letter-spacing: 0.01em !important;
+    }
+
+    .masa .h8 {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        line-height: 1.5rem !important;
+        letter-spacing: 0.03125em !important;
+    }
+
+    .masa .subtitle {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        line-height: 1.5rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .subtitle2 {
+        font-size: 0.875rem !important;
+        font-weight: 700 !important;
+        line-height: 1.3125rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .subtitle3 {
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        line-height: 1.125rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .body {
+        font-size: 1rem !important;
+        font-weight: 400 !important;
+        line-height: 1.5rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .body2 {
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+        line-height: 1.3125rem !important;
+        letter-spacing: 0.015625em !important;
+    }
+
+    .masa .btn {
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+        line-height: 1.3125rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .caption {
+        font-size: 0.75rem !important;
+        font-weight: 400 !important;
+        line-height: 1.125rem !important;
+        letter-spacing: 0em !important;
+    }
+
+    .masa .overline {
+        font-size: 0.625rem !important;
+        font-weight: 400 !important;
+        line-height: 0.9375rem !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+    }
+
+    .masa .rounded-2 {
+        border-radius: 8px !important;
+    }
+
+    .masa .rounded-3 {
+        border-radius: 12px !important;
+    }
+
+    .masa .rounded-4 {
+        border-radius: 16px !important;
+    }
+
+    .masa .rounded-5 {
+        border-radius: 20px !important;
+    }
+
+    .masa .rounded-6 {
+        border-radius: 24px !important;
+    }
+
+    .masa .rounded-b-4 {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+    }
+
+    .masa .rounded-b-0 {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    
+    .masa .rounded-t-0 {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .masa .rounded-r-1 {
+        border-top-right-radius: 5px !important;
+        border-bottom-right-radius: 5px !important;
+    }
+
+    .masa .max-height {
+        height: 100% !important;
+    }
+
+    .masa .max-width {
+        width: 100% !important;
+    }
+
+    .masa .full-width {
+        width: 100% !important;
+    }
+
+    .masa .full-height {
+        height: 100% !important;
+    }

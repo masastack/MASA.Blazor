@@ -398,5 +398,8 @@
     "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表"
   },
   "0.6.0": "0.6.0",
-  "0.7.0": "0.7.0"
+  "0.7.0": "0.7.0",
+  "default": "默认值",
+  "description": "描述",
+  "name": "名称"
 }
