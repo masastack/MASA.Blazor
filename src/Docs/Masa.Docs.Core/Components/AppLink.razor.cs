@@ -15,28 +15,11 @@ public partial class AppLink
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
 
-    private const string POUND = "mdi-pound";
+    private const string POUND = "mdi-anchor";
     private const string OPEN_IN_NEW = "mdi-open-in-new";
     private const string PAGE_NEXT = "mdi-page-next";
 
     private string? _target;
-
-    private string? ComputedHref
-    {
-        get
-        {
-            if (IsSamePage)
-            {
-                // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, use 
-                // var relativePath = (new Uri(NavigationManager.Uri)).AbsolutePath;
-                // return relativePath + Href;
-                // else,
-                return null;
-            }
-
-            return Href;
-        }
-    }
 
     private string? Icon
     {
@@ -73,10 +56,15 @@ public partial class AppLink
 
     private async Task OnClick(MouseEventArgs args)
     {
-        // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, remove @onclick
         if (IsSamePage)
         {
-            // await Js.ScrollToHash(Href);
+            // TODO: remove the following lines when #40190 of aspnetcore resolved.
+            // TODO: Blazor now does not support automatic scrolling of anchor points.
+            // Check this when .NET 8 released.
+
+            await Js.InvokeVoidAsync("setHash");
+            //NavigationManager.ReplaceWithHash(Href);
+            await Js.ScrollToElement(Href.Replace(".", "-").ToLower(), AppService.AppBarHeight);
         }
     }
 }
