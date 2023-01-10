@@ -141,16 +141,11 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       const content = next.content;
 
       tokens[idx].tag = "app-alert";
-      tokens[idx].attrSet("content", content);
+      tokens[idx].attrSet("content", content.replaceAll('>', "&quot"));
       tokens[idx].attrSet("type", "info");
       tokens[idx].attrSet("border", "left");
 
-      return self.renderToken(tokens, idx, options);
-    };
-    md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-alert";
-
-      return self.renderToken(tokens, idx, options);
+      return `<app-alert content="${content.replaceAll('>', "&quot;")}" type="none" border="left"></app-alert>\n`;
     };
   }
 };

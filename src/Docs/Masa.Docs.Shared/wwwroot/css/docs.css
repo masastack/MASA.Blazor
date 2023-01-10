@@ -418,3 +418,7 @@ app-alert p {
         width: 100%;
     }
 }
+
+default-app-markup {
+    margin-bottom: 16px;
+}
