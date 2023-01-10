@@ -9,7 +9,7 @@
             <tr>
                 @foreach (var header in Headers)
                 {
-                    <th style="@(header == "default"?"width:155px;":"") @(header == "type"?"width:200px;":"")">
+                    <th style="@(header == "default" ? "width:155px;" : (header == "type" ? "width:200px;" : ""))">
                         <div class="emphasis--text subtitle">@I18n.T(header)</div>
                     </th>
                 }
