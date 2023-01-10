@@ -323,11 +323,19 @@
   "0.6.0": "0.6.0",
   "0.7.0": "0.7.0",
   "mf-part-1": "1. 创建最小APIs服务",
-  "mf-part-2": "2. 商品: 领域层",
+  "mf-part-2": "2. 领域层",
   "mf-part-3": "3. 自定义仓储实现",
   "mf-part-4": "4. 保存或获取数据",
   "mf-part-5": "5. 事件总线",
-  "mf-part-6": "6. 使用多级缓存",
+  "mf-part-6": "6. 应用服务层",
+  "mf-part-7": "7. 对象映射",
+  "mf-part-8": "8. 多级缓存",
+  "mf-part-9": "9. 全局异常处理",
+  "load-event": "加载事件",
+  "stack-sdks": "业务SDK",
+  "contribution": "贡献",
+  "issues": "提问",
+  "pr": "贡献代码",
 
   "best-practices": "最佳实践",
   "get-started": "开始使用",
@@ -447,7 +455,5 @@
     "tooltips": "当用户悬停在元素上时， Tooltips 组件可用于传递信息",
     "treeview": "适用于显示大量嵌套数据",
     "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表"
-  },
-  "0.6.0": "0.6.0",
-  "0.7.0": "0.7.0"
+  }
 }
