@@ -28,7 +28,7 @@ window.getCurrentDocSearchLanguage = function () {
 // scroll to the top of the page, the state of the isHash is required
 let isHash;
 
-window.setHash = function (){
+window.setHash = function () {
   isHash = true;
 }
 
@@ -74,6 +74,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
     addCodeRules(markdownIt);
     addImageRules(markdownIt);
     addBlockquoteRules(markdownIt);
+    addTabsRules(markdownIt);
   } else if (scope === "desc") {
     addLinkRules(markdownIt)
   }
@@ -152,6 +153,46 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
 
       return self.renderToken(tokens, idx, options);
     };
+  }
+
+  function addTabsRules(md) {
+    md.renderer.rules.container_tabs_open = (tokens, idx, options, env, self) => {
+      let nextIndex = idx
+      let nextToken = tokens[idx]
+      
+      const dic = {}
+      
+      while (nextToken) {
+        nextIndex++
+        nextToken = tokens[nextIndex]
+
+        console.log(nextToken)
+        
+        if (nextToken.type === "container_tab_open") {
+          const tab = nextToken.info.replace("tab", "").trim()
+          
+          nextIndex++
+          nextToken = tokens[nextIndex]
+
+          if (nextToken.type === "fence") {
+            const { content: code, info: lang } = nextToken
+            
+            dic[tab] = { code, lang }
+          }
+        }
+
+        if (nextToken.type === 'container_tabs_close') {
+          break
+        }
+      }
+      
+      console.log('dic', dic, JSON.stringify(dic))
+
+      return `<app-tabs dic='${JSON.stringify(dic)}'>\n`
+    }
+    md.renderer.rules.container_tabs_close = (tokens, idx, options, env, self) => {
+      return `</app-tabs>\n`;
+    }
   }
 };
 
