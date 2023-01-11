@@ -61,6 +61,8 @@ docker:
   only:
     - main
   script:
+    - rm -rf ./src/BlazorComponent
+    - rm -rf ./src/MASA.Docs
     - git config --global https.proxy $PROXY_GATEWAY
     - git config --global http.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
