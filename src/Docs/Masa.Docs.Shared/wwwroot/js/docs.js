@@ -140,7 +140,16 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       const next = tokens[idx + 2];
       const content = next.content;
 
-      return `<app-alert content="${content.replaceAll('>', "&gt;")}" type="none" border="left"></app-alert>\n`;
+      tokens[idx].tag = "app-alert";
+      tokens[idx].attrSet("content", content);
+      tokens[idx].attrSet("border", "left");
+
+      return self.renderToken(tokens, idx, options);
+    };
+    md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
+        tokens[idx].tag = "app-alert";
+
+        return self.renderToken(tokens, idx, options);
     };
   }
 };
