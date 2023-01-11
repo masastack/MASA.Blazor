@@ -8,7 +8,10 @@ namespace Masa.Blazor;
 public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>, IOutsideClickJsCallback
 {
     [Inject]
-    protected I18n I18n { get; set; }
+    protected I18n? I18n { get; set; }
+
+    [Inject]
+    private OutsideClickJSModule? OutsideClickJSModule { get; set; }
 
     [Parameter]
     public override string AppendIcon { get; set; } = "mdi-menu-down";
@@ -214,8 +217,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
     }
 
-    private OutsideClickJSModule? _outsideClickJsModule;
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -309,11 +310,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             OnMenuActiveChange(true);
         }
 
-        if (_outsideClickJsModule is null && MMenu.ContentElement.Context is not null)
+        if (OutsideClickJSModule is { Initialized: false } && MMenu.ContentElement.Context is not null)
         {
-            Console.WriteLine($"new OutsideClickJsModule in Select, MenuContent is null: {MMenu.ContentElement.Context is null}");
-            _outsideClickJsModule = new OutsideClickJSModule(this, Js);
-            await _outsideClickJsModule.InitializeAsync(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+            await OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
         }
     }
 
