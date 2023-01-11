@@ -52,7 +52,7 @@ public class BlazorDocService
 
         try
         {
-            _apiInPageCache = await _httpClient.GetFromJsonAsync<Dictionary<string, List<string>>>("_content/Masa.Docs.Core/data/page-to-api.json");
+            _apiInPageCache = await _httpClient.GetFromJsonAsync<Dictionary<string, List<string>>>("_content/Masa.Blazor.Docs/data/page-to-api.json");
         }
         catch (Exception e)
         {
@@ -71,7 +71,7 @@ public class BlazorDocService
             return await s_apiCache.GetOrAdd(key, async _ =>
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                    $"_content/Masa.Docs.Core/data/apis/{key}.json").ConfigureAwait(false);
+                    $"_content/Masa.Blazor.Docs/data/apis/{key}.json").ConfigureAwait(false);
                 var commonApis = await _commonApis.Value;
                 if (commonApis is not null && commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {

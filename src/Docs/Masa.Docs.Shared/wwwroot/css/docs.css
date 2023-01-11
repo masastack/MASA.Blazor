@@ -397,12 +397,16 @@ app-alert p {
         padding-bottom: 0.75rem;
     }
 
-        .custom-table table td:not(:last-child), table th:not(:last-child) {
-            border-right-width: 2px;
-            border-style: solid;
-            --tw-border-opacity: 1;
-            border-color: rgba(234, 236, 239, var(--tw-border-opacity));
-        }
+    .custom-table table td:not(:last-child) {
+        border-right-width: 2px;
+        border-style: solid;
+        --tw-border-opacity: 1;
+        border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+    }
+
+    .api-table table td p {
+        margin-bottom: 0px !important;
+    }
 
 @media screen and (max-width: 600px) {
     .text-truncate.m-btn {

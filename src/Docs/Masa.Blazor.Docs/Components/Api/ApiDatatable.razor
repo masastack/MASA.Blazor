@@ -1,30 +1,30 @@
 ﻿@using Masa.Blazor.Docs.ApiGenerator
+@inject I18n I18n
 
 @namespace Masa.Blazor.Docs.Components
 
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
-        <tr>
-            @foreach (var header in Headers)
-            {
-                <th class="@header">
-                    <div class="text-capitalize">@header</div>
-                </th>
-            }
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Items)
-        {
-            <tr class="grey lighten-3">
+            <tr>
                 @foreach (var header in Headers)
                 {
-                    if (header == "name")
+                    <th style="@GetHeaderStyle(header)">
+                        <div class="emphasis--text subtitle">@I18n.T(header)</div>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Items)
+            {
+                <tr>
+                    @foreach (var header in Headers)
                     {
                         <td>
-                            <span class="name-item text-mono">
-                                <span class="font-weight-bold">
+                            @if (header == "name")
+                            {
+                                <span class="emphasis2--text subtitle">
                                     <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
                                         <BadgeContent>
                                             <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
@@ -34,44 +34,35 @@
                                         </ChildContent>
                                     </MBadge>
                                 </span>
-                            </span>
+                            }
+                            else
+                            {
+                                <span class="regular--text body">
+                                    @if (header == "type")
+                                    {
+                                        @item.Type
+                                    }
+                                    else if (header == "default")
+                                    {
+                                        @item.DefaultValue
+                                    }
+                                    else if (header == "description")
+                                    {
+                                        @if (string.IsNullOrWhiteSpace(item.Description))
+                                        {
+                                            @("MISSING DESCRIPTION")
+                                        }
+                                        else
+                                        {
+                                            <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
+                                        }
+                                    }
+                                </span>
+                            }
                         </td>
                     }
-                    else if (header == "type")
-                    {
-                        <td>
-                            <span class="name-item text-mono">
-                                <MHighlight Inline Code="@item.Type" Language="cs"></MHighlight>
-                            </span>
-                        </td>
-                    }
-                    else if (header == "default")
-                    {
-                        <td>
-                            <span class="name-item text-mono">
-                                <MHighlight Inline Code="@item.DefaultValue" Language="cs"></MHighlight>
-                            </span>
-                        </td>
-                    }
-                }
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <span class="text--mono">
-                        @if (string.IsNullOrWhiteSpace(item.Description))
-                        {
-                            <div>
-                                MISSING DESCRIPTION
-                            </div>
-                        }
-                        else
-                        {
-                            <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
-                        }
-                    </span>
-                </td>
-            </tr>
-        }
+                </tr>
+            }
         </tbody>
     </MSimpleTable>
 </AppSheet>
@@ -90,7 +81,7 @@
 
     static readonly Dictionary<string, string[]> HeaderMaps = new()
     {
-        { "props", new[] { "name", "type", "default" } },
+        { "props", new[] { "name", "type", "default", "description"} },
         { "methods", new[] { "name", "type" } },
         { "events", new[] { "name", "type" } },
         { "contents", new[] { "name", "type" } }
@@ -102,4 +93,10 @@
         ? Data.OrderBy(item => item.Name)
         : Data.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) || item.Type.Contains(Filter, StringComparison.OrdinalIgnoreCase) || (item.DefaultValue != null && item.DefaultValue.Contains(Filter, StringComparison.OrdinalIgnoreCase))).OrderBy(item => item.Name);
 
+    string GetHeaderStyle(string header)
+    {
+        if (header == "default") return "width:155px;";
+        else if (header == "type") return "width:200px;";
+        return "";
+    }
 }
