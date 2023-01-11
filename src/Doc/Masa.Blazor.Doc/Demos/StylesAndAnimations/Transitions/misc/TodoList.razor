@@ -63,6 +63,7 @@
                         <MListItemAction>
                             <MCheckbox Value="@task.Done"
                                        ValueChanged="@(v => task.Done = v)"
+                                       TValue="bool"
                                        Color="@(task.Done ? "grey" : "primary")">
                                 <LabelContent>
                                     <div class="@(task.Done ? "grey--text" : "primary--text") ml-4">

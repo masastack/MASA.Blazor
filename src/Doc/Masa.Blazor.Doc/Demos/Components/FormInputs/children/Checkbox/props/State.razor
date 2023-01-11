@@ -15,10 +15,10 @@
             <MCheckbox @bind-Value="checkbox1"></MCheckbox>
         </MCol>
         <MCol Cols="4">
-            <MCheckbox></MCheckbox>
+            <MCheckbox TValue="bool"></MCheckbox>
         </MCol>
         <MCol Cols="4">
-            <MCheckbox Indeterminate="indeterminate" Value="checkbox2" ValueChanged="Checkbox2Changed"></MCheckbox>
+            <MCheckbox Indeterminate="indeterminate" Value="checkbox2" TValue="bool" ValueChanged="Checkbox2Changed"></MCheckbox>
         </MCol>
     </MRow>
     <MRow class="light--text">
@@ -34,7 +34,7 @@
             <MCheckbox @bind-Value="checkbox3" Disabled></MCheckbox>
         </MCol>
         <MCol Cols="4">
-            <MCheckbox Disabled></MCheckbox>
+            <MCheckbox Disabled TValue="bool"></MCheckbox>
         </MCol>
     </MRow>
 </MContainer>
