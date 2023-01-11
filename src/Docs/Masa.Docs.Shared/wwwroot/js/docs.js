@@ -142,15 +142,14 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
 
       tokens[idx].tag = "app-alert";
       tokens[idx].attrSet("content", content);
-      tokens[idx].attrSet("type", "info");
       tokens[idx].attrSet("border", "left");
 
       return self.renderToken(tokens, idx, options);
     };
-    md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-alert";
+    md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
+        tokens[idx].tag = "app-alert";
 
-      return self.renderToken(tokens, idx, options);
+        return self.renderToken(tokens, idx, options);
     };
   }
 };
