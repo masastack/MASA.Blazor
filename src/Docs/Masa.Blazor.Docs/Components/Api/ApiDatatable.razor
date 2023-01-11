@@ -9,7 +9,7 @@
             <tr>
                 @foreach (var header in Headers)
                 {
-                    <th style="@(header == "default" ? "width:155px;" : (header == "type" ? "width:200px;" : ""))">
+                    <th style="@GetHeaderStyle(header)">
                         <div class="emphasis--text subtitle">@I18n.T(header)</div>
                     </th>
                 }
@@ -93,4 +93,10 @@
         ? Data.OrderBy(item => item.Name)
         : Data.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) || item.Type.Contains(Filter, StringComparison.OrdinalIgnoreCase) || (item.DefaultValue != null && item.DefaultValue.Contains(Filter, StringComparison.OrdinalIgnoreCase))).OrderBy(item => item.Name);
 
+    string GetHeaderStyle(string header)
+    {
+        if (header == "default") return "width:155px;";
+        else if (header == "type") return "width:200px;";
+        return "";
+    }
 }
