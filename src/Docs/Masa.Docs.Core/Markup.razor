@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Docs.Core.Components
 
-<AppCode Class="@(Class ?? "my-0")" Rounded="Rounded" Code="@Code" Language="@Language" />
+<AppCode Class="@Class" Rounded="Rounded" Code="@Code" Language="@Language" />
 
 @code {
 
@@ -16,5 +16,5 @@
     public StringBoolean Rounded { get; set; } = true;
 
     [Parameter]
-    public string? Class { get; set; }
+    public string? Class { get; set; } = "my-0";
 }

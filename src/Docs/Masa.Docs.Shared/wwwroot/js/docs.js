@@ -140,12 +140,7 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       const next = tokens[idx + 2];
       const content = next.content;
 
-      tokens[idx].tag = "app-alert";
-      tokens[idx].attrSet("content", content.replaceAll('>', "&quot"));
-      tokens[idx].attrSet("type", "info");
-      tokens[idx].attrSet("border", "left");
-
-      return `<app-alert content="${content.replaceAll('>', "&quot;")}" type="none" border="left"></app-alert>\n`;
+      return `<app-alert content="${content.replaceAll('>', "&gt;")}" type="none" border="left"></app-alert>\n`;
     };
   }
 };
