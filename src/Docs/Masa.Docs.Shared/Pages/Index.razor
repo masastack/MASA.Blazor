@@ -65,6 +65,9 @@
     [CascadingParameter]
     private CultureInfo Culture { get; set; } = null!;
 
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
     private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
     {
         ("why-masa-blazor", "/blazor/introduction/why-masa-blazor")
@@ -95,6 +98,12 @@
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
     private bool _loading = true;
+
+    protected override void OnInitialized()
+    {
+        BaseLayout.PageInfo.PageTitle = "MASA Stack Docs";
+        BaseLayout.PageInfo.PageIcon = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png";
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
