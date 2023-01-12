@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿using Masa.Docs.Shared.Shared;
+using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
 using System.Net;
 
@@ -18,6 +19,9 @@ public partial class Document : IDisposable
     [CascadingParameter]
     private CultureInfo Culture { get; set; } = null!;
 
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
     [Parameter]
     public string Project { get; set; } = null!;
 
@@ -31,9 +35,18 @@ public partial class Document : IDisposable
     private string? _md;
     private CultureInfo? _prevCulture;
     private string? _prevAbsolutePath;
+    private Dictionary<string, string[]> _projectMap = new()
+    {
+        { "stack", new string[]{ "MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png" } },
+        { "framework",new string[]{ "MASA Framework", "https://cdn.masastack.com/images/framework_logo.png" } },
+        { "blazor", new string[]{ "MASA Blazor", "https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" } }
+    };
 
     protected override void OnInitialized()
     {
+        BaseLayout.PageInfo.PageTitle = _projectMap.GetValueOrDefault(Project)?[0];
+        BaseLayout.PageInfo.PageIcon = _projectMap.GetValueOrDefault(Project)?[1];
+
         base.OnInitialized();
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
