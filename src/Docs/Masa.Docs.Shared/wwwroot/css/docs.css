@@ -297,6 +297,10 @@ a.text-dec-none {
         border-radius: 0 4px 4px 0 !important;
     }
 
+    .doc-list-nav.m-list--nav .m-list-item {
+        padding: 0 16px;
+    }
+
 .tag-chip {
     border-radius: 6px !important;
     height: 36px !important;
@@ -397,16 +401,16 @@ app-alert p {
         padding-bottom: 0.75rem;
     }
 
-    .custom-table table td:not(:last-child) {
-        border-right-width: 2px;
-        border-style: solid;
-        --tw-border-opacity: 1;
-        border-color: rgba(234, 236, 239, var(--tw-border-opacity));
-    }
+        .custom-table table td:not(:last-child) {
+            border-right-width: 2px;
+            border-style: solid;
+            --tw-border-opacity: 1;
+            border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+        }
 
-    .api-table table td p {
-        margin-bottom: 0px !important;
-    }
+.api-table table td p {
+    margin-bottom: 0px !important;
+}
 
 @media screen and (max-width: 600px) {
     .text-truncate.m-btn {
