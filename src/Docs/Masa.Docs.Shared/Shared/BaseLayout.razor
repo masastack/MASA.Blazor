@@ -4,6 +4,11 @@
 @inject DocService DocService
 @implements IDisposable
 
+<HeadContent>
+    <PageTitle>@PageInfo.PageTitle</PageTitle>
+    <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
+</HeadContent>
+
 <MApp>
     <CascadingValue Value="@I18n.Culture">
         <CascadingValue Value="@_project" Name="project">
@@ -42,6 +47,9 @@
     
 
     public (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
+
+
+    internal (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
 
     private Dictionary<string, string> _projectMap = new();
 
