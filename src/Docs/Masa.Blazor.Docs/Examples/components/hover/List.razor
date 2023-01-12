@@ -4,8 +4,9 @@
         {
             <MCol Cols="12" Md="4">
                 <MHover>
-                    <MCard @attributes="context.Attrs" Class="@($"{context.Class} {(context.Hover ? "on-hover" : "")}")"
-                           Style="@($"transition: opacity .4s ease-in-out; {(context.Hover ? "" : "opacity: 0.6;")}")" Elevation="@(context.Hover ? 12 : 2)">
+                    <MCard @attributes="context.Attrs"
+                           Class="@($"{(context.Hover ? "on-hover" : "")}")"
+                           Elevation="@(context.Hover ? 12 : 2)">
                         <MImage Src="@item.Img" Height="225">
                             <MCardTitle Class="text-h6 white--text">
                                 <MRow Class="fill-height flex-column" Justify="JustifyTypes.SpaceBetween">
@@ -19,8 +20,8 @@
                                     <div class="align-self-center">
                                         @foreach (var icon in _icons)
                                         {
-                                            <MButton Color="@(context.Hover ? "rgba(255, 255, 255, 1) !important;" : _transparent)" Icon>
-                                                <MIcon Color="@(context.Hover ? "rgba(255, 255, 255, 1) !important;" : _transparent)">
+                                            <MButton Class="@(context.Hover ? "show-btns" : "")" Color="transparent" Icon>
+                                                <MIcon Class="@(context.Hover ? "show-btns" : "")" Color="transparent">
                                                     @icon
                                                 </MIcon>
                                             </MButton>

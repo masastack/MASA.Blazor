@@ -2,7 +2,9 @@
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
-    public Usage() : base(typeof(MHover)) { }
+    public Usage() : base(typeof(MHover))
+    {
+    }
 
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
@@ -24,8 +26,8 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         return parameter.Key switch
         {
-            nameof(MHover.CloseDelay) => (StringNumber)(double)parameter.Value,
-            nameof(MHover.OpenDelay) => (StringNumber)(double)parameter.Value,
+            nameof(MHover.CloseDelay) => Convert.ToInt32(parameter.Value),
+            nameof(MHover.OpenDelay) => Convert.ToInt32(parameter.Value),
             _ => parameter.Value
         };
     }
@@ -34,23 +36,25 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         return new Dictionary<string, object>()
         {
-            {nameof(MHover.ChildContent),new RenderFragment<HoverProps>(context => builder =>{
-
-                builder.OpenComponent<MCard>(0);
-                builder.AddMultipleAttributes(1, context.Attrs);
-                builder.AddAttribute(2, nameof(MCard.Class), $"mx-auto {context.Class}");
-                builder.AddAttribute(3, nameof(MCard.Height),(StringNumber)("350"));
-                builder.AddAttribute(4, nameof(MCard.MaxWidth),(StringNumber)"350");
-                builder.AddAttribute(5, nameof(MCard.Elevation),(StringNumber)$"{(context.Hover?12:2)}");
-                builder.AddAttribute(6, nameof(MCard.ChildContent), (RenderFragment)(childBuilder =>
+            {
+                nameof(MHover.ChildContent), new RenderFragment<HoverProps>(context => builder =>
                 {
-                    childBuilder.OpenComponent<MCardText>(0);
-                    childBuilder.AddAttribute(1, nameof(MCardText.Class), "my-4 text-center text-h6");
-                    childBuilder.AddChildContent(2, "Hover over me!");
-                    childBuilder.CloseComponent();
-                }));
-                builder.CloseComponent();
-            })}
+                    builder.OpenComponent<MCard>(0);
+                    builder.AddMultipleAttributes(1, context.Attrs);
+                    builder.AddAttribute(2, nameof(MCard.Class), "mx-auto");
+                    builder.AddAttribute(3, nameof(MCard.Height), (StringNumber)("350"));
+                    builder.AddAttribute(4, nameof(MCard.MaxWidth), (StringNumber)"350");
+                    builder.AddAttribute(5, nameof(MCard.Elevation), (StringNumber)$"{(context.Hover ? 12 : 2)}");
+                    builder.AddAttribute(6, nameof(MCard.ChildContent), (RenderFragment)(childBuilder =>
+                    {
+                        childBuilder.OpenComponent<MCardText>(0);
+                        childBuilder.AddAttribute(1, nameof(MCardText.Class), "my-4 text-center text-h6");
+                        childBuilder.AddChildContent(2, "Hover over me!");
+                        childBuilder.CloseComponent();
+                    }));
+                    builder.CloseComponent();
+                })
+            }
         };
     }
 }

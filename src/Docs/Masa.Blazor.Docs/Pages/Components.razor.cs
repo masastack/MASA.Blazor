@@ -59,7 +59,7 @@ public partial class Components
         {
             if (value != Api)
             {
-                NavigationManager.NavigateTo($"/components/{Page}/{Tab}/{value}");
+                NavigationManager.NavigateTo($"/blazor/components/{Page}/{Tab}/{value}");
             }
         }
     }
