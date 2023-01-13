@@ -12,6 +12,8 @@
 
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
+
             ActiveClass ??= "m-slide-item--active";
             NextIcon ??= "mdi-chevron-right";
             PrevIcon ??= "mdi-chevron-left";
