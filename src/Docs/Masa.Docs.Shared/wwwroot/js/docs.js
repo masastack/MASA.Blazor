@@ -67,16 +67,20 @@ window.getTimeOffset = function () {
 /*
  * markdown-it-proxy would invoke this function to set rules.
  */
-window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
+window.MasaBlazor.markdownItRules = function (parser) {
+  const {md, scope} = parser
   if (scope === "document") {
-    addHeadingRules(markdownIt);
-    addLinkRules(markdownIt);
-    addCodeRules(markdownIt);
-    addImageRules(markdownIt);
-    addBlockquoteRules(markdownIt);
-    addTabsRules(markdownIt);
+    addHeadingRules(md);
+    addLinkRules(md);
+    addCodeRules(md);
+    addImageRules(md);
+    addBlockquoteRules(md);
+
+    parser.useContainer("code-group")
+    parser.useContainer("code-group-item")
+    addCodeGroupRules(parser);
   } else if (scope === "desc") {
-    addLinkRules(markdownIt)
+    addLinkRules(md)
   }
 
   function addHeadingRules(md) {
@@ -148,49 +152,54 @@ window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
       return self.renderToken(tokens, idx, options);
     };
     md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-        tokens[idx].tag = "app-alert";
+      tokens[idx].tag = "app-alert";
 
-        return self.renderToken(tokens, idx, options);
+      return self.renderToken(tokens, idx, options);
     };
   }
 
-  function addTabsRules(md) {
-    md.renderer.rules.container_tabs_open = (tokens, idx, options, env, self) => {
+  function addCodeGroupRules(parser) {
+    parser.md.renderer.rules["container_code-group_open"] = (tokens, idx, options, env, self) => {
       let nextIndex = idx
       let nextToken = tokens[idx]
-      
+
       const dic = {}
-      
+
       while (nextToken) {
         nextIndex++
         nextToken = tokens[nextIndex]
 
-        console.log(nextToken)
-        
-        if (nextToken.type === "container_tab_open") {
-          const tab = nextToken.info.replace("tab", "").trim()
-          
+        if (nextToken.type === "container_code-group-item_open") {
+          const item = nextToken.info.replace("code-group-item", "").trim()
+
           nextIndex++
           nextToken = tokens[nextIndex]
 
           if (nextToken.type === "fence") {
-            const { content: code, info: lang } = nextToken
-            
-            dic[tab] = { code, lang }
+            const {content: code, info: lang} = nextToken
+
+            dic[item] = {code, lang}
           }
         }
 
-        if (nextToken.type === 'container_tabs_close') {
+        if (nextToken.type === 'container_code-group_close') {
           break
         }
       }
-      
-      console.log('dic', dic, JSON.stringify(dic))
 
-      return `<app-tabs dic='${JSON.stringify(dic)}'>\n`
+      const g_attr = `code_group_${idx}`
+      parser.afterRenderCallbacks.push(() => {
+        const selector = `[${g_attr}]`;
+        const element = document.querySelector(selector);
+        if (element) {
+          element.model = dic;
+        }
+      })
+
+      return `<app-code-group ${g_attr}>\n`
     }
-    md.renderer.rules.container_tabs_close = (tokens, idx, options, env, self) => {
-      return `</app-tabs>\n`;
+    parser.md.renderer.rules["container_code-group_close"] = (tokens, idx, options, env, self) => {
+      return `</app-code-group>\n`;
     }
   }
 };

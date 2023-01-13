@@ -217,6 +217,12 @@ public partial class MMarkdownIt : BDomComponentBase
             }
         }
 
+        NextTick(async () =>
+        {
+            await MarkdownItJSModule.AfterRender(_markdownIt);
+            StateHasChanged();
+        });
+
         StateHasChanged();
     }
 }

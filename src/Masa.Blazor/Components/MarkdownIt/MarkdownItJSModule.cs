@@ -16,6 +16,9 @@ public class MarkdownItJSModule : JSModule
     public async ValueTask<MarkdownItParsedResult> ParseAll(IJSObjectReference instance, string source)
         => await InvokeAsync<MarkdownItParsedResult>("parseAll", instance, source);
 
+    public async Task AfterRender(IJSObjectReference instance)
+        => await InvokeVoidAsync("afterRender", instance);
+
     /// <summary>
     /// Highlight the code and return markup string in html format.
     /// </summary>
