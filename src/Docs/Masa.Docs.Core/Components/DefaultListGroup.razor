@@ -4,20 +4,11 @@
 <MListGroup Group="@group"
             Class="m-list-group--default"
             NoAction
-            SubGroup="SubGroup">
+            SubGroup="SubGroup"
+            @ref="_listGroup">
     <ActivatorContent>
         <NavItemContent Item="Item" />
     </ActivatorContent>
-    <PrependIconContent>
-        @if (string.IsNullOrWhiteSpace(Item?.Icon))
-        {
-            <MIcon>mdi-menu-down</MIcon>
-        }
-        else
-        {
-            <MIcon Color="primary">@Item.Icon</MIcon>
-        }
-    </PrependIconContent>
     <ChildContent>
         @foreach (var child in Item?.Children ?? new())
         {
@@ -52,6 +43,8 @@
     [Parameter]
     public bool SubGroup { get; set; }
 
+    private MListGroup? _listGroup;
+
     private List<string> group = new();
 
     protected override void OnInitialized()
@@ -59,6 +52,23 @@
         base.OnInitialized();
 
         group = GenGroup(Item.Children);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (string.IsNullOrWhiteSpace(Item?.Icon))
+        {
+            _listGroup.PrependIconContent = null;
+        }
+        else
+        {
+            _listGroup.PrependIconContent = __builder =>
+            {
+                <MIcon Color="primary">@Item.Icon</MIcon>
+            };
+        }
     }
 
     List<string> GenGroup(List<TItem>? items)
