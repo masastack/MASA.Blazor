@@ -346,6 +346,7 @@
   "dcc": "分布式配置中心",
   "auth": "权限中心",
   "mc": "消息中心",
+  "scheduler": "任务调度中心",
   "use-guide": "使用指南",
   "develop-guide": "开发指南",
   "permission": "权限",
@@ -370,6 +371,9 @@
   "receiver-group": "消息组",
   "send-message": "发送消息",
   "message-record": "消息记录",
+  "scheduler-job": "调度Job",
+  "scheduler-task": "调度任务",
+  "scheduler-resource": "源文件",
   "all-components": {
     "alerts": "Alerts（提示框）向用户传达重要信息",
     "application": "用于轻松修改主题的可选根组件",
