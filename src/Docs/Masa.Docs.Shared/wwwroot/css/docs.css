@@ -297,7 +297,7 @@ a.text-dec-none {
         border-radius: 0 4px 4px 0 !important;
     }
 
-    .doc-list-nav.m-list--nav .m-list-item {
+    .doc-list-nav .m-list-item {
         padding: 0 16px;
     }
 
