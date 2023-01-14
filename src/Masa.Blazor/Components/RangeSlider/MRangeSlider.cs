@@ -210,7 +210,7 @@ namespace Masa.Blazor
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
             var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
-            if (!ListComparer.Equals(val, roundedVal))
+            if (!ListComparer.Equals(roundedVal, InternalValue))
             {
                 InternalValue = roundedVal;
             }
