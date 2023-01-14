@@ -115,6 +115,7 @@
         ]
       },
       "grids",
+      "gridstack",
       {
         "title": "groups",
         "group": "components",

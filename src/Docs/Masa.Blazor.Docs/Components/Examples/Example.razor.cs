@@ -67,7 +67,11 @@ public partial class Example : NextTickComponentBase
                     var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
                     _type = Type.GetType($"{executingAssemblyName}.{File}");
 
-                    ArgumentNullException.ThrowIfNull(_type, $"{File} does not exists");
+                    if (_type == null)
+                    {
+                        StateHasChanged();
+                        return;
+                    }
 
                     var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
 
@@ -91,7 +95,7 @@ public partial class Example : NextTickComponentBase
                     StateHasChanged();
                 }
             });
-            
+
             StateHasChanged();
         }
     }
@@ -110,7 +114,7 @@ public partial class Example : NextTickComponentBase
             _expand = !_expand;
         }
     }
-    
+
     private static(string? Razor, string? cs, string? css) ResolveSourceCode(string sourceCode)
     {
         string? razor = null;
