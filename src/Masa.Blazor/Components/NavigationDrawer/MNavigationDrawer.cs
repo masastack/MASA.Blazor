@@ -201,6 +201,9 @@ namespace Masa.Blazor
 
         protected override bool IsFullscreen => MasaBlazor.Breakpoint.SmAndDown;
 
+        public override IEnumerable<string> DependentSelectors
+            => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" });
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
