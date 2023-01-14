@@ -109,12 +109,13 @@
           "range-sliders",
           "selects",
           "sliders",
-          "switchs",
+          "switches",
           "textareas",
           "text-fields"
         ]
       },
       "grids",
+      "gridstack",
       {
         "title": "groups",
         "group": "components",
