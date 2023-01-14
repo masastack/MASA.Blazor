@@ -109,7 +109,7 @@
           "range-sliders",
           "selects",
           "sliders",
-          "switchs",
+          "switches",
           "textareas",
           "text-fields"
         ]
