@@ -88,8 +88,6 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ActionContent { get; set; }
 
-
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -142,7 +140,8 @@ namespace Masa.Blazor
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__content");
+                        .Add($"{prefix}__content")
+                        .Add(ContentClass);
                 })
                 .Apply("action", cssBuilder =>
                 {

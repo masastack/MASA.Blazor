@@ -4,6 +4,9 @@
     {
         protected override string AttachSelector => Attach ?? ".m-application";
 
+        public override IEnumerable<string> DependentSelectors
+            => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" });
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
