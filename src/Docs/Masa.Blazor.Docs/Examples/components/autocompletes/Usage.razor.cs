@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.Examples.components.autocomplete;
+﻿namespace Masa.Blazor.Docs.Examples.components.autocompletes;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {

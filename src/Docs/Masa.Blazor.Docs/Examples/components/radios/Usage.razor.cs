@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.Examples.components.radio;
+﻿namespace Masa.Blazor.Docs.Examples.components.radios;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {

@@ -8,22 +8,12 @@
                   Class="mr-3 ml-2">
 </AppTooltipButton>
 
-<MTooltip Bottom
-          ContentClass="m-app-tooltip-btn__content"
-          OpenDelay="200">
-    <ActivatorContent>
-        <MButton Icon
-                 Href="https://gitee.com/blazorcomponent/MASA.Blazor"
-                 Target="_blank"
-                 Class="mr-3"
-                 @attributes="@context.Attrs">
-            <img style="width:24px;height:24px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/gitee.png" />
-        </MButton>
-    </ActivatorContent>
-    <ChildContent>
-        gitee
-    </ChildContent>
-</MTooltip>
+<AppTooltipButton Href="https://gitee.com/blazorcomponent/MASA.Blazor"
+                  Target="_blank"
+                  Image="https://cdn.masastack.com/stack/images/website/masa-blazor/gitee.png"
+                  Path="gitee"
+                  Class="mr-3 ml-2">
+</AppTooltipButton>
 
 <AppTooltipButton OnClick="OnSettingsClick"
                   Icon="mdi-cog"
@@ -32,6 +22,8 @@
 </AppTooltipButton>
 
 @code {
+
     [Parameter]
     public EventCallback OnSettingsClick { get; set; }
+
 }
