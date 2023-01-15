@@ -47,9 +47,16 @@ public class DocService
             subTitle += "/";
         }
 
+        var cultureName = _i18n.Culture.Name;
+
+        if (project != "blazor")
+        {
+            cultureName = "zh-cn";
+        }
+
         var key = $"{category}/{title}/{subTitle}:{_i18n.Culture.Name}";
         return await s_documentCache.GetOrAdd(key,
-            async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{subTitle}{_i18n.Culture.Name}.md"));
+            async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{subTitle}{cultureName}.md"));
     }
 
     public async Task<Dictionary<string, string>> ReadProjectMapAsync()

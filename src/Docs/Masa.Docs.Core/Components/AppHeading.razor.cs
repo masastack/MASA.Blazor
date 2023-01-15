@@ -20,6 +20,9 @@ public class AppHeading : ComponentBase
     [Parameter, EditorRequired]
     public string Content { get; set; } = null!;
 
+    [Parameter]
+    public bool DisableHash { get; set; }
+
     private static Dictionary<int, string> _map = new()
     {
         { 1, "text-h3 text-sm-h3 mb-4 mt-4" },
@@ -40,16 +43,21 @@ public class AppHeading : ComponentBase
     {
         builder.OpenElement(0, $"h{Level}");
         builder.AddAttribute(1, "class", $"m-heading {_map[Level]}");
-        builder.AddContent(2, (childBuilder) =>
+
+        if (!DisableHash)
         {
-            childBuilder.OpenElement(0, "a");
-            childBuilder.AddAttribute(1, "href", Href);
-            childBuilder.AddAttribute(2, "class", "text-decoration-none text-right text-md-left");
-            childBuilder.AddEventPreventDefaultAttribute(3, "onclick", true);
-            childBuilder.AddAttribute(4, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, () => OnClick(Href)));
-            childBuilder.AddContent(5, "#");
-            childBuilder.CloseElement();
-        });
+            builder.AddContent(2, (childBuilder) =>
+            {
+                childBuilder.OpenElement(0, "a");
+                childBuilder.AddAttribute(1, "href", Href);
+                childBuilder.AddAttribute(2, "class", "text-decoration-none text-right text-md-left");
+                childBuilder.AddEventPreventDefaultAttribute(3, "onclick", true);
+                childBuilder.AddAttribute(4, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, () => OnClick(Href)));
+                childBuilder.AddContent(5, "#");
+                childBuilder.CloseElement();
+            });
+        }
+
         builder.AddContent(3, Content);
         builder.CloseElement();
     }

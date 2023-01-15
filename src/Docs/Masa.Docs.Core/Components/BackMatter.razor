@@ -1,6 +1,8 @@
-﻿<section id="ready-for-more"
-         class="mt-12">
-    <AppHeading Level="2" Content="TODO: i18n ready"></AppHeading>
+﻿@inject I18n I18n
+
+<section id="ready-for-more"
+         class="my-12">
+    <AppHeading Level="2" DisableHash Content="@I18n.T("Components.ReadyForMore")"></AppHeading>
 
     <RelatedPages Related="Related"></RelatedPages>
 </section>

@@ -8,7 +8,7 @@ tag: "JsProxy"
 
 Drag and drop components and dom objects.
 
-<drag-zone-usage></drag-zone-usage>
+<masa-example file="Examples.components.drag_zone.Usage"></masa-example>
 
 <app-alert type="info" content='You need to reference the package of `Sorttable.js` before using it :`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`.'></app-alert>
 

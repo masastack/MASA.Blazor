@@ -10,7 +10,7 @@ related:
 
 ## 使用
 
-<copyable-text-usage></copyable-text-usage>
+<masa-example file="Examples.components.copyable_text.Usage"></masa-example>
 
 ## 示例
 

@@ -12,7 +12,7 @@ cols: 1
 2. 非MASA Blazor组件产生的异常，无法处理，直接传递到`ErrorBoundry`处理；
 3. MASA Blazor组件非生命周期方法产生的异常，都可以处理，默认展示`Exception.Message`，也可以配置其它选项显示异常堆栈或自定义处理异常
 
-<error-handler-usage></error-handler-usage>
+<masa-example file="Examples.components.error_handler.Usage"></masa-example>
 
 ## 示例
 

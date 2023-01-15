@@ -6,7 +6,7 @@ tag: "JsProxy"
 
 ## Usage
 
-<echarts-usage></echarts-usage>
+<masa-example file="Examples.components.echarts.Usage"></masa-example>
 
 <app-alert type="info" content='You need to reference the package of ECharts before using it: `<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`.'></app-alert>
 

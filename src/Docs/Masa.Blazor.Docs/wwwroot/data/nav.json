@@ -101,7 +101,7 @@
         "items": [
           "autocompletes",
           "cascaders",
-          "checkboxs",
+          "checkboxes",
           "file-inputs",
           "forms",
           "otp-input",

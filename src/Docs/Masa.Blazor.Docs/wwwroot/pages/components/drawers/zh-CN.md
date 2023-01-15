@@ -10,7 +10,7 @@ related:
 
 ## 使用
 
-<drawers-usage></drawers-usage>
+<masa-example file="Examples.components.drawers.Usage"></masa-example>
 
 ## 示例
 

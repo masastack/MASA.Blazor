@@ -13,7 +13,14 @@
                      Class="@Class"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
-                <MIcon Class="emphasize1-color">@Icon</MIcon>
+                @if (!string.IsNullOrWhiteSpace(Icon))
+                {
+                    <MIcon Class="emphasize1-color">@Icon</MIcon>
+                }
+                else
+                {
+                    <img style="width:24px;height:24px;" alt="@Path" src="@Image" />
+                }
             </MButton>
         </ActivatorContent>
         <ChildContent>
@@ -24,8 +31,11 @@
 
 @code {
 
-    [Parameter, EditorRequired]
-    public string Icon { get; set; } = null!;
+    [Parameter]
+    public string? Icon { get; set; }
+
+    [Parameter]
+    public string? Image { get; set; }
 
     [Parameter, EditorRequired]
     public string? Path { get; set; }

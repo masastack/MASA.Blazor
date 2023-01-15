@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.Examples.components.autocomplete;
+﻿namespace Masa.Blazor.Docs.Examples.components.autocompletes;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
@@ -21,7 +21,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MAutocomplete<string, string, string>.Clearable), new CheckboxParameter("false", true) },
         { nameof(MAutocomplete<string, string, string>.Chips), new CheckboxParameter("false", true) },
         { nameof(MAutocomplete<string, string, string>.DeletableChips), new CheckboxParameter("false", true) },
-        { nameof(MAutocomplete<string, string, string>.Multiple), new CheckboxParameter("false", true) },
         { nameof(MAutocomplete<string, string, string>.SmallChips), new CheckboxParameter("false", true) },
     };
 

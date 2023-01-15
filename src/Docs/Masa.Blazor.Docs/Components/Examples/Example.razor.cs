@@ -38,10 +38,13 @@ public partial class Example : NextTickComponentBase
     {
         base.OnInitialized();
 
+        var githubUri =
+            $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
+
         _tooltips = new()
         {
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
-            new("mdi-github", "view-in-github", null, "https://github.com/BlazorComponent"), // todo:dynamic
+            new("mdi-github", "view-in-github", null, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)
         };
     }

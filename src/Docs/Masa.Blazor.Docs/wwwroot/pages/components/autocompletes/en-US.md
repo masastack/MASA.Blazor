@@ -11,7 +11,7 @@ related:
 
 The autocomplete component extends **MSelect** and adds the ability to filter items.
 
-<autocomplete-usage></autocomplete-usage>
+<autocompletes-usage></autocompletes-usage>
 
 ## Caveats
 
@@ -29,13 +29,13 @@ The autocomplete component extends **MSelect** and adds the ability to filter it
 
 You can use `dense` prop to reduce autocomplete height and lower max height of list items.
 
-<masa-example file="Examples.components.autocomplete.Dense"></masa-example>
+<masa-example file="Examples.components.autocompletes.Dense"></masa-example>
 
 #### Filter
 
 The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name.
 
-<masa-example file="Examples.components.autocomplete.Filter"></masa-example>
+<masa-example file="Examples.components.autocompletes.Filter"></masa-example>
 
 ### Contents
 
@@ -43,7 +43,7 @@ The `filter` prop can be used to filter each individual item with custom logic. 
 
 With the power of slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.
 
-<masa-example file="Examples.components.autocomplete.ItemAndSelection"></masa-example>
+<masa-example file="Examples.components.autocompletes.ItemAndSelection"></masa-example>
 
 ### Misc
 
@@ -51,23 +51,23 @@ With the power of slots, you can customize the visual output of the select. In t
 
 Easily hook up dynamic data and create a unique experience. The MAutocomplete's expansive prop list makes it easy to fine tune every aspect of the input.
 
-<masa-example file="Examples.components.autocomplete.ApiSearch"></masa-example>
+<masa-example file="Examples.components.autocompletes.ApiSearch"></masa-example>
 
 #### AsynchronousItems
 
 Sometimes you need to load data externally based upon a search query. Use the 'search-input' prop with the **.sync** modifier when using the autocomplete prop. We also make use of the new 'cache-items' prop. This will keep a unique list of all items that have been passed to the items prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
 
-<masa-example file="Examples.components.autocomplete.AsynchronousItems"></masa-example>
+<masa-example file="Examples.components.autocompletes.AsynchronousItems"></masa-example>
 
 #### CryptocurrencySelector
 
 The `MAutocomplete` component is extremely flexible and can fit in just about any use-case. Create custom displays for no-data, item and selection slots to provide a unique user experience. Using slots enables you to easily customize the desired look for your application.
 
-<masa-example file="Examples.components.autocomplete.CryptocurrencySelector"></masa-example>
+<masa-example file="Examples.components.autocompletes.CryptocurrencySelector"></masa-example>
 
 #### StateSelector
 
 Using a combination of MAutocomplete slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
-<masa-example file="Examples.components.autocomplete.StateSelector"></masa-example>
+<masa-example file="Examples.components.autocompletes.StateSelector"></masa-example>
 

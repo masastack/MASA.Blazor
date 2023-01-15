@@ -11,7 +11,7 @@ related:
 
 分页默认根据设置的 `Length` 属性显示页数，两边有 `Prev` 和 `Next` 按钮帮助导航。
 
-<masa-example file="Examples.components.pagination.Usage"></masa-example>
+<masa-example file="Examples.components.paginations.Usage"></masa-example>
 
 ## 示例
 
@@ -21,28 +21,28 @@ related:
 
 `Circle` 属性为你提供了分页按钮的另一种样式。
 
-<masa-example file="Examples.components.pagination.Circle"></masa-example>
+<masa-example file="Examples.components.paginations.Circle"></masa-example>
 
 #### 禁用
 
 使用 `Disabled` 属性，可以手动禁用分页。
 
-<masa-example file="Examples.components.pagination.Disabled"></masa-example>
+<masa-example file="Examples.components.paginations.Disabled"></masa-example>
 
 #### 图标
 
 上一页和下一页的图标可以通过 `PrevIcon` 和 `NextIcon` 属性自定义。
 
-<masa-example file="Examples.components.pagination.Icon"></masa-example>
+<masa-example file="Examples.components.paginations.Icon"></masa-example>
 
 #### 长度
 
 使用 `Length` 属性可以设置 **MPagination** 的长度，如果页面按钮的数量超过了父容器，分页将被从中截断。
 
-<masa-example file="Examples.components.pagination.Length"></masa-example>
+<masa-example file="Examples.components.paginations.Length"></masa-example>
 
 #### 最大可见分页数
 
 你也可以通过 `TotalVisible` 属性手动设置最大可见分页数。
 
-<masa-example file="Examples.components.pagination.TotalVisible"></masa-example>
+<masa-example file="Examples.components.paginations.TotalVisible"></masa-example>
