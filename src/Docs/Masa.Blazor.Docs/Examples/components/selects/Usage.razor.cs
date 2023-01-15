@@ -13,7 +13,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         { nameof(MSelect<Item,string,string>.Clearable), new CheckboxParameter("false",true) },
         { nameof(MSelect<Item,string,string>.Chips), new CheckboxParameter("false",true) },
-        { nameof(MSelect<Item,string,string>.Multiple), new CheckboxParameter("false",true) },
     };
 
     public Usage() : base(typeof(MSelect<Item, string, string>))

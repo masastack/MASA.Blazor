@@ -19,7 +19,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MFileInput<IBrowserFile>.Counter), new CheckboxParameter("false", true) },
         { nameof(MFileInput<IBrowserFile>.Disabled), new CheckboxParameter("false", true) },
         { nameof(MFileInput<IBrowserFile>.HideInput), new CheckboxParameter("false", true) },
-        { nameof(MFileInput<IBrowserFile>.Multiple), new CheckboxParameter("false", true) },
         { nameof(MFileInput<IBrowserFile>.ShowSize), new CheckboxParameter("false", true) },
     };
 

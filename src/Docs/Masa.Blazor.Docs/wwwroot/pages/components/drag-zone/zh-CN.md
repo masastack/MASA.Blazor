@@ -8,7 +8,7 @@ tag: "Js代理"
 
 拖拽组件和dom对象。
 
-<drag-zone-usage></drag-zone-usage>
+<masa-example file="Examples.components.drag_zone.Usage"></masa-example>
 
 <app-alert type="info" content='使用前需要引入 `Sorttable.js`：`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`。'></app-alert>
 
