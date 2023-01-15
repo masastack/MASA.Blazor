@@ -51,7 +51,7 @@ public class DocService
 
         if (project != "blazor")
         {
-            cultureName = "zh-cn";
+            cultureName = "zh-CN";
         }
 
         var key = $"{category}/{title}/{subTitle}:{_i18n.Culture.Name}";
