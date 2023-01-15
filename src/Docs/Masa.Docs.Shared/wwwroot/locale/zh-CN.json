@@ -261,6 +261,7 @@
   "configuration": "配置",
   "configuration-local": "本地配置",
   "configuration-dcc": "分布式配置DCC",
+  "openId-connect": "身份认证",
   "distributed-lock": "分布式锁",
   "lock-local": "本地锁",
   "medallion": "Medallion分布式锁",
@@ -475,5 +476,10 @@
   "0.7.0": "0.7.0",
   "default": "默认值",
   "description": "描述",
-  "name": "名称"
+  "name": "名称",
+  "operations": "功能操作",
+  "kubernetes": "Kubernetes",
+  "kubernetes-deploy": "在Kubernetes上部署",
+  "tls": "HTTPS 证书",
+  "temporary": "临时证书"
 }
