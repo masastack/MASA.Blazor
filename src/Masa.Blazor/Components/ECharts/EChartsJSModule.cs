@@ -15,6 +15,6 @@ public class EChartsJSModule : JSModule
     public async ValueTask Dispose(IJSObjectReference instance)
         => await InvokeVoidAsync("dispose", instance);
 
-    public async ValueTask Resize(IJSObjectReference instance, int width, int height)
+    public async ValueTask Resize(IJSObjectReference instance, double width, double height)
         => await InvokeVoidAsync("resize", instance, width, height);
 }
