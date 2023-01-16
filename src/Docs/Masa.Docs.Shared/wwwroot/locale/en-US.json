@@ -244,6 +244,8 @@
   "mc": "MC",
   "alert": "Alert",
   "scheduler": "Scheduler",
+  "tsc": "TSC",
+  "stack": "MASA Stack 1.0",
   "use-guide": "Use Guide",
   "develop-guide": "Develop Guide",
   "permission": "Permission",
