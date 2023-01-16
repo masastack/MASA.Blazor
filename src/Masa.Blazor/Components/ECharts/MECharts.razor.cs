@@ -150,7 +150,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
         await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
     }
 
-    public async Task Resize(int width, int height)
+    public async Task Resize(double width, double height)
     {
         await Module.Resize(_echarts, width, height);
     }
