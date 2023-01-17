@@ -1,5 +1,13 @@
 # 升级指南
 
+## 从 v0.6.x 升级到 v1.0.x
+
+v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
+
+- **DataTable** header 的 `Align` 类型从 `string` 变为枚举。
+- **CheckBox/Switch**的 `Value` 类型不再是 `bool` 类型，而是泛型类型。可以设置 `TrueValue` 和 `FalseValue`。升级到 **1.0.0** 后，需要添加参数 `TValue=“bool”`。
+- **PConfirm**已被移除，请改用 `PopupService.Confirm`。
+
 ## 从 v0.5.x 升级到 v0.6.x
 
 v0.6.x 包含了不兼容的破坏性更改，包括以下变更：
@@ -44,7 +52,7 @@ v0.5.x 包含了不兼容的破坏性更改，包括以下变更：
 
 ### CSS
 
-引入 `masa-blazor.css` 和 `masa-extend-blazor.css `更改为引入 `masa-blazor.min.css`。
+引入 `masa-blazor.css` 和 `masa-extend-blazor.css` 更改为引入 `masa-blazor.min.css`。
 
 ### 注入自定义i18n的API变更
 
