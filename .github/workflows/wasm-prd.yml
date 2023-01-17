@@ -34,4 +34,4 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Debug/net7.0/publish/wwwroot/ oss://masa-blazor-wasm/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
