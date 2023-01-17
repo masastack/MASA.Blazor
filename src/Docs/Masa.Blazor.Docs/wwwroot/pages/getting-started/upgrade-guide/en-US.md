@@ -4,7 +4,7 @@
 
 v1.0.x contains non backwards compatible breaking changes, the following changes:
 
-- The `Align` type of the **DataTable** header changes from `string` to `enum`.
+- The `Align` type of the **DataTable** header changes from `string` to enum.
 - The value type of **Checkbox/Switch** is no longer a bool type, but is now a generic type. You can set `TrueValue` and `FalseValue`. After upgrading to **1.0.0**, you need to add a parameter of `TValue= "bool"`.
 - The **PConfirm** has been removed now, use `PopupService.Confirm` instead.
 
