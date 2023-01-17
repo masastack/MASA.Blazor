@@ -1,0 +1,23 @@
+﻿@inject I18n I18n
+
+<div class="ordinary-text d-flex align-center justify-space-between">
+    <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
+        <MI18n Key="contribute.edit-page" Class="mb-2 mb-md-0">
+            <PlaceholderContent>
+                @if (context == 0)
+                {
+                    <AppLink Href="@GithubUri" Content="Github"></AppLink>
+                }
+            </PlaceholderContent>
+        </MI18n>
+
+        <MSpacer Class="hidden-sm-and-down"></MSpacer>
+    </div>
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string GithubUri { get; set; } = null!;
+
+}

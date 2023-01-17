@@ -747,3 +747,8 @@ input[type=number] {
 .m-ellipsis-text__tooltip.menuable__content__active {
     opacity: .9;
 }
+
+/* i18n */
+.m-i18n {
+    white-space: pre;
+}
