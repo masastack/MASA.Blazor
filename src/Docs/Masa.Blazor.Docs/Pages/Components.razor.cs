@@ -1,5 +1,4 @@
 ﻿using BlazorComponent.I18n;
-using Masa.Blazor.Docs.ApiGenerator;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
@@ -94,7 +93,7 @@ public partial class Components
     private CultureInfo? _prevCulture;
     private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
-    private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
+    private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
@@ -193,13 +192,13 @@ public partial class Components
         async Task<Dictionary<string, List<ParameterInfo>>> getApiGroupAsync(string name, bool isFullname = false)
         {
             var component = isFullname
-                ? ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => key == name)
-                : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key =>
-                    Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
+                ? ApiGenerator.ComponentMetas.FirstOrDefault(u => u.Name == name)
+                : ApiGenerator.ComponentMetas.FirstOrDefault(u =>
+                    Regex.IsMatch(u.Name.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
 
             if (component is not null)
             {
-                var parametersCacheValue = ApiGenerator.ApiGenerator.parametersCache[component];
+                var parametersCacheValue = component.Parameters;
 
                 parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
 
