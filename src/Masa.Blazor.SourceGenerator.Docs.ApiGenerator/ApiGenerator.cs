@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -16,13 +15,6 @@ public class ApiGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-#if DEBUG
-        if (!Debugger.IsAttached)
-        {
-            //Debugger.Launch();
-        }
-#endif
-
         var provider = context.SyntaxProvider
                               .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetTargetDataModelForGeneration)
                               .Where(u => u != null);
@@ -44,6 +36,11 @@ public class ApiGenerator : IIncrementalGenerator
 
             foreach (var componentMeta in componentMetas)
             {
+                if (componentMeta is null)
+                {
+                    continue;
+                }
+
                 sb.Append($@"
             ComponentMetas.Add(Gen{componentMeta.Name}());");
             }
@@ -83,6 +80,11 @@ public class ApiGenerator : IIncrementalGenerator
 
             foreach (var componentMeta in componentMetas)
             {
+                if (componentMeta is null)
+                {
+                    continue;
+                }
+
                 var sourceText = GenComponentMeta.GetSourceText(componentMeta);
                 ctx.AddSource($"Masa.Blazor.SourceGenerator.Docs.ApiGenerator.{componentMeta.Name}.g.cs", sourceText);
             }
@@ -100,12 +102,14 @@ public class ApiGenerator : IIncrementalGenerator
         return false;
     }
 
-    private ComponentMeta GetTargetDataModelForGeneration(GeneratorSyntaxContext context, CancellationToken token)
+    private ComponentMeta? GetTargetDataModelForGeneration(GeneratorSyntaxContext context, CancellationToken token)
     {
         var classNode = (ClassDeclarationSyntax)context.Node;
 
         var semanticModel = context.SemanticModel.Compilation.GetSemanticModel(classNode.SyntaxTree);
         var declaredSymbol = semanticModel.GetDeclaredSymbol(classNode);
+        if (declaredSymbol is null) return null;
+
         var componentName = declaredSymbol.Name;
 
         var defaultParameters = new List<ParameterInfo>();
@@ -147,7 +151,7 @@ public class ApiGenerator : IIncrementalGenerator
             if (member is IPropertySymbol parameterSymbol)
             {
                 var attrs = parameterSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass.Name == BlazorParameterAttributeName))
+                if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
                 {
                     var type = parameterSymbol.Type as INamedTypeSymbol;
                     if (type is null)
@@ -157,10 +161,10 @@ public class ApiGenerator : IIncrementalGenerator
 
                     string? defaultValue = null;
 
-                    var defaultValueAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass.Name == DefaultValueAttributeName);
+                    var defaultValueAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == DefaultValueAttributeName);
                     if (defaultValueAttribute is not null)
                     {
-                        defaultValue = defaultValueAttribute.ConstructorArguments.First().Value.ToString();
+                        defaultValue = defaultValueAttribute.ConstructorArguments.First().Value?.ToString();
                     }
 
                     var typeText = GetTypeText(type);
@@ -184,7 +188,7 @@ public class ApiGenerator : IIncrementalGenerator
             else if (member is IMethodSymbol methodSymbol)
             {
                 var attrs = methodSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass.Name == PublicMethodAttributeName))
+                if (attrs.Any(attr => attr.AttributeClass?.Name == PublicMethodAttributeName))
                 {
                     var args = methodSymbol.Parameters.Select(p => $"{GetTypeText(p.Type as INamedTypeSymbol)} {p.Name}");
                     var returnType = GetTypeText(methodSymbol.ReturnType as INamedTypeSymbol);
@@ -197,7 +201,9 @@ public class ApiGenerator : IIncrementalGenerator
 
     private static string GetTypeText(INamedTypeSymbol? type)
     {
-        var typeArguments = type.TypeArguments.Select(t => Keyword(t.Name));
+        if (type is null) return string.Empty;
+
+        var typeArguments = type.TypeArguments.Select(t => Keyword(t.Name)).ToList();
         return typeArguments.Any() ? $"{type.Name}<{string.Join(", ", typeArguments)}>" : Keyword(type.Name);
     }
 
