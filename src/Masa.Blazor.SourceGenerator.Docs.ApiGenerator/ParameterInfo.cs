@@ -1,6 +1,6 @@
-﻿namespace Masa.Blazor.Docs.ApiGenerator;
+﻿namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
 
-public class ParameterInfo
+internal class ParameterInfo
 {
     public string Name { get; set; } = null!;
 
