@@ -221,3 +221,6 @@ packages/
 
 # source code text of Examples in Docs
 src/Docs/**/wwwroot/pages/**/examples
+
+# source code text of test code
+src/Masa.Blazor.Playground/*

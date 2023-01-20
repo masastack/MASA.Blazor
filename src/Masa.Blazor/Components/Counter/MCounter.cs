@@ -2,8 +2,6 @@
 {
     public class MCounter : BCounter
     {
-
-
         protected override void SetComponentClass()
         {
             CssProvider
