@@ -1,0 +1,10 @@
+﻿@using Microsoft.JSInterop
+@namespace BlazorComponent
+@inherits BDomComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@CssProvider.GetClass()"
+         style="@CssProvider.GetStyle()"
+         id="@Id" @ref="Ref"
+         @attributes="Attributes" />
+</CascadingValue>
