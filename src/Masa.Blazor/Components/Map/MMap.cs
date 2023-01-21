@@ -12,7 +12,7 @@ namespace Masa.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("map-base")
+                        .Add("m-bmap")
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
