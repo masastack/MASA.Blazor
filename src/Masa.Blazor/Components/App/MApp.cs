@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using BlazorComponent;
+using BlazorComponent.Web;
 using Masa.Blazor.Popup.Components;
 
 namespace Masa.Blazor
@@ -40,11 +41,20 @@ namespace Masa.Blazor
 
         protected override Task OnInitializedAsync()
         {
-            var themeOptions = IsDark ? MasaBlazor.Theme.Themes.Dark : MasaBlazor.Theme.Themes.Light;
+            MasaBlazor.OnThemeChange -= MasaBlazor_OnThemeChange;
+            MasaBlazor.OnThemeChange += MasaBlazor_OnThemeChange;
 
-            HeadJsInterop.InsertAdjacentHTML("beforeend", ThemeCssBuilder.Build(themeOptions));
+            MasaBlazor_OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();
+        }
+
+        private void MasaBlazor_OnThemeChange(Theme theme)
+        {
+            var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
+            Dark = theme.Dark;
+            Styles = ThemeCssBuilder.Build(themeOptions);
+            StateHasChanged();
         }
 
         protected override void SetComponentClass()
