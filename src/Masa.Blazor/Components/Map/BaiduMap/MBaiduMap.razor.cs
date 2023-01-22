@@ -2,7 +2,7 @@
 using Masa.Blazor;
 using System.Drawing;
 
-namespace BlazorComponent
+namespace Masa.Blazor
 {
     public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap
     {
