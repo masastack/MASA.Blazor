@@ -52,7 +52,7 @@ namespace Masa.Blazor
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
             Dark = theme.Dark;
-            Styles = ThemeCssBuilder.Build(themeOptions);
+            ThemeStyleMarkups = ThemeCssBuilder.Build(themeOptions);
             StateHasChanged();
         }
 
