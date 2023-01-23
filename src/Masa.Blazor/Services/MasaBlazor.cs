@@ -37,7 +37,7 @@
             get { return _theme; }
             set
             {
-                    _theme = value;
+                _theme = value;
                 OnThemeChange?.Invoke(_theme);
                
             }
