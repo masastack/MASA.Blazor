@@ -9,20 +9,20 @@ namespace Masa.Blazor
         }
 
         public async ValueTask InjectBaiduMapScriptAsync(string serviceKey)
-        => await InvokeVoidAsync("injectBaiduMapScript", serviceKey);
+            => await InvokeVoidAsync("injectBaiduMapScript", serviceKey);
 
-        public async ValueTask LoadMapAsync(string divID, (bool canZoom, byte zoom, PointF mapCenter) args)
-        => await InvokeVoidAsync
-            (
-                "loadMap",
-                divID,
-                new
-                {
-                    CanZoom = args.canZoom,
-                    Zoom = args.zoom,
-                    MapCenter = new { Lng = args.mapCenter.X, Lat = args.mapCenter.Y }
-                }
-            );
+        public async ValueTask<ElementReference?> LoadMapAsync(string divID, BaiduMapInitOption args)
+            => await InvokeAsync<ElementReference?>
+                (
+                    "loadMap",
+                    divID,
+                    new
+                    {
+                        args.CanZoom,
+                        args.Zoom,
+                        MapCenter = new { Lng = args.MapCenter.X, Lat = args.MapCenter.Y }
+                    }
+                );
 
     }
 }

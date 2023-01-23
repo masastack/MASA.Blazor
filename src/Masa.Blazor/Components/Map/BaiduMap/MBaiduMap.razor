@@ -1,10 +1,17 @@
 ﻿@using Microsoft.JSInterop
-@namespace BlazorComponent
+@namespace Masa.Blazor
 @inherits BDomComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <div class="@CssProvider.GetClass()"
          style="@CssProvider.GetStyle()"
          id="@Id" @ref="Ref"
-         @attributes="Attributes" />
+         @attributes="Attributes">
+
+        @if (string.IsNullOrWhiteSpace(ServiceKey))
+        {
+            <p>@(nameof(ServiceKey)) is required to enable map services</p>
+        }
+
+    </div>
 </CascadingValue>

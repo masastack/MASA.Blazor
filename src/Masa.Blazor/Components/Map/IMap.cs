@@ -1,11 +1,10 @@
-﻿using Microsoft.JSInterop;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace BlazorComponent.Components.Map
+namespace Masa.Blazor
 {
     public interface IMap
     {
-        public string? ServiceKey { get; set; }
+        public string ServiceKey { get; set; }
 
         public StringNumber Width { get; set; }
 
@@ -13,7 +12,7 @@ namespace BlazorComponent.Components.Map
 
         public byte Zoom { get; set; }
 
-        public PointF Center { get; set; }
+        public PointF MapCenter { get; set; }
 
         public bool CanZoom { get; set; }
 
