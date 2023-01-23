@@ -21,11 +21,10 @@
     <ProjectReference Include="..\Masa.Docs.Core\Masa.Docs.Core.csproj" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <ExamplesSourceFile Remove="Examples\components\application\DynamicallyModifyTheme.razor" />
+    <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
-
+  
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>
