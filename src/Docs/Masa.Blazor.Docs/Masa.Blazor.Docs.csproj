@@ -21,9 +21,6 @@
     <ProjectReference Include="..\Masa.Docs.Core\Masa.Docs.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ExamplesSourceFile Include="Examples\**\*.razor" />
-  </ItemGroup>
 
   <ItemGroup>
     <ExamplesSourceFile Remove="Examples\components\application\DynamicallyModifyTheme.razor" />

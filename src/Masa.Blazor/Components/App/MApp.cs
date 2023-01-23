@@ -41,15 +41,15 @@ namespace Masa.Blazor
 
         protected override Task OnInitializedAsync()
         {
-            MasaBlazor.OnThemeChange -= MasaBlazor_OnThemeChange;
-            MasaBlazor.OnThemeChange += MasaBlazor_OnThemeChange;
+            MasaBlazor.OnThemeChange -= OnThemeChange;
+            MasaBlazor.OnThemeChange += OnThemeChange;
 
-            MasaBlazor_OnThemeChange(MasaBlazor.Theme);
+            OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();
         }
 
-        private void MasaBlazor_OnThemeChange(Theme theme)
+        private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
             Dark = theme.Dark;
