@@ -1,15 +1,3 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
-<MBaiduMap ServiceKey="QahcSGCkRzIVXBkKhWHt3vGhNyYGdk3t"
-    Zoom="@Zoom" @ref="Map"/>
-<MButton OnClick="@(async()=>{ Zoom+=1;})">Zoom In</MButton>
-
-@code
-{
-    public byte Zoom { get; set; } = 10;
-
-    public MBaiduMap? Map { get; set; }
-
-    
-}

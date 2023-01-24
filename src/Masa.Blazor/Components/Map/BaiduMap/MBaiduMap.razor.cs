@@ -18,13 +18,25 @@ namespace Masa.Blazor
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
-        public byte Zoom { get; set; } = 10;
+        public byte Zoom
+        {
+            get => GetValue<byte>(10);
+            set => SetValue(value);
+        }
 
         [Parameter]
-        public PointF MapCenter { get; set; } = new(116.404f, 39.915f);
+        public PointF MapCenter 
+        {
+            get => GetValue<PointF>(new(116.404f, 39.915f));
+            set => SetValue(value);
+        }
 
         [Parameter]
-        public bool CanZoom { get; set; } = true;
+        public bool CanZoom 
+        {
+            get => GetValue<bool>(true);
+            set => SetValue(value);
+        } 
 
         [Parameter]
         public bool Dark { get; set; }
@@ -83,7 +95,7 @@ namespace Masa.Blazor
                 // invalid servicekey
                 if (string.IsNullOrWhiteSpace(ServiceKey) || Module is null)
                     return;
-                
+
                 await Module.InjectBaiduMapScriptAsync(ServiceKey);
 
                 // 2nd render, load and init map
@@ -105,19 +117,32 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<byte>(nameof(Zoom), async (val)
-                => await JsMap.InvokeVoidAsync("setZoom", val));
+            Watcher.Watch<byte>(nameof(Zoom), async (val) =>
+            {
+                if (JsMap is null)
+                    return;
 
+                await JsMap.InvokeVoidAsync("setZoom", val);
+            });
+            
             Watcher.Watch<bool>(nameof(CanZoom), async (val) =>
             {
+                if (JsMap is null)
+                    return;
+
                 if (val)
                     await JsMap.InvokeVoidAsync("enableScrollWheelZoom");
                 else
                     await JsMap.InvokeVoidAsync("disableScrollWheelZoom");
             });
 
-            Watcher.Watch<PointF>(nameof(MapCenter), async (val)
-                => await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint()));
+            Watcher.Watch<PointF>(nameof(MapCenter), async (val) =>
+            {
+                if (JsMap is null)
+                    return;
+
+                await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+            });
         }
 
     }
