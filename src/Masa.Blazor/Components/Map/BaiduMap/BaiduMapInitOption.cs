@@ -6,7 +6,7 @@ namespace Masa.Blazor
     {
         public byte Zoom { get; set; } 
 
-        public PointF MapCenter { get; set; } 
+        public PointF Center { get; set; } 
 
         public bool CanZoom { get; set; } 
     }

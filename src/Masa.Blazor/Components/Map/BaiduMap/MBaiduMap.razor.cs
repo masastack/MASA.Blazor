@@ -25,7 +25,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public PointF MapCenter 
+        public PointF Center 
         {
             get => GetValue<PointF>(new(116.404f, 39.915f));
             set => SetValue(value);
@@ -36,7 +36,14 @@ namespace Masa.Blazor
         {
             get => GetValue<bool>(true);
             set => SetValue(value);
-        } 
+        }
+
+        [Parameter]
+        public Color BackgroundColor
+        {
+            get => GetValue<Color>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -105,7 +112,7 @@ namespace Masa.Blazor
                     {
                         CanZoom = CanZoom,
                         Zoom = Zoom,
-                        MapCenter = MapCenter,
+                        Center = Center,
                     });
                 });
 
@@ -136,7 +143,7 @@ namespace Masa.Blazor
                     await JsMap.InvokeVoidAsync("disableScrollWheelZoom");
             });
 
-            Watcher.Watch<PointF>(nameof(MapCenter), async (val) =>
+            Watcher.Watch<PointF>(nameof(Center), async (val) =>
             {
                 if (JsMap is null)
                     return;
