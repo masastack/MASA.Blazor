@@ -83,6 +83,8 @@ namespace Masa.Blazor
                 // invalid servicekey
                 if (string.IsNullOrWhiteSpace(ServiceKey) || Module is null)
                     return;
+                
+                await Module.InjectBaiduMapScriptAsync(ServiceKey);
 
                 // 2nd render, load and init map
                 NextTick(async () =>
@@ -93,10 +95,7 @@ namespace Masa.Blazor
                         Zoom = Zoom,
                         MapCenter = MapCenter,
                     });
-
                 });
-
-                await Module.InjectBaiduMapScriptAsync(ServiceKey);
 
                 StateHasChanged();
             }
@@ -106,30 +105,19 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<byte>(nameof(Zoom), async (val) =>
-            {
-                if (val != Zoom)
-                    await JsMap.InvokeVoidAsync("setZoom", val);
-            });
+            Watcher.Watch<byte>(nameof(Zoom), async (val)
+                => await JsMap.InvokeVoidAsync("setZoom", val));
 
             Watcher.Watch<bool>(nameof(CanZoom), async (val) =>
             {
-                if (val == CanZoom)
-                    return;
-
                 if (val)
                     await JsMap.InvokeVoidAsync("enableScrollWheelZoom");
                 else
                     await JsMap.InvokeVoidAsync("disableScrollWheelZoom");
             });
 
-            Watcher.Watch<PointF>(nameof(MapCenter), async (val) =>
-            {
-                if (val == MapCenter)
-                    return;
-
-                await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
-            });
+            Watcher.Watch<PointF>(nameof(MapCenter), async (val)
+                => await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint()));
         }
 
     }
