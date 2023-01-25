@@ -1,0 +1,14 @@
+{
+  "props": {
+    "center": "地图的中心。",
+    "darkThemeId": "暗色主题的Id。你可以在[我的地图](https://lbsyun.baidu.com/apiconsole/custommap)中创建并发布暗色地图样式，获取样式Id。",
+    "enableScrollWheelZoom": "是否允许用滚轮缩放地图。",
+    "id": "地图容器的Id。",
+    "zoom": "地图的缩放等级"
+  },
+  "contents": {},
+  "events": {},
+  "functions": {
+    "panTo": "设置地图中心"
+  }
+}

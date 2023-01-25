@@ -25,6 +25,13 @@
     <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\components\baidumaps\Dark.razor" />
+    <ExamplesSourceFile Remove="Examples\components\baidumaps\HeightAndWidth.razor" />
+    <ExamplesSourceFile Remove="Examples\components\baidumaps\Usage.razor" />
+    <ExamplesSourceFile Remove="Examples\components\baidumaps\ZoomAndMove.razor" />
+  </ItemGroup>
+
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

@@ -8,7 +8,7 @@ namespace Masa.Blazor
 
         public StringNumber Height { get; set; }
 
-        public byte Zoom { get; set; }
+        public float Zoom { get; set; }
 
         public PointF Center { get; set; }
 

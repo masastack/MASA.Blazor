@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Microsoft.JSInterop;
+using System.Drawing;
 using Util.Reflection.Expressions;
 
 namespace Masa.Blazor
@@ -15,10 +16,19 @@ namespace Masa.Blazor
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
-        public byte Zoom
+        public float Zoom
         {
-            get => GetValue<byte>(10);
-            set => SetValue(value);
+            get => GetValue<float>(10);
+            set
+            {
+                if (value < DefaultMinZoom)
+                    value = DefaultMinZoom;
+
+                if (value > DefaultMaxZoom)
+                    value = DefaultMaxZoom;
+
+                SetValue(value);
+            }
         }
 
         [Parameter]
@@ -68,6 +78,12 @@ namespace Masa.Blazor
 
         private IJSObjectReference JsMap { get; set; }
 
+        public static float DefaultMaxZoom { get; } = 19;
+
+        public static float DefaultMinZoom { get; } = 3;
+
+        private DotNetObjectReference<MBaiduMap> ObjRef { get; set; }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -92,6 +108,8 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
+                ObjRef = DotNetObjectReference.Create(this);
+
                 JsMap = await Module.InitMapAsync(Id, new BaiduMapInitOption()
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
@@ -99,7 +117,7 @@ namespace Masa.Blazor
                     Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
-                });
+                }, ObjRef);
 
                 StateHasChanged();
             }
@@ -109,9 +127,12 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<byte>(nameof(Zoom), async (val) =>
+            Watcher.Watch<float>(nameof(Zoom), async (val) =>
             {
                 if (JsMap is null)
+                    return;
+
+                if (val == await JsMap.InvokeAsync<float>("getZoom", null))
                     return;
 
                 await JsMap.InvokeVoidAsync("setZoom", val);
@@ -128,13 +149,36 @@ namespace Masa.Blazor
                     await JsMap.InvokeVoidAsync("disableScrollWheelZoom");
             });
 
-            Watcher.Watch<PointF>(nameof(Center), async (val) =>
+            Watcher.Watch<bool>(nameof(Dark), async (val) =>
             {
                 if (JsMap is null)
                     return;
 
-                await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+                if (val)
+                    await JsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = DarkThemeId });
+                else
+                    await JsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = string.Empty });
             });
+
+            //Watcher.Watch<PointF>(nameof(Center), async (val) =>
+            //{
+            //    if (JsMap is null)
+            //        return;
+
+            //    await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+            //});
+        }
+
+        [JSInvokable]
+        public void OnJsZoomEnd(object zoomJson)
+        {
+            Zoom = zoomJson.ToString().ToObject<float>();
+        }
+
+        public async Task PanTo(PointF point)
+        {
+            await JsMap.InvokeVoidAsync("panTo", point.ToGeoPoint());
+            Center = point;
         }
 
     }

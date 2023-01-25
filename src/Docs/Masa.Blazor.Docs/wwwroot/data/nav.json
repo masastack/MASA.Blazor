@@ -61,6 +61,7 @@
       "aspect-ratios",
       "avatars",
       "badges",
+      "baidumaps",
       "banners",
       {
         "title": "bars",
@@ -89,7 +90,7 @@
       "dividers",
       "drag-zone",
       "drawers",
-      "echarts", 
+      "echarts",
       "editors",
       "error-handler",
       "expansion-panels",
