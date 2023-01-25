@@ -9,10 +9,6 @@ namespace Masa.Blazor
         public BaiduMapJSModule Module { get; set; }
 
         [Parameter]
-        [EditorRequired]
-        public string ServiceKey { get; set; }
-
-        [Parameter]
         public StringNumber Width { get; set; } = 360;
 
         [Parameter]
@@ -38,6 +34,10 @@ namespace Masa.Blazor
             get => GetValue(false);
             set => SetValue(value);
         }
+
+        [Parameter]
+        [EditorRequired]
+        public string DarkThemeId { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -90,24 +90,15 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            // 1st render, inject BaiduMap Javascript code
             if (firstRender)
             {
-                // invalid servicekey
-                if (string.IsNullOrWhiteSpace(ServiceKey) || Module is null)
-                    return;
-
-                await Module.InjectBaiduMapScriptAsync(ServiceKey);
-
-                // 2nd render, load and init map
-                NextTick(async () =>
+                JsMap = await Module.InitMapAsync(Id, new BaiduMapInitOption()
                 {
-                    JsMap = await Module.LoadMapAsync(Id, new BaiduMapInitOption()
-                    {
-                        EnableScrollWheelZoom = EnableScrollWheelZoom,
-                        Zoom = Zoom,
-                        Center = Center,
-                    });
+                    EnableScrollWheelZoom = EnableScrollWheelZoom,
+                    Zoom = Zoom,
+                    Center = Center,
+                    DarkThemeId = DarkThemeId,
+                    Dark = Dark,
                 });
 
                 StateHasChanged();

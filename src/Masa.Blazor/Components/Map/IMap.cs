@@ -4,8 +4,6 @@ namespace Masa.Blazor
 {
     public interface IMap
     {
-        public string ServiceKey { get; set; }
-
         public StringNumber Width { get; set; }
 
         public StringNumber Height { get; set; }

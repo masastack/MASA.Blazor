@@ -8,11 +8,8 @@ namespace Masa.Blazor
         {
         }
 
-        public async ValueTask InjectBaiduMapScriptAsync(string serviceKey)
-            => await InvokeVoidAsync("injectBaiduMapScript", serviceKey);
-
-        public async ValueTask<IJSObjectReference> LoadMapAsync(string containerId, BaiduMapInitOption options)
-            => await InvokeAsync<IJSObjectReference>("loadMap", containerId, options);
+        public async ValueTask<IJSObjectReference> InitMapAsync(string containerId, BaiduMapInitOption options)
+            => await InvokeAsync<IJSObjectReference>("initMap", containerId, options);
 
     }
 }
