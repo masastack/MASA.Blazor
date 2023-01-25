@@ -10,5 +10,9 @@ namespace Masa.Blazor
 
         public bool EnableScrollWheelZoom { get; set; }
 
+        public bool Dark { get; set; }
+
+        public string DarkThemeId { get; set; }
+
     }
 }
