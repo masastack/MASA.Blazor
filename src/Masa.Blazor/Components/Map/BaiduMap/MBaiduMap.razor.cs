@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Util.Reflection.Expressions;
 
 namespace Masa.Blazor
 {
@@ -25,23 +26,16 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public PointF Center 
+        public PointF Center
         {
-            get => GetValue<PointF>(new(116.404f, 39.915f));
+            get => GetValue<PointF>(new(116.403f, 39.917f));
             set => SetValue(value);
         }
 
         [Parameter]
-        public bool CanZoom 
+        public bool EnableScrollWheelZoom
         {
-            get => GetValue<bool>(true);
-            set => SetValue(value);
-        }
-
-        [Parameter]
-        public Color BackgroundColor
-        {
-            get => GetValue<Color>();
+            get => GetValue(false);
             set => SetValue(value);
         }
 
@@ -110,7 +104,7 @@ namespace Masa.Blazor
                 {
                     JsMap = await Module.LoadMapAsync(Id, new BaiduMapInitOption()
                     {
-                        CanZoom = CanZoom,
+                        EnableScrollWheelZoom = EnableScrollWheelZoom,
                         Zoom = Zoom,
                         Center = Center,
                     });
@@ -131,8 +125,8 @@ namespace Masa.Blazor
 
                 await JsMap.InvokeVoidAsync("setZoom", val);
             });
-            
-            Watcher.Watch<bool>(nameof(CanZoom), async (val) =>
+
+            Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
             {
                 if (JsMap is null)
                     return;

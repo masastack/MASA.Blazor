@@ -8,6 +8,7 @@ namespace Masa.Blazor
 
         public PointF Center { get; set; } 
 
-        public bool CanZoom { get; set; } 
+        public bool EnableScrollWheelZoom { get; set; }
+
     }
 }
