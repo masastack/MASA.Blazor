@@ -750,5 +750,5 @@ input[type=number] {
 
 /* i18n */
 .m-i18n {
-    white-space: pre;
+    white-space: nowrap;
 }
