@@ -11,5 +11,7 @@ namespace Masa.Blazor
         public static T ToObject<T>(this string json) 
             => JsonSerializer.Deserialize<T>(json);
 
+        public static T ToObject<T>(this string json, JsonSerializerOptions jsonSerializerOptions)
+            => JsonSerializer.Deserialize<T>(json, jsonSerializerOptions);
     }
 }
