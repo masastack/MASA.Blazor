@@ -1,6 +1,5 @@
-﻿using Microsoft.JSInterop;
-using System.Drawing;
-using Util.Reflection.Expressions;
+﻿using System.Drawing;
+using System.Text.Json;
 
 namespace Masa.Blazor
 {
@@ -21,13 +20,8 @@ namespace Masa.Blazor
             get => GetValue<float>(10);
             set
             {
-                if (value < DefaultMinZoom)
-                    value = DefaultMinZoom;
-
-                if (value > DefaultMaxZoom)
-                    value = DefaultMaxZoom;
-
-                SetValue(value);
+                if (value >= DefaultMinZoom && value <= DefaultMaxZoom)
+                    SetValue(value);
             }
         }
 
@@ -76,13 +70,29 @@ namespace Masa.Blazor
             }
         }
 
+        //[Parameter]
+        //public EventCallback<float> OnZoomChanged { get; set; }
+
         private IJSObjectReference JsMap { get; set; }
 
         public static float DefaultMaxZoom { get; } = 19;
 
         public static float DefaultMinZoom { get; } = 3;
 
+        private bool ZoomChangedInJs = false;
+
+        private bool CenterChangedInJs = false;
+
         private DotNetObjectReference<MBaiduMap> ObjRef { get; set; }
+
+        private JsonSerializerOptions SerializerOptions = new();
+
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+
+            SerializerOptions.PropertyNameCaseInsensitive = true;
+        }
 
         protected override void SetComponentClass()
         {
@@ -132,8 +142,11 @@ namespace Masa.Blazor
                 if (JsMap is null)
                     return;
 
-                if (val == await JsMap.InvokeAsync<float>("getZoom", null))
+                if (ZoomChangedInJs)
+                {
+                    ZoomChangedInJs = false;
                     return;
+                }
 
                 await JsMap.InvokeVoidAsync("setZoom", val);
             });
@@ -160,25 +173,33 @@ namespace Masa.Blazor
                     await JsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = string.Empty });
             });
 
-            //Watcher.Watch<PointF>(nameof(Center), async (val) =>
-            //{
-            //    if (JsMap is null)
-            //        return;
+            Watcher.Watch<PointF>(nameof(Center), async (val) =>
+            {
+                if (JsMap is null)
+                    return;
 
-            //    await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
-            //});
+                if (CenterChangedInJs)
+                {
+                    CenterChangedInJs = false;
+                    return;
+                }
+
+                await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+            });
         }
 
         [JSInvokable]
         public void OnJsZoomEnd(object zoomJson)
         {
+            ZoomChangedInJs = true;
             Zoom = zoomJson.ToString().ToObject<float>();
         }
 
-        public async Task PanTo(PointF point)
+        [JSInvokable]
+        public void OnJsMoveEnd(object pointJson)
         {
-            await JsMap.InvokeVoidAsync("panTo", point.ToGeoPoint());
-            Center = point;
+            CenterChangedInJs = true;
+            Center = pointJson.ToString().ToObject<GeoPoint>(SerializerOptions).ToPointF();
         }
 
     }

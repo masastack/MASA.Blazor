@@ -42,9 +42,9 @@ Use `DarkThemeId` to indicate the dark theme Id, and use `Dark` property to swit
 
 #### Move and zoom
 
-Use `Zoom` to the map zoom. 
+Use `Zoom` to get or set the map zoom. 
  
-To move the map center, use `PanTo()` method. If target point is visible in sight, map center will smoothly move to that point. 
+Use `Center` to get or set the map zoom. If target point is visible in sight, map center will smoothly move to that point. 
 
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
 

@@ -11,7 +11,7 @@
 
     <MButton Color="primary" OnClick="@ZoomOut">Zoom Out</MButton>
 
-    <MButton Color="primary" OnClick="@PanToBeijing">Pan To Beijing</MButton>
+    <MButton Color="primary" OnClick="@GoToBeijing">Go To Beijing</MButton>
 </MRow>
 
 @code
@@ -36,5 +36,5 @@
             Zoom -= 1;
     }
 
-    private async void PanToBeijing() => await Map.PanTo(new(116.403f, 39.917f));
+    private void GoToBeijing() => Center = new(116.403f, 39.917f);
 }

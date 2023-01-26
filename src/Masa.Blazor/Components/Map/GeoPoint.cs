@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.Json;
 
 namespace Masa.Blazor
 {
@@ -8,9 +9,8 @@ namespace Masa.Blazor
 
         public float Lat { get; set; }
 
-        public PointF ToPoint()
-        {
-            return new PointF(Lng, Lat);
-        }
+        public PointF ToPointF() => new (Lng, Lat);
+
+        public override string ToString() => JsonSerializer.Serialize(this);
     }
 }
