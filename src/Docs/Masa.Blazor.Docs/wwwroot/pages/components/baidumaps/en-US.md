@@ -6,12 +6,15 @@ tag: "JsProxy"
 
 ## Usage
 
-Before using BaiduMap services, go to [BaiduMap Open Platform](https://lbs.baidu.com/index.php?title=jspopularGL/guide/getkey) to register a 
+Before using the **MBaiduMap** component, go to [BaiduMap Open Platform](https://lbs.baidu.com/index.php?title=jspopularGL/guide/getkey) to register a 
 developer account and apply for an AK.
 To use base map services, register an AK whose **Application Type** is **Browser**.
  
 Then refer the package of BaiduMaps JS API GL: 
-`<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-AK}"></script>`
+
+```html
+<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-AK}"></script>
+```
 
 <app-alert type="info" content='Replace **{your-AK}** with your AK. '></app-alert>
 
@@ -36,7 +39,7 @@ Use `DarkThemeId` to indicate the dark theme Id, and use `Dark` property to swit
 
 #### Height and width
 
-`Height` and `Width` property set chart height, width
+`Height` and `Width` property set map height, width
 
 <masa-example file="Examples.components.baidumaps.HeightAndWidth"></masa-example>
 

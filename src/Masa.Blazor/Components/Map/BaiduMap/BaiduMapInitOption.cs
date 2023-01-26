@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public class BaiduMapInitOption
+    public class BaiduMapInitOptions
     {
         public float Zoom { get; set; } 
 

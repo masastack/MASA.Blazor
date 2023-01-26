@@ -6,11 +6,14 @@ tag: "Js代理"
 
 ## 使用
 
-在使用百度地图服务前，首先需要到[百度地图开放平台](https://lbs.baidu.com/index.php?title=jspopularGL/guide/getkey)注册开发者账号，并申请AK。
+在使用 **MBaiduMap** 组件前，首先需要到[百度地图开放平台](https://lbs.baidu.com/index.php?title=jspopularGL/guide/getkey)注册开发者账号，并申请AK。
 要使用基础地图服务，请注册 **应用类型** 为 **浏览器端** 的AK。
  
 然后引用BaiduMaps JS API GL的包：
-`<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-AK}"></script>`
+
+```html
+<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-AK}"></script>
+```
 
 <app-alert type="info" content='需要将 **{your-AK}** 替换为您申请的AK。'></app-alert>
 
@@ -35,7 +38,7 @@ tag: "Js代理"
 
 #### 高度和宽度
 
-通过 `Height` , `Width`  属性设置宽高。
+通过 `Height` , `Width`  属性设置地图宽高。
 
 <masa-example file="Examples.components.baidumaps.HeightAndWidth"></masa-example>
 

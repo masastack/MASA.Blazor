@@ -1,20 +1,24 @@
-﻿using System.Drawing;
+﻿using BlazorComponent.Attributes;
+using System.Drawing;
 using System.Text.Json;
 
 namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap, IAsyncDisposable
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
 
         [Parameter]
+        [DefaultValue(360)]
         public StringNumber Width { get; set; } = 360;
 
         [Parameter]
+        [DefaultValue(240)]
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
+        [DefaultValue(10)]
         public float Zoom
         {
             get => GetValue<float>(10);
@@ -26,6 +30,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
+        [DefaultValue("116.403, 39.917")]
         public PointF Center
         {
             get => GetValue<PointF>(new(116.403f, 39.917f));
@@ -33,6 +38,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
+        [DefaultValue(false)]
         public bool EnableScrollWheelZoom
         {
             get => GetValue(false);
@@ -40,7 +46,6 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [EditorRequired]
         public string DarkThemeId { get; set; }
 
         [Parameter]
@@ -70,28 +75,25 @@ namespace Masa.Blazor
             }
         }
 
-        //[Parameter]
-        //public EventCallback<float> OnZoomChanged { get; set; }
-
-        private IJSObjectReference JsMap { get; set; }
+        private IJSObjectReference _jsMap;
 
         public static float DefaultMaxZoom { get; } = 19;
 
         public static float DefaultMinZoom { get; } = 3;
 
-        private bool ZoomChangedInJs = false;
+        private bool _zoomChangedInJs = false;
 
-        private bool CenterChangedInJs = false;
+        private bool _centerChangedInJs = false;
 
-        private DotNetObjectReference<MBaiduMap> ObjRef { get; set; }
+        private DotNetObjectReference<MBaiduMap> _objRef;
 
-        private JsonSerializerOptions SerializerOptions = new();
+        private JsonSerializerOptions _serializerOptions = new();
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
 
-            SerializerOptions.PropertyNameCaseInsensitive = true;
+            _serializerOptions.PropertyNameCaseInsensitive = true;
         }
 
         protected override void SetComponentClass()
@@ -118,18 +120,16 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                ObjRef = DotNetObjectReference.Create(this);
+                _objRef = DotNetObjectReference.Create(this);
 
-                JsMap = await Module.InitMapAsync(Id, new BaiduMapInitOption()
+                _jsMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
                     Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
-                }, ObjRef);
-
-                StateHasChanged();
+                }, _objRef);
             }
         }
 
@@ -139,68 +139,69 @@ namespace Masa.Blazor
 
             Watcher.Watch<float>(nameof(Zoom), async (val) =>
             {
-                if (JsMap is null)
+                if (_jsMap is null)
                     return;
 
-                if (ZoomChangedInJs)
+                if (_zoomChangedInJs)
                 {
-                    ZoomChangedInJs = false;
+                    _zoomChangedInJs = false;
                     return;
                 }
 
-                await JsMap.InvokeVoidAsync("setZoom", val);
+                await _jsMap.InvokeVoidAsync("setZoom", val);
             });
 
             Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
             {
-                if (JsMap is null)
+                if (_jsMap is null)
                     return;
 
-                if (val)
-                    await JsMap.InvokeVoidAsync("enableScrollWheelZoom");
-                else
-                    await JsMap.InvokeVoidAsync("disableScrollWheelZoom");
+                await _jsMap.InvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom");
             });
 
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
             {
-                if (JsMap is null)
+                if (_jsMap is null)
                     return;
 
-                if (val)
-                    await JsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = DarkThemeId });
-                else
-                    await JsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = string.Empty });
+                await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty });
             });
 
             Watcher.Watch<PointF>(nameof(Center), async (val) =>
             {
-                if (JsMap is null)
+                if (_jsMap is null)
                     return;
 
-                if (CenterChangedInJs)
+                if (_centerChangedInJs)
                 {
-                    CenterChangedInJs = false;
+                    _centerChangedInJs = false;
                     return;
                 }
 
-                await JsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+                await _jsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
             });
         }
 
         [JSInvokable]
-        public void OnJsZoomEnd(object zoomJson)
+        public void OnJsZoomEnd(float zoom)
         {
-            ZoomChangedInJs = true;
-            Zoom = zoomJson.ToString().ToObject<float>();
+            _zoomChangedInJs = true;
+            Zoom = zoom;
         }
 
         [JSInvokable]
-        public void OnJsMoveEnd(object pointJson)
+        public void OnJsMoveEnd(GeoPointInLowercase point)
         {
-            CenterChangedInJs = true;
-            Center = pointJson.ToString().ToObject<GeoPoint>(SerializerOptions).ToPointF();
+            _centerChangedInJs = true;
+            Center = point.ToPointF();
         }
 
+        public async ValueTask DisposeAsync()
+        {
+            _objRef?.Dispose();
+
+            if (_jsMap is not null)
+                await _jsMap.DisposeAsync();
+        }
     }
 }
