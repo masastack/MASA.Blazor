@@ -87,15 +87,6 @@ namespace Masa.Blazor
 
         private DotNetObjectReference<MBaiduMap> _objRef;
 
-        private JsonSerializerOptions _serializerOptions = new();
-
-        protected override async Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-
-            _serializerOptions.PropertyNameCaseInsensitive = true;
-        }
-
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
