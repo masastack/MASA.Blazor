@@ -1,3 +1,18 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+<MBaiduMap 
+    Dark 
+    EnableScrollWheelZoom Zoom="@Zoom" 
+    Height="720" Width="480"
+           ZoomChanged="@(async (zoom)=>{Console.WriteLine("ff"); })" />
+<MLabel>@ZoomString</MLabel>
+<MButton OnClick="async()=>{Zoom+=1;}"/>
+
+@code
+{
+    public float Zoom { get; set; } = 15;
+
+    public string ZoomString { get; set; } = "hhhh";
+
+}

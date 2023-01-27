@@ -23,8 +23,6 @@ namespace Masa.Blazor
         [JsonPropertyName("lat")]
         public float Lat { get; set; } = default;
 
-        public PointF ToPointF() => new (Lng, Lat);
-
         public override string ToString() => JsonSerializer.Serialize(this);
     }
 }
