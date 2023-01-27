@@ -158,7 +158,7 @@ namespace Masa.Blazor
                 await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty });
             });
 
-            Watcher.Watch<PointF>(nameof(Center), async (val) =>
+            Watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {
                 if (_jsMap is null)
                     return;
@@ -169,7 +169,7 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _jsMap.InvokeVoidAsync("panTo", val.ToGeoPoint());
+                await _jsMap.InvokeVoidAsync("panTo", val);
             });
         }
 
