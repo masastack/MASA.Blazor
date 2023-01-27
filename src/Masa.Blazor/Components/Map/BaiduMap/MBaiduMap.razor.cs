@@ -117,7 +117,7 @@ namespace Masa.Blazor
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
-                    Center = Center,
+                    Center = Center.ToGeoPoint(),
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
                 }, _objRef);
@@ -181,7 +181,7 @@ namespace Masa.Blazor
         }
 
         [JSInvokable]
-        public void OnJsMoveEnd(GeoPointInLowercase point)
+        public void OnJsMoveEnd(GeoPoint point)
         {
             _centerChangedInJs = true;
             Center = point.ToPointF();

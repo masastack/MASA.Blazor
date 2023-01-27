@@ -6,7 +6,7 @@ namespace Masa.Blazor
     {
         public float Zoom { get; set; } 
 
-        public PointF Center { get; set; } 
+        public GeoPoint Center { get; set; } 
 
         public bool EnableScrollWheelZoom { get; set; }
 
