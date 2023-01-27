@@ -6,11 +6,22 @@ namespace Masa.Blazor
 {
     public struct GeoPoint
     {
+        public GeoPoint()
+        {
+
+        }
+
+        public GeoPoint(float lng, float lat)
+        {
+            Lng= lng;
+            Lat= lat;
+        }
+
         [JsonPropertyName("lng")]
-        public float Lng { get; set; }
+        public float Lng { get; set; } = default;
 
         [JsonPropertyName("lat")]
-        public float Lat { get; set; }
+        public float Lat { get; set; } = default;
 
         public PointF ToPointF() => new (Lng, Lat);
 

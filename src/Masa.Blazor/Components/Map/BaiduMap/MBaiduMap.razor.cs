@@ -31,9 +31,9 @@ namespace Masa.Blazor
 
         [Parameter]
         [DefaultValue("116.403, 39.917")]
-        public PointF Center
+        public GeoPoint Center
         {
-            get => GetValue<PointF>(new(116.403f, 39.917f));
+            get => GetValue<GeoPoint>(new(116.403f, 39.917f));
             set => SetValue(value);
         }
 
@@ -117,7 +117,7 @@ namespace Masa.Blazor
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
-                    Center = Center.ToGeoPoint(),
+                    Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
                 }, _objRef);
@@ -184,7 +184,7 @@ namespace Masa.Blazor
         public void OnJsMoveEnd(GeoPoint point)
         {
             _centerChangedInJs = true;
-            Center = point.ToPointF();
+            Center = point;
         }
 
         public async ValueTask DisposeAsync()
