@@ -10,6 +10,6 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           eventType: ${{ github.event.action }}
-          labelName: 'Needs triage'
+          labelName: 'status/needs triage'
           secondsUtilLabel: 300,
           goodFirstIssue: true
