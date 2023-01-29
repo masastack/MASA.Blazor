@@ -11,7 +11,7 @@ namespace Masa.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string ActiveClass { get; set; } = "m-treeview-node--active";
+        public string ActiveClass { get; set; }
 
         [Parameter]
         public string SelectedColor { get; set; } = "accent";
@@ -39,8 +39,8 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-treeview-node__root")
-                        .AddIf(ActiveClass, () => IsActive)
-                        .AddTextColor(Color, () => IsActive);
+                        .AddIf($"m-treeview-node--active {ActiveClass}", () => IsActive)
+                        .AddTextColor(Color, () => ActiveClass is null && IsActive);
                 }, styleBuilder =>
                 {
                     styleBuilder
