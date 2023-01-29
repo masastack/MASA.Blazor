@@ -1,0 +1,15 @@
+name: needs triage
+on:
+  issues:
+    types: [opened, labeled]
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: capdiem/needs-triage@v1.0.0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          eventType: ${{ github.event.action }}
+          labelName: 'status/needs triage'
+          secondsUtilLabel: 300,
+          goodFirstIssue: true
