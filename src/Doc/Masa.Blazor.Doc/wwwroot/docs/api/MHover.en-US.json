@@ -12,7 +12,7 @@
     },
     {
       "Name": "CloseDelay",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "0",
       "Description": ""
     },
@@ -30,8 +30,23 @@
     },
     {
       "Name": "OpenDelay",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
       "Description": ""
     },
     {
