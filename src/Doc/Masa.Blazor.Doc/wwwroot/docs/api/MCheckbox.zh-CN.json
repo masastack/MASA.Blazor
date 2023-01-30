@@ -65,6 +65,11 @@
       "Description": ""
     },
     {
+      "Name": "FalseValue",
+      "Type": "TValue",
+      "Description": ""
+    },
+    {
       "Name": "Height",
       "Type": "StringNumber",
       "Default": "null",
@@ -195,6 +200,11 @@
       "Description": ""
     },
     {
+      "Name": "TrueValue",
+      "Type": "TValue",
+      "Description": ""
+    },
+    {
       "Name": "ValidateOnBlur",
       "Type": "Boolean",
       "Default": "false",
@@ -202,7 +212,7 @@
     },
     {
       "Name": "Value",
-      "Type": "Boolean",
+      "Type": "TValue",
       "Default": "false",
       "Description": ""
     },
@@ -248,7 +258,7 @@
     },
     {
       "Name": "OnChange",
-      "Type": "EventCallback<Boolean>",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     },
     {
@@ -258,7 +268,7 @@
     },
     {
       "Name": "OnInput",
-      "Type": "EventCallback<Boolean>",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     },
     {
@@ -278,7 +288,7 @@
     },
     {
       "Name": "ValueChanged",
-      "Type": "EventCallback<Boolean>",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     }
   ]

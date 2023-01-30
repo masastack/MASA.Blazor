@@ -41,6 +41,16 @@
       "Description": ""
     },
     {
+      "Name": "EventColor",
+      "Type": "Nullable<OneOf`3>",
+      "Description": ""
+    },
+    {
+      "Name": "Events",
+      "Type": "Nullable<OneOf`2>",
+      "Description": ""
+    },
+    {
       "Name": "FirstDayOfWeek",
       "Type": "Int32",
       "Default": "0",
