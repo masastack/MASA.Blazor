@@ -41,6 +41,16 @@
       "Description": ""
     },
     {
+      "Name": "EventColor",
+      "Type": "Nullable<OneOf`3>",
+      "Description": ""
+    },
+    {
+      "Name": "Events",
+      "Type": "Nullable<OneOf`2>",
+      "Description": ""
+    },
+    {
       "Name": "Format",
       "Type": "Func<DateOnly,String>",
       "Default": "null",

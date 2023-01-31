@@ -54,6 +54,16 @@
       "Description": "Designates an elevation applied to the component between 0 and 24."
     },
     {
+      "Name": "EventColor",
+      "Type": "Nullable<OneOf`3>",
+      "Description": ""
+    },
+    {
+      "Name": "Events",
+      "Type": "Nullable<OneOf`2>",
+      "Description": ""
+    },
+    {
       "Name": "FirstDayOfWeek",
       "Type": "Int32",
       "Default": "0",

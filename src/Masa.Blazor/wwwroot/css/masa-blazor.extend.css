@@ -747,3 +747,12 @@ input[type=number] {
 .m-ellipsis-text__tooltip.menuable__content__active {
     opacity: .9;
 }
+
+/* BaiduMap styles */
+
+.m-baidumap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}

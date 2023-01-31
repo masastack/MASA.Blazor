@@ -9,7 +9,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithDark()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Dark, true);
             });
@@ -23,7 +23,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithDense()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Dense, true);
             });
@@ -37,7 +37,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithDisabled()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Disabled, true);
             });
@@ -51,7 +51,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithError()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Error, true);
             });
@@ -65,7 +65,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithErrorCount()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.ErrorCount, 1);
             });
@@ -80,7 +80,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithFlat()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Flat, true);
             });
@@ -94,7 +94,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithHideDetails()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.HideDetails, true);
             });
@@ -108,7 +108,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithInset()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Inset, true);
             });
@@ -122,7 +122,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithLight()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Light, true);
             });
@@ -136,7 +136,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithLoading()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Loading, true);
             });
@@ -150,7 +150,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithPersistentHint()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.PersistentHint, true);
             });
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithReadonly()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Readonly, true);
             });
@@ -178,7 +178,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithSuccess()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Success, true);
             });
@@ -192,7 +192,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithValidateOnBlur()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.ValidateOnBlur, true);
             });
@@ -206,7 +206,7 @@ namespace Masa.Blazor.Test.Switch
         public void RenderSwitchWithValue()
         {
             //Act
-            var cut = RenderComponent<MSwitch>(props =>
+            var cut = RenderComponent<MSwitch<bool>>(props =>
             {
                 props.Add(Switch => Switch.Value, true);
             });

@@ -39,6 +39,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
+        services.TryAddScoped<BaiduMapJSModule>();
 
         return new MasaBlazorBuilder(services);
     }
