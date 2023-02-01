@@ -33,4 +33,8 @@
 		<None Include="..\..\README.md" Pack="true" PackagePath="" />
 		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Components\Map\BaiduMap\Models\" />
+	</ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
 ﻿using BlazorComponent.Attributes;
-using System.Drawing;
-using System.Text.Json;
 
 namespace Masa.Blazor
 {
@@ -67,6 +65,18 @@ namespace Masa.Blazor
         {
             get => GetValue(false);
             set => SetValue(value);
+        }
+
+        [Parameter]
+        [DefaultValue(BaiduMapType.NormalMap)]
+        public BaiduMapType MapType
+        {
+            get => GetValue(BaiduMapType.NormalMap);
+            set
+            {
+                if (value != MapType)
+                    SetValue(value);
+            }
         }
 
         [Parameter]
@@ -199,6 +209,14 @@ namespace Masa.Blazor
                     return;
 
                 await _jsMap.InvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom");
+            });
+
+            Watcher.Watch<BaiduMapType>(nameof(MapType), async (val) =>
+            {
+                if (_jsMap is null)
+                    return;
+
+                await _jsMap.InvokeVoidAsync("setMapType", MapTypeNameMapping.GetBaiduMapTypeName(val));
             });
 
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
