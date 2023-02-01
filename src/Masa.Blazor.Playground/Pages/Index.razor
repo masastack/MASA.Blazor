@@ -1,3 +1,12 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+<MBaiduMap Dark="@isDark" @ref=Map DarkThemeId="9828881e7efb0182edb48236a3b53293" />
+<MButton OnClick="@(()=>isDark=!isDark)" />
+
+@code
+{
+    public bool isDark { get; set; } = false;
+
+    public MBaiduMap? Map { get; set; }
+}

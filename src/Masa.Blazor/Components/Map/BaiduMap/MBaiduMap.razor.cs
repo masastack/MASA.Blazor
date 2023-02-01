@@ -49,7 +49,12 @@ namespace Masa.Blazor
         public string DarkThemeId { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
+        [DefaultValue(false)]
+        public bool Dark
+        {
+            get => GetValue(false);
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Light { get; set; }
@@ -155,6 +160,7 @@ namespace Masa.Blazor
                 if (_jsMap is null)
                     return;
 
+                Console.WriteLine("1");
                 await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty });
             });
 
