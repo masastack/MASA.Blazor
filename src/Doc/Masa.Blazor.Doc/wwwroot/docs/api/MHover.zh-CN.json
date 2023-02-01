@@ -12,7 +12,7 @@
     },
     {
       "Name": "CloseDelay",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "0",
       "Description": "关闭组件前等待的毫秒数。"
     },
@@ -30,9 +30,24 @@
     },
     {
       "Name": "OpenDelay",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "0",
       "Description": "在打开组件之前等待的毫秒数。"
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Description": ""
     },
     {
       "Name": "Style",
