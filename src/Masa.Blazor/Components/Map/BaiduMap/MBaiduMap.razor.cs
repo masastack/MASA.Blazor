@@ -24,7 +24,31 @@ namespace Masa.Blazor
             get => GetValue<float>(10);
             set
             {
-                if (value >= DefaultMinZoom && value <= DefaultMaxZoom)
+                if (value >= MinZoom && value <= MaxZoom)
+                    SetValue(value);
+            }
+        }
+
+        [Parameter]
+        [DefaultValue(19)]
+        public float MaxZoom
+        {
+            get => GetValue<float>(19);
+            set
+            {
+                if (value >= MinZoom && value <= DefaultMaxZoom)
+                    SetValue(value);
+            }
+        }
+
+        [Parameter]
+        [DefaultValue(3)]
+        public float MinZoom
+        {
+            get => GetValue<float>(3);
+            set
+            {
+                if (value >= DefaultMinZoom && value <= MaxZoom)
                     SetValue(value);
             }
         }
@@ -145,6 +169,28 @@ namespace Masa.Blazor
                 }
 
                 await _jsMap.InvokeVoidAsync("setZoom", val);
+            });
+
+            Watcher.Watch<float>(nameof(MaxZoom), async (val) =>
+            {
+                if (_jsMap is null)
+                    return;
+
+                await _jsMap.InvokeVoidAsync("setMaxZoom", val);
+
+                if (Zoom > val)
+                    Zoom = val;
+            });
+
+            Watcher.Watch<float>(nameof(MinZoom), async (val) =>
+            {
+                if (_jsMap is null)
+                    return;
+
+                await _jsMap.InvokeVoidAsync("setMinZoom", val);
+
+                if (Zoom < val)
+                    Zoom = val;
             });
 
             Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
