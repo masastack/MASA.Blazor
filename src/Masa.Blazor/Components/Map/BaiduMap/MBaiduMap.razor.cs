@@ -72,11 +72,15 @@ namespace Masa.Blazor
         public BaiduMapType MapType
         {
             get => GetValue(BaiduMapType.NormalMap);
-            set
-            {
-                if (value != MapType)
-                    SetValue(value);
-            }
+            set => SetValue(value);
+        }
+
+        [Parameter]
+        [DefaultValue(false)]
+        public bool TrafficOn
+        {
+            get => GetValue(false);
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -217,6 +221,14 @@ namespace Masa.Blazor
                     return;
 
                 await _jsMap.InvokeVoidAsync("setMapType", MapTypeNameMapping.GetBaiduMapTypeName(val));
+            });
+
+            Watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
+            {
+                if (_jsMap is null)
+                    return;
+
+                await _jsMap.InvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff");
             });
 
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
