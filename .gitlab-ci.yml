@@ -31,8 +31,8 @@ packer:
     - ls src/
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
