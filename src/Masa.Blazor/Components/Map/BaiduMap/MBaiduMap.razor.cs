@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Attributes;
+using System.Drawing;
 
 namespace Masa.Blazor
 {
@@ -52,18 +53,18 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue("116.403, 39.917")]
-        public GeoPoint Center
-        {
-            get => GetValue<GeoPoint>(new(116.403f, 39.917f));
-            set => SetValue(value);
-        }
-
-        [Parameter]
         [DefaultValue(false)]
         public bool EnableScrollWheelZoom
         {
             get => GetValue(false);
+            set => SetValue(value);
+        }
+
+        [Parameter]
+        [DefaultValue("116.403, 39.917")]
+        public GeoPoint Center
+        {
+            get => GetValue<GeoPoint>(new(116.403f, 39.917f));
             set => SetValue(value);
         }
 
