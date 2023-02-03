@@ -29,7 +29,7 @@ related:
 
 #### 路由联动
 
-<masa-example file="Examples.components.breadcrumbs.Linkage"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Routable"></masa-example>
 
 #### 大号
 
