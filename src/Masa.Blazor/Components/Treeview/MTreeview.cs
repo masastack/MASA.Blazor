@@ -15,7 +15,7 @@
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string ActiveClass { get; set; } = "m-treeview-node--active";
+        public string ActiveClass { get; set; }
 
         [Parameter]
         public string SelectedColor { get; set; } = "accent";

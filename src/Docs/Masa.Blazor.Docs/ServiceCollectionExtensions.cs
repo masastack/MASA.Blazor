@@ -8,8 +8,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<BlazorDocService>();
 
-        ApiGenerator.ApiGenerator.Run();
-
         return services;
     }
 }

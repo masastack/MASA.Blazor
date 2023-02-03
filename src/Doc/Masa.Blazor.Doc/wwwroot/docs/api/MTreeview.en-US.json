@@ -215,6 +215,11 @@
   ],
   "Contents": [
     {
+      "Name": "AppendContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    },
+    {
       "Name": "ChildContent",
       "Type": "RenderFragment",
       "Description": "Default Content"

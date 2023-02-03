@@ -54,6 +54,16 @@
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
     },
     {
+      "Name": "EventColor",
+      "Type": "Nullable<OneOf`3>",
+      "Description": ""
+    },
+    {
+      "Name": "Events",
+      "Type": "Nullable<OneOf`2>",
+      "Description": ""
+    },
+    {
       "Name": "FirstDayOfWeek",
       "Type": "Int32",
       "Default": "0",
