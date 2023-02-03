@@ -6,6 +6,7 @@
     public class MasaBlazor
     {
         private bool _rtl;
+        private Theme _theme;
 
         public MasaBlazor(Breakpoint breakpoint, Application application, Theme theme)
         {
@@ -31,8 +32,19 @@
 
         public Breakpoint Breakpoint { get; }
 
-        public Theme Theme { get; }
+        public Theme Theme
+        {
+            get { return _theme; }
+            set
+            {
+                _theme = value;
+                OnThemeChange?.Invoke(_theme);
+               
+            }
+        }
 
         public event Action<bool> OnRTLChange;
+
+        public event Action<Theme> OnThemeChange;
     }
 }
