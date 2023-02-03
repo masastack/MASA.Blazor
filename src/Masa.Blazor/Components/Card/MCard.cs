@@ -6,6 +6,9 @@ namespace Masa.Blazor
     {
         private IRoutable _router;
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
@@ -63,6 +66,8 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+        public bool Exact { get; set; }
+
         public bool IsClickable => _router.IsClickable;
 
         protected override void OnParametersSet()
@@ -85,12 +90,12 @@ namespace Masa.Blazor
                 .Merge(cssBuilder =>
                 {
                     cssBuilder.Add("m-card")
-                        .AddIf("m-card--flat", () => Flat)
-                        .AddIf("m-card--hover", () => Hover)
-                        .AddIf("m-card--link", () => IsClickable)
-                        .AddIf("m-card--loading", () => Loading == true)
-                        .AddIf("m-card--disabled", () => Disabled)
-                        .AddIf("m-card--raised", () => Raised);
+                              .AddIf("m-card--flat", () => Flat)
+                              .AddIf("m-card--hover", () => Hover)
+                              .AddIf("m-card--link", () => IsClickable)
+                              .AddIf("m-card--loading", () => Loading == true)
+                              .AddIf("m-card--disabled", () => Disabled)
+                              .AddIf("m-card--raised", () => Raised);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -99,8 +104,8 @@ namespace Masa.Blazor
                 .Apply("progress", cssBuilder => { cssBuilder.Add("m-card__progress"); });
 
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
-                .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
-                .ApplyLoadable(Loading, Color, LoaderHeight);
+                            .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
+                            .ApplyLoadable(Loading, Color, LoaderHeight);
         }
     }
 }

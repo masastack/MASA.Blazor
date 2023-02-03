@@ -27,9 +27,9 @@ For the icon variant, breadcrumbs can use any icon in Material Design Icons.
 
 <masa-example file="Examples.components.breadcrumbs.Divider"></masa-example>
 
-#### Linkage
+#### Routable
 
-<masa-example file="Examples.components.breadcrumbs.Linkage"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Routable"></masa-example>
 
 #### Large
 
