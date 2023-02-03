@@ -6,10 +6,18 @@
    @onclick="@OnClick"
    @onclick:preventDefault="IsSamePage"
    @attributes="@Attributes">
-    @Content
+    @if (!IsSamePage)
+    {
+        @Content
+    }
 
     @if (Icon is not null)
     {
         <MIcon Class="@($"m{(IsSamePage ? "r" : "l")}-1")" Color="primary" Size="@(".875rem")">@Icon</MIcon>
+    }
+
+    @if (IsSamePage)
+    {
+        @Content
     }
 </a>
