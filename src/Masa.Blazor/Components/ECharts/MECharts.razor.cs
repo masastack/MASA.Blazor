@@ -105,7 +105,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
         {
             _prevComputedTheme = ComputedTheme;
 
-            await DisposeECharts();
+            await ReinitializeECharts();
         }
     }
 
