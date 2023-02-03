@@ -80,7 +80,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
     parser.useContainer("code-group-item")
     addCodeGroupRules(parser);
   } else if (scope === "desc") {
-    addLinkRules(md)
+    addLinkRules(parser)
   }
 
   function addHeadingRules(md) {
