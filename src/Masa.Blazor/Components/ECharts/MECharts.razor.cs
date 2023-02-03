@@ -47,7 +47,6 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
     private IJSObjectReference _echarts;
-    private bool _isEChartsDisposed = false;
     private object _prevOption;
     private string _prevComputedTheme;
 
@@ -112,14 +111,15 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await base.OnAfterRenderAsync(firstRender);
+
         if (IsDisposed)
         {
             return;
         }
 
-        if (firstRender || _isEChartsDisposed)
+        if (firstRender)
         {
-            _isEChartsDisposed = false;
             await InitECharts();
         }
 
@@ -142,16 +142,24 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     public async Task DisposeECharts()
     {
         await Module.Dispose(_echarts);
-        _isEChartsDisposed = true;
+        _echarts = null;
+    }
+
+    public async Task ReinitializeECharts()
+    {
+        await DisposeECharts();
+        NextTick(async () => { await InitECharts(); });
     }
 
     public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
     {
+        if (_echarts == null) return;
         await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
     }
 
     public async Task Resize(double width, double height)
     {
+        if (_echarts == null) return;
         await Module.Resize(_echarts, width, height);
     }
 

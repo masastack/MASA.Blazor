@@ -20,7 +20,7 @@
 </div>
 
 @code{
-    private MECharts echarts;
+    private MECharts? echarts;
     private string locale;
 
     private object option = new();
@@ -29,7 +29,7 @@
     {
         if (locale != val && echarts is not null)
         {
-            await echarts.DisposeECharts();
+            await echarts.ReinitializeECharts();
         }
 
         locale = val;
