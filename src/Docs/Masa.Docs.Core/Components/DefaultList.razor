@@ -3,7 +3,7 @@
 <MList Expand
        Nav
        Class="@Class"
-       Linkage="Linkage">
+       Routable="Routable">
 
     @foreach (var item in Items)
     {
@@ -40,7 +40,7 @@
     public RenderFragment<TItem>? ItemContent { get; set; }
 
     [Parameter]
-    public bool Linkage { get; set; }
+    public bool Routable { get; set; }
 
     [Parameter]
     public string Class { get; set; }

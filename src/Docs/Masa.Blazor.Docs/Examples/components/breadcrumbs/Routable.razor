@@ -1,0 +1,12 @@
+﻿<MBreadcrumbs Items="items" Routable></MBreadcrumbs>
+
+@code {
+
+    List<BreadcrumbItem> items = new()
+    {
+        new BreadcrumbItem() { Text = "Masa.Blazor", Href = "/blazor/components/all", Exact = true },
+        new BreadcrumbItem() { Text = "Borders", Href = "/blazor/components/borders", Exact = true },
+        new BreadcrumbItem() { Text = "Breadcrumbs", Href = "/blazor/components/breadcrumbs" }
+    };
+
+}

@@ -35,12 +35,28 @@ public partial class Document : IDisposable
     private string? _md;
     private CultureInfo? _prevCulture;
     private string? _prevAbsolutePath;
+
     private Dictionary<string, string[]> _projectMap = new()
     {
-        { "stack", new string[]{ "MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png" } },
-        { "framework",new string[]{ "MASA Framework", "https://cdn.masastack.com/images/framework_logo.png" } },
-        { "blazor", new string[]{ "MASA Blazor", "https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" } }
+        { "stack", new string[] { "MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png" } },
+        { "framework", new string[] { "MASA Framework", "https://cdn.masastack.com/images/framework_logo.png" } },
+        { "blazor", new string[] { "MASA Blazor", "https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" } }
     };
+
+    private string GithubUri
+    {
+        get
+        {
+            return Project switch
+            {
+                "blazor" =>
+                    $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture.Name}.md",
+                "framework" or "stack" =>
+                    $"https://github.com/masastack/MASA.Docs/blob/main/src/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture.Name}.md",
+                _ => string.Empty
+            };
+        }
+    }
 
     protected override void OnInitialized()
     {

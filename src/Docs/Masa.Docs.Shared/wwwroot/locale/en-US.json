@@ -361,6 +361,10 @@
     "treeview": "The Treeview component is useful for displaying large amounts of nested data.",
     "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list"
   },
+  "contribute": {
+    "edit-page": "Edit this page on {0}",
+    "last-updated": "Last updated:"
+  },
   "0.6.0": "0.6.0",
   "0.7.0": "0.7.0"
 }

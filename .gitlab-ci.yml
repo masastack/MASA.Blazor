@@ -31,8 +31,8 @@ packer:
     - ls src/
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
@@ -63,8 +63,8 @@ docker:
   script:
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
     - docker build -t $IMAGE .
@@ -130,8 +130,8 @@ packer-prd:
   script:
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
     - dotnet workload list && dotnet build src/Masa.Blazor.NewDocs.sln

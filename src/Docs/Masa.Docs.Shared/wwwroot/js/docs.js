@@ -71,7 +71,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
   const {md, scope} = parser
   if (scope === "document") {
     addHeadingRules(md);
-    addLinkRules(md);
+    addLinkRules(parser);
     addCodeRules(md);
     addImageRules(md);
     addBlockquoteRules(md);
@@ -80,7 +80,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
     parser.useContainer("code-group-item")
     addCodeGroupRules(parser);
   } else if (scope === "desc") {
-    addLinkRules(md)
+    addLinkRules(parser)
   }
 
   function addHeadingRules(md) {
@@ -105,12 +105,19 @@ window.MasaBlazor.markdownItRules = function (parser) {
     };
   }
 
-  function addLinkRules(md) {
+  function addLinkRules({ md, defaultSlugify }) {
     md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
       const next = tokens[idx + 1];
       const content = next.content;
 
       tokens[idx].tag = "app-link";
+
+      const href = tokens[idx].attrGet("href");
+      let decodedHref = decodeURI(href)
+      if (decodedHref !== href) {
+        tokens[idx].attrSet("href", '#' + defaultSlugify(decodedHref.replace('#', '')))
+      }
+
       tokens[idx].attrSet("content", content);
 
       return self.renderToken(tokens, idx, options);

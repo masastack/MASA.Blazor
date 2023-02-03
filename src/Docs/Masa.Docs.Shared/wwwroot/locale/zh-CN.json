@@ -473,6 +473,10 @@
     "treeview": "适用于显示大量嵌套数据",
     "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表"
   },
+  "contribute": {
+    "edit-page": "在 {0} 上编辑此页面",
+    "last-updated": "最后更新："
+  },
   "0.6.0": "0.6.0",
   "0.7.0": "0.7.0",
   "default": "默认值",

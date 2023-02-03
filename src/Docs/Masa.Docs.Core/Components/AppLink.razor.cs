@@ -15,7 +15,7 @@ public partial class AppLink
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
 
-    private const string POUND = "mdi-anchor";
+    private const string POUND = "mdi-pound";
     private const string OPEN_IN_NEW = "mdi-open-in-new";
     private const string PAGE_NEXT = "mdi-page-next";
 
