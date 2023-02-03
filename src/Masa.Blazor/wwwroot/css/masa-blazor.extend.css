@@ -748,7 +748,12 @@ input[type=number] {
     opacity: .9;
 }
 
-/* BaiduMap styles */
+/* i18n */
+.m-i18n {
+    white-space: nowrap;
+}
+
+/* BaiduMap */
 
 .m-baidumap {
     width: 100%;
