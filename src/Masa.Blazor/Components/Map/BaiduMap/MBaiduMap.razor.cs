@@ -236,7 +236,6 @@ namespace Masa.Blazor
                 if (_jsMap is null)
                     return;
 
-                Console.WriteLine("1");
                 await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty });
             });
 

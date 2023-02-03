@@ -9,7 +9,7 @@
 
     public static class MapTypeNameMapping
     {
-        public static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new Dictionary<BaiduMapType, string>()
+        public static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new()
         {
             { BaiduMapType.NormalMap, "B_NORMAL_MAP" },
             { BaiduMapType.EarthMap, "B_EARTH_MAP" },
