@@ -41,7 +41,7 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
     <script src="_content/Masa.Docs.Shared/echarts/theme/vintage.js"></script>
@@ -58,8 +58,27 @@
     <script src="js/prism-cshtml.min.js"></script>
     <script src="js/prism-normalize-whitespace.min.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
-    <script>
-        Blazor.start().then(function () {
+    <script type="module">
+        import { BrotliDecode } from './js/decode.min.js';
+        Blazor.start({
+            loadBootResource: function (type, name, defaultUri, integrity) {
+                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+                    return (async function () {
+                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        const originalResponseBuffer = await response.arrayBuffer();
+                        const originalResponseArray = new Int8Array(originalResponseBuffer);
+                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
+                        const contentType = type ===
+                        'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+                        return new Response(decompressedResponseArray,
+                            { headers: { 'content-type': contentType } });
+                    })();
+                }
+            }
+        }).then(function () {
             Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
         });
     </script>
