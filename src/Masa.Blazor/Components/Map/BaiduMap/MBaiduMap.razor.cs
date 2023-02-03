@@ -1,5 +1,4 @@
 ﻿using BlazorComponent.Attributes;
-using System.Drawing;
 
 namespace Masa.Blazor
 {
@@ -32,7 +31,7 @@ namespace Masa.Blazor
         [DefaultValue(19)]
         public float MaxZoom
         {
-            get => GetValue<float>(19);
+            get => GetValue(DefaultMaxZoom);
             set
             {
                 if (value >= MinZoom && value <= DefaultMaxZoom)
@@ -44,7 +43,7 @@ namespace Masa.Blazor
         [DefaultValue(3)]
         public float MinZoom
         {
-            get => GetValue<float>(3);
+            get => GetValue(DefaultMinZoom);
             set
             {
                 if (value >= DefaultMinZoom && value <= MaxZoom)
@@ -221,7 +220,7 @@ namespace Masa.Blazor
                 if (_jsMap is null)
                     return;
 
-                await _jsMap.InvokeVoidAsync("setMapType", MapTypeNameMapping.GetBaiduMapTypeName(val));
+                await _jsMap.InvokeVoidAsync("setMapType", MapTypeNameMapping.BaiduMapTypeName[val]);
             });
 
             Watcher.Watch<bool>(nameof(TrafficOn), async (val) =>

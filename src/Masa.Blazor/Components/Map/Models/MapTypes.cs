@@ -16,6 +16,5 @@
             { BaiduMapType.SatelliteMap, "B_SATELLITE_MAP" },
         };
 
-        public static string GetBaiduMapTypeName(BaiduMapType type) => BaiduMapTypeName[type];
     }
 }
