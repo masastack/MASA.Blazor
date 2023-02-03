@@ -86,3 +86,27 @@ double Top { get; }
 
 <app-alert type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
 Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></app-alert>
+
+## 应用主题
+
+可以自定义 Masa Blazor 的主题，包括各种默认颜色......
+
+在 Program.cs 中修改添加 Masa.Blazor 相关服务的代码，即可设置默认主题
+```csharp
+builder.Services.AddMasaBlazor(options =>
+{
+    options.ConfigureTheme(theme =>
+    {
+        theme.Themes.Light.Primary = "#4318FF";
+        theme.Themes.Light.Secondary = "#5CBBF6";
+        theme.Themes.Light.Accent = "#005CAF";
+        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+    });
+})
+```
+
+### 动态修改主题
+
+你可以通过引用 **Theme** 对象的应用属性来访问主题设置，也可以通过重新赋值来修改主题设置
+
+<masa-example file="Examples.components.application.DynamicallyModifyTheme"></masa-example>

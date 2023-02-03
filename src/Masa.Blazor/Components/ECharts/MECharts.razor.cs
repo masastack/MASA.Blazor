@@ -47,7 +47,6 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
     private IJSObjectReference _echarts;
-    private bool _isEChartsDisposed = false;
     private object _prevOption;
     private string _prevComputedTheme;
 
@@ -106,20 +105,21 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
         {
             _prevComputedTheme = ComputedTheme;
 
-            await DisposeECharts();
+            await ReinitializeECharts();
         }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await base.OnAfterRenderAsync(firstRender);
+
         if (IsDisposed)
         {
             return;
         }
 
-        if (firstRender || _isEChartsDisposed)
+        if (firstRender)
         {
-            _isEChartsDisposed = false;
             await InitECharts();
         }
 
@@ -136,23 +136,45 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     public async Task InitECharts()
     {
         _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+
         await SetOption();
     }
 
     public async Task DisposeECharts()
     {
-        await Module.Dispose(_echarts);
-        _isEChartsDisposed = true;
+        if (_echarts == null) return;
+
+        await _echarts.InvokeVoidAsync("dispose");
+
+        _echarts = null;
+    }
+
+    public async Task ReinitializeECharts()
+    {
+        await DisposeECharts();
+
+        NextTick(async () => { await InitECharts(); });
     }
 
     public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
     {
+        if (_echarts == null) return;
+
         await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
     }
 
-    public async Task Resize(double width, double height)
+    public async Task Resize(double width = 0, double height = 0)
     {
-        await Module.Resize(_echarts, width, height);
+        if (_echarts == null) return;
+
+        if (width == 0 || height == 0)
+        {
+            await _echarts.InvokeVoidAsync("resize");
+        }
+        else
+        {
+            await _echarts.InvokeVoidAsync("resize", new { width, height });
+        }
     }
 
     public async ValueTask DisposeAsync()
@@ -160,6 +182,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
         try
         {
             await DisposeECharts();
+
             if (_echarts is not null)
             {
                 await _echarts.DisposeAsync();

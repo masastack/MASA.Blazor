@@ -95,4 +95,27 @@ You can access these values by referencing the `Application` property.
 
 <app-alert type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. "></app-alert>
 
+## Application Theme
 
+The theme of Masa Blazor can be customized, including various default colors...
+
+Modify the code to add Masa.Blazor related services in Program.cs to set a default theme
+
+```csharp
+builder.Services.AddMasaBlazor(options =>
+{
+    options.ConfigureTheme(theme =>
+    {
+        theme.Themes.Light.Primary = "#4318FF";
+        theme.Themes.Light.Secondary = "#5CBBF6";
+        theme.Themes.Light.Accent = "#005CAF";
+        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+    });
+})
+```
+
+### Dynamically modify the theme
+
+You can access theme settings by referencing the app properties of the **Theme** object, or you can modify theme settings by reassigning values
+
+<masa-example file="Examples.components.application.DynamicallyModifyTheme"></masa-example>

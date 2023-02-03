@@ -1,0 +1,23 @@
+name: Issue Labeled
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  issue-labeled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: help wanted
+        if: github.event.label.name == 'status/help wanted'
+        uses: actions-cool/issues-helper@v3.3.3
+        with:
+          actions: "create-comment"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello @${{ github.event.issue.user.login }}. We like your proposal/feedback and would appreciate a contribution via a [Pull Request](https://help.github.com/en/articles/creating-a-pull-request) by you or another community member. We thank you in advance for your contribution and are looking forward to reviewing it!
+
+            你好 @${{ github.event.issue.user.login }}。我们喜欢您的建议/反馈，并希望通过您或其他社区成员的[Pull Request](https://help.github.com/en/articles/creating-a-pull-request)做出贡献。我们预先感谢您的贡献，并期待着对其进行审查！
+            
+            ![thanks](https://media.tenor.com/sTYi0FX1iVsAAAAC/friends.gif)
