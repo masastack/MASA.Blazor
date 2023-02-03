@@ -16,7 +16,7 @@ Then refer the package of BaiduMaps JS API GL:
 <script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-ak}"></script>
 ```
 
-<app-alert type="info" content='Replace **{your-ak}** with your AK. '></app-alert>
+<app-alert type="info" content='Replace `{your-ak}` with your AK. '></app-alert>
 
 <masa-example file="Examples.components.baidumaps.Usage"></masa-example>
 
@@ -27,12 +27,11 @@ Then refer the package of BaiduMaps JS API GL:
 #### Dark
 
 To use dark theme, go to [My Maps](https://lbsyun.baidu.com/apiconsole/custommap) to create and publish a map theme and get the Id. 
- 
 Use `DarkThemeId` to indicate the dark theme Id, and use `Dark` property to switch to dark theme. 
 
-<masa-example file="Examples.components.baidumaps.Dark"></masa-example>
-
 <app-alert type="info" content='The account that created and published the map theme must be the same as that applied for the AK. '></app-alert>
+
+<masa-example file="Examples.components.baidumaps.Dark"></masa-example>
 
 #### Height and width
 

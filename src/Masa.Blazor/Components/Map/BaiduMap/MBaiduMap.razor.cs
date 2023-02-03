@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Attributes;
+using Util.Reflection.Expressions;
 
 namespace Masa.Blazor
 {
@@ -52,7 +53,6 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue(false)]
         public bool EnableScrollWheelZoom
         {
             get => GetValue(false);
@@ -130,6 +130,13 @@ namespace Masa.Blazor
 
         private DotNetObjectReference<MBaiduMap> _objRef;
 
+        private static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new()
+        {
+            { BaiduMapType.NormalMap, "B_NORMAL_MAP" },
+            { BaiduMapType.EarthMap, "B_EARTH_MAP" },
+            { BaiduMapType.SatelliteMap, "B_SATELLITE_MAP" },
+        };
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -171,87 +178,79 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<float>(nameof(Zoom), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                if (_zoomChangedInJs)
+            Watcher.Watch<float>(nameof(Zoom), 
+                async (val) => await DoIfNotNull(
+                async () =>
                 {
-                    _zoomChangedInJs = false;
-                    return;
-                }
+                    if (_zoomChangedInJs)
+                    {
+                        _zoomChangedInJs = false;
+                        return;
+                    }
 
-                await _jsMap.InvokeVoidAsync("setZoom", val);
-            });
+                    await _jsMap.InvokeVoidAsync("setZoom", val);
+                }));
 
-            Watcher.Watch<float>(nameof(MaxZoom), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync("setMaxZoom", val);
-
-                if (Zoom > val)
-                    Zoom = val;
-            });
-
-            Watcher.Watch<float>(nameof(MinZoom), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync("setMinZoom", val);
-
-                if (Zoom < val)
-                    Zoom = val;
-            });
-
-            Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom");
-            });
-
-            Watcher.Watch<BaiduMapType>(nameof(MapType), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync("setMapType", MapTypeNameMapping.BaiduMapTypeName[val]);
-            });
-
-            Watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff");
-            });
-
-            Watcher.Watch<bool>(nameof(Dark), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty });
-            });
-
-            Watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
-            {
-                if (_jsMap is null)
-                    return;
-
-                if (_centerChangedInJs)
+            Watcher.Watch<float>(nameof(MaxZoom),
+                async (val) => await DoIfNotNull(
+                async () =>
                 {
-                    _centerChangedInJs = false;
-                    return;
-                }
+                    await _jsMap.InvokeVoidAsync("setMaxZoom", val);
 
-                await _jsMap.InvokeVoidAsync("panTo", val);
-            });
+                    if (Zoom > val)
+                        Zoom = val;
+                }));
+
+            Watcher.Watch<float>(nameof(MinZoom),
+                async (val) => await DoIfNotNull(
+                async () =>
+                {
+                    await _jsMap.InvokeVoidAsync("setMinZoom", val);
+
+                    if (Zoom < val)
+                        Zoom = val;
+                }));
+
+            Watcher.Watch<bool>(nameof(EnableScrollWheelZoom),
+                async (val) => await DoIfNotNull(
+                async () => 
+                    await _jsMap.InvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom")));
+
+            Watcher.Watch<BaiduMapType>(nameof(MapType), 
+                async (val) => await DoIfNotNull(
+                async () =>
+                    await _jsMap.InvokeVoidAsync("setMapType", BaiduMapTypeName[val])));
+
+            Watcher.Watch<bool>(nameof(TrafficOn), 
+                async (val) => await DoIfNotNull(
+                async () =>
+                    await _jsMap.InvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff")));
+
+            Watcher.Watch<bool>(nameof(Dark), 
+                async (val) => await DoIfNotNull(
+                async () =>
+                    await _jsMap.InvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty })));
+
+            Watcher.Watch<GeoPoint>(nameof(Center), 
+                async (val) => await DoIfNotNull(
+                async () =>
+                {
+                    if (_centerChangedInJs)
+                    {
+                        _centerChangedInJs = false;
+                        return;
+                    }
+
+                    await _jsMap.InvokeVoidAsync("panTo", val);
+            }));
+        }
+
+        private async Task DoIfNotNull(Func<Task> changeCallBack)
+        {
+            if (_jsMap is null)
+                return;
+
+            await changeCallBack();
         }
 
         [JSInvokable]
