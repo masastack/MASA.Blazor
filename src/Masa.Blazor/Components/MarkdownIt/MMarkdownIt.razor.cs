@@ -217,11 +217,7 @@ public partial class MMarkdownIt : BDomComponentBase
             }
         }
 
-        NextTick(async () =>
-        {
-            await MarkdownItJSModule.AfterRender(_markdownIt);
-            StateHasChanged();
-        });
+        NextTick(() => MarkdownItJSModule.AfterRender(_markdownIt));
 
         StateHasChanged();
     }
