@@ -4,7 +4,11 @@
     "darkThemeId": "暗色主题的Id。你可以在[我的地图](https://lbsyun.baidu.com/apiconsole/custommap)中创建并发布暗色地图样式，获取样式Id。",
     "enableScrollWheelZoom": "是否允许用滚轮缩放地图。",
     "id": "地图容器的Id。",
-    "zoom": "地图的缩放等级"
+    "zoom": "地图的缩放等级。",
+    "maxZoom": "地图的最大缩放等级。",
+    "minZoom": "地图的最小缩放等级。",
+    "mapType": "地图的类型（普通地图，地球地图或卫星地图）。",
+    "trafficOn": "是否开启路况图层。"
   },
   "contents": {},
   "events": {},

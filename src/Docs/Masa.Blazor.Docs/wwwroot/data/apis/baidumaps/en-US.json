@@ -4,7 +4,11 @@
     "darkThemeId": "Id of the dark theme. You could create and publish dark themes at [My Maps](https://lbsyun.baidu.com/apiconsole/custommap), and get themes' Ids.",
     "enableScrollWheelZoom": "Whether allows to use mouse wheel to zoom the map or not.",
     "id": "Id of the map container.",
-    "zoom": "Zoom level of the map."
+    "zoom": "Zoom level of the map.",
+    "maxZoom": "Max zoom level of the map.",
+    "minZoom": "Min zoom level of the map.",
+    "mapType": "Type of the map (Normal map, earth map or satellite map).",
+    "trafficOn": "Whether turns on the traffic layer or not."
   },
   "contents": {},
   "events": {},
