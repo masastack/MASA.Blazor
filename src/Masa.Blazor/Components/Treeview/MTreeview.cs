@@ -24,7 +24,7 @@
         public string Color { get; set; } = "primary";
 
         [Parameter]
-        public Func<TItem, Task> LoadChildren { get; set; }
+        public EventCallback<TItem> LoadChildren { get; set; }
 
         [Parameter]
         public bool Activatable { get; set; }
