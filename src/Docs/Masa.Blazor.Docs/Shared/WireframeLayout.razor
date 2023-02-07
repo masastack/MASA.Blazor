@@ -5,12 +5,25 @@
 
     @Body
 
-    <MButton Dark Fab Class="bottom-btn" Href="@(_baseUrl + NavigationManager.GetAbsolutePath())" Color="primary">
+    <MButton Dark Fab Class="bottom-btn" Href="@ComputedHref" Color="primary">
         <MIcon>mdi-github</MIcon>
     </MButton>
 </MApp>
 
 
 @code {
-    const string? _baseUrl = "https://github.com/BlazorComponent/MASA.Blazor/tree/feature/application/src/Docs/Masa.Docs.Shared";
+    static readonly string s_url = "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Docs/Masa.Blazor.Docs/Examples/getting-started/wireframes/{0}.razor";
+
+    private string ComputedHref
+    {
+        get
+        {
+            var segments = NavigationManager.GetSegments();
+
+            Console.WriteLine(string.Join(", ", segments));
+
+            return string.Format(s_url, segments.Last().ToPascal());
+        }
+    }
+
 }

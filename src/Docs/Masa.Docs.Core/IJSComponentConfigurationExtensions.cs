@@ -40,22 +40,16 @@ public static class IJSComponentConfigurationExtensions
             if (includeNamespace)
             {
                 var names = type.FullName!.Split(".").TakeLast(2);
-                name = ToKebab(string.Join("-", names));
+                name = string.Join("-", names).ToKebab();
                 name = name.Replace('_', '-');
             }
             else
             {
-                name = ToKebab(type.Name);
+                name = type.Name.ToKebab();
             }
         }
 
         componentConfiguration.RegisterForJavaScript(type, name, "registerBlazorCustomElement");
-    }
-
-    private static string ToKebab(string name)
-    {
-        var split = GeneratedRegexes.SingleCamelCase().Split(name).Select(s => s.Trim('-'));
-        return string.Join("-", split).ToLowerInvariant();
     }
 
 }
