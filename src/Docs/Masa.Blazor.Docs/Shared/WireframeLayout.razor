@@ -20,8 +20,6 @@
         {
             var segments = NavigationManager.GetSegments();
 
-            Console.WriteLine(string.Join(", ", segments));
-
             return string.Format(s_url, segments.Last().ToPascal());
         }
     }
