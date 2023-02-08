@@ -13,7 +13,10 @@
         {
             if (overlay is MBaiduCircle circle)
                 return await InvokeAsync<IJSObjectReference>("constructCircle", circle);
-            
+
+            if (overlay is MBaiduMarker marker)
+                return await InvokeAsync<IJSObjectReference>("constructMarker", marker);
+
             return null;
         }
 

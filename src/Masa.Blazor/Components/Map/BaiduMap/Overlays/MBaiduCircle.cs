@@ -1,8 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using Util.Reflection.Expressions;
 
 namespace Masa.Blazor
 {
-    public partial class MBaiduCircle : BDomComponentBase, IMapOverlay, ICircle, IStroke, IFillable
+    public class MBaiduCircle : BComponentBase, IMapOverlay, ICircle, IStroke, IFillable
     {
         [Parameter]
         public GeoPoint Center { get; set; }
@@ -41,13 +42,10 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
+                if (Parent is not null)
+                    OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
 
-                NextTick(async () =>
-                {
-                    if (Parent is not null)
-                        await Parent.AddOverlayAsync(this);
-                });
+                NextTick(async () => await Parent.AddOverlayAsync(this));
             }
         }
 

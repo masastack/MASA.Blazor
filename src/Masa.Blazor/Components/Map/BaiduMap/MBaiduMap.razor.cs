@@ -264,15 +264,15 @@ namespace Masa.Blazor
             await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
         }
 
-        public async Task RemoveOverlay<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
+        public async Task RemoveOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
         {
             if (_jsMap is null || overlay is null)
                 return;
-
-            await _jsMap.InvokeVoidAsync("removeOverlay", overlay);
+            
+            await _jsMap.InvokeVoidAsync("removeOverlay", overlay.OverlayRef);
         }
 
-        public async Task ClearOverlay()
+        public async Task ClearOverlaysAsync()
         {
             if (_jsMap is null)
                 return;
