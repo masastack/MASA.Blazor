@@ -306,7 +306,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
     }
 
-    private string? GetMenuAttach()
+    private StringBoolean? GetMenuAttach()
     {
         if (Attach is null) return null;
 
@@ -315,7 +315,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             return Ref.GetSelector();
         }
 
-        return Attach.ToString();
+        return Attach;
     }
 
     protected virtual async Task OnMenuAfterShowContent(bool isLazyContent)

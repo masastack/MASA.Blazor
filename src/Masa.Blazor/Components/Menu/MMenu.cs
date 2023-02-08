@@ -22,7 +22,7 @@
                 {
                     cssBuilder
                         .Add("m-menu")
-                        .AddIf("m-menu--attached", () => Attach is { AsT1: true });
+                        .AddIf("m-menu--attached", () => IsAttachSelf);
                 })
                 .Apply("content", cssBuilder =>
                 {
