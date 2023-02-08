@@ -9,7 +9,9 @@
         public async ValueTask<IJSObjectReference> InitAsync(string containerId, BaiduMapInitOptions options, DotNetObjectReference<MBaiduMap> obj)
             => await InvokeAsync<IJSObjectReference>("init", containerId, options, obj);
 
-        public async ValueTask<IJSObjectReference> ConstructOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
+        public async ValueTask<IJSObjectReference> ConstructOverlayAsync<TOverlay, TMap>(TOverlay overlay)
+            where TOverlay : IMapOverlay<TMap>
+            where TMap : IMap
         {
             if (overlay is MBaiduCircle circle)
                 return await InvokeAsync<IJSObjectReference>("constructCircle", circle);
@@ -19,6 +21,9 @@
 
             if (overlay is MBaiduLabel label)
                 return await InvokeAsync<IJSObjectReference>("constructLabel", label);
+
+            if (overlay is MBaiduPolyline polyline)
+                return await InvokeAsync<IJSObjectReference>("constructPolyline", polyline);
 
             return null;
         }

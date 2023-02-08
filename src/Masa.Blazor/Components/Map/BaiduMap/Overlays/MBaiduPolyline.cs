@@ -3,17 +3,14 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduCircle : BComponentBase, IMapOverlay<MBaiduMap>, ICircle, IStroke, IFillable
+    public class MBaiduPolyline : BComponentBase, IMapOverlay<MBaiduMap>, IPolyline, IStroke
     {
         [Parameter]
-        public GeoPoint Center { get; set; }
+        public IEnumerable<GeoPoint> Points { get; set; }
 
         [Parameter]
-        public float Radius { get; set; }
-
-        [Parameter]
-        [ApiDefaultValue("blue")]
-        public string StrokeColor { get; set; } = "blue";
+        [ApiDefaultValue("#0000FF")]
+        public string StrokeColor { get; set; } = "#0000FF";
 
         [Parameter]
         [ApiDefaultValue(0.9f)]
@@ -28,19 +25,18 @@ namespace Masa.Blazor
         public StrokeStyle StrokeStyle { get; set; } = StrokeStyle.Solid;
 
         [Parameter]
-        [ApiDefaultValue("blue")]
-        public string FillColor { get; set; } = "blue";
+        public bool Geodesic { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(0.3f)]
-        public float FillOpacity { get; set; } = 0.3f;
+        [ApiDefaultValue(true)]
+        public bool Clip { get; set; } = true;
+
+        [JsonIgnore]
+        public IJSObjectReference OverlayRef { get; set; }
 
         [JsonIgnore]
         [CascadingParameter(Name = "Parent")]
         public MBaiduMap MapRef { get; set; }
-
-        [JsonIgnore]
-        public IJSObjectReference OverlayRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

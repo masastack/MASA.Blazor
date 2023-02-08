@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using BlazorComponent.Attributes;
 
 namespace Masa.Blazor
 {
@@ -253,30 +253,22 @@ namespace Masa.Blazor
                 await _jsMap.DisposeAsync();
         }
 
-        public async Task AddOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
-        {
-            if (_jsMap is null || overlay is null)
-                return;
-            
-            overlay.OverlayRef ??= await Module.ConstructOverlayAsync(overlay);
-            
-            await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
-        }
-
-        public async Task RemoveOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
-        {
-            if (_jsMap is null || overlay is null)
-                return;
-            
-            await _jsMap.InvokeVoidAsync("removeOverlay", overlay.OverlayRef);
-        }
-
         public async Task ClearOverlaysAsync()
+            => await _jsMap.TryInvokeVoidAsync("clearOverlays");
+
+        public async Task AddOverlayAsync<TOverlay, TMap>(TOverlay overlay)
+            where TOverlay : IMapOverlay<TMap>
+            where TMap : IMap
         {
-            if (_jsMap is null)
-                return;
-            
-            await _jsMap.InvokeVoidAsync("clearOverlays");
+            if (overlay is not null)
+                overlay.OverlayRef ??= await Module.ConstructOverlayAsync<TOverlay, TMap>(overlay);
+
+            await _jsMap.TryInvokeVoidAsync("addOverlay", overlay.OverlayRef);
         }
+
+        public async Task RemoveOverlayAsync<TOverlay, TMap>(TOverlay overlay)
+            where TOverlay : IMapOverlay<TMap>
+            where TMap : IMap
+            => await _jsMap.TryInvokeVoidAsync(() => overlay is not null, "removeOverlay", overlay.OverlayRef);
     }
 }

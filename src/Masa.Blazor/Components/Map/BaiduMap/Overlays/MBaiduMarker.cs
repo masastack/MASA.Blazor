@@ -3,12 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduMarker : BComponentBase, IMapOverlay, IMarker
+    public class MBaiduMarker : BComponentBase, IMapOverlay<MBaiduMap>, IMarker
     {
-        [JsonIgnore]
-        [CascadingParameter(Name = "Parent")]
-        public MBaiduMap Parent { get; set; }
-
         [JsonIgnore]
         public IJSObjectReference OverlayRef { get; set; }
 
@@ -24,14 +20,18 @@ namespace Masa.Blazor
         [Parameter]
         public string Title { get; set; }
 
+        [JsonIgnore]
+        [CascadingParameter(Name = "Parent")]
+        public MBaiduMap MapRef { get; set; }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender && Parent is not null)
+            if (firstRender && MapRef is not null)
             {
-                OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
-                NextTick(async () => await Parent.AddOverlayAsync(this));
+                OverlayRef = await MapRef.Module.ConstructOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this);
+                NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduLabel : BComponentBase, IMapOverlay, ILabel
+    public class MBaiduLabel : BComponentBase, IMapOverlay<MBaiduMap>, ILabel
     {
         [Parameter]
         public string Content { get; set; }
@@ -19,16 +19,16 @@ namespace Masa.Blazor
 
         [JsonIgnore]
         [CascadingParameter(Name = "Parent")]
-        public MBaiduMap Parent { get; set; }
+        public MBaiduMap MapRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender && Parent is not null)
+            if (firstRender && MapRef is not null)
             {
-                OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
-                NextTick(async () => await Parent.AddOverlayAsync(this));
+                OverlayRef = await MapRef.Module.ConstructOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this);
+                NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
             }
         }
     }

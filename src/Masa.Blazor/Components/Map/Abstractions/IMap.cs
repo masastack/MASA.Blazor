@@ -12,9 +12,13 @@
 
         public bool EnableScrollWheelZoom { get; set; }
 
-        public Task AddOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay;
+        public Task AddOverlayAsync<TOverlay, TMap>(TOverlay overlay)
+            where TOverlay : IMapOverlay<TMap>
+            where TMap : IMap;
 
-        public Task RemoveOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay;
+        public Task RemoveOverlayAsync<TOverlay, TMap>(TOverlay overlay)
+            where TOverlay : IMapOverlay<TMap>
+            where TMap : IMap;
 
         public Task ClearOverlaysAsync();
 
