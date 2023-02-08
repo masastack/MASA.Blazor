@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
@@ -13,8 +12,8 @@ namespace Masa.Blazor
 
         public GeoPoint(float lng, float lat)
         {
-            Lng= lng;
-            Lat= lat;
+            Lng = lng;
+            Lat = lat;
         }
 
         [JsonPropertyName("lng")]

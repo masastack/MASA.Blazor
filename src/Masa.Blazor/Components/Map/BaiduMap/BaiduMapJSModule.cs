@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class BaiduMapJSModule : JSModule
     {
@@ -10,6 +8,14 @@ namespace Masa.Blazor
 
         public async ValueTask<IJSObjectReference> InitAsync(string containerId, BaiduMapInitOptions options, DotNetObjectReference<MBaiduMap> obj)
             => await InvokeAsync<IJSObjectReference>("init", containerId, options, obj);
+
+        public async ValueTask<IJSObjectReference> ConstructOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
+        {
+            if (overlay is MBaiduCircle circle)
+                return await InvokeAsync<IJSObjectReference>("constructCircle", circle);
+            
+            return null;
+        }
 
     }
 }
