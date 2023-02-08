@@ -25,7 +25,6 @@ public class PopupComponentBase : BComponentBase
         {
             Visible = true;
             StateHasChanged();
-            return Task.CompletedTask;
         });
     }
 }

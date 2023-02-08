@@ -11,15 +11,15 @@ namespace Masa.Blazor
         public RenderFragment ChildContent { get; set; }
 
         [Parameter]
-        [DefaultValue(360)]
+        [ApiDefaultValue(360)]
         public StringNumber Width { get; set; } = 360;
 
         [Parameter]
-        [DefaultValue(240)]
+        [ApiDefaultValue(240)]
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
-        [DefaultValue(10)]
+        [ApiDefaultValue(10)]
         public float Zoom
         {
             get => GetValue<float>(10);
@@ -31,7 +31,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue(19)]
+        [ApiDefaultValue(19)]
         public float MaxZoom
         {
             get => GetValue(DefaultMaxZoom);
@@ -43,7 +43,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue(3)]
+        [ApiDefaultValue(3)]
         public float MinZoom
         {
             get => GetValue(DefaultMinZoom);
@@ -62,7 +62,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue("116.403, 39.917")]
+        [ApiDefaultValue("116.403, 39.917")]
         public GeoPoint Center
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));
@@ -70,7 +70,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [DefaultValue(BaiduMapType.NormalMap)]
+        [ApiDefaultValue(BaiduMapType.NormalMap)]
         public BaiduMapType MapType
         {
             get => GetValue(BaiduMapType.NormalMap);

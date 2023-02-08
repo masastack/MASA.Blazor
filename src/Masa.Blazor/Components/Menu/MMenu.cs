@@ -2,7 +2,7 @@
 {
     public class MMenu : BMenu
     {
-        protected override string AttachSelector => Attach ?? ".m-application";
+        protected override string AttachSelector => ".m-application";
 
         public override IEnumerable<string> DependentSelectors
             => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" });
@@ -21,7 +21,8 @@
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-menu");
+                        .Add("m-menu")
+                        .AddIf("m-menu--attached", () => IsAttachSelf);
                 })
                 .Apply("content", cssBuilder =>
                 {
