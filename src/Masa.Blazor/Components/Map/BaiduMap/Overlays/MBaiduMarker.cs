@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using BlazorComponent.Attributes;
+using System.Drawing;
 using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
@@ -28,11 +29,9 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender)
+            if (firstRender && Parent is not null)
             {
-                if (Parent is not null)
-                    OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
-
+                OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
                 NextTick(async () => await Parent.AddOverlayAsync(this));
             }
         }

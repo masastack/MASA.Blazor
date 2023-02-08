@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using Util.Reflection.Expressions;
+﻿using BlazorComponent.Attributes;
+using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
@@ -12,21 +12,27 @@ namespace Masa.Blazor
         public float Radius { get; set; }
 
         [Parameter]
+        [DefaultValue("#00D3FC")]
         public string StrokeColor { get; set; } = "#00D3FC";
 
         [Parameter]
+        [DefaultValue(0.9f)]
         public float StrokeOpacity { get; set; } = 0.9f;
 
         [Parameter]
+        [DefaultValue(2)]
         public float StrokeWeight { get; set; } = 2;
 
         [Parameter]
+        [DefaultValue(StrokeStyle.Solid)]
         public StrokeStyle StrokeStyle { get; set; } = StrokeStyle.Solid;
 
         [Parameter]
+        [DefaultValue("#00B2D5")]
         public string FillColor { get; set; } = "#00B2D5";
 
         [Parameter]
+        [DefaultValue(0.5f)]
         public float FillOpacity { get; set; } = 0.5f;
 
         [JsonIgnore]
@@ -40,11 +46,9 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender)
+            if (firstRender && Parent is not null)
             {
-                if (Parent is not null)
-                    OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
-
+                OverlayRef = await Parent.Module.ConstructOverlayAsync(this);
                 NextTick(async () => await Parent.AddOverlayAsync(this));
             }
         }

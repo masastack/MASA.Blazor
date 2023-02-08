@@ -258,8 +258,7 @@ namespace Masa.Blazor
             if (_jsMap is null || overlay is null)
                 return;
             
-            if (overlay.OverlayRef is null)
-                overlay.OverlayRef = await Module.ConstructOverlayAsync(overlay);
+            overlay.OverlayRef ??= await Module.ConstructOverlayAsync(overlay);
             
             await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
         }
