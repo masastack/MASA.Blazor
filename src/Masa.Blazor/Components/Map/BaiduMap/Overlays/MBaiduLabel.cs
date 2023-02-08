@@ -3,26 +3,23 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduMarker : BComponentBase, IMapOverlay, IMarker
+    public class MBaiduLabel : BComponentBase, IMapOverlay, ILabel
     {
-        [JsonIgnore]
-        [CascadingParameter(Name = "Parent")]
-        public MBaiduMap Parent { get; set; }
-
-        [JsonIgnore]
-        public IJSObjectReference OverlayRef { get; set; }
+        [Parameter]
+        public string Content { get; set; }
 
         [Parameter]
-        public GeoPoint Point { get; set; }
+        public GeoPoint Position { get; set; }
 
         [Parameter]
         public Size Offset { get; set; }
 
-        [Parameter]
-        public float Rotation { get; set; }
+        [JsonIgnore]
+        public IJSObjectReference OverlayRef { get; set; }
 
-        [Parameter]
-        public string Title { get; set; }
+        [JsonIgnore]
+        [CascadingParameter(Name = "Parent")]
+        public MBaiduMap Parent { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

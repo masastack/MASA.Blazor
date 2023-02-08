@@ -17,6 +17,9 @@
             if (overlay is MBaiduMarker marker)
                 return await InvokeAsync<IJSObjectReference>("constructMarker", marker);
 
+            if (overlay is MBaiduLabel label)
+                return await InvokeAsync<IJSObjectReference>("constructLabel", label);
+
             return null;
         }
 

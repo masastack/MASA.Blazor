@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Attributes;
+﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace Masa.Blazor

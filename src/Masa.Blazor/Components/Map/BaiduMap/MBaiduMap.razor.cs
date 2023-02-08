@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Attributes;
+﻿using System.ComponentModel;
 
 namespace Masa.Blazor
 {
