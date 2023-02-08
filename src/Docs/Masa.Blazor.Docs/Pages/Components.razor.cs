@@ -232,17 +232,9 @@ public partial class Components
         }
     }
 
-    private static string KebabToPascal(string name)
-    {
-        name = name.Trim('-');
-        return string.Join("", name.Split('-').Select(item => char.ToUpper(item[0]) + item.Substring(1)));
-    }
-
     [return: NotNullIfNotNull("name")]
     private static string? FormatName(string? name)
     {
-        if (name is null) return null;
-        name = name.TrimEnd('s');
-        return KebabToPascal(name);
+        return name?.TrimEnd('s').ToPascal();
     }
 }
