@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Attributes;
+﻿using System.ComponentModel;
 
 namespace Masa.Blazor
 {
@@ -6,6 +6,9 @@ namespace Masa.Blazor
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
+
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
         [Parameter]
         [ApiDefaultValue(360)]
@@ -168,6 +171,8 @@ namespace Masa.Blazor
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
                 }, _objRef);
+
+                StateHasChanged();
             }
         }
 
@@ -246,6 +251,32 @@ namespace Masa.Blazor
 
             if (_jsMap is not null)
                 await _jsMap.DisposeAsync();
+        }
+
+        public async Task AddOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
+        {
+            if (_jsMap is null || overlay is null)
+                return;
+            
+            overlay.OverlayRef ??= await Module.ConstructOverlayAsync(overlay);
+            
+            await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
+        }
+
+        public async Task RemoveOverlayAsync<TOverlay>(TOverlay overlay) where TOverlay : IMapOverlay
+        {
+            if (_jsMap is null || overlay is null)
+                return;
+            
+            await _jsMap.InvokeVoidAsync("removeOverlay", overlay.OverlayRef);
+        }
+
+        public async Task ClearOverlaysAsync()
+        {
+            if (_jsMap is null)
+                return;
+            
+            await _jsMap.InvokeVoidAsync("clearOverlays");
         }
     }
 }
