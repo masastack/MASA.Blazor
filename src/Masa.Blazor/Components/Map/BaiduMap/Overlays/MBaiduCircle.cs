@@ -47,10 +47,7 @@ namespace Masa.Blazor
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null)
-            {
-                OverlayRef = await MapRef.Module.ConstructOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this);
                 NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
-            }
         }
 
     }

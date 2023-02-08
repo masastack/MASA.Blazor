@@ -25,6 +25,9 @@
             if (overlay is MBaiduPolyline polyline)
                 return await InvokeAsync<IJSObjectReference>("constructPolyline", polyline);
 
+            if (overlay is MBaiduPolygon polygon)
+                return await InvokeAsync<IJSObjectReference>("constructPolygon", polygon);
+
             return null;
         }
 

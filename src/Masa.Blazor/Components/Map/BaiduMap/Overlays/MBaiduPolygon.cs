@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduPolyline : BComponentBase, IMapOverlay<MBaiduMap>, IPolyline, IStroke
+    public class MBaiduPolygon : BComponentBase, IMapOverlay<MBaiduMap>, IPolygon, IStroke, IFillable
     {
         [Parameter]
         public IEnumerable<GeoPoint> Points { get; set; }
@@ -25,11 +25,12 @@ namespace Masa.Blazor
         public StrokeStyle StrokeStyle { get; set; } = StrokeStyle.Solid;
 
         [Parameter]
-        public bool Geodesic { get; set; }
+        [ApiDefaultValue("blue")]
+        public string FillColor { get; set; } = "blue";
 
         [Parameter]
-        [ApiDefaultValue(true)]
-        public bool Clip { get; set; } = true;
+        [ApiDefaultValue(0.3f)]
+        public float FillOpacity { get; set; } = 0.3f;
 
         [JsonIgnore]
         public IJSObjectReference OverlayRef { get; set; }
@@ -45,6 +46,5 @@ namespace Masa.Blazor
             if (firstRender && MapRef is not null)
                 NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
         }
-
     }
 }
