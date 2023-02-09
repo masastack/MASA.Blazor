@@ -123,8 +123,6 @@ deploy-dev-ydy:
 packer-prd:
   image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
   stage: packer-prd
-  tags:
-    - linux-shell
   only:
     - tags
   script:
@@ -157,8 +155,18 @@ docker-prd:
   only:
     - tags
   script:
+    - rm -rf ./src/BlazorComponent
+    - rm -rf ./src/MASA.Docs
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
+    - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
+  after_script:
+    - git config --global --unset https.proxy
+    - git config --global --unset http.proxy
+    - echo "" >/home/gitlab-runner/.gitconfig
   retry: 2
 
 deploy-prd:
