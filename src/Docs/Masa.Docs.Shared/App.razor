@@ -41,6 +41,18 @@
                     new[] { "Util.Reflection.dll" });
                 lazyLoadedAssemblies.AddRange(assemblies);
             }
+            else if (args.Path.StartsWith("stack"))
+            {
+                var assemblies = await AssemblyLoader.LoadAssembliesAsync(
+                    new[] { "Masa.Stack.Docs.dll" });
+                lazyLoadedAssemblies.AddRange(assemblies);
+            }
+            else if (args.Path.StartsWith("framework"))
+            {
+                var assemblies = await AssemblyLoader.LoadAssembliesAsync(
+                    new[] { "Masa.Framework.Docs.dll" });
+                lazyLoadedAssemblies.AddRange(assemblies);
+            }
         }
         catch (Exception ex)
         {
