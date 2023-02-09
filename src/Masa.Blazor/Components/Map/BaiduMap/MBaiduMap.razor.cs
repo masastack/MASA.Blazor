@@ -245,17 +245,6 @@ namespace Masa.Blazor
             Center = point;
         }
 
-        public async ValueTask DisposeAsync()
-        {
-            _objRef?.Dispose();
-
-            if (_jsMap is not null)
-                await _jsMap.DisposeAsync();
-        }
-
-        public async Task ClearOverlaysAsync()
-            => await _jsMap.TryInvokeVoidAsync("clearOverlays");
-
         public async Task AddOverlayAsync<TOverlay, TMap>(TOverlay overlay)
             where TOverlay : IMapOverlay<TMap>
             where TMap : IMap
@@ -270,5 +259,16 @@ namespace Masa.Blazor
             where TOverlay : IMapOverlay<TMap>
             where TMap : IMap
             => await _jsMap.TryInvokeVoidAsync(() => overlay is not null, "removeOverlay", overlay.OverlayRef);
+        
+        public async Task ClearOverlaysAsync()
+            => await _jsMap.TryInvokeVoidAsync("clearOverlays");
+
+        public async ValueTask DisposeAsync()
+        {
+            _objRef?.Dispose();
+
+            if (_jsMap is not null)
+                await _jsMap.DisposeAsync();
+        }
     }
 }
