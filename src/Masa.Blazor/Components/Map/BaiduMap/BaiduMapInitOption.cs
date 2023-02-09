@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class BaiduMapInitOptions
     {

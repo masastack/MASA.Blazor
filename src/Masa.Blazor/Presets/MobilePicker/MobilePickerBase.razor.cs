@@ -11,7 +11,8 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
     [Parameter]
     public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
 
-    [Parameter] public string Title { get; set; }
+    [Parameter]
+    public string Title { get; set; }
 
     [Parameter]
     public bool Visible
@@ -63,12 +64,20 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
     #endregion
 
     private bool _visible;
+    private Func<bool, Task> _internalValueChanged;
 
     private List<TColumnItemValue> InternalValue { get; set; } = new();
 
-    private Task OnCancel() => HandleVisibleChanged(false);
-
     protected virtual string ClassPrefix { get; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        _internalValueChanged = ValueChanged.HasDelegate ? HandleVisibleChanged : default;
+    }
+
+    private Task OnCancel() => HandleVisibleChanged(false);
 
     protected virtual bool TryConvertInternalValueToValue(List<TColumnItemValue> internalValue, out TValue value)
     {

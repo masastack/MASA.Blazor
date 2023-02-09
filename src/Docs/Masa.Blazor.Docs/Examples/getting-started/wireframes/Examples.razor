@@ -4,12 +4,12 @@
     @foreach (var name in _wireframes)
     {
         <MCol Cols="12" Md="6" Lg="4">
-            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}examples/wireframes/{HandleWireframeName(name)}")">
+            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}examples/wireframes/{name.ToKebab()}")">
                 <AppFigure alt="@($"{name} layout")"
                            AspectRatio="@(16/9d)"
                            Name="@name"
                            Outlined
-                           Src="@($"https://cdn.masastack.com/stack/doc/blazor/wireframes/{HandleWireframeName(name)}.svg")">
+                           Src="@($"https://cdn.masastack.com/stack/doc/blazor/wireframes/{name.ToKebab()}.svg")">
                 </AppFigure>
             </a>
         </MCol>
@@ -21,20 +21,15 @@
     [Inject]
     public NavigationManager Navigation { get; set; } = default!;
 
-    List<string> _wireframes = new List<string>
+    List<string> _wireframes = new()
     {
         "Base",
-        "Extended Toolbar",
-        "System Bar",
+        "ExtendedToolbar",
+        "SystemBar",
         "Inbox",
         "Constrained",
-        "Side Navigation",
-        "Three Column",
+        "SideNavigation",
+        "ThreeColumn",
         "Discord"
     };
-
-    string HandleWireframeName(string name)
-    {
-        return name.ToLower().Replace(" ", "-");
-    }
 }

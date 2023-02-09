@@ -240,8 +240,6 @@ namespace Masa.Blazor
                                 await ShowScroll();
                             }
                         }
-
-                        StateHasChanged();
                     });
 
                     //We will remove this when mixins applicationable finished
@@ -266,14 +264,8 @@ namespace Masa.Blazor
             if (ReactsToRoute && CloseConditional())
             {
                 IsActive = false;
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(false);
-                }
-                else
-                {
-                    StateHasChanged();
-                }
+                await ValueChanged.InvokeAsync(false);
+                await InvokeStateHasChangedAsync();
             }
         }
 
@@ -291,14 +283,8 @@ namespace Masa.Blazor
             }
 
             IsActive = !IsMobile;
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(IsActive);
-            }
-            else
-            {
-                await InvokeStateHasChangedAsync();
-            }
+            await ValueChanged.InvokeAsync(IsActive);
+            await InvokeStateHasChangedAsync();
         }
 
         private Task<int> GetActiveZIndexAsync() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);

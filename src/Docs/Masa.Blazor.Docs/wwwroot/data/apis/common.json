@@ -181,7 +181,7 @@
       "maxWidth": "设定组件的最大宽度。",
       "minHeight": "设定组件的最小高度。",
       "minWidth": "设定组件的最小宽度。",
-      "rounded": "对指定的组件应用 `border-radius` 样式。您可以在 [边框半径页面](/blazor/styles-and-animations/elevation) 获取更多有关信息。",
+      "rounded": "对指定的组件应用 `border-radius` 样式。您可以在 [边框半径页面](/blazor/styles-and-animations/border-radius) 获取更多有关信息。",
       "style": "Html document style",
       "width": "设定组件的宽度。",
       "size": "设置组件的高度和宽度。",

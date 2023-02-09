@@ -8,6 +8,8 @@
         <MCol Cols="5">
             <MTreeview @bind-Active="_active"
                        Items="_items"
+                       TKey="int"
+                       TItem="User"
                        LoadChildren="FetchUsers"
                        Color="warning"
                        Activatable
@@ -194,19 +196,7 @@
     {
         await Task.Delay(1500);
         _users = await HttpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
-        //We can't detect whether items has changed with same object reference,so give us a new object
-        //We may enhance this in the feature
-        _items = new List<User>
-        {
-            new User
-            {
-                Name="Users",
-                Children=_users
-            }
-        };
-
-        //Refresh UI,so we will re-build nodes of the treeview
-        StateHasChanged();
+        item.Children = _users;
     }
 
     public void RandomAvatar()
