@@ -13,22 +13,15 @@
             where TOverlay : IMapOverlay<TMap>
             where TMap : IMap
         {
-            if (overlay is MBaiduCircle circle)
-                return await InvokeAsync<IJSObjectReference>("constructCircle", circle);
-
-            if (overlay is MBaiduMarker marker)
-                return await InvokeAsync<IJSObjectReference>("constructMarker", marker);
-
-            if (overlay is MBaiduLabel label)
-                return await InvokeAsync<IJSObjectReference>("constructLabel", label);
-
-            if (overlay is MBaiduPolyline polyline)
-                return await InvokeAsync<IJSObjectReference>("constructPolyline", polyline);
-
-            if (overlay is MBaiduPolygon polygon)
-                return await InvokeAsync<IJSObjectReference>("constructPolygon", polygon);
-
-            return null;
+            return overlay switch
+            {
+                MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("constructCircle", circle),
+                MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("constructMarker", marker),
+                MBaiduLabel label => await InvokeAsync<IJSObjectReference>("constructLabel", label),
+                MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("constructPolyline", polyline),
+                MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("constructPolygon", polygon),
+                _ => null
+            };
         }
 
     }
