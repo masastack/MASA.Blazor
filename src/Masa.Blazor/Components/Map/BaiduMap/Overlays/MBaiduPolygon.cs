@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduPolygon : BComponentBase, IMapOverlay<MBaiduMap>, IPolygon, IStroke, IFillable
+    public class MBaiduPolygon : MBaiduOverlay, IPolygon, IStroke, IFillable
     {
         [Parameter]
         public IEnumerable<GeoPoint> Points { get; set; }
@@ -33,18 +33,18 @@ namespace Masa.Blazor
         public float FillOpacity { get; set; } = 0.3f;
 
         [JsonIgnore]
-        public IJSObjectReference OverlayRef { get; set; }
+        public override IJSObjectReference OverlayRef { get; set; }
 
         [JsonIgnore]
         [CascadingParameter(Name = "Parent")]
-        public MBaiduMap MapRef { get; set; }
+        public override MBaiduMap MapRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null)
-                NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
+                NextTick(async () => await MapRef.AddOverlayAsync(this));
         }
     }
 }

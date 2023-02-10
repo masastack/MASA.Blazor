@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduCircle : BComponentBase, IMapOverlay<MBaiduMap>, ICircle, IStroke, IFillable
+    public class MBaiduCircle : MBaiduOverlay, ICircle, IStroke, IFillable
     {
         [Parameter]
         public GeoPoint Center { get; set; }
@@ -37,17 +37,17 @@ namespace Masa.Blazor
 
         [JsonIgnore]
         [CascadingParameter(Name = "Parent")]
-        public MBaiduMap MapRef { get; set; }
+        public override MBaiduMap MapRef { get; set; }
 
         [JsonIgnore]
-        public IJSObjectReference OverlayRef { get; set; }
+        public override IJSObjectReference OverlayRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null)
-                NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
+                NextTick(async () => await MapRef.AddOverlayAsync(this));
         }
 
     }

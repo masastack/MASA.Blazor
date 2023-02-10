@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public interface IMap
+    public interface IMap<TOverlay>
     {
         public StringNumber Width { get; set; }
 
@@ -12,13 +12,9 @@
 
         public bool EnableScrollWheelZoom { get; set; }
 
-        public Task AddOverlayAsync<TOverlay, TMap>(TOverlay overlay)
-            where TOverlay : IMapOverlay<TMap>
-            where TMap : IMap;
+        public Task AddOverlayAsync(TOverlay overlay);
 
-        public Task RemoveOverlayAsync<TOverlay, TMap>(TOverlay overlay)
-            where TOverlay : IMapOverlay<TMap>
-            where TMap : IMap;
+        public Task RemoveOverlayAsync(TOverlay overlay);
 
         public Task ClearOverlaysAsync();
 

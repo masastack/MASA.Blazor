@@ -3,11 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduMarker : BComponentBase, IMapOverlay<MBaiduMap>, IMarker
+    public class MBaiduMarker : MBaiduOverlay, IMarker
     {
-        [JsonIgnore]
-        public IJSObjectReference OverlayRef { get; set; }
-
         [Parameter]
         public GeoPoint Point { get; set; }
 
@@ -21,15 +18,18 @@ namespace Masa.Blazor
         public string Title { get; set; }
 
         [JsonIgnore]
+        public override IJSObjectReference OverlayRef { get; set; }
+
+        [JsonIgnore]
         [CascadingParameter(Name = "Parent")]
-        public MBaiduMap MapRef { get; set; }
+        public override MBaiduMap MapRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null)
-                NextTick(async () => await MapRef.AddOverlayAsync<IMapOverlay<MBaiduMap>, MBaiduMap>(this));
+                NextTick(async () => await MapRef.AddOverlayAsync(this));
         }
     }
 }

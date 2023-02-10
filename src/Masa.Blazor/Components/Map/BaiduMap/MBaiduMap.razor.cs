@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap, IAsyncDisposable
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<MBaiduOverlay>, IAsyncDisposable
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
@@ -245,21 +245,21 @@ namespace Masa.Blazor
             Center = point;
         }
 
-        public async Task AddOverlayAsync<TOverlay, TMap>(TOverlay overlay)
-            where TOverlay : IMapOverlay<TMap>
-            where TMap : IMap
+        public async Task AddOverlayAsync(MBaiduOverlay overlay)
         {
-            if (overlay is not null)
-                overlay.OverlayRef ??= await Module.ConstructOverlayAsync<TOverlay, TMap>(overlay);
+            if (overlay is null)
+                return;
 
-            await _jsMap.TryInvokeVoidAsync("addOverlay", overlay.OverlayRef);
+            if (overlay.OverlayRef is null)
+                overlay.OverlayRef = await Module.InitAndAddOverlayAsync(overlay, _jsMap);
+
+            else
+                await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
         }
 
-        public async Task RemoveOverlayAsync<TOverlay, TMap>(TOverlay overlay)
-            where TOverlay : IMapOverlay<TMap>
-            where TMap : IMap
+        public async Task RemoveOverlayAsync(MBaiduOverlay overlay)
             => await _jsMap.TryInvokeVoidAsync(() => overlay is not null, "removeOverlay", overlay.OverlayRef);
-        
+
         public async Task ClearOverlaysAsync()
             => await _jsMap.TryInvokeVoidAsync("clearOverlays");
 
