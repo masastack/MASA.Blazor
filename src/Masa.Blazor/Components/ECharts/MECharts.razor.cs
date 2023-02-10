@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using System.Text.Json;
 
-public partial class MECharts : BDomComponentBase, IAsyncDisposable
+namespace Masa.Blazor;
+
+public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
@@ -40,6 +42,33 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
     [Parameter]
     public string Theme { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnDoubleClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseDown { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseMove { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseUp { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOver { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOut { get; set; }
+
+    [Parameter]
+    public EventCallback OnGlobalOut { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnContextMenu { get; set; }
 
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
@@ -135,7 +164,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
     public async Task InitECharts()
     {
-        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions, this);
 
         await SetOption();
     }

@@ -6,9 +6,14 @@ public class EChartsJSModule : JSModule
     {
     }
 
-    public async ValueTask<IEChartsJSObjectReferenceProxy> Init(ElementReference el, string theme, EChartsInitOptions options)
+    public async ValueTask<IEChartsJSObjectReferenceProxy> Init(
+        ElementReference el,
+        string theme,
+        EChartsInitOptions options,
+        IEChartsJsCallbacks owner
+    )
     {
         var obj = await InvokeAsync<IJSObjectReference>("init", el, theme, options);
-        return new IeChartsJSObjectReferenceProxy(obj);
+        return new EChartsJSObjectReferenceProxy(obj, owner);
     }
 }
