@@ -15,10 +15,10 @@
     <ProjectReference Include="..\Masa.Docs.Shared\Masa.Docs.Shared.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
+  <ItemGroup>
     <BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
-		<BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
-		<BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
-	</ItemGroup>
+	<BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
+	<BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
+  </ItemGroup>
 
 </Project>
