@@ -16,11 +16,9 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
+    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
 		<BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
 		<BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
-		<BlazorWebAssemblyLazyLoad Include="Masa.Stack.Docs.dll" />
-		<BlazorWebAssemblyLazyLoad Include="Masa.Framework.Docs.dll" />
 	</ItemGroup>
 
 </Project>
