@@ -156,7 +156,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                             _eventWaitHandle.Set();
                             time1 = DateTime.MinValue;
                         }
-                    } 
+                    }
                 }
 
                 base.OnScanResult(callbackType, result);
@@ -175,19 +175,29 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private class BluetoothPermissions : Permissions.BasePlatformPermission
         {
-            public override (string androidPermission, bool isRuntime)[] RequiredPermissions =>
-                new List<(string androidPermission, bool isRuntime)>
+            public override (string androidPermission, bool isRuntime)[] RequiredPermissions
+            {
+                get
                 {
-                    (global::Android.Manifest.Permission.AccessFineLocation, true),
-                    (global::Android.Manifest.Permission.Bluetooth, true),
-                    (global::Android.Manifest.Permission.BluetoothAdmin, true),
-                   
-#if ANDROID31_0_OR_GREATER
-                    //(global::Android.Manifest.Permission.BluetoothConnect, true),
-                    //(global::Android.Manifest.Permission.BluetoothScan, true),
-#endif
-                    
-                }.ToArray();
+                    var list = new List<(string androidPermission, bool isRuntime)>
+                    {
+                        
+                    };
+                    if (OperatingSystem.IsAndroidVersionAtLeast(32))
+                    {
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothConnect, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothScan, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothAdvertise, true));
+                    }
+                    else
+                    {
+                        list.Add(new(global::Android.Manifest.Permission.Bluetooth, true));
+                        list.Add(new(global::Android.Manifest.Permission.AccessFineLocation, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothAdmin, true));
+                    }
+                    return list.ToArray();
+                }
+            }
         }
         static Task<bool> PlatformGetAvailability()
         {

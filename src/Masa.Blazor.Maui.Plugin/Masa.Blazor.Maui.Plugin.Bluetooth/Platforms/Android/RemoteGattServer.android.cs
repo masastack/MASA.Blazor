@@ -61,6 +61,7 @@
                 else
                 {
                     _owner.Device.OnGattServerDisconnected();
+                    _owner.Device.Disconnect();
                 }
             }
 

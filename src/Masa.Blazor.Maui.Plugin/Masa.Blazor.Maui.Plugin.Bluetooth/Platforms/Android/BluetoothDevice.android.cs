@@ -47,5 +47,10 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             return _gattServer;
         }
+
+        public void Disconnect()
+        {
+            _gattServer=null;
+        }
     }
 }
