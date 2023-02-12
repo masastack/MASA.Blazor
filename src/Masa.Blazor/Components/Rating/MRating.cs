@@ -114,7 +114,6 @@ namespace Masa.Blazor
                     var ratingItem = CreateProps(itemIndex);
 
                     attrs[nameof(MIcon.Size)] = Size;
-                    attrs[nameof(MIcon.Icon)] = true;
                     attrs[nameof(MIcon.Small)] = Small;
                     attrs[nameof(MIcon.XLarge)] = XLarge;
                     attrs[nameof(MIcon.Large)] = Large;
