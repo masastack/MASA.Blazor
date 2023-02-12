@@ -15,12 +15,30 @@ public class ApiGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+#if DEBUG
+        //if (!Debugger.IsAttached)
+        //{
+        //    Debugger.Launch();
+        //}
+#endif
+
         var provider = context.SyntaxProvider
                               .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetTargetDataModelForGeneration)
                               .Where(u => u != null);
 
         context.RegisterSourceOutput(provider.Collect(), (ctx, componentMetas) =>
         {
+            foreach (var componentMeta in componentMetas)
+            {
+                if (componentMeta is null)
+                {
+                    continue;
+                }
+
+                var sourceText = GenComponentMeta.GetSourceText(componentMeta);
+                ctx.AddSource($"Masa.Blazor.SourceGenerator.Docs.ApiGenerator.{componentMeta.Name}.g.cs", sourceText);
+            }
+
             var sb = new StringBuilder();
             sb.Append(@"namespace Masa.Blazor.Docs
 {");
@@ -68,6 +86,8 @@ public class ApiGenerator : IIncrementalGenerator
 
         public string Type {{ get; set; }} = null!;
 
+        public string? TypeDesc {{ get; set; }}
+
         public string? DefaultValue {{ get; set; }}
 
         public string? Description {{ get; set; }}
@@ -77,17 +97,6 @@ public class ApiGenerator : IIncrementalGenerator
 }}");
 
             ctx.AddSource("Masa.Blazor.SourceGenerator.Docs.ApiGenerator.g.cs", sb.ToString());
-
-            foreach (var componentMeta in componentMetas)
-            {
-                if (componentMeta is null)
-                {
-                    continue;
-                }
-
-                var sourceText = GenComponentMeta.GetSourceText(componentMeta);
-                ctx.AddSource($"Masa.Blazor.SourceGenerator.Docs.ApiGenerator.{componentMeta.Name}.g.cs", sourceText);
-            }
         });
     }
 
@@ -168,8 +177,9 @@ public class ApiGenerator : IIncrementalGenerator
                     }
 
                     var typeText = GetTypeText(type);
+                    var typeDesc = GetTypeDesc(type);
 
-                    var parameterInfo = new ParameterInfo { Name = parameterSymbol.Name, Type = typeText, DefaultValue = defaultValue };
+                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue);
 
                     if (type.Name.StartsWith("RenderFragment"))
                     {
@@ -193,7 +203,7 @@ public class ApiGenerator : IIncrementalGenerator
                     var args = methodSymbol.Parameters.Select(p => $"{GetTypeText(p.Type as INamedTypeSymbol)} {p.Name}");
                     var returnType = GetTypeText(methodSymbol.ReturnType as INamedTypeSymbol);
 
-                    publicMethods.Add(new ParameterInfo { Name = methodSymbol.Name, Type = $"({string.Join(", ", args)}) => {returnType}" });
+                    publicMethods.Add(new ParameterInfo(methodSymbol.Name, $"({string.Join(", ", args)}) => {returnType}"));
                 }
             }
         }
@@ -205,6 +215,40 @@ public class ApiGenerator : IIncrementalGenerator
 
         var typeArguments = type.TypeArguments.Select(t => Keyword(t.Name)).ToList();
         return typeArguments.Any() ? $"{type.Name}<{string.Join(", ", typeArguments)}>" : Keyword(type.Name);
+    }
+
+    private static string? GetTypeDesc(INamedTypeSymbol? type)
+    {
+        if (type is null) return null;
+
+        if (type.TypeKind == TypeKind.Enum)
+        {
+            var count = type.MemberNames.Count() - 2;
+
+            return string.Join(" | ", type.MemberNames.Skip(1).Take(count));
+        }
+        else if (type.TypeKind == TypeKind.Class)
+        {
+            if (type.BaseType is not null && type.BaseType.Name == "OneOfBase")
+            {
+                var typeArguments = type.BaseType.TypeArguments.Select(t => Keyword(t.Name));
+                return $"OneOf<{string.Join(",", typeArguments)}>";
+            }
+            else if (type.Name is not "String" and not "List" and not "Expression")
+            {
+                var typeMemebrs = type.GetTypeMembers();
+                var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
+                    .Select(m =>
+                    {
+                        var type = (m as IPropertySymbol).Type;
+                        return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
+                    }).ToList();
+
+                return "{\r\n    " + string.Join("\r\n    ", properties.Select(p => $"{p.Type} {p.Name}")) + "\r\n}";
+            }
+        }
+
+        return null;
     }
 
     private static string Keyword(string typeName)

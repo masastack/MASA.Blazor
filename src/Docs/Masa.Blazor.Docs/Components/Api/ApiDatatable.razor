@@ -5,63 +5,78 @@
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th style="@GetHeaderStyle(header)">
+                    <div class="emphasis--text subtitle">@I18n.T(header)</div>
+                </th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Items)
+        {
             <tr>
                 @foreach (var header in Headers)
                 {
-                    <th style="@GetHeaderStyle(header)">
-                        <div class="emphasis--text subtitle">@I18n.T(header)</div>
-                    </th>
+                    <td>
+                        @if (header == "name")
+                        {
+                            <span class="emphasis2--text subtitle">
+                                <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
+                                    <BadgeContent>
+                                        <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
+                                    </BadgeContent>
+                                    <ChildContent>
+                                        @item.Name
+                                    </ChildContent>
+                                </MBadge>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="regular--text body">
+                                @if (header == "type")
+                                {
+                                    var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);
+                                    
+                                    <MTooltip Disabled="@noTypeDesc" Top>
+                                        <ActivatorContent>
+                                            <MHighlight Code="@item.Type"
+                                                        Language="csharp"
+                                                        Inline
+                                                        Class="@(noTypeDesc ? "" : "dotted-bottom-border")"
+                                                        IgnoreCodeCssOfTheme
+                                                        @attributes="@context.Attrs">
+                                            </MHighlight>
+                                        </ActivatorContent>
+                                        <ChildContent>
+                                            @item.TypeDesc
+                                        </ChildContent>
+                                    </MTooltip>
+                                }
+                                else if (header == "default")
+                                {
+                                    @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
+                                }
+                                else if (header == "description")
+                                {
+                                    @if (string.IsNullOrWhiteSpace(item.Description))
+                                    {
+                                        @("MISSING DESCRIPTION")
+                                    }
+                                    else
+                                    {
+                                        <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
+                                    }
+                                }
+                            </span>
+                        }
+                    </td>
                 }
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Items)
-            {
-                <tr>
-                    @foreach (var header in Headers)
-                    {
-                        <td>
-                            @if (header == "name")
-                            {
-                                <span class="emphasis2--text subtitle">
-                                    <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
-                                        <BadgeContent>
-                                            <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
-                                        </BadgeContent>
-                                        <ChildContent>
-                                            @item.Name
-                                        </ChildContent>
-                                    </MBadge>
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="regular--text body">
-                                    @if (header == "type")
-                                    {
-                                        @item.Type
-                                    }
-                                    else if (header == "default")
-                                    {
-                                        @item.DefaultValue
-                                    }
-                                    else if (header == "description")
-                                    {
-                                        @if (string.IsNullOrWhiteSpace(item.Description))
-                                        {
-                                            @("MISSING DESCRIPTION")
-                                        }
-                                        else
-                                        {
-                                            <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
-                                        }
-                                    }
-                                </span>
-                            }
-                        </td>
-                    }
-                </tr>
-            }
+        }
         </tbody>
     </MSimpleTable>
 </AppSheet>
@@ -80,7 +95,7 @@
 
     static readonly Dictionary<string, string[]> HeaderMaps = new()
     {
-        { "props", new[] { "name", "type", "default", "description"} },
+        { "props", new[] { "name", "type", "default", "description" } },
         { "methods", new[] { "name", "type" } },
         { "events", new[] { "name", "type" } },
         { "contents", new[] { "name", "type" } }
@@ -98,4 +113,5 @@
         else if (header == "type") return "width:200px;";
         return "";
     }
+
 }
