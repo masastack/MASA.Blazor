@@ -29,7 +29,6 @@ namespace MediaPickSample
             builder.Logging.AddDebug();
 #endif
             builder.Services.AddMasaBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddAliyunStorage(() =>
             {
                 return new AliyunStorageOptions(
