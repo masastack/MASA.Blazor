@@ -107,7 +107,6 @@
         {
             try
             {
-
                 await InvokeAsync(StateHasChanged);
 
                 await _client.PutObjectAsync("xxx", newFileFullPath, fileStream);
