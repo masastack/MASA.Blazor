@@ -1,6 +1,5 @@
 ﻿using Masa.Contrib.Storage.ObjectStorage.Aliyun.Options;
-using MauiAppAgent.PlatformsAndroid;
-using MediaPickSample.Data;
+using MediaPickSample.PlatformsAndroid;
 using MediaPickSample.Service;
 using Microsoft.Extensions.Logging;
 
@@ -40,6 +39,7 @@ namespace MediaPickSample
                 {
                     Sts = new AliyunStsOptions("oss-cn-hangzhou")
                 };
+ 
             });
             return builder.Build();
         }

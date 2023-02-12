@@ -2,12 +2,11 @@
 using Android.Provider;
 using AndroidX.Activity.Result;
 using AndroidX.Activity.Result.Contract;
-using MauiAppAgent.PlatformsAndroid;
-using MediaPickSample;
+using MediaPickSample.PlatformsAndroid;
 using MediaPickSample.Service;
 
 [assembly: Dependency(typeof(AndroidPhotoPickerService))]
-namespace MauiAppAgent.PlatformsAndroid
+namespace MediaPickSample.PlatformsAndroid
 {
     public class AndroidPhotoPickerService : IPhotoPickerService
     {
@@ -66,9 +65,9 @@ namespace MauiAppAgent.PlatformsAndroid
         }
         public  Task<Dictionary<string, string>> GetImageAsync3()
         {
-            Intent intent = new Intent(Intent.ActionPick, null);
+            Intent intent = new Intent(Intent.ActionPick);
             intent.SetDataAndType(MediaStore.Images.Media.ExternalContentUri, "image/*");
-            intent.PutExtra(Intent.ExtraAllowMultiple, true);
+            intent.PutExtra(Intent.ExtraAllowMultiple,true);
             MainActivity.Instance.StartActivityForResult(Intent.CreateChooser(intent, "Select Picture"),
                 MainActivity.PickImageId);
             MainActivity.Instance.PickImageTaskCompletionSource = new TaskCompletionSource<Dictionary<string, string>>();

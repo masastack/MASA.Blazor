@@ -60,7 +60,7 @@ namespace MediaPickSample
             Dictionary<string, string> fileList = new Dictionary<string, string>();
             for (int i = 0; i < list.Count; i++)
             {
-                var imageUri = list[0];
+                var imageUri = list[i];
                 var documentFile = DocumentFile.FromSingleUri(Instance, imageUri);
                 if (documentFile != null)
                 {
@@ -90,7 +90,7 @@ namespace MediaPickSample
                         var uris = new List<Android.Net.Uri>();
                         for (int i = 0; i < list.Count; i++)
                         {
-                            uris.Add((Android.Net.Uri)list[0]);
+                            uris.Add((Android.Net.Uri)list[i]);
                         }
 
                         var fileList = Instance.GetImageDicFromUris(uris);
