@@ -18,13 +18,6 @@ public class ApiGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-#if DEBUG
-        if (!Debugger.IsAttached)
-        {
-            Debugger.Launch();
-        }
-#endif
-
         var provider = context.SyntaxProvider
                               .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetTargetDataModelForGeneration)
                               .Where(u => u != null);
@@ -248,42 +241,55 @@ public class ApiGenerator : IIncrementalGenerator
             return Keyword(t.Name);
         }).ToList();
 
-        return typeArguments.Any() ? $"{type.Name}<{string.Join(", ", typeArguments)}>" : Keyword(type.Name);
+        if (typeArguments.Count == 0)
+        {
+            return Keyword(type.Name);
+        }
+
+        if (type.Name == "Nullable")
+        {
+            return $"{typeArguments.First()}?";
+        }
+
+        return $"{type.Name}<{string.Join(", ", typeArguments)}>";
     }
 
     private static string? GetTypeDesc(INamedTypeSymbol? type)
     {
         if (type is null) return null;
 
+        var containingNamespace = type.ContainingNamespace.ToString();
+
+        var isCustomType = containingNamespace is not null && (containingNamespace.StartsWith("BlazorComponent") || containingNamespace.StartsWith("Masa.Blazor"));
+
         if (type.TypeKind == TypeKind.Enum)
         {
             var count = type.MemberNames.Count() - 2;
 
-            return string.Join(" | ", type.MemberNames.Skip(1).Take(count));
+            return "enum: " + string.Join(" | ", type.MemberNames.Skip(1).Take(count));
         }
         else if (type.Name != "String" && (type.IsReferenceType || type.TypeKind == TypeKind.Struct))
         {
             if (type.BaseType is not null && type.BaseType.Name == "OneOfBase")
             {
                 var typeArguments = type.BaseType.TypeArguments.Select(t => Keyword(t.Name));
-                return type.Name + " →\r\n" + $"OneOf<{string.Join(",", typeArguments)}>";
+                return type.Name + " → " + $"OneOf<{string.Join(",", typeArguments)}>";
             }
             else if (type.IsGenericType)
             {
                 string desc = string.Empty;
 
-                var containingNamespace = type.ContainingNamespace.ToString();
-
-                //var isCustomType = false;
-                var isCustomType = containingNamespace is not null && (containingNamespace == "BlazorComponent" || containingNamespace.StartsWith("BlazorComponent"));
-
                 if (isCustomType)
                 {
-                    var typeDesc = GetTypeDesc(type);
+                    var text = GetClassTypeText(type);
+                    if (text is not null)
+                    {
+                        return type.Name + "\r\n" + text;
+                    }
                 }
                 else
                 {
-                    var typeArguments = type.TypeArguments.Where(t => t.TypeKind == TypeKind.Class && type.Name != "String").ToList();
+                    var typeArguments = type.TypeArguments.Where(t => (t.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Enum) && type.Name != "String").ToList();
 
                     foreach (var item in typeArguments)
                     {
@@ -294,7 +300,7 @@ public class ApiGenerator : IIncrementalGenerator
                 }
                 return desc;
             }
-            else
+            else if (isCustomType)
             {
                 var text = GetClassTypeText(type);
                 if (text is not null)
@@ -308,11 +314,15 @@ public class ApiGenerator : IIncrementalGenerator
 
         static string? GetClassTypeText(INamedTypeSymbol? type)
         {
-            var typeMemebrs = type.GetTypeMembers();
             var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
                 .Select(m =>
                 {
                     var type = (m as IPropertySymbol).Type;
+                    if (type.TypeKind == TypeKind.TypeParameter)
+                    {
+                        return (m.Name, Type: type.Name);
+                    }
+
                     return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
                 }).ToList();
 
