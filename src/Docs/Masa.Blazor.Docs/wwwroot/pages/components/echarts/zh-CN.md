@@ -1,7 +1,7 @@
 ---
 title: ECharts（图表）
 desc: "[ECharts](https://echarts.apache.org/examples/zh/index.html)"
-tag: "Js代理"
+tag: "JS代理"
 ---
 
 ## 使用
