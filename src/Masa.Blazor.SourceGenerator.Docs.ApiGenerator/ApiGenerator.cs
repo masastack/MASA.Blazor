@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,16 +11,18 @@ namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
 public class ApiGenerator : IIncrementalGenerator
 {
     private const string BlazorParameterAttributeName = "ParameterAttribute";
-    private const string DefaultValueAttributeName = "DefaultValueAttribute";
-    private const string PublicMethodAttributeName = "PublicMethodAttribute";
+    private const string DefaultValueAttributeName = "ApiDefaultValueAttribute";
+    private const string PublicMethodAttributeName = "ApiPublicMethodAttribute";
+
+    private static Dictionary<string, string> s_typeDescCache = new();
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
 #if DEBUG
-        //if (!Debugger.IsAttached)
-        //{
-        //    Debugger.Launch();
-        //}
+        if (!Debugger.IsAttached)
+        {
+            Debugger.Launch();
+        }
 #endif
 
         var provider = context.SyntaxProvider
@@ -177,7 +180,15 @@ public class ApiGenerator : IIncrementalGenerator
                     }
 
                     var typeText = GetTypeText(type);
-                    var typeDesc = GetTypeDesc(type);
+
+                    if (!s_typeDescCache.TryGetValue(typeText, out var typeDesc))
+                    {
+                        typeDesc = GetTypeDesc(type);
+                        if (!string.IsNullOrWhiteSpace(typeDesc))
+                        {
+                            s_typeDescCache.Add(typeText, typeDesc!);
+                        }
+                    }
 
                     var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue);
 
@@ -213,7 +224,30 @@ public class ApiGenerator : IIncrementalGenerator
     {
         if (type is null) return string.Empty;
 
-        var typeArguments = type.TypeArguments.Select(t => Keyword(t.Name)).ToList();
+        var typeArguments = type.TypeArguments.Select(t =>
+        {
+            if (t is INamedTypeSymbol namedType)
+            {
+                if (namedType.IsTupleType)
+                {
+                    var fields = namedType.TupleElements.Select(f =>
+                    {
+                        var fieldType = GetTypeText(f.Type as INamedTypeSymbol);
+                        var fieldName = f.Name;
+                        return $"{fieldType} {fieldName}";
+                    });
+
+                    return "(" + string.Join(", ", fields) + ")";
+                }
+                else if (namedType.IsGenericType)
+                {
+                    return GetTypeText(namedType);
+                }
+            }
+
+            return Keyword(t.Name);
+        }).ToList();
+
         return typeArguments.Any() ? $"{type.Name}<{string.Join(", ", typeArguments)}>" : Keyword(type.Name);
     }
 
@@ -227,28 +261,68 @@ public class ApiGenerator : IIncrementalGenerator
 
             return string.Join(" | ", type.MemberNames.Skip(1).Take(count));
         }
-        else if (type.TypeKind == TypeKind.Class)
+        else if (type.Name != "String" && (type.IsReferenceType || type.TypeKind == TypeKind.Struct))
         {
             if (type.BaseType is not null && type.BaseType.Name == "OneOfBase")
             {
                 var typeArguments = type.BaseType.TypeArguments.Select(t => Keyword(t.Name));
-                return $"OneOf<{string.Join(",", typeArguments)}>";
+                return type.Name + " →\r\n" + $"OneOf<{string.Join(",", typeArguments)}>";
             }
-            else if (type.Name is not "String" and not "List" and not "Expression")
+            else if (type.IsGenericType)
             {
-                var typeMemebrs = type.GetTypeMembers();
-                var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
-                    .Select(m =>
-                    {
-                        var type = (m as IPropertySymbol).Type;
-                        return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
-                    }).ToList();
+                string desc = string.Empty;
 
-                return "{\r\n    " + string.Join("\r\n    ", properties.Select(p => $"{p.Type} {p.Name}")) + "\r\n}";
+                var containingNamespace = type.ContainingNamespace.ToString();
+
+                //var isCustomType = false;
+                var isCustomType = containingNamespace is not null && (containingNamespace == "BlazorComponent" || containingNamespace.StartsWith("BlazorComponent"));
+
+                if (isCustomType)
+                {
+                    var typeDesc = GetTypeDesc(type);
+                }
+                else
+                {
+                    var typeArguments = type.TypeArguments.Where(t => t.TypeKind == TypeKind.Class && type.Name != "String").ToList();
+
+                    foreach (var item in typeArguments)
+                    {
+                        var itemTypeDesc = GetTypeDesc(item as INamedTypeSymbol);
+                        desc += itemTypeDesc;
+                    }
+
+                }
+                return desc;
+            }
+            else
+            {
+                var text = GetClassTypeText(type);
+                if (text is not null)
+                {
+                    return type.Name + "\r\n" + text;
+                }
             }
         }
 
         return null;
+
+        static string? GetClassTypeText(INamedTypeSymbol? type)
+        {
+            var typeMemebrs = type.GetTypeMembers();
+            var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
+                .Select(m =>
+                {
+                    var type = (m as IPropertySymbol).Type;
+                    return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
+                }).ToList();
+
+            if (properties.Count == 0)
+            {
+                return null;
+            }
+
+            return "{\r\n    " + string.Join("\r\n    ", properties.Select(p => $"{p.Type} {p.Name}")) + "\r\n}";
+        }
     }
 
     private static string Keyword(string typeName)
@@ -265,6 +339,7 @@ public class ApiGenerator : IIncrementalGenerator
             nameof(Double) => "double",
             nameof(Int32) => "int",
             nameof(Int64) => "long",
+            nameof(Object) => "object",
             _ => typeName
         };
     }

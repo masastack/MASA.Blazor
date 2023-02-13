@@ -431,9 +431,7 @@ default-app-markup {
     margin-bottom: 16px;
 }
 
-.dotted-bottom-border {
-    border-bottom-width: 1px;
-    border-bottom-style: dotted;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+.tooltip-code {
+    border-width: 1px;
+    border-style: dashed;
 }
