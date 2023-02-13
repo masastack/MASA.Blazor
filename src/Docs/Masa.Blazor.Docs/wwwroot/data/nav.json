@@ -137,6 +137,7 @@
       "infinite-scroll",
       "lists",
       "markdowns",
+      "markdown-parsers",
       "menus",
       {
         "title": "mobiles",
@@ -179,6 +180,7 @@
       "snackbars",
       "steppers",
       "subheaders",
+      "syntax-highlights",
       {
         "title": "tables",
         "group": "components",

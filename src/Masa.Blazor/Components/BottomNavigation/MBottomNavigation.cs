@@ -187,9 +187,16 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
             return;
         }
 
-        var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
+        if (IsActive)
+        {
+            var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
 
-        MasaBlazor.Application.Bottom = rect.ClientHeight;
+            MasaBlazor.Application.Bottom = rect.ClientHeight;
+        }
+        else
+        {
+            MasaBlazor.Application.Bottom = 0;
+        }
     }
 
     public async ValueTask DisposeAsync()
