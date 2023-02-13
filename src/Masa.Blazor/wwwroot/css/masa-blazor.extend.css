@@ -748,6 +748,15 @@ input[type=number] {
     opacity: .9;
 }
 
+/* markdown-it */
+.m-markdown-it code {
+    display: inline-block;
+}
+
+.m-code-highlight__code {
+    display: inline-block;
+}
+
 /* i18n */
 .m-i18n {
     white-space: nowrap;

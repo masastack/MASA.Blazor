@@ -200,7 +200,7 @@ ul:not([class]), ol:not([class]) {
     right: 24px;
 }
 
-.m-application code:not(.m-code-highlight__code) {
+.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
     background-color: #f0f3f9 !important;
     color: #1B2559;
 }
