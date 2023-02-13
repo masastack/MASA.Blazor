@@ -172,6 +172,8 @@ docker-prd:
 deploy-prd:
   image: portainer/kubectl-shell
   stage: deploy-prd
+  tags:
+    - linux-shell
   only:
     - tags
   script:
