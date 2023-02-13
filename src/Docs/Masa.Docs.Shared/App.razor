@@ -29,13 +29,13 @@
     {
         try
         {
-            if (args.Path == "components/image-captcha")
+            if (args.Path == "blazor/components/image-captcha")
             {
                 var assemblies = await AssemblyLoader.LoadAssembliesAsync(
                     new[] { "SkiaSharp.dll", "SkiaSharp.Views.Blazor.dll" });
                 lazyLoadedAssemblies.AddRange(assemblies);
             }
-            else if (args.Path == "components/forms")
+            else if (args.Path == "blazor/components/forms")
             {
                 var assemblies = await AssemblyLoader.LoadAssembliesAsync(
                     new[] { "Util.Reflection.dll" });

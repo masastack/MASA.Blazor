@@ -1,11 +1,15 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
+@{
+    RenderFragment prependIconContent = string.IsNullOrWhiteSpace(Item?.Icon) ? null : @<MIcon Color="primary">@Item.Icon</MIcon>;
+}
+
 <MListGroup Group="@group"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup"
-            @ref="_listGroup">
+            PrependIconContent="prependIconContent">
     <ActivatorContent>
         <NavItemContent Item="Item" />
     </ActivatorContent>
@@ -43,8 +47,6 @@
     [Parameter]
     public bool SubGroup { get; set; }
 
-    private MListGroup? _listGroup;
-
     private List<string> group = new();
 
     protected override void OnInitialized()
@@ -52,23 +54,6 @@
         base.OnInitialized();
 
         group = GenGroup(Item.Children);
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (string.IsNullOrWhiteSpace(Item?.Icon))
-        {
-            _listGroup.PrependIconContent = null;
-        }
-        else
-        {
-            _listGroup.PrependIconContent = __builder =>
-            {
-                <MIcon Color="primary">@Item.Icon</MIcon>
-            };
-        }
     }
 
     List<string> GenGroup(List<TItem>? items)

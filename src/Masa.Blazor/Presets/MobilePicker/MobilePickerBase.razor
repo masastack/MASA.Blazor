@@ -5,10 +5,8 @@
 
 <MBottomSheet ContentClass="@($"{ClassPrefix}__content")"
               Value="Visible"
-              ValueChanged="HandleVisibleChanged">
-    <ActivatorContent>
-        @ActivatorContent?.Invoke(context)
-    </ActivatorContent>
+              ValueChanged="@_internalValueChanged"
+              ActivatorContent="ActivatorContent">
     <ChildContent>
         <MSheet Class="d-flex justify-space-between align-center">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>

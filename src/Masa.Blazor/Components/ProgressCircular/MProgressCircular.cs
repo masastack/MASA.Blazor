@@ -48,7 +48,8 @@
                 {
                     styleBuilder
                         .AddHeight(Size)
-                        .AddWidth(Size);
+                        .AddWidth(Size)
+                        .AddTextColor(Color);
                 })
                 .Apply("svg", styleAction: styleBuilder =>
                 {

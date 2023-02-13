@@ -1,7 +1,12 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
+    public class MIcon : BIcon, ISizeable
     {
+        /// <summary>
+        /// Attention! End with a space
+        /// </summary>
+        private static string[] s_arrFa5Prefix = new[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
+
         private readonly Dictionary<string, string> _sizeMap = new()
         {
             { nameof(XSmall), "12px" },
@@ -11,11 +16,6 @@
             { nameof(Large), "36px" },
             { nameof(XLarge), "40px" },
         };
-
-        /// <summary>
-        /// Attention! End with a space
-        /// </summary>
-        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
 
         /// <summary>
         /// 36px
@@ -82,10 +82,19 @@
                         .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
-                        .AddTextColor(Color, () => IsActive)
-                        .AddFirstIf((() => Icon, () => _arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
-                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-")),
-                            (() => $"material-icons", () => !string.IsNullOrWhiteSpace(NewChildren)));
+                        .AddTextColor(Color, () => IsActive);
+
+                    if (IconType == IconType.Webfont && Icon is not null)
+                    {
+                        cssBuilder.AddFirstIf(
+                            (() => Icon, () => s_arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
+                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-"))
+                        );
+                    }
+                    else if (IconType == IconType.WebfontNoPseudo)
+                    {
+                        cssBuilder.Add("material-icons");
+                    }
                 }, styleBuilder =>
                 {
                     styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);
@@ -105,18 +114,6 @@
                                 .Add($"width:{size}");
                         }
                     });
-
-            AbstractProvider
-                .Apply(typeof(BButtonIconSlot<>), typeof(BButtonIconSlot<MIcon>))
-                .Apply(typeof(BFontIconSlot<>), typeof(BFontIconSlot<MIcon>))
-                .Apply(typeof(BSvgIconSlot<>), typeof(BSvgIconSlot<MIcon>));
-
-            SvgAttrs = new()
-            {
-                { "viewBox", "0 0 24 24" },
-                { "role", "img" },
-                { "aria-hidden", "true" }
-            };
         }
     }
 }

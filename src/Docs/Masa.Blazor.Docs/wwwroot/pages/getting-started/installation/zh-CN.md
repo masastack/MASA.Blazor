@@ -117,5 +117,5 @@ builder.Services.AddMasaBlazor();
 
 ## 使用
 
-参考官方文档[组件](https://masa-blazor-docs-dev.lonsid.cn/components/application),加入相关组件。
+参考官方文档[组件](https://docs.masastack.com/blazor/components/application),加入相关组件。
 `dotnet run`启动项目即可看到 MasaBlazor 效果。

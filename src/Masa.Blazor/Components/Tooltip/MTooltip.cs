@@ -5,7 +5,7 @@
         [Parameter]
         public string ContentStyle { get; set; }
 
-        protected override string AttachSelector => Attach ?? ".m-application";
+        protected override string AttachSelector => ".m-application";
 
         ElementReference ITooltip.ContentElement
         {
@@ -29,7 +29,7 @@
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--bottom", () => Bottom)
                         .AddIf($"{prefix}--left", () => Left)
-                        .AddIf($"{prefix}--attached", () => Attach != null);
+                        .AddIf($"{prefix}--attached", () => Attach is not { AsT1: true });
                 })
                 .Apply("content", cssBuilder =>
                 {

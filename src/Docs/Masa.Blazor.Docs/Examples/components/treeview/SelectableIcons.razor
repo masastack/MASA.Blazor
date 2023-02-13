@@ -17,6 +17,8 @@
                 <MTreeview
                     @bind-Value="tree"
                     LoadChildren="Fetch"
+                    TKey="string"
+                    TItem="Item"
                     Items="items"
                     ItemKey="item => item.Id"
                     ItemText="item => item.Name"
@@ -146,8 +148,6 @@
             types.Sort();
 
             _itemsChanged = true;
-
-            StateHasChanged();
         }
     }
 

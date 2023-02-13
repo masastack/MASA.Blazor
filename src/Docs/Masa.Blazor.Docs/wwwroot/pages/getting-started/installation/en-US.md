@@ -114,6 +114,6 @@ update `Shared/MainLayout.razor` file，set MApp as root element：
 ```
 ## Use
 
-Refer to official documents [Component](https://masa-blazor-docs-dev.lonsid.cn/components/application),Add related components。
+Refer to official documents [Component](https://docs.masastack.com/blazor/components/application),Add related components。
 `dotnet run` start project Preview the MasaBlazor。
 

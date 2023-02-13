@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection.Metadata;
+using BlazorComponent.Attributes;
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -16,7 +17,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     [Parameter]
     public override string AppendIcon { get; set; } = "mdi-menu-down";
 
-    //TODO:Attach
+    [Parameter]
+    [ApiDefaultValue(false)]
+    public StringBoolean? Attach { get; set; } = false;
 
     [Parameter]
     public bool CacheItems { get; set; }
@@ -303,6 +306,18 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
     }
 
+    private StringBoolean? GetMenuAttach()
+    {
+        if (Attach is null) return null;
+
+        if ((Attach.IsT0 && string.IsNullOrWhiteSpace(Attach.AsT0)) || (Attach.IsT1 && Attach.AsT1))
+        {
+            return Ref.GetSelector();
+        }
+
+        return Attach;
+    }
+
     protected virtual async Task OnMenuAfterShowContent(bool isLazyContent)
     {
         if (isLazyContent)
@@ -432,6 +447,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                     IsMenuActive = v;
                     IsFocused = v;
                 });
+                attrs[nameof(MMenu.Attach)] = GetMenuAttach();
                 attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                 attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                 attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;

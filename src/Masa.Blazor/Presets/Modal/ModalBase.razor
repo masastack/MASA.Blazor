@@ -1,17 +1,15 @@
 ﻿@namespace Masa.Blazor.Presets
 
 <MDialog Value="Value"
-         ValueChanged="InternalValueChanged"
+         ValueChanged="_internalValueChanged"
          ContentClass="@Class"
          MaxWidth="@MaxWidth"
          Persistent="Persistent"
          Scrollable
          Transition="@Transition"
          Width="@Width"
+         ActivatorContent="@ActivatorContent"
          @ref="Dialog">
-    <ActivatorContent>
-        @ActivatorContent?.Invoke(context)
-    </ActivatorContent>
     <ChildContent>
         <MCard Class="@ContentClass"
                Style="@ContentStyle"
