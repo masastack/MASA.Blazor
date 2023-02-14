@@ -1,4 +1,0 @@
-﻿<MAppBar>
-    <MAppBarNavIcon></MAppBarNavIcon>
-</MAppBar>
-
