@@ -1,0 +1,86 @@
+﻿{
+  "Title": "MOtpInput",
+  "Components": [
+    "OTP input"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Length",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Plain",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Type",
+      "Type": "OtpInputType",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnFinish",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+﻿<div>
+    <MResponsive MaxWidth="400" Class="mx-auto mb-4">
+        <MTextField @bind-Value="_overscanCount"  Type="number" TValue="int" Label="Total OverscanCount">
+        </MTextField>
+    </MResponsive>
+
+    <MCard Elevation=6 MaxWidth=400 Class="mx-auto">
+        <MVirtualScroll Height=300 OverscanCount=@_overscanCount ItemHeight=64 Items="Items">
+            <ItemContent>
+                <MListItem>
+
+                    <MListItemAction>
+                        <MButton Fab Small Depressed Color="primary">
+                            @context
+                        </MButton>
+                    </MListItemAction>
+
+                    <MListItemContent>
+                        <MListItemTitle>
+                            User Database Record <strong>ID @context</strong>
+                        </MListItemTitle>
+                    </MListItemContent>
+
+                    <MListItemAction>
+                        <MIcon Small>
+                            mdi-open-in-new
+                        </MIcon>
+                    </MListItemAction>
+
+                </MListItem>
+
+                <MDivider></MDivider>
+
+            </ItemContent>
+        </MVirtualScroll>
+    </MCard>
+</div>
+
+@code
+{
+    int _overscanCount = 0;
+
+    int _length = 7000;
+
+    int[] Items
+    {
+        get
+        {
+            int[] array = new int[_length];
+            for (var i = 0; i < _length; i++)
+            {
+                array[i] = i + 1;
+            }
+            return array;
+        }
+    }
+}

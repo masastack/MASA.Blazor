@@ -1,0 +1,92 @@
+﻿<MCard Class="mx-auto" MaxWidth="500">
+    <MCardTitle Class="text-h6 font-weight-regular justify-space-between">
+        <span>@currentTitle</span>
+        <MAvatar Color="primary lighten-2" Class="subheading white--text" Size="24">@step</MAvatar>
+    </MCardTitle>
+
+    <MWindow @bind-Value="Step">
+        <MWindowItem Value="1">
+            <MCardText>
+                <MTextField Label="Email" @bind-Value="@email"></MTextField>
+                <span class="text-caption grey--text text--darken-1">
+                    This is the email you will use to login to your Masa.Blazor account
+                </span>
+            </MCardText>
+        </MWindowItem>
+
+        <MWindowItem Value="2">
+            <MCardText>
+                <MTextField
+                    TValue="string"
+                    Label="Password"
+                    Type="password">
+                </MTextField>
+                <MTextField
+                    TValue="string"
+                    Label="Confirm Password"
+                    Type="password">
+                </MTextField>
+                <span class="text-caption grey--text text--darken-1">
+                    Please enter a password for your account
+                </span>
+            </MCardText>
+        </MWindowItem>
+
+        <MWindowItem Value="3">
+            <div class="pa-4 text-center">
+                <MImage
+                    Class="mb-4"
+                    Contain
+                    Height="25"
+                    Src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png">
+                </MImage>
+                <h3 class="text-h6 font-weight-light mb-2">
+                    Welcome to MASA Blazor
+                </h3>
+                <span class="text-caption grey--text">Thanks for signing up!</span>
+            </div>
+        </MWindowItem>
+    </MWindow>
+
+    <MDivider></MDivider>
+
+    <MCardActions>
+        <MButton
+            Disabled="@(step == 1)"
+            Text
+            OnClick="() => step--">
+            Back
+        </MButton>
+        <MSpacer></MSpacer>
+        <MButton
+            Disabled="@(step == 3)"
+            Color="primary"
+            Depressed
+            OnClick="() => step++">
+            Next
+        </MButton>
+    </MCardActions>
+</MCard>
+
+@code {
+
+    string email = "john@masablazor.com";
+    int step = 1;
+
+    StringNumber Step
+    {
+        get => step;
+        set => step = value.ToInt32();
+    }
+
+    public string currentTitle
+    {
+        get => step switch
+        {
+            1 => "Sign-Up",
+            2 => "Create a password",
+            _ => "Account Created"
+            };
+    }
+
+}

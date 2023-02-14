@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Autocomplete\**" />
+    <Compile Remove="ButtonGroup\**" />
+    <Compile Remove="Cascader\**" />
+    <Compile Remove="Col\**" />
+    <Compile Remove="DataIterator\**" />
+    <Compile Remove="Icon\**" />
+    <Compile Remove="ListItemGroup\**" />
+    <Compile Remove="Row\**" />
+    <Compile Remove="SlideGroup\**" />
+    <Compile Remove="Table\**" />
+    <Compile Remove="TimePicker\**" />
+    <Compile Remove="Upload\**" />
+    <Compile Remove="Window\**" />
+    <EmbeddedResource Remove="Autocomplete\**" />
+    <EmbeddedResource Remove="ButtonGroup\**" />
+    <EmbeddedResource Remove="Cascader\**" />
+    <EmbeddedResource Remove="Col\**" />
+    <EmbeddedResource Remove="DataIterator\**" />
+    <EmbeddedResource Remove="Icon\**" />
+    <EmbeddedResource Remove="ListItemGroup\**" />
+    <EmbeddedResource Remove="Row\**" />
+    <EmbeddedResource Remove="SlideGroup\**" />
+    <EmbeddedResource Remove="Table\**" />
+    <EmbeddedResource Remove="TimePicker\**" />
+    <EmbeddedResource Remove="Upload\**" />
+    <EmbeddedResource Remove="Window\**" />
+    <None Remove="Autocomplete\**" />
+    <None Remove="ButtonGroup\**" />
+    <None Remove="Cascader\**" />
+    <None Remove="Col\**" />
+    <None Remove="DataIterator\**" />
+    <None Remove="Icon\**" />
+    <None Remove="ListItemGroup\**" />
+    <None Remove="Row\**" />
+    <None Remove="SlideGroup\**" />
+    <None Remove="Table\**" />
+    <None Remove="TimePicker\**" />
+    <None Remove="Upload\**" />
+    <None Remove="Window\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bunit" Version="1.2.49" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+  </ItemGroup>
+
+</Project>

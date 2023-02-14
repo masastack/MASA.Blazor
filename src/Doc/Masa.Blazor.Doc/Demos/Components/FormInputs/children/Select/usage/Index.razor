@@ -1,0 +1,66 @@
+<MRow>
+    <MCol Cols="6">
+        <MSelect @bind-Value="@value1"
+                 Label="Standard"
+                 Items="@items"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value">
+        </MSelect>
+    </MCol>
+    <MCol Cols="6">
+        <MSelect @bind-Value="@value2"
+                 Items="@items"
+                 Label="Filled style"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value"
+                 Filled>
+        </MSelect>
+    </MCol>
+
+    <MCol Cols="6">
+        <MSelect @bind-Value="@value3"
+                 Label="Outlined style"
+                 Outlined
+                 Items="@items"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value">
+        </MSelect>
+    </MCol>
+    <MCol Cols="6">
+        <MSelect @bind-Value="@value4"
+                 Label="Solo style"
+                 Solo
+                 Items="@items"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value">
+        </MSelect>
+    </MCol>
+</MRow>
+
+@code {
+    private string value1;
+    private string value2;
+    private string value3;
+    private string value4;
+
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+
+    List<Item> items = new()
+    {
+        new Item("Foo", "1"),
+        new Item("Bar", "2"),
+        new Item("Fizz", "3"),
+        new Item("Buzz", "4"),
+    };
+
+}

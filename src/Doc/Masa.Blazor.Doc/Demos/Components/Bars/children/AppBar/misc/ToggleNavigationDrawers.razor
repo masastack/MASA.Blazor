@@ -1,0 +1,43 @@
+﻿<MCard
+    Class="mx-auto overflow-hidden"
+    Height="400">
+    <MAppBar
+        Color="deep-purple"
+        Dark>
+        <MAppBarNavIcon @onclick="() => drawer = true"></MAppBarNavIcon>
+
+        <MToolbarTitle>Title</MToolbarTitle>
+    </MAppBar>
+
+    <MNavigationDrawer
+        @bind-Value="drawer"
+        Absolute
+        Temporary>
+        <MList
+            Nav
+            Dense>
+            <MListItemGroup
+                @bind-Value="group"
+                ActiveClass="deep-purple--text text--accent-4">
+                <MListItem>
+                    <MListItemIcon>
+                        <MIcon>mdi-home</MIcon>
+                    </MListItemIcon>
+                    <MListItemTitle>Home</MListItemTitle>
+                </MListItem>
+
+                <MListItem>
+                    <MListItemIcon>
+                        <MIcon>mdi-account</MIcon>
+                    </MListItemIcon>
+                    <MListItemTitle>Account</MListItemTitle>
+                </MListItem>
+            </MListItemGroup>
+        </MList>
+    </MNavigationDrawer>
+</MCard>
+
+@code {
+    bool drawer;
+    StringNumber group;
+}

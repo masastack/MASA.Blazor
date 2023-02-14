@@ -1,0 +1,143 @@
+﻿@using System.Timers;
+@using Timer = System.Timers.Timer;
+
+<MCard Class="mx-auto" MaxWidth="500">
+    <MToolbar Flat Color="transparent">
+        <MAppBarNavIcon></MAppBarNavIcon>
+        <MToolbarTitle>Photo Info</MToolbarTitle>
+        <MSpacer></MSpacer>
+        <MButton Icon OnClick="()=> _search.InputElement.FocusAsync()">
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MContainer Class="py-0">
+        <MRow Align="AlignTypes.Center" Justify="JustifyTypes.Start">
+            @foreach (var item in Selections())
+            {
+                <MCol Class="shrink" Id="@item.Text">
+                    <MChip Disabled="loading" Close OnCloseClick="() => Selected?.Remove(Selected.FirstOrDefault(x => x.Text == item.Text))">
+                        <MIcon Left>@item.Icon</MIcon>
+                        @item.Text
+                    </MChip>
+                </MCol>
+            }
+            @if (!allSelected())
+            {
+                <MCol Cols="12">
+                    <MTextField @bind-Value="search" FullWidth HideDetails="true" Label="Search" SingleLine @ref="_search"></MTextField>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+
+    @if (allSelected())
+    {
+        <MDivider></MDivider>
+    }
+
+    <MList>
+        @foreach (var item in Categories())
+        {
+            @if (!Selected.Any(x => x.Text.Equals(item.Text)))
+            {
+                <MListItem Id="@item.Text" Disabled="loading" OnClick="() =>{ Selected.Add(item);search=string.Empty;}">
+                    <MListItemAvatar>
+                        <MIcon Disabled="loading">@item.Icon</MIcon>
+                    </MListItemAvatar>
+                    <MListItemTitle>@item.Text</MListItemTitle>
+                </MListItem>
+            }
+        }
+    </MList>
+
+    <MDivider></MDivider>
+
+    <MCardActions>
+        <MSpacer></MSpacer>
+        <MButton Disabled="Selected.Count == 0" Loading="loading" Color="purple" Text OnClick="Next">
+            Next
+        </MButton>
+    </MCardActions>
+</MCard>
+
+@code
+{
+    private Timer Timer { get; set; }
+    private bool loading = false;
+    private string search = string.Empty;
+    private MTextField<string> _search;
+    private List<Selection> _selected = new();
+
+    private class Selection
+    {
+        public string Text { get; set; }
+        public string Icon { get; set; }
+    }
+
+    private List<Selection> Items = new()
+        {
+            new() { Text = "Nature", Icon = "mdi-nature" },
+            new() { Text = "Nightlife", Icon = "mdi-glass-wine" },
+            new() { Text = "November", Icon = "mdi-calendar-range" },
+            new() { Text = "Portland", Icon = "mdi-map-marker" },
+            new() { Text = "Biking", Icon = "mdi-bike" }
+        };
+
+    private List<Selection> Selected
+    {
+        get
+        {
+            return _selected;
+        }
+        set
+        {
+            search = "";
+            _selected = value;
+        }
+    }
+
+    private bool allSelected() => Selected.Count == Items.Count;
+
+    private List<Selection> Categories()
+    {
+        var ent = search.ToLower();
+        if (string.IsNullOrWhiteSpace(ent))
+        {
+            return Items;
+        }
+
+        return Items.Where(x => x.Text.ToLower().Contains(ent)).ToList();
+    }
+
+    private List<Selection> Selections() => Selected;
+
+    private void Next()
+    {
+        loading = true;
+
+        if (Timer == null)
+        {
+            Timer = new Timer
+                {
+                    Interval = 2000
+                };
+            Timer.Elapsed += Timer_Elapsed;
+        }
+
+        Timer.Start();
+    }
+
+    private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        await InvokeAsync(() =>
+        {
+            search = string.Empty;
+            Selected = new();
+            loading = false;
+            Timer.Stop();
+
+            StateHasChanged();
+        });
+    }
+}

@@ -1,0 +1,78 @@
+﻿{
+  "Title": "MDivider",
+  "Components": [
+    "Dividers"
+  ],
+  "Props": [
+    {
+      "Name": "Center",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Height",
+      "Type": "Int32",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Inset",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "添加缩进 (72px)"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Vertical",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "垂直显示分隔线"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

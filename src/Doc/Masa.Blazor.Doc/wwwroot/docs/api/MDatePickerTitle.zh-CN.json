@@ -1,0 +1,76 @@
+﻿{
+  "Title": "MDatePickerTitle",
+  "Components": [
+    "Date pickers"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Date",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SelectingYear",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "DateOnly",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Year",
+      "Type": "String",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "YearIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnSelectingYearUpdate",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+﻿<MCard
+    Class="mx-auto"
+    MaxWidth="400">
+    <MCardTitle>
+        <h2 class="text-h4">
+            Toothbrush
+        </h2>
+        <MSpacer></MSpacer>
+        <span class="text-h6">$4.99</span>
+    </MCardTitle>
+
+    <MCardText>
+        Our company takes pride in making handmade brushes.
+        Our toothbrushes are available in 4 different bristel types, from extra soft to hard.
+    </MCardText>
+
+    <MDivider class="mx-4"></MDivider>
+
+    <MCardText>
+        <span class="subheading">Select type</span>
+
+        <MChipGroup
+            @bind-Value="selection"
+            ActiveClass="deep-purple--text text--accent-4"
+            mandatory>
+            <MChip>Extra Soft</MChip>
+            <MChip>Soft</MChip>
+            <MChip>Medium</MChip>
+            <MChip>Hard</MChip>
+        </MChipGroup>
+    </MCardText>
+
+    <MCardActions>
+        <MButton
+            Block
+            Class="white--text"
+            Color="deep-purple accent-4">
+            Add to Cart
+        </MButton>
+    </MCardActions>
+</MCard>
+
+@code {
+
+    StringNumber selection = 2;
+
+}

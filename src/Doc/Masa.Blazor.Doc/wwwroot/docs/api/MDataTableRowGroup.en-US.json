@@ -1,0 +1,37 @@
+﻿{
+  "Title": "MDataTableRowGroup",
+  "Components": [
+    "Data tables"
+  ],
+  "Props": [
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    },
+    {
+      "Name": "ColumnHeaderContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "RowContentContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "RowHeaderContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

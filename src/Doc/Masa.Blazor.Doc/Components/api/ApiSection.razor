@@ -1,0 +1,8 @@
+﻿@namespace Masa.Blazor.Doc.Components
+
+<div>
+    <div class="d-flex mb-2">
+        <AppTextField @bind-Value="Filter" Icon="mdi-magnify" Clearable></AppTextField>
+    </div>
+    <ApiTable ApiData="@ApiData" Class="mb-4" Field="@Section" Filter="@Filter"/>
+</div>

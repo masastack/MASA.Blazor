@@ -1,0 +1,116 @@
+﻿{
+  "Title": "MListGroup",
+  "Components": [
+    "Lists",
+    "List item groups"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "在组件上附加一个图标，使用与 v-icon 相同的语法"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用所有子级的 v-list-item 组件"
+    },
+    {
+      "Name": "Group",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NoAction",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "从组项目中删除分配给操作图标的左边距"
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "在组件前添加一个图标，使用与 v-icon 相同的语法"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "SubGroup",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件指定为嵌套列表组"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "AppendIconContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "PrependIconContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

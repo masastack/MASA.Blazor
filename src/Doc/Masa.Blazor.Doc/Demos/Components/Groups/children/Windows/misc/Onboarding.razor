@@ -1,0 +1,70 @@
+﻿<MCard Color="black" Dark Flat Tile>
+    <MWindow @bind-Value="OnBoarding">
+        @foreach (var item in Enumerable.Range(0, length))
+        {
+            <MWindowItem Value="item">
+                <MCard Color="transparent" Height="200">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <MCardText Class="text-center">
+                            Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.
+                        </MCardText>
+                    </MRow>
+                </MCard>
+            </MWindowItem>
+        }
+    </MWindow>
+
+    <MCardActions Class="justify-space-between">
+        <MButton
+            Text
+            OnClick="Prev">
+            <MIcon>mdi-chevron-left</MIcon>
+        </MButton>
+        <MItemGroup
+            @bind-Value="OnBoarding"
+            Class="text-center"
+            Mandatory>
+            @foreach (var item in Enumerable.Range(0, length))
+            {
+                <MItem Value="item">
+                    <MButton
+                        IsActive="@context.Active"
+                        Icon
+                        OnClick="context.Toggle">
+                        <MIcon>mdi-record</MIcon>
+                    </MButton>
+                </MItem>
+            }
+        </MItemGroup>
+        <MButton
+            Text
+            OnClick="Next">
+            <MIcon>mdi-chevron-right</MIcon>
+        </MButton>
+    </MCardActions>
+</MCard>
+
+@code {
+
+    
+    int onboarding = 0;
+
+    StringNumber OnBoarding
+    {
+        get => onboarding;
+        set => onboarding = value.AsT1;
+    }
+
+    int length = 3;
+
+    private void Next()
+    {
+        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;
+    }
+
+    private void Prev()
+    {
+        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;
+    }
+
+}

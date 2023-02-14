@@ -1,0 +1,40 @@
+﻿<MTimeline>
+    @foreach (var year in _years)
+    {
+        <MTimelineItem Color="@year.Color" Small>
+            <OppositeContent>
+                <span class="@($"headline font-weight-bold {year.Color}--text")">
+                    @year.Year
+                </span>
+            </OppositeContent>
+            <ChildContent>
+                <div class="py-4">
+                    <h2 class="@($"headline font-weight-light mb-4 {year.Color}--text")">
+                        Lorem ipsum
+                    </h2>
+                    <div>
+                        Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+                    </div>
+                </div>
+            </ChildContent>
+        </MTimelineItem>
+    }
+</MTimeline>
+
+@code
+{
+    private class YearDemo
+    {
+        public string Color { get; set; }
+        public string Year { get; set; }
+    }
+
+    private List<YearDemo> _years = new List<YearDemo>
+    {
+        new YearDemo { Color = "cyan", Year = "1960" },
+        new YearDemo { Color = "green", Year = "1970" },
+        new YearDemo { Color = "pink", Year = "1980" },
+        new YearDemo { Color = "amber", Year = "1990" },
+        new YearDemo { Color = "orange", Year = "2000" }
+    };
+}

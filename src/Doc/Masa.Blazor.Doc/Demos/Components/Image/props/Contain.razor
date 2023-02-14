@@ -1,0 +1,54 @@
+﻿<MContainer Fluid>
+    <MRow Justify="@JustifyTypes.SpaceAround">
+        <MCol Cols="5">
+            <div>
+                Default (cover)
+            </div>
+            <div>
+                Matching
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="1.7">
+            </MImage>
+            <div>
+                Too high
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="2">
+            </MImage>
+            <div>
+                Too low
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="1.4">
+            </MImage>
+        </MCol>
+
+        <MCol Cols="5">
+            <div>
+                Contain
+            </div>
+            <div>
+                Matching
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="1.7"
+                    contain>
+            </MImage>
+            <div>
+                Too high
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="2"
+                    contain>
+            </MImage>
+            <div>
+                Too low
+            </div>
+            <MImage Src="https://picsum.photos/510/300?random"
+                    AspectRatio="1.4"
+                    contain>
+            </MImage>
+        </MCol>
+    </MRow>
+</MContainer>

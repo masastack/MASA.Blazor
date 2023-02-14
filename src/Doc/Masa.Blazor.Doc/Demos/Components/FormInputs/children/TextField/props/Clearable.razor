@@ -1,0 +1,43 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_message1"
+                            Label="Regular"
+                            Clearable></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_message2"
+                            Solo
+                            Label="Solo"
+                            Clearable></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_message3"
+                            Filled
+                            Label="Filled"
+                            Clearable></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_message4"
+                            Label="Outlined"
+                            Outlined
+                            Clearable></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code{
+    private string _message1 = "Hey!";
+    private string _message2 = "Hey!";
+    private string _message3 = "Hey!";
+    private string _message4 = "Hey!";
+}

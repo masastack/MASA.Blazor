@@ -1,0 +1,39 @@
+﻿<MCard Class="mx-auto"
+       MaxWidth="300"
+       tile>
+    <MList Dense>
+        <MSubheader>REPORTS</MSubheader>
+        <MListItemGroup @bind-Value="_selectedItem"
+                        Color="primary">
+            @foreach (var item in _items)
+            {
+                <MListItem >
+                    <MListItemIcon>
+                        <MIcon>
+                            @item.Icon
+                        </MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle>@item.Text</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MListItemGroup>
+    </MList>
+</MCard>
+
+@code{
+    private StringNumber _selectedItem = 1;
+    private Item[] _items = new Item[]
+    {
+       new Item { Text= "Real-Time", Icon= "mdi-clock" },
+       new Item { Text= "Audience", Icon= "mdi-account" },
+       new Item { Text= "Conversions", Icon= "mdi-flag" }
+    };
+
+    class Item
+    {
+        public string Text { get; set; }
+        public string Icon { get; set; }
+    }
+}

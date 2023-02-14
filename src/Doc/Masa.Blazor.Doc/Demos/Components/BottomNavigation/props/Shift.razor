@@ -1,0 +1,47 @@
+﻿<MBottomNavigation
+    @bind-Value="value"
+    BackgroundColor="@color"
+    Dark
+    Shift>
+    <MButton>
+        <span>Video</span>
+
+        <MIcon>mdi-television-play</MIcon>
+    </MButton>
+
+    <MButton>
+        <span>Music</span>
+
+        <MIcon>mdi-music-note</MIcon>
+    </MButton>
+
+    <MButton>
+        <span>Book</span>
+
+        <MIcon>mdi-book</MIcon>
+    </MButton>
+
+    <MButton>
+        <span>Image</span>
+
+        <MIcon>mdi-image</MIcon>
+    </MButton>
+</MBottomNavigation>
+
+@code {
+
+    StringNumber value = 1;
+
+    string color
+    {
+        get
+        {
+            if (value == 0) return "blue-grey";
+            if (value == 1) return "teal";
+            if (value == 2) return "brown";
+            if (value == 3) return "indigo";
+            return "blue-grey";
+        }
+    }
+
+}

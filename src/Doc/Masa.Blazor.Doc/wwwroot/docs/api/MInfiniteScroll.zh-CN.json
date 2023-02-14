@@ -1,0 +1,72 @@
+﻿{
+  "Title": "MInfiniteScroll",
+  "Components": [
+    "Infinite scroll"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "FailedToLoadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "HasMore",
+      "Type": "Boolean",
+      "Description": "是否还有更多内容"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoMoreText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Parent",
+      "Type": "Nullable<ElementReference>",
+      "Description": "拥有溢出样式的元素的引用，一般是父元素"
+    },
+    {
+      "Name": "ReloadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Threshold",
+      "Type": "StringNumber",
+      "Description": "触发加载事件的滚动触底距离阈值，单位为像素"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<ValueTuple`3>",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnLoadMore",
+      "Type": "EventCallback",
+      "Description": ""
+    }
+  ]
+}

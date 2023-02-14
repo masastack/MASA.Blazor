@@ -1,0 +1,55 @@
+﻿<MCard>
+    <MToolbar
+        Color="cyan"
+        Dark
+        Flat>
+        <ChildContent>
+            <MAppBarNavIcon></MAppBarNavIcon>
+
+            <MToolbarTitle>Page title</MToolbarTitle>
+
+            <MSpacer></MSpacer>
+
+            <MButton Icon>
+                <MIcon>mdi-magnify</MIcon>
+            </MButton>
+
+            <MButton Icon>
+                <MIcon>mdi-dots-vertical</MIcon>
+            </MButton>
+        </ChildContent>
+
+        <ExtensionContent>
+            <MTabs
+                @bind-Value="model"
+                Centered
+                SliderColor="yellow">
+                @foreach (var item in Enumerable.Range(1, 3))
+                {
+                    <MTab Value="item">
+                        Item @item
+                    </MTab>
+                }
+            </MTabs>
+        </ExtensionContent>
+    </MToolbar>
+
+    <MTabsItems @bind-Value="model">
+        @foreach (var item in Enumerable.Range(1, 3))
+        {
+            <MTabItem Value="item">
+                <MCard Flat>
+                    <MCardText>@text</MCardText>
+                </MCard>
+            </MTabItem>
+        }
+    </MTabsItems>
+</MCard>
+
+@code {
+
+    StringNumber model = 2;
+
+    string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+}

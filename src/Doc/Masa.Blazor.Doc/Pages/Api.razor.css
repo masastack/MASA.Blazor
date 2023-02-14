@@ -1,0 +1,39 @@
+::deep .api-table th.name {
+    width: 20%;
+}
+
+::deep .api-table th.type {
+    width: 15%;
+}
+
+::deep .api-table th.signature {
+    width: 25%;
+}
+
+::deep .api-table th .regular-row td {
+    padding: 8px 16px !important;
+}
+
+::deep .api-table th .regular-row.has-extra-row td {
+    border-bottom: none !important;
+}
+
+::deep .api-table th .extra-row:hover {
+    background: initial !important;
+}
+
+::deep .api-table th .extra-row td {
+    padding: 8px 0 !important;
+}
+
+::deep .api-table th .m-markdown ::deep p {
+    margin-bottom: 0;
+}
+
+::deep .name-item {
+    white-space: nowrap;
+}
+
+::deep .name-item:not(:hover):not(:focus) span {
+    opacity: 0;
+}

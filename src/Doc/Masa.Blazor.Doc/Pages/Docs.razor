@@ -1,0 +1,10 @@
+﻿@page "/{category}"
+@page "/{category}/{fileName}"
+@layout DocLayout
+
+<div style="display: contents" @key="FileName">
+    @if (File != null)
+    {
+        @((MarkupString)File.Html)
+    }
+</div>

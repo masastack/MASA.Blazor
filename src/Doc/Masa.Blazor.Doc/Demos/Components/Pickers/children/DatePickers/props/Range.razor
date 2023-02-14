@@ -1,0 +1,24 @@
+﻿<MRow>
+    <MCol Cols="12"
+          Sm="6">
+        <MDatePicker @bind-Value="_dates"
+                     Range></MDatePicker>
+    </MCol>
+    <MCol Cols="12"
+          Sm="6">
+        <MTextField Value="DateRangeText"
+                    Label="Date range"
+                    PrependIcon="mdi-calendar"
+                    Readonly></MTextField>
+    </MCol>
+</MRow>
+
+  @code {
+    private List<DateOnly> _dates = new List<DateOnly>
+        {
+            new DateOnly(2019,9,10),
+            new DateOnly(2019,9,20)
+        };
+
+    public string DateRangeText => string.Join(" ~ ", _dates.Select(date => date.ToString("yyyy-MM-dd")));
+  }

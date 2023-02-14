@@ -1,0 +1,68 @@
+﻿<style>
+    .sort-item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+</style>
+
+<MContainer>
+    <MRow>
+        <MCol Cols=6>
+            <div>enable sort</div>
+            <MDragZone Group="sort_example" Sort=true>
+                <MDragItem>
+                    <div class="sort-item">item1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+        <MCol Cols=6>
+            <div>disable sort</div>
+            <MDragZone  Group="sort_example" Sort=false>
+                <MDragItem>
+                    <div class="sort-item">item2.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item2.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item2.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item2.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="sort-item">item2.5</div>
+                </MDragItem>
+            </MDragZone>
+
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    private void EnableSort(SorttableOptions options)
+    {
+        options.Group = "group_enable";
+        options.Sort = true;
+    }
+
+    private void DisableSort(SorttableOptions options)
+    {
+        options.Group = "group_disable";
+        options.Sort = false;
+    }
+}

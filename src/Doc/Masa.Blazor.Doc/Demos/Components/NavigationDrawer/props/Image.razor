@@ -1,0 +1,29 @@
+﻿<MCard Class="mx-auto" Height="300" Width="300">
+    <MNavigationDrawer Absolute Dark Src="@("/_content/Masa.Blazor.Doc/backgrounds/bg-2.png")" Width="@("100%")" Permanent>
+        <MList Dark>
+            @foreach (var item in _items)
+            {
+                <MListItem Link Dark>
+                    <MListItemIcon>
+                        <MIcon Dark>@item[0]</MIcon>
+                    </MListItemIcon>
+
+                    <MListItemContent>
+                        <MListItemTitle>@item[1]</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+            
+        </MList>
+    </MNavigationDrawer>
+</MCard>
+
+@code
+{
+    private string[][] _items = new string[3][]
+    {
+        new string[2] {"mdi-email", "Inbox"},
+        new string[2]{"mdi-account-supervisor-circle", "Supervisors" },
+        new string[2]{ "mdi-clock-start", "Clock-in" }
+    };
+}

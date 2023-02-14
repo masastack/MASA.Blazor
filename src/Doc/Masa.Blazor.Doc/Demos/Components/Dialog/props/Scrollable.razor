@@ -1,0 +1,52 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MDialog @bind-Value="dialog"
+             Scrollable
+             MaxWidth="300">
+        <ActivatorContent>
+            <MButton Color="primary" Dark @attributes="@context.Attrs">Open Dialog</MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MCard>
+                <MCardTitle>Select Country</MCardTitle>
+                <MDivider></MDivider>
+                <MCardText Style="height: 300px;">
+                    <MCheckbox Label="Bahamas" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bahrain" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bangladesh" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Barbados" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Belarus" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Belgium" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Belize" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Benin" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bhutan" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bolivia" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bosnia and Herzegovina" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Botswana" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Brazil" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Brunei" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Bulgaria" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Burkina Faso" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Burma" TValue="bool"></MCheckbox>
+                    <MCheckbox Label="Burundi" TValue="bool"></MCheckbox>
+                </MCardText>
+                <MDivider></MDivider>
+                <MCardActions>
+                    <MButton Color="blue darken-1"
+                             Text
+                             OnClick="() => dialog = false">
+                        Close
+                    </MButton>
+                    <MButton Color="blue darken-1"
+                             Text
+                             OnClick="() => dialog = false">
+                        Save
+                    </MButton>
+                </MCardActions>
+            </MCard>
+        </ChildContent>
+    </MDialog>
+</MRow>
+
+@code {
+    bool dialog = false;
+}

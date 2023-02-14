@@ -1,0 +1,17 @@
+﻿<a herf="@Href" class="text-decoration-none text-right text-md-left" @onclick="OnClick"> # </a>
+
+@ChildContent
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Href { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+}

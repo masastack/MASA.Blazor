@@ -1,0 +1,112 @@
+﻿{
+  "Title": "MEditor",
+  "Components": [
+    "Editor"
+  ],
+  "Props": [
+    {
+      "Name": "AdditionalModules",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "BeforeAllUploadAsync",
+      "Type": "Func<List`1,Task`1>",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Markdown",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Placeholder",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ReadOnly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Theme",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolbarClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolbarStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Upload",
+      "Type": "MEditorUpload",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ToolbarContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnReady",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

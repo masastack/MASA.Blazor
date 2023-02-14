@@ -1,0 +1,147 @@
+﻿<MCard Class="mx-auto"
+       MaxWidth="500">
+    <MSheet Class="pa-4 primary lighten-2">
+        <MTextField @bind-Value="_search"
+                    Label="Search Company Directory"
+                    Dark
+                    Flat
+                    SoloInverted
+                    HideDetails="true"
+                    Clearable
+                    ClearIcon="mdi-close-circle-outline"></MTextField>
+        <MCheckbox @bind-Value="_caseSensitive"
+                   Dark
+                   HideDetails="true"
+                   Label="Case sensitive search"></MCheckbox>
+    </MSheet>
+    <MCardText>
+        <MTreeview Items="_items"
+                   Search="@_search"
+                   Filter="Filter"
+                   ItemKey="r=>r.Id"
+                   ItemText="r=>r.Name"
+                   ItemChildren="r=>r.Children"
+                   @bind-Open="_open">
+            <PrependContent>
+                @if (context.Item.Children != null && context.Item.Children.Count > 0)
+                {
+                    <MIcon>
+                        @($"mdi-{(context.Item.Id == 1 ? "home-variant" : "folder-network")}")
+                    </MIcon>
+                }
+            </PrependContent>
+        </MTreeview>
+    </MCardText>
+</MCard>
+
+@code {
+    public class Data
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public List<Data> Children { get; set; }
+    }
+
+    private List<Data> _items = new List<Data>()
+        {
+           new Data()
+           {
+              Id= 1,
+              Name= "MASA Blazor Human Resources",
+              Children= new List<Data>()
+              {
+                new Data()
+                {
+                  Id= 2,
+                  Name= "Core team",
+                  Children= new List<Data>()
+                    {
+                       new Data() {
+                          Id= 201,
+                          Name= "John",
+                        },
+                        new Data(){
+                          Id= 202,
+                          Name= "Kael",
+                        },
+                        new Data(){
+                          Id= 203,
+                          Name= "Nekosaur",
+                        },
+                        new Data(){
+                          Id= 204,
+                          Name= "Jacek",
+                        },
+                        new Data(){
+                          Id= 205,
+                          Name= "Andrew",
+                        }
+                    }
+                },
+                new Data()
+                {
+                  Id= 3,
+                  Name= "Administrators",
+                  Children= new List<Data>()
+                    {
+                        new Data()
+                        {
+                          Id= 301,
+                          Name= "Mike",
+                        },
+                        new Data()
+                        {
+                          Id= 302,
+                          Name= "Hunt",
+                        }
+                    }
+                },
+                new Data()
+                {
+                  Id= 4,
+                  Name= "Contributors",
+                  Children= new List<Data>()
+                    {
+                        new Data()
+                        {
+                          Id= 401,
+                          Name= "Phlow"
+                        },
+                        new Data()
+                        {
+                          Id= 402,
+                          Name= "Brandon"
+                        },
+                        new Data()
+                        {
+                          Id= 403,
+                          Name= "Sean"
+                        }
+                    }
+                }
+              }
+            }
+        };
+    private List<int> _open = new List<int>
+        {
+            1,
+            2
+        };
+    private string _search;
+    private bool _caseSensitive;
+
+    public Func<Data, string, Func<Data, string>, bool> Filter
+    {
+        get
+        {
+            if (_caseSensitive)
+            {
+                return (item, search, textKey) => textKey(item).IndexOf(search) > -1;
+            }
+
+            return null;
+        }
+    }
+}

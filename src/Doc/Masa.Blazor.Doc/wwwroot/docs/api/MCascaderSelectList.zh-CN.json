@@ -1,0 +1,131 @@
+﻿{
+  "Title": "MCascaderSelectList",
+  "Components": [
+    "Cascaders"
+  ],
+  "Props": [
+    {
+      "Name": "Action",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Children",
+      "Type": "List<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "HideSelected",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func<TItem,Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "IList<TItem>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func<TItem,String>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValue",
+      "Type": "Func<TItem,TValue>",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoFilter",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "SearchInput",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedIndex",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedItems",
+      "Type": "IEnumerable<TItem>",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendItemContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "PrependItemContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnItemClick",
+      "Type": "EventCallback<TItem>",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelect",
+      "Type": "EventCallback<TItem>",
+      "Description": ""
+    }
+  ]
+}
