@@ -13,7 +13,7 @@ public partial class MHighlight : BDomComponentBase
 
     [Parameter]
     [EditorRequired]
-    public string Language { get; set; } = null!;
+    public string? Language { get; set; }
 
     [Parameter]
     public bool Inline { get; set; }
@@ -27,13 +27,6 @@ public partial class MHighlight : BDomComponentBase
     private string _codeHtml = string.Empty;
     private string? _prevCode;
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-
-        ArgumentNullException.ThrowIfNull(Language);
-    }
-
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
@@ -42,12 +35,13 @@ public partial class MHighlight : BDomComponentBase
             .Apply(css =>
             {
                 css.Add("m-code-highlight__pre")
-                   .AddIf($"language-{Language.ToLower()}", () => !IgnorePreCssOfTheme);
+                   .AddIf($"language-{Language!.ToLower()}", () => Language is not null && !IgnorePreCssOfTheme);
             }).Apply("code", css =>
             {
                 css.Add("m-code-highlight__code")
-                   .AddIf($"language-{Language.ToLower()}", () => !IgnoreCodeCssOfTheme);
-            });
+                   .AddIf($"language-{Language!.ToLower()}", () => Language is not null && !IgnoreCodeCssOfTheme)
+                   .AddIf(Class, () => Inline);
+            }, style => style.AddIf(Style, () => Inline));
     }
 
     protected override async Task OnParametersSetAsync()
