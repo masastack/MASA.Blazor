@@ -212,3 +212,67 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnviron
 
 - I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
 
+### 在MAUI Blazor项目中支持MasaI18n
+
+- 添加扩展方法:
+
+```csharp
+public static class I18nExtend
+{
+    public static IBlazorComponentBuilder AddI18nForMauiBlazor(this IBlazorComponentBuilder builder, string localesDirectory)
+    {
+        string supportedCulturesPath = localesDirectory + "/supportedCultures.json";
+        bool existsCultures = FileSystem.AppPackageFileExistsAsync(supportedCulturesPath).Result;
+        if (!existsCultures)
+        {
+            throw new Exception("Can't find path：" + supportedCulturesPath);
+        }
+
+        using Stream streamCultures = FileSystem.OpenAppPackageFileAsync(supportedCulturesPath).Result;
+        using StreamReader readerCultures = new(streamCultures);
+        string contents = readerCultures.ReadToEnd();
+        string[] cultures = JsonSerializer.Deserialize<string[]>(contents) ?? throw new Exception("Failed to read supportedCultures json file data!");
+        List<(string culture, Dictionary<string, string>)> locales = new();
+        foreach (string culture in cultures)
+        {
+            string culturePath = localesDirectory + "/" + culture + ".json";
+            bool existsCulture = FileSystem.AppPackageFileExistsAsync(culturePath).Result;
+            if (!existsCulture)
+            {
+                throw new Exception("Can't find path：" + culturePath);
+            }
+
+            using Stream stream = FileSystem.OpenAppPackageFileAsync(culturePath).Result;
+            using StreamReader reader = new(stream);
+            Dictionary<string, string> map = I18nReader.Read(reader.ReadToEnd());
+            locales.Add((culture, map));
+        }
+
+        I18nServiceCollectionExtensions.AddI18n(builder, locales.ToArray());
+        return builder;
+    }
+}
+```
+
+- MAUI Blazor静态资产受限于 Razor 组件，需要使用`FileSystem.OpenAppPackageFileAsync`来访问，详情请阅读[微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components)。MauiProgram.cs增加代码如下：
+
+```csharp
+builder.Services.AddMasaBlazor().AddI18nForMauiBlazor($"{i18n directory path}");
+```
+
+- `i18n directory path` 为放置i18n资源文件的文件夹路径，只支持`wwwroot`和`Resources/Raw`路径下。例如，您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("wwwroot/i18n")`；如果您在`Resources/Raw/i18n`路径下放置了i18n资源文件，则代码写为`builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("i18n")`；
+
+```
+- Pages 
+- Shared 
+- wwwroot
+  - i18n
+    - supportedCultures.json
+    - en-US.json
+    - zh-CN.json
+```
+
+- `supportedCultures.json`配置文件格式与Blazor WebAssembly模式一致
+
+- I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
+
