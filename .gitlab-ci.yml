@@ -30,14 +30,14 @@ packer:
     - id
     - ls src/
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
+    - rm -rf ./docs/MASA.Docs
     - git config --global https.https://github.com.proxy $PROXY_GATEWAY
     - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
 #     - dotnet workload install wasm-tools
-    - dotnet workload list  &&  dotnet build src/Masa.Blazor.NewDocs.sln
+    - dotnet workload list  &&  dotnet build src/Masa.Blazor.Docs.sln
 #     - dotnet pack pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
     - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
     - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
@@ -62,11 +62,11 @@ docker:
     - main
   script:
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
+    - rm -rf ./docs/MASA.Docs
     - git config --global https.https://github.com.proxy $PROXY_GATEWAY
     - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
     - docker build -t $IMAGE .
     - docker push $IMAGE
     - docker rmi  $IMAGE
@@ -127,12 +127,12 @@ packer-prd:
     - tags
   script:
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
+    - rm -rf ./docs/MASA.Docs
     - git config --global https.https://github.com.proxy $PROXY_GATEWAY
     - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-    - dotnet workload list && dotnet build src/Masa.Blazor.NewDocs.sln
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
+    - dotnet workload list && dotnet build src/Masa.Blazor.Docs.sln
     - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
@@ -156,11 +156,11 @@ docker-prd:
     - tags
   script:
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
+    - rm -rf ./docs/MASA.Docs
     - git config --global https.https://github.com.proxy $PROXY_GATEWAY
     - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
   after_script:
