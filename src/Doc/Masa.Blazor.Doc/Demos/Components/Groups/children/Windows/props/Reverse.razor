@@ -1,0 +1,57 @@
+﻿<MCard Flat Tile>
+    <MWindow @bind-Value="Onboarding" Reverse>
+        @foreach (var item in Enumerable.Range(0, length))
+        {
+            <MWindowItem Value="@item">
+                <MCard Color="grey" Height="200">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <h1 style="font-size: 5rem" class="white--text">Slide @(item + 1)</h1>
+                    </MRow>
+                </MCard>
+            </MWindowItem>
+        }
+    </MWindow>
+
+    <MCardActions Class="justify-space-between">
+        <MButton Text OnClick="HandlePrev">
+            <MIcon>mdi-chevron-left</MIcon>
+        </MButton>
+        <MItemGroup @bind-Value="Onboarding" Class="text-center" Mandatory>
+            @foreach (var item in Enumerable.Range(0, length))
+            {
+                <MItem Value="@item">
+                    <MButton Icon IsActive="context.Active" OnClick="@context.Toggle">
+                        <MIcon>mdi-record</MIcon>
+                    </MButton>
+                </MItem>
+            }
+        </MItemGroup>
+        <MButton Text OnClick="HandleNext">
+            <MIcon>mdi-chevron-right</MIcon>
+        </MButton>
+    </MCardActions>
+</MCard>
+
+@code {
+
+    int _onboarding = 0;
+
+    StringNumber Onboarding
+    {
+        get => _onboarding;
+        set => _onboarding = value.AsT1;
+    }
+
+    int length = 3;
+
+    private void HandleNext()
+    {
+        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;
+    }
+
+    private void HandlePrev()
+    {
+        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;
+    }
+
+}

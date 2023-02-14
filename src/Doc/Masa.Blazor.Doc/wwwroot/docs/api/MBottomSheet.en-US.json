@@ -1,0 +1,152 @@
+﻿{
+  "Title": "MBottomSheet",
+  "Components": [
+    "Bottom sheets"
+  ],
+  "Props": [
+    {
+      "Name": "Attach",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Fullscreen",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Inset",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Description": "Sets the maximum width for the component."
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayScrimClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Persistent",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Scrollable",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

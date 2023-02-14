@@ -1,0 +1,63 @@
+﻿<div>
+    <MExpansionPanels Class="mb-6">
+        @foreach (var item in Enumerable.Range(0, 5))
+        {
+            <MExpansionPanel @key="item">
+                <MExpansionPanelHeader ExpandIcon="mdi-menu-down">
+                    Item
+                </MExpansionPanelHeader>
+                <MExpansionPanelContent>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</MExpansionPanelContent>
+            </MExpansionPanel>
+        }
+    </MExpansionPanels>
+
+    <MExpansionPanels>
+        <MExpansionPanel>
+            <MExpansionPanelHeader>
+                <ChildContent>
+                    Item
+                </ChildContent>
+                <ActionsContent>
+                    <MIcon Color="primary">
+                        mdi-chevron-down
+                    </MIcon>
+                </ActionsContent>
+            </MExpansionPanelHeader>
+            <MExpansionPanelContent>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+
+        <MExpansionPanel>
+            <MExpansionPanelHeader DisableIconRotate>
+                <ChildContent>
+                    Item
+                </ChildContent>
+                <ActionsContent>
+                    <MIcon Color="teal">
+                        mdi-check
+                    </MIcon>
+                </ActionsContent>
+            </MExpansionPanelHeader>
+            <MExpansionPanelContent>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+
+        <MExpansionPanel>
+            <MExpansionPanelHeader DisableIconRotate>
+                <ChildContent>
+                    Item
+                </ChildContent>
+                <ActionsContent>
+                    <MIcon Color="error">
+                        mdi-alert-circle
+                    </MIcon>
+                </ActionsContent>
+            </MExpansionPanelHeader>
+            <MExpansionPanelContent>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+    </MExpansionPanels>
+</div>

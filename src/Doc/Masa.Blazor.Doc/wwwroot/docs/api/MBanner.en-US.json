@@ -1,0 +1,115 @@
+﻿{
+  "Title": "MBanner",
+  "Components": [
+    "Banners"
+  ],
+  "Props": [
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Designates an elevation applied to the component between 0 and 24."
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": ""
+    },
+    {
+      "Name": "IconColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Sticky",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActionsContent",
+      "Type": "RenderFragment<Action>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    },
+    {
+      "Name": "IconContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnIconClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

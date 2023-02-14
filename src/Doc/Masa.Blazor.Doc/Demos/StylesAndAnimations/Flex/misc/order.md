@@ -1,0 +1,170 @@
+---
+order: 7
+title:
+  zh-CN: Flex 排序
+  en-US: Order
+---
+
+## zh-CN
+
+您可以使用 `order` 工具类改变 flex 项目的视觉排序.
+
+`order` 同样也有一些弹性变量.
+
+* **.order-first**
+* **.order-0**
+* **.order-1**
+* **.order-2**
+* **.order-3**
+* **.order-4**
+* **.order-5**
+* **.order-6**
+* **.order-7**
+* **.order-8**
+* **.order-9**
+* **.order-10**
+* **.order-11**
+* **.order-12**
+* **.order-last**
+* **.order-sm-first**
+* **.order-sm-0**
+* **.order-sm-1**
+* **.order-sm-2**
+* **.order-sm-3**
+* **.order-sm-4**
+* **.order-sm-5**
+* **.order-sm-6**
+* **.order-sm-7**
+* **.order-sm-8**
+* **.order-sm-9**
+* **.order-sm-10**
+* **.order-sm-11**
+* **.order-sm-12**
+* **.order-sm-last**
+* **.order-md-first**
+* **.order-md-0**
+* **.order-md-1**
+* **.order-md-2**
+* **.order-md-3**
+* **.order-md-4**
+* **.order-md-5**
+* **.order-md-6**
+* **.order-md-7**
+* **.order-md-8**
+* **.order-md-9**
+* **.order-md-10**
+* **.order-md-11**
+* **.order-md-12**
+* **.order-md-last**
+* **.order-lg-first**
+* **.order-lg-0**
+* **.order-lg-1**
+* **.order-lg-2**
+* **.order-lg-3**
+* **.order-lg-4**
+* **.order-lg-5**
+* **.order-lg-6**
+* **.order-lg-7**
+* **.order-lg-8**
+* **.order-lg-9**
+* **.order-lg-10**
+* **.order-lg-11**
+* **.order-lg-12**
+* **.order-lg-last**
+* **.order-lg-first**
+* **.order-xl-0**
+* **.order-xl-1**
+* **.order-xl-2**
+* **.order-xl-3**
+* **.order-xl-4**
+* **.order-xl-5**
+* **.order-xl-6**
+* **.order-xl-7**
+* **.order-xl-8**
+* **.order-xl-9**
+* **.order-xl-10**
+* **.order-xl-11**
+* **.order-xl-12**
+* **.order-xl-last**
+
+## en-US
+
+You can use the `order` tool class to change the visual order of flex items.
+
+`order` also has some elastic variables.
+
+* **.order-first**
+* **.order-0**
+* **.order-1**
+* **.order-2**
+* **.order-3**
+* **.order-4**
+* **.order-5**
+* **.order-6**
+* **.order-7**
+* **.order-8**
+* **.order-9**
+* **.order-10**
+* **.order-11**
+* **.order-12**
+* **.order-last**
+* **.order-sm-first**
+* **.order-sm-0**
+* **.order-sm-1**
+* **.order-sm-2**
+* **.order-sm-3**
+* **.order-sm-4**
+* **.order-sm-5**
+* **.order-sm-6**
+* **.order-sm-7**
+* **.order-sm-8**
+* **.order-sm-9**
+* **.order-sm-10**
+* **.order-sm-11**
+* **.order-sm-12**
+* **.order-sm-last**
+* **.order-md-first**
+* **.order-md-0**
+* **.order-md-1**
+* **.order-md-2**
+* **.order-md-3**
+* **.order-md-4**
+* **.order-md-5**
+* **.order-md-6**
+* **.order-md-7**
+* **.order-md-8**
+* **.order-md-9**
+* **.order-md-10**
+* **.order-md-11**
+* **.order-md-12**
+* **.order-md-last**
+* **.order-lg-first**
+* **.order-lg-0**
+* **.order-lg-1**
+* **.order-lg-2**
+* **.order-lg-3**
+* **.order-lg-4**
+* **.order-lg-5**
+* **.order-lg-6**
+* **.order-lg-7**
+* **.order-lg-8**
+* **.order-lg-9**
+* **.order-lg-10**
+* **.order-lg-11**
+* **.order-lg-12**
+* **.order-lg-last**
+* **.order-lg-first**
+* **.order-xl-0**
+* **.order-xl-1**
+* **.order-xl-2**
+* **.order-xl-3**
+* **.order-xl-4**
+* **.order-xl-5**
+* **.order-xl-6**
+* **.order-xl-7**
+* **.order-xl-8**
+* **.order-xl-9**
+* **.order-xl-10**
+* **.order-xl-11**
+* **.order-xl-12**
+* **.order-xl-last**

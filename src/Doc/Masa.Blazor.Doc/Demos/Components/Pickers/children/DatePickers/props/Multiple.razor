@@ -1,0 +1,19 @@
+﻿<MRow>
+    <MCol Cols="12"
+          Sm="6">
+        <MDatePicker @bind-Value="_dates"
+                     Multiple></MDatePicker>
+    </MCol>
+    <MCol Cols="12"
+          Sm="6">
+        TODO...
+    </MCol>
+</MRow>
+
+@code {
+    private IList<DateOnly> _dates = new List<DateOnly>
+        {
+            new DateOnly(2018,9,15),
+            new DateOnly(2018,9,20)
+        };
+}

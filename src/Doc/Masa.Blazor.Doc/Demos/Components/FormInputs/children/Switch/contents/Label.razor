@@ -1,0 +1,17 @@
+﻿<MContainer Fluid>
+    <MSwitch @bind-Value="switchMe">
+        <LabelContent>
+            Turn on the progress:
+            <MProgressCircular
+                Indeterminate="switchMe"
+                Value="0"
+                Size="24"
+                Class="ml-2">
+            </MProgressCircular>
+        </LabelContent>
+    </MSwitch>
+</MContainer>
+
+@code {
+    bool switchMe;
+}

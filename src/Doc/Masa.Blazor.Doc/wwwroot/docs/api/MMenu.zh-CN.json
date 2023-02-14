@@ -1,0 +1,295 @@
+﻿{
+  "Title": "MMenu",
+  "Components": [
+    "Menus"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "AllowOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Attach",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Auto",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "CloseOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定菜应该在外部激活器被点击时关闭。"
+    },
+    {
+      "Name": "CloseOnContentClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定点击内容时菜单是否应该关闭。"
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用菜单"
+    },
+    {
+      "Name": "DisableKeys",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExternalActivator",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "NudgeBottom",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向底部微调内容"
+    },
+    {
+      "Name": "NudgeLeft",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向左侧微调内容"
+    },
+    {
+      "Name": "NudgeRight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向右侧微调内容"
+    },
+    {
+      "Name": "NudgeTop",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向顶部微调内容"
+    },
+    {
+      "Name": "NudgeWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "微调内容宽度"
+    },
+    {
+      "Name": "OffsetOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在x轴上偏移菜单，与左/右方向一起工作"
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在y轴上偏移菜单，与上/下方向一起工作"
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定是否在激活器悬停时打开菜单"
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PositionX",
+      "Type": "Nullable<Double>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "PositionY",
+      "Type": "Nullable<Double>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右边对齐。"
+    },
+    {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向顶部对齐。"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ZIndex",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+﻿{
+  "Title": "MBottomNavigation",
+  "Components": [
+    "Bottom Navigation"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Description": "Applies position: absolute to the component."
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Description": "Applies position: fixed to the component."
+    },
+    {
+      "Name": "Grow",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Description": "Sets the height for the component."
+    },
+    {
+      "Name": "HideOnScroll",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Horizontal",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "InputValue",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Mandatory",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Description": "Sets the maximum height for the component."
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Description": "Sets the maximum width for the component."
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Description": "Sets the minimum width for the component."
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollTarget",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollThreshold",
+      "Type": "Double",
+      "Description": ""
+    },
+    {
+      "Name": "Shift",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "TargetGroup",
+      "Type": "Nullable<GroupType>",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Description": ""
+    },
+    {
+      "Name": "Values",
+      "Type": "List<StringNumber>",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "InputValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
+}

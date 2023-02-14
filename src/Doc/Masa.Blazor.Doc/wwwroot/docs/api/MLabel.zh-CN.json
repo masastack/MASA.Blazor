@@ -1,0 +1,106 @@
+﻿{
+  "Title": "MLabel",
+  "Components": [
+    "Text fields"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Focused",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "For",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Required",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

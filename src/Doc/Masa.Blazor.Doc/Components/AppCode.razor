@@ -1,0 +1,66 @@
+﻿@inject IJSRuntime Js;
+
+<MSheet Color="@Color" Dark="IsDark" Rounded="Rounded" Class="@($"app-code overflow-hidden {Class}")" Outlined>
+    <HighlightedCode @key="Code" CanLoad Code="@Code" Language="@Language"></HighlightedCode>
+
+    <MButton Class="m-btn--copy mr-n2 mt-n2"
+             Style="background-color:inherit"
+             Absolute Icon Right Rounded Top
+             Disabled="clicked"
+             OnClick="@Copy">
+        <FadeTransition>
+            <ShowTransitionElement Value="clicked">
+                <MIcon Color="grey">
+                    mdi-check
+                </MIcon>
+            </ShowTransitionElement>
+        </FadeTransition>
+        <FadeTransition>
+            <ShowTransitionElement Value="!clicked" Style="position: absolute;">
+                <MIcon Color="grey">
+                    mdi-content-copy
+                </MIcon>
+            </ShowTransitionElement>
+        </FadeTransition>
+    </MButton>
+</MSheet>
+
+@code {
+    readonly int delay = 2000;
+
+    bool clicked;
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter]
+    public string Code { get; set; }
+
+    [Parameter]
+    public bool Dark { get; set; }
+
+    [Parameter]
+    public string Language { get; set; }
+
+    [Parameter]
+    public bool Mixed { get; set; }
+
+    [Parameter]
+    public bool Rounded { get; set; }
+
+    string Color => IsDark ? "#1f1f1f" : "grey lighten-5";
+
+    bool IsDark => Dark || Mixed;
+
+    async Task Copy()
+    {
+        clicked = true;
+
+        await Js.InvokeVoidAsync(JsInteropConstants.Copy, Code);
+
+        await Task.Delay(delay);
+
+        clicked = false;
+    }
+
+}

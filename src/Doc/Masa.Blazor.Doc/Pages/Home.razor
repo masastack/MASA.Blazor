@@ -1,0 +1,584 @@
+﻿@page "/"
+@page "/index.html"
+@layout BaseLayout
+
+<div class="home">
+    <MRow Class="banner" NoGutters Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+        <MCol Align="@AlignTypes.Center" Lg=6 Md=6 Sm=12>
+            <div class="banner-logo-box">
+                <p class="banner-logo-font">
+                    MASA Blazor
+                </p>
+            </div>
+            <div class="banner-detail-box">
+                <p class="banner-detail-font">
+                    @T("MASABlazorDescription")
+                </p>
+            </div>
+            <MRow NoGutters Style="margin-top:88px;" Justify="JustifyTypes.Start">
+                <MButton Dark
+                         Color="#5C2D91"
+                         Height="64"
+                         Class="text-20 mb-6 px-6"
+                         Href="getting-started/installation">
+                    @T("GetStarted")
+                </MButton>
+                <MButton Dark
+                         Outlined
+                         Color="black"
+                         Height="64"
+                         Class="text-20 px-6 mb-6 mx-6"
+                         Href="introduction/why">
+                    @T("WhyUseMASABlazor")
+                </MButton>
+            </MRow>
+        </MCol>
+        <MCol Align="@AlignTypes.Center" Class="pr-6 d-flex justify-end" Lg=6 Md=6 Sm=12>
+            <MWindow @bind-Value="OnBoarding">
+                @foreach (var item in Enumerable.Range(0, _length))
+                {
+                    <MWindowItem Value="item">
+                        <MCard Class="d-flex align-end rounded-0" Color="#F2F3F5" MinHeight="262" MinWidth="262" Width="644" Height="644">
+                            <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/banner.png?x-oss-process=image/resize,w_644" />
+                        </MCard>
+                    </MWindowItem>
+                }
+            </MWindow>
+            @if (_length > 1)
+            {
+                <MItemGroup @bind-Value="OnBoarding"
+                        Class="text-center d-flex align-end"
+                        Mandatory>
+                    @foreach (var item in Enumerable.Range(0, _length))
+                    {
+                        <MItem Value="item">
+                            @if (context.Active)
+                            {
+                                <img class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
+                            }
+                            else
+                            {
+                                <img style="cursor:pointer;" class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
+                            }
+                        </MItem>
+                    }
+                </MItemGroup>
+            }
+        </MCol>
+    </MRow>
+
+    <div class="app-banner" style="display:none;">
+        <div class="banner-logo-box">
+            <p class="banner-logo-font">
+                MASA Blazor
+            </p>
+        </div>
+        <div class="banner-detail-box">
+            <p class="banner-detail-font">
+                @T("MASABlazorDescription")
+            </p>
+        </div>
+        <div class="d-flex justify-center">
+            <MWindow @bind-Value="OnBoarding">
+                @foreach (var item in Enumerable.Range(0, _length))
+                {
+                    <MWindowItem Value="item">
+                        <div class="d-flex align-end rounded-0" style="height: 262px;width: 262px;background-color:#F2F3F5;border-color:#F2F3F5">
+                            <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/banner.png?x-oss-process=image/resize,w_262" />
+                        </div>
+                    </MWindowItem>
+                }
+            </MWindow>
+            @if (_length > 1)
+            {
+                <MItemGroup @bind-Value="OnBoarding"
+                        Class="text-center d-flex align-end"
+                        Mandatory>
+                    @foreach (var item in Enumerable.Range(0, _length))
+                    {
+                        <MItem Value="item">
+                            @if (context.Active)
+                            {
+                                <img style="width:14px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
+                            }
+                            else
+                            {
+                                <img style="cursor:pointer; width:3.5px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
+                            }
+                        </MItem>
+                    }
+                </MItemGroup>
+            }
+        </div>
+        <div class="mt-6">
+            <MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
+                <MButton Dark
+                         Width="130"
+                         Color="#5C2D91"
+                         Height="44"
+                         Class="text-14 rounded-lg mr-3"
+                         Href="getting-started/installation">
+                    @T("GetStarted")
+                </MButton>
+                @*<MButton Dark
+                         Color="black"
+                         Width="130"
+                         Height="44"
+                         Href="https://github.com/BlazorComponent/Masa.Blazor"
+                         Target="_blank"
+                         Class="rounded-lg text-14 ml-3">
+                    <MIcon Left>mdi-github</MIcon>
+                    GitHub
+                </MButton>*@
+                <MButton Dark
+                         Outlined
+                         Color="black"
+                         Height="44"
+                         Class="text-14 rounded-lg"
+                         Href="introduction/why">
+                    @T("WhyUseMASABlazor")
+                </MButton>
+            </MRow>
+            @*<MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
+                <MButton Dark
+                         Outlined
+                         Color="black"
+                         Width="285"
+                         Height="44"
+                         Class="text-14 rounded-lg"
+                         Href="introduction/why">
+                    @T("WhyUseMASABlazor")
+                </MButton>
+            </MRow>*@
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="video">
+            <div class="information">
+                <MRow NoGutters>
+                    <MCol Align="AlignTypes.Center">
+                        <MBorder Color="black" Class="box-title-border rounded-b-xl">
+                            <p class="box-title">@T("VideoTeaching")</p>
+                        </MBorder>
+                    </MCol>
+                    <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    </MCol>
+                </MRow>
+            </div>
+
+            <MRow NoGutters>
+                <MCol Cols="12" Lg="6" Md="6" Sm="12">
+                    <video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls="controls">
+                        your browser does not support the video tag
+                    </video>
+                </MCol>
+                <MCol Cols="12" Lg="6" Md="6" Sm="12" Align="@AlignTypes.Start">
+                    <div class="video-description">
+                        <div class="video-p">@T("VideoTitle")</div>
+                        <div class="video-span">@T("VideoDesc")</div>
+                    </div>
+                </MCol>
+            </MRow>
+
+            <div class="video-group">
+                <MRow NoGutters>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   OnClick="@(() => Toggle("https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-6.0"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info1.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 pl-4 fs-18 text-truncate">
+                                    @T("Introduction")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   OnClick="@(() => Toggle("https://docs.microsoft.com/zh-cn/events/dotnetconf-2021/new-blazor-webassembly-capabilities-in-net-6"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info2.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 pl-4 fs-18 text-truncate">
+                                    @T("BlazorWebAssembly")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   OnClick="@(() => Toggle("https://www.dotnetconf.net/agenda"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info3.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 pl-4 fs-18 text-truncate">
+                                    @T("Conf")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   OnClick="@(() => Toggle("https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-6.0"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info1.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 pl-4 fs-18 text-truncate">
+                                    @T("Introduction")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                </MRow>
+            </div>
+        </div>
+
+        <div class="why-masa-blazor">
+            <div class="information">
+                <MRow NoGutters Align="AlignTypes.Center">
+                    <MCol Cols="8" Align="AlignTypes.Center">
+                        <MBorder Color="black" Class="box-title-border rounded-b-xl">
+                            <p class="box-title">@T("WhyUseMASABlazor")</p>
+                        </MBorder>
+                    </MCol>
+                    <MCol Cols="4" Class="d-flex justify-end" Align="AlignTypes.Center">
+                    </MCol>
+                </MRow>
+            </div>
+            <div class="why-masa-blazor-card">
+                <MRow NoGutters>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3" Align="AlignTypes.Center">
+                        <MCard Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="why-masa-blazor-card-content fill-height">
+                                <div class="d-flex align-center">
+                                    <img class="mt-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/feature1.png">
+                                </div>
+                                <div class="desc">
+                                    <p class="why-masa-blazor-p">@T("RichComponents")</p>
+                                    <p class="why-masa-blazor-span">@T("RichComponentsDesc")</p>
+                                </div>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="why-masa-blazor-card-content fill-height">
+                                <div class="d-flex align-center">
+                                    <img class="mt-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/feature2.png">
+                                </div>
+                                <div class="desc">
+                                    <p class="why-masa-blazor-p">@T("UIDesignLanguage")</p>
+                                    <p class="why-masa-blazor-span">@T("UIDesignLanguageDesc")</p>
+                                </div>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="why-masa-blazor-card-content fill-height">
+                                <div class="d-flex align-center">
+                                    <img class="mt-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/feature3.png">
+                                </div>
+                                <div class="desc">
+                                    <p class="why-masa-blazor-p">@T("LongTermSupport")</p>
+                                    <p class="why-masa-blazor-span">@T("LongTermSupportDesc")</p>
+                                </div>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="why-masa-blazor-card-content fill-height">
+                                <div class="d-flex align-center">
+                                    <img class="mt-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/feature4.png">
+                                </div>
+                                <div class="desc">
+                                    <p class="why-masa-blazor-p">@T("EasyToUse")</p>
+                                    <p class="why-masa-blazor-span">@T("EasyToUseDesc")</p>
+                                </div>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="why-masa-blazor-card-content fill-height">
+                                <div class="d-flex align-center">
+                                    <img class="mt-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/feature5.png">
+                                </div>
+                                <div class="desc">
+                                    <p class="why-masa-blazor-p">@T("CommunityActive")</p>
+                                    <p class="why-masa-blazor-span">@T("CommunityActiveDesc")</p>
+                                </div>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Width="470" Height="470" Color="#5C2D91" Elevation="24">
+                            <MCol Class="fill-height d-flex flex-column justify-space-between pa-0">
+                                <div>
+                                    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/masa.png"></MImage>
+                                </div>
+                                <div style="font-size: 26px;line-height: 30px; letter-spacing: 2px; color:#fff; text-align: center;">
+                                    @("<MCard Elevation=24 />")
+                                </div>
+                                <div>
+                                    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/blazor.png"></MImage>
+                                </div>
+                            </MCol>
+                        </MCard>
+                    </MCol>
+                </MRow>
+            </div>
+        </div>
+
+        <div class="evaluation-cooperation">
+            <div class="information">
+                <MRow>
+                    <MCol Align="AlignTypes.Center">
+                        <MBorder Color="black" Class="box-title-border rounded-b-xl">
+                            <p class="box-title">@T("EvaluationOfCooperation")</p>
+                        </MBorder>
+                    </MCol>
+                    <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    </MCol>
+                </MRow>
+            </div>
+            <div class="companies-box mx-149">
+                <MRow NoGutters>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Class="rounded-lg" Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="companies-content">
+                                <div class="d-flex justify-center">
+                                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs1.png">
+                                </div>
+                                <p class="user-name">鬼谷子</p>
+                                <p class="user-description">基于MASA Blazor组件库，我们快速构建了Material Design的管理后台模版，丰富的功能让产品在交互设计上可以展现更多的想象。</p>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Class="rounded-lg" Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="companies-content">
+                                <div class="d-flex justify-center">
+                                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs2.png">
+                                </div>
+                                <p class="user-name">陈sir</p>
+                                <p class="user-description">MASA Blazor不仅帮助朗诗德后端.NET开发人员升级成为全栈工程师，其优秀的交互设计和标准化的模板，更让整个团队的交付水平成倍数提升，持续助力朗诗德数字化转型，让变化更简单！</p>
+                            </div>
+                        </MCard>
+                    </MCol>
+                    <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
+                        <MCard Class="rounded-lg" Width="470" Height="470" Color="#F9FAFA" Elevation="0">
+                            <div class="companies-content">
+                                <div class="d-flex justify-center">
+                                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs3.png">
+                                </div>
+                                <p class="user-name">梦境</p>
+                                <p class="user-description">大前端时代到处都是基于JS的产品，MASA Blazor 的出现弥补了 C# 开发者制作前端应用的技术空白。有了这个产品，我们可以更加灵活的应对现代软件开发。</p>
+                            </div>
+                        </MCard>
+                    </MCol>
+                </MRow>
+            </div>
+            <div class="cooperation-company">
+                <MRow Class="fill-height" Justify="JustifyTypes.Center" Align="AlignTypes.Center">
+                    <MCol Class="d-flex justify-center">
+                        <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/bgy-logo.png">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/volvo-logo.png?x-oss-process=image/resize,w_80">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/sskj-logo.png">
+                    </MCol>
+                </MRow>
+            </div>
+        </div>
+
+        <div class="related-articles">
+            <div class="information">
+                <MRow>
+                    <MCol Align="AlignTypes.Center">
+                        <MBorder Color="black" Class="box-title-border rounded-b-xl">
+                            <p class="box-title">@T("RelatedArticles")</p>
+                        </MBorder>
+                    </MCol>
+                    <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                        <div style="cursor:pointer;" @onclick="@(()=>Toggle("https://masalabs.github.io/categories/Dapr/"))">
+                            <span class="box-title-more" style="color:#86909C80">@T("More")</span>
+                            <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                        </div>
+                    </MCol>
+                </MRow>
+            </div>
+            <div class="card-box">
+                <MRow NoGutters>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   Height="348"
+                                   Width="348"
+                                   OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-1.html"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr1.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 px-4 text-truncate fs-18">
+                                    @T("RelatedArticle1")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   Height="348"
+                                   Width="348"
+                                   OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-2.html"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr2.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 px-4 text-truncate fs-18">
+                                    @T("RelatedArticle2")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   Height="348"
+                                   Width="348"
+                                   OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-3.html"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr3.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 px-4 text-truncate fs-18">
+                                    @T("RelatedArticle3")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
+                        <MHover Context="hoverContext">
+                            <MCard Color="#F7F8FA"
+                                   @attributes="hoverContext.Attrs"
+                                   Class="rounded-lg"
+                                   Height="348"
+                                   Width="348"
+                                   OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-4.html"))"
+                                   Elevation="@(hoverContext.Hover ? 5 : 0)">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr4.png")" Height="288">
+                                </MImage>
+                                <MCardText Class="pt-4 px-4 text-truncate fs-18">
+                                    @T("RelatedArticle4")
+                                </MCardText>
+                            </MCard>
+                        </MHover>
+                    </MCol>
+                </MRow>
+            </div>
+        </div>
+
+        <div class="contributor">
+            <div class="information">
+                <MRow>
+                    <MCol Align="AlignTypes.Center">
+                        <MBorder Color="black" Class="box-title-border rounded-b-xl">
+                            <p class="box-title">@T("Contributors")</p>
+                        </MBorder>
+                    </MCol>
+                    <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    </MCol>
+                </MRow>
+            </div>
+            <div class="contribution">
+                <MRow NoGutters Align="AlignTypes.End" Justify="JustifyTypes.Center" Style="font-size: 24px; color: #4E5969;">
+                    <p>— @T("ContributorsDesc") —</p>
+                </MRow>
+                <MRow Justify="JustifyTypes.Center">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        var index = i + 1;
+                        <MCol>
+                            <MAvatar Size=77>
+                                <MImage Src=@($"https://cdn.masastack.com/stack/images/website/masa-blazor/avatar{index}.png")></MImage>
+                            </MAvatar>
+                        </MCol>
+                    }
+                </MRow>
+            </div>
+        </div>
+
+        <div class="thanks">
+            <MRow NoGutters Justify="JustifyTypes.Center" Align="AlignTypes.End" Style="font-size: 24px; color: #4E5969;">
+                <p>— @T("Thanks") —</p>
+            </MRow>
+            <MRow Justify="JustifyTypes.Center">
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/Blazor.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/MaterialDesign.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/Vuetify.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/AntDesignBlazor.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/BlazorComponent.png" />
+                </MCol>
+            </MRow>
+        </div>
+    </div>
+
+    <MFooter Dark Padless Color="#5C2D91" Height="444" Class="footer">
+        <MRow NoGutters Class="foot-box">
+            <div>
+                <a href="https://blazor-pro.masastack.com/" target="_blank">MASA Blazor Pro</a>
+                <a href="https://github.com/BlazorComponent" target="_blank">Blazor Component</a>
+                <a href="https://www.material.io/" target="_blank">Material Design</a>
+            </div>
+            <div>
+                <a>@T("MASABlazorCommunity")</a>
+                <a>@T("JoinUs")</a>
+                <a>@T("MoreVideo")</a>
+            </div>
+            <div style="height: 218px;">
+                <a href="https://dotnet9.com/" target="_blank">Dotnet 9</a>
+            </div>
+            <div>
+                <a>@T("UpdateLog")</a>
+                <a>@T("CommonProblem")</a>
+                <a>@T("Contact")</a>
+            </div>
+        </MRow>
+        <MRow NoGutters Class="pb-12" Style="background-color:#5C2D91;" Justify="JustifyTypes.Center">
+            <a href="https://beian.miit.gov.cn/" target="_blank" style="text-decoration:none;font-size:14px;color:#fff;opacity:0.5;">浙ICP备2021013592号-1</a>
+        </MRow>
+    </MFooter>
+</div>

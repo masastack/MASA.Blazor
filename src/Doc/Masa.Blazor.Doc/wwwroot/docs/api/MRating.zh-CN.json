@@ -1,0 +1,165 @@
+﻿{
+  "Title": "MRating",
+  "Components": [
+    "Ratings"
+  ],
+  "Props": [
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": "使用空图标的颜色"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Clearable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "EmptyIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "空时显示的图标"
+    },
+    {
+      "Name": "FullIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "满时显示的图标"
+    },
+    {
+      "Name": "HalfIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "半时显示的图标（需要 half-increments 属性）"
+    },
+    {
+      "Name": "HalfIncrements",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "允许选择半增量"
+    },
+    {
+      "Name": "Hover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将鼠标悬停在图标上时提供视觉反馈"
+    },
+    {
+      "Name": "IconLabel",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Large",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的巨大。"
+    },
+    {
+      "Name": "Length",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "要显示的评分数量"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Size",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设置组件的高度和宽度."
+    },
+    {
+      "Name": "Small",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的小。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "Double",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "XLarge",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的无比巨大。"
+    },
+    {
+      "Name": "XSmall",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的更小。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<RatingItem>",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Double>",
+      "Description": ""
+    }
+  ]
+}

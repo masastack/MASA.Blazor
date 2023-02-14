@@ -1,0 +1,67 @@
+﻿{
+  "Title": "MApp",
+  "Components": [
+    "Application"
+  ],
+  "Props": [
+    {
+      "Name": "AlertParameters",
+      "Type": "Action<AlertParameters>",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "ConfirmParameters",
+      "Type": "Action<ConfirmParameters>",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LeftToRight",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PromptParameters",
+      "Type": "Action<PromptParameters>",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": []
+}

@@ -1,0 +1,482 @@
+﻿{
+  "Title": "MTextarea",
+  "Components": [
+    "Textareas"
+  ],
+  "Props": [
+    {
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Autofocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "AutoGrow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Clearable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ClearIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Counter",
+      "Type": "StringNumberBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CounterValue",
+      "Type": "Func<String,Int32>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "DebounceInterval",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Filled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FullWidth",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDetails",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Messages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "NoResize",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PersistentPlaceholder",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Placeholder",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Prefix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependInnerIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Reverse",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "RowHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Rows",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Rules",
+      "Type": "IEnumerable<Func`2>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Solo",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SoloInverted",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Suffix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValueExpression",
+      "Type": "Expression<Func`1>",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "CounterContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "LabelContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "PrependInnerContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ProgressContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnAppendOuterClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<FocusEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnClearClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnEnter",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<FocusEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyUp",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependInnerClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

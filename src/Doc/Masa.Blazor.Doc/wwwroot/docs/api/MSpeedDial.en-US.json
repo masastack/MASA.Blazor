@@ -1,0 +1,122 @@
+﻿{
+  "Title": "MSpeedDial",
+  "Components": [
+    "Floating Action Buttons"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Description": "Applies position: absolute to the component."
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Direction",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Description": "Applies position: fixed to the component."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

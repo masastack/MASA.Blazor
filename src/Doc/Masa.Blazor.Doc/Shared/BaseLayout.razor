@@ -1,0 +1,133 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <CascadingValue Value="@Culture" Name="Culture">
+        <CascadingValue Value="TimezoneOffset" Name="TimezoneOffset">
+            <MApp Class="baselayout-m-app">
+                <MAppBar App Height="80" Elevation=0 Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
+                    <div class="d-flex align-center ml-6">
+                        <img style="cursor:pointer;" class="mr-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png"
+                             @onclick=@(() =>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />
+                        <ColorChip Label Small Color="#5C2D91">0.6.0</ColorChip>
+                    </div>
+                    <MTabs BackgroundColor="white" Class="mtab-font" Style="margin-left:120px;" Color="black" SliderColor="purple darken-2" @bind-Value="SelectTab">
+                        <MTab Style="text-transform: none"X
+                              Href="https://www.masastack.com/blazor">
+                            @T("Home")
+                        </MTab>
+                        <MTab Style="text-transform: none"
+                              Href="introduction/why">
+                            @T("Docs")
+                        </MTab>
+                        <MTab Style="text-transform: none" Href="about/meet-the-team">@T("Team")</MTab>
+                        <MTab Style="text-transform: none" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                        <MTab Style="text-transform: none" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
+                    </MTabs>
+
+                    <MSpacer></MSpacer>
+
+                    <div id="docsearch" />
+
+                    <MTooltip Bottom>
+                        <ActivatorContent>
+                            <MButton @attributes="@context.Attrs" Icon OnClick="TurnLanguage" Class="mr-6 ml-9">
+                                <img style="width:24px;height:24px;" src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/" + CultureIcon) />
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>@T("LanguageSettings")</span>
+                        </ChildContent>
+                    </MTooltip>
+                    <MTooltip Bottom>
+                        <ActivatorContent>
+                            <MButton @attributes="@context.Attrs" Icon Href="https://github.com/BlazorComponent/Masa.Blazor" Target="_blank" Class="mr-6">
+                                <MIcon Size=24 Color="black">fab fa-github</MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>GitHub</span>
+                        </ChildContent>
+                    </MTooltip>
+                    <MTooltip Bottom>
+                        <ActivatorContent>
+                            <MButton @attributes="@context.Attrs" Icon Href="https://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank" Class="mr-6">
+                                <img style="width:24px;height:24px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/gitee.png" />
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>Gitee</span>
+                        </ChildContent>
+                    </MTooltip>
+                    <MTooltip Bottom>
+                        <ActivatorContent>
+                            <MButton @attributes="@context.Attrs" Icon OnClick="() => ShowSetting = true">
+                                <MIcon Color="black">
+                                    mdi-cog
+                                </MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>@T("Settings")</span>
+                        </ChildContent>
+                    </MTooltip>
+
+                </MAppBar>
+
+                @if (MasaBlazor.Breakpoint.Mobile)
+                {
+                    <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
+                        <div class="d-flex flex-column" style="width:100%;">
+                            <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
+                                <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
+
+                                <div id="docsearch-mobile" />
+
+                                <MButton Icon OnClick="TurnLanguage">
+                                    <img style="width:24px;height:24px;" src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/" + CultureIcon) />
+                                </MButton>
+                            </MRow>
+                            <MRow NoGutters>
+                                <MTabs ShowArrows="true" Height="40" BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
+                                    <MTab Style="text-transform: none;" Href="https://www.masastack.com/blazor">@T("Home")</MTab>
+                                    <MTab Style="text-transform: none;" Href="introduction/why">@T("Docs")</MTab>
+                                    <MTab Style="text-transform: none;" Href="about/meet-the-team">@T("Team")</MTab>
+                                    <MTab Style="text-transform: none;" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                                    <MTab Style="text-transform: none;" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
+                                </MTabs>
+                            </MRow>
+                        </div>
+                    </MAppBar>
+                }
+
+                @Body
+
+                <MNavigationDrawer @bind-Value="ShowSetting" Fixed Right Temporary Width="300">
+                    <PrependContent>
+                        <MToolbar Flat Height="80">
+                            <h3>
+                                @T("Settings")
+                            </h3>
+                        </MToolbar>
+                    </PrependContent>
+                    <ChildContent>
+                        <MContainer>
+                            <div style="padding-left:4px">
+                                <h5>@T("Mode")</h5>
+                                <MButtonGroup Value="BlazorMode.Current" Style="margin-top:4px">
+                                    <MButton Value="BlazorMode.Server" Text Color="purple darken-2" Width="135"
+                                             OnClick="NavigateToServer">
+                                        Server
+                                    </MButton>
+                                    <MButton Value="BlazorMode.Wasm" Text Color="purple darken-2" Width="135"
+                                             OnClick="NavigateToWasm">
+                                        Wasm
+                                    </MButton>
+                                </MButtonGroup>
+                            </div>
+                        </MContainer>
+                    </ChildContent>
+                </MNavigationDrawer>
+            </MApp>
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>

@@ -1,0 +1,27 @@
+﻿<div>
+    <MAlert @bind-Value="visible"
+            Border="Borders.Left"
+            CloseLabel="Close Alert"
+            Color="deep-purple accent-4"
+            Dark
+            Dismissible>
+        Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
+
+        Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
+    </MAlert>
+
+    @if (!visible)
+    {
+        <div class="text-center">
+            <MButton Color="deep-purple accent-4"
+                     Dark
+                     OnClick="() => visible = !visible">
+                Reset
+            </MButton>
+        </div>
+    }
+</div>
+
+@code {
+    bool visible = true;
+}

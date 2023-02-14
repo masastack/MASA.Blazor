@@ -1,0 +1,64 @@
+﻿{
+  "Title": "MTimeline",
+  "Components": [
+    "Timelines"
+  ],
+  "Props": [
+    {
+      "Name": "AlignTop",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Decreases component’s height."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Reverse",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": []
+}

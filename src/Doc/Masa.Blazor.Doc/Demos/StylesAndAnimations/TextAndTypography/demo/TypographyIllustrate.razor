@@ -1,0 +1,84 @@
+﻿<div>
+    <MItemGroup Class="pa-2 d-flex justify-center" Mandatory @bind-Value=_model>
+        @foreach (var item in _sizes)
+        {
+            var icon = item[0];
+            var bp = item[1];
+            var size = item[2];
+
+            <MItem Context="ItemContext" Value=size>
+                <MHover Context="HoverContext">
+                    <div 
+                        @attributes="HoverContext.Attrs"
+                        class="@((ItemContext.Active || HoverContext.Hover) ? "text--primary":"text--secondary") ma-3 text-center"
+                        style="cursor: pointer"
+                        @onclick="ItemContext.Toggle"
+                    >
+
+                        <MIcon Color="@(((ItemContext.Active || HoverContext.Hover) ? "grey darken-4":"grey lighten-1"))" Class="pa-1 mb-1">
+                            @icon
+                        </MIcon>
+
+                        <div class="text-caption">@bp</div>
+                    </div>
+                </MHover>
+            </MItem>
+        }
+    </MItemGroup>
+
+    <div class="text-h5 mb-6 text-center">
+        <code>@TypeClass()</code>
+    </div>
+
+    <MCard Class="d-flex align-center justify-center pa-4 mx-auto" MaxWidth=550 MinHeight=76 Outlined>
+        <div class="@("text-"+_model)">
+            Example Heading
+        </div>
+    </MCard>
+
+</div>
+
+@code {
+
+    StringNumber _model = "caption";
+    string[][] _sizes = new string[][]
+    {
+        new string[]
+        {
+            "mdi-devices", "all", "caption"
+        },
+        new string[]
+        {
+            "mdi-cellphone", "sm", "body-2"
+        },
+        new string[]
+        {
+            "mdi-laptop", "md", "body-1"
+        },
+         new string[]
+        {
+            "mdi-monitor", "lg", "h6"
+        },
+        new string[]
+        {
+            "mdi-television", "xl", "h4"
+        },
+    };
+
+    string[] Current()
+    {
+        return _sizes.First(size => size[2] == _model);
+    }
+
+    string TypeClass()
+    {
+        List<string> type = new List<string> { "text", _model.ToString() };
+        string breakpoint = Current()[1];
+        if (breakpoint != "all")
+        {
+            type.Insert(1, breakpoint);
+        }
+
+        return $".{string.Join("-", type)}";
+    }
+}

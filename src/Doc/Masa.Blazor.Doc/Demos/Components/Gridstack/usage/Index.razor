@@ -1,0 +1,30 @@
+﻿<MGridstack Items="@_items"
+            ItemKey="item => item.ToString()"
+            ItemClass="blue"
+            Margin="6"
+            TItem="int"
+            ItemPosition="ItemSize"
+            DisableOneColumnMode>
+    <ItemContent>
+        <div class="text-center">@context</div>
+    </ItemContent>
+</MGridstack>
+
+@code {
+
+    private readonly List<int> _items = Enumerable.Range(1, 11).ToList();
+
+    static GridstackWidgetPosition ItemSize(int item)
+    {
+        return item switch
+        {
+            1 => new(4, 2),
+            2 => new(4, 4),
+            6 => new(2, 4),
+            7 => new(4, 2),
+            9 => new(4, 2),
+            _ => new(2, 2)
+        };
+    }
+
+}

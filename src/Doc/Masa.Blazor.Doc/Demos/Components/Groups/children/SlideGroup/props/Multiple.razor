@@ -1,0 +1,29 @@
+﻿<MSheet Class="mx-auto" MaxWidth="800" Elevation="8">
+    <MSlideGroup @bind-Values="model" ShowArrows="@(true)" Class="pa-4" Multiple>
+        @foreach (var item in Enumerable.Range(1, 15))
+        {
+            <MSlideItem Value="@item">
+                <MCard Color="@(context.Active ? "primary" : "grey lighten-1")"
+                       Class="ma-4"
+                       Height="200"
+                       Width="100"
+                       OnClick="context.Toggle"
+                       RefBack="context.Ref">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <ScaleTransition>
+                            <ShowTransitionElement Value="context.Active">
+                                <MIcon Color="white" Size="48">mdi-close-circle-outline</MIcon>
+                            </ShowTransitionElement>
+                        </ScaleTransition>
+                    </MRow>
+                </MCard>
+            </MSlideItem>
+        }
+    </MSlideGroup>
+</MSheet>
+
+@code {
+
+    List<StringNumber> model = new();
+
+}

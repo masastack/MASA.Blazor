@@ -24,9 +24,9 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools
     - name: build
-      run: dotnet build Masa.Blazor.Docs.sln
+      run: dotnet build src/Masa.Blazor.NewDocs.sln
     - name: publish
-      run: dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release
+      run: dotnet publish src/Docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
       with:
@@ -34,4 +34,4 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/

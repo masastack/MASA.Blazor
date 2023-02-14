@@ -1,0 +1,295 @@
+﻿{
+  "Title": "MMenu",
+  "Components": [
+    "Menus"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies position: absolute to the component."
+    },
+    {
+      "Name": "AllowOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Attach",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Auto",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "CloseOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "CloseOnContentClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisableKeys",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExternalActivator",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "Sets the maximum height for the component."
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the maximum width for the component."
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "Sets the minimum width for the component."
+    },
+    {
+      "Name": "NudgeBottom",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeLeft",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeRight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeTop",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PositionX",
+      "Type": "Nullable<Double>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "PositionY",
+      "Type": "Nullable<Double>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "Designates the border-radius applied to the component."
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Removes the component’s border-radius."
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ZIndex",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+﻿{
+  "Title": "MDialog",
+  "Components": [
+    "Dialogs"
+  ],
+  "Props": [
+    {
+      "Name": "Attach",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Fullscreen",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayScrimClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Persistent",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "点击元素外部或按下esc键不会使其失效。"
+    },
+    {
+      "Name": "Scrollable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "当设置为 true 时，期望有一个 v-card 和一个 v-card-text 组件，并有指定的高度。更多信息，请查看 可滚动示例。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

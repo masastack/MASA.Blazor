@@ -1,0 +1,16 @@
+﻿<MContainer Class="px-0"
+            Fluid>
+    <MRadioGroup @bind-Value="_radioGroup">
+        @for (var i = 0; i < 3; i++)
+        {
+            var n = i + 1;
+            <MRadio @key="n"
+                Label="@($"Radio {n}")"
+                Value="n"></MRadio>
+        }
+    </MRadioGroup>
+</MContainer>
+
+@code {
+    private int _radioGroup = 1;
+}

@@ -1,0 +1,110 @@
+﻿<MCard Class="mx-auto"
+        MaxWidth="400">
+    <MCard Dark
+            Flat>
+        <MButton Absolute
+               Bottom
+               Color="pink"
+               Right
+               Fab>
+            <MIcon>mdi-plus</MIcon>
+        </MButton>
+        <MCardTitle Class="pa-2 purple lighten-3">
+            <MButton Icon>
+                <MIcon>mdi-menu</MIcon>
+            </MButton>
+            <h3 class="text-h6 font-weight-light text-center grow">
+                Timeline
+            </h3>
+            <MAvatar>
+                <MImage Src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"></MImage>
+            </MAvatar>
+        </MCardTitle>
+        <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/forest.jpg"
+               Gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)" Dark>
+            <MContainer Class="fill-height">
+                <MRow Align="@AlignTypes.Center">
+                    <strong class="text-h1 font-weight-regular mr-6">8</strong>
+                    <MRow Justify="@JustifyTypes.End">
+                        <div class="text-h5 font-weight-light">
+                            Monday
+                        </div>
+                        <div class="text-uppercase font-weight-light">
+                            February 2015
+                        </div>
+                    </MRow>
+                </MRow>
+            </MContainer>
+        </MImage>
+    </MCard>
+    <MCardText Class="py-0">
+        <MTimeline AlignTop
+                    Dense>
+            <MTimelineItem Color="pink"
+                             Small>
+                <MRow Class="pt-1">
+                    <MCol Cols="3">
+                        <strong>5pm</strong>
+                    </MCol>
+                    <MCol>
+                        <strong>New Icon</strong>
+                        <div class="text-caption">
+                            Mobile App
+                        </div>
+                    </MCol>
+                </MRow>
+            </MTimelineItem>
+
+            <MTimelineItem Color="teal lighten-3"
+                             Small>
+                <MRow Class="pt-1">
+                    <MCol Cols="3">
+                        <strong>3-4pm</strong>
+                    </MCol>
+                    <MCol>
+                        <strong>Design Stand Up</strong>
+                        <div class="text-caption mb-2">
+                            Hangouts
+                        </div>
+                        <MAvatar>
+                            <MImage Src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Kurt&hairColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Gray01&graphicType=Skull&eyeType=Wink&eyebrowType=RaisedExcitedNatural&mouthType=Disbelief&skinColor=Brown"></MImage>
+                        </MAvatar>
+                        <MAvatar>
+                            <MImage Src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairFrizzle&accessoriesType=Prescription02&hairColor=Black&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=BlazerSweater&clotheColor=Black&eyeType=Default&eyebrowType=FlatNatural&mouthType=Default&skinColor=Tanned"></MImage>
+                        </MAvatar>
+                        <MAvatar>
+                            <MImage Src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairMiaWallace&accessoriesType=Sunglasses&hairColor=BlondeGolden&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Surprised&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"></MImage>
+                        </MAvatar>
+                    </MCol>
+                </MRow>
+            </MTimelineItem>
+
+            <MTimelineItem Color="pink"
+                             Small>
+                <MRow Class="pt-1">
+                    <MCol Cols="3">
+                        <strong>12pm</strong>
+                    </MCol>
+                    <MCol>
+                        <strong>Lunch break</strong>
+                    </MCol>
+                </MRow>
+            </MTimelineItem>
+
+            <MTimelineItem Color="teal lighten-3"
+                             Small>
+                <MRow Class="pt-1">
+                    <MCol Cols="3">
+                        <strong>9-11am</strong>
+                    </MCol>
+                    <MCol>
+                        <strong>Finish Home Screen</strong>
+                        <div class="text-caption">
+                            Web App
+                        </div>
+                    </MCol>
+                </MRow>
+            </MTimelineItem>
+        </MTimeline>
+    </MCardText>
+</MCard>

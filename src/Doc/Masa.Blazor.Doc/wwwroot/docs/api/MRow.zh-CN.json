@@ -1,0 +1,142 @@
+﻿{
+  "Title": "MRow",
+  "Components": [
+    "Grid system"
+  ],
+  "Props": [
+    {
+      "Name": "Align",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": "应用 align-items css 属性。可用的选项是 start, center, end, baseline 和 stretch。"
+    },
+    {
+      "Name": "AlignContent",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": "应用 align-content 属性。可用的选项是： start, center, end, space-between, space-around 和 stretch。"
+    },
+    {
+      "Name": "AlignContentLg",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 align-content 属性。"
+    },
+    {
+      "Name": "AlignContentMd",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": "在中等和较大的断点上更改 align-content 属性。"
+    },
+    {
+      "Name": "AlignContentSm",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": "在较小和较大的断点处更改 align-content 属性。"
+    },
+    {
+      "Name": "AlignContentXl",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 align-content 属性。"
+    },
+    {
+      "Name": "AlignLg",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": "在中等和更高的断点上更改 align-items 属性。"
+    },
+    {
+      "Name": "AlignMd",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": "在较小和较大的断点处更改 align-items 属性。"
+    },
+    {
+      "Name": "AlignSm",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 align-items 属性。"
+    },
+    {
+      "Name": "AlignXl",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 align-items 属性。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Justify",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": "应用 justify-content css 属性。可用选项是 start, center, end, space-between 和 space-around。"
+    },
+    {
+      "Name": "JustifyLg",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 justify-content 属性。"
+    },
+    {
+      "Name": "JustifyMd",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": "在中等和更高的断点上更改 justify-content 属性。"
+    },
+    {
+      "Name": "JustifySm",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": "在较小和较大的断点上更改 justify-content 属性。"
+    },
+    {
+      "Name": "JustifyXl",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": "在更大和更大的断点上更改 justify-content 属性。"
+    },
+    {
+      "Name": "NoGutters",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除 v-col 之间的距离。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "div",
+      "Description": "指定在根元素上使用的自定义标签。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

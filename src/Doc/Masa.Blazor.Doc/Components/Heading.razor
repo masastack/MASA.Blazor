@@ -1,0 +1,63 @@
+﻿@if (Level == 1)
+{
+    <h1 class="@_class" @attributes="@Attributes">
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
+    </h1>
+}
+else if (Level == 3)
+{
+    <h3 class="@_class" @attributes="@Attributes">
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
+    </h3>
+}
+else if (Level == 4)
+{
+    <h4 class="@_class" @attributes="@Attributes">
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
+    </h4>
+}
+else if (Level == 5)
+{
+    <h5 class="@_class" @attributes="@Attributes">
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
+    </h5>
+}
+else
+{
+    <h2 class="@_class" @attributes="@Attributes">
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
+    </h2>
+}
+
+@code {
+
+    private string _class = "";
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Href { get; set; }
+    
+    [Parameter]
+    public int Level { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; }
+    
+    protected override void OnParametersSet()
+    {
+        _class = Level switch {
+            1 => "m-heading text-h3 text-sm-h3 mb-4",
+            3 => "m-heading text-h5 mb-2",
+            4 => "m-heading text-h6 mb-2",
+            5 => "m-heading text-h7 mb-3",
+            _ => "m-heading text-h4 text-sm-h4 mb-3" // level 2 is default
+            };
+    }
+
+}

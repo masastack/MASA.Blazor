@@ -1,0 +1,124 @@
+﻿{
+  "Title": "MSkeletonLoader",
+  "Components": [
+    "Skeleton loaders"
+  ],
+  "Props": [
+    {
+      "Name": "Boilerplate",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "从骨架中移除加载动画"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    },
+    {
+      "Name": "Loading",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用一个加载动画，加载光标在悬停时加载。false 的值只有在 default 槽中有内容时才会工作。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置组件转换。可以是一个 built in transitions 或者是自己自定义的。"
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Types",
+      "Type": "Dictionary<String,String>",
+      "Default": "",
+      "Description": "将与预定义选项结合使用的自定义类型对象。"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

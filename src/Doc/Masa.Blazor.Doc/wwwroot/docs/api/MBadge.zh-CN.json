@@ -1,0 +1,146 @@
+﻿{
+  "Title": "MBadge",
+  "Components": [
+    "Badges"
+  ],
+  "Props": [
+    {
+      "Name": "Avatar",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "去掉了 badge 插槽中使用 m-avatar 的徽章边距。"
+    },
+    {
+      "Name": "Bordered",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "当使用 dot 属性时，默认情况下会在徽章上应用一个 2px 和它的周围应用一个 1.5px 的边框。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "primary",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Content",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "任何你想要的内容都可以作为文字注入到徽章中。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dot",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "缩小徽章的尺寸并隐藏其内容。"
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "指定徽章中使用的具体图标。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Inline",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "将徽章在 x 轴上偏移。"
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "将徽章在 y 轴上偏移。"
+    },
+    {
+      "Name": "OverLap",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "与组件顶部的开槽内容重叠。"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右边对齐。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "设置组件转换。可以是一个 built in transitions 或者是自己自定义的。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "控制组件可见还是隐藏。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "BadgeContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

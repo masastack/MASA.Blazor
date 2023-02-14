@@ -1,0 +1,123 @@
+﻿{
+  "Title": "MTimePickerClock",
+  "Components": [
+    "Time pickers"
+  ],
+  "Props": [
+    {
+      "Name": "AllowedValues",
+      "Type": "Func<Int32,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Double",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Format",
+      "Type": "Func<Int32,String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Min",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rotate",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Scrollable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Step",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "Nullable<Int32>",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<Int32>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback<Int32>",
+      "Description": ""
+    }
+  ]
+}

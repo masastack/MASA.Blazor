@@ -1,0 +1,58 @@
+﻿{
+  "Title": "MSlideItem",
+  "Components": [
+    "Slide groups"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<ItemContext>",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

@@ -1,0 +1,75 @@
+﻿{
+  "Title": "MExpansionPanelHeader",
+  "Components": [
+    "Expansion panels"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "DisableIconRotate",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HideActions",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActionsContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<Boolean>",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

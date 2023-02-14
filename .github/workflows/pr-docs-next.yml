@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - docs/**
+      - src/Docs/**
   workflow_dispatch:
 
 jobs:
@@ -29,4 +29,4 @@ jobs:
     - name: check tools
       run: dotnet workload list
     - name: build
-      run: dotnet build Masa.Blazor.sln
+      run: dotnet build src/Masa.Blazor.NewDocs.sln

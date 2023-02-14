@@ -1,0 +1,182 @@
+﻿{
+  "Title": "MTimePicker",
+  "Components": [
+    "Time pickers"
+  ],
+  "Props": [
+    {
+      "Name": "AllowedHours",
+      "Type": "OneOf<Func`2,List`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "AllowedMinutes",
+      "Type": "OneOf<Func`2,List`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "AllowedSeconds",
+      "Type": "OneOf<Func`2,List`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "AmPmInTitle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Designates an elevation applied to the component between 0 and 24."
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Format",
+      "Type": "TimeFormat",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "FullWidth",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Landscape",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "Nullable<TimeOnly>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Min",
+      "Type": "Nullable<TimeOnly>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NoTitle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Scrollable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "UseSeconds",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Nullable<TimeOnly>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<Nullable`1>",
+      "Description": ""
+    },
+    {
+      "Name": "OnPeriodUpdate",
+      "Type": "EventCallback<TimePeriod>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Nullable`1>",
+      "Description": ""
+    }
+  ]
+}

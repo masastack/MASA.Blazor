@@ -1,0 +1,33 @@
+﻿<MFileInput
+    @bind-Value="_files"
+    Color="deep-purple accent-4"
+    Counter="@true"
+    Label="File input"
+    Multiple
+    Placeholder="Select your files"
+    PrependIcon="mdi-paperclip"
+    Outlined
+    ShowSize>
+    <SelectionContent Context="context">
+        @if (context.index < 2)
+        {
+            <MChip
+                Color="deep-purple accent-4"
+                Dark
+                Label
+                Small>
+                @context.text
+            </MChip>
+        }
+        else if (context.index == 2)
+        {
+            <span class="text-overline grey--text text--darken-3 mx-2">
+                +@(_files.Count - 2) File(s)
+            </span>
+        }
+    </SelectionContent>
+</MFileInput>
+
+@code {
+    private List<IBrowserFile> _files = new();
+}

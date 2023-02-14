@@ -1,0 +1,56 @@
+﻿@using Masa.Blazor.Doc.Highlight
+
+<pre class="language-@Language">
+    <code class="language-@Language" @ref="_codeElement">
+        @sourceCode
+    </code>
+</pre>
+
+@inject IPrismHighlighter Highlighter
+
+@code {
+    private DotNetObjectReference<HighlightedCode> _objRef;
+    private ElementReference _codeElement;
+
+    [Parameter]
+    public string Code { get; set; }
+
+    [Parameter]
+    public string Language { get; set; }
+
+    [Parameter]
+    public bool CanLoad { get; set; }
+
+    MarkupString sourceCode { get; set; }
+
+    bool hasLoaded = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (CanLoad && !hasLoaded)
+        {
+            _ = Task.Run(async () =>
+            {
+                _objRef = DotNetObjectReference.Create(this);
+                await Highlighter.HighlightAsync(Code, Language, _objRef, _codeElement); //TODO：加载完成通知组件刷新
+            });
+        }
+    }
+
+    protected override bool ShouldRender()
+    {
+        return CanLoad && !hasLoaded;
+    }
+
+    [JSInvokable]
+    public void OnAfterHighlighted()
+    {
+        hasLoaded = true;
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+
+}

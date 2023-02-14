@@ -1,0 +1,113 @@
+﻿{
+  "Title": "MRadio",
+  "Components": [
+    "Radio"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置输入标签"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "不活动时使用的图标"
+    },
+    {
+      "Name": "OnIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 v-ripple 指令。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "TValue",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "LabelContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<FocusEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<ChangeEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<FocusEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    }
+  ]
+}

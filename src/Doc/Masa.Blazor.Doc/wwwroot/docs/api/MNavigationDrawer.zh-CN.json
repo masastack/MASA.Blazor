@@ -1,0 +1,228 @@
+﻿{
+  "Title": "MNavigationDrawer",
+  "Components": [
+    "Navigation drawers"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。使用此属性的组件只有位于 v-main 组件的 外部才能正常运行。您可以在 应用程序页面 获取更多有关布局的信息。注意： 使用此属性会自动应用position: fixed 到布局元素上。您可以使用 absolute 属性 来覆盖这个功能。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在移动设备上从屏幕底部展开"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Clipped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在应用程序工具栏下面有一个被夹住的抽屉。注意:要求在MAppBar上夹左或夹右支柱按预期工作"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "DisableResizeWatcher",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "调整大小时将自动打开/关闭抽屉，具体取决于移动设备还是桌面设备。"
+    },
+    {
+      "Name": "DisableRouteWatcher",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "路线更改时禁用导航抽屉的打开。"
+    },
+    {
+      "Name": "ExpandOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将抽屉折叠成 mini-variant，直到用鼠标悬停"
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "给组件应用 position: fixed"
+    },
+    {
+      "Name": "Floating",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "浮动抽屉没有可见的容器（没有右边框）"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将亮色主题变量应用到组件。"
+    },
+    {
+      "Name": "MiniVariant",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "压缩导航抽屉宽度。"
+    },
+    {
+      "Name": "MiniVariantWidth",
+      "Type": "StringNumber",
+      "Default": "56",
+      "Description": "指定mini属性开期时指定的宽度"
+    },
+    {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf<Breakpoints,Double>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayOpacity",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Permanent",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将抽屉放置在右侧"
+    },
+    {
+      "Name": "Src",
+      "Type": "String",
+      "Default": "",
+      "Description": "指定一个 MImage 作为组件的背景。"
+    },
+    {
+      "Name": "Stateless",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Temporary",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗"
+    },
+    {
+      "Name": "Touchless",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "控制组件是可见的还是隐藏的。"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "256",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "MiniVariantChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

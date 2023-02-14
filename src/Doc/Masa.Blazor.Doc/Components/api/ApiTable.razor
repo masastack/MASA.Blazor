@@ -1,0 +1,51 @@
+﻿@namespace Masa.Blazor.Doc.Components
+
+<AppSheet>
+    <MSimpleTable Class="@($"api-table {Class}")">
+        <thead>
+            <tr>
+                @foreach (var header in Headers)
+                {
+                    <th @key="header" Class="@header">
+                        <div class="text-capitalize">@header</div>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Items)
+            {
+                <tr @key="@item["name"]" Class="@("regular-row")">
+                    @foreach (var (header, i) in Headers.Select((header, i) => (header, i)))
+                    {
+                        <td @key="i">
+                            @if (header == "name")
+                            {
+                                var id = $"{Field}-{item[header]}";
+
+                                <span id="@id" class="name-item text-mono ml-n2">
+                                    <span class="primary--text">#</span>
+                                    <AppLink HideIcon Href="@($"#{id}")" class="font-weight-bold" style="color: rgb(128,0,128)!important">
+                                        @item[header]
+                                    </AppLink>
+                                </span>
+                            }
+                            else if (header is "description")
+                            {
+                                @item[header]
+                            }
+                            else if (header is "type" or "default")
+                            {
+                                <div class="text-mono text-pre">
+                                    <span style="@($"color: {(header == "type" ? "rgb(43,145,175)" : "blue")}")">
+                                        @item[header]
+                                    </span>
+                                </div>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </MSimpleTable>
+</AppSheet>

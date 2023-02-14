@@ -1,0 +1,41 @@
+﻿<MSwitch @bind-Value="hideCancelAction" Label="HideCancelAction"></MSwitch>
+
+<PModal @bind-Value="value" 
+        HideCancelAction="hideCancelAction" 
+        Persistent
+        Title="Title"
+        Width="500"
+        OnSave="OnSave" 
+        OnCancel="OnCancel" 
+        OnDelete="OnDelete">
+    <ActivatorContent>
+        <MButton @attributes="@context.Attrs">Activator</MButton>
+    </ActivatorContent>
+    <ChildContent>
+        Content
+    </ChildContent>
+</PModal>
+
+@code {
+
+    private bool value;
+    private bool hideCancelAction;
+
+    private async Task OnSave()
+    {
+        await Task.Delay(1000);
+
+        value = false;
+    }
+
+    private void OnCancel()
+    {
+        value = false;
+    }
+
+    private void OnDelete()
+    {
+        value = false;
+    }
+
+}

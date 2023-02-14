@@ -1,0 +1,13 @@
+﻿<MSheet Class="overflow-hidden" Outlined Rounded="true" @attributes="@Attributes">
+    @ChildContent
+</MSheet>
+
+@code {
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

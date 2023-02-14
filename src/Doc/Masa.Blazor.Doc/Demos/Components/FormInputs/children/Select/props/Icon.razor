@@ -1,0 +1,58 @@
+<MContainer Fluid>
+    <MRow Align="@AlignTypes.Center">
+        <MCol Cols="6">
+            <MSubheader>
+                Prepended icon
+            </MSubheader>
+        </MCol>
+        <MCol Cols="6">
+            <MSelect @bind-Value="e1"
+                     Items="_items"
+                     Label="Select"
+                     ItemText="u => u.Label"
+                     ItemValue="u => u.Value"
+                     HideDetails="true"
+                     PrependIcon="mdi-map"
+                     SingleLine></MSelect>
+        </MCol>
+        <MCol Cols="6">
+            <MSubheader>
+                Appended icon
+            </MSubheader>
+        </MCol>
+        <MCol Cols="6">
+            <MSelect @bind-Value="e2"
+                     ItemText="u => u.Label"
+                     ItemValue="u => u.Value"
+                     Items="_items"
+                     AppendOuterIcon="mdi-map"
+                     HideDetails="true"
+                     Label="Select"
+                     SingleLine></MSelect>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code{
+    private string e1;
+    private string e2;
+
+    List<Item> _items = new()
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
+
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+}

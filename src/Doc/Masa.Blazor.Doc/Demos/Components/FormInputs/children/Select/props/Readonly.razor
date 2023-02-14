@@ -1,0 +1,32 @@
+<MRow Align="@AlignTypes.Center">
+    <MCol Cols="12">
+        <MSelect Items="_items"
+                 @bind-Value="e1"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value"
+                 Readonly
+                 Label="Read-only"></MSelect>
+    </MCol>
+</MRow>
+
+@code{
+    private string e1;
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+
+    List<Item> _items = new()
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
+}

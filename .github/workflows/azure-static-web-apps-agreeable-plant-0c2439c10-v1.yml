@@ -7,7 +7,7 @@ on:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
-      - docs/**
+      - src/Docs/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -15,7 +15,7 @@ on:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
-      - docs/**
+      - src/Docs/**
 
 jobs:
   build_and_deploy_job:
@@ -38,9 +38,9 @@ jobs:
       - name: Copy Static Resources
         id: copyStaticResources
         run: |
-          dotnet build src/Masa.Blazor.Docs.sln
-          dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release -o publish
-          cp -rf docs/Masa.Docs.WebAssembly/staticwebapp.config.json publish/wwwroot
+          dotnet build src/Masa.Blazor.NewDocs.sln
+          dotnet publish src/Docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release -o publish
+          cp -rf src/Docs/Masa.Docs.WebAssembly/staticwebapp.config.json publish/wwwroot
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

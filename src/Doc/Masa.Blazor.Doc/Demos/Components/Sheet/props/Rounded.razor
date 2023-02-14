@@ -1,0 +1,28 @@
+﻿<MContainer>
+    <MRow Justify="@JustifyTypes.SpaceAround">
+        @foreach (var rounded in _roundeds)
+        {
+            <MCol Cols="12"
+                  Md="4">
+                <MSheet Class="pa-12"
+                        Color="grey lighten-3">
+                    <div></div>
+                    <MSheet Rounded="rounded"
+                            Class="mx-auto"
+                            Height="100"
+                            Width="100"></MSheet>
+                    <div></div>
+                </MSheet>
+            </MCol>
+        }
+    </MRow>
+</MContainer>
+
+@code{
+    private StringBoolean[] _roundeds = new StringBoolean[]
+    {
+        false,true,"xl"
+    };
+}
+
+
