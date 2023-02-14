@@ -1,0 +1,33 @@
+﻿<div>
+    <MContainer Class="grey lighten-5">
+        <MRow>
+            <MCol Sm="9">
+                <MCard Class="pa-2"
+                       Outlined
+                       tile>
+                    Level 1: .col-sm-9
+                </MCard>
+                <MRow NoGutters>
+                    <MCol Cols="8"
+                          Sm="6">
+                        <MCard Class="pa-2"
+                               Outlined
+                               Style="background-color: lightgrey;"
+                               tile>
+                            Level 2: .col-8 .col-sm-6
+                        </MCard>
+                    </MCol>
+                    <MCol Cols="4"
+                          Sm="6">
+                        <MCard Class="pa-2"
+                               Outlined
+                               Style="background-color: lightgrey;"
+                               tile>
+                            Level 3: .col-4 .col-sm-6
+                        </MCard>
+                    </MCol>
+                </MRow>
+            </MCol>
+        </MRow>
+    </MContainer>
+</div>

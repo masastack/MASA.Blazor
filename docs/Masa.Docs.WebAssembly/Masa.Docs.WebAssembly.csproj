@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masa.Docs.Shared\Masa.Docs.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
+    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
+    <BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
+  </ItemGroup>
+
+</Project>

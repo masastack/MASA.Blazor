@@ -1,0 +1,41 @@
+﻿<MRow Justify="JustifyTypes.Center">
+    <MButton Color="primary"
+             Dark
+             StopPropagation
+             OnClick="()=> dialog = true">
+        Open Dialog
+    </MButton>
+
+    <MDialog @bind-Value="dialog"
+             MaxWidth="290">
+        <MCard>
+            <MCardTitle Class="text-h5">
+                Use Google's location service?
+            </MCardTitle>
+
+            <MCardText>
+                Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+            </MCardText>
+
+            <MCardActions>
+                <MSpacer></MSpacer>
+
+                <MButton Color="green darken-1"
+                         Text
+                         OnClick="()=> dialog = false">
+                    Disagree
+                </MButton>
+
+                <MButton Color="green darken-1"
+                         Text
+                         OnClick="()=> dialog = false">
+                    Agree
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MDialog>
+</MRow>
+
+@code {
+    bool dialog = false;
+}

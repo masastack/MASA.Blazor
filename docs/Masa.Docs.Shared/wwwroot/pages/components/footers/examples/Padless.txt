@@ -1,0 +1,5 @@
+﻿<MFooter Padless>
+    <MCol Class="text-center" Cols="12">
+        @DateTime.Now.Year - <strong>MASA Blazor</strong>
+    </MCol>
+</MFooter>

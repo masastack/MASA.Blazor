@@ -1,0 +1,52 @@
+﻿<div class="d-flex flex-column align-center justify-center">
+    <MECharts Option="option" Theme="@theme" Width="@("100%")" MinHeight="300"></MECharts>
+
+    <MRadioGroup TValue="string" @bind-Value="theme" Row>
+        <MRadio Label="default"
+                Value="@("")">
+        </MRadio>
+        <MRadio Label="light"
+                Value="@("light")">
+        </MRadio>
+        <MRadio Label="dark"
+                Value="@("dark")">
+        </MRadio>
+        <MRadio Label="vintage"
+                Value="@("vintage")">
+        </MRadio>
+    </MRadioGroup>
+</div>
+
+@code{
+    private string theme = string.Empty;
+
+    private object option = new
+    {
+        Title = new
+        {
+            Left = "center",
+            Text = "Getting started"
+        },
+        Tooltip = new { },
+        Legend = new
+        {
+            Right = "20px",
+            Data = new[] { "Sales" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
+        },
+        YAxis = new { },
+        Series = new[]
+        {
+            new
+            {
+                Name = "sales",
+                Type = "bar",
+                Data = new[] { 5, 20, 36, 10, 10, 20 }
+            }
+        }
+    };
+
+}

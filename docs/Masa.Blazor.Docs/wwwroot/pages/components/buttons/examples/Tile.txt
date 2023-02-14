@@ -1,0 +1,6 @@
+﻿<MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround">
+    <MButton Tile Color="success">
+        <MIcon Left>mdi-pencil</MIcon>
+        Edit
+    </MButton>
+</MRow>

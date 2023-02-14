@@ -1,0 +1,13 @@
+﻿<MRow Justify="JustifyTypes.Center">
+    <MExpansionPanels Popout>
+        @foreach (var _ in Enumerable.Range(0, 5))
+        {
+            <MExpansionPanel>
+                <MExpansionPanelHeader>Item</MExpansionPanelHeader>
+                <MExpansionPanelContent>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </MExpansionPanelContent>
+            </MExpansionPanel>
+        }
+    </MExpansionPanels>
+</MRow>

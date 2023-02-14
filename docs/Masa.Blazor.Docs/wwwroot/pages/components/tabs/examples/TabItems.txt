@@ -1,0 +1,44 @@
+﻿<MCard>
+    <MTabs
+        @bind-Value="tab"
+        BackgroundColor="primary"
+        Dark>
+        @foreach (var (tab, _) in items)
+        {
+            <MTab Value="tab">
+                @tab
+            </MTab>
+        }
+    </MTabs>
+
+    <MTabsItems Value="tab">
+        @foreach (var (tab, content) in items)
+        {
+            <MTabItem Value="tab">
+                <MCard Flat>
+                    <MCardText>@content</MCardText>
+                </MCard>
+            </MTabItem>
+        }
+    </MTabsItems>
+</MCard>
+
+@code {
+
+    StringNumber tab;
+
+    List<(string tab, string content)> items = new()
+    {
+        new("One", "Tab 1 Content"),
+        new("Two", "Tab 2 Content"),
+        new("Three", "Tab 3 Content"),
+        new("Four", "Tab 4 Content"),
+        new("Five", "Tab 5 Content"),
+        new("Six", "Tab 6 Content"),
+        new("Seven", "Tab 7 Content"),
+        new("Eight", "Tab 8 Content"),
+        new("Nine", "Tab 9 Content"),
+        new("Ten", "Tab 10 Content"),
+    };
+
+}

@@ -1,0 +1,53 @@
+﻿@inject MasaBlazor MasaBlazor
+
+<div class="text-center">
+    <MBottomSheet Inset>
+        <ActivatorContent>
+            <MButton
+                Color="red"
+                Dark
+                @attributes="@context.Attrs">
+                Open Player
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MCard Tile>
+                <MProgressLinear
+                    Value="50"
+                    Class="my-0"
+                    Height="3">
+                </MProgressLinear>
+
+                <MList>
+                    <MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>The Walker</MListItemTitle>
+                            <MListItemSubtitle>Fitz & The Trantrums</MListItemSubtitle>
+                        </MListItemContent>
+
+                        <MSpacer></MSpacer>
+
+                        <MListItemIcon>
+                            <MButton Icon>
+                                <MIcon>mdi-rewind</MIcon>
+                            </MButton>
+                        </MListItemIcon>
+
+                        <MListItemIcon Class="@(MasaBlazor.Breakpoint.MdAndUp ? "mx-5" : "")">
+                            <MButton Icon>
+                                <MIcon>mdi-pause</MIcon>
+                            </MButton>
+                        </MListItemIcon>
+
+                        <MListItemIcon
+                            Class="@($"ml-0 {(MasaBlazor.Breakpoint.MdAndUp ? "mr-3" : "")}")">
+                            <MButton Icon>
+                                <MIcon>mdi-fast-forward</MIcon>
+                            </MButton>
+                        </MListItemIcon>
+                    </MListItem>
+                </MList>
+            </MCard>
+        </ChildContent>
+    </MBottomSheet>
+</div>

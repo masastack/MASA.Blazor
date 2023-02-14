@@ -1,0 +1,12 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol>
+                <MTextField TextColor="green" TValue="string" Label="Regular"></MTextField>
+            </MCol>
+            <MCol>
+                <MTextField TValue="string" TextColor="#fc0000" Label="Regular"></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>

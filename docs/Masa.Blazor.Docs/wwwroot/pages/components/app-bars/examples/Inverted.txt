@@ -1,0 +1,31 @@
+﻿<MCard Class="overflow-hidden">
+    <MAppBar Absolute
+             Color="primary"
+             Dark
+             InvertedScroll
+             ScrollTarget="#scrolling-techniques-8">
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MAppBarTitle>Title</MAppBarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+
+        <MButton Icon>
+            <MIcon>mdi-heart</MIcon>
+        </MButton>
+        <MButton Icon>
+
+            <MIcon>mdi-dots-vertical</MIcon>
+        </MButton>
+
+    </MAppBar>
+    <MSheet Id="scrolling-techniques-8"
+            Class="overflow-y-auto"
+            MaxHeight="600">
+        <MContainer Style="height: 1500px;"></MContainer>
+    </MSheet>
+</MCard>

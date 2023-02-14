@@ -1,0 +1,16 @@
+﻿<div class="d-flex flex-column justify-space-between align-center">
+    <MSlider @bind-Value="_width"
+             Class="align-self-stretch"
+             Min="200"
+             Max="500"
+             Step="1">
+    </MSlider>
+
+    <MImage AspectRatio="16/9d"
+            Width="@_width"
+            Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material.jpg"></MImage>
+</div>
+
+@code {
+    private double _width = 300;
+}

@@ -1,0 +1,130 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<MContainer Style="max-width: 600px;">
+    <MTimeline Dense Clipped>
+        <MTimelineItem FillDot Class="white--text mb-12" Color="orange" Large>
+            <IconContent>
+                <span>JL</span>
+            </IconContent>
+            <ChildContent>
+                <MTextField @bind-Value="_input" HideDetails="true" Flat Label="Leave a comment..." Solo OnKeyDown="HandleOnKeyDown">
+                    <AppendContent>
+                        <MButton Class="mx-0" Depressed OnClick="Comment">
+                            Post
+                        </MButton>
+                    </AppendContent>
+                </MTextField>
+            </ChildContent>
+        </MTimelineItem>
+
+        @foreach (var item in _events)
+        {
+            <MTimelineItem Class="mb-4" Color="pink" Small>
+                <MRow Justify="JustifyTypes.Center">
+                    <MCol Cols="7">@item.Text</MCol>
+                    <MCol Class="text-right" Cols="5">@item.Time</MCol>
+                </MRow>
+            </MTimelineItem>
+        }
+
+        <MTimelineItem Class="mb-6" HideDot>
+            <span>Today</span>
+        </MTimelineItem>
+
+        <MTimelineItem Class="mb-4" Color="grey" IconColor="grey lighten-2" Small>
+            <MRow Justify="JustifyTypes.SpaceBetween">
+                <MCol Cols="7">
+                    This order was archived.
+                </MCol>
+                <MCol Class="text-right" Cols="5">
+                    15:26 EDT
+                </MCol>
+            </MRow>
+        </MTimelineItem>
+
+        <MTimelineItem Class="mb-4" Small>
+            <MRow Justify="JustifyTypes.SpaceBetween">
+                <MCol Cols="7">
+                    <MChip Class="white--text ml-0" Color="purple" Label Small>
+                        App
+                    </MChip>
+                    Digital Downloads fulfilled 1 item.
+                </MCol>
+                <MCol Class="text-right" Cols="5">
+                    15:25 EDT
+                </MCol>
+            </MRow>
+        </MTimelineItem>
+
+        <MTimelineItem Class="mb-4" Color="grey" Small>
+            <MRow Justify="JustifyTypes.SpaceBetween">
+                <MCol Cols="7">
+                    Order confirmation email was sent to doddgu (gushoudao@masastack.com).
+                </MCol>
+                <MCol Class="text-right" Cols="5">
+                    15:25 EDT
+                </MCol>
+            </MRow>
+        </MTimelineItem>
+
+        <MTimelineItem Class="mb-4" HideDot>
+            <MButton Class="mx-0">Resend Email</MButton>
+        </MTimelineItem>
+
+        <MTimelineItem Class="mb-4" Color="grey" Small>
+            <MRow Justify="JustifyTypes.SpaceBetween">
+                <MCol Cols="7">
+                    A $15.00 USD payment was processed on PayPal Express Checkout
+                </MCol>
+                <MCol Class="text-right" Cols="5">
+                    15:25 EDT
+                </MCol>
+            </MRow>
+        </MTimelineItem>
+
+        <MTimelineItem Color="grey" Small>
+            <MRow Justify="JustifyTypes.SpaceBetween">
+                <MCol Cols="7">
+                    MASA placed this order on Online Store (checkout #1937432132572).
+                </MCol>
+                <MCol Class="text-right" Cols="5">
+                    15:25 EDT
+                </MCol>
+            </MRow>
+        </MTimelineItem>
+    </MTimeline>
+</MContainer>
+
+@code
+{
+    private class EventDemo
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public string Time { get; set; }
+    }
+    private List<EventDemo> _events = new List<EventDemo>();
+    private string _input = string.Empty;
+    private int _nonce = 0;
+
+    private void HandleOnKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            Comment();
+        }
+    }
+
+    private void Comment()
+    {
+        _events.Insert(0,
+            new EventDemo
+                {
+                    Id = _nonce++,
+                    Text = _input,
+                    Time = DateTime.Now.ToString("HH:mm:ss")
+                });
+
+        _input = string.Empty;
+    }
+}

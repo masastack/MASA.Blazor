@@ -1,0 +1,66 @@
+﻿<MContainer Class="spacing-playground pa-6" Fluid>
+    <MRow>
+        <MCol Class="d-flex align-center" Cols="12" Sm="6">
+            <MSelect @bind-Value="_paddingDirectionVal" Items="_paddingDirection" TItem="string" TItemValue="string" 
+                TValue="string" ItemValue="r => r" ItemText="r => r" Class="pr-2" Label="@("Padding")">
+                <PrependContent>
+                    <strong class="primary--text py-1">p</strong>
+                </PrependContent>
+                <AppendOuterContent>
+                    <div class="py-1">-</div>
+                </AppendOuterContent>
+            </MSelect>
+
+            <MSelect @bind-Value="_paddingSizeionVal" Items="_paddingSize" TItem="int" TItemValue="int" 
+                TValue="int" ItemValue="r => r" ItemText="r => r.ToString()" Label="@("Size")">
+            </MSelect>
+        </MCol>
+
+        <MCol Class="d-flex" Cols="12" Sm="6">
+            <MSelect @bind-Value="_marginDirectionVal" Items="_marginDirection" TItem="string" TItemValue="string" 
+                TValue="string" ItemValue="r => r" ItemText="r => r" Class="pr-2" Label="@("Margin")">
+                <PrependContent>
+                    <strong class="primary--text py-1">m</strong>
+                </PrependContent>
+                <AppendOuterContent>
+                    <div class="py-1">-</div>
+                </AppendOuterContent>
+            </MSelect>
+
+            <MSelect @bind-Value="_marginSizeVal" Items="_marginSize" TItem="int" TItemValue="int" 
+                TValue="int" ItemValue="r => r" ItemText="r => r.ToString()" Label="@("Size")">
+            </MSelect>
+        </MCol>
+
+        <MCol Class="orange lighten-3 pa-0" Cols="12">
+            <MSheet Class="@ComputedMargin()" Elevation="4" Rounded="true">
+                <div class="@($"light-green lighten-3 {ComputedPadding()}")">
+                    <div class="white text-center py-6">@_playgroundText</div>
+                </div>
+            </MSheet>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code
+{
+    private List<string> _paddingDirection = new() {"t", "b", "l", "r", "s", "e", "x", "y", "a" };
+    private List<int> _paddingSize = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    private string _paddingDirectionVal { get; set; } = "a";
+    private int _paddingSizeionVal { get; set; } = 6;
+    private List<string> _marginDirection => _paddingDirection;
+    private List<int> _marginSize => _paddingSize;
+    private string _marginDirectionVal { get; set; } = "a";
+    private int _marginSizeVal { get; set; } = 2;
+    private string _playgroundText = "Use the controls above to try out the different spacing helpers.";
+
+    private string ComputedPadding()
+    {
+        return $"p{_paddingDirectionVal}-{_paddingSizeionVal}";
+    }
+
+    private string ComputedMargin()
+    {
+        return $"m{_marginDirectionVal}-{_marginSizeVal}";
+    }
+}

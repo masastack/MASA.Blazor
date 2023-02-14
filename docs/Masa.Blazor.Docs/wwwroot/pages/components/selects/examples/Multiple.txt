@@ -1,0 +1,61 @@
+@using System.Collections.Generic;
+
+<MContainer Fluid>
+    <MRow Align="@AlignTypes.Center">
+        <MCol Cols="6">
+            <MSubheader>Multiple with persistent hint</MSubheader>
+        </MCol>
+        <MCol Cols="6">
+            <MSelect @bind-Value="@e6"
+                     Items="@states"
+                     ItemText="u => u"
+                     ItemValue="u => u"
+                     Label="Select"
+                     Multiple
+                     Clearable
+                     Hint="@($"selected values: {string.Join(',', e6)}")">
+            </MSelect>
+        </MCol>
+
+        <MCol Cols="6">
+            <MSubheader>Multiple (Chips) with persistent hint</MSubheader>
+        </MCol>
+
+        <MCol Cols="6">
+            <MSelect @bind-Value="@e7"
+                     Items="@states"
+                     ItemText="u => u"
+                     ItemValue="u => u"
+                     Label="Select"
+                     Multiple
+                     Chips
+                     Hint="@($"selected values: {string.Join(',', e7)}")"
+                     PersistentHint>
+            </MSelect>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    List<string> e6 = new List<string>() { "Alaska" };
+    List<string> e7 = new List<string>() { "Alaska" };
+
+    string[] states =
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming"
+    };
+
+}

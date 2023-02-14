@@ -1,0 +1,53 @@
+﻿<MCard Class="mx-auto" MaxWidth="500">
+    <MList>
+        <MListItemGroup @bind-Value="_selected">
+            @foreach (var item in s_items)
+            {
+                <MListItem @key="@item">
+                    <MListItemIcon>
+                        <MIcon>@item.Icon</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle>@item.Text</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MListItemGroup>
+    </MList>
+</MCard>
+
+@code {
+
+    private static readonly Item[] s_items =
+    {
+        new()
+        {
+            Icon = "mdi-inbox",
+            Text = "Inbox"
+        },
+        new()
+        {
+            Icon = "mdi-star",
+            Text = "Star"
+        },
+        new()
+        {
+            Icon = "mdi-send",
+            Text = "Send"
+        },
+        new()
+        {
+            Icon = "mdi-email-open",
+            Text = "Drafts"
+        }
+    };
+
+    StringNumber _selected = 1;
+
+    private class Item
+    {
+        public string Icon { get; set; }
+        public string Text { get; set; }
+    }
+
+}

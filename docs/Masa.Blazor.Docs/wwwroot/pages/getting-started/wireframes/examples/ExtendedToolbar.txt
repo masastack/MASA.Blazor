@@ -1,0 +1,34 @@
+﻿@page "/examples/wireframes/extended-toolbar"
+@layout WireframeLayout
+
+<MApp Id="inspire">
+    <MAppBar App
+             ShrinkOnScroll>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>Application</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-dots-vertical</MIcon>
+        </MButton>
+    </MAppBar>
+
+    <MMain>
+        <MContainer>
+            <MRow>
+                @for (int i = 0; i < 24; i++)
+                {
+                    <MCol Cols="4">
+                        <MCard Height="200"></MCard>
+                    </MCol>
+                }
+            </MRow>
+        </MContainer>
+    </MMain>
+</MApp>
+
+@code {
+
+}

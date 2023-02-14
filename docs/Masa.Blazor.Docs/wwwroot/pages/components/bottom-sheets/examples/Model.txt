@@ -1,0 +1,30 @@
+﻿<div class="text-center">
+    <MButton
+        Color="blue"
+        Dark
+        OnClick="() => sheet = !sheet">
+        Open bind-Value
+    </MButton>
+    <MBottomSheet @bind-Value="sheet">
+        <MSheet
+            Class="text-center"
+            Height="200">
+            <MButton
+                Class="mt-6"
+                Text
+                Color="red"
+                OnClick="() => sheet = !sheet">
+                close
+            </MButton>
+            <div class="py-3">
+                This is a bottom sheet using the controlled by v-model instead of activator
+            </div>
+        </MSheet>
+    </MBottomSheet>
+</div>
+
+@code {
+
+    bool sheet;
+
+}

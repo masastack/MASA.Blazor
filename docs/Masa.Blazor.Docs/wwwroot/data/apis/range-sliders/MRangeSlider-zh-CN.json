@@ -1,0 +1,22 @@
+{
+  "props": {
+    "inverseLabel": "使用 **rtl** 反转标签位置。",
+    "Max": "设置允许的最大值",
+    "Min": "设置允许的最小值",
+    "Step": "如果大于0，则为滑块上的点设置步骤间隔",
+    "ThumbColor": "设置拇指和拇指标签颜色",
+    "ThumbLabel": "显示拇指标签",
+    "ThumbSize": "控制缩略图标签的大小。",
+    "TickLabels": "与 Array 一起提供时，将尝试按索引顺序将标签映射到每个步骤",
+    "Ticks": "显示刻度线。如果 true ，使用滑块时将显示刻度线。如果设置为 'always' ，它总是显示刻度线。",
+    "TickSize": "控制 `Ticks` 的大小",
+    "TrackColor": "设置刻度线颜色",
+    "TrackFillColor": "设置刻度线填充颜色",
+    "vertical": "将滑块方向切换为垂直方向"
+  },
+  "events": {
+  },
+  "contents": {
+    "ThumbLabelContent": "替换缩略图标签内的内容"
+  }
+}

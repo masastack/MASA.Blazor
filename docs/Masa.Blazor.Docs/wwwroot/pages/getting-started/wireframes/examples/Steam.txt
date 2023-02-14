@@ -1,0 +1,101 @@
+﻿@page "/examples/wireframes/steam"
+@layout WireframeLayout
+
+<MApp Id="inspire">
+    <MSystemBar App>
+        <MSpacer></MSpacer>
+
+        <MIcon>mdi-square</MIcon>
+
+        <MIcon>mdi-circle</MIcon>
+
+        <MIcon>mdi-triangle</MIcon>
+    </MSystemBar>
+
+    <MAppBar App
+             ClippedLeft
+             Flat>
+        @for (int i = 0; i < 2; i++)
+        {
+            <MAvatar Class="mr-3"
+                     Color="grey lighten-1"
+                     Size="36"></MAvatar>
+        }
+
+        <div class="mx-2"></div>
+
+        @for (int i = 0; i < 4; i++)
+        {
+            <MButton Class="mr-3"
+                     Color="grey lighten-1"
+                     Depressed
+                     MinWidth="96"
+                     Rounded
+                     Small>
+            </MButton>
+        }
+
+
+        <MSpacer></MSpacer>
+
+    </MAppBar>
+
+    <MNavigationDrawer @bind-Value="_drawer"
+                       App
+                       Class="pa-2"
+                       Clipped
+                       Width="300">
+        <div class="d-flex align-center pa-1">
+
+            <MButton Rounded Depressed Color="grey lighten-3" Class="grow"></MButton>
+
+            <MButton MinWidth="0"
+                     Depressed
+                     Class="ml-3"
+                     Color="grey lighten-3"></MButton>
+        </div>
+
+        <div class="d-flex align-center pa-1">
+            <MButton Rounded Depressed Color="grey lighten-3" Class="grow"></MButton>
+
+            @for (int i = 0; i < 2; i++)
+            {
+                <MButton Class="ml-3"
+                         Color="grey lighten-1"
+                         Fab
+                         XSmall
+                         Depressed></MButton>
+            }
+        </div>
+
+        <div class="pa-1 mb-4">
+            <MTextField Dense
+                        Flat
+                        HideDetails="@("true")"
+                        Rounded
+                        SoloInverted
+                        Value="@("")"></MTextField>
+        </div>
+    </MNavigationDrawer>
+
+    <MMain>
+        <!-- Your content -->
+    </MMain>
+
+    <MFooter App
+             Color="transparent"
+             Height="72"
+             Inset>
+        <MTextField BackgroundColor="grey lighten-1"
+                    Dense
+                    Flat
+                    HideDetails="@("true")"
+                    Rounded
+                    Solo
+                    Value="@("")"></MTextField>
+    </MFooter>
+</MApp>
+
+@code {
+    bool _drawer;
+}

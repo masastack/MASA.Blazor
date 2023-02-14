@@ -1,0 +1,8 @@
+{
+  "props": {
+    "inset": "Positions the toolbar offset from an application [MNavigationDrawer](components/navigation-drawers)",
+    "padless": "Remove all padding from the footer"
+  },
+  "events": {},
+  "contents": {}
+}

@@ -1,0 +1,22 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<div class="toc-content mt-6 ml-6">@I18n.T("sponsors")</div>
+<div class="sponsors ml-6 mt-2">
+    @foreach (var sponsor in _sponsors)
+    {
+        <a href="@sponsor.Href">
+            <img style="max-width: 240px;" src="@sponsor.Src" alt="@sponsor.Alt" />
+        </a>
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+    List<(string Href, string Src, string Alt)> _sponsors = new List<(string Href, string Src, string Alt)>
+    {
+        ("https://www.lonsid.cn","https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png?x-oss-process=image/resize,l_200","lonsid")
+    };
+}

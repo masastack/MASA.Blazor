@@ -1,0 +1,20 @@
+﻿@using System.Text
+
+<PImageCaptcha CaptchaWidth="200" Outlined Label="VerifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
+
+@code {
+    string randomCode = "1234567890abcdefghijklmn";
+
+    Random random = new Random();
+
+    private Task<string> RefreshCode()
+    {
+        var sb = new StringBuilder();
+        for (int i = 0; i < 5; i++)
+        {
+            sb.Append(randomCode[random.Next(0, randomCode.Length)]);
+        }
+
+        return Task.FromResult(sb.ToString());
+    }
+}

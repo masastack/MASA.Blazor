@@ -1,0 +1,36 @@
+﻿<MRow class="d-flex" Justify="JustifyTypes.Center">
+    <MMenu Absolute OffsetY Style="max-width: 600px">
+        <ActivatorContent>
+            <MCard class="portrait" OnClick="() => { }" @attributes="@context.Attrs">
+                <MImage Height="300" Width="600" Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/cooking.png"></MImage>
+            </MCard>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @foreach (var item in items)
+                {
+                    <MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                @item
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
+</MRow>
+
+@code {
+
+    string[] items =
+        {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    };
+
+}

@@ -1,0 +1,13 @@
+﻿<MRow Justify="JustifyTypes.Center">
+    <MDatePicker @bind-Value="_months"
+                 Type="DatePickerType.Month"
+                 Multiple></MDatePicker>
+</MRow>
+
+@code {
+    private IList<DateOnly> _months = new List<DateOnly>
+        {
+            new DateOnly(2018,9,1),
+            new DateOnly(2018,10,1)
+        };
+}

@@ -1,0 +1,35 @@
+﻿<MRow>
+    <MCol Cols="@("auto")">
+        <MCard Width="200" Height="200" Class="overflow-auto">
+            <MCardText>
+                <h3>Overflow Auto</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+                facilis dicta esse molestias vero hic laudantium provident nisi eos
+                quasi iusto alias sequi, aut aliquid voluptatibus commodi! Minima, eum
+                voluptates?
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Cols="@("auto")">
+        <MCard Width="200" Height="200" Class="overflow-hidden">
+            <MCardText>
+                <h3>Overflow Auto</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+                facilis dicta esse molestias vero hic laudantium provident nisi eos
+                quasi iusto alias sequi, aut aliquid voluptatibus commodi! Minima, eum
+                voluptates?
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Cols="@("auto")">
+        <MCard Width="200" Height="200" Class="overflow-visible">
+            <MCardText>
+                <h3>Overflow Auto</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+                facilis dicta esse molestias vero hic laudantium provident nisi eos
+                quasi iusto alias sequi, aut aliquid voluptatibus commodi! Minima, eum
+                voluptates?
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>

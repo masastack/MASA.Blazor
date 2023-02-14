@@ -1,0 +1,51 @@
+﻿<MRow Justify=JustifyTypes.Center>
+
+    <MMenu Transition="slide-y-transition">
+
+        <ActivatorContent>
+            <MButton Class="ma-2" Color="primary" @attributes="context.Attrs">
+               Slide Y Transition
+            </MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @for (var i = 0; i < 5; i++)
+                {
+                    <MListItem>
+                        <MListItemTitle>
+                            @("Item"+i)
+                        </MListItemTitle>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+
+    </MMenu>
+
+    <div class="mx-4 hidden-sm-and-down"></div>
+
+     <MMenu Transition="slide-y-reverse-transition">
+
+        <ActivatorContent>
+            <MButton Class="ma-2" Color="secondary" @attributes="context.Attrs">
+               Slide Y Reverse Transition
+            </MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @for (var i = 0; i < 5; i++)
+                {
+                    <MListItem>
+                        <MListItemTitle>
+                            @("Item"+i)
+                        </MListItemTitle>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+
+    </MMenu>
+
+</MRow>

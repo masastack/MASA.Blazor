@@ -1,0 +1,18 @@
+﻿<MContainer Fluid>
+    <MRow>
+        <MCol Cols="12">
+            <MRangeSlider @bind-Value="_value"
+                          Disabled
+                          Label="Disabled"></MRangeSlider>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    private IList<double> _value = new List<double>
+        {
+            30,
+            60
+        };
+}
+

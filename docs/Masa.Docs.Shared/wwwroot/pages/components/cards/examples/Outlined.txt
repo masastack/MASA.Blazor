@@ -1,0 +1,17 @@
+﻿<MCard Class="mx-auto" MaxWidth="344" Outlined>
+    <MListItem ThreeLine>
+        <MListItemContent>
+            <div class="text-overline mb-4">
+                OVERLINE
+            </div>
+            <MListItemTitle Class="text-h5 mb-1">
+                Headline 5
+            </MListItemTitle>
+            <MListItemSubtitle>Greyhound divisely hello coldly fonwderfully</MListItemSubtitle>
+        </MListItemContent>
+        <MListItemAvatar Tile Size=80 Color="grey"> </MListItemAvatar>
+    </MListItem>
+    <MCardActions>
+        <MButton Outlined Rounded Text>Button</MButton>
+    </MCardActions>
+</MCard>

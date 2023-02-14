@@ -1,0 +1,16 @@
+{
+  "props": {
+    "app": "当在 [MMain](/blazor/components/mains) 中使用时，将参考和依据 [MToolbar](/blazor/components/toolbars) 和 [MSystemBar](/blazor/components/systemBars) 的高度来计算距离顶部位置。",
+    "prominent": "将工具栏内容的高度增加到 128px。",
+    "shaped": "shaped。",
+    "short": "将工具栏内容的高度降低到 56px（使用 `Prominent` 属性时为 112px）。",
+    "show": "show。",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "contents": {
+    "extensionContent": "槽位直接位于工具栏的主要内容下。可以使用 `ExtensionHeight` 属性显式设置高度。如果该插槽没有内容，可以使用 `Extended` 属性代替。",
+    "imgContent": "需要 [MImage](/blazor/components/images) 组件。范围内的 props 应该与 @bind-value=\"props\" 一起使用。"
+  },
+  "events": {},
+  "functions": {}
+}

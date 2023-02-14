@@ -1,0 +1,147 @@
+﻿{
+  "floating-action-buttons": [
+    "MButton",
+    "MSpeedDial"
+  ],
+  "grids": [
+    "MContainer",
+    "MRow",
+    "MCol",
+    "MSpacer"
+  ],
+  "aspect-ratios": [
+    "MResponsive"
+  ],
+  "app-bars": [
+    "MAppBar",
+    "MAppBarNavIcon",
+    "MAppBarTitle"
+  ],
+  "breadcrumbs": [
+    "MBreadcrumbs",
+    "MBreadcrumbsItem",
+    "MBreadcrumbsDivider"
+  ],
+  "buttons": [
+    "MButton",
+    "MButtonGroup"
+  ],
+  "cards": [
+    "MCard",
+    "MCardActions",
+    "MCardSubtitle",
+    "MCardText",
+    "MCardTitle"
+  ],
+  "carousels": [
+    "MCarousel",
+    "MCarouselItem"
+  ],
+  "expansion-panels": [
+    "MExpansionPanel",
+    "MExpansionPanels",
+    "MExpansionPanelHeader",
+    "MExpansionPanelContent"
+  ],
+  "data-iterators": [
+    "MDataIterator",
+    "MDataFooter"
+  ],
+  "data-tables": [
+    "MDataTable",
+    "MDataTableHeader",
+    "MDataFooter",
+    "MSimpleCheckbox"
+  ],
+  "application": [
+    "MApp",
+    "MMain"
+  ],
+  "checkboxes": [
+    "MCheckbox",
+    "MSimpleCheckbox"
+  ],
+  "radios": [
+    "MRadio",
+    "MRadioGroup"
+  ],
+  "range-sliders": [
+    "MRangeSlider",
+    "MSlider"
+  ],
+  "button-groups": [
+    "MButtonGroup",
+    "MButton"
+  ],
+  "chip-groups": [
+    "MChipGroup",
+    "MChip"
+  ],
+  "item-groups": [
+    "MItem",
+    "MItemGroup"
+  ],
+  "list-item-groups": [
+    "MListGroup",
+    "MListItem",
+    "MListItemAction",
+    "MListItemActionText",
+    "MListItemAvatar",
+    "MListItemContent",
+    "MListItemGroup",
+    "MListItemSubtitle",
+    "MListItemTitle"
+  ],
+  "slide-groups": [
+    "MSlideGroup",
+    "MSlideItem"
+  ],
+  "windows": [
+    "MWindow",
+    "MWindowItem"
+  ],
+  "lists": [
+    "MList",
+    "MListGroup",
+    "MListItem",
+    "MListItemAction",
+    "MListItemActionText",
+    "MListItemAvatar",
+    "MListItemContent",
+    "MListItemGroup",
+    "MListItemIcon",
+    "MListItemSubtitle",
+    "MListItemTitle"
+  ],
+  "markdown-parsers": [
+    "MMarkdownIt"
+  ],
+  "syntax-highlights": [
+    "MHighlight"
+  ],
+  "not-grouped": [
+    "PConfirm",
+    "PPageHeader",
+    "PSidebar"
+  ],
+  "date-pickers-month": [
+    "MDatePicker"
+  ],
+  "steppers": [
+    "MStepper",
+    "MStepperContent",
+    "MStepperHeader",
+    "MStepperItems",
+    "MStepperStep"
+  ],
+  "tabs": [
+    "MTabs",
+    "MTab",
+    "MTabItem",
+    "MTabsItems"
+  ],
+  "timelines": [
+    "MTimeline",
+    "MTimelineItem"
+  ]
+}

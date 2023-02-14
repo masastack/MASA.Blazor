@@ -1,0 +1,20 @@
+﻿@namespace Masa.Docs.Core.Components
+
+<AppCode Class="@Class" Rounded="Rounded" Code="@Code" Language="@Language" />
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string? Code { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string? Language { get; set; }
+
+    [Parameter]
+    public StringBoolean Rounded { get; set; } = true;
+
+    [Parameter]
+    public string? Class { get; set; } = "my-0";
+}

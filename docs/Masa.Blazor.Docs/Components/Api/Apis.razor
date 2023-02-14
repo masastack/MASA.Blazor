@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor.Docs.Components
+
+@if (Data.Keys.Count > 1)
+{
+    <MSelect Items="Data.Keys.ToList()"
+             ItemText="key => key"
+             ItemValue="key => key"
+             Value="Value"
+             ValueChanged="ValueChanged"
+             TValue="string"
+             TItemValue="string"
+             TItem="string"
+             Filled
+             Label="API">
+    </MSelect>
+}
+
+@if (Value is not null && Data.ContainsKey(Value))
+{
+    foreach (var (name, data) in Data[Value])
+    {
+        <ApiSection Name="@name" Data="@data" />
+    }
+}
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public Dictionary<string, Dictionary<string, List<ParameterInfo>>> Data { get; set; } = null!;
+
+    [Parameter]
+    public string? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> ValueChanged { get; set; }
+
+}

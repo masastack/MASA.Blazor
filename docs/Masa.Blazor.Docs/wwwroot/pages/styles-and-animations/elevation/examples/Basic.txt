@@ -1,0 +1,15 @@
+﻿<MContainer>
+    <MRow Justify="JustifyTypes.Center">
+        @for (var i = 0; i < 25; i++)
+        {
+            var num = i;
+            <MCol Cols="@("auto")">
+                <MCard Elevation="@num" Height="100" Width="100" Class="secondary">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        @num
+                    </MRow>
+                </MCard>
+            </MCol>
+        }
+    </MRow>
+</MContainer>

@@ -1,0 +1,23 @@
+﻿@attribute [JSCustomElement]
+
+<a href="@Href"
+   target="@_target"
+   class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
+   @onclick="@OnClick"
+   @onclick:preventDefault="IsSamePage"
+   @attributes="@Attributes">
+    @if (!IsSamePage)
+    {
+        @Content
+    }
+
+    @if (Icon is not null)
+    {
+        <MIcon Class="@($"m{(IsSamePage ? "r" : "l")}-1")" Color="primary" Size="@(".875rem")">@Icon</MIcon>
+    }
+
+    @if (IsSamePage)
+    {
+        @Content
+    }
+</a>

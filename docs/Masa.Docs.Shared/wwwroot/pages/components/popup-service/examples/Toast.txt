@@ -1,0 +1,121 @@
+﻿@using Masa.Blazor.Popup.Components
+@inject IPopupService PopupService
+
+<MButton OnClick="ShowBasic">Basic Toast</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup @bind-Value="toastType" Row>
+    <MRadio Value="AlertTypes.None" Label="None Icon"></MRadio>
+    <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
+    <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
+    <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
+    <MRadio Value="AlertTypes.Info" Label="@nameof(AlertTypes.Info)"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="ShowTyped">Typed Toast</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup @bind-Value="isDark" Row>
+    <MRadio Value="true" Label="Drak"></MRadio>
+    <MRadio Value="false" Label="Light"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="ShowTheme">Show Theme</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowContent">Show with Title and Content</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="CustomAction">Custom Action</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup Value="position" TValue="ToastPosition" Row ValueChanged="OnChangePosition">
+    <MRadio Value="ToastPosition.TopLeft" Label="Top Left"></MRadio>
+    <MRadio Value="ToastPosition.TopRight" Label="Top Right"></MRadio>
+    <MRadio Value="ToastPosition.BottomLeft" Label="Bottom Left"></MRadio>
+    <MRadio Value="ToastPosition.BottomRight" Label="Bottom Right"></MRadio>
+</MRadioGroup>
+
+@code {
+
+    AlertTypes toastType = AlertTypes.Success;
+
+    bool isDark = true;
+
+    ToastPosition position = ToastPosition.BottomRight;
+
+    private Task ShowBasic()
+    {
+        return PopupService.ToastInfoAsync("Info Toast Title");
+    }
+
+    private Task ShowTyped()
+    {
+        return PopupService.ToastAsync($"{toastType.ToString()} Toast Title", toastType);
+    }
+
+    private Task ShowTheme()
+    {
+        return PopupService.ToastAsync((config) =>
+        {
+            config.Dark = isDark;
+            config.Type = toastType;
+            config.Title = $"Now is {(isDark ? "Dark" : "Light")} theme";
+        });
+    }
+
+    private Task ShowContent()
+    {
+        var config = new ToastConfig()
+        {
+            Title = "Message Title",
+            Content = "Message details",
+            Dark = isDark,
+            Type = toastType
+        };
+        return PopupService.ToastAsync(config);
+    }
+
+    private Task HandleOnView()
+    {
+        return PopupService.ToastInfoAsync("View button click");
+    }
+
+    private async Task CustomAction()
+    {
+        RenderFragment customViewAction = (builder) =>
+        {
+            builder.AddContent(0, @<MButton OnClick="HandleOnView" Text> View </MButton>);
+        };
+
+        await PopupService.ToastAsync((config) =>
+        {
+            config.Title = "Custom Action Message";
+            config.Duration = 0;
+            config.Content = "Not auto close";
+            config.Type = toastType;
+            config.ActionContent = customViewAction;
+            config.Dark = isDark;
+            config.OnClose = (key) =>
+            {
+                Console.WriteLine($"Key: {key} Close");
+                return Task.CompletedTask;
+            };
+        });
+    }
+
+    private Task OnChangePosition(ToastPosition position)
+    {
+        this.position = position;
+        return PopupService.ConfigToast((config) =>
+        {
+            config.Position = position;
+        });
+    }
+
+}

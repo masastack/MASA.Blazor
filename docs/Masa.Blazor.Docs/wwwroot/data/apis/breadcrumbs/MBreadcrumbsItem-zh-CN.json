@@ -1,0 +1,14 @@
+{
+  "props": {
+    "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [active-class prop](https://router.vuejs.org/api/)。",
+    "disabled": "移除组件的单击或 target 功能。",
+    "exact": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。你能够在 vue-router 文档浏览更多 [exact prop](https://router.vuejs.org/api/)。",
+    "href": "指定组件为锚点并应用 href 属性。",
+    "linkage": "linkage。",
+    "ripple": "Ripple",
+    "text": "text"
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

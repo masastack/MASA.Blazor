@@ -1,0 +1,48 @@
+﻿<div class="text-center">
+    <MBottomSheet @bind-Value="sheet">
+        <ActivatorContent>
+            <MButton
+                Color="purple"
+                Dark
+                @attributes="@context.Attrs">
+                Open In
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MList>
+                <MSubheader>Open in</MSubheader>
+                @foreach (var tile in tiles)
+                {
+                    <MListItem @key="@tile"
+                               OnClick="() => sheet = false">
+                        <MListItemAvatar>
+                            <MAvatar
+                                Size="32"
+                                Tile>
+                                <img
+                                    src="@($"https://cdn.vuetifyjs.com/images/bottom-sheets/{tile.img}")"
+                                    alt="@tile.title">
+                            </MAvatar>
+                        </MListItemAvatar>
+                        <MListItemTitle>@tile.title</MListItemTitle>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MBottomSheet>
+</div>
+
+@code {
+
+    bool sheet;
+
+    static readonly List<(string img, string title)> tiles = new()
+    {
+        ("keep.png", "Keep"),
+        ("inbox.png", "Inbox"),
+        ("hangouts.png", "Hangouts"),
+        ("messenger.png", "Messenger"),
+        ("google.png", "Google+"),
+    };
+
+}

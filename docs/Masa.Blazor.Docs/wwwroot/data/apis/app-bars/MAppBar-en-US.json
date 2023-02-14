@@ -1,0 +1,20 @@
+{
+  "props": {
+    "clippedLeft": "Designates that the application’s [MNavigationDrawer](components/navigationDrawers) that is positioned on the left is below the `MAppBar`.",
+    "clippedRight": "Designates that the application’s [MNavigationDrawer](components/navigationDrawers) that is positioned on the right is below the `MAppBar`.",
+    "collapseOnScroll": "Puts the app-bar into a collapsed state when scrolling.",
+    "prominent": "Increases the height of the toolbar content to 128px.",
+    "scrollOffScreen": "hrinks a prominent toolbar to a `Dense` or `Short` (default) one when scrolling.",
+    "shaped": "shaped.",
+    "short": "Reduce the height of the toolbar content to 56px (112px when using the `Prominent` prop).",
+    "show": "show.",
+    "shrinkOnScroll": "Shrinks a `Prominent` toolbar to a `Dense` or `Short` (default) one when scrolling.",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "contents": {
+    "extensionContent": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the `ExtensionHeight` prop. If this slot has no content, the `Extended` prop may be used instead.",
+    "imgContent": "Expects the [MImage](/blazor/components/images) component. Scoped props should be applied with @bind-value=\"props\"."
+  },
+  "events": {},
+  "functions": {}
+}

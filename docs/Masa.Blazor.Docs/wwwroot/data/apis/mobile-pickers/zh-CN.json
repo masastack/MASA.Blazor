@@ -1,0 +1,21 @@
+{
+  "props": {
+    "columns": "",
+    "itemChildren": "",
+    "itemDisabled": "",
+    "itemHeight": "",
+    "itemText": "",
+    "itemValue": "",
+    "swipeDuration": "",
+    "title": "",
+    "value": "",
+    "visible": "",
+    "visibleItemCount": ""
+  },
+  "events": {
+    "visibleChanged": ""
+  },
+  "contents": {
+    "activatorContent": ""
+  }
+}

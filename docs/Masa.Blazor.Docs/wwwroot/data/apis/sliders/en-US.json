@@ -1,0 +1,22 @@
+{
+  "props": {
+    "inverseLabel": "Reverse the label position. Works with **rtl**.",
+    "Max": "Sets the maximum allowed value",
+    "Min": "Sets the minimum allowed value",
+    "Step": "If greater than 0, sets step interval for ticks",
+    "ThumbColor": "Sets the thumb and thumb label color",
+    "ThumbLabel": "Show thumb label. If true it shows label when using slider. If set to 'always' it always shows label.",
+    "ThumbSize": "Controls the size of the thumb label.",
+    "TickLabels": "When provided with Array, will attempt to map the labels to each step in index order",
+    "Ticks": "Show track ticks. If true it shows ticks when using slider. If set to 'always' it always shows ticks.",
+    "TickSize": "Controls the size of ticks",
+    "TrackColor": "Sets the track's color",
+    "TrackFillColor": "Sets the track's fill color",
+    "vertical": "Changes slider direction to vertical"
+  },
+  "events": {
+  },
+  "contents": {
+    "thumbLabelContent": "Replaces the content inside the thumb label"
+  }
+}

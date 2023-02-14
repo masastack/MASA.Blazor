@@ -1,0 +1,14 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MDatePicker Class="mt-4"
+                 AllowedDates="_allowedDates"
+                 @bind-Value="_date"
+                 Min="_min"
+                 Max="_max"></MDatePicker>
+</MRow>
+
+@code {
+    private DateOnly _date = DateOnly.Parse("2018-03-02");
+    private DateOnly _min = DateOnly.Parse("2016-06-15");
+    private DateOnly _max = DateOnly.Parse("2018-03-20");
+    private Func<DateOnly, bool> _allowedDates = value => value.Day % 2 == 0;
+}

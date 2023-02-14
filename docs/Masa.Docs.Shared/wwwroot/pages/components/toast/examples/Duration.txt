@@ -1,0 +1,31 @@
+﻿<PToast @ref="_toast" Duration="duration">
+</PToast>
+
+<MTextField Type="number" @bind-Value="duration" NumberProps="props=> { props.Min=0; props.Step=1000; }"></MTextField>
+
+<MButton OnClick="AddToast"> Add Toast </MButton>
+
+@code {
+    PToast _toast;
+
+    int? duration;
+
+    Random random = new Random();
+
+    private async Task AddToast()
+    {
+        var now = DateTime.Now.ToString("HH:mm:ss.fff");
+        var alertType = random.NextInt64(0, 5);
+        var dark = random.NextInt64(0, 2);
+        var config = new ToastConfig()
+        {
+            Title = duration == 0? "Not auto close" : (duration == null? $"Auto close after 4000ms" : $"Auto close after {duration} ms"),
+            Content = $"create time: {now}",
+            Dark = dark == 0,
+            Type = (AlertTypes)alertType,
+            Duration = duration
+        };
+
+        await _toast.AddToast(config);
+    }
+}

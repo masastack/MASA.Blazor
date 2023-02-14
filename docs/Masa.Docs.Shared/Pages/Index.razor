@@ -1,0 +1,157 @@
+﻿@page "/"
+@layout MainLayout
+@inject DocService DocService
+@inject I18n I18n
+
+<MContainer Fluid>
+    <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
+        @if (_loading)
+        {
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+        }
+        else
+        {
+            <div class="project">
+                <div class="heading-5 mb-6 d-flex align-center">
+                    <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                    @I18n.T("getting-started")
+                </div>
+                @ProductCard(s_gettingStartedNavs)
+            </div>
+
+            @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+            {
+                <div class="project">
+                    <div class="heading-5 mb-6 d-flex align-center">
+                        @Image(project)
+                        @I18n.T("product", project)
+                    </div>
+
+                    @{
+                        var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
+                        var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
+                        if (groupNavsWithoutChildren is not null)
+                        {
+                            @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
+                        }
+
+                        var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
+                        if (groupNavsWithChildren is not null)
+                        {
+                            foreach (var navItem in groupNavsWithChildren)
+                            {
+                                if (navItem.Tiling is NavItemTiling.Invisible)
+                                {
+                                    continue;
+                                }
+
+                                var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                                @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
+                            }
+                        }
+                    }
+                </div>
+            }
+        }
+    </MResponsive>
+</MContainer>
+
+@code {
+
+    [CascadingParameter]
+    private CultureInfo Culture { get; set; } = null!;
+
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
+    private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
+    {
+        ("why-masa-blazor", "/blazor/introduction/why-masa-blazor"),
+        ("kubernetes-deploy", "/stack/operations/kubernetes/kubernetes-deploy")
+    };
+
+    private static RenderFragment Image(string project) => __builder =>
+    {
+        string? src = null;
+        switch (project)
+        {
+            case "blazor":
+                src = "https://cdn.masastack.com/images/blazor_logo.png?x-oss-process=image/resize,w_30";
+                break;
+            case "framework":
+                src = "https://cdn.masastack.com/images/framework_logo.png?x-oss-process=image/resize,w_30";
+                break;
+            case "stack":
+                src = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_30";
+                break;
+        }
+
+        if (!string.IsNullOrWhiteSpace(src))
+        {
+            <MImage Src="@src" Class="mr-2" MaxWidth="30" MaxHeight="30"></MImage>
+        }
+    };
+
+    private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
+
+    private bool _loading = true;
+
+    protected override void OnInitialized()
+    {
+        BaseLayout.PageInfo.PageTitle = "MASA Stack Docs";
+        BaseLayout.PageInfo.PageIcon = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _loading = true;
+
+            StateHasChanged();
+
+            var projectMap = await DocService.ReadProjectMapAsync();
+
+            foreach (var key in projectMap.Keys)
+            {
+                _projectToNavs[key] = await DocService.ReadNavsAsync(key);
+            }
+
+            _loading = false;
+
+            StateHasChanged();
+        }
+    }
+
+    private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
+    {
+        <div class="project-content">
+            @if (group is not null)
+            {
+                <div class="project-content__title">@I18n.T(group)</div>
+            }
+            <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
+                <MRow Dense NoGutters>
+                    @foreach (var (title, href) in items)
+                    {
+                        <MCol Cols="4" Class="rounded text-truncate">
+                            @LinkableTitle(title, href)
+                        </MCol>
+                    }
+                </MRow>
+            </MCard>
+        </div>
+    };
+
+    private RenderFragment LinkableTitle(string title, string href) => __builder =>
+    {
+        <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
+    };
+
+}

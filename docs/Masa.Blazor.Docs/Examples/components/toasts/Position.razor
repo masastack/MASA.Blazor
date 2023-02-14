@@ -1,0 +1,43 @@
+﻿<PToast @ref="_toast" Position="position">
+</PToast>
+
+<MRadioGroup Value="position" TValue="ToastPosition" Row ValueChanged="OnChangePosition">
+    <MRadio Value="ToastPosition.TopLeft" Label="Top Left"></MRadio>
+    <MRadio Value="ToastPosition.TopRight" Label="Top Right"></MRadio>
+    <MRadio Value="ToastPosition.BottomLeft" Label="Bottom Left"></MRadio>
+    <MRadio Value="ToastPosition.BottomRight" Label="Bottom Right"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="AddToast"> Add Toast </MButton>
+
+@code {
+    PToast _toast;
+
+    int maxCount = 5;
+
+    ToastPosition position = ToastPosition.BottomRight;
+
+    Random random = new Random();
+
+    private async Task AddToast()
+    {
+        var now = DateTime.Now.ToString("HH:mm:ss.fff");
+        var alertType = random.NextInt64(0, 5);
+        var dark = random.NextInt64(0, 2);
+        var config = new ToastConfig()
+        {
+            Title = $"Show on {position.ToString()}",
+            Content = $"create time: {now}",
+            Dark = dark == 0,
+            Type = (AlertTypes)alertType,
+        };
+
+        await _toast.AddToast(config);
+    }
+
+    private Task OnChangePosition(ToastPosition position)
+    {
+        this.position = position;
+        return Task.CompletedTask;
+    }
+}

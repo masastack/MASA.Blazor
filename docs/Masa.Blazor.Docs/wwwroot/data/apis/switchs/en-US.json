@@ -1,0 +1,12 @@
+{
+  "props": {
+    "inset": "",
+    "leftText": "",
+    "rightText": "",
+    "trackColor": ""
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

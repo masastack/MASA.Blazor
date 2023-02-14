@@ -1,0 +1,105 @@
+﻿<MCard Class="mx-auto"
+       MaxWidth="600">
+    <MToolbar Flat
+              Dense>
+        <MToolbarTitle>
+            <span class="subheading">METRONOME</span>
+        </MToolbarTitle>
+        <MSpacer></MSpacer>
+        <MButton Icon>
+            <MIcon>mdi-share-variant</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MCardText>
+        <MRow Class="mb-4"
+              Justify="@("space-between")">
+            <MCol Class="text-left">
+                <span class="text-h2 font-weight-light">@_bpm</span>
+                <span class="subheading font-weight-light mr-1">BPM</span>
+                @if (_isPlaying)
+                {
+                    <MAvatar Color="@Color"
+                         Style="@($"animation-duration: {AnimationDuration}")"
+                         Class="mb-1 m-avatar--metronome"
+                         Size="12"></MAvatar>
+                }
+            </MCol>
+            <MCol Class="text-right">
+                <MButton Color="@Color"
+                         Dark
+                         Depressed
+                         Fab
+                         OnClick="Toggle">
+                    <MIcon Large>
+                        @(_isPlaying ? "mdi-pause" : "mdi-play")
+                    </MIcon>
+                </MButton>
+            </MCol>
+        </MRow>
+
+        <MSlider @bind-Value="_bpm"
+                 Color="@Color"
+                 TrackColor="grey"
+                 Min="40"
+                 Max="218">
+            <PrependContent>
+                <MIcon Color="@Color"
+                       OnClick="Decrement">
+                    mdi-minus
+                </MIcon>
+            </PrependContent>
+
+            <AppendContent>
+                <MIcon Color="@Color"
+                       OnClick="Increment">
+                    mdi-plus
+                </MIcon>
+            </AppendContent>
+        </MSlider>
+    </MCardText>
+</MCard>
+
+@code {
+    private double _bpm = 40;
+    private bool _isPlaying;
+
+    public string Color
+    {
+        get
+        {
+            if (_bpm < 100)
+            {
+                return "indigo";
+            }
+
+            if (_bpm < 125)
+            {
+                return "teal";
+            }
+
+            if (_bpm < 140) return "green";
+
+            if (_bpm < 175) return "orange";
+
+            return "red";
+        }
+    }
+
+    public string AnimationDuration => $"{60 / _bpm}s";
+
+    public void Decrement()
+    {
+        _bpm--;
+    }
+
+    public void Increment()
+    {
+        _bpm++;
+    }
+
+    public void Toggle()
+    {
+        _isPlaying = !_isPlaying;
+    }
+}

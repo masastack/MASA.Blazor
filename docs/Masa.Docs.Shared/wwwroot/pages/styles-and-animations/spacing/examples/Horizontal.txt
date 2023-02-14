@@ -1,0 +1,5 @@
+﻿<MCard Class="mx-auto" Color="secondary" Width="200">
+    <MCardText>
+        Centered
+    </MCardText>
+</MCard>

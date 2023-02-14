@@ -1,0 +1,22 @@
+{
+  "props": {
+    "alignWithTitle": "Make `MTabs` lined up with the toolbar title",
+    "centerActive": "Forces the selected tab to be centered",
+    "centered": "Centers the tabs",
+    "fixedTabs": "`MTabsItems` min-width 160px, max-width 360px",
+    "grow": "Force `MTab`  to take up all available space",
+    "hideSlider": "Hide’s the generated `MTabsSlider` ",
+    "iconsAndText": "Will stack icon and text vertically",
+    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
+    "nextIcon": "Right pagination icon",
+    "optional": "Does not require an active item. Useful when using `MTab` as a router-link",
+    "prevIcon": "Left pagination icon",
+    "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
+    "sliderColor": "Changes the background color of an auto-generated v-tabs-slider",
+    "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
+    "value": "The designated model value for the component.",
+    "vertical": "Stacks tabs on top of each other vertically."
+  },
+  "events": {},
+  "contents": {}
+}

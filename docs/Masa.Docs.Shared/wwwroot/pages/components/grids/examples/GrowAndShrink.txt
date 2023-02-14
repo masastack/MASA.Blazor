@@ -1,0 +1,29 @@
+﻿<div>
+    <MContainer Class="grey lighten-5">
+        <MRow Class="mb-6"
+              NoGutters>
+            @for (var index = 0; index < 4; index++)
+            {
+                <MCol>
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        col
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+        <MRow NoGutters>
+            @for (int index = 0; index < 2; index++)
+            {
+                <MCol Cols="@(index == 0 ? 8 : 4)">
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        col-@(index == 0 ? 8 : 4)
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+</div>

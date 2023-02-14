@@ -1,0 +1,52 @@
+﻿<MContainer Fluid>
+    <MRow Align="@AlignTypes.Center">
+        <MCol Cols="12" Sm="6">
+            <div class="text-center">
+                <div class="my-2">
+                    <MButton XSmall Color="secondary">XSmall Button</MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Small Color="primary">Small Button</MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Color="warning">Normal Button</MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Large Color="error">Large Button</MButton>
+                </div>
+                <div class="my-2">
+                    <MButton XLarge Color="success">XLarge Button</MButton>
+                </div>
+            </div>
+        </MCol>
+        <MCol Cols="12" Sm="6">
+            <div class="text-center">
+                <div class="my-2">
+                    <MButton XSmall Fab Color="secondary">
+                        <MIcon>mdi-television</MIcon>
+                    </MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Small Fab Color="primary">
+                        <MIcon>mdi-pencil</MIcon>
+                    </MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Fab Color="warning">
+                        <MIcon>mdi-account-circle</MIcon>
+                    </MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Large Fab Color="error">
+                        <MIcon>mdi-alarm</MIcon>
+                    </MButton>
+                </div>
+                <div class="my-2">
+                    <MButton XLarge Fab Color="success">
+                        <MIcon>mdi-domain</MIcon>
+                    </MButton>
+                </div>
+            </div>
+        </MCol>
+    </MRow>
+</MContainer>

@@ -1,0 +1,150 @@
+﻿<MContainer Fluid>
+    <MSwitch @bind-Value="_singleExpand"
+             Label="Expand Single Item"></MSwitch>
+    <MDataIterator Items="_desserts"
+                   ItemKey="r=>r.Name"
+                   ItemsPerPage="4"
+                   SingleExpand="_singleExpand"
+                   HideDefaultFooter>
+        <ChildContent Context="props">
+            <MRow>
+                @foreach (var item in props.Items)
+                {
+                    var expanded = props.IsExpanded(item);
+                    var expand = delegate (bool v) { props.Expand(item, v); };
+                    <MCol @key="item.Name"
+                      Cols="12"
+                      Sm="6"
+                      Md="4"
+                      Lg="3">
+                        <MCard>
+                            <MCardTitle>
+                                <h4>@item.Name</h4>
+                            </MCardTitle>
+                            <MSwitch Value="expanded" ValueChanged="expand" Label="@(expanded?"Expanded":"Closed")" Class="pl-4 mt-0"></MSwitch>
+                            <MDivider></MDivider>
+                            @if (expanded)
+                            {
+                                <MList Dense>
+                                    <MListItem>
+                                        <MListItemContent>Calories:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Calories
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Fat:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Fat
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Carbs:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Carbs
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Protein:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Protein
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Sodium:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Sodium
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Calcium:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Calcium
+                                        </MListItemContent>
+                                    </MListItem>
+                                    <MListItem>
+                                        <MListItemContent>Iron:</MListItemContent>
+                                        <MListItemContent Class="align-end">
+                                            @item.Iron
+                                        </MListItemContent>
+                                    </MListItem>
+                                </MList>
+                            }
+                        </MCard>
+                    </MCol>
+                }
+            </MRow>
+        </ChildContent>
+    </MDataIterator>
+</MContainer>
+
+@code {
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public int Sodium { get; set; }
+
+        public string Calcium { get; set; }
+
+        public string Iron { get; set; }
+    }
+
+    private bool _singleExpand;
+
+    private List<Dessert> _desserts = new List<Dessert>
+        {
+           new Dessert
+           {
+              Name= "Frozen Yogurt",
+              Calories= 159,
+              Fat= 6.0,
+              Carbs= 24,
+              Protein= 4.0,
+              Sodium= 87,
+              Calcium= "14%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Ice cream sandwich",
+              Calories= 237,
+              Fat= 9.0,
+              Carbs= 37,
+              Protein= 4.3,
+              Sodium= 129,
+              Calcium= "8%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Eclair",
+              Calories= 262,
+              Fat= 16.0,
+              Carbs= 23,
+              Protein= 6.0,
+              Sodium= 337,
+              Calcium= "6%",
+              Iron= "7%",
+            },
+            new Dessert
+            {
+              Name= "Cupcake",
+              Calories= 305,
+              Fat= 3.7,
+              Carbs= 67,
+              Protein= 4.3,
+              Sodium= 413,
+              Calcium= "3%",
+              Iron= "8%",
+            },
+        };
+  }

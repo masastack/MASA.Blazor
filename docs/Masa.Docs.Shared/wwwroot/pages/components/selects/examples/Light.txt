@@ -1,0 +1,73 @@
+<MCard>
+    <MContainer Fluid>
+        <MRow Align="@AlignTypes.Center">
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Value="values"
+                         Items="_items"
+                         Attach
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Value="values"
+                         Items="_items"
+                         Filled
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Value="values"
+                         Items="_items"
+                         Chips
+                         Label="Chips"
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Multiple
+                         Outlined></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Value="values"
+                         Items="_items"
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple
+                         Solo></MSelect>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MCard>
+
+@code{
+    private List<string> values = new List<string> { "1" };
+
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+
+    List<Item> _items = new()
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
+}

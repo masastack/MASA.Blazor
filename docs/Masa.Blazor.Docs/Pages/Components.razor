@@ -1,0 +1,54 @@
+﻿@page "/{project}/components/{page}/{tab?}/{api?}"
+
+<MContainer Class="pa-4 pa-sm-6 pa-md-8"
+            Fluid
+            Tag="section">
+    <MResponsive MaxWidth="960"
+                 Class="mx-auto overflow-visible">
+        @if (_frontMatterMeta is not null)
+        {
+            <FrontMatter Meta="_frontMatterMeta"></FrontMatter>
+        }
+        else
+        {
+            <MSkeletonLoader Type="article"></MSkeletonLoader>
+        }
+
+        @if (Page.ToLower() != "all")
+        {
+            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
+                <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
+                <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
+            </MTabs>
+        }
+
+        @if (IsApiTab && _apiData.Count == 0)
+        {
+            <MSkeletonLoader Type="table"></MSkeletonLoader>
+        }
+        else if (!IsApiTab && _md == null)
+        {
+            <MSkeletonLoader Type="article,card"></MSkeletonLoader>
+        }
+        else
+        {
+            <FadeTransition LeaveAbsolute>
+                <ShowTransitionElement Tag="div" Value="@IsApiTab">
+                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
+                </ShowTransitionElement>
+                <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
+                    <DocumentMarkdownIt Source="@_md"
+                                        OnTocParsed="@OnTocParsed"
+                                        OnFrontMatterParsed="@OnFrontMatterParsed" />
+
+                    @if (_frontMatterMeta is not null)
+                    {
+                        <BackMatter Related="@_frontMatterMeta.Related"></BackMatter>
+                    }
+                </ShowTransitionElement>
+            </FadeTransition>
+        }
+
+        <Contribute GithubUri="@($"https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Docs/Masa.Blazor.Docs/wwwroot/pages/components/{Page}/{Culture.Name}.md")" />
+    </MResponsive>
+</MContainer>

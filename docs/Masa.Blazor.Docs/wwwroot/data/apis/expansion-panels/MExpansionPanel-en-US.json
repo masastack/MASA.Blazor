@@ -1,0 +1,9 @@
+{
+  "props": {
+    "disabled": "Disables the expansion-panel content",
+    "readonly": "Makes the expansion-panel content read only.",
+    "value": ""
+  },
+  "events": {},
+  "contents": {}
+}

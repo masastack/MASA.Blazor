@@ -1,0 +1,24 @@
+﻿<div>
+    <MBreadcrumbs Items="items">
+        <DividerContent>
+            <MIcon>mdi-forward</MIcon>
+        </DividerContent>
+    </MBreadcrumbs>
+
+    <MBreadcrumbs Items="items">
+        <DividerContent>
+            <MIcon>mdi-chevron-right</MIcon>
+        </DividerContent>
+    </MBreadcrumbs>
+</div>
+
+@code {
+
+    List<BreadcrumbItem> items = new()
+    {
+        new BreadcrumbItem() {Text = "Dashboard", Disabled = false, Href = "/components/breadcrumbs"},
+        new BreadcrumbItem() {Text = "Link 1", Disabled = false, Href = "/components/breadcrumbs"},
+        new BreadcrumbItem() {Text = "Link 2", Disabled = true, Href = "/components/breadcrumbs"}
+    };
+
+}

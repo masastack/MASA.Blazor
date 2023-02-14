@@ -1,0 +1,14 @@
+﻿@page "/{project}/{category}/{page}"
+@page "/{project}/{category}/{page}/{subPage}"
+
+<MContainer Class="pa-4 pa-sm-6 pa-md-8"
+            Fluid
+            Tag="section">
+    <MResponsive MaxWidth="960"
+                 Class="mx-auto overflow-visible">
+        <DocumentMarkdownIt Source="@_md"
+                            OnTocParsed="@OnTocParsed" />
+        
+        <Contribute GithubUri="@GithubUri"></Contribute>
+    </MResponsive>
+</MContainer>

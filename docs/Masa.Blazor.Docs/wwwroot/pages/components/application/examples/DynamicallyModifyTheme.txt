@@ -1,0 +1,25 @@
+﻿<MSwitch Value="IsDark" TValue="bool" ValueChanged="IsDarkChanged" Label="@(IsDark?"Dark":"Light")"/>
+
+@code {
+    [Inject]
+    public MasaBlazor MasaBlazor { get; set; }
+
+    bool IsDark { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        IsDark = MasaBlazor?.Theme?.Dark ?? false;
+        return base.OnInitializedAsync();
+    }
+
+    public Task IsDarkChanged(bool isDark)
+    {
+        IsDark = isDark;
+        var theme = MasaBlazor.Theme;
+        theme.Dark = isDark;
+
+        MasaBlazor.Theme = theme;
+
+        return Task.CompletedTask;
+    }
+}

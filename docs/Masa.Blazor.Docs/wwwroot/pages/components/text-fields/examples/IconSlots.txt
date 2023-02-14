@@ -1,0 +1,63 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12">
+                <MTextField @bind-Value="_message"
+                            Outlined
+                            Clearable
+                            Label="Message"
+                            Type="text">
+                    <PrependContent>
+                        <MTooltip Bottom>
+                            <ActivatorContent Context="activatorContext">
+                                <MIcon @attributes="activatorContext.Attrs">
+                                    mdi-help-circle-outline
+                                </MIcon>
+                            </ActivatorContent>
+                            <ChildContent>
+                                I'm a tooltip
+                            </ChildContent>
+                        </MTooltip>
+                    </PrependContent>
+                    <AppendContent>
+                        <img width="24"
+                             height="24"
+                             src="_content/Masa.Blazor.Docs/img/masa.png"
+                             alt="">
+                    </AppendContent>
+                    <AppendOuterContent>
+                        <MMenu Style="top: -12px"
+                               OffsetY>
+                            <ActivatorContent Context="menu">
+                                <MButton @attributes="menu.Attrs">
+                                    <MIcon Left>
+                                        mdi-menu
+                                    </MIcon>
+                                    Menu
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MCard>
+                                    <MCardText Class="pa-6">
+                                        <MButton Large
+                                                 Text
+                                                 Color="primary">
+                                            <MIcon Left>
+                                                mdi-target
+                                            </MIcon>Click me
+                                        </MButton>
+                                    </MCardText>
+                                </MCard>
+                            </ChildContent>
+                        </MMenu>
+                    </AppendOuterContent>
+                </MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code {
+    private string _message = "Hey!";
+
+}

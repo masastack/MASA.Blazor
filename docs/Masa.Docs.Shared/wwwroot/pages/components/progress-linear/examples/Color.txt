@@ -1,0 +1,10 @@
+﻿<MContainer>
+    <MProgressLinear Value="15" BackgroundColor="pink lighten-3" Color="pink lighten-1"></MProgressLinear>
+</MContainer>
+<MContainer>
+    <MProgressLinear Value="30" BackgroundColor="blue-grey" Color="lime"></MProgressLinear>
+</MContainer>
+<MContainer>
+    <MProgressLinear Value="45" BackgroundColor="success" Color="error"></MProgressLinear>
+</MContainer>
+

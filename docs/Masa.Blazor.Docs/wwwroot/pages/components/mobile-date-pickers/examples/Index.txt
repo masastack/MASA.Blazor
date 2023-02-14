@@ -1,0 +1,15 @@
+﻿<div class="text-center">
+    <PMobileDatePicker @bind-Value="_date">
+        <ActivatorContent>
+            <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
+                @(_date == default ? "Please select" : _date)
+            </MButton>
+        </ActivatorContent>
+    </PMobileDatePicker>
+</div>
+
+@code {
+
+    private DateOnly _date;
+
+}

@@ -1,0 +1,35 @@
+﻿<div class="d-flex align-center justify-center">
+    <MECharts Option="_option" Width="@("100%")" Height="300">
+    </MECharts>
+</div>
+
+@code{
+    private object _option = new
+    {
+        Title = new
+        {
+            Left = "center",
+            Text = "Getting started"
+        },
+        Tooltip = new { },
+        Legend = new
+        {
+            Data = new[] { "Sales" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
+        },
+        YAxis = new { },
+        Series = new[]
+        {
+            new 
+            {
+                Name = "sales",
+                Type= "bar",
+                Data= new []{ 5, 20, 36, 10, 10, 20 }
+            }
+        }
+    };
+}
+

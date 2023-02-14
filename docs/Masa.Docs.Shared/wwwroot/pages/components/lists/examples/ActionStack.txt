@@ -1,0 +1,78 @@
+﻿<MCard
+    Class="mx-auto"
+    MaxWidth="500">
+    <MToolbar
+        Color="pink"
+        Dark>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>Inbox</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+
+        <MButton Icon>
+            <MIcon>mdi-checkbox-marked-circle</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MList TwoLine>
+        <MListItemGroup
+            @bind-Values="selected"
+            ActiveClass="pink--text"
+            multiple>
+            @foreach (var (item, index) in items.Select((item, index) => (item, index)))
+            {
+                <MListItem Value="@item.title">
+                    <ItemContent>
+                        <MListItemContent>
+                            <MListItemTitle>@item.title</MListItemTitle>
+                            <MListItemSubtitle Class="text--primary">@item.headline</MListItemSubtitle>
+                            <MListItemSubtitle>@item.subtitle</MListItemSubtitle>
+                        </MListItemContent>
+
+                        <MListItemAction>
+                            <MListItemActionText>@item.action</MListItemActionText>
+
+                            @if (!context.Active)
+                            {
+                                <MIcon Color="grey lighten-1">
+                                    mdi-star-outline
+                                </MIcon>
+                            }
+                            else
+                            {
+                                <MIcon Color="yellow darken-3">
+                                    mdi-star
+                                </MIcon>
+                            }
+                        </MListItemAction>
+                    </ItemContent>
+                </MListItem>
+
+                @if (index < items.Count - 1)
+                {
+                    <MDivider/>
+                }
+            }
+        </MListItemGroup>
+    </MList>
+</MCard>
+
+@code {
+
+    List<StringNumber> selected = new();
+
+    List<(string action, string headline, string subtitle, string title)> items = new List<(string action, string headline, string subtitle, string title)>()
+    {
+        ("15 min", "Brunch this weekend?","I'll be in your neighborhood doing errands this weekend. Do you want to hang out?", "Ali Connors"),
+        ("hr","Summer BBQ","Wish I could come, but I'm out of town this weekend.", "me, Scrott, Jennifer"),
+        ("6 hr", "Oui oui","Do you have Paris recommendations? Have you ever been?", "Sandra Adams"),
+        ("12 hr", "Birthday gift","Have any ideas about what we should get Heidi for her birthday?", "Trevor Hansen"),
+        ("18hr","Recipe to try","We should eat this: Grate, Squash, Corn, and tomatillo Tacos.", "Britta Holt"),
+    };
+
+}

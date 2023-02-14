@@ -1,0 +1,17 @@
+﻿<MButton Value="@("recent")">
+    <span>Recent</span>
+
+    <MIcon>mdi-history</MIcon>
+</MButton>
+
+<MButton Value="@("favorites")">
+    <span>Favorites</span>
+
+    <MIcon>mdi-heart</MIcon>
+</MButton>
+
+<MButton Value="@("nearby")">
+    <span>Nearby</span>
+
+    <MIcon>mdi-map-marker</MIcon>
+</MButton>

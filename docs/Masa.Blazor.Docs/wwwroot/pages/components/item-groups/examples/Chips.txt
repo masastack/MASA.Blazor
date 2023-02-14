@@ -1,0 +1,42 @@
+﻿<MCard>
+    <MToolbar Flat Color="blue-grey" Dark>
+        <MToolbarTitle>Submit a post</MToolbarTitle>
+    </MToolbar>
+
+    <MCardText>
+        <MTextField Filled Label="Title" TValue="string" @bind-Value="@title"></MTextField>
+
+        <MTextarea Filled Label="Text" @bind-Value="@text"></MTextarea>
+
+        <MDivider Class="my-2"></MDivider>
+
+        <MItemGroup Multiple>
+            <MSubheader>Tags</MSubheader>
+
+            @foreach (var i in Enumerable.Range(1, 8))
+            {
+                <MItem>
+                    <MChip
+                        ActiveClass="purple--text"
+                        IsActive="@context.Active"
+                        OnClick="@context.Toggle"
+                        RefBack="@context.Ref">
+                        @($"Tag {i}")
+                    </MChip>
+                </MItem>
+            }
+        </MItemGroup>
+
+        <MDivider></MDivider>
+
+        <MCardActions>
+            <MSpacer></MSpacer>
+            <MButton Color="success" Depressed>Post</MButton>
+        </MCardActions>
+    </MCardText>
+</MCard>
+
+@code {
+    string title = "My new post";
+    string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse";
+}

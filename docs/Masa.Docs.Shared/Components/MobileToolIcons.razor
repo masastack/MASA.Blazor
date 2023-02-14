@@ -1,0 +1,15 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<MButton Icon>
+    <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
+</MButton>
+<MButton Icon OnClick="OnDotClick">
+    <MIcon Class="emphasize2-color">mdi-dots-vertical</MIcon>
+</MButton>
+
+@code {
+
+    [Parameter]
+    public EventCallback OnDotClick { get; set; }
+
+}

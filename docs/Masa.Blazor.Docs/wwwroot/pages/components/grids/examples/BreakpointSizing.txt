@@ -1,0 +1,20 @@
+﻿<MContainer Class="grey lighten-5">
+    @for (int i = 1; i <= 2; i++)
+    {
+        var n = i + 1;
+        <MRow Class="@(i == 1 ? "mb-6" : null)"
+              NoGutters>
+            @for (int j = 0; j < n + 1; j++)
+            {
+                var k = j + 1;
+                <MCol>
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        @($"{ k } of { n + 1 }")
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+    }
+</MContainer>

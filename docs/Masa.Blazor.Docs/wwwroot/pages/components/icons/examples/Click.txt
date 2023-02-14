@@ -1,0 +1,38 @@
+﻿<MCard>
+    <MToolbar
+        Color="pink"
+        Dark
+        Dense
+        Flat>
+        <MToolbarTitle Class="text-body-2">
+            Upcoming Changes
+        </MToolbarTitle>
+    </MToolbar>
+    <MCardText>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </MCardText>
+
+    <MCardActions>
+        <MSpacer></MSpacer>
+        <MIcon
+            Large
+            OnClick="Next">
+            mdi-chevron-right
+        </MIcon>
+    </MCardActions>
+</MCard>
+
+<MSnackbar @bind-Value="show" Top>
+    You clicked next!
+</MSnackbar>
+
+@code {
+
+    bool show;
+
+    void Next()
+    {
+        show = true;
+    }
+
+}

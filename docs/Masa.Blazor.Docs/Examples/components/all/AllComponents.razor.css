@@ -1,0 +1,19 @@
+﻿.component-title {
+    font-size: 1.25rem;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    color: #1B2559;
+    margin-bottom:0 !important;
+}
+
+.component-desc {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 24px;
+    color: #485585;
+}

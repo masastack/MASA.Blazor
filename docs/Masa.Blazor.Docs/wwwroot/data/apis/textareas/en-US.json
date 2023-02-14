@@ -1,0 +1,12 @@
+{
+  "props": {
+    "autoGrow": "Remove resize handleAutomatically grow the textarea depending on amount of text",
+    "noResize": "Remove resize handle",
+    "rowHeight": "Height value for each row. Requires the use of the `AutoGrow` prop.",
+    "rows": "Default row count"
+  },
+  "events": {  
+  },
+  "contents": {
+  }
+}

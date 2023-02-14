@@ -1,0 +1,15 @@
+{
+  "props": {
+    "dense": "Lowers max height of list tiles",
+    "disabled": "Disables all children (MListItem)[components/lists/api/MListItem] components",
+    "expand": "Will only collapse when explicitly closed",
+    "if": "",
+    "nav": "An alternative styling that reduces (MListItem)[components/lists/api/MListItem] width and rounds the corners. Typically used with (MNavigationDrawer)[components/navigation-drawers]",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "subheader": "Removes top padding. Used when previous sibling is a header",
+    "threeLine": "Increases list-item height for three lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers."
+  },
+  "events": {},
+  "contents": {}
+}

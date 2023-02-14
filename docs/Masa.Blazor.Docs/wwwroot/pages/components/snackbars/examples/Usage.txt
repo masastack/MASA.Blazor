@@ -1,0 +1,19 @@
+﻿<div class="text-center ma-2">
+    <MButton OnClick="() => snackbar = true">
+        Open Snackbar
+    </MButton>
+    <MSnackbar @bind-Value="snackbar">
+        <ChildContent>
+            Hello, I'm a snackbar
+        </ChildContent>
+        <ActionContent>
+            <MButton Color="pink" Text OnClick="() => snackbar = false">
+                Close
+            </MButton>
+        </ActionContent>
+    </MSnackbar>
+</div>
+
+@code {
+    private bool snackbar;
+}

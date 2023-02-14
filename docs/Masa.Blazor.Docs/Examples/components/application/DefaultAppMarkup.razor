@@ -1,0 +1,11 @@
+﻿@attribute [JSCustomElement]
+
+<Markup Class="mb-4" Code="@Code" Language="@Language" Rounded="@("sm")"></Markup>
+
+@code {
+    [Parameter]
+    public string? Code { get; set; }
+
+    [Parameter]
+    public string? Language { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<MTabs Class="default-tabs fixed-slider" 
+       Style="display: contents;"
+       Routable>
+    @foreach (var item in AppService.GetNavMenus(Project))
+    {
+        <MTab Ripple="false" Class="text-none secondary-emphasis-text"
+              Href="@item.URL"
+              Target="@item.Target">
+            @I18n.T(item.Title)
+        </MTab>
+    }
+</MTabs>
+
+@code {
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+}

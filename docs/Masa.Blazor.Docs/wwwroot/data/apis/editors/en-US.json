@@ -1,0 +1,24 @@
+{
+  "props": {
+    "additionalModules": "",
+    "beforeAllUploadAsync": "",
+    "contentClass": "",
+    "contentStyle": "",
+    "markdown": "",
+    "placeholder": "",
+    "readOnly": "",
+    "theme": "",
+    "toolbarClass": "",
+    "toolbarStyle": "",
+    "upload": "",
+    "value": ""
+  },
+  "events": {
+    "onBlur": "",
+    "onFocus": "",
+    "onReady": ""
+  },
+  "contents": {
+    "toolbarContent": ""
+  }
+}

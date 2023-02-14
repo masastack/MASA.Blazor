@@ -1,0 +1,80 @@
+﻿@inject IPopupService PopupService
+
+<MAlert Type="AlertTypes.Info">
+    <div>
+        在 <code>MApp</code> 组件通过 <code>AlertParameters</code> 设置Alert的默认样式和行为。
+    </div>
+    <div>
+        例如：<code>AlertParameters="param => { param.Right = true; }"</code>。
+    </div>
+</MAlert>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowBasic">Basic Alert</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup @bind-Value="alertType">
+    <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
+    <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
+    <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
+    <MRadio Value="AlertTypes.Info" Label="@nameof(AlertTypes.Info)"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="ShowTyped">Typed Alert</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowException">Exception Alert</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowCustom">Custom Alert</MButton>
+
+@code {
+
+    AlertTypes alertType = AlertTypes.None;
+
+    private Task ShowBasic()
+    {
+        return PopupService.AlertAsync("This is the alert content!");
+    }
+
+    private Task ShowTyped()
+    {
+        return PopupService.AlertAsync("This is the alert content!", alertType);
+    }
+
+    private Task ShowException()
+    {
+        try
+        {
+            throw new Exception("something wrong!");
+        }
+        catch (Exception e)
+        {
+            return PopupService.AlertAsync(e);
+        }
+    }
+
+    private Task ShowCustom()
+    {
+        return PopupService.AlertAsync(param =>
+        {
+            param.Centered = true;
+            param.Content = "This is the alert content!";
+            param.Color = "error";
+            param.Light = true;
+            param.Outlined = true;
+            param.Right = true;
+            param.Top = true;
+            param.ActionProps = a =>
+            {
+                a.Small = true;
+                a.Color = "error";
+            };
+        });
+    }
+
+}

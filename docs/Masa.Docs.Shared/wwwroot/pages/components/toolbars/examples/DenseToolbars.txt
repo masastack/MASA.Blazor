@@ -1,0 +1,24 @@
+﻿<MCard Color="grey lighten-4"
+        Flat
+        Height="200"
+        tile>
+    <MToolbar Dense>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>Title</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+
+        <MButton Icon>
+            <MIcon>mdi-heart</MIcon>
+        </MButton>
+
+        <MButton Icon>
+            <MIcon>mdi-dots-vertical</MIcon>
+        </MButton>
+    </MToolbar>
+</MCard>

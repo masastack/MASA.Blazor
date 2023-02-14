@@ -1,0 +1,83 @@
+﻿<MStepper @bind-Value="e13"
+          Vertical>
+    <MStepperStep Step="1"
+                  Complete>
+        Name of Step 1
+    </MStepperStep>
+
+    <MStepperContent Step="1">
+        <MCard Color="grey lighten-1"
+               Class="mb-12"
+               Height="200"></MCard>
+        <MButton Color="primary"
+                 OnClick="()=>e13 = 2">
+            Continue
+        </MButton>
+        <MButton Text>
+            Cancel
+        </MButton>
+    </MStepperContent>
+
+    <MStepperStep Step="2"
+                  Complete>
+        Name of Step 2
+    </MStepperStep>
+
+    <MStepperContent Step="2">
+        <MCard Color="grey lighten-1"
+               Class="mb-12"
+               Height="200"></MCard>
+        <MButton Color="primary"
+                 OnClick="()=>e13 = 3">
+            Continue
+        </MButton>
+        <MButton Text>
+            Cancel
+        </MButton>
+    </MStepperContent>
+
+    <MStepperStep Rules="rules"
+                  Step="3">
+        Ad templates
+        <small>Alert message</small>
+    </MStepperStep>
+
+    <MStepperContent Step="3">
+        <MCard Color="grey lighten-1"
+               Class="mb-12"
+               Height="200"></MCard>
+        <MButton Color="primary"
+                 OnClick="()=>e13 = 4">
+            Continue
+        </MButton>
+        <MButton Text>
+            Cancel
+        </MButton>
+    </MStepperContent>
+
+    <MStepperStep Step="4">
+        View setup instructions
+    </MStepperStep>
+
+    <MStepperContent Step="4">
+        <MCard Color="grey lighten-1"
+               Class="mb-12"
+               Height="200"></MCard>
+        <MButton Color="primary"
+                 OnClick="()=>e13 = 1">
+            Continue
+        </MButton>
+        <MButton Text>
+            Cancel
+        </MButton>
+    </MStepperContent>
+</MStepper>
+
+@code {
+    private int e13 = 2;
+    List<Func<bool>> rules = new List<Func<bool>>() { Rule };
+    private static bool Rule()
+    {
+        return false;
+    }
+}

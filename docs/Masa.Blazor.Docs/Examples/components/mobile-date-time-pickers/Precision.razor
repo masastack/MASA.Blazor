@@ -1,0 +1,53 @@
+﻿<div class="text-center">
+    <MSelect @bind-Value="_precision"
+             Label="Precision"
+             Items="@Items"
+             ItemText="i => i.ToString()"
+             ItemValue="i => i"
+             Class="d-inline-block"
+             Style="max-width: 180px">
+    </MSelect>
+
+    <PMobileDateTimePicker @bind-Value="_dateTime" Precision="_precision" @key="_precision">
+        <ActivatorContent>
+            <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
+                @(ComputedDateTime)
+            </MButton>
+        </ActivatorContent>
+    </PMobileDateTimePicker>
+</div>
+
+@code {
+
+    [CascadingParameter(Name = "TimezoneOffset")]
+    private TimeSpan TimezoneOffset { get; set; }
+
+    private DateTime _dateTime;
+    private DateTimePrecision _precision = DateTimePrecision.Day;
+
+    private readonly static List<DateTimePrecision> Items = new()
+    {
+        DateTimePrecision.Year,
+        DateTimePrecision.Month,
+        DateTimePrecision.Day,
+        DateTimePrecision.Hour,
+        DateTimePrecision.Minute,
+        DateTimePrecision.Second
+    };
+
+    private DateTime ComputedDateTime => _precision switch
+    {
+        DateTimePrecision.Year => new DateTime(_dateTime.Year, 1, 1),
+        DateTimePrecision.Month => new DateTime(_dateTime.Year, _dateTime.Month, 1),
+        DateTimePrecision.Day => new DateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day),
+        DateTimePrecision.Hour => new DateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, 1, 1),
+        DateTimePrecision.Minute => new DateTime(_dateTime.Year, _dateTime.Month, _dateTime.Day, _dateTime.Hour, _dateTime.Minute, 1),
+        _ => _dateTime
+    };
+
+    protected override void OnInitialized()
+    {
+        _dateTime = DateTime.UtcNow.Add(TimezoneOffset);
+    }
+
+}

@@ -1,0 +1,49 @@
+﻿<MCard>
+    <MButton OnClick="()=>SetLanguage()">Switch the grammar</MButton>
+    <MButton OnClick="()=>GetValue()">Access to the editor's value</MButton>
+    <MDivider></MDivider>
+    <MTextField @bind-Value="_EditorOptions.Language"
+                Label="Syntax support"
+                Outlined></MTextField>
+
+    <MMonacoEditor @ref="_editor" EditorOptions="@_EditorOptions" Width="@("100%")" Height="@("300px")" />
+
+
+</MCard>
+
+<MDivider>Get the value displayed</MDivider>
+<MCard>
+    @_EditorOptions.Value
+</MCard>
+
+@code {
+    private MMonacoEditor _editor;
+
+    public EditorOptions _EditorOptions { get; set; } = new()
+    {
+        Value = @"using System;
+namespace HelloWorldApplication
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+    }
+}",
+        Language = "csharp"
+    };
+
+
+    private async Task SetLanguage()
+    {
+        await _editor.SetModelLanguage(_EditorOptions.Language);
+    }
+
+    private async Task GetValue()
+    {
+        _EditorOptions.Value = await _editor.GetValue();
+    }
+}

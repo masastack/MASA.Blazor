@@ -1,0 +1,38 @@
+﻿<MCard MaxWidth="400" class="mx-auto">
+    <MContainer class="pa-1">
+        <MItemGroup Multiple @bind-Values="selected">
+            <MRow>
+                @foreach (var item in items)
+                {
+                    <MCol Cols="12" Md="6">
+                        <MItem>
+                            <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/{item}")"
+                                    Height="150"
+                                    Class="text-right pa-2"
+                                    @onclick="context.Toggle"
+                                    RefBack="context.Ref">
+                                <MButton Icon Dark>
+                                    <MIcon>@(context.Active ? "mdi-heart" : "mdi-heart-outline")</MIcon>
+                                </MButton>
+                            </MImage>
+                        </MItem>
+                    </MCol>
+                }
+            </MRow>
+        </MItemGroup>
+    </MContainer>
+</MCard>
+
+@code {
+
+    List<string> items = new()
+    {
+        "backgrounds/bg.png",
+        "backgrounds/md.png",
+        "backgrounds/bg-2.png",
+        "backgrounds/md2.png",
+    };
+
+    List<StringNumber> selected = new();
+
+}
