@@ -11,5 +11,5 @@ ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 WORKDIR /app
 COPY . .
-RUN dotnet build src/Docs/Masa.Docs.Server -c Release
-ENTRYPOINT ["dotnet","./src/Docs/Masa.Docs.Server/bin/Release/net7.0/Masa.Docs.Server.dll"]
+RUN dotnet build docs/Masa.Docs.Server -c Release
+ENTRYPOINT ["dotnet","./docs/Masa.Docs.Server/bin/Release/net7.0/Masa.Docs.Server.dll"]
