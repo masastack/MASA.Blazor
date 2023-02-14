@@ -3,6 +3,6 @@
 	url = https://github.com/BlazorComponent/BlazorComponent
 	branch = main
 [submodule "src/MASA.Docs"]
-	path = src/MASA.Docs
+	path = docs/MASA.Docs
 	url = https://github.com/masastack/MASA.Docs
 	branch = main
