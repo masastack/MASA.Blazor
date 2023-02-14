@@ -221,3 +221,6 @@ packages/
 
 # source code text of Examples in Docs
 docs/**/wwwroot/pages/**/examples/
+
+# submodule files
+Masa.Docs/
