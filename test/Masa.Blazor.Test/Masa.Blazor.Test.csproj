@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+    <ProjectReference Include="..\..\src\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 
 </Project>
