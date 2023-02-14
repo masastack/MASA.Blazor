@@ -1,3 +1,0 @@
-﻿  <MBreadcrumbsItem Href="/components/breadcrumbs">Breadcrumbs</MBreadcrumbsItem>
-  <MBreadcrumbsItem Href="/components/breadcrumbs#examples" Text="Examples"></MBreadcrumbsItem>
-  <MBreadcrumbsItem Href="/components/breadcrumbs#divider" Disabled>Divider</MBreadcrumbsItem>

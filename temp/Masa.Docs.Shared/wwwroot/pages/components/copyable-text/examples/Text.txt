@@ -1,3 +1,0 @@
-﻿<PCopyableText Text="Text that you specific">
-    Copy the text that you specific by parameter Text.
-</PCopyableText>

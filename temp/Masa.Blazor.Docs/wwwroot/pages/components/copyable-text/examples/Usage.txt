@@ -1,3 +1,0 @@
-﻿<PCopyableText>
-    There is a text that can be copied.
-</PCopyableText>

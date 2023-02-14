@@ -1,6 +1,0 @@
-﻿<div class="ma-auto" style="max-width: 260px">
-    <MOtpInput @OtpValue="@otp" Type="OtpInputType.Password" Length="5" Dark></MOtpInput>
-</div>
-@code {
-    string otp = "";
-}

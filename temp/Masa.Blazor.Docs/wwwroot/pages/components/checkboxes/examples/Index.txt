@@ -1,6 +1,0 @@
-﻿<MCheckbox @bind-Value="checkbox" Label="@label"></MCheckbox>
-
-@code {
-    bool checkbox = true;
-    string label => $"Checkbox 1: {checkbox.ToString()}";
-}
