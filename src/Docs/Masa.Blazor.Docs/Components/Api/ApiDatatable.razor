@@ -39,11 +39,23 @@
                                 <span class="regular--text body">
                                     @if (header == "type")
                                     {
-                                        @item.Type
+                                        var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);
+
+                                        <MTooltip Disabled="@noTypeDesc" ContentStyle="white-space: pre" Top>
+                                            <ActivatorContent>
+                                                <code @attributes="@context.Attrs"
+                                                      class="@(noTypeDesc ? "" : "tooltip-code")">
+                                                    @item.Type
+                                                </code>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                @item.TypeDesc
+                                            </ChildContent>
+                                        </MTooltip>
                                     }
                                     else if (header == "default")
                                     {
-                                        @item.DefaultValue
+                                        @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
                                     }
                                     else if (header == "description")
                                     {
@@ -80,7 +92,7 @@
 
     static readonly Dictionary<string, string[]> HeaderMaps = new()
     {
-        { "props", new[] { "name", "type", "default", "description"} },
+        { "props", new[] { "name", "type", "default", "description" } },
         { "methods", new[] { "name", "type" } },
         { "events", new[] { "name", "type" } },
         { "contents", new[] { "name", "type" } }
@@ -98,4 +110,5 @@
         else if (header == "type") return "width:200px;";
         return "";
     }
+
 }

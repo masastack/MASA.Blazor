@@ -430,3 +430,8 @@ app-alert p {
 default-app-markup {
     margin-bottom: 16px;
 }
+
+.tooltip-code {
+    border-width: 1px;
+    border-style: dashed;
+}
