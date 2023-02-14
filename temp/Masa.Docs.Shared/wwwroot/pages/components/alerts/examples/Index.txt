@@ -1,0 +1,5 @@
+﻿<MSheet Class="d-flex align-center justify-center">
+    <MAlert Type="AlertTypes.Success">
+        I'm an Alert Usage Example
+    </MAlert>
+</MSheet>

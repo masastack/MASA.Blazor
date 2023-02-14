@@ -1,0 +1,70 @@
+<MContainer>
+    <MRow>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_title"
+                        Counter="25"
+                        Rules="_rules"
+                        Hint="This field uses counter prop"
+                        Label="Regular">
+            </MTextField>
+        </MCol>
+
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_description"
+                        Counter="25"
+                        maxlength="25"
+                        Rules="_rules"
+                        Hint="This field uses maxlength attribute"
+                        Label="Limit exceeded">
+            </MTextField>
+        </MCol>
+
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_title"
+                        Counter="5"
+                        Rules="_wordsRules"
+                        Hint="This field counts words instead of characters"
+                        CounterValue="CounterValue"
+                        Label="Custom counter from prop">
+            </MTextField>
+        </MCol>
+
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_title"
+                        Counter="true"
+                        Rules="_wordsRules"
+                        Hint="This field counts words instead of characters"
+                        Label="Custom counter from slot">
+                <CounterContent>
+                    <MCounter Max="5" Value="@CounterValue(_title)"></MCounter>
+                </CounterContent>
+            </MTextField>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    private string _title = "Preliminary report";
+    private string _description = "California is a state in the western United States";
+
+    private List<Func<string, StringBoolean>> _rules = new()
+    {
+        v => v.Length <= 25 ? true : "Max 25 characters"
+    };
+
+    private List<Func<string, StringBoolean>> _wordsRules = new()
+    {
+        v => v.Trim().Split(' ').Length <= 5 ? true : "Max 5 words"
+    };
+
+    private int CounterValue(string val)
+    {
+        val = val.Trim();
+        return string.IsNullOrEmpty(val) ? 0 : val.Split(' ').Length;
+    }
+
+}

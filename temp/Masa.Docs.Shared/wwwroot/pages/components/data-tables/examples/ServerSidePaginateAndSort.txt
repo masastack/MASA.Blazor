@@ -1,0 +1,207 @@
+﻿<div>
+    <MDataTable Headers="_headers"
+                Items="_desserts"
+                OnOptionsUpdate="HandleOnOptionsUpdate"
+                ServerItemsLength="_totalDesserts"
+                Loading="_loading"
+                Class="elevation-1">
+    </MDataTable>
+</div>
+
+@code {
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public int Sodium { get; set; }
+
+        public string Calcium { get; set; }
+
+        public string Iron { get; set; }
+    }
+
+    private int _totalDesserts = 0;
+    private IEnumerable<Dessert> _desserts = new List<Dessert>();
+    private bool _loading = true;
+    private DataOptions _options=new DataOptions();
+
+    private List<DataTableHeader<Dessert>> _headers = new List<DataTableHeader<Dessert>>
+        {
+           new ()
+           {
+            Text= "Dessert (100g serving)",
+            Align= DataTableHeaderAlign.Start,
+            Sortable= false,
+            Value= nameof(Dessert.Name)
+          },
+          new (){ Text= "Calories", Value= nameof(Dessert.Calories)},
+          new (){ Text= "Fat (g)", Value= nameof(Dessert.Fat)},
+          new (){ Text= "Carbs (g)", Value= nameof(Dessert.Carbs)},
+          new (){ Text= "Protein (g)", Value= nameof(Dessert.Protein)},
+          new (){ Text= "Iron (%)", Value= nameof(Dessert.Iron)}
+        };
+
+    public void HandleOnOptionsUpdate(DataOptions options)
+    {
+        _options = options;
+        GetDataFromApi();
+    }
+
+    protected override void OnInitialized()
+    {
+        GetDataFromApi();
+    }
+
+    public void GetDataFromApi()
+    {
+        _loading = true;
+        FakeApiCallAsync().ContinueWith(task =>
+        {
+            var data = task.Result;
+            _desserts = data.items;
+            _totalDesserts = data.total;
+            _loading = false;
+
+            InvokeAsync(StateHasChanged);
+        });
+    }
+
+    public async Task<(IEnumerable<Dessert> items, int total)> FakeApiCallAsync()
+    {
+        var sortBy = _options.SortBy;
+        var sortDesc = _options.SortDesc;
+        var page = _options.Page;
+        var itemsPerPage = _options.ItemsPerPage;
+
+        var items = GetDesserts();
+        var total = items.Count();
+
+        if (sortBy.Count == 1 && sortDesc.Count == 1)
+        {
+            var header = _headers.Find(header => header.Value == sortBy[0]);
+            var selector = header.ItemValue.Factory;
+
+            if (!sortDesc[0])
+            {
+                items = items.OrderBy(selector);
+            }
+            else
+            {
+                items = items.OrderByDescending(selector);
+            }
+        }
+
+        if (itemsPerPage > 0)
+        {
+            items = items.Skip((page - 1) * itemsPerPage).Take(page * itemsPerPage);
+        }
+
+        await Task.Delay(1000);
+        return (items, total);
+    }
+
+    public IEnumerable<Dessert> GetDesserts()
+    {
+        return new List<Dessert>
+        {
+           new Dessert
+           {
+              Name= "Frozen Yogurt",
+              Calories= 159,
+              Fat= 6.0,
+              Carbs= 24,
+              Protein= 4.0,
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Ice cream sandwich",
+              Calories= 237,
+              Fat= 9.0,
+              Carbs= 37,
+              Protein= 4.3,
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Eclair",
+              Calories= 262,
+              Fat= 16.0,
+              Carbs= 23,
+              Protein= 6.0,
+              Iron= "7%",
+            },
+            new Dessert
+            {
+              Name= "Cupcake",
+              Calories= 305,
+              Fat= 3.7,
+              Carbs= 67,
+              Protein= 4.3,
+              Iron= "8%",
+            },
+            new Dessert
+            {
+                Name= "Gingerbread",
+                Calories= 356,
+                Fat= 16.0,
+                Carbs= 49,
+                Protein= 3.9,
+                Iron= "16%"
+            },
+            new Dessert
+            {
+                Name= "Jelly bean",
+                Calories= 375,
+                Fat= 0.0,
+                Carbs= 94,
+                Protein= 0.0,
+                Iron= "0%",
+            },
+            new Dessert
+            {
+                Name= "Lollipop",
+                Calories= 392,
+                Fat= 0.2,
+                Carbs= 98,
+                Protein= 0,
+                Iron= "2%",
+            },
+            new Dessert
+            {
+                Name= "Honeycomb",
+                Calories= 408,
+                Fat= 3.2,
+                Carbs= 87,
+                Protein= 6.5,
+                Iron= "45%",
+            },
+            new Dessert
+            {
+                Name= "Donut",
+                Calories= 452,
+                Fat= 25.0,
+                Carbs= 51,
+                Protein= 4.9,
+                Iron= "22%",
+            },
+            new Dessert
+            {
+                Name= "KitKat",
+                Calories= 518,
+                Fat= 26.0,
+                Carbs= 65,
+                Protein= 7,
+                Iron= "6%",
+            }
+        };
+    }
+}

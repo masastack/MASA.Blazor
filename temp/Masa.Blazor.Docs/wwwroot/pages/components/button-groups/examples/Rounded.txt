@@ -1,0 +1,32 @@
+﻿<MCard Flat
+       Class="py-12">
+    <MCardText>
+        <MRow Align="@AlignTypes.Center"
+              Justify="@JustifyTypes.Center">
+            <MCol Cols="12">
+                <p class="text-center">
+                    Rounded
+                </p>
+            </MCol>
+            <MButtonGroup @bind-Value="value"
+                          Rounded>
+                <MButton Value="@("left")">
+                    <MIcon>mdi-format-align-left</MIcon>
+                </MButton>
+                <MButton Value="@("center")">
+                    <MIcon>mdi-format-align-center</MIcon>
+                </MButton>
+                <MButton Value="@("right")">
+                    <MIcon>mdi-format-align-right</MIcon>
+                </MButton>
+                <MButton Value="@("justify")">
+                    <MIcon>mdi-format-align-justify</MIcon>
+                </MButton>
+            </MButtonGroup>
+        </MRow>
+    </MCardText>
+</MCard>
+
+@code {
+    StringNumber value = "left";
+}

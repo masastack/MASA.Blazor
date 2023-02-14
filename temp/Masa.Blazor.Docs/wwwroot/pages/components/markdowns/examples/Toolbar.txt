@@ -1,0 +1,13 @@
+﻿<MMarkdown Options="_options">
+</MMarkdown>
+
+@code{
+
+    private Dictionary<string, object> _options = new Dictionary<string, object>();
+
+    protected override void OnInitialized()
+    {
+        _options.Add("toolbar",new List<string>(){"emoji", "br", "bold", "|", "line"});
+        base.OnInitialized();
+    }
+}

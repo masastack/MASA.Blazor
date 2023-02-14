@@ -1,0 +1,70 @@
+﻿@attribute [JSCustomElement]
+
+<div class="container team-members">
+    <div class="row">
+        <hr role="separator" aria-orientation="horizontal" class="mb-1 flex-1-1-100 m-divider theme--light">
+        <!---->
+        <div class="col col-12">
+            <div class="m-lazy" style="min-height: 128px;">
+                <div class="d-flex">
+                    <div class="m-avatar" style="height: 72px; min-width: 72px; width: 72px;">
+                        <div class="m-image m-responsive theme--light">
+                            <div class="m-responsive__sizer" style="padding-bottom: 100%;"></div>
+                            <div class="m-image__image m-image__image--cover" style="background-image: url(@Avatar); background-position: center center;"></div>
+                            <div class="m-responsive__content" style="width: 400px;"></div>
+                        </div>
+                    </div>
+                    <div class="pl-6 font-weight-medium">
+                        <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
+                            <span class="mr-2">@Name</span>
+                            <MButton Icon Href="@GithubUrl" Dense Small Target="_blank">
+                                <MIcon Color="black">mdi-github</MIcon>
+                            </MButton>
+                        </div>
+                        <div class="text-subtitle d-flex align-center my-2">
+                            <MIcon Class="mr-2">
+                                M20 7H16V5L14 3H10L8 5V7H4C2.9 7 2 7.9 2 9V14C2 14.75 2.4 15.38 3 15.73V19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V15.72C21.59 15.37 22 14.73 22 14V9C22 7.9 21.1 7 20 7M10 5H14V7H10V5M4 9H20V14H15V11H9V14H4V9M13 15H11V13H13V15M19 19H5V16H9V17H15V16H19V19Z
+                            </MIcon>
+                            @Position
+                        </div>
+                        <div class="text-subtitle d-flex align-center my-2">
+                            <MIcon Class="mr-2">
+                                M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z
+                            </MIcon>
+                            @City
+                        </div>
+                        <div class="text-subtitle d-flex align-center my-2">
+                            <MIcon Class="mr-2">
+                                M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z
+                            </MIcon>
+                            @Nationality
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+    </div>
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Name { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? Position { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? City { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? Nationality { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? GithubUrl { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? Avatar { get; set; }
+
+}

@@ -1,0 +1,26 @@
+﻿<MErrorHandler ShowAlert=_isShow>
+    <MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
+    <MTextField Label="Input a num" Value="num" />
+    <MButton OnClick="BtnClick">Normal error</MButton>
+    <MButton OnClick="BtnClickLifeCycle">Life cycle error</MButton>
+</MErrorHandler>
+@code
+{
+    private bool _isShow = true;
+    private int num = 1;
+
+    private void BtnClick()
+    {
+        throw new Exception("BtnClickThrow Error!");
+    }
+
+    private void BtnClickLifeCycle()
+    {
+        num = 0;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        num /= num;
+    }
+}

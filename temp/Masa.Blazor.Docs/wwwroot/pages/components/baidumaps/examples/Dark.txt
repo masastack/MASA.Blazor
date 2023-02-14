@@ -1,0 +1,5 @@
+﻿<MBaiduMap Height="400"
+           EnableScrollWheelZoom
+           DarkThemeId="9828881e7efb0182edb48236a3b53293"
+           Style="width:90%; left:5%"
+           Dark />

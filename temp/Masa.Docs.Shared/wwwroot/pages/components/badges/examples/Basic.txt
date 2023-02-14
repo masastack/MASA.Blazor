@@ -1,0 +1,5 @@
+﻿<div class="text-center" style="width:100%">
+    <MBadge>
+        <MIcon Size="36">mi-masa</MIcon>
+    </MBadge>
+</div>

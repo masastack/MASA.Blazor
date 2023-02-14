@@ -1,0 +1,9 @@
+﻿<MCard Elevation="2">
+    <MCardTitle>Card title</MCardTitle>
+    <MCardSubtitle>Subtitle text</MCardSubtitle>
+    <MCardText> Greyhound divisively hello coldly wonderfully marginally far upon excluding. </MCardText>
+    <MCardActions>
+        <MButton Text Color="primary">Action 1</MButton>
+        <MButton Text Color="primary">Action 2</MButton>
+    </MCardActions>
+</MCard>

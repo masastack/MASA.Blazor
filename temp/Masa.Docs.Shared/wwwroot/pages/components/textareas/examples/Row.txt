@@ -1,0 +1,42 @@
+﻿<MContainer Fluid>
+    <MRow>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextarea Label="One row"
+                       AutoGrow
+                       Outlined
+                       Rows="1"
+                       RowHeight="15">
+            </MTextarea>
+        </MCol>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextarea Filled
+                       AutoGrow
+                       Label="Two rows"
+                       Rows="2"
+                       RowHeight="20">
+            </MTextarea>
+        </MCol>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextarea Label="Three rows"
+                       AutoGrow
+                       Outlined
+                       Rows="3"
+                       RowHeight="25"
+                       Shaped>
+            </MTextarea>
+        </MCol>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextarea Filled
+                       AutoGrow
+                       Label="Four rows"
+                       Rows="4"
+                       RowHeight="30"
+                       Shaped>
+            </MTextarea>
+        </MCol>
+    </MRow>
+</MContainer>

@@ -1,0 +1,52 @@
+﻿<style>
+    .multi-item {
+        margin: 5px;
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+</style>
+<MContainer>
+    <MRow>
+        <MCol Cols=6>
+            <MDragZone Group="multiy_example">
+                <MDragItem>
+                    <div class="multi-item">item1.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item1.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item1.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item1.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item1.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+        <MCol Cols=6>
+            <MDragZone Group="multiy_example" >
+                <MDragItem>
+                    <div class="multi-item">item2.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item2.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item2.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item2.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item">item2.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+    </MRow>
+</MContainer>

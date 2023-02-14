@@ -1,0 +1,40 @@
+﻿@using AlertTypes = BlazorComponent.AlertTypes
+
+<div class="d-flex justify-space-between">
+    <MButton Color="primary" OnClick="() => Show()">Default</MButton>
+    <MButton Color="success" OnClick="() => Show(AlertTypes.Success)">Success</MButton>
+    <MButton Color="info" OnClick="() => Show(AlertTypes.Info)">Info</MButton>
+    <MButton Color="warning" OnClick="() => Show(AlertTypes.Warning)">Warning</MButton>
+    <MButton Color="error" OnClick="() => Show(AlertTypes.Error)">Error</MButton>
+</div>
+
+<PConfirm Visible="visible"
+          Title="确认操作"
+          Type="type"
+          OnCancel="Hide"
+          OnOk="Ok">
+    您确认该操作吗？
+</PConfirm>
+
+@code {
+
+    AlertTypes type = 0;
+    bool visible;
+
+    void Show(AlertTypes t = 0)
+    {
+        type = t;
+        visible = true;
+    }
+
+    void Hide()
+    {
+        visible = false;
+    }
+
+    void Ok()
+    {
+        visible = false;
+    }
+
+}

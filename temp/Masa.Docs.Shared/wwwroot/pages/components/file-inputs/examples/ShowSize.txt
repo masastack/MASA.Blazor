@@ -1,0 +1,7 @@
+﻿
+<div>
+    <MFileInput TValue="IBrowserFile"
+                ShowSize
+                Label="File input"></MFileInput>
+</div>
+

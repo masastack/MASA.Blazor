@@ -1,0 +1,261 @@
+﻿<MCard Color="blue-grey darken-1"
+       Dark
+       Loading="IsUpdating">
+    <ProgressContent>
+        <MProgressLinear Absolute
+                         Color="green lighten-3"
+                         Height="4"
+                         Indeterminate>
+        </MProgressLinear>
+    </ProgressContent>
+    <ChildContent>
+        <MImage Height="200"
+                Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/dark-beach.jpg">
+            <MRow>
+                <MCol Class="text-right"
+                      Cols="12">
+                    <MMenu Bottom
+                           Left
+                           Transition="slide-y-transition">
+                        <ActivatorContent>
+                            <MButton Icon
+                                     @attributes="context.Attrs">
+                                <MIcon>mdi-dots-vertical</MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <MList>
+                                <MListItem OnClick="() => IsUpdating = true">
+                                    <MListItemAction>
+                                        <MIcon>mdi-cog</MIcon>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>Update</MListItemTitle>
+                                    </MListItemContent>
+                                </MListItem>
+                            </MList>
+                        </ChildContent>
+                    </MMenu>
+                </MCol>
+                <MRow Class="pa-4"
+                      Align="AlignTypes.Center"
+                      Justify="JustifyTypes.Center">
+                    <MCol Class="text-center">
+                        <h3 class="text-h5">
+                            @_name
+                        </h3>
+                        <span class="grey--text text--lighten-1">@_title</span>
+                    </MCol>
+                </MRow>
+            </MRow>
+        </MImage>
+        <MForm>
+            <MContainer>
+                <MRow>
+                    <MCol Cols="12"
+                          Md="6">
+                        <MTextField @bind-Value="_name"
+                                    Disabled="IsUpdating"
+                                    Filled
+                                    Color="blue-grey lighten-2"
+                                    Label="Name">
+                        </MTextField>
+                    </MCol>
+                    <MCol Cols="12"
+                          Md="6">
+                        <MTextField @bind-Value="_title"
+                                    Disabled="IsUpdating"
+                                    Filled
+                                    Color="blue-grey lighten-2"
+                                    Label="Title">
+                        </MTextField>
+                    </MCol>
+                    <MCol Cols="12">
+                        <MAutocomplete @bind-Value="_friends"
+                                       Disabled="IsUpdating"
+                                       Items="_people"
+                                       Filled
+                                       Chips
+                                       Color="blue-grey lighten-2"
+                                       Label="Select"
+                                       ItemText="r => r.Name"
+                                       ItemValue="r => r.Name"
+                                       Multiple>
+                            <SelectionContent Context="data">
+                                <MChip Close
+                                       IsActive="@data.Selected"
+                                       OnCloseClick="() => Remove(data.Item)">
+                                    <MAvatar Left>
+                                        <MImage Src="@data.Item.Avatar"></MImage>
+                                    </MAvatar>
+                                    @data.Item.Name
+                                </MChip>
+                            </SelectionContent>
+                            <ItemContent Context="data">
+                                @if (data.Item is not object)
+                                {
+                                    <MListItemContent>@data.Item</MListItemContent>
+                                }
+                                else
+                                {
+                                    <MListItemAvatar>
+                                        <img src="@data.Item.Avatar">
+                                    </MListItemAvatar>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            @((MarkupString)data.Item.Name)
+                                        </MListItemTitle>
+                                        <MListItemSubtitle>
+                                            @((MarkupString)data.Item.Group)
+                                        </MListItemSubtitle>
+                                    </MListItemContent>
+                                }
+                            </ItemContent>
+                        </MAutocomplete>
+                    </MCol>
+                </MRow>
+            </MContainer>
+        </MForm>
+        <MDivider></MDivider>
+        <MCardActions>
+            <MSwitch @bind-Value="_autoUpdate"
+                     Disabled="IsUpdating"
+                     Class="mt-0"
+                     Color="green lighten-2"
+                     HideDetails="true"
+                     Label="Auto Update">
+            </MSwitch>
+            <MSpacer></MSpacer>
+            <MButton Disabled="_autoUpdate"
+                     Loading="IsUpdating"
+                     Color="blue-grey darken-3"
+                     Depressed
+                     OnClick="() => IsUpdating = true">
+                <MIcon Left>
+                    mdi-update
+                </MIcon>
+                Update Now
+            </MButton>
+        </MCardActions>
+    </ChildContent>
+</MCard>
+
+@code {
+    private bool _autoUpdate = true;
+
+    private List<string> _friends = new()
+    {
+        "Sandra Adams",
+        "Britta Holt"
+    };
+
+    private bool _isUpdating;
+    private string _name = "Midnight Crew";
+
+    public class Person
+    {
+        public string Header { get; set; }
+
+        public string Name { get; set; }
+
+        public string Group { get; set; }
+
+        public string Avatar { get; set; }
+
+        public bool Divider { get; set; }
+    }
+
+    private List<Person> _people = new List<Person>
+    {
+        new Person
+        {
+            Header = "Group 1",
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Name = "Sandra Adams",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
+        },
+        new Person
+        {
+            Name = "Ali Connors",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
+        },
+        new Person
+        {
+            Name = "Trevor Hansen",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
+        },
+        new Person
+        {
+            Name = "Tucker Smith",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
+        },
+        new Person
+        {
+            Divider = true,
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Header = "Group 2",
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Name = "Britta Holt",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/4.png"
+        },
+        new Person
+        {
+            Name = "Jane Smith ",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/5.png"
+        },
+        new Person
+        {
+            Name = "John Smith",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
+        },
+        new Person
+        {
+            Name = "Sandra Williams",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
+        }
+    };
+
+    private string _title = "The summer breeze";
+
+    protected bool IsUpdating
+    {
+        get { return _isUpdating; }
+        set
+        {
+            _isUpdating = value;
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(3000);
+                _isUpdating = false;
+                await InvokeAsync(StateHasChanged);
+            });
+        }
+    }
+
+    public void Remove(Person item)
+    {
+        var index = _friends.IndexOf(item.Name);
+        if (index >= 0)
+        {
+            _friends.RemoveAt(index);
+        }
+    }
+
+}

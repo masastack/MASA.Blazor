@@ -1,0 +1,52 @@
+﻿<MSheet Height="400" Class="overflow-hidden" Style="position: relative;">
+    <MContainer Class="fill-height">
+        <MRow Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+            <MButton Color="pink" Dark OnClick="() => _drawer = !_drawer">
+                Toggle
+            </MButton>
+        </MRow>
+    </MContainer>
+
+    <MNavigationDrawer @bind-Value="_drawer" Absolute Temporary>
+        <MListItem>
+            <MListItemAvatar>
+                <MImage Src="https://randomuser.me/api/portraits/men/78.jpg"></MImage>
+            </MListItemAvatar>
+
+            <MListItemContent>
+                <MListItemTitle>MASA</MListItemTitle>
+            </MListItemContent>
+        </MListItem>
+
+        <MDivider></MDivider>
+
+        <MList Dense>
+            @foreach (var item in _items)
+            {
+                <MListItem Link>
+                    <MListItemIcon>
+                        <MIcon>@item.Icon</MIcon>
+                    </MListItemIcon>
+
+                    <MListItemContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </MNavigationDrawer>
+</MSheet>
+
+@code{
+    private bool _drawer;
+    private class ItemDemo
+    {
+        public string Title { get; set; }
+        public string Icon { get; set; }
+    }
+    private List<ItemDemo> _items = new()
+    {
+        new ItemDemo { Title = "Home", Icon = "mdi-view-dashboard" },
+        new ItemDemo { Title = "About", Icon = "mdi-forum" }
+    };
+}

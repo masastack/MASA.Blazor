@@ -1,0 +1,9 @@
+﻿
+<MFileInput TValue="IBrowserFile" OnChange="HandleOnChange"></MFileInput>
+
+@code {
+    private void HandleOnChange(IBrowserFile file)
+    {
+        //other code
+    }
+}

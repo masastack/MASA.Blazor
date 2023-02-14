@@ -1,0 +1,40 @@
+﻿<div>
+    <MAppBar Color="deep-purple accent-4"
+             Dense
+             Dark>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>Page title</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-heart</MIcon>
+        </MButton>
+
+        <MButton icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+
+        <MMenu Left
+               Bottom>
+            <ActivatorContent>
+                <MButton Icon @attributes="@context.Attrs">
+                    <MIcon>mdi-dots-vertical</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MList>
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        var n = i + 1;
+                        <MListItem @key="n"
+                               OnClick="() => {}">
+                            <MListItemTitle>Option @n</MListItemTitle>
+                        </MListItem>
+                    }
+                </MList>
+            </ChildContent>
+        </MMenu>
+    </MAppBar>
+</div>

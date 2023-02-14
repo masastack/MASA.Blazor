@@ -1,0 +1,66 @@
+﻿<MRow Justify="JustifyTypes.SpaceAround">
+    <MCol Cols="@("auto")">
+        <MDialog @bind-Value="dialog"
+                 Transition="dialog-bottom-transition"
+                 MaxWidth="600">
+            <ActivatorContent>
+                <MButton Color="primary"
+                         @attributes="@context.Attrs">
+                    From the bottom
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MCard>
+                    <MToolbar Color="primary"
+                              Dark>
+                        Opening from the bottom
+                    </MToolbar>
+                    <MCardText>
+                        <div class="text-h2 pa-12">Hello world!</div>
+                    </MCardText>
+                    <MCardActions Class="justify-end">
+                        <MButton Text
+                                 OnClick="() => dialog = false">
+                            Close
+                        </MButton>
+                    </MCardActions>
+                </MCard>
+            </ChildContent>
+        </MDialog>
+    </MCol>
+
+    <MCol Cols="@("auto")">
+        <MDialog @bind-Value="dialog2"
+                 Transition="dialog-top-transition"
+                 MaxWidth="600">
+            <ActivatorContent>
+                <MButton Color="primary"
+                         @attributes="@context.Attrs">
+                    From the top
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MCard>
+                    <MToolbar Color="primary"
+                              Dark>
+                        Opening from the top
+                    </MToolbar>
+                    <MCardText>
+                        <div class="text-h2 pa-12">Hello world!</div>
+                    </MCardText>
+                    <MCardActions Class="justify-end">
+                        <MButton Text
+                                 OnClick="() => dialog2 = false">
+                            Close
+                        </MButton>
+                    </MCardActions>
+                </MCard>
+            </ChildContent>
+        </MDialog>
+    </MCol>
+</MRow>
+
+@code {
+    bool dialog = false;
+    bool dialog2 = false;
+}

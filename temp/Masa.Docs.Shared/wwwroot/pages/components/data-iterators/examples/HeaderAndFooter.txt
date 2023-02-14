@@ -1,0 +1,166 @@
+﻿<MContainer Fluid>
+    <MDataIterator Items="_desserts"
+                   ItemsPerPage="_itemsPerPage"
+                   HideDefaultFooter>
+        <HeaderContent>
+            <MToolbar Class="mb-2"
+                      Color="indigo darken-5"
+                      Dark
+                      Flat>
+                <MToolbarTitle>This is a header</MToolbarTitle>
+            </MToolbar>
+        </HeaderContent>
+        <ChildContent>
+            <MRow>
+                @foreach (var item in _desserts)
+                {
+                    <MCol @key="item.Name"
+                      Cols="12"
+                      Sm="6"
+                      Md="4"
+                      Lg="3">
+                        <MCard>
+                            <MCardTitle Class="subheading font-weight-bold">
+                                @item.Name
+                            </MCardTitle>
+
+                            <MDivider></MDivider>
+
+                            <MList Dense>
+                                <MListItem>
+                                    <MListItemContent>Calories:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Calories
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Fat:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Fat
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Carbs:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Carbs
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Protein:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Protein
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Sodium:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Sodium
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Calcium:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Calcium
+                                    </MListItemContent>
+                                </MListItem>
+
+                                <MListItem>
+                                    <MListItemContent>Iron:</MListItemContent>
+                                    <MListItemContent Class="align-end">
+                                        @item.Iron
+                                    </MListItemContent>
+                                </MListItem>
+                            </MList>
+                        </MCard>
+                    </MCol>
+                }
+            </MRow>
+        </ChildContent>
+        <FooterContent>
+            <MToolbar Class="mt-2"
+                      Color="indigo"
+                      Dark
+                      Flat>
+                <MToolbarTitle Class="subheading">
+                    This is a footer
+                </MToolbarTitle>
+            </MToolbar>
+        </FooterContent>
+    </MDataIterator>
+</MContainer>
+
+@code {
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public int Sodium { get; set; }
+
+        public string Calcium { get; set; }
+
+        public string Iron { get; set; }
+    }
+
+    private int _itemsPerPage = 4;
+
+    private List<Dessert> _desserts = new List<Dessert>
+        {
+           new Dessert
+           {
+              Name= "Frozen Yogurt",
+              Calories= 159,
+              Fat= 6.0,
+              Carbs= 24,
+              Protein= 4.0,
+              Sodium= 87,
+              Calcium= "14%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Ice cream sandwich",
+              Calories= 237,
+              Fat= 9.0,
+              Carbs= 37,
+              Protein= 4.3,
+              Sodium= 129,
+              Calcium= "8%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Eclair",
+              Calories= 262,
+              Fat= 16.0,
+              Carbs= 23,
+              Protein= 6.0,
+              Sodium= 337,
+              Calcium= "6%",
+              Iron= "7%",
+            },
+            new Dessert
+            {
+              Name= "Cupcake",
+              Calories= 305,
+              Fat= 3.7,
+              Carbs= 67,
+              Protein= 4.3,
+              Sodium= 413,
+              Calcium= "3%",
+              Iron= "8%",
+            },
+        };
+  }

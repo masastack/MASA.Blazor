@@ -1,0 +1,35 @@
+﻿<MMarkdown OnFocus="HandleFocus" OnBlur="HandleBlur" OnEscPress="HandleEscPress" OnCtrlEnterPress="HandleCtrlEnterPress" OnSelect="HandleSelect">
+</MMarkdown>
+<MAlert Border="Borders.Top"
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2" 
+            Class="mt-10">
+        @ViewInfo
+</MAlert>
+
+@code
+{
+    private string ViewInfo { get; set; }
+
+    private void HandleFocus()
+    {
+        ViewInfo = "聚焦";
+    }
+    private void HandleBlur()
+    {
+        ViewInfo = "失去焦点";
+    }
+    private void HandleEscPress()
+    {
+        ViewInfo = "esc 按下";
+    }
+    private void HandleCtrlEnterPress()
+    {
+        ViewInfo = "ctrl+enter 按下";
+    }
+    private void HandleSelect()
+    {
+        ViewInfo = "编辑器中选中文字";
+    }
+}

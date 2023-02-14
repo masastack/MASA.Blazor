@@ -1,0 +1,50 @@
+﻿<div class="text-center">
+    <MChip Class="ma-2" Color="indigo" TextColor="white">
+        <MAvatar Left>
+            <MIcon>mdi-account-circle</MIcon>
+        </MAvatar>
+        Mike
+    </MChip>
+
+    <MChip Class="ma-2" Color="orange" TextColor="white">
+        Premium
+        <MIcon Right>mdi-star</MIcon>
+    </MChip>
+
+    <MChip Class="ma-2" Color="primary" TextColor="white">
+        1 Year
+        <MIcon Right>mdi-cake-variant</MIcon>
+    </MChip>
+
+    <MChip Class="ma-2" Color="green" TextColor="white">
+        <MAvatar Left Class="green darken-4">
+            1
+        </MAvatar>
+        Years
+    </MChip>
+
+    <MChip Class="ma-2" Close Color="teal" TextColor="white" OnCloseClick="Close">
+        <MAvatar Left>
+            <MIcon>mdi-checkbox-marked-circle</MIcon>
+        </MAvatar>
+        Confirmed
+    </MChip>
+
+    <MChip Class="ma-2" Close Color="teal" TextColor="white" CloseIcon="mdi-delete" OnCloseClick="Close">
+        <MAvatar Left>
+            <MIcon>mdi-checkbox-marked-circle</MIcon>
+        </MAvatar>
+        Confirmed
+    </MChip>
+</div>
+
+@code
+{
+    [Inject]
+    private IJSRuntime Js { get; set; }
+
+    private void Close()
+    {
+        Js.InvokeVoidAsync("alert", "Chip close clicked");
+    }
+}

@@ -1,0 +1,3 @@
+﻿  <MBreadcrumbsItem Href="/blazor/components/breadcrumbs">Breadcrumbs</MBreadcrumbsItem>
+  <MBreadcrumbsItem Href="/blazor/components/breadcrumbs#examples" Text="Examples"></MBreadcrumbsItem>
+  <MBreadcrumbsItem Href="/blazor/components/breadcrumbs#divider" Disabled>Divider</MBreadcrumbsItem>

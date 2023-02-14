@@ -1,0 +1,50 @@
+﻿<MContainer Class="grey lighten-5">
+    <MRow Class="mb-6"
+          Justify="@JustifyTypes.Center"
+          NoGutters>
+        <MCol Lg="2">
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                1 of 3
+            </MCard>
+        </MCol>
+        <MCol Md="@("auto")">
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                Variable width content
+            </MCard>
+        </MCol>
+        <MCol Lg="2">
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                3 of 3
+            </MCard>
+        </MCol>
+    </MRow>
+    <MRow NoGutters>
+        <MCol>
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                1 of 3
+            </MCard>
+        </MCol>
+        <MCol Md="@("auto")">
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                Variable width content
+            </MCard>
+        </MCol>
+        <MCol Lg="2">
+            <MCard Class="pa-2"
+                   Outlined
+                   tile>
+                3 of 3
+            </MCard>
+        </MCol>
+    </MRow>
+</MContainer>

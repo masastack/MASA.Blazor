@@ -1,0 +1,78 @@
+﻿@using BlazorComponent.I18n
+@using FluentValidation;
+
+<MForm Model="_orderDetail" EnableValidation EnableI18n>
+    <MTextField @bind-Value="_orderDetail.Title" Label="Title"></MTextField>
+    <MTextField @bind-Value="_orderDetail.Price" Label="Price" Type="number"></MTextField>
+    <MTextField @bind-Value="_orderDetail.Category.Name" Label="Name"></MTextField>
+    @foreach (var customer in _orderDetail.Customers)
+    {
+        <MCard Flat>
+            <MCardTitle>Customer:@customer.Id</MCardTitle>
+            <MCardText>
+                <MTextField @bind-Value="customer.Name" Label="Name"></MTextField>
+                <MTextField @bind-Value="customer.Age" Label="Age" Type="number"></MTextField>
+            </MCardText>
+        </MCard>
+    }
+    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
+</MForm>
+
+@code {
+    class OrderDetail
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public decimal Price { get; set; }
+
+        public Category Category { get; set; }
+
+        public List<Customer> Customers { get; set; }
+    }
+
+    class Customer
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+    }
+
+    class Category
+    {
+        public string Name { get; set; }
+    }
+ 
+    private OrderDetail _orderDetail = new()
+    {
+        Category = new Category 
+        {
+            
+        },
+        Customers = new List<Customer>
+        {
+            new Customer
+            {
+                Id=1
+            },
+            new Customer
+            {
+                Id=2
+            }
+        }
+    };
+
+    public void SubmitOrder(FormContext context)
+    {
+        var validationResult = @"Validation failed: 
+                    -- Title: 'Title' is required. Severity: Error
+                    -- Price: 'Price' must be between 0 and 20. Severity: Error
+                    -- Category.Name: 'Name' is required. Severity: Error
+                    -- Customers[0].Name: 'Name' is required. Severity: Error
+                    -- Customers[1].Age: 'Age' must be between 25 and 100. Severity: Error";
+        context.TryParseFormValidation(validationResult);
+    }
+}
