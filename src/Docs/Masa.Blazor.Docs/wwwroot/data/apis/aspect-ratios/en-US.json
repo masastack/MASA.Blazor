@@ -1,9 +1,0 @@
-{
-  "props": {
-    "aspectRatio": "Aspect ratio.",
-    "contentClass": "Applies a 2px by default and 1.5px border around the badge when using the dot propert"
-  },
-  "contents": {},
-  "events": {},
-  "functions": {}
-}

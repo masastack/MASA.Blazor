@@ -1,9 +1,0 @@
-{
-  "props": {
-    "disableIconRotate": "Removes the icon rotation animation when expanding a panel",
-    "expandIcon": "Set the expand action icon",
-    "hideActions": "Hide the expand icon in the content header"
-  },
-  "events": {},
-  "contents": {}
-}
