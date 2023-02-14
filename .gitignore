@@ -220,4 +220,4 @@ packages/
 .vscode/
 
 # source code text of Examples in Docs
-src/Docs/**/wwwroot/pages/**/examples
+docs/**/wwwroot/pages/**/examples/
