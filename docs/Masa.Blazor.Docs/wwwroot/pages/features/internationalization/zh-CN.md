@@ -254,7 +254,7 @@ public static class I18nExtend
 }
 ```
 
-- MAUI Blazor静态资产受限于 Razor 组件，需要使用`FileSystem.OpenAppPackageFileAsync`来访问，详情请阅读[微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components)。MauiProgram.cs增加代码如下：
+- MAUI Blazor静态资产受限于 Razor 组件，需要使用`FileSystem.OpenAppPackageFileAsync`来访问，详情请阅读 [微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components)。MauiProgram.cs增加代码如下：
 
 ```csharp
 builder.Services.AddMasaBlazor().AddI18nForMauiBlazor($"{i18n directory path}");
