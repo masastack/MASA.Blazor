@@ -38,7 +38,7 @@ jobs:
       - name: Copy Static Resources
         id: copyStaticResources
         run: |
-          dotnet build src/Masa.Blazor.Docs.sln
+          dotnet build Masa.Blazor.Docs.sln
           dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release -o publish
           cp -rf docs/Masa.Docs.WebAssembly/staticwebapp.config.json publish/wwwroot
       - name: Build And Deploy
