@@ -210,3 +210,68 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnviro
 > Note: `supportedCultures.json` must be in the same directory as the i18n resource file
 
 - For an example of using I18n, please refer to Blazor Server mode, the usage method is the same as Blazor Server mode
+
+### Support MasaI18n in MAUI Blazor project
+
+- Add extension method:
+
+```csharp
+public static class I18nExtend
+{
+    public static IBlazorComponentBuilder AddI18nForMauiBlazor(this IBlazorComponentBuilder builder, string localesDirectory)
+    {
+        string supportedCulturesPath = localesDirectory + "/supportedCultures.json";
+        bool existsCultures = FileSystem.AppPackageFileExistsAsync(supportedCulturesPath).Result;
+        if (!existsCultures)
+        {
+            throw new Exception("Can't find path：" + supportedCulturesPath);
+        }
+
+        using Stream streamCultures = FileSystem.OpenAppPackageFileAsync(supportedCulturesPath).Result;
+        using StreamReader readerCultures = new(streamCultures);
+        string contents = readerCultures.ReadToEnd();
+        string[] cultures = JsonSerializer.Deserialize<string[]>(contents) ?? throw new Exception("Failed to read supportedCultures json file data!");
+        List<(string culture, Dictionary<string, string>)> locales = new();
+        foreach (string culture in cultures)
+        {
+            string culturePath = localesDirectory + "/" + culture + ".json";
+            bool existsCulture = FileSystem.AppPackageFileExistsAsync(culturePath).Result;
+            if (!existsCulture)
+            {
+                throw new Exception("Can't find path：" + culturePath);
+            }
+
+            using Stream stream = FileSystem.OpenAppPackageFileAsync(culturePath).Result;
+            using StreamReader reader = new(stream);
+            Dictionary<string, string> map = I18nReader.Read(reader.ReadToEnd());
+            locales.Add((culture, map));
+        }
+
+        I18nServiceCollectionExtensions.AddI18n(builder, locales.ToArray());
+        return builder;
+    }
+}
+```
+
+- MAUI Blazor Static assets limited to Razor components, You need to use `FileSystem.OpenAppPackageFileAsync` to access, read more [Microsoft Doc](https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components). The MauiProgram.cs code is as follows:
+
+```csharp
+builder.Services.AddMasaBlazor().AddI18nForMauiBlazor($"{i18n directory path}");
+```
+
+- `i18n directory path` is the path of the folder where i18n resource files are placed.Only supported under `wwroot` and `Resources/Raw` paths. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("wwwroot/i18n")`; if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("i18n")`.
+
+```
+- Pages 
+- Shared 
+- wwwroot
+  - i18n
+    - supportedCultures.json
+    - en-US.json
+    - zh-CN.json
+```
+
+- `supportedCultures.json` configuration file format is consistent with Blazor Web Assembly mode
+
+- For an example of using I18n, please refer to Blazor Server mode, the usage method is the same as Blazor Server mode
+
