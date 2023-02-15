@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<MBaiduOverlay>, IAsyncDisposable
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<MBaiduOverlay>, IBaiduMapJsCallbacks, IAsyncDisposable
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
@@ -118,7 +118,7 @@ namespace Masa.Blazor
             }
         }
 
-        private IJSObjectReference _jsMap;
+        private IBaiduMapJSObjectReferenceProxy _baiduMap;
 
         public static float DefaultMaxZoom { get; } = 19;
 
@@ -127,8 +127,6 @@ namespace Masa.Blazor
         private bool _zoomChangedInJs = false;
 
         private bool _centerChangedInJs = false;
-
-        private DotNetObjectReference<MBaiduMap> _objRef;
 
         private static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new()
         {
@@ -161,16 +159,14 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                _objRef = DotNetObjectReference.Create(this);
-
-                _jsMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
+                _baiduMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
                     Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
-                }, _objRef);
+                }, this);
 
                 StateHasChanged();
             }
@@ -188,12 +184,12 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _jsMap.TryInvokeVoidAsync("setZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setZoom", val);
             });
 
             Watcher.Watch<float>(nameof(MaxZoom), async (val) =>
             {
-                await _jsMap.TryInvokeVoidAsync("setMaxZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMaxZoom", val);
 
                 if (Zoom > val)
                     Zoom = val;
@@ -201,23 +197,23 @@ namespace Masa.Blazor
 
             Watcher.Watch<float>(nameof(MinZoom), async (val) =>
             {
-                await _jsMap.TryInvokeVoidAsync("setMinZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMinZoom", val);
 
                 if (Zoom < val)
                     Zoom = val;
             });
 
             Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
-                await _jsMap.TryInvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
 
             Watcher.Watch<BaiduMapType>(nameof(MapType), async (val) =>
-                await _jsMap.TryInvokeVoidAsync("setMapType", BaiduMapTypeName[val]));
+                await _baiduMap.TryInvokeVoidAsync("setMapType", BaiduMapTypeName[val]));
 
             Watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
-                await _jsMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
 
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
-                await _jsMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
+                await _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
 
             Watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {
@@ -227,7 +223,7 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _jsMap.TryInvokeVoidAsync("panTo", val);
+                await _baiduMap.TryInvokeVoidAsync("panTo", val);
             });
         }
 
@@ -251,24 +247,21 @@ namespace Masa.Blazor
                 return;
 
             if (overlay.OverlayRef is null)
-                overlay.OverlayRef = await Module.InitAndAddOverlayAsync(overlay, _jsMap);
-
-            else
-                await _jsMap.InvokeVoidAsync("addOverlay", overlay.OverlayRef);
+                overlay.OverlayRef = await Module.InitOverlayAsync(overlay);
+            
+            await _baiduMap.AddOverlayAsync(overlay);
         }
 
         public async Task RemoveOverlayAsync(MBaiduOverlay overlay)
-            => await _jsMap.TryInvokeVoidAsync(() => overlay is not null, "removeOverlay", overlay.OverlayRef);
+            => await _baiduMap.RemoveOverlayAsync(overlay);
 
         public async Task ClearOverlaysAsync()
-            => await _jsMap.TryInvokeVoidAsync("clearOverlays");
+            => await _baiduMap.ClearOverlaysAsync();
 
         public async ValueTask DisposeAsync()
         {
-            _objRef?.Dispose();
-
-            if (_jsMap is not null)
-                await _jsMap.DisposeAsync();
+            if (_baiduMap is not null)
+                await _baiduMap.DisposeAsync();
         }
     }
 }

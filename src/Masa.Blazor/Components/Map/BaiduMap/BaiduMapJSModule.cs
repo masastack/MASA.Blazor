@@ -6,18 +6,21 @@
         {
         }
 
-        public async ValueTask<IJSObjectReference> InitAsync(string containerId, BaiduMapInitOptions options, DotNetObjectReference<MBaiduMap> obj)
-            => await InvokeAsync<IJSObjectReference>("init", containerId, options, obj);
+        public async ValueTask<IBaiduMapJSObjectReferenceProxy> InitAsync(
+            string containerId,
+            BaiduMapInitOptions options,
+            IBaiduMapJsCallbacks owner)
+            => new BaiduMapJSObjectReferenceProxy(await InvokeAsync<IJSObjectReference>("init", containerId, options), owner);
 
-        public async ValueTask<IJSObjectReference> InitAndAddOverlayAsync(MBaiduOverlay overlay, IJSObjectReference map)
+        public async ValueTask<IJSObjectReference> InitOverlayAsync(MBaiduOverlay overlay)
         {
             return overlay switch
             {
-                MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("initAndAddCircle", circle, map),
-                MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("initAndAddMarker", marker, map),
-                MBaiduLabel label => await InvokeAsync<IJSObjectReference>("initAndAddLabel", label, map),
-                MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("initAndAddPolyline", polyline, map),
-                MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("initAndAddPolygon", polygon, map),
+                MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("initCircle", circle),
+                MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("initMarker", marker),
+                MBaiduLabel label => await InvokeAsync<IJSObjectReference>("initLabel", label),
+                MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("initPolyline", polyline),
+                MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("initPolygon", polygon),
                 _ => null
             };
         }
