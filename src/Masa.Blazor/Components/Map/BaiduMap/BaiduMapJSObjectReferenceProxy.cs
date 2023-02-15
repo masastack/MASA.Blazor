@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJSObjectReferenceProxy
 {
@@ -14,41 +12,92 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
 
         _selfReference = DotNetObjectReference.Create(this);
 
-        //jsObjectReference.InvokeVoidAsync("setDotNetObjectReference", _selfReference, GetInvokeEvents());
+        _ = jsObjectReference.InvokeVoidAsync("setDotNetObjectReference", _selfReference, GetInvokeEvents());
     }
 
+    public Func<Task> NotifyZoomChangedInJS { get; set; } = null;
 
+    public Func<Task> NotifyCenterChangedInJS { get; set; } = null;
 
-    //[JSInvokable("OnEvent")]
-    //public async Task OnClick(string eventName, EChartsEventArgs? eventParams)
-    //{
-    //    if (eventName == "click") await _owner.OnClick.InvokeAsync(eventParams);
-    //    if (eventName == "dbclick") await _owner.OnDoubleClick.InvokeAsync(eventParams);
-    //    if (eventName == "mousedown") await _owner.OnMouseDown.InvokeAsync(eventParams);
-    //    if (eventName == "mousemove") await _owner.OnMouseMove.InvokeAsync(eventParams);
-    //    if (eventName == "mouseup") await _owner.OnMouseUp.InvokeAsync(eventParams);
-    //    if (eventName == "mouseover") await _owner.OnMouseOver.InvokeAsync(eventParams);
-    //    if (eventName == "mouseout") await _owner.OnMouseOut.InvokeAsync(eventParams);
-    //    if (eventName == "globalout") await _owner.OnGlobalOut.InvokeAsync();
-    //    if (eventName == "contextmenu") await _owner.OnContextMenu.InvokeAsync(eventParams);
-    //}
+    public Func<Task> NotifyMapTypeChangedInJS { get; set; } = null;
 
-    //private IEnumerable<string> GetInvokeEvents()
-    //{
-    //    List<string> events = new();
+    [JSInvokable]
+    public async Task OnEvent(string eventName, BaiduMapEventArgs? eventParams)
+    {
+        if (eventName == "click") await _owner.OnClick.InvokeAsync(eventParams);
+        if (eventName == "dblclick") await _owner.OnDoubleClick.InvokeAsync(eventParams);
+        if (eventName == "rightclick") await _owner.OnRightClick.InvokeAsync(eventParams);
+        if (eventName == "rightdblclick") await _owner.OnRightDoubleClick.InvokeAsync(eventParams);
+        if (eventName == "mousemove") await _owner.OnMouseMove.InvokeAsync(eventParams);
+        if (eventName == "mouseover") await _owner.OnMouseOver.InvokeAsync();
+        if (eventName == "mouseout") await _owner.OnMouseOut.InvokeAsync();
+        if (eventName == "maptypechange")
+        {
+            if (NotifyMapTypeChangedInJS is null)
+                return;
 
-    //    if (_owner.OnClick.HasDelegate) events.Add("click");
-    //    if (_owner.OnDoubleClick.HasDelegate) events.Add("dbclick");
-    //    if (_owner.OnMouseDown.HasDelegate) events.Add("mousedown");
-    //    if (_owner.OnMouseMove.HasDelegate) events.Add("mousemove");
-    //    if (_owner.OnMouseUp.HasDelegate) events.Add("mouseup");
-    //    if (_owner.OnMouseOver.HasDelegate) events.Add("mouseover");
-    //    if (_owner.OnMouseOut.HasDelegate) events.Add("mouseout");
-    //    if (_owner.OnGlobalOut.HasDelegate) events.Add("globalout");
-    //    if (_owner.OnContextMenu.HasDelegate) events.Add("contextmenu");
+            await NotifyMapTypeChangedInJS();
+            await _owner.OnMapTypeChanged.InvokeAsync();
+        }
+        if (eventName == "movestart") await _owner.OnMoveStart.InvokeAsync();
+        if (eventName == "moving")
+        {
+            if (NotifyCenterChangedInJS is null)
+                return;
 
-    //    return events;
-    //}
+            await NotifyCenterChangedInJS();
+            await _owner.OnMoving.InvokeAsync();
+        }
+        if (eventName == "moveend") await _owner.OnMoveEnd.InvokeAsync();
+        if (eventName == "zoomstart") await _owner.OnZoomStart.InvokeAsync();
+        if (eventName == "zoomend")
+        {
+            if (NotifyZoomChangedInJS is null)
+                return;
+
+            await NotifyZoomChangedInJS();
+            await _owner.OnZoomEnd.InvokeAsync();
+        }
+        if (eventName == "addoverlay") await _owner.OnAddOverlay.InvokeAsync();
+        if (eventName == "addcontrol") await _owner.OnAddControl.InvokeAsync();
+        if (eventName == "removeoverlay") await _owner.OnRemoveOverlay.InvokeAsync();
+        if (eventName == "removecontrol") await _owner.OnRemoveControl.InvokeAsync();
+        if (eventName == "clearoverlays") await _owner.OnClearOverlays.InvokeAsync();
+        if (eventName == "dragstart") await _owner.OnDragStart.InvokeAsync(eventParams);
+        if (eventName == "dragging") await _owner.OnDragging.InvokeAsync(eventParams);
+        if (eventName == "dragend") await _owner.OnDragEnd.InvokeAsync(eventParams);
+        if (eventName == "resize") await _owner.OnResize.InvokeAsync();
+    }
+
+    private IEnumerable<string> GetInvokeEvents()
+    {
+        List<string> events = new();
+
+        if (_owner.OnClick.HasDelegate) events.Add("click");
+        if (_owner.OnDoubleClick.HasDelegate) events.Add("dblclick");
+        if (_owner.OnRightClick.HasDelegate) events.Add("rightclick");
+        if (_owner.OnRightDoubleClick.HasDelegate) events.Add("rightdblclick");
+        if (_owner.OnMouseMove.HasDelegate) events.Add("mousemove");
+        if (_owner.OnMouseOver.HasDelegate) events.Add("mouseover");
+        if (_owner.OnMouseOut.HasDelegate) events.Add("mouseout");
+        if (_owner.OnMapTypeChanged.HasDelegate) events.Add("maptypechange");
+        if (_owner.OnMoveStart.HasDelegate) events.Add("movestart");
+        if (_owner.OnMoving.HasDelegate) events.Add("moving");
+        if (_owner.OnMoveEnd.HasDelegate) events.Add("moveend");
+        if (_owner.OnZoomStart.HasDelegate) events.Add("zoomstart");
+        if (_owner.OnZoomEnd.HasDelegate) events.Add("zoomend");
+        if (_owner.OnAddOverlay.HasDelegate) events.Add("addoverlay");
+        if (_owner.OnAddControl.HasDelegate) events.Add("addcontrol");
+        if (_owner.OnRemoveOverlay.HasDelegate) events.Add("removeoverlay");
+        if (_owner.OnRemoveControl.HasDelegate) events.Add("removecontrol");
+        if (_owner.OnClearOverlays.HasDelegate) events.Add("clearoverlays");
+        if (_owner.OnDragStart.HasDelegate) events.Add("dragstart");
+        if (_owner.OnDragging.HasDelegate) events.Add("dragging");
+        if (_owner.OnDragEnd.HasDelegate) events.Add("dragend");
+        if (_owner.OnResize.HasDelegate) events.Add("resize");
+
+        return events;
+    }
 
     protected override async ValueTask DisposeAsync(bool disposing)
     {
@@ -56,23 +105,4 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
 
         await base.DisposeAsync(disposing);
     }
-
-    public async ValueTask AddOverlayAsync(MBaiduOverlay overlay)
-    {
-        if (overlay is null)
-            return;
-
-        await InvokeVoidAsync("addOverlay", overlay.OverlayRef);
-    }
-
-    public async ValueTask RemoveOverlayAsync(MBaiduOverlay overlay)
-    {
-        if (overlay is null)
-            return;
-
-        await InvokeVoidAsync("removeOverlay", overlay.OverlayRef);
-    }
-
-    public async ValueTask ClearOverlaysAsync()
-        => await InvokeVoidAsync("clearOverlays");
 }
