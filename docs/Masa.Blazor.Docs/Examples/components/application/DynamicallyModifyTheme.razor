@@ -4,7 +4,7 @@
     [Inject]
     public MasaBlazor MasaBlazor { get; set; }
 
-    bool IsDark { get; set; }
+    bool _isDark { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -12,10 +12,9 @@
         return base.OnInitializedAsync();
     }
 
-    public Task IsDarkChanged(bool isDark)
+    public void IsDarkChanged(bool isDark)
     {
         IsDark = isDark;
         MasaBlazor.ToggleTheme();
-        return Task.CompletedTask;
     }
 }
