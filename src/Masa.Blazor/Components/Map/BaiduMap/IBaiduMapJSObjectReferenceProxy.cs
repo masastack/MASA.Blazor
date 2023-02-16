@@ -8,6 +8,6 @@
 
         Func<Task> NotifyMapTypeChangedInJS { get; set; }
 
-        ValueTask<IJSObjectReference> InitAndAddOverlayAsync(MBaiduOverlay overlay);
+        ValueTask<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay);
     }
 }

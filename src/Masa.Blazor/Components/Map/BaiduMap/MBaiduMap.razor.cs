@@ -184,6 +184,33 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback OnResize { get; set; }
 
+        public async ValueTask HandleOnMapTypeChanged()
+        {
+            if (_baiduMap.NotifyMapTypeChangedInJS is null)
+                return;
+
+            await _baiduMap.NotifyMapTypeChangedInJS();
+            await OnMapTypeChanged.InvokeAsync();
+        }
+
+        public async ValueTask HandleOnMoving()
+        {
+            if (_baiduMap.NotifyCenterChangedInJS is null)
+                return;
+
+            await _baiduMap.NotifyCenterChangedInJS();
+            await OnMoving.InvokeAsync();
+        }
+
+        public async ValueTask HandleOnZoomEnd()
+        {
+            if (_baiduMap.NotifyZoomChangedInJS is null)
+                return;
+
+            await _baiduMap.NotifyZoomChangedInJS();
+            await OnZoomEnd.InvokeAsync();
+        }
+
         private IBaiduMapJSObjectReferenceProxy _baiduMap;
 
         private bool _zoomChangedInJs = false;
@@ -334,7 +361,7 @@ namespace Masa.Blazor
                 return;
 
             if (overlay.OverlayRef is null)
-                overlay.OverlayRef = await _baiduMap.InitAndAddOverlayAsync(overlay);
+                overlay.OverlayRef = await _baiduMap.AddOverlayAsync(overlay);
 
             else
                 await _baiduMap.TryInvokeVoidAsync("addOverlay", overlay.OverlayRef);

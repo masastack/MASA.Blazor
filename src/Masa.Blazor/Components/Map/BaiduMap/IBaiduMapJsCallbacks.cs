@@ -45,5 +45,11 @@
         EventCallback<BaiduMapEventArgs> OnDragEnd { get; }
 
         EventCallback OnResize { get; }
+
+        ValueTask HandleOnMapTypeChanged();
+
+        ValueTask HandleOnMoving();
+
+        ValueTask HandleOnZoomEnd();
     }
 }

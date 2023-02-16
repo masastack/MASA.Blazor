@@ -31,33 +31,12 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         if (eventName == "mousemove") await _owner.OnMouseMove.InvokeAsync(eventParams);
         if (eventName == "mouseover") await _owner.OnMouseOver.InvokeAsync();
         if (eventName == "mouseout") await _owner.OnMouseOut.InvokeAsync();
-        if (eventName == "maptypechange")
-        {
-            if (NotifyMapTypeChangedInJS is null)
-                return;
-
-            await NotifyMapTypeChangedInJS();
-            await _owner.OnMapTypeChanged.InvokeAsync();
-        }
+        if (eventName == "maptypechange") await _owner.HandleOnMapTypeChanged();
         if (eventName == "movestart") await _owner.OnMoveStart.InvokeAsync();
-        if (eventName == "moving")
-        {
-            if (NotifyCenterChangedInJS is null)
-                return;
-
-            await NotifyCenterChangedInJS();
-            await _owner.OnMoving.InvokeAsync();
-        }
+        if (eventName == "moving") await _owner.HandleOnMoving();
         if (eventName == "moveend") await _owner.OnMoveEnd.InvokeAsync();
         if (eventName == "zoomstart") await _owner.OnZoomStart.InvokeAsync();
-        if (eventName == "zoomend")
-        {
-            if (NotifyZoomChangedInJS is null)
-                return;
-
-            await NotifyZoomChangedInJS();
-            await _owner.OnZoomEnd.InvokeAsync();
-        }
+        if (eventName == "zoomend") await _owner.HandleOnZoomEnd();
         if (eventName == "addoverlay") await _owner.OnAddOverlay.InvokeAsync();
         if (eventName == "addcontrol") await _owner.OnAddControl.InvokeAsync();
         if (eventName == "removeoverlay") await _owner.OnRemoveOverlay.InvokeAsync();
@@ -99,15 +78,15 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         return events;
     }
 
-    public async ValueTask<IJSObjectReference> InitAndAddOverlayAsync(MBaiduOverlay overlay)
+    public async ValueTask<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay)
     {
         return overlay switch
         {
-            MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("initAndAddCircle", circle),
-            MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("initAndAddMarker", marker),
-            MBaiduLabel label => await InvokeAsync<IJSObjectReference>("initAndAddLabel", label),
-            MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("initAndAddPolyline", polyline),
-            MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("initAndAddPolygon", polygon),
+            MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("addCircle", circle),
+            MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("addMarker", marker),
+            MBaiduLabel label => await InvokeAsync<IJSObjectReference>("addLabel", label),
+            MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("addPolyline", polyline),
+            MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("addPolygon", polygon),
             _ => null
         };
     }
