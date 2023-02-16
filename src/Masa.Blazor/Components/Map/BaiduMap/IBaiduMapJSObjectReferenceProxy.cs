@@ -7,5 +7,7 @@
         Func<Task> NotifyCenterChangedInJS { get; set; }
 
         Func<Task> NotifyMapTypeChangedInJS { get; set; }
+
+        ValueTask<IJSObjectReference> InitAndAddOverlayAsync(MBaiduOverlay overlay);
     }
 }

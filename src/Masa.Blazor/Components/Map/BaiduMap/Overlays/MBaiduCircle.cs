@@ -36,7 +36,7 @@ namespace Masa.Blazor
         public float FillOpacity { get; set; } = 0.3f;
 
         [JsonIgnore]
-        [CascadingParameter(Name = "Parent")]
+        [CascadingParameter]
         public override MBaiduMap MapRef { get; set; }
 
         [JsonIgnore]

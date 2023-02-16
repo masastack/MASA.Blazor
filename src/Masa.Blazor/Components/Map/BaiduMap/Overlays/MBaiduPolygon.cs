@@ -36,7 +36,7 @@ namespace Masa.Blazor
         public override IJSObjectReference OverlayRef { get; set; }
 
         [JsonIgnore]
-        [CascadingParameter(Name = "Parent")]
+        [CascadingParameter]
         public override MBaiduMap MapRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

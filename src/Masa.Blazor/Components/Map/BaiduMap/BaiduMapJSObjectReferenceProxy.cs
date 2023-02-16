@@ -99,6 +99,19 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         return events;
     }
 
+    public async ValueTask<IJSObjectReference> InitAndAddOverlayAsync(MBaiduOverlay overlay)
+    {
+        return overlay switch
+        {
+            MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("initAndAddCircle", circle),
+            MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("initAndAddMarker", marker),
+            MBaiduLabel label => await InvokeAsync<IJSObjectReference>("initAndAddLabel", label),
+            MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("initAndAddPolyline", polyline),
+            MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("initAndAddPolygon", polygon),
+            _ => null
+        };
+    }
+
     protected override async ValueTask DisposeAsync(bool disposing)
     {
         _selfReference.Dispose();

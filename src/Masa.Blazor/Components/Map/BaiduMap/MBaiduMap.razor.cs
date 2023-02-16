@@ -239,20 +239,20 @@ namespace Masa.Blazor
                 _baiduMap.NotifyZoomChangedInJS = async () =>
                 {
                     _zoomChangedInJs = true;
-                    Zoom = await _baiduMap.TryInvokeOriginAsync<float>("getZoom");
+                    Zoom = await _baiduMap.TryInvokeAsync<float>("getZoom");
                 };
 
                 _baiduMap.NotifyCenterChangedInJS = async () =>
                 {
                     _centerChangedInJs = true;
-                    Center = await _baiduMap.TryInvokeOriginAsync<GeoPoint>("getCenter");
+                    Center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
                 };
 
                 _baiduMap.NotifyMapTypeChangedInJS = async () =>
                 {
                     _maptypeChangedInJs = true;
 
-                    switch (await _baiduMap.TryInvokeOriginAsync<string>("getMapType"))
+                    switch (await _baiduMap.TryInvokeAsync<string>("getMapType"))
                     {
                         case "B_NORMAL_MAP": MapType = BaiduMapType.NormalMap; break;
                         case "B_EARTH_MAP": MapType = BaiduMapType.EarthMap; break;
@@ -277,12 +277,12 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _baiduMap.TryInvokeOriginVoidAsync("setZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setZoom", val);
             });
 
             Watcher.Watch<float>(nameof(MaxZoom), async (val) =>
             {
-                await _baiduMap.TryInvokeOriginVoidAsync("setMaxZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMaxZoom", val);
 
                 if (Zoom > val)
                     Zoom = val;
@@ -290,14 +290,14 @@ namespace Masa.Blazor
 
             Watcher.Watch<float>(nameof(MinZoom), async (val) =>
             {
-                await _baiduMap.TryInvokeOriginVoidAsync("setMinZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMinZoom", val);
 
                 if (Zoom < val)
                     Zoom = val;
             });
 
             Watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
-                await _baiduMap.TryInvokeOriginVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
 
             Watcher.Watch<BaiduMapType>(nameof(MapType), async (val) =>
             {
@@ -307,14 +307,14 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _baiduMap.TryInvokeOriginVoidAsync("setMapType", BaiduMapTypeName[val]);
+                await _baiduMap.TryInvokeVoidAsync("setMapType", BaiduMapTypeName[val]);
             });
 
             Watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
-                await _baiduMap.TryInvokeOriginVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
 
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
-                await _baiduMap.TryInvokeOriginVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
+                await _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
 
             Watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {
@@ -324,7 +324,7 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _baiduMap.TryInvokeOriginVoidAsync("panTo", val);
+                await _baiduMap.TryInvokeVoidAsync("panTo", val);
             });
         }
 
@@ -333,16 +333,18 @@ namespace Masa.Blazor
             if (overlay is null)
                 return;
 
-            overlay.OverlayRef ??= await Module.InitOverlayAsync(overlay);
+            if (overlay.OverlayRef is null)
+                overlay.OverlayRef = await _baiduMap.InitAndAddOverlayAsync(overlay);
 
-            await _baiduMap.TryInvokeOriginVoidAsync("addOverlay", overlay.OverlayRef);
+            else
+                await _baiduMap.TryInvokeVoidAsync("addOverlay", overlay.OverlayRef);
         }
 
         public async Task RemoveOverlayAsync(MBaiduOverlay overlay)
-            => await _baiduMap.TryInvokeOriginVoidAsync("removeOverlay", overlay.OverlayRef);
+            => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayRef);
 
         public async Task ClearOverlaysAsync()
-            => await _baiduMap.TryInvokeOriginVoidAsync("clearOverlays");
+            => await _baiduMap.TryInvokeVoidAsync("clearOverlays");
 
         public async ValueTask DisposeAsync()
         {
