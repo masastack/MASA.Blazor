@@ -8,7 +8,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        IsDark = MasaBlazor?.Theme?.Dark ?? false;
+        _isDark = MasaBlazor?.Theme?.Dark ?? false;
         return base.OnInitializedAsync();
     }
 
