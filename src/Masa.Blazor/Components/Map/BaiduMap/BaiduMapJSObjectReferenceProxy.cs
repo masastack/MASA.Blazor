@@ -15,12 +15,6 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         _ = jsObjectReference.InvokeVoidAsync("setDotNetObjectReference", _selfReference, GetInvokeEvents());
     }
 
-    public Func<Task> NotifyZoomChangedInJS { get; set; } = null;
-
-    public Func<Task> NotifyCenterChangedInJS { get; set; } = null;
-
-    public Func<Task> NotifyMapTypeChangedInJS { get; set; } = null;
-
     [JSInvokable]
     public async Task OnEvent(string eventName, BaiduMapEventArgs? eventParams)
     {

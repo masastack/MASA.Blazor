@@ -2,12 +2,6 @@
 {
     public interface IBaiduMapJSObjectReferenceProxy: IJSObjectReference
     {
-        Func<Task> NotifyZoomChangedInJS { get; set; }
-
-        Func<Task> NotifyCenterChangedInJS { get; set; }
-
-        Func<Task> NotifyMapTypeChangedInJS { get; set; }
-
         ValueTask<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay);
     }
 }

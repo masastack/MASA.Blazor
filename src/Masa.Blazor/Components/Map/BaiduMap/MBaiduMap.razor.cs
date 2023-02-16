@@ -186,28 +186,30 @@ namespace Masa.Blazor
 
         public async ValueTask HandleOnMapTypeChanged()
         {
-            if (_baiduMap.NotifyMapTypeChangedInJS is null)
-                return;
+            _maptypeChangedInJs = true;
 
-            await _baiduMap.NotifyMapTypeChangedInJS();
+            switch (await _baiduMap.TryInvokeAsync<string>("getMapType"))
+            {
+                case "B_NORMAL_MAP": MapType = BaiduMapType.NormalMap; break;
+                case "B_EARTH_MAP": MapType = BaiduMapType.EarthMap; break;
+                case "B_SATELLITE_MAP": MapType = BaiduMapType.SatelliteMap; break;
+                default: break;
+            }
+
             await OnMapTypeChanged.InvokeAsync();
         }
 
         public async ValueTask HandleOnMoving()
         {
-            if (_baiduMap.NotifyCenterChangedInJS is null)
-                return;
-
-            await _baiduMap.NotifyCenterChangedInJS();
+            _centerChangedInJs = true;
+            Center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
             await OnMoving.InvokeAsync();
         }
 
         public async ValueTask HandleOnZoomEnd()
         {
-            if (_baiduMap.NotifyZoomChangedInJS is null)
-                return;
-
-            await _baiduMap.NotifyZoomChangedInJS();
+            _zoomChangedInJs = true;
+            Zoom = await _baiduMap.TryInvokeAsync<float>("getZoom");
             await OnZoomEnd.InvokeAsync();
         }
 
@@ -262,31 +264,6 @@ namespace Masa.Blazor
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
                 }, this);
-
-                _baiduMap.NotifyZoomChangedInJS = async () =>
-                {
-                    _zoomChangedInJs = true;
-                    Zoom = await _baiduMap.TryInvokeAsync<float>("getZoom");
-                };
-
-                _baiduMap.NotifyCenterChangedInJS = async () =>
-                {
-                    _centerChangedInJs = true;
-                    Center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
-                };
-
-                _baiduMap.NotifyMapTypeChangedInJS = async () =>
-                {
-                    _maptypeChangedInJs = true;
-
-                    switch (await _baiduMap.TryInvokeAsync<string>("getMapType"))
-                    {
-                        case "B_NORMAL_MAP": MapType = BaiduMapType.NormalMap; break;
-                        case "B_EARTH_MAP": MapType = BaiduMapType.EarthMap; break;
-                        case "B_SATELLITE_MAP": MapType = BaiduMapType.SatelliteMap; break;
-                        default: break;
-                    }
-                };
 
                 StateHasChanged();
             }
