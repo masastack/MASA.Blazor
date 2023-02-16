@@ -116,6 +116,6 @@ builder.Services.AddMasaBlazor(options =>
 
 ### Dynamically modify the theme
 
-You can access theme settings by referencing the app properties of the **Theme** object, or you can modify theme settings by reassigning values
+You can toggle theme by using the **ToggleTheme** method of the **MasaBlazor** service
 
 <masa-example file="Examples.components.application.DynamicallyModifyTheme"></masa-example>
