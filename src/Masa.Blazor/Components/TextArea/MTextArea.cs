@@ -59,11 +59,11 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override void OnWatcherInitialized()
+        protected override void OnWatcherInitialized(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
+            base.OnWatcherInitialized(watcher);
 
-            Watcher
+            watcher
                 .Watch<bool>(nameof(AutoGrow), ReCalculateInputHeight)
                 .Watch<bool>(nameof(RowHeight), ReCalculateInputHeight);
         }
