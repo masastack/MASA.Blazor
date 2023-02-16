@@ -1,0 +1,88 @@
+﻿@using System.Diagnostics.CodeAnalysis;
+@using Masa.Blazor.Presets.EnumChip.Tools;
+
+@typeparam TValue where TValue : Enum;
+
+<MRadioGroup Disabled="Disabled" Dark="Dark" @ref="MRadioGroupConfig" TValue="TValue" Value="Value" Column="Column" Row="Row" ValueChanged="ValueChanged">
+
+
+        <LabelContent>
+            @Title
+        </LabelContent>
+        
+        <ChildContent>
+        @{
+            var collection = Enum.GetValues(typeof(TValue));
+
+            @foreach (var item in collection)
+            {
+                TValue tItem = (TValue)item;
+
+                <MRadio Value="@tItem">
+
+                    <LabelContent>@(new MarkupString(tItem.DisplayText()))</LabelContent>
+
+                </MRadio>
+            }
+        }
+        </ChildContent>
+
+    </MRadioGroup>
+
+@code {
+
+    /// <summary>
+    /// 可以通过这个引用，对内置MRadioGroup进行属性设置
+    /// </summary>
+    [NotNull]
+    [Parameter]
+    public MRadioGroup<TValue> MRadioGroupConfig { get; set; }
+
+
+    /// <summary>
+    /// 标题名称
+    /// </summary>
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Dark
+    /// </summary>
+    [Parameter]
+    public bool Dark { get; set; } = false;
+
+
+    /// <summary>
+    /// 设置值，这里必须是枚举
+    /// </summary>
+    [Parameter]
+    public TValue Value { get; set; }
+
+
+    /// <summary>
+    /// 值改变事件
+    /// </summary>
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+
+    /// <summary>
+    /// 竖向排列
+    /// </summary>
+    [Parameter]
+    public bool Column { get; set; } = false;
+
+    /// <summary>
+    ///  横向排列
+    /// </summary>
+    [Parameter]
+    public bool Row { get; set; } = true;
+
+
+    /// <summary>
+    /// 禁用
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+}
