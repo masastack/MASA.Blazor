@@ -15,11 +15,7 @@
     public Task IsDarkChanged(bool isDark)
     {
         IsDark = isDark;
-        var theme = MasaBlazor.Theme;
-        theme.Dark = isDark;
-
-        MasaBlazor.Theme = theme;
-
+        MasaBlazor.ToggleTheme();
         return Task.CompletedTask;
     }
 }

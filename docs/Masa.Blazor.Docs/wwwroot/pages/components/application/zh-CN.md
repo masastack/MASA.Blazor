@@ -107,6 +107,6 @@ builder.Services.AddMasaBlazor(options =>
 
 ### 动态修改主题
 
-你可以通过引用 **Theme** 对象的应用属性来访问主题设置，也可以通过重新赋值来修改主题设置
+你可以通过 **MasaBlazor** 服务的 **ToggleTheme** 方法切换主题
 
 <masa-example file="Examples.components.application.DynamicallyModifyTheme"></masa-example>
