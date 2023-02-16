@@ -133,20 +133,26 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             public override void OnScanResult(ScanCallbackType callbackType, ScanResult result)
             {
-
                 System.Diagnostics.Debug.WriteLine("OnScanResult");
+                System.Diagnostics.Debug.WriteLine($"{result.Device.Name}:{result.ScanRecord.DeviceName}");
                 if (string.IsNullOrEmpty(scanDeviceName))
                 {
                     if (!Devices.Contains(result.Device))
                     {
                         Devices.Add(result.Device);
+                        Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)
+                            ? result.ScanRecord.DeviceName
+                            : result.Device.Name;
                     }
                 }
                 else
                 {
-                    if (result.Device?.Name == scanDeviceName)
+                    if (result.Device?.Name == scanDeviceName || result.ScanRecord?.DeviceName== scanDeviceName)
                     {
                         Devices.Add(result.Device);
+                        Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)
+                            ? result.ScanRecord.DeviceName
+                            : result.Device.Name;
                         _eventWaitHandle.Set();
                     }
                     else
@@ -187,6 +193,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     {
                         list.Add(new(global::Android.Manifest.Permission.BluetoothConnect, true));
                         list.Add(new(global::Android.Manifest.Permission.BluetoothScan, true));
+                        list.Add(new(global::Android.Manifest.Permission.AccessFineLocation, true));
                         list.Add(new(global::Android.Manifest.Permission.BluetoothAdvertise, true));
                     }
                     else

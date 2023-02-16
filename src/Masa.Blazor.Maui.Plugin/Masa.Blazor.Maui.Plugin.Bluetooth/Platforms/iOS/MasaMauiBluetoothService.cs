@@ -157,6 +157,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     if (!Devices.Contains(device))
                     {
                         Devices.Add(device);
+                        Devices.Last().LocalName = device.Name;
                     }
                 }
                 else
@@ -164,6 +165,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     if (device?.Name == scanDeviceName)
                     {
                         Devices.Add(device);
+                        Devices.Last().LocalName = device.Name;
                         _eventWaitHandle.Set();
                     }
                     else

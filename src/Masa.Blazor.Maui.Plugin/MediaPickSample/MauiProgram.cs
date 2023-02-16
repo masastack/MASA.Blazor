@@ -1,5 +1,11 @@
 ﻿using Masa.Contrib.Storage.ObjectStorage.Aliyun.Options;
+
+#if ANDROID
 using MediaPickSample.PlatformsAndroid;
+#endif
+#if IOS
+using MediaPickSample.PlatformsIOS;
+#endif
 using MediaPickSample.Service;
 using Microsoft.Extensions.Logging;
 
@@ -22,7 +28,9 @@ namespace MediaPickSample
 #if ANDROID
             builder.Services.AddSingleton<IPhotoPickerService, AndroidPhotoPickerService>();
 #endif
-
+#if IOS
+builder.Services.AddSingleton<IPhotoPickerService, IOSPhotoPickerService>();
+#endif
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
             builder.Logging.AddDebug();
