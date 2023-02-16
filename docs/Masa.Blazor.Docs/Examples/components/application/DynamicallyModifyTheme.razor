@@ -1,4 +1,4 @@
-﻿<MSwitch Value="IsDark" TValue="bool" ValueChanged="IsDarkChanged" Label="@(IsDark?"Dark":"Light")"/>
+﻿<MSwitch Value="_isDark" TValue="bool" ValueChanged="IsDarkChanged" Label="@(_isDark?"Dark":"Light")"/>
 
 @code {
     [Inject]
@@ -14,7 +14,7 @@
 
     public void IsDarkChanged(bool isDark)
     {
-        IsDark = isDark;
+        _isDark = isDark;
         MasaBlazor.ToggleTheme();
     }
 }
