@@ -246,12 +246,10 @@ namespace Masa.Blazor
                 })
                 .Watch<bool>(nameof(ExpandOnHover), val =>
                 {
-                    Console.Out.WriteLine("ExpandOnHover invoke");
                     UpdateMiniVariant(val, false);
                 })
                 .Watch<bool>(nameof(IsMouseover), val =>
                 {
-                    Console.Out.WriteLine("IsMouseOver invoke");
                     UpdateMiniVariant(!val);
                 });
         }
@@ -426,9 +424,6 @@ namespace Masa.Blazor
                 ? 0
                 : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
             
-            // TODO:
-            Console.Out.WriteLine("Right = {0}, Id = {1}, Right value = {2}, to value = {3}", Right, Id, MasaBlazor.Application.Right, val);
-
             if (Right)
                 MasaBlazor.Application.Right = val;
             else
