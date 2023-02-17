@@ -1,5 +1,6 @@
 ﻿using Android.Bluetooth;
 using Android.Bluetooth.LE;
+using static Android.Media.Midi.MidiManager;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
@@ -11,7 +12,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         private static ScanSettings _settings = new ScanSettings.Builder()
             .SetScanMode(Android.Bluetooth.LE.ScanMode.Balanced)
             ?.Build();
-        private static DevicesCallback _callback = new DevicesCallback();
+
         public static bool PlatformIsEnabled()
         {
             return _bluetoothAdapter is { IsEnabled: true };
@@ -19,6 +20,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            var _callback = new DevicesCallback();
             time1 = DateTime.Now;
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
@@ -105,7 +107,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             private readonly EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
 
-            public List<BluetoothDevice> Devices { get; } = new();
+            public List<BluetoothDevice> Devices { get;} = new();
             private string scanDeviceName;
             public void WaitOne()
             {
@@ -137,7 +139,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 System.Diagnostics.Debug.WriteLine($"{result.Device.Name}:{result.ScanRecord.DeviceName}");
                 if (string.IsNullOrEmpty(scanDeviceName))
                 {
-                    if (!Devices.Contains(result.Device))
+                    if (!Devices.Contains(result.Device) && (!string.IsNullOrEmpty(result.Device.Name) || !string.IsNullOrEmpty(result.ScanRecord.DeviceName)))
                     {
                         Devices.Add(result.Device);
                         Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)

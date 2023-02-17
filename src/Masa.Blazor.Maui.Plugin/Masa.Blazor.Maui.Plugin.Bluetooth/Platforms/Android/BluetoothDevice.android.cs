@@ -7,7 +7,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         private readonly Android.Bluetooth.BluetoothDevice _device;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private RemoteGattServer _gattServer;
-
         private BluetoothDevice(Android.Bluetooth.BluetoothDevice device)
         {
             _device = device;
@@ -46,11 +45,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             }
 
             return _gattServer;
-        }
-
-        public void Disconnect()
-        {
-            _gattServer=null;
         }
     }
 }

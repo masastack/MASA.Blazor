@@ -47,6 +47,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            _delegate.ClearDevices();
             time1 = DateTime.Now;
             if (!_manager.IsScanning)
             {
@@ -123,7 +124,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             private EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
             private string scanDeviceName;
-            public  List<BluetoothDevice> Devices { get; } = new();
+
+            public void ClearDevices()
+            {
+                Devices = new();
+            }
+            public  List<BluetoothDevice> Devices { get; private set; } = new();
 
             public  void WaitOne()
             {
