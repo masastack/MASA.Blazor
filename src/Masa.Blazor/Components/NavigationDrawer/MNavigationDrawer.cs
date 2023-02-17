@@ -425,6 +425,9 @@ namespace Masa.Blazor
             var val = (!IsActive || IsMobile || Temporary)
                 ? 0
                 : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
+            
+            // TODO:
+            Console.Out.WriteLine("Right = {0}, Id = {1}, Right value = {2}, to value = {3}", Right, Id, MasaBlazor.Application.Right, val);
 
             if (Right)
                 MasaBlazor.Application.Right = val;
