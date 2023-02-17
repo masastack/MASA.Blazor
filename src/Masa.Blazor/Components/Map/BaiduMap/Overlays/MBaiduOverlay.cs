@@ -1,13 +1,18 @@
-﻿namespace Masa.Blazor
+﻿using System.Text.Json.Serialization;
+
+namespace Masa.Blazor
 {
     public abstract class MBaiduOverlay : BComponentBase
     {
-        public virtual IJSObjectReference OverlayRef { get; set; }
+        [JsonIgnore]
+        internal IJSObjectReference OverlayJSObjectRef { get; set; }
 
-        public virtual MBaiduMap MapRef { get; set; }
+        [JsonIgnore]
+        [CascadingParameter]
+        protected MBaiduMap MapRef { get; set; }
 
-        public async Task ShowAsync() => await OverlayRef.InvokeVoidAsync("show");
+        public async Task ShowAsync() => await OverlayJSObjectRef.TryInvokeVoidAsync("show");
 
-        public async Task HideAsync() => await OverlayRef.InvokeVoidAsync("hide");
+        public async Task HideAsync() => await OverlayJSObjectRef.TryInvokeVoidAsync("hide");
     }
 }

@@ -32,19 +32,12 @@ namespace Masa.Blazor
         [ApiDefaultValue(0.3f)]
         public float FillOpacity { get; set; } = 0.3f;
 
-        [JsonIgnore]
-        public override IJSObjectReference OverlayRef { get; set; }
-
-        [JsonIgnore]
-        [CascadingParameter]
-        public override MBaiduMap MapRef { get; set; }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null)
-                NextTick(async () => await MapRef.AddOverlayAsync(this));
+                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
         }
     }
 }

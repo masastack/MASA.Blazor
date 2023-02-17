@@ -74,15 +74,22 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
 
     public async ValueTask<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay)
     {
-        return overlay switch
-        {
-            MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("addCircle", circle),
-            MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("addMarker", marker),
-            MBaiduLabel label => await InvokeAsync<IJSObjectReference>("addLabel", label),
-            MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("addPolyline", polyline),
-            MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("addPolygon", polygon),
-            _ => null
-        };
+        if (overlay is null)
+            return null;
+
+        if (overlay.OverlayJSObjectRef is null)
+            return overlay switch
+            {
+                MBaiduCircle circle => await InvokeAsync<IJSObjectReference>("addCircle", circle),
+                MBaiduMarker marker => await InvokeAsync<IJSObjectReference>("addMarker", marker),
+                MBaiduLabel label => await InvokeAsync<IJSObjectReference>("addLabel", label),
+                MBaiduPolyline polyline => await InvokeAsync<IJSObjectReference>("addPolyline", polyline),
+                MBaiduPolygon polygon => await InvokeAsync<IJSObjectReference>("addPolygon", polygon),
+                _ => null
+            };
+
+        await InvokeVoidAsync("addOverlay", overlay.OverlayJSObjectRef);
+        return overlay.OverlayJSObjectRef;
     }
 
     protected override async ValueTask DisposeAsync(bool disposing)
