@@ -241,9 +241,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
     }
 
-    protected override void OnWatcherInitialized(PropertyWatcher watcher)
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnWatcherInitialized(watcher);
+        base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
                .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange());
