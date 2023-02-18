@@ -263,6 +263,10 @@ namespace Masa.Blazor
                     Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
+                    MaxZoom = MaxZoom,
+                    MinZoom = MinZoom,
+                    TrafficOn = TrafficOn,
+                    MapTypeString = BaiduMapTypeName[MapType],
                 }, this);
 
                 StateHasChanged();
@@ -332,7 +336,7 @@ namespace Masa.Blazor
             });
         }
 
-        public async Task<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay) 
+        public async Task<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay)
             => await _baiduMap.AddOverlayAsync(overlay);
 
         public async Task RemoveOverlayAsync(MBaiduOverlay overlay)
