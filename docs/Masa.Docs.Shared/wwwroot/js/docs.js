@@ -107,8 +107,15 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
   function addLinkRules({ md, defaultSlugify }) {
     md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-      const next = tokens[idx + 1];
-      const content = next.content;
+      let i = 1;
+      let next = tokens[idx + i];
+      let content = next.content;
+
+      while(!content && next.type !== "link_close") {
+        i++;
+        next = tokens[idx+i]
+        content = next.content
+      }
 
       tokens[idx].tag = "app-link";
 
