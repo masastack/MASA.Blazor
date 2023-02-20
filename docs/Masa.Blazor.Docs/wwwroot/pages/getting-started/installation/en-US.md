@@ -100,20 +100,22 @@ builder.Services.AddMasaBlazor();
 ```
 ### Global reference
 
-update `_Imports.razor` file,Add:
+update **_Imports.razor** file:
 
 ```csharp
-@using Masa.Blazor
 @using BlazorComponent
+@using Masa.Blazor
+@using Masa.Blazor.Presets
 ```
 
-update `Shared/MainLayout.razor` file，set MApp as root element：
+update **_Imports.cs** file:
 
-```html
-<MApp> //layout </MApp>
+```csharp
+global using BlazorComponent;
+global using Masa.Blazor;
 ```
-## Use
 
-Refer to official documents [Component](https://docs.masastack.com/blazor/components/application),Add related components。
-`dotnet run` start project Preview the MasaBlazor。
+### Next
 
+- [Default Application](/blazor/components/application#default-application-markup)
+- [Layout templates](/blazor/getting-started/wireframes)
