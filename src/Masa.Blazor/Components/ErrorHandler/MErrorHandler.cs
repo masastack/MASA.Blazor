@@ -95,7 +95,6 @@ namespace Masa.Blazor
             builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
 
             var content = ChildContent;
-            var showChildContent = true;
             if (CurrentException is not null)
             {
                 if (ErrorContent is not null)
@@ -104,7 +103,6 @@ namespace Masa.Blazor
                 }
                 else if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert))
                 {
-                    showChildContent = false;
                     content = cb =>
                     {
                         cb.OpenElement(0, "div");
@@ -114,8 +112,7 @@ namespace Masa.Blazor
                 }
             }
 
-            if (showChildContent)
-                builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
+            builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
 
             builder.CloseComponent();
         }
