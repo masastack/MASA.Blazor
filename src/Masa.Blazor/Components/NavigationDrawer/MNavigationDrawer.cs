@@ -8,7 +8,7 @@ namespace Masa.Blazor
     {
         private readonly string[] _applicationProperties = new string[]
         {
-            "Bottom","Footer","Bar","Top"
+            "Bottom", "Footer", "Bar", "Top"
         };
 
         [Parameter]
@@ -29,14 +29,8 @@ namespace Masa.Blazor
         [Parameter]
         public StringNumber Height
         {
-            get
-            {
-                return GetValue<StringNumber>(App ? "100vh" : "100%");
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get { return GetValue<StringNumber>(App ? "100vh" : "100%"); }
+            set { SetValue(value); }
         }
 
         [Parameter]
@@ -57,14 +51,8 @@ namespace Masa.Blazor
         [Parameter]
         public OneOf<Breakpoints, double> MobileBreakpoint
         {
-            get
-            {
-                return GetValue(MasaBlazor.Breakpoint.MobileBreakpoint);
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get { return GetValue(MasaBlazor.Breakpoint.MobileBreakpoint); }
+            set { SetValue(value); }
         }
 
         [Parameter]
@@ -141,10 +129,7 @@ namespace Masa.Blazor
 
         protected StringNumber ComputedWidth
         {
-            get
-            {
-                return IsMiniVariant ? MiniVariantWidth : Width;
-            }
+            get { return IsMiniVariant ? MiniVariantWidth : Width; }
         }
 
         protected bool HasApp => App && (!IsMobile && !Temporary);
@@ -177,26 +162,17 @@ namespace Masa.Blazor
 
         protected bool ReactsToResize
         {
-            get
-            {
-                return !DisableResizeWatcher && !Stateless;
-            }
+            get { return !DisableResizeWatcher && !Stateless; }
         }
 
         protected bool ReactsToMobile
         {
-            get
-            {
-                return App && !DisableResizeWatcher && !Permanent && !Stateless && !Temporary;
-            }
+            get { return App && !DisableResizeWatcher && !Permanent && !Stateless && !Temporary; }
         }
 
         protected bool ReactsToRoute
         {
-            get
-            {
-                return !DisableRouteWatcher && !Stateless && (Temporary || IsMobile);
-            }
+            get { return !DisableRouteWatcher && !Stateless && (Temporary || IsMobile); }
         }
 
         protected override bool IsFullscreen => MasaBlazor.Breakpoint.SmAndDown;
@@ -208,7 +184,30 @@ namespace Masa.Blazor
         {
             base.OnInitialized();
 
-            Watcher
+            Init();
+
+            MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+            NavigationManager.LocationChanged += OnLocationChanged;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await UpdateApplicationAsync();
+
+                ZIndex = await GetActiveZIndexAsync();
+            }
+        }
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher
                 .Watch<bool>(nameof(Value), val =>
                 {
                     if (Permanent)
@@ -244,19 +243,15 @@ namespace Masa.Blazor
 
                     //We will remove this when mixins applicationable finished
                     _ = UpdateApplicationAsync();
-
                 })
-                .Watch<bool>(nameof(ExpandOnHover), val => UpdateMiniVariant(val, false))
+                .Watch<bool>(nameof(ExpandOnHover), val =>
+                {
+                    UpdateMiniVariant(val, false);
+                })
                 .Watch<bool>(nameof(IsMouseover), val =>
                 {
                     UpdateMiniVariant(!val);
                 });
-
-            Init();
-
-            MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
-            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
-            NavigationManager.LocationChanged += OnLocationChanged;
         }
 
         private async void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -299,9 +294,8 @@ namespace Masa.Blazor
 
         private void UpdateMiniVariant(bool val, bool shouldRender = true)
         {
-            if (MiniVariant != val)
+            if (ExpandOnHover && MiniVariant != val)
             {
-                MiniVariant = val;
                 if (MiniVariantChanged.HasDelegate)
                 {
                     MiniVariantChanged.InvokeAsync(val);
@@ -329,11 +323,6 @@ namespace Masa.Blazor
             else if (!Temporary)
             {
                 IsActive = !IsMobile;
-            }
-
-            if (ExpandOnHover)
-            {
-                UpdateMiniVariant(true, false);
             }
         }
 
@@ -432,9 +421,9 @@ namespace Masa.Blazor
             }
 
             var val = (!IsActive || IsMobile || Temporary)
-                    ? 0
-                    : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
-
+                ? 0
+                : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
+            
             if (Right)
                 MasaBlazor.Application.Right = val;
             else
@@ -449,18 +438,8 @@ namespace Masa.Blazor
             }
 
             var element = await JsInvokeAsync<BlazorComponent.Web.Element>(
-                   JsInteropConstants.GetDomInfo, Ref);
+                JsInteropConstants.GetDomInfo, Ref);
             return element.ClientWidth;
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
-            {
-                ZIndex = await GetActiveZIndexAsync();
-            }
         }
 
         public override async Task HandleOnClickAsync(MouseEventArgs e)

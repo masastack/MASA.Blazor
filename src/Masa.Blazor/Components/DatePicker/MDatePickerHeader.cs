@@ -115,11 +115,11 @@ namespace Masa.Blazor
             return new DateOnly(date.Year, date.Month, 1);
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
-
-            Watcher
+            base.RegisterWatchers(watcher);
+   
+            watcher
                 .Watch<DateOnly>(nameof(Value), (newVal, oldVal) =>
                 {
                     IsReversing = newVal < oldVal;

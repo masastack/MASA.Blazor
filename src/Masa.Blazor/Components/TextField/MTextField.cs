@@ -191,7 +191,18 @@ namespace Masa.Blazor
             }
         }
 
-        public virtual StringNumber ComputedCounterValue => CounterValue?.Invoke(InternalValue) ?? (InternalValue?.ToString()?.Length ?? 0);
+        public virtual StringNumber ComputedCounterValue
+        {
+            get
+            {
+                if (InternalValue is null)
+                {
+                    return 0;
+                }
+
+                return CounterValue?.Invoke(InternalValue) ?? InternalValue.ToString()!.Length;
+            }
+        }
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 

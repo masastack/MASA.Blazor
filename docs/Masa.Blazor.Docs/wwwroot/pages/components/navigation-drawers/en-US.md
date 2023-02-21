@@ -18,7 +18,7 @@ the [MList](/blazor/components/lists) component using the **Nav** property.
 
 <app-alert type="error" content="If you are using **MNavigationDrawer** with **App** property enabled, you don't need to use `Absolute` prop as in examples."></app-alert>
 
-<app-alert type="info" content="The `ExpandOnHover` prop does not alter the content area of **MMain**. To have content area respond to `ExpandOnHover`, bind `OnMiniVariantUpdate` to a data prop."></app-alert>
+<app-alert type="info" content="The `ExpandOnHover` prop does not alter the content area of **MMain**. To have content area respond to `ExpandOnHover`, please set `@bind-MiniVariant`."></app-alert>
 
 ## Examples
 

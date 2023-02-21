@@ -76,10 +76,11 @@ namespace Masa.Blazor
         private IJSObjectReference QuillHelper { get; set; }
         private DotNetObjectReference<MEditor> ObjRef { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            await base.OnInitializedAsync();
-            Watcher
+            base.RegisterWatchers(watcher);
+
+            watcher
                 .Watch<string>(nameof(Value), async val =>
                 {
                     if (_waitingUpdate && _editorRendered)

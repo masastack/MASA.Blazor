@@ -230,18 +230,22 @@ namespace Masa.Blazor
             }
         }
 
-        public override Task SetParametersAsync(ParameterView parameters)
-        {
-            
-            
-            return base.SetParametersAsync(parameters);
-        }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            Watcher
+            InternalActivePicker = ActivePicker ?? Type;
+
+            //Init TableDate
+            var multipleValue = WrapInArray(Value);
+            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
+        }
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher
                 .Watch<DatePickerType?>(nameof(ActivePicker), val =>
                 {
                     InternalActivePicker = val.Value;
@@ -265,12 +269,6 @@ namespace Masa.Blazor
                     var multipleValue = WrapInArray(val);
                     TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
                 });
-
-            InternalActivePicker = ActivePicker ?? Type;
-
-            //Init TableDate
-            var multipleValue = WrapInArray(Value);
-            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
         }
 
         private IList<DateOnly> WrapInArray(TValue value)

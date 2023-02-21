@@ -118,11 +118,11 @@ namespace Masa.Blazor
 
         protected override bool EnableSpaceKeDownPreventDefault => false;
 
-        protected override void OnWatcherInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher
+            watcher
                 .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
                 .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
