@@ -153,6 +153,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
       const content = next.content;
 
       tokens[idx].tag = "app-alert";
+      tokens[idx].attrSet("type", "info");
       tokens[idx].attrSet("content", content);
       tokens[idx].attrSet("border", "left");
 
