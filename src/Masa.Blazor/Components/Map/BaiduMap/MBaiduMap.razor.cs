@@ -279,11 +279,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void OnWatcherInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher.Watch<float>(nameof(Zoom), async (val) =>
+            watcher.Watch<float>(nameof(Zoom), async (val) =>
             {
                 if (_zoomChangedInJs)
                 {
@@ -294,7 +294,7 @@ namespace Masa.Blazor
                 await _baiduMap.TryInvokeVoidAsync("setZoom", val);
             });
 
-            Watcher.Watch<float>(nameof(MaxZoom), async (val) =>
+            watcher.Watch<float>(nameof(MaxZoom), async (val) =>
             {
                 await _baiduMap.TryInvokeVoidAsync("setMaxZoom", val);
 
@@ -302,7 +302,7 @@ namespace Masa.Blazor
                     Zoom = val;
             });
 
-            Watcher.Watch<float>(nameof(MinZoom), async (val) =>
+            watcher.Watch<float>(nameof(MinZoom), async (val) =>
             {
                 await _baiduMap.TryInvokeVoidAsync("setMinZoom", val);
 
@@ -330,7 +330,7 @@ namespace Masa.Blazor
             Watcher.Watch<bool>(nameof(Dark), async (val) =>
                 await _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
 
-            Watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
+            watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {
                 if (_centerChangedInJs)
                 {

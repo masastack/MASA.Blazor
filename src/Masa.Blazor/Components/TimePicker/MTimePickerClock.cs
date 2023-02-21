@@ -279,13 +279,11 @@ namespace Masa.Blazor
             return (x, y);
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
-
-            InputValue = Value;
-
-            Watcher
+            base.RegisterWatchers(watcher);
+            
+            watcher
                 .Watch<int?>(nameof(Value), val =>
                 {
                     InputValue = val;

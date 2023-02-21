@@ -30,6 +30,7 @@ namespace Masa.Blazor.Docs
             {{
                 Name = ""{item.Name}"",
                 Type = ""{item.Type}"",
+                TypeDesc = @""{item.TypeDesc}"",
                 DefaultValue = ""{item.DefaultValue}"",
                 Required = {item.Required.ToString().ToLower()}
             }});");

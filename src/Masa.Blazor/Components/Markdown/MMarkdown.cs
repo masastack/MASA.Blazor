@@ -58,10 +58,11 @@
 
         private IJSObjectReference VditorHelper { get; set; }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
-            Watcher
+            base.RegisterWatchers(watcher);
+
+            watcher
                 .Watch<string>(nameof(Value), async val =>
                 {
                     if (_wattingUpdate && _editorRendered)

@@ -1,0 +1,55 @@
+﻿@inject DocService DocService
+@inject MasaBlazor MasaBlazor
+
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Id="nav-drawer"
+                   Right="RTL"
+                   App
+                   Floating
+                   Width="300"
+                   Style="@Style">
+    <DefaultList Class="doc-list-nav" Routable Items="Navs" />
+    <div class="pt-12"></div>
+</MNavigationDrawer>
+
+@code {
+
+    [Parameter]
+    public bool RTL { get; set; }
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    private string? _lastProject;
+    private List<NavItem> Navs { get; set; } = new();
+
+    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_lastProject != Project)
+        {
+            _lastProject = Project;
+            if (Project is null)
+            {
+                Navs = new();
+                return;
+            }
+
+            Navs = await DocService.ReadNavsAsync(Project);
+        }
+    }
+
+}

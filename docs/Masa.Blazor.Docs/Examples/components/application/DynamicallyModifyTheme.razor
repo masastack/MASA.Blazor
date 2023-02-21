@@ -1,0 +1,21 @@
+﻿@inject MasaBlazor MasaBlazor
+
+<MSwitch Value="_isDark" TValue="bool" ValueChanged="IsDarkChanged" Label="@(_isDark ? "Dark" : "Light")" />
+
+@code {
+
+    bool _isDark;
+
+    protected override Task OnInitializedAsync()
+    {
+        _isDark = MasaBlazor?.Theme?.Dark ?? false;
+        return base.OnInitializedAsync();
+    }
+
+    private void IsDarkChanged(bool isDark)
+    {
+        _isDark = isDark;
+        MasaBlazor.ToggleTheme();
+    }
+
+}

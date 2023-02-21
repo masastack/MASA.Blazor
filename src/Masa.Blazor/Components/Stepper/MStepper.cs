@@ -37,25 +37,7 @@
         protected List<MStepperStep> Steps = new();
 
         protected List<MStepperContent> Content = new();
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            Watcher
-                .Watch<int>(nameof(Value), (newVal, oldVal) =>
-                {
-                    IsReverse = newVal < oldVal;
-
-                    if (oldVal != 0)
-                    {
-                        IsBooted = true;
-                    }
-
-                    UpdateView();
-                });
-        }
-
+        
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -75,10 +57,30 @@
 
         protected override void OnAfterRender(bool firstRender)
         {
+            base.OnAfterRender(firstRender);
+
             if (firstRender)
             {
                 UpdateView();
             }
+        }
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher
+                .Watch<int>(nameof(Value), (newVal, oldVal) =>
+                {
+                    IsReverse = newVal < oldVal;
+
+                    if (oldVal != 0)
+                    {
+                        IsBooted = true;
+                    }
+
+                    UpdateView();
+                });
         }
 
         public void RegisterStep(MStepperStep step)

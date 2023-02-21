@@ -1,15 +1,11 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MRadio<TValue> : BRadio<TValue>
+    public class MRadio<TValue> : BRadio<TValue>
     {
-        [CascadingParameter]
-        public MRadioGroup<TValue> RadioGroup { get; set; }
-
-        protected bool IsFocused { get; set; }
-
         [Parameter]
         public string Color { get; set; } = "primary";
 
+        protected bool IsFocused { get; set; }
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
 
