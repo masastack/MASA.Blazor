@@ -17,9 +17,9 @@
     }
 </MListItemContent>
 
-@if (HasState)
+@if (Item is not null && Item is not { State: NavItemState.None })
 {
-    string color = GetColor(Item!.State!);
+    var color = GetColor(Item.State);
     if (Item!.HasChildren())
     {
         <MChip Style="height: 20px" Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
@@ -31,18 +31,17 @@
 }
 
 @code {
+
     [Parameter, EditorRequired]
     public TItem? Item { get; set; }
 
-    bool HasState => !string.IsNullOrEmpty(Item?.State);
-
-    private static Dictionary<string, string> _stateColors = new()
+    private readonly Dictionary<NavItemState, string> _stateColors = new()
     {
-        { "new", "#05CD99" },
-        { "pwd", "#FF5252" }
+        { NavItemState.New, "#05CD99" },
+        { NavItemState.Update, "#FF5252" }
     };
 
-    string GetColor(string tag)
+    string GetColor(NavItemState tag)
     {
         return _stateColors.ContainsKey(tag) ? _stateColors[tag] : "primary";
     }
@@ -75,4 +74,5 @@
             return titles.Length < 2 ? string.Empty : titles.LastOrDefault()?.Replace("）", "") ?? title;
         }
     }
+
 }
