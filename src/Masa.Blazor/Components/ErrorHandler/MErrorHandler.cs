@@ -24,11 +24,10 @@ namespace Masa.Blazor
 
         protected override void OnParametersSet()
         {
-            if (CurrentException is not null)
-            {
-                _thrownInLifecycles = false;
-                Recover();
-            }
+            if (CurrentException is null) return;
+
+            _thrownInLifecycles = false;
+            Recover();
         }
 
         private bool CheckIfThrownInLifecycles(Exception exception)
@@ -41,17 +40,14 @@ namespace Masa.Blazor
                     && (exception.StackTrace.Contains("RunInitAndSetParametersAsync()")
                         || exception.StackTrace.Contains("SupplyCombinedParameters(ParameterView directAndCascadingParameters)")
                         || exception.StackTrace.Contains("OnAfterRenderAsync(Boolean firstRender)")
-                        || exception.StackTrace.Contains("OnAfterRender(Boolean firstRender)"))))
+                        || exception.StackTrace.Contains("OnAfterRender(Boolean firstRender)")
+                        || exception.StackTrace.Contains("<OnAfterRenderAsync>")
+                        || exception.StackTrace.Contains("<OnAfterRender>"))))
             {
                 return true;
             }
 
-            if (exception.InnerException is not null)
-            {
-                return CheckIfThrownInLifecycles(exception.InnerException);
-            }
-
-            return false;
+            return exception.InnerException is not null && CheckIfThrownInLifecycles(exception.InnerException);
         }
 
         protected override async Task OnErrorAsync(Exception exception)
@@ -63,14 +59,14 @@ namespace Masa.Blazor
                 _thrownInLifecycles = true;
             }
 
-            var _handled = false;
+            var handled = false;
             if (OnErrorHandleAsync != null)
             {
-                _handled = await OnErrorHandleAsync(exception);
+                handled = await OnErrorHandleAsync(exception);
                 StateHasChanged();
             }
 
-            if (!_handled)
+            if (!handled)
             {
                 if (ShowAlert)
                 {
