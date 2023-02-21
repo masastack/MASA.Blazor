@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Docs;
-using Masa.Docs.Shared.Models;
 
 namespace Masa.Docs.Shared;
 
@@ -24,6 +23,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<DocService>();
         services.AddScoped<AppService>();
+        services.AddSingleton<GithubService>();
 
         services.AddMemoryCache();
 
