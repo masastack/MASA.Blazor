@@ -59,10 +59,10 @@
 
         public virtual bool IsLabelActive => IsDirty;
 
-        protected override void OnWatcherInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
-            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+            base.RegisterWatchers(watcher);
+            watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
             {
                 // waiting for InternalValue to be assigned
                 NextTick(InternalValidate);

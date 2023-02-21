@@ -103,8 +103,13 @@ namespace Masa.Blazor
             base.OnInitialized();
 
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
 
-            Watcher.Watch<bool>(nameof(App), (_, prev) =>
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<bool>(nameof(App), (_, prev) =>
                    {
                        if (prev)
                        {

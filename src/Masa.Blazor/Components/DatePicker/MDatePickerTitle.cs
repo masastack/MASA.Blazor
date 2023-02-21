@@ -76,11 +76,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher
+            watcher
                 .Watch<DateOnly>(nameof(Value), (val, prev) =>
                 {
                     IsReversing = val < prev;

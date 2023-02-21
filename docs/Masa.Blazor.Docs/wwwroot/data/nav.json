@@ -57,11 +57,17 @@
         "tiling": "visible"
       },
       "alerts",
-      "application",
+      {
+        "title": "application",
+        "state": "update"
+      },
       "aspect-ratios",
       "avatars",
       "badges",
-      "baidumaps",
+      {
+        "title": "baidumaps",
+        "state": "new"
+      },
       "banners",
       {
         "title": "bars",
@@ -90,8 +96,12 @@
       "dividers",
       "drag-zone",
       "drawers",
-      "echarts",
+      {
+        "title": "echarts",
+        "state": "update"
+      },
       "editors",
+      "ellipsis-texts",
       "error-handler",
       "expansion-panels",
       "floating-action-buttons",
@@ -102,7 +112,10 @@
         "items": [
           "autocompletes",
           "cascaders",
-          "checkboxes",
+          {
+            "title": "checkboxes",
+            "state": "update"
+          },
           "file-inputs",
           "forms",
           "otp-input",
@@ -110,13 +123,19 @@
           "range-sliders",
           "selects",
           "sliders",
-          "switches",
+          {
+            "title": "switches",
+            "state": "update"
+          },
           "textareas",
           "text-fields"
         ]
       },
       "grids",
-      "gridstack",
+      {
+        "title": "gridstack",
+        "state": "new"
+      },
       {
         "title": "groups",
         "group": "components",
@@ -130,15 +149,24 @@
         ]
       },
       "hover",
-      "i18ns",
+      {
+        "title": "i18ns",
+        "state": "new"
+      },
       "icons",
       "image-captcha",
       "images",
       "infinite-scroll",
       "lists",
       "markdowns",
-      "markdown-parsers",
-      "menus",
+      {
+        "title": "markdown-parsers",
+        "state": "new"
+      },
+      {
+        "title": "menus",
+        "state": "update"
+      },
       {
         "title": "mobiles",
         "group": "components",
@@ -170,7 +198,10 @@
         "title": "progress",
         "group": "components",
         "items": [
-          "progress-circular",
+          {
+            "title": "progress-circular",
+            "state": "update"
+          },
           "progress-linear"
         ]
       },
@@ -180,13 +211,19 @@
       "snackbars",
       "steppers",
       "subheaders",
-      "syntax-highlights",
+      {
+        "title": "syntax-highlights",
+        "state": "new"
+      },
       {
         "title": "tables",
         "group": "components",
         "items": [
           "data-iterators",
-          "data-tables",
+          {
+            "title": "data-tables",
+            "state": "update"
+          },
           "simple-tables"
         ]
       },

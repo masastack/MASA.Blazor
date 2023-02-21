@@ -17,7 +17,7 @@ related:
 
 <app-alert type="error" content="如果使用启用了 **App** 属性的 **MNavigationDrawer**，则不需要像示例中那样使用 `Absolute` 属性。"></app-alert>
 
-<app-alert type="info" content="`ExtensionOnHover` 参数不会改变**MMain**的内容区域。 要使内容区域响应`ExtensionOnHover`，请绑定`OnMiniVariantUpdate` 到数据。"></app-alert>
+<app-alert type="info" content="`ExpandOnHover` 参数不会改变**MMain**的内容区域，即不会改变 **MMain** 的左内边距。 要使内容区域响应`ExpandOnHover`，请设置 `@bind-MinVariant`。"></app-alert>
 
 ## 示例
 

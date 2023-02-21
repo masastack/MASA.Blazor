@@ -8,12 +8,13 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
 - **CheckBox/Switch**的 `Value` 类型不再是 `bool` 类型，而是泛型类型。可以设置 `TrueValue` 和 `FalseValue`。升级到 **1.0.0** 后，需要添加参数 `TValue=“bool”`。
 - **DataTable** header 的 `Align` 类型从 `string` 变为枚举。
 - **PConfirm**已被移除，请改用 `PopupService.Confirm`。
+- 清理了 **MHover** 的 `Context`：删除了 `Class` 和 `Style` 属性。
 
 ## 从 v0.5.x 升级到 v0.6.x
 
 v0.6.x 包含了不兼容的破坏性更改，包括以下变更：
 
-### 配置主题色的API表更
+### 配置主题色的API变更
 
 v0.5.x的API:
 

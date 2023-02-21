@@ -44,11 +44,11 @@ namespace Masa.Blazor
             ? (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height)
             : (Window ? 32 : 24);
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher.Watch<bool>(nameof(App), (_, prev) =>
+            watcher.Watch<bool>(nameof(App), (_, prev) =>
                    {
                        if (prev)
                        {

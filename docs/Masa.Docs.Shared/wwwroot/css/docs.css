@@ -435,3 +435,11 @@ default-app-markup {
     border-width: 1px;
     border-style: dashed;
 }
+
+.release-note h2 {
+    margin-bottom: 8px;
+}
+
+.release-note hr {
+    margin: 16px 0;
+}

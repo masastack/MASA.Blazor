@@ -12,11 +12,9 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public string? Title { get; set; }
 
-    public string? State { get; set; }
+    public NavItemState State { get; set; }
 
     public StringNumber Value { get; set; }
 
     public List<DefaultItem>? Children { get; set; }
-
-    public bool HasChildren => Children.Any();
 }

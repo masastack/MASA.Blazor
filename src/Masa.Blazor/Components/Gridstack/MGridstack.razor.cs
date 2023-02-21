@@ -92,11 +92,11 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         ArgumentNullException.ThrowIfNull(ItemKey);
     }
 
-    protected override void OnInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher.Watch<bool>(nameof(Readonly), (val) => { _ = SetStatic(val); });
+        watcher.Watch<bool>(nameof(Readonly), (val) => { _ = SetStatic(val); });
     }
 
     protected override void SetComponentClass()

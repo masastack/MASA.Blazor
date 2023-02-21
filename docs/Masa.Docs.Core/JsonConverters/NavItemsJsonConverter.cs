@@ -34,15 +34,13 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
             if (reader.TokenType == JsonTokenType.String)
             {
                 var title = reader.GetString();
+                if (title is null) continue;
+
                 list.Add(new NavItem(title));
             }
 
             var navItem = new NavItem();
-            if (reader.TokenType == JsonTokenType.EndObject)
-            {
-                list.Add(navItem);
-            }
-            else if (reader.TokenType == JsonTokenType.StartObject)
+            if (reader.TokenType == JsonTokenType.StartObject)
             {
                 while (reader.Read())
                 {
@@ -62,7 +60,13 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                                 navItem.Group = reader.GetString();
                                 break;
                             case "state":
-                                navItem.State = reader.GetString();
+                                var stateStr = reader.GetString();
+                                navItem.State = stateStr switch
+                                {
+                                    "new" => NavItemState.New,
+                                    "update" => NavItemState.Update,
+                                    _ => NavItemState.None
+                                };
                                 break;
                             case "tiling":
                                 var tilingStr = reader.GetString();

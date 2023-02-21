@@ -1,0 +1,119 @@
+﻿@using Octokit
+@inject GithubService GithubService
+@attribute [JSCustomElement]
+@inherits NextTickComponentBase
+
+@if (HasOwnerAndRepo)
+{
+    <div>
+        <MAutocomplete @bind-Value="_search"
+                       Items="@ComputedReleases"
+                       BackgroundColor="grey lighten-3"
+                       TItem="Release"
+                       TItemValue="int"
+                       TValue="int?"
+                       ItemValue="r => r.Id"
+                       ItemText="r => r.Name"
+                       Class="my-8"
+                       HideDetails="true"
+                       Dense
+                       Flat
+                       Label="Select Release version"
+                       PrependInnerIcon="mdi-text-box-search-outline"
+                       Solo
+                       OnSelectedItemUpdate="item => _selected = item">
+            <ItemContent>
+                <MListItemIcon>
+                    <MIcon>mdi-tag-outline</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>@context.Item.Name</MListItemTitle>
+                    <MListItemSubtitle>@context.Item.PublishedAt</MListItemSubtitle>
+                </MListItemContent>
+            </ItemContent>
+        </MAutocomplete>
+
+        <MCard MinHeight="180" Outlined Loading="@_loading">
+            @if (_selected is not null)
+            {
+                <div class="d-flex">
+                    <MListItem>
+                        <MListItemAvatar Size="48">
+                            <MImage Src="@_selected.Author.AvatarUrl"></MImage>
+                        </MListItemAvatar>
+                        <MListItemContent>
+                            <MListItemTitle Class="mb-1 text-h6">
+                                <MI18n Key="released-by">
+                                    <PlaceholderContent>
+                                        @if (context == 0)
+                                        {
+                                            <AppLink Href="@_selected.Author.HtmlUrl" Content="@_selected.Author.Login" />
+                                        }
+                                    </PlaceholderContent>
+                                </MI18n>
+                            </MListItemTitle>
+                            <MListItemSubtitle>
+                                <MI18n Key="published-on">
+                                    <PlaceholderContent>
+                                        @if (context == 0)
+                                        {
+                                            <strong>@_selected.PublishedAt</strong>
+                                        }
+                                    </PlaceholderContent>
+                                </MI18n>
+                            </MListItemSubtitle>
+                        </MListItemContent>
+                    </MListItem>
+                </div>
+
+                <MDivider />
+
+                <div class="pa-4">
+                    <MMarkdownIt Source="@_selected.Body" Scope="desc" Class="release-note"></MMarkdownIt>
+                </div>
+            }
+        </MCard>
+    </div>
+}
+else
+{
+    <div>Failed to fetch releases.</div>
+}
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Owner { get; set; }
+
+    [Parameter, EditorRequired]
+    public string? Repo { get; set; }
+
+    [Parameter]
+    public bool IncludePrerelease { get; set; }
+
+    private bool _loading = true;
+    private int? _search;
+    private Release? _selected;
+
+    private List<Release> _releases = new();
+
+    private List<Release> ComputedReleases => IncludePrerelease ? _releases : _releases.Where(r => r.Prerelease == false).ToList();
+
+    private bool HasOwnerAndRepo => !string.IsNullOrWhiteSpace(Owner) && !string.IsNullOrWhiteSpace(Repo);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender && HasOwnerAndRepo)
+        {
+            _releases = (await GithubService.FetchReleasesAsync(Owner!, Repo!)).ToList();
+            _selected = ComputedReleases.FirstOrDefault();
+            _search = _selected?.Id;
+            _loading = false;
+
+            StateHasChanged();
+        }
+    }
+
+}

@@ -149,11 +149,11 @@ public partial class MCarousel : MWindow, ICarousel
             .Apply<BProgressLinear, MProgressLinear>();
     }
 
-    protected override void OnWatcherInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnWatcherInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
+        watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
                .Watch<int>(nameof(Interval), RestartTimeout)
                .Watch<StringNumber>(nameof(Height), (val, oldVal) =>
                {
