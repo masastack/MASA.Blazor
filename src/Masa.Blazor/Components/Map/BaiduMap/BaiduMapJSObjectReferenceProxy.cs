@@ -55,10 +55,10 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         if (_owner.OnMouseOut.HasDelegate) events.Add("mouseout");
         if (_owner.OnMapTypeChanged.HasDelegate) events.Add("maptypechange");
         if (_owner.OnMoveStart.HasDelegate) events.Add("movestart");
-        if (_owner.OnMoving.HasDelegate) events.Add("moving");
-        if (_owner.OnMoveEnd.HasDelegate) events.Add("moveend");
+        events.Add("moving");
+        if (_owner.OnMoving.HasDelegate) events.Add("moveend");
         if (_owner.OnZoomStart.HasDelegate) events.Add("zoomstart");
-        if (_owner.OnZoomEnd.HasDelegate) events.Add("zoomend");
+        events.Add("zoomend");
         if (_owner.OnAddOverlay.HasDelegate) events.Add("addoverlay");
         if (_owner.OnAddControl.HasDelegate) events.Add("addcontrol");
         if (_owner.OnRemoveOverlay.HasDelegate) events.Add("removeoverlay");

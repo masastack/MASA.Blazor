@@ -40,9 +40,13 @@ tag: "JS代理"
 
 #### 缩放与移动
 
-通过 `Zoom` 获取或设置地图的缩放等级。
+通过 `Zoom` 获取或设置地图的缩放等级；通过 `MaxZoom` 与 `MinZoom` 获取或设置地图的最大与最小缩放等级。
 通过 `Center` 获取或设置地图的中心点。如果该点在当前的地图视图中已经可见，则会以平滑动画的方式移动到中心点位置。
 
-
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
+
+#### 地图图层
+
+通过 `TrafficOn` 属性开启实时交通路况图层。
+通过 `MapType` 属性设置地图类型（普通地图，地球地图或卫星地图）。
 

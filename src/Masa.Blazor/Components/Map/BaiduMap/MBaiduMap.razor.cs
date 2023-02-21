@@ -25,7 +25,13 @@ namespace Masa.Blazor
             get => GetValue<float>(10);
             set
             {
-                if (value >= MinZoom && value <= MaxZoom)
+                if (value < MinZoom)
+                    SetValue(MinZoom);
+
+                else if (value > MaxZoom)
+                    SetValue(MaxZoom);
+
+                else
                     SetValue(value);
             }
         }
