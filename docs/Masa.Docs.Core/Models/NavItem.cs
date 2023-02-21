@@ -27,11 +27,11 @@ public class NavItem : IDefaultItem<NavItem>
 
     public string? Icon { get; set; }
 
-    public string? State { get; set; }
+    public NavItemState State { get; set; }
 
     public NavItemTiling? Tiling { get; set; }
 
-    public string Segment => (Group ?? Title);
+    public string? Segment => (Group ?? Title);
 }
 
 public enum NavItemTiling
@@ -39,4 +39,11 @@ public enum NavItemTiling
     Visible,
     Some,
     Invisible
+}
+
+public enum NavItemState
+{
+    None,
+    New,
+    Update
 }

@@ -490,5 +490,7 @@
   "kubernetes": "Kubernetes",
   "kubernetes-deploy": "在Kubernetes上部署",
   "tls": "HTTPS 证书",
-  "temporary": "临时证书"
+  "temporary": "临时证书",
+  "released-by": "发布者：{0}",
+  "published-on": "发布于：{0}"
 }

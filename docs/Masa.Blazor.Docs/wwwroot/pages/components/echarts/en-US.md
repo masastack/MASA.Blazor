@@ -37,3 +37,9 @@ Specify the locale. For more information, please refer to ECharts official docum
 Specify the theme. Light and dark themes are supported by default. You can use [custom themes](https://echarts.apache.org/handbook/en/concepts/style/#theme). In this example, the **vintage** theme can be set after importing the vintage.js file in HTML.
 
 <masa-example file="Examples.components.echarts.Theme"></masa-example>
+
+### Misc
+
+#### Live update
+
+<masa-example file="Examples.components.echarts.LiveUpdate"></masa-example>
