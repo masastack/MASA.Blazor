@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class BaiduMapJSModule : JSModule
     {
@@ -8,8 +6,11 @@ namespace Masa.Blazor
         {
         }
 
-        public async ValueTask<IJSObjectReference> InitAsync(string containerId, BaiduMapInitOptions options, DotNetObjectReference<MBaiduMap> obj)
-            => await InvokeAsync<IJSObjectReference>("init", containerId, options, obj);
+        public async ValueTask<IBaiduMapJSObjectReferenceProxy> InitAsync(
+            string containerId,
+            BaiduMapInitOptions options,
+            IBaiduMapJsCallbacks owner)
+            => new BaiduMapJSObjectReferenceProxy(await InvokeAsync<IJSObjectReference>("init", containerId, options), owner);
 
     }
 }

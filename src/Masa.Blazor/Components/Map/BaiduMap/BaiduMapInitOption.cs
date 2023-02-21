@@ -12,5 +12,13 @@
 
         public string DarkThemeId { get; set; }
 
+        public float MaxZoom { get; set; }
+
+        public float MinZoom { get; set; }
+
+        public string MapTypeString { get; set; }
+
+        public bool TrafficOn { get; set; }
+
     }
 }
