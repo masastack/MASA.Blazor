@@ -1,0 +1,33 @@
+﻿@using Microsoft.Extensions.Logging
+@inject ILogger<CustomHandler> Logger
+
+<MErrorHandler OnHandle="OnHandle" OnAfterHandle="OnAfterHandle">
+    <MButton OnClick="OnBtnClick" Class="@colorClass">Custom handler exception test</MButton>
+    <MButton OnClick="OnBtnReset">Reset</MButton>
+</MErrorHandler>
+
+@code
+{
+    private string colorClass = "white black--text";
+
+    private void OnBtnClick()
+    {
+        throw new Exception("throw error!");
+    }
+
+    private void OnBtnReset()
+    {
+        colorClass = "white black--text";
+    }
+
+    private void OnHandle(Exception exception)
+    {
+        colorClass = "red white--text";
+        StateHasChanged();
+    }
+
+    private void OnAfterHandle(Exception exception)
+    {
+        Logger.LogError(exception.ToString());
+    }
+}

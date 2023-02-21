@@ -18,14 +18,6 @@ You can also configure other options to display exception stack or customize exc
 
 ### Props
 
-#### OnErrorHandleAsync
-
-Custom exception handling `Func<Exception, Task<bool>>`, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.
-If the return value is `True`, the exception information will not be displayed, and the exception will be handled directly. It is recommended that after implementing custom exception handling, the exception information will be temporarily reset by itself, and the return value will be set to `True`;
-The return value is: `False`, the exception information will be prompted first, and then the exception will be handled.
-
-<masa-example file="Examples.components.error_handler.OnErrorHandleAsync"></masa-example>
-
 #### ShowAlert
 
 `true` displays the error message and retains the content of the form currently filled in, 
@@ -43,3 +35,13 @@ If an error occurs during the life cycle loading process, whether the current ra
 `true` is displayed, `false` is not displayed, and the default is not displayed.
 
 <masa-example file="Examples.components.error_handler.ShowDetail"></masa-example>
+
+### Events
+
+#### Custom handler
+
+Custom exception handling `Func<Exception, Task<bool>>`, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.
+If the return value is `True`, the exception information will not be displayed, and the exception will be handled directly. It is recommended that after implementing custom exception handling, the exception information will be temporarily reset by itself, and the return value will be set to `True`;
+The return value is: `False`, the exception information will be prompted first, and then the exception will be handled.
+
+<masa-example file="Examples.components.error_handler.CustomHandler"></masa-example>

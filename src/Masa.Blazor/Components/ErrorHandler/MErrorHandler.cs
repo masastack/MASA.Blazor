@@ -12,7 +12,10 @@ namespace Masa.Blazor
         public IPopupService PopupService { get; set; }
 
         [Parameter]
-        public Func<Exception, Task<bool>> OnErrorHandleAsync { get; set; }
+        public EventCallback<Exception> OnHandle { get; set; }
+
+        [Parameter]
+        public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
         public bool ShowAlert { get; set; } = true;
@@ -20,6 +23,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool ShowDetail { get; set; }
 
+        private bool _shouldRender = true;
         private bool _thrownInLifecycles;
 
         protected override void OnParametersSet()
@@ -59,30 +63,33 @@ namespace Masa.Blazor
                 _thrownInLifecycles = true;
             }
 
-            var handled = false;
-            if (OnErrorHandleAsync != null)
+            // _shouldRender = false;
+
+            if (OnHandle.HasDelegate)
             {
-                handled = await OnErrorHandleAsync(exception);
-                StateHasChanged();
+                await OnHandle.InvokeAsync(exception);
+            }
+            else if (ShowAlert)
+            {
+                await PopupService.ToastAsync(alert =>
+                {
+                    alert.Type = AlertTypes.Error;
+                    alert.Title = "Something wrong!";
+                    alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                });
             }
 
-            if (!handled)
+            if (OnAfterHandle.HasDelegate)
             {
-                if (ShowAlert)
-                {
-                    await PopupService.ToastAsync(alert =>
-                    {
-                        alert.Type = AlertTypes.Error;
-                        alert.Title = "Something wrong!";
-                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
-                    });
-                }
-                else
-                {
-                    throw exception;
-                }
+                await OnAfterHandle.InvokeAsync(exception);
             }
+
+            _shouldRender = true;
+            
+            // StateHasChanged();
         }
+
+        // protected override bool ShouldRender() => _shouldRender;
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -97,7 +104,7 @@ namespace Masa.Blazor
                 {
                     content = ErrorContent.Invoke(CurrentException);
                 }
-                else if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert))
+                else if (_thrownInLifecycles || (OnHandle.HasDelegate == false && !ShowAlert))
                 {
                     content = cb =>
                     {

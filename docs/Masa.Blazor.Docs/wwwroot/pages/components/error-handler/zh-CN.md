@@ -1,6 +1,6 @@
 ---
 title: Error handler（异常处理）
-desc: "`MErrorHandler`组件用来处理`blazor`组件数据加载和render时的异常信息。"
+desc: "`MErrorHandler`组件用来处理`blazor`组件数据加载和渲染时的异常信息。"
 cols: 1
 ---
 
@@ -18,12 +18,6 @@ cols: 1
 
 ### 属性
 
-#### 自定义异常处理
-
-自定义异常处理 `Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
-
-<masa-example file="Examples.components.error_handler.OnErrorHandleAsync"></masa-example>
-
 #### 是否显示告警
 
  自定义异常处理`Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景色变为红色文字颜色改为白色。
@@ -39,5 +33,8 @@ cols: 1
 <masa-example file="Examples.components.error_handler.ShowDetail"></masa-example>
 
 
+#### 自定义处理
 
+自定义异常处理 `Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
 
+<masa-example file="Examples.components.error_handler.CustomHandler"></masa-example>
