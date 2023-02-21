@@ -1,4 +1,5 @@
-﻿global using Masa.Blazor;
+﻿global using BlazorComponent;
+global using Masa.Blazor;
 global using Masa.Docs.Core;
 global using Masa.Docs.Core.Models;
 global using Masa.Docs.Core.Services;
