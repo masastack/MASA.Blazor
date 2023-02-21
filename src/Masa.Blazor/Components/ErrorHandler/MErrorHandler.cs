@@ -26,6 +26,8 @@ namespace Masa.Blazor
         private bool _shouldRender = true;
         private bool _thrownInLifecycles;
 
+        protected new Exception? CurrentException { get; private set; }
+
         protected override void OnParametersSet()
         {
             if (CurrentException is null) return;
@@ -58,25 +60,30 @@ namespace Masa.Blazor
         {
             Logger?.LogError(exception, "OnErrorAsync");
 
+            CurrentException = exception;
+
             if (CheckIfThrownInLifecycles(exception))
             {
                 _thrownInLifecycles = true;
             }
 
-            // _shouldRender = false;
+            _shouldRender = false;
 
             if (OnHandle.HasDelegate)
             {
                 await OnHandle.InvokeAsync(exception);
             }
-            else if (ShowAlert)
+            else
             {
-                await PopupService.ToastAsync(alert =>
+                if (ShowAlert)
                 {
-                    alert.Type = AlertTypes.Error;
-                    alert.Title = "Something wrong!";
-                    alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
-                });
+                    await PopupService.ToastAsync(alert =>
+                    {
+                        alert.Type = AlertTypes.Error;
+                        alert.Title = "Something wrong!";
+                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                    });
+                }
             }
 
             if (OnAfterHandle.HasDelegate)
@@ -85,11 +92,11 @@ namespace Masa.Blazor
             }
 
             _shouldRender = true;
-            
-            // StateHasChanged();
+
+            StateHasChanged();
         }
 
-        // protected override bool ShouldRender() => _shouldRender;
+        protected override bool ShouldRender() => _shouldRender;
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
