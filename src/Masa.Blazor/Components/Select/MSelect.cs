@@ -455,6 +455,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
                 attrs[nameof(MMenu.Left)] = ComputedMenuProps.Left;
                 attrs[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
+                attrs[nameof(MMenu.MaxWidth)] = ComputedMenuProps.MaxWidth;
                 attrs[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
                 attrs[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
                 attrs[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;
