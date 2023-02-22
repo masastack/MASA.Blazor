@@ -15,17 +15,23 @@ desc: "`MErrorHandler`组件用来管理未经处理的异常。"
 
 ### 属性
 
-#### 是否显示告警
+#### 错误提示类型
 
-发生异常时默认会以弹窗警告来处理。禁用 `ShowAlert` 时则会使用 `ErrorContent` 处理。
+发生异常时默认使用 **Toasts** 显示错误提示。可以通过 `PopupType` 设置提示的类型。当设置 `ErrorPopupType.Error` 时则会使用 `ErrorContent` 处理错误。
 
-<masa-example file="Examples.components.error_handler.ShowAlert"></masa-example>
+<masa-example file="Examples.components.error_handler.PopupType"></masa-example>
 
-#### 是否显示异常详情
+#### 显示错误详情
 
 通过 `ShowDetail` 控制是否显示异常详情。
 
 <masa-example file="Examples.components.error_handler.ShowDetail"></masa-example>
+
+### 插槽
+
+#### 错误内容
+
+<masa-example file="Examples.components.error_handler.ErrorContent"></masa-example>
 
 ### 事件
 

@@ -1,10 +1,9 @@
-﻿@{
-    RenderFragment<Exception> errorContent = _customErrorContent ? e => @<MAlert Type="AlertTypes.Error">@e.Message</MAlert> : null;
-}
-
-<MErrorHandler ShowAlert="@_showAlert" ErrorContent="errorContent" @ref="_errorHandler">
-    <MSwitch @bind-Value="_showAlert" Label="@($"ShowAlert")" HideDetails="true"></MSwitch>
-    <MSwitch @bind-Value="_customErrorContent" Label="Custom ErrorContent" HideDetails="true"></MSwitch>
+﻿<MErrorHandler PopupType="@_errorPopupType" @ref="_errorHandler">
+    <MRadioGroup @bind-Value="_errorPopupType" HideDetails="true" Row>
+        <MRadio Value="ErrorPopupType.Toast" Label="Toast"></MRadio>
+        <MRadio Value="ErrorPopupType.Snackbar" Label="Snackbar"></MRadio>
+        <MRadio Value="ErrorPopupType.None" Label="None"></MRadio>
+    </MRadioGroup>
     <MDivider Class="my-2"></MDivider>
     <MButton OnClick="OnClick">Throw exception</MButton>
 </MErrorHandler>
@@ -18,15 +17,13 @@
 
 @code
 {
-    private bool _showAlert = true;
-    private bool _customErrorContent;
     private bool _isErrorContent;
-
+    private ErrorPopupType _errorPopupType = ErrorPopupType.Toast;
     private MErrorHandler? _errorHandler;
 
     private void OnClick()
     {
-        if (!_showAlert)
+        if (_errorPopupType == ErrorPopupType.None)
         {
             _isErrorContent = true;
             StateHasChanged();

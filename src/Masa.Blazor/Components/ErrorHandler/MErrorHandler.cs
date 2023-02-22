@@ -18,7 +18,8 @@ namespace Masa.Blazor
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
-        public bool ShowAlert { get; set; } = true;
+        [ApiDefaultValue(ErrorPopupType.Toast)]
+        public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Toast;
 
         [Parameter]
         public bool ShowDetail { get; set; }
@@ -84,14 +85,18 @@ namespace Masa.Blazor
             }
             else
             {
-                if (ShowAlert)
+                if (PopupType == ErrorPopupType.Toast)
                 {
-                    await PopupService.ToastAsync(alert =>
+                    await PopupService.ToastAsync(config =>
                     {
-                        alert.Type = AlertTypes.Error;
-                        alert.Title = "Something wrong!";
-                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                        config.Type = AlertTypes.Error;
+                        config.Title = "Something wrong!";
+                        config.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
                     });
+                }
+                else if (PopupType == ErrorPopupType.Snackbar)
+                {
+                    await PopupService.AlertAsync(exception);
                 }
             }
 
@@ -116,7 +121,7 @@ namespace Masa.Blazor
             var content = ChildContent;
             if (CurrentException is not null)
             {
-                if (_thrownInLifecycles || (OnHandle.HasDelegate == false && !ShowAlert))
+                if (_thrownInLifecycles || (OnHandle.HasDelegate == false && PopupType == ErrorPopupType.None))
                 {
                     if (ErrorContent is null)
                     {
