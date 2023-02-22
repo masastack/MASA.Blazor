@@ -1,9 +1,67 @@
 ﻿@page "/"
 @layout MainLayout
 @inject DocService DocService
+@inject AppService AppService
+@inject MasaBlazor MasaBlazor
 @inject I18n I18n
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+
 
 <MContainer Fluid>
+    <MNavigationDrawer Value="true"
+                       Id="nav-drawer1"
+                       Right="false"
+                       App
+                       Floating
+                       Width="300"
+                       Style="@Style">
+        <ChildContent>
+            <MListItem>
+                <MListItemContent>
+                    <MSelect Items="_versions"
+                             @bind-Value="@selectVersion"
+                             ItemText="u => u.Label"
+                             ItemValue="u => u.Value"
+                             Label="version"
+                             HideDetails="true"
+                             OnChange="(string arg)=>VersionSelectChange(arg)"
+                             Dense
+                             Outlined></MSelect>
+                </MListItemContent>
+            </MListItem>
+            <MDivider></MDivider>
+
+            <MList Dense>
+                <MListItemGroup Color="primary">
+                    <MListItem @onclick='(()=>ScrollIntoView("link_getting-started"))' Exact Class="m-list-item--default">
+
+                        <MListItemIcon>
+                            <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                    @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                    {
+                        var linkStr = $"link_{project}";
+                        <MListItem @onclick="(()=>ScrollIntoView(linkStr))" Exact Class="m-list-item--default">
+                            <MListItemAvatar>
+                                @Image(project)
+                            </MListItemAvatar>
+
+                            <MListItemContent>
+                                <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                            </MListItemContent>
+                        </MListItem>
+                    }
+                </MListItemGroup>
+            </MList>
+
+        </ChildContent>
+    </MNavigationDrawer>
+
     <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
         @if (_loading)
         {
@@ -14,7 +72,8 @@
         }
         else
         {
-            <div class="project">
+
+            <div class="project" id="link_getting-started">
                 <div class="heading-5 mb-6 d-flex align-center">
                     <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
                     @I18n.T("getting-started")
@@ -24,7 +83,7 @@
 
             @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
             {
-                <div class="project">
+                <div class="project" id="link_@project">
                     <div class="heading-5 mb-6 d-flex align-center">
                         @Image(project)
                         @I18n.T("product", project)
@@ -68,6 +127,29 @@
     [CascadingParameter]
     private BaseLayout BaseLayout { get; set; } = null!;
 
+    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
+
+    /// <summary>
+    /// doc version list
+    /// </summary>
+    private List<VersionSelectItem> _versions = new List<VersionSelectItem>
+    {
+        new VersionSelectItem("1.0","1.0"),
+    };
+    /// <summary>
+    /// current selected version
+    /// </summary>
+    private string selectVersion = "1.0";
+
+    /// <summary>
+    /// doc version change event
+    /// </summary>
+    private void VersionSelectChange(string newval)
+    {
+        //TODO:many version
+    }
+
+
     private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
     {
         ("why-masa-blazor", "/blazor/introduction/why-masa-blazor"),
@@ -75,6 +157,16 @@
     };
 
     private static RenderFragment Image(string project) => __builder =>
+    {
+        string? src = GetImageAddress(project);
+
+        if (!string.IsNullOrWhiteSpace(src))
+        {
+            <MImage Src="@src" Class="mr-2" MaxWidth="30" MaxHeight="30"></MImage>
+        }
+    };
+
+    private static string GetImageAddress(string project)
     {
         string? src = null;
         switch (project)
@@ -89,12 +181,8 @@
                 src = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_30";
                 break;
         }
-
-        if (!string.IsNullOrWhiteSpace(src))
-        {
-            <MImage Src="@src" Class="mr-2" MaxWidth="30" MaxHeight="30"></MImage>
-        }
-    };
+        return src;
+    }
 
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
@@ -154,4 +242,26 @@
         <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
 
+
+    private async Task ScrollIntoView(string elementId)
+    {
+        // TODO: remove the following lines when #40190 of aspnetcore resolved.
+        // TODO: Blazor now does not support automatic scrolling of anchor points.
+        // Check this when .NET 8 released.
+
+        await JsRuntime.InvokeVoidAsync("setHash");
+        NavigationManager.ReplaceWithHash($"#{elementId}");
+        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+    }
+
+    public class VersionSelectItem
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public VersionSelectItem(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
 }
