@@ -51,3 +51,10 @@ tag: "JS代理"
 通过 `MapType` 属性设置地图类型（普通地图，地球地图或卫星地图）。
 
 <masa-example file="Examples.components.baidumaps.MapLayer"></masa-example>
+
+### 覆盖物
+
+ **MBaiduMap** 组件支持常用的地图覆盖物。要添加地图覆盖物，请将覆盖物组件作为**MBaiduMap** 的直接子组件。
+或者使用 **MBaiduMap** 的相关方法操作覆盖物。
+
+<masa-example file="Examples.components.baidumaps.Overlays"></masa-example>

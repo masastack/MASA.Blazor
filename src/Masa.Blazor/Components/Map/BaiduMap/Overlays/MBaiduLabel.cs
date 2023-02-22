@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
@@ -14,12 +13,11 @@ namespace Masa.Blazor
         [Parameter]
         public Size Offset { get; set; }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        public override async Task SetParametersAsync(ParameterView parameters)
         {
-            await base.OnAfterRenderAsync(firstRender);
+            await base.SetParametersAsync(parameters);
 
-            if (firstRender && MapRef is not null)
-                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
+            RenderConditions = () => Content is not null;
         }
     }
 }

@@ -16,13 +16,5 @@ namespace Masa.Blazor
 
         [Parameter]
         public string Title { get; set; }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender && MapRef is not null)
-                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
-        }
     }
 }

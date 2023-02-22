@@ -5,22 +5,21 @@
            Style="width:90%; left:5%" />
 
 <MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
-    <MCol Cols="6">
+    <MCol Cols="6" Style="display: flex;justify-content: center">
         <MSelect TValue="BaiduMapType"
-             TItem="BaiduMapType"
-             TItemValue="BaiduMapType"
-             @bind-Value="_selectedType"
-             Items="NameAndType"
-             ItemValue="item => item"
-             ItemText="item => item.ToString()"
-             OnSelectedItemUpdate="item => _selectedType=item"
-             Style="width: 200px"/>
+                 TItem="BaiduMapType"
+                 TItemValue="BaiduMapType"
+                 @bind-Value="_selectedType"
+                 Items="NameAndType"
+                 ItemValue="item => item"
+                 ItemText="item => item.ToString()"
+                 OnSelectedItemUpdate="item => _selectedType=item" />
     </MCol>
 
-    <MCol Cols="6">
+    <MCol Cols="6" Style="display: flex;justify-content: center">
         <MSwitch TValue="bool"
-             @bind-Value="TrafficOn"
-             Label="TrafficOn"/>
+                 @bind-Value="TrafficOn"
+                 Label="TrafficOn" />
     </MCol>
 </MRow>
 

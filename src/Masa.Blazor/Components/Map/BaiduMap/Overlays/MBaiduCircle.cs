@@ -1,5 +1,4 @@
 ﻿using BlazorComponent.Attributes;
-using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
@@ -35,13 +34,11 @@ namespace Masa.Blazor
         [ApiDefaultValue(0.3f)]
         public float FillOpacity { get; set; } = 0.3f;
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        public override async Task SetParametersAsync(ParameterView parameters)
         {
-            await base.OnAfterRenderAsync(firstRender);
+            await base.SetParametersAsync(parameters);
 
-            if (firstRender && MapRef is not null)
-                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
+            RenderConditions = () => Radius > 0;
         }
-
     }
 }

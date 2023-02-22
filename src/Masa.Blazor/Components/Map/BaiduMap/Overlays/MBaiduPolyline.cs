@@ -1,5 +1,4 @@
 ﻿using BlazorComponent.Attributes;
-using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
@@ -31,12 +30,11 @@ namespace Masa.Blazor
         [ApiDefaultValue(true)]
         public bool Clip { get; set; } = true;
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        public override async Task SetParametersAsync(ParameterView parameters)
         {
-            await base.OnAfterRenderAsync(firstRender);
+            await base.SetParametersAsync(parameters);
 
-            if (firstRender && MapRef is not null)
-                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
+            RenderConditions = () => Points is not null;
         }
 
     }

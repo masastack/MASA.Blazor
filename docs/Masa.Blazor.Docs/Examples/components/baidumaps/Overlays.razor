@@ -1,0 +1,28 @@
+﻿<MBaiduMap Height="400"
+           DarkThemeId="9828881e7efb0182edb48236a3b53293"
+           Style="width:90%; left:5%">
+
+           <MBaiduCircle Center="Center"
+                         Radius="3000"
+                         StrokeColor="primary"
+                         FillColor="secondary"/>
+           
+           <MBaiduLabel Content="MASA.Blazor"
+                        Position="Center"
+                        Offset="@(new(-10, 0))"/>
+           
+           <MBaiduMarker Point="Center"
+                         Title="Example Marker"/>
+           
+           <MBaiduPolygon/>
+           <MBaiduPolyline/>
+
+</MBaiduMap>
+
+@code {
+    public GeoPoint Center { get; set; } = new(116.403f, 39.917f);
+
+    public List<GeoPoint> PolygonPoints { get; set; }
+
+    public List<GeoPoint> PolylinePoints { get; set; }
+}
