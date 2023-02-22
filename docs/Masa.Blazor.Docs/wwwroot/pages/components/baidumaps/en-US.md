@@ -41,8 +41,12 @@ Use `DarkThemeId` to indicate the dark theme Id, and use `Dark` property to swit
 
 #### Move and zoom
 
-Use `Zoom` to get or set the map zoom. 
+Use `Zoom` to get or set the map zoom. Use `MaxZoom` and `MinZoom` to get or set the max and min zoom level of your map.
 Use `Center` to get or set the map center. If target point is visible in sight, map center will smoothly move to that point. 
 
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
 
+Use `TrafficOn` to turn on the real-time traffic layer.
+Use `MapType` to set type of the map (Normal map, Earth map or Satellite map).
+
+<masa-example file="Examples.components.baidumaps.MapLayer"></masa-example>

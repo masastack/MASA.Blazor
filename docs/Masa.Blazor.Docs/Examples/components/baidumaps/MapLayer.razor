@@ -1,0 +1,38 @@
+﻿<MBaiduMap Height="400"
+           EnableScrollWheelZoom
+           MapType="_selectedType"
+           TrafficOn="TrafficOn"
+           Style="width:90%; left:5%" />
+
+<MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
+    <MCol Cols="6">
+        <MSelect TValue="BaiduMapType"
+             TItem="BaiduMapType"
+             TItemValue="BaiduMapType"
+             @bind-Value="_selectedType"
+             Items="NameAndType"
+             ItemValue="item => item"
+             ItemText="item => item.ToString()"
+             OnSelectedItemUpdate="item => _selectedType=item"
+             Style="width: 200px"/>
+    </MCol>
+
+    <MCol Cols="6">
+        <MSwitch TValue="bool"
+             @bind-Value="TrafficOn"
+             Label="TrafficOn"/>
+    </MCol>
+</MRow>
+
+@code {
+    public BaiduMapType _selectedType { get; set; } = BaiduMapType.NormalMap;
+
+    public bool TrafficOn { get; set; }
+
+    public List<BaiduMapType> NameAndType { get; set; } = new()
+    {
+        BaiduMapType.NormalMap,
+        BaiduMapType.EarthMap,
+        BaiduMapType.SatelliteMap,
+    };
+}
