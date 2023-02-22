@@ -1,33 +1,42 @@
 ﻿@using Microsoft.Extensions.Logging
-@inject ILogger<CustomHandler> Logger
 
 <MErrorHandler OnHandle="OnHandle" OnAfterHandle="OnAfterHandle">
-    <MButton OnClick="OnBtnClick" Class="@colorClass">Custom handler exception test</MButton>
+    <MButton OnClick="OnClick" Class="@_colorClass">Turn red when error occured</MButton>
     <MButton OnClick="OnBtnReset">Reset</MButton>
 </MErrorHandler>
 
+<MDivider Class="my-2"></MDivider>
+
+<div>
+    @foreach (var log in _logs.TakeLast(5))
+    {
+        <div>@log</div>
+    }
+</div>
+
 @code
 {
-    private string colorClass = "white black--text";
+    private string _colorClass = "white black--text";
 
-    private void OnBtnClick()
+    private readonly List<string> _logs = new();
+
+    private void OnClick()
     {
-        throw new Exception("throw error!");
+        throw new Exception("The error was caught by MErrorHandler");
     }
 
     private void OnBtnReset()
     {
-        colorClass = "white black--text";
+        _colorClass = "white black--text";
     }
 
     private void OnHandle(Exception exception)
     {
-        colorClass = "red white--text";
-        StateHasChanged();
+        _colorClass = "red white--text";
     }
 
     private void OnAfterHandle(Exception exception)
     {
-        Logger.LogError(exception.ToString());
+        _logs.Add($"UTC {DateTime.UtcNow} > {exception.Message}");
     }
 }

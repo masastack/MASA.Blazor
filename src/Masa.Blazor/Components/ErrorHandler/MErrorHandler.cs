@@ -36,6 +36,15 @@ namespace Masa.Blazor
             Recover();
         }
 
+        public new void Recover()
+        {
+            if (CurrentException is not null)
+            {
+                CurrentException = null;
+                StateHasChanged();
+            }
+        }
+
         private bool CheckIfThrownInLifecycles(Exception exception)
         {
             if (exception.TargetSite?.Name is nameof(SetParametersAsync)
@@ -107,18 +116,21 @@ namespace Masa.Blazor
             var content = ChildContent;
             if (CurrentException is not null)
             {
-                if (ErrorContent is not null)
+                if (_thrownInLifecycles || (OnHandle.HasDelegate == false && !ShowAlert))
                 {
-                    content = ErrorContent.Invoke(CurrentException);
-                }
-                else if (_thrownInLifecycles || (OnHandle.HasDelegate == false && !ShowAlert))
-                {
-                    content = cb =>
+                    if (ErrorContent is null)
                     {
-                        cb.OpenElement(0, "div");
-                        cb.AddAttribute(1, "class", "blazor-error-boundary");
-                        cb.CloseElement();
-                    };
+                        content = cb =>
+                        {
+                            cb.OpenElement(0, "div");
+                            cb.AddAttribute(1, "class", "blazor-error-boundary");
+                            cb.CloseElement();
+                        };
+                    }
+                    else
+                    {
+                        content = ErrorContent.Invoke(CurrentException);
+                    }
                 }
             }
 
