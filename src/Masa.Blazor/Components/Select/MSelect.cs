@@ -210,7 +210,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         base.OnInitialized();
 
         CachedItems = CacheItems ? Items : new List<TItem>();
-        InternalValue = Value;
 
         ComputedMenuProps = GetDefaultMenuProps();
         MenuProps?.Invoke(ComputedMenuProps);
@@ -246,7 +245,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
-               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange());
+               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
     }
 
     private void OnItemsChange()
