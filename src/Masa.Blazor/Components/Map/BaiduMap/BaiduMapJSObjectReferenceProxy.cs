@@ -106,6 +106,7 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
     protected override async ValueTask DisposeAsync(bool disposing)
     {
         _selfReference.Dispose();
+        await InvokeVoidAsync("destroy");
 
         await base.DisposeAsync(disposing);
     }
