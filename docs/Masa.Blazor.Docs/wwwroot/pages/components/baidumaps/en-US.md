@@ -55,7 +55,7 @@ Use `MapType` to set type of the map (Normal map, Earth map or Satellite map).
 
 ### Overlays
 
-**MBaiduMap** component supports common map overlays. To add overlays, use overlay components as direct child component of **MBaiduMap** .
+ **MBaiduMap** component supports common map overlays. To add overlays, use overlay components as direct child component of **MBaiduMap** .
 Or use related methods in **MBaiduMap** to operate overlays.
 
 <masa-example file="Examples.components.baidumaps.Overlays"></masa-example>
