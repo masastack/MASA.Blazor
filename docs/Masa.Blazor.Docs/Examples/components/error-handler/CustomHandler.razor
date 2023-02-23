@@ -1,0 +1,64 @@
+﻿<MErrorHandler OnHandle="OnHandle" OnAfterHandle="OnAfterHandle">
+    <MButton OnClick="OnClick" Loading="_loading">
+        Fetch data
+    </MButton>
+</MErrorHandler>
+
+@if (_logs.Any())
+{
+    <MDivider Class="my-2"></MDivider>
+}
+
+<div>
+    @foreach (var log in _logs.TakeLast(5))
+    {
+        <div>@log</div>
+    }
+</div>
+
+<MDialog Value="@HasException" MaxWidth="300" ContentClass="white pa-4" Persistent>
+    <div class="text-right"><MButton Icon Small OnClick="OnReset"><MIcon>mdi-close</MIcon></MButton></div>
+    @_exception?.Message
+</MDialog>
+
+@code
+{
+    private readonly List<string> _logs = new();
+
+    private bool _loading;
+    private Exception? _exception;
+
+    private bool HasException => _exception != null;
+
+    private async Task OnClick()
+    {
+        _loading = true;
+
+        // mock http request
+        await Task.Delay(1000);
+
+        try
+        {
+            throw new Exception("Failed to fetch data.");
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void OnReset()
+    {
+        _exception = null;
+    }
+
+    private void OnHandle(Exception exception)
+    {
+        _exception = exception;
+    }
+
+    private void OnAfterHandle(Exception exception)
+    {
+        _logs.Add($"UTC {DateTime.UtcNow} > {exception.Message}");
+    }
+}

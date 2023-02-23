@@ -4,11 +4,30 @@
 
 v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
 
-- **Breadcrumbs** 和 **List(包括ListItem)** 的 `Linkage` 参数更改为 `Routable`。
-- **CheckBox/Switch**的 `Value` 类型不再是 `bool` 类型，而是泛型类型。可以设置 `TrueValue` 和 `FalseValue`。升级到 **1.0.0** 后，需要添加参数 `TValue=“bool”`。
-- **DataTable** header 的 `Align` 类型从 `string` 变为枚举。
-- **PConfirm**已被移除，请改用 `PopupService.Confirm`。
-- 清理了 **MHover** 的 `Context`：删除了 `Class` 和 `Style` 属性。
+- `Linkage` 重命名为 `Routable`，受影响的组件有 **MBreadcrumbs** 和 **MList**：
+  ```diff
+  - <MBreadcrumbs Linkage></MBreadcrumbs>
+  + <MBreadcrumbs Routable></MBreadcrumbs>
+  - <MList Linkage></MList>
+  + <MList Routable></MList>
+  ```
+- **MCheckBox/MSwitch** 的 `Value` 类型不再是 `bool` 类型，而是泛型 `TValue`。对于没有使用 `@bind-Value` 的写法需要显式指定泛型类型：
+  ```diff
+  - <MCheckbox Value="" ValueChanged=""></MCheckbox>
+  + <MCheckbox Value="" ValueChanged="" TValue="bool"></MCheckbox>
+  ```
+- **MDataTable** DataTableHeader 的 `Align` 类型从 `string` 变为枚举：
+  ```diff
+  - Align = "start"
+  + Align = DataTableHeaderAlign.Start
+  ```
+- **PConfirm** 已被移除，请使用 `IPopupService.ConfirmAsync`。
+- **MHover** 移除了 `Context` 的 `Class` 和 `Style` 属性。
+- **MErrorHandler** 移除了 `ShowAlert` 参数，使用 `PopupType` 代替：
+  ```diff
+  - <MErrorHandler ShowAlert="false"></MErrorHandler>
+  + <MErrorHandler PopupType="ErrorPopupType.None"></MErrorHandler>
+  ```
 
 ## 从 v0.5.x 升级到 v0.6.x
 
