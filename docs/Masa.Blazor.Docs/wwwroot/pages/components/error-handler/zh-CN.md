@@ -7,7 +7,7 @@ desc: "`MErrorHandler`组件用来管理未经处理的异常。"
 
 <masa-example file="Examples.components.error_handler.Usage"></masa-example>
 
-<app-alert type="warning" content="非MASABlazor组件内发生的异常能捕获但不能维持原有的状态，如：`<button @onclick=''>throw exception</button>`。"></app-alert>
+<app-alert type="warning" content="非MASABlazor组件内发生的异常能捕获但不能阻止状态刷新，如：`<button @onclick=''>throw exception</button>`。"></app-alert>
 
 <app-alert content="生命周期里发生异常时会尝试使用 `ErrorContent` 代替。"></app-alert>
 

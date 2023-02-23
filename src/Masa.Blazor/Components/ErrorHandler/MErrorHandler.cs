@@ -18,7 +18,7 @@ namespace Masa.Blazor
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(ErrorPopupType.Toast)]
+        [ApiDefaultValue(nameof(ErrorPopupType.Toast))]
         public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Toast;
 
         [Parameter]
