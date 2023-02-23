@@ -1,7 +1,7 @@
 ﻿<MBaiduMap Height="400"
            EnableScrollWheelZoom
            MapType="_selectedType"
-           TrafficOn="TrafficOn"
+           TrafficOn="_trafficOn"
            Style="width:90%; left:5%" />
 
 <MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
@@ -10,25 +10,25 @@
                  TItem="BaiduMapType"
                  TItemValue="BaiduMapType"
                  @bind-Value="_selectedType"
-                 Items="NameAndType"
+                 Items="_nameAndType"
                  ItemValue="item => item"
                  ItemText="item => item.ToString()"
                  OnSelectedItemUpdate="item => _selectedType=item" />
     </MCol>
 
-    <MCol Cols="6" Style="display: flex;justify-content: center">
+    <MCol Cols="6" Style="display: flex;justify-content: center; padding-left:8%">
         <MSwitch TValue="bool"
-                 @bind-Value="TrafficOn"
+                 @bind-Value="_trafficOn"
                  Label="TrafficOn" />
     </MCol>
 </MRow>
 
 @code {
-    public BaiduMapType _selectedType { get; set; } = BaiduMapType.NormalMap;
+    private BaiduMapType _selectedType { get; set; } = BaiduMapType.NormalMap;
 
-    public bool TrafficOn { get; set; }
+    private bool _trafficOn { get; set; }
 
-    public List<BaiduMapType> NameAndType { get; set; } = new()
+    private List<BaiduMapType> _nameAndType { get; set; } = new()
     {
         BaiduMapType.NormalMap,
         BaiduMapType.EarthMap,

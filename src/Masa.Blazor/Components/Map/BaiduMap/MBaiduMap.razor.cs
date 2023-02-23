@@ -342,14 +342,17 @@ namespace Masa.Blazor
             });
         }
 
-        public async Task<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay)
+        public async ValueTask AddOverlayAsync(MBaiduOverlay overlay)
             => await _baiduMap.AddOverlayAsync(overlay);
 
-        public async Task RemoveOverlayAsync(MBaiduOverlay overlay)
+        public async ValueTask RemoveOverlayAsync(MBaiduOverlay overlay)
             => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);
 
-        public async Task ClearOverlaysAsync()
+        public async ValueTask ClearOverlaysAsync()
             => await _baiduMap.TryInvokeVoidAsync("clearOverlays");
+
+        public async ValueTask<bool> Contains(MBaiduOverlay overlay)
+            => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
         public async ValueTask DisposeAsync()
         {

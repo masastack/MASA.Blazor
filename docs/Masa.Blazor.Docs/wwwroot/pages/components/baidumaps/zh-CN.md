@@ -38,7 +38,7 @@ tag: "JS代理"
 
 <masa-example file="Examples.components.baidumaps.HeightAndWidth"></masa-example>
 
-#### 缩放与移动
+#### 缩与移动
 
 通过 `Zoom` 获取或设置地图的缩放等级；通过 `MaxZoom` 与 `MinZoom` 获取或设置地图的最大与最小缩放等级。
 通过 `Center` 获取或设置地图的中心点。如果该点在当前的地图视图中已经可见，则会以平滑动画的方式移动到中心点位置。

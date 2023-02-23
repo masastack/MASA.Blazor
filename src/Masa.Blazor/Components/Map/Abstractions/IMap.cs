@@ -12,11 +12,13 @@
 
         public bool EnableScrollWheelZoom { get; set; }
 
-        public Task<IJSObjectReference> AddOverlayAsync(TOverlay overlay);
+        public ValueTask AddOverlayAsync(TOverlay overlay);
 
-        public Task RemoveOverlayAsync(TOverlay overlay);
+        public ValueTask RemoveOverlayAsync(TOverlay overlay);
 
-        public Task ClearOverlaysAsync();
+        public ValueTask ClearOverlaysAsync();
+
+        public ValueTask<bool> Contains(TOverlay overlay);
 
     }
 }

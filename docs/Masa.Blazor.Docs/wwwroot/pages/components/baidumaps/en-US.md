@@ -46,7 +46,16 @@ Use `Center` to get or set the map center. If target point is visible in sight, 
 
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
 
+#### Map Layers
+
 Use `TrafficOn` to turn on the real-time traffic layer.
 Use `MapType` to set type of the map (Normal map, Earth map or Satellite map).
 
 <masa-example file="Examples.components.baidumaps.MapLayer"></masa-example>
+
+### Overlays
+
+**MBaiduMap** component supports common map overlays. To add overlays, use overlay components as direct child component of **MBaiduMap** .
+Or use related methods in **MBaiduMap** to operate overlays.
+
+<masa-example file="Examples.components.baidumaps.Overlays"></masa-example>

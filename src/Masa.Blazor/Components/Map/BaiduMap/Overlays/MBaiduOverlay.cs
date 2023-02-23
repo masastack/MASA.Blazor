@@ -19,7 +19,7 @@ namespace Masa.Blazor
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender && MapRef is not null && RenderConditions())
-                NextTick(async () => OverlayJSObjectRef = await MapRef.AddOverlayAsync(this));
+                NextTick(async () => await MapRef.AddOverlayAsync(this));
         }
 
         public async Task ShowAsync() => await OverlayJSObjectRef.TryInvokeVoidAsync("show");

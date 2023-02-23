@@ -2,6 +2,6 @@
 {
     public interface IBaiduMapJSObjectReferenceProxy : IJSObjectReference
     {
-        ValueTask<IJSObjectReference> AddOverlayAsync(MBaiduOverlay overlay);
+        ValueTask AddOverlayAsync(MBaiduOverlay overlay);
     }
 }
