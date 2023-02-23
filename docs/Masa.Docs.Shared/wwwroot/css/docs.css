@@ -35,6 +35,7 @@
 
 .m-application code {
     background-color: unset !important;
+    padding: 0 .4rem !important;
 }
 
 .text-mono {
