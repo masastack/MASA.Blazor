@@ -15,11 +15,6 @@ public static class ServiceCollectionExtensions
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
             httpClient.BaseAddress = new Uri(baseUri);
         });
-        services.AddHttpClient("github", httpClient =>
-        {
-            httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
-            httpClient.BaseAddress = new Uri("https://api.github.com/");
-        });
 
         services.AddScoped<DocService>();
         services.AddScoped<AppService>();

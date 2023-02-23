@@ -64,6 +64,7 @@
 
 .m-application code {
     background-color: unset !important;
+    padding: 0 .4rem !important;
 }
 
 .text-mono {
@@ -185,26 +186,42 @@ h7.m-heading {
     margin-left: 0 !important;
 }
 
-#github-issuse {
+.github-issues {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+
+.github-issues .m-skeleton-loader__button {
+    width: 100%;
+    height: 32px;
+    margin-right: 4px;
+}
+
+.github-issues .m-skeleton-loader__button:last-child {
+    margin-right: 0;
+}
+
+.github-issues--loaded {
     height: 32px;
     background: rgba(233, 237, 247, 0.5);
     line-height: 32px;
     font-size: 14px;
 }
 
-    #github-issuse a {
+    .github-issues--loaded a {
         text-decoration: none;
         color: #1B2559 !important;
     }
 
-        #github-issuse a:hover {
+        .github-issues--loaded a:hover {
             color: #4318FF !important;
         }
 
-    #github-issuse > a > i {
+    .github-issues > a > i {
         color: inherit !important;
     }
-
 
 .toc-content {
     font-family: 'Poppins';
