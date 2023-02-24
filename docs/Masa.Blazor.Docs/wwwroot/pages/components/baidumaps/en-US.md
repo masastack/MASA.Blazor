@@ -41,7 +41,7 @@ Use `DarkThemeId` to indicate the dark theme Id, and use `Dark` property to swit
 
 #### Move and zoom
 
-Use `Zoom` to get or set the map zoom. Use `MaxZoom` and `MinZoom` to get or set the max and min zoom level of your map.
+Use `Zoom` to set the map zoom. Use `MaxZoom` and `MinZoom` to set the max and min zoom level of your map.
 Use `Center` to get or set the map center. If target point is visible in sight, map center will smoothly move to that point. 
 
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
