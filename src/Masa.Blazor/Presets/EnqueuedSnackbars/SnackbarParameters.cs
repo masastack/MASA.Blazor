@@ -1,6 +1,6 @@
-﻿namespace Masa.Blazor.Popup.Components;
+﻿namespace Masa.Blazor.Presets.EnqueuedSnackbars;
 
-public class AlertParameters : Alert
+public class SnackbarParameters : Snackbar
 {
     public Dictionary<string, object> ToDictionary()
     {
@@ -33,40 +33,23 @@ public class AlertParameters : Alert
             [nameof(Content)] = Content,
             [nameof(OnAction)] = OnAction,
 
-            [nameof(Icon)] = Icon,
-            [nameof(IconColor)] = IconColor,
             [nameof(Type)] = Type,
-            [nameof(Attributes)] = Attributes,
         };
     }
 
-    internal void MapTo(Alert component)
+    internal void MapTo(Snackbar component)
     {
-        component.Bottom ??= Bottom;
-        component.Centered ??= Centered;
         component.Color ??= Color;
         component.ContentClass ??= ContentClass;
-        component.Dark ??= Dark;
         component.Elevation ??= Elevation;
         component.Height ??= Height;
-        component.Left ??= Left;
-        component.Light ??= Light;
-        component.MultiLine ??= MultiLine;
 
         if (!component.OnClosed.HasDelegate)
         {
             component.OnClosed = OnClosed;
         }
 
-        component.Outlined ??= Outlined;
-        component.Right ??= Right;
         component.Rounded ??= Rounded;
-        component.Shaped ??= Shaped;
-        component.Text ??= Text;
-        component.Tile ??= Tile;
-        component.Timeout ??= Timeout;
-        component.Top ??= Top;
-        component.Vertical ??= Vertical;
         component.Width ??= Width;
 
         component.Content ??= Content;
@@ -74,9 +57,6 @@ public class AlertParameters : Alert
         component.ActionText ??= ActionText;
         component.OnAction ??= OnAction;
 
-        component.Icon ??= Icon;
-        component.IconColor ??= IconColor;
-        component.Type ??= Type;
-        component.Attributes ??= Attributes;
+        component.Type = Type;
     }
 }

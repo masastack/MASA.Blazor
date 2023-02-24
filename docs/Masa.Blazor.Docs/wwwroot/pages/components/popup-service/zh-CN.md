@@ -14,7 +14,7 @@ related:
 
 #### 警告
 
-<masa-example file="Examples.components.popup_service.Alert"></masa-example>
+<masa-example file="Examples.components.popup_service.Snackbar"></masa-example>
 
 #### 确认
 

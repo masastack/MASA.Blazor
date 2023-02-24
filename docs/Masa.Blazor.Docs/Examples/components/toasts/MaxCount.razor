@@ -1,10 +1,10 @@
-﻿<PToast @ref="_toast" MaxCount="maxCount">
-</PToast>
+﻿<PEnqueuedSnackbars @ref="_enqueuedSnackbars" MaxCount="maxCount">
+</PEnqueuedSnackbars>
 
 <MButton OnClick="AddToast"> Add Toast </MButton>
 
 @code {
-    PToast _toast;
+    PEnqueuedSnackbars _enqueuedSnackbars;
 
     int maxCount = 5;
 
@@ -23,6 +23,7 @@
             Type = (AlertTypes)alertType,
         };
 
-        await _toast.AddToast(config);
+        await _enqueuedSnackbars.AddToast(config);
     }
+
 }

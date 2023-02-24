@@ -4,14 +4,13 @@ namespace Masa.Blazor.Presets
 {
     public class ToastConfig
     {
-        public ToastConfig() : this(Guid.NewGuid().ToString())
+        public ToastConfig()
         {
+            Id = Guid.NewGuid();
         }
 
-        public ToastConfig(string key)
-        {
-            Key = key;
-        }
+        public Guid Id { get; }
+
         public bool Visible { get; set; } = true;
         public AlertTypes Type { get; set; }
         public string Color { get; set; }
@@ -21,7 +20,6 @@ namespace Masa.Blazor.Presets
         public string Content { get; set; }
         public int? Duration { get; set; } = 4000;
         public RenderFragment ActionContent { get; set; }
-        public string Key { get; set; }
         public string CloseIcon { get; set; } = "mdi-close";
         public Func<string, Task> OnClose { get; set; }
     }

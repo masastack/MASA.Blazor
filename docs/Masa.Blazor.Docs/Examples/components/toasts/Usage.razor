@@ -1,10 +1,10 @@
-﻿<PToast @ref="_toast">
-</PToast>
+﻿<PEnqueuedSnackbars @ref="_enqueuedSnackbars">
+</PEnqueuedSnackbars>
 
 <MButton OnClick="AddToast"> Add Toast </MButton>
 
 @code {
-    PToast? _toast;
+    PEnqueuedSnackbars? _enqueuedSnackbars;
 
     private Task AddToast()
     {
@@ -13,13 +13,13 @@
         var dark = Random.Shared.NextInt64(0, 2);
         var config = new ToastConfig()
         {
-            Title = $"Add Toast by Click",
+            // Title = $"Add Toast by Click",
             Content = $"create time: {now}",
             Dark = dark == 0,
             Type = (AlertTypes)alertType
         };
 
-        _toast?.AddToast(config);
+        _enqueuedSnackbars?.AddToast(config);
 
         return Task.CompletedTask;
     }

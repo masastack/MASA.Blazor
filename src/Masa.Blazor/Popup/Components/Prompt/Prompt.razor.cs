@@ -46,13 +46,6 @@ public partial class Prompt : PopupComponentBase
 
     protected override void OnParametersSet()
     {
-        if (_defaultParameters is null && MApp?.PromptParameters is not null)
-        {
-            _defaultParameters = new PromptParameters();
-
-            MApp.PromptParameters.Invoke(_defaultParameters);
-        }
-
         _defaultParameters?.MapTo(this);
 
         base.OnParametersSet();

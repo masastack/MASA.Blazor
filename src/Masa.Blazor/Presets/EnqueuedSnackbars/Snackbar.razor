@@ -1,0 +1,40 @@
+﻿@namespace Masa.Blazor.Presets.EnqueuedSnackbars
+
+<MSnackbar @bind-Value="_visible"
+           Bottom="@Bottom"
+           Centered="@Centered"
+           Color="@ComputedColor"
+           Class="m-popup__snackbar"
+           ContentClass="@ContentClass"
+           Dark="@Dark"
+           Elevation="@Elevation"
+           Left="@Left"
+           Light="@Light"
+           MultiLine="@MultiLine"
+           Outlined="@Outlined"
+           Right="@Right"
+           Rounded="@Rounded"
+           Shaped="@Shaped"
+           Text="@Text"
+           Tile="@Tile"
+           Timeout="@Timeout"
+           Top="@Top"
+           Vertical="@Vertical"
+           OnClosed="@HandleOnClosed">
+    <ChildContent>
+        <MAlert Title="@Title" Type="@Type">@Content</MAlert>
+    </ChildContent>
+    <ActionContent>
+        <ModalButton Props="ComputedActionButtonProps"
+                     OnClick="HandleOnAction">
+            @ActionText
+        </ModalButton>
+
+        @if (Closeable)
+        {
+            <MButton Icon OnClick="HandleOnClose">
+                <MIcon>mdi-close</MIcon>
+            </MButton>
+        }
+    </ActionContent>
+</MSnackbar>

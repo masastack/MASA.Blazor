@@ -45,7 +45,7 @@ public class ConfirmParameters : Confirm
 
         component.Icon ??= Icon;
         component.IconColor ??= IconColor;
-        component.Type ??= Type;
+        component.Type = Type;
         component.Attributes ??= Attributes;
     }
 }

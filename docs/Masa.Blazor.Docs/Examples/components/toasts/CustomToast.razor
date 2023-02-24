@@ -1,12 +1,12 @@
 ﻿@inject IPopupService PopupService
 
-<PToast @ref="_toast" Position="position" Duration="defaultDuration">
-</PToast>
+<PEnqueuedSnackbars @ref="_enqueuedSnackbars" Position="position" Duration="defaultDuration">
+</PEnqueuedSnackbars>
 
 <MButton OnClick="AddToast"> Add Toast </MButton>
 
 @code {
-    PToast _toast;
+    PEnqueuedSnackbars _enqueuedSnackbars;
 
     private int defaultDuration = 5000;
 
@@ -43,7 +43,7 @@
             OnClose = OnClose
         };
 
-        await _toast.AddToast(config);
+        await _enqueuedSnackbars.AddToast(config);
     }
 
     private Task OnClose(string key)

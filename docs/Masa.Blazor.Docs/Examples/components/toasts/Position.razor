@@ -1,5 +1,5 @@
-﻿<PToast @ref="_toast" Position="position">
-</PToast>
+﻿<PEnqueuedSnackbars @ref="_enqueuedSnackbars" Position="position">
+</PEnqueuedSnackbars>
 
 <MRadioGroup Value="position" TValue="ToastPosition" Row ValueChanged="OnChangePosition">
     <MRadio Value="ToastPosition.TopLeft" Label="Top Left"></MRadio>
@@ -11,7 +11,7 @@
 <MButton OnClick="AddToast"> Add Toast </MButton>
 
 @code {
-    PToast _toast;
+    PEnqueuedSnackbars _enqueuedSnackbars;
 
     int maxCount = 5;
 
@@ -32,7 +32,7 @@
             Type = (AlertTypes)alertType,
         };
 
-        await _toast.AddToast(config);
+        await _enqueuedSnackbars.AddToast(config);
     }
 
     private Task OnChangePosition(ToastPosition position)
@@ -40,4 +40,5 @@
         this.position = position;
         return Task.CompletedTask;
     }
+
 }

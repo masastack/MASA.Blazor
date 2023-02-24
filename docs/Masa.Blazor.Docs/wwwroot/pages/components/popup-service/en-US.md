@@ -13,7 +13,7 @@ related:
 
 #### Alert
 
-<masa-example file="Examples.components.popup_service.Alert"></masa-example>
+<masa-example file="Examples.components.popup_service.Snackbar"></masa-example>
 
 #### Confirm
 

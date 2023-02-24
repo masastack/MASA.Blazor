@@ -15,7 +15,7 @@
 
 <MDivider Class="my-4" />
 
-<MRadioGroup @bind-Value="alertType">
+<MRadioGroup @bind-Value="_alertType">
     <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
     <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
     <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
@@ -34,16 +34,16 @@
 
 @code {
 
-    AlertTypes alertType = AlertTypes.None;
+    AlertTypes _alertType = AlertTypes.None;
 
     private Task ShowBasic()
     {
-        return PopupService.AlertAsync("This is the alert content!");
+        return PopupService.ShowSnackbarAsync("This is the alert content!");
     }
 
     private Task ShowTyped()
     {
-        return PopupService.AlertAsync("This is the alert content!", alertType);
+        return PopupService.ShowSnackbarAsync("This is the alert content!", _alertType);
     }
 
     private Task ShowException()
@@ -54,13 +54,13 @@
         }
         catch (Exception e)
         {
-            return PopupService.AlertAsync(e);
+            return PopupService.ShowSnackbarAsync(e);
         }
     }
 
     private Task ShowCustom()
     {
-        return PopupService.AlertAsync(param =>
+        return PopupService.ShowSnackbarAsync(param =>
         {
             param.Centered = true;
             param.Content = "This is the alert content!";

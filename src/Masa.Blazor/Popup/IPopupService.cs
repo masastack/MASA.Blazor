@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor.Popup.Components;
 using Masa.Blazor.Presets;
+using Masa.Blazor.Presets.EnqueuedSnackbars;
 using OneOf;
 
 namespace Masa.Blazor;
@@ -34,13 +35,13 @@ public interface IPopupService
 
     #region Alert
 
-    Task AlertAsync(string content);
+    Task ShowSnackbarAsync(string content);
 
-    Task AlertAsync(string content, AlertTypes type);
+    Task ShowSnackbarAsync(string content, AlertTypes type);
 
-    Task AlertAsync(Exception ex);
+    Task ShowSnackbarAsync(Exception ex);
 
-    Task AlertAsync(Action<AlertParameters> parameters);
+    Task ShowSnackbarAsync(Action<SnackbarParameters> parameters);
 
     #endregion
 

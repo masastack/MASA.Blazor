@@ -6,11 +6,15 @@ public partial class PopupService : IPopupService
 {
     private readonly IPopupProvider _popupProvider;
 
+    private bool _enqueuedSnackbarsRendered;
+
     public PopupService(IPopupProvider popupProvider)
     {
+        Console.WriteLine("PopupService register");
+        
         _popupProvider = popupProvider;
 
-        OpenAsync(typeof(Toast), new Dictionary<string, object>());
+        OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object>());
     }
 
     public Task<object> OpenAsync(Type componentType, Dictionary<string, object> parameters)

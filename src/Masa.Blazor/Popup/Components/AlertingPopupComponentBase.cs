@@ -1,13 +1,13 @@
-﻿#nullable enable
-namespace Masa.Blazor.Popup.Components;
+﻿namespace Masa.Blazor.Popup.Components;
 
 public class AlertingPopupComponentBase : PopupComponentBase
 {
+    // TODO: snackbar doesn't needs icon and iconcolor
     [Parameter] public string? Icon { get; set; }
 
     [Parameter] public string? IconColor { get; set; }
 
-    [Parameter] public AlertTypes? Type { get; set; }
+    [Parameter] public AlertTypes Type { get; set; } = AlertTypes.None;
 
     protected virtual string? ComputedIcon
     {

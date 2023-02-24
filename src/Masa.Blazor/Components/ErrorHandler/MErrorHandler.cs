@@ -96,7 +96,7 @@ namespace Masa.Blazor
                 }
                 else if (PopupType == ErrorPopupType.Snackbar)
                 {
-                    await PopupService.AlertAsync(exception);
+                    await PopupService.ShowSnackbarAsync(exception);
                 }
             }
 

@@ -35,6 +35,8 @@
             </CascadingValue>
         </CascadingValue>
     </CascadingValue>
+
+    <MDefaultsProvider SnackbarPopup="p => { p.Closeable = true; }"></MDefaultsProvider>
 </MApp>
 
 @code {
@@ -44,7 +46,7 @@
     private bool _hideAppBarNavIcon;
     private bool _showSettings;
     private string? _project;
-    
+
     internal (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
 
     private Dictionary<string, string> _projectMap = new();

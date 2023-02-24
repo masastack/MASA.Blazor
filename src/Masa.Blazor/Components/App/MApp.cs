@@ -1,5 +1,4 @@
 using BlazorComponent.Web;
-using Masa.Blazor.Popup.Components;
 
 namespace Masa.Blazor
 {
@@ -8,25 +7,6 @@ namespace Masa.Blazor
     /// </summary>
     public partial class MApp : BApp, IThemeable
     {
-        #region for PopupService
-
-        [Parameter]
-        public Action<AlertParameters> AlertParameters { get; set; }
-
-        [Parameter]
-        public Action<ConfirmParameters> ConfirmParameters { get; set; }
-
-        [Parameter]
-        public Action<PromptParameters> PromptParameters { get; set; }
-
-        #endregion
-
-        /// <summary>
-        /// Whether to display from left to right
-        /// </summary>
-        [Parameter]
-        public bool LeftToRight { get; set; } = true;
-
         [Inject]
         public HeadJsInterop HeadJsInterop { get; set; }
 
@@ -36,13 +16,20 @@ namespace Masa.Blazor
         [Inject]
         public Window Window { get; set; }
 
+        /// <summary>
+        /// Whether to display from left to right
+        /// </summary>
+        [Parameter]
+        public bool LeftToRight { get; set; } = true;
+
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
+
 
         protected override Task OnInitializedAsync()
         {
             MasaBlazor.OnThemeChange -= OnThemeChange;
             MasaBlazor.OnThemeChange += OnThemeChange;
-
+            
             OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();

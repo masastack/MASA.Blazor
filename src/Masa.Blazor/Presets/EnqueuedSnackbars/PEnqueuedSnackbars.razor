@@ -1,0 +1,16 @@
+﻿@namespace Masa.Blazor.Presets
+@using Masa.Blazor.Presets.EnqueuedSnackbars
+
+<div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
+    <CascadingValue Value="this">
+        @foreach (var config in _configs)
+        {
+            <Snackbar EnqueueId="@config.Id"
+                      Title="@config.Title"
+                      Content="@config.Content"
+                      Type="@config.Type"
+                      OnClosed="() => Remove(config)">
+            </Snackbar>
+        }
+    </CascadingValue>
+</div>
