@@ -5,6 +5,7 @@
 </MAlert>
 
 @code {
+
     [Parameter]
     public string? Type { get; set; }
 
@@ -16,12 +17,11 @@
 
     private AlertTypes AlertType => Type switch
     {
-        "info" => AlertTypes.Info,
         "error" => AlertTypes.Error,
         "success" => AlertTypes.Success,
         "warning" => AlertTypes.Warning,
-        _ => AlertTypes.None
-    };
+        _ => AlertTypes.Info
+        };
 
     private Borders AlertBorder => Border switch
     {
@@ -30,5 +30,6 @@
         "left" => Borders.Left,
         "right" => Borders.Right,
         _ => Borders.None
-    };
+        };
+
 }

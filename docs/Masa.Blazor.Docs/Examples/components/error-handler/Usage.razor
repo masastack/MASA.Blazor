@@ -1,10 +1,11 @@
 ﻿<MErrorHandler>
-    <MButton @onclick="BtnClick">Throw test</MButton>
+    <MButton OnClick="OnClick">Throw exception</MButton>
 </MErrorHandler>
+
 @code
 {
-    private void BtnClick()
+    private void OnClick()
     {
-        throw new Exception("throw error!");
+        throw new Exception("An error was caught by MErrorHandler component.");
     }
 }
