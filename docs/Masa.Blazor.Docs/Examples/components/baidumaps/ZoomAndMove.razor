@@ -3,7 +3,8 @@
            EnableScrollWheelZoom
            Style="width:90%; left:5%"
            MaxZoom="15" MinZoom="8"
-           @ref="_map" />
+           Zoom="_zoom"
+           Center="_center" />
 
 <MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
 
@@ -17,11 +18,13 @@
 
 @code
 {
-    private MBaiduMap? _map;
+    private GeoPoint _center;
 
-    private void ZoomIn() => _map.Zoom += 1;
+    private float _zoom = 10;
 
-    private void ZoomOut() => _map.Zoom -= 1;
+    private void ZoomIn() => _zoom += 1;
 
-    private void GoToBeijing() => _map.Center = new(116.403f, 39.917f);
+    private void ZoomOut() => _zoom -= 1;
+
+    private void GoToBeijing() => _center = new(116.403f, 39.917f);
 }
