@@ -128,6 +128,7 @@
                 })
                 .Apply("wrapper", cssBuilder => { cssBuilder.Add("m-alert__wrapper"); })
                 .Apply("content", cssBuilder => { cssBuilder.Add("m-alert__content"); })
+                .Apply("title", cssBuilder => { cssBuilder.Add("m-alert__title"); })
                 .Apply("border", cssBuilder =>
                 {
                     cssBuilder
