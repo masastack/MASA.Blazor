@@ -24,9 +24,9 @@
 </MRow>
 
 @code {
-    private BaiduMapType _selectedType { get; set; } = BaiduMapType.NormalMap;
+    private BaiduMapType _selectedType = BaiduMapType.NormalMap;
 
-    private bool _trafficOn { get; set; }
+    private bool _trafficOn;
 
     private List<BaiduMapType> _nameAndType { get; set; } = new()
     {
