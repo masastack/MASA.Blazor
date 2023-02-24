@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Masa.Blazor
 {
-    public class MBaiduMarker : MBaiduOverlay, IMarker
+    public class MBaiduMarker : BaiduOverlayBase, IMarker
     {
         [Parameter]
         public GeoPoint Point { get; set; }

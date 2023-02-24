@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public class MBaiduLabel : MBaiduOverlay, ILabel
+    public class MBaiduLabel : BaiduOverlayBase, ILabel
     {
         [Parameter]
         public string Content { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public class MBaiduCircle : MBaiduOverlay, ICircle, IStroke, IFillable
+    public class MBaiduCircle : BaiduOverlayBase, ICircle, IStroke, IFillable
     {
         [Parameter]
         public GeoPoint Center { get; set; }

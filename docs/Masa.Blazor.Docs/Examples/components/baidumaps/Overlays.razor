@@ -65,7 +65,7 @@
         new(116.390363f, 39.913468f),
     };
 
-    private MBaiduOverlay[] _overlays { get; set; } = new MBaiduOverlay[5];
+    private BaiduOverlayBase?[] _overlays { get; set; } = new BaiduOverlayBase[5];
 
     private MBaiduMap? _map { get; set; }
 
@@ -80,7 +80,7 @@
                 Title = "天安门",
             };
 
-        if (await _map.Contains(_addExampleMarker))
+        if (await _map.ContainsOverlayAsync(_addExampleMarker))
             return;
 
         await _map.AddOverlayAsync(_addExampleMarker);
@@ -100,7 +100,7 @@
     {
         foreach (var item in _overlays)
         {
-            if (!(await _map.Contains(item)))
+            if (!(await _map.ContainsOverlayAsync(item)))
                 await _map.AddOverlayAsync(item);
         }
     }

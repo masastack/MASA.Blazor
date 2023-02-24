@@ -24,14 +24,13 @@
 </MRow>
 
 @code {
-    private BaiduMapType _selectedType { get; set; } = BaiduMapType.NormalMap;
+    private BaiduMapType _selectedType { get; set; } = BaiduMapType.Normal;
 
     private bool _trafficOn { get; set; }
 
     private List<BaiduMapType> _nameAndType { get; set; } = new()
     {
-        BaiduMapType.NormalMap,
-        BaiduMapType.EarthMap,
-        BaiduMapType.SatelliteMap,
+        BaiduMapType.Normal,
+        BaiduMapType.EarthMEarth     BaiduMapType.Satellite,
     };
 }

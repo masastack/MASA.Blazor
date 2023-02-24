@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<MBaiduOverlay>, IBaiduMapJsCallbacks, IAsyncDisposable
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks, IAsyncDisposable
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
@@ -76,10 +76,10 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(BaiduMapType.NormalMap)]
+        [ApiDefaultValue(BaiduMapType.Normal)]
         public BaiduMapType MapType
         {
-            get => GetValue(BaiduMapType.NormalMap);
+            get => GetValue(BaiduMapType.Normal);
             set => SetValue(value);
         }
 
@@ -196,9 +196,9 @@ namespace Masa.Blazor
 
             switch (await _baiduMap.TryInvokeAsync<string>("getMapType"))
             {
-                case "B_NORMAL_MAP": MapType = BaiduMapType.NormalMap; break;
-                case "B_EARTH_MAP": MapType = BaiduMapType.EarthMap; break;
-                case "B_SATELLITE_MAP": MapType = BaiduMapType.SatelliteMap; break;
+                case "B_NORMAL_MAP": MapType = BaiduMapType.Normal; break;
+                case "B_EARTH_MAP": MapType = BaiduMapType.Earth; break;
+                case "B_SATELLITE_MAP": MapType = BaiduMapType.Satellite; break;
                 default: break;
             }
 
@@ -233,9 +233,9 @@ namespace Masa.Blazor
 
         private static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new()
         {
-            { BaiduMapType.NormalMap, "B_NORMAL_MAP" },
-            { BaiduMapType.EarthMap, "B_EARTH_MAP" },
-            { BaiduMapType.SatelliteMap, "B_SATELLITE_MAP" },
+            { BaiduMapType.Normal, "B_NORMAL_MAP" },
+            { BaiduMapType.Earth, "B_EARTH_MAP" },
+            { BaiduMapType.Satellite, "B_SATELLITE_MAP" },
         };
 
         protected override void SetComponentClass()
@@ -342,16 +342,16 @@ namespace Masa.Blazor
             });
         }
 
-        public async ValueTask AddOverlayAsync(MBaiduOverlay overlay)
+        public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.AddOverlayAsync(overlay);
 
-        public async ValueTask RemoveOverlayAsync(MBaiduOverlay overlay)
+        public async ValueTask RemoveOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);
 
         public async ValueTask ClearOverlaysAsync()
             => await _baiduMap.TryInvokeVoidAsync("clearOverlays");
 
-        public async ValueTask<bool> Contains(MBaiduOverlay overlay)
+        public async ValueTask<bool> ContainsOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
         public async ValueTask DisposeAsync()

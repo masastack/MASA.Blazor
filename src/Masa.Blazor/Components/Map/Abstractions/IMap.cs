@@ -18,7 +18,7 @@
 
         public ValueTask ClearOverlaysAsync();
 
-        public ValueTask<bool> Contains(TOverlay overlay);
+        public ValueTask<bool> ContainsOverlayAsync(TOverlay overlay);
 
     }
 }

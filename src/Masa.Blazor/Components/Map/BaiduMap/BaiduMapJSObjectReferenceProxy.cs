@@ -72,7 +72,7 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
         return events;
     }
 
-    public async ValueTask AddOverlayAsync(MBaiduOverlay overlay)
+    public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
     {
         if (overlay is null)
             return;

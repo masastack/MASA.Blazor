@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public class MBaiduPolyline : MBaiduOverlay, IPolyline, IStroke
+    public class MBaiduPolyline : BaiduOverlayBase, IPolyline, IStroke
     {
         [Parameter]
         public IEnumerable<GeoPoint> Points { get; set; }

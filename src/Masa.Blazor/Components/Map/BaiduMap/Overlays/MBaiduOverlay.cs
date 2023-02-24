@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public abstract class MBaiduOverlay : BComponentBase
+    public abstract class BaiduOverlayBase : BComponentBase
     {
         [JsonIgnore]
         internal IJSObjectReference OverlayJSObjectRef { get; set; }
