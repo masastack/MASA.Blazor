@@ -98,7 +98,7 @@
 
     private async Task Restore()
     {
-        foreach(var item in _overlays)
+        foreach (var item in _overlays)
         {
             if (!(await _map.Contains(item)))
                 await _map.AddOverlayAsync(item);
