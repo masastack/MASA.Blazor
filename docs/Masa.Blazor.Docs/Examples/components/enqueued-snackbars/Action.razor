@@ -1,0 +1,29 @@
+﻿<div class="text-center">
+    <PEnqueuedSnackbars @ref="_enqueuedSnackbars" MaxCount="1" />
+    <MButton OnClick="TurnToText" Color="@_color">Turn to red</MButton>
+</div>
+
+@code {
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    private string? _color;
+
+    private void TurnToText()
+    {
+        _color = "red";
+
+        _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
+        {
+            Content = "Turn to red successfully!",
+            Closeable = true,
+            ActionText = "Undo",
+            OnAction = () =>
+            {
+                _color = null;
+                return Task.CompletedTask;
+            }
+        });
+    }
+
+}

@@ -1,12 +1,12 @@
 ﻿using Masa.Blazor.Popup.Components;
 using Masa.Blazor.Presets;
-using Masa.Blazor.Presets.EnqueuedSnackbars;
-using OneOf;
 
 namespace Masa.Blazor;
 
 public interface IPopupService
 {
+    Task<object> OpenAsync(Type componentType, Dictionary<string, object> parameters);
+
     #region Confirm
 
     Task<bool> ConfirmAsync(string title, string content);
@@ -21,8 +21,6 @@ public interface IPopupService
 
     #endregion
 
-    Task<object> OpenAsync(Type componentType, Dictionary<string, object> parameters);
-
     #region Prompt
 
     Task<string> PromptAsync(string title, string content);
@@ -33,29 +31,15 @@ public interface IPopupService
 
     #endregion
 
-    #region Alert
+    #region Snackbar
 
-    Task ShowSnackbarAsync(string content);
+    event Func<SnackbarOptions, Task> OnSnackbarOpen;
 
-    Task ShowSnackbarAsync(string content, AlertTypes type);
+    Task EnqueueSnackbarAsync(string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000);
 
-    Task ShowSnackbarAsync(Exception ex);
+    Task EnqueueSnackbarAsync(string title, string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000);
 
-    Task ShowSnackbarAsync(Action<SnackbarParameters> parameters);
+    Task EnqueueSnackbarAsync(SnackbarOptions options);
 
-    #endregion
-
-    #region Toast
-    event Action<ToastGlobalConfig> OnToastConfig;
-    event Func<ToastConfig, Task> OnToastOpening;
-    Task ConfigToast(ToastGlobalConfig config);
-    Task ConfigToast(Action<ToastGlobalConfig> configAcion);
-    Task ToastAsync(string title, AlertTypes type);
-    Task ToastAsync(ToastConfig config);
-    Task ToastAsync(Action<ToastConfig> configAction);
-    Task ToastSuccessAsync(string title);
-    Task ToastErrorAsync(string title);
-    Task ToastInfoAsync(string title);
-    Task ToastWarningAsync(string title);
     #endregion
 }

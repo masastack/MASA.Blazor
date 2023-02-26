@@ -1,13 +1,10 @@
 ﻿using Masa.Blazor.Popup.Components;
-using Masa.Blazor.Presets.EnqueuedSnackbars;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor;
 
 public class MDefaultsProvider : ComponentBase
 {
-    [Parameter] public Action<SnackbarParameters> SnackbarPopup { get; set; }
-
     [Parameter, EditorRequired] public RenderFragment? ChildContent { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

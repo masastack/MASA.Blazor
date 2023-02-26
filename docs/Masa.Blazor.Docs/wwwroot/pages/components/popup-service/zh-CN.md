@@ -1,18 +1,18 @@
 ---
 title: Popup service（弹出层服务）
-desc: "提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。"
+desc: "提供全局服务调用 **Snackbar**、**Confirm**、**Prompt** 弹出层组件。"
 tag: 服务
 related:
   - /blazor/components/dialogs
-  - /blazor/components/buttons
   - /blazor/components/snackbars
+  - /blazor/components/enqueued-snackbars
 ---
 
 ## 示例
 
 ### 事件
 
-#### 警告
+#### 消息条
 
 <masa-example file="Examples.components.popup_service.Snackbar"></masa-example>
 
@@ -23,7 +23,3 @@ related:
 #### 输入确认
 
 <masa-example file="Examples.components.popup_service.Prompt"></masa-example>
-
-#### Toast
-
-<masa-example file="Examples.components.popup_service.Toast"></masa-example>

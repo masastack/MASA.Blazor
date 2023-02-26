@@ -1,36 +1,37 @@
 ﻿@namespace Masa.Blazor.Presets.EnqueuedSnackbars
 
 <MSnackbar @bind-Value="_visible"
-           Bottom="@Bottom"
-           Centered="@Centered"
            Color="@ComputedColor"
-           Class="m-popup__snackbar"
+           Class="@Class"
            ContentClass="@ContentClass"
            Dark="@Dark"
            Elevation="@Elevation"
-           Left="@Left"
            Light="@Light"
            MultiLine="@MultiLine"
            Outlined="@Outlined"
-           Right="@Right"
            Rounded="@Rounded"
            Shaped="@Shaped"
+           Style="@Style"
            Text="@Text"
            Tile="@Tile"
-           Timeout="@Timeout"
-           Top="@Top"
+           Timeout="@ComputedTimeout"
            Vertical="@Vertical"
            OnClosed="@HandleOnClosed">
     <ChildContent>
         <MAlert Title="@Title" Type="@Type">@Content</MAlert>
     </ChildContent>
     <ActionContent>
-        <ModalButton Props="ComputedActionButtonProps"
+        @if (OnAction.HasDelegate)
+        {
+            <MButton Class="text-capitalize"
+                     Color="@(ActionColor ?? "primary")"
+                     Text
                      OnClick="HandleOnAction">
-            @ActionText
-        </ModalButton>
+                @ActionText
+            </MButton>
+        }
 
-        @if (Closeable)
+        @if (ComputedCloseable)
         {
             <MButton Icon OnClick="HandleOnClose">
                 <MIcon>mdi-close</MIcon>

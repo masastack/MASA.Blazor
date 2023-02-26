@@ -48,7 +48,7 @@
                 {
                     if (args.Value == checkInput)
                     {
-                        await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is equal to '{checkInput}'", AlertTypes.Info);
+                        // await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is equal to '{checkInput}'", AlertTypes.Info);
                         
                         await Task.Delay(1000);
 
@@ -59,7 +59,7 @@
                     }
                     else
                     {
-                        await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is no equal to '{checkInput}'", AlertTypes.Error);
+                        // await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is no equal to '{checkInput}'", AlertTypes.Error);
                         args.Cancel();
                     }
                 }
@@ -67,7 +67,7 @@
                 {
                     args.Cancel();
 
-                    await PopupService.ShowSnackbarAsync(e);
+                    // await PopupService.ShowSnackbarAsync(e);
                 }
             });
     }
@@ -89,15 +89,15 @@
     {
         if (input is null)
         {
-            await PopupService.ShowSnackbarAsync("Cancel was clicked", AlertTypes.Warning);
+            // await PopupService.ShowSnackbarAsync("Cancel was clicked", AlertTypes.Warning);
         }
         else if (input == checkInput)
         {
-            await PopupService.ShowSnackbarAsync($"Input('{input}') is equal to '{checkInput}'", AlertTypes.Info);
+            // await PopupService.ShowSnackbarAsync($"Input('{input}') is equal to '{checkInput}'", AlertTypes.Info);
         }
         else
         {
-            await PopupService.ShowSnackbarAsync($"Input('{input}') is no equal to '{checkInput}'", AlertTypes.Error);
+            // await PopupService.ShowSnackbarAsync($"Input('{input}') is no equal to '{checkInput}'", AlertTypes.Error);
         }
     }
 

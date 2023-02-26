@@ -471,22 +471,58 @@ input[type=number] {
     color: #FFF;
 }
 
-/* toast */
+/* enqueued-snackbars */
 
-.m-toast-container {
+.m-enqueued-snackbars {
     position: fixed;
-    z-index: 1090;
+    z-index: 1048;
 }
 
-    .m-toast-container .m-snack {
-        padding-top: 0px !important;
+@media only screen and (max-width: 599.98px) {
+    .m-enqueued-snackbars {
+        width: 100%;
+        max-width: calc(100% - 2rem) !important;
+    }
+}
+
+    .m-enqueued-snackbars.m-enqueued-snackbars--top {
+        top: 1rem;
+    }
+    
+    .m-enqueued-snackbars.m-enqueued-snackbars--right {
+        right: 1rem;
+    }
+    
+    .m-enqueued-snackbars.m-enqueued-snackbars--center {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .m-enqueued-snackbars.m-enqueued-snackbars--bottom {
+        bottom: 1rem;
+    }
+    
+    .m-enqueued-snackbars.m-enqueued-snackbars--left {
+        left: 1rem;
+    }
+
+    .m-enqueued-snackbars.m-enqueued-snackbars--right .m-snack {
+        justify-content: end;
+    }
+
+    .m-enqueued-snackbars.m-enqueued-snackbars--left .m-snack {
+        justify-content: start;
+    }
+
+    .m-enqueued-snackbars .m-snack {
+        padding-top: 0 !important;
         position: static;
         height: auto;
     }
-
-.m-toast-item {
-    align-items: flex-start;
-}
+    
+    .m-enqueued-snackbars .m-snack__wrapper {
+        width: 100%;
+    }
 
 /* captcha */
 

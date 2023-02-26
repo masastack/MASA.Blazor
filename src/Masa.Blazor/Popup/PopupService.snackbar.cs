@@ -1,58 +1,26 @@
-﻿using Masa.Blazor.Popup.Components;
-using Masa.Blazor.Presets;
-using Masa.Blazor.Presets.EnqueuedSnackbars;
+﻿using Masa.Blazor.Presets;
 
 namespace Masa.Blazor;
 
 public partial class PopupService
 {
-    public async Task EnqueueSnackbarAsync(string content)
-    {
-        if (!_enqueuedSnackbarsRendered)
-        {
-            await OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object>());
-        }
+    public event Func<SnackbarOptions, Task> OnSnackbarOpen;
 
-        if (OnToastOpening is not null)
-        {
-            await OnToastOpening.Invoke(new ToastConfig()
-            {
-                Content = content
-            });
-        }
+    public async Task EnqueueSnackbarAsync(string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000)
+    {
+        await EnqueueSnackbarAsync(new SnackbarOptions(content, type, closeable, timeout));
     }
 
-    public Task ShowSnackbarAsync(string content)
+    public async Task EnqueueSnackbarAsync(string title, string content, AlertTypes type = AlertTypes.None, bool closeable = false,
+        int timeout = 5000)
     {
-        return ShowSnackbarAsync(param => { param.Content = content; });
+        await EnqueueSnackbarAsync(new SnackbarOptions(title, content, type, closeable, timeout));
     }
 
-    public Task ShowSnackbarAsync(string content, AlertTypes type)
+    public async Task EnqueueSnackbarAsync(SnackbarOptions options)
     {
-        return ShowSnackbarAsync(param =>
-        {
-            param.Content = content;
-            param.Type = type;
-        });
-    }
+        if (OnSnackbarOpen is null) return;
 
-    public Task ShowSnackbarAsync(Exception ex)
-    {
-        return ShowSnackbarAsync(param =>
-        {
-            param.Content = ex.Message;
-            param.Type = AlertTypes.Error;
-        });
-    }
-
-    public Task ShowSnackbarAsync(Action<SnackbarParameters> parameters)
-    {
-        SnackbarParameters param = new();
-
-        parameters.Invoke(param);
-
-        _ = OpenAsync(typeof(Snackbar), param.ToDictionary());
-
-        return Task.CompletedTask;
+        await OnSnackbarOpen.Invoke(options);
     }
 }

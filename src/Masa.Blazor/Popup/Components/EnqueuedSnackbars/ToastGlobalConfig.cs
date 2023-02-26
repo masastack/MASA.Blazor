@@ -9,6 +9,6 @@ namespace Masa.Blazor.Popup.Components
 
         public int MaxCount { get; set; }
 
-        public ToastPosition Position { get; set; }
+        public SnackPosition Position { get; set; }
     }
 }

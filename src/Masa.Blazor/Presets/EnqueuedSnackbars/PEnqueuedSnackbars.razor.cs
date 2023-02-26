@@ -2,76 +2,72 @@
 
 namespace Masa.Blazor.Presets
 {
-    public partial class PEnqueuedSnackbars
+    public partial class PEnqueuedSnackbars : BDomComponentBase
     {
         [Parameter]
-        public ToastPosition Position { get; set; } = ToastPosition.BottomRight;
+        [ApiDefaultValue(nameof(SnackPosition.BottomCenter))]
+        public SnackPosition Position { get; set; } = SnackPosition.BottomCenter;
 
         [Parameter]
-        public int? Duration { get; set; } = 4000;
+        [ApiDefaultValue(DEFAULT_MAX_COUNT)]
+        public int MaxCount { get; set; } = DEFAULT_MAX_COUNT;
 
         [Parameter]
-        public int MaxCount { get; set; }
+        [ApiDefaultValue(576)]
+        public StringNumber MaxWidth { get; set; } = 576;
 
         [Parameter]
-        public EventCallback<ToastConfig> OnClose { get; set; }
+        public int? Timeout { get; set; }
 
-        private readonly List<ToastConfig> _configs = new();
+        [Parameter]
+        public bool? Closeable { get; set; }
 
-        private ComponentCssProvider CssProvider { get; } = new();
+        private const int DEFAULT_MAX_COUNT = 5;
 
-        protected override Task OnInitializedAsync()
+        private readonly List<SnackbarOptions> _stack = new();
+
+        protected override void SetComponentClass()
         {
-            SetComponentClass();
-
-            return base.OnInitializedAsync();
+            CssProvider.Apply((cssBuilder) =>
+            {
+                cssBuilder.Add("m-enqueued-snackbars")
+                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--left", () => Position == SnackPosition.TopLeft)
+                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--right", () => Position == SnackPosition.TopRight)
+                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--center", () => Position == SnackPosition.TopCenter)
+                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--left", () => Position == SnackPosition.BottomLeft)
+                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--right", () => Position == SnackPosition.BottomRight)
+                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--center", () => Position == SnackPosition.BottomCenter);
+            }, styleBuilder => { styleBuilder.AddMaxWidth(MaxWidth); });
         }
 
-        private void SetComponentClass()
+        protected override void OnParametersSet()
         {
-            CssProvider.Apply((cssBuilder) => { cssBuilder.Add("m-toast-container"); }, (styleBuilder) =>
+            base.OnParametersSet();
+
+            if (MaxCount < 1)
             {
-                styleBuilder
-                    .AddIf("top: 1rem; left: 1rem;", () => Position == ToastPosition.TopLeft)
-                    .AddIf("top: 1rem; right: 1rem;", () => Position == ToastPosition.TopRight)
-                    .AddIf("bottom: 1rem; left: 1rem;", () => Position == ToastPosition.BottomLeft)
-                    .AddIf("bottom: 1rem; right: 1rem;", () => Position == ToastPosition.BottomRight);
-            });
+                MaxCount = DEFAULT_MAX_COUNT;
+            }
         }
 
-        public async Task AddToast(ToastConfig config)
+        public void EnqueueSnackbar(SnackbarOptions config)
         {
-            config.Duration ??= Duration ??= 4000;
-
-            if (MaxCount > 0 && _configs.Count >= MaxCount)
+            if (MaxCount > 0 && _stack.Count >= MaxCount)
             {
-                var removeConfig = _configs[0];
-                Remove(removeConfig);
+                var diff = _stack.Count - MaxCount + 1;
+
+                _stack.RemoveRange(0, diff);
             }
 
-            _configs.Add(config);
+            _stack.Add(config);
 
             StateHasChanged();
         }
 
-        internal void Remove(Guid id)
-        {
-            var config = _configs.FirstOrDefault(c => c.Id == id);
-            Remove(config);
-        }
-
-        private void Remove(ToastConfig config)
-        {
-            // config.Visible = false;?
-            // StateHasChanged();
-
-            _configs.Remove(config);
-        }
-
         internal void RemoveNoRender(Guid id)
         {
-            var config = _configs.FirstOrDefault(c => c.Id == id);
-            _configs.Remove(config);
+            var config = _stack.FirstOrDefault(c => c.Id == id);
+            _stack.Remove(config);
         }
     }
 }

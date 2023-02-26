@@ -85,18 +85,16 @@ namespace Masa.Blazor
             }
             else
             {
-                if (PopupType == ErrorPopupType.Toast)
+                if (PopupType == ErrorPopupType.Snackbar)
                 {
-                    await PopupService.ToastAsync(config =>
-                    {
-                        config.Type = AlertTypes.Error;
-                        config.Title = "Something wrong!";
-                        config.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
-                    });
-                }
-                else if (PopupType == ErrorPopupType.Snackbar)
-                {
-                    await PopupService.ShowSnackbarAsync(exception);
+                    // TODO:
+                    
+                    // await PopupService.EnqueueSnackbarAsync(config =>
+                    // {
+                    //     config.Type = AlertTypes.Error;
+                    //     config.Title = "Something wrong!";
+                    //     config.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                    // });
                 }
             }
 

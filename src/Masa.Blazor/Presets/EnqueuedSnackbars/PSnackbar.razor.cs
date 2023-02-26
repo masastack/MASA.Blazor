@@ -2,19 +2,15 @@
 
 namespace Masa.Blazor.Presets.EnqueuedSnackbars;
 
-public partial class Snackbar
+public partial class PSnackbar
 {
-    [Inject] private I18n I18n { get; set; } = null!;
-
     [CascadingParameter] private ProviderItem? PopupItem { get; set; }
 
-    [CascadingParameter] private PEnqueuedSnackbars? Toast { get; set; }
+    [CascadingParameter] private PEnqueuedSnackbars? EnqueuedSnacks { get; set; }
 
     #region parameters from MSnackbar
 
-    [Parameter] public bool Bottom { get; set; }
-
-    [Parameter] public bool Centered { get; set; }
+    [Parameter] public string? Class { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -26,8 +22,6 @@ public partial class Snackbar
 
     [Parameter] public StringNumber? Height { get; set; }
 
-    [Parameter] public bool Left { get; set; }
-
     [Parameter] public bool Light { get; set; }
 
     [Parameter] public bool MultiLine { get; set; }
@@ -36,19 +30,17 @@ public partial class Snackbar
 
     [Parameter] public bool Outlined { get; set; }
 
-    [Parameter] public bool Right { get; set; }
-
     [Parameter] public StringBoolean? Rounded { get; set; }
 
     [Parameter] public bool Shaped { get; set; }
+
+    [Parameter] public string? Style { get; set; }
 
     [Parameter] public bool Text { get; set; }
 
     [Parameter] public bool Tile { get; set; }
 
     [Parameter] public int Timeout { get; set; } = 5000;
-
-    [Parameter] public bool Top { get; set; }
 
     [Parameter] public bool Vertical { get; set; }
 
@@ -64,19 +56,17 @@ public partial class Snackbar
 
     [Parameter] public AlertTypes Type { get; set; }
 
-    [Parameter] public Action<ModalButtonProps>? ActionProps { get; set; }
+    [Parameter] public string? ActionColor { get; set; }
 
     [Parameter] public string? ActionText { get; set; }
 
-    [Parameter] public Func<Task>? OnAction { get; set; }
+    [Parameter] public EventCallback OnAction { get; set; }
 
     [Parameter] public bool Closeable { get; set; }
 
     private bool _visible = true;
-    
-    private ModalButtonProps? ComputedActionButtonProps { get; set; }
 
-    protected string? ComputedColor
+    private string? ComputedColor
     {
         get
         {
@@ -96,18 +86,25 @@ public partial class Snackbar
         }
     }
 
-    protected override void OnParametersSet()
+    private int ComputedTimeout
     {
-        base.OnParametersSet();
-
-        ActionText ??= I18n.T("$masaBlazor.close");
-
-        ComputedActionButtonProps = new ModalButtonProps()
+        get
         {
-            Text = true
-        };
+            var timeout = EnqueuedSnacks?.Timeout ?? Timeout;
+            return timeout >= 0 ? timeout : 0;
+        }
+    }
 
-        ActionProps?.Invoke(ComputedActionButtonProps);
+    private bool ComputedCloseable => EnqueuedSnacks?.Closeable ?? Closeable;
+
+    private async Task HandleOnAction()
+    {
+        if (OnAction.HasDelegate)
+        {
+            await OnAction.InvokeAsync();
+        }
+
+        HandleOnClose();
     }
 
     private async Task HandleOnClosed()
@@ -117,27 +114,19 @@ public partial class Snackbar
             await OnClosed.InvokeAsync();
         }
 
+        EnqueuedSnacks?.RemoveNoRender(EnqueueId);
+
         DiscardPopupItem();
     }
 
     private void HandleOnClose()
     {
-        Toast?.RemoveNoRender(EnqueueId);
-    }
-
-    private async Task HandleOnAction()
-    {
-        if (OnAction is not null)
-        {
-            await OnAction.Invoke();
-        }
-
-        DiscardPopupItem();
+        _visible = false;
     }
 
     private void DiscardPopupItem()
     {
-        if (Toast is not null) return;
+        if (EnqueuedSnacks is not null) return;
 
         PopupItem?.Discard(true);
     }

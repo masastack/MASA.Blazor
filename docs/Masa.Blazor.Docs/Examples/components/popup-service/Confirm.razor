@@ -71,13 +71,15 @@
                         throw new Exception("something wrong!");
                     }
 
-                    await PopupService.ShowSnackbarAsync("Handle onOk successfully!", AlertTypes.Success);
+                    // TODO: enqueue snackbar
+                    // await PopupService.ShowSnackbarAsync("Handle onOk successfully!", AlertTypes.Success);
                 }
                 catch (Exception e)
                 {
                     args.Cancel();
 
-                    await PopupService.ShowSnackbarAsync(e);
+                    // TODO: enqueue snackbar
+                    // await PopupService.ShowSnackbarAsync(e);
                 }
             });
     }
@@ -99,11 +101,13 @@
     {
         if (confirmed)
         {
-            await PopupService.ShowSnackbarAsync("Ok was clicked!", AlertTypes.Info);
+            // TODO: enqueue snackbar
+            // await PopupService.ShowSnackbarAsync("Ok was clicked!", AlertTypes.Info);
         }
         else
         {
-            await PopupService.ShowSnackbarAsync("Cancel was clicked!", AlertTypes.Warning);
+    // TODO: enqueue snackbar
+            // await PopupService.ShowSnackbarAsync("Cancel was clicked!", AlertTypes.Warning);
         }
     }
 

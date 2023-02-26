@@ -2,47 +2,38 @@
 
 namespace Masa.Blazor.Popup.Components;
 
-public partial class EnqueuedSnackbars
+public partial class EnqueuedSnackbars : IDisposable
 {
     [Inject]
     private IPopupService PopupService { get; set; }
-    
-    private PEnqueuedSnackbars _toastRef { get; set; }
 
-    private int? _duration = 4000;
+    private PEnqueuedSnackbars _enqueuedSnackbars;
 
-    private int _maxCount = 0;
+    private int _timeout = 5000;
 
-    private ToastPosition _position = ToastPosition.BottomRight;
+    private int _maxCount = 5;
+
+    private SnackPosition _position = SnackPosition.BottomCenter;
 
     protected override Task OnInitializedAsync()
     {
         if (PopupService != null)
         {
-            PopupService.OnToastOpening += NotifyAsync;
-            PopupService.OnToastConfig += Config;
+            PopupService.OnSnackbarOpen += NotifyAsync;
         }
 
         return base.OnInitializedAsync();
     }
 
-    private void Config(ToastGlobalConfig globalConfig)
+    private Task NotifyAsync(SnackbarOptions config)
     {
-        _duration = globalConfig.Duration;
-        _maxCount = globalConfig.MaxCount;
-        _position = globalConfig.Position;
-
-        StateHasChanged();
-    }
-
-    private Task NotifyAsync(ToastConfig config)
-    {
-        return _toastRef.AddToast(config);
+        _enqueuedSnackbars.EnqueueSnackbar(config);
+        return Task.CompletedTask;
     }
 
     public void Dispose()
     {
-        PopupService.OnToastOpening -= NotifyAsync;
-        PopupService.OnToastConfig -= Config;
+        _enqueuedSnackbars?.Dispose();
+        PopupService.OnSnackbarOpen -= NotifyAsync;
     }
 }
