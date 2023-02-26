@@ -4,11 +4,30 @@
 
 v1.0.x contains non backwards compatible breaking changes, the following changes:
 
-- The `Linkage` parameter of **Breadcrumbs** and **List (including ListItem)** is changed to `Routable`.
-- The value type of **Checkbox/Switch** is no longer a bool type, but is now a generic type. You can set `TrueValue` and `FalseValue`. After upgrading to **1.0.0**, you need to add a parameter of `TValue= "bool"`.
-- The `Align` type of the **DataTable** header changes from `string` to enum.
-- The **PConfirm** has been removed now, use `PopupService.Confirm` instead.
-- The **Context** of **MHover** has been cleaned: `Class` and `Style` properties have been deleted.
+- The Linkage` is renamed to `Routable`, and the affected components are **MBreadcrumbs** and **MList**:
+  ```diff
+  - <MBreadcrumbs Linkage></MBreadcrumbs>
+  + <MBreadcrumbs Routable></MBreadcrumbs>
+  - <MList Linkage></MList>
+  + <MList Routable></MList>
+  ```
+- The `Value` type of **MCheckbox/MSwitch** is no longer a `bool`, but generic type `TValue`. For words that do not use `@bind-Value`, you need to specify the generic type explicitly:
+  ```diff
+  - <MCheckbox Value="" ValueChanged=""></MCheckbox>
+  + <MCheckbox Value="" ValueChanged="" TValue="bool"></MCheckbox>
+  ```
+- The `Align` type of the **MDataTable** DataTableHeader changes from `string` to enum:
+  ```diff
+  - Align = "start"
+  + Align = DataTableHeaderAlign.Start
+  ```
+- The **PConfirm** has been removed now, use `IPopupService.ConfirmAsync` instead.
+- **MHover** removes the `Class` and `Style` properties of `Context`.
+- **MErrorHandler** removes the parameter `ShowAlert`, uses `PopupType` instead:
+  ```diff
+  - <MErrorHandler ShowAlert="false"></MErrorHandler>
+  + <MErrorHandler PopupType="ErrorPopupType.None"></MErrorHandler>
+  ```
 
 ## Upgrading from v0.5.x to v0.6.x
 

@@ -1,6 +1,7 @@
 ﻿global using BlazorComponent;
 global using BlazorComponent.I18n;
 global using BlazorComponent.JSInterop;
+global using BlazorComponent.Attributes;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.JSInterop;
 global using System.Runtime.Serialization;

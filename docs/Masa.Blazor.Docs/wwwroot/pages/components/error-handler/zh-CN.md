@@ -1,43 +1,42 @@
 ---
 title: Error handler（异常处理）
-desc: "`MErrorHandler`组件用来处理`blazor`组件数据加载和render时的异常信息。"
-cols: 1
+desc: "`MErrorHandler`组件用来管理未经处理的异常。"
 ---
 
 ## 使用
 
-### 异常统一处理：
-
-1. `balzor`生命周期内的异常，无法处理，直接传递到`ErrorBoundry`处理；
-2. 非MASA Blazor组件产生的异常，无法处理，直接传递到`ErrorBoundry`处理；
-3. MASA Blazor组件非生命周期方法产生的异常，都可以处理，默认展示`Exception.Message`，也可以配置其它选项显示异常堆栈或自定义处理异常
-
 <masa-example file="Examples.components.error_handler.Usage"></masa-example>
+
+<app-alert type="warning" content="非MASABlazor组件内发生的异常能捕获但不能阻止状态刷新，如：`<button @onclick=''>throw exception</button>`。"></app-alert>
+
+<app-alert content="生命周期里发生异常时会尝试使用 `ErrorContent` 代替。"></app-alert>
 
 ## 示例
 
 ### 属性
 
-#### 自定义异常处理
+#### 错误提示类型
 
-自定义异常处理 `Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
+发生异常时默认使用 **Toasts** 显示错误提示。可以通过 `PopupType` 设置提示的类型。当设置 `ErrorPopupType.Error` 时则会使用 `ErrorContent` 处理错误。
 
-<masa-example file="Examples.components.error_handler.OnErrorHandleAsync"></masa-example>
+<masa-example file="Examples.components.error_handler.PopupType"></masa-example>
 
-#### 是否显示告警
+#### 显示错误详情
 
- 自定义异常处理`Func<Exception,Task<bool>>`，点击按钮触发异常后，按钮背景色变为红色文字颜色改为白色。
-1. 返回值为：`True`，则不再进行异常信息的提示，直接进行异常的处理，建议实现自定义异常处理后，自行进行异常信息的暂时，返回值设置为`True`;
-2. 返回值为：`False`，会先进行异常信息的提示，再进行异常的处理。
-
-<masa-example file="Examples.components.error_handler.ShowAlert"></masa-example>
-
-#### 是否显示异常详细信息
-
-`true` 显示，`false` 不显示， 默认不显示
+通过 `ShowDetail` 控制是否显示异常详情。
 
 <masa-example file="Examples.components.error_handler.ShowDetail"></masa-example>
 
+### 插槽
 
+#### 错误内容
 
+<masa-example file="Examples.components.error_handler.ErrorContent"></masa-example>
 
+### 事件
+
+#### 自定义处理
+
+`OnHandle` 会替代默认的处理程序，如果你需要使用自定义的错误处理程序时可以使用。`OnAfterHandle` 是异常处理之后调用的事件。
+
+<masa-example file="Examples.components.error_handler.CustomHandler"></masa-example>

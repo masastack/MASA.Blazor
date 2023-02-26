@@ -58,11 +58,11 @@
             Items.ForEach(item => item.RefreshState());
         }
 
-        public void Toggle(TValue value)
+        public async Task Toggle(TValue value)
         {
             if (ValueChanged.HasDelegate)
             {
-                InternalValue = value;
+                await ValueChanged.InvokeAsync(value);
             }
             else
             {

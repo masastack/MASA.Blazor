@@ -23,13 +23,61 @@ public class GithubService
         return client;
     }
 
+    public async Task<(int open, int close)> SearchIssuesAsync(string owner, string repo, string term)
+    {
+        var issueCount = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__searchIssues_{term}", async entry =>
+        {
+            var request = new SearchIssuesRequest(term);
+            request.Repos.Add(owner, repo);
+            request.In = new[] { IssueInQualifier.Title };
+            request.Type = IssueTypeQualifier.Issue;
+
+            var client = CreateClient(owner, repo);
+
+            var open = 0;
+            var closed = 0;
+
+            try
+            {
+                var result = await client.Search.SearchIssues(request);
+
+                if (!result.IncompleteResults)
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+
+                    open = result.Items.Count(item => item.State == ItemState.Open);
+                    closed = result.Items.Count(item => item.State == ItemState.Closed);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return (open, closed);
+        });
+
+        return issueCount;
+    }
+
     public async Task<IReadOnlyList<Release>> FetchReleasesAsync(string owner, string repo)
     {
         var releases = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__releases", async entry =>
         {
-            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-            var client = CreateClient(owner, repo);
-            return await client.Repository.Release.GetAll(owner, repo);
+            IReadOnlyList<Release>? result = null;
+
+            try
+            {
+                var client = CreateClient(owner, repo);
+                result = await client.Repository.Release.GetAll(owner, repo);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return result;
         });
 
         return releases ?? new List<Release>();
