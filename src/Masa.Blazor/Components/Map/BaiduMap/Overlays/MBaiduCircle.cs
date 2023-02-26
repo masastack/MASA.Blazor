@@ -11,8 +11,7 @@ namespace Masa.Blazor
         public float Radius { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("blue")]
-        public string StrokeColor { get; set; } = "blue";
+        public string StrokeColor { get; set; }
 
         [Parameter]
         [ApiDefaultValue(0.9f)]
@@ -27,8 +26,7 @@ namespace Masa.Blazor
         public StrokeStyle StrokeStyle { get; set; } = StrokeStyle.Solid;
 
         [Parameter]
-        [ApiDefaultValue("blue")]
-        public string FillColor { get; set; } = "blue";
+        public string FillColor { get; set; }
 
         [Parameter]
         [ApiDefaultValue(0.3f)]

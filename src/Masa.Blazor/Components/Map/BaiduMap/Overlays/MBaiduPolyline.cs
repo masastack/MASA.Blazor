@@ -8,8 +8,7 @@ namespace Masa.Blazor
         public IEnumerable<GeoPoint> Points { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("#0000FF")]
-        public string StrokeColor { get; set; } = "#0000FF";
+        public string StrokeColor { get; set; }
 
         [Parameter]
         [ApiDefaultValue(0.9f)]
