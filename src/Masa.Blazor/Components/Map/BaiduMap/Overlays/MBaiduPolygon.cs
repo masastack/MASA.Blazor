@@ -1,0 +1,39 @@
+﻿using BlazorComponent.Attributes;
+
+namespace Masa.Blazor
+{
+    public class MBaiduPolygon : BaiduOverlayBase, IPolygon, IStroke, IFillable
+    {
+        [Parameter]
+        public IEnumerable<GeoPoint> Points { get; set; }
+
+        [Parameter]
+        public string StrokeColor { get; set; } 
+
+        [Parameter]
+        [ApiDefaultValue(0.9f)]
+        public float StrokeOpacity { get; set; } = 0.9f;
+
+        [Parameter]
+        [ApiDefaultValue(2)]
+        public float StrokeWeight { get; set; } = 2;
+
+        [Parameter]
+        [ApiDefaultValue(StrokeStyle.Solid)]
+        public StrokeStyle StrokeStyle { get; set; } = StrokeStyle.Solid;
+
+        [Parameter]
+        public string FillColor { get; set; } 
+
+        [Parameter]
+        [ApiDefaultValue(0.3f)]
+        public float FillOpacity { get; set; } = 0.3f;
+
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+
+            RenderConditions = () => Points is not null;
+        }
+    }
+}
