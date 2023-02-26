@@ -48,7 +48,7 @@
 </MRow>
 
 @code {
-    private List<GeoPoint> _polygonPoints { get; set; } = new()
+    private List<GeoPoint> _polygonPoints = new()
     {
         new(116.398017f, 39.929267f),
         new(116.408149f, 39.929654f),
@@ -56,7 +56,7 @@
         new(116.398448f, 39.919307f),
     };
 
-    private List<GeoPoint> _polylinePoints { get; set; } = new()
+    private List<GeoPoint> _polylinePoints = new()
     {
         new(116.390363f, 39.913468f),
         new(116.413f, 39.914299f),
@@ -65,11 +65,11 @@
         new(116.390363f, 39.913468f),
     };
 
-    private BaiduOverlayBase?[] _overlays { get; set; } = new BaiduOverlayBase[5];
+    private BaiduOverlayBase?[] _overlays = new BaiduOverlayBase[5];
 
-    private MBaiduMap? _map { get; set; }
+    private MBaiduMap? _map;
 
-    private MBaiduMarker? _addExampleMarker { get; set; }
+    private MBaiduMarker? _addExampleMarker;
 
     private async Task AddMarker()
     {
