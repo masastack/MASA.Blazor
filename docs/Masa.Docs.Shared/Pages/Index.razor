@@ -1,5 +1,5 @@
 ﻿@page "/"
-@layout MainLayout
+@layout BaseLayout
 @inject DocService DocService
 @inject AppService AppService
 @inject MasaBlazor MasaBlazor
@@ -8,10 +8,8 @@
 @inject NavigationManager NavigationManager
 
 
-<MContainer Fluid>
-    <MNavigationDrawer Value="true"
-                       Id="nav-drawer1"
-                       Right="false"
+<MMain>
+    <MNavigationDrawer Right="false"
                        App
                        Floating
                        Width="300"
@@ -21,22 +19,20 @@
                 <MListItemContent>
                     <MSelect Items="_versions"
                              @bind-Value="@selectVersion"
-                             ItemText="u => u.Label"
-                             ItemValue="u => u.Value"
-                             Label="version"
+                             ItemText="u => u"
+                             ItemValue="u => u"
                              HideDetails="true"
-                             OnChange="(string arg)=>VersionSelectChange(arg)"
-                             Dense
-                             Outlined></MSelect>
+                             Color="#E4E8F3"
+                             Outlined
+                             Dense></MSelect>
                 </MListItemContent>
             </MListItem>
             <MDivider></MDivider>
 
             <MList Dense>
                 <MListItemGroup Color="primary">
-                    <MListItem @onclick='(()=>ScrollIntoView("link_getting-started"))' Exact Class="m-list-item--default">
-
-                        <MListItemIcon>
+                    <MListItem @onclick='(()=>ScrollIntoView("getting-started"))' Exact Class="m-list-item--default">
+                        <MListItemIcon Style="height:48px;margin-left: 6px;margin-right: 18px;">
                             <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
                         </MListItemIcon>
                         <MListItemContent>
@@ -45,9 +41,8 @@
                     </MListItem>
                     @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                     {
-                        var linkStr = $"link_{project}";
-                        <MListItem @onclick="(()=>ScrollIntoView(linkStr))" Exact Class="m-list-item--default">
-                            <MListItemAvatar>
+                        <MListItem @onclick="(()=>ScrollIntoView(project))" Exact Class="m-list-item--default">
+                            <MListItemAvatar Tile>
                                 @Image(project)
                             </MListItemAvatar>
 
@@ -61,63 +56,64 @@
 
         </ChildContent>
     </MNavigationDrawer>
-
-    <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
-        @if (_loading)
-        {
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-        }
-        else
-        {
-
-            <div class="project" id="link_getting-started">
-                <div class="heading-5 mb-6 d-flex align-center">
-                    <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
-                    @I18n.T("getting-started")
-                </div>
-                @ProductCard(s_gettingStartedNavs)
-            </div>
-
-            @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+    <MContainer Fluid>
+        <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
+            @if (_loading)
             {
-                <div class="project" id="link_@project">
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            }
+            else
+            {
+
+                <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
-                        @Image(project)
-                        @I18n.T("product", project)
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        @I18n.T("getting-started")
                     </div>
+                    @ProductCard(s_gettingStartedNavs)
+                </div>
 
-                    @{
-                        var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
-                        var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
-                        if (groupNavsWithoutChildren is not null)
-                        {
-                            @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
-                        }
+                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                {
+                    <div class="project" id="@project">
+                        <div class="heading-5 mb-6 d-flex align-center">
+                            @Image(project)
+                            @I18n.T("product", project)
+                        </div>
 
-                        var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
-                        if (groupNavsWithChildren is not null)
-                        {
-                            foreach (var navItem in groupNavsWithChildren)
+                        @{
+                            var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
+                            var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
+                            if (groupNavsWithoutChildren is not null)
                             {
-                                if (navItem.Tiling is NavItemTiling.Invisible)
+                                @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
+                            }
+
+                            var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
+                            if (groupNavsWithChildren is not null)
+                            {
+                                foreach (var navItem in groupNavsWithChildren)
                                 {
-                                    continue;
+                                    if (navItem.Tiling is NavItemTiling.Invisible)
+                                    {
+                                        continue;
+                                    }
+
+                                    var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                                    @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                                 }
-
-                                var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
-
-                                @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                             }
                         }
-                    }
-                </div>
+                    </div>
+                }
             }
-        }
-    </MResponsive>
-</MContainer>
+        </MResponsive>
+    </MContainer>
+</MMain>
 
 @code {
 
@@ -129,26 +125,12 @@
 
     private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
 
-    /// <summary>
-    /// doc version list
-    /// </summary>
-    private List<VersionSelectItem> _versions = new List<VersionSelectItem>
+    private List<string> _versions = new List<string>
     {
-        new VersionSelectItem("1.0","1.0"),
+        "1.0",
     };
-    /// <summary>
-    /// current selected version
-    /// </summary>
+
     private string selectVersion = "1.0";
-
-    /// <summary>
-    /// doc version change event
-    /// </summary>
-    private void VersionSelectChange(string newval)
-    {
-        //TODO:many version
-    }
-
 
     private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
     {
@@ -254,14 +236,4 @@
         await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
     }
 
-    public class VersionSelectItem
-    {
-        public string Label { get; set; }
-        public string Value { get; set; }
-        public VersionSelectItem(string label, string value)
-        {
-            Label = label;
-            Value = value;
-        }
-    }
 }
