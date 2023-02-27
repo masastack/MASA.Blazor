@@ -92,6 +92,7 @@
       "chips",
       "copyable-text",
       "cron",
+      "defaults-providers",
       "dialogs",
       "dividers",
       "drag-zone",
