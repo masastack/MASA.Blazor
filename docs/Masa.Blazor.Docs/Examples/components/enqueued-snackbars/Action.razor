@@ -18,10 +18,10 @@
             Content = "Turn to red successfully!",
             Closeable = true,
             ActionText = "Undo",
-            OnAction = () =>
+            OnAction = async () =>
             {
+                await Task.Delay(1000);
                 _color = null;
-                return Task.CompletedTask;
             }
         });
     }
