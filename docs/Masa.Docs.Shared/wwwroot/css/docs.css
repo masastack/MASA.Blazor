@@ -489,3 +489,7 @@ default-app-markup {
 .release-note hr {
     margin: 16px 0;
 }
+
+.change-border-color .m-input__slot fieldset {
+    border-color: rgba(0,0,0,.12);
+}
