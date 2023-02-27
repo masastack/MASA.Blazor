@@ -2,7 +2,7 @@
 
 using Masa.Blazor.Presets;
 
-namespace Masa.Blazor.Popup.Components;
+namespace Masa.Blazor.Popup;
 
 public class PromptOptions
 {

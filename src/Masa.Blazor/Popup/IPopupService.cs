@@ -1,5 +1,5 @@
-﻿using Masa.Blazor.Popup.Components;
-using Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets;
+using Masa.Blazor.Popup;
 
 namespace Masa.Blazor;
 

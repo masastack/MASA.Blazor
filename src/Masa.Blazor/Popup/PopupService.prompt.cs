@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Popup.Components;
+﻿using Masa.Blazor.Popup;
+using Masa.Blazor.Popup.Components;
 
 namespace Masa.Blazor;
 
