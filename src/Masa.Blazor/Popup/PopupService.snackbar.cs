@@ -4,7 +4,7 @@ namespace Masa.Blazor;
 
 public partial class PopupService
 {
-    public event Func<SnackbarOptions, Task> OnSnackbarOpen;
+    public event Func<SnackbarOptions, Task> SnackbarOpen;
 
     public async Task EnqueueSnackbarAsync(string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000)
     {
@@ -19,8 +19,8 @@ public partial class PopupService
 
     public async Task EnqueueSnackbarAsync(SnackbarOptions options)
     {
-        if (OnSnackbarOpen is null) return;
+        if (SnackbarOpen is null) return;
 
-        await OnSnackbarOpen.Invoke(options);
+        await SnackbarOpen.Invoke(options);
     }
 }

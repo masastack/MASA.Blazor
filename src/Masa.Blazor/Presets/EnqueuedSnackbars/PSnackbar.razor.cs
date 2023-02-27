@@ -4,8 +4,6 @@ namespace Masa.Blazor.Presets.EnqueuedSnackbars;
 
 public partial class PSnackbar
 {
-    [CascadingParameter] private ProviderItem? PopupItem { get; set; }
-
     [CascadingParameter] private PEnqueuedSnackbars? EnqueuedSnacks { get; set; }
 
     #region parameters from MSnackbar
@@ -65,6 +63,7 @@ public partial class PSnackbar
     [Parameter] public bool Closeable { get; set; }
 
     private bool _visible = true;
+    private bool _actionLoading;
 
     private string? ComputedColor
     {
@@ -99,10 +98,14 @@ public partial class PSnackbar
 
     private async Task HandleOnAction()
     {
+        _actionLoading = true;
+
         if (OnAction.HasDelegate)
         {
             await OnAction.InvokeAsync();
         }
+
+        _actionLoading = false;
 
         HandleOnClose();
     }
@@ -114,20 +117,11 @@ public partial class PSnackbar
             await OnClosed.InvokeAsync();
         }
 
-        EnqueuedSnacks?.RemoveNoRender(EnqueueId);
-
-        DiscardPopupItem();
+        EnqueuedSnacks?.RemoveSnackbar(EnqueueId);
     }
 
     private void HandleOnClose()
     {
         _visible = false;
-    }
-
-    private void DiscardPopupItem()
-    {
-        if (EnqueuedSnacks is not null) return;
-
-        PopupItem?.Discard(true);
     }
 }

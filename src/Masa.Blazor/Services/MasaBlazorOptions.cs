@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿#nullable enable
+
+namespace Masa.Blazor;
 
 public class MasaBlazorOptions
 {
@@ -19,6 +21,8 @@ public class MasaBlazorOptions
     {
         configure.Invoke(Breakpoint);
     }
+
+    public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
 
     internal Theme Theme { get; }
 

@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Masa.Blazor;
 
-[SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.")]
 public partial class PopupService
 {
     public Task<bool> ConfirmAsync(string title, string content)
@@ -46,13 +45,13 @@ public partial class PopupService
         });
     }
 
-    public async Task<bool> ConfirmAsync(Action<ConfirmParameters> parameters)
+    public async Task<bool> ConfirmAsync(Action<ConfirmOptions> parameters)
     {
-        ConfirmParameters param = new();
+        ConfirmOptions param = new();
 
         parameters.Invoke(param);
 
-        var res = await OpenAsync(typeof(Confirm), param.ToDictionary());
+        var res = await OpenAsync(typeof(Confirm), param.ToParameters());
 
         if (res is bool value)
         {

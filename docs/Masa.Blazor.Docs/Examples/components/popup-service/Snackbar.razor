@@ -37,10 +37,10 @@
     {
         _color = "red";
 
-        await PopupService.EnqueueSnackbarAsync(new SnackbarOptions("Turn to red successfully! You can undo it!", "Undo", () =>
+        await PopupService.EnqueueSnackbarAsync(new SnackbarOptions("Turn to red successfully! You can undo it!", "Undo", async () =>
         {
+            await Task.Delay(1000);
             _color = null;
-            return Task.CompletedTask;
         }));
     }
 

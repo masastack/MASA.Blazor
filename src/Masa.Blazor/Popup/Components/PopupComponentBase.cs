@@ -6,9 +6,6 @@ public class PopupComponentBase : BComponentBase
     protected I18n I18n { get; set; } = null!;
 
     [CascadingParameter]
-    protected MApp? MApp { get; set; }
-
-    [CascadingParameter]
     protected ProviderItem? PopupItem { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]

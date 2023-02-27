@@ -6,15 +6,15 @@ namespace Masa.Blazor.Presets
     {
         [Parameter]
         [ApiDefaultValue(nameof(SnackPosition.BottomCenter))]
-        public SnackPosition Position { get; set; } = SnackPosition.BottomCenter;
+        public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
 
         [Parameter]
         [ApiDefaultValue(DEFAULT_MAX_COUNT)]
         public int MaxCount { get; set; } = DEFAULT_MAX_COUNT;
 
         [Parameter]
-        [ApiDefaultValue(576)]
-        public StringNumber MaxWidth { get; set; } = 576;
+        [ApiDefaultValue(DEFAULT_MAX_WIDTH)]
+        public StringNumber MaxWidth { get; set; } = DEFAULT_MAX_WIDTH;
 
         [Parameter]
         public int? Timeout { get; set; }
@@ -22,7 +22,9 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool? Closeable { get; set; }
 
-        private const int DEFAULT_MAX_COUNT = 5;
+        internal const int DEFAULT_MAX_COUNT = 5;
+        internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
+        internal const int DEFAULT_MAX_WIDTH = 576;
 
         private readonly List<SnackbarOptions> _stack = new();
 
@@ -64,10 +66,11 @@ namespace Masa.Blazor.Presets
             StateHasChanged();
         }
 
-        internal void RemoveNoRender(Guid id)
+        internal void RemoveSnackbar(Guid id)
         {
             var config = _stack.FirstOrDefault(c => c.Id == id);
             _stack.Remove(config);
+            StateHasChanged();
         }
     }
 }

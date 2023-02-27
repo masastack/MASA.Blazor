@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 
 public interface IPopupService
 {
-    Task<object> OpenAsync(Type componentType, Dictionary<string, object> parameters);
+    Task<object> OpenAsync(Type componentType, IDictionary<string, object> parameters);
 
     #region Confirm
 
@@ -17,7 +17,7 @@ public interface IPopupService
 
     Task<bool> ConfirmAsync(string title, string content, Func<PopupOkEventArgs, Task> onOk);
 
-    Task<bool> ConfirmAsync(Action<ConfirmParameters> parameters);
+    Task<bool> ConfirmAsync(Action<ConfirmOptions> parameters);
 
     #endregion
 
@@ -27,13 +27,13 @@ public interface IPopupService
 
     Task<string> PromptAsync(string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk);
 
-    Task<string> PromptAsync(Action<PromptParameters> parameters);
+    Task<string> PromptAsync(Action<PromptOptions> parameters);
 
     #endregion
 
     #region Snackbar
 
-    event Func<SnackbarOptions, Task> OnSnackbarOpen;
+    event Func<SnackbarOptions, Task> SnackbarOpen;
 
     Task EnqueueSnackbarAsync(string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000);
 

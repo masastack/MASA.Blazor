@@ -1,6 +1,6 @@
-﻿using Masa.Blazor.Presets;
+﻿#nullable enable
 
-#nullable enable
+using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 
@@ -36,18 +36,17 @@ public partial class Prompt : PopupComponentBase
 
     private readonly PromptValue _promptValue = new();
 
-    private MForm _form;
+    private MForm? _form;
     private bool _okLoading;
-    private PromptParameters? _defaultParameters;
 
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
+    protected override string ComponentName => PopupComponents.PROMPT;
+
     protected override void OnParametersSet()
     {
-        _defaultParameters?.MapTo(this);
-
         base.OnParametersSet();
 
         OkText ??= I18n.T("$masaBlazor.ok");
@@ -86,7 +85,7 @@ public partial class Prompt : PopupComponentBase
 
     private async Task HandleOnOk()
     {
-        if (_form.Validate())
+        if (_form != null && _form.Validate())
         {
             await HandleOnSubmit();
         }

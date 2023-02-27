@@ -32,16 +32,15 @@ public partial class Confirm : AlertingPopupComponentBase
     [Parameter] public string? TitleStyle { get; set; }
 
     private bool _okLoading;
-    private ConfirmParameters? _defaultParameters;
 
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
+    protected override string ComponentName => PopupComponents.CONFIRM;
+
     protected override void OnParametersSet()
     {
-        _defaultParameters?.MapTo(this);
-
         base.OnParametersSet();
 
         OkText ??= I18n.T("$masaBlazor.ok");

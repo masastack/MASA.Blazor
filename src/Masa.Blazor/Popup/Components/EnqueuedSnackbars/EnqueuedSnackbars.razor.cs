@@ -1,39 +1,62 @@
-﻿using Masa.Blazor.Presets;
+﻿#nullable enable
+
+using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 
-public partial class EnqueuedSnackbars : IDisposable
+public partial class EnqueuedSnackbars : BComponentBase
 {
     [Inject]
-    private IPopupService PopupService { get; set; }
+    private IPopupService? PopupService { get; set; }
 
-    private PEnqueuedSnackbars _enqueuedSnackbars;
+    [Inject]
+    private MasaBlazor? MasaBlazor { get; set; }
 
-    private int _timeout = 5000;
+    [Parameter]
+    public SnackPosition Position { get; set; } = PEnqueuedSnackbars.DEFAULT_SNACK_POSITION;
 
-    private int _maxCount = 5;
+    [Parameter]
+    public int MaxCount { get; set; } = PEnqueuedSnackbars.DEFAULT_MAX_COUNT;
 
-    private SnackPosition _position = SnackPosition.BottomCenter;
+    [Parameter]
+    public StringNumber MaxWidth { get; set; } = PEnqueuedSnackbars.DEFAULT_MAX_WIDTH;
 
-    protected override Task OnInitializedAsync()
+    [Parameter]
+    public int? Timeout { get; set; }
+
+    [Parameter]
+    public bool? Closeable { get; set; }
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    protected override string ComponentName => PopupComponents.SNACKBAR;
+
+    protected override async Task OnInitializedAsync()
     {
-        if (PopupService != null)
+        if (PopupService is not null)
         {
-            PopupService.OnSnackbarOpen += NotifyAsync;
+            PopupService.SnackbarOpen += OnSnackbarOpenAsync;
         }
 
-        return base.OnInitializedAsync();
+        await base.OnInitializedAsync();
     }
 
-    private Task NotifyAsync(SnackbarOptions config)
+    private async Task OnSnackbarOpenAsync(SnackbarOptions config)
     {
-        _enqueuedSnackbars.EnqueueSnackbar(config);
-        return Task.CompletedTask;
+        _enqueuedSnackbars?.EnqueueSnackbar(config);
+
+        await Task.CompletedTask;
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
         _enqueuedSnackbars?.Dispose();
-        PopupService.OnSnackbarOpen -= NotifyAsync;
+
+        if (PopupService is not null)
+        {
+            PopupService.SnackbarOpen -= OnSnackbarOpenAsync;
+        }
+
+        base.Dispose(disposing);
     }
 }

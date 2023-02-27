@@ -1,3 +1,5 @@
+#nullable enable
+
 using BlazorComponent.Web;
 
 namespace Masa.Blazor
@@ -24,12 +26,13 @@ namespace Masa.Blazor
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
+        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
 
         protected override Task OnInitializedAsync()
         {
             MasaBlazor.OnThemeChange -= OnThemeChange;
             MasaBlazor.OnThemeChange += OnThemeChange;
-            
+
             OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();

@@ -2,11 +2,11 @@
 {
     public enum SnackPosition
     {
-        TopLeft,
-        TopRight,
-        TopCenter,
-        BottomLeft,
+        BottomCenter,
         BottomRight,
-        BottomCenter
+        BottomLeft,
+        TopCenter,
+        TopRight,
+        TopLeft,
     }
 }
