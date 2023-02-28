@@ -39,6 +39,8 @@ public interface IPopupService
 
     Task EnqueueSnackbarAsync(string title, string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000);
 
+    Task EnqueueSnackbarAsync(Exception exception, bool withStackTrace, bool closeable = false, int timeout = 5000);
+
     Task EnqueueSnackbarAsync(SnackbarOptions options);
 
     #endregion

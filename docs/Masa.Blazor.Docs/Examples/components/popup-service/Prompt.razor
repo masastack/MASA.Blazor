@@ -1,16 +1,5 @@
 ﻿@inject IPopupService PopupService
 
-<MAlert Type="AlertTypes.Info">
-    <div>
-        在 <code>MApp</code> 组件通过 <code>PromptParameters</code> 设置Prompt的默认样式和行为。
-    </div>
-    <div>
-        例如：<code>PromptParameters="@@("param => { param.OkText = "Confirm"; })"</code>。
-    </div>
-</MAlert>
-
-<MDivider Class="my-4" />
-
 <MButton OnClick="ShowBasic">Basic Prompt</MButton>
 
 <MDivider Class="my-4" />
@@ -48,7 +37,7 @@
                 {
                     if (args.Value == checkInput)
                     {
-                        // await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is equal to '{checkInput}'", AlertTypes.Info);
+                        await PopupService.EnqueueSnackbarAsync($"Input('{args.Value}') is equal to '{checkInput}'", AlertTypes.Info);
                         
                         await Task.Delay(1000);
 
@@ -59,7 +48,7 @@
                     }
                     else
                     {
-                        // await PopupService.ShowSnackbarAsync($"Input('{args.Value}') is no equal to '{checkInput}'", AlertTypes.Error);
+                        await PopupService.EnqueueSnackbarAsync($"Input('{args.Value}') is no equal to '{checkInput}'", AlertTypes.Error);
                         args.Cancel();
                     }
                 }
@@ -67,7 +56,7 @@
                 {
                     args.Cancel();
 
-                    // await PopupService.ShowSnackbarAsync(e);
+                    await PopupService.EnqueueSnackbarAsync(e, true);
                 }
             });
     }
@@ -89,15 +78,15 @@
     {
         if (input is null)
         {
-            // await PopupService.ShowSnackbarAsync("Cancel was clicked", AlertTypes.Warning);
+            await PopupService.EnqueueSnackbarAsync("Cancel was clicked", AlertTypes.Warning);
         }
         else if (input == checkInput)
         {
-            // await PopupService.ShowSnackbarAsync($"Input('{input}') is equal to '{checkInput}'", AlertTypes.Info);
+            await PopupService.EnqueueSnackbarAsync($"Input('{input}') is equal to '{checkInput}'", AlertTypes.Info);
         }
         else
         {
-            // await PopupService.ShowSnackbarAsync($"Input('{input}') is no equal to '{checkInput}'", AlertTypes.Error);
+            await PopupService.EnqueueSnackbarAsync($"Input('{input}') is no equal to '{checkInput}'", AlertTypes.Error);
         }
     }
 
