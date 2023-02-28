@@ -2,7 +2,6 @@
 
 public class AlertingPopupComponentBase : PopupComponentBase
 {
-    // TODO: snackbar doesn't needs icon and iconcolor
     [Parameter] public string? Icon { get; set; }
 
     [Parameter] public string? IconColor { get; set; }
