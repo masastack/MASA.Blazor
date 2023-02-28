@@ -4,7 +4,5 @@ public enum ErrorPopupType
 {
     None,
 
-    Toast,
-
     Snackbar
 }

@@ -1,0 +1,11 @@
+﻿@using Masa.Blazor.Presets
+@namespace Masa.Blazor.Popup.Components
+@inherits BComponentBase
+
+<PEnqueuedSnackbars Position="@Position"
+                    MaxCount="@MaxCount"
+                    MaxWidth="@MaxWidth"
+                    Timeout="@Timeout"
+                    Closeable="@Closeable"
+                    @ref="_enqueuedSnackbars">
+</PEnqueuedSnackbars>

@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Popup.Components;
+﻿using Masa.Blazor.Popup;
+using Masa.Blazor.Popup.Components;
 
 namespace Masa.Blazor;
 
@@ -23,13 +24,13 @@ public partial class PopupService
         });
     }
 
-    public async Task<string> PromptAsync(Action<PromptParameters> parameters)
+    public async Task<string> PromptAsync(Action<PromptOptions> parameters)
     {
-        PromptParameters param = new();
+        PromptOptions param = new();
 
         parameters.Invoke(param);
 
-        var res = await OpenAsync(typeof(Prompt), param.ToDictionary());
+        var res = await OpenAsync(typeof(Prompt), param.ToParameters());
 
         return (string)res;
     }
