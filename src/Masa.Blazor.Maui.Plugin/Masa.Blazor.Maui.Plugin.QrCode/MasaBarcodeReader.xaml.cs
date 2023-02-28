@@ -14,8 +14,8 @@ public partial class MasaBarcodeReader : ContentPage
         BarcodeReader.Options = new BarcodeReaderOptions
         {
             Formats = BarcodeFormats.All,
-            AutoRotate = true,
-            Multiple = true
+            AutoRotate = false,
+            Multiple = false
         };
     }
     private void CameraBarcodeReaderView_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)

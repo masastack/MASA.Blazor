@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using QrCodeSample.Data;
 using ZXing.Net.Maui;
+using ZXing.Net.Maui.Controls;
 
 namespace QrCodeSample
 {

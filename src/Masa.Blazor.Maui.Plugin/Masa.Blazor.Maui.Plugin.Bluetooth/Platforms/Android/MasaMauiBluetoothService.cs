@@ -1,5 +1,6 @@
 ﻿using Android.Bluetooth;
 using Android.Bluetooth.LE;
+using static Android.Media.Midi.MidiManager;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
@@ -11,7 +12,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         private static ScanSettings _settings = new ScanSettings.Builder()
             .SetScanMode(Android.Bluetooth.LE.ScanMode.Balanced)
             ?.Build();
-        private static DevicesCallback _callback = new DevicesCallback();
+
         public static bool PlatformIsEnabled()
         {
             return _bluetoothAdapter is { IsEnabled: true };
@@ -19,6 +20,9 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            _bluetoothAdapter.Dispose();
+            _bluetoothAdapter = _manager?.Adapter;
+            var _callback = new DevicesCallback();
             time1 = DateTime.Now;
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
@@ -47,7 +51,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
-            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
+            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.LocalName == deviceName);
             if (!blueDevice.Gatt.IsConnected)
             {
                 await blueDevice.Gatt.ConnectAsync();
@@ -133,20 +137,26 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             public override void OnScanResult(ScanCallbackType callbackType, ScanResult result)
             {
-
                 System.Diagnostics.Debug.WriteLine("OnScanResult");
+                System.Diagnostics.Debug.WriteLine($"{result.Device.Name}:{result.ScanRecord.DeviceName}");
                 if (string.IsNullOrEmpty(scanDeviceName))
                 {
-                    if (!Devices.Contains(result.Device))
+                    if (!Devices.Contains(result.Device) && (!string.IsNullOrEmpty(result.Device.Name) || !string.IsNullOrEmpty(result.ScanRecord.DeviceName)))
                     {
                         Devices.Add(result.Device);
+                        Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)
+                            ? result.ScanRecord.DeviceName
+                            : result.Device.Name;
                     }
                 }
                 else
                 {
-                    if (result.Device?.Name == scanDeviceName)
+                    if (result.Device?.Name == scanDeviceName || result.ScanRecord?.DeviceName == scanDeviceName)
                     {
                         Devices.Add(result.Device);
+                        Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)
+                            ? result.ScanRecord.DeviceName
+                            : result.Device.Name;
                         _eventWaitHandle.Set();
                     }
                     else
@@ -156,7 +166,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                             _eventWaitHandle.Set();
                             time1 = DateTime.MinValue;
                         }
-                    } 
+                    }
                 }
 
                 base.OnScanResult(callbackType, result);
@@ -175,19 +185,30 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private class BluetoothPermissions : Permissions.BasePlatformPermission
         {
-            public override (string androidPermission, bool isRuntime)[] RequiredPermissions =>
-                new List<(string androidPermission, bool isRuntime)>
+            public override (string androidPermission, bool isRuntime)[] RequiredPermissions
+            {
+                get
                 {
-                    (global::Android.Manifest.Permission.AccessFineLocation, true),
-                    (global::Android.Manifest.Permission.Bluetooth, true),
-                    (global::Android.Manifest.Permission.BluetoothAdmin, true),
-                   
-#if ANDROID31_0_OR_GREATER
-                    //(global::Android.Manifest.Permission.BluetoothConnect, true),
-                    //(global::Android.Manifest.Permission.BluetoothScan, true),
-#endif
-                    
-                }.ToArray();
+                    var list = new List<(string androidPermission, bool isRuntime)>
+                    {
+
+                    };
+                    if (OperatingSystem.IsAndroidVersionAtLeast(32))
+                    {
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothConnect, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothScan, true));
+                        list.Add(new(global::Android.Manifest.Permission.AccessFineLocation, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothAdvertise, true));
+                    }
+                    else
+                    {
+                        list.Add(new(global::Android.Manifest.Permission.Bluetooth, true));
+                        list.Add(new(global::Android.Manifest.Permission.AccessFineLocation, true));
+                        list.Add(new(global::Android.Manifest.Permission.BluetoothAdmin, true));
+                    }
+                    return list.ToArray();
+                }
+            }
         }
         static Task<bool> PlatformGetAvailability()
         {

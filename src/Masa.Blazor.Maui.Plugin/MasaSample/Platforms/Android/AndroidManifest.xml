@@ -4,9 +4,19 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<!--蓝牙权限-->
-	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
 	<!--让应用启动设备发现或操纵蓝牙设置-->
-	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
 	<!-- 如果设配Android9及更低版本，可以申请 ACCESS_COARSE_LOCATION -->
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+	<!-- Needed only if your app makes the device discoverable to Bluetooth
+         devices. -->
+	<uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+
+	<!-- Needed only if your app communicates with already-paired Bluetooth
+         devices. -->
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 </manifest>

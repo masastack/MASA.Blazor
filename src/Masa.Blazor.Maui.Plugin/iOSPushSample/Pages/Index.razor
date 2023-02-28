@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<button @onclick="GetDeviceToken">Get Device Token</button>
+<text>@deviceToken</text>
+@code
+{
+    private string deviceToken { get; set; }
+
+    private void GetDeviceToken()
+    {
+        deviceToken= Preferences.Default.Get("PushToken",string.Empty);
+    }
+}

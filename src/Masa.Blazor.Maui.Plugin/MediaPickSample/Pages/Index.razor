@@ -1,0 +1,129 @@
+﻿@page "/"
+@using Masa.BuildingBlocks.Storage.ObjectStorage;
+@using MediaPickSample.Service;
+
+<MCard Color="#FFFFFF" Class="mx-auto rounded-3 mt-3" Elevation="0">
+    <MCardText>
+        <div class="d-flex" style="flex-wrap: wrap">
+            @if (_phoneDictionary.Any())
+            {
+                @foreach (var phone in _phoneDictionary)
+                {
+                    <div style="position: relative; height: 90px; width: 90px;" class="mr-2 mb-2">
+                        <MImage Src="@phone.Value" AspectRatio="1" Class="grey lighten-2">
+                            <PlaceholderContent>
+                                <MRow Class="fill-height" Align="@AlignTypes.Center" Justify="@JustifyTypes.Center">
+                                    <MProgressCircular Indeterminate></MProgressCircular>
+                                </MRow>
+                            </PlaceholderContent>
+                        </MImage>
+                        <MButton Small Icon Tile Style="position: absolute; top: 0; right: 0; background: #000000; opacity: 0.5;" Dark OnClick="() => RemoveItem(phone.Key)">
+                            <MIcon>
+                                mdi-close
+                            </MIcon>
+                        </MButton>
+                    </div>
+                }
+            }
+            <MBottomSheet>
+                <ActivatorContent>
+                    <MButton XLarge Icon Style="background: #F7F8FA;border-radius: 2px; height:80px;width:80px; " @attributes="@context.Attrs">
+                        <MIcon XLarge Color="#D8D8D8">mdi-camera</MIcon>
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    <MCard>
+                        <MList>
+                            <MListItem OnClick="GetImageAsync1"><MListItemContent><MListItemTitle>Maui-MediaPicker</MListItemTitle></MListItemContent></MListItem>
+                            <MListItem OnClick="GetImageAsync2"><MListItemContent><MListItemTitle>Maui-FilePicker</MListItemTitle></MListItemContent></MListItem>
+                            <MListItem OnClick="GetImageAsync3"><MListItemContent><MListItemTitle>Intent</MListItemTitle></MListItemContent></MListItem>
+                            <MListItem OnClick="GetImageAsync4"><MListItemContent><MListItemTitle>Jetpack-PickMultipleVisualMedia</MListItemTitle></MListItemContent></MListItem>
+                        </MList>
+                    </MCard>
+
+                </ChildContent>
+            </MBottomSheet>
+
+        </div>
+
+    </MCardText>
+</MCard>
+@code {
+    [Inject]
+    private IPhotoPickerService _photoPickerService { get; set; }
+    [Inject]
+    private IClient _client { get; set; }
+    private Dictionary<string, string> _phoneDictionary { get; set; } = new Dictionary<string, string>();
+
+    private async Task GetImageAsync1()
+    {
+        var photoDic = await _photoPickerService.GetImageAsync1();
+        foreach (var photo in photoDic)
+        {
+            var fileUrl = await UploadImageAsync(photo.Value, Path.GetExtension(photo.Key));
+            _phoneDictionary.Add(photo.Key, fileUrl);
+        }
+    }
+    private async Task GetImageAsync2()
+    {
+        var photoDic = await _photoPickerService.GetImageAsync2();
+        foreach (var photo in photoDic)
+        {
+            var fileUrl = await UploadImageAsync(photo.Value, Path.GetExtension(photo.Key));
+            _phoneDictionary.Add(photo.Key, fileUrl);
+        }
+    }
+    private async Task GetImageAsync3()
+    {
+        var photoDic = await _photoPickerService.GetImageAsync3();
+        foreach (var photo in photoDic)
+        {
+            var fileUrl = await UploadImageAsync(photo.Value, Path.GetExtension(photo.Key));
+            _phoneDictionary.Add(photo.Key, fileUrl);
+        }
+    }
+
+    private async Task GetImageAsync4()
+    {
+        var photoDic = await _photoPickerService.GetImageAsync4();
+        foreach (var photo in photoDic)
+        {
+            var fileUrl = await UploadImageAsync(photo.Value, Path.GetExtension(photo.Key));
+            _phoneDictionary.Add(photo.Key, fileUrl);
+        }
+    }
+
+    private void RemoveItem(string key)
+    {
+        _phoneDictionary.Remove(key);
+    }
+
+    private async Task<string> UploadImageAsync(string fileBase64, string fileExtension)
+    {
+        byte[] fileBytes = Convert.FromBase64String(fileBase64);
+        var newFileName = $"{Guid.NewGuid() + fileExtension}";
+        var newFileFullPath = $"images/xxx/xxx/{newFileName}";
+        using (var fileStream = new MemoryStream(fileBytes))
+        {
+            try
+            {
+                await InvokeAsync(StateHasChanged);
+
+                await _client.PutObjectAsync("xxx", newFileFullPath, fileStream);
+
+                return $"https://img-cdn.xxx.cn/{newFileFullPath}";
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("x-oss-hash-crc64ecma"))
+                {
+                    return $"https://img-cdn.xxx.cn/{newFileFullPath}";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+    }
+}
