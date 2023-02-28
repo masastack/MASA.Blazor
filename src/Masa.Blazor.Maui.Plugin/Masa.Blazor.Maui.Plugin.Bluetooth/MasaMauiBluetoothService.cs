@@ -31,7 +31,6 @@
         }
 
 
-
         public static bool IsEnabled()
         {
             var isEnable = false;

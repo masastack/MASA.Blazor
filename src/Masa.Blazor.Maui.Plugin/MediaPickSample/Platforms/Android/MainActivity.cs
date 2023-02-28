@@ -6,6 +6,7 @@ using AndroidX.Activity.Result;
 using AndroidX.Activity.Result.Contract;
 using AndroidX.DocumentFile.Provider;
 using System.Diagnostics;
+using Uri = Android.Net.Uri;
 
 namespace MediaPickSample
 {
@@ -78,7 +79,7 @@ namespace MediaPickSample
             return fileList;
         }
 
-        public class ActivityResultCallback : Java.Lang.Object, IActivityResultCallback
+        private class ActivityResultCallback : Java.Lang.Object, IActivityResultCallback
         {
             public void OnActivityResult(Java.Lang.Object p0)
             {
@@ -87,11 +88,7 @@ namespace MediaPickSample
                     var list = (Android.Runtime.JavaList)p0;
                     if (!list.IsEmpty)
                     {
-                        var uris = new List<Android.Net.Uri>();
-                        for (int i = 0; i < list.Count; i++)
-                        {
-                            uris.Add((Android.Net.Uri)list[i]);
-                        }
+                        var uris = list.Cast<Uri>().ToList();
 
                         var fileList = Instance.GetImageDicFromUris(uris);
                         Instance.PickImageTaskCompletionSource.SetResult(fileList);

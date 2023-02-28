@@ -20,6 +20,8 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            _bluetoothAdapter.Dispose();
+            _bluetoothAdapter = _manager?.Adapter;
             var _callback = new DevicesCallback();
             time1 = DateTime.Now;
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
@@ -49,7 +51,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
-            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
+            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.LocalName == deviceName);
             if (!blueDevice.Gatt.IsConnected)
             {
                 await blueDevice.Gatt.ConnectAsync();
@@ -107,7 +109,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             private readonly EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
 
-            public List<BluetoothDevice> Devices { get;} = new();
+            public List<BluetoothDevice> Devices { get; } = new();
             private string scanDeviceName;
             public void WaitOne()
             {
@@ -149,7 +151,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 }
                 else
                 {
-                    if (result.Device?.Name == scanDeviceName || result.ScanRecord?.DeviceName== scanDeviceName)
+                    if (result.Device?.Name == scanDeviceName || result.ScanRecord?.DeviceName == scanDeviceName)
                     {
                         Devices.Add(result.Device);
                         Devices.Last().LocalName = string.IsNullOrEmpty(result.Device.Name)
@@ -189,7 +191,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 {
                     var list = new List<(string androidPermission, bool isRuntime)>
                     {
-                        
+
                     };
                     if (OperatingSystem.IsAndroidVersionAtLeast(32))
                     {

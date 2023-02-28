@@ -47,6 +47,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices(string deviceName = "")
         {
+            _manager.Dispose();
+            _manager = new CBCentralManager(_delegate, DispatchQueue.DefaultGlobalQueue, new CBCentralInitOptions
+            {
+                ShowPowerAlert = true,
+            });
+
             _delegate.ClearDevices();
             time1 = DateTime.Now;
             if (!_manager.IsScanning)
@@ -75,7 +81,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
-            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
+            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.LocalName == deviceName);
             if (!blueDevice.Gatt.IsConnected)
             {
                 await blueDevice.Gatt.ConnectAsync();
