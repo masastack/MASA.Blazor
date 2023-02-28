@@ -18,8 +18,8 @@ namespace Masa.Blazor
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(nameof(ErrorPopupType.Toast))]
-        public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Toast;
+        [ApiDefaultValue(nameof(ErrorPopupType.Snackbar))]
+        public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Snackbar;
 
         [Parameter]
         public bool ShowDetail { get; set; }
@@ -87,14 +87,7 @@ namespace Masa.Blazor
             {
                 if (PopupType == ErrorPopupType.Snackbar)
                 {
-                    // TODO:
-                    
-                    // await PopupService.EnqueueSnackbarAsync(config =>
-                    // {
-                    //     config.Type = AlertTypes.Error;
-                    //     config.Title = "Something wrong!";
-                    //     config.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
-                    // });
+                    await PopupService.EnqueueSnackbarAsync(exception, ShowDetail);
                 }
             }
 
