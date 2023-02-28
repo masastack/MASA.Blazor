@@ -12,7 +12,7 @@ related:
 
 允许您设置消息队列的`Position`，是否可以关闭和最大队列数量。
 
-<masa-example file="Examples.components.enqueued_snackbars.Usage"></masa-example>
+<enqueued-snackbars-usage></enqueued-snackbars-usage>
 
 ## 示例
 
