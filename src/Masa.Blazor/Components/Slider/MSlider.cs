@@ -314,7 +314,7 @@ namespace Masa.Blazor
         public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
         {
             await HandleOnSliderStartSwiping(args.Target, args.Touches[0].ClientX, args.Touches[0].ClientY);
-            await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
+            await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerExtras() { PreventDefault = false, StopPropagation = true });
             await App.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
             {
                 Capture = true,
