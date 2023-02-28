@@ -35,10 +35,10 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(2)]
+        [ApiDefaultValue(2f)]
         public float StrokeWeight
         {
-            get => GetValue(2);
+            get => GetValue(2f);
             set => SetValue(value);
         }
 
