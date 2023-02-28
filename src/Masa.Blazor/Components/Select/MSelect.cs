@@ -210,7 +210,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         base.OnInitialized();
 
         CachedItems = CacheItems ? Items : new List<TItem>();
-        InternalValue = Value;
 
         ComputedMenuProps = GetDefaultMenuProps();
         MenuProps?.Invoke(ComputedMenuProps);
@@ -241,12 +240,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
     }
 
-    protected override void OnWatcherInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnWatcherInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
-               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange());
+        watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
+               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
     }
 
     private void OnItemsChange()
@@ -455,6 +454,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
                 attrs[nameof(MMenu.Left)] = ComputedMenuProps.Left;
                 attrs[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
+                attrs[nameof(MMenu.MaxWidth)] = ComputedMenuProps.MaxWidth;
                 attrs[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
                 attrs[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
                 attrs[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;

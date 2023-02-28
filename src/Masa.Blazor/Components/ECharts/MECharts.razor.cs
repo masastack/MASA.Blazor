@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using System.Text.Json;
 
-public partial class MECharts : BDomComponentBase, IAsyncDisposable
+namespace Masa.Blazor;
+
+public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
@@ -41,12 +43,39 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     [Parameter]
     public string Theme { get; set; }
 
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnDoubleClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseDown { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseMove { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseUp { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOver { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOut { get; set; }
+
+    [Parameter]
+    public EventCallback OnGlobalOut { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnContextMenu { get; set; }
+
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
-    private IJSObjectReference _echarts;
+    private IEChartsJSObjectReferenceProxy _echarts;
     private object _prevOption;
     private string _prevComputedTheme;
 
@@ -135,7 +164,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
     public async Task InitECharts()
     {
-        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions, this);
 
         await SetOption();
     }
@@ -144,7 +173,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     {
         if (_echarts == null) return;
 
-        await _echarts.InvokeVoidAsync("dispose");
+        await _echarts.DisposeEChartsAsync();
 
         _echarts = null;
     }
@@ -160,7 +189,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     {
         if (_echarts == null) return;
 
-        await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
+        await _echarts.SetOptionAsync(option ?? Option, notMerge, lazyUpdate);
     }
 
     public async Task Resize(double width = 0, double height = 0)
@@ -169,11 +198,11 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
         if (width == 0 || height == 0)
         {
-            await _echarts.InvokeVoidAsync("resize");
+            await _echarts.ResizeAsync();
         }
         else
         {
-            await _echarts.InvokeVoidAsync("resize", new { width, height });
+            await _echarts.ResizeAsync(width, height);
         }
     }
 

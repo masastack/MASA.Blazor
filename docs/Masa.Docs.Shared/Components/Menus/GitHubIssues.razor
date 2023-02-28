@@ -1,0 +1,117 @@
+﻿@namespace Masa.Docs.Shared.Components
+@implements IDisposable;
+@using System.Net.Http.Json;
+@using System.Text.Json;
+@using System.Text.Json.Nodes;
+@using Microsoft.Extensions.Caching.Memory;
+@using Octokit
+@using System.Diagnostics.CodeAnalysis
+
+@if (_show)
+{
+    if (_searching)
+    {
+        <MSkeletonLoader Class="github-issues" Type="button,button,button"></MSkeletonLoader>
+    }
+    else
+    {
+        <div class="github-issues github-issues--loaded rounded">
+            <a class="d-flex" target=_blank href="@($"https://github.com/BlazorComponent/MASA.Blazor/issues?q=is:issue+{_componentName}")">
+                <MIcon Class="emphasize1-color mr-1" Size="16">mdi-plus</MIcon>
+                <span>Issues</span>
+            </a>
+            <a class="d-flex" target=_blank href="@($"https://github.com/BlazorComponent/MASA.Blazor/issues?q=is:open+is:issue+{_componentName}")">
+                <MIcon Class="mr-1" Size="16">mdi-alert-circle-outline</MIcon>
+                <span>@_openCount</span>&nbsp;
+                <span>Open</span>
+            </a>
+            <a class="d-flex" target=_blank href="@($"https://github.com/BlazorComponent/MASA.Blazor/issues?q=is:issue+is:closed+{_componentName}")">
+                <MIcon Class="mr-1" Size="16">mdi-check</MIcon>
+                <span>@_closeCount</span>&nbsp;
+                <span>Closed</span>
+            </a>
+        </div>
+    }
+}
+
+@code {
+
+    [Inject]
+    private GithubService GithubService { get; set; } = null!;
+
+    [Inject]
+    public NavigationManager Navigation { get; set; } = null!;
+
+    bool _show;
+    bool _searching;
+    int _openCount;
+    int _closeCount;
+    string? _componentName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await SearchIssues();
+    }
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += HandleLocationChanged;
+    }
+
+    private async void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        await SearchIssues();
+    }
+
+    private async Task SearchIssues()
+    {
+        if (!Navigation.Uri.Contains("components", StringComparison.OrdinalIgnoreCase))
+        {
+            _show = false;
+            await InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        _componentName = FormatSegment(Navigation.GetSegments().LastOrDefault());
+
+        if (_componentName == "api")
+        {
+            if (_show)
+            {
+                return;
+            }
+
+            _componentName = FormatSegment(Navigation.GetSegments().SkipLast(1).LastOrDefault());
+        }
+
+        if (_componentName is null or "all")
+        {
+            _show = false;
+            await InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        _show = true;
+        _searching = true;
+        await InvokeAsync(StateHasChanged);
+
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("BlazorComponent", "MASA.Blazor", _componentName);
+
+        _searching = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= HandleLocationChanged;
+    }
+
+    [return: NotNullIfNotNull("name")]
+    private static string? FormatSegment(string? name)
+    {
+        return name?.TrimEnd('/').TrimEnd('s').Trim('-').ToLowerInvariant();
+    }
+
+}

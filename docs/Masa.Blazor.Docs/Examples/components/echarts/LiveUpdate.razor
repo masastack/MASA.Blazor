@@ -1,0 +1,66 @@
+﻿@using System.Timers
+@implements IDisposable
+
+<MECharts Option="_option" Height="400"></MECharts>
+
+@code{
+
+    private Timer? _timer;
+    private object _option = GenOption(MakeRandomData());
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (_timer == null)
+        {
+            _timer = new Timer
+            {
+                Interval = 2000
+            };
+
+            _timer.Elapsed += TimerOnElapsed;
+
+            _timer.Start();
+        }
+    }
+
+    private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
+    {
+        InvokeAsync(() =>
+        {
+            // new instance will trigger the echarts.setOption()
+            _option = GenOption(MakeRandomData());
+            StateHasChanged();
+        });
+    }
+
+    private static object GenOption(IEnumerable<PieDataItem> data)
+    {
+        return new
+        {
+            Series = new[]
+            {
+                new
+                {
+                    Radius = new[] { "0", "50%" },
+                    Type = "pie",
+                    Data = data
+                }
+            }
+        };
+    }
+
+    private static IEnumerable<PieDataItem> MakeRandomData()
+    {
+        return new[] { "A", "B", "C" }.Select(item => new PieDataItem(item, Random.Shared.Next(10, 99)));
+    }
+
+    record PieDataItem(string Name, int Value);
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+
+}

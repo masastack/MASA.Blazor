@@ -1,0 +1,39 @@
+﻿@{
+    RenderFragment<Exception> errorContent = _customErrorContent ? e => @<MAlert Type="AlertTypes.Error">@e.Message</MAlert> : null;
+}
+
+<MErrorHandler PopupType="ErrorPopupType.None" ErrorContent="errorContent" @ref="_errorHandler">
+    <MSwitch @bind-Value="_customErrorContent" Label="Custom ErrorContent" HideDetails="true"></MSwitch>
+    <MDivider Class="my-2"></MDivider>
+    <MButton OnClick="OnClick">Throw exception</MButton>
+</MErrorHandler>
+
+@if (_isErrorContent)
+{
+    <div class="mt-2 text-center">
+        <MButton Color="primary" OnClick="Reset">Reset</MButton>
+    </div>
+}
+
+@code
+{
+    private bool _customErrorContent;
+    private bool _isErrorContent;
+
+    private MErrorHandler? _errorHandler;
+
+    private void OnClick()
+    {
+        _isErrorContent = true;
+        StateHasChanged();
+
+        throw new Exception("An error was caught by MErrorHandler component.");
+    }
+
+    private void Reset()
+    {
+        _isErrorContent = false;
+
+        _errorHandler?.Recover();
+    }
+}
