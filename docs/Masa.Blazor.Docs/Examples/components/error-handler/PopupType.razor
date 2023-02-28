@@ -1,6 +1,5 @@
 ﻿<MErrorHandler PopupType="@_errorPopupType" @ref="_errorHandler">
     <MRadioGroup @bind-Value="_errorPopupType" HideDetails="true" Row>
-        <MRadio Value="ErrorPopupType.Toast" Label="Toast"></MRadio>
         <MRadio Value="ErrorPopupType.Snackbar" Label="Snackbar"></MRadio>
         <MRadio Value="ErrorPopupType.None" Label="None"></MRadio>
     </MRadioGroup>
@@ -18,7 +17,7 @@
 @code
 {
     private bool _isErrorContent;
-    private ErrorPopupType _errorPopupType = ErrorPopupType.Toast;
+    private ErrorPopupType _errorPopupType = ErrorPopupType.Snackbar;
     private MErrorHandler? _errorHandler;
 
     private void OnClick()
