@@ -28,6 +28,13 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   - <MErrorHandler ShowAlert="false"></MErrorHandler>
   + <MErrorHandler PopupType="ErrorPopupType.None"></MErrorHandler>
   ```
+- Removed the **PToasts** component, and use the **PEnqueuedSnackbars** component instead.
+- **PopupService** removes `AlertAsync` 和 `ToastAsync`, and use `EnqueueSnackbarAsync` instead.
+  ```diff
+  - PopupService.AlertAsync()
+  - PopupService.ToastAsync()
+  + PopupService.EnqueueSnackbarAsync()
+  ```
 
 ## Upgrading from v0.5.x to v0.6.x
 
