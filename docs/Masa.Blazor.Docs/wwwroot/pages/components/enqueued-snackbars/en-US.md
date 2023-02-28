@@ -12,7 +12,7 @@ related:
 
 Allows you to set the `Position` of the snackbar queue, whether it can be closed, and the max count.
 
-<masa-example file="Examples.components.enqueued_snackbars.Usage"></masa-example>
+<enqueued-snackbars-usage></enqueued-snackbars-usage>
 
 ## Examples
 
