@@ -79,7 +79,12 @@
 .app-code {
     margin: 16px 0;
     position: relative;
-    padding: 12px 50px 12px 16px;
+    padding: 16px;
+}
+
+.app-code code {
+    font-size: 0.9em !important;
+    line-height: 1.3em !important;
 }
 
 h1 + p {
@@ -488,4 +493,12 @@ default-app-markup {
 
 .release-note hr {
     margin: 16px 0;
+}
+
+.doc-markdown-body > section {
+    margin-bottom: 3rem;
+}
+
+.doc-markdown-body > section section {
+    margin-bottom: 3rem;
 }
