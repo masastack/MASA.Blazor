@@ -8,7 +8,6 @@
 @inject NavigationManager NavigationManager
 
 
-<MMain>
     <MNavigationDrawer Right="false"
                        App
                        Floating
@@ -56,6 +55,7 @@
 
         </ChildContent>
     </MNavigationDrawer>
+<MMain>
     <MContainer Fluid>
         <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
             @if (_loading)
@@ -123,7 +123,7 @@
     [CascadingParameter]
     private BaseLayout BaseLayout { get; set; } = null!;
 
-    private string Style => MasaBlazor.Breakpoint.MdAndDown ? "" : $"margin-top: {AppService.AppBarHeight}px";
+    private string Style => $"margin-top: {AppService.AppBarHeight}px";
 
     private List<string> _versions = new List<string>
     {
