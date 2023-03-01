@@ -62,7 +62,7 @@ public partial class Prompt : PopupComponentBase
     private Task HandleOnCancel()
     {
         Visible = false;
-        return SetResult(null);
+        return ClosePopupAsync(null);
     }
 
     private async Task HandleOnSubmit()
@@ -79,7 +79,7 @@ public partial class Prompt : PopupComponentBase
         if (args.IsCanceled is false)
         {
             Visible = false;
-            await SetResult(_promptValue.Value);
+            await ClosePopupAsync(_promptValue.Value);
         }
     }
 
@@ -88,15 +88,6 @@ public partial class Prompt : PopupComponentBase
         if (_form != null && _form.Validate())
         {
             await HandleOnSubmit();
-        }
-    }
-
-    private async Task SetResult(string? value)
-    {
-        if (PopupItem != null)
-        {
-            await Task.Delay(256);
-            PopupItem.Discard(value);
         }
     }
 

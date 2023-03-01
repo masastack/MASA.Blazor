@@ -1,0 +1,21 @@
+﻿@inject IPopupService PopupService
+
+<MButton OnClick="OnClick" Class="text-capitalize">Open the CustomPopupComponent</MButton>
+
+@code {
+
+    private async Task OnClick()
+    {
+        await OpenCustomPopupAsync("content here", AlertTypes.Info);
+    }
+
+    private async Task OpenCustomPopupAsync(string content, AlertTypes type)
+    {
+        await PopupService.OpenAsync(typeof(CustomPopupComponent), new Dictionary<string, object?>()
+        {
+            { nameof(CustomPopupComponent.Content), content },
+            { nameof(CustomPopupComponent.Type), type }
+        });
+    }
+
+}

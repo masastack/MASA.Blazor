@@ -1,11 +1,13 @@
-﻿using Masa.Blazor.Presets;
+﻿#nullable enable
+
+using Masa.Blazor.Presets;
 using Masa.Blazor.Popup;
 
 namespace Masa.Blazor;
 
 public interface IPopupService
 {
-    Task<object> OpenAsync(Type componentType, IDictionary<string, object> parameters);
+    Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters);
 
     #region Confirm
 
@@ -39,7 +41,7 @@ public interface IPopupService
 
     Task EnqueueSnackbarAsync(string title, string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000);
 
-    Task EnqueueSnackbarAsync(Exception exception, bool withStackTrace, bool closeable = false, int timeout = 5000);
+    Task EnqueueSnackbarAsync(Exception exception, bool withStackTrace = false, bool closeable = false, int timeout = 5000);
 
     Task EnqueueSnackbarAsync(SnackbarOptions options);
 

@@ -61,7 +61,7 @@ public partial class Confirm : AlertingPopupComponentBase
     private Task HandleOnCancel()
     {
         Visible = false;
-        return SetResult(false);
+        return ClosePopupAsync(false);
     }
 
     private async Task HandleOnOk()
@@ -78,16 +78,7 @@ public partial class Confirm : AlertingPopupComponentBase
         if (args.IsCanceled is false)
         {
             Visible = false;
-            await SetResult(true);
-        }
-    }
-
-    private async Task SetResult(bool value)
-    {
-        if (PopupItem is not null)
-        {
-            await Task.Delay(256);
-            PopupItem.Discard(value);
+            await ClosePopupAsync(true);
         }
     }
 
