@@ -92,6 +92,7 @@
       "chips",
       "copyable-text",
       "cron",
+      "defaults-providers",
       "dialogs",
       "dividers",
       "drag-zone",
@@ -102,6 +103,7 @@
       },
       "editors",
       "ellipsis-texts",
+      "enqueued-snackbars",
       "error-handler",
       "expansion-panels",
       "floating-action-buttons",
@@ -229,7 +231,6 @@
       },
       "tabs",
       "timelines",
-      "toasts",
       "tooltips",
       "treeview",
       "virtual-scroll"

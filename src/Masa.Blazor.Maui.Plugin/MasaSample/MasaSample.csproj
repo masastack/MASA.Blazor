@@ -47,6 +47,11 @@
       <CodesignProvision>VS: WildCard Development</CodesignProvision>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+      <CodesignKey>Apple Development: Vic Parker (LXZ3399LT9)</CodesignKey>
+      <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    </PropertyGroup>
+
 
     <ItemGroup>
         <!-- App Icon -->

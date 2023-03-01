@@ -67,6 +67,14 @@
 
     public async ValueTask DisposeAsync()
     {
-        await Js.RemoveHtmlElementEventListener("window", "scroll");
+        try
+        {
+            await Js.RemoveHtmlElementEventListener("window", "scroll");
+        }
+        catch (Exception e)
+        {
+            // ignored
+        }
     }
+
 }

@@ -10,9 +10,9 @@ public class SliderParameter
 
     public double Value { get; set; }
 
-    public bool RequieGt0 { get; set; } = true;
+    public bool RequireGt0 { get; set; } = true;
 
-    public bool Condition => RequieGt0 ? Value > 0 : true;
+    public bool Condition => RequireGt0 ? Value > 0 : true;
 
     public SliderParameter(double value)
     {
@@ -29,7 +29,7 @@ public class SliderParameter
     {
         Min = min;
         Max = max;
-        RequieGt0 = requireGt0;
+        RequireGt0 = requireGt0;
     }
 
     public SliderParameter(double value, double min, double max, double step) : this(value, min, max)

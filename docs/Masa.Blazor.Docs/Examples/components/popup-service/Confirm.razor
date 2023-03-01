@@ -1,21 +1,10 @@
 ﻿@inject IPopupService PopupService
 
-<MAlert Type="AlertTypes.Info">
-    <div>
-        在 <code>MApp</code> 组件通过 <code>ConfirmParameters</code> 设置Confirm的默认样式和行为。
-    </div>
-    <div>
-        例如：<code>ConfirmParameters="@@("param => { param.OkText = "Confirm"; })"</code>。
-    </div>
-</MAlert>
-
-<MDivider Class="my-4" />
-
 <MButton OnClick="ShowBasic">Basic Confirm</MButton>
 
 <MDivider Class="my-4" />
 
-<MRadioGroup @bind-Value="alertType">
+<MRadioGroup @bind-Value="alertType" Row>
     <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
     <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
     <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
@@ -71,13 +60,13 @@
                         throw new Exception("something wrong!");
                     }
 
-                    await PopupService.AlertAsync("Handle onOk successfully!", AlertTypes.Success);
+                    await PopupService.EnqueueSnackbarAsync("Handle onOk successfully!", AlertTypes.Success);
                 }
                 catch (Exception e)
                 {
                     args.Cancel();
 
-                    await PopupService.AlertAsync(e);
+                    await PopupService.EnqueueSnackbarAsync(e, true);
                 }
             });
     }
@@ -99,11 +88,11 @@
     {
         if (confirmed)
         {
-            await PopupService.AlertAsync("Ok was clicked!", AlertTypes.Info);
+            await PopupService.EnqueueSnackbarAsync("Ok was clicked!", AlertTypes.Info);
         }
         else
         {
-            await PopupService.AlertAsync("Cancel was clicked!", AlertTypes.Warning);
+            await PopupService.EnqueueSnackbarAsync("Cancel was clicked!", AlertTypes.Warning);
         }
     }
 
