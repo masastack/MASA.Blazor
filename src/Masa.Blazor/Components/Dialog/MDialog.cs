@@ -45,7 +45,7 @@
         protected override bool IsFullscreen => Fullscreen && MasaBlazor.Breakpoint.SmAndDown;
 
         public override IEnumerable<string> DependentSelectors
-            => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" });
+            => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" }).Distinct();
 
         protected override void SetComponentClass()
         {
