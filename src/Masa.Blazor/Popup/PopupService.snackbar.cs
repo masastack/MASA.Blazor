@@ -17,7 +17,7 @@ public partial class PopupService
         await EnqueueSnackbarAsync(new SnackbarOptions(title, content, type, closeable, timeout));
     }
 
-    public async Task EnqueueSnackbarAsync(Exception exception, bool withStackTrace, bool closeable = false, int timeout = 5000)
+    public async Task EnqueueSnackbarAsync(Exception exception, bool withStackTrace = false, bool closeable = false, int timeout = 5000)
     {
         if (withStackTrace)
         {

@@ -23,10 +23,10 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   ```
 - The **PConfirm** has been removed now, use `IPopupService.ConfirmAsync` instead.
 - **MHover** removes the `Class` and `Style` properties of `Context`.
-- **MErrorHandler** removes the parameter `ShowAlert`, uses `PopupType` instead:
+- **MErrorHandler** removes the `ShowAlert` parameter, uses `PopupType` instead. And removes the `OnErrorHandleAsync` parameter, use `OnHandle` instead. `OnHandle` would overrides the default error handler. Use `OnAfterHandle` if you only want to do something else after handling an error.
   ```diff
   - <MErrorHandler ShowAlert="false"></MErrorHandler>
-  + <MErrorHandler PopupType="ErrorPopupType.None"></MErrorHandler>
+  + <MErrorHandler PopupType="ErrorPopupType.None" OnHandle="" OnAfterHandle=""></MErrorHandler>
   ```
 - Removed the **PToasts** component, and use the **PEnqueuedSnackbars** component instead.
 - **PopupService** removes `AlertAsync` 和 `ToastAsync`, and use `EnqueueSnackbarAsync` instead.

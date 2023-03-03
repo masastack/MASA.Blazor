@@ -1,0 +1,22 @@
+﻿@inherits Masa.Blazor.Popup.Components.PopupComponentBase
+
+<MDialog Value="Visible" MaxWidth="360">
+    <MAlert Class="mb-0" Type="@Type" Dismissible Value="Visible" ValueChanged="ValueChanged">@Content</MAlert>
+</MDialog>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Content { get; set; }
+
+    [Parameter]
+    public AlertTypes Type { get; set; }
+
+    private async Task ValueChanged(bool val)
+    {
+        Visible = val;
+
+        await ClosePopupAsync();
+    }
+
+}
