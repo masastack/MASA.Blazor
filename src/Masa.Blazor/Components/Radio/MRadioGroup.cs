@@ -16,7 +16,7 @@
         protected override void OnValueChanged(TValue val)
         {
             base.OnValueChanged(val);
-            this.Toggle(val).Wait();
+            _ = Toggle(val);
         }
 
         protected override void SetComponentClass()
