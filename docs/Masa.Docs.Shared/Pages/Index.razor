@@ -2,6 +2,58 @@
 @layout MainLayout
 @inject DocService DocService
 @inject I18n I18n
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+
+<MNavigationDrawer Right="false"
+                          App
+                          Floating
+                   Width="300"
+                          Permanent
+                          Light
+                          Class="overview-y"
+                          Clipped>
+    <ChildContent>
+        <MListItem>
+            <MListItemContent>
+                <MSelect Items="_versions"
+                         @bind-Value="@selectVersion"
+                         Class="change-border-color"
+                         ItemText="u => u"
+                         ItemValue="u => u"
+                         HideDetails="true"
+                          Outlined
+                          Dense></MSelect>
+            </MListItemContent>
+        </MListItem>
+        <MDivider></MDivider>
+
+        <MList Dense>
+            <MListItemGroup Color="primary">
+                <MListItem @onclick='(()=>ScrollIntoView("getting-started"))' Exact Class="m-list-item--default">
+                    <MListItemIcon Style="height:48px;margin-left: 6px;margin-right: 18px;">
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                {
+                    <MListItem @onclick="(()=>ScrollIntoView(project))" Exact Class="m-list-item--default">
+                    <MListItemAvatar Tile>
+                        @Image(project)
+                    </MListItemAvatar>
+
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                }
+            </MListItemGroup>
+        </MList>
+    </ChildContent>
+</MNavigationDrawer>
 
 <MContainer Fluid>
     <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
@@ -14,7 +66,7 @@
         }
         else
         {
-            <div class="project">
+            <div class="project" id="getting-started">
                 <div class="heading-5 mb-6 d-flex align-center">
                     <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
                     @I18n.T("getting-started")
@@ -24,7 +76,7 @@
 
             @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
             {
-                <div class="project">
+                <div class="project" id="@project">
                     <div class="heading-5 mb-6 d-flex align-center">
                         @Image(project)
                         @I18n.T("product", project)
@@ -73,6 +125,13 @@
         ("why-masa-blazor", "/blazor/introduction/why-masa-blazor"),
         ("kubernetes-deploy", "/stack/operations/kubernetes/kubernetes-deploy")
     };
+
+    private List<string> _versions = new List<string>
+    {
+        "1.0",
+    };
+
+    private string selectVersion = "1.0";
 
     private static RenderFragment Image(string project) => __builder =>
     {
@@ -137,8 +196,8 @@
                 <div class="project-content__title">@I18n.T(group)</div>
             }
             <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-                <MRow Dense NoGutters>
-                    @foreach (var (title, href) in items)
+            <MRow Dense NoGutters>
+                @foreach (var (title, href) in items)
                     {
                         <MCol Cols="4" Class="rounded text-truncate">
                             @LinkableTitle(title, href)
@@ -153,5 +212,16 @@
     {
         <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
+
+    private async Task ScrollIntoView(string elementId)
+    {
+        // TODO: remove the following lines when #40190 of aspnetcore resolved.
+        // TODO: Blazor now does not support automatic scrolling of anchor points.
+        // Check this when .NET 8 released.
+
+        await JsRuntime.InvokeVoidAsync("setHash");
+        NavigationManager.ReplaceWithHash($"#{elementId}");
+        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+    }
 
 }

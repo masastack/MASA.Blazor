@@ -502,3 +502,7 @@ default-app-markup {
 .doc-markdown-body > section section {
     margin-bottom: 3rem;
 }
+
+.change-border-color .m-input__slot fieldset {
+    border-color: rgba(0,0,0,.12) !important;
+}
