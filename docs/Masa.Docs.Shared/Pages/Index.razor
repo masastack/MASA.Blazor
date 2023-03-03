@@ -1,5 +1,5 @@
 ﻿@page "/"
-@layout MainLayout
+@layout BaseLayout
 @inject DocService DocService
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
@@ -11,7 +11,7 @@
                    Width="300"
                           Permanent
                           Light
-                          Class="overview-y"
+                   Class="overview-y"
                           Clipped>
     <ChildContent>
         <MListItem>
@@ -55,62 +55,64 @@
     </ChildContent>
 </MNavigationDrawer>
 
-<MContainer Fluid>
-    <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
-        @if (_loading)
-        {
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-        }
-        else
-        {
-            <div class="project" id="getting-started">
-                <div class="heading-5 mb-6 d-flex align-center">
-                    <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
-                    @I18n.T("getting-started")
-                </div>
-                @ProductCard(s_gettingStartedNavs)
-            </div>
-
-            @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+<MMain>
+    <MContainer Fluid>
+        <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
+            @if (_loading)
             {
-                <div class="project" id="@project">
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            }
+            else
+            {
+                <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
-                        @Image(project)
-                        @I18n.T("product", project)
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        @I18n.T("getting-started")
                     </div>
+                    @ProductCard(s_gettingStartedNavs)
+                </div>
 
-                    @{
-                        var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
-                        var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
-                        if (groupNavsWithoutChildren is not null)
-                        {
-                            @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
-                        }
+                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                {
+                    <div class="project" id="@project">
+                        <div class="heading-5 mb-6 d-flex align-center">
+                            @Image(project)
+                            @I18n.T("product", project)
+                        </div>
 
-                        var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
-                        if (groupNavsWithChildren is not null)
-                        {
-                            foreach (var navItem in groupNavsWithChildren)
+                        @{
+                            var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
+                            var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
+                            if (groupNavsWithoutChildren is not null)
                             {
-                                if (navItem.Tiling is NavItemTiling.Invisible)
+                                @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
+                            }
+
+                            var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
+                            if (groupNavsWithChildren is not null)
+                            {
+                                foreach (var navItem in groupNavsWithChildren)
                                 {
-                                    continue;
+                                    if (navItem.Tiling is NavItemTiling.Invisible)
+                                    {
+                                        continue;
+                                    }
+
+                                    var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                                    @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                                 }
-
-                                var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
-
-                                @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                             }
                         }
-                    }
-                </div>
+                    </div>
+                }
             }
-        }
-    </MResponsive>
-</MContainer>
+        </MResponsive>
+    </MContainer>
+</MMain>
 
 @code {
 
