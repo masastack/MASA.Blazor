@@ -9,23 +9,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Component", "2 - Compon
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product Docs", "Product Docs", "{214C29AE-7E61-4087-9B0A-F2CA9A03006D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.SourceGenerator.Docs.ApiGenerator", "src\Masa.Blazor.SourceGenerator.Docs.ApiGenerator\Masa.Blazor.SourceGenerator.Docs.ApiGenerator.csproj", "{D90A59F0-2242-4CD9-8F0A-9CCC140DC1D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SourceGenerator.Docs.ApiGenerator", "src\Masa.Blazor.SourceGenerator.Docs.ApiGenerator\Masa.Blazor.SourceGenerator.Docs.ApiGenerator.csproj", "{D90A59F0-2242-4CD9-8F0A-9CCC140DC1D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent", "src\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{A26B0575-A04B-45AD-BDCD-9D526C9BA387}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponent", "src\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{A26B0575-A04B-45AD-BDCD-9D526C9BA387}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{143D6DBA-B26D-4336-AFF9-EAF9381A32AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{143D6DBA-B26D-4336-AFF9-EAF9381A32AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Framework.Docs", "docs\MASA.Docs\src\Masa.Framework.Docs\Masa.Framework.Docs.csproj", "{9CF342BF-C6B8-4D6A-BCF9-3CF51F2E5742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Framework.Docs", "docs\MASA.Docs\src\Masa.Framework.Docs\Masa.Framework.Docs.csproj", "{9CF342BF-C6B8-4D6A-BCF9-3CF51F2E5742}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Stack.Docs", "docs\MASA.Docs\src\Masa.Stack.Docs\Masa.Stack.Docs.csproj", "{587736B8-88E4-4490-938F-938E61E6BC47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Stack.Docs", "docs\MASA.Docs\src\Masa.Stack.Docs\Masa.Stack.Docs.csproj", "{587736B8-88E4-4490-938F-938E61E6BC47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Test", "1 - Test", "{5512BB36-2B84-4BB9-B102-C644E3EF5212}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Development", "3 - Development", "{00B4BEE6-3D40-4E40-8B23-D238DCE75F36}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{339BA27B-6C25-4909-9105-D92FC4BB68EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{339BA27B-6C25-4909-9105-D92FC4BB68EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9 - Solution Itms", "9 - Solution Itms", "{6C182DFB-BEED-4970-BDF8-2988032AB445}"
 	ProjectSection(SolutionItems) = preProject
@@ -63,15 +63,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGenerator", "ApiGenerator", "{54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Core", "docs\Masa.Docs.Core\Masa.Docs.Core.csproj", "{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Core", "docs\Masa.Docs.Core\Masa.Docs.Core.csproj", "{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Docs", "docs\Masa.Blazor.Docs\Masa.Blazor.Docs.csproj", "{B278FBED-F723-4651-B8EE-2F7C2AE59C91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs", "docs\Masa.Blazor.Docs\Masa.Blazor.Docs.csproj", "{B278FBED-F723-4651-B8EE-2F7C2AE59C91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Shared", "docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{DEFB408C-5D0E-437F-9FAC-508BBDE255A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Shared", "docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{DEFB408C-5D0E-437F-9FAC-508BBDE255A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Server", "docs\Masa.Docs.Server\Masa.Docs.Server.csproj", "{4C9C8096-1803-4DA4-B37F-976B76D9F6AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Server", "docs\Masa.Docs.Server\Masa.Docs.Server.csproj", "{4C9C8096-1803-4DA4-B37F-976B76D9F6AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.WebAssembly", "docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj", "{205A7827-829B-4A35-9796-48F5705499FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.WebAssembly", "docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj", "{205A7827-829B-4A35-9796-48F5705499FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,7 +133,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{214C29AE-7E61-4087-9B0A-F2CA9A03006D} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
-		{D90A59F0-2242-4CD9-8F0A-9CCC140DC1D1} = {54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}
 		{A26B0575-A04B-45AD-BDCD-9D526C9BA387} = {316905B8-A702-4A0A-970A-6A663DEC29F6}
 		{143D6DBA-B26D-4336-AFF9-EAF9381A32AD} = {316905B8-A702-4A0A-970A-6A663DEC29F6}
 		{9CF342BF-C6B8-4D6A-BCF9-3CF51F2E5742} = {214C29AE-7E61-4087-9B0A-F2CA9A03006D}
@@ -144,6 +143,7 @@ Global
 		{AE37A9DA-AF06-45D4-A691-7D922017B57D} = {D55C6F9E-03F1-4513-B944-154FB018F444}
 		{4234D98C-4DCA-404D-AE9D-EB9DC91FC8DC} = {D55C6F9E-03F1-4513-B944-154FB018F444}
 		{54AFCA2A-8CF8-4FDE-8DF5-53C42053A611} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
+		{D90A59F0-2242-4CD9-8F0A-9CCC140DC1D1} = {54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
 		{B278FBED-F723-4651-B8EE-2F7C2AE59C91} = {214C29AE-7E61-4087-9B0A-F2CA9A03006D}
 		{DEFB408C-5D0E-437F-9FAC-508BBDE255A7} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
