@@ -5,33 +5,30 @@
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
 
-<MNavigationDrawer Right="false"
-                          App
-                          Floating
+<MNavigationDrawer App
+                   Floating
                    Width="300"
-                          Permanent
-                          Light
-                   Class="overview-y"
-                          Clipped>
+                   Clipped>
     <ChildContent>
         <MListItem>
             <MListItemContent>
                 <MSelect Items="_versions"
                          @bind-Value="@selectVersion"
-                         Class="change-border-color"
+                         Class="light-border"
                          ItemText="u => u"
                          ItemValue="u => u"
                          HideDetails="true"
-                          Outlined
-                          Dense></MSelect>
+                         Outlined
+                         Dense>
+                </MSelect>
             </MListItemContent>
         </MListItem>
         <MDivider></MDivider>
 
-        <MList Dense>
-            <MListItemGroup Color="primary">
-                <MListItem @onclick='(()=>ScrollIntoView("getting-started"))' Exact Class="m-list-item--default">
-                    <MListItemIcon Style="height:48px;margin-left: 6px;margin-right: 18px;">
+        <MList Class="doc-list-nav">
+            <MListItemGroup>
+                <MListItem OnClick='() => ScrollIntoView("getting-started")'>
+                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
                         <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
                     </MListItemIcon>
                     <MListItemContent>
@@ -40,15 +37,15 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem @onclick="(()=>ScrollIntoView(project))" Exact Class="m-list-item--default">
-                    <MListItemAvatar Tile>
-                        @Image(project)
-                    </MListItemAvatar>
+                    <MListItem OnClick="(() => ScrollIntoView(project))">
+                        <MListItemAvatar Tile>
+                            @Image(project)
+                        </MListItemAvatar>
 
-                    <MListItemContent>
-                        <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
-                    </MListItemContent>
-                </MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
                 }
             </MListItemGroup>
         </MList>
@@ -200,10 +197,10 @@
                 <div class="project-content__title">@I18n.T(group)</div>
             }
             <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-            <MRow Dense NoGutters>
-                @foreach (var (title, href) in items)
+                <MRow Dense NoGutters>
+                    @foreach (var (title, href) in items)
                     {
-                        <MCol Cols="4" Class="rounded text-truncate">
+                        <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
                             @LinkableTitle(title, href)
                         </MCol>
                     }

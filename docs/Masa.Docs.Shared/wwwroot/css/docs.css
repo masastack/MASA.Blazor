@@ -331,15 +331,15 @@ a.text-dec-none {
         min-width: 0 !important;
     }
 
-    .doc-list-nav a.m-list-item--active .m-list-item__title {
+    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__title {
         color: #fff;
     }
 
-    .doc-list-nav a.m-list-item--active .m-list-item__subtitle {
+    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__subtitle {
         color: rgb(255 255 255 / 60%) !important;
     }
 
-    .doc-list-nav a.m-list-item--active {
+    .doc-list-nav .m-list-item--active:not(.m-list-group__header) {
         background-color: #4318FF;
         color: #fff !important;
     }
@@ -464,11 +464,6 @@ app-alert p {
 }
 
 @media screen and (max-width: 600px) {
-    .text-truncate.m-btn {
-        max-width: 110px;
-        width: auto;
-    }
-
     .text-truncate .m-btn__content {
         white-space: nowrap !important;
         overflow: hidden !important;
@@ -503,6 +498,6 @@ default-app-markup {
     margin-bottom: 3rem;
 }
 
-.change-border-color .m-input__slot fieldset {
+.m-select.light-border .m-input__slot fieldset {
     border-color: rgba(0,0,0,.12) !important;
 }
