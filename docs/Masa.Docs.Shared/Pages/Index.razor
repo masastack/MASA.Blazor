@@ -187,6 +187,8 @@
             _loading = false;
 
             StateHasChanged();
+
+            await LocationHashPositionAsync(NavigationManager.Uri);
         }
     }
 
@@ -226,4 +228,12 @@
         await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
     }
 
+    private async Task LocationHashPositionAsync(string url)
+    {
+        var uri = new Uri(url);
+        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        {
+            await ScrollIntoView(uri.Fragment.Substring(1));
+        }
+    }
 }
