@@ -70,13 +70,7 @@ namespace Masa.Blazor
 
                             if (!Link) return false;
 
-                            if (Value == null) return false;
-
-                            if (ItemGroup == null) return false;
-
-                            if (ItemGroup.Multiple) return ItemGroup.Values.Contains(Value);
-
-                            return ItemGroup.Value == Value;
+                            return false;
                         })
                         .AddIf("m-list-item--highlighted", () => Highlighted)
                         .AddTextColor(Color)
