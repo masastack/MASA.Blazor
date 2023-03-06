@@ -1,0 +1,77 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Class="pt-2"
+                   Width="240"
+                   Fixed
+                   Floating
+                   Temporary>
+    <MList Nav @key="Value">
+        <MListItemGroup>
+            <MListItem>
+                <MListItemContent>
+                    <MSelect Items="Versions"
+                             @bind-Value="@CurrentSelectVersion"
+                             Class="light-border"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             HideDetails="true"
+                             Outlined
+                             Dense>
+                    </MSelect>
+                </MListItemContent>
+            </MListItem>
+            <MDivider></MDivider>
+
+            <MListItem OnClick='() => ScrollIntoView("getting-started")'>
+                <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
+                    <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            @foreach (var (project, navs) in ProjectNavs.OrderByDescending(u => u.Key))
+            {
+                <MListItem OnClick="(() => ScrollIntoView(project))">
+                    <MListItemAvatar Tile>
+                    @ToImage(project)
+                </MListItemAvatar>
+
+                <MListItemContent>
+                    <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            }
+
+        </MListItemGroup>
+    </MList>
+</MNavigationDrawer>
+
+@code {
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    [Parameter]
+    public List<string> Versions { get; set; }
+
+    [Parameter]
+    public string CurrentSelectVersion { get; set; }
+
+    [Parameter]
+    public Dictionary<string, List<NavItem>> ProjectNavs { get; set; }
+
+    [Parameter]
+    public Func<string,Task> ScrollIntoView { get; set; }
+
+    [Parameter]
+    public Func<string, RenderFragment> ToImage { get; set; }
+}

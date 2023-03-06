@@ -6,9 +6,9 @@
 @inject NavigationManager NavigationManager
 
 <MNavigationDrawer App
-                   Floating
+                          Floating
                    Width="300"
-                   Clipped>
+                          Clipped>
     <ChildContent>
         <MListItem>
             <MListItemContent>
@@ -18,8 +18,8 @@
                          ItemText="u => u"
                          ItemValue="u => u"
                          HideDetails="true"
-                         Outlined
-                         Dense>
+                          Outlined
+                          Dense>
                 </MSelect>
             </MListItemContent>
         </MListItem>
@@ -39,18 +39,20 @@
                 {
                     <MListItem OnClick="(() => ScrollIntoView(project))">
                         <MListItemAvatar Tile>
-                            @Image(project)
-                        </MListItemAvatar>
+                        @Image(project)
+                    </MListItemAvatar>
 
-                        <MListItemContent>
-                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
-                        </MListItemContent>
-                    </MListItem>
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
                 }
             </MListItemGroup>
         </MList>
     </ChildContent>
 </MNavigationDrawer>
+
+<MobileIndexNavMenuList @bind-Value="_showMobileIndexNavMenuList" CurrentSelectVersion="@selectVersion" Versions="_versions" ProjectNavs="_projectToNavs" ScrollIntoView="ScrollIntoView" ToImage="Image" />
 
 <MMain>
     <MContainer Fluid>
@@ -132,6 +134,8 @@
 
     private string selectVersion = "1.0";
 
+    private bool _showMobileIndexNavMenuList;
+
     private static RenderFragment Image(string project) => __builder =>
     {
         string? src = null;
@@ -186,6 +190,8 @@
             StateHasChanged();
 
             await LocationHashPositionAsync(NavigationManager.Uri);
+
+            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
         }
     }
 
@@ -197,8 +203,8 @@
                 <div class="project-content__title">@I18n.T(group)</div>
             }
             <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-                <MRow Dense NoGutters>
-                    @foreach (var (title, href) in items)
+            <MRow Dense NoGutters>
+                @foreach (var (title, href) in items)
                     {
                         <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
                             @LinkableTitle(title, href)
