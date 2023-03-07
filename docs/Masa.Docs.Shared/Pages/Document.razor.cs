@@ -52,7 +52,7 @@ public partial class Document : IDisposable
                 "blazor" =>
                     $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture.Name}.md",
                 "framework" or "stack" =>
-                    $"https://github.com/masastack/MASA.Docs/blob/main/docs/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture.Name}.md",
+                    $"https://github.com/masastack/MASA.Docs/blob/main/src/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture.Name}.md",
                 _ => string.Empty
             };
         }

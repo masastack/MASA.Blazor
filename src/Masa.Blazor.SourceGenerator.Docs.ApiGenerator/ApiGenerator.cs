@@ -169,7 +169,24 @@ public class ApiGenerator : IIncrementalGenerator
                     var defaultValueAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == DefaultValueAttributeName);
                     if (defaultValueAttribute is not null)
                     {
-                        defaultValue = defaultValueAttribute.ConstructorArguments.First().Value?.ToString();
+                        var typeConstant = defaultValueAttribute.ConstructorArguments.First();
+                        if (typeConstant.Kind == TypedConstantKind.Enum && !typeConstant.IsNull && typeConstant.Type != null)
+                        {
+                            var str = typeConstant.Value?.ToString();
+
+                            if (int.TryParse(str, out var index))
+                            {
+                                defaultValue = typeConstant.Type.GetMembers()[index].Name;
+                            }
+                            else
+                            {
+                                defaultValue = str;
+                            }
+                        }
+                        else
+                        {
+                            defaultValue = typeConstant.Value?.ToString();
+                        }
                     }
 
                     var typeText = GetTypeText(type);

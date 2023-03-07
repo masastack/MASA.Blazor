@@ -33,7 +33,7 @@ window.setHash = function () {
 }
 
 /*
- * NavigationMananger.NavigateTo always scrolls page to the top.
+ * NavigationManager.NavigateTo always scrolls page to the top.
  * The following `window.scrollTo` would be invoked.
  * When NavigationManager.NavigateTo invoked, the x and y is zero.
  */

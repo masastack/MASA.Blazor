@@ -64,7 +64,11 @@
 
 .m-application code {
     background-color: unset !important;
-    padding: 0 .4rem !important;
+    padding: 0 .4em !important;
+}
+
+.m-application .api-table code {
+    padding: .2em .4em !important;
 }
 
 .text-mono {

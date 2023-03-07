@@ -5,7 +5,7 @@ namespace Masa.Blazor.Presets
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
         [Parameter]
-        [ApiDefaultValue(nameof(SnackPosition.BottomCenter))]
+        [ApiDefaultValue(SnackPosition.BottomCenter)]
         public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
 
         [Parameter]
