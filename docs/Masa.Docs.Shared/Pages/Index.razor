@@ -6,9 +6,10 @@
 @inject NavigationManager NavigationManager
 
 <MNavigationDrawer App
-                          Floating
+                   Floating
                    Width="300"
-                          Clipped>
+                   @bind-Value="_showMobileIndexNavMenuList"
+                   Clipped>
     <ChildContent>
         <MListItem>
             <MListItemContent>
@@ -51,8 +52,6 @@
         </MList>
     </ChildContent>
 </MNavigationDrawer>
-
-<MobileIndexNavMenuList @bind-Value="_showMobileIndexNavMenuList" CurrentSelectVersion="@selectVersion" Versions="_versions" ProjectNavs="_projectToNavs" ScrollIntoView="ScrollIntoView" ToImage="Image" />
 
 <MMain>
     <MContainer Fluid>
