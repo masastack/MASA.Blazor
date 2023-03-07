@@ -43,15 +43,20 @@ related:
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### 验证集合
+#### 通过 DataAnnotations 验证集合
 
-验证集合属性,请注意在集合属性上添加 [EnumerableValidation] Attribute
+验证集合属性，请注意在集合属性上添加 `[EnumerableValidation]` 属性。
 
 <masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
 
 #### 通过 FluentValidation 验证集合
 
-**MForm** 支持 **FluentValidation** 验证集合
+**MForm** 支持 **FluentValidation** 验证集合。
 
 <masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>
 
+#### 解析 ValidationResult
+
+**MForm** 支持解析 `ValidationResult`，用户可以将服务端表单验证返回的 `ValidationResult` 作为 `FormContext.ParseFormValidation` 的参数，将验证结果在前端表单展示,以验证集合为示例。
+
+<masa-example file="Examples.components.forms.ValidationEnumerableWithValidationResult"></masa-example>

@@ -43,14 +43,20 @@ Enable I18n to support multilingual validation messages.How to use `II8n` please
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### Validation enumerable
+#### Validation enumerable(DataAnnotations)
 
-Verify the collection properties and add [enumerable validation]
+Verify the collection properties and add `[EnumerableValidation]`.
 
 <masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
 
 #### Validation enumerable(FluentValidation)
 
-**MForm** supports FluentValidation validation, take validation collection as an example
+**MForm** supports FluentValidation validation, take validation collection as an example.
 
 <masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>
+
+#### Parse ValidationResult
+
+**MForm** supports parsing of `ValidationResult` , which users can use as `FormContext.ParseFormValidation' parameter that displays the validation results in a front-end form, using the validation collection as an example.
+
+<masa-example file="Examples.components.forms.ValidationEnumerableWithValidationResult"></masa-example>
