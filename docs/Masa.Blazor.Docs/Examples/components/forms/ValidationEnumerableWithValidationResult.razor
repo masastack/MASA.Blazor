@@ -14,10 +14,11 @@
             </MCardText>
         </MCard>
     }
-    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
+    <MButton OnClick="() => SubmitOrder(context)" Color="success">Validate</MButton>
 </MForm>
 
 @code {
+
     class OrderDetail
     {
         public int Id { get; set; }
@@ -63,20 +64,17 @@
 
     private OrderDetail _orderDetail = new()
     {
-        Category = new Category 
-        {
-
-        },
+        Category = new Category(),
         Customers = new List<Customer>
         {
-            new Customer
+            new()
             {
-                Id=1,
+                Id = 1,
                 Name = "customer"
             },
-            new Customer
+            new()
             {
-                Id=1,
+                Id = 1,
                 Name = "customer"
             }
         }
@@ -84,12 +82,13 @@
 
     public void SubmitOrder(FormContext context)
     {
-        if(context.Validate() && _orderDetail.Customers[0].Name == _orderDetail.Customers[1].Name)
+        if (context.Validate() && _orderDetail.Customers[0].Name == _orderDetail.Customers[1].Name)
         {
             var validationResult = @"Validation failed: 
                     -- Customers[0].Name: 'Name' cannot be repeated. Severity: Error
                     -- Customers[1].Name: 'Name' cannot be repeated. Severity: Error";
             context.TryParseFormValidation(validationResult);
-        }       
+        }
     }
+
 }
