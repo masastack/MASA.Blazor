@@ -301,6 +301,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             InputSlotAttrs = MMenu.ActivatorAttributes;
             MMenu.AfterShowContent ??= OnMenuAfterShowContent;
+
+            if (OutsideClickJSModule != null)
+            {
+                _ = OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector());
+            }
+
             StateHasChanged();
         }
     }
@@ -322,11 +328,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         if (isLazyContent)
         {
             OnMenuActiveChange(true);
-        }
 
-        if (OutsideClickJSModule is { Initialized: false } && MMenu.ContentElement.Context is not null)
-        {
-            await OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+            if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
+            {
+                OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+            }
         }
     }
 

@@ -152,7 +152,7 @@ namespace Masa.Blazor
         {
             if (val)
             {
-                // TODO: input.select()
+                await JsInvokeAsync(JsInteropConstants.Select, InputElement);
             }
             else
             {
@@ -187,12 +187,12 @@ namespace Masa.Blazor
 
             var value = args.Value?.ToString();
 
-            if (value is not null)
+            if (!string.IsNullOrEmpty(value))
             {
                 ActivateMenu();
             }
 
-            if (!Multiple && string.IsNullOrEmpty(value))
+            if (!Multiple && value == "")
             {
                 await DeleteCurrentItem();
             }
