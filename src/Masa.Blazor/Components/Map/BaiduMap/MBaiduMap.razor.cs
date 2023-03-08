@@ -1,6 +1,4 @@
-﻿using BlazorComponent.Attributes;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks, IAsyncDisposable
     {
@@ -190,6 +188,12 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback OnResize { get; set; }
 
+        [Parameter]
+        public EventCallback<float> ZoomChanged { get; set; }
+
+        [Parameter]
+        public EventCallback<GeoPoint> CenterChanged { get; set; }
+
         public async ValueTask HandleOnMapTypeChanged()
         {
             _maptypeChangedInJs = true;
@@ -209,6 +213,7 @@ namespace Masa.Blazor
         {
             _centerChangedInJs = true;
             Center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
+            await CenterChanged.InvokeAsync(Center);
             await OnMoving.InvokeAsync();
         }
 
@@ -216,6 +221,7 @@ namespace Masa.Blazor
         {
             _zoomChangedInJs = true;
             Zoom = await _baiduMap.TryInvokeAsync<float>("getZoom");
+            await ZoomChanged.InvokeAsync(Zoom);
             await OnZoomEnd.InvokeAsync();
         }
 
