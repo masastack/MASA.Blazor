@@ -73,7 +73,7 @@ When using the `InvertedScroll` property, the bar will hide until the user scrol
 past the threshold, the `MAppBar` will continue to display until the users scrolls up past the threshold. If no **
 ScrollThreshold** value is supplied a default value of 0 will be used.
 
-<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.Inverted"></masa-example>
 
 #### Prominent
 
