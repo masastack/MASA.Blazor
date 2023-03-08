@@ -353,7 +353,16 @@ public partial class CronItem
 
     private void InitCronType()
     {
-        CronItemDataModel cronItemData = new();
+        CronItemDataModel cronItemData = new()
+        {
+            PeriodStart = _minUnit,
+            PeriodEnd = 2,
+            StartFromPeriod = _minUnit,
+            StartEveryPeriod = 1,
+            NearestOfDay = _minUnit,
+            LastPeriodOfWeek = _minUnit,
+            SelectWeekNumber = WeekNumbers.First
+        };
         switch (_selectedCronType)
         {
             case CronTypes.Range:
