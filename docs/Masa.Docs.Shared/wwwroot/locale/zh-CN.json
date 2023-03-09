@@ -455,7 +455,7 @@
     "mobile-picker-views": "专为移动设备设计的选择视图",
     "mobile-time-pickers": "专为移动设备设计的时间选择器",
     "modals": "需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 Modal 在当前页面正中打开一个浮层，承载相应的操作",
-    "monaco-editor": " Monaco Editor 是 VS Code 底层的代码编辑器",
+    "monaco-editor": "Monaco editor 是 VS Code 底层的代码编辑器",
     "navigation-drawers": "Navigation drawers（导航抽屉）包含主要应用程序导航链接",
     "not-grouped": "Not Grouped（未分组的）",
     "overlays": "用于强调特定元素或其中的一部分",
