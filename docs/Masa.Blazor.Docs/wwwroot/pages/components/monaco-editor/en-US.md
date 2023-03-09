@@ -1,5 +1,5 @@
 ---
-title: Monaco Editor
+title: Monaco editor
 desc: "[monaco-editor](https://microsoft.github.io/monaco-editor/)"
 tag: "JsProxy"
 ---
