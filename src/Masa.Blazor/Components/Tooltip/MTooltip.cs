@@ -5,7 +5,7 @@
         [Parameter]
         public string ContentStyle { get; set; }
 
-        protected override string AttachSelector => ".m-application";
+        protected override string? DefaultAttachSelector => ".m-application";
 
         ElementReference ITooltip.ContentElement
         {
