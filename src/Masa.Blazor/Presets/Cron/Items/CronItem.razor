@@ -91,13 +91,13 @@
                         @I18n.T("$masaBlazor.cron.specify")
                         <MSelect Value="@_cronItemData.SpecifyPeriods" TValue="List<int>" TItem="int" TItemValue="int" ValueChanged="OnSpecifyPeriodChanged"
                              Items="@_allPeriodList"
-                                          Outlined
+                             Outlined
                              HideDetails="true"
-                                          Dense
+                             Dense
                              ItemText="u => u.ToString().PadLeft(2, '0')"
                              ItemValue="u => u"
-                                          Multiple
-                                          Chips>
+                             Multiple
+                             Chips>
                         </MSelect>
                     </div>
                 </LabelContent>
