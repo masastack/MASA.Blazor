@@ -8,7 +8,7 @@ tag: "JS代理"
 
 <masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
 
-## js文件
+在使用脚本之前，请参考:
 
 ```html
 <script>
