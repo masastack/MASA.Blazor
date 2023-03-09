@@ -19,6 +19,8 @@ related:
 
 #### Color
 
+The full list of options can be found here [monaco-editor](https://microsoft.github.io/monaco-editor/docs.html)。
+
 `Color` prop Colored points can create visual breakpoints, making your timeline easier to read.
 
 <masa-example file="Examples.components.timelines.Color"></masa-example>
