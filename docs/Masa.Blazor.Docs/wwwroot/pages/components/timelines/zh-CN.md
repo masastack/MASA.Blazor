@@ -23,6 +23,8 @@ related:
 
 #### 颜色
 
+完整选项列表请移步 [monaco-editor](https://microsoft.github.io/monaco-editor/docs.html)。
+
 使用 `Color` 属性指定颜色可以创建可视的断点，使您的时间轴更容易阅读。
 
 <masa-example file="Examples.components.timelines.Color"></masa-example>

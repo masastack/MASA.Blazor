@@ -341,6 +341,7 @@
     "mobile-picker-views": "A picker designed for the mobile",
     "mobile-time-pickers": "A time picker designed for the mobile",
     "modals": "When requiring users to interact with the application, but without jumping to a new page and interrupting the user's workflow, you can use Modal to create a new floating layer over the current page to get user feedback or display information",
+    "monaco-editor": "Monaco Editor",
     "navigation-drawers": "Navigation drawers contain primary application navigation links",
     "not-grouped": "Not Grouped",
     "overlays": "The Overlays component is used to provide emphasis on a particular element or parts of it",
