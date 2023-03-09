@@ -8,7 +8,7 @@ tag: "JsProxy"
 
 <masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
 
-## js文件
+Reference the script before you use it:
 
 ```html
 <script>
