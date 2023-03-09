@@ -28,7 +28,7 @@
                     <MTextField Value="_cronItemData.PeriodEnd" TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min= _cronItemData.PeriodStart; prop.Max = _maxUnit; }" Dense Outlined HideDetails="true" ValueChanged="OnPeriodEndChanged"></MTextField> @_i18nUnitText
                 </div>
             </LabelContent>
-            </MRadio>
+        </MRadio>
         @if (Period != PeriodTypes.Week)
         {
             <MRadio @key="CronTypes.StartFrom" Value="CronTypes.StartFrom">
@@ -40,7 +40,7 @@
                         @string.Format(I18n.T("$masaBlazor.cron.startFrom.end"), _i18nUnitText)
                     </div>
                 </LabelContent>
-                </MRadio>
+             </MRadio>
             if (Period == PeriodTypes.Day)
             {
                 <MRadio @key="CronTypes.NearestDay" Value="CronTypes.NearestDay">
@@ -50,7 +50,7 @@
                             <MTextField Value="_cronItemData.NearestOfDay" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnNearestOfDayChanged"></MTextField> @I18n.T($"$masaBlazor.cron.nearestDayEnd")
                         </div>
                     </LabelContent>
-                    </MRadio>
+                </MRadio>
 
                 <MRadio @key="CronTypes.LastOfPeriod" Value="CronTypes.LastOfPeriod">
                     <LabelContent>
