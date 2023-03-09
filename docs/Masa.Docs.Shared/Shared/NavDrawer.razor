@@ -1,15 +1,21 @@
 ﻿@inject DocService DocService
 @inject MasaBlazor MasaBlazor
+@inherits NextTickComponentBase
+@implements INavDrawer
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
-                   Id="nav-drawer"
+                   Id="@ElementId"
                    Right="RTL"
                    App
                    Floating
                    Width="300"
                    Clipped>
-    <DefaultList Class="doc-list-nav" Routable Items="Navs" />
+    <CascadingValue Value="this" IsFixed>
+        <DefaultList Class="doc-list-nav"
+                     Routable
+                     Items="Navs" />
+    </CascadingValue>
     <div class="pt-12"></div>
 </MNavigationDrawer>
 
@@ -32,6 +38,8 @@
 
     private string? _lastProject;
     private List<NavItem> Navs { get; set; } = new();
+
+    public string ElementId => "nav-drawer";
 
     protected override async Task OnParametersSetAsync()
     {
