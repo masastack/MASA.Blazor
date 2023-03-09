@@ -29,7 +29,7 @@
                 </div>
             </LabelContent>
             </MRadio>
-            @if (Period != PeriodTypes.Week)
+        @if (Period != PeriodTypes.Week)
         {
             <MRadio @key="CronTypes.StartFrom" Value="CronTypes.StartFrom">
                 <LabelContent>
@@ -41,7 +41,6 @@
                     </div>
                 </LabelContent>
                 </MRadio>
-
             if (Period == PeriodTypes.Day)
             {
                 <MRadio @key="CronTypes.NearestDay" Value="CronTypes.NearestDay">
@@ -73,8 +72,7 @@
                         <MSelect Value="_cronItemData.SelectDayOfWeek" Items="_dayOfWeeks" TItem="DayOfWeek" TItemValue="DayOfWeek" TValue="DayOfWeek" ItemText="i=> GetDayOfWeekI18nString(i)" ItemValue="i=> i" ValueChanged="OnDayOfWeekChanged" Outlined Dense HideDetails="true"></MSelect>  @I18n.T($"$masaBlazor.cron.weekStartFrom.end")
                     </div>
                 </LabelContent>
-                </MRadio>
-
+            </MRadio>
             <MRadio @key="CronTypes.LastOfPeriod" Value="CronTypes.LastOfPeriod">
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
@@ -82,7 +80,7 @@
                         <MTextField Value="_cronItemData.StartFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnLastPeriodOfWeekChanged"></MTextField>
                     </div>
                 </LabelContent>
-                </MRadio>
+            </MRadio>
         }
 
         @if (Period != PeriodTypes.Year)
