@@ -19,6 +19,8 @@ Reference the script before you use it:
 <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.js"></script>
 ```
 
+The full list of options can be found here [monaco-editor](https://microsoft.github.io/monaco-editor/docs.html)。
+
 ## Examples
 
 ### Exposed Colors
