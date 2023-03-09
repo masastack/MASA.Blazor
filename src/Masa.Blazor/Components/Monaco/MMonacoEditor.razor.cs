@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
+public partial class MMonacoEditor : BDomComponentBase
 {
     [Inject] 
     protected MonacoEditorJSModule Module { get; set; }
@@ -32,39 +32,10 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [Parameter] 
     public Action? InitCompleteHandle { get; set; }
 
-    private ElementReference _ref;
-
-    private ElementReference? _prevRef;
-
-    private bool _elementReferenceChanged;
-
     /// <summary>
     /// Monaco
     /// </summary>
     public IJSObjectReference Monaco { get; private set; }
-
-    public virtual ElementReference Ref
-    {
-        get => _ref;
-        set
-        {
-            if (_prevRef.HasValue)
-            {
-                if (_prevRef.Value.Id != value.Id)
-                {
-                    _prevRef = value;
-                    _elementReferenceChanged = true;
-                }
-            }
-            else
-            {
-                _prevRef = value;
-            }
-
-            _ref = value;
-        }
-    }
-
 
     protected override void SetComponentClass()
     {
@@ -161,10 +132,5 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     public async Task AddKeybindingRule(KeybindingRule rule)
     {
         await Module.AddKeybindingRule(rule);
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await Module.DisposeAsync();
     }
 }
