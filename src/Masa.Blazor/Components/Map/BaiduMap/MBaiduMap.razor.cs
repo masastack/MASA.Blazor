@@ -212,16 +212,20 @@
         public async ValueTask HandleOnMoving()
         {
             _centerChangedInJs = true;
-            Center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
-            await CenterChanged.InvokeAsync(Center);
+
+            if (CenterChanged.HasDelegate)
+                await CenterChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter"));
+
             await OnMoving.InvokeAsync();
         }
 
         public async ValueTask HandleOnZoomEnd()
         {
             _zoomChangedInJs = true;
-            Zoom = await _baiduMap.TryInvokeAsync<float>("getZoom");
-            await ZoomChanged.InvokeAsync(Zoom);
+
+            if (ZoomChanged.HasDelegate)
+                await ZoomChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<float>("getZoom"));
+
             await OnZoomEnd.InvokeAsync();
         }
 
