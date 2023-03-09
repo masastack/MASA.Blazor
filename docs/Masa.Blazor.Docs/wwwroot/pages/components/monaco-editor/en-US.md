@@ -1,6 +1,6 @@
 ---
 title: Monaco editor
-desc: "[monaco-editor](https://microsoft.github.io/monaco-editor/)"
+desc: "The [Monaco editor](https://microsoft.github.io/monaco-editor/) is the code editor that powers [VS Code](https://github.com/microsoft/vscode)."
 tag: "JsProxy"
 ---
 
