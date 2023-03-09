@@ -1,0 +1,20 @@
+{
+  "props": {
+    "EditorOptions": "Initialized Options",
+    "Monaco": "The currently created instance of the Monaco Editor",
+    "markdown": "",
+    "placeholder": "",
+    "readOnly": "",
+    "theme": "",
+    "toolbarClass": "",
+    "toolbarStyle": "",
+    "upload": ""
+  },
+  "events": {
+    "InitOptions": "Initializes the Options event",
+    "InitCompleteHandle": "Initialize the completion event"
+  },
+  "contents": {
+    "toolbarContent": ""
+  }
+}

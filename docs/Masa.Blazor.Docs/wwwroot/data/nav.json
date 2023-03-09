@@ -110,6 +110,10 @@
         "state": "new"
       },
       {
+        "title": "monaco-editor",
+        "state": "new"
+      },
+      {
         "title": "error-handler",
         "state": "update"
       },
