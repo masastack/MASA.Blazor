@@ -96,7 +96,7 @@ related:
 
 #### 天气卡片
 
-使用[MListItems]（/blazor/components/lists）和[MSlider]（/brazor/components/滑块），我们可以创建一个独特的天气卡。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。
+使用 [MListItem](/blazor/components/lists) 和 [MSlider](/brazor/components/sliders)，我们可以创建一个独特的天气卡。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。
 
 <masa-example file="Examples.components.cards.WeatherCard"></masa-example>
 
