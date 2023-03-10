@@ -27,7 +27,7 @@
         <MDivider></MDivider>
 
         <MList Class="doc-list-nav">
-            <MListItemGroup @bind-Value="_navigationBarCurrentSelectd" Mandatory>
+            <MListItemGroup @bind-Value="_active" Mandatory>
                 <MListItem OnClick='() => ScrollIntoView("getting-started")'>
                     <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
                         <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
@@ -38,9 +38,9 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem OnClick="(() => ScrollIntoView(project))">
+                    <MListItem OnClick="(() => ScrollIntoView(project))" Value="project">
                         <MListItemAvatar Tile>
-                        @Image(project,_projectImageColorDic[project])
+                        @Image(project,_active)
                         </MListItemAvatar>
 
                     <MListItemContent>
@@ -135,28 +135,21 @@
 
     private bool _showMobileIndexNavMenuList;
 
-    private StringNumber _navigationBarCurrentSelectd;
+    private StringNumber _active;
 
-    private Dictionary<string, string> _projectImageColorDic = new Dictionary<string, string>
-    {
-        { "blazor",""},
-        { "framework",""},
-        { "stack",""},
-    };
-
-    private static RenderFragment Image(string project,string color="") => __builder =>
+    private static RenderFragment Image(string project, StringNumber? currentSelectProject = null) => __builder =>
     {
         string? src = null;
         switch (project)
         {
             case "blazor":
-                src = $"http://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(string.IsNullOrEmpty(color) ? "" : $"-{color}")}.png?x-oss-process=image/resize,w_30";
+                src = $"http://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "framework":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(string.IsNullOrEmpty(color) ? "" : $"-{color}")}.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "stack":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(string.IsNullOrEmpty(color) ? "" : $"-{color}")}.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
         }
 
@@ -234,17 +227,6 @@
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
 
-        foreach (var item in _projectImageColorDic)
-        {
-            if (item.Key!=elementId)
-            {
-                _projectImageColorDic[item.Key] = "";
-            }
-            else
-            {
-                _projectImageColorDic[item.Key] = "w";
-            }
-        }
         await JsRuntime.InvokeVoidAsync("setHash");
         NavigationManager.ReplaceWithHash($"#{elementId}");
         await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
