@@ -102,7 +102,7 @@ related:
 
 #### 加载
 
-使用不确定[MProgressLinear]（/blazor/components/progress linear）表示加载状态。
+使用不确定 [MProgressLinear](/blazor/components/progress-linear) 表示加载状态。
 
 <masa-example file="Examples.components.cards.Loading"></masa-example>
 
