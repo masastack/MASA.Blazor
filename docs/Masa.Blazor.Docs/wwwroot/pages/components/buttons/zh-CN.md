@@ -13,7 +13,7 @@ related:
 
 <buttons-usage></buttons-usage>
 
-## Anatomy
+## 解剖学
 
 ## 注意
 
