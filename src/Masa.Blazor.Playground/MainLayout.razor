@@ -1,9 +1,21 @@
 ﻿@inherits LayoutComponentBase
+@using Masa.Blazor.Playground.Pages
 
 <MApp>
-    <MMain>
-        <MContainer>
-            @Body
-        </MContainer>
-    </MMain>
+    <PageTabs>
+        <MMain>
+            <MContainer>
+                <PWindow>
+                    @Body
+                </PWindow>
+            </MContainer>
+        </MMain>
+    </PageTabs>
+
+
+    <MBottomNavigation App Grow Routable Color="primary">
+        <MButton Href="/">Home</MButton>
+        <MButton Href="/counter">Counter</MButton>
+        <MButton Href="/user">User</MButton>
+    </MBottomNavigation>
 </MApp>

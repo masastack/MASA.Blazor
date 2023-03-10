@@ -1,0 +1,86 @@
+﻿@implements IAsyncDisposable
+
+<MWindow Value="@_currentAbsolutePath">
+    @foreach (var path in _absolutePaths)
+    {
+        <MWindowItem Transition="" Value="@path" @key="path">
+            <PWindowContent>
+                @ChildContent
+            </PWindowContent>
+        </MWindowItem>
+    }
+</MWindow>
+
+@code {
+
+    [Inject]
+    private NavigationManager? NavigationManager { get; set; }
+
+    [CascadingParameter]
+    private PageTabs? PageTabs { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private readonly List<string> _absolutePaths = new();
+
+    private string? _currentAbsolutePath;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        _currentAbsolutePath = NavigationManager!.GetAbsolutePath();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var absolutePath = NavigationManager!.GetAbsolutePath();
+        if (!_absolutePaths.Contains(absolutePath))
+        {
+            _absolutePaths.Add(absolutePath);
+        }
+
+        if (PageTabs != null)
+        {
+            PageTabs.TabClosed += PageTabsOnTabClosed;
+        }
+
+        NavigationManager!.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    private void PageTabsOnTabClosed(object? sender, string e)
+    {
+        InvokeAsync(() =>
+        {
+            _absolutePaths.Remove(e);
+            StateHasChanged();
+        });
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        if (_absolutePaths.Contains(_currentAbsolutePath!))
+        {
+            return;
+        }
+
+        InvokeAsync(() =>
+        {
+            _absolutePaths.Add(_currentAbsolutePath!);
+            StateHasChanged();
+        });
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (PageTabs != null)
+        {
+            PageTabs.TabClosed -= PageTabsOnTabClosed;
+        }
+
+        NavigationManager!.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+}

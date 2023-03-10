@@ -1,0 +1,10 @@
+﻿@page "/user/{name?}"
+
+<h1>User: @(Name ?? "Not logon")</h1>
+
+@code {
+
+    [Parameter]
+    public string? Name { get; set; }
+
+}

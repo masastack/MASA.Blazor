@@ -1,0 +1,102 @@
+﻿@implements IAsyncDisposable
+
+<CascadingValue Value="this" IsFixed>
+    <MTabs Routable>
+        @foreach (var path in _absolutePaths)
+        {
+            <MTab Href="@path" @key="@path"
+                  @oncontextmenu="HandleOnContextmenu"
+                  __internal_preventDefault_oncontextmenu>
+                @path
+
+                <MButton Icon
+                         OnClick="() => HandleOnCloseTab(path)"
+                         Small
+                         StopPropagation
+                         OnClickPreventDefault>
+                    <MIcon Small>mdi-close</MIcon>
+                </MButton>
+            </MTab>
+        }
+
+        <MMenu @bind-Value="_menuValue"
+               Absolute
+               OffsetY
+               PositionX="@_positionX"
+               PositionY="@_positionY">
+            <MListItem>Item 1</MListItem>
+            <MListItem>Item 2</MListItem>
+            <MListItem>Item 3</MListItem>
+        </MMenu>
+    </MTabs>
+
+    @ChildContent
+</CascadingValue>
+
+@code {
+
+    [Inject]
+    private NavigationManager? NavigationManager { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private readonly List<string> _absolutePaths = new();
+
+    private bool _menuValue;
+    private double _positionX;
+    private double _positionY;
+
+    internal EventHandler<string>? TabClosed;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var absolutePath = NavigationManager!.GetAbsolutePath();
+        if (!_absolutePaths.Contains(absolutePath))
+        {
+            _absolutePaths.Add(absolutePath);
+        }
+
+        NavigationManager!.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var absolutePath = NavigationManager!.GetAbsolutePath();
+
+        if (_absolutePaths.Contains(absolutePath))
+        {
+            return;
+        }
+
+        InvokeAsync(() =>
+        {
+            _absolutePaths.Add(absolutePath);
+            StateHasChanged();
+        });
+    }
+
+    private void HandleOnCloseTab(string path)
+    {
+        _absolutePaths.Remove(path);
+        TabClosed?.Invoke(this, path);
+    }
+
+    private async Task HandleOnContextmenu(MouseEventArgs args)
+    {
+        _menuValue = false;
+        await Task.Delay(16);
+        
+        _menuValue = true;
+        _positionX = args.ClientX;
+        _positionY = args.ClientY;
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        NavigationManager!.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+}
