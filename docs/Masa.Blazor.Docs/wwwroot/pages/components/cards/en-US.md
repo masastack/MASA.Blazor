@@ -90,7 +90,7 @@ Cards are entry points to more detailed information. To keep things concise, ens
 
 #### Twitter card
 
-The `MCard` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `MCardTitle`, `MCardText` and `MCardActions components.
+The **MCard** component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `MCardTitle`, `MCardText` and `MCardActions components.
 
 <masa-example file="Examples.components.cards.TwitterCard"></masa-example>
 
