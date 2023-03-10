@@ -312,6 +312,13 @@ window.backTop = function () {
   slideTo(0);
 }
 
+window.activeNavItemScrollIntoView = function (ancestorSelector) {
+  const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
+  console.log('activeListItem', activeListItem)
+  if (!activeListItem) return;
+  activeListItem.scrollIntoView({ behavior: "smooth" });
+}
+
 function slideTo(targetPageY) {
   var timer = setInterval(function () {
     var currentY = document.documentElement.scrollTop || document.body.scrollTop;

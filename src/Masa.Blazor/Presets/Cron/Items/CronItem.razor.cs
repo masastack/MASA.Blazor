@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets.Cron.Models;
+
+namespace Masa.Blazor.Presets;
 
 public partial class CronItem
 {
@@ -38,17 +40,9 @@ public partial class CronItem
 
     private int? _maxUnit = null;
 
-    private int? _periodStart;
-
-    private int? _periodEnd;
-
-    private int? _startFromPeriod;
-
-    private int _startEveryPeriod;
+    private CronItemDataModel _cronItemData;
 
     private List<int> _allPeriodList = new();
-
-    private List<int> _specifyPeriods = new();
 
     private string _value;
 
@@ -56,17 +50,9 @@ public partial class CronItem
 
     private bool _showNotSpecify;
 
-    private WeekNumbers _selectWeekNumber;
-
-    private DayOfWeek _selectDayOfWeek;
-
     private List<WeekNumbers> _weekNumbers = new();
 
     private List<DayOfWeek> _dayOfWeeks = new();
-
-    private int? _lastPeriodOfWeek;
-
-    private int? _nearestOfDay;
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -122,14 +108,6 @@ public partial class CronItem
                 _weekNumbers = Enum.GetValues<WeekNumbers>().ToList();
                 _dayOfWeeks = Enum.GetValues<DayOfWeek>().ToList();
             }
-
-            _periodStart = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
-            _periodEnd = Period == PeriodTypes.Year ? DateTime.Now.AddYears(10).Year : 2;
-            _startFromPeriod = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
-            _startEveryPeriod = 1;
-            _nearestOfDay = _minUnit;
-            _lastPeriodOfWeek = _minUnit;
-            _selectWeekNumber = WeekNumbers.First;
         }
         return base.OnAfterRenderAsync(firstRender);
     }
@@ -142,14 +120,15 @@ public partial class CronItem
 
             CalculateCronValue();
         }
+        InitCronType();
         return Task.CompletedTask;
     }
 
     private Task OnPeriodStartChanged(int? periodStart)
     {
-        if (_periodStart != periodStart)
+        if (_cronItemData.PeriodStart != periodStart)
         {
-            _periodStart = periodStart;
+            _cronItemData.PeriodStart = periodStart;
 
             CalculateCronValue();
         }
@@ -158,9 +137,9 @@ public partial class CronItem
 
     private Task OnPeriodEndChanged(int? periodEnd)
     {
-        if (_periodEnd != periodEnd)
+        if (_cronItemData.PeriodEnd != periodEnd)
         {
-            _periodEnd = periodEnd;
+            _cronItemData.PeriodEnd = periodEnd;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -168,9 +147,9 @@ public partial class CronItem
 
     private Task OnNearestOfDayChanged(int? nearestOfDay)
     {
-        if (_nearestOfDay != nearestOfDay)
+        if (_cronItemData.NearestOfDay != nearestOfDay)
         {
-            _nearestOfDay = nearestOfDay;
+            _cronItemData.NearestOfDay = nearestOfDay;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -178,9 +157,9 @@ public partial class CronItem
 
     private Task OnLastPeriodOfWeekChanged(int? lastPeriodOfWeek)
     {
-        if (_lastPeriodOfWeek != lastPeriodOfWeek)
+        if (_cronItemData.LastPeriodOfWeek != lastPeriodOfWeek)
         {
-            _lastPeriodOfWeek = lastPeriodOfWeek;
+            _cronItemData.LastPeriodOfWeek = lastPeriodOfWeek;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -188,9 +167,9 @@ public partial class CronItem
 
     private Task OnStartFromPeriodChange(int? startFromPeriod)
     {
-        if (_startFromPeriod != startFromPeriod)
+        if (_cronItemData.StartFromPeriod != startFromPeriod)
         {
-            _startFromPeriod = startFromPeriod;
+            _cronItemData.StartFromPeriod = startFromPeriod;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -198,9 +177,9 @@ public partial class CronItem
 
     private Task OnStartEveryPeriod(int startEveryPeriod)
     {
-        if (_startEveryPeriod != startEveryPeriod)
+        if (_cronItemData.StartEveryPeriod != startEveryPeriod)
         {
-            _startEveryPeriod = startEveryPeriod;
+            _cronItemData.StartEveryPeriod = startEveryPeriod;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -208,9 +187,9 @@ public partial class CronItem
 
     private Task OnSpecifyPeriodChanged(List<int> specifyPeriods)
     {
-        if (_specifyPeriods != specifyPeriods)
+        if (_cronItemData.SpecifyPeriods != specifyPeriods)
         {
-            _specifyPeriods = specifyPeriods;
+            _cronItemData.SpecifyPeriods = specifyPeriods;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -218,9 +197,9 @@ public partial class CronItem
 
     private Task OnWeekNumberChanged(WeekNumbers weekNumber)
     {
-        if (_selectWeekNumber != weekNumber)
+        if (_cronItemData.SelectWeekNumber != weekNumber)
         {
-            _selectWeekNumber = weekNumber;
+            _cronItemData.SelectWeekNumber = weekNumber;
             CalculateCronValue();
         }
 
@@ -229,9 +208,9 @@ public partial class CronItem
 
     private Task OnDayOfWeekChanged(DayOfWeek dayOfWeek)
     {
-        if (_selectDayOfWeek != dayOfWeek)
+        if (_cronItemData.SelectDayOfWeek != dayOfWeek)
         {
-            _selectDayOfWeek = dayOfWeek;
+            _cronItemData.SelectDayOfWeek = dayOfWeek;
             CalculateCronValue();
         }
         return Task.CompletedTask;
@@ -242,15 +221,15 @@ public partial class CronItem
         switch (_selectedCronType)
         {
             case CronTypes.Range:
-                _value = _periodStart + "-" + _periodEnd;
+                _value = _cronItemData.PeriodStart + "-" + _cronItemData.PeriodEnd;
                 break;
             case CronTypes.StartFrom:
-                _value = _startFromPeriod + "/" + _startEveryPeriod;
+                _value = _cronItemData.StartFromPeriod + "/" + _cronItemData.StartEveryPeriod;
                 break;
             case CronTypes.Specify:
-                if (_specifyPeriods.Any())
+                if (_cronItemData.SpecifyPeriods.Any())
                 {
-                    _value = string.Join(",", _specifyPeriods);
+                    _value = string.Join(",", _cronItemData.SpecifyPeriods);
                 }
                 else
                 {
@@ -261,7 +240,7 @@ public partial class CronItem
                 _value = "?";
                 break;
             case CronTypes.WeekStartFrom:
-                _value = _selectDayOfWeek.ToString("d") + "#" + _selectWeekNumber.ToString("d");
+                _value = _cronItemData.SelectDayOfWeek.ToString("d") + "#" + _cronItemData.SelectWeekNumber.ToString("d");
                 break;
             case CronTypes.LastOfPeriod:
                 if (Period == PeriodTypes.Day)
@@ -270,11 +249,11 @@ public partial class CronItem
                 }
                 else
                 {
-                    _value = _lastPeriodOfWeek + "L";
+                    _value = _cronItemData.LastPeriodOfWeek + "L";
                 }
                 break;
             case CronTypes.NearestDay:
-                _value = _nearestOfDay + "W";
+                _value = _cronItemData.NearestOfDay + "W";
                 break;
             default:
                 _value = "*";
@@ -306,6 +285,8 @@ public partial class CronItem
 
     private Task InitValue()
     {
+        InitCronType();
+
         if (_value == "*")
         {
             _selectedCronType = CronTypes.Period;
@@ -316,8 +297,8 @@ public partial class CronItem
             var splitArr = _value.Split('-');
             if (splitArr.Length == 2)
             {
-                _periodStart = int.Parse(splitArr[0]);
-                _periodEnd = int.Parse(splitArr[1]);
+                _cronItemData.PeriodStart = int.Parse(splitArr[0]);
+                _cronItemData.PeriodEnd = int.Parse(splitArr[1]);
             }
         }
         else if (_value.Contains('/'))
@@ -326,8 +307,8 @@ public partial class CronItem
             var splitArr = _value.Split('/');
             if (splitArr.Length == 2)
             {
-                _startFromPeriod = int.Parse(splitArr[0]);
-                _startEveryPeriod = int.Parse(splitArr[1]);
+                _cronItemData.StartFromPeriod = int.Parse(splitArr[0]);
+                _cronItemData.StartEveryPeriod = int.Parse(splitArr[1]);
             }
         }
         else if (_value == "?")
@@ -340,8 +321,8 @@ public partial class CronItem
             var splitArr = _value.Split("#");
             if (splitArr.Length == 2)
             {
-                _selectDayOfWeek = Enum.Parse<DayOfWeek>(splitArr[0]);
-                _selectWeekNumber = Enum.Parse<WeekNumbers>(splitArr[1]);
+                _cronItemData.SelectDayOfWeek = Enum.Parse<DayOfWeek>(splitArr[0]);
+                _cronItemData.SelectWeekNumber = Enum.Parse<WeekNumbers>(splitArr[1]);
             }
         }
         else if (_value.Contains('L'))
@@ -349,13 +330,13 @@ public partial class CronItem
             _selectedCronType = CronTypes.LastOfPeriod;
             if (Period == PeriodTypes.Week)
             {
-                _lastPeriodOfWeek = int.Parse(_value[0].ToString());
+                _cronItemData.LastPeriodOfWeek = int.Parse(_value[0].ToString());
             }
         }
         else if (_value.Contains('W'))
         {
             _selectedCronType = CronTypes.NearestDay;
-            _nearestOfDay = int.Parse(_value[0].ToString());
+            _cronItemData.NearestOfDay = int.Parse(_value[0].ToString());
         }
         else if (string.IsNullOrWhiteSpace(_value))
         {
@@ -364,9 +345,50 @@ public partial class CronItem
         else
         {
             _selectedCronType = CronTypes.Specify;
-            _specifyPeriods = _value.Split(',').Select(p => int.Parse(p)).ToList();
+            _cronItemData.SpecifyPeriods = _value.Split(',').Select(p => int.Parse(p)).ToList();
         }
 
         return Task.CompletedTask;
+    }
+
+    private void InitCronType()
+    {
+        CronItemDataModel cronItemData = new()
+        {
+            PeriodStart = _minUnit,
+            PeriodEnd = 2,
+            StartFromPeriod = _minUnit,
+            StartEveryPeriod = 1,
+            NearestOfDay = _minUnit,
+            LastPeriodOfWeek = _minUnit,
+            SelectWeekNumber = WeekNumbers.First
+        };
+        switch (_selectedCronType)
+        {
+            case CronTypes.Range:
+                cronItemData.PeriodStart = _cronItemData.PeriodStart;
+                cronItemData.PeriodEnd = _cronItemData.PeriodEnd;
+                break;
+            case CronTypes.StartFrom:
+                cronItemData.StartFromPeriod = _cronItemData.StartFromPeriod;
+                cronItemData.StartEveryPeriod = _cronItemData.StartEveryPeriod;
+                break;
+            case CronTypes.Specify:
+                cronItemData.SpecifyPeriods = _cronItemData.SpecifyPeriods;
+                break;
+            case CronTypes.WeekStartFrom:
+                cronItemData.SelectDayOfWeek = _cronItemData.SelectDayOfWeek;
+                cronItemData.SelectWeekNumber = _cronItemData.SelectWeekNumber;
+                break;
+            case CronTypes.LastOfPeriod:
+                cronItemData.LastPeriodOfWeek = _cronItemData.LastPeriodOfWeek;
+                break;
+            case CronTypes.NearestDay:
+                cronItemData.NearestOfDay = _cronItemData.NearestOfDay;
+                break;
+            default:
+                break;
+        }
+        _cronItemData = cronItemData;
     }
 }

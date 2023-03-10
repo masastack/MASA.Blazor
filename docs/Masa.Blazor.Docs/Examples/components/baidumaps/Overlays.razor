@@ -1,0 +1,107 @@
+﻿<MBaiduMap Height="540" @ref=_map
+           DarkThemeId="9828881e7efb0182edb48236a3b53293"
+           Style="width:90%; left:5%"
+           Zoom="15" EnableScrollWheelZoom
+           Center="new(116.403622f,39.918145f)">
+
+    <MBaiduCircle Center="new(116.417348f, 39.925504f)"
+                  Radius="500"
+                  StrokeColor="#4318ff"
+                  FillColor="#4318ff"
+                  @ref=_overlays[0] />
+
+    <MBaiduLabel Content="南海"
+                 Position="new(116.38986f, 39.925532f)"
+                 Offset="@(new(-10, 0))"
+                 @ref=_overlays[1] />
+
+    <MBaiduMarker Point="new(116.403f, 39.917f)"
+                  Title="Example Marker"
+                  @ref=_overlays[2] />
+
+    <MBaiduPolygon Points="_polygonPoints"
+                   StrokeOpacity="0.9f"
+                   FillOpacity="0.5f"
+                   @ref=_overlays[3] />
+
+    <MBaiduPolyline Points="_polylinePoints"
+                    StrokeStyle="StrokeStyle.Dashed"
+                    StrokeWeight="3"
+                    StrokeColor="red"
+                    @ref=_overlays[4] />
+
+</MBaiduMap>
+
+<MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto; padding-left: 6%">
+    <MCol>
+        <MButton Color="primary" OnClick="AddMarker">Add Marker</MButton>
+    </MCol>
+    <MCol>
+        <MButton Color="primary" OnClick="RemoveMarker">Remove Marker</MButton>
+    </MCol>
+    <MCol>
+        <MButton Color="primary" OnClick="ClearAll">Clear Overlays</MButton>
+    </MCol>
+    <MCol>
+        <MButton Color="primary" OnClick="Restore">Restore Overlays</MButton>
+    </MCol>
+</MRow>
+
+@code {
+    private List<GeoPoint> _polygonPoints = new()
+    {
+        new(116.398017f, 39.929267f),
+        new(116.408149f, 39.929654f),
+        new(116.408796f, 39.919694f),
+        new(116.398448f, 39.919307f),
+    };
+
+    private List<GeoPoint> _polylinePoints = new()
+    {
+        new(116.390363f, 39.913468f),
+        new(116.413f, 39.914299f),
+        new(116.413144f, 39.907325f),
+        new(116.390722f, 39.906495f),
+        new(116.390363f, 39.913468f),
+    };
+
+    private BaiduOverlayBase?[] _overlays = new BaiduOverlayBase[5];
+
+    private MBaiduMap? _map;
+
+    private MBaiduMarker? _addExampleMarker;
+
+    private async Task AddMarker()
+    {
+        if (_addExampleMarker is null)
+            _addExampleMarker = new()
+            {
+                Point = new(116.403874f, 39.911919f),
+                Title = "天安门",
+            };
+
+        if (await _map.ContainsOverlayAsync(_addExampleMarker))
+            return;
+
+        await _map.AddOverlayAsync(_addExampleMarker);
+    }
+
+    private async Task RemoveMarker()
+    {
+        if (_addExampleMarker is null)
+            return;
+
+        await _map.RemoveOverlayAsync(_addExampleMarker);
+    }
+
+    private async Task ClearAll() => await _map.ClearOverlaysAsync();
+
+    private async Task Restore()
+    {
+        foreach (var item in _overlays)
+        {
+            if (!(await _map.ContainsOverlayAsync(item)))
+                await _map.AddOverlayAsync(item);
+        }
+    }
+}
