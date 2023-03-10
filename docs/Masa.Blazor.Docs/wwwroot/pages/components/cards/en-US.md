@@ -87,3 +87,21 @@ Using **MCol** , you can create customized horizontal cards. Use the contain pro
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
 <masa-example file="Examples.components.cards.InformationCard"></masa-example>
+
+#### Twitter card
+
+The `MCard` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `MCardTitle`, `MCardText` and `MCardActions components.
+
+<masa-example file="Examples.components.cards.TwitterCard"></masa-example>
+
+#### Weather card
+
+Using [MListItems](/blazor/components/lists) and a [MSlider](/blazor/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
+
+<masa-example file="Examples.components.cards.WeatherCard"></masa-example>
+
+#### Loading
+
+Use an indeterminate [MProgressLinear](/blazor/components/progress-linear) to indicate a loading state.
+
+<masa-example file="Examples.components.cards.Loading"></masa-example>

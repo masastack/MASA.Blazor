@@ -6,6 +6,8 @@ tag: "JsProxy"
 
 ## Usage
 
+If you want to upload pictures, use the `Upload` parameter to set the image server address.This parameter is not set in all examples of this component, but is replaced by the default image.
+
 <masa-example file="Examples.components.editors.Usage"></masa-example>
 
 ## CSS file
