@@ -115,7 +115,7 @@ related:
 
 #### 验证
 
-MASA Blazor 包括通过 `Rules` 属性进行的简单验证。属性接受类型函数、布尔值和字符串的混合数组。当输入值改变时，数组中的每个元素都会被验证。函数将当前值作为参数传递，并且必须返回 true / false 或包含错误消息的字符串。
+MASA Blazor 包括通过 `Rules` 属性进行的简单验证。属性接受类型函数、布尔值和字符串的混合数组。当输入值改变时，数组中的每个元素都会被验证。函数将当前值作为参数传递，并且必须返回 `true` / `false` 或包含错误消息的字符串。
 
 <masa-example file="Examples.components.text_fields.Validation"></masa-example>
 
