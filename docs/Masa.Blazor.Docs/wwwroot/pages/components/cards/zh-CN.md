@@ -90,7 +90,7 @@ related:
 
 #### 推特卡片
 
-`MCard`组件有多个子组件，可以帮助您构建复杂的示例，而不必担心间距。此示例由`MCardTitle`、`MCardText`和`MCardActions`组件组成。
+**MCard** 组件有多个子组件，可以帮助您构建复杂的示例，而不必担心间距。此示例由`MCardTitle`、`MCardText`和`MCardActions`组件组成。
 
 <masa-example file="Examples.components.cards.TwitterCard"></masa-example>
 
