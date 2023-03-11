@@ -10,15 +10,20 @@ public class MonacoEditorJSModule : JSModule
     {
         return await InvokeAsync<IJSObjectReference>("init", id, options);
     }
-    
+
     public async ValueTask ColorizeElement(string id, object options)
     {
         await InvokeVoidAsync("colorizeElement", id, options);
     }
-    
-    public async Task UpdateOptions(IJSObjectReference id,object options)
+
+    public async ValueTask AddCommand<T>(IJSObjectReference id, int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
     {
-        await InvokeVoidAsync("updateOptions", id,options);
+        await InvokeVoidAsync("addCommand", id, keybinding, dotNetObjectReference, method);
+    }
+
+    public async Task UpdateOptions(IJSObjectReference id, object options)
+    {
+        await InvokeVoidAsync("updateOptions", id, options);
     }
 
     public async ValueTask DefineTheme(string name, StandaloneThemeData themeData)
