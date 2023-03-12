@@ -1,7 +1,8 @@
 ﻿@implements IAsyncDisposable
+@inherits NextTickComponentBase
 
 <CascadingValue Value="this" IsFixed>
-    <MTabs Routable>
+    <MTabs Routable @ref="@_tabs">
         @foreach (var path in _absolutePaths)
         {
             <MTab Href="@path" @key="@path"
@@ -47,6 +48,8 @@
     private double _positionX;
     private double _positionY;
 
+    private MTabs? _tabs;
+
     internal EventHandler<string>? TabClosed;
 
     protected override void OnInitialized()
@@ -82,13 +85,15 @@
     {
         _absolutePaths.Remove(path);
         TabClosed?.Invoke(this, path);
+
+        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     private async Task HandleOnContextmenu(MouseEventArgs args)
     {
         _menuValue = false;
         await Task.Delay(16);
-        
+
         _menuValue = true;
         _positionX = args.ClientX;
         _positionY = args.ClientY;
