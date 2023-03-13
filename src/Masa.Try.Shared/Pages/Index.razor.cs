@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 
 namespace Masa.Try.Shared.Pages;
 
-public partial class Index
+public partial class Index : IDisposable
 {
     private Type? componentType;
 
@@ -61,6 +61,8 @@ public partial class Index
         automaticLayout = true,
     };
 
+    private DotNetObjectReference<Index> DotNetObject; 
+
     [JSInvokable("RunCode")]
     public async void RunCode()
     {
@@ -83,13 +85,15 @@ public partial class Index
     {
         RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
+        DotNetObject = DotNetObjectReference.Create(this);
+
         await base.OnInitializedAsync();
     }
 
     private async Task InitMonaco()
     {
         // 监听CTRL+S
-        await _Monaco.AddCommand(2097, DotNetObjectReference.Create(this), nameof(RunCode));
+        await _Monaco.AddCommand(2097, DotNetObject, nameof(RunCode));
     }
 
     async Task<List<PortableExecutableReference>?> GetReference()
@@ -99,7 +103,7 @@ public partial class Index
         {
             try
             {
-                var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
+                using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
                 if (stream.Length > 0)
                 {
                     portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
@@ -126,5 +130,10 @@ public partial class Index
         }
 
         return razorExtension;
+    }
+
+    public void Dispose()
+    {
+        DotNetObject.Dispose();
     }
 }
