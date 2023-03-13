@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Masa.Blazor.Playground.Pages;
+namespace Masa.Blazor.Presets;
 
 public class PWindowContent : ComponentBase
 {

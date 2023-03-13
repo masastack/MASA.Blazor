@@ -1,0 +1,47 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits NextTickComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <MTabs Routable Class="@Class" Style="@Style" @ref="@_tabs">
+        @foreach (var path in _absolutePaths)
+        {
+            <MTab Href="@path" @key="@path"
+                  Class="@TabClass"
+                  @oncontextmenu="(e) => HandleOnContextmenu(e, path)"
+                  __internal_preventDefault_oncontextmenu>
+                @if (TabContent != default)
+                {
+                    @TabContent.Invoke(path)
+                }
+                else
+                {
+                    @path
+                }
+
+                <MButton Icon
+                         OnClick="() => HandleOnCloseTab(path)"
+                         Small
+                         StopPropagation
+                         OnClickPreventDefault>
+                    <MIcon Small>mdi-close</MIcon>
+                </MButton>
+            </MTab>
+        }
+
+        <MMenu @bind-Value="_menuValue"
+               Absolute
+               OffsetY
+               PositionX="@_positionX"
+               PositionY="@_positionY"
+               CloseOnContentClick>
+            <MList Dense>
+                <MListItem OnClick="ReloadTab">@ReloadTabText</MListItem>
+                <MListItem OnClick="CloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
+                <MListItem OnClick="CloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
+                <MListItem OnClick="CloseOtherTabs">@CloseOtherTabsText</MListItem>
+            </MList>
+        </MMenu>
+    </MTabs>
+
+    @ChildContent
+</CascadingValue>

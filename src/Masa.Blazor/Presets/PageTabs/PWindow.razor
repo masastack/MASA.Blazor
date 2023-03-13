@@ -1,4 +1,6 @@
-﻿@implements IAsyncDisposable
+﻿@using Microsoft.AspNetCore.Components.Routing
+@implements IAsyncDisposable
+@namespace Masa.Blazor.Presets
 
 <MWindow Value="@_currentAbsolutePath">
     @foreach (var path in _absolutePaths)
@@ -17,7 +19,10 @@
     private NavigationManager? NavigationManager { get; set; }
 
     [CascadingParameter]
-    private PageTabs? PageTabs { get; set; }
+    private PPageTabs? ContainerPageTabs { get; set; }
+
+    [Parameter]
+    public PPageTabs? PageTabs { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -42,12 +47,29 @@
             _absolutePaths.Add(absolutePath);
         }
 
-        if (PageTabs != null)
+        if (ContainerPageTabs != null)
         {
-            PageTabs.TabClosed += PageTabsOnTabClosed;
+            ContainerPageTabs.TabClosed += PageTabsOnTabClosed;
+            ContainerPageTabs.TabReload += PageTabsOnTabReload;
+            ContainerPageTabs.TabsUpdated += PageTabsOnTabsUpdated;
         }
 
         NavigationManager!.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            if (PageTabs != null)
+            {
+                PageTabs.TabClosed += PageTabsOnTabClosed;
+                PageTabs.TabReload += PageTabsOnTabReload;
+                PageTabs.TabsUpdated += PageTabsOnTabsUpdated;
+            }
+        }
     }
 
     private void PageTabsOnTabClosed(object? sender, string e)
@@ -55,6 +77,26 @@
         InvokeAsync(() =>
         {
             _absolutePaths.Remove(e);
+            StateHasChanged();
+        });
+    }
+
+    private void PageTabsOnTabReload(object? sender, string e)
+    {
+        InvokeAsync(() =>
+        {
+            _absolutePaths.Remove(e);
+            StateHasChanged();
+            _absolutePaths.Add(e);
+            StateHasChanged();
+        });
+    }
+
+    private void PageTabsOnTabsUpdated(object? sender, string[] paths)
+    {
+        InvokeAsync(() =>
+        {
+            _absolutePaths.RemoveAll(p => !paths.Contains(p));
             StateHasChanged();
         });
     }
@@ -78,6 +120,15 @@
         if (PageTabs != null)
         {
             PageTabs.TabClosed -= PageTabsOnTabClosed;
+            PageTabs.TabReload -= PageTabsOnTabReload;
+            PageTabs.TabsUpdated -= PageTabsOnTabsUpdated;
+        }
+
+        if (ContainerPageTabs != null)
+        {
+            ContainerPageTabs.TabClosed -= PageTabsOnTabClosed;
+            ContainerPageTabs.TabReload -= PageTabsOnTabReload;
+            ContainerPageTabs.TabsUpdated -= PageTabsOnTabsUpdated;
         }
 
         NavigationManager!.LocationChanged -= NavigationManagerOnLocationChanged;
