@@ -83,9 +83,10 @@ public partial class Index : IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
         DotNetObject = DotNetObjectReference.Create(this);
+
+        RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
         await base.OnInitializedAsync();
     }
