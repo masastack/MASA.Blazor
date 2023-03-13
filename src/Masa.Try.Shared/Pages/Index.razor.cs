@@ -10,7 +10,7 @@ public partial class Index : IDisposable
 {
     private Type? componentType;
 
-    private MMonacoEditor _Monaco;
+    private MMonacoEditor _monaco;
 
     private static string Code = @"<body>
     <div id='app'>
@@ -73,7 +73,7 @@ public partial class Index : IDisposable
 
         var options = new CompileRazorOptions()
         {
-            Code = await _Monaco.GetValue(),
+            Code = await _monaco.GetValue(),
             ConcurrentBuild = true
         };
 
@@ -94,7 +94,7 @@ public partial class Index : IDisposable
     private async Task InitMonaco()
     {
         // 监听CTRL+S
-        await _Monaco.AddCommand(2097, DotNetObject, nameof(RunCode));
+        await _monaco.AddCommand(2097, DotNetObject, nameof(RunCode));
     }
 
     async Task<List<PortableExecutableReference>?> GetReference()
