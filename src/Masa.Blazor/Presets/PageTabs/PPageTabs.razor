@@ -2,16 +2,19 @@
 @inherits NextTickComponentBase
 
 <CascadingValue Value="this" IsFixed>
-    <MTabs Routable Class="@Class" Style="@Style" @ref="@_tabs">
+    <MTabs Routable Class="@($"m-page-tabs {Class}")" Style="@Style" HideSlider="@HideSlider" @ref="@_tabs">
         @foreach (var path in _absolutePaths)
         {
-            <MTab Href="@path" @key="@path"
-                  Class="@TabClass"
+            <MTab Href="@path"
+                  Class="@($"m-page-tab {TabClass}")"
+                  Exact
+                  Ripple="@Ripple"
+                  @key="@path"
                   @oncontextmenu="(e) => HandleOnContextmenu(e, path)"
                   __internal_preventDefault_oncontextmenu>
                 @if (TabContent != default)
                 {
-                    @TabContent.Invoke(path)
+                    @TabContent.Invoke(new PageTabPathValue(path, path == NavigationManager.GetAbsolutePath()))
                 }
                 else
                 {

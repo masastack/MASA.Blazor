@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿#nullable enable
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor.Presets;
@@ -18,7 +19,7 @@ public partial class PPageTabs : NextTickComponentBase
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public RenderFragment<string>? TabContent { get; set; }
+    public RenderFragment<PageTabPathValue>? TabContent { get; set; }
 
     [Parameter]
     public string? Class { get; set; }
@@ -28,6 +29,13 @@ public partial class PPageTabs : NextTickComponentBase
 
     [Parameter]
     public string? TabClass { get; set; }
+
+    [Parameter]
+    [ApiDefaultValue(true)]
+    public bool Ripple { get; set; } = true;
+
+    [Parameter]
+    public bool HideSlider { get; set; }
 
     [Parameter]
     public string? ReloadTabText { get; set; }
@@ -40,6 +48,9 @@ public partial class PPageTabs : NextTickComponentBase
 
     [Parameter]
     public string? CloseOtherTabsText { get; set; }
+
+    [Parameter]
+    public IEnumerable<string>? SelfPaths { get; set; }
 
     private readonly List<string> _absolutePaths = new();
 
@@ -81,6 +92,12 @@ public partial class PPageTabs : NextTickComponentBase
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var absolutePath = NavigationManager.GetAbsolutePath();
+
+        FormatSelfPaths();
+        if (SelfPaths!.Any(p => absolutePath.StartsWith(p)))
+        {
+            // TODO: 如果是Self的就永远只有一个tab
+        }
 
         if (_absolutePaths.Contains(absolutePath))
         {
@@ -185,6 +202,13 @@ public partial class PPageTabs : NextTickComponentBase
         _menuValue = true;
         _positionX = args.ClientX;
         _positionY = args.ClientY;
+    }
+
+    private void FormatSelfPaths()
+    {
+        SelfPaths = SelfPaths is null
+            ? new List<string>()
+            : SelfPaths.Select(sp => "/" + sp.Trim('/') + "/").ToList();
     }
 
     protected override void Dispose(bool disposing)
