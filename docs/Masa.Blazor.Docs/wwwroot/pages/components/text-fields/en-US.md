@@ -118,7 +118,7 @@ Text fields can be used with an alternative `Solo` design.
 
 #### Validation
 
-MASA Blazor includes simple validation through the rules prop. The prop accepts a mixed array of types function, boolean and string. When the input value changes, each element in the array will be validated. Functions pass the current value as an argument and must return either true / false or a string containing an error message.
+MASA Blazor includes simple validation through the `Rules` prop. The prop accepts a mixed array of types function, boolean and string. When the input value changes, each element in the array will be validated. Functions pass the current value as an argument and must return either true / false or a string containing an error message.
 
 <masa-example file="Examples.components.text_fields.Validation"></masa-example>
 

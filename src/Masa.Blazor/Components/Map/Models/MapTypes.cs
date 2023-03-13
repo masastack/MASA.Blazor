@@ -2,9 +2,9 @@
 {
     public enum BaiduMapType
     {
-        NormalMap = 0,
-        EarthMap = 1,
-        SatelliteMap = 2,
+        Normal = 0,
+        Earth = 1,
+        Satellite = 2,
     };
 
 }

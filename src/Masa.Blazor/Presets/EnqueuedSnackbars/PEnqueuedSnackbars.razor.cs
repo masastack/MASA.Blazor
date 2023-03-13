@@ -5,7 +5,7 @@ namespace Masa.Blazor.Presets
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
         [Parameter]
-        [ApiDefaultValue(nameof(SnackPosition.BottomCenter))]
+        [ApiDefaultValue(SnackPosition.BottomCenter)]
         public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
 
         [Parameter]
@@ -22,9 +22,11 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool? Closeable { get; set; }
 
+        private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
         internal const int DEFAULT_MAX_WIDTH = 576;
+        internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         private readonly List<SnackbarOptions> _stack = new();
 
@@ -32,13 +34,13 @@ namespace Masa.Blazor.Presets
         {
             CssProvider.Apply((cssBuilder) =>
             {
-                cssBuilder.Add("m-enqueued-snackbars")
-                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--left", () => Position == SnackPosition.TopLeft)
-                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--right", () => Position == SnackPosition.TopRight)
-                          .AddIf("m-enqueued-snackbars--top m-enqueued-snackbars--center", () => Position == SnackPosition.TopCenter)
-                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--left", () => Position == SnackPosition.BottomLeft)
-                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--right", () => Position == SnackPosition.BottomRight)
-                          .AddIf("m-enqueued-snackbars--bottom m-enqueued-snackbars--center", () => Position == SnackPosition.BottomCenter);
+                cssBuilder.Add(ROOT_CSS)
+                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--left", () => Position == SnackPosition.TopLeft)
+                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--right", () => Position == SnackPosition.TopRight)
+                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--center", () => Position == SnackPosition.TopCenter)
+                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--left", () => Position == SnackPosition.BottomLeft)
+                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--right", () => Position == SnackPosition.BottomRight)
+                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter);
             }, styleBuilder => { styleBuilder.AddMaxWidth(MaxWidth); });
         }
 

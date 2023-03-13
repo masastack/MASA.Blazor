@@ -37,6 +37,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
         services.TryAddScoped<EChartsJSModule>();
+        services.TryAddScoped<MonacoEditorJSModule>();
         services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();

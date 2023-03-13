@@ -1,0 +1,20 @@
+{
+  "props": {
+    "EditorOptions": "初始化的Options",
+    "Monaco": "当前创建的Monaco Editor实例",
+    "markdown": "",
+    "placeholder": "",
+    "readOnly": "",
+    "theme": "",
+    "toolbarClass": "",
+    "toolbarStyle": "",
+    "upload": ""
+  },
+  "events": {
+    "InitOptions": "初始化Options事件",
+    "InitCompleteHandle": "初始化完成事件"
+  },
+  "contents": {
+    "toolbarContent": ""
+  }
+}

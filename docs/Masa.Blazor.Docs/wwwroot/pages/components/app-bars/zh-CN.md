@@ -72,9 +72,9 @@ related:
 
 #### 滚动反转
 
-当使用 `InvertedScroll` 属性时，该条将隐藏，直到用户滚动超过指定的阈值。一旦超过阈值，**MAppBar** 将继续显示，直到用户向上滚动超过阈值。如果未提供 `ScrollThreshold` 值，将使用默认值0。
+当使用 `InvertedScroll` 属性时，该栏将隐藏，直到用户滚动超过指定的阈值。一旦超过阈值，**MAppBar** 将继续显示，直到用户向上滚动超过阈值。如果未提供 `ScrollThreshold` 值，将使用默认值0。
 
-<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.Inverted"></masa-example>
 
 #### 突出
 

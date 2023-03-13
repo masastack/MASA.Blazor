@@ -69,7 +69,7 @@ dotnet add package Masa.Blazor
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
 <!--icon file,import need to use-->
-<link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
@@ -84,7 +84,7 @@ dotnet add package Masa.Blazor
 ```html
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
-<link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 

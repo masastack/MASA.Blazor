@@ -13,6 +13,12 @@
 
         private List<IRadio<TValue>> Items { get; } = new();
 
+        protected override void OnValueChanged(TValue val)
+        {
+            base.OnValueChanged(val);
+            _ = Toggle(val);
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();

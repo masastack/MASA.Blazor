@@ -88,6 +88,24 @@ related:
 
 <masa-example file="Examples.components.cards.InformationCard"></masa-example>
 
+#### 推特卡片
+
+**MCard** 组件有多个子组件，可以帮助您构建复杂的示例，而不必担心间距。此示例由 **MCardTitle**、**MCardText** 和 **MCardActions** 组件组成。
+
+<masa-example file="Examples.components.cards.TwitterCard"></masa-example>
+
+#### 天气卡片
+
+使用 [MListItem](/blazor/components/lists) 和 [MSlider](/brazor/components/sliders)，我们可以创建一个独特的天气卡。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。
+
+<masa-example file="Examples.components.cards.WeatherCard"></masa-example>
+
+#### 加载
+
+使用不确定 [MProgressLinear](/blazor/components/progress-linear) 表示加载状态。
+
+<masa-example file="Examples.components.cards.Loading"></masa-example>
+
 
 
 

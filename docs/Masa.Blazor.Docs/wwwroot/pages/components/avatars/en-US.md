@@ -35,7 +35,7 @@ The `Tile` prop removes the border radius from **MAvatar** leaving you with a si
 
 #### Default
 
-The **MAvatar** default slot will accept the **MIcon** component, an image, or text. Mix and match these props with other props to create something unique.
+The **MAvatar** default slot will accept the **MIcon** component, an image, or text. Mix and match these with other props to create something unique.
 
 <masa-example file="Examples.components.avatars.Default"></masa-example>
 

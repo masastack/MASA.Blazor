@@ -70,7 +70,7 @@ in `Pages/_Layout.cshtml` import resource files：
 <!--masa blazor css style-->
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <!--icon file,import need to use-->
-<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 <!--js(should lay the end of file)-->
@@ -84,7 +84,7 @@ in `wwwroot\index.html` import resource files：
 ```html
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 

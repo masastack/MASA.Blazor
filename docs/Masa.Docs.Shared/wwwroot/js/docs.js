@@ -33,7 +33,7 @@ window.setHash = function () {
 }
 
 /*
- * NavigationMananger.NavigateTo always scrolls page to the top.
+ * NavigationManager.NavigateTo always scrolls page to the top.
  * The following `window.scrollTo` would be invoked.
  * When NavigationManager.NavigateTo invoked, the x and y is zero.
  */
@@ -310,6 +310,13 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
 window.backTop = function () {
   slideTo(0);
+}
+
+window.activeNavItemScrollIntoView = function (ancestorSelector) {
+  const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
+  console.log('activeListItem', activeListItem)
+  if (!activeListItem) return;
+  activeListItem.scrollIntoView({ behavior: "smooth" });
 }
 
 function slideTo(targetPageY) {

@@ -38,11 +38,23 @@ tag: "JS代理"
 
 <masa-example file="Examples.components.baidumaps.HeightAndWidth"></masa-example>
 
-#### 缩放与移动
+#### 缩与移动
 
-通过 `Zoom` 获取或设置地图的缩放等级。
+通过 `Zoom` 设置地图的缩放等级；通过 `MaxZoom` 与 `MinZoom` 设置地图的最大与最小缩放等级。
 通过 `Center` 获取或设置地图的中心点。如果该点在当前的地图视图中已经可见，则会以平滑动画的方式移动到中心点位置。
-
 
 <masa-example file="Examples.components.baidumaps.ZoomAndMove"></masa-example>
 
+#### 地图图层
+
+通过 `TrafficOn` 属性开启实时交通路况图层。
+通过 `MapType` 属性设置地图类型（普通地图，地球地图或卫星地图）。
+
+<masa-example file="Examples.components.baidumaps.MapLayer"></masa-example>
+
+### 覆盖物
+
+ **MBaiduMap** 组件支持常用的地图覆盖物。要添加地图覆盖物，请将覆盖物组件作为 **MBaiduMap** 的直接子组件。
+或者使用 **MBaiduMap** 的相关方法操作覆盖物。
+
+<masa-example file="Examples.components.baidumaps.Overlays"></masa-example>

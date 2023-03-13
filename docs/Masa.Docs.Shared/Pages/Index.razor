@@ -1,64 +1,116 @@
 ﻿@page "/"
-@layout MainLayout
+@layout BaseLayout
 @inject DocService DocService
 @inject I18n I18n
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
 
-<MContainer Fluid>
-    <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
-        @if (_loading)
-        {
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-        }
-        else
-        {
-            <div class="project">
-                <div class="heading-5 mb-6 d-flex align-center">
-                    <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
-                    @I18n.T("getting-started")
-                </div>
-                @ProductCard(s_gettingStartedNavs)
-            </div>
+<MNavigationDrawer App
+                   Floating
+                   Width="300"
+                   @bind-Value="_showMobileIndexNavMenuList"
+                   Clipped>
+    <ChildContent>
+        <MListItem>
+            <MListItemContent>
+                <MSelect Items="_versions"
+                         @bind-Value="@selectVersion"
+                         Class="light-border"
+                         ItemText="u => u"
+                         ItemValue="u => u"
+                         HideDetails="true"
+                         Outlined
+                         Dense>
+                </MSelect>
+            </MListItemContent>
+        </MListItem>
+        <MDivider></MDivider>
 
-            @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+        <MList Class="doc-list-nav">
+            <MListItemGroup @bind-Value="_active" Mandatory>
+                <MListItem OnClick='() => ScrollIntoView("getting-started")'>
+                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                {
+                    <MListItem OnClick="(() => ScrollIntoView(project))" Value="project">
+                        <MListItemAvatar Tile>
+                        @Image(project, _active)
+                    </MListItemAvatar>
+
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                }
+            </MListItemGroup>
+        </MList>
+    </ChildContent>
+</MNavigationDrawer>
+
+<MMain>
+    <MContainer Fluid>
+        <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
+            @if (_loading)
             {
-                <div class="project">
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
+            }
+            else
+            {
+                <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
-                        @Image(project)
-                        @I18n.T("product", project)
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        @I18n.T("getting-started")
                     </div>
+                    @ProductCard(s_gettingStartedNavs)
+                </div>
 
-                    @{
-                        var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
-                        var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
-                        if (groupNavsWithoutChildren is not null)
-                        {
-                            @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
-                        }
+                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                {
+                    <div class="project" id="@project">
+                        <div class="heading-5 mb-6 d-flex align-center">
+                            @Image(project)
+                            @I18n.T("product", project)
+                        </div>
 
-                        var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
-                        if (groupNavsWithChildren is not null)
-                        {
-                            foreach (var navItem in groupNavsWithChildren)
+                        @{
+                            var groupedNavs = navs.GroupBy(u => u.Children is null || u.Children.Count == 0).ToList();
+                            var groupNavsWithoutChildren = groupedNavs.FirstOrDefault(u => u.Key);
+                            if (groupNavsWithoutChildren is not null)
                             {
-                                if (navItem.Tiling is NavItemTiling.Invisible)
+                                @ProductCard(groupNavsWithoutChildren.Select(u => (u.Title, u.Href)))
+                            }
+
+                            var groupNavsWithChildren = groupedNavs.FirstOrDefault(u => u.Key == false);
+                            if (groupNavsWithChildren is not null)
+                            {
+                                foreach (var navItem in groupNavsWithChildren)
                                 {
-                                    continue;
+                                    if (navItem.Tiling is NavItemTiling.Invisible)
+                                    {
+                                        continue;
+                                    }
+
+                                    var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+
+                                    @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                                 }
-
-                                var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
-
-                                @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
                             }
                         }
-                    }
-                </div>
+                    </div>
+                }
             }
-        }
-    </MResponsive>
-</MContainer>
+        </MResponsive>
+    </MContainer>
+</MMain>
 
 @code {
 
@@ -74,19 +126,30 @@
         ("kubernetes-deploy", "/stack/operations/kubernetes/kubernetes-deploy")
     };
 
-    private static RenderFragment Image(string project) => __builder =>
+    private List<string> _versions = new List<string>
+    {
+        "1.0",
+    };
+
+    private string selectVersion = "1.0";
+
+    private bool _showMobileIndexNavMenuList;
+
+    private StringNumber _active;
+
+    private static RenderFragment Image(string project, StringNumber? currentSelectProject = null) => __builder =>
     {
         string? src = null;
         switch (project)
         {
             case "blazor":
-                src = "https://cdn.masastack.com/images/blazor_logo.png?x-oss-process=image/resize,w_30";
+                src = $"http://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "framework":
-                src = "https://cdn.masastack.com/images/framework_logo.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "stack":
-                src = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
         }
 
@@ -126,6 +189,10 @@
             _loading = false;
 
             StateHasChanged();
+
+            await LocationHashPositionAsync(NavigationManager.Uri);
+
+            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
         }
     }
 
@@ -137,10 +204,10 @@
                 <div class="project-content__title">@I18n.T(group)</div>
             }
             <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-                <MRow Dense NoGutters>
-                    @foreach (var (title, href) in items)
+            <MRow Dense NoGutters>
+                @foreach (var (title, href) in items)
                     {
-                        <MCol Cols="4" Class="rounded text-truncate">
+                        <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
                             @LinkableTitle(title, href)
                         </MCol>
                     }
@@ -154,4 +221,23 @@
         <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
 
+    private async Task ScrollIntoView(string elementId)
+    {
+        // TODO: remove the following lines when #40190 of aspnetcore resolved.
+        // TODO: Blazor now does not support automatic scrolling of anchor points.
+        // Check this when .NET 8 released.
+
+        await JsRuntime.InvokeVoidAsync("setHash");
+        NavigationManager.ReplaceWithHash($"#{elementId}");
+        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+    }
+
+    private async Task LocationHashPositionAsync(string url)
+    {
+        var uri = new Uri(url);
+        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        {
+            await ScrollIntoView(uri.Fragment.Substring(1));
+        }
+    }
 }
