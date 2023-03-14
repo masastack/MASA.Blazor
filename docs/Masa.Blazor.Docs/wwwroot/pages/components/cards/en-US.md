@@ -21,7 +21,7 @@ The recommended placement of elements inside of `MCard` is:
 * Place `MCardText` and other forms of media below the card header
 * Place `MCardActions` after card content
 
-![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
+![Card Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

@@ -20,7 +20,7 @@ The recommended placement of elements inside of `MAvatar` is:
 * Place a [MImage](blazor/components/images/) or [MIcon](blazor/components/images/) component within the default *slot*
 * Place textual content within the default *slot*
 
-![Avatar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-anatomy.png)
+![Avatar Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/avatar-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

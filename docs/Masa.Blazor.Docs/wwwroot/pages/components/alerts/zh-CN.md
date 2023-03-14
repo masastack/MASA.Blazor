@@ -22,7 +22,7 @@ related:
 * 在标题下方放置文本内容
 * 将关闭动作放在最右侧
 
-![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png) <!-- 将会替换成masastack的cdn -->
+![Alert Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/alert-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

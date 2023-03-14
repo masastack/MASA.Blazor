@@ -20,7 +20,7 @@ The recommended placement of elements inside of `MButton` is:
 * Place text in the center
 * Place visual content around container text
 
-![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-anatomy.png)
+![Button Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/btn-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

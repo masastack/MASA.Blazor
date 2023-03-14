@@ -21,7 +21,7 @@ related:
 * 将 `MBannerText` 放在任何可视内容的右侧
 * 将 `MBannerActions` 放在文本内容的最右侧，底部偏移
 
-![Banner Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-anatomy.png)
+![Banner Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/banner-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

@@ -21,7 +21,7 @@ related:
 * 将 `MCardText` 和其他形式的媒体放在卡头下方
 * 在卡片内容后放置 `MCardActions`
 
-![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
+![Card Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

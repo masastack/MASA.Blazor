@@ -20,7 +20,7 @@ related:
 * 将 [MImage](blazor/components/images/) 或 [MIcon](blazor/components/images/) 组件放在默认 *插槽* 中
 * 将文本内容放在默认的 *插槽* 中
 
-![Avatar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-anatomy.png)
+![Avatar Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/avatar-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |
