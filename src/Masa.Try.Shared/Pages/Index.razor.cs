@@ -61,7 +61,7 @@ public partial class Index : IDisposable
         automaticLayout = true,
     };
 
-    private DotNetObjectReference<Index> DotNetObject; 
+    private DotNetObjectReference<Index> _objRef; 
 
     [JSInvokable("RunCode")]
     public async void RunCode()
