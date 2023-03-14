@@ -84,7 +84,7 @@ public partial class Index : IDisposable
     protected override async Task OnInitializedAsync()
     {
 
-        DotNetObject = DotNetObjectReference.Create(this);
+        _objRef = DotNetObjectReference.Create(this);
 
         RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
@@ -94,7 +94,7 @@ public partial class Index : IDisposable
     private async Task InitMonaco()
     {
         // 监听CTRL+S
-        await _monaco.AddCommand(2097, DotNetObject, nameof(RunCode));
+        await _monaco.AddCommand(2097, _objRef, nameof(RunCode));
     }
 
     async Task<List<PortableExecutableReference>?> GetReference()
