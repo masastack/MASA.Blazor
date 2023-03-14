@@ -174,7 +174,7 @@
       "class": "Html document class.",
       "color": "将指定的颜色应用于控件 - 它可以是材料颜色的名称（例如 `success` 或 `purple`）或 css 颜色（`#033` 或 `rgba(255, 0, 0, 0.5)`）。您可以在 [颜色页面](/blazor/styles-and-animations/colors) 上找到内置类的列表。",
       "dark": "将暗色主题变量应用到组件。你可以在 [暗色主题](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
-      "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [海拔页面](styles-and-animations/elevation) 浏览更多信息。",
+      "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [海拔页面](/blazor/styles-and-animations/elevation) 浏览更多信息。",
       "height": "设定组件的高度",
       "light": "为组件设置浅色主题。",
       "maxHeight": "设定组件的最大高度。",
