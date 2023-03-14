@@ -2,34 +2,34 @@
 
 public partial class MMonacoEditor : BDomComponentBase
 {
-    [Inject] 
+    [Inject]
     protected MonacoEditorJSModule Module { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public object? EditorOptions { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public StringNumber Width { get; set; } = "100%";
 
-    [Parameter] 
+    [Parameter]
     public StringNumber Height { get; set; } = "100%";
 
-    [Parameter] 
+    [Parameter]
     public StringNumber MinWidth { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public StringNumber MinHeight { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public StringNumber MaxWidth { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public StringNumber MaxHeight { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public Func<Task<object>>? InitOptions { get; set; }
 
-    [Parameter] 
+    [Parameter]
     public Action? InitCompleteHandle { get; set; }
 
     /// <summary>
@@ -84,9 +84,14 @@ public partial class MMonacoEditor : BDomComponentBase
         await Module.DefineTheme(themeName, themeData);
     }
 
+    public async Task AddCommand<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
+    {
+        await Module.AddCommand(Monaco, keybinding, dotNetObjectReference, method);
+    }
+
     public async Task UpdateOptions(object options)
     {
-        await Module.UpdateOptions(Monaco,options);
+        await Module.UpdateOptions(Monaco, options);
     }
 
     public async Task<string> GetValue()
