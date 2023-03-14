@@ -13,6 +13,24 @@ related:
 
 <text-fields-usage></text-fields-usage>
 
+## 组件结构解剖
+
+建议在 `MTextField` 中放置元素：
+
+* 在输入或标签的开头放置 `MIcon`
+* 将标签放在预先准备好的内容之后
+
+![Text-field Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 文本字段容器包含 `MInput` 和 `MField` 组件 |
+| 2. 前置图标 | 位于 `MTextField` 前面的自定义图标 |
+| 3. 前置内部图标 | 位于 `MTextField` 开始处的自定义图标 |
+| 4. 标签 | 用于向用户显示与输入相关的文本的内容区域 |
+| 5. 附加内部图标 | 位于 `MTextField` 组件末尾的自定义图标 |
+| 6. 附加图标  | 位于 `MTextField` 组件后面的自定义图标 |
+
 ## 示例
 
 ### 属性
@@ -115,7 +133,7 @@ related:
 
 #### 验证
 
-MASA Blazor 包括通过 rules 属性进行的简单验证。属性接受类型函数、布尔值和字符串的混合数组。当输入值改变时，数组中的每个元素都会被验证。函数将当前值作为参数传递，并且必须返回 true / false 或包含错误消息的字符串。
+MASA Blazor 包括通过 `Rules` 属性进行的简单验证。属性接受类型函数、布尔值和字符串的混合数组。当输入值改变时，数组中的每个元素都会被验证。函数将当前值作为参数传递，并且必须返回 `true` / `false` 或包含错误消息的字符串。
 
 <masa-example file="Examples.components.text_fields.Validation"></masa-example>
 

@@ -6,6 +6,8 @@ tag: "JS代理"
 
 ## 使用
 
+如果要上传图片，请使用`Upload`参数，来设置图片服务器地址。本组件的所有示例均未设置此参数，而是用默认图片来代替。
+
 <masa-example file="Examples.components.editors.Usage"></masa-example>
 
 ## css文件

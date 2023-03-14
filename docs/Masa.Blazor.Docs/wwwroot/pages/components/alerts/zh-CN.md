@@ -13,7 +13,24 @@ related:
 
 <alerts-usage></alerts-usage>
 
-## 解剖学
+## 组件结构剖析
+
+建议在 `MAlert` 内部放置元素：
+
+* 在最左边放置一个 `MIcon`
+* 将 `MAlertTtle` 放在上下文图标的右侧
+* 在标题下方放置文本内容
+* 将关闭动作放在最右侧
+
+![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png) <!-- 将会替换成masastack的cdn -->
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 提示框容器包含所有组件 `MAlert` |
+| 2. 图标 | 与提示框的上下文状态相关的图标; **success, info, warning, error** |
+| 3. 标题 | 字体大小增加的标题 |
+| 4. 标题 | 用于显示文本和其他内联元素的内容区域 |
+| 5. 关闭图标（可选） | 用于隐藏组件 `MAlert`  |
 
 ## 示例
 
