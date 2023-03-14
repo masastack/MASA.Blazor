@@ -15,6 +15,17 @@ related:
 
 ## Anatomy
 
+The recommended placement of elements inside of `MAvatar` is:
+
+* Place a [MImage](blazor/components/images/) or [MIcon](blazor/components/images/) component within the default *slot*
+* Place textual content within the default *slot*
+
+![Avatar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Avatar container that typically holds a [MIcon](blazor/components/icons/) or [MImage](blazor/components/images/) component |
+
 ## Examples
 
 ### Props
@@ -35,7 +46,7 @@ The `Tile` prop removes the border radius from **MAvatar** leaving you with a si
 
 #### Default
 
-The **MAvatar** default slot will accept the **MIcon** component, an image, or text. Mix and match these props with other props to create something unique.
+The **MAvatar** default slot will accept the **MIcon** component, an image, or text. Mix and match these with other props to create something unique.
 
 <masa-example file="Examples.components.avatars.Default"></masa-example>
 

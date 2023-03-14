@@ -23,7 +23,7 @@ builder.Services.AddMasaBlazor(options =>
         theme.Themes.Light.Primary = "#4318FF";
         theme.Themes.Light.Secondary = "#5CBBF6";
         theme.Themes.Light.Accent = "#005CAF";
-        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+        theme.Themes.Light.UserDefined?.Add("Tertiary", "#e57373");
     });
 }).AddI18nForServer("wwwroot/locale");
 
