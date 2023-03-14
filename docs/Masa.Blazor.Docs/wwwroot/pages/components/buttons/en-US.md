@@ -15,6 +15,19 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 ## Anatomy
 
+The recommended placement of elements inside of `MButton` is:
+
+* Place text in the center
+* Place visual content around container text
+
+![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | In addition to text, the Button container typically holds a [MIcon](blazor/components/icons/) component |
+| 2. Icon (optional) | Leading media content intended to improve visual context |
+| 3. Text | A content area for displaying text and other inline elements |
+
 ## Caveats
 
 <app-alert type="warning" content="**MButton** is the only component that behaves differently when using the `Dark` prop. Normally components use the `Dark` prop to denote that they have a dark colored background and need their text to be white. While this will work

@@ -13,7 +13,24 @@ related:
 
 <cards-usage></cards-usage>
 
-## 解剖学
+## 组件结构解剖
+
+建议在 `MCard` 内部放置元素：
+
+* 将 `MCardTitle`, `MCardSubtitle` 或其他标题文本放在顶部
+* 将 `MCardText` 和其他形式的媒体放在卡头下方
+* 在卡片内容后放置 `MCardActions`
+
+![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 卡片容器包含所有 `MCard` 组件。 由3个主要部分组成：`MCardItem`, `MCardText`, 和 `MCardActions` |
+| 2. 标题（可选） | 增强 **font-size** 的标题 |
+| 3. 副标题 （可选） | 具有较低强调文本颜色的副标题 |
+| 4. 文本（可选） | 具有较低强调文本颜色的内容区域 |
+| 5. 操作（可选） | 通常包含一个或多个 [MButton](blazor/components/buttons) 组件的内容区域 |
+
 
 ## 功能组件
 

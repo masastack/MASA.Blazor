@@ -13,7 +13,22 @@ related:
 
 <banners-usage></banners-usage>
 
-## 解剖学
+## 组件结构解剖
+
+建议在 `MBanner` 内部放置元素：
+
+* 在最左边放置一个 `MBannerAvatar` 或 `MBannerIcon` 图标
+* 将 `MBannerText` 放在任何可视内容的右侧
+* 将 `MBannerActions` 放在文本内容的最右侧，底部偏移
+
+![Banner Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | Banner容器包含所有 `MBanner` 组件 |
+| 2. 头像 / 图标（可选） | 旨在改善视觉环境的主流媒体内容 |
+| 3. 文本 | 用于显示文本和其他内联元素的内容区域 |
+| 4. 操作（可选） |通常包含一个或多个 [MButton](blazor/components/buttons) 组件的内容区域 |
 
 ## 示例
 

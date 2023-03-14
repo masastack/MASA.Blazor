@@ -13,6 +13,25 @@ related:
 
 <app-bars-usage></app-bars-usage>
 
+## 组件结构解剖
+
+建议在 `MAppBar` 内部放置元素：
+
+* 将 `MAppBarNavIcon` 或其他导航项目放在最左侧
+* 将 `MAppBarTitle` 放置在导航右侧
+* 将上下文操作放置在导航右侧
+* 将溢出操作放在最右边
+
+![App Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | App Bar 容器包含所有 `MAppBar` 组件 |
+| 2. 应用栏图标（可选） | 创建的样式图标按钮组件，通常用于控制 `MNavigation Drawer` 的状态 |
+| 3. 标题（可选） | 增强 **font-size** 的标题 |
+| 4. 操作项目（可选） | 用于突出显示不在溢出菜单中的某些操作 |
+| 5. 溢出菜单（可选） | 将不常用的操作项放入隐藏菜单 |
+
 ## 功能组件
 
 #### MAppBarNavIcon
