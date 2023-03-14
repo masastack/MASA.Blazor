@@ -2,13 +2,13 @@
 
 public record PageTabPathValue(string Path, bool Selected)
 {
-    public bool Equals(string input)
+    public bool IsMatch(string pattern)
     {
-        if (!input.StartsWith("/"))
+        if (!pattern.StartsWith("/"))
         {
-            input = "/" + input;
+            pattern = "/" + pattern;
         }
 
-        return input.Equals(Path, StringComparison.OrdinalIgnoreCase);
+        return new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(Path);
     }
 }

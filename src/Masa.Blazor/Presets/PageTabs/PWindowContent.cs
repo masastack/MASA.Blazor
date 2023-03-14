@@ -6,7 +6,9 @@ public class PWindowContent : ComponentBase
 {
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    protected override bool ShouldRender() => false;
+    [Parameter] public bool Value { get; set; }
+
+    protected override bool ShouldRender() => Value;
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

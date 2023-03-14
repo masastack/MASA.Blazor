@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -52,7 +53,7 @@ public partial class PPageTabs : NextTickComponentBase
     [Parameter]
     public IEnumerable<string>? SelfPaths { get; set; }
 
-    private readonly List<string> _absolutePaths = new();
+    private readonly List<PathPattern> _absolutePaths = new();
 
     private bool _menuValue;
     private string? _contextmenuPath;
@@ -80,33 +81,34 @@ public partial class PPageTabs : NextTickComponentBase
     {
         base.OnInitialized();
 
-        var absolutePath = NavigationManager.GetAbsolutePath();
-        if (!_absolutePaths.Contains(absolutePath))
-        {
-            _absolutePaths.Add(absolutePath);
-        }
+        var pathPattern = TryGetMatchedPattern();
+        _absolutePaths.Add(pathPattern);
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var absolutePath = NavigationManager.GetAbsolutePath();
-
-        FormatSelfPaths();
-        if (SelfPaths!.Any(p => absolutePath.StartsWith(p)))
-        {
-            // TODO: 如果是Self的就永远只有一个tab
-        }
-
-        if (_absolutePaths.Contains(absolutePath))
+        var pathPattern = TryGetMatchedPattern();
+        if (_absolutePaths.Contains(pathPattern))
         {
             return;
         }
 
+        if (pathPattern.Self)
+        {
+            var renderedPathPattern = _absolutePaths.FirstOrDefault(p => pathPattern == p);
+            if (renderedPathPattern is not null)
+            {
+                renderedPathPattern.Path = NavigationManager.GetAbsolutePath();
+                InvokeAsync(StateHasChanged);
+                return;
+            }
+        }
+
         InvokeAsync(() =>
         {
-            _absolutePaths.Add(absolutePath);
+            _absolutePaths.Add(pathPattern);
             StateHasChanged();
         });
     }
@@ -204,11 +206,19 @@ public partial class PPageTabs : NextTickComponentBase
         _positionY = args.ClientY;
     }
 
-    private void FormatSelfPaths()
+    private List<Regex> FormatSelfPaths()
     {
-        SelfPaths = SelfPaths is null
-            ? new List<string>()
-            : SelfPaths.Select(sp => "/" + sp.Trim('/') + "/").ToList();
+        return SelfPaths is null
+            ? Enumerable.Empty<Regex>().ToList()
+            : SelfPaths.Select(p => new Regex(p)).ToList();
+    }
+
+    private PathPattern TryGetMatchedPattern()
+    {
+        var absolutePath = NavigationManager!.GetAbsolutePath();
+        var regexSelfPaths = FormatSelfPaths();
+        var regexSelfPath = regexSelfPaths.FirstOrDefault(r => r.IsMatch(absolutePath));
+        return regexSelfPath is null ? new PathPattern(absolutePath) : new PathPattern(regexSelfPath.ToString(), true);
     }
 
     protected override void Dispose(bool disposing)
