@@ -135,6 +135,6 @@ public partial class Index : IDisposable
 
     public void Dispose()
     {
-        DotNetObject.Dispose();
+        _objRef.Dispose();
     }
 }
