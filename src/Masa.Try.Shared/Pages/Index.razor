@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject HttpClient HttpClient
+
+<MApp>
+    <MAppBar App>
+        <MButton OnClick="RunCode">执行</MButton>
+    </MAppBar>
+    <MMain>
+        <MContainer Fluid>
+            <div class="monaco-editor">
+                <MMonacoEditor InitCompleteHandle="async()=>await InitMonaco()" Style="height:100%" EditorOptions="Options" @ref="_monaco"></MMonacoEditor>
+            </div>
+            <div class="render">
+                @if (componentType != null)
+                {
+                    <DynamicComponent Type="@componentType" />
+                }
+                else
+                {
+                    <h1>渲染区块</h1>
+                }
+            </div>
+        </MContainer>
+    </MMain>
+
+    <MFooter App>
+    </MFooter>
+</MApp>
+
+<style>
+    .container {
+        height: 100%;
+    }
+
+    .monaco-editor {
+        height: 99%;
+        width: 50%;
+        float: left;
+        margin: 5px;
+    }
+
+    .render {
+        margin: 5px;
+    }
+</style>
