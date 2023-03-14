@@ -15,6 +15,23 @@ Alerts in their simplest form are flat sheets of paper that display a message.
 
 ## Anatomy
 
+The recommended placement of elements inside of `MAlert` is:
+
+* Place a `MIcon` on the far left
+* Place `MAlertTitle` to the right of the contextual icon
+* Place textual content below the title
+* Place closing actions to the far right
+
+![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png) <!-- Will be replaced with the cdn of masastack -->
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Alert container holds all `MAlert` components |
+| 2. Icon | An icon that correlates to the contextual state of the alert; **success, info, warning, error** |
+| 3. Title | A heading with increased font-size |
+| 4. Text | A content area for displaying text and other inline elements |
+| 5. Close Icon (optional) | Used to hide the `MAlert` component |
+
 ## Examples
 
 ### Props

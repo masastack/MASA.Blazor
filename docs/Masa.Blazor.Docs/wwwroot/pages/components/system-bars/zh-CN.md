@@ -13,7 +13,20 @@ related:
 
 <system-bars-usage></system-bars-usage>
 
-## 解剖学
+## 组件结构解剖
+
+建议在 `MSystemBar` 内部放置元素：
+
+* 在右侧放置信息图标
+* 将时间或其他文本信息放在最右边
+
+![System Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 系统栏容器有一个默认插槽，内容右对齐 |
+| 2. 图标项目（可选） | 用于通过使用图标传达信息 |
+| 3. 文本（可选） | 通常用于显示时间的文本内容 |
 
 ## 示例
 

@@ -14,6 +14,19 @@ related:
 
 ## Anatomy
 
+The recommended placement of elements inside of `MSystemBar` is:
+
+* Place informational icons to the right
+* Place time or other textual information to the far right
+
+![System Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The System Bar container has a default slot with content justified right |
+| 2. Icon items (optional) | Used to convey information through the use of icons |
+| 3. Text (optional) | Textual content that is typically used to show time |
+
 ## Examples
 
 ### Props

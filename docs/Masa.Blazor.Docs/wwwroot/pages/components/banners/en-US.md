@@ -15,6 +15,21 @@ Banners can have 1-2 lines of text, actions and icon.
 
 ## Anatomy
 
+The recommended placement of elements inside of `MBanner` is:
+
+* Place a `MBannerAvatar` or `MBannerIcon` on the far left
+* Place `MBannerText` to the right of any visual content
+* Place `MBannerActions` to the far right of textual content, offset bottom
+
+![Banner Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Banner container holds all `MBanner` components |
+| 2. Avatar / Icon (optional) | Leading media content intended to improve visual context |
+| 3. Text | A content area for displaying text and other inline elements |
+| 4. Actions (optional) | A content area that typically contains one or more [MButton](blazor/components/buttons) components |
+
 ## Examples
 
 ### Props
