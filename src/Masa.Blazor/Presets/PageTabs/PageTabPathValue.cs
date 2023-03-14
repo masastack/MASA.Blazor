@@ -1,14 +1,14 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public record PageTabPathValue(string Path, bool Selected)
+public record PageTabPathValue(string AbsolutePath, bool Selected)
 {
-    public bool IsMatch(string pattern)
+    public bool IsMatch(string input)
     {
-        if (!pattern.StartsWith("/"))
+        if (!input.StartsWith("/"))
         {
-            pattern = "/" + pattern;
+            input = "/" + input;
         }
 
-        return new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(Path);
+        return new Regex(input, RegexOptions.IgnoreCase).IsMatch(AbsolutePath);
     }
 }

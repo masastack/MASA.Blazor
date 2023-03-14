@@ -5,7 +5,7 @@
     <MTabs Routable Class="@($"m-page-tabs {Class}")" Style="@Style" HideSlider="@HideSlider" @ref="@_tabs">
         @foreach (var path in _absolutePaths)
         {
-            <MTab Href="@path"
+            <MTab Href="@path.Path"
                   Class="@($"m-page-tab {TabClass}")"
                   Exact
                   Ripple="@Ripple"
@@ -14,7 +14,7 @@
                   __internal_preventDefault_oncontextmenu>
                 @if (TabContent != default)
                 {
-                    @TabContent.Invoke(new PageTabPathValue(path, path == NavigationManager.GetAbsolutePath()))
+                    @TabContent.Invoke(new PageTabPathValue(path.Path, path.Path == NavigationManager.GetAbsolutePath()))
                 }
                 else
                 {

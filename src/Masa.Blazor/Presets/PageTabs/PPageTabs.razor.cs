@@ -56,16 +56,16 @@ public partial class PPageTabs : NextTickComponentBase
     private readonly List<PathPattern> _absolutePaths = new();
 
     private bool _menuValue;
-    private string? _contextmenuPath;
+    private PathPattern? _contextmenuPath;
 
     private double _positionX;
     private double _positionY;
 
     private MTabs? _tabs;
 
-    internal EventHandler<string>? TabClosed;
-    internal EventHandler<string>? TabReload;
-    internal EventHandler<string[]>? TabsUpdated;
+    internal EventHandler<PathPattern>? TabClosed;
+    internal EventHandler<PathPattern>? TabReload;
+    internal EventHandler<PathPattern[]>? TabsUpdated;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -90,7 +90,7 @@ public partial class PPageTabs : NextTickComponentBase
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var pathPattern = TryGetMatchedPattern();
-        if (_absolutePaths.Contains(pathPattern))
+        if (_absolutePaths.Any(p => p.Pattern == pathPattern.Pattern && p.Path == pathPattern.Path))
         {
             return;
         }
@@ -100,7 +100,7 @@ public partial class PPageTabs : NextTickComponentBase
             var renderedPathPattern = _absolutePaths.FirstOrDefault(p => pathPattern == p);
             if (renderedPathPattern is not null)
             {
-                renderedPathPattern.Path = NavigationManager.GetAbsolutePath();
+                renderedPathPattern.UpdatePath(NavigationManager.GetAbsolutePath());
                 InvokeAsync(StateHasChanged);
                 return;
             }
@@ -113,20 +113,21 @@ public partial class PPageTabs : NextTickComponentBase
         });
     }
 
-    private async Task HandleOnCloseTab(string path)
+    private async Task HandleOnCloseTab(PathPattern path)
     {
         var isConfirmed = await PopupService.ConfirmAsync("Close tab", "Are you sure?");
         if (!isConfirmed) return;
 
-        var currentPath = NavigationManager.GetAbsolutePath();
+        // var currentPath = NavigationManager.GetAbsolutePath();
+        var currentPathPattern = TryGetMatchedPattern();
 
-        if (currentPath == path)
+        if (currentPathPattern == path)
         {
             var index = _absolutePaths.IndexOf(path);
 
             var nextPath = index == _absolutePaths.Count - 1
-                ? _absolutePaths.ElementAtOrDefault(_absolutePaths.Count - 2)
-                : _absolutePaths.ElementAtOrDefault(index + 1);
+                ? _absolutePaths.ElementAtOrDefault(_absolutePaths.Count - 2)?.Path
+                : _absolutePaths.ElementAtOrDefault(index + 1)?.Path;
 
             nextPath ??= "/";
 
@@ -149,14 +150,14 @@ public partial class PPageTabs : NextTickComponentBase
     {
         if (_contextmenuPath is null) return;
 
-        var currentPath = NavigationManager.GetAbsolutePath();
+        var currentPath = TryGetMatchedPattern();
 
         var index = _absolutePaths.FindIndex(p => p == _contextmenuPath);
         _absolutePaths.RemoveRange(0, index);
 
         if (!_absolutePaths.Contains(currentPath))
         {
-            NavigationManager.NavigateTo(_contextmenuPath);
+            NavigationManager.NavigateTo(_contextmenuPath!.Path);
         }
 
         TabsUpdated?.Invoke(this, _absolutePaths.ToArray());
@@ -168,7 +169,7 @@ public partial class PPageTabs : NextTickComponentBase
     {
         if (_contextmenuPath is null) return;
 
-        var currentPath = NavigationManager.GetAbsolutePath();
+        var currentPath = TryGetMatchedPattern();
 
         var index = _absolutePaths.FindIndex(p => p == _contextmenuPath);
         var startIndex = index + 1;
@@ -176,7 +177,7 @@ public partial class PPageTabs : NextTickComponentBase
 
         if (!_absolutePaths.Contains(currentPath))
         {
-            NavigationManager.NavigateTo(_contextmenuPath);
+            NavigationManager.NavigateTo(_contextmenuPath!.Path);
         }
 
         TabsUpdated?.Invoke(this, _absolutePaths.ToArray());
@@ -190,12 +191,12 @@ public partial class PPageTabs : NextTickComponentBase
 
         _absolutePaths.RemoveAll(p => p != _contextmenuPath);
 
-        NavigationManager.NavigateTo(_contextmenuPath);
+        NavigationManager.NavigateTo(_contextmenuPath!.Path);
 
         TabsUpdated?.Invoke(this, _absolutePaths.ToArray());
     }
 
-    private async Task HandleOnContextmenu(MouseEventArgs args, string path)
+    private async Task HandleOnContextmenu(MouseEventArgs args, PathPattern path)
     {
         _contextmenuPath = path;
         _menuValue = false;
@@ -215,10 +216,10 @@ public partial class PPageTabs : NextTickComponentBase
 
     private PathPattern TryGetMatchedPattern()
     {
-        var absolutePath = NavigationManager!.GetAbsolutePath();
+        var absolutePath = NavigationManager.GetAbsolutePath();
         var regexSelfPaths = FormatSelfPaths();
         var regexSelfPath = regexSelfPaths.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return regexSelfPath is null ? new PathPattern(absolutePath) : new PathPattern(regexSelfPath.ToString(), true);
+        return regexSelfPath is null ? new PathPattern(absolutePath) : new PathPattern(regexSelfPath.ToString(), absolutePath);
     }
 
     protected override void Dispose(bool disposing)

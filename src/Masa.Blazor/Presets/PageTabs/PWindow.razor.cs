@@ -23,21 +23,20 @@ public partial class PWindow : IAsyncDisposable
 
     private readonly List<PathPattern> _absolutePaths = new();
 
-    private string? _currentAbsolutePath;
+    private PathPattern? _currentAbsolutePath;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        var (_, path) = TryGetMatchedPattern();
-        _currentAbsolutePath = path;
+        var pathPattern = TryGetMatchedPattern();
+        _currentAbsolutePath = pathPattern;
     }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        var (matched, pattern) = TryGetMatchedPattern();
-        var pathPattern = new PathPattern(pattern, matched);
+        var pathPattern = TryGetMatchedPattern();
         if (!_absolutePaths.Contains(pathPattern))
         {
             _absolutePaths.Add(pathPattern);
@@ -68,7 +67,7 @@ public partial class PWindow : IAsyncDisposable
         }
     }
 
-    private void PageTabsOnTabClosed(object? sender, string e)
+    private void PageTabsOnTabClosed(object? sender, PathPattern e)
     {
         InvokeAsync(() =>
         {
@@ -77,7 +76,7 @@ public partial class PWindow : IAsyncDisposable
         });
     }
 
-    private void PageTabsOnTabReload(object? sender, string e)
+    private void PageTabsOnTabReload(object? sender, PathPattern e)
     {
         InvokeAsync(() =>
         {
@@ -88,7 +87,7 @@ public partial class PWindow : IAsyncDisposable
         });
     }
 
-    private void PageTabsOnTabsUpdated(object? sender, string[] paths)
+    private void PageTabsOnTabsUpdated(object? sender, PathPattern[] paths)
     {
         InvokeAsync(() =>
         {
@@ -104,21 +103,18 @@ public partial class PWindow : IAsyncDisposable
             return;
         }
 
-        var regexSelfPaths = FormatSelfPaths();
-        var selfPath = regexSelfPaths!.FirstOrDefault(r => r.IsMatch(_currentAbsolutePath!));
-        if (selfPath is not null)
+        var pathPattern = TryGetMatchedPattern();
+        if (pathPattern.Self)
         {
-            var renderedAbsolutePath = _absolutePaths.FirstOrDefault(p => selfPath.IsMatch(p));
+            var renderedAbsolutePath = _absolutePaths.FirstOrDefault(p => pathPattern == p);
             if (renderedAbsolutePath is not null)
             {
-                var index = _absolutePaths.IndexOf(renderedAbsolutePath);
-                _absolutePaths[index] = selfPath.ToString();
                 InvokeAsync(StateHasChanged);
                 return;
             }
             else
             {
-                _absolutePaths.Add(selfPath.ToString());
+                _absolutePaths.Add(pathPattern);
                 InvokeAsync(StateHasChanged);
                 return;
             }
@@ -138,12 +134,12 @@ public partial class PWindow : IAsyncDisposable
             : SelfPaths.Select(p => new Regex(p)).ToList();
     }
 
-    private(bool matched, string value) TryGetMatchedPattern()
+    private PathPattern TryGetMatchedPattern()
     {
         var absolutePath = NavigationManager!.GetAbsolutePath();
         var regexSelfPaths = FormatSelfPaths();
         var regexSelfPath = regexSelfPaths.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return regexSelfPath is null ? (false, absolutePath) : (true, regexSelfPath.ToString());
+        return regexSelfPath is null ? new PathPattern(absolutePath) : new PathPattern(regexSelfPath.ToString(), absolutePath);
     }
 
     public async ValueTask DisposeAsync()
