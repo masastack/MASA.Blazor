@@ -3,11 +3,8 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public partial class PWindow : IAsyncDisposable
+public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
 {
-    [Inject]
-    private NavigationManager? NavigationManager { get; set; }
-
     [CascadingParameter]
     private PPageTabs? ContainerPageTabs { get; set; }
 
@@ -17,29 +14,23 @@ public partial class PWindow : IAsyncDisposable
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    // TODO: rename: self patterns
-    [Parameter]
-    public IEnumerable<string>? SelfPaths { get; set; }
-
-    private readonly List<PathPattern> _absolutePaths = new();
-
-    private PathPattern? _currentAbsolutePath;
+    private PatternPath? _currentAbsolutePath;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        var pathPattern = TryGetMatchedPattern();
-        _currentAbsolutePath = pathPattern;
+        var patternPath = GetCurrentPatternPath();
+        _currentAbsolutePath = patternPath;
     }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        var pathPattern = TryGetMatchedPattern();
-        if (!_absolutePaths.Contains(pathPattern))
+        var patternPath = GetCurrentPatternPath();
+        if (!PatternPaths.Contains(patternPath))
         {
-            _absolutePaths.Add(pathPattern);
+            PatternPaths.Add(patternPath);
         }
 
         if (ContainerPageTabs != null)
@@ -49,7 +40,7 @@ public partial class PWindow : IAsyncDisposable
             ContainerPageTabs.TabsUpdated += PageTabsOnTabsUpdated;
         }
 
-        NavigationManager!.LocationChanged += NavigationManagerOnLocationChanged;
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -67,46 +58,46 @@ public partial class PWindow : IAsyncDisposable
         }
     }
 
-    private void PageTabsOnTabClosed(object? sender, PathPattern e)
+    private void PageTabsOnTabClosed(object? sender, PatternPath e)
     {
         InvokeAsync(() =>
         {
-            _absolutePaths.Remove(e);
+            PatternPaths.Remove(e);
             StateHasChanged();
         });
     }
 
-    private void PageTabsOnTabReload(object? sender, PathPattern e)
+    private void PageTabsOnTabReload(object? sender, PatternPath e)
     {
         InvokeAsync(() =>
         {
-            _absolutePaths.Remove(e);
+            PatternPaths.Remove(e);
             StateHasChanged();
-            _absolutePaths.Add(e);
+            PatternPaths.Add(e);
             StateHasChanged();
         });
     }
 
-    private void PageTabsOnTabsUpdated(object? sender, PathPattern[] paths)
+    private void PageTabsOnTabsUpdated(object? sender, PatternPath[] paths)
     {
         InvokeAsync(() =>
         {
-            _absolutePaths.RemoveAll(p => !paths.Contains(p));
+            PatternPaths.RemoveAll(p => !paths.Contains(p));
             StateHasChanged();
         });
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        if (_absolutePaths.Contains(_currentAbsolutePath!))
+        if (PatternPaths.Contains(_currentAbsolutePath!))
         {
             return;
         }
 
-        var pathPattern = TryGetMatchedPattern();
-        if (pathPattern.Self)
+        var patternPath = GetCurrentPatternPath();
+        if (patternPath.IsSelf)
         {
-            var renderedAbsolutePath = _absolutePaths.FirstOrDefault(p => pathPattern == p);
+            var renderedAbsolutePath = PatternPaths.FirstOrDefault(p => patternPath == p);
             if (renderedAbsolutePath is not null)
             {
                 InvokeAsync(StateHasChanged);
@@ -114,7 +105,7 @@ public partial class PWindow : IAsyncDisposable
             }
             else
             {
-                _absolutePaths.Add(pathPattern);
+                PatternPaths.Add(patternPath);
                 InvokeAsync(StateHasChanged);
                 return;
             }
@@ -122,24 +113,9 @@ public partial class PWindow : IAsyncDisposable
 
         InvokeAsync(() =>
         {
-            _absolutePaths.Add(_currentAbsolutePath!);
+            PatternPaths.Add(_currentAbsolutePath!);
             StateHasChanged();
         });
-    }
-
-    private List<Regex> FormatSelfPaths()
-    {
-        return SelfPaths is null
-            ? Enumerable.Empty<Regex>().ToList()
-            : SelfPaths.Select(p => new Regex(p)).ToList();
-    }
-
-    private PathPattern TryGetMatchedPattern()
-    {
-        var absolutePath = NavigationManager!.GetAbsolutePath();
-        var regexSelfPaths = FormatSelfPaths();
-        var regexSelfPath = regexSelfPaths.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return regexSelfPath is null ? new PathPattern(absolutePath) : new PathPattern(regexSelfPath.ToString(), absolutePath);
     }
 
     public async ValueTask DisposeAsync()
@@ -158,6 +134,6 @@ public partial class PWindow : IAsyncDisposable
             ContainerPageTabs.TabsUpdated -= PageTabsOnTabsUpdated;
         }
 
-        NavigationManager!.LocationChanged -= NavigationManagerOnLocationChanged;
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }

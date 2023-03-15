@@ -1,28 +1,46 @@
 ﻿@namespace Masa.Blazor.Presets
-@inherits NextTickComponentBase
+@inherits PatternPathComponentBase
 
 <CascadingValue Value="this" IsFixed>
-    <MTabs Routable Class="@($"m-page-tabs {Class}")" Style="@Style" HideSlider="@HideSlider" @ref="@_tabs">
-        @foreach (var path in _absolutePaths)
+    <MTabs Routable
+           Class="@($"m-page-tabs {Class}")"
+           Style="@Style"
+           ActiveClass="@ActiveClass"
+           HideSlider="@HideSlider"
+           SliderColor="@SliderColor"
+           @ref="@_tabs">
+        @foreach (var patternPath in PatternPaths)
         {
-            <MTab Href="@path.Path"
+            <MTab Href="@patternPath.AbsolutePath"
                   Class="@($"m-page-tab {TabClass}")"
                   Exact
                   Ripple="@Ripple"
-                  @key="@path"
-                  @oncontextmenu="(e) => HandleOnContextmenu(e, path)"
+                  @key="@patternPath.Pattern"
+                  @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
                   __internal_preventDefault_oncontextmenu>
-                @if (TabContent != default)
-                {
-                    @TabContent.Invoke(new PageTabPathValue(path.Path, path.Path == NavigationManager.GetAbsolutePath()))
-                }
-                else
-                {
-                    @path
+
+                @{
+                    string title = null;
+
+                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out title))
+                    {
+                        @title
+                    }
+                    else if (TabContent != null)
+                    {
+                        @TabContent.Invoke(new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath()))
+                    }
+                    else
+                    {
+                        title = DefaultTabTitle(patternPath.AbsolutePath);
+
+                        @title
+                    }
                 }
 
                 <MButton Icon
-                         OnClick="() => HandleOnCloseTab(path)"
+                         Class="ml-1"
+                         OnClick="() => HandleOnCloseTab(patternPath, title)"
                          Small
                          StopPropagation
                          OnClickPreventDefault>
