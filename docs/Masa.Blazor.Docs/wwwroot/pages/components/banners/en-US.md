@@ -21,7 +21,7 @@ The recommended placement of elements inside of `MBanner` is:
 * Place `MBannerText` to the right of any visual content
 * Place `MBannerActions` to the far right of textual content, offset bottom
 
-![Banner Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-banner/v-banner-anatomy.png)
+![Banner Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/banner-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

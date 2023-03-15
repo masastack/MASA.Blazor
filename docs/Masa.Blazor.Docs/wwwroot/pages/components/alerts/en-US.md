@@ -9,7 +9,7 @@ related:
 
 ## Usage
 
-Alerts in their simplest form are flat sheets of paper that display a message.
+The component is used to convey important information to the user through the use of contextual types, icons, and colors. `MAlert`
 
 <alerts-usage></alerts-usage>
 
@@ -22,7 +22,7 @@ The recommended placement of elements inside of `MAlert` is:
 * Place textual content below the title
 * Place closing actions to the far right
 
-![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png) <!-- Will be replaced with the cdn of masastack -->
+![Alert Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/alert-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

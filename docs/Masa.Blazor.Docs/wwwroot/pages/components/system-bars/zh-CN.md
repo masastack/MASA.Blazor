@@ -20,7 +20,7 @@ related:
 * 在右侧放置信息图标
 * 将时间或其他文本信息放在最右边
 
-![System Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-anatomy.png)
+![System Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/system-bar-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

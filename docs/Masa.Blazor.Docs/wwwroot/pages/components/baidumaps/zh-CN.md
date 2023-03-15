@@ -12,7 +12,7 @@ tag: "JS代理"
 然后引用BaiduMaps JS API GL的包：
 
 ```html
-<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-ak}"></script>
+<script src="https://api.map.baidu.com/getscript?v=1.0&&type=webgl&ak={your-ak}"></script>
 ```
 
 <app-alert type="info" content='需要将 `{your-ak}` 替换为您申请的AK。'></app-alert>

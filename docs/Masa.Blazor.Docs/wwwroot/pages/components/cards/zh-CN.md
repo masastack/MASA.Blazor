@@ -21,7 +21,7 @@ related:
 * 将 `MCardText` 和其他形式的媒体放在卡头下方
 * 在卡片内容后放置 `MCardActions`
 
-![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
+![Card Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |
@@ -36,20 +36,19 @@ related:
 
 #### MCardActions
 
-用于为卡片放置 动作 的容器，如 [MButton](/blazor/components/buttons) 或 [MMenu](/blazor/components/menus)。 同时在按钮上使用 个特殊边距
-  ，以便它们与其他卡片内容区域的匹配。
+`MCardActions` 的空间可用于放置用于卡片的选项，例如[MButton](/blazor/components/buttons)按钮组件或者 [MMenu](/blazor/components/menus)菜单组件。 它也在选项按钮上应用了特殊边距排版，使其能够和卡片上的其他内容正确排列起来。
 
 #### MCardSubtitle
 
-为卡片字幕提供默认的 **字体大小** 和 **填充**。 字体大小可以以 [排版类](/blazor/styles-and-animations/text-and-typography) 覆盖。
+`MCardSubtitle` 组件能为卡片的小标或字幕提供其默认的 **字体大小** 和 **填充** 排版。 字体大小可以使用文本和排版中的[文字排版属性](/blazor/styles-and-animations/text-and-typography)进行调整。
 
 #### MCardText
 
-主要用于卡片中的 **文本内容**。 对文本应用填充，将其字体大小减少为 .875rem。
+`MCardText` 主要用于显示卡片中的文本内容。 它使卡片中的文本能够进行填充排版，并将字体大小减小至 .875rem 的大小。
 
 #### MCardTitle
 
-为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 [排版类](/blazor/styles-and-animations/text-and-typography) 覆盖。
+`MCardTitle` 为卡片的大标提供了默认的 **字体大小** 和 **填充排版**。 字体大小可以使用文本和排版中的[文字排版属性](/blazor/styles-and-animations/text-and-typography) 进行调整。
 
 ## 示例
 

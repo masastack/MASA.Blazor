@@ -20,7 +20,7 @@ The recommended placement of elements inside of `MTextField` is:
 * Place a `MIcon` at the start of the input or label
 * Place label after prepended content
 
-![Text-field Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-anatomy.png)
+![Text-field Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/text-field-anatomy.png)
 
 | Element / Area | Description |
 | - | - |
