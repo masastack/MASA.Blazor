@@ -9,11 +9,28 @@ related:
 
 ## 使用
 
-最简单的警报形式是显示消息的平板纸。
+`MAlert` 组件用于通过使用上下文类型、图标和颜色向用户传达重要信息。
 
 <alerts-usage></alerts-usage>
 
-## 解剖学
+## 组件结构剖析
+
+建议在 `MAlert` 内部放置元素：
+
+* 在最左边放置一个 `MIcon`
+* 将 `MAlertTtle` 放在上下文图标的右侧
+* 在标题下方放置文本内容
+* 将关闭动作放在最右侧
+
+![Alert Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/alert-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 提示框容器包含所有组件 `MAlert` |
+| 2. 图标 | 与提示框的上下文状态相关的图标; **success, info, warning, error** |
+| 3. 标题 | 字体大小增加的标题 |
+| 4. 标题 | 用于显示文本和其他内联元素的内容区域 |
+| 5. 关闭图标（可选） | 用于隐藏组件 `MAlert`  |
 
 ## 示例
 
@@ -78,7 +95,7 @@ related:
 
 #### 过度
 
-`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 [内建过渡](/blazor/styles-and-animations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
+`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 **Masa Blazor** 内置的[过渡](/blazor/styles-and-animations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
 
 <masa-example file="Examples.components.alerts.Transition"></masa-example>
 

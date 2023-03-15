@@ -13,7 +13,7 @@ To use base map services, register an AK whose **Application Type** is **Browser
 Then refer the package of BaiduMaps JS API GL: 
 
 ```html
-<script src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak={your-ak}"></script>
+<script src="https://api.map.baidu.com/getscript?v=1.0&&type=webgl&ak={your-ak}"></script>
 ```
 
 <app-alert type="info" content='Replace `{your-ak}` with your AK. '></app-alert>

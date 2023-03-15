@@ -15,6 +15,23 @@ The **MAppBar** component is used for application-wide actions and information.
 
 ## Anatomy
 
+The recommended placement of elements inside of `MAppBar` is:
+
+* Place `MAppBarNavIcon` or other navigation items on the far left
+* Place `MAppBarTitle` to the right of navigation
+* Place contextual actions to the right of navigation
+* Place overflow actions to the far right
+
+![App Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The App Bar container holds all `MAppBar` components |
+| 2. App Bar Icon (optional) | A styled icon button component created that is often used to control the state of a `MNavigation Drawer` |
+| 3. Title (optional) | A heading with increased **font-size** |
+| 4. Action items (optional) | Used to highlight certain actions not in the overflow menu |
+| 5. Overflow menu (optional) | Place less often used action items into a hidden menu |
+
 ## SubComponents
 
 - **MAppBarNavIcon** ：A stylized icon button component created specifically for use with [MToolbar](/blazor/components/toolbars) and **AppBar**. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.

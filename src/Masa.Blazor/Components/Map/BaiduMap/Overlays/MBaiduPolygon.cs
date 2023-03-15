@@ -62,7 +62,7 @@ namespace Masa.Blazor
             base.RegisterWatchers(watcher);
 
             watcher.Watch<IEnumerable<GeoPoint>>(nameof(Points), async (val)
-                => await OverlayJSObjectRef.TryInvokeVoidAsync("setPath", val));
+                => await OverlayJSObjectRef.TryInvokeVoidAsync("setPathWithGeoPoint", val, OverlayJSObjectRef));
 
             watcher.Watch<string>(nameof(StrokeColor), async (val)
                 => await OverlayJSObjectRef.TryInvokeVoidAsync("setStrokeColor", val));
