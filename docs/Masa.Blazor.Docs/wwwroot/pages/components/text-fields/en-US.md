@@ -13,6 +13,24 @@ A simple text field with placeholder and/or label.
 
 <text-fields-usage></text-fields-usage>
 
+## Anatomy
+
+The recommended placement of elements inside of `MTextField` is:
+
+* Place a `MIcon` at the start of the input or label
+* Place label after prepended content
+
+![Text-field Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/text-field-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Text field container contains the `MInput` and `MField` components |
+| 2. Prepend icon | A custom icon that is located before `MTextField` |
+| 3. Prepend-inner icon | A custom icon that is located at the start of `MTextField` |
+| 4. Label | A content area for displaying text to users that correlates to the input |
+| 5. Append-inner icon | A custom icon that is located at the end of `MTextField` component |
+| 6. Append icon | A custom icon that is located after `MTextField` component |
+
 ## Examples
 
 ### Props

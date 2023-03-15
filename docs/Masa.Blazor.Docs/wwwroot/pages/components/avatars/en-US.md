@@ -15,6 +15,17 @@ related:
 
 ## Anatomy
 
+The recommended placement of elements inside of `MAvatar` is:
+
+* Place a [MImage](blazor/components/images/) or [MIcon](blazor/components/images/) component within the default *slot*
+* Place textual content within the default *slot*
+
+![Avatar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/avatar-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Avatar container that typically holds a [MIcon](blazor/components/icons/) or [MImage](blazor/components/images/) component |
+
 ## Examples
 
 ### Props

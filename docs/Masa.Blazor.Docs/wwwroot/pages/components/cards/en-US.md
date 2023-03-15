@@ -15,6 +15,22 @@ A card has four basic components, `MCardTitle`, `MCardSubtitle`, `MCardText` 和
 
 ## Anatomy
 
+The recommended placement of elements inside of `MCard` is:
+
+* Place `MCardTitle`, `MCardSubtitle` or other title text on top
+* Place `MCardText` and other forms of media below the card header
+* Place `MCardActions` after card content
+
+![Card Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Card container holds all `MCard` components. Composed of 3 major parts: `MCardItem`, `MCardText`, and `MCardActions` |
+| 2. Title (optional) | A heading with increased **font-size** |
+| 3. Subtitle (optional) | A subheading with a lower emphasis text color |
+| 4. Text (optional) | A content area with a lower emphasis text color |
+| 5. Actions (optional) | A content area that typically contains one or more [MButton](blazor/components/buttons) components |
+
 ## SubComponents
 
 #### MCardActions
@@ -28,11 +44,11 @@ Provide default **font size** and **fill** for card subtitles. Font size can be 
 
 #### MCardText
 
-It is mainly used for **text content** in cards. Apply padding to the text and reduce its font size to. 875rem.
+Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
 
 #### MCardTitle
 
-Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
+Provide default **font size** and **padding** for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
 
 ## Examples
 

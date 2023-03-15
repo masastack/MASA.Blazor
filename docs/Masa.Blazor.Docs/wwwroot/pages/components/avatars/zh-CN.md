@@ -13,7 +13,18 @@ related:
 
 <avatars-usage></avatars-usage>
 
-## 解剖学
+## 组件结构解剖
+
+建议在 `MAvatar` 内部放置元素：
+
+* 将 [MImage](blazor/components/images/) 或 [MIcon](blazor/components/images/) 组件放在默认 *插槽* 中
+* 将文本内容放在默认的 *插槽* 中
+
+![Avatar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/avatar-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | Avatar容器，通常包含 [MIcon](blazor/components/icons/) 或 [MImage](blazor/components/images/) 组件 |
 
 ## 示例
 
