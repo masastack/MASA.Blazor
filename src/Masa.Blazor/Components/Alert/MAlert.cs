@@ -103,7 +103,7 @@
                         .Add("m-alert")
                         .Add("m-sheet")
                         .AddIf("m-alert--border", () => Border != Borders.None)
-                        .Add(BorderClass)
+                        .Add(AlertBorderClass().AlertBorderClass)
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(IsDarkTheme)
                         .AddElevation(Elevation)
@@ -133,7 +133,7 @@
                 {
                     cssBuilder
                         .Add("m-alert__border")
-                        .Add(BorderClass)
+                        .Add(AlertBorderClass().BorderClass)
                         .AddIf("m-alert__border--has-color", () => ColoredBorder)
                         .AddIf(() => Type.ToString().ToLower(), () => HasTypedBorder)
                         .AddTextColor(Color, () => ColoredBorder);
@@ -158,13 +158,14 @@
                 })
                 .Apply<BIcon, MIcon>("dismissible", attrs => { attrs[nameof(MIcon.Dark)] = IsDarkTheme; });
 
-            string BorderClass() => Border switch
+
+            (string BorderClass, string AlertBorderClass) AlertBorderClass() => Border switch
             {
-                Borders.Left => "m-alert__border--left",
-                Borders.Right => "m-alert__border--right",
-                Borders.Top => "m-alert__border--top",
-                Borders.Bottom => "m-alert__border--bottom",
-                Borders.None => "",
+                Borders.Left => ("m-alert__border--left", "m-alert--border-left"),
+                Borders.Right => ("m-alert__border--right", "m-alert--border-right"),
+                Borders.Top => ("m-alert__border--top", "m-alert--border-top"),
+                Borders.Bottom => ("m-alert__border--bottom", "m-alert--border-bottom"),
+                Borders.None => ("", ""),
                 _ => throw new ArgumentOutOfRangeException(nameof(Border))
             };
         }
