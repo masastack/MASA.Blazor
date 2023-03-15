@@ -13,7 +13,7 @@ related:
 
 <toolbars-usage></toolbars-usage>
 
-## 解剖学
+## 组件结构解剖
 
 ## 注意
 

@@ -75,6 +75,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
     addCodeRules(md);
     addImageRules(md);
     addBlockquoteRules(md);
+    addTableRules(md);
 
     parser.useContainer("code-group")
     parser.useContainer("code-group-item")
@@ -170,6 +171,12 @@ window.MasaBlazor.markdownItRules = function (parser) {
       tokens[idx].tag = "app-alert";
 
       return self.renderToken(tokens, idx, options);
+    };
+  }
+
+  function addTableRules(md) {
+    md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
+      return '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' + self.renderToken(tokens, idx, options) + '</div></div></div>';
     };
   }
 
