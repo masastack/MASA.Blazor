@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-最简单的警报形式是显示消息的平板纸。
+`MAlert` 组件用于通过使用上下文类型、图标和颜色向用户传达重要信息。
 
 <alerts-usage></alerts-usage>
 
@@ -22,7 +22,7 @@ related:
 * 在标题下方放置文本内容
 * 将关闭动作放在最右侧
 
-![Alert Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/alert-anatomy.png)
+![Alert Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/alert-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |
@@ -95,7 +95,7 @@ related:
 
 #### 过度
 
-`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 [内建过渡](/blazor/styles-and-animations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
+`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 **Masa Blazor** 内置的[过渡](/blazor/styles-and-animations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
 
 <masa-example file="Examples.components.alerts.Transition"></masa-example>
 

@@ -20,7 +20,7 @@ related:
 * 在输入或标签的开头放置 `MIcon`
 * 将标签放在预先准备好的内容之后
 
-![Text-field Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/text-field-anatomy.png)
+![Text-field Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/text-field-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

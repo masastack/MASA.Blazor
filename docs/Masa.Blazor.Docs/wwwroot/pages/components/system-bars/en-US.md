@@ -19,7 +19,7 @@ The recommended placement of elements inside of `MSystemBar` is:
 * Place informational icons to the right
 * Place time or other textual information to the far right
 
-![System Bar Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/system-bar-anatomy.png)
+![System Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/system-bar-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

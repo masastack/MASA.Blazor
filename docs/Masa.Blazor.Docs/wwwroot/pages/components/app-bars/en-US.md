@@ -22,7 +22,7 @@ The recommended placement of elements inside of `MAppBar` is:
 * Place contextual actions to the right of navigation
 * Place overflow actions to the far right
 
-![App Bar Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
+![App Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
 
 | Element / Area | Description |
 | - | - |

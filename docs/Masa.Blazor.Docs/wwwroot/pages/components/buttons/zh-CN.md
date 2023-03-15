@@ -20,7 +20,7 @@ related:
 * 将文本放在中心
 * 在容器文本周围放置可视内容
 
-![Button Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/btn-anatomy.png)
+![Button Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/btn-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |

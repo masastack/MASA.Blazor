@@ -21,7 +21,7 @@ The recommended placement of elements inside of `MCard` is:
 * Place `MCardText` and other forms of media below the card header
 * Place `MCardActions` after card content
 
-![Card Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
+![Card Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
 
 | Element / Area | Description |
 | - | - |
@@ -44,11 +44,11 @@ Provide default **font size** and **fill** for card subtitles. Font size can be 
 
 #### MCardText
 
-It is mainly used for **text content** in cards. Apply padding to the text and reduce its font size to. 875rem.
+Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
 
 #### MCardTitle
 
-Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
+Provide default **font size** and **padding** for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
 
 ## Examples
 

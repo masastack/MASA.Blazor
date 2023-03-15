@@ -22,7 +22,7 @@ related:
 * 将上下文操作放置在导航右侧
 * 将溢出操作放在最右边
 
-![App Bar Anatomy](http://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
+![App Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
 
 | 元素 / 区域 | 描述 |
 | - | - |
