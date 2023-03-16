@@ -1,10 +1,13 @@
-﻿using BlazorComponent;
-using Masa.Blazor;
+﻿using Masa.Blazor;
 using Masa.Blazor.Extensions.Languages.Razor;
 using Masa.Try.Shared.Pages.Options;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
+using System.IO;
+using System.Runtime.Loader;
+using BlazorComponent;
 
 namespace Masa.Try.Shared.Pages;
 
@@ -185,19 +188,36 @@ public partial class Index : NextTickComponentBase
     async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
-        foreach (var asm in s_assemblies)
+        if (MasaTrySharedExtension.WebAssembly)
         {
-            try
+            foreach (var asm in s_assemblies)
             {
-                await using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
-                if (stream.Length > 0)
+                try
                 {
-                    portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    await using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
+                    if (stream.Length > 0)
+                    {
+                        portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
-            catch (Exception e)
+        }
+        else
+        {
+            foreach (var asm in AssemblyLoadContext.Default.Assemblies)
             {
-                Console.WriteLine(e.Message);
+                try
+                {
+                    portableExecutableReferences?.Add(MetadataReference.CreateFromFile(asm.Location));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
         }
 
