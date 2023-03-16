@@ -77,7 +77,7 @@ public partial class Index : IDisposable
         automaticLayout = true,
     };
 
-    private DotNetObjectReference<Index> DotNetObject; 
+    private DotNetObjectReference<Index> _objRef; 
 
     [JSInvokable("RunCode")]
     public async void RunCode()
@@ -144,7 +144,7 @@ public partial class Index : IDisposable
     protected override async Task OnInitializedAsync()
     {
 
-        DotNetObject = DotNetObjectReference.Create(this);
+        _objRef = DotNetObjectReference.Create(this);
 
         RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
@@ -167,7 +167,7 @@ public partial class Index : IDisposable
     private async Task InitMonaco(TabMonacoModule tabMonacoModule)
     {
         // 监听CTRL+S
-        await tabMonacoModule.MonacoEditor.AddCommand(2097, DotNetObject, nameof(RunCode));
+        await tabMonacoModule.MonacoEditor.AddCommand(2097, _objRef, nameof(RunCode));
     }
 
     async Task<List<PortableExecutableReference>?> GetReference()
@@ -208,6 +208,6 @@ public partial class Index : IDisposable
 
     public void Dispose()
     {
-        DotNetObject.Dispose();
+        _objRef.Dispose();
     }
 }
