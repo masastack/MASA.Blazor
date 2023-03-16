@@ -7,7 +7,8 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddMasaBlazor();
 builder.Services.AddScoped<TryJSModule>();
 
-builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped(sp => new HttpClient
+    { BaseAddress = new Uri(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5250") });
 
 var app = builder.Build();
 
