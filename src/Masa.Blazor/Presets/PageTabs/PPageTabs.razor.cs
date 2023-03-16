@@ -23,12 +23,6 @@ public partial class PPageTabs : PatternPathComponentBase
     public RenderFragment<PageTabPathValue>? TabContent { get; set; }
 
     [Parameter]
-    public string? Class { get; set; }
-
-    [Parameter]
-    public string? Style { get; set; }
-
-    [Parameter]
     public string? TabClass { get; set; }
 
     [Parameter]
@@ -86,6 +80,13 @@ public partial class PPageTabs : PatternPathComponentBase
         PatternPaths.Add(pathPattern);
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override void SetComponentClass()
+    {
+        base.SetComponentClass();
+
+        CssProvider.Apply(css => css.Add("m-page-tabs"));
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)

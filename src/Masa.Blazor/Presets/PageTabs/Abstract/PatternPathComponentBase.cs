@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public class PatternPathComponentBase : NextTickComponentBase
+public class PatternPathComponentBase : BDomComponentBase
 {
     [Inject]
     protected NavigationManager NavigationManager { get; set; } = null!;

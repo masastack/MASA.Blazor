@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
+public partial class PPageContainer : PatternPathComponentBase
 {
     [CascadingParameter]
     private PPageTabs? ContainerPageTabs { get; set; }
@@ -14,13 +14,13 @@ public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    private PatternPath? _currentAbsolutePath;
+    private PatternPath? _currentPatternPath;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         var patternPath = GetCurrentPatternPath();
-        _currentAbsolutePath = patternPath;
+        _currentPatternPath = patternPath;
     }
 
     protected override void OnInitialized()
@@ -43,18 +43,24 @@ public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
+    protected override void SetComponentClass()
+    {
+        base.SetComponentClass();
+
+        CssProvider.Apply(css => { css.Add("p-page-container"); });
+    }
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
         if (firstRender)
         {
-            if (PageTabs != null)
-            {
-                PageTabs.TabClosed += PageTabsOnTabClosed;
-                PageTabs.TabReload += PageTabsOnTabReload;
-                PageTabs.TabsUpdated += PageTabsOnTabsUpdated;
-            }
+            if (PageTabs == null) return;
+
+            PageTabs.TabClosed += PageTabsOnTabClosed;
+            PageTabs.TabReload += PageTabsOnTabReload;
+            PageTabs.TabsUpdated += PageTabsOnTabsUpdated;
         }
     }
 
@@ -89,7 +95,7 @@ public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        if (PatternPaths.Contains(_currentAbsolutePath!))
+        if (PatternPaths.Contains(_currentPatternPath!))
         {
             return;
         }
@@ -113,13 +119,15 @@ public partial class PWindow : PatternPathComponentBase, IAsyncDisposable
 
         InvokeAsync(() =>
         {
-            PatternPaths.Add(_currentAbsolutePath!);
+            PatternPaths.Add(_currentPatternPath!);
             StateHasChanged();
         });
     }
 
-    public async ValueTask DisposeAsync()
+    protected override void Dispose(bool disposing)
     {
+        base.Dispose(disposing);
+
         if (PageTabs != null)
         {
             PageTabs.TabClosed -= PageTabsOnTabClosed;

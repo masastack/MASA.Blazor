@@ -1,13 +1,13 @@
 ﻿@namespace Masa.Blazor.Presets
 @inherits PatternPathComponentBase
 
-<MWindow Value="@_currentAbsolutePath?.Pattern">
+<MWindow Class="@CssProvider.GetClass()" Style="@CssProvider.GetStyle()" Value="@_currentPatternPath?.Pattern">
     @foreach (var path in PatternPaths)
     {
         <MWindowItem Transition="" Value="@path.Pattern" @key="path">
-            <PWindowContent Value="@path.IsSelf">
+            <PPageContainerItem Value="@path.IsSelf">
                 @ChildContent
-            </PWindowContent>
+            </PPageContainerItem>
         </MWindowItem>
     }
 </MWindow>

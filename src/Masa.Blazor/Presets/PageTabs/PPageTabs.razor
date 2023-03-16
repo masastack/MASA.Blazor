@@ -3,8 +3,8 @@
 
 <CascadingValue Value="this" IsFixed>
     <MTabs Routable
-           Class="@($"m-page-tabs {Class}")"
-           Style="@Style"
+           Class="@CssProvider.GetClass()"
+           Style="@CssProvider.GetStyle()"
            ActiveClass="@ActiveClass"
            HideSlider="@HideSlider"
            SliderColor="@SliderColor"

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿#nullable enable
+
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor.Presets;
 
-public class PWindowContent : ComponentBase
+public class PPageContainerItem : ComponentBase
 {
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
