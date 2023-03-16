@@ -60,6 +60,7 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         {
             nameof(MAlert.Border) => $"{nameof(Borders)}.{value}",
             nameof(MAlert.Type) => $"{nameof(AlertTypes)}.{value}",
+            nameof(MAlert.Icon) => $"@(\"{value}\")",
             _ => value.ToString() ?? string.Empty
         };
     }
