@@ -3,6 +3,11 @@ name: deploy-wasm-prd
 on:
   release:
     types: [ created ]
+  push:
+    branches:
+      - main
+    paths:
+      - docs/MASA.Docs*/**
   workflow_dispatch:
 
 jobs:
