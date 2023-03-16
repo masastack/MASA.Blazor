@@ -3,9 +3,7 @@ using Masa.Try.Shared;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
-builder.Services.AddMasaBlazor();
-builder.Services.AddScoped<TryJSModule>();
+builder.Services.AddMasaTryShared();
 
 builder.Services.AddScoped(sp => new HttpClient
     { BaseAddress = new Uri(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5250") });
