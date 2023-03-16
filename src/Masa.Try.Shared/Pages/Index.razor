@@ -1,45 +1,125 @@
 ﻿@page "/"
 @inject HttpClient HttpClient
+@inject TryJSModule TryJSModule
+<MApp Id="inspire">
+    <MNavigationDrawer @bind-Value="drawer"
+                       App
+                       Class="pt-4"
+                       Color="grey lighten-3"
+                       MiniVariant>
+        <MButton
+            Text
+            Dark
+            OnClick="RunCode"
+            Color="primary">
+            <MIcon>
+                mdi-reload
+            </MIcon>
+        </MButton>
+        <MDivider></MDivider>
+        <PModal @bind-Value="createPModal" Title="新增文件" Width="500">
+            <ActivatorContent>
+                <MButton
+                    @attributes="@context.Attrs"
+                    Text
+                    Dark
+                    Color="primary">
+                    新增
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MTextField
+                    @bind-Value="CreateMona.Name"
+                    Solo
+                    Label="文件名称">
+                </MTextField>
+                <MDivider></MDivider>
+                <MButton Block OnClick="CreateFile">新增</MButton>
+            </ChildContent>
+        </PModal>
+        <div style="margin-top: calc(100vh - 128px);">
+            <MDivider></MDivider>
+            <MButton
+                Text
+                Dark
+                Link
+                Href="@url"
+                Color="primary">
+                <MIcon>
+                    mdi-github
+                </MIcon>
+            </MButton>
+        </div>
+    </MNavigationDrawer>
 
-<MApp>
-    <MAppBar App>
-        <MButton OnClick="RunCode">执行</MButton>
-    </MAppBar>
     <MMain>
-        <MContainer Fluid>
-            <div class="monaco-editor">
-                <MMonacoEditor InitCompleteHandle="async()=>await InitMonaco()" Style="height:100%" EditorOptions="Options" @ref="_monaco"></MMonacoEditor>
-            </div>
-            <div class="render">
-                @if (componentType != null)
+        <div id="code">
+            <MTabs @bind-Value="TabStringNumber">
+                @foreach (var item in TabMonacoList)
                 {
-                    <DynamicComponent Type="@componentType" />
+                    <MTab>
+                        @item.Name
+                        <MButton Icon Text OnClick="() => Close(item)">
+                            <MIcon>mdi-close</MIcon>
+                        </MButton>
+                    </MTab>
                 }
-                else
+            </MTabs>
+            <MTabsItems Style="height: 100%;" Value="TabStringNumber">
+                @foreach (var item in TabMonacoList)
                 {
-                    <h1>渲染区块</h1>
+                    <MTabItem Style="height: 100%;">
+                        <MMonacoEditor InitCompleteHandle="async () => await InitMonaco(item)" Style="height:95%" EditorOptions="Options" @ref="item.MonacoEditor"></MMonacoEditor>
+                    </MTabItem>
                 }
-            </div>
-        </MContainer>
+            </MTabsItems>
+        </div>
+        <div id="splitter"></div>
+        <div id="render">
+            @if (componentType != null)
+            {
+                <DynamicComponent Type="@componentType"/>
+            }
+            else
+            {
+                <h1>渲染区块</h1>
+            }
+        </div>
     </MMain>
-
-    <MFooter App>
-    </MFooter>
+    <MOverlay Value="load">
+        <MProgressLinear Color="deep-purple accent-4"
+                         Indeterminate
+                         Rounded
+                         Height="6">
+        </MProgressLinear>
+    </MOverlay>
+    <PEnqueuedSnackbars @ref="_enqueuedSnackbars"></PEnqueuedSnackbars>
 </MApp>
 
 <style>
-    .container {
-        height: 100%;
-    }
-
-    .monaco-editor {
-        height: 99%;
+      #code {
         width: 50%;
+        height: 100%;
         float: left;
-        margin: 5px;
-    }
+      }
 
-    .render {
-        margin: 5px;
+      #render {
+        width: 49%;
+        height: 100%;
+        float: right;
+      }
+
+      #splitter {
+        width: 10px;
+        height: 100%;
+        float: left;
+        cursor: col-resize;
+        background-color: #999999;
+      }
+      html{
+        overflow: hidden;
+      }
+	.m-progress-circular {
+      margin: 1rem;
     }
 </style>

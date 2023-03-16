@@ -1,5 +1,7 @@
-﻿using Masa.Blazor;
+﻿using BlazorComponent;
 using Masa.Blazor.Extensions.Languages.Razor;
+using Masa.Blazor.Presets;
+using Masa.Try.Shared.Pages.Options;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.JSInterop;
@@ -10,8 +12,10 @@ public partial class Index : IDisposable
 {
     private Type? componentType;
 
-    private MMonacoEditor _monaco;
+    private bool load;
 
+    private string url = "https://github.com/BlazorComponent/Masa.Blazor";
+    
     private static string Code = @"<body>
     <div id='app'>
         <header>
@@ -51,8 +55,20 @@ public partial class Index : IDisposable
         "System.Runtime"
     };
 
+    public List<TabMonacoModule> TabMonacoList { get; set; } = new();
+
+    public StringNumber TabStringNumber { get; set; }
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    public bool createPModal { get; set; }
+    
+    public TabMonacoModule CreateMona { get; set; } = new();
+    
     private bool initialize = false;
 
+    private bool drawer = true;
+    
     private object Options = new
     {
         value = Code,
@@ -71,16 +87,60 @@ public partial class Index : IDisposable
             return;
         }
 
+        load = true;
+        StateHasChanged();
+        await Task.Delay(10);
+
+        var _monaco = TabMonacoList[(int)TabStringNumber];
+        
         var options = new CompileRazorOptions()
         {
-            Code = await _monaco.GetValue(),
+            Code = await _monaco.MonacoEditor.GetValue(),
             ConcurrentBuild = true
         };
 
         componentType = RazorCompile.CompileToType(options);
+        load = false;
         StateHasChanged();
     }
 
+    private void Close(TabMonacoModule tabMonacoModule)
+    {
+        if (TabMonacoList.Count == 1)
+        {
+            _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
+            {
+                Content = "Keep at least one",
+                Type = AlertTypes.Error,
+            });
+            return;
+        }
+        tabMonacoModule.MonacoEditor.Dispose();
+        TabMonacoList.Remove(tabMonacoModule);
+        TabStringNumber = 0;
+    }
+    
+    private void CreateFile()
+    {
+        createPModal = false;
+        if (TabMonacoList.Any(x => x.Name == CreateMona.Name))
+        {
+            CreateMona = new TabMonacoModule();
+            _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
+            {
+                Content = "Duplicate file name",
+                Type = AlertTypes.Error,
+            });
+            return;
+        }
+        TabMonacoList.Add(new TabMonacoModule()
+        {
+            Name = CreateMona.Name
+        });
+
+        CreateMona = new TabMonacoModule();
+    }
+    
     protected override async Task OnInitializedAsync()
     {
 
@@ -91,10 +151,23 @@ public partial class Index : IDisposable
         await base.OnInitializedAsync();
     }
 
-    private async Task InitMonaco()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            TabMonacoList.Add(new TabMonacoModule()
+            {
+                Name = "Masa.razor"
+            });
+            await TryJSModule.Init();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task InitMonaco(TabMonacoModule tabMonacoModule)
     {
         // 监听CTRL+S
-        await _monaco.AddCommand(2097, _objRef, nameof(RunCode));
+        await tabMonacoModule.MonacoEditor.AddCommand(2097, _objRef, nameof(RunCode));
     }
 
     async Task<List<PortableExecutableReference>?> GetReference()
@@ -104,7 +177,7 @@ public partial class Index : IDisposable
         {
             try
             {
-                using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
+                await using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
                 if (stream.Length > 0)
                 {
                     portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
