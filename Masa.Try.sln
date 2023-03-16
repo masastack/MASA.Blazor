@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor", "src\Masa.Bla
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Component", "Component", "{E9DCD167-6407-4BD1-B336-25DA1D0E5BAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Trt.Server", "src\Masa.Trt.Server\Masa.Trt.Server.csproj", "{9B49C042-76F9-4B78-85E7-A9DAE499A8CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Try.Server", "src\Masa.Try.Server\Masa.Try.Server.csproj", "{9B49C042-76F9-4B78-85E7-A9DAE499A8CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
