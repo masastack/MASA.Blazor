@@ -20,9 +20,7 @@
                   __internal_preventDefault_oncontextmenu>
 
                 @{
-                    string title = null;
-
-                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out title))
+                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var title))
                     {
                         @title
                     }
@@ -32,15 +30,13 @@
                     }
                     else
                     {
-                        title = DefaultTabTitle(patternPath.AbsolutePath);
-
-                        @title
+                        @DefaultTabTitle(patternPath.AbsolutePath)
                     }
                 }
 
                 <MButton Icon
                          Class="ml-1"
-                         OnClick="() => HandleOnCloseTab(patternPath, title)"
+                         OnClick="() => HandleOnCloseTab(patternPath)"
                          Small
                          StopPropagation
                          OnClickPreventDefault>

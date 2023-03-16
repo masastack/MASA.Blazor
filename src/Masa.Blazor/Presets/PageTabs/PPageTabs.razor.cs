@@ -124,9 +124,10 @@ public partial class PPageTabs : PatternPathComponentBase
         return absolutePath.TrimEnd('/').Split('/').Last();
     }
 
-    private async Task HandleOnCloseTab(PatternPath patternPath, string? tabTitle)
+    private async Task HandleOnCloseTab(PatternPath patternPath)
     {
-        var isConfirmed = await PopupService.ConfirmAsync(I18n.T("pagetabs.close-title"), I18n.T("pagetabs.close-desc", args: $"({tabTitle})"));
+        var isConfirmed = await PopupService.ConfirmAsync(I18n.T("$masaBlazor.pageTabs.closeTab"),
+            I18n.T("$masaBlazor.pageTabs.closeTabConfirm", args: patternPath.AbsolutePath), AlertTypes.Warning);
         if (!isConfirmed) return;
 
         var currentPathPattern = GetCurrentPatternPath();
