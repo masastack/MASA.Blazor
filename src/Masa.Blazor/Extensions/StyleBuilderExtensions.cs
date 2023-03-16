@@ -94,7 +94,7 @@ namespace BlazorComponent
         private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber size)
         {
             return styleBuilder
-                        .AddIf(() => $"{name}: {size.ToUnit()}", () => size != null);
+                        .AddIf(() => $"{name}: {size.ToUnit()} !important", () => size != null);
         }
 
         public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber width)
