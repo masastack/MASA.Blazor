@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
-using System.IO;
 using System.Runtime.Loader;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -15,11 +14,6 @@ namespace Masa.Try.Shared.Pages;
 public partial class Index : NextTickComponentBase
 {
     private const string REPOSITORY_URL = "https://github.com/BlazorComponent/Masa.Blazor";
-
-
-    [SupplyParameterFromQuery]
-    [Parameter]
-    public string? Path { get; set; }
 
     /// <summary>
     /// 编译器需要使用的程序集
@@ -58,25 +52,70 @@ public partial class Index : NextTickComponentBase
     private DotNetObjectReference<Index>? _objRef;
     private bool _initialize;
 
-    private readonly object _defaultEditorOptions = new
-    {
-        value = DEFAULT_CODE,
-        language = "razor",
-        theme = "vs",
-        automaticLayout = true,
-    };
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? Path { get; set; }
 
     public TabMonacoModule CreateMona { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _objRef = DotNetObjectReference.Create(this);
+
+        CompileRazorProjectFileSystem.AddGlobalUsing("@using BlazorComponent");
+        CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor");
+        CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor.Presets");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            var code = DEFAULT_CODE;
+
+            if (!string.IsNullOrEmpty(Path))
+            {
+                try
+                {
+                    var newPath = Path.Replace("http://", "https://").Replace("https://github.com/", "https://raw.githubusercontent.com/")
+                                      .Replace("/blob/", "/");
+                    if (!newPath.StartsWith("https://raw.githubusercontent.com/"))
+                    {
+                        newPath = "https://raw.githubusercontent.com/" + newPath;
+                    }
+
+                    code = await HttpClient.GetStringAsync(newPath);
+                }
+                catch (Exception e)
+                {
+                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code from GitHub", e.Message, AlertTypes.Error);
+                }
+            }
+
+            RazorCompile.Initialized(await GetReference(), GetRazorExtension());
+
+            _tabMonacoList.Add(new TabMonacoModule()
+            {
+                Name = "Default.razor",
+                Options = GenEditorOptions(code)
+            });
+
+            StateHasChanged();
+
+            await TryJSModule.Init();
+        }
+    }
 
     [JSInvokable("RunCode")]
     public async void RunCode()
     {
-        if (_initialize == false)
-        {
-            return;
-        }
+        if (_initialize == false) return;
 
         _load = true;
+
         StateHasChanged();
 
         await Task.Delay(16);
@@ -135,42 +174,6 @@ public partial class Index : NextTickComponentBase
         CreateMona = new TabMonacoModule();
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        _objRef = DotNetObjectReference.Create(this);
-
-        var defaultMonaco = new TabMonacoModule()
-        {
-            Name = "Masa.razor",
-        };
-        _tabMonacoList.Add(defaultMonaco);
-        
-        CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor");
-        CompileRazorProjectFileSystem.AddGlobalUsing("@using BlazorComponent");
-        
-
-        await base.OnInitializedAsync();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var defaultMonaco = new TabMonacoModule()
-            {
-                Name = "Masa.razor"
-            };
-
-            RazorCompile.Initialized(await GetReference(), GetRazorExtension());
-
-            _tabMonacoList.Add(defaultMonaco);
-
-            await TryJSModule.Init();
-        }
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
     private async Task InitCompleteHandle(TabMonacoModule module)
     {
         await InitMonaco(module);
@@ -187,20 +190,7 @@ public partial class Index : NextTickComponentBase
         });
 
         await module.MonacoEditor.SetTheme("custom");
-        
-        if (!string.IsNullOrEmpty(Path))
-        {
-            Path = Path.Replace("http://", "https://").Replace("https://github.com/", "https://raw.githubusercontent.com/")
-                .Replace("/blob/", "/");
-            if (!Path.StartsWith("https://raw.githubusercontent.com/"))
-            {
-                Path = "https://raw.githubusercontent.com/" + Path;
-            }
 
-            var code = await HttpClient.GetStringAsync(Path);
-            await module.MonacoEditor.SetValue(code);
-        }
-        
         await NextTickWhile(async () =>
         {
             await Task.Delay(100);
@@ -214,7 +204,7 @@ public partial class Index : NextTickComponentBase
         await tabMonacoModule.MonacoEditor.AddCommand(2097, _objRef, nameof(RunCode));
     }
 
-    async Task<List<PortableExecutableReference>?> GetReference()
+    private async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
         if (MasaTrySharedExtension.WebAssembly)
@@ -255,7 +245,7 @@ public partial class Index : NextTickComponentBase
         return portableExecutableReferences;
     }
 
-    List<RazorExtension> GetRazorExtension()
+    private List<RazorExtension> GetRazorExtension()
     {
         var razorExtension = new List<RazorExtension>();
 
@@ -265,6 +255,17 @@ public partial class Index : NextTickComponentBase
         }
 
         return razorExtension;
+    }
+
+    private object GenEditorOptions(string code)
+    {
+        return new
+        {
+            value = code,
+            language = "razor",
+            theme = "vs",
+            automaticLayout = true,
+        };
     }
 
     protected override void Dispose(bool disposing)
