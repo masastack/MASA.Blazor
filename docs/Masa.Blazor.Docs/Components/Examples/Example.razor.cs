@@ -42,10 +42,11 @@ public partial class Example : NextTickComponentBase
         base.OnInitialized();
 
         var githubUri =
-            $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
+            $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
 
         _tooltips = new()
         {
+            new("mdi-play-circle-outline", "run-example", null, $"https://try.masastack.com?path={githubUri}"),
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
             new("mdi-github", "view-in-github", null, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)

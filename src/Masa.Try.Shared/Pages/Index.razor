@@ -27,7 +27,7 @@
                 </MButton>
             </ActivatorContent>
             <ChildContent>
-                Ctrl+S
+                Ctrl + S
             </ChildContent>
         </MTooltip>
 
@@ -43,7 +43,7 @@
                    ActiveClass="active-tab">
                 @foreach (var item in _tabMonacoList)
                 {
-                    <MTab>
+                    <MTab Class="text-none">
                         <span>@item.Name</span>
                     </MTab>
                 }
@@ -54,7 +54,7 @@
                     <MTabItem Style="height: 100%;">
                         <MMonacoEditor InitCompleteHandle="() => InitCompleteHandle(item)"
                                        Class="custom-editor"
-                                       EditorOptions="_defaultEditorOptions"
+                                       EditorOptions="@item.Options"
                                        @ref="item.MonacoEditor">
                         </MMonacoEditor>
                     </MTabItem>
