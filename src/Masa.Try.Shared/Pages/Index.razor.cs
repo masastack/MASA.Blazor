@@ -133,8 +133,6 @@ public partial class Index : NextTickComponentBase
     {
         _objRef = DotNetObjectReference.Create(this);
 
-        RazorCompile.Initialized(await GetReference(), GetRazorExtension());
-
         await base.OnInitializedAsync();
     }
 
@@ -142,6 +140,8 @@ public partial class Index : NextTickComponentBase
     {
         if (firstRender)
         {
+            RazorCompile.Initialized(await GetReference(), GetRazorExtension());
+            
             var defaultMonaco = new TabMonacoModule()
             {
                 Name = "Masa.razor"
