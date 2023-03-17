@@ -321,7 +321,6 @@ window.backTop = function () {
 
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
   const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
-  console.log('activeListItem', activeListItem)
   if (!activeListItem) return;
   activeListItem.scrollIntoView({ behavior: "smooth" });
 }

@@ -1,125 +1,80 @@
 ﻿@page "/"
 @inject HttpClient HttpClient
 @inject TryJSModule TryJSModule
-<MApp Id="inspire">
-    <MNavigationDrawer @bind-Value="drawer"
-                       App
-                       Class="pt-4"
-                       Color="grey lighten-3"
-                       MiniVariant>
-        <MButton
-            Text
-            Dark
-            OnClick="RunCode"
-            Color="primary">
-            <MIcon>
-                mdi-reload
-            </MIcon>
-        </MButton>
-        <MDivider></MDivider>
-        <PModal @bind-Value="createPModal" Title="新增文件" Width="500">
+@inject IPopupService PopupService
+@inherits NextTickComponentBase
+
+<MApp Class="default-app default-background">
+    <MNavigationDrawer App
+                       Class="px-2 py-6"
+                       Color="white"
+                       MiniVariant
+                       Permanent
+                       Floating
+                       MiniVariantWidth="64">
+        <MImage Src="https://blazor-pro.masastack.com/img/mainLayout/logo.svg"
+                Width="42"
+                Height="42"
+                Style="margin-left: 3px">
+        </MImage>
+
+        <MDivider Class="my-6"></MDivider>
+
+        <MTooltip Right>
             <ActivatorContent>
-                <MButton
-                    @attributes="@context.Attrs"
-                    Text
-                    Dark
-                    Color="primary">
-                    新增
+                <MButton Icon OnClick="RunCode" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-play</MIcon>
                 </MButton>
             </ActivatorContent>
             <ChildContent>
-                <MTextField
-                    @bind-Value="CreateMona.Name"
-                    Solo
-                    Label="文件名称">
-                </MTextField>
-                <MDivider></MDivider>
-                <MButton Block OnClick="CreateFile">新增</MButton>
+                Ctrl+S
             </ChildContent>
-        </PModal>
-        <div style="margin-top: calc(100vh - 128px);">
-            <MDivider></MDivider>
-            <MButton
-                Text
-                Dark
-                Link
-                Href="@url"
-                Color="primary">
-                <MIcon>
-                    mdi-github
-                </MIcon>
-            </MButton>
-        </div>
+        </MTooltip>
+
+        <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
+            <MIcon>mdi-github</MIcon>
+        </MButton>
     </MNavigationDrawer>
 
     <MMain>
         <div id="code">
-            <MTabs @bind-Value="TabStringNumber">
-                @foreach (var item in TabMonacoList)
+            <MTabs @bind-Value="_tabStringNumber"
+                   HideSlider
+                   ActiveClass="active-tab">
+                @foreach (var item in _tabMonacoList)
                 {
                     <MTab>
-                        @item.Name
-                        <MButton Icon Text OnClick="() => Close(item)">
-                            <MIcon>mdi-close</MIcon>
-                        </MButton>
+                        <span>@item.Name</span>
                     </MTab>
                 }
             </MTabs>
-            <MTabsItems Style="height: 100%;" Value="TabStringNumber">
-                @foreach (var item in TabMonacoList)
+            <MTabsItems Class="editor-group default-background" Value="_tabStringNumber">
+                @foreach (var item in _tabMonacoList)
                 {
                     <MTabItem Style="height: 100%;">
-                        <MMonacoEditor InitCompleteHandle="async () => await InitMonaco(item)" Style="height:95%" EditorOptions="Options" @ref="item.MonacoEditor"></MMonacoEditor>
+                        <MMonacoEditor InitCompleteHandle="() => InitCompleteHandle(item)"
+                                       Class="custom-editor"
+                                       EditorOptions="_defaultEditorOptions"
+                                       @ref="item.MonacoEditor">
+                        </MMonacoEditor>
                     </MTabItem>
                 }
             </MTabsItems>
         </div>
+
         <div id="splitter"></div>
+
         <div id="render">
-            @if (componentType != null)
+            @if (_componentType != null)
             {
-                <DynamicComponent Type="@componentType"/>
-            }
-            else
-            {
-                <h1>渲染区块</h1>
+                <DynamicComponent Type="@_componentType" />
             }
         </div>
     </MMain>
-    <MOverlay Value="load">
-        <MProgressLinear Color="deep-purple accent-4"
-                         Indeterminate
-                         Rounded
-                         Height="6">
-        </MProgressLinear>
+
+    <MOverlay Value="_load" ZIndex="7">
+        <div class="white--text text-h3">
+            Loading, just a moment...
+        </div>
     </MOverlay>
-    <PEnqueuedSnackbars @ref="_enqueuedSnackbars"></PEnqueuedSnackbars>
 </MApp>
-
-<style>
-      #code {
-        width: 50%;
-        height: 100%;
-        float: left;
-      }
-
-      #render {
-        width: 49%;
-        height: 100%;
-        float: right;
-      }
-
-      #splitter {
-        width: 10px;
-        height: 100%;
-        float: left;
-        cursor: col-resize;
-        background-color: #999999;
-      }
-      html{
-        overflow: hidden;
-      }
-	.m-progress-circular {
-      margin: 1rem;
-    }
-</style>

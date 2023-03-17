@@ -73,7 +73,14 @@
     {
         if (JS is null) return;
 
-        await JS.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
+        try
+        {
+            await JS.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
 }

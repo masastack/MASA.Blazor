@@ -1,42 +1,24 @@
-﻿using BlazorComponent;
+﻿using Masa.Blazor;
 using Masa.Blazor.Extensions.Languages.Razor;
-using Masa.Blazor.Presets;
 using Masa.Try.Shared.Pages.Options;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
+using System.IO;
+using System.Runtime.Loader;
+using BlazorComponent;
 
 namespace Masa.Try.Shared.Pages;
 
-public partial class Index : IDisposable
+public partial class Index : NextTickComponentBase
 {
-    private Type? componentType;
-
-    private bool load;
-
-    private string url = "https://github.com/BlazorComponent/Masa.Blazor";
-    
-    private static string Code = @"<body>
-    <div id='app'>
-        <header>
-            <h1>Doctor Who&trade; Episode Database</h1>
-        </header>
-
-        <nav>
-            <a href='main-list'>Main Episode List</a>
-            <a href='search'>Search</a>
-            <a href='new'>Add Episode</a>
-        </nav>
-
-        <h2>Episodes</h2>
-
-    </div>
-</body>";
+    private const string REPOSITORY_URL = "https://github.com/BlazorComponent/Masa.Blazor";
 
     /// <summary>
     /// 编译器需要使用的程序集
     /// </summary>
-    private static List<string> Assemblys = new()
+    private static readonly List<string> s_assemblies = new()
     {
         "BlazorComponent",
         "Masa.Blazor",
@@ -55,95 +37,100 @@ public partial class Index : IDisposable
         "System.Runtime"
     };
 
-    public List<TabMonacoModule> TabMonacoList { get; set; } = new();
+    private bool _load;
+    private Type? _componentType;
 
-    public StringNumber TabStringNumber { get; set; }
+    private const string DEFAULT_CODE = """
+    <div class="d-flex align-center text-h4">
+        <MIcon XLarge Class="mr-2">mdi-arrow-left-bold</MIcon>
+        Write code on the left panel!
+    </div>
+    """;
 
-    private PEnqueuedSnackbars? _enqueuedSnackbars;
+    private readonly List<TabMonacoModule> _tabMonacoList = new();
+    private StringNumber? _tabStringNumber;
+    private DotNetObjectReference<Index>? _objRef;
+    private bool _initialize;
 
-    public bool createPModal { get; set; }
-    
-    public TabMonacoModule CreateMona { get; set; } = new();
-    
-    private bool initialize = false;
-
-    private bool drawer = true;
-    
-    private object Options = new
+    private readonly object _defaultEditorOptions = new
     {
-        value = Code,
+        value = DEFAULT_CODE,
         language = "razor",
-        theme = "vs-dark",
+        theme = "vs",
         automaticLayout = true,
     };
 
-    private DotNetObjectReference<Index> _objRef; 
+    public TabMonacoModule CreateMona { get; set; } = new();
 
     [JSInvokable("RunCode")]
     public async void RunCode()
     {
-        if (initialize == false)
+        if (_initialize == false)
         {
             return;
         }
 
-        load = true;
+        _load = true;
         StateHasChanged();
-        await Task.Delay(10);
 
-        var _monaco = TabMonacoList[(int)TabStringNumber];
-        
+        await Task.Delay(16);
+
+        var monaco = _tabMonacoList[(int)_tabStringNumber];
+
         var options = new CompileRazorOptions()
         {
-            Code = await _monaco.MonacoEditor.GetValue(),
+            Code = await monaco.MonacoEditor.GetValue(),
             ConcurrentBuild = true
         };
 
-        componentType = RazorCompile.CompileToType(options);
-        load = false;
+        try
+        {
+            _componentType = RazorCompile.CompileToType(options);
+        }
+        catch (Exception e)
+        {
+            _ = PopupService?.EnqueueSnackbarAsync(e);
+        }
+        finally
+        {
+            _load = false;
+        }
+
         StateHasChanged();
     }
 
     private void Close(TabMonacoModule tabMonacoModule)
     {
-        if (TabMonacoList.Count == 1)
+        if (_tabMonacoList.Count == 1)
         {
-            _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
-            {
-                Content = "Keep at least one",
-                Type = AlertTypes.Error,
-            });
+            _ = PopupService.EnqueueSnackbarAsync("Keep at least one", AlertTypes.Error);
             return;
         }
+
         tabMonacoModule.MonacoEditor.Dispose();
-        TabMonacoList.Remove(tabMonacoModule);
-        TabStringNumber = 0;
+        _tabMonacoList.Remove(tabMonacoModule);
+        _tabStringNumber = 0;
     }
-    
+
     private void CreateFile()
     {
-        createPModal = false;
-        if (TabMonacoList.Any(x => x.Name == CreateMona.Name))
+        if (_tabMonacoList.Any(x => x.Name == CreateMona.Name))
         {
             CreateMona = new TabMonacoModule();
-            _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
-            {
-                Content = "Duplicate file name",
-                Type = AlertTypes.Error,
-            });
+            _ = PopupService?.EnqueueSnackbarAsync(@"Duplicate file name", AlertTypes.Error);
             return;
         }
-        TabMonacoList.Add(new TabMonacoModule()
+
+        _tabMonacoList.Add(new TabMonacoModule()
         {
             Name = CreateMona.Name
         });
 
         CreateMona = new TabMonacoModule();
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
-
         _objRef = DotNetObjectReference.Create(this);
 
         RazorCompile.Initialized(await GetReference(), GetRazorExtension());
@@ -155,13 +142,41 @@ public partial class Index : IDisposable
     {
         if (firstRender)
         {
-            TabMonacoList.Add(new TabMonacoModule()
+            var defaultMonaco = new TabMonacoModule()
             {
                 Name = "Masa.razor"
-            });
+            };
+
+            _tabMonacoList.Add(defaultMonaco);
+
             await TryJSModule.Init();
         }
+
         await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task InitCompleteHandle(TabMonacoModule module)
+    {
+        await InitMonaco(module);
+
+        await module.MonacoEditor.DefineTheme("custom", new StandaloneThemeData()
+        {
+            Base = "vs",
+            inherit = true,
+            rules = new TokenThemeRule[] { },
+            colors = new Dictionary<string, string>()
+            {
+                { "editor.background", "#f0f3fa" }
+            }
+        });
+
+        await module.MonacoEditor.SetTheme("custom");
+
+        await NextTickWhile(async () =>
+        {
+            await Task.Delay(100);
+            RunCode();
+        }, () =>  _initialize == false);
     }
 
     private async Task InitMonaco(TabMonacoModule tabMonacoModule)
@@ -173,23 +188,40 @@ public partial class Index : IDisposable
     async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
-        foreach (var asm in Assemblys)
+        if (MasaTrySharedExtension.WebAssembly)
         {
-            try
+            foreach (var asm in s_assemblies)
             {
-                await using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
-                if (stream.Length > 0)
+                try
                 {
-                    portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    await using var stream = await HttpClient!.GetStreamAsync($"_framework/{asm}.dll");
+                    if (stream.Length > 0)
+                    {
+                        portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
-            catch (Exception e)
+        }
+        else
+        {
+            foreach (var asm in AssemblyLoadContext.Default.Assemblies)
             {
-                Console.WriteLine(e.Message);
+                try
+                {
+                    portableExecutableReferences?.Add(MetadataReference.CreateFromFile(asm.Location));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
         }
 
-        initialize = true;
+        _initialize = true;
 
         return portableExecutableReferences;
     }
@@ -206,8 +238,9 @@ public partial class Index : IDisposable
         return razorExtension;
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
-        _objRef.Dispose();
+        base.Dispose(disposing);
+        _objRef?.Dispose();
     }
 }
