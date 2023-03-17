@@ -1,26 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
 <MApp>
-    <MAppBar App>
-        <PPageTabs @ref="_pageTabs" />
-    </MAppBar>
-
     <MMain>
         <MContainer>
-            <PPageContainer PageTabs="_pageTabs">
-                @Body
-            </PPageContainer>
+            @Body
         </MContainer>
     </MMain>
-    <MBottomNavigation App Grow Routable Color="primary">
-        <MButton Href="/">Home</MButton>
-        <MButton Href="/counter">Counter</MButton>
-        <MButton Href="/user">User</MButton>
-    </MBottomNavigation>
 </MApp>
-
-@code {
-
-    private PPageTabs _pageTabs;
-
-}
