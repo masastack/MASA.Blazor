@@ -28,8 +28,8 @@
 
 @code {
 
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    public string? Culture { get; set; } = null!;
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }

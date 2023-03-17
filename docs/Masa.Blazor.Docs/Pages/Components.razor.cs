@@ -24,8 +24,8 @@ public partial class Components
     [Inject]
     private I18n I18n { get; set; } = null!;
 
-    [CascadingParameter]
-    private CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    private string Culture { get; set; } = null!;
 
     [Parameter]
     public string Project { get; set; } = null!;
@@ -90,7 +90,7 @@ public partial class Components
     private string? _tab;
     private string? _md;
     private string? _prevPage;
-    private CultureInfo? _prevCulture;
+    private string? _prevCulture;
     private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
     private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();

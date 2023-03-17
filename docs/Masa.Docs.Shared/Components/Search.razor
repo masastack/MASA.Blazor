@@ -22,8 +22,8 @@
 </div>
 
 @code {
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    public string? Culture { get; set; } = null!;
 
     [Parameter]
     public string Class { get; set; } = "mr-6";

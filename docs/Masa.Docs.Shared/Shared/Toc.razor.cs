@@ -61,9 +61,8 @@ public partial class Toc : NextTickComponentBase
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
 
-        await JsRuntime.InvokeVoidAsync("setHash");
         NavigationManager.ReplaceWithHash($"#{elementId}");
-        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
     }
 
     private void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)
