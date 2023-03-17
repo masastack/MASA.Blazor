@@ -332,12 +332,12 @@
 
 /* page-tabs */
 
-.m-page-tabs__content .m-list.m-list--dense {
-    padding: 4px 0;
+.p-page-tab {
+    text-transform: capitalize;
 }
 
-.m-page-tabs__content .m-list-item.m-list-item--dense {
-    min-height: 30px
+.p-page-container {
+    overflow: visible;
 }
 
 /* block-text */

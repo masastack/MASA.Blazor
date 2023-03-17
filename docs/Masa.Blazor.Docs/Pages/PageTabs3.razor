@@ -1,0 +1,23 @@
+﻿@page "/blazor/examples/page-tabs/page3"
+@layout PageTabsLayout
+@inject NavigationManager NavigationManager
+
+<MCard Outlined Style="height: 116px">
+    <MCardText>
+        <h4>Use the cascading PageTabsProvider parameter change the name of current tab.</h4>
+
+        <MButton OnClick="ChangeTabName" Class="text-capitalize" Outlined>Change tab name</MButton>
+    </MCardText>
+</MCard>
+
+@code {
+
+    [CascadingParameter]
+    private IPageTabsProvider? PageTabsProvider { get; set; }
+
+    private void ChangeTabName()
+    {
+        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), DateTime.Now.ToLongTimeString());
+    }
+
+}

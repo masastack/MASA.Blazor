@@ -499,7 +499,7 @@ default-app-markup {
 }
 
     .doc-markdown-body > section section {
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
     }
 
 .m-select.light-border .m-input__slot fieldset {

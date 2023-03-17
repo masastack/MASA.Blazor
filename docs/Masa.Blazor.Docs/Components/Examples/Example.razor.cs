@@ -17,6 +17,9 @@ public partial class Example : NextTickComponentBase
     [Parameter]
     public int Index { get; set; }
 
+    [Parameter]
+    public bool NoActions { get; set; }
+
     private readonly List<(string Code, string Language)> _sections = new();
 
     private bool _rendered;
