@@ -1,0 +1,15 @@
+﻿@page "/blazor/examples/page-tabs/page1"
+@layout PageTabsLayout
+
+<h4>@@Body is wrapped in PageContainer, the state of the page would be saved</h4>
+
+<MTextField @bind-Value="_value" Label="Label" HideDetails="true"></MTextField>
+
+@code {
+
+    [CascadingParameter(Name = "HasPageContainer")]
+    private bool HasPageContainer { get; set; }
+
+    private string? _value;
+
+}

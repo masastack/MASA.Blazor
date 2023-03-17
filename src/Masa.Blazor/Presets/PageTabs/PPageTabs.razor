@@ -12,7 +12,7 @@
         @foreach (var patternPath in PatternPaths)
         {
             <MTab Href="@patternPath.AbsolutePath"
-                  Class="@($"m-page-tab {TabClass}")"
+                  Class="@CssProvider.GetClass("tab")"
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
@@ -20,7 +20,7 @@
                   __internal_preventDefault_oncontextmenu>
 
                 @{
-                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var title))
+                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out string? title) && !string.IsNullOrWhiteSpace(title))
                     {
                         @title
                     }
@@ -52,7 +52,10 @@
                PositionY="@_positionY"
                CloseOnContentClick>
             <MList Dense>
-                <MListItem OnClick="ReloadTab">@ReloadTabText</MListItem>
+                @if (TabReload != null)
+                {
+                    <MListItem OnClick="ReloadTab">@ReloadTabText</MListItem>
+                }
                 <MListItem OnClick="CloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
                 <MListItem OnClick="CloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
                 <MListItem OnClick="CloseOtherTabs">@CloseOtherTabsText</MListItem>

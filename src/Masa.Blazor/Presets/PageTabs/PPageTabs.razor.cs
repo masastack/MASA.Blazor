@@ -14,7 +14,7 @@ public partial class PPageTabs : PatternPathComponentBase
     private IPopupService PopupService { get; set; } = null!;
 
     [CascadingParameter]
-    public IPageTabsProvider? PageTabsProvider { get; set; }
+    private IPageTabsProvider? PageTabsProvider { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -50,6 +50,9 @@ public partial class PPageTabs : PatternPathComponentBase
     [Parameter]
     public string? CloseOtherTabsText { get; set; }
 
+    [Parameter]
+    public string? NoDataPath { get; set; } = "/";
+
     private bool _menuValue;
     private PatternPath? _contextmenuPath;
 
@@ -79,6 +82,11 @@ public partial class PPageTabs : PatternPathComponentBase
         var pathPattern = GetCurrentPatternPath();
         PatternPaths.Add(pathPattern);
 
+        if (PageTabsProvider != null)
+        {
+            PageTabsProvider.TabTitleChanged += PageTabsProviderOnTabTitleChanged;
+        }
+
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
@@ -86,13 +94,24 @@ public partial class PPageTabs : PatternPathComponentBase
     {
         base.SetComponentClass();
 
-        CssProvider.Apply(css => css.Add("m-page-tabs"));
+        CssProvider.Apply(css => css.Add("p-page-tabs"))
+                   .Apply("tab", css => css.Add("p-page-tab"));
+    }
+
+    private void PageTabsProviderOnTabTitleChanged(object? sender, string e)
+    {
+        InvokeAsync(() =>
+        {
+            NextTick(() => { _tabs?.CallSlider(); });
+
+            StateHasChanged();
+        });
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var pathPattern = GetCurrentPatternPath();
-        if (PatternPaths.Any(p => p.Pattern == pathPattern.Pattern && p.AbsolutePath == pathPattern.AbsolutePath))
+        if (!pathPattern.IsSelf && PatternPaths.Any(p => p.AbsolutePath.Equals(pathPattern.AbsolutePath, StringComparison.OrdinalIgnoreCase)))
         {
             return;
         }
@@ -141,13 +160,14 @@ public partial class PPageTabs : PatternPathComponentBase
                 ? PatternPaths.ElementAtOrDefault(PatternPaths.Count - 2)?.AbsolutePath
                 : PatternPaths.ElementAtOrDefault(index + 1)?.AbsolutePath;
 
-            nextPath ??= "/";
+            nextPath ??= NoDataPath;
 
             NavigationManager.NavigateTo(nextPath);
         }
 
         PatternPaths.Remove(patternPath);
         TabClosed?.Invoke(this, patternPath);
+        PageTabsProvider?.RemovePathTitles(patternPath.AbsolutePath);
 
         NextTick(() => { _tabs?.CallSlider(); });
     }
@@ -165,6 +185,10 @@ public partial class PPageTabs : PatternPathComponentBase
         var currentPath = GetCurrentPatternPath();
 
         var index = PatternPaths.FindIndex(p => p == _contextmenuPath);
+
+        var closingAbsolutePaths = PatternPaths.Take(index + 1).Select(p => p.AbsolutePath).ToArray();
+        PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
+
         PatternPaths.RemoveRange(0, index);
 
         if (!PatternPaths.Contains(currentPath))
@@ -185,7 +209,12 @@ public partial class PPageTabs : PatternPathComponentBase
 
         var index = PatternPaths.FindIndex(p => p == _contextmenuPath);
         var startIndex = index + 1;
-        PatternPaths.RemoveRange(startIndex, PatternPaths.Count - startIndex);
+        var count = PatternPaths.Count - startIndex;
+
+        var closingAbsolutePaths = PatternPaths.Skip(startIndex).Take(count).Select(p => p.AbsolutePath).ToArray();
+        PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
+
+        PatternPaths.RemoveRange(startIndex, count);
 
         if (!PatternPaths.Contains(currentPath))
         {
@@ -200,6 +229,9 @@ public partial class PPageTabs : PatternPathComponentBase
     private void CloseOtherTabs()
     {
         if (_contextmenuPath is null) return;
+
+        var closingAbsolutePath = PatternPaths.Where(p => p != _contextmenuPath).Select(p => p.AbsolutePath).ToArray();
+        PageTabsProvider?.RemovePathTitles(closingAbsolutePath);
 
         PatternPaths.RemoveAll(p => p != _contextmenuPath);
 
@@ -222,6 +254,12 @@ public partial class PPageTabs : PatternPathComponentBase
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
+
+        if (PageTabsProvider != null)
+        {
+            PageTabsProvider.TabTitleChanged -= PageTabsProviderOnTabTitleChanged;
+        }
+
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }

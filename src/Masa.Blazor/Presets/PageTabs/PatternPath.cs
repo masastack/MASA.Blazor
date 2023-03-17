@@ -5,13 +5,13 @@ public record PatternPath
     public PatternPath(string absolutePath)
     {
         AbsolutePath = absolutePath;
-        Pattern = absolutePath;
+        Pattern = absolutePath.ToLower();
     }
 
     public PatternPath(string pattern, string absolutePath)
     {
         AbsolutePath = absolutePath;
-        Pattern = pattern;
+        Pattern = pattern.ToLower();
         IsSelf = true;
     }
 

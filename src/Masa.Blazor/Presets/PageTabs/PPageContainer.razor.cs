@@ -47,7 +47,7 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         base.SetComponentClass();
 
-        CssProvider.Apply(css => { css.Add("p-page-container"); });
+        CssProvider.Apply(css => { css.Add("p-page-container"); }, style => { style.Add("height: 100%"); });
     }
 
     protected override void OnAfterRender(bool firstRender)

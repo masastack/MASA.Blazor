@@ -9,11 +9,20 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    public Dictionary<string, string> PathTitles { get; } = new();
+    public Dictionary<string, string?> PathTitles { get; } = new();
 
-    public void UpdateTabTitle(string absolutePath, string title)
+    public EventHandler<string>? TabTitleChanged { get; set; }
+
+    public void RemovePathTitles(params string[] absolutePaths)
+    {
+        absolutePaths.ForEach(path => PathTitles.Remove(path));
+    }
+
+    public void UpdateTabTitle(string absolutePath, string? title)
     {
         PathTitles[absolutePath] = title;
+
+        TabTitleChanged?.Invoke(this, absolutePath);
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

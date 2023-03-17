@@ -4,7 +4,7 @@
 <MWindow Class="@CssProvider.GetClass()" Style="@CssProvider.GetStyle()" Value="@_currentPatternPath?.Pattern">
     @foreach (var path in PatternPaths)
     {
-        <MWindowItem Transition="" Value="@path.Pattern" @key="path">
+        <MWindowItem Transition="" Style="height: 100%" Value="@path.Pattern" @key="path">
             <PPageContainerItem Value="@path.IsSelf">
                 @ChildContent
             </PPageContainerItem>

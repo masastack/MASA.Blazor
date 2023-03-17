@@ -332,8 +332,12 @@
 
 /* page-tabs */
 
-.m-page-tab {
+.p-page-tab {
     text-transform: capitalize;
+}
+
+.p-page-container {
+    overflow: visible;
 }
 
 /* block-text */

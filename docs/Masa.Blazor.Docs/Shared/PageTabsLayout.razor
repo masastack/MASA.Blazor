@@ -1,0 +1,42 @@
+@inherits LayoutComponentBase
+
+<MApp>
+    <PPageTabsProvider>
+        <MAppBar App Color="white">
+            <PPageTabs @ref="_pageTabs"
+                       NoDataPath="/blazor/examples/page-tabs/page1"
+                       SelfPatterns="@SelfPatterns">
+            </PPageTabs>
+        </MAppBar>
+
+        <MMain>
+            <MContainer>
+                <MCard Outlined>
+                    <MCardText>
+                        <PPageContainer PageTabs="_pageTabs" SelfPatterns="SelfPatterns">
+                            @Body
+                        </PPageContainer>
+                    </MCardText>
+                </MCard>
+            </MContainer>
+        </MMain>
+    </PPageTabsProvider>
+
+    <MBottomNavigation App Routable Color="primary">
+        <MButton Href="/blazor/examples/page-tabs/page1">Page 1</MButton>
+        <MButton Href="/blazor/examples/page-tabs/page2">Page 2</MButton>
+        <MButton Href="/blazor/examples/page-tabs/page3">Page 3</MButton>
+        <MButton Href="/blazor/examples/page-tabs/page4">Page 4</MButton>
+    </MBottomNavigation>
+</MApp>
+
+@code {
+
+    private PPageTabs? _pageTabs;
+
+    private static readonly string[] SelfPatterns = new[]
+    {
+        "/blazor/examples/page-tabs/page4",
+    };
+
+}

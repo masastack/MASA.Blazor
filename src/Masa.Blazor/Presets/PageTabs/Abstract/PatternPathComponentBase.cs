@@ -24,7 +24,7 @@ public class PatternPathComponentBase : BDomComponentBase
     {
         return SelfPatterns is null
             ? Enumerable.Empty<Regex>()
-            : SelfPatterns.Select(p => new Regex(p));
+            : SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase));
     }
 
     protected PatternPath GetCurrentPatternPath()

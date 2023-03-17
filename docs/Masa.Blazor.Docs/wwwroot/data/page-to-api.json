@@ -143,5 +143,10 @@
   "timelines": [
     "MTimeline",
     "MTimelineItem"
+  ],
+  "page-tabs": [
+    "PPageTabs",
+    "PPageContainer",
+    "PPageProvider"
   ]
 }
