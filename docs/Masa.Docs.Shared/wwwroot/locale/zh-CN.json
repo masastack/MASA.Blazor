@@ -390,7 +390,7 @@
   "invert-example-colors": "反转示例颜色",
   "view-in-github": "在 Github 上查看",
   "view-source": "查看源码",
-  "run-example": "在 TryMasaBlazor 中运行",
+  "run-example": "运行",
   "all-components": {
     "alerts": "Alerts（提示框）向用户传达重要信息",
     "application": "用于轻松修改主题的可选根组件",
