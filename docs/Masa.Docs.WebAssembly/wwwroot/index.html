@@ -8,6 +8,8 @@
     <meta name="description" content="基于Material Design和BlazorComponent的交互能力提供标准的Blazor组件库。Provide standard blazor component library based on the interaction ability of material design and BlazorComponent" />
     <title>MASA Blazor</title>
     <base href="/" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_512">
     <link href="css/app.css" rel="stylesheet" />
     <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
@@ -115,6 +117,7 @@
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
