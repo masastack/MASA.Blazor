@@ -8,12 +8,18 @@ using Microsoft.JSInterop;
 using System.IO;
 using System.Runtime.Loader;
 using BlazorComponent;
+using Microsoft.AspNetCore.Components;
 
 namespace Masa.Try.Shared.Pages;
 
 public partial class Index : NextTickComponentBase
 {
     private const string REPOSITORY_URL = "https://github.com/BlazorComponent/Masa.Blazor";
+
+
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? Path { get; set; }
 
     /// <summary>
     /// 编译器需要使用的程序集
@@ -133,7 +139,15 @@ public partial class Index : NextTickComponentBase
     {
         _objRef = DotNetObjectReference.Create(this);
 
-        RazorCompile.Initialized(await GetReference(), GetRazorExtension());
+        var defaultMonaco = new TabMonacoModule()
+        {
+            Name = "Masa.razor",
+        };
+        _tabMonacoList.Add(defaultMonaco);
+        
+        CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor");
+        CompileRazorProjectFileSystem.AddGlobalUsing("@using BlazorComponent");
+        
 
         await base.OnInitializedAsync();
     }
@@ -146,6 +160,8 @@ public partial class Index : NextTickComponentBase
             {
                 Name = "Masa.razor"
             };
+
+            RazorCompile.Initialized(await GetReference(), GetRazorExtension());
 
             _tabMonacoList.Add(defaultMonaco);
 
@@ -171,7 +187,20 @@ public partial class Index : NextTickComponentBase
         });
 
         await module.MonacoEditor.SetTheme("custom");
+        
+        if (!string.IsNullOrEmpty(Path))
+        {
+            Path = Path.Replace("http://", "https://").Replace("https://github.com/", "https://raw.githubusercontent.com/")
+                .Replace("/blob/", "/");
+            if (!Path.StartsWith("https://raw.githubusercontent.com/"))
+            {
+                Path = "https://raw.githubusercontent.com/" + Path;
+            }
 
+            var code = await HttpClient.GetStringAsync(Path);
+            await module.MonacoEditor.SetValue(code);
+        }
+        
         await NextTickWhile(async () =>
         {
             await Task.Delay(100);
