@@ -1,6 +1,6 @@
 ﻿namespace Masa.Try.Shared
 {
-    internal class ScriptManager
+    internal class ModuleManager
     {
         public List<Module> Modules { get; } = new List<Module>()
         {

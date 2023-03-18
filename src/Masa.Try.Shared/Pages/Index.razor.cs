@@ -53,7 +53,7 @@ public partial class Index : NextTickComponentBase
     private bool _initialize;
     private bool _settingModalOpened;
 
-    private ScriptManager _scriptManager = new();
+    private ModuleManager _scriptManager = new();
 
     [SupplyParameterFromQuery]
     [Parameter]

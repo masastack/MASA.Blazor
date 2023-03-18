@@ -169,7 +169,6 @@ function addScript(scriptNode) {
         node = document.createElement('script');
         node.setAttribute('src', scriptNode.content);
         node.setAttribute('id', scriptNode.id);
-        //document.body.insertBefore(node, document.getElementById('monaco-editor-require'));
         document.body.appendChild(node);
     }
     else {
