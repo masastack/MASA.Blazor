@@ -31,6 +31,44 @@
             </ChildContent>
         </MTooltip>
 
+        <MTooltip Right>
+            <ActivatorContent>
+                <MButton Icon OnClick="()=>_settingModalOpened=true" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-cog</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                Ctrl + S
+            </ChildContent>
+        </MTooltip>
+
+        <PModal @bind-Value="_settingModalOpened"
+                Title="Settings"
+                Width="500">
+            <MCard Class="mx-auto"
+                   MaxWidth="500">
+                <MList Shaped>
+                    <MListItemGroup Multiple>
+                        @foreach (var item in _scriptManager.Modules)
+                        {
+                            <MListItem Value="item.ModuleName" ActiveClass="deep-purple--text text--accent-4">
+                                <ItemContent>
+                                    <MListItemContent>
+                                        <MListItemTitle>@item.ModuleName</MListItemTitle>
+                                    </MListItemContent>
+                                    <MListItemAction>
+                                        <MCheckbox Value="@item.Loaded"
+                                               Color="deep-purple accent-4"
+                                               OnChange="async (bool val)=>{ if (val) await LoadModule(item); else await UnloadModule(item); }" />
+                                    </MListItemAction>
+                                </ItemContent>
+                            </MListItem>
+                        }
+                    </MListItemGroup>
+                </MList>
+            </MCard>
+        </PModal>
+
         <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
             <MIcon>mdi-github</MIcon>
         </MButton>
@@ -53,9 +91,9 @@
                 {
                     <MTabItem Style="height: 100%;">
                         <MMonacoEditor InitCompleteHandle="() => InitCompleteHandle(item)"
-                                       Class="custom-editor"
-                                       EditorOptions="@item.Options"
-                                       @ref="item.MonacoEditor">
+                                   Class="custom-editor"
+                                   EditorOptions="@item.Options"
+                                   @ref="item.MonacoEditor">
                         </MMonacoEditor>
                     </MTabItem>
                 }

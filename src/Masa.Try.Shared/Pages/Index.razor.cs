@@ -51,6 +51,9 @@ public partial class Index : NextTickComponentBase
     private StringNumber? _tabStringNumber;
     private DotNetObjectReference<Index>? _objRef;
     private bool _initialize;
+    private bool _settingModalOpened;
+
+    private ScriptManager _scriptManager = new();
 
     [SupplyParameterFromQuery]
     [Parameter]
@@ -195,7 +198,7 @@ public partial class Index : NextTickComponentBase
         {
             await Task.Delay(100);
             RunCode();
-        }, () =>  _initialize == false);
+        }, () => _initialize == false);
     }
 
     private async Task InitMonaco(TabMonacoModule tabMonacoModule)
@@ -266,6 +269,18 @@ public partial class Index : NextTickComponentBase
             theme = "vs",
             automaticLayout = true,
         };
+    }
+
+    private async Task LoadModule(Module module)
+    {
+        foreach (var item in module.RelatedScripts)
+            await TryJSModule.AddScript(item);
+    }
+
+    private async Task UnloadModule(Module module)
+    {
+        foreach (var item in module.RelatedScripts)
+            await TryJSModule.RemoveScript(item);
     }
 
     protected override void Dispose(bool disposing)
