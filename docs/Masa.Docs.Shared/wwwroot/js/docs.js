@@ -32,6 +32,14 @@ window.setHash = function () {
   isHash = true;
 }
 
+window.scrollToElement = function (hash, offset) {
+  setHash();
+  const el = document.getElementById(hash);
+  const top = el.getBoundingClientRect().top;
+  const offsetPosition = top + window.pageYOffset - offset;
+  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+}
+
 /*
  * NavigationManager.NavigateTo always scrolls page to the top.
  * The following `window.scrollTo` would be invoked.

@@ -38,15 +38,15 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem OnClick="(() => ScrollIntoView(project))" Value="project">
+                    <MListItem OnClick="(() => ScrollIntoView(project))" Value="project" @key="project">
                         <MListItemAvatar Tile>
-                        @Image(project, _active)
-                    </MListItemAvatar>
+                            @Image(project, _active)
+                        </MListItemAvatar>
 
-                    <MListItemContent>
-                        <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
-                    </MListItemContent>
-                </MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
                 }
             </MListItemGroup>
         </MList>
@@ -114,8 +114,8 @@
 
 @code {
 
-    [CascadingParameter]
-    private CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    private string Culture { get; set; } = null!;
 
     [CascadingParameter]
     private BaseLayout BaseLayout { get; set; } = null!;
@@ -204,8 +204,8 @@
                 <div class="project-content__title">@I18n.T(group)</div>
             }
             <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-            <MRow Dense NoGutters>
-                @foreach (var (title, href) in items)
+                <MRow Dense NoGutters>
+                    @foreach (var (title, href) in items)
                     {
                         <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
                             @LinkableTitle(title, href)
@@ -227,9 +227,8 @@
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
 
-        await JsRuntime.InvokeVoidAsync("setHash");
         NavigationManager.ReplaceWithHash($"#{elementId}");
-        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
     }
 
     private async Task LocationHashPositionAsync(string url)
@@ -240,4 +239,5 @@
             await ScrollIntoView(uri.Fragment.Substring(1));
         }
     }
+
 }
