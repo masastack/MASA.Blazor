@@ -8,9 +8,9 @@
     <MNavigationDrawer App
                        Class="px-2 py-6"
                        Color="white"
-                       MiniVariant
-                       Permanent
-                       Floating
+                              MiniVariant
+                              Permanent
+                              Floating
                        MiniVariantWidth="64">
         <MImage Src="https://blazor-pro.masastack.com/img/mainLayout/logo.svg"
                 Width="42"
@@ -48,7 +48,7 @@
             <MCard Class="mx-auto"
                    MaxWidth="500">
                 <MList Shaped>
-                    <MListItemGroup Multiple>
+                    <MListItemGroup>
                         @foreach (var item in _scriptManager.Modules)
                         {
                             <MListItem Value="item.ModuleName" ActiveClass="deep-purple--text text--accent-4">
@@ -57,12 +57,30 @@
                                         <MListItemTitle>@item.ModuleName</MListItemTitle>
                                     </MListItemContent>
                                     <MListItemAction>
-                                        <MCheckbox Value="@item.Loaded"
-                                               Color="deep-purple accent-4"
-                                               OnChange="async (bool val)=>{ if (val) await LoadModule(item); else await UnloadModule(item); }" />
+                                        @if(item.Loaded)
+                                        {
+                                            <MButton Fab XSmall
+                                                     Elevation="2"
+                                                     Color="green"
+                                                     Outlined>
+                                                <MIcon>mdi-check</MIcon>
+                                            </MButton>
+                                        }
+                                        else
+                                        {
+                                            <MButton 
+                                                class="white--text" 
+                                                Fab XSmall
+                                                Elevation="2"
+                                                Color="primary"
+                                                Outlined
+                                                OnClick="async()=>await LoadModuleAsync(item)">
+                                                <MIcon Dark>mdi-plus</MIcon>
+                                            </MButton>
+                                        }
                                     </MListItemAction>
-                                </ItemContent>
-                            </MListItem>
+                            </ItemContent>
+                        </MListItem>
                         }
                     </MListItemGroup>
                 </MList>

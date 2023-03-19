@@ -11,11 +11,19 @@
                 {
                     new(ScriptNodeType.JS, "https://api.map.baidu.com/getscript?v=1.0&&type=webgl&ak=bgALNYvfp7HFsQKE1TX2RGuH0UN0ENC4")
                 }
+            },
+            new()
+            {
+                ModuleName= "Echarts",
+                RelatedScripts = new()
+                {
+                    new(ScriptNodeType.JS, "https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js")
+                }
             }
         };
     }
 
-    internal struct Module
+    internal class Module
     {
         public string ModuleName { get; set; }
 
@@ -24,7 +32,7 @@
         public bool Loaded { get; set; }
     }
 
-    public struct ScriptNode
+    public readonly struct ScriptNode
     {
         public ScriptNode(ScriptNodeType scriptNodeType, string content)
         {
@@ -33,11 +41,11 @@
             Content = content;
         }
 
-        public string Id { get; set; }
+        public string Id { get; init; }
 
-        public ScriptNodeType NodeType { get; set; }
+        public ScriptNodeType NodeType { get; init; }
 
-        public string Content { get; set; }
+        public string Content { get; init; }
     }
 
     public enum ScriptNodeType

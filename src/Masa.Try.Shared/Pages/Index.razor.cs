@@ -271,16 +271,13 @@ public partial class Index : NextTickComponentBase
         };
     }
 
-    private async Task LoadModule(Module module)
+    private async Task LoadModuleAsync(Module module)
     {
         foreach (var item in module.RelatedScripts)
             await TryJSModule.AddScript(item);
-    }
 
-    private async Task UnloadModule(Module module)
-    {
-        foreach (var item in module.RelatedScripts)
-            await TryJSModule.RemoveScript(item);
+        module.Loaded = true;
+        StateHasChanged();
     }
 
     protected override void Dispose(bool disposing)
