@@ -280,6 +280,15 @@ public partial class Index : NextTickComponentBase
         StateHasChanged();
     }
 
+    private async Task UnloadModuleAsync(Module module)
+    {
+        foreach (var item in module.RelatedScripts)
+            await TryJSModule.RemoveScript(item);
+
+        module.Loaded = false;
+        StateHasChanged();
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
