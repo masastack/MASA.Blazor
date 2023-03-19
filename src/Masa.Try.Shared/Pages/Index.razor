@@ -42,50 +42,87 @@
             </ChildContent>
         </MTooltip>
 
+        @*Settings Modal*@
         <PModal @bind-Value="_settingModalOpened"
                 Title="Settings"
                 Width="500">
             <MCard Class="mx-auto"
                    MaxWidth="500">
-                <MList Shaped>
+                <MRow Class="ml-0">
+                    <MCol Cols="1">
+                        <MButton Icon Color="primary"
+                            OnClick="()=>_addScriptModalOpened=true">
+                            <MIcon>mdi-plus</MIcon>
+                        </MButton>
+                        </MCol>
+                        <MCol Cols="1">
+                        <MButton Icon Color="primary"
+                            OnClick="ClearScriptsReferenceAsync">
+                            <MIcon>mdi-cached</MIcon>
+                        </MButton>
+                        </MCol>
+                        </MRow>
+
+                        <MList TwoLine>
                     <MListItemGroup>
-                        @foreach (var item in _scriptManager.Modules)
+                        @foreach (var item in _customScriptNodes)
                         {
-                            <MListItem Value="item.ModuleName" ActiveClass="deep-purple--text text--accent-4">
+                            <MListItem Value="item.ScriptName" ActiveClass="deep-purple--text text--accent-4">
                                 <ItemContent>
-                                    <MListItemContent>
-                                        <MListItemTitle>@item.ModuleName</MListItemTitle>
-                                    </MListItemContent>
-                                    <MListItemAction>
-                                        @if(item.Loaded)
+                                    <MListItemAvatar>
+                                        @if (item.NodeType is ScriptNodeType.CSS)
                                         {
-                                            <MButton Fab XSmall
-                                                     Elevation="2"
-                                                     Color="green"
-                                                     Outlined
-                                                     OnClick="async()=>await UnloadModuleAsync(item)">
-                                                <MIcon>mdi-check</MIcon>
-                                            </MButton>
+                                            <MIcon Color="blue darken-1">mdi-language-css3</MIcon>
                                         }
                                         else
                                         {
-                                            <MButton 
-                                                class="white--text" 
-                                                Fab XSmall
-                                                Elevation="2"
-                                                Color="primary"
-                                                Outlined
-                                                OnClick="async()=>await LoadModuleAsync(item)">
-                                                <MIcon Dark>mdi-plus</MIcon>
-                                            </MButton>
+                                            <MIcon Color="orange lighten-1">mdi-language-javascript</MIcon>
                                         }
+                                    </MListItemAvatar>
+
+                                    <MListItemContent>
+                                        <MListItemTitle>@item.ScriptName</MListItemTitle>
+                                        <MListItemSubtitle>@item.Content</MListItemSubtitle>
+                                    </MListItemContent>
+
+                                    <MListItemAction>
+                                        <MButton Small Icon
+                                             OnClick="async()=>await RemoveScriptReferenceAsync(item)">
+                                            <MIcon Color="blue-grey lighten-1">mdi-delete-circle</MIcon>
+                                        </MButton>
                                     </MListItemAction>
-                            </ItemContent>
-                        </MListItem>
+                                </ItemContent>
+                            </MListItem>
                         }
                     </MListItemGroup>
                 </MList>
             </MCard>
+        </PModal>
+
+        @*Add Script Reference Modal*@
+        <PModal @bind-Value="_addScriptModalOpened"
+            OnSave="async()=>await AddScriptReferenceAsync()"
+            OnCancel="async()=>{_addScriptModalOpened=false; ClearInputs();}"
+            Title="Add Script Reference"
+            Width="500">
+            <MTextField Outlined 
+                @bind-Value="_newScriptName"
+                Label="Script Name"
+                PrependInnerIcon="mdi-pen" />
+            <MSelect Outlined
+                Label="Script Node Types"
+                PrependInnerIcon="@(_newScriptNodeType==ScriptNodeType.JS?"mdi-language-javascript":"mdi-language-css3")"
+                Items="_scriptNodeTypes"
+                ItemValue="i=>i"
+                ItemText="i=>i.ToString()"
+                TItem="ScriptNodeType"
+                TItemValue="ScriptNodeType"
+                TValue="ScriptNodeType"
+                @bind-Value="_newScriptNodeType"/>
+            <MTextField Outlined 
+                @bind-Value="_newContent" 
+                Label="Content"
+                PrependInnerIcon="mdi-script-text-outline" />
         </PModal>
 
         <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>

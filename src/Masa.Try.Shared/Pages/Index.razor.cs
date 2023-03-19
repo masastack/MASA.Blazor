@@ -52,8 +52,14 @@ public partial class Index : NextTickComponentBase
     private DotNetObjectReference<Index>? _objRef;
     private bool _initialize;
     private bool _settingModalOpened;
+    private bool _addScriptModalOpened;
 
-    private ModuleManager _scriptManager = new();
+    private readonly List<ScriptNode> _customScriptNodes = new();
+
+    private readonly List<ScriptNodeType> _scriptNodeTypes = Enum.GetValues(typeof(ScriptNodeType)).Cast<ScriptNodeType>().ToList();
+    private ScriptNodeType _newScriptNodeType;
+    private string _newScriptName = string.Empty;
+    private string _newContent = string.Empty;
 
     [SupplyParameterFromQuery]
     [Parameter]
@@ -271,22 +277,36 @@ public partial class Index : NextTickComponentBase
         };
     }
 
-    private async Task LoadModuleAsync(Module module)
+    private async Task RemoveScriptReferenceAsync(ScriptNode scriptNode)
     {
-        foreach (var item in module.RelatedScripts)
-            await TryJSModule.AddScript(item);
-
-        module.Loaded = true;
+        await TryJSModule.RemoveScript(scriptNode);
+        _customScriptNodes.Remove(scriptNode);
         StateHasChanged();
     }
 
-    private async Task UnloadModuleAsync(Module module)
+    private async Task AddScriptReferenceAsync()
     {
-        foreach (var item in module.RelatedScripts)
+        var newScript = new ScriptNode(_newScriptName, _newScriptNodeType, _newContent);
+        await TryJSModule.AddScript(newScript);
+        _customScriptNodes.Add(newScript);
+        StateHasChanged();
+        _addScriptModalOpened = false;
+    }
+
+    private async Task ClearScriptsReferenceAsync()
+    {
+        foreach (var item in _customScriptNodes)
             await TryJSModule.RemoveScript(item);
 
-        module.Loaded = false;
+        _customScriptNodes.Clear();
         StateHasChanged();
+    }
+
+    private void ClearInputs()
+    {
+        _newContent = string.Empty;
+        _newScriptName=string.Empty;
+        _newScriptNodeType = ScriptNodeType.JS;
     }
 
     protected override void Dispose(bool disposing)
