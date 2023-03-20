@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:views="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="PlayVideoSample.Xaml.VideoPlayerView">
+	<VerticalStackLayout>
+		<views:MediaElement x:Name="mediaElement" 
+		                      ShouldAutoPlay="True"
+		                      ShouldShowPlaybackControls="True"
+							  ShouldKeepScreenOn="true"
+							  ShouldMute="True"
+		                      Aspect ="AspectFit"
+				
+		                      HeightRequest="300"
+		                      WidthRequest="400"
+		/>
+		<Grid ColumnDefinitions="1*,1*,1*">
+			<Grid Grid.Column="1" BackgroundColor="#aa000000">
+				<Button  BackgroundColor="#aa000000" Text="返回"  CornerRadius="8" FontSize="18" TextColor="White" Clicked="ReturnToBlazor_Clicked" />
+			</Grid>
+		</Grid>
+	</VerticalStackLayout>
+</ContentPage>

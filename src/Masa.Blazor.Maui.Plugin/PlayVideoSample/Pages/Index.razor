@@ -1,0 +1,16 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+<button @onclick="OpenVideo">播放MP4</button>
+
+@code{
+
+    private void OpenVideo()
+    {
+        PlayVideoSample.Xaml.VideoPlayerService.Play("http://vfx.mtime.cn/Video/2021/07/10/mp4/210710171112971120.mp4");
+    }
+}
