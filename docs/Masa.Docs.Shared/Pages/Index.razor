@@ -4,8 +4,9 @@
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
+@inherits NextTickComponentBase
 
-<MNavigationDrawer App
+<MNavigationDrawer App Id="default-index-navbar"
                    Floating
                    Width="300"
                    @bind-Value="_showMobileIndexNavMenuList"
@@ -27,28 +28,38 @@
         <MDivider></MDivider>
 
         <MList Class="doc-list-nav">
-            <MListItemGroup @bind-Value="_active" Mandatory>
-                <MListItem OnClick='() => ScrollIntoView("getting-started")'>
-                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
-                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
-                    </MListItemIcon>
-                    <MListItemContent>
-                        <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
-                    </MListItemContent>
-                </MListItem>
+            <ul style="list-style-type: none;padding:0px !important;">
+                <li>
+                    <a href="@($"#getting-started")" class="m-list-item m-list-item--link @GenClass("getting-started")"
+                       @onclick:preventDefault
+                       @onclick="@(() => ScrollIntoView("getting-started"))">
+                        <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
+                            <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                        </MListItemContent>
+                    </a>
+                </li>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem OnClick="(() => ScrollIntoView(project))" Value="project" @key="project">
-                        <MListItemAvatar Tile>
-                            @Image(project, _active)
-                        </MListItemAvatar>
+                    <li>
+                        <a href="@($"#{project}")"
+                       class="m-list-item m-list-item--link @GenClass(project)"
+                       @onclick:preventDefault
+                       @onclick="@(() => ScrollIntoView(project))">
 
-                        <MListItemContent>
-                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
-                        </MListItemContent>
-                    </MListItem>
+                                <MListItemAvatar Tile>
+                                    @Image(project, _activeHash)
+                                </MListItemAvatar>
+
+                                <MListItemContent>
+                                    <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                                </MListItemContent>
+                        </a>
+                    </li>
                 }
-            </MListItemGroup>
+            </ul>
         </MList>
     </ChildContent>
 </MNavigationDrawer>
@@ -135,21 +146,22 @@
 
     private bool _showMobileIndexNavMenuList;
 
-    private StringNumber _active;
+    private DotNetObjectReference<Index>? _objRef;
+    private string? _activeHash;
 
-    private static RenderFragment Image(string project, StringNumber? currentSelectProject = null) => __builder =>
+    private static RenderFragment Image(string project, string? currentSelectProject = null) => __builder =>
     {
         string? src = null;
         switch (project)
         {
             case "blazor":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "#blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "framework":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "#framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
             case "stack":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
+                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "#stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
                 break;
         }
 
@@ -190,6 +202,8 @@
 
             StateHasChanged();
 
+            _objRef = DotNetObjectReference.Create(this);
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEventForToc", _objRef, "default-index-navbar");
             await LocationHashPositionAsync(NavigationManager.Uri);
 
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
@@ -223,6 +237,7 @@
 
     private async Task ScrollIntoView(string elementId)
     {
+        _activeHash = $"#{elementId}";
         // TODO: remove the following lines when #40190 of aspnetcore resolved.
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
@@ -236,8 +251,35 @@
         var uri = new Uri(url);
         if (!string.IsNullOrWhiteSpace(uri.Fragment))
         {
-            await ScrollIntoView(uri.Fragment.Substring(1));
+            await NextTickWhile(async () =>
+            {
+                await Task.Delay(500);
+                await ScrollIntoView(uri.Fragment.Substring(1));
+            }, () => true);
         }
     }
 
+    [JSInvokable]
+    public void UpdateHash(string hash)
+    {
+        _activeHash = hash;
+        NavigationManager.ReplaceWithHash(hash);
+        StateHasChanged();
+    }
+
+    private string GenClass(string project)
+    {
+        var classStr = "";
+
+        if (!string.IsNullOrWhiteSpace(_activeHash) && _activeHash[1..].Equals(project, StringComparison.OrdinalIgnoreCase))
+        {
+            classStr = " m-list-item--active theme--light";
+        }
+        else
+        {
+            classStr = " text--primary";
+        }
+
+        return classStr;
+    }
 }
