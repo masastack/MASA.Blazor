@@ -266,6 +266,11 @@ namespace Masa.Blazor
         {
             await base.HandleOnClickAsync(args);
 
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync();
+            }
+
             var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
             await input.DispatchEventAsync(@event, stopPropagation: true);
