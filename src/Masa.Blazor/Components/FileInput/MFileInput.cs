@@ -214,6 +214,11 @@ namespace Masa.Blazor
             await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
+        {
+            return Task.CompletedTask;
+        }
+
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
