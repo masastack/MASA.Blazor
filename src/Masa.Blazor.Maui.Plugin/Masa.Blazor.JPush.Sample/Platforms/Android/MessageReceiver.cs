@@ -10,7 +10,7 @@ namespace Masa.Blazor.JPush.Sample.PlatformsAndroid
         },
         Categories = new string[]
         {
-            "com.AppAgent.lsd"
+            "com.JPushDemo.masa"
         })]
     public class MessageReceiver : JPushMessageReceiver
     {
