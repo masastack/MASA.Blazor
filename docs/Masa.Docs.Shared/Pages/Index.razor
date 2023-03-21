@@ -28,38 +28,28 @@
         <MDivider></MDivider>
 
         <MList Class="doc-list-nav">
-            <ul style="list-style-type: none;padding:0px !important;">
-                <li>
-                    <a href="@($"#getting-started")" class="m-list-item m-list-item--link @GenClass("getting-started")"
-                       @onclick:preventDefault
-                       @onclick="@(() => ScrollIntoView("getting-started"))">
+            <MListItemGroup Value="_activeHash" Mandatory>
+                <MListItem Value="@("#getting-started")" Class="scroll-change-hash" OnClick='() => ScrollIntoView("getting-started")' Attributes="@(new Dictionary<string,object>{ {"href" , "#getting-started" }})">
                         <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
                             <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
                         </MListItemIcon>
                         <MListItemContent>
                             <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
                         </MListItemContent>
-                    </a>
-                </li>
+                </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <li>
-                        <a href="@($"#{project}")"
-                       class="m-list-item m-list-item--link @GenClass(project)"
-                       @onclick:preventDefault
-                       @onclick="@(() => ScrollIntoView(project))">
+                    <MListItem Value="@($"#{project}")" Class="scroll-change-hash" OnClick="(() => ScrollIntoView(project))" Attributes="@(new Dictionary<string,object>{ {"href" , $"#{project}"}})">
+                        <MListItemAvatar Tile>
+                            @Image(project, _activeHash)
+                        </MListItemAvatar>
 
-                                <MListItemAvatar Tile>
-                                    @Image(project, _activeHash)
-                                </MListItemAvatar>
-
-                                <MListItemContent>
-                                    <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
-                                </MListItemContent>
-                        </a>
-                    </li>
+                        <MListItemContent>
+                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
                 }
-            </ul>
+            </MListItemGroup>
         </MList>
     </ChildContent>
 </MNavigationDrawer>
@@ -203,7 +193,7 @@
             StateHasChanged();
 
             _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEventForToc", _objRef, "default-index-navbar");
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, "scroll-change-hash");
             await LocationHashPositionAsync(NavigationManager.Uri);
 
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });

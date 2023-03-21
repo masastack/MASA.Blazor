@@ -27,7 +27,7 @@
         <ul class="mb-6">
             @foreach (var item in _toc)
             {
-                <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item)">
+                <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) scroll-change-hash">
                     <a href="@($"#{item.Anchor}")"
                        class="m-toc-link d-block transition-swing text-decoration-none"
                        @onclick:preventDefault
