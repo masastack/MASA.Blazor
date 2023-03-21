@@ -9,7 +9,7 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    public Dictionary<string, string?> PathTitles { get; } = new();
+    public Dictionary<string, Func<string?>> PathTitles { get; } = new();
 
     public EventHandler<string>? TabTitleChanged { get; set; }
 
@@ -18,9 +18,9 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
         absolutePaths.ForEach(path => PathTitles.Remove(path));
     }
 
-    public void UpdateTabTitle(string absolutePath, string? title)
+    public void UpdateTabTitle(string absolutePath, Func<string?> titleFunc)
     {
-        PathTitles[absolutePath] = title;
+        PathTitles[absolutePath] = titleFunc;
 
         TabTitleChanged?.Invoke(this, absolutePath);
     }
