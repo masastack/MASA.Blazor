@@ -21,7 +21,7 @@ namespace MediaPickSample
         protected override void OnCreate(Bundle savedInstanceState)
         {
             Instance = this;
-            PickMultipleMedia = Instance.RegisterForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(100), new ActivityResultCallback());
+            PickMultipleMedia = Instance.RegisterForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(2), new ActivityResultCallback());
             base.OnCreate(savedInstanceState);
         }
 
