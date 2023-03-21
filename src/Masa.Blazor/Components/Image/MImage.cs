@@ -135,7 +135,7 @@ namespace Masa.Blazor
                 stringBuilder.Append($"linear-gradient({Gradient}),");
             }
 
-            stringBuilder.Append($"url({url})");
+            stringBuilder.Append($"url(\"{url}\")");
             return stringBuilder.ToString();
         }
 
