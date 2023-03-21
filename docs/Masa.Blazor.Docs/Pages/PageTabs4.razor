@@ -30,7 +30,7 @@
 
     protected override void OnInitialized()
     {
-        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), Name);
+        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), () => Name);
     }
 
 }
