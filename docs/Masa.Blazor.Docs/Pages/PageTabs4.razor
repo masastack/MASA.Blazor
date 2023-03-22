@@ -30,7 +30,10 @@
 
     protected override void OnInitialized()
     {
-        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), () => Name);
+        // use () => title if you want to update the title on every render
+        // for example if you use the i18n.T function
+
+        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), Name);
     }
 
 }

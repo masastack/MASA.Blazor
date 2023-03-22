@@ -4,11 +4,17 @@ namespace Masa.Blazor.Presets;
 
 public interface IPageTabsProvider
 {
-    Dictionary<string, Func<string?>> PathTitles { get; }
-
+    /// <summary>
+    /// Update tab title
+    /// </summary>
+    /// <param name="absolutePath">The absolute path of the URI</param>
+    /// <param name="titleFunc">the func to get title</param>
     void UpdateTabTitle(string absolutePath, Func<string?> titleFunc);
 
-    EventHandler<string>? TabTitleChanged { get; set; }
-
-    void RemovePathTitles(params string[] absolutePaths);
+    /// <summary>
+    /// Update tab title
+    /// </summary>
+    /// <param name="absolutePath">The absolute path of the URI</param>
+    /// <param name="title">the title</param>
+    void UpdateTabTitle(string absolutePath, string? title);
 }
