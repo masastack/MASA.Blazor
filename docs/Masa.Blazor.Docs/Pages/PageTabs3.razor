@@ -17,8 +17,7 @@
 
     private void ChangeTabName()
     {
-        var now = DateTime.Now.ToLongTimeString();
-        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), () => now);
+        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), DateTime.Now.ToLongTimeString());
     }
 
 }

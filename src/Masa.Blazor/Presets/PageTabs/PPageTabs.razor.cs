@@ -14,7 +14,7 @@ public partial class PPageTabs : PatternPathComponentBase
     private IPopupService PopupService { get; set; } = null!;
 
     [CascadingParameter]
-    private IPageTabsProvider? PageTabsProvider { get; set; }
+    private PPageTabsProvider? PageTabsProvider { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
