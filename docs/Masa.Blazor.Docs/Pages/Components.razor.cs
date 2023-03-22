@@ -103,6 +103,7 @@ public partial class Components
     private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
     private List<string> _tags = new();
+    private static string _allComponentsCacheCount = string.Empty;
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 
@@ -112,11 +113,9 @@ public partial class Components
 
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
-            _tags.Clear();
-            if (IsAllComponentsPage)
+            if (IsAllComponentsPage && string.IsNullOrEmpty(_allComponentsCacheCount))
             {
-                var componentsCount = (await DocService.GetAllConponentsTileAsync()).Count;
-                _tags.Add(componentsCount.ToString());
+                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count.ToString();
             }
 
             _prevPage = Page;
