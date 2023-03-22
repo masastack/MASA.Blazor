@@ -193,7 +193,7 @@
             StateHasChanged();
 
             _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, "doc-list-nav--item-hash");
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
             await LocationHashPositionAsync(NavigationManager.Uri);
 
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });

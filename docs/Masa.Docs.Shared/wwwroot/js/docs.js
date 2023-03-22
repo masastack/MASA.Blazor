@@ -234,7 +234,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
   }
 };
 
-window.registerWindowScrollEvent = function (dotnet, className) {
+window.registerWindowScrollEvent = function (dotnet, cssClass) {
   let _timeout;
   let _scrolling;
   let _offsets = [];
@@ -246,7 +246,7 @@ window.registerWindowScrollEvent = function (dotnet, className) {
 
   function registerClickEvents() {
     if (_registered) return
-    const elements = document.querySelectorAll(`.${className}`);
+    const elements = document.querySelectorAll(cssClass);
     if (elements && elements.length > 0) {
       _registered = true;
       for (const e of elements) {
@@ -261,10 +261,10 @@ window.registerWindowScrollEvent = function (dotnet, className) {
 
   function setOffsets() {
     const offsets = [];
-    var queryFilter = `.${className}`;
+    var queryFilter = cssClass;
     var firstNode = document.querySelector(queryFilter) ;
       if (!firstNode || (firstNode && !firstNode.attributes.getNamedItem('href'))) {
-        queryFilter = `.${className} a`;
+        queryFilter = `${cssClass} a`;
     }
 
     _toc = Array.from(document.querySelectorAll(queryFilter)).map(({attributes}) => {
