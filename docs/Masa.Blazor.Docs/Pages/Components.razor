@@ -7,7 +7,7 @@
                  Class="mx-auto overflow-visible">
         @if (_frontMatterMeta is not null)
         {
-            <FrontMatter Meta="_frontMatterMeta"></FrontMatter>
+            <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@_tags"></FrontMatter>
         }
         else
         {

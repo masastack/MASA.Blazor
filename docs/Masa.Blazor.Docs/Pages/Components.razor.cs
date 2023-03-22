@@ -1,6 +1,5 @@
 ﻿using BlazorComponent.I18n;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;
@@ -87,6 +86,14 @@ public partial class Components
         }
     }
 
+    public bool IsAllComponentsPage
+    {
+        get
+        {
+            return Page.ToLower() == "all";
+        }
+    }
+
     private string? _tab;
     private string? _md;
     private string? _prevPage;
@@ -95,6 +102,7 @@ public partial class Components
     private FrontMatterMeta? _frontMatterMeta;
     private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
+    private List<string> _tags = new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 
@@ -104,6 +112,13 @@ public partial class Components
 
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
+            _tags.Clear();
+            if (IsAllComponentsPage)
+            {
+                var componentsCount = (await DocService.GetAllConponentsTileAsync()).Count;
+                _tags.Add(componentsCount.ToString());
+            }
+
             _prevPage = Page;
             _prevCulture = Culture;
             _apiData.Clear();

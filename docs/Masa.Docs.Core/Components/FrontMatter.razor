@@ -4,6 +4,13 @@
     {
         <MChip Class="tag-chip px-2 ml-4" Label Color="primary" TextColor="white">@Meta.Tag</MChip>
     }
+    @if (AdditionalTags.Any())
+    {
+        foreach (string item in AdditionalTags)
+        {
+            <MChip Class="tag-chip px-2 ml-4" Label Color="primary" TextColor="white">@item</MChip>
+        }
+    }
 </div>
 <div class="ordinary-text">
     <MMarkdownIt Source="@Meta.Description" NoWrapper Scope="desc"></MMarkdownIt>
@@ -16,6 +23,9 @@
     [Parameter]
     [EditorRequired]
     public FrontMatterMeta Meta { get; set; } = null!;
+
+    [Parameter]
+    public List<string> AdditionalTags { get; set; } = new();
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
