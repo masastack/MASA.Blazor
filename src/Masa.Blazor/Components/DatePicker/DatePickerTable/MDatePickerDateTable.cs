@@ -2,6 +2,9 @@
 {
     public class MDatePickerDateTable<TValue> : MDatePickerTable<TValue>, IDatePickerDateTable, IDatePickerTable
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+
         [Parameter]
         public int FirstDayOfWeek { get; set; }
 
@@ -26,7 +29,7 @@
                     return Format;
                 }
 
-                return DateFormatters.Day(Locale);
+                return DateFormatters.Day(I18n);
             }
         }
 

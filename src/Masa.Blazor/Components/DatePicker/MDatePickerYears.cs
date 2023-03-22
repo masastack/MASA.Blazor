@@ -2,6 +2,9 @@
 {
     public partial class MDatePickerYears : BDatePickerYears, IDatePickerYears
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+
         [Parameter]
         public string Color { get; set; }
 
@@ -32,7 +35,7 @@
                     return Format;
                 }
 
-                return DateFormatters.Year(Locale);
+                return DateFormatters.Year(I18n);
             }
         }
 

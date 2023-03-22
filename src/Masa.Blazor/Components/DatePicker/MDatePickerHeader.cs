@@ -4,6 +4,9 @@ namespace Masa.Blazor
 {
     public class MDatePickerHeader : BDatePickerHeader, IThemeable, IDatePickerHeader
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+
         [Parameter]
         public bool Disabled { get; set; }
 
@@ -93,7 +96,7 @@ namespace Masa.Blazor
                     return Format;
                 }
 
-                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(Locale) : DateFormatters.Year(Locale);
+                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(I18n) : DateFormatters.Year(I18n);
             }
         }
 

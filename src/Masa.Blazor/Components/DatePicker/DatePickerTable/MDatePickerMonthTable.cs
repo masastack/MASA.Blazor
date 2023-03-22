@@ -2,6 +2,8 @@
 {
     public partial class MDatePickerMonthTable<TValue> : MDatePickerTable<TValue>, IDatePickerMonthTable, IDatePickerTable
     {
+        [Inject]
+        protected I18n I18n { get; set; }
         public override Func<DateOnly, string> Formatter
         {
             get
@@ -11,7 +13,7 @@
                     return Format;
                 }
 
-                return DateFormatters.Month(Locale);
+                return DateFormatters.Month(I18n);
             }
         }
 
