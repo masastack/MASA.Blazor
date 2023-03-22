@@ -6,7 +6,7 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public DatePickerType? ActivePicker
         {
@@ -183,11 +183,20 @@ namespace Masa.Blazor
 
                     if (values.Count > 0)
                     {
-                        return Type == DatePickerType.Date 
-                            ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" 
-                            : $"{DateFormatters.Month(values[0].Month)}";
+                        if (Locale == "en-US")
+                        {
+                            return Type == DatePickerType.Date
+                             ? $"{DateFormatters.Week(values[0].DayOfWeek, Locale)[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month, Locale)[..3]} {values[0].Day}"
+                             : $"{DateFormatters.Month(values[0].Month, Locale)}";
+                        }
+                        else
+                        {
+                            return Type == DatePickerType.Date                                                                                                                                  
+                             ? $"{DateFormatters.Week(values[0].DayOfWeek, Locale)}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month, Locale)} {values[0].Day}"
+                             : $"{DateFormatters.Month(values[0].Month, Locale)}";
+                        }
                     }
-                    
+
                     return "&nbsp;";
                 };
             }
