@@ -6,7 +6,7 @@
 @inject NavigationManager NavigationManager
 @inherits NextTickComponentBase
 
-<MNavigationDrawer App Id="default-index-navbar"
+<MNavigationDrawer App
                    Floating
                    Width="300"
                    @bind-Value="_showMobileIndexNavMenuList"
@@ -29,17 +29,17 @@
 
         <MList Class="doc-list-nav">
             <MListItemGroup Value="_activeHash" Mandatory>
-                <MListItem Value="@("#getting-started")" Class="scroll-change-hash" OnClick='() => ScrollIntoView("getting-started")' Attributes="@(new Dictionary<string,object>{ {"href" , "#getting-started" }})">
-                        <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
-                            <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
-                        </MListItemIcon>
-                        <MListItemContent>
-                            <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
-                        </MListItemContent>
+                <MListItem Value="@("#getting-started")" Class="doc-list-nav--item-hash" OnClick='() => ScrollIntoView("getting-started")' Href="@("#getting-started")">
+                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
+                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
+                    </MListItemContent>
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem Value="@($"#{project}")" Class="scroll-change-hash" OnClick="(() => ScrollIntoView(project))" Attributes="@(new Dictionary<string,object>{ {"href" , $"#{project}"}})">
+                    <MListItem Value="@($"#{project}")" Class="doc-list-nav--item-hash" OnClick="(() => ScrollIntoView(project))" Href="@($"#{project}")">
                         <MListItemAvatar Tile>
                             @Image(project, _activeHash)
                         </MListItemAvatar>
@@ -193,7 +193,7 @@
             StateHasChanged();
 
             _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, "scroll-change-hash");
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, "doc-list-nav--item-hash");
             await LocationHashPositionAsync(NavigationManager.Uri);
 
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
@@ -257,19 +257,9 @@
         StateHasChanged();
     }
 
-    private string GenClass(string project)
+    protected override void Dispose(bool disposing)
     {
-        var classStr = "";
-
-        if (!string.IsNullOrWhiteSpace(_activeHash) && _activeHash[1..].Equals(project, StringComparison.OrdinalIgnoreCase))
-        {
-            classStr = " m-list-item--active theme--light";
-        }
-        else
-        {
-            classStr = " text--primary";
-        }
-
-        return classStr;
+        base.Dispose(disposing);
+        _objRef?.Dispose();
     }
 }
