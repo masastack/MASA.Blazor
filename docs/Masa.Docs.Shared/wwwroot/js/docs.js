@@ -54,20 +54,68 @@ window.scrollTo = function (x, y) {
   return origScrollTo.apply(this, arguments);
 };
 
-window.addDoSearch = function (isMobile) {
-  const container = `#docsearch${isMobile ? "-mobile" : ""}`;
-  docsearch({
-    container,
-    appId: "TSB4MACWRC",
-    indexName: "blazor-masastack",
-    apiKey: "a38a8d4b58c5648825ba3fafce8b6ffa",
-    debug: false,
-    //searchParameters: {
-    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-    //}
-  });
-};
+window.addDoSearch = function (index, isMobile, currentLanguage, placeholder) {
+    const cnTranslation =
+    {
+        "button": {
+            "buttonText": "搜索",
+            "buttonAriaLabel": "搜索"
+        },
+        "modal": {
+            "searchBox": {
+                "resetButtonTitle": "清除搜索",
+                "resetButtonAriaLabel": "Clearthequery",
+                "cancelButtonText": "取消",
+                "cancelButtonAriaLabel": "Cancel"
+            },
+            "startScreen": {
+                "recentSearchesTitle": "最近",
+                "noRecentSearchesText": "没有搜索历史",
+                "saveRecentSearchButtonTitle": "保存搜索",
+                "removeRecentSearchButtonTitle": "从历史移除记录",
+                "favoriteSearchesTitle": "收藏",
+                "removeFavoriteSearchButtonTitle": "从收藏移除记录"
+            },
+            "errorScreen": {
+                "titleText": "不能获取结果",
+                "helpText": "可能由与网络链接中断"
+            },
+            "footer": {
+                "selectText": "选中",
+                "selectKeyAriaLabel": "Enterkey",
+                "navigateText": "导航",
+                "navigateUpKeyAriaLabel": "Arrowup",
+                "navigateDownKeyAriaLabel": "Arrowdown",
+                "closeText": "关闭",
+                "closeKeyAriaLabel": "Escapekey",
+                "searchByText": "搜索提供："
+            },
+            "noResultsScreen": {
+                "noResultsText": "没有找到记录:",
+                "suggestedQueryText": "尝试搜索中:",
+                "reportMissingResultsText": "确认这个关键词应该返回记录？",
+                "reportMissingResultsLinkText": "告诉我们。"
+            }
+        }
+    }
 
+    const container = `#docsearch${isMobile ? "-mobile" : ""}`;
+    let option = {
+        container,
+        appId: "TSB4MACWRC",
+        indexName: "blazor-masastack_" + index,
+        apiKey: "a38a8d4b58c5648825ba3fafce8b6ffa",
+        placeholder,
+        searchParameters: {
+            facetFilters: ['lang:' + getCurrentDocSearchLanguage()]
+        }
+    }
+    if (currentLanguage == "zh") {
+        option.translations = cnTranslation;
+    }
+    //console.debug(option);
+    docsearch(option);
+};
 window.getTimeOffset = function () {
   return new Date().getTimezoneOffset();
 };

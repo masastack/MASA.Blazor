@@ -1,32 +1,61 @@
 ﻿@namespace Masa.Docs.Shared.Components
-@inject I18n I18n
-
-<div class="flex-1-1-auto d-flex justify-end">
-    <MTextField @bind-Value="_value"
-                BackgroundColor="#F6F8FD"
-                Class="@($"search-input rounded-lg {Class}")"
-                Style="max-width: 340px"
-                Placeholder="@I18n.T("Search")"
-                Clearable
-                ClearIcon="mdi-close-circle"
-                HideDetails="true"
-                TValue="string"
-                Filled
-                Rounded
-                Dense
-                Height="48">
-        <PrependInnerContent>
-            <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
-        </PrependInnerContent>
-    </MTextField>
-</div>
-
+<div id="docsearch" style="background-color:#F6F8FD;max-width: 340px" class="search-input rounded-lg mr-6" />
 @code {
+    [Inject]
+    public IJSRuntime? Js { get; set; }
+
+    [Inject]
+    public I18n? I18n { get; set; }
+
+    [Parameter]
+    public bool ReInit { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ReInitChanged { get; set; }
+
+    [Inject]
+    public MasaBlazor? MasaBlazor { get; set; }
+
     [CascadingParameter(Name = "Culture")]
     public string? Culture { get; set; } = null!;
+
+    [Parameter]
+    public string? IndexName { get; set; }
 
     [Parameter]
     public string Class { get; set; } = "mr-6";
 
     private string _value = string.Empty;
+
+    private string Path = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InvokeAsync(async () =>
+            {
+                StateHasChanged();
+                await InitDocSearchAsycn();
+            });
+        }
+    }
+
+    private async Task InitDocSearchAsycn()
+    {
+        var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+        await Js!.InvokeVoidAsync("addDoSearch", IndexName, MasaBlazor?.Breakpoint?.Mobile, currentLanguage, I18n.T("Search"));
+        ReInit = false;
+    }
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        if (ReInit)
+        {
+            await InitDocSearchAsycn();
+        }
+    }
+
 }

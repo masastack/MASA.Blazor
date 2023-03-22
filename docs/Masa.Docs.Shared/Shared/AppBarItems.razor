@@ -14,10 +14,15 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <Search />
+        <div class="flex-1-1-auto d-flex justify-end">
+            @if (!string.IsNullOrEmpty(Project))
+            {
+                <Search IndexName="@(Env+Project)" @bind-ReInit="@_reInitSearch" />
+            }
+        </div>
     }
 
-    <LanguageMenu OnCultureChanged="@OnCultureChanged" />
+    <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
@@ -33,7 +38,22 @@
 @code {
 
     [Parameter]
+    public string? Project { get; set; }
+
+    [Parameter]
+    public string? Env { get; set; }
+
+    [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    private bool _reInitSearch { get; set; }
+
+
+    public async Task OnCultureChangedLocal(string value)
+    {
+        _reInitSearch = true;
+        await OnCultureChanged.InvokeAsync(value);
+    }
 
     [Parameter]
     public EventCallback OnDotClick { get; set; }
