@@ -94,6 +94,13 @@ public partial class Components
         }
     }
 
+    private List<string> Tags
+    {
+        get
+        {
+            return IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
+        }
+    }
     private string? _tab;
     private string? _md;
     private string? _prevPage;
@@ -102,8 +109,7 @@ public partial class Components
     private FrontMatterMeta? _frontMatterMeta;
     private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
-    private List<string> _tags = new();
-    private static string _allComponentsCacheCount = string.Empty;
+    private static int _allComponentsCacheCount;
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 
@@ -113,9 +119,9 @@ public partial class Components
 
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
-            if (IsAllComponentsPage && string.IsNullOrEmpty(_allComponentsCacheCount))
+            if (IsAllComponentsPage && _allComponentsCacheCount == 0)
             {
-                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count.ToString();
+                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
             }
 
             _prevPage = Page;

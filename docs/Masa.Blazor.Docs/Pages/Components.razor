@@ -7,7 +7,7 @@
                  Class="mx-auto overflow-visible">
         @if (_frontMatterMeta is not null)
         {
-            <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@(IsAllComponentsPage ? _tags = new List<string>{ _allComponentsCacheCount } : new())"></FrontMatter>
+            <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@Tags"></FrontMatter>
         }
         else
         {
