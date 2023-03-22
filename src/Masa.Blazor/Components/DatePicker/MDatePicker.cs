@@ -183,18 +183,9 @@ namespace Masa.Blazor
 
                     if (values.Count > 0)
                     {
-                        if (Locale == "en-US")
-                        {
-                            return Type == DatePickerType.Date
-                             ? $"{DateFormatters.Week(values[0].DayOfWeek, Locale)[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month, Locale)[..3]} {values[0].Day}"
-                             : $"{DateFormatters.Month(values[0].Month, Locale)}";
-                        }
-                        else
-                        {
-                            return Type == DatePickerType.Date                                                                                                                                  
-                             ? $"{DateFormatters.Week(values[0].DayOfWeek, Locale)}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month, Locale)} {values[0].Day}"
-                             : $"{DateFormatters.Month(values[0].Month, Locale)}";
-                        }
+                        return Type == DatePickerType.Date
+                         ? $"{DateFormatters.Week(values[0].DayOfWeek, I18n)}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month, I18n)} {values[0].Day}"
+                         : $"{DateFormatters.Month(values[0].Month, I18n)}";
                     }
 
                     return "&nbsp;";
