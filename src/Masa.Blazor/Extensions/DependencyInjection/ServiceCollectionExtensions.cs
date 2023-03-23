@@ -30,13 +30,14 @@ public static class ServiceCollectionExtensions
             var window = serviceProvider.GetService<Window>();
             var options = serviceProvider.GetService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
-            return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme);
+            return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme, options.Value.Defaults);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
         services.TryAddScoped<EChartsJSModule>();
+        services.TryAddScoped<MonacoEditorJSModule>();
         services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();

@@ -13,7 +13,20 @@ related:
 
 <buttons-usage></buttons-usage>
 
-## Anatomy
+## 组件结构解剖
+
+建议在 `MButton` 内部放置元素：
+
+* 将文本放在中心
+* 在容器文本周围放置可视内容
+
+![Button Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/btn-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 除了文本，Button容器通常还包含 [MIcon](blazor/components/icons/) 组件 |
+| 2. 图标（可选） | 旨在改善视觉环境的主流媒体内容 |
+| 3. 文本 | 用于显示文本和其他内联元素的内容区域 |
 
 ## 注意
 

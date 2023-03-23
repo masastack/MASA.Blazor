@@ -1,0 +1,47 @@
+﻿@inject IPopupService PopupService
+
+<MButton OnClick="ShowBasic">Basic snackbar</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup @bind-Value="_alertType" Row>
+    <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
+    <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
+    <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
+    <MRadio Value="AlertTypes.Info" Label="@nameof(AlertTypes.Info)"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="ShowTyped">Typed snackbar</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowAction" Color="@_color">Action snackbar</MButton>
+
+@code {
+
+    AlertTypes _alertType = AlertTypes.Success;
+
+    string? _color;
+
+    private Task ShowBasic()
+    {
+        return PopupService.EnqueueSnackbarAsync("This a basic snackbar!");
+    }
+
+    private Task ShowTyped()
+    {
+        return PopupService.EnqueueSnackbarAsync("This a typed snackbar!", _alertType);
+    }
+
+    private async Task ShowAction()
+    {
+        _color = "red";
+
+        await PopupService.EnqueueSnackbarAsync(new SnackbarOptions("Turn to red successfully! You can undo it!", "Undo", async () =>
+        {
+            await Task.Delay(1000);
+            _color = null;
+        }));
+    }
+
+}

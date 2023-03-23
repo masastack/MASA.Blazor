@@ -7,7 +7,7 @@ related:
   - /blazor/components/data-iterators
 ---
 
-## 解剖学
+## 组件结构解剖
 
 ## 示例
 

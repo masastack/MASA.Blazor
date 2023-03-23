@@ -103,7 +103,7 @@
                         .Add("m-alert")
                         .Add("m-sheet")
                         .AddIf("m-alert--border", () => Border != Borders.None)
-                        .Add(BorderClass)
+                        .Add(AlertBorderClass)
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(IsDarkTheme)
                         .AddElevation(Elevation)
@@ -128,6 +128,7 @@
                 })
                 .Apply("wrapper", cssBuilder => { cssBuilder.Add("m-alert__wrapper"); })
                 .Apply("content", cssBuilder => { cssBuilder.Add("m-alert__content"); })
+                .Apply("title", cssBuilder => { cssBuilder.Add("m-alert__title"); })
                 .Apply("border", cssBuilder =>
                 {
                     cssBuilder
@@ -157,12 +158,23 @@
                 })
                 .Apply<BIcon, MIcon>("dismissible", attrs => { attrs[nameof(MIcon.Dark)] = IsDarkTheme; });
 
+
             string BorderClass() => Border switch
             {
                 Borders.Left => "m-alert__border--left",
                 Borders.Right => "m-alert__border--right",
                 Borders.Top => "m-alert__border--top",
                 Borders.Bottom => "m-alert__border--bottom",
+                Borders.None => "",
+                _ => throw new ArgumentOutOfRangeException(nameof(Border))
+            };
+
+            string AlertBorderClass() => Border switch
+            {
+                Borders.Left => "m-alert--border-left",
+                Borders.Right => "m-alert--border-right",
+                Borders.Top => "m-alert--border-top",
+                Borders.Bottom => "m-alert--border-bottom",
                 Borders.None => "",
                 _ => throw new ArgumentOutOfRangeException(nameof(Border))
             };

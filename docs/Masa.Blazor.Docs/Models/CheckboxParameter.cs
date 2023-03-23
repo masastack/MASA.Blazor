@@ -2,6 +2,7 @@
 
 public class CheckboxParameter
 {
+    // TODO: rename to Checked
     public bool Value { get; set; }
 
     public string? ParameterValue { get; set; }
@@ -15,8 +16,9 @@ public class CheckboxParameter
         ParameterValue = parameterValue;
     }
 
-    public CheckboxParameter()
+    public CheckboxParameter(bool value = false)
     {
+        Value = value;
         IsBoolean = true;
     }
 }

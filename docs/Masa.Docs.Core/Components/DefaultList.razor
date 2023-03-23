@@ -1,4 +1,5 @@
-﻿@typeparam TItem where TItem : IDefaultItem<TItem>
+﻿@inherits NextTickComponentBase
+@typeparam TItem where TItem : IDefaultItem<TItem>
 
 <MList Expand
        Nav
@@ -33,6 +34,12 @@
 
 @code {
 
+    [Inject]
+    private IJSRuntime? JS { get; set; }
+
+    [CascadingParameter]
+    public INavDrawer? NavDrawer { get; set; }
+
     [Parameter]
     public List<TItem> Items { get; set; } = new();
 
@@ -43,5 +50,37 @@
     public bool Routable { get; set; }
 
     [Parameter]
-    public string Class { get; set; }
+    public string? Class { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            if (NavDrawer is not null)
+            {
+                await NextTickWhile(async () =>
+                {
+                    await Task.Delay(500);
+                    await ScrollIntoView(NavDrawer.ElementSelector);
+                }, () => NavDrawer.Value);
+            }
+        }
+    }
+
+    public async Task ScrollIntoView(string ancestorSelector)
+    {
+        if (JS is null) return;
+
+        try
+        {
+            await JS.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
 }

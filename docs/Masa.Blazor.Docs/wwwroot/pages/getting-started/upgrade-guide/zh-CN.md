@@ -23,10 +23,17 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   ```
 - **PConfirm** 已被移除，请使用 `IPopupService.ConfirmAsync`。
 - **MHover** 移除了 `Context` 的 `Class` 和 `Style` 属性。
-- **MErrorHandler** 移除了 `ShowAlert` 参数，使用 `PopupType` 代替：
+- **MErrorHandler** 移除了 `ShowAlert` 参数，使用 `PopupType` 代替；移除了 `OnErrorHandleAsync` 参数，请使用 `OnHandle` 代替。`OnHandle` 会覆盖默认的错误处理程序，如果你只想在处理错误之后做其他操作，请使用 `OnAfterHandle`。
   ```diff
-  - <MErrorHandler ShowAlert="false"></MErrorHandler>
-  + <MErrorHandler PopupType="ErrorPopupType.None"></MErrorHandler>
+  - <MErrorHandler ShowAlert="false" OnErrorHandleAsync=""></MErrorHandler>
+  + <MErrorHandler PopupType="ErrorPopupType.None" OnHandle="" OnAfterHandle=""></MErrorHandler>
+  ```
+- 移除了 **PToasts** 组件，请使用 **PEnqueuedSnackbars** 组件代替。
+- **PopupService** 移除了 `AlertAsync` 和 `ToastAsync`，请使用 `EnqueueSnackbarAsync` 代替。
+  ```diff
+  - PopupService.AlertAsync()
+  - PopupService.ToastAsync()
+  + PopupService.EnqueueSnackbarAsync()
   ```
 
 ## 从 v0.5.x 升级到 v0.6.x

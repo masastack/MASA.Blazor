@@ -1,0 +1,80 @@
+﻿@page "/"
+@inject HttpClient HttpClient
+@inject TryJSModule TryJSModule
+@inject IPopupService PopupService
+@inherits NextTickComponentBase
+
+<MApp Class="default-app default-background">
+    <MNavigationDrawer App
+                       Class="px-2 py-6"
+                       Color="white"
+                       MiniVariant
+                       Permanent
+                       Floating
+                       MiniVariantWidth="64">
+        <MImage Src="https://blazor-pro.masastack.com/img/mainLayout/logo.svg"
+                Width="42"
+                Height="42"
+                Style="margin-left: 3px">
+        </MImage>
+
+        <MDivider Class="my-6"></MDivider>
+
+        <MTooltip Right>
+            <ActivatorContent>
+                <MButton Icon OnClick="RunCode" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-play</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                Ctrl + S
+            </ChildContent>
+        </MTooltip>
+
+        <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
+            <MIcon>mdi-github</MIcon>
+        </MButton>
+    </MNavigationDrawer>
+
+    <MMain>
+        <div id="code">
+            <MTabs @bind-Value="_tabStringNumber"
+                   HideSlider
+                   ActiveClass="active-tab">
+                @foreach (var item in _tabMonacoList)
+                {
+                    <MTab Class="text-none">
+                        <span>@item.Name</span>
+                    </MTab>
+                }
+            </MTabs>
+            <MTabsItems Class="editor-group default-background" Value="_tabStringNumber">
+                @foreach (var item in _tabMonacoList)
+                {
+                    <MTabItem Style="height: 100%;">
+                        <MMonacoEditor InitCompleteHandle="() => InitCompleteHandle(item)"
+                                       Class="custom-editor"
+                                       EditorOptions="@item.Options"
+                                       @ref="item.MonacoEditor">
+                        </MMonacoEditor>
+                    </MTabItem>
+                }
+            </MTabsItems>
+        </div>
+
+        <div id="splitter"></div>
+
+        <div id="render">
+            @if (_componentType != null)
+            {
+                <DynamicComponent Type="@_componentType" />
+            }
+        </div>
+    </MMain>
+
+    <MOverlay Value="_load" ZIndex="7">
+        <div class="white--text text-h3">
+            Loading, just a moment...
+        </div>
+    </MOverlay>
+</MApp>

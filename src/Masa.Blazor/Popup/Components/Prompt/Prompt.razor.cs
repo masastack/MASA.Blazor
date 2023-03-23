@@ -1,6 +1,6 @@
-﻿using Masa.Blazor.Presets;
+﻿#nullable enable
 
-#nullable enable
+using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 
@@ -36,25 +36,17 @@ public partial class Prompt : PopupComponentBase
 
     private readonly PromptValue _promptValue = new();
 
-    private MForm _form;
+    private MForm? _form;
     private bool _okLoading;
-    private PromptParameters? _defaultParameters;
 
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
+    protected override string ComponentName => PopupComponents.PROMPT;
+
     protected override void OnParametersSet()
     {
-        if (_defaultParameters is null && MApp?.PromptParameters is not null)
-        {
-            _defaultParameters = new PromptParameters();
-
-            MApp.PromptParameters.Invoke(_defaultParameters);
-        }
-
-        _defaultParameters?.MapTo(this);
-
         base.OnParametersSet();
 
         OkText ??= I18n.T("$masaBlazor.ok");
@@ -70,7 +62,7 @@ public partial class Prompt : PopupComponentBase
     private Task HandleOnCancel()
     {
         Visible = false;
-        return SetResult(null);
+        return ClosePopupAsync(null);
     }
 
     private async Task HandleOnSubmit()
@@ -87,24 +79,15 @@ public partial class Prompt : PopupComponentBase
         if (args.IsCanceled is false)
         {
             Visible = false;
-            await SetResult(_promptValue.Value);
+            await ClosePopupAsync(_promptValue.Value);
         }
     }
 
     private async Task HandleOnOk()
     {
-        if (_form.Validate())
+        if (_form != null && _form.Validate())
         {
             await HandleOnSubmit();
-        }
-    }
-
-    private async Task SetResult(string? value)
-    {
-        if (PopupItem != null)
-        {
-            await Task.Delay(256);
-            PopupItem.Discard(value);
         }
     }
 

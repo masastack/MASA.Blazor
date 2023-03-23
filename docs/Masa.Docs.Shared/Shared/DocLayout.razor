@@ -3,7 +3,7 @@
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
 
-<NavigationDrawer Value="_showDrawer"
+<NavDrawer Value="_showDrawer"
                   ValueChanged="OnNavDrawerValueChanged" />
 
 <MMain Class="masa">@Body</MMain>
@@ -67,6 +67,14 @@
 
     public async ValueTask DisposeAsync()
     {
-        await Js.RemoveHtmlElementEventListener("window", "scroll");
+        try
+        {
+            await Js.RemoveHtmlElementEventListener("window", "scroll");
+        }
+        catch (Exception e)
+        {
+            // ignored
+        }
     }
+
 }

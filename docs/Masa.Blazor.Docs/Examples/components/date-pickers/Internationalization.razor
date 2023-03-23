@@ -1,10 +1,14 @@
 ﻿<MRow Justify="JustifyTypes.SpaceAround">
     <MDatePicker @bind-Value="_picker"
-                 NoTitle
-                 Locale="zh-CN"></MDatePicker>
+                 FirstDayOfWeek="0"
+                 Locale="zh-cn">
+    </MDatePicker>
+    <MDatePicker @bind-Value="_picker"
+                 FirstDayOfWeek="1"
+                 Locale="sv-se">
+    </MDatePicker>
 </MRow>
 
-  @code {
+@code {
     private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
-  }
-
+}

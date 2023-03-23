@@ -1,12 +1,14 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+namespace Masa.Blazor
 {
-    public class MDatePickerDateTable<TValue> : MDatePickerTable<TValue>, IDatePickerDateTable, IDatePickerTable
+    public class MDatePickerDateTable<TValue> : MDatePickerTable<TValue>, IDatePickerDateTable
     {
         [Parameter]
         public int FirstDayOfWeek { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> WeekdayFormat { get; set; }
+        public Func<DateOnly, string>? WeekdayFormat { get; set; }
 
         [Parameter]
         public bool ShowWeek { get; set; }
@@ -17,31 +19,9 @@
         [Parameter]
         public EventCallback<int> OnDaySelected { get; set; }
 
-        public override Func<DateOnly, string> Formatter
-        {
-            get
-            {
-                if (Format != null)
-                {
-                    return Format;
-                }
+        public override Func<DateOnly, string> Formatter => Format ?? DateFormatters.Day(Locale);
 
-                return DateFormatters.Day(Locale);
-            }
-        }
-
-        public Func<DateOnly, string> WeekdayFormatter
-        {
-            get
-            {
-                if (WeekdayFormat != null)
-                {
-                    return WeekdayFormat;
-                }
-
-                return null;
-            }
-        }
+        public Func<DateOnly, string>? WeekdayFormatter => WeekdayFormat ?? DateFormatters.ShortestDayOfWeek(Locale);
 
         public IEnumerable<string> WeekDays
         {
@@ -51,7 +31,7 @@
 
                 var range = Enumerable.Range(0, 7);
                 return WeekdayFormatter != null
-                    ? range.Select(i => WeekdayFormat(DateOnly.Parse($"2017-01-{first + i + 15}")))
+                    ? range.Select(i => WeekdayFormatter(DateOnly.Parse($"2017-01-{first + i + 15}"))) // 2017-01-15 is Sunday
                     : range.Select(i => new[] { "S", "M", "T", "W", "T", "F", "S" }[(i + first) % 7]);
             }
         }
@@ -91,11 +71,11 @@
                 .Apply("events", cssBuilder => { cssBuilder.Add("m-date-picker-table__events"); })
                 .Apply("event", cssBuilder =>
                 {
-                    var color = (string)cssBuilder.Data;
+                    var color = (string?)cssBuilder.Data;
                     cssBuilder.AddBackgroundColor(color);
                 }, styleBuilder =>
                 {
-                    var color =  (string)styleBuilder.Data;
+                    var color =  (string?)styleBuilder.Data;
                     styleBuilder.AddBackgroundColor(color);
                 });
 

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+
 namespace Masa.Blazor.Popup.Components;
 
 public class AlertingPopupComponentBase : PopupComponentBase
@@ -7,7 +8,7 @@ public class AlertingPopupComponentBase : PopupComponentBase
 
     [Parameter] public string? IconColor { get; set; }
 
-    [Parameter] public AlertTypes? Type { get; set; }
+    [Parameter] public AlertTypes Type { get; set; } = AlertTypes.None;
 
     protected virtual string? ComputedIcon
     {

@@ -12,8 +12,8 @@
 </div>
 
 @code {
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; } = null!;
 
     List<(string Href, string Src, string Alt)> _sponsors = new List<(string Href, string Src, string Alt)>
     {

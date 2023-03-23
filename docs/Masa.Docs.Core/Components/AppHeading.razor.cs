@@ -70,9 +70,8 @@ public class AppHeading : ComponentBase
             // TODO: Blazor now does not support automatic scrolling of anchor points.
             // Check this when .NET 8 released.
 
-            await JsRuntime.InvokeVoidAsync("setHash");
             NavigationManager.ReplaceWithHash(href);
-            await JsRuntime.ScrollToElement(href, AppService.AppBarHeight);
+            _ = JsRuntime.InvokeVoidAsync("scrollToElement", href.TrimStart('#'), AppService.AppBarHeight + 12);
         }
     }
 }

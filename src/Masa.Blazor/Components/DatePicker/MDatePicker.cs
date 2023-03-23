@@ -1,4 +1,6 @@
-﻿using OneOf;
+﻿#nullable enable
+
+using OneOf;
 
 namespace Masa.Blazor
 {
@@ -21,13 +23,13 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public Func<DateOnly, bool> DayFormat { get; set; }
+        public Func<DateOnly, bool>? DayFormat { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> HeaderDateFormat { get; set; }
+        public Func<DateOnly, string>? HeaderDateFormat { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> MonthFormat { get; set; }
+        public Func<DateOnly, string>? MonthFormat { get; set; }
 
         [Parameter]
         public bool Multiple { get; set; }
@@ -51,16 +53,16 @@ namespace Masa.Blazor
         public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
         [Parameter]
-        public Func<IList<DateOnly>, string> TitleDateFormat { get; set; }
+        public Func<IList<DateOnly>, string>? TitleDateFormat { get; set; }
 
         [Parameter]
-        public string HeaderColor { get; set; }
+        public string? HeaderColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Flat { get; set; }
@@ -75,7 +77,7 @@ namespace Masa.Blazor
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
-        public Func<DateOnly, bool> AllowedDates { get; set; }
+        public Func<DateOnly, bool>? AllowedDates { get; set; }
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -104,14 +106,8 @@ namespace Masa.Blazor
         [Parameter]
         public TValue Value
         {
-            get
-            {
-                return GetValue<TValue>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<TValue>();
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -121,13 +117,13 @@ namespace Masa.Blazor
         public EventCallback OnInput { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> WeekdayFormat { get; set; }
+        public Func<DateOnly, string>? WeekdayFormat { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> YearFormat { get; set; }
+        public Func<DateOnly, string>? YearFormat { get; set; }
 
         [Parameter]
-        public string YearIcon { get; set; }
+        public string? YearIcon { get; set; }
 
         [Parameter]
         public string NextIcon { get; set; } = "mdi-chevron-right";
@@ -142,18 +138,35 @@ namespace Masa.Blazor
         public EventCallback<DatePickerType> OnActivePickerUpdate { get; set; }
 
         [Parameter]
-        public string Locale { get; set; } = "en-US";
+        public string? Locale { get; set; }
 
-        protected DateOnly TableDate
+        public CultureInfo CurrentLocale
         {
             get
             {
-                return GetValue<DateOnly>();
+                var culture = I18n.Culture;
+                
+                if (Locale is not null)
+                {
+                    try
+                    {
+                        culture = CultureInfo.CreateSpecificCulture(Locale);
+                    }
+                    catch (CultureNotFoundException e)
+                    {
+                        // ignored
+                        Console.WriteLine(e);
+                    }
+                }
+
+                return culture;
             }
-            set
-            {
-                SetValue(value);
-            }
+        }
+
+        protected DateOnly TableDate
+        {
+            get => GetValue<DateOnly>();
+            set => SetValue(value);
         }
 
         protected int TableMonth => TableDate.Month - 1;
@@ -168,7 +181,7 @@ namespace Masa.Blazor
 
         protected DateOnly? MaxYear => Max != null ? new DateOnly(Max.Value.Year, 1, 1) : null;
 
-        public (Func<DateOnly, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat ?? DateFormatters.Year(Locale), TitleDateFormat ?? DefaultTitleDateFormatter);
+        public (Func<DateOnly, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat ?? DateFormatters.Year(CurrentLocale), TitleDateFormat ?? DefaultTitleDateFormatter);
 
         public Func<IList<DateOnly>, string> DefaultTitleDateFormatter
         {
@@ -183,9 +196,22 @@ namespace Masa.Blazor
 
                     if (values.Count > 0)
                     {
-                        return Type == DatePickerType.Date 
-                            ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" 
-                            : $"{DateFormatters.Month(values[0].Month)}";
+                        var date = values[0];
+                        
+                        if (Type == DatePickerType.Date)
+                        {
+                            var str = DateFormatters.AbbreviatedDayOfWeek(CurrentLocale)(date) + ", " + DateFormatters.MonthDay(CurrentLocale)(date);
+                            if (Landscape)
+                            {
+                                return str.Replace(", ", "<br>");
+                            }
+
+                            return str;
+                        }
+                        else
+                        {
+                            return DateFormatters.Month(CurrentLocale)(date);
+                        }
                     }
                     
                     return "&nbsp;";
@@ -206,29 +232,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected IList<DateOnly> MultipleValue
-        {
-            get
-            {
-                return WrapInArray(Value);
-            }
-        }
+        protected IList<DateOnly> MultipleValue => WrapInArray(Value);
 
-        protected bool IsMultiple
-        {
-            get
-            {
-                return Multiple || Range;
-            }
-        }
+        protected bool IsMultiple => Multiple || Range;
 
-        protected DateOnly LastValue
-        {
-            get
-            {
-                return IsMultiple ? MultipleValue.LastOrDefault() : (Value is DateOnly date ? date : default);
-            }
-        }
+        protected DateOnly LastValue => IsMultiple ? MultipleValue.LastOrDefault() : (Value is DateOnly date ? date : default);
 
         protected override void OnInitialized()
         {
@@ -336,7 +344,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerYears.Min)] = MinYear;
                     attrs[nameof(MDatePickerYears.Max)] = MaxYear;
                     attrs[nameof(MDatePickerYears.Value)] = TableYear;
-                    attrs[nameof(MDatePickerYears.Locale)] = Locale;
+                    attrs[nameof(MDatePickerYears.Locale)] = CurrentLocale;
                     attrs[nameof(MDatePickerYears.OnInput)] = CreateEventCallback<int>(year =>
                     {
                         TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
@@ -355,7 +363,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerHeader.Max)] = InternalActivePicker == DatePickerType.Date ? MaxMonth : MaxYear;
                     attrs[nameof(MDatePickerHeader.PrevIcon)] = PrevIcon;
                     attrs[nameof(MDatePickerHeader.Readonly)] = Readonly;
-                    attrs[nameof(MDatePickerHeader.Locale)] = Locale;
+                    attrs[nameof(MDatePickerHeader.Locale)] = CurrentLocale;
                     attrs[nameof(MDatePickerHeader.ActivePicker)] = InternalActivePicker;
                     attrs[nameof(MDatePickerHeader.Value)] = Type == DatePickerType.Date ? new DateOnly(TableYear, TableMonth + 1, 1) : new DateOnly(TableYear, 1, 1);
                     attrs[nameof(MDatePickerHeader.OnInput)] = CreateEventCallback<DateOnly>(value =>
@@ -382,7 +390,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerDateTable<TValue>.Min)] = Min;
                     attrs[nameof(MDatePickerDateTable<TValue>.Max)] = Max;
                     attrs[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
-                    attrs[nameof(MDatePickerDateTable<TValue>.Locale)] = Locale;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Locale)] = CurrentLocale;
                     attrs[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly;
                     attrs[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
                     attrs[nameof(MDatePickerDateTable<TValue>.ShowAdjacentMonths)] = ShowAdjacentMonths;
@@ -405,7 +413,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerMonthTable<TValue>.Light)] = Light;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Min)] = MinMonth;
                     attrs[nameof(MDatePickerMonthTable<TValue>.Max)] = MaxMonth;
-                    attrs[nameof(MDatePickerMonthTable<TValue>.Locale)] = Locale;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Locale)] = CurrentLocale;
                     attrs[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
                     attrs[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly && Type == DatePickerType.Month;
                     attrs[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;

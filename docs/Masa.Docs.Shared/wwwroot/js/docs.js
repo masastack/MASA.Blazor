@@ -1,4 +1,4 @@
-﻿window.setCookie = function (name, value) {
+window.setCookie = function (name, value) {
   document.cookie = `$ {
                 name
             } = $ {
@@ -32,8 +32,16 @@ window.setHash = function () {
   isHash = true;
 }
 
+window.scrollToElement = function (hash, offset) {
+  setHash();
+  const el = document.getElementById(hash);
+  const top = el.getBoundingClientRect().top;
+  const offsetPosition = top + window.pageYOffset - offset;
+  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+}
+
 /*
- * NavigationMananger.NavigateTo always scrolls page to the top.
+ * NavigationManager.NavigateTo always scrolls page to the top.
  * The following `window.scrollTo` would be invoked.
  * When NavigationManager.NavigateTo invoked, the x and y is zero.
  */
@@ -75,6 +83,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
     addCodeRules(md);
     addImageRules(md);
     addBlockquoteRules(md);
+    addTableRules(md);
 
     parser.useContainer("code-group")
     parser.useContainer("code-group-item")
@@ -173,6 +182,12 @@ window.MasaBlazor.markdownItRules = function (parser) {
     };
   }
 
+  function addTableRules(md) {
+    md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
+      return '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' + self.renderToken(tokens, idx, options) + '</div></div></div>';
+    };
+  }
+
   function addCodeGroupRules(parser) {
     parser.md.renderer.rules["container_code-group_open"] = (tokens, idx, options, env, self) => {
       let nextIndex = idx
@@ -219,7 +234,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
   }
 };
 
-window.registerWindowScrollEventForToc = function (dotnet, tocId) {
+window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
   let _scrolling;
   let _offsets = [];
@@ -227,16 +242,17 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
   let _registered;
 
   window.addEventListener("scroll", onScroll);
+  registerClickEvents();
 
   function registerClickEvents() {
     if (_registered) return
-    const elements = document.querySelectorAll(`#${tocId} li`);
+    const elements = document.querySelectorAll(selector);
     if (elements && elements.length > 0) {
       _registered = true;
       for (const e of elements) {
         e.addEventListener('click', async () => {
           _scrolling = true;
-          await new Promise(resolve => setTimeout(resolve, 600))
+          await new Promise(resolve => setTimeout(resolve, 1000))
           _scrolling = false;
         })
       }
@@ -245,7 +261,14 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
   function setOffsets() {
     const offsets = [];
-    _toc = Array.from(document.querySelectorAll(`#${tocId} li>a`)).map(({href}) => {
+    var queryFilter = selector;
+    var firstNode = document.querySelector(queryFilter) ;
+      if (!firstNode || (firstNode && !firstNode.attributes.getNamedItem('href'))) {
+        queryFilter = `${selector} a`;
+    }
+
+    _toc = Array.from(document.querySelectorAll(queryFilter)).map(({attributes}) => {
+      let href=attributes.getNamedItem("href").value
       const index = href.indexOf("#");
       return href.slice(index);
     })
@@ -310,6 +333,12 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
 window.backTop = function () {
   slideTo(0);
+}
+
+window.activeNavItemScrollIntoView = function (ancestorSelector) {
+  const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
+  if (!activeListItem) return;
+  activeListItem.scrollIntoView({ behavior: "smooth" });
 }
 
 function slideTo(targetPageY) {

@@ -13,26 +13,42 @@ related:
 
 <cards-usage></cards-usage>
 
-## 解剖学
+## 组件结构解剖
+
+建议在 `MCard` 内部放置元素：
+
+* 将 `MCardTitle`, `MCardSubtitle` 或其他标题文本放在顶部
+* 将 `MCardText` 和其他形式的媒体放在卡头下方
+* 在卡片内容后放置 `MCardActions`
+
+![Card Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | 卡片容器包含所有 `MCard` 组件。 由3个主要部分组成：`MCardItem`, `MCardText`, 和 `MCardActions` |
+| 2. 标题（可选） | 增强 **font-size** 的标题 |
+| 3. 副标题 （可选） | 具有较低强调文本颜色的副标题 |
+| 4. 文本（可选） | 具有较低强调文本颜色的内容区域 |
+| 5. 操作（可选） | 通常包含一个或多个 [MButton](blazor/components/buttons) 组件的内容区域 |
+
 
 ## 功能组件
 
 #### MCardActions
 
-用于为卡片放置 动作 的容器，如 [MButton](/blazor/components/buttons) 或 [MMenu](/blazor/components/menus)。 同时在按钮上使用 个特殊边距
-  ，以便它们与其他卡片内容区域的匹配。
+`MCardActions` 的空间可用于放置用于卡片的选项，例如[MButton](/blazor/components/buttons)按钮组件或者 [MMenu](/blazor/components/menus)菜单组件。 它也在选项按钮上应用了特殊边距排版，使其能够和卡片上的其他内容正确排列起来。
 
 #### MCardSubtitle
 
-为卡片字幕提供默认的 **字体大小** 和 **填充**。 字体大小可以以 [排版类](/blazor/styles-and-animations/text-and-typography) 覆盖。
+`MCardSubtitle` 组件能为卡片的小标或字幕提供其默认的 **字体大小** 和 **填充** 排版。 字体大小可以使用文本和排版中的[文字排版属性](/blazor/styles-and-animations/text-and-typography)进行调整。
 
 #### MCardText
 
-主要用于卡片中的 **文本内容**。 对文本应用填充，将其字体大小减少为 .875rem。
+`MCardText` 主要用于显示卡片中的文本内容。 它使卡片中的文本能够进行填充排版，并将字体大小减小至 .875rem 的大小。
 
 #### MCardTitle
 
-为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 [排版类](/blazor/styles-and-animations/text-and-typography) 覆盖。
+`MCardTitle` 为卡片的大标提供了默认的 **字体大小** 和 **填充排版**。 字体大小可以使用文本和排版中的[文字排版属性](/blazor/styles-and-animations/text-and-typography) 进行调整。
 
 ## 示例
 
@@ -87,6 +103,24 @@ related:
 卡片是获取更详细信息的入口点。 为了保持简洁，请确保限制用户可以执行的操作数量。 
 
 <masa-example file="Examples.components.cards.InformationCard"></masa-example>
+
+#### 推特卡片
+
+**MCard** 组件有多个子组件，可以帮助您构建复杂的示例，而不必担心间距。此示例由 **MCardTitle**、**MCardText** 和 **MCardActions** 组件组成。
+
+<masa-example file="Examples.components.cards.TwitterCard"></masa-example>
+
+#### 天气卡片
+
+使用 [MListItem](/blazor/components/lists) 和 [MSlider](/brazor/components/sliders)，我们可以创建一个独特的天气卡。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。
+
+<masa-example file="Examples.components.cards.WeatherCard"></masa-example>
+
+#### 加载
+
+使用不确定 [MProgressLinear](/blazor/components/progress-linear) 表示加载状态。
+
+<masa-example file="Examples.components.cards.Loading"></masa-example>
 
 
 

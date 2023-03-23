@@ -82,7 +82,7 @@
       "borders",
       {
         "title": "bottom-navigation",
-        "state": "new"
+        "state": "update"
       },
       "bottom-sheets",
       "breadcrumbs",
@@ -92,6 +92,10 @@
       "chips",
       "copyable-text",
       "cron",
+      {
+        "title": "defaults-providers",
+        "state": "new"
+      },
       "dialogs",
       "dividers",
       "drag-zone",
@@ -101,8 +105,18 @@
         "state": "update"
       },
       "editors",
-      "ellipsis-texts",
-      "error-handler",
+      {
+        "title": "enqueued-snackbars",
+        "state": "new"
+      },
+      {
+        "title": "monaco-editor",
+        "state": "new"
+      },
+      {
+        "title": "error-handler",
+        "state": "update"
+      },
       "expansion-panels",
       "floating-action-buttons",
       "footers",
@@ -183,6 +197,10 @@
       "navigation-drawers",
       "not-grouped",
       "overlays",
+      {
+        "title": "page-tabs",
+        "state": "new"
+      },
       "paginations",
       {
         "title": "pickers",
@@ -193,7 +211,10 @@
           "time-pickers"
         ]
       },
-      "popup-service",
+      {
+        "title": "popup-service",
+        "state": "update"
+      },
       {
         "title": "progress",
         "group": "components",
@@ -229,7 +250,6 @@
       },
       "tabs",
       "timelines",
-      "toasts",
       "tooltips",
       "treeview",
       "virtual-scroll"

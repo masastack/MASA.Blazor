@@ -1,0 +1,16 @@
+﻿@page "/blazor/examples/page-tabs/page2"
+@layout PageTabsLayout
+
+<h4>@@Body is wrapped in PageContainer, the state of the page would be saved</h4>
+
+<MRadioGroup @bind-Value="_value" TValue="string" Row>
+    <MRadio Label="radio1" Value="@("radio1")"></MRadio>
+    <MRadio Label="radio2" Value="@("radio2")"></MRadio>
+    <MRadio Label="radio3" Value="@("radio3")"></MRadio>
+</MRadioGroup>
+
+@code {
+
+    private string? _value;
+
+}

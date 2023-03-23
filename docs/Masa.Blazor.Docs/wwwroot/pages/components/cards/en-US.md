@@ -15,6 +15,22 @@ A card has four basic components, `MCardTitle`, `MCardSubtitle`, `MCardText` 和
 
 ## Anatomy
 
+The recommended placement of elements inside of `MCard` is:
+
+* Place `MCardTitle`, `MCardSubtitle` or other title text on top
+* Place `MCardText` and other forms of media below the card header
+* Place `MCardActions` after card content
+
+![Card Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/card-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Card container holds all `MCard` components. Composed of 3 major parts: `MCardItem`, `MCardText`, and `MCardActions` |
+| 2. Title (optional) | A heading with increased **font-size** |
+| 3. Subtitle (optional) | A subheading with a lower emphasis text color |
+| 4. Text (optional) | A content area with a lower emphasis text color |
+| 5. Actions (optional) | A content area that typically contains one or more [MButton](blazor/components/buttons) components |
+
 ## SubComponents
 
 #### MCardActions
@@ -28,11 +44,11 @@ Provide default **font size** and **fill** for card subtitles. Font size can be 
 
 #### MCardText
 
-It is mainly used for **text content** in cards. Apply padding to the text and reduce its font size to. 875rem.
+Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
 
 #### MCardTitle
 
-Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
+Provide default **font size** and **padding** for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).
 
 ## Examples
 
@@ -87,3 +103,21 @@ Using **MCol** , you can create customized horizontal cards. Use the contain pro
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
 <masa-example file="Examples.components.cards.InformationCard"></masa-example>
+
+#### Twitter card
+
+The **MCard** component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the **MCardTitle**, **MCardText** and **MCardActions** components.
+
+<masa-example file="Examples.components.cards.TwitterCard"></masa-example>
+
+#### Weather card
+
+Using [MListItems](/blazor/components/lists) and a [MSlider](/blazor/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
+
+<masa-example file="Examples.components.cards.WeatherCard"></masa-example>
+
+#### Loading
+
+Use an indeterminate [MProgressLinear](/blazor/components/progress-linear) to indicate a loading state.
+
+<masa-example file="Examples.components.cards.Loading"></masa-example>

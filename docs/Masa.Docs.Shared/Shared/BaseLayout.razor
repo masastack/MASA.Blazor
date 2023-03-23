@@ -10,29 +10,27 @@
 </HeadContent>
 
 <MApp>
-    <CascadingValue Value="@I18n.Culture">
+    <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
-            <CascadingValue Value="PageInfo">
-                <MErrorHandler>
-                    <AppBar OnCultureChanged="@OnCultureChanged"
-                            OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
-                            OnDotClick="HandleOnDotClick"
-                            OnSettingsClick="HandleSettingsClick"
-                            HideAppBarNavIcon="@_hideAppBarNavIcon" />
+            <MErrorHandler>
+                <AppBar OnCultureChanged="@OnCultureChanged"
+                        OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                        OnDotClick="HandleOnDotClick"
+                        OnSettingsClick="HandleSettingsClick"
+                        HideAppBarNavIcon="@_hideAppBarNavIcon" />
 
-                    <CascadingValue Value="this" IsFixed>
-                        @Body
-                    </CascadingValue>
+                <CascadingValue Value="this" IsFixed>
+                    @Body
+                </CascadingValue>
 
-                    <Settings @bind-Value="_showSettings" />
-                    <MobileMenuList @bind-Value="_showMobileMenuList" />
-                </MErrorHandler>
+                <Settings @bind-Value="_showSettings" />
+                <MobileMenuList @bind-Value="_showMobileMenuList" />
+            </MErrorHandler>
 
-                <HeadContent>
-                    <PageTitle>@PageInfo.PageTitle</PageTitle>
-                    <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
-                </HeadContent>
-            </CascadingValue>
+            <HeadContent>
+                <PageTitle>@PageInfo.PageTitle</PageTitle>
+                <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
+            </HeadContent>
         </CascadingValue>
     </CascadingValue>
 </MApp>
@@ -44,7 +42,7 @@
     private bool _hideAppBarNavIcon;
     private bool _showSettings;
     private string? _project;
-    
+
     internal (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
 
     private Dictionary<string, string> _projectMap = new();

@@ -1,0 +1,27 @@
+﻿<div style="height: 500px">
+    <MMonacoEditor Height="@("100%")" InitOptions="InitEditor" @ref="_editor"></MMonacoEditor>
+</div>
+
+@code{
+
+    string jsCode =
+        "// jqeuery excerpt:\n//       1         2         3         4\n//34567890123456789012345678901234567890\n/*!\r\n * Sizzle CSS Selector Engine v2.3.0\r\n * https://sizzlejs.com/\r\n *\r\n * Copyright jQuery Foundation and other contributors\r\n * Released under the MIT license\r\n * http://jquery.org/license\r\n *\r\n * Date: 2016-01-04\r\n */\r\n(function( window ) {\r\n\r\nvar i,\r\n\tsupport,\r\n\tExpr,\r\n\tgetText,\r\n\tisXML,\r\n\ttokenize,\r\n\tcompile,\r\n\tselect,\r\n\toutermostContext,\r\n\tsortInput,\r\n\thasDuplicate,\r\n\r\n\t// Local document vars\r\n\tsetDocument,\r\n\tdocument,\r\n\tdocElem,\r\n\tdocumentIsHTML,\r\n\trbuggyQSA,\r\n\trbuggyMatches,\r\n\tmatches,\r\n\tcontains,\r\n\r\n\t// Instance-specific data\r\n\texpando = \"sizzle\" + 1 * new Date(),\r\n\tpreferredDoc = window.document,\r\n\tdirruns = 0,\r\n\tdone = 0,\r\n\tclassCache = createCache(),\r\n\ttokenCache = createCache(),\r\n\tcompilerCache = createCache(),\r\n\tsortOrder = function( a, b ) {\r\n\t\tif ( a === b ) {\r\n\t\t\thasDuplicate = true;\r\n\t\t}\r\n\t\treturn 0;\r\n\t},\r\n\r\n\t// Instance methods\r\n\thasOwn = ({}).hasOwnProperty,\r\n\tarr = [],\r\n\tpop = arr.pop,\r\n\tpush_native = arr.push,\r\n\tpush = arr.push,\r\n\tslice = arr.slice,\r\n\t// Use a stripped-down indexOf as it\'s faster than native\r\n\t// https://jsperf.com/thor-indexof-vs-for/5\r\n\tindexOf = function( list, elem ) {\r\n\t\tvar i = 0,\r\n\t\t\tlen = list.length;";
+
+    private MMonacoEditor _editor;
+
+    private async Task<object> InitEditor()
+    {
+        object options = new
+        {
+            value = jsCode,
+            language = "javascript",
+            wordWrap = "wordWrapColumn",
+            wordWrapColumn = 40,
+            // try "same", "indent" or "none"
+            wrappingIndent = "indent",
+        };
+
+        return options;
+    }
+
+}

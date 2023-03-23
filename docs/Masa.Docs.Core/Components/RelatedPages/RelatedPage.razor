@@ -18,8 +18,8 @@
 
 @code {
 
-    [CascadingParameter]
-    private CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    private string Culture { get; set; } = null!;
 
     /// <summary>
     /// The href.

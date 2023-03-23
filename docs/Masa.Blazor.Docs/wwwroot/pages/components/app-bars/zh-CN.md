@@ -13,6 +13,25 @@ related:
 
 <app-bars-usage></app-bars-usage>
 
+## 组件结构解剖
+
+建议在 `MAppBar` 内部放置元素：
+
+* 将 `MAppBarNavIcon` 或其他导航项目放在最左侧
+* 将 `MAppBarTitle` 放置在导航右侧
+* 将上下文操作放置在导航右侧
+* 将溢出操作放在最右边
+
+![App Bar Anatomy](https://cdn.masastack.com/stack/doc/masablazor/anatomy/app-bar-anatomy.png)
+
+| 元素 / 区域 | 描述 |
+| - | - |
+| 1. 容器 | App Bar 容器包含所有 `MAppBar` 组件 |
+| 2. 应用栏图标（可选） | 创建的样式图标按钮组件，通常用于控制 `MNavigation Drawer` 的状态 |
+| 3. 标题（可选） | 增强 **font-size** 的标题 |
+| 4. 操作项目（可选） | 用于突出显示不在溢出菜单中的某些操作 |
+| 5. 溢出菜单（可选） | 将不常用的操作项放入隐藏菜单 |
+
 ## 功能组件
 
 #### MAppBarNavIcon
@@ -72,9 +91,9 @@ related:
 
 #### 滚动反转
 
-当使用 `InvertedScroll` 属性时，该条将隐藏，直到用户滚动超过指定的阈值。一旦超过阈值，**MAppBar** 将继续显示，直到用户向上滚动超过阈值。如果未提供 `ScrollThreshold` 值，将使用默认值0。
+当使用 `InvertedScroll` 属性时，该栏将隐藏，直到用户滚动超过指定的阈值。一旦超过阈值，**MAppBar** 将继续显示，直到用户向上滚动超过阈值。如果未提供 `ScrollThreshold` 值，将使用默认值0。
 
-<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.Inverted"></masa-example>
 
 #### 突出
 

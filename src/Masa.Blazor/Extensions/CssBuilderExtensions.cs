@@ -1,5 +1,6 @@
-﻿using Masa.Blazor;
-using System.Text.RegularExpressions;
+﻿#nullable enable
+
+using Masa.Blazor;
 
 namespace BlazorComponent
 {
@@ -26,7 +27,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string color)
+        public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string? color)
         {
             if (!string.IsNullOrEmpty(color) && !IsCssColor(color))
             {

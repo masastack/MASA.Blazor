@@ -1,11 +1,12 @@
-﻿using BlazorComponent.Attributes;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap, IAsyncDisposable
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks, IAsyncDisposable
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; }
+
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
         [Parameter]
         [ApiDefaultValue(360)]
@@ -22,7 +23,13 @@ namespace Masa.Blazor
             get => GetValue<float>(10);
             set
             {
-                if (value >= MinZoom && value <= MaxZoom)
+                if (value < MinZoom)
+                    SetValue(MinZoom);
+
+                else if (value > MaxZoom)
+                    SetValue(MaxZoom);
+
+                else
                     SetValue(value);
             }
         }
@@ -67,10 +74,10 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(BaiduMapType.NormalMap)]
+        [ApiDefaultValue(BaiduMapType.Normal)]
         public BaiduMapType MapType
         {
-            get => GetValue(BaiduMapType.NormalMap);
+            get => GetValue(BaiduMapType.Normal);
             set => SetValue(value);
         }
 
@@ -115,23 +122,130 @@ namespace Masa.Blazor
             }
         }
 
-        private IJSObjectReference _jsMap;
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnClick { get; set; }
 
-        public static float DefaultMaxZoom { get; } = 19;
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnDoubleClick { get; set; }
 
-        public static float DefaultMinZoom { get; } = 3;
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnRightClick { get; set; }
+
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnRightDoubleClick { get; set; }
+
+        [Parameter]
+        public EventCallback OnMapTypeChanged { get; set; }
+
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnMouseMove { get; set; }
+
+        [Parameter]
+        public EventCallback OnMouseOver { get; set; }
+
+        [Parameter]
+        public EventCallback OnMouseOut { get; set; }
+
+        [Parameter]
+        public EventCallback OnMoveStart { get; set; }
+
+        [Parameter]
+        public EventCallback OnMoving { get; set; }
+
+        [Parameter]
+        public EventCallback OnMoveEnd { get; set; }
+
+        [Parameter]
+        public EventCallback OnZoomStart { get; set; }
+
+        [Parameter]
+        public EventCallback OnZoomEnd { get; set; }
+
+        [Parameter]
+        public EventCallback OnAddOverlay { get; set; }
+
+        [Parameter]
+        public EventCallback OnAddControl { get; set; }
+
+        [Parameter]
+        public EventCallback OnRemoveOverlay { get; set; }
+
+        [Parameter]
+        public EventCallback OnRemoveControl { get; set; }
+
+        [Parameter]
+        public EventCallback OnClearOverlays { get; set; }
+
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnDragStart { get; set; }
+
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnDragging { get; set; }
+
+        [Parameter]
+        public EventCallback<BaiduMapEventArgs> OnDragEnd { get; set; }
+
+        [Parameter]
+        public EventCallback OnResize { get; set; }
+
+        [Parameter]
+        public EventCallback<float> ZoomChanged { get; set; }
+
+        [Parameter]
+        public EventCallback<GeoPoint> CenterChanged { get; set; }
+
+        public async ValueTask HandleOnMapTypeChanged()
+        {
+            _maptypeChangedInJs = true;
+
+            switch (await _baiduMap.TryInvokeAsync<string>("getMapType"))
+            {
+                case "B_NORMAL_MAP": MapType = BaiduMapType.Normal; break;
+                case "B_EARTH_MAP": MapType = BaiduMapType.Earth; break;
+                case "B_SATELLITE_MAP": MapType = BaiduMapType.Satellite; break;
+                default: break;
+            }
+
+            await OnMapTypeChanged.InvokeAsync();
+        }
+
+        public async ValueTask HandleOnMoving()
+        {
+            _centerChangedInJs = true;
+
+            if (CenterChanged.HasDelegate)
+                await CenterChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter"));
+
+            await OnMoving.InvokeAsync();
+        }
+
+        public async ValueTask HandleOnZoomEnd()
+        {
+            _zoomChangedInJs = true;
+
+            if (ZoomChanged.HasDelegate)
+                await ZoomChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<float>("getZoom"));
+
+            await OnZoomEnd.InvokeAsync();
+        }
+
+        private IBaiduMapJSObjectReferenceProxy _baiduMap;
 
         private bool _zoomChangedInJs = false;
 
         private bool _centerChangedInJs = false;
 
-        private DotNetObjectReference<MBaiduMap> _objRef;
+        private bool _maptypeChangedInJs = false;
+
+        public static float DefaultMaxZoom { get; } = 19;
+
+        public static float DefaultMinZoom { get; } = 3;
 
         private static Dictionary<BaiduMapType, string> BaiduMapTypeName { get; } = new()
         {
-            { BaiduMapType.NormalMap, "B_NORMAL_MAP" },
-            { BaiduMapType.EarthMap, "B_EARTH_MAP" },
-            { BaiduMapType.SatelliteMap, "B_SATELLITE_MAP" },
+            { BaiduMapType.Normal, "B_NORMAL_MAP" },
+            { BaiduMapType.Earth, "B_EARTH_MAP" },
+            { BaiduMapType.Satellite, "B_SATELLITE_MAP" },
         };
 
         protected override void SetComponentClass()
@@ -158,16 +272,20 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                _objRef = DotNetObjectReference.Create(this);
-
-                _jsMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
+                _baiduMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
                     Center = Center,
                     DarkThemeId = DarkThemeId,
                     Dark = Dark,
-                }, _objRef);
+                    MaxZoom = MaxZoom,
+                    MinZoom = MinZoom,
+                    TrafficOn = TrafficOn,
+                    MapTypeString = BaiduMapTypeName[MapType],
+                }, this);
+
+                StateHasChanged();
             }
         }
 
@@ -183,12 +301,12 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _jsMap.TryInvokeVoidAsync("setZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setZoom", val);
             });
 
             watcher.Watch<float>(nameof(MaxZoom), async (val) =>
             {
-                await _jsMap.TryInvokeVoidAsync("setMaxZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMaxZoom", val);
 
                 if (Zoom > val)
                     Zoom = val;
@@ -196,23 +314,31 @@ namespace Masa.Blazor
 
             watcher.Watch<float>(nameof(MinZoom), async (val) =>
             {
-                await _jsMap.TryInvokeVoidAsync("setMinZoom", val);
+                await _baiduMap.TryInvokeVoidAsync("setMinZoom", val);
 
                 if (Zoom < val)
                     Zoom = val;
             });
 
             watcher.Watch<bool>(nameof(EnableScrollWheelZoom), async (val) =>
-                await _jsMap.TryInvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "enableScrollWheelZoom" : "disableScrollWheelZoom"));
 
             watcher.Watch<BaiduMapType>(nameof(MapType), async (val) =>
-                await _jsMap.TryInvokeVoidAsync("setMapType", BaiduMapTypeName[val]));
+            {
+                if (_maptypeChangedInJs)
+                {
+                    _maptypeChangedInJs = false;
+                    return;
+                }
+
+                await _baiduMap.TryInvokeVoidAsync("setMapType", BaiduMapTypeName[val]);
+            });
 
             watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
-                await _jsMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
+                await _baiduMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
 
             watcher.Watch<bool>(nameof(Dark), async (val) =>
-                await _jsMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
+                await _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
 
             watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {
@@ -222,30 +348,26 @@ namespace Masa.Blazor
                     return;
                 }
 
-                await _jsMap.TryInvokeVoidAsync("panTo", val);
+                await _baiduMap.TryInvokeVoidAsync("panTo", val);
             });
         }
 
-        [JSInvokable]
-        public void OnJsZoomEnd(float zoom)
-        {
-            _zoomChangedInJs = true;
-            Zoom = zoom;
-        }
+        public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
+            => await _baiduMap.AddOverlayAsync(overlay);
 
-        [JSInvokable]
-        public void OnJsMoveEnd(GeoPoint point)
-        {
-            _centerChangedInJs = true;
-            Center = point;
-        }
+        public async ValueTask RemoveOverlayAsync(BaiduOverlayBase overlay)
+            => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);
+
+        public async ValueTask ClearOverlaysAsync()
+            => await _baiduMap.TryInvokeVoidAsync("clearOverlays");
+
+        public async ValueTask<bool> ContainsOverlayAsync(BaiduOverlayBase overlay)
+            => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
         public async ValueTask DisposeAsync()
         {
-            _objRef?.Dispose();
-
-            if (_jsMap is not null)
-                await _jsMap.DisposeAsync();
+            if (_baiduMap is not null)
+                await _baiduMap.DisposeAsync();
         }
     }
 }

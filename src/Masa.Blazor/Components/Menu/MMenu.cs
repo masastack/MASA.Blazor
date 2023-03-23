@@ -1,11 +1,13 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.Web;
+
+namespace Masa.Blazor
 {
     public class MMenu : BMenu
     {
-        protected override string AttachSelector => ".m-application";
+        protected override string DefaultAttachSelector => ".m-application";
 
         public override IEnumerable<string> DependentSelectors
-            => base.DependentSelectors.Concat(new[] { ".m-popup__snackbar" });
+            => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
 
         protected override void OnInitialized()
         {

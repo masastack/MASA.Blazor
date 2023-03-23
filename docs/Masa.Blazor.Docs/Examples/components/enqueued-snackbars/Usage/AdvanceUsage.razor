@@ -1,0 +1,32 @@
+﻿@namespace Masa.Blazor.Docs.Examples.components.enqueued_snackbars
+@inherits Masa.Blazor.Presets.PEnqueuedSnackbars
+
+<div class="text-center">
+    <PEnqueuedSnackbars Position="@Position"
+                        Timeout="@Timeout"
+                        MaxCount="@MaxCount"
+                        Closeable="Closeable"
+                        @ref="_enqueuedSnackbars" />
+    <MButton OnClick="Enqueue">Enqueue a snackbar</MButton>
+</div>
+
+@code {
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    private void Enqueue()
+    {
+        if (_enqueuedSnackbars is null) return;
+
+        var content = DateTime.UtcNow;
+
+        var snackbar = new SnackbarOptions()
+        {
+            Title = "Enqueued snackbars",
+            Content = $"created at {content} UTC"
+        };
+
+        _enqueuedSnackbars.EnqueueSnackbar(snackbar);
+    }
+
+}

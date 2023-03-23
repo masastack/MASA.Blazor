@@ -1,0 +1,67 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PatternPathComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <MTabs Routable
+           Class="@CssProvider.GetClass()"
+           Style="@CssProvider.GetStyle()"
+           ActiveClass="@ActiveClass"
+           HideSlider="@HideSlider"
+           SliderColor="@SliderColor"
+           @ref="@_tabs">
+        @foreach (var patternPath in PatternPaths)
+        {
+            <MTab Href="@patternPath.AbsolutePath"
+                  Class="@CssProvider.GetClass("tab")"
+                  Exact
+                  Ripple="@Ripple"
+                  @key="@patternPath.Pattern"
+                  @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
+                  __internal_preventDefault_oncontextmenu>
+
+                @{
+                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var titleBuilder) && titleBuilder.Invoke() is { } title && !string.IsNullOrWhiteSpace(title))
+                    {
+                        @title
+                    }
+                    else if (TabContent != null)
+                    {
+                        @TabContent.Invoke(new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath()))
+                    }
+                    else
+                    {
+                        @DefaultTabTitle(patternPath.AbsolutePath)
+                    }
+                }
+
+                <MButton Icon
+                         Class="ml-1"
+                         OnClick="() => HandleOnCloseTab(patternPath)"
+                         Small
+                         StopPropagation
+                         OnClickPreventDefault>
+                    <MIcon Small>mdi-close</MIcon>
+                </MButton>
+            </MTab>
+        }
+
+        <MMenu @bind-Value="_menuValue"
+               Absolute
+               OffsetY
+               PositionX="@_positionX"
+               PositionY="@_positionY"
+               CloseOnContentClick>
+            <MList Dense>
+                @if (TabReload != null)
+                {
+                    <MListItem OnClick="ReloadTab">@ReloadTabText</MListItem>
+                }
+                <MListItem OnClick="CloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
+                <MListItem OnClick="CloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
+                <MListItem OnClick="CloseOtherTabs">@CloseOtherTabsText</MListItem>
+            </MList>
+        </MMenu>
+    </MTabs>
+
+    @ChildContent
+</CascadingValue>

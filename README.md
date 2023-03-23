@@ -108,7 +108,7 @@ services.AddMasaBlazor();
         <!--Style-->
         <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
         <!--Font-->
-        <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     </head>

@@ -1,0 +1,27 @@
+﻿<div>
+    <MCard Class="ma-10">
+        <MCardTitle>Title</MCardTitle>
+        <MCardSubtitle>Subtitle</MCardSubtitle>
+    </MCard>
+
+    <MDefaultsProvider Defaults="@_defaults">
+        <MCard Class="ma-10">
+            <MCardTitle>Title</MCardTitle>
+            <MCardSubtitle>Subtitle</MCardSubtitle>
+        </MCard>
+    </MDefaultsProvider>
+</div>
+
+@code {
+
+    private readonly IDictionary<string, IDictionary<string, object>> _defaults = new Dictionary<string, IDictionary<string, object>>()
+    {
+        {
+            nameof(MCard), new Dictionary<string, object>()
+            {
+                { nameof(MCard.Elevation), (StringNumber)10 }
+            }
+        }
+    };
+
+}

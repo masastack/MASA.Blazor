@@ -6,12 +6,12 @@
     if (_type == null)
     {
         <MAlert Type="AlertTypes.Error" Outlined>
-            The file "@File" doesn't exists.
+            The file "@File" doesn't exist.
         </MAlert>
     }
     else
     {
-        <MSheet Class="mb-9 m-example"
+        <MSheet Class="m-example"
                 Outlined
                 Rounded="true">
             <div style="min-height: 52px">
@@ -22,55 +22,56 @@
                     }
                 </MSheet>
 
-                <AppDivider />
-
-                <div class="text-end pa-2">
-                    @foreach (var tooltip in _tooltips)
-                    {
-                        <AppTooltipButton Icon="@tooltip.Icon"
-                                          Path="@tooltip.Path"
-                                          Href="@tooltip.href"
-                                          Target="@(tooltip.href != null ? "_blank" : null)"
-                                          Class="mx-2"
-                                          OnClick="() => tooltip.OnClick?.Invoke()" />
-                    }
-                </div>
-
-                @if (_showExpands)
+                @if (!NoActions)
                 {
                     <AppDivider />
 
-                    <ExpandTransition>
-                        <ShowTransitionElement Value="_expand">
-                            <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                                @foreach (var item in _sections)
-                                {
-                                    <MItem>
-                                        <MButton Class="mr-2"
-                                                 IsActive="@context.Active"
-                                                 Text
-                                                 Color="primary"
-                                                 OnClick="@context.Toggle">
-                                            @item.Language
-                                        </MButton>
-                                    </MItem>
-                                }
-                            </MItemGroup>
+                    <div class="text-end pa-2">
+                        @foreach (var tooltip in _tooltips)
+                        {
+                            <AppTooltipButton Icon="@tooltip.Icon"
+                                              Path="@tooltip.Path"
+                                              Href="@tooltip.href"
+                                              Target="@(tooltip.href != null ? "_blank" : null)"
+                                              Class="mx-2"
+                                              OnClick="() => tooltip.OnClick?.Invoke()" />
+                        }
+                    </div>
 
-                            <AppDivider />
+                    @if (_showExpands)
+                    {
+                        <AppDivider />
 
-                            <MWindow Value="_selected" Class="grey lighten-5">
-                                @foreach (var item in _sections)
-                                {
-                                    <MWindowItem>
-                                        <Markup Code="@item.Code" Language="@item.Language" Rounded="false" />
-                                    </MWindowItem>
-                                }
-                            </MWindow>
+                        <ExpandTransition>
+                            <ShowTransitionElement Value="_expand">
+                                <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
+                                    @foreach (var item in _sections)
+                                    {
+                                        <MItem>
+                                            <MButton Class="mr-2"
+                                                     IsActive="@context.Active"
+                                                     Text
+                                                     Color="primary"
+                                                     OnClick="@context.Toggle">
+                                                @item.Language
+                                            </MButton>
+                                        </MItem>
+                                    }
+                                </MItemGroup>
 
-                            <AppDivider />
-                        </ShowTransitionElement>
-                    </ExpandTransition>
+                                <AppDivider />
+
+                                <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
+                                    @foreach (var item in _sections)
+                                    {
+                                        <MWindowItem>
+                                            <Markup Code="@item.Code" Language="@item.Language" Rounded="false" />
+                                        </MWindowItem>
+                                    }
+                                </MWindow>
+                            </ShowTransitionElement>
+                        </ExpandTransition>
+                    }
                 }
             </div>
         </MSheet>
