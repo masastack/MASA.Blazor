@@ -54,9 +54,7 @@ namespace Masa.Blazor
         public DatePickerType ActivePicker { get; set; }
 
         [Parameter]
-        public string Locale { get; set; }
-
-
+        public CultureInfo Locale { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
@@ -93,10 +91,9 @@ namespace Masa.Blazor
                     return Format;
                 }
 
-                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(Locale) : DateFormatters.Year(Locale);
+                return ActivePicker == DatePickerType.Date ? DateFormatters.YearMonth(Locale) : DateFormatters.Year(Locale);
             }
         }
-
 
         public DateOnly CalculateChange(int sign)
         {

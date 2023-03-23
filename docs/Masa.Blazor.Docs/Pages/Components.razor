@@ -7,14 +7,14 @@
                  Class="mx-auto overflow-visible">
         @if (_frontMatterMeta is not null)
         {
-            <FrontMatter Meta="_frontMatterMeta"></FrontMatter>
+            <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@Tags"></FrontMatter>
         }
         else
         {
             <MSkeletonLoader Type="article"></MSkeletonLoader>
         }
 
-        @if (Page.ToLower() != "all")
+        @if (!IsAllComponentsPage)
         {
             <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
                 <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>

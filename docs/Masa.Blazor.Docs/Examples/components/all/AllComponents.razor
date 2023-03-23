@@ -55,35 +55,12 @@
 
     async Task InitDataAsync()
     {
-        var allComponents = await DocService.GetAllComponentsAsync();
-        
-        if (allComponents!=null && allComponents.Any())
-        {
-            // remove all-components
-            allComponents.RemoveAt(0);
-            _allComponents = ResolveAllComponentsData(allComponents);
+        _allComponents = await DocService.GetAllConponentsTileAsync();
 
+        if (_allComponents.Any())
+        {
             _originalAllComponents = new List<NavItem>(_allComponents.ToArray());
         }
-    }
-
-    List<NavItem> ResolveAllComponentsData(List<NavItem> navs)
-    {
-        var result = new List<NavItem>();
-
-        foreach (var nav in navs)
-        {
-            if (nav.Children is not null && nav.Children.Any())
-            {
-                result.AddRange(ResolveAllComponentsData(nav.Children));
-            }
-            else
-            {
-                result.Add(nav);
-            }
-        }
-
-        return result;
     }
 
     void OnSearch()

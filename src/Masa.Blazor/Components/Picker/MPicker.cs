@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+namespace Masa.Blazor
 {
     public partial class MPicker : BPicker, IThemeable, IPicker
     {
@@ -15,10 +17,10 @@
         public bool NoTitle { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public StringNumber Width { get; set; } = 290;
@@ -28,8 +30,6 @@
 
         [Parameter]
         public string HeaderColor { get; set; }
-
-
 
         public string ComputedTitleColor
         {

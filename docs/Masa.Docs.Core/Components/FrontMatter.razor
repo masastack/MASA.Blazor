@@ -1,8 +1,15 @@
 ﻿<div class="d-flex align-center flex-wrap mb-4">
-    <h1 class="m-heading text-h3 text-sm-h3 ">@Meta.Title</h1>
+    <h1 class="m-heading text-h3 text-sm-h3 " id="@Meta.Title.HashToAnchorString()">@Meta.Title</h1>
     @if (!string.IsNullOrWhiteSpace(Meta.Tag))
     {
         <MChip Class="tag-chip px-2 ml-4" Label Color="primary" TextColor="white">@Meta.Tag</MChip>
+    }
+    @if (AdditionalTags.Any())
+    {
+        foreach (string item in AdditionalTags)
+        {
+            <MChip Class="tag-chip px-2 ml-4" Label Color="primary" TextColor="white">@item</MChip>
+        }
     }
 </div>
 <div class="ordinary-text">
@@ -16,6 +23,9 @@
     [Parameter]
     [EditorRequired]
     public FrontMatterMeta Meta { get; set; } = null!;
+
+    [Parameter]
+    public List<string> AdditionalTags { get; set; } = new();
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

@@ -214,6 +214,11 @@ namespace Masa.Blazor
             await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
+        {
+            return Task.CompletedTask;
+        }
+
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
@@ -260,6 +265,11 @@ namespace Masa.Blazor
         public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             await base.HandleOnClickAsync(args);
+
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync();
+            }
 
             var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
