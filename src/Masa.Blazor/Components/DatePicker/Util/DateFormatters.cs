@@ -1,86 +1,64 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public static class DateFormatters
 {
-    public static class DateFormatters
+    /// <summary>
+    /// Get year name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> Year(CultureInfo locale)
     {
-        private static readonly string[] _month = new string[]
-        {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"
-        };
+        return date => date.ToString("yyyy", locale.DateTimeFormat);
+    }
 
-        public static string Month(int month)
-        {
-            return _month[month - 1];
-        }
+    /// <summary>
+    /// Get day of month name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> Day(CultureInfo locale)
+    {
+        return date => date.ToString("dd", locale.DateTimeFormat);
+    }
 
-        public static Func<DateOnly, string> Year(string locale)
-        {
-            if (string.IsNullOrEmpty(locale))
-            {
-                throw new ArgumentNullException(nameof(locale));
-            }
+    /// <summary>
+    /// Get abbreviated day of week name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> DayOfWeek(CultureInfo locale)
+    {
+        return date => locale.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
+    }
 
-            return locale switch
-            {
-                "en-US" => date => $"{date.Year}",
-                "zh-CN" => date => $"{date.Year}年",
-                _ => throw new NotSupportedException($"locale:{locale}"),
-            };
-        }
+    /// <summary>
+    /// Get month and day name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> MonthDay(CultureInfo locale)
+    {
+        return date => date.ToString(locale.DateTimeFormat.MonthDayPattern, locale.DateTimeFormat);
+    }
 
-        public static Func<DateOnly, string> Day(string locale)
-        {
-            if (string.IsNullOrEmpty(locale))
-            {
-                throw new ArgumentNullException(nameof(locale));
-            }
+    /// <summary>
+    /// Get year and month name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> YearMonth(CultureInfo locale)
+    {
+        return date => date.ToString(locale.DateTimeFormat.YearMonthPattern, locale.DateTimeFormat);
+    }
 
-            return locale switch
-            {
-                "en-US" => date => $"{date.Day}",
-                "zh-CN" => date => $"{date.Day}",
-                _ => throw new NotSupportedException($"locale:{locale}"),
-            };
-        }
-
-        public static Func<DateOnly, string> Date(string locale)
-        {
-            if (string.IsNullOrEmpty(locale))
-            {
-                throw new ArgumentNullException(nameof(locale));
-            }
-
-            return locale switch
-            {
-                "en-US" => date => $"{_month[date.Month - 1]} {date.Year}",
-                "zh-CN" => date => $"{date.Year}年 {date.Month}月",
-                _ => throw new NotSupportedException($"locale:{locale}"),
-            };
-        }
-
-        public static Func<DateOnly, string> Month(string locale)
-        {
-            if (string.IsNullOrEmpty(locale))
-            {
-                throw new ArgumentNullException(nameof(locale));
-            }
-
-            return locale switch
-            {
-                "en-US" => date => $"{_month[date.Month - 1][..3]}",
-                "zh-CN" => date => $"{date.Month}月",
-                _ => throw new NotSupportedException($"locale:{locale}"),
-            };
-        }
+    /// <summary>
+    /// Get abbreviated month name
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <returns></returns>
+    public static Func<DateOnly, string> Month(CultureInfo locale)
+    {
+        return date => locale.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
     }
 }
