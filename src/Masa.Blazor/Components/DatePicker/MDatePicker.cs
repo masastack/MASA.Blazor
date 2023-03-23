@@ -200,7 +200,7 @@ namespace Masa.Blazor
                         
                         if (Type == DatePickerType.Date)
                         {
-                            var str = DateFormatters.DayOfWeek(CurrentLocale)(date) + ", " + DateFormatters.MonthDay(CurrentLocale)(date);
+                            var str = DateFormatters.AbbreviatedDayOfWeek(CurrentLocale)(date) + ", " + DateFormatters.MonthDay(CurrentLocale)(date);
                             if (Landscape)
                             {
                                 return str.Replace(", ", "<br>");
