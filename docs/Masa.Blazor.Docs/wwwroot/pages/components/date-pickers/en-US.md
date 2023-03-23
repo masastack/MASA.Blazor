@@ -127,15 +127,9 @@ If you need to display the date in a custom format (different from YYYY-MM-DD), 
 
 <masa-example file="Examples.components.date_pickers.Formatting"></masa-example>
 
-#### FormattingWithExternalLibraries(TODO)
+#### Internationalization
 
-Formatting dates is possible also with external libs such as Moment.js or date-fns
-
-<masa-example file="Examples.components.date_pickers.FormattingWithExternalLibraries"></masa-example>
-
-#### Internationalization(TODO)
-
-The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the locale prop, and then set the first day of the week with the first-day-of-week prop.
+Specify a [BCP 47](https://tools.ietf.org/html/bcp47) language tag using the **Locale** prop, and then set the first day of the week with the **FirstDayOfWeek** prop.
 
 <masa-example file="Examples.components.date_pickers.Internationalization"></masa-example>
 
