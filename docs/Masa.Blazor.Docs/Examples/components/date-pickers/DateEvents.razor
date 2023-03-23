@@ -33,7 +33,6 @@
         _arrayEvents = Enumerable.Range(0, 6).Select(_ =>
         {
             var day = (int)Math.Ceiling(Random.Shared.NextDouble() * 30);
-            Console.WriteLine($"day {day}");
             var now = DateTime.Now;
             return new DateOnly(now.Year, now.Month, day);
         }).ToArray();
