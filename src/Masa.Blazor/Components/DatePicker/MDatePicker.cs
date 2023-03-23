@@ -154,8 +154,7 @@ namespace Masa.Blazor
                     }
                     catch (CultureNotFoundException e)
                     {
-                        // ignored
-                        Console.WriteLine(e);
+                        Logger.LogWarning(e, "Locale {Locale} is not found", Locale);
                     }
                 }
 
