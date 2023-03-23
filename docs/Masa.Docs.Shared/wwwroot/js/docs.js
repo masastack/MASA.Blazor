@@ -1,4 +1,4 @@
-﻿window.setCookie = function (name, value) {
+window.setCookie = function (name, value) {
   document.cookie = `$ {
                 name
             } = $ {
@@ -234,7 +234,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
   }
 };
 
-window.registerWindowScrollEventForToc = function (dotnet, tocId) {
+window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
   let _scrolling;
   let _offsets = [];
@@ -242,16 +242,17 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
   let _registered;
 
   window.addEventListener("scroll", onScroll);
+  registerClickEvents();
 
   function registerClickEvents() {
     if (_registered) return
-    const elements = document.querySelectorAll(`#${tocId} li`);
+    const elements = document.querySelectorAll(selector);
     if (elements && elements.length > 0) {
       _registered = true;
       for (const e of elements) {
         e.addEventListener('click', async () => {
           _scrolling = true;
-          await new Promise(resolve => setTimeout(resolve, 600))
+          await new Promise(resolve => setTimeout(resolve, 1000))
           _scrolling = false;
         })
       }
@@ -260,7 +261,14 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
   function setOffsets() {
     const offsets = [];
-    _toc = Array.from(document.querySelectorAll(`#${tocId} li>a`)).map(({href}) => {
+    var queryFilter = selector;
+    var firstNode = document.querySelector(queryFilter) ;
+      if (!firstNode || (firstNode && !firstNode.attributes.getNamedItem('href'))) {
+        queryFilter = `${selector} a`;
+    }
+
+    _toc = Array.from(document.querySelectorAll(queryFilter)).map(({attributes}) => {
+      let href=attributes.getNamedItem("href").value
       const index = href.indexOf("#");
       return href.slice(index);
     })
