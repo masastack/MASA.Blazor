@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor;
-using System.Text.RegularExpressions;
 
 namespace BlazorComponent
 {
@@ -42,7 +41,7 @@ namespace BlazorComponent
 
             return styleBuilder;
         }
-        
+
         public static StyleBuilder AddTop(this StyleBuilder styleBuilder, StringNumber top)
         {
             return styleBuilder.Add($"top:{top.ToUnit()}");
@@ -94,7 +93,7 @@ namespace BlazorComponent
         private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber size)
         {
             return styleBuilder
-                        .AddIf(() => $"{name}: {size.ToUnit()} !important", () => size != null);
+                        .AddIf(() => $"{name}: {size.ToUnit()}", () => size != null);
         }
 
         public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber width)
