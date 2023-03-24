@@ -59,13 +59,20 @@ namespace Masa.Docs
             return HttpUtility.UrlEncode(slug);
         }
 
-        /// <summary>
-        /// 根据属性名称设置属性的值
-        /// </summary>
-        /// <typeparam name="T">对象类型</typeparam>
-        /// <param name="t">对象</param>
-        /// <param name="name">属性名</param>
-        /// <param name="value">属性的值</param>
+        internal static void SetPropertyValue<T, TProperty>(this T t, Expression<Func<T, TProperty?>> selector, TProperty? newValue)
+        {
+            var m = selector.Compile()(t);
+            var valueType = typeof(TProperty);
+            var valueExpress = Expression.Constant(newValue, valueType);
+            if (selector.Body is MemberExpression memberExpression)
+            {
+                var assignExpression = Expression.Assign(memberExpression, valueExpress);
+                var lambda =
+                   Expression.Lambda<Func<T, TProperty>>(assignExpression, selector.Parameters);
+                lambda.Compile()(t);
+            }
+        }
+
         internal static void SetPropertyValue<T>(this T t, string name, object value)
         {
             Type type = t!.GetType();
@@ -82,11 +89,7 @@ namespace Masa.Docs
             var param_val = Expression.Parameter(typeof(object));
             var body_obj = Expression.Convert(param_obj, type!);
             var body_val = Expression.Convert(param_val, p.PropertyType);
-
-            //获取设置属性的值的方法
             var setMethod = p.GetSetMethod(true);
-
-            //如果只是只读,则setMethod==null
             if (setMethod != null)
             {
                 var body = Expression.Call(param_obj, setMethod, body_val);

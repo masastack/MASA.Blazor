@@ -29,6 +29,8 @@ namespace Masa.Docs.Indexing
 
         public const string DOC_DOMAIN = "MASA_DOC_DOMAIN";
 
+        public const string MASA_DOC_EXCLUDE_URLS = "MASA_DOC_EXCLUDE_URLS";
+
         private readonly ILogger _logger;
 
         private readonly SearchClient _searchClient;
@@ -45,15 +47,19 @@ namespace Masa.Docs.Indexing
 
         private AlgoliaOptions GetRealAlgoliaOptions(AlgoliaOptions algoliaOptions)
         {
-            void SetPropertyFromEnviroment(string envName, Expression<Func<AlgoliaOptions, string?>> selector)
+            void SetPropertyFromEnviroment(string envName, Expression<Func<AlgoliaOptions, object?>> selector, string? delimiter = null)
             {
                 var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
                 if (value is not null)
                 {
-                    if (selector.Body is MemberExpression expression)
+                    if (delimiter != null)
                     {
-                        var name = expression.Member.Name;
-                        algoliaOptions.SetPropertyValue(name, value);
+                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+                        algoliaOptions.SetPropertyValue(selector, valueSet);
+                    }
+                    else
+                    {
+                        algoliaOptions.SetPropertyValue(selector, value);
                     }
                 }
             }
@@ -62,6 +68,7 @@ namespace Masa.Docs.Indexing
             SetPropertyFromEnviroment(ALGOLIA_INDEX_PREFIX, x => x.IndexPrefix);
             SetPropertyFromEnviroment(ROOT_DOCS_PATH, x => x.RootDocsPath);
             SetPropertyFromEnviroment(DOC_DOMAIN, x => x.DocDomain);
+            SetPropertyFromEnviroment(MASA_DOC_EXCLUDE_URLS, x => x.ExcludedUrls, "||");
 
             algoliaOptions.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
             algoliaOptions.ApplicationId.AssertParamNotNull(nameof(algoliaOptions.ApplicationId));
@@ -314,7 +321,12 @@ namespace Masa.Docs.Indexing
                         if (dir == null) continue;
                         var url = dir.Replace(projectPhysicalPath, "").Replace(Path.DirectorySeparatorChar, '/');
                         var lowerProjcet = project.ToLower();
-                        var uri = new Uri(baseUri, lowerProjcet + url);
+                        var projectUrl = lowerProjcet + url;
+                        if (_algoliaOption.ExcludedUrls?.Any(u => u.EndsWith(projectUrl)) is true)
+                        {
+                            continue;
+                        }
+                        var uri = new Uri(baseUri, projectUrl);
                         var docUrl = uri.ToString();
                         var content = File.ReadAllText(fileName, Encoding.UTF8);
                         var indexName = $"{_algoliaOption.IndexPrefix}{lowerProjcet}";
