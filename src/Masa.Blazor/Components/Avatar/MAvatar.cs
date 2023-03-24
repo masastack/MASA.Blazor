@@ -53,10 +53,11 @@
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
+                    var isDirtySize = IsDirtyParameter(nameof(Size));
                     styleBuilder
-                        .AddHeight(Size, IsDirtyParameter(nameof(Size)))
-                        .AddMinWidth(Size, IsDirtyParameter(nameof(Size)))
-                        .AddWidth(Size, IsDirtyParameter(nameof(Size)))
+                        .AddHeight(Size, isDirtySize)
+                        .AddMinWidth(Size, isDirtySize)
+                        .AddWidth(Size, isDirtySize)
                         .AddHeight(Height, IsDirtyParameter(nameof(Height)))
                         .AddWidth(Width, IsDirtyParameter(nameof(Width)))
                         .AddMinWidth(MinWidth, IsDirtyParameter(nameof(MinWidth)))
