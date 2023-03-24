@@ -6,6 +6,11 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+  - type: input
+    attributes:
+      label: Masa.Blazor version
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Describe the bug
@@ -33,16 +38,9 @@ body:
       render: razor
   - type: input
     attributes:
-      label: Masa.Blazor version
-    validations:
-      required: true
-  - type: input
-    attributes:
       label: .NET version
       description: |
         Run `dotnet --version`
-    validations:
-      required: true
   - type: dropdown
     attributes:
       label: What browsers are you seeing the problem on?
