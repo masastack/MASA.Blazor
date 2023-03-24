@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Masa.Docs.Indexing": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "MASA_ALGOLIA_API_KEY": ""
+      }
+    }
+  }
+}

@@ -49,7 +49,9 @@
 
     private void OnListItemClick(StringNumber val)
     {
-        OnCultureChanged.InvokeAsync(val.ToString());
+        if (I18n.Culture.Name != val.ToString())
+        {
+            OnCultureChanged.InvokeAsync(val.ToString());
+        }
     }
-
 }
