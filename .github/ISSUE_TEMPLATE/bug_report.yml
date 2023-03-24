@@ -29,7 +29,7 @@ body:
     attributes:
       label: Reproduction code
       description: |
-        Reproduction code works fine in [Playground](https://github.com/BlazorComponent/MASA.Blazor/blob/feature/issue-template/src/Masa.Blazor.Playground/Pages/Index.razor)
+        Reproduction code works fine in [Playground](https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Masa.Blazor.Playground/Pages/Index.razor)
       render: razor
   - type: input
     attributes:
