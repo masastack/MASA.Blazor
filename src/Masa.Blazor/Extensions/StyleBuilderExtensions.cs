@@ -84,46 +84,40 @@ namespace BlazorComponent
             return styleBuilder;
         }
 
-        public static StyleBuilder AddHeight(this StyleBuilder styleBuilder, StringNumber height)
+        public static StyleBuilder AddHeight(this StyleBuilder styleBuilder, StringNumber height, bool isImportant = false)
         {
             return styleBuilder
-                        .AddSize("height", height);
+                        .AddSize("height", height, isImportant);
         }
 
-        private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber size)
+        public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber width, bool isImportant = false)
         {
             return styleBuilder
-                        .AddIf(() => $"{name}: {size.ToUnit()}", () => size != null);
+                        .AddSize("width", width, isImportant);
         }
 
-        public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber width)
+        public static StyleBuilder AddMinWidth(this StyleBuilder styleBuilder, StringNumber minWidth, bool isImportant = false)
         {
             return styleBuilder
-                        .AddSize("width", width);
+                        .AddSize("min-width", minWidth, isImportant);
         }
 
-        public static StyleBuilder AddMinWidth(this StyleBuilder styleBuilder, StringNumber minWidth)
+        public static StyleBuilder AddMaxWidth(this StyleBuilder styleBuilder, StringNumber maxWidth, bool isImportant = false)
         {
             return styleBuilder
-                        .AddSize("min-width", minWidth);
+                        .AddSize("max-width", maxWidth, isImportant);
         }
 
-        public static StyleBuilder AddMaxWidth(this StyleBuilder styleBuilder, StringNumber maxWidth)
+        public static StyleBuilder AddMinHeight(this StyleBuilder styleBuilder, StringNumber minHeight, bool isImportant = false)
         {
             return styleBuilder
-                        .AddSize("max-width", maxWidth);
+                        .AddSize("min-height", minHeight, isImportant);
         }
 
-        public static StyleBuilder AddMinHeight(this StyleBuilder styleBuilder, StringNumber minHeight)
+        public static StyleBuilder AddMaxHeight(this StyleBuilder styleBuilder, StringNumber maxHeight, bool isImportant = false)
         {
             return styleBuilder
-                        .AddSize("min-height", minHeight);
-        }
-
-        public static StyleBuilder AddMaxHeight(this StyleBuilder styleBuilder, StringNumber maxHeight)
-        {
-            return styleBuilder
-                        .AddSize("max-height", maxHeight);
+                        .AddSize("max-height", maxHeight, isImportant);
         }
 
         public static StyleBuilder AddMeasurable(this StyleBuilder styleBuilder, IMeasurable measurable)
@@ -135,6 +129,12 @@ namespace BlazorComponent
                         .AddSize("width", measurable.Width)
                         .AddSize("min-width", measurable.MinWidth)
                         .AddSize("max-width", measurable.MaxWidth);
+        }
+
+        private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber size, bool isImportant = false)
+        {
+            return styleBuilder
+                        .AddIf(() => $"{name}: {size.ToUnit()} {(isImportant ? "!important" : "")}", () => size != null);
         }
     }
 
