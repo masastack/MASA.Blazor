@@ -92,10 +92,10 @@ namespace Masa.Blazor
         protected override BMenuProps GetDefaultMenuProps()
         {
             var props = base.GetDefaultMenuProps();
-            props.OffsetY = true;
 
-            // props.OffsetOverflow = true;
-            // props.Transition = false;
+            props.OffsetY = true;
+            props.OffsetOverflow = true;
+            props.Transition = null;
 
             return props;
         }
