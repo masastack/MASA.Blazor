@@ -20,7 +20,7 @@
                   __internal_preventDefault_oncontextmenu>
 
                 @{
-                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out string? title) && !string.IsNullOrWhiteSpace(title))
+                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var titleBuilder) && titleBuilder.Invoke() is { } title && !string.IsNullOrWhiteSpace(title))
                     {
                         @title
                     }

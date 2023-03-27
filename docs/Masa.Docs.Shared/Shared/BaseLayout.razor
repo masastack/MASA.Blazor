@@ -10,29 +10,29 @@
 </HeadContent>
 
 <MApp>
-    <CascadingValue Value="@I18n.Culture">
+    <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
-            <CascadingValue Value="PageInfo">
-                <MErrorHandler>
-                    <AppBar OnCultureChanged="@OnCultureChanged"
-                            OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
-                            OnDotClick="HandleOnDotClick"
-                            OnSettingsClick="HandleSettingsClick"
-                            HideAppBarNavIcon="@_hideAppBarNavIcon" />
+            <MErrorHandler>
+                <AppBar OnCultureChanged="@OnCultureChanged"
+                        OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                        OnDotClick="HandleOnDotClick"
+                        OnSettingsClick="HandleSettingsClick"
+                        Project="@_project"
+                        Env="@_env"
+                        HideAppBarNavIcon="@_hideAppBarNavIcon" />
 
-                    <CascadingValue Value="this" IsFixed>
-                        @Body
-                    </CascadingValue>
+                <CascadingValue Value="this" IsFixed>
+                    @Body
+                </CascadingValue>
 
-                    <Settings @bind-Value="_showSettings" />
-                    <MobileMenuList @bind-Value="_showMobileMenuList" />
-                </MErrorHandler>
+                <Settings @bind-Value="_showSettings" />
+                <MobileMenuList @bind-Value="_showMobileMenuList" />
+            </MErrorHandler>
 
-                <HeadContent>
-                    <PageTitle>@PageInfo.PageTitle</PageTitle>
-                    <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
-                </HeadContent>
-            </CascadingValue>
+            <HeadContent>
+                <PageTitle>@PageInfo.PageTitle</PageTitle>
+                <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
+            </HeadContent>
         </CascadingValue>
     </CascadingValue>
 </MApp>
@@ -44,6 +44,7 @@
     private bool _hideAppBarNavIcon;
     private bool _showSettings;
     private string? _project;
+    private string? _env;
 
     internal (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
 
@@ -67,32 +68,15 @@
         if (firstRender)
         {
             _projectMap = await DocService.ReadProjectMapAsync();
-
-            var segments = NavigationManager.GetSegments();
-            var secondSegment = segments.ElementAtOrDefault(1);
-            secondSegment = secondSegment?.TrimEnd('/');
-            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
-            {
-                _project = secondSegment;
-            }
-
+            SetEnv();
+            SetProject();
             StateHasChanged();
         }
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var secondSegment = NavigationManager.GetSegments().ElementAtOrDefault(1);
-        secondSegment = secondSegment?.TrimEnd('/');
-
-        if (_project != secondSegment)
-        {
-            if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
-            {
-                _project = secondSegment;
-                InvokeAsync(StateHasChanged);
-            }
-        }
+        SetProject(async () => await InvokeAsync(StateHasChanged));
     }
 
     private void OnCultureChanged(string cultureName)
@@ -137,6 +121,35 @@
 
         _hideAppBarNavIcon = false;
         StateHasChanged();
+    }
+
+    private void SetEnv()
+    {
+        var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
+        _env = uri switch
+        {
+            "docs.massastack.com" or "blazor.massastack.com" => "prd_",
+            "blazor-dev.massastack.com" or "docs-dev.massastack.com" => "dev_",
+            _ => "local_"
+        };
+    }
+
+    private void SetProject(Action? action = null)
+    {
+        var segments = NavigationManager.GetSegments();
+        var secondSegment = segments.ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+        if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+        {
+            if (_project != secondSegment)
+            {
+                _project = secondSegment;
+                if (action is not null)
+                {
+                    action();
+                }
+            }
+        }
     }
 
     public void Dispose()

@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,10 @@
     <BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
     <BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
     <BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
   <ItemGroup>

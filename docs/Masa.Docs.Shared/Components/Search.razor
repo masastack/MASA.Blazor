@@ -1,32 +1,44 @@
 ﻿@namespace Masa.Docs.Shared.Components
-@inject I18n I18n
 
-<div class="flex-1-1-auto d-flex justify-end">
-    <MTextField @bind-Value="_value"
-                BackgroundColor="#F6F8FD"
-                Class="@($"search-input rounded-lg {Class}")"
-                Style="max-width: 340px"
-                Placeholder="@I18n.T("Search")"
-                Clearable
-                ClearIcon="mdi-close-circle"
-                HideDetails="true"
-                TValue="string"
-                Filled
-                Rounded
-                Dense
-                Height="48">
-        <PrependInnerContent>
-            <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
-        </PrependInnerContent>
-    </MTextField>
-</div>
+@if (MasaBlazor?.Breakpoint?.Mobile is not true)
+{
+    <div id="docsearch" style="background-color:#F6F8FD;max-width: 340px" class="search-input rounded-lg @Class" />
+}
+else
+{
+    <div id="docsearch-mobile" style="background-color:#F6F8FD;" class="search-input rounded-sm @Class" />
+}
 
 @code {
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+
+    [Inject]
+    public IJSRuntime? Js { get; set; }
+
+    [Inject]
+    public I18n? I18n { get; set; }
+
+    [Inject]
+    public MasaBlazor? MasaBlazor { get; set; }
 
     [Parameter]
     public string Class { get; set; } = "mr-6";
 
+    [Parameter]
+    public string? IndexName { get; set; }
+
     private string _value = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitDocSearchAsync();
+        }
+    }
+
+    public async Task InitDocSearchAsync()
+    {
+        var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+        await Js!.InvokeVoidAsync("addDocSearch", IndexName, MasaBlazor?.Breakpoint?.Mobile, currentLanguage, I18n.T("Search"));
+    }
 }

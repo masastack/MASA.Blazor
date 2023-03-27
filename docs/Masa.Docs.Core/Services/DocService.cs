@@ -118,6 +118,39 @@ public class DocService
         return result;
     }
 
+    public static async Task<List<NavItem>> GetAllConponentsTileAsync()
+    {
+        var components = await GetAllComponentsAsync();
+
+        if (components.Any())
+        {
+            // remove all-components
+            components.RemoveAt(0);
+            components = ResolveAllComponentsData(components);
+        }
+
+        return components;
+    }
+
+    private static List<NavItem> ResolveAllComponentsData(List<NavItem> navs)
+    {
+        var result = new List<NavItem>();
+
+        foreach (var nav in navs)
+        {
+            if (nav.Children is not null && nav.Children.Any())
+            {
+                result.AddRange(ResolveAllComponentsData(nav.Children));
+            }
+            else
+            {
+                result.Add(nav);
+            }
+        }
+
+        return result;
+    }
+
     private static void SetHref(List<NavItem> navItems, string? segment = null, string? rootSegment = null)
     {
         foreach (var navItem in navItems)

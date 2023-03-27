@@ -47,7 +47,7 @@ namespace Masa.Blazor
         public EventCallback<DateOnly> OnInput { get; set; }
 
         [Parameter]
-        public string Locale { get; set; }
+        public CultureInfo Locale { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }

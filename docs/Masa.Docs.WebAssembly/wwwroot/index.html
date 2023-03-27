@@ -8,6 +8,8 @@
     <meta name="description" content="基于Material Design和BlazorComponent的交互能力提供标准的Blazor组件库。Provide standard blazor component library based on the interaction ability of material design and BlazorComponent" />
     <title>MASA Blazor</title>
     <base href="/" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_512">
     <link href="css/app.css" rel="stylesheet" />
     <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
@@ -21,7 +23,7 @@
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" />
-    <link rel="stylesheet" href="https://cdn.masastack.com/npm/docsearch/docsearch.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/docsearch/v3/docsearch.css" />
     <link href="https://cdn.bootcdn.net/ajax/libs/prism-themes/1.9.0/prism-material-dark.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/gridstack.js/7.1.0/gridstack.min.css" rel="stylesheet">
     <style>
@@ -115,6 +117,7 @@
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
@@ -124,7 +127,7 @@
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js"></script>
     <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
     <script src="_content/Masa.Docs.Shared/quill/quill-blot-formatter.min.js"></script>
-    <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
+    <script src="https://cdn.masastack.com/npm/docsearch/v3/docsearch.js"></script>
     <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://api.map.baidu.com/getscript?v=1.0&&type=webgl&ak=QahcSGCkRzIVXBkKhWHt3vGhNyYGdk3t"></script>

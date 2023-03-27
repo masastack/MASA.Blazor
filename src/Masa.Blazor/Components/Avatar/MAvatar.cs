@@ -53,16 +53,17 @@
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
+                    var isDirtySize = IsDirtyParameter(nameof(Size));
                     styleBuilder
-                        .AddHeight(Size)
-                        .AddMinWidth(Size)
-                        .AddWidth(Size)
-                        .AddHeight(Height)
-                        .AddWidth(Width)
-                        .AddMinWidth(MinWidth)
-                        .AddMaxWidth(MaxWidth)
-                        .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight)
+                        .AddHeight(Size, isDirtySize)
+                        .AddMinWidth(Size, isDirtySize)
+                        .AddWidth(Size, isDirtySize)
+                        .AddHeight(Height, IsDirtyParameter(nameof(Height)))
+                        .AddWidth(Width, IsDirtyParameter(nameof(Width)))
+                        .AddMinWidth(MinWidth, IsDirtyParameter(nameof(MinWidth)))
+                        .AddMaxWidth(MaxWidth, IsDirtyParameter(nameof(MaxWidth)))
+                        .AddMinHeight(MinHeight, IsDirtyParameter(nameof(MinHeight)))
+                        .AddMaxHeight(MaxHeight, IsDirtyParameter(nameof(MaxHeight)))
                         .AddBackgroundColor(Color);
                 });
         }

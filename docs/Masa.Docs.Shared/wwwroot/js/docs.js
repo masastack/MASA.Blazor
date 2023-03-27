@@ -1,4 +1,4 @@
-﻿window.setCookie = function (name, value) {
+window.setCookie = function (name, value) {
   document.cookie = `$ {
                 name
             } = $ {
@@ -16,21 +16,21 @@ window.getCookie = function (name) {
   return null;
 };
 
-window.getCurrentDocSearchLanguage = function () {
-  const language = window.getCookie("Masa_I18nConfig_Language");
-  if (!language || language === "zh-CN") {
-    return "zh";
-  }
-  return "en";
-};
-
 // Because the following window.scrollTo causes the NavigateTo not to
 // scroll to the top of the page, the state of the isHash is required
 let isHash;
 
 window.setHash = function () {
   isHash = true;
-}
+};
+
+window.scrollToElement = function (hash, offset) {
+  setHash();
+  const el = document.getElementById(hash);
+  const top = el.getBoundingClientRect().top;
+  const offsetPosition = top + window.pageYOffset - offset;
+  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+};
 
 /*
  * NavigationManager.NavigateTo always scrolls page to the top.
@@ -46,20 +46,6 @@ window.scrollTo = function (x, y) {
   return origScrollTo.apply(this, arguments);
 };
 
-window.addDoSearch = function (isMobile) {
-  const container = `#docsearch${isMobile ? "-mobile" : ""}`;
-  docsearch({
-    container,
-    appId: "TSB4MACWRC",
-    indexName: "blazor-masastack",
-    apiKey: "a38a8d4b58c5648825ba3fafce8b6ffa",
-    debug: false,
-    //searchParameters: {
-    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-    //}
-  });
-};
-
 window.getTimeOffset = function () {
   return new Date().getTimezoneOffset();
 };
@@ -68,7 +54,7 @@ window.getTimeOffset = function () {
  * markdown-it-proxy would invoke this function to set rules.
  */
 window.MasaBlazor.markdownItRules = function (parser) {
-  const {md, scope} = parser
+  const { md, scope } = parser;
   if (scope === "document") {
     addHeadingRules(md);
     addLinkRules(parser);
@@ -77,11 +63,11 @@ window.MasaBlazor.markdownItRules = function (parser) {
     addBlockquoteRules(md);
     addTableRules(md);
 
-    parser.useContainer("code-group")
-    parser.useContainer("code-group-item")
+    parser.useContainer("code-group");
+    parser.useContainer("code-group-item");
     addCodeGroupRules(parser);
   } else if (scope === "desc") {
-    addLinkRules(parser)
+    addLinkRules(parser);
   }
 
   function addHeadingRules(md) {
@@ -112,18 +98,21 @@ window.MasaBlazor.markdownItRules = function (parser) {
       let next = tokens[idx + i];
       let content = next.content;
 
-      while(!content && next.type !== "link_close") {
+      while (!content && next.type !== "link_close") {
         i++;
-        next = tokens[idx+i]
-        content = next.content
+        next = tokens[idx + i];
+        content = next.content;
       }
 
       tokens[idx].tag = "app-link";
 
       const href = tokens[idx].attrGet("href");
-      let decodedHref = decodeURI(href)
+      let decodedHref = decodeURI(href);
       if (decodedHref !== href) {
-        tokens[idx].attrSet("href", '#' + defaultSlugify(decodedHref.replace('#', '')))
+        tokens[idx].attrSet(
+          "href",
+          "#" + defaultSlugify(decodedHref.replace("#", ""))
+        );
       }
 
       tokens[idx].attrSet("content", content);
@@ -143,7 +132,10 @@ window.MasaBlazor.markdownItRules = function (parser) {
         const content = tokens[idx].content;
         const info = tokens[idx].info;
 
-        return `<default-app-markup code="${content.replaceAll('"', "&quot;")}" language="${info}"></default-app-markup>\n`;
+        return `<default-app-markup code="${content.replaceAll(
+          '"',
+          "&quot;"
+        )}" language="${info}"></default-app-markup>\n`;
       }
     };
   }
@@ -152,7 +144,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
     md.renderer.rules.image = (tokens, idx, options, env, self) => {
       tokens[idx].attrSet("width", "100%");
       return self.renderToken(tokens, idx, options);
-    }
+    };
   }
 
   function addBlockquoteRules(md) {
@@ -176,57 +168,73 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
   function addTableRules(md) {
     md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-      return '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' + self.renderToken(tokens, idx, options) + '</div></div></div>';
+      return (
+        '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
+        self.renderToken(tokens, idx, options) +
+        "</div></div></div>"
+      );
     };
   }
 
   function addCodeGroupRules(parser) {
-    parser.md.renderer.rules["container_code-group_open"] = (tokens, idx, options, env, self) => {
-      let nextIndex = idx
-      let nextToken = tokens[idx]
+    parser.md.renderer.rules["container_code-group_open"] = (
+      tokens,
+      idx,
+      options,
+      env,
+      self
+    ) => {
+      let nextIndex = idx;
+      let nextToken = tokens[idx];
 
-      const dic = {}
+      const dic = {};
 
       while (nextToken) {
-        nextIndex++
-        nextToken = tokens[nextIndex]
+        nextIndex++;
+        nextToken = tokens[nextIndex];
 
         if (nextToken.type === "container_code-group-item_open") {
-          const item = nextToken.info.replace("code-group-item", "").trim()
+          const item = nextToken.info.replace("code-group-item", "").trim();
 
-          nextIndex++
-          nextToken = tokens[nextIndex]
+          nextIndex++;
+          nextToken = tokens[nextIndex];
 
           if (nextToken.type === "fence") {
-            const {content: code, info: lang} = nextToken
+            const { content: code, info: lang } = nextToken;
 
-            dic[item] = {code, lang}
+            dic[item] = { code, lang };
           }
         }
 
-        if (nextToken.type === 'container_code-group_close') {
-          break
+        if (nextToken.type === "container_code-group_close") {
+          break;
         }
       }
 
-      const g_attr = `code_group_${idx}`
+      const g_attr = `code_group_${idx}`;
       parser.afterRenderCallbacks.push(() => {
         const selector = `[${g_attr}]`;
         const element = document.querySelector(selector);
         if (element) {
           element.model = dic;
         }
-      })
+      });
 
-      return `<app-code-group ${g_attr}>\n`
-    }
-    parser.md.renderer.rules["container_code-group_close"] = (tokens, idx, options, env, self) => {
+      return `<app-code-group ${g_attr}>\n`;
+    };
+    parser.md.renderer.rules["container_code-group_close"] = (
+      tokens,
+      idx,
+      options,
+      env,
+      self
+    ) => {
       return `</app-code-group>\n`;
-    }
+    };
   }
 };
 
-window.registerWindowScrollEventForToc = function (dotnet, tocId) {
+window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
   let _scrolling;
   let _offsets = [];
@@ -234,28 +242,41 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
   let _registered;
 
   window.addEventListener("scroll", onScroll);
+  registerClickEvents();
 
   function registerClickEvents() {
-    if (_registered) return
-    const elements = document.querySelectorAll(`#${tocId} li`);
+    if (_registered) return;
+    const elements = document.querySelectorAll(selector);
     if (elements && elements.length > 0) {
       _registered = true;
       for (const e of elements) {
-        e.addEventListener('click', async () => {
+        e.addEventListener("click", async () => {
           _scrolling = true;
-          await new Promise(resolve => setTimeout(resolve, 600))
+          await new Promise((resolve) => setTimeout(resolve, 1000));
           _scrolling = false;
-        })
+        });
       }
     }
   }
 
   function setOffsets() {
     const offsets = [];
-    _toc = Array.from(document.querySelectorAll(`#${tocId} li>a`)).map(({href}) => {
-      const index = href.indexOf("#");
-      return href.slice(index);
-    })
+    var queryFilter = selector;
+    var firstNode = document.querySelector(queryFilter);
+    if (
+      !firstNode ||
+      (firstNode && !firstNode.attributes.getNamedItem("href"))
+    ) {
+      queryFilter = `${selector} a`;
+    }
+
+    _toc = Array.from(document.querySelectorAll(queryFilter)).map(
+      ({ attributes }) => {
+        let href = attributes.getNamedItem("href").value;
+        const index = href.indexOf("#");
+        return href.slice(index);
+      }
+    );
 
     const toc = _toc.slice().reverse();
 
@@ -273,8 +294,8 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
     if (currentOffset === 0) {
       setHash();
-      await dotnet.invokeMethodAsync("UpdateHash", "")
-      return
+      await dotnet.invokeMethodAsync("UpdateHash", "");
+      return;
     }
 
     setOffsets();
@@ -317,24 +338,92 @@ window.registerWindowScrollEventForToc = function (dotnet, tocId) {
 
 window.backTop = function () {
   slideTo(0);
-}
+};
 
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
-  const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
+  const activeListItem = document.querySelector(
+    `${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`
+  );
   if (!activeListItem) return;
   activeListItem.scrollIntoView({ behavior: "smooth" });
-}
+};
 
 function slideTo(targetPageY) {
   var timer = setInterval(function () {
-    var currentY = document.documentElement.scrollTop || document.body.scrollTop;
-    var distance = targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
+    var currentY =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    var distance =
+      targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
     var speed = Math.ceil(distance / 10);
     if (currentY == targetPageY || currentY == 1) {
       document.documentElement.scrollTop = 0;
       clearInterval(timer);
     } else {
-      window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
+      window.scrollTo(
+        0,
+        targetPageY > currentY ? currentY + speed : currentY - speed
+      );
     }
   }, 10);
 }
+
+window.addDocSearch = function (index, isMobile, currentLanguage, placeholder) {
+  let cnTranslation = {
+    button: {
+      buttonText: "搜索",
+      buttonAriaLabel: "搜索",
+    },
+    modal: {
+      searchBox: {
+        resetButtonTitle: "清除搜索",
+        resetButtonAriaLabel: "清除搜索",
+        cancelButtonText: "取消",
+        cancelButtonAriaLabel: "取消",
+      },
+      startScreen: {
+        recentSearchesTitle: "最近",
+        noRecentSearchesText: "没有搜索历史",
+        saveRecentSearchButtonTitle: "保存搜索",
+        removeRecentSearchButtonTitle: "从历史移除记录",
+        favoriteSearchesTitle: "收藏",
+        removeFavoriteSearchButtonTitle: "从收藏移除记录",
+      },
+      errorScreen: {
+        titleText: "不能获取结果",
+        helpText: "可能由于网络链接中断",
+      },
+      footer: {
+        selectText: "选中",
+        selectKeyAriaLabel: "回车键",
+        navigateText: "导航",
+        navigateUpKeyAriaLabel: "向下键",
+        navigateDownKeyAriaLabel: "向上键",
+        closeText: "关闭",
+        closeKeyAriaLabel: "ESC键",
+        searchByText: "搜索提供：",
+      },
+      noResultsScreen: {
+        noResultsText: "没有找到记录:",
+        suggestedQueryText: "尝试搜索中:",
+        reportMissingResultsText: "确认这个关键词应该返回记录？",
+        reportMissingResultsLinkText: "告诉我们。",
+      },
+    },
+  };
+
+  const container = `#docsearch${isMobile ? "-mobile" : ""}`;
+  let option = {
+    container,
+    appId: "TSB4MACWRC",
+    indexName: "blazor-masastack_" + index,
+    apiKey: "d1fa64adb784057c097feb592d4497d0",
+    placeholder,
+    searchParameters: {
+      facetFilters: ["lang:" + currentLanguage],
+    },
+  };
+  if (currentLanguage == "zh") {
+    option.translations = cnTranslation;
+  }
+  docsearch(option);
+};

@@ -22,14 +22,22 @@
 
     <AppBarItems OnCultureChanged="OnCultureChanged"
                  OnDotClick="OnDotClick" 
+                 Project="@Project"
+                 Env="@Env"
                  OnSettingsClick="OnSettingsClick">
     </AppBarItems>
 </MAppBar>
 
 @code {
 
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    public string? Culture { get; set; } = null!;
+
+    [Parameter]
+    public string? Project { get; set; }
+
+    [Parameter]
+    public string? Env { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }

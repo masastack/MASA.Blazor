@@ -1,0 +1,21 @@
+{
+  "name": "MASA Docs",
+  "short_name": "MASA Docs",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_512",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_192",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

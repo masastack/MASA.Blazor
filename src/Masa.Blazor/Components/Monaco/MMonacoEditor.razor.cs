@@ -44,6 +44,7 @@ public partial class MMonacoEditor : BDomComponentBase
             {
                 styleBuilder
                     .AddWidth(Width)
+                    .AddHeight(Height)
                     .AddMinWidth(MinWidth)
                     .AddMinHeight(MinHeight)
                     .AddMaxHeight(MaxHeight)

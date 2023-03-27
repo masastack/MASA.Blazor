@@ -16,8 +16,8 @@ public partial class Document : IDisposable
     [Inject]
     private AppService AppService { get; set; } = null!;
 
-    [CascadingParameter]
-    private CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    private string Culture { get; set; } = null!;
 
     [CascadingParameter]
     private BaseLayout BaseLayout { get; set; } = null!;
@@ -33,7 +33,7 @@ public partial class Document : IDisposable
     [Parameter] public string? SubPage { get; set; }
 
     private string? _md;
-    private CultureInfo? _prevCulture;
+    private string? _prevCulture;
     private string? _prevAbsolutePath;
 
     private Dictionary<string, string[]> _projectMap = new()
@@ -50,9 +50,9 @@ public partial class Document : IDisposable
             return Project switch
             {
                 "blazor" =>
-                    $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture.Name}.md",
+                    $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture}.md",
                 "framework" or "stack" =>
-                    $"https://github.com/masastack/MASA.Docs/blob/main/src/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture.Name}.md",
+                    $"https://github.com/masastack/MASA.Docs/blob/main/src/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture}.md",
                 _ => string.Empty
             };
         }

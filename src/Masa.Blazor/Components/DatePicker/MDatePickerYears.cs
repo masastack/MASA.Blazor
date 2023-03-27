@@ -21,7 +21,7 @@
         public Func<DateOnly, string> Format { get; set; }
 
         [Parameter]
-        public string Locale { get; set; }
+        public CultureInfo Locale { get; set; }
 
         public Func<DateOnly, string> Formatter
         {

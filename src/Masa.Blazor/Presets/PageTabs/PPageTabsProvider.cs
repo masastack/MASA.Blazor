@@ -9,7 +9,7 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    public Dictionary<string, string?> PathTitles { get; } = new();
+    public Dictionary<string, Func<string?>> PathTitles { get; } = new();
 
     public EventHandler<string>? TabTitleChanged { get; set; }
 
@@ -18,18 +18,21 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
         absolutePaths.ForEach(path => PathTitles.Remove(path));
     }
 
-    public void UpdateTabTitle(string absolutePath, string? title)
+    public void UpdateTabTitle(string absolutePath, Func<string?> titleFunc)
     {
-        PathTitles[absolutePath] = title;
+        PathTitles[absolutePath] = titleFunc;
 
         TabTitleChanged?.Invoke(this, absolutePath);
     }
 
+    public void UpdateTabTitle(string absolutePath, string? title) 
+        => UpdateTabTitle(absolutePath, () => title);
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenComponent<CascadingValue<IPageTabsProvider>>(0);
-        builder.AddAttribute(1, nameof(CascadingValue<IPageTabsProvider>.Value), this);
-        builder.AddAttribute(2, nameof(CascadingValue<IPageTabsProvider>.IsFixed), true);
+        builder.OpenComponent<CascadingValue<PPageTabsProvider>>(0);
+        builder.AddAttribute(1, nameof(CascadingValue<PPageTabsProvider>.Value), this);
+        builder.AddAttribute(2, nameof(CascadingValue<PPageTabsProvider>.IsFixed), true);
         builder.AddAttribute(3, nameof(ChildContent), ChildContent);
         builder.CloseComponent();
     }

@@ -35,10 +35,10 @@ jobs:
     - name: setup python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10' # install the python version needed
-    - name: execute py script # run sitemapgenerate.py
+        python-version: '3.10'
+    - name: execute py script
       env:
-        DOC_DOMAIN: "https://blazor.masastack.com"
+        DOC_DOMAIN: "https://docs.masastack.com"
       run: python scirpts/sitemapgenerate.py
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
@@ -48,3 +48,11 @@ jobs:
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
       run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
+    - name: run index-create tools
+      env:
+        MASA_DOC_DOMAIN: "https://docs.masastack.com/"
+        MASA_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_APIKEY }}
+        MASA_ALGOLIA_APP_ID: "TSB4MACWRC"
+        MASA_ALGOLIA_INDEX_PREFIX: "blazor-masastack_prd_"
+        MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"
+      run: dotnet run --project docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj -c Release
