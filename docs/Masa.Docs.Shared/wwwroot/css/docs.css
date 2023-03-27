@@ -335,25 +335,25 @@ a.text-dec-none {
         min-width: 0 !important;
     }
 
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__title {
-        color: #fff;
-    }
-
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__subtitle {
-        color: rgb(255 255 255 / 60%) !important;
-    }
-
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) {
-        background-color: #4318FF;
-        color: #fff !important;
-    }
-
     .doc-list-nav .m-list-item, .doc-list-nav .m-list-item:before {
         border-radius: 0 4px 4px 0 !important;
     }
 
     .doc-list-nav .m-list-item {
         padding: 0 16px;
+    }
+
+    .doc-list-nav--active {
+        background-color: #4318FF;
+        color: #fff !important;
+    }
+
+    .doc-list-nav--active .m-list-item__title {
+        color: #fff;
+    }
+
+    .doc-list-nav--active .m-list-item__subtitle {
+        color: rgb(255 255 255 / 60%) !important;
     }
 
 .tag-chip {
