@@ -14,10 +14,15 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <Search />
+        <div class="flex-1-1-auto d-flex justify-end">
+            @if (!string.IsNullOrEmpty(Project))
+            {
+                <Search @ref="_algoliaSearch" IndexName="@(Env+Project)" />
+            }
+        </div>
     }
 
-    <LanguageMenu OnCultureChanged="@OnCultureChanged" />
+    <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
@@ -29,11 +34,24 @@
     }
 </div>
 
-
 @code {
 
     [Parameter]
+    public string? Project { get; set; }
+
+    [Parameter]
+    public string? Env { get; set; }
+
+    [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    private Search? _algoliaSearch;
+
+    public async Task OnCultureChangedLocal(string value)
+    {
+        await _algoliaSearch!.InitDocSearchAsync();
+        await OnCultureChanged.InvokeAsync(value);
+    }
 
     [Parameter]
     public EventCallback OnDotClick { get; set; }
