@@ -27,7 +27,11 @@ namespace Masa.Blazor
         public bool FullWidth { get; set; }
 
         [Parameter]
-        public string Prefix { get; set; }
+        public string Prefix
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool SingleLine { get; set; }
@@ -45,7 +49,11 @@ namespace Masa.Blazor
         public bool Filled { get; set; }
 
         [Parameter]
-        public virtual bool Outlined { get; set; }
+        public virtual bool Outlined
+        {
+            get => GetValue(false);
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Reverse { get; set; }
@@ -510,6 +518,15 @@ namespace Masa.Blazor
                 await Task.WhenAll(tasks);
                 StateHasChanged();
             }
+        }
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<bool>(nameof(Outlined), SetLabelWidthAsync)
+                   .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync))
+                   .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
         }
 
         private async Task SetLabelWidthAsync()
