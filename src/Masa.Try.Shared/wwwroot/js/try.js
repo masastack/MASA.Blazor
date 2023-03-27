@@ -159,7 +159,40 @@ function initLanguages() {
 
 }
 
+function addScript(scriptNode) {
+    if (document.getElementById(scriptNode.id) != null)
+        return;
+
+    var node;
+    if (scriptNode.nodeType == 0) {
+        node = document.createElement('script');
+        node.setAttribute('src', scriptNode.content);
+        node.setAttribute('id', scriptNode.id);
+        document.body.appendChild(node);
+    }
+    else {
+        node = document.createElement('link');
+        node.setAttribute('rel', 'stylesheet');
+        node.setAttribute('href', scriptNode.content);
+        node.setAttribute('id', scriptNode.id);
+        document.head.appendChild(node);
+    }
+}
+
+function removeScript(scriptNode) {
+    var node = document.getElementById(scriptNode.id)
+
+    if (node == null)
+        return;
+
+    if (scriptNode.nodeType == 0) {
+        document.body.removeChild(node);
+    }
+    else {
+        document.head.removeChild(node);
+    }
+}
 
 export {
-    init
+    init, addScript, removeScript
 }

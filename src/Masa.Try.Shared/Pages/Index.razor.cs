@@ -39,6 +39,15 @@ public partial class Index : NextTickComponentBase
 
     private bool _load;
     private Type? _componentType;
+    private bool _settingModalOpened;
+    private bool _addScriptModalOpened;
+
+    private readonly List<ScriptNode> _customScriptNodes = new();
+
+    private readonly List<ScriptNodeType> _scriptNodeTypes = Enum.GetValues(typeof(ScriptNodeType)).Cast<ScriptNodeType>().ToList();
+    private ScriptNodeType _newScriptNodeType;
+    private string _newScriptName = string.Empty;
+    private string _newContent = string.Empty;
 
     private const string DEFAULT_CODE = """
     <div class="d-flex align-center text-h4">
@@ -266,6 +275,38 @@ public partial class Index : NextTickComponentBase
             theme = "vs",
             automaticLayout = true,
         };
+    }
+
+    private async Task RemoveScriptReferenceAsync(ScriptNode scriptNode)
+    {
+        await TryJSModule.RemoveScript(scriptNode);
+        _customScriptNodes.Remove(scriptNode);
+        StateHasChanged();
+    }
+
+    private async Task AddScriptReferenceAsync()
+    {
+        var newScript = new ScriptNode(_newScriptName, _newScriptNodeType, _newContent);
+        await TryJSModule.AddScript(newScript);
+        _customScriptNodes.Add(newScript);
+        StateHasChanged();
+        _addScriptModalOpened = false;
+    }
+
+    private async Task ClearScriptsReferenceAsync()
+    {
+        foreach (var item in _customScriptNodes)
+            await TryJSModule.RemoveScript(item);
+
+        _customScriptNodes.Clear();
+        StateHasChanged();
+    }
+
+    private void ClearInputs()
+    {
+        _newContent = string.Empty;
+        _newScriptName = string.Empty;
+        _newScriptNodeType = ScriptNodeType.JS;
     }
 
     protected override void Dispose(bool disposing)
