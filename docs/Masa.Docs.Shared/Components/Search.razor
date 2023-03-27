@@ -20,13 +20,14 @@ else
     [Inject]
     public MasaBlazor? MasaBlazor { get; set; }
 
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; } = null!;
+
     [Parameter]
     public string Class { get; set; } = "mr-6";
-
-    [Parameter]
-    public string? IndexName { get; set; }
-
-    private string _value = string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -38,7 +39,11 @@ else
 
     public async Task InitDocSearchAsync()
     {
-        var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
-        await Js!.InvokeVoidAsync("addDocSearch", IndexName, MasaBlazor?.Breakpoint?.Mobile, currentLanguage, I18n.T("Search"));
+        if (Project is not null)
+        {
+            var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
+            await Js!.InvokeVoidAsync("addDocSearch", indexName, MasaBlazor?.Breakpoint?.Mobile, currentLanguage, I18n.T("Search"));
+        }
     }
 }

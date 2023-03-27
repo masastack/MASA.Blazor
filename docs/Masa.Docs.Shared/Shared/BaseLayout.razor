@@ -13,14 +13,13 @@
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
             <MErrorHandler>
-                <AppBar OnCultureChanged="@OnCultureChanged"
-                        OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
-                        OnDotClick="HandleOnDotClick"
-                        OnSettingsClick="HandleSettingsClick"
-                        Project="@_project"
-                        Env="@_env"
-                        HideAppBarNavIcon="@_hideAppBarNavIcon" />
-
+                <CascadingValue Value="@_env" Name="Env">
+                    <AppBar OnCultureChanged="@OnCultureChanged"
+                            OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                            OnDotClick="HandleOnDotClick"
+                            OnSettingsClick="HandleSettingsClick"
+                            HideAppBarNavIcon="@_hideAppBarNavIcon" />
+                </CascadingValue>
                 <CascadingValue Value="this" IsFixed>
                     @Body
                 </CascadingValue>
