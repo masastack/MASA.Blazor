@@ -125,11 +125,11 @@
 
     private void SetEnv()
     {
-        var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "");
+        var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.massastack.com/" or "blazor.massastack.com/" => "prd_",
-            "blazor-dev.massastack.com/" or "docs-dev.massastack.com/" => "dev_",
+            "docs.massastack.com" or "blazor.massastack.com" => "prd_",
+            "blazor-dev.massastack.com" or "docs-dev.massastack.com" => "dev_",
             _ => "local_"
         };
     }
