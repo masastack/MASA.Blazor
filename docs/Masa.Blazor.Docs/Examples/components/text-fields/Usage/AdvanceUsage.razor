@@ -29,12 +29,12 @@
         get => _clearable;
         set
         {
-            _clearable = value;
-
-            if (value)
+            if (_clearable != value && value)
             {
                 _value ??= "Hover to Clear me";
             }
+
+            _clearable = value;
         }
     }
 
