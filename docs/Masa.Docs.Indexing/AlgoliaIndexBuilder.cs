@@ -139,7 +139,7 @@ namespace Masa.Docs.Indexing
             if (datas != null)
             {
                 _logger.LogInformation($"Create index with {datas.Count()} pages.");
-                var indexNames = datas.Select(x => x.IndexName).Distinct().ToList();
+                var indexNames = datas.Select(x => x.IndexName).Distinct();
                 foreach (var indexName in indexNames)
                 {
                     var index = _searchClient.InitIndex(indexName);
@@ -329,7 +329,8 @@ namespace Masa.Docs.Indexing
                         var uri = new Uri(baseUri, projectUrl);
                         var docUrl = uri.ToString();
                         var content = File.ReadAllText(fileName, Encoding.UTF8);
-                        var indexName = $"{_algoliaOption.IndexPrefix}{lowerProjcet}";
+                        var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProjcet}";
+                        //set different language to different index
                         RecordRoot recordRoot = new(indexName);
                         var records = PraseDocument(content, docUrl, language, project);
                         if (records.Any())

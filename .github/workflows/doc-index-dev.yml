@@ -32,7 +32,7 @@ jobs:
     - name: run index-create tools
       env:
         MASA_DOC_DOMAIN: "https://blazor-dev.masastack.com/"
-        MASA_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_APIKEY }}
+        MASA_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
         MASA_ALGOLIA_APP_ID: "TSB4MACWRC"
         MASA_ALGOLIA_INDEXP_REFIX: "blazor-masastack_dev_"
         MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"

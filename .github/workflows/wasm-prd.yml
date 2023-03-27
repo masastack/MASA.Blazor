@@ -35,10 +35,10 @@ jobs:
     - name: setup python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10' # install the python version needed
-    - name: execute py script # run sitemapgenerate.py
+        python-version: '3.10'
+    - name: execute py script
       env:
-        DOC_DOMAIN: "https://blazor.masastack.com"
+        DOC_DOMAIN: "https://docs.masastack.com"
       run: python scirpts/sitemapgenerate.py
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
