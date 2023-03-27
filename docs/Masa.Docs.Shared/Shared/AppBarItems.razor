@@ -17,7 +17,7 @@
         <div class="flex-1-1-auto d-flex justify-end">
             @if (!string.IsNullOrEmpty(Project))
             {
-                <Search @ref="_algoliaSearch" IndexName="@(Env+Project)" />
+                <Search @ref="_algoliaSearch" IndexName="@(Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project)" />
             }
         </div>
     }
