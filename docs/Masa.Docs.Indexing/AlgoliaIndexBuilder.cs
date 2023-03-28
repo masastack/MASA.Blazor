@@ -2,14 +2,11 @@
 using Algolia.Search.Models.Settings;
 using Markdig;
 using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
 using Masa.Docs.Indexing.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Reflection.Metadata;
 using System.Text;
-using System.Xml.Linq;
 
 namespace Masa.Docs.Indexing
 {
@@ -40,45 +37,44 @@ namespace Masa.Docs.Indexing
         public AlgoliaIndexBuilder(
              ILogger<AlgoliaIndexBuilder> logger, IOptions<AlgoliaOptions> algoliaOption)
         {
-            _algoliaOption = GetRealAlgoliaOptions(algoliaOption.Value);
-            _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
             _logger = logger;
+            _algoliaOption = GetRealAlgoliaOptions(algoliaOption.Value);
+
+            #region check option
+            _algoliaOption.Projects.AssertParamNotNull(nameof(_algoliaOption.Projects));
+            _algoliaOption.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
+            _algoliaOption.ApplicationId.AssertParamNotNull(nameof(_algoliaOption.ApplicationId));
+            AssertDirectoryExist(_algoliaOption.RootDocsPath);
+            #endregion
+
+            _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
         }
 
         private AlgoliaOptions GetRealAlgoliaOptions(AlgoliaOptions algoliaOptions)
         {
-            void SetIEnumerablePropertyFromEnviroment(string envName, Expression<Func<AlgoliaOptions, IEnumerable<string>?>> selector, string? delimiter = null)
+            void SetPropertyFromEnviroment(string envName, string propertyOrFieldName, string? delimiter = null)
             {
                 var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
+                _logger.LogInformation("env:{0}  ,hasvalue:{1}", envName, !string.IsNullOrEmpty(value));
                 if (value is not null)
                 {
                     if (delimiter != null)
                     {
-                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
-                        algoliaOptions.SetPropertyValue(selector, valueSet);
+                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
+                        algoliaOptions.SetPropertyValue(propertyOrFieldName, valueSet);
+                    }
+                    else
+                    {
+                        algoliaOptions.SetPropertyValue(propertyOrFieldName, value);
                     }
                 }
             }
-
-            void SetPropertyFromEnviroment(string envName, Expression<Func<AlgoliaOptions, string?>> selector, string? delimiter = null)
-            {
-                var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
-                if (value is not null)
-                {
-                    algoliaOptions.SetPropertyValue(selector, value);
-                }
-            }
-            SetPropertyFromEnviroment(ALGOLIA_APP_ID, x => x.ApplicationId);
-            SetPropertyFromEnviroment(ALGOLIA_API_KEY, x => x.AlgoliaApiKey);
-            SetPropertyFromEnviroment(ALGOLIA_INDEX_PREFIX, x => x.IndexPrefix);
-            SetPropertyFromEnviroment(ROOT_DOCS_PATH, x => x.RootDocsPath);
-            SetPropertyFromEnviroment(DOC_DOMAIN, x => x.DocDomain);
-            SetIEnumerablePropertyFromEnviroment(MASA_DOC_EXCLUDE_URLS, x => x.ExcludedUrls, "||");
-
-            algoliaOptions.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
-            algoliaOptions.ApplicationId.AssertParamNotNull(nameof(algoliaOptions.ApplicationId));
-            algoliaOptions.Projects.AssertParamNotNull(nameof(algoliaOptions.Projects));
-            AssertDirectoryExist(algoliaOptions.RootDocsPath);
+            SetPropertyFromEnviroment(ALGOLIA_APP_ID, nameof(AlgoliaOptions.ApplicationId));
+            SetPropertyFromEnviroment(ALGOLIA_API_KEY, nameof(AlgoliaOptions.AlgoliaApiKey));
+            SetPropertyFromEnviroment(ALGOLIA_INDEX_PREFIX, nameof(AlgoliaOptions.IndexPrefix));
+            SetPropertyFromEnviroment(ROOT_DOCS_PATH, nameof(AlgoliaOptions.RootDocsPath));
+            SetPropertyFromEnviroment(DOC_DOMAIN, nameof(AlgoliaOptions.DocDomain));
+            SetPropertyFromEnviroment(MASA_DOC_EXCLUDE_URLS, nameof(AlgoliaOptions.ExcludedUrls), "||");
             return algoliaOptions;
         }
 
@@ -137,10 +133,29 @@ namespace Masa.Docs.Indexing
             };
         }
 
+        private string? GetContentFromInline(ContainerInline? containerInline)
+        {
+            string? content = null;
+            if (containerInline is not null)
+            {
+                foreach (var item in containerInline)
+                {
+                    if (item is CodeInline code)
+                    {
+                        content += code.Content;
+                    }
+                    else
+                    {
+                        content += item.ToString();
+                    }
+                }
+            }
+            return content;
+        }
+
         public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot>? datas = null)
         {
             datas = datas ?? GenerateRecords();
-
             if (datas != null)
             {
                 _logger.LogInformation($"Create index with {datas.Count()} pages.");
@@ -158,7 +173,7 @@ namespace Masa.Docs.Indexing
             return false;
         }
 
-        private IEnumerable<Record> PraseDocument(string content, string docUrl, string lang, string project)
+        private IEnumerable<Record> ParseDocument(string content, string docUrl, string lang, string project)
         {
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
             var md = Markdown.Parse(content, pipeline);
@@ -218,7 +233,7 @@ namespace Masa.Docs.Indexing
                 {
                     record.ClonePrerecord(lastRecord);
                 }
-                var content = block.Inline?.FirstChild?.ToString();
+                var content = GetContentFromInline(block.Inline);
                 if (content != null)
                 {
                     switch (recordType)
@@ -281,8 +296,11 @@ namespace Masa.Docs.Indexing
                 }
                 if (node is ParagraphBlock paragraph)
                 {
-                    content += paragraph.Inline?.FirstChild?.ToString();
+                    content += GetContentFromInline(paragraph.Inline);
                 }
+#if DEBUG
+                _logger.LogDebug("{0}\t{1}\t{2}\n{3}\n", node.GetType().Name, docUrl, position, content);
+#endif
             }
             var lastPostion = result.LastOrDefault()?.Weight?.Position;
             if (lastPostion is not null)
@@ -333,11 +351,11 @@ namespace Masa.Docs.Indexing
                         }
                         var uri = new Uri(baseUri, projectUrl);
                         var docUrl = uri.ToString();
+                        if (!docUrl.EndsWith("")) continue;
                         var content = File.ReadAllText(fileName, Encoding.UTF8);
                         var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProjcet}";
-                        //set different language to different index
                         RecordRoot recordRoot = new(indexName);
-                        var records = PraseDocument(content, docUrl, language, project);
+                        var records = ParseDocument(content, docUrl, language, project);
                         if (records.Any())
                         {
                             recordRoot.Records.AddRange(records);

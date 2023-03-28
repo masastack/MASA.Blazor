@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-try:
     runs-on: ubuntu-latest
     steps:
     - name: git pull
