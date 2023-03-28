@@ -285,7 +285,6 @@ public partial class Index : NextTickComponentBase
             var newScript = new ScriptNode(jsScript.Value, ScriptNodeType.Js);
             await TryJSModule.AddScript(newScript);
             _customScriptNodes.Add(newScript);
-            await Console.Out.WriteLineAsync(jsScript.Value);
         }
 
         var cssScripts = CssNodeRegex().Matches(_newScriptContent);
