@@ -3,8 +3,15 @@ using Masa.Docs.Indexing.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureLogging(cfg =>
+    {
+        cfg.ClearProviders();
+        cfg.AddConsole();
+        cfg.AddDebug();
+    })
     .ConfigureAppConfiguration((hostingContext, configuration) =>
     {
         configuration.Sources.Clear();
