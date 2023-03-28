@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  create-doc-index-dev:
     runs-on: ubuntu-latest
     steps:
     - name: git pull
@@ -38,4 +38,4 @@ jobs:
         MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"
         # MASA_DOC_EXCLUDE_URLS  if many please seperate with || ,ex: "/blazor/about/about||/blazor/about/meet-the-team"
         MASA_DOC_EXCLUDE_URLS: "/blazor/about/about||/blazor/about/meet-the-team"
-      run: cd docs/Masa.Docs.Indexing && dotnet run --project Masa.Docs.Indexing.csproj -c Release
+      run: cd docs/Masa.Docs.Indexing && dotnet run --project Masa.Docs.Indexing.csproj --no-launch-profile -c Release

@@ -37,15 +37,17 @@ namespace Masa.Docs.Indexing
         public AlgoliaIndexBuilder(
              ILogger<AlgoliaIndexBuilder> logger, IOptions<AlgoliaOptions> algoliaOption)
         {
+            _logger = logger;
             _algoliaOption = GetRealAlgoliaOptions(algoliaOption.Value);
+
             #region check option
             _algoliaOption.Projects.AssertParamNotNull(nameof(_algoliaOption.Projects));
             _algoliaOption.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
             _algoliaOption.ApplicationId.AssertParamNotNull(nameof(_algoliaOption.ApplicationId));
             AssertDirectoryExist(_algoliaOption.RootDocsPath);
             #endregion
+
             _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
-            _logger = logger;
         }
 
         private AlgoliaOptions GetRealAlgoliaOptions(AlgoliaOptions algoliaOptions)
@@ -53,6 +55,7 @@ namespace Masa.Docs.Indexing
             void SetPropertyFromEnviroment(string envName, string propertyOrFieldName, string? delimiter = null)
             {
                 var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
+                _logger.LogInformation("env:{0}  ,hasvalue:{1}", envName, !string.IsNullOrEmpty(value));
                 if (value is not null)
                 {
                     if (delimiter != null)
@@ -128,6 +131,26 @@ namespace Masa.Docs.Indexing
                 },
                 AttributesForFaceting = new() { $"filterOnly({nameof(Record.Lang).ToLower()})", "type" },
             };
+        }
+
+        private string? GetContentFromInline(ContainerInline? containerInline)
+        {
+            string? content = null;
+            if (containerInline is not null)
+            {
+                foreach (var item in containerInline)
+                {
+                    if (item is CodeInline code)
+                    {
+                        content += code.Content;
+                    }
+                    else
+                    {
+                        content += item.ToString();
+                    }
+                }
+            }
+            return content;
         }
 
         public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot>? datas = null)
@@ -210,7 +233,7 @@ namespace Masa.Docs.Indexing
                 {
                     record.ClonePrerecord(lastRecord);
                 }
-                var content = block.Inline?.FirstChild?.ToString();
+                var content = GetContentFromInline(block.Inline);
                 if (content != null)
                 {
                     switch (recordType)
@@ -273,20 +296,10 @@ namespace Masa.Docs.Indexing
                 }
                 if (node is ParagraphBlock paragraph)
                 {
-                    foreach (var item in paragraph.Inline!)
-                    {
-                        if (item is CodeInline code)
-                        {
-                            content += code.Content;
-                        }
-                        else
-                        {
-                            content += item.ToString();
-                        }
-                    }
+                    content += GetContentFromInline(paragraph.Inline);
                 }
 #if DEBUG
-              _logger.LogDebug("{0}\t{1}\t{2}\n{3}\n", node.GetType().Name, docUrl, position, content);
+                _logger.LogDebug("{0}\t{1}\t{2}\n{3}\n", node.GetType().Name, docUrl, position, content);
 #endif
             }
             var lastPostion = result.LastOrDefault()?.Weight?.Position;
@@ -338,6 +351,7 @@ namespace Masa.Docs.Indexing
                         }
                         var uri = new Uri(baseUri, projectUrl);
                         var docUrl = uri.ToString();
+                        if (!docUrl.EndsWith("")) continue;
                         var content = File.ReadAllText(fileName, Encoding.UTF8);
                         var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProjcet}";
                         RecordRoot recordRoot = new(indexName);
