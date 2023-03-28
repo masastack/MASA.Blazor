@@ -1,11 +1,11 @@
-﻿        
+﻿
 function init() {
     initLanguages();
     var splitter = document.getElementById('splitter');
     var code = document.getElementById('code');
     var render = document.getElementById('render');
 
-    var mouseDownHandler = function(e) {
+    var mouseDownHandler = function (e) {
         // Prevent text selection
         e.preventDefault();
 
@@ -15,7 +15,7 @@ function init() {
         var startRightWidth = render.offsetWidth;
 
         // Define the mouse move handler
-        var mouseMoveHandler = function(e) {
+        var mouseMoveHandler = function (e) {
             // Calculate the new widths
             var newLeftWidth = startLeftWidth + (e.clientX - startPos);
             var newRightWidth = startRightWidth - (e.clientX - startPos);
@@ -26,7 +26,7 @@ function init() {
         };
 
         // Define the mouse up handler
-        var mouseUpHandler = function() {
+        var mouseUpHandler = function () {
             // Remove the handlers
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('mouseup', mouseUpHandler);
@@ -39,7 +39,6 @@ function init() {
 
     splitter.addEventListener('mousedown', mouseDownHandler);
 }
-
 
 function initLanguages() {
     function createDependencyProposals(range) {
@@ -159,22 +158,25 @@ function initLanguages() {
 
 }
 
+function parseToDOM(htmlstring) {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = htmlstring;
+    return tpl.content;
+}
+
 function addScript(scriptNode) {
     if (document.getElementById(scriptNode.id) != null)
         return;
 
-    var node;
+    var node = parseToDOM(scriptNode.content);
+    var attr = document.createAttribute("id");
+    attr.value = scriptNode.id;
+    node.firstChild.setAttributeNode(attr);
+
     if (scriptNode.nodeType == 0) {
-        node = document.createElement('script');
-        node.setAttribute('src', scriptNode.content);
-        node.setAttribute('id', scriptNode.id);
         document.body.appendChild(node);
     }
     else {
-        node = document.createElement('link');
-        node.setAttribute('rel', 'stylesheet');
-        node.setAttribute('href', scriptNode.content);
-        node.setAttribute('id', scriptNode.id);
         document.head.appendChild(node);
     }
 }

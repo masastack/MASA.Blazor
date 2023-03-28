@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 using System.Runtime.Loader;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using System.Text.RegularExpressions;
 
 namespace Masa.Try.Shared.Pages;
 
@@ -46,8 +47,7 @@ public partial class Index : NextTickComponentBase
 
     private readonly List<ScriptNodeType> _scriptNodeTypes = Enum.GetValues(typeof(ScriptNodeType)).Cast<ScriptNodeType>().ToList();
     private ScriptNodeType _newScriptNodeType;
-    private string _newScriptName = string.Empty;
-    private string _newContent = string.Empty;
+    private string _newScriptContent = string.Empty;
 
     private const string DEFAULT_CODE = """
     <div class="d-flex align-center text-h4">
@@ -286,11 +286,26 @@ public partial class Index : NextTickComponentBase
 
     private async Task AddScriptReferenceAsync()
     {
-        var newScript = new ScriptNode(_newScriptName, _newScriptNodeType, _newContent);
-        await TryJSModule.AddScript(newScript);
-        _customScriptNodes.Add(newScript);
+        var jsScripts = JsNodeRegex().Matches(_newScriptContent);
+        foreach (var jsScript in jsScripts.Cast<Match>())
+        {
+            var newScript = new ScriptNode(jsScript.Value, ScriptNodeType.Js);
+            await TryJSModule.AddScript(newScript);
+            _customScriptNodes.Add(newScript);
+            await Console.Out.WriteLineAsync(jsScript.Value);
+        }
+
+        var cssScripts = CssNodeRegex().Matches(_newScriptContent);
+        foreach (var cssScript in cssScripts.Cast<Match>())
+        {
+            var newScript = new ScriptNode(cssScript.Value, ScriptNodeType.Css);
+            await TryJSModule.AddScript(newScript);
+            _customScriptNodes.Add(newScript);
+        }
+
         StateHasChanged();
         _addScriptModalOpened = false;
+        ClearInputs();
     }
 
     private async Task ClearScriptsReferenceAsync()
@@ -304,9 +319,7 @@ public partial class Index : NextTickComponentBase
 
     private void ClearInputs()
     {
-        _newContent = string.Empty;
-        _newScriptName = string.Empty;
-        _newScriptNodeType = ScriptNodeType.JS;
+        _newScriptContent = string.Empty;
     }
 
     protected override void Dispose(bool disposing)
@@ -314,4 +327,10 @@ public partial class Index : NextTickComponentBase
         base.Dispose(disposing);
         _objRef?.Dispose();
     }
+
+    [GeneratedRegex("(<script(.*?)>)(.|\n)*?(</script>)")]
+    private static partial Regex JsNodeRegex();
+
+    [GeneratedRegex("(<link(.*?)/>)")]
+    private static partial Regex CssNodeRegex();
 }

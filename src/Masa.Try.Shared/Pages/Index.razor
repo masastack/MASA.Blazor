@@ -67,10 +67,10 @@
                     <MListItemGroup>
                         @foreach (var item in _customScriptNodes)
                         {
-                            <MListItem Value="item.ScriptName" ActiveClass="deep-purple--text text--accent-4">
+                            <MListItem Value="item.Id" ActiveClass="deep-purple--text text--accent-4">
                                 <ItemContent>
                                     <MListItemAvatar>
-                                        @if (item.NodeType is ScriptNodeType.CSS)
+                                        @if (item.NodeType is ScriptNodeType.Css)
                                         {
                                             <MIcon Color="blue darken-1">mdi-language-css3</MIcon>
                                         }
@@ -81,8 +81,7 @@
                                     </MListItemAvatar>
 
                                     <MListItemContent>
-                                        <MListItemTitle>@item.ScriptName</MListItemTitle>
-                                        <MListItemSubtitle>@item.Content</MListItemSubtitle>
+                                        <MListItemTitle>@item.Content</MListItemTitle>
                                     </MListItemContent>
 
                                     <MListItemAction>
@@ -91,8 +90,8 @@
                                         <MIcon Color="blue-grey lighten-1">mdi-delete-circle</MIcon>
                                         </MButton>
                                         </MListItemAction>
-                                    </ItemContent>
-                                    </MListItem>
+                                </ItemContent>
+                            </MListItem>
                         }
                     </MListItemGroup>
                 </MList>
@@ -104,26 +103,14 @@
                 OnSave="async()=>await AddScriptReferenceAsync()"
                 OnCancel="async()=>{_addScriptModalOpened=false; ClearInputs();}"
                 Title="Add Script Reference"
-                Width="500">
-            <MTextField Outlined
-                        @bind-Value="_newScriptName"
-                        Label="Script Name"
-                        PrependInnerIcon="mdi-pen" />
-            <MSelect Outlined
-                     Label="Script Node Types"
-                     PrependInnerIcon="@(_newScriptNodeType==ScriptNodeType.JS?"mdi-language-javascript":"mdi-language-css3")"
-                     Items="_scriptNodeTypes"
-                     ItemValue="i=>i"
-                     ItemText="i=>i.ToString()"
-                     TItem="ScriptNodeType"
-                     TItemValue="ScriptNodeType"
-                     TValue="ScriptNodeType"
-                     @bind-Value="_newScriptNodeType" />
-            <MTextField Outlined
-                        @bind-Value="_newContent"
-                        Label="Content"
-                        PrependInnerIcon="mdi-script-text-outline" />
-            </PModal>
+                Width="500"
+                Height="500">
+            <MTextarea Outlined
+                        @bind-Value="_newScriptContent"
+                        Label="Script Content"
+                        PrependInnerIcon="mdi-pen"
+                        Style="font-size:small"/>
+        </PModal>
 
         <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
             <MIcon>mdi-github</MIcon>
