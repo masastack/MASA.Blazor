@@ -54,20 +54,14 @@
                                  OnClick="()=>_addScriptModalOpened=true">
                             <MIcon>mdi-plus</MIcon>
                         </MButton>
-                        </MCol>
-                        <MCol Cols="1">
-                        <MButton Icon Color="primary"
-                                 OnClick="ClearScriptsReferenceAsync">
-                            <MIcon>mdi-cached</MIcon>
-                        </MButton>
-                        </MCol>
-                        </MRow>
+                    </MCol>
+                </MRow>
 
-                        <MList TwoLine>
+                <MList TwoLine>
                     <MListItemGroup>
                         @foreach (var item in _customScriptNodes)
                         {
-                            <MListItem Value="item.Id" ActiveClass="deep-purple--text text--accent-4">
+                            <MListItem ActiveClass="deep-purple--text text--accent-4">
                                 <ItemContent>
                                     <MListItemAvatar>
                                         @if (item.NodeType is ScriptNodeType.Css)
@@ -84,12 +78,6 @@
                                         <MListItemTitle>@item.Content</MListItemTitle>
                                     </MListItemContent>
 
-                                    <MListItemAction>
-                                        <MButton Small Icon
-                                             OnClick="async()=>await RemoveScriptReferenceAsync(item)">
-                                        <MIcon Color="blue-grey lighten-1">mdi-delete-circle</MIcon>
-                                        </MButton>
-                                        </MListItemAction>
                                 </ItemContent>
                             </MListItem>
                         }

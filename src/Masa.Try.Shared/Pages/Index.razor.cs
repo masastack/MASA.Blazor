@@ -277,13 +277,6 @@ public partial class Index : NextTickComponentBase
         };
     }
 
-    private async Task RemoveScriptReferenceAsync(ScriptNode scriptNode)
-    {
-        await TryJSModule.RemoveScript(scriptNode);
-        _customScriptNodes.Remove(scriptNode);
-        StateHasChanged();
-    }
-
     private async Task AddScriptReferenceAsync()
     {
         var jsScripts = JsNodeRegex().Matches(_newScriptContent);
@@ -306,15 +299,6 @@ public partial class Index : NextTickComponentBase
         StateHasChanged();
         _addScriptModalOpened = false;
         ClearInputs();
-    }
-
-    private async Task ClearScriptsReferenceAsync()
-    {
-        foreach (var item in _customScriptNodes)
-            await TryJSModule.RemoveScript(item);
-
-        _customScriptNodes.Clear();
-        StateHasChanged();
     }
 
     private void ClearInputs()

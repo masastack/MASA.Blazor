@@ -169,9 +169,6 @@ function addScript(scriptNode) {
         return;
 
     var node = parseToDOM(scriptNode.content);
-    var attr = document.createAttribute("id");
-    attr.value = scriptNode.id;
-    node.firstChild.setAttributeNode(attr);
 
     if (scriptNode.nodeType == 0) {
         document.body.appendChild(node);
@@ -181,20 +178,6 @@ function addScript(scriptNode) {
     }
 }
 
-function removeScript(scriptNode) {
-    var node = document.getElementById(scriptNode.id)
-
-    if (node == null)
-        return;
-
-    if (scriptNode.nodeType == 0) {
-        document.body.removeChild(node);
-    }
-    else {
-        document.head.removeChild(node);
-    }
-}
-
 export {
-    init, addScript, removeScript
+    init, addScript
 }

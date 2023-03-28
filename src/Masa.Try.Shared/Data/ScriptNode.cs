@@ -4,12 +4,9 @@
     {
         public ScriptNode(string content, ScriptNodeType scriptNodeType)
         {
-            Id = Guid.NewGuid().ToString();
             NodeType = scriptNodeType;
             Content = content;
         }
-
-        public string Id { get; init; }
 
         public ScriptNodeType NodeType { get; init; }
 

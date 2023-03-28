@@ -15,6 +15,4 @@ public class TryJSModule : JSModule
     }
 
     public async ValueTask AddScript(ScriptNode scriptNode) => await InvokeVoidAsync("addScript", scriptNode);
-
-    public async ValueTask RemoveScript(ScriptNode scriptNode) => await InvokeVoidAsync("removeScript", scriptNode);
 }
