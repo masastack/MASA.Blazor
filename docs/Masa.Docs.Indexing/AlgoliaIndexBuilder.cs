@@ -1,4 +1,5 @@
-﻿using Algolia.Search.Clients;
+﻿using System.Globalization;
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Settings;
 using Markdig;
 using Markdig.Extensions.Yaml;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.Converters;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace Masa.Docs.Indexing
@@ -41,8 +43,8 @@ namespace Masa.Docs.Indexing
         {
             _logger = logger;
             _algoliaOption = algoliaOption.Value;
-            //when came in ,get all file first
-            SetAllFile();
+            if (!_totalFiles.Any())
+                SetAllFile();
             _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
         }
 
@@ -158,7 +160,7 @@ namespace Masa.Docs.Indexing
                         CodeInline code => () => code.DelimiterCount == 1 ? code.Content : null,//only get the ` code inline
                         EmphasisInline emphasisInline => () => emphasisInline.FirstChild?.ToString(),
                         LiteralInline literalInline => () => literalInline.Content.ToString(),
-                        LinkInline linkInline => () => linkInline.Title,
+                        LinkInline linkInline => () => string.IsNullOrWhiteSpace(linkInline.Title) ? linkInline.Url : linkInline.Title,
                         null => () => null,
                         _ => () => inline.ToString()
                     };
@@ -171,7 +173,7 @@ namespace Masa.Docs.Indexing
                 return result;
             }
 
-            Record? AddHeaderRecord(string lan, string projectName, int position, in HeadingBlock block, uint firstLevel, in Record? lastRecord = null)
+            Record? AddHeaderRecord(string lan, string url, string projectName, int position, in HeadingBlock block, uint firstLevel, in Record? lastRecord = null)
             {
                 RecordType recordType;
                 int level;
@@ -204,13 +206,13 @@ namespace Masa.Docs.Indexing
                     default:
                         return null;
                 }
-                Record record = new Record(lan, docUrl, projectName, recordType, position: position, level: level, pageRank: 0);
+                Record record = new Record(lan, url, projectName, recordType, position: position, level: level, pageRank: 0);
                 if (lastRecord is not null)
                 {
                     record.ClonePrerecord(lastRecord);
                 }
                 var content = GetContentFromInline(block.Inline);
-                if (content != null)
+                if (!string.IsNullOrWhiteSpace(content))
                 {
                     switch (recordType)
                     {
@@ -267,7 +269,10 @@ namespace Masa.Docs.Indexing
                     case YamlFrontMatterBlock yamlBlock:
                         var yamlText = docContent.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length).Trim('-');
                         var deserializer = new DeserializerBuilder()
-                            .WithNamingConvention(CamelCaseNamingConvention.Instance) 
+                            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                            .WithTypeConverter(new DateTimeConverter(
+                                formats: new[] { "yyyy/MM/dd hh:mm:ss", "yyyy/MM/dd hh:mm", "yyyy/MM/dd" })
+                            )
                             .BuildValueDeserializer();
                         var meta = Deserializer.FromValueDeserializer(deserializer)
                             .Deserialize<DescriptionYaml>(yamlText);
@@ -275,6 +280,10 @@ namespace Masa.Docs.Indexing
                         {
                             firstHeadLevel = 1;
                             isSet = true;
+                        }
+                        if (string.IsNullOrWhiteSpace(meta.Title))
+                        {
+                            throw new Exception($"document : {docUrl} do not contain a title,please check it");
                         }
                         record = AddYamlHeaderRecord(lang, project, position, meta.Title!);
                         result.Add(record);
@@ -300,7 +309,7 @@ namespace Masa.Docs.Indexing
                             AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref content);
                             position += 1;
                         }
-                        record = AddHeaderRecord(lang, project, position, block, firstHeadLevel, lastRecord);
+                        record = AddHeaderRecord(lang, docUrl, project, position, block, firstHeadLevel, lastRecord);
                         if (record is not null)
                         {
                             result.Add(record);
@@ -324,10 +333,10 @@ namespace Masa.Docs.Indexing
             {
                 position += 1;
             }
-            if (!string.IsNullOrEmpty(content))
+            if (!string.IsNullOrEmpty(content) && record is not null)
             {
                 AddContentToRecord(lang, docUrl, project, position, result, record!, ref content);
-                if (record is not null) result.Add(record);
+                result.Add(record);
             }
             return result;
         }
