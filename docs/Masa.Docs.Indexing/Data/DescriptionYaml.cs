@@ -8,4 +8,5 @@ public class DescriptionYaml
 
     public List<string> Related { get; set; } = new();
 
+    public string? Tag { get; set; }
 }

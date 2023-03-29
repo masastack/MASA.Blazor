@@ -93,19 +93,28 @@ namespace Masa.Docs.Indexing
             };
         }
 
-        public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot> records)
+        public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot> records, CancellationToken ct = default)
         {
-            _logger.LogInformation($"Create index with {records.Count()} pages.");
-            var indexNames = records.Select(x => x.IndexName).Distinct();
-            foreach (var indexName in indexNames)
+            try
             {
-                var index = _searchClient.InitIndex(indexName);
-                await index.SetSettingsAsync(GetIndexSetting());
-                var allRecords = records.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
-                await index.SaveObjectsAsync(allRecords);
+                _logger.LogInformation($"Create index with {records.Count()} pages.");
+                var indexNames = records.Select(x => x.IndexName).Distinct();
+                foreach (var indexName in indexNames)
+                {
+                    var index = _searchClient.InitIndex(indexName);
+                    await index.SetSettingsAsync(GetIndexSetting(), ct: ct);
+                    var allRecords = records.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
+                    await index.ClearObjectsAsync(ct: ct);
+                    await index.SaveObjectsAsync(allRecords, ct: ct);
+                }
+                _logger.LogInformation($"Index creation complete.");
+                return true;
             }
-            _logger.LogInformation($"Index creation complete.");
-            return true;
+            catch (Exception e)
+            {
+                _logger.LogError(e, "CreateIndexAsync got an error: {0}!", e.Message);
+                return false;
+            }
         }
 
         private IEnumerable<Record> ParseDocument(string docContent, string docUrl, string lang, string project)
@@ -146,7 +155,7 @@ namespace Masa.Docs.Indexing
                 {
                     Func<string?> func = inline switch
                     {
-                        CodeInline code => () => code.Content,
+                        CodeInline code => () => code.DelimiterCount == 1 ? code.Content : null,//only get the ` code inline
                         EmphasisInline emphasisInline => () => emphasisInline.FirstChild?.ToString(),
                         LiteralInline literalInline => () => literalInline.Content.ToString(),
                         LinkInline linkInline => () => linkInline.Title,
@@ -160,9 +169,6 @@ namespace Masa.Docs.Indexing
                 }
 
                 return result;
-                //var inlineMarkdown = doc.Substring(container.Span.Start, container.Span.End);
-                //var text = Markdown.Normalize(inlineMarkdown, new NormalizeOptions() { });
-                //return text;
             }
 
             Record? AddHeaderRecord(string lan, string projectName, int position, in HeadingBlock block, uint firstLevel, in Record? lastRecord = null)
@@ -260,8 +266,10 @@ namespace Masa.Docs.Indexing
                 {
                     case YamlFrontMatterBlock yamlBlock:
                         var yamlText = docContent.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length).Trim('-');
-                        var meta = Deserializer.FromValueDeserializer(new DeserializerBuilder()
-                                .WithNamingConvention(CamelCaseNamingConvention.Instance).BuildValueDeserializer())
+                        var deserializer = new DeserializerBuilder()
+                            .WithNamingConvention(CamelCaseNamingConvention.Instance) 
+                            .BuildValueDeserializer();
+                        var meta = Deserializer.FromValueDeserializer(deserializer)
                             .Deserialize<DescriptionYaml>(yamlText);
                         if (!isSet)
                         {
