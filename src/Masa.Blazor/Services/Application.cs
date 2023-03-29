@@ -11,7 +11,18 @@ namespace Masa.Blazor
         private double _right;
         private double _bottom;
         private double _footer;
-        private bool _isBooted;
+
+        /// <summary>
+        /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
+        /// The value would be set when value was calculated from JS.
+        /// </summary>
+        public bool LeftRightCalculated { get; private set; }
+
+        /// <summary>
+        /// Determines if the value of <see cref="InsetFooter"/> or <see cref="Footer"/> has been set.
+        /// The value would be set when value was calculated from JS.
+        /// </summary>
+        public bool FooterCalculated { get; private set; }
 
         public double Bar
         {
@@ -46,6 +57,7 @@ namespace Masa.Blazor
             {
                 if (_left != value)
                 {
+                    LeftRightCalculated = true;
                     _left = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
                 }
@@ -59,6 +71,7 @@ namespace Masa.Blazor
             {
                 if (_insetFooter != value)
                 {
+                    FooterCalculated = true;
                     _insetFooter = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InsetFooter)));
                 }
@@ -72,6 +85,7 @@ namespace Masa.Blazor
             {
                 if (_right != value)
                 {
+                    LeftRightCalculated = true;
                     _right = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));
                 }
@@ -98,21 +112,9 @@ namespace Masa.Blazor
             {
                 if (_footer != value)
                 {
+                    FooterCalculated = true;
                     _footer = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Footer)));
-                }
-            }
-        }
-
-        public bool IsBooted
-        {
-            get => _isBooted;
-            internal set
-            {
-                if (_isBooted != value)
-                {
-                    _isBooted = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBooted)));
                 }
             }
         }

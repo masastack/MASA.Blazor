@@ -1,70 +1,68 @@
 ﻿using System.ComponentModel;
 
-namespace Masa.Blazor
+namespace Masa.Blazor;
+
+public class MMain : BMain
 {
-    public partial class MMain : BMain, IMain
+    [Inject]
+    public MasaBlazor? MasaBlazor { get; set; }
+
+    private readonly string[] _applicationProperties = new string[]
     {
-        private readonly string[] _applicationProperties = new string[]
+        "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
+    };
+
+    /// <summary>
+    /// Avoid an entry animation on page load.
+    /// </summary>
+    protected override bool IsBooted => MasaBlazor is not null && MasaBlazor.Application.LeftRightCalculated;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor!.Application.PropertyChanged += OnApplicationPropertyChanged;
+    }
+
+    private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (_applicationProperties.Contains(e.PropertyName))
         {
-            "Top","Bar","Right","Footer","InsetFooter","Bottom","Left"
-        };
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
+            InvokeStateHasChanged();
         }
+    }
 
-        private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (_applicationProperties.Contains(e.PropertyName))
+    protected override void SetComponentClass()
+    {
+        CssProvider
+            .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
             {
-                InvokeStateHasChanged();
-            }
-        }
+                styleBuilder
+                    .Add($"padding-top:{MasaBlazor!.Application.Top + MasaBlazor.Application.Bar}px")
+                    .Add($"padding-right:{MasaBlazor.Application.Right}px")
+                    .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
+                    .Add($"padding-left:{MasaBlazor.Application.Left}px");
+            })
+            .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
 
-        protected override void SetComponentClass()
+        Attributes.Add("data-booted", IsBooted);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
         {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-main");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
-                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
-                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
-                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
-                })
-                .Apply("wrap", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-main__wrap");
-                });
-
-            Attributes.Add("data-booted", true);
-
-            AbstractProvider
-                .ApplyMainDefault();
+            StateHasChanged();
+            NextTick(() => {  });
         }
+    }
 
-        protected override void OnParametersSet()
-        {
-            MasaBlazor.Application.IsBooted = true;
-        }
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
 
-        protected override void Dispose(bool disposing)
-        {
-            MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
-            base.Dispose(disposing);
-        }
+        MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
     }
 }
