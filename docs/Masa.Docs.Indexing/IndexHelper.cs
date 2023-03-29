@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Masa.Docs
+namespace Masa.Docs.Indexing
 {
     internal static class IndexHelper
     {
@@ -26,12 +26,12 @@ namespace Masa.Docs
             {
                 byte[] bytes = System.Text.Encoding.Unicode.GetBytes(character.Substring(i, 1));
                 //Fetching binary encoded content  
-                string lowCode = System.Convert.ToString(bytes[1], 16);
+                string lowCode = Convert.ToString(bytes[1], 16);
                 if (lowCode.Length == 1)
                 {
                     lowCode = "0" + lowCode;
                 }
-                string hightCode = System.Convert.ToString(bytes[0], 16);
+                string hightCode = Convert.ToString(bytes[0], 16);
                 if (hightCode.Length == 1)
                 {
                     hightCode = "0" + hightCode;
@@ -45,10 +45,7 @@ namespace Masa.Docs
         {
             var slug = str.Trim().ToLower();
             slug = Regex.Replace(slug, @"[\s,.[\]{}()/]+", "-");
-            slug = Regex.Replace(slug, @"[^a-z0-9 -]", delegate (Match m)
-            {
-                return m.Value.CharCodeAt();
-            });
+            slug = Regex.Replace(slug, @"[^a-z0-9 -]", m => m.Value.CharCodeAt());
             slug = Regex.Replace(slug, @"-{2,}", "-");
             slug = Regex.Replace(slug, @"^-*|-*$", "");
             if (Regex.Match(slug[0].ToString(), @"[^a-z]").Success)
@@ -61,7 +58,6 @@ namespace Masa.Docs
         internal static void SetPropertyValue<T, TProperty>(this T t, Expression<Func<T, TProperty?>> selector, TProperty? newValue)
         {
             var valueType = typeof(TProperty);
-            var param_val = Expression.Parameter(typeof(T));
             var valueExpress = Expression.Constant(newValue, valueType);
             if (selector.Body is MemberExpression memberExpression)
             {

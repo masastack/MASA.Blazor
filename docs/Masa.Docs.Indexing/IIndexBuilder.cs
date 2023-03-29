@@ -2,7 +2,7 @@
 {
     public interface IIndexBuilder<TData> where TData : class
     {
-        Task<bool> CreateIndexAsync(IEnumerable<TData>? datas = null);
+        Task<bool> CreateIndexAsync(IEnumerable<TData> tData);
 
         IEnumerable<TData> GenerateRecords();
     }
