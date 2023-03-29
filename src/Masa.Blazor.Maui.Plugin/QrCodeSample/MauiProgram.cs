@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+﻿using BarcodeScanner.Mobile;
+using Microsoft.AspNetCore.Components.WebView.Maui;
 using QrCodeSample.Data;
 using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
@@ -16,7 +17,10 @@ namespace QrCodeSample
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                });
+                }).ConfigureMauiHandlers(handlers =>
+                {
+                    handlers.AddBarcodeScannerHandler();
+                }); ;
 
             builder.Services.AddMauiBlazorWebView();
 #if DEBUG

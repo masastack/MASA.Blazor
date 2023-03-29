@@ -12,7 +12,15 @@
 
     private void ReadBarcode()
     {
-        MasaMauiBarcodeService.ReadBarcode(BarcodeReaderMauiComponent_OnBarcodeDetected);
+
+        if (OperatingSystem.IsAndroid() && OperatingSystem.IsAndroidVersionAtLeast(31))
+        {
+            MasaMauiBarcodeService.ReadBarcode2(BarcodeReaderMauiComponent_OnBarcodeDetected);
+        }
+        else
+        {
+            MasaMauiBarcodeService.ReadBarcode(BarcodeReaderMauiComponent_OnBarcodeDetected);
+        }
     }
     private void BarcodeReaderMauiComponent_OnBarcodeDetected(string barcodeResult)
     {
