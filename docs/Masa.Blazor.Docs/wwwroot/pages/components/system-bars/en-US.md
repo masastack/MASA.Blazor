@@ -1,4 +1,5 @@
 ---
+title: System bars
 desc: "The **MSystemBar** component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text."
 related:
   - /blazor/components/buttons
