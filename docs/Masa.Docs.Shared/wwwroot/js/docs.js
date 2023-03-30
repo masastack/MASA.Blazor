@@ -367,7 +367,7 @@ function slideTo(targetPageY) {
   }, 10);
 }
 
-window.addDocSearch = function (index, isMobile, currentLanguage, placeholder) {
+window.addDocSearch = function (index, currentLanguage, placeholder) {
   let cnTranslation = {
     button: {
       buttonText: "搜索",
@@ -411,7 +411,7 @@ window.addDocSearch = function (index, isMobile, currentLanguage, placeholder) {
     },
   };
 
-  const container = `#docsearch${isMobile ? "-mobile" : ""}`;
+  const container = `#docsearch`;
   let option = {
     container,
     appId: "TSB4MACWRC",
