@@ -2,16 +2,16 @@ name: create doc index dev
 # Create dev doc index,send to ALGOLIA
 # auto create when doc changed
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - docs/MASA.Docs/src/Masa.Framework.Docs/wwwroot/pages/**/zh-CN.md
-      - docs/MASA.Docs/src/Masa.Framework.Docs/wwwroot/pages/**/en-US.md
-      - docs/MASA.Docs/src/Masa.Stack.Docs/wwwroot/pages/**/zh-CN.md
-      - docs/MASA.Docs/src/Masa.Stack.Docs/wwwroot/pages/**/en-US.md
-      - docs/Masa.Blazor.Docs/wwwroot/pages/**/en-US.md
-      - docs/Masa.Blazor.Docs/wwwroot/pages/**/zh-CN.md
+  #push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - docs/MASA.Docs/src/Masa.Framework.Docs/wwwroot/pages/**/zh-CN.md
+  #    - docs/MASA.Docs/src/Masa.Framework.Docs/wwwroot/pages/**/en-US.md
+  #    - docs/MASA.Docs/src/Masa.Stack.Docs/wwwroot/pages/**/zh-CN.md
+  #    - docs/MASA.Docs/src/Masa.Stack.Docs/wwwroot/pages/**/en-US.md
+  #    - docs/Masa.Blazor.Docs/wwwroot/pages/**/en-US.md
+  #    - docs/Masa.Blazor.Docs/wwwroot/pages/**/zh-CN.md
   workflow_dispatch:
 
 jobs:
