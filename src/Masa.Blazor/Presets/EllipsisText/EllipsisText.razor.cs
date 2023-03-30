@@ -55,6 +55,8 @@ public partial class EllipsisText : IAsyncDisposable
 
     private ActivatorRefProps? _activatorRefProps;
 
+    private bool _isDisposed;
+
     protected override void OnParametersSet()
     {
         if (!(Left || Right || Bottom))
@@ -83,13 +85,15 @@ public partial class EllipsisText : IAsyncDisposable
     public void OnEllipsisChange(bool isEllipsis)
     {
         _isDisabled = !isEllipsis;
-        StateHasChanged();
+        if (!_isDisposed)
+            StateHasChanged();
     }
 
     public async ValueTask DisposeAsync()
     {
         try
         {
+            _isDisposed = true;
             _selfReference?.Dispose();
 
             await _resizeObserverDisposable.InvokeVoidAsync("disconnect");
