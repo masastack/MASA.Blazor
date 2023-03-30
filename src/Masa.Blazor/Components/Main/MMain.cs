@@ -48,17 +48,6 @@ public class MMain : BMain
         Attributes.Add("data-booted", IsBooted);
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            StateHasChanged();
-            NextTick(() => {  });
-        }
-    }
-
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);

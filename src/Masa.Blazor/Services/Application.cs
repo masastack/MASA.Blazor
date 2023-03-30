@@ -55,9 +55,10 @@ namespace Masa.Blazor
             get => _left;
             internal set
             {
+                LeftRightCalculated = true;
+
                 if (_left != value)
                 {
-                    LeftRightCalculated = true;
                     _left = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
                 }
@@ -69,9 +70,10 @@ namespace Masa.Blazor
             get => _insetFooter;
             internal set
             {
+                FooterCalculated = true;
+
                 if (_insetFooter != value)
                 {
-                    FooterCalculated = true;
                     _insetFooter = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InsetFooter)));
                 }
@@ -83,9 +85,10 @@ namespace Masa.Blazor
             get => _right;
             internal set
             {
+                LeftRightCalculated = true;
+
                 if (_right != value)
                 {
-                    LeftRightCalculated = true;
                     _right = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));
                 }
@@ -110,9 +113,10 @@ namespace Masa.Blazor
             get => _footer;
             internal set
             {
+                FooterCalculated = true;
+
                 if (_footer != value)
                 {
-                    FooterCalculated = true;
                     _footer = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Footer)));
                 }
