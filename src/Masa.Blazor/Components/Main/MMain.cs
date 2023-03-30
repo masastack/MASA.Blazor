@@ -15,7 +15,7 @@ public class MMain : BMain
     /// <summary>
     /// Avoid an entry animation on page load.
     /// </summary>
-    protected override bool IsBooted => MasaBlazor is not null && MasaBlazor.Application.LeftRightCalculated;
+    protected override bool IsBooted => MasaBlazor is not null && (MasaBlazor.Application.LeftRightCalculated || !MasaBlazor.Application.HasNavigationDrawer);
 
     protected override void OnInitialized()
     {

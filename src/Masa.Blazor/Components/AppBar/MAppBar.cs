@@ -74,7 +74,7 @@ namespace Masa.Blazor
         /// <summary>
         /// Avoid an entry animation on page load.
         /// </summary>
-        protected override bool IsBooted => MasaBlazor is not null && MasaBlazor.Application.LeftRightCalculated;
+        protected override bool IsBooted => MasaBlazor is not null && (MasaBlazor.Application.LeftRightCalculated || !MasaBlazor.Application.HasNavigationDrawer);
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||

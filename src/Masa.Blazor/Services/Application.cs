@@ -12,17 +12,13 @@ namespace Masa.Blazor
         private double _bottom;
         private double _footer;
 
+        internal bool HasNavigationDrawer { get; set; }
+
         /// <summary>
         /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
         /// The value would be set when value was calculated from JS.
         /// </summary>
         public bool LeftRightCalculated { get; private set; }
-
-        /// <summary>
-        /// Determines if the value of <see cref="InsetFooter"/> or <see cref="Footer"/> has been set.
-        /// The value would be set when value was calculated from JS.
-        /// </summary>
-        public bool FooterCalculated { get; private set; }
 
         public double Bar
         {
@@ -70,8 +66,6 @@ namespace Masa.Blazor
             get => _insetFooter;
             internal set
             {
-                FooterCalculated = true;
-
                 if (_insetFooter != value)
                 {
                     _insetFooter = value;
@@ -113,8 +107,6 @@ namespace Masa.Blazor
             get => _footer;
             internal set
             {
-                FooterCalculated = true;
-
                 if (_footer != value)
                 {
                     _footer = value;
