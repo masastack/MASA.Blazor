@@ -12,11 +12,13 @@ namespace Masa.Blazor
         private double _bottom;
         private double _footer;
 
+        /// <summary>
+        /// Determines if the application has a navigation drawer(required the App property).
+        /// </summary>
         internal bool HasNavigationDrawer { get; set; }
 
         /// <summary>
         /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
-        /// The value would be set when value was calculated from JS.
         /// </summary>
         public bool LeftRightCalculated { get; private set; }
 
