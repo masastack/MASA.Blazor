@@ -1,6 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-public class Weight
+namespace Masa.Docs.Indexing.Data;
+
+public record Weight
 {
     [JsonPropertyName("pageRank")]
     public string PageRank { get; set; } = "0";
@@ -13,7 +15,6 @@ public class Weight
 
     public override string ToString()
     {
-        return $"PageRank:{PageRank};Level：{Level};Postion:{Position}";
+        return $"PageRank:{PageRank};Level：{Level}; Position: {Position}";
     }
 }
-

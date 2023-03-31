@@ -1,15 +1,10 @@
 ﻿using System.Text.Json.Serialization;
 namespace Masa.Docs.Indexing.Data;
+
 public class Record
 {
     [JsonPropertyName("objectID")]
-    public string ObjectID
-    {
-        get
-        {
-            return Weight.Position + "-" + Lang + "-" + UrlWithoutAnchor;
-        }
-    }
+    public string ObjectId => Weight!.Position + "-" + Lang + "-" + UrlWithoutAnchor;
 
     [JsonPropertyName("version")]
     public string Version { get; set; } = string.Empty;
@@ -36,53 +31,61 @@ public class Record
     public string? ContentCamel { get; set; } = null;
 
     [JsonPropertyName("lang")]
-    public string Lang { get; private set; }
+    public string Lang { get; }
 
     [JsonPropertyName("language")]
-    public string Language { get; private set; }
+    public string Language { get; }
 
     [JsonPropertyName("type")]
-    public string Type { get; private set; }
+    public string? Type { get; private set; }
 
     [JsonPropertyName("no_variables")]
-    public bool NoVariables { get; set; } = false;
+    public bool NoVariables { get; set; } = true;
 
     [JsonPropertyName("weight")]
-    public Weight Weight { get; private set; }
+    public Weight? Weight { get; }
 
     [JsonPropertyName("hierarchy")]
     public Hierarchy Hierarchy { get; private set; }
 
     [JsonPropertyName("recordVersion")]
-    public string RecordVersion { get; private set; }
+    public string RecordVersion { get; }
 
-    public Record(string lang, string docUrl, string rootName, RecordType type, int level, int position, int pageRank = 0)
+    public Record(string lang, string? docUrl, string? rootName, RecordType type, int? level, int? position, int pageRank = 0) : this(lang, docUrl, rootName, position, pageRank)
+    {
+        SetType(type);
+        Weight ??= new();
+        Weight.Level = level;
+    }
+
+    public Record(string lang, string? docUrl, string? rootName, int? position, int pageRank = 0)
     {
         Url = docUrl;
         UrlWithoutAnchor = docUrl;
         UrlWithoutVariables = docUrl;
         Lang = lang;
         Language = lang;
-        Hierarchy = new()
+        Hierarchy = new Hierarchy
         {
             Lvl0 = rootName
         };
-        Tags = new();
-        Type = type.ToString().ToLowerInvariant();
-        Weight = new Weight
-        {
-            Level = level,
-            PageRank = pageRank.ToString(),
-            Position = position,
-        };
+        Tags = new List<object>();
+        Weight ??= new();
+        Weight.PageRank = pageRank.ToString();
+        Weight.Position = position;
         RecordVersion = Data.RecordVersion.V3.ToString().ToLower();//now it support v3 only
     }
 
     public void ClonePrerecord(Record fromRecord)
     {
-        Hierarchy = fromRecord.Hierarchy;
+        Hierarchy = fromRecord.Hierarchy with{ };
         Anchor = fromRecord.Anchor;
         UrlWithoutVariables = fromRecord.UrlWithoutVariables;
         Url = fromRecord.Url;
+    }
+
+    public void SetType(RecordType type)
+    {
+        Type = type.ToString().ToLowerInvariant();
     }
 }

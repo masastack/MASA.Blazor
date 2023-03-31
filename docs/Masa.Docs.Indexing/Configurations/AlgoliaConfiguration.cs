@@ -24,6 +24,7 @@ namespace Masa.Docs.Indexing.Configurations
         {
             _logger = logger;
         }
+
         public void Configure(AlgoliaOptions options)
         {
             TrySetOptionFromEnvironmentVariables(options);
@@ -37,9 +38,9 @@ namespace Masa.Docs.Indexing.Configurations
             }
 
             #region check option
-            options.Projects.AssertParamNotNull(nameof(options.Projects));
-            options.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
-            options.ApplicationId.AssertParamNotNull(nameof(options.ApplicationId));
+            options.Projects.AssertNotNullOrEmpty(nameof(options.Projects));
+            options.AlgoliaApiKey.AssertNotNullOrEmpty(ALGOLIA_API_KEY);
+            options.ApplicationId.AssertNotNullOrEmpty(nameof(options.ApplicationId));
             AssertDirectoryExist(options.RootDocsPath);
             #endregion
         }
@@ -50,17 +51,15 @@ namespace Masa.Docs.Indexing.Configurations
             {
                 var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
                 _logger.LogInformation("env: {0}, has value: {1}", envName, !string.IsNullOrEmpty(value));
-                if (value is not null)
+                if (value is null) return;
+                if (delimiter != null)
                 {
-                    if (delimiter != null)
-                    {
-                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
-                        algoliaOptions.SetPropertyValue(propertyOrFieldName, valueSet);
-                    }
-                    else
-                    {
-                        algoliaOptions.SetPropertyValue(propertyOrFieldName, value);
-                    }
+                    var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
+                    algoliaOptions.SetPropertyValue(propertyOrFieldName, valueSet);
+                }
+                else
+                {
+                    algoliaOptions.SetPropertyValue(propertyOrFieldName, value);
                 }
             }
 

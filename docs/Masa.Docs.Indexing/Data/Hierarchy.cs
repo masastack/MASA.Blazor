@@ -1,6 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-public class Hierarchy
+namespace Masa.Docs.Indexing.Data;
+
+public record Hierarchy
 {
     [JsonPropertyName("lvl0")]
     public string? Lvl0 { get; set; }
@@ -22,5 +24,9 @@ public class Hierarchy
 
     [JsonPropertyName("lvl6")]
     public string? Lvl6 { get; set; }
-}
 
+    public override string ToString()
+    {
+        return $"{Lvl0}-{Lvl1}-{Lvl2}-{Lvl3}-{Lvl4}-{Lvl5}-{Lvl6}";
+    }
+}
