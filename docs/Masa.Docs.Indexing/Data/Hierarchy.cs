@@ -1,28 +1,28 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Masa.Docs.Indexing.Data;
 
 public record Hierarchy
 {
-    [JsonPropertyName("lvl0")]
+    [JsonProperty("lvl0")]
     public string? Lvl0 { get; set; }
 
-    [JsonPropertyName("lvl1")]
+    [JsonProperty("lvl1")]
     public string? Lvl1 { get; set; }
 
-    [JsonPropertyName("lvl2")]
+    [JsonProperty("lvl2")]
     public string? Lvl2 { get; set; }
 
-    [JsonPropertyName("lvl3")]
+    [JsonProperty("lvl3")]
     public string? Lvl3 { get; set; }
 
-    [JsonPropertyName("lvl4")]
+    [JsonProperty("lvl4")]
     public string? Lvl4 { get; set; }
 
-    [JsonPropertyName("lvl5")]
+    [JsonProperty("lvl5")]
     public string? Lvl5 { get; set; }
 
-    [JsonPropertyName("lvl6")]
+    [JsonProperty("lvl6")]
     public string? Lvl6 { get; set; }
 
     public override string ToString()
