@@ -1,54 +1,55 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+
 namespace Masa.Docs.Indexing.Data;
 
 public class Record
 {
-    [JsonPropertyName("objectID")]
+    [JsonProperty("objectID")]
     public string ObjectId => Weight!.Position + "-" + Lang + "-" + UrlWithoutAnchor;
 
-    [JsonPropertyName("version")]
+    [JsonProperty("version")]
     public string Version { get; set; } = string.Empty;
 
-    [JsonPropertyName("tags")]
+    [JsonProperty("tags")]
     public List<object> Tags { get; set; }
 
-    [JsonPropertyName("url")]
+    [JsonProperty("url")]
     public string? Url { get; set; }
 
-    [JsonPropertyName("url_without_variables")]
+    [JsonProperty("url_without_variables")]
     public string? UrlWithoutVariables { get; set; }
 
-    [JsonPropertyName("url_without_anchor")]
+    [JsonProperty("url_without_anchor")]
     public string? UrlWithoutAnchor { get; set; }
 
-    [JsonPropertyName("anchor")]
+    [JsonProperty("anchor")]
     public string? Anchor { get; set; } = null;
 
-    [JsonPropertyName("content")]
+    [JsonProperty("content")]
     public string? Content { get; set; } = null;
 
-    [JsonPropertyName("content_camel")]
+    [JsonProperty("content_camel")]
     public string? ContentCamel { get; set; } = null;
 
-    [JsonPropertyName("lang")]
+    [JsonProperty("lang")]
     public string Lang { get; }
 
-    [JsonPropertyName("language")]
+    [JsonProperty("language")]
     public string Language { get; }
 
-    [JsonPropertyName("type")]
+    [JsonProperty("type")]
     public string? Type { get; private set; }
 
-    [JsonPropertyName("no_variables")]
+    [JsonProperty("no_variables")]
     public bool NoVariables { get; set; } = true;
 
-    [JsonPropertyName("weight")]
+    [JsonProperty("weight")]
     public Weight? Weight { get; }
 
-    [JsonPropertyName("hierarchy")]
+    [JsonProperty("hierarchy")]
     public Hierarchy Hierarchy { get; private set; }
 
-    [JsonPropertyName("recordVersion")]
+    [JsonProperty("recordVersion")]
     public string RecordVersion { get; }
 
     public Record(string lang, string? docUrl, string? rootName, RecordType type, int? level, int? position, int pageRank = 0) : this(lang, docUrl, rootName, position, pageRank)
