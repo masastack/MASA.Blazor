@@ -189,7 +189,44 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     {
         if (_echarts == null) return;
 
-        await _echarts.SetOptionAsync(option ?? Option, notMerge, lazyUpdate);
+        option ??= Option;
+        if (IsAnyFunction(option, out string optionJson))
+        {
+            optionJson = FormatterFunction(optionJson);
+            await _echarts.SetOptionStrAsync(optionJson, notMerge, lazyUpdate);
+        }
+        else
+        {
+            await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+        }
+    }
+
+    public static bool IsAnyFunction(object option, out string optionJson)
+    {
+        if (option is null)
+        {
+            optionJson = string.Empty;
+            return false;
+        }
+        optionJson = JsonSerializer.Serialize(option);
+        return optionJson.Contains("function");
+    }
+
+    public static string FormatterFunction(string optionJson)
+    {
+        string pattern = @":\s*""\s*function\s?\(.*\)\s?\{.+\}[\s;]?""[\n\s]?";
+        var regex = new Regex(pattern);
+
+        string newOptionJson = regex.Replace(optionJson,
+            (m) =>
+            {
+                string newValue = m.Value.Trim()
+                    .Substring(2, m.Value.Length - 3)
+                    .Replace("\\u0022", "\"");
+                newValue = $" : {newValue}";
+                return newValue;
+            });
+        return newOptionJson;
     }
 
     public async Task Resize(double width = 0, double height = 0)
