@@ -10,7 +10,7 @@ namespace Masa.Docs.Indexing.Configurations
 
         public const string ALGOLIA_APP_ID = "MASA_ALGOLIA_APP_ID";
 
-        public const string ALGOLIA_INDEX_PREFIX = "MASA_ALGOLIA_INDEXP_REFIX";
+        public const string ALGOLIA_INDEX_PREFIX = "MASA_ALGOLIA_INDEX_PREFIX";
 
         public const string ROOT_DOCS_PATH = "MASA_ROOT_DOCS_PATH";
 
