@@ -117,7 +117,7 @@
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>

@@ -17,9 +17,16 @@
         <div class="flex-1-1-auto d-flex justify-end">
             @if (!string.IsNullOrEmpty(Project))
             {
-                <Search @ref="_algoliaSearch" IndexName="@(Env+Project)" />
+                <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
             }
         </div>
+    }
+    else
+    {
+        @if (!string.IsNullOrEmpty(Project))
+        {
+            <Search @ref="_algoliaSearch" />
+        }
     }
 
     <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
@@ -36,11 +43,11 @@
 
 @code {
 
-    [Parameter]
+    [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
 
-    [Parameter]
-    public string? Env { get; set; }
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; } = null;
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
@@ -49,8 +56,8 @@
 
     public async Task OnCultureChangedLocal(string value)
     {
-        await _algoliaSearch!.InitDocSearchAsync();
         await OnCultureChanged.InvokeAsync(value);
+        await _algoliaSearch!.InitDocSearchAsync();
     }
 
     [Parameter]

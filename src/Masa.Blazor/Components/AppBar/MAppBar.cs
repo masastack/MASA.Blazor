@@ -7,8 +7,9 @@ namespace Masa.Blazor
     {
         private readonly string[] _applicationProperties = new string[]
         {
-            "IsBooted","Left","Bar","Right"
+            "Left","Bar","Right"
         };
+
         private Scroller _scroller;
 
         [Parameter]
@@ -70,11 +71,16 @@ namespace Masa.Blazor
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
+        /// <summary>
+        /// Avoid an entry animation on page load.
+        /// </summary>
+        protected override bool IsBooted => MasaBlazor is not null && MasaBlazor.Application.LeftRightCalculated;
+
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
                                  HideOnScroll ||
                                  CollapseOnScroll ||
-                                 MasaBlazor.Application.IsBooted ||
+                                 MasaBlazor.Application.LeftRightCalculated ||
                                  !Value;
 
         protected double ScrollRatio

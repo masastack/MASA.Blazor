@@ -1,6 +1,6 @@
 ---
 title: Popup service
-content: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm** and **Prompt**."
+desc: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm** and **Prompt**."
 tag: Service
 related:
   - /blazor/components/dialogs

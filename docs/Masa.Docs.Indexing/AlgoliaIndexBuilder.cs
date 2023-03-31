@@ -1,88 +1,51 @@
-﻿using Algolia.Search.Clients;
+﻿using System.Globalization;
+using Algolia.Search.Clients;
 using Algolia.Search.Models.Settings;
 using Markdig;
+using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
 using Masa.Docs.Indexing.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Reflection.Metadata;
 using System.Text;
-using System.Xml.Linq;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.Converters;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Masa.Docs.Indexing
 {
     /// <summary>
     /// builder algolia index from local markdown files
     /// </summary>
-    /// <typeparam name="TData"></typeparam>
     public class AlgoliaIndexBuilder : IIndexBuilder<RecordRoot>
     {
-        public const string ALGOLIA_API_KEY = "MASA_ALGOLIA_API_KEY";
-
-        public const string ALGOLIA_APP_ID = "MASA_ALGOLIA_APP_ID";
-
-        public const string ALGOLIA_INDEX_PREFIX = "MASA_ALGOLIA_INDEXP_REFIX";
-
-        public const string ROOT_DOCS_PATH = "MASA_ROOT_DOCS_PATH";
-
-        public const string DOC_DOMAIN = "MASA_DOC_DOMAIN";
-
-        public const string MASA_DOC_EXCLUDE_URLS = "MASA_DOC_EXCLUDE_URLS";
-
         private readonly ILogger _logger;
 
         private readonly SearchClient _searchClient;
 
         private readonly AlgoliaOptions _algoliaOption;
 
+        private readonly List<string> _totalFiles = new();
+
+        public List<string> TotalFiles
+        {
+            get
+            {
+                if (!_totalFiles.Any())
+                    SetAllFile();
+                return _totalFiles;
+            }
+        }
+
         public AlgoliaIndexBuilder(
              ILogger<AlgoliaIndexBuilder> logger, IOptions<AlgoliaOptions> algoliaOption)
         {
-            _algoliaOption = GetRealAlgoliaOptions(algoliaOption.Value);
-            _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
             _logger = logger;
-        }
-
-        private AlgoliaOptions GetRealAlgoliaOptions(AlgoliaOptions algoliaOptions)
-        {
-            void SetPropertyFromEnviroment(string envName, Expression<Func<AlgoliaOptions, object?>> selector, string? delimiter = null)
-            {
-                var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
-                if (value is not null)
-                {
-                    if (delimiter != null)
-                    {
-                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
-                        algoliaOptions.SetPropertyValue(selector, valueSet);
-                    }
-                    else
-                    {
-                        algoliaOptions.SetPropertyValue(selector, value);
-                    }
-                }
-            }
-            SetPropertyFromEnviroment(ALGOLIA_APP_ID, x => x.ApplicationId);
-            SetPropertyFromEnviroment(ALGOLIA_API_KEY, x => x.AlgoliaApiKey);
-            SetPropertyFromEnviroment(ALGOLIA_INDEX_PREFIX, x => x.IndexPrefix);
-            SetPropertyFromEnviroment(ROOT_DOCS_PATH, x => x.RootDocsPath);
-            SetPropertyFromEnviroment(DOC_DOMAIN, x => x.DocDomain);
-            SetPropertyFromEnviroment(MASA_DOC_EXCLUDE_URLS, x => x.ExcludedUrls, "||");
-
-            algoliaOptions.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
-            algoliaOptions.ApplicationId.AssertParamNotNull(nameof(algoliaOptions.ApplicationId));
-            algoliaOptions.Projects.AssertParamNotNull(nameof(algoliaOptions.Projects));
-            AssertDirectoryExist(algoliaOptions.RootDocsPath);
-            return algoliaOptions;
-        }
-
-        private void AssertDirectoryExist(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                throw new DirectoryNotFoundException($"Can not found directory `{path}`, please check config.");
-            }
+            _algoliaOption = algoliaOption.Value;
+            if (!_totalFiles.Any())
+                SetAllFile();
+            _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
         }
 
         private IndexSettings GetIndexSetting()
@@ -95,7 +58,7 @@ namespace Masa.Docs.Indexing
                     "desc(weight.level)",
                     "asc(weight.position)",
                 },
-                Ranking = new() { "words", "filters", "typo", "attribute", "proximity", "exact", "custom", },
+                Ranking = new List<string> { "words", "filters", "typo", "attribute", "proximity", "exact", "custom", },
                 HighlightPreTag = @"<span class=""algolia-docsearch-suggestion--highlight"">",
                 HighlightPostTag = "</span>",
                 SearchableAttributes = new List<string>() {
@@ -107,9 +70,9 @@ namespace Masa.Docs.Indexing
                     "unordered(hierarchy.lvl6)",
                     "content",
                 },
-                AttributesToHighlight = new() { "hierarchy", "content" },
-                AttributesToSnippet = new() { "content:10", },
-                CamelCaseAttributes = new() { "hierarchy", "hierarchy_radio", "content" },
+                AttributesToHighlight = new List<string> { "hierarchy", "content" },
+                AttributesToSnippet = new List<string> { "content:10", },
+                CamelCaseAttributes = new List<string> { "hierarchy", "hierarchy_radio", "content" },
                 Distinct = true,
                 AttributeForDistinct = "url",
                 AllowTyposOnNumericTokens = false,
@@ -119,7 +82,7 @@ namespace Masa.Docs.Indexing
                 MinWordSizefor1Typo = 3,
                 MinWordSizefor2Typos = 7,
                 RemoveWordsIfNoResults = "allOptional",
-                AttributesToRetrieve = new()
+                AttributesToRetrieve = new List<string>
                 {
                     "hierarchy",
                     "content",
@@ -128,58 +91,93 @@ namespace Masa.Docs.Indexing
                     "url_without_anchor",
                     "type",
                 },
-                AttributesForFaceting = new() { $"filterOnly({nameof(Record.Lang).ToLower()})", "type" },
+                AttributesForFaceting = new List<string> { $"filterOnly({nameof(Record.Lang).ToLower()})", "type" },
             };
         }
 
-        public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot>? datas = null)
+        public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot> records, CancellationToken ct = default)
         {
-            datas = datas ?? GenerateRecords();
-
-            if (datas != null)
+            try
             {
-                _logger.LogInformation($"Create index with {datas.Count()} pages.");
-                var indexNames = datas.Select(x => x.IndexName).Distinct().ToList();
+                _logger.LogInformation($"Create index with {records.Count()} pages.");
+                var indexNames = records.Select(x => x.IndexName).Distinct();
                 foreach (var indexName in indexNames)
                 {
                     var index = _searchClient.InitIndex(indexName);
-                    await index.SetSettingsAsync(GetIndexSetting());
-                    var allRecords = datas.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
-                    await index.SaveObjectsAsync(allRecords);
+                    await index.SetSettingsAsync(GetIndexSetting(), ct: ct);
+                    var allRecords = records.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
+                    await index.ClearObjectsAsync(ct: ct);
+                    await index.SaveObjectsAsync(allRecords, ct: ct);
                 }
                 _logger.LogInformation($"Index creation complete.");
                 return true;
             }
-            return false;
-        }
-
-        private IEnumerable<Record> PraseDocument(string content, string docUrl, string lang, string project)
-        {
-            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-            var md = Markdown.Parse(content, pipeline);
-            return GetRecords(md, lang, docUrl, project);
-        }
-
-        private IEnumerable<Record> GetRecords(MarkdownDocument document, string lang, string docUrl, string project)
-        {
-            void AddContentToRecord(string lang, string docUrl, string project, int position, in List<Record> result, in Record lastRecord, ref string? content)
+            catch (Exception e)
             {
-                if (content != null && lastRecord != null)
+                _logger.LogError(e, "CreateIndexAsync got an error: {0}!", e.Message);
+                return false;
+            }
+        }
+
+        private IEnumerable<Record> ParseDocument(string docContent, string docUrl, string lang, string project)
+        {
+            var pipeline = new MarkdownPipelineBuilder().UseYamlFrontMatter().UseAdvancedExtensions().Build();
+            var document = Markdown.Parse(docContent, pipeline);
+
+            void AddContentToRecord(string lan, string url, string projectName, int position, in List<Record> result, in Record lastRecord, ref string? content)
+            {
+                if (string.IsNullOrEmpty(content))
                 {
-                    var record = new Record(lang, docUrl, project, RecordType.Content, position: position, level: 0, pageRank: 0);
-                    record.ClonePrerecord(lastRecord);
-                    record.Content = content;
-                    record.ContentCamel = content;
                     content = null;
-                    result.Add(record);
+                    return;
                 }
+                var record = new Record(lan, url, projectName, RecordType.Content, position: position, level: 0, pageRank: 0);
+                record.ClonePrerecord(lastRecord);
+                record.Content = content;
+                record.ContentCamel = content;
+                content = null;
+                result.Add(record);
             }
 
-            Record? AddHeaderRecord(string lang, string docUrl, string project, int position, in HeadingBlock block, uint firstHeadLevel, in Record? lastRecord = null)
+            string? GetContentFromInline(ContainerInline? container)
             {
-                RecordType recordType = RecordType.Lvl1;
-                int level = 90;
-                switch (block.Level - firstHeadLevel + 1)
+                if (container == null) return null;
+                foreach (var htmlInline in container.FindDescendants<HtmlInline>())
+                {
+                    htmlInline.Remove();
+                }
+                foreach (var inline in container.FindDescendants<LineBreakInline>())
+                {
+                    inline.Remove();
+                }
+
+                if (container.FirstChild is null) return null;
+                string? result = null;
+                foreach (var inline in container)
+                {
+                    Func<string?> func = inline switch
+                    {
+                        CodeInline code => () => code.DelimiterCount == 1 ? code.Content : null,//only get the ` code inline
+                        EmphasisInline emphasisInline => () => emphasisInline.FirstChild?.ToString(),
+                        LiteralInline literalInline => () => literalInline.Content.ToString(),
+                        LinkInline linkInline => () => string.IsNullOrWhiteSpace(linkInline.Title) ? linkInline.Url : linkInline.Title,
+                        null => () => null,
+                        _ => () => inline.ToString()
+                    };
+                    var inlineText = func();
+                    _logger.LogDebug(
+                        $"======== {inline?.GetType()} {Environment.NewLine} {inlineText} {Environment.NewLine}");
+                    result += inlineText;
+                }
+
+                return result;
+            }
+
+            Record? AddHeaderRecord(string lan, string url, string projectName, int position, in HeadingBlock block, uint firstLevel, in Record? lastRecord = null)
+            {
+                RecordType recordType;
+                int level;
+                switch (block.Level - firstLevel + 1)
                 {
                     case 1:
                         recordType = RecordType.Lvl1;
@@ -208,13 +206,13 @@ namespace Masa.Docs.Indexing
                     default:
                         return null;
                 }
-                Record record = new Record(lang, docUrl, project, recordType, position: position, level: level, pageRank: 0);
+                Record record = new Record(lan, url, projectName, recordType, position: position, level: level, pageRank: 0);
                 if (lastRecord is not null)
                 {
                     record.ClonePrerecord(lastRecord);
                 }
-                var content = block.Inline?.FirstChild?.ToString();
-                if (content != null)
+                var content = GetContentFromInline(block.Inline);
+                if (!string.IsNullOrWhiteSpace(content))
                 {
                     switch (recordType)
                     {
@@ -246,51 +244,111 @@ namespace Masa.Docs.Indexing
                 return record;
             }
 
+            Record AddYamlHeaderRecord(string lan, string projectName, int position, string content)
+            {
+                var recordType = RecordType.Lvl1;
+                var level = 90;
+                Record record = new Record(lan, docUrl, projectName, recordType, position: position, level: level, pageRank: 0);
+                record.Hierarchy.Lvl1 = content;
+                record.Anchor = content.HashToAnchorString();
+                record.Url = docUrl + "#" + record.Anchor;
+                record.UrlWithoutVariables = record.Url;
+                return record;
+            }
+
             int position = 0;
             var result = new List<Record>();
             Record? record = null;
             string? content = null;
-            (uint firstHeadLevel, bool setedValue) = (1, false);
+            (uint firstHeadLevel, bool isSet) = (1, false);
             foreach (var node in document.AsEnumerable())
             {
-                if (node is HeadingBlock block)
+                Record? lastRecord;
+                switch (node)
                 {
-                    if (!setedValue)
-                    {
-                        firstHeadLevel = (uint)block.Level;
-                        setedValue = true;
-                    }
-                    var lastRecord = record;
-                    //add content to record when meet a new head and will not do it at the first step
-                    if (lastRecord is not null && content is not null)
-                    {
-                        AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref content);
+                    case YamlFrontMatterBlock yamlBlock:
+                        var yamlText = docContent.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length).Trim('-');
+                        var deserializer = new DeserializerBuilder()
+                            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                            .WithTypeConverter(new DateTimeConverter(
+                                formats: new[] { "yyyy/MM/dd hh:mm:ss", "yyyy/MM/dd hh:mm", "yyyy/MM/dd" })
+                            )
+                            .BuildValueDeserializer();
+                        var meta = Deserializer.FromValueDeserializer(deserializer)
+                            .Deserialize<DescriptionYaml>(yamlText);
+                        if (!isSet)
+                        {
+                            firstHeadLevel = 1;
+                            isSet = true;
+                        }
+                        if (string.IsNullOrWhiteSpace(meta.Title))
+                        {
+                            throw new Exception($"document : {docUrl} do not contain a title,please check it");
+                        }
+                        record = AddYamlHeaderRecord(lang, project, position, meta.Title!);
+                        result.Add(record);
+                        lastRecord = record;
                         position += 1;
-                    }
-                    record = AddHeaderRecord(lang, docUrl, project, position, block, firstHeadLevel, lastRecord);
-                    if (record is not null)
-                    {
-                        result.Add(record!);
-                        position += 1;
-                    }
+                        if (!string.IsNullOrEmpty(meta.Desc))
+                        {
+                            var descContent = meta.Desc;
+                            AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref descContent);
+                            position += 1;
+                        }
+                        break;
+                    case HeadingBlock block:
+                        if (!isSet)
+                        {
+                            firstHeadLevel = (uint)block.Level;
+                            isSet = true;
+                        }
+                        lastRecord = record;
+                        //add content to record when meet a new head and will not do it at the first step
+                        if (lastRecord is not null && !string.IsNullOrEmpty(content))
+                        {
+                            AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref content);
+                            position += 1;
+                        }
+                        record = AddHeaderRecord(lang, docUrl, project, position, block, firstHeadLevel, lastRecord);
+                        if (record is not null)
+                        {
+                            result.Add(record);
+                            position += 1;
+                        }
+                        break;
+                    case ParagraphBlock paragraph:
+                        content += GetContentFromInline(paragraph.Inline);
+                        break;
                 }
-                if (node is ParagraphBlock paragraph)
-                {
-                    content += paragraph.Inline?.FirstChild?.ToString();
-                }
+
+                _logger.LogDebug(string.Format("nodeType:{0}\t{1}\t{2}\n{3}\n", node.GetType().Name, docUrl,
+                    position, content));
             }
-            var lastPostion = result.LastOrDefault()?.Weight?.Position;
-            if (lastPostion is not null)
+            var lastPosition = result.LastOrDefault()?.Weight.Position;
+            if (lastPosition is not null)
             {
-                position = lastPostion.Value + 1;
+                position = lastPosition.Value + 1;
             }
             else
             {
                 position += 1;
             }
-            AddContentToRecord(lang, docUrl, project, position, result, record!, ref content);
-            if (record is not null) result.Add(record!);
+            if (!string.IsNullOrEmpty(content) && record is not null)
+            {
+                AddContentToRecord(lang, docUrl, project, position, result, record!, ref content);
+                result.Add(record);
+            }
             return result;
+        }
+
+        private void SetAllFile()
+        {
+            _totalFiles.Clear();
+            foreach (var projectItem in _algoliaOption.Projects!)
+            {
+                var projectPhysicalPath = Path.Combine(_algoliaOption.RootDocsPath, projectItem.Value);
+                _totalFiles.AddRange(Directory.GetFiles(projectPhysicalPath, "??-??.md", SearchOption.AllDirectories));
+            }
         }
 
         public IEnumerable<RecordRoot> GenerateRecords()
@@ -300,10 +358,9 @@ namespace Masa.Docs.Indexing
             foreach (var projectItem in _algoliaOption.Projects!)
             {
                 var project = projectItem.Key;
-                var urls = new HashSet<string>();
                 var projectPhysicalPath = Path.Combine(_algoliaOption.RootDocsPath, projectItem.Value);
-                var totalFiles = Directory.GetFiles(projectPhysicalPath, "??-??.md", SearchOption.AllDirectories);
-                foreach (var fileName in totalFiles)
+                var projectFiles = TotalFiles.Where(x => x.StartsWith(projectPhysicalPath));
+                foreach (var fileName in projectFiles)
                 {
                     string? language = null;
                     var lowerFileName = fileName.ToLower();
@@ -315,29 +372,25 @@ namespace Masa.Docs.Indexing
                     {
                         language = "en";
                     }
-                    if (language != null)
+
+                    if (language == null) continue;
+                    var dir = Path.GetDirectoryName(fileName);
+                    if (dir == null) continue;
+                    var url = dir.Replace(projectPhysicalPath, "").Replace(Path.DirectorySeparatorChar, '/');
+                    var lowerProject = project.ToLower();
+                    var projectUrl = lowerProject + url;
+                    if (_algoliaOption.ExcludedUrls?.Any(u => u.EndsWith(projectUrl)) is true)
                     {
-                        var dir = Path.GetDirectoryName(fileName);
-                        if (dir == null) continue;
-                        var url = dir.Replace(projectPhysicalPath, "").Replace(Path.DirectorySeparatorChar, '/');
-                        var lowerProjcet = project.ToLower();
-                        var projectUrl = lowerProjcet + url;
-                        if (_algoliaOption.ExcludedUrls?.Any(u => u.EndsWith(projectUrl)) is true)
-                        {
-                            continue;
-                        }
-                        var uri = new Uri(baseUri, projectUrl);
-                        var docUrl = uri.ToString();
-                        var content = File.ReadAllText(fileName, Encoding.UTF8);
-                        var indexName = $"{_algoliaOption.IndexPrefix}{lowerProjcet}";
-                        RecordRoot recordRoot = new(indexName);
-                        var records = PraseDocument(content, docUrl, language, project);
-                        if (records.Any())
-                        {
-                            recordRoot.Records.AddRange(records);
-                            result.Add(recordRoot);
-                        }
+                        continue;
                     }
+                    var uri = new Uri(baseUri, projectUrl);
+                    var docUrl = uri.ToString();
+                    var content = File.ReadAllText(fileName, Encoding.UTF8);
+                    var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProject}";
+                    RecordRoot recordRoot = new(indexName);
+                    var records = ParseDocument(content, docUrl, language, project);
+                    recordRoot.Records.AddRange(records);
+                    result.Add(recordRoot);
                 }
             }
             return result;
