@@ -13,16 +13,14 @@ namespace Masa.Blazor
         private double _footer;
 
         /// <summary>
-        /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
-        /// The value would be set when value was calculated from JS.
+        /// Determines if the application has a navigation drawer(required the App property).
         /// </summary>
-        public bool LeftRightCalculated { get; private set; }
+        internal bool HasNavigationDrawer { get; set; }
 
         /// <summary>
-        /// Determines if the value of <see cref="InsetFooter"/> or <see cref="Footer"/> has been set.
-        /// The value would be set when value was calculated from JS.
+        /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
         /// </summary>
-        public bool FooterCalculated { get; private set; }
+        public bool LeftRightCalculated { get; private set; }
 
         public double Bar
         {
@@ -70,8 +68,6 @@ namespace Masa.Blazor
             get => _insetFooter;
             internal set
             {
-                FooterCalculated = true;
-
                 if (_insetFooter != value)
                 {
                     _insetFooter = value;
@@ -113,8 +109,6 @@ namespace Masa.Blazor
             get => _footer;
             internal set
             {
-                FooterCalculated = true;
-
                 if (_footer != value)
                 {
                     _footer = value;
