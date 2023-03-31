@@ -50,4 +50,4 @@ jobs:
         MASA_ALGOLIA_APP_ID: "TSB4MACWRC"
         MASA_ALGOLIA_INDEX_PREFIX: "blazor-masastack_prd_"
         MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"
-      run: dotnet run --project docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj -c Release
+      run: dotnet run --project docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj --no-launch-profile -c Release
