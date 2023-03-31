@@ -356,6 +356,12 @@ a.text-dec-none {
         color: rgb(255 255 255 / 60%) !important;
     }
 
+    .doc-list-nav--item-hash {
+        transition-property: background-color, color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
+    }
+
 .tag-chip {
     border-radius: 6px !important;
     height: 36px !important;
