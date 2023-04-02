@@ -727,7 +727,7 @@ input[type=number] {
     display: inline-block;
 }
 
-.theme--light.m-application code.m-code-highlight__code {
+.m-application code.m-code-highlight__code {
     background-color: initial;
     color: initial;
     padding: initial;
