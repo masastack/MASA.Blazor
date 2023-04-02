@@ -12,7 +12,6 @@ public partial class MHighlight : BDomComponentBase
     public string? Code { get; set; }
 
     [Parameter]
-    [EditorRequired]
     public string? Language { get; set; }
 
     [Parameter]
