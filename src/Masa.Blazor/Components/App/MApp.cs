@@ -25,6 +25,8 @@ namespace Masa.Blazor
 
         public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
 
+        protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
+
         protected override Task OnInitializedAsync()
         {
             MasaBlazor!.OnThemeChange -= OnThemeChange;
@@ -38,7 +40,6 @@ namespace Masa.Blazor
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            Dark = theme.Dark;
             ThemeStyleMarkups = ThemeCssBuilder.Build(themeOptions);
             StateHasChanged();
         }
