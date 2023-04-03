@@ -1,13 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Masa.Docs.Indexing.Data
 {
     public class RecordRoot
     {
-        [JsonPropertyName("indexName")]
+        [JsonProperty("indexName")]
         public string IndexName { get; private set; }
 
-        [JsonPropertyName("records")]
+        [JsonProperty("records")]
         public List<Record> Records { get; } = new();
 
         public RecordRoot(string indexName)

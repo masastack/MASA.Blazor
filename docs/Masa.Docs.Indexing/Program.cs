@@ -1,6 +1,7 @@
 ﻿using Masa.Docs.Indexing;
 using Masa.Docs.Indexing.Configurations;
 using Masa.Docs.Indexing.Data;
+using Masa.Docs.Indexing.Parsers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddOptions();
         services.AddSingleton<IIndexBuilder<RecordRoot>, AlgoliaIndexBuilder>();
         services.Configure<AlgoliaOptions>(hostContext.Configuration.GetSection(AlgoliaOptions.Position));
+        services.AddSingleton<IMasaDocParser, MasaDocParser>();
         services.AddSingleton<IConfigureOptions<AlgoliaOptions>, AlgoliaFromEnvironmentConfiguration>();
         services.AddHostedService<IndexingHostedService>();
     })

@@ -7,8 +7,8 @@ MASA Blazor 是一个开源项目，我们的目标是让您轻松的创建令�
 
 此仓库的问题列表仅适用于错误报告和功能请求。 不符合规定的问题将立即关闭。 在报告问题之前：
 
-- 搜索相似的 [issues](https://github.com/BlazorComponent/Masa.Blazor/issues), 它可能已经被解答了。
-- 尝试使用 [最新](https://github.com/BlazorComponent/Masa.Blazor) 的版本在可克隆的仓库中以生产预期行为进行复现。
+- 搜索相似的 [issues](https://github.com/masastack/Masa.Blazor/issues), 它可能已经被解答了。
+- 尝试使用 [最新](https://github.com/masastack/Masa.Blazor) 的版本在可克隆的仓库中以生产预期行为进行复现。
 - 请确保复现的是 **最小化** 和简洁的(代码逻辑)。
 
 这些步骤确保我们掌握一切必要的信息，以便迅速细分和解决你的问题。

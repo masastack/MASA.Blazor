@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -6,17 +7,19 @@ namespace Masa.Docs.Indexing
 {
     internal static class IndexHelper
     {
-        internal static void AssertParamNotNull(this object? arg, string paramName)
-        {
-            if (arg is null)
-            {
-                throw new ArgumentNullException(paramName, "Argument is null, please check config.");
-            }
-        }
 
-        internal static string CharCodeAt(this string character, int index)
+        internal static void AssertNotNullOrEmpty(this object? arg, string paramName)
         {
-            return (character[index] + "").CharCodeAt();
+            switch (arg)
+            {
+                case string strValue when string.IsNullOrEmpty(strValue):
+                case string s when string.IsNullOrWhiteSpace(s):
+                case ICollection { Count: 0 }:
+                case Array { Length: 0 }:
+                case IEnumerable e when !e.GetEnumerator().MoveNext():
+                case null:
+                    throw new ArgumentNullException(paramName, "value is null or empty, please take a check.");
+            }
         }
 
         internal static string CharCodeAt(this string character)
@@ -31,17 +34,26 @@ namespace Masa.Docs.Indexing
                 {
                     lowCode = "0" + lowCode;
                 }
-                string hightCode = Convert.ToString(bytes[0], 16);
-                if (hightCode.Length == 1)
+
+                if (lowCode == "00")
                 {
-                    hightCode = "0" + hightCode;
+                    lowCode = "";
                 }
-                coding += (lowCode + hightCode);
+                string highCode = Convert.ToString(bytes[0], 16);
+                if (highCode.Length == 1)
+                {
+                    highCode = "0" + highCode;
+                }
+                if (highCode == "00")
+                {
+                    highCode = "";
+                }
+                coding += (lowCode + highCode);
             }
             return coding;
         }
 
-        internal static string? HashToAnchorString(this string str)
+        internal static string ToHashAnchor(this string str)
         {
             var slug = str.Trim().ToLower();
             slug = Regex.Replace(slug, @"[\s,.[\]{}()/]+", "-");
