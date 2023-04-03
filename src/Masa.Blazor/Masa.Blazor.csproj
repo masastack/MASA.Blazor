@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-	  <ProjectReference Include="..\Masa.Blazor.SourceGenerator.Docs.ApiGenerator\Masa.Blazor.SourceGenerator.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	  <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>
