@@ -84,7 +84,7 @@
     .app-code code {
         font-size: 0.9em !important;
         line-height: 1.3em !important;
-        color: white;
+        color: white !important;
     }
 
 h1 + p {
