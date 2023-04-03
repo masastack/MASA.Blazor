@@ -18,8 +18,8 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
     public async ValueTask SetOptionAsync(object option, bool notMerge = false, bool lazyUpdate = false)
         => await InvokeVoidAsync("setOption", option, notMerge, lazyUpdate);
 
-   public async ValueTask SetOptionStrAsync(string option, bool notMerge = false, bool lazyUpdate = false)
-         => await InvokeVoidAsync("setOptionStr", option, notMerge, lazyUpdate);
+   public async ValueTask SetJsonOption(string option, bool notMerge = false, bool lazyUpdate = false)
+         => await InvokeVoidAsync("setJsonOption", option, notMerge, lazyUpdate);
 
     public async ValueTask ResizeAsync()
         => await InvokeVoidAsync("resize");

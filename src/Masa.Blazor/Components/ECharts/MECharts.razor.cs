@@ -73,6 +73,9 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
+    [Parameter]
+    public bool IncludeFunctionsInOption { get; set; }
+
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
     private IEChartsJSObjectReferenceProxy _echarts;
@@ -190,10 +193,11 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         if (_echarts == null) return;
 
         option ??= Option;
-        if (IsAnyFunction(option, out string optionJson))
+        string optionJson;
+        if (IncludeFunctionsInOption && IsAnyFunction(option, out optionJson))
         {
             optionJson = FormatterFunction(optionJson);
-            await _echarts.SetOptionStrAsync(optionJson, notMerge, lazyUpdate);
+            await _echarts.SetJsonOption(optionJson, notMerge, lazyUpdate);
         }
         else
         {
@@ -216,7 +220,6 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     {
         string pattern = @":\s*""\s*function\s?\(.*\)\s?\{.+\}[\s;]?""[\n\s]?";
         var regex = new Regex(pattern);
-
         string newOptionJson = regex.Replace(optionJson,
             (m) =>
             {
