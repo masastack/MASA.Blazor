@@ -136,7 +136,8 @@ namespace Masa.Docs.Indexing
         public IEnumerable<RecordRoot> GenerateRecords()
         {
             var result = new List<RecordRoot>();
-            Uri baseUri = new Uri(_algoliaOption.DocDomain);
+            string baseUri = _algoliaOption.DocDomain;
+
             foreach (var projectItem in _algoliaOption.Projects!)
             {
                 var project = projectItem.Key;
@@ -165,8 +166,8 @@ namespace Masa.Docs.Indexing
                     {
                         continue;
                     }
-                    var uri = new Uri(baseUri, projectUrl);
-                    var docUrl = uri.ToString();
+
+                    var docUrl = baseUri + projectUrl.TrimStart('/');
                     var content = File.ReadAllText(fileName, Encoding.UTF8);
                     var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProject}";
                     var records = _docParser.ParseDocument(content, docUrl, language, project);

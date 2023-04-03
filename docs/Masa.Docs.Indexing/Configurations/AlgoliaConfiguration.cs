@@ -37,12 +37,22 @@ namespace Masa.Docs.Indexing.Configurations
                 }
             }
 
-            #region check option
             options.Projects.AssertNotNullOrEmpty(nameof(options.Projects));
+            foreach (var item in options.Projects!)
+            {
+                item.Value.AssertNotNullOrEmpty($"Project.{item.Key}");
+            }
             options.AlgoliaApiKey.AssertNotNullOrEmpty(ALGOLIA_API_KEY);
             options.ApplicationId.AssertNotNullOrEmpty(nameof(options.ApplicationId));
             AssertDirectoryExist(options.RootDocsPath);
-            #endregion
+            if (!options.DocDomain.StartsWith("https://") && !options.DocDomain.StartsWith("http://") && !options.DocDomain.StartsWith("/"))
+            {
+                throw new ArgumentException("Unknown doc domain format,it can start with (http:// || https:// || /), please check it.");
+            }
+            if (!options.DocDomain.EndsWith("/"))
+            {
+                options.DocDomain += "/";
+            }
         }
 
         public void TrySetOptionFromEnvironmentVariables(AlgoliaOptions algoliaOptions)
