@@ -4,7 +4,7 @@ public interface IEChartsJSObjectReferenceProxy : IJSObjectReference
 {
     ValueTask SetOptionAsync(object option, bool notMerge = false, bool lazyUpdate = false);
 
-    ValueTask SetJsonOption(string option, bool notMerge = false, bool lazyUpdate = false);
+    ValueTask SetJsonOptionAsync(string option, bool notMerge = false, bool lazyUpdate = false);
 
     ValueTask ResizeAsync();
 

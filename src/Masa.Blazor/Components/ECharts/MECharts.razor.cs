@@ -197,7 +197,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         if (IncludeFunctionsInOption && IsAnyFunction(option, out optionJson))
         {
             optionJson = FormatterFunction(optionJson);
-            await _echarts.SetJsonOption(optionJson, notMerge, lazyUpdate);
+            await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
         else
         {
