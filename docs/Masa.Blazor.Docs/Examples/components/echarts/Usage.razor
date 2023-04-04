@@ -1,35 +1,44 @@
 ﻿<div class="d-flex align-center justify-center">
-    <MECharts Option="_option" Width="@("100%")" Height="300">
+    <MECharts Option="_option" Width="@("100%")" IncludeFunctionsInOption="true" Height="300">
     </MECharts>
 </div>
-
+@using System.Text.Json.Nodes;
 @code{
-    private object _option = new
-    {
-        Title = new
-        {
-            Left = "center",
-            Text = "Getting started"
-        },
-        Tooltip = new { },
-        Legend = new
-        {
-            Data = new[] { "Sales" }
-        },
-        XAxis = new
-        {
-            Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
-        },
-        YAxis = new { },
-        Series = new[]
-        {
-            new 
-            {
-                Name = "sales",
-                Type= "bar",
-                Data= new []{ 5, 20, 36, 10, 10, 20 }
-            }
-        }
-    };
+
+
+
+    //private object _option = new
+    //{
+    //    Title = new
+    //    {
+    //        Left = "center",
+    //        Text = "Getting started"
+    //    },
+    //    Tooltip = new { },
+    //    Legend = new
+    //    {
+    //        Data = new[] { "Sales" }
+    //    },
+    //    XAxis = new
+    //    {
+    //        Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
+    //    },
+    //    YAxis = new { },
+    //    Series = new[]
+    //    {
+    //        new 
+    //        {
+    //            Name = "sales",
+    //            Type= "bar",
+    //            Data= new []{ 5, 20, 36, 10, 10, 20 }
+    //        }
+    //    }
+    //};
+
+    static string json=  "{\"series\":[{\"type\":\"gauge\",\"radius\":\"100%\",\"center\":[\"25%\",\"50%\"],\"avoidLabelOverlap\":true,\"startAngle\":180,\"endAngle\":0,\"min\":0,\"max\":100,\"splitNumber\":1,\"itemStyle\":{\"color\":\"#6946FF\",\"borderColor\":\"#fff\",\"borderWidth\":2},\"progress\":{\"show\":true,\"roundCap\":false,\"width\":28},\"pointer\":{\"show\":false},\"axisLine\":{\"roundCap\":false,\"lineStyle\":{\"width\":28,\"color\":[[\"1\",\"#05CD99\"]]}},\"axisTick\":{\"splitNumber\":30,\"distance\":24,\"length\":1,\"lineStyle\":{\"width\":2,\"color\":\"#6946FF\"}},\"splitLine\":{\"show\":false},\"axisLabel\":{\"show\":true,\"distance\":10},\"title\":{\"show\":false},\"detail\":{\"backgroundColor\":\"#fff\",\"width\":\"70%\",\"lineHeight\":24,\"height\":24,\"borderRadius\":4,\"offsetCenter\":[0,\"0\"],\"valueAnimation\":true,\"formatter\":\"function (value) {  return `${value} ms`;}\",\"rich\":{\"value\":{\"fontSize\":\"14px\",\"fontWeight\":\"bolder\",\"color\":\"#323D6F\"},\"unit\":{\"fontSize\":\"1.75em\",\"color\":\"#323D6F\",\"padding\":[0,0,0,20]}},\"fontSize\":\"18px\"},\"data\":[{\"value\":0}]}]}";
+
+   static JsonNode jsonNode = JsonNode.Parse(json);
+    object _option = jsonNode;
+}
 }
 
