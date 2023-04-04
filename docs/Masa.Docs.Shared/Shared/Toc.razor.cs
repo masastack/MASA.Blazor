@@ -1,8 +1,6 @@
-﻿using BlazorComponent.JSInterop;
+﻿using BlazorComponent.I18n;
 using Microsoft.JSInterop;
 using System.Text;
-using BlazorComponent;
-using BlazorComponent.I18n;
 
 namespace Masa.Docs.Shared.Shared;
 
@@ -30,17 +28,23 @@ public partial class Toc : NextTickComponentBase
 
         if (firstRender)
         {
-            _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEventForToc", _objRef, "default-toc");
-
-            var uri = new Uri(NavigationManager.Uri);
-            if (!string.IsNullOrWhiteSpace(uri.Fragment))
+            try
             {
-                await NextTickWhile(async () =>
+                await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
+
+                var uri = new Uri(NavigationManager.Uri);
+                if (!string.IsNullOrWhiteSpace(uri.Fragment))
                 {
-                    await Task.Delay(500);
-                    await ScrollIntoView(uri.Fragment.Substring(1));
-                }, () => _toc.Count == 0);
+                    await NextTickWhile(async () =>
+                    {
+                        await Task.Delay(500);
+                        await ScrollIntoView(uri.Fragment.Substring(1));
+                    }, () => _toc.Count == 0);
+                }
+            }
+            catch
+            {
+                // ignored
             }
         }
     }
@@ -61,9 +65,8 @@ public partial class Toc : NextTickComponentBase
         // TODO: Blazor now does not support automatic scrolling of anchor points.
         // Check this when .NET 8 released.
 
-        await JsRuntime.InvokeVoidAsync("setHash");
         NavigationManager.ReplaceWithHash($"#{elementId}");
-        await JsRuntime.ScrollToElement($"#{elementId}", AppService.AppBarHeight);
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
     }
 
     private void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)

@@ -454,6 +454,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 });
                 attrs[nameof(MMenu.Attach)] = GetMenuAttach();
                 attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
+                attrs[nameof(MMenu.Auto)] = ComputedMenuProps.Auto;
                 attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                 attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
                 attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
@@ -469,9 +470,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
                 attrs[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
                 attrs[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
+                attrs[nameof(MMenu.OffsetOverflow)] = ComputedMenuProps.OffsetOverflow;
                 attrs[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
                 attrs[nameof(MMenu.Right)] = ComputedMenuProps.Right;
                 attrs[nameof(MMenu.Top)] = ComputedMenuProps.Top;
+                attrs[nameof(MMenu.Transition)] = ComputedMenuProps.Transition;
             })
             .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), attrs =>
             {

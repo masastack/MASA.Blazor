@@ -6,14 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.3" />
-	  <PackageReference Include="Masa.Blazor.Extensions.Languages.Razor" Version="0.0.1" />
+	  <PackageReference Include="Masa.Blazor.Extensions.Languages.Razor" Version="0.0.2" />
   </ItemGroup>
 
   <ItemGroup>

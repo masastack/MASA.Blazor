@@ -118,15 +118,9 @@ related:
 
 <masa-example file="Examples.components.date_pickers.Formatting"></masa-example>
 
-## 使用外部库自定义格式(TODO)
+#### 国际化
 
-也可以使用外部库（如Moment.js或date fns）格式化日期。
-
-<masa-example file="Examples.components.date_pickers.FormattingWithExternalLibraries"></masa-example>
-
-#### 国际化(TODO)
-
-日期选择器通过JavaScript日期对象支持国际化。使用区域设置道具指定BCP 47语言标记，然后使用每周第一天属性设置每周第一天。
+使用 **Locale** 设置一个[BCP 47](https://tools.ietf.org/html/bcp47)语言标记，并且使用 **FirstDayOfWeek** 设置一周的第一天。
 
 <masa-example file="Examples.components.date_pickers.Internationalization"></masa-example>
 

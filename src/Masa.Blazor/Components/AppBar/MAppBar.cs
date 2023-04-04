@@ -7,8 +7,9 @@ namespace Masa.Blazor
     {
         private readonly string[] _applicationProperties = new string[]
         {
-            "IsBooted","Left","Bar","Right"
+            "Left","Bar","Right"
         };
+
         private Scroller _scroller;
 
         [Parameter]
@@ -19,8 +20,6 @@ namespace Masa.Blazor
 
         [Parameter]
         public StringNumber MarginTop { get; set; }
-
-        public int? Transform { get; private set; } = 0;
 
         [Parameter]
         public StringNumber Left { get; set; } = 0;
@@ -68,13 +67,20 @@ namespace Masa.Blazor
         public bool Value { get; set; } = true;
 
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor? MasaBlazor { get; set; }
+
+        public int? Transform { get; private set; } = 0;
+
+        /// <summary>
+        /// Avoid an entry animation on page load.
+        /// </summary>
+        protected override bool IsBooted => MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated;
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
                                  HideOnScroll ||
                                  CollapseOnScroll ||
-                                 MasaBlazor.Application.IsBooted ||
+                                 IsBooted ||
                                  !Value;
 
         protected double ScrollRatio

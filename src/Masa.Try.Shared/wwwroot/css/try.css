@@ -1,0 +1,65 @@
+body {
+    overflow: hidden;
+}
+
+.default-background {
+    background-color: #F0F3FA !important;
+}
+
+.default-app .m-navigation-drawer__content {
+    position: relative;
+}
+
+.default-app .m-navigation-drawer__content .m-btn {
+    height: 48px;
+    width: 48px;
+    color: #485585 !important;
+}
+
+.default-app .m-navigation-drawer__content .github {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.default-app .m-tabs {
+    color: #485585;
+}
+
+.default-app .active-tab {
+    background-color: #F0F3FA;
+    color: #1B2559;
+}
+
+#code {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#code .editor-group {
+    height: 100%;
+}
+
+#code .editor-group .custom-editor {
+    height: calc(100% - 48px);
+}
+
+#render {
+    width: 49%;
+    height: 100%;
+    float: right;
+    padding: 48px;
+}
+
+#splitter {
+    width: 4px;
+    height: 100%;
+    float: left;
+    cursor: col-resize;
+    background-color: #E4E8F3;
+}
+
+.m-progress-circular {
+    margin: 1rem;
+}

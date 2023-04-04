@@ -1,32 +1,45 @@
 ﻿@namespace Masa.Docs.Shared.Components
+
+@inject IJSRuntime Js
 @inject I18n I18n
 
-<div class="flex-1-1-auto d-flex justify-end">
-    <MTextField @bind-Value="_value"
-                BackgroundColor="#F6F8FD"
-                Class="@($"search-input rounded-lg {Class}")"
-                Style="max-width: 340px"
-                Placeholder="@I18n.T("Search")"
-                Clearable
-                ClearIcon="mdi-close-circle"
-                HideDetails="true"
-                TValue="string"
-                Filled
-                Rounded
-                Dense
-                Height="48">
-        <PrependInnerContent>
-            <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
-        </PrependInnerContent>
-    </MTextField>
-</div>
+<div id="docsearch" style="@Style" class="@Class"></div>
 
 @code {
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; } = null!;
 
     [Parameter]
-    public string Class { get; set; } = "mr-6";
+    public string Class { get; set; } = "";
 
-    private string _value = string.Empty;
+    [Parameter]
+    public string? Style { get; set; } = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitDocSearchAsync();
+        }
+    }
+
+    public async ValueTask InitDocSearchAsync()
+    {
+        try
+        {
+            if (Project is null) return;
+            var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
+            await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
+        }
+        catch
+        {
+            // ignored
+        }
+    }
 }

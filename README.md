@@ -10,8 +10,8 @@
 
 A set of standard basic component libraries based on Material design specifications and BlazorComponent interaction capabilities
 
-[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
-[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
+[![.NET](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 
@@ -21,7 +21,7 @@ English| [简体中文](./README.zh-CN.md)
 
 ## What is MASA Blazor?
 
-Provide a standard basic component library based on Material design specifications and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
+Provide a standard basic component library based on Material design specifications and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
 
 ## Why choose MASA Blazor?
 
@@ -31,7 +31,7 @@ MASA Blazor is based on the Material design specification, and each component is
 
 - Rich components: Contains the basic components of Vuetify 1:1 restoration, as well as many practical preset components and deep integration functions of .Net, including three linkages of Url, breadcrumbs, navigation, advanced search, i18n, etc.
 - UI design language: modern design style, excellent UI multi-end experience design
-- Professional example: [MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) provides preset layouts for a variety of common scenarios
+- Professional example: [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) provides preset layouts for a variety of common scenarios
 - Easy to get started: rich and detailed getting started documents, free video tutorials (in production)
 - Active community encouragement: users participate in real-time interaction, make contributions to join us, and build the most open open source community
 - Long-term support: full-time team maintenance, long-term support, and enterprise-level support
@@ -146,7 +146,7 @@ services.AddMasaBlazor();
 ### Clone code
 
 ```shell
-git clone --recursive https://github.com/BlazorComponent/MASA.Blazor.git
+git clone --recursive https://github.com/masastack/MASA.Blazor.git
 cd MASA.Blazor
 git submodule foreach git checkout main
 ```
@@ -176,8 +176,8 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 
 # Related projects
 
-- [BlazorComponent（Unstyled underlying component framework）](https://github.com/BlazorComponent/BlazorComponent)
-- [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/BlazorComponent/Masa.Blazor.Pro)
+- [BlazorComponent（Unstyled underlying component framework）](https://github.com/masastack/BlazorComponent)
+- [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/masastack/Masa.Blazor.Pro)
 
 ## Supported browsers
 
@@ -215,7 +215,7 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 
 Thanks to all the friends who have contributed to this project.
 
-<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors">
+<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
 </a>
 
@@ -235,6 +235,6 @@ This project adopts the code of conduct defined in the "Contributors Convention"
 
 ## License
 
-[![Masa.Blazor](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
+[![Masa.Blazor](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
 
 Copyright (c) 2021-present Masa.Blazor

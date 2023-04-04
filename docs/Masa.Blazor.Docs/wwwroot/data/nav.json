@@ -197,6 +197,10 @@
       "navigation-drawers",
       "not-grouped",
       "overlays",
+      {
+        "title": "page-tabs",
+        "state": "new"
+      },
       "paginations",
       {
         "title": "pickers",

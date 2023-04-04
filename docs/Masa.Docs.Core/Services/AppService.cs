@@ -19,35 +19,35 @@ public class AppService
         }
     }
 
-    public static List<(string Title, string URL, string Target)> GetNavMenus(string? project)
+    public static List<(string Title, string URL, string? Target, string? Badge)> GetNavMenus(string? project)
     {
-        var list = new List<(string Title, string URL, string Target)>()
+        var list = new List<(string Title, string URL, string? Target, string? Badge)>()
         {
-            new("docs", "/", "")
+            new("docs", "/", null, null)
         };
 
         if (project == "blazor")
         {
-            list.Add(("getting-started", "/blazor/getting-started/installation", ""));
-            list.Add(("ui-components", "/blazor/components/alerts", ""));
-            list.Add(("pro", "https://blazor-pro.masastack.com", "_blank"));
-            list.Add(("blog", "https://blogs.masastack.com/tags/Blazor/", "_blank"));
-            list.Add(("official-website", "https://www.masastack.com/blazor", "_blank"));
+            list.Add(("getting-started", "/blazor/getting-started/installation", null, null));
+            list.Add(("ui-components", "/blazor/components/alerts", null, null));
+            list.Add(("pro", "https://blazor-pro.masastack.com", "_blank", "free-pro"));
+            list.Add(("blog", "https://blogs.masastack.com/tags/Blazor/", "_blank", null));
+            list.Add(("official-website", "https://www.masastack.com/blazor", "_blank", null));
         }
         else if (project == "framework")
         {
-            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Framework/", "_blank"));
-            list.Add(("official-website", "https://www.masastack.com/framework", "_blank"));
+            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Framework/", "_blank", null));
+            list.Add(("official-website", "https://www.masastack.com/framework", "_blank", null));
         }
         else if (project == "stack")
         {
-            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Stack/", "_blank"));
-            list.Add(("official-website", "https://www.masastack.com/stack", "_blank"));
+            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Stack/", "_blank", null));
+            list.Add(("official-website", "https://www.masastack.com/stack", "_blank", null));
         }
         else
         {
-            list.Add(("blog", "https://blogs.masastack.com", "_blank"));
-            list.Add(("official-website", "https://www.masastack.com", "_blank"));
+            list.Add(("blog", "https://blogs.masastack.com", "_blank", null));
+            list.Add(("official-website", "https://www.masastack.com", "_blank", null));
         }
 
         return list;

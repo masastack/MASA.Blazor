@@ -24,8 +24,8 @@
     [Parameter]
     public bool RTL { get; set; }
 
-    [CascadingParameter]
-    public CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; } = null!;
 
     [CascadingParameter(Name = "project")]
     public string? Project { get; set; }

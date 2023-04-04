@@ -1,6 +1,5 @@
 ﻿using BlazorComponent.I18n;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;
@@ -24,8 +23,8 @@ public partial class Components
     [Inject]
     private I18n I18n { get; set; } = null!;
 
-    [CascadingParameter]
-    private CultureInfo Culture { get; set; } = null!;
+    [CascadingParameter(Name = "Culture")]
+    private string Culture { get; set; } = null!;
 
     [Parameter]
     public string Project { get; set; } = null!;
@@ -87,14 +86,30 @@ public partial class Components
         }
     }
 
+    public bool IsAllComponentsPage
+    {
+        get
+        {
+            return Page.ToLower() == "all";
+        }
+    }
+
+    private List<string> Tags
+    {
+        get
+        {
+            return IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
+        }
+    }
     private string? _tab;
     private string? _md;
     private string? _prevPage;
-    private CultureInfo? _prevCulture;
+    private string? _prevCulture;
     private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
     private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
+    private static int _allComponentsCacheCount;
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 
@@ -104,6 +119,11 @@ public partial class Components
 
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
+            if (IsAllComponentsPage && _allComponentsCacheCount == 0)
+            {
+                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
+            }
+
             _prevPage = Page;
             _prevCulture = Culture;
             _apiData.Clear();

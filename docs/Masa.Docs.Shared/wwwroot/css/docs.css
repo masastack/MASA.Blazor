@@ -62,11 +62,6 @@
         border-bottom-color: #FFFFFF1F !important;
     }
 
-.m-application code {
-    background-color: unset !important;
-    padding: 0 .4em !important;
-}
-
 .m-application .api-table code {
     padding: .2em .4em !important;
 }
@@ -89,6 +84,7 @@
     .app-code code {
         font-size: 0.9em !important;
         line-height: 1.3em !important;
+        color: white !important;
     }
 
 h1 + p {
@@ -335,25 +331,31 @@ a.text-dec-none {
         min-width: 0 !important;
     }
 
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__title {
-        color: #fff;
-    }
-
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) .m-list-item__subtitle {
-        color: rgb(255 255 255 / 60%) !important;
-    }
-
-    .doc-list-nav .m-list-item--active:not(.m-list-group__header) {
-        background-color: #4318FF;
-        color: #fff !important;
-    }
-
     .doc-list-nav .m-list-item, .doc-list-nav .m-list-item:before {
         border-radius: 0 4px 4px 0 !important;
     }
 
     .doc-list-nav .m-list-item {
         padding: 0 16px;
+    }
+
+    .doc-list-nav--active {
+        background-color: #4318FF;
+        color: #fff !important;
+    }
+
+    .doc-list-nav--active .m-list-item__title {
+        color: #fff;
+    }
+
+    .doc-list-nav--active .m-list-item__subtitle {
+        color: rgb(255 255 255 / 60%) !important;
+    }
+
+    .doc-list-nav--item-hash {
+        transition-property: background-color, color;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
     }
 
 .tag-chip {
@@ -499,7 +501,7 @@ default-app-markup {
 }
 
     .doc-markdown-body > section section {
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
     }
 
 .m-select.light-border .m-input__slot fieldset {
