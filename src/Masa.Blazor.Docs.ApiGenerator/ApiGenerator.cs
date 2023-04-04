@@ -32,7 +32,7 @@ public class ApiGenerator : IIncrementalGenerator
                 }
 
                 var sourceText = GenComponentMeta.GetSourceText(componentMeta);
-                ctx.AddSource($"Masa.Blazor.SourceGenerator.Docs.ApiGenerator.{componentMeta.Name}.g.cs", sourceText);
+                ctx.AddSource($"Masa.Blazor.Docs.ApiGenerator.{componentMeta.Name}.g.cs", sourceText);
             }
 
             var sb = new StringBuilder();
@@ -92,7 +92,7 @@ public class ApiGenerator : IIncrementalGenerator
     }}
 }}");
 
-            ctx.AddSource("Masa.Blazor.SourceGenerator.Docs.ApiGenerator.g.cs", sb.ToString());
+            ctx.AddSource("Masa.Blazor.Docs.ApiGenerator.g.cs", sb.ToString());
         });
     }
 
