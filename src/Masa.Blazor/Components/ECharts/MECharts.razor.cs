@@ -196,6 +196,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         string optionJson;
         if (IncludeFunctionsInOption && IsAnyFunction(option, out optionJson))
         {
+            optionJson = Unicode2String(optionJson);
             optionJson = FormatterFunction(optionJson);
             await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
@@ -203,6 +204,12 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         {
             await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
         }
+    }
+
+    public static string Unicode2String(string source)
+    {
+        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
+            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
     }
 
     public static bool IsAnyFunction(object option, out string optionJson)
