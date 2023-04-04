@@ -74,7 +74,7 @@ Markdown编辑器示例
 
 ```html
 //Call JS to handle the upload example
-window.Demo.Vditor = {
+let demo = {
     uploadFile: (element, index) => {
         let _that = this;
         let vditor = element.Vditor;
@@ -98,7 +98,7 @@ window.Demo.Vditor = {
                 document.execCommand("insertHTML", false, succFileText);
                 index += 1;
                 if (index < files.length) {
-                    _that.Demo.Vditor.uploadFile(element,  index);
+                    _that.demo.uploadFile(element,  index);
                 }
                 else {
                     fileInput.value = '';
@@ -109,6 +109,8 @@ window.Demo.Vditor = {
         oReq.send(formData);
     }
 };
+
+window.demo = demo;
 ```
 
 <masa-example file="Examples.components.markdowns.BeforeAllUpload"></masa-example>
