@@ -43,7 +43,6 @@
                         <MListItemAvatar Tile>
                             @Image(project, _activeHash)
                         </MListItemAvatar>
-
                         <MListItemContent>
                             <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
                         </MListItemContent>
@@ -192,10 +191,16 @@
 
             StateHasChanged();
 
-            _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
-            await LocationHashPositionAsync(NavigationManager.Uri);
-
+            try
+            {
+                _objRef = DotNetObjectReference.Create(this);
+                await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
+                await LocationHashPositionAsync(NavigationManager.Uri);
+            }
+            catch
+            {
+                // ignored
+            }
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
         }
     }
