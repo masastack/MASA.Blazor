@@ -24,16 +24,22 @@
     {
         if (firstRender)
         {
-            await InitDocSearchAsync().ConfigureAwait(false);
+            await InitDocSearchAsync();
         }
     }
 
     public async ValueTask InitDocSearchAsync()
     {
-        if (Project is null) return;
-        var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
-        var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
-        await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
+        try
+        {
+            if (Project is null) return;
+            var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
+            await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
+        }
+        catch
+        {
+            // ignored
+        }
     }
-
 }
