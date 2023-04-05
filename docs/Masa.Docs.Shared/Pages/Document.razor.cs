@@ -50,7 +50,7 @@ public partial class Document : IDisposable
             return Project switch
             {
                 "blazor" =>
-                    $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture}.md",
+                    $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{Category}/{Page}/{Culture}.md",
                 "framework" or "stack" =>
                     $"https://github.com/masastack/MASA.Docs/blob/main/src/Masa.{Project.ToUpperFirst()}.Docs/wwwroot/pages/{Category}/{Page}/{(string.IsNullOrWhiteSpace(SubPage) ? "" : $"{SubPage}/")}{Culture}.md",
                 _ => string.Empty

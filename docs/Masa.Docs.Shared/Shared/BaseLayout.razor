@@ -13,14 +13,13 @@
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
             <MErrorHandler>
-                <AppBar OnCultureChanged="@OnCultureChanged"
-                        OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
-                        OnDotClick="HandleOnDotClick"
-                        OnSettingsClick="HandleSettingsClick"
-                        Project="@_project"
-                        Env="@_env"
-                        HideAppBarNavIcon="@_hideAppBarNavIcon" />
-
+                <CascadingValue Value="@_env" Name="Env">
+                    <AppBar OnCultureChanged="@OnCultureChanged"
+                            OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                            OnDotClick="HandleOnDotClick"
+                            OnSettingsClick="HandleSettingsClick"
+                            HideAppBarNavIcon="@_hideAppBarNavIcon" />
+                </CascadingValue>
                 <CascadingValue Value="this" IsFixed>
                     @Body
                 </CascadingValue>
@@ -128,8 +127,8 @@
         var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.massastack.com" or "blazor.massastack.com" => "prd_",
-            "blazor-dev.massastack.com" or "docs-dev.massastack.com" => "dev_",
+            "docs.masastack.com" or "blazor.masastack.com" => "prd_",
+            "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
             _ => "local_"
         };
     }

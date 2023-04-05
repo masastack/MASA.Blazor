@@ -14,7 +14,7 @@ namespace Masa.Try.Shared.Pages;
 
 public partial class Index : NextTickComponentBase
 {
-    private const string REPOSITORY_URL = "https://github.com/BlazorComponent/Masa.Blazor";
+    private const string REPOSITORY_URL = "https://github.com/masastack/Masa.Blazor";
 
     /// <summary>
     /// 编译器需要使用的程序集

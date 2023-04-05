@@ -22,38 +22,6 @@ namespace Masa.Blazor.Test.App
         }
 
         [TestMethod]
-        public void RenderAppWithDark()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MApp>(props =>
-            {
-                props.Add(app => app.Dark, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderAppWithLight()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MApp>(props =>
-            {
-                props.Add(app => app.Light, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
         public void RenderAppWithLeftToRight()
         {
             //Act

@@ -1,15 +1,8 @@
-﻿using Masa.Docs.Indexing.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Docs.Indexing
+﻿namespace Masa.Docs.Indexing
 {
     public interface IIndexBuilder<TData> where TData : class
     {
-        Task<bool> CreateIndexAsync(IEnumerable<TData>? datas = null);
+        Task CreateIndexAsync(IEnumerable<TData> tData, CancellationToken ct = default);
 
         IEnumerable<TData> GenerateRecords();
     }

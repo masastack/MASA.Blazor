@@ -22,8 +22,6 @@
 
     <AppBarItems OnCultureChanged="OnCultureChanged"
                  OnDotClick="OnDotClick" 
-                 Project="@Project"
-                 Env="@Env"
                  OnSettingsClick="OnSettingsClick">
     </AppBarItems>
 </MAppBar>
@@ -33,10 +31,10 @@
     [CascadingParameter(Name = "Culture")]
     public string? Culture { get; set; } = null!;
 
-    [Parameter]
+    [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
 
-    [Parameter]
+    [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
 
     [Parameter]
