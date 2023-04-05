@@ -31,6 +31,75 @@
             </ChildContent>
         </MTooltip>
 
+        <MTooltip Right>
+            <ActivatorContent>
+                <MButton Icon OnClick="()=>_settingModalOpened=true" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-cog</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                Settings
+            </ChildContent>
+        </MTooltip>
+
+        @*Settings Modal*@
+        <PModal @bind-Value="_settingModalOpened"
+                Title="Settings"
+                Width="500">
+            <MCard Class="mx-auto"
+                   MaxWidth="500">
+                <MRow Class="ml-0">
+                    <MCol Cols="1">
+                        <MButton Icon Color="primary"
+                                 OnClick="()=>_addScriptModalOpened=true">
+                            <MIcon>mdi-plus</MIcon>
+                        </MButton>
+                    </MCol>
+                </MRow>
+
+                <MList TwoLine>
+                    <MListItemGroup>
+                        @foreach (var item in _customScriptNodes)
+                        {
+                            <MListItem ActiveClass="deep-purple--text text--accent-4">
+                                <ItemContent>
+                                    <MListItemAvatar>
+                                        @if (item.NodeType is ScriptNodeType.Css)
+                                        {
+                                            <MIcon Color="blue darken-1">mdi-language-css3</MIcon>
+                                        }
+                                        else
+                                        {
+                                            <MIcon Color="orange lighten-1">mdi-language-javascript</MIcon>
+                                        }
+                                    </MListItemAvatar>
+
+                                    <MListItemContent>
+                                        <MListItemTitle>@item.Content</MListItemTitle>
+                                    </MListItemContent>
+
+                                </ItemContent>
+                            </MListItem>
+                        }
+                    </MListItemGroup>
+                </MList>
+            </MCard>
+        </PModal>
+
+        @*Add Script Reference Modal*@
+        <PModal @bind-Value="_addScriptModalOpened"
+                OnSave="async()=>await AddScriptReferenceAsync()"
+                OnCancel="async()=>{_addScriptModalOpened=false; ClearInputs();}"
+                Title="Add Script Reference"
+                Width="500"
+                Height="500">
+            <MTextarea Outlined
+                        @bind-Value="_newScriptContent"
+                        Label="Script Content"
+                        PrependInnerIcon="mdi-pen"
+                        Style="font-size:small"/>
+        </PModal>
+
         <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
             <MIcon>mdi-github</MIcon>
         </MButton>
