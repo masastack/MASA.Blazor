@@ -7,16 +7,13 @@ namespace Masa.Blazor
     /// <summary>
     /// Root for application
     /// </summary>
-    public partial class MApp : BApp, IThemeable
+    public class MApp : BApp
     {
         [Inject]
-        public HeadJsInterop HeadJsInterop { get; set; }
+        public MasaBlazor? MasaBlazor { get; set; }
 
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Window Window { get; set; }
+        public Window? Window { get; set; }
 
         /// <summary>
         /// Whether to display from left to right
@@ -26,11 +23,13 @@ namespace Masa.Blazor
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
-        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
+        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
+
+        protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
 
         protected override Task OnInitializedAsync()
         {
-            MasaBlazor.OnThemeChange -= OnThemeChange;
+            MasaBlazor!.OnThemeChange -= OnThemeChange;
             MasaBlazor.OnThemeChange += OnThemeChange;
 
             OnThemeChange(MasaBlazor.Theme);
@@ -41,7 +40,6 @@ namespace Masa.Blazor
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            Dark = theme.Dark;
             ThemeStyleMarkups = ThemeCssBuilder.Build(themeOptions);
             StateHasChanged();
         }
@@ -75,8 +73,8 @@ namespace Masa.Blazor
         {
             if (firstRender)
             {
-                await MasaBlazor.Breakpoint.InitAsync();
-                await Window.InitializeAsync();
+                await MasaBlazor!.Breakpoint.InitAsync();
+                await Window!.InitializeAsync();
 
                 StateHasChanged();
             }

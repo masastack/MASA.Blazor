@@ -20,7 +20,7 @@ When the security team receives a security vulnerability report, they will assig
 
 ## Suggestions for this policy
 
-If you have suggestions on how to improve this process, please submit using [issue](https://github.com/BlazorComponent/Masa.Blazor/issues). 
+If you have suggestions on how to improve this process, please submit using [issue](https://github.com/masastack/Masa.Blazor/issues). 
 
 
 

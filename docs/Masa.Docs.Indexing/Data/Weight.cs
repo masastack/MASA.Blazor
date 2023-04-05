@@ -1,19 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
-public class Weight
+namespace Masa.Docs.Indexing.Data;
+
+public record Weight
 {
-    [JsonPropertyName("pageRank")]
+    [JsonProperty("pageRank")]
     public string PageRank { get; set; } = "0";
 
-    [JsonPropertyName("level")]
+    [JsonProperty("level")]
     public int? Level { get; set; }
 
-    [JsonPropertyName("position")]
+    [JsonProperty("position")]
     public int? Position { get; set; }
 
     public override string ToString()
     {
-        return $"PageRank:{PageRank};Level：{Level};Postion:{Position}";
+        return $"PageRank:{PageRank};Level：{Level}; Position: {Position}";
     }
 }
-

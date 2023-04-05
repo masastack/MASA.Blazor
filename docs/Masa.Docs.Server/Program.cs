@@ -27,7 +27,13 @@ builder.Services.AddMasaBlazor(options =>
     });
 }).AddI18nForServer("wwwroot/locale");
 
-builder.Services.AddMasaDocs(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
+var docSeverUrlConfig = builder.Configuration["ASPNETCORE_URLS"];
+var docSeverUrls = docSeverUrlConfig?.Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+docSeverUrls = docSeverUrls?.Select(x => x.Replace("0.0.0.0", "127.0.0.1")).ToArray();
+var docSeverUrl = docSeverUrls?.FirstOrDefault(x => x.StartsWith("https://")) ??
+                  docSeverUrls?.FirstOrDefault(x => x.StartsWith("http://"));
+
+builder.Services.AddMasaDocs(docSeverUrl ?? "http://localhost:5000");
 
 var app = builder.Build();
 
@@ -40,10 +46,7 @@ if (!app.Environment.IsDevelopment())
 app.MapHealthChecks("/healthz");
 
 app.UseStaticFiles();
-
 app.UseRouting();
-
-// TODO: crawlService
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

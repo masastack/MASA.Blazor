@@ -1,22 +1,25 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Masa.Docs
+namespace Masa.Docs.Indexing
 {
     internal static class IndexHelper
     {
-        internal static void AssertParamNotNull(this object? arg, string paramName)
-        {
-            if (arg is null)
-            {
-                throw new ArgumentNullException(paramName, "Argument is null, please check config.");
-            }
-        }
 
-        internal static string CharCodeAt(this string character, int index)
+        internal static void AssertNotNullOrEmpty(this object? arg, string paramName)
         {
-            return (character[index] + "").CharCodeAt();
+            switch (arg)
+            {
+                case string strValue when string.IsNullOrEmpty(strValue):
+                case string s when string.IsNullOrWhiteSpace(s):
+                case ICollection { Count: 0 }:
+                case Array { Length: 0 }:
+                case IEnumerable e when !e.GetEnumerator().MoveNext():
+                case null:
+                    throw new ArgumentNullException(paramName, "value is null or empty, please take a check.");
+            }
         }
 
         internal static string CharCodeAt(this string character)
@@ -26,29 +29,35 @@ namespace Masa.Docs
             {
                 byte[] bytes = System.Text.Encoding.Unicode.GetBytes(character.Substring(i, 1));
                 //Fetching binary encoded content  
-                string lowCode = System.Convert.ToString(bytes[1], 16);
+                string lowCode = Convert.ToString(bytes[1], 16);
                 if (lowCode.Length == 1)
                 {
                     lowCode = "0" + lowCode;
                 }
-                string hightCode = System.Convert.ToString(bytes[0], 16);
-                if (hightCode.Length == 1)
+
+                if (lowCode == "00")
                 {
-                    hightCode = "0" + hightCode;
+                    lowCode = "";
                 }
-                coding += (lowCode + hightCode);
+                string highCode = Convert.ToString(bytes[0], 16);
+                if (highCode.Length == 1)
+                {
+                    highCode = "0" + highCode;
+                }
+                if (highCode == "00")
+                {
+                    highCode = "";
+                }
+                coding += (lowCode + highCode);
             }
             return coding;
         }
 
-        internal static string? HashToAnchorString(this string str)
+        internal static string ToHashAnchor(this string str)
         {
             var slug = str.Trim().ToLower();
             slug = Regex.Replace(slug, @"[\s,.[\]{}()/]+", "-");
-            slug = Regex.Replace(slug, @"[^a-z0-9 -]", delegate (Match m)
-            {
-                return m.Value.CharCodeAt();
-            });
+            slug = Regex.Replace(slug, @"[^a-z0-9 -]", m => m.Value.CharCodeAt());
             slug = Regex.Replace(slug, @"-{2,}", "-");
             slug = Regex.Replace(slug, @"^-*|-*$", "");
             if (Regex.Match(slug[0].ToString(), @"[^a-z]").Success)
@@ -61,7 +70,6 @@ namespace Masa.Docs
         internal static void SetPropertyValue<T, TProperty>(this T t, Expression<Func<T, TProperty?>> selector, TProperty? newValue)
         {
             var valueType = typeof(TProperty);
-            var param_val = Expression.Parameter(typeof(T));
             var valueExpress = Expression.Constant(newValue, valueType);
             if (selector.Body is MemberExpression memberExpression)
             {
