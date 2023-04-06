@@ -116,9 +116,6 @@
   "markdown-parsers": [
     "MMarkdownIt"
   ],
-  "syntax-highlights": [
-    "MHighlight"
-  ],
   "not-grouped": [
     "PConfirm",
     "PPageHeader",
