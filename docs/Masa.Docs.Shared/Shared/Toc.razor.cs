@@ -30,8 +30,8 @@ public partial class Toc : NextTickComponentBase
         {
             try
             {
+                _objRef = DotNetObjectReference.Create(this);
                 await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
-
                 var uri = new Uri(NavigationManager.Uri);
                 if (!string.IsNullOrWhiteSpace(uri.Fragment))
                 {
