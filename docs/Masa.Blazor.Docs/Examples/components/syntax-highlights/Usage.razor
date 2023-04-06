@@ -1,6 +1,6 @@
-﻿<MHighlight Code="@html" Language="html"></MHighlight>
+﻿<MSyntaxHighlight Code="@html" Language="html"></MSyntaxHighlight>
 
-<MHighlight Code="@js" Language="javascript"></MHighlight>
+<MSyntaxHighlight Code="@cs" Language="csharp"></MSyntaxHighlight>
 
 @code {
 
@@ -17,10 +17,8 @@
 </body>
 </html>";
 
-    private string js = @"var foo = function (bar) {
-  return bar++;
-};
+    private string cs = @"int Foo (int bar) => bar++;
 
-console.log(foo(5));";
+Console.WriteLine(Foo(5));";
 
 }
