@@ -1,17 +1,9 @@
-﻿using System.Globalization;
-using Algolia.Search.Clients;
+﻿using Algolia.Search.Clients;
 using Algolia.Search.Models.Settings;
-using Markdig;
-using Markdig.Extensions.Yaml;
-using Markdig.Syntax;
-using Markdig.Syntax.Inlines;
 using Masa.Docs.Indexing.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.Converters;
-using YamlDotNet.Serialization.NamingConventions;
 using Masa.Docs.Indexing.Parsers;
 
 namespace Masa.Docs.Indexing
