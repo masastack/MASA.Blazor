@@ -51,7 +51,7 @@
             <MTabsItems Class="editor-group default-background" Value="_tabStringNumber">
                 @foreach (var item in _tabMonacoList)
                 {
-                    <MTabItem Style="height:calc(100% - 48px);">
+                    <MTabItem Style="height:100%">
                         <MMonacoEditor InitCompleteHandle="async() =>await InitCompleteHandle(item)"
                                        Class="custom-editor"
                                        EditorOptions="@item.Options"
