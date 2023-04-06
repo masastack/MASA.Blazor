@@ -12,13 +12,13 @@ public partial class MMonacoEditor : BDomComponentBase
     public StringNumber Width { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber Height { get; set; } = "100%";
+    public StringNumber Height { get; set; }
 
     [Parameter]
     public StringNumber MinWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; }
+    public StringNumber MinHeight { get; set; } = "320px";
 
     [Parameter]
     public StringNumber MaxWidth { get; set; }
