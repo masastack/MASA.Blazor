@@ -40,8 +40,12 @@ namespace Masa.Blazor
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            ThemeStyleMarkups = ThemeCssBuilder.Build(themeOptions);
-            StateHasChanged();
+            var style = ThemeCssBuilder.Build(themeOptions);
+            InvokeAsync(async () =>
+            {
+                await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);
+                StateHasChanged();
+            });
         }
 
         protected override void SetComponentClass()
