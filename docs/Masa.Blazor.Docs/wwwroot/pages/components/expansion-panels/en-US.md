@@ -43,7 +43,7 @@ When the `inset` property is activated, the current expansion panel becomes smal
 
 #### Model
 
-The extension panel can be controlled externally by modifying `@bind-Value`. Its value corresponds to the currently open expansion panel index (0-based). If the `multiple` attribute is used, an array containing the indices of the open items.
+The extension panel can be controlled externally by modifying `@bind-Values`. Its value corresponds to the currently open expansion panel index (0-based). If the `multiple` attribute is used, an array containing the indices of the open items.
 
 <masa-example file="Examples.components.expansion_panels.Model"></masa-example>
 
