@@ -106,13 +106,20 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
       tokens[idx].tag = "app-link";
 
-      const href = tokens[idx].attrGet("href");
-      let decodedHref = decodeURI(href);
-      if (decodedHref !== href) {
-        tokens[idx].attrSet(
-          "href",
-          "#" + defaultSlugify(decodedHref.replace("#", ""))
-        );
+      let href = tokens[idx].attrGet("href");
+      let isRelativeUrl = true;
+      try {
+        let url = new URL(href);
+        isRelativeUrl = false;
+      } catch (TypeError) {}
+      if (isRelativeUrl) {
+        let decodedHref = decodeURI(href);
+        if (decodedHref !== href) {
+          const [path, hash] = decodedHref.split("#");
+          if (hash) {
+            tokens[idx].attrSet("href", path + "#" + defaultSlugify(hash));
+          }
+        }
       }
 
       tokens[idx].attrSet("content", content);
@@ -417,6 +424,35 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
     appId: "TSB4MACWRC",
     indexName: "blazor-masastack_" + index,
     apiKey: "d1fa64adb784057c097feb592d4497d0",
+    hitComponent: ({ hit, children }) => {
+      return {
+        type: "a",
+        ref: undefined,
+        constructor: undefined,
+        props: {
+          href: hit.url,
+          onClick: (e) => {
+            let hitUrl;
+            if (hit.url.startsWith("/")) {
+              hitUrl = new URL(hit.url, location.origin);
+            } else {
+              hitUrl = new URL(hit.url);
+            }
+            if (document.location.pathname === hitUrl.pathname) {
+              if (hitUrl.hash) {
+                window.requestAnimationFrame(() =>
+                  window.scrollToElement(hitUrl.hash.substring(1), 108)
+                );
+              } else {
+                window.backTop();
+              }
+            }
+          },
+          children: children,
+        },
+        __v: null,
+      };
+    },
     placeholder,
     searchParameters: {
       facetFilters: ["lang:" + currentLanguage],
