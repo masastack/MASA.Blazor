@@ -1,11 +1,11 @@
 export function observer(el, invoker) {
-    if (!el) return
+  if (!el) return
 
-    const resizeObserver = new ResizeObserver((entries => {
-        invoker.invokeMethodAsync('OnEllipsisChange', el.offsetWidth < el.scrollWidth)
-    }))
+  const resizeObserver = new ResizeObserver((entries => {
+    invoker.invokeMethodAsync('OnEllipsisChange', el.offsetWidth < el.scrollWidth)
+  }))
 
-    resizeObserver.observe(el);
+  resizeObserver.observe(el);
 
-    return resizeObserver;
+  return resizeObserver;
 }
