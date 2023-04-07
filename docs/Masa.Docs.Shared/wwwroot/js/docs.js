@@ -440,7 +440,9 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
             }
             if (document.location.pathname === hitUrl.pathname) {
               if (hitUrl.hash) {
-                window.scrollToElement(hitUrl.hash.substring(1), 108);
+                window.requestAnimationFrame(() =>
+                  window.scrollToElement(hitUrl.hash.substring(1), 108)
+                );
               } else {
                 window.backTop();
               }

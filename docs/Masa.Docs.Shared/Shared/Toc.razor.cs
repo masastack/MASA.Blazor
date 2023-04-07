@@ -18,7 +18,6 @@ public partial class Toc : NextTickComponentBase
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
         AppService.TocChanged += AppServiceOnTocChanged;
     }
 
@@ -32,15 +31,6 @@ public partial class Toc : NextTickComponentBase
             {
                 _objRef = DotNetObjectReference.Create(this);
                 await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
-                var uri = new Uri(NavigationManager.Uri);
-                if (!string.IsNullOrWhiteSpace(uri.Fragment))
-                {
-                    await NextTickWhile(async () =>
-                    {
-                        await Task.Delay(500);
-                        await ScrollIntoView(uri.Fragment.Substring(1));
-                    }, () => _toc.Count == 0);
-                }
             }
             catch
             {
@@ -59,14 +49,21 @@ public partial class Toc : NextTickComponentBase
 
     private async Task ScrollIntoView(string elementId)
     {
-        _activeHash = $"#{elementId}";
+        try
+        {
+            _activeHash = $"#{elementId}";
 
-        // TODO: remove the following lines when #40190 of aspnetcore resolved.
-        // TODO: Blazor now does not support automatic scrolling of anchor points.
-        // Check this when .NET 8 released.
-
-        NavigationManager.ReplaceWithHash($"#{elementId}");
-        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
+            // TODO: remove the following lines when #40190 of aspnetcore resolved.
+            // TODO: Blazor now does not support automatic scrolling of anchor points.
+            // Check this when .NET 8 released.
+            NavigationManager.ReplaceWithHash($"#{elementId}");
+            await Task.Delay(300);
+            _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
+        }
+        catch
+        {
+            // ignored
+        }
     }
 
     private void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)
@@ -79,6 +76,12 @@ public partial class Toc : NextTickComponentBase
         _toc = toc.Where(c => c.Level > 1).ToList();
 
         InvokeAsync(StateHasChanged);
+
+        var uri = new Uri(NavigationManager.Uri);
+        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        {
+            ScrollIntoView(uri.Fragment.Substring(1)).ConfigureAwait(false);
+        }
     }
 
     private string GenClass(MarkdownItTocContent tocContent)
