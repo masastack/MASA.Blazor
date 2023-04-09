@@ -508,7 +508,7 @@
   "released-by": "发布者：{0}",
   "published-on": "发布于：{0}",
   "pwa": {
-    "new-content-available": "新内容可用。点击{0}进行更新。",
+    "new-content-available": "新内容可用。点击 {0} 进行更新。",
     "ignore": "忽略",
     "refresh": "刷新"
   }
