@@ -385,5 +385,10 @@
   "0.7.0": "0.7.0",
   "1.0.0": "1.0.0",
   "released-by": "Released by: {0}",
-  "published-on": "Published on {0}"
+  "published-on": "Published on {0}",
+  "pwa": {
+    "new-content-available": "New content is available. Click {0} to update.",
+    "ignore": "Ignore",
+    "refresh": "Refresh"
+  }
 }
