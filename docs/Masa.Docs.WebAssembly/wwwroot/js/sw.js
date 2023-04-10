@@ -8,7 +8,6 @@
 });
 
 window.swSkipWaiting = function () {
-    console.log('swSkipWaiting', new Date().getTime())
     navigator.serviceWorker.getRegistration().then(function (reg) {
         reg.waiting.postMessage({type: 'SKIP_WAITING'});
     });
@@ -31,7 +30,6 @@ if ('serviceWorker' in navigator) {
     });
 
     navigator.serviceWorker.register('service-worker.js', {updateViaCache: 'none'}).then(function (reg) {
-        console.log('reg', reg)
         if (reg.waiting) {
             emitSwUpdate();
             return;

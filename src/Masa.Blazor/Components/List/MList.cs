@@ -101,8 +101,6 @@
         [Parameter]
         public StringNumber Width { get; set; }
 
-
-
         protected override void SetComponentClass()
         {
             var prefix = "m-list";
