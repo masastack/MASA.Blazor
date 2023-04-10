@@ -199,6 +199,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {
             optionJson = FormatterFunction(optionJson);
+            optionJson = Unicode2String(optionJson);
             await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
         else
@@ -216,6 +217,12 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
         optionJson = JsonSerializer.Serialize(option);
         return optionJson.Contains("function");
+    }
+
+    public static string Unicode2String(string source)
+    {
+        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
+            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
     }
 
     public static string FormatterFunction(string optionJson)
