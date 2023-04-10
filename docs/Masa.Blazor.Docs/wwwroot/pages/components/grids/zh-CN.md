@@ -26,7 +26,7 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 
 ## 辅助类
 
-**FillHeight**将`height:100%`应用于元素。当应用于**MContainer**时，它还包括`align items:center`。
+`fill-height` 将 `height:100%` 应用于元素。当应用于**MContainer**时，它还包括`align-items:center`。
 
 ## 注意
 
