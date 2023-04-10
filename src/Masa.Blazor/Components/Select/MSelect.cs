@@ -300,6 +300,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
         {
             InputSlotAttrs = MMenu.ActivatorAttributes;
+            MMenu.BeforeShowContent ??= OnMenuBeforeShowContent;
             MMenu.AfterShowContent ??= OnMenuAfterShowContent;
 
             if (OutsideClickJSModule != null)
@@ -321,6 +322,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
 
         return Attach;
+    }
+
+    protected virtual async Task OnMenuBeforeShowContent()
+    {
     }
 
     protected virtual async Task OnMenuAfterShowContent(bool isLazyContent)
