@@ -44,8 +44,9 @@ public static class StringExtensions
         return coding;
     }
 
-    public static string? HashToAnchorString(this string str)
+    public static string? HashToAnchorString(this string? str)
     {
+        if (str == null) return null;
         var slug = str.Trim().ToLower();
         slug = Regex.Replace(slug, @"[\s,.[\]{}()/]+", "-");
         slug = Regex.Replace(slug, @"[^a-z0-9 -]", delegate (Match m)
