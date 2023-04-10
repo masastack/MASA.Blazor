@@ -387,7 +387,7 @@
   "released-by": "Released by: {0}",
   "published-on": "Published on {0}",
   "pwa": {
-    "new-content-available": "New content is available. Click {0} to update.",
+    "new-content-available": "New content is available. Click Refresh to update.",
     "ignore": "Ignore",
     "refresh": "Refresh"
   }

@@ -1,29 +1,24 @@
 ﻿@inject IJSRuntime JSRuntime
+@inject I18n I18n
 
-<MSnackbar Vertical Class="m-snackbar--pwa" Value="false" Right Bottom Timeout="-1">
-    <ChildContent>
-        <MI18n Key="pwa.new-content-available">
-            <PlaceholderContent>
-                @if (context == 0)
-                {
-                    <MI18n Key="pwa.refresh" Class="font-weight-bold"></MI18n>
-                }
-            </PlaceholderContent>
-        </MI18n>
-    </ChildContent>
-    <ActionContent>
-        <MButton Text Class="mx-2 text-none font-weight-regular m-snackbar-action__ignore"
-                 OnClick="Ignore">
-            <MI18n Key="pwa.ignore" Class="white--text"></MI18n>
-        </MButton>
-        <MButton Text Class="primary text--secondary text-capitalize font-weight-regular px-2 m-snackbar-action__refresh"
-                 OnClick="RefreshToSkipWaiting">
-            <MI18n Key="pwa.refresh" Class="white--text"></MI18n>
-        </MButton>
-    </ActionContent>
-</MSnackbar>
+<PSnackbar Class="m-snackbar--pwa" 
+           Content="@I18n.T("pwa.new-content-available")"
+           Value
+           Vertical
+           Closeable
+           Right
+           Bottom
+           Timeout="-1"
+           ActionText="@I18n.T("pwa.refresh")"
+           ActionColor="secondary"
+           OnClose="Ignore"
+           OnAction="RefreshToSkipWaiting">
+</PSnackbar>
 
 @code {
+
+    [CascadingParameter(Name = "Culture")]
+    public string? Culture { get; set; }
 
     private async Task Ignore()
     {

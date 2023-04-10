@@ -1,6 +1,7 @@
-﻿@namespace Masa.Blazor.Presets.EnqueuedSnackbars
+﻿@namespace Masa.Blazor.Presets
 
-<MSnackbar @bind-Value="_visible"
+<MSnackbar Value="Value"
+           ValueChanged="ValueChanged"
            Color="@ComputedColor"
            Class="@Class"
            ContentClass="@ContentClass"
@@ -16,6 +17,10 @@
            Tile="@Tile"
            Timeout="@ComputedTimeout"
            Vertical="@Vertical"
+           Top="Top"
+           Right="Right"
+           Bottom="Bottom"
+           Left="Left"
            OnClosed="@HandleOnClosed">
     <ChildContent>
         <MAlert Title="@Title" Type="@Type">@Content</MAlert>
