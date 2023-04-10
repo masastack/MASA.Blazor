@@ -33,9 +33,9 @@
                 <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
             </HeadContent>
         </CascadingValue>
-    </CascadingValue>
 
-    <PwaSnackbar />
+        <PwaSnackbar />
+    </CascadingValue>
 </MApp>
 
 @code {
@@ -132,7 +132,7 @@
             "docs.masastack.com" or "blazor.masastack.com" => "prd_",
             "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
             _ => "local_"
-        };
+            };
     }
 
     private void SetProject(Action? action = null)
