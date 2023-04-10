@@ -1,14 +1,16 @@
-﻿using System.Text.Json;
+﻿#nullable enable
+
+using System.Text.Json;
 
 namespace Masa.Blazor;
 
 public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDisposable
 {
     [Inject]
-    protected I18n I18n { get; set; }
+    protected I18n I18n { get; set; } = null!;
 
     [Inject]
-    protected EChartsJSModule Module { get; set; }
+    protected EChartsJSModule Module { get; set; } = null!;
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -17,19 +19,19 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     public StringNumber Height { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; }
+    public StringNumber? MinHeight { get; set; }
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
-    public StringNumber MaxHeight { get; set; }
+    public StringNumber? MaxHeight { get; set; }
 
     [Parameter]
-    public Action<EChartsInitOptions> InitOptions { get; set; }
+    public Action<EChartsInitOptions>? InitOptions { get; set; }
 
     [Parameter]
     public object Option { get; set; } = new { };
@@ -41,7 +43,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     public bool Dark { get; set; }
 
     [Parameter]
-    public string Theme { get; set; }
+    public string? Theme { get; set; }
 
     [Parameter]
     public EventCallback<EChartsEventArgs> OnClick { get; set; }
@@ -78,11 +80,11 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
 
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
-    private IEChartsJSObjectReferenceProxy _echarts;
-    private object _prevOption;
-    private string _prevComputedTheme;
+    private IEChartsJSObjectReferenceProxy? _echarts;
+    private object? _prevOption;
+    private string? _prevComputedTheme;
 
-    public string ComputedTheme
+    public string? ComputedTheme
     {
         get
         {
@@ -188,15 +190,16 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         NextTick(async () => { await InitECharts(); });
     }
 
-    public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
+    public async Task SetOption(object? option = null, bool notMerge = true, bool lazyUpdate = false)
     {
         if (_echarts == null) return;
 
         option ??= Option;
-        string optionJson;
-        if (IncludeFunctionsInOption && IsAnyFunction(option, out optionJson))
+
+        if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {
             optionJson = FormatterFunction(optionJson);
+            optionJson = Unicode2String(optionJson);
             await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
         else
@@ -214,6 +217,12 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
         optionJson = JsonSerializer.Serialize(option);
         return optionJson.Contains("function");
+    }
+
+    public static string Unicode2String(string source)
+    {
+        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
+            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
     }
 
     public static string FormatterFunction(string optionJson)

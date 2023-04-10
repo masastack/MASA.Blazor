@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMasaBlazor();
+builder.Services.AddHttpClient();
+
+builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 var app = builder.Build();
 
