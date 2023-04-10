@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MHighlight : BDomComponentBase
+public partial class MSyntaxHighlight : BDomComponentBase
 {
     [Inject]
     protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;

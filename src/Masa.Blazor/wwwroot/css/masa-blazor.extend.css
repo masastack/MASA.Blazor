@@ -728,12 +728,12 @@ input[type=number] {
 }
 
 .m-application code.m-code-highlight__code {
-    background-color: initial;
-    color: initial;
-    padding: initial;
-    border-radius: initial;
-    font-size: initial;
-    font-weight: initial;
+    background-color: unset;
+    color: unset;
+    padding: unset;
+    border-radius: unset;
+    font-size: unset;
+    font-weight: unset;
 }
 
 /* i18n */

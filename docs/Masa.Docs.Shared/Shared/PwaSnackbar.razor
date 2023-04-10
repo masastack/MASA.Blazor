@@ -1,0 +1,38 @@
+﻿@inject IJSRuntime JSRuntime
+
+<MSnackbar Vertical Class="m-snackbar--pwa" Value="false" Right Bottom Timeout="-1">
+    <ChildContent>
+        <MI18n Key="pwa.new-content-available">
+            <PlaceholderContent>
+                @if (context == 0)
+                {
+                    <MI18n Key="pwa.refresh" Class="font-weight-bold"></MI18n>
+                }
+            </PlaceholderContent>
+        </MI18n>
+    </ChildContent>
+    <ActionContent>
+        <MButton Text Class="mx-2 text-none font-weight-regular m-snackbar-action__ignore"
+                 OnClick="Ignore">
+            <MI18n Key="pwa.ignore" Class="white--text"></MI18n>
+        </MButton>
+        <MButton Text Class="primary text--secondary text-capitalize font-weight-regular px-2 m-snackbar-action__refresh"
+                 OnClick="RefreshToSkipWaiting">
+            <MI18n Key="pwa.refresh" Class="white--text"></MI18n>
+        </MButton>
+    </ActionContent>
+</MSnackbar>
+
+@code {
+
+    private async Task Ignore()
+    {
+        await JSRuntime.InvokeVoidAsync("swIgnoreUpdate");
+    }
+
+    private async Task RefreshToSkipWaiting()
+    {
+        await JSRuntime.InvokeVoidAsync("swSkipWaiting");
+    }
+
+}

@@ -31,7 +31,7 @@ namespace Masa.Blazor
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-            
+
             var valueItem = SelectedItems.FirstOrDefault();
             if (valueItem is not null)
             {
@@ -92,6 +92,13 @@ namespace Masa.Blazor
                 var selector = $"{MMenu.ContentElement.GetSelector()} .m-cascader__column:nth-child({args.columnIndex + 1})";
                 await Js.ScrollIntoParentView(selector, true, true);
             });
+        }
+
+        protected override async Task OnMenuBeforeShowContent()
+        {
+            await base.OnMenuBeforeShowContent();
+
+            _cascaderLists.ForEach(cascaderList => cascaderList.ActiveSelectedOrNot());
         }
 
         protected override async Task OnMenuAfterShowContent(bool isLazyContent)

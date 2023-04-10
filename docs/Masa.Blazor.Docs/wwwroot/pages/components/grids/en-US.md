@@ -27,7 +27,7 @@ for background, terminology, guidelines, and code snippets.
 
 ## Helper Classes
 
-`FillHeight` applies `height: 100%` to an element. When applied to **MContainer** it will also `align-items: center`.
+`fill-height` applies `height: 100%` to an element. When applied to **MContainer** it will also `align-items: center`.
 
 ## Caveats
 

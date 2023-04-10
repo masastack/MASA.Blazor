@@ -94,11 +94,11 @@ public partial class EllipsisText : IAsyncDisposable
         try
         {
             _isDisposed = true;
-            _selfReference?.Dispose();
 
             await _resizeObserverDisposable.InvokeVoidAsync("disconnect");
-            await _jsModule.DisposeAsync();
             await _resizeObserverDisposable.DisposeAsync();
+            await _jsModule.DisposeAsync();
+            _selfReference?.Dispose();
         }
         catch
         {

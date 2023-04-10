@@ -8,7 +8,7 @@ related:
   - /blazor/components/editors
 ---
 
-<app-alert type="info" content="支持 **prism** 和 **highlightjs** 两种高亮方案，详情请查看 [MHighlight](/blazor/components/syntax-highlights) 组件。"></app-alert>
+<app-alert type="info" content="支持 **prism** 和 **highlightjs** 两种高亮方案，详情请查看 [MSyntaxHighlight](/blazor/components/syntax-highlights) 组件。"></app-alert>
 
 ## 使用
 

@@ -1,6 +1,5 @@
 ﻿using Markdig;
 using Markdig.Extensions.Yaml;
-using Markdig.Renderers.Html;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
 using Masa.Docs.Indexing.Data;
