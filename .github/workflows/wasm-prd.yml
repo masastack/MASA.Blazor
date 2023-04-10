@@ -45,9 +45,11 @@ jobs:
       run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
     - name: run index-create tools
       env:
-        MASA_DOC_DOMAIN: "https://docs.masastack.com/"
+        MASA_DOC_DOMAIN: "/"
         MASA_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
         MASA_ALGOLIA_APP_ID: "TSB4MACWRC"
         MASA_ALGOLIA_INDEX_PREFIX: "blazor-masastack_prd_"
         MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"
-      run: dotnet run --project docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj -c Release
+        # MASA_DOC_EXCLUDE_URLS  if many please seperate with || , e.g. "/blazor/about/about||/blazor/about/meet-the-team"
+        MASA_DOC_EXCLUDE_URLS: "/blazor/about/about||/blazor/about/meet-the-team"
+      run: cd docs/Masa.Docs.Indexing && dotnet run --project Masa.Docs.Indexing.csproj --no-launch-profile -c Release

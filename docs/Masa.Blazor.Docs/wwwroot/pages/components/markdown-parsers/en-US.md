@@ -8,7 +8,7 @@ related:
   - /blazor/components/editors
 ---
 
-<app-alert type="info" content="**prism** and **highlightjs** highlighting schemes are supported, see the [MHighlight](/blazor/components/syntax-highlights) component for details."></app-alert>
+<app-alert type="info" content="**prism** and **highlightjs** highlighting schemes are supported, see the [MSyntaxHighlight](/blazor/components/syntax-highlights) component for details."></app-alert>
 
 ## Usage
 

@@ -1,24 +1,12 @@
 ﻿@namespace Masa.Docs.Shared.Components
 
-@if (MasaBlazor?.Breakpoint?.Mobile is not true)
-{
-    <div id="docsearch" style="background-color:#F6F8FD;max-width: 340px" class="search-input rounded-lg @Class" />
-}
-else
-{
-    <div id="docsearch-mobile" style="background-color:#F6F8FD;" class="search-input rounded-sm @Class" />
-}
+@inject IJSRuntime Js
+@inject I18n I18n
+
+<div id="docsearch" style="@Style" class="@Class"></div>
 
 @code {
 
-    [Inject]
-    public IJSRuntime? Js { get; set; }
-
-    [Inject]
-    public I18n? I18n { get; set; }
-
-    [Inject]
-    public MasaBlazor? MasaBlazor { get; set; }
 
     [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
@@ -27,7 +15,10 @@ else
     public string? Env { get; set; } = null!;
 
     [Parameter]
-    public string Class { get; set; } = "mr-6";
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public string? Style { get; set; } = "";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -37,13 +28,18 @@ else
         }
     }
 
-    public async Task InitDocSearchAsync()
+    public async ValueTask InitDocSearchAsync()
     {
-        if (Project is not null)
+        try
         {
+            if (Project is null) return;
             var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
             var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
-            await Js!.InvokeVoidAsync("addDocSearch", indexName, MasaBlazor?.Breakpoint?.Mobile, currentLanguage, I18n.T("Search"));
+            await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
+        }
+        catch
+        {
+            // ignored
         }
     }
 }

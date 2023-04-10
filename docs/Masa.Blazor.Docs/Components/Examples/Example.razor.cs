@@ -42,7 +42,7 @@ public partial class Example : NextTickComponentBase
         base.OnInitialized();
 
         var githubUri =
-            $"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
+            $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
 
         _tooltips = new()
         {

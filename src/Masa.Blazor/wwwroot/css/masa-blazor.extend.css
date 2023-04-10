@@ -727,6 +727,15 @@ input[type=number] {
     display: inline-block;
 }
 
+.m-application code.m-code-highlight__code {
+    background-color: unset;
+    color: unset;
+    padding: unset;
+    border-radius: unset;
+    font-size: unset;
+    font-weight: unset;
+}
+
 /* i18n */
 .m-i18n {
 }

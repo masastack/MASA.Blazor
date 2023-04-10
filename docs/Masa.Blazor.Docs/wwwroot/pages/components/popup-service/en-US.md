@@ -1,6 +1,6 @@
 ---
 title: Popup service
-content: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm** and **Prompt**."
+desc: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm** and **Prompt**."
 tag: Service
 related:
   - /blazor/components/dialogs
@@ -98,7 +98,7 @@ Here are some necessary steps:
 1. Your own popup component should inherit from the **PopupComponentBase** which is in the **Masa.Blazor.Popup.Components** namespace.
 2. Use the `Visible` property inherited from **PopupComponentBase** to control whether your component opens or closes.
 3. When you close the popup component, the `ClosePopupAsync` method inherited from **PopupComponentBase** should be called. The `returnVal` parameter in the `ClosePopupAsync` method will be the return value of `IPopupService.OpenAsync`.
-4. (optional) There is also a `PopupOkEventArgs` class that helps you leave the power to close the popup component to the user. For details, check the source code for [Confirm component](https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Masa.Blazor/Popup/Components/Confirm/Confirm.razor.cs#L69).
+4. (optional) There is also a `PopupOkEventArgs` class that helps you leave the power to close the popup component to the user. For details, check the source code for [Confirm component](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Popup/Components/Confirm/Confirm.razor.cs#L69).
 
 Here is a simple popup component named **CustomPopupComponent** that encapsulates the **MDialog** and **MAlert** components:
 

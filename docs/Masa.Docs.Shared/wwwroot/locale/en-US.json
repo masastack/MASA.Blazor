@@ -49,6 +49,7 @@
   "home": "Home",
   "docs": "Documents",
   "sponsors": "SPONSORS",
+  "contactus": "CONTACT US",
 
   "blog": "Blog",
   "pro": "Pro",
@@ -386,5 +387,10 @@
   "1.0.0": "1.0.0",
   "tutorial": "Tutorial",
   "released-by": "Released by: {0}",
-  "published-on": "Published on {0}"
+  "published-on": "Published on {0}",
+  "pwa": {
+    "new-content-available": "New content is available. Click {0} to update.",
+    "ignore": "Ignore",
+    "refresh": "Refresh"
+  }
 }

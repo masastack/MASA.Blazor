@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Masa.Docs.Indexing.Configurations
@@ -10,7 +9,7 @@ namespace Masa.Docs.Indexing.Configurations
 
         public const string ALGOLIA_APP_ID = "MASA_ALGOLIA_APP_ID";
 
-        public const string ALGOLIA_INDEX_PREFIX = "MASA_ALGOLIA_INDEXP_REFIX";
+        public const string ALGOLIA_INDEX_PREFIX = "MASA_ALGOLIA_INDEX_PREFIX";
 
         public const string ROOT_DOCS_PATH = "MASA_ROOT_DOCS_PATH";
 
@@ -24,6 +23,7 @@ namespace Masa.Docs.Indexing.Configurations
         {
             _logger = logger;
         }
+
         public void Configure(AlgoliaOptions options)
         {
             TrySetOptionFromEnvironmentVariables(options);
@@ -36,12 +36,22 @@ namespace Masa.Docs.Indexing.Configurations
                 }
             }
 
-            #region check option
-            options.Projects.AssertParamNotNull(nameof(options.Projects));
-            options.AlgoliaApiKey.AssertParamNotNull(ALGOLIA_API_KEY);
-            options.ApplicationId.AssertParamNotNull(nameof(options.ApplicationId));
+            options.Projects.AssertNotNullOrEmpty(nameof(options.Projects));
+            foreach (var item in options.Projects!)
+            {
+                item.Value.AssertNotNullOrEmpty($"Project.{item.Key}");
+            }
+            options.AlgoliaApiKey.AssertNotNullOrEmpty(ALGOLIA_API_KEY);
+            options.ApplicationId.AssertNotNullOrEmpty(nameof(options.ApplicationId));
             AssertDirectoryExist(options.RootDocsPath);
-            #endregion
+            if (!options.DocDomain.StartsWith("https://") && !options.DocDomain.StartsWith("http://") && !options.DocDomain.StartsWith("/"))
+            {
+                throw new ArgumentException("Unknown doc domain format,it can start with (http:// || https:// || /), please check it.");
+            }
+            if (!options.DocDomain.EndsWith("/"))
+            {
+                options.DocDomain += "/";
+            }
         }
 
         public void TrySetOptionFromEnvironmentVariables(AlgoliaOptions algoliaOptions)
@@ -50,17 +60,15 @@ namespace Masa.Docs.Indexing.Configurations
             {
                 var value = Environment.GetEnvironmentVariable(envName, EnvironmentVariableTarget.Process);
                 _logger.LogInformation("env: {0}, has value: {1}", envName, !string.IsNullOrEmpty(value));
-                if (value is not null)
+                if (value is null) return;
+                if (delimiter != null)
                 {
-                    if (delimiter != null)
-                    {
-                        var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
-                        algoliaOptions.SetPropertyValue(propertyOrFieldName, valueSet);
-                    }
-                    else
-                    {
-                        algoliaOptions.SetPropertyValue(propertyOrFieldName, value);
-                    }
+                    var valueSet = value.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).AsEnumerable();
+                    algoliaOptions.SetPropertyValue(propertyOrFieldName, valueSet);
+                }
+                else
+                {
+                    algoliaOptions.SetPropertyValue(propertyOrFieldName, value);
                 }
             }
 

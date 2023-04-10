@@ -33,15 +33,15 @@ related:
 
 具体使用的源码列表如下：
 
-- [PageTabsLayout.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageTabsLayout.razor)
+- [PageTabsLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageTabsLayout.razor)
   布局：演示使用 **PPageTabs**、**PPageContainer**和**PPageTabsProvider** 组件
-- [PageTabs1.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
+- [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
   Page1：演示保存页面状态的功能
-- [PageTabs2.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
+- [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
   Page2：演示保存页面状态的功能
-- [PageTabs3.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
+- [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
   Page3：演示更改标签页标题的功能
-- [PageTabs4.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)
+- [PageTabs4.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)
   Page4：演示模糊匹配路径只显示一个标签页的功能
 
 <masa-example file="Examples.components.page_tabs.Usage" no-actions="true"></masa-example>

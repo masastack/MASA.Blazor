@@ -1,15 +1,10 @@
 ﻿using Algolia.Search.Clients;
 using Algolia.Search.Models.Settings;
-using Markdig;
-using Markdig.Extensions.Yaml;
-using Markdig.Syntax;
-using Markdig.Syntax.Inlines;
 using Masa.Docs.Indexing.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using Masa.Docs.Indexing.Parsers;
 
 namespace Masa.Docs.Indexing
 {
@@ -19,6 +14,8 @@ namespace Masa.Docs.Indexing
     public class AlgoliaIndexBuilder : IIndexBuilder<RecordRoot>
     {
         private readonly ILogger _logger;
+
+        private readonly IMasaDocParser _docParser;
 
         private readonly SearchClient _searchClient;
 
@@ -37,12 +34,13 @@ namespace Masa.Docs.Indexing
         }
 
         public AlgoliaIndexBuilder(
-             ILogger<AlgoliaIndexBuilder> logger, IOptions<AlgoliaOptions> algoliaOption)
+             ILogger<AlgoliaIndexBuilder> logger, IOptions<AlgoliaOptions> algoliaOption, IMasaDocParser docParser)
         {
             _logger = logger;
+            _docParser = docParser;
             _algoliaOption = algoliaOption.Value;
-            //when came in ,get all file first
-            SetAllFile();
+            if (!_totalFiles.Any())
+                SetAllFile();
             _searchClient = new SearchClient(_algoliaOption.ApplicationId, _algoliaOption.AlgoliaApiKey);
         }
 
@@ -93,235 +91,28 @@ namespace Masa.Docs.Indexing
             };
         }
 
-        public async Task<bool> CreateIndexAsync(IEnumerable<RecordRoot> records)
+        public async Task CreateIndexAsync(IEnumerable<RecordRoot> records, CancellationToken ct = default)
         {
-            _logger.LogInformation($"Create index with {records.Count()} pages.");
-            var indexNames = records.Select(x => x.IndexName).Distinct();
-            foreach (var indexName in indexNames)
+            try
             {
-                var index = _searchClient.InitIndex(indexName);
-                await index.SetSettingsAsync(GetIndexSetting());
-                var allRecords = records.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
-                await index.SaveObjectsAsync(allRecords);
-            }
-            _logger.LogInformation($"Index creation complete.");
-            return true;
-        }
-
-        private IEnumerable<Record> ParseDocument(string docContent, string docUrl, string lang, string project)
-        {
-            var pipeline = new MarkdownPipelineBuilder().UseYamlFrontMatter().UseAdvancedExtensions().Build();
-            var document = Markdown.Parse(docContent, pipeline);
-
-            void AddContentToRecord(string lan, string url, string projectName, int position, in List<Record> result, in Record lastRecord, ref string? content)
-            {
-                if (string.IsNullOrEmpty(content))
+                var indexNames = records.Select(x => x.IndexName).Distinct();
+                foreach (var indexName in indexNames)
                 {
-                    content = null;
-                    return;
+                    var index = _searchClient.InitIndex(indexName);
+                    await index.SetSettingsAsync(GetIndexSetting(), ct: ct);
+                    var allRecords = records.Where(x => x.IndexName == indexName).SelectMany(x => x.Records);
+                    _logger.LogInformation($"clear old objects in  {indexName}.");
+                    await index.ClearObjectsAsync(ct: ct);
+                    _logger.LogInformation($"create {allRecords.Count()} objects in  {indexName}.");
+                    await index.SaveObjectsAsync(allRecords, ct: ct);
                 }
-                var record = new Record(lan, url, projectName, RecordType.Content, position: position, level: 0, pageRank: 0);
-                record.ClonePrerecord(lastRecord);
-                record.Content = content;
-                record.ContentCamel = content;
-                content = null;
-                result.Add(record);
+                _logger.LogInformation("Index creation complete.");
             }
-
-            string? GetContentFromInline(ContainerInline? container)
+            catch (Exception e)
             {
-                if (container == null) return null;
-                foreach (var htmlInline in container.FindDescendants<HtmlInline>())
-                {
-                    htmlInline.Remove();
-                }
-                foreach (var inline in container.FindDescendants<LineBreakInline>())
-                {
-                    inline.Remove();
-                }
-
-                if (container.FirstChild is null) return null;
-                string? result = null;
-                foreach (var inline in container)
-                {
-                    Func<string?> func = inline switch
-                    {
-                        CodeInline code => () => code.Content,
-                        EmphasisInline emphasisInline => () => emphasisInline.FirstChild?.ToString(),
-                        LiteralInline literalInline => () => literalInline.Content.ToString(),
-                        LinkInline linkInline => () => linkInline.Title,
-                        null => () => null,
-                        _ => () => inline.ToString()
-                    };
-                    var inlineText = func();
-                    _logger.LogDebug(
-                        $"======== {inline?.GetType()} {Environment.NewLine} {inlineText} {Environment.NewLine}");
-                    result += inlineText;
-                }
-
-                return result;
-                //var inlineMarkdown = doc.Substring(container.Span.Start, container.Span.End);
-                //var text = Markdown.Normalize(inlineMarkdown, new NormalizeOptions() { });
-                //return text;
+                _logger.LogError("{e.Message}", e.Message);
+                throw;
             }
-
-            Record? AddHeaderRecord(string lan, string projectName, int position, in HeadingBlock block, uint firstLevel, in Record? lastRecord = null)
-            {
-                RecordType recordType;
-                int level;
-                switch (block.Level - firstLevel + 1)
-                {
-                    case 1:
-                        recordType = RecordType.Lvl1;
-                        level = 90;
-                        break;
-                    case 2:
-                        recordType = RecordType.Lvl2;
-                        level = 80;
-                        break;
-                    case 3:
-                        recordType = RecordType.Lvl3;
-                        level = 70;
-                        break;
-                    case 4:
-                        recordType = RecordType.Lvl4;
-                        level = 60;
-                        break;
-                    case 5:
-                        recordType = RecordType.Lvl5;
-                        level = 50;
-                        break;
-                    case 6:
-                        recordType = RecordType.Lvl6;
-                        level = 40;
-                        break;
-                    default:
-                        return null;
-                }
-                Record record = new Record(lan, docUrl, projectName, recordType, position: position, level: level, pageRank: 0);
-                if (lastRecord is not null)
-                {
-                    record.ClonePrerecord(lastRecord);
-                }
-                var content = GetContentFromInline(block.Inline);
-                if (content != null)
-                {
-                    switch (recordType)
-                    {
-                        case RecordType.Lvl1:
-                            record.Hierarchy.Lvl1 = content;
-                            break;
-                        case RecordType.Lvl2:
-                            record.Hierarchy.Lvl2 = content;
-                            break;
-                        case RecordType.Lvl3:
-                            record.Hierarchy.Lvl3 = content;
-                            break;
-                        case RecordType.Lvl4:
-                            record.Hierarchy.Lvl4 = content;
-                            break;
-                        case RecordType.Lvl5:
-                            record.Hierarchy.Lvl5 = content;
-                            break;
-                        case RecordType.Lvl6:
-                            record.Hierarchy.Lvl6 = content;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    record.Anchor = content.HashToAnchorString();
-                    record.Url = docUrl + "#" + record.Anchor;
-                    record.UrlWithoutVariables = record.Url;
-                }
-                return record;
-            }
-
-            Record AddYamlHeaderRecord(string lan, string projectName, int position, string content)
-            {
-                var recordType = RecordType.Lvl1;
-                var level = 90;
-                Record record = new Record(lan, docUrl, projectName, recordType, position: position, level: level, pageRank: 0);
-                record.Hierarchy.Lvl1 = content;
-                record.Anchor = content.HashToAnchorString();
-                record.Url = docUrl + "#" + record.Anchor;
-                record.UrlWithoutVariables = record.Url;
-                return record;
-            }
-
-            int position = 0;
-            var result = new List<Record>();
-            Record? record = null;
-            string? content = null;
-            (uint firstHeadLevel, bool isSet) = (1, false);
-            foreach (var node in document.AsEnumerable())
-            {
-                Record? lastRecord;
-                switch (node)
-                {
-                    case YamlFrontMatterBlock yamlBlock:
-                        var yamlText = docContent.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length).Trim('-');
-                        var meta = Deserializer.FromValueDeserializer(new DeserializerBuilder()
-                                .WithNamingConvention(CamelCaseNamingConvention.Instance).BuildValueDeserializer())
-                            .Deserialize<DescriptionYaml>(yamlText);
-                        if (!isSet)
-                        {
-                            firstHeadLevel = 1;
-                            isSet = true;
-                        }
-                        record = AddYamlHeaderRecord(lang, project, position, meta.Title!);
-                        result.Add(record);
-                        lastRecord = record;
-                        position += 1;
-                        if (!string.IsNullOrEmpty(meta.Desc))
-                        {
-                            var descContent = meta.Desc;
-                            AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref descContent);
-                            position += 1;
-                        }
-                        break;
-                    case HeadingBlock block:
-                        if (!isSet)
-                        {
-                            firstHeadLevel = (uint)block.Level;
-                            isSet = true;
-                        }
-                        lastRecord = record;
-                        //add content to record when meet a new head and will not do it at the first step
-                        if (lastRecord is not null && !string.IsNullOrEmpty(content))
-                        {
-                            AddContentToRecord(lang, docUrl, project, position, result, lastRecord, ref content);
-                            position += 1;
-                        }
-                        record = AddHeaderRecord(lang, project, position, block, firstHeadLevel, lastRecord);
-                        if (record is not null)
-                        {
-                            result.Add(record);
-                            position += 1;
-                        }
-                        break;
-                    case ParagraphBlock paragraph:
-                        content += GetContentFromInline(paragraph.Inline);
-                        break;
-                }
-
-                _logger.LogDebug(string.Format("nodeType:{0}\t{1}\t{2}\n{3}\n", node.GetType().Name, docUrl,
-                    position, content));
-            }
-            var lastPosition = result.LastOrDefault()?.Weight.Position;
-            if (lastPosition is not null)
-            {
-                position = lastPosition.Value + 1;
-            }
-            else
-            {
-                position += 1;
-            }
-            if (!string.IsNullOrEmpty(content))
-            {
-                AddContentToRecord(lang, docUrl, project, position, result, record!, ref content);
-                if (record is not null) result.Add(record);
-            }
-            return result;
         }
 
         private void SetAllFile()
@@ -337,7 +128,8 @@ namespace Masa.Docs.Indexing
         public IEnumerable<RecordRoot> GenerateRecords()
         {
             var result = new List<RecordRoot>();
-            Uri baseUri = new Uri(_algoliaOption.DocDomain);
+            string baseUri = _algoliaOption.DocDomain;
+
             foreach (var projectItem in _algoliaOption.Projects!)
             {
                 var project = projectItem.Key;
@@ -366,14 +158,17 @@ namespace Masa.Docs.Indexing
                     {
                         continue;
                     }
-                    var uri = new Uri(baseUri, projectUrl);
-                    var docUrl = uri.ToString();
+
+                    var docUrl = baseUri + projectUrl.TrimStart('/');
                     var content = File.ReadAllText(fileName, Encoding.UTF8);
                     var indexName = $"{_algoliaOption.IndexPrefix}{language}_{lowerProject}";
-                    RecordRoot recordRoot = new(indexName);
-                    var records = ParseDocument(content, docUrl, language, project);
-                    recordRoot.Records.AddRange(records);
-                    result.Add(recordRoot);
+                    var records = _docParser.ParseDocument(content, docUrl, language, project);
+                    if (records.Any())
+                    {
+                        RecordRoot recordRoot = new(indexName);
+                        recordRoot.Records.AddRange(records);
+                        result.Add(recordRoot);
+                    }
                 }
             }
             return result;

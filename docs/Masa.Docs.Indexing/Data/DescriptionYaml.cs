@@ -8,4 +8,9 @@ public class DescriptionYaml
 
     public List<string> Related { get; set; } = new();
 
+    public string? Tag { get; set; }
+
+    public string? Content { get; set; } = null;
+
+    public DateTime? Date { get; set; } = null;
 }

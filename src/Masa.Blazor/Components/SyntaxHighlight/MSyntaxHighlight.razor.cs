@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MHighlight : BDomComponentBase
+public partial class MSyntaxHighlight : BDomComponentBase
 {
     [Inject]
     protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
@@ -12,7 +12,6 @@ public partial class MHighlight : BDomComponentBase
     public string? Code { get; set; }
 
     [Parameter]
-    [EditorRequired]
     public string? Language { get; set; }
 
     [Parameter]
@@ -34,7 +33,7 @@ public partial class MHighlight : BDomComponentBase
         CssProvider
             .Apply(css =>
             {
-                css.Add("m-code-highlight__pre")
+                css.Add("hljs m-code-highlight__pre")
                    .AddIf($"language-{Language!.ToLower()}", () => Language is not null && !IgnorePreCssOfTheme);
             }).Apply("code", css =>
             {
