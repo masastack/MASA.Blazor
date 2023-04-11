@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor.Presets
 
 <MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
-    @foreach (var item in CronItems)
+    @foreach (var item in _cronItems)
     {
         <MTab Value="item.Period.ToString()">
             @I18n.T($"$masaBlazor.{nameof(item.Period)}.{item.Period.ToString()}")
@@ -9,10 +9,10 @@
     }
 </MTabs>
 <MTabsItems @bind-Value="_selectedPeriod">
-    @foreach (var item in CronItems)
+    @foreach (var item in _cronItems)
     {
         <MTabItem Value="item.Period.ToString()">
-            <CronItem Period="item.Period" @bind-Value="item.CronValue" CronValueHasChanged="CronValueHasChanged">
+            <CronItem Period="item.Period" @bind-Value="item.CronValue" CronValueHasChanged="CronValueChangedAsync">
             </CronItem>
         </MTabItem>
     }
