@@ -33,7 +33,22 @@ public partial class MMonacoEditor : BDomComponentBase
     public Action? InitCompleteHandle { get; set; }
 
     [Parameter]
-    public string Value { get; set; }
+    public string Value
+    {
+        get
+        {
+            return _value;
+        }
+        set
+        {
+            if (_value != value)
+            {
+                _value = value;
+            }
+
+            SetValue(value);
+        }
+    }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
@@ -42,6 +57,19 @@ public partial class MMonacoEditor : BDomComponentBase
     /// Monaco
     /// </summary>
     public IJSObjectReference Monaco { get; private set; }
+
+    private string _value;
+
+    protected override void RegisterWatchers(PropertyWatcher watcher)
+    {
+        base.RegisterWatchers(watcher);
+
+        watcher
+            .Watch<string>(nameof(Value), async val =>
+            {
+                await SetValueAsync(_value);
+            });
+    }
 
     protected override void SetComponentClass()
     {
@@ -150,6 +178,8 @@ public partial class MMonacoEditor : BDomComponentBase
     [JSInvokable]
     public async Task OnChange(string value)
     {
+        _value = value;
+
         if (ValueChanged.HasDelegate)
         {
             await ValueChanged.InvokeAsync(value);
