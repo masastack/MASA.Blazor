@@ -133,7 +133,7 @@ public partial class Index : NextTickComponentBase
 
         var options = new CompileRazorOptions()
         {
-            Code = await monaco.MonacoEditor.GetValue(),
+            Code = await monaco.MonacoEditor.GetValueAsync(),
             ConcurrentBuild = true
         };
 
@@ -187,7 +187,7 @@ public partial class Index : NextTickComponentBase
     {
         await InitMonaco(module);
 
-        await module.MonacoEditor.DefineTheme("custom", new StandaloneThemeData()
+        await module.MonacoEditor.DefineThemeAsync("custom", new StandaloneThemeData()
         {
             Base = "vs",
             inherit = true,
@@ -198,7 +198,7 @@ public partial class Index : NextTickComponentBase
             }
         });
 
-        await module.MonacoEditor.SetTheme("custom");
+        await module.MonacoEditor.SetThemeAsync("custom");
 
         await NextTickWhile(async () =>
         {
@@ -210,7 +210,7 @@ public partial class Index : NextTickComponentBase
     private async Task InitMonaco(TabMonacoModule tabMonacoModule)
     {
         // 监听CTRL+S
-        await tabMonacoModule.MonacoEditor.AddCommand(2097, _objRef, nameof(RunCode));
+        await tabMonacoModule.MonacoEditor.AddCommandAsync(2097, _objRef, nameof(RunCode));
     }
 
     private async Task<List<PortableExecutableReference>?> GetReference()
