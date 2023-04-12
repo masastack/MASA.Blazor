@@ -27,9 +27,9 @@
             }
         };
         
-        await _editor.DefineTheme("myTheme", theme);
+        await _editor.DefineThemeAsync("myTheme", theme);
 
-        await _editor.SetTheme("myTheme");
+        await _editor.SetThemeAsync("myTheme");
     }
     private async Task<object> InitEditor()
     {

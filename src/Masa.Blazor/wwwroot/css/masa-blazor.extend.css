@@ -777,3 +777,9 @@ input[type=number] {
 .m-snack .m-alert__icon {
     margin-right: 12px;
 }
+
+/* tab */
+
+.m-tab {
+    text-transform: none;
+}
