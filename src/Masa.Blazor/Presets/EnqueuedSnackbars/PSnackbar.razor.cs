@@ -1,12 +1,16 @@
 ﻿#nullable enable
 
-namespace Masa.Blazor.Presets.EnqueuedSnackbars;
+namespace Masa.Blazor.Presets;
 
 public partial class PSnackbar
 {
     [CascadingParameter] private PEnqueuedSnackbars? EnqueuedSnacks { get; set; }
 
     #region parameters from MSnackbar
+
+    [Parameter] public bool Value { get; set; } = true;
+
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
 
     [Parameter] public string? Class { get; set; }
 
@@ -17,8 +21,6 @@ public partial class PSnackbar
     [Parameter] public bool Dark { get; set; }
 
     [Parameter] public StringNumber? Elevation { get; set; }
-
-    [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public bool Light { get; set; }
 
@@ -44,6 +46,14 @@ public partial class PSnackbar
 
     [Parameter] public StringNumber? Width { get; set; }
 
+    [Parameter] public bool Left { get; set; }
+
+    [Parameter] public bool Right { get; set; }
+
+    [Parameter] public bool Bottom { get; set; }
+
+    [Parameter] public bool Top { get; set; }
+
     #endregion
 
     [Parameter] public Guid EnqueueId { get; set; }
@@ -60,9 +70,10 @@ public partial class PSnackbar
 
     [Parameter] public EventCallback OnAction { get; set; }
 
+    [Parameter] public EventCallback OnClose { get; set; }
+
     [Parameter] public bool Closeable { get; set; }
 
-    private bool _visible = true;
     private bool _actionLoading;
 
     private string? ComputedColor
@@ -107,7 +118,7 @@ public partial class PSnackbar
 
         _actionLoading = false;
 
-        HandleOnClose();
+        Value = false;
     }
 
     private async Task HandleOnClosed()
@@ -122,6 +133,8 @@ public partial class PSnackbar
 
     private void HandleOnClose()
     {
-        _visible = false;
+        Value = false;
+
+        _ = OnClose.InvokeAsync();
     }
 }
