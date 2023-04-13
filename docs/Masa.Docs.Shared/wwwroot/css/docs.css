@@ -504,6 +504,11 @@ default-app-markup {
         margin-bottom: 1.5rem;
     }
 
+    .doc-markdown-body code {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
 .m-select.light-border .m-input__slot fieldset {
     border-color: rgba(0,0,0,.12) !important;
 }
