@@ -29,16 +29,11 @@ public class NavItem : IDefaultItem<NavItem>
 
     public NavItemState State { get; set; }
 
-    public NavItemTiling? Tiling { get; set; }
+    public bool? Hidden { get; set; }
 
     public string? Segment => (Group ?? Title);
-}
 
-public enum NavItemTiling
-{
-    Visible,
-    Some,
-    Invisible
+    public bool IsHidden => Hidden.HasValue && Hidden.Value && (Children != null && Children.All(c => c.IsHidden));
 }
 
 public enum NavItemState
