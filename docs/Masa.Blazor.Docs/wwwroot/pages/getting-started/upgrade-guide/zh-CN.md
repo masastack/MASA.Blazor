@@ -36,6 +36,13 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   + PopupService.EnqueueSnackbarAsync()
   ```
 - **MPageTabs** 重构为预置组件**PPageTabs**，设计和API改动较大，具体请参考[文档](/blazor/components/page-tabs)。
+- 移除了通过`$DefaultCulture`设置默认语言的方式。现在在 _Program.cs_ 中通过 `AddMasaBlazor` 的 `Locale` 选项设置默认语言：
+  ```diff
+  + services.AddMasaBlazor(options =>
+  + {
+  +     options.Locale = new Locale("zh-CN", "en-US");
+  + });
+  ```
 
 ## 从 v0.5.x 升级到 v0.6.x
 

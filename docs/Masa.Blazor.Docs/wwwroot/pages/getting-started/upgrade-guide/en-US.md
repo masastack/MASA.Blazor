@@ -36,6 +36,13 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   + PopupService.EnqueueSnackbarAsync()
   ```
 - **MPageTabs** refactored to the preset component **PPageTabs**. There are many design and API changes, please refer to the [document](/blazor/components/page-tabs) for details.
+- Remove the way of setting the default locale through `$DefaultCulture`. Instead, supply the `Locale` option when calling `AddMasaBlazor` in _Program.cs_.
+  ```diff
+  + services.AddMasaBlazor(options =>
+  + {
+  +     options.Locale = new Locale("zh-CN", "en-US");
+  + });
+  ```
 
 ## Upgrading from v0.5.x to v0.6.x
 
