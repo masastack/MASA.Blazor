@@ -176,11 +176,13 @@ window.MasaBlazor.markdownItRules = function (parser) {
   function addTableRules(md) {
     md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
       return (
-        '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
-        self.renderToken(tokens, idx, options) +
-        "</div></div></div>"
+          '<div class="m-sheet m-sheet--outlined rounded theme--light mb-2"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
+          self.renderToken(tokens, idx, options)
       );
     };
+    md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
+      return self.renderToken(tokens, idx, options) + "</div></div></div>";
+    }
   }
 
   function addCodeGroupRules(parser) {
