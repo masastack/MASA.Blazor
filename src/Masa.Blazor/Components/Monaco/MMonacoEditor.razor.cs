@@ -44,7 +44,7 @@ public partial class MMonacoEditor : BDomComponentBase
             if (_value != value)
             {
                 _value = value;
-                _waitingUpdate = true;
+                _valueChangedByUser = true;
             }
 
             SetValue(value);
@@ -60,7 +60,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public IJSObjectReference Monaco { get; private set; }
 
     private string _value;
-    private bool _waitingUpdate = false;
+    private bool _valueChangedByUser;
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
@@ -69,9 +69,9 @@ public partial class MMonacoEditor : BDomComponentBase
         watcher
             .Watch<string>(nameof(Value), async val =>
             {
-                if (_waitingUpdate)
+                if (_valueChangedByUser)
                 {
-                    _waitingUpdate = false;
+                    _valueChangedByUser = false;
                     await SetValueAsync(_value);
                 }
             });
@@ -185,7 +185,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public async Task OnChange(string value)
     {
         _value = value;
-        _waitingUpdate = false;
+        _valueChangedByUser = false;
 
         if (ValueChanged.HasDelegate)
         {
