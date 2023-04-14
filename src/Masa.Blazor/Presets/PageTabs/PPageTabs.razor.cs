@@ -20,10 +20,13 @@ public partial class PPageTabs : PatternPathComponentBase
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public RenderFragment<PageTabPathValue>? TabContent { get; set; }
+    public string? TabClass { get; set; }
 
     [Parameter]
-    public string? TabClass { get; set; }
+    public RenderFragment<PageTabPathValue>? TabIconContent { get; set; }
+
+    [Parameter]
+    public Func<PageTabPathValue, TabOptions>? TabOptions { get; set; }
 
     [Parameter]
     [ApiDefaultValue(true)]
@@ -52,6 +55,16 @@ public partial class PPageTabs : PatternPathComponentBase
 
     [Parameter]
     public string? NoDataPath { get; set; } = "/";
+
+    [Parameter]
+    public string? CloseIcon { get; set; }
+
+    [Parameter]
+    [ApiDefaultValue(true)]
+    public bool AskBeforeClosing { get; set; } = true;
+
+    [Parameter]
+    public Func<string, Task<bool>>? OnClose { get; set; }
 
     private bool _menuValue;
     private PatternPath? _contextmenuPath;
@@ -95,7 +108,9 @@ public partial class PPageTabs : PatternPathComponentBase
         base.SetComponentClass();
 
         CssProvider.Apply(css => css.Add("p-page-tabs"))
-                   .Apply("tab", css => css.Add("p-page-tab"));
+                   .Apply("tab", css => css.Add("p-page-tab"))
+                   .Apply("tab-title", css => css.Add("p-page-tab__title"))
+                   .Apply("tab-close", css => css.Add("p-page-tab__close"));
     }
 
     private void PageTabsProviderOnTabTitleChanged(object? sender, string e)
@@ -134,6 +149,17 @@ public partial class PPageTabs : PatternPathComponentBase
         });
     }
 
+    private string GetTabTitle(PatternPath patternPath, TabOptions? tabOptions)
+    {
+        if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var titleBuilder) &&
+            titleBuilder.Invoke() is { } title && !string.IsNullOrWhiteSpace(title))
+        {
+            return title;
+        }
+
+        return tabOptions?.Title ?? DefaultTabTitle(patternPath.AbsolutePath);
+    }
+
     private string DefaultTabTitle(string absolutePath)
     {
         if (absolutePath == "/")
@@ -144,10 +170,21 @@ public partial class PPageTabs : PatternPathComponentBase
         return absolutePath.TrimEnd('/').Split('/').Last();
     }
 
-    private async Task HandleOnCloseTab(PatternPath patternPath)
+    private async Task HandleOnCloseTab(PatternPath patternPath, string tabTitle)
     {
-        var isConfirmed = await PopupService.ConfirmAsync(I18n.T("$masaBlazor.pageTabs.closeTab"),
-            I18n.T("$masaBlazor.pageTabs.closeTabConfirm", args: patternPath.AbsolutePath), AlertTypes.Warning);
+        if (!AskBeforeClosing) return;
+
+        bool isConfirmed;
+        if (OnClose != default)
+        {
+            isConfirmed = await OnClose.Invoke(tabTitle);
+        }
+        else
+        {
+            isConfirmed = await PopupService.ConfirmAsync(I18n.T("$masaBlazor.pageTabs.closeTab"),
+                I18n.T("$masaBlazor.pageTabs.closeTabConfirm", args: tabTitle), AlertTypes.Warning);
+        }
+
         if (!isConfirmed) return;
 
         var currentPathPattern = GetCurrentPatternPath();

@@ -336,6 +336,10 @@
     text-transform: capitalize;
 }
 
+.p-page-tab__close {
+    margin-left: 4px;
+}
+
 .p-page-container {
     overflow: visible;
 }
