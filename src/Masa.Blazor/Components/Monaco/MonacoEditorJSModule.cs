@@ -6,9 +6,9 @@ public class MonacoEditorJSModule : JSModule
     {
     }
 
-    public async ValueTask<IJSObjectReference> Init(string id, object options)
+    public async ValueTask<IJSObjectReference> Init<T>(string id, object options, DotNetObjectReference<T> dotNetObjectReference) where T : class
     {
-        return await InvokeAsync<IJSObjectReference>("init", id, options);
+        return await InvokeAsync<IJSObjectReference>("init", id, options, dotNetObjectReference);
     }
 
     public async ValueTask ColorizeElement(string id, object options)

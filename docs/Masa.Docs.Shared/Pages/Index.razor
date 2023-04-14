@@ -94,14 +94,23 @@
                             {
                                 foreach (var navItem in groupNavsWithChildren)
                                 {
-                                    if (navItem.Tiling is NavItemTiling.Invisible)
+                                    if (navItem.IsHidden)
                                     {
                                         continue;
                                     }
 
-                                    var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+                                    var children = navItem is { Hidden: true } ? navItem.Children.Where(c => c is { Hidden: false }) : navItem.Children;
 
-                                    @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
+                                    @ProductCard(children.Select(u =>
+                                    {
+                                        var href = u.Href;
+                                        if (string.IsNullOrWhiteSpace(href))
+                                        {
+                                            href = u.Children?.FirstOrDefault()?.Href;
+                                        }
+
+                                        return (u.Title, href);
+                                    }), navItem.Title)
                                 }
                             }
                         }
@@ -201,6 +210,7 @@
             {
                 // ignored
             }
+
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
         }
     }
@@ -267,4 +277,5 @@
         base.Dispose(disposing);
         _objRef?.Dispose();
     }
+
 }

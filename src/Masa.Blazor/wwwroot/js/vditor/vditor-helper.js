@@ -27,10 +27,15 @@ export function init(domRef, obj, value, options, isUploadHandler) {
         })
     }
     if (isUploadHandler) {
+        let { upload } = vditorOptions;
+
+        let handler = (files) => {
+            obj.invokeMethodAsync('HandleFileChanged');
+        }
+
         vditorOptions.upload = {
-            handler: (files) => {
-                obj.invokeMethodAsync('HandleFileChanged');
-            }
+            ...upload,
+            handler
         }
     }
     SetDefaultFileNameHandle(vditorOptions);

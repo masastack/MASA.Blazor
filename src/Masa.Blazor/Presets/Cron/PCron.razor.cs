@@ -8,13 +8,10 @@ public partial class PCron
     [Parameter]
     public string Value
     {
-        get
-        {
-            return _value;
-        }
+        get => _value;
         set
         {
-            if(_value != value)
+            if (_value != value)
             {
                 _value = value;
                 OnValueChanged();
@@ -24,7 +21,7 @@ public partial class PCron
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
-
+    
     private string _value;
 
     private bool _hasError;
@@ -33,11 +30,27 @@ public partial class PCron
 
     private StringNumber _selectedPeriod;
 
-    private List<CronItemModel> CronItems { get; set; } = new();
+    private readonly List<CronItemModel> _cronItems = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
+        {
+            await CalculateCronValueAsync();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        InitCronItems();
+        return base.OnInitializedAsync();
+    }
+
+    private void InitCronItems()
+    {
+        if (_cronItems.Count == 0)
         {
             foreach (var item in Enum.GetValues<PeriodTypes>())
             {
@@ -52,58 +65,68 @@ public partial class PCron
                     cronDefaultValue = string.Empty;
                 }
 
-                CronItems.Add(new CronItemModel() { Period = item, CronValue = cronDefaultValue });
+                _cronItems.Add(new CronItemModel()
+                {
+                    Period = item,
+                    CronValue = cronDefaultValue,
+                    DefaultValue = cronDefaultValue
+                });
             }
-
-            await CalculateCronValue();
         }
+    }
 
-        await base.OnAfterRenderAsync(firstRender);
+    protected override Task OnParametersSetAsync()
+    {
+        OnValueChanged();
+        return base.OnParametersSetAsync();
     }
 
     private void OnValueChanged()
     {
+        InitCronItems();
         if (CronExpression.IsValidExpression(_value))
         {
             var valueArr = _value.Split(" ");
-            var cronItemsCount = CronItems.Count;
+            var cronItemsCount = _cronItems.Count;
             for (int i = 0; i < valueArr.Length; i++)
             {
                 if (cronItemsCount < i + 1)
                 {
                     return;
                 }
-                CronItems[i].CronValue = valueArr[i];
+                _cronItems[i].CronValue = valueArr[i];
             }
         }
     }
 
-    private Task CronValueHasChanged(CronItemModel cronItem)
+    public void SelectTab()
+    {
+        _selectedPeriod = _cronItems.FirstOrDefault(x => x.DefaultValue != x.CronValue)?.Period.ToString();
+    }
+
+    private async Task CronValueChangedAsync(CronItemModel cronItem)
     {
         if (cronItem != null)
         {
             if (cronItem.Period == PeriodTypes.Week)
             {
-                var dayItem = CronItems.FirstOrDefault(p => p.Period == PeriodTypes.Day);
-
-                dayItem.CronValue = cronItem.CronValue == "?" ? "*" : "?";
+                var dayItem = _cronItems.FirstOrDefault(p => p.Period == PeriodTypes.Day);
+                if (dayItem != null)
+                    dayItem.CronValue = cronItem.CronValue == "?" ? "*" : "?";
             }
             else if (cronItem.Period == PeriodTypes.Day)
             {
-                var dayItem = CronItems.FirstOrDefault(p => p.Period == PeriodTypes.Week);
-
-                dayItem.CronValue = cronItem.CronValue == "?" ? "*" : "?";
+                var dayItem = _cronItems.FirstOrDefault(p => p.Period == PeriodTypes.Week);
+                if (dayItem != null)
+                    dayItem.CronValue = cronItem.CronValue == "?" ? "*" : "?";
             }
-
             ChangeTimeItemDefaultValue(cronItem);
         }
 
-        CalculateCronValue();
-
-        return Task.CompletedTask;
+        await CalculateCronValueAsync();
     }
 
-    private Task ChangeTimeItemDefaultValue(CronItemModel cronItem)
+    private void ChangeTimeItemDefaultValue(CronItemModel cronItem)
     {
         if (cronItem.Period != PeriodTypes.Second && cronItem.Period != PeriodTypes.Minute && cronItem.Period != PeriodTypes.Hour)
         {
@@ -123,24 +146,21 @@ public partial class PCron
                 SetCronValueToZeroWhenDefault(PeriodTypes.Month, "1");
             }
         }
-
-        return Task.CompletedTask;
     }
 
-    private Task SetCronValueToZeroWhenDefault(PeriodTypes period, string defaultValue = "0")
+    private void SetCronValueToZeroWhenDefault(PeriodTypes period, string defaultValue = "0")
     {
-        var item = CronItems.FirstOrDefault(p => p.Period == period);
+        var item = _cronItems.FirstOrDefault(p => p.Period == period);
         if (item != null && (item.CronValue == "*" || item.CronValue == "?"))
         {
             item.CronValue = defaultValue;
+            item.DefaultValue = defaultValue;
         }
-
-        return Task.CompletedTask;
     }
 
-    private Task CalculateCronValue()
+    private async Task CalculateCronValueAsync()
     {
-        Value = string.Join(" ", CronItems.OrderBy(p => p.Period).Select(p => p.CronValue));
+        Value = string.Join(" ", _cronItems.OrderBy(p => p.Period).Select(p => p.CronValue));
 
         try
         {
@@ -155,9 +175,7 @@ public partial class PCron
 
         if (ValueChanged.HasDelegate)
         {
-            ValueChanged.InvokeAsync(_value);
+            await ValueChanged.InvokeAsync(_value);
         }
-
-        return Task.CompletedTask;
     }
 }

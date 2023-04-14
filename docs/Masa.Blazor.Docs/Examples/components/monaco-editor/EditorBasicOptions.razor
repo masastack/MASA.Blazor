@@ -14,14 +14,14 @@
     {
         if (state)
         {
-            await _editor.UpdateOptions(new
+            await _editor.UpdateOptionsAsync(new
             {
                 lineNumbers = "off",
             });
         }
         else
         {
-            await _editor.UpdateOptions(new
+            await _editor.UpdateOptionsAsync(new
             {
                 lineNumbers = "on",
             });

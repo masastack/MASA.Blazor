@@ -1,5 +1,4 @@
 {
-  "$DefaultCulture": "true",
   "introduction": "介绍",
   "browser-support": "浏览器支持",
   "release-notes": "发行说明",
@@ -360,6 +359,8 @@
   "alert": "告警中心",
   "scheduler": "任务调度中心",
   "tsc": "故障排查",
+  "log": "日志",
+  "metric": "指标",
   "stack": "MASA Stack 1.0",
   "use-guide": "使用指南",
   "develop-guide": "开发指南",
@@ -510,7 +511,7 @@
   "released-by": "发布者：{0}",
   "published-on": "发布于：{0}",
   "pwa": {
-    "new-content-available": "新内容可用。点击 {0} 进行更新。",
+    "new-content-available": "新内容可用。点击 刷新 进行更新。",
     "ignore": "忽略",
     "refresh": "刷新"
   }

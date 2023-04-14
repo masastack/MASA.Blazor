@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public class MasaBlazorOptions
+public class MasaBlazorOptions : BlazorComponentOptions
 {
     public MasaBlazorOptions()
     {
