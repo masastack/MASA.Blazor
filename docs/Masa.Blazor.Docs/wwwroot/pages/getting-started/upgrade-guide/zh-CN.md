@@ -35,6 +35,7 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   - PopupService.ToastAsync()
   + PopupService.EnqueueSnackbarAsync()
   ```
+- **MPageTabs** 重构为预置组件**PPageTabs**，设计和API改动较大，具体请参考[文档](/blazor/components/page-tabs)。
 
 ## 从 v0.5.x 升级到 v0.6.x
 
