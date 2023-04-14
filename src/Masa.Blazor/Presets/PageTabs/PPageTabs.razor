@@ -11,19 +11,17 @@
            @ref="@_tabs">
         @foreach (var patternPath in PatternPaths)
         {
+            var pathValue = new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath());
+            var tabOptions = TabOptions?.Invoke(pathValue);
+            var tabTitle = GetTabTitle(patternPath, tabOptions);
+
             <MTab Href="@patternPath.AbsolutePath"
-                  Class="@CssProvider.GetClass("tab")"
+                  Class="@($"{CssProvider.GetClass("tab")} {tabOptions?.Class}")"
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
                   @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
                   __internal_preventDefault_oncontextmenu>
-
-                @{
-                    var pathValue = new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath());
-                    var tabOptions = TabOptions?.Invoke(pathValue);
-                    var tabTitle = GetTabTitle(patternPath, tabOptions);
-                }
 
                 @if (TabIconContent != default)
                 {

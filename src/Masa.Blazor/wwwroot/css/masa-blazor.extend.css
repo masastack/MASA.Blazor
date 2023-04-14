@@ -332,12 +332,8 @@
 
 /* page-tabs */
 
-.p-page-tab {
-    text-transform: capitalize;
-}
-
-.p-page-tab__close {
-    margin-left: 4px;
+.p-page-tab__title {
+    padding: 0 4px;
 }
 
 .p-page-container {

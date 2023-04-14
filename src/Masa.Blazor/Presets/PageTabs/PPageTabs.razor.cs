@@ -26,7 +26,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public RenderFragment<PageTabPathValue>? TabIconContent { get; set; }
 
     [Parameter]
-    public Func<PageTabPathValue, TabOptions>? TabOptions { get; set; }
+    public Func<PageTabPathValue, TabOptions?>? TabOptions { get; set; }
 
     [Parameter]
     [ApiDefaultValue(true)]
@@ -108,7 +108,7 @@ public partial class PPageTabs : PatternPathComponentBase
         base.SetComponentClass();
 
         CssProvider.Apply(css => css.Add("p-page-tabs"))
-                   .Apply("tab", css => css.Add("p-page-tab"))
+                   .Apply("tab", css => css.Add("p-page-tab").Add(TabClass))
                    .Apply("tab-title", css => css.Add("p-page-tab__title"))
                    .Apply("tab-close", css => css.Add("p-page-tab__close"));
     }

@@ -8,6 +8,8 @@ public class TabOptions
 
     public string? Icon { get; set; }
 
+    public string? Class { get; set; }
+
     public string? TitleClass { get; set; }
 
     public string? TitleStyle { get; set; }
@@ -29,5 +31,10 @@ public class TabOptions
     public TabOptions(string? title, string? icon, string? titleClass) : this(title, icon)
     {
         TitleClass = titleClass;
+    }
+
+    public TabOptions(string? title, string? icon, string? titleClass, string? @class) : this(title, icon, titleClass)
+    {
+        Class = @class;
     }
 }

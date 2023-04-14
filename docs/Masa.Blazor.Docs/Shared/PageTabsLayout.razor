@@ -5,6 +5,7 @@
         <MAppBar App Color="white">
             <PPageTabs @ref="_pageTabs"
                        NoDataPath="/blazor/examples/page-tabs/page1"
+                       TabOptions="@TabOptions"
                        SelfPatterns="@SelfPatterns">
             </PPageTabs>
         </MAppBar>
@@ -38,5 +39,15 @@
     {
         "/blazor/examples/page-tabs/page4",
     };
+
+    private TabOptions? TabOptions(PageTabPathValue pathValue)
+    {
+        if (pathValue.AbsolutePath == "/blazor/examples/page-tabs/page2")
+        {
+            return new TabOptions("Custom tab title", "mdi-heart", "", "font-weight-bold");
+        }
+
+        return null;
+    }
 
 }
