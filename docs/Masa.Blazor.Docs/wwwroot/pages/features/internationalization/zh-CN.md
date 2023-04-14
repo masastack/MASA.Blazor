@@ -2,65 +2,41 @@
 
 **MASA Blazor** 支持组件的语言国际化（i18n）。
 
-## 语言支持
+## 快速入门
 
-支持下列语言：
+要设置默认语言环境，请在 _Program.cs_ 中调用 `AddMasaBlazor` 时提供 `Locale` 选项：
 
-* **af-AZ** - Afrikaans (Afrikaans)
-* **ar-EG** - Arabic (اللغة العربية)
-* **az** - Azerbaijani (Azərbaycan)
-* **bg-BG** - Bulgarian (български)
-* **ca-ES** - Catalan (català)
-* **ckb** - Central Kurdish (کوردی)
-* **cs-CZ** - Czech (čeština)
-* **de-DE** - German (Deutsch)
-* **el-GR** - Greek (Ελληνικά)
-* **en-GB** - English (Global)
-* **en-US** - English
-* **es-ES** - Spanish (Español)
-* **et-EE** - Estonian (eesti)
-* **fa-IR** - Persian (فارسی)
-* **fi-FI** - Finnish (suomi)
-* **fr-FR** - French (Français)
-* **he-IL** - Hebrew (עברית)
-* **hr-HR** - Croatian (hrvatski jezik)
-* **hu-HU** - Hungarian (magyar)
-* **id-ID** - Indonesian (Indonesian)
-* **it-IT** - Italian (Italiano)
-* **ja-JP** - Japanese (日本語)
-* **ko-KR** - Korean (한국어)
-* **lv-LV** - Latvian (latviešu valoda)
-* **nb-NO** - Norwegian (Norsk)
-* **nl-BE** - Dutch (Belgium)
-* **nl-NL** - Dutch (Nederlands)
-* **pl-PL** - Polish (język polski)
-* **pt-BR** - Portuguese (Brazil)
-* **pt-PT** - Portuguese (Português)
-* **ro-RO** - Romanian (Română) 
-* **ru-RU** - Russian (Русский)
-* **sk-SK** - Slovak (slovenčina)
-* **sl_SI** - Slovene (slovenski jezik)
-* **sr-Cyrl-CS** - Serbian (српски језик)
-* **sr-Latn-CS** - Serbian (srpski jezik)
-* **sv-SE** - Swedish (svenska)
-* **th-TH** - Thai (ไทย)
-* **tr-TR** - Turkish (Türkçe)
-* **uk-UA** - Ukrainian (Українська)
-* **vi-CN** - Vietnamese (Tiếng Việt)
-* **zh-CN** - Chinese (简体中文)
-* **zh-TW** - Chinese (正體中文)
+```csharp Program.cs
+@using BlazorComponent
 
-## 使用MASA Blazor已内置支持的I18n功能
-
-### 在Blazor Server项目中支持MasaI18n
-
-- 添加服务依赖I18n:
-
-```csharp
-services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
+services.AddMasaBlazor(options => {
+    // new Locale(current, fallback);
+    options.Locale = new Locale("zh-CN", "en-US");
+})
 ```
 
-- `i18n local directory path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`services.AddMasaBlazor().AddI18nForServer("wwwroot/i18n");`。
+使用:
+
+```razor
+@using BlazorComponent.I18n
+@inject I18n I18n
+
+<h1>@I18n.T("$masaBlazor.search")</h1>
+
+<MI18n Key="$masaBlazor.search"></MI18n>
+```
+
+## 添加自定义的本地化
+
+### 在 Blazor Server 中
+
+- 添加 I18n 的服务依赖:
+
+```csharp Program.cs
+services.AddMasaBlazor().AddI18nForServer("i18n-local-directory-path");
+```
+
+`i18n-local-directory-path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则`i18n-local-directory-path`应该用`wwwroot/i18n`代替。
 
 ```
 - Pages 
@@ -71,57 +47,35 @@ services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
     - zh-CN.json
 ```
 
-- i18n资源文件格式如下：
+i18n 资源文件格式如下：
 
-    - zh-CN.json
-
-    ```
-    {
-      "$DefaultCulture": "true",
-      "Home": "首页",
-      "Docs": "文档",
-      "Blog": "博客",
-      "Team": "团队",
-      "Search": "搜索",
-    }
-    ```
-
-    - en-US.json
-
-    ```
-    {
-        "Home": "Home",
-        "Docs": "Docs",
-        "Blog": "Blog",
-        "Team": "Team",
-        "Search": "Search",
-    }
-    ```
-
-> `$DefaultCulture`是预置key，可以设置当前语言为默认语言
-
-- I18n使用示例
-
- ```csharp
- @using BlazorComponent.I18n
- @inject I18n I18n
-
-void Example()
+```json wwwroot/i18n/zh-CN.json
 {
-    I18n.SetCulture("zh-CN");//将语言切换成zh-CN
-    var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"首页";
+  "Home": "首页",
+  "Docs": "文档",
+  "Blog": "博客",
+  "Team": "团队",
+  "Search": "搜索"
 }
 ```
 
-#### 嵌套
-
-- zh-CN.json
-
+```json wwwroot/i18n/en-US.json
+{
+    "Home": "Home",
+    "Docs": "Docs",
+    "Blog": "Blog",
+    "Team": "Team",
+    "Search": "Search"
+}
 ```
+
+嵌套也是支持的：
+
+```json wwwroot/i18n/zh-CN.json
 {
     "User":{
         "Name":"姓名",
-        "Age":"年龄",
+        "Age":"年龄"
     },
     "Goods":{
         "Name":"名称",
@@ -130,64 +84,29 @@ void Example()
 }
 ```
 
-- en-US.json
-
-```
+```json wwwroot/i18n/en-US.json
 {
-    "User":{
-        "Name":"Name",
-        "Age":"Age",
-    },
-    "Goods":{
-        "Name":"Name",
-        "Price":"Price"
-    }
+  "User":{
+    "Name":"Name",
+    "Age":"Age"
+  },
+  "Goods":{
+    "Name":"Name",
+    "Price":"Price"
+  }
 }
 ```
 
-- 使用示例
+### 在 Blazor WebAssembly 中
 
- ```csharp
- @using BlazorComponent.I18n
- @inject I18n I18n
+由于Blazor WebAssembly代码在浏览器端执行，所以需要使用 http 请求来读取 i18n 资源文件，_Program.cs_ 增加代码如下：
 
-void Example()
-{
-    I18n.SetCulture("zh-CN");
-    var name1 = I18n.T("Goods.Name");//输出：名称
-    var name2 = I18n.T("User.Name");//输出：姓名
-    var name3 = I18n.T("Name",true);//输出：姓名。注意：重复的Key会默认取第一个匹配的
-    var name4 = I18n.T("Goods","Name");//输出：名称
-    var age1 = I18n.T("User.Age");//输出：年龄
-    var age2 = I18n.T("Age",true);//输出：年龄
-    var price1 = I18n.T("Goods.Price");//输出：价格
-    var price2 = I18n.T("Price",true);//输出：价格
-
-    I18n.SetLang("en-US");
-    name1 = I18n.T("Goods.Name");//输出：Goods.Name
-    name2 = I18n.T("User.Name");//输出：User.Name
-    name3 = I18n.T("Name",true);//输出：Name
-    name4 = I18n.T("Goods","Name");//输出：Name
-    age1 = I18n.T("User.Age");//输出：User.Age
-    age2 = I18n.T("Age",true);//输出：Age
-    price1 = I18n.T("Goods.Price");//输出：Goods.Price
-    price2 = I18n.T("Price",true);//输出：Price
-}
-```
-
-> I18n默认key找不到对应的数据时返回key，而key一般是英文的，所以en-US.json可以根据情况不用写。如果想找不到对应的数据时返回null，则使用`I18n.T("key",whenNullReturnKey:false)`即可。
-> 支持在嵌套中递归嵌套，使用方式与示例一致
-
-### 在Blazor WebAssembly项目中支持MasaI18n
-
-- 由于Blazor WebAssembly代码在浏览器端执行，所以需要使用http请求来读取i18n资源文件，program.cs增加代码如下：
-
-```csharp
+```csharp Program.cs
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n directory api}");
+await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n-directory-api");
 ```
 
-- `i18n directory api` 为放置i18n资源文件的文件夹路由地址。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`。
+`i18n-directory-api` 为放置i18n资源文件的文件夹路由地址。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则`i18n-directory-api`应该用`i18n`代替。
 
 ```
 - Pages 
@@ -199,9 +118,9 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnviron
     - zh-CN.json
 ```
 
-- `supportedCultures.json`配置文件格式如下
+`supportedCultures.json`配置文件格式如下
 
-```
+```json wwwroot/i18n/supportedCultures.json
 [
   "zh-CN",
   "en-US"
@@ -210,14 +129,12 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnviron
 
 > 注意：`supportedCultures.json`必须与i18n资源文件在同一目录下
 
-- I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
+### 在 MAUI Blazor 中
 
-### 在MAUI Blazor项目中支持MasaI18n
-
-- 添加扩展方法:
+- 添加以下扩展方法:
 
 ```csharp
-public static class I18nExtend
+public static class BlazorComponentBuilderExtensions
 {
     public static IBlazorComponentBuilder AddI18nForMauiBlazor(this IBlazorComponentBuilder builder, string localesDirectory)
     {
@@ -254,13 +171,16 @@ public static class I18nExtend
 }
 ```
 
-- MAUI Blazor静态资产受限于 Razor 组件，需要使用`FileSystem.OpenAppPackageFileAsync`来访问，详情请阅读 [微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components)。MauiProgram.cs增加代码如下：
+MAUI Blazor静态资产受限于 Razor 组件，需要使用`FileSystem.OpenAppPackageFileAsync`来访问，详情请阅读 [微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hybrid/static-files?view=aspnetcore-7.0#static-assets-limited-to-razor-components)。MauiProgram.cs增加代码如下：
 
-```csharp
-builder.Services.AddMasaBlazor().AddI18nForMauiBlazor($"{i18n directory path}");
+```csharp Program.cs
+builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("i18n-directory-path");
 ```
 
-- `i18n directory path` 为放置i18n资源文件的文件夹路径，只支持`wwwroot`和`Resources/Raw`路径下。例如，您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("wwwroot/i18n")`；如果您在`Resources/Raw/i18n`路径下放置了i18n资源文件，则代码写为`builder.Services.AddMasaBlazor().AddI18nForMauiBlazor("i18n")`；
+`i18n-directory-path` 为放置i18n资源文件的文件夹路径，只支持`wwwroot`和`Resources/Raw`路径下。例如，
+
+- 在`wwwroot/i18n`路径下放置了i18n资源文件，则 `i18n-directory-path` 应该用 `wwwroot/i18n` 代替
+- 在`Resources/Raw/i18n`路径下放置了i18n资源文件，则 `i18n-directory-path` 应该用 `i18n` 代替
 
 ```
 - Pages 
@@ -272,7 +192,52 @@ builder.Services.AddMasaBlazor().AddI18nForMauiBlazor($"{i18n directory path}");
     - zh-CN.json
 ```
 
-- `supportedCultures.json`配置文件格式与Blazor WebAssembly模式一致
+> `supportedCultures.json`配置文件格式与Blazor WebAssembly模式一致
 
-- I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
+## 支持的语言
 
+支持下列语言：
+
+* **af-AZ** - Afrikaans (Afrikaans)
+* **ar-EG** - Arabic (اللغة العربية)
+* **az** - Azerbaijani (Azərbaycan)
+* **bg-BG** - Bulgarian (български)
+* **ca-ES** - Catalan (català)
+* **ckb** - Central Kurdish (کوردی)
+* **cs-CZ** - Czech (čeština)
+* **de-DE** - German (Deutsch)
+* **el-GR** - Greek (Ελληνικά)
+* **en-GB** - English (Global)
+* **en-US** - English
+* **es-ES** - Spanish (Español)
+* **et-EE** - Estonian (eesti)
+* **fa-IR** - Persian (فارسی)
+* **fi-FI** - Finnish (suomi)
+* **fr-FR** - French (Français)
+* **he-IL** - Hebrew (עברית)
+* **hr-HR** - Croatian (hrvatski jezik)
+* **hu-HU** - Hungarian (magyar)
+* **id-ID** - Indonesian (Indonesian)
+* **it-IT** - Italian (Italiano)
+* **ja-JP** - Japanese (日本語)
+* **ko-KR** - Korean (한국어)
+* **lv-LV** - Latvian (latviešu valoda)
+* **nb-NO** - Norwegian (Norsk)
+* **nl-BE** - Dutch (Belgium)
+* **nl-NL** - Dutch (Nederlands)
+* **pl-PL** - Polish (język polski)
+* **pt-BR** - Portuguese (Brazil)
+* **pt-PT** - Portuguese (Português)
+* **ro-RO** - Romanian (Română)
+* **ru-RU** - Russian (Русский)
+* **sk-SK** - Slovak (slovenčina)
+* **sl_SI** - Slovene (slovenski jezik)
+* **sr-Cyrl-CS** - Serbian (српски језик)
+* **sr-Latn-CS** - Serbian (srpski jezik)
+* **sv-SE** - Swedish (svenska)
+* **th-TH** - Thai (ไทย)
+* **tr-TR** - Turkish (Türkçe)
+* **uk-UA** - Ukrainian (Українська)
+* **vi-CN** - Vietnamese (Tiếng Việt)
+* **zh-CN** - Chinese (简体中文)
+* **zh-TW** - Chinese (正體中文)

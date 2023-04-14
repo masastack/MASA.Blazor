@@ -137,12 +137,14 @@ window.MasaBlazor.markdownItRules = function (parser) {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
       if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
-        const info = tokens[idx].info;
+        const info = tokens[idx].info || "";
 
+        const [lang, fileName] = info.trim().split(' ');
+        
         return `<default-app-markup code="${content.replaceAll(
           '"',
           "&quot;"
-        )}" language="${info}"></default-app-markup>\n`;
+        )}" language="${lang}" file-name="${fileName || ""}"></default-app-markup>\n`;
       }
     };
   }
