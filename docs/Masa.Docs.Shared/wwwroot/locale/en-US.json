@@ -254,6 +254,8 @@
   "alert": "Alert",
   "scheduler": "Scheduler",
   "tsc": "TSC",
+  "log": "Log",
+  "metric": "Metric",
   "stack": "MASA Stack 1.0",
   "use-guide": "Use Guide",
   "develop-guide": "Develop Guide",
