@@ -172,20 +172,21 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private async Task HandleOnCloseTab(PatternPath patternPath, string tabTitle)
     {
-        if (!AskBeforeClosing) return;
-
-        bool isConfirmed;
-        if (OnClose != default)
+        if (AskBeforeClosing)
         {
-            isConfirmed = await OnClose.Invoke(tabTitle);
-        }
-        else
-        {
-            isConfirmed = await PopupService.ConfirmAsync(I18n.T("$masaBlazor.pageTabs.closeTab"),
-                I18n.T("$masaBlazor.pageTabs.closeTabConfirm", args: tabTitle), AlertTypes.Warning);
-        }
+            bool isConfirmed;
+            if (OnClose != default)
+            {
+                isConfirmed = await OnClose.Invoke(tabTitle);
+            }
+            else
+            {
+                isConfirmed = await PopupService.ConfirmAsync(I18n.T("$masaBlazor.pageTabs.closeTab"),
+                    I18n.T("$masaBlazor.pageTabs.closeTabConfirm", args: tabTitle), AlertTypes.Warning);
+            }
 
-        if (!isConfirmed) return;
+            if (!isConfirmed) return;
+        }
 
         var currentPathPattern = GetCurrentPatternPath();
 
