@@ -35,6 +35,7 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   - PopupService.ToastAsync()
   + PopupService.EnqueueSnackbarAsync()
   ```
+- **MPageTabs** refactored to the preset component **PPageTabs**. There are many design and API changes, please refer to the [document](/blazor/components/page-tabs) for details.
 
 ## Upgrading from v0.5.x to v0.6.x
 
