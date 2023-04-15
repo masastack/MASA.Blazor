@@ -342,8 +342,6 @@
   "load-event": "加载事件",
   "stack-sdks": "业务SDK",
   "contribution": "贡献",
-  "issues": "提问",
-  "pr": "贡献代码",
   "web-project": "Web应用程序",
   "uow": "工作单元",
 
@@ -500,6 +498,7 @@
   "0.6.0": "0.6.0",
   "0.7.0": "0.7.0",
   "1.0.0": "1.0.0",
+  "recommend": "编码风格与代码规范",
   "default": "默认值",
   "description": "描述",
   "name": "名称",
