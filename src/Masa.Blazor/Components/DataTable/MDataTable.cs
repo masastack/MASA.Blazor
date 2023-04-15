@@ -100,7 +100,19 @@ namespace Masa.Blazor
 
         [Parameter]
         public StringNumber Width { get; set; }
-        
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDbClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowContextmenu { get; set; }
+
+        [Parameter]
+        public bool OnRowContextmenuPreventDefault { get; set; }
+
         protected MobileProvider MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
@@ -224,19 +236,19 @@ namespace Masa.Blazor
             }
         }
 
-        public Task HandleOnRowClickAsync(MouseEventArgs args)
+        public Task HandleOnRowClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowClick.InvokeAsync(args);
         }
 
-        public Task HandleOnRowContextMenuAsync(MouseEventArgs arg)
+        public Task HandleOnRowContextmenuAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowContextmenu.InvokeAsync(args);
         }
 
-        public Task HandleOnRowDbClickAsync(MouseEventArgs arg)
+        public Task HandleOnRowDbClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowDbClick.InvokeAsync(args);
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
@@ -377,7 +389,7 @@ namespace Masa.Blazor
                 {
                     var item = (TItem)attrs.Data;
                     var expanded = IsExpanded(item);
-                    var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
+                    var @class = expanded ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
                     attrs[nameof(Class)] = @class;
                     attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
