@@ -137,12 +137,14 @@ window.MasaBlazor.markdownItRules = function (parser) {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
       if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
-        const info = tokens[idx].info;
+        const info = tokens[idx].info || "";
 
+        const [lang, fileName] = info.trim().split(' ');
+        
         return `<default-app-markup code="${content.replaceAll(
           '"',
           "&quot;"
-        )}" language="${info}"></default-app-markup>\n`;
+        )}" language="${lang}" file-name="${fileName || ""}"></default-app-markup>\n`;
       }
     };
   }
@@ -176,11 +178,13 @@ window.MasaBlazor.markdownItRules = function (parser) {
   function addTableRules(md) {
     md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
       return (
-        '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
-        self.renderToken(tokens, idx, options) +
-        "</div></div></div>"
+          '<div class="m-sheet m-sheet--outlined rounded theme--light mb-2"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
+          self.renderToken(tokens, idx, options)
       );
     };
+    md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
+      return self.renderToken(tokens, idx, options) + "</div></div></div>";
+    }
   }
 
   function addCodeGroupRules(parser) {

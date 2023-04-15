@@ -76,9 +76,7 @@
 }
 
 .app-code {
-    margin: 16px 0;
     position: relative;
-    padding: 16px;
 }
 
     .app-code code {
@@ -502,6 +500,11 @@ default-app-markup {
 
     .doc-markdown-body > section section {
         margin-bottom: 1.5rem;
+    }
+
+    .doc-markdown-body code {
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
 .m-select.light-border .m-input__slot fieldset {

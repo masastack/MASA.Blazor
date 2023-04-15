@@ -32,10 +32,50 @@ public partial class MMonacoEditor : BDomComponentBase
     [Parameter]
     public Action? InitCompleteHandle { get; set; }
 
+    [Parameter]
+    public string Value
+    {
+        get
+        {
+            return _value;
+        }
+        set
+        {
+            if (_value != value)
+            {
+                _value = value;
+                _valueChangedByUser = true;
+            }
+
+            SetValue(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
     /// <summary>
     /// Monaco
     /// </summary>
     public IJSObjectReference Monaco { get; private set; }
+
+    private string _value;
+    private bool _valueChangedByUser;
+
+    protected override void RegisterWatchers(PropertyWatcher watcher)
+    {
+        base.RegisterWatchers(watcher);
+
+        watcher
+            .Watch<string>(nameof(Value), async val =>
+            {
+                if (_valueChangedByUser)
+                {
+                    _valueChangedByUser = false;
+                    await SetValueAsync(_value);
+                }
+            });
+    }
 
     protected override void SetComponentClass()
     {
@@ -57,6 +97,7 @@ public partial class MMonacoEditor : BDomComponentBase
         if (firstRender)
         {
             await InitMonaco();
+            await SetValueAsync(Value);
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -75,68 +116,80 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
-        Monaco = await Module.Init(Id, EditorOptions);
+        Monaco = await Module.Init(Id, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }
 
-    public async Task DefineTheme(string themeName, StandaloneThemeData themeData)
+    public async Task DefineThemeAsync(string themeName, StandaloneThemeData themeData)
     {
         await Module.DefineTheme(themeName, themeData);
     }
 
-    public async Task AddCommand<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
+    public async Task AddCommandAsync<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
     {
         await Module.AddCommand(Monaco, keybinding, dotNetObjectReference, method);
     }
 
-    public async Task UpdateOptions(object options)
+    public async Task UpdateOptionsAsync(object options)
     {
         await Module.UpdateOptions(Monaco, options);
     }
 
-    public async Task<string> GetValue()
+    public async Task<string> GetValueAsync()
     {
         return await Module.GetValue(Monaco);
     }
 
-    public async Task SetValue(string value)
+    public async Task SetValueAsync(string value)
     {
         await Module.SetValue(Monaco, value);
     }
 
-    public async Task SetTheme(string theme)
+    public async Task SetThemeAsync(string theme)
     {
         await Module.SetTheme(theme);
     }
 
-    public async Task<TextModelOptions[]> GetModels()
+    public async Task<TextModelOptions[]> GetModelsAsync()
     {
         return await Module.GetModels();
     }
 
-    public async Task<TextModelOptions> GetModel(IJSObjectReference id)
+    public async Task<TextModelOptions> GetModelAsync()
     {
         return await Module.GetModel(Monaco);
     }
 
-    public async Task SetModelLanguage(IJSObjectReference id, string languageId)
+    public async Task SetModelLanguageAsync(string languageId)
     {
         await Module.SetModelLanguage(Monaco, languageId);
     }
 
-    public async Task RemeasureFonts()
+    public async Task RemeasureFontsAsync()
     {
         await Module.RemeasureFonts();
     }
 
-    public async Task AddKeybindingRules(KeybindingRule[] rules)
+    public async Task AddKeybindingRulesAsync(KeybindingRule[] rules)
     {
         await Module.AddKeybindingRules(rules);
     }
 
-    public async Task AddKeybindingRule(KeybindingRule rule)
+    public async Task AddKeybindingRuleAsync(KeybindingRule rule)
     {
         await Module.AddKeybindingRule(rule);
+    }
+
+    [JSInvokable]
+    public async Task OnChange(string value)
+    {
+        _value = value;
+        _valueChangedByUser = false;
+
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync(value);
+        }
     }
 }

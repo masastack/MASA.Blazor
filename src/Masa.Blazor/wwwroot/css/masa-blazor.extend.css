@@ -332,8 +332,8 @@
 
 /* page-tabs */
 
-.p-page-tab {
-    text-transform: capitalize;
+.p-page-tab__title {
+    padding: 0 4px;
 }
 
 .p-page-container {
@@ -776,4 +776,10 @@ input[type=number] {
 
 .m-snack .m-alert__icon {
     margin-right: 12px;
+}
+
+/* tab */
+
+.m-tab {
+    text-transform: none;
 }

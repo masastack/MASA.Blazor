@@ -2,8 +2,8 @@
          Class="@($"m-btn--copy {Class}")"
          Icon
          Right
-         Style="background-color:inherit;"
          Top
+         Show="Show"
          OnClick="Copy">
     <FadeTransition LeaveAbsolute>
         <ShowTransitionElement Value="_copying">
@@ -23,6 +23,9 @@
 
     [Inject]
     public IJSRuntime Js { get; set; } = null!;
+
+    [Parameter]
+    public bool Show { get; set; }
 
     [Parameter]
     public string? Class { get; set; }

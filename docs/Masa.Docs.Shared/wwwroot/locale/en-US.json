@@ -255,6 +255,8 @@
   "alert": "Alert",
   "scheduler": "Scheduler",
   "tsc": "TSC",
+  "log": "Log",
+  "metric": "Metric",
   "stack": "MASA Stack 1.0",
   "use-guide": "Use Guide",
   "develop-guide": "Develop Guide",
@@ -397,7 +399,7 @@
   "released-by": "Released by: {0}",
   "published-on": "Published on {0}",
   "pwa": {
-    "new-content-available": "New content is available. Click {0} to update.",
+    "new-content-available": "New content is available. Click Refresh to update.",
     "ignore": "Ignore",
     "refresh": "Refresh"
   }

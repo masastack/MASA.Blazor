@@ -16,7 +16,10 @@ public static class ServiceCollectionExtensions
 
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
     {
-        services.AddBlazorComponent();
+        var options = new MasaBlazorOptions();
+        optionsAction.Invoke(options);
+
+        services.AddBlazorComponent(o => { o.Locale = options.Locale; });
         services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
         return services.AddMasaBlazorInternal();
     }
