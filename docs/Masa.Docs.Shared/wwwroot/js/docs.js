@@ -137,10 +137,9 @@ window.MasaBlazor.markdownItRules = function (parser) {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
       if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
-        const info = tokens[idx].info || "";
-
-        const [lang, fileName] = info.trim().split(' ');
         
+        const [lang, fileName] = resolveCodeInfo(tokens[idx].info)
+
         return `<default-app-markup code="${content.replaceAll(
           '"',
           "&quot;"
@@ -203,9 +202,10 @@ window.MasaBlazor.markdownItRules = function (parser) {
           nextToken = tokens[nextIndex];
 
           if (nextToken.type === "fence") {
-            const { content: code, info: lang } = nextToken;
+            const { content: code, info } = nextToken;
+            const [lang, fileName]= resolveCodeInfo(info)
 
-            dic[item] = { code, lang };
+            dic[item] = { code, lang, fileName };
           }
         }
 
@@ -234,6 +234,19 @@ window.MasaBlazor.markdownItRules = function (parser) {
     ) => {
       return `</app-code-group>\n`;
     };
+  }
+
+  function resolveCodeInfo(info) {
+    info = (info || "").trim();
+    const whitespaceIndex = info.indexOf(" ");
+    if (whitespaceIndex === -1) {
+      return [info, ""]
+    }
+
+    const lang = info.substring(0, whitespaceIndex);
+    const fileName = info.substring(whitespaceIndex + 1);
+
+    return [lang, fileName];
   }
 };
 
