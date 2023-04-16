@@ -162,7 +162,7 @@ window.MasaBlazor.markdownItRules = function (parser) {
       return (`<div role="alert" class="m-alert m-alert--doc m-sheet m-alert--border m-alert--border-left m-alert--text info--text"><div class="m-alert__wrapper"><i class="m-icon theme--dark info--text mdi mdi-information m-alert__icon"></i><div class="m-alert__border m-alert__border--left"></div>${self.renderToken(tokens, idx, options)}`);
     };
     md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-      return self.renderToken(tokens, idx, options) + "</div></div>";
+      return self.renderToken(tokens, idx, options) + "</div></div></div>";
     };
   }
 
