@@ -158,20 +158,12 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
   function addBlockquoteRules(md) {
     md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
-      const next = tokens[idx + 2];
-      const content = next.content;
-
-      tokens[idx].tag = "app-alert";
-      tokens[idx].attrSet("type", "info");
-      tokens[idx].attrSet("content", content);
-      tokens[idx].attrSet("border", "left");
-
-      return self.renderToken(tokens, idx, options);
+      tokens[idx].tag = "div";
+      tokens[idx].attrSet("class", "m-alert__content");
+      return (`<div role="alert" class="m-alert m-alert--doc m-sheet m-alert--border m-alert--border-left m-alert--text info--text"><div class="m-alert__wrapper"><i class="m-icon theme--dark info--text mdi mdi-information m-alert__icon"></i><div class="m-alert__border m-alert__border--left"></div>${self.renderToken(tokens, idx, options)}`);
     };
     md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-alert";
-
-      return self.renderToken(tokens, idx, options);
+      return self.renderToken(tokens, idx, options) + "</div></div>";
     };
   }
 
