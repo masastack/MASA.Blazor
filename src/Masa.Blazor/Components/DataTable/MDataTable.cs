@@ -1,27 +1,29 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿#nullable enable
+
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, ILoadable, IDataIterator<TItem>, IMobile
+    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, IMobile
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
         
         [Parameter]
-        public string Caption { get; set; }
+        public string? Caption { get; set; }
 
         [Parameter]
-        public RenderFragment CaptionContent { get; set; }
+        public RenderFragment? CaptionContent { get; set; }
 
         [Parameter]
         public IEnumerable<DataTableHeader<TItem>> Headers { get; set; } = new List<DataTableHeader<TItem>>();
 
         [Parameter]
-        public RenderFragment TopContent { get; set; }
+        public RenderFragment? TopContent { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
         public bool FixedHeader { get; set; }
@@ -33,7 +35,7 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
 
         [Parameter]
-        public RenderFragment FootContent { get; set; }
+        public RenderFragment? FootContent { get; set; }
 
         [Parameter]
         public OneOf<Breakpoints, double> MobileBreakpoint { get; set; } = 600;
@@ -42,7 +44,7 @@ namespace Masa.Blazor
         public bool ShowGroupBy { get; set; }
 
         [Parameter]
-        public string CheckboxColor { get; set; }
+        public string? CheckboxColor { get; set; }
 
         [Parameter]
         public Dictionary<string, object> HeaderProps { get; set; } = new();
@@ -51,19 +53,19 @@ namespace Masa.Blazor
         public int HeadersLength { get; set; }
 
         [Parameter]
-        public RenderFragment BodyPrependContent { get; set; }
+        public RenderFragment? BodyPrependContent { get; set; }
 
         [Parameter]
-        public RenderFragment BodyAppendContent { get; set; }
+        public RenderFragment? BodyAppendContent { get; set; }
 
         [Parameter]
-        public RenderFragment GroupContent { get; set; }
+        public RenderFragment? GroupContent { get; set; }
 
         [Parameter]
-        public RenderFragment<(IEnumerable<DataTableHeader<TItem>> Headers, TItem Item)> ExpandedItemContent { get; set; }
+        public RenderFragment<(IEnumerable<DataTableHeader<TItem>> Headers, TItem Item)>? ExpandedItemContent { get; set; }
 
         [Parameter]
-        public string ItemClass { get; set; }
+        public Func<TItem, string?>? ItemClass { get; set; }
 
         [Parameter]
         public Func<object, string, TItem, bool> CustomItemFilter { get; set; } = DefaultFilter;
@@ -72,10 +74,10 @@ namespace Masa.Blazor
         public bool HideDefaultHeader { get; set; }
 
         [Parameter]
-        public RenderFragment<DataTableHeader> HeaderColContent { get; set; }
+        public RenderFragment<DataTableHeader>? HeaderColContent { get; set; }
 
         [Parameter]
-        public RenderFragment<ItemColProps<TItem>> ItemColContent { get; set; }
+        public RenderFragment<ItemColProps<TItem>>? ItemColContent { get; set; }
 
         [Parameter]
         public bool ShowSelect { get; set; }
@@ -84,24 +86,36 @@ namespace Masa.Blazor
         public bool ShowExpand { get; set; }
 
         [Parameter]
-        public RenderFragment ItemDataTableExpandContent { get; set; }
+        public RenderFragment? ItemDataTableExpandContent { get; set; }
 
         [Parameter]
         public string ExpandIcon { get; set; } = "mdi-chevron-down";
 
         [Parameter]
-        public RenderFragment ItemDataTableSelectContent { get; set; }
+        public RenderFragment? ItemDataTableSelectContent { get; set; }
 
         [Parameter]
-        public RenderFragment GroupHeaderContent { get; set; }
+        public RenderFragment? GroupHeaderContent { get; set; }
 
         [Parameter]
         public bool Stripe { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
-        
-        protected MobileProvider MobileProvider { get; set; }
+        public StringNumber? Width { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDbClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowContextmenu { get; set; }
+
+        [Parameter]
+        public bool OnRowContextmenuPreventDefault { get; set; }
+
+        protected MobileProvider? MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
         {
@@ -164,9 +178,9 @@ namespace Masa.Blazor
 
         public bool HasBottom => FooterContent != null || !HideDefaultFooter;
 
-        public bool IsMobile => MobileProvider.IsMobile;
+        public bool IsMobile => MobileProvider?.IsMobile ?? false;
 
-        public Dictionary<string, object> ColspanAttrs => new()
+        public Dictionary<string, object?> ColspanAttrs => new()
         {
             { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
         };
@@ -224,19 +238,19 @@ namespace Masa.Blazor
             }
         }
 
-        public Task HandleOnRowClickAsync(MouseEventArgs args)
+        public Task HandleOnRowClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowClick.InvokeAsync(args);
         }
 
-        public Task HandleOnRowContextMenuAsync(MouseEventArgs arg)
+        public Task HandleOnRowContextmenuAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowContextmenu.InvokeAsync(args);
         }
 
-        public Task HandleOnRowDbClickAsync(MouseEventArgs arg)
+        public Task HandleOnRowDbClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return Task.CompletedTask;
+            return OnRowDbClick.InvokeAsync(args);
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
@@ -244,16 +258,16 @@ namespace Masa.Blazor
             return SearchTableItems(items, search, HeadersWithCustomFilters, HeadersWithoutCustomFilters, CustomItemFilter);
         }
 
-        private IEnumerable<TItem> SearchTableItems(IEnumerable<TItem> items, string search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object, string, TItem, bool> customItemFilter)
+        private IEnumerable<TItem> SearchTableItems(IEnumerable<TItem> items, string? search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object, string, TItem, bool> customItemFilter)
         {
             search = search?.Trim();
 
-            Func<DataTableHeader<TItem>, bool> FilterFunc(TItem item, string search, Func<object, string, TItem, bool> filter)
+            Func<DataTableHeader<TItem>, bool> FilterFunc(TItem item, string? s, Func<object?, string?, TItem, bool> filter)
             {
                 return header =>
                 {
                     var value = header.ItemValue?.Invoke(item);
-                    return header.Filter != null ? header.Filter(value, search, item) : filter(value, search, item);
+                    return header.Filter?.Invoke(value, s, item) ?? filter(value, s, item);
                 };
             }
 
@@ -347,7 +361,7 @@ namespace Masa.Blazor
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>
                 {
-                    var item = (TItem)attrs.Data;
+                    var item = (TItem)attrs.Data!;
                     attrs[nameof(Class)] = "m-data-table__checkbox";
                     attrs[nameof(MSimpleCheckbox.Disabled)] = !IsSelectable(item);
                     attrs[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
@@ -363,6 +377,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
                     attrs[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
                     attrs[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
+                    attrs[nameof(MDataTableRow<TItem>.ItemClass)] = ItemClass;
                 })
                 .Apply(typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<TItem>), attrs =>
                 {
@@ -371,13 +386,14 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableMobileRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
                     attrs[nameof(MDataTableMobileRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
                     attrs[nameof(MDataTableMobileRow<TItem>.Stripe)] = Stripe;
+                    attrs[nameof(MDataTableMobileRow<TItem>.ItemClass)] = ItemClass;
                 })
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
                 .Apply<BIcon, MIcon>("expand-icon", attrs =>
                 {
-                    var item = (TItem)attrs.Data;
+                    var item = (TItem)attrs.Data!;
                     var expanded = IsExpanded(item);
-                    var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
+                    var @class = expanded ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
                     attrs[nameof(Class)] = @class;
                     attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
@@ -387,11 +403,11 @@ namespace Masa.Blazor
                 })
                 .Apply<BButton, MButton>("group-toggle", attrs =>
                 {
-                    var group = (string)attrs.Data;
+                    var group = (string)attrs.Data!;
                     attrs[nameof(Class)] = "ma-0";
                     attrs[nameof(MButton.Icon)] = true;
                     attrs[nameof(MButton.Small)] = true;
-                    attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleGroup(group));
+                    attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, _ => ToggleGroup(group));
                 })
                 .Apply<BIcon, MIcon>("group-toggle-icon")
                 .Apply<BButton, MButton>("group-remove", attrs =>

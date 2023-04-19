@@ -674,7 +674,8 @@ namespace Masa.Blazor
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value?.ToString(), CultureInfo.InvariantCulture, out var val);
+            var value = args.Value?.ToString();
+            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
@@ -694,6 +695,15 @@ namespace Masa.Blazor
                 _badInput = true;
 
                 InternalValue = default;
+
+                if (Type == "number")
+                {
+                    // reset the value of input element if failed to convert
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        _ = SetValueByJsInterop("");
+                    }
+                }
             }
 
             if (!ValidateOnBlur)

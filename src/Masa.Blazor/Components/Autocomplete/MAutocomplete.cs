@@ -299,6 +299,12 @@ namespace Masa.Blazor
             val ??= new List<TItem>();
             oldVal ??= new List<TItem>();
 
+            var except = val.Except(oldVal);
+            if (!except.Any())
+            {
+                return;
+            }
+
             if (!AutoSelectFirst)
             {
                 var preSelectedItem = oldVal.ElementAtOrDefault(MenuListIndex);
