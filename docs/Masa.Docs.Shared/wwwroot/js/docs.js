@@ -138,12 +138,12 @@ window.MasaBlazor.markdownItRules = function (parser) {
       if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
         
-        const [lang, fileName] = resolveCodeInfo(tokens[idx].info)
-
+        const [lang, fileName, lineHighlights] = resolveCodeInfo(tokens[idx].info)
+        
         return `<default-app-markup code="${content.replaceAll(
           '"',
           "&quot;"
-        )}" language="${lang}" file-name="${fileName || ""}"></default-app-markup>\n`;
+        )}" language="${lang}" file-name="${fileName || ""}" line-highlights="${lineHighlights || ""}"></default-app-markup>\n`;
       }
     };
   }
@@ -203,9 +203,9 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
           if (nextToken.type === "fence") {
             const { content: code, info } = nextToken;
-            const [lang, fileName]= resolveCodeInfo(info)
+            const [lang, fileName, lineHighlights]= resolveCodeInfo(info)
 
-            dic[item] = { code, lang, fileName };
+            dic[item] = { code, lang, fileName, lineHighlights };
           }
         }
 
@@ -238,17 +238,33 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
   function resolveCodeInfo(info) {
     info = (info || "").trim();
-    const whitespaceIndex = info.indexOf(" ");
-    if (whitespaceIndex === -1) {
-      return [info, ""]
+    const [lang, ...res] = info.split(/\s+/);
+
+    let fileName, lineHighlights;
+
+    const f = res.find(u => u.startsWith("f:"))
+    const l = res.find(u => u.startsWith("l:"))
+
+    if (res.length > 0 && !f && res[0] !== l) {
+      fileName = res[0];
+    } else {
+      fileName = f && f.substring(2)
     }
 
-    const lang = info.substring(0, whitespaceIndex);
-    const fileName = info.substring(whitespaceIndex + 1);
+    lineHighlights = l && l.substring(2)
 
-    return [lang, fileName];
+    return [lang, fileName, lineHighlights];
   }
 };
+
+window.prismHighlightLines = function (pre) {
+  if (!pre) return;
+  try{
+    Prism.plugins.lineHighlight.highlightLines(pre)();
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
