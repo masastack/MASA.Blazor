@@ -78,6 +78,9 @@ public partial class MSyntaxHighlight : BDomComponentBase
 
         _codeHtml = await MarkdownItJSModule.Highlight(Code, Language);
 
-        await NextTickIf(async () => await OnHighlighted!.Invoke(Ref), () => OnHighlighted != null);
+        if (OnHighlighted != null)
+        {
+            NextTick(async () => { await OnHighlighted.Invoke(Ref); });
+        }
     }
 }
