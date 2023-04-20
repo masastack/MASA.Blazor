@@ -11,36 +11,38 @@
            @ref="@_tabs">
         @foreach (var patternPath in PatternPaths)
         {
+            var pathValue = new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath());
+            var tabOptions = TabOptions?.Invoke(pathValue);
+            var tabTitle = GetTabTitle(patternPath, tabOptions);
+
             <MTab Href="@patternPath.AbsolutePath"
-                  Class="@CssProvider.GetClass("tab")"
+                  Class="@($"{CssProvider.GetClass("tab")} {tabOptions?.Class}")"
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
                   @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
                   __internal_preventDefault_oncontextmenu>
 
-                @{
-                    if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var titleBuilder) && titleBuilder.Invoke() is { } title && !string.IsNullOrWhiteSpace(title))
-                    {
-                        @title
-                    }
-                    else if (TabContent != null)
-                    {
-                        @TabContent.Invoke(new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath()))
-                    }
-                    else
-                    {
-                        @DefaultTabTitle(patternPath.AbsolutePath)
-                    }
+                @if (TabIconContent != default)
+                {
+                    TabIconContent.Invoke(pathValue);
+                }
+                else if (tabOptions?.Icon != default)
+                {
+                    <MIcon Size="20">@tabOptions.Icon</MIcon>
                 }
 
+                <span class="@CssProvider.GetClass("tab-title") @(tabOptions?.TitleClass)" style="@tabOptions?.TitleStyle">
+                    @tabTitle
+                </span>
+
                 <MButton Icon
-                         Class="ml-1"
-                         OnClick="() => HandleOnCloseTab(patternPath)"
+                         Class="@CssProvider.GetClass("tab-close")"
+                         OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
                          Small
                          StopPropagation
                          OnClickPreventDefault>
-                    <MIcon Small>mdi-close</MIcon>
+                    <MIcon Small>@(CloseIcon ?? "mdi-close")</MIcon>
                 </MButton>
             </MTab>
         }

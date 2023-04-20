@@ -76,9 +76,7 @@
 }
 
 .app-code {
-    margin: 16px 0;
     position: relative;
-    padding: 16px;
 }
 
     .app-code code {
@@ -511,4 +509,8 @@ default-app-markup {
 
 .m-select.light-border .m-input__slot fieldset {
     border-color: rgba(0,0,0,.12) !important;
+}
+
+.m-alert--doc .m-alert__content p:last-child {
+    margin-bottom: 0 !important;
 }

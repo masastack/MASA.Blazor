@@ -86,6 +86,10 @@ namespace Masa.Blazor
                         .Add("m-pagination__item")
                         .Add("m-pagination__item--active")
                         .AddBackgroundColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddBackgroundColor(Color);
                 })
                 .Apply("item", cssBuilder =>
                 {

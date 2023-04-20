@@ -137,12 +137,13 @@ window.MasaBlazor.markdownItRules = function (parser) {
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
       if (tokens[idx].markup === "```") {
         const content = tokens[idx].content;
-        const info = tokens[idx].info;
+        
+        const [lang, fileName] = resolveCodeInfo(tokens[idx].info)
 
         return `<default-app-markup code="${content.replaceAll(
           '"',
           "&quot;"
-        )}" language="${info}"></default-app-markup>\n`;
+        )}" language="${lang}" file-name="${fileName || ""}"></default-app-markup>\n`;
       }
     };
   }
@@ -156,20 +157,12 @@ window.MasaBlazor.markdownItRules = function (parser) {
 
   function addBlockquoteRules(md) {
     md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
-      const next = tokens[idx + 2];
-      const content = next.content;
-
-      tokens[idx].tag = "app-alert";
-      tokens[idx].attrSet("type", "info");
-      tokens[idx].attrSet("content", content);
-      tokens[idx].attrSet("border", "left");
-
-      return self.renderToken(tokens, idx, options);
+      tokens[idx].tag = "div";
+      tokens[idx].attrSet("class", "m-alert__content");
+      return (`<div role="alert" class="m-alert m-alert--doc m-sheet m-alert--border m-alert--border-left m-alert--text info--text"><div class="m-alert__wrapper"><i class="m-icon theme--dark info--text mdi mdi-information m-alert__icon"></i><div class="m-alert__border m-alert__border--left"></div>${self.renderToken(tokens, idx, options)}`);
     };
     md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-alert";
-
-      return self.renderToken(tokens, idx, options);
+      return self.renderToken(tokens, idx, options) + "</div></div></div>";
     };
   }
 
@@ -209,9 +202,10 @@ window.MasaBlazor.markdownItRules = function (parser) {
           nextToken = tokens[nextIndex];
 
           if (nextToken.type === "fence") {
-            const { content: code, info: lang } = nextToken;
+            const { content: code, info } = nextToken;
+            const [lang, fileName]= resolveCodeInfo(info)
 
-            dic[item] = { code, lang };
+            dic[item] = { code, lang, fileName };
           }
         }
 
@@ -240,6 +234,19 @@ window.MasaBlazor.markdownItRules = function (parser) {
     ) => {
       return `</app-code-group>\n`;
     };
+  }
+
+  function resolveCodeInfo(info) {
+    info = (info || "").trim();
+    const whitespaceIndex = info.indexOf(" ");
+    if (whitespaceIndex === -1) {
+      return [info, ""]
+    }
+
+    const lang = info.substring(0, whitespaceIndex);
+    const fileName = info.substring(whitespaceIndex + 1);
+
+    return [lang, fileName];
   }
 };
 
