@@ -244,8 +244,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         base.RegisterWatchers(watcher);
 
-        watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
-               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
+        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
     }
 
     private void OnItemsChange()
@@ -332,13 +331,13 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         if (isLazyContent)
         {
-            OnMenuActiveChange(true);
-
             if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
             {
                 OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
             }
         }
+
+        OnMenuActiveChange(true);
     }
 
     protected virtual async void OnMenuActiveChange(bool val)
@@ -348,13 +347,19 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             return;
         }
 
+
+        if (MMenu.ContentElement.Context is null || !IsDirty) return;
+
         var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
             TilesSelector,
             "aria-selected", "True");
 
-        await SetMenuIndex(index);
+        if (index > -1)
+        {
+            await SetMenuIndex(index);
 
-        StateHasChanged();
+            StateHasChanged();
+        }
     }
 
     public async Task Blur()
@@ -902,7 +907,13 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected async Task SetMenuIndex(int index)
     {
-        // TODO: scroll 
+        MenuListIndex = index;
+
+        if (index == -1)
+        {
+            return;
+        }
+
         var i = index;
         var menuItem = ComputedItems.ElementAtOrDefault(index);
         if (menuItem is not null)
@@ -917,8 +928,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 TilesSelector,
                 i);
         }
-
-        MenuListIndex = index;
     }
 
     protected virtual void SetSelectedItems()
