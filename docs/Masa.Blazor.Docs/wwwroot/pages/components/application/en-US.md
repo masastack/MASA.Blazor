@@ -59,13 +59,13 @@ swap them out and the layout will accommodate. For some examples displaying how 
 
 Each of these application components have a designated location and priority that it affects within the layout system.
 
-| 组件 | 描述 |
-| --- | --- |
-| [MAppBar](/blazor/components/app-bars) | Is always placed at the top of an application with a lower priority than **MSystemBar** |
-| [MBottomNavigation](/blazor/components/bottom-navigation) | Is always placed at the bottom of an application with a higher priority than **MFooter** |
-| [MFooter](/blazor/components/footers) | Is always placed at the bottom of an application with a lower priority than **MBottomNavigation** |
+| Component                                                  | Description                                                                                                         |
+|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| [MAppBar](/blazor/components/app-bars)                     | Is always placed at the top of an application with a lower priority than **MSystemBar**                             |
+| [MBottomNavigation](/blazor/components/bottom-navigation)  | Is always placed at the bottom of an application with a higher priority than **MFooter**                            |
+| [MFooter](/blazor/components/footers)                      | Is always placed at the bottom of an application with a lower priority than **MBottomNavigation**                   |
 | [MNavigationDrawer](/blazor/components/navigation-drawers) | Can be placed on the left or right side of an application and can be configured to sit next to or below **MAppBar** |
-| [MSystemBar](/blazor/components/system-bars) | Is always placed at the top of an application with higher priority than  **MAppBar**  |
+| [MSystemBar](/blazor/components/system-bars)               | Is always placed at the top of an application with higher priority than  **MAppBar**                                |
 
 ![app](http://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
 
