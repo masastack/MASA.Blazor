@@ -1,4 +1,6 @@
-﻿<div class="text-center">
+﻿@using Masa.Blazor.Presets
+
+<div class="text-center">
     <PEnqueuedSnackbars @ref="_enqueuedSnackbars" MaxCount="1" />
     <MButton OnClick="TurnToText" Color="@_color">Turn to red</MButton>
 </div>
