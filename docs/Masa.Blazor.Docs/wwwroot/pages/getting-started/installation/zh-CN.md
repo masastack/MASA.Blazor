@@ -141,8 +141,6 @@ builder.Services.AddMasaBlazor();
 
 ### 开始创造
 
-
-
 ```razor MainLayout.razor
 <MApp> //layout </MApp>
 ```

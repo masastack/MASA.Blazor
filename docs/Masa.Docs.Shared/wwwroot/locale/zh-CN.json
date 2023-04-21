@@ -29,6 +29,7 @@
   "breakpoints": "响应式显示",
   "icon-fonts": "图标字体",
   "internationalization": "国际化",
+  "theme": "主题",
   "layouts": "布局",
   "props": "属性",
   "contents": "插槽",
