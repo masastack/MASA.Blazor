@@ -23,6 +23,9 @@ public partial class MSyntaxHighlight : BDomComponentBase
     [Parameter]
     public bool IgnoreCodeCssOfTheme { get; set; }
 
+    [Parameter]
+    public Func<ElementReference, Task>? OnHighlighted { get; set; }
+
     private string _codeHtml = string.Empty;
     private string? _prevCode;
 
@@ -74,5 +77,10 @@ public partial class MSyntaxHighlight : BDomComponentBase
         if (Code == null) return;
 
         _codeHtml = await MarkdownItJSModule.Highlight(Code, Language);
+
+        if (OnHighlighted != null)
+        {
+            NextTick(async () => { await OnHighlighted.Invoke(Ref); });
+        }
     }
 }

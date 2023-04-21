@@ -1,4 +1,7 @@
-﻿<MHover>
+﻿@inherits NextTickComponentBase
+@inject IJSRuntime JSRuntime
+
+<MHover>
     <div Class="app-code @Class" @attributes="@context.Attrs">
         @if (FileNameExists)
         {
@@ -13,7 +16,13 @@
                 Class="@($"overflow-hidden pa-4 {ComputedClass}")"
                 Outlined
                 Elevation="0">
-            <MSyntaxHighlight Class="white--text overflow-x-auto overflow-y-hidden" Code="@Code" Language="@Language" IgnorePreCssOfTheme></MSyntaxHighlight>
+            <MSyntaxHighlight Class="white--text overflow-x-auto overflow-y-hidden"
+                              Code="@Code"
+                              Language="@Language"
+                              IgnorePreCssOfTheme
+                              OnHighlighted="OnHighlighted"
+                              data-line="@LineHighlights">
+            </MSyntaxHighlight>
             <FadeTransition>
                 <AppCopyButton Show="@context.Hover" Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
             </FadeTransition>
@@ -41,6 +50,9 @@
     public string? FileName { get; set; }
 
     [Parameter]
+    public string? LineHighlights { get; set; }
+
+    [Parameter]
     public bool RoundedTop0 { get; set; }
 
     private bool FileNameExists => !string.IsNullOrWhiteSpace(FileName);
@@ -56,6 +68,11 @@
 
             return "rounded";
         }
+    }
+
+    private async Task OnHighlighted(ElementReference elementReference)
+    {
+        await JSRuntime.InvokeVoidAsync("prismHighlightLines", elementReference);
     }
 
 }
