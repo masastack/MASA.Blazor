@@ -6,6 +6,8 @@
 
 ## 自动安装
 
+要快速入门，可以使用 Masa.Template 模板快速创建项目。
+
 ### 安装 Masa.Template 模板
 
 ```shell
@@ -39,6 +41,8 @@ dotnet new --install Masa.Template
                                    默认: net7.0
 ```
 
+> 如果你对模板不了解，请查阅 [dotnet new](https://docs.microsoft.com/zh-cn/dotnet/core/tools/dotnet-new) 文档。
+
 ### 创建项目
 
 以 `masablazor-server` 模板为例，创建项目，并使用 `-o` 指定输出目录和项目名称。
@@ -62,15 +66,17 @@ dotnet run
 
 ### 创建 Blazor Server 或 Blazor WebAssembly 项目
 
+以 .NET 7 提供的空模板为例。
+
 :::: code-group
 ::: code-group-item Server
 ```shell
-dotnet new blazorserver -o BlazorApp
+dotnet new blazorserver-empty -o BlazorApp
 ```
 :::
 ::: code-group-item WebAssembly
 ```shell
-dotnet new blazorwasm -o BlazorApp
+dotnet new blazorwasm-empty -o BlazorApp
 ```
 :::
 ::::
@@ -78,6 +84,7 @@ dotnet new blazorwasm -o BlazorApp
 ### 安装 Masa.Blazor NuGet 包
 
 ```shell
+cd BlazorApp
 dotnet add package Masa.Blazor
 ```
 
@@ -85,28 +92,29 @@ dotnet add package Masa.Blazor
 
 :::: code-group
 ::: code-group-item Server
-```html Pages/_Layout.cshtml
-<!-- masa blazor css style -->
-<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+```diff Pages/_Host.cshtml
+  <base href="~/" />
++ <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+  <link href="css/site.css" rel="stylesheet" />
++ <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
++ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
++ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
-<!--icon file,import need to use-->
-<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
-
-<!--js(should lay the end of file)-->
-<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+  <script src="_framework/blazor.server.js"></script>
++ <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 :::
 ::: code-group-item WebAssembly
-```html wwwroot\index.html
-<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+```diff wwwroot\index.html
+  <base href="/" />
++ <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+  <link href="css/app.css" rel="stylesheet" />
++ <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
++ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
++ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
-<link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
-
-<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+  <script src="_framework/blazor.webassembly.js"></script>
++ <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 :::
 ::::
@@ -133,8 +141,17 @@ builder.Services.AddMasaBlazor();
 
 ### 开始创造
 
-```razor Shared/MainLayout.razor
+
+
+```razor MainLayout.razor
 <MApp> //layout </MApp>
 ```
 
-> 启动项目与上面的自动安装一致。
+> 启动项目的步骤与上面的自动安装一致。
+
+## 下一步
+
+- 想要了解布局规则，请查看 [Application](/blazor/components/application)。
+- 想要快速搭建布局，请查看 [预置布局](/blazor/getting-started/wireframes)。
+- 使用内置的原子化CSS，请查看 [样式和动画](/blazor/styles-and-animations/border-radius)。
+- 更多组件，请查看 [组件](/blazor/components/all)。
