@@ -1,8 +1,9 @@
+
 # Get started with MASA Blazor
 
 Get started with MASA Blazor, building feature-rich and fast applications.
 
-> MASA Blazor is developed based on .Net 6.0, please make sure that you have installed [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0).
+> MASA Blazor is developed based on .NET 6.0, please make sure that you have installed [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0).
 
 ## Automatic Installation
 
@@ -48,7 +49,7 @@ For example, the `masablazor-server` template provides the following template op
 for example, create a project using the `masablazor-server` template, and use `-o` to specify the output directory and project name.
 
 ```shell
-dotnet new masab -o MasaBlazorApp
+dotnet new masablazor-server -o MasaBlazorApp
 ```
 
 ### Run project
@@ -96,9 +97,9 @@ dotnet add package Masa.Blazor
   <base href="~/" />
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/site.css" rel="stylesheet" />
-+ <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
++ <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
++ <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
++ <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
   <script src="_framework/blazor.server.js"></script>
 + <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -109,9 +110,9 @@ dotnet add package Masa.Blazor
   <base href="/" />
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/app.css" rel="stylesheet" />
-+ <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
++ <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
++ <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
++ <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
   <script src="_framework/blazor.webassembly.js"></script>
 + <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -139,7 +140,7 @@ global using Masa.Blazor.Presets;
 builder.Services.AddMasaBlazor();
 ```
 
-### Let's fun
+### Let's build!
 
 ```razor MainLayout.razor
 <MApp> //layout </MApp>

@@ -48,7 +48,7 @@ dotnet new --install Masa.Template
 以 `masablazor-server` 模板为例，创建项目，并使用 `-o` 指定输出目录和项目名称。
 
 ```shell
-dotnet new masab -o MasaBlazorApp
+dotnet new masablazor-server -o MasaBlazorApp
 ```
 
 ### 启动项目
@@ -139,10 +139,12 @@ global using Masa.Blazor.Presets;
 builder.Services.AddMasaBlazor();
 ```
 
-### 开始创造
+### 开始构建
 
 ```razor MainLayout.razor
-<MApp> //layout </MApp>
+<MApp>
+    //layout 
+</MApp>
 ```
 
 > 启动项目的步骤与上面的自动安装一致。
