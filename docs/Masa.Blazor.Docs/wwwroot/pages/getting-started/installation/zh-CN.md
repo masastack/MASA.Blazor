@@ -11,7 +11,7 @@
 ### 安装 Masa.Template 模板
 
 ```shell
-dotnet new --install Masa.Template
+dotnet new install Masa.Template
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：

@@ -12,7 +12,7 @@ To get started quickly, you can use the Masa.Template template to quickly create
 ### Install Masa.Template
 
 ```shell
-dotnet new --install Masa.Template
+dotnet new install Masa.Template
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
@@ -143,7 +143,9 @@ builder.Services.AddMasaBlazor();
 ### Let's build!
 
 ```razor MainLayout.razor
-<MApp> //layout </MApp>
+<MApp>
+    //layout
+</MApp>
 ```
 
 > The steps to run the project are the same as the automatic installation above.
