@@ -1,6 +1,11 @@
-﻿<MMarkdownIt Source="@source" Class="markdown-parser__basic" />
+﻿<MMarkdownIt Source="@source" Class="markdown-parser__basic" OnTocParsed="OnTocParsed" />
 
 @code {
+
+    private void OnTocParsed(List<MarkdownItTocContent> tocContents)
+    {
+        
+    }
 
     private string source = @"
 ## What is Markdown?
