@@ -14,7 +14,7 @@
 dotnet new --install Masa.Template
 ```
 
-[Masa.Templates](https://github.com/masastack/MASA.Templates) 提供了以下模板：
+[Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
 
 - `masablazor-server`: MASA Blazor Server 模板
 - `masablazor-wasm`: MASA Blazor WebAssembly 模板

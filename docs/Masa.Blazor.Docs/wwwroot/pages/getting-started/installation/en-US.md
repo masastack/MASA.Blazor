@@ -14,7 +14,7 @@ To get started quickly, you can use the Masa.Template template to quickly create
 dotnet new --install Masa.Template
 ```
 
-[Masa.Templates](https://github.com/masastack/MASA.Templates) provides the following templates:
+[Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
 
 - `masablazor-server`: MASA Blazor Server template
 - `masablazor-wasm`: MASA Blazor WebAssembly template
