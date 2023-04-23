@@ -67,7 +67,7 @@ Each of these application components have a designated location and priority tha
 - [MNavigationDrawer](/blazor/components/navigation-drawers): Can be placed on the left or right side of an application and can be configured to sit next to or below **MAppBar** .
 - [MSystemBar](/blazor/components/system-bars): Is always placed at the top of an application with higher priority than  **MAppBar** .
 
-![app](http://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
+![app](https://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
 
 ## Application service
 

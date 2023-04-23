@@ -60,7 +60,7 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 - [MNavigationDrawer](/blazor/components/navigation-drawers)：可以放置在应用的左边或右边，并且可以配置在 **MAppBar** 的旁边或下面。
 - [MSystemBar](/blazor/components/system-bars)：总是放在应用顶部，优先级高于 **MAppBar** 。
 
-![app](http://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
+![app](https://cdn.masastack.com/stack/doc/blazor/layouts/app.png)
 
 ## 应用服务
 
