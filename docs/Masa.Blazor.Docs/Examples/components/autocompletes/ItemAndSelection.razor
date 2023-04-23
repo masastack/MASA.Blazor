@@ -84,7 +84,7 @@
                             <SelectionContent Context="data">
                                 <MChip Close
                                        IsActive="@data.Selected"
-                                       OnCloseClick="() => Remove(data.Item)">
+                                       OnCloseClick="() =>_friends.RemoveAt(data.Item)">
                                     <MAvatar Left>
                                         <MImage Src="@data.Item.Avatar"></MImage>
                                     </MAvatar>
@@ -248,14 +248,4 @@
             });
         }
     }
-
-    public void Remove(Person item)
-    {
-        var index = _friends.IndexOf(item.Name);
-        if (index >= 0)
-        {
-            _friends.RemoveAt(index);
-        }
-    }
-
 }
