@@ -15,7 +15,10 @@
             @foreach (var tabItem in TabItems)
             {
                 <MTabItem>
-                    <Markup Code="@tabItem.Code" Language="@tabItem.Lang" FileName="@tabItem.FileName"></Markup>
+                    <Markup Code="@tabItem.Code" Language="@tabItem.Lang"
+                            FileName="@tabItem.FileName"
+                            LineHighlights="@tabItem.LineHighlights">
+                    </Markup>
                 </MTabItem>
             }
         </MTabsItems>
@@ -40,9 +43,12 @@
 
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
-        
+
         [JsonPropertyName("fileName")]
         public string? FileName { get; set; }
+
+        [JsonPropertyName("lineHighlights")]
+        public string? LineHighlights { get; set; }
     }
 
 }

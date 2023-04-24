@@ -1,4 +1,6 @@
-﻿<div class="text-center">
+﻿@using Masa.Blazor.Presets
+
+<div class="text-center">
     <PMobileTimePicker @bind-Value="_time"
                        Min="new TimeOnly(9, 30, 0)"
                        Max="new TimeOnly(14, 59, 59)">

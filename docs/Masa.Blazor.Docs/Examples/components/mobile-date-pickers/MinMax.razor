@@ -1,4 +1,6 @@
-﻿<div class="text-center">
+﻿@using Masa.Blazor.Presets
+
+<div class="text-center">
     <PMobileDatePicker @bind-Value="_date"
                        Max="DateOnly.FromDateTime(DateTime.Now)"
                        Min="new DateOnly(2000, 1, 1)">

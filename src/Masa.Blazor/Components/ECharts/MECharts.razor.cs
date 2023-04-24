@@ -215,7 +215,10 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
             optionJson = string.Empty;
             return false;
         }
-        optionJson = JsonSerializer.Serialize(option);
+        optionJson = JsonSerializer.Serialize(option, new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
         return optionJson.Contains("function");
     }
 

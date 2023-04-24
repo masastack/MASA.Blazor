@@ -31,8 +31,6 @@ for background, terminology, guidelines, and code snippets.
 
 ## Caveats
 
-<app-alert type="info" content="1.x grid system has been deprecated in favor of the 2.x grid system."></app-alert>
-
 <app-alert type="info" content="Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the `xs` breakpoint is assumed and has been removed from the props context. This applies to **offset**、**justify**、**align** and single breakpoint props on `MCol`.For example: 1、Props like `justify-sm` and `justify-md` exist,but `justify-xs` does not, it is simply `justify`. 2、The `Xs` prop does not exist on **MCol**. The equivalent to this is the `Cols` prop."></app-alert>
 
 <app-alert type="info" content="When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results."></app-alert>

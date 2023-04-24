@@ -9,6 +9,14 @@
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
 
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            OnIcon = "mdi-radiobox-marked";
+            OffIcon = "mdi-radiobox-blank";
+            
+            await base.SetParametersAsync(parameters);
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -18,6 +26,7 @@
         protected override void SetComponentClass()
         {
             var prefix = "m-radio";
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
@@ -46,9 +55,6 @@
                     attrs[nameof(MIcon.IsActive)] = IsActive;
                 })
                 .Apply<BLabel, MLabel>();
-
-            OnIcon = "mdi-radiobox-marked";
-            OffIcon = "mdi-radiobox-blank";
         }
     }
 }

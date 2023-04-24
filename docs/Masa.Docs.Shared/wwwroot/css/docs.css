@@ -77,13 +77,29 @@
 
 .app-code {
     position: relative;
+    font-size: 0.9em !important;
+    line-height: 1.3em !important;
 }
 
     .app-code code {
-        font-size: 0.9em !important;
-        line-height: 1.3em !important;
+        font-size: inherit !important;
+        line-height: inherit !important;
         color: white !important;
     }
+
+/* prism line highlight */
+pre[data-line] {
+    padding: 0 !important;
+}
+
+.line-highlight {
+    margin-top: 0 !important;
+    background: #a3aed033 !important;
+}
+
+.line-highlight::before, .line-highlight[data-end]:after {
+    content: "" !important;
+}
 
 h1 + p {
     font-size: 1.25rem;
