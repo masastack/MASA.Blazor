@@ -1,0 +1,34 @@
+@page "/document/compile/{Path?}"
+@layout CompileLayout
+
+<div class="compile">
+    <div class="compile-left">
+        <MMonacoEditor @bind-Value="Code" Style="height:100%"></MMonacoEditor>
+    </div>
+    <div class="compile-right">
+        <DocumentMarkdownIt  Source="@Code"
+                            OnTocParsed="@OnTocParsed" />
+    </div>
+</div>
+
+<style>
+    body {
+        height: 100vh;
+    }
+
+    .compile {
+        display: flex;
+        height: 100%;
+    }
+
+    .compile-left {
+        width: 50%;
+        background-color: #ccc;
+    }
+
+    .compile-right {
+        width: 50%;
+        background-color: white;
+        padding: 24px;
+    }
+</style>
