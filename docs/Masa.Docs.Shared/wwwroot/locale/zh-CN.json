@@ -361,7 +361,7 @@
   "log": "日志",
   "metric": "指标",
   "stack": "MASA Stack 1.0",
-  "use-guide": "使用指南",
+  "use-guide": "操作指南",
   "develop-guide": "开发指南",
   "permission": "权限",
   "user": "用户",
@@ -377,7 +377,7 @@
   "api-scope": "Api范围",
   "client": "客户端",
   "identity-resource": "身份资源",
-  "user-claim": "用户申明",
+  "user-claim": "用户声明",
   "basic-concepts": "基础概念",
   "demo": "示例",
   "channel": "渠道管理",
@@ -513,5 +513,10 @@
     "new-content-available": "新内容可用。点击 刷新 进行更新。",
     "ignore": "忽略",
     "refresh": "刷新"
-  }
+  },
+  "instructions": "操作指南",
+  "rolepermision": "角色权限",
+  "configureoauth": "配置OAuth",
+  "api": "API参考",
+  "authentication-authorization": "认证授权"
 }
