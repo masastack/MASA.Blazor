@@ -393,5 +393,10 @@
     "new-content-available": "New content is available. Click Refresh to update.",
     "ignore": "Ignore",
     "refresh": "Refresh"
-  }
+  },
+  "instructions": "Instructions",
+  "rolepermision": "Role Permission",
+  "configureoauth": "Configure OAuth",
+  "api": "API",
+  "authentication-authorization": "Authentication Authorization"
 }
