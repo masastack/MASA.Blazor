@@ -123,25 +123,29 @@ namespace Masa.Blazor
                 (MasaBlazor.RTL ? PrevIcon : NextIcon);
         }
 
-        public IEnumerable<StringNumber> GetItems()
-        {
-            var maxLength = Math.Clamp(Length, 0, Math.Min(_maxButtons, TotalVisible?.ToInt32() ?? 0));
-		    var odd = maxLength & 1;
-		    var halfRange = maxLength >> 1;
-		    if (Value <= halfRange)
-		    {
-		    	return Range(1, maxLength);
-		    }
-		    else if (Value > Length - halfRange)
-		    {
-		    	return Range(Length - maxLength + 1, Length);
-		    }
-		    else
-		    {
-		    	return Range(Value - halfRange + 1, Value + halfRange + odd);
+   	public IEnumerable<StringNumber> GetItems()
+	{
+		if (TotalVisible?.ToInt32() > 0 != true)
+		{
+			return Enumerable.Empty<StringNumber>();
+		}
+		var maxLength = Math.Clamp(Length, 0, Math.Min(_maxButtons, TotalVisible.ToInt32()));
+		var odd = maxLength & 1;
+		var halfRange = maxLength >> 1;
+		if (Value <= halfRange)
+		{
+			return Range(1, maxLength);
+		}
+		else if (Value > Length - halfRange)
+		{
+			return Range(Length - maxLength + 1, Length);
+		}
+		else
+		{
+			return Range(Value - halfRange + 1, Value + halfRange + odd);
 			//return Range(Value - halfRange + 1 - odd, Value + halfRange);此返回在偶数时，显示更多可用的右侧按钮。
-		    }
-        }
+		}
+	}
 
         protected static IEnumerable<StringNumber> Range(int from, int to)
         {
