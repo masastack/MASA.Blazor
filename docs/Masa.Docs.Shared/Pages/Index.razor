@@ -256,11 +256,10 @@
         var uri = new Uri(url);
         if (!string.IsNullOrWhiteSpace(uri.Fragment))
         {
-            await NextTickWhile(async () =>
+            await Retry(async () =>
             {
-                await Task.Delay(500);
                 await ScrollIntoView(uri.Fragment.Substring(1));
-            }, () => true);
+            }, () => true, delay: 500);
         }
     }
 

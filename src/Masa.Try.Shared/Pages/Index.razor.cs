@@ -200,10 +200,10 @@ public partial class Index : NextTickComponentBase
 
         await module.MonacoEditor.SetThemeAsync("custom");
 
-        await NextTickWhile(async () =>
+        await Retry(() =>
         {
-            await Task.Delay(100);
             RunCode();
+            return Task.CompletedTask;
         }, () =>  _initialize == false);
     }
 
