@@ -11,22 +11,15 @@
             </MToolbar>
         }
 
-        <MSheet Color="#1B2559"
-                Dark="IsDark"
-                Class="@($"overflow-hidden pa-4 {ComputedClass}")"
-                Outlined
-                Elevation="0">
-            <MSyntaxHighlight Class="white--text overflow-x-auto overflow-y-hidden"
-                              Code="@Code"
-                              Language="@Language"
-                              IgnorePreCssOfTheme
-                              OnHighlighted="OnHighlighted"
-                              data-line="@LineHighlights">
-            </MSyntaxHighlight>
-            <FadeTransition>
-                <AppCopyButton Show="@context.Hover" Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
-            </FadeTransition>
-        </MSheet>
+        <MSyntaxHighlight Class="white--text overflow-x-auto overflow-y-hidden pa-4 ma-0"
+                          Code="@Code"
+                          Language="@Language"
+                          OnHighlighted="OnHighlighted"
+                          data-line="@LineHighlights">
+        </MSyntaxHighlight>
+        <FadeTransition>
+            <AppCopyButton Show="@context.Hover" Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
+        </FadeTransition>
     </div>
 </MHover>
 

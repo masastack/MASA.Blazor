@@ -60,11 +60,10 @@
         {
             if (NavDrawer is not null)
             {
-                await NextTickWhile(async () =>
+                await Retry(async () =>
                 {
-                    await Task.Delay(500);
                     await ScrollIntoView(NavDrawer.ElementSelector);
-                }, () => NavDrawer.Value);
+                }, () => NavDrawer.Value, delay: 500);
             }
         }
     }
