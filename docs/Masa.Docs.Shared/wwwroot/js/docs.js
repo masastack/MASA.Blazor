@@ -260,7 +260,9 @@ window.MasaBlazor.markdownItRules = function (parser) {
 window.prismHighlightLines = function (pre) {
   if (!pre) return;
   try{
-    Prism.plugins.lineHighlight.highlightLines(pre)();
+    setTimeout(() => {
+      Prism.plugins.lineHighlight.highlightLines(pre)();
+    }, 300) // in code-group-item, need to wait for 0.3s transition animation
   } catch (err) {
     console.error(err);
   }
