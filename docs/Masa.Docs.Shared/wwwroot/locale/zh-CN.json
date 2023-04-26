@@ -328,7 +328,7 @@
   "extensions": "扩展包",
   "fluent-validation": "FluentValidation验证",
   "dependency-injection": "依赖注入",
-  "dotnet": "Dotnet扩展",
+  "dotnet": "常用扩展",
   "enums": "枚举",
   "expression": "表达式",
   "ldap": "LDAP",
