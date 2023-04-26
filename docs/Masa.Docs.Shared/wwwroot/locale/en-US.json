@@ -420,6 +420,7 @@
   "mf-part-4": "4. Chapter 4: Global Exceptions",
   "mf-part-5": "5. Chapter 5: Caching",
   "mf-part-6": "6. Chapter 6: Domain Driven Design",
+  "dotnet-extensions": "Common Extensions",
   "released-by": "Released by: {0}",
   "published-on": "Published on {0}",
   "pwa": {
