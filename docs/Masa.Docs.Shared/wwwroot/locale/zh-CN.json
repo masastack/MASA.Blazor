@@ -270,7 +270,7 @@
   "openId-connect": "身份认证",
   "distributed-lock": "分布式锁",
   "lock-local": "本地锁",
-  "medallion": "Medallion分布式锁",
+  "madelson": "Madelson分布式锁",
   "medallion-azure": "Medallion分布式锁 (Azure)",
   "medallion-file-system": "Medallion分布式锁 (锁定文件)",
   "medallion-mysql": "Medallion分布式锁 (MySQL)",
