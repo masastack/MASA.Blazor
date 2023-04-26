@@ -93,7 +93,7 @@ pre[data-line] {
 }
 
 .line-highlight {
-    margin-top: 0 !important;
+    margin-top: 16px !important;
     background: #a3aed033 !important;
 }
 
