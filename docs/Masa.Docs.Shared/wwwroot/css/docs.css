@@ -93,7 +93,7 @@ pre[data-line] {
 }
 
 .line-highlight {
-    margin-top: 0 !important;
+    margin-top: 16px !important;
     background: #a3aed033 !important;
 }
 
@@ -162,10 +162,6 @@ h5.m-heading {
 }
 
 h6.m-heading {
-    font-weight: 700 !important;
-}
-
-h7.m-heading {
     font-weight: 700 !important;
 }
 
