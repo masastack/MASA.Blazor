@@ -96,9 +96,9 @@ dotnet add package Masa.Blazor
 <base href="~/" />
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <link href="css/site.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
 <script src="_framework/blazor.server.js"></script>
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -109,9 +109,9 @@ dotnet add package Masa.Blazor
 <base href="/" />
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <link href="css/app.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
