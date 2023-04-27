@@ -432,5 +432,8 @@
   "rolepermision": "Role Permission",
   "configureoauth": "Configure OAuth",
   "api": "API",
-  "authentication-authorization": "Authentication Authorization"
+  "authentication-authorization": "Authentication Authorization",
+  "monitoring": "Monitoring",
+  "error-query": "Error Query",
+  "trouble-shooting": "Trouble Shooting"
 }
