@@ -408,6 +408,7 @@
   "rules-engine": "Rules Engine",
   "microsoft-rules-engine": "Microsoft Rules Engine",
   "background-jobs": "Background Jobs",
+  "memory-cache": "Memory Cache",
   "memory": "Memory",
   "hangfire": "Hangfire",
   "id-generator": "ID Generator",
