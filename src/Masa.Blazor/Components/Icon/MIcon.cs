@@ -1,21 +1,13 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+using Masa.Blazor.IconSets;
+
+namespace Masa.Blazor
 {
     public class MIcon : BIcon, ISizeable
     {
-        /// <summary>
-        /// Attention! End with a space
-        /// </summary>
-        private static string[] s_arrFa5Prefix = new[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
-
-        private readonly Dictionary<string, string> _sizeMap = new()
-        {
-            { nameof(XSmall), "12px" },
-            { nameof(Small), "16px" },
-            { "Default", "24px" },
-            { nameof(Medium), "28px" },
-            { nameof(Large), "36px" },
-            { nameof(XLarge), "40px" },
-        };
+        [Inject]
+        private MasaBlazor? MasaBlazor { get; set; }
 
         /// <summary>
         /// 36px
@@ -44,9 +36,66 @@
         [Parameter]
         public bool IsActive { get; set; } = true;
 
+        private readonly Dictionary<string, string> _sizeMap = new()
+        {
+            { nameof(XSmall), "12px" },
+            { nameof(Small), "16px" },
+            { "Default", "24px" },
+            { nameof(Medium), "28px" },
+            { nameof(Large), "36px" },
+            { nameof(XLarge), "40px" },
+        };
+
         public IDictionary<string, object> Attrs => Attributes;
 
         public bool Medium => false;
+
+        protected override string? ComputedIcon
+        {
+            get
+            {
+                if (IconType != IconType.Webfont)
+                {
+                    return Icon;
+                }
+
+                if (MasaBlazor is null || string.IsNullOrWhiteSpace(Icon))
+                {
+                    return null;
+                }
+
+                var set = MasaBlazor.Icons.DefaultSet;
+
+                var splits = Icon.Split(":");
+                if (splits.Length == 2)
+                {
+                    set = splits[0] switch
+                    {
+                        "mdi" => IconSet.MaterialDesignIcons,
+                        "md" => IconSet.MaterialDesign,
+                        "fa" => IconSet.FontAwesome,
+                        "fa4" => IconSet.FontAwesome4,
+                        _ => set
+                    };
+                }
+
+                return set switch
+                {
+                    IconSet.MaterialDesignIcons => $"mdi {Icon}",
+                    IconSet.MaterialDesign => $"mi {Icon}",
+                    IconSet.FontAwesome => Icon,
+                    IconSet.FontAwesome4 => Icon,
+                    _ => Icon
+                };
+            }
+        }
+
+        private string? ComputedIconCss => IconType switch
+        {
+            IconType.Webfont => ComputedIcon,
+            IconType.WebfontNoPseudo => "material-icons",
+            _ => null
+        };
 
         public string GetSize()
         {
@@ -76,6 +125,7 @@
                 {
                     cssBuilder
                         .Add("m-icon")
+                        .Add(ComputedIconCss)
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
@@ -83,18 +133,6 @@
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
                         .AddTextColor(Color, () => IsActive);
-
-                    if (IconType == IconType.Webfont && Icon is not null)
-                    {
-                        cssBuilder.AddFirstIf(
-                            (() => Icon, () => s_arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
-                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-"))
-                        );
-                    }
-                    else if (IconType == IconType.WebfontNoPseudo)
-                    {
-                        cssBuilder.Add("material-icons");
-                    }
                 }, styleBuilder =>
                 {
                     styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);
