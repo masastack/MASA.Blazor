@@ -65,8 +65,9 @@ namespace Masa.Blazor
                 }
 
                 var set = MasaBlazor.Icons.DefaultSet;
-
                 var splits = Icon.Split(":");
+                var icon = splits[0];
+
                 if (splits.Length == 2)
                 {
                     set = splits[0] switch
@@ -77,20 +78,21 @@ namespace Masa.Blazor
                         "fa4" => IconSet.FontAwesome4,
                         _ => set
                     };
+                    icon = splits[1];
                 }
 
                 return set switch
                 {
-                    IconSet.MaterialDesignIcons => $"mdi {Icon}",
-                    IconSet.MaterialDesign => $"mi {Icon}",
-                    IconSet.FontAwesome => Icon,
-                    IconSet.FontAwesome4 => Icon,
-                    _ => Icon
+                    IconSet.MaterialDesignIcons => $"mdi {icon}",
+                    IconSet.MaterialDesign => $"mi {icon}",
+                    IconSet.FontAwesome => icon,
+                    IconSet.FontAwesome4 => icon,
+                    _ => icon
                 };
             }
         }
 
-        private string? ComputedIconCss => IconType switch
+        private string? IconCss => IconType switch
         {
             IconType.Webfont => ComputedIcon,
             IconType.WebfontNoPseudo => "material-icons",
@@ -125,7 +127,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-icon")
-                        .Add(ComputedIconCss)
+                        .Add(IconCss)
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
