@@ -5,6 +5,7 @@
   "getting-started": "Getting started",
   "installation": "Installation",
   "browser-support": "Browser support",
+  "frequently-asked-questions": "Frequently asked questions",
   "release-notes": "Release notes",
   "upgrade-guide": "Upgrade guide",
   "contributing": "Contributing",
@@ -433,5 +434,8 @@
   "rolepermision": "Role Permission",
   "configureoauth": "Configure OAuth",
   "api": "API",
-  "authentication-authorization": "Authentication Authorization"
+  "authentication-authorization": "Authentication Authorization",
+  "monitoring": "Monitoring",
+  "error-query": "Error Query",
+  "trouble-shooting": "Trouble Shooting"
 }

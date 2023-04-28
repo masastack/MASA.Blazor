@@ -81,10 +81,14 @@
     line-height: 1.3em !important;
 }
 
+    .app-code pre {
+        font-size: inherit !important;
+        line-height: inherit !important;
+    }
+
     .app-code code {
         font-size: inherit !important;
         line-height: inherit !important;
-        color: white !important;
     }
 
 /* prism line highlight */

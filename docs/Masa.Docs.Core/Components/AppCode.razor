@@ -11,7 +11,7 @@
             </MToolbar>
         }
 
-        <MSyntaxHighlight Class="white--text overflow-x-auto overflow-y-hidden pa-4 ma-0"
+        <MSyntaxHighlight Class="@($"white--text overflow-x-auto overflow-y-hidden pa-4 ma-0 {ComputedClass}")"
                           Code="@Code"
                           Language="@Language"
                           OnHighlighted="OnHighlighted"
