@@ -4,7 +4,7 @@
 
 v1.0.x contains non backwards compatible breaking changes, the following changes:
 
-- The Linkage` is renamed to `Routable`, and the affected components are **MBreadcrumbs** and **MList**:
+- The `Linkage` is renamed to `Routable`, and the affected components are **MBreadcrumbs** and **MList**:
   ```diff
   - <MBreadcrumbs Linkage></MBreadcrumbs>
   + <MBreadcrumbs Routable></MBreadcrumbs>
