@@ -93,7 +93,7 @@ dotnet add package Masa.Blazor
 
 :::: code-group
 ::: code-group-item Server
-```diff Pages/_Host.cshtml
+```cshtml Pages/_Host.cshtml l:2,4,7
   <base href="~/" />
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/site.css" rel="stylesheet" />
@@ -104,7 +104,7 @@ dotnet add package Masa.Blazor
 ```
 :::
 ::: code-group-item WebAssembly
-```diff wwwroot\index.html
+```html wwwroot\index.html l:2,4,7
   <base href="/" />
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/app.css" rel="stylesheet" />

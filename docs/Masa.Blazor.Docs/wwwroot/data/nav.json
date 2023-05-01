@@ -13,6 +13,7 @@
     "items": [
       "installation",
       "browser-support",
+      "frequently-asked-questions",
       "wireframes",
       "release-notes",
       "upgrade-guide",
@@ -110,10 +111,6 @@
         "state": "new"
       },
       {
-        "title": "monaco-editor",
-        "state": "new"
-      },
-      {
         "title": "error-handler",
         "state": "update"
       },
@@ -197,6 +194,10 @@
         ]
       },
       "modals",
+      {
+        "title": "monaco-editor",
+        "state": "new"
+      },
       "navigation-drawers",
       "not-grouped",
       "overlays",

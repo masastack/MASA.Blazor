@@ -24,12 +24,16 @@ window.setHash = function () {
   isHash = true;
 };
 
+let scrolling;
+
 window.scrollToElement = function (hash, offset) {
   setHash();
+  scrolling = true;
   const el = document.getElementById(hash);
   const top = el.getBoundingClientRect().top;
   const offsetPosition = top + window.pageYOffset - offset;
   window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+  setTimeout(() => { scrolling = false; }, 1000);
 };
 
 /*
@@ -260,7 +264,9 @@ window.MasaBlazor.markdownItRules = function (parser) {
 window.prismHighlightLines = function (pre) {
   if (!pre) return;
   try{
-    Prism.plugins.lineHighlight.highlightLines(pre)();
+    setTimeout(() => {
+      Prism.plugins.lineHighlight.highlightLines(pre)();
+    }, 300) // in code-group-item, need to wait for 0.3s transition animation
   } catch (err) {
     console.error(err);
   }
@@ -360,7 +366,7 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
 
     registerClickEvents();
 
-    if (_scrolling) {
+    if (_scrolling || scrolling) {
       return;
     }
 
