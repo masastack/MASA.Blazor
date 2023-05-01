@@ -54,6 +54,6 @@ that you still need to include the Font Awesome icons in your project.
 
 #### SVG
 
-If you want to use SVG icons with `MIcon` component, only support input the `path` of SVG.
+If you want to use SVG icons with `MIcon` component, only support input the `path` of SVG. Multi `path`s is also supported.
 
 <masa-example file="Examples.components.icons.Svg"></masa-example>

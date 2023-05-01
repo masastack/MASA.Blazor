@@ -164,10 +164,13 @@
       },
       "hover",
       {
+        "title": "icons",
+        "state": "update"
+      },
+      {
         "title": "i18ns",
         "state": "new"
       },
-      "icons",
       "image-captcha",
       "images",
       "infinite-scroll",

@@ -53,6 +53,6 @@ related:
 
 #### SVG
 
-如果您想要在 **MIcon** 组件中使用SVG图标，仅支持传入SVG的 `path`。
+如果您想要在 **MIcon** 组件中使用SVG图标，仅支持传入SVG的 `path`。多个 `path` 也是支持的。
 
 <masa-example file="Examples.components.icons.Svg"></masa-example>
