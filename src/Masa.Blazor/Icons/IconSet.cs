@@ -1,9 +1,9 @@
-﻿namespace Masa.Blazor.IconSets;
+﻿namespace Masa.Blazor;
 
 public enum IconSet
 {
     MaterialDesignIcons,
     MaterialDesign,
     FontAwesome,
-    FontAwesome4,
+    FontAwesome4
 }

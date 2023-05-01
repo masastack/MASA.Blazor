@@ -1,7 +1,5 @@
 ﻿#nullable enable
 
-using Masa.Blazor.IconSets;
-
 namespace Masa.Blazor
 {
     public class MIcon : BIcon, ISizeable
@@ -50,54 +48,86 @@ namespace Masa.Blazor
 
         public bool Medium => false;
 
-        protected override string? ComputedIcon
+        private string? _iconCss;
+
+        protected override void InitIcon()
         {
-            get
+            Icon? icon;
+
+            if (Icon != null)
             {
-                if (IconType != IconType.Webfont)
+                icon =  Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+            }
+            else
+            {
+                var textContent = ChildContent?.GetTextContent();
+                IconContent = textContent;
+
+                if (textContent is null)
                 {
-                    return Icon;
+                    return;
                 }
 
-                if (MasaBlazor is null || string.IsNullOrWhiteSpace(Icon))
+                if (textContent.StartsWith("$"))
                 {
-                    return null;
+                    icon = MasaBlazor!.Icons.Aliases.GetIconOrDefault(textContent);
                 }
-
-                var set = MasaBlazor.Icons.DefaultSet;
-                var splits = Icon.Split(":");
-                var icon = splits[0];
-
-                if (splits.Length == 2)
+                else
                 {
-                    set = splits[0] switch
-                    {
-                        "mdi" => IconSet.MaterialDesignIcons,
-                        "md" => IconSet.MaterialDesign,
-                        "fa" => IconSet.FontAwesome,
-                        "fa4" => IconSet.FontAwesome4,
-                        _ => set
-                    };
-                    icon = splits[1];
+                    icon = CheckIfSvg(textContent) ? new SvgPath(textContent) : textContent;
                 }
+            }
 
-                return set switch
-                {
-                    IconSet.MaterialDesignIcons => $"mdi {icon}",
-                    IconSet.MaterialDesign => $"mi {icon}",
-                    IconSet.FontAwesome => icon,
-                    IconSet.FontAwesome4 => icon,
-                    _ => icon
-                };
+            if (icon is null)
+            {
+                return;
+            }
+
+            if (icon.IsSvg)
+            {
+                ComputedIcon = icon;
+            }
+            else
+            {
+                (ComputedIcon, _iconCss) = ResolveIcon(icon.AsT0);
             }
         }
 
-        private string? IconCss => IconType switch
+        private(string? icon, string? css) ResolveIcon(string cssIcon)
         {
-            IconType.Webfont => ComputedIcon,
-            IconType.WebfontNoPseudo => "material-icons",
-            _ => null
-        };
+            var set = MasaBlazor!.Icons.DefaultSet;
+
+            var splits = cssIcon.Split(":");
+            var icon = splits[0];
+
+            if (splits.Length == 2)
+            {
+                set = splits[0] switch
+                {
+                    "mdi" => IconSet.MaterialDesignIcons,
+                    "md" => IconSet.MaterialDesign,
+                    "fa" => IconSet.FontAwesome,
+                    "fa4" => IconSet.FontAwesome4,
+                    _ => set
+                };
+                icon = splits[1];
+            }
+
+            var css = set switch
+            {
+                IconSet.MaterialDesignIcons => $"mdi {icon}",
+                IconSet.MaterialDesign => "material-icons",
+                _ => icon
+            };
+
+            icon = set switch
+            {
+                IconSet.MaterialDesign => icon,
+                _ => null
+            };
+
+            return (icon, css);
+        }
 
         public string GetSize()
         {
@@ -127,7 +157,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-icon")
-                        .Add(IconCss)
+                        .AddIf(_iconCss, () => ComputedIcon is { IsSvg: false })
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)

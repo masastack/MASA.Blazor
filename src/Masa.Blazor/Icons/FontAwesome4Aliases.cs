@@ -1,14 +1,13 @@
-﻿namespace Masa.Blazor.IconSets;
+﻿namespace Masa.Blazor;
 
-public class FontAwesome4Alias : IconAlias
+public class FontAwesome4Aliases : IconAliases
 {
-    public FontAwesome4Alias()
+    public FontAwesome4Aliases()
     {
-        Collapse = "fa-chevron-up";
         Complete = "fa-check";
         Cancel = "fa-times-circle";
         Close = "fa-times";
-        Delete = "fa-times-circle"; // delete (e.g. v-chip close)
+        Delete = "fa-times-circle";
         Clear = "fa-check-circle";
         Success = "fa-check-circle";
         Info = "fa-info-circle";
@@ -19,9 +18,8 @@ public class FontAwesome4Alias : IconAlias
         CheckboxOn = "fa-check-square";
         CheckboxOff = "fa-square-o";
         CheckboxIndeterminate = "fa-minus-square";
-        Delimiter = "fa-circle"; // for carousel
-        SortAsc = "fa-sort-up";
-        SortDesc = "fa-sort-down";
+        Delimiter = "fa-circle";
+        Sort = "fa-sort-up";
         Expand = "fa-chevron-down";
         Menu = "fa-bars";
         Subgroup = "fa-caret-down";
@@ -39,5 +37,10 @@ public class FontAwesome4Alias : IconAlias
         File = "fa-paperclip";
         Plus = "fa-plus";
         Minus = "fa-minus";
+        Copy = "fa-clone";
+        GoBack = "fa-arrow-left";
+        Search = "fa-search";
+        FilterOn = "fa-chevron-down";
+        FilterOff = "fa-chevron-up";
     }
 }

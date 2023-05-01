@@ -1,14 +1,13 @@
-﻿namespace Masa.Blazor.IconSets;
+﻿namespace Masa.Blazor;
 
-public class MaterialDesignAlias : IconAlias
+public class MaterialDesignAliases : IconAliases
 {
-    public MaterialDesignAlias()
+    public MaterialDesignAliases()
     {
-        Collapse = "keyboard_arrow_up";
         Complete = "check";
         Cancel = "cancel";
         Close = "close";
-        Delete = "cancel"; // delete (e.g. v-chip close)
+        Delete = "cancel";
         Clear = "cancel";
         Success = "check_circle";
         Info = "info";
@@ -19,9 +18,8 @@ public class MaterialDesignAlias : IconAlias
         CheckboxOn = "check_box";
         CheckboxOff = "check_box_outline_blank";
         CheckboxIndeterminate = "indeterminate_check_box";
-        Delimiter = "fiber_manual_record"; // for carousel
-        SortAsc = "arrow_upward";
-        SortDesc = "arrow_downward";
+        Delimiter = "fiber_manual_record";
+        Sort = "arrow_upward";
         Expand = "keyboard_arrow_down";
         Menu = "menu";
         Subgroup = "arrow_drop_down";
@@ -39,5 +37,10 @@ public class MaterialDesignAlias : IconAlias
         File = "attach_file";
         Plus = "add";
         Minus = "remove";
+        Copy = "content_copy";
+        GoBack = "arrow_back";
+        Search = "search";
+        FilterOn = "keyboard_arrow_down";
+        FilterOff = "keyboard_arrow_up";
     }
 }

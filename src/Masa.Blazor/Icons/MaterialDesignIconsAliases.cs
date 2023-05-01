@@ -1,14 +1,13 @@
-﻿namespace Masa.Blazor.IconSets;
+﻿namespace Masa.Blazor;
 
-public class MaterialDesignIconsAlias : IconAlias
+public class MaterialDesignIconsAliases : IconAliases
 {
-    public MaterialDesignIconsAlias()
+    public MaterialDesignIconsAliases()
     {
-        Collapse = "mdi-chevron-up";
         Complete = "mdi-check";
         Cancel = "mdi-close-circle";
         Close = "mdi-close";
-        Delete = "mdi-close-circle"; // delete (e.g. v-chip close)
+        Delete = "mdi-close-circle";
         Clear = "mdi-close-circle";
         Success = "mdi-check-circle";
         Info = "mdi-information";
@@ -19,9 +18,8 @@ public class MaterialDesignIconsAlias : IconAlias
         CheckboxOn = "mdi-checkbox-marked";
         CheckboxOff = "mdi-checkbox-blank-outline";
         CheckboxIndeterminate = "mdi-minus-box";
-        Delimiter = "mdi-circle"; // for carousel
-        SortAsc = "mdi-arrow-up";
-        SortDesc = "mdi-arrow-down";
+        Delimiter = "mdi-circle";
+        Sort = "mdi-arrow-up";
         Expand = "mdi-chevron-down";
         Menu = "mdi-menu";
         Subgroup = "mdi-menu-down";
@@ -39,5 +37,10 @@ public class MaterialDesignIconsAlias : IconAlias
         File = "mdi-paperclip";
         Plus = "mdi-plus";
         Minus = "mdi-minus";
+        Copy = "mdi-content-copy";
+        GoBack = "mdi-arrow-left";
+        Search = "mdi-magnify";
+        FilterOn = "mdi-filter";
+        FilterOff = "mdi-filter-off";
     }
 }

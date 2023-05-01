@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.IconSets;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public static class MasaBlazorPreset
 {
@@ -17,11 +15,7 @@ public static class MasaBlazorPreset
         }
     };
 
-    public static Icons Icons => new()
-    {
-        DefaultSet = IconSet.MaterialDesignIcons,
-        Alias = new MaterialDesignAlias()
-    };
+    public static Icons Icons => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
 
     public static Theme Theme => new(false, LightTheme, DarkTheme);
 
