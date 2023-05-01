@@ -97,8 +97,6 @@ dotnet add package Masa.Blazor
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/site.css" rel="stylesheet" />
 + <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
   <script src="_framework/blazor.server.js"></script>
 + <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -110,8 +108,6 @@ dotnet add package Masa.Blazor
 + <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
   <link href="css/app.css" rel="stylesheet" />
 + <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-+ <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 
   <script src="_framework/blazor.webassembly.js"></script>
 + <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -153,5 +149,6 @@ builder.Services.AddMasaBlazor();
 
 - 想要了解布局规则，请查看 [Application](/blazor/components/application)。
 - 想要快速搭建布局，请查看 [预置布局](/blazor/getting-started/wireframes)。
+- 更换默认图标集，请查看 [图标字体](/blazor/features/icon-fonts)。
 - 使用内置的原子化CSS，请查看 [样式和动画](/blazor/styles-and-animations/border-radius)。
 - 更多组件，请查看 [组件](/blazor/components/all)。

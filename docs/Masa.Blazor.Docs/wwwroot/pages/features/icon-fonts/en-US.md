@@ -52,7 +52,7 @@ This is the default icon set used by MASA Blazor. It supports local installation
 <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 ```
 :::
-::: code-group-item WebAseembly
+::: code-group-item WebAssembly
 ``` html wwwroot/index.html
 <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 ```

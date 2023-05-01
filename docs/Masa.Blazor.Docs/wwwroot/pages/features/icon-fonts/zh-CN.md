@@ -49,12 +49,12 @@ builder.Services.AddMasaBlazor(options => {
 :::: code-group
 ::: code-group-item Server
 ``` cshtml Pages/_Host.cshtml
-<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 ```
 :::
-::: code-group-item WebAseembly
+::: code-group-item WebAssembly
 ``` html wwwroot/index.html
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 ```
 :::
 ::::
@@ -69,7 +69,7 @@ builder.Services.AddMasaBlazor(options => {
 ### Material Icons
 
 ``` html
-<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
 ```
 
 ``` cs Program.cs
@@ -85,7 +85,7 @@ builder.Services.AddMasaBlazor(options => {
 ### Font Awesome 5 Icons
 
 ``` html
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 ```
 
 ``` cs Program.cs
