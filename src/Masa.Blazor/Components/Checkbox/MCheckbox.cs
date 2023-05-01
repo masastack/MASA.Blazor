@@ -9,13 +9,13 @@ namespace Masa.Blazor
         public bool Indeterminate { get; set; }
 
         [Parameter]
-        public string IndeterminateIcon { get; set; } = "mdi-minus-box";
+        public string IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
 
         [Parameter]
-        public string OnIcon { get; set; } = "mdi-checkbox-marked";
+        public string OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
+        public string OffIcon { get; set; } = "$checkboxOff";
 
         public string ComputedIcon
         {

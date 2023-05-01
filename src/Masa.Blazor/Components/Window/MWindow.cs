@@ -29,8 +29,8 @@ namespace Masa.Blazor
             base.OnParametersSet();
 
             ActiveClass = "m-window-item--active";
-            PrevIcon ??= "mdi-chevron-left";
-            NextIcon ??= "mdi-chevron-right";
+            PrevIcon ??= "$prev";
+            NextIcon ??= "$next";
         }
 
         protected override void SetComponentClass()

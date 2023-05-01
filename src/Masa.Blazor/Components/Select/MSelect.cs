@@ -15,7 +15,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private OutsideClickJSModule? OutsideClickJSModule { get; set; }
 
     [Parameter]
-    public override string AppendIcon { get; set; } = "mdi-menu-down";
+    public override string AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
     [ApiDefaultValue(false)]

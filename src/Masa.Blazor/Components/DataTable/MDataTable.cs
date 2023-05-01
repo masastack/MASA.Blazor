@@ -89,7 +89,7 @@ namespace Masa.Blazor
         public RenderFragment? ItemDataTableExpandContent { get; set; }
 
         [Parameter]
-        public string ExpandIcon { get; set; } = "mdi-chevron-down";
+        public string ExpandIcon { get; set; } = "$expand";
 
         [Parameter]
         public RenderFragment? ItemDataTableSelectContent { get; set; }
@@ -203,11 +203,11 @@ namespace Masa.Blazor
 
         public Dictionary<string, bool> OpenCache { get; } = new();
 
-        public string GroupMinusIcon { get; } = "mdi-minus";
+        public string GroupMinusIcon { get; } = "$minus";
 
-        public string GroupCloseIcon { get; } = "mdi-close";
+        public string GroupCloseIcon { get; } = "$close";
 
-        public string GroupPlusIcon { get; } = "mdi-plus";
+        public string GroupPlusIcon { get; } = "$plus";
 
         public DataOptions Options => InternalOptions.TryDeepClone();
 

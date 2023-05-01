@@ -32,8 +32,8 @@
             base.OnParametersSet();
 
             ActiveClass ??= "m-slide-item--active";
-            NextIcon ??= "mdi-chevron-right";
-            PrevIcon ??= "mdi-chevron-left";
+            NextIcon ??= "$next";
+            PrevIcon ??= "$prev";
         }
 
         protected override void SetComponentClass()

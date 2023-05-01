@@ -11,8 +11,8 @@
 
         public override async Task SetParametersAsync(ParameterView parameters)
         {
-            OnIcon = "mdi-radiobox-marked";
-            OffIcon = "mdi-radiobox-blank";
+            OnIcon = "$radioOn";
+            OffIcon = "$radioOff";
             
             await base.SetParametersAsync(parameters);
         }

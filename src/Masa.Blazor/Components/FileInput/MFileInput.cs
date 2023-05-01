@@ -28,7 +28,7 @@ namespace Masa.Blazor
         public bool ShowSize { get; set; }
 
         [Parameter]
-        public override string PrependIcon { get; set; } = "mdi-paperclip";
+        public override string PrependIcon { get; set; } = "$file";
 
         [Parameter]
         public override bool Clearable { get; set; } = true;

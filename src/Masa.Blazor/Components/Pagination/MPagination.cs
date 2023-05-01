@@ -30,10 +30,10 @@ namespace Masa.Blazor
         public int Length { get; set; }
 
         [Parameter]
-        public string NextIcon { get; set; } = "mdi-chevron-right";
+        public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        public string PrevIcon { get; set; } = "mdi-chevron-left";
+        public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
         public StringNumber TotalVisible { get; set; }
