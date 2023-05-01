@@ -94,24 +94,24 @@ dotnet add package Masa.Blazor
 :::: code-group
 ::: code-group-item Server
 ```cshtml Pages/_Host.cshtml l:2,4,7
-  <base href="~/" />
-+ <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
-  <link href="css/site.css" rel="stylesheet" />
-+ <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<base href="~/" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+<link href="css/site.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 
-  <script src="_framework/blazor.server.js"></script>
-+ <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+<script src="_framework/blazor.server.js"></script>
+<script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 :::
 ::: code-group-item WebAssembly
 ```html wwwroot\index.html l:2,4,7
-  <base href="/" />
-+ <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
-  <link href="css/app.css" rel="stylesheet" />
-+ <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+<base href="/" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+<link href="css/app.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 
-  <script src="_framework/blazor.webassembly.js"></script>
-+ <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+<script src="_framework/blazor.webassembly.js"></script>
+<script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 :::
 ::::
