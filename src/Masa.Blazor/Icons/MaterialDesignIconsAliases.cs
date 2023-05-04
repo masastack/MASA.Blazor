@@ -37,6 +37,8 @@ public class MaterialDesignIconsAliases : IconAliases
         File = "mdi-paperclip";
         Plus = "mdi-plus";
         Minus = "mdi-minus";
+        Increase = "mdi-chevron-up";
+        Decrease = "mdi-chevron-down";
         Copy = "mdi-content-copy";
         GoBack = "mdi-arrow-left";
         Search = "mdi-magnify";

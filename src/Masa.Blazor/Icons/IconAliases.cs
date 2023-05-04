@@ -170,6 +170,16 @@ public class IconAliases
     public Icon? Minus { get; set; }
 
     /// <summary>
+    /// Increase icon used in TextField(number). 
+    /// </summary>
+    public Icon? Increase { get; set; }
+
+    /// <summary>
+    /// Decrease icon used in TextField(number). 
+    /// </summary>
+    public Icon? Decrease { get; set; }
+
+    /// <summary>
     /// Copy icon used in CopyableText.
     /// </summary>
     public Icon? Copy { get; set; }

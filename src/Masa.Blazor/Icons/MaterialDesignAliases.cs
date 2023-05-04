@@ -37,6 +37,8 @@ public class MaterialDesignAliases : IconAliases
         File = "attach_file";
         Plus = "add";
         Minus = "remove";
+        Increase = "keyboard_arrow_up";
+        Decrease = "keyboard_arrow_down";
         Copy = "content_copy";
         GoBack = "arrow_back";
         Search = "search";

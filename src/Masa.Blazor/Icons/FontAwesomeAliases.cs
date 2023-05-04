@@ -37,6 +37,8 @@ public class FontAwesomeAliases : IconAliases
         File = "fas fa-paperclip";
         Plus = "fas fa-plus";
         Minus = "fas fa-minus";
+        Increase = "fas fa-chevron-up";
+        Decrease = "fas fa-chevron-down";
         Copy = "far fa-copy";
         GoBack = "fas fa-arrow-left";
         Search = "fas fa-search";
