@@ -41,13 +41,13 @@ related:
 
 #### Font Awesome
 
-同样支持 [Font Awesome](https://fontawesome.com/icons/)。 只需使用 **fa-** 预定图标名称。 请注意，您仍然需要在您的项目中包含 **Font Awesome** 图标。
+同样支持 [Font Awesome](https://fontawesome.com/icons/)。 只需使用 **fa-** 预定图标名称。 请注意，您仍然需要在您的项目中包含 **Font Awesome** 图标。关于如何安装的更多信息，请导航到[安装页面](/blazor/features/icon-fonts#font-awesome-5-icons)。
 
 <masa-example file="Examples.components.icons.FontAwesome"></masa-example>
 
 #### Material Design
 
-[Material Design](https://material.io/tools/icons/?style=baseline) 也是支持的。
+[Material Design](https://material.io/tools/icons/?style=baseline) 也是支持的。有关如何安装的更多信息，请浏览[这里](/blazor/features/icon-fonts#material-icons)。
 
 <masa-example file="Examples.components.icons.MaterialDesign"></masa-example>
 
