@@ -559,6 +559,8 @@ namespace Masa.Blazor
             }
 
             LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
+
+            StateHasChanged();
         }
 
         private async Task SetPrefixWidthAsync()
@@ -577,6 +579,8 @@ namespace Masa.Blazor
             }
 
             PrefixWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task SetPrependWidthAsync()
@@ -600,6 +604,8 @@ namespace Masa.Blazor
             }
 
             PrependWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task<bool> TryAutoFocus()
@@ -616,9 +622,8 @@ namespace Masa.Blazor
 
         private async Task OnResize()
         {
-            await SetLabelWidthAsync();
-            await SetPrefixWidthAsync();
-            await SetPrependWidthAsync();
+            await PreventRenderingUtil(SetLabelWidthAsync, SetPrefixWidthAsync, SetPrependWidthAsync);
+            StateHasChanged();
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
