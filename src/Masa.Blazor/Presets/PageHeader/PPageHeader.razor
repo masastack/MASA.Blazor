@@ -5,7 +5,7 @@
         @if (OnBack.HasDelegate)
         {
             <MButton Icon Class="mr-2" OnClick="HandleOnBack">
-                <MIcon>mdi-arrow-left</MIcon>
+                <MIcon>$goBack</MIcon>
             </MButton>
         }
 
@@ -50,7 +50,7 @@
                         <MTooltip Top>
                             <ActivatorContent>
                                 <MButton @attributes="context.Attrs" Icon OnClick="HandleOnSearch" Loading="_loading">
-                                    <MIcon>mdi-magnify</MIcon>
+                                    <MIcon>$search</MIcon>
                                 </MButton>
                             </ActivatorContent>
                             <ChildContent>
@@ -65,7 +65,7 @@
                     <MTooltip Top>
                         <ActivatorContent>
                             <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
-                                <MIcon>mdi-filter-off-outline</MIcon>
+                                <MIcon>$filterOff</MIcon>
                             </MButton>
                         </ActivatorContent>
                         <ChildContent>
@@ -78,7 +78,7 @@
                     <MTooltip Top>
                         <ActivatorContent>
                             <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
-                                <MIcon>mdi-filter-outline</MIcon>
+                                <MIcon>$filterOn</MIcon>
                             </MButton>
                         </ActivatorContent>
                         <ChildContent>

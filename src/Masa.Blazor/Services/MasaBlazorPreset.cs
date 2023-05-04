@@ -15,6 +15,8 @@ public static class MasaBlazorPreset
         }
     };
 
+    public static Icons Icons => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
+
     public static Theme Theme => new(false, LightTheme, DarkTheme);
 
     private static ThemeOptions LightTheme => new()

@@ -43,6 +43,13 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   +     options.Locale = new Locale("zh-CN", "en-US");
   + });
   ```
+- **MIcon** component introduces the concept of the default icon set. Now if the icon is not the default icon set, you need to specify the prefix of icon set:
+  ```diff
+  - <MIcon>home</MIcon>
+  + <MIcon>md:home</MIcon>
+  - <MIcon>fas fa-home</MIcon>
+  + <MIcon>fa:fas fa-home</MIcon>
+  ```
 
 ## Upgrading from v0.5.x to v0.6.x
 

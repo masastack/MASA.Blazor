@@ -93,26 +93,22 @@ dotnet add package Masa.Blazor
 
 :::: code-group
 ::: code-group-item Server
-```cshtml Pages/_Host.cshtml l:2,4-6,9
+```cshtml Pages/_Host.cshtml l:2,4,7
 <base href="~/" />
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <link href="css/site.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
 <script src="_framework/blazor.server.js"></script>
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 :::
 ::: code-group-item WebAssembly
-```html wwwroot\index.html l:2,4-6,9
+```html wwwroot\index.html l:2,4,7
 <base href="/" />
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <link href="css/app.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
@@ -154,5 +150,6 @@ builder.Services.AddMasaBlazor();
 
 - Want to know the layout rules, please see [Application](/blazor/components/application).
 - Want to quickly build layouts, please see [Preset Layouts](/blazor/getting-started/wireframes).
+- Want to change the default icon set, please see [Icon fonts](/blazor/features/icon-fonts).
 - Use the built-in atomic CSS, please see [Styles and Animations](/blazor/styles-and-animations/border-radius).
 - More components, please see [Components](/blazor/components/all).

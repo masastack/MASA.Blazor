@@ -33,7 +33,7 @@
         public bool MultiSort { get; set; }
 
         [Parameter]
-        public string SortIcon { get; set; } = "mdi-arrow-up";
+        public string SortIcon { get; set; } = "$sort";
 
         [Parameter]
         public RenderFragment<DataTableHeader> HeaderColContent { get; set; }

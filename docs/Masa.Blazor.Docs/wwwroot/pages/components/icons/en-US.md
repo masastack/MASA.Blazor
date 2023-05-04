@@ -42,18 +42,18 @@ Icons can be used inside of buttons to add emphasis to the action.
 #### Font Awesome
 
 [Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note
-that you still need to include the Font Awesome icons in your project.
+that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/blazor/features/icon-fonts#font-awesome-5-icons).
 
 <masa-example file="Examples.components.icons.FontAwesome"></masa-example>
 
 #### Material Design
 
-[Material Design](https://material.io/tools/icons/?style=baseline) is also supported.
+[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/blazor/features/icon-fonts#material-icons).
 
 <masa-example file="Examples.components.icons.MaterialDesign"></masa-example>
 
 #### SVG
 
-If you want to use SVG icons with `MIcon` component, only support input the `path` of SVG.
+If you want to use SVG icons with `MIcon` component, only support input the `path` of SVG. Multi `path`s is also supported.
 
 <masa-example file="Examples.components.icons.Svg"></masa-example>

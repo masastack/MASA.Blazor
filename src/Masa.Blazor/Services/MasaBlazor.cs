@@ -9,12 +9,17 @@ namespace Masa.Blazor
     {
         private bool _rtl;
 
-        public MasaBlazor(Breakpoint breakpoint, Application application, Theme theme,
+        public MasaBlazor(
+            Breakpoint breakpoint,
+            Application application,
+            Theme theme,
+            Icons icons,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
             Breakpoint = breakpoint;
             Application = application;
             Theme = theme;
+            Icons = icons;
             Defaults = defaults;
         }
 
@@ -38,6 +43,8 @@ namespace Masa.Blazor
         public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; }
 
         public Theme Theme { get; }
+        
+        public Icons Icons { get; }
 
         public event Action<bool> OnRTLChange;
 

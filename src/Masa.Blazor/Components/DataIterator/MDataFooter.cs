@@ -29,16 +29,16 @@ namespace Masa.Blazor
         };
 
         [Parameter]
-        public string PrevIcon { get; set; } = "mdi-chevron-left";
+        public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
-        public string NextIcon { get; set; } = "mdi-chevron-right";
+        public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        public string LastIcon { get; set; }
+        public string LastIcon { get; set; } = "$last";
 
         [Parameter]
-        public string FirstIcon { get; set; }
+        public string FirstIcon { get; set; } = $"first";
 
         [Parameter]
         public string ItemsPerPageAllText { get; set; } = "All";

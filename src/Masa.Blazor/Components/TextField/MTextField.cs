@@ -20,8 +20,9 @@ namespace Masa.Blazor
         [Parameter]
         public bool PersistentPlaceholder { get; set; }
 
+        [ApiDefaultValue("$clear")]
         [Parameter]
-        public string ClearIcon { get; set; } = "mdi-close";
+        public string ClearIcon { get; set; } = "$clear";
 
         [Parameter]
         public bool FullWidth { get; set; }

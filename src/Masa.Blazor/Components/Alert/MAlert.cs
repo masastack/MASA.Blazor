@@ -1,9 +1,11 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+namespace Masa.Blazor
 {
     public class MAlert : BAlert, IThemeable
     {
         [Parameter]
-        public StringBoolean Icon { get; set; }
+        public StringBoolean? Icon { get; set; }
 
         [Parameter]
         public bool ColoredBorder { get; set; }
@@ -12,7 +14,7 @@
         public bool Dense { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Outlined { get; set; }
@@ -21,7 +23,7 @@
         public bool Prominent { get; set; }
 
         [Parameter]
-        public StringBoolean Rounded { get; set; }
+        public StringBoolean? Rounded { get; set; }
 
         [Parameter]
         public bool Shaped { get; set; }
@@ -33,22 +35,22 @@
         public bool Tile { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         private string ComputedType => Type != AlertTypes.None ? Type.ToString().ToLower() : "";
 
@@ -63,10 +65,10 @@
 
             var iconText = Type switch
             {
-                AlertTypes.Success => "mdi-checkbox-marked-circle-outline",
-                AlertTypes.Error => "mdi-alert-circle-outline",
-                AlertTypes.Info => "mdi-information",
-                AlertTypes.Warning => "mdi-alert-outline",
+                AlertTypes.Success => "$success",
+                AlertTypes.Error => "$error",
+                AlertTypes.Info => "$info",
+                AlertTypes.Warning => "$warning",
                 _ => null
             };
 
