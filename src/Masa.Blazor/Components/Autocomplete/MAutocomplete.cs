@@ -9,15 +9,17 @@ namespace Masa.Blazor
         private Func<TItem, string, string, bool> _filter;
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool AllowOverflow { get; set; } = true;
 
         [Parameter]
         public bool AutoSelectFirst { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("(item, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1")]
         public Func<TItem, string, string, bool> Filter
         {
-            get { return _filter ??= (_, query, text) => text.ToLower().IndexOf(query.ToLower(), StringComparison.Ordinal) > -1; }
+            get { return _filter ??= (_, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1; }
             set => _filter = value;
         }
 
@@ -278,7 +280,7 @@ namespace Masa.Blazor
                 await HandleOnFocusAsync(new FocusEventArgs());
             }
 
-            if (!await IsAppendInner(args.Target))
+            if (args.Target != null && !await IsAppendInner(args.Target))
             {
                 ActivateMenu();
             }

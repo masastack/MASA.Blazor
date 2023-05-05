@@ -140,6 +140,11 @@
     "MTimeline",
     "MTimelineItem"
   ],
+  "toolbars": [
+    "MToolbar",
+    "MToolbarTitle",
+    "MToolbarItems"
+  ],
   "page-tabs": [
     "PPageTabs",
     "PPageContainer",

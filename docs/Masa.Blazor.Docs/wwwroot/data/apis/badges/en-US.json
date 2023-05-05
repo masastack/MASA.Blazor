@@ -11,7 +11,9 @@
     "overLap": "Overlaps the slotted content on top of the component.",
     "value": "Controls whether the component is visible or hidden."
   },
-  "contents": {},
+  "contents": {
+    "badgeContent": "Content for the badge."
+  },
   "events": {},
   "methods": {}
 }

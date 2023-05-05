@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿#nullable enable
+
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using BlazorComponent.Attributes;
 using BlazorComponent.Web;
@@ -9,12 +11,13 @@ namespace Masa.Blazor;
 public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>, IOutsideClickJsCallback
 {
     [Inject]
-    protected I18n? I18n { get; set; }
+    protected I18n I18n { get; set; } = null!;
 
     [Inject]
-    private OutsideClickJSModule? OutsideClickJSModule { get; set; }
+    private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
+    [ApiDefaultValue("$dropdown")]
     public override string AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
@@ -37,28 +40,29 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     [EditorRequired]
     [Parameter]
-    public IList<TItem> Items
+    public IList<TItem>? Items
     {
         get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
         set => SetValue(value, disableIListAlwaysNotifying: true);
     }
 
     [Parameter]
+    [ApiDefaultValue("primary")]
     public string ItemColor { get; set; } = "primary";
 
     [Parameter]
-    public Func<TItem, bool> ItemDisabled { get; set; } = _ => false;
+    public Func<TItem, bool>? ItemDisabled { get; set; }
 
     [EditorRequired]
     [Parameter]
-    public Func<TItem, string> ItemText { get; set; }
+    public Func<TItem, string>? ItemText { get; set; }
 
     [EditorRequired]
     [Parameter]
-    public Func<TItem, TItemValue> ItemValue { get; set; }
+    public Func<TItem, TItemValue>? ItemValue { get; set; }
 
     [Parameter]
-    public Action<BMenuProps> MenuProps { get; set; }
+    public Action<BMenuProps>? MenuProps { get; set; }
 
     [Parameter]
     public bool Multiple
@@ -74,29 +78,28 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     //TODO:remove this
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
-    //Filterable
     [Parameter]
-    public string NoDataText { get; set; }
+    public string? NoDataText { get; set; }
 
     [Parameter]
     public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
 
     [Parameter]
-    public RenderFragment AppendItemContent { get; set; }
+    public RenderFragment? AppendItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+    public RenderFragment<SelectListItemProps<TItem>>? ItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment NoDataContent { get; set; }
+    public RenderFragment? NoDataContent { get; set; }
 
     [Parameter]
-    public RenderFragment PrependItemContent { get; set; }
+    public RenderFragment? PrependItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
+    public RenderFragment<SelectSelectionProps<TItem>>? SelectionContent { get; set; }
 
     bool ISelect<TItem, TItemValue, TValue>.HasChips => HasChips;
 
@@ -111,9 +114,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     IList<TItem> ISelect<TItem, TItemValue, TValue>.SelectedItems => SelectedItems;
 
-    string ISelect<TItem, TItemValue, TValue>.GetText(TItem item) => GetText(item);
+    string? ISelect<TItem, TItemValue, TValue>.GetText(TItem item) => GetText(item);
 
-    TItemValue ISelect<TItem, TItemValue, TValue>.GetValue(TItem item) => GetValue(item);
+    TItemValue? ISelect<TItem, TItemValue, TValue>.GetValue(TItem item) => GetValue(item);
 
     bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
@@ -145,7 +148,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-    protected override Dictionary<string, object> InputAttrs => new()
+    protected override Dictionary<string, object?> InputAttrs => new()
     {
         { "type", Type },
         { "value", null },
@@ -190,11 +193,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         MaxHeight = 304
     };
 
-    protected virtual string GetText(TItem item) => item is null || ItemText is null ? null : ItemText(item);
+    protected virtual string? GetText(TItem item) => item is null || ItemText is null ? null : ItemText(item);
 
-    protected TItemValue GetValue(TItem item) => ItemValue is null ? default : ItemValue(item);
+    protected TItemValue? GetValue(TItem item) => ItemValue is null ? default : ItemValue(item);
 
-    protected bool GetDisabled(TItem item) => ItemDisabled(item);
+    protected bool GetDisabled(TItem item) => ItemDisabled?.Invoke(item) ?? false;
 
     protected virtual bool EnableSpaceKeDownPreventDefault => true;
 
@@ -323,21 +326,24 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return Attach;
     }
 
-    protected virtual async Task OnMenuBeforeShowContent()
+    protected virtual Task OnMenuBeforeShowContent()
     {
+        return Task.CompletedTask;
     }
 
-    protected virtual async Task OnMenuAfterShowContent(bool isLazyContent)
+    protected virtual Task OnMenuAfterShowContent(bool isLazyContent)
     {
         if (isLazyContent)
         {
             if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
             {
-                OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
             }
         }
 
         OnMenuActiveChange(true);
+
+        return Task.CompletedTask;
     }
 
     protected virtual async void OnMenuActiveChange(bool val)
@@ -436,7 +442,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .ApplySelectDefault<TItem, TItemValue, TValue>()
             .Merge<BIcon, MIcon>("append-icon", attrs =>
             {
-                var dic = new Dictionary<string, object>();
+                var dic = new Dictionary<string, object?>();
 
                 if (attrs.Data is not null)
                 {
@@ -510,14 +516,14 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .Apply<BChip, MChip>(attrs =>
             {
                 var index = -1;
-                TItem item = default;
+                TItem? item = default;
                 if (attrs.Data is (TItem t, int i))
                 {
                     item = t;
                     index = i;
                 }
 
-                var isDisabled = GetDisabled(item);
+                var isDisabled = item != null && GetDisabled(item);
                 var isInteractive = !isDisabled && IsInteractive;
 
                 attrs[nameof(MChip.Close)] = DeletableChips && isInteractive;
@@ -534,7 +540,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
                     SelectedIndex = index;
                 });
-                attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item));
+                
+                attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item!));
             });
     }
 
@@ -993,7 +1000,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return func;
     }
 
-    protected async Task SetValue(TValue value)
+    protected async Task SetValue(TValue? value)
     {
         if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
         {

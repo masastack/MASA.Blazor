@@ -62,10 +62,6 @@
         border-bottom-color: #FFFFFF1F !important;
     }
 
-.m-application .api-table code {
-    padding: .2em .4em !important;
-}
-
 .text-mono {
     font-family: Roboto Mono, monospace;
 }
