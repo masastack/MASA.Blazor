@@ -9,8 +9,6 @@ related:
 
 ## 使用
 
-最简单的警报形式是显示消息的平板纸。
-
 <alerts-usage></alerts-usage>
 
 ## 组件结构剖析
@@ -95,7 +93,7 @@ related:
 
 #### 过度
 
-`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 [内建过渡](/stylesandanimations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
+`Transition` 属性可让你向提示框应用一个过渡，该动画在隐藏和显示组件时可见。 你可以在 [内建过渡](/blazor/styles-and-animations/transitions) 浏览更多信息或者了解如何创建自己的`Transition` 属性样式的 **Alert** 组件。
 
 <masa-example file="Examples.components.alerts.Transition"></masa-example>
 

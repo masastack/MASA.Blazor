@@ -9,8 +9,6 @@ related:
 
 ## Usage
 
-Alerts in their simplest form are flat sheets of paper that display a message.
-
 <alerts-usage></alerts-usage>
 
 ## Anatomy
@@ -108,7 +106,7 @@ create a unique and customized component
 #### Transition
 
 The **Transition** prop allows you to apply a transition to the alert which is viewable when the component hides and
-shows. For more information, you can check out any of [prebuilt transitions](/stylesandanimations/transitions).
+shows. For more information, you can check out any of [prebuilt transitions](/blazor/styles-and-animations/transitions).
 
 <masa-example file="Examples.components.alerts.Transition"></masa-example>
 
