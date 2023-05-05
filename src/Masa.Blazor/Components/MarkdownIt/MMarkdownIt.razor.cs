@@ -126,11 +126,11 @@ public partial class MMarkdownIt : BDomComponentBase
     private string? _prevSource;
     private IJSObjectReference? _markdownIt;
 
-    protected override void OnInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher
+        watcher
             .Watch<bool>(nameof(Html), GoCreateMarkdownItProxy)
             .Watch<bool>(nameof(XHtmlOut), GoCreateMarkdownItProxy)
             .Watch<bool>(nameof(Breaks), GoCreateMarkdownItProxy)
@@ -216,6 +216,8 @@ public partial class MMarkdownIt : BDomComponentBase
                 await OnTocParsed.InvokeAsync(result.Toc);
             }
         }
+
+        NextTick(() => MarkdownItJSModule.AfterRender(_markdownIt));
 
         StateHasChanged();
     }

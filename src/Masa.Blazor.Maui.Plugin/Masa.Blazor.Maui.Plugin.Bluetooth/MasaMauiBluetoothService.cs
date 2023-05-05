@@ -25,15 +25,32 @@
                 }
             }
         }
-        public static Task<IReadOnlyCollection<BluetoothDevice>> ScanForDevicesAsync()
+        public static Task<IReadOnlyCollection<BluetoothDevice>> ScanForDevicesAsync(string deviceName = "")
         {
-            return PlatformScanForDevices();
+            return PlatformScanForDevices(deviceName);
         }
+
 
         public static bool IsEnabled()
         {
-            return PlatformIsEnabledIsEnabled();
+            var isEnable = false;
+            for (var i = 0; i < 20; i++)
+            {
+                if (PlatformIsEnabled())
+                {
+                    isEnable = true;
+                    break;
+                }
 
+                Thread.Sleep(100);
+            }
+            return isEnable;
+
+        }
+
+        public static BluetoothDevice GetBluetoothDevice(string name)
+        {
+            return _discoveredDevices.FirstOrDefault(o => o.Name == name);
         }
 
         public static async Task<PermissionStatus> CheckAndRequestBluetoothPermission()
@@ -50,8 +67,8 @@
             byte[] dataBytes,
             EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
+
             await PlatformSendDataAsync(deviceName, servicesUuid, characteristicsUuid, dataBytes, gattCharacteristicValueChangedEventArgs);
         }
     }
-    
 }

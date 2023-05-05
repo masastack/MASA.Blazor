@@ -1,0 +1,35 @@
+﻿@attribute [JSCustomElement]
+
+<MAlert Type="@AlertType" Border="@AlertBorder" Text>
+    <MMarkdownIt Source="@Content" NoWrapper Scope="desc"></MMarkdownIt>
+</MAlert>
+
+@code {
+
+    [Parameter]
+    public string? Type { get; set; }
+
+    [Parameter]
+    public string? Content { get; set; }
+
+    [Parameter]
+    public string? Border { get; set; }
+
+    private AlertTypes AlertType => Type switch
+    {
+        "error" => AlertTypes.Error,
+        "success" => AlertTypes.Success,
+        "warning" => AlertTypes.Warning,
+        _ => AlertTypes.Info
+        };
+
+    private Borders AlertBorder => Border switch
+    {
+        "top" => Borders.Top,
+        "bottom" => Borders.Bottom,
+        "left" => Borders.Left,
+        "right" => Borders.Right,
+        _ => Borders.None
+        };
+
+}

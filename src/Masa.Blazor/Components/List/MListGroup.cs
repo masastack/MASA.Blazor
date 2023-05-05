@@ -70,14 +70,14 @@
             {
                 if (PrependIcon == null)
                 {
-                    PrependIcon = "mdi-menu-down";
+                    PrependIcon = "$subgroup";
                 }
             }
             else
             {
                 if (AppendIcon == null)
                 {
-                    AppendIcon = "mdi-chevron-down";
+                    AppendIcon = "$expand";
                 }
             }
         }

@@ -1,0 +1,15 @@
+﻿@using Microsoft.JSInterop
+@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<CascadingValue Value="this" TValue="MBaiduMap">
+    <CascadingValue Value="IsDark" Name="IsDark">
+        <div class="@CssProvider.GetClass()" 
+             style="@CssProvider.GetStyle()" 
+             id="@Id" @ref="Ref" @attributes="Attributes">
+            
+             @ChildContent
+        
+        </div>
+    </CascadingValue>
+</CascadingValue>

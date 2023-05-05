@@ -1,0 +1,39 @@
+﻿@page "/blazor/examples/page-tabs/page4/{name?}"
+@layout PageTabsLayout
+@inject NavigationManager NavigationManager
+
+<MList Dense Routable Class="d-flex">
+    <MListItem Href="/blazor/examples/page-tabs/page4/tom">Tom</MListItem>
+    <MListItem Href="/blazor/examples/page-tabs/page4/john">John</MListItem>
+    <MListItem Href="/blazor/examples/page-tabs/page4/bill">Bill</MListItem>
+    <MListItem Href="/blazor/examples/page-tabs/page4/carl">Carl</MListItem>
+</MList>
+
+<div>
+    @if (Name == null)
+    {
+        <span>No name selected</span>
+    }
+    else
+    {
+        <span>Name selected: @Name</span>
+    }
+</div>
+
+@code {
+
+    [CascadingParameter]
+    private IPageTabsProvider? PageTabsProvider { get; set; }
+
+    [Parameter]
+    public string? Name { get; set; }
+
+    protected override void OnInitialized()
+    {
+        // use () => title if you want to update the title on every render
+        // for example if you use the i18n.T function
+
+        PageTabsProvider?.UpdateTabTitle(NavigationManager.GetAbsolutePath(), Name);
+    }
+
+}

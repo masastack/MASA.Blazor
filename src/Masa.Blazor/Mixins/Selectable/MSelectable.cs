@@ -3,24 +3,40 @@
 namespace Masa.Blazor;
 
 // TODO: move to BlazorComponent
-public partial class MSelectable : MInput<bool>, ISelectable
+public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
 {
     [Parameter]
     public bool? Ripple { get; set; }
 
+    [Parameter]
+    public TValue? TrueValue { get; set; }
+
+    [Parameter]
+    public TValue? FalseValue { get; set; }
+
     public Dictionary<string, object> InputAttrs => new();
 
-    public override bool HasColor => InternalValue;
+    public override bool HasColor => IsActive;
 
     public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
+
+    private bool IsCustomValue => IsDirtyParameter(nameof(TrueValue)) && IsDirtyParameter(nameof(FalseValue));
 
     public bool IsActive
     {
         get
         {
-            // TODO: custom trueValue and falseValue.
+            var input = InternalValue;
 
-            return InternalValue;
+            if (IsCustomValue)
+                return EqualityComparer<TValue>.Default.Equals(input, TrueValue);
+
+            if (input is bool value)
+            {
+                return value;
+            }
+
+            return false;
         }
     }
 
@@ -43,10 +59,16 @@ public partial class MSelectable : MInput<bool>, ISelectable
             return;
         }
 
-        // TODO: custom trueValue and falseValue.
-
         var input = InternalValue;
-        input = !input;
+
+        if (IsCustomValue)
+        {
+            input = EqualityComparer<TValue>.Default.Equals(input, TrueValue) ? FalseValue : TrueValue;
+        }
+        else if (input is bool val)
+        {
+            input = (TValue)(object)(!val);
+        }
 
         Validate(input);
 

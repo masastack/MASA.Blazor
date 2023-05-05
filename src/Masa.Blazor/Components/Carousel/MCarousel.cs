@@ -3,7 +3,7 @@ using Timer = System.Timers.Timer;
 
 namespace Masa.Blazor;
 
-public partial class MCarousel : MWindow, ICarousel, IDisposable
+public partial class MCarousel : MWindow, ICarousel
 {
     [Parameter]
     public bool Cycle
@@ -149,11 +149,11 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
             .Apply<BProgressLinear, MProgressLinear>();
     }
 
-    protected override void OnWatcherInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnWatcherInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
+        watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
                .Watch<int>(nameof(Interval), RestartTimeout)
                .Watch<StringNumber>(nameof(Height), (val, oldVal) =>
                {
@@ -191,14 +191,7 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
 
     public async Task InternalValueChanged(StringNumber val)
     {
-        if (ValueChanged.HasDelegate)
-        {
-            await ValueChanged.InvokeAsync(val);
-        }
-        else
-        {
-            Value = val;
-        }
+        await ToggleAsync(val);
     }
 
     private void RestartTimeout()

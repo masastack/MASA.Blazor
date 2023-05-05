@@ -1,0 +1,8 @@
+{
+  "props": {
+    "divider": "Specifies the dividing character between items."
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

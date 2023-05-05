@@ -135,12 +135,8 @@
         {
             if (Transition is null)
             {
-                int sequence = 0;
-                builder.OpenElement(sequence++, "div");
-                builder.AddAttribute(sequence++, "style", "width:100%; Height:100%;");
                 var childrenHtml = string.Join("", GenStructure());
-                builder.AddMarkupContent(sequence++, childrenHtml);
-                builder.CloseElement();
+                builder.AddMarkupContent(0, childrenHtml);
             }
         };
 

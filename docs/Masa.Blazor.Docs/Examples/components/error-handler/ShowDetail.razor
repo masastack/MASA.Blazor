@@ -1,0 +1,17 @@
+﻿<MSwitch @bind-Value="_showDetail" Label="ShowDetail" HideDetails="true"></MSwitch>
+
+<MDivider Class="my-2"></MDivider>
+
+<MErrorHandler ShowDetail="_showDetail">
+    <MButton @onclick="OnClick">Throw exception</MButton>
+</MErrorHandler>
+
+@code
+{
+    private bool _showDetail;
+
+    private void OnClick()
+    {
+        throw new Exception("An error was caught by MErrorHandler component.");
+    }
+}

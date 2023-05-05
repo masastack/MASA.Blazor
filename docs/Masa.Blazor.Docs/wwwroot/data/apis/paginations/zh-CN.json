@@ -1,0 +1,16 @@
+{
+  "props": {
+    "circle": "将分页元素的形状改变圆形",
+    "length": "分页组件的长度",
+    "nextIcon": "指定用于下一个图标的图标",
+    "prevIcon": "指定用于上一个图标的图标",
+    "totalVisible": "指定最大可见分页数",
+    "value": "当前选定页面"
+  },
+  "events": {
+    "onInput": "被绑定模型的更新",
+    "onNext": "转到下一个项目时发出",
+    "onPrevious": "转到上一个项目时发出"
+  },
+  "contents": {}
+}

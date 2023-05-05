@@ -1,0 +1,85 @@
+﻿@inherits NextTickComponentBase
+@typeparam TItem where TItem : IDefaultItem<TItem>
+
+<MList Expand
+       Nav
+       Class="@Class"
+       Routable="Routable">
+
+    @foreach (var item in Items)
+    {
+        if (item.Heading is not null)
+        {
+            <MSubheader Class="text--primary font-weight-black text-uppercase">@item.Heading</MSubheader>
+        }
+        else if (item.Divider)
+        {
+            <MDivider Class="mt-3 mb-2 ml-2 mr-n2" />
+        }
+        else if (item.HasChildren())
+        {
+            <DefaultListGroup Item="item" />
+        }
+        else if (ItemContent != null)
+        {
+            @ItemContent.Invoke(item)
+        }
+        else
+        {
+            <DefaultListItem Item="item" />
+        }
+    }
+
+</MList>
+
+@code {
+
+    [Inject]
+    private IJSRuntime? JS { get; set; }
+
+    [CascadingParameter]
+    public INavDrawer? NavDrawer { get; set; }
+
+    [Parameter]
+    public List<TItem> Items { get; set; } = new();
+
+    [Parameter]
+    public RenderFragment<TItem>? ItemContent { get; set; }
+
+    [Parameter]
+    public bool Routable { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            if (NavDrawer is not null)
+            {
+                await Retry(async () =>
+                {
+                    await ScrollIntoView(NavDrawer.ElementSelector);
+                }, () => NavDrawer.Value, delay: 500);
+            }
+        }
+    }
+
+    public async Task ScrollIntoView(string ancestorSelector)
+    {
+        if (JS is null) return;
+
+        try
+        {
+            await JS.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
+}

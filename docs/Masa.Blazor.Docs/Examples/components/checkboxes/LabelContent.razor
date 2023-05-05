@@ -1,0 +1,22 @@
+﻿<MContainer Fluid>
+    <MCheckbox @bind-Value="checkbox">
+        <LabelContent>
+            <div>
+                I agree that
+                <MTooltip Bottom>
+                    <ActivatorContent>
+                        <a target="_blank" href="https://docs.masastack.com/blazor/getting-started/installation" @onclick:stopPropagation @attributes="@context.Attrs">Masa.Blazor</a>
+                    </ActivatorContent>
+                    <ChildContent>
+                        Opens in new window
+                    </ChildContent>
+                </MTooltip>
+                is awesome
+            </div>
+        </LabelContent>
+    </MCheckbox>
+</MContainer>
+
+@code {
+    bool checkbox = false;
+}

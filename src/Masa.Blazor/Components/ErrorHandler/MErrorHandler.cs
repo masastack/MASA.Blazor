@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor
 {
@@ -12,22 +11,37 @@ namespace Masa.Blazor
         public IPopupService PopupService { get; set; }
 
         [Parameter]
-        public Func<Exception, Task> OnErrorHandleAsync { get; set; }
+        public EventCallback<Exception> OnHandle { get; set; }
 
         [Parameter]
-        public bool ShowAlert { get; set; } = true;
+        public EventCallback<Exception> OnAfterHandle { get; set; }
+
+        [Parameter]
+        [ApiDefaultValue(ErrorPopupType.Snackbar)]
+        public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Snackbar;
 
         [Parameter]
         public bool ShowDetail { get; set; }
 
+        private bool _shouldRender = true;
         private bool _thrownInLifecycles;
+
+        protected new Exception? CurrentException { get; private set; }
 
         protected override void OnParametersSet()
         {
+            if (CurrentException is null) return;
+
+            _thrownInLifecycles = false;
+            Recover();
+        }
+
+        public new void Recover()
+        {
             if (CurrentException is not null)
             {
-                _thrownInLifecycles = false;
-                Recover();
+                CurrentException = null;
+                StateHasChanged();
             }
         }
 
@@ -41,49 +55,52 @@ namespace Masa.Blazor
                     && (exception.StackTrace.Contains("RunInitAndSetParametersAsync()")
                         || exception.StackTrace.Contains("SupplyCombinedParameters(ParameterView directAndCascadingParameters)")
                         || exception.StackTrace.Contains("OnAfterRenderAsync(Boolean firstRender)")
-                        || exception.StackTrace.Contains("OnAfterRender(Boolean firstRender)"))))
+                        || exception.StackTrace.Contains("OnAfterRender(Boolean firstRender)")
+                        || exception.StackTrace.Contains("<OnAfterRenderAsync>")
+                        || exception.StackTrace.Contains("<OnAfterRender>"))))
             {
                 return true;
             }
 
-            if (exception.InnerException is not null)
-            {
-                return CheckIfThrownInLifecycles(exception.InnerException);
-            }
-
-            return false;
+            return exception.InnerException is not null && CheckIfThrownInLifecycles(exception.InnerException);
         }
 
         protected override async Task OnErrorAsync(Exception exception)
         {
             Logger?.LogError(exception, "OnErrorAsync");
 
+            CurrentException = exception;
+
             if (CheckIfThrownInLifecycles(exception))
             {
                 _thrownInLifecycles = true;
             }
 
-            if (OnErrorHandleAsync != null)
+            _shouldRender = false;
+
+            if (OnHandle.HasDelegate)
             {
-                await OnErrorHandleAsync(exception);
+                await OnHandle.InvokeAsync(exception);
             }
             else
             {
-                if (ShowAlert)
+                if (PopupType == ErrorPopupType.Snackbar)
                 {
-                    await PopupService.ToastAsync(alert =>
-                    {
-                        alert.Type = AlertTypes.Error;
-                        alert.Title = "Something wrong!";
-                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
-                    });
-                }
-                else
-                {
-                    throw exception;
+                    await PopupService.EnqueueSnackbarAsync(exception, ShowDetail);
                 }
             }
+
+            if (OnAfterHandle.HasDelegate)
+            {
+                await OnAfterHandle.InvokeAsync(exception);
+            }
+
+            _shouldRender = true;
+
+            StateHasChanged();
         }
+
+        protected override bool ShouldRender() => _shouldRender;
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -92,25 +109,28 @@ namespace Masa.Blazor
             builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
 
             var content = ChildContent;
-
             if (CurrentException is not null)
             {
-                if (ErrorContent is not null)
+                if (_thrownInLifecycles || (OnHandle.HasDelegate == false && PopupType == ErrorPopupType.None))
                 {
-                    content = ErrorContent.Invoke(CurrentException);
-                }
-                else if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert))
-                {
-                    content = cb =>
+                    if (ErrorContent is null)
                     {
-                        cb.OpenElement(0, "div");
-                        cb.AddAttribute(1, "class", "blazor-error-boundary");
-                        cb.CloseElement();
-                    };
+                        content = cb =>
+                        {
+                            cb.OpenElement(0, "div");
+                            cb.AddAttribute(1, "class", "blazor-error-boundary");
+                            cb.CloseElement();
+                        };
+                    }
+                    else
+                    {
+                        content = ErrorContent.Invoke(CurrentException);
+                    }
                 }
             }
 
             builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
+
             builder.CloseComponent();
         }
 

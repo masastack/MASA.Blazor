@@ -1,4 +1,5 @@
 ﻿#nullable enable
+
 namespace Masa.Blazor.Popup.Components;
 
 public class AlertingPopupComponentBase : PopupComponentBase
@@ -7,7 +8,7 @@ public class AlertingPopupComponentBase : PopupComponentBase
 
     [Parameter] public string? IconColor { get; set; }
 
-    [Parameter] public AlertTypes? Type { get; set; }
+    [Parameter] public AlertTypes Type { get; set; } = AlertTypes.None;
 
     protected virtual string? ComputedIcon
     {
@@ -20,10 +21,10 @@ public class AlertingPopupComponentBase : PopupComponentBase
 
             return Type switch
             {
-                AlertTypes.Success => "mdi-check-circle-outline",
-                AlertTypes.Error => "mdi-close-circle-outline",
-                AlertTypes.Info => "mdi-information-outline",
-                AlertTypes.Warning => "mdi-alert-circle-outline",
+                AlertTypes.Success => "$success",
+                AlertTypes.Error => "$error",
+                AlertTypes.Info => "$info",
+                AlertTypes.Warning => "$warning",
                 _ => null
             };
         }

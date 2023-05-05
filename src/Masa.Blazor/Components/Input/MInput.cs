@@ -3,22 +3,22 @@
     public partial class MInput<TValue> : BInput<TValue>, IThemeable
     {
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
-        public string TextColor { get; set; }
+        public string? TextColor { get; set; }
 
         [Parameter]
         public bool Dense { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         [Parameter]
         public EventCallback<TValue> OnChange { get; set; }
@@ -59,10 +59,10 @@
 
         public virtual bool IsLabelActive => IsDirty;
 
-        protected override void OnWatcherInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
-            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+            base.RegisterWatchers(watcher);
+            watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
             {
                 // waiting for InternalValue to be assigned
                 NextTick(InternalValidate);

@@ -1,21 +1,11 @@
-﻿namespace Masa.Blazor
-{
-    public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
-    {
-        private readonly Dictionary<string, string> _sizeMap = new()
-        {
-            { nameof(XSmall), "12px" },
-            { nameof(Small), "16px" },
-            { "Default", "24px" },
-            { nameof(Medium), "28px" },
-            { nameof(Large), "36px" },
-            { nameof(XLarge), "40px" },
-        };
+﻿#nullable enable
 
-        /// <summary>
-        /// Attention! End with a space
-        /// </summary>
-        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
+namespace Masa.Blazor
+{
+    public class MIcon : BIcon, ISizeable
+    {
+        [Inject]
+        private MasaBlazor? MasaBlazor { get; set; }
 
         /// <summary>
         /// 36px
@@ -44,9 +34,100 @@
         [Parameter]
         public bool IsActive { get; set; } = true;
 
+        private readonly Dictionary<string, string> _sizeMap = new()
+        {
+            { nameof(XSmall), "12px" },
+            { nameof(Small), "16px" },
+            { "Default", "24px" },
+            { nameof(Medium), "28px" },
+            { nameof(Large), "36px" },
+            { nameof(XLarge), "40px" },
+        };
+
         public IDictionary<string, object> Attrs => Attributes;
 
         public bool Medium => false;
+
+        private string? _iconCss;
+
+        protected override void InitIcon()
+        {
+            Icon? icon;
+
+            if (Icon != null)
+            {
+                icon =  Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+            }
+            else
+            {
+                var textContent = ChildContent?.GetTextContent();
+                IconContent = textContent;
+
+                if (textContent is null)
+                {
+                    return;
+                }
+
+                if (textContent.StartsWith("$"))
+                {
+                    icon = MasaBlazor!.Icons.Aliases.GetIconOrDefault(textContent);
+                }
+                else
+                {
+                    icon = CheckIfSvg(textContent) ? new SvgPath(textContent) : textContent;
+                }
+            }
+
+            if (icon is null)
+            {
+                return;
+            }
+
+            if (icon.IsSvg)
+            {
+                ComputedIcon = icon;
+            }
+            else
+            {
+                (ComputedIcon, _iconCss) = ResolveIcon(icon.AsT0);
+            }
+        }
+
+        private(string? icon, string? css) ResolveIcon(string cssIcon)
+        {
+            var set = MasaBlazor!.Icons.DefaultSet;
+
+            var splits = cssIcon.Split(":");
+            var icon = splits[0];
+
+            if (splits.Length == 2)
+            {
+                set = splits[0] switch
+                {
+                    "mdi" => IconSet.MaterialDesignIcons,
+                    "md" => IconSet.MaterialDesign,
+                    "fa" => IconSet.FontAwesome,
+                    "fa4" => IconSet.FontAwesome4,
+                    _ => set
+                };
+                icon = splits[1];
+            }
+
+            var css = set switch
+            {
+                IconSet.MaterialDesignIcons => $"mdi {icon}",
+                IconSet.MaterialDesign => "material-icons",
+                _ => icon
+            };
+
+            icon = set switch
+            {
+                IconSet.MaterialDesign => icon,
+                _ => null
+            };
+
+            return (icon, css);
+        }
 
         public string GetSize()
         {
@@ -76,16 +157,14 @@
                 {
                     cssBuilder
                         .Add("m-icon")
+                        .AddIf(_iconCss, () => ComputedIcon is { IsSvg: false })
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
-                        .AddTextColor(Color, () => IsActive)
-                        .AddFirstIf((() => Icon, () => _arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
-                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-")),
-                            (() => $"material-icons", () => !string.IsNullOrWhiteSpace(NewChildren)));
+                        .AddTextColor(Color, () => IsActive);
                 }, styleBuilder =>
                 {
                     styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);
@@ -105,18 +184,6 @@
                                 .Add($"width:{size}");
                         }
                     });
-
-            AbstractProvider
-                .Apply(typeof(BButtonIconSlot<>), typeof(BButtonIconSlot<MIcon>))
-                .Apply(typeof(BFontIconSlot<>), typeof(BFontIconSlot<MIcon>))
-                .Apply(typeof(BSvgIconSlot<>), typeof(BSvgIconSlot<MIcon>));
-
-            SvgAttrs = new()
-            {
-                { "viewBox", "0 0 24 24" },
-                { "role", "img" },
-                { "aria-hidden", "true" }
-            };
         }
     }
 }

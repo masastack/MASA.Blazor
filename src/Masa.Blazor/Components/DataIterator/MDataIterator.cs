@@ -110,11 +110,11 @@
             return base.SetParametersAsync(parameters);
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher
+            watcher
                 .Watch<IEnumerable<TItem>>(nameof(Value), val =>
                 {
                     var keys = new List<string>();

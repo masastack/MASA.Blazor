@@ -4,6 +4,9 @@ namespace Masa.Blazor;
 
 public class MCarouselItem : MWindowItem, IRoutable
 {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
     [Parameter]
     public string Href { get; set; }
 
@@ -21,6 +24,8 @@ public class MCarouselItem : MWindowItem, IRoutable
 
     [Parameter]
     public string Src { get; set; }
+
+    public bool Exact { get; set; }
 
     private IRoutable _router;
 

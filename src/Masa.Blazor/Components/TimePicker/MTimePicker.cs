@@ -359,12 +359,14 @@ namespace Masa.Blazor
             base.OnInitialized();
 
             SetInputData(Value);
+        }
 
-            Watcher
-                .Watch<TimeOnly?>(nameof(Value), val =>
-                {
-                    SetInputData(val);
-                });
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher
+                .Watch<TimeOnly?>(nameof(Value), SetInputData);
         }
 
         private void SetInputData(TimeOnly? value)

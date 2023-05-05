@@ -1,25 +1,19 @@
-﻿using BlazorComponent.Web;
-using Masa.Blazor.Popup.Components;
+#nullable enable
+
+using BlazorComponent.Web;
 
 namespace Masa.Blazor
 {
     /// <summary>
     /// Root for application
     /// </summary>
-    public partial class MApp : BApp, IThemeable
+    public class MApp : BApp
     {
-        #region for PopupService
+        [Inject]
+        public MasaBlazor? MasaBlazor { get; set; }
 
-        [Parameter]
-        public Action<AlertParameters> AlertParameters { get; set; }
-
-        [Parameter]
-        public Action<ConfirmParameters> ConfirmParameters { get; set; }
-
-        [Parameter]
-        public Action<PromptParameters> PromptParameters { get; set; }
-
-        #endregion
+        [Inject]
+        public Window? Window { get; set; }
 
         /// <summary>
         /// Whether to display from left to right
@@ -27,24 +21,31 @@ namespace Masa.Blazor
         [Parameter]
         public bool LeftToRight { get; set; } = true;
 
-        [Inject]
-        public HeadJsInterop HeadJsInterop { get; set; }
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Window Window { get; set; }
-
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
+
+        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
+
+        protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
 
         protected override Task OnInitializedAsync()
         {
-            var themeOptions = IsDark ? MasaBlazor.Theme.Themes.Dark : MasaBlazor.Theme.Themes.Light;
+            MasaBlazor!.OnThemeChange -= OnThemeChange;
+            MasaBlazor.OnThemeChange += OnThemeChange;
 
-            HeadJsInterop.InsertAdjacentHTML("beforeend", ThemeCssBuilder.Build(themeOptions));
+            OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();
+        }
+
+        private void OnThemeChange(Theme theme)
+        {
+            var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
+            var style = ThemeCssBuilder.Build(themeOptions);
+            InvokeAsync(async () =>
+            {
+                await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);
+                StateHasChanged();
+            });
         }
 
         protected override void SetComponentClass()
@@ -76,8 +77,8 @@ namespace Masa.Blazor
         {
             if (firstRender)
             {
-                await MasaBlazor.Breakpoint.InitAsync();
-                await Window.InitializeAsync();
+                await MasaBlazor!.Breakpoint.InitAsync();
+                await Window!.InitializeAsync();
 
                 StateHasChanged();
             }

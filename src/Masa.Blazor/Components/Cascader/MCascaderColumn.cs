@@ -10,7 +10,7 @@ namespace Masa.Blazor
 
         public string Color { get; set; } = "primary";
 
-        protected override string Icon => "mdi-chevron-right";
+        protected override string Icon => "$next";
 
         protected override string GetSelectedItemSelector(int index)
         {

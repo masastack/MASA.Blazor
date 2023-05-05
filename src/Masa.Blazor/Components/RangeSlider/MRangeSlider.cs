@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public class MRangeSlider<TValue> : MSlider<IList<TValue>>, IRangeSlider<TValue>
+    public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : IComparable
     {
         public ElementReference SecondThumbElement { get; set; }
 
@@ -10,19 +10,10 @@ namespace Masa.Blazor
 
         protected IList<double> InputWidths
         {
-            get
-            {
-                return DoubleInternalValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList();
-            }
+            get { return DoubleInternalValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList(); }
         }
 
-        protected IList<double> DoubleInternalValues
-        {
-            get
-            {
-                return InternalValue is IList<double> val ? val : default;
-            }
-        }
+        protected IList<double> DoubleInternalValues => InternalValue.Select(item => (double)(dynamic)item).ToList();
 
         protected override IList<TValue> LazyValue { get; set; } = new List<TValue>()
         {
@@ -34,22 +25,22 @@ namespace Masa.Blazor
 
         protected override double DoubleInternalValue
         {
-            get 
+            get
             {
-                if (ActiveThumb.HasValue && InternalValue[ActiveThumb.Value] is double val)
+                if (ActiveThumb.HasValue)
                 {
-                    return val;
+                    return (double)(dynamic)InternalValue[ActiveThumb.Value];
                 }
+
                 return default;
-                
             }
-            set 
+            set
             {
-                 var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
+                var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
 
                 if (ActiveThumb.HasValue)
                 {
-                    InternalValue[ActiveThumb.Value] = val is TValue v ? v : default;
+                    InternalValue[ActiveThumb.Value] = ConvertDoubleToTValue<TValue>(val);
                 }
             }
         }
@@ -88,10 +79,7 @@ namespace Masa.Blazor
                 ThumbPressed = true;
             }
 
-            if (ActiveThumb == null)
-            {
-                ActiveThumb = GetIndexOfClosestValue(DoubleInternalValues, _value);
-            }
+            ActiveThumb ??= GetIndexOfClosestValue(DoubleInternalValues, _value);
 
             await SetInternalValueAsync(_value);
         }
@@ -100,16 +88,9 @@ namespace Masa.Blazor
         {
             var values = new List<double>();
 
-            for (int i = 0; i < DoubleInternalValues.Count; i++)
+            for (var i = 0; i < DoubleInternalValues.Count; i++)
             {
-                if (i == ActiveThumb)
-                {
-                    values.Add(value);
-                }
-                else
-                {
-                    values.Add(DoubleInternalValues[i]);
-                }
+                values.Add(i == ActiveThumb ? value : DoubleInternalValues[i]);
             }
 
             var val = values.Select(v => RoundValue(Math.Min(Math.Max(v, Min), Max))).ToList();
@@ -125,7 +106,7 @@ namespace Masa.Blazor
                 val = new List<double> { val[1], val[0] };
             }
 
-            InternalValue = val is IList<TValue> internalVal ? internalVal : default;
+            InternalValue = val.Select(item => (TValue)Convert.ChangeType(item, typeof(TValue))).ToList();
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -209,26 +190,13 @@ namespace Masa.Blazor
 
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
-            var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
-            if (!ListComparer.Equals(val, roundedVal))
+            var roundedVal = val.Select(v => ConvertDoubleToTValue<TValue>(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
+            if (!ListComparer.Equals(roundedVal, InternalValue))
             {
                 InternalValue = roundedVal;
             }
 
             LazyValue = roundedVal;
-        }
-
-        private static TValue ConvertDoubleToTValue(double val)
-        {
-            return val is TValue value ? value : default;
-        }
-
-        protected override void CheckTValue()
-        {
-            if (typeof(TValue) != typeof(double))
-            {
-                throw new ArgumentNullException(nameof(TValue), "Only double supported");
-            }
         }
 
         protected override void SetComponentClass()

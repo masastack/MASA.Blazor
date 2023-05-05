@@ -1,0 +1,55 @@
+﻿<MContainer Fluid>
+    <MRow class="light--text">
+        <MCol Cols="4">
+            on
+        </MCol>
+        <MCol Cols="4">
+            off
+        </MCol>
+        <MCol Cols="4">
+            indeterminate
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols="4">
+            <MCheckbox @bind-Value="checkbox1"></MCheckbox>
+        </MCol>
+        <MCol Cols="4">
+            <MCheckbox TValue="bool"></MCheckbox>
+        </MCol>
+        <MCol Cols="4">
+            <MCheckbox Indeterminate="indeterminate" TValue="bool" Value="checkbox2" ValueChanged="Checkbox2Changed"></MCheckbox>
+        </MCol>
+    </MRow>
+    <MRow class="light--text">
+        <MCol Cols="4">
+            on disabled
+        </MCol>
+        <MCol Cols="4">
+            off disabled
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols="4">
+            <MCheckbox @bind-Value="checkbox3" Disabled></MCheckbox>
+        </MCol>
+        <MCol Cols="4">
+            <MCheckbox Disabled TValue="bool"></MCheckbox>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+
+    bool checkbox1 = true;
+    bool indeterminate = true;
+    bool checkbox2 = true;
+    bool checkbox3 = true;
+
+    void Checkbox2Changed(bool v)
+    {
+        checkbox2 = v;
+        indeterminate = false;
+    }
+
+}

@@ -4,7 +4,6 @@
 #     file: 'devops/sonar-scanner.yml'
 
 stages:
-#   - sonarqube
   - packer
   - docker
   - deploy-dev
@@ -15,28 +14,29 @@ stages:
   - tag
 
 variables:
-  IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
+  IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor:0.2.$CI_PIPELINE_ID
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
 #   image:  registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.201_wasm
-  tags:
-    - ydy
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
+#   tags:
+#     - 51-132
   stage: packer
   only:
     - main
   script:
+    - id
     - ls src/
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
-    - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-#     - docker --version
+    - rm -rf ./docs/MASA.Docs
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
+    - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
 #     - dotnet workload install wasm-tools
-    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln
+    - dotnet workload list  &&  dotnet build Masa.Blazor.Docs.sln
 #     - dotnet pack pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
     - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
     - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
@@ -51,7 +51,6 @@ packer:
       - ./src/BlazorComponent
   retry: 2
 
-
 docker:
   stage: docker
   tags:
@@ -61,47 +60,80 @@ docker:
   only:
     - main
   script:
+    - rm -rf ./src/BlazorComponent
+    - rm -rf ./docs/MASA.Docs
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
+    - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
     - docker build -t $IMAGE .
     - docker push $IMAGE
     - docker rmi  $IMAGE
+  after_script:
+    - git config --global --unset https.proxy
+    - git config --global --unset http.proxy
+    - echo "" >/home/gitlab-runner/.gitconfig
   retry: 2
 
-deploy-dev:
+# deploy-dev:
+#   image: portainer/kubectl-shell
+#   stage: deploy-dev
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+#   retry: 2
+#   when: manual
+
+deploy-dev-ydy:
   image: portainer/kubectl-shell
   stage: deploy-dev
   only:
     - main
   script:
-    - echo $KUBE_CONFIG_DEV | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+    - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
+    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masastack-dev
   retry: 2
 
-deploy-test:
-  image: portainer/kubectl-shell
-  stage: deploy-test
-  only:
-    - main
-  script:
-    - echo $KUBE_CONFIG_DEV | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
-  retry: 2
-  when: manual
+
+# deploy-test:
+#   image: portainer/kubectl-shell
+#   stage: deploy-test
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
+#   retry: 2
+#   when: manual
+
+# deploy-test-ydy:
+#   image: portainer/kubectl-shell
+#   stage: deploy-test
+#   only:
+#     - main
+#   script:
+#     - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
+#     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor-test
+#   retry: 2
+#   when: manual
 
 packer-prd:
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
   stage: packer-prd
-  tags:
-    - linux-shell
   only:
     - tags
   script:
     - rm -rf ./src/BlazorComponent
-    - rm -rf ./src/MASA.Docs
-    - git config --global https.proxy $PROXY_GATEWAY
-    - git config --global http.proxy $PROXY_GATEWAY
-    - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-    - dotnet build src/Masa.Blazor.sln
-    - dotnet pack src --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+    - rm -rf ./docs/MASA.Docs
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
+    - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
+    - dotnet workload list && dotnet build Masa.Blazor.Docs.sln
+    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+    - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
   after_script:
     - git config --global --unset https.proxy
@@ -122,13 +154,25 @@ docker-prd:
   only:
     - tags
   script:
+    - rm -rf ./src/BlazorComponent
+    - rm -rf ./docs/MASA.Docs
+    - git config --global https.https://github.com.proxy $PROXY_GATEWAY
+    - git config --global http.https://github.com.proxy $PROXY_GATEWAY
+    - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
+  after_script:
+    - git config --global --unset https.proxy
+    - git config --global --unset http.proxy
+    - echo "" >/home/gitlab-runner/.gitconfig
   retry: 2
 
 deploy-prd:
   image: portainer/kubectl-shell
   stage: deploy-prd
+  tags:
+    - linux-shell
   only:
     - tags
   script:

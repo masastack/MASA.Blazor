@@ -18,13 +18,13 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
 
         [Parameter]
-        public string EmptyIcon { get; set; } = "mdi-star-outline";
+        public string EmptyIcon { get; set; } = "$ratingEmpty";
 
         [Parameter]
-        public string FullIcon { get; set; } = "mdi-star";
+        public string FullIcon { get; set; } = "$ratingFull";
 
         [Parameter]
-        public string HalfIcon { get; set; } = "mdi-star-half-full";
+        public string HalfIcon { get; set; } = "$ratingHalf";
 
         [Parameter]
         public bool HalfIncrements { get; set; }
@@ -114,7 +114,6 @@ namespace Masa.Blazor
                     var ratingItem = CreateProps(itemIndex);
 
                     attrs[nameof(MIcon.Size)] = Size;
-                    attrs[nameof(MIcon.Icon)] = true;
                     attrs[nameof(MIcon.Small)] = Small;
                     attrs[nameof(MIcon.XLarge)] = XLarge;
                     attrs[nameof(MIcon.Large)] = Large;

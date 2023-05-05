@@ -1,0 +1,16 @@
+﻿@using Masa.Blazor.Presets
+
+<MButton OnClick="() => value = true">Show Modal</MButton>
+
+<PDrawer @bind-Value="value"
+         Title="Title"
+         Width="500"
+         OnCancel="() => value = false">
+    Content
+</PDrawer>
+
+@code {
+
+    private bool value;
+
+}

@@ -44,6 +44,9 @@
 
         protected override bool IsFullscreen => Fullscreen && MasaBlazor.Breakpoint.SmAndDown;
 
+        public override IEnumerable<string> DependentSelectors
+            => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
+
         protected override void SetComponentClass()
         {
             var prefix = "m-dialog";

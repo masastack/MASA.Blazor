@@ -1,0 +1,13 @@
+﻿<MBaiduMap Height="400"
+           DarkThemeId="9828881e7efb0182edb48236a3b53293"
+           Style="width:90%; left:5%"
+           EnableScrollWheelZoom="@_enableScrollWheelZoom" />
+
+<MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
+    <MCheckbox Label="Enable Scrollwheel Zoom" @bind-Value="_enableScrollWheelZoom" />
+</MRow>
+
+@code
+{
+    private bool _enableScrollWheelZoom;
+}

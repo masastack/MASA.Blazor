@@ -1,12 +1,16 @@
-﻿namespace Masa.Blazor;
+﻿#nullable enable
 
-public partial class MECharts : BDomComponentBase, IAsyncDisposable
+using System.Text.Json;
+
+namespace Masa.Blazor;
+
+public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDisposable
 {
     [Inject]
-    protected I18n I18n { get; set; }
+    protected I18n I18n { get; set; } = null!;
 
     [Inject]
-    protected EChartsJSModule Module { get; set; }
+    protected EChartsJSModule Module { get; set; } = null!;
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -15,19 +19,19 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     public StringNumber Height { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; }
+    public StringNumber? MinHeight { get; set; }
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
-    public StringNumber MaxHeight { get; set; }
+    public StringNumber? MaxHeight { get; set; }
 
     [Parameter]
-    public Action<EChartsInitOptions> InitOptions { get; set; }
+    public Action<EChartsInitOptions>? InitOptions { get; set; }
 
     [Parameter]
     public object Option { get; set; } = new { };
@@ -39,18 +43,48 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
     public bool Dark { get; set; }
 
     [Parameter]
-    public string Theme { get; set; }
+    public string? Theme { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnDoubleClick { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseDown { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseMove { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseUp { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOver { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnMouseOut { get; set; }
+
+    [Parameter]
+    public EventCallback OnGlobalOut { get; set; }
+
+    [Parameter]
+    public EventCallback<EChartsEventArgs> OnContextMenu { get; set; }
 
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
+    [Parameter]
+    public bool IncludeFunctionsInOption { get; set; }
+
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
-    private IJSObjectReference _echarts;
-    private bool _isEChartsDisposed = false;
-    private object _prevOption;
+    private IEChartsJSObjectReferenceProxy? _echarts;
+    private object? _prevOption;
+    private string? _prevComputedTheme;
 
-    public string ComputedTheme
+    public string? ComputedTheme
     {
         get
         {
@@ -60,6 +94,16 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
             }
 
             if (Dark)
+            {
+                return "dark";
+            }
+
+            if (Light)
+            {
+                return "light";
+            }
+
+            if (CascadingIsDark)
             {
                 return "dark";
             }
@@ -83,23 +127,33 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
             });
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
+        await base.OnParametersSetAsync();
+
         InitOptions?.Invoke(DefaultInitOptions);
 
         DefaultInitOptions.Locale ??= I18n.Culture.TwoLetterISOLanguageName.ToUpperInvariant();
+
+        if (_prevComputedTheme != ComputedTheme)
+        {
+            _prevComputedTheme = ComputedTheme;
+
+            await ReinitializeECharts();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await base.OnAfterRenderAsync(firstRender);
+
         if (IsDisposed)
         {
             return;
         }
 
-        if (firstRender || _isEChartsDisposed)
+        if (firstRender)
         {
-            _isEChartsDisposed = false;
             await InitECharts();
         }
 
@@ -115,24 +169,93 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
 
     public async Task InitECharts()
     {
-        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions, this);
+
         await SetOption();
     }
 
     public async Task DisposeECharts()
     {
-        await Module.Dispose(_echarts);
-        _isEChartsDisposed = true;
+        if (_echarts == null) return;
+
+        await _echarts.DisposeEChartsAsync();
+
+        _echarts = null;
     }
 
-    public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
+    public async Task ReinitializeECharts()
     {
-        await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
+        await DisposeECharts();
+
+        NextTick(async () => { await InitECharts(); });
     }
 
-    public async Task Resize(int width, int height)
+    public async Task SetOption(object? option = null, bool notMerge = true, bool lazyUpdate = false)
     {
-        await Module.Resize(_echarts, width, height);
+        if (_echarts == null) return;
+
+        option ??= Option;
+
+        if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
+        {
+            optionJson = FormatterFunction(optionJson);
+            optionJson = Unicode2String(optionJson);
+            await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
+        }
+        else
+        {
+            await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+        }
+    }
+
+    public static bool IsAnyFunction(object option, out string optionJson)
+    {
+        if (option is null)
+        {
+            optionJson = string.Empty;
+            return false;
+        }
+        optionJson = JsonSerializer.Serialize(option, new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+        return optionJson.Contains("function");
+    }
+
+    public static string Unicode2String(string source)
+    {
+        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
+            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
+    }
+
+    public static string FormatterFunction(string optionJson)
+    {
+        string pattern = @":\s*""\s*function\s?\(.*\)\s?\{.+\}[\s;]?""[\n\s]?";
+        var regex = new Regex(pattern);
+        string newOptionJson = regex.Replace(optionJson,
+            (m) =>
+            {
+                string newValue = m.Value.Trim()
+                    .Substring(2, m.Value.Length - 3)
+                    .Replace("\\u0022", "\"");
+                newValue = $" : {newValue}";
+                return newValue;
+            });
+        return newOptionJson;
+    }
+
+    public async Task Resize(double width = 0, double height = 0)
+    {
+        if (_echarts == null) return;
+
+        if (width == 0 || height == 0)
+        {
+            await _echarts.ResizeAsync();
+        }
+        else
+        {
+            await _echarts.ResizeAsync(width, height);
+        }
     }
 
     public async ValueTask DisposeAsync()
@@ -140,6 +263,7 @@ public partial class MECharts : BDomComponentBase, IAsyncDisposable
         try
         {
             await DisposeECharts();
+
             if (_echarts is not null)
             {
                 await _echarts.DisposeAsync();

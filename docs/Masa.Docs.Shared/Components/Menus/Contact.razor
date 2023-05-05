@@ -1,0 +1,12 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<div class="toc-content mt-6 ml-6">@I18n.T("contactus")</div>
+<div class="ml-6 mt-2">
+    <MImage src="https://cdn.masastack.com/images/contact--no-padding.png" MaxWidth="200" Contain/>
+</div>
+
+@code {
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; } = null!;
+}

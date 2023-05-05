@@ -1,0 +1,47 @@
+﻿<div style="height: 500px">
+    <MButton OnClick="ChangeTheme">修改主题</MButton>
+    <MDivider></MDivider>
+    <MMonacoEditor Height="@("100%")" InitOptions="InitEditor" @ref="_editor"></MMonacoEditor>
+</div>
+
+@code{
+
+    private MMonacoEditor _editor;
+    
+    private async Task ChangeTheme()
+    {
+        var theme = new StandaloneThemeData
+        {
+            Base = "vs-dark",
+            inherit = true,
+            rules = new TokenThemeRule[] { },
+            colors = new Dictionary<string, string>
+            {
+                { "editor.foreground", "#000000" },
+                { "editor.background", "#EDF9FA" },
+                { "editorCursor.foreground", "#8B0000" },
+                { "editor.lineHighlightBackground", "#0000FF20" },
+                { "editorLineNumber.foreground", "#008800" },
+                { "editor.selectionBackground", "#88000030" },
+                { "editor.inactiveSelectionBackground", "#88000015" },
+            }
+        };
+        
+        await _editor.DefineThemeAsync("myTheme", theme);
+
+        await _editor.SetThemeAsync("myTheme");
+    }
+    private async Task<object> InitEditor()
+    {
+        object options = new
+        {
+            value = "My to-do list:\n* buy milk\n* buy coffee\n* write awesome code",
+            language = "text/plain",
+            fontFamily = "Arial",
+            fontSize = 20,
+        };
+
+        return options;
+    }
+
+}

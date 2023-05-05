@@ -16,7 +16,10 @@ public static class ServiceCollectionExtensions
 
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
     {
-        services.AddBlazorComponent();
+        var options = new MasaBlazorOptions();
+        optionsAction.Invoke(options);
+
+        services.AddBlazorComponent(o => { o.Locale = options.Locale; });
         services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
         return services.AddMasaBlazorInternal();
     }
@@ -30,15 +33,17 @@ public static class ServiceCollectionExtensions
             var window = serviceProvider.GetService<Window>();
             var options = serviceProvider.GetService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
-            return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme);
+            return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons, options.Value.Defaults);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
         services.TryAddScoped<EChartsJSModule>();
+        services.TryAddScoped<MonacoEditorJSModule>();
         services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
+        services.TryAddScoped<BaiduMapJSModule>();
 
         return new MasaBlazorBuilder(services);
     }

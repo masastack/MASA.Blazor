@@ -1,0 +1,18 @@
+{
+  "props": {
+    "disabled": "Removes the ability to click or target the component.",
+    "flat": "Removes the card’s elevation.",
+    "hover": "Will apply an elevation of 4dp when hovered (default 2dp). You can find more information on the [elevation page](/blazor/styles-and-animations/elevation).",
+    "img": "Specifies an image background for the card. For more advanced implementations, it is recommended that you use the [MImage](/blazor/components/images) component. You can find a v-img example here.",
+    "loaderHeight": "Specifies the height of the loader.",
+    "loading": "Displays linear progress bar. Can either be a String which specifies which color is applied to the progress bar (any material color or theme color - **primary**, **secondary**, **success**, **info**, **warning**, **error**) or a Boolean which uses the component `Color` (set by color prop - if it’s supported by the component) or the primary color",
+    "outlined": "Removes elevation (box-shadow) and adds a thin border.",
+    "raised": "Specifies a higher default elevation (8dp). You can find more information on the [elevation page](/blazor/styles-and-animations/elevation).",
+    "show": "Show"
+  },
+  "contents": {
+    "progressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)"
+  },
+  "events": {},
+  "functions": {}
+}

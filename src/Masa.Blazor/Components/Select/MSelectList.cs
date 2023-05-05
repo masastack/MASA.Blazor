@@ -25,9 +25,6 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
 
-        // [Parameter]
-        // public int SelectedIndex { get; set; }
-
         protected string TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
 
         protected override void SetComponentClass()

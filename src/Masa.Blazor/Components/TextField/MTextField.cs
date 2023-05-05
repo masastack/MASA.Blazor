@@ -20,14 +20,19 @@ namespace Masa.Blazor
         [Parameter]
         public bool PersistentPlaceholder { get; set; }
 
+        [ApiDefaultValue("$clear")]
         [Parameter]
-        public string ClearIcon { get; set; } = "mdi-close";
+        public string ClearIcon { get; set; } = "$clear";
 
         [Parameter]
         public bool FullWidth { get; set; }
 
         [Parameter]
-        public string Prefix { get; set; }
+        public string Prefix
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool SingleLine { get; set; }
@@ -45,7 +50,11 @@ namespace Masa.Blazor
         public bool Filled { get; set; }
 
         [Parameter]
-        public virtual bool Outlined { get; set; }
+        public virtual bool Outlined
+        {
+            get => GetValue(false);
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Reverse { get; set; }
@@ -191,7 +200,18 @@ namespace Masa.Blazor
             }
         }
 
-        public virtual StringNumber ComputedCounterValue => CounterValue?.Invoke(InternalValue) ?? (InternalValue?.ToString()?.Length ?? 0);
+        public virtual StringNumber ComputedCounterValue
+        {
+            get
+            {
+                if (InternalValue is null)
+                {
+                    return 0;
+                }
+
+                return CounterValue?.Invoke(InternalValue) ?? InternalValue.ToString()!.Length;
+            }
+        }
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 
@@ -501,6 +521,15 @@ namespace Masa.Blazor
             }
         }
 
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<bool>(nameof(Outlined), SetLabelWidthAsync)
+                   .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync))
+                   .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
+        }
+
         private async Task SetLabelWidthAsync()
         {
             if (!Outlined)
@@ -531,6 +560,8 @@ namespace Masa.Blazor
             }
 
             LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
+
+            StateHasChanged();
         }
 
         private async Task SetPrefixWidthAsync()
@@ -549,6 +580,8 @@ namespace Masa.Blazor
             }
 
             PrefixWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task SetPrependWidthAsync()
@@ -572,6 +605,8 @@ namespace Masa.Blazor
             }
 
             PrependWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task<bool> TryAutoFocus()
@@ -588,9 +623,8 @@ namespace Masa.Blazor
 
         private async Task OnResize()
         {
-            await SetLabelWidthAsync();
-            await SetPrefixWidthAsync();
-            await SetPrependWidthAsync();
+            await PreventRenderingUtil(SetLabelWidthAsync, SetPrefixWidthAsync, SetPrependWidthAsync);
+            StateHasChanged();
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
@@ -646,7 +680,8 @@ namespace Masa.Blazor
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value?.ToString(), CultureInfo.InvariantCulture, out var val);
+            var value = args.Value?.ToString();
+            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
@@ -666,6 +701,15 @@ namespace Masa.Blazor
                 _badInput = true;
 
                 InternalValue = default;
+
+                if (Type == "number")
+                {
+                    // reset the value of input element if failed to convert
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        _ = SetValueByJsInterop("");
+                    }
+                }
             }
 
             if (!ValidateOnBlur)

@@ -1,0 +1,20 @@
+﻿@inherits LayoutComponentBase
+@layout BaseLayout
+
+<MMain>
+    @Body
+</MMain>
+
+@code {
+
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        BaseLayout.HideAppBarNavIcon();
+    }
+
+}

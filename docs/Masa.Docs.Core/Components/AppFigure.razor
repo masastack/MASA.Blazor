@@ -1,0 +1,34 @@
+﻿<figure>
+    <MSheet Outlined="Outlined">
+        <MImage @attributes="Attributes" AspectRatio="AspectRatio" Src="@Src"></MImage>
+    </MSheet>
+
+    @if (!string.IsNullOrWhiteSpace(Name))
+    {
+        <figcaption class="text-subtitle-2 text-center text-capitalize mt-3">@Name</figcaption>
+    }
+    else
+    {
+        @ChildContent
+    }
+</figure>
+
+@code {
+    [Parameter]
+    public bool Outlined { get; set; }
+
+    [Parameter, EditorRequired]
+    public string Src { get; set; } = null!;
+
+    [Parameter]
+    public StringNumber? AspectRatio { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; } = new();
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Name { get; set; }
+}

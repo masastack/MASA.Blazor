@@ -1,0 +1,44 @@
+{
+  "props": {
+    "activatable": "允许用户通过单击节点将其标记为活动节点",
+    "active": "可同步属性，允许您控制哪些节点处于活动状态。 该数组由每个活动项目的 `ItemKey` 组成。",
+    "dense": "降低项目的高度",
+    "expandIcon": "用于指示可以扩展节点的图标",
+    "filter": "自定义项目过滤功能。 默认情况下，它将在项目的标签中使用不区分大小写的搜索。",
+    "hoverable": "将鼠标悬停在节点上时应用悬停类",
+    "indeterminateIcon": "节点处于不确定状态时使用的图标。 仅在 `Selectable` 为 true 时可见。",
+    "itemChildren": "提供的包含其子项的 `Items` 上的属性",
+    "itemDisabled": "提供的 `Items` 上的属性，其中包含该项目的禁用状态",
+    "itemKey": "提供的 `Items` 上的属性用于跟踪节点状态。 此属性的值在所有项目中必须唯一。",
+    "items": "用于构建树视图的项目数组",
+    "itemText": "提供的包含标签文本的 `Items` 上的属性",
+    "loadChildren": "动态加载子代时使用的功能。 如果设置了此道具，则在扩展具有 `ItemChildren` 属性（为空数组）的项时，将运行提供的功能。 支持回调。",
+    "loadingIcon": "节点处于加载状态时使用的图标",
+    "mandatoryActive": "",
+    "multipleActive": "为 true 时，允许用户同时具有多个活动节点",
+    "offIcon": "未选择节点时使用的图标。 仅在 `Selectable` 为 true 时可见。",
+    "onIcon": "选择叶节点或完全选择分支节点时使用的图标。 仅在 `Selectable` 为 true 时可见。",
+    "open": "可同步属性，允许您控制打开哪些节点。 该数组由每个打开项目的 `ItemKey` 组成。",
+    "openAll": "当为 true 时，将导致在安装组件时打开所有分支节点",
+    "openOnClick": "如果为 true ，将导致通过单击节点上的任意位置来打开节点，而不是仅通过单击展开图标来打开节点。 将此属性与 `Activatable` 一起使用时，您将无法将带有子节点标记为活动状态。",
+    "rounded": "为 `MTreeview` 节点提供替代的活动样式。 仅在 `Activatable` 为 true 时可见，并且不应与 `Shaped` 属性一起使用。",
+    "search": "筛选结果的搜索模型",
+    "selectable": "将在每个节点旁边渲染一个复选框，以允许选择它们",
+    "selectedColor": "选择框的颜色",
+    "selectionType": "控制树形视图如何选择节点。 有两种模式可用：'leaf' 和 'independent'",
+    "shaped": "为 `MTreeview` 节点提供替代的活动样式。 仅在 `Activatable` 为 true 时可见，并且不应与 `Rounded` 属性结合使用。",
+    "transition": "在打开和关闭节点时应用过渡",
+    "value": "允许您控制选择哪些节点。 该数组由每个选定项目的 `ItemKey` 组成。 与 @input 事件一起使用以允许 @bind-value 绑定。"
+  },
+  "events": {
+    "activeChanged": "",
+    "onActiveUpdate": "当此值更改时，发出活动项的数组",
+    "onInput": "当此值更改时，发出选定项的数组",
+    "onOpenUpdate": "当此值更改时，发出打开项的数组",
+    "openChanged": ""
+  },
+  "contents": {
+    "labelContent": "标签内容",
+    "prependContent": "在标签之前添加内容"
+  }
+}

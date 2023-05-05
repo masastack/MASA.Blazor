@@ -14,7 +14,7 @@
 
         protected override void SetComponentClass()
         {
-            ExpandIcon ??= "mdi-chevron-down";
+            ExpandIcon ??= "$expand";
 
             CssProvider
                 .Apply(css =>

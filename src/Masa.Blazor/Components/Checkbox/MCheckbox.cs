@@ -3,19 +3,19 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MCheckbox : MSelectable, IThemeable, ICheckbox
+    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue>
     {
         [Parameter]
         public bool Indeterminate { get; set; }
 
         [Parameter]
-        public string IndeterminateIcon { get; set; } = "mdi-minus-box";
+        public string IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
 
         [Parameter]
-        public string OnIcon { get; set; } = "mdi-checkbox-marked";
+        public string OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
+        public string OffIcon { get; set; } = "$checkboxOff";
 
         public string ComputedIcon
         {
@@ -38,7 +38,7 @@ namespace Masa.Blazor
         [Inject]
         public Document Document { get; set; }
 
-        protected override void OnInternalValueChange(bool val)
+        protected override void OnInternalValueChange(TValue val)
         {
             base.OnInternalValueChange(val);
 
@@ -85,10 +85,10 @@ namespace Masa.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<,>), typeof(BCheckboxDefaultSlot<MCheckbox>))
-                .Apply(typeof(BCheckboxCheckbox), typeof(BCheckboxCheckbox))
-                .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MCheckbox>))
-                .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MCheckbox>))
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BCheckboxDefaultSlot<TValue>))
+                .Apply(typeof(BCheckboxCheckbox<,>), typeof(BCheckboxCheckbox<MCheckbox<TValue>, TValue>))
+                .Apply(typeof(BSelectableInput<,>), typeof(BSelectableInput<MCheckbox<TValue>, TValue>))
+                .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MCheckbox<TValue>>))
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
                     attrs[nameof(MIcon.Dense)] = Dense;
@@ -101,7 +101,7 @@ namespace Masa.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            
+
             if (firstRender)
             {
                 //It's used to prevent ripple directive,and we may remove this 

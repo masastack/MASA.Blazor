@@ -1,0 +1,32 @@
+﻿<div class="ordinary-text">
+    <MMarkdownIt Source="@Source"
+                 AnchorOptions="@s_anchorOptions"
+                 OnTocParsed="@OnTocParsed"
+                 OnFrontMatterParsed="@OnFrontMatterParsed"
+                 Html
+                 Typographer
+                 HeaderSections
+                 Scope="document"
+                 Class="doc-markdown-body">
+    </MMarkdownIt>
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Source { get; set; }
+
+    [Parameter]
+    public EventCallback<List<MarkdownItTocContent>?> OnTocParsed { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> OnFrontMatterParsed { get; set; }
+
+    private static readonly MarkdownItAnchorOptions s_anchorOptions = new()
+    {
+        Level = 1,
+        PermalinkClass = "",
+        PermalinkSymbol = ""
+    };
+
+}

@@ -2,11 +2,11 @@ name: deploy-wasm-prd
 
 on:
   release:
-    types: [ created ]
-  workflow_dispatch: 
+    types: [ published ]
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-prd:
     runs-on: ubuntu-latest
     steps:
     - name: git pull
@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: 'recursive'
     - run: git submodule foreach git checkout main
-    - name: setting dotnet 
+    - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
@@ -22,11 +22,19 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools-net6
+      run: dotnet workload install wasm-tools
     - name: build
-      run: dotnet build src/Masa.Blazor.sln
+      run: dotnet build Masa.Blazor.Docs.sln
     - name: publish
-      run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj
+      run: dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: execute py script
+      env:
+        DOC_DOMAIN: "https://docs.masastack.com"
+      run: python scirpts/sitemapgenerate.py
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
       with:
@@ -34,4 +42,14 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
+    - name: run index-create tools
+      env:
+        MASA_DOC_DOMAIN: "/"
+        MASA_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        MASA_ALGOLIA_APP_ID: "TSB4MACWRC"
+        MASA_ALGOLIA_INDEX_PREFIX: "blazor-masastack_prd_"
+        MASA_ROOT_DOCS_PATH: "/home/runner/work/MASA.Blazor/MASA.Blazor/docs/"
+        # MASA_DOC_EXCLUDE_URLS  if many please seperate with || , e.g. "/blazor/about/about||/blazor/about/meet-the-team"
+        MASA_DOC_EXCLUDE_URLS: "/blazor/about/about||/blazor/about/meet-the-team"
+      run: cd docs/Masa.Docs.Indexing && dotnet run --project Masa.Docs.Indexing.csproj --no-launch-profile -c Release

@@ -1,17 +1,21 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MRadio<TValue> : BRadio<TValue>
+    public class MRadio<TValue> : BRadio<TValue>
     {
-        [CascadingParameter]
-        public MRadioGroup<TValue> RadioGroup { get; set; }
-
-        protected bool IsFocused { get; set; }
-
         [Parameter]
         public string Color { get; set; } = "primary";
 
+        protected bool IsFocused { get; set; }
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
+
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            OnIcon = "$radioOn";
+            OffIcon = "$radioOff";
+            
+            await base.SetParametersAsync(parameters);
+        }
 
         protected override void OnInitialized()
         {
@@ -22,6 +26,7 @@
         protected override void SetComponentClass()
         {
             var prefix = "m-radio";
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
@@ -50,9 +55,6 @@
                     attrs[nameof(MIcon.IsActive)] = IsActive;
                 })
                 .Apply<BLabel, MLabel>();
-
-            OnIcon = "mdi-radiobox-marked";
-            OffIcon = "mdi-radiobox-blank";
         }
     }
 }

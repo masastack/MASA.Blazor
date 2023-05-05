@@ -1,0 +1,23 @@
+{
+  "props": {
+    "border": "Puts a border on the alert.",
+    "closeIcon": "Change the default icon used for `dismissible` alerts.",
+    "closeLabel": "Text used for `aria-label` on `dismissible` alerts.",
+    "coloredBorder": "Applies the defined `color` to the alert's border.",
+    "dense": "Decreases component's height.",
+    "dismissible": "Adds a close icon that can hide the alert.",
+    "icon": "Designates a specific icon.",
+    "outlined": "Makes the background transparent and applies a thin border.",
+    "prominent": "Displays a larger vertically centered icon to draw more attention.",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "tag": "Specify a custom tag used on the root element.",
+    "text": "Applies the defined `color` to text and a low opacity background of the same.",
+    "tile": "Removes the component's `border-radius`.",
+    "transition": "Sets the component transition.",
+    "type": "Specify a `success`, `info`, `warning` or `error` alert. Uses the contextual color and has a pre-defined icon.",
+    "value": "Controls whether the component is visible or hidden."
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

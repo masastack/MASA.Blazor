@@ -14,13 +14,13 @@ namespace Masa.Blazor
         public int Step { get; set; }
 
         [Parameter]
-        public string ErrorIcon { get; set; } = "mdi-alert";
+        public string ErrorIcon { get; set; } = "$error";
 
         [Parameter]
-        public string CompleteIcon { get; set; } = "mdi-check";
+        public string CompleteIcon { get; set; } = "$complete";
 
         [Parameter]
-        public string EditIcon { get; set; } = "mdi-pencil";
+        public string EditIcon { get; set; } = "$edit";
 
         [Parameter]
         public List<Func<bool>> Rules { get; set; } = new();

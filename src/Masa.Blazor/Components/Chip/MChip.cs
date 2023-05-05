@@ -14,7 +14,7 @@
         public bool Filter { get; set; }
 
         [Parameter]
-        public string FilterIcon { get; set; } = "mdi-check";
+        public string FilterIcon { get; set; } = "$complete";
 
         [Parameter]
         public bool Label { get; set; }
@@ -56,7 +56,7 @@
 
         protected override void SetComponentClass()
         {
-            CloseIcon ??= "mdi-close-circle";
+            CloseIcon ??= "$delete";
 
             var prefix = "m-chip";
 

@@ -6,15 +6,14 @@ public class EChartsJSModule : JSModule
     {
     }
 
-    public async ValueTask<IJSObjectReference> Init(ElementReference el, string theme, EChartsInitOptions options)
-        => await InvokeAsync<IJSObjectReference>("init", el, theme, options);
-
-    public async ValueTask SetOption(IJSObjectReference instance, object option, bool notMerge = false, bool lazyUpdate = false)
-        => await InvokeVoidAsync("setOption", instance, option, notMerge, lazyUpdate);
-
-    public async ValueTask Dispose(IJSObjectReference instance)
-        => await InvokeVoidAsync("dispose", instance);
-
-    public async ValueTask Resize(IJSObjectReference instance, int width, int height)
-        => await InvokeVoidAsync("resize", instance, width, height);
+    public async ValueTask<IEChartsJSObjectReferenceProxy> Init(
+        ElementReference el,
+        string theme,
+        EChartsInitOptions options,
+        IEChartsJsCallbacks owner
+    )
+    {
+        var obj = await InvokeAsync<IJSObjectReference>("init", el, theme, options);
+        return new EChartsJSObjectReferenceProxy(obj, owner);
+    }
 }

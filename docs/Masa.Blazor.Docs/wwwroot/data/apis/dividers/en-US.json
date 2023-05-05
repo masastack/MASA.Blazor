@@ -1,0 +1,10 @@
+{
+  "props": {
+    "center": "Center。",
+    "inset": "Adds indentation (72px) for normal dividers, reduces max height for `Vertical`.",
+    "vertical": "Displays dividers vertically."
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

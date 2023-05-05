@@ -51,8 +51,8 @@ public partial class PCopyableText
     {
         base.OnParametersSet();
 
-        CopiedIcon ??= "mdi-check";
-        CopyIcon ??= "mdi-content-copy";
+        CopiedIcon ??= "$success";
+        CopyIcon ??= "$copy";
     }
 
     private string Icon => _copying ? CopiedIcon! : CopyIcon!;

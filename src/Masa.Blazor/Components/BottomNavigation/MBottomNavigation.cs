@@ -3,7 +3,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor;
 
-public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAsyncDisposable
+public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable, IAsyncDisposable
 {
     public MBottomNavigation() : base(GroupType.ButtonGroup)
     {
@@ -68,6 +68,9 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
     [Parameter]
     public string Color { get; set; }
+
+    [Parameter]
+    public bool Routable { get; set; }
 
     private Scroller _scroller;
     private bool _haveRendered;
@@ -184,9 +187,16 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
             return;
         }
 
-        var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
+        if (IsActive)
+        {
+            var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
 
-        MasaBlazor.Application.Bottom = rect.ClientHeight;
+            MasaBlazor.Application.Bottom = rect.ClientHeight;
+        }
+        else
+        {
+            MasaBlazor.Application.Bottom = 0;
+        }
     }
 
     public async ValueTask DisposeAsync()

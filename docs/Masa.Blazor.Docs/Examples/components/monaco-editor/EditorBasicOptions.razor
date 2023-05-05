@@ -1,0 +1,48 @@
+﻿<div style="height: 500px">
+    <MButton OnClick="UpdateOptions">修改状态</MButton>
+    <MDivider></MDivider>
+    <MMonacoEditor Height="@("100%")" InitOptions="InitEditor" @ref="_editor"></MMonacoEditor>
+</div>
+
+@code{
+
+    private MMonacoEditor _editor;
+
+    private bool state;
+
+    private async Task UpdateOptions()
+    {
+        if (state)
+        {
+            await _editor.UpdateOptionsAsync(new
+            {
+                lineNumbers = "off",
+            });
+        }
+        else
+        {
+            await _editor.UpdateOptionsAsync(new
+            {
+                lineNumbers = "on",
+            });
+        }
+        state = !state;
+    }
+
+    private async Task<object> InitEditor()
+    {
+        object options = new
+        {
+            value = "// First line\nfunction hello() {\n\talert('Hello world!');\n}\n// Last line",
+            language = "javascript",
+            lineNumbers = "off",
+            roundedSelection = false,
+            scrollBeyondLastLine = false,
+            readOnly = false,
+            theme = "vs-dark",
+        };
+
+        return options;
+    }
+
+}

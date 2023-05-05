@@ -1,0 +1,69 @@
+﻿@inject I18n I18n
+@inject MasaBlazor MasaBlazor
+
+<div class="flex-1-1-auto d-flex align-center justify-end">
+    @if (MasaBlazor.Breakpoint.LgAndUp)
+    {
+        <Tabs />
+    }
+
+    @if (MasaBlazor.Breakpoint.XsOnly)
+    {
+        <MSpacer />
+    }
+
+    @if (MasaBlazor.Breakpoint.SmAndUp)
+    {
+        <div class="flex-1-1-auto d-flex justify-end">
+            @if (!string.IsNullOrEmpty(Project))
+            {
+                <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
+            }
+        </div>
+    }
+    else
+    {
+        @if (!string.IsNullOrEmpty(Project))
+        {
+            <Search @ref="_algoliaSearch" />
+        }
+    }
+
+    <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
+
+    @if (MasaBlazor.Breakpoint.SmAndUp)
+    {
+        <ToolIcons OnSettingsClick="OnSettingsClick" />
+    }
+    else
+    {
+        <MobileToolIcons OnDotClick="OnDotClick" />
+    }
+</div>
+
+@code {
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; } = null;
+
+    [Parameter]
+    public EventCallback<string> OnCultureChanged { get; set; }
+
+    private Search? _algoliaSearch;
+
+    public async Task OnCultureChangedLocal(string value)
+    {
+        await OnCultureChanged.InvokeAsync(value);
+        await _algoliaSearch!.InitDocSearchAsync();
+    }
+
+    [Parameter]
+    public EventCallback OnDotClick { get; set; }
+
+    [Parameter]
+    public EventCallback OnSettingsClick { get; set; }
+
+}

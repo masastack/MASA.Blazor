@@ -1,0 +1,94 @@
+﻿@using FluentValidation;
+
+<MForm Model="_orderDetail" EnableValidation EnableI18n>
+    <MTextField @bind-Value="_orderDetail.Title" Label="Title"></MTextField>
+    <MTextField @bind-Value="_orderDetail.Price" Label="Price" Type="number"></MTextField>
+    <MTextField @bind-Value="_orderDetail.Category.Name" Label="Name"></MTextField>
+    @foreach (var customer in _orderDetail.Customers)
+    {
+        <MCard Flat>
+            <MCardTitle>Customer:@customer.Id</MCardTitle>
+            <MCardText>
+                <MTextField @bind-Value="customer.Name" Label="Name"></MTextField>
+                <MTextField @bind-Value="customer.Age" Label="Age" Type="number"></MTextField>
+            </MCardText>
+        </MCard>
+    }
+    <MButton OnClick="() => SubmitOrder(context)" Color="success">Validate</MButton>
+</MForm>
+
+@code {
+
+    class OrderDetail
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public decimal Price { get; set; }
+
+        public Category Category { get; set; }
+
+        public List<Customer> Customers { get; set; }
+    }
+
+    class Customer
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+    }
+
+    class Category
+    {
+        public string Name { get; set; }
+    }
+
+    class OrderDetailValidator : AbstractValidator<OrderDetail>
+    {
+        public OrderDetailValidator()
+        {
+            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
+        }
+    }
+
+    class CustomerValidator : AbstractValidator<Customer>
+    {
+        public CustomerValidator()
+        {
+            RuleFor(o => o.Name).NotEmpty();
+        }
+    }
+
+    private OrderDetail _orderDetail = new()
+    {
+        Category = new Category(),
+        Customers = new List<Customer>
+        {
+            new()
+            {
+                Id = 1,
+                Name = "customer"
+            },
+            new()
+            {
+                Id = 1,
+                Name = "customer"
+            }
+        }
+    };
+
+    public void SubmitOrder(FormContext context)
+    {
+        if (context.Validate() && _orderDetail.Customers[0].Name == _orderDetail.Customers[1].Name)
+        {
+            var validationResult = @"Validation failed: 
+                    -- Customers[0].Name: 'Name' cannot be repeated. Severity: Error
+                    -- Customers[1].Name: 'Name' cannot be repeated. Severity: Error";
+            context.TryParseFormValidation(validationResult);
+        }
+    }
+
+}

@@ -1,0 +1,271 @@
+[
+  {
+    "title": "introduction",
+    "icon": "mdi-bookmark",
+    "items": [
+      "why-masa-blazor",
+      "roadmap"
+    ]
+  },
+  {
+    "title": "getting-started",
+    "icon": "mdi-flash",
+    "items": [
+      "installation",
+      "browser-support",
+      "frequently-asked-questions",
+      "wireframes",
+      "release-notes",
+      "upgrade-guide",
+      "contributing"
+    ]
+  },
+  {
+    "title": "features",
+    "icon": "mdi-image-edit",
+    "items": [
+      "breakpoints",
+      "icon-fonts",
+      "internationalization",
+      "theme"
+    ]
+  },
+  {
+    "title": "styles-and-animations",
+    "icon": "mdi-palette",
+    "items": [
+      "border-radius",
+      "color",
+      "display-helpers",
+      "elevation",
+      "flex",
+      "floats",
+      "overflow",
+      "spacing",
+      "text-and-typography",
+      "transitions"
+    ]
+  },
+  {
+    "title": "ui-components",
+    "icon": "mdi-layers-triple",
+    "group": "components",
+    "hidden": true,
+    "state": "new",
+    "items": [
+      {
+        "title": "all",
+        "hidden": false
+      },
+      "alerts",
+      {
+        "title": "application",
+        "state": "update"
+      },
+      "aspect-ratios",
+      "avatars",
+      "badges",
+      {
+        "title": "baidumaps",
+        "state": "new"
+      },
+      "banners",
+      {
+        "title": "bars",
+        "group": "components",
+        "items": [
+          "app-bars",
+          "toolbars",
+          "system-bars"
+        ]
+      },
+      "block-text",
+      "borders",
+      {
+        "title": "bottom-navigation",
+        "state": "update"
+      },
+      "bottom-sheets",
+      "breadcrumbs",
+      "buttons",
+      "cards",
+      "carousels",
+      "chips",
+      "copyable-text",
+      "cron",
+      {
+        "title": "defaults-providers",
+        "state": "new"
+      },
+      "dialogs",
+      "dividers",
+      "drag-zone",
+      "drawers",
+      {
+        "title": "echarts",
+        "state": "update"
+      },
+      "editors",
+      {
+        "title": "enqueued-snackbars",
+        "state": "new"
+      },
+      {
+        "title": "error-handler",
+        "state": "update"
+      },
+      "expansion-panels",
+      "floating-action-buttons",
+      "footers",
+      {
+        "title": "form-inputs-and-controls",
+        "group": "components",
+        "items": [
+          "autocompletes",
+          "cascaders",
+          {
+            "title": "checkboxes",
+            "state": "update"
+          },
+          "file-inputs",
+          "forms",
+          "otp-input",
+          "radios",
+          "range-sliders",
+          "selects",
+          "sliders",
+          {
+            "title": "switches",
+            "state": "update"
+          },
+          "textareas",
+          "text-fields"
+        ]
+      },
+      "grids",
+      {
+        "title": "gridstack",
+        "state": "new"
+      },
+      {
+        "title": "groups",
+        "group": "components",
+        "items": [
+          "button-groups",
+          "chip-groups",
+          "item-groups",
+          "list-item-groups",
+          "slide-groups",
+          "windows"
+        ]
+      },
+      "hover",
+      {
+        "title": "icons",
+        "state": "update"
+      },
+      {
+        "title": "i18ns",
+        "state": "new"
+      },
+      "image-captcha",
+      "images",
+      "infinite-scroll",
+      "lists",
+      "markdowns",
+      {
+        "title": "markdown-parsers",
+        "state": "new"
+      },
+      {
+        "title": "menus",
+        "state": "update"
+      },
+      {
+        "title": "mobiles",
+        "group": "components",
+        "items": [
+          "mobile-cascader",
+          "mobile-date-pickers",
+          "mobile-date-time-pickers",
+          "mobile-pickers",
+          "mobile-picker-views",
+          "mobile-time-pickers"
+        ]
+      },
+      "modals",
+      {
+        "title": "monaco-editor",
+        "state": "new"
+      },
+      "navigation-drawers",
+      "not-grouped",
+      "overlays",
+      {
+        "title": "page-tabs",
+        "state": "new"
+      },
+      "paginations",
+      {
+        "title": "pickers",
+        "group": "components",
+        "items": [
+          "date-pickers",
+          "date-pickers-month",
+          "time-pickers"
+        ]
+      },
+      {
+        "title": "popup-service",
+        "state": "update"
+      },
+      {
+        "title": "progress",
+        "group": "components",
+        "items": [
+          {
+            "title": "progress-circular",
+            "state": "update"
+          },
+          "progress-linear"
+        ]
+      },
+      "ratings",
+      "sheets",
+      "skeleton-loaders",
+      "snackbars",
+      "steppers",
+      "subheaders",
+      {
+        "title": "syntax-highlights",
+        "state": "new"
+      },
+      {
+        "title": "tables",
+        "group": "components",
+        "items": [
+          "data-iterators",
+          {
+            "title": "data-tables",
+            "state": "update"
+          },
+          "simple-tables"
+        ]
+      },
+      "tabs",
+      "timelines",
+      "tooltips",
+      "treeview",
+      "virtual-scroll"
+    ]
+  },
+  {
+    "title": "about",
+    "icon": "mdi-information",
+    "items": [
+      "meet-the-team",
+      "security-disclosure",
+      "code-of-conduct"
+    ]
+  }
+]

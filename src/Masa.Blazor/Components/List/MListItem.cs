@@ -40,7 +40,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool Ripple { get; set; }
 
-        private bool ComputedRipple => IsDirtyParameter<bool>(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
+        private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
         protected override void OnParametersSet()
         {
@@ -70,13 +70,7 @@ namespace Masa.Blazor
 
                             if (!Link) return false;
 
-                            if (Value == null) return false;
-
-                            if (ItemGroup == null) return false;
-
-                            if (ItemGroup.Multiple) return ItemGroup.Values.Contains(Value);
-
-                            return ItemGroup.Value == Value;
+                            return false;
                         })
                         .AddIf("m-list-item--highlighted", () => Highlighted)
                         .AddTextColor(Color)

@@ -1,0 +1,80 @@
+﻿@using BlazorComponent.Web;
+@layout BaseLayout
+@inherits LayoutComponentBase
+@implements IAsyncDisposable
+
+<NavDrawer Value="_showDrawer"
+           ValueChanged="OnNavDrawerValueChanged" />
+
+<MMain Class="masa">@Body</MMain>
+
+<Toc />
+
+<FabTransition>
+    <MButton Show="_showBackTop" Large Fab Class="bottom-btn transition-swing" Color="primary" OnClick="ToTopAsync">
+        <MIcon>mdi-chevron-up</MIcon>
+    </MButton>
+</FabTransition>
+
+@code {
+
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
+
+    [Inject]
+    public IJSRuntime Js { get; set; } = null!;
+
+    private bool _showDrawer;
+    private bool _showBackTop;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showDrawer = val; });
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        BaseLayout.ShowAppBarNavIcon();
+
+        if (firstRender)
+        {
+            await Js.AddHtmlElementEventListener("window", "scroll", OnScroll, false, new EventListenerExtras(0, 100));
+        }
+    }
+
+    private void OnNavDrawerValueChanged(bool val)
+    {
+        _showDrawer = val;
+        BaseLayout.ShowDrawer = val;
+    }
+
+    private async Task OnScroll()
+    {
+        var window = await Js.InvokeAsync<Window>(JsInteropConstants.GetWindow);
+        var top = window.PageYOffset;
+
+        _showBackTop = top > 300;
+    }
+
+    private async Task ToTopAsync()
+    {
+        await Js.InvokeVoidAsync("backTop");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await Js.RemoveHtmlElementEventListener("window", "scroll");
+        }
+        catch (Exception e)
+        {
+            // ignored
+        }
+    }
+
+}

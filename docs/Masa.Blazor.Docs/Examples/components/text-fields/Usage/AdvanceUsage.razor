@@ -1,0 +1,44 @@
+﻿@namespace Masa.Blazor.Docs.Examples.components.text_fields
+
+<MTextField @bind-Value="_value"
+            Label="Label"
+            Filled="Filled"
+            Solo="Solo"
+            Outlined="Outlined"
+            PrependIcon="@PrependIcon"
+            Clearable="Clearable">
+</MTextField>
+
+@code {
+
+    [Parameter]
+    public bool Filled { get; set; }
+
+    [Parameter]
+    public bool Solo { get; set; }
+
+    [Parameter]
+    public bool Outlined { get; set; }
+
+    [Parameter]
+    public string? PrependIcon { get; set; }
+
+    [Parameter]
+    public bool Clearable
+    {
+        get => _clearable;
+        set
+        {
+            if (_clearable != value && value)
+            {
+                _value ??= "Hover to Clear me";
+            }
+
+            _clearable = value;
+        }
+    }
+
+    private string? _value;
+    private bool _clearable;
+
+}

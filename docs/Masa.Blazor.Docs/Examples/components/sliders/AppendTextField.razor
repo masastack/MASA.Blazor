@@ -1,0 +1,69 @@
+﻿<MCard Class="slider-append-textfield">
+    <MResponsive Style="@($"background: rgb({_red}, {_green}, {_blue})")"
+                 Height="@("300px")">
+    </MResponsive>
+
+    <MCardText>
+        <MContainer Fluid>
+            <MRow>
+                <MCol Cols="12">
+                    <MSlider @bind-Value="_red"
+                             Max="255"
+                             Label="R"
+                             Class="align-center">
+                        <AppendContent>
+                            <MTextField @bind-Value="_red"
+                                        Class="mt-0 pt-0"
+                                        Type="number"
+                                        Style="width: 60px">
+                            </MTextField>
+                        </AppendContent>
+                    </MSlider>
+                </MCol>
+
+                <MCol Cols="12">
+                    <MSlider @bind-Value="_green"
+                             Max="255"
+                             Label="G"
+                             Class="align-center">
+                        <AppendContent>
+                            <MTextField @bind-Value="_green"
+                                        Class="mt-0 pt-0"
+                                        Type="number"
+                                        Style="width: 60px">
+                            </MTextField>
+                        </AppendContent>
+                    </MSlider>
+                </MCol>
+
+                <MCol Cols="12">
+                    <MSlider @bind-Value="_blue"
+                             Max="255"
+                             Label="B"
+                             Class="align-center">
+                        <AppendContent>
+                            <MTextField @bind-Value="_blue"
+                                        Class="mt-0 pt-0"
+                                        Type="number"
+                                        Style="width: 60px">
+                            </MTextField>
+                        </AppendContent>
+                    </MSlider>
+                </MCol>
+            </MRow>
+        </MContainer>
+    </MCardText>
+</MCard>
+
+<style>
+    .slider-append-textfield {
+        width: 400px;
+        margin: auto;
+    }
+</style>
+
+@code {
+    private double _red = 64;
+    private double _green = 128;
+    private double _blue = 0;
+}

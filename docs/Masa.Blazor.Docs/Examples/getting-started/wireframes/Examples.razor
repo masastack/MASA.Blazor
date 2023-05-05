@@ -1,0 +1,35 @@
+﻿@attribute [JSCustomElement("wireframe-examples")]
+
+<MRow>
+    @foreach (var name in _wireframes)
+    {
+        <MCol Cols="12" Md="6" Lg="4">
+            <a class="text-dec-none" target="_blank" href="@($"{Navigation.BaseUri}examples/wireframes/{name.ToKebab()}")">
+                <AppFigure alt="@($"{name} layout")"
+                           AspectRatio="@(16/9d)"
+                           Name="@name"
+                           Outlined
+                           Src="@($"https://cdn.masastack.com/stack/doc/blazor/wireframes/{name.ToKebab()}.svg")">
+                </AppFigure>
+            </a>
+        </MCol>
+    }
+</MRow>
+
+
+@code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    List<string> _wireframes = new()
+    {
+        "Base",
+        "ExtendedToolbar",
+        "SystemBar",
+        "Inbox",
+        "Constrained",
+        "SideNavigation",
+        "ThreeColumn",
+        "Discord"
+    };
+}

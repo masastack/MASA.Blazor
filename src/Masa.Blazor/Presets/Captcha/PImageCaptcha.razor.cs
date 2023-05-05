@@ -27,7 +27,7 @@ namespace Masa.Blazor.Presets
         public bool Clearable { get; set; }
 
         [Parameter]
-        public string ClearIcon { get; set; } = "mdi-close";
+        public string ClearIcon { get; set; } = "$clear";
 
         [Parameter]
         public bool Dark { get; set; }

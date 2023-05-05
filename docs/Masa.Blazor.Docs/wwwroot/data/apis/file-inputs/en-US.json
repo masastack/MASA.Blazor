@@ -1,0 +1,12 @@
+{
+  "props": {
+    "accept": "Html input accept prop",
+    "hideInput": "Display the icon only without the input (file names)",
+    "showSize": "Sets the displayed size of selected file(s). When using **true** will default to 1000 displaying (**kB**, **MB**, **GB**) while 1024 will display (**KiB**, **MiB**, **GiB**).",
+    "truncateLength": "The length of a filename before it is truncated with ellipsis"
+  },
+  "events": {   
+  },
+  "contents": {
+  }
+}

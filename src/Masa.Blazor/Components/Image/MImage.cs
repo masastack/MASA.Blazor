@@ -30,6 +30,8 @@ namespace Masa.Blazor
         private bool IsError { get; set; } = false;
 
         private StringNumber CalculatedLazySrcAspectRatio { get; set; }
+        
+        private Dimensions Dimensions { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -133,7 +135,7 @@ namespace Masa.Blazor
                 stringBuilder.Append($"linear-gradient({Gradient}),");
             }
 
-            stringBuilder.Append($"url({url})");
+            stringBuilder.Append($"url(\"{url}\")");
             return stringBuilder.ToString();
         }
 

@@ -1,0 +1,24 @@
+﻿@namespace Masa.Blazor.Docs.Examples.components.system_bars
+@inherits Masa.Blazor.MSystemBar
+
+<MRow Align="AlignTypes.Center"
+      Justify="JustifyTypes.Center">
+    <MContainer Fluid>
+        <MCard Height="200"
+               Class="mb-6"
+               Img="https://cdn.masastack.com/stack/images/website/masa-blazor/home/masa_layout1.svg">
+            <MSystemBar Color="@Color"
+                        Height="Height"
+                        Window="Window"
+                        LightsOut="LightsOut">
+                <MIcon>mdi-gmail</MIcon>
+                <span>10 unread emails</span>
+                <MSpacer></MSpacer>
+                <MIcon>mdi-wifi-strength-4</MIcon>
+                <MIcon>mdi-signal-cellular-outline</MIcon>
+                <MIcon>mdi-battery</MIcon>
+                <span>12:30</span>
+            </MSystemBar>
+        </MCard>
+    </MContainer>
+</MRow>

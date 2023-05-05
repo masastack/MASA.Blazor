@@ -1,0 +1,26 @@
+﻿@using Masa.Blazor.Presets
+
+<div class="text-center">
+    <PEnqueuedSnackbars @ref="_enqueuedSnackbars"></PEnqueuedSnackbars>
+
+    <MButton Color="info" Outlined OnClick="() => Enqueue(AlertTypes.Info)">Info</MButton>
+    <MButton Color="warning" Outlined OnClick="() => Enqueue(AlertTypes.Warning)">Warning</MButton>
+    <MButton Color="success" Outlined OnClick="() => Enqueue(AlertTypes.Success)">Success</MButton>
+    <MButton Color="error" Outlined OnClick="() => Enqueue(AlertTypes.Error)">Error</MButton>
+</div>
+
+@code {
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    private void Enqueue(AlertTypes type)
+    {
+        _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
+        {
+            Content = $"{type} snackbar!",
+            Type = type,
+            Closeable = true
+        });
+    }
+
+}

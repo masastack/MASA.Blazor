@@ -1,0 +1,30 @@
+﻿<MBaiduMap Height="400"
+           DarkThemeId="9828881e7efb0182edb48236a3b53293"
+           EnableScrollWheelZoom
+           Style="width:90%; left:5%"
+           MaxZoom="15" MinZoom="8"
+           @bind-Zoom="_zoom"
+           @bind-Center="_center" />
+
+<MRow Align="@AlignTypes.Center" Justify="@JustifyTypes.SpaceAround" Style="margin: 18px auto">
+
+    <MButton Color="primary" OnClick="@ZoomIn">Zoom In</MButton>
+
+    <MButton Color="primary" OnClick="@ZoomOut">Zoom Out</MButton>
+
+    <MButton Color="primary" OnClick="@GoToBeijing">Go To Beijing</MButton>
+
+</MRow>
+
+@code
+{
+    private GeoPoint _center;
+
+    private float _zoom = 10;
+
+    private void ZoomIn() => _zoom += 1;
+
+    private void ZoomOut() => _zoom -= 1;
+
+    private void GoToBeijing() => _center = new(116.403f, 39.917f);
+}

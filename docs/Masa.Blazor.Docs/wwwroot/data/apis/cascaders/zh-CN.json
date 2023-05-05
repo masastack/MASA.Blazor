@@ -1,0 +1,16 @@
+{
+  "props": {
+    "changeOnSelect": "",
+    "itemChildren": "",
+    "items": "",
+    "loadChildren": "",
+    "persistentPlaceholder": "",
+    "showAllLevels": "",
+    "textColor": "",
+    "validateOnBlur": ""
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

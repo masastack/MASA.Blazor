@@ -1,7 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    //TODO:该组件需要完善
-    public partial class MRadioGroup<TValue> : MInput<TValue>
+    public class MRadioGroup<TValue> : MInput<TValue>, IRadioGroup<TValue>
     {
         [Parameter]
         public bool Column { get; set; } = true;
@@ -12,7 +11,13 @@
         [Parameter]
         public bool Row { get; set; }
 
-        protected List<MRadio<TValue>> Items { get; set; } = new();
+        private List<IRadio<TValue>> Items { get; } = new();
+
+        protected override void OnValueChanged(TValue val)
+        {
+            base.OnValueChanged(val);
+            _ = Toggle(val);
+        }
 
         protected override void SetComponentClass()
         {
@@ -38,67 +43,39 @@
                 .Merge(typeof(BInputDefaultSlot<,>), typeof(BRadioGroupDefaultSlot<TValue>));
         }
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-            SetActiveRadio();
-        }
-
-        private void SetActiveRadio()
-        {
-            // if no value provided and mandatory
-            // assign first item
-            if (InternalValue == null)
-            {
-                if (!Mandatory) return;
-
-                var item = Items.FirstOrDefault(item => !item.Disabled);
-                if (item == null) return;
-
-                _ = UpdateItemsState(item);
-
-                return;
-            }
-
-            foreach (var radio in Items)
-            {
-                if (EqualityComparer<TValue>.Default.Equals(radio.Value, InternalValue))
-                {
-                    radio.Active();
-                }
-                else
-                {
-                    radio.DeActive();
-                }
-            }
-        }
-
-        public void AddRadio(MRadio<TValue> radio)
+        public void AddRadio(IRadio<TValue> radio)
         {
             if (!Items.Contains(radio))
             {
                 Items.Add(radio);
-                radio.NotifyChange += UpdateItemsState;
             }
 
-            SetActiveRadio();
+            if (Mandatory && Value == null)
+            {
+                Value = radio.Value;
+                ValueChanged.InvokeAsync(radio.Value);
+            }
+
+            RefreshItemsState();
         }
 
-        public async Task UpdateItemsState(BRadio<TValue> radio)
+        private void RefreshItemsState()
         {
-            foreach (var item in Items)
+            Items.ForEach(item => item.RefreshState());
+        }
+
+        public async Task Toggle(TValue value)
+        {
+            if (ValueChanged.HasDelegate)
             {
-                if (item == radio)
-                {
-                    item.Active();
-                }
-                else
-                {
-                    item.DeActive();
-                }
+                await ValueChanged.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
             }
 
-            InternalValue = radio.Value;
+            NextTick(RefreshItemsState);
         }
     }
 }

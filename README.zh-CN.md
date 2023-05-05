@@ -10,8 +10,8 @@
 
 一套基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库
 
-[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
-[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
+[![.NET](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 
@@ -21,7 +21,7 @@
 
 ## MASA Blazor是什么？
 
-基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，最大的减少开发者的时间成本。缩短开发周期提高开发效率。并提供一套Web解决方案示例 - [MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) 有多种常见场景和预设布局等精彩内容。
+基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，最大的减少开发者的时间成本。缩短开发周期提高开发效率。并提供一套Web解决方案示例 - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) 有多种常见场景和预设布局等精彩内容。
 
 ## 为什么选择MASA Blazor？
 
@@ -31,7 +31,7 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 
 - 丰富组件：包含Vuetify 1:1还原的基础组件，以及很多实用的预置组件和.Net深度集成功能，包括Url、面包屑、导航三联动，高级搜索，i18n等
 - UI设计语言：设计风格现代，UI 多端体验设计优秀
-- 专业示例：[MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) 提供多种常见场景的预设布局
+- 专业示例：[MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) 提供多种常见场景的预设布局
 - 简易上手：丰富详细的上手文档，免费的视频教程（制作中）
 - 社区活跃鼓励：用户参与实时互动，做出贡献加入我们，构建最开放的开源社区
 - 长期支持：全职团队维护，长期提供支持，并提供企业级支持
@@ -108,7 +108,7 @@ services.AddMasaBlazor();
         <!--Style-->
         <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
         <!--Font-->
-        <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
         <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
         <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
     </head>
@@ -176,8 +176,8 @@ dotnet run
 
 ## 相关项目
 
-- [BlazorComponent（无样式的底层组件框架）](https://github.com/BlazorComponent/BlazorComponent)
-- [MASA Blazor Pro（包含各种业务场景的示例）](https://github.com/BlazorComponent/Masa.Blazor.Pro)
+- [BlazorComponent（无样式的底层组件框架）](https://github.com/masastack/BlazorComponent)
+- [MASA Blazor Pro（包含各种业务场景的示例）](https://github.com/masastack/Masa.Blazor.Pro)
 
 ## 浏览器支持
 
@@ -211,13 +211,13 @@ dotnet run
 3. Commit with commit message, like `feat:add MButton`
 4. Create Pull Request
 
-如果你希望参与贡献，欢迎 [Pull Request](https://github.com/BlazorComponent/Masa.Blazor/pulls)，或给我们 [报告 Bug](https://github.com/BlazorComponent/Masa.Blazor/issues/new) 。
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/masastack/Masa.Blazor/pulls)，或给我们 [报告 Bug](https://github.com/masastack/Masa.Blazor/issues/new) 。
 
 ## 贡献者
 
 感谢所有为本项目做出过贡献的朋友。
 
-<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors">
+<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
 </a>
 
@@ -237,6 +237,6 @@ dotnet run
 
 ## 许可声明
 
-[![Masa.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
+[![Masa.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
 
 Copyright (c) 2021-present Masa.Blazor

@@ -1,0 +1,45 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+@inject IJSRuntime Js
+@inject I18n I18n
+
+<div id="docsearch" style="@Style" class="@Class"></div>
+
+@code {
+
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; } = null!;
+
+    [Parameter]
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public string? Style { get; set; } = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitDocSearchAsync();
+        }
+    }
+
+    public async ValueTask InitDocSearchAsync()
+    {
+        try
+        {
+            if (Project is null) return;
+            var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
+            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
+            await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+}

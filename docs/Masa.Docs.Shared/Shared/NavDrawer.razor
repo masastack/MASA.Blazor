@@ -1,0 +1,61 @@
+﻿@inject DocService DocService
+@inject MasaBlazor MasaBlazor
+@inherits NextTickComponentBase
+@implements INavDrawer
+
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Id="@ElementId"
+                   Right="RTL"
+                   App
+                   Floating
+                   Width="300"
+                   Clipped>
+    <CascadingValue Value="this" IsFixed>
+        <DefaultList Class="doc-list-nav"
+                     Routable
+                     Items="Navs" />
+    </CascadingValue>
+    <div class="pt-12"></div>
+</MNavigationDrawer>
+
+@code {
+
+    [Parameter]
+    public bool RTL { get; set; }
+
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; } = null!;
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    private string? _lastProject;
+    private List<NavItem> Navs { get; set; } = new();
+
+    public string ElementId => "nav-drawer";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_lastProject != Project)
+        {
+            _lastProject = Project;
+            if (Project is null)
+            {
+                Navs = new();
+                return;
+            }
+
+            Navs = await DocService.ReadNavsAsync(Project);
+        }
+    }
+
+}

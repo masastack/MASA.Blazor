@@ -8,6 +8,12 @@ namespace Masa.Blazor
         public bool Disabled { get; set; }
 
         [Parameter]
+        public OneOf<DateOnly[], Func<DateOnly, bool>>? Events { get; set; }
+
+        [Parameter]
+        public OneOf<string, Func<DateOnly, string>, Func<DateOnly, string[]>>? EventColor { get; set; }
+
+        [Parameter]
         public Func<DateOnly, bool> AllowedDates { get; set; }
 
         [Parameter]
@@ -41,7 +47,7 @@ namespace Masa.Blazor
         public EventCallback<DateOnly> OnInput { get; set; }
 
         [Parameter]
-        public string Locale { get; set; }
+        public CultureInfo Locale { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
@@ -126,11 +132,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
-
-            Watcher
+            base.RegisterWatchers(watcher);
+            
+            watcher
                 .Watch<DateOnly>(nameof(TableDate), (newVal, oldVal) =>
                 {
                     IsReversing = newVal < oldVal;

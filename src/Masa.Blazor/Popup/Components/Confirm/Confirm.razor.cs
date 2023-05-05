@@ -32,23 +32,15 @@ public partial class Confirm : AlertingPopupComponentBase
     [Parameter] public string? TitleStyle { get; set; }
 
     private bool _okLoading;
-    private ConfirmParameters? _defaultParameters;
 
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
+    protected override string ComponentName => PopupComponents.CONFIRM;
+
     protected override void OnParametersSet()
     {
-        if (_defaultParameters is null && MApp?.ConfirmParameters is not null)
-        {
-            _defaultParameters = new ConfirmParameters();
-
-            MApp.ConfirmParameters.Invoke(_defaultParameters);
-        }
-
-        _defaultParameters?.MapTo(this);
-
         base.OnParametersSet();
 
         OkText ??= I18n.T("$masaBlazor.ok");
@@ -69,7 +61,7 @@ public partial class Confirm : AlertingPopupComponentBase
     private Task HandleOnCancel()
     {
         Visible = false;
-        return SetResult(false);
+        return ClosePopupAsync(false);
     }
 
     private async Task HandleOnOk()
@@ -86,16 +78,7 @@ public partial class Confirm : AlertingPopupComponentBase
         if (args.IsCanceled is false)
         {
             Visible = false;
-            await SetResult(true);
-        }
-    }
-
-    private async Task SetResult(bool value)
-    {
-        if (PopupItem is not null)
-        {
-            await Task.Delay(256);
-            PopupItem.Discard(value);
+            await ClosePopupAsync(true);
         }
     }
 

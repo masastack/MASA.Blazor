@@ -22,7 +22,10 @@
         <MRadio @key="CronTypes.Range" Value="CronTypes.Range">
             <LabelContent>
                 <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
-                    @I18n.T($"$masaBlazor.cron.range.from") <MTextField Value="_periodStart" HideDetails="true" Outlined Dense ValueChanged="OnPeriodStartChanged" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _periodEnd; }" TValue="int?"></MTextField> @I18n.T("$masaBlazor.cron.range.to") <MTextField Value="_periodEnd" TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min= _periodStart; prop.Max = _maxUnit; }" Dense Outlined HideDetails="true" ValueChanged="OnPeriodEndChanged"></MTextField> @_i18nUnitText
+                    @I18n.T($"$masaBlazor.cron.range.from")
+                    <MTextField Value="_cronItemData.PeriodStart" HideDetails="true" Outlined Dense ValueChanged="OnPeriodStartChanged" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _cronItemData.PeriodEnd; }" TValue="int?"></MTextField> 
+                    @I18n.T("$masaBlazor.cron.range.to") 
+                    <MTextField Value="_cronItemData.PeriodEnd" TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min= _cronItemData.PeriodStart; prop.Max = _maxUnit; }" Dense Outlined HideDetails="true" ValueChanged="OnPeriodEndChanged"></MTextField> @_i18nUnitText
                 </div>
             </LabelContent>
         </MRadio>
@@ -31,17 +34,20 @@
             <MRadio @key="CronTypes.StartFrom" Value="CronTypes.StartFrom">
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
-                        @I18n.T($"$masaBlazor.cron.startFrom.from") <MTextField Value="_startFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnStartFromPeriodChange"></MTextField> @string.Format(I18n.T("$masaBlazor.cron.startFrom.middle"), _i18nUnitText) <MTextField Value="_startEveryPeriod" Dense Outlined HideDetails="true" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" TValue="int" ValueChanged="OnStartEveryPeriod"></MTextField> @string.Format(I18n.T("$masaBlazor.cron.startFrom.end"), _i18nUnitText)
+                        @I18n.T($"$masaBlazor.cron.startFrom.from") 
+                        <MTextField Value="_cronItemData.StartFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnStartFromPeriodChange"></MTextField> @string.Format(I18n.T("$masaBlazor.cron.startFrom.middle"), _i18nUnitText)
+                        <MTextField Value="_cronItemData.StartEveryPeriod" Dense Outlined HideDetails="true" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" TValue="int" ValueChanged="OnStartEveryPeriod"></MTextField> 
+                        @string.Format(I18n.T("$masaBlazor.cron.startFrom.end"), _i18nUnitText)
                     </div>
                 </LabelContent>
-            </MRadio>
-
+             </MRadio>
             if (Period == PeriodTypes.Day)
             {
                 <MRadio @key="CronTypes.NearestDay" Value="CronTypes.NearestDay">
                     <LabelContent>
                         <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
-                            @I18n.T($"$masaBlazor.cron.nearestDayStart") <MTextField Value="_nearestOfDay" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnNearestOfDayChanged"></MTextField> @I18n.T($"$masaBlazor.cron.nearestDayEnd")
+                            @I18n.T($"$masaBlazor.cron.nearestDayStart")
+                            <MTextField Value="_cronItemData.NearestOfDay" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnNearestOfDayChanged"></MTextField> @I18n.T($"$masaBlazor.cron.nearestDayEnd")
                         </div>
                     </LabelContent>
                 </MRadio>
@@ -60,15 +66,18 @@
             <MRadio @key="CronTypes.WeekStartFrom" Value="CronTypes.WeekStartFrom">
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
-                        @I18n.T($"$masaBlazor.cron.weekStartFrom.from") <MSelect Value="_selectWeekNumber" Items="_weekNumbers" TItem="WeekNumbers" TItemValue="WeekNumbers" TValue="WeekNumbers" ItemText="i=> GetWeekNumberI18nString(i)" ItemValue="i=> i" ValueChanged="OnWeekNumberChanged" Outlined Dense HideDetails="true"></MSelect>  @string.Format(I18n.T("$masaBlazor.cron.weekStartFrom.middle"), _i18nUnitText) <MSelect Value="_selectDayOfWeek" Items="_dayOfWeeks" TItem="DayOfWeek" TItemValue="DayOfWeek" TValue="DayOfWeek" ItemText="i=> GetDayOfWeekI18nString(i)" ItemValue="i=> i" ValueChanged="OnDayOfWeekChanged" Outlined Dense HideDetails="true"></MSelect>  @I18n.T($"$masaBlazor.cron.weekStartFrom.end")
+                        @I18n.T($"$masaBlazor.cron.weekStartFrom.from")
+                        <MSelect Value="_cronItemData.SelectWeekNumber" Items="_weekNumbers" TItem="WeekNumbers" TItemValue="WeekNumbers" TValue="WeekNumbers" ItemText="i=> GetWeekNumberI18nString(i)" ItemValue="i=> i" ValueChanged="OnWeekNumberChanged" Outlined Dense HideDetails="true">
+                        </MSelect>  @string.Format(I18n.T("$masaBlazor.cron.weekStartFrom.middle"), _i18nUnitText)
+                        <MSelect Value="_cronItemData.SelectDayOfWeek" Items="_dayOfWeeks" TItem="DayOfWeek" TItemValue="DayOfWeek" TValue="DayOfWeek" ItemText="i=> GetDayOfWeekI18nString(i)" ItemValue="i=> i" ValueChanged="OnDayOfWeekChanged" Outlined Dense HideDetails="true"></MSelect>  @I18n.T($"$masaBlazor.cron.weekStartFrom.end")
                     </div>
                 </LabelContent>
             </MRadio>
-
             <MRadio @key="CronTypes.LastOfPeriod" Value="CronTypes.LastOfPeriod">
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
-                        @I18n.T($"$masaBlazor.cron.lastOfPeriod.week") <MTextField Value="_startFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnLastPeriodOfWeekChanged"></MTextField>
+                        @I18n.T($"$masaBlazor.cron.lastOfPeriod.week")
+                        <MTextField Value="_cronItemData.StartFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnLastPeriodOfWeekChanged"></MTextField>
                     </div>
                 </LabelContent>
             </MRadio>
@@ -80,7 +89,7 @@
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
                         @I18n.T("$masaBlazor.cron.specify")
-                        <MSelect Value="@_specifyPeriods" TValue="List<int>" TItem="int" TItemValue="int" ValueChanged="OnSpecifyPeriodChanged"
+                        <MSelect Value="@_cronItemData.SpecifyPeriods" TValue="List<int>" TItem="int" TItemValue="int" ValueChanged="OnSpecifyPeriodChanged"
                              Items="@_allPeriodList"
                              Outlined
                              HideDetails="true"

@@ -1,0 +1,178 @@
+﻿@page "/"
+@inject HttpClient HttpClient
+@inject TryJSModule TryJSModule
+@inject IPopupService PopupService
+@inherits NextTickComponentBase
+
+<MApp Class="default-app default-background">
+    <MNavigationDrawer App
+                       Class="px-2 py-6"
+                       Color="white"
+                       MiniVariant
+                       Permanent
+                       Floating
+                       MiniVariantWidth="64">
+        <MImage Src="https://blazor-pro.masastack.com/img/mainLayout/logo.svg"
+                Width="42"
+                Height="42"
+                Style="margin-left: 3px">
+        </MImage>
+
+        <MDivider Class="my-6"></MDivider>
+
+        <MTooltip Right>
+            <ActivatorContent>
+                <MButton Icon OnClick="RunCode" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-play</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                Ctrl + S
+            </ChildContent>
+        </MTooltip>
+
+        <MTooltip Right>
+            <ActivatorContent>
+                <MButton Icon OnClick="()=>_settingModalOpened=true" XLarge @attributes="@context.Attrs">
+                    <MIcon>mdi-cog</MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                Settings
+            </ChildContent>
+        </MTooltip>
+
+        @*Settings Modal*@
+        <PModal @bind-Value="_settingModalOpened"
+                Title="Settings"
+                Width="500">
+            <MCard Class="mx-auto"
+                   MaxWidth="500">
+                <MRow Class="ml-0">
+                    <MCol Cols="1">
+                        <MButton Icon Color="primary"
+                                 OnClick="()=>_addScriptModalOpened=true">
+                            <MIcon>mdi-plus</MIcon>
+                        </MButton>
+                    </MCol>
+                </MRow>
+
+                <MList TwoLine>
+                    <MListItemGroup>
+                        @foreach (var item in _customScriptNodes)
+                        {
+                            <MListItem ActiveClass="deep-purple--text text--accent-4">
+                                <ItemContent>
+                                    <MListItemAvatar>
+                                        @if (item.NodeType is ScriptNodeType.Css)
+                                        {
+                                            <MIcon Color="blue darken-1">mdi-language-css3</MIcon>
+                                        }
+                                        else
+                                        {
+                                            <MIcon Color="orange lighten-1">mdi-language-javascript</MIcon>
+                                        }
+                                    </MListItemAvatar>
+
+                                    <MListItemContent>
+                                        <MListItemTitle>@item.Content</MListItemTitle>
+                                    </MListItemContent>
+
+                                </ItemContent>
+                            </MListItem>
+                        }
+                    </MListItemGroup>
+                </MList>
+            </MCard>
+        </PModal>
+
+        @*Add Script Reference Modal*@
+        <PModal @bind-Value="_addScriptModalOpened"
+                OnSave="async()=>await AddScriptReferenceAsync()"
+                OnCancel="async()=>{_addScriptModalOpened=false; ClearInputs();}"
+                Title="Add Script Reference"
+                Width="500"
+                Height="500">
+            <MTextarea Outlined
+                        @bind-Value="_newScriptContent"
+                        Label="Script Content"
+                        PrependInnerIcon="mdi-pen"
+                        Style="font-size:small"/>
+        </PModal>
+
+        <MButton Class="github" Href="@REPOSITORY_URL" Target="_blank" Icon XLarge>
+            <MIcon>mdi-github</MIcon>
+        </MButton>
+    </MNavigationDrawer>
+
+    <MMain>
+        <div id="code">
+            <MTabs @bind-Value="_tabStringNumber"
+                   HideSlider
+                   ActiveClass="active-tab">
+                @foreach (var item in _tabMonacoList)
+                {
+                    <MTab Class="text-none">
+                        <span>@item.Name</span>
+                    </MTab>
+                }
+            </MTabs>
+            <MTabsItems Class="editor-group default-background" Value="_tabStringNumber">
+                @foreach (var item in _tabMonacoList)
+                {
+                    <MTabItem Style="height:100%">
+                        <MMonacoEditor InitCompleteHandle="async() =>await InitCompleteHandle(item)"
+                                       Class="custom-editor"
+                                       EditorOptions="@item.Options"
+                                       @ref="item.MonacoEditor">
+                        </MMonacoEditor>
+                    </MTabItem>
+                }
+            </MTabsItems>
+        </div>
+
+        <div id="splitter"></div>
+
+        <div id="render">
+            @if (_componentType != null)
+            {
+                <DynamicComponent Type="@_componentType" />
+            }
+        </div>
+    </MMain>
+
+    <MOverlay Value="_load" ZIndex="7">
+        <div class="white--text text-h3">
+            Loading, just a moment...
+        </div>
+    </MOverlay>
+</MApp>
+
+<style>
+    /* Hide the default scroll bar */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    /* Customize the scrollbar style */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    /* Scroll bar track */
+    ::-webkit-scrollbar-track {
+        background-color: #f5f5f5;
+    }
+    /* Scroll bar slider */
+    ::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 5px;
+    }
+        /* Scroll bar slider hover state */
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
+        }
+    /* Scroll bar corner */
+    ::-webkit-scrollbar-corner {
+        background-color: #f5f5f5;
+    }
+</style>

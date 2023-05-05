@@ -14,10 +14,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
             set
             {
                 _value = value;
@@ -88,7 +85,8 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ActionContent { get; set; }
 
-
+        private const string ROOT_CSS = "m-snack";
+        internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         protected override void OnParametersSet()
         {
@@ -99,23 +97,23 @@ namespace Masa.Blazor
 
         protected override void SetComponentClass()
         {
-            var prefix = "m-snack";
+            var rootCss = ROOT_CSS;
             CssProvider
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add(prefix)
-                        .AddIf($"{prefix}--absolute", () => Absolute)
-                        .AddIf($"{prefix}--active", () => Value)
-                        .AddIf($"{prefix}--bottom", () => Bottom || !Top)
-                        .AddIf($"{prefix}--centered", () => Centered)
-                        .AddIf($"{prefix}--has-background", () => !Text && !Outlined)
-                        .AddIf($"{prefix}--left", () => Left)
-                        .AddIf($"{prefix}--multi-line", () => MultiLine && !Vertical)
-                        .AddIf($"{prefix}--right", () => Right)
-                        .AddIf($"{prefix}--text", () => Text)
-                        .AddIf($"{prefix}--top", () => Top)
-                        .AddIf($"{prefix}--vertical", () => Vertical);
+                        .Add(rootCss)
+                        .AddIf($"{rootCss}--absolute", () => Absolute)
+                        .AddIf($"{rootCss}--active", () => Value)
+                        .AddIf($"{rootCss}--bottom", () => Bottom || !Top)
+                        .AddIf($"{rootCss}--centered", () => Centered)
+                        .AddIf($"{rootCss}--has-background", () => !Text && !Outlined)
+                        .AddIf($"{rootCss}--left", () => Left)
+                        .AddIf($"{rootCss}--multi-line", () => MultiLine && !Vertical)
+                        .AddIf($"{rootCss}--right", () => Right)
+                        .AddIf($"{rootCss}--text", () => Text)
+                        .AddIf($"{rootCss}--top", () => Top)
+                        .AddIf($"{rootCss}--vertical", () => Vertical);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -125,7 +123,7 @@ namespace Masa.Blazor
                 .Apply("wrap", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__wrapper")
+                        .Add($"{rootCss}__wrapper")
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
                         .AddIf("m-sheet--shaped", () => Shaped)
@@ -134,7 +132,7 @@ namespace Masa.Blazor
                         .AddRounded(Rounded, Tile)
                         .AddElevation(Elevation)
                         .AddTheme(IsDark);
-                }, styleBuilder=>
+                }, styleBuilder =>
                 {
                     styleBuilder.AddBackgroundColor(Color);
                     styleBuilder.AddTextColor(Color, () => Text || Outlined);
@@ -142,12 +140,13 @@ namespace Masa.Blazor
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__content");
+                        .Add($"{rootCss}__content")
+                        .Add(ContentClass);
                 })
                 .Apply("action", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__action");
+                        .Add($"{rootCss}__action");
                 });
 
             AbstractProvider
@@ -164,6 +163,7 @@ namespace Masa.Blazor
                         {
                             await ValueChanged.InvokeAsync(_value);
                         }
+
                         if (OnClosed.HasDelegate)
                         {
                             await OnClosed.InvokeAsync();
@@ -179,6 +179,7 @@ namespace Masa.Blazor
             {
                 InvokeAsync(() => ValueChanged.InvokeAsync(_value));
             }
+
             if (OnClosed.HasDelegate)
             {
                 InvokeAsync(() => OnClosed.InvokeAsync());

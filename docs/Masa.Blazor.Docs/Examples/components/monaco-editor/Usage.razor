@@ -1,0 +1,13 @@
+<div style="height: 500px">
+    <MMonacoEditor Height="@("100%")" EditorOptions="Options"></MMonacoEditor>
+</div>
+
+@code{
+    private object Options = new
+    {
+        value = "console.log('Hello World!');",
+        language = "javascript",
+        theme = "vs-dark",
+        automaticLayout = true,
+    };
+}

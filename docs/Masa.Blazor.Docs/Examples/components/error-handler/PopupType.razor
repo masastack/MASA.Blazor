@@ -1,0 +1,40 @@
+﻿<MErrorHandler PopupType="@_errorPopupType" @ref="_errorHandler">
+    <MRadioGroup @bind-Value="_errorPopupType" HideDetails="true" Row>
+        <MRadio Value="ErrorPopupType.Snackbar" Label="Snackbar"></MRadio>
+        <MRadio Value="ErrorPopupType.None" Label="None"></MRadio>
+    </MRadioGroup>
+    <MDivider Class="my-2"></MDivider>
+    <MButton OnClick="OnClick">Throw exception</MButton>
+</MErrorHandler>
+
+@if (_isErrorContent)
+{
+    <div class="mt-2 text-center">
+        <MButton Color="primary" OnClick="Reset">Reset</MButton>
+    </div>
+}
+
+@code
+{
+    private bool _isErrorContent;
+    private ErrorPopupType _errorPopupType = ErrorPopupType.Snackbar;
+    private MErrorHandler? _errorHandler;
+
+    private void OnClick()
+    {
+        if (_errorPopupType == ErrorPopupType.None)
+        {
+            _isErrorContent = true;
+            StateHasChanged();
+        }
+
+        throw new Exception("An error was caught by MErrorHandler component.");
+    }
+
+    private void Reset()
+    {
+        _isErrorContent = false;
+
+        _errorHandler?.Recover();
+    }
+}

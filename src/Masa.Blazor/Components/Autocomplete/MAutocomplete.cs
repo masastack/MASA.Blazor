@@ -92,10 +92,10 @@ namespace Masa.Blazor
         protected override BMenuProps GetDefaultMenuProps()
         {
             var props = base.GetDefaultMenuProps();
-            props.OffsetY = true;
 
-            // props.OffsetOverflow = true;
-            // props.Transition = false;
+            props.OffsetY = true;
+            props.OffsetOverflow = true;
+            props.Transition = null;
 
             return props;
         }
@@ -118,11 +118,11 @@ namespace Masa.Blazor
 
         protected override bool EnableSpaceKeDownPreventDefault => false;
 
-        protected override void OnWatcherInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnWatcherInitialized();
+            base.RegisterWatchers(watcher);
 
-            Watcher
+            watcher
                 .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
                 .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
@@ -152,7 +152,7 @@ namespace Masa.Blazor
         {
             if (val)
             {
-                // TODO: input.select()
+                await JsInvokeAsync(JsInteropConstants.Select, InputElement);
             }
             else
             {
@@ -187,12 +187,12 @@ namespace Masa.Blazor
 
             var value = args.Value?.ToString();
 
-            if (value is not null)
+            if (!string.IsNullOrEmpty(value))
             {
                 ActivateMenu();
             }
 
-            if (!Multiple && string.IsNullOrEmpty(value))
+            if (!Multiple && value == "")
             {
                 await DeleteCurrentItem();
             }
@@ -298,6 +298,12 @@ namespace Masa.Blazor
         {
             val ??= new List<TItem>();
             oldVal ??= new List<TItem>();
+
+            var except = val.Except(oldVal);
+            if (!except.Any())
+            {
+                return;
+            }
 
             if (!AutoSelectFirst)
             {

@@ -1,17 +1,20 @@
-name: Mirror to Giltab
+name: Mirror to Gitlab
 on:
   push:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
+      - .gitlab-ci.yml
   delete:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
+      - .gitlab-ci.yml
   create:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
+      - .gitlab-ci.yml
   workflow_dispatch:
 
 jobs:

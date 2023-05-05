@@ -1,0 +1,161 @@
+﻿@inherits LayoutComponentBase
+@inject I18n I18n
+@inject NavigationManager NavigationManager
+@inject DocService DocService
+@implements IDisposable
+
+<HeadContent>
+    <PageTitle>@PageInfo.PageTitle</PageTitle>
+    <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
+</HeadContent>
+
+<MApp>
+    <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
+        <CascadingValue Value="@_project" Name="project">
+            <MErrorHandler>
+                <CascadingValue Value="@_env" Name="Env">
+                    <AppBar OnCultureChanged="@OnCultureChanged"
+                            OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
+                            OnDotClick="HandleOnDotClick"
+                            OnSettingsClick="HandleSettingsClick"
+                            HideAppBarNavIcon="@_hideAppBarNavIcon" />
+                </CascadingValue>
+                <CascadingValue Value="this" IsFixed>
+                    @Body
+                </CascadingValue>
+
+                <Settings @bind-Value="_showSettings" />
+                <MobileMenuList @bind-Value="_showMobileMenuList" />
+            </MErrorHandler>
+
+            <HeadContent>
+                <PageTitle>@PageInfo.PageTitle</PageTitle>
+                <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
+            </HeadContent>
+        </CascadingValue>
+
+        <PwaSnackbar />
+    </CascadingValue>
+</MApp>
+
+@code {
+
+    private CultureInfo? _culture;
+    private bool _showMobileMenuList;
+    private bool _hideAppBarNavIcon;
+    private bool _showSettings;
+    private string? _project;
+    private string? _env;
+
+    internal (string? PageTitle, string? PageIcon) PageInfo = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png");
+
+    private Dictionary<string, string> _projectMap = new();
+
+    internal bool ShowDrawer;
+
+    internal EventCallback<bool> OnAppBarNavIconClick { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _projectMap = await DocService.ReadProjectMapAsync();
+            SetEnv();
+            SetProject();
+            StateHasChanged();
+        }
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        SetProject(async () => await InvokeAsync(StateHasChanged));
+    }
+
+    private void OnCultureChanged(string cultureName)
+    {
+        _culture = new CultureInfo(cultureName);
+        I18n.SetCulture(_culture);
+    }
+
+    private void HandleOnAppBarNavIconClick()
+    {
+        ShowDrawer = !ShowDrawer;
+        OnAppBarNavIconClick.InvokeAsync(ShowDrawer);
+    }
+
+    private void HandleOnDotClick()
+    {
+        _showMobileMenuList = !_showMobileMenuList;
+    }
+
+    private void HandleSettingsClick()
+    {
+        _showSettings = !_showSettings;
+    }
+
+    internal void HideAppBarNavIcon()
+    {
+        if (_hideAppBarNavIcon)
+        {
+            return;
+        }
+
+        _hideAppBarNavIcon = true;
+        StateHasChanged();
+    }
+
+    internal void ShowAppBarNavIcon()
+    {
+        if (_hideAppBarNavIcon is false)
+        {
+            return;
+        }
+
+        _hideAppBarNavIcon = false;
+        StateHasChanged();
+    }
+
+    private void SetEnv()
+    {
+        var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
+        _env = uri switch
+        {
+            "docs.masastack.com" or "blazor.masastack.com" => "prd_",
+            "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
+            _ => "local_"
+            };
+    }
+
+    private void SetProject(Action? action = null)
+    {
+        var segments = NavigationManager.GetSegments();
+        var secondSegment = segments.ElementAtOrDefault(1);
+        secondSegment = secondSegment?.TrimEnd('/');
+        if (secondSegment is null || _projectMap.ContainsKey(secondSegment))
+        {
+            if (_project != secondSegment)
+            {
+                _project = secondSegment;
+                if (action is not null)
+                {
+                    action();
+                }
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+}

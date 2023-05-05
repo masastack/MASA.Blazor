@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0-ios;net6.0-android</TargetFrameworks>
+        <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
         <OutputType>Exe</OutputType>
@@ -55,6 +55,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.QrCode\Masa.Blazor.Maui.Plugin.QrCode.csproj" />
+      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI.Controls\ZXing.Net.MAUI.Controls.csproj" />
+      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI\ZXing.Net.MAUI.csproj" />
     </ItemGroup>
 
 </Project>

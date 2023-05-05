@@ -24,9 +24,9 @@ public class GridstackJSModule : JSModule
         => await InvokeAsync<List<GridstackWidget>>("save", instance);
 
     [JSInvokable]
-    public void OnResize(string id, int width, int height)
+    public void OnResize(GridstackResizeEventArgs args)
     {
-        Resize?.Invoke(this, new GridstackResizeEventArgs(id, width, height));
+        Resize?.Invoke(this, args);
     }
 
     public override async ValueTask DisposeAsync()

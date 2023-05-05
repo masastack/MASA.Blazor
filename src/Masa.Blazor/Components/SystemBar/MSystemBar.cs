@@ -7,21 +7,32 @@ namespace Masa.Blazor
         [Parameter]
         public string Color { get; set; }
 
-
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber Height
+        {
+            get => GetValue<StringNumber>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool LightsOut { get; set; }
 
         [Parameter]
-        public bool Window { get; set; }
+        public bool Window
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool App { get; set; }
+        public bool App
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Fixed { get; set; }
@@ -29,9 +40,28 @@ namespace Masa.Blazor
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
-        private StringNumber ComputedHeight => Height != null ?
-            (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height) :
-            (Window ? 32 : 24);
+        private StringNumber ComputedHeight => Height != null
+            ? (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height)
+            : (Window ? 32 : 24);
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<bool>(nameof(App), (_, prev) =>
+                   {
+                       if (prev)
+                       {
+                           RemoveApplication(true);
+                       }
+                       else
+                       {
+                           CallUpdate();
+                       }
+                   }, immediate: true)
+                   .Watch<bool>(nameof(Window), CallUpdate)
+                   .Watch<StringNumber>(nameof(Height), CallUpdate);
+        }
 
         protected override void SetComponentClass()
         {
@@ -53,9 +83,12 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task OnParametersSetAsync()
+        private async void CallUpdate()
         {
-            await UpdateApplicationAsync();
+            await NextTickIf(async () =>
+            {
+                await UpdateApplicationAsync();
+            }, () => Ref.Context is null);
         }
 
         protected async Task UpdateApplicationAsync()
@@ -71,7 +104,7 @@ namespace Masa.Blazor
 
         private async Task<double> GetClientHeightAsync()
         {
-            if (Ref.Id == null)
+            if (Ref.Context == null)
             {
                 return 0;
             }
@@ -86,9 +119,9 @@ namespace Masa.Blazor
             RemoveApplication();
         }
 
-        private void RemoveApplication()
+        private void RemoveApplication(bool force = false)
         {
-            if (!App)
+            if (!force && !App)
             {
                 return;
             }

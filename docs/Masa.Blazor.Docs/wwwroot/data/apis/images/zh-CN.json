@@ -1,0 +1,14 @@
+{
+  "props": {
+    "aspectRatio": "计算为**width/height**，因此对于 1920x1080px 的图片，其值为 **1.7778**。 如果省略，将自动计算",
+    "contain": "防止图像不合适时被裁剪",
+    "contentClass": "",
+    "gradient": "将渐变叠加到图像上。 仅支持 (linear-gradient)[https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient] 语法，其他任何操作都应使用类完成（请参见示例）",
+    "lazySrc": "在等待主映像加载时显示的内容，通常是一个小型的base64编码的缩略图。有一个轻微的模糊滤镜应用。使用 (vuetify-loader)[https://github.com/vuetifyjs/vuetify-loader] 来自动生成",
+    "position": "覆盖默认设置，以更改被裁剪的部分。 使用与以下相同的语法 (background-position)[https://developer.mozilla.org/en-US/docs/Web/CSS/background-position]"
+  },
+  "events": {},
+  "contents": {
+    "placeholderContent": "图像占位符的插槽"
+  }
+}

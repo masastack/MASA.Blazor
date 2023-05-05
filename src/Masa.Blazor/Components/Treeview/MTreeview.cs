@@ -15,7 +15,7 @@
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string ActiveClass { get; set; } = "m-treeview-node--active";
+        public string ActiveClass { get; set; }
 
         [Parameter]
         public string SelectedColor { get; set; } = "accent";
@@ -24,19 +24,19 @@
         public string Color { get; set; } = "primary";
 
         [Parameter]
-        public Func<TItem, Task> LoadChildren { get; set; }
+        public EventCallback<TItem> LoadChildren { get; set; }
 
         [Parameter]
         public bool Activatable { get; set; }
 
         [Parameter]
-        public string IndeterminateIcon { get; set; } = "mdi-minus-box";
+        public string IndeterminateIcon { get; set; } = "$minus";
 
         [Parameter]
-        public string OnIcon { get; set; } = "mdi-checkbox-marked";
+        public string OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
+        public string OffIcon { get; set; } = "$checkboxOff";
 
         [Parameter]
         public bool OpenOnClick { get; set; }

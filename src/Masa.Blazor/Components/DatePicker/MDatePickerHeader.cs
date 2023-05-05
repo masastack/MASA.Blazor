@@ -54,9 +54,7 @@ namespace Masa.Blazor
         public DatePickerType ActivePicker { get; set; }
 
         [Parameter]
-        public string Locale { get; set; }
-
-
+        public CultureInfo Locale { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
@@ -93,10 +91,9 @@ namespace Masa.Blazor
                     return Format;
                 }
 
-                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(Locale) : DateFormatters.Year(Locale);
+                return ActivePicker == DatePickerType.Date ? DateFormatters.YearMonth(Locale) : DateFormatters.Year(Locale);
             }
         }
-
 
         public DateOnly CalculateChange(int sign)
         {
@@ -115,11 +112,11 @@ namespace Masa.Blazor
             return new DateOnly(date.Year, date.Month, 1);
         }
 
-        protected override void OnInitialized()
+        protected override void RegisterWatchers(PropertyWatcher watcher)
         {
-            base.OnInitialized();
-
-            Watcher
+            base.RegisterWatchers(watcher);
+   
+            watcher
                 .Watch<DateOnly>(nameof(Value), (newVal, oldVal) =>
                 {
                     IsReversing = newVal < oldVal;

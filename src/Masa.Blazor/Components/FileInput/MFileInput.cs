@@ -28,7 +28,7 @@ namespace Masa.Blazor
         public bool ShowSize { get; set; }
 
         [Parameter]
-        public override string PrependIcon { get; set; } = "mdi-paperclip";
+        public override string PrependIcon { get; set; } = "$file";
 
         [Parameter]
         public override bool Clearable { get; set; } = true;
@@ -214,6 +214,11 @@ namespace Masa.Blazor
             await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
+        {
+            return Task.CompletedTask;
+        }
+
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
@@ -260,6 +265,11 @@ namespace Masa.Blazor
         public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             await base.HandleOnClickAsync(args);
+
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync();
+            }
 
             var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");

@@ -37,7 +37,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     /// Integer > 0 (default 12) which can change on the fly with column(N) API, or 'auto' for nested grids to size themselves to the parent grid container (to make sub-items are the same size). 
     /// </summary>
     [Parameter]
-    [DefaultValue(12)]
+    [ApiDefaultValue(12)]
     public int Column { get; set; } = 12;
 
     /// <summary>
@@ -62,7 +62,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     /// gap size around grid item and content (default: 10px)
     /// </summary>
     [Parameter]
-    [DefaultValue(10)]
+    [ApiDefaultValue(10)]
     public int Margin { get; set; } = 10;
 
     /// <summary>
@@ -92,11 +92,11 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         ArgumentNullException.ThrowIfNull(ItemKey);
     }
 
-    protected override void OnInitialized()
+    protected override void RegisterWatchers(PropertyWatcher watcher)
     {
-        base.OnInitialized();
+        base.RegisterWatchers(watcher);
 
-        Watcher.Watch<bool>(nameof(Readonly), (val) => { _ = SetStatic(val); });
+        watcher.Watch<bool>(nameof(Readonly), (val) => { _ = SetStatic(val); });
     }
 
     protected override void SetComponentClass()
@@ -166,7 +166,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         }
     }
 
-    private async Task Reload()
+    public async Task Reload()
     {
         if (_gridstackInstance is null) return;
         _gridstackInstance = await Module.Reload(_gridstackInstance);

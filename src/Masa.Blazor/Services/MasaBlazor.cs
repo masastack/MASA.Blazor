@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+namespace Masa.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature
@@ -7,16 +9,23 @@
     {
         private bool _rtl;
 
-        public MasaBlazor(Breakpoint breakpoint, Application application, Theme theme)
+        public MasaBlazor(
+            Breakpoint breakpoint,
+            Application application,
+            Theme theme,
+            Icons icons,
+            IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
             Breakpoint = breakpoint;
             Application = application;
             Theme = theme;
+            Icons = icons;
+            Defaults = defaults;
         }
 
         public bool RTL
         {
-            get { return _rtl; }
+            get => _rtl;
             set
             {
                 if (_rtl != value)
@@ -31,8 +40,20 @@
 
         public Breakpoint Breakpoint { get; }
 
+        public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; }
+
         public Theme Theme { get; }
+        
+        public Icons Icons { get; }
 
         public event Action<bool> OnRTLChange;
+
+        public event Action<Theme> OnThemeChange;
+
+        public void ToggleTheme()
+        {
+            Theme.Dark = !Theme.Dark;
+            OnThemeChange?.Invoke(Theme);
+        }
     }
 }

@@ -118,7 +118,8 @@ namespace Masa.Blazor
                         )
                         .AddTheme(IsDark)
                         .AddBackgroundColor(Color, () => HasBackground)
-                        .AddTextColor(Color, () => !HasBackground);
+                        .AddTextColor(Color, () => !HasBackground)
+                        .AddElevation(Elevation);
                 }, styleBuilder =>
                 {
                     styleBuilder

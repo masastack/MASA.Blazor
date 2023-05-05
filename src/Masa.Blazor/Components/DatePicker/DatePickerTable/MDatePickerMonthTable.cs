@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor
+﻿#nullable enable
+
+namespace Masa.Blazor
 {
-    public partial class MDatePickerMonthTable<TValue> : MDatePickerTable<TValue>, IDatePickerMonthTable, IDatePickerTable
+    public partial class MDatePickerMonthTable<TValue> : MDatePickerTable<TValue>, IDatePickerMonthTable
     {
         public override Func<DateOnly, string> Formatter
         {
@@ -11,7 +13,7 @@
                     return Format;
                 }
 
-                return DateFormatters.Month(Locale);
+                return DateFormatters.AbbreviatedMonth(Locale);
             }
         }
 
@@ -21,9 +23,10 @@
             {
                 return date.Year == value.Year && date.Month == value.Month;
             }
-            else if (Value is IList<DateOnly> dates)
+
+            if (Value is IList<DateOnly> dates)
             {
-                return dates.Any(date => date.Year == value.Year && date.Month == value.Month);
+                return dates.Any(d => d.Year == value.Year && d.Month == value.Month);
             }
 
             return false;
