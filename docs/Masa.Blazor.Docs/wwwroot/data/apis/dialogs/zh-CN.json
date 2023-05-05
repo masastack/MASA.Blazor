@@ -21,5 +21,5 @@
   "events": {
     "onOutsideClick": "在活动对话框外部单击时激发的事件。"
   },
-  "functions": {}
+  "methods": {}
 }

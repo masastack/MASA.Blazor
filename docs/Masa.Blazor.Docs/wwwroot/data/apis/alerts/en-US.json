@@ -18,7 +18,11 @@
     "type": "Specify a `success`, `info`, `warning` or `error` alert. Uses the contextual color and has a pre-defined icon.",
     "value": "Controls whether the component is visible or hidden."
   },
-  "contents": {},
+  "contents": {
+    "titleContent": "Content for the title of alert."
+  },
   "events": {},
-  "functions": {}
+  "methods": {
+    "toggleAsync": "Toggles the visibility of the alert."
+  }
 }

@@ -12,5 +12,5 @@
     "imgContent": "需要 [MImage](/blazor/components/images) 组件。范围内的 props 应该与 @bind-value=\"props\" 一起使用。"
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

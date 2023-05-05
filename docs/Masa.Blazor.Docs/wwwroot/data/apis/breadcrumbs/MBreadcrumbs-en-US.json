@@ -9,5 +9,5 @@
     "itemContent": "The slot used to override default `MBreadcrumbsItem` behavior when using the items prop."
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

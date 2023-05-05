@@ -13,5 +13,5 @@
   "events": {
     "valuesChanged": "Value change event, available after using the attribute `Multiple`"
   },
-  "functions": {}
+  "methods": {}
 }

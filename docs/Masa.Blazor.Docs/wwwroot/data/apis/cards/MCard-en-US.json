@@ -14,5 +14,5 @@
     "progressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)"
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

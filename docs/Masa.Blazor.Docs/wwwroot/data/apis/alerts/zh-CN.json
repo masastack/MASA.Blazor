@@ -18,7 +18,11 @@
     "type": "指定一个 `success`, `info`, `warning` 或 `error` 提示。使用上下文颜色并具有预定义的图标。",
     "value": "控制组件可见还是隐藏。"
   },
-  "contents": {},
+  "contents": {
+    "titleContent": "提示框的标题内容。"
+  },
   "events": {},
-  "functions": {}
+  "methods": {
+    "toggleAsync": "切换提示框的活动状态。"
+  }
 }

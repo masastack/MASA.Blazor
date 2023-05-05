@@ -165,7 +165,7 @@
       "onSearchInputUpdate": "onSearchInputUpdate",
       "onSelectedItemUpdate": "onSelectedItemUpdate"
     },
-    "functions": {
+    "methods": {
     }
   },
   "zh-CN": {
@@ -334,7 +334,7 @@
       "onSearchInputUpdate": "onSearchInputUpdate",
       "onSelectedItemUpdate": "onSelectedItemUpdate"
     },
-    "functions": {
+    "methods": {
     }
   }
 }
