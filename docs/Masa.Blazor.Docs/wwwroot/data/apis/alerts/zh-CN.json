@@ -13,6 +13,7 @@
     "tag": "指定在根元素上使用的自定义标签。",
     "text": "将定义的 `color` 应用于文本和同样的低透明度背景。",
     "tile": "删除组件的 `border-radius`。",
+    "Title": "设置组件的标题。",
     "transition": "设置组件转换。",
     "type": "指定一个 `success`, `info`, `warning` 或 `error` 提示。使用上下文颜色并具有预定义的图标。",
     "value": "控制组件可见还是隐藏。"

@@ -19,7 +19,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddElevation(this CssBuilder cssBuilder, StringNumber elevation)
+        public static CssBuilder AddElevation(this CssBuilder cssBuilder, StringNumber? elevation)
         {
             cssBuilder
                 .AddIf($"elevation-{elevation}", () => elevation != null);
@@ -53,7 +53,7 @@ namespace BlazorComponent
             return cssBuilder.AddColor(color, isText, () => true);
         }
 
-        public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText, Func<bool> func)
+        public static CssBuilder AddColor(this CssBuilder cssBuilder, string? color, bool isText, Func<bool> func)
         {
             if (string.IsNullOrEmpty(color) || color.StartsWith("#") || color.StartsWith("rgb"))
             {
@@ -87,7 +87,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string color, Func<bool> func)
+        public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string? color, Func<bool> func)
         {
             return cssBuilder.AddColor(color, true, func);
         }
@@ -132,7 +132,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean rounded, bool tile)
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean? rounded, bool tile)
         {
             if (tile)
             {
