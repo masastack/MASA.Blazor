@@ -32,7 +32,7 @@
                        class="m-toc-link d-block transition-swing text-decoration-none"
                        @onclick:preventDefault
                        @onclick="@(() => ScrollIntoView(item.Anchor))">
-                        @item.Content
+                        @I18n.T(item.Content)
                     </a>
                 </li>
             }
