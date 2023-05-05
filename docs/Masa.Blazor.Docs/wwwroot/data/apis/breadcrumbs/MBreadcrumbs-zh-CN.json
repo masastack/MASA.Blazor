@@ -9,5 +9,5 @@
     "dividerContent": "用于分隔器的插槽。",
     "itemContent": "使用 items 属性时，用于覆盖默认 `MBreadcrumbsItem` 行为的插槽。"
   },
-  "functions": {}
+  "methods": {}
 }

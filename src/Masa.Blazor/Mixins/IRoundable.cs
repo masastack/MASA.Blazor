@@ -1,9 +1,10 @@
-﻿namespace Masa.Blazor
-{
-    public interface IRoundable
-    {
-        StringBoolean Rounded { get; }
+﻿#nullable enable
 
-        bool Tile { get; }
-    }
+namespace Masa.Blazor;
+
+public interface IRoundable
+{
+    StringBoolean? Rounded { get; }
+
+    bool Tile { get; }
 }

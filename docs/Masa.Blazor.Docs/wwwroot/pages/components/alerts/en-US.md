@@ -9,8 +9,6 @@ related:
 
 ## Usage
 
-The component is used to convey important information to the user through the use of contextual types, icons, and colors. `MAlert`
-
 <alerts-usage></alerts-usage>
 
 ## Anatomy

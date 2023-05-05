@@ -13,5 +13,5 @@
   "events": {
     "valuesChanged": "值改变事件,使用属性`Multiple`后可用"
   },
-  "functions": {}
+  "methods": {}
 }

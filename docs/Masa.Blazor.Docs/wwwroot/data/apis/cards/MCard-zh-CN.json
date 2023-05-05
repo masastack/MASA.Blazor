@@ -14,5 +14,5 @@
     "progressContent": "自定义进度线的插槽（`Loading`属性不等于布尔值False时显示)"
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

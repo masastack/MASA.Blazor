@@ -15,65 +15,65 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Items)
-            {
-                <tr>
-                    @foreach (var header in Headers)
-                    {
-                        <td>
-                            @if (header == "name")
-                            {
-                                <span class="emphasis2--text subtitle">
-                                    <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
-                                        <BadgeContent>
-                                            <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
-                                        </BadgeContent>
-                                        <ChildContent>
-                                            @item.Name
-                                        </ChildContent>
-                                    </MBadge>
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="regular--text body">
-                                    @if (header == "type")
-                                    {
-                                        var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);
+        @foreach (var item in Items)
+        {
+            <tr>
+                @foreach (var header in Headers)
+                {
+                    <td>
+                        @if (header == "name")
+                        {
+                            <span class="emphasis2--text subtitle">
+                                <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
+                                    <BadgeContent>
+                                        <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
+                                    </BadgeContent>
+                                    <ChildContent>
+                                        @item.Name
+                                    </ChildContent>
+                                </MBadge>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="regular--text body">
+                                @if (header == "type")
+                                {
+                                    var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);
 
-                                        <MTooltip Disabled="@noTypeDesc" ContentStyle="white-space: pre" Top>
-                                            <ActivatorContent>
-                                                <code @attributes="@context.Attrs"
-                                                      class="@(noTypeDesc ? "" : "tooltip-code")">
-                                                    @item.Type
-                                                </code>
-                                            </ActivatorContent>
-                                            <ChildContent>
-                                                @item.TypeDesc
-                                            </ChildContent>
-                                        </MTooltip>
-                                    }
-                                    else if (header == "default")
+                                    <MTooltip Disabled="@noTypeDesc" ContentStyle="white-space: pre" Top>
+                                        <ActivatorContent>
+                                            <code @attributes="@context.Attrs"
+                                                  class="@(noTypeDesc ? "" : "tooltip-code")">
+                                                @item.Type
+                                            </code>
+                                        </ActivatorContent>
+                                        <ChildContent>
+                                            @item.TypeDesc
+                                        </ChildContent>
+                                    </MTooltip>
+                                }
+                                else if (header == "default")
+                                {
+                                    @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
+                                }
+                                else if (header == "description")
+                                {
+                                    @if (string.IsNullOrWhiteSpace(item.Description))
                                     {
-                                        @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
+                                        @("MISSING DESCRIPTION")
                                     }
-                                    else if (header == "description")
+                                    else
                                     {
-                                        @if (string.IsNullOrWhiteSpace(item.Description))
-                                        {
-                                            @("MISSING DESCRIPTION")
-                                        }
-                                        else
-                                        {
-                                            <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
-                                        }
+                                        <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
                                     }
-                                </span>
-                            }
-                        </td>
-                    }
-                </tr>
-            }
+                                }
+                            </span>
+                        }
+                    </td>
+                }
+            </tr>
+        }
         </tbody>
     </MSimpleTable>
 </AppSheet>
@@ -93,9 +93,9 @@
     static readonly Dictionary<string, string[]> HeaderMaps = new()
     {
         { "props", new[] { "name", "type", "default", "description" } },
-        { "methods", new[] { "name", "type" } },
-        { "events", new[] { "name", "type" } },
-        { "contents", new[] { "name", "type" } }
+        { "methods", new[] { "name", "type", "description" } },
+        { "events", new[] { "name", "type", "description" } },
+        { "contents", new[] { "name", "type", "description" } }
     };
 
     private string[] Headers => HeaderMaps[Field];
@@ -106,9 +106,13 @@
 
     string GetHeaderStyle(string header)
     {
-        if (header == "default") return "width:155px;";
-        else if (header == "type") return "width:200px;";
-        return "";
+        return header switch
+        {
+            "default" => "width:155px;",
+            "name" => "width:200px",
+            "type" => "width:200px;",
+            _ => ""
+        };
     }
 
 }

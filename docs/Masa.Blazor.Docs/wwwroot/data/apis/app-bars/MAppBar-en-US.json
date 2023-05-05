@@ -16,5 +16,5 @@
     "imgContent": "Expects the [MImage](/blazor/components/images) component. Scoped props should be applied with @bind-value=\"props\"."
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }
