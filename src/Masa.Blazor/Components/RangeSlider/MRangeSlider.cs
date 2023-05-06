@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : IComparable
     {

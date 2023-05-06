@@ -44,7 +44,7 @@ namespace Masa.Blazor
             { nameof(XLarge), "40px" },
         };
 
-        public IDictionary<string, object> Attrs => Attributes;
+        public IDictionary<string, object?> Attrs => Attributes;
 
         public bool Medium => false;
 
@@ -129,7 +129,7 @@ namespace Masa.Blazor
             return (icon, css);
         }
 
-        public string GetSize()
+        public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
             {

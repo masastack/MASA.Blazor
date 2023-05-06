@@ -6,6 +6,6 @@
 
         bool Shaped { get; }
 
-        string Tag { get; }
+        string? Tag { get; }
     }
 }

@@ -3,28 +3,30 @@
 public partial class MMonacoEditor : BDomComponentBase
 {
     [Inject]
-    protected MonacoEditorJSModule Module { get; set; }
+    protected MonacoEditorJSModule Module { get; set; } = null!;
 
     [Parameter]
     public object? EditorOptions { get; set; }
 
     [Parameter]
-    public StringNumber Width { get; set; } = "100%";
+    [ApiDefaultValue("100%")]
+    public StringNumber? Width { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber Height { get; set; }
+    public StringNumber? Height { get; set; }
 
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; } = "320px";
+    [ApiDefaultValue("320px")]
+    public StringNumber? MinHeight { get; set; } = "320px";
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
-    public StringNumber MaxHeight { get; set; }
+    public StringNumber? MaxHeight { get; set; }
 
     [Parameter]
     public Func<Task<object>>? InitOptions { get; set; }
@@ -33,12 +35,9 @@ public partial class MMonacoEditor : BDomComponentBase
     public Action? InitCompleteHandle { get; set; }
 
     [Parameter]
-    public string Value
+    public string? Value
     {
-        get
-        {
-            return _value;
-        }
+        get => _value;
         set
         {
             if (_value != value)
@@ -54,27 +53,25 @@ public partial class MMonacoEditor : BDomComponentBase
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
-    /// <summary>
-    /// Monaco
-    /// </summary>
-    public IJSObjectReference Monaco { get; private set; }
-
-    private string _value;
+    private string? _value;
     private bool _valueChangedByUser;
+    private IJSObjectReference? _monaco;
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
 
         watcher
-            .Watch<string>(nameof(Value), async val =>
-            {
-                if (_valueChangedByUser)
-                {
-                    _valueChangedByUser = false;
-                    await SetValueAsync(_value);
-                }
-            });
+            .Watch<string>(nameof(Value), ValueChangeCallback);
+    }
+
+    private async void ValueChangeCallback(string? val)
+    {
+        if (_valueChangedByUser)
+        {
+            _valueChangedByUser = false;
+            await SetValueAsync(_value);
+        }
     }
 
     protected override void SetComponentClass()
@@ -116,7 +113,7 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
-        Monaco = await Module.Init(Id, EditorOptions, DotNetObjectReference.Create(this));
+        _monaco = await Module.Init(Id, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }
@@ -128,22 +125,22 @@ public partial class MMonacoEditor : BDomComponentBase
 
     public async Task AddCommandAsync<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
     {
-        await Module.AddCommand(Monaco, keybinding, dotNetObjectReference, method);
+        await Module.AddCommand(_monaco!, keybinding, dotNetObjectReference, method);
     }
 
     public async Task UpdateOptionsAsync(object options)
     {
-        await Module.UpdateOptions(Monaco, options);
+        await Module.UpdateOptions(_monaco!, options);
     }
 
     public async Task<string> GetValueAsync()
     {
-        return await Module.GetValue(Monaco);
+        return await Module.GetValue(_monaco!);
     }
 
-    public async Task SetValueAsync(string value)
+    public async Task SetValueAsync(string? value)
     {
-        await Module.SetValue(Monaco, value);
+        await Module.SetValue(_monaco!, value);
     }
 
     public async Task SetThemeAsync(string theme)
@@ -158,12 +155,12 @@ public partial class MMonacoEditor : BDomComponentBase
 
     public async Task<TextModelOptions> GetModelAsync()
     {
-        return await Module.GetModel(Monaco);
+        return await Module.GetModel(_monaco!);
     }
 
     public async Task SetModelLanguageAsync(string languageId)
     {
-        await Module.SetModelLanguage(Monaco, languageId);
+        await Module.SetModelLanguage(_monaco!, languageId);
     }
 
     public async Task RemeasureFontsAsync()

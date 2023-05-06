@@ -4,7 +4,7 @@ public class ModalButtonProps
 {
     public bool Block { get; set; }
     public string Class { get; set; }
-    public string Color { get; set; }
+    public string? Color { get; set; }
     public bool Depressed { get; set; }
     public bool Large { get; set; }
     public bool Outlined { get; set; }

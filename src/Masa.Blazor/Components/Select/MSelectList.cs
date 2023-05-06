@@ -20,7 +20,7 @@ namespace Masa.Blazor
         public EventCallback<TItem> OnSelect { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }

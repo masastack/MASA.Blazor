@@ -3,7 +3,7 @@
     public partial class MDatePickerYears : BDatePickerYears, IDatePickerYears
     {
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public DateOnly? Min { get; set; }

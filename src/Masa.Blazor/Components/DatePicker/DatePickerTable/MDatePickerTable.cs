@@ -38,7 +38,7 @@ namespace Masa.Blazor
         public DateOnly Current { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public Func<DateOnly, string> Format { get; set; }

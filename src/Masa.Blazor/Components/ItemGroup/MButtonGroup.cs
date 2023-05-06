@@ -25,10 +25,10 @@
         public bool Tile { get; set; }
 
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         protected override void SetComponentClass()
         {

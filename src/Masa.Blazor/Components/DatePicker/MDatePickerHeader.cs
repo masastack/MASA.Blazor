@@ -8,7 +8,7 @@ namespace Masa.Blazor
         public bool Disabled { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "accent";
+        public string? Color { get; set; } = "accent";
 
         [Parameter]
         public DateOnly? Min { get; set; }
@@ -45,7 +45,7 @@ namespace Masa.Blazor
         public string NextIcon { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
         public Func<DateOnly, string> Format { get; set; }

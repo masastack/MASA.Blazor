@@ -9,56 +9,55 @@ namespace Masa.Blazor
         public bool Contain { get; set; }
 
         [Parameter]
-        public string Src { get; set; }
+        public string? Src { get; set; }
 
         [Parameter]
-        public string LazySrc { get; set; }
+        public string? LazySrc { get; set; }
 
         [Parameter]
-        public string Gradient { get; set; }
+        public string? Gradient { get; set; }
 
         [Parameter]
-        public RenderFragment PlaceholderContent { get; set; }
+        public RenderFragment? PlaceholderContent { get; set; }
 
         [Parameter]
-        public string Position { get; set; } = "center center";
+        [ApiDefaultValue("center center")]
+        public string? Position { get; set; } = "center center";
 
-        private string CurrentSrc { get; set; }
+        private string? _currentSrc;
+        private bool _isError = false;
 
-        public bool IsLoading { get; set; } = true;
+        private StringNumber? _calculatedLazySrcAspectRatio;
+        private Dimensions? _dimensions;
 
-        private bool IsError { get; set; } = false;
-
-        private StringNumber CalculatedLazySrcAspectRatio { get; set; }
-        
-        private Dimensions Dimensions { get; set; }
+        public bool IsLoading { get; private set; } = true;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (!string.IsNullOrEmpty(LazySrc) && IsLoading && Dimensions == null)
+            if (!string.IsNullOrEmpty(LazySrc) && IsLoading && _dimensions == null)
             {
                 var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, LazySrc);
                 await PollForSize(dimensions);
                 if (!dimensions.HasError && AspectRatio == null)
                 {
                     AspectRatio = dimensions.Width / dimensions.Height;
-                    CalculatedLazySrcAspectRatio = AspectRatio;
+                    _calculatedLazySrcAspectRatio = AspectRatio;
                 }
 
                 await InvokeStateHasChangedAsync();
             }
 
-            if (!string.IsNullOrEmpty(Src) && IsLoading && !IsError)
+            if (!string.IsNullOrEmpty(Src) && IsLoading && !_isError)
             {
                 var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, Src);
                 await PollForSize(dimensions);
-                IsError = dimensions.HasError;
+                _isError = dimensions.HasError;
                 if (!dimensions.HasError)
                 {
                     IsLoading = false;
-                    if (AspectRatio == null || CalculatedLazySrcAspectRatio != null)
+                    if (AspectRatio == null || _calculatedLazySrcAspectRatio != null)
                     {
                         AspectRatio = dimensions.Width / dimensions.Height;
                     }
@@ -81,9 +80,9 @@ namespace Masa.Blazor
                 .Apply("image", cssBuilder =>
                 {
                     cssBuilder.Add("m-image__image")
-                        .AddIf("m-image__image--preload", () => IsLoading)
-                        .AddIf("m-image__image--contain", () => Contain)
-                        .AddIf("m-image__image--cover", () => !Contain);
+                              .AddIf("m-image__image--preload", () => IsLoading)
+                              .AddIf("m-image__image--contain", () => Contain)
+                              .AddIf("m-image__image--cover", () => !Contain);
                 }, styleBuilder =>
                 {
                     var url = GetBackgroundImageUrl();
@@ -99,7 +98,7 @@ namespace Masa.Blazor
                 .Merge(typeof(BResponsiveBody<>), typeof(BImageBody<MImage>))
                 .Apply<BResponsive, MResponsive>(attrs =>
                 {
-                    attrs[nameof(Dimensions)] = Dimensions;
+                    attrs[nameof(_dimensions)] = _dimensions;
                     attrs[nameof(AspectRatio)] = AspectRatio;
                     attrs[nameof(ContentClass)] = ContentClass;
                     attrs[nameof(Height)] = Height;
@@ -110,17 +109,17 @@ namespace Masa.Blazor
                 });
         }
 
-        private string GetBackgroundImageUrl()
+        private string? GetBackgroundImageUrl()
         {
             if (string.IsNullOrEmpty(Src) && string.IsNullOrEmpty(LazySrc))
             {
                 return null;
             }
 
-            return IsLoading || IsError ? LazySrc : CurrentSrc;
+            return IsLoading || _isError ? LazySrc : _currentSrc;
         }
 
-        private string GetBackgroundImage(string url)
+        private string? GetBackgroundImage(string url)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -143,7 +142,7 @@ namespace Masa.Blazor
         {
             base.OnParametersSet();
 
-            CurrentSrc = Src;
+            _currentSrc = Src;
         }
 
         private async Task PollForSize(Dimensions dimensions, int? timeOut = 100)
@@ -153,7 +152,7 @@ namespace Masa.Blazor
                 await Task.Delay(timeOut.Value);
             }
 
-            Dimensions = dimensions;
+            _dimensions = dimensions;
         }
     }
 }

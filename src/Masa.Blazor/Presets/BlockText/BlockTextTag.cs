@@ -4,7 +4,7 @@ public class BlockTextTag
 {
     public string Class { get; set; }
 
-    public string Color { get; set; }
+    public string? Color { get; set; }
 
     public bool Outlined { get; set; }
 

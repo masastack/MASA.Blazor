@@ -5,7 +5,7 @@
         private Sizer _sizer;
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public bool Draggable { get; set; }

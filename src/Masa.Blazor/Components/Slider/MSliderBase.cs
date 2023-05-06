@@ -10,13 +10,17 @@ namespace Masa.Blazor;
 /// <typeparam name="TNumeric">Numeric type</typeparam>
 public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric> where TNumeric : IComparable
 {
+    [Inject]
+    public MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [Inject]
+    public Document Document { get; set; } = null!;
+
     [Parameter]
     public bool Vertical { get; set; }
 
-    [Inject]
-    public Document Document { get; set; }
-
     [Parameter]
+    [ApiDefaultValue(100)]
     public double Max { get; set; } = 100;
 
     [Parameter]
@@ -30,25 +34,24 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public List<string> TickLabels { get; set; } = new();
 
     [Parameter]
+    [ApiDefaultValue(false)]
     public StringBoolean Ticks { get; set; } = false;
 
-    [Inject]
-    public MasaBlazor MasaBlazor { get; set; }
+    [Parameter]
+    public string? TrackColor { get; set; }
 
     [Parameter]
-    public string TrackColor { get; set; }
+    public string? TrackFillColor { get; set; }
 
     [Parameter]
-    public string TrackFillColor { get; set; }
-
-    [Parameter]
+    [ApiDefaultValue(2)]
     public double TickSize { get; set; } = 2;
 
     [Parameter]
-    public StringBoolean ThumbLabel { get; set; }
+    public StringBoolean? ThumbLabel { get; set; }
 
     [Parameter]
-    public RenderFragment<TNumeric> ThumbLabelContent { get; set; }
+    public RenderFragment<TNumeric>? ThumbLabelContent { get; set; }
 
     protected virtual double GetRoundedValue(int index)
     {
@@ -78,9 +81,10 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     }
 
     [Parameter]
-    public string ThumbColor { get; set; }
+    public string? ThumbColor { get; set; }
 
     [Parameter]
+    [ApiDefaultValue(32)]
     public StringNumber ThumbSize { get; set; } = 32;
 
     [Parameter]
@@ -93,14 +97,15 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public bool InverseLabel { get; set; }
 
     [Parameter]
+    [ApiDefaultValue(2)]
     public StringNumber LoaderHeight { get; set; } = 2;
 
     [Parameter]
-    public RenderFragment ProgressContent { get; set; }
+    public RenderFragment? ProgressContent { get; set; }
 
     protected virtual double DoubleInternalValue
     {
-        get { return (double)(dynamic)InternalValue; }
+        get => (double)(dynamic)InternalValue;
         set
         {
             var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
@@ -126,7 +131,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     public Dictionary<string, object> InputAttrs { get; } = new();
 
-    public string TrackTransition
+    public string? TrackTransition
     {
         get
         {
@@ -154,7 +159,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     public double StepNumeric => (double)(dynamic)Step > 0 ? (double)(dynamic)Step : 0;
 
-    public string ComputedTrackColor
+    public string? ComputedTrackColor
     {
         get
         {
@@ -177,7 +182,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         }
     }
 
-    public string ComputedTrackFillColor
+    public string? ComputedTrackFillColor
     {
         get
         {
@@ -208,15 +213,9 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         }
     }
 
-    public double NumTicks
-    {
-        get { return Math.Ceiling((Max - Min) / StepNumeric); }
-    }
+    public double NumTicks => Math.Ceiling((Max - Min) / StepNumeric);
 
-    public bool ShowThumbLabel
-    {
-        get { return !IsDisabled && ((ThumbLabel != null && ThumbLabel != false) || ThumbLabelContent != null); }
-    }
+    public bool ShowThumbLabel => !IsDisabled && ((ThumbLabel != null && ThumbLabel != false) || ThumbLabelContent != null);
 
     public Dictionary<string, object> ThumbAttrs => new()
     {

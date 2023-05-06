@@ -75,17 +75,17 @@ namespace Masa.Blazor
 
         protected bool IsSearching => (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
 
-        protected TItem SelectedItem => SelectedItems.LastOrDefault();
+        protected TItem? SelectedItem => SelectedItems.LastOrDefault();
 
         protected bool SearchIsDirty => !string.IsNullOrEmpty(InternalSearch);
 
-        protected string InternalSearch
+        protected string? InternalSearch
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
-        protected override Dictionary<string, object> InputAttrs => new()
+        protected override Dictionary<string, object?> InputAttrs => new()
         {
             { "type", Type },
             { "autocomplete", "off" }
@@ -214,7 +214,7 @@ namespace Masa.Blazor
             var curIndex = SelectedIndex;
             var curItem = SelectedItems.ElementAtOrDefault(curIndex);
 
-            if (!IsInteractive || GetDisabled(curItem))
+            if (!IsInteractive || curItem is null || GetDisabled(curItem))
             {
                 return;
             }

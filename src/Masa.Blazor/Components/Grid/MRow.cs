@@ -8,73 +8,73 @@ namespace Masa.Blazor
         /// 'start' | 'center' | 'end' | 'baseline ' | 'stretch '
         /// </summary>
         [Parameter]
-        public StringEnum<AlignTypes> AlignLg { get; set; }
+        public StringEnum<AlignTypes>? AlignLg { get; set; }
 
         /// <summary>
         /// 'start' | 'center' | 'end' | 'baseline ' | 'stretch '
         /// </summary>
         [Parameter]
-        public StringEnum<AlignTypes> AlignMd { get; set; }
+        public StringEnum<AlignTypes>? AlignMd { get; set; }
 
         /// <summary>
         /// 'start' | 'center' | 'end' | 'baseline ' | 'stretch '
         /// </summary>
         [Parameter]
-        public StringEnum<AlignTypes> AlignSm { get; set; }
+        public StringEnum<AlignTypes>? AlignSm { get; set; }
 
         /// <summary>
         /// 'start' | 'center' | 'end' | 'baseline ' | 'stretch '
         /// </summary>
         [Parameter]
-        public StringEnum<AlignTypes> AlignXl { get; set; }
+        public StringEnum<AlignTypes>? AlignXl { get; set; }
 
         /// <summary>
         /// 'start', 'end', 'center','space-between', 'space-around', 'stretch'
         /// </summary>
         [Parameter]
-        public StringEnum<AlignContentTypes> AlignContentLg { get; set; }
+        public StringEnum<AlignContentTypes>? AlignContentLg { get; set; }
 
         /// <summary>
         /// 'start', 'end', 'center','space-between', 'space-around', 'stretch'
         /// </summary>
         [Parameter]
-        public StringEnum<AlignContentTypes> AlignContentMd { get; set; }
+        public StringEnum<AlignContentTypes>? AlignContentMd { get; set; }
 
         /// <summary>
         /// 'start', 'end', 'center','space-between', 'space-around', 'stretch'
         /// </summary>
         [Parameter]
-        public StringEnum<AlignContentTypes> AlignContentSm { get; set; }
+        public StringEnum<AlignContentTypes>? AlignContentSm { get; set; }
 
         /// <summary>
         /// 'start', 'end', 'center','space-between', 'space-around', 'stretch'
         /// </summary>
         [Parameter]
-        public StringEnum<AlignContentTypes> AlignContentXl { get; set; }
+        public StringEnum<AlignContentTypes>? AlignContentXl { get; set; }
 
         /// <summary>
         /// 'start' | 'end' | 'center' | 'space-around' | 'space-between'
         /// </summary>
         [Parameter]
-        public StringEnum<JustifyTypes> JustifyLg { get; set; }
+        public StringEnum<JustifyTypes>? JustifyLg { get; set; }
 
         /// <summary>
         /// 'start' | 'end' | 'center' | 'space-around' | 'space-between'
         /// </summary>
         [Parameter]
-        public StringEnum<JustifyTypes> JustifyMd { get; set; }
+        public StringEnum<JustifyTypes>? JustifyMd { get; set; }
 
         /// <summary>
         /// 'start' | 'end' | 'center' | 'space-around' | 'space-between'
         /// </summary>
         [Parameter]
-        public StringEnum<JustifyTypes> JustifySm { get; set; }
+        public StringEnum<JustifyTypes>? JustifySm { get; set; }
 
         /// <summary>
         /// 'start' | 'end' | 'center' | 'space-around' | 'space-between'
         /// </summary>
         [Parameter]
-        public StringEnum<JustifyTypes> JustifyXl { get; set; }
+        public StringEnum<JustifyTypes>? JustifyXl { get; set; }
 
         /// <summary>
         /// Removes the gutter between v-cols.
@@ -106,7 +106,7 @@ namespace Masa.Blazor
                             ("align-end", AlignTypes.End),
                             ("align-baseline", AlignTypes.Baseline),
                             ("align-stretch", AlignTypes.Stretch)), () => Align != null)
-                        .AddIf(AlignLg.ToString(() =>
+                        .AddIf(AlignLg!.ToString(() =>
                                 $"align-lg-{AlignLg}",
                             ("align-lg-auto", AlignTypes.Auto),
                             ("align-lg-start", AlignTypes.Start),
@@ -114,7 +114,7 @@ namespace Masa.Blazor
                             ("align-lg-end", AlignTypes.End),
                             ("align-lg-baseline", AlignTypes.Baseline),
                             ("align-lg-stretch", AlignTypes.Stretch)), () => AlignLg != null)
-                        .AddIf(AlignMd.ToString(() =>
+                        .AddIf(AlignMd!.ToString(() =>
                                 $"align-md-{AlignMd}",
                             ("align-md-auto", AlignTypes.Auto),
                             ("align-md-start", AlignTypes.Start),
@@ -122,7 +122,7 @@ namespace Masa.Blazor
                             ("align-md-end", AlignTypes.End),
                             ("align-md-baseline", AlignTypes.Baseline),
                             ("align-md-stretch", AlignTypes.Stretch)), () => AlignMd != null)
-                        .AddIf(AlignSm.ToString(() =>
+                        .AddIf(AlignSm!.ToString(() =>
                                 $"align-sm-{AlignSm}",
                             ("align-sm-auto", AlignTypes.Auto),
                             ("align-sm-start", AlignTypes.Start),
@@ -130,7 +130,7 @@ namespace Masa.Blazor
                             ("align-sm-end", AlignTypes.End),
                             ("align-sm-baseline", AlignTypes.Baseline),
                             ("align-sm-stretch", AlignTypes.Stretch)), () => AlignSm != null)
-                        .AddIf(AlignXl.ToString(() =>
+                        .AddIf(AlignXl!.ToString(() =>
                                 $"align-xl-{AlignXl}",
                             ("align-xl-auto", AlignTypes.Auto),
                             ("align-xl-start", AlignTypes.Start),
@@ -145,28 +145,28 @@ namespace Masa.Blazor
                             ("justify-end", JustifyTypes.End),
                             ("justify-space-between", JustifyTypes.SpaceBetween),
                             ("justify-space-around", JustifyTypes.SpaceAround)), () => Justify != null)
-                        .AddIf(JustifyLg.ToString(() =>
+                        .AddIf(JustifyLg!.ToString(() =>
                                 $"justify-lg-{JustifyLg}",
                             ("justify-lg-start", JustifyTypes.Start),
                             ("justify-lg-center", JustifyTypes.Center),
                             ("justify-lg-end", JustifyTypes.End),
                             ("justify-lg-space-between", JustifyTypes.SpaceBetween),
                             ("justify-lg-space-around", JustifyTypes.SpaceAround)), () => JustifyLg != null)
-                        .AddIf(JustifyMd.ToString(() =>
+                        .AddIf(JustifyMd!.ToString(() =>
                                 $"justify-md-{JustifyMd}",
                             ("justify-md-start", JustifyTypes.Start),
                             ("justify-md-center", JustifyTypes.Center),
                             ("justify-md-end", JustifyTypes.End),
                             ("justify-md-space-between", JustifyTypes.SpaceBetween),
                             ("justify-md-space-around", JustifyTypes.SpaceAround)), () => JustifyMd != null)
-                        .AddIf(JustifySm.ToString(() =>
+                        .AddIf(JustifySm!.ToString(() =>
                                 $"justify-sm-{JustifySm}",
                             ("justify-sm-start", JustifyTypes.Start),
                             ("justify-sm-center", JustifyTypes.Center),
                             ("justify-sm-end", JustifyTypes.End),
                             ("justify-sm-space-between", JustifyTypes.SpaceBetween),
                             ("justify-sm-space-around", JustifyTypes.SpaceAround)), () => JustifySm != null)
-                        .AddIf(JustifyXl.ToString(() =>
+                        .AddIf(JustifyXl!.ToString(() =>
                                 $"justify-xl-{JustifyXl}",
                             ("justify-xl-start", JustifyTypes.Start),
                             ("justify-xl-center", JustifyTypes.Center),
@@ -181,7 +181,7 @@ namespace Masa.Blazor
                             ("align-content-space-between", AlignContentTypes.SpaceBetween),
                             ("align-content-space-space-around", AlignContentTypes.SpaceAround),
                             ("align-content-space-stretch", AlignContentTypes.Stretch)), () => AlignContent != null)
-                        .AddIf(AlignContentLg.ToString(() =>
+                        .AddIf(AlignContentLg!.ToString(() =>
                                     $"align-content-lg-{AlignContentLg}",
                                 ("align-content-lg-start", AlignContentTypes.Start),
                                 ("align-content-lg-center", AlignContentTypes.Center),
@@ -190,16 +190,7 @@ namespace Masa.Blazor
                                 ("align-content-lg-space-space-around", AlignContentTypes.SpaceAround),
                                 ("align-content-lg-space-stretch", AlignContentTypes.Stretch)),
                             () => AlignContentLg != null)
-                        .AddIf(AlignContentLg.ToString(() =>
-                                    $"align-content-lg-{AlignContentLg}",
-                                ("align-content-lg-start", AlignContentTypes.Start),
-                                ("align-content-lg-center", AlignContentTypes.Center),
-                                ("align-content-lg-end", AlignContentTypes.End),
-                                ("align-content-lg-space-between", AlignContentTypes.SpaceBetween),
-                                ("align-content-lg-space-space-around", AlignContentTypes.SpaceAround),
-                                ("align-content-lg-space-stretch", AlignContentTypes.Stretch)),
-                            () => AlignContentLg != null)
-                        .AddIf(AlignContentMd.ToString(() =>
+                        .AddIf(AlignContentMd!.ToString(() =>
                                     $"align-content-md-{AlignContentMd}",
                                 ("align-content-md-start", AlignContentTypes.Start),
                                 ("align-content-md-center", AlignContentTypes.Center),
@@ -208,7 +199,7 @@ namespace Masa.Blazor
                                 ("align-content-md-space-space-around", AlignContentTypes.SpaceAround),
                                 ("align-content-md-space-stretch", AlignContentTypes.Stretch)),
                             () => AlignContentMd != null)
-                        .AddIf(AlignContentSm.ToString(() =>
+                        .AddIf(AlignContentSm!.ToString(() =>
                                     $"align-content-sm-{AlignContentSm}",
                                 ("align-content-sm-start", AlignContentTypes.Start),
                                 ("align-content-sm-center", AlignContentTypes.Center),
@@ -217,7 +208,7 @@ namespace Masa.Blazor
                                 ("align-content-sm-space-space-around", AlignContentTypes.SpaceAround),
                                 ("align-content-sm-space-stretch", AlignContentTypes.Stretch)),
                             () => AlignContentSm != null)
-                        .AddIf(AlignContentXl.ToString(() =>
+                        .AddIf(AlignContentXl!.ToString(() =>
                                     $"align-content-xl-{AlignContentXl}",
                                 ("align-content-xl-start", AlignContentTypes.Start),
                                 ("align-content-xl-center", AlignContentTypes.Center),

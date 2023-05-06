@@ -25,9 +25,9 @@ namespace Masa.Blazor
 
         protected double ElementHeight { get; set; }
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-        protected override Dictionary<string, object> InputAttrs => new(Attributes)
+        protected override Dictionary<string, object?> InputAttrs => new(Attributes)
         {
             { "rows", Rows },
             { "style", AutoGrow && ElementHeight > 0 ? $"height:{ElementHeight}px" : null }
@@ -101,6 +101,7 @@ namespace Masa.Blazor
         private async Task CalculateInputHeight()
         {
             var input = Document.GetElementByReference(InputElement);
+            if (input is null) return;
             var height = await input.GetScrollHeightWithoutHeight();
             var minheight = Rows * RowHeight.ToInt32() * 1.0;
 

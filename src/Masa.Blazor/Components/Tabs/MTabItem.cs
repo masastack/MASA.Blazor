@@ -3,7 +3,7 @@
     public partial class MTabItem : MWindowItem, ITabItem
     {
         [CascadingParameter]
-        public MTabs Tabs { get; set; }
+        public MTabs? Tabs { get; set; }
 
         protected override void OnInitialized()
         {

@@ -1,26 +1,21 @@
-﻿using BlazorComponent.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MStepperContent : BStepperContent, IAsyncDisposable
     {
-        private bool _firstRender = true;
-
-        protected StringNumber Height { get; set; } = "auto";
-
-        protected override bool IsVertical => Stepper.Vertical;
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [CascadingParameter]
-        public MStepper Stepper { get; set; }
+        public MStepper? Stepper { get; set; }
 
         [Parameter]
         public int Step { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
+        private bool _firstRender = true;
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        protected StringNumber Height { get; set; } = "auto";
+
+        protected override bool IsVertical => Stepper?.Vertical is true;
 
         protected override bool IsRtl => MasaBlazor.RTL;
 
@@ -45,14 +40,14 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf($"height:{Height.ToUnit()}", () => Height != null && Stepper.Vertical);
+                        .AddIf($"height:{Height.ToUnit()}", () => Height != null && Stepper?.Vertical is true);
                 });
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Stepper.RegisterContent(this);
+            Stepper?.RegisterContent(this);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -61,7 +56,7 @@ namespace Masa.Blazor
             {
                 _firstRender = false;
 
-                if (Stepper.Vertical)
+                if (Stepper?.Vertical is true)
                 {
                     await JsInvokeAsync(JsInteropConstants.InitStepperWrapper, Ref);
                 }
@@ -80,7 +75,7 @@ namespace Masa.Blazor
 
         public async ValueTask DisposeAsync()
         {
-            Stepper.UnRegisterContent(this);
+            Stepper?.UnRegisterContent(this);
 
             if (Ref.Context is not null)
             {

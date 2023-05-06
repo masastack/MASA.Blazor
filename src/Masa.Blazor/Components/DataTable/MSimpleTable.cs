@@ -14,13 +14,13 @@ namespace Masa.Blazor
         public bool FixedRight { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public RenderFragment WrapperContent { get; set; }
+        public RenderFragment? WrapperContent { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         public ElementReference WrapperElement { get; set; }
 

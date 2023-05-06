@@ -14,7 +14,7 @@ public partial class PPageHeader
     public RenderFragment<(Func<KeyboardEventArgs, Task> onEnter, Func<Task> onSearch)> Filters { get; set; }
 
     [Parameter]
-    public RenderFragment LeftActions { get; set; }
+    public RenderFragment? LeftActions { get; set; }
 
     [Parameter]
     public EventCallback OnBack { get; set; }
@@ -23,7 +23,7 @@ public partial class PPageHeader
     public EventCallback OnSearch { get; set; }
 
     [Parameter]
-    public RenderFragment RightActions { get; set; }
+    public RenderFragment? RightActions { get; set; }
 
     [Parameter]
     public bool ShowFiltersByDefault { get; set; }
@@ -35,13 +35,13 @@ public partial class PPageHeader
     public string Subtitle { get; set; }
 
     [Parameter]
-    public RenderFragment SubtitleFragment { get; set; }
+    public RenderFragment? SubtitleFragment { get; set; }
 
     [Parameter]
     public string Title { get; set; }
 
     [Parameter]
-    public RenderFragment TitleFragment { get; set; }
+    public RenderFragment? TitleFragment { get; set; }
 
     private bool _loading;
 

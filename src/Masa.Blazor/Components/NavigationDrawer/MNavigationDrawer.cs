@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using Microsoft.AspNetCore.Components.Web;
-using OneOf;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Masa.Blazor
 {
@@ -37,7 +33,8 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public StringNumber MiniVariantWidth { get; set; } = 56;
+        [ApiDefaultValue(56)]
+        public StringNumber? MiniVariantWidth { get; set; } = 56;
 
         [Parameter]
         public bool Right { get; set; }
@@ -46,15 +43,16 @@ namespace Masa.Blazor
         public bool Touchless { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("256px")]
         public StringNumber Width { get; set; } = "256px";
 
         [Parameter]
         public string? Color { get; set; }
 
         [Parameter]
-        public OneOf<Breakpoints, double> MobileBreakpoint
+        public OneOf<Breakpoints, double>? MobileBreakpoint
         {
-            get => GetValue(MasaBlazor.Breakpoint.MobileBreakpoint);
+            get => GetValue(MasaBlazor?.Breakpoint.MobileBreakpoint);
             set => SetValue(value);
         }
 
@@ -129,10 +127,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected StringNumber ComputedWidth
-        {
-            get { return IsMiniVariant ? MiniVariantWidth : Width; }
-        }
+        protected StringNumber? ComputedWidth => IsMiniVariant ? MiniVariantWidth : Width;
 
         protected bool HasApp => App && (!IsMobile && !Temporary);
 
@@ -146,12 +141,14 @@ namespace Masa.Blazor
         {
             get
             {
+                if (MasaBlazor == null) return false;
+                
                 var mobile = MasaBlazor.Breakpoint.Mobile;
                 var width = MasaBlazor.Breakpoint.Width;
                 var name = MasaBlazor.Breakpoint.Name;
                 var mobileBreakpoint = MasaBlazor.Breakpoint.MobileBreakpoint;
 
-                if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
+                if (Equals(mobileBreakpoint.Value, MobileBreakpoint?.Value))
                 {
                     return mobile;
                 }
@@ -166,7 +163,7 @@ namespace Masa.Blazor
 
         protected bool ReactsToRoute => !DisableRouteWatcher && !Stateless && (Temporary || IsMobile);
 
-        protected override bool IsFullscreen => MasaBlazor.Breakpoint.SmAndDown;
+        protected override bool IsFullscreen => MasaBlazor != null && MasaBlazor.Breakpoint.SmAndDown;
 
         public override IEnumerable<string> DependentSelectors
             => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
@@ -214,7 +211,7 @@ namespace Masa.Blazor
                         IsActive = val;
                     }
                 })
-                .Watch<bool>(nameof(IsActive), (bool val) =>
+                .Watch<bool>(nameof(IsActive), val =>
                 {
                     // OverlayRef is not null in the next tick.
                     NextTick(async () =>
@@ -338,11 +335,11 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--is-mobile", () => IsMobile)
                         .AddIf($"{prefix}--is-mouseover", () => IsMouseover)
                         .AddIf($"{prefix}--mini-variant", () => IsMiniVariant)
-                        .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.ToDouble() != 56)
+                        .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth?.ToString() != "56")
                         .AddIf($"{prefix}--open", () => IsActive)
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
-                        .AddIf($"{prefix}--temporary", () => Temporary) //
+                        .AddIf($"{prefix}--temporary", () => Temporary)
                         .AddTheme(IsDark)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>

@@ -15,29 +15,21 @@
         public bool NonLinear { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(1)]
         public int Value
         {
-            get
-            {
-                return GetValue(1);
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue(1);
+            set => SetValue(value);
         }
 
         [Parameter]
         public EventCallback<int> ValueChanged { get; set; }
 
-        protected bool IsReverse { get; set; }
+        private readonly List<MStepperStep> _steps = new();
+        private readonly List<MStepperContent> _content = new();
 
-        protected bool IsBooted { get; set; } = true;
+        private bool IsReverse { get; set; }
 
-        protected List<MStepperStep> Steps = new();
-
-        protected List<MStepperContent> Content = new();
-        
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -85,34 +77,34 @@
 
         public void RegisterStep(MStepperStep step)
         {
-            Steps.Add(step);
+            _steps.Add(step);
         }
 
         public void RegisterContent(MStepperContent content)
         {
-            Content.Add(content);
+            _content.Add(content);
         }
 
         public void UnRegisterStep(MStepperStep stepperStep)
         {
-            Steps.Remove(stepperStep);
+            _steps.Remove(stepperStep);
         }
 
         public void UnRegisterContent(MStepperContent stepperContent)
         {
-            Content.Remove(stepperContent);
+            _content.Remove(stepperContent);
         }
 
-        public void UpdateView()
+        private void UpdateView()
         {
-            for (var index = Steps.Count; --index >= 0;)
+            for (var index = _steps.Count; --index >= 0;)
             {
-                Steps[index].Toggle(Value);
+                _steps[index].Toggle(Value);
             }
 
-            for (var index = Content.Count; --index >= 0;)
+            for (var index = _content.Count; --index >= 0;)
             {
-                Content[index].Toggle(Value, IsReverse);
+                _content[index].Toggle(Value, IsReverse);
             }
         }
 

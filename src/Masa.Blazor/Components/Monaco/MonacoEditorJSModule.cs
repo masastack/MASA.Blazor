@@ -36,7 +36,7 @@ public class MonacoEditorJSModule : JSModule
         return await InvokeAsync<string>("getValue", id);
     }
 
-    public async Task SetValue(IJSObjectReference id, string value)
+    public async Task SetValue(IJSObjectReference id, string? value)
     {
         await InvokeVoidAsync("setValue", id, value);
     }

@@ -13,10 +13,10 @@ namespace Masa.Blazor
 
         [EditorRequired]
         [Parameter]
-        public Func<TItem, List<TItem>> ItemChildren { get; set; }
+        public Func<TItem, List<TItem>>? ItemChildren { get; set; }
 
         [Parameter]
-        public Func<TItem, Task> LoadChildren { get; set; }
+        public Func<TItem, Task>? LoadChildren { get; set; }
 
         [Parameter]
         public override bool Outlined { get; set; } = true;
@@ -24,7 +24,7 @@ namespace Masa.Blazor
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
 

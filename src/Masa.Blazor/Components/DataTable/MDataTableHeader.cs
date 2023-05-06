@@ -24,7 +24,7 @@
         public bool SingleSelect { get; set; }
 
         [Parameter]
-        public RenderFragment DataTableSelectContent { get; set; }
+        public RenderFragment? DataTableSelectContent { get; set; }
 
         [Parameter]
         public bool DisableSort { get; set; }

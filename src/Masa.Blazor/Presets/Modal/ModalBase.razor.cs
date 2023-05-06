@@ -1,7 +1,4 @@
-﻿using BlazorComponent.JSInterop;
-using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public partial class ModalBase
 {
@@ -9,16 +6,16 @@ public partial class ModalBase
     public I18n I18n { get; set; } = null!;
 
     [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
+    protected IJSRuntime JsRuntime { get; set; } = null!;
 
     [Parameter]
-    public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
+    public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
     [Parameter]
-    public string ActionsClass { get; set; }
+    public string? ActionsClass { get; set; }
 
     [Parameter]
-    public string ActionsStyle { get; set; }
+    public string? ActionsStyle { get; set; }
 
     /// <summary>
     /// Automatically scroll to the top when <see cref="Value"/> is true.
@@ -27,40 +24,40 @@ public partial class ModalBase
     public bool AutoScrollToTop { get; set; }
 
     [Parameter]
-    public string BodyClass { get; set; }
+    public string? BodyClass { get; set; }
 
     [Parameter]
-    public string BodyStyle { get; set; }
+    public string? BodyStyle { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public string Class { get; set; }
+    public string? Class { get; set; }
 
     [Parameter]
-    public string ContentClass { get; set; }
+    public string? ContentClass { get; set; }
 
     [Parameter]
-    public string ContentStyle { get; set; }
+    public string? ContentStyle { get; set; }
 
-    [Parameter]
+    [Parameter, ApiDefaultValue(100)]
     public int DebounceInterval { get; set; } = 100;
 
     [Parameter]
-    public StringNumber Elevation { get; set; }
+    public StringNumber? Elevation { get; set; }
 
     [Parameter]
-    public object FormModel { get; set; }
+    public object? FormModel { get; set; }
 
     [Parameter]
-    public string HeaderClass { get; set; }
+    public string? HeaderClass { get; set; }
 
     [Parameter]
-    public string HeaderStyle { get; set; }
+    public string? HeaderStyle { get; set; }
 
     [Parameter]
-    public StringNumber Height { get; set; }
+    public StringNumber? Height { get; set; }
 
     [Parameter]
     public bool HideCancelAction { get; set; }
@@ -72,16 +69,16 @@ public partial class ModalBase
     public bool HideActionsDivider { get; set; }
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
     public bool Persistent { get; set; }
 
     [Parameter]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
-    [Parameter]
-    public string Transition { get; set; } = "dialog-transition";
+    [Parameter, ApiDefaultValue("dialog-transition")]
+    public string? Transition { get; set; } = "dialog-transition";
 
     [Parameter]
     public bool Value { get; set; }
@@ -90,27 +87,27 @@ public partial class ModalBase
     public EventCallback<bool> ValueChanged { get; set; }
 
     [Parameter]
-    public StringNumber Width { get; set; }
+    public StringNumber? Width { get; set; }
 
     #region save,cancel,delete
 
     [Parameter]
-    public Action<ModalButtonProps> SaveProps { get; set; }
+    public Action<ModalButtonProps>? SaveProps { get; set; }
 
     [Parameter]
-    public Action<ModalButtonProps> CancelProps { get; set; }
+    public Action<ModalButtonProps>? CancelProps { get; set; }
 
     [Parameter]
-    public Action<ModalButtonProps> DeleteProps { get; set; }
+    public Action<ModalButtonProps>? DeleteProps { get; set; }
 
     [Parameter]
-    public string SaveText { get; set; }
+    public string? SaveText { get; set; }
 
     [Parameter]
-    public string CancelText { get; set; }
+    public string? CancelText { get; set; }
 
     [Parameter]
-    public string DeleteText { get; set; }
+    public string? DeleteText { get; set; }
 
     [Parameter]
     public EventCallback<ModalActionEventArgs> OnSave { get; set; }
@@ -122,41 +119,41 @@ public partial class ModalBase
     public EventCallback<ModalActionEventArgs> OnDelete { get; set; }
 
     [Parameter]
-    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> SaveContent { get; set; }
+    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)>? SaveContent { get; set; }
 
     [Parameter]
-    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> DeleteContent { get; set; }
+    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)>? DeleteContent { get; set; }
 
     [Parameter]
-    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> CancelContent { get; set; }
+    public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)>? CancelContent { get; set; }
 
     [Parameter]
-    public RenderFragment TitleContent { get; set; }
+    public RenderFragment? TitleContent { get; set; }
 
     [Parameter]
-    public RenderFragment<Func<MouseEventArgs, Task>> CloseContent { get; set; }
+    public RenderFragment<Func<MouseEventArgs, Task>>? CloseContent { get; set; }
 
     #endregion
 
     private bool _saveLoading;
-    private Func<MouseEventArgs, Task> _debounceHandleOnSave;
-    private Func<bool, Task> _internalValueChanged;
+    private Func<MouseEventArgs, Task>? _debounceHandleOnSave;
+    private Func<bool, Task>? _internalValueChanged;
 
-    private MCardText BodyRef { get; set; }
+    private MCardText? BodyRef { get; set; }
 
     private bool Loading => _saveLoading; // may add the _deleteLoading in the future
 
     protected bool HasActions => OnDelete.HasDelegate || OnSave.HasDelegate;
 
-    protected MForm Form { get; set; }
+    protected MForm? Form { get; set; }
 
-    protected MDialog Dialog { get; set; }
+    protected MDialog? Dialog { get; set; }
 
-    protected ModalButtonProps ComputedSaveButtonProps { get; set; }
+    protected ModalButtonProps? ComputedSaveButtonProps { get; set; }
 
-    protected ModalButtonProps ComputedCancelButtonProps { get; set; }
+    protected ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
-    protected ModalButtonProps ComputedDeleteButtonProps { get; set; }
+    protected ModalButtonProps? ComputedDeleteButtonProps { get; set; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -210,7 +207,7 @@ public partial class ModalBase
 
         if (firstRender)
         {
-            Dialog.AfterShowContent = async _ => { await ScrollToTop(); };
+            Dialog!.AfterShowContent = async _ => { await ScrollToTop(); };
         }
     }
 
@@ -220,12 +217,12 @@ public partial class ModalBase
         {
             if (Form.Validate())
             {
-                await _debounceHandleOnSave(args);
+                await _debounceHandleOnSave!(args);
             }
         }
         else
         {
-            await _debounceHandleOnSave(args);
+            await _debounceHandleOnSave!(args);
         }
     }
 

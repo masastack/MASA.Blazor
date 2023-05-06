@@ -8,7 +8,7 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
         [Parameter]
 
-        public string Color { get; set; } = "primary";
+        public string? Color { get; set; } = "primary";
 
         protected override string Icon => "$next";
 

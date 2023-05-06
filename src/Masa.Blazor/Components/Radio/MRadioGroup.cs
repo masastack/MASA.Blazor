@@ -3,6 +3,7 @@
     public class MRadioGroup<TValue> : MInput<TValue>, IRadioGroup<TValue>
     {
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool Column { get; set; } = true;
 
         [Parameter]
@@ -64,7 +65,7 @@
             Items.ForEach(item => item.RefreshState());
         }
 
-        public async Task Toggle(TValue value)
+        public async Task Toggle(TValue? value)
         {
             if (ValueChanged.HasDelegate)
             {

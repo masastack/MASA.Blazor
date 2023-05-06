@@ -9,16 +9,16 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     protected GridstackJSModule Module { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public List<TItem> Items { get; set; } = new();
+    public List<TItem>? Items { get; set; }
 
     [Parameter, EditorRequired]
-    public RenderFragment<TItem> ItemContent { get; set; } = null!;
+    public RenderFragment<TItem>? ItemContent { get; set; }
 
     [Parameter, EditorRequired]
-    public Func<TItem, string> ItemKey { get; set; } = null!;
+    public Func<TItem, string>? ItemKey { get; set; }
 
     [Parameter]
-    public Func<TItem, GridstackWidgetPosition> ItemPosition { get; set; }
+    public Func<TItem, GridstackWidgetPosition>? ItemPosition { get; set; }
 
     [Parameter]
     public string? ItemClass { get; set; }
@@ -83,15 +83,6 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     private string? _prevItemKeys;
     private IJSObjectReference? _gridstackInstance;
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-
-        ArgumentNullException.ThrowIfNull(Items);
-        ArgumentNullException.ThrowIfNull(ItemContent);
-        ArgumentNullException.ThrowIfNull(ItemKey);
-    }
-
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
@@ -115,11 +106,14 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
 
         if (Column < 0) Column = 12;
 
-        var itemKeys = string.Join("", Items.Select(ItemKey));
-        if (_prevItemKeys is not null && _prevItemKeys != itemKeys)
+        if (Items != null && ItemKey != null)
         {
-            _prevItemKeys = itemKeys;
-            NextTick(async () => { await Reload(); });
+            var itemKeys = string.Join("", Items.Select(ItemKey));
+            if (_prevItemKeys is not null && _prevItemKeys != itemKeys)
+            {
+                _prevItemKeys = itemKeys;
+                NextTick(async () => { await Reload(); });
+            }
         }
     }
 
@@ -129,7 +123,10 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
 
         if (firstRender)
         {
-            _prevItemKeys = string.Join("", Items.Select(ItemKey));
+            if (Items != null && ItemKey != null)
+            {
+                _prevItemKeys = string.Join("", Items.Select(ItemKey));
+            }
 
             var options = new GridstackOptions()
             {
@@ -155,10 +152,12 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
 
     public async ValueTask<List<GridstackWidget>> OnSave()
     {
+        if (_gridstackInstance is null) return new List<GridstackWidget>();
+
         return await Module.Save(_gridstackInstance);
     }
 
-    private void GridstackOnResize(object sender, GridstackResizeEventArgs e)
+    private void GridstackOnResize(object? sender, GridstackResizeEventArgs e)
     {
         if (OnResize.HasDelegate)
         {

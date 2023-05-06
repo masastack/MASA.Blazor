@@ -5,29 +5,18 @@ namespace Masa.Blazor
 {
     public class MEditor : BEditor, IAsyncDisposable
     {
-        /// <summary>
-        /// 是否开启Markdown
-        /// </summary>
         [Parameter]
         public bool Markdown { get; set; }
 
-        /// <summary>
-        /// 是否只读
-        /// </summary>
         [Parameter]
         public bool ReadOnly { get; set; }
 
-        /// <summary>
-        /// 主题
-        /// </summary>
         [Parameter]
+        [ApiDefaultValue("snow")]
         public string Theme { get; set; } = "snow";
 
-        /// <summary>
-        /// 数据双向绑定
-        /// </summary>
         [Parameter]
-        public override string Value
+        public override string? Value
         {
             get => _value;
             set
@@ -43,7 +32,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public MEditorUpload Upload { get; set; }
+        public MEditorUpload? Upload { get; set; }
 
         /// <summary>
         /// 编辑器内容便变更回调
@@ -61,34 +50,34 @@ namespace Masa.Blazor
         public EventCallback<MouseEventArgs> OnFocus { get; set; }
 
         [Parameter]
-        public Func<List<EditorUploadFileItem>, Task<bool>> BeforeAllUploadAsync { get; set; }
+        public Func<List<EditorUploadFileItem>, Task<bool>>? BeforeAllUploadAsync { get; set; }
 
         /// <summary>
         /// Multiple modules are separated by commas
         /// </summary>
         [Parameter]
-        public string AdditionalModules { get; set; }
+        public string? AdditionalModules { get; set; }
 
-        private string _value { get; set; }
-        private bool _waitingUpdate { get; set; } = false;
-        private bool _editorRendered { get; set; } = false;
-
-        private IJSObjectReference QuillHelper { get; set; }
-        private DotNetObjectReference<MEditor> ObjRef { get; set; }
+        private string? _value;
+        private bool _waitingUpdate = false;
+        private bool _editorRendered = false;
+        private IJSObjectReference? _quillHelper;
+        private DotNetObjectReference<MEditor>? _objRef;
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
 
-            watcher
-                .Watch<string>(nameof(Value), async val =>
-                {
-                    if (_waitingUpdate && _editorRendered)
-                    {
-                        _waitingUpdate = false;
-                        await SetHtmlAsync(_value);
-                    }
-                });
+            watcher.Watch<string>(nameof(Value), ValueChangeCallback);
+        }
+
+        private async void ValueChangeCallback(string _)
+        {
+            if (_waitingUpdate && _editorRendered)
+            {
+                _waitingUpdate = false;
+                await SetHtmlAsync(_value);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -104,12 +93,12 @@ namespace Masa.Blazor
 
         public async Task CreateEditorAsync()
         {
-            ObjRef = DotNetObjectReference.Create(this);
-            QuillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill/quill-helper.js");
+            _objRef = DotNetObjectReference.Create(this);
+            _quillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill/quill-helper.js");
 
-            await QuillHelper.InvokeVoidAsync("init",
+            await _quillHelper.InvokeVoidAsync("init",
                 ContentRef,
-                ObjRef,
+                _objRef,
                 ToolbarRef,
                 AdditionalModules,
                 ReadOnly,
@@ -120,44 +109,44 @@ namespace Masa.Blazor
             if (!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
 
-        public override async Task<string> GetTextAsync()
+        public override async Task<string?> GetTextAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getText", ContentRef);
+            return await _quillHelper.TryInvokeAsync<string>("getText", ContentRef);
         }
 
-        public override async Task<string> GetHtmlAsync()
+        public override async Task<string?> GetHtmlAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getHtml", ContentRef);
+            return await _quillHelper.TryInvokeAsync<string>("getHtml", ContentRef);
         }
 
-        public override async Task<string> GetContentAsync()
+        public override async Task<string?> GetContentAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getContent", ContentRef);
+            return await _quillHelper.TryInvokeAsync<string>("getContent", ContentRef);
         }
 
-        public async Task SetContentAsync(string Content)
+        public async Task SetContentAsync(string? content)
         {
-            await QuillHelper.InvokeVoidAsync("setContent", ContentRef, Content);
+            await _quillHelper.TryInvokeVoidAsync("setContent", ContentRef, content);
         }
 
-        public async Task SetHtmlAsync(string quillHtml)
+        public async Task SetHtmlAsync(string? quillHtml)
         {
-            await QuillHelper.InvokeVoidAsync("setHtml", ContentRef, quillHtml);
+            await _quillHelper.TryInvokeVoidAsync("setHtml", ContentRef, quillHtml);
         }
 
-        public async Task InsertImageAsync(string imageURL, int? editorIndex = null)
+        public async Task InsertImageAsync(string? imageUrl, int? editorIndex = null)
         {
-            await QuillHelper.InvokeVoidAsync("insertImage", ContentRef, imageURL, editorIndex);
+            await _quillHelper.TryInvokeVoidAsync("insertImage", ContentRef, imageUrl, editorIndex);
         }
 
         public async Task EnableAsync()
         {
-            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, true);
+            await _quillHelper.TryInvokeVoidAsync("enableEditor", ContentRef, true);
         }
 
         public async Task DisableAsync()
         {
-            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, false);
+            await _quillHelper.TryInvokeVoidAsync("enableEditor", ContentRef, false);
         }
 
         [JSInvokable]
@@ -211,7 +200,7 @@ namespace Masa.Blazor
 
             if (Upload != default)
             {
-                await QuillHelper.InvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
+                await _quillHelper.TryInvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
             }
             else
             {
@@ -225,15 +214,15 @@ namespace Masa.Blazor
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            ObjRef?.Dispose();
+            _objRef?.Dispose();
         }
 
         public async ValueTask DisposeAsync()
         {
             try
             {
-                if (QuillHelper != null)
-                    await QuillHelper.DisposeAsync();
+                if (_quillHelper != null)
+                    await _quillHelper.DisposeAsync();
             }
             catch (Exception)
             {

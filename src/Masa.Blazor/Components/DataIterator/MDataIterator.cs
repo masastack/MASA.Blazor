@@ -50,25 +50,25 @@
         public RenderFragment<ItemProps<TItem>> ItemContent { get; set; }
 
         [Parameter]
-        public RenderFragment LoadingContent { get; set; }
+        public RenderFragment? LoadingContent { get; set; }
 
         [Parameter]
-        public RenderFragment NoDataContent { get; set; }
+        public RenderFragment? NoDataContent { get; set; }
 
         [Parameter]
-        public RenderFragment NoResultsContent { get; set; }
+        public RenderFragment? NoResultsContent { get; set; }
 
         [Parameter]
-        public RenderFragment HeaderContent { get; set; }
+        public RenderFragment? HeaderContent { get; set; }
 
         [Parameter]
-        public RenderFragment FooterContent { get; set; }
+        public RenderFragment? FooterContent { get; set; }
 
         [Parameter]
         public StringNumber LoaderHeight { get; set; } = 4;
 
         [Parameter]
-        public RenderFragment ProgressContent { get; set; }
+        public RenderFragment? ProgressContent { get; set; }
 
         [Parameter]
         public IEnumerable<TItem> Value
@@ -99,7 +99,7 @@
         protected Dictionary<string, bool> Selection { get; } = new();
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         public override Task SetParametersAsync(ParameterView parameters)
         {

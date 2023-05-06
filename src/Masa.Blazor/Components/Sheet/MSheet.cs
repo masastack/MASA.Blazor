@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MSheet : BSheet, IThemeable, BlazorComponent.ISheet
+    public partial class MSheet : BSheet, ISheet
     {
         [Parameter]
         public bool Outlined { get; set; }
@@ -9,34 +9,34 @@
         public bool Shaped { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
-        public StringBoolean Rounded { get; set; }
+        public StringBoolean? Rounded { get; set; }
 
         [Parameter]
         public bool Tile { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         protected override void SetComponentClass()
         {

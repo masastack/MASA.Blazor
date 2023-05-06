@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue>
     {
@@ -46,7 +44,7 @@ namespace Masa.Blazor
 
         public bool HasText => LeftText != null || RightText != null;
 
-        public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
+        public new string? TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
         protected override void OnInternalValueChange(TValue val)
         {
