@@ -13,8 +13,7 @@ public partial class MMarkdownIt : BDomComponentBase
     [Parameter]
     public bool HeaderSections { get; set; }
 
-    [Parameter]
-    [EditorRequired]
+    [Parameter, EditorRequired]
     public string? Source { get; set; }
 
     [Parameter]
@@ -204,12 +203,14 @@ public partial class MMarkdownIt : BDomComponentBase
         {
             var result = await MarkdownItJSModule.ParseAll(_markdownIt, Source);
 
+            if (result is null) return;
+
             if (OnFrontMatterParsed.HasDelegate)
             {
                 await OnFrontMatterParsed.InvokeAsync(result.FrontMatter);
             }
 
-            _mdHtml = result.MarkupContent;
+            _mdHtml = result.MarkupContent ?? string.Empty;
 
             if (OnTocParsed.HasDelegate)
             {

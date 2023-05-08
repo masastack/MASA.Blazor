@@ -25,7 +25,7 @@
                  @key="@key">
                 <div class="grid-stack-item-content @CssProvider.GetClass("item")"
                      style="@CssProvider.GetStyle("item")">
-                    @ItemContent?.Invoke(item)
+                    @ItemContent(item)
                 </div>
             </div>
         }

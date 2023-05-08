@@ -31,15 +31,15 @@
         [Parameter]
         public bool Activatable { get; set; }
 
-        [Parameter, EditorRequired]
+        [Parameter]
         [ApiDefaultValue("$minus")]
         public string? IndeterminateIcon { get; set; } = "$minus";
 
-        [Parameter, EditorRequired]
+        [Parameter]
         [ApiDefaultValue("$checkboxOn")]
         public string? OnIcon { get; set; } = "$checkboxOn";
 
-        [Parameter, EditorRequired]
+        [Parameter]
         [ApiDefaultValue("$checkboxOff")]
         public string? OffIcon { get; set; } = "$checkboxOff";
 

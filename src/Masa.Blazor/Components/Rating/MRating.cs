@@ -125,7 +125,11 @@ namespace Masa.Blazor
                         attrs["aria-label"] = string.Format(IconLabel, itemIndex, Length);
                     }
 
-                    attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    if (ratingItem.Click != null)
+                    {
+                        attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    }
+
                     attrs["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
                     attrs["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,

@@ -60,7 +60,7 @@ public partial class PSnackbar
 
     [Parameter] public string? Title { get; set; }
 
-    [Parameter, EditorRequired] public string? Content { get; set; }
+    [Parameter] public string? Content { get; set; }
 
     [Parameter] public AlertTypes Type { get; set; }
 

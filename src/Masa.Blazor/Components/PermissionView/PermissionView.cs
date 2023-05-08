@@ -16,9 +16,16 @@ namespace Masa.Blazor
         public RenderFragment? ChildContent { get; set; }
 
         [Parameter, EditorRequired]
-        public string? Code { get; set; }
+        public string Code { get; set; } = null!;
 
         protected ClaimsPrincipal? User { get; set; }
+
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+
+            Code.ThrowIfNull(nameof(PermissionView));
+        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -31,7 +38,7 @@ namespace Masa.Blazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (User == null || Code == null || Validator == null)
+            if (User == null || Validator == null)
             {
                 return;
             }

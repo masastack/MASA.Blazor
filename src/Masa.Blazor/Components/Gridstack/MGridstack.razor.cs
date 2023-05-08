@@ -9,13 +9,13 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     protected GridstackJSModule Module { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public List<TItem>? Items { get; set; }
+    public List<TItem> Items { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public RenderFragment<TItem>? ItemContent { get; set; }
+    public RenderFragment<TItem> ItemContent { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public Func<TItem, string>? ItemKey { get; set; }
+    public Func<TItem, string> ItemKey { get; set; } = null!;
 
     [Parameter]
     public Func<TItem, GridstackWidgetPosition>? ItemPosition { get; set; }
@@ -82,6 +82,15 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
 
     private string? _prevItemKeys;
     private IJSObjectReference? _gridstackInstance;
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        
+        Items.ThrowIfNull(ComponentName);
+        ItemKey.ThrowIfNull(ComponentName);
+        ItemContent.ThrowIfNull(ComponentName);
+    }
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {

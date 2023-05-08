@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using BlazorComponent.Attributes;
 using BlazorComponent.Web;
@@ -38,11 +36,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     [Parameter]
     public bool HideSelected { get; set; }
 
-    [EditorRequired]
-    [Parameter]
-    public IList<TItem>? Items
+    [Parameter, EditorRequired]
+    public IList<TItem> Items
     {
-        get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
+        get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true)!;
         set => SetValue(value, disableIListAlwaysNotifying: true);
     }
 
@@ -53,13 +50,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     [Parameter]
     public Func<TItem, bool>? ItemDisabled { get; set; }
 
-    [EditorRequired]
-    [Parameter]
-    public Func<TItem, string>? ItemText { get; set; }
+    [Parameter, EditorRequired]
+    public Func<TItem, string> ItemText { get; set; } = null!;
 
-    [EditorRequired]
-    [Parameter]
-    public Func<TItem, TItemValue>? ItemValue { get; set; }
+    [Parameter, EditorRequired]
+    public Func<TItem, TItemValue?> ItemValue { get; set; } = null!;
 
     [Parameter]
     public Action<BMenuProps>? MenuProps { get; set; }
@@ -193,19 +188,23 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         MaxHeight = 304
     };
 
-    protected virtual string? GetText(TItem item) => item is null || ItemText is null ? null : ItemText(item);
+    protected virtual string GetText(TItem item) => ItemText(item);
 
-    protected TItemValue? GetValue(TItem item) => ItemValue is null ? default : ItemValue(item);
+    protected TItemValue? GetValue(TItem item) => ItemValue(item);
 
-    protected bool GetDisabled(TItem item) => ItemDisabled?.Invoke(item) ?? false;
+    protected bool GetDisabled(TItem item) => ItemDisabled?.Invoke(item) is true;
 
     protected virtual bool EnableSpaceKeDownPreventDefault => true;
 
-    public override Task SetParametersAsync(ParameterView parameters)
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
         NoDataText = I18n.T("$masaBlazor.noDataText");
 
-        return base.SetParametersAsync(parameters);
+        await base.SetParametersAsync(parameters);
+
+        Items.ThrowIfNull(ComponentName);
+        ItemText.ThrowIfNull(ComponentName);
+        ItemValue.ThrowIfNull(ComponentName);
     }
 
     protected override void OnInitialized()
