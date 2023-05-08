@@ -67,7 +67,7 @@ namespace BlazorComponent
             return styleBuilder.AddColor(color, true, func);
         }
 
-        public static StyleBuilder AddTransition(this StyleBuilder styleBuilder, string transition)
+        public static StyleBuilder AddTransition(this StyleBuilder styleBuilder, string? transition)
         {
             return styleBuilder.AddIf($"transition:{transition}", () => transition != null);
         }

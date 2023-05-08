@@ -16,7 +16,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     [Parameter]
     [ApiDefaultValue("$dropdown")]
-    public override string AppendIcon { get; set; } = "$dropdown";
+    public override string? AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
     [ApiDefaultValue(false)]
@@ -141,7 +141,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected override bool IsDirty => SelectedItems.Count > 0;
 
-    public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+    public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
     protected override Dictionary<string, object?> InputAttrs => new()
     {

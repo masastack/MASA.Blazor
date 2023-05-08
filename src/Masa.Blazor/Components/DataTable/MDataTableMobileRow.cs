@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class MDataTableMobileRow<TItem> : BDataTableMobileRow<TItem>
 {

@@ -2,7 +2,7 @@
 {
     public partial class MSlideGroup : BSlideGroup
     {
-        protected MSlideGroup()
+        public MSlideGroup()
         {
         }
 

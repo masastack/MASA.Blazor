@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable
+    public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable where TKey : notnull
     {
         [Parameter]
         public bool Hoverable { get; set; }

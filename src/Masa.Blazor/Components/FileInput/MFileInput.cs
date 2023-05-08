@@ -29,7 +29,7 @@ namespace Masa.Blazor
 
         [Parameter]
         [ApiDefaultValue("$file")]
-        public override string PrependIcon { get; set; } = "$file";
+        public override string? PrependIcon { get; set; } = "$file";
 
         [Parameter]
         [ApiDefaultValue(true)]

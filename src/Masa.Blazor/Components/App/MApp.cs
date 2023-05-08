@@ -1,5 +1,3 @@
-#nullable enable
-
 using BlazorComponent.Web;
 
 namespace Masa.Blazor

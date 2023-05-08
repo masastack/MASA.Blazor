@@ -1,10 +1,8 @@
-﻿using Masa.Blazor.Presets;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class PopupService
 {
-    public event Func<SnackbarOptions, Task> SnackbarOpen;
+    public event Func<SnackbarOptions, Task>? SnackbarOpen;
 
     public async Task EnqueueSnackbarAsync(string content, AlertTypes type = AlertTypes.None, bool closeable = false, int timeout = 5000)
     {
@@ -21,7 +19,7 @@ public partial class PopupService
     {
         if (withStackTrace)
         {
-            await EnqueueSnackbarAsync(exception.Message, exception.StackTrace, AlertTypes.Error, closeable, timeout);
+            await EnqueueSnackbarAsync(exception.Message, exception.StackTrace ?? string.Empty, AlertTypes.Error, closeable, timeout);
         }
         else
         {

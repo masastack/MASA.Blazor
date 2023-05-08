@@ -65,7 +65,7 @@
                 });
 
             AbstractProvider
-                .Apply(typeof(BSheetBody<>), typeof(BSheetBody<BlazorComponent.ISheet>));
+                .Apply(typeof(BSheetBody<>), typeof(BSheetBody<ISheet>));
         }
     }
 }

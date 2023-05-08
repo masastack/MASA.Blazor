@@ -67,7 +67,8 @@ namespace Masa.Blazor
             if (FixedRight)
             {
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
-                if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (element != null && element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
                 {
                     ScrollerOnRight = true;
                 }

@@ -141,15 +141,11 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
                 {
                     return "0.1s cubic-bezier(0.25, 0.8, 0.5, 1)";
                 }
-                else
-                {
-                    return "none";
-                }
+
+                return "none";
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 

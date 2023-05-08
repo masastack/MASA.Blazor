@@ -3,13 +3,13 @@
     public class MDataTableHeader : BDataTableHeader, IDataTableHeader
     {
         [Inject]
-        protected I18n I18n { get; set; }
+        protected I18n I18n { get; set; } = null!;
 
         [Parameter]
-        public DataOptions Options { get; set; }
+        public DataOptions Options { get; set; } = null!;
 
         [Parameter]
-        public string CheckboxColor { get; set; }
+        public string? CheckboxColor { get; set; }
 
         [Parameter]
         public bool EveryItem { get; set; }
@@ -36,18 +36,18 @@
         public string SortIcon { get; set; } = "$sort";
 
         [Parameter]
-        public RenderFragment<DataTableHeader> HeaderColContent { get; set; }
+        public RenderFragment<DataTableHeader>? HeaderColContent { get; set; }
 
         [Parameter]
         public EventCallback<bool> OnToggleSelectAll { get; set; }
 
         [Parameter]
-        public EventCallback<OneOf<string, List<string>>> OnSort { get; set; }
+        public EventCallback<OneOf<string?, List<string>>> OnSort { get; set; }
 
         [Parameter]
         public EventCallback<string> OnGroup { get; set; }
 
-        public async Task HandleOnHeaderColClick(string value)
+        public async Task HandleOnHeaderColClick(string? value)
         {
             if (OnSort.HasDelegate)
             {
@@ -74,13 +74,14 @@
                 })
                 .Apply("header", cssBuilder =>
                 {
-                    var header = (DataTableHeader)cssBuilder.Data;
+                    var header = (DataTableHeader?)cssBuilder.Data;
+                    if (header is null) return;
 
                     if (!DisableSort && header.Sortable)
                     {
                         var sortIndex = Options.SortBy.IndexOf(header.Value);
                         var beingSorted = sortIndex >= 0;
-                        var isDesc = beingSorted ? Options.SortDesc.ElementAtOrDefault(sortIndex) : false;
+                        var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
 
                         cssBuilder
                             .Add("sortable")
@@ -92,7 +93,8 @@
                         .Add($"text-{header.Align.ToString().ToLower()}");
                 }, styleBuilder =>
                 {
-                    var header = (DataTableHeader)styleBuilder.Data;
+                    var header = (DataTableHeader?)styleBuilder.Data;
+                    if (header is null) return;
 
                     styleBuilder
                         .AddWidth(header.Width)
@@ -107,14 +109,10 @@
                 .Apply("header-mobile__select", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__select"); })
                 .Apply("header-mobile__select-chips", cssBuilder =>
                 {
-                    var (text, value) = ((string text, string value))cssBuilder.Data;
+                    var data = ((string text, string value)?)cssBuilder.Data;
+                    if (!data.HasValue || (data.Value.text is null && data.Value.value is null)) return;
 
-                    if (text is null && value is null)
-                    {
-                        return;
-                    }
-
-                    var sortIndex = Options.SortBy.IndexOf(value);
+                    var sortIndex = Options.SortBy.IndexOf(data.Value.value);
                     var beingSorted = sortIndex >= 0;
                     var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
 

@@ -18,10 +18,10 @@
         public EventCallback<int> OnInput { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> Format { get; set; }
+        public Func<DateOnly, string>? Format { get; set; }
 
         [Parameter]
-        public CultureInfo Locale { get; set; }
+        public CultureInfo Locale { get; set; } = null!;
 
         public Func<DateOnly, string> Formatter
         {
@@ -54,14 +54,14 @@
                 })
                 .Apply("year-item", cssBuilder =>
                 {
-                    var active = (bool)cssBuilder.Data;
+                    var active = (bool)(cssBuilder.Data ?? false);
                     var color = active ? Color ?? "primary" : "";
                     cssBuilder
                         .AddIf("active", () => active)
                         .AddTextColor(color);
                 }, styleBuilder =>
                 {
-                    var active = (bool)styleBuilder.Data;
+                    var active = (bool)(styleBuilder.Data ?? false);
                     var color = active ? Color ?? "primary" : "";
                     styleBuilder
                         .AddTextColor(color);

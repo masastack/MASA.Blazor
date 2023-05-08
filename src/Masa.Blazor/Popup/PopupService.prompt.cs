@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 
 public partial class PopupService
 {
-    public Task<string> PromptAsync(string title, string content)
+    public Task<string?> PromptAsync(string title, string content)
     {
         return PromptAsync(param =>
         {
@@ -14,7 +14,7 @@ public partial class PopupService
         });
     }
 
-    public Task<string> PromptAsync(string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk)
+    public Task<string?> PromptAsync(string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk)
     {
         return PromptAsync(param =>
         {
@@ -24,7 +24,7 @@ public partial class PopupService
         });
     }
 
-    public async Task<string> PromptAsync(Action<PromptOptions> parameters)
+    public async Task<string?> PromptAsync(Action<PromptOptions> parameters)
     {
         PromptOptions param = new();
 
@@ -32,6 +32,6 @@ public partial class PopupService
 
         var res = await OpenAsync(typeof(Prompt), param.ToParameters());
 
-        return (string)res;
+        return (string?)res;
     }
 }

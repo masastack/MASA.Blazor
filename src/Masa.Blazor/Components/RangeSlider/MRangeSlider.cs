@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : IComparable
+    public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : struct, IComparable
     {
         public ElementReference SecondThumbElement { get; set; }
 
@@ -11,13 +11,9 @@
             get { return DoubleInternalValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList(); }
         }
 
-        protected IList<double> DoubleInternalValues => InternalValue.Select(item => (double)(dynamic)item).ToList();
+        protected IList<double> DoubleInternalValues => InternalValue?.Select(item => (double)(dynamic)item).ToList() ?? new List<double>();
 
-        protected override IList<TValue> LazyValue { get; set; } = new List<TValue>()
-        {
-            default,
-            default
-        };
+        protected override IList<TValue>? LazyValue { get; set; } = new List<TValue>() { default, default };
 
         protected int? ActiveThumb { get; set; }
 
@@ -25,7 +21,7 @@
         {
             get
             {
-                if (ActiveThumb.HasValue)
+                if (InternalValue is { Count: 2 } &&  ActiveThumb.HasValue)
                 {
                     return (double)(dynamic)InternalValue[ActiveThumb.Value];
                 }
@@ -36,7 +32,7 @@
             {
                 var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
 
-                if (ActiveThumb.HasValue)
+                if (InternalValue is { Count: 2 } && ActiveThumb.HasValue)
                 {
                     InternalValue[ActiveThumb.Value] = ConvertDoubleToTValue<TValue>(val);
                 }
@@ -189,7 +185,7 @@
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
             var roundedVal = val.Select(v => ConvertDoubleToTValue<TValue>(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
-            if (!ListComparer.Equals(roundedVal, InternalValue))
+            if (InternalValue != null && !ListComparer.Equals(roundedVal, InternalValue))
             {
                 InternalValue = roundedVal;
             }

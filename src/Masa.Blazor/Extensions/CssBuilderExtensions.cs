@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor;
+﻿using Masa.Blazor;
 
 namespace BlazorComponent
 {

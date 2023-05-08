@@ -6,48 +6,51 @@
         protected I18n I18n { get; set; } = null!;
 
         [Parameter]
-        public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
+        public RenderFragment<(int PageStart, int PageStop, int ItemsLength)>? PageTextContent { get; set; }
 
         [Parameter]
         public Action<IDataFooterParameters>? FooterProps { get; set; }
 
         [Parameter]
-        public Func<TItem, string> ItemKey { get; set; }
+        public Func<TItem, string>? ItemKey { get; set; }
+
+        [Parameter]
+        public string? Color { get; set; }
 
         [Parameter]
         public bool SingleSelect { get; set; }
 
         [Parameter]
-        public List<TItem> Expanded { get; set; }
+        public List<TItem>? Expanded { get; set; }
 
         [Parameter]
         public bool SingleExpand { get; set; }
 
         [Parameter]
-        public StringBoolean Loading { get; set; }
+        public StringBoolean? Loading { get; set; }
 
         [Parameter]
-        public string NoResultsText { get; set; }
+        public string? NoResultsText { get; set; }
 
         [Parameter]
-        public string NoDataText { get; set; }
+        public string? NoDataText { get; set; }
 
         [Parameter]
-        public string LoadingText { get; set; }
+        public string? LoadingText { get; set; }
 
         [Parameter]
         public bool HideDefaultFooter { get; set; }
 
         [Parameter]
-        public Func<TItem, bool> SelectableKey { get; set; }
+        public Func<TItem, bool>? SelectableKey { get; set; }
 
         [Parameter]
-        public RenderFragment<(IEnumerable<TItem> Items, Func<TItem, bool> IsExpanded, Action<TItem, bool> Expand)> ChildContent { get; set; }
+        public RenderFragment<(IEnumerable<TItem> Items, Func<TItem, bool> IsExpanded, Action<TItem, bool> Expand)>? ChildContent { get; set; }
 
-        RenderFragment IDataIterator<TItem>.ChildContent => ChildContent == null ? null : ChildContent((ComputedItems, IsExpanded, Expand));
+        RenderFragment? IDataIterator<TItem>.ChildContent => ChildContent?.Invoke((ComputedItems, IsExpanded, Expand));
 
         [Parameter]
-        public RenderFragment<ItemProps<TItem>> ItemContent { get; set; }
+        public RenderFragment<ItemProps<TItem>>? ItemContent { get; set; }
 
         [Parameter]
         public RenderFragment? LoadingContent { get; set; }
@@ -71,7 +74,7 @@
         public RenderFragment? ProgressContent { get; set; }
 
         [Parameter]
-        public IEnumerable<TItem> Value
+        public IEnumerable<TItem>? Value
         {
             get => GetValue<IEnumerable<TItem>>();
             set => SetValue(value);
@@ -81,10 +84,10 @@
         public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
 
         [Parameter]
-        public Action<TItem, bool> OnItemSelect { get; set; }
+        public Action<TItem, bool>? OnItemSelect { get; set; }
 
         [Parameter]
-        public Action<IEnumerable<TItem>, bool> OnToggleSelectAll { get; set; }
+        public Action<IEnumerable<TItem>, bool>? OnToggleSelectAll { get; set; }
 
         public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
 
@@ -98,8 +101,6 @@
 
         protected Dictionary<string, bool> Selection { get; } = new();
 
-        [Parameter]
-        public string? Color { get; set; }
 
         public override Task SetParametersAsync(ParameterView parameters)
         {
@@ -117,11 +118,15 @@
             watcher
                 .Watch<IEnumerable<TItem>>(nameof(Value), val =>
                 {
+                    if (val is null) return;
+                    
                     var keys = new List<string>();
 
                     foreach (var item in val)
                     {
-                        var key = ItemKey(item);
+                        var key = ItemKey?.Invoke(item);
+                        if (key is null) return;
+
                         Selection[key] = true;
 
                         keys.Add(key);
@@ -241,6 +246,7 @@
             foreach (var item in SelectableItems)
             {
                 var key = ItemKey?.Invoke(item);
+                if (key == null) continue;
                 Selection[key] = value;
             }
 

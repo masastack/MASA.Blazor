@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-// TODO: move to BlazorComponent
 public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
 {
     [Parameter]
