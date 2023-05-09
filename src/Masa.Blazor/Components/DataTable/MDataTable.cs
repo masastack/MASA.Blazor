@@ -209,7 +209,7 @@ namespace Masa.Blazor
 
         public string GroupPlusIcon { get; } = "$plus";
 
-        public DataOptions Options => InternalOptions.TryDeepClone();
+        public DataOptions Options => InternalOptions;
 
         protected bool IsFixedRight => FixedRight;
 
