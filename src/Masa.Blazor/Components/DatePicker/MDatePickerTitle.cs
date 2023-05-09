@@ -1,20 +1,12 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MDatePickerTitle : BDatePickerTitle, IDatePickerTitle
     {
         [Parameter]
         public DateOnly Value
         {
-            get
-            {
-                return GetValue<DateOnly>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<DateOnly>();
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -30,21 +22,15 @@ namespace Masa.Blazor
         public EventCallback<bool> OnSelectingYearUpdate { get; set; }
 
         [Parameter]
-        public string Year { get; set; }
+        public string? Year { get; set; }
 
         [Parameter]
-        public string YearIcon { get; set; }
+        public string? YearIcon { get; set; }
 
         [Parameter]
-        public string Date { get; set; }
+        public string? Date { get; set; }
 
-        public string ComputedTransition
-        {
-            get
-            {
-                return IsReversing ? "picker-reverse-transition" : "picker-transition";
-            }
-        }
+        public string ComputedTransition => IsReversing ? "picker-reverse-transition" : "picker-transition";
 
         protected bool IsReversing { get; set; }
 

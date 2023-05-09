@@ -8,10 +8,10 @@ public partial class PPageHeader
     private I18n I18n { get; set; } = null!;
 
     [Parameter]
-    public string Class { get; set; }
+    public string? Class { get; set; }
 
     [Parameter]
-    public RenderFragment<(Func<KeyboardEventArgs, Task> onEnter, Func<Task> onSearch)> Filters { get; set; }
+    public RenderFragment<(Func<KeyboardEventArgs, Task> onEnter, Func<Task> onSearch)>? Filters { get; set; }
 
     [Parameter]
     public RenderFragment? LeftActions { get; set; }
@@ -29,16 +29,16 @@ public partial class PPageHeader
     public bool ShowFiltersByDefault { get; set; }
 
     [Parameter]
-    public string Style { get; set; }
+    public string? Style { get; set; }
 
     [Parameter]
-    public string Subtitle { get; set; }
+    public string? Subtitle { get; set; }
 
     [Parameter]
     public RenderFragment? SubtitleFragment { get; set; }
 
     [Parameter]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     [Parameter]
     public RenderFragment? TitleFragment { get; set; }

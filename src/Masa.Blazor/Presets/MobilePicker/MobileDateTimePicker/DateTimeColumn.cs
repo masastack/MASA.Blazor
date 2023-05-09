@@ -17,9 +17,9 @@ public class DateTimeColumn<TPrecision>
 
     public TPrecision Precision { get; }
 
-    public Func<TPrecision, int, string> Formatter { get; }
+    public Func<TPrecision, int, string>? Formatter { get; }
 
-    public DateTimeColumn(TPrecision precision, int value, Func<TPrecision, int, string> formatter)
+    public DateTimeColumn(TPrecision precision, int value, Func<TPrecision, int, string>? formatter)
     {
         Value = value;
         Precision = precision;

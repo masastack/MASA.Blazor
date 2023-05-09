@@ -2,7 +2,7 @@
 
 public class DateColumn : DateTimeColumn<DatePrecision>
 {
-    public DateColumn(DatePrecision precision, int value, Func<DatePrecision, int, string> formatter) : base(precision, value, formatter)
+    public DateColumn(DatePrecision precision, int value, Func<DatePrecision, int, string>? formatter) : base(precision, value, formatter)
     {
     }
 

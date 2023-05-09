@@ -53,7 +53,11 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
-    public string? NoDataPath { get; set; } = "/";
+    public string NoDataPath
+    {
+        get => _noDataPath ?? "/";
+        set => _noDataPath = value;
+    }
 
     [Parameter]
     public string? CloseIcon { get; set; }
@@ -66,6 +70,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public Func<string, Task<bool>>? OnClose { get; set; }
 
     private bool _menuValue;
+    private string? _noDataPath;
     private PatternPath? _contextmenuPath;
 
     private double _positionX;

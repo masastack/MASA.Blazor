@@ -87,7 +87,7 @@ namespace Masa.Blazor
                 {
                     var url = GetBackgroundImageUrl();
                     styleBuilder
-                        .AddIf(GetBackgroundImage(url), () => !string.IsNullOrEmpty(url))
+                        .AddIf(GetBackgroundImage(url!), () => !string.IsNullOrEmpty(url))
                         .AddIf($"background-position: {Position}", () => !string.IsNullOrEmpty(Position));
                 })
                 .Apply("placeholder", cssBuilder => { cssBuilder.Add("m-image__placeholder"); });

@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components.Web;
-
 namespace Masa.Blazor
 {
     public partial class MSelectList<TItem, TItemValue, TValue> : BSelectList<TItem, TItemValue, TValue>, ISelectList<TItem, TItemValue, TValue>
@@ -14,7 +12,7 @@ namespace Masa.Blazor
         public bool NoFilter { get; set; }
 
         [Parameter]
-        public string SearchInput { get; set; }
+        public string? SearchInput { get; set; }
 
         [Parameter]
         public EventCallback<TItem> OnSelect { get; set; }
@@ -23,9 +21,9 @@ namespace Masa.Blazor
         public string? Color { get; set; }
 
         [Parameter]
-        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+        public RenderFragment<SelectListItemProps<TItem>>? ItemContent { get; set; }
 
-        protected string TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
+        protected string? TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
 
         protected override void SetComponentClass()
         {
@@ -106,7 +104,7 @@ namespace Masa.Blazor
         protected (string, string, string) GetMaskedCharacters(string text)
         {
             var searchInput = (SearchInput ?? "").ToLowerInvariant();
-            var index = text.ToLowerInvariant().IndexOf(searchInput);
+            var index = text.ToLowerInvariant().IndexOf(searchInput, StringComparison.Ordinal);
 
             if (index == -1)
             {

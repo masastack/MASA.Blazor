@@ -46,7 +46,7 @@
 
         public new string? TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
-        protected override void OnInternalValueChange(TValue val)
+        protected override void OnInternalValueChange(TValue? val)
         {
             base.OnInternalValueChange(val);
 

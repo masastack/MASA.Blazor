@@ -188,7 +188,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         MaxHeight = 304
     };
 
-    protected virtual string GetText(TItem item) => ItemText(item);
+    protected virtual string? GetText(TItem? item) => item is null ? null : ItemText(item);
 
     protected TItemValue? GetValue(TItem item) => ItemValue(item);
 
@@ -294,8 +294,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return uniqueItems;
     }
 
-    private bool _isOutsideClickEventRegistered;
-
     private void GenMenu()
     {
         if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
@@ -336,7 +334,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
             {
-                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
             }
         }
 
@@ -539,12 +537,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
                     SelectedIndex = index;
                 });
-                
+
                 attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item!));
             });
     }
 
-    protected override void OnInternalValueChange(TValue val)
+    protected override void OnInternalValueChange(TValue? val)
     {
         base.OnInternalValueChange(val);
 

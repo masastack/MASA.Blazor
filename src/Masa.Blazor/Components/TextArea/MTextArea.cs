@@ -68,7 +68,7 @@ namespace Masa.Blazor
                 .Watch<bool>(nameof(RowHeight), ReCalculateInputHeight);
         }
 
-        protected override void OnLazyValueChange(string val)
+        protected override void OnLazyValueChange(string? val)
         {
             ReCalculateInputHeight();
         }
@@ -85,7 +85,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task SetValueByJsInterop(string val)
+        protected override async Task SetValueByJsInterop(string? val)
         {
             await base.SetValueByJsInterop(val);
             await CalculateInputHeight();

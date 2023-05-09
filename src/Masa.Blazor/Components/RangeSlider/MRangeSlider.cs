@@ -178,7 +178,7 @@
             await base.HandleOnBlurAsync(args);
         }
 
-        protected override void OnValueChanged(IList<TValue> val)
+        protected override void OnValueChanged(IList<TValue>? val)
         {
             val ??= new List<TValue>() { default, default };
 

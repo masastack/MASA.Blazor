@@ -74,7 +74,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     [Parameter]
     public bool Routable { get; set; }
 
-    private Scroller _scroller;
+    private Scroller? _scroller;
     private bool _haveRendered;
 
     public bool CanScroll => HideOnScroll || !InputValue;
@@ -82,7 +82,13 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     private bool IsActive
     {
         get => _scroller?.IsActive ?? true;
-        set => _scroller.IsActive = value;
+        set
+        {
+            if (_scroller is not null)
+            {
+                _scroller.IsActive = value;
+            }
+        }
     }
 
     protected override void OnInitialized()
@@ -131,7 +137,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         IsActive = InputValue;
 
-        _scroller.ScrollThreshold = ScrollThreshold;
+        _scroller!.ScrollThreshold = ScrollThreshold;
 
         if (_haveRendered)
         {
@@ -154,7 +160,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
                     ScrollTarget,
                     "scroll",
                     DotNetObjectReference.Create(new Invoker(async () =>
-                        await CreateEventCallback(async () => await _scroller.OnScroll(ThresholdMet)).InvokeAsync()))
+                        await CreateEventCallback(async () => await _scroller!.OnScroll(ThresholdMet)).InvokeAsync()))
                 );
             }
 

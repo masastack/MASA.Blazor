@@ -11,11 +11,11 @@
         [Parameter]
         public string? ItemsPerPageText { get; set; }
 
-        [Parameter]
-        public DataOptions? Options { get; set; }
+        [Parameter, EditorRequired]
+        public DataOptions Options { get; set; } = null!;
 
-        [Parameter]
-        public DataPagination? Pagination { get; set; }
+        [Parameter, EditorRequired]
+        public DataPagination Pagination { get; set; } = null!;
 
         [Parameter]
         public EventCallback<Action<DataOptions>> OnOptionsUpdate { get; set; }

@@ -137,7 +137,7 @@ public partial class ModalBase
 
     private bool _saveLoading;
     private Func<MouseEventArgs, Task>? _debounceHandleOnSave;
-    private Func<bool, Task>? _internalValueChanged;
+    private Func<bool, Task> _internalValueChanged = _ => Task.CompletedTask;
 
     private MCardText? BodyRef { get; set; }
 
@@ -154,6 +154,8 @@ public partial class ModalBase
     protected ModalButtonProps? ComputedCancelButtonProps { get; set; }
 
     protected ModalButtonProps? ComputedDeleteButtonProps { get; set; }
+
+    protected virtual string? StaticClass { get; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -178,7 +180,7 @@ public partial class ModalBase
         CancelProps?.Invoke(ComputedCancelButtonProps);
         DeleteProps?.Invoke(ComputedDeleteButtonProps);
 
-        _internalValueChanged = ValueChanged.HasDelegate ? InternalValueChanged : default;
+        _internalValueChanged = ValueChanged.HasDelegate ? InternalValueChanged : _ => Task.CompletedTask;
     }
 
     protected override void OnInitialized()

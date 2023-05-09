@@ -103,9 +103,12 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     [Parameter]
     public RenderFragment? ProgressContent { get; set; }
 
+    private HtmlElement? _app;
+    private CancellationTokenSource? _mouseCancellationTokenSource;
+
     protected virtual double DoubleInternalValue
     {
-        get => (double)(dynamic)InternalValue;
+        get => (double)(dynamic)InternalValue!;
         set
         {
             var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
@@ -124,10 +127,6 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public bool ThumbPressed { get; set; }
 
     public double StartOffset { get; set; }
-
-    public CancellationTokenSource MouseCancellationTokenSource { get; set; }
-
-    public HtmlElement App { get; set; }
 
     public Dictionary<string, object> InputAttrs { get; } = new();
 
@@ -231,7 +230,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged(TValue val)
+    protected override void OnValueChanged(TValue? val)
     {
         //Value may not between min and max
         //If that so,we should invoke ValueChanged 
@@ -253,7 +252,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     {
         base.OnInitialized();
 
-        App ??= Document.QuerySelector("[data-app]");
+        _app ??= Document.QuerySelector("[data-app]");
     }
 
     protected override void OnParametersSet()
@@ -280,10 +279,10 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
     {
-        await HandleOnSliderStartSwiping(args.Target, args.Touches[0].ClientX, args.Touches[0].ClientY);
-        await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false,
+        await HandleOnSliderStartSwiping(args.Target!, args.Touches[0].ClientX, args.Touches[0].ClientY);
+        await _app!.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false,
             new EventListenerExtras() { PreventDefault = false, StopPropagation = true });
-        await App.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
+        await _app!.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
         {
             Capture = true,
             Once = true
@@ -292,11 +291,11 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
     {
-        await HandleOnSliderStartSwiping(args.Target, args.ClientX, args.ClientY);
+        await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
 
-        await App.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false,
+        await _app!.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false,
             new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
-        await App.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
+        await _app!.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
         {
             Capture = true,
             Once = true
@@ -329,12 +328,12 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         {
             StartOffset = 0;
 
-            MouseCancellationTokenSource?.Cancel();
-            MouseCancellationTokenSource = new CancellationTokenSource();
+            _mouseCancellationTokenSource?.Cancel();
+            _mouseCancellationTokenSource = new CancellationTokenSource();
 
             _ = Task.Run(async () =>
             {
-                await Task.Delay(300, MouseCancellationTokenSource.Token);
+                await Task.Delay(300, _mouseCancellationTokenSource.Token);
                 ThumbPressed = true;
 
                 await InvokeStateHasChangedAsync();
@@ -362,10 +361,10 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     public async Task HandleOnSliderEndSwiping()
     {
-        MouseCancellationTokenSource?.Cancel();
+        _mouseCancellationTokenSource?.Cancel();
         ThumbPressed = false;
-        await App.RemoveEventListenerAsync("mousemove");
-        await App.RemoveEventListenerAsync("touchmove");
+        await _app!.RemoveEventListenerAsync("mousemove");
+        await _app!.RemoveEventListenerAsync("touchmove");
 
         IsActive = false;
     }
@@ -385,6 +384,8 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
     {
         var track = Document.GetElementByReference(TrackElement);
+        if (track == null) return 0;
+
         var rect = await track.GetBoundingClientRectAsync();
 
         var tractStart = Vertical ? rect.Top : rect.Left;
@@ -408,8 +409,8 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             return value;
         }
 
-        var trimmedStep = Step.ToString().Trim();
-        var decimals = trimmedStep.IndexOf('.') > -1
+        var trimmedStep = Step.ToString()?.Trim();
+        var decimals = trimmedStep != null && trimmedStep.IndexOf('.') > -1
             ? (trimmedStep.Length - trimmedStep.IndexOf('.') - 1)
             : 0;
         var offset = Min % StepNumeric;
@@ -650,19 +651,14 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         }
     }
 
-    protected StringNumber ParseKeyDown(KeyboardEventArgs args, double value)
+    protected StringNumber? ParseKeyDown(KeyboardEventArgs args, double value)
     {
-        if (!IsInteractive)
-        {
-            return null;
-        }
+        if (!IsInteractive) return null;
 
         var keyCodes = new[] { "pageup", "pagedown", "end", "home", "left", "right", "down", "up" };
         var directionCodes = new[] { "left", "right", "down", "up" };
-        if (!keyCodes.Contains(args.Code))
-        {
-            return null;
-        }
+
+        if (!keyCodes.Contains(args.Code)) return null;
 
         var step = StepNumeric == 0 ? 1 : StepNumeric;
         var steps = Max - Min / step;

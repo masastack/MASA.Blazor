@@ -6,10 +6,10 @@ namespace Masa.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Document? Document { get; set; }
+        public Document Document { get; set; } = null!;
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
@@ -543,13 +543,13 @@ namespace Masa.Blazor
                 return;
             }
 
-            var label = Document!.GetElementByReference(LabelReference.Ref);
+            var label = Document.GetElementByReference(LabelReference.Ref);
             if (label == null) return;
 
             var scrollWidth = await label.GetScrollWidthAsync();
             if (scrollWidth == null) return;
 
-            var element = Document!.GetElementByReference(Ref);
+            var element = Document.GetElementByReference(Ref);
             if (element == null) return;
 
             var offsetWidth = await element.GetOffsetWidthAsync();
@@ -567,7 +567,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            var prefix = Document!.GetElementByReference(PrefixElement);
+            var prefix = Document.GetElementByReference(PrefixElement);
             if (prefix == null) return;
 
             var offsetWidth = await prefix.GetOffsetWidthAsync();
@@ -590,7 +590,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            var prependInner = Document!.GetElementByReference(PrependInnerElement);
+            var prependInner = Document.GetElementByReference(PrependInnerElement);
             if (prependInner is null) return;
 
             var offsetWidth = await prependInner.GetOffsetWidthAsync();
@@ -666,7 +666,7 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue.ToString());
+                await SetValueByJsInterop(checkValue?.ToString());
             }
         }
 

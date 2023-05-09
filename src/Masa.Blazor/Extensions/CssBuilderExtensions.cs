@@ -45,7 +45,7 @@ namespace BlazorComponent
             return cssBuilder.AddColor(color, false, func);
         }
 
-        public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText = false)
+        public static CssBuilder AddColor(this CssBuilder cssBuilder, string? color, bool isText = false)
         {
             return cssBuilder.AddColor(color, isText, () => true);
         }

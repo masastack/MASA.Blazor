@@ -44,9 +44,9 @@
         
         public Icons Icons { get; }
 
-        public event Action<bool> OnRTLChange;
+        public event Action<bool>? OnRTLChange;
 
-        public event Action<Theme> OnThemeChange;
+        public event Action<Theme>? OnThemeChange;
 
         public void ToggleTheme()
         {

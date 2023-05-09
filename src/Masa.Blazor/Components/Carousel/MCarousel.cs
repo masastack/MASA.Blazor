@@ -50,7 +50,6 @@ public partial class MCarousel : MWindow, ICarousel
     public string? VerticalDelimiters { get; set; }
 
     private Timer? _timer;
-    private int _slideTimeout;
 
     public override bool IsDark
     {

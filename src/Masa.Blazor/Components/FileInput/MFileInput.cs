@@ -52,19 +52,16 @@ namespace Masa.Blazor
 
         public bool HasChips => Chips || SmallChips;
 
-        public IList<string> Text
+        public IList<string?> Text
         {
             get
             {
                 if (!IsDirty && (IsFocused || !HasLabel))
                 {
-                    return new List<string>
-                    {
-                        Placeholder
-                    };
+                    return new List<string?> { Placeholder };
                 }
 
-                var text = new List<string>();
+                var text = new List<string?>();
 
                 foreach (var file in Files)
                 {

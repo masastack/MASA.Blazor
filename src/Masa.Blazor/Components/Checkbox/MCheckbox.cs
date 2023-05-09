@@ -38,7 +38,7 @@ namespace Masa.Blazor
         [Inject]
         public Document Document { get; set; }
 
-        protected override void OnInternalValueChange(TValue val)
+        protected override void OnInternalValueChange(TValue? val)
         {
             base.OnInternalValueChange(val);
 
@@ -106,8 +106,8 @@ namespace Masa.Blazor
             {
                 //It's used to prevent ripple directive,and we may remove this 
                 var inputSlot = Document.GetElementByReference(InputSlotElement);
-                await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
-                await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
+                await inputSlot!.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
+                await inputSlot!.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
         }
     }

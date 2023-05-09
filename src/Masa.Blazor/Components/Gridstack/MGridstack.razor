@@ -5,29 +5,26 @@
 <div class="grid-stack @CssProvider.GetClass()"
      style="@CssProvider.GetStyle()"
      @ref="Ref">
-    @if (Items != null && ItemKey != null)
+    @foreach (var item in Items)
     {
-        @foreach (var item in Items)
-        {
-            var position = ItemPosition?.Invoke(item);
-            var w = position?.W.ToString() ?? "undefined";
-            var h = position?.H.ToString() ?? "undefined";
-            var x = position?.X is null ? "undefined" : position.X.ToString();
-            var y = position?.Y is null ? "undefined" : position.Y.ToString();
-            var key = ItemKey(item);
+        var position = ItemPosition?.Invoke(item);
+        var w = position?.W.ToString() ?? "undefined";
+        var h = position?.H.ToString() ?? "undefined";
+        var x = position?.X is null ? "undefined" : position.X.ToString();
+        var y = position?.Y is null ? "undefined" : position.Y.ToString();
+        var key = ItemKey(item);
 
-            <div class="grid-stack-item"
-                 gs-w="@w"
-                 gs-h="@h"
-                 gs-x="@x"
-                 gs-y="@y"
-                 gs-id="@key"
-                 @key="@key">
-                <div class="grid-stack-item-content @CssProvider.GetClass("item")"
-                     style="@CssProvider.GetStyle("item")">
-                    @ItemContent(item)
-                </div>
+        <div class="grid-stack-item"
+             gs-w="@w"
+             gs-h="@h"
+             gs-x="@x"
+             gs-y="@y"
+             gs-id="@key"
+             @key="@key">
+            <div class="grid-stack-item-content @CssProvider.GetClass("item")"
+                 style="@CssProvider.GetStyle("item")">
+                @ItemContent(item)
             </div>
-        }
+        </div>
     }
 </div>

@@ -98,7 +98,7 @@ namespace Masa.Blazor
                         .AddIf("no-gutters", () => NoGutters)
                         .AddIf("row--dense", () => Dense)
                         //'start', 'end', 'center', 'baseline', 'stretch'
-                        .AddIf(Align.ToString(() =>
+                        .AddIf(Align!.ToString(() =>
                                 $"align-{Align}",
                             ("align-auto", AlignTypes.Auto),
                             ("align-start", AlignTypes.Start),
@@ -138,7 +138,7 @@ namespace Masa.Blazor
                             ("align-xl-end", AlignTypes.End),
                             ("align-xl-baseline", AlignTypes.Baseline),
                             ("align-xl-stretch", AlignTypes.Stretch)), () => AlignXl != null)
-                        .AddIf(Justify.ToString(() =>
+                        .AddIf(Justify!.ToString(() =>
                                 $"justify-{Justify}",
                             ("justify-start", JustifyTypes.Start),
                             ("justify-center", JustifyTypes.Center),
@@ -173,7 +173,7 @@ namespace Masa.Blazor
                             ("justify-xl-end", JustifyTypes.End),
                             ("justify-xl-space-between", JustifyTypes.SpaceBetween),
                             ("justify-xl-space-around", JustifyTypes.SpaceAround)), () => JustifyXl != null)
-                        .AddIf(AlignContent.ToString(() =>
+                        .AddIf(AlignContent!.ToString(() =>
                                 $"align-content-{AlignContent}",
                             ("align-content-start", AlignContentTypes.Start),
                             ("align-content-center", AlignContentTypes.Center),

@@ -71,6 +71,8 @@ namespace Masa.Blazor.Presets
         internal void RemoveSnackbar(Guid id)
         {
             var config = _stack.FirstOrDefault(c => c.Id == id);
+            if (config is null) return;
+
             _stack.Remove(config);
             StateHasChanged();
         }

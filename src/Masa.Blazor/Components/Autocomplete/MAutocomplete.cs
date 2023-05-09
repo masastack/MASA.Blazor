@@ -6,7 +6,7 @@ namespace Masa.Blazor
 {
     public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>, IAutocomplete<TItem, TItemValue, TValue>
     {
-        private Func<TItem, string, string, bool> _filter;
+        private Func<TItem, string, string, bool>? _filter;
 
         [Parameter]
         [ApiDefaultValue(true)]
@@ -34,16 +34,16 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string SearchInput { get; set; }
+        public string? SearchInput { get; set; }
 
         [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
 
         protected override List<TItem> ComputedItems => FilteredItems;
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-        protected IList<TItemValue> SelectedValues => SelectedItems.Select(GetValue).ToList();
+        protected IList<TItemValue?> SelectedValues => SelectedItems.Select(GetValue).ToList();
 
         protected bool HasDisplayedItems => HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
 
@@ -69,7 +69,7 @@ namespace Masa.Blazor
                     nameof(NoFilter),
                     nameof(InternalSearch),
                     nameof(Items)
-                });
+                })!;
             }
         }
 
@@ -296,7 +296,7 @@ namespace Masa.Blazor
             await base.HandleOnClearClickAsync(args);
         }
 
-        private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
+        private async void OnFilteredItemsChanged(IList<TItem>? val, IList<TItem>? oldVal)
         {
             val ??= new List<TItem>();
             oldVal ??= new List<TItem>();

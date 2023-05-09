@@ -27,7 +27,7 @@
         public string? Src { get; set; }
 
         [Parameter]
-        public RenderFragment<Dictionary<string, object>>? ImgContent { get; set; }
+        public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
         [Parameter]
         public bool Short { get; set; }
