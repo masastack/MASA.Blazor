@@ -140,7 +140,6 @@ public partial class ModalBase
 
     private bool _saveLoading;
     private Func<MouseEventArgs, Task> _debounceHandleOnSave;
-    private Func<bool, Task> _internalValueChanged;
 
     private MCardText BodyRef { get; set; }
 
@@ -180,8 +179,6 @@ public partial class ModalBase
         SaveProps?.Invoke(ComputedSaveButtonProps);
         CancelProps?.Invoke(ComputedCancelButtonProps);
         DeleteProps?.Invoke(ComputedDeleteButtonProps);
-
-        _internalValueChanged = ValueChanged.HasDelegate ? InternalValueChanged : default;
     }
 
     protected override void OnInitialized()
