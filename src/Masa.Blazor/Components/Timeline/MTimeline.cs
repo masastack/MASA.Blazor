@@ -8,7 +8,6 @@
         [Parameter]
         public bool Dense { get; set; }
 
-
         protected override void SetComponentClass()
         {
             var prefix = "m-timeline";

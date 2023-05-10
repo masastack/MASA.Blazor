@@ -13,10 +13,11 @@ public partial class MCarousel : MWindow, ICarousel
     }
 
     [Parameter]
-    public string DelimiterIcon { get; set; }
+    public string? DelimiterIcon { get; set; }
 
     [Parameter]
-    public StringNumber Height
+    [ApiDefaultValue(500)]
+    public StringNumber? Height
     {
         get => GetValue((StringNumber)500);
         set => SetValue(value);
@@ -29,6 +30,7 @@ public partial class MCarousel : MWindow, ICarousel
     public bool HideDelimiterBackground { get; set; }
 
     [Parameter]
+    [ApiDefaultValue(6000)]
     public int Interval
     {
         get => GetValue(6000);
@@ -39,13 +41,15 @@ public partial class MCarousel : MWindow, ICarousel
     public bool Progress { get; set; }
 
     [Parameter]
-    public string ProgressColor { get; set; }
+    public string? ProgressColor { get; set; }
 
     /// <summary>
     /// TODO: enum
     /// </summary>
     [Parameter]
-    public string VerticalDelimiters { get; set; }
+    public string? VerticalDelimiters { get; set; }
+
+    private Timer? _timer;
 
     public override bool IsDark
     {
@@ -64,15 +68,9 @@ public partial class MCarousel : MWindow, ICarousel
 
     private bool IsVertical => VerticalDelimiters is not null;
 
-    public StringNumber InternalValue => Value;
-
     public double ProgressValue => Items.Count > 0 ? (InternalIndex + 1d) / Items.Count * 100 : 0;
 
-    private int SlideTimeout { get; set; }
-
-    private Timer Timer { get; set; }
-
-    public StringNumber InternalHeight { get; private set; }
+    public StringNumber? InternalHeight { get; private set; }
 
     public override Task SetParametersAsync(ParameterView parameters)
     {
@@ -89,20 +87,20 @@ public partial class MCarousel : MWindow, ICarousel
 
         InternalHeight = Height;
 
-        if (Timer == null)
+        if (_timer == null)
         {
-            Timer = new Timer
+            _timer = new Timer
             {
                 Interval = Interval > 0 ? Interval : 6000
             };
 
-            Timer.Elapsed += TimerOnElapsed;
+            _timer.Elapsed += TimerOnElapsed;
         }
 
         StartTimeout();
     }
 
-    private void TimerOnElapsed(object sender, ElapsedEventArgs e)
+    private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     {
         InvokeAsync(() =>
         {
@@ -121,14 +119,8 @@ public partial class MCarousel : MWindow, ICarousel
                 cssBuilder.Add("m-carousel")
                           .AddIf("m-carousel--hide-delimiter-background", () => HideDelimiterBackground)
                           .AddIf("m-carousel--vertical-delimiters", () => IsVertical);
-            }, styleBuilder =>
-            {
-                styleBuilder.AddHeight(InternalHeight);
-            })
-            .Apply("controls", cssBuilder =>
-            {
-                cssBuilder.Add("m-carousel__controls");
-            }, styleBuilder =>
+            }, styleBuilder => { styleBuilder.AddHeight(InternalHeight); })
+            .Apply("controls", cssBuilder => { cssBuilder.Add("m-carousel__controls"); }, styleBuilder =>
             {
                 styleBuilder
                     .Add(() => $"left: {(VerticalDelimiters == "left" && IsVertical ? "0" : "auto")}")
@@ -155,9 +147,9 @@ public partial class MCarousel : MWindow, ICarousel
 
         watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
                .Watch<int>(nameof(Interval), RestartTimeout)
-               .Watch<StringNumber>(nameof(Height), (val, oldVal) =>
+               .Watch<StringNumber>(nameof(Height), (val) =>
                {
-                   if (string.IsNullOrWhiteSpace(val.ToString()))
+                   if (string.IsNullOrWhiteSpace(val?.ToString()))
                    {
                        return;
                    }
@@ -172,7 +164,7 @@ public partial class MCarousel : MWindow, ICarousel
                    }
                    else
                    {
-                       Timer.Stop();
+                       _timer?.Stop();
                    }
 
                    StateHasChanged();
@@ -189,16 +181,16 @@ public partial class MCarousel : MWindow, ICarousel
         }
     }
 
-    public async Task InternalValueChanged(StringNumber val)
+    public async Task InternalValueChanged(StringNumber? val)
     {
         await ToggleAsync(val);
     }
 
     private void RestartTimeout()
     {
-        if (Timer is null) return;
+        if (_timer is null) return;
 
-        Timer.Stop();
+        _timer.Stop();
         StateHasChanged();
         StartTimeout();
     }
@@ -207,16 +199,16 @@ public partial class MCarousel : MWindow, ICarousel
     {
         if (!Cycle) return;
 
-        Timer.Start();
+        _timer?.Start();
     }
 
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
 
-        if (Timer is not null)
+        if (_timer is not null)
         {
-            Timer.Elapsed -= TimerOnElapsed;
+            _timer.Elapsed -= TimerOnElapsed;
         }
     }
 }

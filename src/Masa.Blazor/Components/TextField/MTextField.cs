@@ -6,10 +6,10 @@ namespace Masa.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Document Document { get; set; }
+        public Document Document { get; set; } = null!;
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
@@ -28,9 +28,9 @@ namespace Masa.Blazor
         public bool FullWidth { get; set; }
 
         [Parameter]
-        public string Prefix
+        public string? Prefix
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
@@ -60,7 +60,7 @@ namespace Masa.Blazor
         public bool Reverse { get; set; }
 
         [Parameter]
-        public string Placeholder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
         public bool Rounded { get; set; }
@@ -72,19 +72,19 @@ namespace Masa.Blazor
         public string Type { get; set; } = "text";
 
         [Parameter]
-        public RenderFragment PrependInnerContent { get; set; }
+        public RenderFragment? PrependInnerContent { get; set; }
 
         [Parameter]
-        public string AppendOuterIcon { get; set; }
+        public string? AppendOuterIcon { get; set; }
 
         [Parameter]
-        public RenderFragment AppendOuterContent { get; set; }
+        public RenderFragment? AppendOuterContent { get; set; }
 
         [Parameter]
-        public string PrependInnerIcon { get; set; }
+        public string? PrependInnerIcon { get; set; }
 
         [Parameter]
-        public string Suffix { get; set; }
+        public string? Suffix { get; set; }
 
         [Parameter]
         public bool Autofocus { get; set; }
@@ -105,19 +105,19 @@ namespace Masa.Blazor
         public EventCallback OnEnter { get; set; }
 
         [Parameter]
-        public RenderFragment ProgressContent { get; set; }
+        public RenderFragment? ProgressContent { get; set; }
 
         [Parameter]
         public StringNumber LoaderHeight { get; set; } = 2;
 
         [Parameter]
-        public StringNumberBoolean Counter { get; set; }
+        public StringNumberBoolean? Counter { get; set; }
 
         [Parameter]
-        public Func<TValue, int> CounterValue { get; set; }
+        public Func<TValue, int>? CounterValue { get; set; }
 
         [Parameter]
-        public RenderFragment CounterContent { get; set; }
+        public RenderFragment? CounterContent { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnAppendOuterClick { get; set; }
@@ -129,12 +129,12 @@ namespace Masa.Blazor
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
         [Parameter]
-        public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public virtual Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         [Parameter]
         public int DebounceInterval { get; set; }
 
-        private static readonly string[] DirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
+        private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
         private bool _badInput;
 
@@ -154,7 +154,7 @@ namespace Masa.Blazor
 
         protected override int InternalDebounceInterval => DebounceInterval;
 
-        public override bool IsLabelActive => IsDirty || DirtyTypes.Contains(Type);
+        public override bool IsLabelActive => IsDirty || s_dirtyTypes.Contains(Type);
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
 
@@ -181,11 +181,11 @@ namespace Masa.Blazor
 
         public virtual string Tag => "input";
 
-        protected virtual Dictionary<string, object> InputAttrs
+        protected virtual Dictionary<string, object?> InputAttrs
         {
             get
             {
-                Dictionary<string, object> attributes = new(Attributes) { { "type", Type } };
+                Dictionary<string, object?> attributes = new(Attributes) { { "type", Type } };
 
                 if (Type == "number")
                 {
@@ -215,7 +215,7 @@ namespace Masa.Blazor
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 
-        public StringNumber Max
+        public StringNumber? Max
         {
             get
             {
@@ -241,7 +241,7 @@ namespace Masa.Blazor
 
         protected double PrependWidth { get; set; }
 
-        private string NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
+        private string? NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
 
         protected(StringNumber left, StringNumber right) LabelPosition
         {
@@ -254,7 +254,7 @@ namespace Masa.Blazor
                     offset -= PrependWidth;
                 }
 
-                return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+                return MasaBlazor?.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 
@@ -294,7 +294,7 @@ namespace Masa.Blazor
             }
         }
 
-        public BLabel LabelReference { get; set; }
+        public BLabel? LabelReference { get; set; }
 
         public ElementReference PrefixElement { get; set; }
 
@@ -302,13 +302,13 @@ namespace Masa.Blazor
 
         public ElementReference AppendInnerElement { get; set; }
 
-        protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
+        protected virtual Dictionary<string, object?> InputSlotAttrs { get; set; } = new();
 
         bool ITextField<TValue>.IsDirty => IsDirty;
 
-        Dictionary<string, object> ITextField<TValue>.InputAttrs => InputAttrs;
+        Dictionary<string, object?> ITextField<TValue>.InputAttrs => InputAttrs;
 
-        Dictionary<string, object> ITextField<TValue>.InputSlotAttrs => InputSlotAttrs;
+        Dictionary<string, object?> ITextField<TValue>.InputSlotAttrs => InputSlotAttrs;
 
         protected override void SetComponentClass()
         {
@@ -544,20 +544,16 @@ namespace Masa.Blazor
             }
 
             var label = Document.GetElementByReference(LabelReference.Ref);
-            var scrollWidth = await label.GetScrollWidthAsync();
+            if (label == null) return;
 
-            if (scrollWidth == null)
-            {
-                return;
-            }
+            var scrollWidth = await label.GetScrollWidthAsync();
+            if (scrollWidth == null) return;
 
             var element = Document.GetElementByReference(Ref);
-            var offsetWidth = await element.GetOffsetWidthAsync();
+            if (element == null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await element.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
 
@@ -572,12 +568,10 @@ namespace Masa.Blazor
             }
 
             var prefix = Document.GetElementByReference(PrefixElement);
-            var offsetWidth = await prefix.GetOffsetWidthAsync();
+            if (prefix == null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await prefix.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             PrefixWidth = offsetWidth.Value;
 
@@ -597,12 +591,10 @@ namespace Masa.Blazor
             }
 
             var prependInner = Document.GetElementByReference(PrependInnerElement);
-            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+            if (prependInner is null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             PrependWidth = offsetWidth.Value;
 
@@ -674,7 +666,7 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue.ToString());
+                await SetValueByJsInterop(checkValue?.ToString());
             }
         }
 
@@ -724,7 +716,7 @@ namespace Masa.Blazor
             // todo: args.validity.badInput
         }
 
-        private TValue CheckNumberValidate()
+        private TValue? CheckNumberValidate()
         {
             if (Type != "number" || !BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
                 return InternalValue;

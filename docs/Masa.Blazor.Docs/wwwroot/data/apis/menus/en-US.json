@@ -25,7 +25,7 @@
     "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation (for transition origin)[https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin].",
     "positionX": "Used to position the content when not using an activator slot",
     "positionY": "Used to position the content when not using an activator slot",
-    "transition": "Sets the component transition. Can be one of the (built in transitions)[styles-and-animations/transitions] or one your own.",
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own.",
     "value": "Controls whether the component is visible or hidden.",
     "zIndex": "The z-index used for the component"
   },

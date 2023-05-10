@@ -34,22 +34,22 @@ public class EChartsInitOptions
     }
 
     [JsonPropertyName("width")]
-    public string InternalWidth => Width?.ToString();
+    public string? InternalWidth => Width?.ToString();
 
     [JsonPropertyName("height")]
-    public string InternalHeight => Height?.ToString();
+    public string? InternalHeight => Height?.ToString();
 
     [JsonIgnore]
-    public StringNumber Width { get; set; }
+    public StringNumber? Width { get; set; }
 
     [JsonIgnore]
 
-    public StringNumber Height { get; set; }
+    public StringNumber? Height { get; set; }
 
     /// <summary>
     /// Support from echarts 5.0.0
     /// </summary>
-    public string Locale { get; set; }
+    public string? Locale { get; set; }
 }
 
 public enum EChartsRenderer

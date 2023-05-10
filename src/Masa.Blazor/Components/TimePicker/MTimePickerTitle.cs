@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTimePickerTitle : BTimePickerTitle, ITimePickerTitle
     {
         [Inject]
-        private I18n I18n { get; set; }
+        private I18n I18n { get; set; } = null!;
         
         [Parameter]
         public bool AmPmReadonly { get; set; }
@@ -54,25 +52,13 @@ namespace Masa.Blazor
             }
         }
 
-        public string DisplayMinute
-        {
-            get
-            {
-                return Minute == null ? "--" : Pad(Minute.Value);
-            }
-        }
+        public string DisplayMinute => Minute == null ? "--" : Pad(Minute.Value);
 
-        public string DisplaySecond
-        {
-            get
-            {
-                return Second == null ? "--" : Pad(Second.Value);
-            }
-        }
-        
-        public string AmText { get; protected set; }
+        public string DisplaySecond => Second == null ? "--" : Pad(Second.Value);
 
-        public string PmText { get; protected set; }
+        public string? AmText { get; protected set; }
+
+        public string? PmText { get; protected set; }
 
         public override Task SetParametersAsync(ParameterView parameters)
         {

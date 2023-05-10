@@ -1,33 +1,31 @@
-﻿<MForm>
-    <MAutocomplete @bind-Value="selected"
-                   Items="@items"
-                   ItemText="item => item"
-                   ItemValue="item => item"
-                   Chips
-                   Label="To"
-                   FullWidth
-                   HideDetails=true
-                   HideNoData
-                   HideSelected
-                   Multiple
-                   SingleLine>
-    </MAutocomplete>
-    <MDivider></MDivider>
-    <MTextField Label="Subject"
-                @bind-Value="@subject"
-                SingleLine
-                FullWidth
-                HideDetails=true>
-    </MTextField>
-    <MDivider></MDivider>
-    <MTextarea @bind-Value="title"
-               Label="Message"
-               Counter=true
+﻿<MAutocomplete @bind-Value="selected"
+               Items="@items"
+               ItemText="item => item"
+               ItemValue="item => item"
+               Chips
+               Label="To"
                FullWidth
-               SingleLine
-               maxlength="120">
-    </MTextarea>
-</MForm>
+               HideDetails=true
+               HideNoData
+               HideSelected
+               Multiple
+               SingleLine>
+</MAutocomplete>
+<MDivider></MDivider>
+<MTextField Label="Subject"
+            @bind-Value="@subject"
+            SingleLine
+            FullWidth
+            HideDetails=true>
+</MTextField>
+<MDivider></MDivider>
+<MTextarea @bind-Value="title"
+           Label="Message"
+           Counter=true
+           FullWidth
+           SingleLine
+           maxlength="120">
+</MTextarea>
 
 @code {
 

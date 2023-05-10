@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public enum IconType
 {

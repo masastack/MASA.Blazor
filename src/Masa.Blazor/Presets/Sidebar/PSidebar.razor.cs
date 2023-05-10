@@ -60,7 +60,7 @@
         public EventCallback<TItem> OnClick { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        public string? Color { get; set; } = "primary";
 
         #region List parameters
 

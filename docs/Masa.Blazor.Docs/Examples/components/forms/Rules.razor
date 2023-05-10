@@ -28,9 +28,9 @@
 </MContainer>
 
 @code {
-    private MForm _form;
-    private string _model;
-    private string _match;
+    private MForm? _form;
+    private string _model = "Foobar";
+    private string _match = "Foobar";
     private bool _allowSpaces;
     private double _max;
 
@@ -43,7 +43,7 @@
         set
         {
             _match = value;
-            _form.Validate();
+            _form?.Validate();
         }
     }
 
@@ -56,7 +56,7 @@
         set
         {
             _max = value;
-            _form.Validate();
+            _form?.Validate();
         }
     }
 
@@ -69,7 +69,7 @@
         set
         {
             _model = value;
-            _form.Validate();
+            _form?.Validate();
         }
     }
 

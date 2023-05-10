@@ -26,7 +26,7 @@
         <MAlert Title="@Title" Type="@Type">@Content</MAlert>
     </ChildContent>
     <ActionContent>
-        @if (OnAction.HasDelegate)
+        @if (OnAction != null)
         {
             <MButton Class="text-capitalize"
                      Color="@(ActionColor ?? "primary")"

@@ -2,6 +2,6 @@
 {
     public interface ILoadable : BlazorComponent.ILoadable, IColorable
     {
-        StringNumber LoaderHeight { get; }
+        StringNumber? LoaderHeight { get; }
     }
 }

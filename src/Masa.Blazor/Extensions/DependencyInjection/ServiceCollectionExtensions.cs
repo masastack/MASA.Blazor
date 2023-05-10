@@ -29,9 +29,9 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<Application>();
         services.TryAddScoped(serviceProvider =>
         {
-            var application = serviceProvider.GetService<Application>();
-            var window = serviceProvider.GetService<Window>();
-            var options = serviceProvider.GetService<IOptionsSnapshot<MasaBlazorOptions>>();
+            var application = serviceProvider.GetRequiredService<Application>();
+            var window = serviceProvider.GetRequiredService<Window>();
+            var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
             return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons, options.Value.Defaults);
         });

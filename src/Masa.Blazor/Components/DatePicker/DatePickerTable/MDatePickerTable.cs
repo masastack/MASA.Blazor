@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MDatePickerTable<TValue> : BDatePickerTable, IThemeable, IDatePickerTable
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Disabled { get; set; }
 
@@ -14,7 +15,7 @@ namespace Masa.Blazor
         public OneOf<string, Func<DateOnly, string>, Func<DateOnly, string[]>>? EventColor { get; set; }
 
         [Parameter]
-        public Func<DateOnly, bool> AllowedDates { get; set; }
+        public Func<DateOnly, bool>? AllowedDates { get; set; }
 
         [Parameter]
         public DateOnly? Min { get; set; }
@@ -32,39 +33,36 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public TValue Value { get; set; }
+        public TValue? Value { get; set; }
 
         [Parameter]
         public DateOnly Current { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> Format { get; set; }
+        public Func<DateOnly, string>? Format { get; set; }
 
         [Parameter]
         public EventCallback<DateOnly> OnInput { get; set; }
 
         [Parameter]
-        public CultureInfo Locale { get; set; }
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public CultureInfo Locale { get; set; } = null!;
 
         public int DisplayedMonth => TableDate.Month - 1;
 
         public int DisplayedYear => TableDate.Year;
 
-        public virtual Func<DateOnly, string> Formatter { get; }
+        public virtual Func<DateOnly, string>? Formatter { get; }
 
         protected bool IsReversing { get; set; }
 
-        public Dictionary<string, object> GetButtonAttrs(DateOnly value) => new()
+        public Dictionary<string, object?> GetButtonAttrs(DateOnly value) => new()
         {
             { "type", "button" },
             { "disabled", Disabled || !IsDateAllowed(value, Min, Max, AllowedDates) },
-            { "onclick", CreateEventCallback<MouseEventArgs>(args => HandleOnClickAsync(value)) }
+            { "onclick", CreateEventCallback<MouseEventArgs>(_ => HandleOnClickAsync(value)) }
         };
 
         private async Task HandleOnClickAsync(DateOnly value)
@@ -83,7 +81,7 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IsDateAllowed(DateOnly date, DateOnly? min, DateOnly? max, Func<DateOnly, bool> allowedFunc)
+        private bool IsDateAllowed(DateOnly date, DateOnly? min, DateOnly? max, Func<DateOnly, bool>? allowedFunc)
         {
             return (allowedFunc == null || allowedFunc(date)) && (min == null || date >= min) && (max == null || date <= max);
         }
@@ -112,35 +110,20 @@ namespace Masa.Blazor
             return value == Current;
         }
 
-        protected override string ComputedTransition
-        {
-            get
-            {
-                return IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
-            }
-        }
+        protected override string ComputedTransition => IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
 
         public override DateOnly TableDate
         {
-            get
-            {
-                return GetValue<DateOnly>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<DateOnly>();
+            set => SetValue(value);
         }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
-            
+
             watcher
-                .Watch<DateOnly>(nameof(TableDate), (newVal, oldVal) =>
-                {
-                    IsReversing = newVal < oldVal;
-                });
+                .Watch<DateOnly>(nameof(TableDate), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
         }
 
         protected override void SetComponentClass()
@@ -149,15 +132,15 @@ namespace Masa.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                       .AddIf("m-date-picker-table--disabled", () => Disabled)
-                       .AddTheme(IsDark);
+                        .AddIf("m-date-picker-table--disabled", () => Disabled)
+                        .AddTheme(IsDark);
                 })
                 .Apply("btn", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-btn");
 
-                    var (value, isFloating, isOtherMonth) = ((DateOnly, bool, bool))cssBuilder.Data;
+                    var (value, isFloating, isOtherMonth) = ((DateOnly, bool, bool))cssBuilder.Data!;
                     var isAllowed = IsDateAllowed(value, Min, Max, AllowedDates);
                     var isSelected = IsSelected(value) && isAllowed;
                     var isCurrent = IsCurrent(value);
@@ -187,7 +170,7 @@ namespace Masa.Blazor
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
-                    var (value, isFloating, isOtherMonth) = ((DateOnly, bool, bool))styleBuilder.Data;
+                    var (value, _, _) = ((DateOnly, bool, bool))styleBuilder.Data!;
                     var isAllowed = IsDateAllowed(value, Min, Max, AllowedDates);
                     var isSelected = IsSelected(value) && isAllowed;
                     var isCurrent = value == Current;

@@ -1,15 +1,20 @@
 ﻿using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
     public partial class MRating : BRating, IRating
     {
-        [Parameter]
-        public string BackgroundColor { get; set; }
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+
+        [Inject]
+        public Document Document { get; set; } = null!;
 
         [Parameter]
-        public string Color { get; set; }
+        public string? BackgroundColor { get; set; }
+
+        [Parameter]
+        public string? Color { get; set; }
 
         [Parameter]
         public bool Clearable { get; set; }
@@ -18,12 +23,15 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("$ratingEmpty")]
         public string EmptyIcon { get; set; } = "$ratingEmpty";
 
         [Parameter]
+        [ApiDefaultValue("$ratingFull")]
         public string FullIcon { get; set; } = "$ratingFull";
 
         [Parameter]
+        [ApiDefaultValue("$ratingHalf")]
         public string HalfIcon { get; set; } = "$ratingHalf";
 
         [Parameter]
@@ -33,15 +41,13 @@ namespace Masa.Blazor
         public bool Hover { get; set; }
 
         [Parameter]
-        public string IconLabel { get; set; }
+        public string? IconLabel { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; }
 
         [Parameter]
-        public StringNumber Size { get; set; }
-
-        private double _value = 0;
+        public StringNumber? Size { get; set; }
 
         [Parameter]
         public double Value
@@ -69,20 +75,11 @@ namespace Masa.Blazor
         [Parameter]
         public bool Large { get; set; }
 
-
+        private bool _running;
+        private double _value;
         private double _hoverIndex = -1;
 
-        protected bool _isHovering => Hover && _hoverIndex >= 0;
-
-
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Document Document { get; set; }
-
-        private bool _running;
+        protected bool IsHovering => Hover && _hoverIndex >= 0;
 
         private enum MouseType
         {
@@ -128,7 +125,11 @@ namespace Masa.Blazor
                         attrs["aria-label"] = string.Format(IconLabel, itemIndex, Length);
                     }
 
-                    attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    if (ratingItem.Click != null)
+                    {
+                        attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    }
+
                     attrs["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
                     attrs["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
@@ -161,15 +162,15 @@ namespace Masa.Blazor
 
         public string GetIconName(RatingItem item)
         {
-            var isFull = _isHovering ? item.IsHovered : item.IsFilled;
-            var isHalf = _isHovering ? item.IsHalfHovered : item.IsHalfFilled;
+            var isFull = IsHovering ? item.IsHovered : item.IsFilled;
+            var isHalf = IsHovering ? item.IsHalfHovered : item.IsHalfFilled;
 
             return isFull ? FullIcon : (isHalf != null && (bool)isHalf ? HalfIcon : EmptyIcon);
         }
 
-        private string GetColor(RatingItem props)
+        private string? GetColor(RatingItem props)
         {
-            if (_isHovering)
+            if (IsHovering)
             {
                 if (props.IsHovered || (props.IsHalfHovered != null && (bool)props.IsHalfHovered))
                     return Color;
@@ -203,7 +204,7 @@ namespace Masa.Blazor
 
         private async Task<bool> IsHalfEvent(ExMouseEventArgs args)
         {
-            if (HalfIncrements)
+            if (HalfIncrements && args.Target != null)
             {
                 var target = Document.GetElementByReference(args.Target.ElementReference);
                 if (target != null)

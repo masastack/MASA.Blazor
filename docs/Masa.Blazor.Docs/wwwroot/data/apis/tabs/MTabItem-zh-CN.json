@@ -1,7 +1,7 @@
 {
   "props": {
-    "reverseTransition": "组件反转项时使用的转换。可以是一个 (built in transitions)[styles-and-animations/transitions] 或是你自己创建的过渡。",
-    "transition": "设置组件转换。可以是一个 (built in transitions)[styles-and-animations/transitions] 或者是自己自定义的。",
+    "reverseTransition": "组件反转项时使用的转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或是你自己创建的过渡。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
     "value": "设置选项卡的值。 如果未提供，将使用索引。"
   },
   "events": {},

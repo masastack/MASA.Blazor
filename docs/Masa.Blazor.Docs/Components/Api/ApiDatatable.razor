@@ -65,7 +65,7 @@
                                     }
                                     else
                                     {
-                                        <MMarkdownIt Source="@item.Description" Scope="desc"></MMarkdownIt>
+                                        <MMarkdownIt Class="doc-markdown-body" Source="@item.Description" Scope="desc"></MMarkdownIt>
                                     }
                                 }
                             </span>
@@ -108,9 +108,9 @@
     {
         return header switch
         {
-            "default" => "width:155px;",
-            "name" => "width:200px",
-            "type" => "width:200px;",
+            "default" => "width:144px;",
+            "name" => "width:144px",
+            "type" => "width:264px;",
             _ => ""
         };
     }

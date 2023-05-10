@@ -63,30 +63,31 @@ namespace Masa.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(5000)]
         public int Timeout { get; set; } = 5000;
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Tile { get; set; }
 
         [Parameter]
-        public StringBoolean Rounded { get; set; }
-
-        protected Timer Timer { get; set; }
+        public StringBoolean? Rounded { get; set; }
 
         [Parameter]
-        public string Action { get; set; }
+        public string? Action { get; set; }
 
         [Parameter]
-        public RenderFragment ActionContent { get; set; }
+        public RenderFragment? ActionContent { get; set; }
 
         private const string ROOT_CSS = "m-snack";
         internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
+
+        private Timer? Timer { get; set; }
 
         protected override void OnParametersSet()
         {
@@ -158,7 +159,7 @@ namespace Masa.Blazor
                     attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         Value = false;
-                        Timer.Stop();
+                        Timer?.Stop();
                         if (ValueChanged.HasDelegate)
                         {
                             await ValueChanged.InvokeAsync(_value);
@@ -172,7 +173,7 @@ namespace Masa.Blazor
                 });
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             Value = false;
             if (ValueChanged.HasDelegate)
@@ -185,7 +186,7 @@ namespace Masa.Blazor
                 InvokeAsync(() => OnClosed.InvokeAsync());
             }
 
-            Timer.Enabled = false;
+            Timer!.Enabled = false;
             InvokeStateHasChanged();
         }
     }

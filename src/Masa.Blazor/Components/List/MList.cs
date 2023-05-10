@@ -15,7 +15,7 @@
         public bool Shaped { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         /// <summary>
         /// Lowers max height of list tiles
@@ -69,37 +69,37 @@
         /// Sets the height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         /// <summary>
         /// Sets the maximum height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         /// <summary>
         /// Sets the minimum width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         /// <summary>
         /// Sets the maximum height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         /// <summary>
         /// Sets the maximum width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         /// <summary>
         /// Sets the width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -114,7 +114,7 @@
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(IsDark)
                         .Add("m-list")
-                        .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
+                        .AddIf(() => $"elevation-{Elevation!.Value}", () => Elevation != null)
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--flat", () => Flat)

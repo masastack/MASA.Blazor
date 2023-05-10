@@ -6,51 +6,49 @@ namespace Masa.Blazor
     public partial class MCol : BCol
     {
         [Parameter]
-        public StringNumber Sm { get; set; }
+        public StringNumber? Sm { get; set; }
 
         [Parameter]
-        public StringNumber Md { get; set; }
+        public StringNumber? Md { get; set; }
 
         [Parameter]
-        public StringNumber Lg { get; set; }
+        public StringNumber? Lg { get; set; }
 
         [Parameter]
-        public StringNumber Xl { get; set; }
+        public StringNumber? Xl { get; set; }
 
         /// <summary>
         /// 'auto', 'start', 'end', 'center', 'baseline', 'stretch'
         /// </summary>
         [Parameter]
-        public
-        StringEnum<AlignTypes> Align
-        { get; set; }
+        public StringEnum<AlignTypes>? Align { get; set; }
 
         [Parameter]
-        public StringNumber OrderLg { get; set; }
+        public StringNumber? OrderLg { get; set; }
 
         [Parameter]
-        public StringNumber OrderMd { get; set; }
+        public StringNumber? OrderMd { get; set; }
 
         [Parameter]
-        public StringNumber OrderSm { get; set; }
+        public StringNumber? OrderSm { get; set; }
 
         [Parameter]
-        public StringNumber OrderXl { get; set; }
+        public StringNumber? OrderXl { get; set; }
 
         [Parameter]
-        public StringNumber OffsetLg { get; set; }
+        public StringNumber? OffsetLg { get; set; }
 
         [Parameter]
-        public StringNumber OffsetMd { get; set; }
+        public StringNumber? OffsetMd { get; set; }
 
         [Parameter]
-        public StringNumber OffsetSm { get; set; }
+        public StringNumber? OffsetSm { get; set; }
 
         [Parameter]
-        public StringNumber OffsetXl { get; set; }
+        public StringNumber? OffsetXl { get; set; }
 
         [Parameter]
-        public StringNumber Flex { get; set; }
+        public StringNumber? Flex { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -60,22 +58,22 @@ namespace Masa.Blazor
                     cssBuilder
                         .AddIf(() => $"col",
                             () => Cols == null || (Sm == null && Md == null && Lg == null && Xl == null))
-                        .AddIf(() => $"col-{Cols.Value}", () => Cols != null)
-                        .AddIf(() => $"col-sm-{Sm.Value}", () => Sm != null)
-                        .AddIf(() => $"col-md-{Md.Value}", () => Md != null)
-                        .AddIf(() => $"col-lg-{Lg.Value}", () => Lg != null)
-                        .AddIf(() => $"col-xl-{Xl.Value}", () => Xl != null)
-                        .AddIf(() => $"offset-{Offset.Value}", () => Offset != null)
+                        .AddIf(() => $"col-{Cols!.Value}", () => Cols != null)
+                        .AddIf(() => $"col-sm-{Sm!.Value}", () => Sm != null)
+                        .AddIf(() => $"col-md-{Md!.Value}", () => Md != null)
+                        .AddIf(() => $"col-lg-{Lg!.Value}", () => Lg != null)
+                        .AddIf(() => $"col-xl-{Xl!.Value}", () => Xl != null)
+                        .AddIf(() => $"offset-{Offset!.Value}", () => Offset != null)
                         .AddIf(() => $"offset-lg-{OffsetLg}", () => OffsetLg != null)
                         .AddIf(() => $"offset-md-{OffsetMd}", () => OffsetMd != null)
                         .AddIf(() => $"offset-sm-{OffsetSm}", () => OffsetSm != null)
                         .AddIf(() => $"offset-xl-{OffsetXl}", () => OffsetXl != null)
-                        .AddIf(() => $"order-{Order.Value}", () => Order != null)
+                        .AddIf(() => $"order-{Order!.Value}", () => Order != null)
                         .AddIf(() => $"order-lg-{OrderLg}", () => OrderLg != null)
                         .AddIf(() => $"order-md-{OrderMd}", () => OrderMd != null)
                         .AddIf(() => $"order-sm-{OrderSm}", () => OrderSm != null)
                         .AddIf(() => $"order-xl-{OrderXl}", () => OrderXl != null)
-                        .AddIf(Align.ToString(() =>
+                        .AddIf(Align!.ToString(() =>
                                 $"align-self-{Align}",
                             ("align-self-auto", AlignTypes.Auto),
                             ("align-self-start", AlignTypes.Start),
@@ -89,7 +87,7 @@ namespace Masa.Blazor
 
         private string SetHostFlexStyle()
         {
-            return this.Flex.Match(str =>
+            return Flex!.Match(str =>
                 {
                     if (Regex.Match(str, "^\\d+(\\.\\d+)?(px|em|rem|%)$").Success)
                     {

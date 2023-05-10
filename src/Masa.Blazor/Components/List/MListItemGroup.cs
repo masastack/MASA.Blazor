@@ -7,7 +7,7 @@
         }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         protected override void SetComponentClass()
         {

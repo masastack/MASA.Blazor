@@ -1,39 +1,41 @@
-﻿<MForm>
-    <MContainer>
-        <MRow>
-            <MCol Cols="12"
-                  Sm="6">
-                <MTextField @bind-Value="_message1"
-                            Label="Regular"
-                            Clearable></MTextField>
-            </MCol>
+﻿<MContainer>
+    <MRow>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_message1"
+                        Label="Regular"
+                        Clearable>
+            </MTextField>
+        </MCol>
 
-            <MCol Cols="12"
-                  Sm="6">
-                <MTextField @bind-Value="_message2"
-                            Solo
-                            Label="Solo"
-                            Clearable></MTextField>
-            </MCol>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_message2"
+                        Solo
+                        Label="Solo"
+                        Clearable>
+            </MTextField>
+        </MCol>
 
-            <MCol Cols="12"
-                  Sm="6">
-                <MTextField @bind-Value="_message3"
-                            Filled
-                            Label="Filled"
-                            Clearable></MTextField>
-            </MCol>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_message3"
+                        Filled
+                        Label="Filled"
+                        Clearable>
+            </MTextField>
+        </MCol>
 
-            <MCol Cols="12"
-                  Sm="6">
-                <MTextField @bind-Value="_message4"
-                            Label="Outlined"
-                            Outlined
-                            Clearable></MTextField>
-            </MCol>
-        </MRow>
-    </MContainer>
-</MForm>
+        <MCol Cols="12"
+              Sm="6">
+            <MTextField @bind-Value="_message4"
+                        Label="Outlined"
+                        Outlined
+                        Clearable>
+            </MTextField>
+        </MCol>
+    </MRow>
+</MContainer>
 
 @code{
     private string _message1 = "Hey!";

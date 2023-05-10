@@ -1,14 +1,15 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MSystemBar : BSystemBar, IThemeable
     {
-        [Parameter]
-        public string Color { get; set; }
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
-        public StringNumber Height
+        public string? Color { get; set; }
+
+        [Parameter]
+        public StringNumber? Height
         {
             get => GetValue<StringNumber>();
             set => SetValue(value);
@@ -37,11 +38,8 @@ namespace Masa.Blazor
         [Parameter]
         public bool Fixed { get; set; }
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        private StringNumber ComputedHeight => Height != null
-            ? (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height)
+        private StringNumber ComputedHeight => Height?.ToString() != null
+            ? (Regex.IsMatch(Height.ToString()!, "^[0-9]*$") ? Height.ToInt32() : Height)
             : (Window ? 32 : 24);
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
@@ -85,13 +83,10 @@ namespace Masa.Blazor
 
         private async void CallUpdate()
         {
-            await NextTickIf(async () =>
-            {
-                await UpdateApplicationAsync();
-            }, () => Ref.Context is null);
+            await NextTickIf(async () => { await UpdateApplicationAsync(); }, () => Ref.Context is null);
         }
 
-        protected async Task UpdateApplicationAsync()
+        private async Task UpdateApplicationAsync()
         {
             if (!App)
             {

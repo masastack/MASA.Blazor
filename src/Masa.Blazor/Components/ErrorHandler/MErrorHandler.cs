@@ -5,10 +5,10 @@ namespace Masa.Blazor
     public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {
         [Inject]
-        protected ILogger<MErrorHandler> Logger { get; set; }
+        protected ILogger<MErrorHandler> Logger { get; set; } = null!;
 
         [Inject]
-        public IPopupService PopupService { get; set; }
+        public IPopupService PopupService { get; set; } = null!;
 
         [Parameter]
         public EventCallback<Exception> OnHandle { get; set; }

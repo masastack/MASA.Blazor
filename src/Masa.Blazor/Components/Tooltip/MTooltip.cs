@@ -3,16 +3,13 @@
     public partial class MTooltip : BTooltip, ITooltip
     {
         [Parameter]
-        public string ContentStyle { get; set; }
+        public string? ContentStyle { get; set; }
 
-        protected override string? DefaultAttachSelector => ".m-application";
+        protected override string DefaultAttachSelector => ".m-application";
 
         ElementReference ITooltip.ContentElement
         {
-            set
-            {
-                ContentElement = value;
-            }
+            set => ContentElement = value;
         }
 
         bool IMenuable.IsBooted => IsBooted;

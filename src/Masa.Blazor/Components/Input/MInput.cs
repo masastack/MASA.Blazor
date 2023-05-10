@@ -21,11 +21,11 @@
         public StringNumber? MinHeight { get; set; }
 
         [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
+        public EventCallback<TValue?> OnChange { get; set; }
 
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
 
-        public virtual bool HasColor { get; }
+        public virtual bool HasColor => false;
 
         public virtual string ValidationState
         {
@@ -55,7 +55,7 @@
             }
         }
 
-        protected virtual bool IsDirty => Convert.ToString(LazyValue).Length > 0;
+        protected virtual bool IsDirty => Convert.ToString(LazyValue)?.Length > 0;
 
         public virtual bool IsLabelActive => IsDirty;
 

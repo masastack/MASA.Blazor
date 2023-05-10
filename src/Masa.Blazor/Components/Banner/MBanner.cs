@@ -6,20 +6,20 @@ namespace Masa.Blazor
     {
         protected bool IsSticky => Sticky || App;
 
-
         [Parameter]
         public bool App { get; set; }
 
         [Parameter]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
         [Parameter]
-        public string IconColor { get; set; }
+        public string? IconColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(0)]
         public StringNumber Elevation { get; set; } = "0";
 
         [Parameter]
@@ -29,10 +29,10 @@ namespace Masa.Blazor
         public bool Sticky { get; set; }
 
         [Parameter]
-        public RenderFragment IconContent { get; set; }
+        public RenderFragment? IconContent { get; set; }
 
         [Parameter]
-        public RenderFragment<Action> ActionsContent { get; set; }
+        public RenderFragment<Action>? ActionsContent { get; set; }
 
         [Parameter]
         public EventCallback<bool> ValueChanged { get; set; }
@@ -47,7 +47,7 @@ namespace Masa.Blazor
 
         public bool HasIcon => !string.IsNullOrWhiteSpace(Icon) || IconContent != null;
 
-        public RenderFragment ComputedActionsContent => ActionsContent == null ? null : ActionsContent(() => { Value = false; ValueChanged.InvokeAsync(Value); });
+        public RenderFragment? ComputedActionsContent => ActionsContent?.Invoke(() => { Value = false; ValueChanged.InvokeAsync(Value); });
 
         protected override void SetComponentClass()
         {

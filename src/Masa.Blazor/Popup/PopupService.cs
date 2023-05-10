@@ -10,10 +10,10 @@ public partial class PopupService : IPopupService
     {
         _popupProvider = popupProvider;
 
-        _ = OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object>());
+        _ = OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object?>());
     }
 
-    public Task<object> OpenAsync(Type componentType, IDictionary<string, object> parameters)
+    public Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters)
     {
         var item = _popupProvider.Add(componentType, parameters, this, nameof(PopupService));
         return item.TaskCompletionSource.Task;

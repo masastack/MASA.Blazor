@@ -124,24 +124,24 @@
       "closeDelay": "Milliseconds to wait before closing component.",
       "openDelay": "Milliseconds to wait before opening component.",
       "zIndex": "The z-index used for the component",
-      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
+      "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own."
     },
     "contents": {
       "childContent": "Default content",
-      "iconContent": "The slot used for the icon’s content.",
-      "actionsContent": "The slot used for the action’s content.",
+      "iconContent": "Content for the icon’s content",
+      "actionsContent": "Content for the action’s content",
       "appendContent": "Adds an item inside the input and after input content",
       "appendItemContent": "Adds an item after menu content",
       "appendOuterContent": "Adds an item outside the input and after input content",
       "counterContent": "counterContent",
       "itemContent": "Define a custom item appearance",
       "labelContent": "Replaces the default label",
-      "messageContent": "Customize the messages slot.",
+      "messageContent": "Content for customize the messages",
       "noDataContent": "Displayed when there are no filtered items",
       "prependContent": "Adds an item outside the input and before input content",
       "prependInnerContent": "Adds an item inside the input and before input content",
       "prependItemContent": "Adds an item before menu content",
-      "progressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)",
+      "progressContent": "Content for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)",
       "selectionContent": "Define a custom selection appearance"
     },
     "events": {
@@ -293,7 +293,7 @@
       "closeDelay": "关闭组件前等待的毫秒数.",
       "openDelay": "打开组件前等待的毫秒数.",
       "zIndex": "用于组件的 z-index",
-      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
+      "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。"
     },
     "contents": {
       "childContent": "默认插槽",

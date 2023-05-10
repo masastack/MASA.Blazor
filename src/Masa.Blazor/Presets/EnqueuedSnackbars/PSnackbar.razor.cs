@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public partial class PSnackbar
 {
@@ -60,7 +58,7 @@ public partial class PSnackbar
 
     [Parameter] public string? Title { get; set; }
 
-    [Parameter, EditorRequired] public string? Content { get; set; }
+    [Parameter] public string? Content { get; set; }
 
     [Parameter] public AlertTypes Type { get; set; }
 
@@ -68,7 +66,7 @@ public partial class PSnackbar
 
     [Parameter] public string? ActionText { get; set; }
 
-    [Parameter] public EventCallback OnAction { get; set; }
+    [Parameter] public Func<Task>? OnAction { get; set; }
 
     [Parameter] public EventCallback OnClose { get; set; }
 
@@ -111,9 +109,9 @@ public partial class PSnackbar
     {
         _actionLoading = true;
 
-        if (OnAction.HasDelegate)
+        if (OnAction != null)
         {
-            await OnAction.InvokeAsync();
+            await OnAction();
         }
 
         _actionLoading = false;
