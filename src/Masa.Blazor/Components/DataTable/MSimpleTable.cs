@@ -62,6 +62,17 @@ namespace Masa.Blazor
                 .ApplySimpleTableDefault();
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await HandleOnScrollAsync(EventArgs.Empty);
+                StateHasChanged();
+            }
+        }
+
         public async Task HandleOnScrollAsync(EventArgs args)
         {
             if (FixedRight)
