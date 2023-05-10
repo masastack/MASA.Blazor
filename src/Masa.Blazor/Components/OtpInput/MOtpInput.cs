@@ -4,7 +4,7 @@ namespace Masa.Blazor
     public class MOtpInput: BOtpInput, IThemeable
     {
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         protected override void SetComponentClass()
         {

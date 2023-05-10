@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Masa.Blazor.Presets
 {
@@ -15,13 +11,13 @@ namespace Masa.Blazor.Presets
         public int ImageWidth { get; set; }
         public int ImageHeight { get; set; }
 
-        public string FontName { get; set; }
+        public string? FontName { get; set; }
         public int FontSize { get; set; }
 
         public double MinDistortion { get; set; }
         public double MaxDistortion { get; set; }
-        protected Func<(int oldX, int oldY, double distortionLevel), (int newX, int newY)> DistortionFunc { get; set; }
-        protected Func<IEnumerable<(int x, int y)>> NoisePointMapGenFunc { get; set; }
+        protected Func<(int oldX, int oldY, double distortionLevel), (int newX, int newY)>? DistortionFunc { get; set; }
+        protected Func<IEnumerable<(int x, int y)>>? NoisePointMapGenFunc { get; set; }
 
         public CaptchaGenerator()
             : this(120, 48)
@@ -38,7 +34,7 @@ namespace Masa.Blazor.Presets
         public CaptchaGenerator(
             string paintColorHex, string backgroundColorHex, string noisePointColorHex,
             int imageWidth = 120, int imageHeight = 48,
-            string fontName = null, int fontSize = 20,
+            string? fontName = null, int fontSize = 20,
             bool enableDistortion = true, double minDistortion = 5, double maxDistortion = 15,
             bool enableNoisePoints = true, double noisePointsPercent = 0.05
         ) : this(
@@ -55,10 +51,10 @@ namespace Masa.Blazor.Presets
         public CaptchaGenerator(
             SKColor paintColor, SKColor backgroundColor, SKColor noisePointColor,
             int imageWidth = 120, int imageHeight = 48,
-            string fontName = null, int fontSize = 20,
+            string? fontName = null, int fontSize = 20,
             bool enableDistortion = true, double minDistortion = 5, double maxDistortion = 15,
             bool enableNoisePoints = true, double noisePointsPercent = 0.05
-        ) : this(paintColor, backgroundColor, noisePointColor, imageWidth, imageHeight, fontName, fontSize, null, null)
+        ) : this(paintColor, backgroundColor, noisePointColor, imageWidth, imageHeight, fontName, fontSize, null)
         {
             MinDistortion = minDistortion;
             MaxDistortion = maxDistortion;
@@ -83,7 +79,7 @@ namespace Masa.Blazor.Presets
                             var noisePointCount = (int)(imageWidth * imageHeight * noisePointsPercent);
                             var noisePointPosList = Enumerable.Range(0, noisePointCount)
                                 .Select(
-                                    x =>
+                                    _ =>
                                         (
                                             random.Next(imageWidth),
                                             random.Next(imageHeight)
@@ -96,9 +92,9 @@ namespace Masa.Blazor.Presets
         public CaptchaGenerator(
             SKColor paintColor, SKColor backgroundColor, SKColor noisePointColor,
             int imageWidth = 120, int imageHeight = 48,
-            string fontName = null, int fontSize = 20,
-            Func<(int oldX, int oldY, double distortionLevel), (int newX, int newY)> distortionFunc = null,
-            Func<IEnumerable<(int x, int y)>> noisePointMapGenFunc = null
+            string? fontName = null, int fontSize = 20,
+            Func<(int oldX, int oldY, double distortionLevel), (int newX, int newY)>? distortionFunc = null,
+            Func<IEnumerable<(int x, int y)>>? noisePointMapGenFunc = null
         )
         {
             PaintColor = paintColor;
@@ -177,7 +173,7 @@ namespace Masa.Blazor.Presets
                     {
                         for (int y = 0; y < ImageHeight; y++)
                         {
-                            var (newX, newY) = null == DistortionFunc ? (x, y) : DistortionFunc((x, y, distortionLevel));
+                            var (newX, newY) = DistortionFunc?.Invoke((x, y, distortionLevel)) ?? (x, y);
                             var originalPixel = plainPixmap.GetPixelColor(newX, newY);
 
                             captchaCanvas.DrawPoint(x, y, originalPixel);
@@ -186,7 +182,7 @@ namespace Masa.Blazor.Presets
 
                     if (null != NoisePointMapGenFunc)
                     {
-                        var noisePointMap = NoisePointMapGenFunc();
+                        var noisePointMap = NoisePointMapGenFunc().ToList();
                         for (var i = 0; i < noisePointMap.Count(); i++)
                         {
                             var noisePointPos = noisePointMap.ElementAt(i);

@@ -4,12 +4,12 @@ namespace BlazorComponent
 {
     public static class StyleBuilderExtensions
     {
-        public static StyleBuilder AddColor(this StyleBuilder styleBuilder, string color, bool isText)
+        public static StyleBuilder AddColor(this StyleBuilder styleBuilder, string? color, bool isText)
         {
             return styleBuilder.AddColor(color, isText, () => true);
         }
 
-        public static StyleBuilder AddColor(this StyleBuilder styleBuilder, string color, bool isText, Func<bool> func)
+        public static StyleBuilder AddColor(this StyleBuilder styleBuilder, string? color, bool isText, Func<bool> func)
         {
             if (string.IsNullOrEmpty(color) || (!color.StartsWith("#") && !color.StartsWith("rgb")))
             {
@@ -30,9 +30,9 @@ namespace BlazorComponent
             return styleBuilder;
         }
 
-        public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string color)
+        public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string? color)
         {
-            if (IsCssColor(color))
+            if (color != null && IsCssColor(color))
             {
                 styleBuilder
                  .Add($"background-color:{color}")
@@ -59,22 +59,22 @@ namespace BlazorComponent
 
         private static bool IsCssColor(string color)
         {
-            return !string.IsNullOrEmpty(color) && Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
+            return Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
         }
 
-        public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color, Func<bool> func)
+        public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string? color, Func<bool> func)
         {
             return styleBuilder.AddColor(color, true, func);
         }
 
-        public static StyleBuilder AddTransition(this StyleBuilder styleBuilder, string transition)
+        public static StyleBuilder AddTransition(this StyleBuilder styleBuilder, string? transition)
         {
             return styleBuilder.AddIf($"transition:{transition}", () => transition != null);
         }
 
-        public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color)
+        public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string? color)
         {
-            if (IsCssColor(color))
+            if (color != null && IsCssColor(color))
             {
                 styleBuilder
                     .Add($"color:{color}")
@@ -84,37 +84,37 @@ namespace BlazorComponent
             return styleBuilder;
         }
 
-        public static StyleBuilder AddHeight(this StyleBuilder styleBuilder, StringNumber height, bool isImportant = false)
+        public static StyleBuilder AddHeight(this StyleBuilder styleBuilder, StringNumber? height, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("height", height, isImportant);
         }
 
-        public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber width, bool isImportant = false)
+        public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber? width, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("width", width, isImportant);
         }
 
-        public static StyleBuilder AddMinWidth(this StyleBuilder styleBuilder, StringNumber minWidth, bool isImportant = false)
+        public static StyleBuilder AddMinWidth(this StyleBuilder styleBuilder, StringNumber? minWidth, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("min-width", minWidth, isImportant);
         }
 
-        public static StyleBuilder AddMaxWidth(this StyleBuilder styleBuilder, StringNumber maxWidth, bool isImportant = false)
+        public static StyleBuilder AddMaxWidth(this StyleBuilder styleBuilder, StringNumber? maxWidth, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("max-width", maxWidth, isImportant);
         }
 
-        public static StyleBuilder AddMinHeight(this StyleBuilder styleBuilder, StringNumber minHeight, bool isImportant = false)
+        public static StyleBuilder AddMinHeight(this StyleBuilder styleBuilder, StringNumber? minHeight, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("min-height", minHeight, isImportant);
         }
 
-        public static StyleBuilder AddMaxHeight(this StyleBuilder styleBuilder, StringNumber maxHeight, bool isImportant = false)
+        public static StyleBuilder AddMaxHeight(this StyleBuilder styleBuilder, StringNumber? maxHeight, bool isImportant = false)
         {
             return styleBuilder
                         .AddSize("max-height", maxHeight, isImportant);
@@ -131,7 +131,7 @@ namespace BlazorComponent
                         .AddSize("max-width", measurable.MaxWidth);
         }
 
-        private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber size, bool isImportant = false)
+        private static StyleBuilder AddSize(this StyleBuilder styleBuilder, string name, StringNumber? size, bool isImportant = false)
         {
             return styleBuilder
                         .AddIf(() => $"{name}: {size.ToUnit()} {(isImportant ? "!important" : "")}", () => size != null);

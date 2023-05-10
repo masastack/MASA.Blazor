@@ -1,21 +1,17 @@
 ﻿using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
     public class MTimePickerClock : BTimePickerClock, ITimePickerClock
     {
+        [Inject]
+        public Document Document { get; set; } = null!;
+
         [Parameter]
         public int? Value
         {
-            get
-            {
-                return GetValue<int?>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<int?>();
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -30,10 +26,6 @@ namespace Masa.Blazor
         [Parameter]
         public bool Double { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
-
-
         [Parameter]
         public int Max { get; set; }
 
@@ -41,7 +33,7 @@ namespace Masa.Blazor
         public int Min { get; set; }
 
         [Parameter]
-        public Func<int, bool> AllowedValues { get; set; }
+        public Func<int, bool>? AllowedValues { get; set; }
 
         [Parameter]
         public EventCallback<int> OnInput { get; set; }
@@ -53,21 +45,15 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public int Step { get; set; } = 1;
 
         [Parameter]
-        public Func<int, string> Format { get; set; }
+        public Func<int, string>? Format { get; set; }
 
-        protected int DisplayedValue
-        {
-            get
-            {
-                return Value == null ? Min : Value.Value;
-            }
-        }
+        protected int DisplayedValue => Value ?? Min;
 
         protected override async Task HandleOnWheelAsync(WheelEventArgs args)
         {
@@ -101,15 +87,15 @@ namespace Masa.Blazor
 
         protected bool IsDragging { get; set; }
 
-        protected HtmlElement Clock => Document.GetElementByReference(Ref);
+        protected HtmlElement? Clock => Document.GetElementByReference(Ref);
 
-        protected HtmlElement InnerClock => Document.GetElementByReference(InnerClockElement);
+        protected HtmlElement? InnerClock => Document.GetElementByReference(InnerClockElement);
 
         protected double InnerRadiusScale => 0.62;
 
         protected int Count => Max - Min + 1;
 
-        protected double DegreesPerUnit => 360 / RoundCount;
+        protected double DegreesPerUnit => 360d / RoundCount;
 
         protected int RoundCount => Double ? (Count / 2) : Count;
 
@@ -133,15 +119,11 @@ namespace Masa.Blazor
 
         protected override async Task HandleOnDragMoveAsync(MouseEventArgs args)
         {
-            if (Readonly || Disabled)
-            {
-                return;
-            }
+            if (Readonly || Disabled) return;
 
-            if (!IsDragging)
-            {
-                return;
-            }
+            if (!IsDragging) return;
+
+            if (Clock is null || InnerClock is null) return;
 
             var clockRect = await Clock.GetBoundingClientRectAsync();
             var width = clockRect.Width;
@@ -271,7 +253,7 @@ namespace Masa.Blazor
             return IsInner(value) ? InnerRadiusScale : 1;
         }
 
-        private (double, double) GetPosition(int value)
+        private(double, double) GetPosition(int value)
         {
             var rotateRadians = Rotate * Math.PI / 180;
             var x = Math.Sin((value - Min) * Degrees + rotateRadians) * HandScale(value);
@@ -282,12 +264,9 @@ namespace Masa.Blazor
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
-            
+
             watcher
-                .Watch<int?>(nameof(Value), val =>
-                {
-                    InputValue = val;
-                });
+                .Watch<int?>(nameof(Value), val => { InputValue = val; });
         }
 
         protected override void SetComponentClass()
@@ -352,7 +331,10 @@ namespace Masa.Blazor
                 if (Scrollable)
                 {
                     var el = Document.GetElementByReference(Ref);
-                    await el.AddEventListenerAsync("wheel", CreateEventCallback<WheelEventArgs>(HandleOnWheelAsync), false, new EventListenerExtras() { PreventDefault = true });
+                    if (el is null) return;
+
+                    await el.AddEventListenerAsync("wheel", CreateEventCallback<WheelEventArgs>(HandleOnWheelAsync), false,
+                        new EventListenerExtras() { PreventDefault = true });
                 }
             }
         }

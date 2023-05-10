@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using OneOf;
+﻿using OneOf;
 
 namespace Masa.Blazor
 {
@@ -12,14 +10,8 @@ namespace Masa.Blazor
         [Parameter]
         public DatePickerType? ActivePicker
         {
-            get
-            {
-                return GetValue<DatePickerType?>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<DatePickerType?>();
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -50,6 +42,7 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
         [Parameter]
@@ -74,6 +67,7 @@ namespace Masa.Blazor
         public bool Landscape { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
@@ -104,7 +98,7 @@ namespace Masa.Blazor
         public bool ShowWeek { get; set; }
 
         [Parameter]
-        public TValue Value
+        public TValue? Value
         {
             get => GetValue<TValue>();
             set => SetValue(value);
@@ -126,9 +120,11 @@ namespace Masa.Blazor
         public string? YearIcon { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("$next")]
         public string NextIcon { get; set; } = "$next";
 
         [Parameter]
+        [ApiDefaultValue("$prev")]
         public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
@@ -222,7 +218,7 @@ namespace Masa.Blazor
         {
             get
             {
-                if (ShowCurrent.IsT1 && ShowCurrent.AsT1 == true)
+                if (ShowCurrent.IsT1 && ShowCurrent.AsT1)
                 {
                     return DateOnly.FromDateTime(DateTime.Now);
                 }
@@ -255,7 +251,7 @@ namespace Masa.Blazor
             watcher
                 .Watch<DatePickerType?>(nameof(ActivePicker), val =>
                 {
-                    InternalActivePicker = val.Value;
+                    InternalActivePicker = val ?? Type; 
                 })
                 .Watch<DateOnly>(nameof(TableDate), val =>
                 {
@@ -274,11 +270,11 @@ namespace Masa.Blazor
                 .Watch<TValue>(nameof(Value), val =>
                 {
                     var multipleValue = WrapInArray(val);
-                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
+                    TableDate = multipleValue.Count > 0 ? multipleValue[^1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
                 });
         }
 
-        private IList<DateOnly> WrapInArray(TValue value)
+        private IList<DateOnly> WrapInArray(TValue? value)
         {
             if (value is DateOnly date)
             {
@@ -287,14 +283,13 @@ namespace Masa.Blazor
                     date
                 };
             }
-            else if (value is IList<DateOnly> dates)
+
+            if (value is IList<DateOnly> dates)
             {
                 return dates;
             }
-            else
-            {
-                return new List<DateOnly>();
-            }
+
+            return new List<DateOnly>();
         }
 
         protected override void SetComponentClass()

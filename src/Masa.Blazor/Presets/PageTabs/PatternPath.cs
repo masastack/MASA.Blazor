@@ -32,7 +32,7 @@ public record PatternPath
         AbsolutePath = path;
     }
 
-    public virtual bool Equals(PatternPath other)
+    public virtual bool Equals(PatternPath? other)
     {
         return Pattern == other?.Pattern && IsSelf == other?.IsSelf;
     }
@@ -42,9 +42,9 @@ public record PatternPath
         return HashCode.Combine(IsSelf, Pattern);
     }
 
-    public void Deconstruct(out string Pattern, out string AbsolutePath)
+    public void Deconstruct(out string pattern, out string absolutePath)
     {
-        Pattern = this.Pattern;
-        AbsolutePath = this.AbsolutePath;
+        pattern = this.Pattern;
+        absolutePath = this.AbsolutePath;
     }
 }

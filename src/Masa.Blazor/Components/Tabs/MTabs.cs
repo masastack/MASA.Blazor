@@ -3,13 +3,13 @@
     public partial class MTabs : BTabs, IThemeable
     {
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string? ActiveClass { get; set; }
 
         [Parameter]
         public bool AlignWithTitle { get; set; }
 
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
         public bool CenterActive { get; set; }
@@ -24,13 +24,13 @@
         public bool Grow { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
         public bool IconsAndText { get; set; }
 
         [Parameter]
-        public StringNumber MobileBreakpoint { get; set; }
+        public StringNumber? MobileBreakpoint { get; set; }
 
         [Parameter]
         public bool Right { get; set; }

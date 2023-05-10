@@ -6,20 +6,20 @@ namespace Masa.Blazor
     public class MWindowItem : BWindowItem
     {
         [Inject]
-        public Document Document { get; set; }
+        public Document Document { get; set; } = null!;
 
         [CascadingParameter]
-        public MWindow WindowGroup { get; set; }
+        public MWindow? WindowGroup { get; set; }
 
         [Parameter]
-        public string Transition { get; set; }
+        public string? Transition { get; set; }
 
         [Parameter]
-        public string ReverseTransition { get; set; }
+        public string? ReverseTransition { get; set; }
 
         private bool InTransition { get; set; }
 
-        protected override string ComputedTransition
+        protected override string? ComputedTransition
         {
             get
             {
@@ -34,13 +34,12 @@ namespace Masa.Blazor
 
         protected override async Task HandleOnBefore(ElementReference el)
         {
-            if (InTransition)
-            {
-                return;
-            }
+            if (InTransition) return;
 
             // Initialize transition state here.
             InTransition = true;
+
+            if (WindowGroup == null) return;
 
             if (WindowGroup.TransitionCount == 0)
             {
@@ -60,12 +59,11 @@ namespace Masa.Blazor
 
         protected override Task HandleOnAfter(ElementReference el)
         {
-            if (!InTransition)
-            {
-                return Task.CompletedTask;
-            }
+            if (!InTransition) return Task.CompletedTask;
 
             InTransition = false;
+
+            if (WindowGroup == null) return Task.CompletedTask;
 
             if (WindowGroup.TransitionCount > 0)
             {
@@ -92,10 +90,9 @@ namespace Masa.Blazor
 
             NextTick(async () =>
             {
-                if (!string.IsNullOrEmpty(ComputedTransition) || !InTransition)
-                {
-                    return;
-                }
+                if (!string.IsNullOrEmpty(ComputedTransition) || !InTransition) return;
+
+                if (WindowGroup == null) return;
 
                 // Set transition target height.
                 var elementInfo = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, el);

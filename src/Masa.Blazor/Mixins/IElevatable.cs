@@ -2,6 +2,6 @@
 {
     public interface IElevatable
     {
-        StringNumber Elevation { get; set; }
+        StringNumber? Elevation { get; set; }
     }
 }

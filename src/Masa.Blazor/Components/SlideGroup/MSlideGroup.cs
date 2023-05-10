@@ -6,12 +6,12 @@
         {
         }
 
-        public MSlideGroup(GroupType groupType) : base(groupType)
+        protected MSlideGroup(GroupType groupType) : base(groupType)
         {
         }
 
         [Inject]
-        protected MasaBlazor MasaBlazor { get; set; }
+        protected MasaBlazor MasaBlazor { get; set; } = null!;
 
         protected override void OnInitialized()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MSkeletonLoader : BSkeletonLoader, ISkeletonLoader, IThemeable
+    public partial class MSkeletonLoader : BSkeletonLoader, ISkeletonLoader
     {
         [Parameter]
         public bool Boilerplate { get; set; }
@@ -12,36 +12,36 @@
         public bool Tile { get; set; }
 
         [Parameter]
-        public string Transition { get; set; }
+        public string? Transition { get; set; }
 
         [Parameter]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         [Parameter]
-        public Dictionary<string, string> Types { get; set; }
-
-        public Dictionary<string, string> RootTypes { get; set; }
+        public Dictionary<string, string>? Types { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
+
+        private Dictionary<string, string> RootTypes { get; set; } = new();
 
         private bool IsLoading => ChildContent is null || Loading;
 
@@ -53,14 +53,14 @@
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add(prefix)
-                        .AddIf($"{prefix}--boilerplate", () => Boilerplate)
-                        .AddIf($"{prefix}--is-loading", () => IsLoading)
-                        .AddIf($"{prefix}--tile", () => Tile)
-                        .AddTheme(IsDark)
-                        .AddElevatable(this);
+                              .AddIf($"{prefix}--boilerplate", () => Boilerplate)
+                              .AddIf($"{prefix}--is-loading", () => IsLoading)
+                              .AddIf($"{prefix}--tile", () => Tile)
+                              .AddTheme(IsDark)
+                              .AddElevatable(this);
                 }, styleBuilder =>
                 {
-                    if (IsLoading == true)
+                    if (IsLoading)
                     {
                         styleBuilder.AddMeasurable(this);
                     }
@@ -75,7 +75,7 @@
 
             RootTypes = new Dictionary<string, string>
             {
-                { "actions","button@2"},
+                { "actions", "button@2" },
                 { "article", "heading, paragraph" },
                 { "avatar", "avatar" },
                 { "button", "button" },
@@ -121,17 +121,10 @@
                 }
             }
 
-            if (IsLoading == true)
-            {
-                SkeletonLoaderContent = GenSkeleton();
-            }
-            else
-            {
-                SkeletonLoaderContent = ChildContent;
-            }
+            SkeletonLoaderContent = IsLoading ? GenSkeleton() : ChildContent;
         }
 
-        public RenderFragment GenSkeleton() => builder =>
+        private RenderFragment GenSkeleton() => builder =>
         {
             if (Transition is null)
             {
@@ -140,13 +133,14 @@
             }
         };
 
-        public string Genbone(string text, List<string> childrens)
+        private string Genbone(string text, List<string> children)
         {
             var divHtml = $"<div class=\"m-skeleton-loader__{text} m-skeleton-loader__bone\">";
-            foreach (var child in childrens)
+            foreach (var child in children)
             {
                 divHtml += child;
             }
+
             divHtml += "</div>";
 
             return divHtml;
@@ -154,7 +148,7 @@
 
         private List<string> GenBones(string bones)
         {
-            var childrens = new List<string>();
+            var children = new List<string>();
             var cutList = bones.Split('@').ToList();
             var bone = cutList.FirstOrDefault();
             var frequency = cutList.LastOrDefault();
@@ -162,21 +156,21 @@
             {
                 for (int i = 0; i < int.Parse(frequency); i++)
                 {
-                    childrens.AddRange(GenStructure(bone));
+                    children.AddRange(GenStructure(bone));
                 }
             }
-            return childrens;
+
+            return children;
         }
 
-        private List<string> GenStructure(string type = null)
+        private List<string> GenStructure(string? type = null)
         {
-            var childrens = new List<string>();
-            type = type ?? this.Type ?? "";
-            RootTypes.TryGetValue(type, out string bone);
+            var children = new List<string>();
+            type ??= Type ?? "";
+            RootTypes.TryGetValue(type, out var bone);
 
             if (type == bone)
             {
-
             }
             else if (type.Contains(","))
             {
@@ -186,31 +180,32 @@
             {
                 return GenBones(type);
             }
-            else if (bone.Contains(","))
+            else if (bone?.Contains(",") is true)
             {
-                childrens = MapBones(bone);
+                children = MapBones(bone);
             }
-            else if (bone.Contains("@"))
+            else if (bone?.Contains("@") is true)
             {
-                childrens = GenBones(bone);
+                children = GenBones(bone);
             }
             else if (bone is not null)
             {
-                childrens.AddRange(GenStructure(bone));
+                children.AddRange(GenStructure(bone));
             }
 
-            return new List<string> { Genbone(type, childrens) };
+            return new List<string> { Genbone(type, children) };
         }
 
         private List<string> MapBones(string bones)
         {
-            var childrens = new List<string>();
+            var children = new List<string>();
             var types = bones.Replace(" ", "").Split(",");
             foreach (var type in types)
             {
-                childrens.AddRange(GenStructure(type));
+                children.AddRange(GenStructure(type));
             }
-            return childrens;
+
+            return children;
         }
     }
 }

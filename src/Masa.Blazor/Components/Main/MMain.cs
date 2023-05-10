@@ -24,7 +24,7 @@ public class MMain : BMain
         MasaBlazor!.Application.PropertyChanged += OnApplicationPropertyChanged;
     }
 
-    private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_applicationProperties.Contains(e.PropertyName))
         {

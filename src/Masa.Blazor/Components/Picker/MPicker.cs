@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MPicker : BPicker, IThemeable, IPicker
     {
@@ -23,13 +21,15 @@ namespace Masa.Blazor
         public string? Color { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
+        [ApiDefaultValue("fade-transition")]
         public string Transition { get; set; } = "fade-transition";
 
         [Parameter]
-        public string HeaderColor { get; set; }
+        public string? HeaderColor { get; set; }
 
         public string ComputedTitleColor
         {

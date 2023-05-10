@@ -14,13 +14,13 @@ namespace Masa.Blazor
         public bool FixedRight { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public RenderFragment WrapperContent { get; set; }
+        public RenderFragment? WrapperContent { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         public ElementReference WrapperElement { get; set; }
 
@@ -67,7 +67,8 @@ namespace Masa.Blazor
             if (FixedRight)
             {
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
-                if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (element != null && element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
                 {
                     ScrollerOnRight = true;
                 }

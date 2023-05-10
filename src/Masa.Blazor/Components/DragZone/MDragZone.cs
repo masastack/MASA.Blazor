@@ -1,53 +1,47 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDragZone : BDragZone, IDisposable, IAsyncDisposable
+    public partial class MDragZone : BDragZone, IAsyncDisposable
     {
         [Parameter]
-        public Action<SorttableOptions> Options { get; set; }
+        public Action<SorttableOptions>? Options { get; set; }
 
         [Parameter]
         public bool Disabled
         {
-            get { return _options.Disabled ?? false; }
-            set { _options.Disabled = value; }
+            get => _options.Disabled ?? false;
+            set => _options.Disabled = value;
         }
 
         [Parameter]
         public string Group
         {
-            get
-            {
-                return _options.Group;
-            }
-            set
-            {
-                _options.Group = value;
-            }
+            get => _options.Group;
+            set => _options.Group = value;
         }
 
         [Parameter]
         public string Pull
         {
-            get { return _options.Pull; }
-            set { _options.Pull = value; }
+            get => _options.Pull;
+            set => _options.Pull = value;
         }
 
         [Parameter]
         public string Put
         {
-            get { return _options.Put; }
-            set { _options.Put = value; }
+            get => _options.Put;
+            set => _options.Put = value;
         }
 
         [Parameter]
         public bool Sort
         {
-            get { return _options.Sort ?? true; }
-            set { _options.Sort = value; }
+            get => _options.Sort ?? true;
+            set => _options.Sort = value;
         }
 
-        private DotNetObjectReference<MDragZone> _dotNetHelper;
-        private IJSObjectReference _jsHelper;
+        private DotNetObjectReference<MDragZone>? _dotNetHelper;
+        private IJSObjectReference? _jsHelper;
         private SorttableOptions _options = new();
 
         /// <summary>
@@ -57,7 +51,7 @@
         [JSInvokable]
         public async Task OnChoose(dynamic args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnChoose != null)
                 _options.OnChoose(args);
 
@@ -71,7 +65,7 @@
         [JSInvokable]
         public async Task OnUnchoose(dynamic args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnUnchoose != null)
                 _options.OnUnchoose(args);
 
@@ -85,7 +79,7 @@
         [JSInvokable]
         public async Task OnStart(SorttableEventArgs args)
         {
-            _isRender = false;
+            IsRender = false;
             var find = Items.FirstOrDefault(it => it.Id == args.ItemId);
             if (find == null)
             {
@@ -105,7 +99,7 @@
         [JSInvokable]
         public async Task OnDropEnd(SorttableEventArgs args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnEnd != null)
                 _options.OnEnd(args);
 
@@ -120,7 +114,7 @@
         [JSInvokable]
         public async Task OnAdd(SorttableEventArgs args)
         {
-            _isRender = true;
+            IsRender = true;
             if (_options?.OnAdd != null)
                 _options.OnAdd(args);
 
@@ -139,7 +133,7 @@
         [JSInvokable]
         public async Task OnUpdate(SorttableEventArgs args)
         {
-            _isRender = true;
+            IsRender = true;
             if (_options?.OnUpdate != null)
                 _options.OnUpdate(args);
 
@@ -156,7 +150,7 @@
         [JSInvokable]
         public async Task OnSort(SorttableEventArgs args)
         {
-            _isRender = true;
+            IsRender = true;
             if (_options?.OnSort != null)
                 _options.OnSort(args);
 
@@ -170,7 +164,7 @@
         [JSInvokable]
         public async Task OnRemove(SorttableEventArgs args)
         {
-            _isRender = true;
+            IsRender = true;
             if (_options?.OnRemove != null)
                 _options.OnRemove(args);
           
@@ -193,7 +187,7 @@
         [JSInvokable]
         public async Task OnMove(SorttableMoveEventArgs args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnMove != null)
                 _options.OnMove(args);
 
@@ -207,7 +201,7 @@
         [JSInvokable]
         public async Task OnClone(SorttableEventArgs args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnClone != null)
                 _options.OnClone(args);
 
@@ -217,7 +211,7 @@
         [JSInvokable]
         public async Task OnChange(SorttableEventArgs args)
         {
-            _isRender = false;
+            IsRender = false;
             if (_options?.OnChange != null)
                 _options.OnChange(args);
 
@@ -249,11 +243,6 @@
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
             }
             await base.OnAfterRenderAsync(firstRender);
-        }
-
-        protected override bool ShouldRender()
-        {
-            return base.ShouldRender();
         }
 
         protected override void OnParametersSet()

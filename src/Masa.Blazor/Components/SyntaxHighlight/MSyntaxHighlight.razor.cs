@@ -1,14 +1,11 @@
-﻿#nullable enable
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MSyntaxHighlight : BDomComponentBase
 {
     [Inject]
     protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
 
-    [Parameter]
-    [EditorRequired]
+    [Parameter, EditorRequired]
     public string? Code { get; set; }
 
     [Parameter]

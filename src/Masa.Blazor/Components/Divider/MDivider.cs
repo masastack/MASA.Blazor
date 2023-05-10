@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDivider : BDivider, IThemeable
+    public partial class MDivider : BDivider
     {
         [Parameter]
         public bool Inset { get; set; }

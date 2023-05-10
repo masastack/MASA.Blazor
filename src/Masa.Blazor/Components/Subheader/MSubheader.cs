@@ -5,7 +5,6 @@
         [Parameter]
         public bool Inset { get; set; }
 
-
         protected override void SetComponentClass()
         {
             CssProvider

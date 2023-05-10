@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
 		<Version>0.1.0</Version>
 		<RepositoryUrl>https://github.com/masastack/MASA.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>

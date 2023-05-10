@@ -7,7 +7,7 @@ namespace Masa.Blazor
     public class MFileInput<TValue> : MTextField<TValue>, IFileInput<TValue>
     {
         [Inject]
-        protected I18n I18n { get; set; }
+        protected I18n I18n { get; set; } = null!;
 
         [Parameter]
         public bool HideInput { get; set; }
@@ -19,7 +19,7 @@ namespace Masa.Blazor
         public bool SmallChips { get; set; }
 
         [Parameter]
-        public RenderFragment<(int index, string text)> SelectionContent { get; set; }
+        public RenderFragment<(int index, string text)>? SelectionContent { get; set; }
 
         [Parameter]
         public bool Multiple { get; set; }
@@ -28,20 +28,23 @@ namespace Masa.Blazor
         public bool ShowSize { get; set; }
 
         [Parameter]
-        public override string PrependIcon { get; set; } = "$file";
+        [ApiDefaultValue("$file")]
+        public override string? PrependIcon { get; set; } = "$file";
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public override bool Clearable { get; set; } = true;
 
         [Parameter]
+        [ApiDefaultValue(22)]
         public StringNumber TruncateLength { get; set; } = 22;
 
         [Parameter]
-        public string Accept { get; set; }
+        public string? Accept { get; set; }
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-        protected override Dictionary<string, object> InputAttrs => new()
+        protected override Dictionary<string, object?> InputAttrs => new()
         {
             { "type", "file" },
             { "accept", Accept }
@@ -49,19 +52,16 @@ namespace Masa.Blazor
 
         public bool HasChips => Chips || SmallChips;
 
-        public IList<string> Text
+        public IList<string?> Text
         {
             get
             {
                 if (!IsDirty && (IsFocused || !HasLabel))
                 {
-                    return new List<string>
-                    {
-                        Placeholder
-                    };
+                    return new List<string?> { Placeholder };
                 }
 
-                var text = new List<string>();
+                var text = new List<string?>();
 
                 foreach (var file in Files)
                 {
@@ -73,11 +73,11 @@ namespace Masa.Blazor
             }
         }
 
-        public InputFile InputFile { get; set; }
+        public InputFile? InputFile { get; set; }
 
         public override ElementReference InputElement
         {
-            get => InputFile.Element.Value;
+            get => InputFile?.Element ?? default;
             set => base.InputElement = value;
         }
 
@@ -151,7 +151,7 @@ namespace Masa.Blazor
                 return $"{bytes} B";
             }
 
-            var prefix = binary ? new string[] { "Ki", "Mi", "Gi" } : new string[] { "k", "M", "G" };
+            var prefix = binary ? new[] { "Ki", "Mi", "Gi" } : new[] { "k", "M", "G" };
             var unit = -1;
             var size = Convert.ToDecimal(bytes);
 
@@ -208,10 +208,15 @@ namespace Masa.Blazor
 
         public override async Task HandleOnPrependClickAsync(MouseEventArgs args)
         {
+            if (InputFile?.Element is null) return;
+
             await base.HandleOnPrependClickAsync(args);
             var input = Document.GetElementByReference(InputFile.Element.Value);
-            var @event = new MouseEvent("click");
-            await input.DispatchEventAsync(@event, stopPropagation: true);
+            if (input is not null)
+            {
+                var @event = new MouseEvent("click");
+                await input.DispatchEventAsync(@event, stopPropagation: true);
+            }
         }
 
         public override Task HandleOnInputAsync(ChangeEventArgs args)
@@ -271,15 +276,25 @@ namespace Masa.Blazor
                 await OnClick.InvokeAsync();
             }
 
+            if (InputFile?.Element is null) return;
+
             var input = Document.GetElementByReference(InputFile.Element.Value);
-            var @event = new MouseEvent("click");
-            await input.DispatchEventAsync(@event, stopPropagation: true);
+            if (input is not null)
+            {
+                var @event = new MouseEvent("click");
+                await input.DispatchEventAsync(@event, stopPropagation: true);
+            }
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
+            if (InputFile?.Element is null) return;
+
             var input = Document.GetElementByReference(InputFile.Element.Value);
-            await input.SetPropertyAsync("value", "");
+            if (input is not null)
+            {
+                await input.SetPropertyAsync("value", "");
+            }
 
             if (Multiple)
             {

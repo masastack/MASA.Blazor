@@ -8,25 +8,31 @@ namespace Masa.Blazor
         [Parameter]
         public bool ChangeOnSelect { get; set; }
 
-        [Parameter]
+        [Parameter, ApiDefaultValue(true)]
         public bool ShowAllLevels { get; set; } = true;
 
-        [EditorRequired]
-        [Parameter]
-        public Func<TItem, List<TItem>> ItemChildren { get; set; }
+        [Parameter, EditorRequired]
+        public Func<TItem, List<TItem>> ItemChildren { get; set; } = null!;
 
         [Parameter]
-        public Func<TItem, Task> LoadChildren { get; set; }
+        public Func<TItem, Task>? LoadChildren { get; set; }
 
-        [Parameter]
+        [Parameter, ApiDefaultValue(true)]
         public override bool Outlined { get; set; } = true;
 
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
+
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+
+            ItemChildren.ThrowIfNull(ComponentName);
+        }
 
         protected override void OnParametersSet()
         {

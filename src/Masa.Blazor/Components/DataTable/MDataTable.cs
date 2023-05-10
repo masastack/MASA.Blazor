@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -68,7 +66,7 @@ namespace Masa.Blazor
         public Func<TItem, string?>? ItemClass { get; set; }
 
         [Parameter]
-        public Func<object, string, TItem, bool> CustomItemFilter { get; set; } = DefaultFilter;
+        public Func<object?, string?, TItem, bool> CustomItemFilter { get; set; } = DefaultFilter;
 
         [Parameter]
         public bool HideDefaultHeader { get; set; }
@@ -159,6 +157,8 @@ namespace Masa.Blazor
                             Width = "1px",
                             Value = "data-table-expand"
                         });
+                        
+                        headers.Insert(0, new DataTableHeader<TItem>("1px", "data-table-expand"));
                     }
                     else
                     {
@@ -209,7 +209,7 @@ namespace Masa.Blazor
 
         public string GroupPlusIcon { get; } = "$plus";
 
-        public DataOptions Options => InternalOptions.TryDeepClone();
+        public DataOptions Options => InternalOptions;
 
         protected bool IsFixedRight => FixedRight;
 
@@ -253,12 +253,12 @@ namespace Masa.Blazor
             return OnRowDbClick.InvokeAsync(args);
         }
 
-        private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
+        private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string? search)
         {
             return SearchTableItems(items, search, HeadersWithCustomFilters, HeadersWithoutCustomFilters, CustomItemFilter);
         }
 
-        private IEnumerable<TItem> SearchTableItems(IEnumerable<TItem> items, string? search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object, string, TItem, bool> customItemFilter)
+        private IEnumerable<TItem> SearchTableItems(IEnumerable<TItem> items, string? search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object?, string?, TItem, bool> customItemFilter)
         {
             search = search?.Trim();
 
@@ -338,7 +338,7 @@ namespace Masa.Blazor
                 .Apply(typeof(BProgressLinear), typeof(MProgressLinear), attrs =>
                 {
                     attrs[nameof(MProgressLinear.Absolute)] = true;
-                    attrs[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? "primary" : Loading.AsT0;
+                    attrs[nameof(MProgressLinear.Color)] =  (Loading == true || Loading == "") ? (Color ?? "primary") : Loading?.AsT0;
                     attrs[nameof(MProgressLinear.Height)] = LoaderHeight;
                     attrs[nameof(MProgressLinear.Indeterminate)] = true;
                 })

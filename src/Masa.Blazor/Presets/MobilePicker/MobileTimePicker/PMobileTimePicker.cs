@@ -11,7 +11,7 @@ public class PMobileTimePicker : MobilePickerBase<TimeColumn, TimeColumn, int, T
     public TimeOnly Min { get; set; }
 
     [Parameter]
-    public Func<TimePrecision, int, string> Formatter { get; set; }
+    public Func<TimePrecision, int, string>? Formatter { get; set; }
 
     [Parameter]
     public TimePrecision Precision { get; set; } = TimePrecision.Second;
