@@ -176,7 +176,7 @@ namespace Masa.Blazor
 
             MasaBlazor!.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
 
-            MasaBlazor.Application.HasNavigationDrawer = App;
+            MasaBlazor.Application.HasNavigationDrawer = App && !Temporary;
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
             NavigationManager!.LocationChanged += OnLocationChanged;
