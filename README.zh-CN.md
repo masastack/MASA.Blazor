@@ -39,7 +39,7 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 
 ## 📊 统计
 
-![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/d2284637ff2024bc3301ffce6cdaa1706cfcdc5c.svg "Repobeats analytics image")
 
 ## 🖥️ 文档
 
