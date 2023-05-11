@@ -154,7 +154,7 @@
                     attrs[nameof(MButton.Icon)] = true;
                     attrs[nameof(MButton.Light)] = Light;
 
-                    attrs[nameof(MButton.StopPropagation)] = true;
+                    attrs[nameof(MButton.OnClickStopPropagation)] = true;
                     attrs[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
                     {
                         if (OnInput.HasDelegate)
