@@ -40,7 +40,7 @@
                          Class="@CssProvider.GetClass("tab-close")"
                          OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
                          Small
-                         StopPropagation
+                         OnClickStopPropagation
                          OnClickPreventDefault>
                     <MIcon Small>@(CloseIcon ?? "$close")</MIcon>
                 </MButton>

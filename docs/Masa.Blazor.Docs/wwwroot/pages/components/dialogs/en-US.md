@@ -69,7 +69,7 @@ Modals that do not fit within the available window space will scroll the contain
 
 #### Without activator
 
-If for some reason you are unable to use the activator slot, be sure to add the `StopPropagation` modifier to the event that triggers the dialog.
+If for some reason you are unable to use the activator slot, be sure to add the `OnClickStopPropagation` modifier to the event that triggers the dialog.
 
 <masa-example file="Examples.components.dialogs.WithoutActivator"></masa-example>
 

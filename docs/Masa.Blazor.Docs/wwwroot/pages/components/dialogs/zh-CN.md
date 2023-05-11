@@ -69,6 +69,6 @@ related:
 
 #### 没有激活器
 
-如果因为某些原因不能使用激活器插槽，请确保将 `StopPropagation` 修饰符添加到触发对话框的事件。
+如果因为某些原因不能使用激活器插槽，请确保将 `OnClickStopPropagation` 修饰符添加到触发对话框的事件。
 
 <masa-example file="Examples.components.dialogs.WithoutActivator"></masa-example>
