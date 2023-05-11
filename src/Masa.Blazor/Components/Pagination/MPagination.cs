@@ -1,10 +1,15 @@
 ﻿using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
     public partial class MPagination : BPagination, IPagination
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+
+        [Inject]
+        public Document Document { get; set; } = null!;
+
         [Parameter]
         public bool Circle { get; set; }
 
@@ -36,22 +41,16 @@ namespace Masa.Blazor
         public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
-        public StringNumber TotalVisible { get; set; }
+        public StringNumber? TotalVisible { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Document Document { get; set; }
+        public string? Color { get; set; } = "primary";
 
         public bool PrevDisabled => Value <= 1;
 
         public bool NextDisabled => Value >= Length;
 
-        protected int _maxButtons = 0;
+        protected int MaxButtons;
 
         protected override void SetComponentClass()
         {
@@ -107,10 +106,12 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 var el = Document.GetElementByReference(Ref);
+                if (el is null) return;
+
                 var clientWidth = await el.ParentElement.GetClientWidthAsync();
                 if (clientWidth != null)
                 {
-                    _maxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
+                    MaxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
                     StateHasChanged();
                 }
             }
@@ -118,9 +119,7 @@ namespace Masa.Blazor
 
         public string GetIcon(int index)
         {
-            return index == (int)PaginationIconTypes.First ?
-                (MasaBlazor.RTL ? NextIcon : PrevIcon) :
-                (MasaBlazor.RTL ? PrevIcon : NextIcon);
+            return index == (int)PaginationIconTypes.First ? (MasaBlazor.RTL ? NextIcon : PrevIcon) : (MasaBlazor.RTL ? PrevIcon : NextIcon);
         }
 
         public IEnumerable<StringNumber> GetItems()
@@ -154,8 +153,8 @@ namespace Masa.Blazor
             }
 
             var maxLength = Min(
-                Max(0, TotalVisible, Length),
-                Max(0, _maxButtons, Length),
+                Max(0, (TotalVisible ?? 0), Length),
+                Max(0, MaxButtons, Length),
                 Length);
 
             if (Length <= maxLength)

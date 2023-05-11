@@ -1,5 +1,3 @@
-#nullable enable
-
 using BlazorComponent.Web;
 
 namespace Masa.Blazor
@@ -19,6 +17,7 @@ namespace Masa.Blazor
         /// Whether to display from left to right
         /// </summary>
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool LeftToRight { get; set; } = true;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();

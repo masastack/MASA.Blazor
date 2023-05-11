@@ -1,25 +1,23 @@
-﻿<MForm>
-    <MContainer>
-        <MRow>
-            <MCol Cols="12">
-                <MTextField @bind-Value="_message"
-                            AppendIcon="@(_marker ? "mdi-map-marker" : "mdi-map-marker-off")"
-                            AppendOuterIcon="@(!string.IsNullOrEmpty(_message) ? "mdi-send" : "mdi-microphone")"
-                            PrependIcon="@Icon"
-                            Filled
-                            ClearIcon="mdi-close-circle"
-                            Clearable
-                            Label="Message"
-                            Type="text"
-                            OnAppendClick="ToggleMarker"
-                            OnAppendOuterClick="SendMessage"
-                            OnClearClick="ClearMessage"
-                            OnPrependClick="ChangeIcon">
-                </MTextField>
-            </MCol>
-        </MRow>
-    </MContainer>
-</MForm>
+﻿<MContainer>
+    <MRow>
+        <MCol Cols="12">
+            <MTextField @bind-Value="_message"
+                        AppendIcon="@(_marker ? "mdi-map-marker" : "mdi-map-marker-off")"
+                        AppendOuterIcon="@(!string.IsNullOrEmpty(_message) ? "mdi-send" : "mdi-microphone")"
+                        PrependIcon="@Icon"
+                        Filled
+                        ClearIcon="mdi-close-circle"
+                        Clearable
+                        Label="Message"
+                        Type="text"
+                        OnAppendClick="ToggleMarker"
+                        OnAppendOuterClick="SendMessage"
+                        OnClearClick="ClearMessage"
+                        OnPrependClick="ChangeIcon">
+            </MTextField>
+        </MCol>
+    </MRow>
+</MContainer>
 
 @code {
     private string _message = "Hey!";

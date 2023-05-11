@@ -1,5 +1,4 @@
-﻿#nullable enable
-using Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 

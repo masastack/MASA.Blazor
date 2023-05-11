@@ -3,19 +3,11 @@
     public class MRadio<TValue> : BRadio<TValue>
     {
         [Parameter]
-        public string Color { get; set; } = "primary";
+        public string? Color { get; set; } = "primary";
 
         protected bool IsFocused { get; set; }
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
-
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            OnIcon = "$radioOn";
-            OffIcon = "$radioOff";
-            
-            await base.SetParametersAsync(parameters);
-        }
 
         protected override void OnInitialized()
         {

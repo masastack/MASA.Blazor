@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public class MToolbar : MSheet, IThemeable, IToolbar
+    public class MToolbar : MSheet, IToolbar
     {
         [Parameter]
         public bool Absolute { get; set; }
@@ -10,10 +10,6 @@
 
         [Parameter]
         public bool Collapse { get; set; }
-
-        protected virtual bool IsCollapsed => Collapse;
-
-        public bool IsExtended => Extended || ExtensionContent != null;
 
         [Parameter]
         public bool Floating { get; set; }
@@ -28,16 +24,31 @@
         public bool Dense { get; set; }
 
         [Parameter]
-        public string Src { get; set; }
+        public string? Src { get; set; }
 
         [Parameter]
-        public RenderFragment<Dictionary<string, object>> ImgContent { get; set; }
+        public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
         [Parameter]
         public bool Short { get; set; }
 
         [Parameter]
-        public StringNumber ExtensionHeight { get; set; } = 48;
+        [ApiDefaultValue(48)]
+        public StringNumber? ExtensionHeight { get; set; } = 48;
+
+        [Parameter]
+        public RenderFragment? ExtensionContent { get; set; }
+
+        [Parameter]
+        [ApiDefaultValue("header")]
+        public override string Tag { get; set; } = "header";
+
+        [Parameter]
+        public bool Extended { get; set; }
+        
+        protected virtual bool IsCollapsed => Collapse;
+
+        public bool IsExtended => Extended || ExtensionContent != null;
 
         protected virtual StringNumber ComputedContentHeight
         {
@@ -68,7 +79,7 @@
                     return 48;
                 }
 
-                if (Short)//TODO:breakpoint
+                if (Short) //TODO:breakpoint
                 {
                     return 56;
                 }
@@ -86,18 +97,9 @@
                     return ComputedContentHeight;
                 }
 
-                return IsCollapsed ? ComputedContentHeight : ComputedContentHeight.ToInt32() + ExtensionHeight.ToInt32();
+                return IsCollapsed ? ComputedContentHeight : ComputedContentHeight.ToInt32() + (ExtensionHeight?.ToInt32() ?? 0);
             }
         }
-
-        [Parameter]
-        public RenderFragment ExtensionContent { get; set; }
-
-        [Parameter]
-        public override string Tag { get; set; } = "header";
-
-        [Parameter]
-        public bool Extended { get; set; }
 
         protected virtual bool IsProminent => Prominent;
 
@@ -122,15 +124,12 @@
                 }, styleBuilder =>
                 {
                     styleBuilder
-                       .AddHeight(ComputedHeight);
+                        .AddHeight(ComputedHeight);
                 })
-                .Apply("content", cssBuilder =>
-                {
-                    cssBuilder.Add("m-toolbar__content");
-                }, styleBuilder =>
+                .Apply("content", cssBuilder => { cssBuilder.Add("m-toolbar__content"); }, styleBuilder =>
                 {
                     styleBuilder
-                       .AddHeight(ComputedContentHeight);
+                        .AddHeight(ComputedContentHeight);
                 })
                 .Apply("image", cssBuilder =>
                 {

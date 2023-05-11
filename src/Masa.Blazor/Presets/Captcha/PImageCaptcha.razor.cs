@@ -6,19 +6,20 @@ namespace Masa.Blazor.Presets
     public partial class PImageCaptcha
     {
         [Inject]
-        public virtual IJSRuntime Js { get; set; }
+        public virtual IJSRuntime Js { get; set; } = null!;
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(80)]
         public int CaptchaWidth { get; set; } = 80;
 
         [Parameter]
         public int CaptchaHeight { get; set; }
 
         [Parameter]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         [Parameter]
         public bool Outlined { get; set; }
@@ -27,7 +28,8 @@ namespace Masa.Blazor.Presets
         public bool Clearable { get; set; }
 
         [Parameter]
-        public string ClearIcon { get; set; } = "$clear";
+        [ApiDefaultValue("$clear")]
+        public string? ClearIcon { get; set; } = "$clear";
 
         [Parameter]
         public bool Dark { get; set; }
@@ -51,64 +53,97 @@ namespace Masa.Blazor.Presets
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         [Parameter]
-        public EventCallback<string> ValueChanged { get; set; }
+        public EventCallback<string?> ValueChanged { get; set; }
 
         [Parameter]
-        public string Placeholder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
-        public string VerifyCode { get; set; }
+        public string? VerifyCode { get; set; }
 
         [Parameter]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
+
+        [Parameter, EditorRequired]
+        public Func<Task<string>> OnRefresh { get; set; } = null!;
 
         [Parameter]
-        [EditorRequired]
-        public Func<Task<string>> OnRefresh { get; set; }
+        public string? TextFieldStyle { get; set; }
 
         [Parameter]
-        public string TextFieldStyle { get; set; }
+        public string? ImageStyle { get; set; }
 
         [Parameter]
-        public string ImageStyle { get; set; }
+        public string? TextFieldClass { get; set; }
 
         [Parameter]
-        public string TextFieldClass { get; set; }
+        public string? ImageClass { get; set; }
 
-        [Parameter]
-        public string ImageClass { get; set; }
+        private string? _captchaCode;
 
-        private string _captchaCode;
+        private readonly Random _random = new();
 
-        public string CaptchaCode
+        private string? _imageUrl;
+        private CaptchaGenerator? _generator;
+        private MTextField<string>? _textField;
+        private IEnumerable<Func<string, StringBoolean>>? _rules;
+
+        public string? CaptchaCode
         {
-            get
-            {
-                return _captchaCode;
-            }
+            get => _captchaCode;
             set
             {
-                if (_captchaCode != value)
-                {
-                    _captchaCode = value ?? "";
+                if (_captchaCode == value) return;
 
-                    GenerateImage();
-                }
+                _captchaCode = value ?? "";
+
+                GenerateImage();
             }
         }
 
-        private IEnumerable<Func<string, StringBoolean>> rules;
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
 
-        private string ImageUrl { get; set; }
+            OnRefresh.ThrowIfNull("ImageCaptcha");
+        }
 
-        private readonly Random random = new();
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
 
-        private CaptchaGenerator generator;
+            if (firstRender)
+            {
+                await RefreshCode();
 
-        private MTextField<string> TextFieldElement;
+                _rules = new List<Func<string, StringBoolean>>()
+                {
+                    v =>
+                    {
+                        if (string.IsNullOrEmpty(VerifyCode))
+                        {
+                            return v == CaptchaCode ? true : ErrorMessage;
+                        }
+
+                        return v == VerifyCode ? true : ErrorMessage;
+                    }
+                };
+
+                if (CaptchaHeight == 0)
+                {
+                    var textFieldRect =
+                        await Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, _textField!.InputSlotElement);
+                    CaptchaHeight = (int)textFieldRect.Height;
+                }
+
+                _generator = new CaptchaGenerator(CaptchaWidth, CaptchaHeight);
+
+                await GenerateImage();
+            }
+        }
 
         public Task OnClickAsync()
         {
@@ -117,63 +152,28 @@ namespace Masa.Blazor.Presets
 
         public async Task RefreshCode()
         {
-            CaptchaCode = await OnRefresh?.Invoke();
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await RefreshCode();
-
-                rules = new List<Func<string, StringBoolean>>()
-                {
-                    v =>
-                    {
-                        if (string.IsNullOrEmpty(VerifyCode))
-                        {
-                            return v == CaptchaCode? true : ErrorMessage;
-                        }
-                        else
-                        {
-                            return v == VerifyCode? true : ErrorMessage;
-                        }
-                    }
-                };
-
-                if (CaptchaHeight == 0)
-                {
-                    var textFieldRect = await Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, TextFieldElement.InputSlotElement);
-                    CaptchaHeight = (int)textFieldRect.Height;
-                }
-
-                generator = new CaptchaGenerator(CaptchaWidth, CaptchaHeight);
-
-                await GenerateImage();
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
+            CaptchaCode = await OnRefresh.Invoke();
         }
 
         public Task GenerateImage()
         {
-            if (!string.IsNullOrWhiteSpace(CaptchaCode) && generator != null)
+            if (!string.IsNullOrWhiteSpace(CaptchaCode) && _generator != null)
             {
-                var bgColor = new SKColor((byte)random.Next(90, 130), (byte)random.Next(90, 130), (byte)random.Next(90, 130));
+                var bgColor = new SKColor((byte)_random.Next(90, 130), (byte)_random.Next(90, 130), (byte)_random.Next(90, 130));
 
-                var paintColor = new SKColor((byte)random.Next(200, 256), (byte)random.Next(200, 256), (byte)random.Next(200, 256));
+                var paintColor = new SKColor((byte)_random.Next(200, 256), (byte)_random.Next(200, 256), (byte)_random.Next(200, 256));
 
-                var noisePoint = new SKColor((byte)random.Next(130, 200), (byte)random.Next(130, 200), (byte)random.Next(130, 200));
+                var noisePoint = new SKColor((byte)_random.Next(130, 200), (byte)_random.Next(130, 200), (byte)_random.Next(130, 200));
 
-                generator.BackgroundColor = bgColor;
-                generator.PaintColor = paintColor;
-                generator.NoisePointColor = noisePoint;
-                generator.ImageHeight = CaptchaHeight;
-                generator.ImageWidth = CaptchaWidth;
+                _generator.BackgroundColor = bgColor;
+                _generator.PaintColor = paintColor;
+                _generator.NoisePointColor = noisePoint;
+                _generator.ImageHeight = CaptchaHeight;
+                _generator.ImageWidth = CaptchaWidth;
 
-                var byteArr = generator.GenerateImageAsByteArray(CaptchaCode);
+                var byteArr = _generator.GenerateImageAsByteArray(CaptchaCode);
                 string imageBase64Data = Convert.ToBase64String(byteArr);
-                ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data);
+                _imageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data);
 
                 StateHasChanged();
             }

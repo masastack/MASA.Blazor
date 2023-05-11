@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable
+    public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable where TKey : notnull
     {
         [Parameter]
         public bool Hoverable { get; set; }
@@ -15,13 +15,15 @@
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string? ActiveClass { get; set; }
 
         [Parameter]
-        public string SelectedColor { get; set; } = "accent";
+        [ApiDefaultValue("accent")]
+        public string? SelectedColor { get; set; } = "accent";
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        [ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         [Parameter]
         public EventCallback<TItem> LoadChildren { get; set; }
@@ -30,13 +32,16 @@
         public bool Activatable { get; set; }
 
         [Parameter]
-        public string IndeterminateIcon { get; set; } = "$minus";
+        [ApiDefaultValue("$minus")]
+        public string? IndeterminateIcon { get; set; } = "$minus";
 
         [Parameter]
-        public string OnIcon { get; set; } = "$checkboxOn";
+        [ApiDefaultValue("$checkboxOn")]
+        public string? OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        public string OffIcon { get; set; } = "$checkboxOff";
+        [ApiDefaultValue("$checkboxOff")]
+        public string? OffIcon { get; set; } = "$checkboxOff";
 
         [Parameter]
         public bool OpenOnClick { get; set; }

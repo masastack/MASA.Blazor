@@ -18,7 +18,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     public Func<TItem, string> ItemKey { get; set; } = null!;
 
     [Parameter]
-    public Func<TItem, GridstackWidgetPosition> ItemPosition { get; set; }
+    public Func<TItem, GridstackWidgetPosition>? ItemPosition { get; set; }
 
     [Parameter]
     public string? ItemClass { get; set; }
@@ -87,9 +87,9 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     {
         await base.SetParametersAsync(parameters);
 
-        ArgumentNullException.ThrowIfNull(Items);
-        ArgumentNullException.ThrowIfNull(ItemContent);
-        ArgumentNullException.ThrowIfNull(ItemKey);
+        Items.ThrowIfNull(ComponentName);
+        ItemKey.ThrowIfNull(ComponentName);
+        ItemContent.ThrowIfNull(ComponentName);
     }
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
@@ -155,10 +155,12 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
 
     public async ValueTask<List<GridstackWidget>> OnSave()
     {
+        if (_gridstackInstance is null) return new List<GridstackWidget>();
+
         return await Module.Save(_gridstackInstance);
     }
 
-    private void GridstackOnResize(object sender, GridstackResizeEventArgs e)
+    private void GridstackOnResize(object? sender, GridstackResizeEventArgs e)
     {
         if (OnResize.HasDelegate)
         {

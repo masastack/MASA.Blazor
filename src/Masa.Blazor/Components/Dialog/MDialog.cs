@@ -3,22 +3,24 @@
     public partial class MDialog : BDialog, IDialog, IThemeable
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
-        public string ContentClass { get; set; }
+        public string? ContentClass { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("center center")]
         public string Origin { get; set; } = "center center";
 
         [Parameter]
-        public string OverlayScrimClass { get; set; }
+        public string? OverlayScrimClass { get; set; }
 
         [Parameter]
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public string Transition { get; set; } = "dialog-transition";
+        [ApiDefaultValue("dialog-transition")]
+        public string? Transition { get; set; } = "dialog-transition";
 
         public Dictionary<string, object> ContentAttrs
         {

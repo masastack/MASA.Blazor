@@ -3,7 +3,7 @@
     public partial class MListGroup : BListGroup
     {
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string? ActiveClass { get; set; }
 
         [Parameter]
         public bool NoAction { get; set; }
@@ -12,7 +12,8 @@
         public bool Dark { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        [ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         protected override void SetComponentClass()
         {
@@ -68,17 +69,11 @@
 
             if (SubGroup)
             {
-                if (PrependIcon == null)
-                {
-                    PrependIcon = "$subgroup";
-                }
+                PrependIcon ??= "$subgroup";
             }
             else
             {
-                if (AppendIcon == null)
-                {
-                    AppendIcon = "$expand";
-                }
+                AppendIcon ??= "$expand";
             }
         }
     }

@@ -7,7 +7,7 @@
     "shaped": "在卡片的左上角和右下角应用较大的边框半径。",
     "text": "将定义的 `Color` 应用于文本和同样的低透明度背景。",
     "timeout": "等待snackbar 自动隐藏的时间 (毫秒) 。使用 “-1” 保持无限期打开 (版本 < 2 的 0 )。 建议这个数字在 4000 和 10000 之间。此属性的更改将重置超时。",
-    "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
     "value": "控制组件可见还是隐藏。",
     "vertical": "将消息条内容堆叠在操作（按钮）之上。"
   },
@@ -15,6 +15,6 @@
     "onClosed": ""
   },
   "contents": {
-    "actionContent": "用于将样式绑定到 (MButton)[components/buttons] 以匹配MD2 规格。"
+    "actionContent": "用于将样式绑定到 [MButton](/blazor/components/buttons) 以匹配MD2规格。"
   }
 }

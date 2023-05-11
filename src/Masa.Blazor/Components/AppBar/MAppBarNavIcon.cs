@@ -4,6 +4,8 @@
     {
         protected async override Task OnInitializedAsync()
         {
+            await base.OnInitializedAsync();
+
             AbstractProvider
                 .Apply<BButton, MButton>(prop =>
                 {
@@ -16,8 +18,6 @@
                     }
                 })
                 .Apply<BIcon, MIcon>();
-
-            await base.OnInitializedAsync();
         }
     }
 }

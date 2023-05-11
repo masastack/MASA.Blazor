@@ -5,7 +5,7 @@
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply("wrapper", css => { },
+                .Apply("wrapper", _ => { },
                     style => { style.Add("position:relative;display:inherit;").Add(WrapperStyle); })
                 .Apply(css =>
                 {

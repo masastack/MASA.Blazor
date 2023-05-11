@@ -6,9 +6,9 @@ namespace Masa.Blazor
     public partial class MWindow : BWindow
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor? MasaBlazor { get; set; }
 
-        public bool InternalReverse => MasaBlazor.RTL ? !Reverse : Reverse;
+        public bool InternalReverse => MasaBlazor?.RTL is true ? !Reverse : Reverse;
 
         public string ComputedTransition
         {

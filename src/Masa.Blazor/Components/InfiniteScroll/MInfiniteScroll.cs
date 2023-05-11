@@ -3,7 +3,7 @@
 public partial class MInfiniteScroll : BInfiniteScroll
 {
     [Inject]
-    protected I18n I18n { get; set; }
+    protected I18n I18n { get; set; } = null!;
 
     protected override void OnParametersSet()
     {

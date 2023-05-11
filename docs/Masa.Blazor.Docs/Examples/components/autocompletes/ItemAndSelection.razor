@@ -49,73 +49,71 @@
                 </MRow>
             </MRow>
         </MImage>
-        <MForm>
-            <MContainer>
-                <MRow>
-                    <MCol Cols="12"
-                          Md="6">
-                        <MTextField @bind-Value="_name"
-                                    Disabled="IsUpdating"
-                                    Filled
-                                    Color="blue-grey lighten-2"
-                                    Label="Name">
-                        </MTextField>
-                    </MCol>
-                    <MCol Cols="12"
-                          Md="6">
-                        <MTextField @bind-Value="_title"
-                                    Disabled="IsUpdating"
-                                    Filled
-                                    Color="blue-grey lighten-2"
-                                    Label="Title">
-                        </MTextField>
-                    </MCol>
-                    <MCol Cols="12">
-                        <MAutocomplete @bind-Value="_friends"
-                                       Disabled="IsUpdating"
-                                       Items="_people"
-                                       Filled
-                                       Chips
-                                       Color="blue-grey lighten-2"
-                                       Label="Select"
-                                       ItemText="r => r.Name"
-                                       ItemValue="r => r.Name"
-                                       Multiple>
-                            <SelectionContent Context="data">
-                                <MChip Close
-                                       IsActive="@data.Selected"
-                                       OnCloseClick="() => Remove(data.Item)">
-                                    <MAvatar Left>
-                                        <MImage Src="@data.Item.Avatar"></MImage>
-                                    </MAvatar>
-                                    @data.Item.Name
-                                </MChip>
-                            </SelectionContent>
-                            <ItemContent Context="data">
-                                @if (data.Item is not object)
-                                {
-                                    <MListItemContent>@data.Item</MListItemContent>
-                                }
-                                else
-                                {
-                                    <MListItemAvatar>
-                                        <img src="@data.Item.Avatar">
-                                    </MListItemAvatar>
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            @((MarkupString)data.Item.Name)
-                                        </MListItemTitle>
-                                        <MListItemSubtitle>
-                                            @((MarkupString)data.Item.Group)
-                                        </MListItemSubtitle>
-                                    </MListItemContent>
-                                }
-                            </ItemContent>
-                        </MAutocomplete>
-                    </MCol>
-                </MRow>
-            </MContainer>
-        </MForm>
+        <MContainer>
+            <MRow>
+                <MCol Cols="12"
+                      Md="6">
+                    <MTextField @bind-Value="_name"
+                                Disabled="IsUpdating"
+                                Filled
+                                Color="blue-grey lighten-2"
+                                Label="Name">
+                    </MTextField>
+                </MCol>
+                <MCol Cols="12"
+                      Md="6">
+                    <MTextField @bind-Value="_title"
+                                Disabled="IsUpdating"
+                                Filled
+                                Color="blue-grey lighten-2"
+                                Label="Title">
+                    </MTextField>
+                </MCol>
+                <MCol Cols="12">
+                    <MAutocomplete @bind-Value="_friends"
+                                   Disabled="IsUpdating"
+                                   Items="_people"
+                                   Filled
+                                   Chips
+                                   Color="blue-grey lighten-2"
+                                   Label="Select"
+                                   ItemText="r => r.Name"
+                                   ItemValue="r => r.Name"
+                                   Multiple>
+                        <SelectionContent Context="data">
+                            <MChip Close
+                                   IsActive="@data.Selected"
+                                   OnCloseClick="() => Remove(data.Item)">
+                                <MAvatar Left>
+                                    <MImage Src="@data.Item.Avatar"></MImage>
+                                </MAvatar>
+                                @data.Item.Name
+                            </MChip>
+                        </SelectionContent>
+                        <ItemContent Context="data">
+                            @if (data.Item is not object)
+                            {
+                                <MListItemContent>@data.Item</MListItemContent>
+                            }
+                            else
+                            {
+                                <MListItemAvatar>
+                                    <img src="@data.Item.Avatar">
+                                </MListItemAvatar>
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        @((MarkupString)data.Item.Name)
+                                    </MListItemTitle>
+                                    <MListItemSubtitle>
+                                        @((MarkupString)data.Item.Group)
+                                    </MListItemSubtitle>
+                                </MListItemContent>
+                            }
+                        </ItemContent>
+                    </MAutocomplete>
+                </MCol>
+            </MRow>
+        </MContainer>
         <MDivider></MDivider>
         <MCardActions>
             <MSwitch @bind-Value="_autoUpdate"

@@ -3,21 +3,24 @@
     public partial class MOverlay : BOverlay, IThemeable, IOverlay
     {
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "#212121";
+        [ApiDefaultValue("#212121")]
+        public string? Color { get; set; } = "#212121";
 
         [Parameter]
+        [ApiDefaultValue(0.46)]
         public StringNumber Opacity { get; set; } = 0.46;
 
         [Parameter]
-        public string ScrimClass { get; set; }
+        public string? ScrimClass { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(5)]
         public int ZIndex { get; set; } = 5;
 
         protected override void SetComponentClass()

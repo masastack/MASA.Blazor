@@ -1,13 +1,11 @@
 ﻿using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
     public partial class MProgressLinear : BProgressLinear, IProgressLinear
     {
-        private readonly bool _rtl = false;
-
-        private bool IsReversed => _rtl != Reverse;
+        [Inject]
+        public Document Document { get; set; } = null!;
 
         [Parameter]
         public bool Absolute { get; set; }
@@ -31,34 +29,38 @@ namespace Masa.Blazor
         public bool Top { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(4)]
         public StringNumber Height { get; set; } = 4;
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool Active { get; set; } = true;
 
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
-        public double BackgroundOpacity { get; set; }
+        public double? BackgroundOpacity { get; set; }
 
         [Parameter]
         public bool Stream { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(100)]
         public double BufferValue { get; set; } = 100;
 
         [Parameter]
         public bool Reverse { get; set; }
 
         [Parameter]
-        public RenderFragment<double> ChildContent { get; set; }
+        public RenderFragment<double>? ChildContent { get; set; }
 
         [Parameter]
         public EventCallback<double> OnChange { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
+        private readonly bool _rtl = false;
+
+        private bool IsReversed => _rtl != Reverse;
 
         protected bool IsVisible { get; set; } = true;
 
@@ -70,6 +72,8 @@ namespace Masa.Blazor
             }
 
             var el = Document.GetElementByReference(Ref);
+            if (el is null) return;
+
             var rect = await el.GetBoundingClientRectAsync();
 
             //TODO this.internalValue = e.offsetX / width * 100
@@ -140,7 +144,7 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add($"opacity: {(BackgroundOpacity == default ? (BackgroundColor != null ? 1 : 0.3) : BackgroundOpacity)}")
+                        .Add($"opacity: {BackgroundOpacity ?? (BackgroundColor != null ? 1 : 0.3)}")
                         .Add($"{(IsReversed ? "right" : "left")}: {NormalizedValue}%")
                         .Add($"width: {Math.Max(0, NormalizedBuffer - NormalizedValue)}%")
                         .AddBackgroundColor(BackgroundColor ?? Color);

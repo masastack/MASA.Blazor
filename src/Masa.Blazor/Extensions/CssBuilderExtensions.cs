@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor;
+﻿using Masa.Blazor;
 
 namespace BlazorComponent
 {
@@ -29,10 +27,9 @@ namespace BlazorComponent
 
         public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string? color)
         {
-            if (!string.IsNullOrEmpty(color) && !IsCssColor(color))
+            if (color != null && !IsCssColor(color))
             {
-                cssBuilder
-                    .Add(color);
+                cssBuilder.Add(color);
             }
 
             return cssBuilder;
@@ -43,12 +40,12 @@ namespace BlazorComponent
             return Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
         }
 
-        public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string color, Func<bool> func)
+        public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string? color, Func<bool> func)
         {
             return cssBuilder.AddColor(color, false, func);
         }
 
-        public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText = false)
+        public static CssBuilder AddColor(this CssBuilder cssBuilder, string? color, bool isText = false)
         {
             return cssBuilder.AddColor(color, isText, () => true);
         }
@@ -92,41 +89,39 @@ namespace BlazorComponent
             return cssBuilder.AddColor(color, true, func);
         }
 
-        public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string color)
+        public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string? color)
         {
-            if (!string.IsNullOrEmpty(color) && !IsCssColor(color))
-            {
-                var colors = color.Trim().Split(' ');
-                cssBuilder
-                    .Add($"{colors[0]}--text");
+            if (color is null || IsCssColor(color)) return cssBuilder;
 
-                if (colors.Length == 2)
-                {
-                    cssBuilder
-                        .Add($"text--{colors[1]}");
-                }
+            var colors = color!.Trim().Split(' ');
+            cssBuilder
+                .Add($"{colors[0]}--text");
+
+            if (colors.Length == 2)
+            {
+                cssBuilder
+                    .Add($"text--{colors[1]}");
             }
 
             return cssBuilder;
         }
 
-        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean rounded)
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean? rounded)
         {
-            if (rounded != null)
-            {
-                if (rounded.IsT0)
-                {
-                    var values = rounded.AsT0.Split(' ');
+            if (rounded == null) return cssBuilder;
 
-                    foreach (var val in values)
-                    {
-                        cssBuilder.Add($"rounded-{val}");
-                    }
-                }
-                else if (rounded.IsT1 && rounded.AsT1)
+            if (rounded.IsT0)
+            {
+                var values = rounded.AsT0.Split(' ');
+
+                foreach (var val in values)
                 {
-                    cssBuilder.Add("rounded");
+                    cssBuilder.Add($"rounded-{val}");
                 }
+            }
+            else if (rounded.IsT1 && rounded.AsT1)
+            {
+                cssBuilder.Add("rounded");
             }
 
             return cssBuilder;
@@ -186,10 +181,13 @@ namespace BlazorComponent
             }
             else if (roundable.Rounded is not null)
             {
-                var values = roundable.Rounded.ToString().Split(" ");
-                foreach (var value in values)
+                var values = roundable.Rounded.ToString()?.Split(" ");
+                if (values is not null)
                 {
-                    cssBuilder.Add($"rounded-{value}");
+                    foreach (var value in values)
+                    {
+                        cssBuilder.Add($"rounded-{value}");
+                    }
                 }
             }
 

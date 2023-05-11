@@ -8,10 +8,10 @@
 
         bool Tile { get; }
 
-        string Transition { get; }
+        string? Transition { get; }
 
-        string Type { get; }
+        string? Type { get; }
 
-        Dictionary<string, string> Types { get; }
+        Dictionary<string, string>? Types { get; }
     }
 }

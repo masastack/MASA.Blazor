@@ -4,10 +4,13 @@ namespace Masa.Blazor
 {
     public partial class MFooter : BFooter, IThemeable
     {
-        private readonly string[] _applicationProperties = new string[]
+        private readonly string[] _applicationProperties =
         {
             "Bottom", "Left", "Right"
         };
+
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
         public bool Absolute { get; set; }
@@ -20,23 +23,24 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Fixed { get; set; }
 
         [Parameter]
-        public StringNumber Height
+        [ApiDefaultValue("auto")]
+        public StringNumber? Height
         {
             get => GetValue((StringNumber)"auto");
             set => SetValue(value);
         }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         [Parameter]
         public bool Inset
@@ -46,57 +50,54 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         [Parameter]
         public bool Padless { get; set; }
 
         [Parameter]
-        public StringBoolean Rounded { get; set; }
+        public StringBoolean? Rounded { get; set; }
 
         [Parameter]
         public bool Tile { get; set; }
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        private StringNumber? ComputedBottom => ComputeBottom();
 
-        protected StringNumber ComputedBottom => ComputeBottom();
-
-        protected StringNumber ComputeBottom()
+        private StringNumber? ComputeBottom()
         {
             if (!IsPositioned) return null;
 
             return App && Inset ? MasaBlazor.Application.Bottom : 0;
         }
 
-        protected StringNumber ComputedLeft => ComputeLeft();
+        private StringNumber? ComputedLeft => ComputeLeft();
 
-        protected StringNumber ComputeLeft()
+        private StringNumber? ComputeLeft()
         {
             if (!IsPositioned) return null;
 
             return App && Inset ? MasaBlazor.Application.Left : 0;
         }
 
-        protected StringNumber ComputedRight => ComputeRight();
+        private StringNumber? ComputedRight => ComputeRight();
 
-        protected StringNumber ComputeRight()
+        private StringNumber? ComputeRight()
         {
             if (!IsPositioned) return null;
 
             return App && Inset ? MasaBlazor.Application.Right : 0;
         }
 
-        protected bool IsPositioned => Absolute || Fixed || App;
+        private bool IsPositioned => Absolute || Fixed || App;
 
         protected override void OnInitialized()
         {
@@ -123,7 +124,7 @@ namespace Masa.Blazor
                    .Watch<bool>(nameof(Inset), CallUpdate);
         }
 
-        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
@@ -165,20 +166,17 @@ namespace Masa.Blazor
 
         private async void CallUpdate()
         {
-            await NextTickIf(async () =>
-            {
-                await UpdateApplicationAsync();
-            }, () => Ref.Context is null);
+            await NextTickIf(async () => { await UpdateApplicationAsync(); }, () => Ref.Context is null);
         }
 
-        protected async Task UpdateApplicationAsync()
+        private async Task UpdateApplicationAsync()
         {
             if (!App)
             {
                 return;
             }
 
-            var val = Height.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
+            var val = Height?.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
             if (Inset)
                 MasaBlazor.Application.InsetFooter = val;
             else

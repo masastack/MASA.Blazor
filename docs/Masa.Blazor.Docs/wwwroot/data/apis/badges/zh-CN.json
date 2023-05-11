@@ -11,7 +11,9 @@
     "overLap": "与组件顶部的开槽内容重叠。",
     "value": "控制组件可见还是隐藏。"
   },
-  "contents": {},
+  "contents": {
+    "badgeContent": "徽章的内容。"
+  },
   "events": {},
   "methods": {}
 }

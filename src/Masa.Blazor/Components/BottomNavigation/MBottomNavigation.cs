@@ -10,7 +10,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     }
 
     [Inject]
-    private MasaBlazor MasaBlazor { get; set; }
+    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public bool Absolute { get; set; }
@@ -25,28 +25,29 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Grow { get; set; }
 
     [Parameter]
-    public StringNumber Height { get; set; } = 56;
+    [ApiDefaultValue(56)]
+    public StringNumber? Height { get; set; } = 56;
 
     [Parameter]
-    public StringNumber MaxHeight { get; set; }
+    public StringNumber? MaxHeight { get; set; }
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; }
+    public StringNumber? MinHeight { get; set; }
 
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    public string ScrollTarget { get; set; } = "window";
+    public string? ScrollTarget { get; set; } = "window";
 
     [Parameter]
     public double ScrollThreshold { get; set; }
 
     [Parameter]
-    public StringNumber Width { get; set; }
+    public StringNumber? Width { get; set; }
 
     [Parameter]
     public bool HideOnScroll { get; set; }
@@ -58,21 +59,22 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Shift { get; set; }
 
     [Parameter]
+    [ApiDefaultValue(true)]
     public bool InputValue { get; set; } = true;
 
     [Parameter]
     public EventCallback<bool> InputValueChanged { get; set; }
 
     [Parameter]
-    public string BackgroundColor { get; set; }
+    public string? BackgroundColor { get; set; }
 
     [Parameter]
-    public string Color { get; set; }
+    public string? Color { get; set; }
 
     [Parameter]
     public bool Routable { get; set; }
 
-    private Scroller _scroller;
+    private Scroller? _scroller;
     private bool _haveRendered;
 
     public bool CanScroll => HideOnScroll || !InputValue;
@@ -80,7 +82,13 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     private bool IsActive
     {
         get => _scroller?.IsActive ?? true;
-        set => _scroller.IsActive = value;
+        set
+        {
+            if (_scroller is not null)
+            {
+                _scroller.IsActive = value;
+            }
+        }
     }
 
     protected override void OnInitialized()
@@ -129,7 +137,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         IsActive = InputValue;
 
-        _scroller.ScrollThreshold = ScrollThreshold;
+        _scroller!.ScrollThreshold = ScrollThreshold;
 
         if (_haveRendered)
         {
@@ -152,7 +160,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
                     ScrollTarget,
                     "scroll",
                     DotNetObjectReference.Create(new Invoker(async () =>
-                        await CreateEventCallback(async () => await _scroller.OnScroll(ThresholdMet)).InvokeAsync()))
+                        await CreateEventCallback(async () => await _scroller!.OnScroll(ThresholdMet)).InvokeAsync()))
                 );
             }
 

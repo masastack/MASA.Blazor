@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature
@@ -46,9 +44,9 @@ namespace Masa.Blazor
         
         public Icons Icons { get; }
 
-        public event Action<bool> OnRTLChange;
+        public event Action<bool>? OnRTLChange;
 
-        public event Action<Theme> OnThemeChange;
+        public event Action<Theme>? OnThemeChange;
 
         public void ToggleTheme()
         {

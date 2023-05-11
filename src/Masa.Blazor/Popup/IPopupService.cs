@@ -1,7 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor.Presets;
-using Masa.Blazor.Popup;
+﻿using Masa.Blazor.Popup;
 
 namespace Masa.Blazor;
 
@@ -25,11 +22,11 @@ public interface IPopupService
 
     #region Prompt
 
-    Task<string> PromptAsync(string title, string content);
+    Task<string?> PromptAsync(string title, string content);
 
-    Task<string> PromptAsync(string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk);
+    Task<string?> PromptAsync(string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk);
 
-    Task<string> PromptAsync(Action<PromptOptions> parameters);
+    Task<string?> PromptAsync(Action<PromptOptions> parameters);
 
     #endregion
 

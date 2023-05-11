@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public partial class EllipsisText : IAsyncDisposable
 {

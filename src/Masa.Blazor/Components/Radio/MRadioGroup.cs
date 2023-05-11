@@ -3,6 +3,7 @@
     public class MRadioGroup<TValue> : MInput<TValue>, IRadioGroup<TValue>
     {
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool Column { get; set; } = true;
 
         [Parameter]
@@ -13,7 +14,7 @@
 
         private List<IRadio<TValue>> Items { get; } = new();
 
-        protected override void OnValueChanged(TValue val)
+        protected override void OnValueChanged(TValue? val)
         {
             base.OnValueChanged(val);
             _ = Toggle(val);
@@ -64,7 +65,7 @@
             Items.ForEach(item => item.RefreshState());
         }
 
-        public async Task Toggle(TValue value)
+        public async Task Toggle(TValue? value)
         {
             if (ValueChanged.HasDelegate)
             {

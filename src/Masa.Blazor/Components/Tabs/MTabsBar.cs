@@ -3,10 +3,10 @@
     public partial class MTabsBar : MSlideGroup, IThemeable
     {
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         protected string ComputedColor
         {
