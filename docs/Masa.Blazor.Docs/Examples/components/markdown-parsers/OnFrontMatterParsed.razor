@@ -1,0 +1,55 @@
+﻿@using YamlDotNet.Serialization
+
+<MMarkdownIt Source="@_source" OnFrontMatterParsed="HandleOnFrontMatterParsed" />
+
+<MDivider Class="my-6" />
+
+@if (_frontMatterMeta != null)
+{
+    <div>
+        <h4>Front matter</h4>
+        <MRow Dense>
+            @foreach (var (key, value) in _frontMatterMeta.ToDictionary<string>())
+            {
+                <MCol Cols="4">@key</MCol>
+                <MCol Cols="8">@value</MCol>
+            }
+        </MRow>
+    </div>
+}
+
+@code {
+
+    private string _source = @"---
+title: Markdown parsers
+description: A component to render markdown using markdown-it
+---
+
+## Usage
+
+## Examples
+
+### Props
+
+### Evens
+";
+
+    private FrontMatter? _frontMatterMeta;
+
+    private void HandleOnFrontMatterParsed(string? yaml)
+    {
+        if (yaml is null) return;
+
+        _frontMatterMeta = new DeserializerBuilder().IgnoreUnmatchedProperties().Build().Deserialize<FrontMatter>(yaml);
+    }
+
+    private class FrontMatter
+    {
+        [YamlMember(Alias = "title")]
+        public string? Title { get; set; }
+
+        [YamlMember(Alias = "description")]
+        public string? Description { get; set; }
+    }
+
+}

@@ -1,11 +1,16 @@
 ﻿/*
  * markdown-it-proxy would invoke this function to extend markdown-it.
  */
+
 window.MasaBlazor.extendMarkdownIt = function (parser) {
     const { md, scope } = parser;
+    
+    if (window.markdownitEmoji) {
+        md.use(window.markdownitEmoji);
+    }
+
     if (scope === "document") {
         addHeadingRules(md);
-        addLinkRules(parser);
         addCodeRules(md);
         addImageRules(md);
         addBlockquoteRules(md);
@@ -14,9 +19,9 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         parser.useContainer("code-group");
         parser.useContainer("code-group-item");
         addCodeGroupRules(parser);
-    } else if (scope === "desc") {
-        addLinkRules(parser);
     }
+
+    addLinkRules(parser);
 
     function addHeadingRules(md) {
         md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "anchorOptions": "Configure anchor, see [MarkdownItAnchorOptions](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Components/MarkdownIt/MarkdownItAnchorOptions.cs).",
+    "breaks": "Convert '\\n' in paragraphs into br tag.",
+    "headerSections": "Group headers into sections.",
+    "html": "Enable HTML tags in source.",
+    "langPrefix": "CSS language prefix for fenced blocks. Can be useful for external highlighters.",
+    "linkify": "Autoconvert URL-like text to links.",
+    "noWrapper": "Remove the wrapper element around the content.",
+    "quotes": "Double + single quotes replacement pairs. When typographer enabled, and smartquotes on.",
+    "scope": "Useful when you have multiple MarkdownIt components configured differently.",
+    "source": "Markdown source code.",
+    "typographer": "Enable some language-neutral replacement + quotes beautification.",
+    "xHtmlOut": "Use '/' to close single tags (<br />). This is only for full CommonMark compatibility."
+  },
+  "events": {
+    "onFrontMatterParsed": "Event callback when front matter is parsed.",
+    "onTocParsed": "Event callback when table of contents is parsed."
+  },
+  "contents": {}
+}

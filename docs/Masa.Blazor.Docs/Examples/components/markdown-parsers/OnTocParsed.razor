@@ -1,0 +1,43 @@
+﻿<MMarkdownIt Source="@_source" OnTocParsed="HandleOnTocParsed" />
+
+<MDivider Class="my-6" />
+
+@if (_tocList != null)
+{
+    <div>
+        <h4>Table of content</h4>
+        <ul>
+            @foreach (var toc in _tocList)
+            {
+                <li class="@($"ml-{(toc.Level - 1) * 2}")">@toc.Content</li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+
+    private string _source = @"
+## Usage
+
+## Examples
+
+### Props
+
+#### Options
+
+### Events
+
+#### OnFrontMatterParsed
+
+#### OnTocParsed
+";
+
+    private List<MarkdownItTocContent>? _tocList = new();
+
+    private void HandleOnTocParsed(List<MarkdownItTocContent>? tocList)
+    {
+        _tocList = tocList;
+    }
+
+}

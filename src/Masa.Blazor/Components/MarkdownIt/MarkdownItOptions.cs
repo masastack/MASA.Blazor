@@ -35,7 +35,7 @@ public class MarkdownItOptions
     public bool Typographer { get; set; }
 
     /// <summary>
-    ///  Double + single quotes replacement pairs,
+    /// Double + single quotes replacement pairs,
     /// when typographer enabled, and smartquotes on. 
     /// </summary>
     public string[]? Quotes { get; set; } = new string[] { "“", "”", "‘", "’" };
