@@ -39,7 +39,7 @@ MASA Blazor is based on the Material design specification, and each component is
 
 ## 📊 Stats
 
-![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/d2284637ff2024bc3301ffce6cdaa1706cfcdc5c.svg "Repobeats analytics image")
 
 ## 🖥️ Documentation
 
