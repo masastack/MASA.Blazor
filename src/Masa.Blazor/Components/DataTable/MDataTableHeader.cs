@@ -109,10 +109,10 @@
                 .Apply("header-mobile__select", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__select"); })
                 .Apply("header-mobile__select-chips", cssBuilder =>
                 {
-                    var data = ((string text, string value)?)cssBuilder.Data;
-                    if (!data.HasValue || (data.Value.text is null && data.Value.value is null)) return;
+                    var data = (DataTableHeader?)cssBuilder.Data;
+                    if (data is null || (data.Text is null && data.Value is null)) return;
 
-                    var sortIndex = Options.SortBy.IndexOf(data.Value.value);
+                    var sortIndex = Options.SortBy.IndexOf(data.Value);
                     var beingSorted = sortIndex >= 0;
                     var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
 
@@ -137,38 +137,37 @@
                     attrs[nameof(Class)] = "m-data-table-header__icon";
                     attrs[nameof(MIcon.Size)] = (StringNumber)18;
                 })
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<(string, string), string, string>), "sort-select", attrs =>
+                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataTableHeader, string, string>), "sort-select", attrs =>
                 {
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemText)] =
-                        (Func<(string Text, string Value), string>)(item => item.Text);
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemValue)] =
-                        (Func<(string Text, string Value), string>)(item => item.Value);
-                    attrs[nameof(MSelect<(string, string), string, string>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
-                    attrs[nameof(MSelect<(string, string), string, string>.HideDetails)] = (StringBoolean)true;
-                    attrs[nameof(MSelect<(string, string), string, string>.Multiple)] = Options.MultiSort;
-
-                    attrs[nameof(MSelect<(string, string), string, string>.Value)] = Options.SortBy.Count > 0 ? Options.SortBy[0] : null;
-                    attrs[nameof(MSelect<(string, string), string, string>.ValueChanged)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ItemText)] =
+                        (Func<DataTableHeader, string>)(item => item.Text);
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ItemValue)] =
+                        (Func<DataTableHeader, string>)(item => item.Value);
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Multiple)] = Options.MultiSort;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Value)] = Options.SortBy.Count > 0 ? Options.SortBy[0] : null;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ValueChanged)] =
                         EventCallback.Factory.Create<string>(this, (s) => OnSort.InvokeAsync(s));
 
-                    attrs[nameof(MSelect<(string, string), string, string>.MenuProps)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.MenuProps)] =
                         (Action<BMenuProps>)(props => props.CloseOnContentClick = true);
                 })
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<(string, string), string, List<string>>), "sort-select-multiple", attrs =>
+                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataTableHeader, string, List<string>>), "sort-select-multiple", attrs =>
                 {
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemText)] =
-                        (Func<(string Text, string Value), string>)(item => item.Text);
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemValue)] =
-                        (Func<(string Text, string Value), string>)(item => item.Value);
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.HideDetails)] = (StringBoolean)true;
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.Multiple)] = Options.MultiSort;
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.ItemText)] =
+                        (Func<DataTableHeader, string>)(item => item.Text);
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.ItemValue)] =
+                        (Func<DataTableHeader, string>)(item => item.Value);
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.Multiple)] = Options.MultiSort;
 
-                    attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.Value)] = Options.SortBy;
-                    attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.ValueChanged)] =
+                    attrs[nameof(MSelect<List<DataTableHeader>, string, List<string>>.Value)] = Options.SortBy;
+                    attrs[nameof(MSelect<List<DataTableHeader>, string, List<string>>.ValueChanged)] =
                         EventCallback.Factory.Create<List<string>>(this, s => OnSort.InvokeAsync(s));
 
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.MenuProps)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.MenuProps)] =
                         (Action<BMenuProps>)(props => props.CloseOnContentClick = true);
                 })
                 .Apply<BChip, MChip>(attrs =>

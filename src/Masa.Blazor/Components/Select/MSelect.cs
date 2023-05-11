@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 using System.Reflection.Metadata;
 using BlazorComponent.Attributes;
 using BlazorComponent.Web;
@@ -529,15 +530,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MChip.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                 attrs[nameof(MChip.Small)] = SmallChips;
                 attrs[nameof(MChip.IsActive)] = index == SelectedIndex;
-                attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(e =>
+                attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(_ =>
                 {
                     if (!isInteractive) return;
-
-                    // e.stopPropagation()
-
                     SelectedIndex = index;
                 });
-
+                attrs[nameof(MChip.OnClickStopPropagation)] = true;
                 attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item!));
             });
     }
