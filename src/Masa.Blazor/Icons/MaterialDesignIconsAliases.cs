@@ -44,5 +44,6 @@ public class MaterialDesignIconsAliases : IconAliases
         Search = "mdi-magnify";
         FilterOn = "mdi-filter";
         FilterOff = "mdi-filter-off";
+        Retry = "mdi-reload";
     }
 }

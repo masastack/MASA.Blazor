@@ -698,8 +698,8 @@ input[type=number] {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.m-infinite-scroll *:last-child {
-    margin-left: 4px;
+.m-infinite-scroll__loader {
+    margin: 6px;
 }
 
 /* ellipsis text */

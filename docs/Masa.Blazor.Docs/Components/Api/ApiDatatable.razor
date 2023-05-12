@@ -5,14 +5,14 @@
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
-            <tr>
-                @foreach (var header in Headers)
-                {
-                    <th style="@GetHeaderStyle(header)">
-                        <div class="emphasis--text subtitle">@I18n.T(header)</div>
-                    </th>
-                }
-            </tr>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th style="@GetHeaderStyle(header)">
+                    <div class="emphasis--text subtitle">@I18n.T(header)</div>
+                </th>
+            }
+        </tr>
         </thead>
         <tbody>
         @foreach (var item in Items)
@@ -24,7 +24,7 @@
                         @if (header == "name")
                         {
                             <span class="emphasis2--text subtitle">
-                                <MBadge Value="@(item.Required)" Color="transparent" OffsetY="10">
+                                <MBadge Value="@(item.Required)" Color="transparent" Class="text-mono" OffsetY="10">
                                     <BadgeContent>
                                         <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
                                     </BadgeContent>
@@ -41,7 +41,7 @@
                                 {
                                     var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);
 
-                                    <MTooltip Disabled="@noTypeDesc" ContentStyle="white-space: pre" Top>
+                                    <MTooltip Disabled="@noTypeDesc" ContentClass="text-mono" ContentStyle="white-space: pre" Top>
                                         <ActivatorContent>
                                             <code @attributes="@context.Attrs"
                                                   class="@(noTypeDesc ? "" : "tooltip-code")">
@@ -55,7 +55,9 @@
                                 }
                                 else if (header == "default")
                                 {
-                                    @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
+                                    <span class="text-mono">
+                                        @(string.IsNullOrWhiteSpace(item.DefaultValue) ? "-" : item.DefaultValue)
+                                    </span>
                                 }
                                 else if (header == "description")
                                 {
@@ -112,7 +114,7 @@
             "name" => "width:144px",
             "type" => "width:264px;",
             _ => ""
-        };
+            };
     }
 
 }

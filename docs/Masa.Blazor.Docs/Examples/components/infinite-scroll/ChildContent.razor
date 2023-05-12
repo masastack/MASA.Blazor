@@ -1,8 +1,4 @@
-﻿<MCard Width="500"
-       Height="250"
-       Class="overflow-auto"
-       Style="margin: 0 auto"
-       @ref="_card">
+﻿<MCard Width="500" Height="250" Class="overflow-auto" Style="margin: 0 auto" @ref="_card">
     <MList>
         @foreach (var item in _items)
         {
@@ -14,14 +10,31 @@
             <MDivider />
         }
     </MList>
-    <MInfiniteScroll OnLoad="@OnLoad"
+    <MInfiniteScroll Manual
+                     OnLoad="@OnLoad"
                      Parent="@_card.Ref">
+        @if (context.Status == InfiniteScrollLoadStatus.Loading)
+        {
+            <MProgressLinear Indeterminate Color="primary"></MProgressLinear>
+        }
+        else if (context.Status == InfiniteScrollLoadStatus.Error)
+        {
+            <MButton Color="error" Block OnClick="@context.OnLoad">Failed to load, try again!</MButton>
+        }
+        else if (context.Status == InfiniteScrollLoadStatus.Ok)
+        {
+            <MButton Color="primary" Block OnClick="@context.OnLoad">Give me more!</MButton>
+        }
+        else
+        {
+            <span>That's all!</span>
+        }
     </MInfiniteScroll>
 </MCard>
 
 @code {
 
-    private MCard? _card;
+    private MCard _card;
     private int _count;
     private bool _mockError;
     private List<string> _items = new();

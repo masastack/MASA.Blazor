@@ -11,8 +11,7 @@
             </div>
         </ItemContent>
         <FooterContent>
-            <MInfiniteScroll HasMore="@_hasMore"
-                             OnLoadMore="@LoadMore"
+            <MInfiniteScroll OnLoad="@OnLoad"
                              Parent="@_vs?.Ref">
             </MInfiniteScroll>
         </FooterContent>
@@ -23,25 +22,17 @@
 @code {
 
     private MVirtualScroll<string>? _vs;
-
     private int _count;
+    private bool _mockError;
     private List<string> _items = new();
-    private bool _hasMore;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await LoadMore();
-            StateHasChanged();
-        }
-    }
-
-    private async Task LoadMore()
+    private async Task OnLoad(InfiniteScrollLoadEventArgs args)
     {
         var append = await MockRequest();
+
+        args.Status = append.Count == 0 ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
+
         _items.AddRange(append);
-        _hasMore = append.Count > 0;
     }
 
     private async Task<List<string>> MockRequest()
@@ -52,6 +43,12 @@
         }
 
         await Task.Delay(2000);
+
+        if (_count == 1 && !_mockError)
+        {
+            _mockError = true;
+            throw new TimeoutException("Mock error");
+        }
 
         _count++;
 

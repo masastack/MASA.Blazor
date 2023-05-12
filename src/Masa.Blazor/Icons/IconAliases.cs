@@ -203,6 +203,11 @@ public class IconAliases
     public Icon? FilterOff { get; set; }
 
     /// <summary>
+    ///  Retry icon used in InfiniteScroll.
+    /// </summary>
+    public Icon? Retry { get; set; }
+
+    /// <summary>
     /// User defined icons.
     /// </summary>
     public Dictionary<string, Icon?> UserDefined { get; } = new();

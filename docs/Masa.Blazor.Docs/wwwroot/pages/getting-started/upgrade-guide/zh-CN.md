@@ -43,13 +43,14 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   +     options.Locale = new Locale("zh-CN", "en-US");
   + });
   ```
-- **MIcon**组件引入了默认图标集的概念，现在如果不是默认图标集的图标需要指定图标集前缀：
+- **MIcon** 组件引入了默认图标集的概念，现在如果不是默认图标集的图标需要指定图标集前缀：
   ```diff
   - <MIcon>home</MIcon>
   + <MIcon>md:home</MIcon>
   - <MIcon>fas fa-home</MIcon>
   + <MIcon>fa:fas fa-home</MIcon>
   ```
+-  [MInfiniteScroll](/blazor/components/infinite-scroll) 现在不需要通过额外的 `HasMore` 参数来设置加载的状态，而是通过 `OnLoad` 事件参数的 `Status` 来控制，一步到位。另外，组件在第一次呈现时会自动触发 `OnLoad` 事件。
 
 ## 从 v0.5.x 升级到 v0.6.x
 

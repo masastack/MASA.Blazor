@@ -5,14 +5,14 @@ public partial class MInfiniteScroll : BInfiniteScroll
     [Inject]
     protected I18n I18n { get; set; } = null!;
 
-    protected override void OnParametersSet()
+    public override Task SetParametersAsync(ParameterView parameters)
     {
-        base.OnParametersSet();
+        EmptyText ??= I18n.T("$masaBlazor.infiniteScroll.emptyText");
+        ErrorText ??= I18n.T("$masaBlazor.infiniteScroll.errorText");
+        LoadingText ??= I18n.T("$masaBlazor.infiniteScroll.loadingText");
+        LoadMoreText ??= I18n.T("$masaBlazor.infiniteScroll.loadMoreText");
 
-        NoMoreText ??= I18n.T("$masaBlazor.infiniteScroll.noMore");
-        FailedToLoadText ??= I18n.T("$masaBlazor.infiniteScroll.failedToLoad");
-        ReloadText ??= I18n.T("$masaBlazor.infiniteScroll.reload");
-        LoadingText ??= I18n.T("$masaBlazor.infiniteScroll.loading");
+        return base.SetParametersAsync(parameters);
     }
 
     protected override void SetComponentClass()
@@ -20,9 +20,20 @@ public partial class MInfiniteScroll : BInfiniteScroll
         base.SetComponentClass();
 
         CssProvider
-            .Apply(cssBuilder => { cssBuilder.Add("m-infinite-scroll"); })
-            .Apply("text--no-more", cssBuilder => { cssBuilder.Add("m-infinite-scroll__text--no-more"); })
-            .Apply("text--loading", cssBuilder => { cssBuilder.Add("m-infinite-scroll__text--loading"); })
-            .Apply("text--failed", cssBuilder => { cssBuilder.Add("m-infinite-scroll__text--failed"); });
+            .Apply(cssBuilder => { cssBuilder.Add("m-infinite-scroll"); });
+
+        AbstractProvider
+            .Apply<BProgressCircular, MProgressCircular>(attrs => { attrs[nameof(MProgressCircular.Class)] = "m-infinite-scroll__loader"; })
+            .Apply<BButton, MButton>("retry", attrs =>
+            {
+                attrs[nameof(MButton.Class)] = "m-infinite-scroll__retry";
+                attrs[nameof(MButton.Icon)] = true;
+                attrs[nameof(MButton.Text)] = true;
+            })
+            .Apply<BButton, MButton>("loadMore", attrs =>
+            {
+                attrs[nameof(MButton.Class)] = "m-infinite-scroll__load-more";
+                attrs[nameof(MButton.Outlined)] = true;
+            });
     }
 }

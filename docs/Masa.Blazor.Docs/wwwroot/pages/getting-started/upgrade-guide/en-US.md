@@ -50,6 +50,7 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   - <MIcon>fas fa-home</MIcon>
   + <MIcon>fa:fas fa-home</MIcon>
   ```
+- [MInfiniteScroll](/blazor/components/infinite-scroll) now no longer needs to set the loading state through the additional `HasMore` parameter, but through the `Status` of the `OnLoad` event parameter to control it. Also, the component will automatically trigger the `OnLoad` event when it is first rendered.
 
 ## Upgrading from v0.5.x to v0.6.x
 
