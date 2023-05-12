@@ -101,7 +101,6 @@
 
         protected Dictionary<string, bool> Selection { get; } = new();
 
-
         public override Task SetParametersAsync(ParameterView parameters)
         {
             NoResultsText = I18n.T("$masaBlazor.dataIterator.noResultsText");

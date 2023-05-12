@@ -7,7 +7,7 @@ namespace Masa.Blazor
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
-        
+
         [Parameter]
         public string? Caption { get; set; }
 
@@ -40,6 +40,9 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool ShowGroupBy { get; set; }
+
+        [Parameter]
+        public string? GroupText { get; set; }
 
         [Parameter]
         public string? CheckboxColor { get; set; }
@@ -124,7 +127,9 @@ namespace Masa.Blazor
                     return new List<DataTableHeader<TItem>>();
                 }
 
-                var headers = Headers.Where(header => header.Value == null || InternalOptions.GroupBy.FirstOrDefault(by => by == header.Value) == null).ToList();
+                var headers = Headers
+                              .Where(header => header.Value == null || InternalOptions.GroupBy.FirstOrDefault(by => by == header.Value) == null)
+                              .ToList();
 
                 if (ShowSelect)
                 {
@@ -157,7 +162,7 @@ namespace Masa.Blazor
                             Width = "1px",
                             Value = "data-table-expand"
                         });
-                        
+
                         headers.Insert(0, new DataTableHeader<TItem>("1px", "data-table-expand"));
                     }
                     else
@@ -185,21 +190,9 @@ namespace Masa.Blazor
             { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
         };
 
-        public List<DataTableHeader<TItem>> HeadersWithCustomFilters
-        {
-            get
-            {
-                return Headers.Where(header => header.Filter != null && header.Filterable).ToList();
-            }
-        }
+        public List<DataTableHeader<TItem>> HeadersWithCustomFilters => Headers.Where(header => header.Filter != null && header.Filterable).ToList();
 
-        public List<DataTableHeader<TItem>> HeadersWithoutCustomFilters
-        {
-            get
-            {
-                return Headers.Where(header => header.Filter == null && header.Filterable).ToList();
-            }
-        }
+        public List<DataTableHeader<TItem>> HeadersWithoutCustomFilters => Headers.Where(header => header.Filter == null && header.Filterable).ToList();
 
         public Dictionary<string, bool> OpenCache { get; } = new();
 
@@ -212,6 +205,12 @@ namespace Masa.Blazor
         public DataOptions Options => InternalOptions;
 
         protected bool IsFixedRight => FixedRight;
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            GroupText ??= I18n.T("$masaBlazor.dataTable.groupText", defaultValue: "group");
+            return base.SetParametersAsync(parameters);
+        }
 
         protected override void OnInitialized()
         {
@@ -325,6 +324,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableHeader.MultiSort)] = MultiSort;
                     attrs[nameof(MDataTableHeader.Options)] = InternalOptions;
                     attrs[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
+                    attrs[nameof(MDataTableHeader.GroupText)] = GroupText;
                     attrs[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
                     attrs[nameof(MDataTableHeader.SomeItems)] = SomeItems;
                     attrs[nameof(MDataTableHeader.EveryItem)] = EveryItem;
@@ -353,6 +353,7 @@ namespace Masa.Blazor
                     {
                         css += " m-data-table--mobile";
                     }
+
                     attrs[nameof(Class)] = css;
 
                     attrs[nameof(Style)] = Style;
