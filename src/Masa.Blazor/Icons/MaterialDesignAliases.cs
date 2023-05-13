@@ -44,5 +44,6 @@ public class MaterialDesignAliases : IconAliases
         Search = "search";
         FilterOn = "keyboard_arrow_down";
         FilterOff = "keyboard_arrow_up";
+        Retry = "refresh";
     }
 }
