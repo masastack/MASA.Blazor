@@ -4,7 +4,19 @@
 
 v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
 
-- `Linkage` 重命名为 `Routable`，受影响的组件有 **MBreadcrumbs** 和 **MList**：
+### 特性
+
+- 移除了通过`$DefaultCulture`设置默认语言的方式。现在在 _Program.cs_ 中通过 `AddMasaBlazor` 的 `Locale` 选项设置默认语言：
+  ```csharp
+  services.AddMasaBlazor(options =>
+  {
+      options.Locale = new Locale("zh-CN", "en-US");
+  });
+  ```
+
+### 组件
+
+- **MBreadcrumbs** 和 **MList** 的 `Linkage` 属性重命名为 `Routable`：
   ```diff
   - <MBreadcrumbs Linkage></MBreadcrumbs>
   + <MBreadcrumbs Routable></MBreadcrumbs>
@@ -36,13 +48,6 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   + PopupService.EnqueueSnackbarAsync()
   ```
 - **MPageTabs** 重构为预置组件**PPageTabs**，设计和API改动较大，具体请参考[文档](/blazor/components/page-tabs)。
-- 移除了通过`$DefaultCulture`设置默认语言的方式。现在在 _Program.cs_ 中通过 `AddMasaBlazor` 的 `Locale` 选项设置默认语言：
-  ```diff
-  + services.AddMasaBlazor(options =>
-  + {
-  +     options.Locale = new Locale("zh-CN", "en-US");
-  + });
-  ```
 - **MIcon** 组件引入了默认图标集的概念，现在如果不是默认图标集的图标需要指定图标集前缀：
   ```diff
   - <MIcon>home</MIcon>
@@ -50,45 +55,54 @@ v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
   - <MIcon>fas fa-home</MIcon>
   + <MIcon>fa:fas fa-home</MIcon>
   ```
--  [MInfiniteScroll](/blazor/components/infinite-scroll) 现在不需要通过额外的 `HasMore` 参数来设置加载的状态，而是通过 `OnLoad` 事件参数的 `Status` 来控制，一步到位。另外，组件在第一次呈现时会自动触发 `OnLoad` 事件。
+- **MInfiniteScroll** 现在不需要通过额外的 `HasMore` 参数来设置加载的状态，而是通过 `OnLoad` 事件参数的 `Status` 来控制，一步到位。另外，组件在第一次呈现时会自动触发 `OnLoad` 事件。
+  ```diff
+    <MInfiniteScroll
+  -     HasMore="hasMore"
+  -     OnLoadMore="OnLoad"
+  +     OnLoad="OnLoad"
+    >
+    </MInfiniteScroll>
+
+  @code {
+  -    private bool hasMore;
+  -    private async Task OnLoad() {
+  -        var items = await Request();
+  -        hasMore = items.Count > 0;
+  -    }
+  +    private async Task OnLoad(InfiniteScrollLoadEventArgs args) {
+  +        var items = await Request();
+  +        args.Status = items.Count > 0 ? InfiniteScrollStatus.HasMore : InfiniteScrollStatus.NoMore;
+  +    }
+  }
+  ```
 
 ## 从 v0.5.x 升级到 v0.6.x
 
 v0.6.x 包含了不兼容的破坏性更改，包括以下变更：
 
-### 配置主题色的API变更
+### 主题
 
-v0.5.x的API:
-
-```csharp
-services.AddMasaBlazor(options =>
-{
-    options.DarkTheme = true;
-    options.UseTheme(theme =>
-    {
-        theme.Primary = "XXX";
-    });
-});
+```diff
+ services.AddMasaBlazor(options =>
+ {
+-    options.DarkTheme = true;
+-    options.UseTheme(theme =>
+-    {
+-        theme.Primary = "XXX";
+-    });
++    options.ConfigureTheme(theme =>
++    {
++        theme.Dark = true;
++        theme.Themes.Light.Primary= "XXX";
++        theme.Themes.Dark.Primary= "XXX"; // support for configure the preset of Dark theme
++    });
+ })
 ```
 
-更改为：
+### 组件
 
-```csharp
-services.AddMasaBlazor(options =>
-{
-   options.ConfigureTheme(theme =>
-   {
-       theme.Dark = true;
-       theme.Themes.Light.Primary= "XXX";
-       theme.Themes.Dark.Primary= "XXX"; // 支持配置暗主题的预设颜色
-   });
-})
-```
-
-### 表单（MForm）组件的API变更
-
-- **Validate**，**Reset** 和 **ResetValidation** 更改为同步方法。
-- 将 `ChildContent` 的上下文类型从 **EditContext** 改为 **FormContext**。
+- **Form**：`Validate`，`Reset` 和 `ResetValidation` 更改为同步方法。将 `ChildContent` 的上下文类型从 `EditContext` 改为 `FormContext`。
 
 ## 从 v0.4.x 升级到 v0.5.x
 
@@ -98,22 +112,14 @@ v0.5.x 包含了不兼容的破坏性更改，包括以下变更：
 
 引入 `masa-blazor.css` 和 `masa-extend-blazor.css` 更改为引入 `masa-blazor.min.css`。
 
-### 注入自定义i18n的API变更
+### I18n
 
-v0.4.x的API：
-
-```csharp
-services.AddMasaBlazor();
-services.AddMasaI18nForServer();
-services.AddMasaI18nForWasmAsync(); // in WASM
-```
-
-
-更改为：
-
-```csharp
-services.AddMasaBlazor().AddI18nForServer();
-await services.AddMasaBlazor().AddI18nForWasmAsync(); // in WASM
+```diff
+- services.AddMasaBlazor();
+- services.AddMasaI18nForServer();
+- services.AddMasaI18nForWasmAsync(); // in WASM
++ services.AddMasaBlazor().AddI18nForServer();
++ await services.AddMasaBlazor().AddI18nForWasmAsync(); // in WASM
 ```
 
 同时把 **languageConfig.json** 文件重命名为 **supportedCultures.json**。
