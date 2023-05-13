@@ -5,14 +5,14 @@
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
-        <tr>
-            @foreach (var header in Headers)
-            {
-                <th style="@GetHeaderStyle(header)">
-                    <div class="emphasis--text subtitle">@I18n.T(header)</div>
-                </th>
-            }
-        </tr>
+            <tr>
+                @foreach (var header in Headers)
+                {
+                    <th style="@GetHeaderStyle(header)">
+                        <div class="emphasis--text subtitle">@I18n.T(header)</div>
+                    </th>
+                }
+            </tr>
         </thead>
         <tbody>
         @foreach (var item in Items)
@@ -114,7 +114,7 @@
             "name" => "width:144px",
             "type" => "width:264px;",
             _ => ""
-            };
+        };
     }
 
 }
