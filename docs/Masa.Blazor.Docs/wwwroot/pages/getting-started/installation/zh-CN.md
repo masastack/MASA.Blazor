@@ -2,7 +2,7 @@
 
 开始使用 MASA Blazor，构建功能丰富、快速的应用程序。
 
-> MASA Blazor 基于 .NET 6.0 开发，请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)。
+> MASA Blazor 基于 .NET 6.0 开发，请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 或者更高的版本。
 
 ## 自动安装
 
@@ -11,7 +11,7 @@
 ### 安装 Masa.Template 模板
 
 ```shell
-dotnet new install Masa.Template
+dotnet new install Masa.Template::1.0.0-rc.1
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
