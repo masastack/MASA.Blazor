@@ -41,16 +41,10 @@ public partial class PCopyableText
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Tooltip = I18n.T("$masaBlazor.copy");
-
-        return base.SetParametersAsync(parameters);
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
         CopiedIcon ??= "$success";
         CopyIcon ??= "$copy";
+
+        return base.SetParametersAsync(parameters);
     }
 
     private string Icon => _copying ? CopiedIcon! : CopyIcon!;

@@ -24,10 +24,12 @@ related:
 
 <masa-example file="Examples.components.copyable_text.Text"></masa-example>
 
-#### 文本截断
-
-<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>
-
 #### 提示
 
 <masa-example file="Examples.components.copyable_text.Tooltip"></masa-example>
+
+### 其他
+
+#### 文本截断
+
+<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>
