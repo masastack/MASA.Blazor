@@ -3,7 +3,7 @@
 
 Get started with MASA Blazor, building feature-rich and fast applications.
 
-> MASA Blazor is developed based on .NET 6.0, please make sure that you have installed [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0).
+> MASA Blazor is developed based on .NET 6.0, please make sure that you have installed [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) or later.
 
 ## Automatic Installation
 
@@ -12,7 +12,7 @@ To get started quickly, you can use the Masa.Template template to quickly create
 ### Install Masa.Template
 
 ```shell
-dotnet new install Masa.Template
+dotnet new install Masa.Template::1.0.0-rc.1
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
