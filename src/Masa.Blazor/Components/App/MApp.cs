@@ -8,6 +8,9 @@ namespace Masa.Blazor
     public class MApp : BApp
     {
         [Inject]
+        private IServiceProvider ServiceProvider { get; set; }
+        
+        [Inject]
         public MasaBlazor? MasaBlazor { get; set; }
 
         [Inject]
@@ -34,6 +37,28 @@ namespace Masa.Blazor
             OnThemeChange(MasaBlazor.Theme);
 
             return base.OnInitializedAsync();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await MasaBlazor!.Breakpoint.InitAsync();
+                await Window!.InitializeAsync();
+                
+                await Test();
+
+                StateHasChanged();
+            }
+        }
+
+        private async Task Test()
+        {
+            if (MasaBlazor.Theme.Dark2 != null)
+            {
+                var isDark = await MasaBlazor.Theme.Dark2.Invoke(ServiceProvider);
+                MasaBlazor.Theme.Dark = isDark;
+            }
         }
 
         private void OnThemeChange(Theme theme)
@@ -70,17 +95,6 @@ namespace Masa.Blazor
                 });
 
             Attributes.Add("data-app", true);
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await MasaBlazor!.Breakpoint.InitAsync();
-                await Window!.InitializeAsync();
-
-                StateHasChanged();
-            }
         }
     }
 }

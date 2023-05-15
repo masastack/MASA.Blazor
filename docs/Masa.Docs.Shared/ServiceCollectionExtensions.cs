@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Docs;
+﻿using BlazorComponent.I18n;
+using Masa.Blazor.Docs;
 
 namespace Masa.Docs.Shared;
 
@@ -26,6 +27,13 @@ public static class ServiceCollectionExtensions
         {
             options.ConfigureTheme(theme =>
             {
+                theme.Dark2 = async serviceProvider =>
+                {
+                    var cookieStorage = serviceProvider.GetService<CookieStorage>();
+                    var theme = await cookieStorage!.GetCookieAsync("masablazor@theme");
+
+                    return theme == "dark";
+                };
                 theme.Dark = false;
                 theme.Themes.Light.Primary = "#4318FF";
                 theme.Themes.Light.Secondary = "#A18BFF";
