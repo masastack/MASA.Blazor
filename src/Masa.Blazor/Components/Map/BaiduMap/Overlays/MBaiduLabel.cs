@@ -5,9 +5,9 @@ namespace Masa.Blazor
     public class MBaiduLabel : BaiduOverlayBase, ILabel
     {
         [Parameter]
-        public string Content
+        public string? Content
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 

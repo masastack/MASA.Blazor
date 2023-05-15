@@ -136,7 +136,7 @@ public partial class ModalBase
     #endregion
 
     private bool _saveLoading;
-    private Func<MouseEventArgs, Task> _debounceHandleOnSave;
+    private Func<MouseEventArgs, Task>? _debounceHandleOnSave;
 
     private MCardText? BodyRef { get; set; }
 

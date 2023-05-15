@@ -57,6 +57,13 @@ public partial class MMonacoEditor : BDomComponentBase
     private bool _valueChangedByUser;
     private IJSObjectReference? _monaco;
 
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        Id.ThrowIfNull(ComponentName);
+    }
+
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
@@ -113,7 +120,7 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
-        _monaco = await Module.Init(Id, EditorOptions, DotNetObjectReference.Create(this));
+        _monaco = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }

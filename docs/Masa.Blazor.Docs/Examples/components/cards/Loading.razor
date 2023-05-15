@@ -32,14 +32,14 @@
         </MCardText>
 
         <MCardActions>
-            <MButton Color="deep-purple lighten-2" Text @onclick="Reserve">Reserve</MButton>
+            <MButton Color="deep-purple lighten-2" Text @onclick="@Reserve">Reserve</MButton>
         </MCardActions>
 
     </ChildContent>
 </MCard>
 
 @code {
-    StringBoolean _loading;
+    StringBoolean? _loading;
 
     int _selection = 1;
 
