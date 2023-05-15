@@ -1,6 +1,7 @@
 ﻿namespace Masa.Blazor
 {
-    public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : struct, IComparable
+    // TODO: net7.0 support where TValue : struct, IComparable<TValue>
+    public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue> where TValue : IComparable
     {
         public ElementReference SecondThumbElement { get; set; }
 

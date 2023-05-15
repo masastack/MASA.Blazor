@@ -5,16 +5,17 @@ namespace Masa.Blazor
     public class MBaiduPolyline : BaiduOverlayBase, IPolyline, IStroke
     {
         [Parameter]
+        [EditorRequired]
         public IEnumerable<GeoPoint> Points
         {
-            get => GetValue<IEnumerable<GeoPoint>>();
+            get => GetValue<IEnumerable<GeoPoint>>() ?? Array.Empty<GeoPoint>();
             set => SetValue(value);
         }
 
         [Parameter]
-        public string StrokeColor
+        public string? StrokeColor
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 

@@ -27,9 +27,9 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string Title
+        public string? Title
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 

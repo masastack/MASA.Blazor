@@ -3,7 +3,7 @@
     public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks, IAsyncDisposable
     {
         [Inject]
-        public BaiduMapJSModule Module { get; set; }
+        public BaiduMapJSModule Module { get; set; } = null!;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -89,7 +89,7 @@
         }
 
         [Parameter]
-        public string DarkThemeId { get; set; }
+        public string? DarkThemeId { get; set; }
 
         [Parameter]
         public bool Dark
@@ -203,7 +203,6 @@
                 case "B_NORMAL_MAP": MapType = BaiduMapType.Normal; break;
                 case "B_EARTH_MAP": MapType = BaiduMapType.Earth; break;
                 case "B_SATELLITE_MAP": MapType = BaiduMapType.Satellite; break;
-                default: break;
             }
 
             await OnMapTypeChanged.InvokeAsync();
@@ -229,7 +228,7 @@
             await OnZoomEnd.InvokeAsync();
         }
 
-        private IBaiduMapJSObjectReferenceProxy _baiduMap;
+        private IBaiduMapJSObjectReferenceProxy? _baiduMap;
 
         private bool _zoomChangedInJs = false;
 
@@ -266,13 +265,20 @@
                 });
         }
 
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+
+            Id.ThrowIfNull(ComponentName);
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender)
             {
-                _baiduMap = await Module.InitAsync(Id, new BaiduMapInitOptions()
+                _baiduMap = await Module.InitAsync(Id!, new BaiduMapInitOptions()
                 {
                     EnableScrollWheelZoom = EnableScrollWheelZoom,
                     Zoom = Zoom,
@@ -353,7 +359,7 @@
         }
 
         public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
-            => await _baiduMap.AddOverlayAsync(overlay);
+            => await _baiduMap!.AddOverlayAsync(overlay);
 
         public async ValueTask RemoveOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);

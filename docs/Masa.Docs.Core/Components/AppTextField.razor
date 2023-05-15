@@ -1,7 +1,7 @@
 ﻿<MTextField Value="Value"
             ValueChanged="@ValueChanged"
             BackgroundColor="@(BackgroundColor ?? "grey lighten-3")"
-            Flat="@(!isFocused)"
+            Flat="@(!_isFocused)"
             Class="rounded-lg"
             Dense
             HideDetails="true"
@@ -10,7 +10,7 @@
             ClearIcon="@ClearIcon"
             Label="@Label">
     <PrependInnerContent>
-        <MIcon Color="@(isFocused ? "grey" : "")" Size=16 Class="mr-2">
+        <MIcon Color="@(_isFocused ? "grey" : "")" Size=16 Class="mr-2">
             @Icon
         </MIcon>
     </PrependInnerContent>
@@ -39,6 +39,6 @@
     [Parameter]
     public string ClearIcon { get; set; } = "mdi-close-circle";
 
-    private bool isFocused;
+    private bool _isFocused;
 
 }

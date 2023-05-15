@@ -116,7 +116,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
-    private static Func<TItem, string> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
+    private static Func<TItem, string?> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
 
     private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
 
@@ -132,11 +132,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public int SelectedIndex { get; set; } = -1;
 
-    protected object Menu { get; set; }
+    protected object? Menu { get; set; }
 
-    protected MMenu MMenu => Menu as MMenu;
+    protected MMenu? MMenu => Menu as MMenu;
 
-    protected BMenuProps ComputedMenuProps { get; set; }
+    protected BMenuProps? ComputedMenuProps { get; set; }
 
     protected bool HasChips => Chips || SmallChips;
 
@@ -174,7 +174,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     protected virtual IList<TItem> SelectedItems { get; set; } = new List<TItem>();
 
     protected string TilesSelector =>
-        $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
+        $"{MMenu!.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
 
     protected virtual bool MenuCanShow => true;
 
@@ -305,7 +305,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
             if (OutsideClickJSModule != null)
             {
-                _ = OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector());
+                _ = OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector()!);
             }
 
             StateHasChanged();
@@ -333,7 +333,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         if (isLazyContent)
         {
-            if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
+            if (OutsideClickJSModule?.Initialized is true && MMenu!.ContentElement.Context is not null)
             {
                 _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
             }
@@ -352,7 +352,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
 
 
-        if (MMenu.ContentElement.Context is null || !IsDirty) return;
+        if (MMenu!.ContentElement.Context is null || !IsDirty) return;
 
         var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
             TilesSelector,
@@ -468,7 +468,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 });
                 attrs[nameof(MMenu.Attach)] = GetMenuAttach();
                 attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
-                attrs[nameof(MMenu.Auto)] = ComputedMenuProps.Auto;
+                attrs[nameof(MMenu.Auto)] = ComputedMenuProps!.Auto;
                 attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                 attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
                 attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
@@ -724,7 +724,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         var nextItem = ComputedItemsIfHideSelected.ElementAtOrDefault(nextIndex);
 
         MenuListIndex++;
-        if (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled(nextItem))
+        if (nextItem is not null && (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled?.Invoke(nextItem) is true))
         {
             NextTile();
         }
@@ -747,7 +747,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         var prevItem = ComputedItemsIfHideSelected.ElementAt(prevIndex);
 
         MenuListIndex--;
-        if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled(prevItem))
+        if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled?.Invoke(prevItem) is true)
         {
             PrevTile();
         }
@@ -763,7 +763,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         MenuListIndex = lastIndex;
 
-        if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled(lastItem))
+        if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled?.Invoke(lastItem) is true)
         {
             PrevTile();
         }
@@ -777,7 +777,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         MenuListIndex = 0;
 
-        if (ItemDivider(firstItem) || ItemHeader(firstItem) is not null || ItemDisabled(firstItem))
+        if (ItemDivider(firstItem) || ItemHeader(firstItem) is not null || ItemDisabled?.Invoke(firstItem) is true)
         {
             NextTile();
         }
@@ -842,7 +842,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         if (!IsInteractive) return;
 
-        if (await IsAppendInner(args.Target) is false)
+        if (await IsAppendInner(args.Target!) is false)
         {
             IsMenuActive = true;
         }
@@ -871,7 +871,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             // If append inner is present
             // and the target is itself
             // or inside, toggle menu
-            if (await IsAppendInner(args.Target))
+            if (await IsAppendInner(args.Target!))
             {
                 IsMenuActive = !IsMenuActive;
             }
@@ -926,7 +926,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         if (i > -1)
         {
             await JsInvokeAsync(JsInteropConstants.ScrollToTile,
-                MMenu.ContentElement.GetSelector(),
+                MMenu!.ContentElement.GetSelector(),
                 TilesSelector,
                 i);
         }
@@ -976,9 +976,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         SelectedIndex = -1;
     }
 
-    private static Func<TItem, T> GetFuncOrDefault<T>(string name)
+    private static Func<TItem, T?> GetFuncOrDefault<T>(string name)
     {
-        Func<TItem, T> func;
+        Func<TItem, T?> func;
         try
         {
             var parameterExpression = Expression.Parameter(typeof(TItem), "item");
