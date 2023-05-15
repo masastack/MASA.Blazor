@@ -1,15 +1,20 @@
 {
   "props": {
-    "failedToLoadText": "",
-    "hasMore": "",
-    "loadingText": "",
-    "noMoreText": "",
-    "parent": "",
-    "reloadText": "",
-    "threshold": ""
+    "emptyText": "没有内容时显示的文本",
+    "errorText": "加载失败时显示的文本",
+    "loadingText": "加载时显示的文本",
+    "loadMoreText": "加载成功后显示的文本",
+    "parent": "监听滚动事件的元素",
+    "threshold": "滚动时距离底部的阈值",
+    "manual": "禁止自动加载，使用手动加载模式"
   },
   "events": {
-    "onLoadMore": ""
+    "onLoad": "加载事件，会在组件第一次呈现时和滚动到底部时触发"
   },
-  "contents": {}
+  "contents": {
+    "emptyContent": "没有加载内容时显示的内容",
+    "errorContent": "加载失败时显示的内容",
+    "loadingContent": "加载时显示的内容",
+    "loadMoreContent": "加载更多时显示的内容"
+  }
 }

@@ -44,5 +44,6 @@ public class FontAwesome4Aliases : IconAliases
         Search = "fa-search";
         FilterOn = "fa-chevron-down";
         FilterOff = "fa-chevron-up";
+        Retry = "fas fa-redo";
     }
 }

@@ -67,7 +67,8 @@
 
     private async Task SearchIssues()
     {
-        if (!Navigation.Uri.Contains("components", StringComparison.OrdinalIgnoreCase))
+        var isComponentPage = Navigation.GetAbsolutePath().StartsWith("/blazor/components/");
+        if (!isComponentPage)
         {
             _show = false;
             await InvokeAsync(StateHasChanged);
