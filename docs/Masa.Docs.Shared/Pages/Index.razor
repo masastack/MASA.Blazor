@@ -7,6 +7,7 @@
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
+                   Class="default-nav"
                    Floating
                    Width="300"
                    @bind-Value="_showMobileIndexNavMenuList"
@@ -237,7 +238,7 @@
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
     {
-        <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
+        <MButton Text Href="@href" Class="text-none text-truncate">@I18n.T(title)</MButton>
     };
 
     private async Task ScrollIntoView(string elementId)

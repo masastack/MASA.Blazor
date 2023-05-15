@@ -1,15 +1,13 @@
-﻿<div class="ordinary-text">
-    <MMarkdownIt Source="@Source"
-                 AnchorOptions="@s_anchorOptions"
-                 OnTocParsed="@OnTocParsed"
-                 OnFrontMatterParsed="@OnFrontMatterParsed"
-                 Html
-                 Typographer
-                 HeaderSections
-                 Scope="document"
-                 Class="doc-markdown-body">
-    </MMarkdownIt>
-</div>
+﻿<MMarkdownIt Source="@Source"
+             AnchorOptions="@s_anchorOptions"
+             OnTocParsed="@OnTocParsed"
+             OnFrontMatterParsed="@OnFrontMatterParsed"
+             Html
+             Typographer
+             HeaderSections
+             Scope="document"
+             Class="doc-markdown-body">
+</MMarkdownIt>
 
 @code {
 

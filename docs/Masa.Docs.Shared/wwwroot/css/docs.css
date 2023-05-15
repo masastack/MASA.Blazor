@@ -45,8 +45,25 @@
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #A3AED0), color-stop(0.72, #A3AED0), color-stop(0.86, #A3AED0));
 }
 
+.theme--light.m-application {
+    color: #485585;
+}
+
+.theme--dark.m-application {
+    color: #8ea5c2;
+}
+
 .flex-1-1-auto {
     flex: 1 1 auto !important;
+}
+
+.theme--light.default-app-bar {
+    background-color: #fff !important;
+    border-color: #fff !important;
+}
+
+.theme--dark.default-nav {
+    background-color: #272727;
 }
 
 .m-bar--underline {
@@ -64,11 +81,6 @@
 
 .text-mono {
     font-family: Roboto Mono, monospace;
-}
-
-.m-heading {
-    display: inline-block;
-    position: relative;
 }
 
 .app-code {
@@ -105,26 +117,41 @@ h1 + p {
     font-size: 1.25rem;
 }
 
-#default-toc ul {
+.theme--dark.default-toc {
+    background: #121212;
+}
+
+.default-toc ul {
     list-style-type: none;
 }
 
-#default-toc li {
+.default-toc li {
     border-left: 2px solid #E5E5E5;
 }
 
-    #default-toc li.primary--text {
+.theme--dark.default-toc li {
+    border-left-color: #373c3e;
+}
+
+    .default-toc li.primary--text {
         border-left-color: currentColor;
     }
 
-#default-toc .m-toc-link {
+.default-toc .m-toc-link {
     color: inherit;
 }
 
 .m-heading {
     display: inline-block;
     position: relative;
-    color: black;
+}
+
+.theme--light.m-application .m-heading {
+    color: #1B2559;
+}
+
+.theme--dark.m-application .m-heading {
+    color: #a2bee3;
 }
 
     .m-heading > a {
@@ -175,17 +202,10 @@ h6.m-heading {
     caret-color: #323D6F !important;
 }
 
-.secondary-emphasis-text {
+.theme--light > .secondary-emphasis-text {
     font-weight: 400 !important;
     font-size: 1rem !important;
     color: #424649 !important;
-}
-
-.ordinary-text {
-    font-weight: 400 !important;
-    font-size: 1rem !important;
-    line-height: 1.5rem !important;
-    color: #485585 !important;
 }
 
 .subordinary-color {
@@ -261,9 +281,14 @@ ul:not([class]), ol:not([class]) {
     right: 24px;
 }
 
-.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
+.theme--light.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
     background-color: #f0f3f9 !important;
-    color: #1B2559;
+    /*color: #1B2559;*/
+}
+
+.theme--dark.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
+    background-color: #272a2c !important;
+    /*color: #1B2559;*/
 }
 
 .m-code-highlight__pre .m-code-highlight__code {
@@ -301,8 +326,13 @@ a.text-dec-none {
         caret-color: #1B2559 !important;
     }
 
-.m-card.m-card--doc {
+.theme--light.m-card.m-card--doc {
     border-color: #E4E8F3;
+}
+
+.theme--dark.m-card.m-card--doc {
+    border-color: #232f4f;
+    background-color: transparent;
 }
 
 .m-markdown-it img {
@@ -388,10 +418,17 @@ a.text-dec-none {
         border-radius: 4px !important;
     }
 
+.theme--dark.default-tabs > .m-tabs-bar {
+    background-color: transparent;    
+}
+
 .default-tabs .m-tab {
     font-weight: 400 !important;
     font-size: 1rem !important;
     line-height: 1.5rem !important;
+}
+
+.theme--light.default-tabs .m-tab:not(.m-tab--active) {
     color: #485585 !important;
 }
 

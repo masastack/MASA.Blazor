@@ -11,16 +11,10 @@
                      Target="@Target"
                      OnClick="OnClick"
                      Class="@Class"
+                     Color="#1B2559"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
-                @if (!string.IsNullOrWhiteSpace(Icon))
-                {
-                    <MIcon Class="emphasize1-color">@Icon</MIcon>
-                }
-                else
-                {
-                    <img style="width:24px;height:24px;" alt="@Path" src="@Image" />
-                }
+                <MIcon SvgAttributes="@IconSvgAttrs">@Icon</MIcon>
             </MButton>
         </ActivatorContent>
         <ChildContent>
@@ -31,11 +25,11 @@
 
 @code {
 
-    [Parameter]
-    public string? Icon { get; set; }
+    [Parameter, EditorRequired]
+    public string Icon { get; set; } = null!;
 
     [Parameter]
-    public string? Image { get; set; }
+    public Dictionary<string, object?>? IconSvgAttrs { get; set; }
 
     [Parameter, EditorRequired]
     public string? Path { get; set; }
@@ -54,5 +48,12 @@
 
     [Parameter]
     public EventCallback OnClick { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        Icon.ThrowIfNull("AppTooltipButton");
+    }
 
 }

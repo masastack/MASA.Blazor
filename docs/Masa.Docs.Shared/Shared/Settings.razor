@@ -1,9 +1,11 @@
 ﻿@inject I18n I18n
-@inject NavigationManager Navigation;
+@inject NavigationManager Navigation
+@inject MasaBlazor MasaBlazor
+@inject CookieStorage CookieStorage
 
-<MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="300">
+<MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="349">
     <PrependContent>
-        <MToolbar Flat Height="80">
+        <MToolbar Class="m-bar--underline" Flat Height="96">
             <h3>
                 @I18n.T("settings")
             </h3>
@@ -11,37 +13,53 @@
     </PrependContent>
     <ChildContent>
         <MContainer>
-            <div style="padding-left:4px">
-                <h5>@I18n.T("Mode")</h5>
-                <MButtonGroup Value="BlazorMode.Current" Style="margin-top:4px">
-                    <MButton Value="BlazorMode.Server" Text Color="primary" Width="135"
-                             OnClick="NavigateToServer">
-                        Server
-                    </MButton>
-                    <MButton Value="BlazorMode.Wasm" Text Color="primary" Width="135"
-                             OnClick="NavigateToWasm">
-                        Wasm
-                    </MButton>
-                </MButtonGroup>
+            <div>
+                <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("theme")</div>
+                <MItemGroup Value="@MasaBlazor.Theme.Dark.ToString()" ActiveClass="primary">
+                    <MRow>
+                        <MCol Cols="6">
+                            <MItem Value="@("False")">
+                                <MButton Block Large Elevation="0" Class="@($"justify-space-between {context.ActiveClass}")"
+                                         OnClick="() => ToggleTheme(false)">
+                                    Light
+                                    <MIcon Right>mdi-weather-sunny</MIcon>
+                                </MButton>
+                            </MItem>
+                        </MCol>
+                        <MCol Cols="6">
+                            <MItem Value="@("True")">
+                                <MButton Block Large Elevation="0" Class="@($"justify-space-between {context.ActiveClass}")"
+                                         OnClick="() => ToggleTheme(true)">
+                                    Dark
+                                    <MIcon Right>mdi-weather-night</MIcon>
+                                </MButton>
+                            </MItem>
+                        </MCol>
+                    </MRow>
+                </MItemGroup>
             </div>
         </MContainer>
     </ChildContent>
 </MNavigationDrawer>
 
 @code {
+
     [Parameter]
     public bool Value { get; set; }
 
     [Parameter]
     public EventCallback<bool> ValueChanged { get; set; }
 
-    void NavigateToServer()
+    private void ToggleTheme(bool dark)
     {
-        //TODO: Navigate to server site
+        if (dark == MasaBlazor.Theme.Dark)
+        {
+            return;
+        }
+
+        MasaBlazor.ToggleTheme();
+
+        CookieStorage.SetItemAsync("masablazor@theme", !dark ? "light" : "dark");
     }
 
-    void NavigateToWasm()
-    {
-        //TODO: Navigate to WASM site
-    }
 }

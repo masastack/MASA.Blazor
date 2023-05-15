@@ -26,10 +26,15 @@ public static class ServiceCollectionExtensions
         {
             options.ConfigureTheme(theme =>
             {
+                theme.Dark = false;
                 theme.Themes.Light.Primary = "#4318FF";
                 theme.Themes.Light.Secondary = "#A18BFF";
                 theme.Themes.Light.Accent = "#005CAF";
                 theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+                theme.Themes.Dark.Primary = "#4318FF";
+                theme.Themes.Dark.Secondary = "#A18BFF";
+                theme.Themes.Dark.Accent = "#005CAF";
+                theme.Themes.Dark.UserDefined["Tertiary"] = "#e57373";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {

@@ -2,6 +2,8 @@
 @inject I18n I18n
 @inject NavigationManager NavigationManager
 @inject DocService DocService
+@inject MasaBlazor MasaBlazor
+@inject CookieStorage CookieStorage
 @implements IDisposable
 
 <HeadContent>
@@ -68,6 +70,15 @@
 
         if (firstRender)
         {
+            var themeStr = await CookieStorage.GetCookieAsync("masablazor@theme");
+            Console.Out.WriteLine("themeStr = {0}", themeStr);
+            var isDark = themeStr == "dark";
+
+            if (isDark != MasaBlazor.Theme.Dark)
+            {
+                MasaBlazor.ToggleTheme();
+            }
+            
             _projectMap = await DocService.ReadProjectMapAsync();
             SetEnv();
             SetProject();
