@@ -27,22 +27,23 @@ public static class ServiceCollectionExtensions
         {
             options.ConfigureTheme(theme =>
             {
-                theme.Dark2 = async serviceProvider =>
-                {
-                    var cookieStorage = serviceProvider.GetService<CookieStorage>();
-                    var theme = await cookieStorage!.GetCookieAsync("masablazor@theme");
-
-                    return theme == "dark";
-                };
                 theme.Dark = false;
+
                 theme.Themes.Light.Primary = "#4318FF";
-                theme.Themes.Light.Secondary = "#A18BFF";
+                theme.Themes.Light.Secondary = "#918ea5";
                 theme.Themes.Light.Accent = "#005CAF";
-                theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
-                theme.Themes.Dark.Primary = "#4318FF";
-                theme.Themes.Dark.Secondary = "#A18BFF";
+                theme.Themes.Light.Error = "#ff5449";
+                theme.Themes.Light.UserDefined["Tertiary"] = "#00966f";
+                theme.Themes.Light.UserDefined["Neutral"] = "#929094";
+                theme.Themes.Light.UserDefined["NeutralVariant"] = "#928f99";
+
+                theme.Themes.Dark.Primary = "#c5c0ff";
+                theme.Themes.Dark.Secondary = "#c7c4dc";
                 theme.Themes.Dark.Accent = "#005CAF";
-                theme.Themes.Dark.UserDefined["Tertiary"] = "#e57373";
+                theme.Themes.Dark.Error = "#ffb4ab";
+                theme.Themes.Dark.UserDefined["Tertiary"] = "#67dbaf";
+                theme.Themes.Dark.UserDefined["Neutral"] = "#929094";
+                theme.Themes.Dark.UserDefined["NeutralVariant"] = "#928f99";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {

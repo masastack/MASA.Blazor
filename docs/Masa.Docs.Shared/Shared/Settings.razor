@@ -2,6 +2,7 @@
 @inject NavigationManager Navigation
 @inject MasaBlazor MasaBlazor
 @inject CookieStorage CookieStorage
+@inject LocalStorage LocalStorage
 
 <MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="349">
     <PrependContent>
@@ -59,7 +60,7 @@
 
         MasaBlazor.ToggleTheme();
 
-        CookieStorage.SetItemAsync("masablazor@theme", !dark ? "light" : "dark");
+        _ = LocalStorage.SetItemAsync("masablazor@theme", !dark ? "light" : "dark");
     }
 
 }

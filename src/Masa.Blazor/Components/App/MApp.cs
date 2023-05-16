@@ -8,9 +8,6 @@ namespace Masa.Blazor
     public class MApp : BApp
     {
         [Inject]
-        private IServiceProvider ServiceProvider { get; set; }
-        
-        [Inject]
         public MasaBlazor? MasaBlazor { get; set; }
 
         [Inject]
@@ -46,18 +43,7 @@ namespace Masa.Blazor
                 await MasaBlazor!.Breakpoint.InitAsync();
                 await Window!.InitializeAsync();
                 
-                await Test();
-
                 StateHasChanged();
-            }
-        }
-
-        private async Task Test()
-        {
-            if (MasaBlazor.Theme.Dark2 != null)
-            {
-                var isDark = await MasaBlazor.Theme.Dark2.Invoke(ServiceProvider);
-                MasaBlazor.Theme.Dark = isDark;
             }
         }
 

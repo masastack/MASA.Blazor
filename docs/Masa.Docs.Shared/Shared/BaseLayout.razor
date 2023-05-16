@@ -4,6 +4,7 @@
 @inject DocService DocService
 @inject MasaBlazor MasaBlazor
 @inject CookieStorage CookieStorage
+@inject LocalStorage LocalStorage
 @implements IDisposable
 
 <HeadContent>
@@ -70,15 +71,13 @@
 
         if (firstRender)
         {
-            // var themeStr = await CookieStorage.GetCookieAsync("masablazor@theme");
-            // Console.Out.WriteLine("themeStr = {0}", themeStr);
-            // var isDark = themeStr == "dark";
-            //
-            // if (isDark != MasaBlazor.Theme.Dark)
-            // {
-            //     MasaBlazor.ToggleTheme();
-            // }
-            
+            var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
+            var isDark = themeStr == "dark";
+            if (isDark != MasaBlazor.Theme.Dark)
+            {
+                MasaBlazor.ToggleTheme();
+            }
+
             _projectMap = await DocService.ReadProjectMapAsync();
             SetEnv();
             SetProject();

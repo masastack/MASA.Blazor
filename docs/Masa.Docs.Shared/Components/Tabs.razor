@@ -6,7 +6,7 @@
        Routable>
     @foreach (var item in AppService.GetNavMenus(Project))
     {
-        <MTab Ripple="false" Class="text-none secondary-emphasis-text"
+        <MTab Ripple="false" Class="text-none"
               Href="@item.URL"
               Target="@item.Target">
             <MBadge Color="red" Content="@I18n.T(item.Badge)" Value="@(!string.IsNullOrWhiteSpace(item.Badge))">

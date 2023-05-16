@@ -6,12 +6,11 @@
               OpenDelay="200">
         <ActivatorContent>
             <MButton Icon
+                     Class="@($"default-app-btn {Class}")"
                      Disabled="Disabled"
                      Href="@Href"
                      Target="@Target"
                      OnClick="OnClick"
-                     Class="@Class"
-                     Color="#1B2559"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
                 <MIcon SvgAttributes="@IconSvgAttrs">@Icon</MIcon>
