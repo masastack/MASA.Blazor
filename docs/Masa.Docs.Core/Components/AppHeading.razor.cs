@@ -52,26 +52,12 @@ public class AppHeading : ComponentBase
                 childBuilder.AddAttribute(1, "href", Href);
                 childBuilder.AddAttribute(2, "class", "text-decoration-none text-right text-md-left");
                 childBuilder.AddEventPreventDefaultAttribute(3, "onclick", true);
-                childBuilder.AddAttribute(4, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, () => OnClick(Href)));
-                childBuilder.AddContent(5, "#");
+                childBuilder.AddContent(4, "#");
                 childBuilder.CloseElement();
             });
         }
 
         builder.AddContent(3, Content);
         builder.CloseElement();
-    }
-
-    private async Task OnClick(string href)
-    {
-        if (href.StartsWith("#"))
-        {
-            // TODO: remove the following lines when #40190 of aspnetcore resolved.
-            // TODO: Blazor now does not support automatic scrolling of anchor points.
-            // Check this when .NET 8 released.
-
-            NavigationManager.ReplaceWithHash(href);
-            _ = JsRuntime.InvokeVoidAsync("scrollToElement", href.TrimStart('#'), AppService.AppBarHeight + 12);
-        }
     }
 }

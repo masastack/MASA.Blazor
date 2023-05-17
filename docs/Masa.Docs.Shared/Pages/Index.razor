@@ -29,7 +29,7 @@
 
         <MList Class="doc-list-nav">
             <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
-                <MListItem Value="@("#getting-started")" Class="doc-list-nav--item-hash" OnClick='() => ScrollIntoView("getting-started")' Href="@("#getting-started")">
+                <MListItem Value="@("#getting-started")" Class="doc-list-nav--item-hash" Href="@("#getting-started")">
                     <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
                         <MIcon Color="#FFB547" Size="30" Class="mr-2">fa:fas fa-rocket</MIcon>
                     </MListItemIcon>
@@ -39,7 +39,7 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem Value="@($"#{project}")" Class="doc-list-nav--item-hash" OnClick="(() => ScrollIntoView(project))" Href="@($"#{project}")">
+                    <MListItem Value="@($"#{project}")" Class="doc-list-nav--item-hash" Href="@($"#{project}")">
                         <MListItemAvatar Tile>
                             @Image(project, _activeHash)
                         </MListItemAvatar>
@@ -204,7 +204,6 @@
             {
                 _objRef = DotNetObjectReference.Create(this);
                 await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
-                await LocationHashPositionAsync(NavigationManager.Uri);
             }
             catch
             {
@@ -240,34 +239,10 @@
         <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
 
-    private async Task ScrollIntoView(string elementId)
-    {
-        _activeHash = $"#{elementId}";
-        // TODO: remove the following lines when #40190 of aspnetcore resolved.
-        // TODO: Blazor now does not support automatic scrolling of anchor points.
-        // Check this when .NET 8 released.
-
-        NavigationManager.ReplaceWithHash($"#{elementId}");
-        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
-    }
-
-    private async Task LocationHashPositionAsync(string url)
-    {
-        var uri = new Uri(url);
-        if (!string.IsNullOrWhiteSpace(uri.Fragment))
-        {
-            await Retry(async () =>
-            {
-                await ScrollIntoView(uri.Fragment.Substring(1));
-            }, () => true, delay: 500);
-        }
-    }
-
     [JSInvokable]
     public void UpdateHash(string hash)
     {
         _activeHash = hash;
-        NavigationManager.ReplaceWithHash(hash);
         StateHasChanged();
     }
 

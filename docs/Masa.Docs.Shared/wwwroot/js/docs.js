@@ -16,40 +16,6 @@ window.getCookie = function (name) {
   return null;
 };
 
-// Because the following window.scrollTo causes the NavigateTo not to
-// scroll to the top of the page, the state of the isHash is required
-let isHash;
-
-window.setHash = function () {
-  isHash = true;
-};
-
-let scrolling;
-
-window.scrollToElement = function (hash, offset) {
-  setHash();
-  scrolling = true;
-  const el = document.getElementById(hash);
-  const top = el.getBoundingClientRect().top;
-  const offsetPosition = top + window.pageYOffset - offset;
-  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-  setTimeout(() => { scrolling = false; }, 1000);
-};
-
-/*
- * NavigationManager.NavigateTo always scrolls page to the top.
- * The following `window.scrollTo` would be invoked.
- * When NavigationManager.NavigateTo invoked, the x and y is zero.
- */
-const origScrollTo = window.scrollTo;
-window.scrollTo = function (x, y) {
-  if (isHash && x === 0 && y === 0) {
-    isHash = false;
-    return;
-  }
-  return origScrollTo.apply(this, arguments);
-};
-
 window.getTimeOffset = function () {
   return new Date().getTimezoneOffset();
 };
@@ -113,7 +79,6 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
     if (currentOffset === 0) {
-      setHash();
       await dotnet.invokeMethodAsync("UpdateHash", "");
       return;
     }
@@ -137,7 +102,6 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
 
     _scrolling = true;
 
-    setHash();
     await dotnet.invokeMethodAsync("UpdateHash", hash);
 
     _scrolling = false;
@@ -237,35 +201,35 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
     appId: "TSB4MACWRC",
     indexName: "blazor-masastack_" + index,
     apiKey: "d1fa64adb784057c097feb592d4497d0",
-    hitComponent: ({ hit, children }) => {
-      return {
-        type: "a",
-        ref: undefined,
-        constructor: undefined,
-        props: {
-          href: hit.url,
-          onClick: (e) => {
-            let hitUrl;
-            if (hit.url.startsWith("/")) {
-              hitUrl = new URL(hit.url, location.origin);
-            } else {
-              hitUrl = new URL(hit.url);
-            }
-            if (document.location.pathname === hitUrl.pathname) {
-              if (hitUrl.hash) {
-                window.requestAnimationFrame(() =>
-                  window.scrollToElement(hitUrl.hash.substring(1), 108)
-                );
-              } else {
-                window.backTop();
-              }
-            }
-          },
-          children: children,
-        },
-        __v: null,
-      };
-    },
+    // hitComponent: ({ hit, children }) => {
+    //   return {
+    //     type: "a",
+    //     ref: undefined,
+    //     constructor: undefined,
+    //     props: {
+    //       href: hit.url,
+    //       onClick: (e) => {
+    //         let hitUrl;
+    //         if (hit.url.startsWith("/")) {
+    //           hitUrl = new URL(hit.url, location.origin);
+    //         } else {
+    //           hitUrl = new URL(hit.url);
+    //         }
+    //         if (document.location.pathname === hitUrl.pathname) {
+    //           if (hitUrl.hash) {
+    //             window.requestAnimationFrame(() =>
+    //               window.scrollToElement(hitUrl.hash.substring(1), 108)
+    //             );
+    //           } else {
+    //             window.backTop();
+    //           }
+    //         }
+    //       },
+    //       children: children,
+    //     },
+    //     __v: null,
+    //   };
+    // },
     placeholder,
     searchParameters: {
       facetFilters: ["lang:" + currentLanguage],

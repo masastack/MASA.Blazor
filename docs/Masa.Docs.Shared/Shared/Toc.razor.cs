@@ -43,26 +43,7 @@ public partial class Toc : NextTickComponentBase
     public void UpdateHash(string hash)
     {
         _activeHash = hash;
-        NavigationManager.ReplaceWithHash(hash);
         StateHasChanged();
-    }
-
-    private async Task ScrollIntoView(string elementId)
-    {
-        try
-        {
-            _activeHash = $"#{elementId}";
-
-            // TODO: remove the following lines when #40190 of aspnetcore resolved.
-            // TODO: Blazor now does not support automatic scrolling of anchor points.
-            // Check this when .NET 8 released.
-            NavigationManager.ReplaceWithHash($"#{elementId}");
-            _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
-        }
-        catch
-        {
-            // ignored
-        }
     }
 
     private void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)
@@ -75,12 +56,6 @@ public partial class Toc : NextTickComponentBase
         _toc = toc.Where(c => c.Level > 1).ToList();
 
         InvokeAsync(StateHasChanged);
-
-        var uri = new Uri(NavigationManager.Uri);
-        if (!string.IsNullOrWhiteSpace(uri.Fragment))
-        {
-            ScrollIntoView(uri.Fragment.Substring(1)).ConfigureAwait(false);
-        }
     }
 
     private string GenClass(MarkdownItTocContent tocContent)

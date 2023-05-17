@@ -29,9 +29,7 @@
             {
                 <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) toc-li">
                     <a href="@($"#{item.Anchor}")"
-                       class="m-toc-link d-block transition-swing text-decoration-none"
-                       @onclick:preventDefault
-                       @onclick="@(() => ScrollIntoView(item.Anchor))">
+                       class="m-toc-link d-block transition-swing text-decoration-none">
                         @I18n.T(item.Content)
                     </a>
                 </li>
