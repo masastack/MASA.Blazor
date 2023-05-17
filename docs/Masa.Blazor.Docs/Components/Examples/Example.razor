@@ -12,11 +12,11 @@
     else
     {
         <MSheet Class="m-example"
-                Dark="_dark"
                 Outlined
+                Dark="Dark"
                 Rounded="true">
             <div style="min-height: 52px">
-                <MSheet Class="pa-4" Rounded="true">
+                <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
                     @if (_type is not null)
                     {
                         <DynamicComponent Type="_type"></DynamicComponent>

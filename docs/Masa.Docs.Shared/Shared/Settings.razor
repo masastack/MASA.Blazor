@@ -19,7 +19,7 @@
                     <MRow>
                         <MCol Cols="6">
                             <MItem Value="@("False")">
-                                <MButton Block Large Elevation="0" Class="@($"justify-space-between {context.ActiveClass}")"
+                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
                                          OnClick="() => ToggleTheme(false)">
                                     Light
                                     <MIcon Right>mdi-weather-sunny</MIcon>
@@ -28,7 +28,7 @@
                         </MCol>
                         <MCol Cols="6">
                             <MItem Value="@("True")">
-                                <MButton Block Large Elevation="0" Class="@($"justify-space-between {context.ActiveClass}")"
+                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
                                          OnClick="() => ToggleTheme(true)">
                                     Dark
                                     <MIcon Right>mdi-weather-night</MIcon>

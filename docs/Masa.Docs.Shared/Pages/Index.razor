@@ -238,7 +238,7 @@
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
     {
-        <MButton Text Href="@href" Class="text-none text-truncate ordinary-text">@I18n.T(title)</MButton>
+        <MButton Text Href="@href" Class="text-none text-truncate" Style="font-size: inherit; font-weight: inherit;">@I18n.T(title)</MButton>
     };
 
     private async Task ScrollIntoView(string elementId)
