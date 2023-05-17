@@ -15,6 +15,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         addImageRules(md);
         addBlockquoteRules(md);
         addTableRules(md);
+        addHtmlInlineRules(md)
 
         parser.useContainer("code-group");
         parser.useContainer("code-group-item");
@@ -22,6 +23,26 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
     }
 
     addLinkRules(parser);
+    
+    function addHtmlInlineRules(md) {
+        md.renderer.rules.html_inline = (tokens, idx, options, env, self) => {
+            const content = tokens[idx].content;
+            if(content.startsWith("</")) {
+                return content;
+            }
+
+            let tag = content.split(' ')[0].substring(1);
+            if (tag.endsWith('>')) {
+                tag = tag.replace('>', '');
+            }
+
+            if (customElements.get(tag)){
+                return content.replace(">", ` masa-blazor-custom-element>`)
+            }
+
+            return content;
+        }
+    }
 
     function addHeadingRules(md) {
         md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
@@ -122,7 +143,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
     function addTableRules(md) {
         md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
             return (
-                '<div class="m-sheet m-sheet--outlined rounded theme--light mb-2"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
+                '<div masa-blazor-html class="m-sheet m-sheet--outlined rounded theme--light mb-2"><div masa-blazor-html class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
                 self.renderToken(tokens, idx, options)
             );
         };
@@ -176,7 +197,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
                 }
             });
 
-            return `<app-code-group ${g_attr}>\n`;
+            return `<app-code-group masa-blazor-custom-element ${g_attr}>\n`;
         };
         parser.md.renderer.rules["container_code-group_close"] = (
             tokens,
@@ -219,4 +240,30 @@ window.prismHighlightLines = function (pre) {
     } catch (err) {
         console.error(err);
     }
+}
+
+window.updateThemeOfCustomElements = function (isDark) {
+    const customElements = document.querySelectorAll('[masa-blazor-custom-element]');
+    
+    [...customElements].map(e => {
+        e.setAttribute("dark", isDark)
+    });
+
+    const elements = document.querySelectorAll('[masa-blazor-html]');
+    [...elements].map(e => {
+        if (isDark) {
+            if (e.className.includes('theme--light')) {
+                e.className = e.className.replace('theme--light', 'theme--dark')
+            } else {
+                e.className += " theme--dark";
+            }
+        } else {
+            if (e.className.includes('theme--dark')) {
+
+                e.className = e.className.replace('theme--dark', 'theme--light')
+            } else {
+                e.className += " theme--light";
+            }
+        }
+    })
 }

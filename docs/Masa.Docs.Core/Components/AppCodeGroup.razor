@@ -4,7 +4,7 @@
 <div class="mb-4">
     @if (Model is not null)
     {
-        <MTabs Dark="IsDark" @bind-Value="_tabValue" Class="mb-1">
+        <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
             @foreach (var tab in Tabs)
             {
                 <MTab Class="text-none">@tab</MTab>
@@ -27,8 +27,8 @@
 
 @code {
     
-    [CascadingParameter(Name = "IsDark")]
-    private bool IsDark { get; set; }
+    [Parameter]
+    public bool Dark { get; set; }
 
     [Parameter]
     public Dictionary<string, MarkupModel>? Model { get; set; }

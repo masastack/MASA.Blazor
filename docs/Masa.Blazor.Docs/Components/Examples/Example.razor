@@ -5,17 +5,18 @@
 {
     if (_type == null)
     {
-        <MAlert Type="AlertTypes.Error" Outlined>
+        <MAlert Type="AlertTypes.Error" Outlined Dark="Dark">
             The file "@File" doesn't exist.
         </MAlert>
     }
     else
     {
         <MSheet Class="m-example"
+                Dark="_dark"
                 Outlined
                 Rounded="true">
             <div style="min-height: 52px">
-                <MSheet Class="pa-4" Rounded="true" Dark="_dark">
+                <MSheet Class="pa-4" Rounded="true">
                     @if (_type is not null)
                     {
                         <DynamicComponent Type="_type"></DynamicComponent>
@@ -79,5 +80,5 @@
 }
 else
 {
-    <MSkeletonLoader MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
+    <MSkeletonLoader Dark="Dark" MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
 }

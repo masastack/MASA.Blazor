@@ -1,4 +1,5 @@
 ﻿@import url(theme/tokens.css);
+@import url(theme/typography.module.css);
 
 #blazor-error-ui {
     background: lightyellow;
@@ -393,12 +394,8 @@ a.text-dec-none {
     }
 
     .doc-list-nav--active {
-        background-color: #4318FF;
-        color: #fff !important;
-    }
-
-    .doc-list-nav--active .m-list-item__title {
-        color: #fff;
+        background-color: var(--md-sys-color-primary-light);
+        color: var(--md-sys-color-on-primary-light) !important;
     }
 
     .doc-list-nav--active .m-list-item__subtitle {

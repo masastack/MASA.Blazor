@@ -3,7 +3,6 @@
 @inject NavigationManager NavigationManager
 @inject DocService DocService
 @inject MasaBlazor MasaBlazor
-@inject CookieStorage CookieStorage
 @inject LocalStorage LocalStorage
 @implements IDisposable
 
@@ -12,7 +11,7 @@
     <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
 </HeadContent>
 
-<MApp>
+<MApp Class="body-large">
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
             <MErrorHandler>

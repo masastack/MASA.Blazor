@@ -1,8 +1,7 @@
 ﻿@inject I18n I18n
-@inject NavigationManager Navigation
 @inject MasaBlazor MasaBlazor
-@inject CookieStorage CookieStorage
 @inject LocalStorage LocalStorage
+@inject IJSRuntime JSRuntime
 
 <MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="349">
     <PrependContent>
@@ -60,7 +59,9 @@
 
         MasaBlazor.ToggleTheme();
 
-        _ = LocalStorage.SetItemAsync("masablazor@theme", !dark ? "light" : "dark");
+        _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
+
+        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfCustomElements", dark);
     }
 
 }

@@ -8,7 +8,7 @@
 
         <div>
             <div class="d-flex mb-2">
-                <AppTextField @bind-Value="filter" BackgroundColor="#F6F8FD" Icon="mdi-magnify" Clearable Label="@I18n.T("Search")" />
+                <AppTextField @bind-Value="filter" Icon="mdi-magnify" Clearable Label="@I18n.T("Search")" />
             </div>
 
             <ApiDatatable Field="@Name" Data="Data" Filter="@filter" />

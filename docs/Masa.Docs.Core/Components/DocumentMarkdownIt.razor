@@ -1,7 +1,11 @@
-﻿<MMarkdownIt Source="@Source"
+﻿@using System.ComponentModel
+@inject IJSRuntime JSRuntime
+
+<MMarkdownIt Source="@Source"
              AnchorOptions="@s_anchorOptions"
              OnTocParsed="@OnTocParsed"
              OnFrontMatterParsed="@OnFrontMatterParsed"
+             OnAfterRendered="OnAfterRendered"
              Html
              Typographer
              HeaderSections
@@ -10,6 +14,9 @@
 </MMarkdownIt>
 
 @code {
+
+    [CascadingParameter(Name = "IsDark")]
+    private bool IsDark { get; set; }
 
     [Parameter, EditorRequired]
     public string? Source { get; set; }
@@ -26,5 +33,10 @@
         PermalinkClass = "",
         PermalinkSymbol = ""
     };
+
+    private async Task OnAfterRendered()
+    {
+        await JSRuntime.TryInvokeVoidAsync("updateThemeOfCustomElements", IsDark);
+    }
 
 }

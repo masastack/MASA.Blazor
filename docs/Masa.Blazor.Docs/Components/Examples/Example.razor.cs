@@ -20,6 +20,13 @@ public partial class Example : NextTickComponentBase
     [Parameter]
     public bool NoActions { get; set; }
 
+    [Parameter]
+    public bool Dark
+    {
+        get => _dark;
+        set => _dark = value;
+    }
+
     private readonly List<(string Code, string Language)> _sections = new();
 
     private bool _rendered;
