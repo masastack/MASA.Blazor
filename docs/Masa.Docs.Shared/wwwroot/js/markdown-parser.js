@@ -242,7 +242,7 @@ window.prismHighlightLines = function (pre) {
     }
 }
 
-window.updateThemeOfCustomElements = function (isDark) {
+window.updateThemeOfElementsFromMarkdown = function (isDark) {
     const customElements = document.querySelectorAll('[masa-blazor-custom-element]');
     
     [...customElements].map(e => {

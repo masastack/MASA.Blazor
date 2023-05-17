@@ -36,7 +36,7 @@
 
     private async Task OnAfterRendered()
     {
-        await JSRuntime.TryInvokeVoidAsync("updateThemeOfCustomElements", IsDark);
+        await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", IsDark);
     }
 
 }

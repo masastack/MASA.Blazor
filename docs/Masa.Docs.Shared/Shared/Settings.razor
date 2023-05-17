@@ -61,7 +61,7 @@
 
         _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
 
-        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfCustomElements", dark);
+        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
     }
 
 }
