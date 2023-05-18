@@ -24,12 +24,15 @@
         {
             <div class="toc-content mb-2 ml-6">@I18n.T("Contents")</div>
         }
-        <ul class="mb-6">
+        <ul class="mb-6" @ref="_tocRef">
             @foreach (var item in _toc)
             {
+                var hash = $"#{item.Anchor}";
+
                 <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) toc-li">
-                    <a href="@($"#{item.Anchor}")"
-                       class="m-toc-link d-block transition-swing text-decoration-none">
+                    <a href="@hash"
+                       class="m-toc-link d-block transition-swing text-decoration-none"
+                       @onclick:preventDefault>
                         @I18n.T(item.Content)
                     </a>
                 </li>

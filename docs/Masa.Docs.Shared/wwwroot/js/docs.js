@@ -1,34 +1,25 @@
-window.setCookie = function (name, value) {
-  document.cookie = `$ {
-                name
-            } = $ {
-                escape(value.toString())
-            };
-            path = /;}`;
-};
-
-window.getCookie = function (name) {
-  const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-  const arr = document.cookie.match(reg);
-  if (arr) {
-    return unescape(arr[2]);
-  }
-  return null;
-};
-
-window.getTimeOffset = function () {
-  return new Date().getTimezoneOffset();
-};
-
 window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
   let _scrolling;
   let _offsets = [];
   let _toc = [];
   let _registered;
+  
+  const toc = document.querySelector(selector);
+  toc.addEventListener('click', async (e) => {
+    const el = e.target;
+    if (el.tagName !== "A") return
+
+    routeToNamedElement(el, 108, true)
+
+    el.click();
+
+    await dotnet.invokeMethodAsync("UpdateHash", el.getAttribute('href'));
+  })
 
   window.addEventListener("scroll", onScroll);
-  registerClickEvents();
+
+  // registerClickEvents();
 
   function registerClickEvents() {
     if (_registered) return;
@@ -57,7 +48,7 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
     }
 
     _toc = Array.from(document.querySelectorAll(queryFilter)).map(
-      ({ attributes }) => {
+      ({attributes}) => {
         let href = attributes.getNamedItem("href").value;
         const index = href.indexOf("#");
         return href.slice(index);
@@ -112,7 +103,8 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
 
     registerClickEvents();
 
-    if (_scrolling || scrolling) {
+    // if (_scrolling || scrolling) {
+    if (_scrolling) {
       return;
     }
 
@@ -124,12 +116,87 @@ window.backTop = function () {
   slideTo(0);
 };
 
+/*
+ * NavigationManager.NavigateTo always scrolls page to the top.
+ * The following `window.scrollTo` would be invoked.
+ * When NavigationManager.NavigateTo invoked, the x and y is zero.
+ */
+let isHash = false;
+// const origScrollTo = window.scrollTo;
+// window.scrollTo = function (x, y) {
+//   if (x === 0 && y === 0) {
+//     // isHash = false;
+//     return;
+//   }
+//   return origScrollTo.apply(this, arguments);
+// };
+
+
+window.routeToNamedElement = function (el, offset, once = false) {
+  el.addEventListener('click', (e) => {
+    const hash = el.getAttribute('href')
+    console.log('hash', hash)
+    
+    if (hash !== window.location.hash) {
+
+      var x = window.pageXOffset,
+        y = window.pageYOffset;
+
+      window.addEventListener('scroll', () => {
+        window.scrollTo(x, y)
+      }, {once: true})
+
+
+      window.location.hash = hash;
+    }
+
+    window.requestAnimationFrame(() => {
+      const namedElement = document.querySelector(hash);
+      const top = namedElement.getBoundingClientRect().top;
+      const offsetPosition = top + window.pageYOffset - offset;
+      console.log('top', offsetPosition)
+      window.requestAnimationFrame(() => {
+        window.scrollTo({top: offsetPosition, behavior: "smooth"});
+      })
+    })
+  }, { once })
+
+}
+
+window.scrollToElement = function (selector, offset) {
+  console.log('ssssssssss')
+  var x = window.pageXOffset,
+    y = window.pageYOffset;
+
+  window.addEventListener('scroll', () => {
+    window.scrollTo(x, y)
+  }, {once: true})
+
+  window.location.hash = selector;
+
+  // scrolling = true;
+  isHash = true;
+  const el = document.querySelector(selector);
+  console.log('el', el)
+  const top = el.getBoundingClientRect().top;
+  const offsetPosition = top + window.pageYOffset - offset;
+  console.log('top', offsetPosition)
+  window.requestAnimationFrame(() => {
+    window.scrollTo({top: offsetPosition, behavior: "smooth"});
+  })
+  setTimeout(() => {
+
+    // window.location.hash = selector;
+    // scrolling = false; 
+  }, 1000);
+};
+
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
   const activeListItem = document.querySelector(
     `${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`
   );
   if (!activeListItem) return;
-  activeListItem.scrollIntoView({ behavior: "smooth" });
+  activeListItem.scrollIntoView({behavior: "smooth"});
 };
 
 function slideTo(targetPageY) {

@@ -1,6 +1,7 @@
 ﻿using BlazorComponent.I18n;
 using Microsoft.JSInterop;
 using System.Text;
+using BlazorComponent.Web;
 
 namespace Masa.Docs.Shared.Shared;
 
@@ -14,6 +15,7 @@ public partial class Toc : NextTickComponentBase
     private string? _activeHash;
     private List<MarkdownItTocContent> _toc = new();
     private DotNetObjectReference<Toc>? _objRef;
+    private ElementReference _tocRef;
 
     protected override void OnInitialized()
     {
@@ -30,7 +32,7 @@ public partial class Toc : NextTickComponentBase
             try
             {
                 _objRef = DotNetObjectReference.Create(this);
-                await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
+                NextTick(async () => { await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, _tocRef.GetSelector()); });
             }
             catch
             {
