@@ -1,10 +1,9 @@
 window.registerWindowScrollEvent = function (dotnet, selector) {
   let _timeout;
-  let _scrolling;
   let _offsets = [];
   let _toc = [];
-  let _registered;
-  
+  let _scrollingFromClickEvent;
+
   const toc = document.querySelector(selector);
   toc.addEventListener('click', async (e) => {
     const el = e.target;
@@ -14,27 +13,19 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
 
     el.click();
 
+    _scrollingFromClickEvent = true;
+
     await dotnet.invokeMethodAsync("UpdateHash", el.getAttribute('href'));
   })
 
+  let isEnd
   window.addEventListener("scroll", onScroll);
-
-  // registerClickEvents();
-
-  function registerClickEvents() {
-    if (_registered) return;
-    const elements = document.querySelectorAll(selector);
-    if (elements && elements.length > 0) {
-      _registered = true;
-      for (const e of elements) {
-        e.addEventListener("click", async () => {
-          _scrolling = true;
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          _scrolling = false;
-        });
-      }
-    }
-  }
+  window.addEventListener("scrollend", () => {
+    clearTimeout(isEnd)
+    isEnd = setTimeout(() => {
+      _scrollingFromClickEvent = false;
+    }, 300)
+  })
 
   function setOffsets() {
     const offsets = [];
@@ -91,22 +82,13 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
 
     const hash = _toc[tindex];
 
-    _scrolling = true;
-
     await dotnet.invokeMethodAsync("UpdateHash", hash);
-
-    _scrolling = false;
   }
 
   function onScroll() {
+    if (_scrollingFromClickEvent) return;
+
     clearTimeout(_timeout);
-
-    registerClickEvents();
-
-    // if (_scrolling || scrolling) {
-    if (_scrolling) {
-      return;
-    }
 
     _timeout = setTimeout(findActiveIndex, 17);
   }
@@ -116,55 +98,22 @@ window.backTop = function () {
   slideTo(0);
 };
 
-/*
- * NavigationManager.NavigateTo always scrolls page to the top.
- * The following `window.scrollTo` would be invoked.
- * When NavigationManager.NavigateTo invoked, the x and y is zero.
- */
-let isHash = false;
-// const origScrollTo = window.scrollTo;
-// window.scrollTo = function (x, y) {
-//   if (x === 0 && y === 0) {
-//     // isHash = false;
-//     return;
-//   }
-//   return origScrollTo.apply(this, arguments);
-// };
-
-
 window.routeToNamedElement = function (el, offset, once = false) {
   el.addEventListener('click', (e) => {
     const hash = el.getAttribute('href')
-    console.log('hash', hash)
+
+    history.pushState({}, "", window.location.pathname + hash)
+
+    const namedElement = document.querySelector(hash);
+    const top = namedElement.getBoundingClientRect().top;
+    const offsetPosition = top + window.pageYOffset - offset;
     
-    if (hash !== window.location.hash) {
-
-      var x = window.pageXOffset,
-        y = window.pageYOffset;
-
-      window.addEventListener('scroll', () => {
-        window.scrollTo(x, y)
-      }, {once: true})
-
-
-      window.location.hash = hash;
-    }
-
-    window.requestAnimationFrame(() => {
-      const namedElement = document.querySelector(hash);
-      const top = namedElement.getBoundingClientRect().top;
-      const offsetPosition = top + window.pageYOffset - offset;
-      console.log('top', offsetPosition)
-      window.requestAnimationFrame(() => {
-        window.scrollTo({top: offsetPosition, behavior: "smooth"});
-      })
-    })
-  }, { once })
+    window.scrollTo({top: offsetPosition, behavior: "smooth"});
+  }, {once})
 
 }
 
 window.scrollToElement = function (selector, offset) {
-  console.log('ssssssssss')
   var x = window.pageXOffset,
     y = window.pageYOffset;
 
@@ -184,11 +133,6 @@ window.scrollToElement = function (selector, offset) {
   window.requestAnimationFrame(() => {
     window.scrollTo({top: offsetPosition, behavior: "smooth"});
   })
-  setTimeout(() => {
-
-    // window.location.hash = selector;
-    // scrolling = false; 
-  }, 1000);
 };
 
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
