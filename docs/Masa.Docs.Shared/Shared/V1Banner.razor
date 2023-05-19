@@ -1,0 +1,66 @@
+﻿@inject LocalStorage LocalStorage
+@inject NavigationManager NavigationManager
+
+<ExpandTransition>
+    <MSystemBar If="@_showBanner" App="@_showBanner" Color="#efe7ff" Height="52">
+        <div class="primary--text darken-3 text-start ms-4">
+            <MI18n Key="v1-banner.content">
+                <PlaceholderContent>
+                    @if (context == 0)
+                    {
+                        <strong>1.0.0(RC)</strong>
+                    }
+                </PlaceholderContent>
+            </MI18n>
+        </div>
+
+        <MSpacer />
+
+        <MButton Text
+                 Color="primary"
+                 Class="text-none"
+                 OnClick="OnClose">
+            <MI18n Key="v1-banner.dismiss"></MI18n>
+        </MButton>
+
+        <MButton Text
+                 Color="primary"
+                 Class="text-none"
+                 OnClick="OnOk">
+            <MI18n Key="v1-banner.check-upgrade-guide"></MI18n>
+        </MButton>
+    </MSystemBar>
+</ExpandTransition>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string UpgradeGuidePath { get; set; } = null!;
+
+    private bool _showBanner;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            var banner = await LocalStorage.GetItemAsync("masablazor@banner");
+            _showBanner = string.IsNullOrWhiteSpace(banner);
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnClose()
+    {
+        _showBanner = false;
+        await LocalStorage.SetItemAsync("masablazor@banner", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+    }
+
+    private async Task OnOk()
+    {
+        await OnClose();
+        NavigationManager.NavigateTo(UpgradeGuidePath);
+    }
+
+}

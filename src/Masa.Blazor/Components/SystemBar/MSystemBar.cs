@@ -77,6 +77,7 @@
                 }, styleBuilder =>
                 {
                     styleBuilder
+                        .AddBackgroundColor(Color)
                         .Add($"height:{ComputedHeight.ToUnit()}");
                 });
         }

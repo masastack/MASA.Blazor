@@ -15,6 +15,12 @@
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
             <MErrorHandler>
+                @if (_project is "blazor" or "framework")
+                {
+                    var path = _project == "blazor" ? "/blazor/getting-started/upgrade-guide" : "/framework/upgrade/1.0.0";
+                    <V1Banner UpgradeGuidePath="@path" />
+                }
+
                 <CascadingValue Value="@_env" Name="Env">
                     <AppBar OnCultureChanged="@OnCultureChanged"
                             OnAppBarNavIconClick="HandleOnAppBarNavIconClick"
