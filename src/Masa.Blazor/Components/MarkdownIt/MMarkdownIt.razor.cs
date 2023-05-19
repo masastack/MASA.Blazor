@@ -118,6 +118,9 @@ public partial class MMarkdownIt : BDomComponentBase
     [Parameter]
     public EventCallback<List<MarkdownItTocContent>?> OnTocParsed { get; set; }
 
+    [Parameter]
+    public EventCallback OnAfterRendered { get; set; }
+
     private string _mdHtml = string.Empty;
 
     private string? _prevSource;
@@ -216,7 +219,15 @@ public partial class MMarkdownIt : BDomComponentBase
             }
         }
 
-        NextTick(() => MarkdownItJSModule.AfterRender(_markdownIt));
+        NextTick(async () =>
+        {
+            await MarkdownItJSModule.AfterRender(_markdownIt);
+
+            if (OnAfterRendered.HasDelegate)
+            {
+                await OnAfterRendered.InvokeAsync();
+            }
+        });
 
         StateHasChanged();
     }

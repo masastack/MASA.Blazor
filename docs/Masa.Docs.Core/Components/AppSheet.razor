@@ -1,4 +1,7 @@
-﻿<MSheet Class="overflow-hidden"
+﻿@attribute [JSCustomElement]
+
+<MSheet Class="overflow-hidden"
+        Dark="Dark"
         Outlined="@Outlined"
         Rounded="true"
         @attributes="@Attributes">
@@ -6,6 +9,9 @@
 </MSheet>
 
 @code {
+    
+    [Parameter]
+    public bool Dark { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

@@ -2,6 +2,8 @@
 @inject I18n I18n
 @inject NavigationManager NavigationManager
 @inject DocService DocService
+@inject MasaBlazor MasaBlazor
+@inject LocalStorage LocalStorage
 @implements IDisposable
 
 <HeadContent>
@@ -9,7 +11,7 @@
     <link rel="icon" href="@PageInfo.PageIcon" type="image/x-icon">
 </HeadContent>
 
-<MApp>
+<MApp Class="body-large">
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
             <MErrorHandler>
@@ -68,6 +70,13 @@
 
         if (firstRender)
         {
+            var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
+            var isDark = themeStr == "dark";
+            if (isDark != MasaBlazor.Theme.Dark)
+            {
+                MasaBlazor.ToggleTheme();
+            }
+
             _projectMap = await DocService.ReadProjectMapAsync();
             SetEnv();
             SetProject();

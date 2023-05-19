@@ -62,6 +62,16 @@ public partial class Components
         }
     }
 
+    private string? _tab;
+    private string? _md;
+    private string? _prevPage;
+    private string? _prevCulture;
+    private string? _prevApi;
+    private FrontMatterMeta? _frontMatterMeta;
+    private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
+    private List<MarkdownItTocContent> _documentToc = new();
+    private static int _allComponentsCacheCount;
+
     public List<MarkdownItTocContent> CurrentToc
     {
         get
@@ -77,39 +87,17 @@ public partial class Components
                         Level = 2
                     }).ToList();
                 }
-                else return new();
+
+                return new();
             }
-            else
-            {
-                return _documentToc;
-            }
+
+            return _documentToc;
         }
     }
 
-    public bool IsAllComponentsPage
-    {
-        get
-        {
-            return Page.ToLower() == "all";
-        }
-    }
+    public bool IsAllComponentsPage => Page.ToLower() == "all";
 
-    private List<string> Tags
-    {
-        get
-        {
-            return IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
-        }
-    }
-    private string? _tab;
-    private string? _md;
-    private string? _prevPage;
-    private string? _prevCulture;
-    private string? _prevApi;
-    private FrontMatterMeta? _frontMatterMeta;
-    private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
-    private List<MarkdownItTocContent> _documentToc = new();
-    private static int _allComponentsCacheCount;
+    private List<string> Tags => IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 

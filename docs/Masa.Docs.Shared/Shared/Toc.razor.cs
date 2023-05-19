@@ -103,7 +103,7 @@ public partial class Toc : NextTickComponentBase
         }
         else
         {
-            builder.Append(" subordinary-color");
+            builder.Append(" secondary--text");
         }
 
         return builder.ToString();
