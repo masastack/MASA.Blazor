@@ -27,9 +27,9 @@
                 .Merge(css =>
                 {
                     css.Add(prefix)
-                        .AddTheme(IsDark)
-                        .AddTextColor(ComputedColor)
-                        .AddBackgroundColor(BackgroundColor);
+                       .AddTheme(IsDark)
+                       .AddTextColor(ComputedColor)
+                       .AddBackgroundColor(BackgroundColor);
                 }, style =>
                 {
                     style.AddTextColor(ComputedColor);

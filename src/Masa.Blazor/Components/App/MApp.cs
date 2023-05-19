@@ -36,6 +36,17 @@ namespace Masa.Blazor
             return base.OnInitializedAsync();
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await MasaBlazor!.Breakpoint.InitAsync();
+                await Window!.InitializeAsync();
+                
+                StateHasChanged();
+            }
+        }
+
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
@@ -70,17 +81,6 @@ namespace Masa.Blazor
                 });
 
             Attributes.Add("data-app", true);
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await MasaBlazor!.Breakpoint.InitAsync();
-                await Window!.InitializeAsync();
-
-                StateHasChanged();
-            }
         }
     }
 }

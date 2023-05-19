@@ -3,6 +3,9 @@
 [JSCustomElement(IncludeNamespace = true)]
 public partial class Usage : NextTickComponentBase
 {
+    [Parameter]
+    public bool Dark { get; set; }
+    
     private const string DefaultKey = "default";
 
     private readonly Type _type;

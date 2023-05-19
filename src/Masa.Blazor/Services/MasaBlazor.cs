@@ -51,6 +51,7 @@
         public void ToggleTheme()
         {
             Theme.Dark = !Theme.Dark;
+
             OnThemeChange?.Invoke(Theme);
         }
     }

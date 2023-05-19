@@ -78,6 +78,7 @@
                 .ApplyTabsDefault()
                 .Apply<BSlideGroup, MTabsBar>(attrs =>
                 {
+                    attrs[nameof(MTabsBar.Color)] = Color;
                     attrs[nameof(MTabsBar.ActiveClass)] = ActiveClass;
                     attrs[nameof(MTabsBar.CenterActive)] = CenterActive;
                     attrs[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;

@@ -20,9 +20,13 @@ public partial class Example : NextTickComponentBase
     [Parameter]
     public bool NoActions { get; set; }
 
+    [Parameter]
+    public bool Dark { get; set; }
+
     private readonly List<(string Code, string Language)> _sections = new();
 
     private bool _rendered;
+    private bool _prevDark;
     private bool _dark;
     private bool _expand;
     private bool _showExpands;
@@ -35,6 +39,12 @@ public partial class Example : NextTickComponentBase
         base.OnParametersSet();
 
         ArgumentException.ThrowIfNullOrEmpty(File);
+
+        if (_prevDark != Dark)
+        {
+            _prevDark = Dark;
+            _dark = Dark;
+        }
     }
 
     protected override void OnInitialized()
@@ -61,6 +71,9 @@ public partial class Example : NextTickComponentBase
         {
             NextTick(async () =>
             {
+                _dark = Dark;
+                _prevDark = Dark;
+
                 if (!_rendered)
                 {
                     await Task.Delay(1);

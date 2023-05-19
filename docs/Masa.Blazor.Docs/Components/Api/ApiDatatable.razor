@@ -9,7 +9,7 @@
                 @foreach (var header in Headers)
                 {
                     <th style="@GetHeaderStyle(header)">
-                        <div class="emphasis--text subtitle">@I18n.T(header)</div>
+                        <div class="subtitle">@I18n.T(header)</div>
                     </th>
                 }
             </tr>
@@ -23,7 +23,7 @@
                     <td>
                         @if (header == "name")
                         {
-                            <span class="emphasis2--text subtitle">
+                            <span class="subtitle">
                                 <MBadge Value="@(item.Required)" Color="transparent" Class="text-mono" OffsetY="10">
                                     <BadgeContent>
                                         <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
@@ -36,7 +36,7 @@
                         }
                         else
                         {
-                            <span class="regular--text body">
+                            <span class="body">
                                 @if (header == "type")
                                 {
                                     var noTypeDesc = string.IsNullOrWhiteSpace(item.TypeDesc);

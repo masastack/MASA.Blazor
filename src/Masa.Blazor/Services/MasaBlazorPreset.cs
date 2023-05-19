@@ -29,7 +29,6 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
-        UserDefined = new Dictionary<string, string>()
     };
 
     private static ThemeOptions DarkTheme => new()
@@ -42,6 +41,5 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
-        UserDefined = new Dictionary<string, string>()
     };
 }

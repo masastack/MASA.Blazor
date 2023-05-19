@@ -7,6 +7,7 @@
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
+                   Class="default-nav"
                    Floating
                    Width="300"
                    @bind-Value="_showMobileIndexNavMenuList"
@@ -54,7 +55,7 @@
 </MNavigationDrawer>
 
 <MMain>
-    <MContainer Fluid>
+    <MContainer Fluid Class="px-9">
         <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
             @if (_loading)
             {
@@ -237,7 +238,7 @@
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
     {
-        <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
+        <MButton Text Href="@href" Class="text-none text-truncate" Style="font-size: inherit; font-weight: inherit;">@I18n.T(title)</MButton>
     };
 
     private async Task ScrollIntoView(string elementId)
