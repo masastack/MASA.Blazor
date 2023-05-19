@@ -58,6 +58,8 @@
         var top = window.PageYOffset;
 
         _showBackTop = top > 300;
+
+        await InvokeAsync(StateHasChanged);
     }
 
     private async Task ToTopAsync()

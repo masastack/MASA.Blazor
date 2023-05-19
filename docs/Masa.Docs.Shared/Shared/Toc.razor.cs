@@ -27,15 +27,8 @@ public partial class Toc : NextTickComponentBase
 
         if (firstRender)
         {
-            try
-            {
-                _objRef = DotNetObjectReference.Create(this);
-                await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
-            }
-            catch
-            {
-                // ignored
-            }
+            _objRef = DotNetObjectReference.Create(this);
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
         }
     }
 
@@ -43,21 +36,21 @@ public partial class Toc : NextTickComponentBase
     public void UpdateHash(string hash)
     {
         _activeHash = hash;
-        NavigationManager.ReplaceWithHash(hash);
         StateHasChanged();
     }
 
-    private async Task ScrollIntoView(string elementId)
+    private async Task ScrollIntoView(string hash, bool needsRender = false)
     {
         try
         {
-            _activeHash = $"#{elementId}";
+            _activeHash = hash;
 
-            // TODO: remove the following lines when #40190 of aspnetcore resolved.
-            // TODO: Blazor now does not support automatic scrolling of anchor points.
-            // Check this when .NET 8 released.
-            NavigationManager.ReplaceWithHash($"#{elementId}");
-            _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
+            if (needsRender)
+            {
+                StateHasChanged();
+            }
+
+            _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 12, true);
         }
         catch
         {
@@ -74,13 +67,17 @@ public partial class Toc : NextTickComponentBase
 
         _toc = toc.Where(c => c.Level > 1).ToList();
 
-        InvokeAsync(StateHasChanged);
-
-        var uri = new Uri(NavigationManager.Uri);
-        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        NextTick(async () =>
         {
-            ScrollIntoView(uri.Fragment.Substring(1)).ConfigureAwait(false);
-        }
+            await Task.Delay(300);
+
+            var uri = new Uri(NavigationManager.Uri);
+            if (string.IsNullOrWhiteSpace(uri.Fragment)) return;
+
+            _ = ScrollIntoView(uri.Fragment, true);
+        });
+
+        InvokeAsync(StateHasChanged);
     }
 
     private string GenClass(MarkdownItTocContent tocContent)

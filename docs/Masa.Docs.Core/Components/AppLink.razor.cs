@@ -58,13 +58,8 @@ public partial class AppLink
     {
         if (IsSamePage)
         {
-            // TODO: remove the following lines when #40190 of aspnetcore resolved.
-            // TODO: Blazor now does not support automatic scrolling of anchor points.
-            // Check this when .NET 8 released.
-
-            //NavigationManager.ReplaceWithHash(Href);
             var hash = Href.Replace(".", "-").ToLower();
-            _ = Js.InvokeVoidAsync("scrollToElement", hash.Trim('#'), AppService.AppBarHeight + 12);
+            _ = Js.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 12);
         }
     }
 }

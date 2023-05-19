@@ -2,6 +2,7 @@
 @inject MasaBlazor MasaBlazor
 @inherits NextTickComponentBase
 @implements INavDrawer
+@inject IJSRuntime JSRuntime
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
@@ -22,14 +23,14 @@
 
 @code {
 
-    [Parameter]
-    public bool RTL { get; set; }
-
     [CascadingParameter(Name = "Culture")]
     public string Culture { get; set; } = null!;
 
     [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
+
+    [Parameter]
+    public bool RTL { get; set; }
 
     [Parameter]
     public bool Value { get; set; }
@@ -56,7 +57,15 @@
             }
 
             Navs = await DocService.ReadNavsAsync(Project);
+
+            // delay 500ms in docs.js
+            NextTick(() => ScrollIntoView("#nav-drawer"));
         }
+    }
+
+    private async Task ScrollIntoView(string ancestorSelector)
+    {
+        await JSRuntime.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
     }
 
 }

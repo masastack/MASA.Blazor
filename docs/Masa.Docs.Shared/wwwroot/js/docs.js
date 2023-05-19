@@ -1,39 +1,15 @@
-window.setCookie = function (name, value) {
-  document.cookie = `$ {
-                name
-            } = $ {
-                escape(value.toString())
-            };
-            path = /;}`;
-};
+let scrollingFromClickEvent;
 
-window.getCookie = function (name) {
-  const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-  const arr = document.cookie.match(reg);
-  if (arr) {
-    return unescape(arr[2]);
-  }
-  return null;
-};
+window.scrollToElement = function (hash, offset, preventAutoHighlightToc = false) {
+  scrollingFromClickEvent = preventAutoHighlightToc;
 
-// Because the following window.scrollTo causes the NavigateTo not to
-// scroll to the top of the page, the state of the isHash is required
-let isHash;
+  const el = document.querySelector(hash);
+  if (!el) return;
 
-window.setHash = function () {
-  isHash = true;
-};
-
-let scrolling;
-
-window.scrollToElement = function (hash, offset) {
-  setHash();
-  scrolling = true;
-  const el = document.getElementById(hash);
   const top = el.getBoundingClientRect().top;
   const offsetPosition = top + window.pageYOffset - offset;
-  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-  setTimeout(() => { scrolling = false; }, 1000);
+
+  window.scrollTo({top: offsetPosition, behavior: "smooth"});
 };
 
 /*
@@ -43,15 +19,10 @@ window.scrollToElement = function (hash, offset) {
  */
 const origScrollTo = window.scrollTo;
 window.scrollTo = function (x, y) {
-  if (isHash && x === 0 && y === 0) {
-    isHash = false;
+  if (x === 0 && y === 0) {
     return;
   }
   return origScrollTo.apply(this, arguments);
-};
-
-window.getTimeOffset = function () {
-  return new Date().getTimezoneOffset();
 };
 
 window.registerWindowScrollEvent = function (dotnet, selector) {
@@ -60,24 +31,15 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
   let _offsets = [];
   let _toc = [];
   let _registered;
+  let scrollend;
 
   window.addEventListener("scroll", onScroll);
-  registerClickEvents();
-
-  function registerClickEvents() {
-    if (_registered) return;
-    const elements = document.querySelectorAll(selector);
-    if (elements && elements.length > 0) {
-      _registered = true;
-      for (const e of elements) {
-        e.addEventListener("click", async () => {
-          _scrolling = true;
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          _scrolling = false;
-        });
-      }
-    }
-  }
+  window.addEventListener("scrollend", () => {
+    clearTimeout(scrollend)
+    setTimeout(() => {
+      scrollingFromClickEvent = false;
+    }, 100)
+  })
 
   function setOffsets() {
     const offsets = [];
@@ -91,7 +53,7 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
     }
 
     _toc = Array.from(document.querySelectorAll(queryFilter)).map(
-      ({ attributes }) => {
+      ({attributes}) => {
         let href = attributes.getNamedItem("href").value;
         const index = href.indexOf("#");
         return href.slice(index);
@@ -113,7 +75,7 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
     if (currentOffset === 0) {
-      setHash();
+      updateHash("")
       await dotnet.invokeMethodAsync("UpdateHash", "");
       return;
     }
@@ -133,59 +95,41 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
       tindex = _toc.length - 1;
     }
 
-    const hash = _toc[tindex];
+    const hash = _toc[tindex] ?? "";
 
-    _scrolling = true;
-
-    setHash();
-    await dotnet.invokeMethodAsync("UpdateHash", hash);
-
-    _scrolling = false;
+    updateHash(hash)
+    if (hash) {
+      await dotnet.invokeMethodAsync("UpdateHash", hash);
+    }
   }
 
   function onScroll() {
+    if (scrollingFromClickEvent) return
+
     clearTimeout(_timeout);
 
-    registerClickEvents();
-
-    if (_scrolling || scrolling) {
-      return;
-    }
-
     _timeout = setTimeout(findActiveIndex, 17);
+  }
+
+  function updateHash(h) {
+    history.replaceState({}, "", window.location.pathname + h)
   }
 };
 
 window.backTop = function () {
-  slideTo(0);
+  window.scrollTo({top: 0, behavior: "smooth"})
 };
 
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
-  const activeListItem = document.querySelector(
-    `${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`
-  );
-  if (!activeListItem) return;
-  activeListItem.scrollIntoView({ behavior: "smooth" });
-};
+  setTimeout(() => {
+    const activeListItem = document.querySelector(
+      `${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`
+    );
 
-function slideTo(targetPageY) {
-  var timer = setInterval(function () {
-    var currentY =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    var distance =
-      targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
-    var speed = Math.ceil(distance / 10);
-    if (currentY == targetPageY || currentY == 1) {
-      document.documentElement.scrollTop = 0;
-      clearInterval(timer);
-    } else {
-      window.scrollTo(
-        0,
-        targetPageY > currentY ? currentY + speed : currentY - speed
-      );
-    }
-  }, 10);
-}
+    if (!activeListItem) return;
+    activeListItem.scrollIntoView({behavior: "smooth"});
+  }, 500)
+};
 
 window.addDocSearch = function (index, currentLanguage, placeholder) {
   let cnTranslation = {
@@ -237,7 +181,7 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
     appId: "TSB4MACWRC",
     indexName: "blazor-masastack_" + index,
     apiKey: "d1fa64adb784057c097feb592d4497d0",
-    hitComponent: ({ hit, children }) => {
+    hitComponent: ({hit, children}) => {
       return {
         type: "a",
         ref: undefined,
@@ -254,10 +198,10 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
             if (document.location.pathname === hitUrl.pathname) {
               if (hitUrl.hash) {
                 window.requestAnimationFrame(() =>
-                  window.scrollToElement(hitUrl.hash.substring(1), 108)
+                  window.scrollToElement(hitUrl.hash, 108)
                 );
               } else {
-                window.backTop();
+                window.scrollTo({top: 0, behavior: "smooth"})
               }
             }
           },
@@ -271,7 +215,7 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
       facetFilters: ["lang:" + currentLanguage],
     },
   };
-  if (currentLanguage == "zh") {
+  if (currentLanguage === "zh") {
     option.translations = cnTranslation;
   }
   docsearch(option);
