@@ -14,8 +14,8 @@
     <ChildContent>
         <MListItem>
             <MListItemContent>
-                <MSelect Items="_versions"
-                         @bind-Value="@selectVersion"
+                <MSelect Items="s_versions"
+                         @bind-Value="@_selectVersion"
                          Class="light-border"
                          ItemText="u => u"
                          ItemValue="u => u"
@@ -29,7 +29,11 @@
 
         <MList Class="doc-list-nav">
             <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
-                <MListItem Value="@("#getting-started")" Class="doc-list-nav--item-hash" OnClick='() => ScrollIntoView("getting-started")' Href="@("#getting-started")">
+                <MListItem Value="@("#getting-started")"
+                           Class="doc-list-nav--item-hash"
+                           Href="@("#getting-started")"
+                           OnClick='() => ScrollIntoView("#getting-started")'
+                           OnClickPreventDefault>
                     <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
                         <MIcon Color="#FFB547" Size="30" Class="mr-2">fa:fas fa-rocket</MIcon>
                     </MListItemIcon>
@@ -39,7 +43,13 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem Value="@($"#{project}")" Class="doc-list-nav--item-hash" OnClick="(() => ScrollIntoView(project))" Href="@($"#{project}")">
+                    var hash = $"#{project}";
+
+                    <MListItem Value="hash"
+                               Class="doc-list-nav--item-hash"
+                               Href="@hash"
+                               OnClick="() => ScrollIntoView(hash)"
+                               OnClickPreventDefault>
                         <MListItemAvatar Tile>
                             @Image(project, _activeHash)
                         </MListItemAvatar>
@@ -135,12 +145,12 @@
         ("kubernetes-deploy", "/stack/operations/kubernetes/kubernetes-deploy")
     };
 
-    private List<string> _versions = new List<string>
+    private static readonly List<string> s_versions = new()
     {
         "1.0",
     };
 
-    private string selectVersion = "1.0";
+    private string _selectVersion = "1.0";
 
     private bool _showMobileIndexNavMenuList;
 
@@ -185,10 +195,6 @@
 
         if (firstRender)
         {
-            _loading = true;
-
-            StateHasChanged();
-
             var projectMap = await DocService.ReadProjectMapAsync();
 
             foreach (var key in projectMap.Keys)
@@ -200,15 +206,17 @@
 
             StateHasChanged();
 
-            try
+            _objRef = DotNetObjectReference.Create(this);
+            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
+
+            var uri = NavigationManager.ToUri();
+            if (!string.IsNullOrWhiteSpace(uri.Fragment))
             {
-                _objRef = DotNetObjectReference.Create(this);
-                await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
-                await LocationHashPositionAsync(NavigationManager.Uri);
-            }
-            catch
-            {
-                // ignored
+                NextTick(async () =>
+                {
+                    await Task.Delay(300);
+                    ScrollIntoView(uri.Fragment);
+                });
             }
 
             BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
@@ -240,34 +248,21 @@
         <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
     };
 
-    private async Task ScrollIntoView(string elementId)
+    private void ScrollIntoView(string hash, bool needsRender = false)
     {
-        _activeHash = $"#{elementId}";
-        // TODO: remove the following lines when #40190 of aspnetcore resolved.
-        // TODO: Blazor now does not support automatic scrolling of anchor points.
-        // Check this when .NET 8 released.
-
-        NavigationManager.ReplaceWithHash($"#{elementId}");
-        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
-    }
-
-    private async Task LocationHashPositionAsync(string url)
-    {
-        var uri = new Uri(url);
-        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        _activeHash = hash;
+        if (needsRender)
         {
-            await Retry(async () =>
-            {
-                await ScrollIntoView(uri.Fragment.Substring(1));
-            }, () => true, delay: 500);
+            StateHasChanged();
         }
+
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 48, true);
     }
 
     [JSInvokable]
     public void UpdateHash(string hash)
     {
         _activeHash = hash;
-        NavigationManager.ReplaceWithHash(hash);
         StateHasChanged();
     }
 
