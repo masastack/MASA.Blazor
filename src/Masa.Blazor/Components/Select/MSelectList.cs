@@ -46,13 +46,9 @@ namespace Masa.Blazor
                         attrs["aria-selected"] = value.ToString();
                         //TODO: id
                         attrs["role"] = "option";
-                        attrs[nameof(MListItem.Value)] = (StringNumber)value.ToString();
                         attrs[nameof(MListItem.ActiveClass)] = TileActiveClass;
                         attrs[nameof(MListItem.Ripple)] = true;
-                        attrs[nameof(MListItem.IsActive)] = value;//TODO: remove this when MListItem been refactored
-
-                        var items = HideSelected ? Items.Where(i => !SelectedItems.Contains(i)).ToList() : Items;
-                        attrs[nameof(MListItem.Highlighted)] = items.IndexOf(item) == SelectedIndex;//TODO: remove this when MListItem been refactored
+                        attrs[nameof(MListItem.IsActive)] = value;
                     }
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>

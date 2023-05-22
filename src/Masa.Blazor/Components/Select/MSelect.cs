@@ -421,7 +421,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .Apply("selections", cssBuilder =>
             {
                 cssBuilder
-                    .Add("m-select__selections");
+                    .Add("m-select__selections")
+                    .AddTextColor(TextColor);
+            }, styleBuilder =>
+            {
+                styleBuilder.AddTextColor(TextColor);
             })
             .Apply("selection-comma", cssBuilder =>
             {
