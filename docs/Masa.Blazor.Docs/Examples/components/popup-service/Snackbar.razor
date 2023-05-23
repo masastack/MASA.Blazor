@@ -41,6 +41,8 @@
         {
             await Task.Delay(1000);
             _color = null;
+
+            StateHasChanged();
         }));
     }
 
