@@ -26,3 +26,9 @@
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.loading-dialog{
+    overflow: hidden;
+    box-shadow: none;
+    width: fit-content;
+}

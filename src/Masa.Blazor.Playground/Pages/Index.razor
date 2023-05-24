@@ -1,3 +1,17 @@
 ﻿@page "/"
+@inject IPopupService PopupService
 
-<h1>Test your code here!</h1>
+<MButton OnClick="OnClick">
+    Open
+</MButton>
+
+@code {
+
+    private async Task OnClick()
+    {
+        PopupService.Open(typeof(Loading));
+        await Task.Delay(1000);
+        PopupService.Close(typeof(Loading));
+    }
+
+}

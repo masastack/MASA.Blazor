@@ -6,6 +6,10 @@ public interface IPopupService
 {
     Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters);
 
+    void Open(Type componentType);
+
+    void Close(Type componentType);
+
     #region Confirm
 
     Task<bool> ConfirmAsync(string title, string content);

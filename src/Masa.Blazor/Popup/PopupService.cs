@@ -13,9 +13,27 @@ public partial class PopupService : IPopupService
         _ = OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object?>());
     }
 
+    public void Open(Type componentType)
+    {
+        OpenCompoent(componentType);
+    }
+
     public Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters)
     {
-        var item = _popupProvider.Add(componentType, parameters, this, nameof(PopupService));
-        return item.TaskCompletionSource.Task;
+        return OpenCompoent(componentType, parameters).TaskCompletionSource.Task;
+    }
+
+    public void Close(Type componentType)
+    {
+        var item = _popupProvider.GetItems().FirstOrDefault(u => u.ComponentType == componentType);
+        if (item is not null)
+        {
+            _popupProvider.Remove(item);
+        }
+    }
+
+    private ProviderItem OpenCompoent(Type componentType, IDictionary<string, object?>? parameters = null)
+    {
+        return _popupProvider.Add(componentType, parameters, this, nameof(PopupService));
     }
 }
