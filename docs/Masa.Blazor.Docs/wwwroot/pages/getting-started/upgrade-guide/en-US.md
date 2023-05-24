@@ -33,14 +33,14 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   - Align = "start"
   + Align = DataTableHeaderAlign.Start
   ```
-- The **PConfirm** has been removed now, use `IPopupService.ConfirmAsync` instead.
 - **MHover** removes the `Class` and `Style` properties of `Context`.
 - **MErrorHandler** removes the `ShowAlert` parameter, uses `PopupType` instead. And removes the `OnErrorHandleAsync` parameter, use `OnHandle` instead. `OnHandle` would overrides the default error handler. Use `OnAfterHandle` if you only want to do something else after handling an error.
   ```diff
   - <MErrorHandler ShowAlert="false"></MErrorHandler>
   + <MErrorHandler PopupType="ErrorPopupType.None" OnHandle="" OnAfterHandle=""></MErrorHandler>
   ```
-- Removed the **PToasts** component, and use the **PEnqueuedSnackbars** component instead.
+- The **PConfirm** has been removed now, use the `IPopupService` service's `ConfirmAsync` method instead.
+- The **PToasts** component has been removed now, use the **PEnqueuedSnackbars** component or `IPopupService` service's `EnqueueSnackbarAsync` method instead.
 - **PopupService** removes `AlertAsync` 和 `ToastAsync`, and use `EnqueueSnackbarAsync` instead.
   ```diff
   - PopupService.AlertAsync()
@@ -75,6 +75,11 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
   +        args.Status = items.Count > 0 ? InfiniteScrollStatus.HasMore : InfiniteScrollStatus.NoMore;
   +    }
   }
+  ```
+- **MButton**: the parameter `StopPropgation` are renamed.
+  ```diff
+  - <MButton StopPropagation></MButton>
+  + <MButton OnClickStopPropagation></MButton>
   ```
 
 ## Upgrading from v0.5.x to v0.6.x
