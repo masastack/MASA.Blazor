@@ -24,8 +24,8 @@
                     ScrollOffset = 0;
                 }
 
-                _ = OnResize();
-            });
+                NextTick(OnResize);
+            }, immediate: true);
         }
 
         protected override void SetComponentClass()
