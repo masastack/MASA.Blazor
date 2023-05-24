@@ -64,7 +64,7 @@ Configure [Options](https://ld246.com/article/1549638745630#options) attribute t
 
 #### Upload
 
-Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
+Configure [Options](https://ld246.com/article/1549638745630#options-upload) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
 
 <masa-example file="Examples.components.markdowns.Upload"></masa-example>
 
