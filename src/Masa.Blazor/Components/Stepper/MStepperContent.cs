@@ -1,86 +1,179 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.Web;
+
+namespace Masa.Blazor;
+
+public partial class MStepperContent : BStepperContent
 {
-    public partial class MStepperContent : BStepperContent, IAsyncDisposable
+    [Inject]
+    public MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [CascadingParameter]
+    public MStepper? Stepper { get; set; }
+
+    [Parameter]
+    public int Step { get; set; }
+
+    private bool _firstRender = true;
+    private StringNumber _height = 0;
+
+    protected override bool IsVertical => Stepper?.Vertical is true;
+
+    protected override bool IsRtl => MasaBlazor.RTL;
+
+    protected override void OnInitialized()
     {
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        base.OnInitialized();
 
-        [CascadingParameter]
-        public MStepper? Stepper { get; set; }
+        Stepper?.RegisterContent(this);
+    }
 
-        [Parameter]
-        public int Step { get; set; }
+    protected override void RegisterWatchers(PropertyWatcher watcher)
+    {
+        base.RegisterWatchers(watcher);
 
-        private bool _firstRender = true;
+        watcher.Watch<bool?>(nameof(NullableIsActive), IsActiveChangeCallback, immediate: true);
+    }
 
-        protected StringNumber Height { get; set; } = "auto";
-
-        protected override bool IsVertical => Stepper?.Vertical is true;
-
-        protected override bool IsRtl => MasaBlazor.RTL;
-
-        protected override void SetComponentClass()
+    private async void IsActiveChangeCallback(bool? current, bool? previous)
+    {
+        // If active and the previous state
+        // was null, is just booting up
+        if (current is true && previous == null)
         {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-stepper__content");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("transform-origin: center top 0px")
-                        .AddIf("display:none", () => IsVertical && !IsActive && _firstRender);
-                })
-                .Apply("wrapper", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-stepper__wrapper")
-                        .AddIf("active", () => IsActive);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf($"height:{Height.ToUnit()}", () => Height != null && Stepper?.Vertical is true);
-                });
+            _height = "auto";
+            await InvokeStateHasChangedAsync();
+            return;
         }
 
-        protected override void OnInitialized()
+        if (!IsVertical)
         {
-            base.OnInitialized();
-            Stepper?.RegisterContent(this);
+            return;
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        if (IsActive)
         {
-            if (firstRender)
+            await Enter();
+        }
+        else
+        {
+            await Leave();
+        }
+    }
+
+    protected override void SetComponentClass()
+    {
+        CssProvider
+            .Apply(cssBuilder =>
             {
-                _firstRender = false;
+                cssBuilder
+                    .Add("m-stepper__content");
+            }, styleBuilder =>
+            {
+                styleBuilder
+                    .Add("transform-origin: center top 0px")
+                    .AddIf("display:none", () => IsVertical && !IsActive && _firstRender);
+            })
+            .Apply("wrapper", cssBuilder =>
+            {
+                cssBuilder
+                    .Add("m-stepper__wrapper")
+                    .AddIf("active", () => IsActive);
+            }, styleBuilder =>
+            {
+                styleBuilder
+                    .AddIf($"height:{_height.ToUnit()}", () => _height != null && Stepper?.Vertical is true);
+            });
+    }
 
-                if (Stepper?.Vertical is true)
-                {
-                    await JsInvokeAsync(JsInteropConstants.InitStepperWrapper, Ref);
-                }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
 
-                await JsInvokeAsync(JsInteropConstants.AddStepperEventListener, Ref, IsActive);
+        if (firstRender)
+        {
+            _firstRender = false;
+
+            if (Ref.TryGetSelector(out var selector))
+            {
+                _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
             }
         }
+    }
 
-        public void Toggle(int step, bool reverse)
+    private async Task OnTransition(StepperTransitionEventArgs e)
+    {
+        if (!IsActive || e.PropertyName != "height")
         {
-            IsActive = Step == step;
-            IsReverse = reverse;
+            return;
+        }
 
+        _height = "auto";
+        await InvokeStateHasChangedAsync();
+    }
+
+    private async Task Enter()
+    {
+        var scrollHeight = await GetProp<double>("scrollHeight");
+
+        _height = 0;
+
+        StateHasChanged();
+
+        // Give the collapsing element time to collapse
+        await Task.Delay(450);
+
+        if (IsActive)
+        {
+            _height = scrollHeight == 0 ? "auto" : scrollHeight;
             StateHasChanged();
         }
+    }
 
-        public async ValueTask DisposeAsync()
+    private async Task Leave()
+    {
+        _height = await GetProp<double>("clientHeight");
+        StateHasChanged();
+
+        await Task.Delay(10);
+
+        _height = 0;
+        StateHasChanged();
+    }
+
+    public void Toggle(int step, bool reverse)
+    {
+        NullableIsActive = Step == step;
+        IsReverse = reverse;
+
+        StateHasChanged();
+    }
+
+    private async Task<T> GetProp<T>(string identifier)
+    {
+        return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, Ref, identifier);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        Stepper?.UnRegisterContent(this);
+
+        if (Ref.TryGetSelector(out var selector))
         {
-            Stepper?.UnRegisterContent(this);
-
-            if (Ref.Context is not null)
+            try
             {
-                await JsInvokeAsync(JsInteropConstants.RemoveStepperEventListener, Ref, IsActive);
+                _ =  Js.RemoveHtmlElementEventListener(selector, "transitionend");
+            }
+            catch
+            {
+                // ignored
             }
         }
+    }
+
+    private class StepperTransitionEventArgs
+    {
+        public string PropertyName { get; set; } = null!;
     }
 }
