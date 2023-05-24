@@ -8,7 +8,7 @@
     <div>
         <MAutocomplete @bind-Value="_search"
                        Items="@ComputedReleases"
-                       BackgroundColor="grey lighten-3"
+                       Dark
                        TItem="Release"
                        TItemValue="int"
                        TValue="int?"
@@ -33,7 +33,7 @@
             </ItemContent>
         </MAutocomplete>
 
-        <MCard MinHeight="180" Outlined Loading="@_loading">
+        <MCard Dark="Dark" MinHeight="180" Outlined Loading="@_loading">
             @if (_selected is not null)
             {
                 <div class="d-flex">
@@ -90,6 +90,9 @@ else
 
     [Parameter]
     public bool IncludePrerelease { get; set; }
+
+    [Parameter]
+    public bool Dark { get; set; }
 
     private bool _loading = true;
     private int? _search;

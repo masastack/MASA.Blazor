@@ -45,6 +45,11 @@
     "service": "服务",
     "js-proxy": "JS代理"
   },
+  "v1-banner": {
+    "content": "您正在查看{0}的文档。如果您正在使用旧的版本，建议升级。",
+    "dismiss": "忽略",
+    "check-upgrade-guide": "查看升级指南"
+  },
   "home": "首页",
   "docs": "文档中心",
   "sponsors": "赞助商",

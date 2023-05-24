@@ -7,9 +7,14 @@ namespace Masa.Docs.Shared.Shared;
 public partial class Toc : NextTickComponentBase
 {
     [Inject] private AppService AppService { get; set; } = null!;
+
     [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+
     [Inject] private I18n I18n { get; set; } = null!;
+
+    [CascadingParameter(Name = "Culture")] private string? Culture { get; set; }
 
     private string? _activeHash;
     private List<MarkdownItTocContent> _toc = new();

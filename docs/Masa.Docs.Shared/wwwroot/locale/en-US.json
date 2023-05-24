@@ -47,7 +47,11 @@
     "service": "Service",
     "js-proxy": "JS proxy"
   },
-
+  "v1-banner": {
+    "content": "Your are viewing the documentation for {0}. It is recommended to upgrade if you are using an older version!",
+    "dismiss": "Dismiss",
+    "check-upgrade-guide": "Check the upgrade guide"
+  },
   "home": "Home",
   "docs": "Documents",
   "sponsors": "SPONSORS",
