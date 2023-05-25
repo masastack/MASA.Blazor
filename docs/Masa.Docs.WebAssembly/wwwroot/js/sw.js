@@ -15,7 +15,6 @@ window.swSkipWaiting = function () {
 
 window.swIgnoreUpdate = function () {
     const pwaSnackbar = document.querySelector(".m-snackbar--pwa > .m-snack__wrapper");
-    console.log("ignore", pwaSnackbar, pwaSnackbar.style)
     pwaSnackbar.style.display = "none";
 }
 
