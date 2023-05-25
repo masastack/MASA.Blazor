@@ -1,6 +1,6 @@
 ---
 title: Popup service
-desc: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm** and **Prompt**."
+desc: "Provides pop-up components such as global service invocation **Snackbar**, **Confirm**, **Prompt**, **ProgressCircular** and **ProgressLinear**."
 tag: Service
 related:
   - /blazor/components/dialogs
@@ -8,15 +8,13 @@ related:
   - /blazor/components/enqueued-snackbars
 ---
 
-## Examples
+## Components
 
-### Props
-
-#### Snackbar
+### Snackbar
 
 <masa-example file="Examples.components.popup_service.Snackbar"></masa-example>
 
-<app-alert content="To customize the configuration of the enqueued snackbar, specify it in the **Program.cs**. It has the same configuration items as [PEnqueuedSnackbars](/blazor/components/enqueued-snackbars)."></app-alert>
+> To customize the configuration of the enqueued snackbar, specify it in the **Program.cs**. It has the same configuration items as [PEnqueuedSnackbars](/blazor/components/enqueued-snackbars).
 
 ```cs
 services.AddMasaBlazor(options => 
@@ -34,11 +32,11 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-#### Confirm
+### Confirm
 
 <masa-example file="Examples.components.popup_service.Confirm"></masa-example>
 
-<app-alert content="To customize the configuration of the confirm, specify it in the **Program.cs**."></app-alert>
+> To customize the configuration of the confirm, specify it in the **Program.cs**.
 
 ```cs
 services.AddMasaBlazor(options => 
@@ -62,11 +60,11 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-#### Prompt
+### Prompt
 
 <masa-example file="Examples.components.popup_service.Prompt"></masa-example>
 
-<app-alert content="To customize the configuration of the prompt, specify it in the **Program.cs**."></app-alert>
+> To customize the configuration of the prompt, specify it in the **Program.cs**.
 
 ```cs
 services.AddMasaBlazor(options => 
@@ -86,6 +84,66 @@ services.AddMasaBlazor(options =>
                 { nameof(PromptOptions.CancelProps), (Action<ModalButtonProps>)(u => u.Class = "text-capitalize") },
             }
         }
+    };
+})
+```
+
+### Progress
+
+<masa-example file="Examples.components.popup_service.Progress"></masa-example>
+
+If you want to customize the method name, you can use the extension method:
+
+```cs
+public static class PopupServiceExtensions
+{
+    public static void StartLoading(this IPopupService service)
+    {
+        service.ShowProgressCircular();
+    }
+    
+    public static void StopLoading(this IPopupService service)
+    {
+        service.HideProgressCircular();
+    }
+}
+```
+
+Then you can use it like this:
+
+```razor
+@inject IPopupService PopupService
+
+@code
+{
+    public async Task FetchData()
+    {
+        await PopupService.StartLoading();
+        await HttpClient.GetAsync();
+        await PopupService.StopLoading();
+    }
+}
+```
+
+> To customize the configuration of the progress, specify it in the **Program.cs**.
+
+```cs
+services.AddMasaBlazor(options => 
+{
+    options.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
+    {
+        {
+            PopupComponents.CIRCULAR_PROGRESS, new Dictionary<string, object?>()
+            {
+                { nameof(ProgressCircularOptions.Color), "pink" },
+            }
+        },
+        {
+            PopupComponents.LINEAR_PROGRESS, new Dictionary<string, object?>()
+            {
+                { nameof(ProgressLinearOptions.Color), "pink" },
+            }
+        },
     };
 })
 ```

@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Presets;
-
-namespace Masa.Blazor.Popup;
+﻿namespace Masa.Blazor.Popup;
 
 public class ConfirmOptions
 {

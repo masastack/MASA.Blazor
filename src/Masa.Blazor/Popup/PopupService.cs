@@ -2,9 +2,11 @@
 
 namespace Masa.Blazor;
 
-public partial class PopupService : IPopupService
+public class PopupService : IPopupService
 {
     private readonly IPopupProvider _popupProvider;
+
+    public event Func<SnackbarOptions, Task>? SnackbarOpen;
 
     public PopupService(IPopupProvider popupProvider)
     {
@@ -13,26 +15,33 @@ public partial class PopupService : IPopupService
         _ = OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object?>());
     }
 
-    public void Open(Type componentType)
+    public void Open(Type componentType, IDictionary<string, object?>? parameters = null)
     {
-        OpenCompoent(componentType);
+        OpenComponent(componentType, parameters);
     }
 
     public Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters)
     {
-        return OpenCompoent(componentType, parameters).TaskCompletionSource.Task;
+        return OpenComponent(componentType, parameters).TaskCompletionSource.Task;
     }
 
     public void Close(Type componentType)
     {
-        var item = _popupProvider.GetItems().FirstOrDefault(u => u.ComponentType == componentType);
+        var item = _popupProvider.GetItems().LastOrDefault(u => u.ComponentType == componentType);
         if (item is not null)
         {
             _popupProvider.Remove(item);
         }
     }
 
-    private ProviderItem OpenCompoent(Type componentType, IDictionary<string, object?>? parameters = null)
+    public async Task EnqueueSnackbarAsync(SnackbarOptions options)
+    {
+        if (SnackbarOpen is null) return;
+
+        await SnackbarOpen.Invoke(options);
+    }
+
+    private ProviderItem OpenComponent(Type componentType, IDictionary<string, object?>? parameters)
     {
         return _popupProvider.Add(componentType, parameters, this, nameof(PopupService));
     }
