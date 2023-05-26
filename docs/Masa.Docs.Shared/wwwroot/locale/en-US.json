@@ -1,6 +1,7 @@
 {
   "introduction": "Introduction",
   "why-masa-blazor": "Why MASA Blazor",
+  "masa-stack-install": "MASA Stack Install",
   "roadmap": "Roadmap",
   "getting-started": "Getting started",
   "installation": "Installation",
@@ -268,7 +269,7 @@
   "tsc": "TSC",
   "log": "Log",
   "metric": "Metric",
-  "stack": "MASA Stack 1.0",
+  "masa-stack-1.0": "MASA Stack 1.0",
   "use-guide": "Use Guide",
   "develop-guide": "Develop Guide",
   "permission": "Permission",
@@ -435,6 +436,8 @@
     "refresh": "Refresh"
   },
   "instructions": "Instructions",
+  "helm": "Helm",
+  "docker-compose": "Docker Compose",
   "rolepermision": "Role Permission",
   "configureoauth": "Configure OAuth",
   "api": "API",
