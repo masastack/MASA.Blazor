@@ -79,7 +79,10 @@ namespace Masa.Blazor
         private double _value;
         private double _hoverIndex = -1;
 
-        protected bool IsHovering => Hover && _hoverIndex >= 0;
+        private CancellationTokenSource? _cancellationTokenSource;
+        private Dictionary<int, ForwardRef> _iconForwardRefs = new();
+
+        public bool IsHovering => Hover && _hoverIndex >= 0;
 
         private enum MouseType
         {
@@ -120,6 +123,7 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Color)] = GetColor(ratingItem);
                     attrs[nameof(MIcon.Tag)] = "button";
                     attrs["ripple"] = true;
+
                     if (IconLabel != null)
                     {
                         attrs["aria-label"] = string.Format(IconLabel, itemIndex, Length);
@@ -130,14 +134,30 @@ namespace Masa.Blazor
                         attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
                     }
 
-                    attrs["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
-                        async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
-                    attrs["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
-                        async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
-                    attrs["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
-                        async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseMove));
-                    attrs["return-target"] = true;
+                    _iconForwardRefs.TryAdd(itemIndex, new ForwardRef());
+                    attrs[nameof(MIcon.RefBack)] = _iconForwardRefs[itemIndex];
                 });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                foreach (var (k, v) in _iconForwardRefs)
+                {
+                    if (v.Current.TryGetSelector(out var selector))
+                    {
+                        _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseenter",
+                            e => HandleOnExMouseEventAsync(e, k, MouseType.MouseEnter), false);
+                        _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseleave",
+                            e => HandleOnExMouseEventAsync(e, k, MouseType.MouseLeave), false);
+                        _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mousemove",
+                            e => HandleOnExMouseEventAsync(e, k, MouseType.MouseMove), false, new EventListenerExtras(0, 16));
+                    }
+                }
+            }
         }
 
         public RatingItem CreateProps(int i)
@@ -187,7 +207,9 @@ namespace Masa.Blazor
         private async Task CreateClickFn(int i, ExMouseEventArgs args)
         {
             if (Readonly)
+            {
                 return;
+            }
 
             var newValue = await GenHoverIndex(i, args);
             Value = Clearable && Value == newValue ? 0 : newValue;
@@ -207,12 +229,11 @@ namespace Masa.Blazor
             if (HalfIncrements && args.Target != null)
             {
                 var target = Document.GetElementByReference(args.Target.ElementReference);
-                if (target != null)
-                {
-                    var rect = await target.GetBoundingClientRectAsync();
-                    if (rect != null && (args.PageX - rect.Left) < rect.Width / 2)
-                        return true;
-                }
+                if (target == null) return false;
+
+                var rect = await target.GetBoundingClientRectAsync();
+                if (rect != null && (args.PageX - rect.Left) < rect.Width / 2)
+                    return true;
             }
 
             return false;
@@ -220,29 +241,39 @@ namespace Masa.Blazor
 
         private async Task HandleOnExMouseEventAsync(ExMouseEventArgs args, int index, MouseType type)
         {
-            if (_running)
-                return;
-
-            _running = true;
-            if (Hover)
+            if (!Hover)
             {
-                switch (type)
-                {
-                    case MouseType.MouseEnter:
-                        _hoverIndex = await GenHoverIndex(index, args);
-                        break;
-                    case MouseType.MouseLeave:
-                        _hoverIndex = -1;
-                        break;
-                    case MouseType.MouseMove:
-                        if (HalfIncrements)
-                            _hoverIndex = await GenHoverIndex(index, args);
-                        break;
-                }
+                return;
             }
 
-            await Task.Delay(10);
-            _running = false;
+            if (type is MouseType.MouseEnter or MouseType.MouseLeave)
+            {
+                _cancellationTokenSource?.Cancel();
+                _cancellationTokenSource = new CancellationTokenSource();
+                await Task.Delay(16, _cancellationTokenSource.Token);
+            }
+
+            var prevHoverIndex = _hoverIndex;
+            Console.Out.WriteLine("type = {0}", type);
+
+            switch (type)
+            {
+                case MouseType.MouseEnter:
+                    _hoverIndex = await GenHoverIndex(index, args);
+                    break;
+                case MouseType.MouseLeave:
+                    _hoverIndex = -1;
+                    break;
+                case MouseType.MouseMove:
+                    if (HalfIncrements)
+                        _hoverIndex = await GenHoverIndex(index, args);
+                    break;
+            }
+
+            if (_hoverIndex != prevHoverIndex)
+            {
+                StateHasChanged();
+            }
         }
     }
 }
