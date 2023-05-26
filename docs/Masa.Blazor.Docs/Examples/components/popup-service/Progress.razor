@@ -1,0 +1,25 @@
+﻿@inject IPopupService PopupService
+
+<MButton Class="text-capitalize" OnClick="MockRequestWithCircle">Mock a request with ProgressCircular</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton Class="text-capitalize" OnClick="MockRequestWithLinear">Mock a request with ProgressLinear</MButton>
+
+@code {
+
+    private async Task MockRequestWithCircle()
+    {
+        PopupService.ShowProgressCircular();
+        await Task.Delay(2000);
+        PopupService.HideProgressCircular();
+    }
+
+    private async Task MockRequestWithLinear()
+    {
+        PopupService.ShowProgressLinear();
+        await Task.Delay(2000);
+        PopupService.HideProgressLinear();
+    }
+
+}

@@ -15,8 +15,12 @@ public class PopupComponentBase : BComponentBase
     {
         base.OnInitialized();
 
-        NextTick(() =>
+        NextTick(async () =>
         {
+            // ensure the transition animation could be invoked
+            // TODO: do not work in Confirm and Prompt, come back after the Transition component is refactored.
+            await Task.Delay(16);
+
             Visible = true;
             StateHasChanged();
         });

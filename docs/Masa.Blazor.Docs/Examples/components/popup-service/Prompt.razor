@@ -1,15 +1,15 @@
 ﻿@inject IPopupService PopupService
 
-<MButton OnClick="ShowBasic">Basic Prompt</MButton>
+<MButton Class="text-capitalize" OnClick="ShowBasic">Basic Prompt</MButton>
 
 <MDivider Class="my-4" />
 
 <MCheckbox @bind-Value="throwException" Label="Throw exception"></MCheckbox>
-<MButton OnClick="ShowAsync">Async Prompt</MButton>
+<MButton Class="text-capitalize" OnClick="ShowAsync">Async Prompt</MButton>
 
 <MDivider Class="my-4" />
 
-<MButton OnClick="ShowCustom">Custom Prompt</MButton>
+<MButton Class="text-capitalize" OnClick="ShowCustom">Custom Prompt</MButton>
 
 @code {
 

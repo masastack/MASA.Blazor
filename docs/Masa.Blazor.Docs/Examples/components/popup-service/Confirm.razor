@@ -1,6 +1,6 @@
 ﻿@inject IPopupService PopupService
 
-<MButton OnClick="ShowBasic">Basic Confirm</MButton>
+<MButton Class="text-capitalize" OnClick="ShowBasic">Basic Confirm</MButton>
 
 <MDivider Class="my-4" />
 
@@ -11,16 +11,16 @@
     <MRadio Value="AlertTypes.Info" Label="@nameof(AlertTypes.Info)"></MRadio>
 </MRadioGroup>
 
-<MButton OnClick="ShowTyped">Typed Confirm</MButton>
+<MButton Class="text-capitalize" OnClick="ShowTyped">Typed Confirm</MButton>
 
 <MDivider Class="my-4" />
 
 <MCheckbox @bind-Value="throwException" Label="Throw exception"></MCheckbox>
-<MButton OnClick="ShowAsync">Async Confirm</MButton>
+<MButton Class="text-capitalize" OnClick="ShowAsync">Async Confirm</MButton>
 
 <MDivider Class="my-4" />
 
-<MButton OnClick="ShowCustom">Custom Confirm</MButton>
+<MButton Class="text-capitalize" OnClick="ShowCustom">Custom Confirm</MButton>
 
 @code {
 

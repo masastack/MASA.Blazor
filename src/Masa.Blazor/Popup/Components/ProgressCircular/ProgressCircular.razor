@@ -1,0 +1,16 @@
+﻿@namespace Masa.Blazor.Popup.Components
+@inherits PopupComponentBase
+
+<MOverlay Value="@Visible"
+          Class="@Class"
+          Color="@BackgroundColor"
+          Opacity="@BackgroundOpacity"
+          ScrimClass="@ScrimClass"
+          Style="@ComputedStyle"
+          ZIndex="@ZIndex">
+    <MProgressCircular Indeterminate
+                       Color="@Color"
+                       Size="@Size"
+                       Width="@Width">
+    </MProgressCircular>
+</MOverlay>
