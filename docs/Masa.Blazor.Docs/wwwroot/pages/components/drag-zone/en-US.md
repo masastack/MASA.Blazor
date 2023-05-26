@@ -1,7 +1,7 @@
 ---
 title: DragZone
 desc: "The `MDragZone` component is based on [Sorttable.js](https://github.com/SortableJS/Sortable) to implement drag and drop functionality"
-tag: "JsProxy"
+tag: "JS Proxy"
 ---
 
 ## Usage
