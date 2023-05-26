@@ -1,14 +1,18 @@
 ---
 title: ECharts（图表）
-desc: "[ECharts](https://echarts.apache.org/examples/zh/index.html)"
+desc: "一个代理了 [ECharts](https://echarts.apache.org/examples/zh/index.html) 的组件"
 tag: "JS代理"
 ---
 
 ## 使用
 
-<masa-example file="Examples.components.echarts.Usage"></masa-example>
+用前需要先引用ECharts的包：
 
-<app-alert type="info" content='使用前需要先引用ECharts的包：`<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`。'></app-alert>
+```html 
+<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
+```
+
+<masa-example file="Examples.components.echarts.Usage"></masa-example>
 
 ## 示例
 
@@ -22,9 +26,15 @@ tag: "JS代理"
 
 #### 高度和宽度
 
-通过 `Height` , `Width`  属性设置宽高
+通过 `Height`,`Width` 属性设置宽高。
 
 <masa-example file="Examples.components.echarts.HeightAndWidth"></masa-example>
+
+#### 配置中使用 function
+
+在 `Option` 中使用 function 时，需要启用 `IncludeFunctionsInOption` 属性。下面的例子中，使用 **lambda** 设置了 tooltip 的内容，使用 **function** 设置了横坐标的名称。
+
+<masa-example file="Examples.components.echarts.IncludeFunctionsInOption"></masa-example>
 
 #### 本地化
 

@@ -76,6 +76,12 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
     [Parameter]
     public bool IncludeFunctionsInOption { get; set; }
 
+    private static readonly Regex s_functionRegex
+        = new(@"""\s*function\s?\([a-zA-Z][a-zA-Z0-9,\s]*\)\s?\{((?<BR>\{)|(?<-BR>\})|[^{}]*)+\}\s*""", RegexOptions.IgnoreCase);
+
+    private static readonly Regex s_lambdaRegex
+        = new(@"""\([a-zA-Z]?[a-zA-Z0-9\s,]*\)\s?=\\u003e\s?[a-zA-Z{\\u0060][^""]+""", RegexOptions.IgnoreCase);
+
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
     private IEChartsJSObjectReferenceProxy? _echarts;
@@ -196,7 +202,8 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
 
         if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {
-            optionJson = FormatterFunction(optionJson);
+            optionJson = FormatFunction(optionJson);
+            optionJson = FormatLambda(optionJson);
             optionJson = Unicode2String(optionJson);
             await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
@@ -206,6 +213,12 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
     }
 
+    public static string Unicode2String(string source)
+    {
+        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
+            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
+    }
+
     public static bool IsAnyFunction(object option, out string optionJson)
     {
         if (option is null)
@@ -213,33 +226,23 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
             optionJson = string.Empty;
             return false;
         }
+
         optionJson = JsonSerializer.Serialize(option, new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
-        return optionJson.Contains("function");
+
+        return optionJson.Contains("function") || optionJson.Contains("=\\u003e", StringComparison.OrdinalIgnoreCase);
     }
 
-    public static string Unicode2String(string source)
+    public static string FormatFunction(string optionJson)
     {
-        return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
-            source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
+        return s_functionRegex.Replace(optionJson, (m) => m.Value.Trim().Substring(1, m.Value.Length - 2));
     }
 
-    public static string FormatterFunction(string optionJson)
+    public static string FormatLambda(string optionJson)
     {
-        string pattern = @":\s*""\s*function\s?\(.*\)\s?\{.+\}[\s;]?""[\n\s]?";
-        var regex = new Regex(pattern);
-        string newOptionJson = regex.Replace(optionJson,
-            (m) =>
-            {
-                string newValue = m.Value.Trim()
-                    .Substring(2, m.Value.Length - 3)
-                    .Replace("\\u0022", "\"");
-                newValue = $" : {newValue}";
-                return newValue;
-            });
-        return newOptionJson;
+        return s_lambdaRegex.Replace(optionJson, m => m.Value.Trim().Substring(1, m.Value.Length - 2));
     }
 
     public async Task Resize(double width = 0, double height = 0)

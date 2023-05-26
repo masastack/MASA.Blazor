@@ -1,7 +1,7 @@
 ---
 title: Markdown
 desc: "Packaging based on [vditor](https://github.com/Vanessa219/vditor)"
-tag: JsProxy
+tag: JS Proxy
 ---
 
 ## Usage

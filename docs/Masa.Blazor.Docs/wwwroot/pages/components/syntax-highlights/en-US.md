@@ -1,7 +1,7 @@
 ---
 title: Syntax highlights
 desc: "[prism](https://prismjs.com/) and [highlightjs](https://highlightjs.org/) are supported. You need to introduce the js and css files one of the them in `_Host.cshtml` or `index.html`."
-tag: JSProxy
+tag: JS Proxy
 related:
   - /blazor/components/markdown-parsers
 ---

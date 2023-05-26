@@ -1,7 +1,7 @@
 ---
 title: BaiduMaps
 desc: "[BaiduMaps JavaScript API GL](https://lbsyun.baidu.com/index.php?title=jspopularGL)"
-tag: "JsProxy"
+tag: "JS Proxy"
 ---
 
 ## Usage

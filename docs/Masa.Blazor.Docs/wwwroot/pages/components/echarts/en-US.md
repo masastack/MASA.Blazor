@@ -1,14 +1,18 @@
 ---
 title: ECharts
-desc: "[ECharts](https://echarts.apache.org/examples/en/index.html)"
-tag: "JsProxy"
+desc: "A proxy component for [ECharts](https://echarts.apache.org/examples/en/index.html)"
+tag: "JS Proxy"
 ---
 
 ## Usage
 
-<masa-example file="Examples.components.echarts.Usage"></masa-example>
+You need to reference the package of ECharts before using it:
 
-<app-alert type="info" content='You need to reference the package of ECharts before using it: `<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`.'></app-alert>
+```html 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.1.1/echarts.min.js"></script>
+```
+
+<masa-example file="Examples.components.echarts.Usage"></masa-example>
 
 ## Examples
 
@@ -25,6 +29,12 @@ Use `Dark` prop to switch to the dark theme.
 `Height` and `Width` property set chart height,width
 
 <masa-example file="Examples.components.echarts.HeightAndWidth"></masa-example>
+
+#### Use function in option
+
+Using the function in `Option`, you need to enable the `IncludeFunctionsInOption` property. In the following example, the name of tooltip is set using **lambda**, and the label of the XAxis is set using **function**.
+
+<masa-example file="Examples.components.echarts.IncludeFunctionsInOption"></masa-example>
 
 #### Locale
 
