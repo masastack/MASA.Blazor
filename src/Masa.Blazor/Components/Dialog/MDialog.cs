@@ -93,7 +93,8 @@
                 .Apply<BOverlay, MOverlay>(attrs =>
                 {
                     attrs[nameof(MOverlay.ScrimClass)] = OverlayScrimClass;
-                    attrs[nameof(MOverlay.Value)] = ShowOverlay && IsActive;
+                    attrs[nameof(MOverlay.Value)] = IsActive;
+                    attrs[nameof(MOverlay.Scrim)] = ShowOverlay;
                     attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
