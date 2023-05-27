@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MOverlay : BOverlay, IThemeable, IOverlay
+    public partial class MOverlay : BOverlay, IThemeable, IOverlay, IAsyncDisposable
     {
         [Inject]
         private ScrollStrategyJSModule ScrollStrategyJSModule { get; set; } = null!;
@@ -101,6 +101,14 @@
         private async Task ShowScroll()
         {
             await ScrollStrategyJSModule.ShowScroll();
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (ScrollStrategyJSModule.Initialized)
+            {
+                await ShowScroll();
+            }
         }
     }
 }
