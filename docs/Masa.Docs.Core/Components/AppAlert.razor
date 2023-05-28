@@ -13,7 +13,7 @@
     public string? Content { get; set; }
 
     [Parameter]
-    public string? Border { get; set; }
+    public string? Border { get; set; } = "left";
 
     private AlertTypes AlertType => Type switch
     {
@@ -21,7 +21,7 @@
         "success" => AlertTypes.Success,
         "warning" => AlertTypes.Warning,
         _ => AlertTypes.Info
-        };
+    };
 
     private Borders AlertBorder => Border switch
     {
@@ -30,6 +30,6 @@
         "left" => Borders.Left,
         "right" => Borders.Right,
         _ => Borders.None
-        };
+    };
 
 }
