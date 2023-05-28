@@ -5,14 +5,14 @@
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
-            <tr>
-                @foreach (var header in Headers)
-                {
-                    <th style="@GetHeaderStyle(header)">
-                        <div class="subtitle">@I18n.T(header)</div>
-                    </th>
-                }
-            </tr>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th style="@GetHeaderStyle(header)">
+                    <div class="subtitle">@I18n.T(header)</div>
+                </th>
+            }
+        </tr>
         </thead>
         <tbody>
         @foreach (var item in Items)
@@ -63,7 +63,15 @@
                                 {
                                     @if (string.IsNullOrWhiteSpace(item.Description))
                                     {
-                                        @("MISSING DESCRIPTION")
+                                        <span>
+                                            MISSING DESCRIPTION
+                                            @if (GithubUri is not null)
+                                            {
+                                                @("(")
+                                                <AppLink Href="@GithubUri" Content="@I18n.T("contribute.edit", args: "Github")"></AppLink>
+                                                @(")")
+                                            }
+                                        </span>
                                     }
                                     else
                                     {
@@ -92,7 +100,10 @@
     [Parameter]
     public string? Filter { get; set; }
 
-    static readonly Dictionary<string, string[]> HeaderMaps = new()
+    [Parameter]
+    public string? GithubUri { get; set; }
+
+    static readonly Dictionary<string, string[]> s_headerMaps = new()
     {
         { "props", new[] { "name", "type", "default", "description" } },
         { "methods", new[] { "name", "type", "description" } },
@@ -100,7 +111,7 @@
         { "contents", new[] { "name", "type", "description" } }
     };
 
-    private string[] Headers => HeaderMaps[Field];
+    private string[] Headers => s_headerMaps[Field];
 
     private IEnumerable<ParameterInfo> Items => string.IsNullOrWhiteSpace(Filter)
         ? Data.OrderBy(item => item.Name)
@@ -114,7 +125,7 @@
             "name" => "width:144px",
             "type" => "width:264px;",
             _ => ""
-        };
+            };
     }
 
 }

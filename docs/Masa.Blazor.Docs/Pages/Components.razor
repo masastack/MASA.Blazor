@@ -34,7 +34,10 @@
         {
             <FadeTransition LeaveAbsolute>
                 <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
+                    <Apis @bind-Value="@CurrentApi"
+                          Data="@_apiData"
+                          GithubUri="@ApiGithubUri">
+                    </Apis>
                 </ShowTransitionElement>
                 <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
                     <DocumentMarkdownIt Source="@_md"
@@ -49,6 +52,6 @@
             </FadeTransition>
         }
 
-        <Contribute GithubUri="@($"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/components/{Page}/{Culture}.md")" />
+        <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />
     </MResponsive>
 </MContainer>

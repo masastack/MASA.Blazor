@@ -512,6 +512,7 @@
     "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表"
   },
   "contribute": {
+    "edit": "在 {0} 上编辑",
     "edit-page": "在 {0} 上编辑此页面",
     "last-updated": "最后更新："
   },

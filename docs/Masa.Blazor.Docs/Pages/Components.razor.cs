@@ -68,7 +68,7 @@ public partial class Components
     private string? _prevCulture;
     private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
-    private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
+    private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
     private static int _allComponentsCacheCount;
 
@@ -100,6 +100,18 @@ public partial class Components
     private List<string> Tags => IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
+    
+    private string ApiGithubUri
+    {
+        get
+        {
+            var lastSegment = _apiData.Keys.Count > 1 ? $"{CurrentApi}-{Culture}" : Culture;
+
+            return $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/data/apis/{Page}/{lastSegment}.json";
+        }
+    }
+
+    private string ComponentGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/components/{Page}/{Culture}.md";
 
     protected override async Task OnParametersSetAsync()
     {
@@ -184,10 +196,9 @@ public partial class Components
         var name = Page;
 
         var pageToApi = await BlazorDocService.ReadPageToApiAsync();
-        bool isMultipleApi = false;
-        if (pageToApi.ContainsKey(Page))
+        var isMultipleApi = false;
+        if (pageToApi.TryGetValue(Page, out var apis))
         {
-            var apis = pageToApi[Page];
             isMultipleApi = apis.Count > 1;
             await apis.ForEachAsync(async componentName => { _apiData[componentName] = await getApiGroupAsync(componentName, true); });
         }
