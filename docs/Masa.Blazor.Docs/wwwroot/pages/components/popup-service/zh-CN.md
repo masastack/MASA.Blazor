@@ -135,13 +135,13 @@ services.AddMasaBlazor(options =>
     options.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
     {
         {
-            PopupComponents.CIRCULAR_PROGRESS, new Dictionary<string, object?>()
+            PopupComponents.PROGRESS_CIRCULAR, new Dictionary<string, object?>()
             {
                 { nameof(ProgressCircularOptions.Color), "pink" },
             }
         },
         {
-            PopupComponents.LINEAR_PROGRESS, new Dictionary<string, object?>()
+            PopupComponents.PROGRESS_LINEAR, new Dictionary<string, object?>()
             {
                 { nameof(ProgressLinearOptions.Color), "pink" },
             }

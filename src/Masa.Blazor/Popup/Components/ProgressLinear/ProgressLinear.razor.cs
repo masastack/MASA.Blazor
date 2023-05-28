@@ -24,5 +24,5 @@ public partial class ProgressLinear : PopupComponentBase
 
     private string ComputedStyle => $"z-index: {ZIndex};{Style}";
 
-    protected override string ComponentName => PopupComponents.LINEAR_PROGRESS;
+    protected override string ComponentName => PopupComponents.PROGRESS_LINEAR;
 }
