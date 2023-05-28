@@ -9,7 +9,7 @@
         public bool Outlined { get; set; }
 
         /// <summary>
-        /// Provides an alternative active style for v-list-item
+        /// Provides an alternative active style for MListItem
         /// </summary>
         [Parameter]
         public bool Shaped { get; set; }
@@ -24,25 +24,25 @@
         public bool Dense { get; set; }
 
         /// <summary>
-        /// Disables all children v-list-item components
+        /// Disables all children MListItem components
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; }
 
         /// <summary>
-        /// Remove the highlighted background on active v-list-items
+        /// Remove the highlighted background on active MListItems
         /// </summary>
         [Parameter]
         public bool Flat { get; set; }
 
         /// <summary>
-        /// An alternative styling that reduces v-list-item width and rounds the corners. Typically used with v-navigation-drawer
+        /// An alternative styling that reduces MListItem width and rounds the corners. Typically used with MNavigationDrawer
         /// </summary>
         [Parameter]
         public bool Nav { get; set; }
 
         /// <summary>
-        /// Rounds the v-list-item edges
+        /// Rounds the MListItem edges
         /// </summary>
         [Parameter]
         public bool Rounded { get; set; }
