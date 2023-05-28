@@ -142,7 +142,10 @@
           "text-fields"
         ]
       },
-      "grids",
+      {
+        "title": "grids",
+        "exact": true
+      },
       {
         "title": "gridstack",
         "state": "new"

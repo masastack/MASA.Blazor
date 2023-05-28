@@ -7,6 +7,8 @@ public class DefaultItem : IDefaultItem<DefaultItem>
     public bool Divider { get; set; }
 
     public string? Href { get; set; }
+    
+    public bool Exact { get; set; }
 
     public string? Icon { get; set; }
 
