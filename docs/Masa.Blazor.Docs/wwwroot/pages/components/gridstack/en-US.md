@@ -1,6 +1,7 @@
 ---
 title: Gridstack
 desc: "Packaging based on [gridstack](https://github.com/gridstack/gridstack.js)"
+tag: JS Proxy
 related:
   - /blazor/components/echarts                      
   - /blazor/components/sheets

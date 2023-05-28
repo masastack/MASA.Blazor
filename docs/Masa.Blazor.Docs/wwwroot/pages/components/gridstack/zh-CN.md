@@ -1,6 +1,7 @@
 ---
 title: Gridstack
 desc: "基于 [gridstack](https://github.com/gridstack/gridstack.js) 封装。"
+tag: JS代理
 related:
   - /blazor/components/echarts
   - /blazor/components/sheets
