@@ -16,7 +16,9 @@ minimum height of the item and can also be controlled from `MList` with the same
 
 ## Caveats
 
-<app-alert type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alert>
+> If you want the `Href` property of **MListItem** to correlate with the route, you need to apply the `Routable` property on MList.
+
+> If you want to find a list item with status, please check [**MListItemGroup**](/blazor/components/list-item-groups).
 
 ## Examples
 

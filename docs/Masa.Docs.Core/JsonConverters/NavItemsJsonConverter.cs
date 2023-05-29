@@ -56,6 +56,9 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "icon":
                                 navItem.Icon = reader.GetString();
                                 break;
+                            case "exact":
+                                navItem.Exact = reader.GetBoolean();
+                                break;
                             case "group":
                                 navItem.Group = reader.GetString();
                                 break;

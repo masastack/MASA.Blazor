@@ -393,6 +393,7 @@
     "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list"
   },
   "contribute": {
+    "edit": "Edit on {0}",
     "edit-page": "Edit this page on {0}",
     "last-updated": "Last updated:"
   },

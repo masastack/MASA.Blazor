@@ -7,6 +7,8 @@ public interface IDefaultItem<TItem>
     bool Divider { get; set; }
 
     string? Href { get; set; }
+    
+    bool Exact { get; set; }
 
     string? Icon { get; set; }
 
