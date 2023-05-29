@@ -22,5 +22,5 @@ public partial class ProgressCircular : PopupComponentBase
 
     private string ComputedStyle => $"position: fixed;{Style}";
 
-    protected override string ComponentName => PopupComponents.CIRCULAR_PROGRESS;
+    protected override string ComponentName => PopupComponents.PROGRESS_CIRCULAR;
 }
