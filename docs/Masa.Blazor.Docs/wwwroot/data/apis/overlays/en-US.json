@@ -1,9 +1,11 @@
 {
   "props": {
+    "contained": "Limits the size of the component and scrim to its offset parent. Implies `absolute`.",
     "opacity": "Sets the overlay opacity.",
-    "scrimClass": "",
-    "value": "The z-index used for the component.",
-    "zIndex": "Controls whether the component is visible or hidden."
+    "scrim": "Enable the overlay background.",
+    "scrimClass": "Sets the DOM class on the the scrim element.",
+    "value": "Controls whether the component is visible or hidden.",
+    "zIndex": "The z-index used for the component.."
   },
   "events": {},
   "contents": {}
