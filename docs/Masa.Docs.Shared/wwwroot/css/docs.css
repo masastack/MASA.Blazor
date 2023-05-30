@@ -579,7 +579,7 @@ default-app-markup {
     padding: 24px;
 }
 
-.annual-service .annual-service__card {
+.annual-service__card {
     padding: 48px 32px 16px 32px;
 }
 
@@ -637,7 +637,7 @@ default-app-markup {
     border-radius: 12px;
 }
 
-.annual-service .action__hint{
+.annual-service .action__hint {
     opacity: 0.5;
     font-size: 14px;
     min-height: 48px;
@@ -653,40 +653,35 @@ default-app-markup {
     color: #FF7D00;
 }
 
-.annual-service__desktop {
+.annual-service > .hidden-sm-and-down {
     padding: 24px;
 }
 
-.annual-service__mobile {
+.annual-service > .hidden-md-and-up {
     width: 100%;
     height: 100%;
     padding: 12px;
 }
 
-.annual-service__mobile .m-window__container {
+.annual-service > .hidden-md-and-up .m-window__container {
     height: 100%;
 }
 
-.annual-service__mobile .icons {
-    margin-bottom: 8px;
+.annual-service-contact {
+    padding: 32px;
+    font-size: 22px;
 }
 
-.annual-service__mobile li {
-    margin-bottom: 12px;
+.annual-service-contact .close-icon {
+    height: 32px;
+    width: 32px;
 }
 
-.annual-service__mobile .product {
-    margin-bottom: 24px;
+.annual-service-contact > div {
+    margin-bottom: 32px;
+    padding: 16px 0;
 }
 
-.annual-service__mobile .cost {
-    margin-bottom: 24px;
-}
-
-.annual-service__mobile .annual-service__card {
-    padding: 24px 24px 12px 24px;
-}
-
-.annual-service__mobile .action__hint {
-    margin-top: 8px;
+.annual-service-contact > div:first-child {
+    padding: 0;
 }

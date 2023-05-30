@@ -3,7 +3,7 @@
 @inject MasaBlazor MasaBlazor
 
 <MContainer Class="fill-height annual-service pa-0" Fluid>
-    <div class="hidden-sm-and-down fill-height annual-service__desktop">
+    <div class="hidden-sm-and-down fill-height">
         <MRow Style="height: calc(100% - 48px)">
             @foreach (var service in s_services)
             {
@@ -17,8 +17,8 @@
             <span>以上均为官方开源增值服务，不影响开源社区的正常运营</span>
         </div>
     </div>
-    <div class="hidden-md-and-up annual-service__mobile">
-        <MWindow @bind-Value="@_index" Style="height: calc(100% - 48px)">
+    <div class="hidden-md-and-up">
+        <MWindow @bind-Value="@_index" Style="height: calc(100% - 60px)">
             @foreach (var service in s_services)
             {
                 <MWindowItem Class="fill-height">
@@ -39,21 +39,20 @@
 </MContainer>
 
 <MDialog @bind-Value="_dialog" MaxWidth="770" ContentClass="rounded-xl">
-    <MSheet Class="px-10 py-9" Style="font-size: 22px">
-        <div class="mb-10 d-flex align-center">
-            <div class="font-weight-bold" style="font-size: 20px">
-                <MIcon Small Color="primary">mdi-circle</MIcon>
+    <MSheet Class="annual-service-contact">
+        <div class="d-flex align-center">
+            <div class="d-flex align-center font-weight-bold">
+                <MIcon Class="mr-1" Small Color="primary">mdi-circle</MIcon>
                 联系方式
             </div>
             <MSpacer />
-            <MButton Icon Outlined Color="black"
-                     Width="32" Height="32"
-                     Style="border-color: #E1E3EA"
+            <MButton Icon Color="black"
+                     Class="close-icon"
                      OnClick="() => _dialog = false">
                 <MIcon>$close</MIcon>
             </MButton>
         </div>
-        <div class="mb-10 d-flex flex-column align-center py-4">
+        <div class="d-flex flex-column align-center">
             <MIcon Size="48" Class="mb-3" Color="primary">$wechat</MIcon>
             <div class="d-flex align-center mb-2">
                 微信号 <MDivider Vertical Class="mx-2" Style="margin: 6px 0" /> MasaStackTechOps
@@ -62,11 +61,11 @@
                     Width="120">
             </MImage>
         </div>
-        <div class="mb-10 d-flex flex-column align-center py-4">
+        <div class="d-flex flex-column align-center">
             <MIcon Size="48" Class="mb-3" Color="primary">mdi-email</MIcon>
             <a class="text-decoration-none" style="color:inherit;" href="mailto:marketing@masastack.com">marketing@masastack.com</a>
         </div>
-        <div class="mb-14 d-flex flex-column align-center py-4">
+        <div class="d-flex flex-column align-center">
             <MIcon Size="48" Class="mb-3" Color="primary">mdi-phone</MIcon>
             <a class="text-decoration-none" style="color:inherit;" href="tel:13989775601">13989775601</a>
         </div>
