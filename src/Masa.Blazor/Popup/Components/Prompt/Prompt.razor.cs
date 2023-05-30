@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Presets;
-
-namespace Masa.Blazor.Popup.Components;
+﻿namespace Masa.Blazor.Popup.Components;
 
 public partial class Prompt : PopupComponentBase
 {

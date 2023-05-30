@@ -2,7 +2,7 @@
 
 public class PopupComponentBase : BComponentBase
 {
-    [Inject] protected I18n? I18n { get; set; }
+    [Inject] protected I18n I18n { get; set; } = null!;
 
     [CascadingParameter] private ProviderItem? PopupItem { get; set; }
 
