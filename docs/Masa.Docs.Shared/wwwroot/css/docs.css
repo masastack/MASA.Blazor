@@ -407,6 +407,11 @@ a.text-dec-none {
         transition-duration: 0.15s;
         transition-timing-function: ease;
     }
+    
+    .doc-list-nav--item-hash .m-list-item__icon {
+        margin-left: 4px;
+        margin-right: 24px;
+    }
 
 .tag-chip {
     border-radius: 6px !important;
