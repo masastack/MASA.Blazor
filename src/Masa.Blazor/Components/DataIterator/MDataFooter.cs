@@ -39,8 +39,8 @@
         [Parameter, ApiDefaultValue("$last")]
         public string? LastIcon { get; set; } = "$last";
 
-        [Parameter, ApiDefaultValue("first")]
-        public string? FirstIcon { get; set; } = $"first";
+        [Parameter, ApiDefaultValue("$first")]
+        public string? FirstIcon { get; set; } = "$first";
 
         [Parameter, ApiDefaultValue("All")]
         public string? ItemsPerPageAllText { get; set; } = "All";
