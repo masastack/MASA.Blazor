@@ -9,30 +9,25 @@
                    Fixed
                    Floating
                    Temporary>
-    <MList Nav @key="Value">
+    <MList Nav>
         <MListItemGroup>
             @foreach (var item in AppService.GetNavMenus(Project))
             {
                 <MListItem Href="@item.URL" Target="@item.Target">
                     <MListItemContent>
-                        <MListItemTitle Class="emphasize1-color">@I18n.T(item.Title)</MListItemTitle>
+                        <MListItemTitle>@I18n.T(item.Title)</MListItemTitle>
                     </MListItemContent>
                 </MListItem>
             }
             <MDivider />
-            <MListItem>
-                <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">@I18n.T("settings")</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
             <MListItem Href="https://github.com/masastack/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">Github</MListItemTitle>
+                    <MListItemTitle>Github</MListItemTitle>
                 </MListItemContent>
             </MListItem>
             <MListItem Href="https://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">Gitee</MListItemTitle>
+                    <MListItemTitle>Gitee</MListItemTitle>
                 </MListItemContent>
             </MListItem>
         </MListItemGroup>

@@ -1,0 +1,27 @@
+﻿@inject MasaBlazor MasaBlazor
+@inject LocalStorage LocalStorage
+@inject IJSRuntime JSRuntime
+
+<AppTooltipButton Icon="@(MasaBlazor.Theme.Dark ? "mdi-weather-night" : "mdi-weather-sunny")"
+                  Path="toggle-theme"
+                  Class="mr-2 ml-2"
+                  OnClick="() => ToggleTheme(!MasaBlazor.Theme.Dark)">
+</AppTooltipButton>
+
+@code {
+
+    private void ToggleTheme(bool dark)
+    {
+        if (dark == MasaBlazor.Theme.Dark)
+        {
+            return;
+        }
+
+        MasaBlazor.ToggleTheme();
+
+        _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
+
+        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+    }
+
+}

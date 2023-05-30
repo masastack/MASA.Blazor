@@ -31,7 +31,7 @@ public class AppService
         if (project == "blazor")
         {
             list.Add(("getting-started", "/blazor/getting-started/installation", "_self", null));
-            list.Add(("ui-components", "/blazor/components/all", "_self", null));
+            list.Add(("ui-components", "/blazor/components", "_self", null));
             list.Add(annualService);
             list.Add(("pro", "https://blazor-pro.masastack.com", "_blank", "free-pro"));
             list.Add(("blog", "https://blogs.masastack.com/tags/Blazor/", "_blank", null));

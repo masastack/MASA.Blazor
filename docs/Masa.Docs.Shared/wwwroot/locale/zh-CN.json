@@ -250,6 +250,7 @@
   "supported": "支持",
   "supported-with-polyfill": "由 polyfill 支持",
   "not-supported": "不支持",
+  "toggle-theme": "切换主题",
   "github": "Github",
   "gitee": "Gitee",
   "settings": "设置",

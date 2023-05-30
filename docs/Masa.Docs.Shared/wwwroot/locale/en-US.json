@@ -247,6 +247,7 @@
   "supported": "Supported",
   "supported-with-polyfill": "Supported with polyfill",
   "not-supported": "Not supported",
+  "toggle-theme": "Toggle theme",
   "github": "Github",
   "gitee": "Gitee",
   "settings": "Settings",
