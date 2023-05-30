@@ -28,3 +28,12 @@
     height: 24px;
     width: 24px;
 }
+
+.annual-service-contact .icon {
+    font-size: 24px;
+}
+
+.annual-service-contact .icon > .m-icon__svg {
+    width: 24px;
+    height: 24px;
+}

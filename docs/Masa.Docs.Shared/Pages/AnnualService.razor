@@ -1,6 +1,7 @@
 ﻿@page "/annual-service"
 @layout MainLayout
 @inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <MContainer Class="fill-height annual-service pa-0" Fluid>
     <div class="hidden-sm-and-down fill-height">
@@ -53,7 +54,7 @@
             </MButton>
         </div>
         <div class="d-flex flex-column align-center">
-            <MIcon Size="48" Class="mb-3" Color="primary">$wechat</MIcon>
+            <MIcon Class="icon mb-3" Color="primary">$wechat</MIcon>
             <div class="d-flex align-center mb-2">
                 微信号 <MDivider Vertical Class="mx-2" Style="margin: 6px 0" /> MasaStackTechOps
             </div>
@@ -62,11 +63,11 @@
             </MImage>
         </div>
         <div class="d-flex flex-column align-center">
-            <MIcon Size="48" Class="mb-3" Color="primary">mdi-email</MIcon>
+            <MIcon Class="icon mb-3" Color="primary">mdi-email</MIcon>
             <a class="text-decoration-none" style="color:inherit;" href="mailto:marketing@masastack.com">marketing@masastack.com</a>
         </div>
         <div class="d-flex flex-column align-center">
-            <MIcon Size="48" Class="mb-3" Color="primary">mdi-phone</MIcon>
+            <MIcon Class="icon mb-3" Color="primary">mdi-phone</MIcon>
             <a class="text-decoration-none" style="color:inherit;" href="tel:13989775601">13989775601</a>
         </div>
     </MSheet>
@@ -77,6 +78,18 @@
     private bool _dialog;
 
     private StringNumber _index = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    private Task BreakpointOnOnUpdate()
+    {
+        return InvokeAsync(StateHasChanged);
+    }
 
     private RenderFragment ServiceCard(AnnualServiceData service) => __builder =>
     {
@@ -136,7 +149,7 @@
                          Block
                          Dark
                          Depressed
-                         XLarge="@MasaBlazor.Breakpoint.MdAndUp"
+                         XLarge="@(!MasaBlazor.Breakpoint.SmAndDown)"
                          Large="@MasaBlazor.Breakpoint.SmAndDown"
                          OnClick="() => _dialog = true">
                     联系购买
@@ -176,6 +189,11 @@
         {
             _index = index + 1;
         }
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
     }
 
 }

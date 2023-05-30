@@ -685,3 +685,12 @@ default-app-markup {
 .annual-service-contact > div:first-child {
     padding: 0;
 }
+
+.annual-service-contact .icon {
+    font-size: 48px;
+}
+
+.annual-service-contact .icon > .m-icon__svg {
+    width: 48px;
+    height: 48px;
+}
