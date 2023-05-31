@@ -1,0 +1,92 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     @ref="Ref">
+    @if (HasHeader)
+    {
+        <div class="@CssProvider.GetClass("header")">
+            @RenderContentFragment("header__title", Title, TitleContent);
+            @RenderContentFragment("header__actions", ActionsContent)
+        </div>
+    }
+
+    <div class="@CssProvider.GetClass("view")">
+        <table>
+            <tbody>
+            @foreach (var row in Rows)
+            {
+                <tr class="@CssProvider.GetClass("row")">
+                    @foreach (var cell in row)
+                    {
+                        @if (Bordered)
+                        {
+                            var thSpan = 1;
+                            var tdSpan = cell.Span * 2 - 1;
+
+                            <th class="@CssProvider.GetClass("item__label")" colspan="@thSpan">
+                                @cell.Label
+                            </th>
+                            <td class="@CssProvider.GetClass("item__content")" colspan="@tdSpan">
+                                @cell.ChildContent
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
+                                <div class="@CssProvider.GetClass("item-container")">
+                                    <span class="@CssProvider.GetClass("item-container__label")">
+                                        @cell.Label
+                                    </span>
+                                    <span class="@CssProvider.GetClass("item-container__content")">
+                                        @cell.ChildContent
+                                    </span>
+                                </div>
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <CascadingValue Value="this" IsFixed>
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+
+    private RenderFragment RenderContentFragment(string name, RenderFragment? contentFragment = null) => __builder =>
+    {
+        @if (contentFragment != null)
+        {
+            <div class="@CssProvider.GetClass(name)">
+                @contentFragment
+            </div>
+        }
+    };
+
+    private RenderFragment RenderContentFragment(string name, string? content, RenderFragment? contentFragment = null) => __builder =>
+    {
+        var hasContent = !string.IsNullOrWhiteSpace(content);
+        var hasContentFragment = contentFragment != null;
+
+        @if (hasContent || hasContentFragment)
+        {
+            <div class="@CssProvider.GetClass(name)">
+                @if (hasContentFragment)
+                {
+                    @contentFragment
+                }
+                else
+                {
+                    @content
+                }
+            </div>
+        }
+    };
+
+}

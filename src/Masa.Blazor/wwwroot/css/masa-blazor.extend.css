@@ -783,3 +783,78 @@ input[type=number] {
 .m-tab {
     text-transform: none;
 }
+
+/* descriptions */
+
+.m-descriptions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.m-descriptions-header__title {
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.m-descriptions-view {
+    width: 100%;
+}
+
+.m-descriptions-view > table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.m-descriptions--bordered .m-descriptions-view {
+    border: thin solid rgba(0,0,0,.12);
+}
+
+.m-descriptions--bordered .m-descriptions-view > table {
+    table-layout: auto;
+}
+
+.m-descriptions--bordered .m-descriptions-row {
+    border-bottom: thin solid rgba(0,0,0,.12);  
+}
+
+.m-descriptions--bordered .m-descriptions-row:last-child {
+    border-bottom: none;
+}
+
+.m-descriptions--bordered .m-descriptions-item__label, .m-descriptions--bordered .m-descriptions-item__content {
+    padding: 0 16px;
+    border-right: thin solid rgba(0,0,0,.12);  
+}
+
+.m-descriptions--bordered .m-descriptions-item__label {
+    background-color: #FAFAFA;
+    text-align: start;
+}
+
+.m-descriptions-row {
+    height: 48px;
+}
+
+.m-descriptions--dense .m-descriptions-row {
+    height: 32px;
+}
+
+.m-descriptions-item-container {
+    display: flex;
+}
+
+.m-descriptions-item-container__label:after {
+    content: ":";
+    position: relative;
+    top: -.5px;
+    margin: 0 8px 0 2px;
+}
+
+.m-descriptions-item-container__label.m-descriptions-item-container__label--no-colon::after {
+    content: " ";
+}
