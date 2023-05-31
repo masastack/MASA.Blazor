@@ -6,81 +6,143 @@ v1.0.x contains non backwards compatible breaking changes, the following changes
 
 ### Features
 
-- Remove the way of setting the default locale through `$DefaultCulture`. Instead, supply the `Locale` option when calling `AddMasaBlazor` in _Program.cs_.
-  ```csharp
-  services.AddMasaBlazor(options =>
-  {
-      options.Locale = new Locale("zh-CN", "en-US");
-  });
-  ```
+#### I18n
+
+Removed the way of setting the default locale through `$DefaultCulture`. Instead, supply the `Locale` option when calling `AddMasaBlazor` in _Program.cs_.
+
+```csharp
+services.AddMasaBlazor(options =>
+{
+    options.Locale = new Locale("zh-CN", "en-US");
+});
+```
 
 ### Components
 
-- The `Linkage` is renamed to `Routable`, and the affected components are **MBreadcrumbs** and **MList**:
-  ```diff
-  - <MBreadcrumbs Linkage></MBreadcrumbs>
-  + <MBreadcrumbs Routable></MBreadcrumbs>
-  - <MList Linkage></MList>
-  + <MList Routable></MList>
-  ```
-- The `Value` type of **MCheckbox/MSwitch** is no longer a `bool`, but generic type `TValue`. For words that do not use `@bind-Value`, you need to specify the generic type explicitly:
-  ```diff
-  - <MCheckbox Value="" ValueChanged=""></MCheckbox>
-  + <MCheckbox Value="" ValueChanged="" TValue="bool"></MCheckbox>
-  ```
-- The `Align` type of the **MDataTable** DataTableHeader changes from `string` to enum:
-  ```diff
-  - Align = "start"
-  + Align = DataTableHeaderAlign.Start
-  ```
-- **MHover** removes the `Class` and `Style` properties of `Context`.
-- **MErrorHandler** removes the `ShowAlert` parameter, uses `PopupType` instead. And removes the `OnErrorHandleAsync` parameter, use `OnHandle` instead. `OnHandle` would overrides the default error handler. Use `OnAfterHandle` if you only want to do something else after handling an error.
-  ```diff
-  - <MErrorHandler ShowAlert="false"></MErrorHandler>
-  + <MErrorHandler PopupType="ErrorPopupType.None" OnHandle="" OnAfterHandle=""></MErrorHandler>
-  ```
-- The **PConfirm** has been removed now, use the `IPopupService` service's `ConfirmAsync` method instead.
-- The **PToasts** component has been removed now, use the **PEnqueuedSnackbars** component or `IPopupService` service's `EnqueueSnackbarAsync` method instead.
-- **PopupService** removes `AlertAsync` 和 `ToastAsync`, and use `EnqueueSnackbarAsync` instead.
-  ```diff
-  - PopupService.AlertAsync()
-  - PopupService.ToastAsync()
-  + PopupService.EnqueueSnackbarAsync()
-  ```
-- **MPageTabs** refactored to the preset component **PPageTabs**. There are many design and API changes, please refer to the [document](/blazor/components/page-tabs) for details.
-- **MIcon** component introduces the concept of the default icon set. Now if the icon is not the default icon set, you need to specify the prefix of icon set:
-  ```diff
-  - <MIcon>home</MIcon>
-  + <MIcon>md:home</MIcon>
-  - <MIcon>fas fa-home</MIcon>
-  + <MIcon>fa:fas fa-home</MIcon>
-  ```
-- **MInfiniteScroll** now no longer needs to set the loading state through the additional `HasMore` parameter, but through the `Status` of the `OnLoad` event parameter to control it. Also, the component will automatically trigger the `OnLoad` event when it is first rendered.
-  ```diff
-    <MInfiniteScroll
-  -     HasMore="hasMore"
-  -     OnLoadMore="OnLoad"
-  +     OnLoad="OnLoad"
-    >
-    </MInfiniteScroll>
+#### MBreadcrumbs
 
-  @code {
-  -    private bool hasMore;
-  -    private async Task OnLoad() {
-  -        var items = await Request();
-  -        hasMore = items.Count > 0;
-  -    }
-  +    private async Task OnLoad(InfiniteScrollLoadEventArgs args) {
-  +        var items = await Request();
-  +        args.Status = items.Count > 0 ? InfiniteScrollStatus.HasMore : InfiniteScrollStatus.NoMore;
-  +    }
-  }
-  ```
-- **MButton**: the parameter `StopPropgation` are renamed.
-  ```diff
-  - <MButton StopPropagation></MButton>
-  + <MButton OnClickStopPropagation></MButton>
-  ```
+The `Linkage` is renamed to `Routable`.
+
+```diff
+- <MBreadcrumbs Linkage></MBreadcrumbs>
++ <MBreadcrumbs Routable></MBreadcrumbs>
+```
+
+#### MButton
+
+The parameter `StopPropgation` is renamed to `OnClickStopPropagation`.
+
+```diff
+- <MButton StopPropagation></MButton>
++ <MButton OnClickStopPropagation></MButton>
+ ```
+
+#### MCheckbox/MSwitch
+
+The `Value` is no longer a `bool`, but generic type `TValue`. For words that do not use `@bind-Value`, you need to specify the generic type explicitly.
+
+```diff
+- <MCheckbox Value="" ValueChanged=""></MCheckbox>
++ <MCheckbox Value="" ValueChanged="" TValue="bool"></MCheckbox>
+```
+
+#### MDataTable
+
+The `Align` type of DataTableHeader changes from `string` to enum.
+
+```diff
+- Align = "start"
++ Align = DataTableHeaderAlign.Start
+```
+
+#### MErrorHandler
+
+- The `ShowAlert` parameter is removed, uses `PopupType` instead
+- The `OnErrorHandleAsync` parameter is removed, use `OnHandle` instead. `OnHandle` would overrides the default error handler. Use `OnAfterHandle` if you only want to do something else after handling an error.
+
+```diff
+- <MErrorHandler ShowAlert="false"></MErrorHandler>
++ <MErrorHandler PopupType="ErrorPopupType.None" OnHandle="" OnAfterHandle=""></MErrorHandler>
+```
+
+#### MHover
+
+Removed the `Class` and `Style` properties of `Context`.
+
+#### MIcon
+
+Introduces the concept of the default icon set. Now if the icon is not the default icon set, you need to specify the prefix of icon set.
+
+```diff
+- <MIcon>home</MIcon>
++ <MIcon>md:home</MIcon>
+- <MIcon>fas fa-home</MIcon>
++ <MIcon>fa:fas fa-home</MIcon>
+```
+
+#### MInfiniteScroll
+
+Now no longer needs to set the loading state through the additional `HasMore` parameter, but through the `Status` of the `OnLoad` event parameter to control it. Also, the component will automatically trigger the `OnLoad` event when it is first rendered.
+
+```diff
+ <MInfiniteScroll
+-    HasMore="hasMore"
+-    OnLoadMore="OnLoad"
++    OnLoad="OnLoad"
+ >
+ </MInfiniteScroll>
+ @code {
+-    private bool hasMore;
+-    private async Task OnLoad() {
+-        var items = await Request();
+-        hasMore = items.Count > 0;
+-    }
++    private async Task OnLoad(InfiniteScrollLoadEventArgs args) {
++        var items = await Request();
++        args.Status = items.Count > 0 ? InfiniteScrollStatus.HasMore : InfiniteScrollStatus.NoMore;
++    }
+ }
+```
+
+#### MList
+
+The `Linkage` is renamed to `Routable`.
+
+```diff
+- <MList Linkage></MList>
++ <MList Routable></MList>
+```
+
+#### MOverlay
+
+A new parameter `Contained` is used to replace the previous parameter `Absolute`.
+
+```diff
+- <MOverlay Absolute></MOverlay>
++ <MOverlay Contained></MOverlay>
+```
+
+#### MPageTabs
+
+Refactored to the preset component **PPageTabs**. There are many design and API changes, please refer to the [document](/blazor/components/page-tabs) for details.
+
+#### PopupService
+
+Removed `AlertAsync` and `ToastAsync`, use `EnqueueSnackbarAsync` instead.
+
+```diff
+- PopupService.AlertAsync()
+- PopupService.ToastAsync()
++ PopupService.EnqueueSnackbarAsync()
+```
+
+#### PConfirm
+
+The component has been removed, use the `IPopupService` service's `ConfirmAsync` method instead.
+
+#### PToasts
+
+The component has been removed, use the **PEnqueuedSnackbars** component or `IPopupService` service's `EnqueueSnackbarAsync` method instead.
 
 ## Upgrading from v0.5.x to v0.6.x
 
