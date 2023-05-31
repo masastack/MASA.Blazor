@@ -48,12 +48,14 @@ The `Value` is no longer a `bool`, but generic type `TValue`. For words that do 
 
 #### MDataTable
 
-The `Align` type of DataTableHeader changes from `string` to enum.
+- The `Align` type of DataTableHeader changes from `string` to enum.
 
-```diff
-- Align = "start"
-+ Align = DataTableHeaderAlign.Start
-```
+  ```diff
+  - Align = "start"
+  + Align = DataTableHeaderAlign.Start
+  ```
+
+- The type of `ItemClass` was changed from `string` to `Func<TItem, string>`.
 
 #### MErrorHandler
 

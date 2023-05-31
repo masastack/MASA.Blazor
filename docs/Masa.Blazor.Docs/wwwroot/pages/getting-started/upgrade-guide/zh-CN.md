@@ -48,12 +48,14 @@ services.AddMasaBlazor(options =>
 
 #### MDataTable
 
-DataTableHeader 的 `Align` 类型从 `string` 变为枚举。
+- DataTableHeader 的 `Align` 类型从 `string` 变为枚举。
 
-```diff
-- Align = "start"
-+ Align = DataTableHeaderAlign.Start
-```
+  ```diff
+  - Align = "start"
+  + Align = DataTableHeaderAlign.Start
+  ```
+
+- `ItemClass`的类型从 `string` 改为了 `Func<TItem, string>`。
 
 #### MErrorHandler
 
