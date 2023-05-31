@@ -8,7 +8,8 @@
     {
         <MTab Ripple="false"
               Href="@item.URL"
-              Target="@item.Target">
+              Target="@item.Target"
+              Exact="false">
             <MBadge Color="red" Content="@I18n.T(item.Badge)" Value="@(!string.IsNullOrWhiteSpace(item.Badge))">
                 @I18n.T(item.Title)
             </MBadge>

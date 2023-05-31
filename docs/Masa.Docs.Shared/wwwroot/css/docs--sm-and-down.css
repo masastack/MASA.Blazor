@@ -1,0 +1,39 @@
+.annual-service__card {
+    padding: 24px 24px 12px 24px;
+}
+
+.annual-service .icons {
+    margin-bottom: 8px;
+}
+
+.annual-service li {
+    margin-bottom: 12px;
+}
+
+.annual-service .action__hint {
+    margin-top: 8px;
+}
+
+.annual-service-contact {
+    padding: 24px;
+    font-size: 16px;
+}
+
+.annual-service-contact > div {
+    margin-bottom: 16px;
+    padding: 8px 0;
+}
+
+.annual-service-contact .close-icon {
+    height: 24px;
+    width: 24px;
+}
+
+.annual-service-contact .icon {
+    font-size: 24px;
+}
+
+.annual-service-contact .icon > .m-icon__svg {
+    width: 24px;
+    height: 24px;
+}

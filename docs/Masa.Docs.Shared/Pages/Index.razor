@@ -35,8 +35,8 @@
                            Href="@("#getting-started")"
                            OnClick='() => ScrollIntoView("#getting-started")'
                            OnClickPreventDefault>
-                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
-                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fa:fas fa-rocket</MIcon>
+                    <MListItemIcon>
+                        <MIcon Color="#FFB547" Size="32" Style="margin-right: 2px">fa:fas fa-rocket</MIcon>
                     </MListItemIcon>
                     <MListItemContent>
                         <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
@@ -45,15 +45,16 @@
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
                     var hash = $"#{project}";
+                    var isActive = _activeHash == hash;
 
                     <MListItem Value="hash"
                                Class="doc-list-nav--item-hash"
                                Href="@hash"
                                OnClick="() => ScrollIntoView(hash)"
                                OnClickPreventDefault>
-                        <MListItemAvatar Tile>
-                            @Image(project, _activeHash)
-                        </MListItemAvatar>
+                        <MListItemIcon>
+                            <MIcon Color="@(isActive ? "" : "#4318ff")" Size="34">@($"$masa{project.ToUpperFirst()}")</MIcon>
+                        </MListItemIcon>
                         <MListItemContent>
                             <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
                         </MListItemContent>
@@ -78,7 +79,7 @@
             {
                 <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
-                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fa:fas fa-rocket</MIcon>
+                        <MIcon Color="#FFB547" Size="32" Style="margin-right: 10px">fa:fas fa-rocket</MIcon>
                         @I18n.T("getting-started")
                     </div>
                     @ProductCard(s_gettingStartedNavs)
@@ -88,7 +89,7 @@
                 {
                     <div class="project" id="@project">
                         <div class="heading-5 mb-6 d-flex align-center">
-                            @Image(project)
+                            <MIcon Color="#4318ff" Size="34" Class="mr-2">@($"$masa{project.ToUpperFirst()}")</MIcon>
                             @I18n.T("product", project)
                         </div>
 
@@ -146,6 +147,8 @@
         ("masa-stack-install", "/stack/masa-stack-1.0/installation/docker-compose")
     };
 
+    private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
+
     private static readonly List<string> s_versions = new()
     {
         "1.0",
@@ -157,30 +160,6 @@
 
     private DotNetObjectReference<Index>? _objRef;
     private string? _activeHash;
-
-    private static RenderFragment Image(string project, string? currentSelectProject = null) => __builder =>
-    {
-        string? src = null;
-        switch (project)
-        {
-            case "blazor":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "#blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-            case "framework":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "#framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-            case "stack":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "#stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-        }
-
-        if (!string.IsNullOrWhiteSpace(src))
-        {
-            <MImage Src="@src" Class="mr-2" MaxWidth="30" MaxHeight="30"></MImage>
-        }
-    };
-
-    private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
     private bool _loading = true;
 

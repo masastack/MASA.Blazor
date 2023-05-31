@@ -407,6 +407,11 @@ a.text-dec-none {
         transition-duration: 0.15s;
         transition-timing-function: ease;
     }
+    
+    .doc-list-nav--item-hash .m-list-item__icon {
+        margin-left: 4px;
+        margin-right: 24px;
+    }
 
 .tag-chip {
     border-radius: 6px !important;
@@ -568,4 +573,124 @@ default-app-markup {
 
 .m-alert--doc .m-alert__content p:last-child {
     margin-bottom: 0 !important;
+}
+
+.annual-service {
+    padding: 24px;
+}
+
+.annual-service__card {
+    padding: 48px 32px 16px 32px;
+}
+
+.annual-service .icons {
+    margin-bottom: 16px;
+}
+
+.annual-service .icons .m-icon {
+    margin-right: 24px;
+}
+
+.annual-service .icons .m-icon:last-child {
+    margin-right: 0;
+}
+
+.annual-service .product {
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 35px;
+    margin-bottom: 24px;
+}
+
+.annual-service .cost {
+    font-size: 24px;
+    white-space: nowrap;
+    margin-bottom: 24px;
+}
+
+.annual-service .cost__num {
+    color: black;
+    font-size: 52px;
+}
+
+.annual-service ul {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.annual-service li {
+    line-height: 21px;
+    margin-bottom: 24px;
+}
+
+.annual-service li:last-child {
+    margin-bottom: 0;
+}
+
+.annual-service .action {
+    text-align: center;
+}
+
+.annual-service .action .m-btn {
+    border-radius: 12px;
+}
+
+.annual-service .action__hint {
+    opacity: 0.5;
+    font-size: 14px;
+    min-height: 48px;
+    margin-top: 16px;
+}
+
+.annual-service .tip {
+    padding-top: 24px;
+    color: #323D6F;
+}
+
+.annual-service .tip span:first-child {
+    color: #FF7D00;
+}
+
+.annual-service > .hidden-sm-and-down {
+    padding: 24px;
+}
+
+.annual-service > .hidden-md-and-up {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+}
+
+.annual-service > .hidden-md-and-up .m-window__container {
+    height: 100%;
+}
+
+.annual-service-contact {
+    padding: 32px;
+    font-size: 22px;
+}
+
+.annual-service-contact .close-icon {
+    height: 32px;
+    width: 32px;
+}
+
+.annual-service-contact > div {
+    margin-bottom: 32px;
+    padding: 16px 0;
+}
+
+.annual-service-contact > div:first-child {
+    padding: 0;
+}
+
+.annual-service-contact .icon {
+    font-size: 48px;
+}
+
+.annual-service-contact .icon > .m-icon__svg {
+    width: 48px;
+    height: 48px;
 }
