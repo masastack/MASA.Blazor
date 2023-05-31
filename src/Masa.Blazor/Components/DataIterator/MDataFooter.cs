@@ -8,7 +8,7 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Parameter]
+        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.itemsPerPageText")]
         public string? ItemsPerPageText { get; set; }
 
         [Parameter, EditorRequired]
@@ -39,11 +39,11 @@
         [Parameter, ApiDefaultValue("$last")]
         public string? LastIcon { get; set; } = "$last";
 
-        [Parameter, ApiDefaultValue("first")]
-        public string? FirstIcon { get; set; } = $"first";
+        [Parameter, ApiDefaultValue("$first")]
+        public string? FirstIcon { get; set; } = "$first";
 
-        [Parameter, ApiDefaultValue("All")]
-        public string? ItemsPerPageAllText { get; set; } = "All";
+        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.itemsPerPageAll")]
+        public string? ItemsPerPageAllText { get; set; }
 
         [Parameter]
         public bool ShowFirstLastPage { get; set; }
@@ -57,7 +57,7 @@
         [Parameter]
         public bool DisableItemsPerPage { get; set; }
 
-        [Parameter]
+        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.pageText")]
         public string? PageText { get; set; }
 
         [Parameter]
