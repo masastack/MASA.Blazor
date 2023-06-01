@@ -6,7 +6,7 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public DatePickerType? ActivePicker
         {
@@ -25,9 +25,6 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool Multiple { get; set; }
-
-        [Parameter]
-        public DateOnly PickerDate { get; set; }
 
         [Parameter]
         public bool Range { get; set; }
@@ -141,7 +138,7 @@ namespace Masa.Blazor
             get
             {
                 var culture = I18n.Culture;
-                
+
                 if (Locale is not null)
                 {
                     try
@@ -192,7 +189,7 @@ namespace Masa.Blazor
                     if (values.Count > 0)
                     {
                         var date = values[0];
-                        
+
                         if (Type == DatePickerType.Date)
                         {
                             var str = DateFormatters.AbbreviatedDayOfWeek(CurrentLocale)(date) + ", " + DateFormatters.MonthDay(CurrentLocale)(date);
@@ -208,7 +205,7 @@ namespace Masa.Blazor
                             return DateFormatters.Month(CurrentLocale)(date);
                         }
                     }
-                    
+
                     return "&nbsp;";
                 };
             }
@@ -276,17 +273,30 @@ namespace Masa.Blazor
 
         private IList<DateOnly> WrapInArray(TValue? value)
         {
-            if (value is DateOnly date)
+            if (value is DateOnly date && date != DateOnly.MinValue && date != DateOnly.MaxValue)
             {
-                return new List<DateOnly>()
+                return new List<DateOnly>
                 {
                     date
                 };
             }
 
-            if (value is IList<DateOnly> dates)
+            if (value is DateTime dateTime && dateTime != DateTime.MinValue && dateTime != DateTime.MaxValue)
+            {
+                return new List<DateOnly>
+                {
+                    DateOnly.FromDateTime(dateTime)
+                };
+            }
+
+            if (value is IList<DateOnly> dates && dates.All(d => d != DateOnly.MinValue && d != DateOnly.MaxValue))
             {
                 return dates;
+            }
+
+            if (value is IList<DateTime> dateTimes && dateTimes.All(d => d != DateTime.MinValue && d != DateTime.MaxValue))
+            {
+                return dateTimes.Select(DateOnly.FromDateTime).ToList();
             }
 
             return new List<DateOnly>();

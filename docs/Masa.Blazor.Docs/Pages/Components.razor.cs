@@ -27,10 +27,7 @@ public partial class Components
     private string Culture { get; set; } = null!;
 
     [Parameter]
-    public string Project { get; set; } = null!;
-
-    [Parameter]
-    public string Page { get; set; } = null!;
+    public string? Page { get; set; }
 
     [Parameter]
     public string? Tab
@@ -95,7 +92,7 @@ public partial class Components
         }
     }
 
-    public bool IsAllComponentsPage => Page.ToLower() == "all";
+    public bool IsAllComponentsPage => Page is null || Page.ToLower() == "all";
 
     private List<string> Tags => IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
 
@@ -179,7 +176,7 @@ public partial class Components
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync(Project, "components", Page);
+            _md = await DocService.ReadDocumentAsync("blazor", "components", Page);
         }
         catch (HttpRequestException e)
         {

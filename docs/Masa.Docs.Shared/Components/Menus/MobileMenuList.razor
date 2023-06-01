@@ -15,7 +15,11 @@
             {
                 <MListItem Href="@item.URL" Target="@item.Target">
                     <MListItemContent>
-                        <MListItemTitle>@I18n.T(item.Title)</MListItemTitle>
+                        <MListItemTitle>
+                            <MBadge Color="red" Content="@I18n.T(item.Badge)" Value="@(!string.IsNullOrWhiteSpace(item.Badge))">
+                                @I18n.T(item.Title)
+                            </MBadge>
+                        </MListItemTitle>
                     </MListItemContent>
                 </MListItem>
             }
