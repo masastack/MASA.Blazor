@@ -213,7 +213,10 @@
         "title": "pickers",
         "group": "components",
         "items": [
-          "date-pickers",
+          {
+            "title": "date-pickers",
+            "exact": true
+          },
           "date-pickers-month",
           "time-pickers"
         ]
