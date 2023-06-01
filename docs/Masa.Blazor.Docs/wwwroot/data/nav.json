@@ -263,6 +263,17 @@
     ]
   },
   {
+    "title": "labs",
+    "icon": "mdi-flask",
+    "state": "new",
+    "items": [
+      {
+        "title": "descriptions",
+        "state": "new"
+      }
+    ]
+  },
+  {
     "title": "about",
     "icon": "mdi-information",
     "items": [
