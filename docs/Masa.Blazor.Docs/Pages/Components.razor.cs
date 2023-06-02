@@ -27,7 +27,7 @@ public partial class Components
     private string Culture { get; set; } = null!;
 
     [Parameter]
-    public string? Page { get; set; }
+    public string Page { get; set; } = null!;
 
     [Parameter]
     public string? Tab
@@ -54,10 +54,14 @@ public partial class Components
         {
             if (value != Api)
             {
-                NavigationManager.NavigateTo($"/blazor/components/{Page}/{Tab}/{value}");
+                NavigationManager.NavigateTo($"/blazor/{_group}/{Page}/{Tab}/{value}");
             }
         }
     }
+
+    private static int s_allComponentsCacheCount;
+
+    private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
 
     private string? _tab;
     private string? _md;
@@ -65,9 +69,8 @@ public partial class Components
     private string? _prevCulture;
     private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
-    private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
+    private string _group = "components";
     private List<MarkdownItTocContent> _documentToc = new();
-    private static int _allComponentsCacheCount;
 
     public List<MarkdownItTocContent> CurrentToc
     {
@@ -94,7 +97,7 @@ public partial class Components
 
     public bool IsAllComponentsPage => Page is null || Page.ToLower() == "all";
 
-    private List<string> Tags => IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
+    private List<string> Tags => IsAllComponentsPage ? new List<string> { s_allComponentsCacheCount.ToString() } : new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
     
@@ -108,17 +111,19 @@ public partial class Components
         }
     }
 
-    private string ComponentGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/components/{Page}/{Culture}.md";
+    private string ComponentGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{_group}/{Page}/{Culture}.md";
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
 
+        _group = NavigationManager.GetAbsolutePath().StartsWith("/blazor/components", StringComparison.OrdinalIgnoreCase) ? "components" : "labs";
+
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
-            if (IsAllComponentsPage && _allComponentsCacheCount == 0)
+            if (IsAllComponentsPage && s_allComponentsCacheCount == 0)
             {
-                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
+                s_allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
             }
 
             _prevPage = Page;
@@ -153,7 +158,7 @@ public partial class Components
 
     private void NavigateToTab(string tab)
     {
-        NavigationManager.NavigateTo($"/blazor/components/{Page}/{tab}");
+        NavigationManager.NavigateTo($"/blazor/{_group}/{Page}/{tab}");
     }
 
     private void OnFrontMatterParsed(string? yaml)
@@ -176,7 +181,7 @@ public partial class Components
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync("blazor", "components", Page);
+            _md = await DocService.ReadDocumentAsync("blazor", _group, Page);
         }
         catch (HttpRequestException e)
         {

@@ -1,0 +1,20 @@
+﻿<MSwitch @bind-Value="_bordered" Label="Bordered"></MSwitch>
+
+<MDescriptions Title="Order Info" Bordered="_bordered">
+    <MDescriptionsItem Label="Order ID">O-106697775485</MDescriptionsItem>
+    <MDescriptionsItem Label="Created At">@(new DateTime(2023, 6, 2, 10, 49, 00).ToLocalTime())</MDescriptionsItem>
+    <MDescriptionsItem Label="Status" Span="3">
+        <MIcon Color="green">mdi-truck-outline</MIcon>
+        <span>In Transit</span>
+    </MDescriptionsItem>
+    <MDescriptionsItem Label="User ID">2023060203921</MDescriptionsItem>
+    <MDescriptionsItem Label="User Name">Peter Quill</MDescriptionsItem>
+    <MDescriptionsItem Label="Total Price">￥184</MDescriptionsItem>
+    <MDescriptionsItem Label="Address" Span="3">Singapore Science Park, QianTang District, HangZhou City, ZheJiang Province</MDescriptionsItem>
+</MDescriptions>
+
+@code {
+
+    private bool _bordered = true;
+
+}

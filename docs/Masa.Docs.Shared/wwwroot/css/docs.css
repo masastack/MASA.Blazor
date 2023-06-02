@@ -509,7 +509,7 @@ app-alert p {
         font-weight: 600;
     }
 
-    .custom-table table td, table th {
+    .custom-table table td, .custom-table table th {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
         padding-top: 0.75rem;

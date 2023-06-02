@@ -1,15 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public interface IDescriptionItem
-{
-    string? Label { get; }
-
-    int Span { get; }
-
-    RenderFragment? ChildContent { get; }
-}
-
-public class MDescriptionItem : ComponentBase, IDescriptionItem
+public class MDescriptionsItem : ComponentBase, IDescriptionsItem
 {
     [CascadingParameter] private MDescriptions? Descriptions { get; set; }
 
@@ -19,11 +10,19 @@ public class MDescriptionItem : ComponentBase, IDescriptionItem
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public string? LabelStyle { get; set; }
+
+    [Parameter] public string? LabelClass { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+
+    [Parameter] public string? Style { get; set; }
+
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
 
-        Label.ThrowIfNull(nameof(MDescriptionItem));
+        Label.ThrowIfNull(nameof(MDescriptionsItem));
     }
 
     protected override void OnInitialized()

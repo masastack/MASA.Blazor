@@ -148,6 +148,7 @@
   "copyable-text": "Copyable text（可复制的文本）",
   "cron": "Cron（Cron表达式）",
   "defaults-providers": "Defaults providers（默认值提供程序）",
+  "descriptions": "Descriptions（描述列表）",
   "dialogs": "Dialogs（对话框）",
   "dividers": "Dividers（分割线）",
   "drag-zone": "Drag zone（拖放）",

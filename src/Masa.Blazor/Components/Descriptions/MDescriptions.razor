@@ -4,53 +4,115 @@
 <div class="@CssProvider.GetClass()"
      style="@CssProvider.GetStyle()"
      @ref="Ref">
-    @if (HasHeader)
-    {
-        <div class="@CssProvider.GetClass("header")">
-            @RenderContentFragment("header__title", Title, TitleContent);
-            @RenderContentFragment("header__actions", ActionsContent)
-        </div>
-    }
+    <CascadingValue Value="IsDark" Name="IsDark">
+        @if (HasHeader)
+        {
+            <div class="@CssProvider.GetClass("header")">
+                @RenderContentFragment("header__title", Title, TitleContent)
+                @RenderContentFragment("header__actions", ActionsContent)
+            </div>
+        }
 
-    <div class="@CssProvider.GetClass("view")">
-        <table>
-            <tbody>
-            @foreach (var row in Rows)
-            {
-                <tr class="@CssProvider.GetClass("row")">
-                    @foreach (var cell in row)
+        <div class="@CssProvider.GetClass("view")">
+            <table>
+                <tbody>
+                @foreach (var row in Rows)
+                {
+                    @if (Vertical)
                     {
-                        @if (Bordered)
-                        {
-                            var thSpan = 1;
-                            var tdSpan = cell.Span * 2 - 1;
-
-                            <th class="@CssProvider.GetClass("item__label")" colspan="@thSpan">
-                                @cell.Label
-                            </th>
-                            <td class="@CssProvider.GetClass("item__content")" colspan="@tdSpan">
-                                @cell.ChildContent
-                            </td>
-                        }
-                        else
-                        {
-                            <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
-                                <div class="@CssProvider.GetClass("item-container")">
-                                    <span class="@CssProvider.GetClass("item-container__label")">
+                        <tr class="@CssProvider.GetClass("row")">
+                            @foreach (var cell in row)
+                            {
+                                @if (Bordered)
+                                {
+                                    <th class="@CssProvider.GetClass("item__label") @cell.LabelClass"
+                                        style="@CssProvider.GetStyle("item__label") @cell.LabelStyle"
+                                        colspan="@cell.Span">
                                         @cell.Label
-                                    </span>
-                                    <span class="@CssProvider.GetClass("item-container__content")">
+                                    </th>
+                                }
+                                else
+                                {
+                                    <th class="@CssProvider.GetClass("item")" colspan="@cell.Span">
+                                        <div class="@CssProvider.GetClass("item-container")">
+                                            <span class="@CssProvider.GetClass("item-container__label") @cell.LabelClass"
+                                                  style="@CssProvider.GetStyle("item-container__label") @cell.LabelStyle">
+                                                @cell.Label
+                                            </span>
+                                        </div>
+                                    </th>
+                                }
+                            }
+                        </tr>
+                        <tr class="@CssProvider.GetClass("row")">
+                            @foreach (var cell in row)
+                            {
+                                @if (Bordered)
+                                {
+                                    <td class="@CssProvider.GetClass("item__content") @cell.Class"
+                                        style="@CssProvider.GetStyle("item__content") @cell.Style"
+                                        colspan="@cell.Span">
                                         @cell.ChildContent
-                                    </span>
-                                </div>
-                            </td>
-                        }
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
+                                        <div class="@CssProvider.GetClass("item-container")">
+                                            <span class="@CssProvider.GetClass("item-container__content") @cell.Class"
+                                                  style="@CssProvider.GetStyle("item-container__content") @cell.Style">
+                                                @cell.ChildContent
+                                            </span>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
                     }
-                </tr>
-            }
-            </tbody>
-        </table>
-    </div>
+                    else
+                    {
+                        <tr class="@CssProvider.GetClass("row")">
+                            @foreach (var cell in row)
+                            {
+                                @if (Bordered)
+                                {
+                                    var thSpan = 1;
+                                    var tdSpan = cell.Span * 2 - 1;
+
+                                    <th class="@CssProvider.GetClass("item__label") @cell.LabelClass"
+                                        style="@CssProvider.GetStyle("item__label") @cell.LabelStyle"
+                                        colspan="@thSpan">
+                                        @cell.Label
+                                    </th>
+                                    <td class="@CssProvider.GetClass("item__content") @cell.Class"
+                                        style="@CssProvider.GetStyle("item__content") @cell.Style"
+                                        colspan="@tdSpan">
+                                        @cell.ChildContent
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
+                                        <div class="@CssProvider.GetClass("item-container")">
+                                            <span class="@CssProvider.GetClass("item-container__label") @cell.LabelClass"
+                                                  style="@CssProvider.GetStyle("item-container__label") @cell.LabelStyle">
+                                                @cell.Label
+                                            </span>
+                                            <span class="@CssProvider.GetClass("item-container__content") @cell.Class"
+                                                  style="@CssProvider.GetStyle("item-container__content") @cell.Style">
+                                                @cell.ChildContent
+                                            </span>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </CascadingValue>
 
     <CascadingValue Value="this" IsFixed>
         @ChildContent
