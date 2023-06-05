@@ -1,0 +1,15 @@
+﻿<MSwitch @bind-Value="_vertical" Label="Vertical"></MSwitch>
+
+<MDescriptions Title="Order Info" Vertical="@_vertical">
+    <MDescriptionsItem Label="Order ID">O-106697775485</MDescriptionsItem>
+    <MDescriptionsItem Label="User ID">2023060203921</MDescriptionsItem>
+    <MDescriptionsItem Label="User Name">Peter Quill</MDescriptionsItem>
+    <MDescriptionsItem Label="Total Price">￥184</MDescriptionsItem>
+    <MDescriptionsItem Label="Address">Singapore Science Park, QianTang District, HangZhou City, ZheJiang Province</MDescriptionsItem>
+</MDescriptions>
+
+@code {
+
+    private bool _vertical = true;
+
+}
