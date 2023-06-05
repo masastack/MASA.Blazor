@@ -14,6 +14,7 @@ This component built-in the following third-party markdown-it plugins:
 - [markdown-it-container](https://github.com/markdown-it/markdown-it-container)：Create block-level custom containers.
 - [markdown-it-front-matter](https://github.com/ParkSB/markdown-it-front-matter)：Resolve front matter as string.
 - [markdown-it-header-sections](https://github.com/arve0/markdown-it-header-sections)：Group headers into sections. The `HeaderSections` property needs to be enabled.
+- [markdown-it-todo](https://github.com/dexfire/markdown-it-todo): Render `[ ]` and `[x]` as checkboxes.
 
 > About how to use other plugins, please refer to the example of [Use third-party plugins](#use-third-party-plugins).
 

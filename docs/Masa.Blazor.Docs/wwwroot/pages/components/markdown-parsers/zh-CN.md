@@ -14,6 +14,8 @@ related:
 - [markdown-it-container](https://github.com/markdown-it/markdown-it-container)：创建块级自定义容器。
 - [markdown-it-front-matter](https://github.com/ParkSB/markdown-it-front-matter)：解析 Front Matter。
 - [markdown-it-header-sections](https://github.com/arve0/markdown-it-header-sections)：将标题分组为节。需要开启 `HeaderSections` 属性。
+- [markdown-it-todo](https://github.com/dexfire/markdown-it-todo): 将 `[ ]` 和 `[x]`程序为复选框。
+
 
 > 有关如何使用其他插件，请参考 [使用第三方插件](#使用第三方插件) 的示例。
 
