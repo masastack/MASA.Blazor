@@ -8,7 +8,7 @@ related:
   - /blazor/components/editors
 ---
 
-  This component built-in the following third-party markdown-it plugins:
+This component built-in the following third-party markdown-it plugins:
 - [markdown-it-anchor](https://github.com/valeriangalliat/markdown-it-anchor): Through the `AnchorOptions` property, you can configure the style of the anchor.
 - [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs)：Add classes, identifiers and attributes to markdown using `{.class #identifier attr=value attr2="spaced value"}`.
 - [markdown-it-container](https://github.com/markdown-it/markdown-it-container)：Create block-level custom containers.
