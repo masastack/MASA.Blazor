@@ -723,6 +723,10 @@ input[type=number] {
     display: inline-block;
 }
 
+.m-markdown-it input.markdown-todo {
+    vertical-align: middle;
+}
+
 .m-code-highlight__code {
     display: inline-block;
 }
