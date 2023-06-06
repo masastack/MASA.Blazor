@@ -1,32 +1,29 @@
 ﻿@page "/"
+@using System.Text.Json
 
 <h1>Test your code here!</h1>
 
-<MSwitch @bind-Value="dense" Label="dense"></MSwitch>
-<MSwitch @bind-Value="bordered" Label="bordered"></MSwitch>
+<div class="d-flex">
+    <MButton OnClick="AddCard">Add card</MButton>
+    <MSpacer />
+    <MButton OnClick="Export">Export</MButton>
+</div>
 
-<MDescriptions Cols="12" Sm="6" Md="4" Dense="@dense" Bordered="@bordered">
-    <MDescriptionItem Label="UserName">Zhou Maomao</MDescriptionItem>
-    <MDescriptionItem Label="Telephone">1810000000</MDescriptionItem>
-    <MDescriptionItem Label="Live">Hangzhou, Zhejiang</MDescriptionItem>
-    <MDescriptionItem Label="Remark">A Remark</MDescriptionItem>
-    <MDescriptionItem Label="Address">No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</MDescriptionItem>
-</MDescriptions>
+<MDrawflow Style="height: 100%; width: 100%; background: white; background-size: 24px 24px; background-image: linear-gradient(to right, #f1f1f1 1px, transparent 1px),linear-gradient(to bottom, #f1f1f1 1px, transparent 1px)"
+           @ref="_drawflow" />
 
 @code {
 
-    private bool bordered;
+    private MDrawflow _drawflow = null!;
 
-    private bool dense;
-
-    private void ToggleBordered()
+    private async Task AddCard()
     {
-        bordered = !bordered;
+        await _drawflow.AddNodeAsync("http-request", 0, 1, 0, 0, "", new { data = JsonSerializer.Serialize(new { Method = "get", Url = "www.bing.com" }) }, "<http-request-diagram df-data></http-request-diagram>");
     }
 
-    private void ToggleDense()
+    private async Task Export()
     {
-        dense = !dense;
+        var res = await _drawflow.ExportAsync();
+        Console.WriteLine($"export result: {res}");
     }
-
 }
