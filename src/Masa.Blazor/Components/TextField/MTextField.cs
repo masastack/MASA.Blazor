@@ -716,7 +716,7 @@ namespace Masa.Blazor
             // todo: args.validity.badInput
         }
 
-        private TValue? CheckNumberValidate()
+        private TValue CheckNumberValidate()
         {
             if (Type != "number" || !BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
                 return InternalValue;

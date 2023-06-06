@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue>
+    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue> where TValue : notnull
     {
+        [Inject]
+        public Document Document { get; set; } = null!;
+        
         [Parameter]
         public bool Indeterminate { get; set; }
 
@@ -35,10 +38,7 @@ namespace Masa.Blazor
             }
         }
 
-        [Inject]
-        public Document Document { get; set; }
-
-        protected override void OnInternalValueChange(TValue? val)
+        protected override void OnInternalValueChange(TValue val)
         {
             base.OnInternalValueChange(val);
 
@@ -107,7 +107,7 @@ namespace Masa.Blazor
                 //It's used to prevent ripple directive,and we may remove this 
                 var inputSlot = Document.GetElementByReference(InputSlotElement);
                 await inputSlot!.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
-                await inputSlot!.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
+                await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
         }
     }

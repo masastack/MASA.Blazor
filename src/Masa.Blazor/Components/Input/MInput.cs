@@ -21,7 +21,7 @@
         public StringNumber? MinHeight { get; set; }
 
         [Parameter]
-        public EventCallback<TValue?> OnChange { get; set; }
+        public EventCallback<TValue> OnChange { get; set; }
 
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
 
