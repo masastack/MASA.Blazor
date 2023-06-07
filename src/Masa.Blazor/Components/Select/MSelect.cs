@@ -544,7 +544,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             });
     }
 
-    protected override void OnInternalValueChange(TValue? val)
+    protected override void OnInternalValueChange(TValue val)
     {
         base.OnInternalValueChange(val);
 
@@ -999,7 +999,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return func;
     }
 
-    protected async Task SetValue(TValue? value)
+    protected async Task SetValue(TValue value)
     {
         if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
         {

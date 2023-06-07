@@ -1,15 +1,16 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
+public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> where TValue : notnull
 {
     [Parameter]
     public bool? Ripple { get; set; }
 
     [Parameter]
-    public TValue? TrueValue { get; set; }
+    public TValue TrueValue { get; set; } = default!;
 
     [Parameter]
-    public TValue? FalseValue { get; set; }
+
+    public TValue FalseValue { get; set; } = default!;
 
     public Dictionary<string, object> InputAttrs => new();
 

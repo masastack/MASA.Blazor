@@ -17,7 +17,7 @@ namespace Masa.Blazor
         public bool Depressed { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Icon { get; set; }
