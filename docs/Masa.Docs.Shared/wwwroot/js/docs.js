@@ -180,7 +180,7 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
     container,
     appId: "TSB4MACWRC",
     indexName: "blazor-masastack_" + index,
-    apiKey: "d1fa64adb784057c097feb592d4497d0",
+    apiKey: "12f9496bb2f06001f90cf49738e1a227",
     hitComponent: ({hit, children}) => {
       return {
         type: "a",

@@ -230,7 +230,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         return Task.CompletedTask;
     }
 
-    protected override void OnValueChanged(TValue? val)
+    protected override void OnValueChanged(TValue val)
     {
         //Value may not between min and max
         //If that so,we should invoke ValueChanged 

@@ -136,7 +136,20 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected MMenu? MMenu => Menu as MMenu;
 
-    protected BMenuProps? ComputedMenuProps { get; set; }
+    protected BMenuProps ComputedMenuProps
+    {
+        get
+        {
+            var defaults = GetDefaultMenuProps();
+            MenuProps?.Invoke(defaults);
+            if (defaults.OffsetY && defaults.NudgeBottom is null)
+            {
+                defaults.NudgeBottom = 1;
+            }
+
+            return defaults;
+        }
+    }
 
     protected bool HasChips => Chips || SmallChips;
 
@@ -213,13 +226,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         base.OnInitialized();
 
         CachedItems = CacheItems ? Items : new List<TItem>();
-
-        ComputedMenuProps = GetDefaultMenuProps();
-        MenuProps?.Invoke(ComputedMenuProps);
-        if (ComputedMenuProps.OffsetY && ComputedMenuProps.NudgeBottom is null)
-        {
-            ComputedMenuProps.NudgeBottom = 1;
-        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -544,7 +550,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             });
     }
 
-    protected override void OnInternalValueChange(TValue? val)
+    protected override void OnInternalValueChange(TValue val)
     {
         base.OnInternalValueChange(val);
 
@@ -999,7 +1005,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return func;
     }
 
-    protected async Task SetValue(TValue? value)
+    protected async Task SetValue(TValue value)
     {
         if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
         {
