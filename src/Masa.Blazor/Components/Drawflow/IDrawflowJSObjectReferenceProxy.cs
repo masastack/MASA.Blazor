@@ -1,9 +1,12 @@
 ﻿namespace Masa.Blazor.Components.Drawflow;
 
-public interface IDrawflowJSObjectReferenceProxy : IJSObjectReference
+public interface IDrawflowJSObjectReferenceProxy : IJSObjectReference, IDrawflow
 {
     Task SetMode(DrawflowEditorMode mode);
+}
 
+public interface IDrawflow
+{
     Task<int> AddNodeAsync
     (
         string name,
@@ -15,7 +18,9 @@ public interface IDrawflowJSObjectReferenceProxy : IJSObjectReference
         object? data,
         string html);
 
-    Task RemoveNodeByIdAsync(int id);
+    Task RemoveNodeAsync(int id);
 
-    Task<string> ExportAsync();
+    Task UpdateNodeDataAsync(int id, object data);
+
+    Task<string?> ExportAsync(bool withoutData = false);
 }

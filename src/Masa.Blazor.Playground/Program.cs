@@ -1,13 +1,6 @@
-using Masa.Blazor.Playground.Components;
-using Microsoft.AspNetCore.Components.Web;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddMasaBlazor();
-builder.Services.AddServerSideBlazor(options =>
-{
-    options.RootComponents.RegisterCustomElement<HttpRequestDiagram>("http-request-diagram");
-});
 builder.Services.AddHttpClient();
 
 builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");

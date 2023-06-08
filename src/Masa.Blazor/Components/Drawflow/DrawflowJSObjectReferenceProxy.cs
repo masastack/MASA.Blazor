@@ -33,14 +33,19 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
             html);
     }
 
-    public async Task RemoveNodeByIdAsync(int id)
+    public async Task RemoveNodeAsync(int id)
     {
         await InvokeVoidAsync("removeNodeId", $"node-{id}");
     }
 
-    public async Task<string> ExportAsync()
+    public async Task UpdateNodeDataAsync(int id, object data)
     {
-        return await InvokeAsync<string>("export");
+        await InvokeVoidAsync("updateNodeDataFromId", id, data);
+    }
+
+    public async Task<string?> ExportAsync(bool withoutData = false)
+    {
+        return await InvokeAsync<string?>("export", withoutData);
     }
 }
 

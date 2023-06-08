@@ -1,29 +1,3 @@
 ﻿@page "/"
-@using System.Text.Json
 
 <h1>Test your code here!</h1>
-
-<div class="d-flex">
-    <MButton OnClick="AddCard">Add card</MButton>
-    <MSpacer />
-    <MButton OnClick="Export">Export</MButton>
-</div>
-
-<MDrawflow Style="height: 100%; width: 100%; background: white; background-size: 24px 24px; background-image: linear-gradient(to right, #f1f1f1 1px, transparent 1px),linear-gradient(to bottom, #f1f1f1 1px, transparent 1px)"
-           @ref="_drawflow" />
-
-@code {
-
-    private MDrawflow _drawflow = null!;
-
-    private async Task AddCard()
-    {
-        await _drawflow.AddNodeAsync("http-request", 0, 1, 0, 0, "", new { data = JsonSerializer.Serialize(new { Method = "get", Url = "www.bing.com" }) }, "<http-request-diagram df-data></http-request-diagram>");
-    }
-
-    private async Task Export()
-    {
-        var res = await _drawflow.ExportAsync();
-        Console.WriteLine($"export result: {res}");
-    }
-}

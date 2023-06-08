@@ -26,10 +26,3 @@
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
-
-.drawflow .drawflow-node {
-    padding: 0 !important;
-    border: none !important;
-    width: 200px !important;
-}

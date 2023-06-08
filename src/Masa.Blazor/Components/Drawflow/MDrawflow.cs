@@ -52,7 +52,7 @@ public class MDrawflow : BDomComponentBase
     }
 
     [ApiPublicMethod]
-    public async Task AddNodeAsync(
+    public async Task<int> AddNodeAsync(
         string name,
         int inputs,
         int outputs,
@@ -62,26 +62,32 @@ public class MDrawflow : BDomComponentBase
         object? data,
         string html)
     {
-        if (_drawflowProxy != null)
-        {
-            await _drawflowProxy.AddNodeAsync(name, inputs, outputs, positionX, positionY, className, data, html).ConfigureAwait(false);
-        }
+        if (_drawflowProxy == null) return 0;
+
+        return await _drawflowProxy.AddNodeAsync(name, inputs, outputs, positionX, positionY, className, data, html).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
-    public async Task RemoveNodeByIdAsync(int id)
+    public async Task RemoveNodeAsync(int id)
     {
-        if (_drawflowProxy != null)
-        {
-            await _drawflowProxy.RemoveNodeByIdAsync(id).ConfigureAwait(false);
-        }
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.RemoveNodeAsync(id).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
-    public async Task<string?> ExportAsync()
+    public async Task UpdateNodeDataAsync(int id, object data)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.UpdateNodeDataAsync(id, data).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
+    public async Task<string?> ExportAsync(bool withoutData = false)
     {
         if (_drawflowProxy == null) return null;
 
-        return await _drawflowProxy.ExportAsync().ConfigureAwait(false);
+        return await _drawflowProxy.ExportAsync(withoutData).ConfigureAwait(false);
     }
 }

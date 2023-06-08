@@ -11,12 +11,4 @@
     <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.CustomElements" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\Card.razor" />
-  </ItemGroup>
-
 </Project>
