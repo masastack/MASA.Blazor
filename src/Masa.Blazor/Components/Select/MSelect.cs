@@ -61,6 +61,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     public Action<BMenuProps>? MenuProps { get; set; }
 
     [Parameter]
+    public bool Eager { get; set; }
+
+    [Parameter]
     public bool Multiple
     {
         get => GetValue<bool>();
@@ -478,6 +481,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 });
                 attrs[nameof(MMenu.Attach)] = GetMenuAttach();
                 attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
+                attrs[nameof(MMenu.Eager)] = Eager;
                 attrs[nameof(MMenu.Auto)] = ComputedMenuProps!.Auto;
                 attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                 attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
