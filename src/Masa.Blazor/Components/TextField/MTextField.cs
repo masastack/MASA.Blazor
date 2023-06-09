@@ -152,7 +152,7 @@ namespace Masa.Blazor
 
         protected override bool IsDirty => Convert.ToString(LazyValue).Length > 0 || _badInput;
 
-        protected override int InternalDebounceInterval => DebounceInterval;
+        public override int InternalDebounceInterval => DebounceInterval;
 
         public override bool IsLabelActive => IsDirty || s_dirtyTypes.Contains(Type);
 
