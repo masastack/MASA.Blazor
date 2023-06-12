@@ -450,5 +450,6 @@
   "authentication-authorization": "Authentication Authorization",
   "monitoring": "Monitoring",
   "error-query": "Error Query",
-  "trouble-shooting": "Trouble Shooting"
+  "trouble-shooting": "Trouble Shooting",
+  "access-guide": "Access Guide"
 }
