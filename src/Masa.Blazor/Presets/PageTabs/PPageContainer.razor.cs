@@ -87,7 +87,15 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         InvokeAsync(() =>
         {
-            PatternPaths.RemoveAll(p => !paths.Contains(p));
+            if (paths.Length == 0)
+            {
+                PatternPaths.Clear();
+            }
+            else
+            {
+                PatternPaths.RemoveAll(p => !paths.Contains(p));
+            }
+
             StateHasChanged();
         });
     }

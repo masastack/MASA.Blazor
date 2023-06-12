@@ -117,6 +117,14 @@ public partial class PPageTabs : PatternPathComponentBase
                    .Apply("tab-close", css => css.Add("p-page-tab__close"));
     }
 
+    [ApiPublicMethod]
+    public void ClearAll()
+    {
+        PatternPaths.Clear();
+        TabsUpdated?.Invoke(this, Array.Empty<PatternPath>());
+        StateHasChanged();
+    }
+
     private void PageTabsProviderOnTabTitleChanged(object? sender, string e)
     {
         InvokeAsync(() =>
