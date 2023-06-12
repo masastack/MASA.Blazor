@@ -547,5 +547,6 @@
   "authentication-authorization": "认证授权",
   "monitoring": "项目监测",
   "error-query": "错误查询",
-  "trouble-shooting": "故障分析"
+  "trouble-shooting": "故障分析",
+  "access-guide": "接入指南"
 }
