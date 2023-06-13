@@ -63,13 +63,7 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                                 navItem.Group = reader.GetString();
                                 break;
                             case "state":
-                                var stateStr = reader.GetString();
-                                navItem.State = stateStr switch
-                                {
-                                    "new" => NavItemState.New,
-                                    "update" => NavItemState.Update,
-                                    _ => NavItemState.None
-                                };
+                                navItem.State = reader.GetString();
                                 break;
                             case "hidden":
                                 var hidden = reader.GetBoolean();

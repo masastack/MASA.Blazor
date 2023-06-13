@@ -12,13 +12,13 @@
     public string? Project { get; set; }
 
     [CascadingParameter(Name = "Env")]
-    public string? Env { get; set; } = null!;
+    public string? Env { get; set; }
 
     [Parameter]
-    public string Class { get; set; } = "";
+    public string? Class { get; set; }
 
     [Parameter]
-    public string? Style { get; set; } = "";
+    public string? Style { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
