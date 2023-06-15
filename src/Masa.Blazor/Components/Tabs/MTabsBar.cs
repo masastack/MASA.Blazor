@@ -27,6 +27,7 @@
                 .Merge(css =>
                 {
                     css.Add(prefix)
+                       .AddIf($"{prefix}--is-mobile", () => IsMobile)
                        .AddTheme(IsDark)
                        .AddTextColor(ComputedColor)
                        .AddBackgroundColor(BackgroundColor);
