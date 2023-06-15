@@ -11,11 +11,17 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
 
     public EventHandler<string>? TabTitleChanged { get; set; }
 
-    public void RemovePathTitles(params string[] absolutePaths)
+    internal void RemovePathTitles(params string[] absolutePaths)
     {
         absolutePaths.ForEach(path => PathTitles.Remove(path));
     }
 
+    internal void RemoveAllPathTitles()
+    {
+        PathTitles.Clear();
+    }
+
+    [ApiPublicMethod]
     public void UpdateTabTitle(string absolutePath, Func<string?> titleFunc)
     {
         PathTitles[absolutePath] = titleFunc;
@@ -23,6 +29,7 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
         TabTitleChanged?.Invoke(this, absolutePath);
     }
 
+    [ApiPublicMethod]
     public void UpdateTabTitle(string absolutePath, string? title) 
         => UpdateTabTitle(absolutePath, () => title);
 
