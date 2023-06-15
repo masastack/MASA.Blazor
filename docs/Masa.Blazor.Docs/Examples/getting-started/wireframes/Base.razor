@@ -9,7 +9,7 @@
     </MNavigationDrawer>
 
     <MAppBar App>
-        <MAppBarNavIcon @onclick="()=>_drawer = !_drawer"></MAppBarNavIcon>
+        <MAppBarNavIcon @onclick="()=>_drawer = !(_drawer ?? false)"></MAppBarNavIcon>
 
         <MToolbarTitle>Application</MToolbarTitle>
     </MAppBar>
@@ -20,5 +20,5 @@
 </MApp>
 
 @code {
-    bool _drawer;
+    bool? _drawer;
 }

@@ -2,7 +2,7 @@
 
 public interface INavDrawer
 {
-    bool Value { get; }
+    bool? Value { get; }
 
     string ElementId { get; }
 

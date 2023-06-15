@@ -28,9 +28,14 @@
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
-    private Task BreakpointOnOnUpdate()
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
-        return InvokeAsync(StateHasChanged);
+        if (!e.MobileChanged)
+        {
+            return;
+        }
+
+        InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()

@@ -49,9 +49,9 @@
 @code {
 
     private CultureInfo? _culture;
-    private bool _showMobileMenuList;
+    private bool? _showMobileMenuList;
     private bool _hideAppBarNavIcon;
-    private bool _showSettings;
+    private bool? _showSettings;
     private string? _project;
     private string? _env;
 
@@ -59,9 +59,9 @@
 
     private Dictionary<string, string> _projectMap = new();
 
-    internal bool ShowDrawer;
+    internal bool? ShowDrawer;
 
-    internal EventCallback<bool> OnAppBarNavIconClick { get; set; }
+    internal EventCallback<bool?> OnAppBarNavIconClick { get; set; }
 
     protected override void OnInitialized()
     {
@@ -103,18 +103,18 @@
 
     private void HandleOnAppBarNavIconClick()
     {
-        ShowDrawer = !ShowDrawer;
+        ShowDrawer = !(ShowDrawer ?? false);
         OnAppBarNavIconClick.InvokeAsync(ShowDrawer);
     }
 
     private void HandleOnDotClick()
     {
-        _showMobileMenuList = !_showMobileMenuList;
+        _showMobileMenuList = !(_showMobileMenuList ?? false);
     }
 
     private void HandleSettingsClick()
     {
-        _showSettings = !_showSettings;
+        _showSettings = !(_showSettings ?? false);
     }
 
     internal void HideAppBarNavIcon()
