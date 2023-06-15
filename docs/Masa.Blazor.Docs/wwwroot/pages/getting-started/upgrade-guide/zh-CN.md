@@ -114,6 +114,10 @@ services.AddMasaBlazor(options =>
 + <MList Routable></MList>
 ```
 
+#### NNavigationDrawer
+
+`Value` 的类型改为 `bool?`，`ValueChanged` 的类型改为 `EventCallback<bool?>`。如果你没有特别的需求，建议将 `Value` 值设置 `null`。当 `Value` 值为 `null` 时，组件会根据屏幕宽度自动判断是否显示抽屉。
+
 #### MOverlay
 
 一个新的属性 `Contained` 用来代替之前的 `Absolute`。
