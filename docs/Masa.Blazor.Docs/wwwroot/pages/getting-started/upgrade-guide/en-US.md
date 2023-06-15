@@ -115,6 +115,10 @@ The `Linkage` is renamed to `Routable`.
 + <MList Routable></MList>
 ```
 
+#### MNavigationDrawer
+
+The type of `Value` is changed to `bool?`, and the type of `ValueChanged` is changed to `EventCallback<bool?>`. If you don't have special requirements, it is recommended to set the `Value` value to `null`. When the `Value` value is `null`, the component will automatically determine whether to display the drawer according to the screen width.
+
 #### MOverlay
 
 A new parameter `Contained` is used to replace the previous parameter `Absolute`.
