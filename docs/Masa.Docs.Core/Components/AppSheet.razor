@@ -4,6 +4,7 @@
         Dark="Dark"
         Outlined="@Outlined"
         Rounded="true"
+        Width="@Width"
         @attributes="@Attributes">
     @ChildContent
 </MSheet>
@@ -18,6 +19,9 @@
 
     [Parameter]
     public bool Outlined { get; set; } = true;
+
+    [Parameter]
+    public StringNumber? Width { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();

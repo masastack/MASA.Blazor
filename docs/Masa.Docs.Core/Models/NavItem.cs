@@ -29,18 +29,11 @@ public class NavItem : IDefaultItem<NavItem>
 
     public string? Icon { get; set; }
 
-    public NavItemState State { get; set; }
+    public string? State { get; set; }
 
     public bool? Hidden { get; set; }
 
     public string? Segment => (Group ?? Title);
 
     public bool IsHidden => Hidden.HasValue && Hidden.Value && (Children != null && Children.All(c => c.IsHidden));
-}
-
-public enum NavItemState
-{
-    None,
-    New,
-    Update
 }

@@ -423,16 +423,6 @@ a.text-dec-none {
     width: fit-content !important;
 }
 
-.fixed-slider .m-tabs-slider-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-    .fixed-slider .m-tabs-slider-wrapper .m-tabs-slider {
-        width: 34px !important;
-        border-radius: 4px !important;
-    }
-
 .theme--dark.default-tabs > .m-tabs-bar {
     background-color: transparent;    
 }
@@ -450,12 +440,6 @@ a.text-dec-none {
     .default-tabs .m-tab--active:focus::before {
         opacity: 0 !important;
     }
-
-.m-tabs-l .m-tab {
-    padding-left: 0 !important;
-    justify-content: start !important;
-}
-
 
 .search-input .m-input__prepend-inner {
     height: 100% !important;
@@ -573,6 +557,16 @@ default-app-markup {
 
 .m-alert--doc .m-alert__content p:last-child {
     margin-bottom: 0 !important;
+}
+
+#docsearch .DocSearch-Button {
+    min-width: 156px;
+}
+
+@media only screen and (max-width: 599.98px) {
+    #docsearch .DocSearch-Button  {
+        min-width: unset;
+    }
 }
 
 .annual-service {
