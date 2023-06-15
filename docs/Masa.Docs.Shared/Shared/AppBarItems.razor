@@ -14,12 +14,10 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <div class="flex-1-1-auto d-flex justify-end">
-            @if (!string.IsNullOrEmpty(Project))
-            {
-                <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
-            }
-        </div>
+        @if (!string.IsNullOrEmpty(Project))
+        {
+            <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
+        }
     }
     else
     {

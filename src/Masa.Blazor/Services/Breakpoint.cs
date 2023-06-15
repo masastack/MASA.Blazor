@@ -5,6 +5,7 @@ namespace Masa.Blazor;
 public class Breakpoint
 {
     private CancellationTokenSource _cancellationTokenSource;
+    private bool? _prevMobile;
 
     public Breakpoint()
     {
@@ -63,7 +64,7 @@ public class Breakpoint
 
     public double ScrollBarWidth { get; set; }
 
-    public event Func<Task> OnUpdate;
+    public event EventHandler<BreakpointChangedEventArgs> OnUpdate;
 
     Window Window { get; set; }
 
@@ -155,10 +156,19 @@ public class Breakpoint
             Mobile = current <= max;
         }
 
-        if (OnUpdate != null)
+        var eventArgs = new BreakpointChangedEventArgs();
+
+        if (!_prevMobile.HasValue)
         {
-            await OnUpdate.Invoke();
+            _prevMobile = Mobile;
         }
+        else if (_prevMobile != Mobile)
+        {
+            _prevMobile = Mobile;
+            eventArgs.MobileChanged = true;
+        }
+
+        OnUpdate?.Invoke(this, eventArgs);
     }
 
     private async Task<double> GetClientHeightAsync()

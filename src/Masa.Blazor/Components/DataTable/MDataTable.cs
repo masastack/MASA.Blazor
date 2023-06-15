@@ -223,7 +223,7 @@ namespace Masa.Blazor
             MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
         }
 
-        private async Task BreakpointOnOnUpdate()
+        private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
         {
             MobileProvider = new MobileProvider(this);
             await InvokeStateHasChangedAsync();

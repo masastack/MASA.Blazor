@@ -14,9 +14,9 @@
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
-    private Task BreakpointOnOnUpdate()
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
-        return InvokeAsync(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
 
     private int Height
