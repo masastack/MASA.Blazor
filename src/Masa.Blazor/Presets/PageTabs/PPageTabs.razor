@@ -56,11 +56,11 @@
             <MList Dense>
                 @if (TabReload != null)
                 {
-                    <MListItem OnClick="ReloadTab">@ReloadTabText</MListItem>
+                    <MListItem OnClick="HandleOnReloadTab">@ReloadTabText</MListItem>
                 }
-                <MListItem OnClick="CloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
-                <MListItem OnClick="CloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
-                <MListItem OnClick="CloseOtherTabs">@CloseOtherTabsText</MListItem>
+                <MListItem OnClick="HandleOnCloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
+                <MListItem OnClick="HandleOnCloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
+                <MListItem OnClick="HandleOnCloseOtherTabs">@CloseOtherTabsText</MListItem>
             </MList>
         </MMenu>
     </MTabs>
