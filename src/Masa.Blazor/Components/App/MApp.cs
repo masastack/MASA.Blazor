@@ -8,10 +8,10 @@ namespace Masa.Blazor
     public class MApp : BApp
     {
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Window? Window { get; set; }
+        public Window Window { get; set; } = null!;
 
         /// <summary>
         /// Whether to display from left to right
@@ -38,11 +38,16 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
-                await MasaBlazor!.Breakpoint.InitAsync();
-                await Window!.InitializeAsync();
-                
+                await MasaBlazor.Breakpoint.InitAsync();
+
+                IsMasaBlazorReady = true;
+
+                await Window.AddResizeEventListenerAsync();
+
                 StateHasChanged();
             }
         }
