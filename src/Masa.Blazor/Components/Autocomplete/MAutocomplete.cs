@@ -214,7 +214,7 @@ namespace Masa.Blazor
             var curIndex = SelectedIndex;
             var curItem = SelectedItems.ElementAtOrDefault(curIndex);
 
-            if (!IsInteractive || curItem is null || GetDisabled(curItem))
+            if (!IsInteractive || GetDisabled(curItem))
             {
                 return;
             }
