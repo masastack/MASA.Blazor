@@ -15,6 +15,8 @@
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
             Breakpoint = breakpoint;
+            Breakpoint.OnChanged = e => { BreakpointChanged?.Invoke(this, e); };
+
             Application = application;
             Theme = theme;
             Icons = icons;
@@ -41,12 +43,14 @@
         public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; }
 
         public Theme Theme { get; }
-        
+
         public Icons Icons { get; }
 
         public event Action<bool>? OnRTLChange;
 
         public event Action<Theme>? OnThemeChange;
+
+        public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
 
         public void ToggleTheme()
         {
