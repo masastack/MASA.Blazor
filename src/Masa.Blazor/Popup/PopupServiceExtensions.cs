@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 
 public static class PopupServiceExtensions
 {
-    #region MyRegion
+    #region EnqueueSnackbar
 
     public static async Task EnqueueSnackbarAsync(this IPopupService service, string content, AlertTypes type = AlertTypes.None,
         bool closeable = false, int timeout = 5000)

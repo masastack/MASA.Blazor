@@ -1,8 +1,8 @@
 # 升级指南
 
-## 从 v0.6.x 升级到 v1.0.x
+## 从 v0.6.x 升级到 v1.0.0
 
-v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
+v1.0.0 包含了不兼容的破坏性更改，包括以下变更：
 
 ### 特性
 
@@ -15,6 +15,23 @@ services.AddMasaBlazor(options =>
 {
     options.Locale = new Locale("zh-CN", "en-US");
 });
+```
+
+### 服务
+
+#### MasaBlazor
+
+`MasaBlazor.Breakpoint.OnUpdate` 事件的类型改为了 `EventHandler<BreakpointChangedEventArgs>`。
+
+```
+  @inject MasaBlazor MasaBlazor
+
+  MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+
+- private void BreakpointOnOnUpdate()
++ private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+  {
+  }
 ```
 
 ### 组件

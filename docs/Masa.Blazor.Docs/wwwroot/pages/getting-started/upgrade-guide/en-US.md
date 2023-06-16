@@ -1,8 +1,8 @@
 # Upgrade Guides
 
-## Upgrading from v0.6.x to v1.0.x
+## Upgrading from v0.6.x to v1.0.0
 
-v1.0.x contains non backwards compatible breaking changes, the following changes:
+v1.0.0 contains non backwards compatible breaking changes, the following changes:
 
 ### Features
 
@@ -15,6 +15,23 @@ services.AddMasaBlazor(options =>
 {
     options.Locale = new Locale("zh-CN", "en-US");
 });
+```
+
+### Services
+
+#### MasaBlazor
+
+The type of the `MasaBlazor.Breakpoint.OnUpdate` event is changed to `EventHandler<BreakpointChangedEventArgs>`.
+
+```diff
+  @inject MasaBlazor MasaBlazor
+
+  MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+
+- private void BreakpointOnOnUpdate()
++ private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+  {
+  }
 ```
 
 ### Components
