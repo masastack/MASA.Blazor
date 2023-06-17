@@ -4,6 +4,7 @@
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
+@inject MasaBlazor MasaBlazor
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
@@ -11,7 +12,8 @@
                    Floating
                    Width="300"
                    @bind-Value="_drawer"
-                   Clipped>
+                   Clipped
+                   Right="@MasaBlazor.RTL">
     <ChildContent>
         <MListItem>
             <MListItemContent>

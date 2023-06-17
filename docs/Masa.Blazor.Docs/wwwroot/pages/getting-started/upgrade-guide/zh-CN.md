@@ -17,6 +17,13 @@ services.AddMasaBlazor(options =>
 });
 ```
 
+#### 双向性(LTR/RTL)
+
+删除了通过参数设置某些组件默认 RTL 的方式。现在在 _Program.cs_ 中通过 `AddMasaBlazor` 的 `RTL` 选项设置默认 RTL。
+
+- MApp (移除了 `LeftToRight` 参数)
+- MBadge (移除了 `Right` 参数)
+
 ### 服务
 
 #### MasaBlazor

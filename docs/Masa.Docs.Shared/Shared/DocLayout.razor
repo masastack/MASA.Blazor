@@ -4,11 +4,12 @@
 @implements IAsyncDisposable
 
 <NavDrawer Value="_showDrawer"
-           ValueChanged="OnNavDrawerValueChanged" />
+           ValueChanged="OnNavDrawerValueChanged"
+           RTL="MasaBlazor.RTL" />
 
 <MMain>@Body</MMain>
 
-<Toc />
+<Toc RTL="@MasaBlazor.RTL" />
 
 <FabTransition>
     <MButton Show="_showBackTop" Large Fab Class="bottom-btn transition-swing" Color="primary" OnClick="ToTopAsync">
@@ -18,11 +19,14 @@
 
 @code {
 
-    [CascadingParameter]
-    private BaseLayout BaseLayout { get; set; } = null!;
+    [Inject]
+    MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Inject]
     public IJSRuntime Js { get; set; } = null!;
+
+    [CascadingParameter]
+    private BaseLayout BaseLayout { get; set; } = null!;
 
     private bool? _showDrawer;
     private bool _showBackTop;

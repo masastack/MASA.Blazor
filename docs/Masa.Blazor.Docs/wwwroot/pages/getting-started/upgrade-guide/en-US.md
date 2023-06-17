@@ -17,6 +17,13 @@ services.AddMasaBlazor(options =>
 });
 ```
 
+#### Bidirectionality (LTR/RTL)
+
+Removed the way of setting the default RTL on some components through parameter. Instead, supply the `RTL` option when calling `AddMasaBlazor` in _Program.cs_.
+
+- MApp (Removed `LeftToRight` parameter)
+- MBadge (Removed `Right` parameter)
+
 ### Services
 
 #### MasaBlazor

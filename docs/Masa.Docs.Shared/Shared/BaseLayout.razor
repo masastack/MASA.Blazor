@@ -76,17 +76,30 @@
 
         if (firstRender)
         {
-            var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
-            var isDark = themeStr == "dark";
-            if (isDark != MasaBlazor.Theme.Dark)
-            {
-                MasaBlazor.ToggleTheme();
-            }
+            await InitTheme();
+            await InitRTL();
 
             _projectMap = await DocService.ReadProjectMapAsync();
+
             SetEnv();
             SetProject();
             StateHasChanged();
+        }
+    }
+
+    private async Task InitRTL()
+    {
+        var rtlStr = await LocalStorage.GetItemAsync("masablazor@rtl");
+        MasaBlazor.RTL = rtlStr == "rtl";
+    }
+
+    private async Task InitTheme()
+    {
+        var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
+        var isDark = themeStr == "dark";
+        if (isDark != MasaBlazor.Theme.Dark)
+        {
+            MasaBlazor.ToggleTheme();
         }
     }
 

@@ -1,8 +1,11 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
+@inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <MTabs Class="default-tabs"
-       Routable>
+       Routable
+       @ref="_tabs">
     @foreach (var item in _internalMenus)
     {
         <MTab Ripple="false"
@@ -41,9 +44,26 @@
     [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
 
+    private MTabs? _tabs;
     private string? _prevProject;
     private List<DefaultItem> _internalMenus = new();
     private List<DefaultItem> _externalMenus = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+    }
+
+    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    {
+        InvokeAsync(() =>
+        {
+            _tabs?.CallSlider();
+            StateHasChanged();
+        });
+    }
 
     protected override void OnParametersSet()
     {
@@ -56,6 +76,12 @@
             _internalMenus = menus.Where(u => u.Target != "_blank").ToList();
             _externalMenus = menus.Where(u => u.Target == "_blank").ToList();
         }
+    }
+
+    public void Dispose()
+    {
+        _tabs?.Dispose();
+        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
     }
 
 }

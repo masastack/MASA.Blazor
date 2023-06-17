@@ -2,6 +2,9 @@
 {
     public partial class MBadge : BBadge, IBadge
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+        
         [Parameter]
         public bool Avatar { get; set; }
 
@@ -44,9 +47,6 @@
         public bool Bottom { get; set; }
 
         [Parameter]
-        public bool Right { get; set; }
-
-        [Parameter]
         public RenderFragment? BadgeContent { get; set; }
 
         private int Offset => OverLap ?
@@ -70,13 +70,15 @@
 
         protected string ComputedTop => Bottom ? ComputedYOffset : AUTO;
 
-        protected string ComputedLeft => Right ?
+        protected string ComputedLeft => IsRtl ?
             (Left ? ComputedXOffset : AUTO) :
             (Left ? AUTO : ComputedXOffset);
 
-        protected string ComputedRight => Right ?
+        protected string ComputedRight => IsRtl ?
             (Left ? AUTO : ComputedXOffset) :
             (!Left ? AUTO : ComputedXOffset);
+
+        protected bool IsRtl => MasaBlazor.RTL;
 
         protected override void SetComponentClass()
         {
