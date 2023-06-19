@@ -12,18 +12,22 @@ To get started quickly, you can use the Masa.Template template to quickly create
 ### Install Masa.Template
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.1
+dotnet new install Masa.Template::1.0.0-rc.2
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
 
+- `masablazor-maui`: MASA Blazor MAUI template
 - `masablazor-server`: MASA Blazor Server template
 - `masablazor-wasm`: MASA Blazor WebAssembly template
-- `masablazor-empty-server`: MASA Blazor Server empty template
-- `masablazor-empty-wasm`: MASA Blazor WebAssembly empty template
+- `masablazor-empty-server`: MASA Blazor Server Empty template
+- `masablazor-empty-wasm`: MASA Blazor WebAssembly Empty template
 - `masablazor-pro-server`: MASA Blazor Pro Server template
 - `masablazor-pro-wasm`: MASA Blazor Pro WebAssembly template
 - `masablazor-maui`: MASA Blazor MAUI template
+- `masablazor-wpf`: MASA Blazor WPF template
+- `masablazor-photino`: MASA Blazor Photino template
+- `masablazor-winform`: MASA Blazor Winform template
 
 Every template provides the corresponding template options, which can be viewed by `dotnet new <template name> -h`.
 
