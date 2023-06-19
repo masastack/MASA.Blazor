@@ -19,8 +19,8 @@ dotnet new install Masa.Template::1.0.0-rc.2
 - `masablazor-maui`: MASA Blazor MAUI 模板
 - `masablazor-server`: MASA Blazor Server 模板
 - `masablazor-wasm`: MASA Blazor WebAssembly 模板
-- `masablazor-empty-server`: MASA Blazor Server Empty 模板
-- `masablazor-empty-wasm`: MASA Blazor WebAssembly Empty 模板
+- `masablazor-empty-server`: MASA Blazor Server 空模板
+- `masablazor-empty-wasm`: MASA Blazor WebAssembly 空模板
 - `masablazor-pro-server`: MASA Blazor Pro Server 模板
 - `masablazor-pro-wasm`: MASA Blazor Pro WebAssembly 模板
 - `masablazor-maui`: MASA Blazor MAUI 模板
