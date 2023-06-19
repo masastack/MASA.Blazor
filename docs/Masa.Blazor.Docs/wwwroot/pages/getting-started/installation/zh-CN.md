@@ -11,18 +11,22 @@
 ### 安装 Masa.Template 模板
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.1
+dotnet new install Masa.Template::1.0.0-rc.2
 ```
 
 [Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
 
+- `masablazor-maui`: MASA Blazor MAUI 模板
 - `masablazor-server`: MASA Blazor Server 模板
 - `masablazor-wasm`: MASA Blazor WebAssembly 模板
-- `masablazor-empty-server`: MASA Blazor Server 空模板
-- `masablazor-empty-wasm`: MASA Blazor WebAssembly 空模板
+- `masablazor-empty-server`: MASA Blazor Server Empty 模板
+- `masablazor-empty-wasm`: MASA Blazor WebAssembly Empty 模板
 - `masablazor-pro-server`: MASA Blazor Pro Server 模板
 - `masablazor-pro-wasm`: MASA Blazor Pro WebAssembly 模板
 - `masablazor-maui`: MASA Blazor MAUI 模板
+- `masablazor-wpf`: MASA Blazor WPF 模板
+- `masablazor-photino`: MASA Blazor Photino 模板
+- `masablazor-winform`: MASA Blazor Winform 模板
 
 每个模板都提供了相应的模板选项，可以通过 `dotnet new <模板名称> -h` 查看。
 
