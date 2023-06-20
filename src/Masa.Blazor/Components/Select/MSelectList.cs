@@ -48,7 +48,10 @@ namespace Masa.Blazor
                         attrs["role"] = "option";
                         attrs[nameof(MListItem.ActiveClass)] = TileActiveClass;
                         attrs[nameof(MListItem.Ripple)] = true;
-                        attrs[nameof(MListItem.IsActive)] = value;
+                        attrs[nameof(MListItem.IsActive)] = value;//TODO: remove this when MListItem been refactored
+                        
+                        var items = HideSelected ? Items.Where(i => !SelectedItems.Contains(i)).ToList() : Items;
+                        attrs[nameof(MListItem.Highlighted)] = items.IndexOf(item) == SelectedIndex;//TODO: remove this when MListItem been refactored
                     }
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>

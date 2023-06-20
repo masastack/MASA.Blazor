@@ -12,7 +12,7 @@
               Href="@item.Href"
               Target="@item.Target"
               Exact="false">
-            <MBadge Color="red"
+            <MBadge Color="@item.StateBackgroundColor"
                     Content="@I18n.T(item.State)"
                     Value="@(!string.IsNullOrWhiteSpace(item.State))">
                 @I18n.T(item.Title)

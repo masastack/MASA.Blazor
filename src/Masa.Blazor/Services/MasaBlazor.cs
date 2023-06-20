@@ -17,6 +17,8 @@
         {
             RTL = rtl;
             Breakpoint = breakpoint;
+            Breakpoint.OnChanged = e => { BreakpointChanged?.Invoke(this, e); };
+
             Application = application;
             Theme = theme;
             Icons = icons;
@@ -53,6 +55,8 @@
         public event Action<Theme>? OnThemeChange;
 
         public event EventHandler RTLChanged;
+
+        public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
 
         public void ToggleTheme()
         {
