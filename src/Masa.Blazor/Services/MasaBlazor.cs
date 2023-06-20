@@ -8,12 +8,14 @@
         private bool _rtl;
 
         public MasaBlazor(
+            bool rtl,
             Breakpoint breakpoint,
             Application application,
             Theme theme,
             Icons icons,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
+            RTL = rtl;
             Breakpoint = breakpoint;
             Breakpoint.OnChanged = e => { BreakpointChanged?.Invoke(this, e); };
 
@@ -32,6 +34,7 @@
                 {
                     _rtl = value;
                     OnRTLChange?.Invoke(_rtl);
+                    RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -46,7 +49,10 @@
 
         public Icons Icons { get; }
 
+        [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;
+
+        public event EventHandler RTLChanged;
 
         public event Action<Theme>? OnThemeChange;
 

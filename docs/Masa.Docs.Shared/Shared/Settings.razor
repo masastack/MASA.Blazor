@@ -3,7 +3,13 @@
 @inject LocalStorage LocalStorage
 @inject IJSRuntime JSRuntime
 
-<MNavigationDrawer Value="Value" ValueChanged="ValueChanged" Fixed Right Temporary Width="349">
+<MNavigationDrawer Value="Value"
+                   ValueChanged="ValueChanged"
+                   Fixed
+                   Right="!MasaBlazor.RTL"
+                   Temporary
+                   HideOverlay
+                   Width="349">
     <PrependContent>
         <MToolbar Class="m-bar--underline" Flat Height="96">
             <h3>
@@ -13,7 +19,7 @@
     </PrependContent>
     <ChildContent>
         <MContainer>
-            <div>
+            <div class="mb-4">
                 <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("theme")</div>
                 <MItemGroup Value="@MasaBlazor.Theme.Dark.ToString()" ActiveClass="primary">
                     <MRow>
@@ -32,6 +38,31 @@
                                          OnClick="() => ToggleTheme(true)">
                                     Dark
                                     <MIcon Right>mdi-weather-night</MIcon>
+                                </MButton>
+                            </MItem>
+                        </MCol>
+                    </MRow>
+                </MItemGroup>
+            </div>
+            <div>
+                <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("direction")</div>
+                <MItemGroup Value="@MasaBlazor.RTL.ToString()" ActiveClass="primary">
+                    <MRow>
+                        <MCol Cols="6">
+                            <MItem Value="@("False")">
+                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
+                                         OnClick="() => ToggleRTL(false)">
+                                    LTR
+                                    <MIcon Right>M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0 5,6A4,4 0 0,0 9,10Z</MIcon>
+                                </MButton>
+                            </MItem>
+                        </MCol>
+                        <MCol Cols="6">
+                            <MItem Value="@("True")">
+                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
+                                         OnClick="() => ToggleRTL(true)">
+                                    RTL
+                                    <MIcon Right>M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0 6,6A4,4 0 0,0 10,10Z</MIcon>
                                 </MButton>
                             </MItem>
                         </MCol>
@@ -62,6 +93,18 @@
         _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
 
         _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+    }
+
+    private void ToggleRTL(bool rtl)
+    {
+        if (rtl == MasaBlazor.RTL)
+        {
+            return;
+        }
+
+        MasaBlazor.RTL = rtl;
+
+        _ = LocalStorage.SetItemAsync("masablazor@rtl", rtl ? "rtl" : "ltr");
     }
 
 }

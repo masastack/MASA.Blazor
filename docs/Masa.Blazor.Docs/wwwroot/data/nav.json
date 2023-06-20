@@ -24,6 +24,7 @@
     "title": "features",
     "icon": "mdi-image-edit",
     "items": [
+      "bidirectionality",
       "breakpoints",
       "icon-fonts",
       "internationalization",

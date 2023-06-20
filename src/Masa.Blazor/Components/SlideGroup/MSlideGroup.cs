@@ -13,6 +13,8 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
+        protected override bool RTL => MasaBlazor.RTL;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

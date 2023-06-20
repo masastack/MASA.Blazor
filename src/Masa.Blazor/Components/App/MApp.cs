@@ -13,27 +13,25 @@ namespace Masa.Blazor
         [Inject]
         public Window Window { get; set; } = null!;
 
-        /// <summary>
-        /// Whether to display from left to right
-        /// </summary>
-        [Parameter]
-        [ApiDefaultValue(true)]
-        public bool LeftToRight { get; set; } = true;
-
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
         public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
 
         protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
 
-        protected override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            MasaBlazor!.OnThemeChange -= OnThemeChange;
+            base.OnInitialized();
+
             MasaBlazor.OnThemeChange += OnThemeChange;
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
 
             OnThemeChange(MasaBlazor.Theme);
+        }
 
-            return base.OnInitializedAsync();
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeStateHasChanged();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -74,7 +72,7 @@ namespace Masa.Blazor
                         .Add("m-application")
                         .Add(() =>
                         {
-                            var suffix = LeftToRight ? "ltr" : "rtl";
+                            var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
                         .AddTheme(IsDark);
@@ -86,6 +84,14 @@ namespace Masa.Blazor
                 });
 
             Attributes.Add("data-app", true);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            MasaBlazor.OnThemeChange -= OnThemeChange;
+            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
         }
     }
 }
