@@ -303,11 +303,14 @@
 }
 
 /* drawer */
+/* TODO: The naming convention is wrong, should be m-dialog-drawer. Keep this until v2 */
 
 .m-dialog--drawer {
     border-radius: 0;
     margin: 0;
     height: 100%;
+    max-width: 100vw;
+    min-width: 375px;
     position: fixed;
     overflow-y: auto;
     top: 0;
