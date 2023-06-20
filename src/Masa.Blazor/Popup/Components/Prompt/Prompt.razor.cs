@@ -57,7 +57,6 @@ public partial class Prompt : PopupComponentBase
 
     private Task HandleOnCancel()
     {
-        Visible = false;
         return ClosePopupAsync(null);
     }
 
@@ -74,7 +73,6 @@ public partial class Prompt : PopupComponentBase
 
         if (args.IsCanceled is false)
         {
-            Visible = false;
             await ClosePopupAsync(_promptValue.Value);
         }
     }

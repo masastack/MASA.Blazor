@@ -34,6 +34,7 @@ public class PopupComponentBase : BComponentBase
     {
         if (PopupItem != null)
         {
+            Visible = false;
             await Task.Delay(256);
             PopupItem.Discard(returnVal);
         }
