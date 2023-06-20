@@ -52,9 +52,9 @@
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;
 
-        public event Action<Theme>? OnThemeChange;
-
         public event EventHandler RTLChanged;
+
+        public event Action<Theme>? OnThemeChange;
 
         public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
 
