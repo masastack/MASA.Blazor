@@ -31,6 +31,8 @@ public class NavItem : IDefaultItem<NavItem>
 
     public string? State { get; set; }
 
+    public string? StateBackgroundColor { get; set; }
+
     public bool? Hidden { get; set; }
 
     public string? Segment => (Group ?? Title);

@@ -15,6 +15,8 @@ public class DefaultItem : IDefaultItem<DefaultItem>
     public string? Title { get; set; }
 
     public string? State { get; set; }
+    
+    public string? StateBackgroundColor { get; set; }
 
     public StringNumber Value { get; set; }
 
@@ -43,8 +45,9 @@ public class DefaultItem : IDefaultItem<DefaultItem>
         Href = href;
     }
 
-    public DefaultItem(string title, string href, string state) : this(title, href)
+    public DefaultItem(string title, string href, string state, string stateBackgroundColor = "red") : this(title, href)
     {
         State = state;
+        StateBackgroundColor = stateBackgroundColor;
     }
 }

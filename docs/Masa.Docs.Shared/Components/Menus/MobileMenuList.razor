@@ -16,7 +16,7 @@
                 <MListItem Href="@item.Href" Target="@item.Target">
                     <MListItemContent>
                         <MListItemTitle>
-                            <MBadge Color="red" Content="@I18n.T(item.State)" Value="@(!string.IsNullOrWhiteSpace(item.State))">
+                            <MBadge Color="@item.StateBackgroundColor" Content="@I18n.T(item.State)" Value="@(!string.IsNullOrWhiteSpace(item.State))">
                                 @I18n.T(item.Title)
                             </MBadge>
                         </MListItemTitle>

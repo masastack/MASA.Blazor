@@ -33,7 +33,7 @@ public class AppService
             list.Add(new ("getting-started", "/blazor/getting-started/installation"));
             list.Add(new ("ui-components", "/blazor/components"));
             list.Add(annualService);
-            list.Add(new ("pro", "https://blazor-pro.masastack.com", "free-pro"));
+            list.Add(new ("pro", "https://blazor-pro.masastack.com", "free-pro", "green"));
             list.Add(new ("blog", "https://blogs.masastack.com/tags/Blazor/"));
             list.Add(new ("official-website", "https://www.masastack.com/blazor"));
         }
