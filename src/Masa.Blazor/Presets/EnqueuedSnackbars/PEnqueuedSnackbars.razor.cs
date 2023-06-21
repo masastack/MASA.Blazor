@@ -22,6 +22,21 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool? Closeable { get; set; }
 
+        [Parameter]
+        public StringNumber? Elevation { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public StringBoolean? Rounded { get; set; }
+
+        [Parameter]
+        public bool Shaped { get; set; }
+
+        [Parameter]
+        public bool Text { get; set; }
+
         private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;

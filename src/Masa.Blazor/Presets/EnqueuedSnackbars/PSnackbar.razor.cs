@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using BlazorComponent.Abstracts;
+
+namespace Masa.Blazor.Presets;
 
 public partial class PSnackbar
 {
@@ -73,6 +75,7 @@ public partial class PSnackbar
     [Parameter] public bool Closeable { get; set; }
 
     private bool _actionLoading;
+    private ComponentCssProvider? _cssProvider;
 
     private string? ComputedColor
     {
@@ -86,10 +89,27 @@ public partial class PSnackbar
             return Type switch
             {
                 AlertTypes.Success => "success",
-                AlertTypes.Info => "info",
+                AlertTypes.Info    => "info",
                 AlertTypes.Warning => "warning",
-                AlertTypes.Error => "error",
-                _ => null
+                AlertTypes.Error   => "error",
+                _                  => null
+            };
+        }
+    }
+
+    private string? IconColor => Text ? ComputedColor : null;
+
+    private string? ComputedIcon
+    {
+        get
+        {
+            return Type switch
+            {
+                AlertTypes.Success => "$success",
+                AlertTypes.Error   => "$error",
+                AlertTypes.Info    => "$info",
+                AlertTypes.Warning => "$warning",
+                _                  => null
             };
         }
     }
@@ -104,6 +124,24 @@ public partial class PSnackbar
     }
 
     private bool ComputedCloseable => EnqueuedSnacks?.Closeable ?? Closeable;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _cssProvider = new ComponentCssProvider(() => Class, () => Style);
+        // _cssProvider.UseBaseCssName("m-enqueued-snackbar")
+        //             .Apply()
+        //             .Apply("wrapper", css =>
+        //             {
+        //                 css.Add("m-alert__wrapper");
+        //             })
+        //             .Apply("icon")
+        //             .Apply("title", css =>
+        //             {
+        //                 css.Add("m-alert__title");
+        //             });
+    }
 
     private async Task HandleOnAction()
     {
