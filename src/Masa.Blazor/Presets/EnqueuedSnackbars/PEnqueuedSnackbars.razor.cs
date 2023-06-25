@@ -55,7 +55,8 @@ namespace Masa.Blazor.Presets
                           .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--center", () => Position == SnackPosition.TopCenter)
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--left", () => Position == SnackPosition.BottomLeft)
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--right", () => Position == SnackPosition.BottomRight)
-                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter);
+                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter)
+                          .AddIf($"{ROOT_CSS}--center", () => Position == SnackPosition.Center);
             }, styleBuilder => { styleBuilder.AddMaxWidth(MaxWidth); });
         }
 
