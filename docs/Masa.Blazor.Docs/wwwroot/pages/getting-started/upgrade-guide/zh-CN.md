@@ -30,7 +30,7 @@ services.AddMasaBlazor(options =>
 
 `MasaBlazor.Breakpoint.OnUpdate` 事件的类型改为了 `EventHandler<BreakpointChangedEventArgs>`。
 
-```
+```diff
   @inject MasaBlazor MasaBlazor
 
   MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
