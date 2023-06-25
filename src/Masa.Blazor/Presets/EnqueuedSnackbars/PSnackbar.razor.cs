@@ -97,7 +97,7 @@ public partial class PSnackbar
         }
     }
 
-    private string? IconColor => Text ? ComputedColor : null;
+    private string? IconColor => Text || Outlined ? ComputedColor : null;
 
     private string? ComputedIcon
     {
@@ -129,18 +129,19 @@ public partial class PSnackbar
     {
         base.OnInitialized();
 
-        _cssProvider = new ComponentCssProvider(() => Class, () => Style);
-        // _cssProvider.UseBaseCssName("m-enqueued-snackbar")
-        //             .Apply()
-        //             .Apply("wrapper", css =>
-        //             {
-        //                 css.Add("m-alert__wrapper");
-        //             })
-        //             .Apply("icon")
-        //             .Apply("title", css =>
-        //             {
-        //                 css.Add("m-alert__title");
-        //             });
+        _cssProvider = new ComponentCssProvider(() => Class, () => Style)
+                       .Apply("wrapper", css =>
+                       {
+                           css.Add("m-alert__wrapper");
+                       })
+                       .Apply("icon", css =>
+                       {
+                           css.Add("m-alert__icon");
+                       })
+                       .Apply("title", css =>
+                       {
+                           css.Add("m-alert__title");
+                       });
     }
 
     private async Task HandleOnAction()

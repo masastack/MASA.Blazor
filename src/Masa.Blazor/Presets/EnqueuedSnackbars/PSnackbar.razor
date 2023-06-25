@@ -46,7 +46,7 @@
         @if (OnAction != null)
         {
             <MButton Class="text-capitalize"
-                     Color="@(ActionColor ?? "primary")"
+                     Color="@(ActionColor ?? IconColor ?? "primary")"
                      Loading="@_actionLoading"
                      Text
                      OnClick="HandleOnAction">
@@ -56,7 +56,9 @@
 
         @if (ComputedCloseable)
         {
-            <MButton Icon OnClick="HandleOnClose">
+            <MButton Color="@IconColor"
+                     Icon
+                     OnClick="HandleOnClose">
                 <MIcon>$close</MIcon>
             </MButton>
         }
