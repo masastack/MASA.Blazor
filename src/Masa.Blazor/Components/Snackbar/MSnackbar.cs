@@ -6,31 +6,11 @@ namespace Masa.Blazor
 {
     public partial class MSnackbar : BSnackbar, IThemeable, ISnackbar
     {
-        private bool _value;
-
         [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-
-                if (_value && Timeout > 0)
-                {
-                    if (Timer == null)
-                    {
-                        Timer = new Timer(Timeout);
-                        Timer.Elapsed += Timer_Elapsed;
-                    }
-
-                    Timer.Enabled = true;
-                }
-            }
-        }
+        public bool Value { get; set; }
 
         [Parameter]
         public EventCallback<bool> ValueChanged { get; set; }
@@ -94,6 +74,17 @@ namespace Masa.Blazor
             base.OnParametersSet();
 
             Transition ??= "m-snack-transition";
+
+            if (Value && Timeout > 0)
+            {
+                if (Timer == null)
+                {
+                    Timer = new Timer(Timeout);
+                    Timer.Elapsed += Timer_Elapsed;
+                }
+
+                Timer.Enabled = true;
+            }
         }
 
         protected override void SetComponentClass()
@@ -162,7 +153,7 @@ namespace Masa.Blazor
                         Timer?.Stop();
                         if (ValueChanged.HasDelegate)
                         {
-                            await ValueChanged.InvokeAsync(_value);
+                            await ValueChanged.InvokeAsync(Value);
                         }
 
                         if (OnClosed.HasDelegate)
@@ -178,7 +169,7 @@ namespace Masa.Blazor
             Value = false;
             if (ValueChanged.HasDelegate)
             {
-                InvokeAsync(() => ValueChanged.InvokeAsync(_value));
+                InvokeAsync(() => ValueChanged.InvokeAsync(Value));
             }
 
             if (OnClosed.HasDelegate)

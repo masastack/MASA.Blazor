@@ -10,6 +10,12 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override string ComponentName => nameof(PEnqueuedSnackbars);
 
+    protected override ParameterList<bool> GenToggleParameters() => new()
+    {
+        { nameof(PEnqueuedSnackbars.Outlined), false },
+        { nameof(PEnqueuedSnackbars.Text), false }
+    };
+
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
         {
@@ -27,7 +33,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
-        { nameof(PEnqueuedSnackbars.Closeable), new CheckboxParameter(true) }
+        { nameof(PEnqueuedSnackbars.Closeable), new CheckboxParameter(true) },
+        { nameof(PEnqueuedSnackbars.Shaped), new CheckboxParameter(false) },
+        { nameof(PEnqueuedSnackbars.Rounded), new CheckboxParameter("xl", false) }
     };
 
     protected override ParameterList<SliderParameter> GenSliderParameters() => new()
@@ -42,8 +50,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         {
             nameof(PEnqueuedSnackbars.Position) => GetPosition(parameter.Value?.ToString()),
             nameof(PEnqueuedSnackbars.MaxCount) => int.Parse(parameter.Value!.ToString()!),
-            nameof(PEnqueuedSnackbars.Timeout) => int.Parse(parameter.Value!.ToString()!),
-            _ => parameter.Value
+            nameof(PEnqueuedSnackbars.Timeout)  => int.Parse(parameter.Value!.ToString()!),
+            nameof(PEnqueuedSnackbars.Rounded)  => (StringBoolean)(parameter.Value is null ? false : "xl"),
+            _                                   => parameter.Value
         };
     }
 
@@ -53,13 +62,13 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         {
             return value.ToString() switch
             {
-                nameof(SnackPosition.TopLeft) => "@SnackPosition.TopLeft",
-                nameof(SnackPosition.TopRight) => "@SnackPosition.TopRight",
-                nameof(SnackPosition.TopCenter) => "@SnackPosition.TopCenter",
-                nameof(SnackPosition.BottomLeft) => "@SnackPosition.BottomLeft",
-                nameof(SnackPosition.BottomRight) => "@SnackPosition.BottomRight",
+                nameof(SnackPosition.TopLeft)      => "@SnackPosition.TopLeft",
+                nameof(SnackPosition.TopRight)     => "@SnackPosition.TopRight",
+                nameof(SnackPosition.TopCenter)    => "@SnackPosition.TopCenter",
+                nameof(SnackPosition.BottomLeft)   => "@SnackPosition.BottomLeft",
+                nameof(SnackPosition.BottomRight)  => "@SnackPosition.BottomRight",
                 nameof(SnackPosition.BottomCenter) => "@SnackPosition.BottomCenter",
-                _ => base.FormatValue(key, value)
+                _                                  => base.FormatValue(key, value)
             };
         }
 
@@ -70,12 +79,12 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         return name switch
         {
-            nameof(SnackPosition.TopLeft) => SnackPosition.TopLeft,
-            nameof(SnackPosition.TopRight) => SnackPosition.TopRight,
-            nameof(SnackPosition.TopCenter) => SnackPosition.TopCenter,
-            nameof(SnackPosition.BottomLeft) => SnackPosition.BottomLeft,
+            nameof(SnackPosition.TopLeft)     => SnackPosition.TopLeft,
+            nameof(SnackPosition.TopRight)    => SnackPosition.TopRight,
+            nameof(SnackPosition.TopCenter)   => SnackPosition.TopCenter,
+            nameof(SnackPosition.BottomLeft)  => SnackPosition.BottomLeft,
             nameof(SnackPosition.BottomRight) => SnackPosition.BottomRight,
-            _ => SnackPosition.BottomCenter
+            _                                 => SnackPosition.BottomCenter
         };
     }
 }

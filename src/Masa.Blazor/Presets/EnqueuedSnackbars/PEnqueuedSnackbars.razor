@@ -1,8 +1,9 @@
 ﻿@namespace Masa.Blazor.Presets
+@using Microsoft.Extensions.Options
 @inherits BDomComponentBase
 
 <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
-    <CascadingValue Value="this">
+    <CascadingValue Value="this" IsFixed="true">
         @foreach (var config in _stack)
         {
             <PSnackbar @key="config"
@@ -14,7 +15,13 @@
                        Closeable="@config.Closeable"
                        ActionText="@config.ActionText"
                        ActionColor="@config.ActionColor"
-                       OnAction="@config.OnAction">
+                       OnAction="@config.OnAction"
+                       Elevation="@Elevation"
+                       Outlined="@Outlined"
+                       Rounded="@Rounded"
+                       Shaped="@Shaped"
+                       Text="@Text"
+                       OnClose="() => RemoveSnackbar(config.Id)">
             </PSnackbar>
         }
     </CascadingValue>

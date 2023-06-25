@@ -3,7 +3,7 @@
 <MSnackbar Value="Value"
            ValueChanged="ValueChanged"
            Color="@ComputedColor"
-           Class="@Class"
+           Class="@_cssProvider?.GetClass()"
            ContentClass="@ContentClass"
            Dark="@Dark"
            Elevation="@Elevation"
@@ -12,7 +12,7 @@
            Outlined="@Outlined"
            Rounded="@Rounded"
            Shaped="@Shaped"
-           Style="@Style"
+           Style="@_cssProvider?.GetStyle()"
            Text="@Text"
            Tile="@Tile"
            Timeout="@ComputedTimeout"
@@ -23,13 +23,30 @@
            Left="Left"
            OnClosed="@HandleOnClosed">
     <ChildContent>
-        <MAlert Title="@Title" Type="@Type">@Content</MAlert>
+        <div Class="@_cssProvider?.GetClass("wrapper")">
+            @if (ComputedIcon != null)
+            {
+                <MIcon Color="@IconColor"
+                       Class="@_cssProvider?.GetClass("icon")">
+                    @ComputedIcon
+                </MIcon>
+            }
+
+            <div>
+                @if (Title != null)
+                {
+                    <div class="@_cssProvider?.GetClass("title")">@Title</div>
+                }
+
+                @Content
+            </div>
+        </div>
     </ChildContent>
     <ActionContent>
         @if (OnAction != null)
         {
             <MButton Class="text-capitalize"
-                     Color="@(ActionColor ?? "primary")"
+                     Color="@(ActionColor ?? IconColor ?? "primary")"
                      Loading="@_actionLoading"
                      Text
                      OnClick="HandleOnAction">
@@ -39,7 +56,9 @@
 
         @if (ComputedCloseable)
         {
-            <MButton Icon OnClick="HandleOnClose">
+            <MButton Color="@IconColor"
+                     Icon
+                     OnClick="HandleOnClose">
                 <MIcon>$close</MIcon>
             </MButton>
         }
