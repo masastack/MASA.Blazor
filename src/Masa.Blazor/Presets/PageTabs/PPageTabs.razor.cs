@@ -27,6 +27,8 @@ public partial class PPageTabs : PatternPathComponentBase
     [Parameter]
     public Func<PageTabPathValue, TabOptions?>? TabOptions { get; set; }
 
+    #region Parameters from MTabs
+
     [Parameter]
     [ApiDefaultValue(true)]
     public bool Ripple { get; set; } = true;
@@ -35,10 +37,28 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? ActiveClass { get; set; }
 
     [Parameter]
+    public string? BackgroundColor { get; set; }
+
+    [Parameter]
+    public string? Color { get; set; }
+
+    [Parameter]
+    public StringNumber? Height { get; set; }
+
+    [Parameter]
     public bool HideSlider { get; set; }
 
     [Parameter]
     public string? SliderColor { get; set; }
+
+    [Parameter]
+    [ApiDefaultValue(2)]
+    public StringNumber? SliderSize { get; set; } = 2;
+
+    [Parameter]
+    public bool Dark { get; set; }
+
+    #endregion
 
     [Parameter]
     public string? ReloadTabText { get; set; }
@@ -53,6 +73,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
+    [ApiDefaultValue("/")]
     public string NoDataPath
     {
         get => _noDataPath ?? "/";
@@ -60,7 +81,8 @@ public partial class PPageTabs : PatternPathComponentBase
     }
 
     [Parameter]
-    public string? CloseIcon { get; set; }
+    [ApiDefaultValue("$close")]
+    public string? CloseIcon { get; set; } = "$close";
 
     [Parameter]
     [ApiDefaultValue(true)]
