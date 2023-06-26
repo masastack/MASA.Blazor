@@ -51,15 +51,15 @@
                                 if (e is not null)
                                 {
                                     <p class="info--text">This could be a JavaScript cache issue. Refresh and try again, or manually hard reload (<kbd>Ctrl+F5</kbd> for Windows, <kbd>Command+Shift+R</kbd> for Mac).</p>
-
-                                    <MButton Block
-                                             Class="text-capitalize"
-                                             Large
-                                             Color="primary"
-                                             OnClick="RefreshToSkipWaiting">
-                                        @I18n.T("pwa.refresh")
-                                    </MButton>
                                 }
+
+                                <MButton Block
+                                         Class="text-capitalize"
+                                         Large
+                                         Color="primary"
+                                         OnClick="() => RefreshPage(e is not null)">
+                                    @I18n.T("pwa.refresh")
+                                </MButton>
                             }
                         </div>
                     </MContainer>
@@ -129,6 +129,18 @@
     {
         _culture = new CultureInfo(cultureName);
         I18n.SetCulture(_culture);
+    }
+
+    private async Task RefreshPage(bool isJsException)
+    {
+        if (isJsException)
+        {
+            await RefreshToSkipWaiting();
+        }
+        else
+        {
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        }
     }
 
     private async Task RefreshToSkipWaiting()
