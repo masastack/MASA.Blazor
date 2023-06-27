@@ -8,6 +8,7 @@
 - [如何自动高亮对应路由的导航？](#highlight-navigation)
 - [P开头的组件为什么无法使用？](#p-starting-components)
 - [无法从“方法组”转换为“Microsoft.AspNetCore.Components.EventCallback”](#cannot-convert-from-method-group-to-eventcallback)
+- [如何让UI紧凑？](#how-to-make-ui-compact)
 
 ## 问题专区
 
@@ -31,4 +32,42 @@
   <MSelect TItem="string"
            OnSelectedItemUpdate="OnUpdate">
   </MSelect>
+  ```
+- **如何让UI更紧凑** { #how-to-make-ui-compact }
+
+  目前没有提供一键式的紧凑模式，但是你可以通过非CSS的途径来实现这一点，使用 [DefaultsProvider](https://docs.masastack.com/blazor/components/defaults-providers) 应用组件的紧凑样式：
+
+  ```cs Program.cs
+  builder.Services.AddMasaBlazor(options => {
+      options.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
+      {
+          { nameof(MIcon), new Dictionary<string, object?>() { { nameof(MIcon.Dense), true } } },
+          { nameof(MAlert), new Dictionary<string, object?>() { { nameof(MAlert.Dense), true } } },
+          { nameof(MButton), new Dictionary<string, object?>() { { nameof(MButton.Small), true } } },
+          { "MCascaderColumn", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MChip), new Dictionary<string, object?>() { { nameof(MChip.Small), true } } },
+          { "MDataTable", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MSimpleTable), new Dictionary<string, object?>() { { nameof(MSimpleTable.Dense), true } } },
+          { nameof(MDescriptions), new Dictionary<string, object?>() { { nameof(MDescriptions.Dense), true } } },
+          { nameof(MRow), new Dictionary<string, object?>() { { nameof(MRow.Dense), true } } },
+          { "MAutocomplete", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MCascader", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MCheckbox", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MFileInput", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MRadioGroup", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MRangeSlider", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSelect", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSlider", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSwitch", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MTextarea", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MTextField", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MButtonGroup), new Dictionary<string, object?>() { { nameof(MButtonGroup.Dense), true } } },
+          { nameof(MListItem), new Dictionary<string, object?>() { { nameof(MListItem.Dense), true } } },
+          { nameof(MRating), new Dictionary<string, object?>() { { nameof(MRating.Dense), true } } },
+          { nameof(MTimeline), new Dictionary<string, object?>() { { nameof(MTimeline.Dense), true } } },
+          { nameof(MToolbar), new Dictionary<string, object?>() { { nameof(MToolbar.Dense), true } } },
+          { "MTreeview", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(PImageCaptcha), new Dictionary<string, object?>() { { nameof(PImageCaptcha.Dense), true } } }
+      };
+  })
   ```
