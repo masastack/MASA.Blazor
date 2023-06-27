@@ -122,101 +122,78 @@ namespace Masa.Blazor
             return index == (int)PaginationIconTypes.First ? (MasaBlazor.RTL ? NextIcon : PrevIcon) : (MasaBlazor.RTL ? PrevIcon : NextIcon);
         }
 
-        public IEnumerable<StringNumber> GetItems()
+        private int ComputedTotalVisible
         {
-            if (TotalVisible != null && TotalVisible.ToInt32() == 0)
+            get
             {
-                return Enumerable.Empty<StringNumber>();
-            }
-
-            int Min(int v1, int v2, int v3)
-            {
-                var min = Math.Min(v1, v2);
-                return Math.Min(min, v3);
-            }
-
-            int Max(StringNumber v1, StringNumber v2, int v)
-            {
-                int max;
-
-                if (v1 == null || v2 == null)
+                if (TotalVisible is null)
                 {
-                    max = 0;
-                }
-                else
-                {
-                    max = Math.Max(v1.ToInt32(), v2.ToInt32());
+                    return MaxButtons;
                 }
 
-                //Use v to ensure max always greater than 0
-                return max == 0 ? v : max;
-            }
-
-            var maxLength = Min(
-                Max(0, (TotalVisible ?? 0), Length),
-                Max(0, MaxButtons, Length),
-                Length);
-
-            if (Length <= maxLength)
-            {
-                return Range(1, Length);
-            }
-
-            var items = new List<StringNumber>();
-            var even = maxLength % 2 == 0 ? 1 : 0;
-            var left = Convert.ToInt32(Math.Floor(maxLength / 2M));
-            var right = Length - left + 1 + even;
-
-            if (Value > left && Value < right)
-            {
-                var firstItem = 1;
-                var lastItem = Length;
-                var start = Value - left + 2;
-                var end = Value + left - 2 - even;
-                StringNumber secondItem = start - 1 == firstItem + 1 ? 2 : "...";
-                StringNumber beforeLastItem = end + 1 == lastItem - 1 ? end + 1 : "...";
-
-                items.Add(firstItem);
-                items.Add(secondItem);
-                items.AddRange(Range(start, end));
-                items.Add(beforeLastItem);
-                items.Add(Length);
-
-                return items;
-            }
-            else if (Value == left)
-            {
-                var end = Value + left - 1 - even;
-
-                items.AddRange(Range(1, end));
-                items.Add("...");
-                items.Add(Length);
-
-                return items;
-            }
-            else if (Value == right)
-            {
-                var start = Value - left + 1;
-                items.Add(1);
-                items.Add("...");
-                items.AddRange(Range(start, Length));
-
-                return items;
-            }
-            else
-            {
-                items.AddRange(Range(1, left));
-                items.Add("...");
-                items.AddRange(Range(right, Length));
-
-                return items;
+                return TotalVisible.ToInt32();
             }
         }
 
-        protected static IEnumerable<StringNumber> Range(int from, int to)
+        private IEnumerable<StringNumber> CreateRange(int length, int start = 0)
         {
-            from = from > 0 ? from : 1;
-            return Enumerable.Range(from,  to - from + 1).Select(r => (StringNumber)r);
+            return Enumerable.Range(0, length).Select(i => (StringNumber)(start + i));
+        }
+
+        public IEnumerable<StringNumber> GetItems()
+        {
+            List<StringNumber> items = new();
+
+            var start = 1;
+
+            if (Length <= 0)
+            {
+                return items;
+            }
+
+            if (ComputedTotalVisible <= 1)
+            {
+                items.Add(Value);
+                return items;
+            }
+
+            if (Length <= ComputedTotalVisible)
+            {
+                items.AddRange(CreateRange(Length, start));
+                return items;
+            }
+
+            var even = ComputedTotalVisible % 2 == 0;
+            var middle = even ? ComputedTotalVisible / 2d : Math.Floor(ComputedTotalVisible / 2d);
+            var left = even ? middle : middle + 1;
+            var right = Length - middle;
+
+            if (left - Value >= 0)
+            {
+                items.AddRange(CreateRange(Math.Max(1, ComputedTotalVisible - 1), start));
+                items.Add("...");
+                items.Add(Length);
+            }
+            else if (Value - right >= (even ? 1 : 0))
+            {
+                var rangeLength = ComputedTotalVisible - 1;
+                var rangeStart = Length - rangeLength + start;
+                items.Add(start);
+                items.Add("...");
+                items.AddRange(CreateRange(rangeLength, rangeStart));
+            }
+            else
+            {
+                var rangeLength = Math.Max(1, ComputedTotalVisible - 3);
+                var rangeStart = rangeLength == 1 ? Value : Value - Convert.ToInt32(Math.Ceiling(rangeLength / 2d)) + start;
+                items.Add(start);
+                items.Add("...");
+                items.AddRange(CreateRange(rangeLength, rangeStart));
+                items.Add("...");
+                items.Add(Length);
+            }
+
+            return items;
         }
 
         public virtual async Task HandlePreviousAsync(MouseEventArgs args)
