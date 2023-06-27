@@ -1,32 +1,3 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
-
-<MSwitch @bind-Value="dense" Label="dense"></MSwitch>
-<MSwitch @bind-Value="bordered" Label="bordered"></MSwitch>
-
-<MDescriptions Cols="12" Sm="6" Md="4" Dense="@dense" Bordered="@bordered">
-    <MDescriptionItem Label="UserName">Zhou Maomao</MDescriptionItem>
-    <MDescriptionItem Label="Telephone">1810000000</MDescriptionItem>
-    <MDescriptionItem Label="Live">Hangzhou, Zhejiang</MDescriptionItem>
-    <MDescriptionItem Label="Remark">A Remark</MDescriptionItem>
-    <MDescriptionItem Label="Address">No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</MDescriptionItem>
-</MDescriptions>
-
-@code {
-
-    private bool bordered;
-
-    private bool dense;
-
-    private void ToggleBordered()
-    {
-        bordered = !bordered;
-    }
-
-    private void ToggleDense()
-    {
-        dense = !dense;
-    }
-
-}

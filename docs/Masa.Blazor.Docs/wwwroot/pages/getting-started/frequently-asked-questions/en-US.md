@@ -7,7 +7,8 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 - [How do I vertically center content?](#vertical-center-content)
 - [How do I automatically highlight the navigation corresponding to the route?](#highlight-navigation)
 - [Why can't I use components starting with P?](#p-starting-components)
-- [cannot convert from 'method group' to 'EventCallback'](#cannot-convert-from-method-group-to-eventcallback)
+- [Cannot convert from 'method group' to 'EventCallback'](#cannot-convert-from-method-group-to-eventcallback)
+- [How to make UI compact?](#how-to-make-ui-compact)
 
 
 ## Questions
@@ -32,4 +33,42 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
   <MSelect TItem="string"
            OnSelectedItemUpdate="OnUpdate">
   </MSelect>
+  ```
+- **How to make UI compact** { #how-to-make-ui-compact }
+
+  For now there is no one-click compact mode, but you can achieve this through non-CSS means, using [DefaultsProvider](https://docs.masastack.com/blazor/components/defaults-providers) to apply the compact style of the component:
+
+  ```cs Program.cs
+  builder.Services.AddMasaBlazor(options => {
+      options.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
+      {
+          { nameof(MIcon), new Dictionary<string, object?>() { { nameof(MIcon.Dense), true } } },
+          { nameof(MAlert), new Dictionary<string, object?>() { { nameof(MAlert.Dense), true } } },
+          { nameof(MButton), new Dictionary<string, object?>() { { nameof(MButton.Small), true } } },
+          { "MCascaderColumn", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MChip), new Dictionary<string, object?>() { { nameof(MChip.Small), true } } },
+          { "MDataTable", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MSimpleTable), new Dictionary<string, object?>() { { nameof(MSimpleTable.Dense), true } } },
+          { nameof(MDescriptions), new Dictionary<string, object?>() { { nameof(MDescriptions.Dense), true } } },
+          { nameof(MRow), new Dictionary<string, object?>() { { nameof(MRow.Dense), true } } },
+          { "MAutocomplete", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MCascader", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MCheckbox", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MFileInput", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MRadioGroup", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MRangeSlider", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSelect", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSlider", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MSwitch", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MTextarea", new Dictionary<string, object?>() { { "Dense", true } } },
+          { "MTextField", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(MButtonGroup), new Dictionary<string, object?>() { { nameof(MButtonGroup.Dense), true } } },
+          { nameof(MListItem), new Dictionary<string, object?>() { { nameof(MListItem.Dense), true } } },
+          { nameof(MRating), new Dictionary<string, object?>() { { nameof(MRating.Dense), true } } },
+          { nameof(MTimeline), new Dictionary<string, object?>() { { nameof(MTimeline.Dense), true } } },
+          { nameof(MToolbar), new Dictionary<string, object?>() { { nameof(MToolbar.Dense), true } } },
+          { "MTreeview", new Dictionary<string, object?>() { { "Dense", true } } },
+          { nameof(PImageCaptcha), new Dictionary<string, object?>() { { nameof(PImageCaptcha.Dense), true } } }
+      };
+  })
   ```
