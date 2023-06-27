@@ -1,0 +1,11 @@
+{
+  "props": {
+    "SelfPatterns": "属性用于模糊匹配路径，所有匹配成功的路径都会显示在同一个内容中。",
+    "ExcludedPatterns": "接受一个匹配路径的正则表达式列表，匹配成功的路径对应的页面的内容将不会在离开页面后被缓存在DOM中。",
+    "PageTabs": "PPageTabs组件的引用。"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}
