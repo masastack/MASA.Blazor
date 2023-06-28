@@ -190,9 +190,15 @@ public partial class ModalBase
                 var args = new ModalActionEventArgs();
 
                 _saveLoading = true;
-                await OnSave.InvokeAsync(args);
-                _saveLoading = false;
-
+              	try
+				{
+					await OnSave.InvokeAsync(args);
+				}
+				finally
+				{
+					_saveLoading = false;
+				}
+                
                 if (args.IsCanceled) return;
 
                 Form?.Reset();
