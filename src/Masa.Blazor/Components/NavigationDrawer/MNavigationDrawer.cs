@@ -176,7 +176,16 @@ namespace Masa.Blazor
 
             MasaBlazor!.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
 
-            MasaBlazor.Application.HasNavigationDrawer = App && !Temporary;
+            if (Value == null && ValueChanged.HasDelegate)
+            {
+                _ = ValueChanged.InvokeAsync(!MasaBlazor.Breakpoint.Mobile);
+            }
+
+            if (App)
+            {
+                MasaBlazor.Application.HasNavigationDrawer = !Temporary;
+            }
+
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
             NavigationManager!.LocationChanged += OnLocationChanged;
@@ -191,7 +200,7 @@ namespace Masa.Blazor
                 await UpdateApplicationAsync();
 
                 ZIndex = await GetActiveZIndexAsync();
-                
+
                 StateHasChanged();
             }
         }

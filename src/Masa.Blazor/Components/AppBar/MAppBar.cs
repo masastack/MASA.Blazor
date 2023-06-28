@@ -60,6 +60,7 @@ namespace Masa.Blazor
             "Left", "Bar", "Right"
         };
 
+        private bool _rendered;
         private Scroller? _scroller;
 
         public int? Transform { get; private set; } = 0;
@@ -67,8 +68,7 @@ namespace Masa.Blazor
         /// <summary>
         /// Avoid an entry animation on page load.
         /// </summary>
-        protected override bool IsBooted =>
-            MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated;
+        protected override bool IsBooted =>_rendered && (MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
@@ -258,6 +258,7 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
+                Attributes["data-booted"] = IsBooted ? "true" : null;
                 InvokeStateHasChanged();
             }
         }
@@ -302,8 +303,6 @@ namespace Masa.Blazor
                 .Merge("image",
                     _ => { },
                     style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
-
-            Attributes.Add("data-booted", "true");
         }
 
         protected override void OnParametersSet()
@@ -335,6 +334,10 @@ namespace Masa.Blazor
         {
             if (firstRender)
             {
+                _rendered = true;
+                Attributes["data-booted"] = IsBooted ? "true" : null;
+                StateHasChanged();
+
                 await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
                 {
                     if (!CanScroll) return;

@@ -12,10 +12,12 @@ public class MMain : BMain
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
     };
 
+    private bool _isRendered;
+
     /// <summary>
     /// Avoid an entry animation on page load.
     /// </summary>
-    protected override bool IsBooted => MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated;
+    protected override bool IsBooted => _isRendered && (!MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
     protected override void OnInitialized()
     {
@@ -24,10 +26,23 @@ public class MMain : BMain
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _isRendered = true;
+            Attributes["data-booted"] = IsBooted ? "true" : null;
+            StateHasChanged();
+        }
+    }
+
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_applicationProperties.Contains(e.PropertyName))
         {
+            Attributes["data-booted"] = IsBooted ? "true" : null;
             InvokeStateHasChanged();
         }
     }
@@ -44,8 +59,6 @@ public class MMain : BMain
                     .Add($"padding-left:{MasaBlazor.Application.Left}px");
             })
             .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
-
-        Attributes.Add("data-booted", IsBooted);
     }
 
     protected override void Dispose(bool disposing)
