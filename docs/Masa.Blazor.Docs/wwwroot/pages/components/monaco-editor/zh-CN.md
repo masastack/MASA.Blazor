@@ -6,11 +6,7 @@ tag: "JS代理"
 
 ## 使用
 
-<masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
-
-
-
-在使用脚本之前，请参考:
+在使用之前需要引入脚本：
 
 ```html
 <script>
@@ -22,6 +18,8 @@ tag: "JS代理"
 ```
 
 完整选项列表请移步 [monaco-editor](https://microsoft.github.io/monaco-editor/docs.html)。
+
+<masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
 
 ## 示例
 
