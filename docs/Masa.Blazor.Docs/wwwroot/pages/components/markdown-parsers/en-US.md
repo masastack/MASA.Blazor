@@ -1,6 +1,6 @@
 ---
 title: Markdown parsers
-desc: "Packaging based on [markdown-it](https://github.com/markdown-it/markdown-it)."
+desc: "Packaging based on [markdown-it(v13.0.1)](https://github.com/markdown-it/markdown-it)."
 tag: JS Proxy
 related:
   - /blazor/components/syntax-highlights
