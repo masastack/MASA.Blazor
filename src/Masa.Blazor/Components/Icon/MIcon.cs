@@ -54,7 +54,7 @@
 
             if (Icon != null)
             {
-                icon =  Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+                icon = Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
             }
             else
             {
@@ -103,26 +103,36 @@
                 set = splits[0] switch
                 {
                     "mdi" => IconSet.MaterialDesignIcons,
-                    "md" => IconSet.MaterialDesign,
-                    "fa" => IconSet.FontAwesome,
+                    "md"  => IconSet.MaterialDesign,
+                    "fa"  => IconSet.FontAwesome,
                     "fa4" => IconSet.FontAwesome4,
-                    _ => set
+                    _     => set
                 };
                 icon = splits[1];
             }
 
-            var css = set switch
-            {
-                IconSet.MaterialDesignIcons => $"mdi {icon}",
-                IconSet.MaterialDesign => "material-icons",
-                _ => icon
-            };
+            string css;
 
-            icon = set switch
+            if (MasaBlazor.Icons.Name != null)
             {
-                IconSet.MaterialDesign => icon,
-                _ => null
-            };
+                css = MasaBlazor.Icons.Aliases.Custom?.Invoke(icon) ?? icon;
+                icon = null;
+            }
+            else
+            {
+                css = set switch
+                {
+                    IconSet.MaterialDesignIcons => $"mdi {icon}",
+                    IconSet.MaterialDesign      => "material-icons",
+                    _                           => icon
+                };
+
+                icon = set switch
+                {
+                    IconSet.MaterialDesign => icon,
+                    _                      => null
+                };
+            }
 
             return (icon, css);
         }

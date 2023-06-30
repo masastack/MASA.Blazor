@@ -210,7 +210,12 @@ public class IconAliases
     /// <summary>
     /// User defined icons.
     /// </summary>
-    public Dictionary<string, Icon?> UserDefined { get; } = new();
+    public Dictionary<string, Icon?> UserDefined { get; set; } = new();
+
+    /// <summary>
+    /// Custom the CSS formatter, works for custom icon set only.
+    /// </summary>
+    public Func<string, string>? Custom { get; set; }
 
     public IReadOnlyDictionary<string, Icon?> ToDictionary()
     {
