@@ -16,6 +16,7 @@ public partial class MStepperContent : BStepperContent
     private bool _booting;
     private bool _firstRender = true;
     private StringNumber _height = 0;
+    private bool _transitionEndListenerAdded;
 
     protected override bool IsVertical => Stepper?.Vertical is true;
 
@@ -124,8 +125,6 @@ public partial class MStepperContent : BStepperContent
                     .AddIf($"height:{_height.ToUnit()}", () => _height != null && Stepper?.Vertical is true);
             });
     }
-
-    private bool _transitionEndListenerAdded;
 
     protected override void OnAfterRender(bool firstRender)
     {
