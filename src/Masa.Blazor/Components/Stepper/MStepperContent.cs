@@ -60,6 +60,8 @@ public partial class MStepperContent : BStepperContent
 
                 NextTick(async () =>
                 {
+                    AddTransitionEndListener();
+
                     await Task.Delay(16);
                     _booting = false;
                     IsActive = true;
@@ -123,6 +125,8 @@ public partial class MStepperContent : BStepperContent
             });
     }
 
+    private bool _transitionEndListenerAdded;
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
@@ -131,10 +135,17 @@ public partial class MStepperContent : BStepperContent
         {
             _firstRender = false;
 
-            if (Ref.TryGetSelector(out var selector))
-            {
-                _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
-            }
+            AddTransitionEndListener();
+        }
+    }
+
+    private void AddTransitionEndListener()
+    {
+        if (!_transitionEndListenerAdded && Ref.TryGetSelector(out var selector))
+        {
+            _transitionEndListenerAdded = true;
+
+            _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
         }
     }
 
