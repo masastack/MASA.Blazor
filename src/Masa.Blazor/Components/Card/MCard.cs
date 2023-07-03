@@ -68,6 +68,8 @@ namespace Masa.Blazor
 
         public bool Exact { get; }
 
+        public string? MatchPattern { get; }
+
         public bool IsClickable => _router?.IsClickable is true;
 
         protected override void OnParametersSet()
