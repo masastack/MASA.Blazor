@@ -44,7 +44,7 @@ namespace Masa.Blazor
 
         public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-        protected override Dictionary<string, object?> InputAttrs => new()
+        protected override Dictionary<string, object?> InputAttrs => new(Attributes)
         {
             { "type", "file" },
             { "accept", Accept }
