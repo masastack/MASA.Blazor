@@ -16,6 +16,7 @@ public partial class MStepperContent : BStepperContent
     private bool _booting;
     private bool _firstRender = true;
     private StringNumber _height = 0;
+    private bool _transitionEndListenerAdded;
 
     protected override bool IsVertical => Stepper?.Vertical is true;
 
@@ -60,6 +61,8 @@ public partial class MStepperContent : BStepperContent
 
                 NextTick(async () =>
                 {
+                    AddTransitionEndListener();
+
                     await Task.Delay(16);
                     _booting = false;
                     IsActive = true;
@@ -131,10 +134,17 @@ public partial class MStepperContent : BStepperContent
         {
             _firstRender = false;
 
-            if (Ref.TryGetSelector(out var selector))
-            {
-                _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
-            }
+            AddTransitionEndListener();
+        }
+    }
+
+    private void AddTransitionEndListener()
+    {
+        if (!_transitionEndListenerAdded && Ref.TryGetSelector(out var selector))
+        {
+            _transitionEndListenerAdded = true;
+
+            _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
         }
     }
 
