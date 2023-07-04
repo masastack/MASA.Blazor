@@ -15,7 +15,7 @@
 <MApp Class="body-large">
     <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
         <CascadingValue Value="@_project" Name="project">
-            <MErrorHandler>
+            <MErrorHandler DisablePopupIfErrorContentRender>
                 <ChildContent>
                     @if (_project is "blazor" or "framework")
                     {
@@ -207,7 +207,7 @@
             "docs.masastack.com" or "blazor.masastack.com" => "prd_",
             "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
             _ => "local_"
-            };
+        };
     }
 
     private void SetProject(Action? action = null)
