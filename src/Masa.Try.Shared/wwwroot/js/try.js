@@ -1,10 +1,18 @@
-﻿
-function init() {
+﻿function init() {
     initLanguages();
-    var splitter = document.getElementById('splitter');
-    var code = document.getElementById('code');
-    var render = document.getElementById('render');
 
+    let splitter = document.getElementById('splitter');
+    if (splitter) {
+        addSplitterEventListener(splitter);
+    } else {
+        setTimeout(() => {
+            splitter = document.getElementById('splitter');
+            addSplitterEventListener(splitter);
+        }, 1000)
+    }
+}
+
+function addSplitterEventListener(splitter) {
     var mouseDownHandler = function (e) {
         // Prevent text selection
         e.preventDefault();
@@ -36,6 +44,9 @@ function init() {
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
     };
+
+    var code = document.getElementById('code');
+    var render = document.getElementById('render');
 
     splitter.addEventListener('mousedown', mouseDownHandler);
 }
@@ -172,8 +183,7 @@ function addScript(scriptNode) {
 
     if (scriptNode.nodeType == 0) {
         document.body.appendChild(node);
-    }
-    else {
+    } else {
         document.head.appendChild(node);
     }
 }
