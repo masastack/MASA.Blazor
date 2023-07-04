@@ -51,12 +51,18 @@ public partial class Example : NextTickComponentBase
     {
         base.OnInitialized();
 
-        var githubUri =
-            $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
+        var githubUri = $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/{File.Replace(".", "/").Replace("_", "-")}.razor";
+
+        // From File: Examples.components.alerts.Border
+        // To Path: pages/Examples/components/alerts/examples/Border.txt
+        var sections = File.Replace("Examples", "pages", StringComparison.OrdinalIgnoreCase).Replace("_", "-").Split(".").ToList();
+        sections.Insert(sections.Count - 1, "examples");
+        var sourceCodePath = string.Join("/", sections) + ".txt";
+        var sourceCodeUri = $"https://docs.masastack.com/_content/Masa.Blazor.Docs/{sourceCodePath}";
 
         _tooltips = new()
         {
-            new("mdi-play-circle-outline", "run-example", null, $"https://try.masastack.com?path={githubUri}"),
+            new("mdi-play-circle-outline", "run-example", null, $"https://try.masastack.com?path={sourceCodeUri}"),
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
             new("mdi-github", "view-in-github", null, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)
