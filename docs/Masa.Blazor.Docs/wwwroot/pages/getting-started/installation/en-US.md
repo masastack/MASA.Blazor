@@ -17,7 +17,6 @@ dotnet new install Masa.Template::1.0.0-rc.2
 
 [Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
 
-- `masablazor-maui`: MASA Blazor MAUI template
 - `masablazor-server`: MASA Blazor Server template
 - `masablazor-wasm`: MASA Blazor WebAssembly template
 - `masablazor-empty-server`: MASA Blazor Server Empty template
