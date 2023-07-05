@@ -17,7 +17,15 @@
         {
             RTL = rtl;
             Breakpoint = breakpoint;
-            Breakpoint.OnChanged = e => { BreakpointChanged?.Invoke(this, e); };
+            Breakpoint.OnChanged = e =>
+            {
+                BreakpointChanged?.Invoke(this, e);
+
+                if (e.MobileChanged)
+                {
+                    MobileChanged?.Invoke(this, e);
+                }
+            };
 
             Application = application;
             Theme = theme;
@@ -56,7 +64,15 @@
 
         public event Action<Theme>? OnThemeChange;
 
+        /// <summary>
+        /// An event that fires when the breakpoint has changed.
+        /// </summary>
         public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
+
+        /// <summary>
+        /// An event that fires when the the value of Mobile property from <see cref="Breakpoint"/> has changed.
+        /// </summary>
+        public event EventHandler<MobileChangedEventArgs> MobileChanged;
 
         public void ToggleTheme()
         {

@@ -5,8 +5,7 @@ namespace Masa.Blazor;
 public class Breakpoint
 {
     private CancellationTokenSource _cancellationTokenSource;
-    private bool? _prevMobile;
-    private bool _firstCalculation = true;
+    private bool _prevMobile;
 
     public Breakpoint()
     {
@@ -18,6 +17,12 @@ public class Breakpoint
     }
 
     internal void SetWindow(Window window) => Window = window;
+
+    /// <summary>
+    /// Indicates that the breakpoint has been calculated. If not, the breakpoint will not work.
+    /// For example, the <see cref="Mobile"/> may be not correct before the breakpoint is initialized.
+    /// </summary>
+    public bool Initialized { get; private set; }
 
     public bool Xs { get; private set; }
 
@@ -160,21 +165,11 @@ public class Breakpoint
             Mobile = current <= max;
         }
 
-        var eventArgs = new BreakpointChangedEventArgs
-        {
-            FirstCalculation = _firstCalculation
-        };
+        var eventArgs = new BreakpointChangedEventArgs();
 
-        if (_firstCalculation)
-        {
-            _firstCalculation = false;
-        }
+        Initialized = true;
 
-        if (!_prevMobile.HasValue)
-        {
-            _prevMobile = Mobile;
-        }
-        else if (_prevMobile != Mobile)
+        if (_prevMobile != Mobile)
         {
             _prevMobile = Mobile;
             eventArgs.MobileChanged = true;
