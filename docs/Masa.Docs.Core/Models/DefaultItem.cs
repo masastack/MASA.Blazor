@@ -10,12 +10,14 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public bool Exact { get; set; }
 
+    public string? MatchPattern { get; set; }
+
     public string? Icon { get; set; }
 
     public string? Title { get; set; }
 
     public string? State { get; set; }
-    
+
     public string? StateBackgroundColor { get; set; }
 
     public StringNumber Value { get; set; }
@@ -45,7 +47,12 @@ public class DefaultItem : IDefaultItem<DefaultItem>
         Href = href;
     }
 
-    public DefaultItem(string title, string href, string state, string stateBackgroundColor = "red") : this(title, href)
+    public DefaultItem(string title, string href, string matchPattern) : this(title, href)
+    {
+        MatchPattern = matchPattern;
+    }
+    
+    public DefaultItem(string title, string href, string state, string stateBackgroundColor) : this(title, href)
     {
         State = state;
         StateBackgroundColor = stateBackgroundColor;

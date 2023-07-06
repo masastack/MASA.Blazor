@@ -26,12 +26,12 @@ public class AppService
             new ("docs", "/"),
         };
 
-        DefaultItem annualService = new("annual-service", "/annual-service", "pricing");
+        DefaultItem annualService = new("annual-service", "/annual-service", "pricing", "red");
 
         if (project == "blazor")
         {
-            list.Add(new ("getting-started", "/blazor/getting-started/installation"));
-            list.Add(new ("ui-components", "/blazor/components"));
+            list.Add(new ("getting-started", "/blazor/getting-started/installation", "/blazor/getting-started"));
+            list.Add(new ("ui-components", "/blazor/components/all", "/blazor/components"));
             list.Add(annualService);
             list.Add(new ("pro", "https://blazor-pro.masastack.com", "free-pro", "green"));
             list.Add(new ("blog", "https://blogs.masastack.com/tags/Blazor/"));

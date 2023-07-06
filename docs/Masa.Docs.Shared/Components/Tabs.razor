@@ -11,7 +11,7 @@
         <MTab Ripple="false"
               Href="@item.Href"
               Target="@item.Target"
-              Exact="false">
+              MatchPattern="@item.MatchPattern">
             @if (item.Href == "/")
             {
                 <MBadge Content="@Project"
