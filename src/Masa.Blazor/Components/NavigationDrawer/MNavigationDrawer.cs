@@ -178,7 +178,8 @@ namespace Masa.Blazor
 
             if (Value == null && ValueChanged.HasDelegate)
             {
-                _ = ValueChanged.InvokeAsync(!MasaBlazor.Breakpoint.Mobile);
+                var val = !MasaBlazor.Breakpoint.Mobile && !Temporary;
+                _ = ValueChanged.InvokeAsync(val);
             }
 
             if (App)
