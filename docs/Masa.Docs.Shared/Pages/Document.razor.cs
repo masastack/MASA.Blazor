@@ -36,13 +36,6 @@ public partial class Document : IDisposable
     private string? _prevCulture;
     private string? _prevAbsolutePath;
 
-    private Dictionary<string, string[]> _projectMap = new()
-    {
-        { "stack", new string[] { "MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png" } },
-        { "framework", new string[] { "MASA Framework", "https://cdn.masastack.com/images/framework_logo.png" } },
-        { "blazor", new string[] { "MASA Blazor", "https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" } }
-    };
-
     private string GithubUri
     {
         get
@@ -60,9 +53,6 @@ public partial class Document : IDisposable
 
     protected override void OnInitialized()
     {
-        BaseLayout.PageInfo.PageTitle = _projectMap.GetValueOrDefault(Project)?[0];
-        BaseLayout.PageInfo.PageIcon = _projectMap.GetValueOrDefault(Project)?[1];
-
         base.OnInitialized();
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;

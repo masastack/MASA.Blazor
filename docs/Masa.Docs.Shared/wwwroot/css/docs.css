@@ -431,6 +431,16 @@ a.text-dec-none {
     font-weight: 400 !important;
     font-size: 1rem !important;
     line-height: 1.5rem !important;
+    padding: 0 12px;
+}
+
+.default-tabs .m-tab.m-tab--active {
+    font-weight: 600 !important;
+}
+
+.default-tabs .m-tab:before {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .theme--light.default-tabs .m-tab:not(.m-tab--active) {

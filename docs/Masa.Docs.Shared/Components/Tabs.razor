@@ -11,12 +11,23 @@
         <MTab Ripple="false"
               Href="@item.Href"
               Target="@item.Target"
-              Exact="false">
-            <MBadge Color="@item.StateBackgroundColor"
-                    Content="@I18n.T(item.State)"
-                    Value="@(!string.IsNullOrWhiteSpace(item.State))">
-                @I18n.T(item.Title)
-            </MBadge>
+              MatchPattern="@item.MatchPattern">
+            @if (item.Href == "/")
+            {
+                <MBadge Content="@Project"
+                        Class="text-capitalize"
+                        Value="@(!string.IsNullOrWhiteSpace(Project))">
+                    @I18n.T(item.Title)
+                </MBadge>
+            }
+            else
+            {
+                <MBadge Color="@item.StateBackgroundColor"
+                        Content="@I18n.T(item.State)"
+                        Value="@(!string.IsNullOrWhiteSpace(item.State))">
+                    @I18n.T(item.Title)
+                </MBadge>
+            }
         </MTab>
     }
 
