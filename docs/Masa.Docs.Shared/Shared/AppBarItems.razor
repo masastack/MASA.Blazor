@@ -33,7 +33,7 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <ToolIcons OnSettingsClick="OnSettingsClick" />
+        <ToolIcons RepoUrl="@RepoUrl" OnSettingsClick="OnSettingsClick" />
     }
     else
     {
@@ -47,7 +47,10 @@
     public string? Project { get; set; }
 
     [CascadingParameter(Name = "Env")]
-    public string? Env { get; set; } = null;
+    public string? Env { get; set; }
+    
+    [Parameter]
+    public string? RepoUrl { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }

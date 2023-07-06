@@ -19,7 +19,8 @@
                         @onclick="OnAppBarNavIconClick" />
     }
 
-    <AppBarItems OnCultureChanged="OnCultureChanged"
+    <AppBarItems RepoUrl="@RepoUrl"
+                 OnCultureChanged="OnCultureChanged"
                  OnDotClick="OnDotClick" 
                  OnSettingsClick="OnSettingsClick">
     </AppBarItems>
@@ -28,13 +29,16 @@
 @code {
 
     [CascadingParameter(Name = "Culture")]
-    public string? Culture { get; set; } = null!;
+    public string? Culture { get; set; }
 
     [CascadingParameter(Name = "project")]
     public string? Project { get; set; }
 
     [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
+
+    [Parameter]
+    public string? RepoUrl { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }

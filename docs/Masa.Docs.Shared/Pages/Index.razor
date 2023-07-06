@@ -162,14 +162,7 @@
 
     private DotNetObjectReference<Index>? _objRef;
     private string? _activeHash;
-
     private bool _loading = true;
-
-    protected override void OnInitialized()
-    {
-        BaseLayout.PageInfo.PageTitle = "MASA Stack Docs";
-        BaseLayout.PageInfo.PageIcon = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png";
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

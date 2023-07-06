@@ -1,5 +1,20 @@
 ﻿{
-  "blazor": "Masa.Blazor.Docs",
-  "framework": "Masa.Framework.Docs",
-  "stack": "Masa.Stack.Docs"
+  "blazor": {
+    "name": "MASA Blazor",
+    "path": "Masa.Blazor.Docs",
+    "iconUrl": "https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png",
+    "repoUrl": "https://github.com/masastack/MASA.Blazor"
+  },
+  "framework": {
+    "name": "MASA Framework",
+    "path": "Masa.Framework.Docs",
+    "iconUrl": "https://cdn.masastack.com/images/framework_logo.png",
+    "repoUrl": "https://github.com/masastack/MASA.Framework"
+  },
+  "stack": {
+    "name": "MASA Stack",
+    "path": "Masa.Stack.Docs",
+    "iconUrl": "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png",
+    "repoUrl": "https://github.com/masastack/MASA.Stack"
+  }
 }
