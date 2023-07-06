@@ -6,7 +6,8 @@ namespace Masa.Docs.Shared.Shared;
 
 public partial class BaseLayout
 {
-    private static readonly Project s_emptyProject = new("MASA Stack", "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png",
+    private static readonly Project s_emptyProject = new("MASA Stack",
+        "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
         "https://github.com/masastack");
 
     private bool? _showSettings;
