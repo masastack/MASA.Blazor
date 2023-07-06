@@ -91,16 +91,9 @@ public partial class BaseLayout
         I18n.SetCulture(_culture);
     }
 
-    private async Task RefreshPage(bool isJsException)
+    private async Task RefreshPage()
     {
-        if (isJsException)
-        {
-            await RefreshToSkipWaiting();
-        }
-        else
-        {
-            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-        }
+        await RefreshToSkipWaiting();
     }
 
     private async Task RefreshToSkipWaiting()
