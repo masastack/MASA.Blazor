@@ -134,6 +134,9 @@ namespace Masa.Blazor
         [Parameter]
         public int DebounceInterval { get; set; }
 
+        /// <summary>
+        /// Update the bound value on blur instead of on input.
+        /// </summary>
         [Parameter]
         public bool UpdateOnBlur { get; set; }
 
