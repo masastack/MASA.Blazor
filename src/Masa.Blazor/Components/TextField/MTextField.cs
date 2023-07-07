@@ -134,6 +134,9 @@ namespace Masa.Blazor
         [Parameter]
         public int DebounceInterval { get; set; }
 
+        [Parameter]
+        public bool UpdateOnBlur { get; set; }
+
         private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
         private bool _badInput;
@@ -645,11 +648,11 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        public virtual async Task HandleOnChangeAsync(ChangeEventArgs args)
+        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            if (OnChange.HasDelegate)
+            if (UpdateOnBlur)
             {
-                await OnChange.InvokeAsync(InternalValue);
+                await UpdateValue(args.Value?.ToString(), OnChange);
             }
         }
 
@@ -672,7 +675,19 @@ namespace Masa.Blazor
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            var value = args.Value?.ToString();
+            if (UpdateOnBlur)
+            {
+                return;
+            }
+
+            await UpdateValue(args.Value?.ToString(), OnInput);
+
+            StateHasChanged();
+            // todo: args.validity.badInput
+        }
+
+        private async Task UpdateValue(string? value, EventCallback<TValue> callback)
+        {
             var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
 
             if (success)
@@ -683,9 +698,9 @@ namespace Masa.Blazor
 
                 InternalValue = val;
 
-                if (OnInput.HasDelegate)
+                if (callback.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(val);
+                    await callback.InvokeAsync(val);
                 }
             }
             else
@@ -694,7 +709,7 @@ namespace Masa.Blazor
 
                 InternalValue = default;
 
-                if (Type == "number")
+                if (Type.ToLower() == "number")
                 {
                     // reset the value of input element if failed to convert
                     if (!string.IsNullOrEmpty(value))
@@ -710,10 +725,6 @@ namespace Masa.Blazor
                 //and validate may not be called
                 InternalValidate();
             }
-
-            StateHasChanged();
-
-            // todo: args.validity.badInput
         }
 
         private TValue CheckNumberValidate()
