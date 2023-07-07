@@ -23,7 +23,7 @@ public class AppService
     {
         var list = new List<DefaultItem>()
         {
-            new ("docs", "/"),
+            new ("docs", "/", "^/$|^/((?!(blazor/components|blazor/getting-started)).)*/[^/]*"),
         };
 
         DefaultItem annualService = new("annual-service", "/annual-service", "pricing", "red");
