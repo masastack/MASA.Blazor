@@ -1,3 +1,24 @@
 ﻿@page "/"
 
-<h1>Test your code here!</h1>
+<MButton OnClick="() => value = !value">Toggle to @(!value)</MButton>
+
+<Transition Name="fab-transition">
+    <IfTransitionElement Value="@value">
+        <MCard Outlined>
+            <MCardText>
+                <h1>Why choose MASA Blazor?</h1>
+                <p class="info--text">
+                    MASA Blazor is based on Material design specifications, and each component is carefully designed, with modularity, responsiveness and excellent performance.
+                    MASA Blazor is regularly maintained and upgraded by a professional full-time technical team, efficient response speed, diversified solutions, and enterprise-level support. At present, it has been used in well-known companies, and the MASA Stack product line developed by the MASA team will continue to be used. In addition to ensuring the quality of the project, it can also continue to add new components and functions.
+                    In addition to providing developers with many middle- and Taiwan-based open source projects, MASA Stack, one of its most basic components, MASA Blazor, also hopes to be the most practical component library.
+                </p>
+            </MCardText>
+        </MCard>
+    </IfTransitionElement>
+</Transition>
+
+@code {
+
+    private bool value;
+
+}
