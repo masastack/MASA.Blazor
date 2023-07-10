@@ -5,29 +5,44 @@ namespace Masa.Blazor;
 public class MMain : BMain
 {
     [Inject]
-    public MasaBlazor? MasaBlazor { get; set; }
+    public MasaBlazor MasaBlazor { get; set; } = null!;
 
     private readonly string[] _applicationProperties = new string[]
     {
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
     };
 
+    private bool _isRendered;
+
     /// <summary>
     /// Avoid an entry animation on page load.
     /// </summary>
-    protected override bool IsBooted => MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated;
+    protected override bool IsBooted => _isRendered && (!MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        MasaBlazor!.Application.PropertyChanged += OnApplicationPropertyChanged;
+        MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _isRendered = true;
+            Attributes["data-booted"] = IsBooted ? "true" : null;
+            StateHasChanged();
+        }
     }
 
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_applicationProperties.Contains(e.PropertyName))
         {
+            Attributes["data-booted"] = IsBooted ? "true" : null;
             InvokeStateHasChanged();
         }
     }
@@ -38,14 +53,12 @@ public class MMain : BMain
             .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
             {
                 styleBuilder
-                    .Add($"padding-top:{MasaBlazor!.Application.Top + MasaBlazor.Application.Bar}px")
+                    .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
                     .Add($"padding-right:{MasaBlazor.Application.Right}px")
                     .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
                     .Add($"padding-left:{MasaBlazor.Application.Left}px");
             })
             .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
-
-        Attributes.Add("data-booted", IsBooted);
     }
 
     protected override void Dispose(bool disposing)

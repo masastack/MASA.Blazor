@@ -19,41 +19,41 @@ public class AppService
         }
     }
 
-    public static List<(string Title, string URL, string? Target, string? Badge)> GetNavMenus(string? project)
+    public static List<DefaultItem> GetNavMenus(string? project)
     {
-        var list = new List<(string Title, string URL, string? Target, string? Badge)>()
+        var list = new List<DefaultItem>()
         {
-            new("docs", "/", "_self", null),
+            new ("docs", "/", "^/$|^/((?!(blazor/components|blazor/getting-started)).)*/[^/]*"),
         };
 
-        (string Title, string URL, string? Target, string? Badge) annualService = new("annual-service", "/annual-service", "_self", "pricing");
+        DefaultItem annualService = new("annual-service", "/annual-service", "pricing", "red");
 
         if (project == "blazor")
         {
-            list.Add(("getting-started", "/blazor/getting-started/installation", "_self", null));
-            list.Add(("ui-components", "/blazor/components", "_self", null));
+            list.Add(new ("getting-started", "/blazor/getting-started/installation", "/blazor/getting-started"));
+            list.Add(new ("ui-components", "/blazor/components/all", "/blazor/components"));
             list.Add(annualService);
-            list.Add(("pro", "https://blazor-pro.masastack.com", "_blank", "free-pro"));
-            list.Add(("blog", "https://blogs.masastack.com/tags/Blazor/", "_blank", null));
-            list.Add(("official-website", "https://www.masastack.com/blazor", "_blank", null));
+            list.Add(new ("pro", "https://blazor-pro.masastack.com", "free-pro", "green"));
+            list.Add(new ("blog", "https://blogs.masastack.com/tags/Blazor/"));
+            list.Add(new ("official-website", "https://www.masastack.com/blazor"));
         }
         else if (project == "framework")
         {
             list.Add(annualService);
-            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Framework/", "_blank", null));
-            list.Add(("official-website", "https://www.masastack.com/framework", "_blank", null));
+            list.Add(new ("blog", "https://blogs.masastack.com/tags/MASA-Framework/"));
+            list.Add(new ("official-website", "https://www.masastack.com/framework"));
         }
         else if (project == "stack")
         {
             list.Add(annualService);
-            list.Add(("blog", "https://blogs.masastack.com/tags/MASA-Stack/", "_blank", null));
-            list.Add(("official-website", "https://www.masastack.com/stack", "_blank", null));
+            list.Add(new ("blog", "https://blogs.masastack.com/tags/MASA-Stack/"));
+            list.Add(new ("official-website", "https://www.masastack.com/stack"));
         }
         else
         {
             list.Add(annualService);
-            list.Add(("blog", "https://blogs.masastack.com", "_blank", null));
-            list.Add(("official-website", "https://www.masastack.com", "_blank", null));
+            list.Add(new ("blog", "https://blogs.masastack.com"));
+            list.Add(new ("official-website", "https://www.masastack.com"));
         }
 
         return list;

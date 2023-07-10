@@ -16,6 +16,8 @@ public partial class Toc : NextTickComponentBase
 
     [CascadingParameter(Name = "Culture")] private string? Culture { get; set; }
 
+    [Parameter] public bool RTL { get; set; }
+
     private string? _activeHash;
     private List<MarkdownItTocContent> _toc = new();
     private DotNetObjectReference<Toc>? _objRef;

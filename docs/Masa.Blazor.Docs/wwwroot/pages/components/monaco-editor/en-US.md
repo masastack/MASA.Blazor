@@ -6,9 +6,7 @@ tag: "JS Proxy"
 
 ## Usage
 
-<masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
-
-Reference the script before you use it:
+Before using, you need to introduce the scripts:
 
 ```html
 <script>
@@ -20,6 +18,8 @@ Reference the script before you use it:
 ```
 
 The full list of options can be found here [monaco-editor](https://microsoft.github.io/monaco-editor/docs.html)。
+
+<masa-example file="Examples.components.monaco_editor.Usage"></masa-example>
 
 ## Examples
 

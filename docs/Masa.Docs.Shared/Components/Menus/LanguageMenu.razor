@@ -3,7 +3,7 @@
 @inject MasaBlazor MasaBlazor
 @namespace Masa.Docs.Shared.Components
 
-<AppMenu Items="items">
+<AppMenu Items="_items" TItem="DefaultItem">
     <ActivatorContent>
         <MButton Icon="@MasaBlazor.Breakpoint.SmAndDown"
                  Text
@@ -26,23 +26,29 @@
 
 @code {
 
-    private List<DefaultItem> items = new();
-
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    private static Dictionary<string, string> s_cultureNames = new()
+    {
+        { "en-US", "English" },
+        { "zh-CN", "简体中文" }
+    };
+
+    private List<DefaultItem> _items = new();
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        items = new()
+        _items = new()
         {
             new DefaultItem() { Heading = I18n.T("translations") },
         };
 
-        items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
+        _items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
         {
-            Title = c.NativeName,
+            Title = s_cultureNames.GetValueOrDefault(c.Name, c.NativeName),
             Value = c.Name
         }));
     }

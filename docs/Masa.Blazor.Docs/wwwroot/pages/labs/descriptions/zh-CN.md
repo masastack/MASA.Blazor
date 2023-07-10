@@ -7,8 +7,6 @@ related:
   - /blazor/components/not-grouped
 ---
 
-<app-alert type='warning' content='这个组件将会在 `1.0.0-rc.4` 中引入。'></app-alert>
-
 ## 使用
 
 <masa-example file="Examples.labs.descriptions.Usage"></masa-example>

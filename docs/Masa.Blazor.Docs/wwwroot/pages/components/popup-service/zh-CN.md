@@ -176,10 +176,8 @@ services.AddMasaBlazor(options =>
     [Parameter]
     public AlertTypes Type { get; set; }
 
-    private async Task ValueChanged(bool val)
+    private async Task ValueChanged(bool _)
     {
-        Visible = val;
-
         await ClosePopupAsync();
     }
 }

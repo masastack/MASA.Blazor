@@ -8,13 +8,25 @@
         private bool _rtl;
 
         public MasaBlazor(
+            bool rtl,
             Breakpoint breakpoint,
             Application application,
             Theme theme,
             Icons icons,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
+            RTL = rtl;
             Breakpoint = breakpoint;
+            Breakpoint.OnChanged = e =>
+            {
+                BreakpointChanged?.Invoke(this, e);
+
+                if (e.MobileChanged)
+                {
+                    MobileChanged?.Invoke(this, e);
+                }
+            };
+
             Application = application;
             Theme = theme;
             Icons = icons;
@@ -30,6 +42,7 @@
                 {
                     _rtl = value;
                     OnRTLChange?.Invoke(_rtl);
+                    RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -41,12 +54,25 @@
         public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; }
 
         public Theme Theme { get; }
-        
+
         public Icons Icons { get; }
 
+        [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;
 
+        public event EventHandler RTLChanged;
+
         public event Action<Theme>? OnThemeChange;
+
+        /// <summary>
+        /// An event that fires when the breakpoint has changed.
+        /// </summary>
+        public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
+
+        /// <summary>
+        /// An event that fires when the the value of Mobile property from <see cref="Breakpoint"/> has changed.
+        /// </summary>
+        public event EventHandler<MobileChangedEventArgs> MobileChanged;
 
         public void ToggleTheme()
         {

@@ -12,7 +12,7 @@
            ActionText="@I18n.T("pwa.refresh")"
            ActionColor="secondary"
            OnClose="Ignore"
-           OnAction="RefreshToSkipWaiting">
+           OnAction="OnRefresh">
 </PSnackbar>
 
 @code {
@@ -20,14 +20,12 @@
     [CascadingParameter(Name = "Culture")]
     public string? Culture { get; set; }
 
+    [Parameter]
+    public Func<Task> OnRefresh { get; set; }
+
     private async Task Ignore()
     {
         await JSRuntime.InvokeVoidAsync("swIgnoreUpdate");
-    }
-
-    private async Task RefreshToSkipWaiting()
-    {
-        await JSRuntime.InvokeVoidAsync("swSkipWaiting");
     }
 
 }

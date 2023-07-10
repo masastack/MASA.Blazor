@@ -105,9 +105,16 @@
 
         public async ValueTask DisposeAsync()
         {
-            if (ScrollStrategyJSModule.Initialized)
+            try
             {
-                await ShowScroll();
+                if (ScrollStrategyJSModule.Initialized)
+                {
+                    await ShowScroll();
+                }
+            }
+            catch
+            {
+                // ignored
             }
         }
     }

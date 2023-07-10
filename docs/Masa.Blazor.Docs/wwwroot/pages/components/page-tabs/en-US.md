@@ -17,13 +17,21 @@ A set of visited tab components that can be switched to the corresponding page b
   the `UpdateTabTitle` method provided with the `IPageTabsProvider` parameter, the title set by the `TabOptions` parameter
   will be overwritten.
 - The `SelfPatterns` parameter is used for fuzzy matching paths. All successful paths are displayed in the same tab. The
-  behavior is similar to the `href` attribute of the `<a></a>` tag.
+  behavior is similar to `_self` of the `href` attribute of the `<a></a>` tag.
 - Use the `OnClose` parameter to customize the behavior of closing the tab. Return `true` to close the tab and return
   `false` to not close the tab.
+
+> It needs to be used with the **PPageContainer** component.
 
 ### PPageContainer
 
 After wrapping `@Body`, the contents of the page will be cached.
+
+- The `SelfPatterns` parameter is used for fuzzy matching paths. All successful paths are displayed in the same content. The
+  behavior is similar to `_self` of the `href` attribute of the `<a></a>` tag.
+- The `ExcludedPatterns` parameter accepts a list of regular expressions that match the path, and the content of the page corresponding to the successful match will not be cached in the DOM after leaving the page.
+
+> The component can be used alone.
 
 ### PPageTabsProvider
 
@@ -44,7 +52,7 @@ The specific source codes are listed below:
 - [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
   Page1: demonstrate the ability to save page state.
 - [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
-  Page2: demonstrate the ability to save page state.
+  Page2: demonstrate the ability to not save page state after using the `ExcludedPatterns` attribute.
 - [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
   Page3: demonstrates the ability to change the title of a tab.
 - [PageTabs4.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)

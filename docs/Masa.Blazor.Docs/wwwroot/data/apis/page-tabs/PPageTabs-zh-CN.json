@@ -1,0 +1,22 @@
+{
+  "props": {
+    "askBeforeClosing": "关闭前是否询问。",
+    "closeIcon": "关闭的图标。",
+    "closeOtherTabsText": "关闭其他标签的文本。",
+    "closeTabsToTheLeftText": "关闭左侧标签的文本。",
+    "closeTabsToTheRightText": "关闭右侧标签的文本。",
+    "hideSlider": "隐藏滑块。",
+    "noDataPath": "无数据时的路径。",
+    "onClose": "自定义关闭标签的逻辑，返回 `false` 可以阻止关闭。",
+    "reloadTabText": "重新加载标签的文本。",
+    "selfPatterns": "属性用于模糊匹配路径，所有匹配成功的路径都会显示在同一个标签中。",
+    "sliderColor": "滑块的颜色。",
+    "tabClass": "标签的样式类。",
+    "tabOptions": "标签的配置。"
+  },
+  "events": {
+  },
+  "contents": {
+    "tabIconContent": "标签图标的插槽。"
+  }
+}

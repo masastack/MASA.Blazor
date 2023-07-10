@@ -13,8 +13,10 @@ public partial class MStepperContent : BStepperContent
     [Parameter]
     public int Step { get; set; }
 
+    private bool _booting;
     private bool _firstRender = true;
     private StringNumber _height = 0;
+    private bool _transitionEndListenerAdded;
 
     protected override bool IsVertical => Stepper?.Vertical is true;
 
@@ -36,6 +38,41 @@ public partial class MStepperContent : BStepperContent
 
     private async void IsActiveChangeCallback(bool? current, bool? previous)
     {
+        if (Eager)
+        {
+            IsActive = current is true;
+        }
+        else
+        {
+            if (IsBooted)
+            {
+                NextTick(async () =>
+                {
+                    await Task.Delay(16);
+                    IsActive = current is true;
+                    StateHasChanged();
+                });
+            }
+            else if (current is true)
+            {
+                IsBooted = true;
+
+                _booting = true;
+
+                NextTick(async () =>
+                {
+                    AddTransitionEndListener();
+
+                    await Task.Delay(16);
+                    _booting = false;
+                    IsActive = true;
+                    StateHasChanged();
+                });
+
+                await InvokeStateHasChangedAsync();
+            }
+        }
+
         // If active and the previous state
         // was null, is just booting up
         if (current is true && previous == null)
@@ -45,20 +82,24 @@ public partial class MStepperContent : BStepperContent
             return;
         }
 
-        if (!IsVertical)
+        if (!IsVertical || (!Eager && !IsBooted))
         {
             return;
         }
 
-        if (IsActive)
+        await NextTickIf(async () =>
         {
-            await Enter();
-        }
-        else
-        {
-            await Leave();
-        }
+            if (IsActive)
+            {
+                await Enter();
+            }
+            else
+            {
+                await Leave();
+            }
+        }, () => !Eager);
     }
+
 
     protected override void SetComponentClass()
     {
@@ -93,10 +134,17 @@ public partial class MStepperContent : BStepperContent
         {
             _firstRender = false;
 
-            if (Ref.TryGetSelector(out var selector))
-            {
-                _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
-            }
+            AddTransitionEndListener();
+        }
+    }
+
+    private void AddTransitionEndListener()
+    {
+        if (!_transitionEndListenerAdded && Ref.TryGetSelector(out var selector))
+        {
+            _transitionEndListenerAdded = true;
+
+            _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
         }
     }
 
@@ -122,11 +170,8 @@ public partial class MStepperContent : BStepperContent
         // Give the collapsing element time to collapse
         await Task.Delay(450);
 
-        if (IsActive)
-        {
-            _height = scrollHeight == 0 ? "auto" : scrollHeight;
-            StateHasChanged();
-        }
+        _height = scrollHeight == 0 ? "auto" : scrollHeight;
+        StateHasChanged();
     }
 
     private async Task Leave()

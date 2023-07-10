@@ -102,8 +102,6 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
                 return Column;
             }
 
-            Console.Out.WriteLine("val = {0}", val);
-            
             return val;
         }
     }
@@ -185,9 +183,9 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
-    private Task BreakpointOnOnUpdate()
+    private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
-        return InvokeStateHasChangedAsync();
+        await InvokeStateHasChangedAsync();
     }
 
     protected override void SetComponentClass()

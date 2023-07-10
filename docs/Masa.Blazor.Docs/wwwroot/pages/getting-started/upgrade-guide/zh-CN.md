@@ -1,8 +1,8 @@
 # 升级指南
 
-## 从 v0.6.x 升级到 v1.0.x
+## 从 v0.6.x 升级到 v1.0.0
 
-v1.0.x 包含了不兼容的破坏性更改，包括以下变更：
+v1.0.0 包含了不兼容的破坏性更改，包括以下变更：
 
 ### 特性
 
@@ -15,6 +15,30 @@ services.AddMasaBlazor(options =>
 {
     options.Locale = new Locale("zh-CN", "en-US");
 });
+```
+
+#### 双向性(LTR/RTL)
+
+删除了通过参数设置某些组件默认 RTL 的方式。现在在 _Program.cs_ 中通过 `AddMasaBlazor` 的 `RTL` 选项设置默认 RTL。
+
+- MApp (移除了 `LeftToRight` 参数)
+- MBadge (移除了 `Right` 参数)
+
+### 服务
+
+#### MasaBlazor
+
+`MasaBlazor.Breakpoint.OnUpdate` 事件的类型改为了 `EventHandler<BreakpointChangedEventArgs>`。
+
+```diff
+  @inject MasaBlazor MasaBlazor
+
+  MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+
+- private void BreakpointOnOnUpdate()
++ private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+  {
+  }
 ```
 
 ### 组件
@@ -113,6 +137,10 @@ services.AddMasaBlazor(options =>
 - <MList Linkage></MList>
 + <MList Routable></MList>
 ```
+
+#### MNavigationDrawer
+
+`Value` 的类型改为 `bool?`，`ValueChanged` 的类型改为 `EventCallback<bool?>`。如果你没有特别的需求，建议将 `Value` 值设置 `null`。当 `Value` 值为 `null` 时，组件会根据屏幕宽度自动判断是否显示抽屉。
 
 #### MOverlay
 

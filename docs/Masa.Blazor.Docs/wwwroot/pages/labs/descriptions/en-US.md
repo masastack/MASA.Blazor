@@ -7,8 +7,6 @@ related:
   - /blazor/components/not-grouped
 ---
 
-<app-alert type='warning' content='This component will be introduced in `1.0.0-rc.4`.'></app-alert>
-
 ## Usage
 
 <masa-example file="Examples.labs.descriptions.Usage"></masa-example>

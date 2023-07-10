@@ -1,6 +1,6 @@
 ---
 title: Gridstack
-desc: "Packaging based on [gridstack](https://github.com/gridstack/gridstack.js)"
+desc: "Packaging based on [gridstack(v7.2.1)](https://github.com/gridstack/gridstack.js)"
 tag: JS Proxy
 related:
   - /blazor/components/echarts                      
@@ -9,6 +9,12 @@ related:
 ---
 
 ## Usage
+
+You need to import the style file before using it:
+
+```csharp
+<link href="https://cdn.jsdelivr.net/npm/gridstack@7.2.1/dist/gridstack.min.js" rel="stylesheet">
+```
 
 <masa-example file="Examples.components.gridstack.Usage"></masa-example>
 

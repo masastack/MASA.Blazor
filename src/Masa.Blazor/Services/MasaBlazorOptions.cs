@@ -11,6 +11,14 @@ public class MasaBlazorOptions : BlazorComponentOptions
 
     public bool RTL { get; set; }
 
+    public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
+
+    internal Theme Theme { get; }
+
+    internal Breakpoint Breakpoint { get; }
+
+    internal Icons Icons { get; }
+
     public void ConfigureTheme(Action<Theme> configure)
     {
         configure.Invoke(Theme);
@@ -42,12 +50,4 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.Name = name;
         Icons.Aliases = aliases;
     }
-
-    public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
-
-    internal Theme Theme { get; }
-
-    internal Breakpoint Breakpoint { get; }
-
-    internal Icons Icons { get; }
 }

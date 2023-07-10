@@ -73,7 +73,7 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment? PrependContent { get; set; }
-        
+
         private readonly string[] _applicationProperties = new string[]
         {
             "Bottom", "Footer", "Bar", "Top"
@@ -142,7 +142,7 @@ namespace Masa.Blazor
             get
             {
                 if (MasaBlazor == null) return false;
-                
+
                 var mobile = MasaBlazor.Breakpoint.Mobile;
                 var width = MasaBlazor.Breakpoint.Width;
                 var name = MasaBlazor.Breakpoint.Name;
@@ -176,7 +176,17 @@ namespace Masa.Blazor
 
             MasaBlazor!.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
 
-            MasaBlazor.Application.HasNavigationDrawer = App && !Temporary;
+            if (Value == null && ValueChanged.HasDelegate)
+            {
+                var val = !MasaBlazor.Breakpoint.Mobile && !Temporary;
+                _ = ValueChanged.InvokeAsync(val);
+            }
+
+            if (App)
+            {
+                MasaBlazor.Application.HasNavigationDrawer = !Temporary;
+            }
+
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
             NavigationManager!.LocationChanged += OnLocationChanged;
@@ -191,6 +201,8 @@ namespace Masa.Blazor
                 await UpdateApplicationAsync();
 
                 ZIndex = await GetActiveZIndexAsync();
+
+                StateHasChanged();
             }
         }
 
@@ -199,20 +211,35 @@ namespace Masa.Blazor
             base.RegisterWatchers(watcher);
 
             watcher
-                .Watch<bool>(nameof(Value), val =>
+                .Watch<bool?>(nameof(Value), val =>
                 {
                     if (Permanent)
                     {
                         return;
                     }
 
+                    if (val == null)
+                    {
+                        Init();
+                        return;
+                    }
+
                     if (val != IsActive)
                     {
-                        IsActive = val;
+                        IsActive = val.Value;
                     }
                 })
                 .Watch<bool>(nameof(IsActive), val =>
                 {
+                    if (ValueChanged.HasDelegate)
+                    {
+                        ValueChanged.InvokeAsync(val);
+                    }
+                    else
+                    {
+                        Value = val;
+                    }
+
                     // OverlayRef is not null in the next tick.
                     NextTick(async () =>
                     {
@@ -235,14 +262,8 @@ namespace Masa.Blazor
                     //We will remove this when mixins applicationable finished
                     _ = UpdateApplicationAsync();
                 })
-                .Watch<bool>(nameof(ExpandOnHover), val =>
-                {
-                    UpdateMiniVariant(val, false);
-                })
-                .Watch<bool>(nameof(IsMouseover), val =>
-                {
-                    UpdateMiniVariant(!val);
-                });
+                .Watch<bool>(nameof(ExpandOnHover), val => { UpdateMiniVariant(val, false); })
+                .Watch<bool>(nameof(IsMouseover), val => { UpdateMiniVariant(!val); });
         }
 
         private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -255,21 +276,27 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task OnBreakpointOnUpdate()
+        private async void OnBreakpointOnUpdate(object? sender, BreakpointChangedEventArgs e)
         {
-            NextTick(async () =>
+            if (!e.MobileChanged)
             {
-                //When window resize,we should update ZIndex for Overlay 
-                ZIndex = await GetActiveZIndexAsync();
-            });
+                return;
+            }
 
             if (!ReactsToResize || !ReactsToMobile)
             {
                 return;
             }
 
+            NextTick(async () =>
+            {
+                //When window resize,we should update ZIndex for Overlay 
+                ZIndex = await GetActiveZIndexAsync();
+                StateHasChanged();
+            });
+
             IsActive = !IsMobile;
-            await ValueChanged.InvokeAsync(IsActive);
+
             await InvokeStateHasChangedAsync();
         }
 
@@ -278,7 +305,7 @@ namespace Masa.Blazor
         private void ApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_applicationProperties.Contains(e.PropertyName))
-            { 
+            {
                 InvokeStateHasChanged();
             }
         }
@@ -307,9 +334,9 @@ namespace Masa.Blazor
             {
                 IsActive = true;
             }
-            else if (Stateless)
+            else if (Stateless || Value != null)
             {
-                IsActive = Value;
+                IsActive = Value!.Value;
             }
             else if (!Temporary)
             {
@@ -414,7 +441,7 @@ namespace Masa.Blazor
             var val = (!IsActive || IsMobile || Temporary)
                 ? 0
                 : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
-            
+
             if (Right)
                 MasaBlazor!.Application.Right = val;
             else

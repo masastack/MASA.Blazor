@@ -8,5 +8,6 @@
         TopCenter,
         TopRight,
         TopLeft,
+        Center
     }
 }

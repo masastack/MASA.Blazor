@@ -6,7 +6,7 @@
             <PPageTabs @ref="_pageTabs"
                        NoDataPath="/blazor/examples/page-tabs/page1"
                        TabOptions="@TabOptions"
-                       SelfPatterns="@SelfPatterns">
+                       SelfPatterns="@s_selfPatterns">
             </PPageTabs>
         </MAppBar>
 
@@ -14,7 +14,9 @@
             <MContainer>
                 <MCard Outlined>
                     <MCardText>
-                        <PPageContainer PageTabs="_pageTabs" SelfPatterns="SelfPatterns">
+                        <PPageContainer PageTabs="_pageTabs" 
+                                        SelfPatterns="@s_selfPatterns"
+                                        ExcludedPatterns="@s_excludedPatterns">
                             @Body
                         </PPageContainer>
                     </MCardText>
@@ -35,9 +37,14 @@
 
     private PPageTabs? _pageTabs;
 
-    private static readonly string[] SelfPatterns = new[]
+    private static readonly string[] s_selfPatterns =
     {
         "/blazor/examples/page-tabs/page4",
+    };
+
+    private static readonly string[] s_excludedPatterns =
+    {
+        "/blazor/examples/page-tabs/page2"
     };
 
     private TabOptions? TabOptions(PageTabPathValue pathValue)

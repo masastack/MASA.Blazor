@@ -6,9 +6,9 @@ namespace Masa.Blazor
     {
         private double _bar;
         private double _top;
-        private double _left;
+        private double? _left;
         private double _insetFooter;
-        private double _right;
+        private double? _right;
         private double _bottom;
         private double _footer;
 
@@ -50,12 +50,12 @@ namespace Masa.Blazor
 
         public double Left
         {
-            get => _left;
+            get => _left ?? 0;
             internal set
             {
                 LeftRightCalculated = true;
 
-                if (_left != value)
+                if (_left is null || _left != value)
                 {
                     _left = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
@@ -78,12 +78,12 @@ namespace Masa.Blazor
 
         public double Right
         {
-            get => _right;
+            get => _right ?? 0;
             internal set
             {
                 LeftRightCalculated = true;
 
-                if (_right != value)
+                if (_right is null || _right != value)
                 {
                     _right = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));

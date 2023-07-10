@@ -4,14 +4,16 @@
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
+@inject MasaBlazor MasaBlazor
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
                    Class="default-nav"
                    Floating
                    Width="300"
-                   @bind-Value="_showMobileIndexNavMenuList"
-                   Clipped>
+                   @bind-Value="_drawer"
+                   Clipped
+                   Right="@MasaBlazor.RTL">
     <ChildContent>
         <MListItem>
             <MListItemContent>
@@ -156,18 +158,11 @@
 
     private string _selectVersion = "1.0";
 
-    private bool _showMobileIndexNavMenuList;
+    private bool? _drawer;
 
     private DotNetObjectReference<Index>? _objRef;
     private string? _activeHash;
-
     private bool _loading = true;
-
-    protected override void OnInitialized()
-    {
-        BaseLayout.PageInfo.PageTitle = "MASA Stack Docs";
-        BaseLayout.PageInfo.PageIcon = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png";
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -199,7 +194,7 @@
                 });
             }
 
-            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
+            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool?>(this, val => { _drawer = !(_drawer ?? false); });
         }
     }
 

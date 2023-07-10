@@ -55,7 +55,8 @@ public partial class MMonacoEditor : BDomComponentBase
 
     private string? _value;
     private bool _valueChangedByUser;
-    private IJSObjectReference? _monaco;
+
+    public IJSObjectReference? Editor { get; private set; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -120,7 +121,7 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
-        _monaco = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
+        Editor = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }
@@ -132,22 +133,22 @@ public partial class MMonacoEditor : BDomComponentBase
 
     public async Task AddCommandAsync<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
     {
-        await Module.AddCommand(_monaco!, keybinding, dotNetObjectReference, method);
+        await Module.AddCommand(Editor!, keybinding, dotNetObjectReference, method);
     }
 
     public async Task UpdateOptionsAsync(object options)
     {
-        await Module.UpdateOptions(_monaco!, options);
+        await Module.UpdateOptions(Editor!, options);
     }
 
     public async Task<string> GetValueAsync()
     {
-        return await Module.GetValue(_monaco!);
+        return await Module.GetValue(Editor!);
     }
 
     public async Task SetValueAsync(string? value)
     {
-        await Module.SetValue(_monaco!, value);
+        await Module.SetValue(Editor!, value);
     }
 
     public async Task SetThemeAsync(string theme)
@@ -162,12 +163,12 @@ public partial class MMonacoEditor : BDomComponentBase
 
     public async Task<TextModelOptions> GetModelAsync()
     {
-        return await Module.GetModel(_monaco!);
+        return await Module.GetModel(Editor!);
     }
 
     public async Task SetModelLanguageAsync(string languageId)
     {
-        await Module.SetModelLanguage(_monaco!, languageId);
+        await Module.SetModelLanguage(Editor!, languageId);
     }
 
     public async Task RemeasureFontsAsync()

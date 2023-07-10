@@ -1,8 +1,8 @@
 # Upgrade Guides
 
-## Upgrading from v0.6.x to v1.0.x
+## Upgrading from v0.6.x to v1.0.0
 
-v1.0.x contains non backwards compatible breaking changes, the following changes:
+v1.0.0 contains non backwards compatible breaking changes, the following changes:
 
 ### Features
 
@@ -15,6 +15,30 @@ services.AddMasaBlazor(options =>
 {
     options.Locale = new Locale("zh-CN", "en-US");
 });
+```
+
+#### Bidirectionality (LTR/RTL)
+
+Removed the way of setting the default RTL on some components through parameter. Instead, supply the `RTL` option when calling `AddMasaBlazor` in _Program.cs_.
+
+- MApp (Removed `LeftToRight` parameter)
+- MBadge (Removed `Right` parameter)
+
+### Services
+
+#### MasaBlazor
+
+The type of the `MasaBlazor.Breakpoint.OnUpdate` event is changed to `EventHandler<BreakpointChangedEventArgs>`.
+
+```diff
+  @inject MasaBlazor MasaBlazor
+
+  MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+
+- private void BreakpointOnOnUpdate()
++ private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+  {
+  }
 ```
 
 ### Components
@@ -114,6 +138,10 @@ The `Linkage` is renamed to `Routable`.
 - <MList Linkage></MList>
 + <MList Routable></MList>
 ```
+
+#### MNavigationDrawer
+
+The type of `Value` is changed to `bool?`, and the type of `ValueChanged` is changed to `EventCallback<bool?>`. If you don't have special requirements, it is recommended to set the `Value` value to `null`. When the `Value` value is `null`, the component will automatically determine whether to display the drawer according to the screen width.
 
 #### MOverlay
 

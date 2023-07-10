@@ -23,7 +23,9 @@ public class MCarouselItem : MWindowItem, IRoutable
     [Parameter]
     public string? Src { get; set; }
 
-    public bool Exact { get; set; }
+    public bool Exact { get; }
+
+    public string? MatchPattern { get; }
 
     private IRoutable? _router;
 

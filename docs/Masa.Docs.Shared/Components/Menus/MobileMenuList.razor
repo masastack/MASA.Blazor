@@ -13,10 +13,10 @@
         <MListItemGroup>
             @foreach (var item in AppService.GetNavMenus(Project))
             {
-                <MListItem Href="@item.URL" Target="@item.Target">
+                <MListItem Href="@item.Href" Target="@item.Target">
                     <MListItemContent>
                         <MListItemTitle>
-                            <MBadge Color="red" Content="@I18n.T(item.Badge)" Value="@(!string.IsNullOrWhiteSpace(item.Badge))">
+                            <MBadge Color="@item.StateBackgroundColor" Content="@I18n.T(item.State)" Value="@(!string.IsNullOrWhiteSpace(item.State))">
                                 @I18n.T(item.Title)
                             </MBadge>
                         </MListItemTitle>
@@ -44,9 +44,9 @@
     public string? Project { get; set; }
 
     [Parameter]
-    public bool Value { get; set; }
+    public bool? Value { get; set; }
 
     [Parameter]
-    public EventCallback<bool> ValueChanged { get; set; }
+    public EventCallback<bool?> ValueChanged { get; set; }
 
 }

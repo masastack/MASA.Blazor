@@ -13,6 +13,8 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
+        protected override bool RTL => MasaBlazor.RTL;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -21,10 +23,12 @@
             IsMobile = MasaBlazor.Breakpoint.Mobile;
         }
 
-        private Task BreakpointOnOnUpdate()
+        private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
         {
+            if (!e.MobileChanged) return;
+
             IsMobile = MasaBlazor.Breakpoint.Mobile;
-            return InvokeStateHasChangedAsync();
+            await InvokeStateHasChangedAsync();
         }
 
         protected override void OnParametersSet()

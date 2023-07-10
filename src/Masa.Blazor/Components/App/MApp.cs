@@ -8,17 +8,10 @@ namespace Masa.Blazor
     public class MApp : BApp
     {
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Window? Window { get; set; }
-
-        /// <summary>
-        /// Whether to display from left to right
-        /// </summary>
-        [Parameter]
-        [ApiDefaultValue(true)]
-        public bool LeftToRight { get; set; } = true;
+        public Window Window { get; set; } = null!;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
@@ -26,23 +19,33 @@ namespace Masa.Blazor
 
         protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
 
-        protected override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            MasaBlazor!.OnThemeChange -= OnThemeChange;
+            base.OnInitialized();
+
             MasaBlazor.OnThemeChange += OnThemeChange;
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
 
             OnThemeChange(MasaBlazor.Theme);
+        }
 
-            return base.OnInitializedAsync();
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeStateHasChanged();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
-                await MasaBlazor!.Breakpoint.InitAsync();
-                await Window!.InitializeAsync();
-                
+                await MasaBlazor.Breakpoint.InitAsync();
+
+                IsMasaBlazorReady = true;
+
+                await Window.AddResizeEventListenerAsync();
+
                 StateHasChanged();
             }
         }
@@ -69,7 +72,7 @@ namespace Masa.Blazor
                         .Add("m-application")
                         .Add(() =>
                         {
-                            var suffix = LeftToRight ? "ltr" : "rtl";
+                            var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
                         .AddTheme(IsDark);
@@ -81,6 +84,14 @@ namespace Masa.Blazor
                 });
 
             Attributes.Add("data-app", true);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            MasaBlazor.OnThemeChange -= OnThemeChange;
+            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
         }
     }
 }
