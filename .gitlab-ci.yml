@@ -92,8 +92,8 @@ deploy-dev-ydy:
   only:
     - main
   script:
-    - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masastack-dev
+    - echo $KUBE_CONFIG_MASA_YDY | base64 -d > ./config
+    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masa-blazor-dev
   retry: 2
 
 
