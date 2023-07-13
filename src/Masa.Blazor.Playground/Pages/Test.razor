@@ -1,0 +1,41 @@
+﻿@page "/Test"
+
+<MButton OnClick="() => value = !value">Toggle to @(!value)</MButton>
+
+
+@* <MTransition Name="fade-transition" LeaveAbsolute> *@
+@*     <MShowTransitionElement Value="value"> *@
+@*         <MIcon Color="success"> *@
+@*             mdi-check *@
+@*         </MIcon> *@
+@*     </MShowTransitionElement> *@
+@*     <MShowTransitionElement Value="!value"> *@
+@*         <MIcon Color="red"> *@
+@*             mdi-content-copy *@
+@*         </MIcon> *@
+@*     </MShowTransitionElement> *@
+@* </MTransition> *@
+
+<MButton OnClick="() => _count++">Count++</MButton>
+
+@* <FadeTransition LeaveAbsolute> *@
+@*     <KeyTransitionElement Tag="span" Value="@($"task-{_count}")"> *@
+@*         @_count *@
+@*     </KeyTransitionElement> *@
+@* </FadeTransition> *@
+
+<MFadeTransition>
+    <MKeyTransitionElement Tag="span" Value="@($"task-{_count}")">
+        @_count
+    </MKeyTransitionElement>
+</MFadeTransition>
+
+@code {
+
+    private int _count;
+
+    private string? _newTask;
+
+    private bool value;
+
+}
