@@ -1,11 +1,15 @@
+using Masa.Blazor.Playground.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMasaBlazor();
 builder.Services.AddHttpClient();
+
+builder.Services.TryAddTransient<TransitionJSModule>();
 
 builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 

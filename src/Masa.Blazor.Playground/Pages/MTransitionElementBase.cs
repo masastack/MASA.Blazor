@@ -1,9 +1,8 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Playground.Pages;
 
-public class MTransitionElementBase<TValue> : Element where TValue : notnull
+public class MTransitionElementBase<TValue> : MElement where TValue : notnull
 {
     [CascadingParameter]
     protected MTransition? Transition { get; set; }

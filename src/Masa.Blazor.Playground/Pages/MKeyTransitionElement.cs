@@ -4,26 +4,24 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor.Playground.Pages;
 
-public class KeyTransitionState<TValue> where TValue : notnull
+public class KeyTransitionState
 {
-    public TValue Key { get; set; }
+    public string? Key { get; set; }
 
     public bool Value { get; set; }
 
-    public KeyTransitionState(TValue key, bool value)
+    public KeyTransitionState(string? key, bool value)
     {
         Key = key;
         Value = value;
     }
 }
 
-public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> where TValue : notnull
+public class MKeyTransitionElement : MTransitionElementBase<string>
 {
-    private TValue? _prevValue;
-    private List<KeyTransitionState<TValue>?> _states = new() { default, default };
-    private bool need_a_render;
-
-    private List<KeyTransitionState<TValue>?> ComputedStates => _states.Where(s => s is not null).ToList();
+    private string? _prevValue;
+    private List<KeyTransitionState?> _states = new();
+    private bool _needARender;
 
     protected override void OnInitialized()
     {
@@ -36,14 +34,15 @@ public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> wher
     {
         base.OnParametersSet();
 
-        if (!EqualityComparer<TValue>.Default.Equals(Value, _prevValue))
+        if (!EqualityComparer<string>.Default.Equals(Value, _prevValue))
         {
-            _states[0] = new KeyTransitionState<TValue>(_prevValue, true);
-            _states[1] = new KeyTransitionState<TValue>(Value, false);
+            _states.Clear();
+            _states.Add(new KeyTransitionState(_prevValue, true));
+            _states.Add(new KeyTransitionState(Value, false));
 
             _prevValue = Value;
 
-            need_a_render = true;
+            _needARender = true;
         }
     }
 
@@ -51,18 +50,14 @@ public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> wher
     {
         await base.OnAfterRenderAsync(firstRender);
 
-        if (need_a_render)
+        if (_needARender)
         {
-            need_a_render = false;
+            _needARender = false;
 
-            NextTick(() =>
-            {
-                _states[0].Value = false;
-                _states[1].Value = true;
-                StateHasChanged();
-            });
+            _states[0].Value = false;
+            _states[1].Value = true;
 
-            // await Task.Delay(16);
+            await Task.Delay(17);
 
             StateHasChanged();
         }
@@ -70,9 +65,9 @@ public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> wher
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        if (ComputedStates.Count == 0)
+        if (_states.Count == 0)
         {
-            BuildRenderTree2(builder, new KeyTransitionState<TValue>(Value, true));
+            BuildRenderTree2(builder, new KeyTransitionState(Value, true));
         }
         else
         {
@@ -83,7 +78,7 @@ public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> wher
         }
     }
 
-    private void BuildRenderTree2(RenderTreeBuilder builder, KeyTransitionState<TValue> state)
+    private void BuildRenderTree2(RenderTreeBuilder builder, KeyTransitionState state)
     {
         Console.Out.WriteLine($"state.Key ={state.Key}, state.Value = {state.Value}");
 
@@ -95,13 +90,13 @@ public class MKeyTransitionElement<TValue> : MTransitionElementBase<TValue> wher
         builder.CloseComponent();
     }
 
-    private RenderFragment RenderChildContent(KeyTransitionState<TValue> state)
+    private RenderFragment RenderChildContent(KeyTransitionState state)
     {
         return builder =>
         {
             var sequence = 0;
             builder.OpenComponent<Container>(sequence++);
-            builder.AddAttribute(sequence++, nameof(Container.Value), EqualityComparer<TValue>.Default.Equals(state.Key, Value));
+            builder.AddAttribute(sequence++, nameof(Container.Value), EqualityComparer<string>.Default.Equals(state.Key, Value));
             builder.AddAttribute(sequence, nameof(ChildContent), ChildContent);
             builder.SetKey(state.Key);
             builder.CloseComponent();
