@@ -89,14 +89,7 @@ public partial class Index : NextTickComponentBase
             {
                 try
                 {
-                    var newPath = Path.Replace("http://", "https://").Replace("https://github.com/", "https://raw.githubusercontent.com/")
-                                      .Replace("/blob/", "/");
-                    if (!newPath.StartsWith("https://raw.githubusercontent.com/"))
-                    {
-                        newPath = "https://raw.githubusercontent.com/" + newPath;
-                    }
-
-                    code = await HttpClient.GetStringAsync(newPath);
+                    code = await HttpClient.GetStringAsync(Path);
                 }
                 catch (Exception e)
                 {
