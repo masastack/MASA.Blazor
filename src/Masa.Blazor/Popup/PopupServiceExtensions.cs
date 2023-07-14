@@ -46,6 +46,15 @@ public static class PopupServiceExtensions
         });
     }
 
+    public static Task<bool> ConfirmAsync(this IPopupService service, string title, RenderFragment content)
+    {
+        return service.ConfirmAsync(param =>
+        {
+            param.Title = title;
+            param.ContentContent = content;
+        });
+    }
+
     public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content, AlertTypes type)
     {
         return service.ConfirmAsync(param =>
