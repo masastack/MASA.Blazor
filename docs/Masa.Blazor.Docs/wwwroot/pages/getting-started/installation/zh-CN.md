@@ -6,15 +6,15 @@
 
 ## 自动安装
 
-要快速入门，可以使用 Masa.Template 模板快速创建项目。
+要快速入门，可以使用 MASA.Template 模板快速创建项目。
 
-### 安装 Masa.Template 模板
+### 安装 MASA.Template 模板
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.2
+dotnet new install MASA.Template
 ```
 
-[Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
+[MASA.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
 
 - `masablazor-server`: MASA Blazor Server 模板
 - `masablazor-wasm`: MASA Blazor WebAssembly 模板

@@ -48,7 +48,7 @@ To check out the docs, visit [docs.masastack.com](https://docs.masastack.com/bla
 ## 📂 Related projects
 
 - [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/masastack/Masa.Blazor.Pro)
-- [Masa Template](https://github.com/masastack/Masa.Template)
+- [MASA Template](https://github.com/masastack/MASA.Template)
 
 ## 👨‍💻 Local development
 
