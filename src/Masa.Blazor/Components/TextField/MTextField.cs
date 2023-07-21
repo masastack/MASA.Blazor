@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using System.Runtime.CompilerServices;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -658,25 +659,6 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            var originValue = args.Value?.ToString();
-
-            var succeed = TryConvertTo<TValue>(originValue, out var result);
-
-            if (succeed && OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(result);
-            }
-
-            if (UpdateOnBlur || UpdateOnChange)
-            {
-                UpdateValue(originValue, succeed, result);
-
-                StateHasChanged();
-            }
-        }
-
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
@@ -694,26 +676,36 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
+        {
+            return OnValueChangedAsync(args, OnInput);
+        }
+
+        public override Task HandleOnChangeAsync(ChangeEventArgs args)
+        {
+            return OnValueChangedAsync(args, OnChange);
+        }
+
+        private async Task OnValueChangedAsync(ChangeEventArgs args, EventCallback<TValue> cb,
+            [CallerArgumentExpression("cb")] string cbName = "")
         {
             var originValue = args.Value?.ToString();
 
             var succeed = TryConvertTo<TValue>(originValue, out var result);
 
-            if (succeed && OnInput.HasDelegate)
+            if (succeed && cb.HasDelegate)
             {
-                await OnInput.InvokeAsync(result);
+                await cb.InvokeAsync(result);
             }
 
-            if (UpdateOnBlur || UpdateOnChange)
+            var updateOnChange = UpdateOnBlur || UpdateOnChange;
+
+            if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
             {
-                return;
+                UpdateValue(originValue, succeed, result);
+
+                StateHasChanged();
             }
-
-            UpdateValue(originValue, succeed, result);
-
-            StateHasChanged();
-            // todo: args.validity.badInput
         }
 
         private static bool TryConvertTo<T>(string? value, out T result)
