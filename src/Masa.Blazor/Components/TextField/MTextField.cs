@@ -708,7 +708,7 @@ namespace Masa.Blazor
             }
         }
 
-        private static bool TryConvertTo<T>(string? value, out T result)
+        private static bool TryConvertTo<T>(string? value, out T? result)
         {
             var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
 
@@ -718,11 +718,11 @@ namespace Masa.Blazor
                 return true;
             }
 
-            result = default!;
+            result = default;
             return false;
         }
 
-        private void UpdateValue(string? originValue, bool succeeded, TValue convertedValue)
+        private void UpdateValue(string? originValue, bool succeeded, TValue? convertedValue)
         {
             if (succeeded)
             {
