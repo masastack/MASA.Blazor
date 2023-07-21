@@ -135,10 +135,17 @@ namespace Masa.Blazor
         public int DebounceInterval { get; set; }
 
         /// <summary>
-        /// Update the bound value on blur instead of on input.
+        /// Update the bound value on change event instead of on input.
         /// </summary>
         [Parameter]
+        [Obsolete("Use UpdateOnChange instead.")]
         public bool UpdateOnBlur { get; set; }
+
+        /// <summary>
+        /// Update the bound value on change event instead of on input.
+        /// </summary>
+        [Parameter]
+        public bool UpdateOnChange { get; set; }
 
         private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
@@ -653,9 +660,20 @@ namespace Masa.Blazor
 
         public override async Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            if (UpdateOnBlur)
+            var originValue = args.Value?.ToString();
+
+            var succeed = TryConvertTo<TValue>(originValue, out var result);
+
+            if (succeed && OnChange.HasDelegate)
             {
-                await UpdateValue(args.Value?.ToString(), OnChange);
+                await OnChange.InvokeAsync(result);
+            }
+
+            if (UpdateOnBlur || UpdateOnChange)
+            {
+                UpdateValue(originValue, succeed, result);
+
+                StateHasChanged();
             }
         }
 
@@ -678,33 +696,49 @@ namespace Masa.Blazor
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            if (UpdateOnBlur)
+            var originValue = args.Value?.ToString();
+
+            var succeed = TryConvertTo<TValue>(originValue, out var result);
+
+            if (succeed && OnInput.HasDelegate)
+            {
+                await OnInput.InvokeAsync(result);
+            }
+
+            if (UpdateOnBlur || UpdateOnChange)
             {
                 return;
             }
 
-            await UpdateValue(args.Value?.ToString(), OnInput);
+            UpdateValue(originValue, succeed, result);
 
             StateHasChanged();
             // todo: args.validity.badInput
         }
 
-        private async Task UpdateValue(string? value, EventCallback<TValue> callback)
+        private static bool TryConvertTo<T>(string? value, out T result)
         {
-            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
+            var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
 
-            if (success)
+            if (succeeded)
+            {
+                result = val;
+                return true;
+            }
+
+            result = default!;
+            return false;
+        }
+
+        private void UpdateValue(string? originValue, bool succeeded, TValue convertedValue)
+        {
+            if (succeeded)
             {
                 _badInput = false;
 
                 ValueChangedInternally = true;
 
-                InternalValue = val;
-
-                if (callback.HasDelegate)
-                {
-                    await callback.InvokeAsync(val);
-                }
+                InternalValue = convertedValue;
             }
             else
             {
@@ -715,7 +749,7 @@ namespace Masa.Blazor
                 if (Type.ToLower() == "number")
                 {
                     // reset the value of input element if failed to convert
-                    if (!string.IsNullOrEmpty(value))
+                    if (!string.IsNullOrEmpty(originValue))
                     {
                         _ = SetValueByJsInterop("");
                     }
