@@ -23,9 +23,15 @@
         [Parameter]
         public EventCallback<TValue> OnChange { get; set; }
 
+        /// <summary>
+        /// The required rule built-in.
+        /// </summary>
         [Parameter]
         public bool Required { get; set; }
 
+        /// <summary>
+        /// The error message when the required rule is not satisfied.
+        /// </summary>
         [Parameter, ApiDefaultValue(DEFAULT_REQUIRED_MESSAGE)]
         public string RequiredMessage
         {
