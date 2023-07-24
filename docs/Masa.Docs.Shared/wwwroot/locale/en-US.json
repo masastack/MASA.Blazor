@@ -35,6 +35,7 @@
   "bidirectionality": "Bidirectionality (LTR/RTL)",
   "icon-fonts": "Icon fonts",
   "internationalization": "Internationalization(I18n)",
+  "auto-match-nav": "Auto matching navigation",
   "theme": "Theme",
   "direction": "Bidirectionality",
   "layouts": "Layouts",

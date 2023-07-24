@@ -28,6 +28,7 @@
       "breakpoints",
       "icon-fonts",
       "internationalization",
+      "auto-match-nav",
       "theme"
     ]
   },

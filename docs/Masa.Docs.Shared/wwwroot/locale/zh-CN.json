@@ -35,6 +35,7 @@
   "bidirectionality": "双向性(LTR/RTL)",
   "icon-fonts": "图标字体",
   "internationalization": "国际化",
+  "auto-match-nav": "导航自动匹配",
   "theme": "主题",
   "direction": "双向性",
   "layouts": "布局",
