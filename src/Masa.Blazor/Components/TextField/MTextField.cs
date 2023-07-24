@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using System.Runtime.CompilerServices;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -135,10 +136,17 @@ namespace Masa.Blazor
         public int DebounceInterval { get; set; }
 
         /// <summary>
-        /// Update the bound value on blur instead of on input.
+        /// Update the bound value on change event instead of on input.
         /// </summary>
         [Parameter]
+        [Obsolete("Use UpdateOnChange instead.")]
         public bool UpdateOnBlur { get; set; }
+
+        /// <summary>
+        /// Update the bound value on change event instead of on input.
+        /// </summary>
+        [Parameter]
+        public bool UpdateOnChange { get; set; }
 
         private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
@@ -651,14 +659,6 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            if (UpdateOnBlur)
-            {
-                await UpdateValue(args.Value?.ToString(), OnChange);
-            }
-        }
-
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
@@ -676,35 +676,61 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            if (UpdateOnBlur)
-            {
-                return;
-            }
-
-            await UpdateValue(args.Value?.ToString(), OnInput);
-
-            StateHasChanged();
-            // todo: args.validity.badInput
+            return OnValueChangedAsync(args, OnInput);
         }
 
-        private async Task UpdateValue(string? value, EventCallback<TValue> callback)
+        public override Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
+            return OnValueChangedAsync(args, OnChange);
+        }
 
-            if (success)
+        private async Task OnValueChangedAsync(ChangeEventArgs args, EventCallback<TValue> cb,
+            [CallerArgumentExpression("cb")] string cbName = "")
+        {
+            var originValue = args.Value?.ToString();
+
+            var succeed = TryConvertTo<TValue>(originValue, out var result);
+
+            if (succeed && cb.HasDelegate)
+            {
+                await cb.InvokeAsync(result);
+            }
+
+            var updateOnChange = UpdateOnBlur || UpdateOnChange;
+
+            if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
+            {
+                UpdateValue(originValue, succeed, result);
+
+                StateHasChanged();
+            }
+        }
+
+        private static bool TryConvertTo<T>(string? value, out T? result)
+        {
+            var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
+
+            if (succeeded)
+            {
+                result = val;
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
+
+        private void UpdateValue(string? originValue, bool succeeded, TValue? convertedValue)
+        {
+            if (succeeded)
             {
                 _badInput = false;
 
                 ValueChangedInternally = true;
 
-                InternalValue = val;
-
-                if (callback.HasDelegate)
-                {
-                    await callback.InvokeAsync(val);
-                }
+                InternalValue = convertedValue;
             }
             else
             {
@@ -715,7 +741,7 @@ namespace Masa.Blazor
                 if (Type.ToLower() == "number")
                 {
                     // reset the value of input element if failed to convert
-                    if (!string.IsNullOrEmpty(value))
+                    if (!string.IsNullOrEmpty(originValue))
                     {
                         _ = SetValueByJsInterop("");
                     }
