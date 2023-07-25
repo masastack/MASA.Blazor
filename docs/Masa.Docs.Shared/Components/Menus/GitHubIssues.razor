@@ -98,7 +98,7 @@
         _searching = true;
         await InvokeAsync(StateHasChanged);
 
-        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("BlazorComponent", "MASA.Blazor", _componentName);
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", _componentName);
 
         _searching = false;
         await InvokeAsync(StateHasChanged);
