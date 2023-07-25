@@ -3,6 +3,10 @@
         const pwaSnackbar = document.querySelector(".m-snackbar--pwa > .m-snack__wrapper");
         if (!pwaSnackbar) return;
 
+        if (window.getComputedStyle(document.getElementById('blazor-error-ui')).display !== 'none') {
+            pwaSnackbar.style.marginBottom = "2.4rem";
+        }
+
         pwaSnackbar.style.display = "flex";
     }, 5000)
 });

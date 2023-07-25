@@ -93,7 +93,7 @@ public partial class Index : NextTickComponentBase
                 }
                 catch (Exception e)
                 {
-                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code from GitHub", e.Message, AlertTypes.Error);
+                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code...", e.Message, AlertTypes.Error);
                 }
             }
 
