@@ -61,12 +61,11 @@ public partial class MStepperContent : BStepperContent
 
                 NextTick(async () =>
                 {
-                    AddTransitionEndListener();
-
                     await Task.Delay(16);
                     _booting = false;
                     IsActive = true;
                     StateHasChanged();
+                    AddTransitionEndListener();
                 });
 
                 await InvokeStateHasChangedAsync();
@@ -134,7 +133,10 @@ public partial class MStepperContent : BStepperContent
         {
             _firstRender = false;
 
-            AddTransitionEndListener();
+            if (Eager)
+            {
+                AddTransitionEndListener();
+            }
         }
     }
 
