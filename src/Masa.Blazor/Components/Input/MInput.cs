@@ -2,6 +2,9 @@
 {
     public partial class MInput<TValue> : BInput<TValue>, IThemeable
     {
+        [Inject]
+        private I18n I18n { get; set; } = null!;
+
         [Parameter]
         public string? Color { get; set; }
 
@@ -32,16 +35,14 @@
         /// <summary>
         /// The error message when the required rule is not satisfied.
         /// </summary>
-        [Parameter, ApiDefaultValue(DEFAULT_REQUIRED_MESSAGE)]
+        [Parameter, ApiDefaultValue("$masaBlazor.required")]
         public string RequiredMessage
         {
-            get => _requiredMessage ?? DEFAULT_REQUIRED_MESSAGE;
+            get => _requiredMessage ?? I18n.T("$masaBlazor.required");
             set => _requiredMessage = value;
         }
 
         #region built-in Required rule
-
-        private const string DEFAULT_REQUIRED_MESSAGE = "Required";
 
         private static readonly Func<TValue, bool> s_defaultRequiredRule = v =>
         {
