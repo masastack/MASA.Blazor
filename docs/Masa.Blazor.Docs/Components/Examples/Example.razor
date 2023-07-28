@@ -46,29 +46,29 @@
                         <ExpandTransition>
                             <ShowTransitionElement Value="_expand">
                                 <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MItem>
-                                            <MButton Class="mr-2"
-                                                     IsActive="@context.Active"
-                                                     Text
-                                                     Color="primary"
-                                                     OnClick="@context.Toggle">
-                                                @item.Language
-                                            </MButton>
-                                        </MItem>
-                                    }
+                                    
+                                    <MItem>
+                                        <MButton Class="mr-2"
+                                                 IsActive="@context.Active"
+                                                 Text
+                                                 Color="primary"
+                                                 OnClick="@context.Toggle">
+                                            @_sections.Language
+                                        </MButton>
+                                    </MItem>
+                                    <MButton Class="mr-2"
+                                             Text
+                                             Color="primary" Style="float: right" OnClick="async ()=>await RunCode()">
+                                        Run
+                                    </MButton>
                                 </MItemGroup>
 
                                 <AppDivider />
 
                                 <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MWindowItem>
-                                            <Markup RoundedTop0 Code="@item.Code" Language="@item.Language" />
-                                        </MWindowItem>
-                                    }
+                                    <MWindowItem>
+                                        <MMonacoEditor InitCompleteHandle="async() =>await InitCompleteHandle()" @ref=_sections.MonacoEditor Height="@("500px")" Value="@_sections.Code" EditorOptions="options"></MMonacoEditor>
+                                    </MWindowItem>
                                 </MWindow>
                             </ShowTransitionElement>
                         </ExpandTransition>
