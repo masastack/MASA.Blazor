@@ -919,3 +919,40 @@ input[type=number] {
 .m-descriptions-item-container__label.m-descriptions-item-container__label--no-colon::after {
     content: " ";
 }
+
+/* DateTimePicker */
+
+.m-date-time-picker {
+    min-width: 580px !important;
+}
+
+.m-date-time-picker__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+}
+
+.m-date-time-picker__view {
+    display: inline-flex;
+}
+
+.m-date-time-picker__view .m-picker--date {
+    border-top-right-radius: 0;
+}
+
+.m-date-time-picker__view .m-picker--time {
+    border-top-left-radius: 0;
+}
+
+.m-date-time-picker__view .m-date-picker-title {
+    min-height: 56px;
+}
+
+.m-date-time-picker__view .m-time-picker-title {
+    margin-top: 22px;
+}
+
+.m-date-time-picker__view .m-time-picker-title__time .m-picker__title__btn, .m-date-time-picker__view .m-time-picker-title__time span {
+    height: 34px;
+    font-size: 34px;
+}

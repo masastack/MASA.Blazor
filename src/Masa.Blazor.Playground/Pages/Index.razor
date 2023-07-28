@@ -1,3 +1,51 @@
 ﻿@page "/"
+@using System.ComponentModel.DataAnnotations
 
-<h1>Test your code here!</h1>
+<h1>Test your code here! @_date</h1>
+
+<PDateTimePickerView @bind-Value="_date">
+</PDateTimePickerView>
+
+<p class="error--text">确认后 required没有消除</p>
+<MForm OnSubmit="() => { }" Context="formContext">
+    <PDateTimePicker @bind-Value="_date2"
+                     TimeFormat="TimeFormat.Hr24">
+        <ActivatorContent>
+            <MTextField @bind-Value="_date2" Readonly
+                        Required
+                        Clearable
+                        @attributes="@context.Attrs">
+            </MTextField>
+        </ActivatorContent>
+    </PDateTimePicker>
+    <button type="submit">Submit</button>
+</MForm>
+
+<MForm Model="_model" EnableValidation OnSubmit="() => { }" Context="formContext">
+    <PDateTimePicker @bind-Value="_model.Date"
+                     TimeFormat="TimeFormat.Hr24">
+        <ActivatorContent>
+            <MTextField @bind-Value="_model.Date" Readonly
+                        Clearable
+                        @attributes="@context.Attrs">
+            </MTextField>
+        </ActivatorContent>
+    </PDateTimePicker>
+    <button type="submit">Submit</button>
+</MForm>
+
+@code {
+
+    private DateTime? _date = null;
+    private DateTime? _date2 = null;
+
+    private Model _model = new();
+
+    class Model
+    {
+        [Required]
+        public DateTime? Date { get; set; }
+    }
+
+
+}

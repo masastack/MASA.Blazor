@@ -1,0 +1,87 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TValue
+@inherits PDateTimePickerView<TValue>
+@inject I18n I18n
+
+<MMenu Value="_menu"
+       ValueChanged="OnMenuChanged"
+       CloseOnContentClick="false"
+       OffsetY
+       NudgeBottom="1"
+       ActivatorContent="@ActivatorContent"
+       ContentClass="m-date-time-picker">
+    <ChildContent>
+        <PDateTimePickerView @bind-Value="_internalDateTime"
+                             ActivePicker="@ActivePicker"
+                             AllowedDates="@AllowedDates"
+                             AllowedHours="@AllowedHours"
+                             AllowedMinutes="@AllowedMinutes"
+                             AllowedSeconds="@AllowedSeconds"
+                             AmPmInTitle="@AmPmInTitle"
+                             Color="@Color"
+                             DayFormat="@DayFormat"
+                             Disabled="@Disabled"
+                             FirstDayOfWeek="@FirstDayOfWeek"
+                             TimeFormat="@TimeFormat"
+                             HeaderDateFormat="@HeaderDateFormat"
+                             HeaderColor="@HeaderColor"
+                             Locale="@Locale"
+                             Max="@Max"
+                             Min="@Min"
+                             MonthFormat="@MonthFormat"
+                             NoTitle="@NoTitle"
+                             NextIcon="@NextIcon"
+                             PrevIcon="@PrevIcon"
+                             Reactive="@Reactive"
+                             Readonly="@Reactive"
+                             Scrollable="@Scrollable"
+                             ShowAdjacentMonths="@ShowAdjacentMonths"
+                             ShowCurrent="@ShowCurrent"
+                             ShowWeek="@ShowWeek"
+                             TitleDateFormat="@TitleDateFormat"
+                             UseSeconds="@UseSeconds"
+                             WeekdayFormat="@WeekdayFormat"
+                             YearFormat="@YearFormat"
+                             YearIcon="@YearIcon"
+                             Dark="Dark"
+                             Light="@Light">
+        </PDateTimePickerView>
+        <MDivider />
+        <div class="m-date-time-picker__actions">
+            <MButton Color="@(Color ?? "primary")"
+                     Text
+                     OnClick="OnConfirm"
+                     Dark="@Dark"
+                     Light="@Light">
+                @I18n.T("$masaBlazor.ok")
+            </MButton>
+        </div>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter]
+    public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
+
+    private bool _menu;
+
+    private TValue? _internalDateTime;
+
+    private void OnMenuChanged(bool val)
+    {
+        _menu = val;
+
+        if (_menu)
+        {
+            _internalDateTime = Value;
+        }
+    }
+
+    private async Task OnConfirm()
+    {
+        _menu = false;
+        await ValueChanged.InvokeAsync(_internalDateTime);
+    }
+
+}

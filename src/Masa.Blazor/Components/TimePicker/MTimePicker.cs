@@ -4,7 +4,7 @@
     {
         [Inject]
         private I18n I18n { get; set; } = null!;
-        
+
         [Parameter]
         public string? HeaderColor { get; set; }
 
@@ -73,14 +73,8 @@
         [Parameter]
         public TimeOnly? Value
         {
-            get
-            {
-                return GetValue<TimeOnly?>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get { return GetValue<TimeOnly?>(); }
+            set { SetValue(value); }
         }
 
         [Parameter]
@@ -88,6 +82,15 @@
 
         [Parameter]
         public EventCallback<TimeOnly?> OnChange { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnHourClick { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnMinuteClick { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnSecondClick { get; set; }
 
         public string? AmText { get; set; }
 
@@ -101,7 +104,7 @@
 
         protected int? InputSecond { get; set; }
 
-        protected TimePeriod Period { get; set; } = TimePeriod.Am;
+        public TimePeriod Period { get; internal set; } = TimePeriod.Am;
 
         public bool IsAmPm => Format == TimeFormat.AmPm;
 
@@ -203,7 +206,9 @@
         }
 
         public int? LazyInputHour { get; private set; }
+
         public int? LazyInputMinute { get; private set; }
+
         public int? LazyInputSecond { get; private set; }
 
         private static string Convert24To12(int hour)
@@ -263,6 +268,19 @@
 
         private async Task HandleOnChangeAsync(int value)
         {
+            switch (Selecting)
+            {
+                case SelectingTimes.Hour:
+                    await OnHourClick.InvokeAsync(value);
+                    break;
+                case SelectingTimes.Minute:
+                    await OnMinuteClick.InvokeAsync(value);
+                    break;
+                case SelectingTimes.Second:
+                    await OnSecondClick.InvokeAsync(value);
+                    break;
+            }
+
             var emitChange = Selecting == (UseSeconds ? SelectingTimes.Second : SelectingTimes.Minute);
 
             if (Selecting == SelectingTimes.Hour)
@@ -347,9 +365,9 @@
 
         public override Task SetParametersAsync(ParameterView parameters)
         {
-            AmText = I18n.T("$masaBlazor.timePicker.am");    
-            PmText = I18n.T("$masaBlazor.timePicker.pm");    
-            
+            AmText = I18n.T("$masaBlazor.timePicker.am");
+            PmText = I18n.T("$masaBlazor.timePicker.pm");
+
             return base.SetParametersAsync(parameters);
         }
 
@@ -441,10 +459,7 @@
                     attrs[nameof(MTimePickerTitle.Readonly)] = Readonly;
                     attrs[nameof(MTimePickerTitle.UseSeconds)] = UseSeconds;
                     attrs[nameof(MTimePickerTitle.Selecting)] = Selecting;
-                    attrs[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value =>
-                    {
-                        Selecting = value;
-                    });
+                    attrs[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value => { Selecting = value; });
                     attrs[nameof(MTimePickerTitle.OnPeriodUpdate)] = CreateEventCallback<TimePeriod>(async value =>
                     {
                         await SetPeriodAsync(value);
@@ -457,7 +472,9 @@
                 })
                 .Apply(typeof(BTimePickerClock), typeof(MTimePickerClock), attrs =>
                 {
-                    attrs[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour ? IsAllowedHourCb : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
+                    attrs[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour
+                        ? IsAllowedHourCb
+                        : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
                     attrs[nameof(MTimePickerClock.Color)] = Color;
                     attrs[nameof(MTimePickerClock.Dark)] = Dark;
                     attrs[nameof(MTimePickerClock.Disabled)] = Disabled;
@@ -470,7 +487,9 @@
                     attrs[nameof(MTimePickerClock.Readonly)] = Readonly;
                     attrs[nameof(MTimePickerClock.Scrollable)] = Scrollable;
                     attrs[nameof(MTimePickerClock.Step)] = Selecting == SelectingTimes.Hour ? 1 : 5;
-                    attrs[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour ? InputHour : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
+                    attrs[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour
+                        ? InputHour
+                        : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
                     attrs[nameof(MTimePickerClock.OnInput)] = CreateEventCallback<int>(HandleOnInputAsync);
                     attrs[nameof(MTimePickerClock.OnChange)] = CreateEventCallback<int>(HandleOnChangeAsync);
                 });
