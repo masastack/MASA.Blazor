@@ -148,7 +148,7 @@ public partial class Example : NextTickComponentBase
 
                     // var (razor, cs, css) = ResolveSourceCode(sourceCode);
 
-                    _sections = new Sections(sourceCode, "cshtml");
+                    _sections = new Sections(sourceCode, "razor");
 
                     StateHasChanged();
                 }
