@@ -5,9 +5,7 @@ public class Sections
     public string Code { get; set; }
 
     public string Language { get; set; }
-
-    public MMonacoEditor MonacoEditor { get; set; }
-
+    
     public Sections(string code, string language)
     {
         Code = code;

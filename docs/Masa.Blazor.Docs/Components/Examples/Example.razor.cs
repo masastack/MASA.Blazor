@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using System.Runtime.Loader;
-using Masa.Blazor.Extensions.Languages.Razor;
+﻿using Masa.Blazor.Extensions.Languages.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.JSInterop;
+using System.Reflection;
 
 namespace Masa.Blazor.Docs.Components;
 
@@ -15,6 +14,9 @@ public partial class Example : NextTickComponentBase
     [Inject] public IHttpClientFactory HttpClientFactory { get; set; } = null!;
 
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+
+    [Inject] private IPopupService PopupService { get; set; } = null!;
+    [Inject] public IJSRuntime Js { get; set; } = null!;
 
     [Parameter, EditorRequired] public string File { get; set; } = null!;
 
@@ -53,10 +55,12 @@ public partial class Example : NextTickComponentBase
     private bool _dark;
     private bool _expand;
     private bool _showExpands;
+    private bool _load;
     private static bool _initialize;
     private StringNumber _selected = 0;
     private Type? _type;
     private DotNetObjectReference<Example>? _objRef;
+    private MMonacoEditor MonacoEditor;
     private List<(string Icon, string Path, Action? OnClick, string? href)> _tooltips = new();
 
     private object options = new
@@ -111,7 +115,7 @@ public partial class Example : NextTickComponentBase
 
     private async Task InitCompleteHandle()
     {
-        await _sections.MonacoEditor.AddCommandAsync(2097, _objRef, nameof(RunCode));
+        await MonacoEditor.AddCommandAsync(2097, _objRef, nameof(RunCode));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -146,8 +150,6 @@ public partial class Example : NextTickComponentBase
 
                     var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
 
-                    // var (razor, cs, css) = ResolveSourceCode(sourceCode);
-
                     _sections = new Sections(sourceCode, "razor");
 
                     StateHasChanged();
@@ -155,6 +157,41 @@ public partial class Example : NextTickComponentBase
             });
 
             StateHasChanged();
+        }
+    }
+
+    private async Task RestoreCode()
+    {
+        var segments = NavigationManager.GetSegments();
+
+        var category = segments[2].TrimEnd('/');
+        var title = segments[3].TrimEnd('/');
+
+        var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+        _type = Type.GetType($"{executingAssemblyName}.{File}");
+
+        if (_type == null)
+        {
+            StateHasChanged();
+            return;
+        }
+
+        var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
+        await MonacoEditor.SetValueAsync(sourceCode);
+    }
+
+    private async Task CopyCode()
+    {
+        var code = await MonacoEditor.GetValueAsync();
+
+        if (!string.IsNullOrWhiteSpace(code))
+        {
+            await Js.InvokeVoidAsync(JsInteropConstants.CopyText, code);
+            await PopupService.EnqueueSnackbarAsync("Copy success",AlertTypes.Success);
+        }
+        else
+        {
+            await PopupService.EnqueueSnackbarAsync("The code is empty", AlertTypes.Success);
         }
     }
 
@@ -173,53 +210,34 @@ public partial class Example : NextTickComponentBase
         }
     }
 
-    private static (string? Razor, string? cs, string? css) ResolveSourceCode(string sourceCode)
-    {
-        string? razor = null;
-        string? cs = null;
-        string? css = null;
-
-        var code = sourceCode;
-        var cssFrom = sourceCode.IndexOf("<style", StringComparison.Ordinal);
-        var cssTo = sourceCode.IndexOf("</style>", StringComparison.Ordinal) + "</style>".Length;
-
-        if (cssFrom > -1 && cssTo > -1)
-        {
-            var cssContent = sourceCode.Substring(cssFrom, cssTo - cssFrom);
-            css = cssContent;
-
-            code = code.Replace(cssContent, "");
-        }
-
-        var codeIndex = code.IndexOf("@code");
-        if (codeIndex > -1)
-        {
-            razor = code.Substring(0, codeIndex).Trim();
-            cs = code.Substring(codeIndex).Trim();
-        }
-        else
-        {
-            razor = code.Trim();
-        }
-
-        return (razor, cs, css);
-    }
-
     [JSInvokable(nameof(RunCode))]
     public async Task RunCode()
     {
+        _load = true;
+        await Task.Delay(50);
+        _ = InvokeAsync(StateHasChanged);
+
         if (!_initialize)
         {
             RazorCompile.Initialized(await GetReference(), GetRazorExtension());
         }
 
-        string code = await _sections!.MonacoEditor.GetValueAsync();
-        _type = RazorCompile.CompileToType(new CompileRazorOptions()
+        try
         {
-            OptimizationLevel = OptimizationLevel.Release,
-            Code = code,
-        });
 
+            string code = await MonacoEditor.GetValueAsync();
+            _type = RazorCompile.CompileToType(new CompileRazorOptions()
+            {
+                OptimizationLevel = OptimizationLevel.Release,
+                Code = code,
+            });
+        }
+        catch (Exception e)
+        {
+            await PopupService.EnqueueSnackbarAsync(e.Message, AlertTypes.Error);
+        }
+
+        _load = false;
         _ = InvokeAsync(StateHasChanged);
     }
 
@@ -227,6 +245,7 @@ public partial class Example : NextTickComponentBase
     private async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
+
         using var http = HttpClientFactory.CreateClient("masa-docs");
         foreach (var asm in assemblies)
         {
