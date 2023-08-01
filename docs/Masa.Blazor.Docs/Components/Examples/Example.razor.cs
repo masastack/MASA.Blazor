@@ -12,7 +12,7 @@ public partial class Example : NextTickComponentBase
 {
     [Inject] private BlazorDocService DocService { get; set; } = null!;
 
-    [Inject] public IHttpClientFactory HttpClientFactory { get; set; }
+    [Inject] public IHttpClientFactory HttpClientFactory { get; set; } = null!;
 
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
