@@ -218,7 +218,21 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
         else
         {
-            await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+            try
+            {
+                await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+            }
+            catch (JSException e)
+            {
+                if (e.Message.Contains("not a function"))
+                {
+                    throw new JSException("Are you trying to use a function in the option? " +
+                                          "If so, please set the IncludeFunctionsInOption property to true. " +
+                                          "If not, please check the option.", e);
+                }
+
+                throw;
+            }
         }
     }
 
