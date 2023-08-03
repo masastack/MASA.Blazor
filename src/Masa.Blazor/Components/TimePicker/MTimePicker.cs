@@ -6,6 +6,16 @@
         private I18n I18n { get; set; } = null!;
 
         [Parameter]
+        public TimePickerType ActivePicker
+        {
+            get => GetValue<TimePickerType>();
+            set => SetValue(value);
+        }
+
+        [Parameter]
+        public EventCallback<TimePickerType> ActivePickerChanged { get; set; }
+
+        [Parameter]
         public string? HeaderColor { get; set; }
 
         [Parameter]
@@ -96,7 +106,11 @@
 
         public string? PmText { get; set; }
 
-        public SelectingTimes Selecting { get; set; } = SelectingTimes.Hour;
+        public SelectingTimes Selecting
+        {
+            get => GetValue(SelectingTimes.Hour);
+            set => SetValue(value);
+        }
 
         protected int? InputHour { get; set; }
 
@@ -211,16 +225,6 @@
 
         public int? LazyInputSecond { get; private set; }
 
-        private static string Convert24To12(int hour)
-        {
-            return $"{(hour > 0 ? ((hour - 1) % 12 + 1) : 12)}";
-        }
-
-        private static int Convert12To24(int hour, TimePeriod period)
-        {
-            return hour % 12 + (period == TimePeriod.Pm ? 12 : 0);
-        }
-
         private string Pad(int val)
         {
             return val.ToString().PadLeft(2, '0');
@@ -230,7 +234,7 @@
         {
             if (Selecting == SelectingTimes.Hour)
             {
-                InputHour = IsAmPm ? Convert12To24(value, Period) : value;
+                InputHour = IsAmPm ? TimeHelper.Convert12To24(value, Period) : value;
             }
             else if (Selecting == SelectingTimes.Minute)
             {
@@ -383,7 +387,9 @@
             base.RegisterWatchers(watcher);
 
             watcher
-                .Watch<TimeOnly?>(nameof(Value), SetInputData);
+                .Watch<TimeOnly?>(nameof(Value), SetInputData)
+                .Watch<SelectingTimes>(nameof(Selecting), EmitPicker)
+                .Watch<TimePickerType>(nameof(ActivePicker), SetPicker);
         }
 
         private void SetInputData(TimeOnly? value)
@@ -393,6 +399,18 @@
             InputSecond = value?.Second;
 
             Period = (InputHour == 0 || InputHour < 12) ? TimePeriod.Am : TimePeriod.Pm;
+        }
+
+        private void EmitPicker(SelectingTimes selecting)
+        {
+            var activePicker = (TimePickerType)(selecting);
+            ActivePickerChanged.InvokeAsync(activePicker);
+        }
+
+        private void SetPicker(TimePickerType picker)
+        {
+            Selecting = (SelectingTimes)picker;
+            StateHasChanged();
         }
 
         protected override void SetComponentClass()
@@ -479,7 +497,7 @@
                     attrs[nameof(MTimePickerClock.Dark)] = Dark;
                     attrs[nameof(MTimePickerClock.Disabled)] = Disabled;
                     attrs[nameof(MTimePickerClock.Double)] = Selecting == SelectingTimes.Hour && !IsAmPm;
-                    Func<int, string> format = Selecting == SelectingTimes.Hour ? (IsAmPm ? Convert24To12 : val => $"{val}") : val => Pad(val);
+                    Func<int, string> format = Selecting == SelectingTimes.Hour ? (IsAmPm ? val => TimeHelper.Convert24To12(val).ToString() : val => $"{val}") : val => Pad(val);
                     attrs[nameof(MTimePickerClock.Format)] = format;
                     attrs[nameof(MTimePickerClock.Light)] = Light;
                     attrs[nameof(MTimePickerClock.Max)] = Selecting == SelectingTimes.Hour ? (IsAmPm && Period == TimePeriod.Am ? 11 : 23) : 59;
