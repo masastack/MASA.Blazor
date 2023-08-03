@@ -19,6 +19,12 @@ namespace Masa.Blazor
         public virtual bool Clearable { get; set; }
 
         [Parameter]
+        public string? Format { get; set; }
+
+        [Parameter]
+        public string? Locale { get; set; }
+
+        [Parameter]
         public bool PersistentPlaceholder { get; set; }
 
         [ApiDefaultValue("$clear")]
@@ -544,6 +550,46 @@ namespace Masa.Blazor
                    .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
         }
 
+        protected override string? Formatter(object? val)
+        {
+            var localeExists = !string.IsNullOrWhiteSpace(Locale);
+            var formatExists = !string.IsNullOrWhiteSpace(Format);
+
+            if (localeExists || formatExists)
+            {
+                if (val is DateTime dt)
+                {
+                    return dt.ToString(
+                        format: formatExists ? Format : null,
+                        provider: localeExists ? CurrentLocale : null);
+                }
+            }
+
+            return base.Formatter(val);
+        }
+
+        public CultureInfo CurrentLocale
+        {
+            get
+            {
+                var culture = CultureInfo.CurrentUICulture;
+
+                if (Locale is not null)
+                {
+                    try
+                    {
+                        culture = CultureInfo.CreateSpecificCulture(Locale);
+                    }
+                    catch (CultureNotFoundException e)
+                    {
+                        Logger.LogWarning(e, "Locale {Locale} is not found", Locale);
+                    }
+                }
+
+                return culture;
+            }
+        }
+
         private async Task SetLabelWidthAsync()
         {
             if (!Outlined)
@@ -672,7 +718,7 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue?.ToString());
+                await SetValueByJsInterop(Formatter(checkValue));
             }
         }
 
