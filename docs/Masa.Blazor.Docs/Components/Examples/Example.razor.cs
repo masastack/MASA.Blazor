@@ -187,7 +187,7 @@ public partial class Example : NextTickComponentBase
         if (!string.IsNullOrWhiteSpace(code))
         {
             await Js.InvokeVoidAsync(JsInteropConstants.CopyText, code);
-            await PopupService.EnqueueSnackbarAsync("Copy success",AlertTypes.Success);
+            await PopupService.EnqueueSnackbarAsync("Copy success", AlertTypes.Success);
         }
         else
         {
@@ -245,21 +245,38 @@ public partial class Example : NextTickComponentBase
     private async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
-
-        using var http = HttpClientFactory.CreateClient("masa-docs");
-        foreach (var asm in assemblies)
+        var iswebAssembly = Js is IJSInProcessRuntime;
+        if (iswebAssembly)
         {
-            try
+            using var http = HttpClientFactory.CreateClient("masa-docs");
+            foreach (var asm in assemblies)
             {
-                await using var stream = await http!.GetStreamAsync($"_framework/{asm}.dll");
-                if (stream.Length > 0)
+                try
                 {
-                    portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    await using var stream = await http!.GetStreamAsync($"_framework/{asm}.dll");
+                    if (stream.Length > 0)
+                    {
+                        portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
-            catch (Exception e)
+        }
+        else
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                Console.WriteLine(e.Message);
+                try
+                {
+                    portableExecutableReferences?.Add(MetadataReference.CreateFromFile(assembly.Location));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
