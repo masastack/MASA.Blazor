@@ -2,8 +2,8 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="m-date-time-picker__view">
-    <MDatePicker Value="DateOnly"
+<div class="@BasePickerBlock.Element("view")">
+    <MDatePicker Value="InternalDate"
                  ValueChanged="DateChanged"
                  TValue="DateOnly?"
                  AllowedDates="@AllowedDates"
@@ -34,7 +34,7 @@
                  Dark="@Dark"
                  Light="@Light">
     </MDatePicker>
-    <MTimePicker Value="TimeOnly"
+    <MTimePicker Value="InternalTime"
                  ValueChanged="TimeChanged"
                  AllowedHours="@AllowedHours"
                  AllowedMinutes="@AllowedMinutes"

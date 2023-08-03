@@ -2,8 +2,8 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="m-date-time-picker__view">
-    <MDatePicker Value="DateOnly"
+<div class="@BasePickerBlock.Element("view") @Block.Element("view")">
+    <MDatePicker Value="InternalDate"
                  ValueChanged="DateChanged"
                  TValue="DateOnly?"
                  AllowedDates="@AllowedDates"
@@ -12,13 +12,11 @@
                  DayFormat="@DayFormat"
                  Disabled="@Disabled"
                  FirstDayOfWeek="@FirstDayOfWeek"
-                 HeaderColor="@HeaderColor"
-                 HeaderDateFormat="@HeaderDateFormat"
                  Locale="@Locale"
                  Max="@MaxDate"
                  Min="@MinDate"
                  MonthFormat="@MonthFormat"
-                 NoTitle="@NoTitle"
+                 NoTitle
                  NextIcon="@NextIcon"
                  PrevIcon="@PrevIcon"
                  Reactive="@Reactive"
@@ -27,15 +25,16 @@
                  ShowAdjacentMonths="@ShowAdjacentMonths"
                  ShowCurrent="@ShowCurrent"
                  ShowWeek="@ShowWeek"
-                 TitleDateFormat="@TitleDateFormat"
                  WeekdayFormat="@WeekdayFormat"
                  YearFormat="@YearFormat"
                  YearIcon="@YearIcon"
                  Dark="@Dark"
                  Light="@Light">
     </MDatePicker>
+
     <MDivider Vertical Style="margin: 0" />
-    <MDigitalClock Value="TimeOnly"
+
+    <MDigitalClock Value="InternalTime"
                    ValueChanged="TimeChanged"
                    TValue="TimeOnly?"
                    Color="@(Color ?? "accent")"

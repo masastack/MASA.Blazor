@@ -923,7 +923,7 @@ input[type=number] {
 /* DateTimePicker */
 
 .m-date-time-picker {
-    min-width: 580px !important;
+    min-width: auto !important;
 }
 
 .m-date-time-picker__actions {
@@ -955,6 +955,32 @@ input[type=number] {
 .m-date-time-picker__view .m-time-picker-title__time .m-picker__title__btn, .m-date-time-picker__view .m-time-picker-title__time span {
     height: 34px;
     font-size: 34px;
+}
+
+.m-date-digital-clock-picker__view .m-digital-clock {
+    padding: 4px 0;
+}
+
+.m-date-digital-clock-picker {
+    font-size: 0;
+}
+
+.m-date-digital-clock-picker .m-digital-clock {
+    font-size: 16px;
+}
+
+.m-date-digital-clock-compact-picker__view {
+    display: inline-flex;
+    flex-direction: column;
+    width: 290px;
+}
+
+.m-date-digital-clock-compact-picker__view .m-digital-clock__items, .m-date-digital-clock-compact-picker__view .m-digital-clock__item {
+    width: calc(290px / 4);
+}
+
+.m-date-digital-clock-compact-picker__view .m-digital-clock__items, .m-date-digital-clock-compact-picker__view .m-digital-clock__item {
+    width: calc(290px / 3);
 }
 
 /* DigitalClock */

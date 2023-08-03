@@ -3,7 +3,7 @@
 @using BemIt
 @inherits BDomComponentBase
 
-<div class="@Block.Modifier(Disabled, Readonly).AddTheme(IsDark).Add(Class)"
+<div class="@Block.Modifier(Disabled, Readonly).Add(Format).Add(UseSeconds).AddTheme(IsDark).Add(Class)"
      style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())">
     <ul class="@Block.Element("items")" @ref="@_hoursRef">
         @for (var i = 0; i < (Format == TimeFormat.AmPm ? 12 : 24); i = i + HourStep)

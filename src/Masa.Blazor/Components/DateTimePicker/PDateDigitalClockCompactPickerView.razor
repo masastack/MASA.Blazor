@@ -2,10 +2,10 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="d-inline-flex flex-column">
+<div class="@BasePickerBlock.Element("view") @Block.Element("view")">
     <MTabs @bind-Value="_tabValue" FixedTabs>
         <MTab Value="@DATE" Ripple="false">
-            @if (DateOnly.HasValue)
+            @if (InternalDate.HasValue)
             {
                 <span class="mr-1">
                     @YearTitle
@@ -20,21 +20,21 @@
             }
         </MTab>
         <MTab Value="@TIME" Ripple="false">
-            @if (TimeOnly.HasValue)
+            @if (InternalTime.HasValue)
             {
-                @TimeOnly.Value.Hour.ToString("00")
+                @InternalTime.Value.Hour.ToString("00")
                 <span>:</span>
-                @TimeOnly.Value.Minute.ToString("00")
+                @InternalTime.Value.Minute.ToString("00")
                 @if (UseSeconds)
                 {
                     <span>:</span>
-                    @TimeOnly.Value.Second
+                    @InternalTime.Value.Second
                 }
 
                 if (TimeFormat == TimeFormat.AmPm)
                 {
                     <span class="ml-1">
-                        @TimeOnly.Value.ToString("tt", CultureInfo.CurrentCulture)
+                        @InternalTime.Value.ToString("tt", CultureInfo.CurrentCulture)
                     </span>
                 }
             }
@@ -46,7 +46,7 @@
     </MTabs>
     <MWindow Value="_tabValue">
         <MWindowItem Value="DATE" Eager Transition="@Transition">
-            <MDatePicker Value="DateOnly"
+            <MDatePicker Value="InternalDate"
                          ValueChanged="DateChanged"
                          TValue="DateOnly?"
                          AllowedDates="@AllowedDates"
@@ -55,7 +55,6 @@
                          DayFormat="@DayFormat"
                          Disabled="@Disabled"
                          FirstDayOfWeek="@FirstDayOfWeek"
-                         HeaderDateFormat="@HeaderDateFormat"
                          Locale="@Locale"
                          Max="@MaxDate"
                          Min="@MinDate"
@@ -69,7 +68,6 @@
                          ShowAdjacentMonths="@ShowAdjacentMonths"
                          ShowCurrent="@ShowCurrent"
                          ShowWeek="@ShowWeek"
-                         TitleDateFormat="@TitleDateFormat"
                          WeekdayFormat="@WeekdayFormat"
                          YearFormat="@YearFormat"
                          YearIcon="@YearIcon"
@@ -79,41 +77,18 @@
             </MDatePicker>
         </MWindowItem>
         <MWindowItem Value="TIME" Eager Transition="@Transition">
-            <MTimePicker Value="TimeOnly"
-                         ValueChanged="TimeChanged"
-                         AllowedHours="@AllowedHours"
-                         AllowedMinutes="@AllowedMinutes"
-                         AllowedSeconds="@AllowedSeconds"
-                         Color="@Color"
-                         Disabled="@Disabled"
-                         Format="@TimeFormat"
-                         Max="@MaxTime"
-                         Min="@MinTime"
-                         NoTitle
-                         Readonly="@Readonly"
-                         Scrollable="@Scrollable"
-                         UseSeconds="@UseSeconds"
-                         Dark="@Dark"
-                         Light="@Light"
-                         OnHourClick="OnHourClick"
-                         @bind-Activepicker="@_timeActivePicker"
-                         @ref="_timePicker">
-            </MTimePicker>
-            <span style="position: absolute; top: 1px; left: 16px; opacity: 0.6;">
-                @SelectingTime
-            </span>
-            <span style="position: absolute; top: 1px; right: 0;">
-                <MButton Icon
-                         OnClick="OnPrevClick"
-                         Disabled="@((int)_timeActivePicker <= 1)">
-                    <MIcon>$prev</MIcon>
-                </MButton>
-                <MButton Icon
-                         OnClick="OnNextClick"
-                         Disabled="@((int)_timeActivePicker == SupportedMaxTimePickerType)">
-                    <MIcon>$next</MIcon>
-                </MButton>
-            </span>
+            <MDigitalClock Value="InternalTime"
+                           ValueChanged="TimeChanged"
+                           TValue="TimeOnly?"
+                           Color="@(Color ?? "accent")"
+                           Disabled="@Disabled"
+                           Format="@TimeFormat"
+                           Readonly="@Readonly"
+                           UseSeconds="@UseSeconds"
+                           Dark="@Dark"
+                           Light="@Light"
+                           Height="290">
+            </MDigitalClock>
         </MWindowItem>
     </MWindow>
 </div>

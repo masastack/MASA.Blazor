@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDateTimePickerView2<TValue> : PDateTimePickerViewBase<TValue>
+public partial class PDateDigitalClockCompactPickerView<TValue> : PDateTimePickerViewBase<TValue>
 {
     [Inject]
     private I18n I18n { get; set; } = null!;
@@ -17,14 +17,16 @@ public partial class PDateTimePickerView2<TValue> : PDateTimePickerViewBase<TVal
     private MTimePicker? _timePicker;
 
     private TimePickerType _timeActivePicker = TimePickerType.Hour;
+    
+    private Block Block => new("m-date-digital-clock-compact-picker");
 
     private string? DateTitle
     {
         get
         {
-            if (_datePicker is not null && DateOnly.HasValue)
+            if (_datePicker is not null && InternalDate.HasValue)
             {
-                return DateFormatters.MonthDay(_datePicker.CurrentLocale)(DateOnly.Value);
+                return DateFormatters.MonthDay(_datePicker.CurrentLocale)(InternalDate.Value);
             }
 
             return null;
@@ -35,9 +37,9 @@ public partial class PDateTimePickerView2<TValue> : PDateTimePickerViewBase<TVal
     {
         get
         {
-            if (_datePicker is not null && DateOnly.HasValue)
+            if (_datePicker is not null && InternalDate.HasValue)
             {
-                return DateFormatters.Year(_datePicker.CurrentLocale)(DateOnly.Value);
+                return DateFormatters.Year(_datePicker.CurrentLocale)(InternalDate.Value);
             }
 
             return null;

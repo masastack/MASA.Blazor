@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDateTimePickerViewBase<TValue>: ComponentBase
+public class PDateTimePickerViewBase<TValue>: ComponentBase
 {
     [Parameter] public DatePickerType? ActiveDatePicker { get; set; }
 
@@ -23,8 +23,6 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
     [Parameter]
     [ApiDefaultValue(TimeFormat.AmPm)]
     public TimeFormat TimeFormat { get; set; } = TimeFormat.AmPm;
-
-    [Parameter] public Func<DateOnly, string>? HeaderDateFormat { get; set; }
 
     [Parameter] public string? Locale { get; set; }
 
@@ -94,8 +92,6 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
 
     [Parameter] public bool ShowWeek { get; set; }
 
-    [Parameter] public Func<IList<DateOnly>, string>? TitleDateFormat { get; set; }
-
     [Parameter]
     [ApiDefaultValue(true)]
     public bool UseSeconds { get; set; } = true;
@@ -115,8 +111,8 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
     [Parameter] public bool Light { get; set; }
 
     private DateTime? _prevValue;
-    protected DateOnly? DateOnly;
-    protected TimeOnly? TimeOnly;
+    protected DateOnly? InternalDate;
+    protected TimeOnly? InternalTime;
 
     private DateTime? _min;
     private DateTime? _max;
@@ -124,6 +120,8 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
     protected DateOnly? MinDate;
     protected TimeOnly? MaxTime;
     protected TimeOnly? MinTime;
+    
+    protected Block BasePickerBlock => new("m-date-time-picker");
 
     protected override void OnParametersSet()
     {
@@ -151,13 +149,13 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
 
         if (value is null || value.Value == default)
         {
-            DateOnly = null;
-            TimeOnly = null;
+            InternalDate = null;
+            InternalTime = null;
         }
         else
         {
-            DateOnly = System.DateOnly.FromDateTime(value.Value);
-            TimeOnly = System.TimeOnly.FromDateTime(value.Value);
+            InternalDate = System.DateOnly.FromDateTime(value.Value);
+            InternalTime = System.TimeOnly.FromDateTime(value.Value);
         }
     }
 
@@ -168,7 +166,7 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
             return;
         }
 
-        DateOnly = date;
+        InternalDate = date;
 
         await UpdateValue();
     }
@@ -180,15 +178,15 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
             return;
         }
 
-        TimeOnly = time;
+        InternalTime = time;
 
         await UpdateValue();
     }
 
     protected async Task OnHourClick(int hour)
     {
-        TimeOnly = TimeOnly.HasValue
-            ? new TimeOnly(hour, TimeOnly.Value.Minute, TimeOnly.Value.Second)
+        InternalTime = InternalTime.HasValue
+            ? new TimeOnly(hour, InternalTime.Value.Minute, InternalTime.Value.Second)
             : new TimeOnly(hour, 0, 0);
 
         await UpdateValue();
@@ -210,11 +208,11 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
 
         var now = DateTime.Now;
 
-        if (DateOnly.HasValue && DateOnly.Value != default)
+        if (InternalDate.HasValue && InternalDate.Value != default)
         {
-            year = DateOnly.Value.Year;
-            month = DateOnly.Value.Month;
-            day = DateOnly.Value.Day;
+            year = InternalDate.Value.Year;
+            month = InternalDate.Value.Month;
+            day = InternalDate.Value.Day;
         }
         else
         {
@@ -223,11 +221,11 @@ public partial class PDateTimePickerViewBase<TValue>: ComponentBase
             day = now.Day;
         }
 
-        if (TimeOnly.HasValue)
+        if (InternalTime.HasValue)
         {
-            hour = TimeOnly.Value.Hour;
-            minute = TimeOnly.Value.Minute;
-            second = TimeOnly.Value.Second;
+            hour = InternalTime.Value.Hour;
+            minute = InternalTime.Value.Minute;
+            second = InternalTime.Value.Second;
         }
         else
         {

@@ -7,31 +7,23 @@
 time: @(time?.ToString("T"))
 <MDigitalClock TValue="TimeOnly?" Disabled Color="primary" Ripple="false" @bind-Value="time"></MDigitalClock>
 
-<PDateClockPickerView @bind-Value="_date">
-</PDateClockPickerView>
+<PDateDigitalClockPickerView @bind-Value="_date" UseSeconds="false">
+</PDateDigitalClockPickerView>
+
+<MDivider Class="my-2"></MDivider>
+
+<PDateDigitalClockCompactPickerView @bind-Value="_date" UseSeconds="false">
+</PDateDigitalClockCompactPickerView>
+
+<MDivider Class="my-2"></MDivider>
 
 <PDateTimePickerView @bind-Value="_date">
 </PDateTimePickerView>
 
 <MDivider Class="my-2"></MDivider>
 
-<PDateTimePickerView2 @bind-Value="_date">
-</PDateTimePickerView2>
-
-<p class="error--text">确认后 required没有消除</p>
-<MForm OnSubmit="() => { }" Context="formContext">
-    <PDateTimePicker @bind-Value="_date2"
-                     TimeFormat="TimeFormat.Hr24">
-        <ActivatorContent>
-            <MTextField @bind-Value="_date2" Readonly
-                        Required
-                        Clearable
-                        @attributes="@context.Attrs">
-            </MTextField>
-        </ActivatorContent>
-    </PDateTimePicker>
-    <button type="submit">Submit</button>
-</MForm>
+<PDateTimeCompactPickerView @bind-Value="_date">
+</PDateTimeCompactPickerView>
 
 @code {
 

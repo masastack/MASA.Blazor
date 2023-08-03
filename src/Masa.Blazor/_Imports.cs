@@ -12,3 +12,4 @@ global using System.Text;
 global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.Logging;
 global using OneOf;
+global using BemIt;
