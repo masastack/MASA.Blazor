@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Extensions.Languages.Razor;
+﻿using Masa.Blazor.Docs.Examples.components.selects;
+using Masa.Blazor.Extensions.Languages.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.JSInterop;
@@ -17,6 +18,7 @@ public partial class Example : NextTickComponentBase
 
     [Inject] private IPopupService PopupService { get; set; } = null!;
     [Inject] public IJSRuntime Js { get; set; } = null!;
+    [Inject] public MasaBlazor MasaBlazor { get; set; }
 
     [Parameter, EditorRequired] public string File { get; set; } = null!;
 
@@ -110,6 +112,18 @@ public partial class Example : NextTickComponentBase
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
             new("mdi-github", "view-in-github", null, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)
+        };
+
+        MasaBlazor.OnThemeChange += async (theme) =>
+        {
+            if (theme.Dark && MonacoEditor !=null)
+            {
+                await MonacoEditor?.SetThemeAsync("vs-dark");
+            }
+            else if(MonacoEditor != null)
+            {
+                await MonacoEditor?.SetThemeAsync("vs");
+            }
         };
     }
 
