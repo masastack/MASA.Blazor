@@ -51,9 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iOSPushSample", "iOSPushSam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JPush", "JPush", "{CDFC36CF-64AC-4E0B-81E0-2D387CBD65B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.JPush.Binding", "Masa.Blazor.JPush.Binding\Masa.Blazor.JPush.Binding.csproj", "{55395B66-860B-4CB7-BAB0-45D5729A2D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.JPush.Binding", "Masa.Blazor.JPush.Binding\Masa.Blazor.JPush.Binding.csproj", "{55395B66-860B-4CB7-BAB0-45D5729A2D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.JPush.Sample", "Masa.Blazor.JPush.Sample\Masa.Blazor.JPush.Sample.csproj", "{FB193C72-7D61-4D88-A11D-94F25EDF8BD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.JPush.Sample", "Masa.Blazor.JPush.Sample\Masa.Blazor.JPush.Sample.csproj", "{FB193C72-7D61-4D88-A11D-94F25EDF8BD1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Video", "Video", "{08CE11D5-6B0F-4D22-B6A0-06C4BBEF0126}"
 EndProject

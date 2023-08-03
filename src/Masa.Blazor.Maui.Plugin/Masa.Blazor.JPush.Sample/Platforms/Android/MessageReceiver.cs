@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using CN.Jpush.Android.Service;
 
 namespace Masa.Blazor.JPush.Sample.PlatformsAndroid
 {

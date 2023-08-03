@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android</TargetFrameworks>
 
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -17,6 +17,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.JPushDemo.masa</ApplicationId>
+		<!--<ApplicationId>com.JPushDemo.masa</ApplicationId>-->
 		<ApplicationIdGuid>AF0727FF-CD57-4FE5-BE53-93BB53CD2C09</ApplicationIdGuid>
 
 		<!-- Versions -->

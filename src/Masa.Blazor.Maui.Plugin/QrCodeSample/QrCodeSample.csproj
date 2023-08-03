@@ -55,8 +55,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.QrCode\Masa.Blazor.Maui.Plugin.QrCode.csproj" />
-      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI.Controls\ZXing.Net.MAUI.Controls.csproj" />
-      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI\ZXing.Net.MAUI.csproj" />
     </ItemGroup>
 
 </Project>

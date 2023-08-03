@@ -51,7 +51,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Masa.Blazor" Version="1.0.0-preview.2" />
+        <PackageReference Include="Masa.Blazor" Version="1.0.0-preview.17" />
         <PackageReference Include="Masa.BuildingBlocks.Storage.ObjectStorage" Version="1.0.0-preview.1" />
         <PackageReference Include="Masa.Contrib.Storage.ObjectStorage.Aliyun" Version="1.0.0-preview.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />

@@ -1,8 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net7.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+	<ItemGroup>
+		<EmbeddedNativeLibrary Include="Jars\arm64-v8a\libjcore410.so" />
+		<EmbeddedNativeLibrary Include="Jars\armeabi-v7a\libjcore410.so" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedJar Include="Jars\jcore-android-4.1.0.jar" />
+		<EmbeddedJar Include="Jars\jpush-android-4.9.0.jar" />
+	</ItemGroup>
 </Project>

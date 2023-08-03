@@ -15,6 +15,7 @@ namespace Masa.Blazor.JPush.Sample
 
             JPushInterface.Init(Android.App.Application.Context);
             JPushInterface.SetDebugMode(true);
+           var  rid = JPushInterface.GetRegistrationID(Android.App.Application.Context);
         }
     }
 }

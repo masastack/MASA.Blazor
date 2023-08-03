@@ -5,6 +5,7 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 	<!-- 适配Android13，弹出通知必须权限-->
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -110,7 +111,7 @@
 		<!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
 		<meta-data android:name="JPUSH_CHANNEL" android:value="developer-default" />
 		<!-- Required. AppKey copied from Portal -->
-		<meta-data android:name="JPUSH_APPKEY" android:value="这里填应用的AppKey" />
+		<meta-data android:name="JPUSH_APPKEY" android:value="fc0e4873f680e678d45c28c8" />
 	</application>
-	<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="31" />
+	<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="33" />
 </manifest>
