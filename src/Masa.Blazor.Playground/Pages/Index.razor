@@ -1,10 +1,22 @@
 ﻿@page "/"
 @using System.ComponentModel.DataAnnotations
+@inject IPopupService Pop
 
 <h1>Test your code here! @_date</h1>
 
+time: @(time?.ToString("T"))
+<MDigitalClock TValue="TimeOnly?" Disabled Color="primary" Ripple="false" @bind-Value="time"></MDigitalClock>
+
+<PDateClockPickerView @bind-Value="_date">
+</PDateClockPickerView>
+
 <PDateTimePickerView @bind-Value="_date">
 </PDateTimePickerView>
+
+<MDivider Class="my-2"></MDivider>
+
+<PDateTimePickerView2 @bind-Value="_date">
+</PDateTimePickerView2>
 
 <p class="error--text">确认后 required没有消除</p>
 <MForm OnSubmit="() => { }" Context="formContext">
@@ -21,20 +33,10 @@
     <button type="submit">Submit</button>
 </MForm>
 
-<MForm Model="_model" EnableValidation OnSubmit="() => { }" Context="formContext">
-    <PDateTimePicker @bind-Value="_model.Date"
-                     TimeFormat="TimeFormat.Hr24">
-        <ActivatorContent>
-            <MTextField @bind-Value="_model.Date" Readonly
-                        Clearable
-                        @attributes="@context.Attrs">
-            </MTextField>
-        </ActivatorContent>
-    </PDateTimePicker>
-    <button type="submit">Submit</button>
-</MForm>
-
 @code {
+
+    // private TimeOnly? time;
+    private TimeOnly? time = TimeOnly.FromDateTime(DateTime.Now);
 
     private DateTime? _date = null;
     private DateTime? _date2 = null;

@@ -275,6 +275,10 @@
       {
         "title": "descriptions",
         "state": "new"
+      },
+      {
+        "title": "date-time-pickers",
+        "state": "new"
       }
     ]
   },

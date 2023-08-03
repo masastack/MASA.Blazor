@@ -956,3 +956,105 @@ input[type=number] {
     height: 34px;
     font-size: 34px;
 }
+
+/* DigitalClock */
+
+.m-digital-clock {
+    display: flex;
+    height: 238px;
+}
+
+.m-digital-clock__items {
+    height: 100%;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 0 !important;
+    position: relative;
+    scroll-behavior: smooth;
+    width: 56px;
+    border-right: 1px solid rgba(0,0,0,.12);
+}
+
+.m-digital-clock__items:not(:first-of-type) {
+    margin-left: -1px;
+}
+
+.m-digital-clock__items:last-of-type {
+    margin-right: 0;
+    border-right: none;
+}
+
+.m-digital-clock:not(.m-digital-clock--disabled) .m-digital-clock__items:hover {
+    overflow-y: auto;
+}
+
+.m-digital-clock__items:after {
+    display: block;
+    content: "";
+    height: calc((100% - 36px) - 8px);
+}
+
+.m-digital-clock__item {
+    cursor: pointer;
+    height: 36px;
+    line-height: 36px;
+    width: 56px;
+    padding: 0 4px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.m-digital-clock--disabled .m-digital-clock__item, .m-digital-clock--readonly .m-digital-clock__item {
+    pointer-events: none;
+}
+
+.m-digital-clock__item:first-of-type {
+    margin-top: 4px;
+}
+
+.m-digital-clock__item:last-of-type {
+    margin-bottom: 4px;
+}
+
+.m-digital-clock__item-content {
+    position: relative;
+}
+
+.m-digital-clock__item-content:before {
+    background-color: currentColor;
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .3s cubic-bezier(.25, .8, .5, 1);
+}
+
+.theme--light.m-digital-clock .m-digital-clock__item.m-digital-clock__item--active {
+    color: #FFFFFF;
+}
+
+.theme--dark.m-digital-clock .m-digital-clock__item.m-digital-clock__item--active {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.theme--light.m-digital-clock--disabled .m-digital-clock__item {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.theme--dark.m-digital-clock--disabled .m-digital-clock__item {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.theme--light.m-digital-clock .m-digital-clock__item-content:hover::before {
+    opacity: .04;
+}
+
+.theme--dark.m-digital-clock .m-digital-clock__item-content:hover::before {
+    opacity: 0.08;
+}

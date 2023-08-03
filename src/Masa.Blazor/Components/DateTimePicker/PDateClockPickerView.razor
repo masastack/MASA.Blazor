@@ -34,24 +34,17 @@
                  Dark="@Dark"
                  Light="@Light">
     </MDatePicker>
-    <MTimePicker Value="TimeOnly"
-                 ValueChanged="TimeChanged"
-                 AllowedHours="@AllowedHours"
-                 AllowedMinutes="@AllowedMinutes"
-                 AllowedSeconds="@AllowedSeconds"
-                 AmPmInTitle="@AmPmInTitle"
-                 Color="@Color"
-                 Disabled="@Disabled"
-                 HeaderColor="@HeaderColor"
-                 Format="@TimeFormat"
-                 Max="@MaxTime"
-                 Min="@MinTime"
-                 NoTitle="@NoTitle"
-                 Readonly="@Readonly"
-                 Scrollable="@Scrollable"
-                 UseSeconds="@UseSeconds"
-                 Dark="@Dark"
-                 Light="@Light"
-                 OnHourClick="OnHourClick">
-    </MTimePicker>
+    <MDivider Vertical Style="margin: 0" />
+    <MDigitalClock Value="TimeOnly"
+                   ValueChanged="TimeChanged"
+                   TValue="TimeOnly?"
+                   Color="@(Color ?? "accent")"
+                   Disabled="@Disabled"
+                   Format="@TimeFormat"
+                   Readonly="@Readonly"
+                   UseSeconds="@UseSeconds"
+                   Dark="@Dark"
+                   Light="@Light"
+                   Height="290">
+    </MDigitalClock>
 </div>

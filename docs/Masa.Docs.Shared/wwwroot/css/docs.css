@@ -1,6 +1,10 @@
 ﻿@import url(theme/tokens.css);
 @import url(theme/typography.module.css);
 
+.m-application {
+    line-height: 1.5 !important;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
