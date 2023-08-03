@@ -1,0 +1,21 @@
+{
+  "props": {
+    "anchorOptions": "配置锚点，参见 [MarkdownItAnchorOptions](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Components/MarkdownIt/MarkdownItAnchorOptions.cs)。", 
+    "breaks": "将段落中的`\\n`转换为 `br` 标记",
+    "headerSections": "将标题分组为节",
+    "html": "启用 HTML 标签",
+    "langPrefix": "代码段的 CSS 语言前缀。可用于高亮方案。",
+    "linkify": "自动将类似 URL 的文本转换为链接。",
+    "noWrapper": "删除内容周围的包装元素。",
+    "quotes": "双引号和单引号替换对。当启用`Typographer`时，智能引号将起作用。",
+    "scope": "在以不同方式配置多个Markdown It组件时非常有用。",
+    "source": "Markdown源代码。",
+    "typographer": "启用一些语言中立的替换和引号美化。",
+    "xHtmlOut": "使用‘/’结束单个标记(`<br />`)。这只是为了与CommonMark完全兼容。"
+  },
+  "events": {
+    "onFrontMatterParsed": "解析 Front Matter 时的事件回调。",
+    "onTocParsed": "解析目录时的事件回调。"
+  },
+  "contents": {}
+}

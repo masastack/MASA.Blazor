@@ -3,12 +3,12 @@
 @inject MasaBlazor MasaBlazor
 @namespace Masa.Docs.Shared.Components
 
-<AppMenu Items="items">
+<AppMenu Items="_items" TItem="DefaultItem">
     <ActivatorContent>
-        <MButton @attributes="@context.Attrs"
-                 Icon="@MasaBlazor.Breakpoint.SmAndDown"
-                 Class="emphasize1-color px-0 px-md-2"
-                 Text>
+        <MButton Icon="@MasaBlazor.Breakpoint.SmAndDown"
+                 Text
+                 Class="default-app-btn px-0 px-md-2"
+                 @attributes="@context.Attrs">
             <MIcon>mdi-translate</MIcon>
 
             <AppChevronDown></AppChevronDown>
@@ -26,30 +26,38 @@
 
 @code {
 
-    private List<DefaultItem> items = new();
-
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    private static Dictionary<string, string> s_cultureNames = new()
+    {
+        { "en-US", "English" },
+        { "zh-CN", "简体中文" }
+    };
+
+    private List<DefaultItem> _items = new();
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        items = new()
+        _items = new()
         {
             new DefaultItem() { Heading = I18n.T("translations") },
         };
 
-        items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
+        _items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
         {
-            Title = c.NativeName,
+            Title = s_cultureNames.GetValueOrDefault(c.Name, c.NativeName),
             Value = c.Name
         }));
     }
 
     private void OnListItemClick(StringNumber val)
     {
-        OnCultureChanged.InvokeAsync(val.ToString());
+        if (I18n.Culture.Name != val.ToString())
+        {
+            OnCultureChanged.InvokeAsync(val.ToString());
+        }
     }
-
 }

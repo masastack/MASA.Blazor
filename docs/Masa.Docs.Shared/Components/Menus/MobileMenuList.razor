@@ -9,30 +9,29 @@
                    Fixed
                    Floating
                    Temporary>
-    <MList Nav @key="Value">
+    <MList Nav>
         <MListItemGroup>
             @foreach (var item in AppService.GetNavMenus(Project))
             {
-                <MListItem Href="@item.URL" Target="@item.Target">
+                <MListItem Href="@item.Href" Target="@item.Target">
                     <MListItemContent>
-                        <MListItemTitle Class="emphasize1-color">@I18n.T(item.Title)</MListItemTitle>
+                        <MListItemTitle>
+                            <MBadge Color="@item.StateBackgroundColor" Content="@I18n.T(item.State)" Value="@(!string.IsNullOrWhiteSpace(item.State))">
+                                @I18n.T(item.Title)
+                            </MBadge>
+                        </MListItemTitle>
                     </MListItemContent>
                 </MListItem>
             }
             <MDivider />
-            <MListItem>
+            <MListItem Href="https://github.com/masastack/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">@I18n.T("settings")</MListItemTitle>
+                    <MListItemTitle>Github</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MListItem Href="https://github.com/blazorcomponent/MASA.Blazor" Target="_blank">
+            <MListItem Href="https://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank">
                 <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">Github</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Href="ttps://gitee.com/blazorcomponent/MASA.Blazor" Target="_blank">
-                <MListItemContent>
-                    <MListItemTitle Class="emphasize1-color">Gitee</MListItemTitle>
+                    <MListItemTitle>Gitee</MListItemTitle>
                 </MListItemContent>
             </MListItem>
         </MListItemGroup>
@@ -45,9 +44,9 @@
     public string? Project { get; set; }
 
     [Parameter]
-    public bool Value { get; set; }
+    public bool? Value { get; set; }
 
     [Parameter]
-    public EventCallback<bool> ValueChanged { get; set; }
+    public EventCallback<bool?> ValueChanged { get; set; }
 
 }

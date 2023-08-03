@@ -13,6 +13,7 @@
     "items": [
       "installation",
       "browser-support",
+      "frequently-asked-questions",
       "wireframes",
       "release-notes",
       "upgrade-guide",
@@ -23,10 +24,12 @@
     "title": "features",
     "icon": "mdi-image-edit",
     "items": [
+      "bidirectionality",
       "breakpoints",
       "icon-fonts",
       "internationalization",
-      "layouts"
+      "auto-match-nav",
+      "theme"
     ]
   },
   {
@@ -49,12 +52,12 @@
     "title": "ui-components",
     "icon": "mdi-layers-triple",
     "group": "components",
-    "tiling": "some",
+    "hidden": true,
     "state": "new",
     "items": [
       {
         "title": "all",
-        "tiling": "visible"
+        "hidden": false
       },
       "alerts",
       {
@@ -110,10 +113,6 @@
         "state": "new"
       },
       {
-        "title": "monaco-editor",
-        "state": "new"
-      },
-      {
         "title": "error-handler",
         "state": "update"
       },
@@ -145,7 +144,10 @@
           "text-fields"
         ]
       },
-      "grids",
+      {
+        "title": "grids",
+        "exact": true
+      },
       {
         "title": "gridstack",
         "state": "new"
@@ -164,10 +166,13 @@
       },
       "hover",
       {
+        "title": "icons",
+        "state": "update"
+      },
+      {
         "title": "i18ns",
         "state": "new"
       },
-      "icons",
       "image-captcha",
       "images",
       "infinite-scroll",
@@ -194,6 +199,10 @@
         ]
       },
       "modals",
+      {
+        "title": "monaco-editor",
+        "state": "new"
+      },
       "navigation-drawers",
       "not-grouped",
       "overlays",
@@ -206,7 +215,10 @@
         "title": "pickers",
         "group": "components",
         "items": [
-          "date-pickers",
+          {
+            "title": "date-pickers",
+            "exact": true
+          },
           "date-pickers-month",
           "time-pickers"
         ]
@@ -253,6 +265,17 @@
       "tooltips",
       "treeview",
       "virtual-scroll"
+    ]
+  },
+  {
+    "title": "labs",
+    "icon": "mdi-flask",
+    "state": "new",
+    "items": [
+      {
+        "title": "descriptions",
+        "state": "new"
+      }
     ]
   },
   {

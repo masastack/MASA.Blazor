@@ -1,8 +1,10 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListItem Href="@Item?.Href"
-           Exact
+<MListItem Href="@Item.Href"
+           Exact="@Item.Exact"
+           Target="@Item.Target"
+           ActiveClass="doc-list-nav--active"
            Class="m-list-item--default">
     @if (Item?.Icon is not null)
     {
@@ -18,5 +20,6 @@
 @code {
 
     [Parameter, EditorRequired]
-    public TItem? Item { get; set; }
+    public TItem Item { get; set; } = default!;
+
 }

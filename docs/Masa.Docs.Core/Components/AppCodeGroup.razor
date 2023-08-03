@@ -1,30 +1,38 @@
 ﻿@using System.Text.Json.Serialization
 @attribute [JSCustomElement]
 
-@if (Model is not null)
-{
-    <MTabs @bind-Value="_tabValue" Class="mb-1">
-        @foreach (var tab in Tabs)
-        {
-            <MTab Class="text-capitalize">@tab</MTab>
-        }
-    </MTabs>
+<div class="mb-4">
+    @if (Model is not null)
+    {
+        <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
+            @foreach (var tab in Tabs)
+            {
+                <MTab Class="text-none">@tab</MTab>
+            }
+        </MTabs>
 
-    <MTabsItems Value="_tabValue">
-        @foreach (var tabItem in TabItems)
-        {
-            <MTabItem>
-                <Markup Code="@tabItem.Code" Language="@tabItem.Lang"></Markup>
-            </MTabItem>
-        }
-    </MTabsItems>
-}
+        <MTabsItems Dark="Dark" Value="_tabValue">
+            @foreach (var tabItem in TabItems)
+            {
+                <MTabItem>
+                    <Markup Code="@tabItem.Code" Language="@tabItem.Lang"
+                            FileName="@tabItem.FileName"
+                            LineHighlights="@tabItem.LineHighlights">
+                    </Markup>
+                </MTabItem>
+            }
+        </MTabsItems>
+    }
+</div>
 
 @code {
+    
+    [Parameter]
+    public bool Dark { get; set; }
 
     [Parameter]
     public Dictionary<string, MarkupModel>? Model { get; set; }
-
+    
     private StringNumber? _tabValue;
 
     private IEnumerable<string> Tabs => (Model ?? new()).Keys;
@@ -38,6 +46,12 @@
 
         [JsonPropertyName("lang")]
         public string? Lang { get; set; }
+
+        [JsonPropertyName("fileName")]
+        public string? FileName { get; set; }
+
+        [JsonPropertyName("lineHighlights")]
+        public string? LineHighlights { get; set; }
     }
 
 }

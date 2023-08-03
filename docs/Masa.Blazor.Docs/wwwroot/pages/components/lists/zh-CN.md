@@ -15,7 +15,9 @@ related:
 
 ## 注意
 
-<app-alert type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/blazor/components/list-item-groups)。"></app-alert>
+> 如果你想让 **MListItem** 的 `Href` 属性与路由联动，需要在 **MList** 上应用 `Routable` 属性。
+
+> 如果您要查找有状态列表项，请查看 [**MListItemGroup**](/blazor/components/list-item-groups)。
 
 ## 示例
 

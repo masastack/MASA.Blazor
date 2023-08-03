@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Masa.Blazor.Presets;
 
 // TODO: add class constraints for TItem after c# 7.0 release
 
@@ -8,29 +10,29 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     [Inject] private IJSRuntime Js { get; set; } = null!;
 
-    [Parameter] public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
+    [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
-    [Parameter] public StringNumber Height { get; set; }
+    [Parameter] public StringNumber? Height { get; set; }
 
-    [Parameter, EditorRequired] public List<TItem> Items { get; set; }
+    [Parameter, EditorRequired] public List<TItem> Items { get; set; } = null!;
 
-    [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; }
+    [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; } = null!;
 
-    [Parameter] public Func<TItem, bool> ItemDisabled { get; set; }
+    [Parameter] public Func<TItem, bool>? ItemDisabled { get; set; }
 
-    [Parameter, EditorRequired] public Func<TItem, string> ItemText { get; set; }
+    [Parameter, EditorRequired] public Func<TItem, string> ItemText { get; set; } = null!;
 
-    [Parameter, EditorRequired] public Func<TItem, TItemValue> ItemValue { get; set; }
+    [Parameter, EditorRequired] public Func<TItem, TItemValue> ItemValue { get; set; } = null!;
 
     [Parameter] public EventCallback<TItem> OnLoadChildren { get; set; }
 
     [Parameter] public EventCallback<List<TItem>> OnConfirm { get; set; }
 
-    [Parameter] public string Title { get; set; }
+    [Parameter] public string? Title { get; set; }
 
-    [Parameter] public List<TItemValue> Value { get; set; }
+    [Parameter] public List<TItemValue>? Value { get; set; }
 
-    [Parameter] public EventCallback<List<TItemValue>> ValueChanged { get; set; }
+    [Parameter] public EventCallback<List<TItemValue>?> ValueChanged { get; set; }
 
     [Parameter] public bool Visible
     {
@@ -47,7 +49,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
 
     private int _tabIndex;
-    private TItem _loadingItem;
+    private TItem? _loadingItem;
     private List<TItem> _loadedItems = new();
     private bool _visible;
 
@@ -57,9 +59,9 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     private string PleaseSelectText => I18n.T("$masaBlazor.mobileCascader.pleaseSelect");
 
-    private TItem Current => SelectedItems.Count > 0 ? SelectedItems.Last() : default;
+    private TItem? Current => SelectedItems.Count > 0 ? SelectedItems.Last() : default;
 
-    private List<TItem> Children => Current == null ? null : ItemChildren(Current);
+    private List<TItem>? Children => Current == null ? null : ItemChildren(Current);
 
     private bool HasChildren => Children is not null && Children.Count > 0;
 
@@ -79,11 +81,21 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
             if (SelectedItems.Count == _tabIndex)
             {
-                return ItemChildren(Current);
+                return ItemChildren(Current!);
             }
 
             return ItemChildren(SelectedItems[_tabIndex - 1]);
         }
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        Items.ThrowIfNull(nameof(PMobileCascader<TItem, TItemValue>));
+        ItemChildren.ThrowIfNull(nameof(PMobileCascader<TItem, TItemValue>));
+        ItemText.ThrowIfNull(nameof(PMobileCascader<TItem, TItemValue>));
+        ItemValue.ThrowIfNull(nameof(PMobileCascader<TItem, TItemValue>));
     }
 
     protected override async Task OnParametersSetAsync()
@@ -143,7 +155,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     private bool IsDisabled(TItem item)
     {
-        return (ItemDisabled is not null && ItemDisabled(item)) || item.Equals(_loadingItem);
+        return ItemDisabled?.Invoke(item) is true || item!.Equals(_loadingItem);
     }
 
     private async Task OnCancel()
@@ -264,7 +276,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
         FormatTabs();
     }
 
-    private bool TryGetItem(List<TItem> items, TItemValue value, out TItem item)
+    private bool TryGetItem(List<TItem> items, TItemValue value, [NotNullWhen(true)] out TItem? item)
     {
         item = default;
 
@@ -276,6 +288,6 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
         item = items[index];
 
-        return true;
+        return item != null;
     }
 }

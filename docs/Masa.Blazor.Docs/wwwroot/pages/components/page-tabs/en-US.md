@@ -13,15 +13,25 @@ related:
 
 A set of visited tab components that can be switched to the corresponding page by clicking the tab.
 
-- You can customize the title of the tab through the `TabContent` slot. If you change the title through
-  the `UpdateTabTitle` method provided with the `IPageTabsProvider` parameter, the contents of the `TabContent` slot
+- You can customize the title and icon of the tab through the `TabOptions` parameter. If you change the title through
+  the `UpdateTabTitle` method provided with the `IPageTabsProvider` parameter, the title set by the `TabOptions` parameter
   will be overwritten.
 - The `SelfPatterns` parameter is used for fuzzy matching paths. All successful paths are displayed in the same tab. The
-  behavior is similar to the `href` attribute of the `<a></a>` tag.
+  behavior is similar to `_self` of the `href` attribute of the `<a></a>` tag.
+- Use the `OnClose` parameter to customize the behavior of closing the tab. Return `true` to close the tab and return
+  `false` to not close the tab.
+
+> It needs to be used with the **PPageContainer** component.
 
 ### PPageContainer
 
 After wrapping `@Body`, the contents of the page will be cached.
+
+- The `SelfPatterns` parameter is used for fuzzy matching paths. All successful paths are displayed in the same content. The
+  behavior is similar to `_self` of the `href` attribute of the `<a></a>` tag.
+- The `ExcludedPatterns` parameter accepts a list of regular expressions that match the path, and the content of the page corresponding to the successful match will not be cached in the DOM after leaving the page.
+
+> The component can be used alone.
 
 ### PPageTabsProvider
 
@@ -37,15 +47,15 @@ new page and is not the focus of this example.
 
 The specific source codes are listed below:
 
-- [PageTabsLayout.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageTabsLayout.razor)
-  Layout: demonstrate the use of **PPageTabs**, **PPageContainer** and **PPageTabsProvider** components.
-- [PageTabs1.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
+- [PageTabsLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageTabsLayout.razor)
+  Layout: demonstrate the use of **PPageTabs**, **PPageContainer** and **PPageTabsProvider** components, and how to use `TabOptions` to customize the title and icon of the tab.
+- [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
   Page1: demonstrate the ability to save page state.
-- [PageTabs2.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
-  Page2: demonstrate the ability to save page state.
-- [PageTabs3.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
+- [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
+  Page2: demonstrate the ability to not save page state after using the `ExcludedPatterns` attribute.
+- [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
   Page3: demonstrates the ability to change the title of a tab.
-- [PageTabs4.razor](https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)
+- [PageTabs4.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)
   Page4: demonstrates the ability of fuzzy matching paths to display only one tab.
 
 <masa-example file="Examples.components.page_tabs.Usage" no-actions="true"></masa-example>

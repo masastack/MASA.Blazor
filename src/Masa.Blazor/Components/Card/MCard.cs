@@ -2,15 +2,15 @@
 
 namespace Masa.Blazor
 {
-    public partial class MCard : MSheet, ICard, IRoutable, ISheet, ILoadable
+    public partial class MCard : MSheet, ICard, IRoutable, ILoadable
     {
-        private IRoutable _router;
+        private IRoutable? _router;
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager NavigationManager { get; set; } = null!;
 
         [Parameter]
-        public RenderFragment ProgressContent { get; set; }
+        public RenderFragment? ProgressContent { get; set; }
 
         /// <summary>
         /// Removes the card’s elevation.
@@ -43,32 +43,34 @@ namespace Masa.Blazor
         public bool Raised { get; set; }
 
         [Parameter]
-        public string Img { get; set; }
+        public string? Img { get; set; }
 
-        [Parameter]
+        [Parameter, ApiDefaultValue(4)]
         public StringNumber LoaderHeight { get; set; } = 4;
 
-        [Parameter]
+        [Parameter, ApiDefaultValue(false)]
         public StringBoolean Loading { get; set; } = false;
 
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string? ActiveClass { get; set; }
 
         [Parameter]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
-        [Parameter]
+        [Parameter, ApiDefaultValue(true)]
         public bool Ripple { get; set; } = true;
 
         [Parameter]
-        public string Target { get; set; }
+        public string? Target { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-        public bool Exact { get; set; }
+        public bool Exact { get; }
 
-        public bool IsClickable => _router.IsClickable;
+        public string? MatchPattern { get; }
+
+        public bool IsClickable => _router?.IsClickable is true;
 
         protected override void OnParametersSet()
         {

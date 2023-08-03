@@ -1,0 +1,39 @@
+﻿<div class="d-flex align-center justify-center">
+    <MECharts Option="_option" Width="@("100%")" Height="300" IncludeFunctionsInOption>
+    </MECharts>
+</div>
+
+@code {
+
+    private object _option = new
+    {
+        Title = new
+        {
+            Left = "center",
+            Text = "Getting started"
+        },
+        Tooltip = new
+        {
+            Formatter = "(params, ticket, callback) =>`${params.name}: <b class='primary--text'>${params.value}</b>`"
+        },
+        XAxis = new
+        {
+            Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" },
+            AxisLabel = new
+            {
+                Formatter = "function(value, index) { return value.toUpperCase(); }"
+            }
+        },
+        YAxis = new { },
+        Series = new[]
+        {
+            new
+            {
+                Name = "sales",
+                Type= "bar",
+                Data= new []{ 5, 20, 36, 10, 10, 20 }
+            }
+        }
+    };
+
+}

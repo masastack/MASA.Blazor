@@ -1,44 +1,16 @@
-window.setCookie = function (name, value) {
-  document.cookie = `$ {
-                name
-            } = $ {
-                escape(value.toString())
-            };
-            path = /;}`;
-};
+let scrollingFromClickEvent;
 
-window.getCookie = function (name) {
-  const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-  const arr = document.cookie.match(reg);
-  if (arr) {
-    return unescape(arr[2]);
-  }
-  return null;
-};
+window.scrollToElement = function (hash, offset, preventAutoHighlightToc = false) {
+  scrollingFromClickEvent = preventAutoHighlightToc;
 
-window.getCurrentDocSearchLanguage = function () {
-  const language = window.getCookie("Masa_I18nConfig_Language");
-  if (!language || language === "zh-CN") {
-    return "zh";
-  }
-  return "en";
-};
+  const el = document.querySelector(hash);
+  if (!el) return;
 
-// Because the following window.scrollTo causes the NavigateTo not to
-// scroll to the top of the page, the state of the isHash is required
-let isHash;
-
-window.setHash = function () {
-  isHash = true;
-}
-
-window.scrollToElement = function (hash, offset) {
-  setHash();
-  const el = document.getElementById(hash);
   const top = el.getBoundingClientRect().top;
   const offsetPosition = top + window.pageYOffset - offset;
-  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-}
+
+  window.scrollTo({top: offsetPosition, behavior: "smooth"});
+};
 
 /*
  * NavigationManager.NavigateTo always scrolls page to the top.
@@ -47,191 +19,10 @@ window.scrollToElement = function (hash, offset) {
  */
 const origScrollTo = window.scrollTo;
 window.scrollTo = function (x, y) {
-  if (isHash && x === 0 && y === 0) {
-    isHash = false;
+  if (x === 0 && y === 0) {
     return;
   }
   return origScrollTo.apply(this, arguments);
-};
-
-window.addDoSearch = function (isMobile) {
-  const container = `#docsearch${isMobile ? "-mobile" : ""}`;
-  docsearch({
-    container,
-    appId: "TSB4MACWRC",
-    indexName: "blazor-masastack",
-    apiKey: "a38a8d4b58c5648825ba3fafce8b6ffa",
-    debug: false,
-    //searchParameters: {
-    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-    //}
-  });
-};
-
-window.getTimeOffset = function () {
-  return new Date().getTimezoneOffset();
-};
-
-/*
- * markdown-it-proxy would invoke this function to set rules.
- */
-window.MasaBlazor.markdownItRules = function (parser) {
-  const {md, scope} = parser
-  if (scope === "document") {
-    addHeadingRules(md);
-    addLinkRules(parser);
-    addCodeRules(md);
-    addImageRules(md);
-    addBlockquoteRules(md);
-    addTableRules(md);
-
-    parser.useContainer("code-group")
-    parser.useContainer("code-group-item")
-    addCodeGroupRules(parser);
-  } else if (scope === "desc") {
-    addLinkRules(parser)
-  }
-
-  function addHeadingRules(md) {
-    md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
-      const level = tokens[idx].markup.length;
-      const next = tokens[idx + 1];
-      const children = next ? next.children : [];
-      const [, href] = children[2].attrs[0];
-      const content = children[0].content;
-
-      tokens[idx].tag = "app-heading";
-      tokens[idx].attrSet("content", content);
-      tokens[idx].attrSet("href", href);
-      tokens[idx].attrSet("level", level);
-
-      return self.renderToken(tokens, idx, options);
-    };
-    md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-heading";
-
-      return self.renderToken(tokens, idx, options);
-    };
-  }
-
-  function addLinkRules({ md, defaultSlugify }) {
-    md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-      let i = 1;
-      let next = tokens[idx + i];
-      let content = next.content;
-
-      while(!content && next.type !== "link_close") {
-        i++;
-        next = tokens[idx+i]
-        content = next.content
-      }
-
-      tokens[idx].tag = "app-link";
-
-      const href = tokens[idx].attrGet("href");
-      let decodedHref = decodeURI(href)
-      if (decodedHref !== href) {
-        tokens[idx].attrSet("href", '#' + defaultSlugify(decodedHref.replace('#', '')))
-      }
-
-      tokens[idx].attrSet("content", content);
-
-      return self.renderToken(tokens, idx, options);
-    };
-    md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-link";
-
-      return self.renderToken(tokens, idx, options);
-    };
-  }
-
-  function addCodeRules(md) {
-    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-      if (tokens[idx].markup === "```") {
-        const content = tokens[idx].content;
-        const info = tokens[idx].info;
-
-        return `<default-app-markup code="${content.replaceAll('"', "&quot;")}" language="${info}"></default-app-markup>\n`;
-      }
-    };
-  }
-
-  function addImageRules(md) {
-    md.renderer.rules.image = (tokens, idx, options, env, self) => {
-      tokens[idx].attrSet("width", "100%");
-      return self.renderToken(tokens, idx, options);
-    }
-  }
-
-  function addBlockquoteRules(md) {
-    md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
-      const next = tokens[idx + 2];
-      const content = next.content;
-
-      tokens[idx].tag = "app-alert";
-      tokens[idx].attrSet("type", "info");
-      tokens[idx].attrSet("content", content);
-      tokens[idx].attrSet("border", "left");
-
-      return self.renderToken(tokens, idx, options);
-    };
-    md.renderer.rules.blockquote_close = (tokens, idx, options, env, self) => {
-      tokens[idx].tag = "app-alert";
-
-      return self.renderToken(tokens, idx, options);
-    };
-  }
-
-  function addTableRules(md) {
-    md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-      return '<div class="m-sheet m-sheet--outlined rounded theme--light"><div class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' + self.renderToken(tokens, idx, options) + '</div></div></div>';
-    };
-  }
-
-  function addCodeGroupRules(parser) {
-    parser.md.renderer.rules["container_code-group_open"] = (tokens, idx, options, env, self) => {
-      let nextIndex = idx
-      let nextToken = tokens[idx]
-
-      const dic = {}
-
-      while (nextToken) {
-        nextIndex++
-        nextToken = tokens[nextIndex]
-
-        if (nextToken.type === "container_code-group-item_open") {
-          const item = nextToken.info.replace("code-group-item", "").trim()
-
-          nextIndex++
-          nextToken = tokens[nextIndex]
-
-          if (nextToken.type === "fence") {
-            const {content: code, info: lang} = nextToken
-
-            dic[item] = {code, lang}
-          }
-        }
-
-        if (nextToken.type === 'container_code-group_close') {
-          break
-        }
-      }
-
-      const g_attr = `code_group_${idx}`
-      parser.afterRenderCallbacks.push(() => {
-        const selector = `[${g_attr}]`;
-        const element = document.querySelector(selector);
-        if (element) {
-          element.model = dic;
-        }
-      })
-
-      return `<app-code-group ${g_attr}>\n`
-    }
-    parser.md.renderer.rules["container_code-group_close"] = (tokens, idx, options, env, self) => {
-      return `</app-code-group>\n`;
-    }
-  }
 };
 
 window.registerWindowScrollEvent = function (dotnet, selector) {
@@ -240,38 +31,34 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
   let _offsets = [];
   let _toc = [];
   let _registered;
+  let scrollend;
 
   window.addEventListener("scroll", onScroll);
-  registerClickEvents();
-
-  function registerClickEvents() {
-    if (_registered) return
-    const elements = document.querySelectorAll(selector);
-    if (elements && elements.length > 0) {
-      _registered = true;
-      for (const e of elements) {
-        e.addEventListener('click', async () => {
-          _scrolling = true;
-          await new Promise(resolve => setTimeout(resolve, 1000))
-          _scrolling = false;
-        })
-      }
-    }
-  }
+  window.addEventListener("scrollend", () => {
+    clearTimeout(scrollend)
+    setTimeout(() => {
+      scrollingFromClickEvent = false;
+    }, 100)
+  })
 
   function setOffsets() {
     const offsets = [];
     var queryFilter = selector;
-    var firstNode = document.querySelector(queryFilter) ;
-      if (!firstNode || (firstNode && !firstNode.attributes.getNamedItem('href'))) {
-        queryFilter = `${selector} a`;
+    var firstNode = document.querySelector(queryFilter);
+    if (
+      !firstNode ||
+      (firstNode && !firstNode.attributes.getNamedItem("href"))
+    ) {
+      queryFilter = `${selector} a`;
     }
 
-    _toc = Array.from(document.querySelectorAll(queryFilter)).map(({attributes}) => {
-      let href=attributes.getNamedItem("href").value
-      const index = href.indexOf("#");
-      return href.slice(index);
-    })
+    _toc = Array.from(document.querySelectorAll(queryFilter)).map(
+      ({attributes}) => {
+        let href = attributes.getNamedItem("href").value;
+        const index = href.indexOf("#");
+        return href.slice(index);
+      }
+    );
 
     const toc = _toc.slice().reverse();
 
@@ -288,9 +75,9 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
       window.pageYOffset || document.documentElement.offsetTop || 0;
 
     if (currentOffset === 0) {
-      setHash();
-      await dotnet.invokeMethodAsync("UpdateHash", "")
-      return
+      updateHash("")
+      await dotnet.invokeMethodAsync("UpdateHash", "");
+      return;
     }
 
     setOffsets();
@@ -308,49 +95,128 @@ window.registerWindowScrollEvent = function (dotnet, selector) {
       tindex = _toc.length - 1;
     }
 
-    const hash = _toc[tindex];
+    const hash = _toc[tindex] ?? "";
 
-    _scrolling = true;
-
-    setHash();
-    await dotnet.invokeMethodAsync("UpdateHash", hash);
-
-    _scrolling = false;
+    updateHash(hash)
+    if (hash) {
+      await dotnet.invokeMethodAsync("UpdateHash", hash);
+    }
   }
 
   function onScroll() {
+    if (scrollingFromClickEvent) return
+
     clearTimeout(_timeout);
 
-    registerClickEvents();
-
-    if (_scrolling) {
-      return;
-    }
-
     _timeout = setTimeout(findActiveIndex, 17);
+  }
+
+  function updateHash(h) {
+    history.replaceState({}, "", window.location.pathname + h)
   }
 };
 
 window.backTop = function () {
-  slideTo(0);
-}
+  window.scrollTo({top: 0, behavior: "smooth"})
+};
 
 window.activeNavItemScrollIntoView = function (ancestorSelector) {
-  const activeListItem = document.querySelector(`${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`);
-  if (!activeListItem) return;
-  activeListItem.scrollIntoView({ behavior: "smooth" });
-}
+  setTimeout(() => {
+    const activeListItem = document.querySelector(
+      `${ancestorSelector} .m-list-item--active:not(.m-list-group__header)`
+    );
 
-function slideTo(targetPageY) {
-  var timer = setInterval(function () {
-    var currentY = document.documentElement.scrollTop || document.body.scrollTop;
-    var distance = targetPageY > currentY ? targetPageY - currentY : currentY - targetPageY;
-    var speed = Math.ceil(distance / 10);
-    if (currentY == targetPageY || currentY == 1) {
-      document.documentElement.scrollTop = 0;
-      clearInterval(timer);
-    } else {
-      window.scrollTo(0, targetPageY > currentY ? currentY + speed : currentY - speed);
-    }
-  }, 10);
-}
+    if (!activeListItem) return;
+    activeListItem.scrollIntoView({behavior: "smooth"});
+  }, 500)
+};
+
+window.addDocSearch = function (index, currentLanguage, placeholder) {
+  let cnTranslation = {
+    button: {
+      buttonText: "搜索",
+      buttonAriaLabel: "搜索",
+    },
+    modal: {
+      searchBox: {
+        resetButtonTitle: "清除搜索",
+        resetButtonAriaLabel: "清除搜索",
+        cancelButtonText: "取消",
+        cancelButtonAriaLabel: "取消",
+      },
+      startScreen: {
+        recentSearchesTitle: "最近",
+        noRecentSearchesText: "没有搜索历史",
+        saveRecentSearchButtonTitle: "保存搜索",
+        removeRecentSearchButtonTitle: "从历史移除记录",
+        favoriteSearchesTitle: "收藏",
+        removeFavoriteSearchButtonTitle: "从收藏移除记录",
+      },
+      errorScreen: {
+        titleText: "不能获取结果",
+        helpText: "可能由于网络链接中断",
+      },
+      footer: {
+        selectText: "选中",
+        selectKeyAriaLabel: "回车键",
+        navigateText: "导航",
+        navigateUpKeyAriaLabel: "向下键",
+        navigateDownKeyAriaLabel: "向上键",
+        closeText: "关闭",
+        closeKeyAriaLabel: "ESC键",
+        searchByText: "搜索提供：",
+      },
+      noResultsScreen: {
+        noResultsText: "没有找到记录:",
+        suggestedQueryText: "尝试搜索中:",
+        reportMissingResultsText: "确认这个关键词应该返回记录？",
+        reportMissingResultsLinkText: "告诉我们。",
+      },
+    },
+  };
+
+  const container = `#docsearch`;
+  let option = {
+    container,
+    appId: "TSB4MACWRC",
+    indexName: "blazor-masastack_" + index,
+    apiKey: "12f9496bb2f06001f90cf49738e1a227",
+    hitComponent: ({hit, children}) => {
+      return {
+        type: "a",
+        ref: undefined,
+        constructor: undefined,
+        props: {
+          href: hit.url,
+          onClick: (e) => {
+            let hitUrl;
+            if (hit.url.startsWith("/")) {
+              hitUrl = new URL(hit.url, location.origin);
+            } else {
+              hitUrl = new URL(hit.url);
+            }
+            if (document.location.pathname === hitUrl.pathname) {
+              if (hitUrl.hash) {
+                window.requestAnimationFrame(() =>
+                  window.scrollToElement(hitUrl.hash, 108)
+                );
+              } else {
+                window.scrollTo({top: 0, behavior: "smooth"})
+              }
+            }
+          },
+          children: children,
+        },
+        __v: null,
+      };
+    },
+    placeholder,
+    searchParameters: {
+      facetFilters: ["lang:" + currentLanguage],
+    },
+  };
+  if (currentLanguage === "zh") {
+    option.translations = cnTranslation;
+  }
+  docsearch(option);
+};

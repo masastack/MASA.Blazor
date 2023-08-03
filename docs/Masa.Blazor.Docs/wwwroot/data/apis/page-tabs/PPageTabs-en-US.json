@@ -1,0 +1,22 @@
+﻿{
+  "props": {
+    "askBeforeClosing": "Determines whether to ask before closing.",
+    "closeIcon": "The icon of close.",
+    "closeOtherTabsText": "The text of close other tabs.",
+    "closeTabsToTheLeftText": "The text of close tabs to the left.",
+    "closeTabsToTheRightText": "The text of close tabs to the right.",
+    "hideSlider": "Determines whether to hide the slider.",
+    "noDataPath": "The path to navigate to when there is no tabs.",
+    "onClose": "Custom logic for closing tabs, returning `false` can prevent closing.",
+    "reloadTabText": "The text of reload tab.",
+    "selfPatterns": "Used for fuzzy matching paths. All successful paths are displayed in the same tab.",
+    "sliderColor": "The color of slider.",
+    "tabClass": "The class of tab.",
+    "tabOptions": "The options for tab."
+  },
+  "events": {
+  },
+  "contents": {
+    "tabIconContent": "The fragment of the tab icon."
+  }
+}

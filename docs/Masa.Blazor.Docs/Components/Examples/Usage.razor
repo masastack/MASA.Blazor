@@ -3,7 +3,7 @@
 
 @if (_rendered)
 {
-    <AppSheet Class="mb-12 m-example">
+    <AppSheet Dark="Dark" Class="mb-12 m-example">
         <MRow NoGutters>
             <MCol Cols="12" Md="@(HasRightOptions ? 8 : 12)">
                 <MResponsive Class="d-flex" Height="44">
@@ -105,7 +105,7 @@
                 <AppDivider />
             </MCol>
             <MCol Cols="12">
-                <Markup Code="@SourceCode" Language="razor" Rounded="@("b")"></Markup>
+                <Markup RoundedTop0 Code="@SourceCode" Language="razor"></Markup>
             </MCol>
         </MRow>
     </AppSheet>

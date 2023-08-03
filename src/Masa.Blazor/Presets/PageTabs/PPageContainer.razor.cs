@@ -1,5 +1,4 @@
-﻿#nullable enable
-using Microsoft.AspNetCore.Components.Routing;
+﻿using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
@@ -14,11 +13,20 @@ public partial class PPageContainer : PatternPathComponentBase
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// A list of regular expression patterns to match.
+    /// The content of the matched path would not be cached in the DOM.
+    /// </summary>
+    [Parameter]
+    public IEnumerable<string>? ExcludedPatterns { get; set; }
+
+    private string? _previousPath;
     private PatternPath? _currentPatternPath;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
         var patternPath = GetCurrentPatternPath();
         _currentPatternPath = patternPath;
     }
@@ -39,6 +47,8 @@ public partial class PPageContainer : PatternPathComponentBase
             ContainerPageTabs.TabReload += PageTabsOnTabReload;
             ContainerPageTabs.TabsUpdated += PageTabsOnTabsUpdated;
         }
+
+        _previousPath = patternPath.AbsolutePath;
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
@@ -88,22 +98,54 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         InvokeAsync(() =>
         {
-            PatternPaths.RemoveAll(p => !paths.Contains(p));
+            if (paths.Length == 0)
+            {
+                PatternPaths.Clear();
+            }
+            else
+            {
+                PatternPaths.RemoveAll(p => !paths.Contains(p));
+            }
+
             StateHasChanged();
         });
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
+        var currentPatternPath = GetCurrentPatternPath();
+        var currentPath = currentPatternPath.AbsolutePath;
+
+        // only the path is changed, not the query string
+        if (_previousPath == currentPath)
+        {
+            return;
+        }
+
+        // if the previous path is excluded, remove it from the PatternPaths
+        if (_previousPath is not null && ExcludedPatterns is not null)
+        {
+            if (ExcludedPatterns.Any(pattern => new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(_previousPath)))
+            {
+                var previousPatternPath = PatternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
+                if (previousPatternPath is not null)
+                {
+                    PatternPaths.Remove(previousPatternPath);
+                    InvokeAsync(StateHasChanged);
+                }
+            }
+        }
+
+        _previousPath = currentPath;
+
         if (PatternPaths.Contains(_currentPatternPath!))
         {
             return;
         }
 
-        var patternPath = GetCurrentPatternPath();
-        if (patternPath.IsSelf)
+        if (currentPatternPath.IsSelf)
         {
-            var renderedAbsolutePath = PatternPaths.FirstOrDefault(p => patternPath == p);
+            var renderedAbsolutePath = PatternPaths.FirstOrDefault(p => currentPatternPath == p);
             if (renderedAbsolutePath is not null)
             {
                 InvokeAsync(StateHasChanged);
@@ -111,7 +153,7 @@ public partial class PPageContainer : PatternPathComponentBase
             }
             else
             {
-                PatternPaths.Add(patternPath);
+                PatternPaths.Add(currentPatternPath);
                 InvokeAsync(StateHasChanged);
                 return;
             }

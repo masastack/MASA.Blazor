@@ -3,13 +3,13 @@
     public class MDataTableHeader : BDataTableHeader, IDataTableHeader
     {
         [Inject]
-        protected I18n I18n { get; set; }
+        protected I18n I18n { get; set; } = null!;
 
         [Parameter]
-        public DataOptions Options { get; set; }
+        public DataOptions Options { get; set; } = null!;
 
         [Parameter]
-        public string CheckboxColor { get; set; }
+        public string? CheckboxColor { get; set; }
 
         [Parameter]
         public bool EveryItem { get; set; }
@@ -24,7 +24,7 @@
         public bool SingleSelect { get; set; }
 
         [Parameter]
-        public RenderFragment DataTableSelectContent { get; set; }
+        public RenderFragment? DataTableSelectContent { get; set; }
 
         [Parameter]
         public bool DisableSort { get; set; }
@@ -33,21 +33,21 @@
         public bool MultiSort { get; set; }
 
         [Parameter]
-        public string SortIcon { get; set; } = "mdi-arrow-up";
+        public string SortIcon { get; set; } = "$sort";
 
         [Parameter]
-        public RenderFragment<DataTableHeader> HeaderColContent { get; set; }
+        public RenderFragment<DataTableHeader>? HeaderColContent { get; set; }
 
         [Parameter]
         public EventCallback<bool> OnToggleSelectAll { get; set; }
 
         [Parameter]
-        public EventCallback<OneOf<string, List<string>>> OnSort { get; set; }
+        public EventCallback<OneOf<string?, List<string>>> OnSort { get; set; }
 
         [Parameter]
         public EventCallback<string> OnGroup { get; set; }
 
-        public async Task HandleOnHeaderColClick(string value)
+        public async Task HandleOnHeaderColClick(string? value)
         {
             if (OnSort.HasDelegate)
             {
@@ -74,13 +74,14 @@
                 })
                 .Apply("header", cssBuilder =>
                 {
-                    var header = (DataTableHeader)cssBuilder.Data;
+                    var header = (DataTableHeader?)cssBuilder.Data;
+                    if (header is null) return;
 
                     if (!DisableSort && header.Sortable)
                     {
                         var sortIndex = Options.SortBy.IndexOf(header.Value);
                         var beingSorted = sortIndex >= 0;
-                        var isDesc = beingSorted ? Options.SortDesc.ElementAtOrDefault(sortIndex) : false;
+                        var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
 
                         cssBuilder
                             .Add("sortable")
@@ -92,7 +93,8 @@
                         .Add($"text-{header.Align.ToString().ToLower()}");
                 }, styleBuilder =>
                 {
-                    var header = (DataTableHeader)styleBuilder.Data;
+                    var header = (DataTableHeader?)styleBuilder.Data;
+                    if (header is null) return;
 
                     styleBuilder
                         .AddWidth(header.Width)
@@ -107,14 +109,10 @@
                 .Apply("header-mobile__select", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__select"); })
                 .Apply("header-mobile__select-chips", cssBuilder =>
                 {
-                    var (text, value) = ((string text, string value))cssBuilder.Data;
+                    var data = (DataTableHeader?)cssBuilder.Data;
+                    if (data is null || (data.Text is null && data.Value is null)) return;
 
-                    if (text is null && value is null)
-                    {
-                        return;
-                    }
-
-                    var sortIndex = Options.SortBy.IndexOf(value);
+                    var sortIndex = Options.SortBy.IndexOf(data.Value);
                     var beingSorted = sortIndex >= 0;
                     var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
 
@@ -139,38 +137,37 @@
                     attrs[nameof(Class)] = "m-data-table-header__icon";
                     attrs[nameof(MIcon.Size)] = (StringNumber)18;
                 })
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<(string, string), string, string>), "sort-select", attrs =>
+                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataTableHeader, string, string>), "sort-select", attrs =>
                 {
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemText)] =
-                        (Func<(string Text, string Value), string>)(item => item.Text);
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemValue)] =
-                        (Func<(string Text, string Value), string>)(item => item.Value);
-                    attrs[nameof(MSelect<(string, string), string, string>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
-                    attrs[nameof(MSelect<(string, string), string, string>.HideDetails)] = (StringBoolean)true;
-                    attrs[nameof(MSelect<(string, string), string, string>.Multiple)] = Options.MultiSort;
-
-                    attrs[nameof(MSelect<(string, string), string, string>.Value)] = Options.SortBy.Count > 0 ? Options.SortBy[0] : null;
-                    attrs[nameof(MSelect<(string, string), string, string>.ValueChanged)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ItemText)] =
+                        (Func<DataTableHeader, string>)(item => item.Text);
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ItemValue)] =
+                        (Func<DataTableHeader, string>)(item => item.Value);
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Multiple)] = Options.MultiSort;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.Value)] = Options.SortBy.Count > 0 ? Options.SortBy[0] : null;
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.ValueChanged)] =
                         EventCallback.Factory.Create<string>(this, (s) => OnSort.InvokeAsync(s));
 
-                    attrs[nameof(MSelect<(string, string), string, string>.MenuProps)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, string>.MenuProps)] =
                         (Action<BMenuProps>)(props => props.CloseOnContentClick = true);
                 })
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<(string, string), string, List<string>>), "sort-select-multiple", attrs =>
+                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataTableHeader, string, List<string>>), "sort-select-multiple", attrs =>
                 {
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemText)] =
-                        (Func<(string Text, string Value), string>)(item => item.Text);
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemValue)] =
-                        (Func<(string Text, string Value), string>)(item => item.Value);
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.HideDetails)] = (StringBoolean)true;
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.Multiple)] = Options.MultiSort;
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.ItemText)] =
+                        (Func<DataTableHeader, string>)(item => item.Text);
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.ItemValue)] =
+                        (Func<DataTableHeader, string>)(item => item.Value);
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.Multiple)] = Options.MultiSort;
 
-                    attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.Value)] = Options.SortBy;
-                    attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.ValueChanged)] =
+                    attrs[nameof(MSelect<List<DataTableHeader>, string, List<string>>.Value)] = Options.SortBy;
+                    attrs[nameof(MSelect<List<DataTableHeader>, string, List<string>>.ValueChanged)] =
                         EventCallback.Factory.Create<List<string>>(this, s => OnSort.InvokeAsync(s));
 
-                    attrs[nameof(MSelect<(string, string), string, List<string>>.MenuProps)] =
+                    attrs[nameof(MSelect<DataTableHeader, string, List<string>>.MenuProps)] =
                         (Action<BMenuProps>)(props => props.CloseOnContentClick = true);
                 })
                 .Apply<BChip, MChip>(attrs =>

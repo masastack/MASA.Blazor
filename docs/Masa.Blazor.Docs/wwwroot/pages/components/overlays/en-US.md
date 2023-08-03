@@ -17,23 +17,17 @@ In its simplest form, the **MOverlay** component will add a dimmed layer over yo
 
 ### Props
 
-#### Absolute
+#### Contained
 
-`Absolute` overlays are positioned absolutely and contained inside of their parent element.
+A `Contained` overlay is positioned absolutely and contained inside of its parent element.
 
-<masa-example file="Examples.components.overlays.Absolute"></masa-example>
+<masa-example file="Examples.components.overlays.Contained"></masa-example>
 
 #### Opacity
 
 `Opacity` allows you to customize the transparency of components.
 
 <masa-example file="Examples.components.overlays.Opacity"></masa-example>
-
-#### Z-index
-
-`ZIndex` gives you the ability to easily change the stack order of the **MOverlay** component.
-
-<masa-example file="Examples.components.overlays.ZIndex"></masa-example>
 
 ### Misc
 

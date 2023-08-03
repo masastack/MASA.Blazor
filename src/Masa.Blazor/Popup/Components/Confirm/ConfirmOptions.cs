@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor.Presets;
-
-namespace Masa.Blazor.Popup;
+﻿namespace Masa.Blazor.Popup;
 
 public class ConfirmOptions
 {
@@ -15,6 +11,8 @@ public class ConfirmOptions
     public Action<ModalButtonProps>? CancelProps { get; set; }
 
     public string? Content { get; set; }
+
+    public RenderFragment? ContentContent { get; set; }
 
     public string? ContentClass { get; set; }
 

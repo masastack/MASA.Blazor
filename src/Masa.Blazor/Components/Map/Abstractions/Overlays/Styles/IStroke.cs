@@ -2,7 +2,7 @@
 {
     public interface IStroke
     {
-        public string StrokeColor { get; set; }
+        public string? StrokeColor { get; set; }
 
         public float StrokeOpacity { get; set; }
 

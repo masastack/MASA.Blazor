@@ -4,6 +4,9 @@ namespace Masa.Blazor
 {
     public class MSimpleTable : BSimpleTable, ISimpleTable
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Dense { get; set; }
 
@@ -14,13 +17,13 @@ namespace Masa.Blazor
         public bool FixedRight { get; set; }
 
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         [Parameter]
-        public RenderFragment WrapperContent { get; set; }
+        public RenderFragment? WrapperContent { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
+        public StringNumber? Width { get; set; }
 
         public ElementReference WrapperElement { get; set; }
 
@@ -62,12 +65,24 @@ namespace Masa.Blazor
                 .ApplySimpleTableDefault();
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await HandleOnScrollAsync(EventArgs.Empty);
+                StateHasChanged();
+            }
+        }
+
         public async Task HandleOnScrollAsync(EventArgs args)
         {
             if (FixedRight)
             {
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
-                if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (element != null && element.ScrollWidth == (MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)
                 {
                     ScrollerOnRight = true;
                 }

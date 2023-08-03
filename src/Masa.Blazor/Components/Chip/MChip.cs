@@ -2,10 +2,8 @@
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {
-        private Sizer _sizer;
-
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public bool Draggable { get; set; }
@@ -14,7 +12,7 @@
         public bool Filter { get; set; }
 
         [Parameter]
-        public string FilterIcon { get; set; } = "mdi-check";
+        public string FilterIcon { get; set; } = "$complete";
 
         [Parameter]
         public bool Label { get; set; }
@@ -29,19 +27,22 @@
         public bool Pill { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool Ripple { get; set; } = true;
 
         [Parameter]
         public bool Small { get; set; }
 
         [Parameter]
-        public string TextColor { get; set; }
+        public string? TextColor { get; set; }
 
         [Parameter]
         public bool XLarge { get; set; }
 
         [Parameter]
         public bool XSmall { get; set; }
+
+        private Sizer? _sizer;
 
         protected override void OnParametersSet()
         {
@@ -56,7 +57,7 @@
 
         protected override void SetComponentClass()
         {
-            CloseIcon ??= "mdi-close-circle";
+            CloseIcon ??= "$delete";
 
             var prefix = "m-chip";
 
@@ -65,7 +66,7 @@
                 {
                     cssBuilder
                         .Add(prefix)
-                        .Add(_sizer.SizeableClasses)
+                        .Add(_sizer!.SizeableClasses)
                         .AddIf($"{prefix}--clickable", () => IsClickable)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--draggable", () => Draggable)
@@ -102,9 +103,9 @@
                     attrs[nameof(MIcon.Right)] = true;
                     attrs[nameof(MIcon.Size)] = (StringNumber)18;
                     attrs[nameof(MIcon.OnClick)] = OnCloseClick;
-                    attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>()
+                    attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object?>()
                     {
-                        {"aria-label", CloseLabel}
+                        { "aria-label", CloseLabel }
                     };
                 })
                 .Apply<BIcon, MIcon>("filter", attrs =>

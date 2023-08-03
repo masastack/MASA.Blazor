@@ -14,8 +14,6 @@ related:
 Masa.Blazor 网格深受 [Bootstrap 网格](https://getbootstrap.com/docs/4.0/layout/grid/) 的启发。 它使用一系列的容器、行、列来整合内容的布局和排列。 如果你不熟悉
 flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)，了解背景、术语、指南和代码片段。
 
-<example file="" />
-
 ## 子组件
 
 - **MContainer**：**MContainer** 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 `Fluid` 属性将容器在所有视口和设备尺寸上完全扩展。
@@ -26,11 +24,9 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 
 ## 辅助类
 
-**FillHeight**将`height:100%`应用于元素。当应用于**MContainer**时，它还包括`align items:center`。
+`fill-height` 将 `height:100%` 应用于元素。当应用于**MContainer**时，它还包括`align-items:center`。
 
 ## 注意
-
-<app-alert type="info" content="1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。"></app-alert>
 
 <app-alert type="info" content="网格组件上基于断点的属性以 `andUp` 的方式工作。 考虑 `xs` 断点已经被删除的情况， 这将会影响到 `offset`、`justify`、`align` 和 **MCol** 上的断点属性。如：1、 `justify-sm` 和 `justify-md` 这样的属性仍然存在，但 `justify-xs` 会变成 `justify`。2、 **MCol** 上不存在 `Xs` 属性。 与此对应的是 `Cols` 属性。"></app-alert>
 

@@ -11,7 +11,7 @@ related:
 
 <selects-usage></selects-usage>
 
-## 注意
+## Caveats
 
 <app-alert type="info" content="The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alert>
 

@@ -6,18 +6,20 @@ namespace Masa.Blazor
 {
     public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>, IAutocomplete<TItem, TItemValue, TValue>
     {
-        private Func<TItem, string, string, bool> _filter;
+        private Func<TItem, string, string, bool>? _filter;
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool AllowOverflow { get; set; } = true;
 
         [Parameter]
         public bool AutoSelectFirst { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("(item, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1")]
         public Func<TItem, string, string, bool> Filter
         {
-            get { return _filter ??= (_, query, text) => text.ToLower().IndexOf(query.ToLower(), StringComparison.Ordinal) > -1; }
+            get { return _filter ??= (_, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1; }
             set => _filter = value;
         }
 
@@ -32,16 +34,16 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string SearchInput { get; set; }
+        public string? SearchInput { get; set; }
 
         [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
 
         protected override List<TItem> ComputedItems => FilteredItems;
 
-        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-        protected IList<TItemValue> SelectedValues => SelectedItems.Select(GetValue).ToList();
+        protected IList<TItemValue?> SelectedValues => SelectedItems.Select(GetValue).ToList();
 
         protected bool HasDisplayedItems => HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
 
@@ -67,23 +69,23 @@ namespace Masa.Blazor
                     nameof(NoFilter),
                     nameof(InternalSearch),
                     nameof(Items)
-                });
+                })!;
             }
         }
 
         protected bool IsSearching => (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
 
-        protected TItem SelectedItem => SelectedItems.LastOrDefault();
+        protected TItem? SelectedItem => SelectedItems.LastOrDefault();
 
         protected bool SearchIsDirty => !string.IsNullOrEmpty(InternalSearch);
 
-        protected string InternalSearch
+        protected string? InternalSearch
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
-        protected override Dictionary<string, object> InputAttrs => new()
+        protected override Dictionary<string, object?> InputAttrs => new()
         {
             { "type", Type },
             { "autocomplete", "off" }
@@ -92,10 +94,10 @@ namespace Masa.Blazor
         protected override BMenuProps GetDefaultMenuProps()
         {
             var props = base.GetDefaultMenuProps();
-            props.OffsetY = true;
 
-            // props.OffsetOverflow = true;
-            // props.Transition = false;
+            props.OffsetY = true;
+            props.OffsetOverflow = true;
+            props.Transition = null;
 
             return props;
         }
@@ -278,7 +280,7 @@ namespace Masa.Blazor
                 await HandleOnFocusAsync(new FocusEventArgs());
             }
 
-            if (!await IsAppendInner(args.Target))
+            if (args.Target != null && !await IsAppendInner(args.Target))
             {
                 ActivateMenu();
             }
@@ -294,10 +296,16 @@ namespace Masa.Blazor
             await base.HandleOnClearClickAsync(args);
         }
 
-        private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
+        private async void OnFilteredItemsChanged(IList<TItem>? val, IList<TItem>? oldVal)
         {
             val ??= new List<TItem>();
             oldVal ??= new List<TItem>();
+
+            var except = val.Except(oldVal);
+            if (!except.Any())
+            {
+                return;
+            }
 
             if (!AutoSelectFirst)
             {

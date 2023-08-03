@@ -8,7 +8,7 @@ public class EChartsJSModule : JSModule
 
     public async ValueTask<IEChartsJSObjectReferenceProxy> Init(
         ElementReference el,
-        string theme,
+        string? theme,
         EChartsInitOptions options,
         IEChartsJsCallbacks owner
     )

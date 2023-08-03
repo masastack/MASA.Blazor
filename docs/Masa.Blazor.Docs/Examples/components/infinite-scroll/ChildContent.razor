@@ -1,0 +1,71 @@
+﻿<MCard Width="500" Height="250" Class="overflow-auto" Style="margin: 0 auto" @ref="_card">
+    <MList>
+        @foreach (var item in _items)
+        {
+            <MListItem>
+                <MListItemContent>
+                    <MListItemTitle>@item</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MDivider />
+        }
+    </MList>
+    <MInfiniteScroll Manual
+                     OnLoad="@OnLoad"
+                     Parent="@_card.Ref">
+        @if (context.Status == InfiniteScrollLoadStatus.Loading)
+        {
+            <MProgressLinear Indeterminate Color="primary"></MProgressLinear>
+        }
+        else if (context.Status == InfiniteScrollLoadStatus.Error)
+        {
+            <MButton Color="error" Block OnClick="@context.OnLoad">Failed to load, try again!</MButton>
+        }
+        else if (context.Status == InfiniteScrollLoadStatus.Ok)
+        {
+            <MButton Color="primary" Block OnClick="@context.OnLoad">Give me more!</MButton>
+        }
+        else
+        {
+            <span>That's all!</span>
+        }
+    </MInfiniteScroll>
+</MCard>
+
+@code {
+
+    private MCard _card;
+    private int _count;
+    private bool _mockError;
+    private List<string> _items = new();
+
+    private async Task OnLoad(InfiniteScrollLoadEventArgs args)
+    {
+        var append = await MockRequest();
+
+        args.Status = append.Count == 0 ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
+
+        _items.AddRange(append);
+    }
+
+    private async Task<List<string>> MockRequest()
+    {
+        if (_count >= 3)
+        {
+            return new List<string>();
+        }
+
+        await Task.Delay(2000);
+
+        if (_count == 1 && !_mockError)
+        {
+            _mockError = true;
+            throw new TimeoutException("Mock error");
+        }
+
+        _count++;
+
+        return Enumerable.Range(_items.Count, 10).Select(n => n.ToString()).ToList();
+    }
+
+}

@@ -22,6 +22,21 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool? Closeable { get; set; }
 
+        [Parameter]
+        public StringNumber? Elevation { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public StringBoolean? Rounded { get; set; }
+
+        [Parameter]
+        public bool Shaped { get; set; }
+
+        [Parameter]
+        public bool Text { get; set; }
+
         private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
@@ -40,7 +55,8 @@ namespace Masa.Blazor.Presets
                           .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--center", () => Position == SnackPosition.TopCenter)
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--left", () => Position == SnackPosition.BottomLeft)
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--right", () => Position == SnackPosition.BottomRight)
-                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter);
+                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter)
+                          .AddIf($"{ROOT_CSS}--center", () => Position == SnackPosition.Center);
             }, styleBuilder => { styleBuilder.AddMaxWidth(MaxWidth); });
         }
 
@@ -71,6 +87,8 @@ namespace Masa.Blazor.Presets
         internal void RemoveSnackbar(Guid id)
         {
             var config = _stack.FirstOrDefault(c => c.Id == id);
+            if (config is null) return;
+
             _stack.Remove(config);
             StateHasChanged();
         }

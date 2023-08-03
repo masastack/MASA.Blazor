@@ -12,7 +12,7 @@
     "overlayScrimClass": "overlayScrimClass",
     "persistent": "Clicking outside of the element will not deactivate it.",
     "scrollable": "When set to true, expects a v-card and a v-card-text component with a designated height. ",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](styles-and-animations/transitions) or one your own.",
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own.",
     "value": "Controls whether the component is visible or hidden."
   },
   "contents": {
@@ -21,5 +21,5 @@
   "events": {
     "onOutsideClick": "Event that fires when clicking outside an active dialog."
   },
-  "functions": {}
+  "methods": {}
 }

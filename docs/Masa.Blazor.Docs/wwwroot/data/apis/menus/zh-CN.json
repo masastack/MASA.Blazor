@@ -25,7 +25,7 @@
     "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 (for transition origin)[https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin]",
     "positionX": "用于在不使用激活器插槽时定位内容",
     "positionY": "用于在不使用激活器插槽时定位内容",
-    "transition": "设置组件转换。可以是一个 (built in transitions)[styles-and-animations/transitions] 或者是自己自定义的。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
     "value": "控制组件可见还是隐藏。",
     "zIndex": "用于组件的 z-index"
   },

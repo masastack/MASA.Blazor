@@ -1,6 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
 <MApp>
+    <MNavigationDrawer App>
+        <MList Routable Nav>
+            <MListItem Href="/">Home</MListItem>
+        </MList>
+    </MNavigationDrawer>
+
     <MMain>
         <MContainer>
             @Body

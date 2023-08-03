@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using OneOf;
+﻿using OneOf;
 
 namespace Masa.Blazor
 {
@@ -8,18 +6,12 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public DatePickerType? ActivePicker
         {
-            get
-            {
-                return GetValue<DatePickerType?>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<DatePickerType?>();
+            set => SetValue(value);
         }
 
         [Parameter]
@@ -35,9 +27,6 @@ namespace Masa.Blazor
         public bool Multiple { get; set; }
 
         [Parameter]
-        public DateOnly PickerDate { get; set; }
-
-        [Parameter]
         public bool Range { get; set; }
 
         [Parameter]
@@ -50,6 +39,7 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
         [Parameter]
@@ -74,6 +64,7 @@ namespace Masa.Blazor
         public bool Landscape { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
@@ -104,7 +95,7 @@ namespace Masa.Blazor
         public bool ShowWeek { get; set; }
 
         [Parameter]
-        public TValue Value
+        public TValue? Value
         {
             get => GetValue<TValue>();
             set => SetValue(value);
@@ -126,10 +117,12 @@ namespace Masa.Blazor
         public string? YearIcon { get; set; }
 
         [Parameter]
-        public string NextIcon { get; set; } = "mdi-chevron-right";
+        [ApiDefaultValue("$next")]
+        public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        public string PrevIcon { get; set; } = "mdi-chevron-left";
+        [ApiDefaultValue("$prev")]
+        public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
         public EventCallback<DateOnly> OnPickerDateUpdate { get; set; }
@@ -145,7 +138,7 @@ namespace Masa.Blazor
             get
             {
                 var culture = I18n.Culture;
-                
+
                 if (Locale is not null)
                 {
                     try
@@ -154,8 +147,7 @@ namespace Masa.Blazor
                     }
                     catch (CultureNotFoundException e)
                     {
-                        // ignored
-                        Console.WriteLine(e);
+                        Logger.LogWarning(e, "Locale {Locale} is not found", Locale);
                     }
                 }
 
@@ -197,7 +189,7 @@ namespace Masa.Blazor
                     if (values.Count > 0)
                     {
                         var date = values[0];
-                        
+
                         if (Type == DatePickerType.Date)
                         {
                             var str = DateFormatters.AbbreviatedDayOfWeek(CurrentLocale)(date) + ", " + DateFormatters.MonthDay(CurrentLocale)(date);
@@ -213,7 +205,7 @@ namespace Masa.Blazor
                             return DateFormatters.Month(CurrentLocale)(date);
                         }
                     }
-                    
+
                     return "&nbsp;";
                 };
             }
@@ -223,7 +215,7 @@ namespace Masa.Blazor
         {
             get
             {
-                if (ShowCurrent.IsT1 && ShowCurrent.AsT1 == true)
+                if (ShowCurrent.IsT1 && ShowCurrent.AsT1)
                 {
                     return DateOnly.FromDateTime(DateTime.Now);
                 }
@@ -256,7 +248,7 @@ namespace Masa.Blazor
             watcher
                 .Watch<DatePickerType?>(nameof(ActivePicker), val =>
                 {
-                    InternalActivePicker = val.Value;
+                    InternalActivePicker = val ?? Type; 
                 })
                 .Watch<DateOnly>(nameof(TableDate), val =>
                 {
@@ -275,27 +267,39 @@ namespace Masa.Blazor
                 .Watch<TValue>(nameof(Value), val =>
                 {
                     var multipleValue = WrapInArray(val);
-                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
+                    TableDate = multipleValue.Count > 0 ? multipleValue[^1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
                 });
         }
 
-        private IList<DateOnly> WrapInArray(TValue value)
+        private IList<DateOnly> WrapInArray(TValue? value)
         {
-            if (value is DateOnly date)
+            if (value is DateOnly date && date != DateOnly.MinValue && date != DateOnly.MaxValue)
             {
-                return new List<DateOnly>()
+                return new List<DateOnly>
                 {
                     date
                 };
             }
-            else if (value is IList<DateOnly> dates)
+
+            if (value is DateTime dateTime && dateTime != DateTime.MinValue && dateTime != DateTime.MaxValue)
+            {
+                return new List<DateOnly>
+                {
+                    DateOnly.FromDateTime(dateTime)
+                };
+            }
+
+            if (value is IList<DateOnly> dates && dates.All(d => d != DateOnly.MinValue && d != DateOnly.MaxValue))
             {
                 return dates;
             }
-            else
+
+            if (value is IList<DateTime> dateTimes && dateTimes.All(d => d != DateTime.MinValue && d != DateTime.MaxValue))
             {
-                return new List<DateOnly>();
+                return dateTimes.Select(DateOnly.FromDateTime).ToList();
             }
+
+            return new List<DateOnly>();
         }
 
         protected override void SetComponentClass()

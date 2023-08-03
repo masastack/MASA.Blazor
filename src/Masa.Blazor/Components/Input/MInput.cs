@@ -2,6 +2,9 @@
 {
     public partial class MInput<TValue> : BInput<TValue>, IThemeable
     {
+        [Inject]
+        private I18n I18n { get; set; } = null!;
+
         [Parameter]
         public string? Color { get; set; }
 
@@ -23,9 +26,41 @@
         [Parameter]
         public EventCallback<TValue> OnChange { get; set; }
 
+        /// <summary>
+        /// The required rule built-in.
+        /// </summary>
+        [Parameter]
+        public bool Required { get; set; }
+
+        /// <summary>
+        /// The error message when the required rule is not satisfied.
+        /// </summary>
+        [Parameter, ApiDefaultValue("$masaBlazor.required")]
+        public string RequiredMessage
+        {
+            get => _requiredMessage ?? I18n.T("$masaBlazor.required");
+            set => _requiredMessage = value;
+        }
+
+        #region built-in Required rule
+
+        private static readonly Func<TValue, bool> s_defaultRequiredRule = v =>
+        {
+            if (v is string str)
+            {
+                return !string.IsNullOrWhiteSpace(str);
+            }
+
+            return !EqualityComparer<TValue>.Default.Equals(v, default);
+        };
+
+        private string? _requiredMessage;
+
+        #endregion
+
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
 
-        public virtual bool HasColor { get; }
+        public virtual bool HasColor => false;
 
         public virtual string ValidationState
         {
@@ -55,9 +90,20 @@
             }
         }
 
-        protected virtual bool IsDirty => Convert.ToString(LazyValue).Length > 0;
+        protected virtual bool IsDirty => Convert.ToString(LazyValue)?.Length > 0;
 
         public virtual bool IsLabelActive => IsDirty;
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (Required)
+            {
+                var rules = new List<Func<TValue, StringBoolean>>() { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
+                Rules = Rules is null ? rules : rules.Concat(Rules);
+            }
+        }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {

@@ -22,17 +22,15 @@
 
             <MForm @ref="_form"
                    Class="pt-2"
-                   Model="_promptValue"
-                   EnableValidation
                    OnSubmit="HandleOnSubmit">
-                <MTextarea @bind-Value="_promptValue.Value"
-                           AutoGrow
-                           Dense
-                           HideDetails="@("auto")"
-                           Outlined
-                           Placeholder="@Placeholder"
-                           Rows="1">
-                </MTextarea>
+                <MTextField @bind-Value="_value"
+                            Autofocus
+                            Dense
+                            HideDetails="@("auto")"
+                            Outlined
+                            Placeholder="@Placeholder"
+                            Rules="@Rules">
+                </MTextField>
             </MForm>
         </MCardText>
 

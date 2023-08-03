@@ -3,7 +3,7 @@
 public class ModalButton : MButton
 {
     [Parameter]
-    public ModalButtonProps Props { get; set; }
+    public ModalButtonProps? Props { get; set; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {

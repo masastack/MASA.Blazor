@@ -1,7 +1,7 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
 
-<div class="flex-1-1-auto d-flex align-center justify-end">
+<div class="flex-1-1-auto d-flex align-center justify-end ml-4">
     @if (MasaBlazor.Breakpoint.LgAndUp)
     {
         <Tabs />
@@ -14,14 +14,26 @@
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <Search />
+        @if (!string.IsNullOrEmpty(Project))
+        {
+            <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
+        }
+    }
+    else
+    {
+        @if (!string.IsNullOrEmpty(Project))
+        {
+            <Search @ref="_algoliaSearch" />
+        }
     }
 
-    <LanguageMenu OnCultureChanged="@OnCultureChanged" />
+    <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
+
+    <ThemeToggle />
 
     @if (MasaBlazor.Breakpoint.SmAndUp)
     {
-        <ToolIcons OnSettingsClick="OnSettingsClick" />
+        <ToolIcons RepoUrl="@RepoUrl" OnSettingsClick="OnSettingsClick" />
     }
     else
     {
@@ -29,11 +41,27 @@
     }
 </div>
 
-
 @code {
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    [CascadingParameter(Name = "Env")]
+    public string? Env { get; set; }
+    
+    [Parameter]
+    public string? RepoUrl { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
+
+    private Search? _algoliaSearch;
+
+    public async Task OnCultureChangedLocal(string value)
+    {
+        await OnCultureChanged.InvokeAsync(value);
+        await _algoliaSearch!.InitDocSearchAsync();
+    }
 
     [Parameter]
     public EventCallback OnDotClick { get; set; }

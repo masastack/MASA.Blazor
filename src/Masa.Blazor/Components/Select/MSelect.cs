@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 using System.Reflection.Metadata;
 using BlazorComponent.Attributes;
 using BlazorComponent.Web;
@@ -9,13 +10,14 @@ namespace Masa.Blazor;
 public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>, IOutsideClickJsCallback
 {
     [Inject]
-    protected I18n? I18n { get; set; }
+    protected I18n I18n { get; set; } = null!;
 
     [Inject]
-    private OutsideClickJSModule? OutsideClickJSModule { get; set; }
+    private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
-    public override string AppendIcon { get; set; } = "mdi-menu-down";
+    [ApiDefaultValue("$dropdown")]
+    public override string? AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
     [ApiDefaultValue(false)]
@@ -35,30 +37,31 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     [Parameter]
     public bool HideSelected { get; set; }
 
-    [EditorRequired]
-    [Parameter]
+    [Parameter, EditorRequired]
     public IList<TItem> Items
     {
-        get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
+        get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true)!;
         set => SetValue(value, disableIListAlwaysNotifying: true);
     }
 
     [Parameter]
+    [ApiDefaultValue("primary")]
     public string ItemColor { get; set; } = "primary";
 
     [Parameter]
-    public Func<TItem, bool> ItemDisabled { get; set; } = _ => false;
+    public Func<TItem, bool>? ItemDisabled { get; set; }
 
-    [EditorRequired]
-    [Parameter]
-    public Func<TItem, string> ItemText { get; set; }
+    [Parameter, EditorRequired]
+    public Func<TItem, string> ItemText { get; set; } = null!;
 
-    [EditorRequired]
-    [Parameter]
-    public Func<TItem, TItemValue> ItemValue { get; set; }
+    [Parameter, EditorRequired]
+    public Func<TItem, TItemValue?> ItemValue { get; set; } = null!;
 
     [Parameter]
-    public Action<BMenuProps> MenuProps { get; set; }
+    public Action<BMenuProps>? MenuProps { get; set; }
+
+    [Parameter]
+    public bool Eager { get; set; }
 
     [Parameter]
     public bool Multiple
@@ -74,29 +77,28 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     //TODO:remove this
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
-    //Filterable
     [Parameter]
-    public string NoDataText { get; set; }
+    public string? NoDataText { get; set; }
 
     [Parameter]
     public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
 
     [Parameter]
-    public RenderFragment AppendItemContent { get; set; }
+    public RenderFragment? AppendItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+    public RenderFragment<SelectListItemProps<TItem>>? ItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment NoDataContent { get; set; }
+    public RenderFragment? NoDataContent { get; set; }
 
     [Parameter]
-    public RenderFragment PrependItemContent { get; set; }
+    public RenderFragment? PrependItemContent { get; set; }
 
     [Parameter]
-    public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
+    public RenderFragment<SelectSelectionProps<TItem>>? SelectionContent { get; set; }
 
     bool ISelect<TItem, TItemValue, TValue>.HasChips => HasChips;
 
@@ -111,13 +113,13 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     IList<TItem> ISelect<TItem, TItemValue, TValue>.SelectedItems => SelectedItems;
 
-    string ISelect<TItem, TItemValue, TValue>.GetText(TItem item) => GetText(item);
+    string? ISelect<TItem, TItemValue, TValue>.GetText(TItem item) => GetText(item);
 
-    TItemValue ISelect<TItem, TItemValue, TValue>.GetValue(TItem item) => GetValue(item);
+    TItemValue? ISelect<TItem, TItemValue, TValue>.GetValue(TItem item) => GetValue(item);
 
     bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
-    private static Func<TItem, string> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
+    private static Func<TItem, string?> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
 
     private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
 
@@ -133,19 +135,32 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public int SelectedIndex { get; set; } = -1;
 
-    protected object Menu { get; set; }
+    protected object? Menu { get; set; }
 
-    protected MMenu MMenu => Menu as MMenu;
+    protected MMenu? MMenu => Menu as MMenu;
 
-    protected BMenuProps ComputedMenuProps { get; set; }
+    protected BMenuProps ComputedMenuProps
+    {
+        get
+        {
+            var defaults = GetDefaultMenuProps();
+            MenuProps?.Invoke(defaults);
+            if (defaults.OffsetY && defaults.NudgeBottom is null)
+            {
+                defaults.NudgeBottom = 1;
+            }
+
+            return defaults;
+        }
+    }
 
     protected bool HasChips => Chips || SmallChips;
 
     protected override bool IsDirty => SelectedItems.Count > 0;
 
-    public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+    public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-    protected override Dictionary<string, object> InputAttrs => new()
+    protected override Dictionary<string, object?> InputAttrs => new()
     {
         { "type", Type },
         { "value", null },
@@ -175,7 +190,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     protected virtual IList<TItem> SelectedItems { get; set; } = new List<TItem>();
 
     protected string TilesSelector =>
-        $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
+        $"{MMenu!.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
 
     protected virtual bool MenuCanShow => true;
 
@@ -190,19 +205,23 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         MaxHeight = 304
     };
 
-    protected virtual string GetText(TItem item) => item is null || ItemText is null ? null : ItemText(item);
+    protected virtual string? GetText(TItem? item) => item is null ? null : ItemText(item);
 
-    protected TItemValue GetValue(TItem item) => ItemValue is null ? default : ItemValue(item);
+    protected TItemValue? GetValue(TItem item) => ItemValue(item);
 
-    protected bool GetDisabled(TItem item) => ItemDisabled(item);
+    protected bool GetDisabled(TItem item) => ItemDisabled?.Invoke(item) is true;
 
     protected virtual bool EnableSpaceKeDownPreventDefault => true;
 
-    public override Task SetParametersAsync(ParameterView parameters)
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
         NoDataText = I18n.T("$masaBlazor.noDataText");
 
-        return base.SetParametersAsync(parameters);
+        await base.SetParametersAsync(parameters);
+
+        Items.ThrowIfNull(ComponentName);
+        ItemText.ThrowIfNull(ComponentName);
+        ItemValue.ThrowIfNull(ComponentName);
     }
 
     protected override void OnInitialized()
@@ -210,13 +229,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         base.OnInitialized();
 
         CachedItems = CacheItems ? Items : new List<TItem>();
-
-        ComputedMenuProps = GetDefaultMenuProps();
-        MenuProps?.Invoke(ComputedMenuProps);
-        if (ComputedMenuProps.OffsetY && ComputedMenuProps.NudgeBottom is null)
-        {
-            ComputedMenuProps.NudgeBottom = 1;
-        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -244,8 +256,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         base.RegisterWatchers(watcher);
 
-        watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
-               .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
+        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
     }
 
     private void OnItemsChange()
@@ -293,18 +304,17 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return uniqueItems;
     }
 
-    private bool _isOutsideClickEventRegistered;
-
     private void GenMenu()
     {
         if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
         {
             InputSlotAttrs = MMenu.ActivatorAttributes;
+            MMenu.BeforeShowContent ??= OnMenuBeforeShowContent;
             MMenu.AfterShowContent ??= OnMenuAfterShowContent;
 
             if (OutsideClickJSModule != null)
             {
-                _ = OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector());
+                _ = OutsideClickJSModule.InitializeAsync(this, InputSlotElement.GetSelector()!);
             }
 
             StateHasChanged();
@@ -323,17 +333,24 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         return Attach;
     }
 
-    protected virtual async Task OnMenuAfterShowContent(bool isLazyContent)
+    protected virtual Task OnMenuBeforeShowContent()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task OnMenuAfterShowContent(bool isLazyContent)
     {
         if (isLazyContent)
         {
-            OnMenuActiveChange(true);
-
-            if (OutsideClickJSModule?.Initialized is true && MMenu.ContentElement.Context is not null)
+            if (OutsideClickJSModule?.Initialized is true && MMenu!.ContentElement.Context is not null)
             {
-                OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
+                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
             }
         }
+
+        OnMenuActiveChange(true);
+
+        return Task.CompletedTask;
     }
 
     protected virtual async void OnMenuActiveChange(bool val)
@@ -343,13 +360,19 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             return;
         }
 
+
+        if (MMenu!.ContentElement.Context is null || !IsDirty) return;
+
         var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
             TilesSelector,
             "aria-selected", "True");
 
-        await SetMenuIndex(index);
+        if (index > -1)
+        {
+            await SetMenuIndex(index);
 
-        StateHasChanged();
+            StateHasChanged();
+        }
     }
 
     public async Task Blur()
@@ -407,7 +430,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .Apply("selections", cssBuilder =>
             {
                 cssBuilder
-                    .Add("m-select__selections");
+                    .Add("m-select__selections")
+                    .AddTextColor(TextColor);
+            }, styleBuilder =>
+            {
+                styleBuilder.AddTextColor(TextColor);
             })
             .Apply("selection-comma", cssBuilder =>
             {
@@ -426,7 +453,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .ApplySelectDefault<TItem, TItemValue, TValue>()
             .Merge<BIcon, MIcon>("append-icon", attrs =>
             {
-                var dic = new Dictionary<string, object>();
+                var dic = new Dictionary<string, object?>();
 
                 if (attrs.Data is not null)
                 {
@@ -454,6 +481,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 });
                 attrs[nameof(MMenu.Attach)] = GetMenuAttach();
                 attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
+                attrs[nameof(MMenu.Eager)] = Eager;
+                attrs[nameof(MMenu.Auto)] = ComputedMenuProps!.Auto;
                 attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                 attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
                 attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
@@ -469,9 +498,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
                 attrs[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
                 attrs[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
+                attrs[nameof(MMenu.OffsetOverflow)] = ComputedMenuProps.OffsetOverflow;
                 attrs[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
                 attrs[nameof(MMenu.Right)] = ComputedMenuProps.Right;
                 attrs[nameof(MMenu.Top)] = ComputedMenuProps.Top;
+                attrs[nameof(MMenu.Transition)] = ComputedMenuProps.Transition;
             })
             .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), attrs =>
             {
@@ -497,14 +528,14 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             .Apply<BChip, MChip>(attrs =>
             {
                 var index = -1;
-                TItem item = default;
+                TItem? item = default;
                 if (attrs.Data is (TItem t, int i))
                 {
                     item = t;
                     index = i;
                 }
 
-                var isDisabled = GetDisabled(item);
+                var isDisabled = item != null && GetDisabled(item);
                 var isInteractive = !isDisabled && IsInteractive;
 
                 attrs[nameof(MChip.Close)] = DeletableChips && isInteractive;
@@ -513,15 +544,13 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                 attrs[nameof(MChip.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                 attrs[nameof(MChip.Small)] = SmallChips;
                 attrs[nameof(MChip.IsActive)] = index == SelectedIndex;
-                attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(e =>
+                attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(_ =>
                 {
                     if (!isInteractive) return;
-
-                    // e.stopPropagation()
-
                     SelectedIndex = index;
                 });
-                attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item));
+                attrs[nameof(MChip.OnClickStopPropagation)] = true;
+                attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item!));
             });
     }
 
@@ -709,7 +738,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         var nextItem = ComputedItemsIfHideSelected.ElementAtOrDefault(nextIndex);
 
         MenuListIndex++;
-        if (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled(nextItem))
+        if (nextItem is not null && (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled?.Invoke(nextItem) is true))
         {
             NextTile();
         }
@@ -732,7 +761,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         var prevItem = ComputedItemsIfHideSelected.ElementAt(prevIndex);
 
         MenuListIndex--;
-        if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled(prevItem))
+        if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled?.Invoke(prevItem) is true)
         {
             PrevTile();
         }
@@ -748,7 +777,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         MenuListIndex = lastIndex;
 
-        if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled(lastItem))
+        if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled?.Invoke(lastItem) is true)
         {
             PrevTile();
         }
@@ -762,7 +791,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         MenuListIndex = 0;
 
-        if (ItemDivider(firstItem) || ItemHeader(firstItem) is not null || ItemDisabled(firstItem))
+        if (ItemDivider(firstItem) || ItemHeader(firstItem) is not null || ItemDisabled?.Invoke(firstItem) is true)
         {
             NextTile();
         }
@@ -827,7 +856,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         if (!IsInteractive) return;
 
-        if (await IsAppendInner(args.Target) is false)
+        if (await IsAppendInner(args.Target!) is false)
         {
             IsMenuActive = true;
         }
@@ -856,7 +885,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             // If append inner is present
             // and the target is itself
             // or inside, toggle menu
-            if (await IsAppendInner(args.Target))
+            if (await IsAppendInner(args.Target!))
             {
                 IsMenuActive = !IsMenuActive;
             }
@@ -894,7 +923,13 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected async Task SetMenuIndex(int index)
     {
-        // TODO: scroll 
+        MenuListIndex = index;
+
+        if (index == -1)
+        {
+            return;
+        }
+
         var i = index;
         var menuItem = ComputedItems.ElementAtOrDefault(index);
         if (menuItem is not null)
@@ -905,12 +940,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         if (i > -1)
         {
             await JsInvokeAsync(JsInteropConstants.ScrollToTile,
-                MMenu.ContentElement.GetSelector(),
+                MMenu!.ContentElement.GetSelector(),
                 TilesSelector,
                 i);
         }
-
-        MenuListIndex = index;
     }
 
     protected virtual void SetSelectedItems()
@@ -957,9 +990,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         SelectedIndex = -1;
     }
 
-    private static Func<TItem, T> GetFuncOrDefault<T>(string name)
+    private static Func<TItem, T?> GetFuncOrDefault<T>(string name)
     {
-        Func<TItem, T> func;
+        Func<TItem, T?> func;
         try
         {
             var parameterExpression = Expression.Parameter(typeof(TItem), "item");

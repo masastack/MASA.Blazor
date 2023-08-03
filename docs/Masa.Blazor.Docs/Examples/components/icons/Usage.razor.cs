@@ -1,6 +1,4 @@
-﻿using YamlDotNet.Core.Tokens;
-
-namespace Masa.Blazor.Docs.Examples.components.icons;
+﻿namespace Masa.Blazor.Docs.Examples.components.icons;
 
 public class Usage : Masa.Blazor.Docs.Components.Usage
 {
@@ -47,6 +45,7 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         return parameter.Key switch
         {
             nameof(MIcon.Size) => (StringNumber)(string)parameter.Value,
+            nameof(MIcon.Icon) => (Icon)(string)parameter.Value,
             _ => parameter.Value
         };
     }

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public partial class PCopyableText
 {
@@ -43,16 +41,10 @@ public partial class PCopyableText
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Tooltip = I18n.T("$masaBlazor.copy");
+        CopiedIcon ??= "$success";
+        CopyIcon ??= "$copy";
 
         return base.SetParametersAsync(parameters);
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        CopiedIcon ??= "mdi-check";
-        CopyIcon ??= "mdi-content-copy";
     }
 
     private string Icon => _copying ? CopiedIcon! : CopyIcon!;

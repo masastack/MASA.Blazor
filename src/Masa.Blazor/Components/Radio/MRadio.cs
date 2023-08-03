@@ -3,7 +3,7 @@
     public class MRadio<TValue> : BRadio<TValue>
     {
         [Parameter]
-        public string Color { get; set; } = "primary";
+        public string? Color { get; set; } = "primary";
 
         protected bool IsFocused { get; set; }
 
@@ -18,6 +18,7 @@
         protected override void SetComponentClass()
         {
             var prefix = "m-radio";
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
@@ -46,9 +47,6 @@
                     attrs[nameof(MIcon.IsActive)] = IsActive;
                 })
                 .Apply<BLabel, MLabel>();
-
-            OnIcon = "mdi-radiobox-marked";
-            OffIcon = "mdi-radiobox-blank";
         }
     }
 }

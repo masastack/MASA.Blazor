@@ -5,7 +5,7 @@
     RenderFragment prependIconContent = string.IsNullOrWhiteSpace(Item?.Icon) ? null : @<MIcon Color="primary">@Item.Icon</MIcon>;
 }
 
-<MListGroup Group="@group"
+<MListGroup Group="@_group"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup"
@@ -42,21 +42,21 @@
     public string? Icon { get; set; }
 
     [Parameter, EditorRequired]
-    public TItem Item { get; set; }
+    public TItem Item { get; set; } = default!;
 
     [Parameter]
     public bool SubGroup { get; set; }
 
-    private List<string> group = new();
+    private List<string?> _group = new();
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        group = GenGroup(Item.Children);
+        _group = GenGroup(Item.Children);
     }
 
-    List<string> GenGroup(List<TItem>? items)
+    List<string?> GenGroup(List<TItem>? items)
     {
         if (items == null || !items.Any()) return new List<string?>();
 
@@ -66,7 +66,7 @@
         {
             groups.AddRange(GenGroup(item.Children));
             if (item.HasChildren()) continue;
-            groups.Add(item?.Href);
+            groups.Add(item.Href);
         }
 
         return groups;

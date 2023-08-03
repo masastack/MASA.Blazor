@@ -5,11 +5,11 @@ namespace Masa.Blazor
     public abstract class BaiduOverlayBase : BDomComponentBase
     {
         [JsonIgnore]
-        internal IJSObjectReference OverlayJSObjectRef { get; set; }
+        internal IJSObjectReference? OverlayJSObjectRef { get; set; }
 
         [JsonIgnore]
         [CascadingParameter]
-        protected MBaiduMap MapRef { get; set; }
+        protected MBaiduMap? MapRef { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

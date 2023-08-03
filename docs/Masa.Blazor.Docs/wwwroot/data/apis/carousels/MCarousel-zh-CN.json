@@ -29,5 +29,5 @@
   "events": {
     "valuesChanged": "值改变事件"
   },
-  "functions": {}
+  "methods": {}
 }

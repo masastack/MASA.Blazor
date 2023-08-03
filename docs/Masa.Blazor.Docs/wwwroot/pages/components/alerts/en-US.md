@@ -9,8 +9,6 @@ related:
 
 ## Usage
 
-The component is used to convey important information to the user through the use of contextual types, icons, and colors. `MAlert`
-
 <alerts-usage></alerts-usage>
 
 ## Anatomy
@@ -38,8 +36,7 @@ The recommended placement of elements inside of `MAlert` is:
 
 #### Border
 
-The **Border** prop adds a simple border to one of the 4 sides of the alert. This can be combined with props like *
-*Color**, **Dark**, and **Type** to provide unique accents to the alert.
+The **Border** prop adds a simple border to one of the 4 sides of the alert. This can be combined with props like **Color**, **Dark**, and **Type** to provide unique accents to the alert.
 
 <masa-example file="Examples.components.alerts.Border"></masa-example>
 

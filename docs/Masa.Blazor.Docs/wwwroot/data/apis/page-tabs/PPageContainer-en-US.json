@@ -1,0 +1,11 @@
+﻿{
+  "props": {
+    "SelfPatterns": "Used for fuzzy matching paths. All successful paths are displayed in the same content.",
+    "ExcludedPatterns": "Accepts a list of regular expressions that match the path, and the content of the page corresponding to the successful match will not be cached in the DOM after leaving the page.",
+    "PageTabs": "The ref of PPageTabs component."
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

@@ -1,8 +1,8 @@
 ﻿@inject I18n I18n
 @attribute [JSCustomElement]
 
-<div class="overflow-hidden mb-4 m-sheet m-sheet--outlined theme--light rounded">
-    <div class="m-data-table theme--light">
+<div class="overflow-hidden mb-4 m-sheet m-sheet--outlined @ThemeClass rounded">
+    <div class="m-data-table @ThemeClass">
         <div class="m-data-table__wrapper">
             <table>
                 <thead>
@@ -41,3 +41,12 @@
         </div>
     </div>
 </div>
+
+@code {
+
+    [Parameter]
+    public bool Dark { get; set; }
+
+    private string ThemeClass => Dark ? "theme--dark" : "theme--light";
+
+}

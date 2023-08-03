@@ -1,5 +1,3 @@
-#nullable enable
-
 using BlazorComponent.Web;
 
 namespace Masa.Blazor
@@ -7,43 +5,60 @@ namespace Masa.Blazor
     /// <summary>
     /// Root for application
     /// </summary>
-    public partial class MApp : BApp, IThemeable
+    public class MApp : BApp
     {
         [Inject]
-        public HeadJsInterop HeadJsInterop { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Window Window { get; set; }
-
-        /// <summary>
-        /// Whether to display from left to right
-        /// </summary>
-        [Parameter]
-        public bool LeftToRight { get; set; } = true;
+        public Window Window { get; set; } = null!;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
-        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
+        public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
 
-        protected override Task OnInitializedAsync()
+        protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
+
+        protected override void OnInitialized()
         {
-            MasaBlazor.OnThemeChange -= OnThemeChange;
+            base.OnInitialized();
+
             MasaBlazor.OnThemeChange += OnThemeChange;
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
 
             OnThemeChange(MasaBlazor.Theme);
+        }
 
-            return base.OnInitializedAsync();
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeStateHasChanged();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await MasaBlazor.Breakpoint.InitAsync();
+
+                IsMasaBlazorReady = true;
+
+                await Window.AddResizeEventListenerAsync();
+
+                StateHasChanged();
+            }
         }
 
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            Dark = theme.Dark;
-            ThemeStyleMarkups = ThemeCssBuilder.Build(themeOptions);
-            StateHasChanged();
+            var style = ThemeCssBuilder.Build(themeOptions);
+            InvokeAsync(async () =>
+            {
+                await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);
+                StateHasChanged();
+            });
         }
 
         protected override void SetComponentClass()
@@ -57,7 +72,7 @@ namespace Masa.Blazor
                         .Add("m-application")
                         .Add(() =>
                         {
-                            var suffix = LeftToRight ? "ltr" : "rtl";
+                            var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
                         .AddTheme(IsDark);
@@ -71,15 +86,12 @@ namespace Masa.Blazor
             Attributes.Add("data-app", true);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void Dispose(bool disposing)
         {
-            if (firstRender)
-            {
-                await MasaBlazor.Breakpoint.InitAsync();
-                await Window.InitializeAsync();
+            base.Dispose(disposing);
 
-                StateHasChanged();
-            }
+            MasaBlazor.OnThemeChange -= OnThemeChange;
+            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
         }
     }
 }

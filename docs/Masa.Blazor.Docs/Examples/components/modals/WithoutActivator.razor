@@ -1,4 +1,6 @@
-﻿<MButton OnClick="() => value = true">Show Modal</MButton>
+﻿@using Masa.Blazor.Presets
+
+<MButton OnClick="() => value = true">Show Modal</MButton>
 
 <PModal @bind-Value="value"
         Title="Title"

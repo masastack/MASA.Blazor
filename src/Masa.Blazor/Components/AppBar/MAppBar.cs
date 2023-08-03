@@ -3,30 +3,16 @@ using System.ComponentModel;
 
 namespace Masa.Blazor
 {
-    public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
+    public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
-        private readonly string[] _applicationProperties = new string[]
-        {
-            "IsBooted","Left","Bar","Right"
-        };
-        private Scroller _scroller;
+        [Inject]
+        public MasaBlazor? MasaBlazor { get; set; }
 
         [Parameter]
         public bool App { get; set; }
 
         [Parameter]
         public bool Fixed { get; set; }
-
-        [Parameter]
-        public StringNumber MarginTop { get; set; }
-
-        public int? Transform { get; private set; } = 0;
-
-        [Parameter]
-        public StringNumber Left { get; set; } = 0;
-
-        [Parameter]
-        public StringNumber Right { get; set; } = 0;
 
         [Parameter]
         public bool ClippedLeft { get; set; }
@@ -38,6 +24,7 @@ namespace Masa.Blazor
         public bool CollapseOnScroll { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("window")]
         public string ScrollTarget { get; set; } = "window";
 
         /// <summary>
@@ -65,16 +52,29 @@ namespace Masa.Blazor
         public bool ScrollOffScreen { get; set; }
 
         [Parameter]
+        [ApiDefaultValue(true)]
         public bool Value { get; set; } = true;
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        private readonly string[] _applicationProperties =
+        {
+            "Left", "Bar", "Right"
+        };
+
+        private bool _rendered;
+        private Scroller? _scroller;
+
+        public int? Transform { get; private set; } = 0;
+
+        /// <summary>
+        /// Avoid an entry animation on page load.
+        /// </summary>
+        protected override bool IsBooted =>_rendered && (MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
                                  HideOnScroll ||
                                  CollapseOnScroll ||
-                                 MasaBlazor.Application.IsBooted ||
+                                 IsBooted ||
                                  !Value;
 
         protected double ScrollRatio
@@ -83,7 +83,7 @@ namespace Masa.Blazor
             {
                 var threshold = ComputedScrollThreshold;
 
-                return Math.Max((threshold - _scroller.CurrentScroll) / threshold, 0);
+                return Math.Max((threshold - (_scroller?.CurrentScroll ?? 0)) / threshold, 0);
             }
         }
 
@@ -103,7 +103,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected StringNumber ComputedFontSize
+        protected StringNumber? ComputedFontSize
         {
             get
             {
@@ -120,6 +120,8 @@ namespace Masa.Blazor
         {
             get
             {
+                if (MasaBlazor == null) return 0;
+
                 if (!App || ClippedLeft) return 0;
 
                 return MasaBlazor.Application.Left;
@@ -130,6 +132,8 @@ namespace Masa.Blazor
         {
             get
             {
+                if (MasaBlazor == null) return 0;
+
                 if (!App) return 0;
 
                 return MasaBlazor.Application.Bar;
@@ -151,7 +155,7 @@ namespace Masa.Blazor
             get
             {
                 var height = NumberHelper.ParseInt(base.ComputedContentHeight.ToString());
-                if (IsExtended) height += NumberHelper.ParseInt(ExtensionHeight.ToString());
+                if (IsExtended) height += NumberHelper.ParseInt(ExtensionHeight?.ToString());
 
                 return height;
             }
@@ -161,6 +165,8 @@ namespace Masa.Blazor
         {
             get
             {
+                if (MasaBlazor == null) return 0;
+
                 if (!App || ClippedRight) return 0;
 
                 return MasaBlazor.Application.Right;
@@ -181,9 +187,9 @@ namespace Masa.Blazor
         {
             get
             {
-                if (!CanScroll ||
-                    (ElevateOnScroll && _scroller.CurrentScroll == 0 && _scroller.IsActive))
-                    return 0;
+                if (_scroller == null) return 0;
+
+                if (!CanScroll || (ElevateOnScroll && _scroller.CurrentScroll == 0 && _scroller.IsActive)) return 0;
 
                 if (_scroller.IsActive) return 0;
 
@@ -197,6 +203,8 @@ namespace Masa.Blazor
         {
             get
             {
+                if (_scroller == null) return false;
+
                 if (ElevateOnScroll && IsExtended)
                 {
                     return _scroller.CurrentScroll < ComputedScrollThreshold;
@@ -215,10 +223,9 @@ namespace Masa.Blazor
         {
             get
             {
-                if (!CollapseOnScroll)
-                {
-                    return base.IsCollapsed;
-                }
+                if (_scroller == null) return false;
+
+                if (!CollapseOnScroll) return base.IsCollapsed;
 
                 return _scroller.CurrentScroll > 0;
             }
@@ -226,7 +233,7 @@ namespace Masa.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
-        protected HtmlElement Target { get; set; }
+        protected HtmlElement? Target { get; set; }
 
         protected override void OnInitialized()
         {
@@ -238,18 +245,20 @@ namespace Masa.Blazor
             {
                 IsActive = Value
             };
+
             if (InvertedScroll)
             {
                 _scroller.IsActive = false;
             }
 
-            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+            MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
         }
 
-        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
+                Attributes["data-booted"] = IsBooted ? "true" : null;
                 InvokeStateHasChanged();
             }
         }
@@ -280,7 +289,7 @@ namespace Masa.Blazor
                         .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
                         .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
                         .AddIf("m-app-bar--hide-shadow", () => HideShadow)
-                        .AddIf("m-app-bar--is-scrolled", () => _scroller.CurrentScroll > 0)
+                        .AddIf("m-app-bar--is-scrolled", () => _scroller is { CurrentScroll: > 0 })
                         .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
                 }, styleBuilder =>
                 {
@@ -294,24 +303,24 @@ namespace Masa.Blazor
                 .Merge("image",
                     _ => { },
                     style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
-
-            Attributes.Add("data-booted", "true");
         }
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-            _scroller.ScrollThreshold = ScrollThreshold;
+
+            if (_scroller != null)
+            {
+                _scroller.ScrollThreshold = ScrollThreshold;
+            }
 
             UpdateApplication();
         }
 
         private void UpdateApplication()
         {
-            if (!App)
-            {
-                return;
-            }
+            if (MasaBlazor == null) return;
+            if (!App) return;
 
             var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
@@ -325,12 +334,16 @@ namespace Masa.Blazor
         {
             if (firstRender)
             {
-                await Target.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
+                _rendered = true;
+                Attributes["data-booted"] = IsBooted ? "true" : null;
+                StateHasChanged();
+
+                await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
                 {
                     if (!CanScroll) return;
 
-                    await _scroller.OnScroll(ThresholdMet);
-                }), false);
+                    await _scroller!.OnScroll(ThresholdMet);
+                }));
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -338,6 +351,8 @@ namespace Masa.Blazor
 
         protected void ThresholdMet(Scroller _)
         {
+            if (_scroller == null) return;
+
             if (InvertedScroll)
             {
                 _scroller.IsActive = _scroller.CurrentScroll > ComputedScrollThreshold;
@@ -355,9 +370,11 @@ namespace Masa.Blazor
 
         public ValueTask DisposeAsync()
         {
+            if (MasaBlazor == null) return ValueTask.CompletedTask;
+
             RemoveApplication();
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-            _ = Target.RemoveEventListenerAsync("scroll");
+            _ = Target!.RemoveEventListenerAsync("scroll");
             return ValueTask.CompletedTask;
         }
 
@@ -369,9 +386,9 @@ namespace Masa.Blazor
             }
 
             if (!Bottom)
-                MasaBlazor.Application.Top = 0;
+                MasaBlazor!.Application.Top = 0;
             else
-                MasaBlazor.Application.Bottom = 0;
+                MasaBlazor!.Application.Bottom = 0;
         }
     }
 }

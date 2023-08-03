@@ -27,9 +27,6 @@ public partial class Components
     private string Culture { get; set; } = null!;
 
     [Parameter]
-    public string Project { get; set; } = null!;
-
-    [Parameter]
     public string Page { get; set; } = null!;
 
     [Parameter]
@@ -57,10 +54,23 @@ public partial class Components
         {
             if (value != Api)
             {
-                NavigationManager.NavigateTo($"/blazor/components/{Page}/{Tab}/{value}");
+                NavigationManager.NavigateTo($"/blazor/{_group}/{Page}/{Tab}/{value}");
             }
         }
     }
+
+    private static int s_allComponentsCacheCount;
+
+    private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
+
+    private string? _tab;
+    private string? _md;
+    private string? _prevPage;
+    private string? _prevCulture;
+    private string? _prevApi;
+    private FrontMatterMeta? _frontMatterMeta;
+    private string _group = "components";
+    private List<MarkdownItTocContent> _documentToc = new();
 
     public List<MarkdownItTocContent> CurrentToc
     {
@@ -77,51 +87,43 @@ public partial class Components
                         Level = 2
                     }).ToList();
                 }
-                else return new();
+
+                return new();
             }
-            else
-            {
-                return _documentToc;
-            }
+
+            return _documentToc;
         }
     }
 
-    public bool IsAllComponentsPage
-    {
-        get
-        {
-            return Page.ToLower() == "all";
-        }
-    }
+    public bool IsAllComponentsPage => Page is null || Page.ToLower() == "all";
 
-    private List<string> Tags
-    {
-        get
-        {
-            return IsAllComponentsPage ? new List<string> { _allComponentsCacheCount.ToString() } : new();
-        }
-    }
-    private string? _tab;
-    private string? _md;
-    private string? _prevPage;
-    private string? _prevCulture;
-    private string? _prevApi;
-    private FrontMatterMeta? _frontMatterMeta;
-    private readonly Dictionary<string, Dictionary<string, List<Masa.Blazor.Docs.ParameterInfo>>> _apiData = new();
-    private List<MarkdownItTocContent> _documentToc = new();
-    private static int _allComponentsCacheCount;
+    private List<string> Tags => IsAllComponentsPage ? new List<string> { s_allComponentsCacheCount.ToString() } : new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
+    
+    private string ApiGithubUri
+    {
+        get
+        {
+            var lastSegment = _apiData.Keys.Count > 1 ? $"{CurrentApi}-{Culture}" : Culture;
+
+            return $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/data/apis/{Page}/{lastSegment}.json";
+        }
+    }
+
+    private string ComponentGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{_group}/{Page}/{Culture}.md";
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
 
+        _group = NavigationManager.GetAbsolutePath().StartsWith("/blazor/components", StringComparison.OrdinalIgnoreCase) ? "components" : "labs";
+
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
-            if (IsAllComponentsPage && _allComponentsCacheCount == 0)
+            if (IsAllComponentsPage && s_allComponentsCacheCount == 0)
             {
-                _allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
+                s_allComponentsCacheCount = (await DocService.GetAllConponentsTileAsync()).Count;
             }
 
             _prevPage = Page;
@@ -156,7 +158,7 @@ public partial class Components
 
     private void NavigateToTab(string tab)
     {
-        NavigationManager.NavigateTo($"/blazor/components/{Page}/{tab}");
+        NavigationManager.NavigateTo($"/blazor/{_group}/{Page}/{tab}");
     }
 
     private void OnFrontMatterParsed(string? yaml)
@@ -179,7 +181,7 @@ public partial class Components
     {
         try
         {
-            _md = await DocService.ReadDocumentAsync(Project, "components", Page);
+            _md = await DocService.ReadDocumentAsync("blazor", _group, Page);
         }
         catch (HttpRequestException e)
         {
@@ -196,10 +198,9 @@ public partial class Components
         var name = Page;
 
         var pageToApi = await BlazorDocService.ReadPageToApiAsync();
-        bool isMultipleApi = false;
-        if (pageToApi.ContainsKey(Page))
+        var isMultipleApi = false;
+        if (pageToApi.TryGetValue(Page, out var apis))
         {
-            var apis = pageToApi[Page];
             isMultipleApi = apis.Count > 1;
             await apis.ForEachAsync(async componentName => { _apiData[componentName] = await getApiGroupAsync(componentName, true); });
         }

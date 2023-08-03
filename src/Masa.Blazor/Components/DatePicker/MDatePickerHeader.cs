@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    public class MDatePickerHeader : BDatePickerHeader, IThemeable, IDatePickerHeader
+    public class MDatePickerHeader : BDatePickerHeader, IDatePickerHeader
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "accent";
+        public string? Color { get; set; } = "accent";
 
         [Parameter]
         public DateOnly? Min { get; set; }
@@ -22,42 +23,33 @@ namespace Masa.Blazor
         [Parameter]
         public DateOnly Value
         {
-            get
-            {
-                return GetValue<DateOnly>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<DateOnly>();
+            set => SetValue(value);
         }
 
         [Parameter]
         public EventCallback OnToggle { get; set; }
 
         [Parameter]
-        public string PrevIcon { get; set; }
+        public string? PrevIcon { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; }
 
         [Parameter]
-        public string NextIcon { get; set; }
+        public string? NextIcon { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
-        public Func<DateOnly, string> Format { get; set; }
+        public Func<DateOnly, string>? Format { get; set; }
 
         [Parameter]
         public DatePickerType ActivePicker { get; set; }
 
         [Parameter]
-        public CultureInfo Locale { get; set; }
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public CultureInfo Locale { get; set; } = null!;
 
         public bool RTL => MasaBlazor.RTL;
 
@@ -115,12 +107,9 @@ namespace Masa.Blazor
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
-   
+
             watcher
-                .Watch<DateOnly>(nameof(Value), (newVal, oldVal) =>
-                {
-                    IsReversing = newVal < oldVal;
-                });
+                .Watch<DateOnly>(nameof(Value), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
         }
 
         protected override void SetComponentClass()
@@ -157,14 +146,15 @@ namespace Masa.Blazor
                 {
                     var change = attrs.Index;
                     var calculateChange = CalculateChange(change);
-                    var disabled = Disabled || (change < 0 && Min != null && calculateChange < Min) || (change > 0 && Max != null && calculateChange > Max);
+                    var disabled = Disabled || (change < 0 && Min != null && calculateChange < Min) ||
+                                   (change > 0 && Max != null && calculateChange > Max);
 
                     attrs[nameof(MButton.Dark)] = Dark;
                     attrs[nameof(MButton.Disabled)] = disabled;
                     attrs[nameof(MButton.Icon)] = true;
                     attrs[nameof(MButton.Light)] = Light;
 
-                    attrs[nameof(MButton.StopPropagation)] = true;
+                    attrs[nameof(MButton.OnClickStopPropagation)] = true;
                     attrs[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
                     {
                         if (OnInput.HasDelegate)

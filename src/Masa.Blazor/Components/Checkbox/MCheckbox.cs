@@ -3,19 +3,22 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue>
+    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue> where TValue : notnull
     {
+        [Inject]
+        public Document Document { get; set; } = null!;
+        
         [Parameter]
         public bool Indeterminate { get; set; }
 
         [Parameter]
-        public string IndeterminateIcon { get; set; } = "mdi-minus-box";
+        public string IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
 
         [Parameter]
-        public string OnIcon { get; set; } = "mdi-checkbox-marked";
+        public string OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
+        public string OffIcon { get; set; } = "$checkboxOff";
 
         public string ComputedIcon
         {
@@ -34,9 +37,6 @@ namespace Masa.Blazor
                 return OffIcon;
             }
         }
-
-        [Inject]
-        public Document Document { get; set; }
 
         protected override void OnInternalValueChange(TValue val)
         {
@@ -106,7 +106,7 @@ namespace Masa.Blazor
             {
                 //It's used to prevent ripple directive,and we may remove this 
                 var inputSlot = Document.GetElementByReference(InputSlotElement);
-                await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
+                await inputSlot!.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
                 await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
         }

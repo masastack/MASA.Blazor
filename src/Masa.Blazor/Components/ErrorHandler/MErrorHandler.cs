@@ -1,19 +1,26 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor
 {
     public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {
         [Inject]
-        protected ILogger<MErrorHandler> Logger { get; set; }
+        protected ILogger<MErrorHandler> Logger { get; set; } = null!;
 
         [Inject]
-        public IPopupService PopupService { get; set; }
+        public IPopupService PopupService { get; set; } = null!;
 
+        /// <summary>
+        /// The event that will be invoked when an exception is thrown.
+        /// It's recommended to pop up a dialog to show the exception.
+        /// If you set this, the default popup will be disabled.
+        /// </summary>
         [Parameter]
         public EventCallback<Exception> OnHandle { get; set; }
 
+        /// <summary>
+        /// The event that will be invoked after <see cref="OnHandle"/>.
+        /// </summary>
         [Parameter]
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
@@ -21,11 +28,24 @@ namespace Masa.Blazor
         [ApiDefaultValue(ErrorPopupType.Snackbar)]
         public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Snackbar;
 
+        /// <summary>
+        /// Determine whether to show the stack trace of exception.
+        /// </summary>
         [Parameter]
         public bool ShowDetail { get; set; }
 
+        /// <summary>
+        /// Disable the default popup or custom <see cref="OnHandle"/> event when the error content is going to render.
+        /// It's useful when you don't want to show the error content and popup at the same time.
+        /// </summary>
+        [Parameter]
+        public bool DisablePopupIfErrorContentRender { get; set; }
+
         private bool _shouldRender = true;
         private bool _thrownInLifecycles;
+
+        private bool ShouldRenderErrorContent
+            => _thrownInLifecycles || (OnHandle.HasDelegate == false && PopupType == ErrorPopupType.None);
 
         protected new Exception? CurrentException { get; private set; }
 
@@ -79,15 +99,18 @@ namespace Masa.Blazor
 
             _shouldRender = false;
 
-            if (OnHandle.HasDelegate)
+            if (!(DisablePopupIfErrorContentRender && ShouldRenderErrorContent))
             {
-                await OnHandle.InvokeAsync(exception);
-            }
-            else
-            {
-                if (PopupType == ErrorPopupType.Snackbar)
+                if (OnHandle.HasDelegate)
                 {
-                    await PopupService.EnqueueSnackbarAsync(exception, ShowDetail);
+                    await OnHandle.InvokeAsync(exception);
+                }
+                else
+                {
+                    if (PopupType == ErrorPopupType.Snackbar)
+                    {
+                        await PopupService.EnqueueSnackbarAsync(exception, ShowDetail);
+                    }
                 }
             }
 
@@ -110,23 +133,20 @@ namespace Masa.Blazor
             builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
 
             var content = ChildContent;
-            if (CurrentException is not null)
+            if (CurrentException is not null && ShouldRenderErrorContent)
             {
-                if (_thrownInLifecycles || (OnHandle.HasDelegate == false && PopupType == ErrorPopupType.None))
+                if (ErrorContent is null)
                 {
-                    if (ErrorContent is null)
+                    content = cb =>
                     {
-                        content = cb =>
-                        {
-                            cb.OpenElement(0, "div");
-                            cb.AddAttribute(1, "class", "blazor-error-boundary");
-                            cb.CloseElement();
-                        };
-                    }
-                    else
-                    {
-                        content = ErrorContent.Invoke(CurrentException);
-                    }
+                        cb.OpenElement(0, "div");
+                        cb.AddAttribute(1, "class", "blazor-error-boundary");
+                        cb.CloseElement();
+                    };
+                }
+                else
+                {
+                    content = ErrorContent.Invoke(CurrentException);
                 }
             }
 

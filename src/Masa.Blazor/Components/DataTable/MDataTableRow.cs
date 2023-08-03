@@ -3,13 +3,13 @@
     public class MDataTableRow<TItem> : BDataTableRow<TItem>
     {
         [Parameter]
-        public Func<TItem, bool> IsSelected { get; set; }
+        public Func<TItem, bool>? IsSelected { get; set; }
 
         [Parameter]
-        public Func<TItem, bool> IsExpanded { get; set; }
+        public Func<TItem, bool>? IsExpanded { get; set; }
 
         [Parameter]
-        public string ItemClass { get; set; }
+        public Func<TItem, string?>? ItemClass { get; set; }
 
         [Parameter]
         public bool Stripe { get; set; }
@@ -22,10 +22,10 @@
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .AddIf("m-data-table__selected", () => IsSelected(Item))
-                        .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded(Item))
+                        .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected(Item))
+                        .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded != null && IsExpanded(Item))
                         .AddIf("stripe", () => IsStripe)
-                        .Add(ItemClass);
+                        .Add(() => ItemClass?.Invoke(Item) ?? "");
                 })
                 .Apply("cell", cssBuilder =>
                 {

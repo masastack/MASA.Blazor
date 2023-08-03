@@ -1,7 +1,7 @@
 ---
 title: Markdown
 desc: "Packaging based on [vditor](https://github.com/Vanessa219/vditor)"
-tag: JsProxy
+tag: JS Proxy
 ---
 
 ## Usage
@@ -64,7 +64,7 @@ Configure [Options](https://ld246.com/article/1549638745630#options) attribute t
 
 #### Upload
 
-Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
+Configure [Options](https://ld246.com/article/1549638745630#options-upload) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
 
 <masa-example file="Examples.components.markdowns.Upload"></masa-example>
 
@@ -74,7 +74,7 @@ Configure [Options](https://ld246.com/article/1549638745630#options) attribute t
 
 ```html
 //Call JS to handle the upload example
-window.Demo.Vditor = {
+let demo = {
     uploadFile: (element, index) => {
         let _that = this;
         let vditor = element.Vditor;
@@ -98,7 +98,7 @@ window.Demo.Vditor = {
                 document.execCommand("insertHTML", false, succFileText);
                 index += 1;
                 if (index < files.length) {
-                    _that.Demo.Vditor.uploadFile(element,  index);
+                    _that.demo.uploadFile(element,  index);
                 }
                 else {
                     fileInput.value = '';
@@ -109,6 +109,8 @@ window.Demo.Vditor = {
         oReq.send(formData);
     }
 };
+
+window.demo = demo;
 ```
 
 <masa-example file="Examples.components.markdowns.BeforeAllUpload"></masa-example>

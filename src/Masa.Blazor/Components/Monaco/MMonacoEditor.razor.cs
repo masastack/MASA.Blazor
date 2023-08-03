@@ -3,28 +3,30 @@
 public partial class MMonacoEditor : BDomComponentBase
 {
     [Inject]
-    protected MonacoEditorJSModule Module { get; set; }
+    protected MonacoEditorJSModule Module { get; set; } = null!;
 
     [Parameter]
     public object? EditorOptions { get; set; }
 
     [Parameter]
-    public StringNumber Width { get; set; } = "100%";
+    [ApiDefaultValue("100%")]
+    public StringNumber? Width { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber Height { get; set; } = "100%";
+    public StringNumber? Height { get; set; }
 
     [Parameter]
-    public StringNumber MinWidth { get; set; }
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    public StringNumber MinHeight { get; set; }
+    [ApiDefaultValue("320px")]
+    public StringNumber? MinHeight { get; set; } = "320px";
 
     [Parameter]
-    public StringNumber MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; }
 
     [Parameter]
-    public StringNumber MaxHeight { get; set; }
+    public StringNumber? MaxHeight { get; set; }
 
     [Parameter]
     public Func<Task<object>>? InitOptions { get; set; }
@@ -32,10 +34,53 @@ public partial class MMonacoEditor : BDomComponentBase
     [Parameter]
     public Action? InitCompleteHandle { get; set; }
 
-    /// <summary>
-    /// Monaco
-    /// </summary>
-    public IJSObjectReference Monaco { get; private set; }
+    [Parameter]
+    public string? Value
+    {
+        get => _value;
+        set
+        {
+            if (_value != value)
+            {
+                _value = value;
+                _valueChangedByUser = true;
+            }
+
+            SetValue(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private string? _value;
+    private bool _valueChangedByUser;
+
+    public IJSObjectReference? Editor { get; private set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        Id.ThrowIfNull(ComponentName);
+    }
+
+    protected override void RegisterWatchers(PropertyWatcher watcher)
+    {
+        base.RegisterWatchers(watcher);
+
+        watcher
+            .Watch<string>(nameof(Value), ValueChangeCallback);
+    }
+
+    private async void ValueChangeCallback(string? val)
+    {
+        if (_valueChangedByUser)
+        {
+            _valueChangedByUser = false;
+            await SetValueAsync(_value);
+        }
+    }
 
     protected override void SetComponentClass()
     {
@@ -57,6 +102,7 @@ public partial class MMonacoEditor : BDomComponentBase
         if (firstRender)
         {
             await InitMonaco();
+            await SetValueAsync(Value);
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -75,68 +121,80 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
-        Monaco = await Module.Init(Id, EditorOptions);
+        Editor = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }
 
-    public async Task DefineTheme(string themeName, StandaloneThemeData themeData)
+    public async Task DefineThemeAsync(string themeName, StandaloneThemeData themeData)
     {
         await Module.DefineTheme(themeName, themeData);
     }
 
-    public async Task AddCommand<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
+    public async Task AddCommandAsync<T>(int keybinding, DotNetObjectReference<T> dotNetObjectReference, string method) where T : class
     {
-        await Module.AddCommand(Monaco, keybinding, dotNetObjectReference, method);
+        await Module.AddCommand(Editor!, keybinding, dotNetObjectReference, method);
     }
 
-    public async Task UpdateOptions(object options)
+    public async Task UpdateOptionsAsync(object options)
     {
-        await Module.UpdateOptions(Monaco, options);
+        await Module.UpdateOptions(Editor!, options);
     }
 
-    public async Task<string> GetValue()
+    public async Task<string> GetValueAsync()
     {
-        return await Module.GetValue(Monaco);
+        return await Module.GetValue(Editor!);
     }
 
-    public async Task SetValue(string value)
+    public async Task SetValueAsync(string? value)
     {
-        await Module.SetValue(Monaco, value);
+        await Module.SetValue(Editor!, value);
     }
 
-    public async Task SetTheme(string theme)
+    public async Task SetThemeAsync(string theme)
     {
         await Module.SetTheme(theme);
     }
 
-    public async Task<TextModelOptions[]> GetModels()
+    public async Task<TextModelOptions[]> GetModelsAsync()
     {
         return await Module.GetModels();
     }
 
-    public async Task<TextModelOptions> GetModel(IJSObjectReference id)
+    public async Task<TextModelOptions> GetModelAsync()
     {
-        return await Module.GetModel(Monaco);
+        return await Module.GetModel(Editor!);
     }
 
-    public async Task SetModelLanguage(IJSObjectReference id, string languageId)
+    public async Task SetModelLanguageAsync(string languageId)
     {
-        await Module.SetModelLanguage(Monaco, languageId);
+        await Module.SetModelLanguage(Editor!, languageId);
     }
 
-    public async Task RemeasureFonts()
+    public async Task RemeasureFontsAsync()
     {
         await Module.RemeasureFonts();
     }
 
-    public async Task AddKeybindingRules(KeybindingRule[] rules)
+    public async Task AddKeybindingRulesAsync(KeybindingRule[] rules)
     {
         await Module.AddKeybindingRules(rules);
     }
 
-    public async Task AddKeybindingRule(KeybindingRule rule)
+    public async Task AddKeybindingRuleAsync(KeybindingRule rule)
     {
         await Module.AddKeybindingRule(rule);
+    }
+
+    [JSInvokable]
+    public async Task OnChange(string value)
+    {
+        _value = value;
+        _valueChangedByUser = false;
+
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync(value);
+        }
     }
 }

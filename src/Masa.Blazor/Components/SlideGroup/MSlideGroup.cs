@@ -6,8 +6,29 @@
         {
         }
 
-        public MSlideGroup(GroupType groupType) : base(groupType)
+        protected MSlideGroup(GroupType groupType) : base(groupType)
         {
+        }
+
+        [Inject]
+        protected MasaBlazor MasaBlazor { get; set; } = null!;
+
+        protected override bool RTL => MasaBlazor.RTL;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+            IsMobile = MasaBlazor.Breakpoint.Mobile;
+        }
+
+        private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+        {
+            if (!e.MobileChanged) return;
+
+            IsMobile = MasaBlazor.Breakpoint.Mobile;
+            await InvokeStateHasChangedAsync();
         }
 
         protected override void OnParametersSet()
@@ -15,8 +36,8 @@
             base.OnParametersSet();
 
             ActiveClass ??= "m-slide-item--active";
-            NextIcon ??= "mdi-chevron-right";
-            PrevIcon ??= "mdi-chevron-left";
+            NextIcon ??= "$next";
+            PrevIcon ??= "$prev";
         }
 
         protected override void SetComponentClass()
@@ -47,6 +68,12 @@
                 .Apply(typeof(BSlideGroupPrev<>), typeof(BSlideGroupPrev<MSlideGroup>))
                 .Apply(typeof(BSlideGroupNext<>), typeof(BSlideGroupNext<MSlideGroup>))
                 .Apply<BIcon, MIcon>();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
         }
     }
 }

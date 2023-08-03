@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature
@@ -9,12 +7,29 @@ namespace Masa.Blazor
     {
         private bool _rtl;
 
-        public MasaBlazor(Breakpoint breakpoint, Application application, Theme theme,
+        public MasaBlazor(
+            bool rtl,
+            Breakpoint breakpoint,
+            Application application,
+            Theme theme,
+            Icons icons,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
+            RTL = rtl;
             Breakpoint = breakpoint;
+            Breakpoint.OnChanged = e =>
+            {
+                BreakpointChanged?.Invoke(this, e);
+
+                if (e.MobileChanged)
+                {
+                    MobileChanged?.Invoke(this, e);
+                }
+            };
+
             Application = application;
             Theme = theme;
+            Icons = icons;
             Defaults = defaults;
         }
 
@@ -27,6 +42,7 @@ namespace Masa.Blazor
                 {
                     _rtl = value;
                     OnRTLChange?.Invoke(_rtl);
+                    RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -39,13 +55,29 @@ namespace Masa.Blazor
 
         public Theme Theme { get; }
 
-        public event Action<bool> OnRTLChange;
+        public Icons Icons { get; }
 
-        public event Action<Theme> OnThemeChange;
+        [Obsolete("Use RTLChanged instead")]
+        public event Action<bool>? OnRTLChange;
+
+        public event EventHandler RTLChanged;
+
+        public event Action<Theme>? OnThemeChange;
+
+        /// <summary>
+        /// An event that fires when the breakpoint has changed.
+        /// </summary>
+        public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
+
+        /// <summary>
+        /// An event that fires when the the value of Mobile property from <see cref="Breakpoint"/> has changed.
+        /// </summary>
+        public event EventHandler<MobileChangedEventArgs> MobileChanged;
 
         public void ToggleTheme()
         {
             Theme.Dark = !Theme.Dark;
+
             OnThemeChange?.Invoke(Theme);
         }
     }

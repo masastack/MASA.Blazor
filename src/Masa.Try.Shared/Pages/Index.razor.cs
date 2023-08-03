@@ -8,12 +8,13 @@ using Microsoft.JSInterop;
 using System.Runtime.Loader;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using System.Text.RegularExpressions;
 
 namespace Masa.Try.Shared.Pages;
 
 public partial class Index : NextTickComponentBase
 {
-    private const string REPOSITORY_URL = "https://github.com/BlazorComponent/Masa.Blazor";
+    private const string REPOSITORY_URL = "https://github.com/masastack/Masa.Blazor";
 
     /// <summary>
     /// 编译器需要使用的程序集
@@ -39,6 +40,14 @@ public partial class Index : NextTickComponentBase
 
     private bool _load;
     private Type? _componentType;
+    private bool _settingModalOpened;
+    private bool _addScriptModalOpened;
+
+    private readonly List<ScriptNode> _customScriptNodes = new();
+
+    private readonly List<ScriptNodeType> _scriptNodeTypes = Enum.GetValues(typeof(ScriptNodeType)).Cast<ScriptNodeType>().ToList();
+    private ScriptNodeType _newScriptNodeType;
+    private string _newScriptContent = string.Empty;
 
     private const string DEFAULT_CODE = """
     <div class="d-flex align-center text-h4">
@@ -80,18 +89,11 @@ public partial class Index : NextTickComponentBase
             {
                 try
                 {
-                    var newPath = Path.Replace("http://", "https://").Replace("https://github.com/", "https://raw.githubusercontent.com/")
-                                      .Replace("/blob/", "/");
-                    if (!newPath.StartsWith("https://raw.githubusercontent.com/"))
-                    {
-                        newPath = "https://raw.githubusercontent.com/" + newPath;
-                    }
-
-                    code = await HttpClient.GetStringAsync(newPath);
+                    code = await HttpClient.GetStringAsync(Path);
                 }
                 catch (Exception e)
                 {
-                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code from GitHub", e.Message, AlertTypes.Error);
+                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code...", e.Message, AlertTypes.Error);
                 }
             }
 
@@ -124,7 +126,7 @@ public partial class Index : NextTickComponentBase
 
         var options = new CompileRazorOptions()
         {
-            Code = await monaco.MonacoEditor.GetValue(),
+            Code = await monaco.MonacoEditor.GetValueAsync(),
             ConcurrentBuild = true
         };
 
@@ -178,7 +180,7 @@ public partial class Index : NextTickComponentBase
     {
         await InitMonaco(module);
 
-        await module.MonacoEditor.DefineTheme("custom", new StandaloneThemeData()
+        await module.MonacoEditor.DefineThemeAsync("custom", new StandaloneThemeData()
         {
             Base = "vs",
             inherit = true,
@@ -189,19 +191,19 @@ public partial class Index : NextTickComponentBase
             }
         });
 
-        await module.MonacoEditor.SetTheme("custom");
+        await module.MonacoEditor.SetThemeAsync("custom");
 
-        await NextTickWhile(async () =>
+        await Retry(() =>
         {
-            await Task.Delay(100);
             RunCode();
+            return Task.CompletedTask;
         }, () =>  _initialize == false);
     }
 
     private async Task InitMonaco(TabMonacoModule tabMonacoModule)
     {
         // 监听CTRL+S
-        await tabMonacoModule.MonacoEditor.AddCommand(2097, _objRef, nameof(RunCode));
+        await tabMonacoModule.MonacoEditor.AddCommandAsync(2097, _objRef, nameof(RunCode));
     }
 
     private async Task<List<PortableExecutableReference>?> GetReference()
@@ -268,9 +270,43 @@ public partial class Index : NextTickComponentBase
         };
     }
 
+    private async Task AddScriptReferenceAsync()
+    {
+        var jsScripts = JsNodeRegex().Matches(_newScriptContent);
+        foreach (var jsScript in jsScripts.Cast<Match>())
+        {
+            var newScript = new ScriptNode(jsScript.Value, ScriptNodeType.Js);
+            await TryJSModule.AddScript(newScript);
+            _customScriptNodes.Add(newScript);
+        }
+
+        var cssScripts = CssNodeRegex().Matches(_newScriptContent);
+        foreach (var cssScript in cssScripts.Cast<Match>())
+        {
+            var newScript = new ScriptNode(cssScript.Value, ScriptNodeType.Css);
+            await TryJSModule.AddScript(newScript);
+            _customScriptNodes.Add(newScript);
+        }
+
+        StateHasChanged();
+        _addScriptModalOpened = false;
+        ClearInputs();
+    }
+
+    private void ClearInputs()
+    {
+        _newScriptContent = string.Empty;
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
         _objRef?.Dispose();
     }
+
+    [GeneratedRegex("(<script(.*?)>)(.|\n)*?(</script>)")]
+    private static partial Regex JsNodeRegex();
+
+    [GeneratedRegex("(<link(.*?)/>)")]
+    private static partial Regex CssNodeRegex();
 }

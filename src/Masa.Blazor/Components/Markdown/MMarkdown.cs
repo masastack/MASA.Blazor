@@ -3,7 +3,7 @@
     public class MMarkdown : BMarkdown, IAsyncDisposable
     {
         [Parameter]
-        public override string Value
+        public override string? Value
         {
             get => _value;
             set
@@ -11,14 +11,15 @@
                 if (_value != value)
                 {
                     _value = value;
-                    _wattingUpdate = true;
+                    _waitingUpdate = true;
                 }
+
                 SetValue(value);
             }
         }
 
         [Parameter]
-        public Dictionary<string, object> Options { get; set; }
+        public Dictionary<string, object>? Options { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; }
@@ -50,27 +51,27 @@
         [Parameter]
         public EventCallback BeforeAllUpload { get; set; }
 
-        private bool _editorRendered = false;
-        private bool _wattingUpdate = false;
-        private string _value;
+        private string? _value;
+        private bool _editorRendered;
+        private bool _waitingUpdate;
 
-        private DotNetObjectReference<MMarkdown> ObjRef { get; set; }
-
-        private IJSObjectReference VditorHelper { get; set; }
+        private DotNetObjectReference<MMarkdown>? _objRef;
+        private IJSObjectReference? _vditorHelper;
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
 
-            watcher
-                .Watch<string>(nameof(Value), async val =>
-                {
-                    if (_wattingUpdate && _editorRendered)
-                    {
-                        _wattingUpdate = false;
-                        await SetValueAsync(_value, true);
-                    }
-                });
+            watcher.Watch<string?>(nameof(Value), ValueChangeCallback);
+        }
+
+        private async void ValueChangeCallback(string? val)
+        {
+            if (_waitingUpdate && _editorRendered)
+            {
+                _waitingUpdate = false;
+                await SetValueAsync(_value, true);
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -80,34 +81,35 @@
             {
                 return;
             }
+
             await CreateMarkdownAsync();
         }
 
         public async Task CreateMarkdownAsync()
         {
-            ObjRef = DotNetObjectReference.Create(this);
-            VditorHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/vditor/vditor-helper.js");
-            await VditorHelper.InvokeVoidAsync("init", Ref, ObjRef, Value, Options, BeforeAllUpload.HasDelegate);
+            _objRef = DotNetObjectReference.Create(this);
+            _vditorHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/vditor/vditor-helper.js");
+            await _vditorHelper.InvokeVoidAsync("init", Ref, _objRef, Value, Options, BeforeAllUpload.HasDelegate);
         }
 
-        public async ValueTask<string> GetValueAsync()
+        public async ValueTask<string?> GetValueAsync()
         {
-            return await VditorHelper.InvokeAsync<string>("getValue", Ref);
+            return await _vditorHelper.TryInvokeAsync<string>("getValue", Ref);
         }
 
-        public async ValueTask<string> GetHtmlAsync()
+        public async ValueTask<string?> GetHtmlAsync()
         {
-            return await VditorHelper.InvokeAsync<string>("getHtml", Ref);
+            return await _vditorHelper.TryInvokeAsync<string>("getHtml", Ref);
         }
 
-        public async Task SetValueAsync(string value, bool clearStack = false)
+        public async Task SetValueAsync(string? value, bool clearStack = false)
         {
-            await VditorHelper.InvokeVoidAsync("setValue", Ref, value, clearStack);
+            await _vditorHelper.TryInvokeVoidAsync("setValue", Ref, value, clearStack);
         }
 
         public async Task InsertValueAsync(string value, bool render = true)
         {
-            await VditorHelper.InvokeVoidAsync("insertValue", Ref, value, render);
+            await _vditorHelper.TryInvokeVoidAsync("insertValue", Ref, value, render);
         }
 
         [JSInvokable]
@@ -119,10 +121,11 @@
                 Html = await GetHtmlAsync();
                 await HtmlChanged.InvokeAsync(Html);
             }
+
             if (Readonly)
             {
-                await VditorHelper.InvokeVoidAsync("disabled", Ref);
-                await VditorHelper.InvokeVoidAsync("preview", Ref);
+                await _vditorHelper.TryInvokeVoidAsync("disabled", Ref);
+                await _vditorHelper.TryInvokeVoidAsync("preview", Ref);
             }
         }
 
@@ -130,7 +133,7 @@
         public async Task HandleInputAsync(string value)
         {
             _value = value;
-            _wattingUpdate = false;
+            _waitingUpdate = false;
 
             if (ValueChanged.HasDelegate)
             {
@@ -211,18 +214,15 @@
         {
             try
             {
-                await VditorHelper.InvokeVoidAsync("destroy", Ref);
-                if (ObjRef != null)
-                {
-                    ObjRef.Dispose();
-                }
-                if (VditorHelper != null)
-                {
-                    await VditorHelper.DisposeAsync();
-                }
+                await _vditorHelper.TryInvokeVoidAsync("destroy", Ref);
+
+                _objRef?.Dispose();
+
+                await _vditorHelper.TryDisposeAsync();
             }
             catch (Exception)
             {
+                // ignored
             }
         }
     }

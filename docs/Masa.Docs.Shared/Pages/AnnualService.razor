@@ -1,0 +1,199 @@
+﻿@page "/annual-service"
+@layout MainLayout
+@inject MasaBlazor MasaBlazor
+@implements IDisposable
+
+<MContainer Class="fill-height annual-service pa-0" Fluid>
+    <div class="hidden-sm-and-down fill-height">
+        <MRow Style="height: calc(100% - 48px)">
+            @foreach (var service in s_services)
+            {
+                <MCol Sm="12" Md="6" Lg="3">
+                    @ServiceCard(service)
+                </MCol>
+            }
+        </MRow>
+        <div class="tip">
+            <span>*</span>
+            <span>以上均为官方开源增值服务，不影响开源社区的正常运营</span>
+        </div>
+    </div>
+    <div class="hidden-md-and-up">
+        <MWindow @bind-Value="@_index" Style="height: calc(100% - 60px)">
+            @foreach (var service in s_services)
+            {
+                <MWindowItem Class="fill-height">
+                    @ServiceCard(service)
+                </MWindowItem>
+            }
+        </MWindow>
+        <div class="text-center mt-4 secondary--text">
+            <MButton Icon OnClick="OnPrev" Color="secondary">
+                <MIcon Large>mdi-arrow-left-circle</MIcon>
+            </MButton>
+            <span class="mx-6">@(_index.ToInt32() + 1) / @s_services.Count</span>
+            <MButton Icon OnClick="OnNext" Color="secondary">
+                <MIcon Large>mdi-arrow-right-circle</MIcon>
+            </MButton>
+        </div>
+    </div>
+</MContainer>
+
+<MDialog @bind-Value="_dialog" MaxWidth="770" ContentClass="rounded-xl">
+    <MSheet Class="annual-service-contact">
+        <div class="d-flex align-center">
+            <div class="d-flex align-center font-weight-bold">
+                <MIcon Class="mr-1" Small Color="primary">mdi-circle</MIcon>
+                联系方式
+            </div>
+            <MSpacer />
+            <MButton Icon Color="black"
+                     Class="close-icon"
+                     OnClick="() => _dialog = false">
+                <MIcon>$close</MIcon>
+            </MButton>
+        </div>
+        <div class="d-flex flex-column align-center">
+            <MIcon Class="icon mb-3" Color="primary">$wechat</MIcon>
+            <div class="d-flex align-center mb-2">
+                微信号 <MDivider Vertical Class="mx-2" Style="margin: 6px 0" /> MasaStackTechOps
+            </div>
+            <MImage Src="https://cdn.masastack.com/images/contact--no-title.png?x-oss-process=image/resize,l_120"
+                    Width="120">
+            </MImage>
+        </div>
+        <div class="d-flex flex-column align-center">
+            <MIcon Class="icon mb-3" Color="primary">mdi-email</MIcon>
+            <a class="text-decoration-none" style="color:inherit;" href="mailto:marketing@masastack.com">marketing@masastack.com</a>
+        </div>
+        <div class="d-flex flex-column align-center">
+            <MIcon Class="icon mb-3" Color="primary">mdi-phone</MIcon>
+            <a class="text-decoration-none" style="color:inherit;" href="tel:13989775601">13989775601</a>
+        </div>
+    </MSheet>
+</MDialog>
+
+@code {
+
+    private bool _dialog;
+
+    private StringNumber _index = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private RenderFragment ServiceCard(AnnualServiceData service) => __builder =>
+    {
+        <MSheet Color="@service.BackgroundColor"
+                Class="annual-service__card fill-height rounded-xl d-flex flex-column"
+                Style="@($"position: relative; color:{service.TextColor}")">
+            <div>
+                <div class="icons">
+                    @foreach (var icon in service.Icons)
+                    {
+                        <MIcon Color="@service.PrimaryColor"
+                               Size="48"
+                               Icon="@icon">
+                        </MIcon>
+                    }
+                </div>
+
+                <div class="product"
+                     style="color:@service.PrimaryColor">
+                    @service.Name
+                </div>
+
+                <div class="cost font-weight-bold"
+                     style="color:@service.TextColor">
+                    ¥ <span class="cost__num">@service.Cost</span> / 年
+                </div>
+
+                <ul>
+                    @foreach (var item in service.Items)
+                    {
+                        if (service.Stack && item == service.Items.Last())
+                        {
+                            <li class="d-flex align-start" style="opacity: 0.5">
+                                <MIcon Color="@service.PrimaryColor"
+                                       Class="mr-3">
+                                    mdi-minus-circle
+                                </MIcon>
+                                @item
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="d-flex align-start">
+                                <MIcon Color="@service.PrimaryColor"
+                                       Class="mr-3">
+                                    mdi-check-circle
+                                </MIcon>
+                                @item
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <MSpacer />
+            <div class="action">
+                <MButton Color="@service.PrimaryColor"
+                         Block
+                         Dark
+                         Depressed
+                         XLarge="@(!MasaBlazor.Breakpoint.SmAndDown)"
+                         Large="@MasaBlazor.Breakpoint.SmAndDown"
+                         OnClick="() => _dialog = true">
+                    联系购买
+                </MButton>
+                <div class="action__hint" style="color:@service.PrimaryColor;">
+                    年度技术服务包
+                    @if (service.Stack)
+                    {
+                        @("（本报价为5个节点以内，超过5节点另单独洽谈）")
+                    }
+                </div>
+            </div>
+        </MSheet>
+    };
+
+    private void OnPrev()
+    {
+        var index = _index.ToInt32();
+        if (index == 0)
+        {
+            _index = s_services.Count - 1;
+        }
+        else
+        {
+            _index = index - 1;
+        }
+    }
+
+    private void OnNext()
+    {
+        var index = _index.ToInt32();
+        if (index == s_services.Count - 1)
+        {
+            _index = 0;
+        }
+        else
+        {
+            _index = index + 1;
+        }
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+    }
+
+}

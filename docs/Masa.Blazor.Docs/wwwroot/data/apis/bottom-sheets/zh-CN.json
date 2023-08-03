@@ -13,7 +13,7 @@
     "overlayScrimClass": "overlayScrimClass",
     "persistent": "点击元素外面或按下 **esc** 键将不会关闭它。",
     "scrollable": "当设置为 true 时，期望有一个 [MCard](components/cards) 和一个 [MCardText](components/cardTexts) 组件，并有指定的高度。更多信息，请查看 [可滚动示例](components/dialogs/#scrollable)。",
-    "transition": "设置组件转换。可以是一个 [built in transitions](styles-and-animations/transitions) 或者是自己自定义的。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
     "value": "控制组件可见还是隐藏。"
   },
   "contents": {},
@@ -21,5 +21,5 @@
     "iputValueChanged": "",
     "valuesChanged": ""
   },
-  "functions": {}
+  "methods": {}
 }

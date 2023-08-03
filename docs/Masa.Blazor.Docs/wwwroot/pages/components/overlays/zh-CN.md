@@ -17,23 +17,17 @@ related:
 
 ### 属性
 
-#### 绝对定位
+#### 包含
 
-使用`Absolute`属性会使遮罩层被放置在绝对位置，并包含在父元素中。
+使用`Contained`属性会使遮罩层被放置在绝对位置，并包含在父元素中。
 
-<masa-example file="Examples.components.overlays.Absolute"></masa-example>
+<masa-example file="Examples.components.overlays.Contained"></masa-example>
 
 #### 透明度
 
 使用`Opacity`属性允许您自定义组件的透明度。
 
 <masa-example file="Examples.components.overlays.Opacity"></masa-example>
-
-#### Z-index
-
-使用`ZIndex`属性使您能够轻松地更改 **MOverlay** 组件的覆盖顺序。
-
-<masa-example file="Examples.components.overlays.ZIndex"></masa-example>
 
 ### 其他
 

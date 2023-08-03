@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 
@@ -26,6 +24,21 @@ public partial class EnqueuedSnackbars : BComponentBase
 
     [Parameter]
     public bool? Closeable { get; set; }
+    
+    [Parameter]
+    public StringNumber? Elevation { get; set; }
+
+    [Parameter]
+    public bool Outlined { get; set; }
+
+    [Parameter]
+    public StringBoolean? Rounded { get; set; }
+
+    [Parameter]
+    public bool Shaped { get; set; }
+
+    [Parameter]
+    public bool Text { get; set; }
 
     private PEnqueuedSnackbars? _enqueuedSnackbars;
 

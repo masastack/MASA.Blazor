@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using System.Runtime.CompilerServices;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -6,10 +7,10 @@ namespace Masa.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Document Document { get; set; }
+        public Document Document { get; set; } = null!;
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
@@ -20,14 +21,19 @@ namespace Masa.Blazor
         [Parameter]
         public bool PersistentPlaceholder { get; set; }
 
+        [ApiDefaultValue("$clear")]
         [Parameter]
-        public string ClearIcon { get; set; } = "mdi-close";
+        public string ClearIcon { get; set; } = "$clear";
 
         [Parameter]
         public bool FullWidth { get; set; }
 
         [Parameter]
-        public string Prefix { get; set; }
+        public string? Prefix
+        {
+            get => GetValue<string?>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool SingleLine { get; set; }
@@ -45,13 +51,17 @@ namespace Masa.Blazor
         public bool Filled { get; set; }
 
         [Parameter]
-        public virtual bool Outlined { get; set; }
+        public virtual bool Outlined
+        {
+            get => GetValue(false);
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool Reverse { get; set; }
 
         [Parameter]
-        public string Placeholder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
         public bool Rounded { get; set; }
@@ -63,19 +73,19 @@ namespace Masa.Blazor
         public string Type { get; set; } = "text";
 
         [Parameter]
-        public RenderFragment PrependInnerContent { get; set; }
+        public RenderFragment? PrependInnerContent { get; set; }
 
         [Parameter]
-        public string AppendOuterIcon { get; set; }
+        public string? AppendOuterIcon { get; set; }
 
         [Parameter]
-        public RenderFragment AppendOuterContent { get; set; }
+        public RenderFragment? AppendOuterContent { get; set; }
 
         [Parameter]
-        public string PrependInnerIcon { get; set; }
+        public string? PrependInnerIcon { get; set; }
 
         [Parameter]
-        public string Suffix { get; set; }
+        public string? Suffix { get; set; }
 
         [Parameter]
         public bool Autofocus { get; set; }
@@ -96,19 +106,19 @@ namespace Masa.Blazor
         public EventCallback OnEnter { get; set; }
 
         [Parameter]
-        public RenderFragment ProgressContent { get; set; }
+        public RenderFragment? ProgressContent { get; set; }
 
         [Parameter]
         public StringNumber LoaderHeight { get; set; } = 2;
 
         [Parameter]
-        public StringNumberBoolean Counter { get; set; }
+        public StringNumberBoolean? Counter { get; set; }
 
         [Parameter]
-        public Func<TValue, int> CounterValue { get; set; }
+        public Func<TValue, int>? CounterValue { get; set; }
 
         [Parameter]
-        public RenderFragment CounterContent { get; set; }
+        public RenderFragment? CounterContent { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnAppendOuterClick { get; set; }
@@ -120,12 +130,25 @@ namespace Masa.Blazor
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
         [Parameter]
-        public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public virtual Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         [Parameter]
         public int DebounceInterval { get; set; }
 
-        private static readonly string[] DirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
+        /// <summary>
+        /// Update the bound value on change event instead of on input.
+        /// </summary>
+        [Parameter]
+        [Obsolete("Use UpdateOnChange instead.")]
+        public bool UpdateOnBlur { get; set; }
+
+        /// <summary>
+        /// Update the bound value on change event instead of on input.
+        /// </summary>
+        [Parameter]
+        public bool UpdateOnChange { get; set; }
+
+        private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
         private bool _badInput;
 
@@ -143,9 +166,9 @@ namespace Masa.Blazor
 
         protected override bool IsDirty => Convert.ToString(LazyValue).Length > 0 || _badInput;
 
-        protected override int InternalDebounceInterval => DebounceInterval;
+        public override int InternalDebounceInterval => DebounceInterval;
 
-        public override bool IsLabelActive => IsDirty || DirtyTypes.Contains(Type);
+        public override bool IsLabelActive => IsDirty || s_dirtyTypes.Contains(Type);
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
 
@@ -172,11 +195,11 @@ namespace Masa.Blazor
 
         public virtual string Tag => "input";
 
-        protected virtual Dictionary<string, object> InputAttrs
+        protected virtual Dictionary<string, object?> InputAttrs
         {
             get
             {
-                Dictionary<string, object> attributes = new(Attributes) { { "type", Type } };
+                Dictionary<string, object?> attributes = new(Attributes) { { "type", Type } };
 
                 if (Type == "number")
                 {
@@ -206,7 +229,7 @@ namespace Masa.Blazor
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 
-        public StringNumber Max
+        public StringNumber? Max
         {
             get
             {
@@ -232,7 +255,7 @@ namespace Masa.Blazor
 
         protected double PrependWidth { get; set; }
 
-        private string NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
+        private string? NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
 
         protected(StringNumber left, StringNumber right) LabelPosition
         {
@@ -245,7 +268,7 @@ namespace Masa.Blazor
                     offset -= PrependWidth;
                 }
 
-                return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+                return MasaBlazor?.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 
@@ -285,7 +308,7 @@ namespace Masa.Blazor
             }
         }
 
-        public BLabel LabelReference { get; set; }
+        public BLabel? LabelReference { get; set; }
 
         public ElementReference PrefixElement { get; set; }
 
@@ -293,13 +316,13 @@ namespace Masa.Blazor
 
         public ElementReference AppendInnerElement { get; set; }
 
-        protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
+        protected virtual Dictionary<string, object?> InputSlotAttrs { get; set; } = new();
 
         bool ITextField<TValue>.IsDirty => IsDirty;
 
-        Dictionary<string, object> ITextField<TValue>.InputAttrs => InputAttrs;
+        Dictionary<string, object?> ITextField<TValue>.InputAttrs => InputAttrs;
 
-        Dictionary<string, object> ITextField<TValue>.InputSlotAttrs => InputSlotAttrs;
+        Dictionary<string, object?> ITextField<TValue>.InputSlotAttrs => InputSlotAttrs;
 
         protected override void SetComponentClass()
         {
@@ -512,6 +535,15 @@ namespace Masa.Blazor
             }
         }
 
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<bool>(nameof(Outlined), SetLabelWidthAsync)
+                   .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync))
+                   .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
+        }
+
         private async Task SetLabelWidthAsync()
         {
             if (!Outlined)
@@ -526,22 +558,20 @@ namespace Masa.Blazor
             }
 
             var label = Document.GetElementByReference(LabelReference.Ref);
-            var scrollWidth = await label.GetScrollWidthAsync();
+            if (label == null) return;
 
-            if (scrollWidth == null)
-            {
-                return;
-            }
+            var scrollWidth = await label.GetScrollWidthAsync();
+            if (scrollWidth == null) return;
 
             var element = Document.GetElementByReference(Ref);
-            var offsetWidth = await element.GetOffsetWidthAsync();
+            if (element == null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await element.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
+
+            StateHasChanged();
         }
 
         private async Task SetPrefixWidthAsync()
@@ -552,14 +582,14 @@ namespace Masa.Blazor
             }
 
             var prefix = Document.GetElementByReference(PrefixElement);
-            var offsetWidth = await prefix.GetOffsetWidthAsync();
+            if (prefix == null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await prefix.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             PrefixWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task SetPrependWidthAsync()
@@ -575,14 +605,14 @@ namespace Masa.Blazor
             }
 
             var prependInner = Document.GetElementByReference(PrependInnerElement);
-            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+            if (prependInner is null) return;
 
-            if (offsetWidth == null)
-            {
-                return;
-            }
+            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+            if (offsetWidth == null) return;
 
             PrependWidth = offsetWidth.Value;
+
+            StateHasChanged();
         }
 
         private async Task<bool> TryAutoFocus()
@@ -599,9 +629,8 @@ namespace Masa.Blazor
 
         private async Task OnResize()
         {
-            await SetLabelWidthAsync();
-            await SetPrefixWidthAsync();
-            await SetPrependWidthAsync();
+            await PreventRenderingUtil(SetLabelWidthAsync, SetPrefixWidthAsync, SetPrependWidthAsync);
+            StateHasChanged();
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
@@ -630,14 +659,6 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        public virtual async Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
-        }
-
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
@@ -651,32 +672,80 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue.ToString());
+                await SetValueByJsInterop(checkValue?.ToString());
             }
         }
 
-        public override async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value?.ToString(), CultureInfo.InvariantCulture, out var val);
+            return OnValueChangedAsync(args, OnInput);
+        }
 
-            if (success)
+        public override Task HandleOnChangeAsync(ChangeEventArgs args)
+        {
+            return OnValueChangedAsync(args, OnChange);
+        }
+
+        private async Task OnValueChangedAsync(ChangeEventArgs args, EventCallback<TValue> cb,
+            [CallerArgumentExpression("cb")] string cbName = "")
+        {
+            var originValue = args.Value?.ToString();
+
+            var succeed = TryConvertTo<TValue>(originValue, out var result);
+
+            if (succeed && cb.HasDelegate)
+            {
+                await cb.InvokeAsync(result);
+            }
+
+            var updateOnChange = UpdateOnBlur || UpdateOnChange;
+
+            if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
+            {
+                UpdateValue(originValue, succeed, result);
+
+                StateHasChanged();
+            }
+        }
+
+        private static bool TryConvertTo<T>(string? value, out T? result)
+        {
+            var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
+
+            if (succeeded)
+            {
+                result = val;
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
+
+        private void UpdateValue(string? originValue, bool succeeded, TValue? convertedValue)
+        {
+            if (succeeded)
             {
                 _badInput = false;
 
                 ValueChangedInternally = true;
 
-                InternalValue = val;
-
-                if (OnInput.HasDelegate)
-                {
-                    await OnInput.InvokeAsync(val);
-                }
+                InternalValue = convertedValue;
             }
             else
             {
                 _badInput = true;
 
                 InternalValue = default;
+
+                if (Type.ToLower() == "number")
+                {
+                    // reset the value of input element if failed to convert
+                    if (!string.IsNullOrEmpty(originValue))
+                    {
+                        _ = SetValueByJsInterop("");
+                    }
+                }
             }
 
             if (!ValidateOnBlur)
@@ -685,10 +754,6 @@ namespace Masa.Blazor
                 //and validate may not be called
                 InternalValidate();
             }
-
-            StateHasChanged();
-
-            // todo: args.validity.badInput
         }
 
         private TValue CheckNumberValidate()

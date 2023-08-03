@@ -1,6 +1,9 @@
+using BlazorComponent;
+using Masa.Blazor;
 using Masa.Docs.Core;
 using Masa.Docs.Shared;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 // https://github.com/dotnet/aspnetcore/issues/38212
@@ -16,18 +19,14 @@ builder.Services.AddServerSideBlazor(options =>
 builder.Services.AddHealthChecks();
 
 builder.Services.AddScoped<LazyAssemblyLoader>();
-builder.Services.AddMasaBlazor(options =>
-{
-    options.ConfigureTheme(theme =>
-    {
-        theme.Themes.Light.Primary = "#4318FF";
-        theme.Themes.Light.Secondary = "#5CBBF6";
-        theme.Themes.Light.Accent = "#005CAF";
-        theme.Themes.Light.UserDefined?.Add("Tertiary", "#e57373");
-    });
-}).AddI18nForServer("wwwroot/locale");
 
-builder.Services.AddMasaDocs(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
+var docSeverUrlConfig = builder.Configuration["ASPNETCORE_URLS"];
+var docSeverUrls = docSeverUrlConfig?.Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+docSeverUrls = docSeverUrls?.Select(x => x.Replace("0.0.0.0", "127.0.0.1")).ToArray();
+var docSeverUrl = docSeverUrls?.FirstOrDefault(x => x.StartsWith("https://")) ??
+                  docSeverUrls?.FirstOrDefault(x => x.StartsWith("http://"));
+
+builder.Services.AddMasaDocs(docSeverUrl ?? "http://localhost:5000").AddI18nForServer("wwwroot/locale");
 
 var app = builder.Build();
 
@@ -42,8 +41,6 @@ app.MapHealthChecks("/healthz");
 app.UseStaticFiles();
 
 app.UseRouting();
-
-// TODO: crawlService
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

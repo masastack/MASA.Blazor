@@ -2,8 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
 		<Version>0.1.0</Version>
-		<RepositoryUrl>https://github.com/BlazorComponent/MASA.Blazor</RepositoryUrl>
+		<RepositoryUrl>https://github.com/masastack/MASA.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageProjectUrl>https://blazor.masastack.com</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -26,7 +27,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-	  <ProjectReference Include="..\Masa.Blazor.SourceGenerator.Docs.ApiGenerator\Masa.Blazor.SourceGenerator.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	  <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>

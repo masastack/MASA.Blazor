@@ -9,13 +9,13 @@
         public bool Outlined { get; set; }
 
         /// <summary>
-        /// Provides an alternative active style for v-list-item
+        /// Provides an alternative active style for MListItem
         /// </summary>
         [Parameter]
         public bool Shaped { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         /// <summary>
         /// Lowers max height of list tiles
@@ -24,25 +24,25 @@
         public bool Dense { get; set; }
 
         /// <summary>
-        /// Disables all children v-list-item components
+        /// Disables all children MListItem components
         /// </summary>
         [Parameter]
         public bool Disabled { get; set; }
 
         /// <summary>
-        /// Remove the highlighted background on active v-list-items
+        /// Remove the highlighted background on active MListItems
         /// </summary>
         [Parameter]
         public bool Flat { get; set; }
 
         /// <summary>
-        /// An alternative styling that reduces v-list-item width and rounds the corners. Typically used with v-navigation-drawer
+        /// An alternative styling that reduces MListItem width and rounds the corners. Typically used with MNavigationDrawer
         /// </summary>
         [Parameter]
         public bool Nav { get; set; }
 
         /// <summary>
-        /// Rounds the v-list-item edges
+        /// Rounds the MListItem edges
         /// </summary>
         [Parameter]
         public bool Rounded { get; set; }
@@ -69,39 +69,37 @@
         /// Sets the height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber Height { get; set; }
+        public StringNumber? Height { get; set; }
 
         /// <summary>
         /// Sets the maximum height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MinHeight { get; set; }
+        public StringNumber? MinHeight { get; set; }
 
         /// <summary>
         /// Sets the minimum width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MinWidth { get; set; }
+        public StringNumber? MinWidth { get; set; }
 
         /// <summary>
         /// Sets the maximum height for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MaxHeight { get; set; }
+        public StringNumber? MaxHeight { get; set; }
 
         /// <summary>
         /// Sets the maximum width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber MaxWidth { get; set; }
+        public StringNumber? MaxWidth { get; set; }
 
         /// <summary>
         /// Sets the width for the component.
         /// </summary>
         [Parameter]
-        public StringNumber Width { get; set; }
-
-
+        public StringNumber? Width { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -116,7 +114,7 @@
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(IsDark)
                         .Add("m-list")
-                        .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
+                        .AddIf(() => $"elevation-{Elevation!.Value}", () => Elevation != null)
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--flat", () => Flat)

@@ -1,17 +1,22 @@
-﻿<div class="ordinary-text">
-    <MMarkdownIt Source="@Source"
-                 AnchorOptions="@s_anchorOptions"
-                 OnTocParsed="@OnTocParsed"
-                 OnFrontMatterParsed="@OnFrontMatterParsed"
-                 Html
-                 Typographer
-                 HeaderSections
-                 Scope="document"
-                 Class="doc-markdown-body">
-    </MMarkdownIt>
-</div>
+﻿@using System.ComponentModel
+@inject IJSRuntime JSRuntime
+
+<MMarkdownIt Source="@Source"
+             AnchorOptions="@s_anchorOptions"
+             OnTocParsed="@OnTocParsed"
+             OnFrontMatterParsed="@OnFrontMatterParsed"
+             OnAfterRendered="OnAfterRendered"
+             Html
+             Typographer
+             HeaderSections
+             Scope="document"
+             Class="doc-markdown-body">
+</MMarkdownIt>
 
 @code {
+
+    [CascadingParameter(Name = "IsDark")]
+    private bool IsDark { get; set; }
 
     [Parameter, EditorRequired]
     public string? Source { get; set; }
@@ -28,5 +33,10 @@
         PermalinkClass = "",
         PermalinkSymbol = ""
     };
+
+    private async Task OnAfterRendered()
+    {
+        await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", IsDark);
+    }
 
 }

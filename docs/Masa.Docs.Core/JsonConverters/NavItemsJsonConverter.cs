@@ -56,27 +56,18 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "icon":
                                 navItem.Icon = reader.GetString();
                                 break;
+                            case "exact":
+                                navItem.Exact = reader.GetBoolean();
+                                break;
                             case "group":
                                 navItem.Group = reader.GetString();
                                 break;
                             case "state":
-                                var stateStr = reader.GetString();
-                                navItem.State = stateStr switch
-                                {
-                                    "new" => NavItemState.New,
-                                    "update" => NavItemState.Update,
-                                    _ => NavItemState.None
-                                };
+                                navItem.State = reader.GetString();
                                 break;
-                            case "tiling":
-                                var tilingStr = reader.GetString();
-                                navItem.Tiling = tilingStr switch
-                                {
-                                    "some" => NavItemTiling.Some,
-                                    "visible" => NavItemTiling.Visible,
-                                    "invisible" => NavItemTiling.Invisible,
-                                    _ => null
-                                };
+                            case "hidden":
+                                var hidden = reader.GetBoolean();
+                                navItem.Hidden = hidden;
                                 break;
                             case "items":
                                 navItem.Children = ReadSubItems(ref reader);

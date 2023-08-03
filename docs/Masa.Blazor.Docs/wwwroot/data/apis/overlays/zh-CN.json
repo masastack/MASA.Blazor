@@ -1,9 +1,11 @@
 {
   "props": {
-    "opacity": "设置遮罩层的透明度",
-    "scrimClass": "",
+    "contained": "将组件的大小限制为其偏移量父级。会应用`absolute`。",
+    "opacity": "设置遮罩层的透明度。",
+    "scrim": "启用遮罩层背景。",
+    "scrimClass": "设置scrim元素的DOM class。",
     "value": "控制组件可见还是隐藏。",
-    "zIndex": "用于组件的 z-index"
+    "zIndex": "用于组件的 `z-index`。"
   },
   "events": {},
   "contents": {}

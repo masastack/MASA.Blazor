@@ -1,5 +1,4 @@
-﻿#nullable enable
-using Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup.Components;
 
@@ -14,6 +13,8 @@ public partial class Confirm : AlertingPopupComponentBase
     [Parameter] public Action<ModalButtonProps>? CancelProps { get; set; }
 
     [Parameter] public string? Content { get; set; }
+
+    [Parameter] public RenderFragment? ContentContent { get; set; }
 
     [Parameter] public string? ContentClass { get; set; }
 
@@ -36,6 +37,9 @@ public partial class Confirm : AlertingPopupComponentBase
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
+
+    private RenderFragment? ComputedContent
+        => ContentContent ?? (string.IsNullOrWhiteSpace(Content) ? null : (RenderFragment)(b => b.AddContent(0, Content)));
 
     protected override string ComponentName => PopupComponents.CONFIRM;
 
@@ -60,7 +64,6 @@ public partial class Confirm : AlertingPopupComponentBase
 
     private Task HandleOnCancel()
     {
-        Visible = false;
         return ClosePopupAsync(false);
     }
 
@@ -77,7 +80,6 @@ public partial class Confirm : AlertingPopupComponentBase
 
         if (args.IsCanceled is false)
         {
-            Visible = false;
             await ClosePopupAsync(true);
         }
     }

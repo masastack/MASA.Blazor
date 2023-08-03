@@ -4,18 +4,21 @@
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
+@inject MasaBlazor MasaBlazor
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
+                   Class="default-nav"
                    Floating
                    Width="300"
-                   @bind-Value="_showMobileIndexNavMenuList"
-                   Clipped>
+                   @bind-Value="_drawer"
+                   Clipped
+                   Right="@MasaBlazor.RTL">
     <ChildContent>
         <MListItem>
             <MListItemContent>
-                <MSelect Items="_versions"
-                         @bind-Value="@selectVersion"
+                <MSelect Items="s_versions"
+                         @bind-Value="@_selectVersion"
                          Class="light-border"
                          ItemText="u => u"
                          ItemValue="u => u"
@@ -28,10 +31,14 @@
         <MDivider></MDivider>
 
         <MList Class="doc-list-nav">
-            <MListItemGroup Value="_activeHash" Mandatory>
-                <MListItem Value="@("#getting-started")" Class="doc-list-nav--item-hash" OnClick='() => ScrollIntoView("getting-started")' Href="@("#getting-started")">
-                    <MListItemIcon Style="margin-left: 6px;margin-right: 18px;">
-                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+            <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
+                <MListItem Value="@("#getting-started")"
+                           Class="doc-list-nav--item-hash"
+                           Href="@("#getting-started")"
+                           OnClick='() => ScrollIntoView("#getting-started")'
+                           OnClickPreventDefault>
+                    <MListItemIcon>
+                        <MIcon Color="#FFB547" Size="32" Style="margin-right: 2px">fa:fas fa-rocket</MIcon>
                     </MListItemIcon>
                     <MListItemContent>
                         <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
@@ -39,11 +46,17 @@
                 </MListItem>
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <MListItem Value="@($"#{project}")" Class="doc-list-nav--item-hash" OnClick="(() => ScrollIntoView(project))" Href="@($"#{project}")">
-                        <MListItemAvatar Tile>
-                            @Image(project, _activeHash)
-                        </MListItemAvatar>
+                    var hash = $"#{project}";
+                    var isActive = _activeHash == hash;
 
+                    <MListItem Value="hash"
+                               Class="doc-list-nav--item-hash"
+                               Href="@hash"
+                               OnClick="() => ScrollIntoView(hash)"
+                               OnClickPreventDefault>
+                        <MListItemIcon>
+                            <MIcon Color="@(isActive ? "" : "#4318ff")" Size="34">@($"$masa{project.ToUpperFirst()}")</MIcon>
+                        </MListItemIcon>
                         <MListItemContent>
                             <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
                         </MListItemContent>
@@ -55,7 +68,7 @@
 </MNavigationDrawer>
 
 <MMain>
-    <MContainer Fluid>
+    <MContainer Fluid Class="px-9">
         <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
             @if (_loading)
             {
@@ -68,7 +81,7 @@
             {
                 <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
-                        <MIcon Color="#FFB547" Size="30" Class="mr-2">fas fa-rocket</MIcon>
+                        <MIcon Color="#FFB547" Size="32" Style="margin-right: 10px">fa:fas fa-rocket</MIcon>
                         @I18n.T("getting-started")
                     </div>
                     @ProductCard(s_gettingStartedNavs)
@@ -78,7 +91,7 @@
                 {
                     <div class="project" id="@project">
                         <div class="heading-5 mb-6 d-flex align-center">
-                            @Image(project)
+                            <MIcon Color="#4318ff" Size="34" Class="mr-2">@($"$masa{project.ToUpperFirst()}")</MIcon>
                             @I18n.T("product", project)
                         </div>
 
@@ -95,14 +108,23 @@
                             {
                                 foreach (var navItem in groupNavsWithChildren)
                                 {
-                                    if (navItem.Tiling is NavItemTiling.Invisible)
+                                    if (navItem.IsHidden)
                                     {
                                         continue;
                                     }
 
-                                    var children = navItem.Tiling is NavItemTiling.Some ? navItem.Children.Where(s => s.Tiling == NavItemTiling.Visible) : navItem.Children;
+                                    var children = navItem is { Hidden: true } ? navItem.Children.Where(c => c is { Hidden: false }) : navItem.Children;
 
-                                    @ProductCard(children.Select(u => (u.Title, u.Href)), navItem.Title)
+                                    @ProductCard(children.Select(u =>
+                                    {
+                                        var href = u.Href;
+                                        if (string.IsNullOrWhiteSpace(href))
+                                        {
+                                            href = u.Children?.FirstOrDefault()?.Href;
+                                        }
+
+                                        return (u.Title, href);
+                                    }), navItem.Title)
                                 }
                             }
                         }
@@ -124,52 +146,23 @@
     private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
     {
         ("why-masa-blazor", "/blazor/introduction/why-masa-blazor"),
-        ("kubernetes-deploy", "/stack/operations/kubernetes/kubernetes-deploy")
-    };
-
-    private List<string> _versions = new List<string>
-    {
-        "1.0",
-    };
-
-    private string selectVersion = "1.0";
-
-    private bool _showMobileIndexNavMenuList;
-
-    private DotNetObjectReference<Index>? _objRef;
-    private string? _activeHash;
-
-    private static RenderFragment Image(string project, string? currentSelectProject = null) => __builder =>
-    {
-        string? src = null;
-        switch (project)
-        {
-            case "blazor":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASABlazor/logo{(currentSelectProject == "#blazor" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-            case "framework":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAFramework/logo{(currentSelectProject == "#framework" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-            case "stack":
-                src = $"https://cdn.masastack.com/stack/images/logo/MASAStack/logo{(currentSelectProject == "#stack" ? "-w" : "")}.png?x-oss-process=image/resize,w_30";
-                break;
-        }
-
-        if (!string.IsNullOrWhiteSpace(src))
-        {
-            <MImage Src="@src" Class="mr-2" MaxWidth="30" MaxHeight="30"></MImage>
-        }
+        ("masa-stack-install", "/stack/masa-stack-1.0/installation/docker-compose")
     };
 
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
 
-    private bool _loading = true;
-
-    protected override void OnInitialized()
+    private static readonly List<string> s_versions = new()
     {
-        BaseLayout.PageInfo.PageTitle = "MASA Stack Docs";
-        BaseLayout.PageInfo.PageIcon = "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png";
-    }
+        "1.0",
+    };
+
+    private string _selectVersion = "1.0";
+
+    private bool? _drawer;
+
+    private DotNetObjectReference<Index>? _objRef;
+    private string? _activeHash;
+    private bool _loading = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -177,10 +170,6 @@
 
         if (firstRender)
         {
-            _loading = true;
-
-            StateHasChanged();
-
             var projectMap = await DocService.ReadProjectMapAsync();
 
             foreach (var key in projectMap.Keys)
@@ -194,9 +183,18 @@
 
             _objRef = DotNetObjectReference.Create(this);
             await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
-            await LocationHashPositionAsync(NavigationManager.Uri);
 
-            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool>(this, val => { _showMobileIndexNavMenuList = !_showMobileIndexNavMenuList; });
+            var uri = NavigationManager.ToUri();
+            if (!string.IsNullOrWhiteSpace(uri.Fragment))
+            {
+                NextTick(async () =>
+                {
+                    await Task.Delay(300);
+                    ScrollIntoView(uri.Fragment);
+                });
+            }
+
+            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool?>(this, val => { _drawer = !(_drawer ?? false); });
         }
     }
 
@@ -222,38 +220,24 @@
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
     {
-        <MButton Text Href="@href" Class="ordinary-text text-none text-truncate">@I18n.T(title)</MButton>
+        <MButton Text Href="@href" Class="text-none text-truncate" Style="font-size: inherit; font-weight: inherit;">@I18n.T(title)</MButton>
     };
 
-    private async Task ScrollIntoView(string elementId)
+    private void ScrollIntoView(string hash, bool needsRender = false)
     {
-        _activeHash = $"#{elementId}";
-        // TODO: remove the following lines when #40190 of aspnetcore resolved.
-        // TODO: Blazor now does not support automatic scrolling of anchor points.
-        // Check this when .NET 8 released.
-
-        NavigationManager.ReplaceWithHash($"#{elementId}");
-        _ = JsRuntime.InvokeVoidAsync("scrollToElement", elementId, AppService.AppBarHeight + 12);
-    }
-
-    private async Task LocationHashPositionAsync(string url)
-    {
-        var uri = new Uri(url);
-        if (!string.IsNullOrWhiteSpace(uri.Fragment))
+        _activeHash = hash;
+        if (needsRender)
         {
-            await NextTickWhile(async () =>
-            {
-                await Task.Delay(500);
-                await ScrollIntoView(uri.Fragment.Substring(1));
-            }, () => true);
+            StateHasChanged();
         }
+
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 48, true);
     }
 
     [JSInvokable]
     public void UpdateHash(string hash)
     {
         _activeHash = hash;
-        NavigationManager.ReplaceWithHash(hash);
         StateHasChanged();
     }
 
@@ -262,4 +246,5 @@
         base.Dispose(disposing);
         _objRef?.Dispose();
     }
+
 }

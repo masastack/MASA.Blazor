@@ -1,41 +1,39 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MStepperStep : BStepperStep, IStepperStep
     {
-        private bool _isActive;
-        private bool _isInactive;
-
         [CascadingParameter]
-        public MStepper Stepper { get; set; }
+        public MStepper? Stepper { get; set; }
 
         [Parameter]
         public int Step { get; set; }
 
         [Parameter]
-        public string ErrorIcon { get; set; } = "mdi-alert";
+        public string ErrorIcon { get; set; } = "$error";
 
         [Parameter]
-        public string CompleteIcon { get; set; } = "mdi-check";
+        public string CompleteIcon { get; set; } = "$complete";
 
         [Parameter]
-        public string EditIcon { get; set; } = "mdi-pencil";
+        public string EditIcon { get; set; } = "$edit";
 
         [Parameter]
         public List<Func<bool>> Rules { get; set; } = new();
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        public string? Color { get; set; } = "primary";
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
         public bool Editable { get; set; }
 
         [Parameter]
         public bool Complete { get; set; }
+
+        private bool _isActive;
+        private bool _isInactive;
 
         public bool HasError => Rules.Any(validate => !validate());
 
@@ -72,7 +70,7 @@ namespace Masa.Blazor
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Stepper.RegisterStep(this);
+            Stepper?.RegisterStep(this);
         }
 
         protected override void OnParametersSet()
@@ -81,7 +79,7 @@ namespace Masa.Blazor
             Attributes["ripple"] = Editable;
         }
 
-        public override Task HandleOnClickAsync(MouseEventArgs args)
+        protected override Task HandleOnClickAsync(MouseEventArgs args)
         {
             if (OnClick.HasDelegate)
             {
@@ -90,7 +88,7 @@ namespace Masa.Blazor
 
             if (Editable)
             {
-                Stepper.StepClick(Step);
+                Stepper?.StepClick(Step);
             }
 
             return base.HandleOnClickAsync(args);
@@ -106,7 +104,7 @@ namespace Masa.Blazor
 
         protected override void Dispose(bool disposing)
         {
-            Stepper.UnRegisterStep(this);
+            Stepper?.UnRegisterStep(this);
 
             base.Dispose(disposing);
         }

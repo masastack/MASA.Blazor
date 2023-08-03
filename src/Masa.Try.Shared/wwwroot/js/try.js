@@ -1,11 +1,19 @@
-﻿        
-function init() {
+﻿function init() {
     initLanguages();
-    var splitter = document.getElementById('splitter');
-    var code = document.getElementById('code');
-    var render = document.getElementById('render');
 
-    var mouseDownHandler = function(e) {
+    let splitter = document.getElementById('splitter');
+    if (splitter) {
+        addSplitterEventListener(splitter);
+    } else {
+        setTimeout(() => {
+            splitter = document.getElementById('splitter');
+            addSplitterEventListener(splitter);
+        }, 1000)
+    }
+}
+
+function addSplitterEventListener(splitter) {
+    var mouseDownHandler = function (e) {
         // Prevent text selection
         e.preventDefault();
 
@@ -15,7 +23,7 @@ function init() {
         var startRightWidth = render.offsetWidth;
 
         // Define the mouse move handler
-        var mouseMoveHandler = function(e) {
+        var mouseMoveHandler = function (e) {
             // Calculate the new widths
             var newLeftWidth = startLeftWidth + (e.clientX - startPos);
             var newRightWidth = startRightWidth - (e.clientX - startPos);
@@ -26,7 +34,7 @@ function init() {
         };
 
         // Define the mouse up handler
-        var mouseUpHandler = function() {
+        var mouseUpHandler = function () {
             // Remove the handlers
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('mouseup', mouseUpHandler);
@@ -37,9 +45,11 @@ function init() {
         document.addEventListener('mouseup', mouseUpHandler);
     };
 
+    var code = document.getElementById('code');
+    var render = document.getElementById('render');
+
     splitter.addEventListener('mousedown', mouseDownHandler);
 }
-
 
 function initLanguages() {
     function createDependencyProposals(range) {
@@ -159,7 +169,25 @@ function initLanguages() {
 
 }
 
+function parseToDOM(htmlstring) {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = htmlstring;
+    return tpl.content;
+}
+
+function addScript(scriptNode) {
+    if (document.getElementById(scriptNode.id) != null)
+        return;
+
+    var node = parseToDOM(scriptNode.content);
+
+    if (scriptNode.nodeType == 0) {
+        document.body.appendChild(node);
+    } else {
+        document.head.appendChild(node);
+    }
+}
 
 export {
-    init
+    init, addScript
 }

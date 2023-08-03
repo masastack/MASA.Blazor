@@ -1,5 +1,4 @@
-﻿@using System.Globalization;
-@attribute [JSCustomElement]
+﻿@attribute [JSCustomElement]
 @inject I18n I18n
 
 <MTextField @bind-Value="_value"
@@ -32,8 +31,8 @@
                          onerror="this.src='_content/Masa.Blazor.Docs/img/default-img.png'" />
                 </div>
             </MCard>
-            <p class="component-title mt-2">@I18n.T(component.Title)</p>
-            <p class="component-desc mt-1">@I18n.T($"all-components.{component.Title}")</p>
+            <h3 class="mt-2">@I18n.T(component.Title)</h3>
+            <div class="mt-1">@I18n.T($"all-components.{component.Title}")</div>
         </MCol>
     }
 </MRow>

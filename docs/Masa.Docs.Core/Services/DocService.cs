@@ -14,7 +14,7 @@ public class DocService
 
     private readonly HttpClient _httpClient;
 
-    private readonly Lazy<Task<Dictionary<string, string>?>> _projectMap;
+    private readonly Lazy<Task<Dictionary<string, Project>?>> _projectMap;
 
     public DocService(IHttpClientFactory factory, I18n i18n)
     {
@@ -22,11 +22,11 @@ public class DocService
 
         _httpClient = factory.CreateClient("masa-docs");
 
-        _projectMap = new Lazy<Task<Dictionary<string, string>?>>(async () =>
+        _projectMap = new Lazy<Task<Dictionary<string, Project>?>>(async () =>
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<Dictionary<string, string>>("_content/Masa.Docs.Shared/data/project.json");
+                return await _httpClient.GetFromJsonAsync<Dictionary<string, Project>>("_content/Masa.Docs.Shared/data/project.json");
             }
             catch (Exception e)
             {
@@ -40,7 +40,7 @@ public class DocService
     {
         var projectMap = await ReadProjectMapAsync();
 
-        var projectFullName = projectMap[project];
+        var projectFullName = projectMap[project].Path;
 
         if (subTitle != null)
         {
@@ -59,7 +59,7 @@ public class DocService
             async _ => await _httpClient.GetStringAsync($"_content/{projectFullName}/pages/{category}/{title}/{subTitle}{cultureName}.md"));
     }
 
-    public async Task<Dictionary<string, string>> ReadProjectMapAsync()
+    public async Task<Dictionary<string, Project>> ReadProjectMapAsync()
     {
         var projectMap = await _projectMap.Value;
         ArgumentNullException.ThrowIfNull(projectMap);
@@ -71,7 +71,7 @@ public class DocService
     {
         var projectMap = await ReadProjectMapAsync();
 
-        var projectFullName = projectMap[project];
+        var projectFullName = projectMap[project].Path;
 
         return await s_projectNavsCache.GetOrAdd(project, async _ =>
         {

@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public partial class EllipsisText : IAsyncDisposable
 {
@@ -55,6 +54,8 @@ public partial class EllipsisText : IAsyncDisposable
 
     private ActivatorRefProps? _activatorRefProps;
 
+    private bool _isDisposed;
+
     protected override void OnParametersSet()
     {
         if (!(Left || Right || Bottom))
@@ -83,18 +84,20 @@ public partial class EllipsisText : IAsyncDisposable
     public void OnEllipsisChange(bool isEllipsis)
     {
         _isDisabled = !isEllipsis;
-        StateHasChanged();
+        if (!_isDisposed)
+            StateHasChanged();
     }
 
     public async ValueTask DisposeAsync()
     {
         try
         {
-            _selfReference?.Dispose();
+            _isDisposed = true;
 
             await _resizeObserverDisposable.InvokeVoidAsync("disconnect");
-            await _jsModule.DisposeAsync();
             await _resizeObserverDisposable.DisposeAsync();
+            await _jsModule.DisposeAsync();
+            _selfReference?.Dispose();
         }
         catch
         {

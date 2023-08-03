@@ -1,0 +1,43 @@
+﻿@inject MasaBlazor MasaBlazor
+@implements IDisposable
+
+<MCard Dark Color="secondary" Height="@Height" Class="text-center" Style="@($"line-height:{Height}px")">
+    Height = @Height
+</MCard>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private int Height
+    {
+        get
+        {
+            return MasaBlazor.Breakpoint.Name switch
+            {
+                Breakpoints.Xs => 100,
+                Breakpoints.Sm => 200,
+                Breakpoints.Md => 300,
+                Breakpoints.Lg => 400,
+                Breakpoints.Xl => 500,
+                _ => 0
+            };
+        }
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+    }
+
+}

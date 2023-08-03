@@ -1,10 +1,15 @@
 ﻿using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
     public partial class MPagination : BPagination, IPagination
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+
+        [Inject]
+        public Document Document { get; set; } = null!;
+
         [Parameter]
         public bool Circle { get; set; }
 
@@ -30,28 +35,22 @@ namespace Masa.Blazor
         public int Length { get; set; }
 
         [Parameter]
-        public string NextIcon { get; set; } = "mdi-chevron-right";
+        public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        public string PrevIcon { get; set; } = "mdi-chevron-left";
+        public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
-        public StringNumber TotalVisible { get; set; }
+        public StringNumber? TotalVisible { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
-        [Inject]
-        public Document Document { get; set; }
+        public string? Color { get; set; } = "primary";
 
         public bool PrevDisabled => Value <= 1;
 
         public bool NextDisabled => Value >= Length;
 
-        protected int _maxButtons = 0;
+        protected int MaxButtons;
 
         protected override void SetComponentClass()
         {
@@ -86,6 +85,10 @@ namespace Masa.Blazor
                         .Add("m-pagination__item")
                         .Add("m-pagination__item--active")
                         .AddBackgroundColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddBackgroundColor(Color);
                 })
                 .Apply("item", cssBuilder =>
                 {
@@ -103,10 +106,12 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 var el = Document.GetElementByReference(Ref);
+                if (el is null) return;
+
                 var clientWidth = await el.ParentElement.GetClientWidthAsync();
                 if (clientWidth != null)
                 {
-                    _maxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
+                    MaxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
                     StateHasChanged();
                 }
             }
@@ -114,106 +119,81 @@ namespace Masa.Blazor
 
         public string GetIcon(int index)
         {
-            return index == (int)PaginationIconTypes.First ?
-                (MasaBlazor.RTL ? NextIcon : PrevIcon) :
-                (MasaBlazor.RTL ? PrevIcon : NextIcon);
+            return index == (int)PaginationIconTypes.First ? (MasaBlazor.RTL ? NextIcon : PrevIcon) : (MasaBlazor.RTL ? PrevIcon : NextIcon);
+        }
+
+        private int ComputedTotalVisible
+        {
+            get
+            {
+                if (TotalVisible is null)
+                {
+                    return MaxButtons;
+                }
+
+                return TotalVisible.ToInt32();
+            }
+        }
+
+        private IEnumerable<StringNumber> CreateRange(int length, int start = 0)
+        {
+            return Enumerable.Range(0, length).Select(i => (StringNumber)(start + i));
         }
 
         public IEnumerable<StringNumber> GetItems()
         {
-            if (TotalVisible != null && TotalVisible.ToInt32() == 0)
+            List<StringNumber> items = new();
+
+            var start = 1;
+
+            if (Length <= 0)
             {
-                return Enumerable.Empty<StringNumber>();
-            }
-
-            int Min(int v1, int v2, int v3)
-            {
-                var min = Math.Min(v1, v2);
-                return Math.Min(min, v3);
-            }
-
-            int Max(StringNumber v1, StringNumber v2, int v)
-            {
-                int max;
-
-                if (v1 == null || v2 == null)
-                {
-                    max = 0;
-                }
-                else
-                {
-                    max = Math.Max(v1.ToInt32(), v2.ToInt32());
-                }
-
-                //Use v to ensure max always greater than 0
-                return max == 0 ? v : max;
-            }
-
-            var maxLength = Min(
-                Max(0, TotalVisible, Length),
-                Max(0, _maxButtons, Length),
-                Length);
-
-            if (Length <= maxLength)
-            {
-                return Range(1, Length);
-            }
-
-            var items = new List<StringNumber>();
-            var even = maxLength % 2 == 0 ? 1 : 0;
-            var left = Convert.ToInt32(Math.Floor(maxLength / 2M));
-            var right = Length - left + 1 + even;
-
-            if (Value > left && Value < right)
-            {
-                var firstItem = 1;
-                var lastItem = Length;
-                var start = Value - left + 2;
-                var end = Value + left - 2 - even;
-                StringNumber secondItem = start - 1 == firstItem + 1 ? 2 : "...";
-                StringNumber beforeLastItem = end + 1 == lastItem - 1 ? end + 1 : "...";
-
-                items.Add(firstItem);
-                items.Add(secondItem);
-                items.AddRange(Range(start, end));
-                items.Add(beforeLastItem);
-                items.Add(Length);
-
                 return items;
             }
-            else if (Value == left)
-            {
-                var end = Value + left - 1 - even;
 
-                items.AddRange(Range(1, end));
+            if (ComputedTotalVisible <= 1)
+            {
+                items.Add(Value);
+                return items;
+            }
+
+            if (Length <= ComputedTotalVisible)
+            {
+                items.AddRange(CreateRange(Length, start));
+                return items;
+            }
+
+            var even = ComputedTotalVisible % 2 == 0;
+            var middle = even ? ComputedTotalVisible / 2d : Math.Floor(ComputedTotalVisible / 2d);
+            var left = even ? middle : middle + 1;
+            var right = Length - middle;
+
+            if (left - Value >= 0)
+            {
+                items.AddRange(CreateRange(Math.Max(1, ComputedTotalVisible - 1), start));
                 items.Add("...");
                 items.Add(Length);
-
-                return items;
             }
-            else if (Value == right)
+            else if (Value - right >= (even ? 1 : 0))
             {
-                var start = Value - left + 1;
-                items.Add(1);
+                var rangeLength = ComputedTotalVisible - 1;
+                var rangeStart = Length - rangeLength + start;
+                items.Add(start);
                 items.Add("...");
-                items.AddRange(Range(start, Length));
-
-                return items;
+                items.AddRange(CreateRange(rangeLength, rangeStart));
             }
             else
             {
-                items.AddRange(Range(1, left));
+                var rangeLength = Math.Max(1, ComputedTotalVisible - 3);
+                var rangeStart = rangeLength == 1 ? Value : Value - Convert.ToInt32(Math.Ceiling(rangeLength / 2d)) + start;
+                items.Add(start);
                 items.Add("...");
-                items.AddRange(Range(right, Length));
-
-                return items;
+                items.AddRange(CreateRange(rangeLength, rangeStart));
+                items.Add("...");
+                items.Add(Length);
             }
-        }
 
-        protected static IEnumerable<StringNumber> Range(int from, int to)
-        {
-            from = from > 0 ? from : 1;
-            return Enumerable.Range(from,  to - from + 1).Select(r => (StringNumber)r);
+            return items;
         }
 
         public virtual async Task HandlePreviousAsync(MouseEventArgs args)

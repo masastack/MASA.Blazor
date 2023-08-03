@@ -1,10 +1,8 @@
-﻿#nullable enable
-
-namespace Masa.Blazor.Popup.Components;
+﻿namespace Masa.Blazor.Popup.Components;
 
 public class PopupComponentBase : BComponentBase
 {
-    [Inject] protected I18n? I18n { get; set; }
+    [Inject] protected I18n I18n { get; set; } = null!;
 
     [CascadingParameter] private ProviderItem? PopupItem { get; set; }
 
@@ -17,8 +15,12 @@ public class PopupComponentBase : BComponentBase
     {
         base.OnInitialized();
 
-        NextTick(() =>
+        NextTick(async () =>
         {
+            // ensure the transition animation could be invoked
+            // TODO: do not work in Confirm and Prompt, come back after the Transition component is refactored.
+            await Task.Delay(16);
+
             Visible = true;
             StateHasChanged();
         });
@@ -32,6 +34,7 @@ public class PopupComponentBase : BComponentBase
     {
         if (PopupItem != null)
         {
+            Visible = false;
             await Task.Delay(256);
             PopupItem.Discard(returnVal);
         }

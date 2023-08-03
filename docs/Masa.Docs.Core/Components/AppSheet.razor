@@ -1,17 +1,27 @@
-﻿<MSheet Class="overflow-hidden"
+﻿@attribute [JSCustomElement]
+
+<MSheet Class="overflow-hidden"
+        Dark="Dark"
         Outlined="@Outlined"
         Rounded="true"
+        Width="@Width"
         @attributes="@Attributes">
     @ChildContent
 </MSheet>
 
 @code {
+    
+    [Parameter]
+    public bool Dark { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
     public bool Outlined { get; set; } = true;
+
+    [Parameter]
+    public StringNumber? Width { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();

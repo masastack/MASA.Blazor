@@ -5,7 +5,7 @@
 {
     if (_type == null)
     {
-        <MAlert Type="AlertTypes.Error" Outlined>
+        <MAlert Type="AlertTypes.Error" Outlined Dark="Dark">
             The file "@File" doesn't exist.
         </MAlert>
     }
@@ -13,9 +13,10 @@
     {
         <MSheet Class="m-example"
                 Outlined
+                Dark="Dark"
                 Rounded="true">
             <div style="min-height: 52px">
-                <MSheet Class="pa-4" Rounded="true" Dark="_dark">
+                <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
                     @if (_type is not null)
                     {
                         <DynamicComponent Type="_type"></DynamicComponent>
@@ -44,30 +45,36 @@
 
                         <ExpandTransition>
                             <ShowTransitionElement Value="_expand">
-                                <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MItem>
-                                            <MButton Class="mr-2"
-                                                     IsActive="@context.Active"
-                                                     Text
-                                                     Color="primary"
-                                                     OnClick="@context.Toggle">
-                                                @item.Language
-                                            </MButton>
-                                        </MItem>
-                                    }
-                                </MItemGroup>
+                                
+                                <MButton Class="mr-2"
+                                         IsActive="true"
+                                         Text
+                                         Color="primary">
+                                    @_sections.Language
+                                </MButton>
+                                
+                                <MButton Class="mr-2"
+                                         Text
+                                         Color="primary" Style="float: right" OnClick="async ()=>await RunCode()">
+                                    Run
+                                 </MButton>
 
+                                 <MButton Class="mr-2"
+                                          Text
+                                          Color="primary" Style="float: right" OnClick="async ()=>await RestoreCode()">
+                                     Restore
+                                 </MButton>
+                                <MButton Class="mr-2"
+                                         Text
+                                          Color="primary" Style="float: right" OnClick="async ()=>await CopyCode()">
+                                     Copy code
+                                </MButton>
                                 <AppDivider />
 
                                 <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MWindowItem>
-                                            <Markup Code="@item.Code" Language="@item.Language" Rounded="false" />
-                                        </MWindowItem>
-                                    }
+                                    <MWindowItem>
+                                         <MMonacoEditor InitCompleteHandle="async() =>await InitCompleteHandle()" @ref=MonacoEditor Height="@("500px")" Value="@_sections.Code" EditorOptions="options"></MMonacoEditor>
+                                    </MWindowItem>
                                 </MWindow>
                             </ShowTransitionElement>
                         </ExpandTransition>
@@ -79,5 +86,11 @@
 }
 else
 {
-    <MSkeletonLoader MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
+    <MSkeletonLoader Dark="Dark" MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
 }
+
+<MOverlay Value="_load" ZIndex="7">
+    <div class="white--text text-h3">
+        Loading, just a moment...
+    </div>
+</MOverlay>

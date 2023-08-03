@@ -2,6 +2,9 @@
 {
     public partial class MBadge : BBadge, IBadge
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+        
         [Parameter]
         public bool Avatar { get; set; }
 
@@ -9,22 +12,23 @@
         public bool Bordered { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        [ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         [Parameter]
-        public StringNumber Content { get; set; }
+        public StringNumber? Content { get; set; }
 
         [Parameter]
         public bool Dot { get; set; }
 
         [Parameter]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
         [Parameter]
-        public StringNumber OffsetX { get; set; }
+        public StringNumber? OffsetX { get; set; }
 
         [Parameter]
-        public StringNumber OffsetY { get; set; }
+        public StringNumber? OffsetY { get; set; }
 
         [Parameter]
         public bool OverLap { get; set; }
@@ -33,6 +37,7 @@
         public bool Tile { get; set; }
 
         [Parameter]
+        [ApiDefaultValue("scale-rotate-transition")]
         public string Transition { get; set; } = "scale-rotate-transition";
 
         [Parameter]
@@ -42,18 +47,15 @@
         public bool Bottom { get; set; }
 
         [Parameter]
-        public bool Right { get; set; }
-
-        [Parameter]
-        public RenderFragment BadgeContent { get; set; }
+        public RenderFragment? BadgeContent { get; set; }
 
         private int Offset => OverLap ?
             (Dot ? 8 : 12) :
             (Dot ? 2 : 4);
 
-        private const string Auto = "auto";
+        private const string AUTO = "auto";
 
-        private string CalcPosition(StringNumber offset)
+        private string CalcPosition(StringNumber? offset)
         {
             var obj = offset != null ? offset.ToUnit() : $"{Offset}px";
 
@@ -64,26 +66,28 @@
 
         protected string ComputedYOffset => CalcPosition(OffsetY);
 
-        protected string ComputedBottom => Bottom ? Auto : ComputedYOffset;
+        protected string ComputedBottom => Bottom ? AUTO : ComputedYOffset;
 
-        protected string ComputedTop => Bottom ? ComputedYOffset : Auto;
+        protected string ComputedTop => Bottom ? ComputedYOffset : AUTO;
 
-        protected string ComputedLeft => Right ?
-            (Left ? ComputedXOffset : Auto) :
-            (Left ? Auto : ComputedXOffset);
+        protected string ComputedLeft => IsRtl ?
+            (Left ? ComputedXOffset : AUTO) :
+            (Left ? AUTO : ComputedXOffset);
 
-        protected string ComputedRight => Right ?
-            (Left ? Auto : ComputedXOffset) :
-            (!Left ? Auto : ComputedXOffset);
+        protected string ComputedRight => IsRtl ?
+            (Left ? AUTO : ComputedXOffset) :
+            (!Left ? AUTO : ComputedXOffset);
+
+        protected bool IsRtl => MasaBlazor.RTL;
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
 
             CssProvider
-                .Apply(cssBuiler =>
+                .Apply(cssBuilder =>
                 {
-                    cssBuiler
+                    cssBuilder
                         .Add("m-badge")
                         .AddIf("m-badge--avatar", () => Avatar)
                         .AddIf("m-badge--bordered", () => Bordered)

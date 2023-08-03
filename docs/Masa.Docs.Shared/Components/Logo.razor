@@ -5,7 +5,7 @@
    style="width: 100%; height:100%"
    href="/"
    @attributes="@Attributes">
-    <MImage Src="https://cdn.masastack.com/images/logo-h-en.svg"
+    <MImage Src="@($"https://cdn.masastack.com/images/logo-h-en{(IsDark ? "--dark" : "")}.png?x-oss-process=image/resize,w_180")"
             alt="@I18n.T("logo")"
             Class="shrink"
             MaxWidth="180"
@@ -15,7 +15,9 @@
 
 @code {
 
+    [CascadingParameter(Name = "IsDark")]
+    private bool IsDark { get; set; }
+    
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
-
 }

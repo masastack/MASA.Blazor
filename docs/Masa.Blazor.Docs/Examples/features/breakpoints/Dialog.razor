@@ -1,0 +1,46 @@
+﻿@inject MasaBlazor MasaBlazor
+@implements IDisposable
+
+<div class="text-center">
+    <MDialog Fullscreen="@MasaBlazor.Breakpoint.Mobile"
+             @bind-Value="_dialog"
+             ContentClass="white"
+             Width="@(MasaBlazor.Breakpoint.Mobile ? null : 300)">
+        <ActivatorContent>
+            <MButton Color="primary" @attributes="@context.Attrs">Open Dialog</MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <div class="d-flex align-center justify-center" style="min-height: 300px;height: 100%;">
+                <MButton Color="primary" OnClick="() => _dialog = false">Close Dialog</MButton>
+            </div>
+        </ChildContent>
+    </MDialog>
+</div>
+
+@code {
+
+    private bool _dialog;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    {
+        if (!e.MobileChanged)
+        {
+            return;
+        }
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+    }
+
+}

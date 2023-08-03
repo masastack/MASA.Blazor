@@ -1,7 +1,7 @@
 ---
 title: Editor
 desc: "Rich text editor based on [Quill](https://quilljs.com/) encapsulation"
-tag: "JsProxy"
+tag: "JS Proxy"
 ---
 
 ## Usage

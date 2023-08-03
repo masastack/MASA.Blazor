@@ -1,8 +1,8 @@
 ﻿{
   "en-US": {
     "props": {
-      "id": "Html document id.",
-      "class": "Html document class.",
+      "id": "Sets the DOM id on the component.",
+      "class": "Sets the DOM class on the component.",
       "color": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find a list of built-in classes on the [colors page](/blazor/styles-and-animations/colors).",
       "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
       "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/blazor/styles-and-animations/elevation).",
@@ -13,7 +13,7 @@
       "minHeight": "Sets the minimum height for the component.",
       "minWidth": "Sets the minimum width for the component.",
       "rounded": "Designates the `border-radius` applied to the component. You can find more information on the [Border Radius](/blazor/styles-and-animations/border-radius) page.",
-      "style": "Html document style",
+      "style": "Sets the inline style on the component.",
       "width": "Sets the width for the component.",
       "size": "Sets the height and width of the component.",
       "bottom": "Aligns the component towards the bottom.",
@@ -38,19 +38,18 @@
       "scrollTarget": "The amount of scroll distance down before `HideOnScroll` activates.",
       "scroll-threshold": "The amount of scroll distance down before `hideOnScroll` activates.",
       "src": "Image source. See [MImage](/blazor/components/images) for details.",
-      "required": "Required",
       "extended": "Use this prop to increase the height of the toolbar without using the `Extension` slot for adding content. May be used in conjunction with the `ExtensionHeight` prop, and any of the other props that affect the height of the toolbar, e.g. `Prominent`, `Dense`, etc., WITH THE EXCEPTION of `Height`.",
       "collapse": "Puts the toolbar into a collapsed state reducing its maximum width.",
       "extensionHeight": "Specify an explicit height for the `ExtensionContent` slot.",
       "disabled": "Disables the ability to open the component.",
       "fullscreen": "Changes layout for fullscreen display.",
       "hideOverlay": "Hides the display of the overlay.",
-      "link": "Designates that the component is a link. This is automatic when using the href or to prop.",
-      "routable": "routable",
-      "target": "Designates the target attribute. This should only be applied when using the **href** prop.",
+      "link": "Designates that the component is a link. This is automatic when using the `Href` prop.",
+      "routable": "Enable the feature of correlate with the route, which automatically highlights items when a route matches 'Href'.",
+      "target": "Designates the target attribute.",
       "backgroundColor": "Change the background color of the component.",
-      "exact": "Exactly match the link. Without this, ‘/’ will match every route. You can find more information about the [exact prop](https://router.vuejs.org/api/) on the vue-router documentation.",
-      "activeClass": "Configure the active CSS class applied when the link is active. You can find more information about the [active-class prop](https://router.vuejs.org/api/) on the vue-router documentation.",
+      "exact": "Exactly match the link.",
+      "activeClass": "Configure the active CSS class applied when the link is active.",
       "href": "Designates the component as anchor and applies the `Href` attribute.",
       "isActive": "Activate now.",
       "key": "Key",
@@ -104,6 +103,8 @@
       "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as [MIcon](/blazor/components/icons)",
       "readonly": "Puts input in readonly state",
       "reverse": "Reverses the input orientation",
+      "required": "The required rule built-in",
+      "requiredMessage": "The error message when the required rule is not satisfied.",
       "rules": "Accepts an array of functions that take an input value as an argument and return either true / false or a string with an error message",
       "searchInput": "Search value.",
       "shaped": "Round if `Outlined` and increase **border-radius** if `Filled`. Must be used with either `Outlined` or `Filled`",
@@ -124,24 +125,24 @@
       "closeDelay": "Milliseconds to wait before closing component.",
       "openDelay": "Milliseconds to wait before opening component.",
       "zIndex": "The z-index used for the component",
-      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
+      "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own."
     },
     "contents": {
       "childContent": "Default content",
-      "iconContent": "The slot used for the icon’s content.",
-      "actionsContent": "The slot used for the action’s content.",
+      "iconContent": "Content for the icon’s content",
+      "actionsContent": "Content for the action’s content",
       "appendContent": "Adds an item inside the input and after input content",
       "appendItemContent": "Adds an item after menu content",
       "appendOuterContent": "Adds an item outside the input and after input content",
       "counterContent": "counterContent",
       "itemContent": "Define a custom item appearance",
       "labelContent": "Replaces the default label",
-      "messageContent": "Customize the messages slot.",
+      "messageContent": "Content for customize the messages",
       "noDataContent": "Displayed when there are no filtered items",
       "prependContent": "Adds an item outside the input and before input content",
       "prependInnerContent": "Adds an item inside the input and before input content",
       "prependItemContent": "Adds an item before menu content",
-      "progressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)",
+      "progressContent": "Content for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)",
       "selectionContent": "Define a custom selection appearance"
     },
     "events": {
@@ -165,13 +166,13 @@
       "onSearchInputUpdate": "onSearchInputUpdate",
       "onSelectedItemUpdate": "onSelectedItemUpdate"
     },
-    "functions": {
+    "methods": {
     }
   },
   "zh-CN": {
     "props": {
-      "id": "Html document id.",
-      "class": "Html document class.",
+      "id": "设置组件上的DOM id。",
+      "class": "设置组件上的CSS类。",
       "color": "将指定的颜色应用于控件 - 它可以是材料颜色的名称（例如 `success` 或 `purple`）或 css 颜色（`#033` 或 `rgba(255, 0, 0, 0.5)`）。您可以在 [颜色页面](/blazor/styles-and-animations/colors) 上找到内置类的列表。",
       "dark": "将暗色主题变量应用到组件。你可以在 [暗色主题](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
       "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [海拔页面](/blazor/styles-and-animations/elevation) 浏览更多信息。",
@@ -182,7 +183,7 @@
       "minHeight": "设定组件的最小高度。",
       "minWidth": "设定组件的最小宽度。",
       "rounded": "对指定的组件应用 `border-radius` 样式。您可以在 [边框半径页面](/blazor/styles-and-animations/border-radius) 获取更多有关信息。",
-      "style": "Html document style",
+      "style": "将内联样式应用于组件。",
       "width": "设定组件的宽度。",
       "size": "设置组件的高度和宽度。",
       "bottom": "将组件向底部对齐。",
@@ -207,19 +208,18 @@
       "scrollTarget": "在 `HideOnScroll` 激活之前的滚动距离。",
       "scroll-threshold": "在 `HideOnScroll` 激活之前的滚动距离。",
       "src": "图像源。详情请参阅 [MImage](/blazor/components/images)",
-      "required": "必须的",
       "extended": "使用此道具可以增加工具栏的高度，而 不需要 使用 `ExtensionContent` 插槽来添加内容。可以与 `ExtensionHeight` 属性，以及其他会影响工具栏高度的其他属性，例如 `Prominent`, `Dense` 等配合使用，`Height` 除外。",
       "collapse": "将工具栏置于折叠状态，以减小其最大宽度。",
       "extensionHeight": "为 `ExtensionContent` 插槽指定一个明确的高度。",
       "disabled": "禁用打开组件的能力。",
       "fullscreen": "改变全屏显示的布局。",
       "hideOverlay": "隐藏遮罩层的显示.",
-      "link": "指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的。",
-      "routable": "routable",
-      "target": "指定 target 属性。只在使用 **href** 属性时应用。",
+      "link": "指定组件为链接。当使用`Href`这是自动的设置的。",
+      "routable": "启用路由联动的特性，路由与 `Href` 匹配时会自动高亮项。",
+      "target": "指定 target 属性。",
       "backgroundColor": "更改组件的背景颜色。",
-      "exact": "完全匹配链接。如果没有这个链接，'/' 将匹配每个路由。你能够在 vue-router 文档浏览更多 [exact prop](https://router.vuejs.org/api/)。",
-      "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [active-class prop](https://router.vuejs.org/api/)。",
+      "exact": "完全匹配链接。",
+      "activeClass": "配置在链接激活时应用的 CSS 类。",
       "href": "指定组件为锚点并应用 `Href` 属性。",
       "isActive": "受否激活。",
       "key": "Key",
@@ -273,6 +273,8 @@
       "prependInnerIcon": "在组件的输入中添加一个图标，使用与 [MIcon](/blazor/components/icons) 相同的语法",
       "readonly": "将输入设置为只读状态",
       "reverse": "反转输入方向",
+      "required": "内置的必填规则",
+      "requiredMessage": "当必填规则不满足时的错误消息",
       "rules": "接受一个委托数组，该数组接受一个输入值作为参数，并返回 true / false 或 a string 和一个错误消息",
       "searchInput": "搜索值",
       "shaped": "如果 `Outlined` 则为圆形，如果 `Filled` 则增加 **border-radius**。必须与 `Outlined` 或 `Filled` 一起使用",
@@ -293,7 +295,7 @@
       "closeDelay": "关闭组件前等待的毫秒数.",
       "openDelay": "打开组件前等待的毫秒数.",
       "zIndex": "用于组件的 z-index",
-      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
+      "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。"
     },
     "contents": {
       "childContent": "默认插槽",
@@ -334,7 +336,7 @@
       "onSearchInputUpdate": "onSearchInputUpdate",
       "onSelectedItemUpdate": "onSelectedItemUpdate"
     },
-    "functions": {
+    "methods": {
     }
   }
 }

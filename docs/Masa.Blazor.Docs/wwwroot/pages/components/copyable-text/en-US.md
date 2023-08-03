@@ -24,10 +24,12 @@ related:
 
 <masa-example file="Examples.components.copyable_text.Text"></masa-example>
 
-#### Text truncate
-
-<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>
-
 #### Tooltip
 
 <masa-example file="Examples.components.copyable_text.Tooltip"></masa-example>
+
+### Misc
+
+#### Text truncate
+
+<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>

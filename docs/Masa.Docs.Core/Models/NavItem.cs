@@ -24,26 +24,18 @@ public class NavItem : IDefaultItem<NavItem>
     public bool Divider { get; set; }
 
     public string? Href { get; set; }
+    
+    public bool Exact { get; set; }
 
     public string? Icon { get; set; }
 
-    public NavItemState State { get; set; }
+    public string? State { get; set; }
 
-    public NavItemTiling? Tiling { get; set; }
+    public string? StateBackgroundColor { get; set; }
+
+    public bool? Hidden { get; set; }
 
     public string? Segment => (Group ?? Title);
-}
 
-public enum NavItemTiling
-{
-    Visible,
-    Some,
-    Invisible
-}
-
-public enum NavItemState
-{
-    None,
-    New,
-    Update
+    public bool IsHidden => Hidden.HasValue && Hidden.Value && (Children != null && Children.All(c => c.IsHidden));
 }

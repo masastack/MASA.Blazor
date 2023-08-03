@@ -2,20 +2,8 @@
 {
     public class MIcon : BIcon, ISizeable
     {
-        /// <summary>
-        /// Attention! End with a space
-        /// </summary>
-        private static string[] s_arrFa5Prefix = new[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
-
-        private readonly Dictionary<string, string> _sizeMap = new()
-        {
-            { nameof(XSmall), "12px" },
-            { nameof(Small), "16px" },
-            { "Default", "24px" },
-            { nameof(Medium), "28px" },
-            { nameof(Large), "36px" },
-            { nameof(XLarge), "40px" },
-        };
+        [Inject]
+        private MasaBlazor? MasaBlazor { get; set; }
 
         /// <summary>
         /// 36px
@@ -44,11 +32,112 @@
         [Parameter]
         public bool IsActive { get; set; } = true;
 
-        public IDictionary<string, object> Attrs => Attributes;
+        private readonly Dictionary<string, string> _sizeMap = new()
+        {
+            { nameof(XSmall), "12px" },
+            { nameof(Small), "16px" },
+            { "Default", "24px" },
+            { nameof(Medium), "28px" },
+            { nameof(Large), "36px" },
+            { nameof(XLarge), "40px" },
+        };
+
+        public IDictionary<string, object?> Attrs => Attributes;
 
         public bool Medium => false;
 
-        public string GetSize()
+        private string? _iconCss;
+
+        protected override void InitIcon()
+        {
+            Icon? icon;
+
+            if (Icon != null)
+            {
+                icon = Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+            }
+            else
+            {
+                var textContent = ChildContent?.GetTextContent();
+                IconContent = textContent;
+
+                if (textContent is null)
+                {
+                    return;
+                }
+
+                if (textContent.StartsWith("$"))
+                {
+                    icon = MasaBlazor!.Icons.Aliases.GetIconOrDefault(textContent);
+                }
+                else
+                {
+                    icon = CheckIfSvg(textContent) ? new SvgPath(textContent) : textContent;
+                }
+            }
+
+            if (icon is null)
+            {
+                return;
+            }
+
+            if (icon.IsSvg)
+            {
+                ComputedIcon = icon;
+            }
+            else
+            {
+                (ComputedIcon, _iconCss) = ResolveIcon(icon.AsT0);
+            }
+        }
+
+        private(string? icon, string? css) ResolveIcon(string cssIcon)
+        {
+            var set = MasaBlazor!.Icons.DefaultSet;
+
+            var splits = cssIcon.Split(":");
+            var icon = splits[0];
+
+            if (splits.Length == 2)
+            {
+                set = splits[0] switch
+                {
+                    "mdi" => IconSet.MaterialDesignIcons,
+                    "md"  => IconSet.MaterialDesign,
+                    "fa"  => IconSet.FontAwesome,
+                    "fa4" => IconSet.FontAwesome4,
+                    _     => set
+                };
+                icon = splits[1];
+            }
+
+            string css;
+
+            if (MasaBlazor.Icons.Name != null)
+            {
+                css = MasaBlazor.Icons.Aliases.Custom?.Invoke(icon) ?? icon;
+                icon = null;
+            }
+            else
+            {
+                css = set switch
+                {
+                    IconSet.MaterialDesignIcons => $"mdi {icon}",
+                    IconSet.MaterialDesign      => "material-icons",
+                    _                           => icon
+                };
+
+                icon = set switch
+                {
+                    IconSet.MaterialDesign => icon,
+                    _                      => null
+                };
+            }
+
+            return (icon, css);
+        }
+
+        public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
             {
@@ -76,6 +165,7 @@
                 {
                     cssBuilder
                         .Add("m-icon")
+                        .AddIf(_iconCss, () => ComputedIcon is { IsSvg: false })
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
@@ -83,18 +173,6 @@
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
                         .AddTextColor(Color, () => IsActive);
-
-                    if (IconType == IconType.Webfont && Icon is not null)
-                    {
-                        cssBuilder.AddFirstIf(
-                            (() => Icon, () => s_arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
-                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-"))
-                        );
-                    }
-                    else if (IconType == IconType.WebfontNoPseudo)
-                    {
-                        cssBuilder.Add("material-icons");
-                    }
                 }, styleBuilder =>
                 {
                     styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);

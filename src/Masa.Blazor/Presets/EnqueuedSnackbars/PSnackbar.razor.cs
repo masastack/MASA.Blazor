@@ -1,12 +1,16 @@
-﻿#nullable enable
+﻿using BlazorComponent.Abstracts;
 
-namespace Masa.Blazor.Presets.EnqueuedSnackbars;
+namespace Masa.Blazor.Presets;
 
 public partial class PSnackbar
 {
     [CascadingParameter] private PEnqueuedSnackbars? EnqueuedSnacks { get; set; }
 
     #region parameters from MSnackbar
+
+    [Parameter] public bool Value { get; set; } = true;
+
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
 
     [Parameter] public string? Class { get; set; }
 
@@ -17,8 +21,6 @@ public partial class PSnackbar
     [Parameter] public bool Dark { get; set; }
 
     [Parameter] public StringNumber? Elevation { get; set; }
-
-    [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public bool Light { get; set; }
 
@@ -44,13 +46,21 @@ public partial class PSnackbar
 
     [Parameter] public StringNumber? Width { get; set; }
 
+    [Parameter] public bool Left { get; set; }
+
+    [Parameter] public bool Right { get; set; }
+
+    [Parameter] public bool Bottom { get; set; }
+
+    [Parameter] public bool Top { get; set; }
+
     #endregion
 
     [Parameter] public Guid EnqueueId { get; set; }
 
     [Parameter] public string? Title { get; set; }
 
-    [Parameter, EditorRequired] public string? Content { get; set; }
+    [Parameter] public string? Content { get; set; }
 
     [Parameter] public AlertTypes Type { get; set; }
 
@@ -58,12 +68,14 @@ public partial class PSnackbar
 
     [Parameter] public string? ActionText { get; set; }
 
-    [Parameter] public EventCallback OnAction { get; set; }
+    [Parameter] public Func<Task>? OnAction { get; set; }
+
+    [Parameter] public EventCallback OnClose { get; set; }
 
     [Parameter] public bool Closeable { get; set; }
 
-    private bool _visible = true;
     private bool _actionLoading;
+    private ComponentCssProvider? _cssProvider;
 
     private string? ComputedColor
     {
@@ -77,10 +89,27 @@ public partial class PSnackbar
             return Type switch
             {
                 AlertTypes.Success => "success",
-                AlertTypes.Info => "info",
+                AlertTypes.Info    => "info",
                 AlertTypes.Warning => "warning",
-                AlertTypes.Error => "error",
-                _ => null
+                AlertTypes.Error   => "error",
+                _                  => null
+            };
+        }
+    }
+
+    private string? IconColor => Text || Outlined ? ComputedColor : null;
+
+    private string? ComputedIcon
+    {
+        get
+        {
+            return Type switch
+            {
+                AlertTypes.Success => "$success",
+                AlertTypes.Error   => "$error",
+                AlertTypes.Info    => "$info",
+                AlertTypes.Warning => "$warning",
+                _                  => null
             };
         }
     }
@@ -96,18 +125,37 @@ public partial class PSnackbar
 
     private bool ComputedCloseable => EnqueuedSnacks?.Closeable ?? Closeable;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _cssProvider = new ComponentCssProvider(() => Class, () => Style)
+                       .Apply("wrapper", css =>
+                       {
+                           css.Add("m-alert__wrapper");
+                       })
+                       .Apply("icon", css =>
+                       {
+                           css.Add("m-alert__icon");
+                       })
+                       .Apply("title", css =>
+                       {
+                           css.Add("m-alert__title");
+                       });
+    }
+
     private async Task HandleOnAction()
     {
         _actionLoading = true;
 
-        if (OnAction.HasDelegate)
+        if (OnAction != null)
         {
-            await OnAction.InvokeAsync();
+            await OnAction();
         }
 
         _actionLoading = false;
 
-        HandleOnClose();
+        Value = false;
     }
 
     private async Task HandleOnClosed()
@@ -122,6 +170,8 @@ public partial class PSnackbar
 
     private void HandleOnClose()
     {
-        _visible = false;
+        Value = false;
+
+        _ = OnClose.InvokeAsync();
     }
 }

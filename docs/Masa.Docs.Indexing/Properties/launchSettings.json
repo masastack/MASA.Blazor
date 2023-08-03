@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Masa.Docs.Indexing": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "MASA_ALGOLIA_API_KEY": "",
+        "MASA_DOC_EXCLUDE_URLS": "",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

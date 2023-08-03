@@ -7,7 +7,7 @@ public class MarkdownItJSModule : JSModule
     }
 
     public async ValueTask<IJSObjectReference> Create(MarkdownItOptions options, bool enableHeaderSections = false,
-        MarkdownItAnchorOptions? anchorOptions = null, string scope = null)
+        MarkdownItAnchorOptions? anchorOptions = null, string? scope = null)
         => await InvokeAsync<IJSObjectReference>("create", options, enableHeaderSections, anchorOptions, scope);
 
     public async ValueTask<string> Parse(IJSObjectReference instance, string source)
@@ -29,7 +29,7 @@ public class MarkdownItJSModule : JSModule
     /// TODO: But there is a problem under WASM: https://github.com/dotnet/aspnetcore/issues/45799.
     /// </param>
     /// <returns>A <see cref="ValueTask{TResult}"/> including the markup string in html format</returns>
-    public async ValueTask<string> Highlight(string code, string language, bool streaming = false)
+    public async ValueTask<string> Highlight(string code, string? language, bool streaming = false)
     {
         if (streaming)
         {

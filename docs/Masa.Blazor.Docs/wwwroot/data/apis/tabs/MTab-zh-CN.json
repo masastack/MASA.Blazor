@@ -26,5 +26,5 @@
   "events": {
     "onClick": "点击事件"
   },
-  "functions": {}
+  "methods": {}
 }

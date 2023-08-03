@@ -13,11 +13,16 @@
     "tag": "Specify a custom tag used on the root element.",
     "text": "Applies the defined `color` to text and a low opacity background of the same.",
     "tile": "Removes the component's `border-radius`.",
+    "title": "Designates a title for the alert.",
     "transition": "Sets the component transition.",
     "type": "Specify a `success`, `info`, `warning` or `error` alert. Uses the contextual color and has a pre-defined icon.",
     "value": "Controls whether the component is visible or hidden."
   },
-  "contents": {},
+  "contents": {
+    "titleContent": "Content for the title of alert."
+  },
   "events": {},
-  "functions": {}
+  "methods": {
+    "toggleAsync": "Toggles the visibility of the alert."
+  }
 }

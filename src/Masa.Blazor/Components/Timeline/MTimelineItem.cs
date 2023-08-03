@@ -3,7 +3,8 @@
     public partial class MTimelineItem : BTimelineItem, IThemeable, ITimelineItem
     {
         [Parameter]
-        public string Color { get; set; } = "primary";
+        [ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         [Parameter]
         public bool FillDot { get; set; }
@@ -12,10 +13,10 @@
         public bool HideDot { get; set; }
 
         [Parameter]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
         [Parameter]
-        public string IconColor { get; set; }
+        public string? IconColor { get; set; }
 
         [Parameter]
         public bool Large { get; set; }
@@ -29,7 +30,6 @@
         [Parameter]
         public bool Small { get; set; }
 
-
         protected override void SetComponentClass()
         {
             var prefix = "m-timeline-item";
@@ -40,8 +40,8 @@
                     cssBuilder
                         .Add(prefix)
                         .AddIf($"{prefix}--fill-dot", () => FillDot)
-                        .AddIf($"{prefix}--before", () => BTimeline.Reverse ? Right : Left)
-                        .AddIf($"{prefix}--after", () => BTimeline.Reverse ? Left : Right)
+                        .AddIf($"{prefix}--before", () => BTimeline?.Reverse is true ? Right : Left)
+                        .AddIf($"{prefix}--after", () => BTimeline?.Reverse is true ? Left : Right)
                         .AddTheme(IsDark);
                 })
                 .Apply("body", cssBuilder =>

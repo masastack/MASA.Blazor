@@ -43,7 +43,7 @@ ExpansionPanels  扩展面板及其内容都可以使用 `disabled` 属性禁用
 
 #### 外部控制
 
-可以通过修改 `@bind-Value` 来从外部控制扩展面板。 它的值对应于当前打开的扩展面板索引（从0开始）。 如果使用 `multiple` 属性，则是一个包含打开项索引的数组。
+可以通过修改 `@bind-Values` 来从外部控制扩展面板。 它的值对应于当前打开的扩展面板索引（从0开始）。 如果使用 `multiple` 属性，则是一个包含打开项索引的数组。
 
 <masa-example file="Examples.components.expansion_panels.Model"></masa-example>
 

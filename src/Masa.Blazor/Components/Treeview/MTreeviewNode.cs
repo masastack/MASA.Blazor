@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTreeviewNode<TItem, TKey> : BTreeviewNode<TItem, TKey>
     {
@@ -11,13 +9,13 @@ namespace Masa.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string? ActiveClass { get; set; }
 
-        [Parameter]
-        public string SelectedColor { get; set; } = "accent";
+        [Parameter, ApiDefaultValue("accent")]
+        public string? SelectedColor { get; set; } = "accent";
 
-        [Parameter]
-        public string Color { get; set; } = "primary";
+        [Parameter, ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         protected override void SetComponentClass()
         {

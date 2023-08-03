@@ -8,18 +8,33 @@ public interface IDefaultItem<TItem>
 
     string? Href { get; set; }
 
+    bool Exact { get; set; }
+
     string? Icon { get; set; }
 
     string? Title { get; set; }
 
-    NavItemState State { get; set; }
-
-    StringNumber Value { get; set; }
+    string? State { get; set; }
+    
+    string? StateBackgroundColor { get; set; }
 
     List<TItem>? Children { get; }
 
     bool HasChildren()
     {
         return Children is not null && Children.Any();
+    }
+
+    string? Target
+    {
+        get
+        {
+            if (Href == null)
+            {
+                return null;
+            }
+
+            return Href.StartsWith("http") ? "_blank" : "_self";
+        }
     }
 }

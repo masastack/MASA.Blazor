@@ -1,4 +1,5 @@
-﻿@page "/{project}/components/{page}/{tab?}/{api?}"
+﻿@page "/blazor/components/{page}/{tab?}/{api?}"
+@page "/blazor/labs/{page}/{tab?}/{api?}"
 
 <MContainer Class="pa-4 pa-sm-6 pa-md-8"
             Fluid
@@ -34,7 +35,10 @@
         {
             <FadeTransition LeaveAbsolute>
                 <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
+                    <Apis @bind-Value="@CurrentApi"
+                          Data="@_apiData"
+                          GithubUri="@ApiGithubUri">
+                    </Apis>
                 </ShowTransitionElement>
                 <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
                     <DocumentMarkdownIt Source="@_md"
@@ -49,6 +53,6 @@
             </FadeTransition>
         }
 
-        <Contribute GithubUri="@($"https://github.com/BlazorComponent/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/components/{Page}/{Culture}.md")" />
+        <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />
     </MResponsive>
 </MContainer>

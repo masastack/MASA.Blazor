@@ -6,10 +6,12 @@
         public bool Disabled { get; set; }
 
         [Parameter]
-        public StringNumber Left { get; set; } = 0;
+        [ApiDefaultValue(0)]
+        public StringNumber? Left { get; set; } = 0;
 
         [Parameter]
-        public StringNumber Right { get; set; } = "auto";
+        [ApiDefaultValue("auto")]
+        public StringNumber? Right { get; set; } = "auto";
 
         [Parameter]
         public bool Absolute { get; set; }
@@ -18,7 +20,8 @@
         public bool Focused { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        [ApiDefaultValue("primary")]
+        public string? Color { get; set; } = "primary";
 
         [Parameter]
         public bool Value { get; set; }

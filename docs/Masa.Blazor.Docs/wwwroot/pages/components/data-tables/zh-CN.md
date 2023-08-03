@@ -74,13 +74,13 @@ related:
 
 #### 搜索
 
-使用 `FixedRight` 属性，可以默认固定最后一列。
+数据表格还提供了 `Search` 属性以过滤数据。
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
 #### 固定列
 
-数据表格还提供了 `Search` 属性以过滤数据。
+使用 `FixedRight` 属性，可以默认固定最后一列。
 
 <masa-example file="Examples.components.data_tables.Fixed"></masa-example>
 

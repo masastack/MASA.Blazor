@@ -5,16 +5,17 @@ namespace Masa.Blazor
     public class MBaiduPolygon : BaiduOverlayBase, IPolygon, IStroke, IFillable
     {
         [Parameter]
+        [EditorRequired]
         public IEnumerable<GeoPoint> Points
         {
-            get => GetValue<IEnumerable<GeoPoint>>();
+            get => GetValue<IEnumerable<GeoPoint>>() ?? Array.Empty<GeoPoint>();
             set => SetValue(value);
         }
 
         [Parameter]
-        public string StrokeColor
+        public string? StrokeColor
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
@@ -43,9 +44,9 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string FillColor
+        public string? FillColor
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 

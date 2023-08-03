@@ -6,5 +6,5 @@
     "onCopy": "OnCopy"
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

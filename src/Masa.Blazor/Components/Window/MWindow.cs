@@ -6,9 +6,11 @@ namespace Masa.Blazor
     public partial class MWindow : BWindow
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
 
-        public bool InternalReverse => MasaBlazor.RTL ? !Reverse : Reverse;
+        protected override bool RTL => MasaBlazor.RTL;
+
+        public bool InternalReverse => RTL ? !Reverse : Reverse;
 
         public string ComputedTransition
         {
@@ -29,8 +31,8 @@ namespace Masa.Blazor
             base.OnParametersSet();
 
             ActiveClass = "m-window-item--active";
-            PrevIcon ??= "mdi-chevron-left";
-            NextIcon ??= "mdi-chevron-right";
+            PrevIcon ??= "$prev";
+            NextIcon ??= "$next";
         }
 
         protected override void SetComponentClass()

@@ -17,5 +17,5 @@
     "loaderContent": "自定义加载器"
   },
   "events": {},
-  "functions": {}
+  "methods": {}
 }

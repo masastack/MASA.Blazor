@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components.Web;
-
 namespace Masa.Blazor
 {
     public partial class MSelectList<TItem, TItemValue, TValue> : BSelectList<TItem, TItemValue, TValue>, ISelectList<TItem, TItemValue, TValue>
@@ -14,21 +12,18 @@ namespace Masa.Blazor
         public bool NoFilter { get; set; }
 
         [Parameter]
-        public string SearchInput { get; set; }
+        public string? SearchInput { get; set; }
 
         [Parameter]
         public EventCallback<TItem> OnSelect { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
-        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+        public RenderFragment<SelectListItemProps<TItem>>? ItemContent { get; set; }
 
-        // [Parameter]
-        // public int SelectedIndex { get; set; }
-
-        protected string TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
+        protected string? TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
 
         protected override void SetComponentClass()
         {
@@ -51,11 +46,10 @@ namespace Masa.Blazor
                         attrs["aria-selected"] = value.ToString();
                         //TODO: id
                         attrs["role"] = "option";
-                        attrs[nameof(MListItem.Value)] = (StringNumber)value.ToString();
                         attrs[nameof(MListItem.ActiveClass)] = TileActiveClass;
                         attrs[nameof(MListItem.Ripple)] = true;
                         attrs[nameof(MListItem.IsActive)] = value;//TODO: remove this when MListItem been refactored
-
+                        
                         var items = HideSelected ? Items.Where(i => !SelectedItems.Contains(i)).ToList() : Items;
                         attrs[nameof(MListItem.Highlighted)] = items.IndexOf(item) == SelectedIndex;//TODO: remove this when MListItem been refactored
                     }
@@ -109,7 +103,7 @@ namespace Masa.Blazor
         protected (string, string, string) GetMaskedCharacters(string text)
         {
             var searchInput = (SearchInput ?? "").ToLowerInvariant();
-            var index = text.ToLowerInvariant().IndexOf(searchInput);
+            var index = text.ToLowerInvariant().IndexOf(searchInput, StringComparison.Ordinal);
 
             if (index == -1)
             {

@@ -1,24 +1,21 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using OneOf;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTimePicker : BTimePicker, ITimePicker
     {
         [Inject]
-        private I18n I18n { get; set; }
+        private I18n I18n { get; set; } = null!;
         
         [Parameter]
-        public string HeaderColor { get; set; }
+        public string? HeaderColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber? Elevation { get; set; }
 
         [Parameter]
         public bool Flat { get; set; }
@@ -33,9 +30,11 @@ namespace Masa.Blazor
         public bool Light { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; } = 290;
+        [ApiDefaultValue(290)]
+        public StringNumber? Width { get; set; } = 290;
 
         [Parameter]
+        [ApiDefaultValue(TimeFormat.AmPm)]
         public TimeFormat Format { get; set; } = TimeFormat.AmPm;
 
         [Parameter]
@@ -90,9 +89,9 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<TimeOnly?> OnChange { get; set; }
 
-        public string AmText { get; set; }
+        public string? AmText { get; set; }
 
-        public string PmText { get; set; }
+        public string? PmText { get; set; }
 
         public SelectingTimes Selecting { get; set; } = SelectingTimes.Hour;
 
@@ -187,7 +186,7 @@ namespace Masa.Blazor
 
                 if (Min == null && Max == null)
                 {
-                    return isMinuteAllowed ? cb : val => false;
+                    return isMinuteAllowed ? cb : _ => false;
                 }
 
                 var (minHour, minMinute, minSecond) = Min != null ? (Min.Value.Hour, Min.Value.Minute, Min.Value.Second) : (0, 0, 0);

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Masa.Blazor.Presets;
+﻿using Masa.Blazor.Presets;
 
 namespace Masa.Blazor.Popup;
 
@@ -33,4 +31,9 @@ public class PromptOptions
     public string? TitleClass { get; set; }
 
     public string? TitleStyle { get; set; }
+
+    /// <summary>
+    /// Rule to validate the input value.
+    /// </summary>
+    public Func<string, StringBoolean>? Rule { get; set; }
 }

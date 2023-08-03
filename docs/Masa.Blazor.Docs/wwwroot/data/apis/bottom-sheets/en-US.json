@@ -13,10 +13,10 @@
     "overlayScrimClass": "overlayScrimClass",
     "persistent": "Clicking outside of the element or pressing `esc` key will not deactivate it.",
     "scrollable": "When set to true, expects a [MCard](components/cards) and a [MCardText](components/cardTexts) component with a designated height. For more information, check out the [scrollable example.](components/dialogs/#scrollable)。",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](styles-and-animations/transitions) or one your own.",
+    "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own.",
     "value": "Controls whether the component is visible or hidden."
   },
   "contents": {},
   "events": {},
-  "functions": {}
+  "methods": {}
 }

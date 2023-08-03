@@ -27,7 +27,7 @@
     /// <example>/{category}/{title}</example>
     [EditorRequired]
     [Parameter]
-    public string Href { get; set; }
+    public string Href { get; set; } = null!;
 
     #region Unsupport hrefs
 
@@ -35,7 +35,6 @@
 
     readonly List<string> _unsupportedHrefs = new()
     {
-        "/blazor/features/theme",
         "/blazor/components/parallax",
         "/blazor/components/selection-controls",
         "/blazor/components/combobox"

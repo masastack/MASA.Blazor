@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MMarkdownIt : BDomComponentBase
 {
@@ -13,8 +11,7 @@ public partial class MMarkdownIt : BDomComponentBase
     [Parameter]
     public bool HeaderSections { get; set; }
 
-    [Parameter]
-    [EditorRequired]
+    [Parameter, EditorRequired]
     public string? Source { get; set; }
 
     [Parameter]
@@ -121,6 +118,9 @@ public partial class MMarkdownIt : BDomComponentBase
     [Parameter]
     public EventCallback<List<MarkdownItTocContent>?> OnTocParsed { get; set; }
 
+    [Parameter]
+    public EventCallback OnAfterRendered { get; set; }
+
     private string _mdHtml = string.Empty;
 
     private string? _prevSource;
@@ -204,12 +204,14 @@ public partial class MMarkdownIt : BDomComponentBase
         {
             var result = await MarkdownItJSModule.ParseAll(_markdownIt, Source);
 
+            if (result is null) return;
+
             if (OnFrontMatterParsed.HasDelegate)
             {
                 await OnFrontMatterParsed.InvokeAsync(result.FrontMatter);
             }
 
-            _mdHtml = result.MarkupContent;
+            _mdHtml = result.MarkupContent ?? string.Empty;
 
             if (OnTocParsed.HasDelegate)
             {
@@ -217,7 +219,15 @@ public partial class MMarkdownIt : BDomComponentBase
             }
         }
 
-        NextTick(() => MarkdownItJSModule.AfterRender(_markdownIt));
+        NextTick(async () =>
+        {
+            await MarkdownItJSModule.AfterRender(_markdownIt);
+
+            if (OnAfterRendered.HasDelegate)
+            {
+                await OnAfterRendered.InvokeAsync();
+            }
+        });
 
         StateHasChanged();
     }

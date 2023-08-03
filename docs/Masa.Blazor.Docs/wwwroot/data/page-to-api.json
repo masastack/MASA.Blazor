@@ -116,11 +116,7 @@
   "markdown-parsers": [
     "MMarkdownIt"
   ],
-  "syntax-highlights": [
-    "MHighlight"
-  ],
   "not-grouped": [
-    "PConfirm",
     "PPageHeader",
     "PSidebar"
   ],
@@ -143,6 +139,11 @@
   "timelines": [
     "MTimeline",
     "MTimelineItem"
+  ],
+  "toolbars": [
+    "MToolbar",
+    "MToolbarTitle",
+    "MToolbarItems"
   ],
   "page-tabs": [
     "PPageTabs",

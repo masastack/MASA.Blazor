@@ -3,10 +3,10 @@
     public partial class MTabsBar : MSlideGroup, IThemeable
     {
         [Parameter]
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         protected string ComputedColor
         {
@@ -27,9 +27,10 @@
                 .Merge(css =>
                 {
                     css.Add(prefix)
-                        .AddTheme(IsDark)
-                        .AddTextColor(ComputedColor)
-                        .AddBackgroundColor(BackgroundColor);
+                       .AddIf($"{prefix}--is-mobile", () => IsMobile)
+                       .AddTheme(IsDark)
+                       .AddTextColor(ComputedColor)
+                       .AddBackgroundColor(BackgroundColor);
                 }, style =>
                 {
                     style.AddTextColor(ComputedColor);

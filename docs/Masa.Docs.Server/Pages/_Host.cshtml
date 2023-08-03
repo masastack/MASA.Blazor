@@ -13,21 +13,23 @@
     <meta name="description" content="基于Material Design和BlazorComponent的交互能力提供标准的Blazor组件库。Provide standard blazor component library based on the interaction ability of material design and BlazorComponent" />
     <base href="~/" />
     <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
-    <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
     <link href="Masa.Docs.Server.styles.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/stack/css/standard.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-    <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/fontawesome/v6.4.0/css/all.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/fonts/roboto/roboto.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" rel="stylesheet">
-    <link href="https://cdn.masastack.com/npm/docsearch/docsearch.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/prism-themes/1.9.0/prism-material-dark.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/gridstack.js/7.1.0/gridstack.min.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/docsearch/v3/docsearch.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/gridstack.js/7.2.1/gridstack.min.css" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/prism/prism-material-dark-for-masa.css" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/prism/prism-line-highlight.min.css" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/css/docs--sm-and-down.css" rel="stylesheet" media="(max-width: 960px)">
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
@@ -44,23 +46,22 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
     <script src="_framework/blazor.server.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
-    <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/js/markdown-it-emoji.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/js/markdown-parser.js"></script>
+    <script src="https://cdn.masastack.com/npm/echarts/5.4.2/echarts.min.js"></script>
     <script src="_content/Masa.Docs.Shared/echarts/theme/vintage.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js"></script>
     <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
     <script src="_content/Masa.Docs.Shared/quill/quill-blot-formatter.min.js"></script>
-    <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
+    <script src="https://cdn.masastack.com/npm/docsearch/v3/docsearch.js"></script>
     <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="_content/Masa.Docs.Shared/prism/prism.min.js"></script>
     <script src="https://api.map.baidu.com/getscript?v=1.0&&type=webgl&ak=QahcSGCkRzIVXBkKhWHt3vGhNyYGdk3t"></script>
-    <script src="js/prism-razor-diff.min.js"></script>
-    <script src="js/prism-normalize-whitespace.min.js"></script>
     <script>
         var require = { paths: { 'vs': 'https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs' } };
     </script>

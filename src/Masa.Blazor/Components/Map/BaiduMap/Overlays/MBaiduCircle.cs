@@ -20,9 +20,9 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string StrokeColor
+        public string? StrokeColor
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
@@ -51,9 +51,9 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string FillColor
+        public string? FillColor
         {
-            get => GetValue<string>();
+            get => GetValue<string?>();
             set => SetValue(value);
         }
 
