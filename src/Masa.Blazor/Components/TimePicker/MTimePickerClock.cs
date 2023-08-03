@@ -302,7 +302,7 @@ namespace Masa.Blazor
                 })
                 .Apply("item", cssBuilder =>
                 {
-                    var value = cssBuilder.Index;
+                    var value = (int)cssBuilder.Data!;
                     var color = value == Value ? Color ?? "accent" : "";
                     cssBuilder
                         .Add("m-time-picker-clock__item")
@@ -311,7 +311,7 @@ namespace Masa.Blazor
                         .AddBackgroundColor(color);
                 }, styleBuilder =>
                 {
-                    var value = styleBuilder.Index;
+                    var value = (int)styleBuilder.Data!;
                     var (x, y) = GetPosition(value);
                     var color = value == Value ? Color ?? "accent" : "";
                     styleBuilder

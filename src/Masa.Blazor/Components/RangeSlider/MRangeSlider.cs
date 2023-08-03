@@ -206,7 +206,7 @@
                 })
                 .Apply("range-track-background", cssBuilder =>
                 {
-                    var index = cssBuilder.Index;
+                    var index = (int)cssBuilder.Data!;
                     cssBuilder
                         .AddIf("m-slider__track-background", () => index != 1 || IsDisabled)
                         .AddIf("m-slider__track-fill", () => index == 1 && !IsDisabled)
@@ -214,7 +214,7 @@
                         .AddBackgroundColor(index == 1 && !IsDisabled ? ComputedTrackFillColor : "");
                 }, styleBuilder =>
                 {
-                    var index = styleBuilder.Index;
+                    var index = (int)styleBuilder.Data!;
                     styleBuilder
                         .AddBackgroundColor(index != 1 || IsDisabled ? ComputedTrackColor : "")
                         .AddBackgroundColor(index == 1 && !IsDisabled ? ComputedTrackFillColor : "");
@@ -264,7 +264,7 @@
 
         protected override void GetThumbContainerStyles(StyleBuilder styleBuilder)
         {
-            var index = styleBuilder.Index;
+            var index = (int)(styleBuilder.Data ?? 0);
 
             var direction = Vertical ? "top" : "left";
             var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
