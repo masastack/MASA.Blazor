@@ -4,11 +4,15 @@ namespace Masa.Blazor;
 
 public partial class MDigitalClock<TValue> : BDomComponentBase
 {
-    [Parameter]
-    public string? Color { get; set; }
+    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedHours { get; set; }
 
-    [Parameter]
-    public bool Disabled { get; set; }
+    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedMinutes { get; set; }
+
+    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedSeconds { get; set; }
+
+    [Parameter] public string? Color { get; set; }
+
+    [Parameter] public bool Disabled { get; set; }
 
     [Parameter]
     [ApiDefaultValue(TimeFormat.AmPm)]
@@ -26,6 +30,12 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     public int MinuteStep { get; set; } = 1;
 
     [Parameter]
+    public TimeOnly? Max { get; set; }
+
+    [Parameter]
+    public TimeOnly? Min { get; set; }
+
+    [Parameter]
     public bool Readonly { get; set; }
 
     [Parameter]
@@ -36,8 +46,7 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     [ApiDefaultValue(1)]
     public int SecondStep { get; set; } = 1;
 
-    [Parameter]
-    public bool UseSeconds { get; set; }
+    [Parameter] public bool UseSeconds { get; set; }
 
     [Parameter]
     public TValue? Value
@@ -46,17 +55,13 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
         set => SetValue(value);
     }
 
-    [Parameter]
-    public bool Light { get; set; }
+    [Parameter] public bool Light { get; set; }
 
-    [Parameter]
-    public bool Dark { get; set; }
+    [Parameter] public bool Dark { get; set; }
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
-    [Parameter]
-    public EventCallback<TValue?> ValueChanged { get; set; }
+    [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
     private Block Block => new("m-digital-clock");
 
@@ -115,6 +120,18 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     private string ActiveItemClass => _activeItemClass ??= Block.Element("item").Modifier("active").Build().Split(" ").Last();
 
     private bool IsRipple => !Disabled && !Readonly && Ripple;
+
+    private Func<int, bool>? IsAllowedHour24Callback
+        => TimeHelper.IsAllowedHour24(AllowedHours, Max, Min);
+
+    private Func<int, bool>? IsAllowedMinuteCallback
+        => TimeHelper.IsAllowedMinute(IsAllowedHour24Callback, AllowedMinutes, Max, Min, Hour);
+
+    private Func<int, bool>? IsAllowedSecondCallback
+        => TimeHelper.IsAllowedSecond(IsAllowedHour24Callback, IsAllowedMinuteCallback, AllowedSeconds, Max, Min, Hour, Minute);
+
+    private Func<int, bool>? IsAllowedHourCallback
+        => TimeHelper.IsAllowedHourAmPm(IsAllowedHour24Callback, Format, _timePeriod);
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -184,11 +201,11 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     /// <param name="hour">value in 12 or 24 hour format</param>
     private async Task HandleOnHourClick(int hour)
     {
-        var formatHour = Format == TimeFormat.AmPm
+        var hour24 = Format == TimeFormat.AmPm
             ? TimeHelper.Convert12To24(hour, _timePeriod)
             : hour;
 
-        await OnInternalTimeClick(formatHour, Minute ?? 0, Second ?? 0);
+        await OnInternalTimeClick(hour24, Minute ?? 0, Second ?? 0);
     }
 
     private async Task HandleOnMinuteClick(int minute)
@@ -203,9 +220,18 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
     private async Task OnInternalTimeClick(int hour, int minute, int second)
     {
-        var time = new TimeOnly(hour, minute, second).ToString("O");
+        var time = new TimeOnly(hour, minute, second);
 
-        if (BindConverter.TryConvertTo<TValue>(time, CultureInfo.InvariantCulture, out var value))
+        if (Max.HasValue && time > Max.Value)
+        {
+            time = Max.Value;
+        }
+        else if (Min.HasValue && time < Min.Value)
+        {
+            time = Min.Value;
+        }
+
+        if (BindConverter.TryConvertTo<TValue>(time.ToString("O"), CultureInfo.InvariantCulture, out var value))
         {
             if (ValueChanged.HasDelegate)
             {

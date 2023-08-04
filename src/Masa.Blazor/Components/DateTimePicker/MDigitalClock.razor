@@ -3,7 +3,7 @@
 @using BemIt
 @inherits BDomComponentBase
 
-<div class="@Block.Modifier(Disabled, Readonly).Add(Format).Add(UseSeconds).AddTheme(IsDark).Add(Class)"
+<div class="@Block.Modifier(Disabled, Readonly).Add(Format, "format").Add(UseSeconds).AddTheme(IsDark).AddClass("m-card", Class)"
      style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())">
     <ul class="@Block.Element("items")" @ref="@_hoursRef">
         @for (var i = 0; i < (Format == TimeFormat.AmPm ? 12 : 24); i = i + HourStep)
@@ -26,20 +26,19 @@
                 isActive = ComputedHour == i;
             }
 
-            var index = i;
 
-            @ItemRenderFragment(index, isActive, HandleOnHourClick, h => TimeHelper.FormatAmHour(h, Format))
+            @ItemRenderFragment(i, isActive, IsAllowedHourCallback, HandleOnHourClick, h => TimeHelper.FormatAmHour(h, Format))
         }
     </ul>
 
     <ul class="@Block.Element("items")" @ref="@_minutesRef">
-        @ItemsRenderFragment(60, MinuteStep, Minute, HandleOnMinuteClick)
+        @ItemsRenderFragment(60, MinuteStep, Minute, IsAllowedMinuteCallback, HandleOnMinuteClick)
     </ul>
 
     @if (UseSeconds)
     {
         <ul class="@Block.Element("items")" @ref="@_secondsRef">
-            @ItemsRenderFragment(60, SecondStep, Second, HandleOnSecondClick)
+            @ItemsRenderFragment(60, SecondStep, Second, IsAllowedSecondCallback, HandleOnSecondClick)
         </ul>
     }
 
@@ -54,20 +53,20 @@
 
 @code {
 
-    private RenderFragment ItemsRenderFragment(int count, int step, int? current, Func<int, Task> onClick) => __builder =>
+    private RenderFragment ItemsRenderFragment(int count, int step, int? current, Func<int, bool>? isAllowedCb, Func<int, Task> onClick) => __builder =>
     {
         @for (var i = 0; i < count; i = i + step)
         {
             var isActive = current == i;
             var index = i;
 
-            @ItemRenderFragment(index, isActive, onClick)
+            @ItemRenderFragment(index, isActive, isAllowedCb, onClick)
         }
     };
 
-    private RenderFragment ItemRenderFragment(int index, bool active, Func<int, Task> onClick, Func<int, string>? format = null) => __builder =>
+    private RenderFragment ItemRenderFragment(int index, bool active, Func<int, bool>? isAllowedCb, Func<int, Task> onClick, Func<int, string>? format = null) => __builder =>
     {
-        <li class="@Block.Element("item").Modifier("active", active)"
+        <li class="@Block.Element("item").Modifier(active).Add("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
             @onclick="() => onClick(index)">
             @ItemContentRenderFragment(format?.Invoke(index) ?? index.ToString("00"), active)
         </li>
@@ -84,7 +83,7 @@
     {
         var active = _timePeriod == period;
 
-        <li class="@Block.Element("item").Modifier("active", active)" @onclick="() => OnPeriodClick(period)">
+        <li class="@Block.Element("item").Modifier(active)" @onclick="() => OnPeriodClick(period)">
             @ItemContentRenderFragment(period == TimePeriod.Am ? "AM" : "PM", active)
         </li>
     };

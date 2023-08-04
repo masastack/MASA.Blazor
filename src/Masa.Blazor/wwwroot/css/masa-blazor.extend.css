@@ -957,6 +957,8 @@ input[type=number] {
     font-size: 34px;
 }
 
+/* DateDigitalClockPicker */
+
 .m-date-digital-clock-picker__view .m-digital-clock {
     padding: 4px 0;
 }
@@ -969,24 +971,39 @@ input[type=number] {
     font-size: 16px;
 }
 
+/* DateDigitalClockCompactPicker */
+
 .m-date-digital-clock-compact-picker__view {
     display: inline-flex;
     flex-direction: column;
     width: 290px;
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock__items, .m-date-digital-clock-compact-picker__view .m-digital-clock__item {
-    width: calc(290px / 4);
+.m-date-digital-clock-compact-picker__view .m-digital-clock {
+    justify-content: center;
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock__items, .m-date-digital-clock-compact-picker__view .m-digital-clock__item {
+.m-date-digital-clock-compact-picker__view .m-digital-clock .m-digital-clock__items,
+.m-date-digital-clock-compact-picker__view .m-digital-clock .m-digital-clock__item {
+    width: calc(290px / 2);
+}
+
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__items,
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__item,
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__item {
     width: calc(290px / 3);
+}
+
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__item {
+    width: calc(290px / 4);
 }
 
 /* DigitalClock */
 
 .m-digital-clock {
-    display: flex;
+    display: inline-flex;
     height: 238px;
 }
 
@@ -998,11 +1015,16 @@ input[type=number] {
     position: relative;
     scroll-behavior: smooth;
     width: 56px;
-    border-right: 1px solid rgba(0,0,0,.12);
+    border-right-style: solid;
+    border-right-width: thin;
 }
 
-.m-digital-clock__items:not(:first-of-type) {
-    margin-left: -1px;
+.theme--light.m-digital-clock .m-digital-clock__items {
+    border-right-color: rgba(0,0,0,.12);
+}
+
+.theme--dark.m-digital-clock .m-digital-clock__items {
+    border-right-color: rgba(255,255,255,.12);
 }
 
 .m-digital-clock__items:last-of-type {
@@ -1061,20 +1083,36 @@ input[type=number] {
     transition: .3s cubic-bezier(.25, .8, .5, 1);
 }
 
-.theme--light.m-digital-clock .m-digital-clock__item.m-digital-clock__item--active {
-    color: #FFFFFF;
-}
-
-.theme--dark.m-digital-clock .m-digital-clock__item.m-digital-clock__item--active {
+.theme--light.m-digital-clock .m-digital-clock__item--active .m-digital-clock__item-content {
     color: rgba(0, 0, 0, 0.87);
+    background-color: #e4e4e4;
 }
 
-.theme--light.m-digital-clock--disabled .m-digital-clock__item {
+.theme--dark.m-digital-clock .m-digital-clock__item--active .m-digital-clock__item-content {
+    color: #FFFFFF;
+    background-color: #545454;
+}
+
+.m-digital-clock__item--active .m-digital-clock__item-content.accent,
+.m-digital-clock__item--active .m-digital-clock__item-content.error,
+.m-digital-clock__item--active .m-digital-clock__item-content.info,
+.m-digital-clock__item--active .m-digital-clock__item-content.primary,
+.m-digital-clock__item--active .m-digital-clock__item-content.secondary,
+.m-digital-clock__item--active .m-digital-clock__item-content.success, 
+.m-digital-clock__item--active .m-digital-clock__item-content.warning {
+    color: #FFFFFF !important;
+}
+
+.theme--light.m-digital-clock .m-digital-clock__item--disabled {
     color: rgba(0, 0, 0, 0.38);
+    pointer-events: none;
+    tab-index: -1;
 }
 
-.theme--dark.m-digital-clock--disabled .m-digital-clock__item {
+.theme--dark.m-digital-clock .m-digital-clock__item--disabled {
     color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    tab-index: -1;
 }
 
 .theme--light.m-digital-clock .m-digital-clock__item-content:hover::before {
