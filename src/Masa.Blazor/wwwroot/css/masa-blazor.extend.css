@@ -924,6 +924,12 @@ input[type=number] {
 
 .m-date-time-picker {
     min-width: auto !important;
+    width: auto;
+}
+
+.m-date-time-picker__view--compact {
+    display: inline-flex;
+    flex-direction: column;
 }
 
 .m-date-time-picker__actions {
@@ -973,30 +979,30 @@ input[type=number] {
 
 /* DateDigitalClockCompactPicker */
 
-.m-date-digital-clock-compact-picker__view {
+.m-date-time-picker__view--has-digital-clock {
     display: inline-flex;
     flex-direction: column;
     width: 290px;
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock {
+.m-date-time-picker__view--has-digital-clock .m-digital-clock {
     justify-content: center;
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock .m-digital-clock__items,
-.m-date-digital-clock-compact-picker__view .m-digital-clock .m-digital-clock__item {
+.m-date-time-picker__view--has-digital-clock .m-digital-clock .m-digital-clock__items,
+.m-date-time-picker__view--has-digital-clock .m-digital-clock .m-digital-clock__item {
     width: calc(290px / 2);
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__items,
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__items,
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__item,
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__item {
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__items,
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__item,
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__item {
     width: calc(290px / 3);
 }
 
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__items,
-.m-date-digital-clock-compact-picker__view .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__item {
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-time-picker__view--has-digital-clock .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__item {
     width: calc(290px / 4);
 }
 

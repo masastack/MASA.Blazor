@@ -3,52 +3,117 @@
 @inherits PDateTimePickerView<TValue>
 @inject I18n I18n
 
-<MMenu Value="_menu"
-       ValueChanged="OnMenuChanged"
-       CloseOnContentClick="false"
-       OffsetY
-       NudgeBottom="1"
-       ActivatorContent="@ActivatorContent"
-       ContentClass="m-date-time-picker">
-    <ChildContent>
-        <PDateTimePickerView @bind-Value="_internalDateTime"
-                             ActivePicker="@ActiveDatePicker"
-                             AllowedDates="@AllowedDates"
-                             AllowedHours="@AllowedHours"
-                             AllowedMinutes="@AllowedMinutes"
-                             AllowedSeconds="@AllowedSeconds"
-                             AmPmInTitle="@AmPmInTitle"
-                             Color="@Color"
-                             DayFormat="@DayFormat"
-                             Disabled="@Disabled"
-                             FirstDayOfWeek="@FirstDayOfWeek"
-                             TimeFormat="@TimeFormat"
-                             HeaderDateFormat="@HeaderDateFormat"
-                             HeaderColor="@HeaderColor"
-                             Locale="@Locale"
-                             Max="@Max"
-                             Min="@Min"
-                             MonthFormat="@MonthFormat"
-                             NoTitle="@NoTitle"
-                             NextIcon="@NextIcon"
-                             PrevIcon="@PrevIcon"
-                             Reactive="@Reactive"
-                             Readonly="@Reactive"
-                             Scrollable="@Scrollable"
-                             ShowAdjacentMonths="@ShowAdjacentMonths"
-                             ShowCurrent="@ShowCurrent"
-                             ShowWeek="@ShowWeek"
-                             TitleDateFormat="@TitleDateFormat"
-                             UseSeconds="@UseSeconds"
-                             WeekdayFormat="@WeekdayFormat"
-                             YearFormat="@YearFormat"
-                             YearIcon="@YearIcon"
-                             Dark="Dark"
-                             Light="@Light">
-        </PDateTimePickerView>
+@if (Dialog)
+{
+    <MDialog Value="_menu"
+             ValueChanged="OnMenuChanged"
+             ActivatorContent="@ActivatorContent"
+             ContentClass="@BasePickerBlock.Build()">
+        <ChildContent>
+            @ViewContentRenderFragment()
+            @ActionsContentRenderFragment()
+        </ChildContent>
+    </MDialog>
+}
+else
+{
+    <MMenu Value="_menu"
+           ValueChanged="OnMenuChanged"
+           CloseOnContentClick="false"
+           OffsetY
+           NudgeBottom="1"
+           ActivatorContent="@ActivatorContent"
+           ContentClass="@BasePickerBlock.Build()">
+        <ChildContent>
+            @ViewContentRenderFragment()
+            @ActionsContentRenderFragment()
+        </ChildContent>
+    </MMenu>
+}
+
+@code {
+
+    private RenderFragment ViewContentRenderFragment() => __builder =>
+    {
+        @if (Compact)
+        {
+            <PDateTimeCompactPickerView @bind-Value="_internalDateTime"
+                                        ActiveDatePicker="@ActiveDatePicker"
+                                        AllowedDates="@AllowedDates"
+                                        AllowedHours="@AllowedHours"
+                                        AllowedMinutes="@AllowedMinutes"
+                                        AllowedSeconds="@AllowedSeconds"
+                                        Color="@Color"
+                                        DayFormat="@DayFormat"
+                                        Disabled="@Disabled"
+                                        FirstDayOfWeek="@FirstDayOfWeek"
+                                        TimeFormat="@TimeFormat"
+                                        Locale="@Locale"
+                                        Max="@Max"
+                                        Min="@Min"
+                                        MonthFormat="@MonthFormat"
+                                        NextIcon="@NextIcon"
+                                        PrevIcon="@PrevIcon"
+                                        Reactive="@Reactive"
+                                        Readonly="@Reactive"
+                                        Scrollable="@Scrollable"
+                                        ShowAdjacentMonths="@ShowAdjacentMonths"
+                                        ShowCurrent="@ShowCurrent"
+                                        ShowWeek="@ShowWeek"
+                                        Transition="@TabItemTransition"
+                                        UseSeconds="@UseSeconds"
+                                        WeekdayFormat="@WeekdayFormat"
+                                        YearFormat="@YearFormat"
+                                        YearIcon="@YearIcon"
+                                        Dark="Dark"
+                                        Light="@Light">
+            </PDateTimeCompactPickerView>
+        }
+        else
+        {
+            <PDateTimePickerView @bind-Value="_internalDateTime"
+                                 ActiveDatePicker="@ActiveDatePicker"
+                                 AllowedDates="@AllowedDates"
+                                 AllowedHours="@AllowedHours"
+                                 AllowedMinutes="@AllowedMinutes"
+                                 AllowedSeconds="@AllowedSeconds"
+                                 AmPmInTitle="@AmPmInTitle"
+                                 Color="@Color"
+                                 DayFormat="@DayFormat"
+                                 Disabled="@Disabled"
+                                 FirstDayOfWeek="@FirstDayOfWeek"
+                                 TimeFormat="@TimeFormat"
+                                 HeaderDateFormat="@HeaderDateFormat"
+                                 HeaderColor="@HeaderColor"
+                                 Locale="@Locale"
+                                 Max="@Max"
+                                 Min="@Min"
+                                 MonthFormat="@MonthFormat"
+                                 NoTitle="@NoTitle"
+                                 NextIcon="@NextIcon"
+                                 PrevIcon="@PrevIcon"
+                                 Reactive="@Reactive"
+                                 Readonly="@Reactive"
+                                 Scrollable="@Scrollable"
+                                 ShowAdjacentMonths="@ShowAdjacentMonths"
+                                 ShowCurrent="@ShowCurrent"
+                                 ShowWeek="@ShowWeek"
+                                 TitleDateFormat="@TitleDateFormat"
+                                 UseSeconds="@UseSeconds"
+                                 WeekdayFormat="@WeekdayFormat"
+                                 YearFormat="@YearFormat"
+                                 YearIcon="@YearIcon"
+                                 Dark="Dark"
+                                 Light="@Light">
+            </PDateTimePickerView>
+        }
+    };
+
+    private RenderFragment ActionsContentRenderFragment() => __builder =>
+    {
         <MDivider />
-        <div class="m-date-time-picker__actions">
-            <MButton Color="@(Color ?? "primary")"
+        <div class="@BasePickerBlock.Element("actions")">
+            <MButton Color="primary"
                      Text
                      OnClick="OnConfirm"
                      Dark="@Dark"
@@ -56,32 +121,6 @@
                 @I18n.T("$masaBlazor.ok")
             </MButton>
         </div>
-    </ChildContent>
-</MMenu>
-
-@code {
-
-    [Parameter]
-    public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
-
-    private bool _menu;
-
-    private TValue? _internalDateTime;
-
-    private void OnMenuChanged(bool val)
-    {
-        _menu = val;
-
-        if (_menu)
-        {
-            _internalDateTime = Value;
-        }
-    }
-
-    private async Task OnConfirm()
-    {
-        _menu = false;
-        await ValueChanged.InvokeAsync(_internalDateTime);
-    }
+    };
 
 }

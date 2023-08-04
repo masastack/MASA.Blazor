@@ -2,7 +2,7 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="@BasePickerBlock.Element("view") @Block.Element("view")">
+<div class="@BasePickerBlock.Element("view").Modifier("compact").Add("has-digital-clock")">
     <MTabs @bind-Value="_tabValue" FixedTabs>
         <MTab Value="@DATE" Ripple="false">
             @if (InternalDate.HasValue)

@@ -9,7 +9,7 @@
        OffsetY
        NudgeBottom="1"
        ActivatorContent="@ActivatorContent"
-       ContentClass="@Block.Add("m-date-time-picker").Build()">
+       ContentClass="@BasePickerBlock.AddClass(Block.Build()).Build()">
     <ChildContent>
         <PDateDigitalClockPickerView @bind-Value="_internalDateTime"
                                      AllowedDates="@AllowedDates"
@@ -39,8 +39,9 @@
                                      YearIcon="@YearIcon"
                                      Dark="Dark"
                                      Light="@Light">
-        </PDateDigitalClockPickerView><MDivider />
-        <div class="m-date-time-picker__actions">
+        </PDateDigitalClockPickerView>
+        <MDivider />
+        <div class="@BasePickerBlock.Element("actions")">
             <MButton Color="primary"
                      Text
                      OnClick="OnConfirm"

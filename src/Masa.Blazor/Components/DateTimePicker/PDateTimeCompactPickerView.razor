@@ -2,7 +2,7 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="d-inline-flex flex-column">
+<div class="@BasePickerBlock.Element("view").Modifier("compact")">
     <MTabs @bind-Value="_tabValue" FixedTabs>
         <MTab Value="@DATE" Ripple="false">
             @if (InternalDate.HasValue)
@@ -44,8 +44,8 @@
             }
         </MTab>
     </MTabs>
-    <MWindow Value="_tabValue">
-        <MWindowItem Value="DATE" Eager Transition="@Transition">
+    <MTabsItems Value="_tabValue">
+        <MTabItem Value="DATE" Eager Transition="@Transition">
             <MDatePicker Value="InternalDate"
                          ValueChanged="DateChanged"
                          TValue="DateOnly?"
@@ -75,8 +75,8 @@
                          Light="@Light"
                          @ref="_datePicker">
             </MDatePicker>
-        </MWindowItem>
-        <MWindowItem Value="TIME" Eager Transition="@Transition">
+        </MTabItem>
+        <MTabItem Value="TIME" Eager Transition="@Transition">
             <MTimePicker Value="InternalTime"
                          ValueChanged="TimeChanged"
                          AllowedHours="@AllowedHours"
@@ -112,6 +112,6 @@
                     <MIcon>$next</MIcon>
                 </MButton>
             </span>
-        </MWindowItem>
-    </MWindow>
+        </MTabItem>
+    </MTabsItems>
 </div>

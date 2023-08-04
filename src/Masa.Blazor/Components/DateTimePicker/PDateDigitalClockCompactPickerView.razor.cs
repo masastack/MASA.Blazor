@@ -18,8 +18,6 @@ public partial class PDateDigitalClockCompactPickerView<TValue> : PDateTimePicke
 
     private TimePickerType _timeActivePicker = TimePickerType.Hour;
     
-    private Block Block => new("m-date-digital-clock-compact-picker");
-
     private string? DateTitle
     {
         get
