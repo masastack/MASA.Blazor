@@ -5,14 +5,14 @@
 <h1>Test your code here! @_date</h1>
 
 time: @(time?.ToString("T"))
-<MDigitalClock TValue="TimeOnly?" Disabled Color="primary" Ripple="false" @bind-Value="time"></MDigitalClock>
+<MDigitalClock TValue="TimeOnly?" Min="new TimeOnly(9, 30)" Max="new TimeOnly(15, 0)" @bind-Value="time"></MDigitalClock>
 
 <PDateDigitalClockPickerView @bind-Value="_date" UseSeconds="false">
 </PDateDigitalClockPickerView>
 
 <MDivider Class="my-2"></MDivider>
 
-<PDateDigitalClockCompactPickerView @bind-Value="_date" UseSeconds="false">
+<PDateDigitalClockCompactPickerView @bind-Value="_date" TimeFormat="TimeFormat.Hr24">
 </PDateDigitalClockCompactPickerView>
 
 <MDivider Class="my-2"></MDivider>
@@ -27,6 +27,7 @@ time: @(time?.ToString("T"))
 
 @code {
 
+    private Func<int, bool> _allowedHours = v => v % 2 != 0;
     // private TimeOnly? time;
     private TimeOnly? time = TimeOnly.FromDateTime(DateTime.Now);
 
