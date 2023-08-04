@@ -122,102 +122,14 @@
 
         public bool IsAmPm => Format == TimeFormat.AmPm;
 
-        protected Func<int, bool> IsAllowedHourCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
+        protected Func<int, bool>? IsAllowedHourCb
+            => TimeHelper.IsAllowedHour24(AllowedHours, Max, Min);
 
-                if (AllowedHours.IsT1)
-                {
-                    cb = val => AllowedHours.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedHours.AsT0;
-                }
+        protected Func<int, bool>? IsAllowedMinuteCb
+            => TimeHelper.IsAllowedMinute(IsAllowedHourCb, AllowedMinutes, Max, Min, InputHour);
 
-                if (Min == null && Max == null)
-                {
-                    return cb;
-                }
-
-                var minHour = Min != null ? Min.Value.Hour : 0;
-                var maxHour = Max != null ? Max.Value.Hour : 23;
-
-                return val => val >= minHour && val <= maxHour && (cb == null || cb(val));
-            }
-        }
-
-        protected Func<int, bool> IsAllowedMinuteCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
-
-                var isHourAllowed = IsAllowedHourCb == null || InputHour == null || IsAllowedHourCb(InputHour.Value);
-                if (AllowedMinutes.IsT1)
-                {
-                    cb = val => AllowedMinutes.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedMinutes.AsT0;
-                }
-
-                if (Min == null && Max == null)
-                {
-                    return isHourAllowed ? cb : val => false;
-                }
-
-                var (minHour, minMinute) = Min != null ? (Min.Value.Hour, Min.Value.Minute) : (0, 0);
-                var (maxHour, maxMinute) = Max != null ? (Max.Value.Hour, Max.Value.Minute) : (23, 59);
-                var minTime = minHour * 60 + minMinute;
-                var maxTime = maxHour * 60 + maxMinute;
-
-                return val =>
-                {
-                    var time = 60 * InputHour + val;
-                    return time >= minTime && time <= maxTime && isHourAllowed && (cb == null || cb(val));
-                };
-            }
-        }
-
-        protected Func<int, bool> IsAllowedSecondCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
-
-                var isHourAllowed = IsAllowedHourCb == null || InputHour == null || IsAllowedHourCb(InputHour.Value);
-                var isMinuteAllowed = isHourAllowed && (IsAllowedMinuteCb == null || InputMinute == null || IsAllowedMinuteCb(InputMinute.Value));
-
-                if (AllowedSeconds.IsT1)
-                {
-                    cb = val => AllowedSeconds.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedSeconds.AsT0;
-                }
-
-                if (Min == null && Max == null)
-                {
-                    return isMinuteAllowed ? cb : _ => false;
-                }
-
-                var (minHour, minMinute, minSecond) = Min != null ? (Min.Value.Hour, Min.Value.Minute, Min.Value.Second) : (0, 0, 0);
-                var (maxHour, maxMinute, maxSecond) = Max != null ? (Max.Value.Hour, Max.Value.Minute, Max.Value.Second) : (23, 59, 59);
-                var minTime = minHour * 3600 + minMinute * 60 + minSecond;
-                var maxTime = maxHour * 3600 + maxMinute * 60 + maxSecond;
-
-                return val =>
-                {
-                    var time = 3600 * InputHour + 60 * InputMinute + val;
-                    return time >= minTime && time <= maxTime && isMinuteAllowed && (cb == null || cb(val));
-                };
-            }
-        }
+        protected Func<int, bool>? IsAllowedSecondCb
+            => TimeHelper.IsAllowedSecond(IsAllowedHourCb, IsAllowedMinuteCb, AllowedSeconds, Max, Min, InputHour, InputMinute);
 
         public int? LazyInputHour { get; private set; }
 
