@@ -1,9 +1,8 @@
 ﻿@namespace Masa.Blazor.Presets
 @typeparam TValue
 @inherits PDateTimePickerView<TValue>
-@inject I18n I18n
 
-@if (Dialog)
+@if (IsDialog)
 {
     <MDialog Value="_menu"
              ValueChanged="OnMenuChanged"
@@ -38,7 +37,7 @@ else
 
     private RenderFragment ViewContentRenderFragment() => __builder =>
     {
-        @if (Compact)
+        @if (IsCompact)
         {
             @CompactPickerView()
         }
@@ -61,39 +60,5 @@ else
             </MButton>
         </div>
     };
-
-    [Parameter]
-    public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
-
-    [Parameter]
-    public bool Compact { get; set; }
-
-    [Parameter]
-    public bool Dialog { get; set; }
-
-    [Parameter]
-    public string? TabItemTransition { get; set; }
-
-    private bool _menu;
-
-    internal TValue? InternalDateTime;
-
-    protected virtual string Class => BasePickerBlock.Modifier(Compact).AddTheme(IsDark).Build();
-
-    private void OnMenuChanged(bool val)
-    {
-        _menu = val;
-
-        if (_menu)
-        {
-            InternalDateTime = Value;
-        }
-    }
-
-    private async Task OnConfirm()
-    {
-        _menu = false;
-        await ValueChanged.InvokeAsync(InternalDateTime);
-    }
 
 }
