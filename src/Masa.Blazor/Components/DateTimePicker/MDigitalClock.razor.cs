@@ -1,9 +1,14 @@
 ﻿using BemIt;
+using BlazorComponent.Web;
 
 namespace Masa.Blazor;
 
 public partial class MDigitalClock<TValue> : BDomComponentBase
 {
+    [Inject] protected DomEventJsInterop DomEventJsInterop { get; set; } = null!;
+
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+
     [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedHours { get; set; }
 
     [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedMinutes { get; set; }
@@ -58,8 +63,6 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     [Parameter] public bool Light { get; set; }
 
     [Parameter] public bool Dark { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
@@ -140,6 +143,14 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
         if (firstRender)
         {
             OnValueChanged(Value);
+
+            _ = DomEventJsInterop.IntersectionObserver(Ref.GetSelector()!, () =>
+            {
+                OnInternalTimeChanged("h");
+                OnInternalTimeChanged("m");
+                OnInternalTimeChanged("s");
+                return Task.CompletedTask;
+            });
         }
     }
 

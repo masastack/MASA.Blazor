@@ -2,7 +2,7 @@
 @inherits PDateTimePickerViewBase<TValue>
 @typeparam TValue
 
-<div class="@BasePickerBlock.Element("view").Modifier("compact").Add("has-digital-clock")">
+<div class="@BasePickerBlock.Element("view").Modifier("compact")">
     <MTabs @bind-Value="_tabValue" FixedTabs>
         <MTab Value="@DATE" Ripple="false">
             @if (InternalDate.HasValue)
@@ -79,15 +79,20 @@
         <MWindowItem Value="TIME" Eager Transition="@Transition">
             <MDigitalClock Value="InternalTime"
                            ValueChanged="TimeChanged"
+                           AllowedHours="@AllowedHours"
+                           AllowedMinutes="@AllowedMinutes"
+                           AllowedSeconds="@AllowedSeconds"
                            TValue="TimeOnly?"
                            Color="@(Color ?? "accent")"
                            Disabled="@Disabled"
+                           Height="290"
                            Format="@TimeFormat"
+                           Max="@MaxTime"
+                           Min="@MinTime"
                            Readonly="@Readonly"
                            UseSeconds="@UseSeconds"
                            Dark="@Dark"
-                           Light="@Light"
-                           Height="290">
+                           Light="@Light">
             </MDigitalClock>
         </MWindowItem>
     </MWindow>

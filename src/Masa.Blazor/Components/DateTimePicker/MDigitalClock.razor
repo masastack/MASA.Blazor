@@ -2,9 +2,11 @@
 @typeparam TValue
 @using BemIt
 @inherits BDomComponentBase
+@inject I18n I18n
 
-<div class="@Block.Modifier(Disabled, Readonly).Add(Format, "format").Add(UseSeconds).AddTheme(IsDark).AddClass("m-card", Class)"
-     style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())">
+<div class="@Block.Modifier(Disabled, Readonly).Add(Format, "format").Add(UseSeconds).AddTheme(IsDark).AddClass("m-sheet", Class)"
+     style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())"
+     @ref="Ref">
     <ul class="@Block.Element("items")" @ref="@_hoursRef">
         @for (var i = 0; i < (Format == TimeFormat.AmPm ? 12 : 24); i = i + HourStep)
         {
@@ -84,7 +86,7 @@
         var active = _timePeriod == period;
 
         <li class="@Block.Element("item").Modifier(active)" @onclick="() => OnPeriodClick(period)">
-            @ItemContentRenderFragment(period == TimePeriod.Am ? "AM" : "PM", active)
+            @ItemContentRenderFragment(period == TimePeriod.Am ? I18n.T("$masaBlazor.timePicker.am") : I18n.T("$masaBlazor.timePicker.pm"), active)
         </li>
     };
 

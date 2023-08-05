@@ -1,7 +1,9 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class PDateTimePickerViewBase<TValue>: ComponentBase
+public class PDateTimePickerViewBase<TValue> : ComponentBase
 {
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+
     [Parameter] public DatePickerType? ActiveDatePicker { get; set; }
 
     [Parameter] public Func<DateOnly, bool>? AllowedDates { get; set; }
@@ -120,8 +122,26 @@ public class PDateTimePickerViewBase<TValue>: ComponentBase
     protected DateOnly? MinDate;
     protected TimeOnly? MaxTime;
     protected TimeOnly? MinTime;
-    
+
     protected Block BasePickerBlock => new("m-date-time-picker");
+
+    public bool IsDark
+    {
+        get
+        {
+            if (Dark)
+            {
+                return true;
+            }
+
+            if (Light)
+            {
+                return false;
+            }
+
+            return CascadingIsDark;
+        }
+    }
 
     protected override void OnParametersSet()
     {
@@ -142,7 +162,7 @@ public class PDateTimePickerViewBase<TValue>: ComponentBase
             }
         }
     }
-    
+
     private void UpdateInternalDateTime(DateTime? value)
     {
         _prevValue = value;

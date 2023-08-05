@@ -97,10 +97,10 @@
                          @bind-Activepicker="@_timeActivePicker"
                          @ref="_timePicker">
             </MTimePicker>
-            <span style="position: absolute; top: 1px; left: 16px; opacity: 0.6;">
+            <span class="@(TimePickerClockBlock.Element("selecting-time"))">
                 @SelectingTime
             </span>
-            <span style="position: absolute; top: 1px; right: 0;">
+            <span class="@(TimePickerClockBlock.Element("prev-next"))">
                 <MButton Icon
                          OnClick="OnPrevClick"
                          Disabled="@((int)_timeActivePicker <= 1)">
