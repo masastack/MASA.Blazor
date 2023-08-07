@@ -1030,9 +1030,14 @@ input[type=number] {
     padding-left: 0 !important;
     position: relative;
     scroll-behavior: smooth;
-    width: 56px;
+    width: 112px;
     border-right-style: solid;
     border-right-width: thin;
+}
+
+.m-digital-clock--multi-section .m-digital-clock__items,
+.m-digital-clock--multi-section .m-digital-clock__item {
+    width: 56px;
 }
 
 .theme--light.m-digital-clock .m-digital-clock__items {
@@ -1062,7 +1067,7 @@ input[type=number] {
     cursor: pointer;
     height: 36px;
     line-height: 36px;
-    width: 56px;
+    width: 112px;
     padding: 0 4px;
     text-align: center;
     white-space: nowrap;

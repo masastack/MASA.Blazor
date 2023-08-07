@@ -12,6 +12,21 @@ public static class TimeHelper
         return hour % 12 + (period == TimePeriod.Pm ? 12 : 0);
     }
 
+    public static Func<TimeOnly, bool>? IsAllowedTime(
+        OneOf<Func<TimeOnly, bool>, List<TimeOnly>> allowedTimes,
+        TimeOnly? max,
+        TimeOnly? min)
+    {
+        var cb = allowedTimes.IsT1 ? val => allowedTimes.AsT1.Contains(val) : allowedTimes.AsT0;
+
+        if (min == null && max == null)
+        {
+            return cb;
+        }
+        
+        return val => val >= min && val <= max && (cb == null || cb(val));
+    }
+
     public static Func<int, bool>? IsAllowedHour24(
         OneOf<Func<int, bool>, List<int>> allowedHours,
         TimeOnly? max,

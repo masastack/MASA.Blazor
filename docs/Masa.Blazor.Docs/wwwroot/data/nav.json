@@ -279,6 +279,10 @@
       {
         "title": "date-time-pickers",
         "state": "new"
+      },
+      {
+        "title": "digital-clock",
+        "state": "new"
       }
     ]
   },
