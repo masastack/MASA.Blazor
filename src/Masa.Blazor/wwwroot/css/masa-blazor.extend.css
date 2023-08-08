@@ -1143,3 +1143,15 @@ input[type=number] {
 .theme--dark.m-digital-clock .m-digital-clock__item-content:hover::before {
     opacity: 0.08;
 }
+
+/* menu */
+
+.theme--light.m-menu__content {
+    background: #FFFFFF;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.theme--dark.m-menu__content {
+    background: #121212;
+    color: #FFFFFF;
+}
