@@ -1,5 +1,5 @@
 ﻿---
-title: Digital clock（数字时钟选择器）
+title: Digital clocks（数字时钟）
 desc: "**MDigitalClock** 组件允许用户在没有任何输入或弹出模式的情况下选择时间"
 related:
   - /blazor/components/date-pickers
@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-<masa-example file="Examples.labs.digital_clock.Usage"></masa-example>
+<digital-clocks-usage></digital-clocks-usage>
 
 ## 示例
 
@@ -17,12 +17,12 @@ related:
 
 #### 步长（间隔）
 
-<masa-example file="Examples.labs.digital_clock.Step"></masa-example>
+<masa-example file="Examples.labs.digital_clocks.Step"></masa-example>
 
 #### 最大和最小值
 
-<masa-example file="Examples.labs.digital_clock.MinMax"></masa-example>
+<masa-example file="Examples.labs.digital_clocks.MinMax"></masa-example>
 
 #### 允许的时间
 
-<masa-example file="Examples.labs.digital_clock.AllowedTimes"></masa-example>
+<masa-example file="Examples.labs.digital_clocks.AllowedTimes"></masa-example>

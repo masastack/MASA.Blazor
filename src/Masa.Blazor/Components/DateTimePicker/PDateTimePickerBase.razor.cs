@@ -8,13 +8,13 @@ public partial class PDateTimePickerBase<TValue> : IDisposable
 
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
-    [Parameter] public bool? Compact { get; set; }
-
-    [Parameter] public bool? Dialog { get; set; }
+    [Parameter] [ApiDefaultValue(DateTimePickerViewType.Auto)]
+    public DateTimePickerViewType ViewType { get; set; }
 
     [Parameter] public string? TabItemTransition { get; set; }
 
     private bool _menu;
+    private DateTimePickerViewType _prevViewType;
 
     private string Class => BasePickerBlock.Modifier("compact", IsCompact).AddTheme(IsDark).Build();
 
@@ -30,34 +30,62 @@ public partial class PDateTimePickerBase<TValue> : IDisposable
 
         MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
 
-        CheckIfCompactOrDialogChanged();
+        CheckViewType();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevViewType != ViewType)
+        {
+            _prevViewType = ViewType;
+
+            CheckViewType();
+        }
     }
 
     private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
     {
-        if (!CheckIfCompactOrDialogChanged()) return;
+        if (!CheckViewType()) return;
 
         InvokeAsync(StateHasChanged);
     }
 
-    private bool CheckIfCompactOrDialogChanged()
+    private bool CheckViewType()
     {
         var mobile = MasaBlazor.Breakpoint.Mobile;
-        var changed = false;
 
-        if (Compact is null)
+        var prevIsCompact = IsCompact;
+        var prevIsDialog = IsDialog;
+
+        switch (ViewType)
         {
-            IsCompact = mobile;
-            changed = true;
+            case DateTimePickerViewType.Auto:
+                IsCompact = mobile;
+                IsDialog = mobile;
+                break;
+            case DateTimePickerViewType.Compact:
+                IsCompact = true;
+                IsDialog = mobile;
+                break;
+            case DateTimePickerViewType.Dialog:
+                IsCompact  = mobile;
+                IsDialog = true;
+                break;
+            case DateTimePickerViewType.Desktop:
+                IsCompact = false;
+                IsDialog = false;
+                break;
+            case DateTimePickerViewType.Mobile:
+                IsCompact = true;
+                IsDialog = true;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
 
-        if (Dialog is null)
-        {
-            IsDialog = mobile;
-            changed = true;
-        }
-
-        return changed;
+        return prevIsCompact != IsCompact || prevIsDialog != IsDialog;
     }
 
     private void OnMenuChanged(bool val)

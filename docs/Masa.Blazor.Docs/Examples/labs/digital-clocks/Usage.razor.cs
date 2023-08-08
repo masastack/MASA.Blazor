@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.Examples.labs.digital_clock;
+﻿namespace Masa.Blazor.Docs.Examples.labs.digital_clocks;
 
 public partial class Usage : Masa.Blazor.Docs.Components.Usage
 {

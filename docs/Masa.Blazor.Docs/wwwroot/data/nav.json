@@ -277,11 +277,15 @@
         "state": "new"
       },
       {
+        "title": "date-digital-clock-pickers",
+        "state": "new"
+      },
+      {
         "title": "date-time-pickers",
         "state": "new"
       },
       {
-        "title": "digital-clock",
+        "title": "digital-clocks",
         "state": "new"
       }
     ]

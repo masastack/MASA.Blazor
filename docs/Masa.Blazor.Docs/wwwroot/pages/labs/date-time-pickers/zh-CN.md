@@ -1,13 +1,21 @@
 ﻿---
-title: DateTimePicker（日期时间选择器）
-desc: "**PDateTimePicker** 是一个基于 **MDatePicker** 和 **MTimePicker** 组件制作的日期时间选择组件。"
+title: Date time pickers（日期时间选择器）
+desc: "**PDateTimePicker** 是一个的日期时间选择组件。"
 tag: "预置"
 related:
   - /blazor/components/date-pickers
   - /blazor/components/time-pickers
-  - /blazor/components/date-pickers-month
+  - /blazor/labs/date-digital-clock-pickers
 ---
 
-## 使用
+## DateTimePicker
 
-<masa-example file="Examples.labs.date_time_pickers.Usage"></masa-example>
+<masa-example file="Examples.labs.date_time_pickers.Picker"></masa-example>
+
+## DateTimePickerView
+
+<masa-example file="Examples.labs.date_time_pickers.Default"></masa-example>
+
+## DateTimeCompactPickerView
+
+<masa-example file="Examples.labs.date_time_pickers.Compact"></masa-example>
