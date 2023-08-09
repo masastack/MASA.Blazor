@@ -104,6 +104,12 @@ public partial class Usage : NextTickComponentBase
         return parameter.Value;
     }
 
+    /// <summary>
+    /// Format value to string for display.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     protected virtual string FormatValue(string key, object value)
     {
         return value.ToString() ?? string.Empty;

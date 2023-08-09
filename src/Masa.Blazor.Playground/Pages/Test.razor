@@ -1,0 +1,45 @@
+﻿@page "/Test"
+
+<MButton OnClick="() => compact = !compact">Compact</MButton>
+<MButton OnClick="() => dialog = !dialog">Dialog</MButton>
+
+<MForm OnSubmit="() => { }" Context="formContext">
+    <PDateDigitalClockPicker @bind-Value="_date2"
+                             TimeFormat="TimeFormat.Hr24">
+        <ActivatorContent>
+            <MTextField @bind-Value="_date2"
+                        Readonly
+                        Required
+                        Clearable
+                        @attributes="@context.Attrs">
+            </MTextField>
+        </ActivatorContent>
+    </PDateDigitalClockPicker>
+    <button type="submit">Submit</button>
+</MForm>
+
+<MForm OnSubmit="() => { }" Context="formContext">
+    <PDateTimePicker @bind-Value="_date2"
+                     TimeFormat="TimeFormat.Hr24"
+                     Compact="@compact"
+                     Dialog="@dialog">
+        <ActivatorContent>
+            <MTextField @bind-Value="_date2"
+                        Readonly
+                        Required
+                        Clearable
+                        @attributes="@context.Attrs">
+            </MTextField>
+        </ActivatorContent>
+    </PDateTimePicker>
+    <button type="submit">Submit</button>
+</MForm>
+
+
+@code {
+
+    private DateTime? _date2 = null;
+
+    private bool compact;
+    private bool dialog;
+}

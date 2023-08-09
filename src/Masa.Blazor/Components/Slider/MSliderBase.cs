@@ -515,7 +515,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             })
             .Apply("tick", cssBuilder =>
             {
-                var width = cssBuilder.Index * (100 / NumTicks);
+                var width = (int)cssBuilder.Data! * (100 / NumTicks);
                 var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
                 cssBuilder
@@ -525,7 +525,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             {
                 var direction = Vertical ? "bottom" : (MasaBlazor.RTL ? "right" : "left");
                 var offsetDirection = Vertical ? (MasaBlazor.RTL ? "left" : "right") : "top";
-                var width = styleBuilder.Index * (100 / NumTicks);
+                var width = (int)styleBuilder.Data! * (100 / NumTicks);
 
                 styleBuilder
                     .AddWidth(TickSize)
@@ -540,10 +540,12 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             })
             .Apply("thumb-container", cssBuilder =>
             {
+                var index = (int)(cssBuilder?.Data ?? 0);
+                
                 cssBuilder
                     .Add("m-slider__thumb-container")
-                    .AddIf("m-slider__thumb-container--active", () => IsThumbActive(cssBuilder.Index))
-                    .AddIf("m-slider__thumb-container--focused", () => IsThumbFocus(cssBuilder.Index))
+                    .AddIf("m-slider__thumb-container--active", () => IsThumbActive(index))
+                    .AddIf("m-slider__thumb-container--focused", () => IsThumbFocus(index))
                     .AddIf("m-slider__thumb-container--show-label", () => ShowThumbLabel)
                     .AddTextColor(ComputedThumbColor);
             }, styleBuilder => { GetThumbContainerStyles(styleBuilder); })

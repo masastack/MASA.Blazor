@@ -1,0 +1,109 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@inherits BDomComponentBase
+@inject I18n I18n
+
+<div class="@(Block.Modifier(Disabled, Readonly).Add(Format, "format").Add("use-seconds", ComputedUseSeconds).Add(MultiSection).AddTheme(IsDark).AddClass("m-sheet", Class))"
+     style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())"
+     @ref="Ref">
+    @if (MultiSection)
+    {
+        <ul class="@Block.Element("items")" @ref="@_hoursRef">
+            @for (var i = 0; i < (Format == TimeFormat.AmPm ? 12 : 24); i = i + HourStep)
+            {
+                bool isActive;
+
+                if (Format == TimeFormat.AmPm)
+                {
+                    if (ComputedHour == 12 && i == 0)
+                    {
+                        isActive = true;
+                    }
+                    else
+                    {
+                        isActive = ComputedHour == i;
+                    }
+                }
+                else
+                {
+                    isActive = ComputedHour == i;
+                }
+
+
+                @ItemRenderFragment(i, isActive, IsAllowedHourCallback, HandleOnHourClick, h => TimeHelper.FormatAmHour(h, Format))
+            }
+        </ul>
+
+        <ul class="@Block.Element("items")" @ref="@_minutesRef">
+            @ItemsRenderFragment(60, MinuteStep, Minute, IsAllowedMinuteCallback, HandleOnMinuteClick)
+        </ul>
+
+        @if (UseSeconds)
+        {
+            <ul class="@Block.Element("items")" @ref="@_secondsRef">
+                @ItemsRenderFragment(60, SecondStep, Second, IsAllowedSecondCallback, HandleOnSecondClick)
+            </ul>
+        }
+
+        @if (Format == TimeFormat.AmPm)
+        {
+            <ul class="@Block.Element("items")">
+                @AmPmItemContentRenderFragment(TimePeriod.Am)
+                @AmPmItemContentRenderFragment(TimePeriod.Pm)
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="@Block.Element("items")" @ref="_timesRef">
+            @foreach (var time in _singleSectionItems)
+            {
+                var active = time == InternalTime;
+                var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
+                <li class="@Block.Element("item").Modifier(active).Add(disabled)"
+                    @onclick="() => HandleOnTimeClick(time)">
+                    @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+
+    private RenderFragment ItemsRenderFragment(int count, int step, int? current, Func<int, bool>? isAllowedCb, Func<int, Task> onClick) => __builder =>
+    {
+        @for (var i = 0; i < count; i = i + step)
+        {
+            var isActive = current == i;
+            var index = i;
+
+            @ItemRenderFragment(index, isActive, isAllowedCb, onClick)
+        }
+    };
+
+    private RenderFragment ItemRenderFragment(int index, bool active, Func<int, bool>? isAllowedCb, Func<int, Task> onClick, Func<int, string>? format = null) => __builder =>
+    {
+        <li class="@Block.Element("item").Modifier(active).Add("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
+            @onclick="() => onClick(index)">
+            @ItemContentRenderFragment(format?.Invoke(index) ?? index.ToString("00"), active)
+        </li>
+    };
+
+    private RenderFragment ItemContentRenderFragment(string content, bool active) => __builder =>
+    {
+        <div class="@Block.Element("item-content").AddBackgroundColor(Color, active)" ripple="@IsRipple">
+            @content
+        </div>
+    };
+
+    private RenderFragment AmPmItemContentRenderFragment(TimePeriod period) => __builder =>
+    {
+        var active = _timePeriod == period;
+
+        <li class="@Block.Element("item").Modifier(active)" @onclick="() => OnPeriodClick(period)">
+            @ItemContentRenderFragment(period == TimePeriod.Am ? I18n.T("$masaBlazor.timePicker.am") : I18n.T("$masaBlazor.timePicker.pm"), active)
+        </li>
+    };
+
+}

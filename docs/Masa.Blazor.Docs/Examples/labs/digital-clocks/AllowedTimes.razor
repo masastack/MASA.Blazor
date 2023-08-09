@@ -1,0 +1,28 @@
+﻿<h4>9-12 and 13-17</h4>
+
+<MRow>
+    <MCol Cols="12" Md="6">
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       AllowedTimes="@s_allowedTimes">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       MultiSection
+                       AllowedHours="@s_allowedHours">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+    </MCol>
+</MRow>
+
+@code {
+
+    private static readonly Func<TimeOnly, bool> s_allowedTimes = t => (t >= new TimeOnly(9, 0) && t < new TimeOnly(12, 0)) || (t >= new TimeOnly(13, 0) && t < new TimeOnly(17, 0));
+    private static readonly Func<int, bool> s_allowedHours = h => h is >= 9 and < 12 or >= 13 and < 17;
+
+    private TimeOnly _time = new(9, 0);
+
+}

@@ -1,0 +1,53 @@
+﻿<MRow>
+    <MCol Cols="12" Md="6">
+        <MSelect @bind-Value="_format"
+                 Filled
+                 HideDetails="true"
+                 Label="TimeFormat"
+                 Items="_items"
+                 ItemValue="u => u.Value"
+                 ItemText="u => u.Name">
+        </MSelect>
+
+        <MCheckbox @bind-Value="_multiSection"
+                   Label="MultiSection"
+                   HideDetails="true">
+            MultiSection
+        </MCheckbox>
+
+        @if (_multiSection)
+        {
+            <MCheckbox @bind-Value="_useSeconds"
+                       Label="UseSeconds"
+                       HideDetails="true">
+            </MCheckbox>
+        }
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <div class="d-flex flex-column align-center">
+            <MChip Color="primary" Class="mb-1">@_date</MChip>
+            <PDateDigitalClockPickerView @bind-Value="_date"
+                                         MultiSection="@_multiSection"
+                                         UseSeconds="@_useSeconds"
+                                         TimeFormat="_format">
+            </PDateDigitalClockPickerView>
+        </div>
+    </MCol>
+</MRow>
+
+@code {
+
+    private List<(string Name, TimeFormat Value)> _items = new()
+    {
+        new("AM/PM", TimeFormat.AmPm),
+        new("24 Hour", TimeFormat.Hr24)
+    };
+
+    private DateTime _date = DateTime.Now;
+
+    private bool _multiSection;
+    private bool _useSeconds;
+    private TimeFormat _format;
+
+
+}
