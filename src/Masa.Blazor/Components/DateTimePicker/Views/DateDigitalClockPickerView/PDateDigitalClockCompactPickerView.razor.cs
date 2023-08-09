@@ -1,12 +1,10 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDateDigitalClockCompactPickerView<TValue> : PDateTimePickerViewBase<TValue>
+public partial class PDateDigitalClockCompactPickerView<TValue> : PDateDigitalClockPickerViewBase<TValue>
 {
-    [Inject]
-    private I18n I18n { get; set; } = null!;
+    [Inject] private I18n I18n { get; set; } = null!;
 
-    [Parameter]
-    public string? Transition { get; set; }
+    [Parameter] public string? Transition { get; set; }
 
     private const string DATE = "date";
     private const string TIME = "time";
@@ -17,7 +15,7 @@ public partial class PDateDigitalClockCompactPickerView<TValue> : PDateTimePicke
     private MTimePicker? _timePicker;
 
     private TimePickerType _timeActivePicker = TimePickerType.Hour;
-    
+
     private string? DateTitle
     {
         get

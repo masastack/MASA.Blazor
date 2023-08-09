@@ -1,5 +1,5 @@
 ﻿@namespace Masa.Blazor.Presets
-@inherits PDateTimePickerViewBase<TValue>
+@inherits PDateDigitalClockPickerViewBase<TValue>
 @typeparam TValue
 
 <div class="@BasePickerBlock.Element("view").Modifier("compact")">
@@ -28,7 +28,7 @@
                 @if (UseSeconds)
                 {
                     <span>:</span>
-                    @InternalTime.Value.Second
+                    @InternalTime.Value.Second.ToString("00")
                 }
 
                 if (TimeFormat == TimeFormat.AmPm)
@@ -82,6 +82,7 @@
                            AllowedHours="@AllowedHours"
                            AllowedMinutes="@AllowedMinutes"
                            AllowedSeconds="@AllowedSeconds"
+                           AllowedTimes="@AllowedTimes"
                            TValue="TimeOnly?"
                            Color="@(Color ?? "accent")"
                            Disabled="@Disabled"
@@ -89,7 +90,12 @@
                            Format="@TimeFormat"
                            Max="@MaxTime"
                            Min="@MinTime"
+                           MultiSection="@MultiSection"
                            Readonly="@Readonly"
+                           Step="@Step"
+                           HourStep="@HourStep"
+                           MinuteStep="@MinuteStep"
+                           SecondStep="@SecondStep"
                            UseSeconds="@UseSeconds"
                            Dark="@Dark"
                            Light="@Light">

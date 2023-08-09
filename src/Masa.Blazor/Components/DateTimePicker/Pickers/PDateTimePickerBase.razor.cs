@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDateTimePickerBase<TValue> : IDisposable
+public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, IDisposable
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
@@ -16,7 +16,7 @@ public partial class PDateTimePickerBase<TValue> : IDisposable
     private bool _menu;
     private DateTimePickerViewType _prevViewType;
 
-    private string Class => BasePickerBlock.Modifier("compact", IsCompact).AddTheme(IsDark).Build();
+    private string Class => BasePickerBlock.Modifier("compact", IsCompact).Build();
 
     private bool IsCompact { get; set; }
 

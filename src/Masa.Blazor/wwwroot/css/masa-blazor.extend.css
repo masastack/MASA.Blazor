@@ -999,20 +999,25 @@ input[type=number] {
     top: 1px;
 }
 
-.m-date-time-picker__view--compact .m-digital-clock .m-digital-clock__items,
-.m-date-time-picker__view--compact .m-digital-clock .m-digital-clock__item {
+.m-date-time-picker__view--compact .m-digital-clock:not(.m-digital-clock--multi-section) .m-digital-clock__items,
+.m-date-time-picker__view--compact .m-digital-clock:not(.m-digital-clock--multi-section) .m-digital-clock__item {
+    width: 290px;
+}
+
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section .m-digital-clock__items,
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section .m-digital-clock__item {
     width: calc(290px / 2);
 }
 
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__items,
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__items,
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--format-am-pm .m-digital-clock__item,
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--use-seconds .m-digital-clock__item {
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--format-am-pm .m-digital-clock__items,
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--format-am-pm .m-digital-clock__item,
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--use-seconds .m-digital-clock__item {
     width: calc(290px / 3);
 }
 
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__items,
-.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__item {
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__items,
+.m-date-time-picker__view--compact .m-digital-clock.m-digital-clock--multi-section.m-digital-clock--format-am-pm.m-digital-clock--use-seconds .m-digital-clock__item {
     width: calc(290px / 4);
 }
 
@@ -1152,6 +1157,18 @@ input[type=number] {
 }
 
 .theme--dark.m-menu__content {
-    background: #121212;
+    background: #1e1e1e;
+    color: #FFFFFF;
+}
+
+/* dialog */
+
+.theme--light.m-dialog__content .m-dialog {
+    background: #FFFFFF;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.theme--dark.m-dialog__content .m-dialog {
+    background: #1e1e1e;
     color: #FFFFFF;
 }
