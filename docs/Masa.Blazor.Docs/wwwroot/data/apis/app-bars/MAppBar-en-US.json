@@ -1,7 +1,7 @@
 {
   "props": {
-    "clippedLeft": "Designates that the application’s [MNavigationDrawer](components/navigationDrawers) that is positioned on the left is below the `MAppBar`.",
-    "clippedRight": "Designates that the application’s [MNavigationDrawer](components/navigationDrawers) that is positioned on the right is below the `MAppBar`.",
+    "clippedLeft": "Designates that the application’s [MNavigationDrawer](/blazor/components/navigationDrawers) that is positioned on the left is below the `MAppBar`.",
+    "clippedRight": "Designates that the application’s [MNavigationDrawer](/blazor/components/navigationDrawers) that is positioned on the right is below the `MAppBar`.",
     "collapseOnScroll": "Puts the app-bar into a collapsed state when scrolling.",
     "prominent": "Increases the height of the toolbar content to 128px.",
     "scrollOffScreen": "hrinks a prominent toolbar to a `Dense` or `Short` (default) one when scrolling.",
