@@ -413,8 +413,7 @@ a.text-dec-none {
     }
     
     .doc-list-nav--item-hash .m-list-item__icon {
-        margin-left: 4px;
-        margin-right: 24px;
+        margin: 12px 24px 12px 4px;
     }
 
 .tag-chip {
