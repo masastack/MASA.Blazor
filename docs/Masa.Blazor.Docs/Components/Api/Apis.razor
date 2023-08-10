@@ -2,17 +2,19 @@
 
 @if (Data.Keys.Count > 1)
 {
-    <MSelect Items="Data.Keys.ToList()"
-             ItemText="key => key"
-             ItemValue="key => key"
-             Value="Value"
-             ValueChanged="ValueChanged"
-             TValue="string"
-             TItemValue="string"
-             TItem="string"
-             Filled
-             Label="API">
-    </MSelect>
+    <OutlineCard Title="Component APIs"
+                Class="mb-4">
+        <MChipGroup Value="@Value"
+                    ValueChanged="@(v => ValueChanged.InvokeAsync(v?.ToString()))"
+                    Column
+                    Mandatory
+                    ActiveClass="primary primary--text">
+            @foreach (var key in Data.Keys)
+            {
+                <MChip Value="@key" Outlined Filter>@key</MChip>
+            }
+        </MChipGroup>
+    </OutlineCard>
 }
 
 @if (Value is not null && Data.TryGetValue(Value, out var value))

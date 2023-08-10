@@ -1,0 +1,23 @@
+﻿.m-outline-card {
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+.m-outline-card__title {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    padding: 0 16px;
+    background-color: inherit;
+}
+
+.theme--light.m-outline-card {
+    background-color: #fff;
+    border: thin solid rgba(0, 0, 0, .12)
+}
+
+.theme--dark.m-outline-card {
+    background-color: #121212;
+    border: thin solid rgba(255, 255, 255, .12)
+}
