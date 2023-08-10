@@ -1,11 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
+namespace Masa.Blazor.Docs.ApiGenerator;
 
 [Generator]
 public class ApiGenerator : IIncrementalGenerator
@@ -127,6 +126,9 @@ public class ApiGenerator : IIncrementalGenerator
         while (declaredSymbol is not null)
         {
             AnalyzeParameters(declaredSymbol, defaultParameters, contentParameters, eventParameters, publicMethods);
+
+            // BaseType could be null if the blazor component only has a razor file but no cs file.
+            // So need to add a empty cs file the blazor component.
             declaredSymbol = declaredSymbol.BaseType;
         }
 
@@ -277,13 +279,13 @@ public class ApiGenerator : IIncrementalGenerator
 
         var containingNamespace = type.ContainingNamespace.ToString();
 
-        var isCustomType = containingNamespace is not null && (containingNamespace.StartsWith("BlazorComponent") || containingNamespace.StartsWith("Masa.Blazor"));
+        var isCustomType = containingNamespace is not null &&
+                           (containingNamespace.StartsWith("BlazorComponent") || containingNamespace.StartsWith("Masa.Blazor"));
 
         if (type.TypeKind == TypeKind.Enum)
         {
-            var count = type.MemberNames.Count() - 2;
-
-            return "enum: " + string.Join(" | ", type.MemberNames.Skip(1).Take(count));
+            var excludeNames = new[] { "value__", ".ctor" };
+            return "enum: " + string.Join(" | ", type.MemberNames.Except(excludeNames));
         }
         else if (type.Name != "String" && (type.IsReferenceType || type.TypeKind == TypeKind.Struct))
         {
@@ -306,15 +308,17 @@ public class ApiGenerator : IIncrementalGenerator
                 }
                 else
                 {
-                    var typeArguments = type.TypeArguments.Where(t => (t.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Enum) && type.Name != "String").ToList();
+                    var typeArguments = type.TypeArguments
+                                            .Where(t => (t.TypeKind is TypeKind.Class or TypeKind.Struct or TypeKind.Enum) && type.Name != "String")
+                                            .ToList();
 
                     foreach (var item in typeArguments)
                     {
                         var itemTypeDesc = GetTypeDesc(item as INamedTypeSymbol);
                         desc += itemTypeDesc;
                     }
-
                 }
+
                 return desc;
             }
             else if (isCustomType)
@@ -361,13 +365,13 @@ public class ApiGenerator : IIncrementalGenerator
 
         return typeName switch
         {
-            nameof(String) => "string",
+            nameof(String)  => "string",
             nameof(Boolean) => "bool",
-            nameof(Double) => "double",
-            nameof(Int32) => "int",
-            nameof(Int64) => "long",
-            nameof(Object) => "object",
-            _ => typeName
+            nameof(Double)  => "double",
+            nameof(Int32)   => "int",
+            nameof(Int64)   => "long",
+            nameof(Object)  => "object",
+            _               => typeName
         };
     }
 
