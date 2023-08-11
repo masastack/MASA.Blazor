@@ -8,7 +8,11 @@ namespace Masa.Blazor;
 /// </summary>
 /// <typeparam name="TValue">Numeric type or a list of numeric type</typeparam>
 /// <typeparam name="TNumeric">Numeric type</typeparam>
-public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric> where TNumeric : IComparable
+#if NET6_0
+public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>
+#else
+public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric> where TNumeric : struct, IComparable<TNumeric>
+#endif
 {
     [Inject]
     public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -541,7 +545,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             .Apply("thumb-container", cssBuilder =>
             {
                 var index = (int)(cssBuilder?.Data ?? 0);
-                
+
                 cssBuilder
                     .Add("m-slider__thumb-container")
                     .AddIf("m-slider__thumb-container--active", () => IsThumbActive(index))
