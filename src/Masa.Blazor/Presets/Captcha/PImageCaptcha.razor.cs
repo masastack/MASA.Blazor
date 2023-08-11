@@ -180,5 +180,21 @@ namespace Masa.Blazor.Presets
 
             return Task.CompletedTask;
         }
+
+        [ApiPublicMethod]
+        public async Task FocusAsync()
+        {
+            if (_textField is null) return;
+
+            await _textField.FocusAsync();
+        }
+
+        [ApiPublicMethod]
+        public async Task BlurAsync()
+        {
+            if (_textField is null) return;
+
+            await _textField.BlurAsync();
+        }
     }
 }
