@@ -1,6 +1,10 @@
 ﻿namespace Masa.Blazor
 {
+#if NET6_0
+    public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue>
+#else
     public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue> where TValue : notnull
+#endif
     {
         [Parameter]
         public bool Flat { get; set; }

@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
+#if NET6_0
+    public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue>
+#else
     public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable, ICheckbox<TValue> where TValue : notnull
+#endif
     {
         [Inject]
         public Document Document { get; set; } = null!;
-        
+
         [Parameter]
         public bool Indeterminate { get; set; }
 
