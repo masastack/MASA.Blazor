@@ -413,8 +413,7 @@ a.text-dec-none {
     }
     
     .doc-list-nav--item-hash .m-list-item__icon {
-        margin-left: 4px;
-        margin-right: 24px;
+        margin: 12px 24px 12px 4px;
     }
 
 .tag-chip {
@@ -701,4 +700,8 @@ default-app-markup {
 .annual-service-contact .icon > .m-icon__svg {
     width: 48px;
     height: 48px;
+}
+
+.theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state)>.m-input__control>.m-input__slot fieldset {
+    color: rgba(0,0,0,.12);;
 }

@@ -1,7 +1,7 @@
 {
   "props": {
-    "clippedLeft": "指定位于左侧的应用程序的 [MNavigationDrawer](components/navigationDrawers) 在应用程序栏下方。",
-    "clippedRight": "指定位于右侧的应用程序的 [MNavigationDrawer](components/navigationDrawers) 在应用程序栏下方。",
+    "clippedLeft": "指定位于左侧的应用程序的 [MNavigationDrawer](/blazor/components/navigationDrawers) 在应用程序栏下方。",
+    "clippedRight": "指定位于右侧的应用程序的 [MNavigationDrawer](/blazor/components/navigationDrawers) 在应用程序栏下方。",
     "collapseOnScroll": "滚动时将应用栏置于折叠状态。",
     "prominent": "将工具栏内容的高度增加到 128px。",
     "scrollOffScreen": "滚动时隐藏应用程序栏。将 不 显示 `extension` 插槽。",

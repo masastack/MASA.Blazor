@@ -17,7 +17,7 @@
 
         @if (!IsAllComponentsPage)
         {
-            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
+            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-9">
                 <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
                 <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
             </MTabs>

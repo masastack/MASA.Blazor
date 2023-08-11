@@ -5,14 +5,7 @@
 {
     <section id="@Name.ToLower()">
         <AppHeading Level="3" Href="@($"#{Name.ToLower()}")" Content="@(I18n.T(Name))"></AppHeading>
-
-        <div>
-            <div class="d-flex mb-2">
-                <AppTextField @bind-Value="_filter" Icon="mdi-magnify" Clearable Label="@I18n.T("Search")" />
-            </div>
-
-            <ApiDatatable Field="@Name" Data="Data" Filter="@_filter" GithubUri="@GithubUri" />
-        </div>
+        <ApiDatatable Field="@Name" Data="Data" Filter="@Filter" GithubUri="@GithubUri" />
     </section>
 }
 
@@ -29,6 +22,7 @@
     [Parameter]
     public string? GithubUri { get; set; }
 
-    private string? _filter;
+    [Parameter]
+    public string? Filter { get; set; }
 
 }

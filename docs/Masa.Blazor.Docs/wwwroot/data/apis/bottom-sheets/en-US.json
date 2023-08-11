@@ -12,7 +12,7 @@
     "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation  [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
     "overlayScrimClass": "overlayScrimClass",
     "persistent": "Clicking outside of the element or pressing `esc` key will not deactivate it.",
-    "scrollable": "When set to true, expects a [MCard](components/cards) and a [MCardText](components/cardTexts) component with a designated height. For more information, check out the [scrollable example.](components/dialogs/#scrollable)。",
+    "scrollable": "When set to true, expects a [MCard](/blazor/components/cards) and a [MCardText](/blazor/components/cardTexts) component with a designated height. For more information, check out the [scrollable example.](/blazor/components/dialogs/#scrollable)。",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own.",
     "value": "Controls whether the component is visible or hidden."
   },

@@ -1,5 +1,4 @@
-﻿using Masa.Blazor.Docs.Examples.components.selects;
-using Masa.Blazor.Extensions.Languages.Razor;
+﻿using Masa.Blazor.Extensions.Languages.Razor;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.JSInterop;
@@ -16,9 +15,9 @@ public partial class Example : NextTickComponentBase
 
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
-    [Inject] private IPopupService PopupService { get; set; } = null!;
     [Inject] public IJSRuntime Js { get; set; } = null!;
-    [Inject] public MasaBlazor MasaBlazor { get; set; }
+
+    [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter, EditorRequired] public string File { get; set; } = null!;
 
@@ -28,12 +27,10 @@ public partial class Example : NextTickComponentBase
 
     [Parameter] public bool Dark { get; set; }
 
-    private Sections _sections;
-
     /// <summary>
     /// 编译器需要使用的程序集
     /// </summary>
-    private static readonly List<string> assemblies = new()
+    private static readonly List<string> s_assemblies = new()
     {
         "BlazorComponent",
         "Masa.Blazor",
@@ -52,25 +49,24 @@ public partial class Example : NextTickComponentBase
         "System.Runtime"
     };
 
+    private Dictionary<string, object> _options = new()
+    {
+        { "language", "html" },
+        { "theme", "vs" },
+        { "automaticLayout", true }
+    };
+
     private bool _rendered;
     private bool _prevDark;
     private bool _dark;
     private bool _expand;
     private bool _showExpands;
-    private bool _load;
+    private string? _sourceCode;
     private static bool _initialize;
-    private StringNumber _selected = 0;
     private Type? _type;
     private DotNetObjectReference<Example>? _objRef;
-    private MMonacoEditor MonacoEditor;
+    private MMonacoEditor? _monacoEditor;
     private List<(string Icon, string Path, Action? OnClick, string? href)> _tooltips = new();
-
-    private object options = new
-    {
-        language = "html",
-        theme = "vs",
-        automaticLayout = true,
-    };
 
     protected override void OnParametersSet()
     {
@@ -101,35 +97,36 @@ public partial class Example : NextTickComponentBase
         // From File: Examples.components.alerts.Border
         // To Path: pages/Examples/components/alerts/examples/Border.txt
         var sections = File.Replace("Examples", "pages", StringComparison.OrdinalIgnoreCase).Replace("_", "-")
-            .Split(".").ToList();
+                           .Split(".").ToList();
         sections.Insert(sections.Count - 1, "examples");
         var sourceCodePath = string.Join("/", sections) + ".txt";
         var sourceCodeUri = $"https://docs.masastack.com/_content/Masa.Blazor.Docs/{sourceCodePath}";
 
         _tooltips = new()
         {
-            new("mdi-play-circle-outline", "run-example", null, $"https://try.masastack.com?path={sourceCodeUri}"),
+            new("mdi-play-circle-outline", "code-run-external", null, $"https://try.masastack.com?path={sourceCodeUri}"),
             new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
             new("mdi-github", "view-in-github", null, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)
         };
 
-        MasaBlazor.OnThemeChange += async (theme) =>
-        {
-            if (theme.Dark && MonacoEditor !=null)
-            {
-                await MonacoEditor?.SetThemeAsync("vs-dark");
-            }
-            else if(MonacoEditor != null)
-            {
-                await MonacoEditor?.SetThemeAsync("vs");
-            }
-        };
+        MasaBlazor.OnThemeChange += OnMasaBlazorOnOnThemeChange;
     }
 
-    private async Task InitCompleteHandle()
+    private void InitCompleteHandle()
     {
-        await MonacoEditor.AddCommandAsync(2097, _objRef, nameof(RunCode));
+        // add ctrl+s command
+        _ = _monacoEditor?.AddCommandAsync(2097, _objRef!, nameof(RunCode));
+    }
+
+    private async void OnMasaBlazorOnOnThemeChange(Theme theme)
+    {
+        if (_monacoEditor is null)
+        {
+            return;
+        }
+
+        await _monacoEditor.SetThemeAsync(theme.Dark ? "vs-dark" : "vs");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -162,9 +159,7 @@ public partial class Example : NextTickComponentBase
                         return;
                     }
 
-                    var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
-
-                    _sections = new Sections(sourceCode, "razor");
+                    _sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
 
                     StateHasChanged();
                 }
@@ -186,26 +181,20 @@ public partial class Example : NextTickComponentBase
 
         if (_type == null)
         {
-            StateHasChanged();
             return;
         }
 
         var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
-        await MonacoEditor.SetValueAsync(sourceCode);
+        await _monacoEditor!.SetValueAsync(sourceCode);
     }
 
     private async Task CopyCode()
     {
-        var code = await MonacoEditor.GetValueAsync();
+        var code = await _monacoEditor!.GetValueAsync();
 
         if (!string.IsNullOrWhiteSpace(code))
         {
             await Js.InvokeVoidAsync(JsInteropConstants.CopyText, code);
-            await PopupService.EnqueueSnackbarAsync("Copy success", AlertTypes.Success);
-        }
-        else
-        {
-            await PopupService.EnqueueSnackbarAsync("The code is empty", AlertTypes.Success);
         }
     }
 
@@ -216,6 +205,7 @@ public partial class Example : NextTickComponentBase
             _showExpands = true;
             StateHasChanged();
 
+            _options["theme"] = MasaBlazor.Theme.Dark ? "vs-dark" : "vs";
             _expand = true;
         }
         else
@@ -227,47 +217,32 @@ public partial class Example : NextTickComponentBase
     [JSInvokable(nameof(RunCode))]
     public async Task RunCode()
     {
-        _load = true;
-        await Task.Delay(50);
-        _ = InvokeAsync(StateHasChanged);
-
         if (!_initialize)
         {
             RazorCompile.Initialized(await GetReference(), GetRazorExtension());
         }
 
-        try
+        var code = await _monacoEditor!.GetValueAsync();
+        _type = RazorCompile.CompileToType(new CompileRazorOptions()
         {
+            OptimizationLevel = OptimizationLevel.Release,
+            Code = code,
+        });
 
-            string code = await MonacoEditor.GetValueAsync();
-            _type = RazorCompile.CompileToType(new CompileRazorOptions()
-            {
-                OptimizationLevel = OptimizationLevel.Release,
-                Code = code,
-            });
-        }
-        catch (Exception e)
-        {
-            await PopupService.EnqueueSnackbarAsync(e.Message, AlertTypes.Error);
-        }
-
-        _load = false;
         _ = InvokeAsync(StateHasChanged);
     }
-
 
     private async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
-        var iswebAssembly = Js is IJSInProcessRuntime;
-        if (iswebAssembly)
+        if (Js is IJSInProcessRuntime)
         {
             using var http = HttpClientFactory.CreateClient("masa-docs");
-            foreach (var asm in assemblies)
+            foreach (var asm in s_assemblies)
             {
                 try
                 {
-                    await using var stream = await http!.GetStreamAsync($"_framework/{asm}.dll");
+                    await using var stream = await http.GetStreamAsync($"_framework/{asm}.dll");
                     if (stream.Length > 0)
                     {
                         portableExecutableReferences?.Add(MetadataReference.CreateFromStream(stream));
@@ -281,7 +256,7 @@ public partial class Example : NextTickComponentBase
         }
         else
         {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(u => !string.IsNullOrWhiteSpace(u.Location)))
             {
                 try
                 {
@@ -302,7 +277,7 @@ public partial class Example : NextTickComponentBase
     private static List<RazorExtension> GetRazorExtension()
     {
         return typeof(Example).Assembly.GetReferencedAssemblies()
-            .Select(asm => new AssemblyExtension(asm.FullName, AppDomain.CurrentDomain.Load(asm.FullName)))
-            .Cast<RazorExtension>().ToList();
+                              .Select(asm => new AssemblyExtension(asm.FullName, AppDomain.CurrentDomain.Load(asm.FullName)))
+                              .Cast<RazorExtension>().ToList();
     }
 }

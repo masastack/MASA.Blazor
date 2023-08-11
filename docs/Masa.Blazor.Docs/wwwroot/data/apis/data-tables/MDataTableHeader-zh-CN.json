@@ -6,7 +6,7 @@
     "headers": "Array of header items to display",
     "isMobile": "Renders mobile view of headers",
     "multiSort": "",
-    "options": "Options object. Identical to the one on [MDataTable](components/data-tables/api/MDataTable)",
+    "options": "Options object. Identical to the one on [MDataTable](/blazor/components/data-tables/api/MDataTable)",
     "showGroupBy": "Shows group by button",
     "singleSelect": "Toggles rendering of select-all checkbox",
     "someItems": "Indicates if one or more items in table are selected",

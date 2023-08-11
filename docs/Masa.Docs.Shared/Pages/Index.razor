@@ -200,22 +200,16 @@
 
     private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
     {
-        <div class="project-content">
-            @if (group is not null)
-            {
-                <div class="project-content__title">@I18n.T(group)</div>
-            }
-            <MCard Outlined Flat Class="py-6 px-12 m-card--doc">
-                <MRow Dense NoGutters>
-                    @foreach (var (title, href) in items)
-                    {
-                        <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
-                            @LinkableTitle(title, href)
-                        </MCol>
-                    }
-                </MRow>
-            </MCard>
-        </div>
+        <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title">
+            <MRow Dense NoGutters>
+                @foreach (var (title, href) in items)
+                {
+                    <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
+                        @LinkableTitle(title, href)
+                    </MCol>
+                }
+            </MRow>
+        </OutlineCard>
     };
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
