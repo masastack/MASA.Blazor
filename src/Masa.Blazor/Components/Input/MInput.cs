@@ -101,7 +101,14 @@
             if (Required)
             {
                 var rules = new List<Func<TValue, StringBoolean>>() { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
-                Rules = Rules is null ? rules : rules.Concat(Rules);
+                if (IsDirtyParameter(nameof(Rules)))
+                {
+                    Rules = Rules is null ? rules : rules.Concat(Rules);
+                }
+                else
+                {
+                    Rules = rules;
+                }
             }
         }
 
