@@ -333,7 +333,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerTitle.Disabled)] = Disabled;
                     attrs[nameof(MDatePickerTitle.Readonly)] = Readonly;
                     attrs[nameof(MDatePickerTitle.SelectingYear)] = InternalActivePicker == DatePickerType.Year;
-                    attrs[nameof(MDatePickerTitle.Year)] = Formatters.Year(new DateOnly(TableDate.Year, 1, 1));
+                    attrs[nameof(MDatePickerTitle.Year)] = Formatters.Year(TableDate);
                     attrs[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
                     attrs[nameof(MDatePickerTitle.Value)] = MultipleValue.FirstOrDefault();
                     attrs[nameof(MDatePickerTitle.OnSelectingYearUpdate)] = CreateEventCallback<bool>(value =>
