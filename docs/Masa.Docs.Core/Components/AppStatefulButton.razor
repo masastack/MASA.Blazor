@@ -1,0 +1,92 @@
+﻿@inject I18n I18n
+@inject IPopupService PopupService
+
+<MButton Small="@Small"
+         Color="@Color"
+         Class="@Class"
+         Text="@Text"
+         Disabled="@_processing"
+         OnClick="HandleOnClick">
+    <MIcon Left>
+        @_computedIcon
+    </MIcon>
+    @I18n.T(_computedText)
+</MButton>
+
+@code {
+
+    [Parameter]
+    public string? Color { get; set; } = "primary";
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public bool Small { get; set; }
+
+    [Parameter]
+    public bool Text { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public string? StaticText { get; set; }
+
+    [Parameter]
+    public string? ProcessText { get; set; }
+
+    [Parameter]
+    public string? FinishText { get; set; }
+
+    [Parameter]
+    public string? StaticIcon { get; set; }
+
+    [Parameter]
+    public string? FinishIcon { get; set; }
+
+    private bool _processing;
+    private string? _computedText;
+    private string? _computedIcon;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _computedText = StaticText;
+        _computedIcon = StaticIcon;
+    }
+
+    private async Task HandleOnClick()
+    {
+        if (!OnClick.HasDelegate)
+        {
+            return;
+        }
+
+        _processing = true;
+        _computedText = ProcessText;
+        StateHasChanged();
+
+        try
+        {
+            await OnClick.InvokeAsync();
+            _computedText = FinishText ?? ProcessText;
+            _computedIcon = FinishIcon ?? StaticIcon;
+            StateHasChanged();
+            await Task.Delay(500);
+        }
+        catch (Exception e)
+        {
+            await PopupService.EnqueueSnackbarAsync(e, withStackTrace: true);
+        }
+        finally
+        {
+            _computedText = StaticText;
+            _computedIcon = StaticIcon;
+
+            _processing = false;
+        }
+    }
+
+}

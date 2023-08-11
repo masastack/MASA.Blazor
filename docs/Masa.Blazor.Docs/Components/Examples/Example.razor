@@ -45,37 +45,44 @@
 
                         <ExpandTransition>
                             <ShowTransitionElement Value="_expand">
-                                
-                                <MButton Class="mr-2"
-                                         IsActive="true"
-                                         Text
-                                         Color="primary">
-                                    @_sections.Language
-                                </MButton>
-                                
-                                <MButton Class="mr-2"
-                                         Text
-                                         Color="primary" Style="float: right" OnClick="async ()=>await RunCode()">
-                                    Run
-                                 </MButton>
+                                <div class="d-flex justify-end pa-2">
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="CopyCode"
+                                                       StaticIcon="mdi-content-copy"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-copy"
+                                                       ProcessText="code-copying"
+                                                       FinishText="code-copied">
+                                    </AppStatefulButton>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RestoreCode"
+                                                       StaticIcon="mdi-restore"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-restore"
+                                                       ProcessText="code-restoring">
+                                    </AppStatefulButton>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RunCode"
+                                                       StaticIcon="mdi-play-circle-outline"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-run"
+                                                       ProcessText="code-running">
+                                    </AppStatefulButton>
+                                </div>
 
-                                 <MButton Class="mr-2"
-                                          Text
-                                          Color="primary" Style="float: right" OnClick="async ()=>await RestoreCode()">
-                                     Restore
-                                 </MButton>
-                                <MButton Class="mr-2"
-                                         Text
-                                          Color="primary" Style="float: right" OnClick="async ()=>await CopyCode()">
-                                     Copy code
-                                </MButton>
                                 <AppDivider />
 
-                                <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
-                                    <MWindowItem>
-                                         <MMonacoEditor InitCompleteHandle="async() =>await InitCompleteHandle()" @ref=MonacoEditor Height="@("500px")" Value="@_sections.Code" EditorOptions="options"></MMonacoEditor>
-                                    </MWindowItem>
-                                </MWindow>
+                                <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
+                                               Value="@_sourceCode"
+                                               EditorOptions="_options"
+                                               @ref=_monacoEditor>
+                                </MMonacoEditor>
                             </ShowTransitionElement>
                         </ExpandTransition>
                     }
@@ -88,9 +95,3 @@ else
 {
     <MSkeletonLoader Dark="Dark" MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
 }
-
-<MOverlay Value="_load" ZIndex="7">
-    <div class="white--text text-h3">
-        Loading, just a moment...
-    </div>
-</MOverlay>
