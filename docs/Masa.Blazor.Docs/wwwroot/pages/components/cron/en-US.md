@@ -10,4 +10,4 @@ related:
 
 ## Usage
 
-<masa-example file="Examples.components.cron.Index"></masa-example>
+<masa-example file="Examples.components.cron.Usage"></masa-example>

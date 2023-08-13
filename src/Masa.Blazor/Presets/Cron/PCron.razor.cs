@@ -4,11 +4,46 @@ public partial class PCron
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
-    [Parameter]
-    public string? Value { get; set; }
+    [Parameter] public string? Class { get; set; }
 
-    [Parameter]
-    public EventCallback<string?> ValueChanged { get; set; }
+    [Parameter] public string? Style { get; set; }
+
+    [Parameter] public StringNumber? MinHeight { get; set; }
+
+    [Parameter] public bool Outlined { get; set; }
+
+    [Parameter] public bool NoTransition { get; set; }
+
+    [Parameter] public string? Value { get; set; }
+
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+
+    [Parameter] public EventCallback<string> OnChange { get; set; }
+
+    [Parameter] public bool Dark { get; set; }
+
+    [Parameter] public bool Light { get; set; }
+
+    [CascadingParameter(Name = "IsDark")]
+    public bool CascadingIsDark { get; set; }
+
+    public bool IsDark
+    {
+        get
+        {
+            if (Dark)
+            {
+                return true;
+            }
+
+            if (Light)
+            {
+                return false;
+            }
+
+            return CascadingIsDark;
+        }
+    }
 
     private string? _prevValue;
 
@@ -19,6 +54,8 @@ public partial class PCron
     private StringNumber? _selectedPeriod;
 
     private readonly List<CronItemModel> _cronItems = new();
+
+    private Block Block => new("m-cron");
 
     protected override void OnInitialized()
     {
@@ -170,6 +207,11 @@ public partial class PCron
             _errorMessage = I18n.T(ex.Message);
         }
 
+        if (_hasError)
+        {
+            return;
+        }
+
         if (ValueChanged.HasDelegate)
         {
             _prevValue = value;
@@ -179,5 +221,7 @@ public partial class PCron
         {
             Value = value;
         }
+
+        await OnChange.InvokeAsync(value);
     }
 }
