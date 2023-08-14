@@ -507,9 +507,9 @@ namespace Masa.Blazor
                 .ApplyTextFieldPrependIcon(typeof(MIcon),
                     attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
                 .Merge<BIcon, MIcon>("append-icon-number-up",
-                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 }, { "ripple", true } })
                 .Merge<BIcon, MIcon>("append-icon-number-down",
-                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } });
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 }, { "ripple", true } });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
