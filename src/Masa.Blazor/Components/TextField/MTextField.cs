@@ -739,11 +739,6 @@ namespace Masa.Blazor
 
             var succeed = TryConvertTo<TValue>(originValue, out var result);
 
-            if (succeed && cb.HasDelegate)
-            {
-                await cb.InvokeAsync(result);
-            }
-
             var updateOnChange = UpdateOnBlur || UpdateOnChange;
 
             if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
@@ -751,6 +746,11 @@ namespace Masa.Blazor
                 UpdateValue(originValue, succeed, result);
 
                 StateHasChanged();
+            }
+
+            if (succeed && cb.HasDelegate)
+            {
+                await cb.InvokeAsync(result);
             }
         }
 
