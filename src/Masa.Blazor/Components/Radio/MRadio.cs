@@ -46,7 +46,13 @@
                     attrs[nameof(MIcon.Color)] = Color;
                     attrs[nameof(MIcon.IsActive)] = IsActive;
                 })
-                .Apply<BLabel, MLabel>();
+                .Apply<BLabel, MLabel>(attrs =>
+                {
+                    attrs[nameof(MLabel.Attributes)] = new Dictionary<string, object>()
+                    {
+                        { "__internal_preventDefault_onclick", true }
+                    };
+                });
         }
     }
 }

@@ -576,19 +576,57 @@ input[type=number] {
 
 /* cron */
 
-.m-cron .m-text-field {
-    margin: 0px 16px 0px 16px !important;
+.m-cron--outlined {
+    border-width: thin;
+    border-style: solid;
+    border-radius: 4px;
 }
-.m-cron {
-    padding: 0px 12px 0px 12px;
+
+.theme--light.m-cron--outlined {
+    border-color: rgba(0, 0, 0, .38);
 }
-.m-cron .m-cron-item {
+
+.theme--dark.m-cron--outlined {
+    border-color: hsla(0, 0%, 100%, .5);
+}
+
+.m-cron--outlined .m-tabs {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.m-cron--outlined .m-window {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.m-cron-period .m-input--selection-controls {
+    margin: 8px 16px 16px 16px;
+    padding-top: 0;
+}
+
+.m-cron-period .m-text-field {
+    margin: 0 8px;
+}
+
+.m-cron-period .m-radio {
+    min-height: 40px;
+    margin-top: 4px;
+    margin-bottom: 4px !important;
+}
+
+.m-cron-period .m-radio:first-child {
+    margin-top: 0;
+}
+
+.m-cron-period .m-radio:last-child {
+    margin-bottom: 0 !important;
+}
+
+.m-cron-period .m-cron-period__radio-label {
     align-items: center;
     display: flex;
     width: 100%;
-}
-.m-cron .m-radio {
-    padding-top: 8px;
 }
 
 /* mobile picker */

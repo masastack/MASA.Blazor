@@ -1,0 +1,58 @@
+﻿@namespace Masa.Blazor.Presets.Cron
+@inherits Masa.Blazor.Presets.Cron.CronItemBase
+
+@base.BuildRenderTree
+
+@code {
+
+    public DayCronItem() : base(PeriodTypes.Day)
+    {
+    }
+
+    protected override RenderFragment RadiosContent() => __builder =>
+    {
+        @PeriodContent()
+        @UnspecifiedContent()
+        @RangeContent()
+        @FromToContent()
+        @NearestDayContent()
+        @LastOfPeriodContent()
+        @SpecifiedContent()
+    };
+
+    private RenderFragment NearestDayContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.NearestDay">
+            <LabelContent>
+                <div class="m-cron-period__radio-label">
+                    <MI18n Key="$masaBlazor.cron.nearestWorkDayPerMonth"
+                           Class="d-flex align-center">
+                        <PlaceholderContent>
+                            <MTextField
+                                Value="CronItemData.NearestOfDay"
+                                HideDetails="true"
+                                Outlined
+                                Dense TValue="int?"
+                                Type="number"
+                                NumberProps="prop => { prop.Min = MinUnit; prop.Max = MaxUnit; }"
+                                ValueChanged="OnNearestOfDayChanged">
+                            </MTextField>
+                        </PlaceholderContent>
+                    </MI18n>
+                </div>
+            </LabelContent>
+        </MRadio>
+    };
+
+    private RenderFragment LastOfPeriodContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.LastOfPeriod">
+            <LabelContent>
+                <div class="m-cron-period__radio-label">
+                    @I18n.T($"$masaBlazor.cron.lastDayOfPerMonth")
+                </div>
+            </LabelContent>
+        </MRadio>
+    };
+
+}
