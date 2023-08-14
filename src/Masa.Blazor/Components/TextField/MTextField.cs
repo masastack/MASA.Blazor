@@ -843,6 +843,8 @@ namespace Masa.Blazor
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     InternalValue = internalValue;
+
+                    await OnChange.InvokeAsync(internalValue);
                 }
             }
 
@@ -868,6 +870,8 @@ namespace Masa.Blazor
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     InternalValue = internalValue;
+
+                    await OnChange.InvokeAsync(internalValue);
                 }
             }
 
@@ -908,6 +912,8 @@ namespace Masa.Blazor
             {
                 await OnClearClick.InvokeAsync(args);
             }
+
+            await OnChange.InvokeAsync(default);
 
             await InputElement.FocusAsync();
         }
