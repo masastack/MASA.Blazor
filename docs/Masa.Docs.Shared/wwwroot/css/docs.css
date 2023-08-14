@@ -293,13 +293,6 @@ ul:not([class]), ol:not([class]) {
     margin-bottom: 16px;
 }
 
-.bottom-btn {
-    z-index: 6;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-}
-
 .theme--light.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
     background-color: #f0f3f9 !important;
     /*color: #1B2559;*/
