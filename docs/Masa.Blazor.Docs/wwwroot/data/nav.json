@@ -99,6 +99,10 @@
         "title": "defaults-providers",
         "state": "new"
       },
+      {
+        "title": "descriptions",
+        "state": "new"
+      },
       "dialogs",
       "dividers",
       "drag-zone",
@@ -272,10 +276,6 @@
     "icon": "mdi-flask",
     "state": "new",
     "items": [
-      {
-        "title": "descriptions",
-        "state": "new"
-      },
       {
         "title": "date-digital-clock-pickers",
         "state": "new"
