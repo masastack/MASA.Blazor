@@ -170,7 +170,7 @@ public partial class ModalBase
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         ComputedSaveButtonProps = GetDefaultSaveButtonProps();
         ComputedCancelButtonProps = GetDefaultCancelButtonProps();
         ComputedDeleteButtonProps = GetDefaultDeleteButtonProps();
@@ -301,8 +301,14 @@ public partial class ModalBase
         {
             await InvokeAsync(async () =>
             {
-                await action(arg);
-                StateHasChanged();
+                try
+                {
+                    await action(arg);
+                }
+                finally
+                {
+                    StateHasChanged();
+                }
             });
         }, interval);
     }
