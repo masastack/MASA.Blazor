@@ -287,6 +287,8 @@ namespace Masa.Blazor
 
             IsActive = !IsMobile;
 
+            await UpdateApplicationAsync();
+
             await InvokeStateHasChangedAsync();
         }
 
