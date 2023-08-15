@@ -7,7 +7,15 @@ public class ModalActionEventArgs
         IsCanceled = false;
     }
 
+    public ModalActionEventArgs(FormContext? formContext)
+    {
+        IsCanceled = false;
+        FormContext = formContext;
+    }
+
     public bool IsCanceled { get; private set; }
+
+    public FormContext? FormContext { get; private set; }
 
     /// <summary>
     /// Cancel the next operation.

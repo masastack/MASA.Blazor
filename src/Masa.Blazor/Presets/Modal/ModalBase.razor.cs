@@ -187,10 +187,10 @@ public partial class ModalBase
         _debounceHandleOnSave = DebounceEvent<MouseEventArgs>(
             async (_) =>
             {
-                var args = new ModalActionEventArgs();
+                var args = new ModalActionEventArgs(Form?.FormContext);
 
                 _saveLoading = true;
-                
+
                 try
                 {
                     await OnSave.InvokeAsync(args);
