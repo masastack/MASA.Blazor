@@ -81,7 +81,7 @@ namespace Masa.Blazor.Presets
 
             _stack.Add(config);
 
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         internal void RemoveSnackbar(Guid id)
@@ -90,7 +90,8 @@ namespace Masa.Blazor.Presets
             if (config is null) return;
 
             _stack.Remove(config);
-            StateHasChanged();
+
+            InvokeAsync(StateHasChanged);
         }
     }
 }
