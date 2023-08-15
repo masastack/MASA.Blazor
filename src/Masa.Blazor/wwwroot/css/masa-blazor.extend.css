@@ -398,22 +398,14 @@ input[type=number] {
 
 .m-input-number-handler-wrap {
     display: flex;
-    flex-direction: column-reverse;
-    height: 100%;
-    border-radius: 0 2px 2px 0;
+    flex-direction: column;
     opacity: 0;
-    transition: opacity .24s linear .1s;
-    align-items: center;
-    align-self: center;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    justify-content: center;
 }
 
     .m-input-number-handler-wrap .m-input__icon {
-        height: 12px;
-    }
-
-    .m-input-number-handler-wrap.m-input-number-handler-focused {
-        opacity: 1;
-        box-shadow: none;
+        height: 16px;
     }
 
     .m-input-number-handler-wrap .m-input__append-inner {
@@ -421,11 +413,22 @@ input[type=number] {
     }
 
 .m-number-input-icon button {
-    height: 12px;
+    width: 100%;
+    font-size: 16px !important;
 }
 
+    .m-number-input-icon button::before {
+        width: 24px;
+    }
+
     .m-number-input-icon button::after {
-        border-radius: 0% !important;
+        transform: none !important;
+        border-radius: 0 !important;
+    }
+    
+    .m-number-input-icon button:hover::after {
+        opacity: 0.08;
+        background-color: currentColor;
     }
 
 .m-number-input-down-disabled button {
@@ -434,6 +437,18 @@ input[type=number] {
 
 .m-number-input-up-disabled button {
     cursor: not-allowed !important;
+}
+
+.m-text-field:hover .m-input-number-handler-wrap {
+    opacity: 1;
+}
+
+.m-input--dense .m-input-number-handler-wrap .m-input__icon {
+    height: 12px;
+}
+
+.m-input--dense .m-number-input-icon button {
+    font-size: 12px !important;
 }
 
 /* support childContent in Divider */
