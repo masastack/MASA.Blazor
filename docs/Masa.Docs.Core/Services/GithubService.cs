@@ -59,6 +59,43 @@ public class GithubService
 
         return issueCount;
     }
+    
+    public async Task<(int open, int close)> SearchIssuesAsync(string owner, string repo, IEnumerable<string> labels, string cacheKey)
+    {
+        var issueCount = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__searchIssues_{cacheKey}", async entry =>
+        {
+            var request = new SearchIssuesRequest();
+            request.Repos.Add(owner, repo);
+            request.Type = IssueTypeQualifier.Issue;
+            request.Labels = labels;
+
+            var client = CreateClient(owner, repo);
+
+            var open = 0;
+            var closed = 0;
+
+            try
+            {
+                var result = await client.Search.SearchIssues(request);
+
+                if (!result.IncompleteResults)
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+
+                    open = result.Items.Count(item => item.State == ItemState.Open);
+                    closed = result.Items.Count(item => item.State == ItemState.Closed);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return (open, closed);
+        });
+
+        return issueCount;
+    }
 
     public async Task<IReadOnlyList<Release>> FetchReleasesAsync(string owner, string repo)
     {

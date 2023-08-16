@@ -37,6 +37,9 @@
     "MCarousel",
     "MCarouselItem"
   ],
+  "echarts": [
+    "MECharts"
+  ],
   "expansion-panels": [
     "MExpansionPanel",
     "MExpansionPanels",
