@@ -76,6 +76,16 @@ dotnet run
 
 Recommended use chrome or edge to visit `http://localhost:5000/`
 
+## 💁‍♂️ Contributing
+
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.
+
+Thanks to all the friends who have contributed to this project.
+
+<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
+</a>
+
 ## 🌐 Supported browsers
 
 ![chrome](https://img.shields.io/badge/chrome->%3D57-success.svg?logo=google%20chrome&logoColor=red)![firefox](https://img.shields.io/badge/firefox->522-success.svg?logo=mozilla%20firefox&logoColor=red)![edge](https://img.shields.io/badge/edge->%3D16-success.svg?logo=microsoft%20edge&logoColor=blue)![ie](https://img.shields.io/badge/ie->%3D11-success.svg?logo=internet%20explorer&logoColor=blue)![Safari](https://img.shields.io/badge/safari->%3D14-success.svg?logo=safari&logoColor=blue)![oper](https://img.shields.io/badge/opera->%3D4.4-success.svg?logo=opera&logoColor=red)
@@ -100,19 +110,6 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 | Windows | Supported | Supported | Not supported | Supported | Supported      | Supported, IE11+  |
 
 > Due to WebAssembly restriction, Blazor WebAssembly doesn't support IE browser, but Blazor Server supports IE 11† with additional polyfills. See official documentation
-
-## 💁‍♂️ Contributing
-
-1. Fork & Clone
-2. Create Feature_xxx branch
-3. Commit with commit message, like `feat: add MButton`
-4. Create Pull Request
-
-Thanks to all the friends who have contributed to this project.
-
-<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
-</a>
 
 ## 💬 Interactive
 
