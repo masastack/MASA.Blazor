@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Masa.Blazor.Presets;
+namespace Masa.Blazor.Presets.PageContainer;
 
 public class PPageContainerItem : ComponentBase
 {

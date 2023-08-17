@@ -4,24 +4,20 @@
     <PPageTabsProvider>
         <MAppBar App Color="white">
             <PPageTabs @ref="_pageTabs"
-                       NoDataPath="/blazor/examples/page-tabs/page1"
+                       NoDataPath="@s_noDataPath"
                        TabOptions="@TabOptions"
                        SelfPatterns="@s_selfPatterns">
             </PPageTabs>
         </MAppBar>
 
         <MMain>
-            <MContainer>
-                <MCard Outlined>
-                    <MCardText>
-                        <PPageContainer PageTabs="_pageTabs" 
-                                        SelfPatterns="@s_selfPatterns"
-                                        ExcludedPatterns="@s_excludedPatterns">
-                            @Body
-                        </PPageContainer>
-                    </MCardText>
-                </MCard>
-            </MContainer>
+            <PPageContainer PageTabs="_pageTabs"
+                            SelfPatterns="@s_selfPatterns"
+                            ExcludePatterns="@s_excludedPatterns">
+                <MContainer>
+                    @Body
+                </MContainer>
+            </PPageContainer>
         </MMain>
     </PPageTabsProvider>
 
@@ -37,6 +33,8 @@
 
     private PPageTabs? _pageTabs;
 
+    private static readonly string s_noDataPath = "/blazor/examples/page-tabs/page1";
+
     private static readonly string[] s_selfPatterns =
     {
         "/blazor/examples/page-tabs/page4",
@@ -51,7 +49,7 @@
     {
         if (pathValue.AbsolutePath == "/blazor/examples/page-tabs/page2")
         {
-            return new TabOptions("Custom tab title", "mdi-heart", "font-weight-bold");
+            return new TabOptions("Custom tab title", "mdi-tab", "font-weight-bold");
         }
 
         return null;

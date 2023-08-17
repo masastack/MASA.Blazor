@@ -16,8 +16,6 @@ public class PatternPathComponentBase : BDomComponentBase
     [Parameter]
     public IEnumerable<string>? SelfPatterns { get; set; }
 
-    protected readonly List<PatternPath> PatternPaths = new();
-
     protected IEnumerable<Regex> FormatSelfPatterns()
     {
         return SelfPatterns is null

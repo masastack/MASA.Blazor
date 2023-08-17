@@ -91,8 +91,11 @@ public partial class PPageTabs : PatternPathComponentBase
     [Parameter]
     public Func<string, Task<bool>>? OnClose { get; set; }
 
+    protected readonly List<PatternPath> PatternPaths = new();
+
     private bool _menuValue;
     private string? _noDataPath;
+    private string? _previousPath;
     private PatternPath? _contextmenuPath;
 
     private double _positionX;
@@ -214,28 +217,33 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var pathPattern = GetCurrentPatternPath();
-        if (!pathPattern.IsSelf && PatternPaths.Any(p => p.AbsolutePath.Equals(pathPattern.AbsolutePath, StringComparison.OrdinalIgnoreCase)))
+        var currentPatternPath = GetCurrentPatternPath();
+        var currentPath = currentPatternPath.AbsolutePath;
+
+        // only the path is changed, not the query string
+        if (_previousPath == currentPath)
         {
             return;
         }
 
-        if (pathPattern.IsSelf)
+        if (currentPatternPath.IsSelf)
         {
-            var renderedPathPattern = PatternPaths.FirstOrDefault(p => pathPattern == p);
+            var renderedPathPattern = PatternPaths.FirstOrDefault(p => currentPatternPath == p);
             if (renderedPathPattern is not null)
             {
                 renderedPathPattern.UpdatePath(NavigationManager.GetAbsolutePath());
                 InvokeAsync(StateHasChanged);
-                return;
             }
         }
 
-        InvokeAsync(() =>
+        if (!PatternPaths.Contains(currentPatternPath))
         {
-            PatternPaths.Add(pathPattern);
-            StateHasChanged();
-        });
+            PatternPaths.Add(currentPatternPath);
+        }
+
+        _previousPath = currentPath;
+
+        InvokeAsync(StateHasChanged);
     }
 
     private string GetTabTitle(PatternPath patternPath, TabOptions? tabOptions)
