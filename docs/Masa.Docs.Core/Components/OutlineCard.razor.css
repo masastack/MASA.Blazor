@@ -1,7 +1,8 @@
 ﻿.m-outline-card {
-    position: relative;
-    padding: 16px;
     border-radius: 4px;
+    margin-top: 12px;
+    padding: 16px;
+    position: relative;
 }
 
 .m-outline-card__title {
