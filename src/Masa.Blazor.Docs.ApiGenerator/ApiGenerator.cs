@@ -88,6 +88,8 @@ public class ApiGenerator : IIncrementalGenerator
         public string? Description {{ get; set; }}
 
         public bool Required {{ get; set; }}
+
+        public bool IsObsolete {{ get; set; }}
     }}
 }}");
 
@@ -202,7 +204,9 @@ public class ApiGenerator : IIncrementalGenerator
                         }
                     }
 
-                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue);
+                    var isObsolete = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == "ObsoleteAttribute") is not null;
+
+                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete);
 
                     if (type.Name.StartsWith("RenderFragment"))
                     {
