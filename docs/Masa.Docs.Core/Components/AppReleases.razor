@@ -69,7 +69,11 @@
                 <MDivider />
 
                 <div class="pa-4">
-                    <MMarkdownIt Source="@_selected.Body" Scope="desc" Class="release-note"></MMarkdownIt>
+                    <MMarkdownIt Source="@_selected.Body"
+                                 Scope="desc"
+                                 Class="release-note"
+                                 Linkify>
+                    </MMarkdownIt>
                 </div>
             }
         </MCard>
