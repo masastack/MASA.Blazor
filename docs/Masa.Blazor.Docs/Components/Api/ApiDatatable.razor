@@ -5,14 +5,14 @@
 <AppSheet Class="mb-9">
     <MSimpleTable Class="api-table">
         <thead>
-            <tr>
-                @foreach (var header in Headers)
-                {
-                    <th style="@GetHeaderStyle(header)">
-                        <div class="subtitle">@I18n.T(header)</div>
-                    </th>
-                }
-            </tr>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th style="@GetHeaderStyle(header)">
+                    <div class="subtitle">@I18n.T(header)</div>
+                </th>
+            }
+        </tr>
         </thead>
         <tbody>
         @foreach (var item in Items)
@@ -24,7 +24,9 @@
                         @if (header == "name")
                         {
                             <span class="subtitle">
-                                <MBadge Value="@(item.Required)" Color="transparent" Class="text-mono" OffsetY="10">
+                                <MBadge Value="@(item.Required)" Color="transparent"
+                                        Class="@(item.IsObsolete ? "text-mono text-decoration-line-through" : "text-mono")"
+                                        OffsetY="10">
                                     <BadgeContent>
                                         <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
                                     </BadgeContent>
@@ -125,7 +127,7 @@
             "name" => "width:144px",
             "type" => "width:264px;",
             _ => ""
-        };
+            };
     }
 
 }
