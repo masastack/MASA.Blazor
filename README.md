@@ -68,7 +68,7 @@ git submodule foreach git checkout main
 ### Run doc server
 
 ```shell
-cd docs/Masa.Doc.Server
+cd docs/Masa.Docs.Server
 dotnet run
 ```
 
