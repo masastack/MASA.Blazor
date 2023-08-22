@@ -7,15 +7,15 @@ Get started with MASA Blazor, building feature-rich and fast applications.
 
 ## Automatic Installation
 
-To get started quickly, you can use the Masa.Template template to quickly create a project.
+To get started quickly, you can use the MASA.Template template to quickly create a project.
 
-### Install Masa.Template
+### Install MASA.Template
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.2
+dotnet new install MASA.Template
 ```
 
-[Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
+[MASA.Template](https://github.com/masastack/MASA.Template) provides the following templates:
 
 - `masablazor-server`: MASA Blazor Server template
 - `masablazor-wasm`: MASA Blazor WebAssembly template

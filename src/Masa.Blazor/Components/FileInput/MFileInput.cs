@@ -310,6 +310,8 @@ namespace Masa.Blazor
             {
                 await OnClearClick.InvokeAsync(args);
             }
+
+            await OnChange.InvokeAsync(InternalValue);
         }
     }
 }

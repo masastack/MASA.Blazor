@@ -79,6 +79,8 @@ namespace Masa.Blazor
             "Bottom", "Footer", "Bar", "Top"
         };
 
+        private bool _prevShowOverlay;
+
         protected StringNumber? ComputedMaxHeight
         {
             get
@@ -204,6 +206,13 @@ namespace Masa.Blazor
 
                 StateHasChanged();
             }
+
+            if (_prevShowOverlay != ShowOverlay)
+            {
+                _prevShowOverlay = ShowOverlay;
+
+                _ = ShowOverlay ? HideScroll() : ShowScroll();
+            }
         }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
@@ -239,25 +248,6 @@ namespace Masa.Blazor
                     {
                         Value = val;
                     }
-
-                    // OverlayRef is not null in the next tick.
-                    NextTick(async () =>
-                    {
-                        if (val)
-                        {
-                            if (ShowOverlay)
-                            {
-                                await HideScroll();
-                            }
-                        }
-                        else
-                        {
-                            if (!ShowOverlay)
-                            {
-                                await ShowScroll();
-                            }
-                        }
-                    });
 
                     //We will remove this when mixins applicationable finished
                     _ = UpdateApplicationAsync();
@@ -296,6 +286,8 @@ namespace Masa.Blazor
             });
 
             IsActive = !IsMobile;
+
+            await UpdateApplicationAsync();
 
             await InvokeStateHasChangedAsync();
         }

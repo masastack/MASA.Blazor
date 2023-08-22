@@ -2,100 +2,133 @@
 
 public partial class PCron
 {
-    [Inject]
-    I18n I18n { get; set; }
+    [Inject] private I18n I18n { get; set; } = null!;
 
-    [Parameter]
-    public string Value
+    [Parameter] public string? Class { get; set; }
+
+    [Parameter] public string? Style { get; set; }
+
+    [Parameter] public StringNumber? MinHeight { get; set; }
+
+    [Parameter] public bool Outlined { get; set; }
+
+    [Parameter] public bool NoTransition { get; set; }
+
+    [Parameter] public string? Value { get; set; }
+
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+
+    [Parameter] public EventCallback<string> OnChange { get; set; }
+
+    [Parameter] public bool Dark { get; set; }
+
+    [Parameter] public bool Light { get; set; }
+
+    [CascadingParameter(Name = "IsDark")]
+    public bool CascadingIsDark { get; set; }
+
+    public bool IsDark
     {
-        get => _value;
-        set
+        get
         {
-            if (_value != value)
+            if (Dark)
             {
-                _value = value;
-                OnValueChanged();
+                return true;
             }
+
+            if (Light)
+            {
+                return false;
+            }
+
+            return CascadingIsDark;
         }
     }
 
-    [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
-    
-    private string _value;
+    private string? _prevValue;
 
     private bool _hasError;
 
     private string _errorMessage = string.Empty;
 
-    private StringNumber _selectedPeriod;
+    private StringNumber? _selectedPeriod;
 
     private readonly List<CronItemModel> _cronItems = new();
 
+    private Block Block => new("m-cron");
+
+    protected override void OnInitialized()
+    {
+        InitCronItems();
+
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevValue != Value)
+        {
+            _prevValue = Value;
+
+            OnValueChanged();
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender && string.IsNullOrWhiteSpace(Value))
         {
             await CalculateCronValueAsync();
         }
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
-    protected override Task OnInitializedAsync()
-    {
-        InitCronItems();
-        return base.OnInitializedAsync();
-    }
-
-    private void InitCronItems()
-    {
-        if (_cronItems.Count == 0)
-        {
-            foreach (var item in Enum.GetValues<PeriodTypes>())
-            {
-                var cronDefaultValue = "*";
-
-                if (item == PeriodTypes.Week)
-                {
-                    cronDefaultValue = "?";
-                }
-                else if (item == PeriodTypes.Year)
-                {
-                    cronDefaultValue = string.Empty;
-                }
-
-                _cronItems.Add(new CronItemModel()
-                {
-                    Period = item,
-                    CronValue = cronDefaultValue,
-                    DefaultValue = cronDefaultValue
-                });
-            }
-        }
-    }
-
-    protected override Task OnParametersSetAsync()
-    {
-        OnValueChanged();
-        return base.OnParametersSetAsync();
     }
 
     private void OnValueChanged()
     {
-        InitCronItems();
-        if (CronExpression.IsValidExpression(_value))
+        if (string.IsNullOrWhiteSpace(Value) || !CronExpression.IsValidExpression(Value))
         {
-            var valueArr = _value.Split(" ");
-            var cronItemsCount = _cronItems.Count;
-            for (int i = 0; i < valueArr.Length; i++)
+            return;
+        }
+
+        var valueArr = Value.Split(" ");
+        var cronItemsCount = _cronItems.Count;
+        for (var i = 0; i < valueArr.Length; i++)
+        {
+            if (cronItemsCount < i + 1)
             {
-                if (cronItemsCount < i + 1)
-                {
-                    return;
-                }
-                _cronItems[i].CronValue = valueArr[i];
+                return;
             }
+
+            _cronItems[i].CronValue = valueArr[i];
+        }
+    }
+
+    private void InitCronItems()
+    {
+        if (_cronItems.Any()) return;
+
+        foreach (var item in Enum.GetValues<PeriodTypes>())
+        {
+            var cronDefaultValue = "*";
+
+            if (item == PeriodTypes.Week)
+            {
+                cronDefaultValue = "?";
+            }
+            else if (item == PeriodTypes.Year)
+            {
+                cronDefaultValue = string.Empty;
+            }
+
+            _cronItems.Add(new CronItemModel()
+            {
+                Period = item,
+                CronValue = cronDefaultValue,
+                DefaultValue = cronDefaultValue
+            });
         }
     }
 
@@ -120,6 +153,7 @@ public partial class PCron
                 if (dayItem != null)
                     dayItem.CronValue = cronItem.CronValue == "?" ? "*" : "?";
             }
+
             ChangeTimeItemDefaultValue(cronItem);
         }
 
@@ -160,11 +194,11 @@ public partial class PCron
 
     private async Task CalculateCronValueAsync()
     {
-        Value = string.Join(" ", _cronItems.OrderBy(p => p.Period).Select(p => p.CronValue));
+        var value = string.Join(" ", _cronItems.OrderBy(p => p.Period).Select(p => p.CronValue));
 
         try
         {
-            CronExpression.ValidateExpression(Value);
+            CronExpression.ValidateExpression(value);
             _hasError = false;
         }
         catch (Exception ex)
@@ -173,9 +207,21 @@ public partial class PCron
             _errorMessage = I18n.T(ex.Message);
         }
 
+        if (_hasError)
+        {
+            return;
+        }
+
         if (ValueChanged.HasDelegate)
         {
-            await ValueChanged.InvokeAsync(_value);
+            _prevValue = value;
+            await ValueChanged.InvokeAsync(value);
         }
+        else
+        {
+            Value = value;
+        }
+
+        await OnChange.InvokeAsync(value);
     }
 }

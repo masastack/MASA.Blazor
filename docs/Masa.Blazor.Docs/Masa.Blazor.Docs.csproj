@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Masa.Blazor.Extensions.Languages.Razor" Version="0.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.CustomElements" Version="7.0.0" />

@@ -19,7 +19,9 @@
                 <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
                     @if (_type is not null)
                     {
-                        <DynamicComponent Type="_type"></DynamicComponent>
+                        <MErrorHandler>
+                            <DynamicComponent Type="_type"></DynamicComponent>
+                        </MErrorHandler>
                     }
                 </MSheet>
 
@@ -45,31 +47,44 @@
 
                         <ExpandTransition>
                             <ShowTransitionElement Value="_expand">
-                                <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MItem>
-                                            <MButton Class="mr-2"
-                                                     IsActive="@context.Active"
-                                                     Text
-                                                     Color="primary"
-                                                     OnClick="@context.Toggle">
-                                                @item.Language
-                                            </MButton>
-                                        </MItem>
-                                    }
-                                </MItemGroup>
+                                <div class="d-flex justify-end pa-2">
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="CopyCode"
+                                                       StaticIcon="mdi-content-copy"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-copy"
+                                                       ProcessText="code-copying"
+                                                       FinishText="code-copied">
+                                    </AppStatefulButton>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RestoreCode"
+                                                       StaticIcon="mdi-restore"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-restore"
+                                                       ProcessText="code-restoring">
+                                    </AppStatefulButton>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RunCode"
+                                                       StaticIcon="mdi-play-circle-outline"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-run"
+                                                       ProcessText="code-running">
+                                    </AppStatefulButton>
+                                </div>
 
                                 <AppDivider />
 
-                                <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MWindowItem>
-                                            <Markup RoundedTop0 Code="@item.Code" Language="@item.Language" />
-                                        </MWindowItem>
-                                    }
-                                </MWindow>
+                                <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
+                                               Value="@_sourceCode"
+                                               EditorOptions="_options"
+                                               @ref=_monacoEditor>
+                                </MMonacoEditor>
                             </ShowTransitionElement>
                         </ExpandTransition>
                     }

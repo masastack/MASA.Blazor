@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Routing;
+using Masa.Blazor.Presets.PageContainer;
 
 namespace Masa.Blazor.Presets;
 
@@ -17,8 +18,30 @@ public partial class PPageContainer : PatternPathComponentBase
     /// A list of regular expression patterns to match.
     /// The content of the matched path would not be cached in the DOM.
     /// </summary>
-    [Parameter]
+    [Parameter] [Obsolete("Use ExcludePatterns instead")]
     public IEnumerable<string>? ExcludedPatterns { get; set; }
+
+    /// <summary>
+    /// A list of regular expression patterns to match.
+    /// The content of the matched path would not be cached in the DOM.
+    /// </summary>
+    [Parameter]
+    public IEnumerable<string>? ExcludePatterns { get; set; }
+
+    /// <summary>
+    /// A list of regular expression patterns to match.
+    /// The content of the matched path would be cached in the DOM.
+    /// </summary>
+    [Parameter]
+    public IEnumerable<string>? IncludePatterns { get; set; }
+
+    /// <summary>
+    /// Max number of cached pages.
+    /// </summary>
+    [Parameter] [ApiDefaultValue(10)]
+    public int Max { get; set; } = 10;
+
+    private readonly LRUCache<string, PatternPath> _patternPaths = new(10);
 
     private string? _previousPath;
     private PatternPath? _currentPatternPath;
@@ -27,8 +50,7 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         base.OnParametersSet();
 
-        var patternPath = GetCurrentPatternPath();
-        _currentPatternPath = patternPath;
+        ExcludePatterns ??= ExcludedPatterns;
     }
 
     protected override void OnInitialized()
@@ -36,10 +58,8 @@ public partial class PPageContainer : PatternPathComponentBase
         base.OnInitialized();
 
         var patternPath = GetCurrentPatternPath();
-        if (!PatternPaths.Contains(patternPath))
-        {
-            PatternPaths.Add(patternPath);
-        }
+        _currentPatternPath = patternPath;
+        _patternPaths.Put(patternPath.Pattern, patternPath);
 
         if (ContainerPageTabs != null)
         {
@@ -78,7 +98,7 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         InvokeAsync(() =>
         {
-            PatternPaths.Remove(e);
+            _patternPaths.Remove(e.Pattern);
             StateHasChanged();
         });
     }
@@ -87,9 +107,9 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         InvokeAsync(() =>
         {
-            PatternPaths.Remove(e);
+            _patternPaths.Remove(e.Pattern);
             StateHasChanged();
-            PatternPaths.Add(e);
+            _patternPaths.Put(e.Pattern, e);
             StateHasChanged();
         });
     }
@@ -100,11 +120,11 @@ public partial class PPageContainer : PatternPathComponentBase
         {
             if (paths.Length == 0)
             {
-                PatternPaths.Clear();
+                _patternPaths.Clear();
             }
             else
             {
-                PatternPaths.RemoveAll(p => !paths.Contains(p));
+                _patternPaths.RemoveAll(_patternPaths.Keys.Except(paths.Select(p => p.Pattern)));
             }
 
             StateHasChanged();
@@ -122,15 +142,27 @@ public partial class PPageContainer : PatternPathComponentBase
             return;
         }
 
-        // if the previous path is excluded, remove it from the PatternPaths
-        if (_previousPath is not null && ExcludedPatterns is not null)
+        if (currentPatternPath.IsSelf)
         {
-            if (ExcludedPatterns.Any(pattern => new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(_previousPath)))
+            if (_patternPaths.TryGetValue(currentPath, out var renderedPathPattern))
             {
-                var previousPatternPath = PatternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
+                renderedPathPattern.UpdatePath(NavigationManager.GetAbsolutePath());
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        // if the previous path is excluded or not included, remove it from the PatternPaths
+        if (_previousPath is not null)
+        {
+            if ((ExcludePatterns?.Any() is true &&
+                 ExcludePatterns.Any(pattern => new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(_previousPath))) ||
+                (IncludePatterns?.Any() is true &&
+                 !IncludePatterns.Any(pattern => new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(_previousPath))))
+            {
+                var previousPatternPath = _patternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
                 if (previousPatternPath is not null)
                 {
-                    PatternPaths.Remove(previousPatternPath);
+                    _patternPaths.Remove(previousPatternPath.Pattern);
                     InvokeAsync(StateHasChanged);
                 }
             }
@@ -138,32 +170,11 @@ public partial class PPageContainer : PatternPathComponentBase
 
         _previousPath = currentPath;
 
-        if (PatternPaths.Contains(_currentPatternPath!))
-        {
-            return;
-        }
+        _currentPatternPath = currentPatternPath;
 
-        if (currentPatternPath.IsSelf)
-        {
-            var renderedAbsolutePath = PatternPaths.FirstOrDefault(p => currentPatternPath == p);
-            if (renderedAbsolutePath is not null)
-            {
-                InvokeAsync(StateHasChanged);
-                return;
-            }
-            else
-            {
-                PatternPaths.Add(currentPatternPath);
-                InvokeAsync(StateHasChanged);
-                return;
-            }
-        }
+        _patternPaths.PutOrGet(currentPatternPath.Pattern, currentPatternPath);
 
-        InvokeAsync(() =>
-        {
-            PatternPaths.Add(_currentPatternPath!);
-            StateHasChanged();
-        });
+        InvokeAsync(StateHasChanged);
     }
 
     protected override void Dispose(bool disposing)

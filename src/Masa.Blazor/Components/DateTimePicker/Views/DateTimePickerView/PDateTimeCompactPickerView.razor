@@ -1,0 +1,117 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PDateTimePickerViewBase<TValue>
+@typeparam TValue
+
+<div class="@BasePickerBlock.Element("view").Modifier("compact")">
+    <MTabs @bind-Value="_tabValue" FixedTabs>
+        <MTab Value="@DATE" Ripple="false">
+            @if (InternalDate.HasValue)
+            {
+                <span class="mr-1">
+                    @YearTitle
+                </span>
+                <span>
+                    @DateTitle
+                </span>
+            }
+            else
+            {
+                <MIcon Class="mr-1">mdi-calendar</MIcon>
+            }
+        </MTab>
+        <MTab Value="@TIME" Ripple="false">
+            @if (InternalTime.HasValue)
+            {
+                @InternalTime.Value.Hour.ToString("00")
+                <span>:</span>
+                @InternalTime.Value.Minute.ToString("00")
+                @if (UseSeconds)
+                {
+                    <span>:</span>
+                    @InternalTime.Value.Second
+                }
+
+                if (TimeFormat == TimeFormat.AmPm)
+                {
+                    <span class="ml-1">
+                        @InternalTime.Value.ToString("tt", CultureInfo.CurrentCulture)
+                    </span>
+                }
+            }
+            else
+            {
+                <MIcon Class="mr-1">mdi-clock-outline</MIcon>
+            }
+        </MTab>
+    </MTabs>
+    <MTabsItems Value="_tabValue">
+        <MTabItem Value="DATE" Eager Transition="@Transition">
+            <MDatePicker Value="InternalDate"
+                         ValueChanged="DateChanged"
+                         TValue="DateOnly?"
+                         AllowedDates="@AllowedDates"
+                         ActivePicker="@ActiveDatePicker"
+                         Color="@Color"
+                         DayFormat="@DayFormat"
+                         Disabled="@Disabled"
+                         FirstDayOfWeek="@FirstDayOfWeek"
+                         Locale="@Locale"
+                         Max="@MaxDate"
+                         Min="@MinDate"
+                         MonthFormat="@MonthFormat"
+                         NoTitle
+                         NextIcon="@NextIcon"
+                         PrevIcon="@PrevIcon"
+                         Reactive="@Reactive"
+                         Readonly="@Readonly"
+                         Scrollable="@Scrollable"
+                         ShowAdjacentMonths="@ShowAdjacentMonths"
+                         ShowCurrent="@ShowCurrent"
+                         ShowWeek="@ShowWeek"
+                         WeekdayFormat="@WeekdayFormat"
+                         YearFormat="@YearFormat"
+                         YearIcon="@YearIcon"
+                         Dark="@Dark"
+                         Light="@Light"
+                         @ref="_datePicker">
+            </MDatePicker>
+        </MTabItem>
+        <MTabItem Value="TIME" Eager Transition="@Transition">
+            <MTimePicker Value="InternalTime"
+                         ValueChanged="TimeChanged"
+                         AllowedHours="@AllowedHours"
+                         AllowedMinutes="@AllowedMinutes"
+                         AllowedSeconds="@AllowedSeconds"
+                         Color="@Color"
+                         Disabled="@Disabled"
+                         Format="@TimeFormat"
+                         Max="@MaxTime"
+                         Min="@MinTime"
+                         NoTitle
+                         Readonly="@Readonly"
+                         Scrollable="@Scrollable"
+                         UseSeconds="@UseSeconds"
+                         Dark="@Dark"
+                         Light="@Light"
+                         OnHourClick="OnHourClick"
+                         @bind-Activepicker="@_timeActivePicker"
+                         @ref="_timePicker">
+            </MTimePicker>
+            <span class="@(TimePickerClockBlock.Element("selecting-time"))">
+                @SelectingTime
+            </span>
+            <span class="@(TimePickerClockBlock.Element("prev-next"))">
+                <MButton Icon
+                         OnClick="OnPrevClick"
+                         Disabled="@((int)_timeActivePicker <= 1)">
+                    <MIcon>$prev</MIcon>
+                </MButton>
+                <MButton Icon
+                         OnClick="OnNextClick"
+                         Disabled="@((int)_timeActivePicker == SupportedMaxTimePickerType)">
+                    <MIcon>$next</MIcon>
+                </MButton>
+            </span>
+        </MTabItem>
+    </MTabsItems>
+</div>

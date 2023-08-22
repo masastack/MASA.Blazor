@@ -906,12 +906,16 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public override async Task HandleOnClearClickAsync(MouseEventArgs args)
     {
-        await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
+        var value = Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default;
+
+        await SetValue(value);
 
         if (OnClearClick.HasDelegate)
         {
             await OnClearClick.InvokeAsync(args);
         }
+
+        await OnChange.InvokeAsync(value);
 
         await SetMenuIndex(-1);
 

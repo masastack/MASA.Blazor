@@ -2,36 +2,50 @@
 @using BlazorComponent.I18n
 @using Masa.Blazor.Presets
 
-<PCron Value="@_cronValue" ValueChanged="OnCronValueChanged">
+<MCheckbox @bind-Value="_outlined" Label="Outlined" HideDetails="true"></MCheckbox>
+<MCheckbox @bind-Value="_noTransition" Label="No transition" HideDetails="true"></MCheckbox>
+<MCheckbox @bind-Value="_minHeight" Label="MinHeight=400" HideDetails="true"></MCheckbox>
+
+<MDivider Class="my-4"></MDivider>
+
+<PCron @bind-Value="@_cronValue"
+       Class="mb-4"
+       MinHeight="@(_minHeight ? 400 : null)"
+       NoTransition="@_noTransition"
+       Outlined="@_outlined"
+       OnChange="GetNextTenRunTime">
 </PCron>
 
-<div>
-    <MTextField Value="_cronValue" TValue="string" ValueChanged="OnCronValueChanged" Label="@i18n.T("$masaBlazor.cron.demo.cronExpressionLabel")" Outlined Dense></MTextField>
-    <MTextarea @bind-Value="_nextTenRunTime" Readonly Outlined Rows="11" Label="@i18n.T("$masaBlazor.cron.demo.nextTenRunTime")">
-    </MTextarea>
-</div>
+<MTextField @bind-Value="_cronValue"
+            TValue="string"
+            OnInput="GetNextTenRunTime"
+            Label="Cron Expression"
+            Outlined
+            Dense>
+</MTextField>
+
+<MTextarea @bind-Value="_nextTenRunTime"
+           Readonly
+           Outlined
+           Rows="11"
+           Label="The next ten run time">
+</MTextarea>
 
 @code {
+
     [Inject]
     I18n i18n { get; set; }
 
     [CascadingParameter(Name = "TimezoneOffset")]
     public TimeSpan TimezoneOffset { get; set; }
 
+    bool _outlined;
+    bool _noTransition;
+    bool _minHeight;
+
     string _cronValue = string.Empty;
     string _nextTenRunTime = string.Empty;
-    StringBuilder sb = new ();
-
-    private Task OnCronValueChanged(string cronValue)
-    {
-        if(_cronValue != cronValue)
-        {
-            _cronValue = cronValue;
-
-            GetNextTenRunTime();
-        }
-        return Task.CompletedTask;
-    }
+    StringBuilder sb = new();
 
     private void GetNextTenRunTime()
     {
@@ -59,13 +73,7 @@
             }
         }
 
-        if(sb.Length == 0)
-        {
-            _nextTenRunTime = "No more next run time";
-        }
-        else
-        {
-            _nextTenRunTime = sb.ToString();
-        }
+        _nextTenRunTime = sb.Length == 0 ? "No more next run time" : sb.ToString();
     }
+
 }

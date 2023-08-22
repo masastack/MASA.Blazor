@@ -17,7 +17,7 @@
 
         @if (!IsAllComponentsPage)
         {
-            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
+            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-9">
                 <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
                 <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
             </MTabs>
@@ -33,14 +33,8 @@
         }
         else
         {
-            <FadeTransition LeaveAbsolute>
-                <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis @bind-Value="@CurrentApi"
-                          Data="@_apiData"
-                          GithubUri="@ApiGithubUri">
-                    </Apis>
-                </ShowTransitionElement>
-                <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
+            <MTabsItems Value="IsApiTab.ToString()">
+                <MTabItem Value="@("False")" Transition="" Eager>
                     <DocumentMarkdownIt Source="@_md"
                                         OnTocParsed="@OnTocParsed"
                                         OnFrontMatterParsed="@OnFrontMatterParsed" />
@@ -49,8 +43,14 @@
                     {
                         <BackMatter Related="@_frontMatterMeta.Related"></BackMatter>
                     }
-                </ShowTransitionElement>
-            </FadeTransition>
+                </MTabItem>
+                <MTabItem Value="@("True")" Transition="">
+                    <Apis @bind-Value="@CurrentApi"
+                          Data="@_apiData"
+                          GithubUri="@ApiGithubUri">
+                    </Apis>
+                </MTabItem>
+            </MTabsItems>
         }
 
         <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />

@@ -1,0 +1,105 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PDateDigitalClockPickerViewBase<TValue>
+@typeparam TValue
+
+<div class="@BasePickerBlock.Element("view").Modifier("compact")">
+    <MTabs @bind-Value="_tabValue" FixedTabs>
+        <MTab Value="@DATE" Ripple="false">
+            @if (InternalDate.HasValue)
+            {
+                <span class="mr-1">
+                    @YearTitle
+                </span>
+                <span>
+                    @DateTitle
+                </span>
+            }
+            else
+            {
+                <MIcon Class="mr-1">mdi-calendar</MIcon>
+            }
+        </MTab>
+        <MTab Value="@TIME" Ripple="false">
+            @if (InternalTime.HasValue)
+            {
+                @InternalTime.Value.Hour.ToString("00")
+                <span>:</span>
+                @InternalTime.Value.Minute.ToString("00")
+                @if (UseSeconds)
+                {
+                    <span>:</span>
+                    @InternalTime.Value.Second.ToString("00")
+                }
+
+                if (TimeFormat == TimeFormat.AmPm)
+                {
+                    <span class="ml-1">
+                        @InternalTime.Value.ToString("tt", CultureInfo.CurrentCulture)
+                    </span>
+                }
+            }
+            else
+            {
+                <MIcon Class="mr-1">mdi-clock-outline</MIcon>
+            }
+        </MTab>
+    </MTabs>
+    <MWindow Value="_tabValue">
+        <MWindowItem Value="DATE" Eager Transition="@Transition">
+            <MDatePicker Value="InternalDate"
+                         ValueChanged="DateChanged"
+                         TValue="DateOnly?"
+                         AllowedDates="@AllowedDates"
+                         ActivePicker="@ActiveDatePicker"
+                         Color="@Color"
+                         DayFormat="@DayFormat"
+                         Disabled="@Disabled"
+                         FirstDayOfWeek="@FirstDayOfWeek"
+                         Locale="@Locale"
+                         Max="@MaxDate"
+                         Min="@MinDate"
+                         MonthFormat="@MonthFormat"
+                         NoTitle
+                         NextIcon="@NextIcon"
+                         PrevIcon="@PrevIcon"
+                         Reactive="@Reactive"
+                         Readonly="@Readonly"
+                         Scrollable="@Scrollable"
+                         ShowAdjacentMonths="@ShowAdjacentMonths"
+                         ShowCurrent="@ShowCurrent"
+                         ShowWeek="@ShowWeek"
+                         WeekdayFormat="@WeekdayFormat"
+                         YearFormat="@YearFormat"
+                         YearIcon="@YearIcon"
+                         Dark="@Dark"
+                         Light="@Light"
+                         @ref="_datePicker">
+            </MDatePicker>
+        </MWindowItem>
+        <MWindowItem Value="TIME" Eager Transition="@Transition">
+            <MDigitalClock Value="InternalTime"
+                           ValueChanged="TimeChanged"
+                           AllowedHours="@AllowedHours"
+                           AllowedMinutes="@AllowedMinutes"
+                           AllowedSeconds="@AllowedSeconds"
+                           AllowedTimes="@AllowedTimes"
+                           TValue="TimeOnly?"
+                           Color="@(Color ?? "accent")"
+                           Disabled="@Disabled"
+                           Height="290"
+                           Format="@TimeFormat"
+                           Max="@MaxTime"
+                           Min="@MinTime"
+                           MultiSection="@MultiSection"
+                           Readonly="@Readonly"
+                           Step="@Step"
+                           HourStep="@HourStep"
+                           MinuteStep="@MinuteStep"
+                           SecondStep="@SecondStep"
+                           UseSeconds="@UseSeconds"
+                           Dark="@Dark"
+                           Light="@Light">
+            </MDigitalClock>
+        </MWindowItem>
+    </MWindow>
+</div>

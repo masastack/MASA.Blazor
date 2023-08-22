@@ -37,6 +37,7 @@ public partial class BaseLayout
         {
             await InitTheme();
             await InitRTL();
+            await InitLang();
 
             _projectMap = await DocService.ReadProjectMapAsync();
 
@@ -65,6 +66,16 @@ public partial class BaseLayout
         }
     }
 
+    private async Task InitLang()
+    {
+        var langStr = await LocalStorage.GetItemAsync("masablazor@lang");
+        if (langStr is not null)
+        {
+            _culture = new CultureInfo(langStr);
+            I18n.SetCulture(_culture);
+        }
+    }
+
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var changed = SetProject();
@@ -88,6 +99,7 @@ public partial class BaseLayout
     private void OnCultureChanged(string cultureName)
     {
         _culture = new CultureInfo(cultureName);
+        _ = LocalStorage.SetItemAsync("masablazor@lang", cultureName);
         I18n.SetCulture(_culture);
     }
 

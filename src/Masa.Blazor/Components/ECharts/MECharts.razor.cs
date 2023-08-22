@@ -202,14 +202,37 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
 
         if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {
+            // unescape verbatim text
+            optionJson = Regex.Unescape(optionJson);
+
+            // remove the double quotes around the function
             optionJson = FormatFunction(optionJson);
+
+            // remove the double quotes around the lambda
             optionJson = FormatLambda(optionJson);
+
+            // convert unicode to string
             optionJson = Unicode2String(optionJson);
+
             await _echarts.SetJsonOptionAsync(optionJson, notMerge, lazyUpdate);
         }
         else
         {
-            await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+            try
+            {
+                await _echarts.SetOptionAsync(option, notMerge, lazyUpdate);
+            }
+            catch (JSException e)
+            {
+                if (e.Message.Contains("not a function"))
+                {
+                    throw new JSException("Are you trying to use a function in the option? " +
+                                          "If so, please set the IncludeFunctionsInOption property to true. " +
+                                          "If not, please check the option.", e);
+                }
+
+                throw;
+            }
         }
     }
 
@@ -232,6 +255,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
 
+        // check if the option contains "function" or "=>"
         return optionJson.Contains("function") || optionJson.Contains("=\\u003e", StringComparison.OrdinalIgnoreCase);
     }
 

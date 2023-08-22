@@ -1,26 +1,51 @@
 ﻿@namespace Masa.Blazor.Presets
+@using Masa.Blazor.Presets.Cron
 
-<MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
-    @foreach (var item in _cronItems)
-    {
-        <MTab Value="item.Period.ToString()">
-            @I18n.T($"$masaBlazor.{nameof(item.Period)}.{item.Period.ToString()}")
-        </MTab>
-    }
-</MTabs>
-<MTabsItems @bind-Value="_selectedPeriod">
-    @foreach (var item in _cronItems)
-    {
-        <MTabItem Value="item.Period.ToString()">
-            <CronItem Period="item.Period" @bind-Value="item.CronValue" CronValueHasChanged="CronValueChangedAsync">
-            </CronItem>
-        </MTabItem>
-    }
-</MTabsItems>
-<MAlert @bind-Value="_hasError"
-        Dense
-        Outlined
-        Style="margin-left:12px; margin-right:28px"
-        Type="AlertTypes.Error">
-    @_errorMessage
-</MAlert>
+<div class="@Block.Modifier(Outlined).AddTheme(IsDark).AddClass(Class)"
+     style="@(new StyleBuilder().AddMinHeight(MinHeight).Add(Style).GetStyle())">
+    <CascadingValue Value="IsDark" Name="IsDark">
+        <MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
+            @foreach (var item in _cronItems)
+            {
+                <MTab Value="item.Period.ToString()" Class="text-capitalize">
+                    @I18n.T($"$masaBlazor.{nameof(item.Period)}.{item.Period.ToString()}")
+                </MTab>
+            }
+        </MTabs>
+
+        @if (_cronItems.Count == 7)
+        {
+            <MTabsItems @bind-Value="_selectedPeriod">
+                <MTabItem Value="PeriodTypes.Second.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <SecondCronItem @bind-Value="@_cronItems[0].CronValue" CronValueHasChanged="CronValueChangedAsync"></SecondCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Minute.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <MinuteCronItem @bind-Value="@_cronItems[1].CronValue" CronValueHasChanged="CronValueChangedAsync"></MinuteCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Hour.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <HourCronItem @bind-Value="@_cronItems[2].CronValue" CronValueHasChanged="CronValueChangedAsync"></HourCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Day.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <DayCronItem @bind-Value="@_cronItems[3].CronValue" CronValueHasChanged="CronValueChangedAsync"></DayCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Month.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <MonthCronItem @bind-Value="@_cronItems[4].CronValue" CronValueHasChanged="CronValueChangedAsync"></MonthCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Week.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <WeekCronItem @bind-Value="@_cronItems[5].CronValue" CronValueHasChanged="CronValueChangedAsync"></WeekCronItem>
+                </MTabItem>
+                <MTabItem Value="PeriodTypes.Year.ToString()" Eager Transition="@(NoTransition ? "" : null)">
+                    <YearCronItem @bind-Value="@_cronItems[6].CronValue" CronValueHasChanged="CronValueChangedAsync"></YearCronItem>
+                </MTabItem>
+            </MTabsItems>
+        }
+
+        <MAlert @bind-Value="_hasError"
+                Dense
+                Outlined
+                Style="margin-left:12px; margin-right:28px"
+                Type="AlertTypes.Error">
+            @_errorMessage
+        </MAlert>
+    </CascadingValue>
+</div>

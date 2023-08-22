@@ -170,7 +170,7 @@ public partial class ModalBase
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         ComputedSaveButtonProps = GetDefaultSaveButtonProps();
         ComputedCancelButtonProps = GetDefaultCancelButtonProps();
         ComputedDeleteButtonProps = GetDefaultDeleteButtonProps();
@@ -187,10 +187,10 @@ public partial class ModalBase
         _debounceHandleOnSave = DebounceEvent<MouseEventArgs>(
             async (_) =>
             {
-                var args = new ModalActionEventArgs();
+                var args = new ModalActionEventArgs(Form?.FormContext);
 
                 _saveLoading = true;
-                
+
                 try
                 {
                     await OnSave.InvokeAsync(args);
@@ -301,8 +301,14 @@ public partial class ModalBase
         {
             await InvokeAsync(async () =>
             {
-                await action(arg);
-                StateHasChanged();
+                try
+                {
+                    await action(arg);
+                }
+                finally
+                {
+                    StateHasChanged();
+                }
             });
         }, interval);
     }

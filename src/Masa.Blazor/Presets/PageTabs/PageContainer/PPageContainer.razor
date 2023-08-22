@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor.Presets
 @inherits PatternPathComponentBase
+@using Masa.Blazor.Presets.PageContainer
 
 <MWindow Class="@CssProvider.GetClass()"
          Style="@CssProvider.GetStyle()"
          Value="@_currentPatternPath?.Pattern">
-    @foreach (var path in PatternPaths)
+    @foreach (var path in _patternPaths)
     {
         <MWindowItem Transition="" Style="height: 100%" Value="@path.Pattern" @key="path.Pattern">
             <PPageContainerItem Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">

@@ -28,6 +28,7 @@
       "breakpoints",
       "icon-fonts",
       "internationalization",
+      "auto-match-nav",
       "theme"
     ]
   },
@@ -96,6 +97,10 @@
       "cron",
       {
         "title": "defaults-providers",
+        "state": "new"
+      },
+      {
+        "title": "descriptions",
         "state": "new"
       },
       "dialogs",
@@ -272,7 +277,15 @@
     "state": "new",
     "items": [
       {
-        "title": "descriptions",
+        "title": "date-digital-clock-pickers",
+        "state": "new"
+      },
+      {
+        "title": "date-time-pickers",
+        "state": "new"
+      },
+      {
+        "title": "digital-clocks",
         "state": "new"
       }
     ]

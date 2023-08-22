@@ -1,6 +1,10 @@
 ﻿namespace Masa.Blazor;
 
+#if NET6_0
+public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
+#else
 public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> where TValue : notnull
+#endif
 {
     [Parameter]
     public bool? Ripple { get; set; }
@@ -9,7 +13,6 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
     public TValue TrueValue { get; set; } = default!;
 
     [Parameter]
-
     public TValue FalseValue { get; set; } = default!;
 
     public Dictionary<string, object> InputAttrs => new();

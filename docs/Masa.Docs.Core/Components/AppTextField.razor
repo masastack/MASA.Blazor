@@ -1,15 +1,14 @@
 ﻿<MTextField Value="Value"
             ValueChanged="@ValueChanged"
-            Flat="@(!_isFocused)"
-            Class="rounded-lg"
             Dense
             HideDetails="true"
-            Solo 
+            Outlined
             Clearable="@Clearable"
             ClearIcon="@ClearIcon"
-            Label="@Label">
+            Placeholder="@Label"
+            PersistentPlaceholder>
     <PrependInnerContent>
-        <MIcon Color="@(_isFocused ? "grey" : "")" Size=16 Class="mr-2">
+        <MIcon Color="grey" Class="mr-2">
             @Icon
         </MIcon>
     </PrependInnerContent>

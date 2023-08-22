@@ -13,27 +13,31 @@ related:
 
 一组访问过的标签页组件，可以通过点击标签页切换到对应的页面。
 
-- 可以通过 `TabOptions` 属性自定义标签页的标题和图标。如果通过 `IPageTabsProvider` 参数提供的 `UpdateTabTitle`
-  方法更改标题，将会覆盖 `TabOptions` 属性设置的标题。
-- `SelfPatterns` 属性用于模糊匹配路径，所有匹配成功的路径都会显示在同一个标签页中。行为与`<a></a>`标签的 `href` 属性的 `_self` 类似。
-- 使用`OnClose`属性自定义关闭标签页的行为。返回 `true` 表示关闭标签页，返回 `false` 表示不关闭标签页。
+| 主要参数           | 说明                                                                                                                   | 
+|----------------|----------------------------------------------------------------------------------------------------------------------|
+| `TabOptions`   | 可以通过 `TabOptions` 属性自定义标签页的标题和图标。如果通过 **PPageTabsProvider** 组件提供的 `UpdateTabTitle` 方法更改标题，将会覆盖 `TabOptions` 属性设置的标题。 |
+| `SelfPatterns` | 用于模糊匹配路径，所有匹配成功的路径都会显示在同一个标签页中。行为与`<a></a>`标签的 `href` 属性的 `_self` 类似。                                                |
+| `OnClose`      | 自定义关闭标签页的行为。返回 `true` 表示关闭标签页，返回 `false` 表示不关闭标签页。                                                                   |
 
 > 需配合 **PPageContainer** 组件一起使用。
 
 ### PPageContainer
 
-一个的容器组件，包裹 `@Body` 后，将缓存页面的内容。
+一个的容器组件，包裹 `@Body` 后，将缓存页面的内容。行为类似 Vue 的 `<keep-alive></keep-alive>` 组件。
 
-- `SelfPatterns` 属性用于模糊匹配路径，所有匹配成功的路径都会显示在同一个内容中。行为与`<a></a>`标签的 `href` 属性的 `self` 类似。
-- `ExcludedPattners` 属性接受一个匹配路径的正则表达式列表，匹配成功的路径对应的页面的内容将不会在离开页面后被缓存在DOM中。
+| 主要参数              | 说明                                                                  |
+|-------------------|---------------------------------------------------------------------|
+| `SelfPatterns`    | 用于模糊匹配路径，所有匹配成功的路径都会显示在同一个内容中。行为与`<a></a>`标签的 `href` 属性的 `self` 类似。 |
+| `ExcludePattners` | 接受一个匹配路径的正则表达式列表，匹配成功的路径对应的页面的内容将不会在离开页面后被缓存在DOM中。                  |
+| `IncludePatterns` | 不设置此参数时，默认所有页面都会缓存。                                                 |
+| `Max`             | 最大缓存页面数量。                                                           |
 
 > 该组件可以单独使用。
 
-### PPagePTabsProvider
+### PPageTabsProvider
 
-一个提供器，层级应在 **PPageTabs** 和 **PPageContainer** 之上。
-
-- 子页面可以通过级联下去的 `IPageTabsProvider` 参数提供的 `UpdateTabTitle` 方法更改标签页的标题。
+一个提供器，层级应在 **PPageTabs** 和 **PPageContainer** 之上。子页面可以通过级联下去的 `IPageTabsProvider`
+参数提供的 `UpdateTabTitle` 方法更改标签页的标题。
 
 ## 使用
 

@@ -1,6 +1,10 @@
 ﻿@import url(theme/tokens.css);
 @import url(theme/typography.module.css);
 
+.m-application {
+    line-height: 1.5 !important;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -289,13 +293,6 @@ ul:not([class]), ol:not([class]) {
     margin-bottom: 16px;
 }
 
-.bottom-btn {
-    z-index: 6;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-}
-
 .theme--light.m-application code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
     background-color: #f0f3f9 !important;
     /*color: #1B2559;*/
@@ -334,7 +331,6 @@ a.text-dec-none {
     }
 
     .overview .project-content__title {
-        margin-bottom: 8px;
         font-weight: 700;
         line-height: 24px;
     }
@@ -409,8 +405,7 @@ a.text-dec-none {
     }
     
     .doc-list-nav--item-hash .m-list-item__icon {
-        margin-left: 4px;
-        margin-right: 24px;
+        margin: 12px 24px 12px 4px;
     }
 
 .tag-chip {
@@ -697,4 +692,8 @@ default-app-markup {
 .annual-service-contact .icon > .m-icon__svg {
     width: 48px;
     height: 48px;
+}
+
+.theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state)>.m-input__control>.m-input__slot fieldset {
+    color: rgba(0,0,0,.12);;
 }

@@ -1,0 +1,83 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TValue
+@inherits PDateTimePickerBase<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment CompactPickerView() => __builder =>
+    {
+        <PDateTimeCompactPickerView @bind-Value="InternalDateTime"
+                                    ActiveDatePicker="@ActiveDatePicker"
+                                    AllowedDates="@AllowedDates"
+                                    AllowedHours="@AllowedHours"
+                                    AllowedMinutes="@AllowedMinutes"
+                                    AllowedSeconds="@AllowedSeconds"
+                                    Color="@Color"
+                                    DayFormat="@DayFormat"
+                                    Disabled="@Disabled"
+                                    FirstDayOfWeek="@FirstDayOfWeek"
+                                    TimeFormat="@TimeFormat"
+                                    Locale="@Locale"
+                                    Max="@Max"
+                                    Min="@Min"
+                                    MonthFormat="@MonthFormat"
+                                    NextIcon="@NextIcon"
+                                    PrevIcon="@PrevIcon"
+                                    Reactive="@Reactive"
+                                    Readonly="@Reactive"
+                                    Scrollable="@Scrollable"
+                                    ShowAdjacentMonths="@ShowAdjacentMonths"
+                                    ShowCurrent="@ShowCurrent"
+                                    ShowWeek="@ShowWeek"
+                                    Transition="@TabItemTransition"
+                                    UseSeconds="@UseSeconds"
+                                    WeekdayFormat="@WeekdayFormat"
+                                    YearFormat="@YearFormat"
+                                    YearIcon="@YearIcon"
+                                    Dark="@Dark"
+                                    Light="@Light">
+        </PDateTimeCompactPickerView>
+    };
+
+    protected override RenderFragment DefaultPickerView() => __builder =>
+    {
+        <PDateTimePickerView @bind-Value="InternalDateTime"
+                             ActiveDatePicker="@ActiveDatePicker"
+                             AllowedDates="@AllowedDates"
+                             AllowedHours="@AllowedHours"
+                             AllowedMinutes="@AllowedMinutes"
+                             AllowedSeconds="@AllowedSeconds"
+                             AmPmInTitle="@AmPmInTitle"
+                             Color="@Color"
+                             DayFormat="@DayFormat"
+                             Disabled="@Disabled"
+                             FirstDayOfWeek="@FirstDayOfWeek"
+                             TimeFormat="@TimeFormat"
+                             HeaderDateFormat="@HeaderDateFormat"
+                             HeaderColor="@HeaderColor"
+                             Locale="@Locale"
+                             Max="@Max"
+                             Min="@Min"
+                             MonthFormat="@MonthFormat"
+                             NoTitle="@NoTitle"
+                             NextIcon="@NextIcon"
+                             PrevIcon="@PrevIcon"
+                             Reactive="@Reactive"
+                             Readonly="@Reactive"
+                             Scrollable="@Scrollable"
+                             ShowAdjacentMonths="@ShowAdjacentMonths"
+                             ShowCurrent="@ShowCurrent"
+                             ShowWeek="@ShowWeek"
+                             TitleDateFormat="@TitleDateFormat"
+                             UseSeconds="@UseSeconds"
+                             WeekdayFormat="@WeekdayFormat"
+                             YearFormat="@YearFormat"
+                             YearIcon="@YearIcon"
+                             Dark="@Dark"
+                             Light="@Light">
+        </PDateTimePickerView>
+    };
+
+}

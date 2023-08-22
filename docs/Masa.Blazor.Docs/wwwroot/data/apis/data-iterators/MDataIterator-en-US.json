@@ -7,7 +7,7 @@
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
     "expanded": "Array of expanded items.",
-    "footerProps": "See the [MDataIterator](components/data-iterators/api/MDataFooter) API for more information",
+    "footerProps": "See the [MDataIterator](/blazor/components/data-iterators/api/MDataFooter) API for more information",
     "groupBy": "",
     "groupDesc": "",
     "hideDefaultFooter": "Hides default footer",
@@ -45,7 +45,7 @@
     "loadingContent": "Defines content for when `Loading` is true and no items are provided",
     "noDataContent": "Defines content for when no items are provided",
     "noResultsContent": "Defines content for when `Search` is provided but no results are found",
-    "pageTextContent": "This slot is forwarded to the default footer. See the [MDataIterator](components/data-iterators/api/MDataFooter) API for more information.",
+    "pageTextContent": "This slot is forwarded to the default footer. See the [MDataIterator](/blazor/components/data-iterators/api/MDataFooter) API for more information.",
     "progressContent": ""
   }
 }

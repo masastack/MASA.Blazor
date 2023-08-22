@@ -1,0 +1,92 @@
+﻿@namespace Masa.Blazor.Presets.Cron
+@inherits Masa.Blazor.Presets.Cron.CronItemBase
+
+@base.BuildRenderTree
+
+@code {
+
+    public WeekCronItem() : base(PeriodTypes.Week)
+    {
+    }
+
+    protected override RenderFragment RadiosContent() => __builder =>
+    {
+        @PeriodContent()
+        @UnspecifiedContent()
+        @RangeContent()
+        @WeekStartFromContent()
+        @LastOfPeriodContent()
+        @SpecifiedContent()
+    };
+
+    private RenderFragment WeekStartFromContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.WeekStartFrom">
+            <LabelContent>
+                <MI18n Key="$masaBlazor.cron.weekDayOfWeek"
+                       Class="m-cron-period__radio-label">
+                    <PlaceholderContent>
+                        @if (context == 0)
+                        {
+                            <MSelect Value="CronItemData.SelectWeekNumber"
+                                     Items="WeekNumbers"
+                                     TItem="WeekNumbers"
+                                     TItemValue="WeekNumbers"
+                                     TValue="WeekNumbers"
+                                     ItemText="i => GetWeekNumberI18nString(i)"
+                                     ItemValue="i => i"
+                                     ValueChanged="OnWeekNumberChanged"
+                                     Outlined
+                                     Dense
+                                     HideDetails="true">
+                            </MSelect>
+                        }
+                        else if (context == 1)
+                        {
+                            <MSelect
+                                Value="CronItemData.SelectDayOfWeek"
+                                Items="DayOfWeeks"
+                                TItem="DayOfWeek"
+                                TItemValue="DayOfWeek"
+                                TValue="DayOfWeek"
+                                ItemText="i => DateTimeFormatInfo.CurrentInfo.GetDayName(i)"
+                                ItemValue="i => i"
+                                ValueChanged="OnDayOfWeekChanged"
+                                Outlined
+                                Dense
+                                HideDetails="true">
+                            </MSelect>
+                        }
+                    </PlaceholderContent>
+                </MI18n>
+            </LabelContent>
+        </MRadio>
+    };
+
+    private RenderFragment LastOfPeriodContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.LastOfPeriod">
+            <LabelContent>
+                <MI18n Key="$masaBlazor.cron.lastWeekDayOfPerMonth"
+                       Class="m-cron-period__radio-label">
+                    <PlaceholderContent>
+                        <MSelect
+                            Value="CronItemData.StartFromPeriod - 1"
+                            Items="DayOfWeeks"
+                            TItem="DayOfWeek"
+                            TItemValue="int"
+                            TValue="int?"
+                            ItemText="i => DateTimeFormatInfo.CurrentInfo.GetDayName(i)"
+                            ItemValue="i => (int)i"
+                            ValueChanged="OnLastPeriodOfWeekChanged"
+                            Outlined
+                            Dense
+                            HideDetails="true">
+                        </MSelect>
+                    </PlaceholderContent>
+                </MI18n>
+            </LabelContent>
+        </MRadio>
+    };
+
+}

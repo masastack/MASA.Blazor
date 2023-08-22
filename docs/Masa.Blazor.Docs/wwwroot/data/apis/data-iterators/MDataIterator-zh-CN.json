@@ -7,7 +7,7 @@
     "disablePagination": "完全禁用分页",
     "disableSort": "完全禁用排序",
     "expanded": "扩展项目数组。",
-    "footerProps": "更多信息请访问 [MDataIterator](components/data-iterators/api/MDataFooter)",
+    "footerProps": "更多信息请访问 [MDataIterator](/blazor/components/data-iterators/api/MDataFooter)",
     "groupBy": "",
     "groupDesc": "",
     "hideDefaultFooter": "默认隐藏页脚",
@@ -45,7 +45,7 @@
     "loadingContent": "定义 `Loading` 为 true 且未提供任何项目时的内容",
     "noDataContent": "定义何时不提供任何项目的内容",
     "noResultsContent": "定义何时提供 `Search` 但未找到结果的内容",
-    "pageTextContent": "该插槽将转发到默认页脚。 有关更多信息，请参见 [MDataIterator](components/data-iterators/api/MDataFooter)。",
+    "pageTextContent": "该插槽将转发到默认页脚。 有关更多信息，请参见 [MDataIterator](/blazor/components/data-iterators/api/MDataFooter)。",
     "progressContent": ""
   }
 }

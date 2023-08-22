@@ -2,6 +2,7 @@
 global using BlazorComponent.I18n;
 global using BlazorComponent.JSInterop;
 global using BlazorComponent.Attributes;
+global using BlazorComponent.Web;
 global using Masa.Blazor.Presets;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.JSInterop;
@@ -12,3 +13,4 @@ global using System.Text;
 global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.Logging;
 global using OneOf;
+global using BemIt;

@@ -37,6 +37,9 @@
     "MCarousel",
     "MCarouselItem"
   ],
+  "echarts": [
+    "MECharts"
+  ],
   "expansion-panels": [
     "MExpansionPanel",
     "MExpansionPanels",
@@ -52,6 +55,16 @@
     "MDataTableHeader",
     "MDataFooter",
     "MSimpleCheckbox"
+  ],
+  "date-time-pickers":[
+    "PDateTimePicker",
+    "PDateTimePickerView",
+    "PDateTimeCompactPickerView"
+  ],
+  "date-digital-clock-pickers":[
+    "PDateDigitalClockPicker",
+    "PDateDigitalClockPickerView",
+    "PDateDigitalClockCompactPickerView"
   ],
   "application": [
     "MApp",

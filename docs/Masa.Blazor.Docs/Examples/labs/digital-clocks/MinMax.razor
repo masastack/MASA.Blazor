@@ -1,0 +1,31 @@
+﻿<h4>9-to-5</h4>
+
+<MRow>
+    <MCol Cols="12" Md="6">
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       Min="@s_min"
+                       Max="@s_max">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       MultiSection
+                       Min="@s_min"
+                       Max="@s_max">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+    </MCol>
+</MRow>
+
+
+@code {
+
+    private static readonly TimeOnly s_min = new(9, 0);
+    private static readonly TimeOnly s_max = new(17, 0);
+
+    private TimeOnly _time = new(9, 0);
+
+}

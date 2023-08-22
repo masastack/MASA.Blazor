@@ -107,12 +107,51 @@ public static class PopupServiceExtensions
         });
     }
 
+    /// <summary>
+    /// Open a prompt dialog.
+    /// </summary>
+    /// <param name="service">The popup service</param>
+    /// <param name="title">The prompt title</param>
+    /// <param name="content">The prompt content</param>
+    /// <param name="rule">The rule to validate the input value</param>
+    /// <returns>The input value</returns>
+    public static Task<string?> PromptAsync(this IPopupService service, string title, string content, Func<string, StringBoolean> rule)
+    {
+        return service.PromptAsync(param =>
+        {
+            param.Title = title;
+            param.Content = content;
+            param.Rule = rule;
+        });
+    }
+
     public static Task<string?> PromptAsync(this IPopupService service, string title, string content, Func<PopupOkEventArgs<string?>, Task> onOk)
     {
         return service.PromptAsync(param =>
         {
             param.Title = title;
             param.Content = content;
+            param.OnOk = onOk;
+        });
+    }
+
+    /// <summary>
+    /// Open a prompt dialog.
+    /// </summary>
+    /// <param name="service">The popup service</param>
+    /// <param name="title">The prompt title</param>
+    /// <param name="content">The prompt content</param>
+    /// <param name="rule">The rule to validate the input value</param>
+    /// <param name="onOk">The callback when the ok button was clicked</param>
+    /// <returns>The input value</returns>
+    public static Task<string?> PromptAsync(this IPopupService service, string title, string content, Func<string, StringBoolean> rule,
+        Func<PopupOkEventArgs<string?>, Task> onOk)
+    {
+        return service.PromptAsync(param =>
+        {
+            param.Title = title;
+            param.Content = content;
+            param.Rule = rule;
             param.OnOk = onOk;
         });
     }

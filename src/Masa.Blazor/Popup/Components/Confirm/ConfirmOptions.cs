@@ -12,6 +12,8 @@ public class ConfirmOptions
 
     public string? Content { get; set; }
 
+    public RenderFragment? ContentContent { get; set; }
+
     public string? ContentClass { get; set; }
 
     public string? ContentStyle { get; set; }

@@ -48,7 +48,7 @@ To check out the docs, visit [docs.masastack.com](https://docs.masastack.com/bla
 ## 📂 Related projects
 
 - [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/masastack/Masa.Blazor.Pro)
-- [Masa Template](https://github.com/masastack/Masa.Template)
+- [MASA Template](https://github.com/masastack/MASA.Template)
 
 ## 👨‍💻 Local development
 
@@ -68,13 +68,23 @@ git submodule foreach git checkout main
 ### Run doc server
 
 ```shell
-cd docs/Masa.Doc.Server
+cd docs/Masa.Docs.Server
 dotnet run
 ```
 
 ### Visit
 
 Recommended use chrome or edge to visit `http://localhost:5000/`
+
+## 💁‍♂️ Contributing
+
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.
+
+Thanks to all the friends who have contributed to this project.
+
+<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
+</a>
 
 ## 🌐 Supported browsers
 
@@ -100,19 +110,6 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 | Windows | Supported | Supported | Not supported | Supported | Supported      | Supported, IE11+  |
 
 > Due to WebAssembly restriction, Blazor WebAssembly doesn't support IE browser, but Blazor Server supports IE 11† with additional polyfills. See official documentation
-
-## 💁‍♂️ Contributing
-
-1. Fork & Clone
-2. Create Feature_xxx branch
-3. Commit with commit message, like `feat: add MButton`
-4. Create Pull Request
-
-Thanks to all the friends who have contributed to this project.
-
-<a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
-</a>
 
 ## 💬 Interactive
 

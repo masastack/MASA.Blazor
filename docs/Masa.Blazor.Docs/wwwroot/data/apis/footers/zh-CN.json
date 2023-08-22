@@ -1,6 +1,6 @@
 {
   "props": {
-    "inset": "定位工具栏偏离应用程序的[MNavigationDrawer](components/navigation-drawers)的位置",
+    "inset": "定位工具栏偏离应用程序的[MNavigationDrawer](/blazor/components/navigation-drawers)的位置",
     "padless": "删除页脚中的所有边距"
   },
   "events": {},

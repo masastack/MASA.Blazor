@@ -1,0 +1,60 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PDateDigitalClockPickerViewBase<TValue>
+@typeparam TValue
+
+<div class="@BasePickerBlock.Element("view")">
+    <MDatePicker Value="InternalDate"
+                 ValueChanged="DateChanged"
+                 TValue="DateOnly?"
+                 AllowedDates="@AllowedDates"
+                 ActivePicker="@ActiveDatePicker"
+                 Color="@Color"
+                 DayFormat="@DayFormat"
+                 Disabled="@Disabled"
+                 FirstDayOfWeek="@FirstDayOfWeek"
+                 Locale="@Locale"
+                 Max="@MaxDate"
+                 Min="@MinDate"
+                 MonthFormat="@MonthFormat"
+                 NoTitle
+                 NextIcon="@NextIcon"
+                 PrevIcon="@PrevIcon"
+                 Reactive="@Reactive"
+                 Readonly="@Readonly"
+                 Scrollable="@Scrollable"
+                 ShowAdjacentMonths="@ShowAdjacentMonths"
+                 ShowCurrent="@ShowCurrent"
+                 ShowWeek="@ShowWeek"
+                 WeekdayFormat="@WeekdayFormat"
+                 YearFormat="@YearFormat"
+                 YearIcon="@YearIcon"
+                 Dark="@Dark"
+                 Light="@Light">
+    </MDatePicker>
+
+    <MDivider Vertical Style="margin: 0" />
+
+    <MDigitalClock Value="InternalTime"
+                   ValueChanged="TimeChanged"
+                   AllowedHours="@AllowedHours"
+                   AllowedMinutes="@AllowedMinutes"
+                   AllowedSeconds="@AllowedSeconds"
+                   AllowedTimes="@AllowedTimes"
+                   TValue="TimeOnly?"
+                   Color="@(Color ?? "accent")"
+                   Disabled="@Disabled"
+                   Height="290"
+                   Format="@TimeFormat"
+                   Max="@MaxTime"
+                   Min="@MinTime"
+                   MultiSection="@MultiSection"
+                   Readonly="@Readonly"
+                   Step="@Step"
+                   HourStep="@HourStep"
+                   MinuteStep="@MinuteStep"
+                   SecondStep="@SecondStep"
+                   UseSeconds="@UseSeconds"
+                   Dark="@Dark"
+                   Light="@Light">
+    </MDigitalClock>
+</div>

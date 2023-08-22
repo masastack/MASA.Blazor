@@ -1,0 +1,19 @@
+﻿@namespace Masa.Blazor.Presets.Cron
+@inherits Masa.Blazor.Presets.Cron.CronItemBase
+
+@base.BuildRenderTree
+
+@code {
+
+    public YearCronItem() : base(PeriodTypes.Year)
+    {
+    }
+
+    protected override RenderFragment RadiosContent() => __builder =>
+    {
+        @PeriodContent()
+        @RangeContent()
+        @FromToContent()
+    };
+
+}

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
+namespace Masa.Blazor.Docs.ApiGenerator;
 
 public static class GenComponentMeta
 {
@@ -32,7 +32,8 @@ namespace Masa.Blazor.Docs
                 Type = ""{item.Type}"",
                 TypeDesc = @""{item.TypeDesc}"",
                 DefaultValue = ""{item.DefaultValue}"",
-                Required = {item.Required.ToString().ToLower()}
+                Required = {item.Required.ToString().ToLower()},
+                IsObsolete = {item.IsObsolete.ToString().ToLower()},
             }});");
             }
 

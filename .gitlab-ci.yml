@@ -92,8 +92,8 @@ deploy-dev-ydy:
   only:
     - main
   script:
-    - echo $KUBE_CONFIG_DEV_YDY | base64 -d > ./config
-    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masastack-dev
+    - echo $https://github.com/masastack/MASA.Blazor.git | base64 -d > ./config
+    - kubectl --kubeconfig ./config set image deployment/blazor-dev blazor-dev=$IMAGE -n masa-blazor-dev
   retry: 2
 
 
@@ -176,7 +176,7 @@ deploy-prd:
   only:
     - tags
   script:
-    - echo $KUBE_CONFIG_BLAZOR_PRD | base64 -d > ./config
+    - echo $KUBE_CONFIG_MASA_YDY | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor masa-blazor=$IMAGE_PRD -n masa-blazor
   retry: 2
   when: manual
