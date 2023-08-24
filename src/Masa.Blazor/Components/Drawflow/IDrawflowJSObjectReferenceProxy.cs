@@ -12,8 +12,10 @@ public interface IDrawflow
         string name,
         int inputs,
         int outputs,
-        int positionX,
-        int positionY,
+        double clientX,
+        double clientY,
+        double offsetX,
+        double offsetY,
         string? className,
         object? data,
         string html);

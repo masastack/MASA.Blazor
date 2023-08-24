@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor;
 
-public class MDrawflow : BDomComponentBase
+public class MDrawflow : MDrop
 {
     [Inject] private DrawflowJSModule DrawflowJSModule { get; set; } = null!;
 
@@ -12,16 +12,7 @@ public class MDrawflow : BDomComponentBase
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, "div");
-        builder.AddMultipleAttributes(1, Attributes);
-        builder.AddAttribute(2, "id", Id);
-        builder.AddAttribute(3, "class", CssProvider.GetClass());
-        builder.AddAttribute(4, "style", CssProvider.GetStyle());
-        builder.AddElementReferenceCapture(5, e => Ref = e);
-        builder.CloseElement();
-    }
+    private Block Block => new("m-drawflow");
 
     protected override async Task OnParametersSetAsync()
     {
@@ -40,15 +31,8 @@ public class MDrawflow : BDomComponentBase
 
         if (firstRender)
         {
-            _drawflowProxy = await DrawflowJSModule.Init($"#{Id}", Mode);
+            _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, Mode);
         }
-    }
-
-    protected override void SetComponentClass()
-    {
-        base.SetComponentClass();
-
-        CssProvider.Apply(cssBuilder => cssBuilder.Add("m-drawflow"));
     }
 
     [ApiPublicMethod]
@@ -56,15 +40,17 @@ public class MDrawflow : BDomComponentBase
         string name,
         int inputs,
         int outputs,
-        int positionX,
-        int positionY,
+        double clientX,
+        double clientY,
+        double offsetX,
+        double offsetY,
         string? className,
         object? data,
         string html)
     {
         if (_drawflowProxy == null) return 0;
 
-        return await _drawflowProxy.AddNodeAsync(name, inputs, outputs, positionX, positionY, className, data, html).ConfigureAwait(false);
+        return await _drawflowProxy.AddNodeAsync(name, inputs, outputs, clientX, clientY, offsetX, offsetY, className, data, html).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
