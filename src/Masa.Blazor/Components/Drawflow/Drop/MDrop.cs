@@ -13,11 +13,13 @@ public class MDrop : ComponentBase
     [Parameter] public EventCallback<ExDragEventArgs> OnDrop { get; set; }
 
     protected ElementReference ElementReference { get; private set; }
+    
+    protected virtual string ClassString => new Block("m-drop").AddClass(Class).Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(2, "class", Class);
+        builder.AddAttribute(2, "class", ClassString);
         builder.AddAttribute(3, "style", Style);
         builder.AddAttribute(4, "onexdrop", EventCallback.Factory.Create(this, OnDrop));
         builder.AddAttribute(5, "ondragover", EventCallback.Empty);

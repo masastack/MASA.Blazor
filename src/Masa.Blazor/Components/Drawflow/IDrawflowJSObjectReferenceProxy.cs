@@ -20,9 +20,17 @@ public interface IDrawflow
         object? data,
         string html);
 
-    Task RemoveNodeAsync(int id);
+    Task RemoveNodeAsync(int nodeId);
 
-    Task UpdateNodeDataAsync(int id, object data);
+    Task UpdateNodeDataAsync(int nodeId, object data);
 
     Task<string?> ExportAsync(bool withoutData = false);
+
+    Task AddInputAsync(int nodeId);
+
+    Task AddOutputAsync(int nodeId);
+
+    Task RemoveInputAsync(int nodeId, string inputClass);
+
+    Task RemoveOutputAsync(int nodeId, string inputClass);
 }
