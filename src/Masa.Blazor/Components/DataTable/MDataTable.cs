@@ -162,8 +162,6 @@ namespace Masa.Blazor
                             Width = "1px",
                             Value = "data-table-expand"
                         });
-
-                        headers.Insert(0, new DataTableHeader<TItem>("1px", "data-table-expand"));
                     }
                     else
                     {
