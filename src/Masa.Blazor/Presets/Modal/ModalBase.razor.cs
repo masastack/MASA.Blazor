@@ -194,15 +194,15 @@ public partial class ModalBase
                 try
                 {
                     await OnSave.InvokeAsync(args);
+
+                    if (args.IsCanceled) return;
+
+                    Form?.Reset();
                 }
                 finally
                 {
                     _saveLoading = false;
                 }
-
-                if (args.IsCanceled) return;
-
-                Form?.Reset();
             },
             TimeSpan.FromMilliseconds(DebounceInterval));
     }
