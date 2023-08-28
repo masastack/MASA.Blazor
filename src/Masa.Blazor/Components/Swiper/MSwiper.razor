@@ -1,0 +1,16 @@
+﻿@namespace Masa.Blazor
+
+<div class="swiper @Class"
+     style="@Style"
+     @ref="_elementReference">
+    <div class="swiper-wrapper">
+        <CascadingValue Value="this" IsFixed>
+            @ChildContent
+        </CascadingValue>
+    </div>
+    
+    @if (_swiperOptions.Pagination is not null)
+    {
+        <div class="swiper-pagination" @ref="_swiperOptions."></div>
+    }
+</div>
