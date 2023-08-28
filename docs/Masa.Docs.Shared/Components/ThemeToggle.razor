@@ -5,12 +5,25 @@
 <AppTooltipButton Icon="@(MasaBlazor.Theme.Dark ? "mdi-weather-night" : "mdi-weather-sunny")"
                   Path="toggle-theme"
                   Class="mr-2 ml-2"
-                  OnClick="() => ToggleTheme(!MasaBlazor.Theme.Dark)">
+                  OnClick="SwitchTheme">
 </AppTooltipButton>
 
 @code {
 
-    private void ToggleTheme(bool dark)
+    private DotNetObjectReference<ThemeToggle>? objRef;
+
+    protected override void OnInitialized()
+    {
+        objRef = DotNetObjectReference.Create(this);
+    }
+
+    public void SwitchTheme(MouseEventArgs e)
+    {
+        _ = JSRuntime.InvokeVoidAsync("switchTheme", objRef, !MasaBlazor.Theme.Dark, e.ClientX, e.ClientY);
+    }
+
+    [JSInvokable]
+    public void ToggleTheme(bool dark)
     {
         if (dark == MasaBlazor.Theme.Dark)
         {

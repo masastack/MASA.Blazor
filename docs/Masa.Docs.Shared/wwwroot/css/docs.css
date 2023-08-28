@@ -697,3 +697,20 @@ default-app-markup {
 .theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state)>.m-input__control>.m-input__slot fieldset {
     color: rgba(0,0,0,.12);;
 }
+
+::view-transition-old(root) {
+    animation: none;
+}
+::view-transition-new(root) {
+    mix-blend-mode: normal;
+    animation: clip .5s ease-in;
+}
+
+@keyframes clip {
+    from {
+        clip-path: circle(0% at var(--x) var(--y));
+    }
+    to{
+        clip-path: circle(100% at var(--x) var(--y));
+    }
+}
