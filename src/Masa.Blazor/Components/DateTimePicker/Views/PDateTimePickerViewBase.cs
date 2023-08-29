@@ -245,13 +245,13 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
         {
             hour = InternalTime.Value.Hour;
             minute = InternalTime.Value.Minute;
-            second = InternalTime.Value.Second;
+            second = UseSeconds ? InternalTime.Value.Second : 0;
         }
         else
         {
             hour = now.Hour;
             minute = now.Minute;
-            second = now.Second;
+            second = UseSeconds ? now.Second : 0;
         }
 
         return new DateTime(year, month, day, hour, minute, second);
