@@ -37,7 +37,7 @@
                                               Href="@tooltip.href"
                                               Target="@(tooltip.href != null ? "_blank" : null)"
                                               Class="mx-2"
-                                              OnClick="() => tooltip.OnClick?.Invoke()" />
+                                              OnClick="@(() => tooltip.OnClick?.Invoke())" />
                         }
                     </div>
 

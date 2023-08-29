@@ -703,7 +703,7 @@ default-app-markup {
 }
 ::view-transition-new(root) {
     mix-blend-mode: normal;
-    animation: clip .5s ease-in;
+    animation: clip .3s ease-in;
 }
 
 @keyframes clip {
