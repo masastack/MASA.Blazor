@@ -1,2 +1,2 @@
-class o{constructor(o,e={}){console.log("el",o),console.log("swiperOptions",e),Object.keys(e).forEach((o=>{})),new Swiper(o,e)}}function e(e,n){return new o(e,n)}export{e as init};
+class o{constructor(o,n={}){console.log("el",o),console.log("swiperOptions",n),console.log("swiperOptions.pagination['el']",n.pagination.el);const e=document.querySelector(n.pagination.el);console.log(e),Object.keys(n).forEach((o=>{})),n.pagination&&(n.pagination.type=n.pagination.type.toLowerCase()),console.log("swiperOptions",n),new Swiper(o,n)}}function n(n,e){return new o(n,e)}export{n as init};
 //# sourceMappingURL=swiper-proxy.js.map

@@ -5,25 +5,20 @@ namespace Masa.Blazor;
 public class SwiperPaginationOptions
 {
     public SwiperPaginationOptions(
-        ElementReference elementReference,
+        string el,
         SwiperPaginationType type,
         bool dynamicBullets,
         int dynamicMainBullets)
     {
-        ElementReference = elementReference;
-        Selector = elementReference.GetSelector();
+        El = el;
         Type = type;
         DynamicBullets = dynamicBullets;
         DynamicMainBullets = dynamicMainBullets;
     }
 
-    [JsonIgnore]
-    // [JsonPropertyName("el")]
-    public ElementReference ElementReference { get; }
+    public string El { get; }
 
-    [JsonPropertyName("el")]
-    public string Selector { get; }
-
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public SwiperPaginationType Type { get; }
 
     public bool DynamicBullets { get; }

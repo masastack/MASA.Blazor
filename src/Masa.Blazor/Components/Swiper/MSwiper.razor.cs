@@ -10,24 +10,14 @@ public partial class MSwiper
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    private readonly Dictionary<string, object> _modules = new();
-
-    private readonly SwiperOptions _swiperOptions = new();
-
     private ElementReference _elementReference;
+
+    private MSwiperPagination? _pagination;
+    private MSwiperNavigation? _navigation;
 
     private CancellationTokenSource _cancellationTokenSource = new();
 
-    internal async Task AddModuleAsync(string module, object options)
-    {
-        if (module == "pagination")
-        {
-            _swiperOptions.Pagination = options;
-        }
-
-        await Task.Delay(1000);
-        await InitSwiperAsync();
-    }
+    private Block Block => new("m-swiper");
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -35,16 +25,41 @@ public partial class MSwiper
 
         if (firstRender)
         {
-            // await InitSwiperAsync();
+            await InitSwiperAsync();
         }
+    }
+
+    internal async Task AddModuleAsync(object module)
+    {
+        switch (module)
+        {
+            case MSwiperPagination pagination:
+                _pagination = pagination;
+                break;
+            case MSwiperNavigation navigation:
+                _navigation = navigation;
+                break;
+        }
+
+        StateHasChanged();
+
+        await InitSwiperAsync();
     }
 
     private async Task InitSwiperAsync()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
-        await Task.Delay(1000, _cancellationTokenSource.Token);
-        Console.Out.WriteLine("InitSwiperAsync...");
-        await SwiperJsModule.Init(_elementReference, _swiperOptions);
+        await Task.Delay(16, _cancellationTokenSource.Token);
+
+        var rootSelector = _elementReference.GetSelector();
+
+        SwiperOptions options = new()
+        {
+            Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
+            Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
+        };
+
+        await SwiperJsModule.Init(_elementReference, options);
     }
 }
