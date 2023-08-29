@@ -9,6 +9,14 @@ public class MDrawflow : MDrop
 
     [Parameter] public DrawflowEditorMode Mode { get; set; }
 
+    [Parameter] public EventCallback<string> OnNodeCreated { get; set; }
+
+    [Parameter] public EventCallback<string> OnNodeRemoved { get; set; }
+
+    [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
+
+    [Parameter] public EventCallback OnImport { get; set; }
+
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
 
@@ -31,7 +39,8 @@ public class MDrawflow : MDrop
 
         if (firstRender)
         {
-            _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, Mode);
+            var interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
+            _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, interopHandleReference, Mode);
         }
     }
 
@@ -63,11 +72,35 @@ public class MDrawflow : MDrop
     }
 
     [ApiPublicMethod]
+    public async Task<DrawflowNode<TData>?> GetNodeFromIdAsync<TData>(string nodeId)
+    {
+        if (_drawflowProxy == null) return null;
+
+        return await _drawflowProxy.GetNodeFromIdAsync<TData>(nodeId).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
     public async Task UpdateNodeDataAsync(int nodeId, object data)
     {
         if (_drawflowProxy == null) return;
 
         await _drawflowProxy.UpdateNodeDataAsync(nodeId, data).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
+    public async Task UpdateNodeHTMLAsync(int nodeId, string html)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.UpdateNodeHTMLAsync(nodeId, html).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
+    public async Task ImportAsync(string json)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.ImportAsync(json).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
@@ -108,5 +141,21 @@ public class MDrawflow : MDrop
         if (_drawflowProxy == null) return;
 
         await _drawflowProxy.RemoveOutputAsync(nodeId, outputClass).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
+    public async Task FocusNodeAsync(string nodeId)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.FocusNodeAsync(nodeId).ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
+    public async Task CenterNodeAsync(string nodeId, bool animate = true)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.CenterNodeAsync(nodeId, animate).ConfigureAwait(false);
     }
 }

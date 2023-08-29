@@ -20,11 +20,17 @@ public interface IDrawflow
         object? data,
         string html);
 
+    Task<DrawflowNode<TData>?> GetNodeFromIdAsync<TData>(string nodeId);
+
     Task RemoveNodeAsync(int nodeId);
 
     Task UpdateNodeDataAsync(int nodeId, object data);
 
+    Task UpdateNodeHTMLAsync(int nodeId, string html);
+
     Task<string?> ExportAsync(bool withoutData = false);
+
+    Task ImportAsync(string json);
 
     Task AddInputAsync(int nodeId);
 
@@ -33,4 +39,8 @@ public interface IDrawflow
     Task RemoveInputAsync(int nodeId, string inputClass);
 
     Task RemoveOutputAsync(int nodeId, string inputClass);
+
+    Task FocusNodeAsync(string nodeId);
+
+    Task CenterNodeAsync(string nodeId, bool animate);
 }

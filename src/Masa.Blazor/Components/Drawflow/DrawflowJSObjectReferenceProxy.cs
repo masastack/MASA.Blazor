@@ -37,6 +37,11 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
             html);
     }
 
+    public async Task<DrawflowNode<TData>?> GetNodeFromIdAsync<TData>(string nodeId)
+    {
+        return await InvokeAsync<DrawflowNode<TData>>("getNodeFromId", nodeId);
+    }
+
     public async Task RemoveNodeAsync(int nodeId)
     {
         await InvokeVoidAsync("removeNodeId", $"node-{nodeId}");
@@ -50,6 +55,11 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
     public async Task<string?> ExportAsync(bool withoutData = false)
     {
         return await InvokeAsync<string?>("export", withoutData);
+    }
+
+    public async Task ImportAsync(string json)
+    {
+        await InvokeVoidAsync("import", json);
     }
 
     public async Task AddInputAsync(int nodeId)
@@ -70,6 +80,21 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
     public async Task RemoveOutputAsync(int nodeId, string outputClass)
     {
         await InvokeVoidAsync("removeNodeOutput", nodeId, outputClass);
+    }
+
+    public async Task UpdateNodeHTMLAsync(int nodeId, string html)
+    {
+        await InvokeVoidAsync("updateNodeHtml", nodeId, html);
+    }
+
+    public async Task FocusNodeAsync(string nodeId)
+    {
+        await InvokeVoidAsync("focusNode", nodeId);
+    }
+
+    public async Task CenterNodeAsync(string nodeId, bool animate)
+    {
+        await InvokeVoidAsync("centerNode", nodeId, animate);
     }
 }
 

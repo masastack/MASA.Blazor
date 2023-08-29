@@ -6,9 +6,10 @@ public class DrawflowJSModule : JSModule
     {
     }
 
-    public async ValueTask<IDrawflowJSObjectReferenceProxy> Init(string selector, DrawflowEditorMode mode)
+    public async ValueTask<IDrawflowJSObjectReferenceProxy> Init(string selector, DotNetObjectReference<object> _dotNetObjectReference,
+        DrawflowEditorMode mode)
     {
-        var jsObject = await InvokeAsync<IJSObjectReference>("init", selector, mode.ToString().ToLower());
+        var jsObject = await InvokeAsync<IJSObjectReference>("init", selector, _dotNetObjectReference, mode.ToString().ToLower());
         return new DrawflowJSObjectReferenceProxy(jsObject);
     }
 }
