@@ -56,12 +56,12 @@
     "MDataFooter",
     "MSimpleCheckbox"
   ],
-  "date-time-pickers":[
+  "date-time-pickers": [
     "PDateTimePicker",
     "PDateTimePickerView",
     "PDateTimeCompactPickerView"
   ],
-  "date-digital-clock-pickers":[
+  "date-digital-clock-pickers": [
     "PDateDigitalClockPicker",
     "PDateDigitalClockPickerView",
     "PDateDigitalClockCompactPickerView"
@@ -142,6 +142,13 @@
     "MStepperHeader",
     "MStepperItems",
     "MStepperStep"
+  ],
+  "swiper": [
+    "MSwiper",
+    "MSwiperSlide",
+    "MSwiperPagination",
+    "MSwiperNavigation",
+    "MSwiperAutoplay"
   ],
   "tabs": [
     "MTabs",
