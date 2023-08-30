@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Masa.Blazor.Swiper.Modules;
+﻿using Masa.Blazor.Swiper.Modules;
 
 namespace Masa.Blazor;
 

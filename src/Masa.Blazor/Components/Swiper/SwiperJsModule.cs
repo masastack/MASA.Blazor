@@ -8,24 +8,11 @@ public class SwiperJsModule : JSModule
 
     public async ValueTask<ISwiperJSObjectReferenceProxy> Init(
         ElementReference el,
-        SwiperOptions options
+        SwiperOptions options,
+        DotNetObjectReference<object> interopHandle
     )
     {
-        var obj = await InvokeAsync<IJSObjectReference>("init", el, options);
+        var obj = await InvokeAsync<IJSObjectReference>("init", el, options, interopHandle);
         return new SwiperJSObjectReferenceProxy(obj);
-    }
-}
-
-public interface ISwiperJSObjectReferenceProxy
-{
-}
-
-public class SwiperJSObjectReferenceProxy : ISwiperJSObjectReferenceProxy
-{
-    private readonly IJSObjectReference _jsObjectReference;
-
-    public SwiperJSObjectReferenceProxy(IJSObjectReference jsObjectReference)
-    {
-        _jsObjectReference = jsObjectReference;
     }
 }

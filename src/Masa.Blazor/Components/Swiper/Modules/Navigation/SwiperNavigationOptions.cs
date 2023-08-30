@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor;
+﻿namespace Masa.Blazor.Swiper.Modules;
 
 public class SwiperNavigationOptions
 {

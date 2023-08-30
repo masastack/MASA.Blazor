@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
 
-<div class="@Block.AddClass("swiper")"
-     style="@Style"
+<div class="@Block.AddClass("swiper", Class)"
+     style="@(new StyleBuilder().AddHeight(Height).AddWidth(Width).Add(Style).GetStyle())"
      @ref="_elementReference">
     <div class="swiper-wrapper">
         <CascadingValue Value="this" IsFixed>
