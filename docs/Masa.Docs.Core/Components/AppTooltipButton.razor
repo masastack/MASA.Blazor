@@ -10,7 +10,7 @@
                      Disabled="Disabled"
                      Href="@Href"
                      Target="@Target"
-                     OnClick="OnClick"
+                     OnClick="@OnClick"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
                 <MIcon SvgAttributes="@IconSvgAttrs">@Icon</MIcon>
@@ -46,7 +46,7 @@
     public string? Class { get; set; }
 
     [Parameter]
-    public EventCallback OnClick { get; set; }
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {

@@ -220,3 +220,11 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
   }
   docsearch(option);
 };
+
+window.switchTheme = function (dotNetHelper,dark,x,y) {
+  document.documentElement.style.setProperty('--x', x + 'px')
+  document.documentElement.style.setProperty('--y', y + 'px')
+  document.startViewTransition(() => {
+    dotNetHelper.invokeMethodAsync('ToggleTheme',dark);
+  });
+}
