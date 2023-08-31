@@ -99,6 +99,12 @@ Striped table.
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
 
+#### Resize mode
+
+Using the `ResizeMode` prop you can allow users to resize columns.
+
+<masa-example file="Examples.components.data_tables.ResizeMode"></masa-example>
+
 ### Contents
 
 #### Header
