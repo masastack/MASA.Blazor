@@ -116,6 +116,13 @@ namespace Masa.Blazor
         [Parameter]
         public bool OnRowContextmenuPreventDefault { get; set; }
 
+        [Parameter]
+        public DataTableResizeMode ResizeMode
+        {
+            get => GetValue(DataTableResizeMode.None);
+            set => SetValue(value);
+        }
+
         protected MobileProvider? MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
@@ -221,6 +228,45 @@ namespace Masa.Blazor
             MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                if (ResizeMode != DataTableResizeMode.None)
+                {
+                    await JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current);
+                }
+            }
+        }
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher
+                .Watch<DataOptions>(nameof(InternalOptions), (value, prevValue) =>
+                {
+                        Console.WriteLine("DataTable InternalOptions changed");
+                    if (ResizeMode != DataTableResizeMode.None && value?.ItemsPerPage != prevValue?.ItemsPerPage)
+                    {
+                        Console.Out.WriteLine("Updatge...");
+                        NextTick(() =>
+                        {
+                            _ = JsInvokeAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current);
+                        });
+                    }
+                })
+                .Watch<DataTableResizeMode>(nameof(ResizeMode), (value, prevValue) =>
+                {
+                    if (prevValue == DataTableResizeMode.None)
+                    {
+                        NextTick(() => { _ = JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); });
+                    }
+                });
+        }
+
         private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
         {
             MobileProvider = new MobileProvider(this);
@@ -321,6 +367,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableHeader.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
                     attrs[nameof(MDataTableHeader.MultiSort)] = MultiSort;
                     attrs[nameof(MDataTableHeader.Options)] = InternalOptions;
+                    attrs[nameof(MDataTableHeader.Resizable)] = ResizeMode != DataTableResizeMode.None;
                     attrs[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
                     attrs[nameof(MDataTableHeader.GroupText)] = GroupText;
                     attrs[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
@@ -352,11 +399,25 @@ namespace Masa.Blazor
                         css += " m-data-table--mobile";
                     }
 
-                    attrs[nameof(Class)] = css;
+                    if (ResizeMode != DataTableResizeMode.None)
+                    {
+                        css += " m-data-table--resizable";
 
+                        if (ResizeMode == DataTableResizeMode.Overflow)
+                        {
+                            css += " m-data-table--resizable-overflow";
+                        }
+                        else if (ResizeMode == DataTableResizeMode.Independent)
+                        {
+                            css += " m-data-table--resizable-independent";
+                        }
+                    }
+
+                    attrs[nameof(Class)] = css;
                     attrs[nameof(Style)] = Style;
                     attrs[nameof(FixedRight)] = IsFixedRight;
                     attrs[nameof(Width)] = Width;
+                    attrs[nameof(RefBack)] = RefBack;
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>
                 {
