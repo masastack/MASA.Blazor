@@ -131,7 +131,31 @@ namespace Masa.Blazor
 
                     if (ratingItem.Click != null)
                     {
-                        attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                        // TODO:(1.1.0) change ratingItem.Click type to MouseEventArgs!
+                        attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, e =>
+                        {
+                            ExMouseEventArgs args = new()
+                            {
+                                Detail = e.Detail,
+                                ScreenX = e.ScreenX,
+                                ScreenY = e.ScreenY,
+                                ClientX = e.ClientX,
+                                ClientY = e.ClientY,
+                                OffsetX = e.OffsetX,
+                                OffsetY = e.OffsetY,
+                                PageX = e.PageX,
+                                PageY = e.PageY,
+                                Button = e.Button,
+                                Buttons = e.Buttons,
+                                CtrlKey = e.CtrlKey,
+                                ShiftKey = e.ShiftKey,
+                                AltKey = e.AltKey,
+                                MetaKey = e.MetaKey,
+                                Type = e.Type,
+                            };
+
+                            ratingItem.Click.Invoke(args);
+                        });
                     }
 
                     _iconForwardRefs.TryAdd(itemIndex, new ForwardRef());
@@ -254,7 +278,6 @@ namespace Masa.Blazor
             }
 
             var prevHoverIndex = _hoverIndex;
-            Console.Out.WriteLine("type = {0}", type);
 
             switch (type)
             {
