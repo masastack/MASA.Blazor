@@ -248,10 +248,8 @@ namespace Masa.Blazor
             watcher
                 .Watch<DataOptions>(nameof(InternalOptions), (value, prevValue) =>
                 {
-                        Console.WriteLine("DataTable InternalOptions changed");
                     if (ResizeMode != DataTableResizeMode.None && value?.ItemsPerPage != prevValue?.ItemsPerPage)
                     {
-                        Console.Out.WriteLine("Updatge...");
                         NextTick(() =>
                         {
                             _ = JsInvokeAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current);
