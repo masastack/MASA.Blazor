@@ -16,7 +16,7 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
 
     [Parameter] public string? Color { get; set; }
 
-    [Parameter] public Func<DateOnly, bool>? DayFormat { get; set; }
+    [Parameter] public Func<DateOnly, string>? DayFormat { get; set; }
 
     [Parameter] public bool Disabled { get; set; }
 

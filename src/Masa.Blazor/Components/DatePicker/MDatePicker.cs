@@ -15,7 +15,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public Func<DateOnly, bool>? DayFormat { get; set; }
+        public Func<DateOnly, string>? DayFormat { get; set; }
 
         [Parameter]
         public Func<DateOnly, string>? HeaderDateFormat { get; set; }
