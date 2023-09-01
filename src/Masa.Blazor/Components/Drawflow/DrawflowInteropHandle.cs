@@ -22,6 +22,18 @@ public class DrawflowInteropHandle
     }
 
     [JSInvokable]
+    public async Task OnNodeSelected(string nodeId)
+    {
+        await _drawflow.OnNodeSelected.InvokeAsync(nodeId);
+    }
+
+    [JSInvokable]
+    public async Task OnNodeUnselected(string nodeId)
+    {
+        await _drawflow.OnNodeUnselected.InvokeAsync(nodeId);
+    }
+
+    [JSInvokable]
     public async Task OnNodeDataChanged(string nodeId)
     {
         await _drawflow.OnNodeDataChanged.InvokeAsync(nodeId);

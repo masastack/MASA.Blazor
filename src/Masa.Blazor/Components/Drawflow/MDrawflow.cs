@@ -13,6 +13,10 @@ public class MDrawflow : MDrop
 
     [Parameter] public EventCallback<string> OnNodeRemoved { get; set; }
 
+    [Parameter] public EventCallback<string> OnNodeSelected { get; set; }
+
+    [Parameter] public EventCallback<string> OnNodeUnselected { get; set; }
+
     [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
 
     [Parameter] public EventCallback OnImport { get; set; }
