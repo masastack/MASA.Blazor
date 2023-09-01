@@ -15,6 +15,9 @@
         public bool EveryItem { get; set; }
 
         [Parameter]
+        public bool Resizable { get; set; }
+
+        [Parameter]
         public bool SomeItems { get; set; }
 
         [Parameter]
@@ -104,6 +107,11 @@
                 {
                     cssBuilder
                         .Add("m-data-table-header__sort-badge");
+                })
+                .Apply("col-resize", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-data-table-header__col-resize");
                 })
                 .Apply("header-mobile__wrapper", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__wrapper"); })
                 .Apply("header-mobile__select", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__select"); })

@@ -1,0 +1,28 @@
+﻿@namespace Masa.Blazor
+
+<div class="@Block.AddClass("swiper", Class)"
+     style="@(new StyleBuilder().AddHeight(Height).AddWidth(Width).Add(Style).GetStyle())"
+     @ref="_elementReference">
+    <div class="swiper-wrapper">
+        <CascadingValue Value="this" IsFixed>
+            @ChildContent
+        </CascadingValue>
+    </div>
+
+    @if (_pagination is not null)
+    {
+        <div class="@Block.Extend("pagination").AddClass("swiper-pagination").AddClass(_pagination.Class)"
+             style="@_pagination.Style">
+        </div>
+    }
+
+    @if (_navigation is not null)
+    {
+        <div class="@Block.Extend("next").AddClass("swiper-button-next").AddClass(_navigation.Class)"
+             style="@_navigation.Style">
+        </div>
+        <div class="@Block.Extend("prev").AddClass("swiper-button-prev").AddClass(_navigation.Class)"
+             style="@_navigation.Style">
+        </div>
+    }
+</div>

@@ -38,6 +38,7 @@
     "onItemSelect": "",
     "onToggleSelectAll": "",
     "page": "Changes which page of items is displayed.",
+    "resizeMode": "Support for resizing columns. `Auto` means that when a column is expanded the others shrinks. `Overflow` allows to resize columns with overflow of parent container. `Independent` only shrinks the next sibling column.",
     "search": "Text input used to filter items",
     "selectableKey": "The property on each item that is used to determine if it is selectable or not",
     "serverItemsLength": "The property on each item that is used to determine if it is selectable or not",

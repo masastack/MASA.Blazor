@@ -84,6 +84,7 @@
     background-color: #1E1E1E;
 }
 
+/* strip in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
     background: #fafafa;
 }
@@ -94,6 +95,44 @@
 
 .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
     background-color: #fafafa;
+}
+
+/* resizable in datatable */
+
+.m-data-table--resizable > .m-data-table__wrapper > table {
+    min-width: 100%;
+}
+
+.m-data-table--resizable > .m-data-table__wrapper > table > thead > tr > th {
+    position: relative;
+}
+
+.m-data-table--resizable > .m-data-table__wrapper > table > thead > tr > th > .m-data-table-header__col-resize {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    cursor: col-resize;
+    user-select: none;
+    z-index: 1;
+}
+
+.m-data-table--resizable > .m-data-table__wrapper > table > thead > tr > th > .m-data-table-header__col-resize:hover {
+    border-right: 1px solid currentColor;
+    opacity: 0.7;
+}
+
+.theme--light.m-data-table--resizable th, .theme--light.m-data-table--resizable td {
+    border-right: thin solid rgba(0,0,0,.12);
+}
+
+.theme--dark.m-data-table--resizable th, .theme--dark.m-data-table--resizable td {
+    border-right: thin solid rgba(255,255,255,.12);
+}
+
+.m-data-table--resizable th:last-child, .m-data-table--resizable td:last-child {
+    border-right: none;
 }
 
 /* border */

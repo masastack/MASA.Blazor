@@ -90,6 +90,12 @@ related:
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
 
+#### 调整大小
+
+使用 `ResizeMode` 属性可以调整列的大小。
+
+<masa-example file="Examples.components.data_tables.ResizeMode"></masa-example>
+
 ### 属性
 
 #### 表头

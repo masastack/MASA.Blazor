@@ -38,6 +38,7 @@
     "onItemSelect": "",
     "onToggleSelectAll": "",
     "page": "更改显示的项目页面。",
+    "resizeMode": "支持调整列的大小。`Auto`表示当一列展开时，其他列将收缩。`Overflow`允许调整列大小时使父容器溢出。`Independent` 只收缩兄弟列。",
     "search": "用于过滤项目的文本输入",
     "selectableKey": "每个项目上的属性，用于确定其是否可选择。",
     "serverItemsLength": "仅在服务器提供数据时使用。 应该设置为服务器上可用项目的总数，以便分页可以正常工作",
