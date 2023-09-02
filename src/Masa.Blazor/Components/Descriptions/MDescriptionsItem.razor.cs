@@ -18,6 +18,8 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem
 
     [Parameter] public string? Style { get; set; }
 
+    private bool _renderFromAncestor;
+
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
@@ -30,5 +32,24 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem
         base.OnInitialized();
 
         Descriptions?.Register(this);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_renderFromAncestor)
+        {
+            _renderFromAncestor = false;
+            return;
+        }
+
+        Descriptions?.UpdateChild(this);
+    }
+
+    // inherit
+    public void RenderFromAncestor()
+    {
+        _renderFromAncestor = true;
     }
 }

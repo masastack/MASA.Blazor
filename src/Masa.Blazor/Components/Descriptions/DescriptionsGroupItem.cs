@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class DescriptionsGroupItem : IDescriptionsItem
+public class DescriptionsGroupItem
 {
     public int Span { get; init; }
 
