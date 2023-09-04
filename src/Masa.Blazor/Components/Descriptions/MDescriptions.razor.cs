@@ -224,6 +224,17 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         StateHasChanged();
     }
 
+    internal void UpdateChild(IDescriptionsItem descriptionsItem)
+    {
+        var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
+        if (item != null)
+        {
+            item = descriptionsItem;
+            descriptionsItem.RenderFromAncestor();
+            StateHasChanged(); 
+        }
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
