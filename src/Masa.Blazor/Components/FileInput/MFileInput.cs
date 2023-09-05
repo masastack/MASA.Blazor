@@ -118,6 +118,8 @@ namespace Masa.Blazor
 
         protected override bool IsDirty => Files.Count > 0;
 
+        public override bool HasPrependClick => true;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
