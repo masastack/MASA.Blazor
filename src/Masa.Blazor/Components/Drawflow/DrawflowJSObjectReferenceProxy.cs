@@ -52,9 +52,14 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
         await InvokeVoidAsync("updateNodeDataFromId", nodeId, data);
     }
 
-    public async Task<string?> ExportAsync(bool withoutData = false)
+    public async Task ClearAsync()
     {
-        return await InvokeAsync<string?>("export", withoutData);
+        await InvokeVoidAsync("clear");
+    }
+
+    public async Task<string?> ExportAsync(bool withoutData = false, bool indented = false)
+    {
+        return await InvokeAsync<string?>("export", withoutData, indented);
     }
 
     public async Task ImportAsync(string json)

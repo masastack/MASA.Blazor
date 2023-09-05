@@ -100,6 +100,14 @@ public class MDrawflow : MDrop
     }
 
     [ApiPublicMethod]
+    public async Task ClearAsync()
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.ClearAsync().ConfigureAwait(false);
+    }
+
+    [ApiPublicMethod]
     public async Task ImportAsync(string json)
     {
         if (_drawflowProxy == null) return;
@@ -108,11 +116,11 @@ public class MDrawflow : MDrop
     }
 
     [ApiPublicMethod]
-    public async Task<string?> ExportAsync(bool withoutData = false)
+    public async Task<string?> ExportAsync(bool withoutData = false, bool indented = false)
     {
         if (_drawflowProxy == null) return null;
 
-        return await _drawflowProxy.ExportAsync(withoutData).ConfigureAwait(false);
+        return await _drawflowProxy.ExportAsync(withoutData, indented).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]

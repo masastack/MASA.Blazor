@@ -1,0 +1,126 @@
+﻿<div class="d-flex mb-4">
+    @for (int i = 0; i < 3; i++)
+    {
+        var index = i;
+
+        <MDrag DataValue="@($"node-{index}")" Class="@($"example-drawflow-node {s_colors[index]}")">node-@index</MDrag>
+    }
+</div>
+
+<MDrawflow Class="example-drawflow-workspace"
+           OnDrop="@DropAsync"
+           @ref="_drawflow">
+    <div style="position: absolute; right: 24px; top: 24px; z-index: 3;">
+        <MButton OnClick="@ClearAsync">Clear</MButton>
+        <MButton OnClick="@ExportAsync">Export</MButton>
+        <MButton OnClick="@OpenImportDialog">Import</MButton>
+    </div>
+</MDrawflow>
+
+<MDialog @bind-Value="_dialog" ContentClass="pa-6" Width="500" Scrollable>
+    <MSyntaxHighlight Code="@_exportData" Language="json"></MSyntaxHighlight>
+</MDialog>
+
+<MDialog @bind-Value="_importDialog" ContentClass="pa-6" Width="500">
+    <MTextarea @bind-Value="_importData" Outlined Label="Import data" Rows="10"></MTextarea>
+    <MButton Color="primary" OnClick="@ImportAsync">Import</MButton>
+</MDialog>
+
+<style>
+    /* just for DEMO */
+    .example-drawflow-node {
+      width: 160px;
+      min-height: 40px;
+      border-radius: 4px;
+      padding: 15px;
+      margin-right: 8px;
+    }
+    
+    .example-drawflow-workspace {
+      position: relative;
+      height: 300px;
+      background: white;
+      background-size: 25px 25px;
+      background-image: linear-gradient(to right, #f1f1f1 1px, transparent 1px),linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
+    }
+</style>
+
+@code {
+
+    private static readonly string[] s_colors = { "pink", "cyan", "green" };
+
+    private MDrawflow? _drawflow;
+
+    private string? _exportData;
+    private string? _importData = """{"drawflow":{"Home":{"data":{"1":{"id":1,"name":"node-0","data":{"msg":"message from node-0!"},"class":"pink","html":"<div df-data>node-0</div>","typenode":false,"inputs":{"input_1":{"connections":[]}},"outputs":{"output_1":{"connections":[{"node":"2","output":"input_1"},{"node":"3","output":"input_1"}]}},"pos_x":34,"pos_y":128},"2":{"id":2,"name":"node-1","data":{"msg":"message from node-1!"},"class":"cyan","html":"<div df-data>node-1</div>","typenode":false,"inputs":{"input_1":{"connections":[{"node":"1","input":"output_1"}]}},"outputs":{"output_1":{"connections":[]}},"pos_x":285,"pos_y":191},"3":{"id":3,"name":"node-2","data":{"msg":"message from node-2!"},"class":"green","html":"<div df-data>node-2</div>","typenode":false,"inputs":{"input_1":{"connections":[{"node":"1","input":"output_1"}]}},"outputs":{"output_1":{"connections":[]}},"pos_x":283,"pos_y":81}}}}}""";
+    private bool _dialog;
+    private bool _importDialog;
+
+    private async Task DropAsync(ExDragEventArgs args)
+    {
+        if (_drawflow is null)
+        {
+            return;
+        }
+
+        var value = args.DataTransfer.Data.Value;
+        if (value is null)
+        {
+            return;
+        }
+
+        var index = Convert.ToInt32(value.Split("-")[1]);
+
+        await _drawflow.AddNodeAsync(
+            name: value,
+            inputs: 1,
+            outputs: 1,
+            clientX: args.ClientX,
+            clientY: args.ClientY,
+            offsetX: args.DataTransfer.Data.OffsetX,
+            offsetY: args.DataTransfer.Data.OffsetY,
+            className: $"{s_colors[index]}",
+            data: new { msg = $"message from {value}!" },
+            html: $"<div df-data>{value}</div>");
+    }
+
+    private async Task ExportAsync()
+    {
+        if (_drawflow == null)
+        {
+            return;
+        }
+
+        _exportData = await _drawflow.ExportAsync(indented: true);
+        _dialog = true;
+    }
+
+    private async Task ClearAsync()
+    {
+        if (_drawflow == null)
+        {
+            return;
+        }
+
+        await _drawflow.ClearAsync();
+        _exportData = null;
+    }
+
+    private void OpenImportDialog()
+    {
+        _importDialog = true;
+    }
+
+    private async Task ImportAsync()
+    {
+        _importDialog = false;
+
+        if (_drawflow == null || string.IsNullOrWhiteSpace(_importData))
+        {
+            return;
+        }
+
+        await _drawflow.ImportAsync(_importData);
+    }
+
+}

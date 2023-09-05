@@ -28,7 +28,9 @@ public interface IDrawflow
 
     Task UpdateNodeHTMLAsync(int nodeId, string html);
 
-    Task<string?> ExportAsync(bool withoutData = false);
+    Task ClearAsync();
+
+    Task<string?> ExportAsync(bool withoutData = false, bool indented = false);
 
     Task ImportAsync(string json);
 
