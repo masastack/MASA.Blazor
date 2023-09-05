@@ -30,7 +30,7 @@ public interface IDrawflow
 
     Task ClearAsync();
 
-    Task<string?> ExportAsync(bool withoutData = false, bool indented = false);
+    Task<string?> ExportAsync(bool indented = false);
 
     Task ImportAsync(string json);
 

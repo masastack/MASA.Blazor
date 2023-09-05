@@ -57,9 +57,9 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
         await InvokeVoidAsync("clear");
     }
 
-    public async Task<string?> ExportAsync(bool withoutData = false, bool indented = false)
+    public async Task<string?> ExportAsync(bool indented = false)
     {
-        return await InvokeAsync<string?>("export", withoutData, indented);
+        return await InvokeAsync<string?>("export", indented);
     }
 
     public async Task ImportAsync(string json)

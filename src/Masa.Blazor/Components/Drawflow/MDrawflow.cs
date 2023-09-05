@@ -116,11 +116,11 @@ public class MDrawflow : MDrop
     }
 
     [ApiPublicMethod]
-    public async Task<string?> ExportAsync(bool withoutData = false, bool indented = false)
+    public async Task<string?> ExportAsync(bool indented = false)
     {
         if (_drawflowProxy == null) return null;
 
-        return await _drawflowProxy.ExportAsync(withoutData, indented).ConfigureAwait(false);
+        return await _drawflowProxy.ExportAsync(indented).ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
