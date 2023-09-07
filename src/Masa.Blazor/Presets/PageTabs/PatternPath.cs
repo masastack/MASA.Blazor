@@ -6,6 +6,7 @@ public record PatternPath
     {
         AbsolutePath = absolutePath;
         Pattern = absolutePath.ToLower();
+        CreatedAt = DateTime.Now;
     }
 
     public PatternPath(string pattern, string absolutePath)
@@ -13,6 +14,7 @@ public record PatternPath
         AbsolutePath = absolutePath;
         Pattern = pattern.ToLower();
         IsSelf = true;
+        CreatedAt = DateTime.Now;
     }
 
     public string AbsolutePath { get; private set; }
@@ -26,6 +28,11 @@ public record PatternPath
     /// Determine whether if the path is a self path.
     /// </summary>
     public bool IsSelf { get; }
+
+    /// <summary>
+    /// Use for keeping track of the order of the path, see #1535
+    /// </summary>
+    public DateTime CreatedAt { get; }
 
     public void UpdatePath(string path)
     {
