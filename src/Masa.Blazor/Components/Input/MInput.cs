@@ -30,7 +30,11 @@
         /// The required rule built-in.
         /// </summary>
         [Parameter]
-        public bool Required { get; set; }
+        public bool Required
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         /// <summary>
         /// The error message when the required rule is not satisfied.
@@ -92,30 +96,30 @@
 
         protected virtual bool IsDirty => Convert.ToString(LazyValue)?.Length > 0;
 
-        public virtual bool IsLabelActive => IsDirty;
-
-        protected override void OnParametersSet()
+        protected override IEnumerable<Func<TValue, StringBoolean>> InternalRules
         {
-            base.OnParametersSet();
-
-            if (Required)
+            get
             {
-                var rules = new List<Func<TValue, StringBoolean>>() { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
-                if (IsDirtyParameter(nameof(Rules)))
+                if (Required)
                 {
-                    Rules = Rules is null ? rules : rules.Concat(Rules);
+                    var rules = new List<Func<TValue, StringBoolean>>() { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
+                    return Rules is null ? rules : rules.Concat(Rules);
                 }
-                else
-                {
-                    Rules = rules;
-                }
+
+                return Rules ?? Enumerable.Empty<Func<TValue, StringBoolean>>();
             }
         }
+
+        public virtual bool IsLabelActive => IsDirty;
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
-            watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+            watcher.Watch<bool>(nameof(Required), () =>
+            {
+                // waiting for InternalValue to be assigned
+                NextTick(InternalValidate);
+            }).Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
             {
                 // waiting for InternalValue to be assigned
                 NextTick(InternalValidate);
