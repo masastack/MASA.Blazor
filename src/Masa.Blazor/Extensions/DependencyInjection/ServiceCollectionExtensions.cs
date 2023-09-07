@@ -1,5 +1,6 @@
 ﻿using BlazorComponent.Web;
 using Masa.Blazor;
+using Masa.Blazor.Components.Drawflow;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
@@ -45,6 +46,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
         services.TryAddScoped<SwiperJsModule>();
+        services.TryAddScoped<DrawflowJSModule>();
 
         return new MasaBlazorBuilder(services);
     }
