@@ -411,6 +411,11 @@ namespace Masa.Blazor
                         }
                     }
 
+                    if (MasaBlazor.RTL)
+                    {
+                        css += " m-data-table--rtl";
+                    }
+
                     attrs[nameof(Class)] = css;
                     attrs[nameof(Style)] = Style;
                     attrs[nameof(FixedRight)] = IsFixedRight;

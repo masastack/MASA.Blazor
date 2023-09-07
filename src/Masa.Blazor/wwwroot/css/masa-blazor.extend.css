@@ -118,6 +118,11 @@
     z-index: 1;
 }
 
+.m-data-table--rtl.m-data-table--resizable>.m-data-table__wrapper>table>thead>tr>th>.m-data-table-header__col-resize {
+    right: unset;
+    left: -4px;
+}
+
 .m-data-table--resizable > .m-data-table__wrapper > table > thead > tr > th > .m-data-table-header__col-resize:hover {
     border-right: 1px solid currentColor;
     opacity: 0.7;
@@ -131,7 +136,7 @@
     border-right: thin solid rgba(255,255,255,.12);
 }
 
-.m-data-table--resizable th:last-child, .m-data-table--resizable td:last-child {
+.m-data-table--resizable:not(.m-data-table--rtl) th:last-child, .m-data-table--resizable:not(.m-data-table--rtl) td:last-child {
     border-right: none;
 }
 
