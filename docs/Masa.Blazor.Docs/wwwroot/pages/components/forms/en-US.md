@@ -43,20 +43,26 @@ Enable I18n to support multilingual validation messages.How to use `II8n` please
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### Validation enumerable(DataAnnotations)
+#### Validate complex type with DataAnnotations 
 
-Verify the collection properties and add `[EnumerableValidation]`.
+Use `[ValidateComplexType]` attribute and `<ObjectGraphDataAnnotationsValidator />` to validate complex types.
 
-<masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
+```xml Project.csproj
+<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+```
 
-#### Validation enumerable(FluentValidation)
+<masa-example file="Examples.components.forms.ValidateComplexType"></masa-example>
 
-**MForm** supports FluentValidation validation, take validation collection as an example.
+#### Validate with FluentValidation
 
-<masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>
+<app-alert type="warning" content="Validators need to be registered, see [FluentValidation Dependency Injection](https://docs.fluentvalidation.net/en/latest/di.html) for details."></app-alert>
 
-#### Parse ValidationResult
+**MForm** supports FluentValidation validation.
+
+<masa-example file="Examples.components.forms.ValidateWithFluentValidation"></masa-example>
+
+#### Parse external validation result
 
 **MForm** supports parsing of `ValidationResult` , which users can use as `FormContext.ParseFormValidation' parameter that displays the validation results in a front-end form, using the validation collection as an example.
 
-<masa-example file="Examples.components.forms.ValidationEnumerableWithValidationResult"></masa-example>
+<masa-example file="Examples.components.forms.ParseFormValidation"></masa-example>

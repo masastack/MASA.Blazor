@@ -43,20 +43,26 @@ related:
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### 通过 DataAnnotations 验证集合
+#### 通过 DataAnnotations 验证复杂类型
 
-验证集合属性，请注意在集合属性上添加 `[EnumerableValidation]` 属性。
+使用 `[ValidateComplexType]` 属性和 `<ObjectGraphDataAnnotationsValidator />`，可以验证复杂类型。
 
-<masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
+```xml Project.csproj
+<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+```
 
-#### 通过 FluentValidation 验证集合
+<masa-example file="Examples.components.forms.ValidateComplexType"></masa-example>
 
-**MForm** 支持 **FluentValidation** 验证集合。
+#### 使用 FluentValidation 验证
 
-<masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>
+**MForm** 支持 **FluentValidation** 验证。
 
-#### 解析 ValidationResult
+<app-alert type="warning" content="验证器需要注册，详情请查看 [FluentValidation Dependency Injection](https://docs.fluentvalidation.net/en/latest/di.html)。"></app-alert>
+
+<masa-example file="Examples.components.forms.ValidateWithFluentValidation"></masa-example>
+
+#### 解析外部验证结果
 
 **MForm** 支持解析 `ValidationResult`，用户可以将服务端表单验证返回的 `ValidationResult` 作为 `FormContext.ParseFormValidation` 的参数，将验证结果在前端表单展示,以验证集合为示例。
 
-<masa-example file="Examples.components.forms.ValidationEnumerableWithValidationResult"></masa-example>
+<masa-example file="Examples.components.forms.ParseFormValidation"></masa-example>

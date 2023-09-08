@@ -1,6 +1,7 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
 <MForm Model="_order" EnableValidation>
+    <ObjectGraphDataAnnotationsValidator />
     <MTextField @bind-Value="_order.Title" Label="Title"></MTextField>
     <MTextField @bind-Value="_order.Price" Label="Price" Type="number"></MTextField>
     @foreach (var person in _order.Persons)
@@ -13,19 +14,22 @@
             </MCardText>
         </MCard>
     }
-    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
+    <MButton OnClick="() => SubmitOrder(context)" Color="success">Validate</MButton>
 </MForm>
 
 @code {
+
     public class Order
     {
         public int Id { get; set; }
+
         [Required]
         public string Title { get; set; }
+
         [Range(0, 20.00)]
         public decimal Price { get; set; }
 
-        [EnumerableValidation]
+        [ValidateComplexType]
         public List<Person> Persons { get; set; }
     }
 
@@ -41,26 +45,20 @@
     }
 
     private Order _order = new()
+    {
+        Persons = new List<Person>
         {
-            Persons = new List<Person>
-        {
-            new Person
-            {
-                Id=1
-            },
-            new Person
-            {
-                Id=2
-            }
+            new() { Id = 1 }
         }
-        };
+    };
 
     public async Task SubmitOrder(FormContext context)
     {
         var success = context.Validate();
         if (success)
         {
-            //验证成功，操作业务
+            // do something
         }
     }
+
 }

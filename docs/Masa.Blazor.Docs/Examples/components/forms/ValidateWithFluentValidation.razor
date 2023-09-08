@@ -1,5 +1,4 @@
-﻿@using BlazorComponent.I18n
-@using FluentValidation;
+﻿@using FluentValidation;
 
 <MForm Model="_orderDetail" EnableValidation EnableI18n>
     <MTextField @bind-Value="_orderDetail.Title" Label="Title"></MTextField>
@@ -14,10 +13,11 @@
             </MCardText>
         </MCard>
     }
-    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
+    <MButton OnClick="() => SubmitOrder(context)" Color="success">Validate</MButton>
 </MForm>
 
 @code {
+
     class OrderDetail
     {
         public int Id { get; set; }
@@ -40,10 +40,10 @@
 
     class OrderDetailValidator : AbstractValidator<OrderDetail>
     {
-        public OrderDetailValidator(I18n i18n)
+        public OrderDetailValidator()
         {
             RuleFor(o => o.Title).NotEmpty();
-            RuleFor(o => o.Price).InclusiveBetween(0,20);
+            RuleFor(o => o.Price).InclusiveBetween(0, 20);
             RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
         }
     }
@@ -53,7 +53,7 @@
         public CustomerValidator()
         {
             RuleFor(o => o.Name).NotEmpty();
-            RuleFor(o => o.Age).InclusiveBetween(25,100);
+            RuleFor(o => o.Age).InclusiveBetween(25, 100);
         }
     }
 
@@ -61,14 +61,7 @@
     {
         Customers = new List<Customer>
         {
-            new Customer
-            {
-                Id=1
-            },
-            new Customer
-            {
-                Id=2
-            }
+            new() { Id = 1 }
         }
     };
 
@@ -77,7 +70,8 @@
         var success = context.Validate();
         if (success)
         {
-            //验证成功，操作业务
+            // do something
         }
     }
+
 }
