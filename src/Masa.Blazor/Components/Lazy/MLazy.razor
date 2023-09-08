@@ -1,0 +1,8 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<div class="@Block"
+     style="@(new StyleBuilder().Add(Style).GetStyle())"
+     @ref="Ref">
+    @ChildContent
+</div>
