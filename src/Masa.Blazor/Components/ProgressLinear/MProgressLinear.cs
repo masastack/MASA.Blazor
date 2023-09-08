@@ -58,8 +58,12 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<double>? ChildContent { get; set; }
 
+        [Obsolete("Use ValueChanged instead.")]
         [Parameter]
         public EventCallback<double> OnChange { get; set; }
+
+        [Parameter] 
+        public EventCallback<double> ValueChanged { get; set; }
 
         private bool IsReversed => MasaBlazor.RTL != Reverse;
 
@@ -77,14 +81,29 @@ namespace Masa.Blazor
 
             var rect = await el.GetBoundingClientRectAsync();
 
-            //TODO this.internalValue = e.offsetX / width * 100
-            Value = args.OffsetX / rect.Width * 100;
-            Value = Math.Round(Value, 0);
+            var value = args.OffsetX / rect.Width * 100;
+            value = Math.Round(value, 0);
 
-            await OnChange.InvokeAsync(Value);
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
+            }
+
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
+            }
         }
 
-        protected bool Reactive => OnChange.HasDelegate;
+        protected bool Reactive => ValueChanged.HasDelegate || OnChange.HasDelegate;
 
         protected int NormalizedValue => NormalizeValue(Value);
 
