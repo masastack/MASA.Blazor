@@ -1,8 +1,14 @@
 ﻿@namespace Masa.Blazor
 @inherits BDomComponentBase
 
-<div class="@Block"
+<div class="@Block.AddClass(Class)"
+     class2="@CssProvider.GetClass()"
      style="@(new StyleBuilder().Add(Style).GetStyle())"
      @ref="Ref">
-    @ChildContent
+    <Transition Name="@Transition">
+        <IfTransitionElement Class="@Block.Element("wrapper").ToString()"
+                             Value="_isActive">
+            @ChildContent
+        </IfTransitionElement>
+    </Transition>
 </div>
