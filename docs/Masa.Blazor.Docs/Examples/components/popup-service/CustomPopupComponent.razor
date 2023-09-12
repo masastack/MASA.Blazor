@@ -1,6 +1,6 @@
 ﻿@inherits Masa.Blazor.Popup.Components.PopupComponentBase
 
-<MDialog Value="Visible" MaxWidth="360">
+<MDialog Value="Visible" ValueChanged="ValueChanged" MaxWidth="360">
     <MAlert Class="mb-0" Type="@Type" Dismissible Value="Visible" ValueChanged="ValueChanged">@Content</MAlert>
 </MDialog>
 

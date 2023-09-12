@@ -18,7 +18,6 @@ You need to reference the following files before using it:
 
 ## Usage
 
-
 <masa-example file="Examples.labs.swiper.Default"></masa-example>
 
 ## Examples

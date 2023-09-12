@@ -1,5 +1,5 @@
 ﻿---
-title: Swiper
+title: Swiper（移动端滑块）
 desc: "一个基于 [Swiper](https://github.com/nolimits4web/swiper) 的移动端触摸滑动组件。"
 tag: "JS代理"
 related:
