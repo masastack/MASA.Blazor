@@ -188,34 +188,26 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         await InvokeStateHasChangedAsync();
     }
 
+    private Block _block = new("m-descriptions");
+
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
 
         CssProvider
-            .UseBaseCssName("m-descriptions")
-            .Apply(cssBuilder =>
-            {
-                cssBuilder.AddModifierIf("dense", () => Dense)
-                          .AddModifierIf("bordered", () => Bordered)
-                          .AddTheme(IsDark);
-            })
-            .Apply("header")
-            .Apply("header__title")
-            .Apply("header__actions")
-            .Apply("view")
-            .Apply("row")
-            .Apply("item")
-            .Apply("item__label", cssBuilder => { cssBuilder.Add(LabelClass); }, styleBuilder => { styleBuilder.Add(LabelStyle); })
-            .Apply("item__content", cssBuilder => { cssBuilder.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); })
-            .Apply("item-container")
-            .Apply("item-container__label", cssBuilder =>
-            {
-                cssBuilder
-                    .AddModifierIf("no-colon", () => !Colon)
-                    .Add(LabelClass);
-            }, styleBuilder => { styleBuilder.Add(LabelStyle); })
-            .Apply("item-container__content", cssBuilder => { cssBuilder.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); });
+            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered)).AddTheme(IsDark); })
+            .Extend("header")
+            .Extend("header__title")
+            .Extend("header__actions")
+            .Extend("view")
+            .Extend("row")
+            .Extend("item")
+            .Extend("item__label", css => { css.Add(LabelClass); }, styleBuilder => { styleBuilder.Add(LabelStyle); })
+            .Extend("item__content", css => { css.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); })
+            .Extend("item-container")
+            .Extend("item-container__label", css => { css.Modifiers(u => u.Modifier("no-colon", !Colon)).Add(LabelClass); },
+                styleBuilder => { styleBuilder.Add(LabelStyle); })
+            .Extend("item-container__content", cs => { cs.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); });
     }
 
     internal void Register(IDescriptionsItem descriptionsItem)
@@ -231,7 +223,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         {
             item = descriptionsItem;
             descriptionsItem.RenderFromAncestor();
-            StateHasChanged(); 
+            StateHasChanged();
         }
     }
 
