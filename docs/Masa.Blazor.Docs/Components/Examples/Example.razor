@@ -11,86 +11,99 @@
     }
     else
     {
-        <MSheet Class="m-example"
-                Outlined
-                Dark="Dark"
-                Rounded="true">
-            <div style="min-height: 52px">
-                <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
-                    @if (_type is not null)
-                    {
-                        <MErrorHandler>
-                            <DynamicComponent Type="_type"></DynamicComponent>
-                        </MErrorHandler>
-                    }
-                </MSheet>
-
-                @if (!NoActions)
-                {
-                    <AppDivider />
-
-                    <div class="text-end pa-2">
-                        @foreach (var tooltip in _tooltips)
+        <MLazy MinHeight="110">
+            <MSheet Class="m-example"
+                    Outlined
+                    Dark="Dark"
+                    Rounded="true">
+                <div style="min-height: 52px">
+                    <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
+                        @if (_type is not null)
                         {
-                            <AppTooltipButton Icon="@tooltip.Icon"
-                                              Path="@tooltip.Path"
-                                              Href="@tooltip.href"
-                                              Target="@(tooltip.href != null ? "_blank" : null)"
-                                              Class="mx-2"
-                                              OnClick="@(() => tooltip.OnClick?.Invoke())" />
+                            <MErrorHandler>
+                                <DynamicComponent Type="_type" @key="_typeIdentity"></DynamicComponent>
+                            </MErrorHandler>
                         }
-                    </div>
+                    </MSheet>
 
-                    @if (_showExpands)
+                    @if (!NoActions)
                     {
                         <AppDivider />
 
-                        <ExpandTransition>
-                            <ShowTransitionElement Value="_expand">
-                                <div class="d-flex justify-end pa-2">
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1"
-                                                       OnClick="CopyCode"
-                                                       StaticIcon="mdi-content-copy"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-copy"
-                                                       ProcessText="code-copying"
-                                                       FinishText="code-copied">
-                                    </AppStatefulButton>
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1"
-                                                       OnClick="RestoreCode"
-                                                       StaticIcon="mdi-restore"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-restore"
-                                                       ProcessText="code-restoring">
-                                    </AppStatefulButton>
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1"
-                                                       OnClick="RunCode"
-                                                       StaticIcon="mdi-play-circle-outline"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-run"
-                                                       ProcessText="code-running">
-                                    </AppStatefulButton>
-                                </div>
+                        <div class="text-end pa-2">
+                            @foreach (var tooltip in _tooltips)
+                            {
+                                <AppTooltipButton Icon="@tooltip.Icon"
+                                                  Path="@tooltip.Path"
+                                                  Href="@tooltip.href"
+                                                  Target="@(tooltip.href != null ? "_blank" : null)"
+                                                  Class="mx-2"
+                                                  OnClick="@tooltip.OnClick" />
+                            }
+                        </div>
 
-                                <AppDivider />
+                        @if (_showExpands)
+                        {
+                            <AppDivider />
 
-                                <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
-                                               Value="@_sourceCode"
-                                               EditorOptions="_options"
-                                               @ref=_monacoEditor>
-                                </MMonacoEditor>
-                            </ShowTransitionElement>
-                        </ExpandTransition>
+                            <ExpandTransition>
+                                <ShowTransitionElement Value="_expand">
+                                    <div class="d-flex justify-end pa-2">
+                                        <AppStatefulButton Small
+                                                           Text
+                                                           Class="text-none mr-1"
+                                                           OnClick="CopyCode"
+                                                           StaticIcon="mdi-content-copy"
+                                                           FinishIcon="mdi-check"
+                                                           StaticText="code-copy"
+                                                           ProcessText="code-copying"
+                                                           FinishText="code-copied">
+                                        </AppStatefulButton>
+                                        <AppStatefulButton Small
+                                                           Text
+                                                           Class="text-none mr-1"
+                                                           OnClick="RestoreCode"
+                                                           StaticIcon="mdi-restore"
+                                                           FinishIcon="mdi-check"
+                                                           StaticText="code-restore"
+                                                           ProcessText="code-restoring">
+                                        </AppStatefulButton>
+                                        @if (!string.IsNullOrWhiteSpace(_sourceCodeUri))
+                                        {
+                                            <MButton Small="true"
+                                                     Color="primary"
+                                                     Class="text-none mr-1"
+                                                     Text
+                                                     Href="@($"https://try.masastack.com?path={_sourceCodeUri}")">
+                                                <MIcon Left>mdi-open-in-new</MIcon>
+                                                <MI18n Key="code-run-external"></MI18n>
+                                            </MButton>
+                                        }
+                                        <AppStatefulButton Small
+                                                           Text
+                                                           Class="text-none mr-1"
+                                                           OnClick="RunCode"
+                                                           StaticIcon="mdi-play-circle-outline"
+                                                           FinishIcon="mdi-check"
+                                                           StaticText="code-run"
+                                                           ProcessText="code-running">
+                                        </AppStatefulButton>
+                                    </div>
+
+                                    <AppDivider />
+
+                                    <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
+                                                   Value="@_sourceCode"
+                                                   EditorOptions="_options"
+                                                   @ref=_monacoEditor>
+                                    </MMonacoEditor>
+                                </ShowTransitionElement>
+                            </ExpandTransition>
+                        }
                     }
-                }
-            </div>
-        </MSheet>
+                </div>
+            </MSheet>
+        </MLazy>
     }
 }
 else

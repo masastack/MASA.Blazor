@@ -64,9 +64,11 @@ public partial class Example : NextTickComponentBase
     private string? _sourceCode;
     private static bool _initialize;
     private Type? _type;
+    private Guid _typeIdentity;
     private DotNetObjectReference<Example>? _objRef;
     private MMonacoEditor? _monacoEditor;
-    private List<(string Icon, string Path, Action? OnClick, string? href)> _tooltips = new();
+    private string? _sourceCodeUri;
+    private List<(string Icon, string Path, Func<Task> OnClick, string? href)> _tooltips = new();
 
     protected override void OnParametersSet()
     {
@@ -100,13 +102,13 @@ public partial class Example : NextTickComponentBase
                            .Split(".").ToList();
         sections.Insert(sections.Count - 1, "examples");
         var sourceCodePath = string.Join("/", sections) + ".txt";
-        var sourceCodeUri = $"https://docs.masastack.com/_content/Masa.Blazor.Docs/{sourceCodePath}";
+        _sourceCodeUri = $"https://docs.masastack.com/_content/Masa.Blazor.Docs/{sourceCodePath}";
 
         _tooltips = new()
         {
-            new("mdi-play-circle-outline", "code-run-external", null, $"https://try.masastack.com?path={sourceCodeUri}"),
-            new("mdi-invert-colors", "invert-example-colors", () => _dark = !_dark, null),
-            new("mdi-github", "view-in-github", null, githubUri),
+            new("mdi-reload", "code-restore", RestoreCode, null),
+            new("mdi-invert-colors", "invert-example-colors", ToggleTheme, null),
+            new("mdi-github", "view-in-github", () => Task.CompletedTask, githubUri),
             new("mdi-code-tags", "view-source", ToggleCode, null)
         };
 
@@ -178,8 +180,9 @@ public partial class Example : NextTickComponentBase
 
         var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
         _type = Type.GetType($"{executingAssemblyName}.{File}");
+        _typeIdentity = Guid.NewGuid();
 
-        if (_type == null)
+        if (_type == null ||  _monacoEditor is null)
         {
             return;
         }
@@ -198,7 +201,13 @@ public partial class Example : NextTickComponentBase
         }
     }
 
-    private void ToggleCode()
+    private async Task ToggleTheme()
+    {
+        _dark = !_dark;
+        await Task.CompletedTask;
+    }
+
+    private async Task ToggleCode()
     {
         if (!_showExpands)
         {
@@ -212,6 +221,8 @@ public partial class Example : NextTickComponentBase
         {
             _expand = !_expand;
         }
+
+        await Task.CompletedTask;
     }
 
     [JSInvokable(nameof(RunCode))]
