@@ -1,0 +1,24 @@
+﻿<MResponsive Class="overflow-y-auto"
+             MaxHeight="300">
+    <div class="pa-6 text-center" style="position: sticky; top: 0;">
+        Scroll down
+    </div>
+
+    <MResponsive MinHeight="@("50vh")"></MResponsive>
+
+    <div class="text-center text-body-2 mb-12">
+        The card will appear below:
+    </div>
+
+    <MLazy Options="new IntersectionObserverInit(0.5)"
+           MinHeight="200">
+        <MCard Class="mx-auto" MaxWidth="336">
+            <MCardTitle>Card title</MCardTitle>
+            <MCardText>
+                Phasellus magna. Quisque rutrum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Aliquam lobortis. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna.
+
+                In turpis. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In turpis. Pellentesque dapibus hendrerit tortor. Ut varius tincidunt libero.
+            </MCardText>
+        </MCard>
+    </MLazy>
+</MResponsive>
