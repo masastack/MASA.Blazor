@@ -6,7 +6,17 @@ public partial class MLazy : IAsyncDisposable
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public StringNumber? Height { get; set; }
+
+    [Parameter] public StringNumber? MaxHeight { get; set; }
+
+    [Parameter] public StringNumber? MaxWidth { get; set; }
+
     [Parameter] public StringNumber? MinHeight { get; set; }
+
+    [Parameter] public StringNumber? MinWidth { get; set; }
+
+    [Parameter] public StringNumber? Width { get; set; }
 
     [Parameter, ApiDefaultValue(DefaultTransition)]
     public string Transition { get; set; } = DefaultTransition;
@@ -15,7 +25,7 @@ public partial class MLazy : IAsyncDisposable
     /// The init options for IntersectionObserver.
     /// As soon as the component is created, the options cannot be changed.
     /// </summary>
-    [Parameter] public IntersectionObserverInit? InitOptions { get; set; }
+    [Parameter] public IntersectionObserverInit? Options { get; set; }
 
     [Parameter] public EventCallback<IntersectEventArgs> OnIntersect { get; set; }
 
@@ -23,7 +33,22 @@ public partial class MLazy : IAsyncDisposable
 
     private bool _isActive;
 
-    private Block Block => new("m-lazy");
+    protected override void SetComponentClass()
+    {
+        base.SetComponentClass();
+
+        CssProvider
+            .UseBem("m-lazy", styleAction: styleAction =>
+            {
+                styleAction.AddHeight(Height)
+                           .AddMaxHeight(MaxHeight)
+                           .AddMaxWidth(MaxWidth)
+                           .AddMinHeight(MinHeight)
+                           .AddMinWidth(MinWidth)
+                           .AddWidth(Width);
+            })
+            .Element("wrapper");
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -32,7 +57,7 @@ public partial class MLazy : IAsyncDisposable
         if (firstRender)
         {
             var handleReference = DotNetObjectReference.Create(new IntersectInvoker(OnIntersectAsync));
-            await IntersectJSModule.ObserverAsync(Ref, handleReference, InitOptions);
+            await IntersectJSModule.ObserverAsync(Ref, handleReference, Options);
         }
     }
 

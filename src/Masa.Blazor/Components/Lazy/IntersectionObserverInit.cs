@@ -6,6 +6,20 @@
 /// </summary>
 public class IntersectionObserverInit
 {
+    public IntersectionObserverInit()
+    {
+    }
+
+    public IntersectionObserverInit(params double[] threshold)
+    {
+        Threshold = threshold;
+    }
+
+    public IntersectionObserverInit(bool once)
+    {
+        Once = once;
+    }
+
     /// <summary>
     /// An Element or Document object which is an ancestor of the intended target,
     /// whose bounding rectangle will be considered the viewport.
