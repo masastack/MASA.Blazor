@@ -3,7 +3,7 @@ title: Lazy
 desc: "The **MLazy** component is used to dynamically load components based upon an elements visibility."
 ---
 
-## 使用
+## Usage
 
 The **MLazy** component by default will not render its contents until it has been intersected. Scroll down and watch the element render as you go past it.
 
