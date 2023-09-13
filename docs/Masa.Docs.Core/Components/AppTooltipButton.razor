@@ -58,14 +58,14 @@
         Icon.ThrowIfNull("AppTooltipButton");
     }
 
-    private async Task HandleOnClick()
+    private async Task HandleOnClick(MouseEventArgs args)
     {
         if (OnClick.HasDelegate)
         {
             _loading = true;
             StateHasChanged();
 
-            await OnClick.InvokeAsync();
+            await OnClick.InvokeAsync(args);
         }
 
         _loading = false;
