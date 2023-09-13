@@ -272,6 +272,17 @@
     ]
   },
   {
+    "title": "js-modules",
+    "icon": "$languageJavascript",
+    "state": "new",
+    "items": [
+      {
+        "title": "intersection-observer",
+        "state": "new"
+      }
+    ]
+  },
+  {
     "title": "labs",
     "icon": "mdi-flask",
     "state": "new",

@@ -148,8 +148,9 @@ pre[data-line] {
     content: "" !important;
 }
 
-h1 + p {
+h1+p, app-heading[level="1"]+p, .app-heading+p {
     font-size: 1.25rem;
+    font-weight: 300;
 }
 
 .theme--dark.default-toc {
