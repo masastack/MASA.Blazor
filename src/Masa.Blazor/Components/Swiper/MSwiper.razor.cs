@@ -1,12 +1,8 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MSwiper : IAsyncDisposable
+public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 {
     [Inject] private SwiperJsModule SwiperJsModule { get; set; } = null!;
-
-    [Parameter] public string? Class { get; set; }
-
-    [Parameter] public string? Style { get; set; }
 
     [Parameter] public StringNumber? Height { get; set; }
 
@@ -35,6 +31,8 @@ public partial class MSwiper : IAsyncDisposable
     /// </summary>
     [Parameter] [ApiDefaultValue(300)] public int Speed { get; set; } = 300;
 
+    [Parameter] public bool Vertical { get; set; }
+
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public int Index { get; set; }
@@ -53,13 +51,22 @@ public partial class MSwiper : IAsyncDisposable
 
     private CancellationTokenSource _cancellationTokenSource = new();
 
-    private Block Block => new("m-swiper");
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         _swiperInteropHandle = DotNetObjectReference.Create<object>(new SwiperInteropHandle(this));
+    }
+
+    protected override void SetComponentClass()
+    {
+        base.SetComponentClass();
+
+        CssProvider
+            .UseBem("m-swiper", css => { css.Add("swiper"); }, style => { style.AddHeight(Height).AddWidth(Width); })
+            .Extend("pagination", css => { css.Add("swiper-pagination").Add(_pagination?.Class); }, style => { style.Add(_pagination?.Style); })
+            .Extend("next", css => { css.Add("swiper-button-next").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); })
+            .Extend("prev", css => { css.Add("swiper-button-prev").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); });
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -120,6 +127,7 @@ public partial class MSwiper : IAsyncDisposable
         SwiperOptions options = new()
         {
             AutoHeight = AutoHeight,
+            Direction = Vertical ? "vertical" : "horizontal",
             Loop = Loop,
             Parallax = Parallax,
             SpaceBetween = SpaceBetween,

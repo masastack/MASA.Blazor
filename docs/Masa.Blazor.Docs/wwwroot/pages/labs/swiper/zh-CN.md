@@ -24,6 +24,10 @@ related:
 
 ### 属性
 
+#### 竖向
+
+<masa-example file="Examples.labs.swiper.Vertical"></masa-example>
+
 #### 循环
 
 <masa-example file="Examples.labs.swiper.Loop"></masa-example>

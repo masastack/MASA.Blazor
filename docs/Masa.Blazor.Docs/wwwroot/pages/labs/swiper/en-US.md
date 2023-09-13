@@ -24,6 +24,10 @@ You need to reference the following files before using it:
 
 ### Props
 
+#### Vertical
+
+<masa-example file="Examples.labs.swiper.Vertical"></masa-example>
+
 #### Loop
 
 <masa-example file="Examples.labs.swiper.Loop"></masa-example>
