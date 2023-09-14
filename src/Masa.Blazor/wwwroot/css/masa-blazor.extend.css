@@ -77,11 +77,11 @@
 }
 
 .theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-    background-color: #FFFFFF;
+    background: #FFFFFF;
 }
 
 .theme--dark.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-    background-color: #1E1E1E;
+    background: #1E1E1E;
 }
 
 /* strip in datatable */
@@ -93,8 +93,20 @@
     background: #212121;
 }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
-    background-color: #fafafa;
+.theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
+    background: #fafafa;
+}
+
+.theme--dark.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
+    background: #212121;
+}
+
+.theme--light.m-data-table>.m-data-table__wrapper.fixed-right > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td:last-child {
+    background: #eee;
+}
+
+.theme--dark.m-data-table>.m-data-table__wrapper.fixed-right > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td:last-child {
+    background: #616161;
 }
 
 /* resizable in datatable */
