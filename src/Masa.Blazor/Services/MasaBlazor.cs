@@ -5,6 +5,13 @@
     /// </summary>
     public class MasaBlazor
     {
+        /// <summary>
+        /// The current rendering environment.
+        /// </summary>
+        public static RenderingEnvironment RenderingEnvironment { get; internal set; }
+        
+        public static bool IsSSR => RenderingEnvironment is RenderingEnvironment.SSRServer or RenderingEnvironment.SSRWebAssembly;
+
         private bool _rtl;
 
         public MasaBlazor(

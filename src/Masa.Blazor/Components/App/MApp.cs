@@ -27,6 +27,7 @@ namespace Masa.Blazor
             MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
 
             OnThemeChange(MasaBlazor.Theme);
+            Console.Out.WriteLine("MasaBlazor.RenderingEnvironment = {0}", MasaBlazor.RenderingEnvironment);
         }
 
         private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
@@ -38,11 +39,11 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender)
+            if (MasaBlazor.IsSSR && firstRender)
             {
-                await MasaBlazor.Breakpoint.InitAsync();
+                Console.Out.WriteLine("App OnAfterRenderAsync ");
 
-                IsMasaBlazorReady = true;
+                await MasaBlazor.Breakpoint.InitAsync();
 
                 await Window.AddResizeEventListenerAsync();
 

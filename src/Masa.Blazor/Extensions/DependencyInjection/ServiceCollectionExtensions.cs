@@ -1,5 +1,4 @@
-﻿using BlazorComponent.Web;
-using Masa.Blazor;
+﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -30,11 +29,20 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<Application>();
         services.TryAddScoped(serviceProvider =>
         {
+#if NET8_0
+            var isSSR = services.Any(s => s.ServiceType.FullName == "Microsoft.AspNetCore.Components.Endpoints.IComponentPrerenderer");
+            MasaBlazor.RenderingEnvironment = GetRenderingEnvironment(serviceProvider, isSSR);
+#else
+            MasaBlazor.RenderingEnvironment = GetRenderingEnvironment(serviceProvider, false);
+#endif
+
             var application = serviceProvider.GetRequiredService<Application>();
             var window = serviceProvider.GetRequiredService<Window>();
             var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
-            return new MasaBlazor(options.Value.RTL, options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons, options.Value.Defaults);
+
+            return new MasaBlazor(options.Value.RTL, options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons,
+                options.Value.Defaults);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
@@ -50,5 +58,38 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IntersectJSModule>();
 
         return new MasaBlazorBuilder(services);
+    }
+
+    private static RenderingEnvironment GetRenderingEnvironment(IServiceProvider serviceProvider, bool isSSR)
+    {
+        RenderingEnvironment renderingEnvironment;
+
+        var jsRuntime = serviceProvider.GetRequiredService<IJSRuntime>();
+
+        if (isSSR)
+        {
+            // TODO: 存在不使用Server和WebAssembly的情况，需要增加一个Static
+            renderingEnvironment = jsRuntime is IJSInProcessRuntime
+                ? RenderingEnvironment.SSRWebAssembly
+                : RenderingEnvironment.SSRServer;
+        }
+        else if (jsRuntime is JSInProcessRuntime)
+        {
+            renderingEnvironment = RenderingEnvironment.WebAssembly;
+        }
+        else if (jsRuntime.GetType().Name == "RemoteJSRuntime")
+        {
+            renderingEnvironment = RenderingEnvironment.Server;
+        }
+        else if (jsRuntime.GetType().Name == "WebViewJSRuntime")
+        {
+            renderingEnvironment = RenderingEnvironment.WebView;
+        }
+        else
+        {
+            renderingEnvironment = RenderingEnvironment.Unknown;
+        }
+
+        return renderingEnvironment;
     }
 }
