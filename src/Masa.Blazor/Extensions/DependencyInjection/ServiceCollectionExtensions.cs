@@ -62,16 +62,24 @@ public static class ServiceCollectionExtensions
 
     private static RenderingEnvironment GetRenderingEnvironment(IServiceProvider serviceProvider, bool isSSR)
     {
-        RenderingEnvironment renderingEnvironment;
+        RenderingEnvironment renderingEnvironment = RenderingEnvironment.Unknown;
 
         var jsRuntime = serviceProvider.GetRequiredService<IJSRuntime>();
 
         if (isSSR)
         {
-            // TODO: 存在不使用Server和WebAssembly的情况，需要增加一个Static
-            renderingEnvironment = jsRuntime is IJSInProcessRuntime
-                ? RenderingEnvironment.SSRWebAssembly
-                : RenderingEnvironment.SSRServer;
+            if (jsRuntime is JSInProcessRuntime)
+            {
+                renderingEnvironment = RenderingEnvironment.SSRWebAssembly;
+            }
+            else if (jsRuntime.GetType().Name == "UnsupportedJavaScriptRuntime")
+            {
+                renderingEnvironment = RenderingEnvironment.SSRStatic;
+            }
+            else if (jsRuntime.GetType().Name == "RemoteJSRuntime")
+            {
+                renderingEnvironment = RenderingEnvironment.SSRServer;
+            }
         }
         else if (jsRuntime is JSInProcessRuntime)
         {
@@ -84,6 +92,10 @@ public static class ServiceCollectionExtensions
         else if (jsRuntime.GetType().Name == "WebViewJSRuntime")
         {
             renderingEnvironment = RenderingEnvironment.WebView;
+        }
+        else if (jsRuntime.GetType().Name == "UnsupportedJavaScriptRuntime")
+        {
+            renderingEnvironment = RenderingEnvironment.Static;
         }
         else
         {
