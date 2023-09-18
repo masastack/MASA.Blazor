@@ -33,8 +33,7 @@ public static class ServiceCollectionExtensions
             var window = serviceProvider.GetRequiredService<Window>();
             var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
-            return new MasaBlazor(options.Value.RTL, options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons,
-                options.Value.Defaults);
+            return new MasaBlazor(options.Value.RTL, options.Value.Breakpoint, application, options.Value.Theme, options.Value.Icons, options.Value.Defaults);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
