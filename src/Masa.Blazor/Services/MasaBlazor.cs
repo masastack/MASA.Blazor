@@ -1,28 +1,10 @@
 ﻿namespace Masa.Blazor
 {
-    public enum RenderingEnvironment {
-        Unknown,
-        Server,
-        Static,
-        WebAssembly,
-        SSRServer,
-        SSRStatic,
-        SSRWebAssembly,
-        WebView
-    }
-    
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature
     /// </summary>
     public class MasaBlazor
     {
-        /// <summary>
-        /// The current rendering environment.
-        /// </summary>
-        public static RenderingEnvironment RenderingEnvironment { get; internal set; }
-        
-        public static bool IsSSR => RenderingEnvironment is RenderingEnvironment.SSRServer or RenderingEnvironment.SSRWebAssembly or RenderingEnvironment.SSRStatic;
-
         private bool _rtl;
 
         public MasaBlazor(
