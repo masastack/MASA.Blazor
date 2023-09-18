@@ -59,7 +59,7 @@ public class PMobileDatePicker : MobilePickerBase<DateColumn, DateColumn, int, D
             needChange = true;
         }
 
-        if (needChange)
+        if (needChange || Value == default)
         {
             Value = GetDateWithinBoundary(Value);
             Columns = GetYears(Value);
