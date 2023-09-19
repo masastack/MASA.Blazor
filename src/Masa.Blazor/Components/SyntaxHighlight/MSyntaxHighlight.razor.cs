@@ -23,6 +23,7 @@ public partial class MSyntaxHighlight : BDomComponentBase
     [Parameter]
     public Func<ElementReference, Task>? OnHighlighted { get; set; }
 
+    private bool _firstRender = true;
     private string _codeHtml = string.Empty;
     private string? _prevCode;
 
@@ -47,7 +48,7 @@ public partial class MSyntaxHighlight : BDomComponentBase
     {
         await base.OnParametersSetAsync();
 
-        if (_prevCode is not null && _prevCode != Code)
+        if (!_firstRender && _prevCode != Code)
         {
             _prevCode = Code;
 
@@ -61,6 +62,8 @@ public partial class MSyntaxHighlight : BDomComponentBase
 
         if (firstRender)
         {
+            _firstRender = false;
+
             _prevCode = Code;
 
             await TryHighlight();
@@ -71,9 +74,13 @@ public partial class MSyntaxHighlight : BDomComponentBase
 
     private async Task TryHighlight()
     {
-        if (Code == null) return;
+        if (Code == null)
+        {
+            _codeHtml = string.Empty;
+            return;
+        }
 
-        _codeHtml = await MarkdownItJSModule.Highlight(Code, Language);
+        _codeHtml = await MarkdownItJSModule.Highlight(Code, Language, streaming: false);
 
         if (OnHighlighted != null)
         {
