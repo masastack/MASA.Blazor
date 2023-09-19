@@ -34,16 +34,12 @@ namespace Masa.Blazor
             InvokeStateHasChanged();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
         {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
+            await MasaBlazor.Breakpoint.InitAsync();
+            await Window.AddResizeEventListenerAsync();
+            if (onAfterRender)
             {
-                await MasaBlazor.Breakpoint.InitAsync();
-
-                await Window.AddResizeEventListenerAsync();
-
                 StateHasChanged();
             }
         }

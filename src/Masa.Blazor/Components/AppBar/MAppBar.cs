@@ -60,21 +60,16 @@ namespace Masa.Blazor
             "Left", "Bar", "Right"
         };
 
-        private bool _rendered;
+        private bool _isBooted;
         private Scroller? _scroller;
 
         public int? Transform { get; private set; } = 0;
-
-        /// <summary>
-        /// Avoid an entry animation on page load.
-        /// </summary>
-        private bool IsBooted =>_rendered && (MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
                                  HideOnScroll ||
                                  CollapseOnScroll ||
-                                 IsBooted ||
+                                 _isBooted ||
                                  !Value;
 
         protected double ScrollRatio
@@ -254,11 +249,22 @@ namespace Masa.Blazor
             MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
         }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (firstRender)
+            {
+                _isBooted = true;
+                Attributes["data-booted"] = "true";
+                StateHasChanged();
+            }
+        }
+
         private void ApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
-                Attributes["data-booted"] = IsBooted ? "true" : null;
                 InvokeStateHasChanged();
             }
         }
@@ -330,23 +336,14 @@ namespace Masa.Blazor
                 MasaBlazor.Application.Bottom = val;
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
         {
-            if (firstRender)
+            await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
             {
-                _rendered = true;
-                Attributes["data-booted"] = IsBooted ? "true" : null;
-                StateHasChanged();
+                if (!CanScroll) return;
 
-                await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
-                {
-                    if (!CanScroll) return;
-
-                    await _scroller!.OnScroll(ThresholdMet);
-                }));
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
+                await _scroller!.OnScroll(ThresholdMet);
+            }));
         }
 
         protected void ThresholdMet(Scroller _)
