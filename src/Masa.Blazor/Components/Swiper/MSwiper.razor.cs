@@ -10,6 +10,8 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
     [Parameter] public bool AutoHeight { get; set; }
 
+    [Parameter] [ApiDefaultValue(true)] public bool AllowTouchMove { get; set; } = true;
+
     /// <summary>
     /// Set to true to enable continuous loop mode
     /// </summary>
@@ -126,6 +128,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
         SwiperOptions options = new()
         {
+            AllowTouchMove = AllowTouchMove,
             AutoHeight = AutoHeight,
             Direction = Vertical ? "vertical" : "horizontal",
             Loop = Loop,
