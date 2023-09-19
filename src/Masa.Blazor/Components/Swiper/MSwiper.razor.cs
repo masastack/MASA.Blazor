@@ -44,6 +44,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
     private ElementReference _elementReference;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private ISwiperJSObjectReferenceProxy? _swiperProxy;
+    private bool _isJsInteropReady;
 
     private int _prevIndex;
 
@@ -71,14 +72,10 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
             .Extend("prev", css => { css.Add("swiper-button-prev").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); });
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
     {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await InitSwiperAsync();
-        }
+        _isJsInteropReady = true;
+        await InitSwiperAsync();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -120,6 +117,11 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
     private async Task InitSwiperAsync()
     {
+        if (!_isJsInteropReady)
+        {
+            return;
+        }
+
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
         await Task.Delay(16, _cancellationTokenSource.Token);
