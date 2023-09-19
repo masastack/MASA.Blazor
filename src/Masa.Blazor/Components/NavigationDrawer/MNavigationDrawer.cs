@@ -184,11 +184,6 @@ namespace Masa.Blazor
                 _ = ValueChanged.InvokeAsync(val);
             }
 
-            if (App)
-            {
-                MasaBlazor.Application.HasNavigationDrawer = !Temporary;
-            }
-
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
             NavigationManager!.LocationChanged += OnLocationChanged;
@@ -198,20 +193,23 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender)
-            {
-                await UpdateApplicationAsync();
-
-                ZIndex = await GetActiveZIndexAsync();
-
-                StateHasChanged();
-            }
-
             if (_prevShowOverlay != ShowOverlay)
             {
                 _prevShowOverlay = ShowOverlay;
 
                 _ = ShowOverlay ? HideScroll() : ShowScroll();
+            }
+        }
+
+        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
+        {
+            await UpdateApplicationAsync();
+
+            ZIndex = await GetActiveZIndexAsync();
+
+            if (onAfterRender)
+            {
+                StateHasChanged();
             }
         }
 

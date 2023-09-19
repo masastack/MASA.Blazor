@@ -28,6 +28,8 @@
         private readonly List<MStepperStep> _steps = new();
         private readonly List<MStepperContent> _content = new();
 
+        private bool _isBooted;
+        
         private bool IsReverse { get; set; }
 
         protected override void SetComponentClass()
@@ -40,7 +42,7 @@
                     cssBuilder
                         .Add("m-stepper")
                         .AddIf("m-stepper--flat", () => Flat)
-                        .AddIf("m-stepper--is-booted", () => IsBooted)
+                        .AddIf("m-stepper--is-booted", () => _isBooted)
                         .AddIf("m-stepper--vertical", () => Vertical)
                         .AddIf("m-stepper--alt-labels", () => AltLabels)
                         .AddIf("m-stepper--non-linear", () => NonLinear);
@@ -68,7 +70,7 @@
 
                     if (oldVal != 0)
                     {
-                        IsBooted = true;
+                        _isBooted = true;
                     }
 
                     UpdateView();

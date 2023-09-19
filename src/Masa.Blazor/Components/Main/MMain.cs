@@ -4,45 +4,34 @@ namespace Masa.Blazor;
 
 public class MMain : BMain
 {
-    [Inject]
-    public MasaBlazor MasaBlazor { get; set; } = null!;
+    [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
-    private readonly string[] _applicationProperties = new string[]
+    private static string[] s_applicationProperties =
     {
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
     };
 
-    private bool _isRendered;
-
-    /// <summary>
-    /// Avoid an entry animation on page load.
-    /// </summary>
-    protected override bool IsBooted => _isRendered && (!MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
 
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
-        await base.OnAfterRenderAsync(firstRender);
+        base.OnAfterRender(firstRender);
 
         if (firstRender)
         {
-            _isRendered = true;
-            Attributes["data-booted"] = IsBooted ? "true" : null;
-            StateHasChanged();
+            Attributes["data-booted"] = "true";
         }
     }
 
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (_applicationProperties.Contains(e.PropertyName))
+        if (s_applicationProperties.Contains(e.PropertyName))
         {
-            Attributes["data-booted"] = IsBooted ? "true" : null;
             InvokeStateHasChanged();
         }
     }

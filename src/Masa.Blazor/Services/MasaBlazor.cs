@@ -13,6 +13,7 @@
             Application application,
             Theme theme,
             Icons icons,
+            SSROptions? ssr = null,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
             RTL = rtl;
@@ -30,6 +31,7 @@
             Application = application;
             Theme = theme;
             Icons = icons;
+            SSR = ssr;
             Defaults = defaults;
         }
 
@@ -56,6 +58,8 @@
         public Theme Theme { get; }
 
         public Icons Icons { get; }
+
+        public SSROptions? SSR { get; }
 
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;

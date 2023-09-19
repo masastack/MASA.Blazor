@@ -9,20 +9,17 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons = MasaBlazorPreset.Icons;
     }
 
-    public bool RTL { get; set; }
-
     public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
 
-    internal Theme Theme { get; }
+    public bool RTL { get; set; }
 
     internal Breakpoint Breakpoint { get; }
 
     internal Icons Icons { get; }
 
-    public void ConfigureTheme(Action<Theme> configure)
-    {
-        configure.Invoke(Theme);
-    }
+    internal SSROptions? SSR { get; private set; }
+
+    internal Theme Theme { get; }
 
     public void ConfigureBreakpoint(Action<Breakpoint> configure)
     {
@@ -35,10 +32,10 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.Aliases = defaultSet switch
         {
             IconSet.MaterialDesignIcons => new MaterialDesignIconsAliases(),
-            IconSet.MaterialDesign => new MaterialDesignAliases(),
-            IconSet.FontAwesome => new FontAwesomeAliases(),
-            IconSet.FontAwesome4 => new FontAwesome4Aliases(),
-            _ => throw new ArgumentOutOfRangeException(nameof(defaultSet), defaultSet, null)
+            IconSet.MaterialDesign      => new MaterialDesignAliases(),
+            IconSet.FontAwesome         => new FontAwesomeAliases(),
+            IconSet.FontAwesome4        => new FontAwesome4Aliases(),
+            _                           => throw new ArgumentOutOfRangeException(nameof(defaultSet), defaultSet, null)
         };
 
         aliasesConfigure?.Invoke(Icons.Aliases);
@@ -49,5 +46,16 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.DefaultSet = null;
         Icons.Name = name;
         Icons.Aliases = aliases;
+    }
+
+    public void ConfigureSSR(Action<SSROptions> configure)
+    {
+        SSR = new SSROptions();
+        configure.Invoke(SSR);
+    }
+
+    public void ConfigureTheme(Action<Theme> configure)
+    {
+        configure.Invoke(Theme);
     }
 }
