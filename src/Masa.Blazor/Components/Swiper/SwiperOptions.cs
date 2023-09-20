@@ -5,6 +5,8 @@ namespace Masa.Blazor;
 
 public class SwiperOptions
 {
+    public bool AllowTouchMove { get; set; }
+
     public bool AutoHeight { get; set; }
 
     public string? Direction { get; set; }
