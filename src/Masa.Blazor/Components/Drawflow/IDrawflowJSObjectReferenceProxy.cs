@@ -7,7 +7,7 @@ public interface IDrawflowJSObjectReferenceProxy : IJSObjectReference, IDrawflow
 
 public interface IDrawflow
 {
-    Task<int> AddNodeAsync
+    Task<string> AddNodeAsync
     (
         string name,
         int inputs,
@@ -22,11 +22,11 @@ public interface IDrawflow
 
     Task<DrawflowNode<TData>?> GetNodeFromIdAsync<TData>(string nodeId);
 
-    Task RemoveNodeAsync(int nodeId);
+    Task RemoveNodeAsync(string nodeId);
 
-    Task UpdateNodeDataAsync(int nodeId, object data);
+    Task UpdateNodeDataAsync(string nodeId, object data);
 
-    Task UpdateNodeHTMLAsync(int nodeId, string html);
+    Task UpdateNodeHTMLAsync(string nodeId, string html);
 
     Task ClearAsync();
 
@@ -34,13 +34,13 @@ public interface IDrawflow
 
     Task ImportAsync(string json);
 
-    Task AddInputAsync(int nodeId);
+    Task AddInputAsync(string nodeId);
 
-    Task AddOutputAsync(int nodeId);
+    Task AddOutputAsync(string nodeId);
 
-    Task RemoveInputAsync(int nodeId, string inputClass);
+    Task RemoveInputAsync(string nodeId, string inputClass);
 
-    Task RemoveOutputAsync(int nodeId, string inputClass);
+    Task RemoveOutputAsync(string nodeId, string inputClass);
 
     Task FocusNodeAsync(string nodeId);
 
