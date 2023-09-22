@@ -85,6 +85,7 @@
             {
                 return;
             }
+
             DragDropService.DragItem = find;
             if (_options?.OnStart != null)
                 _options.OnStart(args);
@@ -123,6 +124,7 @@
                 var item = DragDropService.DragItem.Clone();
                 Add(item, args.NewIndex);
             }
+
             await Task.CompletedTask;
         }
 
@@ -167,12 +169,12 @@
             IsRender = true;
             if (_options?.OnRemove != null)
                 _options.OnRemove(args);
-          
+
             if (Contains(DragDropService.DragItem))
             {
                 Remove(DragDropService.DragItem);
                 if (args.IsClone)
-                {                   
+                {
                     Add(DragDropService.DragItem, args.OldIndex);
                 }
             }
@@ -242,6 +244,7 @@
                 _dotNetHelper = DotNetObjectReference.Create(this);
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
             }
+
             await base.OnAfterRenderAsync(firstRender);
         }
 
@@ -253,8 +256,8 @@
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
             _dotNetHelper?.Dispose();
+            base.Dispose(disposing);
         }
 
         public async ValueTask DisposeAsync()
@@ -264,7 +267,7 @@
                 if (_jsHelper != null)
                     await _jsHelper.DisposeAsync();
             }
-            catch
+            catch (JSDisconnectedException)
             {
                 // ignored
             }
