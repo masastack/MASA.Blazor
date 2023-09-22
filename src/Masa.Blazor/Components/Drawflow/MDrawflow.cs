@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor;
 
-public class MDrawflow : MDrop
+public class MDrawflow : MDrop, IAsyncDisposable
 {
     [Inject] private DrawflowJSModule DrawflowJSModule { get; set; } = null!;
 
@@ -23,6 +23,7 @@ public class MDrawflow : MDrop
 
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
+    private DotNetObjectReference<object>? _interopHandleReference;
 
     protected override string ClassString => new Block("m-drawflow").Modifier(Mode, "mode").AddClass(base.ClassString).Build();
 
@@ -42,9 +43,9 @@ public class MDrawflow : MDrop
         await base.OnAfterRenderAsync(firstRender);
 
         if (firstRender)
-        {
-            var interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
-            _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, interopHandleReference, Mode);
+        { 
+            _interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
+            _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, _interopHandleReference, Mode);
         }
     }
 
@@ -169,5 +170,24 @@ public class MDrawflow : MDrop
         if (_drawflowProxy == null) return;
 
         await _drawflowProxy.CenterNodeAsync(nodeId, animate).ConfigureAwait(false);
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            _interopHandleReference?.Dispose();
+
+            if (_drawflowProxy != null)
+            {
+                await _drawflowProxy.DisposeAsync();
+            }
+
+            await DrawflowJSModule.DisposeAsync();
+        }
+        catch (JSDisconnectedException)
+        {
+            // ignored
+        }
     }
 }

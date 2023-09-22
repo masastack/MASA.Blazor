@@ -94,10 +94,11 @@ public class Breakpoint
     public async Task InitAsync()
     {
         await UpdateAsync();
-        await Window.AddEventListenerAsync("resize", HandleOnResizeAsync, new EventListenerOptions
-        {
-            Passive = true
-        });
+        await Window.AddEventListenerAsync(
+            "resize",
+            UpdateAsync,
+            new EventListenerOptions { Passive = true },
+            new EventListenerExtras(debounce: 200));
     }
 
     private async Task UpdateAsync()
@@ -194,14 +195,5 @@ public class Breakpoint
         var innerWidth = await Window.GetInnerWidthAsync();
 
         return Math.Max(clientWidth ?? 0, innerWidth ?? 0);
-    }
-
-    private async Task HandleOnResizeAsync()
-    {
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
-        await Task.Delay(200, _cancellationTokenSource.Token);
-
-        await UpdateAsync();
     }
 }

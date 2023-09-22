@@ -121,6 +121,7 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
+        // TODO: need dispose the object reference in .NET or JS
         Editor = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();

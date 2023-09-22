@@ -207,7 +207,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         }
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
@@ -216,9 +216,9 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
                 await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
             }
         }
-        catch
+        catch (JSDisconnectedException)
         {
-            // nothing to do
+            // ignored
         }
     }
 }

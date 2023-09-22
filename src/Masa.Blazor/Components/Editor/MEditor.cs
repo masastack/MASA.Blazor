@@ -213,8 +213,8 @@ namespace Masa.Blazor
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
             _objRef?.Dispose();
+            base.Dispose(disposing);
         }
 
         public async ValueTask DisposeAsync()
@@ -224,7 +224,7 @@ namespace Masa.Blazor
                 if (_quillHelper != null)
                     await _quillHelper.DisposeAsync();
             }
-            catch (Exception)
+            catch (JSDisconnectedException)
             {
                 // ignored
             }
