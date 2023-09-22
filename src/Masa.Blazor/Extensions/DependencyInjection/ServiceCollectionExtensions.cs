@@ -54,7 +54,8 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<SwiperJsModule>();
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
-
+        services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
+        
         return new MasaBlazorBuilder(services);
     }
 }
