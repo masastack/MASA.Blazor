@@ -118,9 +118,8 @@ public partial class Toc : NextTickComponentBase
 
     protected override void Dispose(bool disposing)
     {
-        base.Dispose(disposing);
-
-        AppService.TocChanged -= AppServiceOnTocChanged;
         _objRef?.Dispose();
+        AppService.TocChanged -= AppServiceOnTocChanged;
+        base.Dispose(disposing);
     }
 }

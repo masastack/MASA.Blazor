@@ -34,24 +34,6 @@
         content: "An error has occurred."
     }
 
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-    margin: 12px 0 0 0;
-    background-color: #F6F8FD;
-}
-
-::-webkit-scrollbar {
-    width: 4px;
-    height: 5px;
-    margin: 5px 0;
-}
-
-::-webkit-scrollbar-thumb {
-    margin: 5px 0;
-    border-radius: 4px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #A3AED0), color-stop(0.72, #A3AED0), color-stop(0.86, #A3AED0));
-}
-
 .theme--light.default-app-btn {
     color: var(--md-ref-palette-neutral6) !important;
 }

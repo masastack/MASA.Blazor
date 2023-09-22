@@ -291,4 +291,11 @@ public partial class Example : NextTickComponentBase
                               .Select(asm => new AssemblyExtension(asm.FullName, AppDomain.CurrentDomain.Load(asm.FullName)))
                               .Cast<RazorExtension>().ToList();
     }
+
+    protected override void Dispose(bool disposing)
+    {
+        _objRef?.Dispose();
+
+        base.Dispose(disposing);
+    }
 }
