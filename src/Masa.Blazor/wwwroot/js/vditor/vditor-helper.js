@@ -78,16 +78,16 @@ export function insertValue(domRef, value, render = true) {
     domRef.Vditor.insertValue(value, render);
 }
 export function destroy(domRef) {
-    domRef.Vditor.destroy();
+    domRef && domRef.Vditor.destroy();
 }
 export function disabled(domRef) {
-    domRef.Vditor.disabled();
+    domRef && domRef.Vditor.disabled();
 }
 export function enable(domRef) {
-    domRef.Vditor.enable();
+    domRef && domRef.Vditor.enable();
 }
 export function preview(domRef) {
-    domRef.querySelector('[data-type=preview]').click();
+    domRef && domRef.querySelector('[data-type=preview]').click();
 }
 function SetDefaultFileNameHandle(vditorOptions) {
     let { upload } = vditorOptions;
