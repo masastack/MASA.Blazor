@@ -294,7 +294,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
                 await _echarts.DisposeAsync();
             }
         }
-        catch
+        catch(JSDisconnectedException)
         {
             // ignored
         }

@@ -228,13 +228,9 @@ namespace Masa.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
-        protected HtmlElement? Target { get; set; }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            Target = new HtmlElement(Js, ScrollTarget);
 
             _scroller = new Scroller(this)
             {
@@ -372,14 +368,26 @@ namespace Masa.Blazor
             _scroller.SavedScroll = _scroller.CurrentScroll;
         }
 
-        public ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
-            if (MasaBlazor == null) return ValueTask.CompletedTask;
+            try
+            {
+                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll");
+            }
+            catch (InvalidOperationException)
+            {
+                // ignored
+            }
+            catch (JSDisconnectedException)
+            {
+                // ignored
+            }
+
+            if (MasaBlazor == null) return;
 
             RemoveApplication();
+
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-            _ = Target!.RemoveEventListenerAsync("scroll");
-            return ValueTask.CompletedTask;
         }
 
         private void RemoveApplication()

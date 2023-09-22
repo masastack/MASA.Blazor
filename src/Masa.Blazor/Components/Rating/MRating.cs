@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MRating : BRating, IRating
+    public partial class MRating : BRating, IRating, IAsyncDisposable
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -296,6 +296,26 @@ namespace Masa.Blazor
             if (_hoverIndex != prevHoverIndex)
             {
                 StateHasChanged();
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                foreach (var (k, v) in _iconForwardRefs)
+                {
+                    if (v.Current.TryGetSelector(out var selector))
+                    {
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
+                    }
+                }
+            }
+            catch (JSDisconnectedException)
+            {
+                // ignored
             }
         }
     }
