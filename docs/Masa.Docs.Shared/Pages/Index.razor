@@ -15,69 +15,65 @@
                    Clipped
                    Right="@MasaBlazor.RTL">
     <ChildContent>
-        <MListItem>
-            <MListItemContent>
-                <MSelect Items="s_versions"
-                         @bind-Value="@_selectVersion"
-                         Class="light-border"
-                         ItemText="u => u"
-                         ItemValue="u => u"
-                         HideDetails="true"
-                         Outlined
-                         Dense>
-                </MSelect>
-            </MListItemContent>
-        </MListItem>
-        <MDivider></MDivider>
+        @if (_projectToNavs.Any())
+        {
+            <MListItem>
+                <MListItemContent>
+                    <MSelect Items="s_versions"
+                             @bind-Value="@_selectVersion"
+                             Class="light-border"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             HideDetails="true"
+                             Outlined
+                             Dense>
+                    </MSelect>
+                </MListItemContent>
+            </MListItem>
+            <MDivider></MDivider>
 
-        <MList Class="doc-list-nav">
-            <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
-                <MListItem Value="@("#getting-started")"
-                           Class="doc-list-nav--item-hash"
-                           Href="@("#getting-started")"
-                           OnClick='() => ScrollIntoView("#getting-started")'
-                           OnClickPreventDefault>
-                    <MListItemIcon>
-                        <MIcon Color="#FFB547" Size="32" Style="margin-right: 2px">fa:fas fa-rocket</MIcon>
-                    </MListItemIcon>
-                    <MListItemContent>
-                        <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
-                    </MListItemContent>
-                </MListItem>
-                @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
-                {
-                    var hash = $"#{project}";
-                    var isActive = _activeHash == hash;
-
-                    <MListItem Value="hash"
+            <MList Class="doc-list-nav">
+                <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
+                    <MListItem Value="@("#getting-started")"
                                Class="doc-list-nav--item-hash"
-                               Href="@hash"
-                               OnClick="() => ScrollIntoView(hash)"
+                               Href="@("#getting-started")"
+                               OnClick='() => ScrollIntoView("#getting-started")'
                                OnClickPreventDefault>
                         <MListItemIcon>
-                            <MIcon Color="@(isActive ? "" : "#4318ff")" Size="34">@($"$masa{project.ToUpperFirst()}")</MIcon>
+                            <MIcon Color="#FFB547" Size="32" Style="margin-right: 2px">fa:fas fa-rocket</MIcon>
                         </MListItemIcon>
                         <MListItemContent>
-                            <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                            <MListItemTitle>@I18n.T("getting-started")</MListItemTitle>
                         </MListItemContent>
                     </MListItem>
-                }
-            </MListItemGroup>
-        </MList>
+                    @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
+                    {
+                        var hash = $"#{project}";
+                        var isActive = _activeHash == hash;
+
+                        <MListItem Value="hash"
+                                   Class="doc-list-nav--item-hash"
+                                   Href="@hash"
+                                   OnClick="() => ScrollIntoView(hash)"
+                                   OnClickPreventDefault>
+                            <MListItemIcon>
+                                <MIcon Color="@(isActive ? "" : "#4318ff")" Size="34">@($"$masa{project.ToUpperFirst()}")</MIcon>
+                            </MListItemIcon>
+                            <MListItemContent>
+                                <MListItemTitle>@I18n.T("product", project)</MListItemTitle>
+                            </MListItemContent>
+                        </MListItem>
+                    }
+                </MListItemGroup>
+            </MList>
+        }
     </ChildContent>
 </MNavigationDrawer>
 
 <MMain>
     <MContainer Fluid Class="px-9">
         <MResponsive Class="mx-auto overflow-visible overview" MaxWidth="1260">
-            @if (_loading)
-            {
-                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-                <MSkeletonLoader Type="card-heading, image"></MSkeletonLoader>
-            }
-            else
+            @if (!_loading)
             {
                 <div class="project" id="getting-started">
                     <div class="heading-5 mb-6 d-flex align-center">
@@ -164,6 +160,15 @@
     private string? _activeHash;
     private bool _loading = true;
 
+    protected override void OnInitialized()
+    {
+        BaseLayout.OnAppBarNavIconClick = () =>
+        {
+            _drawer = !_drawer;
+            StateHasChanged();
+        };
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -193,23 +198,23 @@
                     ScrollIntoView(uri.Fragment);
                 });
             }
-
-            BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool?>(this, val => { _drawer = !(_drawer ?? false); });
         }
     }
 
     private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
     {
-        <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title">
-            <MRow Dense NoGutters>
-                @foreach (var (title, href) in items)
-                {
-                    <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
-                        @LinkableTitle(title, href)
-                    </MCol>
-                }
-            </MRow>
-        </OutlineCard>
+        <MLazy MinHeight="70">
+            <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title">
+                <MRow Dense NoGutters>
+                    @foreach (var (title, href) in items)
+                    {
+                        <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
+                            @LinkableTitle(title, href)
+                        </MCol>
+                    }
+                </MRow>
+            </OutlineCard>
+        </MLazy>
     };
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>
@@ -237,8 +242,8 @@
 
     protected override void Dispose(bool disposing)
     {
-        base.Dispose(disposing);
         _objRef?.Dispose();
+        base.Dispose(disposing);
     }
 
 }
