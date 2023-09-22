@@ -336,14 +336,21 @@ namespace Masa.Blazor
                 MasaBlazor.Application.Bottom = val;
         }
 
-        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
-            {
-                if (!CanScroll) return;
+            await base.OnAfterRenderAsync(firstRender);
 
-                await _scroller!.OnScroll(ThresholdMet);
-            }));
+            if (firstRender)
+            {
+                await Js.AddHtmlElementEventListener(ScrollTarget, "scroll", async () =>
+                {
+                    if (!CanScroll) return;
+
+                    await _scroller!.OnScroll(ThresholdMet);
+
+                    StateHasChanged();
+                }, false);
+            }
         }
 
         protected void ThresholdMet(Scroller _)

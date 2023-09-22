@@ -209,9 +209,7 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
         if (firstRender)
         {
-            OnValueChanged(Value);
-
-            _ = DomEventJsInterop.IntersectionObserver(Ref.GetSelector()!, () =>
+            _ = IntersectJSModule.ObserverAsync(Ref, _ =>
             {
                 ScrollToActive("h");
                 ScrollToActive("m");
@@ -219,6 +217,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
                 ScrollToActive();
                 return Task.CompletedTask;
             });
+
+            OnValueChanged(Value);
         }
     }
 
