@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Masa.Docs.Shared
 @using Microsoft.AspNetCore.Components.Web
+@using Masa.Blazor
 @namespace Masa.Docs.Server.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -32,6 +33,7 @@
     <link href="_content/Masa.Docs.Shared/prism/prism-line-highlight.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs--sm-and-down.css" rel="stylesheet" media="(max-width: 960px)">
+    <component type="typeof(MThemeProvider)" render-mode="ServerPrerendered" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>

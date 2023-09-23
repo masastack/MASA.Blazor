@@ -4,7 +4,7 @@
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
-@inject MasaBlazor MasaBlazor
+@inject IThemeService ThemeService
 @inherits NextTickComponentBase
 
 <MNavigationDrawer App
@@ -13,7 +13,7 @@
                    Width="300"
                    @bind-Value="_drawer"
                    Clipped
-                   Right="@MasaBlazor.RTL">
+                    Right="@ThemeService.RTL">
     <ChildContent>
         @if (_projectToNavs.Any())
         {

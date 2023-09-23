@@ -126,11 +126,11 @@ pre[data-line] {
     background: #a3aed033 !important;
 }
 
-.line-highlight::before, .line-highlight[data-end]:after {
-    content: "" !important;
-}
+    .line-highlight::before, .line-highlight[data-end]:after {
+        content: "" !important;
+    }
 
-h1+p, app-heading[level="1"]+p, .app-heading+p {
+h1 + p, app-heading[level="1"] + p, .app-heading + p {
     font-size: 1.25rem;
     font-weight: 300;
 }
@@ -151,9 +151,9 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
     border-left-color: #373c3e;
 }
 
-    .default-toc li.primary--text {
-        border-left-color: currentColor;
-    }
+.default-toc li.primary--text {
+    border-left-color: currentColor;
+}
 
 .default-toc .m-toc-link {
     color: inherit;
@@ -372,21 +372,21 @@ a.text-dec-none {
         padding: 0 16px;
     }
 
-    .doc-list-nav--active {
-        background-color: var(--md-sys-color-primary-light);
-        color: var(--md-sys-color-on-primary-light) !important;
-    }
+.doc-list-nav--active {
+    background-color: var(--masa-palette-primary);
+    color: var(--md-sys-color-on-primary-light) !important;
+}
 
     .doc-list-nav--active .m-list-item__subtitle {
         color: rgb(255 255 255 / 60%) !important;
     }
 
-    .doc-list-nav--item-hash {
-        transition-property: background-color, color;
-        transition-duration: 0.15s;
-        transition-timing-function: ease;
-    }
-    
+.doc-list-nav--item-hash {
+    transition-property: background-color, color;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+
     .doc-list-nav--item-hash .m-list-item__icon {
         margin: 12px 24px 12px 4px;
     }
@@ -402,7 +402,7 @@ a.text-dec-none {
 }
 
 .theme--dark.default-tabs > .m-tabs-bar {
-    background-color: transparent;    
+    background-color: transparent;
 }
 
 .default-tabs .m-tab {
@@ -412,22 +412,22 @@ a.text-dec-none {
     padding: 0 12px;
 }
 
-.default-tabs .m-tab.m-tab--active {
-    font-weight: 600 !important;
-}
+    .default-tabs .m-tab.m-tab--active {
+        font-weight: 600 !important;
+    }
 
-.default-tabs .m-tab:before {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
+    .default-tabs .m-tab:before {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
 
 .theme--light.default-tabs .m-tab:not(.m-tab--active) {
     color: #485585 !important;
 }
 
-    .default-tabs .m-tab--active:focus::before {
-        opacity: 0 !important;
-    }
+.default-tabs .m-tab--active:focus::before {
+    opacity: 0 !important;
+}
 
 .search-input .m-input__prepend-inner {
     height: 100% !important;
@@ -534,10 +534,10 @@ default-app-markup {
         margin-bottom: 1.5rem;
     }
 
-    .doc-markdown-body code {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
+.doc-markdown-body code {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .m-select.light-border .m-input__slot fieldset {
     border-color: rgba(0,0,0,.12) !important;
@@ -552,7 +552,7 @@ default-app-markup {
 }
 
 @media only screen and (max-width: 599.98px) {
-    #docsearch .DocSearch-Button  {
+    #docsearch .DocSearch-Button {
         min-width: unset;
     }
 }
@@ -569,13 +569,13 @@ default-app-markup {
     margin-bottom: 16px;
 }
 
-.annual-service .icons .m-icon {
-    margin-right: 24px;
-}
+    .annual-service .icons .m-icon {
+        margin-right: 24px;
+    }
 
-.annual-service .icons .m-icon:last-child {
-    margin-right: 0;
-}
+        .annual-service .icons .m-icon:last-child {
+            margin-right: 0;
+        }
 
 .annual-service .product {
     font-weight: 900;
@@ -607,17 +607,17 @@ default-app-markup {
     margin-bottom: 24px;
 }
 
-.annual-service li:last-child {
-    margin-bottom: 0;
-}
+    .annual-service li:last-child {
+        margin-bottom: 0;
+    }
 
 .annual-service .action {
     text-align: center;
 }
 
-.annual-service .action .m-btn {
-    border-radius: 12px;
-}
+    .annual-service .action .m-btn {
+        border-radius: 12px;
+    }
 
 .annual-service .action__hint {
     opacity: 0.5;
@@ -631,9 +631,9 @@ default-app-markup {
     color: #323D6F;
 }
 
-.annual-service .tip span:first-child {
-    color: #FF7D00;
-}
+    .annual-service .tip span:first-child {
+        color: #FF7D00;
+    }
 
 .annual-service > .hidden-sm-and-down {
     padding: 24px;
@@ -645,45 +645,47 @@ default-app-markup {
     padding: 12px;
 }
 
-.annual-service > .hidden-md-and-up .m-window__container {
-    height: 100%;
-}
+    .annual-service > .hidden-md-and-up .m-window__container {
+        height: 100%;
+    }
 
 .annual-service-contact {
     padding: 32px;
     font-size: 22px;
 }
 
-.annual-service-contact .close-icon {
-    height: 32px;
-    width: 32px;
-}
+    .annual-service-contact .close-icon {
+        height: 32px;
+        width: 32px;
+    }
 
-.annual-service-contact > div {
-    margin-bottom: 32px;
-    padding: 16px 0;
-}
+    .annual-service-contact > div {
+        margin-bottom: 32px;
+        padding: 16px 0;
+    }
 
-.annual-service-contact > div:first-child {
-    padding: 0;
-}
+        .annual-service-contact > div:first-child {
+            padding: 0;
+        }
 
-.annual-service-contact .icon {
-    font-size: 48px;
-}
+    .annual-service-contact .icon {
+        font-size: 48px;
+    }
 
-.annual-service-contact .icon > .m-icon__svg {
-    width: 48px;
-    height: 48px;
-}
+        .annual-service-contact .icon > .m-icon__svg {
+            width: 48px;
+            height: 48px;
+        }
 
-.theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state)>.m-input__control>.m-input__slot fieldset {
-    color: rgba(0,0,0,.12);;
+.theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state) > .m-input__control > .m-input__slot fieldset {
+    color: rgba(0,0,0,.12);
+    ;
 }
 
 ::view-transition-old(root) {
     animation: none;
 }
+
 ::view-transition-new(root) {
     mix-blend-mode: normal;
     animation: clip .3s ease-in;
@@ -693,7 +695,8 @@ default-app-markup {
     from {
         clip-path: circle(0% at var(--x) var(--y));
     }
-    to{
+
+    to {
         clip-path: circle(100% at var(--x) var(--y));
     }
 }

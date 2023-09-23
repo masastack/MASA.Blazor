@@ -3,7 +3,7 @@
     public class MDatePickerHeader : BDatePickerHeader, IDatePickerHeader
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -51,11 +51,11 @@
         [Parameter]
         public CultureInfo Locale { get; set; } = null!;
 
-        public bool RTL => MasaBlazor.RTL;
+        public bool RTL => ThemeService.RTL;
 
         protected bool IsReversing { get; set; }
 
-        public string Transition => IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
+        public string Transition => IsReversing == !ThemeService.RTL ? "tab-reverse-transition" : "tab-transition";
 
         public Dictionary<string, object> ButtonAttrs => new()
         {

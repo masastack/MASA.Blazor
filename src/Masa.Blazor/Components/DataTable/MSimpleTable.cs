@@ -5,7 +5,7 @@ namespace Masa.Blazor
     public class MSimpleTable : BSimpleTable, ISimpleTable
     {
         [Inject]
-        private MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Parameter]
         public bool Dense { get; set; }
@@ -82,7 +82,7 @@ namespace Masa.Blazor
             {
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (element != null && element.ScrollWidth == (MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)
+                if (element != null && element.ScrollWidth == (ThemeService.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)
                 {
                     ScrollerOnRight = true;
                 }

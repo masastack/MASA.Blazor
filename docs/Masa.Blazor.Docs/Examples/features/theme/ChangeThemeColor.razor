@@ -1,0 +1,59 @@
+﻿@inject IThemeService ThemeService
+@implements IDisposable
+
+<MRow>
+    <MCol Cols="12">
+        <p>Change Theme Color</p>
+        <MButtonGroup Borderless Value="@_color" ValueChanged="ThemeColorChanged" Style="display: flex; flex-wrap: wrap; border-radius: 0; " Class="color-selector-card">
+             @foreach (var item in _colors)
+            {
+                <MButton Value="@item" Color="@item" Small Style="min-width: 28px;" />
+            }
+        </MButtonGroup>
+    </MCol>
+    <MCol Cols="12">
+        <MButton Color="primary" OnClick="ResetThemeColor">
+            <MIcon Left>mdi-refresh</MIcon>
+            Reset
+        </MButton>
+    </MCol>
+</MRow>
+
+@code {
+    string? _lightPrimarycolor;
+    string? _darkPrimarycolor;
+    string? _color;
+    public static string[] _colors = new string[] { "red", "pink", "purple", "indigo", "blue", "cyan", "teal", "green", "lime", "yellow", "orange", "brown", "grey" };
+
+    protected override Task OnInitializedAsync()
+    {
+        _lightPrimarycolor = ThemeService.Theme.LightPalette.Primary;
+        _darkPrimarycolor = ThemeService.Theme.DarkPalette.Primary;
+        return base.OnInitializedAsync();
+    }
+
+    private void ResetThemeColor()
+    {
+        ThemeService.Theme.LightPalette.Primary = _lightPrimarycolor;
+        ThemeService.Theme.DarkPalette.Primary = _darkPrimarycolor;
+        ThemeService.UpdateTheme();
+    }
+
+    private void ThemeColorChanged(StringNumber? color)
+    {
+        if (color == null)
+        {
+            ResetThemeColor();
+        }
+        else
+        {
+            ThemeService.Theme.LightPalette.Primary = ThemeService.Theme.DarkPalette.Primary = _color = color.ToString();
+            ThemeService.UpdateTheme();
+        }
+    }
+
+    public void Dispose()
+    {
+        ResetThemeColor();
+    }
+}

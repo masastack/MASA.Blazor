@@ -8,18 +8,6 @@ services.AddMasaBlazor(options => {
 })
 ```
 
-You can also change this dynamically at any point by modifying the **rtl** value on the `MasaBlazor` object.
+You can change this setting dynamically through the `RTL` value on the `IThemeService` service.
 
-```razor
-@inject MasaBlazor MasaBlazor
-
-@code {
-    private bool _rtl = false;
-
-    private void ToggleRTL()
-    {
-        _rtl = !_rtl;
-        MasaBlazor.RTL = _rtl;
-    }
-}
-```
+<masa-example file="Examples.features.bidirectionality.ChangeBidirectionality"></masa-example>

@@ -27,6 +27,13 @@
     <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\features\bidirectionality\ChangeBidirectionality.razor" />
+    <ExamplesSourceFile Remove="Examples\features\theme\ChangeThemeColor.razor" />
+    <ExamplesSourceFile Remove="Examples\features\theme\ChangeThemeMode.razor" />
+    <ExamplesSourceFile Remove="Examples\features\theme\SinglePageCustomStyles.razor" />
+  </ItemGroup>
+
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

@@ -17,9 +17,9 @@ public static class MasaBlazorPreset
 
     public static Icons Icons => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
 
-    public static Theme Theme => new(false, LightTheme, DarkTheme);
+    public static Theme Theme => new(LightTheme, DarkTheme);
 
-    private static ThemeOptions LightTheme => new()
+    private static Palette LightTheme => new()
     {
         CombinePrefix = ".m-application",
         Primary = "#1976D2",
@@ -31,7 +31,7 @@ public static class MasaBlazorPreset
         Warning = "#FB8C00",
     };
 
-    private static ThemeOptions DarkTheme => new()
+    private static Palette DarkTheme => new()
     {
         CombinePrefix = ".m-application",
         Primary = "#2196F3",

@@ -6,9 +6,9 @@ namespace Masa.Blazor
     public partial class MWindow : BWindow
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
-        protected override bool RTL => MasaBlazor.RTL;
+        protected override bool RTL => ThemeService.RTL;
 
         public bool InternalReverse => RTL ? !Reverse : Reverse;
 

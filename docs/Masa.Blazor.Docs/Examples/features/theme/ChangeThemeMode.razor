@@ -1,0 +1,33 @@
+﻿@inject IThemeService ThemeService
+@implements IDisposable
+
+<MSwitch Value="_dark" TValue="bool" ValueChanged="DarkChanged" Label="Toggle Light/Dark Mode" />
+
+@code {
+
+    bool _dark;
+
+    protected override Task OnInitializedAsync()
+    {
+        ThemeService.DarkChanged += MasaBlazorOnDarkChanged;
+        _dark = ThemeService.Dark;
+        return base.OnInitializedAsync();
+    }
+
+    private void DarkChanged(bool dark)
+    {
+        _dark = dark;
+        ThemeService.Dark = dark;
+    }
+
+    private void MasaBlazorOnDarkChanged(bool dark)
+    {
+        _dark = dark;
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ThemeService.DarkChanged -= MasaBlazorOnDarkChanged;
+    }
+}

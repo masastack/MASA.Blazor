@@ -19,6 +19,8 @@ public partial class Example : NextTickComponentBase
 
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
+    [Inject] public IThemeService ThemeService { get; set; } = null!;
+
     [Parameter, EditorRequired] public string File { get; set; } = null!;
 
     [Parameter] public int Index { get; set; }
@@ -112,7 +114,7 @@ public partial class Example : NextTickComponentBase
             new("mdi-code-tags", "view-source", ToggleCode, null)
         };
 
-        MasaBlazor.OnThemeChange += OnMasaBlazorOnOnThemeChange;
+        ThemeService.DarkChanged += MasaBlazorOnThemeChange;
     }
 
     private void InitCompleteHandle()
@@ -121,14 +123,15 @@ public partial class Example : NextTickComponentBase
         _ = _monacoEditor?.AddCommandAsync(2097, _objRef!, nameof(RunCode));
     }
 
-    private async void OnMasaBlazorOnOnThemeChange(Theme theme)
+    private async void MasaBlazorOnThemeChange(bool dark)
     {
-        if (_monacoEditor is null)
-        {
-            return;
-        }
+        _dark = Dark = dark;
+        await InvokeAsync(StateHasChanged);
 
-        await _monacoEditor.SetThemeAsync(theme.Dark ? "vs-dark" : "vs");
+        if (_monacoEditor !=null)
+        {
+            await _monacoEditor.SetThemeAsync(dark ? "vs-dark" : "vs");
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -214,7 +217,7 @@ public partial class Example : NextTickComponentBase
             _showExpands = true;
             StateHasChanged();
 
-            _options["theme"] = MasaBlazor.Theme.Dark ? "vs-dark" : "vs";
+            _options["theme"] = ThemeService.Dark ? "vs-dark" : "vs";
             _expand = true;
         }
         else

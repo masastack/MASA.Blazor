@@ -1,0 +1,33 @@
+﻿@inject IThemeService ThemeService
+@implements IDisposable
+
+<MSwitch Value="_rtl" TValue="bool" ValueChanged="RTLChanged" Label="Toggle LTR/RTL Mode" />
+
+@code {
+
+    bool _rtl;
+
+    protected override Task OnInitializedAsync()
+    {
+        ThemeService.RTLChanged += ThemeServiceOnRTLChanged;
+        _rtl = ThemeService.RTL;
+        return base.OnInitializedAsync();
+    }
+
+    private void RTLChanged(bool rtl)
+    {
+        _rtl = rtl;
+        ThemeService.RTL = rtl;
+    }
+
+    private void ThemeServiceOnRTLChanged(bool rtl)
+    {
+        _rtl = rtl;
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ThemeService.RTLChanged -= ThemeServiceOnRTLChanged;
+    }
+}

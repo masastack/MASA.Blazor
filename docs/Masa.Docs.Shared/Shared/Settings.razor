@@ -1,12 +1,13 @@
 ﻿@inject I18n I18n
-@inject MasaBlazor MasaBlazor
+@inject IThemeService ThemeService
 @inject LocalStorage LocalStorage
+@inject IThemeService ThemeService
 @inject IJSRuntime JSRuntime
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
                    Fixed
-                   Right="!MasaBlazor.RTL"
+                    Right="!ThemeService.RTL"
                    Temporary
                    HideOverlay
                    Width="349">
@@ -21,7 +22,7 @@
         <MContainer>
             <div class="mb-4">
                 <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("theme")</div>
-                <MItemGroup Value="@MasaBlazor.Theme.Dark.ToString()" ActiveClass="primary">
+                 <MItemGroup Value="@ThemeService.Dark.ToString()" ActiveClass="primary">
                     <MRow>
                         <MCol Cols="6">
                             <MItem Value="@("False")">
@@ -46,7 +47,7 @@
             </div>
             <div>
                 <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("direction")</div>
-                <MItemGroup Value="@MasaBlazor.RTL.ToString()" ActiveClass="primary">
+                <MItemGroup Value="@ThemeService.RTL.ToString()" ActiveClass="primary">
                     <MRow>
                         <MCol Cols="6">
                             <MItem Value="@("False")">
@@ -83,12 +84,7 @@
 
     private void ToggleTheme(bool dark)
     {
-        if (dark == MasaBlazor.Theme.Dark)
-        {
-            return;
-        }
-
-        MasaBlazor.ToggleTheme();
+        ThemeService.Dark = dark;
 
         _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
 
@@ -97,12 +93,12 @@
 
     private void ToggleRTL(bool rtl)
     {
-        if (rtl == MasaBlazor.RTL)
+        if (rtl == ThemeService.RTL)
         {
             return;
         }
 
-        MasaBlazor.RTL = rtl;
+        ThemeService.RTL = rtl;
 
         _ = LocalStorage.SetItemAsync("masablazor@rtl", rtl ? "rtl" : "ltr");
     }

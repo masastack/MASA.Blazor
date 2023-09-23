@@ -11,22 +11,23 @@ namespace Masa.Blazor
         public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Window Window { get; set; } = null!;
+        public IThemeService ThemeService { get; set; } = null!;
 
-        protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
+        [Inject]
+        public Window Window { get; set; } = null!;
 
         public override IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor!.Defaults;
 
-        protected override bool IsDark => MasaBlazor?.Theme is { Dark: true };
+        protected override bool IsDark => ThemeService.Dark;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            MasaBlazor.OnThemeChange += OnThemeChange;
-            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+            ThemeService.RTLChanged += ThemeServiceOnRTLChanged;
+            ThemeService.DarkChanged += ThemeServiceOnDarkChanged;
 
-            OnThemeChange(MasaBlazor.Theme);
+            ThemeService.UpdateTheme();
         }
 
         protected override async Task OnInitializedAsync()
@@ -50,26 +51,20 @@ namespace Masa.Blazor
             }
         }
 
-        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        private void ThemeServiceOnRTLChanged(bool rtl)
         {
             InvokeStateHasChanged();
         }
-        
+
+        private void ThemeServiceOnDarkChanged(bool dark)
+        {
+            InvokeStateHasChanged();
+        }
+
         private async Task OnJSInteropReadyAsync()
         {
             await MasaBlazor.Breakpoint.InitAsync();
             await Window.AddResizeEventListenerAsync();
-        }
-
-        private void OnThemeChange(Theme theme)
-        {
-            var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            var style = ThemeCssBuilder.Build(themeOptions);
-            InvokeAsync(async () =>
-            {
-                await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);
-                StateHasChanged();
-            });
         }
 
         protected override void SetComponentClass()
@@ -83,7 +78,7 @@ namespace Masa.Blazor
                         .Add("m-application")
                         .Add(() =>
                         {
-                            var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
+                            var suffix = ThemeService.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
                         .AddTheme(IsDark);
@@ -101,8 +96,8 @@ namespace Masa.Blazor
         {
             base.Dispose(disposing);
 
-            MasaBlazor.OnThemeChange -= OnThemeChange;
-            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+            ThemeService.RTLChanged -= ThemeServiceOnRTLChanged;
+            ThemeService.DarkChanged -= ThemeServiceOnDarkChanged;
         }
     }
 }

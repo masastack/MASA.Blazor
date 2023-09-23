@@ -8,6 +8,9 @@ namespace Masa.Blazor
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
 
+        [Inject]
+        private IThemeService ThemeService { get; set; } = null!;
+
         [Parameter]
         public string? Caption { get; set; }
 
@@ -411,7 +414,7 @@ namespace Masa.Blazor
                         }
                     }
 
-                    if (MasaBlazor.RTL)
+                    if (ThemeService.RTL)
                     {
                         css += " m-data-table--rtl";
                     }

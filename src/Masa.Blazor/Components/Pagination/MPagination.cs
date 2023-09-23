@@ -5,7 +5,7 @@ namespace Masa.Blazor
     public partial class MPagination : BPagination, IPagination
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Inject]
         public Document Document { get; set; } = null!;
@@ -119,7 +119,7 @@ namespace Masa.Blazor
 
         public string GetIcon(int index)
         {
-            return index == (int)PaginationIconTypes.First ? (MasaBlazor.RTL ? NextIcon : PrevIcon) : (MasaBlazor.RTL ? PrevIcon : NextIcon);
+            return index == (int)PaginationIconTypes.First ? (ThemeService.RTL ? NextIcon : PrevIcon) : (ThemeService.RTL ? PrevIcon : NextIcon);
         }
 
         private int ComputedTotalVisible

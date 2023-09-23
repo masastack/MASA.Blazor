@@ -18,6 +18,7 @@ public partial class BaseLayout
     private Project? _projectInfo;
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
+    [Inject] private IThemeService _themeService { get; set; } = null!;
 
     internal Action? OnAppBarNavIconClick { get; set; }
 
@@ -51,17 +52,15 @@ public partial class BaseLayout
     private async Task InitRTL()
     {
         var rtlStr = await LocalStorage.GetItemAsync("masablazor@rtl");
-        MasaBlazor.RTL = rtlStr == "rtl";
+        _themeService.RTL = rtlStr == "rtl";
     }
 
     private async Task InitTheme()
     {
         var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
         var isDark = themeStr == "dark";
-        if (isDark != MasaBlazor.Theme.Dark)
-        {
-            MasaBlazor.ToggleTheme();
-        }
+
+        _themeService.Dark = isDark;
     }
 
     private async Task InitLang()
@@ -153,9 +152,9 @@ public partial class BaseLayout
         var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.masastack.com" or "blazor.masastack.com"         => "prd_",
+            "docs.masastack.com" or "blazor.masastack.com" => "prd_",
             "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
-            _                                                      => "local_"
+            _ => "local_"
         };
     }
 

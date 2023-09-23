@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 public partial class MStepperContent : BStepperContent
 {
     [Inject]
-    public MasaBlazor MasaBlazor { get; set; } = null!;
+    private IThemeService ThemeService { get; set; } = null!;
 
     [CascadingParameter]
     public MStepper? Stepper { get; set; }
@@ -20,7 +20,7 @@ public partial class MStepperContent : BStepperContent
 
     protected override bool IsVertical => Stepper?.Vertical is true;
 
-    protected override bool IsRtl => MasaBlazor.RTL;
+    protected override bool IsRtl => ThemeService.RTL;
 
     protected override void OnInitialized()
     {

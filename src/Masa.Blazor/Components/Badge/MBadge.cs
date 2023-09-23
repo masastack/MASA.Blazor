@@ -3,7 +3,7 @@
     public partial class MBadge : BBadge, IBadge
     {
         [Inject]
-        private MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
         
         [Parameter]
         public bool Avatar { get; set; }
@@ -78,7 +78,7 @@
             (Left ? AUTO : ComputedXOffset) :
             (!Left ? AUTO : ComputedXOffset);
 
-        protected bool IsRtl => MasaBlazor.RTL;
+        protected bool IsRtl => ThemeService.RTL;
 
         protected override void SetComponentClass()
         {

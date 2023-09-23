@@ -3,8 +3,8 @@
     public partial class MTabs : BTabs, IThemeable
     {
         [Inject]
-        protected MasaBlazor MasaBlazor { get; set; } = null!;
-        
+        private IThemeService ThemeService { get; set; } = null!;
+
         [Parameter]
         public string? ActiveClass { get; set; }
 
@@ -38,7 +38,7 @@
         [Parameter]
         public bool Right { get; set; }
 
-        protected override bool RTL => MasaBlazor.RTL;
+        protected override bool RTL => ThemeService.RTL;
 
         protected override void SetComponentClass()
         {

@@ -15,7 +15,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 #endif
 {
     [Inject]
-    public MasaBlazor MasaBlazor { get; set; } = null!;
+    protected IThemeService ThemeService { get; set; } = null!;
 
     [Inject]
     public Document Document { get; set; } = null!;
@@ -477,7 +477,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             }, styleBuilder =>
             {
                 //TODO: change here
-                var startDir = Vertical ? MasaBlazor.RTL ? "bottom" : "top" : MasaBlazor.RTL ? "left" : "right";
+                var startDir = Vertical ? ThemeService.RTL ? "bottom" : "top" : ThemeService.RTL ? "left" : "right";
                 var endDir = Vertical ? "height" : "width";
 
                 var start = "0px";
@@ -500,8 +500,8 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
                 var endDir = Vertical ? "top" : "right";
                 var valueDir = Vertical ? "height" : "width";
 
-                var start = MasaBlazor.RTL ? "auto" : "0";
-                var end = MasaBlazor.RTL ? "0" : "auto";
+                var start = ThemeService.RTL ? "auto" : "0";
+                var end = ThemeService.RTL ? "0" : "auto";
                 var value = IsDisabled ? $"calc({InputWidth}% - 10px)" : $"{InputWidth}%";
 
                 styleBuilder
@@ -520,15 +520,15 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             .Apply("tick", cssBuilder =>
             {
                 var width = (int)cssBuilder.Data! * (100 / NumTicks);
-                var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
+                var filled = ThemeService.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
                 cssBuilder
                     .Add("m-slider__tick")
                     .AddIf("m-slider__tick--filled", () => filled);
             }, styleBuilder =>
             {
-                var direction = Vertical ? "bottom" : (MasaBlazor.RTL ? "right" : "left");
-                var offsetDirection = Vertical ? (MasaBlazor.RTL ? "left" : "right") : "top";
+                var direction = Vertical ? "bottom" : (ThemeService.RTL ? "right" : "left");
+                var offsetDirection = Vertical ? (ThemeService.RTL ? "left" : "right") : "top";
                 var width = (int)styleBuilder.Data! * (100 / NumTicks);
 
                 styleBuilder
@@ -592,7 +592,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     protected virtual void GetThumbContainerStyles(StyleBuilder styleBuilder)
     {
         var direction = Vertical ? "top" : "left";
-        var value = MasaBlazor.RTL ? 100 - InputWidth : InputWidth;
+        var value = ThemeService.RTL ? 100 - InputWidth : InputWidth;
         value = Vertical ? 100 - value : value;
 
         styleBuilder
@@ -607,7 +607,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
         if (firstRender)
         {
-            MasaBlazor.OnRTLChange += OnRTLChange;
+            ThemeService.RTLChanged += OnRTLChange;
         }
     }
 
@@ -670,7 +670,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         var steps = Max - Min / step;
         if (directionCodes.Contains(args.Code))
         {
-            var increase = MasaBlazor.RTL ? new[] { "left", "up" } : new[] { "right", "up" };
+            var increase = ThemeService.RTL ? new[] { "left", "up" } : new[] { "right", "up" };
             var direction = increase.Contains(args.Code) ? 1 : -1;
             var multiplier = args.ShiftKey ? 3 : (args.CtrlKey ? 2 : 1);
 

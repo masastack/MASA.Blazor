@@ -1,0 +1,52 @@
+﻿<MTabs @bind-Value="tab" Class="mb-4">
+    <MTab Value="0">Default</MTab>
+    <MTab Value="1">Red</MTab>
+    <MTab Value="2">Green</MTab>
+</MTabs>
+<MTabsItems @bind-Value="tab">
+    <MTabItem Value="0">
+        <MChip Color="primary">Sample Style</MChip>
+    </MTabItem>
+    <MTabItem Value="1">
+        @if (tab == 1)
+        {
+            <MThemeProvider Theme="_redTheme"/>
+            <MChip Color="primary">Sample Style</MChip>
+        }
+    </MTabItem>
+    <MTabItem Value="2">
+        @if (tab == 2)
+        {
+            <MThemeProvider Theme="_greenTheme"/> 
+            <MChip Color="primary">Sample Style</MChip>
+        }
+    </MTabItem>
+</MTabsItems>
+
+@code {
+    StringNumber? tab;
+
+    Theme _redTheme = new Theme(new Palette
+        {
+            CombinePrefix = ".m-application",
+            Primary = "red"
+        },
+        new Palette
+        {
+            CombinePrefix = ".m-application",
+            Primary = "red"
+        });
+
+    Theme _greenTheme = new Theme(
+        new Palette
+        {
+            CombinePrefix = ".m-application",
+            Primary = "green"
+        },
+        new Palette
+        {
+            CombinePrefix = ".m-application",
+            Primary = "green"
+        }
+        );
+}

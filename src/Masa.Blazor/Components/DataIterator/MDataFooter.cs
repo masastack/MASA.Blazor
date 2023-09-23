@@ -6,7 +6,7 @@
         protected I18n I18n { get; set; } = null!;
 
         [Inject]
-        protected MasaBlazor MasaBlazor { get; set; } = null!;
+        protected IThemeService ThemeService { get; set; } = null!;
 
         [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.itemsPerPageText")]
         public string? ItemsPerPageText { get; set; }
@@ -86,7 +86,7 @@
             }
         }
 
-        public bool RTL => MasaBlazor.RTL;
+        public bool RTL => ThemeService.RTL;
 
         public bool DisableNextPageIcon => Options?.ItemsPerPage <= 0 || Options?.Page * Options?.ItemsPerPage >= Pagination?.ItemsLength ||
                                            Pagination?.PageStop < 0;
@@ -109,11 +109,11 @@
         {
             if (firstRender)
             {
-                MasaBlazor.OnRTLChange += OnRTLChange;
+                ThemeService.RTLChanged += OnRTLChanged;
             }
         }
 
-        private void OnRTLChange(bool obj)
+        private void OnRTLChanged(bool obj)
         {
             InvokeStateHasChanged();
         }

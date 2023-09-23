@@ -27,6 +27,11 @@ public static class ServiceCollectionExtensions
     private static IMasaBlazorBuilder AddMasaBlazorInternal(this IServiceCollection services)
     {
         services.TryAddScoped<Application>();
+        services.TryAddScoped<IThemeService>(serviceProvider =>
+        {
+            var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
+            return new ThemeService(options.Value.Theme, options.Value.Dark, options.Value.RTL);
+        });
         services.TryAddScoped(serviceProvider =>
         {
             var application = serviceProvider.GetRequiredService<Application>();
@@ -34,10 +39,8 @@ public static class ServiceCollectionExtensions
             var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
             options.Value.Breakpoint.SetWindow(window);
             return new MasaBlazor(
-                options.Value.RTL,
                 options.Value.Breakpoint,
                 application,
-                options.Value.Theme,
                 options.Value.Icons,
                 options.Value.SSR,
                 options.Value.Defaults);

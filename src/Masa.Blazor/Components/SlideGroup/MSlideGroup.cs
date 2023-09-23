@@ -13,17 +13,20 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
-        protected override bool RTL => MasaBlazor.RTL;
+        [Inject]
+        private IThemeService ThemeService { get; set; } = null!;
+
+        protected override bool RTL => ThemeService.RTL;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+            MasaBlazor.BreakpointChanged += OnBreakpointChanged;
             IsMobile = MasaBlazor.Breakpoint.Mobile;
         }
 
-        private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+        private async void OnBreakpointChanged(object? sender, BreakpointChangedEventArgs e)
         {
             if (!e.MobileChanged) return;
 
@@ -73,7 +76,7 @@
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+            MasaBlazor.BreakpointChanged -= OnBreakpointChanged;
         }
     }
 }

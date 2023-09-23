@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
-@inject MasaBlazor MasaBlazor
+@inject IThemeService ThemeService
 @implements IDisposable
 
 <MTabs Class="default-tabs"
@@ -64,10 +64,10 @@
     {
         base.OnInitialized();
 
-        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+        ThemeService.RTLChanged += ThemeServiceOnRTLChanged;
     }
 
-    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    private void ThemeServiceOnRTLChanged(bool rtl)
     {
         InvokeAsync(() =>
         {
@@ -92,7 +92,7 @@
     public void Dispose()
     {
         _tabs?.Dispose();
-        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+        ThemeService.RTLChanged -= ThemeServiceOnRTLChanged;
     }
 
 }

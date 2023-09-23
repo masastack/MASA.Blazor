@@ -5,7 +5,7 @@ namespace Masa.Blazor
     public partial class MRating : BRating, IRating, IAsyncDisposable
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Inject]
         public Document Document { get; set; } = null!;
@@ -243,7 +243,7 @@ namespace Masa.Blazor
         private async Task<double> GenHoverIndex(int i, ExMouseEventArgs args)
         {
             var isHalf = await IsHalfEvent(args);
-            isHalf = HalfIncrements && MasaBlazor.RTL ? !isHalf : isHalf;
+            isHalf = HalfIncrements && ThemeService.RTL ? !isHalf : isHalf;
 
             return i + (isHalf ? 0.5 : 1);
         }

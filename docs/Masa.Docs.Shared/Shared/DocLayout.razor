@@ -4,11 +4,11 @@
 @implements IAsyncDisposable
 
 <NavDrawer @bind-Value="_showDrawer"
-           RTL="MasaBlazor.RTL" />
+           RTL="ThemeService.RTL" />
 
 <MMain>@Body</MMain>
 
-<Toc RTL="@MasaBlazor.RTL" />
+<Toc RTL="@ThemeService.RTL" />
 
 <FabTransition>
     <MButton Show="_showBackTop" Large Fab Fixed Bottom Right Class="transition-swing" Color="primary" OnClick="ToTopAsync">
@@ -19,7 +19,7 @@
 @code {
 
     [Inject]
-    MasaBlazor MasaBlazor { get; set; } = null!;
+    IThemeService ThemeService { get; set; } = null!;
 
     [Inject]
     public IJSRuntime Js { get; set; } = null!;

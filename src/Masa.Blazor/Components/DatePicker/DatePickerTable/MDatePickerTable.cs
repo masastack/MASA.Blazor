@@ -3,7 +3,7 @@
     public partial class MDatePickerTable<TValue> : BDatePickerTable, IThemeable, IDatePickerTable
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -110,7 +110,7 @@
             return value == Current;
         }
 
-        protected override string ComputedTransition => IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
+        protected override string ComputedTransition => IsReversing == !ThemeService.RTL ? "tab-reverse-transition" : "tab-transition";
 
         public override DateOnly TableDate
         {

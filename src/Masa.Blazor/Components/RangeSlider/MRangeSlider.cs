@@ -243,7 +243,7 @@
 
         private void GetTrackStyle(StyleBuilder styleBuilder, double startLength, double endLength, double startPadding = 0, double endPadding = 0)
         {
-            var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
+            var startDir = Vertical ? (ThemeService.RTL ? "top" : "bottom") : (ThemeService.RTL ? "right" : "left");
             var endDir = Vertical ? "height" : "width";
 
             var start = $"calc({startLength}% + {startPadding}px)";
@@ -270,7 +270,7 @@
             var index = (int)(styleBuilder.Data ?? 0);
 
             var direction = Vertical ? "top" : "left";
-            var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
+            var value = ThemeService.RTL ? 100 - InputWidths[index] : InputWidths[index];
             value = Vertical ? 100 - value : value;
 
             styleBuilder

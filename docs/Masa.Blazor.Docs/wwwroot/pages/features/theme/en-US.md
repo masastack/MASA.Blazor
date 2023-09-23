@@ -2,74 +2,49 @@
 
 Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.
 
-## Light and dark
+## Custom themes
 
-MASA Blazor supports **light** and **dark** themes. By default, your application will use the light theme. To switch to the dark theme, set the enable dark theme when registering the service:
-
-```csharp Program.cs
-builder.Services.AddMasaBlazor(options =>
-{
-    options.ConfigureTheme(theme =>
-    {
-        theme.Dark = true;
-    });
-});
-```
-
-When you specify a component as light or dark, unless otherwise specified, all of its child components will inherit and apply the same theme.
-
-## Customizing
-
-By default MASA Blazor applies the standard theme to all components.
-
-```csharp
-public static class MasaBlazorPreset
-{
-    private static ThemeOptions LightTheme => new()
-    {
-        CombinePrefix = ".m-application",
-        Primary = "#1976D2",
-        Secondary = "#424242",
-        Accent = "#82B1FF",
-        Error = "#FF5252",
-        Info = "#2196F3",
-        Success = "#4CAF50",
-        Warning = "#FB8C00",
-        UserDefined = new Dictionary<string, string>()
-    };
-
-    private static ThemeOptions DarkTheme => new()
-    {
-        CombinePrefix = ".m-application",
-        Primary = "#2196F3",
-        Secondary = "#424242",
-        Accent = "#FF4081",
-        Error = "#FF5252",
-        Info = "#2196F3",
-        Success = "#4CAF50",
-        Warning = "#FB8C00",
-        UserDefined = new Dictionary<string, string>()
-    };
-}
-```
-
-You can easily change this. Just set the theme properties when registering the service. You can choose to modify all or part of the theme properties, and the rest will inherit from the default values.
+The standard theme is applied to all components by **MASA Blazor**, or you can customize the theme when you sign up for the service, and undefined properties inherit the default values.
 
 ```csharp Program.cs
 builder.Services.AddMasaBlazor(options =>
 {
+    options.Dark = true;
     options.ConfigureTheme(theme =>
     {
-        theme.Themes.Light.Primary = "#4318FF";
-        theme.Themes.Light.Secondary = "#A18BFF";
-        theme.Themes.Light.Accent = "#005CAF";
-        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+        theme.LightPalette.Primary = "#4f33ff";
+        theme.LightPalette.Secondary = "#C7C4DC";
+        theme.LightPalette.Error = "#ba1a1a";
+        theme.LightPalette.UserDefined["Tertiary"] = "#00966f";
+        theme.DarkPalette.Primary = "#c5c0ff";
     });
 });
 ```
 
-## Toggle theme dynamically
+## Change theme dynamically
 
-Through the `MasaBlazor` service, you can change the theme at runtime.
+You can switch between the `Light` and `Dark` themes at runtime through the `IThemeService` service.
 
-<masa-example file="Examples.features.theme.DynamicallyModifyTheme"></masa-example>
+When you specify a component as light or dark, all of its child components inherit and apply the same value unless otherwise noted.
+
+<masa-example file="Examples.features.theme.ChangeThemeMode"></masa-example>
+
+You can also modify colors dynamically at runtime.
+
+<masa-example file="Examples.features.theme.ChangeThemeColor"></masa-example>
+
+## Advanced usage
+
+You can use the `MThemeProvider` component to conveniently set up themes, such as using different color schemes for each page.
+
+<masa-example file="Examples.features.theme.SinglePageCustomStyles"></masa-example>
+
+## Change style position
+
+By default, we generate `style` elements inside `body`
+
+In some cases, it may be necessary to move the `style` to `head` for specification and security. You can manually add the `MThemeProvider` component in `head`, at which point we won't generate a default style in `body`.
+
+```html Pages/_Host.cshtml
+    <component type="typeof(MThemeProvider)" render-mode="ServerPrerendered" />
+```

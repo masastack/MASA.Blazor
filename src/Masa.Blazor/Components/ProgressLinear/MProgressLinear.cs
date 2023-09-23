@@ -8,7 +8,7 @@ namespace Masa.Blazor
         public Document Document { get; set; } = null!;
 
         [Inject]
-        protected MasaBlazor MasaBlazor { get; set; } = null!;
+        private IThemeService ThemeService { get; set; } = null!;
 
         [Parameter]
         public bool Absolute { get; set; }
@@ -65,7 +65,7 @@ namespace Masa.Blazor
         [Parameter] 
         public EventCallback<double> ValueChanged { get; set; }
 
-        private bool IsReversed => MasaBlazor.RTL != Reverse;
+        private bool IsReversed => ThemeService.RTL != Reverse;
 
         protected bool IsVisible { get; set; } = true;
 

@@ -13,6 +13,8 @@ public class MasaBlazorOptions : BlazorComponentOptions
 
     public bool RTL { get; set; }
 
+    public bool Dark { get; set; }
+
     internal Breakpoint Breakpoint { get; }
 
     internal Icons Icons { get; }

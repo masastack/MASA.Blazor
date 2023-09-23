@@ -10,6 +10,9 @@ namespace Masa.Blazor
         public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
+        public IThemeService ThemeService { get; set; } = null!;
+
+        [Inject]
         public Document Document { get; set; } = null!;
 
         [Inject]
@@ -274,7 +277,7 @@ namespace Masa.Blazor
                     offset -= PrependWidth;
                 }
 
-                return MasaBlazor?.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+                return ThemeService?.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 
