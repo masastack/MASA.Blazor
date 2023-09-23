@@ -43,7 +43,7 @@ builder.Services.AddMasaBlazor(options =>
 
 我们默认会生成在 `body` 内生成 `style` 元素。
 
-在某情况下，为了规范与安全性可能需要将样式移动到在 `head` 中。您可以手动在 `head` 中添加 `MThemeProvider` 组件，此时我们将不会在 `body` 中生成默认样式。
+在某些情况下，为了规范与安全性可能需要将样式移动到在 `head` 中。您可以手动在 `head` 中添加 `MThemeProvider` 组件，此时我们将不会在 `body` 中生成默认样式。
 
 ```html Pages/_Host.cshtml
     <component type="typeof(MThemeProvider)" render-mode="ServerPrerendered" />
