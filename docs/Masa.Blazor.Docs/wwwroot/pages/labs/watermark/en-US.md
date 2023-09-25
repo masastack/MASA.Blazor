@@ -8,3 +8,7 @@ related:
 ## Usage
 
 <masa-example file="Examples.labs.watermark.Usage"></masa-example>
+
+## Refresh watermark
+
+<masa-example file="Examples.labs.watermark.RefreshWatermark"></masa-example>
