@@ -29591,4 +29591,16 @@ html.overflow-y-hidden {
     right: 0;
 }
 
+.m-watermark {
+    z-index: 9;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: 320px;
+    pointer-events: none;
+    background-repeat: repeat;
+}
+
 @import url(masa-blazor.extend.css);

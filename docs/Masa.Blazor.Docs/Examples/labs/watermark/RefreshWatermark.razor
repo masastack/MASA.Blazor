@@ -1,0 +1,21 @@
+﻿<MCard Height="500">
+    <MWatermark @ref=Watermark Value="Masa Blazor" />
+    <MCardTitle>
+        <MTextField @bind-Value="Value"
+                    Label="Value"
+                    Clearable>
+        </MTextField>
+        <MButton OnClick="OnRefresh">Refresh</MButton>
+    </MCardTitle>
+</MCard>
+
+@code{
+    private MWatermark Watermark;
+
+    private string Value;
+
+    private void OnRefresh()
+    {
+        Watermark.SetBase64Uri(Value);
+    }
+}
