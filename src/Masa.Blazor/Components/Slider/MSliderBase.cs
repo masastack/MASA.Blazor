@@ -397,11 +397,16 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         var clickOffset = Vertical ? args.ClientY : args.ClientX;
 
         var clickPos = Math.Min(Math.Max((clickOffset - tractStart - StartOffset) / trackLength, 0), 1);
+
         if (Vertical)
         {
             clickPos = 1 - clickPos;
         }
-        //TODO:rtl
+
+        if (MasaBlazor.RTL)
+        {
+            clickPos = 1 - clickPos;
+        }
 
         return Min + clickPos * (Max - Min);
     }
