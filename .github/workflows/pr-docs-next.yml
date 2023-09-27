@@ -26,7 +26,7 @@ jobs:
           8.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools
+      run: dotnet workload install wasm-tools-net7
     - name: check tools
       run: dotnet workload list
     - name: build

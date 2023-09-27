@@ -122,6 +122,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private static Func<TItem, string?> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
 
     private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
+    
+    private bool _onClearInvoked;
+    private bool _onSelectItemInvoked;
 
     private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
@@ -256,7 +259,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         base.RegisterWatchers(watcher);
 
-        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
+        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true)
+               .Watch<bool>(nameof(IsMenuActive), IsMenuActiveChanged);
+    }
+
+    private async void IsMenuActiveChanged(bool val)
+    {
+        if (val) return;
+
+        if (_onSelectItemInvoked || _onClearInvoked)
+        {
+            await TryInvokeFieldChangeOfInputsFilter(isClear: _onClearInvoked);
+
+            _onClearInvoked = false;
+            _onSelectItemInvoked = false;
+        }
     }
 
     private void OnItemsChange()
@@ -359,7 +376,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             return;
         }
-
 
         if (MMenu!.ContentElement.Context is null || !IsDirty) return;
 
@@ -585,6 +601,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
     {
+        _onSelectItemInvoked = true;
+        
         var value = ItemValue(item);
         if (!Multiple)
         {
@@ -906,6 +924,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public override async Task HandleOnClearClickAsync(MouseEventArgs args)
     {
+        _onClearInvoked = true;
+        
         var value = Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default;
 
         await SetValue(value);
@@ -913,6 +933,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         if (OnClearClick.HasDelegate)
         {
             await OnClearClick.InvokeAsync(args);
+        }
+
+        if (!IsMenuActive)
+        {
+            // invoke the field change event of inputs filter when the menu is not active
+            IsMenuActiveChanged(false);
         }
 
         await OnChange.InvokeAsync(value);

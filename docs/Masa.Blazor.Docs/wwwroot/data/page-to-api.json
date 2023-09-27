@@ -113,6 +113,10 @@
     "MWindow",
     "MWindowItem"
   ],
+  "inputs-filter": [
+    "MInputsFilter",
+    "PDataFilter"
+  ],
   "lists": [
     "MList",
     "MListGroup",

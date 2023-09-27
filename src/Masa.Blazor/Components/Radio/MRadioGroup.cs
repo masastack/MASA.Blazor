@@ -12,12 +12,15 @@
         [Parameter]
         public bool Row { get; set; }
 
+        private bool _isImmediateCallbackForValueChange;
+
         private List<IRadio<TValue>> Items { get; } = new();
 
         protected override void OnValueChanged(TValue val)
         {
             base.OnValueChanged(val);
-            _ = Toggle(val);
+
+            RefreshItemsState();
         }
 
         protected override void SetComponentClass()
@@ -75,6 +78,8 @@
             {
                 Value = value;
             }
+
+            await TryInvokeFieldChangeOfInputsFilter();
 
             NextTick(RefreshItemsState);
         }

@@ -897,9 +897,14 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            if (args.Key == "Enter" && OnEnter.HasDelegate)
+            if (args.Code is "Enter" or "NumpadEnter")
             {
-                await OnEnter.InvokeAsync();
+                if (OnEnter.HasDelegate)
+                {
+                    await OnEnter.InvokeAsync();
+                }
+
+                await TryInvokeFieldChangeOfInputsFilter();
             }
 
             if (OnKeyDown.HasDelegate)
@@ -918,6 +923,8 @@ namespace Masa.Blazor
             }
 
             await OnChange.InvokeAsync(default);
+
+            await TryInvokeFieldChangeOfInputsFilter(isClear: true);
 
             await InputElement.FocusAsync();
         }
@@ -938,6 +945,10 @@ namespace Masa.Blazor
             {
                 await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
                 await IntersectJSModule.UnobserveAsync(InputElement);
+            }
+            catch (InvalidOperationException)
+            {
+                // ignored
             }
             catch (JSDisconnectedException)
             {
