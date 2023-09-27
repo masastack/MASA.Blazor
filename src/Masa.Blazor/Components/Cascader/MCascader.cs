@@ -17,8 +17,8 @@ namespace Masa.Blazor
         [Parameter]
         public Func<TItem, Task>? LoadChildren { get; set; }
 
-        [Parameter, ApiDefaultValue(true)]
-        public override bool Outlined { get; set; } = true;
+        [Parameter]
+        public override bool Outlined { get; set; }
 
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
