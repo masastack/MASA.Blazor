@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.ApiGenerator;
+﻿namespace Masa.Blazor.Docs.ApiGenerator.Shared;
 
 public class ComponentMeta
 {

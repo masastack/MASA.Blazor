@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text;
 using System.Text.RegularExpressions;
+using Masa.Blazor.Docs.ApiGenerator.Shared;
 
 namespace Masa.Blazor.Docs.ComponentApiGenerator;
 

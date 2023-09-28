@@ -18,4 +18,8 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator.Shared\Masa.Blazor.Docs.ApiGenerator.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
