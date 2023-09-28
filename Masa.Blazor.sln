@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Development", "3 - Deve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{339BA27B-6C25-4909-9105-D92FC4BB68EF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9 - Solution Itms", "9 - Solution Itms", "{6C182DFB-BEED-4970-BDF8-2988032AB445}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -116,10 +114,6 @@ Global
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Release|Any CPU.Build.0 = Release|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Release|Any CPU.ActiveCfg = Release|Any CPU
