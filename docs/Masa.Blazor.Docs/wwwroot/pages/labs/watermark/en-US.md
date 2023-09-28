@@ -1,8 +1,6 @@
 ---
 title: Watermark
 desc: "Add a component for adding partial watermarks."
-related:
-  - /blazor/components/watermark
 ---
 
 ## Usage
