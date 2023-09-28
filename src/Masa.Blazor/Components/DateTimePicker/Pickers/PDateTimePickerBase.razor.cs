@@ -13,6 +13,8 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     [Parameter] public string? TabItemTransition { get; set; }
 
+    [Parameter] public EventCallback OnConfirm { get; set; }
+
     private bool _menu;
     private DateTimePickerViewType _prevViewType;
 
@@ -98,10 +100,11 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
         }
     }
 
-    private async Task OnConfirm()
+    private async Task HandleOnConfirm()
     {
         _menu = false;
         await ValueChanged.InvokeAsync(InternalDateTime);
+        await OnConfirm.InvokeAsync();
     }
 
     public void Dispose()
