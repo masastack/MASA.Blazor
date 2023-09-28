@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Masa.Blazor.Docs.ApiGenerator.Shared;
 
-namespace Masa.Blazor.Docs.ComponentApiGenerator;
+namespace Masa.Blazor.Docs.ApiGenerator;
 
 [Generator]
 public class ComponentApiGenerator : IIncrementalGenerator

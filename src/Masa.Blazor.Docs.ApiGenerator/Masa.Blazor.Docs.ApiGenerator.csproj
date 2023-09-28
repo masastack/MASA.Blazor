@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator.Shared\Masa.Blazor.Docs.ApiGenerator.Shared.csproj" />
+      <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" />
     </ItemGroup>
 
 </Project>

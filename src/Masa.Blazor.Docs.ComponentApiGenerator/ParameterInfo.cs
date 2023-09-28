@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Docs.ApiGenerator.Shared;
+﻿namespace Masa.Blazor.Docs.ApiGenerator;
 
 public class ParameterInfo
 {
