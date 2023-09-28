@@ -6,9 +6,9 @@ public partial class MWatermark : BDomComponentBase
 {
     private string? _base64Uri;
 
-    private string _text;
+    private string? _prevText;
 
-    private string _image;
+    private string? _prevImage;
 
     [Parameter] public string Image { get; set; }
 
