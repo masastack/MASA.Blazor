@@ -4,7 +4,7 @@ namespace Masa.Blazor.Docs.ApiGenerator;
 
 public static class GenComponentMeta
 {
-    internal static string GetSourceText(ComponentMeta componentMeta)
+    public static string GetSourceText(ComponentMeta componentMeta)
     {
         var sb = new StringBuilder($@"
 namespace Masa.Blazor.Docs

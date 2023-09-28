@@ -11,13 +11,20 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.21"/>
         <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3"/>
         <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.3"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="wwwroot\"/>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-rc.1.23421.29" />
     </ItemGroup>
 
     <ItemGroup>

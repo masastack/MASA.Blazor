@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.ApiGenerator;
 
-internal class ParameterInfo
+public class ParameterInfo
 {
     public ParameterInfo(string name, string type, string? typeDesc = null, string? defaultValue = null, bool isObsolete = false)
     {

@@ -1,5 +1,17 @@
 # Upgrade Guides
 
+## Upgrading form v1.0.x to v1.1.0
+
+### Components
+
+#### Cascader
+
+The default value of the `Outlined` property is `false` now, consistent with the default style of other form input components.
+
+#### ImageCaptcha
+
+In order to reduce the size of WebAssembly loading, the ImageCaptcha component is moved to a separate nuget package: [Masa.Blazor.Presets.ImageCaptcha](https://www.nuget.org/packages/Masa.Blazor.Presets.ImageCaptcha).
+
 ## Upgrading from v0.6.x to v1.0.0
 
 v1.0.0 contains non backwards compatible breaking changes, the following changes:

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Docs.ApiGenerator;
 
-internal class ComponentMeta
+public class ComponentMeta
 {
     public ComponentMeta(string name, Dictionary<string, List<ParameterInfo>> parameters)
     {

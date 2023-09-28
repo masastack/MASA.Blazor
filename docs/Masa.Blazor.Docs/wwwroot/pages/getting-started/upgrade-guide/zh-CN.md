@@ -1,5 +1,17 @@
 # 升级指南
 
+## 从 v1.0.x 升级到 v1.1.0
+
+### 组件
+
+#### Cascader
+
+`Outlined` 属性的默认值改为了 `false`，与其他表单输入组件默认样式一致。
+
+#### ImageCaptcha
+
+为了减少 WebAssembly 加载的体积，将 ImageCaptcha 组件移动到单独的 nuget 包：[Masa.Blazor.Presets.ImageCaptcha](https://www.nuget.org/packages/Masa.Blazor.Presets.ImageCaptcha)。
+
 ## 从 v0.6.x 升级到 v1.0.0
 
 v1.0.0 包含了不兼容的破坏性更改，包括以下变更：
