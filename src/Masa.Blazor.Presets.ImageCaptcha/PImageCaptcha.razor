@@ -23,9 +23,13 @@
                 Label="@Label"
                 @ref="_textField">
         <AppendOuterContent>
-            <MImage MinWidth="@CaptchaWidth" MinHeight="@CaptchaHeight" Src="@_imageUrl" @onclick="OnClickAsync" Style="@ImageStyle" Class="@ImageClass"></MImage>
+            <MImage MinWidth="@CaptchaWidth"
+                    MinHeight="@CaptchaHeight"
+                    Src="@_imageUrl"
+                    @onclick="OnClickAsync"
+                    Style="@ImageStyle"
+                    Class="@ImageClass">
+            </MImage>
         </AppendOuterContent>
     </MTextField>
 </div>
-
-

@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <RootNamespace>Masa.Blazor.Docs.ApiGenerator</RootNamespace>
+        <RootNamespace>Masa.Blazor.Docs.TestApiGenerator</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" />
+      <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator.Shared\Masa.Blazor.Docs.ApiGenerator.Shared.csproj" />
     </ItemGroup>
 
 </Project>

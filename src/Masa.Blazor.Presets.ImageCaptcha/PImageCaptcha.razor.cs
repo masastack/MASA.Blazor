@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Masa.Blazor.Presets
 {
