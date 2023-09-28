@@ -1,6 +1,6 @@
 ---
 title: Watermark
-desc: "Add a component for adding partial watermarks."
+desc: "Add specific text or imge to the page."
 ---
 
 ## Usage
