@@ -1320,3 +1320,15 @@ input[type=number] {
 .m-data-filter__low-frequency.expanded {
     margin-bottom: 8px;
 }
+
+.m-watermark {
+    z-index: 9;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 320px;
+    pointer-events: none;
+    background-repeat: repeat;
+}
