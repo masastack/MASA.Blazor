@@ -54,7 +54,7 @@ public partial class MWatermark : BDomComponentBase
         {
             using var bitmap = new SKBitmap(120, 160);
             using var canvas = new SKCanvas(bitmap);
-            canvas.Clear(SKColors.Transparent); // 设置透明背景
+            canvas.Clear(SKColors.Transparent);
 
             using var paint = new SKPaint();
             paint.TextSize = TextSize;
