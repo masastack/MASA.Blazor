@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.21"/>
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3"/>
+        <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.3"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj"/>
+        <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    </ItemGroup>
+
+</Project>

@@ -100,7 +100,7 @@ public partial class Components
     private List<string> Tags => IsAllComponentsPage ? new List<string> { s_allComponentsCacheCount.ToString() } : new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
-    
+
     private string ApiGithubUri
     {
         get
@@ -111,7 +111,8 @@ public partial class Components
         }
     }
 
-    private string ComponentGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{_group}/{Page}/{Culture}.md";
+    private string ComponentGithubUri
+        => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{_group}/{Page}/{Culture}.md";
 
     protected override async Task OnParametersSetAsync()
     {
@@ -212,9 +213,11 @@ public partial class Components
 
         async Task<Dictionary<string, List<ParameterInfo>>> getApiGroupAsync(string name, bool isFullname = false)
         {
+            var componentApiMetas = GetAllComponentApiMetas();
+
             var component = isFullname
-                ? ApiGenerator.ComponentMetas.FirstOrDefault(u => u.Name == name)
-                : ApiGenerator.ComponentMetas.FirstOrDefault(u =>
+                ? componentApiMetas.FirstOrDefault(u => u.Name == name)
+                : componentApiMetas.FirstOrDefault(u =>
                     Regex.IsMatch(u.Name.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
 
             if (component is not null)
@@ -257,5 +260,12 @@ public partial class Components
     private static string? FormatName(string? name)
     {
         return name?.TrimEnd('s').ToPascal();
+    }
+
+    private static IEnumerable<ComponentMeta> GetAllComponentApiMetas()
+    {
+        var list = ApiGenerator.ComponentMetas.ToList();
+        list.AddRange(ImageCaptchaApiGenerator.ComponentMetas);
+        return list;
     }
 }
