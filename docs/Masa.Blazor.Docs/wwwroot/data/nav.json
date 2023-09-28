@@ -314,6 +314,10 @@
       {
         "title": "swiper",
         "state": "new"
+      },
+      {
+        "title": "watermark",
+        "state": "new"
       }
     ]
   },

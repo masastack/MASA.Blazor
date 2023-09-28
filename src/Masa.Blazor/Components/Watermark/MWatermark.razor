@@ -1,0 +1,7 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<div id="@Id" class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
+    <slot></slot>
+    <div class="m-watermark" style="@( $"background-image:url({Base64Uri});background-size:{BackgroundSizeX}px {BackgroundSizeY}px;")"></div>
+</div>
