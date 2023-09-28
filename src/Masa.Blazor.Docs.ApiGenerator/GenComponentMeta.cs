@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Masa.Blazor.Docs.ComponentApiGenerator;
+namespace Masa.Blazor.Docs.ApiGenerator;
 
 public static class GenComponentMeta
 {

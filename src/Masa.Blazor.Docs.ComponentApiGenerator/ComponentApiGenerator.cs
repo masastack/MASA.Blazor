@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Masa.Blazor.Docs.ApiGenerator;
+namespace Masa.Blazor.Docs.ComponentApiGenerator;
 
 [Generator]
 public class ComponentApiGenerator : IIncrementalGenerator
