@@ -1,6 +1,6 @@
 ---
 title: Watermark（水印）
-desc: "添加组件局部水印组件。"
+desc: "给某个区域加上水印。"
 related:
   - /blazor/components/watermark
 ---
