@@ -4,7 +4,13 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
 {
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
+    [Parameter] public RenderFragment? ActionsContent { get; set; }
+
     [Parameter] [ApiDefaultValue(true)] public bool Dense { get; set; } = true;
+
+    [Parameter] public bool HideResetButton { get; set; }
+
+    [Parameter] public bool HideSearchButton { get; set; }
 
     [Parameter] [ApiDefaultValue(true)] public StringBoolean? HideDetails { get; set; } = true;
 
@@ -12,13 +18,11 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
 
     [Parameter] public RenderFragment? LowFrequencyContent { get; set; }
 
-    [Parameter] public RenderFragment? ActionsContent { get; set; }
-
     [Parameter] public EventCallback OnSearch { get; set; }
 
     private bool _expanded;
     private bool _searching;
-    private bool _reloading;
+    private bool _resetting;
     private bool _firstRender = true;
     private StringNumber _height = 0;
     private bool _expanding = true;
@@ -150,7 +154,7 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
 
     private async Task HandleOnClear()
     {
-        _reloading = true;
+        _resetting = true;
         StateHasChanged();
 
         _inputsFilter!.ResetInputs();
@@ -161,7 +165,7 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
         }
         finally
         {
-            _reloading = false;
+            _resetting = false;
         }
     }
 
