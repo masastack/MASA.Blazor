@@ -4,7 +4,7 @@ namespace Masa.Blazor;
 
 public partial class MWatermark : BDomComponentBase
 {
-    private string Base64Uri { get; set; }
+    private string? _base64Uri;
 
     private string _text;
 
