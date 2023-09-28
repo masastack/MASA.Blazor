@@ -82,13 +82,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Try.WebAssembly", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ApiGenerator", "src\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj", "{B4B65E18-C212-47C1-A6DB-3C58402F42DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground.WebAssembly", "src\Masa.Blazor.Playground.WebAssembly\Masa.Blazor.Playground.WebAssembly.csproj", "{BEF692C4-7DD3-4458-B734-36567A0D5109}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Indexing", "docs\Masa.Docs.Indexing\Masa.Docs.Indexing.csproj", "{E7137978-72EC-41AD-83AC-6E82B9387644}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Extensions.Languages.Razor", "..\MASA.Blazor.Extensions\src\Languages\Masa.Blazor.Extensions.Languages.Razor\Masa.Blazor.Extensions.Languages.Razor.csproj", "{1C4D19CA-E733-4759-8745-9820ED307ADB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground8", "src\Masa.Blazor.Playground8\Masa.Blazor.Playground8.csproj", "{325C9F82-5405-47C0-8A9D-075869D6315D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Presets.ImageCaptcha", "src\Masa.Blazor.Presets.ImageCaptcha\Masa.Blazor.Presets.ImageCaptcha.csproj", "{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}"
 EndProject
