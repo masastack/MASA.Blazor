@@ -236,7 +236,9 @@ namespace Masa.Blazor
             {
                 if (ResizeMode != DataTableResizeMode.None)
                 {
-                    await JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current);
+                    await NextTickIf(
+                        async () => { await JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); },
+                        () => RefBack.Current.Context is null);
                 }
             }
         }
