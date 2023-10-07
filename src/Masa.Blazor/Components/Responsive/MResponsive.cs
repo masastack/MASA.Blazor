@@ -21,7 +21,7 @@ public class MResponsive : BResponsive
             })
             .Apply("sizer", cssBuilder => { cssBuilder.Add("m-responsive__sizer"); }, styleBuilder =>
             {
-                var respSizerStyle = GenAspectStyle(AspectRatio);
+                var respSizerStyle = GenAspectStyle(ComputedAspectRatio);
                 styleBuilder
                     .AddIf(respSizerStyle, () => !string.IsNullOrEmpty(respSizerStyle));
             })
