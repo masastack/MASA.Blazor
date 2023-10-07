@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class Dimensions
+public class ImageDimensions
 {
     public double Width { get; set; }
 

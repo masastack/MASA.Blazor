@@ -50,7 +50,7 @@ namespace Masa.Blazor
         private bool _isError = false;
 
         private StringNumber? _calculatedLazySrcAspectRatio;
-        private Dimensions? _dimensions;
+        private ImageDimensions? _dimensions;
 
         public bool IsLoading { get; private set; } = true;
 
@@ -95,9 +95,9 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task<Dimensions> GetImageDimensionsAsync(string src)
+        private async Task<ImageDimensions> GetImageDimensionsAsync(string src)
         {
-            return await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, src);
+            return await JsInvokeAsync<ImageDimensions>(JsInteropConstants.GetImageDimensions, src);
         }
 
         private async Task Init(bool isIntersecting = false)
