@@ -11,7 +11,7 @@ related:
 
 最简单的扩展面板显示可扩展项目的列表。
 
-<masa-example file="Examples.components.expansion_panels.Index"></masa-example>
+<masa-example file="Examples.components.expansion_panels.Usage"></masa-example>
 
 ## 示例
 

@@ -11,7 +11,7 @@ related:
 
 Expansion panels in their simplest form display a list of expandable items.
 
-<masa-example file="Examples.components.expansion_panels.Index"></masa-example>
+<masa-example file="Examples.components.expansion_panels.Usage"></masa-example>
 
 ## Examples
 
