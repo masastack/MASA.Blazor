@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
+    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>, IAsyncDisposable
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -13,7 +13,7 @@ namespace Masa.Blazor
         public Document Document { get; set; } = null!;
 
         [Inject]
-        public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -523,7 +523,11 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement,
                     DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
 
-                await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus, OnResize);
+                await IntersectJSModule.ObserverAsync(InputElement, async _ =>
+                {
+                    await TryAutoFocus();
+                    await OnResize();
+                });
 
                 var tasks = new Task[3];
 
@@ -893,9 +897,14 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            if (args.Key == "Enter" && OnEnter.HasDelegate)
+            if (args.Code is "Enter" or "NumpadEnter")
             {
-                await OnEnter.InvokeAsync();
+                if (OnEnter.HasDelegate)
+                {
+                    await OnEnter.InvokeAsync();
+                }
+
+                await TryInvokeFieldChangeOfInputsFilter();
             }
 
             if (OnKeyDown.HasDelegate)
@@ -915,6 +924,8 @@ namespace Masa.Blazor
 
             await OnChange.InvokeAsync(default);
 
+            await TryInvokeFieldChangeOfInputsFilter(isClear: true);
+
             await InputElement.FocusAsync();
         }
 
@@ -926,6 +937,23 @@ namespace Masa.Blazor
             }
 
             await base.HandleOnMouseUpAsync(args);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            try
+            {
+                await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
+                await IntersectJSModule.UnobserveAsync(InputElement);
+            }
+            catch (InvalidOperationException)
+            {
+                // ignored
+            }
+            catch (JSDisconnectedException)
+            {
+                // ignored
+            }
         }
     }
 }

@@ -220,7 +220,7 @@
 
                 await _vditorHelper.TryDisposeAsync();
             }
-            catch (Exception)
+            catch (JSDisconnectedException)
             {
                 // ignored
             }

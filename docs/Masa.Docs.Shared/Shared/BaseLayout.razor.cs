@@ -19,9 +19,7 @@ public partial class BaseLayout
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
 
-    internal bool? ShowDrawer { get; set; }
-
-    internal EventCallback<bool?> OnAppBarNavIconClick { get; set; }
+    internal Action? OnAppBarNavIconClick { get; set; }
 
     protected override void OnInitialized()
     {
@@ -115,8 +113,7 @@ public partial class BaseLayout
 
     private void HandleOnAppBarNavIconClick()
     {
-        ShowDrawer = !ShowDrawer;
-        OnAppBarNavIconClick.InvokeAsync(ShowDrawer);
+        OnAppBarNavIconClick?.Invoke();
     }
 
     private void HandleOnDotClick()

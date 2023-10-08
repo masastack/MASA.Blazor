@@ -19,7 +19,8 @@ variables:
 
 packer:
 #   image:  registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.201_wasm
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
+#  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0
 #   tags:
 #     - 51-132
   stage: packer
@@ -120,7 +121,7 @@ deploy-dev-ydy:
 #   when: manual
 
 packer-prd:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0
   stage: packer-prd
   only:
     - tags
@@ -131,9 +132,11 @@ packer-prd:
     - git config --global http.https://github.com.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
-    - dotnet workload list && dotnet build Masa.Blazor.Docs.sln
-    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+#    - dotnet workload list && dotnet build Masa.Blazor.Docs.sln
+    - dotnet build src/Masa.Blazor.Presets.ImageCaptcha/Masa.Blazor.Presets.ImageCaptcha.csproj
     - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+    - dotnet pack src/Masa.Blazor.Presets.ImageCaptcha/Masa.Blazor.Presets.ImageCaptcha.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
   after_script:
     - git config --global --unset https.proxy

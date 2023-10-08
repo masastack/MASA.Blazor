@@ -75,7 +75,7 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
 
         InternalValue = input;
 
-        await Task.CompletedTask;
+        await TryInvokeFieldChangeOfInputsFilter();
     }
 
     public async Task HandleOnBlur(FocusEventArgs args)

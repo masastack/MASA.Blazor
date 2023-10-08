@@ -29,19 +29,36 @@ namespace Masa.Blazor
             OnThemeChange(MasaBlazor.Theme);
         }
 
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+            
+            if (HostedInWebAssembly)
+            {
+                await OnJSInteropReadyAsync();
+            }
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender && !HostedInWebAssembly)
+            {
+                await OnJSInteropReadyAsync();
+                StateHasChanged();
+            }
+        }
+
         private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
         {
             InvokeStateHasChanged();
         }
-
-        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
+        
+        private async Task OnJSInteropReadyAsync()
         {
             await MasaBlazor.Breakpoint.InitAsync();
             await Window.AddResizeEventListenerAsync();
-            if (onAfterRender)
-            {
-                StateHasChanged();
-            }
         }
 
         private void OnThemeChange(Theme theme)

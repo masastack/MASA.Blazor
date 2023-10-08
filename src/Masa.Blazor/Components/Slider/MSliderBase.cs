@@ -298,7 +298,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
 
         await _app!.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false,
-            new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
+            new EventListenerExtras() { PreventDefault = true, StopPropagation = true, Throttle = HostedInWebAssembly ? 0 : 50});
         await _app!.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
         {
             Capture = true,
@@ -397,11 +397,16 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         var clickOffset = Vertical ? args.ClientY : args.ClientX;
 
         var clickPos = Math.Min(Math.Max((clickOffset - tractStart - StartOffset) / trackLength, 0), 1);
+
         if (Vertical)
         {
             clickPos = 1 - clickPos;
         }
-        //TODO:rtl
+
+        if (MasaBlazor.RTL)
+        {
+            clickPos = 1 - clickPos;
+        }
 
         return Min + clickPos * (Max - Min);
     }

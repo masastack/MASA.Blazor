@@ -193,23 +193,18 @@ namespace Masa.Blazor
         {
             await base.OnAfterRenderAsync(firstRender);
 
+            if (firstRender)
+            {
+                await UpdateApplicationAsync();
+                ZIndex = await GetActiveZIndexAsync();
+                StateHasChanged();
+            }
+
             if (_prevShowOverlay != ShowOverlay)
             {
                 _prevShowOverlay = ShowOverlay;
 
                 _ = ShowOverlay ? HideScroll() : ShowScroll();
-            }
-        }
-
-        protected override async Task OnJSInteropReadyAsync(bool onAfterRender)
-        {
-            await UpdateApplicationAsync();
-
-            ZIndex = await GetActiveZIndexAsync();
-
-            if (onAfterRender)
-            {
-                StateHasChanged();
             }
         }
 

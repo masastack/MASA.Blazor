@@ -304,11 +304,19 @@
         "state": "new"
       },
       {
+        "title": "inputs-filter",
+        "state": "new"
+      },
+      {
         "title": "lazy",
         "state": "new"
       },
       {
         "title": "swiper",
+        "state": "new"
+      },
+      {
+        "title": "watermark",
         "state": "new"
       }
     ]

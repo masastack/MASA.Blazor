@@ -1,9 +1,12 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MInput<TValue> : BInput<TValue>, IThemeable
+    public partial class MInput<TValue> : BInput<TValue>, IThemeable, IFilterInput
     {
         [Inject]
         private I18n I18n { get; set; } = null!;
+
+        [CascadingParameter]
+        protected MInputsFilter? InputsFilter { get; set; }
 
         [Parameter]
         public string? Color { get; set; }
@@ -111,6 +114,18 @@
         }
 
         public virtual bool IsLabelActive => IsDirty;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            if (InputsFilter != null)
+            {
+                InputsFilter.RegisterInput(this);
+                Dense = InputsFilter.Dense;
+                HideDetails = InputsFilter.HideDetails;
+            }
+        }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
@@ -225,6 +240,21 @@
                     attrs[nameof(MIcon.Disabled)] = IsDisabled;
                     attrs[nameof(MIcon.Light)] = Light;
                 });
+        }
+
+        protected async Task TryInvokeFieldChangeOfInputsFilter(bool isClear = false)
+        {
+            if (InputsFilter is null)
+            {
+                return;
+            }
+
+            await InputsFilter.FieldChange(ValueIdentifier.FieldName, isClear);
+        }
+
+        public void ResetFilter()
+        {
+            Reset();
         }
     }
 }

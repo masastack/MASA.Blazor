@@ -3,8 +3,7 @@
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
 
-<NavDrawer Value="_showDrawer"
-           ValueChanged="OnNavDrawerValueChanged"
+<NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL" />
 
 <MMain>@Body</MMain>
@@ -35,7 +34,7 @@
     {
         base.OnInitialized();
 
-        BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool?>(this, val => { _showDrawer = val; });
+        BaseLayout.OnAppBarNavIconClick = () => _showDrawer = !_showDrawer;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -48,12 +47,6 @@
         {
             await Js.AddHtmlElementEventListener("window", "scroll", OnScroll, false, new EventListenerExtras(0, 100));
         }
-    }
-
-    private void OnNavDrawerValueChanged(bool? val)
-    {
-        _showDrawer = val;
-        BaseLayout.ShowDrawer = val;
     }
 
     private async Task OnScroll()

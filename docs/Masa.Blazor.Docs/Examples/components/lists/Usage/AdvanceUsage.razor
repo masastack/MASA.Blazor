@@ -1,0 +1,42 @@
+﻿@namespace Masa.Blazor.Docs.Examples.components.lists
+
+<MList Dense="@Dense"
+       TwoLine="@TwoLine"
+       ThreeLine="@ThreeLine">
+    @for (int i = 0; i < 3; i++)
+    {
+        var index = i;
+        <MListItem>
+            @if (ShowAvatar)
+            {
+                <MListItemAvatar>
+                    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"></MImage>
+                </MListItemAvatar>
+            }
+            <MListItemContent>
+                <MListItemTitle>
+                    Item @index
+                </MListItemTitle>
+                <MListItemSubtitle>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit
+                </MListItemSubtitle>
+            </MListItemContent>
+        </MListItem>
+    }
+</MList>
+
+@code {
+
+    [Parameter]
+    public bool Dense { get; set; }
+
+    [Parameter]
+    public bool TwoLine { get; set; }
+
+    [Parameter]
+    public bool ThreeLine { get; set; }
+
+    [Parameter]
+    public bool ShowAvatar { get; set; }
+
+}
