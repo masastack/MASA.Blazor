@@ -50,7 +50,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task<int> AddNodeAsync(
+    public async Task<string?> AddNodeAsync(
         string name,
         int inputs,
         int outputs,
@@ -62,14 +62,14 @@ public class MDrawflow : MDrop, IAsyncDisposable
         object? data,
         string html)
     {
-        if (_drawflowProxy == null) return 0;
+        if (_drawflowProxy == null) return null;
 
         return await _drawflowProxy.AddNodeAsync(name, inputs, outputs, clientX, clientY, offsetX, offsetY, className, data, html)
                                    .ConfigureAwait(false);
     }
 
     [ApiPublicMethod]
-    public async Task RemoveNodeAsync(int nodeId)
+    public async Task RemoveNodeAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
 
@@ -85,7 +85,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task UpdateNodeDataAsync(int nodeId, object data)
+    public async Task UpdateNodeDataAsync(string nodeId, object data)
     {
         if (_drawflowProxy == null) return;
 
@@ -93,7 +93,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task UpdateNodeHTMLAsync(int nodeId, string html)
+    public async Task UpdateNodeHTMLAsync(string nodeId, string html)
     {
         if (_drawflowProxy == null) return;
 
@@ -125,7 +125,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task AddInputAsync(int nodeId)
+    public async Task AddInputAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
 
@@ -133,7 +133,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task AddOutputAsync(int nodeId)
+    public async Task AddOutputAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
 
@@ -141,7 +141,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task RemoveInputAsync(int nodeId, string inputClass)
+    public async Task RemoveInputAsync(string nodeId, string inputClass)
     {
         if (_drawflowProxy == null) return;
 
@@ -149,7 +149,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     }
 
     [ApiPublicMethod]
-    public async Task RemoveOutputAsync(int nodeId, string outputClass)
+    public async Task RemoveOutputAsync(string nodeId, string outputClass)
     {
         if (_drawflowProxy == null) return;
 
