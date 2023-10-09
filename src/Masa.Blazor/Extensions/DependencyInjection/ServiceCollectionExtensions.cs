@@ -45,6 +45,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
+        services.TryAddSingleton<InternalHttpClient>();
 
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MonacoEditorJSModule>();
@@ -55,7 +56,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
-        
+
         return new MasaBlazorBuilder(services);
     }
 }
