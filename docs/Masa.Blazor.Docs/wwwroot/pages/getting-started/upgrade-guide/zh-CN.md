@@ -10,7 +10,7 @@
 
 #### ImageCaptcha
 
-为了减少 WebAssembly 加载的体积，将 ImageCaptcha 组件移动到单独的 nuget 包：[Masa.Blazor.Presets.ImageCaptcha](https://www.nuget.org/packages/Masa.Blazor.Presets.ImageCaptcha)。
+为了减少 WebAssembly 加载的体积，将 ImageCaptcha 组件移动到单独的 nuget 包：[Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia)。
 
 ## 从 v0.6.x 升级到 v1.0.0
 

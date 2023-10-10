@@ -3,7 +3,7 @@
   "profiles": {
     "Generators": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../Masa.Blazor.Presets.ImageCaptcha/Masa.Blazor.Presets.ImageCaptcha.csproj"
+      "targetProject": "../Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj"
     }
   }
 }

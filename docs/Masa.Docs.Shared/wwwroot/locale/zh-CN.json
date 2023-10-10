@@ -243,6 +243,7 @@
   "tooltips": "Tooltips（工具提示）",
   "treeview": "Treeview（树形视图）",
   "virtual-scroll": "Virtual scroll（虚拟滚动条）",
+  "watermark": "Watermark（水印）",
   "md-breakpoints": "Material Design 断点",
   "device": "设备",
   "code": "代码",
@@ -538,7 +539,8 @@
     "toast": "该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息",
     "tooltips": "当用户悬停在元素上时， Tooltips 组件可用于传递信息",
     "treeview": "适用于显示大量嵌套数据",
-    "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表"
+    "virtual-scroller": "VirtualScroller 组件显示一个虚拟、无限 的列表",
+    "watermark": "给某个区域加上水印"
   },
   "contribute": {
     "edit": "在 {0} 上编辑",
