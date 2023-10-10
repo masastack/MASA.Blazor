@@ -240,6 +240,7 @@
   "tooltips": "Tooltips",
   "treeview": "Treeview",
   "virtual-scroll": "Virtual scroll",
+  "watermark": "Watermark",
   "md-breakpoints": "Material Design Breakpoints",
   "device": "Device",
   "code": "Code",
@@ -419,7 +420,8 @@
     "toast": "The component is used to convey important information to the user through the use contextual types icons and color",
     "tooltips": "The Tooltips component is useful for conveying information when a user hovers over an element",
     "treeview": "The Treeview component is useful for displaying large amounts of nested data.",
-    "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list"
+    "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list",
+    "watermark": "Add specific text or image to the page"
   },
   "contribute": {
     "edit": "Edit on {0}",

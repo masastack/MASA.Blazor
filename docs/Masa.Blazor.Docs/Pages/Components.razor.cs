@@ -265,7 +265,7 @@ public partial class Components
     private static IEnumerable<ComponentMeta> GetAllComponentApiMetas()
     {
         var list = ApiGenerator.ComponentMetas.ToList();
-        list.AddRange(ImageCaptchaApiGenerator.ComponentMetas);
+        list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
         return list;
     }
 }

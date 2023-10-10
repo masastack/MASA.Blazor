@@ -17,7 +17,7 @@ public partial class MWatermark : BDomComponentBase
 
     [Parameter] [ApiDefaultValue(-22)] public int Rotate { get; set; } = -22;
 
-    [Parameter] [ApiDefaultValue("new SKColor(0, 0, 0, 128)")]
+    [Parameter] [ApiDefaultValue("new SKColor(0, 0, 0, 38)")]
     public SKColor Color { get; set; } = s_defaultSkColor;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -33,14 +33,15 @@ public partial class MWatermark : BDomComponentBase
     /// <summary>
     /// Determines whether the watermark is grayscale. Only works when <see cref="Image"/> is not null.
     /// </summary>
-    [Parameter] public bool IsGrayscale { get; set; }
+    [Parameter] [ApiDefaultValue(true)] public bool Grayscale { get; set; } = true;
 
-    private static readonly SKColor s_defaultSkColor = new(0, 0, 0, 128);
+    private static readonly SKColor s_defaultSkColor = new(0, 0, 0, 38);
 
     private string? _base64Uri;
     private string? _backgroundSize;
 
     private string? _prevImage;
+    private SKBitmap? _originalBitmap;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -56,7 +57,7 @@ public partial class MWatermark : BDomComponentBase
                 nameof(Top),
                 nameof(GapX),
                 nameof(GapY),
-                nameof(IsGrayscale)))
+                nameof(Grayscale)))
         {
             await UpdateWatermark();
         }
@@ -91,9 +92,14 @@ public partial class MWatermark : BDomComponentBase
             {
                 await DrawImageWatermark();
             }
+            catch (HttpRequestException e)
+            {
+                Logger.LogWarning(e, "Failed to download image from {Image}, fallback to text watermark.", Image);
+                drawImage = false;
+            }
             catch (Exception e)
             {
-                Logger.LogError(e, "Draw image watermark failed.");
+                Logger.LogWarning(e, "Failed to draw image watermark, fallback to text watermark.");
                 drawImage = false;
             }
         }
@@ -124,34 +130,31 @@ public partial class MWatermark : BDomComponentBase
 
     private async Task DrawImageWatermark()
     {
-        if (_prevImage == Image)
+        if (_prevImage != Image || _originalBitmap is null)
         {
-            return;
+            _prevImage = Image;
+
+            await using var stream = await HttpClient.GetStreamAsync(Image!);
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            _originalBitmap = SKBitmap.Decode(memoryStream);
         }
-
-        _prevImage = Image;
-
-        await using var stream = await HttpClient.GetStreamAsync(Image!);
-
-        using var memoryStream = new MemoryStream();
-        await stream.CopyToAsync(memoryStream);
-        memoryStream.Seek(0, SeekOrigin.Begin);
-
-        using var originalBitmap = SKBitmap.Decode(memoryStream);
 
         var paint = new SKPaint
         {
             IsAntialias = true,
             FilterQuality = SKFilterQuality.Medium,
-            Color = Color
         };
 
-        if (IsGrayscale)
+        if (Grayscale || IsDirtyParameter(nameof(Color)) && Color != SKColor.Empty)
         {
-            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color, SKBlendMode.SrcIn);
+            var filterColor = Color == SKColor.Empty ? s_defaultSkColor : Color;
+            paint.ColorFilter = SKColorFilter.CreateBlendMode(filterColor, SKBlendMode.SrcIn);
         }
 
-        DrawWatermark(originalBitmap.Width, originalBitmap.Height, originalBitmap, paint);
+        DrawWatermark(_originalBitmap.Width, _originalBitmap.Height, _originalBitmap, paint);
     }
 
     private void DrawWatermark(int originalWidth, int originalHeight, object drawContent, SKPaint paint)
@@ -250,5 +253,12 @@ public partial class MWatermark : BDomComponentBase
         var imageBytes = memoryStream.ToArray();
 
         return Convert.ToBase64String(imageBytes);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        _originalBitmap?.Dispose();
     }
 }

@@ -1,0 +1,14 @@
+﻿<MSwitch @bind-Value="_grayscale"
+         Label="Grayscale">
+</MSwitch>
+
+<MWatermark Image="https://cdn.masastack.com/images/logo-h-en.png?x-oss-process=image/resize,w_180"
+            Grayscale="@_grayscale">
+    <div style="height: 300px"></div>
+</MWatermark>
+
+@code {
+
+    private bool _grayscale = true;
+
+}

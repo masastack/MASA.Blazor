@@ -82,7 +82,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ApiGenerat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Indexing", "docs\Masa.Docs.Indexing\Masa.Docs.Indexing.csproj", "{E7137978-72EC-41AD-83AC-6E82B9387644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Presets.ImageCaptcha", "src\Masa.Blazor.Presets.ImageCaptcha\Masa.Blazor.Presets.ImageCaptcha.csproj", "{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SomethingSkia", "src\Masa.Blazor.SomethingSkia\Masa.Blazor.SomethingSkia.csproj", "{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ComponentApiGenerator", "src\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj", "{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}"
 EndProject

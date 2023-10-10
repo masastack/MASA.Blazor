@@ -20,7 +20,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
         var provider = context.SyntaxProvider
                               .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetTargetDataModelForGeneration)
                               .Where(u => u != null);
-        
+
         context.RegisterSourceOutput(provider.Collect(), (ctx, componentMetas) =>
         {
             if (componentMetas.Length == 0)
@@ -30,7 +30,9 @@ public class ComponentApiGenerator : IIncrementalGenerator
 
             var namespaceName = componentMetas.First()!.NamespaceName + "ApiGenerator";
 
-            foreach (var componentMeta in componentMetas)
+            var distinctComponentMetas = componentMetas.Distinct((a, b) => a!.Name == b!.Name);
+
+            foreach (var componentMeta in distinctComponentMetas)
             {
                 if (componentMeta is null)
                 {
@@ -88,7 +90,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
     private ComponentMeta? GetTargetDataModelForGeneration(GeneratorSyntaxContext context, CancellationToken token)
     {
         var namespaceName = context.SemanticModel.Compilation.AssemblyName?.Split('.').Last();
-        
+
         var classNode = (ClassDeclarationSyntax)context.Node;
 
         var semanticModel = context.SemanticModel.Compilation.GetSemanticModel(classNode.SyntaxTree);
@@ -319,16 +321,16 @@ public class ComponentApiGenerator : IIncrementalGenerator
         static string? GetClassTypeText(INamedTypeSymbol? type)
         {
             var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
-                .Select(m =>
-                {
-                    var type = (m as IPropertySymbol).Type;
-                    if (type.TypeKind == TypeKind.TypeParameter)
-                    {
-                        return (m.Name, Type: type.Name);
-                    }
+                                 .Select(m =>
+                                 {
+                                     var type = (m as IPropertySymbol).Type;
+                                     if (type.TypeKind == TypeKind.TypeParameter)
+                                     {
+                                         return (m.Name, Type: type.Name);
+                                     }
 
-                    return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
-                }).ToList();
+                                     return (m.Name, Type: GetTypeText(type as INamedTypeSymbol));
+                                 }).ToList();
 
             if (properties.Count == 0)
             {
@@ -361,5 +363,25 @@ public class ComponentApiGenerator : IIncrementalGenerator
     private static bool IsIgnoreProp(string name)
     {
         return new[] { "Attributes", "RefBack" }.Contains(name);
+    }
+}
+
+public static class IEnumerableExtensions
+{
+    public static IEnumerable<T> Distinct<T>(this IEnumerable<T> source, Func<T, T, bool> comparer) where T : notnull
+        => source.Distinct(new DynamicEqualityComparer<T>(comparer));
+
+    private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T> where T : notnull
+    {
+        private readonly Func<T, T, bool> _func;
+
+        public DynamicEqualityComparer(Func<T, T, bool> func)
+        {
+            _func = func;
+        }
+
+        public bool Equals(T x, T y) => _func(x, y);
+
+        public int GetHashCode(T obj) => 0;
     }
 }

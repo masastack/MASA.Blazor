@@ -10,7 +10,7 @@ The default value of the `Outlined` property is `false` now, consistent with the
 
 #### ImageCaptcha
 
-In order to reduce the size of WebAssembly loading, the ImageCaptcha component is moved to a separate nuget package: [Masa.Blazor.Presets.ImageCaptcha](https://www.nuget.org/packages/Masa.Blazor.Presets.ImageCaptcha).
+In order to reduce the size of WebAssembly loading, the ImageCaptcha component is moved to a separate nuget package: [Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia).
 
 ## Upgrading from v0.6.x to v1.0.0
 

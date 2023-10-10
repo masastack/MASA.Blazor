@@ -79,10 +79,10 @@ public partial class MWatermark
             anyChanged = parameterNames.Contains(nameof(GapY));
         }
 
-        if (__prevIsGrayscale != IsGrayscale)
+        if (__prevIsGrayscale != Grayscale)
         {
-            __prevIsGrayscale = IsGrayscale;
-            anyChanged = parameterNames.Contains(nameof(IsGrayscale));
+            __prevIsGrayscale = Grayscale;
+            anyChanged = parameterNames.Contains(nameof(Grayscale));
         }
 
         return anyChanged;
