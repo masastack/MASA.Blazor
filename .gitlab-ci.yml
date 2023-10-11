@@ -133,7 +133,7 @@ packer-prd:
     - git clone -b main https://github.com/masastack/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./docs/MASA.Docs
 #    - dotnet workload list && dotnet build Masa.Blazor.Docs.sln
-    - dotnet build src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj
+    - dotnet build src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj -c Release
     - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet pack src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj --no-build  --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
