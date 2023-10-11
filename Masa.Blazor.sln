@@ -41,13 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D55C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{AE37A9DA-AF06-45D4-A691-7D922017B57D}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\azure-static-web-apps-agreeable-plant-0c2439c10-v1.yml = .github\workflows\azure-static-web-apps-agreeable-plant-0c2439c10-v1.yml
 		.github\workflows\close-stale.yml = .github\workflows\close-stale.yml
 		.github\workflows\issue-labeled.yml = .github\workflows\issue-labeled.yml
 		.github\workflows\mirror-gitlab.yml = .github\workflows\mirror-gitlab.yml
 		.github\workflows\needs-triage.yml = .github\workflows\needs-triage.yml
 		.github\workflows\pr-docs-next.yml = .github\workflows\pr-docs-next.yml
-		.github\workflows\wasm-dev.yml = .github\workflows\wasm-dev.yml
 		.github\workflows\wasm-prd.yml = .github\workflows\wasm-prd.yml
 		.github\workflows\wasm-try.yml = .github\workflows\wasm-try.yml
 	EndProjectSection
