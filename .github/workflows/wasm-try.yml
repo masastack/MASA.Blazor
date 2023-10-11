@@ -24,7 +24,7 @@ jobs:
         dotnet-version: |
           6.0.x
           7.0.x
-          8.0.x
+          8.0.100-rc.1.23455.8
         include-prerelease: true
     - name: setting tools
       run: dotnet workload install wasm-tools
