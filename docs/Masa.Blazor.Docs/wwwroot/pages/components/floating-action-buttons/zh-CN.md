@@ -2,7 +2,7 @@
 title: Floating Action Buttons（浮动动作按钮）
 desc: "**MButton** 组件可以用作浮动动作按钮。 这提供了一个具有主要行为点的应用程序。 结合 **MSpeedDial** 组件, 您可以创建一组可供用户使用的功能"
 related:
-  - /blazor/components/button
+  - /blazor/components/buttons
   - /blazor/components/icons
   - /blazor/styles-and-animations/transitions
 ---
