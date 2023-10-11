@@ -8,6 +8,10 @@
 
 The default value of the `Outlined` property is `false` now, consistent with the default style of other form input components.
 
+#### Form(FluentValidation)
+
+Removed the built-in automatic registration of **FluentValidation** validators, now you need to register manually, please refer to [Automatic registration](https://docs.fluentvalidation.net/en/latest/di.html#automatic-registration) for details.
+
 #### ImageCaptcha
 
 In order to reduce the size of WebAssembly loading, the ImageCaptcha component is moved to a separate nuget package: [Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia).

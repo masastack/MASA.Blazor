@@ -8,6 +8,10 @@
 
 `Outlined` 属性的默认值改为了 `false`，与其他表单输入组件默认样式一致。
 
+#### Form(FluentValidation)
+
+移除了内置的自动注册 **FluentValidation** 验证器的功能，现在需要手动注册，详情请参考 [Automatic registration](https://docs.fluentvalidation.net/en/latest/di.html#automatic-registration)。
+
 #### ImageCaptcha
 
 为了减少 WebAssembly 加载的体积，将 ImageCaptcha 组件移动到单独的 nuget 包：[Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia)。
