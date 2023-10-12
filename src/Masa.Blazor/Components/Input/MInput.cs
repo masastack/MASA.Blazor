@@ -53,12 +53,17 @@
 
         private static readonly Func<TValue, bool> s_defaultRequiredRule = v =>
         {
+            if (v == null)
+            {
+                return false;
+            }
+
             if (v is string str)
             {
                 return !string.IsNullOrWhiteSpace(str);
             }
 
-            return !EqualityComparer<TValue>.Default.Equals(v, default);
+            return true;
         };
 
         private string? _requiredMessage;
