@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Masa.Blazor;
 
@@ -14,7 +15,6 @@ public partial class MSplitter
     private readonly DelayTask _delayTask = new();
     private readonly Collection<MSplitterPane> _panes = new();
 
-    private List<double> _paneSizes = new();
     private BoundingClientRect? _containerRect;
     private bool _mousedown;
     private int _activeIndex;
@@ -37,10 +37,12 @@ public partial class MSplitter
                 css.Add(pane.Class);
             }, style =>
             {
+                // TODO: pane
+                
                 if (style.Data is not int index) return;
 
                 var pane = _panes[index];
-                var size = _paneSizes[index] + "%";
+                var size = pane.Size + "%";
 
                 if (Vertical)
                 {
@@ -62,7 +64,10 @@ public partial class MSplitter
 
         await _delayTask.Run(() =>
         {
-            _paneSizes = _panes.Select(_ => 100d / _panes.Count).ToList();
+            var initSize = 100d / _panes.Count;
+
+            _panes.ForEach(p => { p.Size = initSize; });
+
             return InvokeAsync(StateHasChanged);
         });
     }
@@ -72,7 +77,7 @@ public partial class MSplitter
         await Js.AddHtmlElementEventListener<MouseEventArgs>("document", "mousemove", HandleMousemove, new EventListenerOptions()
         {
             Passive = false
-        });
+        }, new EventListenerExtras(0, throttle: 16));
 
         await Js.AddHtmlElementEventListener<MouseEventArgs>("document", "mouseup", HandleMouseup, new EventListenerOptions()
         {
@@ -96,35 +101,65 @@ public partial class MSplitter
             return;
         }
 
-        Console.Out.WriteLine("rect width = {0}", args.ClientX);
-
         var x = args.ClientX - _containerRect.Left;
         var y = args.ClientY - _containerRect.Top;
         Console.Out.WriteLine("x = {0}", x);
         Console.Out.WriteLine("y = {0}", y);
         Console.Out.WriteLine("_activeIndex = {0}", _activeIndex);
 
-        var currentIndex = _activeIndex;
-        var nextIndex = _activeIndex + 1;
+        double dragDistance = 0;
 
-        double frontPaneSize = 0;
-        if (currentIndex > 0)
+        if (Vertical)
         {
-            frontPaneSize = _paneSizes.Take(currentIndex).Sum();
+        }
+        else
+        {
+            dragDistance = x;
         }
 
-        var prevPaneSize = _paneSizes[currentIndex];
-        var prevNextPaneSize = _paneSizes[nextIndex];
+        // TODO: RTL
 
-        _paneSizes[currentIndex] = Math.Round(x / _containerRect.Width * 100, 2);
-        _paneSizes[nextIndex] = (prevPaneSize + prevNextPaneSize) - _paneSizes[currentIndex];
+        var dragPercentage2 = dragDistance * 100 / _containerRect.Width;
 
-        Console.Out.WriteLine("sizes = {0}", string.Join(",", _paneSizes));
+        var prevPanesSize = _panes.Take(_activeIndex).Sum(u => u.Size);
+        var nextPanesSize = _panes.Skip(_activeIndex + 2).Sum(u => u.Size);
+        var secondNextPanesSize = _panes.Skip(_activeIndex + 2).Sum(u => u.Size);
 
+        var minDrag = prevPanesSize;
+        var maxDrag = 100 - nextPanesSize;
+
+        var dragPercentage = Math.Max(Math.Min(dragPercentage2, maxDrag), minDrag);
+
+
+        var currentIndex = _activeIndex;
+        var nextIndex = _activeIndex + 1;
+        var paneBefore = _panes[currentIndex];
+        var paneAfter = _panes[nextIndex];
+
+        var paneBeforeMaxReached = paneBefore.Max < 100 && (dragPercentage >= paneBefore.Max + prevPanesSize);
+        var paneAfterMaxReached = paneAfter.Max < 100 && (dragPercentage <= 100 - (paneAfter.Max + secondNextPanesSize));
+
+        if (paneBeforeMaxReached || paneAfterMaxReached)
+        {
+            if (paneBeforeMaxReached)
+            {
+                paneBefore.Size = paneBefore.Max;
+                paneAfter.Size = Math.Max(100 - paneBefore.Max - prevPanesSize - nextPanesSize, 0);
+            }
+            else
+            {
+                paneBefore.Size = Math.Max(100 - paneAfter.Max - prevPanesSize - secondNextPanesSize, 0);
+                paneAfter.Size = paneAfter.Max;
+            }
+        }
+        else
+        {
+            paneBefore.Size = Math.Min(Math.Max(dragPercentage - prevPanesSize, paneBefore.Min), paneBefore.Max);
+            paneAfter.Size = Math.Min(Math.Max(100 - dragPercentage - nextPanesSize, paneAfter.Min), paneAfter.Max);
+        }
+
+        Console.Out.WriteLine("sizes = {0}", string.Join(",", _panes.Select(u => u.Size)));
         StateHasChanged();
-
-        // _paneSizes[0]++;
-        // _paneSizes[1]--;
     }
 
     private async Task HandleMouseup(MouseEventArgs args)

@@ -10,7 +10,13 @@ public partial class MSplitterPane : IComponent
 
     [Parameter] public string? Style { get; set; }
 
+    [Parameter] [ApiDefaultValue(100)] public double Max { get; set; } = 100;
+
+    [Parameter] public double Min { get; set; }
+
     private bool _initialized;
+
+    internal double Size { get; set; }
 
     public void Attach(RenderHandle renderHandle)
     {
