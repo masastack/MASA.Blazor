@@ -1,0 +1,29 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     id="@Id"
+     @ref="Ref">
+    <CascadingValue Value="this" IsFixed>
+        @ChildContent
+    </CascadingValue>
+
+    @for (var i = 0; i < _panes.Count; i++)
+    {
+        var index = i;
+        var pane = _panes[index];
+
+        <div class="@CssProvider.GetClass("pane", index)"
+             style="@CssProvider.GetStyle("pane", index)">
+            @pane.ChildContent
+        </div>
+
+        @if (index != _panes.Count - 1)
+        {
+            <div class="@CssProvider.GetClass("bar")"
+                 @onmousedown="@((e) => HandleMousedown(e, index))">
+            </div>
+        }
+    }
+</div>
