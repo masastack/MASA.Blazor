@@ -298,7 +298,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
 
         await _app!.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false,
-            new EventListenerExtras() { PreventDefault = true, StopPropagation = true, Throttle = HostedInWebAssembly ? 0 : 50});
+            new EventListenerExtras() { PreventDefault = true, StopPropagation = true, Throttle = HostedInWebAssembly ? 0 : 16});
         await _app!.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
         {
             Capture = true,

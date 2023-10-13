@@ -22,7 +22,9 @@
         @if (index != _panes.Count - 1)
         {
             <div class="@CssProvider.GetClass("bar")"
-                 @onmousedown="@((e) => HandleMousedown(e, index))">
+                 style="@CssProvider.GetStyle("bar")"
+                 @onmousedown="@(e => HandleMousedown(e, index))">
+                @BarContent
             </div>
         }
     }
