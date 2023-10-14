@@ -5,6 +5,7 @@
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
+                   Class="doc-drawer"
                    Fixed
                    Right="!MasaBlazor.RTL"
                    Temporary
@@ -20,32 +21,24 @@
     <ChildContent>
         <MContainer>
             <div class="mb-4">
-                <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("theme")</div>
-                <MItemGroup Value="@MasaBlazor.Theme.Dark.ToString()" ActiveClass="primary">
-                    <MRow>
-                        <MCol Cols="6">
-                            <MItem Value="@("False")">
-                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleTheme(false)">
-                                    Light
-                                    <MIcon Right>mdi-weather-sunny</MIcon>
-                                </MButton>
-                            </MItem>
-                        </MCol>
-                        <MCol Cols="6">
-                            <MItem Value="@("True")">
-                                <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleTheme(true)">
-                                    Dark
-                                    <MIcon Right>mdi-weather-night</MIcon>
-                                </MButton>
-                            </MItem>
-                        </MCol>
-                    </MRow>
-                </MItemGroup>
+                <div class="font-weight-black ps-1 mb-2">@I18n.T("theme")</div>
+                <MRadioGroup @bind-Value="_theme"
+                             TValue="string" 
+                             OnChange="@ToggleTheme"
+                             Class="mt-0">
+                    @foreach (var (opt, icon) in s_themeOptions)
+                    {
+                        <MRadio Value="opt" Style="height: 32px">
+                            <LabelContent>
+                                <MIcon Left>@icon</MIcon>
+                                @opt
+                            </LabelContent>
+                        </MRadio>
+                    }
+                </MRadioGroup>
             </div>
             <div>
-                <div class="text-subtitle-2 font-weight-black ps-1">@I18n.T("direction")</div>
+                <div class="font-weight-black ps-1 mb-2">@I18n.T("direction")</div>
                 <MItemGroup Value="@MasaBlazor.RTL.ToString()" ActiveClass="primary">
                     <MRow>
                         <MCol Cols="6">
@@ -81,18 +74,55 @@
     [Parameter]
     public EventCallback<bool?> ValueChanged { get; set; }
 
-    private void ToggleTheme(bool dark)
+    private string? _theme;
+
+    private static (string opt, string icon)[] s_themeOptions = { ("light", "mdi-weather-sunny"), ("dark", "mdi-weather-night"), ("system", "mdi-desktop-classic") };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (dark == MasaBlazor.Theme.Dark)
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
         {
-            return;
+            _theme = await GetThemeFromLocalStorage() ?? "system";
+            StateHasChanged();
         }
+    }
 
-        MasaBlazor.ToggleTheme();
+    private ValueTask<bool> IsDarkPreferColor() => JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
 
-        _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
+    private Task<string?> GetThemeFromLocalStorage() => LocalStorage.GetItemAsync("masablazor@theme");
 
-        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+    private Task UpdateThemeInLocalStorage(string value) => LocalStorage.SetItemAsync("masablazor@theme", value);
+
+    private async Task ToggleTheme(string option)
+    {
+        switch (option)
+        {
+            case "system":
+            {
+                var isDark = await IsDarkPreferColor();
+                if (isDark != MasaBlazor.Theme.Dark)
+                {
+                    ToggleThemeInternal(isDark);
+                }
+
+                break;
+            }
+            case "light" when MasaBlazor.Theme.Dark:
+                ToggleThemeInternal(false);
+                break;
+            case "dark" when !MasaBlazor.Theme.Dark:
+                ToggleThemeInternal(true);
+                break;
+        }
+        _ = UpdateThemeInLocalStorage(option);
+
+        void ToggleThemeInternal(bool dark)
+        {
+            MasaBlazor.ToggleTheme();
+            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+        }
     }
 
     private void ToggleRTL(bool rtl)

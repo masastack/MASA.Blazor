@@ -143,7 +143,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
     function addTableRules(md) {
         md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
             return (
-                '<div masa-blazor-html class="m-sheet m-sheet--outlined rounded theme--light mb-2"><div masa-blazor-html class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
+                '<div masa-blazor-html class="m-sheet m-sheet--outlined m-sheet--no-bg rounded theme--light mb-2"><div masa-blazor-html class="m-data-table m-data-table--fixed-height theme--light"><div class="m-data-table__wrapper">' +
                 self.renderToken(tokens, idx, options)
             );
         };

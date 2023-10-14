@@ -5,10 +5,12 @@
     <div Class="app-code @Class" @attributes="@context.Attrs">
         @if (FileNameExists)
         {
-            <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Dark Color="#323d6f">
-                <MIcon Class="mr-1">mdi-file-tree</MIcon>
-                @FileName
-            </MToolbar>
+            <MLazy MinHeight="48">
+                <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Dark Color="#47464E">
+                    <MIcon Dense Class="mr-1">mdi-file-tree</MIcon>
+                    @FileName
+                </MToolbar>
+            </MLazy>
         }
 
         <MSyntaxHighlight Class="@($"white--text overflow-x-auto overflow-y-hidden pa-4 ma-0 {ComputedClass}")"

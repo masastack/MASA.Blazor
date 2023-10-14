@@ -57,10 +57,21 @@ public partial class BaseLayout
     private async Task InitTheme()
     {
         var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
-        var isDark = themeStr == "dark";
-        if (isDark != MasaBlazor.Theme.Dark)
+
+        switch (themeStr)
         {
-            MasaBlazor.ToggleTheme();
+            case "light" when MasaBlazor.Theme.Dark:
+            case "dark" when !MasaBlazor.Theme.Dark:
+                MasaBlazor.ToggleTheme();
+                break;
+            default:
+                var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
+                if (darkPrefer != MasaBlazor.Theme.Dark)
+                {
+                    MasaBlazor.ToggleTheme();
+                }
+
+                break;
         }
     }
 

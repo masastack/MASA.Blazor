@@ -1,6 +1,6 @@
 ﻿@attribute [JSCustomElement]
 
-<MSheet Class="overflow-hidden"
+<MSheet Class="@($"overflow-hidden {Class}")"
         Dark="Dark"
         Outlined="@Outlined"
         Rounded="true"
@@ -10,6 +10,9 @@
 </MSheet>
 
 @code {
+
+    [Parameter]
+    public string? Class { get; set; }
     
     [Parameter]
     public bool Dark { get; set; }
