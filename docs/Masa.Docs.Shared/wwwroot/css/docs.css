@@ -290,10 +290,6 @@ h6.m-heading {
         text-decoration: none;
     }
 
-        .github-issues--loaded a:hover {
-            /*color: #4318FF !important;*/
-        }
-
 .github-issues > a > i {
     color: inherit !important;
 }
