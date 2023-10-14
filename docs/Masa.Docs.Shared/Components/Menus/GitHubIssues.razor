@@ -116,8 +116,6 @@
         _searching = true;
         await InvokeAsync(StateHasChanged);
 
-        Console.Out.WriteLine("lastSegment = {0}", lastSegment);
-
         _componentNames.Clear();
 
         if (pageToApi.TryGetValue(lastSegment, out var components))
@@ -129,9 +127,7 @@
             _componentNames.Add("component/" + lastSegment.ToPascal().TrimEnd('s'));
         }
 
-        // TODO: there is a bug in octokit, https://github.com/octokit/octokit.net/issues/2762
-        // When the issue is fixed, we should change the following argument `labels` to `new string[] { string.join(',', _componentNames) }`.
-        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", labels: _componentNames.Take(1), lastSegment);
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", new[] { string.Join(',', _componentNames) }, lastSegment);
 
         _searching = false;
         await InvokeAsync(StateHasChanged);
