@@ -5,8 +5,9 @@ namespace Masa.Blazor;
 
 public partial class MSplitter
 {
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     [Parameter] [ApiDefaultValue(8)] public int BarSize { get; set; } = 8;
 
@@ -23,6 +24,7 @@ public partial class MSplitter
 
     private BoundingClientRect? _containerRect;
     private bool _mousedown;
+    private bool _dragging;
     private int _activeIndex;
     private bool _eventsBound;
 
@@ -34,33 +36,31 @@ public partial class MSplitter
             .UseBem("m-splitter", css =>
             {
                 css.Modifiers(m =>
-                    m.Modifier("column", !Row).Add(Row)).AddTheme(CascadingIsDark);
+                    m.Modifier("column", !Row).Add(Row).Add("dragging", _dragging)).AddTheme(CascadingIsDark);
             })
             .Element("pane", css =>
             {
-                if (css.Data is not int index) return;
-
-                var pane = _panes[index];
-                css.Add(pane.Class);
+                if (css.Data is MSplitterPane pane)
+                {
+                    css.Add(pane.Class);
+                }
             }, style =>
             {
-                // TODO: pane
-
-                if (style.Data is not int index) return;
-
-                var pane = _panes[index];
-                var size = Math.Round(pane.InternalSize, 2, MidpointRounding.ToZero) + "%";
-
-                if (Row)
+                if (style.Data is MSplitterPane pane)
                 {
-                    style.AddHeight(size);
-                }
-                else
-                {
-                    style.AddWidth(size);
-                }
+                    var size = Math.Round(pane.InternalSize, 2, MidpointRounding.ToZero) + "%";
 
-                style.Add(pane.Style);
+                    if (Row)
+                    {
+                        style.AddHeight(size);
+                    }
+                    else
+                    {
+                        style.AddWidth(size);
+                    }
+
+                    style.Add(pane.Style);
+                }
             })
             .Element("bar", _ => { }, style =>
             {
@@ -93,8 +93,23 @@ public partial class MSplitter
     internal async Task UnregisterAsync(MSplitterPane pane)
     {
         _panes.Remove(pane);
-        StateHasChanged();
-        await Task.CompletedTask;
+
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        await _delayTask.Run(() =>
+        {
+            for (var i = 0; i < _panes.Count; i++)
+            {
+                _panes[i].InternalIndex = i;
+            }
+
+            InitialPanesSizing();
+
+            return InvokeAsync(StateHasChanged);
+        });
     }
 
     private void InitialPanesSizing()
@@ -181,23 +196,33 @@ public partial class MSplitter
         }, new EventListenerExtras
         {
             Throttle = 16,
-            PreventDefault = true
+            PreventDefault = true,
+            Key = $"{Id}_mousemove"
         });
 
-        await Js.AddHtmlElementEventListener<MouseEventArgs>("document", "mouseup", HandleMouseup, new EventListenerOptions()
+        await Js.AddHtmlElementEventListener("document", "mouseup", HandleMouseup, false, new EventListenerExtras($"{Id}_mouseup"));
+
+        await Js.AddHtmlElementEventListener<TouchEventArgs>("document", "touchmove", HandleMousemove, new EventListenerOptions()
         {
             Passive = false
+        }, new EventListenerExtras
+        {
+            Throttle = 16,
+            PreventDefault = true,
+            Key = $"{Id}_touchmove"
         });
+
+        await Js.AddHtmlElementEventListener("document", "touchend", HandleMouseup, false, new EventListenerExtras($"{Id}_touchend"));
     }
 
     private async Task UnbindEvents()
     {
         try
         {
-            // TODO: check if events was deleted
-            
-            await Js.RemoveHtmlElementEventListener("document", "mousemove");
-            await Js.RemoveHtmlElementEventListener("document", "mouseup");
+            await Js.RemoveHtmlElementEventListener("document", "mousemove", $"{Id}_mousemove");
+            await Js.RemoveHtmlElementEventListener("document", "mouseup", $"{Id}_mouseup");
+            await Js.RemoveHtmlElementEventListener("document", "touchmove", $"{Id}_touchmove");
+            await Js.RemoveHtmlElementEventListener("document", "touchend", $"{Id}_touchend");
         }
         catch (JSDisconnectedException)
         {
@@ -209,7 +234,7 @@ public partial class MSplitter
         }
     }
 
-    private async Task HandleMousedown(MouseEventArgs args, int index)
+    private async Task HandleMousedown(int index)
     {
         await BindEvents();
 
@@ -218,12 +243,14 @@ public partial class MSplitter
         _containerRect = await Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
     }
 
-    private async Task HandleMousemove(MouseEventArgs args)
+    private async Task HandleMousemove(object args)
     {
         if (_containerRect is null || !_mousedown)
         {
             return;
         }
+
+        _dragging = true;
 
         var splitterIndex = _activeIndex;
         var secondNextPanesSize = _panes.Skip(_activeIndex + 3).Sum(u => u.InternalSize);
@@ -275,19 +302,26 @@ public partial class MSplitter
 
                 if (panesToResize[0].HasValue)
                 {
-                    paneBefore = _panes[panesToResize[0]!.Value];
+                    paneBefore = _panes.ElementAtOrDefault(panesToResize[0]!.Value);
                 }
 
                 if (panesToResize[1].HasValue)
                 {
-                    paneAfter = _panes[panesToResize[1]!.Value];
+                    paneAfter = _panes.ElementAtOrDefault(panesToResize[1]!.Value);
                 }
             }
 
-            paneBefore.InternalSize = Math.Min(Math.Max(dragPercentage - sums.prevPanesSize - sums.prevReachedMinPanes, paneBefore.Min),
-                paneBefore.Max);
-            paneAfter.InternalSize = Math.Min(Math.Max(100 - dragPercentage - sums.nextPanesSize - sums.nextReachedMinPanes, paneAfter.Min),
-                paneAfter.Max);
+            if (paneBefore != null)
+            {
+                paneBefore.InternalSize = Math.Min(Math.Max(dragPercentage - sums.prevPanesSize - sums.prevReachedMinPanes, paneBefore.Min),
+                    paneBefore.Max);
+            }
+
+            if (paneAfter != null)
+            {
+                paneAfter.InternalSize = Math.Min(Math.Max(100 - dragPercentage - sums.nextPanesSize - sums.nextReachedMinPanes, paneAfter.Min),
+                    paneAfter.Max);
+            }
         }
 
         StateHasChanged();
@@ -295,10 +329,11 @@ public partial class MSplitter
         await Task.CompletedTask;
     }
 
-    private async Task HandleMouseup(MouseEventArgs args)
+    private async Task HandleMouseup()
     {
         _mousedown = false;
         await Task.Delay(100);
+        _dragging = false;
         await UnbindEvents();
     }
 
@@ -347,17 +382,17 @@ public partial class MSplitter
                     }
                 }
 
-                _panes[panesToResize[1]!.Value].Size = 100 - sums.prevReachedMinPanes - _panes[0].Min - sums.prevPanesSize - sums.nextPanesSize;
+                _panes[panesToResize[1]!.Value].InternalSize =
+                    100 - sums.prevReachedMinPanes - _panes[0].Min - sums.prevPanesSize - sums.nextPanesSize;
 
                 return null;
             }
         }
 
-        Console.Out.WriteLine($"{dragPercentage} {sums.nextPanesSize} {_panes[panesToResize[1].Value].Min}");
         if (dragPercentage > 100 - sums.nextPanesSize - _panes[panesToResize[1]!.Value].Min)
         {
             panesToResize[1] = _panes.FirstOrDefault(p => p.InternalIndex > splitterIndex + 1 && p.InternalSize > p.Min)?.InternalIndex;
-            Console.Out.WriteLine("panesToResize[1] = {0}", panesToResize[1]);
+
             sums.nextReachedMinPanes = 0;
 
             if (panesToResize[1].HasValue)
@@ -376,7 +411,7 @@ public partial class MSplitter
                 }
             }
 
-            sums.nextPanesSize = panesToResize[1].HasValue ? SumPrevPanesSize(panesToResize[1]!.Value - 1) : 0;
+            sums.nextPanesSize = panesToResize[1].HasValue ? SumNextPanesSize(panesToResize[1]!.Value - 1) : 0;
 
             if (!panesToResize[1].HasValue)
             {
@@ -393,7 +428,8 @@ public partial class MSplitter
                     }
                 }
 
-                _panes[panesToResize[0]!.Value].Size = 100 - sums.prevPanesSize - sums.nextReachedMinPanes - _panes.Last().Min - sums.nextPanesSize;
+                _panes[panesToResize[0]!.Value].InternalSize =
+                    100 - sums.prevPanesSize - sums.nextReachedMinPanes - _panes.Last().Min - sums.nextPanesSize;
                 return null;
             }
         }
@@ -411,17 +447,37 @@ public partial class MSplitter
         return _panes.Skip(index + 2).Sum(p => p.InternalSize);
     }
 
-    private double CalculateDragPercentage(MouseEventArgs args)
+    private double CalculateDragPercentage(object args)
     {
         ArgumentNullException.ThrowIfNull(_containerRect);
 
+        double clientX = 0;
+        double clientY = 0;
+
+        if (args is MouseEventArgs mouseEventArgs)
+        {
+            clientX = mouseEventArgs.ClientX;
+            clientY = mouseEventArgs.ClientY;
+        }
+        else if (args is TouchEventArgs touchEventArgs)
+        {
+            clientX = touchEventArgs.Touches[0].ClientX;
+            clientY = touchEventArgs.Touches[0].ClientY;
+        }
+
         if (Row)
         {
-            var y = args.ClientY - _containerRect.Top;
+            var y = clientY - _containerRect.Top;
             return y * 100 / _containerRect.Height;
         }
 
-        var x = args.ClientX - _containerRect.Left;
+        var x = clientX - _containerRect.Left;
+
+        if (MasaBlazor.RTL)
+        {
+            x = _containerRect.Width - x;
+        }
+
         return x * 100 / _containerRect.Width;
     }
 }

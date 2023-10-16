@@ -1363,10 +1363,10 @@ input[type=number] {
     width: 100%;
 }
 
-/*.m-splitter--column .m-splitter__pane {*/
-/*    transition:  width .1s ease-out*/
-/*}*/
+.m-splitter--column:not(.m-splitter--dragging) .m-splitter__pane {
+    transition:  width .3s ease-out
+}
 
-/*.m-splitter--row .m-splitter__pane {*/
-/*    transition:  height .1s ease-out*/
-/*}*/
+.m-splitter--row:not(.m-splitter--dragging) .m-splitter__pane {
+    transition:  height .3s ease-out
+}

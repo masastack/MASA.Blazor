@@ -14,8 +14,8 @@
         var index = i;
         var pane = _panes[index];
 
-        <div class="@CssProvider.GetClass("pane", index)"
-             style="@CssProvider.GetStyle("pane", index)">
+        <div class="@CssProvider.GetClass("pane", pane)"
+             style="@CssProvider.GetStyle("pane", pane)">
             @pane.ChildContent
         </div>
 
@@ -23,7 +23,9 @@
         {
             <div class="@CssProvider.GetClass("bar")"
                  style="@CssProvider.GetStyle("bar")"
-                 @onmousedown="@(e => HandleMousedown(e, index))">
+                 @key="@index"
+                 @onmousedown="@(_ => HandleMousedown(index))"
+                 @ontouchstart=@(_ => HandleMousedown(index))>
                 @BarContent
             </div>
         }
