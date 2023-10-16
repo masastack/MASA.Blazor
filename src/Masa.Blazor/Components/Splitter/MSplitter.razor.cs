@@ -62,7 +62,10 @@ public partial class MSplitter
                     style.Add(pane.Style);
                 }
             })
-            .Element("bar", _ => { }, style =>
+            .Element("bar", css =>
+            {
+                css.Modifiers(m => m.Modifier("default", BarContent is null));
+            }, style =>
             {
                 if (Row)
                 {
@@ -334,6 +337,7 @@ public partial class MSplitter
         _mousedown = false;
         await Task.Delay(100);
         _dragging = false;
+        StateHasChanged();
         await UnbindEvents();
     }
 
