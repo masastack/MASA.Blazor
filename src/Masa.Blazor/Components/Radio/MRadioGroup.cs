@@ -79,6 +79,8 @@
                 Value = value;
             }
 
+            await OnChange.InvokeAsync(value);
+
             await TryInvokeFieldChangeOfInputsFilter();
 
             NextTick(RefreshItemsState);

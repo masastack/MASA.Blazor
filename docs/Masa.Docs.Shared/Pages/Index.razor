@@ -33,7 +33,7 @@
             <MDivider></MDivider>
 
             <MList Class="doc-list-nav">
-                <MListItemGroup Value="_activeHash" Mandatory ActiveClass="doc-list-nav--active">
+                <MListItemGroup Value="_activeHash" Mandatory ActiveClass="primary--text">
                     <MListItem Value="@("#getting-started")"
                                Class="doc-list-nav--item-hash"
                                Href="@("#getting-started")"
@@ -85,7 +85,7 @@
 
                 @foreach (var (project, navs) in _projectToNavs.OrderByDescending(u => u.Key))
                 {
-                    <div class="project" id="@project">
+                    <MLazy Class="project" Id="@project" MinHeight="1200">
                         <div class="heading-5 mb-6 d-flex align-center">
                             <MIcon Color="#4318ff" Size="34" Class="mr-2">@($"$masa{project.ToUpperFirst()}")</MIcon>
                             @I18n.T("product", project)
@@ -124,7 +124,7 @@
                                 }
                             }
                         }
-                    </div>
+                    </MLazy>
                 }
             }
         </MResponsive>
@@ -141,8 +141,9 @@
 
     private static readonly List<(string title, string href)> s_gettingStartedNavs = new()
     {
-        ("why-masa-blazor", "/blazor/introduction/why-masa-blazor"),
-        ("masa-stack-install", "/stack/masa-stack-1.0/installation/docker-compose")
+        ("MASA Stack", "/stack/stack/introduce"),
+        ("MASA Framework", "/framework/getting-started/overview"),
+        ("MASA Blazor", "/blazor/getting-started/installation"),
     };
 
     private readonly Dictionary<string, List<NavItem>> _projectToNavs = new();
@@ -203,18 +204,16 @@
 
     private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
     {
-        <MLazy MinHeight="70">
-            <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title">
-                <MRow Dense NoGutters>
-                    @foreach (var (title, href) in items)
-                    {
-                        <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
-                            @LinkableTitle(title, href)
-                        </MCol>
-                    }
-                </MRow>
-            </OutlineCard>
-        </MLazy>
+        <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title" Filled>
+            <MRow Dense Class="ma-0">
+                @foreach (var (title, href) in items)
+                {
+                    <MCol Cols="12" Sm="6" Md="4" Class="text-center rounded text-truncate">
+                        @LinkableTitle(title, href)
+                    </MCol>
+                }
+            </MRow>
+        </OutlineCard>
     };
 
     private RenderFragment LinkableTitle(string title, string href) => __builder =>

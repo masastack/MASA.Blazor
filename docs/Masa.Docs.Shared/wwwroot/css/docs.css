@@ -1,5 +1,39 @@
-﻿@import url(theme/tokens.css);
-@import url(theme/typography.module.css);
+﻿:root {
+    --md-sys-color-outline-variant-light: #c9c5d0;
+    --md-sys-color-on-surface-light: #1b1b1f;
+    --md-sys-color-surface-variant-light: #e5e1ec;
+    --md-sys-color-on-surface-variant-light: #47464f;
+    --md-sys-color-secondary-container-light: #e3dfff;
+    --md-sys-color-on-secondary-container-light: #130463;
+    --md-sys-color-surface-container-highest-light: #e5e1e6;
+    --md-sys-color-surface-container-high-light: #eae7ec;
+    --md-sys-color-surface-container-light: #f0edf1;
+    --md-sys-color-surface-container-low-light: #f6f2f7;
+    --md-sys-color-surface-container-lowest-light: #ffffff;
+    --md-sys-color-primary-light: #4f33ff;
+    --md-sys-color-on-primary-light: #ffffff;
+
+    --md-sys-color-outline-variant-dark: #47464f;
+    --md-sys-color-surface-dark: #131316;
+    --md-sys-color-on-surface-dark: #c8c5ca;
+    --md-sys-color-surface-variant-dark: #47464f;
+    --md-sys-color-on-surface-variant-dark: #c9c5d0;
+    --md-sys-color-secondary-container-dark: #464559;
+    --md-sys-color-on-secondary-container-dark: #E4DFF9;
+    --md-sys-color-surface-container-highest-dark: #353438;
+    --md-sys-color-surface-container-high-dark: #2a2a2d;
+    --md-sys-color-surface-container-dark: #1f1f23;
+    --md-sys-color-surface-container-low-dark: #1b1b1f;
+    --md-sys-color-surface-container-lowest-dark: #0e0e11;
+    --md-sys-color-primary-dark: #c5c0ff;
+    --md-sys-color-on-primary-dark: #2400a2;
+
+    --md-ref-palette-neutral6: #131316;
+    --md-ref-palette-neutral94: #f0edf1;
+    --md-ref-palette-neutral98: #fcf8fd;
+    --md-ref-palette-neutral-variant40: #5f5d67;
+    --md-ref-palette-neutral-variant90: #e5e1ec;
+}
 
 .m-application {
     line-height: 1.5 !important;
@@ -53,34 +87,39 @@
 }
 
 .theme--light.default-app-bar {
-    /*background-color: var(--md-sys-color-surface-light) !important;*/
-    /*border-color: var(--md-sys-color-surface-light) !important;*/
     background-color: white !important;
     border-color: white;
 }
 
 .theme--dark.default-app-bar {
-    background-color: var(--md-sys-color-surface-container-dark) !important;
-    border-color: var(--md-sys-color-surface-container-dark) !important;
+    background-color: var(--md-sys-color-surface-dark) !important;
+    border-color: var(--md-sys-color-surface-dark) !important;
     color: var(--md-ref-palette-neutral94) !important;
 }
 
 .theme--light.m-application {
     /*background: var(--md-sys-color-surface-light);*/
-    color: var(--md-ref-palette-neutral6);
+    color: var(--md-sys-color-on-surface-light);
 }
 
 .theme--dark.m-application {
     background: var(--md-sys-color-surface-dark);
-    color: var(--md-ref-palette-neutral98);
+    color: var(--md-sys-color-on-surface-dark);
+}
+
+.doc-list-nav .theme--dark.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
+    color: var(--md-sys-color-on-surface-dark);
+}
+
+.doc-list-nav .theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
+    color: var(--md-sys-color-on-surface-light);
 }
 
 .theme--light.default-nav {
-    /*background-color: var(--md-sys-color-surface-light) !important;*/
 }
 
 .theme--dark.default-nav {
-    background-color: var(--md-sys-color-surface-container-dark) !important;
+    background-color: var(--md-sys-color-surface-dark) !important;
 }
 
 .m-bar--underline {
@@ -89,11 +128,11 @@
 }
 
     .m-bar--underline.theme--light {
-        border-bottom-color: #E4E8F3 !important;
+        border-bottom-color: var(--md-sys-color-outline-variant-light) !important;
     }
 
     .m-bar--underline.theme--dark {
-        border-bottom-color: #FFFFFF1F !important;
+        border-bottom-color: var(--md-sys-color-outline-variant-dark) !important;
     }
 
 .text-mono {
@@ -116,6 +155,10 @@
         line-height: inherit !important;
     }
 
+.theme--dark app-code-group .m-tabs>.m-tabs-bar {
+    background-color: unset;
+}
+
 /* prism line highlight */
 pre[data-line] {
     padding: 0 !important;
@@ -136,7 +179,7 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
 }
 
 .theme--dark.default-toc {
-    background-color: var(--md-sys-color-surface-container-low-dark);
+    background-color: var(--md-sys-color-surface-dark);
 }
 
 .default-toc ul {
@@ -239,22 +282,26 @@ h6.m-heading {
 
 .github-issues--loaded {
     height: 32px;
-    background: rgba(233, 237, 247, 0.5);
     line-height: 32px;
     font-size: 14px;
 }
 
     .github-issues--loaded a {
         text-decoration: none;
-        color: #1B2559 !important;
     }
-
-        .github-issues--loaded a:hover {
-            color: #4318FF !important;
-        }
 
 .github-issues > a > i {
     color: inherit !important;
+}
+
+.theme--light.default-toc .github-issues--loaded {
+    background-color: var(--md-sys-color-surface-container-low-light);
+    color: var(--md-sys-color-on-surface-variant-light);
+}
+
+.theme--dark.default-toc .github-issues--loaded {
+    background-color: var(--md-sys-color-surface-container-low-dark);
+    color: var(--md-sys-color-on-surface-variant-dark);
 }
 
 .toc-content {
@@ -265,11 +312,14 @@ h6.m-heading {
     line-height: 36px;
     letter-spacing: 8px;
     text-transform: uppercase;
-    color: var(--md-ref-palette-neutral-variant90);
+}
+
+.theme--light .toc-content {
+    color: var(--md-sys-color-surface-container-highest-light);
 }
 
 .theme--dark .toc-content {
-    color: var(--md-ref-palette-neutral-variant40);
+    color: var(--md-sys-color-surface-container-highest-dark);
 }
 
 ul:not([class]), ol:not([class]) {
@@ -337,6 +387,18 @@ a.text-dec-none {
     border: thin solid #E4E8F3;
 }
 
+.m-example.theme--dark.m-sheet, .m-example.theme--dark .m-example__comp {
+    background-color: unset;
+}
+
+.m-sheet--no-bg {
+    background-color: unset !important;
+}
+
+.m-sheet--no-bg > .m-data-table {
+    background-color: unset;
+}
+
 .doc-list-nav {
     padding-left: 0 !important;
 }
@@ -370,15 +432,6 @@ a.text-dec-none {
 
     .doc-list-nav .m-list-item {
         padding: 0 16px;
-    }
-
-    .doc-list-nav--active {
-        background-color: var(--md-sys-color-primary-light);
-        color: var(--md-sys-color-on-primary-light) !important;
-    }
-
-    .doc-list-nav--active .m-list-item__subtitle {
-        color: rgb(255 255 255 / 60%) !important;
     }
 
     .doc-list-nav--item-hash {
@@ -538,6 +591,14 @@ default-app-markup {
         padding-top: 0;
         padding-bottom: 0;
     }
+
+.doc-drawer.theme--dark.m-navigation-drawer {
+    background-color: var(--md-sys-color-surface-dark);
+}
+
+.doc-drawer .theme--dark.m-toolbar {
+    background-color: inherit;
+}
 
 .m-select.light-border .m-input__slot fieldset {
     border-color: rgba(0,0,0,.12) !important;

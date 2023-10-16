@@ -1,6 +1,7 @@
 ﻿@using BemIt
 
-<div class="@Block.AddTheme(CascadingIsDark).AddClass(Class)" Style="@Style">
+<div class="@Block.Modifier(Filled).AddTheme(CascadingIsDark).AddClass(Class)"
+     Style="@Style">
     <span class="@Block.Element("title").AddClass(TitleClass)">
         @Title
     </span>
@@ -28,5 +29,8 @@
 
     [Parameter]
     public string? TitleClass { get; set; }
+
+    [Parameter]
+    public bool Filled { get; set; }
 
 }

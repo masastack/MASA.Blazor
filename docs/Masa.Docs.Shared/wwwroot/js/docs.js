@@ -228,3 +228,7 @@ window.switchTheme = function (dotNetHelper,dark,x,y) {
     dotNetHelper.invokeMethodAsync('ToggleTheme',dark);
   });
 }
+
+window.isDarkPreferColor = function() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}

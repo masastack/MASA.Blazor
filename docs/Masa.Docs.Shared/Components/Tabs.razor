@@ -14,7 +14,8 @@
               MatchPattern="@item.MatchPattern">
             @if (item.Href == "/")
             {
-                <MBadge Content="@Project"
+                <MBadge Color="primary"
+                        Content="@Project"
                         Class="text-capitalize"
                         Value="@(!string.IsNullOrWhiteSpace(Project))">
                     @I18n.T(item.Title)
