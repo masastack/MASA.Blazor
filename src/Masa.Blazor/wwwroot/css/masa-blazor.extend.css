@@ -1353,6 +1353,14 @@ input[type=number] {
     justify-content: center;
 }
 
+.theme--light.m-splitter > .m-splitter__bar:hover {
+    background-color: rgba(0,0,0,.06);
+}
+
+.theme--dark.m-splitter > .m-splitter__bar:hover {
+    background-color: rgba(255,255,255,.16);
+}
+
 .m-splitter--column > .m-splitter__bar {
     cursor: col-resize;
     height: 100%;
