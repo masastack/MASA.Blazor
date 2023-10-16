@@ -65,10 +65,17 @@ public partial class BaseLayout
                 MasaBlazor.ToggleTheme();
                 break;
             default:
-                var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-                if (darkPrefer != MasaBlazor.Theme.Dark)
+                try
                 {
-                    MasaBlazor.ToggleTheme();
+                    var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
+                    if (darkPrefer != MasaBlazor.Theme.Dark)
+                    {
+                        MasaBlazor.ToggleTheme();
+                    }
+                }
+                catch (JSException)
+                {
+                    // ignored
                 }
 
                 break;

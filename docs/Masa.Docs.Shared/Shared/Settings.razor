@@ -101,12 +101,18 @@
         {
             case "system":
             {
-                var isDark = await IsDarkPreferColor();
-                if (isDark != MasaBlazor.Theme.Dark)
+                try
                 {
-                    ToggleThemeInternal(isDark);
+                    var isDark = await IsDarkPreferColor();
+                    if (isDark != MasaBlazor.Theme.Dark)
+                    {
+                        ToggleThemeInternal(isDark);
+                    }
                 }
-
+                catch (JSException)
+                {
+                    // ignored
+                }
                 break;
             }
             case "light" when MasaBlazor.Theme.Dark:
