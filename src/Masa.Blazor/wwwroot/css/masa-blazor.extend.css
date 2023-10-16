@@ -1321,6 +1321,60 @@ input[type=number] {
     margin-bottom: 8px;
 }
 
+/* Watermark */
+
 .m-watermark {
     position: relative;
+}
+
+/* Splitter */
+
+.m-splitter {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.m-splitter--column {
+    flex-direction: row;
+}
+
+.m-splitter--row {
+    flex-direction: column;
+}
+
+.m-splitter__pane {
+    overflow: hidden;
+}
+
+.m-splitter__bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme--light.m-splitter > .m-splitter__bar--default:hover {
+    background-color: rgba(0,0,0,.06);
+}
+
+.theme--dark.m-splitter > .m-splitter__bar--default:hover {
+    background-color: rgba(255,255,255,.16);
+}
+
+.m-splitter--column > .m-splitter__bar {
+    cursor: col-resize;
+    height: 100%;
+}
+
+.m-splitter--row > .m-splitter__bar {
+    cursor: row-resize;
+    width: 100%;
+}
+
+.m-splitter--column:not(.m-splitter--dragging) .m-splitter__pane {
+    transition:  width .3s ease-out
+}
+
+.m-splitter--row:not(.m-splitter--dragging) .m-splitter__pane {
+    transition:  height .3s ease-out
 }

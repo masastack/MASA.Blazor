@@ -2,16 +2,36 @@
 
 <h1>Test your code here!</h1>
 
-<MSwiper Style="height: 400px;">
-    <MSwiperPagination Type="SwiperPaginationType.Progressbar" />
-    <MSwiperNavigation />
-    <MSwiperSlide>
-        1
-    </MSwiperSlide>
-    <MSwiperSlide>
-        2
-    </MSwiperSlide>
-    <MSwiperSlide>
-        3
-    </MSwiperSlide>
-</MSwiper>
+<MSplitter Style="height: 300px">
+    <ChildContent>
+        <MSplitterPane Class="grey lighten-4">
+            Left
+        </MSplitterPane>
+        <MSplitterPane>
+            <MSplitter Row>
+                <ChildContent>
+                    <MSplitterPane Class="blue lighten-5">
+                        Top
+                    </MSplitterPane>
+                    <MSplitterPane Class="blue lighten-5">
+                        Middle
+                    </MSplitterPane>
+                    <MSplitterPane Class="blue lighten-5">
+                        Bottom
+                    </MSplitterPane>
+                </ChildContent>
+                <BarContent>
+                    <barcontent>
+                        <MIcon Small>mdi-drag-horizontal</MIcon>
+                    </barcontent>
+                </BarContent>
+            </MSplitter>
+        </MSplitterPane>
+        <MSplitterPane Class="grey lighten-4 ">
+            Right
+        </MSplitterPane>
+    </ChildContent>
+    <BarContent>
+        <MIcon Small>mdi-drag-vertical</MIcon>
+    </BarContent>
+</MSplitter>

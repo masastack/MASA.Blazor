@@ -1,0 +1,1 @@
+Inspired by [splitpanes](https://github.com/antoniandre/splitpanes).
