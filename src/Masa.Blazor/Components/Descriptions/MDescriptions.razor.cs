@@ -48,6 +48,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [Parameter] public bool Light { get; set; }
 
+    private readonly DelayTask _registerDelayTask = new();
+    private readonly DelayTask _unregisterDelayTask = new();
     private readonly List<IDescriptionsItem> _descriptionItems = new();
 
     public bool IsDark
@@ -190,8 +192,6 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         await InvokeStateHasChangedAsync();
     }
 
-    private Block _block = new("m-descriptions");
-
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
@@ -212,16 +212,22 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             .Extend("item-container__content", cs => { cs.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); });
     }
 
-    internal void Register(IDescriptionsItem descriptionsItem)
+    internal async Task Register(IDescriptionsItem descriptionsItem)
     {
         _descriptionItems.Add(descriptionsItem);
-        StateHasChanged();
+        await _registerDelayTask.Run(InvokeStateHasChangedAsync);
     }
 
-    internal void Unregister(IDescriptionsItem descriptionsItem)
+    internal async Task Unregister(IDescriptionsItem descriptionsItem)
     {
         _descriptionItems.Remove(descriptionsItem);
-        StateHasChanged();
+
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
     }
 
     internal void UpdateChild(IDescriptionsItem descriptionsItem)

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
+public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IAsyncDisposable
 {
     [CascadingParameter] private MDescriptions? Descriptions { get; set; }
 
@@ -19,6 +19,7 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
     [Parameter] public string? Style { get; set; }
 
     private bool _renderFromAncestor;
+    private bool _registered;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -27,11 +28,15 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
         Label.ThrowIfNull(nameof(MDescriptionsItem));
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
 
-        Descriptions?.Register(this);
+        if (Descriptions != null)
+        {
+            await Descriptions.Register(this);
+            _registered = true;
+        }
     }
 
     protected override void OnParametersSet()
@@ -44,7 +49,10 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
             return;
         }
 
-        Descriptions?.UpdateChild(this);
+        if (_registered)
+        {
+            Descriptions?.UpdateChild(this);
+        }
     }
 
     // inherit
@@ -53,8 +61,11 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
         _renderFromAncestor = true;
     }
 
-    public void Dispose()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        Descriptions?.Unregister(this);
+        if (Descriptions != null)
+        {
+            await Descriptions.Unregister(this);
+        }
     }
 }
