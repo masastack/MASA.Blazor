@@ -6,6 +6,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
+    [Parameter] public bool AlignCenter { get; set; }
+
     [Parameter, ApiDefaultValue(true)] public bool Colon { get; set; } = true;
 
     [Parameter] public int Xs { get; set; }
@@ -195,7 +197,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         base.SetComponentClass();
 
         CssProvider
-            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered)).AddTheme(IsDark); })
+            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered, AlignCenter)).AddTheme(IsDark); })
             .Extend("header")
             .Extend("header__title")
             .Extend("header__actions")
