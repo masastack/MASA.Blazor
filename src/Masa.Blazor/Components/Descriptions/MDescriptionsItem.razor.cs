@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDescriptionsItem : ComponentBase, IDescriptionsItem
+public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IDisposable
 {
     [CascadingParameter] private MDescriptions? Descriptions { get; set; }
 
@@ -51,5 +51,10 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem
     public void RenderFromAncestor()
     {
         _renderFromAncestor = true;
+    }
+
+    public void Dispose()
+    {
+        Descriptions?.Unregister(this);
     }
 }

@@ -216,6 +216,12 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         StateHasChanged();
     }
 
+    internal void Unregister(IDescriptionsItem descriptionsItem)
+    {
+        _descriptionItems.Remove(descriptionsItem);
+        StateHasChanged();
+    }
+
     internal void UpdateChild(IDescriptionsItem descriptionsItem)
     {
         var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
