@@ -1,0 +1,23 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<MSheet Class="@CssProvider.GetClass()"
+        Style="@CssProvider.GetStyle()"
+        Id="@Id"
+        RefBack="@RefBack"
+        MaxWidth="@Width">
+    @if (!HideCanvas)
+    {
+        // genCanvas
+    }
+    
+    @if (!HideSliders || !HideInputs)
+    {
+        // genControls
+    }
+    
+    @if (ShowSwatches)
+    {
+        // genSwatches
+    }
+</MSheet>

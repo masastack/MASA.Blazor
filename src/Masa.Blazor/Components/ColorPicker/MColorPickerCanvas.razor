@@ -1,0 +1,85 @@
+﻿@using System.Drawing
+@namespace Masa.Blazor.ColorPicker
+@inherits BDomComponentBase
+
+<div class="@CssProvider.GetClass("canvas")"
+     style="@CssProvider.GetStyle("canvas")"
+     @onclick="HandleOnClick"
+     @onmousedown="HandleOnMouseDown">
+    <canvas @ref="_canvasRef"
+            width="@Width"
+            height="@Height">
+    </canvas>
+
+    <div class="@CssProvider.GetClass("canvas-dot")"
+         style="@CssProvider.GetStyle("canvas-dot")">
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Color Color { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public StringNumber DotSize { get; set; } = 10;
+
+    [Parameter]
+    public StringNumber Height { get; set; } = 150;
+
+    [Parameter]
+    public StringNumber Width { get; set; } = 300;
+
+    private ElementReference _canvasRef;
+
+    private (double Width, double Height, double Left, double Top) _boundingRect = (0,0,0,0);
+
+    private (double X, double Y) Dot
+    {
+        get
+        {
+            if (Color.IsEmpty)
+            {
+                return (0, 0);
+            }
+
+            var hsva = Color.ToHSVA();
+
+            return (hsva.S * Width.ToInt32(), (1 - hsva.V) * Height.ToInt32());
+        }
+    }
+
+    protected override void SetComponentClass()
+    {
+        base.SetComponentClass();
+
+        CssProvider.UseBem("m-color-picker")
+                   .Element("canvas", _ => { }, style =>
+                   {
+                       style.AddWidth(Width)
+                            .AddHeight(Height);
+                   })
+                   .Element("canvas-dot", css => { css.Modifiers(m => m.Modifier(Disabled)); }, style =>
+                   {
+                       var radius = DotSize.ToInt32() / 2d;
+                       StringNumber x = Dot.X - radius;
+                       StringNumber y = Dot.Y - radius;
+                       
+                       style.AddWidth(DotSize)
+                            .AddHeight(DotSize)
+                            .Add($"translate({x.ConvertToUnit()}, {y.ConvertToUnit()})");
+                   });
+    }
+
+    private async Task HandleOnClick()
+    {
+    }
+
+    private async Task HandleOnMouseDown()
+    {
+    }
+
+}
