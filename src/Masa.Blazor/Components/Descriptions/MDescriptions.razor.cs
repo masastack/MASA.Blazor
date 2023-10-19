@@ -6,6 +6,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
+    [Parameter] public bool AlignCenter { get; set; }
+
     [Parameter, ApiDefaultValue(true)] public bool Colon { get; set; } = true;
 
     [Parameter] public int Xs { get; set; }
@@ -46,6 +48,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [Parameter] public bool Light { get; set; }
 
+    private readonly DelayTask _registerDelayTask = new();
+    private readonly DelayTask _unregisterDelayTask = new();
     private readonly List<IDescriptionsItem> _descriptionItems = new();
 
     public bool IsDark
@@ -188,14 +192,12 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         await InvokeStateHasChangedAsync();
     }
 
-    private Block _block = new("m-descriptions");
-
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
 
         CssProvider
-            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered)).AddTheme(IsDark); })
+            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered, AlignCenter)).AddTheme(IsDark); })
             .Extend("header")
             .Extend("header__title")
             .Extend("header__actions")
@@ -210,10 +212,22 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             .Extend("item-container__content", cs => { cs.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); });
     }
 
-    internal void Register(IDescriptionsItem descriptionsItem)
+    internal async Task Register(IDescriptionsItem descriptionsItem)
     {
         _descriptionItems.Add(descriptionsItem);
-        StateHasChanged();
+        await _registerDelayTask.Run(InvokeStateHasChangedAsync);
+    }
+
+    internal async Task Unregister(IDescriptionsItem descriptionsItem)
+    {
+        _descriptionItems.Remove(descriptionsItem);
+
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
     }
 
     internal void UpdateChild(IDescriptionsItem descriptionsItem)

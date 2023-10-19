@@ -1029,6 +1029,14 @@ input[type=number] {
     content: " ";
 }
 
+.m-descriptions--align-center:not(.m-descriptions--bordered) .m-descriptions-item {
+    vertical-align: middle;
+}
+
+.m-descriptions--align-center .m-descriptions-item-container {
+    align-items: center;
+}
+
 /* Dialog */
 
 .theme--light.m-dialog {
