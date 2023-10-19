@@ -1,0 +1,26 @@
+﻿@inject IPopupService PopupService
+
+<div class="overflow-auto" style="height: 300px">
+    <MPullRefresh OnRefresh="@OnRefresh"
+                  OnError="@HandleOnError">
+        <div class="text-center rounded pt-6" 
+             style="height: 500px; border: 1px dashed grey;">
+            Pull down to refresh but this time it will throw an error
+        </div>
+    </MPullRefresh>
+</div>
+
+@code {
+
+    private async Task OnRefresh()
+    {
+        await Task.Delay(1000); // Simulate a long running operation
+        throw new TimeoutException(); // Simulate an error
+    }
+
+    private async Task HandleOnError(Exception e)
+    {
+        await PopupService.EnqueueSnackbarAsync(e);
+    }
+
+}
