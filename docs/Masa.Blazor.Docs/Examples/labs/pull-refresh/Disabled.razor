@@ -1,0 +1,17 @@
+﻿<div class="overflow-auto" style="height: 300px">
+    <MPullRefresh Disabled OnRefresh="OnRefresh">
+        <div class="text-center rounded pt-6"
+             style="height: 500px; border: 1px dashed grey;">
+            You cannot pull to refresh here, it is disabled.
+        </div>
+    </MPullRefresh>
+</div>
+
+@code {
+    
+    private async Task OnRefresh()
+    {
+        await Task.Delay(1000); // Simulate a long running operation
+    }
+
+}

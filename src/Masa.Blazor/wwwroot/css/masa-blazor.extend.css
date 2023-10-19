@@ -1378,3 +1378,35 @@ input[type=number] {
 .m-splitter--row:not(.m-splitter--dragging) .m-splitter__pane {
     transition:  height .3s ease-out
 }
+
+/* PullRefresh */
+
+.m-pull-refresh {
+    overflow: hidden;
+}
+
+.m-pull-refresh__track {
+    position: relative;
+    height: 100%;
+    transition-property: transform;
+}
+
+.m-pull-refresh__header {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    transform: translateY(-100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme--dark.m-pull-refresh .m-pull-refresh__header {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.theme--light.m-pull-refresh .m-pull-refresh__header {
+    color: rgba(0, 0, 0, 0.6);
+}

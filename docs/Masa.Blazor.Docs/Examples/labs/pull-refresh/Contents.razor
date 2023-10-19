@@ -1,0 +1,61 @@
+﻿<div class="overflow-auto" style="height: 300px">
+    <MPullRefresh OnRefresh="OnRefresh">
+        <ChildContent>
+            <div class="text-center rounded pt-6"
+                 style="height: 500px; border: 1px dashed grey;">
+                Pull down to refresh @_counter
+            </div>
+        </ChildContent>
+        <PullingContent>
+            <div class="d-flex justify-center align-center">
+                <MIcon Class="mr-2">mdi-arrow-down</MIcon>
+                <div>
+                    <div>Pull to refresh</div>
+                    <div>Last refresh time: @_lastRefreshTime.ToString("HH:mm:ss")</div>
+                </div>
+            </div>
+        </PullingContent>
+        <CanReleaseContent>
+            <div class="d-flex justify-center align-center">
+                <MIcon Class="mr-2">mdi-arrow-up</MIcon>
+                <div>
+                    <div>Release to refresh</div>
+                    <div>Last refresh time: @_lastRefreshTime.ToString("HH:mm:ss")</div>
+                </div>
+            </div>
+        </CanReleaseContent>
+        <LoadingContent>
+            <div class="d-flex justify-center align-center">
+                <MProgressCircular Indeterminate Size="24" Width="2" Class="mr-2"></MProgressCircular>
+                <div>
+                    <div>Loading...</div>
+                    <div>Last refresh time: @_lastRefreshTime.ToString("HH:mm:ss")</div>
+                </div>
+            </div>
+        </LoadingContent>
+        <SuccessContent>
+            <div class="d-flex justify-center align-center">
+                <MIcon Class="mr-2">mdi-check</MIcon>
+                <div>
+                    <div>Refresh success</div>
+                    <div>Last refresh time: @_lastRefreshTime.ToString("HH:mm:ss")</div>
+                </div>
+            </div>
+        </SuccessContent>
+    </MPullRefresh>
+</div>
+
+@code {
+
+    private DateTime _lastRefreshTime = DateTime.UtcNow;
+
+    private int _counter;
+
+    private async Task OnRefresh()
+    {
+        await Task.Delay(1000); // Simulate a long running operation
+        _lastRefreshTime = DateTime.UtcNow;
+        _counter++;
+    }
+
+}
