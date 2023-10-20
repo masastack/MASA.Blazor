@@ -12,6 +12,7 @@ public class ApiGenerator : IIncrementalGenerator
     private const string BlazorParameterAttributeName = "ParameterAttribute";
     private const string DefaultValueAttributeName = "ApiDefaultValueAttribute";
     private const string PublicMethodAttributeName = "ApiPublicMethodAttribute";
+    private const string IgnoredParameterAttributeName = "ApiIgnoredParameterAttribute";
 
     private static Dictionary<string, string> s_typeDescCache = new();
 
@@ -122,12 +123,13 @@ public class ApiGenerator : IIncrementalGenerator
         var contentParameters = new List<ParameterInfo>();
         var eventParameters = new List<ParameterInfo>();
         var publicMethods = new List<ParameterInfo>();
+        var ignoreParameters = new List<string>();
 
         // TODO: 需要继承自 ComponentBase
 
         while (declaredSymbol is not null)
         {
-            AnalyzeParameters(declaredSymbol, defaultParameters, contentParameters, eventParameters, publicMethods);
+            AnalyzeParameters(declaredSymbol, defaultParameters, contentParameters, eventParameters, publicMethods, ignoreParameters);
 
             // BaseType could be null if the blazor component only has a razor file but no cs file.
             // So need to add a empty cs file the blazor component.
@@ -146,7 +148,7 @@ public class ApiGenerator : IIncrementalGenerator
     }
 
     private static void AnalyzeParameters(INamedTypeSymbol classSymbol, List<ParameterInfo> defaultParameters, List<ParameterInfo> contentParameters,
-        List<ParameterInfo> eventParameters, List<ParameterInfo> publicMethods)
+        List<ParameterInfo> eventParameters, List<ParameterInfo> publicMethods, List<string> ignoreParameters)
     {
         var members = classSymbol.GetMembers();
 
@@ -160,10 +162,14 @@ public class ApiGenerator : IIncrementalGenerator
             if (member is IPropertySymbol parameterSymbol)
             {
                 var attrs = parameterSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
+                if (attrs.Any(attr => attr.AttributeClass?.Name == IgnoredParameterAttributeName))
+                {
+                    ignoreParameters.Add(parameterSymbol.Name);
+                }
+                else if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
                 {
                     var type = parameterSymbol.Type as INamedTypeSymbol;
-                    if (type is null)
+                    if (type is null || ignoreParameters.Contains(parameterSymbol.Name))
                     {
                         continue;
                     }
