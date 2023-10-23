@@ -1,120 +1,18 @@
-let scrollingFromClickEvent;
-
-window.scrollToElement = function (hash, offset, preventAutoHighlightToc = false) {
-  scrollingFromClickEvent = preventAutoHighlightToc;
+window.scrollToElement = function (hash, offset) {
+  if (!hash) return;
 
   const el = document.querySelector(hash);
   if (!el) return;
 
   const top = el.getBoundingClientRect().top;
   const offsetPosition = top + window.pageYOffset - offset;
-
+  
   window.scrollTo({top: offsetPosition, behavior: "smooth"});
 };
 
-/*
- * NavigationManager.NavigateTo always scrolls page to the top.
- * The following `window.scrollTo` would be invoked.
- * When NavigationManager.NavigateTo invoked, the x and y is zero.
- */
-const origScrollTo = window.scrollTo;
-window.scrollTo = function (x, y) {
-  if (x === 0 && y === 0) {
-    return;
-  }
-  return origScrollTo.apply(this, arguments);
-};
-
-window.registerWindowScrollEvent = function (dotnet, selector) {
-  let _timeout;
-  let _scrolling;
-  let _offsets = [];
-  let _toc = [];
-  let _registered;
-  let scrollend;
-
-  window.addEventListener("scroll", onScroll);
-  window.addEventListener("scrollend", () => {
-    clearTimeout(scrollend)
-    setTimeout(() => {
-      scrollingFromClickEvent = false;
-    }, 100)
-  })
-
-  function setOffsets() {
-    const offsets = [];
-    var queryFilter = selector;
-    var firstNode = document.querySelector(queryFilter);
-    if (
-      !firstNode ||
-      (firstNode && !firstNode.attributes.getNamedItem("href"))
-    ) {
-      queryFilter = `${selector} a`;
-    }
-
-    _toc = Array.from(document.querySelectorAll(queryFilter)).map(
-      ({attributes}) => {
-        let href = attributes.getNamedItem("href").value;
-        const index = href.indexOf("#");
-        return href.slice(index);
-      }
-    );
-
-    const toc = _toc.slice().reverse();
-
-    for (const item of toc) {
-      const section = document.getElementById(item.slice(1));
-      if (!section) continue;
-      offsets.push(section.offsetTop - 48);
-    }
-    _offsets = offsets;
-  }
-
-  async function findActiveIndex() {
-    const currentOffset =
-      window.pageYOffset || document.documentElement.offsetTop || 0;
-
-    if (currentOffset === 0) {
-      updateHash("")
-      await dotnet.invokeMethodAsync("UpdateHash", "");
-      return;
-    }
-
-    setOffsets();
-
-    const index = _offsets.findIndex((offset) => {
-      return offset < currentOffset;
-    });
-
-    let tindex = index > -1 ? _offsets.length - 1 - index : 0;
-
-    if (
-      currentOffset + window.innerHeight ===
-      document.documentElement.offsetHeight
-    ) {
-      tindex = _toc.length - 1;
-    }
-
-    const hash = _toc[tindex] ?? "";
-
-    updateHash(hash)
-    if (hash) {
-      await dotnet.invokeMethodAsync("UpdateHash", hash);
-    }
-  }
-
-  function onScroll() {
-    if (scrollingFromClickEvent) return
-
-    clearTimeout(_timeout);
-
-    _timeout = setTimeout(findActiveIndex, 17);
-  }
-
-  function updateHash(h) {
-    history.replaceState({}, "", window.location.pathname + h)
-  }
-};
+window.updateHash = function (hash) {
+  history.replaceState({}, "", window.location.pathname + hash)
+}
 
 window.backTop = function () {
   window.scrollTo({top: 0, behavior: "smooth"})

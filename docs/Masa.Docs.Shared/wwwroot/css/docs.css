@@ -387,8 +387,8 @@ a.text-dec-none {
     border: thin solid #E4E8F3;
 }
 
-.m-example.theme--dark.m-sheet, .m-example.theme--dark .m-example__comp {
-    background-color: unset;
+.m-example.theme--dark.m-sheet, .theme--dark.m-example__comp {
+    background-color: var(--md-sys-color-surface-dark);
 }
 
 .m-sheet--no-bg {
