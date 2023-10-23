@@ -5,7 +5,10 @@
 @inject IJSRuntime JsRuntime
 @inject NavigationManager NavigationManager
 @inject MasaBlazor MasaBlazor
+@inject IntersectJSModule IntersectJSModule
+@using Element = BlazorComponent.Web.Element
 @inherits NextTickComponentBase
+@implements IAsyncDisposable
 
 <MNavigationDrawer App
                    Class="default-nav"
@@ -153,13 +156,15 @@
         "1.0",
     };
 
+    private readonly DelayTask _delayTask = new();
+
     private string _selectVersion = "1.0";
 
     private bool? _drawer;
 
-    private DotNetObjectReference<Index>? _objRef;
     private string? _activeHash;
     private bool _loading = true;
+    private bool _internalScrolling;
 
     protected override void OnInitialized()
     {
@@ -187,18 +192,49 @@
 
             StateHasChanged();
 
-            _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".doc-list-nav--item-hash");
+            await ObserveToc();
+        }
+    }
 
-            var uri = NavigationManager.ToUri();
-            if (!string.IsNullOrWhiteSpace(uri.Fragment))
+    private async Task ObserveToc()
+    {
+        var marginTop = AppService.AppBarHeight + 48;
+        var document = await JsRuntime.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, "document");
+        var marginBottom = document.ClientHeight - marginTop - 36;
+
+        var navHashes = new[] { "#getting-started" }.Concat(_projectToNavs.Select(u => $"#{u.Key}"));
+        foreach (var hash in navHashes)
+        {
+            await IntersectJSModule.ObserverAsync(hash, (e) => HandleOnIntersect(e, hash), new IntersectionObserverInit()
             {
-                NextTick(async () =>
-                {
-                    await Task.Delay(300);
-                    ScrollIntoView(uri.Fragment);
-                });
-            }
+                RootMargin = $"-{marginTop}px 0px -{marginBottom}px 0px"
+            });
+        }
+    }
+
+    private async Task UnobserveToc()
+    {
+        var navHashes = new[] { "#getting-started" }.Concat(_projectToNavs.Select(u => $"#{u.Key}"));
+        foreach (var hash in navHashes)
+        {
+            await IntersectJSModule.UnobserveAsync(hash);
+        }
+    }
+
+    private async Task HandleOnIntersect(IntersectEventArgs e, string hash)
+    {
+        if (_internalScrolling)
+        {
+            return;
+        }
+        
+        if (e.IsIntersecting)
+        {
+            _activeHash = hash;
+            await _delayTask.Run(async () =>
+            {
+                await InvokeAsync(StateHasChanged);
+            });
         }
     }
 
@@ -221,28 +257,30 @@
         <MButton Text Href="@href" Class="text-none text-truncate" Style="font-size: inherit; font-weight: inherit;">@I18n.T(title)</MButton>
     };
 
-    private void ScrollIntoView(string hash, bool needsRender = false)
+    private async Task ScrollIntoView(string hash)
     {
+        _internalScrolling = true;
         _activeHash = hash;
-        if (needsRender)
+        _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 48);
+
+        await Task.Run(async () =>
         {
-            StateHasChanged();
+            await Task.Delay(1000);
+            _internalScrolling = false;
+        });
+    }
+    
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            Console.Out.WriteLine("DisposeAsync");
+            await UnobserveToc();
         }
-
-        _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 48, true);
-    }
-
-    [JSInvokable]
-    public void UpdateHash(string hash)
-    {
-        _activeHash = hash;
-        StateHasChanged();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        _objRef?.Dispose();
-        base.Dispose(disposing);
+        catch (JSDisconnectedException)
+        {
+            // ignored
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 ﻿using BlazorComponent.I18n;
 using Microsoft.JSInterop;
 using System.Text;
+using BlazorComponent.Web;
+using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Docs.Shared.Shared;
 
@@ -10,6 +12,8 @@ public partial class Toc : NextTickComponentBase
 
     [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 
+    [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
+
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject] private I18n I18n { get; set; } = null!;
@@ -18,73 +22,121 @@ public partial class Toc : NextTickComponentBase
 
     [Parameter] public bool RTL { get; set; }
 
-    private string? _activeHash;
     private List<MarkdownItTocContent> _toc = new();
-    private DotNetObjectReference<Toc>? _objRef;
+    private string? _initialHash;
 
+    private bool _scrolling = false;
+    private List<string> _activeStack = new();
+    private string? _activeItem;
+    
     protected override void OnInitialized()
     {
         base.OnInitialized();
         AppService.TocChanged += AppServiceOnTocChanged;
+        _initialHash = NavigationManager.GetHash();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private string? ActiveItem
     {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
+        get => _activeItem;
+        set
         {
-            _objRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("registerWindowScrollEvent", _objRef, ".toc-li");
+            if (_activeItem != value)
+            {
+                _activeItem = value;
+
+                _ = JsRuntime.InvokeVoidAsync("updateHash", value);
+            }
         }
     }
 
-    [JSInvokable]
-    public void UpdateHash(string hash)
+    private async Task ObserveToc()
     {
-        _activeHash = hash;
+        const double titleHeight = 32;
+
+        var document = await JsRuntime.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, "document");
+        var documentClientHeight = document.ClientHeight;
+        var bottomMargin = documentClientHeight - AppService.AppBarHeight - titleHeight;
+
+        foreach (var item in _toc)
+        {
+            await IntersectJSModule.ObserverAsync($"#{item.Anchor}", HandleOnIntersect, new IntersectionObserverInit()
+            {
+                RootMargin = $"-{AppService.AppBarHeight}px 0px -{bottomMargin}px 0px",
+            });
+        }
+    }
+
+    private async Task HandleOnIntersect(IntersectEventArgs e)
+    {
+        e.Entries.ForEach(entry =>
+        {
+            if (entry.IsIntersecting)
+            {
+                _activeStack.Add(entry.Target.Selector);
+            }
+            else if (_activeStack.Contains(entry.Target.Selector))
+            {
+                _activeStack.Remove(entry.Target.Selector);
+            }
+        });
+
+        if (_activeStack.Count > 0)
+        {
+            ActiveItem = _activeStack.Last();
+        }
+        else if (ActiveItem is null)
+        {
+            ActiveItem = "#" + _toc.First().Anchor;
+        }
+
         StateHasChanged();
     }
 
-    private async Task ScrollIntoView(string hash, bool needsRender = false)
+    private async Task ScrollIntoView(string hash, bool force = false)
     {
-        try
+        if (NavigationManager.GetHash() == hash && !force)
         {
-            _activeHash = hash;
-
-            if (needsRender)
-            {
-                StateHasChanged();
-            }
-
-            _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 12, true);
+            return;
         }
-        catch
-        {
-            // ignored
-        }
+
+        await JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 12);
     }
 
-    private void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)
+    private async void AppServiceOnTocChanged(object? sender, List<MarkdownItTocContent>? toc)
     {
         if (toc is null)
         {
             return;
         }
 
+        if (_initialHash is not null)
+        {
+            ActiveItem = _initialHash;
+            NextTick(async () =>
+            {
+                await Task.Delay(300);
+                await ScrollIntoView(ActiveItem, force: true);
+                StateHasChanged();
+            });
+            _initialHash = null;
+        }
+        else
+        {
+            _activeStack.Clear();
+            ActiveItem = null;
+        }
+
+        foreach (var item in _toc)
+        {
+            await IntersectJSModule.UnobserveAsync($"#{item.Anchor}");
+        }
+
         _toc = toc.Where(c => c.Level > 1).ToList();
 
-        NextTick(async () =>
-        {
-            await Task.Delay(300);
+        await ObserveToc();
 
-            var uri = new Uri(NavigationManager.Uri);
-            if (string.IsNullOrWhiteSpace(uri.Fragment)) return;
-
-            _ = ScrollIntoView(uri.Fragment, true);
-        });
-
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
 
     private string GenClass(MarkdownItTocContent tocContent)
@@ -104,7 +156,7 @@ public partial class Toc : NextTickComponentBase
                 break;
         }
 
-        if (!string.IsNullOrWhiteSpace(_activeHash) && _activeHash[1..].Equals(tocContent.Anchor, StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrWhiteSpace(ActiveItem) && ActiveItem[1..].Equals(tocContent.Anchor, StringComparison.OrdinalIgnoreCase))
         {
             builder.Append(" primary--text");
         }
@@ -118,7 +170,6 @@ public partial class Toc : NextTickComponentBase
 
     protected override void Dispose(bool disposing)
     {
-        _objRef?.Dispose();
         AppService.TocChanged -= AppServiceOnTocChanged;
         base.Dispose(disposing);
     }
