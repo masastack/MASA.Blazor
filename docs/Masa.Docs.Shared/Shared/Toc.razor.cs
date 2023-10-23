@@ -45,7 +45,7 @@ public partial class Toc : NextTickComponentBase
             {
                 _activeItem = value;
 
-                _ = JsRuntime.InvokeVoidAsync("updateHash", value);
+                _ = JsRuntime.TryInvokeVoidAsync("updateHash", value);
             }
         }
     }
