@@ -30,8 +30,21 @@ public class IntersectJSModule : JSModule
         await InvokeVoidAsync("observe", el, DotNetObjectReference.Create(new IntersectInvoker(handle)), options);
     }
 
+    public async ValueTask ObserverAsync(
+        string selector,
+        Func<IntersectEventArgs, Task> handle,
+        IntersectionObserverInit? options = null)
+    {
+        await InvokeVoidAsync("observeSelector", selector,  DotNetObjectReference.Create(new IntersectInvoker(handle)), options);
+    }
+
     public async ValueTask UnobserveAsync(ElementReference el)
     {
         await InvokeVoidAsync("unobserve", el);
+    }
+
+    public async ValueTask UnobserveAsync(string selector)
+    {
+        await InvokeVoidAsync("unobserveSelector", selector);
     }
 }
