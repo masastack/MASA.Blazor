@@ -11,6 +11,7 @@ window.scrollToElement = function (hash, offset) {
 };
 
 window.updateHash = function (hash) {
+  if (!hash) return
   history.replaceState({}, "", window.location.pathname + hash)
 }
 
