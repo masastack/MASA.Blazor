@@ -57,6 +57,18 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     [Parameter]
     public RenderFragment<TNumeric>? ThumbLabelContent { get; set; }
 
+    [ApiIgnoredParameter]
+    public override EventCallback<MouseEventArgs> OnMouseDown { get; set; }
+
+    [ApiIgnoredParameter]
+    public override EventCallback<MouseEventArgs> OnMouseUp { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> OnStart { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> OnEnd { get; set; }
+
     protected virtual double GetRoundedValue(int index)
     {
         return RoundValue(DoubleInternalValue);
@@ -350,6 +362,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             ClientY = clientY,
         };
 
+        await OnStart.InvokeAsync(InternalValue);
         await HandleOnMouseMoveAsync(args);
     }
 
@@ -371,6 +384,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         await _app!.RemoveEventListenerAsync("touchmove");
 
         IsActive = false;
+        await OnEnd.InvokeAsync(InternalValue);
     }
 
     public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
