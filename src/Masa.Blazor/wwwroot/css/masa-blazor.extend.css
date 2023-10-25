@@ -1,4 +1,12 @@
-﻿/* fixed-right in datatable */
+﻿.theme--light.m-application {
+    color-scheme: light;
+}
+
+.theme--dark.m-application {
+    color-scheme: dark;
+}
+
+/* fixed-right in datatable */
 .m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th {
     z-index: 2 !important;
 }
