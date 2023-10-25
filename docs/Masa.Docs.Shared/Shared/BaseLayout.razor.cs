@@ -64,7 +64,7 @@ public partial class BaseLayout
             case "dark" when !MasaBlazor.Theme.Dark:
                 MasaBlazor.ToggleTheme();
                 break;
-            default:
+            case "system" or null:
                 try
                 {
                     var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
