@@ -9,6 +9,7 @@
 - [P开头的组件为什么无法使用？](#p-starting-components)
 - [无法从“方法组”转换为“Microsoft.AspNetCore.Components.EventCallback”](#cannot-convert-from-method-group-to-eventcallback)
 - [如何让UI紧凑？](#how-to-make-ui-compact)
+- [I18n 切换语言后文本不更新](#i18n-text-not-updated)
 
 ## 问题专区
 
@@ -71,3 +72,57 @@
       };
   })
   ```
+  
+- **I18n 切换语言后文本不更新** { #i18n-text-not-updated }
+
+  - 通过级联参数变更通知子组件刷新（推荐）
+
+    ```razor MainLayout
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+
+    <MApp>
+      <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
+        @* AppBar Main.. *@
+      </CascadingValue>
+    </MApp>
+    ```  
+    
+    ``` razor PageOrComponent.razor
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        [CascadingParameter(Name = "Culture")]
+        public string? Culture { get; set; }
+    }
+    ```
+
+  - 通过I18n的事件通知子组件刷新
+
+    ``` razor
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    @implements IDisposable
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        protected override void OnInitialized()
+        {
+            I18n.CultureChange += OnCultureChange;
+        }
+    
+        private void OnCultureChange(object? sender, EventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    
+        public void Dispose()
+        {
+            I18n.CultureChange -= OnCultureChange;
+        }
+    }
+    ```
