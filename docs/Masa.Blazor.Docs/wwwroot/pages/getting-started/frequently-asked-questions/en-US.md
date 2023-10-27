@@ -9,6 +9,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 - [Why can't I use components starting with P?](#p-starting-components)
 - [Cannot convert from 'method group' to 'EventCallback'](#cannot-convert-from-method-group-to-eventcallback)
 - [How to make UI compact?](#how-to-make-ui-compact)
+- [I18n text not updated after language change](#i18n-text-not-updated)
 
 
 ## Questions
@@ -72,3 +73,57 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
       };
   })
   ```
+
+- **I18n text not updated after language change** { #i18n-text-not-updated }
+
+  - Notify the child component to refresh by changing the cascading parameter (recommended)
+
+    ```razor MainLayout
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+
+    <MApp>
+      <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
+        @* AppBar Main.. *@
+      </CascadingValue>
+    </MApp>
+    ```  
+
+    ``` razor PageOrComponent.razor
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        [CascadingParameter(Name = "Culture")]
+        public string? Culture { get; set; }
+    }
+    ```
+
+  - Notify the child component to refresh through the event of I18n
+
+    ```razor MainLayout
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    @implements IDisposable
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        protected override void OnInitialized()
+        {
+            I18n.CultureChange += OnCultureChange;
+        }
+    
+        private void OnCultureChange(object? sender, EventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    
+        public void Dispose()
+        {
+            I18n.CultureChange -= OnCultureChange;
+        }
+    }
+    ```

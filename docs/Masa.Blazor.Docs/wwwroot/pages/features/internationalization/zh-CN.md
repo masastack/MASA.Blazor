@@ -15,7 +15,7 @@ services.AddMasaBlazor(options => {
 })
 ```
 
-使用:
+### 使用
 
 ```razor
 @using BlazorComponent.I18n
@@ -25,6 +25,24 @@ services.AddMasaBlazor(options => {
 
 <MI18n Key="$masaBlazor.search"></MI18n>
 ```
+
+### 切换语言
+
+``` razor
+@using BlazorComponent.I18n
+@inject I18n I18n
+
+<MButton OnClick="ChangeLanguage">Change Language</MButton>
+
+@code {
+    private void ChangeLanguage()
+    {
+        I18n.SetCulture(new CultureInfo("zh-CN"));
+    }
+}
+```
+
+> 关于切换语言后文本不更新的问题，请移步 [常见问题](/blazor/getting-started/frequently-asked-questions)。
 
 ## 添加自定义的本地化
 

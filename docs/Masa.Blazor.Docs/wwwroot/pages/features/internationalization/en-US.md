@@ -15,7 +15,7 @@ services.AddMasaBlazor(options => {
 })
 ```
 
-Usage:
+### Usage
 
 ```razor
 @using BlazorComponent.I18n
@@ -25,6 +25,24 @@ Usage:
 
 <MI18n Key="$masaBlazor.search"></MI18n>
 ```
+
+### Change language
+
+``` razor
+@using BlazorComponent.I18n
+@inject I18n I18n
+
+<MButton OnClick="ChangeLanguage">Change Language</MButton>
+
+@code {
+    private void ChangeLanguage()
+    {
+        I18n.SetCulture(new CultureInfo("zh-CN"));
+    }
+}
+```
+
+> For the problem that the text is not updated after switching the language, please go to [FAQ](/blazor/getting-started/frequently-asked-questions).
 
 ## Adding a custom locale
 
