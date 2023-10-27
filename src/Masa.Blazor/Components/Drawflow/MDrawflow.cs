@@ -182,8 +182,6 @@ public class MDrawflow : MDrop, IAsyncDisposable
             {
                 await _drawflowProxy.DisposeAsync();
             }
-
-            await DrawflowJSModule.DisposeAsync();
         }
         catch (JSDisconnectedException)
         {
