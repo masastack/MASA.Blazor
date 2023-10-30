@@ -80,7 +80,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         = new(@"""\s*function\s?\([a-zA-Z][a-zA-Z0-9,\s]*\)\s?\{((?<BR>\{)|(?<-BR>\})|[^{}]*)+\}\s*""", RegexOptions.IgnoreCase);
 
     private static readonly Regex s_lambdaRegex
-        = new(@"""\([a-zA-Z]?[a-zA-Z0-9\s,]*\)\s?=\\u003e\s?[a-zA-Z{\\u0060][^""]+""", RegexOptions.IgnoreCase);
+        = new(@"""\([a-zA-Z]?[a-zA-Z0-9\s,]*\)\s?=>\s?[a-zA-Z{}`][^""]+""", RegexOptions.IgnoreCase);
 
     private EChartsInitOptions DefaultInitOptions { get; set; } = new();
 
