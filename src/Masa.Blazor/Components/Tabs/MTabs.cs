@@ -4,7 +4,10 @@
     {
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
-        
+
+        [CascadingParameter(Name = "FirstBoot")]
+        private bool FirstBoot { get; set; }
+
         [Parameter]
         public string? ActiveClass { get; set; }
 
@@ -39,6 +42,18 @@
         public bool Right { get; set; }
 
         protected override bool RTL => MasaBlazor.RTL;
+
+        private bool _firstBootHandled = false;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (FirstBoot && !_firstBootHandled)
+            {
+                _firstBootHandled = true;
+                await CallSlider();
+            }
+        }
 
         protected override void SetComponentClass()
         {
