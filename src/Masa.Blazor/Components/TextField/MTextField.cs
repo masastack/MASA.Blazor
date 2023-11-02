@@ -146,13 +146,13 @@ namespace Masa.Blazor
         /// </summary>
         [Parameter]
         [Obsolete("Use UpdateOnChange instead.")]
-        public bool UpdateOnBlur { get; set; }
+        public virtual bool UpdateOnBlur { get; set; }
 
         /// <summary>
         /// Update the bound value on change event instead of on input.
         /// </summary>
         [Parameter]
-        public bool UpdateOnChange { get; set; }
+        public virtual bool UpdateOnChange { get; set; }
 
         private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 

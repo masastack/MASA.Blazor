@@ -42,6 +42,18 @@ namespace Masa.Blazor
         [Parameter]
         public string? Accept { get; set; }
 
+        /// <summary>
+        /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
+        /// </summary>
+        [ApiIgnoredParameter]
+        public override bool UpdateOnChange { get; set; }
+
+        /// <summary>
+        /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
+        /// </summary>
+        [ApiIgnoredParameter]
+        public override bool UpdateOnBlur { get; set; }
+
         public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         protected override Dictionary<string, object?> InputAttrs => new(Attributes)
@@ -138,11 +150,6 @@ namespace Masa.Blazor
             {
                 throw new ArgumentException("Multiple TValue should be List<IBrowserFile>");
             }
-
-            if (OnChange.HasDelegate)
-            {
-                ValueChanged = OnChange;
-            }
         }
 
         public string HumanReadableFileSize(long bytes, bool binary = false)
@@ -221,10 +228,9 @@ namespace Masa.Blazor
             }
         }
 
-        public override Task HandleOnInputAsync(ChangeEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
+        public override Task HandleOnInputAsync(ChangeEventArgs args) => Task.CompletedTask;
+
+        public override Task HandleOnChangeAsync(ChangeEventArgs args) => Task.CompletedTask;
 
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
@@ -243,7 +249,7 @@ namespace Masa.Blazor
             }
         }
 
-        public void HandleOnFileChange(InputFileChangeEventArgs args)
+        public async Task HandleOnFileChange(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -267,6 +273,9 @@ namespace Masa.Blazor
                     InternalValue = default;
                 }
             }
+
+            await OnInput.InvokeAsync(InternalValue);
+            await OnChange.InvokeAsync(InternalValue);
         }
 
         public override async Task HandleOnClickAsync(ExMouseEventArgs args)
@@ -308,11 +317,7 @@ namespace Masa.Blazor
                 InternalValue = default;
             }
 
-            if (OnClearClick.HasDelegate)
-            {
-                await OnClearClick.InvokeAsync(args);
-            }
-
+            await OnClearClick.InvokeAsync(args);
             await OnChange.InvokeAsync(InternalValue);
         }
     }
