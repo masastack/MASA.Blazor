@@ -16,6 +16,12 @@ namespace Masa.Blazor
         [Parameter]
         public bool FixedRight { get; set; }
 
+        /// <summary>
+        /// TODO: internal use?
+        /// </summary>
+        [Parameter]
+        public bool HasFixed { get; set; }
+
         [Parameter]
         public StringNumber? Height { get; set; }
 
@@ -49,7 +55,7 @@ namespace Masa.Blazor
                         .Add("m-data-table__wrapper")
                         //REVIEW:Is this class name ok?
                         .AddIf("fixed-right", () => FixedRight)
-                        .AddIf("not-scroll-right", () => FixedRight && !ScrollerOnRight);
+                        .AddIf("not-scroll-right", () => (FixedRight || HasFixed) && !ScrollerOnRight);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -78,7 +84,7 @@ namespace Masa.Blazor
 
         public async Task HandleOnScrollAsync(EventArgs args)
         {
-            if (FixedRight)
+            if (FixedRight || HasFixed)
             {
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
                 // ReSharper disable once CompareOfFloatsByEqualityOperator

@@ -93,7 +93,9 @@
                     }
 
                     cssBuilder
-                        .Add($"text-{header.Align.ToString().ToLower()}");
+                        .Add($"text-{header.Align.ToString().ToLower()}")
+                        .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
+                        .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left);
                 }, styleBuilder =>
                 {
                     var header = (DataTableHeader?)styleBuilder.Data;

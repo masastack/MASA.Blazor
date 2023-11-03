@@ -34,7 +34,24 @@
                         cssBuilder
                             .Add($"text-{header.Align.ToString().ToLower()}")
                             .Add(header.CellClass)
-                            .AddIf("m-data-table__divider", () => header.Divider);
+                            .AddIf("m-data-table__divider", () => header.Divider)
+                            .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
+                            .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left);
+                    }
+                },  styleBuilder =>
+                {
+                    if (styleBuilder.Data is DataTableHeader<TItem> header)
+                    {
+                        if (header.Fixed == DataTableFixed.Right)
+                        {
+                            var count = Headers.Count;
+                            var lastIndex = Headers.LastIndexOf(header);
+                            if (lastIndex > 0)
+                            {
+                                var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                                styleBuilder.Add($"right: {widths}px");
+                            }
+                        }
                     }
                 });
         }

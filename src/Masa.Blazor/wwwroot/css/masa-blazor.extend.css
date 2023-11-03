@@ -92,6 +92,39 @@
     background: #1E1E1E;
 }
 
+/* fixed in datatable */
+.theme--light.m-data-table .m-data-table__column--fixed-right {
+    background-color: #FFF;
+} 
+
+.m-data-table__column--fixed-right {
+    position: sticky !important;
+    z-index: 1;
+    right: 0;
+}
+
+.m-data-table__column--fixed-right:after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow .3s;
+    content: '';
+    pointer-events: none;
+}
+
+.m-data-table > .m-data-table__wrapper.not-scroll-right .m-data-table__column--fixed-right:after,
+.m-data-table > .m-data-table__wrapper.not-scroll-right .m-data-table__column--fixed-right:after  {
+    box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.not-scroll-right .m-data-table__column--fixed-right:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.not-scroll-right .m-data-table__column--fixed-right:after  {
+    box-shadow: 10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
 /* strip in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
     background: #fafafa;
