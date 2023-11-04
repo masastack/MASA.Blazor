@@ -1,12 +1,15 @@
 ﻿@using System.Drawing
+@using System.ComponentModel.Design
 @namespace Masa.Blazor.ColorPicker
 @inherits BDomComponentBase
 
 <div class="@CssProvider.GetClass("canvas")"
      style="@CssProvider.GetStyle("canvas")"
      @onclick="HandleOnClick"
-     @onmousedown="HandleOnMouseDown">
-    <canvas @ref="_canvasRef"
+     @onmousedown="HandleOnMouseDown"
+     @onmousedown:preventDefault
+     @ref="Ref">
+    <canvas @ref="@GenRef("canvas").Ref"
             width="@Width"
             height="@Height">
     </canvas>
@@ -33,9 +36,10 @@
     [Parameter]
     public StringNumber Width { get; set; } = 300;
 
-    private ElementReference _canvasRef;
+    [Parameter]
+    public EventCallback<Color> OnColorUpdate { get; set; }
 
-    private (double Width, double Height, double Left, double Top) _boundingRect = (0,0,0,0);
+    private BoundingClientRect? _boundingRect;
 
     private (double X, double Y) Dot
     {
@@ -67,19 +71,87 @@
                        var radius = DotSize.ToInt32() / 2d;
                        StringNumber x = Dot.X - radius;
                        StringNumber y = Dot.Y - radius;
-                       
+
                        style.AddWidth(DotSize)
                             .AddHeight(DotSize)
                             .Add($"translate({x.ConvertToUnit()}, {y.ConvertToUnit()})");
                    });
     }
 
-    private async Task HandleOnClick()
+    private async Task HandleOnClick(MouseEventArgs e)
     {
+        if (Disabled)
+        {
+            return;
+        }
+
+        _boundingRect = await RootRef.GetBoundingClientRectAsync();
+        await EmitColor(e.ClientY, e.ClientY);
     }
 
     private async Task HandleOnMouseDown()
     {
+        if (Disabled)
+        {
+            return;
+        }
+
+        _boundingRect = await RootRef.GetBoundingClientRectAsync();
+
+        await Js.AddHtmlElementEventListener<MouseEventArgs>("window", "mousemove", HandleMouseMove, false, new EventListenerExtras()
+        {
+            Key = $"window-mousemove-{Ref.Id}"
+        });
+        await Js.AddHtmlElementEventListener("window", "mouseup", HandleOnMouseUp, false, new EventListenerExtras()
+        {
+            Key = $"window-mouseup-{Ref.Id}"
+        });
+    }
+
+    private async Task HandleMouseMove(MouseEventArgs e)
+    {
+        if (Disabled)
+        {
+            return;
+        }
+
+        await EmitColor(e.ClientX, e.ClientY);
+    }
+
+    private async Task HandleOnMouseUp()
+    {
+        await Js.RemoveHtmlElementEventListener("window", "mousemove", $"window-mousemove-{Ref.Id}");
+        await Js.RemoveHtmlElementEventListener("window", "mouseup", $"window-mouseup-{Ref.Id}");
+    }
+
+    private async Task EmitColor(double x, double y)
+    {
+        if (_boundingRect is null)
+        {
+            return;
+        }
+
+        var width = Width.ToDouble();
+        var height = Height.ToDouble();
+        
+        var color = Color.FromHSVA(
+            h: Color.GetHue(),
+            s: Math.Clamp(x - _boundingRect.Left, 0, width) / width,
+            v: 1 - Math.Clamp(y - _boundingRect.Top, 0, height) / height,
+            a: Color.GetAlpha());
+
+        await OnColorUpdate.InvokeAsync(color);
+    }
+
+    private async Task UpdateCanvas()
+    {
+        if (Color.IsEmpty)
+        {
+            return;
+        }
+
+        var boudingRect = await Refs["canvas"].GetBoundingClientRectAsync();
+
     }
 
 }

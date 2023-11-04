@@ -58,4 +58,29 @@ public static class Util
         var hsv = (h, s, v: max);
         return (h: hsv.h, s: hsv.s, v: hsv.v, a: rgba.A / 255d);
     }
+
+    /// <summary>
+    /// Convert HSV to RGBA
+    /// </summary>
+    /// <param name="h">0-360</param>
+    /// <param name="s">0-1</param>
+    /// <param name="v">0-1</param>
+    /// <param name="a">0-1</param>
+    /// <returns></returns>
+    public static Color HSVAToRGBA(double h, double s, double v, double a)
+    {
+        var f = (double n) =>
+        {
+            var k = (n + (h / 60f)) % 6;
+            return v - v * s * Math.Max(Math.Min(k, Math.Min(4 - k, 1)), 0);
+        };
+
+        var rga = new[] { f(5), f(3), f(1) }.Select(u => Math.Round(u * 255));
+
+        return Color.FromArgb(
+            alpha: (int)Math.Round(a * 255),
+            red: (int)rga.ElementAt(0),
+            green: (int)rga.ElementAt(1),
+            blue: (int)rga.ElementAt(2));
+    }
 }
