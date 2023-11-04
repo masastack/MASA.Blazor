@@ -95,7 +95,8 @@
                     cssBuilder
                         .Add($"text-{header.Align.ToString().ToLower()}")
                         .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
-                        .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left);
+                        .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
+                        .AddIf("first-fixed-column", () => header.IsFirstFixedColumn);
                 }, styleBuilder =>
                 {
                     var header = (DataTableHeader?)styleBuilder.Data;
@@ -104,6 +105,17 @@
                     styleBuilder
                         .AddWidth(header.Width)
                         .AddMinWidth(header.Width);
+
+                    if (header.Fixed == DataTableFixed.Right)
+                    {
+                        var count = Headers.Count;
+                        var lastIndex = Headers.LastIndexOf(header);
+                        if (lastIndex > 0)
+                        {
+                            var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                            styleBuilder.Add($"right: {widths}px");
+                        }
+                    }
                 })
                 .Apply("sort-badge", cssBuilder =>
                 {

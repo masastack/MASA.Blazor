@@ -36,7 +36,8 @@
                             .Add(header.CellClass)
                             .AddIf("m-data-table__divider", () => header.Divider)
                             .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
-                            .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left);
+                            .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
+                            .AddIf("first-fixed-column", () => header.IsFirstFixedColumn);
                     }
                 },  styleBuilder =>
                 {
