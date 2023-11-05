@@ -11,96 +11,21 @@
     z-index: 2 !important;
 }
 
-.m-data-table > .m-data-table__wrapper.not-scroll-right > table > tbody > tr > td:not(.m-data-table__column--fixed-right):last-child::after,
-.m-data-table > .m-data-table__wrapper.not-scroll-right > table > thead > tr > th:not(.m-data-table__column--fixed-right):last-child::after  {
-    box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
-}
-
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.not-scroll-right > table > tbody > tr > td:not(.m-data-table__column--fixed-right):last-child::after,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.not-scroll-right > table > thead > tr > th:not(.m-data-table__column--fixed-right):last-child::after  {
-    box-shadow: 10px 0 8px -8px rgb(0 0 0 / 15%);
-}
-
-.m-data-table > .m-data-table__wrapper.fixed-right {
-    overflow-x: scroll;
-}
-
-    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        z-index: 1;
-        right: 0px;
-    }
-
-    .m-application--is-rtl .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-        left: 0px;
-        right: auto;
-    }
-
-.theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-    background-color: #FFFFFF;
-}
-
-.theme--dark.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-    background-color: #1E1E1E;
-}
-
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after,
-.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
-    position: absolute;
-    top: 0;
-    bottom: -1px;
-    left: 0;
-    width: 30px;
-    transform: translateX(-100%);
-    transition: box-shadow .3s;
-    content: '';
-    pointer-events: none;
-}
-
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
-    top: -8px;
-    bottom: -8px;
-    transform: none;
-    left: auto;
-    right: 0;
-}
-
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
-    background-color: inherit;
-}
-
-.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    z-index: 1;
-    background-color: #fff;
-    right: 0px;
-}
-
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-    left: 0px;
-    right: auto;
-}
-
-.theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
+/* fixed in datatable */
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper),
+.theme--light.m-data-table > .m-data-table__wrapper > table > thead > tr {
     background: #FFFFFF;
 }
 
-.theme--dark.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
+.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper),
+.theme--dark.m-data-table > .m-data-table__wrapper > table > thead > tr {
     background: #1E1E1E;
 }
 
-/* fixed in datatable */
-.theme--light.m-data-table .m-data-table__column--fixed-right {
-    background-color: #FFF;
-} 
-
-.m-data-table__column--fixed-right {
+.m-data-table__column--fixed-right, .m-data-table__column--fixed-left {
     position: sticky !important;
     z-index: 1;
-    right: 0;
+    background: inherit;
 }
 
 .m-data-table__column--fixed-right:after {
@@ -115,12 +40,36 @@
     pointer-events: none;
 }
 
-.m-data-table > .m-data-table__wrapper.not-scroll-right .first-fixed-column:after {
+.m-data-table__column--fixed-left:after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    right: -60px;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow .3s;
+    content: '';
+    pointer-events: none;
+}
+
+.m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left.first-fixed-column:after {
     box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
 }
 
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper.not-scroll-right .first-fixed-column:after {
-    box-shadow: 10px 0 8px -8px rgb(0 0 0 / 15%);
+.m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right.first-fixed-column:after {
+    box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
+.m-application--is-rtl .m-data-table__column--fixed-left:after {
+    left: 0;
+    right: auto;
+}
+
+.m-application--is-rtl .m-data-table__column--fixed-right:after {
+    left: auto;
+    right: -60px;
 }
 
 /* strip in datatable */
@@ -130,22 +79,6 @@
 
 .theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
     background: #212121;
-}
-
-.theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
-    background: #fafafa;
-}
-
-.theme--dark.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
-    background: #212121;
-}
-
-.theme--light.m-data-table>.m-data-table__wrapper.fixed-right > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td:last-child {
-    background: #eee;
-}
-
-.theme--dark.m-data-table>.m-data-table__wrapper.fixed-right > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td:last-child {
-    background: #616161;
 }
 
 /* resizable in datatable */

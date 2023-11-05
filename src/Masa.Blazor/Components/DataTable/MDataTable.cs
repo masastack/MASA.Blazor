@@ -3,13 +3,10 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, IMobile, IAsyncDisposable
+    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, IMobile
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
-
-        [Inject]
-        private IResizeJSModule ResizeJSModule { get; set; } = null!;
 
         [Parameter]
         public string? Caption { get; set; }
@@ -28,10 +25,6 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool FixedHeader { get; set; }
-
-        [Parameter]
-        [Obsolete("Use Fixed property in per Header instead.")]
-        public bool FixedRight { get; set; }
 
         [Parameter]
         public bool Dense { get; set; }
@@ -127,8 +120,6 @@ namespace Masa.Blazor
             set => SetValue(value);
         }
         
-        public double ColumnWidth { get; private set; }
-
         protected MobileProvider? MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
@@ -214,8 +205,6 @@ namespace Masa.Blazor
         public string GroupPlusIcon { get; } = "$plus";
 
         public DataOptions Options => InternalOptions;
-
-        protected bool IsFixedRight => FixedRight;
         
         public override Task SetParametersAsync(ParameterView parameters)
         {
@@ -240,19 +229,15 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await NextTickIf(async () =>
+                if (ResizeMode != DataTableResizeMode.None)
                 {
-                    var @ref = RefBack.Current;
-                    
-                    if (ResizeMode != DataTableResizeMode.None)
+                    await NextTickIf(async () =>
                     {
+                        var @ref = RefBack.Current;
+
                         await JsInvokeAsync(JsInteropConstants.ResizableDataTable, @ref);
-                    }
-
-                    var tableSelector = $"{@ref.GetSelector()} table";
-
-                    _ = ResizeJSModule.ObserverAsync(tableSelector, OnTableResizeAsync);
-                }, () => RefBack.Current.Context is null);
+                    }, () => RefBack.Current.Context is null);
+                }
             }
         }
 
@@ -283,15 +268,6 @@ namespace Masa.Blazor
         private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
         {
             MobileProvider = new MobileProvider(this);
-            await InvokeStateHasChangedAsync();
-        }
-        
-        private async Task OnTableResizeAsync()
-        {
-            var tableSelector = $"{RefBack.Current.GetSelector()} table";
-            var scrollWidth = await Js.InvokeAsync<double>(JsInteropConstants.GetProp, tableSelector, "scrollWidth");
-            Console.Out.WriteLine($"Table resize...., {scrollWidth}");
-            ColumnWidth = scrollWidth / Headers.Count();
             await InvokeStateHasChangedAsync();
         }
 
@@ -442,8 +418,7 @@ namespace Masa.Blazor
 
                     attrs[nameof(Class)] = css;
                     attrs[nameof(Style)] = Style;
-                    attrs[nameof(FixedRight)] = IsFixedRight;
-                    attrs[nameof(MSimpleTable.HasFixed)] = Headers.Any(u => u.Fixed == DataTableFixed.Right);
+                    attrs[nameof(MSimpleTable.HasFixed)] = Headers.Any(u => u.Fixed != DataTableFixed.None);
                     attrs[nameof(Width)] = Width;
                     attrs[nameof(RefBack)] = RefBack;
                 })
@@ -527,22 +502,6 @@ namespace Masa.Blazor
         {
             MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
             base.Dispose(disposing);
-        }
-        
-        async ValueTask IAsyncDisposable.DisposeAsync()
-        {
-            try
-            {
-                await ResizeJSModule.UnobserveAsync($"{RefBack.Current.GetSelector()} table");
-            }
-            catch (JSDisconnectedException)
-            {
-                // ignore
-            }
-            catch (InvalidOperationException)
-            {
-                // ignore
-            }
         }
     }
 }
