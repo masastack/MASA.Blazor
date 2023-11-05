@@ -80,7 +80,7 @@ related:
 
 #### 固定列
 
-使用 `FixedRight` 属性，可以默认固定最后一列。
+使用 `Headers` 的 `Fixed` 属性可以固定列。
 
 <masa-example file="Examples.components.data_tables.Fixed"></masa-example>
 
