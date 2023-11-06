@@ -897,7 +897,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            if (args.Code is "Enter" or "NumpadEnter")
+            if (args.Key is KeyCodes.Enter or KeyCodes.NumpadEnter)
             {
                 if (OnEnter.HasDelegate)
                 {

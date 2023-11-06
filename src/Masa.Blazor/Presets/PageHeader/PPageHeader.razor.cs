@@ -70,7 +70,7 @@ public partial class PPageHeader
 
     private async Task HandleOnEnter(KeyboardEventArgs args)
     {
-        if (args.Code is "Enter" or "NumpadEnter")
+        if (args.Key is "Enter" or "NumpadEnter")
         {
             await HandleOnSearchWithDelay();
         }

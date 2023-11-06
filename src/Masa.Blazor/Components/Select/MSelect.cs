@@ -664,14 +664,14 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
-        if (IsReadonly && args.Code != KeyCodes.Tab) return;
+        if (IsReadonly && args.Key != KeyCodes.Tab) return;
 
         if (OnKeyDown.HasDelegate)
         {
             await OnKeyDown.InvokeAsync(args);
         }
 
-        var keyCode = args.Code;
+        var keyCode = args.Key;
 
         // If menu is active, allow default
         // listIndex change from menu

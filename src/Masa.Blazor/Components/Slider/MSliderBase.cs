@@ -680,32 +680,49 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     {
         if (!IsInteractive) return null;
 
-        var keyCodes = new[] { "pageup", "pagedown", "end", "home", "left", "right", "down", "up" };
-        var directionCodes = new[] { "left", "right", "down", "up" };
+        var keyCodes = new[]
+        {
+            KeyCodes.PageUp,
+            KeyCodes.PageDown,
+            KeyCodes.End,
+            KeyCodes.Home,
+            KeyCodes.ArrowLeft,
+            KeyCodes.ArrowRight,
+            KeyCodes.ArrowDown,
+            KeyCodes.ArrowUp
+        };
 
-        if (!keyCodes.Contains(args.Code)) return null;
+        var directionCodes = new[]
+        {
+            KeyCodes.ArrowLeft,
+            KeyCodes.ArrowRight,
+            KeyCodes.ArrowDown,
+            KeyCodes.ArrowUp,
+        };
+
+        if (!keyCodes.Contains(args.Key)) return null;
 
         var step = StepNumeric == 0 ? 1 : StepNumeric;
         var steps = Max - Min / step;
-        if (directionCodes.Contains(args.Code))
+        if (directionCodes.Contains(args.Key))
         {
-            var increase = MasaBlazor.RTL ? new[] { "left", "up" } : new[] { "right", "up" };
-            var direction = increase.Contains(args.Code) ? 1 : -1;
+            var increase = MasaBlazor.RTL ? new[] { KeyCodes.ArrowLeft, KeyCodes.ArrowUp } : new[] { KeyCodes.ArrowRight, KeyCodes.ArrowUp };
+            var direction = increase.Contains(args.Key) ? 1 : -1;
             var multiplier = args.ShiftKey ? 3 : (args.CtrlKey ? 2 : 1);
 
             value += (direction * step * multiplier);
         }
-        else if (args.Code == "home")
+        else if (args.Key == KeyCodes.Home)
         {
             value = Min;
         }
-        else if (args.Code == "end")
+        else if (args.Key == KeyCodes.End)
         {
             value = Max;
         }
         else
         {
-            var direction = args.Code == "pagedown" ? 1 : -1;
+            var direction = args.Key == KeyCodes.PageDown ? 1 : -1;
             value = value - (direction * step * (steps > 100 ? steps / 10 : 10));
         }
 
