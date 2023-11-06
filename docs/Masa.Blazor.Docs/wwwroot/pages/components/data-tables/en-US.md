@@ -87,9 +87,9 @@ The data table exposes a `Search` prop that allows you to filter your data.
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
-#### Fixed right
+#### Fixed
 
-Using the `FixedRightFix` prop  the last column.
+Fixed columns using the `Fixed` prop in the **Headers** array.
 
 <masa-example file="Examples.components.data_tables.Fixed"></masa-example>
 

@@ -2,6 +2,9 @@
 {
     public class MDataTableRow<TItem> : BDataTableRow<TItem>
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+        
         [Parameter]
         public Func<TItem, bool>? IsSelected { get; set; }
 
@@ -34,7 +37,34 @@
                         cssBuilder
                             .Add($"text-{header.Align.ToString().ToLower()}")
                             .Add(header.CellClass)
-                            .AddIf("m-data-table__divider", () => header.Divider);
+                            .AddIf("m-data-table__divider", () => header.Divider)
+                            .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
+                            .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
+                            .AddIf("first-fixed-column", () => header.IsFixedShadowColumn);
+                    }
+                },  styleBuilder =>
+                {
+                    if (styleBuilder.Data is DataTableHeader<TItem> header)
+                    {
+                        if (header.Fixed == DataTableFixed.Right)
+                        {
+                            var count = Headers.Count;
+                            var lastIndex = Headers.LastIndexOf(header);
+                            if (lastIndex > -1)
+                            {
+                                var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                                styleBuilder.Add($"{(MasaBlazor.RTL ? "left" : "right")}: {widths}px");
+                            }
+                        }
+                        else if (header.Fixed == DataTableFixed.Left)
+                        {
+                            var index = Headers.IndexOf(header);
+                            if (index > -1)
+                            {
+                                var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                                styleBuilder.Add($"{(MasaBlazor.RTL ? "right" : "left")}: {widths}px");
+                            }
+                        }
                     }
                 });
         }

@@ -27,9 +27,6 @@ namespace Masa.Blazor
         public bool FixedHeader { get; set; }
 
         [Parameter]
-        public bool FixedRight { get; set; }
-
-        [Parameter]
         public bool Dense { get; set; }
 
         [Parameter]
@@ -126,7 +123,7 @@ namespace Masa.Blazor
             get => GetValue(DataTableResizeMode.None);
             set => SetValue(value);
         }
-
+        
         protected MobileProvider? MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
@@ -212,9 +209,7 @@ namespace Masa.Blazor
         public string GroupPlusIcon { get; } = "$plus";
 
         public DataOptions Options => InternalOptions;
-
-        protected bool IsFixedRight => FixedRight;
-
+        
         public override Task SetParametersAsync(ParameterView parameters)
         {
             GroupText ??= I18n.T("$masaBlazor.dataTable.groupText", defaultValue: "group");
@@ -240,9 +235,12 @@ namespace Masa.Blazor
             {
                 if (ResizeMode != DataTableResizeMode.None)
                 {
-                    await NextTickIf(
-                        async () => { await JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); },
-                        () => RefBack.Current.Context is null);
+                    await NextTickIf(async () =>
+                    {
+                        var @ref = RefBack.Current;
+
+                        await JsInvokeAsync(JsInteropConstants.ResizableDataTable, @ref);
+                    }, () => RefBack.Current.Context is null);
                 }
             }
         }
@@ -425,7 +423,7 @@ namespace Masa.Blazor
 
                     attrs[nameof(Class)] = css;
                     attrs[nameof(Style)] = Style;
-                    attrs[nameof(FixedRight)] = IsFixedRight;
+                    attrs[nameof(MSimpleTable.HasFixed)] = Headers.Any(u => u.Fixed != DataTableFixed.None);
                     attrs[nameof(Width)] = Width;
                     attrs[nameof(RefBack)] = RefBack;
                 })
