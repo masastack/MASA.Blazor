@@ -84,10 +84,13 @@
         public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
 
         [Parameter]
-        public Action<TItem, bool>? OnItemSelect { get; set; }
+        public EventCallback<(TItem Item, bool Selected)> OnItemSelect { get; set; }
 
         [Parameter]
-        public Action<IEnumerable<TItem>, bool>? OnToggleSelectAll { get; set; }
+        public EventCallback<(TItem Item, bool Expanded)> OnItemExpand { get; set; }
+
+        [Parameter]
+        public EventCallback<(IEnumerable<TItem> Items, bool Selected)> OnToggleSelectAll { get; set; }
 
         public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
 
@@ -192,6 +195,8 @@
             }
 
             Expansion[key] = value;
+
+            OnItemExpand.InvokeAsync((item, value));
         }
 
         public bool IsSelected(TItem item)
@@ -232,7 +237,7 @@
 
             UpdateSelectedItemsAsValue();
 
-            OnItemSelect?.Invoke(item, value);
+            OnItemSelect.InvokeAsync((item, value));
         }
 
         public bool IsSelectable(TItem item)
@@ -251,7 +256,7 @@
 
             UpdateSelectedItemsAsValue();
 
-            OnToggleSelectAll?.Invoke(SelectableItems, value);
+            OnToggleSelectAll.InvokeAsync((SelectableItems, value));
         }
 
         private void UpdateSelectedItemsAsValue()

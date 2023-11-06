@@ -107,8 +107,12 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowClick { get; set; }
 
+        [Obsolete("Use OnRowDblClick instead.")]
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDbClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDblClick { get; set; }
 
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowContextmenu { get; set; }
@@ -291,9 +295,10 @@ namespace Masa.Blazor
             return OnRowContextmenu.InvokeAsync(args);
         }
 
-        public Task HandleOnRowDbClickAsync(DataTableRowMouseEventArgs<TItem> args)
+        public Task HandleOnRowDblClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return OnRowDbClick.InvokeAsync(args);
+            var e = OnRowDblClick.HasDelegate ? OnRowDblClick : OnRowDbClick;
+            return e.InvokeAsync(args);
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string? search)
