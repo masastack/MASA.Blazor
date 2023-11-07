@@ -46,8 +46,8 @@
   "events": "事件",
   "methods": "方法",
   "state": {
-    "new": "NEW",
-    "pwd": "PWD"
+    "new": "新增",
+    "update": "更新"
   },
   "tag": {
     "preset": "预置",

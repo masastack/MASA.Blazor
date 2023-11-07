@@ -45,10 +45,10 @@ namespace Masa.Blazor
         [Parameter]
         public string? Img { get; set; }
 
-        [Parameter, ApiDefaultValue(4)]
+        [Parameter, MassApiParameter(4)]
         public StringNumber LoaderHeight { get; set; } = 4;
 
-        [Parameter, ApiDefaultValue(false)]
+        [Parameter, MassApiParameter(false)]
         public StringBoolean Loading { get; set; } = false;
 
         [Parameter]
@@ -57,7 +57,7 @@ namespace Masa.Blazor
         [Parameter]
         public string? Href { get; set; }
 
-        [Parameter, ApiDefaultValue(true)]
+        [Parameter, MassApiParameter(true)]
         public bool Ripple { get; set; } = true;
 
         [Parameter]

@@ -23,7 +23,7 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     [Parameter] public int FirstDayOfWeek { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(TimeFormat.AmPm)]
+    [MassApiParameter(TimeFormat.AmPm)]
     public TimeFormat TimeFormat { get; set; } = TimeFormat.AmPm;
 
     [Parameter] public string? Locale { get; set; }
@@ -73,11 +73,11 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     [Parameter] public Func<DateOnly, string>? MonthFormat { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("$next")]
+    [MassApiParameter("$next")]
     public string NextIcon { get; set; } = "$next";
 
     [Parameter]
-    [ApiDefaultValue("$prev")]
+    [MassApiParameter("$prev")]
     public string PrevIcon { get; set; } = "$prev";
 
     [Parameter] public bool Reactive { get; set; }
@@ -89,13 +89,13 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     [Parameter] public bool ShowAdjacentMonths { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MassApiParameter(true)]
     public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
     [Parameter] public bool ShowWeek { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MassApiParameter(true)]
     public bool UseSeconds { get; set; } = true;
 
     [Parameter] public TValue? Value { get; set; }

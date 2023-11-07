@@ -9,13 +9,13 @@ public partial class MSplitter
 
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
-    [Parameter] [ApiDefaultValue(8)] public int BarSize { get; set; } = 8;
+    [Parameter] [MassApiParameter(8)] public int BarSize { get; set; } = 8;
 
     [Parameter] public RenderFragment? BarContent { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] [ApiDefaultValue(true)] public bool PushOtherPanes { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public bool PushOtherPanes { get; set; } = true;
 
     [Parameter] public bool Row { get; set; }
 

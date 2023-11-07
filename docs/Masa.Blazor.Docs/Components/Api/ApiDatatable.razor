@@ -25,13 +25,18 @@
                         {
                             <span class="subtitle">
                                 <MBadge Value="@(item.Required)" Color="transparent"
-                                        Class="@(item.IsObsolete ? "text-mono text-decoration-line-through" : "text-mono")"
+                                        Class="@(item.IsObsolete ? "text-mono text-no-wrap text-decoration-line-through" : "text-mono text-no-wrap")"
                                         OffsetY="10">
                                     <BadgeContent>
                                         <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
                                     </BadgeContent>
                                     <ChildContent>
                                         @item.Name
+
+                                        @if (!string.IsNullOrEmpty(item.ReleasedOn))
+                                        {
+                                            <MChip Class="ml-2 px-2" Outlined XSmall Color="@AppService.ColorForUpdateState">@item.ReleasedOn</MChip>
+                                        }
                                     </ChildContent>
                                 </MBadge>
                             </span>

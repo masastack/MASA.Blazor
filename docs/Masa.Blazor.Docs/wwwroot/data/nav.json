@@ -53,24 +53,18 @@
     "icon": "mdi-layers-triple",
     "group": "components",
     "hidden": true,
-    "state": "new",
+    "state": "update",
     "items": [
       {
         "title": "all",
         "hidden": false
       },
       "alerts",
-      {
-        "title": "application",
-        "state": "update"
-      },
+      "application",
       "aspect-ratios",
       "avatars",
       "badges",
-      {
-        "title": "baidumaps",
-        "state": "new"
-      },
+      "baidumaps",
       "banners",
       {
         "title": "bars",
@@ -83,10 +77,7 @@
       },
       "block-text",
       "borders",
-      {
-        "title": "bottom-navigation",
-        "state": "update"
-      },
+      "bottom-navigation",
       "bottom-sheets",
       "breadcrumbs",
       "buttons",
@@ -95,31 +86,16 @@
       "chips",
       "copyable-text",
       "cron",
-      {
-        "title": "defaults-providers",
-        "state": "new"
-      },
-      {
-        "title": "descriptions",
-        "state": "new"
-      },
+      "defaults-providers",
+      "descriptions",
       "dialogs",
       "dividers",
       "drag-zone",
       "drawers",
-      {
-        "title": "echarts",
-        "state": "update"
-      },
+      "echarts",
       "editors",
-      {
-        "title": "enqueued-snackbars",
-        "state": "new"
-      },
-      {
-        "title": "error-handler",
-        "state": "update"
-      },
+      "enqueued-snackbars",
+      "error-handler",
       "expansion-panels",
       "floating-action-buttons",
       "footers",
@@ -129,10 +105,7 @@
         "items": [
           "autocompletes",
           "cascaders",
-          {
-            "title": "checkboxes",
-            "state": "update"
-          },
+          "checkboxes",
           "file-inputs",
           "forms",
           "otp-input",
@@ -140,10 +113,7 @@
           "range-sliders",
           "selects",
           "sliders",
-          {
-            "title": "switches",
-            "state": "update"
-          },
+          "switches",
           "textareas",
           "text-fields"
         ]
@@ -152,10 +122,7 @@
         "title": "grids",
         "exact": true
       },
-      {
-        "title": "gridstack",
-        "state": "new"
-      },
+      "gridstack",
       {
         "title": "groups",
         "group": "components",
@@ -169,27 +136,15 @@
         ]
       },
       "hover",
-      {
-        "title": "icons",
-        "state": "update"
-      },
-      {
-        "title": "i18ns",
-        "state": "new"
-      },
+      "icons",
+      "i18ns",
       "image-captcha",
       "images",
       "infinite-scroll",
       "lists",
       "markdowns",
-      {
-        "title": "markdown-parsers",
-        "state": "new"
-      },
-      {
-        "title": "menus",
-        "state": "update"
-      },
+      "markdown-parsers",
+      "menus",
       {
         "title": "mobiles",
         "group": "components",
@@ -203,16 +158,13 @@
         ]
       },
       "modals",
-      {
-        "title": "monaco-editor",
-        "state": "new"
-      },
+      "monaco-editor",
       "navigation-drawers",
       "not-grouped",
       "overlays",
       {
         "title": "page-tabs",
-        "state": "new"
+        "state": "update"
       },
       "paginations",
       {
@@ -227,18 +179,12 @@
           "time-pickers"
         ]
       },
-      {
-        "title": "popup-service",
-        "state": "update"
-      },
+      "popup-service",
       {
         "title": "progress",
         "group": "components",
         "items": [
-          {
-            "title": "progress-circular",
-            "state": "update"
-          },
+          "progress-circular",
           "progress-linear"
         ]
       },
@@ -248,13 +194,11 @@
       "snackbars",
       "steppers",
       "subheaders",
-      {
-        "title": "syntax-highlights",
-        "state": "new"
-      },
+      "syntax-highlights",
       {
         "title": "tables",
         "group": "components",
+        "state": "update",
         "items": [
           "data-iterators",
           {
@@ -278,7 +222,8 @@
     "items": [
       {
         "title": "intersection-observer",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.0"
       }
     ]
   },
@@ -289,43 +234,53 @@
     "items": [
       {
         "title": "date-digital-clock-pickers",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.0.2"
       },
       {
         "title": "date-time-pickers",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.0.2"
       },
       {
         "title": "digital-clocks",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.0.2"
       },
       {
         "title": "drawflow",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.0.4"
       },
       {
         "title": "inputs-filter",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.0"
       },
       {
         "title": "lazy",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.0"
       },
       {
         "title": "pull-refresh",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.1"
       },
       {
         "title": "splitters",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.1"
       },
       {
         "title": "swiper",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.0.4"
       },
       {
         "title": "watermark",
-        "state": "new"
+        "state": "new",
+        "releasedOn": "v1.1.1"
       }
     ]
   },

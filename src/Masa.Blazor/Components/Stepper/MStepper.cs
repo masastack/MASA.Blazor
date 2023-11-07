@@ -15,7 +15,7 @@
         public bool NonLinear { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(1)]
+        [MassApiParameter(1)]
         public int Value
         {
             get => GetValue(1);

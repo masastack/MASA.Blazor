@@ -6,15 +6,15 @@ public class PDateDigitalClockPickerViewBase<TValue> : PDateTimePickerViewBase<T
 
     [Parameter] public bool MultiSection { get; set; }
 
-    [Parameter] [ApiDefaultValue("TimeSpan.FromMinutes(30)")]
+    [Parameter] [MassApiParameter("TimeSpan.FromMinutes(30)")]
     public TimeSpan Step { get; set; } = TimeSpan.FromMinutes(30);
 
-    [Parameter] [ApiDefaultValue(1)]
+    [Parameter] [MassApiParameter(1)]
     public int HourStep { get; set; } = 1;
 
-    [Parameter] [ApiDefaultValue(1)]
+    [Parameter] [MassApiParameter(1)]
     public int MinuteStep { get; set; } = 1;
 
-    [Parameter] [ApiDefaultValue(1)]
+    [Parameter] [MassApiParameter(1)]
     public int SecondStep { get; set; } = 1;
 }

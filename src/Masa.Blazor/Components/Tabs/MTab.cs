@@ -3,7 +3,7 @@
     public class MTab : BTab
     {
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MassApiParameter(true)]
         public bool Ripple { get; set; } = true;
 
         protected override void OnParametersSet()

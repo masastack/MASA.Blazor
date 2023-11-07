@@ -87,6 +87,7 @@ namespace Masa.Blazor
         public RenderFragment? ItemDataTableExpandContent { get; set; }
 
         [Parameter]
+        [MassApiParameter("$expand")]
         public string ExpandIcon { get; set; } = "$expand";
 
         [Parameter]
@@ -118,6 +119,7 @@ namespace Masa.Blazor
         public bool OnRowContextmenuPreventDefault { get; set; }
 
         [Parameter]
+        [MassApiParameter(ReleasedOn = "v1.0.4")]
         public DataTableResizeMode ResizeMode
         {
             get => GetValue(DataTableResizeMode.None);

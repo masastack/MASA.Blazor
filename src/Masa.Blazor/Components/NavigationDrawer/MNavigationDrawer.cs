@@ -33,7 +33,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(56)]
+        [MassApiParameter(56)]
         public StringNumber? MiniVariantWidth { get; set; } = 56;
 
         [Parameter]
@@ -43,7 +43,7 @@ namespace Masa.Blazor
         public bool Touchless { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("256px")]
+        [MassApiParameter("256px")]
         public StringNumber Width { get; set; } = "256px";
 
         [Parameter]

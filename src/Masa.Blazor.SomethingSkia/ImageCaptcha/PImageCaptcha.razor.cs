@@ -11,7 +11,7 @@ namespace Masa.Blazor.Presets
         public StringNumber? Height { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(80)]
+        [MassApiParameter(80)]
         public int CaptchaWidth { get; set; } = 80;
 
         [Parameter]
@@ -27,7 +27,7 @@ namespace Masa.Blazor.Presets
         public bool Clearable { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$clear")]
+        [MassApiParameter("$clear")]
         public string? ClearIcon { get; set; } = "$clear";
 
         [Parameter]
@@ -180,7 +180,7 @@ namespace Masa.Blazor.Presets
             return Task.CompletedTask;
         }
 
-        [ApiPublicMethod]
+        [MasaApiPublicMethod]
         public async Task FocusAsync()
         {
             if (_textField is null) return;
@@ -188,7 +188,7 @@ namespace Masa.Blazor.Presets
             await _textField.FocusAsync();
         }
 
-        [ApiPublicMethod]
+        [MasaApiPublicMethod]
         public async Task BlurAsync()
         {
             if (_textField is null) return;

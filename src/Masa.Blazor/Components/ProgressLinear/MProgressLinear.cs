@@ -32,11 +32,11 @@ namespace Masa.Blazor
         public bool Top { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(4)]
+        [MassApiParameter(4)]
         public StringNumber Height { get; set; } = 4;
 
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MassApiParameter(true)]
         public bool Active { get; set; } = true;
 
         [Parameter]
@@ -49,7 +49,7 @@ namespace Masa.Blazor
         public bool Stream { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(100)]
+        [MassApiParameter(100)]
         public double BufferValue { get; set; } = 100;
 
         [Parameter]

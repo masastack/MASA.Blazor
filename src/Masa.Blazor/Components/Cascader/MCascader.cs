@@ -8,7 +8,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool ChangeOnSelect { get; set; }
 
-        [Parameter, ApiDefaultValue(true)]
+        [Parameter, MassApiParameter(true)]
         public bool ShowAllLevels { get; set; } = true;
 
         [Parameter, EditorRequired]

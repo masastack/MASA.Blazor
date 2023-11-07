@@ -20,6 +20,8 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public string? StateBackgroundColor { get; set; }
 
+    public string? ReleasedOn { get; set; } 
+
     public StringNumber Value { get; set; }
 
     public List<DefaultItem>? Children { get; set; }

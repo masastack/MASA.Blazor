@@ -34,6 +34,7 @@ namespace Masa.Blazor.Docs
                 DefaultValue = ""{item.DefaultValue}"",
                 Required = {item.Required.ToString().ToLower()},
                 IsObsolete = {item.IsObsolete.ToString().ToLower()},
+                ReleasedOn = ""{item.ReleasedOn}"",
             }});");
             }
 

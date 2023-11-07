@@ -1,5 +1,15 @@
 # Upgrade Guides
 
+## Upgrading form v1.1.x to v1.2.0
+
+### Components
+
+#### DataTable
+
+- The type of `OnItemSelect` is changed from `Action<TItem, bool>` to `EventCallback<(TItem Item, bool Selected)>`.
+
+- Removed the `FixedRight` property, now you can set the fixed position of the column through the `Fixed` property in the `Headers`.
+
 ## Upgrading form v1.0.x to v1.1.0
 
 ### Components

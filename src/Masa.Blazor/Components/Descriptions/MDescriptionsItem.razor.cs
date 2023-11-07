@@ -6,7 +6,7 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IAsyncDisposa
 
     [Parameter, EditorRequired] public string Label { get; set; } = null!;
 
-    [Parameter, ApiDefaultValue(1)] public int Span { get; set; } = 1;
+    [Parameter, MassApiParameter(1)] public int Span { get; set; } = 1;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 

@@ -12,7 +12,7 @@
         public bool Bordered { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("primary")]
+        [MassApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]
@@ -37,7 +37,7 @@
         public bool Tile { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("scale-rotate-transition")]
+        [MassApiParameter("scale-rotate-transition")]
         public string Transition { get; set; } = "scale-rotate-transition";
 
         [Parameter]
