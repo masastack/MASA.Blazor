@@ -245,7 +245,7 @@ namespace Masa.Blazor
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            var keyCode = args.Code;
+            var keyCode = args.Key;
 
             if (args.CtrlKey || !new[] { KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
             {
