@@ -1,5 +1,15 @@
 # 升级指南
 
+## 从 v1.1.x 升级到 v1.2.0
+
+### 组件
+
+#### DataTable
+
+- `OnItemSelect` 的类型从 `Action<TItem, bool>` 改为了 `EventCallback<(TItem Item, bool Selected)>`。
+
+- 删除了 `FixedRight` 属性，现在可以通过Headers里的 `Fixed` 属性来设置列的固定位置。
+
 ## 从 v1.0.x 升级到 v1.1.0
 
 ### 组件
