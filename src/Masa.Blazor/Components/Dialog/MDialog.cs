@@ -9,7 +9,7 @@
         public string? ContentClass { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("center center")]
+        [MassApiParameter("center center")]
         public string Origin { get; set; } = "center center";
 
         [Parameter]
@@ -19,7 +19,7 @@
         public bool Scrollable { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("dialog-transition")]
+        [MassApiParameter("dialog-transition")]
         public string? Transition { get; set; } = "dialog-transition";
 
         public Dictionary<string, object> ContentAttrs

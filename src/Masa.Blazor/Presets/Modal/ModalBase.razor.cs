@@ -41,7 +41,7 @@ public partial class ModalBase
     [Parameter]
     public string? ContentStyle { get; set; }
 
-    [Parameter, ApiDefaultValue(100)]
+    [Parameter, MassApiParameter(100)]
     public int DebounceInterval { get; set; } = 100;
 
     [Parameter]
@@ -77,7 +77,7 @@ public partial class ModalBase
     [Parameter]
     public string? Title { get; set; }
 
-    [Parameter, ApiDefaultValue("dialog-transition")]
+    [Parameter, MassApiParameter("dialog-transition")]
     public string? Transition { get; set; } = "dialog-transition";
 
     [Parameter]

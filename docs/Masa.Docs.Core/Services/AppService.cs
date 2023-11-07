@@ -4,6 +4,8 @@ public class AppService
 {
     public const int AppBarHeight = 96;
     public const int MobileAppBarHeight = 64;
+    public const string ColorForNewState = "#05CD99";
+    public const string ColorForUpdateState = "#FF5252";
 
     private List<MarkdownItTocContent>? _toc;
 

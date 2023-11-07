@@ -49,7 +49,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         }
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task<string?> AddNodeAsync(
         string name,
         int inputs,
@@ -68,7 +68,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
                                    .ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task RemoveNodeAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
@@ -76,7 +76,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.RemoveNodeAsync(nodeId).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task<DrawflowNode<TData>?> GetNodeFromIdAsync<TData>(string nodeId)
     {
         if (_drawflowProxy == null) return null;
@@ -84,7 +84,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         return await _drawflowProxy.GetNodeFromIdAsync<TData>(nodeId).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task UpdateNodeDataAsync(string nodeId, object data)
     {
         if (_drawflowProxy == null) return;
@@ -92,7 +92,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.UpdateNodeDataAsync(nodeId, data).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task UpdateNodeHTMLAsync(string nodeId, string html)
     {
         if (_drawflowProxy == null) return;
@@ -100,7 +100,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.UpdateNodeHTMLAsync(nodeId, html).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task ClearAsync()
     {
         if (_drawflowProxy == null) return;
@@ -108,7 +108,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.ClearAsync().ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task ImportAsync(string json)
     {
         if (_drawflowProxy == null) return;
@@ -116,7 +116,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.ImportAsync(json).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task<string?> ExportAsync(bool indented = false)
     {
         if (_drawflowProxy == null) return null;
@@ -124,7 +124,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         return await _drawflowProxy.ExportAsync(indented).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task AddInputAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
@@ -132,7 +132,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.AddInputAsync(nodeId).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task AddOutputAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
@@ -140,7 +140,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.AddOutputAsync(nodeId).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task RemoveInputAsync(string nodeId, string inputClass)
     {
         if (_drawflowProxy == null) return;
@@ -148,7 +148,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.RemoveInputAsync(nodeId, inputClass).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task RemoveOutputAsync(string nodeId, string outputClass)
     {
         if (_drawflowProxy == null) return;
@@ -156,7 +156,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.RemoveOutputAsync(nodeId, outputClass).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task FocusNodeAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
@@ -164,7 +164,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.FocusNodeAsync(nodeId).ConfigureAwait(false);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task CenterNodeAsync(string nodeId, bool animate = true)
     {
         if (_drawflowProxy == null) return;

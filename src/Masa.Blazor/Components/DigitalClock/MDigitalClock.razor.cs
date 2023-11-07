@@ -31,7 +31,7 @@ public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
     [Parameter] public bool Disabled { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(TimeFormat.AmPm)]
+    [MassApiParameter(TimeFormat.AmPm)]
     public TimeFormat Format { get; set; } = TimeFormat.AmPm;
 
     [Parameter] public StringNumber? Height { get; set; }
@@ -40,14 +40,14 @@ public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
     /// The hour step (interval) of the time picker, only works when <see cref="MultiSection"/> is true.
     /// </summary>
     [Parameter]
-    [ApiDefaultValue(1)]
+    [MassApiParameter(1)]
     public int HourStep { get; set; } = 1;
 
     /// <summary>
     /// The minute step (interval) of the time picker, only works when <see cref="MultiSection"/> is true.
     /// </summary>
     [Parameter]
-    [ApiDefaultValue(1)]
+    [MassApiParameter(1)]
     public int MinuteStep { get; set; } = 1;
 
     [Parameter] public TimeOnly? Max { get; set; }
@@ -63,21 +63,21 @@ public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
     [Parameter] public bool Readonly { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MassApiParameter(true)]
     public bool Ripple { get; set; } = true;
 
     /// <summary>
     /// The second step (interval) of the time picker, only works when <see cref="MultiSection"/> is true.
     /// </summary>
     [Parameter]
-    [ApiDefaultValue(1)]
+    [MassApiParameter(1)]
     public int SecondStep { get; set; } = 1;
 
     /// <summary>
     /// The time step (interval) of the time picker, only works when <see cref="MultiSection"/> is false.
     /// </summary>
     [Parameter]
-    [ApiDefaultValue("TimeSpan.FromMinutes(30)")]
+    [MassApiParameter("TimeSpan.FromMinutes(30)")]
     public TimeSpan Step { get; set; } = TimeSpan.FromMinutes(30);
 
     /// <summary>

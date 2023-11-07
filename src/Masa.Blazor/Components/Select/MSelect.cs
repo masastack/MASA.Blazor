@@ -16,11 +16,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
-    [ApiDefaultValue("$dropdown")]
+    [MassApiParameter("$dropdown")]
     public override string? AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
-    [ApiDefaultValue(false)]
+    [MassApiParameter(false)]
     public StringBoolean? Attach { get; set; } = false;
 
     [Parameter]
@@ -45,7 +45,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     }
 
     [Parameter]
-    [ApiDefaultValue("primary")]
+    [MassApiParameter("primary")]
     public string ItemColor { get; set; } = "primary";
 
     [Parameter]

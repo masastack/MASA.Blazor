@@ -18,9 +18,9 @@ public partial class MLazy : IAsyncDisposable
 
     [Parameter] public StringNumber? Width { get; set; }
 
-    [Parameter] [ApiDefaultValue("div")] public string Tag { get; set; } = "div";
+    [Parameter] [MassApiParameter("div")] public string Tag { get; set; } = "div";
 
-    [Parameter, ApiDefaultValue(DefaultTransition)]
+    [Parameter, MassApiParameter(DefaultTransition)]
     public string Transition { get; set; } = DefaultTransition;
 
     /// <summary>

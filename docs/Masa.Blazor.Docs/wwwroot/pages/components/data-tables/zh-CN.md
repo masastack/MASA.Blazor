@@ -78,7 +78,7 @@ related:
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
-#### 固定列
+#### 固定列 {released-on=v1.2.0}
 
 使用 `Headers` 的 `Fixed` 属性可以固定列。
 
@@ -90,7 +90,7 @@ related:
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
 
-#### 调整大小
+#### 调整大小 {released-on=v1.0.4}
 
 使用 `ResizeMode` 属性可以调整列的大小。
 

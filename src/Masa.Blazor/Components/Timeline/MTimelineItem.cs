@@ -3,7 +3,7 @@
     public partial class MTimelineItem : BTimelineItem, IThemeable, ITimelineItem
     {
         [Parameter]
-        [ApiDefaultValue("primary")]
+        [MassApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]

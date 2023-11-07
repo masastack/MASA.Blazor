@@ -23,15 +23,15 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$ratingEmpty")]
+        [MassApiParameter("$ratingEmpty")]
         public string EmptyIcon { get; set; } = "$ratingEmpty";
 
         [Parameter]
-        [ApiDefaultValue("$ratingFull")]
+        [MassApiParameter("$ratingFull")]
         public string FullIcon { get; set; } = "$ratingFull";
 
         [Parameter]
-        [ApiDefaultValue("$ratingHalf")]
+        [MassApiParameter("$ratingHalf")]
         public string HalfIcon { get; set; } = "$ratingHalf";
 
         [Parameter]

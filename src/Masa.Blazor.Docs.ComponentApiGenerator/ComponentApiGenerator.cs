@@ -10,8 +10,8 @@ namespace Masa.Blazor.Docs.ApiGenerator;
 public class ComponentApiGenerator : IIncrementalGenerator
 {
     private const string BlazorParameterAttributeName = "ParameterAttribute";
-    private const string DefaultValueAttributeName = "ApiDefaultValueAttribute";
-    private const string PublicMethodAttributeName = "ApiPublicMethodAttribute";
+    private const string MassApiParameterAttributeName = "MasaApiParameterAttribute";
+    private const string MasaApiPublicMethodAttributeName = "MasaApiPublicMethodAttribute";
 
     private static Dictionary<string, string> s_typeDescCache = new();
 
@@ -103,12 +103,13 @@ public class ComponentApiGenerator : IIncrementalGenerator
         var contentParameters = new List<ParameterInfo>();
         var eventParameters = new List<ParameterInfo>();
         var publicMethods = new List<ParameterInfo>();
+        var ignoreParameters = new List<string>();
 
         // TODO: 需要继承自 ComponentBase
 
         while (declaredSymbol is not null)
         {
-            AnalyzeParameters(declaredSymbol, defaultParameters, contentParameters, eventParameters, publicMethods);
+            AnalyzeParameters(declaredSymbol, defaultParameters, contentParameters, eventParameters, publicMethods, ignoreParameters);
 
             // BaseType could be null if the blazor component only has a razor file but no cs file.
             // So need to add a empty cs file the blazor component.
@@ -127,7 +128,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
     }
 
     private static void AnalyzeParameters(INamedTypeSymbol classSymbol, List<ParameterInfo> defaultParameters, List<ParameterInfo> contentParameters,
-        List<ParameterInfo> eventParameters, List<ParameterInfo> publicMethods)
+        List<ParameterInfo> eventParameters, List<ParameterInfo> publicMethods, List<string> ignoreParameters)
     {
         var members = classSymbol.GetMembers();
 
@@ -141,37 +142,32 @@ public class ComponentApiGenerator : IIncrementalGenerator
             if (member is IPropertySymbol parameterSymbol)
             {
                 var attrs = parameterSymbol.GetAttributes();
+                
+                var apiParameterAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == MassApiParameterAttributeName);
+                if (apiParameterAttribute is not null)
+                {
+                    if (IsIgnoredParameter(apiParameterAttribute))
+                    {
+                        ignoreParameters.Add(parameterSymbol.Name);
+                        continue;
+                    }
+                }
+                
                 if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
                 {
                     var type = parameterSymbol.Type as INamedTypeSymbol;
-                    if (type is null)
+                    if (type is null || ignoreParameters.Contains(parameterSymbol.Name))
                     {
                         continue;
                     }
 
                     string? defaultValue = null;
+                    string? releasedOn = null;
 
-                    var defaultValueAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == DefaultValueAttributeName);
-                    if (defaultValueAttribute is not null)
+                    if (apiParameterAttribute is not null)
                     {
-                        var typeConstant = defaultValueAttribute.ConstructorArguments.First();
-                        if (typeConstant.Kind == TypedConstantKind.Enum && !typeConstant.IsNull && typeConstant.Type != null)
-                        {
-                            var str = typeConstant.Value?.ToString();
-
-                            if (int.TryParse(str, out var index))
-                            {
-                                defaultValue = typeConstant.Type.GetMembers()[index].Name;
-                            }
-                            else
-                            {
-                                defaultValue = str;
-                            }
-                        }
-                        else
-                        {
-                            defaultValue = typeConstant.Value?.ToString();
-                        }
+                        releasedOn = GetReleasedOnOnApiParameterAttribute(apiParameterAttribute);
+                        defaultValue = GetDefaultValueOnApiParameterAttribute(apiParameterAttribute);
                     }
 
                     var typeText = GetTypeText(type);
@@ -187,7 +183,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
 
                     var isObsolete = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == "ObsoleteAttribute") is not null;
 
-                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete);
+                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete, false, releasedOn);
 
                     if (type.Name.StartsWith("RenderFragment"))
                     {
@@ -206,7 +202,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
             else if (member is IMethodSymbol methodSymbol)
             {
                 var attrs = methodSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass?.Name == PublicMethodAttributeName))
+                if (attrs.Any(attr => attr.AttributeClass?.Name == MasaApiPublicMethodAttributeName))
                 {
                     var args = methodSymbol.Parameters.Select(p => $"{GetTypeText(p.Type as INamedTypeSymbol)} {p.Name}");
                     var returnType = GetTypeText(methodSymbol.ReturnType as INamedTypeSymbol);
@@ -363,6 +359,58 @@ public class ComponentApiGenerator : IIncrementalGenerator
     private static bool IsIgnoreProp(string name)
     {
         return new[] { "Attributes", "RefBack" }.Contains(name);
+    }
+
+    private static string? GetDefaultValueOnApiParameterAttribute(AttributeData apiParameterAttributeData)
+    {
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "DefaultValue").Value;
+
+        if (typedConstant.IsNull)
+        {
+            typedConstant = apiParameterAttributeData.ConstructorArguments.FirstOrDefault();
+        }
+
+        if (typedConstant.IsNull)
+        {
+            return null;
+        }
+
+        if (typedConstant is { Kind: TypedConstantKind.Enum, Type: not null })
+        {
+            var str = typedConstant.Value?.ToString();
+
+            if (int.TryParse(str, out var index))
+            {
+                return typedConstant.Type.GetMembers()[index].Name;
+            }
+
+            return str;
+        }
+
+        return typedConstant.Value?.ToString();
+    }
+
+    private static string? GetReleasedOnOnApiParameterAttribute(AttributeData apiParameterAttributeData)
+    {
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedOn").Value;
+
+        if (typedConstant.IsNull)
+        {
+            typedConstant = apiParameterAttributeData.ConstructorArguments.ElementAtOrDefault(1);
+        }
+
+        if (typedConstant.IsNull)
+        {
+            return null;
+        }
+
+        return typedConstant.Value?.ToString();
+    }
+
+    private static bool IsIgnoredParameter(AttributeData apiParameterAttributeData)
+    {
+        var ignoredArgument = apiParameterAttributeData.NamedArguments.FirstOrDefault(n => n.Key == "Ignored");
+        return ignoredArgument.Key is not null && ignoredArgument.Value.Value is true;
     }
 }
 

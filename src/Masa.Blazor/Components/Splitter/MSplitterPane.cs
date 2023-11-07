@@ -12,7 +12,7 @@ public partial class MSplitterPane : IComponent, IAsyncDisposable
 
     [Parameter] public double Size { get; set; }
 
-    [Parameter] [ApiDefaultValue(100)] public double Max { get; set; } = 100;
+    [Parameter] [MassApiParameter(100)] public double Max { get; set; } = 100;
 
     [Parameter] public double Min { get; set; }
 

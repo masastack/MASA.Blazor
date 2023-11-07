@@ -33,7 +33,7 @@ namespace Masa.Blazor.Docs
                 TypeDesc = @""{item.TypeDesc}"",
                 DefaultValue = ""{item.DefaultValue}"",
                 Required = {item.Required.ToString().ToLower()},
-                IsObsolete = {item.IsObsolete.ToString().ToLower()},
+                IsObsolete = {item.IsObsolete.ToString().ToLower()}
             }});");
             }
 

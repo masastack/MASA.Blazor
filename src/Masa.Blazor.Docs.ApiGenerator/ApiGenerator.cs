@@ -10,9 +10,8 @@ namespace Masa.Blazor.Docs.ApiGenerator;
 public class ApiGenerator : IIncrementalGenerator
 {
     private const string BlazorParameterAttributeName = "ParameterAttribute";
-    private const string DefaultValueAttributeName = "ApiDefaultValueAttribute";
-    private const string PublicMethodAttributeName = "ApiPublicMethodAttribute";
-    private const string IgnoredParameterAttributeName = "ApiIgnoredParameterAttribute";
+    private const string MassApiParameterAttributeName = "MassApiParameterAttribute";
+    private const string MasaApiPublicMethodAttributeName = "MasaApiPublicMethodAttribute";
 
     private static Dictionary<string, string> s_typeDescCache = new();
 
@@ -91,6 +90,8 @@ public class ApiGenerator : IIncrementalGenerator
         public bool Required {{ get; set; }}
 
         public bool IsObsolete {{ get; set; }}
+
+        public string? ReleasedOn {{ get; set; }}
     }}
 }}");
 
@@ -162,11 +163,18 @@ public class ApiGenerator : IIncrementalGenerator
             if (member is IPropertySymbol parameterSymbol)
             {
                 var attrs = parameterSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass?.Name == IgnoredParameterAttributeName))
+
+                var apiParameterAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == MassApiParameterAttributeName);
+                if (apiParameterAttribute is not null)
                 {
-                    ignoreParameters.Add(parameterSymbol.Name);
+                    if (IsIgnoredParameter(apiParameterAttribute))
+                    {
+                        ignoreParameters.Add(parameterSymbol.Name);
+                        continue;
+                    }
                 }
-                else if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
+
+                if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
                 {
                     var type = parameterSymbol.Type as INamedTypeSymbol;
                     if (type is null || ignoreParameters.Contains(parameterSymbol.Name))
@@ -175,28 +183,12 @@ public class ApiGenerator : IIncrementalGenerator
                     }
 
                     string? defaultValue = null;
+                    string? releasedOn = null;
 
-                    var defaultValueAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == DefaultValueAttributeName);
-                    if (defaultValueAttribute is not null)
+                    if (apiParameterAttribute is not null)
                     {
-                        var typeConstant = defaultValueAttribute.ConstructorArguments.First();
-                        if (typeConstant.Kind == TypedConstantKind.Enum && !typeConstant.IsNull && typeConstant.Type != null)
-                        {
-                            var str = typeConstant.Value?.ToString();
-
-                            if (int.TryParse(str, out var index))
-                            {
-                                defaultValue = typeConstant.Type.GetMembers()[index].Name;
-                            }
-                            else
-                            {
-                                defaultValue = str;
-                            }
-                        }
-                        else
-                        {
-                            defaultValue = typeConstant.Value?.ToString();
-                        }
+                        releasedOn = GetReleasedOnOnApiParameterAttribute(apiParameterAttribute);
+                        defaultValue = GetDefaultValueOnApiParameterAttribute(apiParameterAttribute);
                     }
 
                     var typeText = GetTypeText(type);
@@ -212,7 +204,7 @@ public class ApiGenerator : IIncrementalGenerator
 
                     var isObsolete = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == "ObsoleteAttribute") is not null;
 
-                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete);
+                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete, false, releasedOn);
 
                     if (type.Name.StartsWith("RenderFragment"))
                     {
@@ -231,7 +223,7 @@ public class ApiGenerator : IIncrementalGenerator
             else if (member is IMethodSymbol methodSymbol)
             {
                 var attrs = methodSymbol.GetAttributes();
-                if (attrs.Any(attr => attr.AttributeClass?.Name == PublicMethodAttributeName))
+                if (attrs.Any(attr => attr.AttributeClass?.Name == MasaApiPublicMethodAttributeName))
                 {
                     var args = methodSymbol.Parameters.Select(p => $"{GetTypeText(p.Type as INamedTypeSymbol)} {p.Name}");
                     var returnType = GetTypeText(methodSymbol.ReturnType as INamedTypeSymbol);
@@ -388,5 +380,57 @@ public class ApiGenerator : IIncrementalGenerator
     private static bool IsIgnoreProp(string name)
     {
         return new[] { "Attributes", "RefBack" }.Contains(name);
+    }
+
+    private static string? GetDefaultValueOnApiParameterAttribute(AttributeData apiParameterAttributeData)
+    {
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "DefaultValue").Value;
+
+        if (typedConstant.IsNull)
+        {
+            typedConstant = apiParameterAttributeData.ConstructorArguments.FirstOrDefault();
+        }
+
+        if (typedConstant.IsNull)
+        {
+            return null;
+        }
+
+        if (typedConstant is { Kind: TypedConstantKind.Enum, Type: not null })
+        {
+            var str = typedConstant.Value?.ToString();
+
+            if (int.TryParse(str, out var index))
+            {
+                return typedConstant.Type.GetMembers()[index].Name;
+            }
+
+            return str;
+        }
+
+        return typedConstant.Value?.ToString();
+    }
+
+    private static string? GetReleasedOnOnApiParameterAttribute(AttributeData apiParameterAttributeData)
+    {
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedOn").Value;
+
+        if (typedConstant.IsNull)
+        {
+            typedConstant = apiParameterAttributeData.ConstructorArguments.ElementAtOrDefault(1);
+        }
+
+        if (typedConstant.IsNull)
+        {
+            return null;
+        }
+
+        return typedConstant.Value?.ToString();
+    }
+
+    private static bool IsIgnoredParameter(AttributeData apiParameterAttributeData)
+    {
+        var ignoredArgument = apiParameterAttributeData.NamedArguments.FirstOrDefault(n => n.Key == "Ignored");
+        return ignoredArgument.Key is not null && ignoredArgument.Value.Value is true;
     }
 }

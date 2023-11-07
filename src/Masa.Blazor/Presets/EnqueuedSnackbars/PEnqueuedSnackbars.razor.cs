@@ -5,15 +5,15 @@ namespace Masa.Blazor.Presets
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
         [Parameter]
-        [ApiDefaultValue(SnackPosition.BottomCenter)]
+        [MassApiParameter(SnackPosition.BottomCenter)]
         public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
 
         [Parameter]
-        [ApiDefaultValue(DEFAULT_MAX_COUNT)]
+        [MassApiParameter(DEFAULT_MAX_COUNT)]
         public int MaxCount { get; set; } = DEFAULT_MAX_COUNT;
 
         [Parameter]
-        [ApiDefaultValue(DEFAULT_MAX_WIDTH)]
+        [MassApiParameter(DEFAULT_MAX_WIDTH)]
         public StringNumber MaxWidth { get; set; } = DEFAULT_MAX_WIDTH;
 
         [Parameter]

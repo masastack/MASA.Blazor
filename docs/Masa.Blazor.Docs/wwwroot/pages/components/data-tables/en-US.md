@@ -87,7 +87,7 @@ The data table exposes a `Search` prop that allows you to filter your data.
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
-#### Fixed
+#### Fixed {released-on=v1.2.0}
 
 Fixed columns using the `Fixed` prop in the **Headers** array.
 
@@ -99,7 +99,7 @@ Striped table.
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
 
-#### Resize mode
+#### Resize mode {released-on=v1.0.4}
 
 Using the `ResizeMode` prop you can allow users to resize columns.
 

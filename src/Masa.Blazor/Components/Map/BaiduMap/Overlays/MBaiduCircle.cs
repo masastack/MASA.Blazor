@@ -5,7 +5,7 @@ namespace Masa.Blazor
     public class MBaiduCircle : BaiduOverlayBase, ICircle, IStroke, IFillable
     {
         [Parameter]
-        [ApiDefaultValue("116.403, 39.917")]
+        [MassApiParameter("116.403, 39.917")]
         public GeoPoint Center
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));
@@ -27,7 +27,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(0.9f)]
+        [MassApiParameter(0.9f)]
         public float StrokeOpacity
         {
             get => GetValue(0.9f);
@@ -35,7 +35,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(2f)]
+        [MassApiParameter(2f)]
         public float StrokeWeight
         {
             get => GetValue(2f);
@@ -43,7 +43,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(StrokeStyle.Solid)]
+        [MassApiParameter(StrokeStyle.Solid)]
         public StrokeStyle StrokeStyle
         {
             get => GetValue(StrokeStyle.Solid);
@@ -58,7 +58,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(0.3f)]
+        [MassApiParameter(0.3f)]
         public float FillOpacity
         {
             get => GetValue(0.3f);
