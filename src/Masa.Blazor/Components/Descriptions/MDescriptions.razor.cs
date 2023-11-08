@@ -227,7 +227,14 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             return;
         }
 
-        await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
+        try
+        {
+            await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
+        }
+        catch
+        {
+            // ignore 'System.Threading.Tasks.TaskCanceledException: A task was canceled'
+        }
     }
 
     internal void UpdateChild(IDescriptionsItem descriptionsItem)
