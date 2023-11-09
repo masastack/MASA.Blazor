@@ -85,7 +85,7 @@ public partial class MSplitter
 
         _panes.Add(pane);
 
-        await _delayTask.Run(() =>
+        await _delayTask.RunAsync(() =>
         {
             InitialPanesSizing();
 
@@ -102,7 +102,7 @@ public partial class MSplitter
             return;
         }
 
-        await _delayTask.Run(() =>
+        await _delayTask.RunAsync(() =>
         {
             for (var i = 0; i < _panes.Count; i++)
             {

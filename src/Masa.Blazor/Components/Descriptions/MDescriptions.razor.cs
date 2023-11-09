@@ -215,7 +215,14 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
     internal async Task Register(IDescriptionsItem descriptionsItem)
     {
         _descriptionItems.Add(descriptionsItem);
-        await _registerDelayTask.Run(InvokeStateHasChangedAsync);
+
+        _registerDelayTask.Reset();
+        await _registerDelayTask.RunAsync(async () =>
+        {
+            Console.Out.WriteLine("Register = {0}", descriptionsItem.Label);
+            await InvokeStateHasChangedAsync();
+        });
+        
     }
 
     internal async Task Unregister(IDescriptionsItem descriptionsItem)
@@ -227,14 +234,27 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             return;
         }
 
-        try
-        {
-            await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
-        }
-        catch
-        {
-            // ignore 'System.Threading.Tasks.TaskCanceledException: A task was canceled'
-        }
+        // try
+        // {
+        //     await _unregisterDelayTask.Run(() =>
+        //     {
+        //         try
+        //         {
+        //             Console.Out.WriteLine("Unregister = {0}", descriptionsItem.GetHashCode());
+        //             return InvokeAsync(StateHasChanged);
+        //         }
+        //         catch (Exception e)
+        //         {
+        //             Console.WriteLine(e);
+        //             throw;
+        //         }
+        //     });
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine(e);
+        //     throw;
+        // }
     }
 
     internal void UpdateChild(IDescriptionsItem descriptionsItem)

@@ -45,19 +45,22 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IAsyncDisposa
 
         if (_renderFromAncestor)
         {
+            Console.Out.WriteLine($"{this.Label} _renderFromAncestor = false");
             _renderFromAncestor = false;
             return;
         }
 
         if (_registered)
         {
-            Descriptions?.UpdateChild(this);
+            Console.Out.WriteLine($"{this.Label} UpdateChild");
+            // Descriptions?.UpdateChild(this);
         }
     }
 
     // inherit
     public void RenderFromAncestor()
     {
+        Console.Out.WriteLine($"{this.Label} _renderFromAncestor = true");
         _renderFromAncestor = true;
     }
 
