@@ -1,37 +1,49 @@
 ﻿@page "/"
+@using System.Reflection.Emit
 
 <h1>Test your code here!</h1>
 
-<MSplitter Style="height: 300px">
-    <ChildContent>
-        <MSplitterPane Class="grey lighten-4">
-            Left
-        </MSplitterPane>
-        <MSplitterPane>
-            <MSplitter Row>
-                <ChildContent>
-                    <MSplitterPane Class="blue lighten-5">
-                        Top
-                    </MSplitterPane>
-                    <MSplitterPane Class="blue lighten-5">
-                        Middle
-                    </MSplitterPane>
-                    <MSplitterPane Class="blue lighten-5">
-                        Bottom
-                    </MSplitterPane>
-                </ChildContent>
-                <BarContent>
-                    <barcontent>
-                        <MIcon Small>mdi-drag-horizontal</MIcon>
-                    </barcontent>
-                </BarContent>
-            </MSplitter>
-        </MSplitterPane>
-        <MSplitterPane Class="grey lighten-4 ">
-            Right
-        </MSplitterPane>
-    </ChildContent>
-    <BarContent>
-        <MIcon Small>mdi-drag-vertical</MIcon>
-    </BarContent>
-</MSplitter>
+<MDescriptions>
+    @foreach (var item in Labels)
+    {
+        <MDescriptionsItem Label="@item">
+            Content for @item
+        </MDescriptionsItem>
+    }
+</MDescriptions>
+
+<MButton OnClick="OnClick">Update</MButton>
+<MButton OnClick="OnClick2">Remove</MButton>
+<MButton OnClick="OnClick3">222222</MButton>
+
+@code {
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        Console.Out.WriteLine("STATE HAS CHANGED");
+    }
+
+    private List<string> Labels = new List<string>() { "Label 1", "Label 2", "Label 3", "Label 4", "Label 5", "Label 6" };
+
+    private string label2 = "label 2";
+
+
+    private void OnClick()
+    {
+        Labels.Add(DateTime.Now.ToString());
+    }
+
+
+    private void OnClick2()
+    {
+        Labels.Remove(Labels.ElementAt(1));
+    }
+
+    private void OnClick3()
+    {
+        Labels[1] = "123123123";
+        Console.Out.WriteLine("Set label 2 = 123123123");
+    }
+}

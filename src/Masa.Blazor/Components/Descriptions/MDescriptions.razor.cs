@@ -6,7 +6,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
-    [Parameter] [MassApiParameter(ReleasedOn = "v1.1.1")] public bool AlignCenter { get; set; }
+    [Parameter] [MassApiParameter(ReleasedOn = "v1.1.1")]
+    public bool AlignCenter { get; set; }
 
     [Parameter, MassApiParameter(true)] public bool Colon { get; set; } = true;
 
@@ -48,9 +49,10 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [Parameter] public bool Light { get; set; }
 
-    private readonly DelayTask _registerDelayTask = new();
-    private readonly DelayTask _unregisterDelayTask = new();
     private readonly List<IDescriptionsItem> _descriptionItems = new();
+
+    private CancellationTokenSource _ctsForRegister = new();
+    private CancellationTokenSource _ctsForUnregister = new();
 
     public bool IsDark
     {
@@ -187,6 +189,33 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_descriptionItems.Count > 1)
+        {
+            Console.Out.WriteLine(_descriptionItems[1].Label);
+        }
+    }
+
+    // TODO: explain why this is needed
+    private bool extraRender = true;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (extraRender)
+        {
+            extraRender = false;
+            StateHasChanged();
+        }
+        else
+        {
+            extraRender = true;
+        }
+    }
+
     private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
         await InvokeStateHasChangedAsync();
@@ -216,14 +245,21 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
     {
         _descriptionItems.Add(descriptionsItem);
 
-        _registerDelayTask.Reset();
-        await _registerDelayTask.RunAsync(async () =>
+        _ctsForRegister.Cancel();
+        _ctsForRegister = new CancellationTokenSource();
+
+        try
         {
-            Console.Out.WriteLine("Register = {0}", descriptionsItem.Label);
-            await InvokeStateHasChangedAsync();
-        });
-        
+            await Task.Delay(300, _ctsForRegister.Token);
+            Logger.LogInformation($"invoke state has changed {descriptionsItem.Label}");
+            StateHasChanged();
+        }
+        catch (TaskCanceledException)
+        {
+            // ignored
+        }
     }
+
 
     internal async Task Unregister(IDescriptionsItem descriptionsItem)
     {
@@ -234,39 +270,29 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             return;
         }
 
-        // try
-        // {
-        //     await _unregisterDelayTask.Run(() =>
-        //     {
-        //         try
-        //         {
-        //             Console.Out.WriteLine("Unregister = {0}", descriptionsItem.GetHashCode());
-        //             return InvokeAsync(StateHasChanged);
-        //         }
-        //         catch (Exception e)
-        //         {
-        //             Console.WriteLine(e);
-        //             throw;
-        //         }
-        //     });
-        // }
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine(e);
-        //     throw;
-        // }
-    }
+        _ctsForUnregister.Cancel();
+        _ctsForUnregister = new CancellationTokenSource();
 
-    internal void UpdateChild(IDescriptionsItem descriptionsItem)
-    {
-        var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
-        if (item != null)
+        try
         {
-            item = descriptionsItem;
-            descriptionsItem.RenderFromAncestor();
+            await Task.Delay(300, _ctsForUnregister.Token);
             StateHasChanged();
         }
+        catch (TaskCanceledException)
+        {
+            // ignored
+        }
     }
+
+    // internal void UpdateChild(IDescriptionsItem descriptionsItem, int id)
+    // {
+    //     var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
+    //     if (item != null)
+    //     {
+    //         item = descriptionsItem;
+    //         StateHasChanged();
+    //     }
+    // }
 
     protected override void Dispose(bool disposing)
     {

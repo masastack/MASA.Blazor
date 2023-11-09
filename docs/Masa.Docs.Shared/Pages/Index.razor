@@ -156,7 +156,7 @@
         "1.0",
     };
 
-    private readonly DelayTask _delayTask = new();
+    private readonly DebounceTask _debounceTask = new();
 
     private string _selectVersion = "1.0";
 
@@ -231,10 +231,8 @@
         if (e.IsIntersecting)
         {
             _activeHash = hash;
-            await _delayTask.Run(async () =>
-            {
-                await InvokeAsync(StateHasChanged);
-            });
+            _debounceTask.Reset();
+            await _debounceTask.RunAsync(() => InvokeAsync(StateHasChanged));
         }
     }
 

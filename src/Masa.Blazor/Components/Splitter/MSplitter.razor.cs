@@ -19,7 +19,7 @@ public partial class MSplitter
 
     [Parameter] public bool Row { get; set; }
 
-    private readonly DelayTask _delayTask = new();
+    private readonly DebounceTask _debounceTask = new();
     private readonly Collection<MSplitterPane> _panes = new();
 
     private BoundingClientRect? _containerRect;
@@ -85,7 +85,8 @@ public partial class MSplitter
 
         _panes.Add(pane);
 
-        await _delayTask.RunAsync(() =>
+        _debounceTask.Reset();
+        await _debounceTask.RunAsync(() =>
         {
             InitialPanesSizing();
 
@@ -102,7 +103,8 @@ public partial class MSplitter
             return;
         }
 
-        await _delayTask.RunAsync(() =>
+        _debounceTask.Reset();
+        await _debounceTask.RunAsync(() =>
         {
             for (var i = 0; i < _panes.Count; i++)
             {
