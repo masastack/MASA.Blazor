@@ -11,10 +11,10 @@
         [Parameter]
         public string? ActiveClass { get; set; }
 
-        [Parameter, ApiDefaultValue("accent")]
+        [Parameter, MassApiParameter("accent")]
         public string? SelectedColor { get; set; } = "accent";
 
-        [Parameter, ApiDefaultValue("primary")]
+        [Parameter, MassApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         protected override void SetComponentClass()

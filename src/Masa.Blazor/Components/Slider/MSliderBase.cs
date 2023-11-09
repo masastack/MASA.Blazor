@@ -24,21 +24,21 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public bool Vertical { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(100)]
+    [MassApiParameter(100)]
     public double Max { get; set; } = 100;
 
     [Parameter]
     public double Min { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(1)]
+    [MassApiParameter(1)]
     public TNumeric Step { get; set; } = (TNumeric)(dynamic)1;
 
     [Parameter]
     public List<string> TickLabels { get; set; } = new();
 
     [Parameter]
-    [ApiDefaultValue(false)]
+    [MassApiParameter(false)]
     public StringBoolean Ticks { get; set; } = false;
 
     [Parameter]
@@ -48,7 +48,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public string? TrackFillColor { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(2)]
+    [MassApiParameter(2)]
     public double TickSize { get; set; } = 2;
 
     [Parameter]
@@ -57,16 +57,18 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     [Parameter]
     public RenderFragment<TNumeric>? ThumbLabelContent { get; set; }
 
-    [ApiIgnoredParameter]
+    [MassApiParameter(Ignored = true)]
     public override EventCallback<MouseEventArgs> OnMouseDown { get; set; }
 
-    [ApiIgnoredParameter]
+    [MassApiParameter(Ignored = true)]
     public override EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
     [Parameter]
+    [MassApiParameter(ReleasedOn = "v1.1.1")]
     public EventCallback<TValue> OnStart { get; set; }
 
     [Parameter]
+    [MassApiParameter(ReleasedOn = "v1.1.1")]
     public EventCallback<TValue> OnEnd { get; set; }
 
     protected virtual double GetRoundedValue(int index)
@@ -100,7 +102,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public string? ThumbColor { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(32)]
+    [MassApiParameter(32)]
     public StringNumber ThumbSize { get; set; } = 32;
 
     [Parameter]
@@ -113,7 +115,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public bool InverseLabel { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(2)]
+    [MassApiParameter(2)]
     public StringNumber LoaderHeight { get; set; } = 2;
 
     [Parameter]
@@ -680,32 +682,49 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     {
         if (!IsInteractive) return null;
 
-        var keyCodes = new[] { "pageup", "pagedown", "end", "home", "left", "right", "down", "up" };
-        var directionCodes = new[] { "left", "right", "down", "up" };
+        var keyCodes = new[]
+        {
+            KeyCodes.PageUp,
+            KeyCodes.PageDown,
+            KeyCodes.End,
+            KeyCodes.Home,
+            KeyCodes.ArrowLeft,
+            KeyCodes.ArrowRight,
+            KeyCodes.ArrowDown,
+            KeyCodes.ArrowUp
+        };
 
-        if (!keyCodes.Contains(args.Code)) return null;
+        var directionCodes = new[]
+        {
+            KeyCodes.ArrowLeft,
+            KeyCodes.ArrowRight,
+            KeyCodes.ArrowDown,
+            KeyCodes.ArrowUp,
+        };
+
+        if (!keyCodes.Contains(args.Key)) return null;
 
         var step = StepNumeric == 0 ? 1 : StepNumeric;
         var steps = Max - Min / step;
-        if (directionCodes.Contains(args.Code))
+        if (directionCodes.Contains(args.Key))
         {
-            var increase = MasaBlazor.RTL ? new[] { "left", "up" } : new[] { "right", "up" };
-            var direction = increase.Contains(args.Code) ? 1 : -1;
+            var increase = MasaBlazor.RTL ? new[] { KeyCodes.ArrowLeft, KeyCodes.ArrowUp } : new[] { KeyCodes.ArrowRight, KeyCodes.ArrowUp };
+            var direction = increase.Contains(args.Key) ? 1 : -1;
             var multiplier = args.ShiftKey ? 3 : (args.CtrlKey ? 2 : 1);
 
             value += (direction * step * multiplier);
         }
-        else if (args.Code == "home")
+        else if (args.Key == KeyCodes.Home)
         {
             value = Min;
         }
-        else if (args.Code == "end")
+        else if (args.Key == KeyCodes.End)
         {
             value = Max;
         }
         else
         {
-            var direction = args.Code == "pagedown" ? 1 : -1;
+            var direction = args.Key == KeyCodes.PageDown ? 1 : -1;
             value = value - (direction * step * (steps > 100 ? steps / 10 : 10));
         }
 

@@ -3,7 +3,7 @@
     public class MRadioGroup<TValue> : MInput<TValue>, IRadioGroup<TValue>
     {
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MassApiParameter(true)]
         public bool Column { get; set; } = true;
 
         [Parameter]

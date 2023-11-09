@@ -9,14 +9,14 @@ namespace Masa.Blazor
         private Func<TItem, string, string, bool>? _filter;
 
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MassApiParameter(true)]
         public bool AllowOverflow { get; set; } = true;
 
         [Parameter]
         public bool AutoSelectFirst { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("(item, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1")]
+        [MassApiParameter("(item, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1")]
         public Func<TItem, string, string, bool> Filter
         {
             get { return _filter ??= (_, query, text) => text.IndexOf(query, StringComparison.OrdinalIgnoreCase) > -1; }
@@ -245,7 +245,7 @@ namespace Masa.Blazor
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            var keyCode = args.Code;
+            var keyCode = args.Key;
 
             if (args.CtrlKey || !new[] { KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
             {

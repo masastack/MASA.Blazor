@@ -17,12 +17,16 @@
     }
 </MListItemContent>
 
-@if (Item?.State is not null)
+@if (!string.IsNullOrWhiteSpace(Item?.ReleasedOn))
+{
+    <MChip Class="px-2" Color="@AppService.ColorForNewState" Outlined Small>@Item.ReleasedOn</MChip>
+}
+else if (Item?.State is not null)
 {
     var color = GetColor(Item.State);
     if (Item!.HasChildren())
     {
-        <MChip Style="height: 20px" Class="px-1" Color="@color" TextColor="white" Small>@I18n.T($"state.{Item.State}")</MChip>
+        <MIcon Color="@color">mdi-circle-medium</MIcon>
     }
     else if (color is null)
     {
@@ -30,7 +34,7 @@
     }
     else
     {
-        <MIcon Size="12" Color="@color">mdi-circle</MIcon>
+        <MChip Class="px-2" Color="@color" Outlined Small>@I18n.T($"state.{Item.State}")</MChip>
     }
 }
 
@@ -38,16 +42,15 @@
 
     [Parameter, EditorRequired]
     public TItem? Item { get; set; }
-    
-    private readonly Dictionary<string, string> _stateColors = new()
-    {
-        { "new", "#05CD99" },
-        { "update", "#FF5252" }
-    };
 
     string? GetColor(string state)
     {
-        return _stateColors.TryGetValue(state, out var color) ? color : null;
+        return state switch
+        {
+            "new"    => AppService.ColorForNewState,
+            "update" => AppService.ColorForUpdateState,
+            _        => null
+        };
     }
 
     string? GetSubtitle(string? title)

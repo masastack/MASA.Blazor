@@ -25,7 +25,7 @@ namespace Masa.Blazor
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(ErrorPopupType.Snackbar)]
+        [MassApiParameter(ErrorPopupType.Snackbar)]
         public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Snackbar;
 
         /// <summary>

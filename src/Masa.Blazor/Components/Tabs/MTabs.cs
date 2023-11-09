@@ -1,12 +1,12 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MTabs : BTabs, IThemeable
+    public partial class MTabs : BTabs, IThemeable, IAsyncDisposable
     {
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [CascadingParameter(Name = "FirstBoot")]
-        private bool FirstBoot { get; set; }
+        [Inject]
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Parameter]
         public string? ActiveClass { get; set; }
@@ -43,18 +43,16 @@
 
         protected override bool RTL => MasaBlazor.RTL;
 
-        private bool _firstBootHandled = false;
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            if (FirstBoot && !_firstBootHandled)
+
+            if (firstRender)
             {
-                _firstBootHandled = true;
-                await CallSlider();
+                await IntersectJSModule.ObserverAsync(Ref, OnIntersectAsync);
             }
         }
-
+        
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -108,6 +106,30 @@
                 .Apply<BTab, MTab>()
                 .Apply<BWindow, MTabsItems>()
                 .Apply<BWindowItem, MTabItem>();
+        }
+
+        private async Task OnIntersectAsync(IntersectEventArgs e)
+        {
+            if (e.IsIntersecting)
+            {
+                await InvokeAsync(CallSlider);
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                await IntersectJSModule.UnobserveAsync(Ref);
+            }
+            catch (JSDisconnectedException)
+            {
+                // ignore
+            }
+            catch (InvalidOperationException)
+            {
+                // ignore
+            }
         }
     }
 }

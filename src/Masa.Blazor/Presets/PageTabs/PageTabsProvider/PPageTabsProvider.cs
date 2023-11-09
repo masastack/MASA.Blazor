@@ -21,7 +21,7 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
         PathTitles.Clear();
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void UpdateTabTitle(string absolutePath, Func<string?> titleFunc)
     {
         PathTitles[absolutePath] = titleFunc;
@@ -29,7 +29,7 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
         TabTitleChanged?.Invoke(this, absolutePath);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void UpdateTabTitle(string absolutePath, string? title) 
         => UpdateTabTitle(absolutePath, () => title);
 

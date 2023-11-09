@@ -13,8 +13,11 @@ namespace Masa.Blazor
         [Parameter]
         public bool FixedHeader { get; set; }
 
+        /// <summary>
+        /// TODO: internal use?
+        /// </summary>
         [Parameter]
-        public bool FixedRight { get; set; }
+        public bool HasFixed { get; set; }
 
         [Parameter]
         public StringNumber? Height { get; set; }
@@ -27,7 +30,7 @@ namespace Masa.Blazor
 
         public ElementReference WrapperElement { get; set; }
 
-        protected bool ScrollerOnRight { get; set; }
+        private int _scrollState;
 
         protected override void SetComponentClass()
         {
@@ -47,9 +50,9 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-data-table__wrapper")
-                        //REVIEW:Is this class name ok?
-                        .AddIf("fixed-right", () => FixedRight)
-                        .AddIf("not-scroll-right", () => FixedRight && !ScrollerOnRight);
+                        .AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
+                        .AddIf("scrolling", () => HasFixed && _scrollState == 1)
+                        .AddIf("scrolled-to-right", () => HasFixed && _scrollState == 2);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -78,20 +81,25 @@ namespace Masa.Blazor
 
         public async Task HandleOnScrollAsync(EventArgs args)
         {
-            if (FixedRight)
+            if (!HasFixed)
             {
-                var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (element != null && element.ScrollWidth == (MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)
+                return;
+            }
+
+            var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
+            if (element != null)
+            {
+                if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < 0.01)
                 {
-                    ScrollerOnRight = true;
+                    _scrollState = 2;
+                }
+                else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < 0.01)
+                {
+                    _scrollState = 0;
                 }
                 else
                 {
-                    if (ScrollerOnRight)
-                    {
-                        ScrollerOnRight = false;
-                    }
+                    _scrollState = 1;
                 }
             }
         }

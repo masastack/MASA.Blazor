@@ -49,7 +49,7 @@
   "methods": "Methods",
   "state": {
     "new": "NEW",
-    "pwd": "PWD"
+    "update": "UPDATE"
   },
   "tag": {
     "preset": "Preset",

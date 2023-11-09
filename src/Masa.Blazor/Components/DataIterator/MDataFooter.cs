@@ -8,7 +8,7 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.itemsPerPageText")]
+        [Parameter, MassApiParameter("$masaBlazor.dataFooter.itemsPerPageText")]
         public string? ItemsPerPageText { get; set; }
 
         [Parameter, EditorRequired]
@@ -21,7 +21,7 @@
         public EventCallback<Action<DataOptions>> OnOptionsUpdate { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("new List<OneOf<int, DataItemsPerPageOption>>(){5, 10, 15, -1}")]
+        [MassApiParameter("new List<OneOf<int, DataItemsPerPageOption>>(){5, 10, 15, -1}")]
         public IEnumerable<OneOf<int, DataItemsPerPageOption>>? ItemsPerPageOptions { get; set; } = new List<OneOf<int, DataItemsPerPageOption>>()
         {
             5,
@@ -30,19 +30,19 @@
             -1
         };
 
-        [Parameter, ApiDefaultValue("$prev")]
+        [Parameter, MassApiParameter("$prev")]
         public string? PrevIcon { get; set; } = "$prev";
 
-        [Parameter, ApiDefaultValue("$next")]
+        [Parameter, MassApiParameter("$next")]
         public string? NextIcon { get; set; } = "$next";
 
-        [Parameter, ApiDefaultValue("$last")]
+        [Parameter, MassApiParameter("$last")]
         public string? LastIcon { get; set; } = "$last";
 
-        [Parameter, ApiDefaultValue("$first")]
+        [Parameter, MassApiParameter("$first")]
         public string? FirstIcon { get; set; } = "$first";
 
-        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.itemsPerPageAll")]
+        [Parameter, MassApiParameter("$masaBlazor.dataFooter.itemsPerPageAll")]
         public string? ItemsPerPageAllText { get; set; }
 
         [Parameter]
@@ -57,7 +57,7 @@
         [Parameter]
         public bool DisableItemsPerPage { get; set; }
 
-        [Parameter, ApiDefaultValue("$masaBlazor.dataFooter.pageText")]
+        [Parameter, MassApiParameter("$masaBlazor.dataFooter.pageText")]
         public string? PageText { get; set; }
 
         [Parameter]

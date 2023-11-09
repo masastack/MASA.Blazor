@@ -6,9 +6,9 @@ public class MInputsFilter : ComponentBase
 {
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] [ApiDefaultValue(true)] public bool Dense { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public bool Dense { get; set; } = true;
 
-    [Parameter] [ApiDefaultValue(true)] public StringBoolean? HideDetails { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public StringBoolean? HideDetails { get; set; } = true;
 
     [Parameter] public EventCallback<InputsFilterFieldChangedEventArgs> OnFieldChanged { get; set; }
 
@@ -39,7 +39,7 @@ public class MInputsFilter : ComponentBase
     /// <summary>
     /// Reset the value of all inputs.
     /// </summary>
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void ResetInputs()
     {
         foreach (var input in _inputs)

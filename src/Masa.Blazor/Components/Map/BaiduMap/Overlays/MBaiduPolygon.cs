@@ -20,7 +20,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(0.9f)]
+        [MassApiParameter(0.9f)]
         public float StrokeOpacity
         {
             get => GetValue(0.9f);
@@ -28,7 +28,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(2f)]
+        [MassApiParameter(2f)]
         public float StrokeWeight
         {
             get => GetValue(2f);
@@ -36,7 +36,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(StrokeStyle.Solid)]
+        [MassApiParameter(StrokeStyle.Solid)]
         public StrokeStyle StrokeStyle
         {
             get => GetValue(StrokeStyle.Solid);
@@ -51,7 +51,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [ApiDefaultValue(0.3f)]
+        [MassApiParameter(0.3f)]
         public float FillOpacity
         {
             get => GetValue(0.3f);

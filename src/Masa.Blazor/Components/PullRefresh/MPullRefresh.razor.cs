@@ -14,11 +14,11 @@ public partial class MPullRefresh : IAsyncDisposable
 
     [Parameter] public EventCallback<Exception> OnError { get; set; }
 
-    [Parameter] [ApiDefaultValue(50)] public int HeadHeight { get; set; } = 50;
+    [Parameter] [MassApiParameter(50)] public int HeadHeight { get; set; } = 50;
 
-    [Parameter] [ApiDefaultValue(500)] public int SuccessDuration { get; set; } = 500;
+    [Parameter] [MassApiParameter(500)] public int SuccessDuration { get; set; } = 500;
 
-    [Parameter] [ApiDefaultValue(50)] public int Threshold { get; set; } = 50;
+    [Parameter] [MassApiParameter(50)] public int Threshold { get; set; } = 50;
 
     [Parameter] public string? PullingText { get; set; }
 

@@ -20,6 +20,9 @@ public class AppHeading : ComponentBase
     [Parameter, EditorRequired]
     public string Content { get; set; } = null!;
 
+    [Parameter]
+    public string? ReleasedOn { get; set; }
+
     private static Dictionary<int, string> s_map = new()
     {
         { 1, "text-h3 text-sm-h3 mb-4 mt-4" },
@@ -60,6 +63,21 @@ public class AppHeading : ComponentBase
         }
 
         builder.AddContent(3, Content);
+
+        if (!string.IsNullOrWhiteSpace(ReleasedOn))
+        {
+            builder.AddContent(4, childBuilder =>
+            {
+                childBuilder.OpenComponent<MChip>(0);
+                childBuilder.AddAttribute(1, nameof(MChip.Outlined), true);
+                childBuilder.AddAttribute(2, nameof(MChip.Color), AppService.ColorForUpdateState);
+                childBuilder.AddAttribute(3, nameof(MChip.Small), true);
+                childBuilder.AddAttribute(4, nameof(MChip.Class), "ml-2");
+                childBuilder.AddChildContent(5, ReleasedOn);
+                childBuilder.CloseComponent();
+            });
+        }
+        
         builder.CloseElement();
     }
 

@@ -27,9 +27,6 @@ namespace Masa.Blazor
         public bool FixedHeader { get; set; }
 
         [Parameter]
-        public bool FixedRight { get; set; }
-
-        [Parameter]
         public bool Dense { get; set; }
 
         [Parameter]
@@ -90,6 +87,7 @@ namespace Masa.Blazor
         public RenderFragment? ItemDataTableExpandContent { get; set; }
 
         [Parameter]
+        [MassApiParameter("$expand")]
         public string ExpandIcon { get; set; } = "$expand";
 
         [Parameter]
@@ -107,8 +105,12 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowClick { get; set; }
 
+        [Obsolete("Use OnRowDblClick instead.")]
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDbClick { get; set; }
+
+        [Parameter]
+        public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowDblClick { get; set; }
 
         [Parameter]
         public EventCallback<DataTableRowMouseEventArgs<TItem>> OnRowContextmenu { get; set; }
@@ -117,12 +119,13 @@ namespace Masa.Blazor
         public bool OnRowContextmenuPreventDefault { get; set; }
 
         [Parameter]
+        [MassApiParameter(ReleasedOn = "v1.0.4")]
         public DataTableResizeMode ResizeMode
         {
             get => GetValue(DataTableResizeMode.None);
             set => SetValue(value);
         }
-
+        
         protected MobileProvider? MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
@@ -208,9 +211,7 @@ namespace Masa.Blazor
         public string GroupPlusIcon { get; } = "$plus";
 
         public DataOptions Options => InternalOptions;
-
-        protected bool IsFixedRight => FixedRight;
-
+        
         public override Task SetParametersAsync(ParameterView parameters)
         {
             GroupText ??= I18n.T("$masaBlazor.dataTable.groupText", defaultValue: "group");
@@ -236,9 +237,12 @@ namespace Masa.Blazor
             {
                 if (ResizeMode != DataTableResizeMode.None)
                 {
-                    await NextTickIf(
-                        async () => { await JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); },
-                        () => RefBack.Current.Context is null);
+                    await NextTickIf(async () =>
+                    {
+                        var @ref = RefBack.Current;
+
+                        await JsInvokeAsync(JsInteropConstants.ResizableDataTable, @ref);
+                    }, () => RefBack.Current.Context is null);
                 }
             }
         }
@@ -291,9 +295,10 @@ namespace Masa.Blazor
             return OnRowContextmenu.InvokeAsync(args);
         }
 
-        public Task HandleOnRowDbClickAsync(DataTableRowMouseEventArgs<TItem> args)
+        public Task HandleOnRowDblClickAsync(DataTableRowMouseEventArgs<TItem> args)
         {
-            return OnRowDbClick.InvokeAsync(args);
+            var e = OnRowDblClick.HasDelegate ? OnRowDblClick : OnRowDbClick;
+            return e.InvokeAsync(args);
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string? search)
@@ -420,7 +425,7 @@ namespace Masa.Blazor
 
                     attrs[nameof(Class)] = css;
                     attrs[nameof(Style)] = Style;
-                    attrs[nameof(FixedRight)] = IsFixedRight;
+                    attrs[nameof(MSimpleTable.HasFixed)] = Headers.Any(u => u.Fixed != DataTableFixed.None);
                     attrs[nameof(Width)] = Width;
                     attrs[nameof(RefBack)] = RefBack;
                 })

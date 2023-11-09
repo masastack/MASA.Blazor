@@ -16,11 +16,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
-    [ApiDefaultValue("$dropdown")]
+    [MassApiParameter("$dropdown")]
     public override string? AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
-    [ApiDefaultValue(false)]
+    [MassApiParameter(false)]
     public StringBoolean? Attach { get; set; } = false;
 
     [Parameter]
@@ -45,7 +45,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     }
 
     [Parameter]
-    [ApiDefaultValue("primary")]
+    [MassApiParameter("primary")]
     public string ItemColor { get; set; } = "primary";
 
     [Parameter]
@@ -83,7 +83,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     public string? NoDataText { get; set; }
 
     [Parameter]
+    [Obsolete("Use OnSelect instead.")]
     public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
+
+    [Parameter]
+    public EventCallback<(TItem Item, bool Selected)> OnSelect { get; set; }
 
     [Parameter]
     public RenderFragment? AppendItemContent { get; set; }
@@ -602,7 +606,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
     {
         _onSelectItemInvoked = true;
-        
+
+        bool isSelected;
+
         var value = ItemValue(item);
         if (!Multiple)
         {
@@ -615,6 +621,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             {
                 IsMenuActive = false;
             }
+
+            isSelected = true;
         }
         else
         {
@@ -622,10 +630,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             if (internalValues.Contains(value))
             {
                 internalValues.Remove(value);
+                isSelected = false;
             }
             else
             {
                 internalValues.Add(value);
+                isSelected = true;
             }
 
             if (internalValues is TValue val)
@@ -647,22 +657,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             }
         }
 
-        if (OnSelectedItemUpdate.HasDelegate)
-        {
-            await OnSelectedItemUpdate.InvokeAsync(item);
-        }
+        _ = OnSelectedItemUpdate.InvokeAsync(item);
+
+        _ = OnSelect.InvokeAsync((item, isSelected));
     }
 
     public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
-        if (IsReadonly && args.Code != KeyCodes.Tab) return;
+        if (IsReadonly && args.Key != KeyCodes.Tab) return;
 
         if (OnKeyDown.HasDelegate)
         {
             await OnKeyDown.InvokeAsync(args);
         }
 
-        var keyCode = args.Code;
+        var keyCode = args.Key;
 
         // If menu is active, allow default
         // listIndex change from menu

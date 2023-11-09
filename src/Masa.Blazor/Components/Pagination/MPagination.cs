@@ -2,13 +2,16 @@
 
 namespace Masa.Blazor
 {
-    public partial class MPagination : BPagination, IPagination
+    public partial class MPagination : BPagination, IPagination, IAsyncDisposable
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
         public Document Document { get; set; } = null!;
+
+        [Inject]
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Parameter]
         public bool Circle { get; set; }
@@ -103,17 +106,43 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 var el = Document.GetElementByReference(Ref);
                 if (el is null) return;
 
                 var clientWidth = await el.ParentElement.GetClientWidthAsync();
-                if (clientWidth != null)
+                if (clientWidth is > 0)
                 {
-                    MaxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
-                    StateHasChanged();
+                    CalcMaxButtons(clientWidth.Value);
                 }
+                else
+                {
+                    // clientWidth may be 0 when place in dialog
+                    // so we need to observe the element
+                    await IntersectJSModule.ObserverAsync(Ref, async e =>
+                    {
+                        if (e.IsIntersecting)
+                        {
+                            await InvokeAsync(async () =>
+                            {
+                                clientWidth = await el.ParentElement.GetClientWidthAsync();
+                                if (clientWidth is > 0)
+                                {
+                                    CalcMaxButtons(clientWidth.Value);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
+            void CalcMaxButtons(double width)
+            {
+                MaxButtons = Convert.ToInt32(Math.Floor((width - 96.0) / 42.0));
+                StateHasChanged();
             }
         }
 
@@ -255,6 +284,22 @@ namespace Masa.Blazor
             if (OnInput.HasDelegate)
             {
                 await OnInput.InvokeAsync(item.AsT1);
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                await IntersectJSModule.UnobserveAsync(Ref);
+            }
+            catch (JSDisconnectedException)
+            {
+                // ignore
+            }
+            catch (InvalidOperationException)
+            {
+                // ignore
             }
         }
     }

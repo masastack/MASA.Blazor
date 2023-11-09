@@ -9,7 +9,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public object? EditorOptions { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("100%")]
+    [MassApiParameter("100%")]
     public StringNumber? Width { get; set; } = "100%";
 
     [Parameter]
@@ -19,7 +19,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("320px")]
+    [MassApiParameter("320px")]
     public StringNumber? MinHeight { get; set; } = "320px";
 
     [Parameter]

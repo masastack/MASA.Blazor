@@ -39,11 +39,11 @@ namespace Masa.Blazor
         public RenderFragment? PlaceholderContent { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("center center")]
+        [MassApiParameter("center center")]
         public string? Position { get; set; } = "center center";
 
         [Parameter]
-        [ApiDefaultValue("fade-transition")]
+        [MassApiParameter("fade-transition")]
         public string? Transition { get; set; } = "fade-transition";
 
         private string? _currentSrc;

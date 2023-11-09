@@ -6,13 +6,13 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
 
     [Parameter] public RenderFragment? ActionsContent { get; set; }
 
-    [Parameter] [ApiDefaultValue(true)] public bool Dense { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public bool Dense { get; set; } = true;
 
     [Parameter] public bool HideResetButton { get; set; }
 
     [Parameter] public bool HideSearchButton { get; set; }
 
-    [Parameter] [ApiDefaultValue(true)] public StringBoolean? HideDetails { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public StringBoolean? HideDetails { get; set; } = true;
 
     [Parameter] public RenderFragment? HighFrequencyContent { get; set; }
 

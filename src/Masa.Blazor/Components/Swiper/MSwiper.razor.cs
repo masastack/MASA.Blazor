@@ -10,7 +10,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
     [Parameter] public bool AutoHeight { get; set; }
 
-    [Parameter] [ApiDefaultValue(true)] public bool AllowTouchMove { get; set; } = true;
+    [Parameter] [MassApiParameter(true)] public bool AllowTouchMove { get; set; } = true;
 
     /// <summary>
     /// Set to true to enable continuous loop mode
@@ -31,7 +31,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
     /// <summary>
     /// Duration of transition between slides (in ms)
     /// </summary>
-    [Parameter] [ApiDefaultValue(300)] public int Speed { get; set; } = 300;
+    [Parameter] [MassApiParameter(300)] public int Speed { get; set; } = 300;
 
     [Parameter] public bool Vertical { get; set; }
 
@@ -156,7 +156,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
         await IndexChanged.InvokeAsync(index);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task SlideToAsync(int index, int? speed = null)
     {
         if (_swiperProxy == null) return;
@@ -164,14 +164,14 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
         await _swiperProxy!.SlideToAsync(index, speed ?? Speed);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task SlideNextAsync(int? speed = null)
     {
         if (_swiperProxy == null) return;
         await _swiperProxy!.SlideNextAsync(speed ?? Speed);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public async Task SlidePrevAsync(int? speed = null)
     {
         if (_swiperProxy == null) return;

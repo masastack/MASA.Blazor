@@ -30,7 +30,7 @@ public partial class PPageTabs : PatternPathComponentBase
     #region Parameters from MTabs
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MassApiParameter(true)]
     public bool Ripple { get; set; } = true;
 
     [Parameter]
@@ -52,7 +52,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? SliderColor { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(2)]
+    [MassApiParameter(2)]
     public StringNumber? SliderSize { get; set; } = 2;
 
     [Parameter]
@@ -73,7 +73,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("/")]
+    [MassApiParameter("/")]
     public string NoDataPath
     {
         get => _noDataPath ?? "/";
@@ -81,11 +81,11 @@ public partial class PPageTabs : PatternPathComponentBase
     }
 
     [Parameter]
-    [ApiDefaultValue("$close")]
+    [MassApiParameter("$close")]
     public string? CloseIcon { get; set; } = "$close";
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MassApiParameter(true)]
     public bool AskBeforeClosing { get; set; } = true;
 
     [Parameter]
@@ -142,7 +142,7 @@ public partial class PPageTabs : PatternPathComponentBase
                    .Apply("tab-close", css => css.Add("p-page-tab__close"));
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseAllTabs(bool disableAutoNavigation = false)
     {
         PatternPaths.Clear();
@@ -155,7 +155,7 @@ public partial class PPageTabs : PatternPathComponentBase
         }
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseCurrentTab(bool disableAutoNavigation = false)
     {
         var current = GetCurrentPatternPath();
@@ -168,7 +168,7 @@ public partial class PPageTabs : PatternPathComponentBase
         CloseTab(current);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseTabs(Regex pattern, bool disableAutoNavigation = false)
     {
         var paths = PatternPaths.Where(p => pattern.IsMatch(p.AbsolutePath)).ToArray();
@@ -198,7 +198,7 @@ public partial class PPageTabs : PatternPathComponentBase
         NextTick(() => { _tabs?.CallSlider(); });
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseOtherTabs()
     {
         var current = GetCurrentPatternPath();
