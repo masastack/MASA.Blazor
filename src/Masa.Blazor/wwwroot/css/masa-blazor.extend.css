@@ -400,6 +400,7 @@
 /* copyable-text */
 
 .m-presets-copyable-text {
+    display: inline-block;
 }
 
     .m-presets-copyable-text .m-presets-copyable-text__content {
