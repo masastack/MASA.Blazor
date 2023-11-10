@@ -53,6 +53,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     private CancellationTokenSource _ctsForRegister = new();
     private CancellationTokenSource _ctsForUnregister = new();
+    private bool _renderTwice = true;
 
     public bool IsDark
     {
@@ -198,21 +199,20 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             Console.Out.WriteLine(_descriptionItems[1].Label);
         }
     }
-
-    // TODO: explain why this is needed
-    private bool extraRender = true;
+    
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
 
-        if (extraRender)
+        // DescriptionItem may be update after render, so we need to render twice
+        if (_renderTwice)
         {
-            extraRender = false;
+            _renderTwice = false;
             StateHasChanged();
         }
         else
         {
-            extraRender = true;
+            _renderTwice = true;
         }
     }
 
@@ -283,16 +283,6 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             // ignored
         }
     }
-
-    // internal void UpdateChild(IDescriptionsItem descriptionsItem, int id)
-    // {
-    //     var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
-    //     if (item != null)
-    //     {
-    //         item = descriptionsItem;
-    //         StateHasChanged();
-    //     }
-    // }
 
     protected override void Dispose(bool disposing)
     {
