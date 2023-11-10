@@ -251,7 +251,6 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         try
         {
             await Task.Delay(300, _ctsForRegister.Token);
-            Logger.LogInformation($"invoke state has changed {descriptionsItem.Label}");
             StateHasChanged();
         }
         catch (TaskCanceledException)
