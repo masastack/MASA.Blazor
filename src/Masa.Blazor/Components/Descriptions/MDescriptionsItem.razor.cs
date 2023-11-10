@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IAsyncDisposable
+public class MDescriptionsItem : IComponent, IDescriptionsItem, IAsyncDisposable
 {
     [CascadingParameter] private MDescriptions? Descriptions { get; set; }
 
@@ -18,47 +18,25 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem, IAsyncDisposa
 
     [Parameter] public string? Style { get; set; }
 
-    private bool _renderFromAncestor;
-    private bool _registered;
+    private bool _initialized;
 
-    public override async Task SetParametersAsync(ParameterView parameters)
+    public void Attach(RenderHandle renderHandle)
     {
-        await base.SetParametersAsync(parameters);
-
-        Label.ThrowIfNull(nameof(MDescriptionsItem));
     }
 
-    protected override async Task OnInitializedAsync()
+    public async Task SetParametersAsync(ParameterView parameters)
     {
-        await base.OnInitializedAsync();
+        parameters.SetParameterProperties(this);
 
-        if (Descriptions != null)
+        if (!_initialized)
         {
-            await Descriptions.Register(this);
-            _registered = true;
+            _initialized = true;
+
+            if (Descriptions != null)
+            {
+                await Descriptions.Register(this);
+            }
         }
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (_renderFromAncestor)
-        {
-            _renderFromAncestor = false;
-            return;
-        }
-
-        if (_registered)
-        {
-            Descriptions?.UpdateChild(this);
-        }
-    }
-
-    // inherit
-    public void RenderFromAncestor()
-    {
-        _renderFromAncestor = true;
     }
 
     async ValueTask IAsyncDisposable.DisposeAsync()

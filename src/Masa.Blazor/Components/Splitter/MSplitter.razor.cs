@@ -19,8 +19,10 @@ public partial class MSplitter
 
     [Parameter] public bool Row { get; set; }
 
-    private readonly DelayTask _delayTask = new();
     private readonly Collection<MSplitterPane> _panes = new();
+
+    private CancellationTokenSource _registerCts = new();
+    private CancellationTokenSource _unregisterCts = new();
 
     private BoundingClientRect? _containerRect;
     private bool _mousedown;
@@ -85,12 +87,11 @@ public partial class MSplitter
 
         _panes.Add(pane);
 
-        await _delayTask.Run(() =>
-        {
-            InitialPanesSizing();
-
-            return InvokeAsync(StateHasChanged);
-        });
+        _registerCts.Cancel();
+        _registerCts = new CancellationTokenSource();
+        await Task.Delay(300, _registerCts.Token);
+        InitialPanesSizing();
+        await InvokeAsync(StateHasChanged);
     }
 
     internal async Task UnregisterAsync(MSplitterPane pane)
@@ -101,18 +102,18 @@ public partial class MSplitter
         {
             return;
         }
+        
+        _unregisterCts.Cancel();
+        _unregisterCts = new CancellationTokenSource();
+        await Task.Delay(300, _unregisterCts.Token);
 
-        await _delayTask.Run(() =>
+        for (var i = 0; i < _panes.Count; i++)
         {
-            for (var i = 0; i < _panes.Count; i++)
-            {
-                _panes[i].InternalIndex = i;
-            }
+            _panes[i].InternalIndex = i;
+        }
 
-            InitialPanesSizing();
-
-            return InvokeAsync(StateHasChanged);
-        });
+        InitialPanesSizing();
+        await InvokeAsync(StateHasChanged);
     }
 
     private void InitialPanesSizing()

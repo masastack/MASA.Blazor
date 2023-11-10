@@ -156,7 +156,7 @@
         "1.0",
     };
 
-    private readonly DelayTask _delayTask = new();
+    private CancellationTokenSource _ctsForIntersect = new();
 
     private string _selectVersion = "1.0";
 
@@ -231,10 +231,11 @@
         if (e.IsIntersecting)
         {
             _activeHash = hash;
-            await _delayTask.Run(async () =>
-            {
-                await InvokeAsync(StateHasChanged);
-            });
+            
+            _ctsForIntersect.Cancel();
+            _ctsForIntersect = new CancellationTokenSource();
+            await Task.Delay(300, _ctsForIntersect.Token);
+            await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -274,10 +275,13 @@
     {
         try
         {
-            Console.Out.WriteLine("DisposeAsync");
             await UnobserveToc();
         }
         catch (JSDisconnectedException)
+        {
+            // ignored
+        }
+        catch (InvalidOperationException)
         {
             // ignored
         }

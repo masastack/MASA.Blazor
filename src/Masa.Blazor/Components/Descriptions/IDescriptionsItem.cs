@@ -15,9 +15,4 @@ public interface IDescriptionsItem
     string? Class { get; }
 
     string? Style { get; }
-
-    /// <summary>
-    /// Internal use only.
-    /// </summary>
-    void RenderFromAncestor();
 }

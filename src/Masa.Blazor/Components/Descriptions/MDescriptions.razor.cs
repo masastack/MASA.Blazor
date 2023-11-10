@@ -6,7 +6,8 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
-    [Parameter] [MassApiParameter(ReleasedOn = "v1.1.1")] public bool AlignCenter { get; set; }
+    [Parameter] [MassApiParameter(ReleasedOn = "v1.1.1")]
+    public bool AlignCenter { get; set; }
 
     [Parameter, MassApiParameter(true)] public bool Colon { get; set; } = true;
 
@@ -48,9 +49,11 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [Parameter] public bool Light { get; set; }
 
-    private readonly DelayTask _registerDelayTask = new();
-    private readonly DelayTask _unregisterDelayTask = new();
     private readonly List<IDescriptionsItem> _descriptionItems = new();
+
+    private CancellationTokenSource _ctsForRegister = new();
+    private CancellationTokenSource _ctsForUnregister = new();
+    private bool _renderTwice = true;
 
     public bool IsDark
     {
@@ -187,6 +190,23 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
+    
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        // DescriptionItem may be update after render, so we need to render twice
+        if (_renderTwice)
+        {
+            _renderTwice = false;
+            StateHasChanged();
+        }
+        else
+        {
+            _renderTwice = true;
+        }
+    }
+
     private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
         await InvokeStateHasChangedAsync();
@@ -215,8 +235,21 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
     internal async Task Register(IDescriptionsItem descriptionsItem)
     {
         _descriptionItems.Add(descriptionsItem);
-        await _registerDelayTask.Run(InvokeStateHasChangedAsync);
+
+        _ctsForRegister.Cancel();
+        _ctsForRegister = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(300, _ctsForRegister.Token);
+            StateHasChanged();
+        }
+        catch (TaskCanceledException)
+        {
+            // ignored
+        }
     }
+
 
     internal async Task Unregister(IDescriptionsItem descriptionsItem)
     {
@@ -227,17 +260,17 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             return;
         }
 
-        await _unregisterDelayTask.Run(InvokeStateHasChangedAsync);
-    }
+        _ctsForUnregister.Cancel();
+        _ctsForUnregister = new CancellationTokenSource();
 
-    internal void UpdateChild(IDescriptionsItem descriptionsItem)
-    {
-        var item = _descriptionItems?.FirstOrDefault(u => u == descriptionsItem);
-        if (item != null)
+        try
         {
-            item = descriptionsItem;
-            descriptionsItem.RenderFromAncestor();
+            await Task.Delay(300, _ctsForUnregister.Token);
             StateHasChanged();
+        }
+        catch (TaskCanceledException)
+        {
+            // ignored
         }
     }
 
