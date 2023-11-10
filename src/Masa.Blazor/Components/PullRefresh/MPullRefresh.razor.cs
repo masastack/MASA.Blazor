@@ -80,6 +80,11 @@ public partial class MPullRefresh : IAsyncDisposable
             _scrollParentJSRef = await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.GetScrollParent, Ref);
 
             var trackSelector = _trackRef.GetSelector()!;
+            
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchstart", OnTouchStart, new EventListenerOptions()
+            {
+                Passive = true
+            });
 
             _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchmove", OnTouchMove, new  EventListenerOptions()
             {
@@ -152,8 +157,6 @@ public partial class MPullRefresh : IAsyncDisposable
         {
             _duration = 300;
 
-            Console.Out.WriteLine("_duration = {0}", _duration);
-
             if (_pullRefreshStatus == PullRefreshStatus.CanRelease)
             {
                 SetStatus(HeadHeight, true);
@@ -225,6 +228,7 @@ public partial class MPullRefresh : IAsyncDisposable
 
             if (_trackRef.TryGetSelector(out var trackSelector))
             {
+                await Js.RemoveHtmlElementEventListener(trackSelector, "touchstart");
                 await Js.RemoveHtmlElementEventListener(trackSelector, "touchmove");
             }
         }
