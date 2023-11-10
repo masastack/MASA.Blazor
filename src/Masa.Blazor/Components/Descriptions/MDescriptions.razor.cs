@@ -190,15 +190,6 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (_descriptionItems.Count > 1)
-        {
-            Console.Out.WriteLine(_descriptionItems[1].Label);
-        }
-    }
     
     protected override void OnAfterRender(bool firstRender)
     {
