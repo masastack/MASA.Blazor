@@ -370,7 +370,7 @@
         public async ValueTask<bool> ContainsOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             if (_baiduMap is not null)
                 await _baiduMap.DisposeAsync();

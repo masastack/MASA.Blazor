@@ -183,7 +183,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
                 await _drawflowProxy.DisposeAsync();
             }
         }
-        catch (JSDisconnectedException)
+        catch (Exception)
         {
             // ignored
         }

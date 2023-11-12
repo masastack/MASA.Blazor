@@ -217,14 +217,14 @@ namespace Masa.Blazor
             base.Dispose(disposing);
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {
                 if (_quillHelper != null)
                     await _quillHelper.DisposeAsync();
             }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

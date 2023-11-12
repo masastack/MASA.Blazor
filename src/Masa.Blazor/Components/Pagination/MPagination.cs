@@ -293,13 +293,9 @@ namespace Masa.Blazor
             {
                 await IntersectJSModule.UnobserveAsync(Ref);
             }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
-                // ignore
-            }
-            catch (InvalidOperationException)
-            {
-                // ignore
+                // ignored
             }
         }
     }

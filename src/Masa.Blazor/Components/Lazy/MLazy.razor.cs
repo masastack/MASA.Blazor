@@ -76,8 +76,15 @@ public partial class MLazy : IAsyncDisposable
         await InvokeStateHasChangedAsync();
     }
 
-    public ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        return IntersectJSModule.UnobserveAsync(Ref);
+        try
+        {
+            await IntersectJSModule.UnobserveAsync(Ref);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

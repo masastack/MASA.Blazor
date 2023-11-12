@@ -35,8 +35,15 @@ public class MDrag : BDomComponentBase, IAsyncDisposable
         builder.CloseComponent();
     }
 
-    public ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        return JS.InvokeVoidAsync(JsInteropConstants.UnregisterDragEvent, _elementReference);
+        try
+        {
+            await JS.InvokeVoidAsync(JsInteropConstants.UnregisterDragEvent, _elementReference);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

@@ -283,7 +283,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
@@ -294,7 +294,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
                 await _echarts.DisposeAsync();
             }
         }
-        catch(JSDisconnectedException)
+        catch (Exception)
         {
             // ignored
         }

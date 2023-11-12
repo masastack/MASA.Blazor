@@ -232,9 +232,9 @@ public partial class MPullRefresh : IAsyncDisposable
                 await Js.RemoveHtmlElementEventListener(trackSelector, "touchmove");
             }
         }
-        catch (JSDisconnectedException)
+        catch (Exception)
         {
-            // ignore
+            // ignored
         }
     }
 }
