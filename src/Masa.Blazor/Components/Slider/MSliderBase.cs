@@ -348,14 +348,11 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
             _mouseCancellationTokenSource?.Cancel();
             _mouseCancellationTokenSource = new CancellationTokenSource();
-
-            _ = Task.Run(async () =>
+            await RunTaskInMicrosecondsAsync(() =>
             {
-                await Task.Delay(300, _mouseCancellationTokenSource.Token);
                 ThumbPressed = true;
-
-                await InvokeStateHasChangedAsync();
-            });
+                return InvokeStateHasChangedAsync();
+            }, 300, _mouseCancellationTokenSource.Token);
         }
 
         var args = new MouseEventArgs()

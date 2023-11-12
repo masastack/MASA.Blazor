@@ -238,16 +238,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
         _ctsForRegister.Cancel();
         _ctsForRegister = new CancellationTokenSource();
-
-        try
-        {
-            await Task.Delay(300, _ctsForRegister.Token);
-            StateHasChanged();
-        }
-        catch (TaskCanceledException)
-        {
-            // ignored
-        }
+        await RunTaskInMicrosecondsAsync(StateHasChanged, 300, _ctsForRegister.Token);
     }
 
 
@@ -262,16 +253,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
         _ctsForUnregister.Cancel();
         _ctsForUnregister = new CancellationTokenSource();
-
-        try
-        {
-            await Task.Delay(300, _ctsForUnregister.Token);
-            StateHasChanged();
-        }
-        catch (TaskCanceledException)
-        {
-            // ignored
-        }
+        await RunTaskInMicrosecondsAsync(StateHasChanged, 300, _ctsForUnregister.Token);
     }
 
     protected override void Dispose(bool disposing)

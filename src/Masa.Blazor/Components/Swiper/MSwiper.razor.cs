@@ -129,24 +129,26 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
-        await Task.Delay(16, _cancellationTokenSource.Token);
 
-        var rootSelector = _elementReference.GetSelector();
-
-        SwiperOptions options = new()
+        await RunTaskInMicrosecondsAsync(async () =>
         {
-            AllowTouchMove = AllowTouchMove,
-            AutoHeight = AutoHeight,
-            Direction = Vertical ? "vertical" : "horizontal",
-            Loop = Loop,
-            Parallax = Parallax,
-            SpaceBetween = SpaceBetween,
-            Autoplay = _autoplay?.GetOptions(),
-            Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
-            Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
-        };
+            var rootSelector = _elementReference.GetSelector();
 
-        _swiperProxy = await SwiperJsModule.Init(_elementReference, options, _swiperInteropHandle);
+            SwiperOptions options = new()
+            {
+                AllowTouchMove = AllowTouchMove,
+                AutoHeight = AutoHeight,
+                Direction = Vertical ? "vertical" : "horizontal",
+                Loop = Loop,
+                Parallax = Parallax,
+                SpaceBetween = SpaceBetween,
+                Autoplay = _autoplay?.GetOptions(),
+                Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
+                Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
+            };
+
+            _swiperProxy = await SwiperJsModule.Init(_elementReference, options, _swiperInteropHandle);
+        }, 16, _cancellationTokenSource.Token);
     }
 
     internal async Task UpdateIndexAsync(int index)
@@ -178,7 +180,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
         await _swiperProxy!.SlidePrevAsync(speed ?? Speed);
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
