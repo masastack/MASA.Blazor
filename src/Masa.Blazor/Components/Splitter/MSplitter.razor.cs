@@ -89,9 +89,11 @@ public partial class MSplitter
 
         _registerCts.Cancel();
         _registerCts = new CancellationTokenSource();
-        await Task.Delay(300, _registerCts.Token);
-        InitialPanesSizing();
-        await InvokeAsync(StateHasChanged);
+        await RunTaskInMicrosecondsAsync(async () =>
+        {
+            InitialPanesSizing();
+            await InvokeStateHasChangedAsync();
+        }, 300, _registerCts.Token);
     }
 
     internal async Task UnregisterAsync(MSplitterPane pane)
@@ -105,15 +107,16 @@ public partial class MSplitter
         
         _unregisterCts.Cancel();
         _unregisterCts = new CancellationTokenSource();
-        await Task.Delay(300, _unregisterCts.Token);
-
-        for (var i = 0; i < _panes.Count; i++)
+        await RunTaskInMicrosecondsAsync(async () =>
         {
-            _panes[i].InternalIndex = i;
-        }
+            for (var i = 0; i < _panes.Count; i++)
+            {
+                _panes[i].InternalIndex = i;
+            }
 
-        InitialPanesSizing();
-        await InvokeAsync(StateHasChanged);
+            InitialPanesSizing();
+            await InvokeStateHasChangedAsync();
+        }, 300, _unregisterCts.Token);
     }
 
     private void InitialPanesSizing()
@@ -228,11 +231,7 @@ public partial class MSplitter
             await Js.RemoveHtmlElementEventListener("document", "touchmove", $"{Id}_touchmove");
             await Js.RemoveHtmlElementEventListener("document", "touchend", $"{Id}_touchend");
         }
-        catch (JSDisconnectedException)
-        {
-            // ignored
-        }
-        catch (InvalidOperationException)
+        catch (Exception)
         {
             // ignored
         }
