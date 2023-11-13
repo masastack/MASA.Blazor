@@ -212,7 +212,7 @@ public partial class MStepperContent : BStepperContent
             {
                 _ =  Js.RemoveHtmlElementEventListener(selector, "transitionend");
             }
-            catch(JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

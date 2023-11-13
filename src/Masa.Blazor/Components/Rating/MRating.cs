@@ -270,11 +270,26 @@ namespace Masa.Blazor
                 return;
             }
 
+            var taskCanceled = false;
+
             if (type is MouseType.MouseEnter or MouseType.MouseLeave)
             {
                 _cancellationTokenSource?.Cancel();
                 _cancellationTokenSource = new CancellationTokenSource();
-                await Task.Delay(16, _cancellationTokenSource.Token);
+
+                try
+                {
+                    await Task.Delay(16, _cancellationTokenSource.Token);
+                }
+                catch (TaskCanceledException)
+                {
+                    taskCanceled = true;
+                }
+            }
+
+            if (taskCanceled)
+            {
+                return;
             }
 
             var prevHoverIndex = _hoverIndex;
@@ -313,7 +328,7 @@ namespace Masa.Blazor
                     }
                 }
             }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

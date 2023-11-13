@@ -210,7 +210,7 @@
             }
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {
@@ -220,7 +220,7 @@
 
                 await _vditorHelper.TryDisposeAsync();
             }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

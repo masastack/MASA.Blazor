@@ -88,7 +88,7 @@ public partial class EllipsisText : IAsyncDisposable
             StateHasChanged();
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {

@@ -939,18 +939,14 @@ namespace Masa.Blazor
             await base.HandleOnMouseUpAsync(args);
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {
                 await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
                 await IntersectJSModule.UnobserveAsync(InputElement);
             }
-            catch (InvalidOperationException)
-            {
-                // ignored
-            }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

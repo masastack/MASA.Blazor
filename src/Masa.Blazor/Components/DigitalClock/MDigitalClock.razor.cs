@@ -387,13 +387,13 @@ public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
         await HandleOnHourClick(ComputedHour ?? 0);
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
             await IntersectJSModule.UnobserveAsync(Ref);
         }
-        catch (JSDisconnectedException)
+        catch (Exception)
         {
             // ignored
         }

@@ -103,7 +103,7 @@
             await ScrollStrategyJSModule.ShowScroll();
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {

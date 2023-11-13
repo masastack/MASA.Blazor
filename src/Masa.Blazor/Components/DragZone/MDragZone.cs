@@ -260,14 +260,14 @@
             base.Dispose(disposing);
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {
                 if (_jsHelper != null)
                     await _jsHelper.DisposeAsync();
             }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

@@ -183,7 +183,7 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
                 await Js.RemoveHtmlElementEventListener(selector, "transitionend");
             }
         }
-        catch (JSDisconnectedException)
+        catch (Exception)
         {
             // ignored
         }

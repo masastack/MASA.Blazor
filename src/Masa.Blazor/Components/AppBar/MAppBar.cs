@@ -374,11 +374,7 @@ namespace Masa.Blazor
             {
                 await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll");
             }
-            catch (InvalidOperationException)
-            {
-                // ignored
-            }
-            catch (JSDisconnectedException)
+            catch (Exception)
             {
                 // ignored
             }

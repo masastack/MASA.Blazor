@@ -1,10 +1,7 @@
-﻿using BlazorComponent.Web;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class Breakpoint
 {
-    private CancellationTokenSource _cancellationTokenSource;
     private bool _prevMobile;
 
     public Breakpoint()

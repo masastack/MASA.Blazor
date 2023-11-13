@@ -234,8 +234,16 @@
             
             _ctsForIntersect.Cancel();
             _ctsForIntersect = new CancellationTokenSource();
-            await Task.Delay(300, _ctsForIntersect.Token);
-            await InvokeAsync(StateHasChanged);
+
+            try
+            {
+                await Task.Delay(300, _ctsForIntersect.Token);
+                await InvokeAsync(StateHasChanged);
+            }
+            catch (TaskCanceledException)
+            {
+                // ignored
+            }
         }
     }
 
@@ -277,11 +285,7 @@
         {
             await UnobserveToc();
         }
-        catch (JSDisconnectedException)
-        {
-            // ignored
-        }
-        catch (InvalidOperationException)
+        catch (Exception)
         {
             // ignored
         }

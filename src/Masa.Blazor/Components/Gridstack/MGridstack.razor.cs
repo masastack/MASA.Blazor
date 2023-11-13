@@ -180,7 +180,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         await Module.SetStatic(_gridstackInstance, staticValue);
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
