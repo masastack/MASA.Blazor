@@ -123,11 +123,18 @@ namespace Masa.Blazor
         private async Task LoadImageAsync()
         {
             _isError = false;
-            await PollForSize(NormalisedSrc.Src);
-            _isError = _dimensions.HasError;
-            if (!_dimensions.HasError)
+            if (string.IsNullOrWhiteSpace(NormalisedSrc.Src))
             {
-                OnLoad();
+                _isError = true;
+            }
+            else
+            {
+                await PollForSize(NormalisedSrc.Src);
+                _isError = _dimensions == null || _dimensions.HasError;
+                if (!_isError)
+                {
+                    OnLoad();
+                }
             }
         }
 
