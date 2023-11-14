@@ -84,13 +84,13 @@
         public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
 
         [Parameter]
-        public EventCallback<(TItem Item, bool Selected)> OnItemSelect { get; set; }
+        public EventCallback<(TItem, bool)> OnItemSelect { get; set; }
 
         [Parameter]
-        public EventCallback<(TItem Item, bool Expanded)> OnItemExpand { get; set; }
+        public EventCallback<(TItem, bool)> OnItemExpand { get; set; }
 
         [Parameter]
-        public EventCallback<(IEnumerable<TItem> Items, bool Selected)> OnToggleSelectAll { get; set; }
+        public EventCallback<(IEnumerable<TItem>, bool)> OnToggleSelectAll { get; set; }
 
         public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
 
