@@ -1,21 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.dll" />
-    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.dll" />
-    <BlazorWebAssemblyLazyLoad Include="Util.Reflection.dll" />
+    <BlazorWebAssemblyLazyLoad Include="Masa.Blazor.SomethingSkia.wasm" />
+    <BlazorWebAssemblyLazyLoad Include="Util.Reflection.wasm" />
   </ItemGroup>
 
   <ItemGroup>
