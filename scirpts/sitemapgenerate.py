@@ -42,7 +42,7 @@ def create_robots(filename, domain, robotSet=None):
 
 
 base_dir = os.path.join(
-    os.getcwd(), r'docs/Masa.Docs.WebAssembly/bin/Release/net7.0/publish/wwwroot')
+    os.getcwd(), r'docs/Masa.Docs.WebAssembly/bin/Release/net8.0/publish/wwwroot')
 
 #base_dir = r"D:\Source\Stack\src\MASA.Blazor\docs\Masa.Docs.WebAssembly\bin\Release\net7.0\publish\wwwroot"
 print(base_dir)
