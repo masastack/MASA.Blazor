@@ -32,14 +32,13 @@
             var path = args.Path;
             path = path.Split("?").First().Split("#").First().ToLowerInvariant();
 
-            // if (path is "blazor/components/image-captcha" or "blazor/labs/watermark")
-            // {
-            //     var assemblies = await AssemblyLoader.LoadAssembliesAsync(
-            //         new[] { /*"SkiaSharp.wasm", "SkiaSharp.Views.Blazor.wasm",*/ "Masa.Blazor.SomethingSkia.wasm" });
-            //     lazyLoadedAssemblies.AddRange(assemblies);
-            // }
-            // else 
-            if (path == "blazor/components/forms")
+            if (path is "blazor/components/image-captcha" or "blazor/labs/watermark")
+            {
+                var assemblies = await AssemblyLoader.LoadAssembliesAsync(
+                    new[] { "Masa.Blazor.SomethingSkia.wasm" });
+                lazyLoadedAssemblies.AddRange(assemblies);
+            }
+            else if (path == "blazor/components/forms")
             {
                 var assemblies = await AssemblyLoader.LoadAssembliesAsync(
                     new[] { "Util.Reflection.wasm" });
