@@ -4,7 +4,6 @@ public class ThrottleTask
 {
     private readonly object _lock = new();
 
-    private CancellationTokenSource _cancellationTokenSource;
     private Task _currentTask = Task.CompletedTask;
     private bool _canceled;
 
@@ -28,9 +27,7 @@ public class ThrottleTask
                 return; // ignore if the previous task is not completed
             }
 
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-            _currentTask = Task.Delay(Interval, _cancellationTokenSource.Token);
+            _currentTask = Task.Delay(Interval);
             _canceled = false;
         }
 
