@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.PullToRefresh;
+using Masa.Blazor.Utils;
 
 namespace Masa.Blazor;
 
@@ -37,6 +38,7 @@ public partial class MPullRefresh : IAsyncDisposable
     [Parameter] public RenderFragment? SuccessContent { get; set; }
 
     private readonly Toucher _toucher = new();
+    private readonly ThrottleTask _throttleTask = new(16);
 
     private IJSObjectReference? _scrollParentJSRef;
 
@@ -66,7 +68,7 @@ public partial class MPullRefresh : IAsyncDisposable
                    .Element("track", _ => { }, style =>
                    {
                        style.Add($"transition-duration: {_duration}ms;")
-                            .AddIf($"transform:translate3d(0,{_distance}px, 0)", () => _distance > 0); // transition-timing-function: ease;
+                            .AddIf($"transform:translate3d(0,{_distance}px, 0)", () => _distance > 0);
                    })
                    .Element("header", _ => { }, style => { style.AddHeight(HeadHeight); });
     }
@@ -80,13 +82,13 @@ public partial class MPullRefresh : IAsyncDisposable
             _scrollParentJSRef = await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.GetScrollParent, Ref);
 
             var trackSelector = _trackRef.GetSelector()!;
-            
+
             _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchstart", OnTouchStart, new EventListenerOptions()
             {
                 Passive = true
             });
 
-            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchmove", OnTouchMove, new  EventListenerOptions()
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchmove", OnTouchMove, new EventListenerOptions()
             {
                 Passive = false
             }, new EventListenerExtras()
@@ -107,8 +109,9 @@ public partial class MPullRefresh : IAsyncDisposable
         }
         else if (distance == 0)
         {
-            _pullRefreshStatus =  PullRefreshStatus.Default;
+            _pullRefreshStatus = PullRefreshStatus.Default;
             _root = null;
+            _throttleTask.Cancel();
         }
         else if (distance < Threshold)
         {
@@ -143,10 +146,15 @@ public partial class MPullRefresh : IAsyncDisposable
 
             if (_reachTop && _toucher.DeltaY >= 0 && _toucher.IsVertical)
             {
-                var easeDeltaY = Ease(_toucher.DeltaY);
-                SetStatus(easeDeltaY);
-
-                StateHasChanged();
+                await _throttleTask.RunAsync(async () =>
+                {
+                    if (IsTouchable)
+                    {
+                        var easeDeltaY = Ease(_toucher.DeltaY);
+                        SetStatus(easeDeltaY);
+                        await InvokeStateHasChangedAsync();
+                    }
+                });
             }
         }
     }
@@ -213,12 +221,14 @@ public partial class MPullRefresh : IAsyncDisposable
             }
             else
             {
-                distance = Threshold * 1.5 + (distance -  Threshold * 2) / 4;
+                distance = Threshold * 1.5 + (distance - Threshold * 2) / 4;
             }
         }
 
         return Math.Round(distance);
     }
+
+    protected override bool AfterHandleEventShouldRender() => false;
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
