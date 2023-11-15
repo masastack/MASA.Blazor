@@ -32,16 +32,17 @@
             var path = args.Path;
             path = path.Split("?").First().Split("#").First().ToLowerInvariant();
 
-            if (path is "blazor/components/image-captcha" or "blazor/labs/watermark")
+            // if (path is "blazor/components/image-captcha" or "blazor/labs/watermark")
+            // {
+            //     var assemblies = await AssemblyLoader.LoadAssembliesAsync(
+            //         new[] { /*"SkiaSharp.wasm", "SkiaSharp.Views.Blazor.wasm",*/ "Masa.Blazor.SomethingSkia.wasm" });
+            //     lazyLoadedAssemblies.AddRange(assemblies);
+            // }
+            // else 
+            if (path == "blazor/components/forms")
             {
                 var assemblies = await AssemblyLoader.LoadAssembliesAsync(
-                    new[] { "SkiaSharp.dll", "SkiaSharp.Views.Blazor.dll" });
-                lazyLoadedAssemblies.AddRange(assemblies);
-            }
-            else if (path == "blazor/components/forms")
-            {
-                var assemblies = await AssemblyLoader.LoadAssembliesAsync(
-                    new[] { "Util.Reflection.dll" });
+                    new[] { "Util.Reflection.wasm" });
                 lazyLoadedAssemblies.AddRange(assemblies);
             }
         }
