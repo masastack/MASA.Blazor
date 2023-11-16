@@ -359,7 +359,14 @@
         }
 
         public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
-            => await _baiduMap!.AddOverlayAsync(overlay);
+        {
+            if (_baiduMap is null)
+            {
+                return;
+            }
+            
+            await _baiduMap.AddOverlayAsync(overlay);
+        }
 
         public async ValueTask RemoveOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);
@@ -372,8 +379,15 @@
 
         async ValueTask IAsyncDisposable.DisposeAsync()
         {
-            if (_baiduMap is not null)
-                await _baiduMap.DisposeAsync();
+            try
+            {
+                if (_baiduMap is not null)
+                    await _baiduMap.DisposeAsync();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }
