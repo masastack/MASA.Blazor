@@ -19,6 +19,15 @@ namespace Masa.Blazor
         [Parameter]
         public bool Disabled { get; set; }
 
+        /// <summary>
+        /// The format of the link href. It's useful for SEO.
+        /// </summary>
+        /// <example>
+        /// ”/page/{0}“
+        /// </example>
+        [Parameter]
+        public string? HrefFormat { get; set; }
+
         [Parameter]
         public int Value { get; set; }
 

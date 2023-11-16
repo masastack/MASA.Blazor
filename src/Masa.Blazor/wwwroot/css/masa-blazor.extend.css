@@ -1391,3 +1391,9 @@ input[type=number] {
 .theme--light.m-pull-refresh .m-pull-refresh__header {
     color: rgba(0, 0, 0, 0.6);
 }
+
+/* pagination */
+
+a.m-pagination__item {
+    line-height: 34px;
+}
