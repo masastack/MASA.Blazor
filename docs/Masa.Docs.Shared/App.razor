@@ -35,7 +35,7 @@
             if (path is "blazor/components/image-captcha" or "blazor/labs/watermark")
             {
                 var assemblies = await AssemblyLoader.LoadAssembliesAsync(
-                    new[] { "Masa.Blazor.SomethingSkia.wasm" });
+                    new[] { "SkiaSharp.wasm", "SkiaSharp.Views.Blazor.wasm" });
                 lazyLoadedAssemblies.AddRange(assemblies);
             }
             else if (path == "blazor/components/forms")

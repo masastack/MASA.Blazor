@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorWebAssemblyLazyLoad Include="Masa.Blazor.SomethingSkia.wasm" />
+    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.wasm" />
+    <BlazorWebAssemblyLazyLoad Include="SkiaSharp.Views.Blazor.wasm" />
     <BlazorWebAssemblyLazyLoad Include="Util.Reflection.wasm" />
   </ItemGroup>
 
