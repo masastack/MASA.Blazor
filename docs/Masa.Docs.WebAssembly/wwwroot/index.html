@@ -121,7 +121,7 @@
     </div>
 
     <script src="js/sw.js"></script>
-    <script src="_framework/blazor.webassembly.js?version=8" autostart="false"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-it-emoji.min.js"></script>
@@ -168,6 +168,15 @@
         }).then(function () {
             Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
         });
+    </script>
+    <script>
+        const version = "1.2.2__net8.0";
+        const key = "docs-version"
+        const wasmUpdateVersion = localStorage.getItem(key)
+        if (!wasmUpdateVersion || wasmUpdateVersion !== version) {
+            if ('caches' in window) { caches.keys().then(function(cacheNames) { cacheNames.forEach(function(cacheName) { caches.open(cacheName).then(function(cache) { cache.keys().then(function(requests) { requests.forEach(function(request) { cache.delete(request); }); }); }); }); }); }
+            localStorage.setItem(key, version)
+        }
     </script>
 </body>
 
