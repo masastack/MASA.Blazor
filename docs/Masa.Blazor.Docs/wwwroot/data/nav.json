@@ -138,7 +138,10 @@
       "hover",
       "icons",
       "i18ns",
-      "image-captcha",
+      {
+        "title": "image-captcha",
+        "state": "breaking-change"
+      },
       "images",
       "infinite-scroll",
       "lists",
