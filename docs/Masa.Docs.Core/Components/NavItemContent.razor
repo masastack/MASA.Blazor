@@ -47,9 +47,10 @@ else if (Item?.State is not null)
     {
         return state switch
         {
-            "new"    => AppService.ColorForNewState,
-            "update" => AppService.ColorForUpdateState,
-            _        => null
+            "new"             => AppService.ColorForNewState,
+            "update"          => AppService.ColorForUpdateState,
+            "breaking-change" => AppService.ColorForBreakingChangeState,
+            _                 => null
         };
     }
 

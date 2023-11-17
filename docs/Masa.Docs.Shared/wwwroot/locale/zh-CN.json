@@ -47,7 +47,8 @@
   "methods": "方法",
   "state": {
     "new": "新增",
-    "update": "更新"
+    "update": "更新",
+    "breaking-change": "破坏更新"
   },
   "tag": {
     "preset": "预置",

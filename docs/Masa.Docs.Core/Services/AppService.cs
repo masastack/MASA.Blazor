@@ -6,6 +6,7 @@ public class AppService
     public const int MobileAppBarHeight = 64;
     public const string ColorForNewState = "#05CD99";
     public const string ColorForUpdateState = "#FF5252";
+    public const string ColorForBreakingChangeState = "#E040FB";
 
     private List<MarkdownItTocContent>? _toc;
 
