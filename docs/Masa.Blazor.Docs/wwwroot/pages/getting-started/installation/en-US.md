@@ -145,7 +145,7 @@ builder.Services.AddMasaBlazor();
 </MApp>
 ```
 
-## Manual Installation (Blazor Web App)
+## Manual Installation (Blazor Web App) {released-on=v1.1.0}
 
 > Requires Masa.Blazor minimum version `1.1.0` and .NET minimum version `8.0`.
 

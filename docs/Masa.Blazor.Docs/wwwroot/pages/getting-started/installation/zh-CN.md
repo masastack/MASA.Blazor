@@ -144,7 +144,7 @@ builder.Services.AddMasaBlazor();
 </MApp>
 ```
 
-## 手动安装（Blazor Web App）
+## 手动安装（Blazor Web App） {released-on=v1.1.0}
 
 > 要求 Masa.Blazor 最小版本为 `1.1.0` 和 .NET 版本最小为 `8.0`。
 

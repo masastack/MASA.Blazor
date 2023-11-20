@@ -10,8 +10,12 @@
   {
     "title": "getting-started",
     "icon": "mdi-flash",
+    "state": "update",
     "items": [
-      "installation",
+      {
+        "title": "installation",
+        "state": "update"
+      },
       "browser-support",
       "frequently-asked-questions",
       "wireframes",
