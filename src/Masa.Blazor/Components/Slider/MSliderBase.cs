@@ -9,9 +9,9 @@ namespace Masa.Blazor;
 /// <typeparam name="TValue">Numeric type or a list of numeric type</typeparam>
 /// <typeparam name="TNumeric">Numeric type</typeparam>
 #if NET6_0
-public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>
+public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>, IOutsideClickJsCallback, IAsyncDisposable
 #else
-public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric> where TNumeric : struct, IComparable<TNumeric>
+public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>, IOutsideClickJsCallback, IAsyncDisposable where TNumeric : struct, IComparable<TNumeric>
 #endif
 {
     [Inject]
@@ -19,6 +19,9 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
 
     [Inject]
     public Document Document { get; set; } = null!;
+
+    [Inject]
+    private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
     public bool Vertical { get; set; }
@@ -121,7 +124,6 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     [Parameter]
     public RenderFragment? ProgressContent { get; set; }
 
-    private HtmlElement? _app;
     private CancellationTokenSource? _mouseCancellationTokenSource;
 
     protected virtual double DoubleInternalValue
@@ -137,6 +139,8 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     public bool IsActive { get; set; }
 
     public bool NoClick { get; set; }
+
+    public ElementReference SliderElement { get; set; }
 
     public ElementReference ThumbElement { get; set; }
 
@@ -266,20 +270,20 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         return (T)Convert.ChangeType(val, typeof(T));
     }
 
-    protected override void OnInitialized()
+    private DotNetObjectReference<object>? _interopHandleReference;
+    private TValue? _oldValue;
+    private long _id;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnInitialized();
+        await base.OnAfterRenderAsync(firstRender);
 
-        _app ??= Document.QuerySelector("[data-app]");
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (OnChange.HasDelegate)
+        if (firstRender)
         {
-            ValueChanged = OnChange;
+            await OutsideClickJSModule.InitializeAsync(this, SliderElement.GetSelector());
+
+            _interopHandleReference = DotNetObjectReference.Create<object>(new SliderInteropHandle<TValue, TNumeric>(this));
+            _id = await Js.InvokeAsync<long>(JsInteropConstants.RegisterSliderEvents, SliderElement, _interopHandleReference);
         }
     }
 
@@ -296,43 +300,14 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
     }
 
     public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
-    {
-        await HandleOnSliderStartSwiping(args.Target!, args.Touches[0].ClientX, args.Touches[0].ClientY);
-        await _app!.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false,
-            new EventListenerExtras() { PreventDefault = false, StopPropagation = true });
-        await _app!.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
-        {
-            Capture = true,
-            Once = true
-        });
-    }
+        => await HandleOnSliderStartSwiping(args.Target!, args.Touches[0].ClientX, args.Touches[0].ClientY);
 
     public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
+        => await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
+
+    protected async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
     {
-        await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
-
-        await _app!.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false,
-            new EventListenerExtras() { PreventDefault = true, StopPropagation = true, Throttle = HostedInWebAssembly ? 0 : 16 });
-        await _app!.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
-        {
-            Capture = true,
-            Once = true
-        }, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
-    }
-
-    public async Task HandleTouchMove(TouchEventArgs args)
-    {
-        var mouseEventArgs = new MouseEventArgs()
-        {
-            ClientX = args.Touches[0].ClientX,
-            ClientY = args.Touches[0].ClientY,
-        };
-
-        await HandleOnMouseMoveAsync(mouseEventArgs);
-    }
-
-    public virtual async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
-    {
+        _oldValue = InternalValue;
         IsActive = true;
 
         if (target.Class?.Contains("m-slider__thumb-container") ?? false)
@@ -355,35 +330,25 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
             }, 300, _mouseCancellationTokenSource.Token);
         }
 
-        var args = new MouseEventArgs()
-        {
-            ClientX = clientX,
-            ClientY = clientY,
-        };
-
         await OnStart.InvokeAsync(InternalValue);
-        await HandleOnMouseMoveAsync(args);
-    }
-
-    public async Task HandleOnTouchEndAsync(TouchEventArgs args)
-    {
-        await HandleOnSliderEndSwiping();
-    }
-
-    public async Task HandleOnSliderMouseUpAsync(MouseEventArgs args)
-    {
-        await HandleOnSliderEndSwiping();
     }
 
     public async Task HandleOnSliderEndSwiping()
     {
         _mouseCancellationTokenSource?.Cancel();
         ThumbPressed = false;
-        await _app!.RemoveEventListenerAsync("mousemove");
-        await _app!.RemoveEventListenerAsync("touchmove");
+
+        await OnEnd.InvokeAsync(InternalValue);
+
+        if (!EqualityComparer<TValue>.Default.Equals(_oldValue, InternalValue))
+        {
+            await OnChange.InvokeAsync(InternalValue);
+            NoClick = true;
+        }
 
         IsActive = false;
-        await OnEnd.InvokeAsync(InternalValue);
+
+        StateHasChanged();
     }
 
     public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
@@ -396,6 +361,11 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         var val = await ParseMouseMoveAsync(args);
 
         await SetInternalValueAsync(val);
+
+        if (!ValueChanged.HasDelegate)
+        {
+            StateHasChanged();
+        }
     }
 
     protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
@@ -570,7 +540,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
                     .AddIf("m-slider__thumb-container--focused", () => IsThumbFocus(index))
                     .AddIf("m-slider__thumb-container--show-label", () => ShowThumbLabel)
                     .AddTextColor(ComputedThumbColor);
-            }, styleBuilder => { GetThumbContainerStyles(styleBuilder); })
+            }, GetThumbContainerStyles)
             .Apply("thumb", cssBuilder =>
             {
                 cssBuilder
@@ -726,5 +696,30 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         }
 
         return value;
+    }
+
+    public Task HandleOnOutsideClickAsync()
+    {
+        NextTick(async () =>
+        {
+            await HandleOnBlurAsync(new FocusEventArgs());
+            StateHasChanged();
+        });
+
+        return Task.CompletedTask;
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
+
+            _interopHandleReference?.Dispose();
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

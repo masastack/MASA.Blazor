@@ -1,12 +1,13 @@
 ﻿<MCard>
     <MCardText>
-        <MSlider TValue="double"
+        <MSlider @bind-Value="_value"
                  Step="10"
                  ThumbLabel="true"
-                 Ticks="true"></MSlider>
+                 Ticks="true">
+        </MSlider>
     </MCardText>
 </MCard>
 
 @code {
-    private double _value = 0;
-  }
+    private double _value;
+}
