@@ -50,11 +50,18 @@ public partial class MSplitterPane : IComponent, IAsyncDisposable
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        if (Splitter == null)
+        try
         {
-            return;
-        }
+            if (Splitter == null)
+            {
+                return;
+            }
 
-        await Splitter.UnregisterAsync(this);
+            await Splitter.UnregisterAsync(this);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

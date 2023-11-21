@@ -41,9 +41,16 @@ public class MDescriptionsItem : IComponent, IDescriptionsItem, IAsyncDisposable
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        if (Descriptions != null)
+        try
         {
-            await Descriptions.Unregister(this);
+            if (Descriptions != null)
+            {
+                await Descriptions.Unregister(this);
+            }
+        }
+        catch (Exception)
+        {
+            // ignored
         }
     }
 }
