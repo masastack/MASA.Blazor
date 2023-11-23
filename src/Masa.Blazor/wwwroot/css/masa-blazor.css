@@ -18152,12 +18152,15 @@ html.overflow-y-hidden {
 }
 .m-ripple__animation--enter {
     transition: none;
+    opacity: 0;
 }
 .m-ripple__animation--in {
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.25;
 }
 .m-ripple__animation--out {
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
 }
 .theme--light.m-icon {
     color: rgba(0, 0, 0, 0.54);
