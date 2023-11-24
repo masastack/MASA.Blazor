@@ -231,6 +231,7 @@ public partial class Example : NextTickComponentBase
         if (!_initialize)
         {
             RazorCompile.Initialized(await GetReference(), GetRazorExtension());
+            _initialize = true;
         }
 
         var code = await _monacoEditor!.GetValueAsync();
@@ -280,16 +281,26 @@ public partial class Example : NextTickComponentBase
             }
         }
 
-        _initialize = true;
-
         return portableExecutableReferences;
     }
 
     private static List<RazorExtension> GetRazorExtension()
     {
         return typeof(Example).Assembly.GetReferencedAssemblies()
-                              .Select(asm => new AssemblyExtension(asm.FullName, AppDomain.CurrentDomain.Load(asm.FullName)))
-                              .Cast<RazorExtension>().ToList();
+            .Select(asm =>
+            {
+                try
+                {
+                    return new AssemblyExtension(asm.FullName,
+                        AppDomain.CurrentDomain.Load(asm.FullName));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message, asm.FullName);
+                    return null;
+                }
+            }).Where(x => x != null)
+            .Cast<RazorExtension>().ToList();
     }
 
     protected override void Dispose(bool disposing)
