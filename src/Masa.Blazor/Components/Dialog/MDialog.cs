@@ -15,6 +15,13 @@
         [Parameter]
         public string? OverlayScrimClass { get; set; }
 
+        /// <summary>
+        /// The lazy content would be created in a [data-permanent] element.
+        /// It's useful when you use this component in a layout.
+        /// </summary>
+        [Parameter]
+        public bool Permanent { get; set; }
+
         [Parameter]
         public bool Scrollable { get; set; }
 
@@ -42,7 +49,8 @@
 
         bool IDialog.IsBooted => IsBooted;
 
-        protected override string AttachSelector => Attach ?? ".m-application";
+        protected override string AttachSelector
+            => Attach ?? (Permanent ? ".m-application__permanent" : ".m-application");
 
         protected override bool IsFullscreen => Fullscreen && MasaBlazor.Breakpoint.SmAndDown;
 
