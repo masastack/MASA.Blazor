@@ -4,7 +4,7 @@ namespace Masa.Blazor
 {
     public class MMenu : BMenu
     {
-        protected override string DefaultAttachSelector => ".m-application";
+        protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
         public override IEnumerable<string> DependentSelectors
             => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
