@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using Microsoft.VisualBasic;
+
+namespace Masa.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature
@@ -60,6 +62,9 @@
         public Icons Icons { get; }
 
         public SSROptions? SSR { get; }
+
+        // TODO: Use SSROptions
+        public bool IsSsr { get; } = true;
 
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;

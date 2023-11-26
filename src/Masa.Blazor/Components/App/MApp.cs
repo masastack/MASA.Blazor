@@ -7,11 +7,15 @@ namespace Masa.Blazor
     /// </summary>
     public class MApp : BApp
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter]
+#else
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
+        private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
-        public Window Window { get; set; } = null!;
+        private Window Window { get; set; } = null!;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 

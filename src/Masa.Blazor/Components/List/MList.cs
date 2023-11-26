@@ -101,6 +101,16 @@
         [Parameter]
         public StringNumber? Width { get; set; }
 
+#if NET8_0_OR_GREATER
+        [Inject]
+        private MasaBlazorProvider MasaBlazorProvider { get; set; } = null!;
+
+        public override bool IsDark
+            => MasaBlazorProvider.MasaBlazor.IsSsr
+                ? MasaBlazorProvider.MasaBlazor.Theme.Dark
+                : base.IsDark;
+#endif
+
         protected override void SetComponentClass()
         {
             var prefix = "m-list";

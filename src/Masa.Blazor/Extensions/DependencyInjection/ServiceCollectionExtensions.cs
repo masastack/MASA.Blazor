@@ -10,8 +10,7 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services)
     {
         services.AddBlazorComponent();
-        services.AddOptions<MasaBlazorOptions>();
-        return services.AddMasaBlazorInternal();
+        return services.AddMasaBlazorInternal(new MasaBlazorOptions());
     }
 
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
@@ -20,28 +19,31 @@ public static class ServiceCollectionExtensions
         optionsAction.Invoke(options);
 
         services.AddBlazorComponent(o => { o.Locale = options.Locale; });
-        services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
-        return services.AddMasaBlazorInternal();
+        return services.AddMasaBlazorInternal(options);
     }
 
-    private static IMasaBlazorBuilder AddMasaBlazorInternal(this IServiceCollection services)
+    private static IMasaBlazorBuilder AddMasaBlazorInternal(this IServiceCollection services, MasaBlazorOptions options)
     {
         services.TryAddScoped<Application>();
         services.TryAddScoped(serviceProvider =>
         {
             var application = serviceProvider.GetRequiredService<Application>();
             var window = serviceProvider.GetRequiredService<Window>();
-            var options = serviceProvider.GetRequiredService<IOptionsSnapshot<MasaBlazorOptions>>();
-            options.Value.Breakpoint.SetWindow(window);
+            options.Breakpoint.SetWindow(window);
             return new MasaBlazor(
-                options.Value.RTL,
-                options.Value.Breakpoint,
+                options.RTL,
+                options.Breakpoint,
                 application,
-                options.Value.Theme,
-                options.Value.Icons,
-                options.Value.SSR,
-                options.Value.Defaults);
+                options.Theme,
+                options.Icons,
+                options.SSR,
+                options.Defaults);
         });
+
+#if NET8_0_OR_GREATER
+        services.AddCascadingMasaBlazor();
+#endif
+
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();

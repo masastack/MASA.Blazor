@@ -6,7 +6,7 @@ namespace Masa.Blazor
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
         public bool App { get; set; }
@@ -54,6 +54,13 @@ namespace Masa.Blazor
         [Parameter]
         [MassApiParameter(true)]
         public bool Value { get; set; } = true;
+
+#if NET8_0_OR_GREATER
+        public override bool IsDark
+            => MasaBlazor.IsSsr
+                ? MasaBlazor.Theme.Dark
+                : base.IsDark;
+#endif
 
         private readonly string[] _applicationProperties =
         {
@@ -261,6 +268,7 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
+                Console.Out.WriteLine($"ApplicationPropertyChanged~~ {e.PropertyName} {MasaBlazor.Application.Left}");
                 InvokeStateHasChanged();
             }
         }
@@ -326,10 +334,24 @@ namespace Masa.Blazor
 
             var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
+            Console.Out.WriteLine("AppBar ~~ UpdateApplication Top:{val}");
+
             if (!Bottom)
+            {
                 MasaBlazor.Application.Top = val;
+
+#if NET8_0_OR_GREATER
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { top = val });
+#endif
+            }
             else
+            {
                 MasaBlazor.Application.Bottom = val;
+
+#if NET8_0_OR_GREATER
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { bottom = val });
+#endif
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

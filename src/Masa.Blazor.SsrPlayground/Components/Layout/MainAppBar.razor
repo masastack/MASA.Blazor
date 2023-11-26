@@ -1,0 +1,18 @@
+﻿@rendermode InteractiveServer
+@inject MasaBlazorProvider MasaBlazorProvider
+
+<MAppBar App>
+    <MSpacer />
+    <MButton Icon OnClick="@ToggleTheme">
+        <MIcon>@(MasaBlazorProvider.MasaBlazor.Theme.Dark ? "mdi-weather-night" : "mdi-weather-sunny")</MIcon>
+    </MButton>
+</MAppBar>
+
+@code {
+
+    private void ToggleTheme()
+    {
+        MasaBlazorProvider.ToggleTheme();
+    }
+
+}

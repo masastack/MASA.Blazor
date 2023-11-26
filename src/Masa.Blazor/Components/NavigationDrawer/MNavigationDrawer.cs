@@ -4,11 +4,17 @@ namespace Masa.Blazor
 {
     public class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
+#if NET8_0_OR_GREATER
+        [Inject] private MasaBlazorProvider MasaBlazorProvider { get; set; } = null!;
+
+        [CascadingParameter] private MasaBlazor MasaBlazor { get; set; } = null!;
+#else
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         [Inject]
-        public NavigationManager? NavigationManager { get; set; }
+        public NavigationManager NavigationManager { get; set; } = null!;
 
         [Parameter]
         public bool Bottom { get; set; }
@@ -73,6 +79,13 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment? PrependContent { get; set; }
+
+#if NET8_0_OR_GREATER
+        public override bool IsDark
+            => MasaBlazor.IsSsr
+                ? MasaBlazor.Theme.Dark
+                : base.IsDark;
+#endif
 
         private readonly string[] _applicationProperties = new string[]
         {
@@ -428,9 +441,23 @@ namespace Masa.Blazor
                 : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
 
             if (Right)
-                MasaBlazor!.Application.Right = val;
+            {
+                MasaBlazor.Application.Right = val;
+#if NET8_0_OR_GREATER
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { right = val });
+#endif
+            }
             else
-                MasaBlazor!.Application.Left = val;
+            {
+                MasaBlazor.Application.Left = val;
+#if NET8_0_OR_GREATER
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { left = val });
+#endif
+            }
+
+#if NET8_0_OR_GREATER
+            MasaBlazorProvider.NotifyStateChanged();
+#endif
         }
 
         private async Task<double> GetClientWidthAsync()
