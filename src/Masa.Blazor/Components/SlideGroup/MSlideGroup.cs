@@ -38,6 +38,11 @@
             ActiveClass ??= "m-slide-item--active";
             NextIcon ??= "$next";
             PrevIcon ??= "$prev";
+
+            if (MasaBlazor.RTL)
+            {
+                (NextIcon, PrevIcon) = (PrevIcon, NextIcon);
+            }
         }
 
         protected override void SetComponentClass()
