@@ -1,14 +1,24 @@
+using Masa.Blazor;
 using Masa.Blazor.SsrPlayground;
 using Masa.Blazor.SsrPlayground.Components;
 using Microsoft.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
+}
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
        .AddInteractiveServerComponents();
 
-builder.Services.AddMasaBlazor(opts => { opts.ConfigureTheme(t => t.Dark = true); });
+builder.Services.AddMasaBlazor(opts =>
+{
+    opts.RTL = true;
+    opts.ConfigureTheme(t => t.Dark = true); 
+});
 
 // builder.Services.AddCascadingValue("Test", sp => "Hello from CascadingValue");
 

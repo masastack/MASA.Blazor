@@ -1,8 +1,6 @@
 ﻿// TODO: Do I should put the class in the namespace Masa.Blazor.Services?
 // Because the class is not recommended to be used by the user.
 
-using System.Text.Json;
-
 namespace Masa.Blazor;
 
 public class MasaBlazorProvider
@@ -21,10 +19,9 @@ public class MasaBlazorProvider
 
     public void NotifyStateChanged(MasaBlazor masaBlazor)
     {
-        Console.Out.WriteLine($"NotifyStateChanged ~~ Dark:{MasaBlazor.Theme.Dark} Left:{masaBlazor.Application.Left}");
         MasaBlazorChanged?.Invoke(masaBlazor);
     }
-    
+
     public void NotifyStateChanged() => NotifyStateChanged(MasaBlazor);
 
     public void ToggleTheme()
@@ -32,6 +29,13 @@ public class MasaBlazorProvider
         MasaBlazor.ToggleTheme();
         NotifyStateChanged(MasaBlazor);
         _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.SsrSetTheme, MasaBlazor.Theme.Dark);
+    }
+
+    public void ToggleRtl()
+    {
+        MasaBlazor.RTL = !MasaBlazor.RTL;
+        NotifyStateChanged(MasaBlazor);
+        _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.SsrSetRtl, MasaBlazor.RTL);
     }
 }
 

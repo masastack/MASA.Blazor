@@ -1,10 +1,13 @@
 ﻿@rendermode InteractiveServer
 @inject MasaBlazorProvider MasaBlazorProvider
 
-<MAppBar App>
+<MAppBar App ClippedLeft>
     <MSpacer />
     <MButton Icon OnClick="@ToggleTheme">
-        <MIcon>@(MasaBlazorProvider.MasaBlazor.Theme.Dark ? "mdi-weather-night" : "mdi-weather-sunny")</MIcon>
+        <MIcon>@(MasaBlazorProvider.MasaBlazor.Theme.Dark ? "mdi-weather-sunny" : "mdi-weather-night")</MIcon>
+    </MButton>
+    <MButton Icon OnClick="@ToggleRtl">
+        <MIcon>@(MasaBlazorProvider.MasaBlazor.RTL ? "mdi-format-pilcrow-arrow-left" : "mdi-format-pilcrow-arrow-right")</MIcon>
     </MButton>
 </MAppBar>
 
@@ -15,4 +18,10 @@
         MasaBlazorProvider.ToggleTheme();
     }
 
+    private void ToggleRtl()
+    {
+        // MasaBlazorProvider.ToggleRtl();
+        // MasaBlazorProvider.MasaBlazor.RTL = false;
+        MasaBlazorProvider.ToggleRtl();
+    }
 }

@@ -36,7 +36,7 @@ namespace Masa.Blazor
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            
+
             if (HostedInWebAssembly)
             {
                 await OnJSInteropReadyAsync();
@@ -58,10 +58,10 @@ namespace Masa.Blazor
         {
             InvokeStateHasChanged();
         }
-        
+
         private async Task OnJSInteropReadyAsync()
         {
-            await MasaBlazor.Breakpoint.InitAsync();
+            await MasaBlazor.Breakpoint.InitAsync(Js);
             await Window.AddResizeEventListenerAsync();
         }
 

@@ -444,14 +444,14 @@ namespace Masa.Blazor
             {
                 MasaBlazor.Application.Right = val;
 #if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { right = val });
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
 #endif
             }
             else
             {
                 MasaBlazor.Application.Left = val;
 #if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { left = val });
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
 #endif
             }
 

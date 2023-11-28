@@ -334,14 +334,12 @@ namespace Masa.Blazor
 
             var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
-            Console.Out.WriteLine("AppBar ~~ UpdateApplication Top:{val}");
-
             if (!Bottom)
             {
                 MasaBlazor.Application.Top = val;
 
 #if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { top = val });
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
 #endif
             }
             else
@@ -349,7 +347,7 @@ namespace Masa.Blazor
                 MasaBlazor.Application.Bottom = val;
 
 #if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrSetMain, new { bottom = val });
+                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
 #endif
             }
         }
