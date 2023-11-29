@@ -23,6 +23,9 @@ public class AppHeading : ComponentBase
     [Parameter]
     public string? ReleasedOn { get; set; }
 
+    [Parameter]
+    public string? UpdatedIn { get; set; }
+
     private static Dictionary<int, string> s_map = new()
     {
         { 1, "text-h3 text-sm-h3 mb-4 mt-4" },
@@ -70,16 +73,38 @@ public class AppHeading : ComponentBase
             {
                 childBuilder.OpenComponent<MChip>(0);
                 childBuilder.AddAttribute(1, nameof(MChip.Outlined), true);
-                childBuilder.AddAttribute(2, nameof(MChip.Color), AppService.ColorForUpdateState);
+                childBuilder.AddAttribute(2, nameof(MChip.Color), AppService.ColorForNewState);
                 childBuilder.AddAttribute(3, nameof(MChip.Small), true);
                 childBuilder.AddAttribute(4, nameof(MChip.Class), "ml-2");
-                childBuilder.AddChildContent(5, ReleasedOn);
+                childBuilder.AddComponentParameter(5, "ChildContent", GenI18nContent("feature.released-on", ReleasedOn));
                 childBuilder.CloseComponent();
             });
         }
-        
+
+        if (!string.IsNullOrWhiteSpace(UpdatedIn))
+        {
+            builder.AddContent(5, childBuilder =>
+            {
+                childBuilder.OpenComponent<MChip>(0);
+                childBuilder.AddAttribute(1, nameof(MChip.Outlined), true);
+                childBuilder.AddAttribute(2, nameof(MChip.Color), AppService.ColorForUpdateState);
+                childBuilder.AddAttribute(3, nameof(MChip.Small), true);
+                childBuilder.AddAttribute(4, nameof(MChip.Class), "ml-2");
+                childBuilder.AddComponentParameter(5, "ChildContent", GenI18nContent("feature.updated-in", UpdatedIn));
+                childBuilder.CloseComponent();
+            });
+        }
+
         builder.CloseElement();
     }
+
+    private RenderFragment GenI18nContent(string key, string arg) => (builder) =>
+    {
+        builder.OpenComponent<MI18n>(0);
+        builder.AddAttribute(1, nameof(MI18n.Key), key);
+        builder.AddAttribute(2, nameof(MI18n.Args), new object[] { arg });
+        builder.CloseComponent();
+    };
 
     private async Task OnClick(string href)
     {
