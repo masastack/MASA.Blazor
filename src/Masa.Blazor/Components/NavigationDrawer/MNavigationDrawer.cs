@@ -7,7 +7,10 @@ namespace Masa.Blazor
 #if NET8_0_OR_GREATER
         [Inject] private MasaBlazorProvider MasaBlazorProvider { get; set; } = null!;
 
-        [CascadingParameter] private MasaBlazor MasaBlazor { get; set; } = null!;
+        [CascadingParameter]
+        private MasaBlazorState MasaBlazorState { get; set; } = null!;
+
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
 #else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;

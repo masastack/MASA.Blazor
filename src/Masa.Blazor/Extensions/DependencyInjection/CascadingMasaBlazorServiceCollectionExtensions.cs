@@ -14,27 +14,27 @@ public static class CascadingMasaBlazorServiceCollectionExtensions
     {
         serviceCollection.AddScoped<MasaBlazorProvider>();
 
-        return serviceCollection.AddCascadingValue<MasaBlazor>(services =>
+        return serviceCollection.AddCascadingValue<MasaBlazorState>(services =>
         {
             var masaBlazorProvider = services.GetRequiredService<MasaBlazorProvider>();
             return new MasaBlazorCascadingValueSource(masaBlazorProvider);
         });
     }
 
-    private sealed class MasaBlazorCascadingValueSource : CascadingValueSource<MasaBlazor>, IDisposable
+    private sealed class MasaBlazorCascadingValueSource : CascadingValueSource<MasaBlazorState>, IDisposable
     {
         private readonly MasaBlazorProvider _masaBlazorProvider;
 
         public MasaBlazorCascadingValueSource(MasaBlazorProvider masaBlazorProvider)
-            : base(masaBlazorProvider.MasaBlazor, isFixed: false)
+            : base(masaBlazorProvider.State, isFixed: false)
         {
             _masaBlazorProvider = masaBlazorProvider;
             _masaBlazorProvider.MasaBlazorChanged += HandleMasaBlazorChanged;
         }
 
-        private void HandleMasaBlazorChanged(MasaBlazor masaBlazor)
+        private void HandleMasaBlazorChanged(MasaBlazorState state)
         {
-            _ = NotifyChangedAsync(masaBlazor);
+            _ = NotifyChangedAsync(state);
         }
 
         public void Dispose()
