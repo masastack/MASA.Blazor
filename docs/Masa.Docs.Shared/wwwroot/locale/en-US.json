@@ -482,5 +482,9 @@
   "monitoring": "Monitoring",
   "error-query": "Error Query",
   "trouble-shooting": "Trouble Shooting",
-  "access-guide": "Access Guide"
+  "access-guide": "Access Guide",
+  "feature": {
+    "released-on": "Released on {0}",
+    "updated-in": "Updated in {0}"
+  }
 }

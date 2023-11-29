@@ -218,7 +218,10 @@
       "tabs",
       "timelines",
       "tooltips",
-      "treeview",
+      {
+        "title": "treeview",
+        "state": "update"
+      },
       "virtual-scroll"
     ]
   },

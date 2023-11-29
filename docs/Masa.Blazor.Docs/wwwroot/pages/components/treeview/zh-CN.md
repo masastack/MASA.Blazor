@@ -75,10 +75,9 @@ related:
 
 <masa-example file="Examples.components.treeview.SelectColor"></masa-example>
 
-#### 选择类型
+#### 选择类型 {updated-in=v1.3.0}
 
-属性视图支持两种不同的选择类型。 默认类型是 `Leaf`，它在 `@bind-Value` 数组中只包含选中的叶节点。 但会渲染父节点状态为全选或半选(这一点需要考量)。 另一种模式是 `Independent`
-，允许选择父节点，但每个节点都独立于其父节点。
+属性视图支持三种不同的选择类型。默认类型是 `Leaf`，它在 `@bind-Value` 数组中只包含选中的叶节点。但会渲染父节点状态为全选或半选(这一点需要考量)。第二种模式是 `Independent`，允许选择父节点，但每个节点都独立于其父节点。第三种模式是 `LeafButIndependentParent`。
 
 <masa-example file="Examples.components.treeview.SelectType"></masa-example>
 

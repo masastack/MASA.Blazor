@@ -75,11 +75,11 @@ Setting `SelectColor` prop You can control the color of the selected node checkb
 
 <masa-example file="Examples.components.treeview.SelectColor"></masa-example>
 
-#### Select type
+#### Select type {updated-in=v1.3.0}
 
-Treeview now supports two different selection types. The default type is `Leaf`, which will only include leaf nodes in
-the `@bind-Value` array, but will render parent nodes as either partially or fully selected. The alternative mode is
-`Independent`, which allows one to select parent nodes, but each node is independent of its parent and children.
+Treeview now supports three different selection types. The default type is `Leaf`, which will only include leaf nodes in
+the `@bind-Value` array, but will render parent nodes as either partially or fully selected. The second mode is
+`Independent`, which allows one to select parent nodes, but each node is independent of its parent and children. The third mode is `LeafButIndependentParent`.
 
 <masa-example file="Examples.components.treeview.SelectType"></masa-example>
 
