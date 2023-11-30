@@ -20,7 +20,7 @@ variables:
 packer:
 #   image:  registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.201_wasm
 #  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0.100_wasm_v2
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0.100
 #   tags:
 #     - 51-132
   stage: packer
@@ -121,7 +121,7 @@ deploy-dev-ydy:
 #   when: manual
 
 packer-prd:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:8.0.100
   stage: packer-prd
   only:
     - tags
