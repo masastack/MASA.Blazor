@@ -11,11 +11,12 @@
     <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
-    <MSsrThemeProvider @rendermode="@InteractiveServer"/>
+    <MSsrThemeProvider @rendermode="@InteractiveServer" />
 </head>
 
 <body>
     <Routes />
+    <script src="js/restore.js"></script>
     <MSsrAppProvider @rendermode="@InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>

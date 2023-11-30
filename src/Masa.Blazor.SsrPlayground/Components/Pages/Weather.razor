@@ -13,31 +13,30 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
+    <MDataTable Headers="_headers" Items="forecasts" ItemsPerPage="5">
+        <ItemColContent>
+            @if (context.Header.Value == nameof(WeatherForecast.Date))
             {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
+                @context.Item.Date.ToShortDateString()
             }
-        </tbody>
-    </table>
+            else
+            {
+                @context.Value
+            }
+        </ItemColContent>
+    </MDataTable>
 }
 
 @code {
     private WeatherForecast[]? forecasts;
+    
+    private List<DataTableHeader<WeatherForecast>> _headers = new()
+    {
+        new() { Text = "Date", Value = nameof(WeatherForecast.Date) },
+        new() { Text = "Temp. (C)", Value = nameof(WeatherForecast.TemperatureC) },
+        new() { Text = "Temp. (F)", Value = nameof(WeatherForecast.TemperatureF) },
+        new() { Text = "Summary", Value = nameof(WeatherForecast.Summary), Sortable = false }
+    };
 
     protected override async Task OnInitializedAsync()
     {

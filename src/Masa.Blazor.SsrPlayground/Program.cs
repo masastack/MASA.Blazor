@@ -1,3 +1,4 @@
+using BlazorComponent;
 using Masa.Blazor;
 using Masa.Blazor.SsrPlayground;
 using Masa.Blazor.SsrPlayground.Components;
@@ -16,6 +17,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddMasaBlazor(opts =>
 {
+    opts.Locale = new Locale("zh-CN", "en-US");
     opts.RTL = true;
     opts.ConfigureTheme(t => t.Dark = true); 
 });
