@@ -1,4 +1,33 @@
 const MASA_BLAZOR_SSR_STATE = "masablazor@ssr-state";
+function setRtl(rtl, updateCache = true) {
+    console.log("[index.ts] setRtl", rtl);
+    const app = getApp();
+    if (!app)
+        return;
+    const rtlCss = "m-application--is-rtl";
+    if (!rtl) {
+        app.classList.remove(rtlCss);
+    }
+    else if (!app.classList.contains(rtlCss)) {
+        app.classList.add(rtlCss);
+    }
+    if (updateCache) {
+        updateStorage({ rtl });
+    }
+}
+function getThemeCss(dark) {
+    return dark ? "theme--dark" : "theme--light";
+}
+function getApp() {
+    return document.querySelector(".m-application");
+}
+function updateStorage(obj) {
+    const stateStr = localStorage.getItem(MASA_BLAZOR_SSR_STATE);
+    if (stateStr) {
+        const state = JSON.parse(stateStr);
+        localStorage.setItem(MASA_BLAZOR_SSR_STATE, JSON.stringify(Object.assign(Object.assign({}, state), obj)));
+    }
+}
 function restoreMain(application) {
     const main = document.querySelector(".m-main");
     if (main && application) {
@@ -40,15 +69,20 @@ function onDispose() {
 function restoreTheme(state) {
     console.log("restoreTheme", state);
     if (typeof state.dark === "boolean") {
-        window.BlazorComponent.interop.ssr.setTheme(state.dark);
+        const selector = `.${getThemeCss(!state.dark)}:not(.theme--independent)`;
+        const elements = document.querySelectorAll(selector);
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].classList.remove(getThemeCss(!state.dark));
+            elements[i].classList.add(getThemeCss(state.dark));
+        }
     }
 }
 function restoreRtl(state) {
     console.log("restoreRtl", state);
     if (typeof state.rtl === "boolean") {
-        window.BlazorComponent.interop.ssr.setRtl(state.rtl);
+        setRtl(state.rtl, false);
     }
 }
 
-export { onDispose, onLoad, onUpdate };
+export { onDispose, onLoad, onUpdate, restoreRtl, restoreTheme };
 //# sourceMappingURL=ssr-page-script.js.map

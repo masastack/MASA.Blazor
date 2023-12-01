@@ -16,8 +16,9 @@
 
 <body>
     <Routes />
-    <script src="js/restore.js"></script>
-    <MSsrAppProvider @rendermode="@InteractiveServer" />
+    @* <script src="js/restore.js"></script> *@
+    <script src="_content/Masa.Blazor/js/ssr-state-restore.js"></script>
+    <MSsrStateProvider @rendermode="@InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 </body>

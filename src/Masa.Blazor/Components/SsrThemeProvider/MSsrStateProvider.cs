@@ -36,7 +36,7 @@ public class MasaBlazorSsrState
     }
 }
 
-public class MSsrAppProvider : ComponentBase, IDisposable
+public class MSsrStateProvider : ComponentBase, IDisposable
 {
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 

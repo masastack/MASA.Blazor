@@ -2,8 +2,15 @@
 {
     public class MIcon : BIcon, ISizeable
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter]
+        private MasaBlazorState MasaBlazorState { get; set; } = null!;
+        
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
-        private MasaBlazor? MasaBlazor { get; set; }
+        public MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         /// <summary>
         /// 36px
@@ -42,11 +49,11 @@
             { nameof(XLarge), "40px" },
         };
 
-        public IDictionary<string, object?> Attrs => Attributes;
+        private string? _iconCss;
 
         public bool Medium => false;
 
-        private string? _iconCss;
+        public override bool IsDark => MasaBlazor.IsSsr ? MasaBlazor.Theme.Dark : base.IsDark;
 
         protected override void InitIcon()
         {

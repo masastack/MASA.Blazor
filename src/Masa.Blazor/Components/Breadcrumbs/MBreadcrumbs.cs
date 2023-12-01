@@ -2,10 +2,16 @@
 {
     public class MBreadcrumbs : BBreadcrumbs
     {
-        [Parameter]
-        public bool Large { get; set; }
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
+        [Parameter] public bool Large { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            CascadingIsDark = MasaBlazor.IsSsr && MasaBlazor.Theme.Dark;
+        }
 
         protected override void SetComponentClass()
         {
@@ -15,7 +21,7 @@
                     cssBuilder
                         .Add("m-breadcrumbs")
                         .AddIf("m-breadcrumbs--large", () => Large)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 });
 
             AbstractProvider

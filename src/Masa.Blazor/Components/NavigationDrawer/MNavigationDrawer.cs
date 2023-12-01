@@ -5,8 +5,6 @@ namespace Masa.Blazor
     public class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
 #if NET8_0_OR_GREATER
-        [Inject] private MasaBlazorProvider MasaBlazorProvider { get; set; } = null!;
-
         [CascadingParameter]
         private MasaBlazorState MasaBlazorState { get; set; } = null!;
 
@@ -82,13 +80,6 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment? PrependContent { get; set; }
-
-#if NET8_0_OR_GREATER
-        public override bool IsDark
-            => MasaBlazor.IsSsr
-                ? MasaBlazor.Theme.Dark
-                : base.IsDark;
-#endif
 
         private readonly string[] _applicationProperties = new string[]
         {
@@ -203,6 +194,18 @@ namespace Masa.Blazor
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
             NavigationManager!.LocationChanged += OnLocationChanged;
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -368,7 +371,7 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--temporary", () => Temporary)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
@@ -446,21 +449,21 @@ namespace Masa.Blazor
             if (Right)
             {
                 MasaBlazor.Application.Right = val;
-#if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
-#endif
+
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
+                }
             }
             else
             {
                 MasaBlazor.Application.Left = val;
-#if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
-#endif
-            }
 
-#if NET8_0_OR_GREATER
-            MasaBlazorProvider.NotifyStateChanged();
-#endif
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
+                }
+            }
         }
 
         private async Task<double> GetClientWidthAsync()

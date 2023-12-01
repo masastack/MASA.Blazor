@@ -6,6 +6,8 @@ namespace Masa.Blazor
     {
         protected bool IsSticky => Sticky || App;
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool App { get; set; }
 
@@ -49,6 +51,13 @@ namespace Masa.Blazor
 
         public RenderFragment? ComputedActionsContent => ActionsContent?.Invoke(() => { Value = false; ValueChanged.InvokeAsync(Value); });
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            CascadingIsDark = MasaBlazor.IsSsr && MasaBlazor.Theme.Dark;
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -65,7 +74,7 @@ namespace Masa.Blazor
                         .AddIf("m-banner--single-line", () => SingleLine)
                         .AddIf("m-banner--sticky", () => IsSticky)
                         .AddBackgroundColor(Color)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

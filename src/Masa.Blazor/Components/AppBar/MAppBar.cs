@@ -55,13 +55,6 @@ namespace Masa.Blazor
         [MassApiParameter(true)]
         public bool Value { get; set; } = true;
 
-#if NET8_0_OR_GREATER
-        public override bool IsDark
-            => MasaBlazor.IsSsr
-                ? MasaBlazor.Theme.Dark
-                : base.IsDark;
-#endif
-
         private readonly string[] _applicationProperties =
         {
             "Left", "Bar", "Right"
@@ -338,17 +331,19 @@ namespace Masa.Blazor
             {
                 MasaBlazor.Application.Top = val;
 
-#if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
-#endif
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
+                }
             }
             else
             {
                 MasaBlazor.Application.Bottom = val;
 
-#if NET8_0_OR_GREATER
-                _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
-#endif
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
+                }
             }
         }
 

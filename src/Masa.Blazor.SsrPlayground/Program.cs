@@ -18,7 +18,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMasaBlazor(opts =>
 {
     opts.Locale = new Locale("zh-CN", "en-US");
-    opts.RTL = true;
+    opts.RTL = false;
     opts.ConfigureTheme(t => t.Dark = true); 
 });
 

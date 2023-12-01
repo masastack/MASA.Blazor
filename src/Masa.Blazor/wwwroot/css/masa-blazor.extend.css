@@ -1396,4 +1396,5 @@ input[type=number] {
 
 a.m-pagination__item {
     line-height: 34px;
+    text-align: center;
 }

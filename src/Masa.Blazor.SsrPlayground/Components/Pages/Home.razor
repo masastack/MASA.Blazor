@@ -1,14 +1,8 @@
 ﻿@page "/"
-@using BlazorComponent.I18n
-@inject MasaBlazor MasaBlazor
-@inject I18n I18n
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
-<h2>T: @I18n.T("$masaBlazor.ok")</h2>
-<h2>C: <MI18n Key="$masaBlazor.ok" @rendermode="@InteractiveServer"></MI18n></h2>
 
-<MButton Color="primary">Primary</MButton>
-
-Welcome to your new app.
+<MChip></MChip>
+<MChip @rendermode="InteractiveServer"></MChip>

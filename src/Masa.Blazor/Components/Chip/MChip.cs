@@ -2,6 +2,9 @@
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public string? Color { get; set; }
 
@@ -48,6 +51,13 @@
         {
             base.OnParametersSet();
 
+            Console.Out.WriteLine($"MChip.OnParametersSet() MasaBlazor.Theme.Dark:{MasaBlazor.Theme.Dark} CascadingIsDark:{CascadingIsDark} IsCascadingIsDarkDirty:{IsCascadingIsDarkDirty}");
+
+            if (MasaBlazor.IsSsr && !IsCascadingIsDarkDirty)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+
             _sizer = new Sizer(this);
 
             Attributes["ripple"] = Ripple && IsClickable;
@@ -77,7 +87,7 @@
                         .AddIf($"{prefix}--pill", () => Pill)
                         .AddIf($"{prefix}--removable", () => Close)
                         .AddIf($"{prefix}--active {ComputedActiveClass}", () => InternalIsActive)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
                         .AddTextColor(TextColor);

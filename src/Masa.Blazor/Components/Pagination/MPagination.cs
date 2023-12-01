@@ -4,8 +4,15 @@ namespace Masa.Blazor
 {
     public partial class MPagination : BPagination, IPagination, IAsyncDisposable
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter]
+        private MasaBlazorState MasaBlazorState { get; set; } = null!;
+        
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         [Inject]
         public Document Document { get; set; } = null!;
@@ -62,7 +69,9 @@ namespace Masa.Blazor
 
         public bool NextDisabled => Value >= Length;
 
-        protected int MaxButtons;
+        protected int MaxButtons { get; set; }
+
+        public override bool IsDark => MasaBlazor.IsSsr ? MasaBlazor.Theme.Dark : base.IsDark;
 
         protected override void SetComponentClass()
         {
@@ -166,7 +175,7 @@ namespace Masa.Blazor
             {
                 if (TotalVisible is null)
                 {
-                    return MaxButtons;
+                    return MaxButtons > 0 ? MaxButtons : Length;
                 }
 
                 return TotalVisible.ToInt32();

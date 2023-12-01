@@ -173,7 +173,10 @@
         "title": "page-tabs",
         "state": "update"
       },
-      "paginations",
+      {
+        "title": "paginations",
+        "state": "update"
+      },
       {
         "title": "pickers",
         "group": "components",

@@ -2,6 +2,13 @@
 
 public class MAlert : BAlert
 {
+#if NET8_0_OR_GREATER
+    [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
+
+    private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
+#endif
+
     [Parameter]
     public StringBoolean? Icon { get; set; }
 
@@ -54,7 +61,7 @@ public class MAlert : BAlert
 
     private string ComputedColor => Color ?? ComputedType;
 
-    private (bool, RenderFragment?) ComputedIcon()
+    private(bool, RenderFragment?) ComputedIcon()
     {
         if (Icon != null && Icon.IsT1 && Icon.AsT1 == false) return (false, null);
 
@@ -64,10 +71,10 @@ public class MAlert : BAlert
         var iconText = Type switch
         {
             AlertTypes.Success => "$success",
-            AlertTypes.Error => "$error",
-            AlertTypes.Info => "$info",
+            AlertTypes.Error   => "$error",
+            AlertTypes.Info    => "$info",
             AlertTypes.Warning => "$warning",
-            _ => null
+            _                  => null
         };
 
         if (iconText == null) return (false, null);
@@ -85,10 +92,19 @@ public class MAlert : BAlert
 
     private string IconColor => HasColoredIcon ? ComputedColor : "";
 
-    private bool IsDarkTheme => (Type != AlertTypes.None && !ColoredBorder && !Outlined) || IsDark;
+    private bool LogicalDark => Type != AlertTypes.None && !ColoredBorder && !Outlined;
+
+    private bool IsDarkTheme => LogicalDark || IsDark;
 
     protected override void OnParametersSet()
     {
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
+#endif
+
         (IsShowIcon, IconContent) = ComputedIcon();
     }
 
@@ -105,7 +121,7 @@ public class MAlert : BAlert
                     .AddIf("m-alert--border", () => Border != Borders.None)
                     .Add(AlertBorderClass)
                     .AddIf("m-sheet--shaped", () => Shaped)
-                    .AddTheme(IsDarkTheme)
+                    .AddTheme(IsDarkTheme, IndependentTheme)
                     .AddElevation(Elevation)
                     .AddFirstIf(
                         (() => "m-alert--prominent", () => Prominent),
@@ -160,22 +176,22 @@ public class MAlert : BAlert
 
         string BorderClass() => Border switch
         {
-            Borders.Left => "m-alert__border--left",
-            Borders.Right => "m-alert__border--right",
-            Borders.Top => "m-alert__border--top",
+            Borders.Left   => "m-alert__border--left",
+            Borders.Right  => "m-alert__border--right",
+            Borders.Top    => "m-alert__border--top",
             Borders.Bottom => "m-alert__border--bottom",
-            Borders.None => "",
-            _ => throw new ArgumentOutOfRangeException(nameof(Border))
+            Borders.None   => "",
+            _              => throw new ArgumentOutOfRangeException(nameof(Border))
         };
 
         string AlertBorderClass() => Border switch
         {
-            Borders.Left => "m-alert--border-left",
-            Borders.Right => "m-alert--border-right",
-            Borders.Top => "m-alert--border-top",
+            Borders.Left   => "m-alert--border-left",
+            Borders.Right  => "m-alert--border-right",
+            Borders.Top    => "m-alert--border-top",
             Borders.Bottom => "m-alert--border-bottom",
-            Borders.None => "",
-            _ => throw new ArgumentOutOfRangeException(nameof(Border))
+            Borders.None   => "",
+            _              => throw new ArgumentOutOfRangeException(nameof(Border))
         };
     }
 }
