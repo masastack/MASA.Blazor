@@ -45,6 +45,31 @@
 
         private bool IsLoading => ChildContent is null || Loading;
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+            if (Types is not null)
+            {
+                foreach (var (key, value) in Types)
+                {
+                    RootTypes.Add(key, value);
+                }
+            }
+
+            SkeletonLoaderContent = IsLoading ? GenSkeleton() : ChildContent;
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-skeleton-loader";
@@ -56,7 +81,7 @@
                               .AddIf($"{prefix}--boilerplate", () => Boilerplate)
                               .AddIf($"{prefix}--is-loading", () => IsLoading)
                               .AddIf($"{prefix}--tile", () => Tile)
-                              .AddTheme(IsDark)
+                              .AddTheme(IsDark, IndependentTheme)
                               .AddElevatable(this);
                 }, styleBuilder =>
                 {
@@ -107,21 +132,6 @@
                 { "text", "text" },
                 { "divider", "divider" },
             };
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (Types is not null)
-            {
-                foreach (var (key, value) in Types)
-                {
-                    RootTypes.Add(key, value);
-                }
-            }
-
-            SkeletonLoaderContent = IsLoading ? GenSkeleton() : ChildContent;
         }
 
         private RenderFragment GenSkeleton() => builder =>

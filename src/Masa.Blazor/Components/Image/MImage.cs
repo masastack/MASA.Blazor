@@ -8,6 +8,8 @@ namespace Masa.Blazor
         [Inject]
         private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Contain { get; set; }
 
@@ -151,6 +153,21 @@ namespace Masa.Blazor
             }
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+            _currentSrc = Src;
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -159,7 +176,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-image")
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("image", cssBuilder =>
                 {
@@ -219,13 +236,6 @@ namespace Masa.Blazor
 
             stringBuilder.Append($"url(\"{url}\")");
             return stringBuilder.ToString();
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            _currentSrc = Src;
         }
 
         private async Task PollForSize(string imgSrc, int? timeOut = 100)

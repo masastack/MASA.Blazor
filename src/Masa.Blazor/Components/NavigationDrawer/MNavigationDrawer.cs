@@ -196,15 +196,17 @@ namespace Masa.Blazor
             NavigationManager!.LocationChanged += OnLocationChanged;
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
 #if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
 #endif
         }
 

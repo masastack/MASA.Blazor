@@ -428,6 +428,21 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         return IsFocused;
     }
 
+    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
@@ -450,7 +465,7 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
                     .AddIf("m-slider--active", () => IsActive)
                     .AddIf("m-slider--disabled", () => IsDisabled)
                     .AddIf("m-slider--readonly", () => IsReadonly)
-                    .AddTheme(IsDark);
+                    .AddTheme(IsDark, IndependentTheme);
             })
             .Apply("track-container", cssBuilder =>
             {

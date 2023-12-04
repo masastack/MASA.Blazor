@@ -6,6 +6,8 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
 public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> where TValue : notnull
 #endif
 {
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+    
     [Parameter]
     public bool? Ripple { get; set; }
 
@@ -96,6 +98,21 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
     {
         return Task.CompletedTask;
     }
+    
+    protected bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
     protected override void SetComponentClass()
     {

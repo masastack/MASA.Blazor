@@ -4,7 +4,7 @@
     {
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
-
+        
         [Parameter]
         public string? Color { get; set; }
 
@@ -46,17 +46,19 @@
         public bool XSmall { get; set; }
 
         private Sizer? _sizer;
+        
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-            Console.Out.WriteLine($"MChip.OnParametersSet() MasaBlazor.Theme.Dark:{MasaBlazor.Theme.Dark} CascadingIsDark:{CascadingIsDark} IsCascadingIsDarkDirty:{IsCascadingIsDarkDirty}");
-
-            if (MasaBlazor.IsSsr && !IsCascadingIsDarkDirty)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
+#endif
 
             _sizer = new Sizer(this);
 

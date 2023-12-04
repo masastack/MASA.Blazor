@@ -91,7 +91,7 @@
                     cssBuilder
                         .Add("m-input--switch__track")
                         .AddTextColor(TrackColor ?? TextColor)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -102,7 +102,7 @@
                     cssBuilder
                         .Add("m-input--switch__thumb")
                         .AddTextColor(TextColor)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

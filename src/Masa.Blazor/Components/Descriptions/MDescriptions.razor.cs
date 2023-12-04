@@ -212,12 +212,27 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         await InvokeStateHasChangedAsync();
     }
 
+    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
 
         CssProvider
-            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered, AlignCenter)).AddTheme(IsDark); })
+            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered, AlignCenter)).AddTheme(IsDark, IndependentTheme); })
             .Extend("header")
             .Extend("header__title")
             .Extend("header__actions")

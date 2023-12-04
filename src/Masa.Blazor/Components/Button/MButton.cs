@@ -162,11 +162,18 @@ namespace Masa.Blazor
                 .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-            CascadingIsDark = MasaBlazor.IsSsr && MasaBlazor.Theme.Dark;
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
 
             Attributes["ripple"] = Ripple;
         }

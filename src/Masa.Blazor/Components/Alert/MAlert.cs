@@ -96,10 +96,14 @@ public class MAlert : BAlert
 
     private bool IsDarkTheme => LogicalDark || IsDark;
 
+    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
     protected override void OnParametersSet()
     {
+        base.OnParametersSet();
+
 #if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr)
+        if (MasaBlazor.IsSsr && !IndependentTheme)
         {
             CascadingIsDark = MasaBlazor.Theme.Dark;
         }

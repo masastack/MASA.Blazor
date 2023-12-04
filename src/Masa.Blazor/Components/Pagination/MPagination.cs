@@ -71,7 +71,20 @@ namespace Masa.Blazor
 
         protected int MaxButtons { get; set; }
 
-        public override bool IsDark => MasaBlazor.IsSsr ? MasaBlazor.Theme.Dark : base.IsDark;
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -82,7 +95,7 @@ namespace Masa.Blazor
                         .Add("m-pagination")
                         .AddIf("m-pagination--circle", () => Circle)
                         .AddIf("m-pagination--disabled", () => Disabled)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("navigation", cssBuilder =>
                 {

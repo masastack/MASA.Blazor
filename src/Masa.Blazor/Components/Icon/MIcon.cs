@@ -53,8 +53,6 @@
 
         public bool Medium => false;
 
-        public override bool IsDark => MasaBlazor.IsSsr ? MasaBlazor.Theme.Dark : base.IsDark;
-
         protected override void InitIcon()
         {
             Icon? icon;
@@ -144,6 +142,8 @@
             return (icon, css);
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
@@ -165,6 +165,19 @@
             return Size?.ToUnit();
         }
 
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -178,7 +191,7 @@
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddTextColor(Color, () => IsActive);
                 }, styleBuilder =>
                 {

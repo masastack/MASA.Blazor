@@ -93,7 +93,7 @@ namespace Masa.Blazor
                             var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, isIndependent: false);
                 })
                 .Apply("wrap", cssBuilder =>
                 {

@@ -3,9 +3,9 @@
     public partial class MSheet : BSheet, ISheet
     {
 #if NET8_0_OR_GREATER
-        [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 #endif
-
+        
         [Parameter]
         public bool Outlined { get; set; }
 
@@ -42,15 +42,17 @@
         [Parameter]
         public StringNumber? MinHeight { get; set; }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
 #if NET8_0_OR_GREATER
-            if (MasaBlazorState.Instance.IsSsr)
-            {
-                CascadingIsDark = MasaBlazorState.Instance.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
 #endif
         }
 

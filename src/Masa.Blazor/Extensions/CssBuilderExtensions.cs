@@ -4,7 +4,7 @@ namespace BlazorComponent
 {
     public static class CssBuilderExtensions
     {
-        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool isDark, bool isIndependent = false)
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool isDark, bool isIndependent)
         {
             cssBuilder.Add(() =>
             {

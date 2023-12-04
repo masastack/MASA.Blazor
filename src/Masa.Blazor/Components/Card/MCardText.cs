@@ -4,7 +4,7 @@
     {
         [CascadingParameter(Name = "IsDark")]
         public bool CascadingIsDark { get; set; }
-        
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -14,7 +14,7 @@
                 {
                     cssBuilder
                         .Add("m-card__text")
-                        .AddTheme(CascadingIsDark);
+                        .AddTheme(CascadingIsDark, isIndependent: false);
                 });
         }
     }

@@ -2,6 +2,8 @@
 {
     public partial class MList : BList, IThemeable
     {
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+        
         /// <summary>
         /// Removes elevation (box-shadow) and adds a thin border.
         /// </summary>
@@ -101,14 +103,19 @@
         [Parameter]
         public StringNumber? Width { get; set; }
 
-#if NET8_0_OR_GREATER
-        [Inject]
-        private MasaBlazorProvider MasaBlazorProvider { get; set; } = null!;
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-        public override bool IsDark
-            => MasaBlazorProvider.MasaBlazor.IsSsr
-                ? MasaBlazorProvider.MasaBlazor.Theme.Dark
-                : base.IsDark;
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
 #endif
 
         protected override void SetComponentClass()
@@ -122,7 +129,7 @@
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
                         .AddIf("m-sheet--shaped", () => Shaped)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .Add("m-list")
                         .AddIf(() => $"elevation-{Elevation!.Value}", () => Elevation != null)
                         .AddIf($"{prefix}--dense", () => Dense)
