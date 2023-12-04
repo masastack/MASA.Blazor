@@ -2,6 +2,10 @@
 {
     public partial class MSheet : BSheet, ISheet
     {
+#if NET8_0_OR_GREATER
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
+        
         [Parameter]
         public bool Outlined { get; set; }
 
@@ -38,6 +42,20 @@
         [Parameter]
         public StringNumber? MinHeight { get; set; }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
+#endif
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-sheet";
@@ -48,7 +66,7 @@
                         .Add(prefix)
                         .AddIf($"{prefix}--outlined", () => Outlined)
                         .AddIf($"{prefix}--shaped", () => Shaped)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddElevation(Elevation)
                         .AddRounded(Rounded, Tile)
                         .AddBackgroundColor(Color);

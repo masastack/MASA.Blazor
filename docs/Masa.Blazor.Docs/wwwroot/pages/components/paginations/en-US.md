@@ -29,6 +29,12 @@ Using the `Disabled` property, you can manually disable paging.
 
 <masa-example file="Examples.components.paginations.Disabled"></masa-example>
 
+#### Href format {released-on=v1.3.0}
+
+Using `HrefFormat` property, you can customize the link format of the pagination button. It's helpful for SEO.
+
+<masa-example file="Examples.components.paginations.HrefFormat"></masa-example>
+
 #### Icon
 
 The icons of the previous page and the next page can be customized through the `PrevIcon` and `NextIcon` properties.

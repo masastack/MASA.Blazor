@@ -38,7 +38,7 @@ public partial class MSplitter
             .UseBem("m-splitter", css =>
             {
                 css.Modifiers(m =>
-                    m.Modifier("column", !Row).Add(Row).Add("dragging", _dragging)).AddTheme(CascadingIsDark);
+                    m.Modifier("column", !Row).Add(Row).Add("dragging", _dragging)).AddTheme(CascadingIsDark, isIndependent: false);
             })
             .Element("pane", css =>
             {

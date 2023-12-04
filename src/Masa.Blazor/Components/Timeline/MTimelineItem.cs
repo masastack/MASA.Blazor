@@ -30,6 +30,23 @@
         [Parameter]
         public bool Small { get; set; }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             var prefix = "m-timeline-item";
@@ -42,7 +59,7 @@
                         .AddIf($"{prefix}--fill-dot", () => FillDot)
                         .AddIf($"{prefix}--before", () => BTimeline?.Reverse is true ? Right : Left)
                         .AddIf($"{prefix}--after", () => BTimeline?.Reverse is true ? Left : Right)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("body", cssBuilder =>
                 {

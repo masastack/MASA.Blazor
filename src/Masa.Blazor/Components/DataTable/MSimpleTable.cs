@@ -31,6 +31,20 @@ namespace Masa.Blazor
         public ElementReference WrapperElement { get; set; }
 
         private int _scrollState;
+        
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -44,7 +58,7 @@ namespace Masa.Blazor
                         .AddIf("m-data-table--fixed-header", () => FixedHeader)
                         .AddIf("m-data-table--has-top", () => TopContent != null)
                         .AddIf("m-data-table--has-bottom", () => BottomContent != null)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("wrapper", cssBuilder =>
                 {

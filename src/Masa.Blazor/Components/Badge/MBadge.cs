@@ -2,8 +2,14 @@
 {
     public partial class MBadge : BBadge, IBadge
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
+
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
         
         [Parameter]
         public bool Avatar { get; set; }
@@ -80,6 +86,20 @@
 
         protected bool IsRtl => MasaBlazor.RTL;
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -98,7 +118,7 @@
                         .AddIf("m-badge--left", () => Left)
                         .AddIf("m-badge--overlap", () => OverLap)
                         .AddIf("m-badge--tile", () => Tile)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("wrapper", cssBuilder =>
                 {

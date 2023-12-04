@@ -16,6 +16,13 @@ public class MMain : BMain
         await base.OnInitializedAsync();
 
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
+
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr)
+        {
+            Attributes["data-booted"] = "true";
+        }
+#endif
     }
 
     protected override void OnAfterRender(bool firstRender)

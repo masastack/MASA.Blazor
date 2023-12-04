@@ -2,6 +2,9 @@
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+        
         [Parameter]
         public string? Color { get; set; }
 
@@ -43,10 +46,19 @@
         public bool XSmall { get; set; }
 
         private Sizer? _sizer;
+        
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
+#endif
 
             _sizer = new Sizer(this);
 
@@ -77,7 +89,7 @@
                         .AddIf($"{prefix}--pill", () => Pill)
                         .AddIf($"{prefix}--removable", () => Close)
                         .AddIf($"{prefix}--active {ComputedActiveClass}", () => InternalIsActive)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
                         .AddTextColor(TextColor);

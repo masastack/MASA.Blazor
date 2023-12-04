@@ -2,8 +2,9 @@
 {
     public partial class MOverlay : BOverlay, IThemeable, IOverlay, IAsyncDisposable
     {
-        [Inject]
-        private ScrollStrategyJSModule ScrollStrategyJSModule { get; set; } = null!;
+        [Inject] private ScrollStrategyJSModule ScrollStrategyJSModule { get; set; } = null!;
+
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
@@ -50,6 +51,21 @@
             }
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -60,7 +76,7 @@
                         .AddIf("m-overlay--active", () => Value)
                         .AddIf("m-overlay--absolute", () => Absolute || Contained)
                         .AddIf("m-overlay--contained", () => Contained)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

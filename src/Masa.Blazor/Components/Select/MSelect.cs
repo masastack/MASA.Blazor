@@ -422,7 +422,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         IsMenuActive = true;
     }
+    
+    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
@@ -436,7 +450,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                     .AddIf("m-select--is-multi", () => Multiple)
                     .AddIf("m-select--chips", () => Chips)
                     .AddIf("m-select--chips--small", () => SmallChips)
-                    .AddTheme(IsDark);
+                    .AddTheme(IsDark, IndependentTheme);
             }, styleBuilder =>
             {
                 styleBuilder

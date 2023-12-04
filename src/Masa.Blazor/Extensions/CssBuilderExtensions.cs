@@ -4,15 +4,18 @@ namespace BlazorComponent
 {
     public static class CssBuilderExtensions
     {
-        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool isDark, bool exDark = false)
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool isDark, bool isIndependent)
         {
-            var dark = isDark || exDark;
-
             cssBuilder.Add(() =>
             {
-                var suffix = dark ? "dark" : "light";
+                var suffix = isDark ? "dark" : "light";
                 return $"theme--{suffix}";
             });
+            
+            if (isIndependent)
+            {
+                cssBuilder.Add("theme--independent");
+            }
 
             return cssBuilder;
         }

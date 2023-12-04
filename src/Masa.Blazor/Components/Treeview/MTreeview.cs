@@ -45,6 +45,23 @@
 
         [Parameter]
         public bool OpenOnClick { get; set; }
+        
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -57,7 +74,7 @@
                         .Add("m-treeview")
                         .AddIf("m-treeview--hoverable", () => Hoverable)
                         .AddIf("m-treeview--dense", () => Dense)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 });
 
             AbstractProvider

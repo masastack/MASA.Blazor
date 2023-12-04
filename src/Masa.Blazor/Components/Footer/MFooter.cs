@@ -131,6 +131,21 @@ namespace Masa.Blazor
                 InvokeStateHasChanged();
             }
         }
+                
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -140,7 +155,7 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-footer")
                         .Add("m-sheet")
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color)
                         .AddIf("m-footer--absolute", () => Absolute)
                         .AddIf("m-footer--fixed", () => !Absolute && (App || Fixed))

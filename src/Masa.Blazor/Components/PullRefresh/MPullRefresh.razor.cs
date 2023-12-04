@@ -64,7 +64,7 @@ public partial class MPullRefresh : IAsyncDisposable
     {
         base.SetComponentClass();
 
-        CssProvider.UseBem("m-pull-refresh", css => { css.Modifiers(m => m.Modifier(_pullRefreshStatus, "status")).AddTheme(CascadingIsDark); })
+        CssProvider.UseBem("m-pull-refresh", css => { css.Modifiers(m => m.Modifier(_pullRefreshStatus, "status")).AddTheme(CascadingIsDark, isIndependent: false); })
                    .Element("track", _ => { }, style =>
                    {
                        style.Add($"transition-duration: {_duration}ms;")

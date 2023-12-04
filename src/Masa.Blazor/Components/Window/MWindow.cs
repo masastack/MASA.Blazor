@@ -25,11 +25,19 @@ namespace Masa.Blazor
                 return $"m-window-{axis}{direction}-transition";
             }
         }
+        
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
             ActiveClass = "m-window-item--active";
             PrevIcon ??= "$prev";
             NextIcon ??= "$next";
@@ -44,7 +52,7 @@ namespace Masa.Blazor
                         .Add("m-window")
                         .Add("m-item-group")
                         .AddIf("m-window--show-arrows-on-hover", () => ShowArrowsOnHover)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("container", cssBuilder =>
                 {

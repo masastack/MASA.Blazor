@@ -269,6 +269,22 @@ namespace Masa.Blazor
                 .Watch<int?>(nameof(Value), val => { InputValue = val; });
         }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -277,7 +293,7 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-time-picker-clock")
                         .AddIf("m-time-picker-clock--indeterminate", () => Value == null)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("inner", cssBuilder =>
                 {

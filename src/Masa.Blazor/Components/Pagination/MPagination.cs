@@ -4,8 +4,15 @@ namespace Masa.Blazor
 {
     public partial class MPagination : BPagination, IPagination, IAsyncDisposable
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter]
+        private MasaBlazorState MasaBlazorState { get; set; } = null!;
+        
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         [Inject]
         public Document Document { get; set; } = null!;
@@ -62,7 +69,22 @@ namespace Masa.Blazor
 
         public bool NextDisabled => Value >= Length;
 
-        protected int MaxButtons;
+        protected int MaxButtons { get; set; }
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -73,7 +95,7 @@ namespace Masa.Blazor
                         .Add("m-pagination")
                         .AddIf("m-pagination--circle", () => Circle)
                         .AddIf("m-pagination--disabled", () => Disabled)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("navigation", cssBuilder =>
                 {
@@ -166,7 +188,7 @@ namespace Masa.Blazor
             {
                 if (TotalVisible is null)
                 {
-                    return MaxButtons;
+                    return MaxButtons > 0 ? MaxButtons : Length;
                 }
 
                 return TotalVisible.ToInt32();

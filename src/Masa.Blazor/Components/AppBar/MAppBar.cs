@@ -6,7 +6,7 @@ namespace Masa.Blazor
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
         [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
         public bool App { get; set; }
@@ -261,6 +261,7 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
+                Console.Out.WriteLine($"ApplicationPropertyChanged~~ {e.PropertyName} {MasaBlazor.Application.Left}");
                 InvokeStateHasChanged();
             }
         }
@@ -327,9 +328,23 @@ namespace Masa.Blazor
             var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
             if (!Bottom)
+            {
                 MasaBlazor.Application.Top = val;
+
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
+                }
+            }
             else
+            {
                 MasaBlazor.Application.Bottom = val;
+
+                if (MasaBlazor.IsSsr)
+                {
+                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
+                }
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

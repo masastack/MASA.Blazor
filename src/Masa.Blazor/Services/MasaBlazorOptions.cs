@@ -21,9 +21,19 @@ public class MasaBlazorOptions : BlazorComponentOptions
 
     internal Theme Theme { get; }
 
-    public void ConfigureBreakpoint(Action<Breakpoint> configure)
+    public void ConfigureBreakpoint(Action<BreakpointOptions> configure)
     {
-        configure.Invoke(Breakpoint);
+        var defaultBreakpointOptions = new BreakpointOptions()
+        {
+            MobileBreakpoint = MasaBlazorPreset.Breakpoint.MobileBreakpoint,
+            ScrollBarWidth = MasaBlazorPreset.Breakpoint.ScrollBarWidth,
+            Thresholds = MasaBlazorPreset.Breakpoint.Thresholds
+        };
+        configure.Invoke(defaultBreakpointOptions);
+
+        Breakpoint.MobileBreakpoint = defaultBreakpointOptions.MobileBreakpoint;
+        Breakpoint.ScrollBarWidth = defaultBreakpointOptions.ScrollBarWidth;
+        Breakpoint.Thresholds = defaultBreakpointOptions.Thresholds;
     }
 
     public void ConfigureIcons(IconSet defaultSet, Action<IconAliases>? aliasesConfigure = null)

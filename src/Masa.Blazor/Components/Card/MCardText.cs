@@ -14,7 +14,7 @@
                 {
                     cssBuilder
                         .Add("m-card__text")
-                       .AddTheme(CascadingIsDark);
+                        .AddTheme(CascadingIsDark, isIndependent: false);
                 });
         }
     }

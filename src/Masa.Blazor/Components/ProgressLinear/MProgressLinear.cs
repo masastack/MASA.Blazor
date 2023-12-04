@@ -109,10 +109,18 @@ namespace Masa.Blazor
 
         protected int NormalizedBuffer => NormalizeValue(BufferValue);
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
             if (string.IsNullOrWhiteSpace(Color))
             {
                 Color = "primary";
@@ -136,7 +144,7 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--striped", () => Striped)
                         .AddIf($"{prefix}--visible", () => IsVisible)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

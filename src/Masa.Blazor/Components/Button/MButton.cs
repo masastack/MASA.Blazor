@@ -5,6 +5,8 @@ namespace Masa.Blazor
 {
     public class MButton : BButton, IButton, IThemeable
     {
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         public bool Default { get; set; } = true;
 
         [Parameter]
@@ -116,7 +118,7 @@ namespace Masa.Blazor
                             ("m-size--x-small", () => XSmall),
                             ("m-size--default", () => Default)
                         )
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color, () => HasBackground)
                         .AddTextColor(Color, () => !HasBackground)
                         .AddElevation(Elevation);
@@ -160,9 +162,19 @@ namespace Masa.Blazor
                 .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+
             Attributes["ripple"] = Ripple;
         }
 

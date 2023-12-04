@@ -146,6 +146,23 @@
             });
         }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -165,7 +182,7 @@
                         .AddIf($"{prefix}--is-loading", () => Loading != false && Loading != null)
                         .AddIf($"{prefix}--is-readonly", () => IsReadonly)
                         .AddIf($"{prefix}--dense", () => Dense)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddTextColor(ValidationState);
                 }, styleBuilder =>
                 {

@@ -7,11 +7,18 @@ namespace Masa.Blazor
     /// </summary>
     public class MApp : BApp
     {
+#if NET8_0_OR_GREATER
+        [CascadingParameter]
+        private MasaBlazorState MasaBlazorState { get; set; } = null!;
+
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         [Inject]
-        public Window Window { get; set; } = null!;
+        private Window Window { get; set; } = null!;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
@@ -32,7 +39,7 @@ namespace Masa.Blazor
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            
+
             if (HostedInWebAssembly)
             {
                 await OnJSInteropReadyAsync();
@@ -54,10 +61,10 @@ namespace Masa.Blazor
         {
             InvokeStateHasChanged();
         }
-        
+
         private async Task OnJSInteropReadyAsync()
         {
-            await MasaBlazor.Breakpoint.InitAsync();
+            await MasaBlazor.Breakpoint.InitAsync(Js);
             await Window.AddResizeEventListenerAsync();
         }
 
@@ -86,7 +93,7 @@ namespace Masa.Blazor
                             var suffix = MasaBlazor.RTL ? "rtl" : "ltr";
                             return $"{prefix}--is-{suffix}";
                         })
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, isIndependent: false);
                 })
                 .Apply("wrap", cssBuilder =>
                 {

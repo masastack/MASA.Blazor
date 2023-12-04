@@ -111,6 +111,20 @@
             watcher
                 .Watch<DateOnly>(nameof(Value), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
         }
+        
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -120,7 +134,7 @@
                     cssBuilder
                         .Add("m-date-picker-header")
                         .AddIf("m-date-picker-header--disabled", () => Disabled)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("value", cssBuilder =>
                 {

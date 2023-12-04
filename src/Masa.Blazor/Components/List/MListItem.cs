@@ -42,13 +42,23 @@ namespace Masa.Blazor
 
         private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
             Attributes["ripple"] = ComputedRipple;
         }
-
+  
         protected override void SetComponentClass()
         {
             var prefix = "m-list-item";
@@ -74,7 +84,7 @@ namespace Masa.Blazor
                         })
                         .AddIf("m-list-item--highlighted", () => Highlighted)
                         .AddTextColor(Color)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 });
         }
     }
