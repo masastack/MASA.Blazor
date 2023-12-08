@@ -69,6 +69,22 @@ public class Breakpoint
 
     public OneOf<Breakpoints, double> MobileBreakpoint { get; internal set; }
 
+    public double GetMobileBreakpointValue()
+    {
+        if (MobileBreakpoint.IsT1)
+        {
+            return MobileBreakpoint.AsT1;
+        }
+
+        return MobileBreakpoint.AsT0 switch
+        {
+            Breakpoints.Xs => Thresholds.Xs,
+            Breakpoints.Sm => Thresholds.Sm,
+            Breakpoints.Md => Thresholds.Md,
+            _              => Thresholds.Lg,
+        };
+    }
+
     public BreakpointThresholds Thresholds { get; internal set; }
 
     public double ScrollBarWidth { get; internal set; }

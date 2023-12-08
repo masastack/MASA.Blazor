@@ -48,11 +48,14 @@ public class MMain : BMain
         CssProvider
             .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
             {
-                styleBuilder
+                if (!MasaBlazor.IsSsr)
+                {
+                    styleBuilder
                     .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
                     .Add($"padding-right:{MasaBlazor.Application.Right}px")
                     .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
                     .Add($"padding-left:{MasaBlazor.Application.Left}px");
+                }
             })
             .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
     }

@@ -9,6 +9,8 @@ public partial class MSsrThemeProvider : IDisposable
     private readonly ThemeCssBuilder _themeCssBuilder = new();
     private string? _themeCss;
 
+    private string? _ssrCss;
+
     protected override void OnInitialized()
     {
         BuildThemeCss(MasaBlazor.Theme);

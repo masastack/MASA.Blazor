@@ -1,0 +1,63 @@
+﻿@page "/weather"
+@attribute [StreamRendering]
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MDataTable Headers="_headers" Items="forecasts" ItemsPerPage="5">
+        <ItemColContent>
+            @if (context.Header.Value == nameof(WeatherForecast.Date))
+            {
+                @context.Item.Date.ToShortDateString()
+            }
+            else
+            {
+                @context.Value
+            }
+        </ItemColContent>
+    </MDataTable>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+    
+    private List<DataTableHeader<WeatherForecast>> _headers = new()
+    {
+        new() { Text = "Date", Value = nameof(WeatherForecast.Date) },
+        new() { Text = "Temp. (C)", Value = nameof(WeatherForecast.TemperatureC) },
+        new() { Text = "Temp. (F)", Value = nameof(WeatherForecast.TemperatureF) },
+        new() { Text = "Summary", Value = nameof(WeatherForecast.Summary), Sortable = false }
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = startDate.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = summaries[Random.Shared.Next(summaries.Length)]
+        }).ToArray();
+    }
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}

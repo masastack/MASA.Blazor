@@ -363,6 +363,7 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--bottom", () => Bottom)
                         .AddIf($"{prefix}--clipped", () => Clipped)
                         .AddIf($"{prefix}--close", () => !IsActive)
+                        .AddIf($"{prefix}--app", () => App)
                         .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
                         .AddIf($"{prefix}--floating", () => Floating)
                         .AddIf($"{prefix}--is-mobile", () => IsMobile)
@@ -380,8 +381,8 @@ namespace Masa.Blazor
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}")
-                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => ComputedMaxHeight != null)
+                        .AddIf(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}", () => !MasaBlazor.IsSsr)
+                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => !MasaBlazor.IsSsr && ComputedMaxHeight != null)
                         .AddIf(() => $"transform:{translate}({ComputedTransform.ToUnit("%")})", () => ComputedTransform != null)
                         .AddWidth(ComputedWidth)
                         .AddBackgroundColor(Color);

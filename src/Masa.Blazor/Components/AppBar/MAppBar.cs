@@ -5,8 +5,14 @@ namespace Masa.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
+#if  NET8_0_OR_GREATER
+        [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
+
+        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
+#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
+#endif
 
         [Parameter]
         public bool App { get; set; }
@@ -243,6 +249,12 @@ namespace Masa.Blazor
             }
 
             MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
+
+            if (MasaBlazor.IsSsr)
+            {
+                _isBooted = true;
+                Attributes["data-booted"] = "true";
+            }
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -261,7 +273,6 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
-                Console.Out.WriteLine($"ApplicationPropertyChanged~~ {e.PropertyName} {MasaBlazor.Application.Left}");
                 InvokeStateHasChanged();
             }
         }
@@ -288,8 +299,11 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-app-bar")
                         .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
+                        .AddIf("m-app-bar--clipped-left", () => ClippedLeft)
+                        .AddIf("m-app-bar--clipped-right", () => ClippedRight)
                         .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
                         .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
+                        .AddIf("m-app-bar--app", () => App)
                         .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
                         .AddIf("m-app-bar--hide-shadow", () => HideShadow)
                         .AddIf("m-app-bar--is-scrolled", () => _scroller is { CurrentScroll: > 0 })
@@ -297,11 +311,11 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
-                        .Add(() => $"margin-top:{ComputedMarginTop}px")
                         .Add(() => $"transform:translateY({ComputedTransform}px)")
-                        .Add(() => $"left:{ComputedLeft}px")
-                        .Add(() => $"right:{ComputedRight}px");
+                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
+                        .AddIf(() => $"margin-top:{ComputedMarginTop}px", () => !MasaBlazor.IsSsr)
+                        .AddIf(() => $"left:{ComputedLeft}px", () => !MasaBlazor.IsSsr)
+                        .AddIf(() => $"right:{ComputedRight}px", () => !MasaBlazor.IsSsr);
                 })
                 .Merge("image",
                     _ => { },
