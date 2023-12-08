@@ -30,8 +30,13 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
   If there are generic parameters in the method, you need to specify the generic type. For example, when using the `OnSelectedItemUpdate` event in the **MSelect** component, you need to specify the generic type as follows:
 
-  ``` razor l:1
+  ``` razor l:1-3
   <MSelect TItem="string"
+           TValue="string"
+           TItemValue="string"
+           Items="@Items"
+           ItemText="item => item"
+           ItemValue="item => item"
            OnSelectedItemUpdate="OnUpdate">
   </MSelect>
   ```

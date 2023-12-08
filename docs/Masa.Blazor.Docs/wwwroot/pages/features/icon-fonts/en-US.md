@@ -114,6 +114,13 @@ builder.Services.AddMasaBlazor(options => {
 <MIcon Icon="@("fa-home")" />
 ```
 
+### Offline resources
+
+If you need to use icon fonts offline, you can visit the [MASA.Template](https://github.com/masastack/MASA.Template/tree/main/src/Content/BlazorServer/wwwroot/css) repository on Github to download them.
+
+You can also create a temporary project by running the command `dotnet new masablazor-server -o TempApp` and then copy the **wwwroot/css** directory to your project.
+For how to install the template, please refer to the [Installation](/blazor/getting-started/installation).
+
 ## Creating a custom icon set
 
 In order to use a custom set as the default icon set, you must also add the necessary aliases that correspond to values used by components. For example, I'd like to use [Remix icon](https://remixicon.com/) as the default font set:

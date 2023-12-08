@@ -114,6 +114,13 @@ builder.Services.AddMasaBlazor(options => {
 <MIcon Icon="@("fa-home")" />
 ```
 
+### 离线资源
+
+如果您需要离线使用图标字体，可以访问 Github 上的 [MASA.Template](https://github.com/masastack/MASA.Template/tree/main/src/Content/BlazorServer/wwwroot/css) 仓库下载。
+
+你也可以通过命令 `dotnet new masablazor-server -o TempApp` 创建一个临时的项目，然后将 **wwwroot/css** 目录复制到你的项目中。
+关于如何安装模板移步 [安装文档](/blazor/getting-started/installation)。
+
 ## 自定义图标集
 
 为了使用自定义的图标集作为默认的图标集，您还必须添加与组件使用的值相对应的必要别名。例如，我想使用 [Remix icon](https://remixicon.com/) 作为默认的字体集：
