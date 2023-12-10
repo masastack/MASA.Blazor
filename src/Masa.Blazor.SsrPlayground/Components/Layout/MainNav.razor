@@ -2,7 +2,7 @@
 @inject MasaBlazor MasaBlazor
 @inject I18n I18n
 
-<MNavigationDrawer App Clipped Class="app-nav-drawer">
+<MNavigationDrawer App Class="app-nav-drawer">
     <MList Routable Nav>
         <MListItem Href="/">Home</MListItem>
         <MListItem Href="/counter">Counter</MListItem>
@@ -10,8 +10,8 @@
     </MList>
 </MNavigationDrawer>
 
-<MAppBar App ClippedLeft >
-    <MAppBarNavIcon Class="app-nav-toggle" />
+<MAppBar App >
+    <MAppBarNavIcon />
     <MSpacer />
     @* <MButton Class="app-bar-toggle-theme" Icon> *@
     @*     <MIcon>@(MasaBlazor.Theme.Dark ? "mdi-weather-sunny" : "mdi-weather-night")</MIcon> *@
@@ -23,8 +23,6 @@
     @*     <MIcon>@(I18n.Culture.Name == "en-US" ? "mdi-translate" : "mdi-translate-off")</MIcon> *@
     @* </MButton> *@
 </MAppBar>
-
-<BlazorPageScript.PageScript Src="./Components/Layout/MainNav.razor.js" />
 
 @code {
 
