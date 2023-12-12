@@ -92,12 +92,10 @@ public class BaiduMapJSObjectReferenceProxy : JSObjectReferenceProxy, IBaiduMapJ
             await InvokeVoidAsync("addOverlay", overlay.OverlayJSObjectRef);
     }
 
-    protected override async ValueTask DisposeAsync(bool disposing)
+    protected override async ValueTask DisposeAsync()
     {
         _selfReference.Dispose();
         await InvokeVoidAsync("destroyMap");
-
-        await base.DisposeAsync(disposing);
     }
 
 }
