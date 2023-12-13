@@ -6,6 +6,8 @@ public class MMain : BMain
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
+    private bool IsSsr => MasaBlazor.IsSsr;
+
     private static string[] s_applicationProperties =
     {
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
@@ -18,7 +20,7 @@ public class MMain : BMain
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
 
 #if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr)
+        if (IsSsr)
         {
             Attributes["data-booted"] = "true";
         }
@@ -48,7 +50,7 @@ public class MMain : BMain
         CssProvider
             .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
             {
-                if (!MasaBlazor.IsSsr)
+                if (!IsSsr)
                 {
                     styleBuilder
                     .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")

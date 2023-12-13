@@ -5,10 +5,9 @@ public partial class MSsrThemeProvider : IDisposable
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
-
+    
     private readonly ThemeCssBuilder _themeCssBuilder = new();
     private string? _themeCss;
-
     private string? _ssrCss;
 
     protected override void OnInitialized()

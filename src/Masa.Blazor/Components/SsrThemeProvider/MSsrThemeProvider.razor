@@ -1,23 +1,23 @@
 ﻿@namespace Masa.Blazor
 
-@if (!string.IsNullOrWhiteSpace(_themeCss))
-{
-    <style id="masa-blazor-theme-stylesheet"
-           type="text/css">
-    @((MarkupString)_themeCss)
-    </style>
-}
-
 @if (MasaBlazor.IsSsr)
 {
+    if (!string.IsNullOrWhiteSpace(_themeCss))
+    {
+        <style id="masa-blazor-theme-stylesheet"
+               type="text/css">
+    @((MarkupString)_themeCss)
+    </style>
+    }
+
     <style id="masa-blazor-ssr-stylesheet"
-            type="text/css">
+           type="text/css">
     :root {
-      --main-padding-left: @(MasaBlazor.Ssr!.MainPaddingLeft+"px");
-      --main-padding-right: @(MasaBlazor.Ssr.MainPaddingRight+"px");
-      --main-padding-top: @(MasaBlazor.Ssr.MainPaddingTop+"px");
-      --main-padding-bottom: @(MasaBlazor.Ssr.MainPaddingBottom+"px");
-      --mobile-breakpoint: @(MasaBlazor.Breakpoint.GetMobileBreakpointValue()+"px")
+      --main-padding-left: @(MasaBlazor.Ssr!.MainPaddingLeft + "px");
+      --main-padding-right: @(MasaBlazor.Ssr.MainPaddingRight + "px");
+      --main-padding-top: @(MasaBlazor.Ssr.MainPaddingTop + "px");
+      --main-padding-bottom: @(MasaBlazor.Ssr.MainPaddingBottom + "px");
+      --mobile-breakpoint: @(MasaBlazor.Breakpoint.GetMobileBreakpointValue() + "px")
     } 
 
     </style>

@@ -81,6 +81,14 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment? PrependContent { get; set; }
 
+        /// <summary>
+        /// Indicates the component should not be render as a SSR component.
+        /// It's useful when you want render components interactively under SSR.
+        /// </summary>
+        [Parameter] public bool NoSsr { get; set; }
+
+        private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
+
         private readonly string[] _applicationProperties = new string[]
         {
             "Bottom", "Footer", "Bar", "Top"
@@ -203,10 +211,10 @@ namespace Masa.Blazor
             base.OnParametersSet();
 
 #if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
 #endif
         }
 
@@ -381,8 +389,8 @@ namespace Masa.Blazor
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .AddIf(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}", () => !MasaBlazor.IsSsr)
-                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => !MasaBlazor.IsSsr && ComputedMaxHeight != null)
+                        .AddIf(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}", () => !IsSsr)
+                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => !IsSsr && ComputedMaxHeight != null)
                         .AddIf(() => $"transform:{translate}({ComputedTransform.ToUnit("%")})", () => ComputedTransform != null)
                         .AddWidth(ComputedWidth)
                         .AddBackgroundColor(Color);
@@ -453,7 +461,7 @@ namespace Masa.Blazor
             {
                 MasaBlazor.Application.Right = val;
 
-                if (MasaBlazor.IsSsr)
+                if (IsSsr)
                 {
                     _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
                 }
@@ -462,7 +470,7 @@ namespace Masa.Blazor
             {
                 MasaBlazor.Application.Left = val;
 
-                if (MasaBlazor.IsSsr)
+                if (IsSsr)
                 {
                     _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
                 }

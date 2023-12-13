@@ -3,6 +3,12 @@
 public class SSROptions
 {
     /// <summary>
+    /// Indicates whether globally interactive rendering is enabled.
+    /// More details: https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#apply-a-render-mode-to-the-entire-app.
+    /// </summary>
+    public bool IsAllInteractive { get; set; }
+    
+    /// <summary>
     /// The height of SystemBar
     /// </summary>
     public double Bar { get; set; }
