@@ -1,0 +1,36 @@
+﻿@inject MasaBlazor MasaBlazor
+@inject NavigationManager NavigationManager
+
+<MInteractiveTrigger QueryName="@nameof(ThemeTurnDark)"
+                     QueryValue="@ThemeTurnDark"
+                     InteractiveValue="true"
+                     InteractiveComponentType="@typeof(ThemeToggler2)">
+    <MButton Icon>
+        <MIcon>@(_isDarkTheme ? "mdi-weather-sunny" : "mdi-weather-night")</MIcon>
+    </MButton>
+</MInteractiveTrigger>
+
+@code {
+
+    [SupplyParameterFromQuery]
+    private string? Theme { get; set; }
+
+    [SupplyParameterFromQuery]
+    private bool ThemeTurnDark { get; set; }
+
+    private bool _isDarkTheme;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (!string.IsNullOrWhiteSpace(Theme))
+            _isDarkTheme = string.Equals(Theme, "dark", StringComparison.OrdinalIgnoreCase);
+        else
+        {
+            _isDarkTheme = MasaBlazor.Theme.Dark;
+            NavigationManager.NavigateWithQueryParameter(nameof(Theme), _isDarkTheme ? "dark" : "light");
+        }
+    }
+
+}
