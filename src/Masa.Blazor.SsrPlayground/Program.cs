@@ -19,9 +19,6 @@ builder.Services.AddMasaBlazor(opts =>
         ssr.Left = 256;
         ssr.Top = 64;
     });
-    opts.Locale = new Locale("zh-CN", "en-US");
-    opts.RTL = false;
-    opts.ConfigureTheme(t => t.Dark = true); 
 });
 
 var app = builder.Build();

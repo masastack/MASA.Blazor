@@ -5,14 +5,8 @@ namespace Masa.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
-#if  NET8_0_OR_GREATER
-        [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
-
-        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
 
         [Parameter]
         public bool App { get; set; }
@@ -352,20 +346,10 @@ namespace Masa.Blazor
             if (!Bottom)
             {
                 MasaBlazor.Application.Top = val;
-
-                if (IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
-                }
             }
             else
             {
                 MasaBlazor.Application.Bottom = val;
-
-                if (IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
-                }
             }
         }
 

@@ -1,6 +1,4 @@
 export function onLoad() {
-  console.log("[MainNav] onLoad");
-
   resize();
 
   window.addEventListener("resize", resize);
@@ -9,8 +7,6 @@ export function onLoad() {
 }
 
 export function onUpdate() {
-  console.log("[MainNav] onUpdate");
-
   window.removeEventListener('click', outsideClickFn)
 
   resize();
@@ -33,9 +29,7 @@ function addDrawerToggleEvent() {
 }
 
 function resize() {
-  const mobileBreakpoint = getComputedStyle(
-    document.documentElement
-  ).getPropertyValue("--mobile-breakpoint");
+  const mobileBreakpoint = getComputedStyle(document.documentElement).getPropertyValue("--mobile-breakpoint");
 
   const appNav = document.querySelector(".m-navigation-drawer--app");
 

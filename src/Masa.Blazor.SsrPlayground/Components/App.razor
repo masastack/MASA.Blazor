@@ -13,13 +13,11 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
     <MSsrThemeProvider />
+    <Masa.Blazor.SsrPlayground.Components.Layout.SsrLayoutCssProvider />
 </head>
 
 <body>
     <Routes />
-    @* <script src="js/restore.js"></script> *@
-    <script src="_content/Masa.Blazor/js/ssr-state-restore.js"></script>
-    @* <MSsrStateProvider @rendermode="@InteractiveServer" /> *@
     <script src="_framework/blazor.web.js"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 </body>

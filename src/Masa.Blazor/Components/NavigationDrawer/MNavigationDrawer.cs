@@ -4,15 +4,8 @@ namespace Masa.Blazor
 {
     public class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
-#if NET8_0_OR_GREATER
-        [CascadingParameter]
-        private MasaBlazorState MasaBlazorState { get; set; } = null!;
-
-        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
@@ -460,20 +453,10 @@ namespace Masa.Blazor
             if (Right)
             {
                 MasaBlazor.Application.Right = val;
-
-                if (IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
-                }
             }
             else
             {
                 MasaBlazor.Application.Left = val;
-
-                if (IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
-                }
             }
         }
 

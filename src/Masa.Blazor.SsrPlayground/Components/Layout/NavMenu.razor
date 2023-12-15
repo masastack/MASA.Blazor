@@ -1,0 +1,17 @@
+﻿<MNavigationDrawer App Class="app-nav-drawer">
+    <MList Routable Nav>
+        <MListItem ActiveClass="primary--text" Href="/">Home</MListItem>
+        <MListItem ActiveClass="primary--text" Href="/counter">Counter</MListItem>
+        <MListItem ActiveClass="primary--text" Href="/weather">Weather</MListItem>
+    </MList>
+</MNavigationDrawer>
+
+<MAppBar App>
+    <MAppBarNavIcon />
+    <MSpacer />
+
+    <RtlToggle />
+    <ThemeToggle />
+</MAppBar>
+
+<PageScript Src="./Components/Layout/NavMenu.razor.js"></PageScript>

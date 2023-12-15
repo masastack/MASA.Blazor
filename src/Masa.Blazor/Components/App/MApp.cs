@@ -7,15 +7,8 @@ namespace Masa.Blazor
     /// </summary>
     public class MApp : BApp
     {
-#if NET8_0_OR_GREATER
-        [CascadingParameter]
-        private MasaBlazorState MasaBlazorState { get; set; } = null!;
-
-        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
 
         [Inject]
         private Window Window { get; set; } = null!;
