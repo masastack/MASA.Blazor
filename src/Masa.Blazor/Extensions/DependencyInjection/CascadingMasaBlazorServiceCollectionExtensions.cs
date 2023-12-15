@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using Masa.Blazor;
+﻿using Masa.Blazor;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -10,17 +9,20 @@ public static class CascadingMasaBlazorServiceCollectionExtensions
     /// </summary>
     /// <param name="serviceCollection"></param>
     /// <returns></returns>
-    internal static IServiceCollection AddCascadingMasaBlazor(this IServiceCollection serviceCollection)
+    internal static void AddCascadingMasaBlazor(this IServiceCollection serviceCollection)
     {
+#if NET8_0_OR_GREATER
         serviceCollection.AddScoped<MasaBlazorProvider>();
 
-        return serviceCollection.AddCascadingValue<MasaBlazorState>(services =>
+        serviceCollection.AddCascadingValue<MasaBlazorState>(services =>
         {
             var masaBlazorProvider = services.GetRequiredService<MasaBlazorProvider>();
             return new MasaBlazorCascadingValueSource(masaBlazorProvider);
         });
+#endif
     }
 
+#if NET8_0_OR_GREATER
     private sealed class MasaBlazorCascadingValueSource : CascadingValueSource<MasaBlazorState>, IDisposable
     {
         private readonly MasaBlazorProvider _masaBlazorProvider;
@@ -42,5 +44,5 @@ public static class CascadingMasaBlazorServiceCollectionExtensions
             _masaBlazorProvider.MasaBlazorChanged -= HandleMasaBlazorChanged;
         }
     }
-}
 #endif
+}

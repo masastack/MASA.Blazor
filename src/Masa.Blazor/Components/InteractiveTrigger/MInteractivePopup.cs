@@ -32,7 +32,7 @@ public abstract class MInteractivePopup : ComponentBase, IOutsideClickJsCallback
     {
         // TODO: https://github.com/dotnet/aspnetcore/issues/52705
         await Task.Delay(100); 
-        NavigationManager.NavigateWithQueryParameter(QueryName, null);
+        NavigationManager.NavigateWithQueryParameter(QueryName, (string?)null);
     }
 
     async ValueTask IAsyncDisposable.DisposeAsync()
