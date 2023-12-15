@@ -1,0 +1,18 @@
+﻿<MInteractiveTrigger QueryName="@nameof(Notification)"
+                     QueryValue="@Notification"
+                     InteractiveValue="true"
+                     InteractiveComponentType="typeof(Notification)"
+                     WithPopup
+                     Left="-160"
+                     PopupClass="mt-1">
+    <MButton Icon>
+        <MIcon>mdi-bell-badge-outline</MIcon>
+    </MButton>
+</MInteractiveTrigger>
+
+@code {
+
+    [SupplyParameterFromQuery]
+    private bool Notification { get; set; }
+
+}

@@ -1,0 +1,69 @@
+﻿@rendermode InteractiveServer
+@attribute [StreamRendering]
+@inherits MInteractivePopup
+
+<MCard Width="320">
+    @if (_notifications?.Any() is true)
+    {
+        foreach (var item in _notifications)
+        {
+            <MHover>
+                <MListItem Dense @attributes="@context.Attrs">
+                    <MListItemContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                        <MListItemSubtitle>@item.Message</MListItemSubtitle>
+                    </MListItemContent>
+                    <MListItemAction>
+                        @if (context.Hover)
+                        {
+                            <MButton Icon Small OnClick="@(() => RemoveNotification(item))">
+                                <MIcon>mdi-cancel</MIcon>
+                            </MButton>
+                        }
+                    </MListItemAction>
+                </MListItem>
+            </MHover>
+        }
+    }
+    else
+    {
+        <MSkeletonLoader Type="list-item" />
+        <MSkeletonLoader Type="list-item" />
+        <MSkeletonLoader Type="list-item" />
+    }
+</MCard>
+
+@code {
+
+    private List<NotificationItem>? _notifications;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(500);
+
+        _notifications = new List<NotificationItem>()
+        {
+            new("New component", "MInteractiveTrigger component has been added"),
+            new("New component", "MInteractiveTriggers component has been added"),
+            new("New component", "MInteractivePopup component has been added"),
+        };
+    }
+
+    private void RemoveNotification(NotificationItem item)
+    {
+        if (_notifications is null)
+        {
+            return;
+        }
+
+        _notifications.Remove(item);
+
+        if (_notifications.Count == 0)
+        {
+            NavigationManager.NavigateWithQueryParameter(QueryName, (bool?)null);
+        }
+    }
+
+    private record NotificationItem(string Title, string Message);
+
+}
