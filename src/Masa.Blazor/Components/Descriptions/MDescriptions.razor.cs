@@ -271,10 +271,10 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
         await RunTaskInMicrosecondsAsync(StateHasChanged, 300, _ctsForUnregister.Token);
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
-
         MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+
+        return base.DisposeAsync(disposing);
     }
 }

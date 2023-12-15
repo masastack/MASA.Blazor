@@ -154,7 +154,7 @@ public partial class Index : NextTickComponentBase
             return;
         }
 
-        tabMonacoModule.MonacoEditor.Dispose();
+        _ = tabMonacoModule.MonacoEditor.DisposeAsync();
         _tabMonacoList.Remove(tabMonacoModule);
         _tabStringNumber = 0;
     }
@@ -298,10 +298,10 @@ public partial class Index : NextTickComponentBase
         _newScriptContent = string.Empty;
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
         _objRef?.Dispose();
+        return base.DisposeAsync(disposing);
     }
 
     [GeneratedRegex("(<script(.*?)>)(.|\n)*?(</script>)")]

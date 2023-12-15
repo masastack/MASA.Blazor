@@ -124,12 +124,6 @@
             return element?.ClientHeight ?? 0;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            RemoveApplication();
-        }
-
         private void RemoveApplication(bool force = false)
         {
             if (!force && !App)
@@ -138,6 +132,12 @@
             }
 
             MasaBlazor.Application.Bar = 0;
+        }
+
+        protected override ValueTask DisposeAsync(bool disposing)
+        {
+            RemoveApplication();
+            return base.DisposeAsync(disposing);
         }
     }
 }

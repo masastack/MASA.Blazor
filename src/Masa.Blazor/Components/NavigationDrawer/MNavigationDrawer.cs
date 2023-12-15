@@ -497,12 +497,13 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override async ValueTask DisposeAsync(bool disposing)
         {
             RemoveApplication();
             MasaBlazor!.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
             NavigationManager!.LocationChanged -= OnLocationChanged;
+            await base.DisposeAsync(disposing);
         }
 
         private void RemoveApplication()

@@ -104,12 +104,12 @@ namespace Masa.Blazor
             Attributes.Add("data-app", true);
         }
 
-        protected override void Dispose(bool disposing)
+        protected override ValueTask DisposeAsync(bool disposing)
         {
-            base.Dispose(disposing);
-
             MasaBlazor.OnThemeChange -= OnThemeChange;
             MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+
+            return base.DisposeAsync(disposing);
         }
     }
 }

@@ -62,10 +62,10 @@ public class MMain : BMain
             .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
-
         MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
+
+        return base.DisposeAsync(disposing);
     }
 }

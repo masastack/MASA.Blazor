@@ -402,15 +402,15 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.NavigateTo(nextPath);
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
-
         if (PageTabsProvider != null)
         {
             PageTabsProvider.TabTitleChanged -= PageTabsProviderOnTabTitleChanged;
         }
 
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+
+        return base.DisposeAsync(disposing);
     }
 }

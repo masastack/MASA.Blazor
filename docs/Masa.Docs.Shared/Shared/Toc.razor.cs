@@ -168,9 +168,9 @@ public partial class Toc : NextTickComponentBase
         return builder.ToString();
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
         AppService.TocChanged -= AppServiceOnTocChanged;
-        base.Dispose(disposing);
+        return base.DisposeAsync(disposing);
     }
 }

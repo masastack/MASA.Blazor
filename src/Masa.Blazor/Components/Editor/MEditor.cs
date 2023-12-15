@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public class MEditor : BEditor, IAsyncDisposable
+    public class MEditor : BEditor
     {
         [Parameter]
         public bool Markdown { get; set; }
@@ -211,14 +211,9 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override async ValueTask DisposeAsync(bool disposing)
         {
             _objRef?.Dispose();
-            base.Dispose(disposing);
-        }
-
-        async ValueTask IAsyncDisposable.DisposeAsync()
-        {
             try
             {
                 if (_quillHelper != null)
@@ -228,6 +223,8 @@ namespace Masa.Blazor
             {
                 // ignored
             }
+
+            await base.DisposeAsync(disposing);
         }
     }
 }

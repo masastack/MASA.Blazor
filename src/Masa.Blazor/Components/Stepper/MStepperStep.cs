@@ -102,11 +102,11 @@
             StateHasChanged();
         }
 
-        protected override void Dispose(bool disposing)
+        protected override ValueTask DisposeAsync(bool disposing)
         {
             Stepper?.UnRegisterStep(this);
 
-            base.Dispose(disposing);
+            return base.DisposeAsync(disposing);
         }
     }
 }

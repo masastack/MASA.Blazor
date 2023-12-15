@@ -61,15 +61,18 @@ public partial class EnqueuedSnackbars : BComponentBase
         await Task.CompletedTask;
     }
 
-    protected override void Dispose(bool disposing)
+    protected override async ValueTask DisposeAsync(bool disposing)
     {
-        _enqueuedSnackbars?.Dispose();
+        if (_enqueuedSnackbars != null)
+        {
+            await _enqueuedSnackbars.DisposeAsync();
+        }
 
         if (PopupService is not null)
         {
             PopupService.SnackbarOpen -= OnSnackbarOpenAsync;
         }
 
-        base.Dispose(disposing);
+        await base.DisposeAsync(disposing);
     }
 }
