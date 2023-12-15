@@ -86,6 +86,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ComponentA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{07665478-645F-4E5D-A8E6-8AF711D4FA89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SsrPlayground", "src\Masa.Blazor.SsrPlayground\Masa.Blazor.SsrPlayground.csproj", "{94D1F512-145B-44D2-ACEC-D79904D43FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -172,6 +174,10 @@ Global
 		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851} = {316905B8-A702-4A0A-970A-6A663DEC29F6}
 		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186} = {54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}
 		{07665478-645F-4E5D-A8E6-8AF711D4FA89} = {00B4BEE6-3D40-4E40-8B23-D238DCE75F36}
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6} = {00B4BEE6-3D40-4E40-8B23-D238DCE75F36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F25C776-A200-4DEB-8F8B-9D1FA2CDC740}
