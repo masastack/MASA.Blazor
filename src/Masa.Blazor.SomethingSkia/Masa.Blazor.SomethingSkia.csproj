@@ -4,6 +4,7 @@
         <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,6 +31,10 @@
     <ItemGroup>
         <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj"/>
         <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

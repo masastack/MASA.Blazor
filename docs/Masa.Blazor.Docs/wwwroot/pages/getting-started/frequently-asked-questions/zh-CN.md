@@ -29,8 +29,13 @@
 
   如果方法里存在泛型参数，那你需要指明泛型类型。例如在 **MSelect** 组件使用 `OnSelectedItemUpdate` 事件时，你需要指明泛型类型，如下所示：
 
-  ``` razor l:1
+  ``` razor l:1-3
   <MSelect TItem="string"
+           TValue="string"
+           TItemValue="string"
+           Items="@Items"
+           ItemText="item => item"
+           ItemValue="item => item"
            OnSelectedItemUpdate="OnUpdate">
   </MSelect>
   ```
