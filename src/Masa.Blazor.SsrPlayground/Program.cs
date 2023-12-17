@@ -1,5 +1,5 @@
-using BlazorComponent;
 using Masa.Blazor.SsrPlayground.Components;
+using Masa.Blazor.SsrPlayground.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,9 @@ builder.Services.AddMasaBlazor(opts =>
         ssr.Top = 64;
     });
 });
+
+builder.Services.AddScoped<AppState>();
+builder.Services.AddSingleton<NotificationMockService>();
 
 var app = builder.Build();
 

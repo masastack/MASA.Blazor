@@ -17,12 +17,12 @@ else
 {
     <MSimpleTable>
         <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
         </thead>
         <tbody>
         @foreach (var forecast in forecasts)
@@ -43,7 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-    // Simulate asynchronous loading to demonstrate streaming rendering
+        // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);

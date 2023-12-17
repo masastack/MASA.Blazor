@@ -1,69 +1,72 @@
-﻿@rendermode InteractiveServer
-@attribute [StreamRendering]
+﻿@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using Masa.Blazor.SsrPlayground.Services
 @inherits MInteractivePopup
+@inject NotificationMockService NotificationMockService
 
 <MCard Width="320">
-    @if (_notifications?.Any() is true)
-    {
-        foreach (var item in _notifications)
+    <MCardText>
+        @if (_items.Count > 0)
         {
-            <MHover>
-                <MListItem Dense @attributes="@context.Attrs">
-                    <MListItemContent>
-                        <MListItemTitle>@item.Title</MListItemTitle>
-                        <MListItemSubtitle>@item.Message</MListItemSubtitle>
-                    </MListItemContent>
-                    <MListItemAction>
+            foreach (var item in _items)
+            {
+                <MHover>
+                    <MListItem Dense @attributes="@context.Attrs">
+                        <MListItemContent>
+                            <MListItemTitle>@item.Title</MListItemTitle>
+                            <MListItemSubtitle Style="white-space: pre-wrap">@((MarkupString)item.Message)</MListItemSubtitle>
+                        </MListItemContent>
                         @if (context.Hover)
                         {
-                            <MButton Icon Small OnClick="@(() => RemoveNotification(item))">
-                                <MIcon>mdi-cancel</MIcon>
+                            <MButton Icon Small
+                                     Absolute
+                                     Right
+                                     OnClick="@(() => RemoveNotificationAsync(item))">
+                                <MIcon>mdi-close</MIcon>
                             </MButton>
                         }
-                    </MListItemAction>
-                </MListItem>
-            </MHover>
+                    </MListItem>
+                </MHover>
+
+                <MDivider />
+            }
         }
-    }
-    else
-    {
-        <MSkeletonLoader Type="list-item" />
-        <MSkeletonLoader Type="list-item" />
-        <MSkeletonLoader Type="list-item" />
-    }
+        else
+        {
+            <div class="text-center">
+                No notifications
+            </div>
+        }
+    </MCardText>
 </MCard>
 
 @code {
 
-    private List<NotificationItem>? _notifications;
+    [Parameter] public IEnumerable<NotificationItem>? Items { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    private List<NotificationItem> _items = [];
+
+    protected override void OnInitialized()
     {
-        await Task.Delay(500);
+        base.OnInitialized();
 
-        _notifications = new List<NotificationItem>()
-        {
-            new("New component", "MInteractiveTrigger component has been added"),
-            new("New component", "MInteractiveTriggers component has been added"),
-            new("New component", "MInteractivePopup component has been added"),
-        };
+        _items = Items?.ToList() ?? [];
     }
 
-    private void RemoveNotification(NotificationItem item)
+    private async Task RemoveNotificationAsync(NotificationItem item)
     {
-        if (_notifications is null)
+        if (_items.Count == 0)
         {
             return;
         }
 
-        _notifications.Remove(item);
+        _items.Remove(item);
 
-        if (_notifications.Count == 0)
+        await NotificationMockService.RemoveItemByIdAsync(item.Id);
+
+        if (_items.Count == 0)
         {
             NavigationManager.NavigateWithQueryParameter(QueryName, (bool?)null);
         }
     }
-
-    private record NotificationItem(string Title, string Message);
 
 }
