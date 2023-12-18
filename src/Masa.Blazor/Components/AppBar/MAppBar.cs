@@ -316,8 +316,8 @@ namespace Masa.Blazor
                         .Add(() => $"transform:translateY({ComputedTransform}px)")
                         .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
                         .AddIf(() => $"margin-top:{ComputedMarginTop}px", () => !IsSsr)
-                        .AddIf(() => $"left:{ComputedLeft}px", () => !IsSsr)
-                        .AddIf(() => $"right:{ComputedRight}px", () => !IsSsr);
+                        .Add(() => $"left:{ComputedLeft}px")
+                        .Add(() => $"right:{ComputedRight}px");
                 })
                 .Merge("image",
                     _ => { },
