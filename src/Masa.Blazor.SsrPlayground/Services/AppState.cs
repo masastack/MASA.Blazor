@@ -2,6 +2,9 @@
 
 namespace Masa.Blazor.SsrPlayground.Services;
 
+/// <summary>
+/// State management for the ssr app
+/// </summary>
 public class AppState
 {
     private readonly NotificationMockService _notificationMockService;
@@ -18,10 +21,15 @@ public class AppState
         await _notificationMockService.AddItemAsync(item);
         await NotifyChangeSubscribersAsync();
     }
-    
+
     public Task<IEnumerable<NotificationItem>> GetNotificationItemsAsync()
     {
         return _notificationMockService.GetListAsync();
+    }
+
+    public Task RemoveNotificationItemByIdAsync(Guid id)
+    {
+        return _notificationMockService.RemoveItemByIdAsync(id);
     }
 
     public void NotifyOnChange(EventCallback callback)

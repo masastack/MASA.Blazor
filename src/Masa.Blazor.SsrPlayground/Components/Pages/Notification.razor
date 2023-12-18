@@ -1,49 +1,49 @@
-﻿@rendermode InteractiveServer
-@page "/notification"
+﻿@page "/notification"
 @using Masa.Blazor.SsrPlayground.Services
 @namespace Microsoft.AspNetCore.Components.Forms
 @inject AppState AppState
 
-<MForm Model="@NotificationItem"
-       OnSubmit="@HandleSubmitAsync">
-    <MTextField @bind-Value="@NotificationItem.Title" Label="Title"></MTextField>
-    <MTextarea @bind-Value="@NotificationItem.Message" Label="Message"></MTextarea>
-    <MButton Type="submit" Color="primary">Add new notification</MButton>
-</MForm>
-
-@* <EditForm Enhance *@
-@*           EditContext="@editContext" *@
-@*           FormName="new-notification1" *@
-@*           OnSubmit="@HandleSubmitAsync"> *@
-@*     <DataAnnotationsValidator /> *@
-@*     <div> *@
-@*         <label>Title: </label> *@
-@*         <InputText @bind-Value="@NotificationItem.Title" /> *@
-@*         <ValidationMessage For="@(() => NotificationItem.Title)" /> *@
-@*     </div> *@
-@*     <div> *@
-@*         <label>Message: </label> *@
-@*         <InputTextArea @bind-Value="@NotificationItem.Message" /> *@
-@*         <ValidationMessage For="@(() => NotificationItem.Message)" /> *@
-@*     </div> *@
-@*     <div> *@
-@*         <button type="submit">Add new notification</button> *@
-@*     </div> *@
-@* </EditForm> *@
+<div class="form">
+    <EditForm Enhance
+              EditContext="@editContext"
+              FormName="new-notification"
+              OnSubmit="@HandleSubmitAsync">
+        <DataAnnotationsValidator />
+        <div class="form-item">
+            <label>
+                Title:
+            </label>
+            <div class="form-input">
+                <InputText @bind-Value="@NotificationItem.Title" />
+                <ValidationMessage For="@(() => NotificationItem.Title)" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label>
+                Message:
+            </label>
+            <div class="form-input">
+                <InputTextArea @bind-Value="@NotificationItem.Message" />
+                <ValidationMessage For="@(() => NotificationItem.Message)" />
+            </div>
+        </div>
+        <div class="d-flex">
+            <MSpacer />
+            <MButton Type="submit">Add new notification</MButton>
+        </div>
+    </EditForm>
+</div>
 
 @code {
 
     [SupplyParameterFromForm]
-    private NotificationItem NotificationItem { get; set; } = null!;
+    private NotificationItem NotificationItem { get; set; } = default!;
 
     private EditContext editContext = default!;
 
     protected override void OnInitialized()
     {
-        base.OnInitialized();
-
         NotificationItem ??= new NotificationItem();
-
         editContext = new EditContext(NotificationItem);
     }
 

@@ -21,26 +21,26 @@
 }
 
 .m-app-bar.m-app-bar--app {
-  left: var(--main-padding-left);
-  right: 0;
+  left: var(--main-padding-left) !important;
+  right: 0 !important;
 }
 
 .m-app-bar.m-app-bar--app.m-app-bar--clipped-left {
-  left: 0;
+  left: 0 !important;
 }
 
 .m-navigation-drawer.m-navigation-drawer--app.m-navigation-drawer--close ~ .m-app-bar.m-app-bar--app,
 .m-navigation-drawer.m-navigation-drawer--app.m-navigation-drawer--is-mobile ~ .m-app-bar.m-app-bar--app,
 .m-navigation-drawer.m-navigation-drawer--app.m-navigation-drawer--temporary ~ .m-app-bar.m-app-bar--app {
-  left: 0;
+  left: 0 !important;
 }
 
 .m-app-bar.m-app-bar--app.m-app-bar--clipped-left {
-  right: var(--main-padding-right);
+  right: var(--main-padding-right) !important;
 }
 
 .m-navigation-drawer.m-navigation-drawer--app.m-navigation-drawer--right.m-navigation-drawer--close ~ .m-app-bar.m-app-bar--app.m-app-bar--clipped-left {
-  right: 0;
+  right: 0 !important;
 }
 
 .m-navigation-drawer.m-navigation-drawer--app.m-navigation-drawer--close:not(.m-navigation-drawer--right)

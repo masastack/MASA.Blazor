@@ -1,7 +1,7 @@
 ﻿@rendermode @(new InteractiveServerRenderMode(prerender: false))
 @using Masa.Blazor.SsrPlayground.Services
 @inherits MInteractivePopup
-@inject NotificationMockService NotificationMockService
+@inject AppState AppState
 
 <MCard Width="320">
     <MCardText>
@@ -17,11 +17,12 @@
                         </MListItemContent>
                         @if (context.Hover)
                         {
-                            <MButton Icon Small
+                            <MButton Icon
+                                     Small
                                      Absolute
-                                     Right
+                                     Style="right: -4px;"
                                      OnClick="@(() => RemoveNotificationAsync(item))">
-                                <MIcon>mdi-close</MIcon>
+                                <MIcon Small>mdi-check</MIcon>
                             </MButton>
                         }
                     </MListItem>
@@ -61,7 +62,7 @@
 
         _items.Remove(item);
 
-        await NotificationMockService.RemoveItemByIdAsync(item.Id);
+        await AppState.RemoveNotificationItemByIdAsync(item.Id);
 
         if (_items.Count == 0)
         {
