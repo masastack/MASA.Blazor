@@ -50,7 +50,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             void handler(object sender, CBServiceEventArgs args)
             {
-#if NET6_0_OR_GREATER
+#if net7_0_OR_GREATER
                 peripheral.DiscoveredCharacteristics -= handler;
 #else
                 peripheral.DiscoveredCharacteristic -= handler;
@@ -68,7 +68,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 tcs.SetResult(characteristics.AsReadOnly());
             }
 
-#if NET6_0_OR_GREATER
+#if net7_0_OR_GREATER
             peripheral.DiscoveredCharacteristics += handler;
 #else
             peripheral.DiscoveredCharacteristic += handler;

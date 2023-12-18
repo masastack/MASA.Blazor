@@ -1,38 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+        <TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-        <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+        <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+        <!-- Note for MacCatalyst:
+            The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+            When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+            The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+            either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+        <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
         <OutputType>Exe</OutputType>
-        <RootNamespace>QrCodeSample</RootNamespace>
+        <RootNamespace>Masa.Blazor.Maui.Plugin.PictureMasking</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
+        <Nullable>enable</Nullable>
 
         <!-- Display name -->
-        <ApplicationTitle>QrCodeSample</ApplicationTitle>
+        <ApplicationTitle>Masa.Blazor.Maui.Plugin.PictureMasking</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.qrcodesample</ApplicationId>
-        <ApplicationIdGuid>2810CC6F-8B35-4467-B23A-6AB6507D7F1A</ApplicationIdGuid>
+        <ApplicationId>com.companyname.masa.blazor.maui.plugin.picturemasking</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-    </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-      <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
-      <CodesignProvision>VS: WildCard Development</CodesignProvision>
     </PropertyGroup>
 
     <ItemGroup>
@@ -54,7 +54,21 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.QrCode\Masa.Blazor.Maui.Plugin.QrCode.csproj" />
+      <None Remove="Resources\Images\test2.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Camera.MAUI" Version="1.4.4" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="Page\PictureMasking.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
     </ItemGroup>
 
 </Project>

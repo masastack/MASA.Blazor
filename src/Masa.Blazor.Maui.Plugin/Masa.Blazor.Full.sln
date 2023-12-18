@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Video", "Video", "{08CE11D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayVideoSample", "PlayVideoSample\PlayVideoSample.csproj", "{9630CF02-4DF0-4A43-AB4B-1C067CAAAB07}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PictureMask", "PictureMask", "{D1E6BE72-E9B1-46E2-90BB-71B65C150503}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
