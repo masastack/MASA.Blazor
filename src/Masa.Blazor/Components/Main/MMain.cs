@@ -6,6 +6,8 @@ public class MMain : BMain
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
+    private bool IsSsr => MasaBlazor.IsSsr;
+
     private static string[] s_applicationProperties =
     {
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
@@ -18,7 +20,7 @@ public class MMain : BMain
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
 
 #if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr)
+        if (IsSsr)
         {
             Attributes["data-booted"] = "true";
         }
@@ -48,19 +50,22 @@ public class MMain : BMain
         CssProvider
             .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
             {
-                styleBuilder
+                if (!IsSsr)
+                {
+                    styleBuilder
                     .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
                     .Add($"padding-right:{MasaBlazor.Application.Right}px")
                     .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
                     .Add($"padding-left:{MasaBlazor.Application.Left}px");
+                }
             })
             .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
-
         MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
+
+        return base.DisposeAsync(disposing);
     }
 }

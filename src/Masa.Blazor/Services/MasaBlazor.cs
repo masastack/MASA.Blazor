@@ -33,7 +33,7 @@ namespace Masa.Blazor
             Application = application;
             Theme = theme;
             Icons = icons;
-            SSR = ssr;
+            Ssr = ssr;
             Defaults = defaults;
         }
 
@@ -61,9 +61,9 @@ namespace Masa.Blazor
 
         public Icons Icons { get; }
 
-        public SSROptions? SSR { get; }
+        public SSROptions? Ssr { get; }
 
-        public bool IsSsr => SSR != null;
+        public bool IsSsr => Ssr?.IsAllInteractive is false;
 
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;

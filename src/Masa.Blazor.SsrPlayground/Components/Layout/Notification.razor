@@ -1,0 +1,73 @@
+﻿@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using Masa.Blazor.SsrPlayground.Services
+@inherits MInteractivePopup
+@inject AppState AppState
+
+<MCard Width="320">
+    <MCardText>
+        @if (_items.Count > 0)
+        {
+            foreach (var item in _items)
+            {
+                <MHover>
+                    <MListItem Dense @attributes="@context.Attrs">
+                        <MListItemContent>
+                            <MListItemTitle>@item.Title</MListItemTitle>
+                            <MListItemSubtitle Style="white-space: pre-wrap">@((MarkupString)item.Message)</MListItemSubtitle>
+                        </MListItemContent>
+                        @if (context.Hover)
+                        {
+                            <MButton Icon
+                                     Small
+                                     Absolute
+                                     Style="right: -4px;"
+                                     OnClick="@(() => RemoveNotificationAsync(item))">
+                                <MIcon Small>mdi-check</MIcon>
+                            </MButton>
+                        }
+                    </MListItem>
+                </MHover>
+
+                <MDivider />
+            }
+        }
+        else
+        {
+            <div class="text-center">
+                No notifications
+            </div>
+        }
+    </MCardText>
+</MCard>
+
+@code {
+
+    [Parameter] public IEnumerable<NotificationItem>? Items { get; set; }
+
+    private List<NotificationItem> _items = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _items = Items?.ToList() ?? [];
+    }
+
+    private async Task RemoveNotificationAsync(NotificationItem item)
+    {
+        if (_items.Count == 0)
+        {
+            return;
+        }
+
+        _items.Remove(item);
+
+        await AppState.RemoveNotificationItemByIdAsync(item.Id);
+
+        if (_items.Count == 0)
+        {
+            NavigationManager.NavigateWithQueryParameter(QueryName, (bool?)null);
+        }
+    }
+
+}

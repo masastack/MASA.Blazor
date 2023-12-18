@@ -22,11 +22,11 @@
             }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override ValueTask DisposeAsync(bool disposing)
         {
-            base.Dispose(disposing);
-
             Tabs?.UnregisterTabItem(this);
+
+            return base.DisposeAsync(disposing);
         }
     }
 }

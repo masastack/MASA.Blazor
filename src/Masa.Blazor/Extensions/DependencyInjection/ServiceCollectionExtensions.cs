@@ -1,7 +1,6 @@
 ﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -40,10 +39,6 @@ public static class ServiceCollectionExtensions
                 options.SSR,
                 options.Defaults);
         });
-
-#if NET8_0_OR_GREATER
-        services.AddCascadingMasaBlazor();
-#endif
 
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();

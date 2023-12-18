@@ -303,10 +303,9 @@ public partial class Example : NextTickComponentBase
             .Cast<RazorExtension>().ToList();
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
         _objRef?.Dispose();
-
-        base.Dispose(disposing);
+        return base.DisposeAsync(disposing);
     }
 }

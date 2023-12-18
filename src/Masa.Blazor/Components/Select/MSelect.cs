@@ -365,7 +365,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             if (OutsideClickJSModule?.Initialized is true && MMenu!.ContentElement.Context is not null)
             {
-                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
+                _ = OutsideClickJSModule.UpdateDependentElementsAsync(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
             }
         }
 

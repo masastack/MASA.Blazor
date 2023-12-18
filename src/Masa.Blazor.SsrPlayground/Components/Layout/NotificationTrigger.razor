@@ -1,0 +1,43 @@
+﻿@using Masa.Blazor.SsrPlayground.Services
+@attribute [StreamRendering]
+@inject AppState AppState
+
+<MInteractiveTrigger QueryName="@nameof(Notification)"
+                     QueryValue="@Notification"
+                     TValue="bool?"
+                     InteractiveValue="true"
+                     InteractiveComponentType="@typeof(Notification)"
+                     InteractiveComponentParameters="@_parameters"
+                     WithPopup
+                     Left="-164"
+                     PopupClass="mt-1">
+    <MButton Icon>
+        <MIcon>@(HasNotifications ? "mdi-bell-badge-outline" : "mdi-bell-outline")</MIcon>
+    </MButton>
+</MInteractiveTrigger>
+
+@code {
+
+    [SupplyParameterFromQuery]
+    private bool Notification { get; set; }
+
+    private IEnumerable<NotificationItem>? _notificationItems;
+
+    private bool HasNotifications => _notificationItems?.Any() is true;
+
+    private Dictionary<string, object?> _parameters = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.NotifyOnChange(EventCallback.Factory.Create(this, GetNotificationsAsync));
+
+        await GetNotificationsAsync();
+    }
+
+    private async Task GetNotificationsAsync()
+    {
+        _notificationItems = await AppState.GetNotificationItemsAsync();
+        _parameters[nameof(Layout.Notification.Items)] = _notificationItems;
+    }
+
+}

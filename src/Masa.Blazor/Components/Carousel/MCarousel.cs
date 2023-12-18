@@ -202,13 +202,13 @@ public partial class MCarousel : MWindow, ICarousel
         _timer?.Start();
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsync(bool disposing)
     {
-        base.Dispose(disposing);
-
         if (_timer is not null)
         {
             _timer.Elapsed -= TimerOnElapsed;
         }
+
+        return base.DisposeAsync(disposing);
     }
 }

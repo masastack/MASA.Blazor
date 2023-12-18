@@ -2,12 +2,8 @@
 
 public class MAlert : BAlert
 {
-#if NET8_0_OR_GREATER
-    [CascadingParameter] private MasaBlazorState MasaBlazorState { get; set; } = null!;
-
-    private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
-#endif
+    [Inject]
+    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public StringBoolean? Icon { get; set; }

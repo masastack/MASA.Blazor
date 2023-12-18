@@ -58,7 +58,9 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.Aliases = aliases;
     }
 
-    public void ConfigureSSR(Action<SSROptions> configure)
+    public void ConfigureSsr() => ConfigureSsr(_ => { });
+
+    public void ConfigureSsr(Action<SSROptions> configure)
     {
         SSR = new SSROptions();
         configure.Invoke(SSR);

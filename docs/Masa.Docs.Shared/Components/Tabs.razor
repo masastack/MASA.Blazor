@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 @inject MasaBlazor MasaBlazor
-@implements IDisposable
+@implements IAsyncDisposable
 
 <MTabs Class="default-tabs"
        Color="primary"
@@ -91,9 +91,14 @@
         }
     }
 
-    public void Dispose()
+
+    public async ValueTask DisposeAsync()
     {
-        _tabs?.Dispose();
+        if (_tabs != null)
+        {
+            await _tabs.DisposeAsync();
+        }
+
         MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
     }
 

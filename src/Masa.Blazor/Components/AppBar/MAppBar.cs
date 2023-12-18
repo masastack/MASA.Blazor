@@ -55,6 +55,14 @@ namespace Masa.Blazor
         [MassApiParameter(true)]
         public bool Value { get; set; } = true;
 
+        /// <summary>
+        /// Indicates the component should not be render as a SSR component.
+        /// It's useful when you want render components interactively under SSR.
+        /// </summary>
+        [Parameter] public bool NoSsr { get; set; }
+
+        private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
+
         private readonly string[] _applicationProperties =
         {
             "Left", "Bar", "Right"
@@ -243,6 +251,12 @@ namespace Masa.Blazor
             }
 
             MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
+
+            if (IsSsr)
+            {
+                _isBooted = true;
+                Attributes["data-booted"] = "true";
+            }
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -261,7 +275,6 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
-                Console.Out.WriteLine($"ApplicationPropertyChanged~~ {e.PropertyName} {MasaBlazor.Application.Left}");
                 InvokeStateHasChanged();
             }
         }
@@ -288,8 +301,11 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-app-bar")
                         .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
+                        .AddIf("m-app-bar--clipped-left", () => ClippedLeft)
+                        .AddIf("m-app-bar--clipped-right", () => ClippedRight)
                         .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
                         .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
+                        .AddIf("m-app-bar--app", () => App)
                         .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
                         .AddIf("m-app-bar--hide-shadow", () => HideShadow)
                         .AddIf("m-app-bar--is-scrolled", () => _scroller is { CurrentScroll: > 0 })
@@ -297,9 +313,9 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
-                        .Add(() => $"margin-top:{ComputedMarginTop}px")
                         .Add(() => $"transform:translateY({ComputedTransform}px)")
+                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
+                        .AddIf(() => $"margin-top:{ComputedMarginTop}px", () => !IsSsr)
                         .Add(() => $"left:{ComputedLeft}px")
                         .Add(() => $"right:{ComputedRight}px");
                 })
@@ -330,20 +346,10 @@ namespace Masa.Blazor
             if (!Bottom)
             {
                 MasaBlazor.Application.Top = val;
-
-                if (MasaBlazor.IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { top = val });
-                }
             }
             else
             {
                 MasaBlazor.Application.Bottom = val;
-
-                if (MasaBlazor.IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { bottom = val });
-                }
             }
         }
 

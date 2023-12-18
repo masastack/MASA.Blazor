@@ -505,10 +505,11 @@ namespace Masa.Blazor
             });
         }
 
-        protected override void Dispose(bool disposing)
+        protected override ValueTask DisposeAsync(bool disposing)
         {
             MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
-            base.Dispose(disposing);
+
+            return base.DisposeAsync(disposing);
         }
     }
 }

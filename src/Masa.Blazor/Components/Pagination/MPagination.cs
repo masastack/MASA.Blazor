@@ -4,15 +4,8 @@ namespace Masa.Blazor
 {
     public partial class MPagination : BPagination, IPagination, IAsyncDisposable
     {
-#if NET8_0_OR_GREATER
-        [CascadingParameter]
-        private MasaBlazorState MasaBlazorState { get; set; } = null!;
-        
-        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
+        private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
         public Document Document { get; set; } = null!;

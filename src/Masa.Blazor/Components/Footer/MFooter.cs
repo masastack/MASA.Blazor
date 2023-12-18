@@ -209,12 +209,6 @@ namespace Masa.Blazor
             return element.ClientHeight;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            RemoveApplication();
-            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-        }
-
         private void RemoveApplication(bool force = false)
         {
             if (!force && !App)
@@ -226,6 +220,12 @@ namespace Masa.Blazor
                 MasaBlazor.Application.InsetFooter = 0;
             else
                 MasaBlazor.Application.Footer = 0;
+        }
+
+        protected override ValueTask DisposeAsync(bool disposing)
+        {
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+            return base.DisposeAsync(disposing);
         }
     }
 }

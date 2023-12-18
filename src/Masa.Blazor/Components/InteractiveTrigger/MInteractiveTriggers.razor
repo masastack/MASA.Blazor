@@ -1,0 +1,33 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@using Microsoft.AspNetCore.Components.Rendering
+@inherits MInteractiveTriggerBase<TValue, IEnumerable<TValue>>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override string ComponentName => nameof(MInteractiveTriggers<TValue>);
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        InteractiveValue.ThrowIfNull(ComponentName);
+    }
+
+    protected override void RenderLinkContent(RenderTreeBuilder __builder)
+    {
+        foreach (var interactiveValue in InteractiveValue!)
+        {
+            var value = EqualityComparer<TValue?>.Default.Equals(QueryValue, interactiveValue) ? default : interactiveValue;
+            @RenderSingleLink(QueryName, value, interactiveValue)
+        }
+    }
+
+    protected override bool CheckInteractive()
+    {
+        return InteractiveValue!.Any(val => EqualityComparer<TValue>.Default.Equals(QueryValue, val));
+    }
+
+}

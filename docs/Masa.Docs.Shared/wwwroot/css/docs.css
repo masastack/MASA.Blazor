@@ -592,6 +592,10 @@ default-app-markup {
         padding-bottom: 0;
     }
 
+.doc-markdown-body li > p {
+    margin-bottom: 8px !important;
+}
+
 .doc-drawer.theme--dark.m-navigation-drawer {
     background-color: var(--md-sys-color-surface-dark);
 }

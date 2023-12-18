@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDragZone : BDragZone, IAsyncDisposable
+    public partial class MDragZone : BDragZone
     {
         [Parameter]
         public Action<SorttableOptions>? Options { get; set; }
@@ -254,14 +254,10 @@
             base.OnParametersSet();
         }
 
-        protected override void Dispose(bool disposing)
+        protected override async ValueTask DisposeAsync(bool disposing)
         {
             _dotNetHelper?.Dispose();
-            base.Dispose(disposing);
-        }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
-        {
             try
             {
                 if (_jsHelper != null)
@@ -271,6 +267,8 @@
             {
                 // ignored
             }
+
+            await base.DisposeAsync(disposing);
         }
     }
 }

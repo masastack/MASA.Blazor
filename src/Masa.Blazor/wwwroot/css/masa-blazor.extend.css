@@ -1398,3 +1398,27 @@ a.m-pagination__item {
     line-height: 34px;
     text-align: center;
 }
+
+/* InteractiveTrigger */
+
+.m-interactive-trigger {
+    position: relative;
+}
+
+.m-interactive-trigger__link {
+    display: contents;
+}
+
+.m-interactive-trigger__link.m-interactive-trigger__link--disabled {
+    pointer-events: none;
+}
+
+.m-interactive-trigger__popup {
+    position: absolute;
+    opacity: 0;
+}
+
+.m-interactive-trigger__popup.m-interactive-trigger__popup--active {
+    opacity: 1;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+}

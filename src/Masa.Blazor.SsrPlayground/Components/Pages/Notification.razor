@@ -1,0 +1,63 @@
+﻿@page "/notification"
+@using Masa.Blazor.SsrPlayground.Services
+@namespace Microsoft.AspNetCore.Components.Forms
+@inject AppState AppState
+
+<div class="form">
+    <EditForm Enhance
+              EditContext="@editContext"
+              FormName="new-notification"
+              OnSubmit="@HandleSubmitAsync">
+        <DataAnnotationsValidator />
+        <div class="form-item">
+            <label>
+                Title:
+            </label>
+            <div class="form-input">
+                <InputText @bind-Value="@NotificationItem.Title" />
+                <ValidationMessage For="@(() => NotificationItem.Title)" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label>
+                Message:
+            </label>
+            <div class="form-input">
+                <InputTextArea @bind-Value="@NotificationItem.Message" />
+                <ValidationMessage For="@(() => NotificationItem.Message)" />
+            </div>
+        </div>
+        <div class="d-flex">
+            <MSpacer />
+            <MButton Type="submit">Add new notification</MButton>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+
+    [SupplyParameterFromForm]
+    private NotificationItem NotificationItem { get; set; } = default!;
+
+    private EditContext editContext = default!;
+
+    protected override void OnInitialized()
+    {
+        NotificationItem ??= new NotificationItem();
+        editContext = new EditContext(NotificationItem);
+    }
+
+    private async Task HandleSubmitAsync()
+    {
+        if (editContext.Validate())
+        {
+            await HandleValidSubmitAsync();
+        }
+    }
+
+    private async Task HandleValidSubmitAsync()
+    {
+        await AppState.AddNotificationItemAsync(NotificationItem);
+    }
+
+}

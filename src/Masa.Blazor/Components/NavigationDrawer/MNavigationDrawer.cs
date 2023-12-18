@@ -4,15 +4,8 @@ namespace Masa.Blazor
 {
     public class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
-#if NET8_0_OR_GREATER
-        [CascadingParameter]
-        private MasaBlazorState MasaBlazorState { get; set; } = null!;
-
-        private MasaBlazor MasaBlazor => MasaBlazorState.Instance;
-#else
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
@@ -80,6 +73,14 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment? PrependContent { get; set; }
+
+        /// <summary>
+        /// Indicates the component should not be render as a SSR component.
+        /// It's useful when you want render components interactively under SSR.
+        /// </summary>
+        [Parameter] public bool NoSsr { get; set; }
+
+        private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
 
         private readonly string[] _applicationProperties = new string[]
         {
@@ -203,10 +204,10 @@ namespace Masa.Blazor
             base.OnParametersSet();
 
 #if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
 #endif
         }
 
@@ -363,6 +364,7 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--bottom", () => Bottom)
                         .AddIf($"{prefix}--clipped", () => Clipped)
                         .AddIf($"{prefix}--close", () => !IsActive)
+                        .AddIf($"{prefix}--app", () => App)
                         .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
                         .AddIf($"{prefix}--floating", () => Floating)
                         .AddIf($"{prefix}--is-mobile", () => IsMobile)
@@ -380,8 +382,8 @@ namespace Masa.Blazor
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}")
-                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => ComputedMaxHeight != null)
+                        .AddIf(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}", () => !IsSsr)
+                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => !IsSsr && ComputedMaxHeight != null)
                         .AddIf(() => $"transform:{translate}({ComputedTransform.ToUnit("%")})", () => ComputedTransform != null)
                         .AddWidth(ComputedWidth)
                         .AddBackgroundColor(Color);
@@ -451,20 +453,10 @@ namespace Masa.Blazor
             if (Right)
             {
                 MasaBlazor.Application.Right = val;
-
-                if (MasaBlazor.IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { right = val });
-                }
             }
             else
             {
                 MasaBlazor.Application.Left = val;
-
-                if (MasaBlazor.IsSsr)
-                {
-                    _ = Js.InvokeVoidAsync(JsInteropConstants.SsrUpdateMain, new { left = val });
-                }
             }
         }
 
@@ -488,12 +480,13 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override async ValueTask DisposeAsync(bool disposing)
         {
             RemoveApplication();
             MasaBlazor!.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
             NavigationManager!.LocationChanged -= OnLocationChanged;
+            await base.DisposeAsync(disposing);
         }
 
         private void RemoveApplication()

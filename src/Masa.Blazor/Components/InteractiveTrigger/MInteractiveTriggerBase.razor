@@ -1,0 +1,52 @@
+﻿@namespace Masa.Blazor
+@using Microsoft.AspNetCore.Components.Rendering
+@inherits CssProviderComponentBase
+@typeparam TValue
+@typeparam TInteractiveValue
+@inject NavigationManager NavigationManager
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     id="@ElementId">
+    @RenderLinkContent
+    @RenderPopupContent
+</div>
+
+@code {
+
+    protected abstract void RenderLinkContent(RenderTreeBuilder __builder);
+
+    protected RenderFragment RenderSingleLink(string name, TValue? value, TValue? interactiveValue) => __builder =>
+    {
+        <a class="@CssProvider.GetClass("link")"
+           style="@CssProvider.GetStyle("link")"
+           href="@NavigationManager.GetUriWithQueryParameters(new Dictionary<string, object?>() { { name, value  } })">
+            @ChildContent?.Invoke(interactiveValue)
+        </a>
+    };
+
+    private void RenderPopupContent(RenderTreeBuilder __builder)
+    {
+        @if (WithPopup)
+        {
+            <div class="@CssProvider.GetClass("popup")"
+                 style="@CssProvider.GetStyle("popup")">
+                @RenderInteractiveComponent
+            </div>
+        }
+        else
+        {
+            @RenderInteractiveComponent
+        }
+    }
+
+    private void RenderInteractiveComponent(RenderTreeBuilder __builder)
+    {
+        @if (IsInteractive)
+        {
+            <DynamicComponent Type="@InteractiveComponentType"
+                              Parameters="@ComputedInteractiveComponentParameters" />
+        }
+    }
+
+}
