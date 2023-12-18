@@ -13,7 +13,12 @@ export function onUpdate() {
 }
 
 export function onDispose() {
-  console.log("[MainNav] onDispose");
+  window.removeEventListener("resize", resize);
+
+  const navIcon = document.querySelector(".m-app-bar--app .m-app-bar__nav-icon")
+  if (navIcon) {
+    navIcon.removeEventListener('click', toggleDrawer);
+  }
 }
 
 const openCss = "m-navigation-drawer--open";
