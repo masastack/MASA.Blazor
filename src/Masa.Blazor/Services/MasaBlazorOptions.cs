@@ -58,8 +58,15 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.Aliases = aliases;
     }
 
+    /// <summary>
+    /// Configure static SSR options, do not set this when use interactive at root.
+    /// </summary>
     public void ConfigureSsr() => ConfigureSsr(_ => { });
 
+    /// <summary>
+    /// Configure static SSR options, do not set this when use interactive at root.
+    /// </summary>
+    /// <param name="configure"></param>
     public void ConfigureSsr(Action<SSROptions> configure)
     {
         SSR = new SSROptions();
