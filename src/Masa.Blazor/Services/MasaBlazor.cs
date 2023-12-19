@@ -63,7 +63,7 @@ namespace Masa.Blazor
 
         public SSROptions? Ssr { get; }
 
-        public bool IsSsr => Ssr?.IsAllInteractive is false;
+        public bool IsSsr => Ssr is not null;
 
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;

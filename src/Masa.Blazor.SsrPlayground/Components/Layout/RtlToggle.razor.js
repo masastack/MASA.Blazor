@@ -39,11 +39,11 @@ function toggleRtl() {
 function updateDom() {
   const app = document.querySelector('.m-application');
   if (isRtl) {
-    app.classList.remove("m-application--is-rtl");
-    app.classList.add('m-application--is-ltr');
-  } else {
     app.classList.remove('m-application--is-ltr');
     app.classList.add("m-application--is-rtl");
+  } else {
+    app.classList.remove("m-application--is-rtl");
+    app.classList.add('m-application--is-ltr');
   }
 }
 
