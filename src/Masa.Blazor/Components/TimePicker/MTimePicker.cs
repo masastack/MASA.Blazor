@@ -40,11 +40,11 @@
         public bool Light { get; set; }
 
         [Parameter]
-        [MassApiParameter(290)]
+        [MasaApiParameter(290)]
         public StringNumber? Width { get; set; } = 290;
 
         [Parameter]
-        [MassApiParameter(TimeFormat.AmPm)]
+        [MasaApiParameter(TimeFormat.AmPm)]
         public TimeFormat Format { get; set; } = TimeFormat.AmPm;
 
         [Parameter]

@@ -12,7 +12,7 @@ namespace Masa.Blazor
         public bool ReadOnly { get; set; }
 
         [Parameter]
-        [MassApiParameter("snow")]
+        [MasaApiParameter("snow")]
         public string Theme { get; set; } = "snow";
 
         [Parameter]

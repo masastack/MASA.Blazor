@@ -42,7 +42,7 @@
         /// <summary>
         /// The error message when the required rule is not satisfied.
         /// </summary>
-        [Parameter, MassApiParameter("$masaBlazor.required")]
+        [Parameter, MasaApiParameter("$masaBlazor.required")]
         public string RequiredMessage
         {
             get => _requiredMessage ?? I18n.T("$masaBlazor.required");

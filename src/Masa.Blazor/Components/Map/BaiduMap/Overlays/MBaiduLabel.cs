@@ -12,7 +12,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [MassApiParameter("116.403, 39.917")]
+        [MasaApiParameter("116.403, 39.917")]
         public GeoPoint Position
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));

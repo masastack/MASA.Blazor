@@ -39,7 +39,7 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
-        [MassApiParameter(true)]
+        [MasaApiParameter(true)]
         public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
         [Parameter]
@@ -64,7 +64,7 @@ namespace Masa.Blazor
         public bool Landscape { get; set; }
 
         [Parameter]
-        [MassApiParameter(290)]
+        [MasaApiParameter(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
@@ -117,11 +117,11 @@ namespace Masa.Blazor
         public string? YearIcon { get; set; }
 
         [Parameter]
-        [MassApiParameter("$next")]
+        [MasaApiParameter("$next")]
         public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        [MassApiParameter("$prev")]
+        [MasaApiParameter("$prev")]
         public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]

@@ -21,11 +21,11 @@
         public string? Color { get; set; }
 
         [Parameter]
-        [MassApiParameter(290)]
+        [MasaApiParameter(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
-        [MassApiParameter("fade-transition")]
+        [MasaApiParameter("fade-transition")]
         public string Transition { get; set; } = "fade-transition";
 
         [Parameter]

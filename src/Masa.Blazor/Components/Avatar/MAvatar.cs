@@ -15,7 +15,7 @@
         public bool Tile { get; set; }
 
         [Parameter]
-        [MassApiParameter(48)]
+        [MasaApiParameter(48)]
         public StringNumber Size { get; set; } = 48;
 
         [Parameter]

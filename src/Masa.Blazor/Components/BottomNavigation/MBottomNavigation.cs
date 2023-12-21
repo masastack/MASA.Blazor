@@ -25,7 +25,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Grow { get; set; }
 
     [Parameter]
-    [MassApiParameter(56)]
+    [MasaApiParameter(56)]
     public StringNumber? Height { get; set; } = 56;
 
     [Parameter]
@@ -59,7 +59,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Shift { get; set; }
 
     [Parameter]
-    [MassApiParameter(true)]
+    [MasaApiParameter(true)]
     public bool InputValue { get; set; } = true;
 
     [Parameter]

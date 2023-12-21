@@ -24,7 +24,7 @@ namespace Masa.Blazor
         public bool CollapseOnScroll { get; set; }
 
         [Parameter]
-        [MassApiParameter("window")]
+        [MasaApiParameter("window")]
         public string ScrollTarget { get; set; } = "window";
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Masa.Blazor
         public bool ScrollOffScreen { get; set; }
 
         [Parameter]
-        [MassApiParameter(true)]
+        [MasaApiParameter(true)]
         public bool Value { get; set; } = true;
 
         /// <summary>

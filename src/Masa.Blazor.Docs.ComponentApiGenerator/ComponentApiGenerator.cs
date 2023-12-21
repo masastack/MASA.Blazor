@@ -10,7 +10,7 @@ namespace Masa.Blazor.Docs.ApiGenerator;
 public class ComponentApiGenerator : IIncrementalGenerator
 {
     private const string BlazorParameterAttributeName = "ParameterAttribute";
-    private const string MassApiParameterAttributeName = "MasaApiParameterAttribute";
+    private const string MasaApiParameterAttributeName = "MasaApiParameterAttribute";
     private const string MasaApiPublicMethodAttributeName = "MasaApiPublicMethodAttribute";
 
     private static Dictionary<string, string> s_typeDescCache = new();
@@ -143,7 +143,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
             {
                 var attrs = parameterSymbol.GetAttributes();
                 
-                var apiParameterAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == MassApiParameterAttributeName);
+                var apiParameterAttribute = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == MasaApiParameterAttributeName);
                 if (apiParameterAttribute is not null)
                 {
                     if (IsIgnoredParameter(apiParameterAttribute))

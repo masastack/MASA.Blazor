@@ -6,11 +6,11 @@
         public bool Disabled { get; set; }
 
         [Parameter]
-        [MassApiParameter(0)]
+        [MasaApiParameter(0)]
         public StringNumber? Left { get; set; } = 0;
 
         [Parameter]
-        [MassApiParameter("auto")]
+        [MasaApiParameter("auto")]
         public StringNumber? Right { get; set; } = "auto";
 
         [Parameter]
@@ -20,7 +20,7 @@
         public bool Focused { get; set; }
 
         [Parameter]
-        [MassApiParameter("primary")]
+        [MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets;
 
 public class PPageTabsProvider : ComponentBase, IPageTabsProvider
 {

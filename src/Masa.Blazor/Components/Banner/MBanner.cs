@@ -21,7 +21,7 @@ namespace Masa.Blazor
         public string? Color { get; set; }
 
         [Parameter]
-        [MassApiParameter(0)]
+        [MasaApiParameter(0)]
         public StringNumber Elevation { get; set; } = "0";
 
         [Parameter]

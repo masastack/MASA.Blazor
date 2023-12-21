@@ -11,7 +11,7 @@ namespace Masa.Blazor.Presets
         public StringNumber? Height { get; set; }
 
         [Parameter]
-        [MassApiParameter(80)]
+        [MasaApiParameter(80)]
         public int CaptchaWidth { get; set; } = 80;
 
         [Parameter]
@@ -27,7 +27,7 @@ namespace Masa.Blazor.Presets
         public bool Clearable { get; set; }
 
         [Parameter]
-        [MassApiParameter("$clear")]
+        [MasaApiParameter("$clear")]
         public string? ClearIcon { get; set; } = "$clear";
 
         [Parameter]

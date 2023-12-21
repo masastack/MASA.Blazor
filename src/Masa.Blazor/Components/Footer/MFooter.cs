@@ -32,7 +32,7 @@ namespace Masa.Blazor
         public bool Fixed { get; set; }
 
         [Parameter]
-        [MassApiParameter("auto")]
+        [MasaApiParameter("auto")]
         public StringNumber? Height
         {
             get => GetValue((StringNumber)"auto");

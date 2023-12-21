@@ -13,11 +13,11 @@ public partial class MWatermark : BDomComponentBase
 
     [Parameter] public string? Text { get; set; }
 
-    [Parameter] [MassApiParameter(16)] public int TextSize { get; set; } = 16;
+    [Parameter] [MasaApiParameter(16)] public int TextSize { get; set; } = 16;
 
-    [Parameter] [MassApiParameter(-22)] public int Rotate { get; set; } = -22;
+    [Parameter] [MasaApiParameter(-22)] public int Rotate { get; set; } = -22;
 
-    [Parameter] [MassApiParameter("new SKColor(0, 0, 0, 38)")]
+    [Parameter] [MasaApiParameter("new SKColor(0, 0, 0, 38)")]
     public SKColor Color { get; set; } = s_defaultSkColor;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -33,7 +33,7 @@ public partial class MWatermark : BDomComponentBase
     /// <summary>
     /// Determines whether the watermark is grayscale. Only works when <see cref="Image"/> is not null.
     /// </summary>
-    [Parameter] [MassApiParameter(true)] public bool Grayscale { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public bool Grayscale { get; set; } = true;
 
     private static readonly SKColor s_defaultSkColor = new(0, 0, 0, 38);
 

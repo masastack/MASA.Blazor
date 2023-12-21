@@ -20,7 +20,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [MassApiParameter(0.9f)]
+        [MasaApiParameter(0.9f)]
         public float StrokeOpacity
         {
             get => GetValue(0.9f);
@@ -28,7 +28,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [MassApiParameter(2f)]
+        [MasaApiParameter(2f)]
         public float StrokeWeight
         {
             get => GetValue(2f);
@@ -36,7 +36,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [MassApiParameter(StrokeStyle.Solid)]
+        [MasaApiParameter(StrokeStyle.Solid)]
         public StrokeStyle StrokeStyle
         {
             get => GetValue(StrokeStyle.Solid);
@@ -47,7 +47,7 @@ namespace Masa.Blazor
         public bool Geodesic { get; set; } = false;
 
         [Parameter]
-        [MassApiParameter(true)]
+        [MasaApiParameter(true)]
         public bool Clip { get; set; } = true;
 
         protected override void RegisterWatchers(PropertyWatcher watcher)

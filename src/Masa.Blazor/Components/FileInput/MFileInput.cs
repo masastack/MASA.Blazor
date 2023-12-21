@@ -28,15 +28,15 @@ namespace Masa.Blazor
         public bool ShowSize { get; set; }
 
         [Parameter]
-        [MassApiParameter("$file")]
+        [MasaApiParameter("$file")]
         public override string? PrependIcon { get; set; } = "$file";
 
         [Parameter]
-        [MassApiParameter(true)]
+        [MasaApiParameter(true)]
         public override bool Clearable { get; set; } = true;
 
         [Parameter]
-        [MassApiParameter(22)]
+        [MasaApiParameter(22)]
         public StringNumber TruncateLength { get; set; } = 22;
 
         [Parameter]
@@ -45,13 +45,13 @@ namespace Masa.Blazor
         /// <summary>
         /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
         /// </summary>
-        [MassApiParameter(Ignored = true)]
+        [MasaApiParameter(Ignored = true)]
         public override bool UpdateOnChange { get; set; }
 
         /// <summary>
         /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
         /// </summary>
-        [MassApiParameter(Ignored = true)]
+        [MasaApiParameter(Ignored = true)]
         public override bool UpdateOnBlur { get; set; }
 
         public override Action<TextFieldNumberProperty>? NumberProps { get; set; }

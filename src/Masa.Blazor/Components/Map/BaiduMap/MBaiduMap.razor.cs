@@ -9,15 +9,15 @@
         public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
-        [MassApiParameter(360)]
+        [MasaApiParameter(360)]
         public StringNumber Width { get; set; } = 360;
 
         [Parameter]
-        [MassApiParameter(240)]
+        [MasaApiParameter(240)]
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
-        [MassApiParameter(10)]
+        [MasaApiParameter(10)]
         public float Zoom
         {
             get => GetValue<float>(10);
@@ -35,7 +35,7 @@
         }
 
         [Parameter]
-        [MassApiParameter(19)]
+        [MasaApiParameter(19)]
         public float MaxZoom
         {
             get => GetValue(DefaultMaxZoom);
@@ -47,7 +47,7 @@
         }
 
         [Parameter]
-        [MassApiParameter(3)]
+        [MasaApiParameter(3)]
         public float MinZoom
         {
             get => GetValue(DefaultMinZoom);
@@ -66,7 +66,7 @@
         }
 
         [Parameter]
-        [MassApiParameter("116.403, 39.917")]
+        [MasaApiParameter("116.403, 39.917")]
         public GeoPoint Center
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));
@@ -74,7 +74,7 @@
         }
 
         [Parameter]
-        [MassApiParameter(BaiduMapType.Normal)]
+        [MasaApiParameter(BaiduMapType.Normal)]
         public BaiduMapType MapType
         {
             get => GetValue(BaiduMapType.Normal);
