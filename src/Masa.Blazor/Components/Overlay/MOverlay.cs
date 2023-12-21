@@ -16,18 +16,18 @@
         public bool Contained { get; set; }
 
         [Parameter]
-        [MassApiParameter("#212121")]
+        [MasaApiParameter("#212121")]
         public string? Color { get; set; } = "#212121";
 
         [Parameter]
-        [MassApiParameter(0.46)]
+        [MasaApiParameter(0.46)]
         public StringNumber Opacity { get; set; } = 0.46;
 
         [Parameter]
         public string? ScrimClass { get; set; }
 
         [Parameter]
-        [MassApiParameter(5)]
+        [MasaApiParameter(5)]
         public int ZIndex { get; set; } = 5;
 
         public ElementReference ContentRef { get; set; }

@@ -30,7 +30,7 @@
         public bool Pill { get; set; }
 
         [Parameter]
-        [MassApiParameter(true)]
+        [MasaApiParameter(true)]
         public bool Ripple { get; set; } = true;
 
         [Parameter]

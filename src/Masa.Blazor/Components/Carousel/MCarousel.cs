@@ -16,7 +16,7 @@ public partial class MCarousel : MWindow, ICarousel
     public string? DelimiterIcon { get; set; }
 
     [Parameter]
-    [MassApiParameter(500)]
+    [MasaApiParameter(500)]
     public StringNumber? Height
     {
         get => GetValue((StringNumber)500);
@@ -30,7 +30,7 @@ public partial class MCarousel : MWindow, ICarousel
     public bool HideDelimiterBackground { get; set; }
 
     [Parameter]
-    [MassApiParameter(6000)]
+    [MasaApiParameter(6000)]
     public int Interval
     {
         get => GetValue(6000);

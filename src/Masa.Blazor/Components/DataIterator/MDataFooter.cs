@@ -8,7 +8,7 @@
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Parameter, MassApiParameter("$masaBlazor.dataFooter.itemsPerPageText")]
+        [Parameter, MasaApiParameter("$masaBlazor.dataFooter.itemsPerPageText")]
         public string? ItemsPerPageText { get; set; }
 
         [Parameter, EditorRequired]
@@ -21,7 +21,7 @@
         public EventCallback<Action<DataOptions>> OnOptionsUpdate { get; set; }
 
         [Parameter]
-        [MassApiParameter("new List<OneOf<int, DataItemsPerPageOption>>(){5, 10, 15, -1}")]
+        [MasaApiParameter("new List<OneOf<int, DataItemsPerPageOption>>(){5, 10, 15, -1}")]
         public IEnumerable<OneOf<int, DataItemsPerPageOption>>? ItemsPerPageOptions { get; set; } = new List<OneOf<int, DataItemsPerPageOption>>()
         {
             5,
@@ -30,19 +30,19 @@
             -1
         };
 
-        [Parameter, MassApiParameter("$prev")]
+        [Parameter, MasaApiParameter("$prev")]
         public string? PrevIcon { get; set; } = "$prev";
 
-        [Parameter, MassApiParameter("$next")]
+        [Parameter, MasaApiParameter("$next")]
         public string? NextIcon { get; set; } = "$next";
 
-        [Parameter, MassApiParameter("$last")]
+        [Parameter, MasaApiParameter("$last")]
         public string? LastIcon { get; set; } = "$last";
 
-        [Parameter, MassApiParameter("$first")]
+        [Parameter, MasaApiParameter("$first")]
         public string? FirstIcon { get; set; } = "$first";
 
-        [Parameter, MassApiParameter("$masaBlazor.dataFooter.itemsPerPageAll")]
+        [Parameter, MasaApiParameter("$masaBlazor.dataFooter.itemsPerPageAll")]
         public string? ItemsPerPageAllText { get; set; }
 
         [Parameter]
@@ -57,7 +57,7 @@
         [Parameter]
         public bool DisableItemsPerPage { get; set; }
 
-        [Parameter, MassApiParameter("$masaBlazor.dataFooter.pageText")]
+        [Parameter, MasaApiParameter("$masaBlazor.dataFooter.pageText")]
         public string? PageText { get; set; }
 
         [Parameter]

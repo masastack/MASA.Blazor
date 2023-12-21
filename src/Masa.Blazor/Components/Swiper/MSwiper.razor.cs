@@ -10,7 +10,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
 
     [Parameter] public bool AutoHeight { get; set; }
 
-    [Parameter] [MassApiParameter(true)] public bool AllowTouchMove { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public bool AllowTouchMove { get; set; } = true;
 
     /// <summary>
     /// Set to true to enable continuous loop mode
@@ -31,7 +31,7 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
     /// <summary>
     /// Duration of transition between slides (in ms)
     /// </summary>
-    [Parameter] [MassApiParameter(300)] public int Speed { get; set; } = 300;
+    [Parameter] [MasaApiParameter(300)] public int Speed { get; set; } = 300;
 
     [Parameter] public bool Vertical { get; set; }
 

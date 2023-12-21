@@ -43,7 +43,7 @@ namespace Masa.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
-        [MassApiParameter(5000)]
+        [MasaApiParameter(5000)]
         public int Timeout { get; set; } = 5000;
 
         [Parameter]

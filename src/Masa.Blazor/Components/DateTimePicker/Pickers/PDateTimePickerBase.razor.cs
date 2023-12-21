@@ -8,7 +8,7 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
-    [Parameter] [MassApiParameter(DateTimePickerViewType.Auto)]
+    [Parameter] [MasaApiParameter(DateTimePickerViewType.Auto)]
     public DateTimePickerViewType ViewType { get; set; }
 
     [Parameter] public string? TabItemTransition { get; set; }

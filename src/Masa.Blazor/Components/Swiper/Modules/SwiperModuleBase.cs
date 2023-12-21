@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Swiper.Modules;
+﻿namespace Masa.Blazor.Components.Swiper.Modules;
 
 public abstract class SwiperModuleBase : IComponent
 {

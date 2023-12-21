@@ -30,7 +30,7 @@ public partial class PPageTabs : PatternPathComponentBase
     #region Parameters from MTabs
 
     [Parameter]
-    [MassApiParameter(true)]
+    [MasaApiParameter(true)]
     public bool Ripple { get; set; } = true;
 
     [Parameter]
@@ -52,7 +52,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? SliderColor { get; set; }
 
     [Parameter]
-    [MassApiParameter(2)]
+    [MasaApiParameter(2)]
     public StringNumber? SliderSize { get; set; } = 2;
 
     [Parameter]
@@ -73,7 +73,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
-    [MassApiParameter("/")]
+    [MasaApiParameter("/")]
     public string NoDataPath
     {
         get => _noDataPath ?? "/";
@@ -81,11 +81,11 @@ public partial class PPageTabs : PatternPathComponentBase
     }
 
     [Parameter]
-    [MassApiParameter("$close")]
+    [MasaApiParameter("$close")]
     public string? CloseIcon { get; set; } = "$close";
 
     [Parameter]
-    [MassApiParameter(true)]
+    [MasaApiParameter(true)]
     public bool AskBeforeClosing { get; set; } = true;
 
     [Parameter]

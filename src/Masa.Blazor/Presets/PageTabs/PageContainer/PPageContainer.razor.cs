@@ -33,13 +33,13 @@ public partial class PPageContainer : PatternPathComponentBase
     /// The content of the matched path would be cached in the DOM.
     /// </summary>
     [Parameter]
-    [MassApiParameter(ReleasedOn = "v1.0.2")]
+    [MasaApiParameter(ReleasedOn = "v1.0.2")]
     public IEnumerable<string>? IncludePatterns { get; set; }
 
     /// <summary>
     /// Max number of cached pages.
     /// </summary>
-    [Parameter] [MassApiParameter(10, "v1.0.2")]
+    [Parameter] [MasaApiParameter(10, "v1.0.2")]
     public int Max { get; set; } = 10;
 
     private readonly LRUCache<string, PatternPath> _patternPaths = new(10);

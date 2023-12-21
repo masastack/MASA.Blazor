@@ -33,14 +33,14 @@
         public bool Short { get; set; }
 
         [Parameter]
-        [MassApiParameter(48)]
+        [MasaApiParameter(48)]
         public StringNumber? ExtensionHeight { get; set; } = 48;
 
         [Parameter]
         public RenderFragment? ExtensionContent { get; set; }
 
         [Parameter]
-        [MassApiParameter("header")]
+        [MasaApiParameter("header")]
         public override string Tag { get; set; } = "header";
 
         [Parameter]

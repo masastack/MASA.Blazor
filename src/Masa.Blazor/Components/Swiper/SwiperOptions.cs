@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using Masa.Blazor.Swiper.Modules;
+using Masa.Blazor.Components.Swiper.Modules;
 
 namespace Masa.Blazor;
 

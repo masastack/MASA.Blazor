@@ -12,7 +12,7 @@
         public bool Dark { get; set; }
 
         [Parameter]
-        [MassApiParameter("primary")]
+        [MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         protected override void SetComponentClass()

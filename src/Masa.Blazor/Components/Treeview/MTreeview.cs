@@ -18,11 +18,11 @@
         public string? ActiveClass { get; set; }
 
         [Parameter]
-        [MassApiParameter("accent")]
+        [MasaApiParameter("accent")]
         public string? SelectedColor { get; set; } = "accent";
 
         [Parameter]
-        [MassApiParameter("primary")]
+        [MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]
@@ -32,15 +32,15 @@
         public bool Activatable { get; set; }
 
         [Parameter]
-        [MassApiParameter("$minus")]
+        [MasaApiParameter("$minus")]
         public string? IndeterminateIcon { get; set; } = "$minus";
 
         [Parameter]
-        [MassApiParameter("$checkboxOn")]
+        [MasaApiParameter("$checkboxOn")]
         public string? OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        [MassApiParameter("$checkboxOff")]
+        [MasaApiParameter("$checkboxOff")]
         public string? OffIcon { get; set; } = "$checkboxOff";
 
         [Parameter]

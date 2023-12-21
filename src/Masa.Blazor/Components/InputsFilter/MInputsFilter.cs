@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class MInputsFilter : ComponentBase
 {
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] [MassApiParameter(true)] public bool Dense { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public bool Dense { get; set; } = true;
 
-    [Parameter] [MassApiParameter(true)] public StringBoolean? HideDetails { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public StringBoolean? HideDetails { get; set; } = true;
 
     [Parameter] public EventCallback<InputsFilterFieldChangedEventArgs> OnFieldChanged { get; set; }
 

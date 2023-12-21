@@ -6,10 +6,10 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
-    [Parameter] [MassApiParameter(ReleasedOn = "v1.1.1")]
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.1.1")]
     public bool AlignCenter { get; set; }
 
-    [Parameter, MassApiParameter(true)] public bool Colon { get; set; } = true;
+    [Parameter, MasaApiParameter(true)] public bool Colon { get; set; } = true;
 
     [Parameter] public int Xs { get; set; }
 
@@ -17,7 +17,7 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
 
     [Parameter] public int Md { get; set; }
 
-    [Parameter, MassApiParameter(3)] public int Column { get; set; } = 3;
+    [Parameter, MasaApiParameter(3)] public int Column { get; set; } = 3;
 
     [Parameter] public int Lg { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class MDrag : BDomComponentBase, IAsyncDisposable
 {

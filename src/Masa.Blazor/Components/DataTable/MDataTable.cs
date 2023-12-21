@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -87,7 +86,7 @@ namespace Masa.Blazor
         public RenderFragment? ItemDataTableExpandContent { get; set; }
 
         [Parameter]
-        [MassApiParameter("$expand")]
+        [MasaApiParameter("$expand")]
         public string ExpandIcon { get; set; } = "$expand";
 
         [Parameter]
@@ -119,7 +118,7 @@ namespace Masa.Blazor
         public bool OnRowContextmenuPreventDefault { get; set; }
 
         [Parameter]
-        [MassApiParameter(ReleasedOn = "v1.0.4")]
+        [MasaApiParameter(ReleasedOn = "v1.0.4")]
         public DataTableResizeMode ResizeMode
         {
             get => GetValue(DataTableResizeMode.None);
