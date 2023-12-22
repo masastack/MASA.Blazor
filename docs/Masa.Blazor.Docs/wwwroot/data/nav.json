@@ -294,6 +294,11 @@
         "title": "watermark",
         "state": "new",
         "releasedOn": "v1.1.1"
+      },
+      {
+        "title": "xgplayer",
+        "state": "new",
+        "releasedOn": "v1.3.0"
       }
     ]
   },

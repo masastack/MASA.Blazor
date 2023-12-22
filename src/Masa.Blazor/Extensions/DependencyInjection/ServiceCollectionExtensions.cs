@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
+using Masa.Blazor.Components.Xgplayer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -51,6 +52,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
         services.TryAddScoped<SwiperJsModule>();
+        services.TryAddScoped<XgplayerJSModule>();
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
