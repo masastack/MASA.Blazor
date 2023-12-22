@@ -16,8 +16,6 @@ public class XgplayerJSModule : JSModule
         IEnumerable<MediaStreamUrl> urls,
         XgplayerOptions? options = null)
     {
-        Console.Out.WriteLine("[XgplayerJSModule] InitAsync");
-
         var jsObjectReference = await InvokeAsync<IJSObjectReference>("init", selector, urls, options);
         return new XgplayerJSObjectReference(jsObjectReference);
     }
