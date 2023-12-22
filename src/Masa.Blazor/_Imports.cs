@@ -15,3 +15,5 @@ global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.Logging;
 global using OneOf;
 global using BemIt;
+global using Microsoft.AspNetCore.Components.Rendering;
+global using System.Text.Json.Serialization;

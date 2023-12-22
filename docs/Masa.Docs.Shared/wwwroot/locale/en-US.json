@@ -244,6 +244,7 @@
   "treeview": "Treeview",
   "virtual-scroll": "Virtual scroll",
   "watermark": "Watermark",
+  "xgplayer": "Xgplayer",
   "md-breakpoints": "Material Design Breakpoints",
   "device": "Device",
   "code": "Code",
@@ -426,7 +427,8 @@
     "tooltips": "The Tooltips component is useful for conveying information when a user hovers over an element",
     "treeview": "The Treeview component is useful for displaying large amounts of nested data.",
     "virtual-scroller": "The VirtualScroller component displays a virtual、infinite list",
-    "watermark": "Add specific text or image to the page"
+    "watermark": "Add specific text or image to the page",
+    "xgplayer": "A HTML5 video player based on Xgplayer"
   },
   "contribute": {
     "edit": "Edit on {0}",
