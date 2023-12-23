@@ -711,6 +711,8 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.RemoveStopPropagationEvent,  InputElement, "wheel");
+            
             IsFocused = false;
             if (OnBlur.HasDelegate)
             {
@@ -884,6 +886,8 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, InputElement, "wheel");
+            
             if (!IsFocused)
             {
                 IsFocused = true;
