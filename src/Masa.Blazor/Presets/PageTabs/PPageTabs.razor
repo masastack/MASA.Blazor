@@ -26,8 +26,10 @@
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
-                  @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
-                  __internal_preventDefault_oncontextmenu>
+                  @oncontextmenu="@((e) => HandleOnContextmenu(e, patternPath))"
+                  __internal_preventDefault_oncontextmenu
+                  @onauxclick="@(e => HandleOnAuxclick(e, patternPath, tabTitle))"
+                  __internal_preventDefault_onauxclick>
 
                 @if (TabIconContent != default)
                 {

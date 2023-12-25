@@ -97,6 +97,7 @@ public partial class PPageTabs : PatternPathComponentBase
     private string? _noDataPath;
     private string? _previousPath;
     private PatternPath? _contextmenuPath;
+    private CancellationTokenSource? _middleClickCancellationTokenSource;
 
     private double _positionX;
     private double _positionY;
@@ -364,6 +365,20 @@ public partial class PPageTabs : PatternPathComponentBase
         _menuValue = true;
         _positionX = args.ClientX;
         _positionY = args.ClientY;
+    }
+
+    private async Task HandleOnAuxclick(MouseEventArgs args, PatternPath patternPath, string tabTitle)
+    {
+        if (args.Button == 1)
+        {
+            // HACK: I don't know why this event would be triggered twice
+            // so I use a cancellation token to cancel the previous task
+
+            _middleClickCancellationTokenSource?.Cancel();
+            _middleClickCancellationTokenSource = new CancellationTokenSource();
+
+            await RunTaskInMicrosecondsAsync(() => HandleOnCloseTab(patternPath, tabTitle), 100, _middleClickCancellationTokenSource.Token);
+        }
     }
 
     private void CloseTab(PatternPath patternPath)
