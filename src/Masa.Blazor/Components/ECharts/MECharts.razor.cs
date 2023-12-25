@@ -196,8 +196,6 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
 
     public async Task SetOption(object? option = null, bool notMerge = true, bool lazyUpdate = false)
     {
-        Console.Out.WriteLine("[MECharts] SetOption, _echarts is null? {0}", _echarts == null);
-        
         if (_echarts == null) return;
 
         option ??= Option;
