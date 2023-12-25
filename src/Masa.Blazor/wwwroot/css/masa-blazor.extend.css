@@ -17,9 +17,17 @@
     background: #FFFFFF;
 }
 
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:hover:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) {
+    background: #eeeeee;
+}
+
 .theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper),
 .theme--dark.m-data-table > .m-data-table__wrapper > table > thead > tr {
     background: #1E1E1E;
+}
+
+.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:hover:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) {
+    background: #616161;
 }
 
 .m-data-table__column--fixed-right, .m-data-table__column--fixed-left {
