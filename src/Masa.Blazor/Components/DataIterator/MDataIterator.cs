@@ -24,6 +24,9 @@
         public List<TItem>? Expanded { get; set; }
 
         [Parameter]
+        public EventCallback<List<TItem>> ExpandedChanged { get; set; }
+
+        [Parameter]
         public bool SingleExpand { get; set; }
 
         [Parameter]
@@ -98,9 +101,11 @@
 
         public IEnumerable<TItem> SelectableItems => ComputedItems.Where(IsSelectable);
 
+        private IEnumerable<TItem>? _prevExpanded;
+        
         public bool IsEmpty => !Items.Any() || Pagination.ItemsLength == 0;
 
-        protected Dictionary<string, bool> Expansion { get; } = new();
+        protected Dictionary<string, bool> Expansion { get; private set; } = new();
 
         protected Dictionary<string, bool> Selection { get; } = new();
 
@@ -121,7 +126,7 @@
                 .Watch<IEnumerable<TItem>>(nameof(Value), val =>
                 {
                     if (val is null) return;
-                    
+
                     var keys = new List<string>();
 
                     foreach (var item in val)
@@ -173,12 +178,21 @@
                 return false;
             }
 
-            if (Expansion.TryGetValue(key, out var expanded))
+            if (!Equals(_prevExpanded, Expanded))
             {
-                return expanded;
+                _prevExpanded = Expanded;
+
+                if (Expanded is null)
+                {
+                    Expansion.Clear();
+                }
+                else
+                {
+                    Expansion = Expanded.ToDictionary(ItemKey!, _ => true);
+                }
             }
 
-            return false;
+            return Expansion.TryGetValue(key, out var expanded) && expanded;
         }
 
         public void Expand(TItem item, bool value = true)
@@ -186,6 +200,7 @@
             if (SingleExpand)
             {
                 Expansion.Clear();
+                Expanded?.Clear();
             }
 
             var key = ItemKey?.Invoke(item);
@@ -197,6 +212,18 @@
             Expansion[key] = value;
 
             OnItemExpand.InvokeAsync((item, value));
+
+            var expanded = Expanded ?? new List<TItem>();
+            if (value)
+            {
+                expanded.Add(item);
+            }
+            else
+            {
+                expanded.Remove(item);
+            }
+
+            ExpandedChanged.InvokeAsync(expanded);
         }
 
         public bool IsSelected(TItem item)
