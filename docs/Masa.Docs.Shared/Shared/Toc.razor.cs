@@ -23,17 +23,15 @@ public partial class Toc : NextTickComponentBase
     [Parameter] public bool RTL { get; set; }
 
     private List<MarkdownItTocContent> _toc = new();
-    private string? _initialHash;
 
     private bool _scrolling = false;
     private List<string> _activeStack = new();
     private string? _activeItem;
-    
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         AppService.TocChanged += AppServiceOnTocChanged;
-        _initialHash = NavigationManager.GetHash();
     }
 
     private string? ActiveItem
@@ -110,16 +108,17 @@ public partial class Toc : NextTickComponentBase
             return;
         }
 
-        if (_initialHash is not null)
+        var hash = NavigationManager.GetHash();
+
+        if (hash is not null)
         {
-            ActiveItem = _initialHash;
+            ActiveItem = hash;
             NextTick(async () =>
             {
                 await Task.Delay(300);
                 await ScrollIntoView(ActiveItem, force: true);
                 StateHasChanged();
             });
-            _initialHash = null;
         }
         else
         {
