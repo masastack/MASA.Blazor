@@ -20,7 +20,7 @@
     {
         <a class="@CssProvider.GetClass("link")"
            style="@CssProvider.GetStyle("link")"
-           href="@NavigationManager.GetUriWithQueryParameters(new Dictionary<string, object?>() { { name, value  } })">
+           href="@NavigationManager.GetRelativeUriWithQueryParameters(new Dictionary<string, object?>() { { name, value  } })">
             @ChildContent?.Invoke(interactiveValue)
         </a>
     };
