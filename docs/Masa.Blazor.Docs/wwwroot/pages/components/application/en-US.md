@@ -51,6 +51,8 @@ You can use combinations of any or all of the above components including **MBott
 <app-alert type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 
 you can overwrite this functionality by using the `Absolute` prop."></app-alert>
 
+<app-alert type="warning" content="About how to avoid the entry animation of **MMain** and **MAppBar** when first loaded, please refer to [Frequently Asked Questions](/blazor/getting-started/frequently-asked-questions#avoid-the-entry-animation-of-main-and-app-bar)"></app-alert>
+
 ## Application components
 
 Below is a list of all the components that support the `App` prop and can be used as layout elements in your application. 

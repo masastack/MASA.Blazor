@@ -762,3 +762,14 @@ default-app-markup {
         clip-path: circle(100% at var(--x) var(--y));
     }
 }
+
+@media (min-width: 1264px) {
+    .m-main.portal-main:not(.app--sized) { 
+        padding-left: 300px !important;
+    }
+    
+    .m-main.doc-main:not(.app--sized) {
+        padding-left: 300px !important;
+        padding-right: 300px !important;
+    }
+}

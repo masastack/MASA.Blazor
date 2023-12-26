@@ -6,6 +6,8 @@ public class MMain : BMain
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
+    private bool _sized;
+
     private bool IsSsr => MasaBlazor.IsSsr;
 
     private static string[] s_applicationProperties =
@@ -41,25 +43,26 @@ public class MMain : BMain
     {
         if (s_applicationProperties.Contains(e.PropertyName))
         {
+            _sized = true;
             InvokeStateHasChanged();
         }
     }
 
-    protected override void SetComponentClass()
+    protected override void SetComponentCss()
     {
         CssProvider
-            .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
+            .UseBem("m-main", css => { css.AddIf("app--sized", () => _sized); }, style =>
             {
                 if (!IsSsr)
                 {
-                    styleBuilder
-                    .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
-                    .Add($"padding-right:{MasaBlazor.Application.Right}px")
-                    .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
-                    .Add($"padding-left:{MasaBlazor.Application.Left}px");
+                    style
+                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
+                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
+                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
+                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
                 }
             })
-            .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
+            .Element("wrap");
     }
 
     protected override ValueTask DisposeAsync(bool disposing)

@@ -70,6 +70,7 @@ namespace Masa.Blazor
 
         private bool _isBooted;
         private Scroller? _scroller;
+        private bool _sized;
 
         public int? Transform { get; private set; } = 0;
 
@@ -275,6 +276,7 @@ namespace Masa.Blazor
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
+                _sized = true;
                 InvokeStateHasChanged();
             }
         }
@@ -300,6 +302,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-app-bar")
+                        .AddIf("app--sized", () => _sized)
                         .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
                         .AddIf("m-app-bar--clipped-left", () => ClippedLeft)
                         .AddIf("m-app-bar--clipped-right", () => ClippedRight)
