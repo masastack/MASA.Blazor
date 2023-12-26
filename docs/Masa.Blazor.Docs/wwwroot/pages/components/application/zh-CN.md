@@ -45,6 +45,8 @@ related:
 
 <app-alert type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></app-alert>
 
+<app-alert type="warning" content="有关如何避免初次加载时 **MMain** 和 **MAppBar** 的过渡动画，请查看[常见问题](/blazor/getting-started/frequently-asked-questions#section-95ee98984e13533a)。"></app-alert>
+
 ## 应用组件
 
 以下是所有支持 **App** 属性的组件列表，这些组件可以在你的应用中用作布局元素。这些组件可以混合和匹配，并且每个特定组件在任何时候都只能存在一个。不过，你可以把它们换掉，布局也能适应。

@@ -10,6 +10,7 @@
 - [无法从“方法组”转换为“Microsoft.AspNetCore.Components.EventCallback”](#cannot-convert-from-method-group-to-eventcallback)
 - [如何让UI紧凑？](#how-to-make-ui-compact)
 - [I18n 切换语言后文本不更新](#i18n-text-not-updated)
+- [避免 MMain 和 MAppBar 初次加载的过渡动画](#avoid-the-entry-animation-of-main-and-app-bar)
 
 ## 问题专区
 
@@ -131,3 +132,32 @@
         }
     }
     ```
+
+- **避免 MMain 和 MAppBar 初次加载的过渡动画** { #avoid-the-entry-animation-of-main-and-app-bar }
+
+  MASA Blazor 会自动计算 **MMain** 和 **MAppBar** 的位置，而这一过程需要调用 JS 互操作，所以会有一定的延迟。当得到计算后的位置并应用后，会有一个过渡动画。
+  可以通过 CSS 来避免此过渡动画。例如以本文档为例：
+
+  ```razor
+  <MApp>
+    <MAppBar Class="my-app" App></MAppBar>
+    <MNavigationDrawer App></MNavigationDrawer>
+    <MMain Class="my-main"></MMain>
+  </MApp>
+  ```
+
+  ``` css
+  /* 默认的 mobile 断点值是 md,其值是 1264px*/
+  /* MNavigationDrawer 的默认宽度是 300px */
+  @media (min-width: 1264px) {
+    /* 避免 MAppBar 的过渡动画 */
+    .my-app:not(.app--sized){
+      left: 300px !important;
+    }
+  
+    / * 避免 MMain 的过渡动画 * /
+    .my-main:not(.app--sized){
+      padding-left: 300px !important;
+    }
+  }
+  ```

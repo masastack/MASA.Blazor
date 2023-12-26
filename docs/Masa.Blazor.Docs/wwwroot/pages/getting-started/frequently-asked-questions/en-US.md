@@ -10,7 +10,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 - [Cannot convert from 'method group' to 'EventCallback'](#cannot-convert-from-method-group-to-eventcallback)
 - [How to make UI compact?](#how-to-make-ui-compact)
 - [I18n text not updated after language change](#i18n-text-not-updated)
-
+- [Avoid the entry animation of main and app bar](#avoid-the-entry-animation-of-main-and-app-bar)
 
 ## Questions
 
@@ -132,3 +132,33 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
         }
     }
     ```
+
+- **Avoid the entry animation of main and app bar** { #avoid-the-entry-animation-of-main-and-app-bar }
+
+  MASA Blazor will automatically calculate the position of **MMain** and **MAppBar**, and this process requires calling JS interop,
+  so there will be some delay. After getting the calculated position and applying it, there will be a transition animation.
+  It can be avoided by adding the following CSS:
+
+  ```razor
+  <MApp>
+    <MAppBar Class="my-app" App></MAppBar>
+    <MNavigationDrawer App></MNavigationDrawer>
+    <MMain Class="my-main"></MMain>
+  </MApp>
+  ```
+
+  ```css
+  /* The default mobile breakpoint is md, and its value is 1264px */
+  /* The default width of MNavigationDrawer is 300px */
+  @media (min-width: 1264px) {
+    /* Avoid the transition animation of MAppBar */
+    .my-app:not(.app--sized){
+      left: 300px !important;
+    }
+    
+    /* Avoid the transition animation of MMain */
+    .my-main:not(.app--sized){
+      padding-left: 300px !important;
+    }
+  }
+  ```
