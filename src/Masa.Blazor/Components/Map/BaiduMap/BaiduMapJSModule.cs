@@ -18,8 +18,7 @@
             }
             catch (JSException e)
             {
-                // TODO: after https://github.com/dotnet/aspnetcore/issues/52070 is fixed, remove this
-                if (e.Message.StartsWith("Cannot create a JSObjectReference from the"))
+                if (e.ForCannotCreateFromNullOrUndefined())
                 {
                     return null;
                 }
