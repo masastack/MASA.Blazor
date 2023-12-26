@@ -4,11 +4,11 @@
 
 > MASA Blazor 基于 .NET 6.0 开发，请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 或者更高的版本。
 
-## 自动安装 {updated-in=v1.3.0}
+## 自动安装
 
 要快速入门，可以使用 MASA.Template 模板快速创建项目。
 
-### 安装 MASA.Template 模板 
+### 安装 MASA.Template 模板 {updated-in=v1.3.0}
 
 ```shell
 dotnet new install MASA.Template
@@ -145,11 +145,11 @@ builder.Services.AddMasaBlazor();
 </MApp>
 ```
 
-## 手动安装（Blazor Web App） {released-on=v1.1.0}
+## 手动安装（Blazor Web App）
 
 > 要求 Masa.Blazor 最小版本为 `1.1.0` 和 .NET 版本最小为 `8.0`。
 
-### 全局交互
+### 全局交互 {released-on=v1.1.0}
 
 在根级别应用交互性。
 
@@ -450,99 +450,6 @@ builder.Services.AddMasaBlazor(options => {
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-```
-
-## SSR {released-on=v1.3.0}
-
-在使用每页/组件应用交互时，对于一些状态如主题、语言、RTL、布局等需要在客户端保存，MASA Blazor 提供了一些 SSR 组件来解决这些问题。
-
-### 切换主题
-
-当需要切换主题时，你需要将 **MSsrThemeProvider** 组件设置为可交互的。
-
-```razor App.razor l:6-7
-<head>
-...
-
-<HeadOutlet />
-
-@*此示例使用Server交互模式*@
-<MSsrThemeProvider @rendermode="InteractiveServer" />
-
-</head>
-```
-
-然后在需要切换主题的地方注入 **MasaBlazorProvider**，调用 **ToggleTheme** 方法即可。
-
-```razor 
-@inject MasaBlazorProvider MasaBlazorProvider
-
-@code {
-    private void ToggleTheme()
-    {
-        MasaBlazorProvider.ToggleTheme();
-    }
-}
-```
-
-### 切换 RTL
-
-在需要切换 RTL 的地方注入 **MasaBlazorProvider**，调用 **ToggleRtl** 方法即可。
-
-```razor
-@inject MasaBlazorProvider MasaBlazorProvider
-
-@code {
-    private void ToggleRtl()
-    {
-        MasaBlazorProvider.ToggleRtl();
-    }
-}
-```
-
-### 客户端状态
-
-当你使用了 **MAppBar**、**MNavigationManager** 和 **MFooter** 组件时，MASA Blazor 自动计算 **MMain** 组件大小。
-但这在 SSR 中无效，因为计算依赖 JavaScript，而服务端无法执行 JavaScript。
-
-因此提供了以下组件来解决这些问题：
-
-- **MSsrStateProvider** 组件用于在 SSR 中设置和保存客户端状态。必须是可交互的。
-- **MSsrPageScript** 组件用于页面间跳转时恢复客户端状态。
-
-另外还有一个脚本文件 `ssr-state-restore.js`，用于在初次加载时恢复客户端状态。
-
-```razor App.razor l:4-8
-<body>
-    <Routes />
-
-    @*初次加载时恢复客户端状态*@
-    <script src="_content/Masa.Blazor/js/ssr-state-restore.js"></script>
-
-    @*此示例使用Server交互模式*@
-    <MSsrStateProvider @rendermode="InteractiveServer" />
-    
-    <script src="_framework/blazor.web.js"></script>
-    ...
-</body>
-```
-
-```razor MainLayout.razor l:14-15
-<MApp>
-    <MAppBar App>
-        ...
-    </MAppBar>
-    <MNavigationManager App>
-       ...
-    </MNavigationManager>
-
-    <MMain>
-        @Body
-    </MMain>
-</MApp>
-
-@*页面间跳转恢复客户端状态*@
-<MSsrPageScript />
 ```
 
 ## 下一步

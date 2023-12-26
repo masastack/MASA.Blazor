@@ -23,7 +23,7 @@
   "spacing": "Spacing",
   "text-and-typography": "Text and typography",
   "transitions": "Transitions",
-  "ui-components": "UI components",
+  "ui-components": "Components",
   "js-modules": "JavaScript modules",
   "intersection-observer": "Intersection observer",
   "labs": "Labs",
@@ -64,7 +64,7 @@
   },
   "home": "Home",
   "docs": "Documents",
-  "annual-service": "Annual service",
+  "annual-service": "Enterprise",
   "sponsors": "SPONSORS",
   "contactus": "CONTACT US",
 
