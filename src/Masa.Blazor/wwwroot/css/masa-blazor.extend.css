@@ -1430,3 +1430,13 @@ a.m-pagination__item {
     opacity: 1;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)
 }
+
+/* xgplayer */
+
+.m-xgplayer.xgplayer .xgplayer-start {
+    z-index: 4;
+}
+
+.m-xgplayer.xgplayer .xgplayer-controls {
+    z-index: 4;
+}
