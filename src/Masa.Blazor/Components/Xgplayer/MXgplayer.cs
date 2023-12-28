@@ -170,7 +170,7 @@ public class XgplayerUrl : OneOfBase<string, MediaStreamUrl, IEnumerable<MediaSt
 
     public static bool operator ==(XgplayerUrl left, XgplayerUrl right)
     {
-        return left.AsEnumerable().SequenceEqual(right.AsEnumerable());
+        return left.AsEnumerable().Select(u => u.Src).SequenceEqual(right.AsEnumerable().Select(u => u.Src));
     }
 
     public static bool operator !=(XgplayerUrl left, XgplayerUrl right)

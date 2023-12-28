@@ -6,17 +6,13 @@ public class XgplayerJSModule : JSModule
     {
     }
 
-    public async ValueTask<XgplayerJSObjectReference> InitAsync(string selector, string url, XgplayerOptions? options = null)
-    {
-        return await InitAsync(selector, new[] { new MediaStreamUrl(url) }, options);
-    }
-
     public async ValueTask<XgplayerJSObjectReference> InitAsync(
         string selector,
         IEnumerable<MediaStreamUrl> urls,
-        XgplayerOptions? options = null)
+        XgplayerOptions? options,
+        DotNetObjectReference<XgplayerJSInteropHandle> interopHandle)
     {
-        var jsObjectReference = await InvokeAsync<IJSObjectReference>("init", selector, urls, options);
+        var jsObjectReference = await InvokeAsync<IJSObjectReference>("init", selector, urls, options, interopHandle);
         return new XgplayerJSObjectReference(jsObjectReference);
     }
 }
