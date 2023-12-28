@@ -30,6 +30,11 @@ public abstract class MInteractivePopup : ComponentBase, IOutsideClickJsCallback
 
     public async Task HandleOnOutsideClickAsync()
     {
+        await CloseAsync();
+    }
+
+    protected async Task CloseAsync()
+    {
         await Task.Delay(1); // https://github.com/dotnet/aspnetcore/issues/52705
         NavigationManager.NavigateWithQueryParameter(QueryName, (string?)null);
     }
