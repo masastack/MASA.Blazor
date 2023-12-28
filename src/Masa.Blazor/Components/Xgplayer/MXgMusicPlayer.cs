@@ -85,9 +85,14 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public EventCallback<bool> OnFullscreenChange { get; set; }
+
+    [Parameter] public EventCallback<bool> OnCssFullscreenChange { get; set; }
+
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
     private XgplayerUrl? _prevUrl;
+    private DotNetObjectReference<XgplayerJSInteropHandle>? _jsInteropHandle;
 
     private IXgplayerControls? _controls;
     private IXgplayerPlay? _play;
@@ -106,21 +111,11 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
 
             if (culture.TwoLetterISOLanguageName == "zh")
             {
-                return IsHant(culture) ? "zh-hk" : "zh-cn";
+                return IsZhHant(culture) ? "zh-hk" : "zh-cn";
             }
 
             return culture.TwoLetterISOLanguageName;
         }
-    }
-
-    public bool IsHant(CultureInfo culture)
-    {
-        if (culture.Parent.Name == "zh")
-        {
-            return culture.Name == "zh-Hant";
-        }
-
-        return IsHant(culture.Parent);
     }
 
     protected XgplayerJSObjectReference? XgplayerJSObjectReference { get; set; }
@@ -131,6 +126,8 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
 
         Url.ThrowIfNull(ComponentName);
         _prevUrl = Url;
+
+        _jsInteropHandle = DotNetObjectReference.Create(new XgplayerJSInteropHandle(this));
     }
 
     protected override async Task OnParametersSetAsync()
@@ -170,13 +167,13 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
         builder.AddContent(4, RenderChildContent);
         builder.CloseElement();
 
-        void RenderChildContent(RenderTreeBuilder builder)
+        void RenderChildContent(RenderTreeBuilder nextBuilder)
         {
-            builder.OpenComponent<CascadingValue<IXgplayer>>(0);
-            builder.AddAttribute(1, "Value", this);
-            builder.AddAttribute(2, "IsFixed", true);
-            builder.AddAttribute(3, "ChildContent", ChildContent);
-            builder.CloseComponent();
+            nextBuilder.OpenComponent<CascadingValue<IXgplayer>>(0);
+            nextBuilder.AddAttribute(1, "Value", this);
+            nextBuilder.AddAttribute(2, "IsFixed", true);
+            nextBuilder.AddAttribute(3, "ChildContent", ChildContent);
+            nextBuilder.CloseComponent();
         }
     }
 
@@ -192,8 +189,13 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new();
 
+        if (_jsInteropHandle is null)
+        {
+            return;
+        }
+
         await RunTaskInMicrosecondsAsync(
-            async () => XgplayerJSObjectReference = await XgplayerJSModule.InitAsync(Ref.GetSelector(), Url, GenOptions()),
+            async () => XgplayerJSObjectReference = await XgplayerJSModule.InitAsync(Ref.GetSelector(), Url, GenOptions(), _jsInteropHandle),
             100,
             _cancellationTokenSource.Token);
     }
@@ -253,6 +255,16 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
     public async Task<XgplayerPropsAndStates> GetPropsAndStatesAsync()
     {
         return await XgplayerJSObjectReference!.GetPropsAndStatesAsync();
+    }
+
+    private bool IsZhHant(CultureInfo culture)
+    {
+        if (culture.Parent.Name == "zh")
+        {
+            return culture.Name == "zh-Hant";
+        }
+
+        return IsZhHant(culture.Parent);
     }
 
     protected override async ValueTask DisposeAsync(bool disposing)
