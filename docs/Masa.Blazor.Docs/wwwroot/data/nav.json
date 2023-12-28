@@ -33,7 +33,11 @@
       "icon-fonts",
       "internationalization",
       "auto-match-nav",
-      "theme"
+      "theme",
+      {
+        "title": "ssr",
+        "state": "new"
+      }
     ]
   },
   {
@@ -269,6 +273,11 @@
         "title": "inputs-filter",
         "state": "new",
         "releasedOn": "v1.1.0"
+      },
+      {
+        "title": "interactive-trigger",
+        "state": "new",
+        "releasedOn": "v1.3.0"
       },
       {
         "title": "lazy",

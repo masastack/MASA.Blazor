@@ -48,8 +48,14 @@ public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue>
     /// </summary>
     [Parameter] public bool WithPopup { get; set; }
 
+    /// <summary>
+    /// The class of popup, but apply only when interacting.
+    /// </summary>
     [Parameter] public string? PopupClass { get; set; }
 
+    /// <summary>
+    /// The style of popup, but apply only when interacting.
+    /// </summary>
     [Parameter] public string? PopupStyle { get; set; }
 
     /// <summary>
@@ -125,14 +131,14 @@ public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue>
         CssProvider.UseBem("m-interactive-trigger")
                    .Element("link",
                        css => { css.Modifiers(m => m.Modifier("disabled", IsInteractive && DisableLinkOnInteractive)); })
-                   .Element("popup", css => { css.Modifiers(m => m.Modifier("active", _active).AddClass(PopupClass)); },
+                   .Element("popup", css => { css.Modifiers(m => m.Modifier("active", _active)).AddIf(PopupClass, () => _active); },
                        style =>
                        {
                            style.AddIf($"top: {Top}px", () => Top.HasValue)
                                 .AddIf($"right: {Right}px", () => Right.HasValue)
                                 .AddIf($"bottom: {Bottom}px", () => Bottom.HasValue)
                                 .AddIf($"left: {Left}px", () => Left.HasValue)
-                                .Add(PopupStyle);
+                                .AddIf(PopupStyle, () => _active);
                        });
     }
 }

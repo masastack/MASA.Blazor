@@ -35,6 +35,10 @@
     --md-ref-palette-neutral-variant90: #e5e1ec;
 }
 
+h1:focus {
+    outline: none;
+}
+
 .m-application {
     line-height: 1.5 !important;
 }
@@ -113,6 +117,10 @@
 
 .doc-list-nav .theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
     color: var(--md-sys-color-on-surface-light);
+}
+
+.doc-list-nav .m-list-item__subtitle {
+    font-size: 0.8125rem;
 }
 
 .theme--light.default-nav {
