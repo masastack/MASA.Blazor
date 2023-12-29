@@ -52,7 +52,7 @@
 
             if (Icon != null)
             {
-                icon = Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+                icon = Icon.IsAlias ? MasaBlazor.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
             }
             else
             {
@@ -66,7 +66,7 @@
 
                 if (textContent.StartsWith("$"))
                 {
-                    icon = MasaBlazor!.Icons.Aliases.GetIconOrDefault(textContent);
+                    icon = MasaBlazor.Icons.Aliases.GetIconOrDefault(textContent);
                 }
                 else
                 {
@@ -148,7 +148,7 @@
 #endif
         }
 
-        protected override void SetComponentClass()
+        protected override void SetComponentCss()
         {
             CssProvider
                 .Apply(cssBuilder =>
