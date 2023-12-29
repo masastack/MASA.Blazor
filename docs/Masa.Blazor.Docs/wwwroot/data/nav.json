@@ -27,10 +27,14 @@
   {
     "title": "features",
     "icon": "mdi-image-edit",
+    "state": "new",
     "items": [
       "bidirectionality",
       "breakpoints",
-      "icon-fonts",
+      {
+        "title": "icon-fonts",
+        "state": "update"
+      },
       "internationalization",
       "auto-match-nav",
       "theme",

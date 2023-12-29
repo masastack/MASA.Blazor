@@ -102,6 +102,7 @@
                 {
                     "mdi" => DefaultIconAliases.MaterialDesignIcons,
                     "md"  => DefaultIconAliases.MaterialDesign,
+                    "fa6"  => DefaultIconAliases.FontAwesome6,
                     "fa"  => DefaultIconAliases.FontAwesome,
                     "fa4" => DefaultIconAliases.FontAwesome4,
                     _     => defaultAliases
