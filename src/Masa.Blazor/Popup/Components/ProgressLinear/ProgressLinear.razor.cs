@@ -8,8 +8,6 @@ public partial class ProgressLinear : PopupComponentBase
 
     [Parameter] public bool Bottom { get; set; }
 
-    [Parameter] public string? Class { get; set; }
-
     [Parameter] public string? Color { get; set; }
 
     [Parameter] public int Height { get; set; } = 4;
@@ -17,8 +15,6 @@ public partial class ProgressLinear : PopupComponentBase
     [Parameter] public bool Stream { get; set; }
 
     [Parameter] public bool Striped { get; set; }
-
-    [Parameter] public string? Style { get; set; }
 
     [Parameter] public int ZIndex { get; set; } = 1000;
 

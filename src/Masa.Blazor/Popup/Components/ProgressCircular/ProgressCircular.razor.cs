@@ -6,13 +6,9 @@ public partial class ProgressCircular : PopupComponentBase
 
     [Parameter] public double BackgroundOpacity { get; set; } = 0.46;
 
-    [Parameter] public string? Class { get; set; }
-
     [Parameter] public string? Color { get; set; }
 
     [Parameter] public string? ScrimClass { get; set; }
-
-    [Parameter] public string? Style { get; set; }
 
     [Parameter] public int ZIndex { get; set; } = 1000;
 
