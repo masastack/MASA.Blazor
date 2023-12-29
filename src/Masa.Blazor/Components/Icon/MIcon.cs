@@ -52,7 +52,7 @@
 
             if (Icon != null)
             {
-                icon = Icon.IsAlias ? MasaBlazor!.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
+                icon = Icon.IsAlias ? MasaBlazor.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
             }
             else
             {
@@ -66,7 +66,7 @@
 
                 if (textContent.StartsWith("$"))
                 {
-                    icon = MasaBlazor!.Icons.Aliases.GetIconOrDefault(textContent);
+                    icon = MasaBlazor.Icons.Aliases.GetIconOrDefault(textContent);
                 }
                 else
                 {
@@ -91,48 +91,26 @@
 
         private(string? icon, string? css) ResolveIcon(string cssIcon)
         {
-            var set = MasaBlazor!.Icons.DefaultSet;
+            var defaultAliases = MasaBlazor.Icons.Aliases;
 
             var splits = cssIcon.Split(":");
             var icon = splits[0];
 
             if (splits.Length == 2)
             {
-                set = splits[0] switch
+                defaultAliases = splits[0] switch
                 {
-                    "mdi" => IconSet.MaterialDesignIcons,
-                    "md"  => IconSet.MaterialDesign,
-                    "fa"  => IconSet.FontAwesome,
-                    "fa4" => IconSet.FontAwesome4,
-                    _     => set
+                    "mdi" => DefaultIconAliases.MaterialDesignIcons,
+                    "md"  => DefaultIconAliases.MaterialDesign,
+                    "fa6"  => DefaultIconAliases.FontAwesome6,
+                    "fa"  => DefaultIconAliases.FontAwesome,
+                    "fa4" => DefaultIconAliases.FontAwesome4,
+                    _     => defaultAliases
                 };
                 icon = splits[1];
             }
 
-            string css;
-
-            if (MasaBlazor.Icons.Name != null)
-            {
-                css = MasaBlazor.Icons.Aliases.Custom?.Invoke(icon) ?? icon;
-                icon = null;
-            }
-            else
-            {
-                css = set switch
-                {
-                    IconSet.MaterialDesignIcons => $"mdi {icon}",
-                    IconSet.MaterialDesign      => "material-icons",
-                    _                           => icon
-                };
-
-                icon = set switch
-                {
-                    IconSet.MaterialDesign => icon,
-                    _                      => null
-                };
-            }
-
-            return (icon, css);
+            return (defaultAliases.ContentFormatter?.Invoke(icon), defaultAliases.CssFormatter?.Invoke(icon));
         }
 
         private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
@@ -171,7 +149,7 @@
 #endif
         }
 
-        protected override void SetComponentClass()
+        protected override void SetComponentCss()
         {
             CssProvider
                 .Apply(cssBuilder =>

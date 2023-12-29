@@ -2,11 +2,13 @@
 
 public class IconAliases
 {
+    private Func<string, string>? _custom;
+
     /// <summary>
     /// Complete icon used in Chip, Stepper and MobileCascader.
     /// </summary>
     public Icon? Complete { get; set; }
-    
+
     /// <summary>
     /// Cancel icon used in Alert.
     /// </summary>
@@ -213,9 +215,28 @@ public class IconAliases
     public Dictionary<string, Icon?> UserDefined { get; set; } = new();
 
     /// <summary>
-    /// Custom the CSS formatter, works for custom icon set only.
+    /// The formatter for icon class name. 
     /// </summary>
-    public Func<string, string>? Custom { get; set; }
+    [Obsolete("Use CssFormatter instead.")]
+    public Func<string, string>? Custom
+    {
+        get => _custom;
+        set
+        {
+            _custom = value;
+            CssFormatter ??= value;
+        }
+    }
+
+    /// <summary>
+    /// The formatter for icon class name.
+    /// </summary>
+    public Func<string, string>? CssFormatter { get; set; }
+
+    /// <summary>
+    /// The formatter for icon content.
+    /// </summary>
+    public Func<string, string>? ContentFormatter { get; set; }
 
     public IReadOnlyDictionary<string, Icon?> ToDictionary()
     {

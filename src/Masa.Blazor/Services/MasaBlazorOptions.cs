@@ -45,6 +45,7 @@ public class MasaBlazorOptions : BlazorComponentOptions
             IconSet.MaterialDesign      => new MaterialDesignAliases(),
             IconSet.FontAwesome         => new FontAwesomeAliases(),
             IconSet.FontAwesome4        => new FontAwesome4Aliases(),
+            IconSet.FontAwesome6        => new FontAwesome6Aliases(),
             _                           => throw new ArgumentOutOfRangeException(nameof(defaultSet), defaultSet, null)
         };
 

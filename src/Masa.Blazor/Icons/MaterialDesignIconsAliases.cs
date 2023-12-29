@@ -45,5 +45,6 @@ public class MaterialDesignIconsAliases : IconAliases
         FilterOn = "mdi-filter";
         FilterOff = "mdi-filter-off";
         Retry = "mdi-reload";
+        CssFormatter = icon => $"mdi {icon}";
     }
 }

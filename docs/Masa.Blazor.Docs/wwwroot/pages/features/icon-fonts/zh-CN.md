@@ -1,6 +1,10 @@
 ﻿# 图标字体
 
-开箱即用，MASA Blazor 支持4个流行的图标字库： [Material Design Icons](https://materialdesignicons.com/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) 和 [Font Awesome 5](https://fontawesome.com/)。
+开箱即用，MASA Blazor 支持5个流行的图标字库： [Material Design Icons](https://materialdesignicons.com/),
+[Material Icons](https://fonts.google.com/icons), 
+[Font Awesome 4](https://fontawesome.com/v4/icons/)，
+[Font Awesome 5]((https://fontawesome.com/v5/search?m=free))
+和 [Font Awesome 6](https://fontawesome.com/v6/search?o=r&m=free)
 
 ## 使用
 
@@ -9,15 +13,14 @@
 ```cs Program.cs
 builder.Services.AddMasaBlazor(options => {
     options.ConfigureIcons(IconSet.MaterialDesignIcons); // 默认图标集，此处仅为了演示
-})
-;
+});
 ```
 
 ``` razor
 <MIcon Icon="@("mdi-home")" />
 ```
 
-在上面的例子中，我们选择了 `MaterialDesignIcons` 作为默认的图标集。因为它是一个预定义的字体集，MASA Blazor 会自动加载它的别名。您可以在 [Github](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Icons)。
+在上面的例子中，我们选择了 `MaterialDesignIcons` 作为默认的图标集。因为它是一个预定义的字体集，MASA Blazor 会自动加载它的别名。您可以在 [Github](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Icons) 中查看预设的字体集。
 
 ### 多个图标集
 
@@ -30,11 +33,19 @@ builder.Services.AddMasaBlazor(options => {
 ```
 
 ``` razor
-<MIcon Icon="@("fas fa-plus")"></MIcon> @*渲染一个FontAwesome图标*@
-<MIcon Icon="@("mdi:mdi-minus")"></MIcon> @*渲染一个MDI图标*@
+@*渲染一个FontAwesome图标，默认图标集不需要前缀*@
+<MIcon Icon="@("fas fa-plus")"></MIcon>
+@*渲染一个MDI图标，非默认图标集需要前缀*@
+<MIcon Icon="@("mdi:mdi-minus")"></MIcon>
 ```
 
-> 提供默认图标集的前缀（如 `mdi:`）是不必要的
+| Icon Set              | Prefix | Example                 |
+|-----------------------|--------|-------------------------|
+| Material Design Icons | `mdi:` | `mdi:mdi-home`          |
+| Material Icons        | `md:`  | `md:home`               |
+| Font Awesome 4        | `fa4:` | `fa4:fa-home`           |
+| Font Awesome 5        | `fa:`  | `fa:fas fa-house`       |
+| Font Awesome 6        | `fa6:` | `fa6:fa-solid fa-house` |
 
 ## 安装图标字体
 
@@ -82,6 +93,22 @@ builder.Services.AddMasaBlazor(options => {
 <MIcon Icon="@("home")" />
 ```
 
+### Font Awesome 6 Icons {released-on=v1.3.1}
+
+``` html
+<link href="https://cdn.masastack.com/npm/fontawesome/v6.4.0/css/all.min.css" rel="stylesheet">
+```
+
+``` cs Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureIcons(IconSet.FontAwesome6);
+});
+```
+
+``` razor
+<MIcon Icon="@("fa-solid fa-home")" />
+```
+
 ### Font Awesome 5 Icons
 
 ``` html
@@ -114,14 +141,28 @@ builder.Services.AddMasaBlazor(options => {
 <MIcon Icon="@("fa-home")" />
 ```
 
-### 离线资源
+## 离线资源
 
 如果您需要离线使用图标字体，可以访问 Github 上的 [MASA.Template](https://github.com/masastack/MASA.Template/tree/main/src/Content/BlazorServer/wwwroot/css) 仓库下载。
 
 你也可以通过命令 `dotnet new masablazor-server -o TempApp` 创建一个临时的项目，然后将 **wwwroot/css** 目录复制到你的项目中。
 关于如何安装模板移步 [安装文档](/blazor/getting-started/installation)。
 
-## 自定义图标集
+## 自定义图标集 {updated-in=v1.3.1}
+
+不同的图标字体库生成的DOM结构不同，MASA Blazor 在 **IconAliases** 类中提供了 `CssFormatter` 和 `ContentFormatter` 两个委托，用于设置图标的渲染逻辑。
+
+以下是内置的图标字体库的渲染逻辑：
+
+| Icon Set              | Origin HTML                          | CssFormatter               | ContentFormatter |
+|-----------------------|--------------------------------------|----------------------------|------------------|
+| Material Design Icons | `<i class="mdi mdi-home"></i>`       | `icon => $"mdi {icon}"`    |                  |
+| Material Icons        | `<i class="material-icons">home</i>` | `icon => "material-icons"` | `icon => icon`   |
+| Font Awesome 4        | `<i class="fa fa-home"></i>`         | `icon => $"fa {icon}"`     |                  |
+| Font Awesome 5        | `<i class="fas fa-house"></i>`       | `icon => icon`             |                  |
+| Font Awesome 6        | `<i class="fa-solid fa-house"></i>`  | `icon => icon`             |                  |
+
+### 自定义全新的图标集
 
 为了使用自定义的图标集作为默认的图标集，您还必须添加与组件使用的值相对应的必要别名。例如，我想使用 [Remix icon](https://remixicon.com/) 作为默认的字体集：
 
@@ -166,11 +207,52 @@ var remixIconAliases = new IconAliases()
     Search = "ri-search-line",
     FilterOn = "ri-arrow-down-s-line",
     FilterOff = "ri-arrow-up-s-line",
+    CssFormatter = icon => icon,
 };
 
 builder.Services.AddMasaBlazor(options => {
     options.ConfigureIcons("reimx", remixIconAliases);
 });
+```
+
+### 保留组件内置的图标不变
+
+以 Remix icon 和 iconfont 为例：
+
+#### Remix
+
+```csharp
+// 此例使用 MaterialDesignIcons 作为组件内置的图标集不变
+var remixIconAlias = new MaterialDesignIconsAliases()
+{
+  CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : icon;
+};
+
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureIcons("remix", remixIconAlias);
+});
+```
+
+``` razor
+<MIcon>ri-arrow-go-back-line</MIcon>
+```
+
+#### iconfont（阿里巴巴矢量图标库）
+
+```csharp
+var iconfontAliases = new MaterialDesignIconsAliases()
+{
+    Custom = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}";
+};
+
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureIcons("iconfont", iconfontAliases);
+});
+```
+
+``` razor
+@* for example: `iconfont icon-name` *@
+<MIcon>icon-name</MIcon>
 ```
 
 ## 扩展可用的别名
