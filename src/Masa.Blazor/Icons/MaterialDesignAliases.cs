@@ -45,5 +45,7 @@ public class MaterialDesignAliases : IconAliases
         FilterOn = "keyboard_arrow_down";
         FilterOff = "keyboard_arrow_up";
         Retry = "refresh";
+        CssFormatter = _ => "material-icons";
+        ContentFormatter = icon => icon;
     }
 }

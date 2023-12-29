@@ -44,6 +44,7 @@ public class FontAwesomeAliases : IconAliases
         Search = "fas fa-search";
         FilterOn = "fas fa-chevron-down";
         FilterOff = "fas fa-chevron-up";
-        Retry = "fa fa-refresh";
+        Retry = "fas fa-redo";
+        CssFormatter = icon => icon;
     }
 }
