@@ -20,6 +20,7 @@ namespace Masa.Blazor
         [Parameter]
         public override bool Outlined { get; set; }
 
+        private double _right;
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
 
@@ -63,6 +64,10 @@ namespace Masa.Blazor
                     attrs[nameof(MMenu.OffsetY)] = true;
                     attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
+                    if (MasaBlazor.RTL)
+                    {
+                        attrs[nameof(MMenu.ContentStyle)] = $"right:{_right}px";
+                    }
                 })
                 .Apply(typeof(BCascaderColumn<,>), typeof(MCascaderColumn<TItem, TValue>), attrs =>
                 {
@@ -110,6 +115,16 @@ namespace Masa.Blazor
         protected override async Task OnMenuAfterShowContent(bool isLazyContent)
         {
             await base.OnMenuAfterShowContent(isLazyContent);
+
+            if (MasaBlazor.RTL && MMenu is not null)
+            {
+                var right = Document.DocumentElement.ClientWidth - MMenu.Dimensions.Activator.Right;
+                if (_right != right)
+                {
+                    _right = right;
+                    StateHasChanged();
+                }
+            }
 
             await ScrollToInlineStartAsync();
 
