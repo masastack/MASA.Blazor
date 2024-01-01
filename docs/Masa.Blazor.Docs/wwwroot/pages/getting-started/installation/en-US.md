@@ -152,8 +152,6 @@ builder.Services.AddMasaBlazor();
 
 > Requires Masa.Blazor minimum version `1.1.0` and .NET minimum version `8.0`.
 
-For now, we only recommend using the global application interactive rendering mode (`--all-interactive`) to use each page interactively. Static server rendering is not well supported.
-
 :::: code-group
 ::: code-group-item Auto
 ```shell
