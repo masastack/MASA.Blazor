@@ -18,7 +18,7 @@ builder.Services.AddMasaBlazor(options =>
 
 当您将组件指定为浅色或深色时，除非另有说明，否则它的所有子组件都将继承并应用相同的主题。
 
-## 自定义主题
+## 自定义主题 {updated-in=v1.3.2}
 
 默认情况下，MASA Blazor 为所有组件应用标准主题。
 
@@ -35,6 +35,10 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#FFFFFF",
+        OnSecondary = "#FFFFFF",
+        OnAccent = "#FFFFFF",
+        OnError = "#FFFFFF",
         UserDefined = new Dictionary<string, string>()
     };
 
@@ -48,6 +52,10 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnAccent = "#000000",
+        OnError = "#000000",
         UserDefined = new Dictionary<string, string>()
     };
 }
@@ -60,13 +68,26 @@ builder.Services.AddMasaBlazor(options =>
 {
     options.ConfigureTheme(theme =>
     {
-        theme.Themes.Light.Primary = "#4318FF";
-        theme.Themes.Light.Secondary = "#A18BFF";
-        theme.Themes.Light.Accent = "#005CAF";
-        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+        theme.Themes.Light.Primary = "#4f33ff";
+        theme.Themes.Light.Secondary = "#5e5c71";
+        theme.Themes.Light.Accent = "#006C4F";
+        theme.Themes.Light.Error = "#BA1A1A";
+        theme.Themes.Light.OnSurface = "#1C1B1F";
+
+        theme.Themes.Dark.Primary = "#C5C0FF";
+        theme.Themes.Dark.Secondary = "#C7C4DC";
+        theme.Themes.Dark.Accent = "#67DBAF";
+        theme.Themes.Dark.Error = "#FFB4AB";
+        theme.Themes.Dark.Surface = "#131316";
+        theme.Themes.Dark.OnPrimary = "#2400A2";
+        theme.Themes.Dark.OnSecondary = "#302E42";
+        theme.Themes.Dark.OnAccent = "#003827";
+        theme.Themes.Dark.OnSurface = "#C9C5CA";
     });
 });
 ```
+
+主题样式的 CSS 会在应用启动时自动生成一个 `id` 为 `masa-blazor-theme-stylesheet` 的 `<style>` 标签，并插入到 `<head>` 标签中。
 
 ## 动态更改主题
 

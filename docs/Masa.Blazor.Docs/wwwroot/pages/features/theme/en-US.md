@@ -18,7 +18,7 @@ builder.Services.AddMasaBlazor(options =>
 
 When you specify a component as light or dark, unless otherwise specified, all of its child components will inherit and apply the same theme.
 
-## Customizing
+## Customizing {updated-in=v1.3.2}
 
 By default MASA Blazor applies the standard theme to all components.
 
@@ -35,6 +35,10 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#FFFFFF",
+        OnSecondary = "#FFFFFF",
+        OnAccent = "#FFFFFF",
+        OnError = "#FFFFFF",
         UserDefined = new Dictionary<string, string>()
     };
 
@@ -48,6 +52,10 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnAccent = "#000000",
+        OnError = "#000000",
         UserDefined = new Dictionary<string, string>()
     };
 }
@@ -60,13 +68,26 @@ builder.Services.AddMasaBlazor(options =>
 {
     options.ConfigureTheme(theme =>
     {
-        theme.Themes.Light.Primary = "#4318FF";
-        theme.Themes.Light.Secondary = "#A18BFF";
-        theme.Themes.Light.Accent = "#005CAF";
-        theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+        theme.Themes.Light.Primary = "#4f33ff";
+        theme.Themes.Light.Secondary = "#5e5c71";
+        theme.Themes.Light.Accent = "#006C4F";
+        theme.Themes.Light.Error = "#BA1A1A";
+        theme.Themes.Light.OnSurface = "#1C1B1F";
+
+        theme.Themes.Dark.Primary = "#C5C0FF";
+        theme.Themes.Dark.Secondary = "#C7C4DC";
+        theme.Themes.Dark.Accent = "#67DBAF";
+        theme.Themes.Dark.Error = "#FFB4AB";
+        theme.Themes.Dark.Surface = "#131316";
+        theme.Themes.Dark.OnPrimary = "#2400A2";
+        theme.Themes.Dark.OnSecondary = "#302E42";
+        theme.Themes.Dark.OnAccent = "#003827";
+        theme.Themes.Dark.OnSurface = "#C9C5CA";
     });
 });
 ```
+
+The CSS of the theme style will automatically generate a `<style>` tag with an `id` of `masa-blazor-theme-stylesheet` and insert it into the `<head>` tag when the application starts.
 
 ## Toggle theme dynamically
 
