@@ -264,6 +264,20 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
         return await XgplayerJSObjectReference!.GetPropsAndStatesAsync();
     }
 
+    /// <summary>
+    /// Invoke a method of xgplayer js object instance.
+    /// </summary>
+    /// <param name="identity">The name of method</param>
+    /// <param name="args">The arguments of method</param>
+    /// <example>
+    /// player.InvokeVoidAsync("play");
+    /// </example>
+    [MasaApiPublicMethod]
+    public async Task InvokeVoidAsync(string identity, params object[] args)
+    {
+        await XgplayerJSObjectReference.InvokeVoidAsync(identity, args);
+    }
+
     private bool IsZhHant(CultureInfo culture)
     {
         if (culture.Parent.Name == "zh")
