@@ -37,7 +37,10 @@
       },
       "internationalization",
       "auto-match-nav",
-      "theme",
+      {
+        "title": "theme",
+        "state": "update"
+      },
       {
         "title": "ssr",
         "state": "new"
