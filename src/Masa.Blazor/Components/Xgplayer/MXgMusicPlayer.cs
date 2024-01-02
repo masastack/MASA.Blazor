@@ -89,6 +89,13 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
 
     [Parameter] public EventCallback<bool> OnCssFullscreenChange { get; set; }
 
+    /// <summary>
+    /// For most scenarios, you can use <see cref="OnFullscreenChange"/>.
+    /// For scenarios where you need to click the full screen button to enter full screen
+    /// when using this component in Webview, you may need to use this event.
+    /// </summary>
+    [Parameter] public EventCallback OnFullscreenTouchend { get; set; }
+
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
     private XgplayerUrl? _prevUrl;
