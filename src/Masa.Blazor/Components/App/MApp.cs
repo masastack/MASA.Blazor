@@ -64,7 +64,7 @@ namespace Masa.Blazor
         private void OnThemeChange(Theme theme)
         {
             var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-            var style = ThemeCssBuilder.Build(themeOptions);
+            var style = ThemeCssBuilder.Build(themeOptions, theme.Dark);
             InvokeAsync(async () =>
             {
                 await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);

@@ -31,7 +31,7 @@ public partial class MSsrThemeProvider : IDisposable
     private void BuildThemeCss(Theme theme, bool isDark)
     {
         var themeOptions = isDark ? theme.Themes.Dark : theme.Themes.Light;
-        _themeCss = _themeCssBuilder.Build(themeOptions);
+        _themeCss = _themeCssBuilder.Build(themeOptions, isDark);
     }
 
     public void Dispose()

@@ -101,16 +101,6 @@ h1:focus {
     color: var(--md-ref-palette-neutral94) !important;
 }
 
-.theme--light.m-application {
-    /*background: var(--md-sys-color-surface-light);*/
-    color: var(--md-sys-color-on-surface-light);
-}
-
-.theme--dark.m-application {
-    background: var(--md-sys-color-surface-dark);
-    color: var(--md-sys-color-on-surface-dark);
-}
-
 .doc-list-nav .theme--dark.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
     color: var(--md-sys-color-on-surface-dark);
 }
@@ -421,7 +411,7 @@ a.text-dec-none {
     }
 
     .doc-list-nav .m-list-group.m-list-group--default .m-list-item {
-        margin-bottom: 0px !important;
+        margin-bottom: 4px !important;
         height: 48px !important;
     }
 

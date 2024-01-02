@@ -29,18 +29,22 @@ public static class ServiceCollectionExtensions
                 theme.Dark = false;
 
                 theme.Themes.Light.Primary = "#4f33ff";
-                theme.Themes.Light.Secondary = "#C7C4DC";
-                theme.Themes.Light.Error = "#ba1a1a";
-                theme.Themes.Light.UserDefined["Tertiary"] = "#00966f";
-                theme.Themes.Light.UserDefined["Neutral"] = "#929094";
-                theme.Themes.Light.UserDefined["NeutralVariant"] = "#928f99";
+                theme.Themes.Light.Secondary = "#5e5c71";
+                theme.Themes.Light.Accent = "#006C4F";
+                theme.Themes.Light.Error = "#BA1A1A";
+                // theme.Themes.Light.Surface = "#FCF8FD";
+                theme.Themes.Light.OnSurface = "#1C1B1F";
 
-                theme.Themes.Dark.Primary = "#c5c0ff";
+                theme.Themes.Dark.Primary = "#C5C0FF";
                 theme.Themes.Dark.Secondary = "#C7C4DC";
-                theme.Themes.Dark.Error = "#ffb4ab";
-                theme.Themes.Dark.UserDefined["Tertiary"] = "#68dbaf";
-                theme.Themes.Dark.UserDefined["Neutral"] = "#929094";
-                theme.Themes.Dark.UserDefined["NeutralVariant"] = "#928f99";
+                theme.Themes.Dark.Accent = "#67DBAF";
+                theme.Themes.Dark.Error = "#FFB4AB";
+                theme.Themes.Dark.Surface = "#131316";
+                theme.Themes.Dark.OnPrimary = "#2400A2";
+                theme.Themes.Dark.OnSecondary = "#302E42";
+                theme.Themes.Dark.OnAccent = "#003827";
+                // theme.Themes.Dark.OnError = "#690005";
+                theme.Themes.Dark.OnSurface = "#C9C5CA";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {
