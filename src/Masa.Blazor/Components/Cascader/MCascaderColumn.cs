@@ -4,13 +4,16 @@ namespace Masa.Blazor
 {
     public class MCascaderColumn<TItem, TValue> : BCascaderColumn<TItem, TValue>
     {
+        [Inject]
+        private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Dense { get; set; }
 
         [Parameter]
         public string? Color { get; set; } = "primary";
 
-        protected override string Icon => "$next";
+        protected override string Icon => MasaBlazor.RTL ? "$prev" : "$next";
 
         protected override string GetSelectedItemSelector(int index)
         {

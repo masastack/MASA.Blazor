@@ -8,6 +8,8 @@ namespace Masa.Blazor
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
+        protected override bool IsRtl => MasaBlazor.RTL;
+
         public override IEnumerable<string> DependentSelectors
             => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
 
@@ -58,7 +60,8 @@ namespace Masa.Blazor
                         .AddIf($"min-width:{CalculatedMinWidth}", () => CalculatedMinWidth != null)
                         .AddIf($"max-width:{CalculatedMaxWidth}", () => CalculatedMaxWidth != null)
                         .AddIf($"top:{CalculatedTop!.ToUnit()}", () => CalculatedTop != null)
-                        .AddIf($"left:{CalculatedLeft!.ToUnit()}", () => CalculatedLeft != null)
+                        .AddIf($"left:{CalculatedLeft!.ToUnit()}", () => CalculatedLeft != null && !IsRtl)
+                        .AddIf("direction: rtl", () => IsRtl)
                         .Add($"transform-origin:{Origin}")
                         .Add($"z-index:{ComputedZIndex}")
                         .Add(ContentStyle);
