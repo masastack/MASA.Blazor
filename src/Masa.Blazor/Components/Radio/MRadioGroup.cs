@@ -16,6 +16,8 @@
 
         private List<IRadio<TValue>> Items { get; } = new();
 
+        protected override bool WatchValueChangeImmediately => false;
+
         protected override void OnValueChanged(TValue val)
         {
             base.OnValueChanged(val);
