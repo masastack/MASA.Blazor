@@ -1,0 +1,86 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    @if (Transition != null)
+    {
+        <Transition Name="@Transition">
+            <ShowTransitionElement Value="Value"
+                                   Tag="@Tag"
+                                   role="alert"
+                                   Class="@CssProvider.GetClass()"
+                                   Style="@CssProvider.GetStyle()"
+                                   id="@Id">
+                @RenderWrapper()
+            </ShowTransitionElement>
+        </Transition>
+    }
+    else
+    {
+        <Element Tag="@Tag"
+                 role="alert"
+                 Class="@CssProvider.GetClass()"
+                 style="@CssProvider.GetStyle()"
+                 id="@Id">
+            @RenderWrapper()
+        </Element>
+    }
+</CascadingValue>
+
+@code {
+
+    private RenderFragment RenderWrapper() => __builder =>
+    {
+        <div class="@CssProvider.GetClass("wrapper")"
+             style="@CssProvider.GetStyle("wrapper")">
+            @if (IsShowIcon)
+            {
+                <MIcon Color="@IconColor"
+                       Dark="@IsDarkTheme"
+                       Class="m-alert__icon">
+                    @IconContent
+                </MIcon>
+            }
+
+            <div class="@CssProvider.GetClass("content")">
+                @if (HasTitle)
+                {
+                    <div class="@CssProvider.GetClass("title")">
+                        @if (TitleContent == null)
+                        {
+                            @Title
+                        }
+                        else
+                        {
+                            @TitleContent
+                        }
+                    </div>
+                }
+
+                @ChildContent
+            </div>
+
+
+            @if (Border != Borders.None)
+            {
+                <div class="@CssProvider.GetClass("border")"
+                     style="@CssProvider.GetStyle("border")">
+                </div>
+            }
+
+            @if (Dismissible)
+            {
+                <MButton Class="m-alert__dismissible"
+                         Color="@IconColor"
+                         Dark="@IsDarkTheme"
+                         Icon
+                         Small
+                         OnClick="@HandleOnDismiss"
+                         aria-label="@CloseLabel">
+                    <MIcon Dark="@IsDarkTheme">@CloseIcon</MIcon>
+                </MButton>
+            }
+        </div>
+    };
+
+}
