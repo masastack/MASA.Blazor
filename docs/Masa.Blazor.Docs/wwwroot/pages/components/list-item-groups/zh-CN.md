@@ -25,7 +25,7 @@ related:
 
 #### 必填项
 
-使用`Multiple`属性必须至少选定一项。
+使用`Mandatory`属性必须至少选定一项。
 
 <masa-example file="Examples.components.list_item_groups.Mandatory"></masa-example>
 
