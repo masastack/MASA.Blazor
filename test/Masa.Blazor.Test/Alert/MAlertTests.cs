@@ -9,20 +9,6 @@ namespace Masa.Blazor.Test.Alert
     public class MAlertTests : TestBase
     {
         [TestMethod]
-        public void TestLoad()
-        {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var cut = RenderComponent<MAlert>();
-            for (int i = 0; i < 100000; i++)
-            {
-                cut.Render();
-            }
-            stopwatch.Stop();
-            Console.Out.WriteLine("MAlert took " + stopwatch.ElapsedMilliseconds + " ms to render");
-        }
-        
-        [TestMethod]
         public void RenderAlertWithColoredBorder()
         {
             //Act

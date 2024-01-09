@@ -192,7 +192,6 @@ public partial class MAlert : BDomComponentBase, IThemeable
             {
                 css.Add("m-sheet")
                    .AddIf("m-sheet--shaped", () => Shaped)
-                   // .AddIf("m-alert--border", () => Border != Borders.None);
                    .Modifiers(m
                        => m.Modifier("border", Border != Borders.None)
                            .Add(Border, Border != Borders.None)
@@ -221,78 +220,13 @@ public partial class MAlert : BDomComponentBase, IThemeable
             .Element("border", css =>
             {
                 css
-                   //  .Modifiers(m
-                   //     => m.Modifier("has-color", ColoredBorder)
-                   //         // .Add(Border.ToString())
-                   //         // .AddTextColor(Color, ColoredBorder)
-                   // )
+                    .Modifiers(m
+                       => m.Modifier("has-color", ColoredBorder)
+                           .Add(Border.ToString())
+                           .AddTextColor(Color, ColoredBorder)
+                   )
                    .AddIf(Type.ToString().ToLower(), () => HasTypedBorder);
             }, style => { style.AddTextColor(Color, () => ColoredBorder); });
-        
-        return;
-
-        CssProvider
-            .Apply(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-alert")
-                    .Add("m-sheet")
-                    .AddIf("m-alert--border", () => Border != Borders.None)
-                    .Add(AlertBorderClass)
-                    .AddIf("m-sheet--shaped", () => Shaped)
-                    .AddTheme(IsDarkTheme, IndependentTheme)
-                    .AddElevation(Elevation)
-                    .AddFirstIf(
-                        (() => "m-alert--prominent", () => Prominent),
-                        (() => "m-alert--dense", () => Dense))
-                    .AddIf("m-alert--text", () => Text)
-                    .AddIf("m-alert--outlined", () => Outlined)
-                    .AddColor(ComputedColor, HasText, () => !ColoredBorder)
-                    .AddRounded(Rounded, Tile);
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddColor(ComputedColor, HasText, () => !ColoredBorder)
-                    .AddHeight(Height)
-                    .AddMaxHeight(MaxHeight)
-                    .AddMinHeight(MinHeight)
-                    .AddWidth(Width)
-                    .AddMaxWidth(MaxWidth)
-                    .AddMinWidth(MinWidth)
-                    .AddIf("display:none", () => Transition == null && !Value);
-            })
-            .Apply("wrapper", cssBuilder => { cssBuilder.Add("m-alert__wrapper"); })
-            .Apply("content", cssBuilder => { cssBuilder.Add("m-alert__content"); })
-            .Apply("title", cssBuilder => { cssBuilder.Add("m-alert__title"); })
-            .Apply("border", cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-alert__border")
-                    .Add(BorderClass)
-                    .AddIf("m-alert__border--has-color", () => ColoredBorder)
-                    .AddIf(() => Type.ToString().ToLower(), () => HasTypedBorder)
-                    .AddTextColor(Color, () => ColoredBorder);
-            }, styleBuilder => { styleBuilder.AddTextColor(Color, () => ColoredBorder); });
-
-        string BorderClass() => Border switch
-        {
-            Borders.Left   => "m-alert__border--left",
-            Borders.Right  => "m-alert__border--right",
-            Borders.Top    => "m-alert__border--top",
-            Borders.Bottom => "m-alert__border--bottom",
-            Borders.None   => "",
-            _              => throw new ArgumentOutOfRangeException(nameof(Border))
-        };
-
-        string AlertBorderClass() => Border switch
-        {
-            Borders.Left   => "m-alert--border-left",
-            Borders.Right  => "m-alert--border-right",
-            Borders.Top    => "m-alert--border-top",
-            Borders.Bottom => "m-alert--border-bottom",
-            Borders.None   => "",
-            _              => throw new ArgumentOutOfRangeException(nameof(Border))
-        };
     }
 
     private async Task HandleOnDismiss(MouseEventArgs args)
