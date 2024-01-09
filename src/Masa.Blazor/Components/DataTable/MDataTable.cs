@@ -440,6 +440,10 @@ namespace Masa.Blazor
                        Select(item, val);
                    });
                 })
+                .Apply(typeof(BDataTableColgroup<>), typeof(MDataTableColgroup<TItem>), attrs =>
+                {
+                    attrs[nameof(MDataTableColgroup<TItem>.Headers)] = ComputedHeaders;
+                })
                 .Apply(typeof(BDataTableRow<>), typeof(MDataTableRow<TItem>), attrs =>
                 {
                     attrs[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;

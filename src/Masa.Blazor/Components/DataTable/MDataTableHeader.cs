@@ -91,6 +91,7 @@
 
                         cssBuilder
                             .Add("sortable")
+                            .AddIf("m-data-table__divider", () => header.Divider)
                             .AddIf("active", () => beingSorted)
                             .AddIf(() => isDesc ? "desc" : "asc", () => beingSorted);
                     }
