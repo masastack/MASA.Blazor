@@ -37,22 +37,33 @@ public static class PopupServiceExtensions
 
     #region Confirm
 
-    public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content)
+    public static Task<bool> ConfirmAsync(this IPopupService service, string title, AlertTypes type = AlertTypes.None)
     {
         return service.ConfirmAsync(param =>
         {
             param.Title = title;
-            param.Content = content;
+            param.Type = type;
         });
     }
 
-    public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content, AlertTypes type)
+    public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content, AlertTypes type = AlertTypes.None)
     {
         return service.ConfirmAsync(param =>
         {
             param.Title = title;
             param.Content = content;
             param.Type = type;
+        });
+    }
+
+    public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content, string okText, AlertTypes type = AlertTypes.None)
+    {
+        return service.ConfirmAsync(param =>
+        {
+            param.Title = title;
+            param.Content = content;
+            param.Type = type;
+            param.OkText = okText;
         });
     }
 
@@ -73,6 +84,19 @@ public static class PopupServiceExtensions
         {
             param.Title = title;
             param.Content = content;
+            param.Type = type;
+            param.OnOk = onOk;
+        });
+    }
+
+    public static Task<bool> ConfirmAsync(this IPopupService service, string title, string content, string okText, AlertTypes type,
+         Func<PopupOkEventArgs, Task> onOk)
+    {
+        return service.ConfirmAsync(param =>
+        {
+            param.Title = title;
+            param.Content = content;
+            param.OkText = okText;
             param.Type = type;
             param.OnOk = onOk;
         });
