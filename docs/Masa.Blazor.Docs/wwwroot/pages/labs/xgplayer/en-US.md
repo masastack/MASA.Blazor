@@ -51,7 +51,7 @@ The `_isRunning` field is used to record whether the video or audio is playing.
 
 ## Plugin components
 
-Currently, only three plugin components **Controls**, **Play**, **Time** are implemented,
+Currently, only plugin components **Controls**, **Play**, **Time** and **Start** are implemented,
 and other plugin components are welcome to PR.
 
 ### Controls
