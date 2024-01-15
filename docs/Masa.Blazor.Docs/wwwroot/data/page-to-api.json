@@ -82,6 +82,9 @@
     "MRangeSlider",
     "MSlider"
   ],
+  "switches": [
+    "MSwitch"
+  ],
   "button-groups": [
     "MButtonGroup",
     "MButton"
