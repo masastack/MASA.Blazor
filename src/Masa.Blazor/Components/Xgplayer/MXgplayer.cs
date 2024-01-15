@@ -52,9 +52,6 @@ public class MXgplayer : MXgMusicPlayer
     /// </summary>
     [Parameter] public Thumbnail? Thumbnail { get; set; }
 
-    private IXgplayerControls? _controls;
-    private IXgplayerPlay? _play;
-
     protected override void SetComponentCss()
     {
         CssProvider.UseBem("m-xgplayer");
