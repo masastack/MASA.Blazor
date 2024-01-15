@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-using Masa.Blazor.Components.Xgplayer.Plugins;
+﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
+using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
 
 namespace Masa.Blazor.Components.Xgplayer;
@@ -134,6 +134,8 @@ public class XgplayerOptions
     public IXgplayerPlay? Play { get; set; }
 
     public IXgplayerTime? Time { get; set; }
+
+    public IXgplayerStart? Start { get; set; }
 }
 
 public enum DomEventType

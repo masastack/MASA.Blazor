@@ -2,6 +2,7 @@
 using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
+using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
 
 namespace Masa.Blazor;
@@ -104,6 +105,7 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
     private IXgplayerControls? _controls;
     private IXgplayerPlay? _play;
     private IXgplayerTime? _time;
+    private IXgplayerStart? _start;
 
     private string ComputedLang
     {
@@ -227,7 +229,8 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
             Music = new XgplayerMusic(), // indicate that this is a music player
             Controls = _controls,
             Play = _play,
-            Time = _time
+            Time = _time,
+            Start = _start,
         };
     }
 
@@ -243,6 +246,9 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
                 break;
             case IXgplayerTime time:
                 _time = time;
+                break;
+            case IXgplayerStart start:
+                _start = start;
                 break;
         }
 
