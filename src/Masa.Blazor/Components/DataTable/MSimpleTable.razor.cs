@@ -117,7 +117,7 @@ public partial class MSimpleTable : BDomComponentBase
         }
     }
 
-    public async Task HandleOnScrollAsync(EventArgs args)
+    private async Task HandleOnScrollAsync(EventArgs args)
     {
         if (!HasFixed)
         {
@@ -127,11 +127,13 @@ public partial class MSimpleTable : BDomComponentBase
         var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
         if (element != null)
         {
-            if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < 0.01)
+            const double threshold = 1;
+            
+            if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < threshold)
             {
                 _scrollState = 2;
             }
-            else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < 0.01)
+            else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < threshold)
             {
                 _scrollState = 0;
             }
