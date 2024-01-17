@@ -91,34 +91,19 @@ public partial class MSimpleTable : BDomComponentBase
     protected override void SetComponentCss()
     {
         CssProvider
-            .Apply(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-data-table")
-                    .AddIf("m-data-table--dense", () => Dense)
-                    .AddIf("m-data-table--fixed-height", () => Height != null && !FixedHeader)
-                    .AddIf("m-data-table--fixed-header", () => FixedHeader)
-                    .AddIf("m-data-table--has-top", () => TopContent != null)
-                    .AddIf("m-data-table--has-bottom", () => BottomContent != null)
-                    .AddTheme(IsDark, IndependentTheme);
-            })
-            .Apply("wrapper", cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-data-table__wrapper")
-                    .AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
-                    .AddIf("scrolling", () => HasFixed && _scrollState == 1)
-                    .AddIf("scrolled-to-right", () => HasFixed && _scrollState == 2);
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddHeight(Height);
-            })
-            .Apply("table", styleAction: styleBuilder =>
-            {
-                styleBuilder
-                    .AddWidth(Width);
-            });
+            .UseBem("m-data-table",
+                css => css.Modifiers(m => m.Modifier(Dense)
+                                           .Add("fixed-height", Height != null && !FixedHeader)
+                                           .Add(FixedHeader)
+                                           .Add("has-top", TopContent != null)
+                                           .Add("has-bottom", BottomContent != null)
+                                           .AddTheme(IsDark, IndependentTheme)))
+            .Element("wrapper",
+                css => css.AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
+                          .AddIf("scrolling", () => HasFixed && _scrollState == 1)
+                          .AddIf("scrolled-to-right", () => HasFixed && _scrollState == 2),
+                style => style.AddHeight(Height))
+            .Apply("table", styleAction: style => style.AddWidth(Width));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
