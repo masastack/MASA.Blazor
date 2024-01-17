@@ -1,0 +1,114 @@
+﻿@namespace Masa.Blazor.Components.DataTable.Header
+@inherits MDataTableHeaderBase
+
+<thead class="@CssProvider.GetClass()">
+<tr>
+    @{
+        List<RenderFragment> children = new();
+
+        var header = Headers.FirstOrDefault(h => h.Value == "data-table-select");
+        if (header is not null && !SingleSelect)
+        {
+            children.Add(GenSelectContent(header));
+        }
+
+        var sortHeaders = Headers.Where(h => h.Sortable && h.Value != "data-table-select").ToList();
+        if (!DisableSort && sortHeaders.Count > 0)
+        {
+            children.Add(GenSortContent(sortHeaders));
+        }
+
+        if (children.Any())
+        {
+            <th>
+                <div class="@CssProvider.GetClass("header-mobile__wrapper")">
+                    @foreach (var item in children)
+                    {
+                        @item
+                    }
+                </div>
+            </th>
+        }
+    }
+</tr>
+</thead>
+
+@code {
+
+    private List<RenderFragment> Children { get; set; } = new();
+
+    private RenderFragment GenSelectContent(DataTableHeader header) => __builder =>
+    {
+        <div class="@CssProvider.GetClass("header-mobile__select") @header.Class">
+            @GenSelectAll()
+        </div>
+    };
+
+    private RenderFragment GenSortContent(List<DataTableHeader> sortHeaders) => __builder =>
+    {
+        RenderFragment<SelectSelectionProps<DataTableHeader>> selectionContent = context =>
+            @<MChip OnClick="@(() => OnSort.InvokeAsync(context.Item.Value))"
+                    OnClickStopPropagation
+                    Class="sortable">
+                @if (HeaderColContent != null)
+                {
+                    @HeaderColContent(context.Item)
+                }
+                else
+                {
+                    @context.Item.Text
+                }
+
+                <div class="@CssProvider.GetClass("header-mobile__select-chips", data: context.Item)">
+                    @GenSortIcon()
+                </div>
+        </MChip>;
+
+        RenderFragment<SelectListItemProps<DataTableHeader>> itemContent = context =>
+            @<BListItemContent>
+                @if (HeaderColContent != null)
+                {
+                    @HeaderColContent(context.Item!)
+                }
+                else
+                {
+                    @context.Item!.Text
+                }
+        </BListItemContent>;
+
+        @if (MultiSort)
+        {
+            <MSelect Items="sortHeaders"
+                     TItem="DataTableHeader"
+                     TItemValue="string"
+                     TValue="List<string>"
+                     Label="@I18n.T("$masaBlazor.dataTable.sortBy")"
+                     ItemText="u => u.Text"
+                     ItemValue="u => u.Value"
+                     HideDetails="@true"
+                     Multiple="@true"
+                     Value="@Options.SortBy.ToList()"
+                     ValueChanged="@(val => OnSort.InvokeAsync(val))"
+                     MenuProps="m => m.CloseOnContentClick = true"
+                     ItemContent="itemContent"
+                     SelectionContent="selectionContent" />
+        }
+        else
+        {
+            <MSelect Items="sortHeaders"
+                     TItem="DataTableHeader"
+                     TItemValue="string"
+                     TValue="string"
+                     Label="@I18n.T("$masaBlazor.dataTable.sortBy")"
+                     ItemText="u => u.Text"
+                     ItemValue="u => u.Value"
+                     HideDetails="@true"
+                     Value="@(Options.SortBy.FirstOrDefault())"
+                     ValueChanged="@(val => OnSort.InvokeAsync(val))"
+                     MenuProps="m => m.CloseOnContentClick = true"
+                     ItemContent="itemContent"
+                     SelectionContent="selectionContent" />
+        }
+    };
+
+}

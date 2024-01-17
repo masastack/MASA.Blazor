@@ -1,0 +1,55 @@
+﻿@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject IResizeJSModule ResizeJSModule
+
+<col class="@(Header.Divider ? "divider" : "")"
+     @ref="_el" />
+
+@code {
+
+    [CascadingParameter] private MSimpleTable SimpleTable { get; set; } = null!;
+
+    [Parameter] public DataTableHeader Header { get; set; } = null!;
+
+    [Parameter] public bool CalculateRealWidth { get; set; }
+
+    private ElementReference _el;
+    private bool _observed;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (!_observed && CalculateRealWidth && Header.Width is null)
+        {
+            await ResizeJSModule.ObserverAsync(_el, OnResizeAsync);
+            _observed = true;
+        }
+    }
+
+    private async Task OnResizeAsync()
+    {
+        Header.RealWidth = await JS.InvokeAsync<double>(JsInteropConstants.GetProp, _el, "offsetWidth");
+        await SimpleTable.DebounceRenderForColResizeAsync();
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            if (_observed)
+            {
+                await ResizeJSModule.UnobserveAsync(_el);
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            // ignored
+        }
+        catch (JSDisconnectedException)
+        {
+            // ignored
+        }
+    }
+
+}

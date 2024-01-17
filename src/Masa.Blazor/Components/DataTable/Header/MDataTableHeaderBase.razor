@@ -1,0 +1,165 @@
+﻿@namespace Masa.Blazor.Components.DataTable.Header
+@inherits BDomComponentBase
+
+@code {
+
+    [Inject] protected I18n I18n { get; set; } = default!;
+
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [CascadingParameter] private MDataTableHeader? DataTableHeader { get; set; }
+
+    [Parameter] public bool IsMobile { get; set; }
+
+    [Parameter] public List<DataTableHeader> Headers { get; set; } = new();
+
+    [Parameter] public bool MultiSort { get; set; }
+
+    [Parameter] public bool SingleSelect { get; set; }
+
+    [Parameter] public bool DisableSort { get; set; }
+
+    [Parameter] public RenderFragment<DataTableHeader>? HeaderColContent { get; set; }
+
+    [Parameter] public RenderFragment<DataTableHeaderSelectContext>? DataTableSelectContent { get; set; }
+
+    [Parameter] public string SortIcon { get; set; } = "$sort";
+
+    [Parameter] public DataOptions Options { get; set; } = null!;
+
+    [Parameter] public EventCallback<OneOf<string?, List<string>>> OnSort { get; set; }
+
+    [Parameter] public bool EveryItem { get; set; }
+
+    [Parameter] public bool SomeItems { get; set; }
+
+    [Parameter] public EventCallback<bool> OnToggleSelectAll { get; set; }
+
+    [Parameter] public string? CheckboxColor { get; set; }
+
+    [Parameter] public string? GroupText { get; set; }
+
+    [Parameter] public EventCallback<string> OnGroup { get; set; }
+
+    [Parameter] public bool ShowGroupBy { get; set; }
+
+    [Parameter] public bool Resizable { get; set; }
+
+    private bool IsIndeterminate => !EveryItem && SomeItems;
+
+    protected RenderFragment GenSortIcon() => __builder =>
+    {
+        <MIcon Class="m-data-table-header__icon"
+               Size="18">
+            @SortIcon
+        </MIcon>
+    };
+
+    protected RenderFragment GenSelectAll() => __builder =>
+    {
+        if (DataTableSelectContent is not null)
+        {
+            @(DataTableSelectContent(new DataTableHeaderSelectContext(EveryItem, IsIndeterminate, OnToggleSelectAll)))
+        }
+        else
+        {
+            <MSimpleCheckbox Class="m-data-table__checkbox"
+                             Value="@EveryItem"
+                             ValueChanged="@OnToggleSelectAll"
+                             Indeterminate="@IsIndeterminate"
+                             Color="@CheckboxColor">
+            </MSimpleCheckbox>
+        }
+    };
+
+    protected override void SetComponentCss()
+    {
+        CssProvider
+            .Apply(cssBuilder =>
+            {
+                cssBuilder
+                    .Add("m-data-table-header")
+                    .AddIf("m-data-table-header-mobile", () => IsMobile);
+            })
+            .Apply("header", cssBuilder =>
+            {
+                var header = (DataTableHeader?)cssBuilder.Data;
+                if (header is null) return;
+
+                if (!DisableSort && header.Sortable)
+                {
+                    var sortIndex = Options.SortBy.IndexOf(header.Value);
+                    var beingSorted = sortIndex >= 0;
+                    var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
+
+                    cssBuilder
+                        .Add("sortable")
+                        .AddIf("m-data-table__divider", () => header.Divider)
+                        .AddIf("active", () => beingSorted)
+                        .AddIf(() => isDesc ? "desc" : "asc", () => beingSorted);
+                }
+
+                cssBuilder
+                    .Add($"text-{header.Align.ToString().ToLower()}")
+                    .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
+                    .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
+                    .AddIf("first-fixed-column", () => header.IsFixedShadowColumn);
+            }, styleBuilder =>
+            {
+                var header = (DataTableHeader?)styleBuilder.Data;
+                if (header is null) return;
+
+                styleBuilder
+                    .AddWidth(header.Width)
+                    .AddMinWidth(header.Width);
+
+                if (header.Fixed == DataTableFixed.Right)
+                {
+                    var count = Headers.Count;
+                    var lastIndex = Headers.LastIndexOf(header);
+                    if (lastIndex > -1)
+                    {
+                        var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                        styleBuilder.Add($"{(MasaBlazor.RTL ? "left" : "right")}: {widths}px");
+                    }
+                }
+                else if (header.Fixed == DataTableFixed.Left)
+                {
+                    var index = Headers.IndexOf(header);
+                    if (index > -1)
+                    {
+                        var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                        styleBuilder.Add($"{(MasaBlazor.RTL ? "right" : "left")}: {widths}px");
+                    }
+                }
+            })
+            .Apply("sort-badge", cssBuilder =>
+            {
+                cssBuilder
+                    .Add("m-data-table-header__sort-badge");
+            })
+            .Apply("col-resize", cssBuilder =>
+            {
+                cssBuilder
+                    .Add("m-data-table-header__col-resize");
+            })
+            .Apply("header-mobile__wrapper", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__wrapper"); })
+            .Apply("header-mobile__select", cssBuilder => { cssBuilder.Add("m-data-table-header-mobile__select"); })
+            .Apply("header-mobile__select-chips", cssBuilder =>
+            {
+                var data = (DataTableHeader?)cssBuilder.Data;
+                if (data is null || (data.Text is null && data.Value is null)) return;
+
+                var sortIndex = Options.SortBy.IndexOf(data.Value);
+                var beingSorted = sortIndex >= 0;
+                var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
+
+                cssBuilder.Add("m-chip__close sortable")
+                          .AddIf("active", () => beingSorted)
+                          .AddIf("asc", () => beingSorted && !isDesc)
+                          .AddIf("desc", () => beingSorted && isDesc);
+            });
+    }
+
+
+}

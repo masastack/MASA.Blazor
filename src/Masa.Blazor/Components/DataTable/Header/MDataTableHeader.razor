@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor.Components.DataTable
+@using Masa.Blazor.Components.DataTable.Header
+@inherits Masa.Blazor.Components.DataTable.Header.MDataTableHeaderBase
+
+@if (IsMobile)
+{
+    <MDataTableHeaderMobile Headers="@Headers"
+                            SingleSelect="@SingleSelect"
+                            DisableSort="@DisableSort"
+                            OnSort="@OnSort"
+                            HeaderColContent="@HeaderColContent"
+                            MultiSort="@MultiSort"
+                            Options="@Options"
+                            EveryItem="@EveryItem"
+                            SomeItems="@SomeItems"
+                            OnToggleSelectAll="@OnToggleSelectAll"
+                            CheckboxColor="@CheckboxColor"
+                            DataTableSelectContent="@DataTableSelectContent" />
+}
+else
+{
+    <MDataTableHeaderDesktop Headers="@Headers"
+                             SingleSelect="@SingleSelect"
+                             DisableSort="@DisableSort"
+                             OnSort="@OnSort"
+                             HeaderColContent="@HeaderColContent"
+                             MultiSort="@MultiSort"
+                             Options="@Options"
+                             EveryItem="@EveryItem"
+                             SomeItems="@SomeItems"
+                             OnToggleSelectAll="@OnToggleSelectAll"
+                             CheckboxColor="@CheckboxColor"
+                             DataTableSelectContent="@DataTableSelectContent"
+                             GroupText="@GroupText"
+                             OnGroup="@OnGroup"
+                             ShowGroupBy="@ShowGroupBy"
+                             Resizable="@Resizable" />
+}

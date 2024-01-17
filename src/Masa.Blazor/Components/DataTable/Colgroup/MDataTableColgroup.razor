@@ -1,0 +1,13 @@
+﻿@namespace Masa.Blazor.Components.DataTable
+@using Masa.Blazor.Components.DataTable.Colgroup
+@inherits BDomComponentBase
+@typeparam TItem
+
+<colgroup>
+    @foreach (var header in Headers)
+    {
+        <MDataTableColGroupItem Header="@header"
+                                CalculateRealWidth="@HasFixedColumn"
+                                @key="header" />
+    }
+</colgroup>

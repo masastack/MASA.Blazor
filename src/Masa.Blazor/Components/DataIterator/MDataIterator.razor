@@ -1,0 +1,94 @@
+﻿@namespace Masa.Blazor
+@inherits MData<TItem>
+@typeparam TItem
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     @ref="@Ref">
+
+    @HeaderContent
+    
+    @GenItems()
+
+    @GenDefaultFooter()
+
+    @FooterContent
+
+</div>
+
+@code {
+    
+    protected virtual RenderFragment RenderEmptyWrapper(RenderFragment? childContent, string? childText) => __builder =>
+    {
+        <div class="@CssProvider.GetClass("empty-wrapper")">
+            @ContentOrText(childContent, childText)
+        </div>
+    };
+    
+    protected static RenderFragment ContentOrText(RenderFragment? content, string? text) => __builder =>
+    {
+        if (content is not null)
+        {
+            @content
+        }
+        else
+        {
+            @text
+        }
+    };
+
+    protected RenderFragment GenDefaultFooter() => __builder =>
+    {
+        @if (!HideDefaultFooter)
+        {
+            <MDataFooter PageTextContent="@PageTextContent"
+                         Options="@InternalOptions"
+                         Pagination="@Pagination"
+                         OnOptionsUpdate="options => UpdateOptions(options)"
+                         ItemsPerPageAllText="@I18n.T("$masaBlazor.dataFooter.itemsPerPageAll")"
+                         Parameters="@FooterProps">
+            </MDataFooter>
+        }
+    };
+
+    protected RenderFragment? GenEmpty(int originalItemsLength, int filteredItemsLength)
+    {
+        if (originalItemsLength == 0 && Loading == true)
+        {
+            return RenderEmptyWrapper(LoadingContent, LoadingText);
+        }
+
+        if (originalItemsLength == 0)
+        {
+            return RenderEmptyWrapper(NoDataContent, NoDataText);
+        }
+
+        if (filteredItemsLength == 0)
+        {
+            return RenderEmptyWrapper(NoResultsContent, NoResultsText);
+        }
+
+        return null;
+    }
+
+    private RenderFragment? GenItems() => __builder =>
+    {
+        var empty = GenEmpty(Items.Count(), Pagination.ItemsLength);
+        if (empty is not null)
+        {
+            @empty
+        }
+        else if (ItemContent is not null)
+        {
+            foreach (var item in ComputedItems.Select((item, index) => (item, index)))
+            {
+                @ItemContent(new ItemProps<TItem>(item.index, item.item))
+            }
+        }
+        else if (ChildContent is not null)
+        {
+            @ChildContent((ComputedItems, IsExpanded, Expand))
+        }
+    };
+
+}
