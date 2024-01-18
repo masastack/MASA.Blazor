@@ -1,0 +1,23 @@
+﻿@namespace Masa.Blazor.Components.DataTable
+@typeparam TItem
+@inherits BDomComponentBase
+
+<tr class="@CssProvider.GetClass()" @attributes="Attributes">
+    @foreach (var header in Headers)
+    {
+        <td class="@CssProvider.GetClass("cell", data: header)"
+            style="@CssProvider.GetStyle("cell", data: header)">
+            @{
+                var props = new ItemColProps<TItem>(header, Item);
+                if (HasSlot(props))
+                {
+                    @SlotContent(props)
+                }
+                else
+                {
+                    @props.Value
+                }
+            }
+        </td>
+    }
+</tr>

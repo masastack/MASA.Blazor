@@ -24029,31 +24029,7 @@ html.overflow-y-hidden {
 .m-data-table--fixed-header.m-data-table--dense > .m-data-table__wrapper > table > thead > tr:nth-child(2) > th {
     top: 32px;
 }
-.theme--light.m-small-dialog__menu-content, .theme--light.m-small-dialog__actions {
-    background: #FFFFFF;
-}
 
-.theme--dark.m-small-dialog__menu-content, .theme--dark.m-small-dialog__actions {
-    background: #1E1E1E;
-}
-
-.m-small-dialog {
-    display: block;
-}
-.m-small-dialog__activator {
-    cursor: pointer;
-}
-.m-small-dialog__activator__content {
-    display: inline-block;
-}
-.m-small-dialog__content {
-    padding: 0 16px;
-}
-.m-small-dialog__actions {
-    padding: 8px;
-    text-align: right;
-    white-space: pre;
-}
 .m-virtual-table {
     position: relative;
 }

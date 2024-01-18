@@ -124,12 +124,6 @@ related:
 
 <masa-example file="Examples.components.data_tables.CRUDActions"></masa-example>
 
-#### 编辑用对话框
-
-**MEditDialog** 组件可用于直接在 **MDataTable** 中编辑数据。 如果点击 **MEditDialog** 外部时不想关闭对话框，可以添加 `Persistent` 属性。
-
-<masa-example file="Examples.components.data_tables.EditDialog"></masa-example>
-
 #### 可展开行
 
 `ShowExpand` 属性会在每个默认行上渲染一个展开图标。 你可以使用 `ItemDataTableExpandContent` 插槽来自定义。 添加一列 `Value="data-table-expand"` 到 **

@@ -1,12 +1,15 @@
 ﻿namespace Masa.Blazor
 {
-    public class MDataFooter : BDataFooter, IDataFooter
+    public partial class MDataFooter : BDomComponentBase, IDataFooterParameters
     {
         [Inject]
         protected I18n I18n { get; set; } = null!;
 
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
+
+        [Parameter]
+        public RenderFragment? PrependContent { get; set; }
 
         [Parameter, MasaApiParameter("$masaBlazor.dataFooter.itemsPerPageText")]
         public string? ItemsPerPageText { get; set; }
@@ -118,7 +121,20 @@
             InvokeStateHasChanged();
         }
 
-        protected override void SetComponentClass()
+        private int ItemsPagePageValue
+        {
+            get
+            {
+                if (ComputedDataItemsPerPageOptions.Any(u => u.Value == Options.ItemsPerPage))
+                {
+                    return Options.ItemsPerPage;
+                }
+
+                return ComputedDataItemsPerPageOptions.First().Value;
+            }
+        }
+
+        protected override void SetComponentCss()
         {
             CssProvider
                 .Apply(cssBuilder =>
@@ -146,39 +162,6 @@
                     cssBuilder
                         .Add("m-data-footer__icons-after");
                 });
-
-            AbstractProvider
-                .ApplyDataFooterDefault()
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), attrs =>
-                {
-                    if (ComputedDataItemsPerPageOptions.Count() <= 1)
-                    {
-                        return;
-                    }
-
-                    var value = Options?.ItemsPerPage;
-                    var result = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
-                    if (result == null)
-                    {
-                        value = ComputedDataItemsPerPageOptions.First().Value;
-                    }
-
-                    Func<DataItemsPerPageOption, int> itemValue = r => r.Value;
-                    Func<DataItemsPerPageOption, string?> itemText = r => r.Text;
-
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Disabled)] = DisableItemsPerPage;
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Items)] = ComputedDataItemsPerPageOptions.ToList();
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Value)] = value;
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemValue)] = itemValue;
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemText)] = itemText;
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.HideDetails)] = (StringBoolean)true;
-                    //TODO:auto
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.MinWidth)] = (StringNumber)"75px";
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ValueChanged)] =
-                        EventCallback.Factory.Create<int>(this, HandleOnChangeItemsPerPageAsync);
-                })
-                .Apply<BButton, MButton>()
-                .Apply<BIcon, MIcon>();
         }
 
         public async Task HandleOnFirstPageAsync()

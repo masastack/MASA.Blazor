@@ -15,11 +15,7 @@
             { typeof(BList), typeof(MList) },
             { typeof(BItemGroup), typeof(MItemGroup) },
             { typeof(BButtonGroup), typeof(MButtonGroup) },
-            { typeof(BDataFooter), typeof(MDataFooter) },
             { typeof(BSimpleCheckbox), typeof(MSimpleCheckbox) },
-            { typeof(BDataTableRowGroup), typeof(MDataTableRowGroup) },
-            { typeof(BDataTableHeader), typeof(MDataTableHeader) },
-            { typeof(BSimpleTable), typeof(MSimpleTable) },
             { typeof(BDatePickerHeader), typeof(MDatePickerHeader) },
             { typeof(BDatePickerYears), typeof(MDatePickerYears) },
             { typeof(BPicker), typeof(MPicker) },
@@ -50,9 +46,6 @@
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
             { typeof(BCascaderColumn<,>), typeof(MCascaderColumn<,>) },
-            { typeof(BDataTableColgroup<>), typeof(MDataTableColgroup<>) },
-            { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
-            { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
             { typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<>) }
         };

@@ -12,7 +12,7 @@
 }
 
 /* fixed in datatable */
-.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper),
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper):not(.m-data-table__selected),
 .theme--light.m-data-table > .m-data-table__wrapper > table > thead > tr {
     background: #FFFFFF;
 }
@@ -21,7 +21,7 @@
     background: #eeeeee;
 }
 
-.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper),
+.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper):not(.m-data-table__selected),
 .theme--dark.m-data-table > .m-data-table__wrapper > table > thead > tr {
     background: #1E1E1E;
 }
