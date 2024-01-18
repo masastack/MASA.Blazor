@@ -40,17 +40,17 @@ public partial class MDataTableMobileRow<TItem>
     protected override void SetComponentCss()
     {
         CssProvider
-            .Apply(cssBuilder =>
+            .UseBem("m-data-table")
+            .Element("mobile-table-row",cssBuilder =>
             {
                 cssBuilder
-                    .Add("m-data-table__mobile-table-row")
-                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected.Invoke(Item))
+                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected.Invoke(Item)) // BUG: selected效果被stripe覆盖了
                     .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded != null && IsExpanded(Item))
                     .AddIf("stripe", () => IsStripe)
                     .Add(() => ItemClass?.Invoke(Item) ?? "");
             })
-            .Apply("mobile-row", cssBuilder => { cssBuilder.Add("m-data-table__mobile-row"); })
-            .Apply("mobile-row__header", cssBuilder => { cssBuilder.Add("m-data-table__mobile-row__header"); })
-            .Apply("mobile-row__cell", cssBuilder => { cssBuilder.Add("m-data-table__mobile-row__cell"); });
+            .Element("mobile-row")
+            .Element("mobile-row__header")
+            .Element("mobile-row__cell");
     }
 }

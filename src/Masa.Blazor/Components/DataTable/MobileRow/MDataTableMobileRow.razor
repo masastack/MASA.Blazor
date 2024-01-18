@@ -2,7 +2,7 @@
 @typeparam TItem
 @inherits BDomComponentBase
 
-<tr class="@CssProvider.GetClass()" @attributes="@Attributes">
+<tr class="@CssProvider.GetClass("mobile-table-row")" @attributes="@Attributes">
     @foreach (var header in Headers)
     {
         <td class="@CssProvider.GetClass("mobile-row", data: header)">

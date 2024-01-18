@@ -21,7 +21,7 @@
         if (children.Any())
         {
             <th>
-                <div class="@CssProvider.GetClass("header-mobile__wrapper")">
+                <div class="@CssProvider.GetClass("mobile__wrapper")">
                     @foreach (var item in children)
                     {
                         @item
@@ -39,7 +39,7 @@
 
     private RenderFragment GenSelectContent(DataTableHeader header) => __builder =>
     {
-        <div class="@CssProvider.GetClass("header-mobile__select") @header.Class">
+        <div class="@CssProvider.GetClass("mobile__select") @header.Class">
             @GenSelectAll()
         </div>
     };
@@ -59,7 +59,7 @@
                     @context.Item.Text
                 }
 
-                <div class="@CssProvider.GetClass("header-mobile__select-chips", data: context.Item)">
+                <div class="@CssProvider.GetClass("mobile__select-chips", data: context.Item)">
                     @GenSortIcon()
                 </div>
         </MChip>;
