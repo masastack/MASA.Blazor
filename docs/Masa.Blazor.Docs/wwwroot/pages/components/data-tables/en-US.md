@@ -135,13 +135,6 @@ header alignment.
 
 <masa-example file="Examples.components.data_tables.CRUDActions"></masa-example>
 
-#### EditDialog
-
-The **MEditDialog** component can be used for editing data directly within a **MEditDialog**. You can block the closing of
-the **MEditDialog** when clicked outside by adding the `Persistent` prop.
-
-<masa-example file="Examples.components.data_tables.EditDialog"></masa-example>
-
 #### ExpandableRow
 
 The `ShowExpand`  prop will render an expand icon on each default row. You can customize this with the
