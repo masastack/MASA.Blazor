@@ -44,7 +44,7 @@ public partial class MDataTableMobileRow<TItem>
             .Element("mobile-table-row",cssBuilder =>
             {
                 cssBuilder
-                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected.Invoke(Item)) // BUG: selected效果被stripe覆盖了
+                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected.Invoke(Item))
                     .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded != null && IsExpanded(Item))
                     .AddIf("stripe", () => IsStripe)
                     .Add(() => ItemClass?.Invoke(Item) ?? "");
