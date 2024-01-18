@@ -55,8 +55,8 @@
 
     private RenderFragment GenHeaders() => __builder =>
     {
-        // DataTableHeaderContext context = new(ComputedHeaders, Options, IsMobile, ShowGroupBy, SomeItems, EveryItem, OnSort, OnGroup, OnToggleSelectAll);
-
+        // TODO: header context, but there is different between datatable and dataiterator
+        // so we need to create a dataiterator base class
         @HeaderContent
 
         @if (!HideDefaultHeader)
@@ -132,11 +132,16 @@
                 OpenCache[group.Key] = true;
             }
 
-            // TODO: group context
-
             if (GroupContent != null)
             {
-                @GroupContent
+                @GroupContent(
+                    new DataTableGroupContext<TItem>(
+                        group.Key,
+                        Options,
+                        IsMobile,
+                        group.ToList(),
+                        ComputedHeaders.ToList())
+                )
             }
             else
             {
@@ -147,13 +152,22 @@
 
     private RenderFragment GenDefaultGroupedRow(IGrouping<string, TItem> group, bool isOpen) => __builder =>
     {
-        // TODO: group header context
+        void ToggleFn() => ToggleGroup(group.Key);
 
         <MDataTableRowGroup Value="@isOpen">
             <ColumnHeaderContent>
                 @if (GroupHeaderContent != null)
                 {
-                    @GroupHeaderContent
+                    @GroupHeaderContent(
+                        new DataTableGroupHeaderContext<TItem>(
+                            group.Key,
+                            Options.GroupBy,
+                            group.ToList(),
+                            ComputedHeaders.ToList(),
+                            isOpen,
+                            CreateEventCallback(ToggleFn),
+                            CreateEventCallback(RemoveGroup))
+                    )
                 }
                 else
                 {
@@ -161,14 +175,14 @@
                         <MButton Class="ma-0"
                                  Icon
                                  Small
-                                 OnClick="@(() => ToggleGroup(group.Key))">
+                                 OnClick="@ToggleFn">
                             <MIcon Icon="@(isOpen ? "$minus" : "$plus")" />
                         </MButton>
                         @($"{GetText(Options.GroupBy[0])}: {group.Key}")
                         <MButton Class="ma-0"
                                  Icon
                                  Small
-                                 OnClick="@(() => RemoveGroup())">
+                                 OnClick="@RemoveGroup">
                             <MIcon Icon="@("$close")" />
                         </MButton>
                     </td>
@@ -277,12 +291,27 @@
 
         RenderFragment<ItemColProps<TItem>> GenRowSlot() => context => __builder =>
         {
+            DataTableItemExpandOrSelectContext<TItem> CreateExpandOrSelectContext()
+            {
+                return new DataTableItemExpandOrSelectContext<TItem>(
+                    item,
+                    index,
+                    CreateEventCallback<bool>(val => Expand(item, val)),
+                    CreateEventCallback<bool>(val => Select(item, val)),
+                    IsExpanded(item),
+                    IsSelected(item),
+                    ComputedHeaders.ToList(),
+                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowClickAsync(e, item)),
+                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowDblClickAsync(e, item)),
+                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowContextmenuAsync(e, item))
+                );
+            }
+
             if (HasExpand(context))
             {
-                // TODO: data-table-expand context
                 if (ItemDataTableExpandContent != null)
                 {
-                    @ItemDataTableExpandContent
+                    @ItemDataTableExpandContent(CreateExpandOrSelectContext())
                 }
                 else
                 {
@@ -299,7 +328,7 @@
             {
                 if (ItemDataTableSelectContent != null)
                 {
-                    @ItemDataTableSelectContent
+                    @ItemDataTableSelectContent(CreateExpandOrSelectContext())
                 }
                 else
                 {
@@ -353,16 +382,5 @@
                          Indeterminate>
         </MProgressLinear>
     };
-
-    public record DataTableHeaderContext(
-        IEnumerable<DataTableHeader<TItem>> Headers,
-        DataOptions Options,
-        bool Mobile,
-        bool ShowGroupBy,
-        bool SomeItems,
-        bool EveryItem,
-        EventCallback<string> OnSort,
-        EventCallback<string> OnGroup,
-        EventCallback<bool> OnToggleSelectAll);
 
 }

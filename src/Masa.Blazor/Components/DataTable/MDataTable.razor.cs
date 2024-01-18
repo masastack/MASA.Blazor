@@ -54,7 +54,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     public RenderFragment? BodyAppendContent { get; set; }
 
     [Parameter]
-    public RenderFragment? GroupContent { get; set; }
+    public RenderFragment<DataTableGroupContext<TItem>>? GroupContent { get; set; }
 
     [Parameter]
     public RenderFragment<(IEnumerable<DataTableHeader<TItem>> Headers, TItem Item)>? ExpandedItemContent { get; set; }
@@ -81,17 +81,17 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     public bool ShowExpand { get; set; }
 
     [Parameter]
-    public RenderFragment? ItemDataTableExpandContent { get; set; }
+    public RenderFragment<DataTableItemExpandOrSelectContext<TItem>>? ItemDataTableExpandContent { get; set; }
 
     [Parameter]
     [MasaApiParameter("$expand")]
     public string ExpandIcon { get; set; } = "$expand";
 
     [Parameter]
-    public RenderFragment? ItemDataTableSelectContent { get; set; }
+    public RenderFragment<DataTableItemExpandOrSelectContext<TItem>>? ItemDataTableSelectContent { get; set; }
 
     [Parameter]
-    public RenderFragment? GroupHeaderContent { get; set; }
+    public RenderFragment<DataTableGroupHeaderContext<TItem>>? GroupHeaderContent { get; set; }
 
     [Parameter]
     public bool Stripe { get; set; }
