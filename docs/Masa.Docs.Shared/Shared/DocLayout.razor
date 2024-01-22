@@ -2,13 +2,21 @@
 @layout BaseLayout
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
+@inject NavigationManager NavigationManager
 
 <NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL" />
 
-<MMain Class="doc-main">@Body</MMain>
+<MScrollToTarget RootMarginTop="@($"-{Offset + 8}px")"
+                 AutoRootMargin="AutoRootMargin.Bottom"
+                 Offset="@Offset"
+                 @key="@NavigationManager.GetAbsolutePath()">
+    <MMain Class="doc-main">
+        @Body
+    </MMain>
 
-<Toc RTL="@MasaBlazor.RTL" />
+    <Toc RTL="@MasaBlazor.RTL" ActiveItem="@context.ActiveTarget" />
+</MScrollToTarget>
 
 <FabTransition>
     <MButton Show="_showBackTop" Large Fab Fixed Bottom Right Class="transition-swing" Color="primary" OnClick="ToTopAsync">
@@ -29,6 +37,8 @@
 
     private bool? _showDrawer;
     private bool _showBackTop;
+
+    private int Offset => AppService.AppBarHeight + 12;
 
     protected override void OnInitialized()
     {

@@ -15,6 +15,9 @@
 
 @code {
 
+    [CascadingParameter]
+    private MScrollToTarget? ScrollToTargetComp { get; set; }
+    
     [CascadingParameter(Name = "IsDark")]
     private bool IsDark { get; set; }
 
@@ -37,6 +40,8 @@
     private async Task OnAfterRendered()
     {
         await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", IsDark);
+
+        ScrollToTargetComp?.TryObserverTargets();
     }
 
 }

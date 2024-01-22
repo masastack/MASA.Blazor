@@ -4,8 +4,8 @@
 <MContainer Class="pa-4 pa-sm-6 pa-md-8"
             Fluid
             Tag="section">
-    <MResponsive MaxWidth="960"
-                 Class="mx-auto overflow-visible">
+    <div style="max-width: 960px"
+         class="mx-auto overflow-visible">
         @if (_frontMatterMeta is not null)
         {
             <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@Tags"></FrontMatter>
@@ -54,5 +54,5 @@
         }
 
         <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />
-    </MResponsive>
+    </div>
 </MContainer>
