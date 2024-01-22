@@ -3384,7 +3384,11 @@ progress {
 }
 
 .dialog-transition-enter-active, .dialog-transition-leave-active {
-    pointer-events: none !important;
+    /* HACK: Temporarily comment out this code block because in high latency situations,
+         the transition animation of the dialog may not complete, 
+         which can result in this CSS not being removed, making the dialog unclickable.
+         Fixed this when refactoring transition!*/
+    /*pointer-events: none !important;*/
 }
 .dialog-transition-enter, .dialog-transition-leave-to {
     transform: scale(0.5);
