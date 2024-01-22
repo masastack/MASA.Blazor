@@ -74,6 +74,8 @@ namespace Masa.Blazor
 
         private async void SrcChangeCallback()
         {
+            IsLoading = string.IsNullOrWhiteSpace(Src);
+
             if (!IsLoading)
             {
                 await Init(true);
