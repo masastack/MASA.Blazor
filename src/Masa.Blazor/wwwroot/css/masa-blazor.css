@@ -23256,7 +23256,7 @@ html.overflow-y-hidden {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: currentColor;
+    /*background: currentColor;*/
     opacity: 0.3;
     position: absolute;
     left: -12px;
