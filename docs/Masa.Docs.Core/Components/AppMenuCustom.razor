@@ -1,0 +1,44 @@
+﻿@namespace Masa.Docs.Core.Components
+
+<MMenu Bottom
+       CloseDelay="100"
+       ContentClass="rounded"
+       Left
+       MaxHeight="500"
+       OffsetY
+       OpenDelay="60"
+       Transition="slide-y-transition"
+       ActivatorContent="@ActivatorContent"
+       Value="Value"
+       ValueChanged="ValueChanged"
+       CloseOnContentClick="@CloseOnContentClick"
+       OpenOnHover="@OpenOnHover">
+    <ChildContent>
+        <AppSheet Outlined="@false"
+                  Width="@Width"
+                  MaxWidth="@MaxWidth">
+            @ChildContent
+        </AppSheet>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public StringNumber? Width { get; set; }
+
+    [Parameter] public StringNumber? MaxWidth { get; set; }
+
+    [Parameter] public bool CloseOnContentClick { get; set; }
+
+    [Parameter] public bool OpenOnHover { get; set; } = true;
+
+    [Parameter] public bool Value { get; set; }
+
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
+
+}

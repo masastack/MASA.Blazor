@@ -62,7 +62,6 @@
     "check-upgrade-guide": "查看升级指南"
   },
   "home": "首页",
-  "docs": "文档中心",
   "annual-service": "企业服务",
   "sponsors": "赞助商",
   "contactus": "联系我们",
@@ -587,5 +586,12 @@
   "feature": {
     "released-on": "发布于 {0}",
     "updated-in": "更新于 {0}"
+  },
+  "notifications":{
+    "viewUnread": "查看未读（{0}）",
+    "viewRead": "查看已读（{0}）",
+    "done": "全部完成",
+    "release-notes": "发行说明",
+    "view-details": "查看详情"
   }
 }

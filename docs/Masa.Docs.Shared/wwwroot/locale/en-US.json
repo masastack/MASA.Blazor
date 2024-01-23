@@ -64,7 +64,6 @@
     "check-upgrade-guide": "Check the upgrade guide"
   },
   "home": "Home",
-  "docs": "Documents",
   "annual-service": "Enterprise",
   "sponsors": "SPONSORS",
   "contactus": "CONTACT US",
@@ -490,5 +489,12 @@
   "feature": {
     "released-on": "Released on {0}",
     "updated-in": "Updated in {0}"
+  },
+  "notifications":{
+    "viewRead": "View Read({0})",
+    "viewUnread": "View unread({0})",
+    "done": "All done",
+    "release-notes": "Release notes",
+    "view-details": "View details"
   }
 }

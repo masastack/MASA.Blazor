@@ -1,0 +1,97 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject MasaBlazor MasaBlazor
+@inject LocalStorage LocalStorage
+@inject I18n I18n
+
+<AppMenuCustom @bind-Value="_menu"
+               OpenOnHover="false"
+               CloseOnContentClick="false"
+               Width="520"
+               MaxWidth="@("100%")">
+    <ActivatorContent>
+        <MButton Icon Class="default-app-btn mx-1" @attributes="@context.Attrs">
+            <MBadge Value="UnreadNotifications.Count > 0"
+                    Color="red"
+                    Dot>
+                @{
+                    var outline = _menu ? "" : "-outline";
+                }
+                <MIcon Icon="@(UnreadNotifications.Count > 0 ? $"mdi-bell-ring{outline}" : $"mdi-bell{outline}")"></MIcon>
+            </MBadge>
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MToolbar Dense Elevation="0">
+            <MButton Class="px-2 ms-n1 text-none font-weight-regular"
+                     Small
+                     Text
+                     OnClick="@(() => _showArchived = !_showArchived)">
+                @if (_showArchived)
+                {
+                    @I18n.T("notifications.viewUnread", UnreadNotifications.Count)
+                }
+                else
+                {
+                    @I18n.T("notifications.viewRead", ReadNotifications.Count)
+                }
+            </MButton>
+        </MToolbar>
+        <MDivider />
+        <MResponsive MaxHeight="340"
+                     MinHeight="204"
+                     Style="overflow-y: scroll">
+            @if (CurrentNotifications.Count == 0)
+            {
+                <div class="py-8 text-center text-subtitle-1">
+                    <p>
+                        @I18n.T("notifications.done", ReadNotifications.Count)
+                    </p>
+
+                    <MIcon Icon="@("$masaBlazor")" Size="96" Color="#D7D7D7" />
+                </div>
+            }
+            else
+            {
+                <MList ThreeLine>
+                    @foreach (var (item, index) in CurrentNotifications.Select((item, index) => (item, index)))
+                    {
+                        if (index != 0)
+                        {
+                            <MDivider Class="my-1" />
+                        }
+
+                        <MListItem Ripple="false">
+                            <MListItemIcon Class="mr-3 mt-2" Style="font-size: 24px">
+                                @item.Emoji
+                            </MListItemIcon>
+                            <MListItemContent>
+                                <MListItemTitle Class="text-wrap text-h6">
+                                    <div class="text-truncate">@item.Title</div>
+                                </MListItemTitle>
+                                <div class="text-caption mb-1">
+                                    @item.CreatedAt
+                                </div>
+                                <div class="text-caption">
+                                    <DocumentMarkdownIt Source="@item.Content"></DocumentMarkdownIt>
+
+                                    <MChip Outlined Small Href="@item.Href" OnClick="@(() => OnClick(item))">
+                                        @I18n.T($"notifications.{item.HrefText}")
+                                        <MIcon XSmall Icon="@("mdi-open-in-new")" Class="ml-1" />
+                                    </MChip>
+                                </div>
+                            </MListItemContent>
+                            @if (!_showArchived)
+                            {
+                                <MListItemAction>
+                                    <MButton Icon OnClickStopPropagation OnClick="@(() => ToggleNotification(item))">
+                                        <MIcon>mdi-check</MIcon>
+                                    </MButton>
+                                </MListItemAction>
+                            }
+                        </MListItem>
+                    }
+                </MList>
+            }
+        </MResponsive>
+    </ChildContent>
+</AppMenuCustom>
