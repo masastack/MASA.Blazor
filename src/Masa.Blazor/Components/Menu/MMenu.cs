@@ -60,8 +60,7 @@ namespace Masa.Blazor
                         .AddIf($"min-width:{CalculatedMinWidth}", () => CalculatedMinWidth != null)
                         .AddIf($"max-width:{CalculatedMaxWidth}", () => CalculatedMaxWidth != null)
                         .AddIf($"top:{CalculatedTop!.ToUnit()}", () => CalculatedTop != null)
-                        .AddIf($"left:{CalculatedLeft!.ToUnit()}", () => CalculatedLeft != null && !IsRtl)
-                        .AddIf("direction: rtl", () => IsRtl)
+                        .AddIf($"left:{CalculatedLeft!.ToUnit()}", () => CalculatedLeft != null)
                         .Add($"transform-origin:{Origin}")
                         .Add($"z-index:{ComputedZIndex}")
                         .Add(ContentStyle);
