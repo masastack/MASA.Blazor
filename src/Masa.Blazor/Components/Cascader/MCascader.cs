@@ -66,7 +66,7 @@ namespace Masa.Blazor
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
                     if (MasaBlazor.RTL)
                     {
-                        attrs[nameof(MMenu.ContentStyle)] = $"right:{_right}px";
+                        attrs[nameof(MMenu.ContentStyle)] = $"right:{_right}px; left: unset;";
                     }
                 })
                 .Apply(typeof(BCascaderColumn<,>), typeof(MCascaderColumn<TItem, TValue>), attrs =>
@@ -119,7 +119,20 @@ namespace Masa.Blazor
             if (MasaBlazor.RTL && MMenu is not null)
             {
                 var right = Document.DocumentElement.ClientWidth - MMenu.Dimensions.Activator.Right;
-                if (_right != right)
+
+                if (MMenu.NudgeLeft is not null)
+                {
+                    var (_, number) = MMenu.NudgeLeft.TryGetNumber();
+                    right -= number;
+                }
+
+                if (MMenu.NudgeRight != null)
+                {
+                    var (_, number) = MMenu.NudgeRight.TryGetNumber();
+                    right += number;
+                }
+
+                if (Math.Abs(_right - right) > 0.1)
                 {
                     _right = right;
                     StateHasChanged();
