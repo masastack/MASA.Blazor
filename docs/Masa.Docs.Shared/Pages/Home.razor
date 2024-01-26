@@ -1,8 +1,9 @@
 ﻿@page "/home"
 @layout BaseLayout
 @inject NavigationManager NavigationManager
+@inject MasaBlazor MasaBlazor
 
-<MMain>
+<MMain Class="portal-main">
     <MContainer Class="fill-height">
         <div style="min-height: 75%; width: 100%">
             <MTabs Value="@Product" Centered IconsAndText>
@@ -25,6 +26,8 @@
                 </MTab>
             </MTabs>
 
+            <MDivider Style="position: relative; margin-top: -2px;" />
+
             <MTabsItems Value="@Product" Class="mt-8">
                 <MTabItem Value="@("stack")" Transition="">
                     <MRow>
@@ -42,7 +45,7 @@
                     <MRow>
                         <MCol Cols="12" Md="6">
                             <MCard Outlined>
-                                <MCardTitle>Getting Started</MCardTitle>
+                                <MCardTitle><a>Getting Started</a></MCardTitle>
                                 <MCardText>
                                     Getting Started
                                 </MCardText>
@@ -56,7 +59,14 @@
                             <MRow>
                                 <MCol Cols="12">
                                     <MCard Outlined>
-                                        <MCardTitle>Getting Started</MCardTitle>
+                                        <MCardTitle Class="d-flex align-start justify-space-between">
+                                            Getting Started
+                                            <MButton Href="/blazor/getting-started/installation" Small Icon Text>
+                                                <MIcon Small>
+                                                    mdi-open-in-new
+                                                </MIcon>
+                                            </MButton>
+                                        </MCardTitle>
                                         <MCardText>
                                             <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
                                         </MCardText>
@@ -67,19 +77,19 @@
                                         <MCardTitle>Icons</MCardTitle>
                                         <MCardText>
                                             <DocumentMarkdownIt Source="@_blazorIconIntro"></DocumentMarkdownIt>
-                                            <MIcon Color="secondary">mdi-hand-wave-outline</MIcon>
+                                            <MIcon Color="secondary">mdi-code-json</MIcon>
                                             <MIcon Color="primary">$masaStack</MIcon>
                                             <MIcon Color="primary">$masaFramework</MIcon>
                                             <MIcon Color="primary">$masaBlazor</MIcon>
-                                            <MIcon Color="pink">mdi-human-greeting-variant</MIcon>
+                                            <MIcon Color="pink lighten-3">mdi-human-greeting-variant</MIcon>
                                         </MCardText>
                                     </MCard>
                                 </MCol>
                                 <MCol Cols="12">
                                     <MCard Outlined>
-                                        <MCardTitle>Theme</MCardTitle>
+                                        <MCardTitle>Uitility Classes</MCardTitle>
                                         <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
+                                            <DocumentMarkdownIt Source="@_blazorUtilityClassesIntro"></DocumentMarkdownIt>
                                         </MCardText>
                                     </MCard>
                                 </MCol>
@@ -92,14 +102,22 @@
                                         <MCardTitle>Theme</MCardTitle>
                                         <MCardText>
                                             <DocumentMarkdownIt Source="@_blazorThemeIntro"></DocumentMarkdownIt>
+                                            <MSwitch Value="@MasaBlazor.Theme.Dark"
+                                                     ValueChanged="val => MasaBlazor.ToggleTheme()"
+                                                     TValue="bool"
+                                                     LeftText="L"
+                                                     RightText="D"
+                                                     Color="primary"
+                                                     HideDetails="@true">
+                                            </MSwitch>
                                         </MCardText>
                                     </MCard>
                                 </MCol>
                                 <MCol Cols="12">
                                     <MCard Outlined Height="@("100%")">
-                                        <MCardTitle>Getting Started</MCardTitle>
+                                        <MCardTitle>Components</MCardTitle>
                                         <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
+                                            <DocumentMarkdownIt Source="@_blazorComponentsIntro"></DocumentMarkdownIt>
                                         </MCardText>
                                     </MCard>
                                 </MCol>

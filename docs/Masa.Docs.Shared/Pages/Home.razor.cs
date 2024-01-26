@@ -6,6 +6,13 @@ public partial class Home : ComponentBase
     [SupplyParameterFromQuery]
     public string Product { get; set; } = "stack";
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        Product ??= "stack";
+    }
+
     private string _blazorGettingStartedIntro =
         """
         To get started quickly, you can use the MASA.Template template to quickly create a project.
@@ -29,29 +36,26 @@ public partial class Home : ComponentBase
 
     private string _blazorThemeIntro =
         """
-        在 Material Deisgn 2 颜色规则的基础上，引入了 Material Design 3 中 `On<Rule>` 的规则的支持。
-        ```cs
-        builder.Services.AddMasaBlazor(options =>
-        {
-            options.ConfigureTheme(theme =>
-            {
-                theme.Themes.Light.Primary = "#4f33ff";
-                theme.Themes.Light.Secondary = "#5e5c71";
-                theme.Themes.Light.Accent = "#006C4F";
-                theme.Themes.Light.Error = "#BA1A1A";
-                theme.Themes.Light.OnSurface = "#1C1B1F";
+        轻松地通过编程的方式改变应用程序的颜色。重新构建默认样式表并根据您的特定需求自定义框架的各个方面。
+        在 Material Design 2 颜色规则的基础上，引入了 Material Design 3 中 `On[Rule]` 的规则的支持。
+        """;
 
-                theme.Themes.Dark.Primary = "#C5C0FF";
-                theme.Themes.Dark.Secondary = "#C7C4DC";
-                theme.Themes.Dark.Accent = "#67DBAF";
-                theme.Themes.Dark.Error = "#FFB4AB";
-                theme.Themes.Dark.Surface = "#131316";
-                theme.Themes.Dark.OnPrimary = "#2400A2";
-                theme.Themes.Dark.OnSecondary = "#302E42";
-                theme.Themes.Dark.OnAccent = "#003827";
-                theme.Themes.Dark.OnSurface = "#C9C5CA";
-            });
-        });
-        ```
+    private string _blazorUtilityClassesIntro =
+        """
+        MASA Blazor provides a set of utility classes that can be used to quickly build a UI,
+        including: [Border radius](/blazor/styles-and-animations/border-radius),
+        [Colors](/blazor/styles-and-animations/color), 
+        [Display helpers](/blazor/styles-and-animations/display-helpers),
+        [Elevation](/blazor/styles-and-animations/elevation),
+        [Flex](/blazor/styles-and-animations/flex),
+        [Float](/blazor/styles-and-animations/floats),
+        [Overflow](/blazor/styles-and-animations/overflow),
+        [Spacing](/blazor/styles-and-animations/spacing),
+        [Text and typography](/blazor/styles-and-animations/text-and-typography).
+        """;
+
+    private string _blazorComponentsIntro =
+        """
+        MASA Blazor 提供基础组件、预置组件、JS模块和实验性组件。
         """;
 }
