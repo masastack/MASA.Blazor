@@ -1,10 +1,11 @@
-﻿using Masa.Blazor.ScrollToTarget;
+﻿using Masa.Blazor.Components.ScrollToTarget;
+using Masa.Blazor.ScrollToTarget;
 
 namespace Masa.Blazor;
 
 public class MScrollToTarget : ComponentBase, IAsyncDisposable
 {
-    [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
+    [Inject] private ScrollToTargetJSModule ScrollToTargetJSModule { get; set; } = null!;
 
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
@@ -45,13 +46,22 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
 
     [Parameter] public double[] Threshold { get; set; } = { };
 
-    [Parameter] public string? ScrollContainer { get; set; }
+    [Parameter] public string? ScrollContainerSelector { get; set; }
+
+    [Parameter] public bool DisableIntersectAfterTriggering { get; set; }
 
     private bool _task;
+
     private TargetContext _targetContext = new();
     private List<string> _activeStack = new();
     private bool _hasRendered;
     private List<Action>? _tasks;
+
+    private DotNetObjectReference<ScrollToTargetJSInteropHandle>? _jsInteropHandle;
+    private ScrollToTargetJSObjectReference? _scrollToTargetJSObjectReference;
+
+    private bool _disableIntersecting;
+    private CancellationTokenSource? _ctsForDisableIntersecting;
 
     private List<string> Targets { get; } = new();
 
@@ -62,6 +72,8 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
         base.OnInitialized();
 
         Targets.ThrowIfNull(nameof(MScrollToTarget));
+
+        _jsInteropHandle = DotNetObjectReference.Create(new ScrollToTargetJSInteropHandle(this));
     }
 
     protected override void OnParametersSet()
@@ -73,13 +85,24 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
         RootMarginBottom ??= "0px";
         RootMarginLeft ??= "0px";
 
-        _targetContext.ActiveClass = ActiveClass;
+        _targetContext.ScrollToTarget ??= ScrollToTarget;
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            _scrollToTargetJSObjectReference = await ScrollToTargetJSModule.InitAsync(_jsInteropHandle!, new IntersectionObserverInit()
+            {
+                RootMarginTop = RootMarginTop,
+                RootMarginRight = RootMarginRight,
+                RootMarginBottom = RootMarginBottom,
+                RootMarginLeft = RootMarginLeft,
+                AutoRootMargin = AutoRootMargin,
+                RootSelector = RootSelector,
+                Threshold = Threshold
+            });
+
             _hasRendered = true;
 
             if (_tasks is { Count: > 0 })
@@ -118,7 +141,31 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
     internal void UnregisterTarget(string target)
     {
         Targets.Remove(target);
-        _ = IntersectJSModule.UnobserveAsync($"#{target}");
+
+        _scrollToTargetJSObjectReference?.UnobserveAsync(target);
+    }
+
+    private async Task DisableIntersect()
+    {
+        _ctsForDisableIntersecting?.Cancel();
+        _ctsForDisableIntersecting = new();
+
+        try
+        {
+            _disableIntersecting = true;
+            await Task.Delay(500, _ctsForDisableIntersecting.Token); // smooth scroll animation time is 200~500ms
+            _disableIntersecting = false;
+            if (lastTarget is not null)
+            {
+                _targetContext.ActiveTarget = lastTarget;
+                lastTarget = null;
+                StateHasChanged();
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            // ignored
+        }
     }
 
     private async ValueTask ObserverAsync(string target)
@@ -128,72 +175,37 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
             Targets.Add(target);
         }
 
-        await IntersectJSModule.ObserverAsync($"#{target}", e => OnIntersectAsync(e, target),
-            new IntersectionObserverInit()
-            {
-                RootMarginTop = RootMarginTop,
-                RootMarginRight = RootMarginRight,
-                RootMarginBottom = RootMarginBottom,
-                RootMarginLeft = RootMarginLeft,
-                AutoRootMargin = AutoRootMargin,
-                RootSelector = RootSelector,
-                Threshold = Threshold
-            });
+        _scrollToTargetJSObjectReference?.ObserveAsync(target);
     }
 
-    private CancellationTokenSource? _cts;
+    private string lastTarget;
 
-    private async Task OnIntersectAsync(IntersectEventArgs e, string target)
+    internal async ValueTask UpdateActiveTarget(string target)
     {
-        if (e.IsIntersecting)
+        lastTarget = target;
+
+        if (_disableIntersecting)
         {
-            _activeStack.Add(target);
-        }
-        else
-        {
-            _activeStack.Remove(target);
+            return;
         }
 
-        _cts?.Cancel();
-        _cts = new();
-
-        try
-        {
-            await Task.Delay(32, _cts.Token);
-            if (_activeStack.Count > 0)
-            {
-                var lastActive = _activeStack.Last();
-                _targetContext.ActiveTarget = lastActive;
-                _ = InvokeAsync(StateHasChanged);
-            }
-        }
-        catch (TaskCanceledException)
-        {
-            // ignored
-        }
-    }
-
-    private async Task ScrollToTargetAsync(string target, string? container = null)
-    {
-        await JSRuntime.InvokeVoidAsync(JsInteropConstants.ScrollToTarget, target, container, Offset);
-    }
-
-    [MasaApiPublicMethod]
-    public void TryObserverTargets()
-    {
-        foreach (var target in Targets.ToList())
-        {
-            _ = ObserverAsync(target);
-        }
+        _targetContext.ActiveTarget = target;
+        await InvokeAsync(StateHasChanged);
     }
 
     [MasaApiPublicMethod]
     public void ScrollToTarget(string target)
     {
-        if (Targets.Contains(target))
+        if (DisableIntersectAfterTriggering)
         {
-            _ = ScrollToTargetAsync($"#{target}", ScrollContainer);
+            _ = DisableIntersect();
         }
+
+        _ = JSRuntime.InvokeVoidAsync(
+            JsInteropConstants.ScrollToTarget,
+            $"#{target}",
+            ScrollContainerSelector,
+            Offset);
     }
 
     public async ValueTask DisposeAsync()
@@ -202,7 +214,8 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
         {
             foreach (var target in Targets)
             {
-                _ = IntersectJSModule.UnobserveAsync($"#{target}");
+                _ = _scrollToTargetJSObjectReference?.UnobserveAsync(target);
+                _ = _scrollToTargetJSObjectReference?.DisposeAsync();
             }
         }
         catch (JSDisconnectedException)

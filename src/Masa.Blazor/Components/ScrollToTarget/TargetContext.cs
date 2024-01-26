@@ -2,7 +2,7 @@
 
 public class TargetContext
 {
-    public string? ActiveClass { get; set; }
-
     public string? ActiveTarget { get; set; }
+
+    public Action<string> ScrollToTarget { get; set; } = default!;
 }

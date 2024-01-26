@@ -297,6 +297,11 @@
         "releasedOn": "v1.1.1"
       },
       {
+        "title": "scroll-to-target",
+        "state": "new",
+        "releasedOn": "v1.3.4"
+      },
+      {
         "title": "splitters",
         "state": "new",
         "releasedOn": "v1.1.1"

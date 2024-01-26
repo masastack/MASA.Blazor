@@ -1,65 +1,55 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.ScrollToTarget;
+using Masa.Blazor.ScrollToTarget;
 
-public class MScrollToTargetTrigger : BDomComponentBase
+namespace Masa.Blazor;
+
+public class MScrollToTargetTrigger : ComponentBase, IAsyncDisposable
 {
-    [CascadingParameter] private MScrollToTarget? ScrollToTarget { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
-    [Parameter] [MasaApiParameter("div")] public string Tag { get; set; } = "div";
+    [CascadingParameter] private MScrollToTarget? ScrollToTarget { get; set; }
 
     [Parameter] [EditorRequired] public string Target { get; set; } = null!;
 
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment<TargetTriggerContext>? ChildContent { get; set; }
 
-    [Parameter] public bool PreventDefaultOnClick { get; set; }
+    private TargetTriggerContext _context = new();
 
-    [Parameter] public bool StopPropagationOnClick { get; set; }
-
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnInitialized();
-
-        ScrollToTarget?.RegisterTarget(Target);
+        if (firstRender)
+        {
+            ScrollToTarget?.RegisterTarget(Target);
+        }
     }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        Target.ThrowIfNull(ComponentName);
+        Target.ThrowIfNull(nameof(MScrollToTargetTrigger));
 
-        Tag ??= "div";
+        UpdateTargetTriggerContext();
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
+        => builder.AddContent(0, ChildContent?.Invoke(_context));
+
+    private void UpdateTargetTriggerContext()
     {
-        builder.OpenElement(0, Tag);
-        builder.AddAttribute(1, "class", CssProvider.GetClass());
-        builder.AddAttribute(2, "style", CssProvider.GetStyle());
-        builder.AddAttribute(3, "id", Id);
-
-        if (ScrollToTarget is not null)
-        {
-            builder.AddAttribute(4, "onclick", () => ScrollToTarget.ScrollToTarget(Target));
-            builder.AddAttribute(5, "__internal_preventDefault_onclick", PreventDefaultOnClick);
-            builder.AddAttribute(6, "__internal_stopPropagation_onclick", StopPropagationOnClick);
-        }
-
-        builder.AddMultipleAttributes(7, Attributes);
-        builder.AddContent(8, ChildContent);
-        builder.CloseElement();
+        _context.IsActive = ScrollToTarget?.ActiveTarget == Target;
+        _context.ActiveClass = _context.IsActive ? ScrollToTarget?.ActiveClass : null;
+        _context.ScrollToTarget ??= InvokeScrollToTarget;
     }
 
-    protected override void SetComponentCss()
+    private void InvokeScrollToTarget()
     {
-        base.SetComponentCss();
-
-        CssProvider.UseBem("m-scroll-to-target-trigger",
-            css => { css.AddIf(ScrollToTarget?.ActiveClass, () => ScrollToTarget != null && ScrollToTarget.ActiveTarget == Target); });
+        ScrollToTarget?.ScrollToTarget(Target);
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    ValueTask IAsyncDisposable.DisposeAsync()
     {
         ScrollToTarget?.UnregisterTarget(Target);
-        return base.DisposeAsync(disposing);
+        return ValueTask.CompletedTask;
     }
 }

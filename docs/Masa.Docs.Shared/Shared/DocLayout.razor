@@ -7,15 +7,15 @@
 <NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL" />
 
-<MScrollToTarget RootMarginTop="@($"-{Offset + 8}px")"
+<MScrollToTarget RootMarginTop="@($"-{Offset + 4}px")"
                  AutoRootMargin="AutoRootMargin.Bottom"
-                 Offset="@Offset"
-                 @key="@NavigationManager.GetAbsolutePath()">
+                 Offset="@Offset">
     <MMain Class="doc-main">
         @Body
     </MMain>
 
-    <Toc RTL="@MasaBlazor.RTL" ActiveItem="@context.ActiveTarget" />
+    <Toc RTL="@MasaBlazor.RTL"
+         ActiveItem="@context.ActiveTarget" />
 </MScrollToTarget>
 
 <FabTransition>

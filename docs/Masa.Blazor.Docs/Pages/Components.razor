@@ -23,18 +23,14 @@
             </MTabs>
         }
 
-        @if (IsApiTab && _apiData.Count == 0)
-        {
-            <MSkeletonLoader Type="table"></MSkeletonLoader>
-        }
-        else if (!IsApiTab && _md == null)
-        {
-            <MSkeletonLoader Type="article,card"></MSkeletonLoader>
-        }
-        else
-        {
-            <MTabsItems Value="IsApiTab.ToString()" Style="background-color: unset;">
-                <MTabItem Value="@("False")" Transition="" Eager>
+        <MTabsItems Value="IsApiTab.ToString()" Style="background-color: unset; overflow: unset;">
+            <MTabItem Value="@("False")" Transition="" Eager>
+                @if (_md == null)
+                {
+                    <MSkeletonLoader Type="article,card"></MSkeletonLoader>
+                }
+                else
+                {
                     <DocumentMarkdownIt Source="@_md"
                                         OnTocParsed="@OnTocParsed"
                                         OnFrontMatterParsed="@OnFrontMatterParsed" />
@@ -43,15 +39,22 @@
                     {
                         <BackMatter Related="@_frontMatterMeta.Related"></BackMatter>
                     }
-                </MTabItem>
-                <MTabItem Value="@("True")" Transition="">
+                }
+            </MTabItem>
+            <MTabItem Value="@("True")" Transition="">
+                @if (_apiData.Count == 0)
+                {
+                    <MSkeletonLoader Type="table"></MSkeletonLoader>
+                }
+                else
+                {
                     <Apis @bind-Value="@CurrentApi"
                           Data="@_apiData"
                           GithubUri="@ApiGithubUri">
                     </Apis>
-                </MTabItem>
-            </MTabsItems>
-        }
+                }
+            </MTabItem>
+        </MTabsItems>
 
         <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />
     </div>

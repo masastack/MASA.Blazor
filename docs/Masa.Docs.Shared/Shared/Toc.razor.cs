@@ -12,14 +12,12 @@ public partial class Toc : NextTickComponentBase
 
     [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 
-    [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
-
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject] private I18n I18n { get; set; } = null!;
 
     [CascadingParameter(Name = "Culture")] private string? Culture { get; set; }
-    
+
     [CascadingParameter] private MScrollToTarget? ScrollToTargetComp { get; set; }
 
     [Parameter] public bool RTL { get; set; }
@@ -59,7 +57,7 @@ public partial class Toc : NextTickComponentBase
         }
 
         var hash = NavigationManager.GetHash();
-        
+
         if (hash is not null)
         {
             NextTick(async () =>

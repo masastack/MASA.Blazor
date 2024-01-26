@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
+using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Xgplayer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -56,6 +57,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
+        services.TryAddScoped<ScrollToTargetJSModule>();
 
         return new MasaBlazorBuilder(services);
     }

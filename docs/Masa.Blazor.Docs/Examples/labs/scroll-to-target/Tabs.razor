@@ -1,0 +1,46 @@
+﻿<div id="scroll-to-target-tabs"
+     style="position: relative; height: 300px;"
+     class="d-flex overflow-hidden surface">
+    <MScrollToTarget ScrollContainerSelector="#scroll-to-target-tabs-scroll"
+                     RootSelector="#scroll-to-target-tabs"
+                     RootMarginTop="-50%"
+                     RootMarginBottom="-50%"
+                     DisableIntersectAfterTriggering>
+        <MTabs Value="@context.ActiveTarget"
+               Vertical
+               Style="width: auto; flex: none;">
+            @foreach (var item in _items)
+            {
+                <MScrollToTargetTrigger Target="@item" Context="triggerContext">
+                    <MTab Value="@item"
+                          OnClick="@triggerContext.ScrollToTarget">
+                        @item
+                    </MTab>
+                </MScrollToTargetTrigger>
+            }
+        </MTabs>
+        <div id="scroll-to-target-tabs-scroll"
+             class="px-4"
+             style="flex: 1;overflow-y: scroll;">
+            @foreach (var item in _items)
+            {
+                <div id="@item"
+                     Class="d-flex justify-center align-center"
+                     style="border: 1px dashed; height: 100%; width: 100%">
+                        Content for @item
+                </div>
+            }
+        </div>
+    </MScrollToTarget>
+</div>
+
+@code {
+
+    private List<string> _items =
+    [
+        "menu-1",
+        "menu-2",
+        "menu-3"
+    ];
+
+}

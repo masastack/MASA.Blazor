@@ -148,6 +148,10 @@
   "date-pickers-month": [
     "MDatePicker"
   ],
+  "scroll-to-target": [
+    "MScrollToTarget",
+    "MScrollToTargetTrigger"
+  ],
   "steppers": [
     "MStepper",
     "MStepperContent",
@@ -187,6 +191,7 @@
     "MXgMusicPlayer",
     "MXgplayerControls",
     "MXgplayerPlay",
-    "MXgplayerTime"
+    "MXgplayerTime",
+    "MXgplayerStart"
   ]
 }
