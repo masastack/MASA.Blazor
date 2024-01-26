@@ -18,6 +18,11 @@ public class MobileProvider : IMobile
         {
             var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
 
+            if (width == 0)
+            {
+                return false;
+            }
+
             if (mobileBreakpoint.Equals(this.MobileBreakpoint))
             {
                 return mobile;
