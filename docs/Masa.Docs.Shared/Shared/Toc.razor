@@ -27,22 +27,28 @@
             {
                 var hash = $"#{item.Anchor}";
 
-                <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) toc-li">
-                    <a href="@hash"
-                       class="m-toc-link d-block transition-swing text-decoration-none"
-                       @onclick:preventDefault
-                       @onclick="@(() => ScrollIntoView(hash))">
-                        @item.Content
-                        @if (item.Attrs.ContainsKey("released-on"))
-                        {
-                            <MIcon Color="@AppService.ColorForNewState" Small>mdi-circle-medium</MIcon>
-                        }
-                        else if (item.Attrs.ContainsKey("updated-in"))
-                        {
-                            <MIcon Color="@AppService.ColorForUpdateState" Small>mdi-circle-medium</MIcon>
-                        }
-                    </a>
-                </li>
+                <MScrollToTargetTrigger Target="@item.Anchor" @key="@item.Anchor">
+                    @{
+                        var color = context.IsActive ? "primary--text" : "secondary--text";
+                    }
+
+                    <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) toc-li @color">
+                        <a class="@($"m-toc-link d-block transition-swing text-decoration-none {color}")"
+                           href="@hash"
+                           @onclick="@context.ScrollToTarget"
+                           @onclick:preventDefault>
+                            @item.Content
+                            @if (item.Attrs.ContainsKey("released-on"))
+                            {
+                                <MIcon Color="@AppService.ColorForNewState" Small>mdi-circle-medium</MIcon>
+                            }
+                            else if (item.Attrs.ContainsKey("updated-in"))
+                            {
+                                <MIcon Color="@AppService.ColorForUpdateState" Small>mdi-circle-medium</MIcon>
+                            }
+                        </a>
+                    </li>
+                </MScrollToTargetTrigger>
             }
         </ul>
         <Sponsors />

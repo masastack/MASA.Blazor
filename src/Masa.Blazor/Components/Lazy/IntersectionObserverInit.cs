@@ -21,12 +21,36 @@ public class IntersectionObserverInit
     }
 
     /// <summary>
-    /// An Element or Document object which is an ancestor of the intended target,
-    /// whose bounding rectangle will be considered the viewport.
-    /// Any part of the target not visible in the visible area of the root
-    /// is not considered visible.
+    /// The top value of RootMargin.
+    /// For details: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
     /// </summary>
-    public string? RootMargin { get; set; } = "0px";
+    public string RootMarginTop { get; set; } = "0px";
+
+    /// <summary>
+    /// The right value of RootMargin.
+    /// For details: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
+    /// </summary>
+    public string RootMarginRight { get; set; } = "0px";
+
+    /// <summary>
+    /// The bottom value of RootMargin.
+    /// For details: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
+    /// </summary>
+    public string RootMarginBottom { get; set; } = "0px";
+
+    /// <summary>
+    /// The left value of RootMargin.
+    /// For details: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
+    /// </summary>
+    public string RootMarginLeft { get; set; } = "0px";
+
+    /// <summary>
+    /// The margin value of RootMargin that will be automatically calculated.
+    /// For example, if you set <see cref="RootMarginTop"/> to 64px,
+    /// the value of RootMargin bottom will be `calc(64px - 100%)`.
+    /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public AutoRootMargin AutoRootMargin { get; set; }
 
     /// <summary>
     /// A string which specifies a set of offsets to add to the root's bounding_box

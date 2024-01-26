@@ -3,12 +3,8 @@
 @inject DocService DocService
 @inject I18n I18n
 @inject IJSRuntime JsRuntime
-@inject NavigationManager NavigationManager
 @inject MasaBlazor MasaBlazor
-@inject IntersectJSModule IntersectJSModule
-@using Element = BlazorComponent.Web.Element
 @inherits NextTickComponentBase
-@implements IAsyncDisposable
 
 <MNavigationDrawer App
                    Class="default-nav"
@@ -156,15 +152,12 @@
         "1.0",
     };
 
-    private CancellationTokenSource _ctsForIntersect = new();
-
     private string _selectVersion = "1.0";
 
     private bool? _drawer;
 
     private string? _activeHash;
     private bool _loading = true;
-    private bool _internalScrolling;
 
     protected override void OnInitialized()
     {
@@ -191,62 +184,9 @@
             _loading = false;
 
             StateHasChanged();
-
-            await ObserveToc();
         }
     }
-
-    private async Task ObserveToc()
-    {
-        var marginTop = AppService.AppBarHeight + 48;
-        var document = await JsRuntime.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, "document");
-        var marginBottom = document.ClientHeight - marginTop - 36;
-
-        var navHashes = new[] { "#getting-started" }.Concat(_projectToNavs.Select(u => $"#{u.Key}"));
-        foreach (var hash in navHashes)
-        {
-            await IntersectJSModule.ObserverAsync(hash, (e) => HandleOnIntersect(e, hash), new IntersectionObserverInit()
-            {
-                RootMargin = $"-{marginTop}px 0px -{marginBottom}px 0px"
-            });
-        }
-    }
-
-    private async Task UnobserveToc()
-    {
-        var navHashes = new[] { "#getting-started" }.Concat(_projectToNavs.Select(u => $"#{u.Key}"));
-        foreach (var hash in navHashes)
-        {
-            await IntersectJSModule.UnobserveAsync(hash);
-        }
-    }
-
-    private async Task HandleOnIntersect(IntersectEventArgs e, string hash)
-    {
-        if (_internalScrolling)
-        {
-            return;
-        }
-        
-        if (e.IsIntersecting)
-        {
-            _activeHash = hash;
-            
-            _ctsForIntersect.Cancel();
-            _ctsForIntersect = new CancellationTokenSource();
-
-            try
-            {
-                await Task.Delay(300, _ctsForIntersect.Token);
-                await InvokeAsync(StateHasChanged);
-            }
-            catch (TaskCanceledException)
-            {
-                // ignored
-            }
-        }
-    }
-
+    
     private RenderFragment ProductCard(IEnumerable<(string title, string href)> items, string? group = null) => __builder =>
     {
         <OutlineCard Title="@I18n.T(group)" Class="project-content" TitleClass="project-content__title" Filled>
@@ -268,27 +208,8 @@
 
     private async Task ScrollIntoView(string hash)
     {
-        _internalScrolling = true;
         _activeHash = hash;
         _ = JsRuntime.InvokeVoidAsync("scrollToElement", hash, AppService.AppBarHeight + 48);
-
-        await Task.Run(async () =>
-        {
-            await Task.Delay(1000);
-            _internalScrolling = false;
-        });
-    }
-    
-    async ValueTask IAsyncDisposable.DisposeAsync()
-    {
-        try
-        {
-            await UnobserveToc();
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
     }
 
 }
