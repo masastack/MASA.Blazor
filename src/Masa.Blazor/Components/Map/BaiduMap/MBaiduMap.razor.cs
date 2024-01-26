@@ -194,6 +194,8 @@
         [Parameter]
         public EventCallback<GeoPoint> CenterChanged { get; set; }
 
+        private CancellationTokenSource _movingCts = new();
+
         public async ValueTask HandleOnMapTypeChanged()
         {
             _maptypeChangedInJs = true;
@@ -210,12 +212,19 @@
 
         public async ValueTask HandleOnMoving()
         {
-            _centerChangedInJs = true;
+            await RunTaskInMicrosecondsAsync(async () =>
+            {
+                var center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
+                if (Center.Equals(center))
+                {
+                    return;
+                }
 
-            if (CenterChanged.HasDelegate)
-                await CenterChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter"));
+                _centerChangedInJs = true;
 
-            await OnMoving.InvokeAsync();
+                await CenterChanged.InvokeAsync(center);
+                await OnMoving.InvokeAsync();
+            }, 300, _movingCts.Token);
         }
 
         public async ValueTask HandleOnZoomEnd()
@@ -252,7 +261,6 @@
         private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -381,7 +389,7 @@
             {
                 return;
             }
-            
+
             await _baiduMap.AddOverlayAsync(overlay);
         }
 
