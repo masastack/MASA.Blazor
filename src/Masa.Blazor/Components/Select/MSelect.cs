@@ -990,10 +990,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             i = ComputedItemsIfHideSelected.IndexOf(menuItem);
         }
 
-        if (i > -1)
+        if (i > -1 && MMenu?.ContentElement.TryGetSelector(out var selector) is true)
         {
             await JsInvokeAsync(JsInteropConstants.ScrollToTile,
-                MMenu!.ContentElement.GetSelector(),
+                selector,
                 TilesSelector,
                 i);
         }
