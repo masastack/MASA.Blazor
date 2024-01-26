@@ -3,32 +3,29 @@
 @inherits MDataIterator<TItem>
 @using Masa.Blazor.Components.DataTable
 
-@if (MasaBlazor.Breakpoint.Width > 0)
-{
-    <CascadingValue Value="@(Headers.Any(h => h.Fixed != DataTableFixed.None))"
-                    Name="DataTableHasFixed">
-        <MSimpleTable Height="@Height"
-                      Width="@Width"
-                      FixedHeader="@FixedHeader"
-                      Dense="@Dense"
-                      Class="@CssProvider.GetClass()"
-                      Style="@CssProvider.GetStyle()"
-                      RefBack="@RefBack"
-                      TopContent="@TopContent">
-            <ChildContent>
-                @GenCaption()
-                @GenColgroup()
-                @GenHeaders()
-                @GenBody()
-                @GenFooter()
-            </ChildContent>
-            <BottomContent>
-                @FooterContent
-                @GenDefaultFooter()
-            </BottomContent>
-        </MSimpleTable>
-    </CascadingValue>
-}
+<CascadingValue Value="@(Headers.Any(h => h.Fixed != DataTableFixed.None))"
+                Name="DataTableHasFixed">
+    <MSimpleTable Height="@Height"
+                  Width="@Width"
+                  FixedHeader="@FixedHeader"
+                  Dense="@Dense"
+                  Class="@CssProvider.GetClass()"
+                  Style="@CssProvider.GetStyle()"
+                  RefBack="@RefBack"
+                  TopContent="@TopContent">
+        <ChildContent>
+            @GenCaption()
+            @GenColgroup()
+            @GenHeaders()
+            @GenBody()
+            @GenFooter()
+        </ChildContent>
+        <BottomContent>
+            @FooterContent
+            @GenDefaultFooter()
+        </BottomContent>
+    </MSimpleTable>
+</CascadingValue>
 
 @code {
 
