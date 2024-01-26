@@ -1,0 +1,114 @@
+﻿@page "/home"
+@layout BaseLayout
+@inject NavigationManager NavigationManager
+
+<MMain>
+    <MContainer Class="fill-height">
+        <div style="min-height: 75%; width: 100%">
+            <MTabs Value="@Product" Centered IconsAndText>
+                <MTab Value="@("stack")"
+                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))"
+                      Class="mr-4">
+                    MASA Stack
+                    <MIcon Icon="@("$masaStack")" />
+                </MTab>
+                <MTab Value="@("framework")"
+                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))"
+                      Class="mr-4">
+                    MASA Framework
+                    <MIcon Icon="@("$masaFramework")" />
+                </MTab>
+                <MTab Value="@("blazor")"
+                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "blazor")))">
+                    MASA Blazor
+                    <MIcon Icon="@("$masaBlazor")" />
+                </MTab>
+            </MTabs>
+
+            <MTabsItems Value="@Product" Class="mt-8">
+                <MTabItem Value="@("stack")" Transition="">
+                    <MRow>
+                        <MCol Cols="12" Md="6">
+                            <MCard Outlined>
+                                <MCardTitle>Getting Started</MCardTitle>
+                                <MCardText>
+                                    Getting Started
+                                </MCardText>
+                            </MCard>
+                        </MCol>
+                    </MRow>
+                </MTabItem>
+                <MTabItem Value="@("framework")" Transition="">
+                    <MRow>
+                        <MCol Cols="12" Md="6">
+                            <MCard Outlined>
+                                <MCardTitle>Getting Started</MCardTitle>
+                                <MCardText>
+                                    Getting Started
+                                </MCardText>
+                            </MCard>
+                        </MCol>
+                    </MRow>
+                </MTabItem>
+                <MTabItem Value="@("blazor")" Transition="">
+                    <MRow>
+                        <MCol Cols="12" Md="6">
+                            <MRow>
+                                <MCol Cols="12">
+                                    <MCard Outlined>
+                                        <MCardTitle>Getting Started</MCardTitle>
+                                        <MCardText>
+                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
+                                        </MCardText>
+                                    </MCard>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MCard Outlined>
+                                        <MCardTitle>Icons</MCardTitle>
+                                        <MCardText>
+                                            <DocumentMarkdownIt Source="@_blazorIconIntro"></DocumentMarkdownIt>
+                                            <MIcon Color="secondary">mdi-hand-wave-outline</MIcon>
+                                            <MIcon Color="primary">$masaStack</MIcon>
+                                            <MIcon Color="primary">$masaFramework</MIcon>
+                                            <MIcon Color="primary">$masaBlazor</MIcon>
+                                            <MIcon Color="pink">mdi-human-greeting-variant</MIcon>
+                                        </MCardText>
+                                    </MCard>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MCard Outlined>
+                                        <MCardTitle>Theme</MCardTitle>
+                                        <MCardText>
+                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
+                                        </MCardText>
+                                    </MCard>
+                                </MCol>
+                            </MRow>
+                        </MCol>
+                        <MCol Cols="12" Md="6">
+                            <MRow>
+                                <MCol Cols="12">
+                                    <MCard Outlined Height="@("100%")">
+                                        <MCardTitle>Theme</MCardTitle>
+                                        <MCardText>
+                                            <DocumentMarkdownIt Source="@_blazorThemeIntro"></DocumentMarkdownIt>
+                                        </MCardText>
+                                    </MCard>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MCard Outlined Height="@("100%")">
+                                        <MCardTitle>Getting Started</MCardTitle>
+                                        <MCardText>
+                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
+                                        </MCardText>
+                                    </MCard>
+                                </MCol>
+                            </MRow>
+
+                        </MCol>
+                    </MRow>
+                </MTabItem>
+            </MTabsItems>
+        </div>
+    </MContainer>
+</MMain>
