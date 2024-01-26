@@ -68,6 +68,16 @@ public partial class NotificationsMenu
         _allNotifications =
         [
             new NotificationItem(
+                "v1.3.4 Release",
+                """
+                Highlights:
+                - **ScrollToTarget**: new component that supports automatic scrolling to the specified element and highlighting of the active item.
+                """,
+                NotificationType.Release,
+                "/blazor/getting-started/release-notes?v=v1.3.4",
+                "release notes",
+                new DateOnly(2024, 1, 26)),
+            new NotificationItem(
                 "v1.3.3 Release",
                 """
                 Highlights:
