@@ -749,6 +749,12 @@ app-alert p {
     animation: clip .3s ease-in;
 }
 
+.portal-main .theme--dark.m-tabs > .m-tabs-bar,
+.portal-main .theme--dark.m-tabs-items,
+.portal-main .theme--dark.m-card {
+    background-color: var(--md-sys-color-surface-dark);
+}
+
 @keyframes clip {
     from {
         clip-path: circle(0% at var(--x) var(--y));
@@ -759,10 +765,6 @@ app-alert p {
 }
 
 @media (min-width: 1264px) {
-    .m-main.portal-main:not(.app--sized) { 
-        padding-left: 300px !important;
-    }
-    
     .m-main.doc-main:not(.app--sized) {
         padding-left: 300px !important;
         padding-right: 300px !important;

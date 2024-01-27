@@ -36,6 +36,7 @@
   "breakpoints": "响应式显示",
   "bidirectionality": "双向性(LTR/RTL)",
   "icon-fonts": "图标字体",
+  "utility-classes": "实用类",
   "internationalization": "国际化",
   "auto-match-nav": "导航自动匹配",
   "theme": "主题",
@@ -62,6 +63,7 @@
     "check-upgrade-guide": "查看升级指南"
   },
   "home": "首页",
+  "docs": "文档",
   "annual-service": "企业服务",
   "sponsors": "赞助商",
   "contactus": "联系我们",
@@ -439,13 +441,13 @@
   "view-in-github": "在 Github 上查看",
   "view-source": "查看源码",
   "code-restore": "重置",
-  "code-restoring":"重置中...",
+  "code-restoring": "重置中...",
   "code-copy": "复制代码",
   "code-copying": "复制中...",
   "code-copied": "复制成功",
   "code-run-external": "在 MASA Try 中运行",
   "code-run": "运行",
-  "code-running":"运行中...",
+  "code-running": "运行中...",
   "all-components": {
     "alerts": "Alerts（提示框）向用户传达重要信息",
     "application": "用于轻松修改主题的可选根组件",
@@ -588,11 +590,21 @@
     "released-on": "发布于 {0}",
     "updated-in": "更新于 {0}"
   },
-  "notifications":{
+  "notifications": {
     "viewUnread": "查看未读（{0}）",
     "viewRead": "查看已读（{0}）",
     "done": "全部完成",
     "release-notes": "发行说明",
     "view-details": "查看详情"
+  },
+  "intro": {
+    "blazor": {
+      "getting-started": "要快速入门，可以使用 MASA.Template 模板快速创建项目。",
+      "theme": "轻松地通过编程的方式改变应用程序的颜色。重新构建默认样式表并根据您的特定需求自定义框架的各个方面。在 Material Design 2 颜色规则的基础上，添加了 Material Design 3 中 `On[Rule]` 规则的支持。",
+      "icons": "开箱即用，MASA Blazor 支持5个流行的图标字库： [Material Design Icons](https://materialdesignicons.com/)，[Material Icons](https://fonts.google.com/icons)，[Font Awesome 4](https://fontawesome.com/v4/icons/)，[Font Awesome 5]((https://fontawesome.com/v5/search?m=free))和 [Font Awesome 6](https://fontawesome.com/v6/search?o=r&m=free)",
+      "i18n": "MASA Blazor 支持组件的语言国际化（i18n）。",
+      "utility-classes": "Masa Blazor提供了一组可用于快速构建UI的实用程序类，包括：[Border radius](/blazor/styles-and-animations/border-radius)，[Colors](/blazor/styles-and-animations/color)，[Display helpers](/blazor/styles-and-animations/display-helpers)，[Elevation](/blazor/styles-and-animations/elevation)，[Flex](/blazor/styles-and-animations/flex)，[Float](/blazor/styles-and-animations/floats)，[Overflow](/blazor/styles-and-animations/overflow)，[Spacing](/blazor/styles-and-animations/spacing)，[Text and typography](/blazor/styles-and-animations/text-and-typography)",
+      "components": "MASA Blazor 是一个对移动端友好的组件库，提供了基础组件、预置组件、JS模块和实验性组件。"
+    }
   }
 }

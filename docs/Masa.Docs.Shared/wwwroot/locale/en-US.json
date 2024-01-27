@@ -23,7 +23,7 @@
   "spacing": "Spacing",
   "text-and-typography": "Text and typography",
   "transitions": "Transitions",
-  "ui-components": "Components",
+  "components": "Components",
   "js-modules": "JavaScript modules",
   "intersection-observer": "Intersection observer",
   "labs": "Labs",
@@ -36,6 +36,7 @@
   "breakpoints": "Breakpoints",
   "bidirectionality": "Bidirectionality (LTR/RTL)",
   "icon-fonts": "Icon fonts",
+  "utility-classes": "Utility classes",
   "internationalization": "Internationalization(I18n)",
   "auto-match-nav": "Auto matching navigation",
   "theme": "Theme",
@@ -64,10 +65,10 @@
     "check-upgrade-guide": "Check the upgrade guide"
   },
   "home": "Home",
+  "docs": "Documentation",
   "annual-service": "Enterprise",
   "sponsors": "SPONSORS",
   "contactus": "CONTACT US",
-
   "blog": "MASA Blogs",
   "pro": "MASA Blazor Pro",
   "team": "Team",
@@ -320,12 +321,12 @@
   "view-in-github": "View on Github",
   "view-source": "View source",
   "code-restore": "Restore",
-  "code-restoring":"Restoring...",
+  "code-restoring": "Restoring...",
   "code-copy": "Copy code",
   "code-copying": "Copying...",
   "code-copied": "Copied",
   "code-run": "Run",
-  "code-running":"Running...",
+  "code-running": "Running...",
   "code-run-external": "Run in MASA Try",
   "all-components": {
     "alerts": "Alerts convey important information to the user",
@@ -491,11 +492,21 @@
     "released-on": "Released on {0}",
     "updated-in": "Updated in {0}"
   },
-  "notifications":{
+  "notifications": {
     "viewRead": "View Read({0})",
     "viewUnread": "View unread({0})",
     "done": "All done",
     "release-notes": "Release notes",
     "view-details": "View details"
+  },
+  "intro": {
+    "blazor": {
+      "getting-started": "To get started quickly, you can use the MASA.Template template to quickly create a project.",
+      "theme": "Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs. Add support for `On[Rule]` rules in Material Design 3 based on the color rules of Material Design 2.",
+      "i18n": "MASA Blazor support component language internationalization (i18n).",
+      "icons": "Out of the box, MASA Blazor supports 5 popular icon font libraries: [Material Design Icons](https://materialdesignicons.com/),[Material Icons](https://fonts.google.com/icons),[Font Awesome 4](https://fontawesome.com/v4/icons/)，[Font Awesome 5]((https://fontawesome.com/v5/search?m=free))和 [Font Awesome 6](https://fontawesome.com/v6/search?o=r&m=free)",
+      "utility-classes": "MASA Blazor provides a set of utility classes that can be used to quickly build a UI, including: [Border radius](/blazor/styles-and-animations/border-radius), [Colors](/blazor/styles-and-animations/color), [Display helpers](/blazor/styles-and-animations/display-helpers), [Elevation](/blazor/styles-and-animations/elevation), [Flex](/blazor/styles-and-animations/flex), [Float](/blazor/styles-and-animations/floats), [Overflow](/blazor/styles-and-animations/overflow), [Spacing](/blazor/styles-and-animations/spacing), [Text and typography](/blazor/styles-and-animations/text-and-typography).",
+      "components": "MASA Blazor is a mobile-friendly component library that provides basic components, preset components, JS modules and experimental components."
+    }
   }
 }

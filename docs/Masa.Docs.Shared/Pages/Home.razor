@@ -1,0 +1,58 @@
+﻿@page "/"
+@layout BaseLayout
+@inject NavigationManager NavigationManager
+@inject MasaBlazor MasaBlazor
+@implements IDisposable
+
+<MMain Class="portal-main">
+    <MContainer Style="padding-top: 64px;">
+        <MTabs Value="@Product"
+               Centered="@(!MasaBlazor.Breakpoint.Xs)"
+               FixedTabs="MasaBlazor.Breakpoint.Xs"
+               IconsAndText="@(!MasaBlazor.Breakpoint.Xs)">
+            <MTab Value="@("stack")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))"
+                  Class="mr-4">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Stack")
+                }
+
+                <MIcon Icon="@("$masaStack")" />
+            </MTab>
+            <MTab Value="@("framework")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))"
+                  Class="mr-4">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Framework")
+                }
+
+                <MIcon Icon="@("$masaFramework")" />
+            </MTab>
+            <MTab Value="@("blazor")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "blazor")))">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Blazor")
+                }
+
+                <MIcon Icon="@("$masaBlazor")" />
+            </MTab>
+        </MTabs>
+
+        <MDivider Style="position: relative; margin-top: -1px;" />
+
+        <MTabsItems Value="@Product" Class="mt-8">
+            <MTabItem Value="@("stack")" Transition="">
+                <StackIntro />
+            </MTabItem>
+            <MTabItem Value="@("framework")" Transition="">
+                <FrameworkIntro />
+            </MTabItem>
+            <MTabItem Value="@("blazor")" Transition="">
+                <BlazorIntro />
+            </MTabItem>
+        </MTabsItems>
+    </MContainer>
+</MMain>

@@ -1,0 +1,74 @@
+﻿@inject I18n I18n
+@inject DocService DocService
+
+<MRow>
+    <MCol Cols="12" Md="6" Lg="6" Xl="9">
+        <MRow>
+            <MCol Cols="12">
+                <IntroCard TitlePath="getting-started"
+                           MarkdownSource="@gettingStarted"
+                           OpenInNewUrl="/framework/getting-started/overview">
+                    <MButton Small Color="secondary" Outlined Href="/framework/getting-started/web-project">
+                        入门教程
+                        <MIcon Small Right>mdi-open-in-new</MIcon>
+                    </MButton>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard TitlePath="tutorial"
+                           MarkdownSource="@tutorial"
+                           OpenInNewUrl="/framework/tutorial/overview">
+                    <Markup Code="dotnet new install MASA.Template" Class="mb-4" Language="bash" />
+                    <Markup Code="dotnet new masafx -n MASA.EShop --web None" Language="bash" />
+                </IntroCard>
+            </MCol>
+        </MRow>
+
+    </MCol>
+
+    <MCol Cols="12" Md="6" Lg="6" Xl="3">
+        <MRow>
+            <MCol Cols="12">
+                <IntroCard TitlePath="building-blocks"
+                           OpenInNewUrl="/framework/building-blocks/auto-complete/overview">
+                    @GenIntroCardContent(_buildingBlocks)
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard TitlePath="utils"
+                           OpenInNewUrl="/framework/utils/auto-complete/overview">
+                    @GenIntroCardContent(_utils)
+                </IntroCard>
+            </MCol>
+        </MRow>
+
+    </MCol>
+</MRow>
+
+@code {
+
+    private RenderFragment GenIntroCardContent(IEnumerable<(string? Title, string? Href)>? items) => __builder =>
+    {
+        @if (items is null)
+        {
+            <MSkeletonLoader Type="paragraph" />
+        }
+        else
+        {
+            <div class="d-flex flex-wrap">
+                @foreach (var (title, href) in items)
+                {
+                    <MButton Small
+                             Color="secondary"
+                             Outlined
+                             Href="@href"
+                             Class="mr-2 mb-2">
+                        @I18n.T(title)
+                        <MIcon Small Right>mdi-open-in-new</MIcon>
+                    </MButton>
+                }
+            </div>
+        }
+    };
+
+}
