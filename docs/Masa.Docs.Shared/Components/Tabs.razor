@@ -61,11 +61,13 @@
     private string? _prevProject;
     private List<DefaultItem> _internalMenus = new();
     private List<DefaultItem> _externalMenus = new();
+    private string? _prevCulture;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        _prevCulture = Culture;
         MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
     }
 
@@ -91,6 +93,14 @@
         }
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (_prevCulture != Culture)
+        {
+            _prevCulture = Culture;
+            _tabs?.CallSlider();
+        }
+    }
 
     public async ValueTask DisposeAsync()
     {

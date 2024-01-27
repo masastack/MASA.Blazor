@@ -1,132 +1,58 @@
-﻿@page "/home"
+﻿@page "/"
 @layout BaseLayout
 @inject NavigationManager NavigationManager
 @inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <MMain Class="portal-main">
-    <MContainer Class="fill-height">
-        <div style="min-height: 75%; width: 100%">
-            <MTabs Value="@Product" Centered IconsAndText>
-                <MTab Value="@("stack")"
-                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))"
-                      Class="mr-4">
-                    MASA Stack
-                    <MIcon Icon="@("$masaStack")" />
-                </MTab>
-                <MTab Value="@("framework")"
-                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))"
-                      Class="mr-4">
-                    MASA Framework
-                    <MIcon Icon="@("$masaFramework")" />
-                </MTab>
-                <MTab Value="@("blazor")"
-                      OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "blazor")))">
-                    MASA Blazor
-                    <MIcon Icon="@("$masaBlazor")" />
-                </MTab>
-            </MTabs>
+    <MContainer Style="padding-top: 64px;">
+        <MTabs Value="@Product"
+               Centered="@(!MasaBlazor.Breakpoint.Xs)"
+               FixedTabs="MasaBlazor.Breakpoint.Xs"
+               IconsAndText="@(!MasaBlazor.Breakpoint.Xs)">
+            <MTab Value="@("stack")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))"
+                  Class="mr-4">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Stack")
+                }
 
-            <MDivider Style="position: relative; margin-top: -2px;" />
+                <MIcon Icon="@("$masaStack")" />
+            </MTab>
+            <MTab Value="@("framework")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))"
+                  Class="mr-4">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Framework")
+                }
 
-            <MTabsItems Value="@Product" Class="mt-8">
-                <MTabItem Value="@("stack")" Transition="">
-                    <MRow>
-                        <MCol Cols="12" Md="6">
-                            <MCard Outlined>
-                                <MCardTitle>Getting Started</MCardTitle>
-                                <MCardText>
-                                    Getting Started
-                                </MCardText>
-                            </MCard>
-                        </MCol>
-                    </MRow>
-                </MTabItem>
-                <MTabItem Value="@("framework")" Transition="">
-                    <MRow>
-                        <MCol Cols="12" Md="6">
-                            <MCard Outlined>
-                                <MCardTitle><a>Getting Started</a></MCardTitle>
-                                <MCardText>
-                                    Getting Started
-                                </MCardText>
-                            </MCard>
-                        </MCol>
-                    </MRow>
-                </MTabItem>
-                <MTabItem Value="@("blazor")" Transition="">
-                    <MRow>
-                        <MCol Cols="12" Md="6">
-                            <MRow>
-                                <MCol Cols="12">
-                                    <MCard Outlined>
-                                        <MCardTitle Class="d-flex align-start justify-space-between">
-                                            Getting Started
-                                            <MButton Href="/blazor/getting-started/installation" Small Icon Text>
-                                                <MIcon Small>
-                                                    mdi-open-in-new
-                                                </MIcon>
-                                            </MButton>
-                                        </MCardTitle>
-                                        <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorGettingStartedIntro"></DocumentMarkdownIt>
-                                        </MCardText>
-                                    </MCard>
-                                </MCol>
-                                <MCol Cols="12">
-                                    <MCard Outlined>
-                                        <MCardTitle>Icons</MCardTitle>
-                                        <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorIconIntro"></DocumentMarkdownIt>
-                                            <MIcon Color="secondary">mdi-code-json</MIcon>
-                                            <MIcon Color="primary">$masaStack</MIcon>
-                                            <MIcon Color="primary">$masaFramework</MIcon>
-                                            <MIcon Color="primary">$masaBlazor</MIcon>
-                                            <MIcon Color="pink lighten-3">mdi-human-greeting-variant</MIcon>
-                                        </MCardText>
-                                    </MCard>
-                                </MCol>
-                                <MCol Cols="12">
-                                    <MCard Outlined>
-                                        <MCardTitle>Uitility Classes</MCardTitle>
-                                        <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorUtilityClassesIntro"></DocumentMarkdownIt>
-                                        </MCardText>
-                                    </MCard>
-                                </MCol>
-                            </MRow>
-                        </MCol>
-                        <MCol Cols="12" Md="6">
-                            <MRow>
-                                <MCol Cols="12">
-                                    <MCard Outlined Height="@("100%")">
-                                        <MCardTitle>Theme</MCardTitle>
-                                        <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorThemeIntro"></DocumentMarkdownIt>
-                                            <MSwitch Value="@MasaBlazor.Theme.Dark"
-                                                     ValueChanged="val => MasaBlazor.ToggleTheme()"
-                                                     TValue="bool"
-                                                     LeftText="L"
-                                                     RightText="D"
-                                                     Color="primary"
-                                                     HideDetails="@true">
-                                            </MSwitch>
-                                        </MCardText>
-                                    </MCard>
-                                </MCol>
-                                <MCol Cols="12">
-                                    <MCard Outlined Height="@("100%")">
-                                        <MCardTitle>Components</MCardTitle>
-                                        <MCardText>
-                                            <DocumentMarkdownIt Source="@_blazorComponentsIntro"></DocumentMarkdownIt>
-                                        </MCardText>
-                                    </MCard>
-                                </MCol>
-                            </MRow>
+                <MIcon Icon="@("$masaFramework")" />
+            </MTab>
+            <MTab Value="@("blazor")"
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "blazor")))">
+                @if (!MasaBlazor.Breakpoint.Xs)
+                {
+                    @("MASA Blazor")
+                }
 
-                        </MCol>
-                    </MRow>
-                </MTabItem>
-            </MTabsItems>
-        </div>
+                <MIcon Icon="@("$masaBlazor")" />
+            </MTab>
+        </MTabs>
+
+        <MDivider Style="position: relative; margin-top: -1px;" />
+
+        <MTabsItems Value="@Product" Class="mt-8">
+            <MTabItem Value="@("stack")" Transition="">
+                <StackIntro />
+            </MTabItem>
+            <MTabItem Value="@("framework")" Transition="">
+                <FrameworkIntro />
+            </MTabItem>
+            <MTabItem Value="@("blazor")" Transition="">
+                <BlazorIntro />
+            </MTabItem>
+        </MTabsItems>
     </MContainer>
 </MMain>
