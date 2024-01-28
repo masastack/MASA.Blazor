@@ -57,8 +57,6 @@ related:
 
 ### 其他
 
-#### 自定义文本
-
-**MSwitch** 可以自定义文本
+#### 自定义文本或图标
 
 <masa-example file="Examples.components.switches.CustomText"></masa-example>

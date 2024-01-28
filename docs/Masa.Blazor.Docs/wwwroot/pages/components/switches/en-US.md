@@ -57,9 +57,6 @@ Switch labels can be defined in **LabelContent**.
 
 ### Misc
 
-#### CustomText
-
-switch customize show text
+#### Custom text or icon
 
 <masa-example file="Examples.components.switches.CustomText"></masa-example>
-
