@@ -5,7 +5,7 @@
     <MCol Cols="12" Md="6" Lg="6" Xl="9">
         <MRow>
             <MCol Cols="12">
-                <IntroCard TitlePath="getting-started"
+                <IntroCard Title="@I18n.T("getting-started")"
                            MarkdownSource="@gettingStarted"
                            OpenInNewUrl="/framework/getting-started/overview">
                     <MButton Small Color="secondary" Outlined Href="/framework/getting-started/web-project">
@@ -15,7 +15,7 @@
                 </IntroCard>
             </MCol>
             <MCol Cols="12">
-                <IntroCard TitlePath="tutorial"
+                <IntroCard Title="@I18n.T("tutorial")"
                            MarkdownSource="@tutorial"
                            OpenInNewUrl="/framework/tutorial/overview">
                     <Markup Code="dotnet new install MASA.Template" Class="mb-4" Language="bash" />
@@ -29,13 +29,13 @@
     <MCol Cols="12" Md="6" Lg="6" Xl="3">
         <MRow>
             <MCol Cols="12">
-                <IntroCard TitlePath="building-blocks"
+                <IntroCard Title="@I18n.T("building-blocks")"
                            OpenInNewUrl="/framework/building-blocks/auto-complete/overview">
                     @GenIntroCardContent(_buildingBlocks)
                 </IntroCard>
             </MCol>
             <MCol Cols="12">
-                <IntroCard TitlePath="utils"
+                <IntroCard Title="@I18n.T("utils")"
                            OpenInNewUrl="/framework/utils/auto-complete/overview">
                     @GenIntroCardContent(_utils)
                 </IntroCard>

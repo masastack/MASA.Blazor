@@ -1,8 +1,6 @@
-﻿@inject I18n I18n
-
-<MCard Outlined>
+﻿<MCard Outlined>
     <MCardTitle Class="d-flex align-start justify-space-between">
-        @I18n.T(TitlePath)
+        @Title
         <MButton Href="@OpenInNewUrl" Small Icon Text>
             <MIcon Small>
                 mdi-arrow-expand
@@ -10,11 +8,7 @@
         </MButton>
     </MCardTitle>
     <MCardText>
-        @if (MarkdownSourcePath is not null)
-        {
-            <DocumentMarkdownIt Source="@I18n.T(MarkdownSourcePath)" />
-        }
-        else if (MarkdownSource is not null)
+        @if (MarkdownSource is not null)
         {
             <DocumentMarkdownIt Source="@MarkdownSource" />
         }
@@ -27,11 +21,9 @@
 
     [CascadingParameter(Name = "Culture")] private string? Culture { get; set; }
 
-    [Parameter] [EditorRequired] public string TitlePath { get; set; } = default!;
+    [Parameter] [EditorRequired] public string Title { get; set; } = default!;
 
     [Parameter] [EditorRequired] public string OpenInNewUrl { get; set; } = default!;
-
-    [Parameter] public string? MarkdownSourcePath { get; set; }
 
     [Parameter] public string? MarkdownSource { get; set; }
 
