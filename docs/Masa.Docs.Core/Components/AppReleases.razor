@@ -14,7 +14,7 @@
                        TValue="int?"
                        ItemValue="r => r.Id"
                        ItemText="r => r.Name"
-                       Class="my-8"
+                       Class="mb-4"
                        HideDetails="true"
                        Dense
                        Flat
@@ -68,7 +68,7 @@
 
                 <MDivider />
 
-                <div class="pa-4">
+                <div class="pa-4" style="@MdStyle">
                     <MMarkdownIt Source="@_selected.Body"
                                  Scope="desc"
                                  Class="release-note"
@@ -85,7 +85,7 @@ else
 }
 
 @code {
-    
+
     [SupplyParameterFromQuery(Name = "v")]
     [Parameter] public string? Version { get; set; }
 
@@ -101,6 +101,9 @@ else
     [Parameter]
     public bool Dark { get; set; }
 
+    [Parameter]
+    public bool IsIntro { get; set; }
+
     private bool _loading = true;
     private int? _search;
     private Release? _selected;
@@ -111,6 +114,8 @@ else
 
     private bool HasOwnerAndRepo => !string.IsNullOrWhiteSpace(Owner) && !string.IsNullOrWhiteSpace(Repo);
 
+    private string? MdStyle => IsIntro ? "max-height:400px; overflow-y: auto" : null;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -118,8 +123,7 @@ else
         if (firstRender && HasOwnerAndRepo)
         {
             _releases = (await GithubService.FetchReleasesAsync(Owner!, Repo!)).ToList();
-            _selected = ComputedReleases.FirstOrDefault(u => u.Name == Version);
-            _search = _selected?.Id;
+            UpdateSelected();
             _loading = false;
 
             StateHasChanged();
@@ -130,9 +134,14 @@ else
     {
         if (HasOwnerAndRepo)
         {
-            _selected = ComputedReleases.FirstOrDefault(u => u.Name == Version);
-            _search = _selected?.Id;
+            UpdateSelected();
         }
+    }
+
+    private void UpdateSelected()
+    {
+        _selected = ComputedReleases.FirstOrDefault(u => u.Name == Version) ?? ComputedReleases.FirstOrDefault();
+        _search = _selected?.Id;
     }
 
 }

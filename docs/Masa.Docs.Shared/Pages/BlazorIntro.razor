@@ -30,10 +30,6 @@
                            MarkdownSource="@I18n.T("intro.blazor.utility-classes")">
                 </IntroCard>
             </MCol>
-        </MRow>
-    </MCol>
-    <MCol Cols="12" Md="6">
-        <MRow>
             <MCol Cols="12">
                 <IntroCard Title="@I18n.T("i18n")"
                            OpenInNewUrl="/blazor/features/internationalization"
@@ -64,6 +60,10 @@
                     </MSwitch>
                 </IntroCard>
             </MCol>
+        </MRow>
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <MRow>
             <MCol Cols="12">
                 <IntroCard Title="@I18n.T("components")"
                            OpenInNewUrl="/blazor/components/alerts"
@@ -83,6 +83,12 @@
                             </MForm>
                         </MCardText>
                     </MCard>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("release-notes")"
+                           OpenInNewUrl="/blazor/getting-started/release-notes">
+                    <AppReleases Owner="masastack" Repo="MASA.Blazor" IsIntro />
                 </IntroCard>
             </MCol>
         </MRow>
