@@ -5,7 +5,7 @@
     <MCol Cols="12" Md="6">
         <MRow>
             <MCol Cols="12">
-                <IntroCard TitlePath="installation"
+                <IntroCard Title="@I18n.T("installation")"
                            MarkdownSource="@installation"
                            OpenInNewUrl="/stack/masa-stack-1.0/installation/docker-compose">
                 </IntroCard>
@@ -45,7 +45,7 @@
 
     private RenderFragment GenProductCard(ProductIntro product) => __builder =>
     {
-        <IntroCard TitlePath="@product.Title"
+        <IntroCard Title="@I18n.T(product.Title)"
                    MarkdownSource="@product.Intro"
                    OpenInNewUrl="@product.Href">
         </IntroCard>

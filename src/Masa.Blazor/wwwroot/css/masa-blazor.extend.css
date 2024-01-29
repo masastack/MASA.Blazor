@@ -1440,3 +1440,9 @@ a.m-pagination__item {
 .m-xgplayer.xgplayer .xgplayer-controls {
     z-index: 4;
 }
+
+/* switch left and right icon */
+.m-input--switch--text .m-input--switch__left .m-icon,
+.m-input--switch--text .m-input--switch__right .m-icon {
+    color: inherit;
+}

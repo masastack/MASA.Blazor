@@ -1,5 +1,17 @@
-﻿<div>
-    <MSwitch @bind-Value="_show" LeftText="EN" RightText="中" Color="black" TrackColor="#E5E6EB"></MSwitch>
+﻿<div class="d-flex justify-space-around">
+    <MSwitch @bind-Value="_show"
+             LeftText="EN"
+             RightText="中"
+             Color="black"
+             TrackColor="#E5E6EB">
+    </MSwitch>
+
+    <MSwitch @bind-Value="_show"
+             LeftIcon="mdi-alphabetical-variant"
+             RightIcon="mdi-ideogram-cjk-variant"
+             Color="black"
+             TrackColor="#E5E6EB">
+    </MSwitch>
 </div>
 
 @code {

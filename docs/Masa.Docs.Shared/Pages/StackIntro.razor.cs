@@ -2,6 +2,9 @@
 
 public partial class StackIntro
 {
+    [CascadingParameter(Name = "Culture")]
+    private string? Culture { get; set; }
+
     private static string installation =
         """
         - Docker compose

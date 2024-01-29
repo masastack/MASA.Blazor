@@ -6,17 +6,17 @@
     <MCol Cols="12" Md="6">
         <MRow>
             <MCol Cols="12">
-                <IntroCard TitlePath="getting-started"
+                <IntroCard Title="@I18n.T("getting-started")"
                            OpenInNewUrl="/blazor/getting-started/installation"
-                           MarkdownSourcePath="intro.blazor.getting-started">
+                           MarkdownSource="@I18n.T("intro.blazor.getting-started")">
                     <Markup Code="dotnet new install MASA.Template" Class="mb-4" Language="bash"></Markup>
                     <Markup Code="dotnet new blazor -o BlazorApp -ai" Language="bash"></Markup>
                 </IntroCard>
             </MCol>
             <MCol Cols="12">
-                <IntroCard TitlePath="icon-fonts"
+                <IntroCard Title="@I18n.T("icon-fonts")"
                            OpenInNewUrl="/blazor/features/icon-fonts"
-                           MarkdownSourcePath="intro.blazor.icons">
+                           MarkdownSource="@I18n.T("intro.blazor.icons")">
                     <MIcon Color="secondary">mdi-code-json</MIcon>
                     <MIcon Color="primary">$masaStack</MIcon>
                     <MIcon Color="primary">$masaFramework</MIcon>
@@ -25,9 +25,39 @@
                 </IntroCard>
             </MCol>
             <MCol Cols="12">
-                <IntroCard TitlePath="utility-classes"
+                <IntroCard Title="@I18n.T("utility-classes")"
                            OpenInNewUrl="/blazor/styles-and-animations/border-radius"
-                           MarkdownSourcePath="intro.blazor.utility-classes">
+                           MarkdownSource="@I18n.T("intro.blazor.utility-classes")">
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("i18n")"
+                           OpenInNewUrl="/blazor/features/internationalization"
+                           MarkdownSource="@I18n.T("intro.blazor.i18n")">
+                    <MSwitch Value="Culture"
+                             ValueChanged="CultureChange"
+                             TValue="string"
+                             TrueValue="@("CN")"
+                             FalseValue="@("EN")"
+                             LeftIcon="mdi-alphabetical-variant"
+                             RightIcon="mdi-ideogram-cjk-variant"
+                             Color="primary"
+                             HideDetails="@true">
+                    </MSwitch>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("theme")"
+                           OpenInNewUrl="/blazor/features/theme"
+                           MarkdownSource="@I18n.T("intro.blazor.theme")">
+                    <MSwitch Value="@MasaBlazor.Theme.Dark"
+                             ValueChanged="val => MasaBlazor.ToggleTheme()"
+                             TValue="bool"
+                             LeftIcon="mdi-lightbulb-on-outline"
+                             RightIcon="mdi-lightbulb-off-outline"
+                             Color="primary"
+                             HideDetails="@true">
+                    </MSwitch>
                 </IntroCard>
             </MCol>
         </MRow>
@@ -35,39 +65,9 @@
     <MCol Cols="12" Md="6">
         <MRow>
             <MCol Cols="12">
-                <IntroCard TitlePath="i18n"
-                           OpenInNewUrl="/blazor/features/internationalization"
-                           MarkdownSourcePath="intro.blazor.i18n">
-                    <MSwitch Value="Culture"
-                             ValueChanged="CultureChange"
-                             TValue="string"
-                             TrueValue="@("CN")"
-                             FalseValue="@("EN")"
-                             LeftText="EN"
-                             RightText="CN"
-                             Color="primary"
-                             HideDetails="@true">
-                    </MSwitch>
-                </IntroCard>
-            </MCol>
-            <MCol Cols="12">
-                <IntroCard TitlePath="theme"
-                           OpenInNewUrl="/blazor/features/theme"
-                           MarkdownSourcePath="intro.blazor.theme">
-                    <MSwitch Value="@MasaBlazor.Theme.Dark"
-                             ValueChanged="val => MasaBlazor.ToggleTheme()"
-                             TValue="bool"
-                             LeftText="L"
-                             RightText="D"
-                             Color="primary"
-                             HideDetails="@true">
-                    </MSwitch>
-                </IntroCard>
-            </MCol>
-            <MCol Cols="12">
-                <IntroCard TitlePath="components"
+                <IntroCard Title="@I18n.T("components")"
                            OpenInNewUrl="/blazor/components/alerts"
-                           MarkdownSourcePath="intro.blazor.components">
+                           MarkdownSource="@I18n.T("intro.blazor.components")">
                     <MCard Outlined>
                         <MCardText>
                             <MForm @ref="_form">
@@ -83,6 +83,12 @@
                             </MForm>
                         </MCardText>
                     </MCard>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("release-notes")"
+                           OpenInNewUrl="/blazor/getting-started/release-notes">
+                    <AppReleases2 Owner="masastack" Repo="MASA.Blazor" IsIntro Version="@Version" />
                 </IntroCard>
             </MCol>
         </MRow>

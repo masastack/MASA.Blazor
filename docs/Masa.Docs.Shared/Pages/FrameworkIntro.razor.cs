@@ -2,6 +2,9 @@
 
 public partial class FrameworkIntro
 {
+    [CascadingParameter(Name = "Culture")]
+    private string? Culture { get; set; }
+    
     IEnumerable<(string? Title, string? Href)>? _buildingBlocks;
     IEnumerable<(string? Title, string? Href)>? _utils;
 
