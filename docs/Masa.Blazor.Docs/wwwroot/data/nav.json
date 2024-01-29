@@ -128,7 +128,10 @@
           "range-sliders",
           "selects",
           "sliders",
-          "switches",
+          {
+            "title": "switches",
+            "state": "update"
+          },
           "textareas",
           "text-fields"
         ]

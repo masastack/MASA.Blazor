@@ -57,6 +57,6 @@ related:
 
 ### 其他
 
-#### 自定义文本或图标
+#### 自定义文本或图标 {updated-in=v1.4.0}
 
 <masa-example file="Examples.components.switches.CustomText"></masa-example>

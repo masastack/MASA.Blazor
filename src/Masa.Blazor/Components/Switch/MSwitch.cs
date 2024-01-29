@@ -15,13 +15,13 @@
         [Parameter]
         public string? LeftText { get; set; }
 
-        [Parameter]
+        [Parameter] [MasaApiParameter(ReleasedOn = "v1.4.0")]
         public string? LeftIcon { get; set; }
 
         [Parameter]
         public string? RightText { get; set; }
 
-        [Parameter]
+        [Parameter] [MasaApiParameter(ReleasedOn = "v1.4.0")]
         public string? RightIcon { get; set; }
 
         [Parameter]

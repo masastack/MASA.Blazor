@@ -8,7 +8,10 @@ public partial class Home : ComponentBase
     [Parameter]
     [SupplyParameterFromQuery]
     public string Product { get; set; } = "stack";
-
+    
+    [SupplyParameterFromQuery(Name = "v")]
+    [Parameter] public string? Version { get; set; }
+    
     private bool _prevXs;
 
     protected override void OnInitialized()

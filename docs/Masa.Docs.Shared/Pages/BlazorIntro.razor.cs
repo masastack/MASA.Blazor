@@ -7,6 +7,8 @@ public partial class BlazorIntro
     [CascadingParameter(Name = "Culture")]
     private string? AppCulture { get; set; }
 
+    [Parameter] public string? Version { get; set; }
+
     private string? Name { get; set; }
 
     private string? Password { get; set; }
