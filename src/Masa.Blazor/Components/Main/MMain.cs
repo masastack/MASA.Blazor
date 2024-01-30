@@ -65,10 +65,10 @@ public class MMain : BMain
             .Element("wrap");
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
         MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
 
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 }

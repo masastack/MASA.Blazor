@@ -222,10 +222,10 @@ namespace Masa.Blazor
                 MasaBlazor.Application.Footer = 0;
         }
 
-        protected override ValueTask DisposeAsync(bool disposing)
+        protected override ValueTask DisposeAsyncCore()
         {
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-            return base.DisposeAsync(disposing);
+            return base.DisposeAsyncCore();
         }
     }
 }
