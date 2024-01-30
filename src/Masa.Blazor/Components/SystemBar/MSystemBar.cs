@@ -134,10 +134,10 @@
             MasaBlazor.Application.Bar = 0;
         }
 
-        protected override ValueTask DisposeAsync(bool disposing)
+        protected override ValueTask DisposeAsyncCore()
         {
             RemoveApplication();
-            return base.DisposeAsync(disposing);
+            return base.DisposeAsyncCore();
         }
     }
 }

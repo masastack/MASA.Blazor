@@ -211,7 +211,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async ValueTask DisposeAsync(bool disposing)
+        protected override async ValueTask DisposeAsyncCore()
         {
             _objRef?.Dispose();
             try
@@ -224,7 +224,7 @@ namespace Masa.Blazor
                 // ignored
             }
 
-            await base.DisposeAsync(disposing);
+            await base.DisposeAsyncCore();
         }
     }
 }

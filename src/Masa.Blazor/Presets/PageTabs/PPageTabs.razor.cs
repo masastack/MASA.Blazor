@@ -417,7 +417,7 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.NavigateTo(nextPath);
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
         if (PageTabsProvider != null)
         {
@@ -426,6 +426,6 @@ public partial class PPageTabs : PatternPathComponentBase
 
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
 
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 }

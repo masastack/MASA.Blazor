@@ -254,7 +254,7 @@
             base.OnParametersSet();
         }
 
-        protected override async ValueTask DisposeAsync(bool disposing)
+        protected override async ValueTask DisposeAsyncCore()
         {
             _dotNetHelper?.Dispose();
 
@@ -268,7 +268,7 @@
                 // ignored
             }
 
-            await base.DisposeAsync(disposing);
+            await base.DisposeAsyncCore();
         }
     }
 }

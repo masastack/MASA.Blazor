@@ -75,10 +75,10 @@
                 .Apply<BIcon, MIcon>();
         }
 
-        protected override ValueTask DisposeAsync(bool disposing)
+        protected override ValueTask DisposeAsyncCore()
         {
             MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
-            return base.DisposeAsync(disposing);
+            return base.DisposeAsyncCore();
         } 
     }
 }

@@ -29,7 +29,7 @@ public class GridstackJSModule : JSModule
         Resize?.Invoke(this, args);
     }
 
-    protected override ValueTask DisposeAsync()
+    protected override ValueTask DisposeAsyncCore()
     {
         _dotNetObjectReference.Dispose();
         return ValueTask.CompletedTask;

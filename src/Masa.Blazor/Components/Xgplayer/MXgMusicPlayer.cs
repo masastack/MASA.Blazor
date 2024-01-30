@@ -294,7 +294,7 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
         return IsZhHant(culture.Parent);
     }
 
-    protected override async ValueTask DisposeAsync(bool disposing)
+    protected override async ValueTask DisposeAsyncCore()
     {
         if (XgplayerJSObjectReference != null)
         {

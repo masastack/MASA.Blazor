@@ -178,7 +178,7 @@ public partial class PPageContainer : PatternPathComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
 
         if (PageTabs != null)
@@ -197,6 +197,6 @@ public partial class PPageContainer : PatternPathComponentBase
 
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
 
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 }

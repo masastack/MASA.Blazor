@@ -61,7 +61,7 @@ public partial class EnqueuedSnackbars : BComponentBase
         await Task.CompletedTask;
     }
 
-    protected override async ValueTask DisposeAsync(bool disposing)
+    protected override async ValueTask DisposeAsyncCore()
     {
         if (_enqueuedSnackbars != null)
         {
@@ -73,6 +73,6 @@ public partial class EnqueuedSnackbars : BComponentBase
             PopupService.SnackbarOpen -= OnSnackbarOpenAsync;
         }
 
-        await base.DisposeAsync(disposing);
+        await base.DisposeAsyncCore();
     }
 }

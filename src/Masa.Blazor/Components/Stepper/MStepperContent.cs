@@ -200,7 +200,7 @@ public partial class MStepperContent : BStepperContent
         return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, Ref, identifier);
     }
     
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
         Stepper?.UnRegisterContent(this);
 
@@ -216,7 +216,7 @@ public partial class MStepperContent : BStepperContent
             }
         }
 
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 
     private class StepperTransitionEventArgs
