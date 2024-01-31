@@ -208,6 +208,13 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
             Offset);
     }
 
+    /// <summary>
+    /// Retry to observe targets.
+    /// </summary>
+    [MasaApiPublicMethod]
+    public void RetryObserveTargets()
+        => Targets.ForEach(target => _scrollToTargetJSObjectReference?.ObserveAsync(target));
+
     public async ValueTask DisposeAsync()
     {
         try
