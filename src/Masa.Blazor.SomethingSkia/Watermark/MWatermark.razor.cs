@@ -255,9 +255,9 @@ public partial class MWatermark : BDomComponentBase
         return Convert.ToBase64String(imageBytes);
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
         _originalBitmap?.Dispose();
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 }

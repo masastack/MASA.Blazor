@@ -298,10 +298,10 @@ public partial class Index : NextTickComponentBase
         _newScriptContent = string.Empty;
     }
 
-    protected override ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
         _objRef?.Dispose();
-        return base.DisposeAsync(disposing);
+        return base.DisposeAsyncCore();
     }
 
     [GeneratedRegex("(<script(.*?)>)(.|\n)*?(</script>)")]
