@@ -40,6 +40,8 @@
     private async Task OnAfterRendered()
     {
         await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", IsDark);
+
+        ScrollToTargetComp?.RetryObserveTargets();
     }
 
 }
