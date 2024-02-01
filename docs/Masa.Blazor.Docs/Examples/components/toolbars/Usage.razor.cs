@@ -24,7 +24,7 @@
 
         protected override RenderFragment GenChildContent() => builder =>
         {
-            builder.OpenComponent<BAppBarNavIcon>(0);
+            builder.OpenComponent<MAppBarNavIcon>(0);
             builder.CloseComponent();
         };
 

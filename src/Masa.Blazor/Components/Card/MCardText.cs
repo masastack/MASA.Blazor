@@ -1,21 +1,14 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MCardText : Container
 {
-    public partial class MCardText : BCardText
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+
+    protected override string ClassName => "m-card__text";
+
+    protected override void SetComponentCss()
     {
-        [CascadingParameter(Name = "IsDark")]
-        public bool CascadingIsDark { get; set; }
-
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
-
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-card__text")
-                        .AddTheme(CascadingIsDark, isIndependent: false);
-                });
-        }
+        base.SetComponentCss();
+        CssProvider.Merge(css => { css.AddTheme(CascadingIsDark, isIndependent: false); });
     }
 }

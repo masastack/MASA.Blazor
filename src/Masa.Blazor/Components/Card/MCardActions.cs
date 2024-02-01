@@ -1,17 +1,6 @@
-﻿namespace Masa.Blazor
-{
-    public partial class MCardActions : BCardActions
-    {
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
+﻿namespace Masa.Blazor;
 
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-card__actions");
-                });
-        }
-    }
+public class MCardActions : Container
+{
+    protected override string ClassName => "m-card__actions";
 }

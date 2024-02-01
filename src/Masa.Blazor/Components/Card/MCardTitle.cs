@@ -1,17 +1,6 @@
-﻿namespace Masa.Blazor
-{
-    public partial class MCardTitle : BCardTitle
-    {
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
+﻿namespace Masa.Blazor;
 
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-card__title");
-                });
-        }
-    }
+public class MCardTitle : Container
+{
+    protected override string ClassName => "m-card__title";
 }
