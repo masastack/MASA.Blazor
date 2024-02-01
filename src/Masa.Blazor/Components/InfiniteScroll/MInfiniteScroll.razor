@@ -1,0 +1,74 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+@code {
+
+    RenderFragment GenEmpty() => __builder =>
+    {
+        if (_loadStatus == InfiniteScrollLoadStatus.Empty)
+        {
+            @(EmptyContent ?? DefaultEmpty)
+        }
+    };
+
+    RenderFragment DefaultEmpty => @<span>@EmptyText</span>;
+
+    RenderFragment DefaultLoading => __builder =>
+    {
+        <span>@LoadingText</span>
+        <MProgressCircular Indeterminate
+                           Size="24"
+                           Color="@Color"
+                           Class="m-infinite-scroll__loader"/>
+    };
+
+    RenderFragment DefaultError => __builder =>
+    {
+        <span>@ErrorText</span>
+        <MButton OnClick="@DoLoadMore" Color="@Color"
+                 Class="m-infinite-scroll__retry"
+                 Icon
+                 Text>
+            <MIcon>$retry</MIcon>
+        </MButton>
+    };
+
+    RenderFragment DefaultLoadMore => __builder =>
+    {
+        <MButton OnClick="@DoLoadMore"
+                 Color="@Color"
+                 Class="m-infinite-scroll__load-more"
+                 Outlined>
+            @LoadMoreText
+        </MButton>
+    };
+
+}
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     @ref="@Ref">
+    @if (ChildContent != null)
+    {
+        @ChildContent((_loadStatus, CreateEventCallback(DoLoadMore)))
+    }
+    else
+    {
+        if (_loadStatus == InfiniteScrollLoadStatus.Empty)
+        {
+            @(EmptyContent ?? DefaultEmpty)
+        }
+        else if (_loadStatus == InfiniteScrollLoadStatus.Loading)
+        {
+            @(LoadingContent ?? DefaultLoading)
+        }
+        else if (_loadStatus == InfiniteScrollLoadStatus.Error)
+        {
+            @(ErrorContent?.Invoke(DoLoadMore) ?? DefaultError)
+        }
+        else
+        {
+            @(LoadMoreContent?.Invoke(DoLoadMore) ?? DefaultLoadMore)
+        }
+    }
+</div>
