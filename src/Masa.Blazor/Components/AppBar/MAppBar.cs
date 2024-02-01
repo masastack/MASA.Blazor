@@ -281,9 +281,9 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void SetComponentClass()
+        protected override void SetComponentCss()
         {
-            base.SetComponentClass();
+            base.SetComponentCss();
 
             if (InvertedScroll)
             {

@@ -3,6 +3,7 @@ global using BlazorComponent.I18n;
 global using BlazorComponent.JSInterop;
 global using BlazorComponent.Attributes;
 global using BlazorComponent.Web;
+global using Masa.Blazor.Core;
 global using Masa.Blazor.Presets;
 global using Masa.Blazor.Services.Internals;
 global using Microsoft.AspNetCore.Components;

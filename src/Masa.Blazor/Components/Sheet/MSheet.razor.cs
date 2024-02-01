@@ -1,11 +1,47 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MSheet : BSheet, ISheet
+    public partial class MSheet : BDomComponentBase
     {
 #if NET8_0_OR_GREATER
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 #endif
-        
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
+        [Parameter]
+        [MasaApiParameter("div")]
+        public virtual string Tag { get; set; } = "div";
+
+        [Parameter]
+        public bool? Show { get; set; }
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter(Name = "IsDark")]
+        public bool CascadingIsDark { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return CascadingIsDark;
+            }
+        }
+
         [Parameter]
         public bool Outlined { get; set; }
 
@@ -56,7 +92,7 @@
 #endif
         }
 
-        protected override void SetComponentClass()
+        protected override void SetComponentCss()
         {
             var prefix = "m-sheet";
             CssProvider
@@ -81,9 +117,6 @@
                         .AddMaxHeight(MaxHeight)
                         .AddBackgroundColor(Color);
                 });
-
-            AbstractProvider
-                .Apply(typeof(BSheetBody<>), typeof(BSheetBody<ISheet>));
         }
     }
 }
