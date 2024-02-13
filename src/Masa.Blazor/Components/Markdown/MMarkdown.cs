@@ -36,6 +36,9 @@
         public EventCallback<string> OnToolbarButtonClick { get; set; }
 
         [Parameter]
+        public EventCallback OnAfter { get; set; }
+
+        [Parameter]
         public EventCallback BeforeAllUpload { get; set; }
 
         private string? _prevValue;
@@ -103,6 +106,11 @@
         [JSInvokable]
         public async Task HandleRenderedAsync()
         {
+            if (OnAfter.HasDelegate)
+            {
+                await OnAfter.InvokeAsync();
+            }
+
             if (!string.IsNullOrWhiteSpace(Value) && HtmlChanged.HasDelegate)
             {
                 Html = await GetHtmlAsync();
