@@ -20,6 +20,8 @@ tag: "JS代理"
 ## 最佳实践
 
 > 推荐与 [Blazor自定义元素](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/js-spa-frameworks?view=aspnetcore-7.0#blazor-custom-elements) 一起使用。
+> 
+> WebView不支持Blazor自定义元素可通过 [从 JavaScript 呈现 Razor 组件](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/js-spa-frameworks?view=aspnetcore-8.0#render-razor-components-from-javascript)  解决。
 
 ```razor CustomElement.razor
 @using System.Text.Json
