@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.SingleLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-banner--single-line");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.SingleLine, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-banner");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.App, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-banner--sticky");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.App, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-banner");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Sticky, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStickyClass = classes.Contains("m-banner--sticky");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Sticky, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStickyClass = classes.Contains("m-banner");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasdarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Dark, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasdarkClass = classes.Contains("m-banner");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Light, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-banner");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var noValueClass = !classes.Contains("display:none");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Value, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var noValueClass = !classes.Contains("m-banner__wrapper");
 
             // Assert
@@ -236,7 +236,7 @@ namespace Masa.Blazor.Test.Banner
             {
                 props.Add(banner => banner.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation");
 
             // Assert

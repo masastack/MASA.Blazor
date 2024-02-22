@@ -1,26 +1,48 @@
-﻿using BlazorComponent.Web;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public partial class MStepperContent : BStepperContent
+public partial class MStepperContent: BDomComponentBase
 {
-    [Inject]
-    public MasaBlazor MasaBlazor { get; set; } = null!;
+    [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [CascadingParameter]
-    public MStepper? Stepper { get; set; }
+    [CascadingParameter] public MStepper? Stepper { get; set; }
 
-    [Parameter]
-    public int Step { get; set; }
+    [Parameter] public int Step { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool Eager { get; set; }
 
     private bool _booting;
     private bool _firstRender = true;
     private StringNumber _height = 0;
     private bool _transitionEndListenerAdded;
 
-    protected override bool IsVertical => Stepper?.Vertical is true;
+    protected bool IsBooted { get; set; }
 
-    protected override bool IsRtl => MasaBlazor.RTL;
+    protected bool? NullableIsActive
+    {
+        get => GetValue<bool?>();
+        set => SetValue(value);
+    }
+
+    protected bool IsActive { get; set; }
+
+    protected bool IsReverse { get; set; }
+
+    protected string TransitionName
+    {
+        get
+        {
+            var reverse = IsRtl ? !IsReverse : IsReverse;
+
+            return reverse ? "tab-reverse-transition" : "tab-transition";
+        }
+    }
+
+
+    protected bool IsVertical => Stepper?.Vertical is true;
+
+    protected bool IsRtl => MasaBlazor.RTL;
 
     protected override void OnInitialized()
     {
@@ -146,7 +168,8 @@ public partial class MStepperContent : BStepperContent
         {
             _transitionEndListenerAdded = true;
 
-            _ =  Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition, false);
+            _ = Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition,
+                false);
         }
     }
 
@@ -199,7 +222,7 @@ public partial class MStepperContent : BStepperContent
     {
         return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, Ref, identifier);
     }
-    
+
     protected override ValueTask DisposeAsyncCore()
     {
         Stepper?.UnRegisterContent(this);
@@ -208,7 +231,7 @@ public partial class MStepperContent : BStepperContent
         {
             try
             {
-                _ =  Js.RemoveHtmlElementEventListener(selector, "transitionend");
+                _ = Js.RemoveHtmlElementEventListener(selector, "transitionend");
             }
             catch (Exception)
             {

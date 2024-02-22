@@ -1,15 +1,9 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MStepperHeader : Container
 {
-    public partial class MStepperHeader : BStepperHeader
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-stepper__header");
-                });
-        }
+        return new[] { "m-stepper__header" };
     }
 }

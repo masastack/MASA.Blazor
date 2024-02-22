@@ -1,7 +1,8 @@
 ﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits MSheet
 
-@base.BuildRenderTree
+@((RenderFragment)base.BuildRenderTree)
 
 @code {
 
@@ -9,8 +10,8 @@
     {
         if (!string.IsNullOrWhiteSpace(Src) || ImgContent != null)
         {
-            <div class="@CssProvider.GetClass("image")"
-                 style="@CssProvider.GetStyle("image")">
+            <div class="@_block.Element("image")"
+                 style="@GetImageStyle()">
                 @if (ImgContent != null)
                 {
                     @ImgContent(new()
@@ -26,15 +27,15 @@
             </div>
         }
 
-        <div class="@CssProvider.GetClass("content")"
-             style="@CssProvider.GetStyle("content")">
+        <div class="@_block.Element("content")"
+             style="@(StyleBuilder.Create().AddHeight(ComputedContentHeight))">
             @ChildContent
         </div>
 
         if (IsExtended)
         {
-            <div class="@CssProvider.GetClass("extension")"
-                 style="@CssProvider.GetStyle("extension")">
+            <div class="@_block.Element("extension")"
+                 style="@(StyleBuilder.Create().AddHeight(ExtensionHeight))">
                 @ExtensionContent
             </div>
         }

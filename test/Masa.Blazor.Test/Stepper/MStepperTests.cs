@@ -16,7 +16,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.AltLabels, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAltLabelsClass = classes.Contains("m-stepper--alt-labels");
             // Assert
             Assert.IsTrue(hasAltLabelsClass);
@@ -30,7 +30,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-stepper");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-stepper--flat");
             // Assert
             Assert.IsTrue(hasFlatClass);
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -162,7 +162,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.NonLinear, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNonLinearClass = classes.Contains("m-stepper--non-linear");
             // Assert
             Assert.IsTrue(hasNonLinearClass);
@@ -176,7 +176,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-stepper");
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -190,7 +190,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-stepper");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -204,7 +204,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-stepper");
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -218,7 +218,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-stepper");
             // Assert
             Assert.IsTrue(hasTileClass);
@@ -232,7 +232,7 @@ namespace Masa.Blazor.Test.Stepper
             {
                 props.Add(stepper => stepper.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-stepper--vertical");
             // Assert
             Assert.IsTrue(hasVerticalClass);

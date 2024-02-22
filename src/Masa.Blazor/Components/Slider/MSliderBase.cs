@@ -1,5 +1,6 @@
 ﻿using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
+using StyleBuilder = BlazorComponent.StyleBuilder;
 
 namespace Masa.Blazor;
 

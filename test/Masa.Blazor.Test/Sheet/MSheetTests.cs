@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-sheet--outlined");
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -148,7 +148,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-sheet");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -162,7 +162,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-sheet--shaped");
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -176,7 +176,7 @@ namespace Masa.Blazor.Test.Sheet
             {
                 props.Add(sheet => sheet.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-sheet");
             // Assert
             Assert.IsTrue(hasTileClass);

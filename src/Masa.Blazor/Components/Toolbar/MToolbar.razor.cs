@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor;
 
 public partial class MToolbar : MSheet
 {
@@ -91,47 +93,27 @@ public partial class MToolbar : MSheet
 
     protected virtual bool IsProminent => Prominent;
 
-    protected override void SetComponentCss()
-    {
-        base.SetComponentCss();
+    private Block _block = new("m-toolbar");
 
-        CssProvider
-            .Merge(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-toolbar")
-                    .AddIf("m-toolbar--absolute", () => Absolute)
-                    .AddIf("m-toolbar--bottom", () => Bottom)
-                    .AddIf("m-toolbar--collapse", () => Collapse)
-                    .AddIf("m-toolbar--collapsed", () => IsCollapsed)
-                    .AddIf("m-toolbar--dense", () => Dense)
-                    .AddIf("m-toolbar--extended", () => IsExtended)
-                    .AddIf("m-toolbar--flat", () => Flat)
-                    .AddIf("m-toolbar--floating", () => Floating)
-                    .AddIf("m-toolbar--prominent", () => IsProminent);
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddHeight(ComputedHeight);
-            })
-            .Apply("content", cssBuilder => { cssBuilder.Add("m-toolbar__content"); }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddHeight(ComputedContentHeight);
-            })
-            .Apply("image", cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-toolbar__image");
-            })
-            .Apply("extension", cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-toolbar__extension");
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddHeight(ExtensionHeight);
-            });
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            _block.Modifier(Absolute)
+                .And(Bottom)
+                .And(Collapse)
+                .And("collapsed", IsCollapsed)
+                .And(Dense)
+                .And("extended", IsExtended)
+                .And(Flat)
+                .And(Floating)
+                .And("prominent", IsProminent)
+                .GenerateCssClasses());
     }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        return base.BuildComponentStyle().Concat(new StyleBuilder().AddHeight(ComputedHeight).GenerateCssStyles());
+    }
+
+    protected virtual string? GetImageStyle() => null;
 }

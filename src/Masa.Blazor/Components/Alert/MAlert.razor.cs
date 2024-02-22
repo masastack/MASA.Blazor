@@ -194,10 +194,10 @@ public partial class MAlert : BDomComponentBase, IThemeable
                    .AddIf("m-sheet--shaped", () => Shaped)
                    .Modifiers(m
                        => m.Modifier("border", Border != Borders.None)
-                           .Add(Border, Border != Borders.None)
+                           .And(Border, Border != Borders.None)
                            .AddOneOf(Prominent, Dense)
-                           .Add(Text)
-                           .Add(Outlined)
+                           .And(Text)
+                           .And(Outlined)
                            .AddColor(ComputedColor, HasText, !ColoredBorder)
                            .AddElevation(Elevation)
                            .AddRounded(Rounded, Tile)
@@ -222,7 +222,7 @@ public partial class MAlert : BDomComponentBase, IThemeable
                 css
                     .Modifiers(m
                        => m.Modifier("has-color", ColoredBorder)
-                           .Add(Border.ToString())
+                           .And(Border.ToString())
                            .AddTextColor(Color, ColoredBorder)
                    )
                    .AddIf(Type.ToString().ToLower(), () => HasTypedBorder);

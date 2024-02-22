@@ -2,5 +2,8 @@
 
 public class MCardActions : Container
 {
-    protected override string ClassName => "m-card__actions";
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return new[] { "m-card__actions" };
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using StyleBuilder = BlazorComponent.StyleBuilder;
+
+namespace Masa.Blazor
 {
 #if NET6_0
     public class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue>, IRangeSlider<TValue>

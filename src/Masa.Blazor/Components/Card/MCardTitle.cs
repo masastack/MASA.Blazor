@@ -2,5 +2,8 @@
 
 public class MCardTitle : Container
 {
-    protected override string ClassName => "m-card__title";
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return new[] { "m-card__title" };
+    }
 }

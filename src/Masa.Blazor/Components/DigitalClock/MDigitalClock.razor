@@ -3,7 +3,7 @@
 @inherits BDomComponentBase
 @inject I18n I18n
 
-<div class="@(Block.Modifier(Disabled, Readonly).Add(Format, "format").Add("use-seconds", ComputedUseSeconds).Add(MultiSection).AddTheme(IsDark).AddClass("m-sheet", Class))"
+<div class="@(Block.Modifier(Disabled, Readonly).And(Format, "format").And("use-seconds", ComputedUseSeconds).And(MultiSection).AddTheme(IsDark).AddClass("m-sheet", Class))"
      style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())"
      @ref="Ref">
     @if (MultiSection)
@@ -60,7 +60,7 @@
             {
                 var active = time == InternalTime;
                 var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
-                <li class="@Block.Element("item").Modifier(active).Add(disabled)"
+                <li class="@Block.Element("item").Modifier(active).And(disabled)"
                     @onclick="() => HandleOnTimeClick(time)">
                     @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
                 </li>
@@ -84,7 +84,7 @@
 
     private RenderFragment ItemRenderFragment(int index, bool active, Func<int, bool>? isAllowedCb, Func<int, Task> onClick, Func<int, string>? format = null) => __builder =>
     {
-        <li class="@Block.Element("item").Modifier(active).Add("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
+        <li class="@Block.Element("item").Modifier(active).And("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
             @onclick="() => onClick(index)">
             @ItemContentRenderFragment(format?.Invoke(index) ?? index.ToString("00"), active)
         </li>

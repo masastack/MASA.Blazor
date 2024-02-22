@@ -1,19 +1,19 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <CascadingValue Value="this" IsFixed>
+    <BCascadingValue Value="this" IsFixed>
         <ShowTransitionElement
             Value="@(Show ?? true)"
             Tag="@Tag"
-            class="@CssProvider.GetClass()"
-            style="@CssProvider.GetStyle()"
+            Class="@GetClass()"
+            Style="@GetStyle()"
             id="@Id"
-            ReferenceCaptureAction="r => Ref = r"
-            @attributes="@Attributes">
+            @attributes="@Attributes"
+            ReferenceCaptureAction="r => Ref = r">
             @GenBody()
         </ShowTransitionElement>
-    </CascadingValue>
+    </BCascadingValue>
 </CascadingValue>
 
 @code {

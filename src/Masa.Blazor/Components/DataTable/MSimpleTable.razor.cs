@@ -93,10 +93,10 @@ public partial class MSimpleTable : BDomComponentBase
         CssProvider
             .UseBem("m-data-table",
                 css => css.Modifiers(m => m.Modifier(Dense)
-                                           .Add("fixed-height", Height != null && !FixedHeader)
-                                           .Add(FixedHeader)
-                                           .Add("has-top", TopContent != null)
-                                           .Add("has-bottom", BottomContent != null)
+                                           .And("fixed-height", Height != null && !FixedHeader)
+                                           .And(FixedHeader)
+                                           .And("has-top", TopContent != null)
+                                           .And("has-bottom", BottomContent != null)
                                            .AddTheme(IsDark, IndependentTheme)))
             .Element("wrapper",
                 css => css.AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
