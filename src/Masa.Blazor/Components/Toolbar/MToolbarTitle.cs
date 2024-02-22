@@ -2,5 +2,8 @@
 
 public class MToolbarTitle : Container
 {
-    protected override string? ClassName => "m-toolbar__title";
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return new[] { "m-toolbar__title" };
+    }
 }

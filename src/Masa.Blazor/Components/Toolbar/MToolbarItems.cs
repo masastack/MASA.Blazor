@@ -2,5 +2,8 @@
 
 public class MToolbarItems : Container
 {
-    protected override string? ClassName => "m-toolbar__items";
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return new[] { "m-toolbar__items" };
+    }
 }

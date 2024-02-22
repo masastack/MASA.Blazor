@@ -1,0 +1,57 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <div tabindex="@(Editable ? 0 : -1)"
+         class="@CssProvider.GetClass("step")"
+         style="@CssProvider.GetStyle("step")"
+         ripple="@Editable"
+         id="@Id"
+         @ref="@Ref"
+         @onclick="HandleOnClick"
+         @onkeydown="HandleOnKeyDown">
+        @GenStep()
+        @GenLabel()
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenStep() => __builder =>
+    {
+        <span class="@CssProvider.GetClass("content")">
+            @GenStepContent()
+        </span>
+    };
+
+    private RenderFragment GenStepContent() => __builder =>
+    {
+        if (HasError)
+        {
+            <MIcon>@ErrorIcon</MIcon>
+        }
+        else if (Complete)
+        {
+            if (Editable)
+            {
+                <MIcon>@EditIcon</MIcon>
+            }
+            else
+            {
+                <MIcon>@CompleteIcon</MIcon>
+            }
+        }
+        else
+        {
+            @Step
+        }
+    };
+
+    private RenderFragment GenLabel() => __builder =>
+    {
+        <div class="@CssProvider.GetClass("label")">
+            @ChildContent
+        </div>
+    };
+
+}

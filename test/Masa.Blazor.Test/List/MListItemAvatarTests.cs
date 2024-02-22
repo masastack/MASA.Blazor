@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemavatar => listitemavatar.Horizontal, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHorizontalClass = classes.Contains("m-list-item__avatar--horizontal");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemavatar => listitemavatar.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-list-item__avatar");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemavatar => listitemavatar.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-list-item__avatar");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemavatar => listitemavatar.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-list-item__avatar");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemavatar => listitemavatar.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-list-item__avatar");
 
             // Assert

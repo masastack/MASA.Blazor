@@ -4,11 +4,12 @@ public class MCardText : Container
 {
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
-    protected override string ClassName => "m-card__text";
+    private Block _block = new("m-card");
 
-    protected override void SetComponentCss()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentCss();
-        CssProvider.Merge(css => { css.AddTheme(CascadingIsDark, isIndependent: false); });
+        return base.BuildComponentClass().Concat(
+            _block.Element("text").AddTheme(CascadingIsDark, isIndependent: false).GenerateCssClasses()
+        );
     }
 }

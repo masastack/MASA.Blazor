@@ -1,0 +1,64 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <ExpandTransition>
+        <ShowTransitionElement Value="Value"
+                               Class="@GetClass()"
+                               Style="@GetStyle()"
+                               @attributes="@Attributes">
+            <div class="@_block.Element("wrapper")">
+                <div class="@_block.Element("content")">
+                    @GenAvatar()
+                    <div class="@_block.Element("text")">
+                        @ChildContent
+                    </div>
+                </div>
+                @GenActions()
+            </div>
+        </ShowTransitionElement>
+    </ExpandTransition>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenAvatar() => __builder =>
+    {
+        if (!HasIcon)
+        {
+            return;
+        }
+
+        <MAvatar Class="@_block.Element("icon").Build()"
+                 Color="@Color"
+                 Size="40"
+                 @onclick="HandleOnIconClickAsync">
+            @GenIcon()
+        </MAvatar>
+    };
+
+    private RenderFragment GenIcon() => __builder =>
+    {
+        if (Icon != null)
+        {
+            <MIcon Icon="@Icon" Size="28" Color="@IconColor"/>
+        }
+        else
+        {
+            @IconContent
+        }
+    };
+
+    private RenderFragment GenActions() => __builder =>
+    {
+        if (ComputedActionsContent is null)
+        {
+            return;
+        }
+
+        <div class="@_block.Element("actions")">
+            @ComputedActionsContent
+        </div>
+    };
+
+}

@@ -6,7 +6,6 @@
         {
             { typeof(BButton), typeof(MButton) },
             { typeof(BIcon), typeof(MIcon) },
-            { typeof(BAvatar), typeof(MAvatar) },
             { typeof(BBreadcrumbsDivider), typeof(MBreadcrumbsDivider) },
             { typeof(BBreadcrumbsItem), typeof(MBreadcrumbsItem) },
             { typeof(BProgressCircular), typeof(MProgressCircular) },

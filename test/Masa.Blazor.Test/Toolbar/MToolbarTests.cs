@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-toolbar--absolute");
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-toolbar--bottom");
             // Assert
             Assert.IsTrue(hasBottomClass);
@@ -42,7 +42,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Collapse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCollapseClass = classes.Contains("m-toolbar--collapse");
             // Assert
             Assert.IsTrue(hasCollapseClass);
@@ -56,7 +56,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -70,7 +70,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-toolbar--dense");
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -84,7 +84,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Elevation, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -99,7 +99,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Extended, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasExtendedClass = classes.Contains("m-toolbar--extended");
             // Assert
             Assert.IsTrue(hasExtendedClass);
@@ -113,7 +113,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-toolbar--flat");
             // Assert
             Assert.IsTrue(hasFlatClass);
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Floating, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFloatingClass = classes.Contains("m-toolbar--floating");
             // Assert
             Assert.IsTrue(hasFloatingClass);
@@ -186,7 +186,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -260,7 +260,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -274,7 +274,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Prominent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasProminentClass = classes.Contains("m-toolbar--prominent");
             // Assert
             Assert.IsTrue(hasProminentClass);
@@ -288,7 +288,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -302,7 +302,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -316,7 +316,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Short, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShortClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasShortClass);
@@ -330,7 +330,7 @@ namespace Masa.Blazor.Test.Toolbar
             {
                 props.Add(toolbar => toolbar.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasTileClass);

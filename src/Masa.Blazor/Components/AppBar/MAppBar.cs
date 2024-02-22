@@ -1,27 +1,21 @@
-﻿using BlazorComponent.Web;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
-        [Inject]
-        private MasaBlazor MasaBlazor { get; set; } = null!;
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Parameter]
-        public bool App { get; set; }
+        [Parameter] public bool App { get; set; }
 
-        [Parameter]
-        public bool Fixed { get; set; }
+        [Parameter] public bool Fixed { get; set; }
 
-        [Parameter]
-        public bool ClippedLeft { get; set; }
+        [Parameter] public bool ClippedLeft { get; set; }
 
-        [Parameter]
-        public bool ClippedRight { get; set; }
+        [Parameter] public bool ClippedRight { get; set; }
 
-        [Parameter]
-        public bool CollapseOnScroll { get; set; }
+        [Parameter] public bool CollapseOnScroll { get; set; }
 
         [Parameter]
         [MasaApiParameter("window")]
@@ -33,33 +27,26 @@ namespace Masa.Blazor
         [Parameter]
         public bool ElevateOnScroll { get; set; }
 
-        [Parameter]
-        public bool FadeImgOnScroll { get; set; }
+        [Parameter] public bool FadeImgOnScroll { get; set; }
 
-        [Parameter]
-        public bool HideOnScroll { get; set; }
+        [Parameter] public bool HideOnScroll { get; set; }
 
-        [Parameter]
-        public bool InvertedScroll { get; set; }
+        [Parameter] public bool InvertedScroll { get; set; }
 
-        [Parameter]
-        public bool ShrinkOnScroll { get; set; }
+        [Parameter] public bool ShrinkOnScroll { get; set; }
 
-        [Parameter]
-        public double ScrollThreshold { get; set; }
+        [Parameter] public double ScrollThreshold { get; set; }
 
-        [Parameter]
-        public bool ScrollOffScreen { get; set; }
+        [Parameter] public bool ScrollOffScreen { get; set; }
 
-        [Parameter]
-        [MasaApiParameter(true)]
-        public bool Value { get; set; } = true;
+        [Parameter] [MasaApiParameter(true)] public bool Value { get; set; } = true;
 
         /// <summary>
         /// Indicates the component should not be render as a SSR component.
         /// It's useful when you want render components interactively under SSR.
         /// </summary>
-        [Parameter] public bool NoSsr { get; set; }
+        [Parameter]
+        public bool NoSsr { get; set; }
 
         private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
 
@@ -281,50 +268,41 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void SetComponentCss()
+        protected override string GetImageStyle()
         {
-            base.SetComponentCss();
+            return new StyleBuilder().AddIf("opacity", ComputedOpacity.ToString(), ComputedOpacity.HasValue).Build();
+        }
 
-            if (InvertedScroll)
-            {
-                Transform = -ComputedHeight.ToInt32();
-            }
+        private Block _block = new("m-app-bar");
 
-            if (ShrinkOnScroll)
-            {
-                Dense = false;
-                Flat = false;
-                Prominent = true;
-            }
+        protected override IEnumerable<string> BuildComponentClass()
+        {
+            return base.BuildComponentClass().Concat(
+                _block.Modifier("app--sized", _sized)
+                    .And("clipped", ClippedLeft || ClippedRight)
+                    .And(ClippedLeft)
+                    .And(ClippedRight)
+                    .And(FadeImgOnScroll)
+                    .And(ElevateOnScroll)
+                    .And(App)
+                    .And("fixed", !Absolute && (App || Fixed))
+                    .And(HideShadow)
+                    .And("is-scrolled", _scroller is { CurrentScroll: > 0 })
+                    .And(ShrinkOnScroll)
+                    .GenerateCssClasses()
+            );
+        }
 
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-app-bar")
-                        .AddIf("app--sized", () => _sized)
-                        .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
-                        .AddIf("m-app-bar--clipped-left", () => ClippedLeft)
-                        .AddIf("m-app-bar--clipped-right", () => ClippedRight)
-                        .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
-                        .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
-                        .AddIf("m-app-bar--app", () => App)
-                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
-                        .AddIf("m-app-bar--hide-shadow", () => HideShadow)
-                        .AddIf("m-app-bar--is-scrolled", () => _scroller is { CurrentScroll: > 0 })
-                        .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add(() => $"transform:translateY({ComputedTransform}px)")
-                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
-                        .AddIf(() => $"margin-top:{ComputedMarginTop}px", () => !IsSsr)
-                        .Add(() => $"left:{ComputedLeft}px")
-                        .Add(() => $"right:{ComputedRight}px");
-                })
-                .Merge("image",
-                    _ => { },
-                    style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
+        protected override IEnumerable<string> BuildComponentStyle()
+        {
+            return base.BuildComponentStyle().Concat(
+                new StyleBuilder().Add("transform", $"translateY({ComputedTransform}px)")
+                    .AddIf("font-size", ComputedFontSize?.ToUnit("rem"), ComputedFontSize != null)
+                    .AddIf("margin-top", $"{ComputedMarginTop}px", !IsSsr)
+                    .Add("left", $"{ComputedLeft}px")
+                    .Add("right", $"{ComputedRight}px")
+                    .GenerateCssStyles()
+            );
         }
 
         protected override void OnParametersSet()

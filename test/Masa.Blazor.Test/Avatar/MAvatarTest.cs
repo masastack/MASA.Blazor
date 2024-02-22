@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Avatar
             {
                 props.Add(avatar => avatar.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-avatar--left");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Avatar
             {
                 props.Add(avatar => avatar.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-avatar--right");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Avatar
             {
                 props.Add(avatar => avatar.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("rounded");
 
             // Assert

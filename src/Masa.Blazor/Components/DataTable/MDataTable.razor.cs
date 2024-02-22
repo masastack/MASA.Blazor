@@ -320,10 +320,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     {
         CssProvider.UseBem("m-data-table",
                        css => css.Modifiers(m => m.Modifier("mobile", IsMobile)
-                                                  .Add("resizable", ResizeMode != DataTableResizeMode.None)
-                                                  .Add("resizable-overflow", ResizeMode == DataTableResizeMode.Overflow)
-                                                  .Add("resizable-independent", ResizeMode == DataTableResizeMode.Independent)
-                                                  .Add("rtl", MasaBlazor.RTL)))
+                                        .And("resizable", ResizeMode != DataTableResizeMode.None)
+                                        .And("resizable-overflow", ResizeMode == DataTableResizeMode.Overflow)
+                                        .And("resizable-independent", ResizeMode == DataTableResizeMode.Independent)
+                                        .And("rtl", MasaBlazor.RTL)))
                    .Element("progress")
                    .Apply("column", css => css.Add("column"))
                    .Element("empty-wrapper")

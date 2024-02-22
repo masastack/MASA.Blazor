@@ -1,0 +1,26 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="IsDark" Name="AppIsDark">
+        <CascadingValue Value="this" TValue="IDefaultsProvider" IsFixed="true">
+            <div class="@GetClass()"
+                 style="@GetStyle()"
+                 id="@Id"
+                 @ref="@Ref"
+                 data-app>
+                <div class="@_block.Element("wrap")">
+                    @ChildContent
+                </div>
+
+                @foreach (var item in PopupProvider.GetItems())
+                {
+                    <CascadingValue @key="item" Value="item">
+                        <DynamicComponent Type="item.ComponentType" Parameters="item.Parameters"></DynamicComponent>
+                    </CascadingValue>
+                }
+                <div data-permanent class="m-application__permanent"></div>
+            </div>
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>

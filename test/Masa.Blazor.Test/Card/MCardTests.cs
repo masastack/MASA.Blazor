@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-card--disabled");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(alert => alert.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-card");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-card--flat");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Hover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHoverClass = classes.Contains("m-card");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.LoaderHeight, 4);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-card");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-card");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-sheet--outlined");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Raised, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRaisedClass = classes.Contains("m-card");
 
             // Assert
@@ -254,7 +254,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Ripple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRippleClass = classes.Contains("m-card");
 
             // Assert
@@ -269,7 +269,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-card");
 
             // Assert
@@ -284,7 +284,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-card");
 
             // Assert
@@ -299,7 +299,7 @@ namespace Masa.Blazor.Test.Card
             {
                 props.Add(card => card.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-card");
 
             // Assert

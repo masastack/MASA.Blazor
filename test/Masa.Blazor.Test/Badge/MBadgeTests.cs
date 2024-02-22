@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Avatar, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAvatarClass = classes.Contains("m-badge--avatar");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Bordered, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBorderedClass = classes.Contains("m-badge--bordered");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-badge--bottom");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Dot, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDotClass = classes.Contains("m-badge--dot");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasdarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Content, 6);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasContentClass = classes.Contains("m-badge");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Inline, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInLineClass = classes.Contains("m-badge--inline");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-badge--left");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.OverLap, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOverLapClass = classes.Contains("m-badge--overlap");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-badge--tile");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.OffsetX, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetXClass = classes.Contains("m-badge");
 
             // Assert
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.OffsetY, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetYClass = classes.Contains("m-badge");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.Badge
             {
                 props.Add(badge => badge.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = !classes.Contains(".m-badge__badge");
 
             // Assert
