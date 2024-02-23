@@ -1,0 +1,45 @@
+﻿<MRow>
+    <MCol Cols="4">
+        <MList Dense>
+            <MSortable Items="@_man"
+                       ItemKey="u => u"
+                       Group="man"
+                       GhostClass="accent">
+                <MListItem>@context</MListItem>
+                <MDivider/>
+            </MSortable>
+        </MList>
+    </MCol>
+    <MCol Cols="4">
+        <MList Dense>
+            <MSortable Items="@_woman"
+                       ItemKey="u => u"
+                       Group="woman"
+                       GhostClass="accent">
+                <MListItem>@context</MListItem>
+                <MDivider/>
+            </MSortable>
+        </MList>
+    </MCol>
+    <MCol Cols="4">
+        <MList Dense>
+            <MSortable Items="@_peoples"
+                       ItemKey="u => u"
+                       Group="people"
+                       GhostClass="accent">
+                <MListItem>@context</MListItem>
+                <MDivider/>
+            </MSortable>
+        </MList>
+    </MCol>
+</MRow>
+
+
+@code {
+
+    private string[] _man = ["John", "David", "Benjamin", "Alex", "Michael"];
+    private string[] _woman = ["Mary", "Lily", "Emily", "Sarah", "Anna"];
+    private string[] _peoples = [];
+
+
+}
