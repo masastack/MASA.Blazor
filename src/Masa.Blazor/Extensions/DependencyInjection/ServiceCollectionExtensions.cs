@@ -58,6 +58,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
+        services.TryAddScoped<SortableJSModule>();
 
         return new MasaBlazorBuilder(services);
     }

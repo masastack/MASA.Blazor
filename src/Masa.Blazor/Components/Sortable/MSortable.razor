@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TItem
+@inject SortableJSModule SortableJSModule
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@implements ISortable
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @GenItems()
+</div>
+
+@code {
+
+    private RenderFragment GenItems() => __builder =>
+    {
+        if (ChildContent is null)
+        {
+            return;
+        }
+
+        @foreach (var item in Items)
+        {
+            var dataId = ItemKey?.Invoke(item);
+
+            <div data-id="@dataId"
+                 class="@_block.Element("item")"
+                 style="@(StyleBuilder.Create().Add("cursor", "move").Build())"
+                 @key="@(dataId ?? (object?)item)">
+                @ChildContent(item)
+            </div>
+        }
+    };
+
+}
