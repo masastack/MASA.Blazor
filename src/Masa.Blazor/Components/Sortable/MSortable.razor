@@ -5,13 +5,14 @@
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @implements ISortable
 
-<div class="@GetClass()"
-     style="@GetStyle()"
-     id="@Id"
-     @ref="@Ref"
-     @attributes="@Attributes">
+<Element Class="@GetClass()"
+         Style="@GetStyle()"
+         Tag="@Tag"
+         id="@Id"
+         ReferenceCaptureAction="r => Ref = r"
+         @attributes="@Attributes">
     @GenItems()
-</div>
+</Element>
 
 @code {
 
@@ -26,12 +27,13 @@
         {
             var dataId = ItemKey?.Invoke(item);
 
-            <div data-id="@dataId"
-                 class="@_block.Element("item")"
-                 style="@(StyleBuilder.Create().Add("cursor", "move").Build())"
-                 @key="@(dataId ?? (object?)item)">
+            <Element Tag="@ItemTag"
+                     Class="@_block.Element("item").Build()"
+                     Style="@(StyleBuilder.Create().Build())"
+                     @key="@(dataId ?? (object?)item)"
+                     data-id="@dataId">
                 @ChildContent(item)
-            </div>
+            </Element>
         }
     };
 

@@ -10,7 +10,11 @@ public partial class MSortable<TItem> : MasaComponentBase
 
     [Parameter] public EventCallback<IEnumerable<string>> OrderChanged { get; set; }
 
-    [Parameter] [EditorRequired] public Func<TItem, string>? ItemKey { get; set; }
+    [Parameter] [EditorRequired] public Func<TItem, string> ItemKey { get; set; } = default!;
+
+    [Parameter] [MasaApiParameter("div")] public string? Tag { get; set; } = "div";
+
+    [Parameter] [MasaApiParameter("div")] public string? ItemTag { get; set; } = "div";
 
     /// <summary>
     /// ms, animation speed moving items when sorting, `0` — without animation
@@ -165,6 +169,7 @@ public partial class MSortable<TItem> : MasaComponentBase
         base.OnParametersSet();
 
         Items.ThrowIfNull(ComponentName);
+        ItemKey.ThrowIfNull(ComponentName);
 
         if (!Equals(_prevItems, Items))
         {
