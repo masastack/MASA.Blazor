@@ -1,9 +1,7 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits MSortableProviderBase<TItem>
 @typeparam TItem
 @inject SortableJSModule SortableJSModule
-@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@implements ISortable
 
 <Element Class="@GetClass()"
          Style="@GetStyle()"
@@ -28,8 +26,8 @@
             var dataId = ItemKey?.Invoke(item);
 
             <Element Tag="@ItemTag"
-                     Class="@_block.Element("item").Build()"
-                     Style="@(StyleBuilder.Create().Build())"
+                     Class="@_block.Element("item").AddClass(ItemClass).Build()"
+                     Style="@ItemStyle"
                      @key="@(dataId ?? (object?)item)"
                      data-id="@dataId">
                 @ChildContent(item)

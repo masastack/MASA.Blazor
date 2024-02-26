@@ -23,6 +23,16 @@ public class SortableOptions
     /// Only delay if user is using touch
     /// </summary>
     public bool DelayOnTouchOnly { get; set; }
+    
+    /// <summary>
+    /// Disables the sortable if set to true.
+    /// </summary>
+    public bool Disabled { get; set; }
+
+    /// <summary>
+    /// Specifies which items inside the element should be draggable
+    /// </summary>
+    public string? Draggable { get; set; }
 
     /// <summary>
     /// Class name for the dragging item, only accept a single class
@@ -35,7 +45,7 @@ public class SortableOptions
     public string? Easing { get; set; }
 
     /// <summary>
-    /// distance mouse must be from empty sortable to insert drag element into it
+    /// px, distance mouse must be from empty sortable to insert drag element into it
     /// </summary>
     public int EmptyInsertThreshold { get; set; } = 5;
 
@@ -78,7 +88,7 @@ public class SortableOptions
     /// <summary>
     /// Threshold of the inverted swap zone
     /// </summary>
-    public int? InvertedSwapThreshold { get; set; }
+    public double? InvertedSwapThreshold { get; set; }
 
     /// <summary>
     /// Call `event.preventDefault()` when triggered `filter` event
@@ -93,5 +103,5 @@ public class SortableOptions
     /// <summary>
     /// Threshold of the swap zone
     /// </summary>
-    public int SwapThreshold { get; set; } = 1;
+    public double SwapThreshold { get; set; } = 1;
 }

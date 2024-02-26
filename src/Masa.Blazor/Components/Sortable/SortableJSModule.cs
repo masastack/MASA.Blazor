@@ -16,4 +16,15 @@ public class SortableJSModule : JSModule
             await InvokeAsync<IJSObjectReference>("init", elementReference, options, order, interopHandle);
         return new SortableJSObjectReference(jsObjectReference);
     }
+
+    public async ValueTask<SortableJSObjectReference> InitAsync(
+        string selector,
+        SortableOptions? options,
+        IEnumerable<string>? order,
+        DotNetObjectReference<SortableJSInteropHandle> interopHandle)
+    {
+        var jsObjectReference =
+            await InvokeAsync<IJSObjectReference>("init", selector, options, order, interopHandle);
+        return new SortableJSObjectReference(jsObjectReference);
+    }
 }

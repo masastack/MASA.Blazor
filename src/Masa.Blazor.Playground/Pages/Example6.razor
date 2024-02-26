@@ -1,0 +1,106 @@
+﻿<div style="width: 500px;">
+    <div class="d-flex align-center">
+        <MSpacer/>
+        <MButton Color="primary" OnClick="@(() => _editMode = true)">Edit</MButton>
+    </div>
+
+    <MDivider Class="mt-2 mb-4"/>
+
+    <MRow Id="sortable-provider-example">
+        <MSortableProvider Items="_features"
+                           ItemKey="item => item.Name"
+                           Container="#sortable-provider-example"
+                           Animation="300"
+                           Disabled="@(!_editMode)"
+                           Easing="ease-in-out"
+                           Handle=".feature__icon"
+                           Group="features"
+                           OnAdd="HandleOnAdd">
+            <ItemContent>
+                <MCol Cols="3"
+                      @key="@context.Item.Id"
+                      @attributes="@context.Attrs">
+                    <a class="d-flex flex-column align-center justify-center secondary--text">
+                        <MBadge Overlap
+                                Bordered
+                                Color="error"
+                                Icon="mdi-close"
+                                Value="@_editMode"
+                                @onclick="@(() => HandleOnBadgeClick(context.Item))">
+                            <MIcon Large Class="feature__icon">@context.Item.Icon</MIcon>
+                        </MBadge>
+                        <span class="body-2">@context.Item.Name</span>
+                    </a>
+                </MCol>
+            </ItemContent>
+        </MSortableProvider>
+    </MRow>
+
+    <MDivider Class="my-2"/>
+
+    <MRow Id="sortable-provider-example2">
+        <MSortableProvider Items="_restFeatures"
+                           ItemKey="item => item.Name"
+                           Container="#sortable-provider-example2"
+                           Animation="300"
+                           Disabled="@(!_editMode)"
+                           Easing="ease-in-out"
+                           Handle=".feature__icon"
+                           Group="features">
+            <ItemContent>
+                <MCol Cols="3"
+                      @key="@context.Item.Id"
+                      @attributes="@context.Attrs">
+                    <a class="d-flex flex-column align-center justify-center secondary--text">
+                        <MIcon Large Class="feature__icon">@context.Item.Icon</MIcon>
+                        <span class="body-2">@context.Item.Name</span>
+                    </a>
+                </MCol>
+            </ItemContent>
+        </MSortableProvider>
+    </MRow>
+</div>
+
+@code {
+
+    private bool _editMode = false;
+
+    private List<Feature> _features = new()
+    {
+        new Feature(Guid.NewGuid(), "Airplane", "mdi-airplane-takeoff"),
+        new Feature(Guid.NewGuid(), "Train", "mdi-train"),
+        new Feature(Guid.NewGuid(), "Bus", "mdi-bus"),
+        new Feature(Guid.NewGuid(), "Bank", "mdi-bank"),
+    };
+
+    private List<Feature> _restFeatures =
+    [
+        new Feature(Guid.NewGuid(), "Music", "mdi-music"),
+        new Feature(Guid.NewGuid(), "Video", "mdi-video"),
+        new Feature(Guid.NewGuid(), "Cookie", "mdi-cookie"),
+        new Feature(Guid.NewGuid(), "Beer", "mdi-beer")
+    ];
+
+    private void HandleOnAdd(string key)
+    {
+        var feat = _restFeatures.FirstOrDefault(u => u.Name == key);
+        if (feat is null) return;
+
+        _features.Add(feat);
+        _restFeatures.Remove(feat);
+    }
+
+    private void HandleOnBadgeClick(Feature feature)
+    {
+        if (!_editMode)
+        {
+            return;
+        }
+
+        _restFeatures.Add(feature);
+        _features.Remove(feature);
+    }
+
+    record Feature(Guid Id, string Name, string Icon);
+
+}

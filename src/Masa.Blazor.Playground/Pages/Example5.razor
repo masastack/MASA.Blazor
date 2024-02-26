@@ -6,6 +6,8 @@
     <MSortable Items="@_items"
                ItemKey="@(item => item.Name)"
                GhostClass="accent"
+               Animation="200"
+               Easing="cubic-bezier(0, 0.55, 0.45, 1)"
                @bind-Order="order">
         <MListItem>@context.Name</MListItem>
         <MDivider/>
@@ -13,7 +15,7 @@
 </MList>
 
 @code {
-    
+
     private IEnumerable<string> order = new List<string>();
 
     private record Item(int Id, string Name);
@@ -27,4 +29,4 @@
         new Item(5, "Bob")
     ];
 
-}
+} 

@@ -12,4 +12,13 @@ public class SortableJSInteropHandle
     [JSInvokable]
     public ValueTask UpdateOrder(IEnumerable<string> order)
         => _sortable.UpdateOrder(order);
+
+    [JSInvokable]
+    public ValueTask HandleOnAdd(string key)
+        => _sortable.HandleOnAdd(key);
+
+
+    [JSInvokable]
+    public ValueTask HandleOnRemove(string key)
+        => _sortable.HandleOnRemove(key);
 }
