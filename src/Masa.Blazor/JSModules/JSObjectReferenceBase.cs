@@ -11,7 +11,7 @@ public class JSObjectReferenceBase : IAsyncDisposable
 
     public async ValueTask InvokeVoidAsync(string identity, params object[] args)
     {
-        await JSObjectReference.InvokeVoidAsync("invokeVoid", identity, args);
+        await JSObjectReference.InvokeVoidAsync("invokeVoid", args.Prepend(identity).ToArray());
     }
 
     async ValueTask IAsyncDisposable.DisposeAsync()

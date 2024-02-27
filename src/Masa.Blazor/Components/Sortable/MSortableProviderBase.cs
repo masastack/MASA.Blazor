@@ -6,9 +6,14 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
     [Parameter] [EditorRequired] public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
 
-    [Parameter] public IEnumerable<string>? Order { get; set; }
+    [Parameter]
+    public List<string>? Order
+    {
+        get => GetValue<List<string>>();
+        set => SetValue(value);
+    }
 
-    [Parameter] public EventCallback<IEnumerable<string>> OrderChanged { get; set; }
+    [Parameter] public EventCallback<List<string>> OrderChanged { get; set; }
 
     [Parameter] [EditorRequired] public Func<TItem, string> ItemKey { get; set; } = default!;
 
@@ -168,7 +173,8 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     [Parameter] public EventCallback<string> OnRemove { get; set; }
 
     private IEnumerable<TItem>? _prevItems;
-    private int _prevItemsCount;
+    private HashSet<string> _prevItemKeys;
+    private List<string> _internalOrder;
 
     private DotNetObjectReference<SortableJSInteropHandle>? _sortableJSInteropHandle;
     private SortableJSObjectReference? _jsObjectReference;
@@ -180,21 +186,24 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         base.OnInitialized();
 
         _prevItems = Items;
-        _prevItemsCount = Items.Count();
+        _prevItemKeys = GetItemKeys();
 
         _sortableJSInteropHandle = DotNetObjectReference.Create(new SortableJSInteropHandle(this));
     }
+
+    private HashSet<string> GetItemKeys() => new(Items.Select(u => ItemKey(u)));
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(Disabled),
-            val =>
-            {
-                Console.Out.WriteLine("[MSortableProviderBase] Disabled changed to " + val);
-                _jsObjectReference?.InvokeVoidAsync("option", "disabled", val);
-            });
+                val =>
+                {
+                    Console.Out.WriteLine("[MSortableProviderBase] Disabled changed to " + val);
+                    _jsObjectReference?.InvokeVoidAsync("option", "disabled", val);
+                })
+            .Watch<List<string>>(nameof(Order), val => { _ = _jsObjectReference?.SortAsync(val, false); });
     }
 
     protected override void OnParametersSet()
@@ -207,16 +216,16 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         if (!Equals(_prevItems, Items))
         {
             _prevItems = Items;
-            _prevItemsCount = Items.Count();
+            _prevItemKeys = GetItemKeys();
             RefreshOrder();
         }
         else
         {
-            var itemsCount = Items.Count();
-            if (_prevItemsCount != itemsCount)
+            var keys = GetItemKeys();
+            if (!_prevItemKeys.SetEquals(keys))
             {
-                _prevItemsCount = itemsCount;
-                RefreshOrder();
+                _prevItemKeys = keys;
+                SortByInternalOrder();
             }
         }
     }
@@ -264,12 +273,30 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         };
     }
 
-    // TODO： internal 
-    public async ValueTask UpdateOrder(IEnumerable<string> order) => await OrderChanged.InvokeAsync(order);
+    private void UpdateOrderInternal(List<string> order)
+    {
+        _internalOrder = order;
+        _ = OrderChanged.InvokeAsync(order);
+    }
 
-    public async ValueTask HandleOnAdd(string key) => await OnAdd.InvokeAsync(key);
+    public async ValueTask UpdateOrder(List<string> order)
+    {
+        UpdateOrderInternal(order);
+    }
 
-    public async ValueTask HandleOnRemove(string key) => await OnRemove.InvokeAsync(key);
+    public async ValueTask HandleOnAdd(string key, List<string> order)
+    {
+        UpdateOrderInternal(order);
+
+        await OnAdd.InvokeAsync(key);
+    }
+
+    public async ValueTask HandleOnRemove(string key, List<string> order)
+    {
+        UpdateOrderInternal(order);
+
+        await OnRemove.InvokeAsync(key);
+    }
 
     private void RefreshOrder()
     {
@@ -280,9 +307,18 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
         NextTick(async () =>
         {
-            var order = await _jsObjectReference.GetOrderAsync();
-            Console.Out.WriteLine("[MSortableProviderBase] RefreshOrder: " + string.Join(", ", order));
-            await OrderChanged.InvokeAsync(order);
+            var order = await _jsObjectReference.ToArrayAsync();
+            UpdateOrderInternal(order);
         });
+    }
+
+    private void SortByInternalOrder()
+    {
+        if (_jsObjectReference is null)
+        {
+            return;
+        }
+
+        NextTick(() => _ = _jsObjectReference.SortAsync(_internalOrder, false));
     }
 }

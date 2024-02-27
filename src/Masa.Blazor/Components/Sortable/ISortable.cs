@@ -2,9 +2,9 @@
 
 public interface ISortable
 {
-    ValueTask UpdateOrder(IEnumerable<string> order);
+    ValueTask UpdateOrder(List<string> order);
 
-    ValueTask HandleOnAdd(string key);
+    ValueTask HandleOnAdd(string key, List<string> order);
 
-    ValueTask HandleOnRemove(string key);
+    ValueTask HandleOnRemove(string key, List<string> order);
 }

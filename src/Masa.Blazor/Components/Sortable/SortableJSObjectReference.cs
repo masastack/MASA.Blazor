@@ -8,6 +8,10 @@ public class SortableJSObjectReference : JSObjectReferenceBase
     {
     }
 
-    public ValueTask<IEnumerable<string>> GetOrderAsync()
-        => JSObjectReference.InvokeAsync<IEnumerable<string>>("getOrder");
+    public ValueTask<List<string>> ToArrayAsync()
+        => JSObjectReference.InvokeAsync<List<string>>("invoke", "toArray");
+
+    public ValueTask SortAsync(List<string> order, bool useAnimation)
+        => InvokeVoidAsync("sort", order, useAnimation);
+        // => JSObjectReference.InvokeVoidAsync("invokeVoid", "sort", order, useAnimation);
 }

@@ -1,5 +1,5 @@
 ﻿<MRow>
-    <MCol Cols="6">
+    <MCol Cols="4">
         <MList Dense>
             <MSortable Items="@_items1"
                        ItemKey="u => u"
@@ -10,12 +10,23 @@
             </MSortable>
         </MList>
     </MCol>
-    <MCol Cols="6">
+    <MCol Cols="4">
         <MList Dense>
             <MSortable Items="@_items2"
                        ItemKey="u => u"
                        Group="people"
                        GhostClass="accent">
+                <MListItem>@context</MListItem>
+                <MDivider/>
+            </MSortable>
+        </MList>
+    </MCol>
+    <MCol Cols="4">
+        <MList Dense>
+            <MSortable Items="@_animals"
+                       ItemKey="u => u"
+                       Group="animals"
+                       GhostClass="secondary">
                 <MListItem>@context</MListItem>
                 <MDivider/>
             </MSortable>
@@ -28,6 +39,7 @@
 
     private string[] _items1 = ["John", "Mary", "David", "Lily", "Benjamin"];
     private string[] _items2 = ["Emily", "Alex", "Sarah", "Michael", "Anna"];
+    private string[] _animals = ["Dog", "Cat", "Bird", "Fish", "Rabbit"];
 
 
 }

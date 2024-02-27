@@ -11,4 +11,9 @@ public partial class MSortable<TItem> : MSortableProviderBase<TItem>
     private Block _block = new("m-sortable");
 
     protected override string ContainerSelector => Ref.GetSelector();
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return _block.Modifier(Disabled).GenerateCssClasses();
+    }
 }
