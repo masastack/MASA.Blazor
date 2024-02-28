@@ -50,7 +50,8 @@
   "state": {
     "new": "新增",
     "update": "更新",
-    "breaking-change": "破坏更新"
+    "breaking-change": "破坏更新",
+    "deprecated": "弃用"
   },
   "tag": {
     "preset": "预置",

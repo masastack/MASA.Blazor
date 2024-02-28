@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Sortable;
+
+namespace Masa.Blazor;
 
 public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortable
 {

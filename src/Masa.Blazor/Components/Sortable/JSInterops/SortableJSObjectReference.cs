@@ -1,6 +1,6 @@
 ﻿using Masa.Blazor.JSModules;
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Components.Sortable;
 
 public class SortableJSObjectReference : JSObjectReferenceBase
 {

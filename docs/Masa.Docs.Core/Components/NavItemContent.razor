@@ -50,6 +50,7 @@ else if (Item?.State is not null)
             "new"             => AppService.ColorForNewState,
             "update"          => AppService.ColorForUpdateState,
             "breaking-change" => AppService.ColorForBreakingChangeState,
+            "deprecated"      => AppService.ColorForDeprecatedState,
             _                 => null
         };
     }

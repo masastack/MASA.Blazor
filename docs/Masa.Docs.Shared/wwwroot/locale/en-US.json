@@ -53,7 +53,8 @@
   "state": {
     "new": "NEW",
     "update": "UPDATE",
-    "breaking-change": "BC"
+    "breaking-change": "BC",
+    "deprecated": "DEPRECATED"
   },
   "tag": {
     "preset": "Preset",
@@ -150,6 +151,7 @@
   "descriptions": "Descriptions",
   "dialogs": "Dialogs",
   "dividers": "Dividers",
+  "drag-zone": "Drag zone",
   "drawers": "Drawers",
   "drawflow": "Drawflow",
   "echarts": "ECharts",
