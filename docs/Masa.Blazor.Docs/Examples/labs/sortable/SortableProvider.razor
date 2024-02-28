@@ -1,0 +1,144 @@
+﻿<div class="mx-auto" style="max-width: 500px">
+    <div class="d-flex align-center">
+        <div>
+            <div>
+                order of main features: @string.Join(", ", _mainFeatureOrder)
+            </div>
+            <div>
+                order of rest features: @string.Join(", ", _restFeatureOrder)
+            </div>
+        </div>
+        <MSpacer/>
+        <MButton Color="primary" OnClick="@(() => _editMode = !_editMode)">
+            @(_editMode ? "Save" : "Edit")
+        </MButton>
+    </div>
+
+    <MDivider Class="my-2"/>
+
+    <MRow Id="sortable-provider-example" Style="min-height: 24px;">
+        <MSortableProvider Items="_mainFeatures"
+                           ItemKey="item => item.Name"
+                           @bind-Order="_mainFeatureOrder"
+                           Container="#sortable-provider-example"
+                           Animation="300"
+                           Disabled="@(!_editMode)"
+                           Easing="ease-in-out"
+                           Handle=".feature__icon"
+                           Group="features"
+                           OnAdd="HandleOnAdd">
+            <ItemContent>
+                <MCol Cols="3"
+                      @key="@context.Item.Name"
+                      @attributes="@context.Attrs">
+                    <a class="d-flex flex-column align-center justify-center secondary--text">
+                        <MBadge Overlap
+                                Bordered
+                                Color="error"
+                                Icon="mdi-close"
+                                Value="@_editMode"
+                                @onclick="@(() => HandleOnBadgeClick(context.Item))">
+                            <MIcon Large Class="feature__icon">@context.Item.Icon</MIcon>
+                        </MBadge>
+                        <span class="body-2">@context.Item.Name</span>
+                    </a>
+                </MCol>
+            </ItemContent>
+        </MSortableProvider>
+    </MRow>
+
+    <MDivider Class="my-2"/>
+
+    <MRow Id="sortable-provider-example2" Style="min-height: 24px;">
+        <MSortableProvider Items="_restFeatures"
+                           ItemKey="item => item.Name"
+                           @bind-Order="_restFeatureOrder"
+                           Container="#sortable-provider-example2"
+                           Animation="300"
+                           Disabled="@(!_editMode)"
+                           Easing="ease-in-out"
+                           Handle=".feature__icon"
+                           Group="features"
+                           OnAdd="HandleOnAddRest">
+            <ItemContent>
+                <MCol Cols="3"
+                      @key="@context.Item.Name"
+                      @attributes="@context.Attrs">
+                    <a class="d-flex flex-column align-center justify-center secondary--text">
+                        <MIcon Large Class="feature__icon">@context.Item.Icon</MIcon>
+                        <span class="body-2">@context.Item.Name</span>
+                    </a>
+                </MCol>
+            </ItemContent>
+        </MSortableProvider>
+    </MRow>
+</div>
+
+@code {
+
+    private bool _editMode = false;
+
+    private List<string> _mainFeatureOrder = [];
+    private List<string> _restFeatureOrder = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // assume that the order of the features is set by the user,
+        // here we just set the initial order by the name of the feature
+        _mainFeatureOrder = _mainFeatures.Select(u => u.Name).Order().ToList();
+        _restFeatureOrder = _restFeatures.Select(u => u.Name).Order().ToList();
+    }
+
+    private List<Feature> _mainFeatures =
+    [
+        new Feature("Airplane", "mdi-airplane-takeoff"),
+        new Feature("Train", "mdi-train"),
+        new Feature("Bus", "mdi-bus"),
+        new Feature("Bank", "mdi-bank")
+    ];
+
+    private List<Feature> _restFeatures =
+    [
+        new Feature("Music", "mdi-music"),
+        new Feature("Video", "mdi-video"),
+        new Feature("Cookie", "mdi-cookie"),
+        new Feature("Beer", "mdi-beer")
+    ];
+
+    private void HandleOnAdd(string key)
+    {
+        var feat = _restFeatures.FirstOrDefault(u => u.Name == key);
+        if (feat is null) return;
+
+        _mainFeatures.Add(feat);
+        _restFeatures.Remove(feat);
+    }
+
+    private void HandleOnBadgeClick(Feature feature)
+    {
+        if (!_editMode)
+        {
+            return;
+        }
+
+        _restFeatures.Add(feature);
+        _restFeatureOrder.Add(feature.Name);
+
+        _mainFeatures.Remove(feature);
+        _mainFeatureOrder.Remove(feature.Name);
+    }
+
+    public void HandleOnAddRest(string key)
+    {
+        var feat = _mainFeatures.FirstOrDefault(u => u.Name == key);
+        if (feat is null) return;
+
+        _restFeatures.Add(feat);
+        _mainFeatures.Remove(feat);
+    }
+
+    record Feature(string Name, string Icon);
+
+}

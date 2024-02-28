@@ -55,7 +55,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
 
     [Parameter] public string? Style { get; set; }
 
-    public string GetClass()
+    public string? GetClass()
     {
         var stringBuilder = new StringBuilder();
         foreach (var item in BuildComponentClass())
@@ -66,7 +66,8 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
 
         stringBuilder.Append(Class);
 
-        return stringBuilder.ToString().Trim();
+        var css = stringBuilder.ToString().Trim();
+        return css.Length == 0 ? null : css;
     }
 
     public string? GetStyle()

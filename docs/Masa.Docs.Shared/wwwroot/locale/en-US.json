@@ -53,7 +53,8 @@
   "state": {
     "new": "NEW",
     "update": "UPDATE",
-    "breaking-change": "BC"
+    "breaking-change": "BC",
+    "deprecated": "DEPRECATED"
   },
   "tag": {
     "preset": "Preset",
@@ -237,6 +238,7 @@
   "swiper": "Swiper",
   "steppers": "Steppers",
   "subheaders": "Subheaders",
+  "sortable": "Sortable",
   "tables": "Tables",
   "data-iterators": "Data iterators",
   "data-tables": "Data tables",
@@ -353,7 +355,6 @@
     "defaults-providers": "The defaults provider allows you to provide specific default prop values to components in a section of your application",
     "dialogs": "The dialog component is used for displaying critical information",
     "dividers": "The Dividers component is used to separate sections of lists or layouts",
-    "drag-zone": "The DragZone component is based on Sorttable.js to implement drag and drop functionality",
     "drawers": "Drawers",
     "drawflow": "A simple flow component",
     "echarts": "ECharts",
@@ -420,6 +421,7 @@
     "snackbars": "The Snackbars component is used to display quick messages to users",
     "steppers": "The Steppers component displays progress through numbered steps",
     "subheaders": "The Subheaders component is used to separate sections of lists",
+    "sortable": "Reorderable drag-and-drop lists for modern browsers and touch devices.",
     "splitters": "A simple and touch-ready panes splitter / resizer",
     "swiper": "The Swiper component is a touch enabled slider that allows users to drag between slides",
     "data-iterators": "The DataIterators component is used for displaying data, and shares a majority of its functionality with the MDataTable component",

@@ -105,7 +105,10 @@
       "descriptions",
       "dialogs",
       "dividers",
-      "drag-zone",
+      {
+        "title": "drag-zone",
+        "state": "deprecated"
+      },
       "drawers",
       "echarts",
       "editors",
@@ -303,6 +306,11 @@
         "title": "scroll-to-target",
         "state": "new",
         "releasedOn": "v1.3.4"
+      },
+      {
+        "title": "sortable",
+        "state": "new",
+        "releasedOn": "v1.4.0"
       },
       {
         "title": "splitters",

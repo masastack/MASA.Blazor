@@ -1,5 +1,6 @@
 ﻿namespace Masa.Blazor
 {
+    [Obsolete("The component is deprecated and will be removed in the next major version. Please use MSortable instead.")]
     public partial class MDragZone : BDragZone
     {
         [Parameter]

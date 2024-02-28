@@ -3,7 +3,11 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <span class="@GetClass()" style="@GetStyle()">
+    <span id="@Id"
+          class="@GetClass()"
+          style="@GetStyle()"
+          @ref="@Ref"
+          @attributes="@Attributes">
         @if (Inline && Left)
         {
             @GenWrapper()
