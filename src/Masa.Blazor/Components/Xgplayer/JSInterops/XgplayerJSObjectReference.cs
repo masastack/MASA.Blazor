@@ -33,9 +33,4 @@ public class XgplayerJSObjectReference : JSObjectReferenceBase
     {
         await JSObjectReference.InvokeVoidAsync("destroy");
     }
-
-    public async ValueTask DisposeAsync()
-    {
-        await JSObjectReference.DisposeAsync();
-    }
 }

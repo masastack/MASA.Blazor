@@ -321,4 +321,14 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
         NextTick(() => _ = _jsObjectReference.SortAsync(_internalOrder, false));
     }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        _sortableJSInteropHandle?.Dispose();
+
+        if (_jsObjectReference != null)
+        {
+            await _jsObjectReference.DisposeAsync();
+        }
+    }
 }
