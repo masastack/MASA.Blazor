@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Overlay
             {
                 props.Add(overlay => overlay.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Overlay
             {
                 props.Add(overlay => overlay.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-overlay");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Overlay
             {
                 props.Add(overlay => overlay.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-overlay--active");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Overlay
             {
                 props.Add(overlay => overlay.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-overlay--absolute");
 
             // Assert

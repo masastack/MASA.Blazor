@@ -19,7 +19,6 @@
             { typeof(BDatePickerYears), typeof(MDatePickerYears) },
             { typeof(BPicker), typeof(MPicker) },
             { typeof(BDatePickerTitle), typeof(MDatePickerTitle) },
-            { typeof(BOverlay), typeof(MOverlay) },
             { typeof(BChip), typeof(MChip) },
             { typeof(BLabel), typeof(MLabel) },
             { typeof(BMessages), typeof(MMessages) },

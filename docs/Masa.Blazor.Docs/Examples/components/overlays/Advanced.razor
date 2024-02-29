@@ -16,17 +16,16 @@
                      Color="orange"
                      BackgroundColor="orange"
                      Hover
-                     Class="mr-2"></MRating>
+                     Class="mr-2">
+            </MRating>
             <span class="primary--text text-subtitle-2">64 Reviews</span>
         </MCardTitle>
 
-        <FadeTransition>
-            <ShowTransitionElement Value="@context.Hover" Class="text-center">
-                <MOverlay Contained Value="@context.Hover"
-                          Color="#036358">
-                    <MButton>See more info</MButton>
-                </MOverlay>
-            </ShowTransitionElement>
-        </FadeTransition>
+        <MOverlay Contained
+                  Value="@context.Hover"
+                  Class="text-center"
+                  Color="#036358">
+            <MButton>See more info</MButton>
+        </MOverlay>
     </MCard>
 </MHover>

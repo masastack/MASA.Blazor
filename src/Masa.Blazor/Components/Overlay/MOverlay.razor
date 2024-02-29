@@ -1,0 +1,31 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+@if (_booted || Eager)
+{
+    <CascadingValue Value="IsDark" Name="IsDark">
+        <div class="@GetClass()"
+             style="@GetStyle()"
+             id="@Id"
+             @ref="@Ref"
+             @attributes="@Attributes">
+
+            <Transition Name="fade-transition">
+                <IfTransitionElement Value="@Value"
+                                     Class="@_block.Element("scrim").AddBackgroundColor(ComputedColor).AddClass(ScrimClass).Build()"
+                                     Style="@StyleBuilder.Create().AddBackgroundColor(ComputedColor).Build()">
+                </IfTransitionElement>
+            </Transition>
+
+
+            <Transition Name="fade-transition">
+                <ShowTransitionElement Value="@Value"
+                                       Class="@_block.Element("content").Build()"
+                                       ReferenceCaptureAction="r => ContentRef = r">
+                    @ChildContent
+                </ShowTransitionElement>
+            </Transition>
+        </div>
+    </CascadingValue>
+}
