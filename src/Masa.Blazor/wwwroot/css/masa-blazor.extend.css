@@ -1247,6 +1247,24 @@ input[type=number] {
     opacity: 0.08;
 }
 
+@media (pointer: fine) {
+    .m-digital-clock__items:hover {
+        overflow-y:auto;
+    }
+}
+
+@media (pointer: none) {
+    .m-digital-clock__items {
+        overflow-y:auto;
+    }
+}
+
+@media (pointer: coarse) {
+    .m-digital-clock__items {
+        overflow-y:auto;
+    }
+}
+
 /* menu */
 
 .theme--light.m-menu__content {
