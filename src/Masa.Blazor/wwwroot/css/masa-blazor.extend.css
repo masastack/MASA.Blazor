@@ -1446,3 +1446,25 @@ a.m-pagination__item {
 .m-input--switch--text .m-input--switch__right .m-icon {
     color: inherit;
 }
+
+/* overlay */
+
+.m-overlay__scrim {
+    opacity: var(--m-overlay-opacity, 0.32);
+}
+
+.m-overlay-scroll-blocked, .m-overlay--scroll-blocked {
+    padding-inline-end: var(--m-scrollbar-offset);
+}
+
+.m-overlay-scroll-blocked:not(html) {
+    overflow-y: hidden !important;
+}
+
+html.m-overlay-scroll-blocked {
+    position: fixed;
+    top: var(--m-body-scroll-y);
+    left: var(--m-body-scroll-x);
+    width: 100%;
+    height: 100%;
+}

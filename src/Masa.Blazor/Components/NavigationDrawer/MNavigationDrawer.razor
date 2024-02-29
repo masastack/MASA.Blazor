@@ -1,0 +1,79 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="this" IsFixed>
+        <CascadingValue Name="IsInNav" Value="@(Tag == "nav")">
+            <MOverlay ZIndex="@ZIndex"
+                      Absolute="@(!Fixed)"
+                      Value="@ShowOverlay"
+                      @ref="Overlay">
+            </MOverlay>
+
+            @*TODO: Directives,Listeners*@
+            <Element Tag="@Tag"
+                     Class="@GetClass()"
+                     Style="@GetStyle()"
+                     id="@Id"
+                     ReferenceCaptureAction="element => Ref = element"
+                     data-booted="true"
+                     @attributes="@Attributes"
+                     @onmouseenter="HandleOnMouseEnterAsync"
+                     @onmouseleave="HandleOnMouseLeaveAsync"
+                     @onclick="HandleOnClickAsync">
+                @GenBackground()
+
+                @GenPosition("prepend")
+
+                <div class="@_block.Element("content")">
+                    @ChildContent
+                </div>
+
+                @GenPosition("append")
+
+                <div class="@_block.Element("border")"></div>
+            </Element>
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenDefaultImageBackground() => __builder =>
+    {
+        <MImage Src="@Src"
+                Height="@("100%")"
+                Width="@("100%")"/>
+    };
+
+    private RenderFragment GenBackground() => __builder =>
+    {
+        if (string.IsNullOrWhiteSpace(Src) && ImgContent is null)
+        {
+            return;
+        }
+
+        <div class="@_block.Element("image")">
+            @(ImgContent?.Invoke(new Dictionary<string, object?>
+            {
+                { "Height", "100%" },
+                { "Width", "100%" },
+                { "Src", Src }
+            }) ?? GenDefaultImageBackground())
+        </div>
+    };
+
+    private RenderFragment GenPosition(string position) => __builder =>
+    {
+        var content = position == "prepend" ? PrependContent : AppendContent;
+        if (content is null)
+        {
+            return;
+        }
+
+        <div class="@_block.Element(position)">
+            @content
+        </div>
+    };
+
+}

@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.App, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Clipped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClippedClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.DisableResizeWatcher, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableResizeWatcherClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.DisableRouteWatcher, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableRouteWatcherClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.ExpandOnHover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasExpandOnHoverClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Fixed, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Floating, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFloatingClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.MiniVariant, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMiniVariantClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Permanent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPermanentClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -255,7 +255,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -271,7 +271,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Stateless, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStatelessClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -287,7 +287,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Temporary, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTemporaryClass = classes.Contains("m-navigation-drawer");
 
             // Assert
@@ -303,7 +303,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             {
                 props.Add(navigationdrawer => navigationdrawer.Touchless, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTouchlessClass = classes.Contains("m-navigation-drawer");
 
             // Assert

@@ -1,0 +1,45 @@
+﻿@namespace Masa.Blazor
+@inherits BBootable
+
+<CascadingValue Value="IsDark" Name="IsDark">
+
+    @ComputedActivatorContent
+
+    <CascadingValue Value="this" IsFixed>
+        <div class="@CssProvider.GetClass()"
+             style="@CssProvider.GetStyle()"
+             id="@Id"
+             @ref="Ref"
+             role="dialog">
+            @if (IsBooted)
+            {
+                <div class="@CssProvider.GetClass("content")"
+                     style="@CssProvider.GetStyle("content")"
+                     @onkeydown="@Keydown"
+                     @ref="@ContentRef"
+                     @attributes="@ContentAttrs">
+
+                    <Transition Name="@Transition">
+                        <ShowTransitionElement Value="@IsActive"
+                                               Class="@CssProvider.GetClass("innerContent")"
+                                               Style="@CssProvider.GetStyle("innerContent")"
+                                               ReferenceCaptureAction="r => DialogRef = r">
+                            @ChildContent
+                        </ShowTransitionElement>
+                    </Transition>
+
+                </div>
+
+                if (ShowOverlay)
+                {
+                    <MOverlay ScrimClass="@OverlayScrimClass"
+                              Value="@IsActive"
+                              ZIndex="@(ZIndex - 1)"
+                              @ref="Overlay">
+                    </MOverlay>
+                }
+            }
+        </div>
+    </CascadingValue>
+
+</CascadingValue>
