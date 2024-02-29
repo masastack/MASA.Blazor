@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using Masa.Blazor.Utils;
+
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Masa.Blazor.Presets.PageContainer;
@@ -7,8 +10,8 @@ public class LRUCache<TKey, TValue> : IEnumerable<TValue> where TKey : notnull
 {
     private const int DEFAULT_CAPACITY = 10;
 
-    private readonly LinkedList<TKey> _list;
-    private readonly Dictionary<TKey, TValue> _dictionary;
+    private readonly ConcurrentLinkedList<TKey> _list;
+    private readonly ConcurrentDictionary<TKey, TValue> _dictionary;
     private readonly int _capacity;
 
     public LRUCache() : this(DEFAULT_CAPACITY)
@@ -18,11 +21,11 @@ public class LRUCache<TKey, TValue> : IEnumerable<TValue> where TKey : notnull
     public LRUCache(int capacity)
     {
         _capacity = capacity > 0 ? capacity : DEFAULT_CAPACITY;
-        _list = new LinkedList<TKey>();
-        _dictionary = new Dictionary<TKey, TValue>();
+        _list = new ConcurrentLinkedList<TKey>();
+        _dictionary = new ConcurrentDictionary<TKey, TValue>();
     }
 
-    public Dictionary<TKey, TValue>.KeyCollection Keys => _dictionary.Keys;
+    public ICollection<TKey> Keys => _dictionary.Keys;
 
     public TValue? Get(TKey key)
     {
@@ -48,12 +51,12 @@ public class LRUCache<TKey, TValue> : IEnumerable<TValue> where TKey : notnull
         {
             if (_list.Count == _capacity)
             {
-                _dictionary.Remove(_list.First!.Value);
+                _dictionary.TryRemove(_list.First!.Value, out var _);
                 _list.RemoveFirst();
             }
 
             _list.AddLast(key);
-            _dictionary.Add(key, value);
+            _dictionary.TryAdd(key, value);
         }
     }
 
@@ -84,7 +87,7 @@ public class LRUCache<TKey, TValue> : IEnumerable<TValue> where TKey : notnull
     {
         if (_dictionary.TryGetValue(key, out _))
         {
-            _dictionary.Remove(key);
+            _dictionary.TryRemove(key, out var _);
             _list.Remove(key);
         }
     }
