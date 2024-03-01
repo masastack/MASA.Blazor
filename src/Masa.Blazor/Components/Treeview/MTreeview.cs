@@ -32,8 +32,8 @@
         public bool Activatable { get; set; }
 
         [Parameter]
-        [MasaApiParameter("$minus")]
-        public string? IndeterminateIcon { get; set; } = "$minus";
+        [MasaApiParameter("$checkboxIndeterminate")]
+        public string? IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
 
         [Parameter]
         [MasaApiParameter("$checkboxOn")]
