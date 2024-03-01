@@ -142,16 +142,16 @@ public abstract class MasaNextTickComponentBase : ComponentBase, IAsyncDisposabl
         {
             // ignored
         }
-        catch (JSException e)
+        // HACK: remove this after https://github.com/dotnet/aspnetcore/issues/52119 is fixed
+        catch (JSException e) when (e.Message.Contains("has it been disposed")
+                                    && (OperatingSystem.IsWindows() || OperatingSystem.IsAndroid() ||
+                                        OperatingSystem.IsIOS()))
         {
-            // HACK: remove this after https://github.com/dotnet/aspnetcore/issues/52119 is fixed
-            if (e.Message.Contains("has it been disposed") && (OperatingSystem.IsWindows() ||
-                                                               OperatingSystem.IsAndroid() || OperatingSystem.IsIOS()))
-            {
-                return;
-            }
-
-            throw;
+            // ignored
+        }
+        catch (InvalidOperationException e) when (e.Message.Contains("prerendering"))
+        {
+            // ignored
         }
 
         GC.SuppressFinalize(this);
