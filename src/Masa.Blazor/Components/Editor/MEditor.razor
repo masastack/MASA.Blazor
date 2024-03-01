@@ -1,0 +1,17 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref">
+    <div class="@ToolbarClass"
+         style="@ToolbarStyle"
+         @ref="@ToolbarRef">
+        @ToolbarContent
+    </div>
+    <div class="@ContentClass"
+         style="@ContentStyle"
+         @ref="@ContentRef">
+    </div>
+</div>
