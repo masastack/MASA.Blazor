@@ -80,6 +80,10 @@
     right: -60px;
 }
 
+.m-data-table__checkbox.m-simple-checkbox > .m-input--selection-controls__input {
+    margin-right: 0;
+}
+
 /* strip in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
     background: #fafafa;
