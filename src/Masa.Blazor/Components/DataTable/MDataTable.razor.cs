@@ -78,6 +78,9 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     public bool ShowSelect { get; set; }
 
     [Parameter]
+    public bool FixedSelect { get; set; }
+
+    [Parameter]
     public bool ShowExpand { get; set; }
 
     [Parameter]
@@ -145,7 +148,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
                 {
                     headers.Insert(0, new DataTableHeader<TItem>
                     {
-                        Width = "1px",
+                        Fixed = FixedSelect ? DataTableFixed.Left : DataTableFixed.None,
+                        Width = "56px",
                         Value = "data-table-select"
                     });
                 }
