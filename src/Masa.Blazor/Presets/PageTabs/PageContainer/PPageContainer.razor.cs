@@ -42,6 +42,8 @@ public partial class PPageContainer : PatternPathComponentBase
     [Parameter] [MasaApiParameter(10, "v1.0.2")]
     public int Max { get; set; } = 10;
 
+    [Parameter] public string? Transition { get; set; } = "";
+
     private readonly LRUCache<string, PatternPath> _patternPaths = new(10);
 
     private string? _previousPath;
