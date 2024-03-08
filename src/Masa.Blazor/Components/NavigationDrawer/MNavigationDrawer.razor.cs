@@ -213,16 +213,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     //TODO ontransitionend事件
 
-    protected async Task HideScroll()
-    {
-        await Js.InvokeVoidAsync(JsInteropConstants.HideScroll, IsFullscreen, OverlayRef.GetSelector());
-    }
-
-    protected async Task ShowScroll()
-    {
-        await Js.InvokeVoidAsync(JsInteropConstants.ShowScroll, OverlayRef.GetSelector());
-    }
-
     protected bool CloseConditional()
     {
         return IsActive && !IsDisposed && ReactsToClick;
@@ -240,8 +230,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     {
         "Bottom", "Footer", "Bar", "Top"
     };
-
-    private bool _prevShowOverlay;
 
     protected StringNumber? ComputedMaxHeight
     {
@@ -386,13 +374,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             await UpdateApplicationAsync();
             ZIndex = await GetActiveZIndexAsync();
             StateHasChanged();
-        }
-
-        if (_prevShowOverlay != ShowOverlay)
-        {
-            _prevShowOverlay = ShowOverlay;
-
-            _ = ShowOverlay ? HideScroll() : ShowScroll();
         }
     }
 
