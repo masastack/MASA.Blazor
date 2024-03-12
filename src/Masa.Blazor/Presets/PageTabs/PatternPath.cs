@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public record PatternPath
+public class PatternPath
 {
     public PatternPath(string absolutePath)
     {
