@@ -55,6 +55,8 @@ namespace Masa.Blazor
 
         private readonly List<IDependent> _dependents = new();
 
+        private bool _attatched;
+
         public bool IsDark
         {
             get
@@ -126,6 +128,8 @@ namespace Masa.Blazor
                 await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
+
+                _attatched = true;
             }
         }
 
@@ -176,11 +180,11 @@ namespace Masa.Blazor
 
         protected override async ValueTask DisposeAsyncCore()
         {
-            await DeleteContent();
-        }
+            if (!_attatched)
+            {
+                return;
+            }
 
-        protected virtual async Task DeleteContent()
-        {
             if (ContentRef.Context != null)
             {
                 await JsInvokeAsync(JsInteropConstants.DelElementFrom, ContentRef, AttachSelector);
