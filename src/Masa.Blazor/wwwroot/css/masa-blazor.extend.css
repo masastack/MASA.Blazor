@@ -391,6 +391,7 @@
 
 .p-page-container {
     overflow: visible;
+    height: 100%;
 }
 
 /* block-text */

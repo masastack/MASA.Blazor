@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
@@ -91,8 +89,10 @@ public partial class PPageTabs : PatternPathComponentBase
     [Parameter]
     public Func<string, Task<bool>>? OnClose { get; set; }
 
-    protected readonly List<PatternPath> PatternPaths = new();
+    private readonly Block _tabBlock = new("p-page-tab");
 
+    protected readonly List<PatternPath> PatternPaths = new();
+    
     private bool _menuValue;
     private string? _noDataPath;
     private string? _previousPath;
@@ -133,14 +133,9 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.Apply(css => css.Add("p-page-tabs"))
-                   .Apply("tab", css => css.Add("p-page-tab").Add(TabClass))
-                   .Apply("tab-title", css => css.Add("p-page-tab__title"))
-                   .Apply("tab-close", css => css.Add("p-page-tab__close"));
+        yield return "p-page-tabs";
     }
 
     [MasaApiPublicMethod]
