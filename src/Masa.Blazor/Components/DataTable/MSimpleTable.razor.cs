@@ -102,7 +102,8 @@ public partial class MSimpleTable : BDomComponentBase
                 css => css.AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
                           .AddIf("scrolling", () => HasFixed && _scrollState == 1)
                           .AddIf("scrolled-to-right", () => HasFixed && _scrollState == 2),
-                style => style.AddHeight(Height).AddWidth(Width));
+                style => style.AddHeight(Height))
+            .Apply("table", styleAction: style => style.AddWidth(Width));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
