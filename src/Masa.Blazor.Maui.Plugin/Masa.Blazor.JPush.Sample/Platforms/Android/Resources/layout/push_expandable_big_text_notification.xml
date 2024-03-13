@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent">
+
+
+    <RelativeLayout
+        android:id="@+id/push_big_pic_default_Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:background="@android:color/transparent">
+        <RelativeLayout
+            android:id="@+id/push_big_defaultView"
+            android:layout_width="match_parent"
+            android:layout_height="65dp" >
+
+            <ImageView
+                android:id="@+id/push_big_notification_icon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerInside" />
+
+
+            <ImageView
+                android:id="@+id/push_big_notification_icon2"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignBottom="@id/push_big_notification_icon"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerInside" />
+
+            <RelativeLayout
+                android:id="@+id/push_big_notification"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_toRightOf="@id/push_big_notification_icon"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <DateTimeView
+                    android:id="@+id/push_big_notification_date"
+                    style="@android:style/TextAppearance.StatusBar.EventContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:textSize="12sp"
+                    android:textColor="#ffffff"
+                    android:alpha="0.6"/>
+
+                <TextView
+                    android:id="@+id/push_big_notification_title"
+                    style="@android:style/TextAppearance.StatusBar.EventContent.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    android:layout_toLeftOf="@id/push_big_notification_date"
+                    android:textStyle="normal"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/push_big_notification_content"
+                    style="@android:style/TextAppearance.StatusBar.EventContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/push_big_notification_title"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:textColor="#ffffff"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/push_big_text_notification_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="69dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/push_big_bigtext_defaultView"
+                style="@android:style/TextAppearance.StatusBar.EventContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="192dp"
+                android:textColor="#ffffff"
+                android:alpha="0.9"
+                android:visibility="gone"
+                android:textStyle="normal"
+                android:ellipsize = "end"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

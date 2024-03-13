@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -17,12 +17,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="BarcodeScanner.Mobile.Maui" Version="6.3.0.25-pre" />
 	  <PackageReference Include="ZXing.Net.Maui" Version="0.3.0-preview.1" />
+	  <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="MasaBarcodeReader.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="MasaBarcodeReader2.xaml.cs">
+	    <DependentUpon>MasaBarcodeReader2.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -30,16 +35,9 @@
 	  <MauiXaml Update="MasaBarcodeReader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Platforms\Android\" />
-	  <Folder Include="Platforms\iOS\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI.Controls\ZXing.Net.MAUI.Controls.csproj" />
-	  <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI\ZXing.Net.MAUI.csproj" />
+	  <MauiXaml Update="MasaBarcodeReader2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

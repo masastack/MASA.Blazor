@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <root-path name="jad_root_path" path="."/>
+        <external-path name="jad_external_path" path="JAdDownload" />
+        <external-files-path name="jad_external_files_path" path="JAdDownload" />
+        <files-path name="jad_files_path" path="JAdDownload" />
+        <cache-path name="jad_cache_path" path="JAdDownload" />
+    </paths>
+</resources>

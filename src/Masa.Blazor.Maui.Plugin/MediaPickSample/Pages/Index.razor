@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Masa.BuildingBlocks.Storage.ObjectStorage;
 @using MediaPickSample.Service;
+@using Masa.Blazor.Presets
 
 <MCard Color="#FFFFFF" Class="mx-auto rounded-3 mt-3" Elevation="0">
     <MCardText>
@@ -47,14 +48,49 @@
         </div>
 
     </MCardText>
+                <MButton OnClick="()=>Enqueue(AlertTypes.Error)"></MButton>
+    
+    <PEnqueuedSnackbars @ref="_enqueuedSnackbars"
+        Closeable="false"
+        MaxCount="5"
+        Timeout="5000"
+        Position="@SnackPosition.TopCenter">
+    </PEnqueuedSnackbars>
 </MCard>
 @code {
     [Inject]
     private IPhotoPickerService _photoPickerService { get; set; }
+
+    [Inject]
+    private IPopupService PopupService { get; set; }
+
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
     [Inject]
     private IClient _client { get; set; }
     private Dictionary<string, string> _phoneDictionary { get; set; } = new Dictionary<string, string>();
 
+    private void Enqueue(AlertTypes type)
+    {
+        _enqueuedSnackbars?.EnqueueSnackbar(new SnackbarOptions()
+            {
+                Content = $"{type} snackbar!",
+                Type = type,
+                Closeable = true
+            });
+    }
+
+
+
+    private Task ShowBasic()
+    {
+        return PopupService.OpenAsync(typeof(PEnqueuedSnackbars),new Dictionary<string, object?>()
+        {
+            { nameof(PEnqueuedSnackbars.Closeable), true },
+            { nameof(PEnqueuedSnackbars.Position), SnackPosition.TopRight },
+
+        });
+        return PopupService.EnqueueSnackbarAsync("This a basic snackbar!",AlertTypes.Error,false,10000);
+    }
     private async Task GetImageAsync1()
     {
         var photoDic = await _photoPickerService.GetImageAsync1();

@@ -202,7 +202,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 #if !__WATCHOS__
                 switch (central.State)
                 {
-#if NET6_0_OR_GREATER
+#if net7_0_OR_GREATER
                     case CBManagerState.PoweredOn:
                     case CBManagerState.Resetting:
 #else
@@ -274,7 +274,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             switch (_manager.State)
             {
-#if NET6_0_OR_GREATER || __WATCHOS__
+#if net7_0_OR_GREATER || __WATCHOS__
                 case CBManagerState.PoweredOn:
                 case CBManagerState.Resetting:
 #else

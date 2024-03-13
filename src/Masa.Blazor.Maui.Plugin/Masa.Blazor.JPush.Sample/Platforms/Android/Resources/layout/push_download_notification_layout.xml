@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jad_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/jad_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="#0A9789"
+        android:duplicateParentState="false"
+        android:scaleType="center" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/jad_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:id="@+id/jad_download_success"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jad_desc"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/download_success_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:gravity="start|center"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/jad_download_success_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="start|center"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/jad_download_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jad_desc"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/jad_download_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ellipsize="end"
+                android:gravity="start|center"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:id="@+id/jad_download_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ellipsize="end"
+                android:gravity="end|center"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="11sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/jad_action"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end|center"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:background="@drawable/jpush_btn_bg_green_playable"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"/>
+</LinearLayout>

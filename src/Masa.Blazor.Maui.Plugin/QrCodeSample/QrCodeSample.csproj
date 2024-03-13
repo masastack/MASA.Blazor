@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-        <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+        <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
         <OutputType>Exe</OutputType>
         <RootNamespace>QrCodeSample</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -30,7 +30,7 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+    <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
       <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
       <CodesignProvision>VS: WildCard Development</CodesignProvision>
     </PropertyGroup>
@@ -55,8 +55,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.QrCode\Masa.Blazor.Maui.Plugin.QrCode.csproj" />
-      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI.Controls\ZXing.Net.MAUI.Controls.csproj" />
-      <ProjectReference Include="C:\Users\guohao\source\repos\ZXing.Net.Maui\ZXing.Net.MAUI\ZXing.Net.MAUI.csproj" />
     </ItemGroup>
 
 </Project>

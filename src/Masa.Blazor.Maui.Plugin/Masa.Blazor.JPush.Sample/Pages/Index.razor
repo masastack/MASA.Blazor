@@ -1,0 +1,20 @@
+﻿@page "/"
+@using CN.Jpush.Android.Api;
+@using CN.Jpush.Android.Data;
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+<span>@rid</span>
+<button @onclick="GetRid"></button>
+@code
+{
+    private string rid { get; set; }
+
+    private void GetRid()
+    {
+        rid = JPushInterface.GetRegistrationID(Android.App.Application.Context);
+    }
+}
