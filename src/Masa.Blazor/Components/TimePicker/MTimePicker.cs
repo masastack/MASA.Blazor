@@ -4,7 +4,17 @@
     {
         [Inject]
         private I18n I18n { get; set; } = null!;
-        
+
+        [Parameter]
+        public TimePickerType ActivePicker
+        {
+            get => GetValue<TimePickerType>();
+            set => SetValue(value);
+        }
+
+        [Parameter]
+        public EventCallback<TimePickerType> ActivePickerChanged { get; set; }
+
         [Parameter]
         public string? HeaderColor { get; set; }
 
@@ -30,11 +40,11 @@
         public bool Light { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(290)]
+        [MasaApiParameter(290)]
         public StringNumber? Width { get; set; } = 290;
 
         [Parameter]
-        [ApiDefaultValue(TimeFormat.AmPm)]
+        [MasaApiParameter(TimeFormat.AmPm)]
         public TimeFormat Format { get; set; } = TimeFormat.AmPm;
 
         [Parameter]
@@ -73,14 +83,8 @@
         [Parameter]
         public TimeOnly? Value
         {
-            get
-            {
-                return GetValue<TimeOnly?>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get { return GetValue<TimeOnly?>(); }
+            set { SetValue(value); }
         }
 
         [Parameter]
@@ -89,11 +93,24 @@
         [Parameter]
         public EventCallback<TimeOnly?> OnChange { get; set; }
 
+        [Parameter]
+        public EventCallback<int> OnHourClick { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnMinuteClick { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnSecondClick { get; set; }
+
         public string? AmText { get; set; }
 
         public string? PmText { get; set; }
 
-        public SelectingTimes Selecting { get; set; } = SelectingTimes.Hour;
+        public SelectingTimes Selecting
+        {
+            get => GetValue(SelectingTimes.Hour);
+            set => SetValue(value);
+        }
 
         protected int? InputHour { get; set; }
 
@@ -101,120 +118,24 @@
 
         protected int? InputSecond { get; set; }
 
-        protected TimePeriod Period { get; set; } = TimePeriod.Am;
+        public TimePeriod Period { get; internal set; } = TimePeriod.Am;
 
         public bool IsAmPm => Format == TimeFormat.AmPm;
 
-        protected Func<int, bool> IsAllowedHourCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
+        protected Func<int, bool>? IsAllowedHourCb
+            => TimeHelper.IsAllowedHour24(AllowedHours, Max, Min);
 
-                if (AllowedHours.IsT1)
-                {
-                    cb = val => AllowedHours.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedHours.AsT0;
-                }
+        protected Func<int, bool>? IsAllowedMinuteCb
+            => TimeHelper.IsAllowedMinute(IsAllowedHourCb, AllowedMinutes, Max, Min, InputHour);
 
-                if (Min == null && Max == null)
-                {
-                    return cb;
-                }
-
-                var minHour = Min != null ? Min.Value.Hour : 0;
-                var maxHour = Max != null ? Max.Value.Hour : 23;
-
-                return val => val >= minHour && val <= maxHour && (cb == null || cb(val));
-            }
-        }
-
-        protected Func<int, bool> IsAllowedMinuteCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
-
-                var isHourAllowed = IsAllowedHourCb == null || InputHour == null || IsAllowedHourCb(InputHour.Value);
-                if (AllowedMinutes.IsT1)
-                {
-                    cb = val => AllowedMinutes.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedMinutes.AsT0;
-                }
-
-                if (Min == null && Max == null)
-                {
-                    return isHourAllowed ? cb : val => false;
-                }
-
-                var (minHour, minMinute) = Min != null ? (Min.Value.Hour, Min.Value.Minute) : (0, 0);
-                var (maxHour, maxMinute) = Max != null ? (Max.Value.Hour, Max.Value.Minute) : (23, 59);
-                var minTime = minHour * 60 + minMinute;
-                var maxTime = maxHour * 60 + maxMinute;
-
-                return val =>
-                {
-                    var time = 60 * InputHour + val;
-                    return time >= minTime && time <= maxTime && isHourAllowed && (cb == null || cb(val));
-                };
-            }
-        }
-
-        protected Func<int, bool> IsAllowedSecondCb
-        {
-            get
-            {
-                var cb = (Func<int, bool>)null;
-
-                var isHourAllowed = IsAllowedHourCb == null || InputHour == null || IsAllowedHourCb(InputHour.Value);
-                var isMinuteAllowed = isHourAllowed && (IsAllowedMinuteCb == null || InputMinute == null || IsAllowedMinuteCb(InputMinute.Value));
-
-                if (AllowedSeconds.IsT1)
-                {
-                    cb = val => AllowedSeconds.AsT1.Contains(val);
-                }
-                else
-                {
-                    cb = AllowedSeconds.AsT0;
-                }
-
-                if (Min == null && Max == null)
-                {
-                    return isMinuteAllowed ? cb : _ => false;
-                }
-
-                var (minHour, minMinute, minSecond) = Min != null ? (Min.Value.Hour, Min.Value.Minute, Min.Value.Second) : (0, 0, 0);
-                var (maxHour, maxMinute, maxSecond) = Max != null ? (Max.Value.Hour, Max.Value.Minute, Max.Value.Second) : (23, 59, 59);
-                var minTime = minHour * 3600 + minMinute * 60 + minSecond;
-                var maxTime = maxHour * 3600 + maxMinute * 60 + maxSecond;
-
-                return val =>
-                {
-                    var time = 3600 * InputHour + 60 * InputMinute + val;
-                    return time >= minTime && time <= maxTime && isMinuteAllowed && (cb == null || cb(val));
-                };
-            }
-        }
+        protected Func<int, bool>? IsAllowedSecondCb
+            => TimeHelper.IsAllowedSecond(IsAllowedHourCb, IsAllowedMinuteCb, AllowedSeconds, Max, Min, InputHour, InputMinute);
 
         public int? LazyInputHour { get; private set; }
+
         public int? LazyInputMinute { get; private set; }
+
         public int? LazyInputSecond { get; private set; }
-
-        private static string Convert24To12(int hour)
-        {
-            return $"{(hour > 0 ? ((hour - 1) % 12 + 1) : 12)}";
-        }
-
-        private static int Convert12To24(int hour, TimePeriod period)
-        {
-            return hour % 12 + (period == TimePeriod.Pm ? 12 : 0);
-        }
 
         private string Pad(int val)
         {
@@ -225,7 +146,7 @@
         {
             if (Selecting == SelectingTimes.Hour)
             {
-                InputHour = IsAmPm ? Convert12To24(value, Period) : value;
+                InputHour = IsAmPm ? TimeHelper.Convert12To24(value, Period) : value;
             }
             else if (Selecting == SelectingTimes.Minute)
             {
@@ -263,6 +184,19 @@
 
         private async Task HandleOnChangeAsync(int value)
         {
+            switch (Selecting)
+            {
+                case SelectingTimes.Hour:
+                    await OnHourClick.InvokeAsync(value);
+                    break;
+                case SelectingTimes.Minute:
+                    await OnMinuteClick.InvokeAsync(value);
+                    break;
+                case SelectingTimes.Second:
+                    await OnSecondClick.InvokeAsync(value);
+                    break;
+            }
+
             var emitChange = Selecting == (UseSeconds ? SelectingTimes.Second : SelectingTimes.Minute);
 
             if (Selecting == SelectingTimes.Hour)
@@ -347,9 +281,9 @@
 
         public override Task SetParametersAsync(ParameterView parameters)
         {
-            AmText = I18n.T("$masaBlazor.timePicker.am");    
-            PmText = I18n.T("$masaBlazor.timePicker.pm");    
-            
+            AmText = I18n.T("$masaBlazor.timePicker.am");
+            PmText = I18n.T("$masaBlazor.timePicker.pm");
+
             return base.SetParametersAsync(parameters);
         }
 
@@ -365,7 +299,9 @@
             base.RegisterWatchers(watcher);
 
             watcher
-                .Watch<TimeOnly?>(nameof(Value), SetInputData);
+                .Watch<TimeOnly?>(nameof(Value), SetInputData)
+                .Watch<SelectingTimes>(nameof(Selecting), EmitPicker)
+                .Watch<TimePickerType>(nameof(ActivePicker), SetPicker);
         }
 
         private void SetInputData(TimeOnly? value)
@@ -375,6 +311,18 @@
             InputSecond = value?.Second;
 
             Period = (InputHour == 0 || InputHour < 12) ? TimePeriod.Am : TimePeriod.Pm;
+        }
+
+        private void EmitPicker(SelectingTimes selecting)
+        {
+            var activePicker = (TimePickerType)(selecting);
+            ActivePickerChanged.InvokeAsync(activePicker);
+        }
+
+        private void SetPicker(TimePickerType picker)
+        {
+            Selecting = (SelectingTimes)picker;
+            StateHasChanged();
         }
 
         protected override void SetComponentClass()
@@ -441,10 +389,7 @@
                     attrs[nameof(MTimePickerTitle.Readonly)] = Readonly;
                     attrs[nameof(MTimePickerTitle.UseSeconds)] = UseSeconds;
                     attrs[nameof(MTimePickerTitle.Selecting)] = Selecting;
-                    attrs[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value =>
-                    {
-                        Selecting = value;
-                    });
+                    attrs[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value => { Selecting = value; });
                     attrs[nameof(MTimePickerTitle.OnPeriodUpdate)] = CreateEventCallback<TimePeriod>(async value =>
                     {
                         await SetPeriodAsync(value);
@@ -457,12 +402,14 @@
                 })
                 .Apply(typeof(BTimePickerClock), typeof(MTimePickerClock), attrs =>
                 {
-                    attrs[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour ? IsAllowedHourCb : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
+                    attrs[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour
+                        ? IsAllowedHourCb
+                        : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
                     attrs[nameof(MTimePickerClock.Color)] = Color;
                     attrs[nameof(MTimePickerClock.Dark)] = Dark;
                     attrs[nameof(MTimePickerClock.Disabled)] = Disabled;
                     attrs[nameof(MTimePickerClock.Double)] = Selecting == SelectingTimes.Hour && !IsAmPm;
-                    Func<int, string> format = Selecting == SelectingTimes.Hour ? (IsAmPm ? Convert24To12 : val => $"{val}") : val => Pad(val);
+                    Func<int, string> format = Selecting == SelectingTimes.Hour ? (IsAmPm ? val => TimeHelper.Convert24To12(val).ToString() : val => $"{val}") : val => Pad(val);
                     attrs[nameof(MTimePickerClock.Format)] = format;
                     attrs[nameof(MTimePickerClock.Light)] = Light;
                     attrs[nameof(MTimePickerClock.Max)] = Selecting == SelectingTimes.Hour ? (IsAmPm && Period == TimePeriod.Am ? 11 : 23) : 59;
@@ -470,7 +417,9 @@
                     attrs[nameof(MTimePickerClock.Readonly)] = Readonly;
                     attrs[nameof(MTimePickerClock.Scrollable)] = Scrollable;
                     attrs[nameof(MTimePickerClock.Step)] = Selecting == SelectingTimes.Hour ? 1 : 5;
-                    attrs[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour ? InputHour : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
+                    attrs[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour
+                        ? InputHour
+                        : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
                     attrs[nameof(MTimePickerClock.OnInput)] = CreateEventCallback<int>(HandleOnInputAsync);
                     attrs[nameof(MTimePickerClock.OnChange)] = CreateEventCallback<int>(HandleOnChangeAsync);
                 });

@@ -36,7 +36,7 @@
 .m-application--is-rtl {
     direction: rtl;
 }
-.m-application--wrap {
+.m-application__wrap {
     flex: 1 1 auto;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -52,7 +52,7 @@
         .m-application {
             display: block;
         }
-        .m-application--wrap {
+        .m-application__wrap {
             display: block;
         }
     }
@@ -3384,7 +3384,11 @@ progress {
 }
 
 .dialog-transition-enter-active, .dialog-transition-leave-active {
-    pointer-events: none !important;
+    /* HACK: Temporarily comment out this code block because in high latency situations,
+         the transition animation of the dialog may not complete, 
+         which can result in this CSS not being removed, making the dialog unclickable.
+         Fix this when refactoring transition!*/
+    /*pointer-events: none !important;*/
 }
 .dialog-transition-enter, .dialog-transition-leave-to {
     transform: scale(0.5);
@@ -18152,12 +18156,15 @@ html.overflow-y-hidden {
 }
 .m-ripple__animation--enter {
     transition: none;
+    opacity: 0;
 }
 .m-ripple__animation--in {
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.25;
 }
 .m-ripple__animation--out {
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
 }
 .theme--light.m-icon {
     color: rgba(0, 0, 0, 0.54);
@@ -21400,16 +21407,11 @@ html.overflow-y-hidden {
 .m-badge--tile .m-badge__badge {
     border-radius: 0;
 }
-.theme--light.m-banner.m-sheet {
-    background-color: transparent;
-}
+
 .theme--light.m-banner.m-sheet:not(.m-sheet--outlined):not(.m-sheet--shaped) .m-banner__wrapper {
     border-bottom: thin solid rgba(0, 0, 0, 0.12);
 }
 
-.theme--dark.m-banner.m-sheet {
-    background-color: transparent;
-}
 .theme--dark.m-banner.m-sheet:not(.m-sheet--outlined):not(.m-sheet--shaped) .m-banner__wrapper {
     border-bottom: thin solid rgba(255, 255, 255, 0.12);
 }
@@ -23249,7 +23251,7 @@ html.overflow-y-hidden {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: currentColor;
+    /*background: currentColor;*/
     opacity: 0.3;
     position: absolute;
     left: -12px;
@@ -24026,31 +24028,7 @@ html.overflow-y-hidden {
 .m-data-table--fixed-header.m-data-table--dense > .m-data-table__wrapper > table > thead > tr:nth-child(2) > th {
     top: 32px;
 }
-.theme--light.m-small-dialog__menu-content, .theme--light.m-small-dialog__actions {
-    background: #FFFFFF;
-}
 
-.theme--dark.m-small-dialog__menu-content, .theme--dark.m-small-dialog__actions {
-    background: #1E1E1E;
-}
-
-.m-small-dialog {
-    display: block;
-}
-.m-small-dialog__activator {
-    cursor: pointer;
-}
-.m-small-dialog__activator__content {
-    display: inline-block;
-}
-.m-small-dialog__content {
-    padding: 0 16px;
-}
-.m-small-dialog__actions {
-    padding: 8px;
-    text-align: right;
-    white-space: pre;
-}
 .m-virtual-table {
     position: relative;
 }

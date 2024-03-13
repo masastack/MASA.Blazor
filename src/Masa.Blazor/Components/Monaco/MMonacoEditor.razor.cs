@@ -9,7 +9,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public object? EditorOptions { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("100%")]
+    [MasaApiParameter("100%")]
     public StringNumber? Width { get; set; } = "100%";
 
     [Parameter]
@@ -19,7 +19,7 @@ public partial class MMonacoEditor : BDomComponentBase
     public StringNumber? MinWidth { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("320px")]
+    [MasaApiParameter("320px")]
     public StringNumber? MinHeight { get; set; } = "320px";
 
     [Parameter]
@@ -121,6 +121,7 @@ public partial class MMonacoEditor : BDomComponentBase
             language = "csharp"
         };
 
+        // TODO: need dispose the object reference in .NET or JS
         Editor = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();

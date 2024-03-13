@@ -18,9 +18,9 @@ namespace Masa.Blazor.Presets.Cron.Models
 
         public List<int> SpecifyPeriods { get; set; } = new();
 
-        public WeekNumbers SelectWeekNumber;
+        public WeekNumbers SelectWeekNumber { get; set; }
 
-        public DayOfWeek SelectDayOfWeek;
+        public DayOfWeek SelectDayOfWeek { get; set; }
 
         public int? NearestOfDay { get; set; }
 

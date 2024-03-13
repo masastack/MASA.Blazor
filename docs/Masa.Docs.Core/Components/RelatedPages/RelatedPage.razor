@@ -3,7 +3,7 @@
 @inject AppService AppService
 @inject I18n I18n
 
-<AppSheet MinHeight="@((StringNumber)61)">
+<AppSheet Class="m-sheet--no-bg" MinHeight="@((StringNumber)61)">
     <MListItem Href="@Href" Disabled="@Disabled">
         <MListItemIcon>
             <MIcon Color="@Color">@Icon</MIcon>
@@ -52,6 +52,8 @@
         { "directives", ("mdi-function", "blue-grey") },
         { "getting-started", ("mdi-speedometer", "teal") },
         { "introduction", ("mdi-script-text-outline","green") },
+        { "labs", ("mdi-flask","indigo darken-1") },
+        { "js-modules", ("$languageJavascript","yellow accent-3") },
         { "about", ("mi-masa","primary") },
         { "resources", ("mdi-human-male-board","pink") },
         { "styles-and-animations", ("mdi-palette-outline","deep-purple accent-4") },

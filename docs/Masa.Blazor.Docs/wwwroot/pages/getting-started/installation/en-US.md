@@ -7,16 +7,17 @@ Get started with MASA Blazor, building feature-rich and fast applications.
 
 ## Automatic Installation
 
-To get started quickly, you can use the Masa.Template template to quickly create a project.
+To get started quickly, you can use the MASA.Template template to quickly create a project.
 
-### Install Masa.Template
+### Install MASA.Template {updated-in=v1.3.0}
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.2
+dotnet new install MASA.Template
 ```
 
-[Masa.Template](https://github.com/masastack/MASA.Template) provides the following templates:
+[MASA.Template](https://github.com/masastack/MASA.Template) provides the following templates:
 
+- `masablazor`: MASA Blazor Web App template **(Added in v1.3.0)**
 - `masablazor-server`: MASA Blazor Server template
 - `masablazor-wasm`: MASA Blazor WebAssembly template
 - `masablazor-empty-server`: MASA Blazor Server Empty template
@@ -64,11 +65,7 @@ cd MasaBlazorApp
 dotnet run
 ```
 
-## Manual Installation
-
-Use the official template provided by Blazor to create a project, then install the Masa.Blazor NuGet package, and finally import the resource file.
-
-### Create Blazor Server or Blazor WebAssembly project
+## Manual Installation (Blazor Server/WebAssembly)
 
 Take the empty template provided with .NET 7.
 
@@ -85,7 +82,7 @@ dotnet new blazorwasm-empty -o BlazorApp
 :::
 ::::
 
-### Add Masa.Blazor NuGet package
+### Install Masa.Blazor NuGet package
 
 ```shell
 cd BlazorApp
@@ -139,15 +136,288 @@ global using Masa.Blazor.Presets;
 builder.Services.AddMasaBlazor();
 ```
 
-### Let's build!
+### Build the layout
 
 ```razor MainLayout.razor
 <MApp>
-    //layout
+    <MMain>
+        @Body
+    </MMain>
 </MApp>
 ```
 
-> The steps to run the project are the same as the automatic installation above.
+## Manual Installation (Blazor Web App)
+
+### Interactivity at root level {released-on=v1.1.0}
+
+> Requires Masa.Blazor minimum version `1.1.0` and .NET minimum version `8.0`.
+
+:::: code-group
+::: code-group-item Auto
+```shell
+dotnet new blazor --empty --interactivity Auto --all-interactive -o BlazorApp
+```
+:::
+::: code-group-item Server
+```shell
+dotnet new blazor --empty --interactivity Server --all-interactive -o BlazorApp
+```
+:::
+::: code-group-item WebAssembly
+```shell
+dotnet new blazor --empty --interactivity WebAssembly --all-interactive -o BlazorApp
+```
+:::
+::::
+
+#### Install Masa.Blazor NuGet package
+
+:::: code-group
+::: code-group-item Auto
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item Server
+```shell
+cd BlazorApp
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item WebAssembly
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::::
+
+#### Add resource files
+
+:::: code-group
+::: code-group-item Auto
+```razor BlazorApp\Components\App.razor l:2,5,8
+<base href="/" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="BlazorApp.styles.css" />
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+
+<script src="_framework/blazor.web.js"></script>
+<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+```
+:::
+::: code-group-item Server
+```razor Components\App.razor l:2,5,8
+<base href="/" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="BlazorApp.styles.css" />
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+
+<script src="_framework/blazor.web.js"></script>
+<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+```
+:::
+::: code-group-item WebAssembly
+```razor BlazorApp\Components\App.razor l:2,5,8
+<base href="/" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="BlazorApp.styles.css" />
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
+
+<script src="_framework/blazor.web.js"></script>
+<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+```
+:::
+::::
+
+#### Add global using
+
+```razor _Imports.razor
+@using BlazorComponent
+@using Masa.Blazor
+@using Masa.Blazor.Presets
+```
+
+```csharp _Imports.cs
+global using BlazorComponent;
+global using Masa.Blazor;
+global using Masa.Blazor.Presets;
+```
+
+#### Add services
+
+:::: code-group
+::: code-group-item Auto
+```csharp BlazorApp\Program.cs,BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor();
+```
+:::
+::: code-group-item Server
+```csharp Program.cs
+builder.Services.AddMasaBlazor();
+```
+:::
+::: code-group-item WebAssembly
+```csharp BlazorApp\Program.cs,BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor();
+```
+:::
+::::
+
+#### Build the layout
+
+```razor MainLayout.razor l:3-4,6-7
+@inherits LayoutComponentBase
+
+<MApp>
+    <MMain>
+        @Body
+    </MMain>
+</MApp>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+```
+
+### Interactivity on per page/component {released-on=v1.3.0}
+
+Interactivity is applied on a per-page or per-component basis.
+
+
+:::: code-group
+::: code-group-item Auto
+```shell
+dotnet new blazor --empty --interactivity Auto -o BlazorApp
+```
+:::
+::: code-group-item Server
+```shell
+dotnet new blazor --empty --interactivity Server -o BlazorApp
+```
+:::
+::: code-group-item WebAssembly
+```shell
+dotnet new blazor --empty --interactivity WebAssembly -o BlazorApp
+```
+:::
+::::
+
+#### Install Masa.Blazor NuGet package
+
+:::: code-group
+::: code-group-item Auto
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item Server
+```shell
+cd BlazorApp
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item WebAssembly
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::::
+
+#### Add global using
+
+```razor _Imports.razor
+@using BlazorComponent
+@using Masa.Blazor
+@using Masa.Blazor.Presets
+```
+
+```csharp _Imports.cs
+global using BlazorComponent;
+global using Masa.Blazor;
+global using Masa.Blazor.Presets;
+```
+
+#### Add resource files
+
+```razor App.razor l:5,8,11,17
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="_content/Masa.Blazor/css/masa-blazor.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorApp.styles.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet />
+    <MSsrThemeProvider />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+</body>
+```
+
+#### Add services
+
+:::: code-group
+::: code-group-item Auto
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+```
+:::
+::: code-group-item Server
+```csharp
+// Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+
+```
+:::
+::: code-group-item WebAssembly
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+```
+:::
+::::
+
+#### Build the layout
+
+```razor MainLayout.razor l:3-4,6-7
+@inherits LayoutComponentBase
+
+<MApp>
+    <MMain>
+        @Body
+    </MMain>
+</MApp>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+```
 
 ## Next
 

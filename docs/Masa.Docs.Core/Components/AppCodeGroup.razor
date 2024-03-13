@@ -1,15 +1,17 @@
 ﻿@using System.Text.Json.Serialization
 @attribute [JSCustomElement]
 
-<div class="mb-4">
+<div class="pb-4">
     @if (Model is not null)
     {
-        <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
-            @foreach (var tab in Tabs)
-            {
-                <MTab Class="text-none">@tab</MTab>
-            }
-        </MTabs>
+        <MLazy MinHeight="48">
+            <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
+                @foreach (var tab in Tabs)
+                {
+                    <MTab Class="text-none">@tab</MTab>
+                }
+            </MTabs>
+        </MLazy>
 
         <MTabsItems Dark="Dark" Value="_tabValue">
             @foreach (var tabItem in TabItems)

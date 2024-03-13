@@ -14,6 +14,8 @@ public partial class Confirm : AlertingPopupComponentBase
 
     [Parameter] public string? Content { get; set; }
 
+    [Parameter] public RenderFragment? ContentContent { get; set; }
+
     [Parameter] public string? ContentClass { get; set; }
 
     [Parameter] public string? ContentStyle { get; set; }
@@ -35,6 +37,9 @@ public partial class Confirm : AlertingPopupComponentBase
     private ModalButtonProps? ComputedOkButtonProps { get; set; }
 
     private ModalButtonProps? ComputedCancelButtonProps { get; set; }
+
+    private RenderFragment? ComputedContent
+        => ContentContent ?? (string.IsNullOrWhiteSpace(Content) ? null : (RenderFragment)(b => b.AddContent(0, Content)));
 
     protected override string ComponentName => PopupComponents.CONFIRM;
 

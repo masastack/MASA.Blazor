@@ -1,0 +1,40 @@
+﻿@namespace Masa.Blazor
+@inherits MSortableProviderBase<TItem>
+@using Masa.Blazor.Components.Sortable
+@using Element = BlazorComponent.Web.Element
+@typeparam TItem
+@inject SortableJSModule SortableJSModule
+
+<Element Class="@GetClass()"
+         Style="@GetStyle()"
+         Tag="@Tag"
+         id="@Id"
+         ReferenceCaptureAction="r => Ref = r"
+         @attributes="@Attributes">
+    @GenItems()
+</Element>
+
+@code {
+
+    private RenderFragment GenItems() => __builder =>
+    {
+        if (ChildContent is null)
+        {
+            return;
+        }
+
+        @foreach (var item in Items)
+        {
+            var dataId = ItemKey?.Invoke(item);
+
+            <Element Tag="@ItemTag"
+                     Class="@_block.Element("item").AddClass(ItemClass).Build()"
+                     Style="@ItemStyle"
+                     @key="@(dataId ?? (object?)item)"
+                     data-id="@dataId">
+                @ChildContent(item)
+            </Element>
+        }
+    };
+
+}

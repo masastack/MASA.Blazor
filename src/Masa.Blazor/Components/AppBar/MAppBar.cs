@@ -1,30 +1,24 @@
-﻿using BlazorComponent.Web;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
     {
-        [Inject]
-        public MasaBlazor? MasaBlazor { get; set; }
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        [Parameter] public bool App { get; set; }
+
+        [Parameter] public bool Fixed { get; set; }
+
+        [Parameter] public bool ClippedLeft { get; set; }
+
+        [Parameter] public bool ClippedRight { get; set; }
+
+        [Parameter] public bool CollapseOnScroll { get; set; }
 
         [Parameter]
-        public bool App { get; set; }
-
-        [Parameter]
-        public bool Fixed { get; set; }
-
-        [Parameter]
-        public bool ClippedLeft { get; set; }
-
-        [Parameter]
-        public bool ClippedRight { get; set; }
-
-        [Parameter]
-        public bool CollapseOnScroll { get; set; }
-
-        [Parameter]
-        [ApiDefaultValue("window")]
+        [MasaApiParameter("window")]
         public string ScrollTarget { get; set; } = "window";
 
         /// <summary>
@@ -33,48 +27,45 @@ namespace Masa.Blazor
         [Parameter]
         public bool ElevateOnScroll { get; set; }
 
-        [Parameter]
-        public bool FadeImgOnScroll { get; set; }
+        [Parameter] public bool FadeImgOnScroll { get; set; }
 
-        [Parameter]
-        public bool HideOnScroll { get; set; }
+        [Parameter] public bool HideOnScroll { get; set; }
 
-        [Parameter]
-        public bool InvertedScroll { get; set; }
+        [Parameter] public bool InvertedScroll { get; set; }
 
-        [Parameter]
-        public bool ShrinkOnScroll { get; set; }
+        [Parameter] public bool ShrinkOnScroll { get; set; }
 
-        [Parameter]
-        public double ScrollThreshold { get; set; }
+        [Parameter] public double ScrollThreshold { get; set; }
 
-        [Parameter]
-        public bool ScrollOffScreen { get; set; }
+        [Parameter] public bool ScrollOffScreen { get; set; }
 
+        [Parameter] [MasaApiParameter(true)] public bool Value { get; set; } = true;
+
+        /// <summary>
+        /// Indicates the component should not be render as a SSR component.
+        /// It's useful when you want render components interactively under SSR.
+        /// </summary>
         [Parameter]
-        [ApiDefaultValue(true)]
-        public bool Value { get; set; } = true;
+        public bool NoSsr { get; set; }
+
+        private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
 
         private readonly string[] _applicationProperties =
         {
             "Left", "Bar", "Right"
         };
 
-        private bool _rendered;
+        private bool _isBooted;
         private Scroller? _scroller;
+        private bool _sized;
 
         public int? Transform { get; private set; } = 0;
-
-        /// <summary>
-        /// Avoid an entry animation on page load.
-        /// </summary>
-        protected override bool IsBooted =>_rendered && (MasaBlazor is null || !MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
 
         public bool CanScroll => InvertedScroll ||
                                  ElevateOnScroll ||
                                  HideOnScroll ||
                                  CollapseOnScroll ||
-                                 IsBooted ||
+                                 _isBooted ||
                                  !Value;
 
         protected double ScrollRatio
@@ -233,13 +224,9 @@ namespace Masa.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
-        protected HtmlElement? Target { get; set; }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            Target = new HtmlElement(Js, ScrollTarget);
 
             _scroller = new Scroller(this)
             {
@@ -252,57 +239,70 @@ namespace Masa.Blazor
             }
 
             MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
+
+            if (IsSsr)
+            {
+                _isBooted = true;
+                Attributes["data-booted"] = "true";
+            }
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (firstRender)
+            {
+                _isBooted = true;
+                Attributes["data-booted"] = "true";
+                StateHasChanged();
+            }
         }
 
         private void ApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_applicationProperties.Contains(e.PropertyName))
             {
-                Attributes["data-booted"] = IsBooted ? "true" : null;
+                _sized = true;
                 InvokeStateHasChanged();
             }
         }
 
-        protected override void SetComponentClass()
+        protected override string GetImageStyle()
         {
-            base.SetComponentClass();
+            return new StyleBuilder().AddIf("opacity", ComputedOpacity.ToString(), ComputedOpacity.HasValue).Build();
+        }
 
-            if (InvertedScroll)
-            {
-                Transform = -ComputedHeight.ToInt32();
-            }
+        private Block _block = new("m-app-bar");
 
-            if (ShrinkOnScroll)
-            {
-                Dense = false;
-                Flat = false;
-                Prominent = true;
-            }
+        protected override IEnumerable<string> BuildComponentClass()
+        {
+            return base.BuildComponentClass().Concat(
+                _block.Modifier("app--sized", _sized)
+                    .And("clipped", ClippedLeft || ClippedRight)
+                    .And(ClippedLeft)
+                    .And(ClippedRight)
+                    .And(FadeImgOnScroll)
+                    .And(ElevateOnScroll)
+                    .And(App)
+                    .And("fixed", !Absolute && (App || Fixed))
+                    .And(HideShadow)
+                    .And("is-scrolled", _scroller is { CurrentScroll: > 0 })
+                    .And(ShrinkOnScroll)
+                    .GenerateCssClasses()
+            );
+        }
 
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-app-bar")
-                        .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
-                        .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
-                        .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
-                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
-                        .AddIf("m-app-bar--hide-shadow", () => HideShadow)
-                        .AddIf("m-app-bar--is-scrolled", () => _scroller is { CurrentScroll: > 0 })
-                        .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
-                        .Add(() => $"margin-top:{ComputedMarginTop}px")
-                        .Add(() => $"transform:translateY({ComputedTransform}px)")
-                        .Add(() => $"left:{ComputedLeft}px")
-                        .Add(() => $"right:{ComputedRight}px");
-                })
-                .Merge("image",
-                    _ => { },
-                    style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
+        protected override IEnumerable<string> BuildComponentStyle()
+        {
+            return base.BuildComponentStyle().Concat(
+                new StyleBuilder().Add("transform", $"translateY({ComputedTransform}px)")
+                    .AddIf("font-size", ComputedFontSize?.ToUnit("rem"), ComputedFontSize != null)
+                    .AddIf("margin-top", $"{ComputedMarginTop}px", !IsSsr)
+                    .Add("left", $"{ComputedLeft}px")
+                    .Add("right", $"{ComputedRight}px")
+                    .GenerateCssStyles()
+            );
         }
 
         protected override void OnParametersSet()
@@ -325,28 +325,30 @@ namespace Masa.Blazor
             var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
             if (!Bottom)
+            {
                 MasaBlazor.Application.Top = val;
+            }
             else
+            {
                 MasaBlazor.Application.Bottom = val;
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
-                _rendered = true;
-                Attributes["data-booted"] = IsBooted ? "true" : null;
-                StateHasChanged();
-
-                await Target!.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
+                await Js.AddHtmlElementEventListener(ScrollTarget, "scroll", async () =>
                 {
                     if (!CanScroll) return;
 
                     await _scroller!.OnScroll(ThresholdMet);
-                }));
-            }
 
-            await base.OnAfterRenderAsync(firstRender);
+                    StateHasChanged();
+                }, false);
+            }
         }
 
         protected void ThresholdMet(Scroller _)
@@ -368,14 +370,22 @@ namespace Masa.Blazor
             _scroller.SavedScroll = _scroller.CurrentScroll;
         }
 
-        public ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
-            if (MasaBlazor == null) return ValueTask.CompletedTask;
+            try
+            {
+                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll");
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+
+            if (MasaBlazor == null) return;
 
             RemoveApplication();
+
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-            _ = Target!.RemoveEventListenerAsync("scroll");
-            return ValueTask.CompletedTask;
         }
 
         private void RemoveApplication()

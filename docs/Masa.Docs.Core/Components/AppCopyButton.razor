@@ -2,17 +2,17 @@
          Class="@($"m-btn--copy {Class}")"
          Icon
          Right
-         Top
+         Style="top: 14px;"
          Show="Show"
          OnClick="Copy">
     <FadeTransition LeaveAbsolute>
         <ShowTransitionElement Value="_copying">
-            <MIcon Color="success">
+            <MIcon Color="success" Small>
                 mdi-check
             </MIcon>
         </ShowTransitionElement>
         <ShowTransitionElement Value="!_copying">
-            <MIcon Color="white">
+            <MIcon Color="white" Small>
                 mdi-content-copy
             </MIcon>
         </ShowTransitionElement>

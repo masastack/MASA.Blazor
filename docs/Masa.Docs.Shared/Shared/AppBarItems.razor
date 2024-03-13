@@ -1,5 +1,6 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <div class="flex-1-1-auto d-flex align-center justify-end ml-4">
     @if (MasaBlazor.Breakpoint.LgAndUp)
@@ -29,9 +30,11 @@
 
     <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
 
+    <NotificationsMenu />
+
     <ThemeToggle />
 
-    @if (MasaBlazor.Breakpoint.SmAndUp)
+    @if (MasaBlazor.Breakpoint.LgAndUp)
     {
         <ToolIcons RepoUrl="@RepoUrl" OnSettingsClick="OnSettingsClick" />
     }
@@ -68,5 +71,22 @@
 
     [Parameter]
     public EventCallback OnSettingsClick { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
+    }
+
+    private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.MobileChanged -= MasaBlazorOnMobileChanged;
+    }
 
 }

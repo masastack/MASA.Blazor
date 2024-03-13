@@ -93,7 +93,7 @@ public partial class Index : NextTickComponentBase
                 }
                 catch (Exception e)
                 {
-                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code from GitHub", e.Message, AlertTypes.Error);
+                    await PopupService.EnqueueSnackbarAsync("Failed to fetch code...", e.Message, AlertTypes.Error);
                 }
             }
 
@@ -154,7 +154,7 @@ public partial class Index : NextTickComponentBase
             return;
         }
 
-        tabMonacoModule.MonacoEditor.Dispose();
+        _ = tabMonacoModule.MonacoEditor.DisposeAsync();
         _tabMonacoList.Remove(tabMonacoModule);
         _tabStringNumber = 0;
     }
@@ -298,10 +298,10 @@ public partial class Index : NextTickComponentBase
         _newScriptContent = string.Empty;
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
-        base.Dispose(disposing);
         _objRef?.Dispose();
+        return base.DisposeAsyncCore();
     }
 
     [GeneratedRegex("(<script(.*?)>)(.|\n)*?(</script>)")]

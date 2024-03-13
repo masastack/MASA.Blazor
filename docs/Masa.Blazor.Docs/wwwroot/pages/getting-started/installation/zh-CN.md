@@ -6,16 +6,17 @@
 
 ## 自动安装
 
-要快速入门，可以使用 Masa.Template 模板快速创建项目。
+要快速入门，可以使用 MASA.Template 模板快速创建项目。
 
-### 安装 Masa.Template 模板
+### 安装 MASA.Template 模板 {updated-in=v1.3.0}
 
 ```shell
-dotnet new install Masa.Template::1.0.0-rc.2
+dotnet new install MASA.Template
 ```
 
-[Masa.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
+[MASA.Template](https://github.com/masastack/MASA.Template) 提供了以下模板：
 
+- `masablazor`: MASA Blazor Web App 模板 **（添加自v1.3.0）**
 - `masablazor-server`: MASA Blazor Server 模板
 - `masablazor-wasm`: MASA Blazor WebAssembly 模板
 - `masablazor-empty-server`: MASA Blazor Server 空模板
@@ -63,11 +64,7 @@ cd MasaBlazorApp
 dotnet run
 ```
 
-## 手动安装
-
-使用Blazor官方提供的模板创建项目，然后安装 Masa.Blazor NuGet 包，最后引入资源文件。
-
-### 创建 Blazor Server 或 Blazor WebAssembly 项目
+## 手动安装（Blazor Server/WebAssembly）
 
 以 .NET 7 提供的空模板为例。
 
@@ -84,7 +81,7 @@ dotnet new blazorwasm-empty -o BlazorApp
 :::
 ::::
 
-### 安装 Masa.Blazor NuGet 包
+### 安装 Masa.Blazor
 
 ```shell
 cd BlazorApp
@@ -138,15 +135,322 @@ global using Masa.Blazor.Presets;
 builder.Services.AddMasaBlazor();
 ```
 
-### 开始构建
+### 设置布局
 
 ```razor MainLayout.razor
 <MApp>
-    //layout 
+    <MMain> 
+        @Body
+    </MMain>
 </MApp>
 ```
 
-> 启动项目的步骤与上面的自动安装一致。
+## 手动安装（Blazor Web App）
+
+> 要求 Masa.Blazor 最小版本为 `1.1.0` 和 .NET 版本最小为 `8.0`。
+
+### 全局交互 {released-on=v1.1.0}
+
+在根级别应用交互性。
+
+:::: code-group
+::: code-group-item Auto
+```shell
+dotnet new blazor --empty --interactivity Auto --all-interactive -o BlazorApp
+```
+:::
+::: code-group-item Server
+```shell
+dotnet new blazor --empty --interactivity Server --all-interactive -o BlazorApp
+```
+:::
+::: code-group-item WebAssembly
+```shell
+dotnet new blazor --empty --interactivity WebAssembly --all-interactive -o BlazorApp
+```
+:::
+::::
+
+#### 安装 Masa.Blazor
+
+:::: code-group
+::: code-group-item Auto
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item Server
+```shell
+cd BlazorApp
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item WebAssembly
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::::
+
+#### 添加全局 using
+
+```razor _Imports.razor
+@using BlazorComponent
+@using Masa.Blazor
+@using Masa.Blazor.Presets
+```
+
+```csharp _Imports.cs
+global using BlazorComponent;
+global using Masa.Blazor;
+global using Masa.Blazor.Presets;
+```
+
+#### 引入资源文件
+
+:::: code-group
+::: code-group-item Auto
+```razor BlazorApp\Components\App.razor l:5,8,16
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="_content/Masa.Blazor/css/masa-blazor.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorApp.styles.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet @rendermode="InteractiveAuto" />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveAuto" />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+</body>
+```
+:::
+::: code-group-item Server
+```razor Components\App.razor l:5,8,16
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="_content/Masa.Blazor/css/masa-blazor.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorApp.styles.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveServer" />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+</body>
+```
+:::
+::: code-group-item WebAssembly
+```razor BlazorApp\Components\App.razor l:5,8,16
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="_content/Masa.Blazor/css/masa-blazor.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorApp.styles.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet @rendermode="InteractiveWebAssembly" />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveWebAssembly" />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+</body>
+```
+:::
+::::
+
+#### 注入服务
+
+:::: code-group
+::: code-group-item Auto
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor();
+```
+:::
+::: code-group-item Server
+```csharp
+// Program.cs
+builder.Services.AddMasaBlazor();
+
+```
+:::
+::: code-group-item WebAssembly
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor();
+```
+:::
+::::
+
+#### 设置布局
+
+```razor MainLayout.razor l:3-4,6-7
+@inherits LayoutComponentBase
+
+<MApp>
+    <MMain>
+        @Body
+    </MMain>
+</MApp>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+```
+
+### 每页/组件 {released-on=v1.3.0}
+
+基于每页或每组件应用交互。
+
+:::: code-group
+::: code-group-item Auto
+```shell
+dotnet new blazor --empty --interactivity Auto -o BlazorApp
+```
+:::
+::: code-group-item Server
+```shell
+dotnet new blazor --empty --interactivity Server -o BlazorApp
+```
+:::
+::: code-group-item WebAssembly
+```shell
+dotnet new blazor --empty --interactivity WebAssembly -o BlazorApp
+```
+:::
+::::
+
+#### 安装 Masa.Blazor
+
+:::: code-group
+::: code-group-item Auto
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item Server
+```shell
+cd BlazorApp
+dotnet add package Masa.Blazor
+```
+:::
+::: code-group-item WebAssembly
+```shell
+cd BlazorApp\BlazorApp.Client
+dotnet add package Masa.Blazor
+```
+:::
+::::
+
+#### 添加全局 using
+
+```razor _Imports.razor
+@using BlazorComponent
+@using Masa.Blazor
+@using Masa.Blazor.Presets
+```
+
+```csharp _Imports.cs
+global using BlazorComponent;
+global using Masa.Blazor;
+global using Masa.Blazor.Presets;
+```
+
+#### 引入资源文件
+
+```razor App.razor l:5,8,11,17
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="_content/Masa.Blazor/css/masa-blazor.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorApp.styles.css" />
+    <link rel="stylesheet" href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet />
+    <MSsrThemeProvider />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+</body>
+```
+
+#### 注入服务
+
+:::: code-group
+::: code-group-item Auto
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+```
+:::
+::: code-group-item Server
+```csharp
+// Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+
+```
+:::
+::: code-group-item WebAssembly
+```csharp
+// BlazorApp\Program.cs
+// BlazorApp.Client\Program.cs
+builder.Services.AddMasaBlazor(options => {
+    options.ConfigureSsr();
+});
+```
+:::
+::::
+
+#### 设置布局
+
+```razor MainLayout.razor l:3-4,6-7
+@inherits LayoutComponentBase
+
+<MApp>
+    <MMain>
+        @Body
+    </MMain>
+</MApp>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+```
 
 ## 下一步
 

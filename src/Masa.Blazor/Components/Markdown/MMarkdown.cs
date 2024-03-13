@@ -3,20 +3,7 @@
     public class MMarkdown : BMarkdown, IAsyncDisposable
     {
         [Parameter]
-        public override string? Value
-        {
-            get => _value;
-            set
-            {
-                if (_value != value)
-                {
-                    _value = value;
-                    _waitingUpdate = true;
-                }
-
-                SetValue(value);
-            }
-        }
+        public override string? Value { get; set; }
 
         [Parameter]
         public Dictionary<string, object>? Options { get; set; }
@@ -49,28 +36,32 @@
         public EventCallback<string> OnToolbarButtonClick { get; set; }
 
         [Parameter]
+        public EventCallback OnAfter { get; set; }
+
+        [Parameter]
         public EventCallback BeforeAllUpload { get; set; }
 
-        private string? _value;
-        private bool _editorRendered;
-        private bool _waitingUpdate;
-
+        private string? _prevValue;
         private DotNetObjectReference<MMarkdown>? _objRef;
         private IJSObjectReference? _vditorHelper;
+        private CancellationTokenSource? _inputCancellationTokenSource;
 
-        protected override void RegisterWatchers(PropertyWatcher watcher)
+        protected override void OnInitialized()
         {
-            base.RegisterWatchers(watcher);
+            base.OnInitialized();
 
-            watcher.Watch<string?>(nameof(Value), ValueChangeCallback);
+            _prevValue = Value;
         }
 
-        private async void ValueChangeCallback(string? val)
+        protected override void OnParametersSet()
         {
-            if (_waitingUpdate && _editorRendered)
+            base.OnParametersSet();
+
+            if (_prevValue != Value)
             {
-                _waitingUpdate = false;
-                await SetValueAsync(_value, true);
+                _prevValue = Value;
+
+                _ = SetValueAsync(Value, true);
             }
         }
 
@@ -115,7 +106,11 @@
         [JSInvokable]
         public async Task HandleRenderedAsync()
         {
-            _editorRendered = true;
+            if (OnAfter.HasDelegate)
+            {
+                await OnAfter.InvokeAsync();
+            }
+
             if (!string.IsNullOrWhiteSpace(Value) && HtmlChanged.HasDelegate)
             {
                 Html = await GetHtmlAsync();
@@ -132,19 +127,21 @@
         [JSInvokable]
         public async Task HandleInputAsync(string value)
         {
-            _value = value;
-            _waitingUpdate = false;
+            _inputCancellationTokenSource?.Cancel();
+            _inputCancellationTokenSource = new CancellationTokenSource();
 
-            if (ValueChanged.HasDelegate)
+            await RunTaskInMicrosecondsAsync(async () =>
             {
+                _prevValue = value;
+
                 await ValueChanged.InvokeAsync(value);
-            }
 
-            if (HtmlChanged.HasDelegate)
-            {
-                Html = await GetHtmlAsync();
-                await HtmlChanged.InvokeAsync(Html);
-            }
+                if (HtmlChanged.HasDelegate)
+                {
+                    Html = await GetHtmlAsync();
+                    await HtmlChanged.InvokeAsync(Html);
+                }
+            }, 500, _inputCancellationTokenSource.Token);
         }
 
         [JSInvokable]
@@ -210,7 +207,7 @@
             }
         }
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             try
             {

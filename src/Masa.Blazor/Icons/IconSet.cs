@@ -5,5 +5,6 @@ public enum IconSet
     MaterialDesignIcons,
     MaterialDesign,
     FontAwesome,
-    FontAwesome4
+    FontAwesome4,
+    FontAwesome6
 }

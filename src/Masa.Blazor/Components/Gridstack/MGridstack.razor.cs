@@ -37,7 +37,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     /// Integer > 0 (default 12) which can change on the fly with column(N) API, or 'auto' for nested grids to size themselves to the parent grid container (to make sub-items are the same size). 
     /// </summary>
     [Parameter]
-    [ApiDefaultValue(12)]
+    [MasaApiParameter(12)]
     public int Column { get; set; } = 12;
 
     /// <summary>
@@ -62,7 +62,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     /// gap size around grid item and content (default: 10px)
     /// </summary>
     [Parameter]
-    [ApiDefaultValue(10)]
+    [MasaApiParameter(10)]
     public int Margin { get; set; } = 10;
 
     /// <summary>
@@ -180,7 +180,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         await Module.SetStatic(_gridstackInstance, staticValue);
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {

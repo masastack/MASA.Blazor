@@ -18,11 +18,11 @@
         public string? ActiveClass { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("accent")]
+        [MasaApiParameter("accent")]
         public string? SelectedColor { get; set; } = "accent";
 
         [Parameter]
-        [ApiDefaultValue("primary")]
+        [MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]
@@ -32,19 +32,36 @@
         public bool Activatable { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$minus")]
-        public string? IndeterminateIcon { get; set; } = "$minus";
+        [MasaApiParameter("$checkboxIndeterminate")]
+        public string? IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
 
         [Parameter]
-        [ApiDefaultValue("$checkboxOn")]
+        [MasaApiParameter("$checkboxOn")]
         public string? OnIcon { get; set; } = "$checkboxOn";
 
         [Parameter]
-        [ApiDefaultValue("$checkboxOff")]
+        [MasaApiParameter("$checkboxOff")]
         public string? OffIcon { get; set; } = "$checkboxOff";
 
         [Parameter]
         public bool OpenOnClick { get; set; }
+        
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -57,7 +74,7 @@
                         .Add("m-treeview")
                         .AddIf("m-treeview--hoverable", () => Hoverable)
                         .AddIf("m-treeview--dense", () => Dense)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 });
 
             AbstractProvider

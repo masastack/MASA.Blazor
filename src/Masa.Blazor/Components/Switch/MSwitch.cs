@@ -1,6 +1,10 @@
 ﻿namespace Masa.Blazor
 {
+#if NET6_0
+    public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue>
+#else
     public partial class MSwitch<TValue> : MSelectable<TValue>, ISwitch<TValue> where TValue : notnull
+#endif
     {
         [Parameter]
         public bool Flat { get; set; }
@@ -11,8 +15,14 @@
         [Parameter]
         public string? LeftText { get; set; }
 
+        [Parameter] [MasaApiParameter(ReleasedOn = "v1.4.0")]
+        public string? LeftIcon { get; set; }
+
         [Parameter]
         public string? RightText { get; set; }
+
+        [Parameter] [MasaApiParameter(ReleasedOn = "v1.4.0")]
+        public string? RightIcon { get; set; }
 
         [Parameter]
         public string? TrackColor { get; set; }
@@ -42,7 +52,7 @@
             }
         }
 
-        public bool HasText => LeftText != null || RightText != null;
+        public bool HasText => LeftText != null || LeftIcon != null || RightText != null || RightIcon != null;
 
         public new string? TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
@@ -87,7 +97,7 @@
                     cssBuilder
                         .Add("m-input--switch__track")
                         .AddTextColor(TrackColor ?? TextColor)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -98,7 +108,7 @@
                     cssBuilder
                         .Add("m-input--switch__thumb")
                         .AddTextColor(TextColor)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -141,7 +151,11 @@
                     attrs[nameof(MProgressCircular.Size)] = (StringNumber)16;
                     attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 })
-                .Apply(typeof(BSwitchProgress<,>), typeof(BSwitchProgress<MSwitch<TValue>, TValue>));
+                .Apply(typeof(BSwitchProgress<,>), typeof(BSwitchProgress<MSwitch<TValue>, TValue>))
+                .Apply<BIcon, MIcon>(attrs =>
+                {
+                    attrs[nameof(MIcon.Small)] = true;
+                });
         }
     }
 }

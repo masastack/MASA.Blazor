@@ -1,0 +1,20 @@
+﻿<div class="overflow-auto" style="height: 300px">
+    <MPullRefresh OnRefresh="OnRefresh">
+        <div class="text-center rounded pt-6"
+             style="height: 500px; border: 1px dashed grey;">
+            Pull down to refresh @_counter
+        </div>
+    </MPullRefresh>
+</div>
+
+@code {
+    
+    private int _counter;
+
+    private async Task OnRefresh()
+    {
+        await Task.Delay(1000); // Simulate a long running operation
+        _counter++;
+    }
+
+}

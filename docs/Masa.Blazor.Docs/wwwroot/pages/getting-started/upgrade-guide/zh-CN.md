@@ -1,5 +1,31 @@
 # 升级指南
 
+## 从 v1.1.x 升级到 v1.2.0
+
+### 组件
+
+#### DataTable
+
+- `OnItemSelect` 的类型从 `Action<TItem, bool>` 改为了 `EventCallback<(TItem Item, bool Selected)>`。
+
+- 删除了 `FixedRight` 属性，现在可以通过Headers里的 `Fixed` 属性来设置列的固定位置。
+
+## 从 v1.0.x 升级到 v1.1.0
+
+### 组件
+
+#### Cascader
+
+`Outlined` 属性的默认值改为了 `false`，与其他表单输入组件默认样式一致。
+
+#### Form(FluentValidation)
+
+移除了内置的自动注册 **FluentValidation** 验证器的功能，现在需要手动注册，详情请参考 [Automatic registration](https://docs.fluentvalidation.net/en/latest/di.html#automatic-registration)。
+
+#### ImageCaptcha
+
+为了减少 WebAssembly 加载的体积，将 ImageCaptcha 组件移动到单独的 nuget 包：[Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia)。
+
 ## 从 v0.6.x 升级到 v1.0.0
 
 v1.0.0 包含了不兼容的破坏性更改，包括以下变更：

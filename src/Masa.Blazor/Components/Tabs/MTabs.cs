@@ -1,10 +1,13 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MTabs : BTabs, IThemeable
+    public partial class MTabs : BTabs, IThemeable, IAsyncDisposable
     {
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
-        
+
+        [Inject]
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
+
         [Parameter]
         public string? ActiveClass { get; set; }
 
@@ -40,6 +43,31 @@
 
         protected override bool RTL => MasaBlazor.RTL;
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await IntersectJSModule.ObserverAsync(Ref, OnIntersectAsync);
+            }
+        }
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+        
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -57,7 +85,7 @@
                         .AddIf($"{prefix}--icons-and-text", () => IconsAndText)
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--vertical", () => Vertical)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("slider-wrapper",
                     cssBuilder => { cssBuilder.Add("m-tabs-slider-wrapper"); },
@@ -93,6 +121,26 @@
                 .Apply<BTab, MTab>()
                 .Apply<BWindow, MTabsItems>()
                 .Apply<BWindowItem, MTabItem>();
+        }
+
+        private async Task OnIntersectAsync(IntersectEventArgs e)
+        {
+            if (e.IsIntersecting)
+            {
+                await InvokeAsync(CallSlider);
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                await IntersectJSModule.UnobserveAsync(Ref);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

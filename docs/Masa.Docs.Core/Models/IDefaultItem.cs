@@ -17,6 +17,8 @@ public interface IDefaultItem<TItem>
     string? State { get; set; }
     
     string? StateBackgroundColor { get; set; }
+    
+    string? ReleasedOn { get; set; }
 
     List<TItem>? Children { get; }
 

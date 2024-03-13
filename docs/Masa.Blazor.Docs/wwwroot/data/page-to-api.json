@@ -37,6 +37,9 @@
     "MCarousel",
     "MCarouselItem"
   ],
+  "echarts": [
+    "MECharts"
+  ],
   "expansion-panels": [
     "MExpansionPanel",
     "MExpansionPanels",
@@ -53,6 +56,16 @@
     "MDataFooter",
     "MSimpleCheckbox"
   ],
+  "date-time-pickers": [
+    "PDateTimePicker",
+    "PDateTimePickerView",
+    "PDateTimeCompactPickerView"
+  ],
+  "date-digital-clock-pickers": [
+    "PDateDigitalClockPicker",
+    "PDateDigitalClockPickerView",
+    "PDateDigitalClockCompactPickerView"
+  ],
   "application": [
     "MApp",
     "MMain"
@@ -68,6 +81,9 @@
   "range-sliders": [
     "MRangeSlider",
     "MSlider"
+  ],
+  "switches": [
+    "MSwitch"
   ],
   "button-groups": [
     "MButtonGroup",
@@ -100,6 +116,15 @@
     "MWindow",
     "MWindowItem"
   ],
+  "inputs-filter": [
+    "MInputsFilter",
+    "PDataFilter"
+  ],
+  "interactive-trigger": [
+    "MInteractiveTrigger",
+    "MInteractiveTriggers",
+    "MInteractivePopup"
+  ],
   "lists": [
     "MList",
     "MListGroup",
@@ -123,12 +148,23 @@
   "date-pickers-month": [
     "MDatePicker"
   ],
+  "scroll-to-target": [
+    "MScrollToTarget",
+    "MScrollToTargetTrigger"
+  ],
   "steppers": [
     "MStepper",
     "MStepperContent",
     "MStepperHeader",
     "MStepperItems",
     "MStepperStep"
+  ],
+  "swiper": [
+    "MSwiper",
+    "MSwiperSlide",
+    "MSwiperPagination",
+    "MSwiperNavigation",
+    "MSwiperAutoplay"
   ],
   "tabs": [
     "MTabs",
@@ -149,5 +185,13 @@
     "PPageTabs",
     "PPageContainer",
     "PPageProvider"
+  ],
+  "xgplayer": [
+    "MXgplayer",
+    "MXgMusicPlayer",
+    "MXgplayerControls",
+    "MXgplayerPlay",
+    "MXgplayerTime",
+    "MXgplayerStart"
   ]
 }

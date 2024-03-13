@@ -1,0 +1,96 @@
+﻿@inject MasaBlazor MasaBlazor                    
+@inject IPopupService PopupService
+@inject I18n I18n
+
+<MRow>
+    <MCol Cols="12" Md="6">
+        <MRow>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("getting-started")"
+                           OpenInNewUrl="/blazor/getting-started/installation"
+                           MarkdownSource="@I18n.T("intro.blazor.getting-started")">
+                    <Markup Code="dotnet new install MASA.Template" Class="mb-4" Language="bash"></Markup>
+                    <Markup Code="dotnet new masablazor -o BlazorApp -ai" Language="bash"></Markup>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("icon-fonts")"
+                           OpenInNewUrl="/blazor/features/icon-fonts"
+                           MarkdownSource="@I18n.T("intro.blazor.icons")">
+                    <MIcon Color="secondary">mdi-code-json</MIcon>
+                    <MIcon Color="primary">$masaStack</MIcon>
+                    <MIcon Color="primary">$masaFramework</MIcon>
+                    <MIcon Color="primary">$masaBlazor</MIcon>
+                    <MIcon Color="pink lighten-3">mdi-human-greeting-variant</MIcon>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("utility-classes")"
+                           OpenInNewUrl="/blazor/styles-and-animations/border-radius"
+                           MarkdownSource="@I18n.T("intro.blazor.utility-classes")">
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("i18n")"
+                           OpenInNewUrl="/blazor/features/internationalization"
+                           MarkdownSource="@I18n.T("intro.blazor.i18n")">
+                    <MSwitch Value="Culture"
+                             ValueChanged="CultureChange"
+                             TValue="string"
+                             TrueValue="@("CN")"
+                             FalseValue="@("EN")"
+                             LeftIcon="mdi-alphabetical-variant"
+                             RightIcon="mdi-ideogram-cjk-variant"
+                             Color="primary"
+                             HideDetails="@true">
+                    </MSwitch>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("theme")"
+                           OpenInNewUrl="/blazor/features/theme"
+                           MarkdownSource="@I18n.T("intro.blazor.theme")">
+                    <MSwitch Value="@MasaBlazor.Theme.Dark"
+                             ValueChanged="val => MasaBlazor.ToggleTheme()"
+                             TValue="bool"
+                             LeftIcon="mdi-lightbulb-on-outline"
+                             RightIcon="mdi-lightbulb-off-outline"
+                             Color="primary"
+                             HideDetails="@true">
+                    </MSwitch>
+                </IntroCard>
+            </MCol>
+        </MRow>
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <MRow>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("components")"
+                           OpenInNewUrl="/blazor/components/alerts"
+                           MarkdownSource="@I18n.T("intro.blazor.components")">
+                    <MCard Outlined>
+                        <MCardText>
+                            <MForm @ref="_form">
+                                <MTextField @bind-Value="@Name" Label="Name" Outlined
+                                            Required Dense Clearable
+                                            PrependInnerIcon="mdi-account-outline">
+                                </MTextField>
+                                <MTextField @bind-Value="@Password" Type="password" Label="Password" Outlined
+                                            Required Dense Clearable
+                                            PrependInnerIcon="mdi-lock-outline">
+                                </MTextField>
+                                <MButton Color="primary" Block OnClick="@Commit" Loading="@_loading">Commit</MButton>
+                            </MForm>
+                        </MCardText>
+                    </MCard>
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("release-notes")"
+                           OpenInNewUrl="/blazor/getting-started/release-notes">
+                    <AppReleases2 Owner="masastack" Repo="MASA.Blazor" IsIntro Version="@Version" />
+                </IntroCard>
+            </MCol>
+        </MRow>
+    </MCol>
+</MRow>

@@ -11,7 +11,7 @@
     "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
     "overlayScrimClass": "overlayScrimClass",
     "persistent": "在元素外部单击不会将其停用。",
-    "scrollable": "当设置为 true 时，期望有一个 [MCard](/blazor/components/cards) 和一个 [MCardText](components/cards/api/MCardText) 组件。",
+    "scrollable": "当设置为 true 时，期望有一个 [MCard](/blazor/components/cards) 和一个 [MCardText](/blazor/components/cards/api/MCardText) 组件。",
     "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
     "value": "控制组件可见还是隐藏。"
   },

@@ -1,0 +1,5 @@
+﻿{
+  "props": {
+    "target": "The `id` of the target element, also used to register the intersection observer"
+  }
+}

@@ -1,9 +1,8 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class PatternPathComponentBase : BDomComponentBase
+public class PatternPathComponentBase : MasaComponentBase
 {
-    [Inject]
-    protected NavigationManager NavigationManager { get; set; } = null!;
+    [Inject] protected NavigationManager NavigationManager { get; set; } = null!;
 
     /// <summary>
     /// A list of regular expression patterns to match.
@@ -14,22 +13,29 @@ public class PatternPathComponentBase : BDomComponentBase
     /// "/users/[a-z][A-Z]+": the /users/alice and /users/tom would be displayed in the same tab.
     /// </example>
     [Parameter]
-    public IEnumerable<string>? SelfPatterns { get; set; }
+    public IEnumerable<string> SelfPatterns { get; set; } = Array.Empty<string>();
 
-    protected readonly List<PatternPath> PatternPaths = new();
+    private HashSet<string> _prevSelfPatterns = new();
 
-    protected IEnumerable<Regex> FormatSelfPatterns()
+    protected HashSet<Regex> CachedSelfPatternRegexes = new();
+
+    protected override void OnParametersSet()
     {
-        return SelfPatterns is null
-            ? Enumerable.Empty<Regex>()
-            : SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase));
+        base.OnParametersSet();
+
+        if (_prevSelfPatterns.SetEquals(SelfPatterns)) return;
+
+        _prevSelfPatterns = new HashSet<string>(SelfPatterns);
+        CachedSelfPatternRegexes =
+            new HashSet<Regex>(SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase)));
     }
 
     protected PatternPath GetCurrentPatternPath()
     {
         var absolutePath = NavigationManager.GetAbsolutePath();
-        var selfPatternRegexes = FormatSelfPatterns();
-        var selfPatternRegex = selfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return selfPatternRegex is null ? new PatternPath(absolutePath) : new PatternPath(selfPatternRegex.ToString(), absolutePath);
+        var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));
+        return selfPatternRegex is null
+            ? new PatternPath(absolutePath)
+            : new PatternPath(selfPatternRegex.ToString(), absolutePath);
     }
 }

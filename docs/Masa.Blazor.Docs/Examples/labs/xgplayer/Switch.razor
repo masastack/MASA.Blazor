@@ -1,0 +1,67 @@
+﻿@using Masa.Blazor.Components.Xgplayer.Plugins
+@using Masa.Blazor.Components.Xgplayer
+
+<div style="width: 100%" class="text-center">
+    <div style="width: 600px;height: 338px; background-color: #000000"
+         class="mx-auto">
+        @if (_isMusic)
+        {
+            <MXgMusicPlayer Url="@("https://cdn.masastack.com/stack/doc/blazor/components/xgplayer/1703002472.m4a")"
+                            Autoplay="@_isRunning"
+                            Width="@("100%")"
+                            Height="@("100%")"
+                            StartTime="@_startTime"
+                            Ignores="new[] { BuiltInPlugin.MusicBackward, BuiltInPlugin.MusicForward, BuiltInPlugin.MusicNext, BuiltInPlugin.MusicPrev }"
+                            @ref="_xgMusicPlayer">
+                <MXgplayerControls AutoHide="false" InitShow></MXgplayerControls>
+                <MXgplayerPlay Index="0"></MXgplayerPlay>
+            </MXgMusicPlayer>
+        }
+        else
+        {
+            <MXgplayer Url="@("https://img-cdn.lonsid.cn/download/1703002472.mp4")"
+                       Autoplay="@_isRunning"
+                       Width="@("100%")"
+                       Height="@("100%")"
+                       StartTime="_startTime"
+                       @ref="@_xgplayer">
+                <MXgplayerControls InitShow AutoHide="false" />
+            </MXgplayer>
+        }
+    </div>
+
+    <MButton Class="mt-1" Color="primary" OnClick="@ToggleMusic">Toggle to @(_isMusic ? "Video" : "Music")</MButton>
+</div>
+
+@code {
+
+    private bool _isMusic;
+
+    private double _startTime;
+    private bool _isRunning;
+
+    private MXgMusicPlayer _xgMusicPlayer = null!;
+    private MXgplayer _xgplayer = null!;
+
+    private async Task ToggleMusic()
+    {
+        if (_isMusic)
+        {
+            _isMusic = false;
+            await SetStateAsync(_xgMusicPlayer);
+        }
+        else
+        {
+            _isMusic = true;
+            await SetStateAsync(_xgplayer);
+        }
+    }
+
+    private async Task SetStateAsync(MXgMusicPlayer player)
+    {
+        var attr = await player.GetPropsAndStatesAsync();
+        _startTime = attr.CurrentTime;
+        _isRunning = attr.State == XgplayerState.Running;
+    }
+
+}

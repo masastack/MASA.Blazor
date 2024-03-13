@@ -61,6 +61,21 @@
                    .Watch<StringNumber>(nameof(Height), CallUpdate);
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -68,7 +83,7 @@
                 {
                     cssBuilder
                         .Add("m-system-bar")
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color)
                         .AddIf("m-system-bar--lights-out", () => LightsOut)
                         .AddIf("m-system-bar--absolute", () => Absolute)
@@ -109,12 +124,6 @@
             return element?.ClientHeight ?? 0;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            RemoveApplication();
-        }
-
         private void RemoveApplication(bool force = false)
         {
             if (!force && !App)
@@ -123,6 +132,12 @@
             }
 
             MasaBlazor.Application.Bar = 0;
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            RemoveApplication();
+            return base.DisposeAsyncCore();
         }
     }
 }

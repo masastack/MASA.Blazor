@@ -1,0 +1,44 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MSheet
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenBody() => __builder =>
+    {
+        if (!string.IsNullOrWhiteSpace(Src) || ImgContent != null)
+        {
+            <div class="@_block.Element("image")"
+                 style="@GetImageStyle()">
+                @if (ImgContent != null)
+                {
+                    @ImgContent(new()
+                    {
+                        { "Height", Height },
+                        { "Src", Src }
+                    })
+                }
+                else
+                {
+                    <MImage Height="@ComputedHeight" Src="@Src"/>
+                }
+            </div>
+        }
+
+        <div class="@_block.Element("content")"
+             style="@(StyleBuilder.Create().AddHeight(ComputedContentHeight))">
+            @ChildContent
+        </div>
+
+        if (IsExtended)
+        {
+            <div class="@_block.Element("extension")"
+                 style="@(StyleBuilder.Create().AddHeight(ExtensionHeight))">
+                @ExtensionContent
+            </div>
+        }
+    };
+
+}

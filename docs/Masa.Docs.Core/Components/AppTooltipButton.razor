@@ -9,8 +9,9 @@
                      Class="@($"default-app-btn {Class}")"
                      Disabled="Disabled"
                      Href="@Href"
+                     Loading="@_loading"
                      Target="@Target"
-                     OnClick="OnClick"
+                     OnClick="@HandleOnClick"
                      aria-label="@Path"
                      @attributes="@context.Attrs">
                 <MIcon SvgAttributes="@IconSvgAttrs">@Icon</MIcon>
@@ -46,13 +47,28 @@
     public string? Class { get; set; }
 
     [Parameter]
-    public EventCallback OnClick { get; set; }
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    private bool _loading;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
 
         Icon.ThrowIfNull("AppTooltipButton");
+    }
+
+    private async Task HandleOnClick(MouseEventArgs args)
+    {
+        if (OnClick.HasDelegate)
+        {
+            _loading = true;
+            StateHasChanged();
+
+            await OnClick.InvokeAsync(args);
+        }
+
+        _loading = false;
     }
 
 }

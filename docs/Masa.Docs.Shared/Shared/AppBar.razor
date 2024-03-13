@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @inject MasaBlazor MasaBlazor
+@implements IDisposable
 
 <MAppBar Id="app-bar"
          App
@@ -7,13 +8,13 @@
          Flat
          ClippedRight
          ClippedLeft
-         Height="@(MasaBlazor.Breakpoint.Xs ? AppService.MobileAppBarHeight : AppService.AppBarHeight)"
+         Height="@(MasaBlazor.Breakpoint.Mobile ? AppService.MobileAppBarHeight : AppService.AppBarHeight)"
          Style="left: 0">
-    <div Class="hidden-md-and-down mr-4" style="min-width:264px;">
+    <div Class="hidden-sm-and-down mr-4" style="min-width:264px;">
         <Logo />
     </div>
 
-    @if (HideAppBarNavIcon is false)
+    @if (HideAppBarNavIcon is false && Project is not null)
     {
         <MAppBarNavIcon Class="hidden-lg-and-up"
                         @onclick="OnAppBarNavIconClick" />
@@ -54,5 +55,22 @@
 
     [Parameter]
     public EventCallback OnSettingsClick { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
+    }
+
+    private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.MobileChanged -= MasaBlazorOnMobileChanged;
+    }
 
 }

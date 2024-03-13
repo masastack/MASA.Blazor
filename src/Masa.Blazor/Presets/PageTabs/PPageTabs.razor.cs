@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
@@ -30,7 +28,7 @@ public partial class PPageTabs : PatternPathComponentBase
     #region Parameters from MTabs
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MasaApiParameter(true)]
     public bool Ripple { get; set; } = true;
 
     [Parameter]
@@ -52,7 +50,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? SliderColor { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(2)]
+    [MasaApiParameter(2)]
     public StringNumber? SliderSize { get; set; } = 2;
 
     [Parameter]
@@ -73,7 +71,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
-    [ApiDefaultValue("/")]
+    [MasaApiParameter("/")]
     public string NoDataPath
     {
         get => _noDataPath ?? "/";
@@ -81,19 +79,25 @@ public partial class PPageTabs : PatternPathComponentBase
     }
 
     [Parameter]
-    [ApiDefaultValue("$close")]
+    [MasaApiParameter("$close")]
     public string? CloseIcon { get; set; } = "$close";
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MasaApiParameter(true)]
     public bool AskBeforeClosing { get; set; } = true;
 
     [Parameter]
     public Func<string, Task<bool>>? OnClose { get; set; }
 
+    private readonly Block _tabBlock = new("p-page-tab");
+
+    protected readonly List<PatternPath> PatternPaths = new();
+    
     private bool _menuValue;
     private string? _noDataPath;
+    private string? _previousPath;
     private PatternPath? _contextmenuPath;
+    private CancellationTokenSource? _middleClickCancellationTokenSource;
 
     private double _positionX;
     private double _positionY;
@@ -129,17 +133,12 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.Apply(css => css.Add("p-page-tabs"))
-                   .Apply("tab", css => css.Add("p-page-tab").Add(TabClass))
-                   .Apply("tab-title", css => css.Add("p-page-tab__title"))
-                   .Apply("tab-close", css => css.Add("p-page-tab__close"));
+        yield return "p-page-tabs";
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseAllTabs(bool disableAutoNavigation = false)
     {
         PatternPaths.Clear();
@@ -152,7 +151,7 @@ public partial class PPageTabs : PatternPathComponentBase
         }
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseCurrentTab(bool disableAutoNavigation = false)
     {
         var current = GetCurrentPatternPath();
@@ -165,7 +164,7 @@ public partial class PPageTabs : PatternPathComponentBase
         CloseTab(current);
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseTabs(Regex pattern, bool disableAutoNavigation = false)
     {
         var paths = PatternPaths.Where(p => pattern.IsMatch(p.AbsolutePath)).ToArray();
@@ -195,7 +194,7 @@ public partial class PPageTabs : PatternPathComponentBase
         NextTick(() => { _tabs?.CallSlider(); });
     }
 
-    [ApiPublicMethod]
+    [MasaApiPublicMethod]
     public void CloseOtherTabs()
     {
         var current = GetCurrentPatternPath();
@@ -214,28 +213,33 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var pathPattern = GetCurrentPatternPath();
-        if (!pathPattern.IsSelf && PatternPaths.Any(p => p.AbsolutePath.Equals(pathPattern.AbsolutePath, StringComparison.OrdinalIgnoreCase)))
+        var currentPatternPath = GetCurrentPatternPath();
+        var currentPath = currentPatternPath.AbsolutePath;
+
+        // only the path is changed, not the query string
+        if (_previousPath == currentPath)
         {
             return;
         }
 
-        if (pathPattern.IsSelf)
+        if (currentPatternPath.IsSelf)
         {
-            var renderedPathPattern = PatternPaths.FirstOrDefault(p => pathPattern == p);
+            var renderedPathPattern = PatternPaths.FirstOrDefault(p => currentPatternPath == p);
             if (renderedPathPattern is not null)
             {
                 renderedPathPattern.UpdatePath(NavigationManager.GetAbsolutePath());
                 InvokeAsync(StateHasChanged);
-                return;
             }
         }
 
-        InvokeAsync(() =>
+        if (!PatternPaths.Contains(currentPatternPath))
         {
-            PatternPaths.Add(pathPattern);
-            StateHasChanged();
-        });
+            PatternPaths.Add(currentPatternPath);
+        }
+
+        _previousPath = currentPath;
+
+        InvokeAsync(StateHasChanged);
     }
 
     private string GetTabTitle(PatternPath patternPath, TabOptions? tabOptions)
@@ -358,6 +362,20 @@ public partial class PPageTabs : PatternPathComponentBase
         _positionY = args.ClientY;
     }
 
+    private async Task HandleOnAuxclick(MouseEventArgs args, PatternPath patternPath, string tabTitle)
+    {
+        if (args.Button == 1)
+        {
+            // HACK: I don't know why this event would be triggered twice
+            // so I use a cancellation token to cancel the previous task
+
+            _middleClickCancellationTokenSource?.Cancel();
+            _middleClickCancellationTokenSource = new CancellationTokenSource();
+
+            await RunTaskInMicrosecondsAsync(() => HandleOnCloseTab(patternPath, tabTitle), 100, _middleClickCancellationTokenSource.Token);
+        }
+    }
+
     private void CloseTab(PatternPath patternPath)
     {
         PatternPaths.Remove(patternPath);
@@ -394,15 +412,15 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.NavigateTo(nextPath);
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
-        base.Dispose(disposing);
-
         if (PageTabsProvider != null)
         {
             PageTabsProvider.TabTitleChanged -= PageTabsProviderOnTabTitleChanged;
         }
 
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+
+        return base.DisposeAsyncCore();
     }
 }

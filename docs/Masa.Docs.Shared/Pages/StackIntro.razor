@@ -1,0 +1,54 @@
+﻿@inject I18n I18n
+@inject DocService DocService
+
+<MRow>
+    <MCol Cols="12" Md="6">
+        <MRow>
+            <MCol Cols="12">
+                <IntroCard Title="@I18n.T("installation")"
+                           MarkdownSource="@installation"
+                           OpenInNewUrl="/stack/masa-stack-1.0/installation/docker-compose">
+                </IntroCard>
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_auth)
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_pm)
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_tsc)
+            </MCol>
+        </MRow>
+
+    </MCol>
+
+    <MCol Cols="12" Md="6">
+        <MRow>
+            <MCol Cols="12">
+                @GenProductCard(_dcc)
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_mc)
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_alert)
+            </MCol>
+            <MCol Cols="12">
+                @GenProductCard(_scheduler)
+            </MCol>
+        </MRow>
+    </MCol>
+</MRow>
+
+@code {
+
+    private RenderFragment GenProductCard(ProductIntro product) => __builder =>
+    {
+        <IntroCard Title="@I18n.T(product.Title)"
+                   MarkdownSource="@product.Intro"
+                   OpenInNewUrl="@product.Href">
+        </IntroCard>
+    };
+
+}

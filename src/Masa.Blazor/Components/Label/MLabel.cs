@@ -6,11 +6,11 @@
         public bool Disabled { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(0)]
+        [MasaApiParameter(0)]
         public StringNumber? Left { get; set; } = 0;
 
         [Parameter]
-        [ApiDefaultValue("auto")]
+        [MasaApiParameter("auto")]
         public StringNumber? Right { get; set; } = "auto";
 
         [Parameter]
@@ -20,11 +20,28 @@
         public bool Focused { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("primary")]
+        [MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
         [Parameter]
         public bool Value { get; set; }
+
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -36,7 +53,7 @@
                         .Add(prefix)
                         .AddIf($"{prefix}--active", () => Value)
                         .AddIf($"{prefix}--is-disabled", () => Disabled)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddTextColor(Color, () => Focused);
                 }, styleBuilder =>
                 {

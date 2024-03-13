@@ -9,6 +9,8 @@
 - [P开头的组件为什么无法使用？](#p-starting-components)
 - [无法从“方法组”转换为“Microsoft.AspNetCore.Components.EventCallback”](#cannot-convert-from-method-group-to-eventcallback)
 - [如何让UI紧凑？](#how-to-make-ui-compact)
+- [I18n 切换语言后文本不更新](#i18n-text-not-updated)
+- [避免 MMain 和 MAppBar 初次加载的过渡动画](#avoid-the-entry-animation-of-main-and-app-bar)
 
 ## 问题专区
 
@@ -28,8 +30,13 @@
 
   如果方法里存在泛型参数，那你需要指明泛型类型。例如在 **MSelect** 组件使用 `OnSelectedItemUpdate` 事件时，你需要指明泛型类型，如下所示：
 
-  ``` razor l:1
+  ``` razor l:1-3
   <MSelect TItem="string"
+           TValue="string"
+           TItemValue="string"
+           Items="@Items"
+           ItemText="item => item"
+           ItemValue="item => item"
            OnSelectedItemUpdate="OnUpdate">
   </MSelect>
   ```
@@ -70,4 +77,87 @@
           { nameof(PImageCaptcha), new Dictionary<string, object?>() { { nameof(PImageCaptcha.Dense), true } } }
       };
   })
+  ```
+  
+- **I18n 切换语言后文本不更新** { #i18n-text-not-updated }
+
+  - 通过级联参数变更通知子组件刷新（推荐）
+
+    ```razor MainLayout
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+
+    <MApp>
+      <CascadingValue Value="@I18n.Culture.ToString()" Name="Culture">
+        @* AppBar Main.. *@
+      </CascadingValue>
+    </MApp>
+    ```  
+    
+    ``` razor PageOrComponent.razor
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        [CascadingParameter(Name = "Culture")]
+        public string? Culture { get; set; }
+    }
+    ```
+
+  - 通过I18n的事件通知子组件刷新
+
+    ``` razor
+    @using BlazorComponent.I18n
+    @inject I18n I18n
+    @implements IDisposable
+    
+    <h1>@I18n.T("$masaBlazor.search")</h1>
+    
+    @code {
+        protected override void OnInitialized()
+        {
+            I18n.CultureChange += OnCultureChange;
+        }
+    
+        private void OnCultureChange(object? sender, EventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    
+        public void Dispose()
+        {
+            I18n.CultureChange -= OnCultureChange;
+        }
+    }
+    ```
+
+- **避免 MMain 和 MAppBar 初次加载的过渡动画** { #avoid-the-entry-animation-of-main-and-app-bar }
+
+  MASA Blazor 会自动计算 **MMain** 和 **MAppBar** 的位置，而这一过程需要调用 JS 互操作，所以会有一定的延迟。当得到计算后的位置并应用后，会有一个过渡动画。
+  可以通过 CSS 来避免此过渡动画。例如以本文档为例：
+
+  ```razor
+  <MApp>
+    <MAppBar Class="my-app" App></MAppBar>
+    <MNavigationDrawer App></MNavigationDrawer>
+    <MMain Class="my-main"></MMain>
+  </MApp>
+  ```
+
+  ``` css
+  /* 默认的 mobile 断点值是 md,其值是 1264px*/
+  /* MNavigationDrawer 的默认宽度是 300px */
+  @media (min-width: 1264px) {
+    /* 避免 MAppBar 的过渡动画 */
+    .my-app:not(.app--sized){
+      left: 300px !important;
+    }
+  
+    / * 避免 MMain 的过渡动画 * /
+    .my-main:not(.app--sized){
+      padding-left: 300px !important;
+    }
+  }
   ```

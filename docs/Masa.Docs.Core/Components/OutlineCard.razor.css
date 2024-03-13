@@ -1,0 +1,36 @@
+﻿.m-outline-card {
+    border-radius: 4px;
+    margin-top: 12px;
+    padding: 16px;
+    position: relative;
+}
+
+.m-outline-card__title {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    padding: 0 16px;
+    border-radius: 4px;
+}
+
+.m-outline-card .m-outline-card__title {
+    background-color: inherit;
+}
+
+.theme--dark.m-outline-card--filled .m-outline-card__title {
+    background-color: #47464f;
+}
+
+.theme--light.m-outline-card {
+    background-color: #fff;
+    border: thin solid rgba(0, 0, 0, .12)
+}
+
+.theme--dark.m-outline-card:not(.m-outline-card--filled) {
+    background-color: var(--md-sys-color-surface-dark);
+    border: thin solid rgba(255, 255, 255, .12)
+}
+
+.theme--dark.m-outline-card--filled {
+    background-color: #1c1c21;
+}

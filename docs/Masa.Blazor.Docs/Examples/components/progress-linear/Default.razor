@@ -1,13 +1,13 @@
 ﻿<MContainer>
-    <MProgressLinear Value="@_power" Color="amber" Height="25" OnChange="PowerChanged"></MProgressLinear>
+    <MProgressLinear @bind-Value="@_power" Color="amber" Height="25"></MProgressLinear>
 </MContainer>
 <MContainer>
-    <MProgressLinear Value="@_skill" Color="blue-grey" Height="25" OnChange="SkillChanged">
+    <MProgressLinear @bind-Value="@_skill" Color="blue-grey" Height="25">
         <strong>@($"{context}%")</strong>
     </MProgressLinear>
 </MContainer>
 <MContainer>
-    <MProgressLinear Value="@_knowledge" Height="25" OnChange="KnowledgeChanged">
+    <MProgressLinear @bind-Value="@_knowledge" Height="25">
         <strong>@($"{context}%")</strong>
     </MProgressLinear>
 </MContainer>
@@ -16,20 +16,4 @@
     private double _skill = 20;
     private double _knowledge = 33;
     private double _power = 78;
-
-    private void SkillChanged(double value)
-    {
-        _skill = value;
-    }
-
-    private void KnowledgeChanged(double value)
-    {
-        _knowledge = value;
-    }
-
-    private void PowerChanged(double value)
-    {
-        _power = value;
-    }
 }
-

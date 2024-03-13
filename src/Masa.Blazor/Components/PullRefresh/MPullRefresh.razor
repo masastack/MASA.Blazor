@@ -1,0 +1,90 @@
+﻿@using Masa.Blazor.PullToRefresh
+
+@namespace Masa.Blazor
+@inherits BDomComponentBase
+@inject I18n I18n
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     id="@Id"
+     @ref="Ref">
+    <div class="@CssProvider.GetClass("track")"
+         style="@CssProvider.GetStyle("track")"
+         @ref="@_trackRef"
+         @ontouchend="OnTouchEnd"
+         @ontouchcancel="OnTouchEnd">
+        <div class="@CssProvider.GetClass("header")"
+             style="@CssProvider.GetStyle("header")">
+            @RenderLoadingStatus()
+            @RenderCanReleaseStatus()
+            @RenderPullingStatus()
+            @RenderSuccessStatus()
+        </div>
+
+        @ChildContent
+    </div>
+</div>
+
+@code {
+
+    private RenderFragment RenderLoadingStatus() => __builder =>
+    {
+        if (_pullRefreshStatus == PullRefreshStatus.Loading)
+        {
+            if (LoadingContent is null)
+            {
+                <MProgressCircular Indeterminate Size="24" Width="2" />
+            }
+            else
+            {
+                @LoadingContent(_distance);
+            }
+        }
+    };
+
+    private RenderFragment RenderCanReleaseStatus() => __builder =>
+    {
+        if (_pullRefreshStatus == PullRefreshStatus.CanRelease)
+        {
+            if (CanReleaseContent is null)
+            {
+                @CanReleaseText
+            }
+            else
+            {
+                @CanReleaseContent(_distance);
+            }
+        }
+    };
+
+    private RenderFragment RenderPullingStatus() => __builder =>
+    {
+        if (_pullRefreshStatus == PullRefreshStatus.Pulling)
+        {
+            if (PullingContent is null)
+            {
+                @PullingText
+            }
+            else
+            {
+                @PullingContent(_distance);
+            }
+        }
+    };
+
+    private RenderFragment RenderSuccessStatus() => __builder =>
+    {
+        if (_pullRefreshStatus == PullRefreshStatus.Success)
+        {
+            if (SuccessContent is null)
+            {
+                @SuccessText
+            }
+            else
+            {
+                @SuccessContent
+            }
+        }
+    };
+
+}

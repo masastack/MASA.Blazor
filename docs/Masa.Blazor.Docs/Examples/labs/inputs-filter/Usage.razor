@@ -1,0 +1,157 @@
+﻿@using System.Text.Json
+
+<MInputsFilter OnFieldChanged="OnFieldChanged">
+    <MRow Dense>
+        <MCol Cols="12">
+            <MAutocomplete @bind-Value="_autocompleteValue"
+                           Label="Autocomplete"
+                           Items="@_items"
+                           ItemText="@(item => item)"
+                           ItemValue="@(item => item)"
+                           Clearable
+                           Filled>
+            </MAutocomplete>
+        </MCol>
+        <MCol Cols="12">
+            <MSelect @bind-Value="_selectMultipleValue"
+                     Label="Select multiple"
+                     Items="@_items"
+                     ItemText="@(item => item)"
+                     ItemValue="@(item => item)"
+                     Multiple
+                     Clearable
+                     Filled>
+            </MSelect>
+        </MCol>
+        <MCol Cols="12">
+            <MCascader @bind-Value="_cascaderValue"
+                       Label="Cascader"
+                       Items="_cascaderItems"
+                       ItemText="u => u.Label"
+                       ItemValue="u => u.Value"
+                       ItemChildren="u => u.Children"
+                       Clearable
+                       Filled>
+            </MCascader>
+        </MCol>
+        <MCol Cols="12">
+            <MTextField @bind-Value="_textFieldValue"
+                        Label="TextField"
+                        PersistentPlaceholder
+                        Placeholder="Press enter to trigger filter action"
+                        Clearable
+                        Filled>
+            </MTextField>
+        </MCol>
+        <MCol Cols="12">
+            <MCheckbox @bind-Value="_checkboxValue"
+                       Label="Checkbox">
+            </MCheckbox>
+
+        </MCol>
+        <MCol Cols="12">
+            <MSwitch @bind-Value="_switchValue"
+                     Label="Switch">
+            </MSwitch>
+        </MCol>
+        <MCol Cols="12">
+            <MRadioGroup @bind-Value="_radioValue"
+                         Row>
+                <MRadio Label="Radio 1"
+                        Value="@("radio-1")">
+                </MRadio>
+                <MRadio Label="Radio 2"
+                        Value="@("radio-2")">
+                </MRadio>
+            </MRadioGroup>
+        </MCol>
+    </MRow>
+</MInputsFilter>
+
+<MAlert Type="AlertTypes.Info" Class="mt-2">
+    @if (_loading)
+    {
+        <div>Loading...</div>
+    }
+    else
+    {
+        <div>@(_log ?? "waiting for input change...")</div>
+    }
+
+    <div class="text-pre">@_json</div>
+</MAlert>
+
+@code {
+
+    private static List<string> _items = new() { "Item 1", "Item 2", "Item 3" };
+
+    private static List<CascaderNode> _cascaderItems = new()
+    {
+        new CascaderNode("1", "湖北")
+        {
+            Children = new List<CascaderNode>()
+            {
+                new("11", "武汉", new List<CascaderNode>()
+                {
+                    new("111", "武昌区", new List<CascaderNode>()
+                    {
+                        new("1111", "黄鹤楼街道"),
+                        new("1112", "白沙洲街道"),
+                    }),
+                    new("112", "洪山区")
+                }),
+                new("12", "黄石"),
+                new("13", "宜昌")
+            }
+        },
+        new CascaderNode("2", "浙江", new List<CascaderNode>()
+        {
+            new("21", "杭州"),
+            new("22", "温州"),
+            new("23", "义乌"),
+            new("24", "宁波")
+        })
+    };
+
+    private string? _autocompleteValue;
+    private string? _cascaderValue;
+    private bool _checkboxValue;
+    private string? _radioValue;
+    private List<string> _selectMultipleValue = new();
+    private bool _switchValue;
+    private string? _textFieldValue;
+
+    private string? _log;
+    private bool _loading;
+
+    private string _json; // just for demo
+
+    public record CascaderNode(string Value, string Label, List<CascaderNode>? Children = null);
+
+    private async Task OnFieldChanged(InputsFilterFieldChangedEventArgs args)
+    {
+        _loading = true;
+        StateHasChanged();
+
+        await Task.Delay(300);
+        _log = $"{args.FieldName} changed, you may want to update data from server...";
+
+        // just for demo
+        _json = JsonSerializer.Serialize(new
+        {
+            _autocompleteValue,
+            _cascaderValue,
+            _checkboxValue,
+            _radioValue,
+            _selectMultipleValue,
+            _switchValue,
+            _textFieldValue
+        }, new JsonSerializerOptions()
+        {
+            WriteIndented = true
+        });
+
+        _loading = false;
+    }
+
+}

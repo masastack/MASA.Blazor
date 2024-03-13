@@ -32,7 +32,7 @@ public partial class AppLink
         }
     }
 
-    private bool IsExternal => Uri.TryCreate(Href, UriKind.Absolute, out var _);
+    private bool IsExternal => Href.StartsWith("http") || Href.StartsWith("mailto");
 
     private bool IsSamePage => !IsExternal && Href.StartsWith("#");
 

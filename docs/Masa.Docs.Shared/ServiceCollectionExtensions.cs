@@ -29,18 +29,22 @@ public static class ServiceCollectionExtensions
                 theme.Dark = false;
 
                 theme.Themes.Light.Primary = "#4f33ff";
-                theme.Themes.Light.Secondary = "#C7C4DC";
-                theme.Themes.Light.Error = "#ba1a1a";
-                theme.Themes.Light.UserDefined["Tertiary"] = "#00966f";
-                theme.Themes.Light.UserDefined["Neutral"] = "#929094";
-                theme.Themes.Light.UserDefined["NeutralVariant"] = "#928f99";
+                theme.Themes.Light.Secondary = "#5e5c71";
+                theme.Themes.Light.Accent = "#006C4F";
+                theme.Themes.Light.Error = "#BA1A1A";
+                // theme.Themes.Light.Surface = "#FCF8FD";
+                theme.Themes.Light.OnSurface = "#1C1B1F";
 
-                theme.Themes.Dark.Primary = "#c5c0ff";
+                theme.Themes.Dark.Primary = "#C5C0FF";
                 theme.Themes.Dark.Secondary = "#C7C4DC";
-                theme.Themes.Dark.Error = "#ffb4ab";
-                theme.Themes.Dark.UserDefined["Tertiary"] = "#68dbaf";
-                theme.Themes.Dark.UserDefined["Neutral"] = "#929094";
-                theme.Themes.Dark.UserDefined["NeutralVariant"] = "#928f99";
+                theme.Themes.Dark.Accent = "#67DBAF";
+                theme.Themes.Dark.Error = "#FFB4AB";
+                theme.Themes.Dark.Surface = "#131316";
+                theme.Themes.Dark.OnPrimary = "#2400A2";
+                theme.Themes.Dark.OnSecondary = "#302E42";
+                theme.Themes.Dark.OnAccent = "#003827";
+                // theme.Themes.Dark.OnError = "#690005";
+                theme.Themes.Dark.OnSurface = "#C9C5CA";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {
@@ -68,6 +72,8 @@ public static class ServiceCollectionExtensions
                 };
                 aliases.UserDefined["wechat"] = new SvgPath(
                     "M9.5,4C5.36,4 2,6.69 2,10C2,11.89 3.08,13.56 4.78,14.66L4,17L6.5,15.5C7.39,15.81 8.37,16 9.41,16C9.15,15.37 9,14.7 9,14C9,10.69 12.13,8 16,8C16.19,8 16.38,8 16.56,8.03C15.54,5.69 12.78,4 9.5,4M6.5,6.5A1,1 0 0,1 7.5,7.5A1,1 0 0,1 6.5,8.5A1,1 0 0,1 5.5,7.5A1,1 0 0,1 6.5,6.5M11.5,6.5A1,1 0 0,1 12.5,7.5A1,1 0 0,1 11.5,8.5A1,1 0 0,1 10.5,7.5A1,1 0 0,1 11.5,6.5M16,9C12.69,9 10,11.24 10,14C10,16.76 12.69,19 16,19C16.67,19 17.31,18.92 17.91,18.75L20,20L19.38,18.13C20.95,17.22 22,15.71 22,14C22,11.24 19.31,9 16,9M14,11.5A1,1 0 0,1 15,12.5A1,1 0 0,1 14,13.5A1,1 0 0,1 13,12.5A1,1 0 0,1 14,11.5M18,11.5A1,1 0 0,1 19,12.5A1,1 0 0,1 18,13.5A1,1 0 0,1 17,12.5A1,1 0 0,1 18,11.5Z");
+                aliases.UserDefined["languageJavascript"] = new SvgPath(
+                    "M3,3H21V21H3V3M7.73,18.04C8.13,18.89 8.92,19.59 10.27,19.59C11.77,19.59 12.8,18.79 12.8,17.04V11.26H11.1V17C11.1,17.86 10.75,18.08 10.2,18.08C9.62,18.08 9.38,17.68 9.11,17.21L7.73,18.04M13.71,17.86C14.21,18.84 15.22,19.59 16.8,19.59C18.4,19.59 19.6,18.76 19.6,17.23C19.6,15.82 18.79,15.19 17.35,14.57L16.93,14.39C16.2,14.08 15.89,13.87 15.89,13.37C15.89,12.96 16.2,12.64 16.7,12.64C17.18,12.64 17.5,12.85 17.79,13.37L19.1,12.5C18.55,11.54 17.77,11.17 16.7,11.17C15.19,11.17 14.22,12.13 14.22,13.4C14.22,14.78 15.03,15.43 16.25,15.95L16.67,16.13C17.45,16.47 17.91,16.68 17.91,17.26C17.91,17.74 17.46,18.09 16.76,18.09C15.93,18.09 15.45,17.66 15.09,17.06L13.71,17.86Z");
             });
         });
 

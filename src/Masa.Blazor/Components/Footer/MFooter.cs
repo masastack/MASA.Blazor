@@ -32,7 +32,7 @@ namespace Masa.Blazor
         public bool Fixed { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("auto")]
+        [MasaApiParameter("auto")]
         public StringNumber? Height
         {
             get => GetValue((StringNumber)"auto");
@@ -131,6 +131,21 @@ namespace Masa.Blazor
                 InvokeStateHasChanged();
             }
         }
+                
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -140,7 +155,7 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-footer")
                         .Add("m-sheet")
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddBackgroundColor(Color)
                         .AddIf("m-footer--absolute", () => Absolute)
                         .AddIf("m-footer--fixed", () => !Absolute && (App || Fixed))
@@ -194,12 +209,6 @@ namespace Masa.Blazor
             return element.ClientHeight;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            RemoveApplication();
-            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-        }
-
         private void RemoveApplication(bool force = false)
         {
             if (!force && !App)
@@ -211,6 +220,12 @@ namespace Masa.Blazor
                 MasaBlazor.Application.InsetFooter = 0;
             else
                 MasaBlazor.Application.Footer = 0;
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+            return base.DisposeAsyncCore();
         }
     }
 }

@@ -1,14 +1,9 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MToolbarTitle : Container
 {
-    public class MToolbarTitle : BToolbarTitle
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder.Add("m-toolbar__title");
-                });
-        }
+        return new[] { "m-toolbar__title" };
     }
 }

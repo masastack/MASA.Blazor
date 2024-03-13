@@ -6,6 +6,8 @@
 @using Microsoft.Extensions.Caching.Memory;
 @using Octokit
 @using System.Diagnostics.CodeAnalysis
+@using Masa.Blazor.Docs.Services
+@inject BlazorDocService BlazorDocService
 
 @if (_show)
 {
@@ -16,16 +18,16 @@
     else
     {
         <div class="github-issues github-issues--loaded rounded">
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{_componentName}")">
+            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{Labels}")">
                 <MIcon Class="emphasize1-color mr-1" Size="16">mdi-plus</MIcon>
                 <span>Issues</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{_componentName}")">
+            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-alert-circle-outline</MIcon>
                 <span>@_openCount</span>&nbsp;
                 <span>Open</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{_componentName}")">
+            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-check</MIcon>
                 <span>@_closeCount</span>&nbsp;
                 <span>Closed</span>
@@ -46,7 +48,9 @@
     bool _searching;
     int _openCount;
     int _closeCount;
-    string? _componentName;
+    List<string> _componentNames = new();
+
+    private string Labels => "label:" + string.Join(',', _componentNames);
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,30 +71,44 @@
 
     private async Task SearchIssues()
     {
-        var isComponentPage = Navigation.GetAbsolutePath().StartsWith("/blazor/components/");
+        var temp = _show;
+
+        var isComponentPage = Navigation.GetAbsolutePath().StartsWith("/blazor/components/", StringComparison.OrdinalIgnoreCase);
         if (!isComponentPage)
         {
             _show = false;
-            await InvokeAsync(StateHasChanged);
+
+            if (temp)
+            {
+                await InvokeAsync(StateHasChanged);
+            }
+
             return;
         }
 
-        _componentName = FormatSegment(Navigation.GetSegments().LastOrDefault());
+        var pageToApi = await BlazorDocService.ReadPageToApiAsync();
 
-        if (_componentName == "api")
+        var segments = Navigation.GetSegments();
+        var lastSegment = segments.LastOrDefault()?.ToLowerInvariant();
+        if (lastSegment == "api")
         {
             if (_show)
             {
                 return;
             }
 
-            _componentName = FormatSegment(Navigation.GetSegments().SkipLast(1).LastOrDefault());
+            lastSegment = segments.SkipLast(1).LastOrDefault()?.ToLowerInvariant();
         }
 
-        if (_componentName is null or "all")
+        if (lastSegment is null or "all")
         {
             _show = false;
-            await InvokeAsync(StateHasChanged);
+
+            if (temp)
+            {
+                await InvokeAsync(StateHasChanged);
+            }
+
             return;
         }
 
@@ -98,7 +116,18 @@
         _searching = true;
         await InvokeAsync(StateHasChanged);
 
-        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("BlazorComponent", "MASA.Blazor", _componentName);
+        _componentNames.Clear();
+
+        if (pageToApi.TryGetValue(lastSegment, out var components))
+        {
+            _componentNames.AddRange(components.Select(c => "component/" + (c[0] == 'M' ? c.TrimStart('M') : c.TrimStart('P'))));
+        }
+        else
+        {
+            _componentNames.Add("component/" + lastSegment.ToPascal().TrimEnd('s'));
+        }
+
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", new[] { string.Join(',', _componentNames) }, lastSegment);
 
         _searching = false;
         await InvokeAsync(StateHasChanged);
@@ -107,12 +136,6 @@
     public void Dispose()
     {
         Navigation.LocationChanged -= HandleLocationChanged;
-    }
-
-    [return: NotNullIfNotNull("name")]
-    private static string? FormatSegment(string? name)
-    {
-        return name?.TrimEnd('/').TrimEnd('s').Trim('-').ToLowerInvariant();
     }
 
 }

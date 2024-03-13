@@ -1,123 +1,116 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MStepper : MSheet
 {
-    public partial class MStepper : MSheet
+    [Parameter] public bool Flat { get; set; }
+
+    [Parameter] public bool Vertical { get; set; }
+
+    [Parameter] public bool AltLabels { get; set; }
+
+    [Parameter] public bool NonLinear { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(1)]
+    public int Value
     {
-        [Parameter]
-        public bool Flat { get; set; }
+        get => GetValue(1);
+        set => SetValue(value);
+    }
 
-        [Parameter]
-        public bool Vertical { get; set; }
+    [Parameter] public EventCallback<int> ValueChanged { get; set; }
 
-        [Parameter]
-        public bool AltLabels { get; set; }
+    private readonly List<MStepperStep> _steps = new();
+    private readonly List<MStepperContent> _content = new();
 
-        [Parameter]
-        public bool NonLinear { get; set; }
+    private bool _isBooted;
 
-        [Parameter]
-        [ApiDefaultValue(1)]
-        public int Value
+    private bool IsReverse { get; set; }
+
+    private Block _block = new("m-stepper");
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            _block.Modifier(Flat)
+                .And(_isBooted)
+                .And(Vertical)
+                .And(AltLabels)
+                .And(NonLinear).GenerateCssClasses());
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
         {
-            get => GetValue(1);
-            set => SetValue(value);
+            UpdateView();
         }
+    }
 
-        [Parameter]
-        public EventCallback<int> ValueChanged { get; set; }
+    protected override void RegisterWatchers(PropertyWatcher watcher)
+    {
+        base.RegisterWatchers(watcher);
 
-        private readonly List<MStepperStep> _steps = new();
-        private readonly List<MStepperContent> _content = new();
-
-        private bool IsReverse { get; set; }
-
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
-
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-stepper")
-                        .AddIf("m-stepper--flat", () => Flat)
-                        .AddIf("m-stepper--is-booted", () => IsBooted)
-                        .AddIf("m-stepper--vertical", () => Vertical)
-                        .AddIf("m-stepper--alt-labels", () => AltLabels)
-                        .AddIf("m-stepper--non-linear", () => NonLinear);
-                });
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
-
-            if (firstRender)
+        watcher
+            .Watch<int>(nameof(Value), (newVal, oldVal) =>
             {
+                IsReverse = newVal < oldVal;
+
+                if (oldVal != 0)
+                {
+                    _isBooted = true;
+                }
+
                 UpdateView();
-            }
+
+                StateHasChanged();
+            });
+    }
+
+    public void RegisterStep(MStepperStep step)
+    {
+        _steps.Add(step);
+    }
+
+    public void RegisterContent(MStepperContent content)
+    {
+        _content.Add(content);
+    }
+
+    public void UnRegisterStep(MStepperStep stepperStep)
+    {
+        _steps.Remove(stepperStep);
+    }
+
+    public void UnRegisterContent(MStepperContent stepperContent)
+    {
+        _content.Remove(stepperContent);
+    }
+
+    private void UpdateView()
+    {
+        for (var index = _steps.Count; --index >= 0;)
+        {
+            _steps[index].Toggle(Value);
         }
 
-        protected override void RegisterWatchers(PropertyWatcher watcher)
+        for (var index = _content.Count; --index >= 0;)
         {
-            base.RegisterWatchers(watcher);
-
-            watcher
-                .Watch<int>(nameof(Value), (newVal, oldVal) =>
-                {
-                    IsReverse = newVal < oldVal;
-
-                    if (oldVal != 0)
-                    {
-                        IsBooted = true;
-                    }
-
-                    UpdateView();
-                });
+            _content[index].Toggle(Value, IsReverse);
         }
+    }
 
-        public void RegisterStep(MStepperStep step)
+    public void StepClick(int step)
+    {
+        if (ValueChanged.HasDelegate)
         {
-            _steps.Add(step);
+            ValueChanged.InvokeAsync(step);
         }
-
-        public void RegisterContent(MStepperContent content)
+        else
         {
-            _content.Add(content);
-        }
-
-        public void UnRegisterStep(MStepperStep stepperStep)
-        {
-            _steps.Remove(stepperStep);
-        }
-
-        public void UnRegisterContent(MStepperContent stepperContent)
-        {
-            _content.Remove(stepperContent);
-        }
-
-        private void UpdateView()
-        {
-            for (var index = _steps.Count; --index >= 0;)
-            {
-                _steps[index].Toggle(Value);
-            }
-
-            for (var index = _content.Count; --index >= 0;)
-            {
-                _content[index].Toggle(Value, IsReverse);
-            }
-        }
-
-        public void StepClick(int step)
-        {
-            if (ValueChanged.HasDelegate)
-            {
-                ValueChanged.InvokeAsync(step);
-            }
-            else
-            {
-                Value = step;
-            }
+            Value = step;
         }
     }
 }

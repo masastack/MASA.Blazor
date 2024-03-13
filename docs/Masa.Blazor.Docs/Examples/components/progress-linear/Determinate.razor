@@ -1,23 +1,16 @@
 ﻿<MContainer>
-	<MProgressLinear @bind-Value="_valueDeterminate" Color="deep-purple accent-4" OnChange="HandleOnChange"></MProgressLinear>
+    <MProgressLinear @bind-Value="_valueDeterminate" Color="deep-purple accent-4"></MProgressLinear>
 </MContainer>
 <MContainer>
-	<MProgressLinear @bind-Value="_valueDeterminate" Color="pink" OnChange="HandleOnChange"></MProgressLinear>
+    <MProgressLinear @bind-Value="_valueDeterminate" Color="pink"></MProgressLinear>
 </MContainer>
 <MContainer>
-	<MProgressLinear @bind-Value="_valueDeterminate" Color="indigo darken-2" OnChange="HandleOnChange"></MProgressLinear>
+    <MProgressLinear @bind-Value="_valueDeterminate" Color="indigo darken-2"></MProgressLinear>
 </MContainer>
 <MContainer>
-	<MProgressLinear @bind-Value="_valueDeterminate" Color="amber" OnChange="HandleOnChange"></MProgressLinear>
+    <MProgressLinear @bind-Value="_valueDeterminate" Color="amber"></MProgressLinear>
 </MContainer>
-
 
 @code{
-	private double _valueDeterminate = 50;
-
-	private void HandleOnChange(double value)
-	{
-		_valueDeterminate = value;
-	}
+    private double _valueDeterminate = 50;
 }
-

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {
@@ -25,7 +23,7 @@ namespace Masa.Blazor
         public EventCallback<Exception> OnAfterHandle { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(ErrorPopupType.Snackbar)]
+        [MasaApiParameter(ErrorPopupType.Snackbar)]
         public ErrorPopupType PopupType { get; set; } = ErrorPopupType.Snackbar;
 
         /// <summary>

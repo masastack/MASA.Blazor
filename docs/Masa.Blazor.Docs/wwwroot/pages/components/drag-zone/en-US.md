@@ -4,6 +4,8 @@ desc: "The `MDragZone` component is based on [Sorttable.js](https://github.com/S
 tag: "JS Proxy"
 ---
 
+<app-alert type="error" content="This component has been deprecated. Please use the [MSortable](/blazor/labs/sortable) component."></app-alert>
+
 ## Usage
 
 Drag and drop components and dom objects.

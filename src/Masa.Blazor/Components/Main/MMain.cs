@@ -4,67 +4,71 @@ namespace Masa.Blazor;
 
 public class MMain : BMain
 {
-    [Inject]
-    public MasaBlazor MasaBlazor { get; set; } = null!;
+    [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
-    private readonly string[] _applicationProperties = new string[]
+    private bool _sized;
+
+    private bool IsSsr => MasaBlazor.IsSsr;
+
+    private static string[] s_applicationProperties =
     {
         "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
     };
 
-    private bool _isRendered;
-
-    /// <summary>
-    /// Avoid an entry animation on page load.
-    /// </summary>
-    protected override bool IsBooted => _isRendered && (!MasaBlazor.Application.HasNavigationDrawer || MasaBlazor.Application.LeftRightCalculated);
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
 
         MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
+
+#if NET8_0_OR_GREATER
+        if (IsSsr)
+        {
+            Attributes["data-booted"] = "true";
+        }
+#endif
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
-        await base.OnAfterRenderAsync(firstRender);
+        base.OnAfterRender(firstRender);
 
         if (firstRender)
         {
-            _isRendered = true;
-            Attributes["data-booted"] = IsBooted ? "true" : null;
-            StateHasChanged();
+            Attributes["data-booted"] = "true";
         }
     }
 
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (_applicationProperties.Contains(e.PropertyName))
+        if (s_applicationProperties.Contains(e.PropertyName))
         {
-            Attributes["data-booted"] = IsBooted ? "true" : null;
+            _sized = true;
             InvokeStateHasChanged();
         }
     }
 
-    protected override void SetComponentClass()
+    protected override void SetComponentCss()
     {
         CssProvider
-            .Apply(cssBuilder => { cssBuilder.Add("m-main"); }, styleBuilder =>
+            .UseBem("m-main", css => { css.AddIf("app--sized", () => _sized); }, style =>
             {
-                styleBuilder
-                    .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
-                    .Add($"padding-right:{MasaBlazor.Application.Right}px")
-                    .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
-                    .Add($"padding-left:{MasaBlazor.Application.Left}px");
+                if (!IsSsr)
+                {
+                    style
+                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
+                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
+                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
+                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
+                }
             })
-            .Apply("wrap", cssBuilder => cssBuilder.Add("m-main__wrap"));
+            .Element("wrap");
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
-        base.Dispose(disposing);
-
         MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
+
+        return base.DisposeAsyncCore();
     }
 }

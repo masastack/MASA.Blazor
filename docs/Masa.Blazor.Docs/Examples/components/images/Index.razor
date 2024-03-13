@@ -1,11 +1,21 @@
 ﻿<MRow Justify="@JustifyTypes.Center">
-    <MImage MaxHeight="150"
-            MaxWidth="250"
-            Src="@_src"
+    <MImage MaxHeight="@MaxHeight"
+            MaxWidth="@MaxWidth"
+            Contain="@Contain"
+            Src="https://picsum.photos/id/11/500/300"
             LazySrc="https://picsum.photos/id/11/10/6">
     </MImage>
 </MRow>
 
 @code {
-    private string _src = "https://picsum.photos/id/11/500/300";
+
+    [Parameter]
+    public bool Contain { get; set; }
+
+    [Parameter]
+    public StringNumber MaxWidth { get; set; }
+
+    [Parameter]
+    public StringNumber MaxHeight { get; set; }
+
 }

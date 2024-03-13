@@ -29,6 +29,11 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#FFFFFF",
+        OnSecondary = "#FFFFFF",
+        OnAccent = "#FFFFFF",
+        OnError = "#FFFFFF",
+        OnSurface = "#000000"
     };
 
     private static ThemeOptions DarkTheme => new()
@@ -41,5 +46,10 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnAccent = "#000000",
+        OnError = "#000000",
+        OnSurface = "#FFFFFF"
     };
 }

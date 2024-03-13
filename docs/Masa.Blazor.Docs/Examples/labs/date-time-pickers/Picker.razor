@@ -1,0 +1,38 @@
+﻿<MSelect @bind-Value="@_pickerViewType"
+         Dense
+         Label="Picker view type"
+         Items="@_items"
+         ItemValue="u => u.Value"
+         ItemText="u => u.Name"
+         Outlined>
+</MSelect>
+
+<PDateTimePicker @bind-Value="_date"
+                 TimeFormat="TimeFormat.Hr24"
+                 ViewType="_pickerViewType">
+    <ActivatorContent>
+        <MTextField @bind-Value="_date"
+                    Label="Pick a date time"
+                    Clearable
+                    Filled
+                    Readonly
+                    @attributes="@context.Attrs">
+        </MTextField>
+    </ActivatorContent>
+</PDateTimePicker>
+
+@code {
+
+    private static List<(string Name, DateTimePickerViewType Value)> _items = new()
+    {
+        new("Auto", DateTimePickerViewType.Auto),
+        new("Compact", DateTimePickerViewType.Compact),
+        new("Dialog", DateTimePickerViewType.Dialog),
+        new("Desktop", DateTimePickerViewType.Desktop),
+        new("Mobile", DateTimePickerViewType.Mobile)
+    };
+
+    private DateTime? _date;
+    private DateTimePickerViewType _pickerViewType;
+
+}

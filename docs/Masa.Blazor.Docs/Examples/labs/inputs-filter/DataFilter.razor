@@ -1,0 +1,112 @@
+﻿@using Masa.Blazor.Presets
+@using System.Text.Json
+
+<PDataFilter OnSearch="FetchDataAsync">
+    <ActionsContent>
+        <MButton Color="primary">
+            <MIcon Left>mdi-plus</MIcon>
+            Add Order
+        </MButton>
+    </ActionsContent>
+    <HighFrequencyContent>
+        <MTextField @bind-Value="_orderQuery.OrderId"
+                    Label="OrderId"
+                    Outlined>
+        </MTextField>
+    </HighFrequencyContent>
+    <LowFrequencyContent>
+        <MRow Dense>
+            <MCol Cols="12" Sm="6" Md="4" Lg="3">
+                <MTextField @bind-Value="_orderQuery.OrderId"
+                            Label="OrderId"
+                            Outlined>
+                </MTextField>
+            </MCol>
+            <MCol Cols="12" Sm="6" Md="4" Lg="3">
+                <MTextField @bind-Value="_orderQuery.PhoneNumber"
+                            Label="Phone number"
+                            Outlined>
+                </MTextField>
+            </MCol>
+            <MCol Cols="12" Sm="6" Md="4" Lg="3">
+                <MSelect @bind-Value="_orderQuery.OrderStatus"
+                         Label="Order status"
+                         Items="_statusItems"
+                         ItemText="item => item"
+                         ItemValue="item => _statusItems.IndexOf(item)"
+                         Outlined>
+                </MSelect>
+            </MCol>
+            <MCol Cols="12" Sm="6" Md="4" Lg="3">
+                <PDateDigitalClockPicker @bind-Value="_orderQuery.CreatedAt"
+                                         OnConfirm="FetchDataAsync">
+                    <ActivatorContent>
+                        <MTextField @bind-Value="_orderQuery.CreatedAt"
+                                    Label="Created at"
+                                    Outlined
+                                    Readonly
+                                    Clearable
+                                    @attributes="@context.Attrs">
+                        </MTextField>
+                    </ActivatorContent>
+                </PDateDigitalClockPicker>
+            </MCol>
+        </MRow>
+    </LowFrequencyContent>
+</PDataFilter>
+
+<MAlert Type="AlertTypes.Info">
+    @if (_loading)
+    {
+        <div>Loading...</div>
+    }
+    else
+    {
+        <div>Fetch data by:</div>
+    }
+
+    <div class="text-pre">
+        @_orderQueryJson
+    </div>
+</MAlert>
+
+@code {
+
+    private static List<string> _statusItems = new() { "All", "Pending", "Completed", "Canceled" };
+
+    private OrderQuery _orderQuery = new();
+
+    private bool _loading;
+
+    private string? _orderQueryJson; // just for demo
+
+    private async Task FetchDataAsync()
+    {
+        _loading = true;
+        StateHasChanged();
+
+        await Task.Delay(300); // simulate network delay
+
+        // just for demo
+        _orderQueryJson = JsonSerializer.Serialize(_orderQuery, new JsonSerializerOptions()
+        {
+            WriteIndented = true,
+        });
+
+        // fetch data from server
+
+        _loading = false;
+    }
+
+    private class OrderQuery
+    {
+        public string? OrderId { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
+        public int OrderStatus { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+    }
+
+}

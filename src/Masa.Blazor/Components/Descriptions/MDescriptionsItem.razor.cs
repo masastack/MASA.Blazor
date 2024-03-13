@@ -1,12 +1,12 @@
 ﻿namespace Masa.Blazor;
 
-public class MDescriptionsItem : ComponentBase, IDescriptionsItem
+public class MDescriptionsItem : IComponent, IDescriptionsItem, IAsyncDisposable
 {
     [CascadingParameter] private MDescriptions? Descriptions { get; set; }
 
     [Parameter, EditorRequired] public string Label { get; set; } = null!;
 
-    [Parameter, ApiDefaultValue(1)] public int Span { get; set; } = 1;
+    [Parameter, MasaApiParameter(1)] public int Span { get; set; } = 1;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -18,17 +18,39 @@ public class MDescriptionsItem : ComponentBase, IDescriptionsItem
 
     [Parameter] public string? Style { get; set; }
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
+    private bool _initialized;
 
-        Label.ThrowIfNull(nameof(MDescriptionsItem));
+    public void Attach(RenderHandle renderHandle)
+    {
     }
 
-    protected override void OnInitialized()
+    public async Task SetParametersAsync(ParameterView parameters)
     {
-        base.OnInitialized();
+        parameters.SetParameterProperties(this);
 
-        Descriptions?.Register(this);
+        if (!_initialized)
+        {
+            _initialized = true;
+
+            if (Descriptions != null)
+            {
+                await Descriptions.Register(this);
+            }
+        }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        try
+        {
+            if (Descriptions != null)
+            {
+                await Descriptions.Unregister(this);
+            }
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

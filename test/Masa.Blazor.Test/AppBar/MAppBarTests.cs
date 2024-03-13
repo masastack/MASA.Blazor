@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.App, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-app-bar--fixed");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ClippedRight, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClippedRightClass = classes.Contains("m-app-bar--clipped");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ClippedLeft, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClippedLeftClass = classes.Contains("m-app-bar--clipped");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Collapse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClippedLeftClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.CollapseOnScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ElevateOnScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollClass = classes.Contains("m-app-bar--elevate-on-scroll");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Elevation, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Extended, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ExtensionHeight, 48);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.FadeImgOnScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFadeImgOnScrollClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Fixed, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-app-bar--fixed");
 
             // Assert
@@ -255,7 +255,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -271,7 +271,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Floating, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFloatingClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -383,7 +383,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.HideOnScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideOnScrollClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -399,7 +399,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.InvertedScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInvertedScrollClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -415,7 +415,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -431,7 +431,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -447,7 +447,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Prominent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasProminentClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -463,7 +463,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -479,7 +479,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ScrollOffScreen, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollOffScreenClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -511,7 +511,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-app-bar");
 
             // Assert
@@ -527,7 +527,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.ShrinkOnScroll, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollClass = classes.Contains("m-app-bar--shrink-on-scroll");
 
             // Assert
@@ -543,7 +543,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("rounded");
 
             // Assert
@@ -559,7 +559,7 @@ namespace Masa.Blazor.Test.AppBar
             {
                 props.Add(appbar => appbar.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-app-bar");
 
             // Assert

@@ -1,5 +1,9 @@
 ﻿namespace Masa.Blazor;
 
-public class MSlider<TValue> : MSliderBase<TValue, TValue> where TValue : IComparable
+#if NET6_0
+public class MSlider<TValue> : MSliderBase<TValue, TValue>
+#else
+public class MSlider<TValue> : MSliderBase<TValue, TValue> where TValue : struct, IComparable<TValue>
+#endif
 {
 }

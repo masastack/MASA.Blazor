@@ -6,21 +6,11 @@ namespace Masa.Blazor
     {
         private double _bar;
         private double _top;
-        private double? _left;
+        private double _left;
         private double _insetFooter;
-        private double? _right;
+        private double _right;
         private double _bottom;
         private double _footer;
-
-        /// <summary>
-        /// Determines if the application has a navigation drawer(required the App property).
-        /// </summary>
-        internal bool HasNavigationDrawer { get; set; }
-
-        /// <summary>
-        /// Determines if the value of <see cref="Left"/> or <see cref="Right"/> has been set.
-        /// </summary>
-        public bool LeftRightCalculated { get; private set; }
 
         public double Bar
         {
@@ -50,12 +40,10 @@ namespace Masa.Blazor
 
         public double Left
         {
-            get => _left ?? 0;
+            get => _left;
             internal set
             {
-                LeftRightCalculated = true;
-
-                if (_left is null || _left != value)
+                if (_left != value)
                 {
                     _left = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
@@ -78,12 +66,10 @@ namespace Masa.Blazor
 
         public double Right
         {
-            get => _right ?? 0;
+            get => _right;
             internal set
             {
-                LeftRightCalculated = true;
-
-                if (_right is null || _right != value)
+                if (_right != value)
                 {
                     _right = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));

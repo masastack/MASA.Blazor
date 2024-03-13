@@ -1,0 +1,19 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PatternPathComponentBase
+@using Masa.Blazor.Presets.PageContainer
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="Attributes">
+    @foreach (var path in _patternPaths.OrderBy(u => u.CreatedAt))
+    {
+        <div class="@_block.Element("item").AddClass("d-none", path.Pattern != _currentPatternPath?.Pattern)"
+             @key="path.Pattern">
+            <PPageContainerItem Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">
+                @ChildContent
+            </PPageContainerItem>
+        </div>
+    }
+</div>

@@ -17,6 +17,21 @@
             }
         }
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -28,7 +43,7 @@
                 {
                     css.Add(prefix)
                        .AddIf($"{prefix}--is-mobile", () => IsMobile)
-                       .AddTheme(IsDark)
+                       .AddTheme(IsDark, IndependentTheme)
                        .AddTextColor(ComputedColor)
                        .AddBackgroundColor(BackgroundColor);
                 }, style =>

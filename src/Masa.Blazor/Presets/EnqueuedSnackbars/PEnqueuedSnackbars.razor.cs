@@ -5,15 +5,15 @@ namespace Masa.Blazor.Presets
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
         [Parameter]
-        [ApiDefaultValue(SnackPosition.BottomCenter)]
+        [MasaApiParameter(SnackPosition.BottomCenter)]
         public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
 
         [Parameter]
-        [ApiDefaultValue(DEFAULT_MAX_COUNT)]
+        [MasaApiParameter(DEFAULT_MAX_COUNT)]
         public int MaxCount { get; set; } = DEFAULT_MAX_COUNT;
 
         [Parameter]
-        [ApiDefaultValue(DEFAULT_MAX_WIDTH)]
+        [MasaApiParameter(DEFAULT_MAX_WIDTH)]
         public StringNumber MaxWidth { get; set; } = DEFAULT_MAX_WIDTH;
 
         [Parameter]
@@ -81,7 +81,7 @@ namespace Masa.Blazor.Presets
 
             _stack.Add(config);
 
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         internal void RemoveSnackbar(Guid id)
@@ -90,7 +90,8 @@ namespace Masa.Blazor.Presets
             if (config is null) return;
 
             _stack.Remove(config);
-            StateHasChanged();
+
+            InvokeAsync(StateHasChanged);
         }
     }
 }

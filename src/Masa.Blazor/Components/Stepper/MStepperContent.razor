@@ -1,0 +1,24 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+@if (IsBooted || Eager)
+{
+    if (IsVertical)
+    {
+        <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id">
+            <div class="@CssProvider.GetClass("wrapper")" style="@CssProvider.GetStyle("wrapper")" @ref="Ref">
+                @ChildContent
+            </div>
+        </div>
+    }
+    else
+    {
+        <Transition Name="@TransitionName">
+            <ShowTransitionElement Value="@IsActive" class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id">
+                <div class="@CssProvider.GetClass("wrapper")" style="@CssProvider.GetStyle("wrapper")" @ref="Ref">
+                    @ChildContent
+                </div>
+            </ShowTransitionElement>
+        </Transition>
+    }
+}

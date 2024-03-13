@@ -1,0 +1,143 @@
+﻿@namespace Masa.Blazor.Presets.Cron
+
+<div class="m-cron-period">
+    <MRadioGroup Value="SelectedCronType"
+                 TValue="CronTypes"
+                 ValueChanged="OnSelectedCronTypeChanged"
+                 HideDetails="true">
+        @RadiosContent()
+    </MRadioGroup>
+</div>
+
+@code {
+
+    protected virtual RenderFragment RadiosContent() => __builder => { };
+
+    protected RenderFragment PeriodContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.Period">
+            <LabelContent>
+                <div class="m-cron-period__radio-label">
+                    @I18n.T($"$masaBlazor.cron.{nameof(CronTypes.Period).ToLower()}.{_period.ToString().ToLower()}")
+                </div>
+            </LabelContent>
+        </MRadio>
+    };
+
+    protected RenderFragment UnspecifiedContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.NotSpecify">
+            <LabelContent>
+                <div class="m-cron-period__radio-label">
+                    @I18n.T($"$masaBlazor.cron.notSpecify")
+                </div>
+            </LabelContent>
+        </MRadio>
+    };
+
+    protected RenderFragment RangeContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.Range">
+            <LabelContent>
+                <MI18n Key="$masaBlazor.cron.fromTo" class="m-cron-period__radio-label">
+                    <PlaceholderContent>
+                        @if (context == 0)
+                        {
+                            <MTextField Value="CronItemData.PeriodStart"
+                                        HideDetails="true"
+                                        Outlined
+                                        Dense
+                                        ValueChanged="OnPeriodStartChanged"
+                                        Type="number"
+                                        NumberProps="prop => { prop.Min = MinUnit; prop.Max = CronItemData.PeriodEnd; }"
+                                        TValue="int?">
+                            </MTextField>
+                        }
+                        else if (context == 1)
+                        {
+                            <MTextField
+                                Value="CronItemData.PeriodEnd"
+                                TValue="int?"
+                                Type="number"
+                                NumberProps="@(prop => { prop.Min = CronItemData.PeriodStart; prop.Max = MaxUnit; })"
+                                Dense
+                                Outlined
+                                HideDetails="true"
+                                ValueChanged="OnPeriodEndChanged">
+                            </MTextField>
+                        }
+                        else
+                        {
+                            @I18NUnitText
+                        }
+                    </PlaceholderContent>
+                </MI18n>
+            </LabelContent>
+        </MRadio>
+    };
+
+    protected RenderFragment FromToContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.StartFrom">
+            <LabelContent>
+                <MI18n Key="$masaBlazor.cron.startFromAndExec" class="m-cron-period__radio-label">
+                    <PlaceholderContent>
+                        @if (context == 0)
+                        {
+                            <MTextField
+                                Value="CronItemData.StartFromPeriod"
+                                HideDetails="true"
+                                Outlined
+                                Dense TValue="int?"
+                                Type="number"
+                                NumberProps="prop => { prop.Min = MinUnit; prop.Max = MaxUnit; }"
+                                ValueChanged="OnStartFromPeriodChange">
+                            </MTextField>
+                        }
+                        else if (context == 1)
+                        {
+                            <MTextField
+                                Value="CronItemData.StartEveryPeriod"
+                                Dense
+                                Outlined
+                                HideDetails="true"
+                                Type="number"
+                                NumberProps="prop => { prop.Min = MinUnit; prop.Max = MaxUnit; }" TValue="int" ValueChanged="OnStartEveryPeriod">
+                            </MTextField>
+                        }
+                        else
+                        {
+                            @I18NUnitText
+                        }
+                    </PlaceholderContent>
+                </MI18n>
+            </LabelContent>
+        </MRadio>
+    };
+
+    protected RenderFragment SpecifiedContent() => __builder =>
+    {
+        <MRadio Value="CronTypes.Specify">
+            <LabelContent>
+                <div class="m-cron-period__radio-label">
+                    @I18n.T("$masaBlazor.cron.specify")
+                    <MSelect Value="@CronItemData.SpecifyPeriods"
+                             TValue="List<int>"
+                             TItem="int"
+                             TItemValue="int"
+                             ValueChanged="OnSpecifyPeriodChanged"
+                             Items="@AllPeriodList"
+                             Outlined
+                             HideDetails="true"
+                             Dense
+                             ItemText="u => u.ToString().PadLeft(2, '0')"
+                             ItemValue="u => u"
+                             Multiple
+                             Chips>
+                    </MSelect>
+                </div>
+            </LabelContent>
+        </MRadio>
+    };
+
+}

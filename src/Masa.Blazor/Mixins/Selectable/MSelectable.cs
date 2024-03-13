@@ -1,7 +1,13 @@
 ﻿namespace Masa.Blazor;
 
+#if NET6_0
+public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue>
+#else
 public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> where TValue : notnull
+#endif
 {
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+    
     [Parameter]
     public bool? Ripple { get; set; }
 
@@ -9,7 +15,6 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
     public TValue TrueValue { get; set; } = default!;
 
     [Parameter]
-
     public TValue FalseValue { get; set; } = default!;
 
     public Dictionary<string, object> InputAttrs => new();
@@ -72,7 +77,7 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
 
         InternalValue = input;
 
-        await Task.CompletedTask;
+        await TryInvokeFieldChangeOfInputsFilter();
     }
 
     public async Task HandleOnBlur(FocusEventArgs args)
@@ -93,6 +98,21 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
     {
         return Task.CompletedTask;
     }
+    
+    protected bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
     protected override void SetComponentClass()
     {

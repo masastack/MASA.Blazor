@@ -1,0 +1,36 @@
+﻿@using BemIt
+
+<div class="@Block.Modifier(Filled).AddTheme(CascadingIsDark).AddClass(Class)"
+     Style="@Style">
+    <span class="@Block.Element("title").AddClass(TitleClass)">
+        @Title
+    </span>
+    @ChildContent
+</div>
+
+@code {
+
+    private Block Block => new("m-outline-card");
+
+    [CascadingParameter(Name = "IsDark")]
+    public bool CascadingIsDark { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? TitleClass { get; set; }
+
+    [Parameter]
+    public bool Filled { get; set; }
+
+}

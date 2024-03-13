@@ -1,9 +1,10 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 @inject MasaBlazor MasaBlazor
-@implements IDisposable
+@implements IAsyncDisposable
 
 <MTabs Class="default-tabs"
+       Color="primary"
        Routable
        @ref="_tabs">
     @foreach (var item in _internalMenus)
@@ -14,7 +15,8 @@
               MatchPattern="@item.MatchPattern">
             @if (item.Href == "/")
             {
-                <MBadge Content="@Project"
+                <MBadge Color="primary"
+                        Content="@Project"
                         Class="text-capitalize"
                         Value="@(!string.IsNullOrWhiteSpace(Project))">
                     @I18n.T(item.Title)
@@ -59,11 +61,13 @@
     private string? _prevProject;
     private List<DefaultItem> _internalMenus = new();
     private List<DefaultItem> _externalMenus = new();
+    private string? _prevCulture;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        _prevCulture = Culture;
         MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
     }
 
@@ -89,9 +93,22 @@
         }
     }
 
-    public void Dispose()
+    protected override void OnAfterRender(bool firstRender)
     {
-        _tabs?.Dispose();
+        if (_prevCulture != Culture)
+        {
+            _prevCulture = Culture;
+            _tabs?.CallSlider();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_tabs != null)
+        {
+            await _tabs.DisposeAsync();
+        }
+
         MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
     }
 

@@ -1,0 +1,32 @@
+﻿<MCard Outlined>
+    <MCardTitle Class="d-flex align-start justify-space-between">
+        @Title
+        <MButton Href="@OpenInNewUrl" Small Icon Text>
+            <MIcon Small>
+                mdi-link-variant
+            </MIcon>
+        </MButton>
+    </MCardTitle>
+    <MCardText>
+        @if (MarkdownSource is not null)
+        {
+            <DocumentMarkdownIt Source="@MarkdownSource" />
+        }
+
+        @ChildContent
+    </MCardText>
+</MCard>
+
+@code {
+
+    [CascadingParameter(Name = "Culture")] private string? Culture { get; set; }
+
+    [Parameter] [EditorRequired] public string Title { get; set; } = default!;
+
+    [Parameter] [EditorRequired] public string OpenInNewUrl { get; set; } = default!;
+
+    [Parameter] public string? MarkdownSource { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+}

@@ -78,9 +78,9 @@ related:
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
-#### 固定列
+#### 固定列 {released-on=v1.2.0}
 
-使用 `FixedRight` 属性，可以默认固定最后一列。
+使用 `Headers` 的 `Fixed` 属性可以固定列。
 
 <masa-example file="Examples.components.data_tables.Fixed"></masa-example>
 
@@ -89,6 +89,12 @@ related:
 明暗相间的条纹。
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
+
+#### 调整大小 {released-on=v1.0.4}
+
+使用 `ResizeMode` 属性可以调整列的大小。
+
+<masa-example file="Examples.components.data_tables.ResizeMode"></masa-example>
 
 ### 属性
 
@@ -117,12 +123,6 @@ related:
 带 CRUD 操作的 **MDataTable** 使用 **MDialog** 组件来编辑每行数据。
 
 <masa-example file="Examples.components.data_tables.CRUDActions"></masa-example>
-
-#### 编辑用对话框
-
-**MEditDialog** 组件可用于直接在 **MDataTable** 中编辑数据。 如果点击 **MEditDialog** 外部时不想关闭对话框，可以添加 `Persistent` 属性。
-
-<masa-example file="Examples.components.data_tables.EditDialog"></masa-example>
 
 #### 可展开行
 

@@ -6,11 +6,25 @@
         {
         }
 
-        public async ValueTask<IBaiduMapJSObjectReferenceProxy> InitAsync(
+        public async ValueTask<IBaiduMapJSObjectReferenceProxy?> InitAsync(
             string containerId,
             BaiduMapInitOptions options,
             IBaiduMapJsCallbacks owner)
-            => new BaiduMapJSObjectReferenceProxy(await InvokeAsync<IJSObjectReference>("init", containerId, options), owner);
+        {
+            try
+            {
+                var jsObjectReference = await InvokeAsync<IJSObjectReference>("init", containerId, options);
+                return new BaiduMapJSObjectReferenceProxy(jsObjectReference, owner);
+            }
+            catch (JSException e)
+            {
+                if (e.ForCannotCreateFromNullOrUndefined())
+                {
+                    return null;
+                }
 
+                throw;
+            }
+        }
     }
 }

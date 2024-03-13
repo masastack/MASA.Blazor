@@ -1,0 +1,48 @@
+﻿<MRow>
+    <MCol Cols="12" Md="6">
+        <h4>Single section</h4>
+        <MTextField @bind-Value="_timeStep"
+                    Label="Time step"
+                    Type="number"
+                    NumberProps="n => { n.Min = 1; n.Max = 720; }">
+        </MTextField>
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       Step="@TimeSpan.FromMinutes(_timeStep)">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+    </MCol>
+    <MCol Cols="12" Md="6">
+        <h4>Multi sections</h4>
+        <MRow>
+            <MCol Cols="4">
+                <MTextField @bind-Value="_hourStep" Label="Hour step" Type="number" NumberProps="n => { n.Max = 12; n.Min = 1; }"></MTextField>
+            </MCol>
+            <MCol Cols="4">
+                <MTextField @bind-Value="_minuteStep" Label="minute step" Type="number" NumberProps="n => { n.Max = 30; n.Min = 1; }"></MTextField>
+            </MCol>
+            <MCol Cols="4">
+                <MTextField @bind-Value="_secondStep" Label="second step" Type="number" NumberProps="n => {n.Max = 30; n.Min = 1;}"></MTextField>
+            </MCol>
+        </MRow>
+        <MDigitalClock @bind-Value="_time"
+                       Color="primary"
+                       MultiSection
+                       HourStep="_hourStep"
+                       MinuteStep="_minuteStep"
+                       SecondStep="_secondStep">
+        </MDigitalClock>
+        <MChip Color="accent">@_time.ToString("T")</MChip>
+
+    </MCol>
+</MRow>
+
+@code {
+
+    private TimeOnly _time;
+    private int _timeStep = 30;
+    private int _hourStep = 1;
+    private int _minuteStep = 1;
+    private int _secondStep = 1;
+
+}

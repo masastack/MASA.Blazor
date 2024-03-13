@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Development", "3 - Deve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{339BA27B-6C25-4909-9105-D92FC4BB68EF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9 - Solution Itms", "9 - Solution Itms", "{6C182DFB-BEED-4970-BDF8-2988032AB445}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -43,13 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D55C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{AE37A9DA-AF06-45D4-A691-7D922017B57D}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\azure-static-web-apps-agreeable-plant-0c2439c10-v1.yml = .github\workflows\azure-static-web-apps-agreeable-plant-0c2439c10-v1.yml
 		.github\workflows\close-stale.yml = .github\workflows\close-stale.yml
 		.github\workflows\issue-labeled.yml = .github\workflows\issue-labeled.yml
 		.github\workflows\mirror-gitlab.yml = .github\workflows\mirror-gitlab.yml
 		.github\workflows\needs-triage.yml = .github\workflows\needs-triage.yml
 		.github\workflows\pr-docs-next.yml = .github\workflows\pr-docs-next.yml
-		.github\workflows\wasm-dev.yml = .github\workflows\wasm-dev.yml
 		.github\workflows\wasm-prd.yml = .github\workflows\wasm-prd.yml
 		.github\workflows\wasm-try.yml = .github\workflows\wasm-try.yml
 	EndProjectSection
@@ -82,6 +78,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Try.WebAssembly", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ApiGenerator", "src\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj", "{B4B65E18-C212-47C1-A6DB-3C58402F42DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Indexing", "docs\Masa.Docs.Indexing\Masa.Docs.Indexing.csproj", "{E7137978-72EC-41AD-83AC-6E82B9387644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SomethingSkia", "src\Masa.Blazor.SomethingSkia\Masa.Blazor.SomethingSkia.csproj", "{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ComponentApiGenerator", "src\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj", "{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{07665478-645F-4E5D-A8E6-8AF711D4FA89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SsrPlayground", "src\Masa.Blazor.SsrPlayground\Masa.Blazor.SsrPlayground.csproj", "{94D1F512-145B-44D2-ACEC-D79904D43FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,10 +114,6 @@ Global
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276}.Release|Any CPU.Build.0 = Release|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E89ECC0B-FF51-4A84-AFDE-A8DBFACF2208}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -148,6 +150,34 @@ Global
 		{B4B65E18-C212-47C1-A6DB-3C58402F42DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B65E18-C212-47C1-A6DB-3C58402F42DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B65E18-C212-47C1-A6DB-3C58402F42DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF692C4-7DD3-4458-B734-36567A0D5109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF692C4-7DD3-4458-B734-36567A0D5109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF692C4-7DD3-4458-B734-36567A0D5109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF692C4-7DD3-4458-B734-36567A0D5109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7137978-72EC-41AD-83AC-6E82B9387644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7137978-72EC-41AD-83AC-6E82B9387644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7137978-72EC-41AD-83AC-6E82B9387644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7137978-72EC-41AD-83AC-6E82B9387644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325C9F82-5405-47C0-8A9D-075869D6315D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325C9F82-5405-47C0-8A9D-075869D6315D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325C9F82-5405-47C0-8A9D-075869D6315D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325C9F82-5405-47C0-8A9D-075869D6315D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07665478-645F-4E5D-A8E6-8AF711D4FA89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,7 +189,6 @@ Global
 		{9CF342BF-C6B8-4D6A-BCF9-3CF51F2E5742} = {214C29AE-7E61-4087-9B0A-F2CA9A03006D}
 		{587736B8-88E4-4490-938F-938E61E6BC47} = {214C29AE-7E61-4087-9B0A-F2CA9A03006D}
 		{E6FDA936-BD5B-4BE4-B447-D2A1A406E276} = {5512BB36-2B84-4BB9-B102-C644E3EF5212}
-		{339BA27B-6C25-4909-9105-D92FC4BB68EF} = {00B4BEE6-3D40-4E40-8B23-D238DCE75F36}
 		{D55C6F9E-03F1-4513-B944-154FB018F444} = {6C182DFB-BEED-4970-BDF8-2988032AB445}
 		{AE37A9DA-AF06-45D4-A691-7D922017B57D} = {D55C6F9E-03F1-4513-B944-154FB018F444}
 		{4234D98C-4DCA-404D-AE9D-EB9DC91FC8DC} = {D55C6F9E-03F1-4513-B944-154FB018F444}
@@ -173,6 +202,11 @@ Global
 		{2CC061F3-6E19-4B8F-91F3-3640B9EEE908} = {CBCF9CD0-AB20-4747-B841-DE9BB197EE28}
 		{5D90677E-3422-4CB2-A006-288880B3A010} = {CBCF9CD0-AB20-4747-B841-DE9BB197EE28}
 		{B4B65E18-C212-47C1-A6DB-3C58402F42DC} = {54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}
+		{E7137978-72EC-41AD-83AC-6E82B9387644} = {6D52B20D-5559-4E10-8386-4B6AD391A6A1}
+		{E9278A51-B3F1-4DE6-870A-C3F7CCDCE851} = {316905B8-A702-4A0A-970A-6A663DEC29F6}
+		{E3FB7E73-F0BD-4C17-8C95-B12925D4F186} = {54AFCA2A-8CF8-4FDE-8DF5-53C42053A611}
+		{07665478-645F-4E5D-A8E6-8AF711D4FA89} = {00B4BEE6-3D40-4E40-8B23-D238DCE75F36}
+		{94D1F512-145B-44D2-ACEC-D79904D43FD6} = {00B4BEE6-3D40-4E40-8B23-D238DCE75F36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F25C776-A200-4DEB-8F8B-9D1FA2CDC740}

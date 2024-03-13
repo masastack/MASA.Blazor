@@ -3,8 +3,8 @@
 
 <CascadingValue Value="this" IsFixed>
     <MTabs Routable
-           Class="@CssProvider.GetClass()"
-           Style="@CssProvider.GetStyle()"
+           Class="@GetClass()"
+           Style="@GetStyle()"
            ActiveClass="@ActiveClass"
            BackgroundColor="@BackgroundColor"
            Color="@Color"
@@ -12,6 +12,7 @@
            HideSlider="@HideSlider"
            SliderColor="@SliderColor"
            SliderSize="@SliderSize"
+           ShowArrows="true"
            Dark="@Dark"
            @ref="@_tabs">
         @foreach (var patternPath in PatternPaths)
@@ -21,12 +22,14 @@
             var tabTitle = GetTabTitle(patternPath, tabOptions);
 
             <MTab Href="@patternPath.AbsolutePath"
-                  Class="@($"{CssProvider.GetClass("tab")} {tabOptions?.Class}")"
+                  Class="@_tabBlock.AddClass(TabClass).AddClass(tabOptions?.Class).ToString()"
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
-                  @oncontextmenu="(e) => HandleOnContextmenu(e, patternPath)"
-                  __internal_preventDefault_oncontextmenu>
+                  @oncontextmenu="@((e) => HandleOnContextmenu(e, patternPath))"
+                  __internal_preventDefault_oncontextmenu
+                  @onauxclick="@(e => HandleOnAuxclick(e, patternPath, tabTitle))"
+                  __internal_preventDefault_onauxclick>
 
                 @if (TabIconContent != default)
                 {
@@ -37,12 +40,12 @@
                     <MIcon Size="20">@tabOptions.Icon</MIcon>
                 }
 
-                <span class="@CssProvider.GetClass("tab-title") @(tabOptions?.TitleClass)" style="@tabOptions?.TitleStyle">
+                <span class="@_tabBlock.Element("title").AddClass(tabOptions?.TitleClass)" style="@tabOptions?.TitleStyle">
                     @tabTitle
                 </span>
 
                 <MButton Icon
-                         Class="@CssProvider.GetClass("tab-close")"
+                         Class="@_tabBlock.Element("close").Build()"
                          OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
                          Small
                          OnClickStopPropagation

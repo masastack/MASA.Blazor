@@ -1,25 +1,32 @@
 ﻿@namespace Masa.Blazor.Docs.Components
+@inject I18n I18n
 
 @if (Data.Keys.Count > 1)
 {
-    <MSelect Items="Data.Keys.ToList()"
-             ItemText="key => key"
-             ItemValue="key => key"
-             Value="Value"
-             ValueChanged="ValueChanged"
-             TValue="string"
-             TItemValue="string"
-             TItem="string"
-             Filled
-             Label="API">
-    </MSelect>
+    <OutlineCard Title="Component APIs"
+                 Class="mb-4">
+        <MChipGroup Value="@Value"
+                    ValueChanged="@(v => ValueChanged.InvokeAsync(v?.ToString()))"
+                    Column
+                    Mandatory
+                    ActiveClass="primary primary--text">
+            @foreach (var key in Data.Keys)
+            {
+                <MChip Value="@key" Outlined Filter>@key</MChip>
+            }
+        </MChipGroup>
+    </OutlineCard>
 }
 
 @if (Value is not null && Data.TryGetValue(Value, out var value))
 {
+    <div class="d-flex mb-4">
+        <AppTextField @bind-Value="_filter" Icon="mdi-magnify" Clearable Label="@I18n.T("Search")" />
+    </div>
+
     foreach (var (name, data) in value)
     {
-        <ApiSection Name="@name" Data="@data" GithubUri="@GithubUri" />
+        <ApiSection Name="@name" Data="@data" Filter="@_filter" GithubUri="@GithubUri" />
     }
 }
 
@@ -37,5 +44,7 @@
 
     [Parameter]
     public string? GithubUri { get; set; }
+
+    private string? _filter;
 
 }

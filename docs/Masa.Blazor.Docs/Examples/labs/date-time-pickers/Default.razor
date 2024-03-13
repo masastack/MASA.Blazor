@@ -1,0 +1,10 @@
+﻿<div class="d-flex flex-column align-center">
+    <MChip Color="primary" Class="mb-1">@_date</MChip>
+    <PDateTimePickerView @bind-Value="_date"></PDateTimePickerView>
+</div>
+
+@code {
+
+    private DateTime _date = DateTime.Now;
+
+}

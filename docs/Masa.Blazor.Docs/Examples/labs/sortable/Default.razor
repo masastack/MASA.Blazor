@@ -1,0 +1,22 @@
+﻿<div class="mx-auto" style="max-width: 500px;">
+    <div>
+        Order: @(string.Join(", ", _order))
+    </div>
+
+    <MList Dense>
+        <MSortable Items="@_items"
+                   ItemKey="@(item => item)"
+                   @bind-Order="_order"
+                   Context="name">
+            <MListItem>@name</MListItem>
+            <MDivider/>
+        </MSortable>
+    </MList>
+</div>
+
+@code {
+
+    private List<string> _order = [];
+    private string[] _items = ["John", "Mary", "David", "Lily", "Benjamin"];
+
+}

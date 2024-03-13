@@ -16,7 +16,7 @@ integrated by using a series of containers, rows, and columns to layout and alig
 flexbox, [Read the CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)
 for background, terminology, guidelines, and code snippets.
 
-<example file="" />
+<masa-example file="Examples.components.grids.Usage"></masa-example>
 
 ## Sub-components
 

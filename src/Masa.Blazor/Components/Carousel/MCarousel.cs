@@ -16,7 +16,7 @@ public partial class MCarousel : MWindow, ICarousel
     public string? DelimiterIcon { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(500)]
+    [MasaApiParameter(500)]
     public StringNumber? Height
     {
         get => GetValue((StringNumber)500);
@@ -30,7 +30,7 @@ public partial class MCarousel : MWindow, ICarousel
     public bool HideDelimiterBackground { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(6000)]
+    [MasaApiParameter(6000)]
     public int Interval
     {
         get => GetValue(6000);
@@ -202,13 +202,13 @@ public partial class MCarousel : MWindow, ICarousel
         _timer?.Start();
     }
 
-    protected override void Dispose(bool disposing)
+    protected override ValueTask DisposeAsyncCore()
     {
-        base.Dispose(disposing);
-
         if (_timer is not null)
         {
             _timer.Elapsed -= TimerOnElapsed;
         }
+
+        return base.DisposeAsyncCore();
     }
 }

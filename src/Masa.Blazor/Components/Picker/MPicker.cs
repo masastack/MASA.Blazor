@@ -21,11 +21,11 @@
         public string? Color { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(290)]
+        [MasaApiParameter(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
-        [ApiDefaultValue("fade-transition")]
+        [MasaApiParameter("fade-transition")]
         public string Transition { get; set; } = "fade-transition";
 
         [Parameter]
@@ -40,6 +40,23 @@
             }
         }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             var prefix = "m-picker";
@@ -52,7 +69,7 @@
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--landscape", () => Landscape)
                         .AddIf($"{prefix}--full-width", () => FullWidth)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddElevation(Elevation);
                 })
                 .Apply("title", cssBuilder =>
@@ -71,7 +88,7 @@
                     cssBuilder
                         .Add($"{prefix}__body")
                         .AddIf($"{prefix}__body--no-title", () => NoTitle)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

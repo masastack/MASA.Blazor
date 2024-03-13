@@ -1,0 +1,96 @@
+﻿@namespace Masa.Blazor
+@inherits BDomComponentBase
+
+<div class="@CssProvider.GetClass()">
+    @PrependContent
+
+    @if (ComputedDataItemsPerPageOptions.Count() > 1)
+    {
+        <div class="@CssProvider.GetClass("select")">
+            @ItemsPerPageText
+            <CascadingValue Value="true" Name="DisableDefaultsProvider">
+                <MSelect Items="@ComputedDataItemsPerPageOptions.ToList()"
+                         TItem="DataItemsPerPageOption"
+                         TItemValue="int"
+                         TValue="int"
+                         Disabled="@DisableItemsPerPage"
+                         Value="@ItemsPagePageValue"
+                         ValueChanged="@HandleOnChangeItemsPerPageAsync"
+                         ItemValue="u => u.Value"
+                         ItemText="u => u.Text"
+                         HideDetails="@true"
+                         MinWidth="75">
+                </MSelect>
+            </CascadingValue>
+        </div>
+    }
+
+    <div class="@CssProvider.GetClass("pagination")">
+        @{
+            var itemsLength = Pagination.ItemsLength;
+            var pageStart = Pagination.PageStart;
+            var pageStop = Pagination.PageStop;
+
+            if (Pagination.ItemsLength > 0 && Pagination.ItemsPerPage != 0)
+            {
+                pageStart = Pagination.PageStart + 1;
+                pageStop = (itemsLength < Pagination.PageStop || Pagination.PageStop < 0)
+                    ? itemsLength
+                    : Pagination.PageStop;
+
+                if (PageTextContent != null)
+                {
+                    @PageTextContent((pageStart, pageStop, itemsLength))
+                }
+                else if (PageText != null)
+                {
+                    @string.Format(PageText, pageStart, pageStop, itemsLength)
+                }
+            }
+            else if (PageTextContent != null)
+            {
+                @PageTextContent((pageStart, pageStop, itemsLength))
+            }
+            else
+            {
+                @("–")
+            }
+        }
+    </div>
+
+    <div class="@CssProvider.GetClass("icons-before")">
+        @if (ShowFirstLastPage)
+        {
+            @FooterIcon(Options.Page == 1, HandleOnFirstPageAsync, RTL ? LastIcon : FirstIcon)
+        }
+        @FooterIcon(Options.Page == 1, HandleOnPreviousPageAsync, RTL ? NextIcon : PrevIcon)
+    </div>
+    @if (ShowCurrentPage)
+    {
+        <span>
+            @Options.Page
+        </span>
+    }
+    <div class="@CssProvider.GetClass("icons-after")">
+        @FooterIcon(DisableNextPageIcon, HandleOnNextPageAsync, RTL ? PrevIcon : NextIcon)
+        @if (ShowFirstLastPage)
+        {
+            @FooterIcon(Options.Page >= Pagination.PageCount || Options.ItemsPerPage == -1, HandleOnLastPageAsync, RTL ? FirstIcon : LastIcon)
+        }
+    </div>
+
+</div>
+
+@code {
+
+    private RenderFragment FooterIcon(bool isDisabled, Func<Task> onClick, string? icon) => __builder =>
+    {
+        <MButton Disabled="@(isDisabled || DisablePagination)"
+                 Icon
+                 Text
+                 OnClick="@onClick">
+            <MIcon Icon="@icon" />
+        </MButton>
+    };
+
+}

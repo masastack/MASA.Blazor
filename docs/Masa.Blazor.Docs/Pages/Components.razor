@@ -4,8 +4,8 @@
 <MContainer Class="pa-4 pa-sm-6 pa-md-8"
             Fluid
             Tag="section">
-    <MResponsive MaxWidth="960"
-                 Class="mx-auto overflow-visible">
+    <div style="max-width: 960px"
+         class="mx-auto overflow-visible">
         @if (_frontMatterMeta is not null)
         {
             <FrontMatter Meta="_frontMatterMeta" AdditionalTags="@Tags"></FrontMatter>
@@ -17,42 +17,45 @@
 
         @if (!IsAllComponentsPage)
         {
-            <MTabs Value="IsApiTab.ToString()" Class="default-tabs m-bar--underline m-tabs-l mb-12">
-                <MTab Class="mr-4" Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
+            <MTabs Value="IsApiTab.ToString()" Color="primary" Class="default-tabs m-bar--underline m-tabs-l mb-9">
+                <MTab Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
                 <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
             </MTabs>
         }
 
-        @if (IsApiTab && _apiData.Count == 0)
-        {
-            <MSkeletonLoader Type="table"></MSkeletonLoader>
-        }
-        else if (!IsApiTab && _md == null)
-        {
-            <MSkeletonLoader Type="article,card"></MSkeletonLoader>
-        }
-        else
-        {
-            <FadeTransition LeaveAbsolute>
-                <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis @bind-Value="@CurrentApi"
-                          Data="@_apiData"
-                          GithubUri="@ApiGithubUri">
-                    </Apis>
-                </ShowTransitionElement>
-                <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
+        <MTabsItems Value="IsApiTab.ToString()" Style="background-color: unset; overflow: unset;">
+            <MTabItem Value="@("False")" Transition="" Eager>
+                @if (_md == null)
+                {
+                    <MSkeletonLoader Type="article,card"></MSkeletonLoader>
+                }
+                else
+                {
                     <DocumentMarkdownIt Source="@_md"
                                         OnTocParsed="@OnTocParsed"
                                         OnFrontMatterParsed="@OnFrontMatterParsed" />
 
-                    @if (_frontMatterMeta is not null)
+                    @if (_frontMatterMeta?.Related?.Any() is true)
                     {
                         <BackMatter Related="@_frontMatterMeta.Related"></BackMatter>
                     }
-                </ShowTransitionElement>
-            </FadeTransition>
-        }
+                }
+            </MTabItem>
+            <MTabItem Value="@("True")" Transition="">
+                @if (_apiData.Count == 0)
+                {
+                    <MSkeletonLoader Type="table"></MSkeletonLoader>
+                }
+                else
+                {
+                    <Apis @bind-Value="@CurrentApi"
+                          Data="@_apiData"
+                          GithubUri="@ApiGithubUri">
+                    </Apis>
+                }
+            </MTabItem>
+        </MTabsItems>
 
         <Contribute GithubUri="@(IsApiTab ? ApiGithubUri : ComponentGithubUri)" />
-    </MResponsive>
+    </div>
 </MContainer>

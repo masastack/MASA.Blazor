@@ -1,0 +1,59 @@
+﻿@inject IntersectJSModule IntersectJSModule
+@implements IAsyncDisposable
+
+<div>
+    <div class="d-flex align-center text-center justify-center">
+        <MAvatar
+            Color="@(isIntersecting ? "green lighten-1" : "red darken-2")"
+            Class="me-3 swing-transition"
+            Size="32">
+        </MAvatar>
+    </div>
+
+    <MSheet
+        Class="overflow-y-auto"
+        MaxHeight="400">
+        <MSheet
+            Height="@("200vh")"
+            Class="d-flex align-center text-center pa-2">
+            <MCard
+                Class="mx-auto"
+                MaxWidth="336"
+                @ref="card">
+                <MCardTitle>Card title</MCardTitle>
+                <MCardText>
+                    Phasellus magna. Quisque rutrum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Aliquam lobortis. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna.
+
+                    In turpis. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In turpis. Pellentesque dapibus hendrerit tortor. Ut varius tincidunt libero.
+                </MCardText>
+            </MCard>
+        </MSheet>
+    </MSheet>
+</div>
+
+@code {
+
+    private bool isIntersecting;
+    private MCard card;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var handle = DotNetObjectReference.Create(new IntersectInvoker(OnIntersectAsync));
+            await IntersectJSModule.ObserverAsync(card.Ref, handle);
+        }
+    }
+
+    private async Task OnIntersectAsync(IntersectEventArgs args)
+    {
+        isIntersecting = args.IsIntersecting;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await IntersectJSModule.UnobserveAsync(card.Ref);
+    }
+
+}

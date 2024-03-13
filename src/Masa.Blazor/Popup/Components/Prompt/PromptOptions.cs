@@ -31,4 +31,9 @@ public class PromptOptions
     public string? TitleClass { get; set; }
 
     public string? TitleStyle { get; set; }
+
+    /// <summary>
+    /// Rule to validate the input value.
+    /// </summary>
+    public Func<string, StringBoolean>? Rule { get; set; }
 }

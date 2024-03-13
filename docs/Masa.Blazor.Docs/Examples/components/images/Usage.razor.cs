@@ -13,13 +13,9 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MImage.MaxWidth), new SliderParameter(250, 0, 500) },
     };
 
-    public Usage() : base(typeof(MImage)) { }
+    public Usage() : base(typeof(Index)) { }
 
-    protected override RenderFragment GenChildContent() => builder =>
-    {
-        builder.OpenComponent<Index>(0);
-        builder.CloseComponent();
-    };
+    protected override string ComponentName => nameof(MImage);
 
     protected override object? CastValue(ParameterItem<object?> parameter)
     {

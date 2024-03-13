@@ -1,0 +1,64 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MForm Model="_order" EnableValidation>
+    <ObjectGraphDataAnnotationsValidator />
+    <MTextField @bind-Value="_order.Title" Label="Title"></MTextField>
+    <MTextField @bind-Value="_order.Price" Label="Price" Type="number"></MTextField>
+    @foreach (var person in _order.Persons)
+    {
+        <MCard Flat>
+            <MCardTitle>Person:@person.Id</MCardTitle>
+            <MCardText>
+                <MTextField @bind-Value="person.Name" Label="Name"></MTextField>
+                <MTextField @bind-Value="person.Age" Label="Age" Type="number"></MTextField>
+            </MCardText>
+        </MCard>
+    }
+    <MButton OnClick="() => SubmitOrder(context)" Color="success">Validate</MButton>
+</MForm>
+
+@code {
+
+    public class Order
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Title { get; set; }
+
+        [Range(0, 20.00)]
+        public decimal Price { get; set; }
+
+        [ValidateComplexType]
+        public List<Person> Persons { get; set; }
+    }
+
+    public class Person
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Range(25, 100)]
+        public int Age { get; set; }
+    }
+
+    private Order _order = new()
+    {
+        Persons = new List<Person>
+        {
+            new() { Id = 1 }
+        }
+    };
+
+    public async Task SubmitOrder(FormContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            // do something
+        }
+    }
+
+}

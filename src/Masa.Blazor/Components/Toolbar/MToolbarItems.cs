@@ -1,17 +1,9 @@
-﻿namespace Masa.Blazor
-{
-    public class MToolbarItems : BToolbarItems
-    {
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder.Add("m-toolbar__items");
-                });
+﻿namespace Masa.Blazor;
 
-            AbstractProvider
-                .Apply(typeof(IImage), typeof(MImage));
-        }
+public class MToolbarItems : Container
+{
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return new[] { "m-toolbar__items" };
     }
 }

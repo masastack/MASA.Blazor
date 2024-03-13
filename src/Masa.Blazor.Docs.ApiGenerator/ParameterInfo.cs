@@ -1,24 +1,36 @@
-﻿namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
+﻿namespace Masa.Blazor.Docs.ApiGenerator;
 
-internal class ParameterInfo
+public class ParameterInfo
 {
-    public ParameterInfo(string name, string type, string? typeDesc = null, string? defaultValue = null)
+    public ParameterInfo(
+        string name,
+        string type,
+        string? typeDesc = null,
+        string? defaultValue = null,
+        bool isObsolete = false,
+        bool required = false,
+        string? releasedOn = null)
     {
         Name = name;
         Type = type;
         TypeDesc = typeDesc;
         DefaultValue = defaultValue;
+        IsObsolete = isObsolete;
+        Required = required;
+        ReleasedOn = releasedOn;
     }
-    
-    public string Name { get; set; } = null!;
 
-    public string Type { get; set; } = null!;
-    
-    public string? TypeDesc { get; set; }
+    public string Name { get; }
 
-    public string? DefaultValue { get; set; }
+    public string Type { get; }
 
-    public string? Description { get; set; }
+    public string? TypeDesc { get; }
 
-    public bool Required { get; set; }
+    public string? DefaultValue { get; }
+
+    public bool Required { get; }
+
+    public bool IsObsolete { get; }
+
+    public string? ReleasedOn { get; }
 }

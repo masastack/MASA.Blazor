@@ -5,7 +5,7 @@ namespace Masa.Blazor
     public class MBaiduMarker : BaiduOverlayBase, IMarker
     {
         [Parameter]
-        [ApiDefaultValue("116.403, 39.917")]
+        [MasaApiParameter("116.403, 39.917")]
         public GeoPoint Point
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));

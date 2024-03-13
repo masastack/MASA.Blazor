@@ -16,10 +16,12 @@
                 Dark="Dark"
                 Rounded="true">
             <div style="min-height: 52px">
-                <MSheet Class="pa-4" Rounded="true" Dark="_dark" Light="!_dark">
+                <MSheet Class="pa-4 m-example__comp" Rounded="true" Dark="_dark" Light="!_dark">
                     @if (_type is not null)
                     {
-                        <DynamicComponent Type="_type"></DynamicComponent>
+                        <MErrorHandler>
+                            <DynamicComponent Type="_type" @key="_typeIdentity"></DynamicComponent>
+                        </MErrorHandler>
                     }
                 </MSheet>
 
@@ -27,7 +29,7 @@
                 {
                     <AppDivider />
 
-                    <div class="text-end pa-2">
+                    <MLazy MinHeight="52" Class="text-end pa-2">
                         @foreach (var tooltip in _tooltips)
                         {
                             <AppTooltipButton Icon="@tooltip.Icon"
@@ -35,9 +37,9 @@
                                               Href="@tooltip.href"
                                               Target="@(tooltip.href != null ? "_blank" : null)"
                                               Class="mx-2"
-                                              OnClick="() => tooltip.OnClick?.Invoke()" />
+                                              OnClick="@tooltip.OnClick" />
                         }
-                    </div>
+                    </MLazy>
 
                     @if (_showExpands)
                     {
@@ -45,31 +47,55 @@
 
                         <ExpandTransition>
                             <ShowTransitionElement Value="_expand">
-                                <MItemGroup @bind-Value="_selected" Class="pa-2" Mandatory>
-                                    @foreach (var item in _sections)
+                                <div class="d-flex justify-end pa-2">
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="CopyCode"
+                                                       StaticIcon="mdi-content-copy"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-copy"
+                                                       ProcessText="code-copying"
+                                                       FinishText="code-copied">
+                                    </AppStatefulButton>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RestoreCode"
+                                                       StaticIcon="mdi-restore"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-restore"
+                                                       ProcessText="code-restoring">
+                                    </AppStatefulButton>
+                                    @if (!string.IsNullOrWhiteSpace(_sourceCodeUri))
                                     {
-                                        <MItem>
-                                            <MButton Class="mr-2"
-                                                     IsActive="@context.Active"
-                                                     Text
-                                                     Color="primary"
-                                                     OnClick="@context.Toggle">
-                                                @item.Language
-                                            </MButton>
-                                        </MItem>
+                                        <MButton Small="true"
+                                                 Color="primary"
+                                                 Class="text-none mr-1"
+                                                 Text
+                                                 Href="@($"https://try.masastack.com?path={_sourceCodeUri}")">
+                                            <MIcon Left>mdi-open-in-new</MIcon>
+                                            <MI18n Key="code-run-external"></MI18n>
+                                        </MButton>
                                     }
-                                </MItemGroup>
+                                    <AppStatefulButton Small
+                                                       Text
+                                                       Class="text-none mr-1"
+                                                       OnClick="RunCode"
+                                                       StaticIcon="mdi-play-circle-outline"
+                                                       FinishIcon="mdi-check"
+                                                       StaticText="code-run"
+                                                       ProcessText="code-running">
+                                    </AppStatefulButton>
+                                </div>
 
                                 <AppDivider />
 
-                                <MWindow Value="_selected" Class="grey lighten-5 rounded-b">
-                                    @foreach (var item in _sections)
-                                    {
-                                        <MWindowItem>
-                                            <Markup RoundedTop0 Code="@item.Code" Language="@item.Language" />
-                                        </MWindowItem>
-                                    }
-                                </MWindow>
+                                <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
+                                               Value="@_sourceCode"
+                                               EditorOptions="_options"
+                                               @ref=_monacoEditor>
+                                </MMonacoEditor>
                             </ShowTransitionElement>
                         </ExpandTransition>
                     }

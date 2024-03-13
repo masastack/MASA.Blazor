@@ -1,22 +1,25 @@
-﻿using BlazorComponent.Web;
+﻿using System.Text.Json;
 
 namespace Masa.Blazor;
 
+public class BreakpointOptions
+{
+    public OneOf<Breakpoints, double> MobileBreakpoint { get; set; }
+
+    public double ScrollBarWidth { get; set; }
+
+    public BreakpointThresholds? Thresholds { get; set; }
+}
+
 public class Breakpoint
 {
-    private CancellationTokenSource _cancellationTokenSource;
     private bool _prevMobile;
 
     public Breakpoint()
     {
     }
 
-    public Breakpoint(Window window)
-    {
-        Window = window;
-    }
-
-    internal void SetWindow(Window window) => Window = window;
+    private IJSRuntime? JSRuntime { get; set; }
 
     /// <summary>
     /// Indicates that the breakpoint has been calculated. If not, the breakpoint will not work.
@@ -64,20 +67,32 @@ public class Breakpoint
 
     public bool Mobile { get; private set; }
 
-    public OneOf<Breakpoints, double> MobileBreakpoint { get; set; }
+    public OneOf<Breakpoints, double> MobileBreakpoint { get; internal set; }
 
-    public BreakpointThresholds Thresholds { get; set; }
+    public double GetMobileBreakpointValue()
+    {
+        if (MobileBreakpoint.IsT1)
+        {
+            return MobileBreakpoint.AsT1;
+        }
 
-    public double ScrollBarWidth { get; set; }
+        return MobileBreakpoint.AsT0 switch
+        {
+            Breakpoints.Xs => Thresholds.Xs,
+            Breakpoints.Sm => Thresholds.Sm,
+            Breakpoints.Md => Thresholds.Md,
+            _              => Thresholds.Lg,
+        };
+    }
+
+    public BreakpointThresholds Thresholds { get; internal set; }
+
+    public double ScrollBarWidth { get; internal set; }
 
     [Obsolete("Use MasaBlazor.BreakpointChanged instead")]
     public event EventHandler<BreakpointChangedEventArgs> OnUpdate;
 
     internal Action<BreakpointChangedEventArgs> OnChanged;
-
-    Window Window { get; set; }
-
-    Document Document => Window.Document;
 
     public void Deconstruct(
         out double width,
@@ -91,20 +106,26 @@ public class Breakpoint
         mobileBreakpoint = MobileBreakpoint;
     }
 
-    public async Task InitAsync()
+    public async Task InitAsync(IJSRuntime jsRuntime)
     {
+        JSRuntime = jsRuntime;
+
         await UpdateAsync();
-        await Window.AddEventListenerAsync("resize", HandleOnResizeAsync, new EventListenerOptions
-        {
-            Passive = true
-        });
+
+        _ = JSRuntime.AddHtmlElementEventListener("window", "resize", ResizeAsync,
+            new EventListenerOptions { Passive = true },
+            new EventListenerExtras(debounce: 200));
     }
 
-    private async Task UpdateAsync()
+    private async Task ResizeAsync()
     {
-        var height = await GetClientHeightAsync();
-        var width = await GetClientWidthAsync();
+        await UpdateAsync();
+    }
 
+    public async Task UpdateAsync()
+    {
+        var height = await GetClientSizeAsync("Height");
+        var width = await GetClientSizeAsync("Width");
         var xs = width < Thresholds.Xs;
         var sm = width < Thresholds.Sm && !xs;
         var md = width < (Thresholds.Md - ScrollBarWidth) && !(sm || xs);
@@ -180,28 +201,21 @@ public class Breakpoint
         OnChanged?.Invoke(eventArgs);
     }
 
-    private async Task<double> GetClientHeightAsync()
+    private async Task<double> GetClientSizeAsync(string sizeName)
     {
-        var clientHeight = await Document.GetClientHeightAsync();
-        var innerHeight = await Window.GetInnerHeightAsync();
-
-        return Math.Max(clientHeight ?? 0, innerHeight ?? 0);
+        var clientSize = await GetNumberPropAsync("document", $"client{sizeName}");
+        var innerSize = await GetNumberPropAsync("window", $"inner{sizeName}");
+        return Math.Max(clientSize ?? 0, innerSize ?? 0);
     }
 
-    private async Task<double> GetClientWidthAsync()
+    private async Task<double?> GetNumberPropAsync(string selector, string name)
     {
-        var clientWidth = await Document.GetClientWidthAsync();
-        var innerWidth = await Window.GetInnerWidthAsync();
+        if (JSRuntime is null)
+        {
+            throw new NullReferenceException("JSRuntime is null. Please call UpdateJsRuntime(IJSRuntime jsRuntime) first.");
+        }
 
-        return Math.Max(clientWidth ?? 0, innerWidth ?? 0);
-    }
-
-    private async Task HandleOnResizeAsync()
-    {
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
-        await Task.Delay(200, _cancellationTokenSource.Token);
-
-        await UpdateAsync();
+        var jsonElement = await JSRuntime.InvokeAsync<JsonElement>(JsInteropConstants.GetProp, selector, name);
+        return jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : null;
     }
 }

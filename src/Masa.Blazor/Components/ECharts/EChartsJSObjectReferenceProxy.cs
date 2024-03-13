@@ -18,8 +18,8 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
     public async ValueTask SetOptionAsync(object option, bool notMerge = false, bool lazyUpdate = false)
         => await InvokeVoidAsync("setOption", option, notMerge, lazyUpdate);
 
-   public async ValueTask SetJsonOptionAsync(string option, bool notMerge = false, bool lazyUpdate = false)
-         => await InvokeVoidAsync("setJsonOption", option, notMerge, lazyUpdate);
+    public async ValueTask SetJsonOptionAsync(string option, bool notMerge = false, bool lazyUpdate = false)
+        => await InvokeVoidAsync("setJsonOption", option, notMerge, lazyUpdate);
 
     public async ValueTask ResizeAsync()
         => await InvokeVoidAsync("resize");
@@ -61,10 +61,10 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
         return events;
     }
 
-    protected override async ValueTask DisposeAsync(bool disposing)
+    protected override ValueTask DisposeAsync()
     {
         _selfReference.Dispose();
 
-        await base.DisposeAsync(disposing);
+        return ValueTask.CompletedTask;
     }
 }

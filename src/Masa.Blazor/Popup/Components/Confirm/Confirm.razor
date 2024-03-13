@@ -9,7 +9,7 @@
     <MCard>
         @if (!string.IsNullOrEmpty(Title))
         {
-            <MCardTitle Class="@TitleClass" Style="@TitleStyle">
+            <MCardTitle Class="@TitleClass"  Style="@($"{(ComputedContent is null ? "font-size: 1rem;" : "")} {TitleStyle}")">
                 @if (!string.IsNullOrEmpty(ComputedIcon))
                 {
                     <MIcon Color="@ComputedIconColor" Class="mr-2">@ComputedIcon</MIcon>
@@ -18,10 +18,10 @@
             </MCardTitle>
         }
 
-        @if (!string.IsNullOrEmpty(Content))
+        @if (ComputedContent is not null)
         {
             <MCardText Class="@($"pb-0 {ContentClass}")" Style="@ContentStyle">
-                @Content
+                @ComputedContent
             </MCardText>
         }
 

@@ -3,8 +3,25 @@ namespace Masa.Blazor
 {
     public class MOtpInput: BOtpInput, IThemeable
     {
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public string? Color { get; set; }
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -15,7 +32,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add(defaultClass)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddTextColor(Color);
                 }, styleBuilder =>
                 {
@@ -26,7 +43,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .Add("m-text-field")
                         .Add("m-text-field--is-booted")
                         .AddIf("m-otp-input--plain", ()=> Plain)

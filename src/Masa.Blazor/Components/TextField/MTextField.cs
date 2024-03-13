@@ -1,9 +1,10 @@
-﻿using BlazorComponent.Web;
+﻿using System.Runtime.CompilerServices;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
+    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>, IAsyncDisposable
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -12,15 +13,21 @@ namespace Masa.Blazor
         public Document Document { get; set; } = null!;
 
         [Inject]
-        public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
 
         [Parameter]
+        public string? Format { get; set; }
+
+        [Parameter]
+        public string? Locale { get; set; }
+
+        [Parameter]
         public bool PersistentPlaceholder { get; set; }
 
-        [ApiDefaultValue("$clear")]
+        [MasaApiParameter("$clear")]
         [Parameter]
         public string ClearIcon { get; set; } = "$clear";
 
@@ -135,10 +142,17 @@ namespace Masa.Blazor
         public int DebounceInterval { get; set; }
 
         /// <summary>
-        /// Update the bound value on blur instead of on input.
+        /// Update the bound value on change event instead of on input.
         /// </summary>
         [Parameter]
-        public bool UpdateOnBlur { get; set; }
+        [Obsolete("Use UpdateOnChange instead.")]
+        public virtual bool UpdateOnBlur { get; set; }
+
+        /// <summary>
+        /// Update the bound value on change event instead of on input.
+        /// </summary>
+        [Parameter]
+        public virtual bool UpdateOnChange { get; set; }
 
         private static readonly string[] s_dirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
@@ -493,9 +507,9 @@ namespace Masa.Blazor
                 .ApplyTextFieldPrependIcon(typeof(MIcon),
                     attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
                 .Merge<BIcon, MIcon>("append-icon-number-up",
-                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 }, { "ripple", true } })
                 .Merge<BIcon, MIcon>("append-icon-number-down",
-                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } });
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 }, { "ripple", true } });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -509,7 +523,11 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement,
                     DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
 
-                await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus, OnResize);
+                await IntersectJSModule.ObserverAsync(InputElement, async _ =>
+                {
+                    await TryAutoFocus();
+                    await OnResize();
+                });
 
                 var tasks = new Task[3];
 
@@ -534,6 +552,46 @@ namespace Masa.Blazor
             watcher.Watch<bool>(nameof(Outlined), SetLabelWidthAsync)
                    .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync))
                    .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
+        }
+
+        protected override string? Formatter(object? val)
+        {
+            var localeExists = !string.IsNullOrWhiteSpace(Locale);
+            var formatExists = !string.IsNullOrWhiteSpace(Format);
+
+            if (localeExists || formatExists)
+            {
+                if (val is DateTime dt)
+                {
+                    return dt.ToString(
+                        format: formatExists ? Format : null,
+                        provider: localeExists ? CurrentLocale : null);
+                }
+            }
+
+            return base.Formatter(val);
+        }
+
+        public CultureInfo CurrentLocale
+        {
+            get
+            {
+                var culture = CultureInfo.CurrentUICulture;
+
+                if (Locale is not null)
+                {
+                    try
+                    {
+                        culture = CultureInfo.CreateSpecificCulture(Locale);
+                    }
+                    catch (CultureNotFoundException e)
+                    {
+                        Logger.LogWarning(e, "Locale {Locale} is not found", Locale);
+                    }
+                }
+
+                return culture;
+            }
         }
 
         private async Task SetLabelWidthAsync()
@@ -651,16 +709,10 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            if (UpdateOnBlur)
-            {
-                await UpdateValue(args.Value?.ToString(), OnChange);
-            }
-        }
-
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.RemoveStopPropagationEvent,  InputElement, "wheel");
+            
             IsFocused = false;
             if (OnBlur.HasDelegate)
             {
@@ -672,39 +724,65 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue?.ToString());
+                await SetValueByJsInterop(Formatter(checkValue));
             }
         }
 
-        public override async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            if (UpdateOnBlur)
+            return OnValueChangedAsync(args, OnInput);
+        }
+
+        public override Task HandleOnChangeAsync(ChangeEventArgs args)
+        {
+            return OnValueChangedAsync(args, OnChange);
+        }
+
+        private async Task OnValueChangedAsync(ChangeEventArgs args, EventCallback<TValue> cb,
+            [CallerArgumentExpression("cb")] string cbName = "")
+        {
+            var originValue = args.Value?.ToString();
+
+            var succeed = TryConvertTo<TValue>(originValue, out var result);
+
+            var updateOnChange = UpdateOnBlur || UpdateOnChange;
+
+            if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
             {
-                return;
+                UpdateValue(originValue, succeed, result);
+
+                StateHasChanged();
             }
 
-            await UpdateValue(args.Value?.ToString(), OnInput);
-
-            StateHasChanged();
-            // todo: args.validity.badInput
+            if (succeed && cb.HasDelegate)
+            {
+                await cb.InvokeAsync(result);
+            }
         }
 
-        private async Task UpdateValue(string? value, EventCallback<TValue> callback)
+        private static bool TryConvertTo<T>(string? value, out T? result)
         {
-            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
+            var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
 
-            if (success)
+            if (succeeded)
+            {
+                result = val;
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
+
+        private void UpdateValue(string? originValue, bool succeeded, TValue? convertedValue)
+        {
+            if (succeeded)
             {
                 _badInput = false;
 
                 ValueChangedInternally = true;
 
-                InternalValue = val;
-
-                if (callback.HasDelegate)
-                {
-                    await callback.InvokeAsync(val);
-                }
+                InternalValue = convertedValue;
             }
             else
             {
@@ -715,7 +793,7 @@ namespace Masa.Blazor
                 if (Type.ToLower() == "number")
                 {
                     // reset the value of input element if failed to convert
-                    if (!string.IsNullOrEmpty(value))
+                    if (!string.IsNullOrEmpty(originValue))
                     {
                         _ = SetValueByJsInterop("");
                     }
@@ -771,6 +849,8 @@ namespace Masa.Blazor
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     InternalValue = internalValue;
+
+                    await OnChange.InvokeAsync(internalValue);
                 }
             }
 
@@ -796,6 +876,8 @@ namespace Masa.Blazor
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     InternalValue = internalValue;
+
+                    await OnChange.InvokeAsync(internalValue);
                 }
             }
 
@@ -804,6 +886,8 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, InputElement, "wheel");
+            
             if (!IsFocused)
             {
                 IsFocused = true;
@@ -817,9 +901,14 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            if (args.Key == "Enter" && OnEnter.HasDelegate)
+            if (args.Key is KeyCodes.Enter or KeyCodes.NumpadEnter)
             {
-                await OnEnter.InvokeAsync();
+                if (OnEnter.HasDelegate)
+                {
+                    await OnEnter.InvokeAsync();
+                }
+
+                await TryInvokeFieldChangeOfInputsFilter();
             }
 
             if (OnKeyDown.HasDelegate)
@@ -837,6 +926,10 @@ namespace Masa.Blazor
                 await OnClearClick.InvokeAsync(args);
             }
 
+            await OnChange.InvokeAsync(default);
+
+            await TryInvokeFieldChangeOfInputsFilter(isClear: true);
+
             await InputElement.FocusAsync();
         }
 
@@ -848,6 +941,19 @@ namespace Masa.Blazor
             }
 
             await base.HandleOnMouseUpAsync(args);
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
+                await IntersectJSModule.UnobserveAsync(InputElement);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

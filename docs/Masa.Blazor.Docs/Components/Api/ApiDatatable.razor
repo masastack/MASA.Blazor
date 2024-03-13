@@ -2,17 +2,17 @@
 
 @namespace Masa.Blazor.Docs.Components
 
-<AppSheet Class="mb-9">
+<AppSheet Class="mb-9 m-sheet--no-bg">
     <MSimpleTable Class="api-table">
         <thead>
-            <tr>
-                @foreach (var header in Headers)
-                {
-                    <th style="@GetHeaderStyle(header)">
-                        <div class="subtitle">@I18n.T(header)</div>
-                    </th>
-                }
-            </tr>
+        <tr>
+            @foreach (var header in Headers)
+            {
+                <th style="@GetHeaderStyle(header)">
+                    <div class="subtitle">@I18n.T(header)</div>
+                </th>
+            }
+        </tr>
         </thead>
         <tbody>
         @foreach (var item in Items)
@@ -24,12 +24,19 @@
                         @if (header == "name")
                         {
                             <span class="subtitle">
-                                <MBadge Value="@(item.Required)" Color="transparent" Class="text-mono" OffsetY="10">
+                                <MBadge Value="@(item.Required)" Color="transparent"
+                                        Class="@(item.IsObsolete ? "text-mono text-no-wrap text-decoration-line-through" : "text-mono text-no-wrap")"
+                                        OffsetY="10">
                                     <BadgeContent>
                                         <MIcon Size="9" Color="red lighten-2">mdi-asterisk</MIcon>
                                     </BadgeContent>
                                     <ChildContent>
                                         @item.Name
+
+                                        @if (!string.IsNullOrEmpty(item.ReleasedOn))
+                                        {
+                                            <MChip Class="ml-2 px-2" Outlined XSmall Color="@AppService.ColorForUpdateState">@item.ReleasedOn</MChip>
+                                        }
                                     </ChildContent>
                                 </MBadge>
                             </span>
@@ -125,7 +132,7 @@
             "name" => "width:144px",
             "type" => "width:264px;",
             _ => ""
-        };
+            };
     }
 
 }

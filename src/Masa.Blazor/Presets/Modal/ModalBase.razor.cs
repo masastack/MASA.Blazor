@@ -41,7 +41,7 @@ public partial class ModalBase
     [Parameter]
     public string? ContentStyle { get; set; }
 
-    [Parameter, ApiDefaultValue(100)]
+    [Parameter, MasaApiParameter(100)]
     public int DebounceInterval { get; set; } = 100;
 
     [Parameter]
@@ -77,7 +77,7 @@ public partial class ModalBase
     [Parameter]
     public string? Title { get; set; }
 
-    [Parameter, ApiDefaultValue("dialog-transition")]
+    [Parameter, MasaApiParameter("dialog-transition")]
     public string? Transition { get; set; } = "dialog-transition";
 
     [Parameter]
@@ -170,7 +170,7 @@ public partial class ModalBase
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        
+
         ComputedSaveButtonProps = GetDefaultSaveButtonProps();
         ComputedCancelButtonProps = GetDefaultCancelButtonProps();
         ComputedDeleteButtonProps = GetDefaultDeleteButtonProps();
@@ -187,22 +187,22 @@ public partial class ModalBase
         _debounceHandleOnSave = DebounceEvent<MouseEventArgs>(
             async (_) =>
             {
-                var args = new ModalActionEventArgs();
+                var args = new ModalActionEventArgs(Form?.FormContext);
 
                 _saveLoading = true;
-                
+
                 try
                 {
                     await OnSave.InvokeAsync(args);
+
+                    if (args.IsCanceled) return;
+
+                    Form?.Reset();
                 }
                 finally
                 {
                     _saveLoading = false;
                 }
-
-                if (args.IsCanceled) return;
-
-                Form?.Reset();
             },
             TimeSpan.FromMilliseconds(DebounceInterval));
     }
@@ -301,8 +301,14 @@ public partial class ModalBase
         {
             await InvokeAsync(async () =>
             {
-                await action(arg);
-                StateHasChanged();
+                try
+                {
+                    await action(arg);
+                }
+                finally
+                {
+                    StateHasChanged();
+                }
             });
         }, interval);
     }

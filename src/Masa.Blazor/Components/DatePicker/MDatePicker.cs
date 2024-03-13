@@ -15,7 +15,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public Func<DateOnly, bool>? DayFormat { get; set; }
+        public Func<DateOnly, string>? DayFormat { get; set; }
 
         [Parameter]
         public Func<DateOnly, string>? HeaderDateFormat { get; set; }
@@ -39,7 +39,7 @@ namespace Masa.Blazor
         public bool Scrollable { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MasaApiParameter(true)]
         public OneOf<DateOnly, bool> ShowCurrent { get; set; } = true;
 
         [Parameter]
@@ -64,7 +64,7 @@ namespace Masa.Blazor
         public bool Landscape { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(290)]
+        [MasaApiParameter(290)]
         public StringNumber Width { get; set; } = 290;
 
         [Parameter]
@@ -117,11 +117,11 @@ namespace Masa.Blazor
         public string? YearIcon { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$next")]
+        [MasaApiParameter("$next")]
         public string NextIcon { get; set; } = "$next";
 
         [Parameter]
-        [ApiDefaultValue("$prev")]
+        [MasaApiParameter("$prev")]
         public string PrevIcon { get; set; } = "$prev";
 
         [Parameter]
@@ -333,7 +333,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDatePickerTitle.Disabled)] = Disabled;
                     attrs[nameof(MDatePickerTitle.Readonly)] = Readonly;
                     attrs[nameof(MDatePickerTitle.SelectingYear)] = InternalActivePicker == DatePickerType.Year;
-                    attrs[nameof(MDatePickerTitle.Year)] = Formatters.Year(new DateOnly(TableDate.Year, 1, 1));
+                    attrs[nameof(MDatePickerTitle.Year)] = Formatters.Year(TableDate);
                     attrs[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
                     attrs[nameof(MDatePickerTitle.Value)] = MultipleValue.FirstOrDefault();
                     attrs[nameof(MDatePickerTitle.OnSelectingYearUpdate)] = CreateEventCallback<bool>(value =>

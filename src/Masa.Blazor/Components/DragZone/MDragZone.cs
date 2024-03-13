@@ -1,6 +1,7 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDragZone : BDragZone, IAsyncDisposable
+    [Obsolete("The component is deprecated and will be removed in the next major version. Please use MSortable instead.")]
+    public partial class MDragZone : BDragZone
     {
         [Parameter]
         public Action<SorttableOptions>? Options { get; set; }
@@ -85,6 +86,7 @@
             {
                 return;
             }
+
             DragDropService.DragItem = find;
             if (_options?.OnStart != null)
                 _options.OnStart(args);
@@ -123,6 +125,7 @@
                 var item = DragDropService.DragItem.Clone();
                 Add(item, args.NewIndex);
             }
+
             await Task.CompletedTask;
         }
 
@@ -167,12 +170,12 @@
             IsRender = true;
             if (_options?.OnRemove != null)
                 _options.OnRemove(args);
-          
+
             if (Contains(DragDropService.DragItem))
             {
                 Remove(DragDropService.DragItem);
                 if (args.IsClone)
-                {                   
+                {
                     Add(DragDropService.DragItem, args.OldIndex);
                 }
             }
@@ -242,6 +245,7 @@
                 _dotNetHelper = DotNetObjectReference.Create(this);
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
             }
+
             await base.OnAfterRenderAsync(firstRender);
         }
 
@@ -251,23 +255,21 @@
             base.OnParametersSet();
         }
 
-        protected override void Dispose(bool disposing)
+        protected override async ValueTask DisposeAsyncCore()
         {
-            base.Dispose(disposing);
             _dotNetHelper?.Dispose();
-        }
 
-        public async ValueTask DisposeAsync()
-        {
             try
             {
                 if (_jsHelper != null)
                     await _jsHelper.DisposeAsync();
             }
-            catch
+            catch (Exception)
             {
                 // ignored
             }
+
+            await base.DisposeAsyncCore();
         }
     }
 }

@@ -269,6 +269,22 @@ namespace Masa.Blazor
                 .Watch<int?>(nameof(Value), val => { InputValue = val; });
         }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -277,7 +293,7 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-time-picker-clock")
                         .AddIf("m-time-picker-clock--indeterminate", () => Value == null)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("inner", cssBuilder =>
                 {
@@ -302,7 +318,7 @@ namespace Masa.Blazor
                 })
                 .Apply("item", cssBuilder =>
                 {
-                    var value = cssBuilder.Index;
+                    var value = (int)cssBuilder.Data!;
                     var color = value == Value ? Color ?? "accent" : "";
                     cssBuilder
                         .Add("m-time-picker-clock__item")
@@ -311,7 +327,7 @@ namespace Masa.Blazor
                         .AddBackgroundColor(color);
                 }, styleBuilder =>
                 {
-                    var value = styleBuilder.Index;
+                    var value = (int)styleBuilder.Data!;
                     var (x, y) = GetPosition(value);
                     var color = value == Value ? Color ?? "accent" : "";
                     styleBuilder

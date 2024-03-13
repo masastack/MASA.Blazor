@@ -29,6 +29,12 @@ related:
 
 <masa-example file="Examples.components.paginations.Disabled"></masa-example>
 
+#### Href 格式 {released-on=v1.3.0}
+
+使用 `HrefFormat` 属性，可以自定义分页按钮的链接格式，这对 SEO 有帮助。
+
+<masa-example file="Examples.components.paginations.HrefFormat"></masa-example>
+
 #### 图标
 
 上一页和下一页的图标可以通过 `PrevIcon` 和 `NextIcon` 属性自定义。

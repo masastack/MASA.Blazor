@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MRating : BRating, IRating
+    public partial class MRating : BRating, IRating, IAsyncDisposable
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -23,15 +23,15 @@ namespace Masa.Blazor
         public bool Dense { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$ratingEmpty")]
+        [MasaApiParameter("$ratingEmpty")]
         public string EmptyIcon { get; set; } = "$ratingEmpty";
 
         [Parameter]
-        [ApiDefaultValue("$ratingFull")]
+        [MasaApiParameter("$ratingFull")]
         public string FullIcon { get; set; } = "$ratingFull";
 
         [Parameter]
-        [ApiDefaultValue("$ratingHalf")]
+        [MasaApiParameter("$ratingHalf")]
         public string HalfIcon { get; set; } = "$ratingHalf";
 
         [Parameter]
@@ -89,7 +89,21 @@ namespace Masa.Blazor
             MouseEnter,
             MouseLeave,
             MouseMove
+        }        
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
         }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -103,7 +117,7 @@ namespace Masa.Blazor
                         .Add("m-rating")
                         .AddIf("m-rating--readonly", () => Readonly)
                         .AddIf("m-rating--dense", () => Dense)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 });
 
             AbstractProvider
@@ -131,7 +145,31 @@ namespace Masa.Blazor
 
                     if (ratingItem.Click != null)
                     {
-                        attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                        // TODO:(1.1.0) change ratingItem.Click type to MouseEventArgs!
+                        attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, e =>
+                        {
+                            ExMouseEventArgs args = new()
+                            {
+                                Detail = e.Detail,
+                                ScreenX = e.ScreenX,
+                                ScreenY = e.ScreenY,
+                                ClientX = e.ClientX,
+                                ClientY = e.ClientY,
+                                OffsetX = e.OffsetX,
+                                OffsetY = e.OffsetY,
+                                PageX = e.PageX,
+                                PageY = e.PageY,
+                                Button = e.Button,
+                                Buttons = e.Buttons,
+                                CtrlKey = e.CtrlKey,
+                                ShiftKey = e.ShiftKey,
+                                AltKey = e.AltKey,
+                                MetaKey = e.MetaKey,
+                                Type = e.Type,
+                            };
+
+                            ratingItem.Click.Invoke(args);
+                        });
                     }
 
                     _iconForwardRefs.TryAdd(itemIndex, new ForwardRef());
@@ -246,15 +284,29 @@ namespace Masa.Blazor
                 return;
             }
 
+            var taskCanceled = false;
+
             if (type is MouseType.MouseEnter or MouseType.MouseLeave)
             {
                 _cancellationTokenSource?.Cancel();
                 _cancellationTokenSource = new CancellationTokenSource();
-                await Task.Delay(16, _cancellationTokenSource.Token);
+
+                try
+                {
+                    await Task.Delay(16, _cancellationTokenSource.Token);
+                }
+                catch (TaskCanceledException)
+                {
+                    taskCanceled = true;
+                }
+            }
+
+            if (taskCanceled)
+            {
+                return;
             }
 
             var prevHoverIndex = _hoverIndex;
-            Console.Out.WriteLine("type = {0}", type);
 
             switch (type)
             {
@@ -273,6 +325,26 @@ namespace Masa.Blazor
             if (_hoverIndex != prevHoverIndex)
             {
                 StateHasChanged();
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                foreach (var (k, v) in _iconForwardRefs)
+                {
+                    if (v.Current.TryGetSelector(out var selector))
+                    {
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
+                        _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
     }

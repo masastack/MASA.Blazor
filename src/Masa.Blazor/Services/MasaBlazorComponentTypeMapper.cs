@@ -6,7 +6,6 @@
         {
             { typeof(BButton), typeof(MButton) },
             { typeof(BIcon), typeof(MIcon) },
-            { typeof(BAvatar), typeof(MAvatar) },
             { typeof(BBreadcrumbsDivider), typeof(MBreadcrumbsDivider) },
             { typeof(BBreadcrumbsItem), typeof(MBreadcrumbsItem) },
             { typeof(BProgressCircular), typeof(MProgressCircular) },
@@ -15,16 +14,11 @@
             { typeof(BList), typeof(MList) },
             { typeof(BItemGroup), typeof(MItemGroup) },
             { typeof(BButtonGroup), typeof(MButtonGroup) },
-            { typeof(BDataFooter), typeof(MDataFooter) },
             { typeof(BSimpleCheckbox), typeof(MSimpleCheckbox) },
-            { typeof(BDataTableRowGroup), typeof(MDataTableRowGroup) },
-            { typeof(BDataTableHeader), typeof(MDataTableHeader) },
-            { typeof(BSimpleTable), typeof(MSimpleTable) },
             { typeof(BDatePickerHeader), typeof(MDatePickerHeader) },
             { typeof(BDatePickerYears), typeof(MDatePickerYears) },
             { typeof(BPicker), typeof(MPicker) },
             { typeof(BDatePickerTitle), typeof(MDatePickerTitle) },
-            { typeof(BOverlay), typeof(MOverlay) },
             { typeof(BChip), typeof(MChip) },
             { typeof(BLabel), typeof(MLabel) },
             { typeof(BMessages), typeof(MMessages) },
@@ -50,8 +44,6 @@
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
             { typeof(BCascaderColumn<,>), typeof(MCascaderColumn<,>) },
-            { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
-            { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
             { typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<>) }
         };

@@ -87,9 +87,9 @@ The data table exposes a `Search` prop that allows you to filter your data.
 
 <masa-example file="Examples.components.data_tables.Search"></masa-example>
 
-#### Fixed right
+#### Fixed {released-on=v1.2.0}
 
-Using the `FixedRightFix` prop  the last column.
+Fixed columns using the `Fixed` prop in the **Headers** array.
 
 <masa-example file="Examples.components.data_tables.Fixed"></masa-example>
 
@@ -98,6 +98,12 @@ Using the `FixedRightFix` prop  the last column.
 Striped table.
 
 <masa-example file="Examples.components.data_tables.Stripe"></masa-example>
+
+#### Resize mode {released-on=v1.0.4}
+
+Using the `ResizeMode` prop you can allow users to resize columns.
+
+<masa-example file="Examples.components.data_tables.ResizeMode"></masa-example>
 
 ### Contents
 
@@ -128,13 +134,6 @@ header alignment.
 **MDataTable** with CRUD actions using a **MDialog** component for editing each row.
 
 <masa-example file="Examples.components.data_tables.CRUDActions"></masa-example>
-
-#### EditDialog
-
-The **MEditDialog** component can be used for editing data directly within a **MEditDialog**. You can block the closing of
-the **MEditDialog** when clicked outside by adding the `Persistent` prop.
-
-<masa-example file="Examples.components.data_tables.EditDialog"></masa-example>
 
 #### ExpandableRow
 

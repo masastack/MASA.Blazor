@@ -48,7 +48,7 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 ## 📂 相关项目
 
 - [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/masastack/Masa.Blazor.Pro)
-- [Masa Template](https://github.com/masastack/Masa.Template)
+- [MASA Template](https://github.com/masastack/MASA.Template)
 
 ## 👨‍💻 本地开发
 

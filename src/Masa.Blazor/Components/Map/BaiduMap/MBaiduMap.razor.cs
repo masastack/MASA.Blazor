@@ -9,15 +9,15 @@
         public RenderFragment? ChildContent { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(360)]
+        [MasaApiParameter(360)]
         public StringNumber Width { get; set; } = 360;
 
         [Parameter]
-        [ApiDefaultValue(240)]
+        [MasaApiParameter(240)]
         public StringNumber Height { get; set; } = 240;
 
         [Parameter]
-        [ApiDefaultValue(10)]
+        [MasaApiParameter(10)]
         public float Zoom
         {
             get => GetValue<float>(10);
@@ -35,7 +35,7 @@
         }
 
         [Parameter]
-        [ApiDefaultValue(19)]
+        [MasaApiParameter(19)]
         public float MaxZoom
         {
             get => GetValue(DefaultMaxZoom);
@@ -47,7 +47,7 @@
         }
 
         [Parameter]
-        [ApiDefaultValue(3)]
+        [MasaApiParameter(3)]
         public float MinZoom
         {
             get => GetValue(DefaultMinZoom);
@@ -66,7 +66,7 @@
         }
 
         [Parameter]
-        [ApiDefaultValue("116.403, 39.917")]
+        [MasaApiParameter("116.403, 39.917")]
         public GeoPoint Center
         {
             get => GetValue<GeoPoint>(new(116.403f, 39.917f));
@@ -74,7 +74,7 @@
         }
 
         [Parameter]
-        [ApiDefaultValue(BaiduMapType.Normal)]
+        [MasaApiParameter(BaiduMapType.Normal)]
         public BaiduMapType MapType
         {
             get => GetValue(BaiduMapType.Normal);
@@ -194,6 +194,8 @@
         [Parameter]
         public EventCallback<GeoPoint> CenterChanged { get; set; }
 
+        private CancellationTokenSource _movingCts = new();
+
         public async ValueTask HandleOnMapTypeChanged()
         {
             _maptypeChangedInJs = true;
@@ -210,12 +212,19 @@
 
         public async ValueTask HandleOnMoving()
         {
-            _centerChangedInJs = true;
+            await RunTaskInMicrosecondsAsync(async () =>
+            {
+                var center = await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter");
+                if (Center.Equals(center))
+                {
+                    return;
+                }
 
-            if (CenterChanged.HasDelegate)
-                await CenterChanged.InvokeAsync(await _baiduMap.TryInvokeAsync<GeoPoint>("getCenter"));
+                _centerChangedInJs = true;
 
-            await OnMoving.InvokeAsync();
+                await CenterChanged.InvokeAsync(center);
+                await OnMoving.InvokeAsync();
+            }, 300, _movingCts.Token);
         }
 
         public async ValueTask HandleOnZoomEnd()
@@ -247,6 +256,22 @@
             { BaiduMapType.Satellite, "B_SATELLITE_MAP" },
         };
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -256,7 +281,7 @@
                 {
                     cssBuilder
                         .Add("m-baidumap")
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -359,7 +384,14 @@
         }
 
         public async ValueTask AddOverlayAsync(BaiduOverlayBase overlay)
-            => await _baiduMap!.AddOverlayAsync(overlay);
+        {
+            if (_baiduMap is null)
+            {
+                return;
+            }
+
+            await _baiduMap.AddOverlayAsync(overlay);
+        }
 
         public async ValueTask RemoveOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeVoidAsync("removeOverlay", overlay.OverlayJSObjectRef);
@@ -370,10 +402,17 @@
         public async ValueTask<bool> ContainsOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
-        public async ValueTask DisposeAsync()
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
-            if (_baiduMap is not null)
-                await _baiduMap.DisposeAsync();
+            try
+            {
+                if (_baiduMap is not null)
+                    await _baiduMap.DisposeAsync();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

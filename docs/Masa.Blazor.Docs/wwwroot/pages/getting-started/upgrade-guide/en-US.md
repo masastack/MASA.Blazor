@@ -1,5 +1,31 @@
 # Upgrade Guides
 
+## Upgrading form v1.1.x to v1.2.0
+
+### Components
+
+#### DataTable
+
+- The type of `OnItemSelect` is changed from `Action<TItem, bool>` to `EventCallback<(TItem Item, bool Selected)>`.
+
+- Removed the `FixedRight` property, now you can set the fixed position of the column through the `Fixed` property in the `Headers`.
+
+## Upgrading form v1.0.x to v1.1.0
+
+### Components
+
+#### Cascader
+
+The default value of the `Outlined` property is `false` now, consistent with the default style of other form input components.
+
+#### Form(FluentValidation)
+
+Removed the built-in automatic registration of **FluentValidation** validators, now you need to register manually, please refer to [Automatic registration](https://docs.fluentvalidation.net/en/latest/di.html#automatic-registration) for details.
+
+#### ImageCaptcha
+
+In order to reduce the size of WebAssembly loading, the ImageCaptcha component is moved to a separate nuget package: [Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia).
+
 ## Upgrading from v0.6.x to v1.0.0
 
 v1.0.0 contains non backwards compatible breaking changes, the following changes:

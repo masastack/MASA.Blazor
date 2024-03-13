@@ -1,16 +1,16 @@
 ﻿using System.Text;
 
-namespace Masa.Blazor.SourceGenerator.Docs.ApiGenerator;
+namespace Masa.Blazor.Docs.ApiGenerator;
 
 public static class GenComponentMeta
 {
-    internal static string GetSourceText(ComponentMeta componentMeta)
+    public static string GetSourceText(ComponentMeta componentMeta)
     {
-        var sb = new StringBuilder(@"
+        var sb = new StringBuilder($@"
 namespace Masa.Blazor.Docs
-{
-    public static partial class ApiGenerator
-    {
+{{
+    public static partial class {componentMeta.NamespaceName}ApiGenerator
+    {{
 ");
         sb.Append($@"
         private static ComponentMeta Gen{componentMeta.Name}()
@@ -32,7 +32,9 @@ namespace Masa.Blazor.Docs
                 Type = ""{item.Type}"",
                 TypeDesc = @""{item.TypeDesc}"",
                 DefaultValue = ""{item.DefaultValue}"",
-                Required = {item.Required.ToString().ToLower()}
+                Required = {item.Required.ToString().ToLower()},
+                IsObsolete = {item.IsObsolete.ToString().ToLower()},
+                ReleasedOn = ""{item.ReleasedOn}"",
             }});");
             }
 

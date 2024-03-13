@@ -3,7 +3,7 @@
     public class MRadioGroup<TValue> : MInput<TValue>, IRadioGroup<TValue>
     {
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MasaApiParameter(true)]
         public bool Column { get; set; } = true;
 
         [Parameter]
@@ -12,12 +12,17 @@
         [Parameter]
         public bool Row { get; set; }
 
+        private bool _isImmediateCallbackForValueChange;
+
         private List<IRadio<TValue>> Items { get; } = new();
+
+        protected override bool WatchValueChangeImmediately => false;
 
         protected override void OnValueChanged(TValue val)
         {
             base.OnValueChanged(val);
-            _ = Toggle(val);
+
+            RefreshItemsState();
         }
 
         protected override void SetComponentClass()
@@ -75,6 +80,10 @@
             {
                 Value = value;
             }
+
+            await OnChange.InvokeAsync(value);
+
+            await TryInvokeFieldChangeOfInputsFilter();
 
             NextTick(RefreshItemsState);
         }

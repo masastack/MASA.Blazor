@@ -1,0 +1,84 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TValue
+@inherits PDateTimePickerBase<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment CompactPickerView() => __builder =>
+    {
+        <PDateDigitalClockCompactPickerView @bind-Value="InternalDateTime"
+                                            ActiveDatePicker="@ActiveDatePicker"
+                                            AllowedDates="@AllowedDates"
+                                            AllowedHours="@AllowedHours"
+                                            AllowedMinutes="@AllowedMinutes"
+                                            AllowedSeconds="@AllowedSeconds"
+                                            Color="@Color"
+                                            DayFormat="@DayFormat"
+                                            Disabled="@Disabled"
+                                            FirstDayOfWeek="@FirstDayOfWeek"
+                                            TimeFormat="@TimeFormat"
+                                            Locale="@Locale"
+                                            Max="@Max"
+                                            Min="@Min"
+                                            MonthFormat="@MonthFormat"
+                                            MultiSection="@MultiSection"
+                                            NextIcon="@NextIcon"
+                                            PrevIcon="@PrevIcon"
+                                            Reactive="@Reactive"
+                                            Readonly="@Reactive"
+                                            Scrollable="@Scrollable"
+                                            ShowAdjacentMonths="@ShowAdjacentMonths"
+                                            ShowCurrent="@ShowCurrent"
+                                            ShowWeek="@ShowWeek"
+                                            Transition="@TabItemTransition"
+                                            UseSeconds="@UseSeconds"
+                                            WeekdayFormat="@WeekdayFormat"
+                                            YearFormat="@YearFormat"
+                                            YearIcon="@YearIcon"
+                                            Dark="@Dark"
+                                            Light="@Light">
+        </PDateDigitalClockCompactPickerView>
+    };
+
+    protected override RenderFragment DefaultPickerView() => __builder =>
+    {
+        <PDateDigitalClockPickerView @bind-Value="InternalDateTime"
+                                     AllowedDates="@AllowedDates"
+                                     AllowedHours="@AllowedHours"
+                                     AllowedMinutes="@AllowedMinutes"
+                                     AllowedSeconds="@AllowedSeconds"
+                                     AllowedTimes="@AllowedTimes"
+                                     Color="@Color"
+                                     DayFormat="@DayFormat"
+                                     Disabled="@Disabled"
+                                     FirstDayOfWeek="@FirstDayOfWeek"
+                                     TimeFormat="@TimeFormat"
+                                     Locale="@Locale"
+                                     Max="@Max"
+                                     Min="@Min"
+                                     MonthFormat="@MonthFormat"
+                                     MultiSection="@MultiSection"
+                                     NextIcon="@NextIcon"
+                                     PrevIcon="@PrevIcon"
+                                     Reactive="@Reactive"
+                                     Readonly="@Reactive"
+                                     Scrollable="@Scrollable"
+                                     ShowAdjacentMonths="@ShowAdjacentMonths"
+                                     ShowCurrent="@ShowCurrent"
+                                     ShowWeek="@ShowWeek"
+                                     Step="@Step"
+                                     HourStep="@HourStep"
+                                     MinuteStep="@MinuteStep"
+                                     SecondStep="@SecondStep"
+                                     UseSeconds="@UseSeconds"
+                                     WeekdayFormat="@WeekdayFormat"
+                                     YearFormat="@YearFormat"
+                                     YearIcon="@YearIcon"
+                                     Dark="@Dark"
+                                     Light="@Light">
+        </PDateDigitalClockPickerView>
+    };
+
+}

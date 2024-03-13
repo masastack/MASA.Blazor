@@ -2,19 +2,31 @@
 
 namespace Masa.Blazor
 {
-    public partial class MPagination : BPagination, IPagination
+    public partial class MPagination : BPagination, IPagination, IAsyncDisposable
     {
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; } = null!;
+        private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject]
         public Document Document { get; set; } = null!;
+
+        [Inject]
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Parameter]
         public bool Circle { get; set; }
 
         [Parameter]
         public bool Disabled { get; set; }
+
+        /// <summary>
+        /// The format of the link href. It's useful for SEO.
+        /// </summary>
+        /// <example>
+        /// ”/page/{0}“
+        /// </example>
+        [Parameter]
+        public string? HrefFormat { get; set; }
 
         [Parameter]
         public int Value { get; set; }
@@ -50,7 +62,22 @@ namespace Masa.Blazor
 
         public bool NextDisabled => Value >= Length;
 
-        protected int MaxButtons;
+        protected int MaxButtons { get; set; }
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -61,7 +88,7 @@ namespace Masa.Blazor
                         .Add("m-pagination")
                         .AddIf("m-pagination--circle", () => Circle)
                         .AddIf("m-pagination--disabled", () => Disabled)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("navigation", cssBuilder =>
                 {
@@ -103,17 +130,43 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 var el = Document.GetElementByReference(Ref);
                 if (el is null) return;
 
                 var clientWidth = await el.ParentElement.GetClientWidthAsync();
-                if (clientWidth != null)
+                if (clientWidth is > 0)
                 {
-                    MaxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
-                    StateHasChanged();
+                    CalcMaxButtons(clientWidth.Value);
                 }
+                else
+                {
+                    // clientWidth may be 0 when place in dialog
+                    // so we need to observe the element
+                    await IntersectJSModule.ObserverAsync(Ref, async e =>
+                    {
+                        if (e.IsIntersecting)
+                        {
+                            await InvokeAsync(async () =>
+                            {
+                                clientWidth = await el.ParentElement.GetClientWidthAsync();
+                                if (clientWidth is > 0)
+                                {
+                                    CalcMaxButtons(clientWidth.Value);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+
+            void CalcMaxButtons(double width)
+            {
+                MaxButtons = Convert.ToInt32(Math.Floor((width - 96.0) / 42.0));
+                StateHasChanged();
             }
         }
 
@@ -128,7 +181,7 @@ namespace Masa.Blazor
             {
                 if (TotalVisible is null)
                 {
-                    return MaxButtons;
+                    return MaxButtons > 0 ? MaxButtons : Length;
                 }
 
                 return TotalVisible.ToInt32();
@@ -255,6 +308,18 @@ namespace Masa.Blazor
             if (OnInput.HasDelegate)
             {
                 await OnInput.InvokeAsync(item.AsT1);
+            }
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            try
+            {
+                await IntersectJSModule.UnobserveAsync(Ref);
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
     }

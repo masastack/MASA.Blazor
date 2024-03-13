@@ -8,7 +8,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool ChangeOnSelect { get; set; }
 
-        [Parameter, ApiDefaultValue(true)]
+        [Parameter, MasaApiParameter(true)]
         public bool ShowAllLevels { get; set; } = true;
 
         [Parameter, EditorRequired]
@@ -17,9 +17,10 @@ namespace Masa.Blazor
         [Parameter]
         public Func<TItem, Task>? LoadChildren { get; set; }
 
-        [Parameter, ApiDefaultValue(true)]
-        public override bool Outlined { get; set; } = true;
+        [Parameter]
+        public override bool Outlined { get; set; }
 
+        private double _right;
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
 
@@ -63,6 +64,10 @@ namespace Masa.Blazor
                     attrs[nameof(MMenu.OffsetY)] = true;
                     attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
+                    if (MasaBlazor.RTL)
+                    {
+                        attrs[nameof(MMenu.ContentStyle)] = $"right:{_right}px; left: unset;";
+                    }
                 })
                 .Apply(typeof(BCascaderColumn<,>), typeof(MCascaderColumn<TItem, TValue>), attrs =>
                 {
@@ -110,6 +115,29 @@ namespace Masa.Blazor
         protected override async Task OnMenuAfterShowContent(bool isLazyContent)
         {
             await base.OnMenuAfterShowContent(isLazyContent);
+
+            if (MasaBlazor.RTL && MMenu is not null)
+            {
+                var right = Document.DocumentElement.ClientWidth - MMenu.Dimensions.Activator.Right;
+
+                if (MMenu.NudgeLeft is not null)
+                {
+                    var (_, number) = MMenu.NudgeLeft.TryGetNumber();
+                    right -= number;
+                }
+
+                if (MMenu.NudgeRight != null)
+                {
+                    var (_, number) = MMenu.NudgeRight.TryGetNumber();
+                    right += number;
+                }
+
+                if (Math.Abs(_right - right) > 0.1)
+                {
+                    _right = right;
+                    StateHasChanged();
+                }
+            }
 
             await ScrollToInlineStartAsync();
 

@@ -9,24 +9,31 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons = MasaBlazorPreset.Icons;
     }
 
-    public bool RTL { get; set; }
-
     public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
 
-    internal Theme Theme { get; }
+    public bool RTL { get; set; }
 
     internal Breakpoint Breakpoint { get; }
 
     internal Icons Icons { get; }
 
-    public void ConfigureTheme(Action<Theme> configure)
-    {
-        configure.Invoke(Theme);
-    }
+    internal SSROptions? SSR { get; private set; }
 
-    public void ConfigureBreakpoint(Action<Breakpoint> configure)
+    internal Theme Theme { get; }
+
+    public void ConfigureBreakpoint(Action<BreakpointOptions> configure)
     {
-        configure.Invoke(Breakpoint);
+        var defaultBreakpointOptions = new BreakpointOptions()
+        {
+            MobileBreakpoint = MasaBlazorPreset.Breakpoint.MobileBreakpoint,
+            ScrollBarWidth = MasaBlazorPreset.Breakpoint.ScrollBarWidth,
+            Thresholds = MasaBlazorPreset.Breakpoint.Thresholds
+        };
+        configure.Invoke(defaultBreakpointOptions);
+
+        Breakpoint.MobileBreakpoint = defaultBreakpointOptions.MobileBreakpoint;
+        Breakpoint.ScrollBarWidth = defaultBreakpointOptions.ScrollBarWidth;
+        Breakpoint.Thresholds = defaultBreakpointOptions.Thresholds;
     }
 
     public void ConfigureIcons(IconSet defaultSet, Action<IconAliases>? aliasesConfigure = null)
@@ -35,10 +42,11 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.Aliases = defaultSet switch
         {
             IconSet.MaterialDesignIcons => new MaterialDesignIconsAliases(),
-            IconSet.MaterialDesign => new MaterialDesignAliases(),
-            IconSet.FontAwesome => new FontAwesomeAliases(),
-            IconSet.FontAwesome4 => new FontAwesome4Aliases(),
-            _ => throw new ArgumentOutOfRangeException(nameof(defaultSet), defaultSet, null)
+            IconSet.MaterialDesign      => new MaterialDesignAliases(),
+            IconSet.FontAwesome         => new FontAwesomeAliases(),
+            IconSet.FontAwesome4        => new FontAwesome4Aliases(),
+            IconSet.FontAwesome6        => new FontAwesome6Aliases(),
+            _                           => throw new ArgumentOutOfRangeException(nameof(defaultSet), defaultSet, null)
         };
 
         aliasesConfigure?.Invoke(Icons.Aliases);
@@ -49,5 +57,25 @@ public class MasaBlazorOptions : BlazorComponentOptions
         Icons.DefaultSet = null;
         Icons.Name = name;
         Icons.Aliases = aliases;
+    }
+
+    /// <summary>
+    /// Configure static SSR options, do not set this when use interactive at root.
+    /// </summary>
+    public void ConfigureSsr() => ConfigureSsr(_ => { });
+
+    /// <summary>
+    /// Configure static SSR options, do not set this when use interactive at root.
+    /// </summary>
+    /// <param name="configure"></param>
+    public void ConfigureSsr(Action<SSROptions> configure)
+    {
+        SSR = new SSROptions();
+        configure.Invoke(SSR);
+    }
+
+    public void ConfigureTheme(Action<Theme> configure)
+    {
+        configure.Invoke(Theme);
     }
 }

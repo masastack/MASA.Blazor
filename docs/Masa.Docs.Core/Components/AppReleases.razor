@@ -7,14 +7,14 @@
 {
     <div>
         <MAutocomplete @bind-Value="_search"
-                       Items="@ComputedReleases"
+                       Items="@_releases"
                        Dark
                        TItem="Release"
                        TItemValue="int"
                        TValue="int?"
                        ItemValue="r => r.Id"
                        ItemText="r => r.Name"
-                       Class="my-8"
+                       Class="mb-4"
                        HideDetails="true"
                        Dense
                        Flat
@@ -68,8 +68,12 @@
 
                 <MDivider />
 
-                <div class="pa-4">
-                    <MMarkdownIt Source="@_selected.Body" Scope="desc" Class="release-note"></MMarkdownIt>
+                <div class="pa-4" style="@MdStyle">
+                    <MMarkdownIt Source="@_selected.Body"
+                                 Scope="desc"
+                                 Class="release-note"
+                                 Linkify>
+                    </MMarkdownIt>
                 </div>
             }
         </MCard>
@@ -82,6 +86,9 @@ else
 
 @code {
 
+    [SupplyParameterFromQuery(Name = "v")]
+    [Parameter] public string? Version { get; set; }
+
     [Parameter, EditorRequired]
     public string? Owner { get; set; }
 
@@ -89,10 +96,10 @@ else
     public string? Repo { get; set; }
 
     [Parameter]
-    public bool IncludePrerelease { get; set; }
+    public bool Dark { get; set; }
 
     [Parameter]
-    public bool Dark { get; set; }
+    public bool IsIntro { get; set; }
 
     private bool _loading = true;
     private int? _search;
@@ -100,9 +107,9 @@ else
 
     private List<Release> _releases = new();
 
-    private List<Release> ComputedReleases => IncludePrerelease ? _releases : _releases.Where(r => r.Prerelease == false).ToList();
-
     private bool HasOwnerAndRepo => !string.IsNullOrWhiteSpace(Owner) && !string.IsNullOrWhiteSpace(Repo);
+
+    private string? MdStyle => IsIntro ? "max-height:400px; overflow-y: auto" : null;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -110,13 +117,27 @@ else
 
         if (firstRender && HasOwnerAndRepo)
         {
-            _releases = (await GithubService.FetchReleasesAsync(Owner!, Repo!)).ToList();
-            _selected = ComputedReleases.FirstOrDefault();
-            _search = _selected?.Id;
+            var releases = await GithubService.FetchReleasesAsync(Owner!, Repo!);
+            _releases = releases.Where(u => u.Prerelease == false).ToList();
+            UpdateSelected();
             _loading = false;
 
             StateHasChanged();
         }
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (HasOwnerAndRepo && _releases.Count > 0)
+        {
+            UpdateSelected();
+        }
+    }
+
+    private void UpdateSelected()
+    {
+        _selected = _releases.FirstOrDefault(u => u.Name == Version) ?? _releases.FirstOrDefault();
+        _search = _selected?.Id;
     }
 
 }

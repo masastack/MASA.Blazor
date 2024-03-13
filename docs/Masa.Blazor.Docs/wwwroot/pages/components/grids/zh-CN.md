@@ -14,6 +14,8 @@ related:
 Masa.Blazor 网格深受 [Bootstrap 网格](https://getbootstrap.com/docs/4.0/layout/grid/) 的启发。 它使用一系列的容器、行、列来整合内容的布局和排列。 如果你不熟悉
 flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background)，了解背景、术语、指南和代码片段。
 
+<masa-example file="Examples.components.grids.Usage"></masa-example>
+
 ## 子组件
 
 - **MContainer**：**MContainer** 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 `Fluid` 属性将容器在所有视口和设备尺寸上完全扩展。

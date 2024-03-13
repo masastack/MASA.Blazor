@@ -1,0 +1,45 @@
+﻿<MScrollToTarget ScrollContainerSelector="#scroll-to-target-chip-group-scroll"
+                 RootSelector="#scroll-to-target-chip-group"
+                 RootMarginTop="-50%"
+                 RootMarginBottom="-50%">
+    <MChipGroup Value="@context.ActiveTarget"
+                ActiveClass="primary--text">
+        @foreach (var item in _items)
+        {
+            <MScrollToTargetTrigger Target="@item" Context="triggerContext">
+                <MChip Outlined
+                       Value="@item"
+                       OnClick="@triggerContext.ScrollToTarget">
+                    @item
+                </MChip>
+            </MScrollToTargetTrigger>
+        }
+    </MChipGroup>
+    <div id="scroll-to-target-chip-group"
+         style="position: relative; height: 300px;"
+         class="d-flex flex-column overflow-hidden surface">
+        <div id="scroll-to-target-chip-group-scroll"
+             class="px-4"
+             style="flex: 1;overflow-y: scroll;">
+            @foreach (var item in _items)
+            {
+                <div id="@item"
+                     Class="d-flex justify-center align-center"
+                     style="border: 1px dashed; height: 100%; width: 100%">
+                    Content for @item
+                </div>
+            }
+        </div>
+    </div>
+</MScrollToTarget>
+
+@code {
+
+    private List<string> _items =
+    [
+        "chip-1",
+        "chip-2",
+        "chip-3"
+    ];
+
+}

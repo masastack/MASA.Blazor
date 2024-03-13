@@ -1,0 +1,90 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <span id="@Id"
+          class="@GetClass()"
+          style="@GetStyle()"
+          @ref="@Ref"
+          @attributes="@Attributes">
+        @if (Inline && Left)
+        {
+            @GenWrapper()
+            @ChildContent
+        }
+        else
+        {
+            @ChildContent
+            @GenWrapper()
+        }
+    </span>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenWrapper() => __builder =>
+    {
+        <span class="@_block.Element("wrapper")">
+            @GenBadge()
+        </span>
+    };
+
+    private RenderFragment GenBadge() => __builder =>
+    {
+        var noTransition = string.IsNullOrWhiteSpace(Transition);
+
+        var css = _block.Element("badge").AddBackgroundColor(Color).Build();
+        var style = StyleBuilder.Create()
+            .AddIf("bottom", ComputedBottom, !Inline)
+            .AddIf("left", ComputedLeft, !Inline)
+            .AddIf("right", ComputedRight, !Inline)
+            .AddIf("top", ComputedTop, !Inline)
+            .AddBackgroundColor(Color)
+            .AddIf("display", "none", noTransition && !Value)
+            .Build();
+
+        if (noTransition)
+        {
+            <span class="@css"
+                  style="@style">
+                @GenContent()
+            </span>
+        }
+        else
+        {
+            <Transition Name="@Transition">
+                <ShowTransitionElement Tag="span"
+                                       Value="@Value"
+                                       Class="@css"
+                                       Style="@style">
+                    @GenContent()
+                </ShowTransitionElement>
+            </Transition>
+        }
+    };
+
+    private RenderFragment GenContent() => __builder =>
+    {
+        if (Dot)
+        {
+            return;
+        }
+
+        if (BadgeContent != null)
+        {
+            @BadgeContent
+        }
+
+        if (Content != null)
+        {
+            @Content
+        }
+
+        if (!string.IsNullOrWhiteSpace(Icon))
+        {
+            <MIcon Icon="@Icon"/>
+        }
+    };
+
+}

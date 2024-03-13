@@ -1,16 +1,30 @@
 ﻿@inject MasaBlazor MasaBlazor
 @inject LocalStorage LocalStorage
 @inject IJSRuntime JSRuntime
+@implements IDisposable
 
 <AppTooltipButton Icon="@(MasaBlazor.Theme.Dark ? "mdi-weather-night" : "mdi-weather-sunny")"
                   Path="toggle-theme"
                   Class="mr-2 ml-2"
-                  OnClick="() => ToggleTheme(!MasaBlazor.Theme.Dark)">
+                  OnClick="@SwitchTheme">
 </AppTooltipButton>
 
 @code {
 
-    private void ToggleTheme(bool dark)
+    private DotNetObjectReference<ThemeToggle>? _objRef;
+
+    protected override void OnInitialized()
+    {
+        _objRef = DotNetObjectReference.Create(this);
+    }
+
+    public void SwitchTheme(MouseEventArgs e)
+    {
+        _ = JSRuntime.InvokeVoidAsync("switchTheme", _objRef, !MasaBlazor.Theme.Dark, e.ClientX, e.ClientY);
+    }
+
+    [JSInvokable]
+    public void ToggleTheme(bool dark)
     {
         if (dark == MasaBlazor.Theme.Dark)
         {
@@ -22,6 +36,11 @@
         _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
 
         _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
     }
 
 }

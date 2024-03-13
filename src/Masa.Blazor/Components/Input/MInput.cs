@@ -1,7 +1,13 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MInput<TValue> : BInput<TValue>, IThemeable
+    public partial class MInput<TValue> : BInput<TValue>, IThemeable, IFilterInput
     {
+        [Inject]
+        private I18n I18n { get; set; } = null!;
+
+        [CascadingParameter]
+        protected MInputsFilter? InputsFilter { get; set; }
+
         [Parameter]
         public string? Color { get; set; }
 
@@ -22,6 +28,47 @@
 
         [Parameter]
         public EventCallback<TValue> OnChange { get; set; }
+
+        /// <summary>
+        /// The required rule built-in.
+        /// </summary>
+        [Parameter]
+        public bool Required
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// The error message when the required rule is not satisfied.
+        /// </summary>
+        [Parameter, MasaApiParameter("$masaBlazor.required")]
+        public string RequiredMessage
+        {
+            get => _requiredMessage ?? I18n.T("$masaBlazor.required");
+            set => _requiredMessage = value;
+        }
+
+        #region built-in Required rule
+
+        private static readonly Func<TValue, bool> s_defaultRequiredRule = v =>
+        {
+            if (v == null)
+            {
+                return false;
+            }
+
+            if (v is string str)
+            {
+                return !string.IsNullOrWhiteSpace(str);
+            }
+
+            return true;
+        };
+
+        private string? _requiredMessage;
+
+        #endregion
 
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
 
@@ -57,17 +104,64 @@
 
         protected virtual bool IsDirty => Convert.ToString(LazyValue)?.Length > 0;
 
+        protected override IEnumerable<Func<TValue, StringBoolean>> InternalRules
+        {
+            get
+            {
+                if (Required)
+                {
+                    var rules = new List<Func<TValue, StringBoolean>>() { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
+                    return Rules is null ? rules : rules.Concat(Rules);
+                }
+
+                return Rules ?? Enumerable.Empty<Func<TValue, StringBoolean>>();
+            }
+        }
+
         public virtual bool IsLabelActive => IsDirty;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            if (InputsFilter != null)
+            {
+                InputsFilter.RegisterInput(this);
+                Dense = InputsFilter.Dense;
+                HideDetails = InputsFilter.HideDetails;
+            }
+        }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
-            watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+            watcher.Watch<bool>(nameof(Required), () =>
+            {
+                // waiting for InternalValue to be assigned
+                NextTick(InternalValidate);
+            }).Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
             {
                 // waiting for InternalValue to be assigned
                 NextTick(InternalValidate);
             });
         }
+
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
 
         protected override void SetComponentClass()
         {
@@ -88,7 +182,7 @@
                         .AddIf($"{prefix}--is-loading", () => Loading != false && Loading != null)
                         .AddIf($"{prefix}--is-readonly", () => IsReadonly)
                         .AddIf($"{prefix}--dense", () => Dense)
-                        .AddTheme(IsDark)
+                        .AddTheme(IsDark, IndependentTheme)
                         .AddTextColor(ValidationState);
                 }, styleBuilder =>
                 {
@@ -168,6 +262,21 @@
                     attrs[nameof(MIcon.Disabled)] = IsDisabled;
                     attrs[nameof(MIcon.Light)] = Light;
                 });
+        }
+
+        protected async Task TryInvokeFieldChangeOfInputsFilter(bool isClear = false)
+        {
+            if (InputsFilter is null)
+            {
+                return;
+            }
+
+            await InputsFilter.FieldChange(ValueIdentifier.FieldName, isClear);
+        }
+
+        public void ResetFilter()
+        {
+            Reset();
         }
     }
 }

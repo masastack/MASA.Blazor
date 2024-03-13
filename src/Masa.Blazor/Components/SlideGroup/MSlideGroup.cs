@@ -38,6 +38,11 @@
             ActiveClass ??= "m-slide-item--active";
             NextIcon ??= "$next";
             PrevIcon ??= "$prev";
+
+            if (MasaBlazor.RTL)
+            {
+                (NextIcon, PrevIcon) = (PrevIcon, NextIcon);
+            }
         }
 
         protected override void SetComponentClass()
@@ -70,10 +75,10 @@
                 .Apply<BIcon, MIcon>();
         }
 
-        protected override void Dispose(bool disposing)
+        protected override ValueTask DisposeAsyncCore()
         {
-            base.Dispose(disposing);
             MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
-        }
+            return base.DisposeAsyncCore();
+        } 
     }
 }

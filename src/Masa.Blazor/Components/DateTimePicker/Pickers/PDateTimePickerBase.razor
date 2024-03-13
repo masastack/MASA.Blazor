@@ -1,0 +1,64 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TValue
+@inherits PDateTimePickerView<TValue>
+
+@if (IsDialog)
+{
+    <MDialog Value="_menu"
+             ValueChanged="OnMenuChanged"
+             ActivatorContent="@ActivatorContent"
+             ContentClass="@Class">
+        <ChildContent>
+            @ViewContentRenderFragment()
+            @ActionsContentRenderFragment()
+        </ChildContent>
+    </MDialog>
+}
+else
+{
+    <MMenu Value="_menu"
+           ValueChanged="OnMenuChanged"
+           CloseOnContentClick="false"
+           OffsetY
+           NudgeBottom="1"
+           ActivatorContent="@ActivatorContent"
+           ContentClass="@Class">
+        <ChildContent>
+            @ViewContentRenderFragment()
+            @ActionsContentRenderFragment()
+        </ChildContent>
+    </MMenu>
+}
+
+@code {
+
+    protected virtual RenderFragment CompactPickerView() => __builder => { };
+    protected virtual RenderFragment DefaultPickerView() => __builder => { };
+
+    private RenderFragment ViewContentRenderFragment() => __builder =>
+    {
+        @if (IsCompact)
+        {
+            @CompactPickerView()
+        }
+        else
+        {
+            @DefaultPickerView()
+        }
+    };
+
+    private RenderFragment ActionsContentRenderFragment() => __builder =>
+    {
+        <MDivider />
+        <div class="@BasePickerBlock.Element("actions")">
+            <MButton Color="primary"
+                     Text
+                     OnClick="@HandleOnConfirm"
+                     Dark="@Dark"
+                     Light="@Light">
+                @I18n.T("$masaBlazor.ok")
+            </MButton>
+        </div>
+    };
+
+}

@@ -1,15 +1,35 @@
 ﻿using System.Text;
+using Masa.Blazor.Components.Image;
 
 namespace Masa.Blazor
 {
-    //Todo：Crossover mode to be perfected
-    public partial class MImage : MResponsive, IImage, IThemeable
+    public partial class MImage : MResponsive, IImage, IThemeable, IAsyncDisposable
     {
+        [Inject]
+        private IntersectJSModule IntersectJSModule { get; set; } = null!;
+
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         public bool Contain { get; set; }
 
         [Parameter]
-        public string? Src { get; set; }
+        public bool Eager { get; set; }
+
+        // TODO: support for string | SrcObject
+        [Parameter, EditorRequired]
+        public string? Src
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
+
+        // TODO: support for SrcSet and Sizes
+        // [Parameter]
+        // public string? Srcset { get; set; }
+
+        // [Parameter]
+        // public string Sizes { get; set; }
 
         [Parameter]
         public string? LazySrc { get; set; }
@@ -21,50 +41,133 @@ namespace Masa.Blazor
         public RenderFragment? PlaceholderContent { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("center center")]
+        [MasaApiParameter("center center")]
         public string? Position { get; set; } = "center center";
+
+        [Parameter]
+        [MasaApiParameter("fade-transition")]
+        public string? Transition { get; set; } = "fade-transition";
 
         private string? _currentSrc;
         private bool _isError = false;
 
         private StringNumber? _calculatedLazySrcAspectRatio;
-        private Dimensions? _dimensions;
+        private ImageDimensions? _dimensions;
 
         public bool IsLoading { get; private set; } = true;
+
+        public override StringNumber? ComputedAspectRatio => NormalisedSrc.Aspect ?? _calculatedLazySrcAspectRatio;
+
+        private SrcObject NormalisedSrc => new()
+        {
+            Src = Src,
+            LazySrc = LazySrc,
+            Aspect = AspectRatio
+        };
+
+        protected override void RegisterWatchers(PropertyWatcher watcher)
+        {
+            base.RegisterWatchers(watcher);
+
+            watcher.Watch<string>(nameof(Src), SrcChangeCallback);
+        }
+
+        private async void SrcChangeCallback()
+        {
+            IsLoading = string.IsNullOrWhiteSpace(Src);
+
+            if (!IsLoading)
+            {
+                await Init(true);
+            }
+            else
+            {
+                await LoadImageAsync();
+                await InvokeStateHasChangedAsync();
+            }
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (!string.IsNullOrEmpty(LazySrc) && IsLoading && _dimensions == null)
+            if (firstRender)
             {
-                var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, LazySrc);
-                await PollForSize(dimensions);
-                if (!dimensions.HasError && AspectRatio == null)
-                {
-                    AspectRatio = dimensions.Width / dimensions.Height;
-                    _calculatedLazySrcAspectRatio = AspectRatio;
-                }
+                await IntersectJSModule.ObserverAsync(Ref, e => Init(e.IsIntersecting), new IntersectionObserverInit(true));
 
-                await InvokeStateHasChangedAsync();
+                await Init();
+            }
+        }
+
+        private async Task<ImageDimensions> GetImageDimensionsAsync(string src)
+        {
+            return await JsInvokeAsync<ImageDimensions>(JsInteropConstants.GetImageDimensions, src);
+        }
+
+        private async Task Init(bool isIntersecting = false)
+        {
+            if (!isIntersecting && !Eager)
+            {
+                return;
             }
 
-            if (!string.IsNullOrEmpty(Src) && IsLoading && !_isError)
+            if (!string.IsNullOrEmpty(NormalisedSrc.LazySrc))
             {
-                var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, Src);
-                await PollForSize(dimensions);
-                _isError = dimensions.HasError;
-                if (!dimensions.HasError)
-                {
-                    IsLoading = false;
-                    if (AspectRatio == null || _calculatedLazySrcAspectRatio != null)
-                    {
-                        AspectRatio = dimensions.Width / dimensions.Height;
-                    }
-                }
-
-                await InvokeStateHasChangedAsync();
+                await PollForSize(NormalisedSrc.LazySrc, null);
+                await InvokeAsync(StateHasChanged);
             }
+
+            if (!string.IsNullOrEmpty(NormalisedSrc.Src))
+            {
+                await LoadImageAsync();
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+
+        private async Task LoadImageAsync()
+        {
+            _isError = false;
+            if (string.IsNullOrWhiteSpace(NormalisedSrc.Src))
+            {
+                _isError = true;
+            }
+            else
+            {
+                await PollForSize(NormalisedSrc.Src);
+                _isError = _dimensions == null || _dimensions.HasError;
+                if (!_isError)
+                {
+                    OnLoad();
+                }
+            }
+        }
+
+        private void OnLoad()
+        {
+            IsLoading = false;
+            if (_dimensions.Height != 0 & _dimensions.Width != 0)
+            {
+                _calculatedLazySrcAspectRatio = _dimensions.Width / _dimensions.Height;
+            }
+            else
+            {
+                _calculatedLazySrcAspectRatio = 1;
+            }
+        }
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
+            _currentSrc = Src;
         }
 
         protected override void SetComponentClass()
@@ -75,7 +178,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-image")
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 })
                 .Apply("image", cssBuilder =>
                 {
@@ -98,7 +201,6 @@ namespace Masa.Blazor
                 .Merge(typeof(BResponsiveBody<>), typeof(BImageBody<MImage>))
                 .Apply<BResponsive, MResponsive>(attrs =>
                 {
-                    attrs[nameof(_dimensions)] = _dimensions;
                     attrs[nameof(AspectRatio)] = AspectRatio;
                     attrs[nameof(ContentClass)] = ContentClass;
                     attrs[nameof(Height)] = Height;
@@ -138,21 +240,42 @@ namespace Masa.Blazor
             return stringBuilder.ToString();
         }
 
-        protected override void OnParametersSet()
+        private async Task PollForSize(string imgSrc, int? timeOut = 100)
         {
-            base.OnParametersSet();
+            while (true)
+            {
+                var dimensions = await GetImageDimensionsAsync(imgSrc);
 
-            _currentSrc = Src;
+                if (_dimensions != null)
+                {
+                    _dimensions.HasError = dimensions.HasError;
+                }
+
+                if (dimensions.Width != 0 || dimensions.Height != 0)
+                {
+                    _dimensions = dimensions;
+                    _calculatedLazySrcAspectRatio = dimensions.Width / dimensions.Height;
+                }
+                else if (IsLoading && !dimensions.HasError && timeOut != null)
+                {
+                    await Task.Delay(timeOut.Value);
+                    continue;
+                }
+
+                break;
+            }
         }
 
-        private async Task PollForSize(Dimensions dimensions, int? timeOut = 100)
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
-            if (IsLoading && !dimensions.HasError && timeOut != null)
+            try
             {
-                await Task.Delay(timeOut.Value);
+                await IntersectJSModule.UnobserveAsync(Ref);
             }
-
-            _dimensions = dimensions;
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

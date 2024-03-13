@@ -16,11 +16,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter]
-    [ApiDefaultValue("$dropdown")]
+    [MasaApiParameter("$dropdown")]
     public override string? AppendIcon { get; set; } = "$dropdown";
 
     [Parameter]
-    [ApiDefaultValue(false)]
+    [MasaApiParameter(false)]
     public StringBoolean? Attach { get; set; } = false;
 
     [Parameter]
@@ -45,7 +45,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     }
 
     [Parameter]
-    [ApiDefaultValue("primary")]
+    [MasaApiParameter("primary")]
     public string ItemColor { get; set; } = "primary";
 
     [Parameter]
@@ -83,7 +83,11 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     public string? NoDataText { get; set; }
 
     [Parameter]
+    [Obsolete("Use OnSelect instead.")]
     public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
+
+    [Parameter]
+    public EventCallback<(TItem Item, bool Selected)> OnSelect { get; set; }
 
     [Parameter]
     public RenderFragment? AppendItemContent { get; set; }
@@ -122,6 +126,9 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     private static Func<TItem, string?> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
 
     private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
+    
+    private bool _onClearInvoked;
+    private bool _onSelectItemInvoked;
 
     private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
@@ -256,7 +263,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         base.RegisterWatchers(watcher);
 
-        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true);
+        watcher.Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange(), immediate: true)
+               .Watch<bool>(nameof(IsMenuActive), IsMenuActiveChanged);
+    }
+
+    private async void IsMenuActiveChanged(bool val)
+    {
+        if (val) return;
+
+        if (_onSelectItemInvoked || _onClearInvoked)
+        {
+            await TryInvokeFieldChangeOfInputsFilter(isClear: _onClearInvoked);
+
+            _onClearInvoked = false;
+            _onSelectItemInvoked = false;
+        }
     }
 
     private void OnItemsChange()
@@ -344,7 +365,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             if (OutsideClickJSModule?.Initialized is true && MMenu!.ContentElement.Context is not null)
             {
-                _ = OutsideClickJSModule.UpdateDependentElements(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
+                _ = OutsideClickJSModule.UpdateDependentElementsAsync(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
             }
         }
 
@@ -359,7 +380,6 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         {
             return;
         }
-
 
         if (MMenu!.ContentElement.Context is null || !IsDirty) return;
 
@@ -402,7 +422,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
         IsMenuActive = true;
     }
+    
+    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
+#if NET8_0_OR_GREATER
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+        }
+#endif
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
@@ -416,7 +450,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
                     .AddIf("m-select--is-multi", () => Multiple)
                     .AddIf("m-select--chips", () => Chips)
                     .AddIf("m-select--chips--small", () => SmallChips)
-                    .AddTheme(IsDark);
+                    .AddTheme(IsDark, IndependentTheme);
             }, styleBuilder =>
             {
                 styleBuilder
@@ -585,6 +619,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
     {
+        _onSelectItemInvoked = true;
+
+        bool isSelected;
+
         var value = ItemValue(item);
         if (!Multiple)
         {
@@ -597,6 +635,8 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             {
                 IsMenuActive = false;
             }
+
+            isSelected = true;
         }
         else
         {
@@ -604,10 +644,12 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             if (internalValues.Contains(value))
             {
                 internalValues.Remove(value);
+                isSelected = false;
             }
             else
             {
                 internalValues.Add(value);
+                isSelected = true;
             }
 
             if (internalValues is TValue val)
@@ -629,22 +671,21 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             }
         }
 
-        if (OnSelectedItemUpdate.HasDelegate)
-        {
-            await OnSelectedItemUpdate.InvokeAsync(item);
-        }
+        _ = OnSelectedItemUpdate.InvokeAsync(item);
+
+        _ = OnSelect.InvokeAsync((item, isSelected));
     }
 
     public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
-        if (IsReadonly && args.Code != KeyCodes.Tab) return;
+        if (IsReadonly && args.Key != KeyCodes.Tab) return;
 
         if (OnKeyDown.HasDelegate)
         {
             await OnKeyDown.InvokeAsync(args);
         }
 
-        var keyCode = args.Code;
+        var keyCode = args.Key;
 
         // If menu is active, allow default
         // listIndex change from menu
@@ -906,12 +947,24 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
 
     public override async Task HandleOnClearClickAsync(MouseEventArgs args)
     {
-        await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
+        _onClearInvoked = true;
+        
+        var value = Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default;
+
+        await SetValue(value);
 
         if (OnClearClick.HasDelegate)
         {
             await OnClearClick.InvokeAsync(args);
         }
+
+        if (!IsMenuActive)
+        {
+            // invoke the field change event of inputs filter when the menu is not active
+            IsMenuActiveChanged(false);
+        }
+
+        await OnChange.InvokeAsync(value);
 
         await SetMenuIndex(-1);
 
@@ -937,10 +990,10 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
             i = ComputedItemsIfHideSelected.IndexOf(menuItem);
         }
 
-        if (i > -1)
+        if (i > -1 && MMenu?.ContentElement.TryGetSelector(out var selector) is true)
         {
             await JsInvokeAsync(JsInteropConstants.ScrollToTile,
-                MMenu!.ContentElement.GetSelector(),
+                selector,
                 TilesSelector,
                 i);
         }

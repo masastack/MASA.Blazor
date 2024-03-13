@@ -6,7 +6,7 @@ tag: "JS代理"
 
 ## 使用
 
-用前需要先引用ECharts的包：
+使用前需要先引用 ECharts 的包：
 
 ```html 
 <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>

@@ -1,0 +1,79 @@
+﻿@using System.Text
+@using BlazorComponent.I18n
+@using Masa.Blazor.Presets
+
+<MCheckbox @bind-Value="_outlined" Label="Outlined" HideDetails="true"></MCheckbox>
+<MCheckbox @bind-Value="_noTransition" Label="No transition" HideDetails="true"></MCheckbox>
+<MCheckbox @bind-Value="_minHeight" Label="MinHeight=400" HideDetails="true"></MCheckbox>
+
+<MDivider Class="my-4"></MDivider>
+
+<PCron @bind-Value="@_cronValue"
+       Class="mb-4"
+       MinHeight="@(_minHeight ? 400 : null)"
+       NoTransition="@_noTransition"
+       Outlined="@_outlined"
+       OnChange="GetNextTenRunTime">
+</PCron>
+
+<MTextField @bind-Value="_cronValue"
+            TValue="string"
+            OnInput="GetNextTenRunTime"
+            Label="Cron Expression"
+            Outlined
+            Dense>
+</MTextField>
+
+<MTextarea @bind-Value="_nextTenRunTime"
+           Readonly
+           Outlined
+           Rows="11"
+           Label="The next ten run time">
+</MTextarea>
+
+@code {
+
+    [Inject]
+    I18n i18n { get; set; }
+
+    [CascadingParameter(Name = "TimezoneOffset")]
+    public TimeSpan TimezoneOffset { get; set; }
+
+    bool _outlined;
+    bool _noTransition;
+    bool _minHeight;
+
+    string _cronValue = string.Empty;
+    string _nextTenRunTime = string.Empty;
+    StringBuilder sb = new();
+
+    private void GetNextTenRunTime()
+    {
+        sb.Clear();
+        _nextTenRunTime = string.Empty;
+
+        var startTime = DateTimeOffset.Now;
+
+        var cronExpression = new CronExpression(_cronValue);
+
+        var allTimeZone = TimeZoneInfo.GetSystemTimeZones();
+
+        var timezoneInfo = allTimeZone.FirstOrDefault(p => p.BaseUtcOffset == TimezoneOffset);
+
+        cronExpression.TimeZone = timezoneInfo;
+
+        for (int i = 0; i < 10; i++)
+        {
+            var nextExecuteTime = cronExpression.GetNextValidTimeAfter(startTime);
+
+            if (nextExecuteTime.HasValue)
+            {
+                startTime = nextExecuteTime.Value;
+                sb.AppendLine(startTime.ToOffset(TimezoneOffset).ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+        }
+
+        _nextTenRunTime = sb.Length == 0 ? "No more next run time" : sb.ToString();
+    }
+
+}

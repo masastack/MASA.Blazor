@@ -1,0 +1,73 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits BDomComponentBase
+
+<div class="@CssProvider.GetClass()"
+     style="@CssProvider.GetStyle()"
+     id="@Id"
+     @ref="Ref">
+    <MInputsFilter Dense="@Dense"
+                   HideDetails="@HideDetails"
+                   OnFieldChanged="@OnFieldChanged"
+                   @ref="_inputsFilter">
+        <div class="@CssProvider.GetClass("high-frequency")">
+            <div class="@CssProvider.GetClass("high-frequency-inputs")">
+                @HighFrequencyContent
+            </div>
+            <MSpacer />
+            <div class="@CssProvider.GetClass("high-frequency-actions")">
+                @if (ActionsContent is not null)
+                {
+                    @ActionsContent
+
+                    @if (!HideResetButton && !HideSearchButton)
+                    {
+                        <MDivider Vertical Class="ml-4 mr-2" />
+                    }
+                }
+
+                @if (!HideResetButton)
+                {
+                    <MButton Loading="_resetting"
+                             Icon
+                             OnClick="@HandleOnClear">
+                        <MIcon>mdi-reload</MIcon>
+                    </MButton>
+                }
+
+                @if (!HideSearchButton)
+                {
+                    <MButton Loading="_searching"
+                             Icon
+                             OnClick="@HandleOnSearch">
+                        <MIcon>mdi-magnify</MIcon>
+                    </MButton>
+                }
+
+                @if (LowFrequencyContent != null)
+                {
+                    @if (_expanded)
+                    {
+                        <MButton Icon OnClick="@HideLowFrequency">
+                            <MIcon>mdi-chevron-up</MIcon>
+                        </MButton>
+                    }
+                    else
+                    {
+                        <MButton Icon OnClick="@ShowLowFrequency">
+                            <MIcon>mdi-chevron-down</MIcon>
+                        </MButton>
+                    }
+                }
+            </div>
+        </div>
+
+        @if (LowFrequencyContent != null && _isBooted)
+        {
+            <div class="@CssProvider.GetClass("low-frequency")"
+                 style="@CssProvider.GetStyle("low-frequency")"
+                 @ref="_lowFrequencyRef">
+                @LowFrequencyContent
+            </div>
+        }
+    </MInputsFilter>
+</div>

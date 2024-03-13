@@ -5,12 +5,12 @@
    style="width: 100%; height:100%"
    href="/"
    @attributes="@Attributes">
-    <MImage Src="@($"https://cdn.masastack.com/images/logo-h-en{(IsDark ? "--dark" : "")}.png?x-oss-process=image/resize,w_180")"
+    <MImage Src="@($"https://cdn.masastack.com/images/logo-h-en{(IsDark ? "--dark" : "")}.png?x-oss-process=image/resize,w_360")"
             alt="@I18n.T("logo")"
             Class="shrink"
             MaxWidth="180"
-            Width="180"
-            Height="40"/>
+            Width="@("100%")"
+            Height="39"/>
 </a>
 
 @code {

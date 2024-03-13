@@ -1,0 +1,18 @@
+{
+  "props": {
+    "activeClass": "目标元素与视区相交时需要添加的类名，可以通过 context 获取",
+    "autoRootMargin": "是否自动计算 rootMargin",
+    "Offset": "滚动偏移量",
+    "RootMarginBottom": "根元素的底部边界",
+    "RootMarginLeft": "根元素的左边界",
+    "RootMarginRight": "根元素的右边界",
+    "RootMarginTop": "根元素的顶部边界",
+    "RootSelector": "根元素的选择器",
+    "ScrollContainerSelector": "滚动容器的选择器",
+    "Threshold": "交叉比例阈值",
+    "DisableIntersectAfterTriggering": "是否在点击触发后滚动时短暂禁用交叉激活"
+  },
+  "methods": {
+    "scrollToTarget": "滚动到目标元素，入参为目标元素的`id`"
+  }
+}

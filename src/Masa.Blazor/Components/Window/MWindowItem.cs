@@ -19,6 +19,8 @@ namespace Masa.Blazor
 
         private bool InTransition { get; set; }
 
+        protected override bool HasTransition => Transition != "" && ReverseTransition != "";
+
         protected override string? ComputedTransition
         {
             get

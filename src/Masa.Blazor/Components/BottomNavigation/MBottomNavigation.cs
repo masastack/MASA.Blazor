@@ -25,7 +25,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Grow { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(56)]
+    [MasaApiParameter(56)]
     public StringNumber? Height { get; set; } = 56;
 
     [Parameter]
@@ -59,7 +59,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public bool Shift { get; set; }
 
     [Parameter]
-    [ApiDefaultValue(true)]
+    [MasaApiParameter(true)]
     public bool InputValue { get; set; } = true;
 
     [Parameter]
@@ -207,7 +207,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         }
     }
 
-    public async ValueTask DisposeAsync()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try
         {
@@ -216,9 +216,9 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
                 await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
             }
         }
-        catch
+        catch (Exception)
         {
-            // nothing to do
+            // ignored
         }
     }
 }

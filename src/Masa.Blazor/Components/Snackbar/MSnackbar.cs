@@ -43,7 +43,7 @@ namespace Masa.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(5000)]
+        [MasaApiParameter(5000)]
         public int Timeout { get; set; } = 5000;
 
         [Parameter]
@@ -69,9 +69,20 @@ namespace Masa.Blazor
 
         private Timer? Timer { get; set; }
 
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
+
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
 
             Transition ??= "m-snack-transition";
 
@@ -123,7 +134,7 @@ namespace Masa.Blazor
                         .AddTextColor(Color, () => Text || Outlined)
                         .AddRounded(Rounded, Tile)
                         .AddElevation(Elevation)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder.AddBackgroundColor(Color);

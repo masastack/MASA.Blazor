@@ -28,19 +28,31 @@ namespace Masa.Blazor
         public bool ShowSize { get; set; }
 
         [Parameter]
-        [ApiDefaultValue("$file")]
+        [MasaApiParameter("$file")]
         public override string? PrependIcon { get; set; } = "$file";
 
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MasaApiParameter(true)]
         public override bool Clearable { get; set; } = true;
 
         [Parameter]
-        [ApiDefaultValue(22)]
+        [MasaApiParameter(22)]
         public StringNumber TruncateLength { get; set; } = 22;
 
         [Parameter]
         public string? Accept { get; set; }
+
+        /// <summary>
+        /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
+        /// </summary>
+        [MasaApiParameter(Ignored = true)]
+        public override bool UpdateOnChange { get; set; }
+
+        /// <summary>
+        /// Dot not use this parameter because it's inherited from MTextField and not supported in MFileInput.
+        /// </summary>
+        [MasaApiParameter(Ignored = true)]
+        public override bool UpdateOnBlur { get; set; }
 
         public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
@@ -118,6 +130,8 @@ namespace Masa.Blazor
 
         protected override bool IsDirty => Files.Count > 0;
 
+        public override bool HasPrependClick => true;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -135,11 +149,6 @@ namespace Masa.Blazor
             if (Multiple && typeof(TValue) != typeof(List<IBrowserFile>))
             {
                 throw new ArgumentException("Multiple TValue should be List<IBrowserFile>");
-            }
-
-            if (OnChange.HasDelegate)
-            {
-                ValueChanged = OnChange;
             }
         }
 
@@ -219,10 +228,9 @@ namespace Masa.Blazor
             }
         }
 
-        public override Task HandleOnInputAsync(ChangeEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
+        public override Task HandleOnInputAsync(ChangeEventArgs args) => Task.CompletedTask;
+
+        public override Task HandleOnChangeAsync(ChangeEventArgs args) => Task.CompletedTask;
 
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
@@ -241,7 +249,7 @@ namespace Masa.Blazor
             }
         }
 
-        public void HandleOnFileChange(InputFileChangeEventArgs args)
+        public async Task HandleOnFileChange(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -265,6 +273,9 @@ namespace Masa.Blazor
                     InternalValue = default;
                 }
             }
+
+            await OnInput.InvokeAsync(InternalValue);
+            await OnChange.InvokeAsync(InternalValue);
         }
 
         public override async Task HandleOnClickAsync(ExMouseEventArgs args)
@@ -306,10 +317,8 @@ namespace Masa.Blazor
                 InternalValue = default;
             }
 
-            if (OnClearClick.HasDelegate)
-            {
-                await OnClearClick.InvokeAsync(args);
-            }
+            await OnClearClick.InvokeAsync(args);
+            await OnChange.InvokeAsync(InternalValue);
         }
     }
 }

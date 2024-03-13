@@ -32,11 +32,11 @@ namespace Masa.Blazor
         public bool Top { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(4)]
+        [MasaApiParameter(4)]
         public StringNumber Height { get; set; } = 4;
 
         [Parameter]
-        [ApiDefaultValue(true)]
+        [MasaApiParameter(true)]
         public bool Active { get; set; } = true;
 
         [Parameter]
@@ -49,7 +49,7 @@ namespace Masa.Blazor
         public bool Stream { get; set; }
 
         [Parameter]
-        [ApiDefaultValue(100)]
+        [MasaApiParameter(100)]
         public double BufferValue { get; set; } = 100;
 
         [Parameter]
@@ -58,8 +58,12 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<double>? ChildContent { get; set; }
 
+        [Obsolete("Use ValueChanged instead.")]
         [Parameter]
         public EventCallback<double> OnChange { get; set; }
+
+        [Parameter] 
+        public EventCallback<double> ValueChanged { get; set; }
 
         private bool IsReversed => MasaBlazor.RTL != Reverse;
 
@@ -77,23 +81,46 @@ namespace Masa.Blazor
 
             var rect = await el.GetBoundingClientRectAsync();
 
-            //TODO this.internalValue = e.offsetX / width * 100
-            Value = args.OffsetX / rect.Width * 100;
-            Value = Math.Round(Value, 0);
+            var value = args.OffsetX / rect.Width * 100;
+            value = Math.Round(value, 0);
 
-            await OnChange.InvokeAsync(Value);
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
+            }
+
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
+            }
         }
 
-        protected bool Reactive => OnChange.HasDelegate;
+        protected bool Reactive => ValueChanged.HasDelegate || OnChange.HasDelegate;
 
         protected int NormalizedValue => NormalizeValue(Value);
 
         protected int NormalizedBuffer => NormalizeValue(BufferValue);
 
+        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
+#if NET8_0_OR_GREATER
+            if (MasaBlazor.IsSsr && !IndependentTheme)
+            {
+                CascadingIsDark = MasaBlazor.Theme.Dark;
+            }
+#endif
             if (string.IsNullOrWhiteSpace(Color))
             {
                 Color = "primary";
@@ -117,7 +144,7 @@ namespace Masa.Blazor
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--striped", () => Striped)
                         .AddIf($"{prefix}--visible", () => IsVisible)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
                     styleBuilder

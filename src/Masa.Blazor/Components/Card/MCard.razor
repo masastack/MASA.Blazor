@@ -1,0 +1,27 @@
+﻿@namespace Masa.Blazor
+@inherits MSheet
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenBody() => __builder =>
+    {
+        @GenProgress()
+        @ChildContent
+    };
+
+    private RenderFragment GenProgress() => __builder =>
+    {
+        var progress = RenderFragments.GenProgress(this);
+        if (progress is null)
+        {
+            return;
+        }
+
+        <div class="@_block.Element("progress")">
+            @progress
+        </div>
+    };
+
+}

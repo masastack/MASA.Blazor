@@ -2,17 +2,24 @@
 @layout BaseLayout
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
+@inject NavigationManager NavigationManager
 
-<NavDrawer Value="_showDrawer"
-           ValueChanged="OnNavDrawerValueChanged"
+<NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL" />
 
-<MMain>@Body</MMain>
+<MScrollToTarget RootMarginTop="@($"-{Offset + 4}px")"
+                 AutoRootMargin="AutoRootMargin.Bottom"
+                 Offset="@Offset">
+    <MMain Class="doc-main">
+        @Body
+    </MMain>
 
-<Toc RTL="@MasaBlazor.RTL" />
+    <Toc RTL="@MasaBlazor.RTL"
+         ActiveItem="@context.ActiveTarget" />
+</MScrollToTarget>
 
 <FabTransition>
-    <MButton Show="_showBackTop" Large Fab Class="bottom-btn transition-swing" Color="primary" OnClick="ToTopAsync">
+    <MButton Show="_showBackTop" Large Fab Fixed Bottom Right Class="transition-swing" Color="primary" OnClick="ToTopAsync">
         <MIcon>mdi-chevron-up</MIcon>
     </MButton>
 </FabTransition>
@@ -31,11 +38,13 @@
     private bool? _showDrawer;
     private bool _showBackTop;
 
+    private int Offset => AppService.AppBarHeight + 12;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        BaseLayout.OnAppBarNavIconClick = EventCallback.Factory.Create<bool?>(this, val => { _showDrawer = val; });
+        BaseLayout.OnAppBarNavIconClick = () => _showDrawer = !_showDrawer;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -48,12 +57,6 @@
         {
             await Js.AddHtmlElementEventListener("window", "scroll", OnScroll, false, new EventListenerExtras(0, 100));
         }
-    }
-
-    private void OnNavDrawerValueChanged(bool? val)
-    {
-        _showDrawer = val;
-        BaseLayout.ShowDrawer = val;
     }
 
     private async Task OnScroll()
