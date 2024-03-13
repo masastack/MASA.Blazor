@@ -9,8 +9,6 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddMasaBlazor();
 builder.Services.AddHttpClient();
 
-builder.Services.TryAddTransient<TransitionJSModule>();
-
 builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 var app = builder.Build();

@@ -94,10 +94,10 @@ public class MKeyTransitionElement : MTransitionElementBase<string>
     {
         return builder =>
         {
-            var sequence = 0;
-            builder.OpenComponent<Container>(sequence++);
-            builder.AddAttribute(sequence++, nameof(Container.Value), EqualityComparer<string>.Default.Equals(state.Key, Value));
-            builder.AddAttribute(sequence, nameof(ChildContent), ChildContent);
+            builder.OpenComponent<ShouldRenderContainer>(0);
+            builder.AddAttribute(1, nameof(ShouldRenderContainer.Value),
+                EqualityComparer<string>.Default.Equals(state.Key, Value));
+            builder.AddAttribute(2, nameof(ChildContent), ChildContent);
             builder.SetKey(state.Key);
             builder.CloseComponent();
         };
