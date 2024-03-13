@@ -8,6 +8,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public DrawflowEditorMode Mode { get; set; }
 
+    [Parameter] public string? Data { get; set; }
     [Parameter] public EventCallback<string> OnNodeCreated { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeRemoved { get; set; }
@@ -17,6 +18,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
     [Parameter] public EventCallback<string> OnNodeUnselected { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
+    [Parameter]public EventCallback LoadData { get; set; }
 
     [Parameter] public EventCallback OnImport { get; set; }
 
@@ -45,6 +47,16 @@ public class MDrawflow : MDrop, IAsyncDisposable
         { 
             _interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
             _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, _interopHandleReference, Mode);
+
+            if (LoadData.HasDelegate)
+            {
+                await LoadData.InvokeAsync();
+            }
+
+            if (!string.IsNullOrEmpty(Data))
+            {
+                await _drawflowProxy!.ImportAsync(Data);
+            }
         }
     }
 
