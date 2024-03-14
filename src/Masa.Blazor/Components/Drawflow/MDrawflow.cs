@@ -8,7 +8,8 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public DrawflowEditorMode Mode { get; set; }
 
-    [Parameter] public string? Data { get; set; }
+    [Parameter] public Func<string>? DataInitializer { get; set; }
+
     [Parameter] public EventCallback<string> OnNodeCreated { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeRemoved { get; set; }
@@ -18,13 +19,13 @@ public class MDrawflow : MDrop, IAsyncDisposable
     [Parameter] public EventCallback<string> OnNodeUnselected { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
-    [Parameter]public EventCallback LoadData { get; set; }
 
     [Parameter] public EventCallback OnImport { get; set; }
 
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
     private DotNetObjectReference<object>? _interopHandleReference;
+    private string? _data;
 
     protected override string ClassString => new Block("m-drawflow").Modifier(Mode, "mode").AddClass(base.ClassString).Build();
 
@@ -37,6 +38,11 @@ public class MDrawflow : MDrop, IAsyncDisposable
             _prevMode = Mode;
             _drawflowProxy?.SetMode(Mode);
         }
+
+        if (DataInitializer != null)
+        {
+            _data = DataInitializer.Invoke();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -47,15 +53,10 @@ public class MDrawflow : MDrop, IAsyncDisposable
         { 
             _interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
             _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, _interopHandleReference, Mode);
-
-            if (LoadData.HasDelegate)
+            
+            if (!string.IsNullOrEmpty(_data))
             {
-                await LoadData.InvokeAsync();
-            }
-
-            if (!string.IsNullOrEmpty(Data))
-            {
-                await _drawflowProxy!.ImportAsync(Data);
+                await _drawflowProxy!.ImportAsync(_data);
             }
         }
     }
