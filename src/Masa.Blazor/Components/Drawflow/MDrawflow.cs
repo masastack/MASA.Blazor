@@ -39,10 +39,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
             _drawflowProxy?.SetMode(Mode);
         }
 
-        if (DataInitializer != null)
-        {
-            _data = await DataInitializer.Invoke();
-        }
+        
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -53,7 +50,12 @@ public class MDrawflow : MDrop, IAsyncDisposable
         { 
             _interopHandleReference = DotNetObjectReference.Create<object>(new DrawflowInteropHandle(this));
             _drawflowProxy = await DrawflowJSModule.Init(ElementReference.GetSelector()!, _interopHandleReference, Mode);
-            
+
+            if (DataInitializer != null)
+            {
+                _data = await DataInitializer.Invoke();
+            }
+
             if (!string.IsNullOrEmpty(_data))
             {
                 await _drawflowProxy!.ImportAsync(_data);
