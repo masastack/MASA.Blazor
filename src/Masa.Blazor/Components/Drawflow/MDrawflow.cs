@@ -8,7 +8,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public DrawflowEditorMode Mode { get; set; }
 
-    [Parameter] public Func<string>? DataInitializer { get; set; }
+    [Parameter] public Func<Task<string>>? DataInitializer { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeCreated { get; set; }
 
@@ -41,7 +41,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
         if (DataInitializer != null)
         {
-            _data = DataInitializer.Invoke();
+            _data = await DataInitializer.Invoke();
         }
     }
 
