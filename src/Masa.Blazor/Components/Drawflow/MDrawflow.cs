@@ -8,7 +8,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public DrawflowEditorMode Mode { get; set; }
 
-    [Parameter] public Func<Task<string>>? DataInitializer { get; set; }
+    [Parameter] public Func<ValueTask<string>>? DataInitializer { get; set; }
 
     [Parameter] public EventCallback<string> OnNodeCreated { get; set; }
 
@@ -25,7 +25,6 @@ public class MDrawflow : MDrop, IAsyncDisposable
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
     private DotNetObjectReference<object>? _interopHandleReference;
-    private string? _data;
 
     protected override string ClassString => new Block("m-drawflow").Modifier(Mode, "mode").AddClass(base.ClassString).Build();
 
@@ -53,13 +52,15 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
             if (DataInitializer != null)
             {
-                _data = await DataInitializer.Invoke();
+                 var data = await DataInitializer.Invoke();
+
+                 if (!string.IsNullOrWhiteSpace(data))
+                 {
+                     await _drawflowProxy!.ImportAsync(data);
+                 }
             }
 
-            if (!string.IsNullOrEmpty(_data))
-            {
-                await _drawflowProxy!.ImportAsync(_data);
-            }
+            
         }
     }
 
