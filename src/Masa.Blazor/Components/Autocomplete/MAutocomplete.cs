@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Infrastructure;
-using Microsoft.AspNetCore.Components.Web;
-using OneOf.Types;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>, IAutocomplete<TItem, TItemValue, TValue>
     {
@@ -198,8 +194,6 @@ namespace Masa.Blazor
             {
                 await DeleteCurrentItem();
             }
-
-            ValueChangedInternally = true;
 
             InternalSearch = value;
 
