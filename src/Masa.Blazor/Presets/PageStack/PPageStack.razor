@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Blazor.Presets
 @using Microsoft.AspNetCore.Components.Routing
-@using Masa.Blazor.Presets.PageContainer
+@using Masa.Blazor.Presets.PageStack
 @inherits PatternPathComponentBase
 
 <PPageContainer IncludePatterns="TabbedPatterns"
@@ -9,20 +9,19 @@
     @ChildContent
 </PPageContainer>
 
-@foreach (var path in _stackPatternPaths.OrderBy(u => u.CreatedAt))
-{
-    <MDialog Transition="dialog-right-transition"
-             Value="@path.Active"
-             Fullscreen
-             @key="path.Pattern">
-        <PPageContainerItem Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">
-            <MButton Icon OnClick="@HandleOnPrevious">
-                <MIcon>$goBack</MIcon>
-            </MButton>
+<CascadingValue Value="this" IsFixed>
+    @foreach (var path in _stackPatternPaths.OrderBy(u => u.CreatedAt))
+    {
+        <PPageStackItem Active="@path.Active"
+                        Class="@Class"
+                        Style="@Style"
+                        CanRender="@(path.Pattern == GetCurrentPatternPath().Pattern)"
+                        OnGoBack="@HandleOnPrevious"
+                        @key="@path.Pattern">
             @ChildContent
-        </PPageContainerItem>
-    </MDialog>
-}
+        </PPageStackItem>
+    }
+</CascadingValue>
 
 @code {
 
@@ -164,12 +163,15 @@
     {
         _locationChangedByUserClick = true;
 
-        // var uriNavigateTo = _stackPatternPaths.Count > 1 ? _stackPatternPaths.ElementAt(1).AbsolutePath : _latestTabPath ?? "/";
-        // NavigationManager.Replace(uriNavigateTo);
-
         Js.InvokeVoidAsync(JsInteropConstants.HistoryBack);
 
         CloseTopPageOfStack();
+    }
+
+    [MasaApiPublicMethod]
+    public void GoBack()
+    {
+        HandleOnPrevious();
     }
 
     private void CloseTopPageOfStack()

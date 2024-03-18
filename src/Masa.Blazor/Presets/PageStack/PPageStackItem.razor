@@ -1,0 +1,66 @@
+﻿@namespace Masa.Blazor.Presets.PageStack
+
+<MDialog Transition="dialog-right-transition"
+         Value="@Active"
+         ContentClass="@Class"
+         ContentStyle="@Style"
+         Fullscreen
+         Scrollable>
+    <BShouldRender Value="@CanRender">
+        <CascadingValue Value="this" IsFixed>
+            <MAppBar Class="@AppBarClass"
+                     Style="@AppBarStyle"
+                     Fixed
+                     Elevation="0"
+                     Color="@AppBarColor">
+                @if (AppBarContent is not null)
+                {
+                    @AppBarContent.Invoke(new PageStackGoBackContext(null, HandleOnGoBack))
+                }
+                else
+                {
+                    <MButton Icon OnClick="@OnGoBack">
+                        <MIcon>$goBack</MIcon>
+                    </MButton>
+
+                    <MAppBarTitle>
+                        @AppBarTitle
+                    </MAppBarTitle>
+                }
+            </MAppBar>
+            <div class="@ContentClass"
+                 style="@ContentStyle; padding-top: 64px;">
+                @ChildContent
+            </div>
+        </CascadingValue>
+    </BShouldRender>
+</MDialog>
+
+@code {
+
+    [Parameter] public bool Active { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool CanRender { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+
+    [Parameter] public string? Style { get; set; }
+
+    [Parameter] public EventCallback OnGoBack { get; set; }
+
+    internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
+    internal string? AppBarColor { get; set; }
+    internal string? AppBarClass { get; set; }
+    internal string? AppBarStyle { get; set; }
+    internal string? AppBarTitle { get; set; }
+    internal string? ContentClass { get; set; }
+    internal string? ContentStyle { get; set; }
+
+    private async Task HandleOnGoBack()
+    {
+        await OnGoBack.InvokeAsync();
+    }
+
+}
