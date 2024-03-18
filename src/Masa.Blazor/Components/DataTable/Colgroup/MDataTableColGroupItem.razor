@@ -29,7 +29,8 @@
 
     private async Task OnResizeAsync()
     {
-        Header.RealWidth = await JS.InvokeAsync<double>(JsInteropConstants.GetProp, _el, "offsetWidth");
+        var rect = await JS.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, _el);
+        Header.RealWidth = rect.Width;
         await SimpleTable.DebounceRenderForColResizeAsync();
     }
 
