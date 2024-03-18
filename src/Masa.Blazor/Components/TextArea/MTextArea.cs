@@ -68,11 +68,6 @@ namespace Masa.Blazor
                 .Watch<bool>(nameof(RowHeight), ReCalculateInputHeight);
         }
 
-        protected override void OnLazyValueChange(string? val)
-        {
-            ReCalculateInputHeight();
-        }
-
         private void ReCalculateInputHeight()
         {
             if (AutoGrow)

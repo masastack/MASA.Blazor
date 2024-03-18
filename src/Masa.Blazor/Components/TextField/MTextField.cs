@@ -170,7 +170,7 @@ namespace Masa.Blazor
 
         public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
 
-        protected override bool IsDirty => Convert.ToString(LazyValue).Length > 0 || _badInput;
+        protected override bool IsDirty => base.IsDirty || _badInput;
 
         public override int InternalDebounceInterval => DebounceInterval;
 
@@ -723,22 +723,21 @@ namespace Masa.Blazor
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                InternalValue = checkValue;
-                await SetValueByJsInterop(Formatter(checkValue));
+                UpdateInternalValue(checkValue, InternalValueChangeType.InternalOperation);
             }
         }
 
         public override Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            return OnValueChangedAsync(args, OnInput);
+            return HandleOnInputOrChangeEvent(args, OnInput);
         }
 
         public override Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            return OnValueChangedAsync(args, OnChange);
+            return HandleOnInputOrChangeEvent(args, OnChange);
         }
 
-        private async Task OnValueChangedAsync(ChangeEventArgs args, EventCallback<TValue> cb,
+        private async Task HandleOnInputOrChangeEvent(ChangeEventArgs args, EventCallback<TValue> cb,
             [CallerArgumentExpression("cb")] string cbName = "")
         {
             var originValue = args.Value?.ToString();
@@ -750,7 +749,6 @@ namespace Masa.Blazor
             if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
             {
                 UpdateValue(originValue, succeed, result);
-
                 StateHasChanged();
             }
 
@@ -779,16 +777,12 @@ namespace Masa.Blazor
             if (succeeded)
             {
                 _badInput = false;
-
-                ValueChangedInternally = true;
-
-                InternalValue = convertedValue;
+                UpdateInternalValue(convertedValue, InternalValueChangeType.Input);
             }
             else
             {
                 _badInput = true;
-
-                InternalValue = default;
+                UpdateInternalValue(default, InternalValueChangeType.Input);
 
                 if (Type.ToLower() == "number")
                 {
@@ -848,7 +842,7 @@ namespace Masa.Blazor
 
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
-                    InternalValue = internalValue;
+                    UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
 
                     await OnChange.InvokeAsync(internalValue);
                 }
@@ -875,7 +869,7 @@ namespace Masa.Blazor
 
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
-                    InternalValue = internalValue;
+                    UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
 
                     await OnChange.InvokeAsync(internalValue);
                 }
@@ -919,7 +913,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            InternalValue = default;
+            UpdateInternalValue(default, InternalValueChangeType.InternalOperation);
 
             if (OnClearClick.HasDelegate)
             {

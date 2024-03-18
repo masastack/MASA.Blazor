@@ -102,7 +102,7 @@
             }
         }
 
-        protected virtual bool IsDirty => Convert.ToString(LazyValue)?.Length > 0;
+        protected virtual bool IsDirty => Convert.ToString(InternalValue)?.Length > 0;
 
         protected override IEnumerable<Func<TValue, StringBoolean>> InternalRules
         {

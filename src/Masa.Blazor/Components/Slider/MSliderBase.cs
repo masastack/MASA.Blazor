@@ -262,8 +262,6 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         {
             InternalValue = roundedVal;
         }
-
-        LazyValue = roundedVal;
     }
 
     protected static T ConvertDoubleToTValue<T>(double val)
