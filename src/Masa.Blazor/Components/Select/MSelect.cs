@@ -755,8 +755,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
         }
         else if (code == KeyCodes.Enter && MenuListIndex != -1)
         {
-            var item = ComputedItemsIfHideSelected.ElementAtOrDefault(MenuListIndex);
-            await SelectItem(item);
+            await SelectItemByIndex(MenuListIndex);
         }
 
         await SetMenuIndex(MenuListIndex);
@@ -1066,7 +1065,7 @@ public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TI
     {
         if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
         {
-            InternalValue = value;
+            UpdateInternalValue(value, InternalValueChangeType.InternalOperation);
             if (OnChange.HasDelegate)
             {
                 await OnChange.InvokeAsync(value);
