@@ -232,7 +232,7 @@ public partial class PPageTabs : PatternPathComponentBase
             }
         }
 
-        if (!PatternPaths.Contains(currentPatternPath))
+        if (!PatternPaths.Any(p => p.Pattern == currentPatternPath.Pattern))
         {
             PatternPaths.Add(currentPatternPath);
         }
