@@ -75,7 +75,7 @@ public partial class MSelectable<TValue> : MInput<TValue>, ISelectable<TValue> w
 
         Validate(input);
 
-        InternalValue = input;
+        UpdateInternalValue(input, InternalValueChangeType.InternalOperation);
 
         await TryInvokeFieldChangeOfInputsFilter();
     }

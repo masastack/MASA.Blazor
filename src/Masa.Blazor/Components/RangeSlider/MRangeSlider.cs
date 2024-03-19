@@ -17,9 +17,8 @@ namespace Masa.Blazor
             get { return DoubleInternalValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList(); }
         }
 
-        protected IList<double> DoubleInternalValues => InternalValue?.Select(item => (double)(dynamic)item).ToList() ?? new List<double>();
-
-        protected override IList<TValue>? LazyValue { get; set; } = new List<TValue>() { default, default };
+        protected IList<double> DoubleInternalValues =>
+            InternalValue?.Select(item => (double)(dynamic)item).ToList() ?? new List<double>();
 
         protected int? ActiveThumb { get; set; }
 
@@ -27,7 +26,7 @@ namespace Masa.Blazor
         {
             get
             {
-                if (InternalValue is { Count: 2 } &&  ActiveThumb.HasValue)
+                if (InternalValue is { Count: 2 } && ActiveThumb.HasValue)
                 {
                     return (double)(dynamic)InternalValue[ActiveThumb.Value];
                 }
@@ -106,7 +105,7 @@ namespace Masa.Blazor
                 val = new List<double> { val[1], val[0] };
             }
 
-            InternalValue = val.Select(item => (TValue)Convert.ChangeType(item, typeof(TValue))).ToList();
+            UpdateInternalValue(val.Select(item => (TValue)Convert.ChangeType(item, typeof(TValue))).ToList(), InternalValueChangeType.InternalOperation);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -127,7 +126,8 @@ namespace Masa.Blazor
 
         public override async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
         {
-            var value = await ParseMouseMoveAsync(new MouseEventArgs() { ClientX = args.Touches[0].ClientX, ClientY = args.Touches[0].ClientY });
+            var value = await ParseMouseMoveAsync(new MouseEventArgs()
+                { ClientX = args.Touches[0].ClientX, ClientY = args.Touches[0].ClientY });
             await ReevaluateSelectedAsync(value);
             await base.HandleOnTouchStartAsync(args);
         }
@@ -184,19 +184,24 @@ namespace Masa.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
+        protected override IList<TValue> InternalValue
+        {
+            get => GetValue((IList<TValue>)new List<TValue>() { default, default });
+            set => SetValue(value); // TODO: need to deep clone?
+        }
+
         protected override void OnValueChanged(IList<TValue>? val)
         {
             val ??= new List<TValue>() { default, default };
 
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
-            var roundedVal = val.Select(v => ConvertDoubleToTValue<TValue>(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
+            var roundedVal = val.Select(v =>
+                ConvertDoubleToTValue<TValue>(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
             if (InternalValue != null && !ListComparer.Equals(roundedVal, InternalValue))
             {
                 InternalValue = roundedVal;
             }
-
-            LazyValue = roundedVal;
         }
 
         protected override void SetComponentClass()
@@ -231,7 +236,8 @@ namespace Masa.Blazor
                     }
                     else if (index == 1)
                     {
-                        GetTrackStyle(styleBuilder, InputWidths[0], Math.Abs(InputWidths[1] - InputWidths[0]), padding, padding * -2);
+                        GetTrackStyle(styleBuilder, InputWidths[0], Math.Abs(InputWidths[1] - InputWidths[0]), padding,
+                            padding * -2);
                     }
                     else
                     {
@@ -243,7 +249,8 @@ namespace Masa.Blazor
                 .ApplyRangeSliderDefault<TValue>();
         }
 
-        private void GetTrackStyle(StyleBuilder styleBuilder, double startLength, double endLength, double startPadding = 0, double endPadding = 0)
+        private void GetTrackStyle(StyleBuilder styleBuilder, double startLength, double endLength,
+            double startPadding = 0, double endPadding = 0)
         {
             var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
             var endDir = Vertical ? "height" : "width";
