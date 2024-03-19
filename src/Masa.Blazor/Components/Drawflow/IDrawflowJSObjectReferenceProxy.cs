@@ -45,4 +45,8 @@ public interface IDrawflow
     Task FocusNodeAsync(string nodeId);
 
     Task CenterNodeAsync(string nodeId, bool animate);
+
+    Task UpdateConnectionNodesAsync(string nodeId);
+
+    Task RemoveConnectionNodeIdAsync(string nodeId);
 }

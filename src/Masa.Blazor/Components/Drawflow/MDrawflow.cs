@@ -187,6 +187,20 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.CenterNodeAsync(nodeId, animate).ConfigureAwait(false);
     }
 
+    public async Task UpdateConnectionNodesAsync(string nodeId)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.UpdateConnectionNodesAsync(nodeId).ConfigureAwait(false);
+    }
+
+    public async Task RemoveConnectionNodeIdAsync(string nodeId)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.RemoveConnectionNodeIdAsync(nodeId).ConfigureAwait(false);
+    }
+
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         try

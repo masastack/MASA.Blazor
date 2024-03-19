@@ -101,6 +101,16 @@ public class DrawflowJSObjectReferenceProxy : JSObjectReferenceProxy, IDrawflowJ
     {
         await InvokeVoidAsync("centerNode", nodeId, animate);
     }
+
+    public async Task UpdateConnectionNodesAsync(string nodeId)
+    {
+        await InvokeVoidAsync("updateConnectionNodes", nodeId);
+    }
+
+    public async Task RemoveConnectionNodeIdAsync(string nodeId)
+    {
+        await InvokeVoidAsync("removeConnectionNodeId", nodeId);
+    }
 }
 
 public enum DrawflowEditorMode
