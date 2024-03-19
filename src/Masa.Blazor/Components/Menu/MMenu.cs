@@ -13,27 +13,22 @@ namespace Masa.Blazor
         public override IEnumerable<string> DependentSelectors
             => base.DependentSelectors.Concat(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR }).Distinct();
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            Transition ??= "m-menu-transition";
-            Origin ??= "top left";
-        }
-
         private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-#if NET8_0_OR_GREATER
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
+
+            Transition ??= "m-menu-transition";
+            Origin ??= "top left";
+#if NET8_0_OR_GREATER
 
             if (MasaBlazor.IsSsr && !IndependentTheme)
             {
                 CascadingIsDark = MasaBlazor.Theme.Dark;
             }
-        }
 #endif
+        }
 
         protected override void SetComponentClass()
         {

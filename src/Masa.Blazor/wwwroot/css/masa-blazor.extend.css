@@ -6,11 +6,6 @@
     color-scheme: dark;
 }
 
-/* fixed-right in datatable */
-.m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th {
-    z-index: 2 !important;
-}
-
 /* fixed in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper):not(.m-data-table__selected),
 .theme--light.m-data-table > .m-data-table__wrapper > table > thead > tr {
@@ -91,6 +86,10 @@
 
 .theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
     background: #212121;
+}
+
+.m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th.m-data-table__column--fixed-left {
+    z-index: 3;
 }
 
 /* resizable in datatable */
