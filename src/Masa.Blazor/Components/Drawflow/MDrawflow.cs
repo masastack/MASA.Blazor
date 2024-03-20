@@ -187,6 +187,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.CenterNodeAsync(nodeId, animate).ConfigureAwait(false);
     }
 
+    [MasaApiPublicMethod]
     public async Task UpdateConnectionNodesAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
@@ -194,6 +195,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
         await _drawflowProxy.UpdateConnectionNodesAsync(nodeId).ConfigureAwait(false);
     }
 
+    [MasaApiPublicMethod]
     public async Task RemoveConnectionNodeIdAsync(string nodeId)
     {
         if (_drawflowProxy == null) return;
