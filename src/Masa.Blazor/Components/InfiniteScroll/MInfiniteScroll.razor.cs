@@ -10,7 +10,8 @@ public partial class MInfiniteScroll : BDomComponentBase
     /// The parent element that has overflow style.
     /// </summary>
     [Parameter, EditorRequired]
-    public OneOf<ElementReference, string>? Parent { get; set; }
+    [MasaApiParameter("window")]
+    public OneOf<ElementReference, string>? Parent { get; set; } = "window";
 
     [Parameter] public string? Color { get; set; }
 
@@ -43,6 +44,7 @@ public partial class MInfiniteScroll : BDomComponentBase
     [Parameter] public RenderFragment<Func<Task>>? LoadMoreContent { get; set; }
 
     private bool _isAttached;
+    private bool _isFirstLoad = true;
     private string? _parentSelector;
     private InfiniteScrollLoadStatus _loadStatus;
 
@@ -69,11 +71,11 @@ public partial class MInfiniteScroll : BDomComponentBase
         watcher.Watch<bool>(nameof(Manual), ManualChangeCallback);
     }
 
-    private async void ManualChangeCallback(bool val)
+    private void ManualChangeCallback(bool val)
     {
         if (val)
         {
-            await AddScrollListener();
+            AddScrollListener();
         }
     }
 
@@ -83,10 +85,30 @@ public partial class MInfiniteScroll : BDomComponentBase
 
         if (firstRender)
         {
-            await DoLoadMore();
+            ResolveParentSelect();
+            _isFirstLoad = false;
+            AddScrollListener();
+            await ScrollCallback();
+        }
+    }
 
-            NextTick(async () => { await AddScrollListener(); });
-            StateHasChanged();
+    private void ResolveParentSelect()
+    {
+        if (Parent.HasValue)
+        {
+            if (Parent.Value.IsT0)
+            {
+                _parentSelector = Parent.Value.AsT0.GetSelector();
+            }
+            else if (Parent.Value.IsT1)
+            {
+                _parentSelector = Parent.Value.AsT1;
+            }
+        }
+
+        if (_parentSelector is null)
+        {
+            throw new InvalidOperationException("The selector of parent element cannot be null");
         }
     }
 
@@ -96,34 +118,19 @@ public partial class MInfiniteScroll : BDomComponentBase
     [MasaApiPublicMethod]
     public async Task ResetAsync() => await DoLoadMore();
 
-    private async Task AddScrollListener()
+    private void AddScrollListener()
     {
-        if (!_isAttached && Parent is { Value: not null })
-        {
-            string? selector = null;
+        if (_isAttached) return;
 
-            if (Parent.Value.IsT0 && Parent.Value.AsT0.Id is not null)
+        _isAttached = true;
+        _ = Js.AddHtmlElementEventListener(_parentSelector, "scroll", ScrollCallback, false,
+            new EventListenerExtras(0, 0)
             {
-                selector = Parent.Value.AsT0.GetSelector();
-            }
-            else if (Parent.Value.IsT1)
-            {
-                selector = Parent.Value.AsT1;
-            }
-
-            if (selector is null)
-            {
-                return;
-            }
-
-            _isAttached = true;
-            _parentSelector = selector;
-
-            await Js.AddHtmlElementEventListener(selector, "scroll", OnScroll, false, new EventListenerExtras(0, 100));
-        }
+                Key = Ref.Id
+            });
     }
 
-    private async Task OnScroll()
+    private async Task ScrollCallback()
     {
         if (_parentSelector is null || Manual || !OnLoad.HasDelegate || _loadStatus == InfiniteScrollLoadStatus.Empty)
         {
@@ -140,13 +147,15 @@ public partial class MInfiniteScroll : BDomComponentBase
         var exceeded = await JsInvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
             _parentSelector,
             Threshold.ToDouble());
+
         if (!exceeded)
         {
             return;
         }
 
         await DoLoadMore();
-        StateHasChanged();
+
+        _ = InvokeAsync(StateHasChanged);
     }
 
     private async Task DoLoadMore()
@@ -176,6 +185,6 @@ public partial class MInfiniteScroll : BDomComponentBase
             return;
         }
 
-        await Js.RemoveHtmlElementEventListener(_parentSelector, "scroll");
+        await Js.RemoveHtmlElementEventListener(_parentSelector, "scroll", key: Ref.Id);
     }
 }

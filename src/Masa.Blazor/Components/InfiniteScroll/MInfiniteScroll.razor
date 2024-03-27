@@ -66,7 +66,7 @@
         {
             @(ErrorContent?.Invoke(DoLoadMore) ?? DefaultError)
         }
-        else
+        else if (!_isFirstLoad)
         {
             @(LoadMoreContent?.Invoke(DoLoadMore) ?? DefaultLoadMore)
         }
