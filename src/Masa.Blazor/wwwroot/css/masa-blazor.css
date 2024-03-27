@@ -1,6 +1,6 @@
 ﻿.theme--light.m-application {
-    background: #FFFFFF;
-    color: rgba(0, 0, 0, 0.87);
+    background: var(--m-theme-light-surface);
+    color: var(--m-theme-light-on-surface);
 }
 .theme--light.m-application .text--primary {
     color: rgba(0, 0, 0, 0.87) !important;
@@ -13,8 +13,8 @@
 }
 
 .theme--dark.m-application {
-    background: #121212;
-    color: #FFFFFF;
+    background: var(--m-theme-dark-surface);
+    color: var(--m-theme-dark-on-surface);
 }
 .theme--dark.m-application .text--primary {
     color: #FFFFFF !important;
