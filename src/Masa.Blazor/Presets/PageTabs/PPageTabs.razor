@@ -44,14 +44,17 @@
                     @tabTitle
                 </span>
 
-                <MButton Icon
-                         Class="@_tabBlock.Element("close").Build()"
-                         OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
-                         Small
-                         OnClickStopPropagation
-                         OnClickPreventDefault>
-                    <MIcon Small>@(CloseIcon ?? "$close")</MIcon>
-                </MButton>
+                @if ((tabOptions == null) || tabOptions.Closeable)
+                {
+                    <MButton Icon
+                             Class="@_tabBlock.Element("close").Build()"
+                             OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
+                             Small
+                             OnClickStopPropagation
+                             OnClickPreventDefault>
+                        <MIcon Small>@(CloseIcon ?? "$close")</MIcon>
+                    </MButton>
+                }
             </MTab>
         }
 
