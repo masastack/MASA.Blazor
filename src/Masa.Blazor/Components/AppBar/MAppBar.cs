@@ -340,14 +340,19 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await Js.AddHtmlElementEventListener(ScrollTarget, "scroll", async () =>
-                {
-                    if (!CanScroll) return;
+                await Js.AddHtmlElementEventListener(
+                    ScrollTarget,
+                    "scroll",
+                    async () =>
+                    {
+                        if (!CanScroll) return;
 
-                    await _scroller!.OnScroll(ThresholdMet);
+                        await _scroller!.OnScroll(ThresholdMet);
 
-                    StateHasChanged();
-                }, false);
+                        StateHasChanged();
+                    },
+                    false,
+                    new EventListenerExtras(key: Ref.Id));
             }
         }
 
@@ -374,7 +379,7 @@ namespace Masa.Blazor
         {
             try
             {
-                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll");
+                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll", key: Ref.Id);
             }
             catch (Exception)
             {
