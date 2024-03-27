@@ -6,21 +6,28 @@ public class PPageStackItemInit : IComponent
 {
     [CascadingParameter] private PPageStackItem PageStackItem { get; set; } = null!;
 
-    [Parameter] public string? AppBarClass { get; set; }
+    [Parameter] public string? RerenderKey { get; set; }
 
-    [Parameter] public string? AppBarStyle { get; set; }
+    [Parameter] public string? BarClass { get; set; }
 
-    [Parameter] public string? AppBarColor { get; set; }
+    [Parameter] public string? BarStyle { get; set; }
+
+    [Parameter] public string? BarColor { get; set; }
 
     [Parameter] public string? ContentClass { get; set; }
 
     [Parameter] public string? ContentStyle { get; set; }
 
-    [Parameter] public RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
+    [Parameter] public RenderFragment<PageStackGoBackContext>? BarContent { get; set; }
 
-    [Parameter] public string? AppBarTitle { get; set; }
+    [Parameter] public string? Title { get; set; }
+
+    [Parameter] public RenderFragment? ActionContent { get; set; }
+
+    [Parameter] public bool Light { get; set; }
 
     private bool _init;
+    private string? _prevRerenderKey;
 
     public void Attach(RenderHandle renderHandle)
     {
@@ -32,19 +39,36 @@ public class PPageStackItemInit : IComponent
 
         if (_init)
         {
+            if (_prevRerenderKey != RerenderKey)
+            {
+                _prevRerenderKey = RerenderKey;
+                Rerender();
+            }
+
             return Task.CompletedTask;
         }
 
         _init = true;
+        _prevRerenderKey = RerenderKey;
 
-        PageStackItem.AppBarContent = AppBarContent;
-        PageStackItem.AppBarColor = AppBarColor;
-        PageStackItem.AppBarClass = AppBarClass;
-        PageStackItem.AppBarStyle = AppBarStyle;
-        PageStackItem.AppBarTitle = AppBarTitle;
+        PageStackItem.AppBarContent = BarContent;
+        PageStackItem.AppBarColor = BarColor;
+        PageStackItem.AppBarClass = BarClass;
+        PageStackItem.AppBarStyle = BarStyle;
+        PageStackItem.AppBarTitle = Title;
+        PageStackItem.Light = Light;
+
         PageStackItem.ContentClass = ContentClass;
         PageStackItem.ContentStyle = ContentStyle;
 
+        PageStackItem.ActionContent = ActionContent;
+
         return Task.CompletedTask;
+    }
+
+    [MasaApiPublicMethod]
+    public void Rerender()
+    {
+        PageStackItem.InvokeStateHasChanged();
     }
 }

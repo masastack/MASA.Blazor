@@ -12,5 +12,9 @@ public class StackPatternPath : PatternPath
         Active = true;
     }
 
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     public bool Active { get; set; }
+
+    public string Selector { get; set; }
 }

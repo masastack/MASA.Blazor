@@ -2,33 +2,45 @@
 
 <MDialog Transition="dialog-right-transition"
          Value="@Active"
-         ContentClass="@Class"
+         ContentClass="@($"m-page-stack-item {Class}")"
          ContentStyle="@Style"
          Fullscreen
-         Scrollable>
+         ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Index } })">
     <BShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
             <MAppBar Class="@AppBarClass"
                      Style="@AppBarStyle"
                      Fixed
-                     Elevation="0"
-                     Color="@AppBarColor">
-                @if (AppBarContent is not null)
-                {
-                    @AppBarContent.Invoke(new PageStackGoBackContext(null, HandleOnGoBack))
-                }
-                else
-                {
-                    <MButton Icon OnClick="@OnGoBack">
-                        <MIcon>$goBack</MIcon>
-                    </MButton>
+                     FadeImgOnScroll
+                     ElevateOnScroll
+                     ScrollTarget="@($"[page-stack-id=\"{Index}\"]>.m-dialog")"
+                     Color="@AppBarColor"
+                     Light="@Light">
+                <ImgContent>
+                    <div class="transparent" style="width: 100%; height: 100%"></div>
+                </ImgContent>
+                <ChildContent>
+                    @if (AppBarContent is not null)
+                    {
+                        @AppBarContent.Invoke(new PageStackGoBackContext(null, HandleOnGoBack))
+                    }
+                    else
+                    {
+                        <MButton Icon OnClick="@OnGoBack">
+                            <MIcon>$goBack</MIcon>
+                        </MButton>
 
-                    <MAppBarTitle>
-                        @AppBarTitle
-                    </MAppBarTitle>
-                }
+                        <MAppBarTitle>
+                            @AppBarTitle
+                        </MAppBarTitle>
+                    }
+                    
+                    <MSpacer />
+                    
+                    @ActionContent
+                </ChildContent>
             </MAppBar>
-            <div class="@ContentClass"
+            <div class="fill-height @ContentClass"
                  style="@ContentStyle; padding-top: 64px;">
                 @ChildContent
             </div>
@@ -50,17 +62,38 @@
 
     [Parameter] public EventCallback OnGoBack { get; set; }
 
+    [Parameter] public Action<string>? SelectorCaptureAction { get; set; }
+
+    [Parameter] public int Index { get; set; }
+    
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            SelectorCaptureAction?.Invoke($"[page-stack-id=\"{Index}\"]>.m-dialog");
+        }
+    }
+
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal string? AppBarColor { get; set; }
     internal string? AppBarClass { get; set; }
     internal string? AppBarStyle { get; set; }
     internal string? AppBarTitle { get; set; }
+    internal bool Light { get; set; }
+
     internal string? ContentClass { get; set; }
     internal string? ContentStyle { get; set; }
+    
+    internal RenderFragment? ActionContent { get; set; }
 
     private async Task HandleOnGoBack()
     {
         await OnGoBack.InvokeAsync();
+    }
+
+    internal void InvokeStateHasChanged()
+    {
+        StateHasChanged();
     }
 
 }

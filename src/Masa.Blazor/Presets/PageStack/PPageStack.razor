@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.Routing
 @using Masa.Blazor.Presets.PageStack
 @inherits PatternPathComponentBase
+@inject IJSRuntime JSRuntime
 
 <PPageContainer IncludePatterns="TabbedPatterns"
                 SelfPatterns="SelfPatterns"
@@ -10,14 +11,21 @@
 </PPageContainer>
 
 <CascadingValue Value="this" IsFixed>
-    @foreach (var path in _stackPatternPaths.OrderBy(u => u.CreatedAt))
+    @for (var i = 0; i < Pages.Count; i++)
     {
+        var index = i;
+        var path = Pages.ElementAt(index);
+        var isTop = i == Pages.Count - 1;
+        var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(path.AbsolutePath, StringComparison.OrdinalIgnoreCase);
+
         <PPageStackItem Active="@path.Active"
                         Class="@Class"
                         Style="@Style"
-                        CanRender="@(path.Pattern == GetCurrentPatternPath().Pattern)"
+                        CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"
-                        @key="@path.Pattern">
+                        SelectorCaptureAction="u => path.Selector = u"
+                        Index="index"
+                        @key="@path.Id">
             @ChildContent
         </PPageStackItem>
     }
@@ -35,7 +43,7 @@
 
     [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
 
-    private readonly Stack<StackPatternPath> _stackPatternPaths = new();
+    internal readonly List<StackPatternPath> Pages = new();
 
     private bool _locationChangedByUserClick;
 
@@ -50,13 +58,14 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
+        
         UpdateRegexes();
 
         var patternPath = GetCurrentStackPatternPath();
         if (!IsTabbedPattern(patternPath.AbsolutePath))
         {
-            _stackPatternPaths.Push(patternPath);
+            Pages.Add(patternPath);
+            DisableRootScrollbar(true);
         }
         else
         {
@@ -91,6 +100,10 @@
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
+        // only two cases should be handled here:
+        // 1. user click on the browser back/forward button
+        // 2. user click on the anchor tag with href attribute
+
         if (_locationChangedByUserClick)
         {
             _locationChangedByUserClick = false;
@@ -98,63 +111,67 @@
         }
 
         var currentPath = NavigationManager.GetAbsolutePath();
-        var existInStack = _stackPatternPaths.Any(p => p.AbsolutePath == currentPath);
         var isTabbedPath = IsTabbedPattern(currentPath);
 
-        // 1. 导航到新的stack页面，直接push
-        // 2. 导航到tab页面，更新_latestTabPath
-        // 3. 导航到已经存在的stack页面，不做任何操作
-
+        // if the current path is a tabbed path
         if (isTabbedPath)
         {
             if (_pageTypeOfPreviousPath == PageType.Tab)
             {
                 _latestTabPath = currentPath;
-                return;
             }
-
-            if (_pageTypeOfPreviousPath == PageType.Stack)
+            else if (_pageTypeOfPreviousPath == PageType.Stack)
             {
-                CloseTopPageOfStack();
+                if (Pages.Count == 1)
+                {
+                    // has an animation
+                    CloseTopPageOfStack();
+                }
+                else
+                {
+                    // no animation
+                    ClearStack();
+                }
+
                 _previousPath = currentPath;
-                _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
-                InvokeAsync(StateHasChanged);
-                return;
-            }
-        }
-        else
-        {
-            if (existInStack && _pageTypeOfPreviousPath == PageType.Stack)
-            {
-                CloseTopPageOfStack();
-                _previousPath = currentPath;
-                _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
-                InvokeAsync(StateHasChanged);
-                return;
-            }
-        }
-
-
-        _previousPath = currentPath;
-        _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
-
-        var currentPatternPath = GetCurrentStackPatternPath();
-        if (currentPatternPath.IsSelf)
-        {
-            var renderedPatternPath = _stackPatternPaths.FirstOrDefault(p => p.Pattern == currentPatternPath.Pattern);
-            if (renderedPatternPath is not null)
-            {
-                renderedPatternPath.UpdatePath(NavigationManager.GetAbsolutePath());
+                _pageTypeOfPreviousPath = PageType.Tab;
                 InvokeAsync(StateHasChanged);
             }
-        }
 
-        if (_stackPatternPaths.Any(p => p.Pattern == currentPatternPath.Pattern))
-        {
             return;
         }
 
-        _stackPatternPaths.Push(currentPatternPath);
+        // if the current path is a stack path
+
+        var currentPatternPath = GetCurrentStackPatternPath();
+
+        if (!currentPatternPath.IsSelf && _pageTypeOfPreviousPath == PageType.Stack)
+        {
+            var previous2 = Pages.ElementAtOrDefault(Pages.Count - 2);
+            if (previous2 is not null && currentPatternPath.Pattern == previous2.Pattern)
+            {
+                CloseTopPageOfStack();
+                _previousPath = currentPath;
+                _pageTypeOfPreviousPath = PageType.Stack;
+                InvokeAsync(StateHasChanged);
+                return;
+            }
+        }
+
+        if (currentPatternPath.IsSelf)
+        {
+            var renderedPatternPath = Pages.FirstOrDefault(p => p.Pattern == currentPatternPath.Pattern);
+            if (renderedPatternPath is not null)
+            {
+                renderedPatternPath.UpdatePath(currentPath);
+                InvokeAsync(StateHasChanged);
+            }
+        }
+
+        _previousPath = currentPath;
+        _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
+        Pages.Add(currentPatternPath);
+        DisableRootScrollbar(true);
 
         InvokeAsync(StateHasChanged);
     }
@@ -176,21 +193,34 @@
 
     private void CloseTopPageOfStack()
     {
-        if (_stackPatternPaths.Count == 0)
+        if (Pages.Count == 0)
         {
             return;
         }
 
-        var current = _stackPatternPaths.Peek();
+        var current = Pages.Last();
         current.Active = false;
 
         Task.Run(async () =>
         {
             await Task.Delay(300); // wait for the transition to complete
-            _stackPatternPaths.Pop();
-            _previousPath = _stackPatternPaths.LastOrDefault()?.AbsolutePath;
+            Pages.RemoveAt(Pages.Count - 1);
+
+            if (Pages.Count == 0)
+            {
+                DisableRootScrollbar(false);
+            }
+
+            _previousPath = Pages.LastOrDefault()?.AbsolutePath;
             _ = InvokeAsync(StateHasChanged);
         });
+    }
+
+    private void ClearStack()
+    {
+        Pages.Clear();
+        DisableRootScrollbar(false);
+        _ = InvokeAsync(StateHasChanged);
     }
 
     private StackPatternPath GetCurrentStackPatternPath()
@@ -198,6 +228,14 @@
         var absolutePath = NavigationManager.GetAbsolutePath();
         var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));
         return selfPatternRegex is null ? new StackPatternPath(absolutePath) : new StackPatternPath(selfPatternRegex.ToString(), absolutePath);
+    }
+
+    private void DisableRootScrollbar(bool disable)
+    {
+        _ = Js.InvokeVoidAsync(
+            disable ? JsInteropConstants.AddCls : JsInteropConstants.RemoveCls,
+            "html",
+            "overflow-y-hidden");
     }
 
     protected override ValueTask DisposeAsyncCore()
