@@ -88,5 +88,15 @@ namespace Masa.Blazor
 
             OnThemeChange?.Invoke(Theme);
         }
+
+        public void SetTheme(bool dark)
+        {
+            if (Theme.Dark == dark)
+            {
+                return;
+            }
+
+            ToggleTheme();
+        }
     }
 }
