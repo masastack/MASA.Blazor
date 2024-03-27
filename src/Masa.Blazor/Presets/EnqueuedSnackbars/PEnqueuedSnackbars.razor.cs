@@ -1,9 +1,9 @@
-﻿using BlazorComponent.Abstracts;
-
-namespace Masa.Blazor.Presets
+﻿namespace Masa.Blazor.Presets
 {
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
+        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
         [Parameter]
         [MasaApiParameter(SnackPosition.BottomCenter)]
         public SnackPosition Position { get; set; } = DEFAULT_SNACK_POSITION;
@@ -45,6 +45,10 @@ namespace Masa.Blazor.Presets
 
         private readonly List<SnackbarOptions> _stack = new();
 
+        private bool IsPositionBottom => Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
+
+        private bool IsPositionTop => Position is SnackPosition.TopCenter or SnackPosition.TopLeft or SnackPosition.TopRight;
+
         protected override void SetComponentClass()
         {
             CssProvider.Apply((cssBuilder) =>
@@ -57,7 +61,12 @@ namespace Masa.Blazor.Presets
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--right", () => Position == SnackPosition.BottomRight)
                           .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter)
                           .AddIf($"{ROOT_CSS}--center", () => Position == SnackPosition.Center);
-            }, styleBuilder => { styleBuilder.AddMaxWidth(MaxWidth); });
+            }, styleBuilder =>
+            {
+                styleBuilder.AddMaxWidth(MaxWidth)
+                    .AddIf($"bottom: {MasaBlazor.Application.Bottom}px", () => IsPositionBottom)
+                    .AddIf($"top: {MasaBlazor.Application.Top}px)", () => IsPositionTop);
+            });
         }
 
         protected override void OnParametersSet()
