@@ -550,16 +550,15 @@ input[type=number] {
 @media only screen and (max-width: 599.98px) {
     .m-enqueued-snackbars {
         width: 100%;
-        max-width: calc(100% - 2rem) !important;
     }
 }
 
     .m-enqueued-snackbars.m-enqueued-snackbars--top {
-        top: 1rem;
+        top: 0;
     }
     
     .m-enqueued-snackbars.m-enqueued-snackbars--right {
-        right: 1rem;
+        right: 0;
     }
     
     .m-enqueued-snackbars.m-enqueued-snackbars--center {
@@ -568,11 +567,11 @@ input[type=number] {
     }
     
     .m-enqueued-snackbars.m-enqueued-snackbars--bottom {
-        bottom: 1rem;
+        bottom: 0;
     }
     
     .m-enqueued-snackbars.m-enqueued-snackbars--left {
-        left: 1rem;
+        left: 0;
     }
 
     .m-enqueued-snackbars.m-enqueued-snackbars--center:not(.m-enqueued-snackbars--right):not(.m-enqueued-snackbars--left):not(.m-enqueued-snackbars--top):not(.m-enqueued-snackbars--bottom) {
