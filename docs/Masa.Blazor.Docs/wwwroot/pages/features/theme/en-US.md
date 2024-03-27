@@ -35,10 +35,12 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        Surface = "#FFFFFF",
         OnPrimary = "#FFFFFF",
         OnSecondary = "#FFFFFF",
         OnAccent = "#FFFFFF",
         OnError = "#FFFFFF",
+        OnSurface = "#000000DE",
         UserDefined = new Dictionary<string, string>()
     };
 
@@ -52,6 +54,7 @@ public static class MasaBlazorPreset
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
+        Surface = "#121212",
         OnPrimary = "#000000",
         OnSecondary = "#000000",
         OnAccent = "#000000",
