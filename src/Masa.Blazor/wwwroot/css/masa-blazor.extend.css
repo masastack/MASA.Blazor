@@ -389,7 +389,11 @@
 }
 
 .p-page-container {
-    overflow: visible;
+    overflow: auto;
+    height: 100%;
+}
+
+.p-page-container__item {
     height: 100%;
 }
 

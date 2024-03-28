@@ -1,0 +1,10 @@
+﻿@page "/blazor/examples/page-stack/page1"
+@layout PageStackLayout
+
+<PPageStackItemInit Title="Page 1">
+</PPageStackItemInit>
+
+<div>
+    <h3>Page 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
+    <a href="/blazor/examples/page-stack/page2">Navigate to Page 2</a>
+</div>
