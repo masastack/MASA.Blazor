@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class StackPageBase : ComponentBase
+public class PStackPageBase : ComponentBase
 {
     [CascadingParameter] private PPageStack? PageStack { get; set; }
 

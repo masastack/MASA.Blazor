@@ -7,7 +7,7 @@ related:
   - /blazor/components/menus
 ---
 
-## 组件列表
+## 组件
 
 ### PPageTabs
 

@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+
+<MApp>
+    <MMain>
+        <PPageStack TabbedPatterns="@_tabbedPatterns">
+            <MContainer Class="fill-height justify-center">
+                @Body
+            </MContainer>
+        </PPageStack>
+    </MMain>
+
+    <MBottomNavigation App Routable Color="primary">
+        <MButton Href="/blazor/examples/page-stack/tab1">Tab 1</MButton>
+        <MButton Href="/blazor/examples/page-stack/tab2">Tab 2</MButton>
+        <MButton Href="/blazor/examples/page-stack/tab3">Tab 3</MButton>
+    </MBottomNavigation>
+</MApp>
+
+@code {
+
+    private string[] _tabbedPatterns = ["/blazor/examples/page-stack/tab*"];
+
+}

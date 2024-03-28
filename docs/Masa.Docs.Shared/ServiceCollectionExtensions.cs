@@ -40,10 +40,9 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Dark.Accent = "#67DBAF";
                 theme.Themes.Dark.Error = "#FFB4AB";
                 theme.Themes.Dark.Surface = "#131316";
-                theme.Themes.Dark.OnPrimary = "#2400A2";
+                theme.Themes.Dark.OnPrimary = "#090029";
                 theme.Themes.Dark.OnSecondary = "#302E42";
                 theme.Themes.Dark.OnAccent = "#003827";
-                // theme.Themes.Dark.OnError = "#690005";
                 theme.Themes.Dark.OnSurface = "#C9C5CA";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>

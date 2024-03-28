@@ -1,0 +1,12 @@
+﻿@page "/blazor/examples/page-stack/page3"
+@layout PageStackLayout
+
+<PPageStackItemInit Title="Page 3">
+    <ActionContent>
+        <MButton Icon Href="/blazor/examples/page-stack/tab3">
+            <MIcon>mdi-home</MIcon>
+        </MButton>
+    </ActionContent>
+</PPageStackItemInit>
+
+<h3>Page 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
