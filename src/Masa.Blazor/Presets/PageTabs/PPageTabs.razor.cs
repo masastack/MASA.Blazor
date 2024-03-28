@@ -141,13 +141,18 @@ public partial class PPageTabs : PatternPathComponentBase
     [MasaApiPublicMethod]
     public void CloseAllTabs(bool disableAutoNavigation = false)
     {
-        PatternPaths.Clear();
-        TabsUpdated?.Invoke(this, Array.Empty<PatternPath>());
-        PageTabsProvider?.RemoveAllPathTitles();
+        var toClosePatternPaths = PatternPaths.Where(p => IsCloseable(p));
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
+        TabsUpdated?.Invoke(this, PatternPaths.ToArray());
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
+        PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
         if (!disableAutoNavigation)
         {
-            NavigationManager.NavigateTo(NoDataPath);
+            if (PatternPaths.Count > 0)
+                NavigationManager.NavigateTo(PatternPaths[0].AbsolutePath);
+            else
+                NavigationManager.NavigateTo(NoDataPath);
         }
     }
 
@@ -155,6 +160,7 @@ public partial class PPageTabs : PatternPathComponentBase
     public void CloseCurrentTab(bool disableAutoNavigation = false)
     {
         var current = GetCurrentPatternPath();
+        if (!IsCloseable(current)) return;
 
         if (!disableAutoNavigation)
         {
@@ -263,8 +269,17 @@ public partial class PPageTabs : PatternPathComponentBase
         return absolutePath.TrimEnd('/').Split('/').Last();
     }
 
+    private bool IsCloseable(PatternPath patternPath)
+    {
+        var pathValue = new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath());
+        var tabOptions = TabOptions?.Invoke(pathValue);
+        return (tabOptions == null) || tabOptions.Closeable;
+    }
+
     private async Task HandleOnCloseTab(PatternPath patternPath, string tabTitle)
     {
+        if (!IsCloseable(patternPath)) return;
+
         if (AskBeforeClosing)
         {
             bool isConfirmed;
@@ -304,10 +319,11 @@ public partial class PPageTabs : PatternPathComponentBase
 
         var index = PatternPaths.FindIndex(p => p == _contextmenuPath);
 
-        var closingAbsolutePaths = PatternPaths.Take(index + 1).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Take(index).Where(p => IsCloseable(p));
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
-        PatternPaths.RemoveRange(0, index);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         if (!PatternPaths.Contains(currentPath))
         {
@@ -329,10 +345,11 @@ public partial class PPageTabs : PatternPathComponentBase
         var startIndex = index + 1;
         var count = PatternPaths.Count - startIndex;
 
-        var closingAbsolutePaths = PatternPaths.Skip(startIndex).Take(count).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Skip(startIndex).Take(count).Where(p => IsCloseable(p));
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
-        PatternPaths.RemoveRange(startIndex, count);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         if (!PatternPaths.Contains(currentPath))
         {
@@ -387,10 +404,11 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private void CloseOtherTabs(PatternPath current)
     {
-        var closingAbsolutePath = PatternPaths.Where(p => p != current).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Where(p => p != current && IsCloseable(p));
+        var closingAbsolutePath = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePath);
 
-        PatternPaths.RemoveAll(p => p != current);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         NavigationManager.NavigateTo(current.AbsolutePath);
 
