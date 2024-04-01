@@ -197,9 +197,11 @@
       {
         "title": "pickers",
         "group": "components",
+        "state": "update",
         "items": [
           {
             "title": "date-pickers",
+            "state": "update",
             "exact": true
           },
           "date-pickers-month",
