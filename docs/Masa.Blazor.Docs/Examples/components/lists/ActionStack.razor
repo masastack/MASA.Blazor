@@ -23,7 +23,7 @@
         <MListItemGroup
             @bind-Values="selected"
             ActiveClass="pink--text"
-            multiple>
+            Multiple>
             @foreach (var (item, index) in items.Select((item, index) => (item, index)))
             {
                 <MListItem Value="@item.title">
