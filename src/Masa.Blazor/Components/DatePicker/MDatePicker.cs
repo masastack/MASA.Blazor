@@ -92,6 +92,7 @@ namespace Masa.Blazor
         public bool ShowAdjacentMonths { get; set; }
 
         [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.4.0")]
         public bool ShowWeek { get; set; }
 
         [Parameter]
@@ -132,6 +133,10 @@ namespace Masa.Blazor
 
         [Parameter]
         public string? Locale { get; set; }
+
+        [Parameter]
+        [MasaApiParameter(CalendarWeekRule.FirstDay, "v1.4.0")]
+        public CalendarWeekRule CalendarWeekRule { get; set; }
 
         public CultureInfo CurrentLocale
         {
@@ -382,6 +387,7 @@ namespace Masa.Blazor
                 .Apply<BDatePickerTable, MDatePickerDateTable<TValue>>("date-table", attrs =>
                 {
                     attrs[nameof(MDatePickerDateTable<TValue>.AllowedDates)] = AllowedDates;
+                    attrs[nameof(MDatePickerDateTable<TValue>.CalendarWeekRule)] = CalendarWeekRule;
                     attrs[nameof(MDatePickerDateTable<TValue>.Color)] = Color;
                     attrs[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
                     attrs[nameof(MDatePickerDateTable<TValue>.Dark)] = Dark;

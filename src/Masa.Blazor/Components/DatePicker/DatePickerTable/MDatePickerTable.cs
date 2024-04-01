@@ -50,6 +50,9 @@
         [Parameter]
         public CultureInfo Locale { get; set; } = null!;
 
+        [Parameter]
+        public CalendarWeekRule CalendarWeekRule { get; set; }
+
         public int DisplayedMonth => TableDate.Month - 1;
 
         public int DisplayedYear => TableDate.Year;
