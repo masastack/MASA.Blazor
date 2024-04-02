@@ -396,15 +396,6 @@
     visibility: visible;
 }
 
-.p-page-container {
-    overflow: auto;
-    height: 100%;
-}
-
-.p-page-container__item {
-    height: 100%;
-}
-
 /* block-text */
 
 .m-presets-block-text {
