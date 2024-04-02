@@ -2,8 +2,9 @@
 
 <MApp>
     <MMain>
-        <PPageStack TabbedPatterns="@_tabbedPatterns">
-            <MContainer Class="fill-height justify-center">
+        <PPageStack TabbedPatterns="@_tabbedPatterns"
+                    SelfPatterns="@_selfPatterns">
+            <MContainer>
                 @Body
             </MContainer>
         </PPageStack>
@@ -19,5 +20,6 @@
 @code {
 
     private string[] _tabbedPatterns = ["/blazor/examples/page-stack/tab*"];
+    private string[] _selfPatterns = ["/blazor/examples/page-stack/page2/*"];
 
 }

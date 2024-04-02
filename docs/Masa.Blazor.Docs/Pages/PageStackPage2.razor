@@ -1,10 +1,60 @@
-﻿@page "/blazor/examples/page-stack/page2"
+﻿@page "/blazor/examples/page-stack/page2/{id}"
 @layout PageStackLayout
+@inject NavigationManager NavigationManager
 
 <PPageStackItemInit Title="Page 2">
 </PPageStackItemInit>
 
+<p class="caption">url: /blazor/examples/page-stack/page2/{id}</p>
+
 <div>
-    <h3>Page 2 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
+    <h1>
+        @if (_loading)
+        {
+            <MProgressCircular Indeterminate/>
+        }
+        else
+        {
+            <span>Id: @Id</span>
+        }
+    </h1>
+    <h3>Page 2 created at @(_createdAt.ToString("HH:mm:ss zz"))</h3>
+    <a class="text-decoration-underline" @onclick="OnClick">Update Id</a>
+    <br/>
     <a href="/blazor/examples/page-stack/page3">Navigate to Page 3</a>
 </div>
+
+@code {
+
+    [Parameter] public string Id { get; set; } = default!;
+
+    private DateTimeOffset _createdAt;
+
+    private string? _prevId;
+    private bool _loading;
+
+    protected override void OnInitialized()
+    {
+        _createdAt = DateTimeOffset.UtcNow;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_prevId != Id)
+        {
+            _loading = true;
+            StateHasChanged();
+
+            await Task.Delay(1000);
+            _loading = false;
+            _prevId = Id;
+        }
+    }
+
+    private void OnClick()
+    {
+        var newId = Random.Shared.Next(100, 999);
+        NavigationManager.NavigateTo($"/blazor/examples/page-stack/page2/{newId}");
+    }
+
+}

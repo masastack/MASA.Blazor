@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public partial class PPageStack: PatternPathComponentBase
+public partial class PPageStack : PatternPathComponentBase
 {
     enum PageType
     {
@@ -14,7 +14,7 @@ public partial class PPageStack: PatternPathComponentBase
 
     [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
 
-    internal readonly List<StackPatternPath> Pages = new();
+    internal readonly List<StackPageData> Pages = new();
 
     private bool _locationChangedByUserClick;
 
@@ -29,10 +29,10 @@ public partial class PPageStack: PatternPathComponentBase
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        
+
         UpdateRegexes();
 
-        var patternPath = GetCurrentStackPatternPath();
+        var patternPath = GetCurrentPageData();
         if (!IsTabbedPattern(patternPath.AbsolutePath))
         {
             Pages.Add(patternPath);
@@ -113,36 +113,37 @@ public partial class PPageStack: PatternPathComponentBase
         }
 
         // if the current path is a stack path
-
-        var currentPatternPath = GetCurrentStackPatternPath();
-
-        if (!currentPatternPath.IsSelf && _pageTypeOfPreviousPath == PageType.Stack)
-        {
-            var previous2 = Pages.ElementAtOrDefault(Pages.Count - 2);
-            if (previous2 is not null && currentPatternPath.Pattern == previous2.Pattern)
-            {
-                CloseTopPageOfStack();
-                _previousPath = currentPath;
-                _pageTypeOfPreviousPath = PageType.Stack;
-                InvokeAsync(StateHasChanged);
-                return;
-            }
-        }
+        var currentPatternPath = GetCurrentPageData();
 
         if (currentPatternPath.IsSelf)
         {
-            var renderedPatternPath = Pages.FirstOrDefault(p => p.Pattern == currentPatternPath.Pattern);
-            if (renderedPatternPath is not null)
+            var topPage = Pages.LastOrDefault();
+            if (topPage is not null)
             {
-                renderedPatternPath.UpdatePath(currentPath);
-                InvokeAsync(StateHasChanged);
+                if (topPage.Pattern == currentPatternPath.Pattern)
+                {
+                    topPage.UpdatePath(currentPath);
+                    InvokeAsync(StateHasChanged);
+                    return;
+                }
+            }
+        }
+
+        if (Pages.Any(page => page.Pattern == currentPatternPath.Pattern))
+        {
+            CloseTopPageOfStack();
+        }
+        else
+        {
+            Pages.Add(currentPatternPath);
+            if (Pages.Count == 1)
+            {
+                DisableRootScrollbar(true);
             }
         }
 
         _previousPath = currentPath;
         _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
-        Pages.Add(currentPatternPath);
-        DisableRootScrollbar(true);
 
         InvokeAsync(StateHasChanged);
     }
@@ -151,7 +152,7 @@ public partial class PPageStack: PatternPathComponentBase
     {
         _locationChangedByUserClick = true;
 
-        Js.InvokeVoidAsync(JsInteropConstants.HistoryBack);
+        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryBack);
 
         CloseTopPageOfStack();
     }
@@ -194,11 +195,13 @@ public partial class PPageStack: PatternPathComponentBase
         _ = InvokeAsync(StateHasChanged);
     }
 
-    private StackPatternPath GetCurrentStackPatternPath()
+    private StackPageData GetCurrentPageData() 
     {
         var absolutePath = NavigationManager.GetAbsolutePath();
         var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return selfPatternRegex is null ? new StackPatternPath(absolutePath) : new StackPatternPath(selfPatternRegex.ToString(), absolutePath);
+        return selfPatternRegex is null
+            ? new StackPageData(absolutePath)
+            : new StackPageData(selfPatternRegex.ToString(), absolutePath);
     }
 
     private void DisableRootScrollbar(bool disable)
@@ -215,5 +218,4 @@ public partial class PPageStack: PatternPathComponentBase
 
         return base.DisposeAsyncCore();
     }
-
 }
