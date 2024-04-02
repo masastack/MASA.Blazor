@@ -55,7 +55,7 @@ The specific source codes are listed below:
 - [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
   Page1: demonstrate the ability to save page state.
 - [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
-  Page2: demonstrate the ability to not save page state after using the `ExcludedPatterns` attribute.
+  Page2: demonstrate that the state will not be cached after using the `ExcludedPatterns` property, and the function of not being able to close.
 - [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
   Page3: demonstrates the ability to change the title of a tab.
 - [PageTabs4.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)
