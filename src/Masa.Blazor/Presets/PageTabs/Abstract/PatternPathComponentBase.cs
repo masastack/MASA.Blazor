@@ -30,7 +30,7 @@ public class PatternPathComponentBase : MasaComponentBase
             new HashSet<Regex>(SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase)));
     }
 
-    protected PatternPath GetCurrentPatternPath()
+    protected virtual PatternPath GetCurrentPatternPath()
     {
         var absolutePath = NavigationManager.GetAbsolutePath();
         var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));

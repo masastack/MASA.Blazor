@@ -388,6 +388,14 @@
     padding: 0 4px;
 }
 
+.p-page-tab:not(.m-tab--active) .p-page-tab__close {
+    visibility: hidden;
+}
+
+.p-page-tab:not(.m-tab--active):hover .p-page-tab__close {
+    visibility: visible;
+}
+
 .p-page-container {
     overflow: auto;
     height: 100%;
