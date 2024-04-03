@@ -1,5 +1,21 @@
 # Upgrade Guides
 
+## Upgrading form v1.2.x to v1.4.0
+
+### Components
+
+#### DragZone
+
+This component is deprecated but not deleted, it is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+
+#### PageContainer
+
+No longer use the **Windows** component as the switching container internally, so custom styles that use internal CSS class names may fail.
+
+### CSS
+
+The class name `m-application--wrap` is changed to `m-application__wrap`.
+
 ## Upgrading form v1.1.x to v1.2.0
 
 ### Components
