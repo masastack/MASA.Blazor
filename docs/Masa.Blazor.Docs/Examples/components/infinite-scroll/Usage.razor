@@ -2,7 +2,7 @@
        Height="250"
        Class="overflow-auto"
        Style="margin: 0 auto"
-       @ref="_card">
+       Id="infinite-scroll-usage">
     <MList>
         @foreach (var item in _items)
         {
@@ -11,11 +11,11 @@
                     <MListItemTitle>@item</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MDivider />
+            <MDivider/>
         }
     </MList>
     <MInfiniteScroll OnLoad="@OnLoad"
-                     Parent="@_card.Ref">
+                     Parent="#infinite-scroll-usage">
     </MInfiniteScroll>
 </MCard>
 

@@ -1,4 +1,8 @@
-﻿<MCard Width="500" Height="250" Class="overflow-auto" Style="margin: 0 auto" @ref="_card">
+﻿<MCard Width="500"
+       Height="250"
+       Class="overflow-auto"
+       Style="margin: 0 auto"
+       Id="infinite-scroll-childcontent">
     <MList>
         @foreach (var item in _items)
         {
@@ -12,7 +16,7 @@
     </MList>
     <MInfiniteScroll Manual
                      OnLoad="@OnLoad"
-                     Parent="@_card.Ref">
+                     Parent="#infinite-scroll-childcontent">
         @if (context.Status == InfiniteScrollLoadStatus.Loading)
         {
             <MProgressLinear Indeterminate Color="primary"></MProgressLinear>
