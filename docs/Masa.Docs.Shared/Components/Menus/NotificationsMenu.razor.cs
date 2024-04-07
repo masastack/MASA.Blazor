@@ -70,6 +70,7 @@ public partial class NotificationsMenu
             new NotificationItem(
                 "v1.4.0 Release",
                 """
+                We provides a best practice example of how to integrate MAUI hybrid with MASA Blazor. You can find the repository at [Masa.Blazor.MauiDemo](https://github.com/masastack/Masa.Blazor.MauiDemo).
                 Highlights:
                 - **Overlay**: add fade transition animation, use *block* scroll strategy, and update the bg color of scrim.
                 - **PageStack**: new component that provides a container similar to a page stack, mainly for mobile.

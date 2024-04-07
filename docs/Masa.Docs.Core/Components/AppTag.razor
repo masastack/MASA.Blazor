@@ -1,0 +1,29 @@
+﻿@attribute [JSCustomElement]
+
+@foreach (var tag in _tags)
+{
+    <MChip Label Small Class="mr-1">
+        @tag
+    </MChip>
+}
+
+@code
+{
+    [Parameter] public string? Label { get; set; }
+
+    private string[] _tags = [];
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (Label?.StartsWith("tags:") is true)
+        {
+            _tags = Label[5..].Split(';');
+        }
+        else if (Label != null)
+        {
+            _tags = [Label];
+        }
+    }
+}

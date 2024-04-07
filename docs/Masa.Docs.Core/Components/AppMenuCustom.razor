@@ -16,6 +16,7 @@
     <ChildContent>
         <AppSheet Outlined="@false"
                   Width="@Width"
+                  MinWidth="@MinWidth"
                   MaxWidth="@MaxWidth">
             @ChildContent
         </AppSheet>
@@ -32,6 +33,8 @@
     [Parameter] public StringNumber? Width { get; set; }
 
     [Parameter] public StringNumber? MaxWidth { get; set; }
+
+    [Parameter] public StringNumber? MinWidth { get; set; }
 
     [Parameter] public bool CloseOnContentClick { get; set; }
 

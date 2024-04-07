@@ -7,7 +7,7 @@
        Color="primary"
        Routable
        @ref="_tabs">
-    @foreach (var item in _internalMenus)
+    @foreach (var item in _internalMenu)
     {
         <MTab Ripple="false"
               Href="@item.Href"
@@ -33,13 +33,11 @@
         </MTab>
     }
 
-    @if (_externalMenus.Any())
+    @if (_resourcesMenu.Any())
     {
-        <MDivider Vertical Class="ml-8 mr-4 my-auto" Style="height:16px" Inset />
+        <MDivider Vertical Class="ml-8 mr-4 my-auto" Style="height:16px" Inset/>
 
-        var stateExists = _externalMenus.Any(u => u.State != null);
-
-        <AppMenu Items="_externalMenus" TItem="DefaultItem" Width="@(stateExists ? 250 : 200)">
+        <AppMenu Items="_resourcesMenu" TItem="DefaultItem" MinWidth="200">
             <ActivatorContent>
                 <MButton Height="48" Text Class="m-tab" @attributes="@context.Attrs">
                     @I18n.T("resources") <AppChevronDown></AppChevronDown>
@@ -51,16 +49,14 @@
 
 @code {
 
-    [CascadingParameter(Name = "Culture")]
-    public string? Culture { get; set; }
+    [CascadingParameter(Name = "Culture")] public string? Culture { get; set; }
 
-    [CascadingParameter(Name = "project")]
-    public string? Project { get; set; }
+    [CascadingParameter(Name = "project")] public string? Project { get; set; }
 
     private MTabs? _tabs;
     private string? _prevProject;
-    private List<DefaultItem> _internalMenus = new();
-    private List<DefaultItem> _externalMenus = new();
+    private List<DefaultItem> _internalMenu = new();
+    private List<DefaultItem> _resourcesMenu = new();
     private string? _prevCulture;
 
     protected override void OnInitialized()
@@ -87,9 +83,8 @@
         if (_prevProject is null || _prevProject != Project)
         {
             _prevProject = Project;
-            var menus = AppService.GetNavMenus(Project);
-            _internalMenus = menus.Where(u => u.Target != "_blank").ToList();
-            _externalMenus = menus.Where(u => u.Target == "_blank").ToList();
+            _internalMenu = AppService.GetNavMenus(Project);
+            _resourcesMenu = AppService.GetResources(Project);
         }
     }
 

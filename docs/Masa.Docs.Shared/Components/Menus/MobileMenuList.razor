@@ -11,19 +11,21 @@
                    Temporary>
     <MList Nav>
         <MListItemGroup>
-            @foreach (var item in AppService.GetNavMenus(Project))
+            @foreach (var item in _items)
             {
                 <MListItem Href="@item.Href" Target="@item.Target">
                     <MListItemContent>
-                        <MListItemTitle>
-                            <MBadge Color="@item.StateBackgroundColor" Content="@I18n.T(item.State)" Value="@(!string.IsNullOrWhiteSpace(item.State))">
-                                @I18n.T(item.Title)
-                            </MBadge>
+                        <MListItemTitle Class="d-flex align-center justify-space-between">
+                            @I18n.T(item.Title)
+                            @if (!string.IsNullOrWhiteSpace(item.State))
+                            {
+                                <MChip Color="@item.StateBackgroundColor" Small>@I18n.T(item.State)</MChip>
+                            }
                         </MListItemTitle>
                     </MListItemContent>
                 </MListItem>
             }
-            <MDivider />
+            <MDivider/>
             <MListItem Href="https://github.com/masastack/MASA.Blazor" Target="_blank">
                 <MListItemContent>
                     <MListItemTitle>Github</MListItemTitle>
@@ -40,13 +42,39 @@
 
 @code {
 
-    [CascadingParameter(Name = "project")]
-    public string? Project { get; set; }
+    [CascadingParameter(Name = "project")] public string? Project { get; set; }
 
-    [Parameter]
-    public bool? Value { get; set; }
+    [Parameter] public bool? Value { get; set; }
 
-    [Parameter]
-    public EventCallback<bool?> ValueChanged { get; set; }
+    [Parameter] public EventCallback<bool?> ValueChanged { get; set; }
+
+    private List<DefaultItem> _items = new();
+
+    private string? _prevProject;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        RefreshItems();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevProject != Project)
+        {
+            _prevProject = Project;
+            RefreshItems();
+        }
+    }
+
+    private void RefreshItems()
+    {
+        _items.Clear();
+        _items.AddRange(AppService.GetNavMenus(Project));
+        _items.AddRange(AppService.GetResources(Project));
+    }
 
 }
