@@ -27,38 +27,32 @@ public class AppService
     {
         var list = new List<DefaultItem>()
         {
-            new ("docs", "/", "^/$|^/((?!(blazor/components|blazor/getting-started)).)*/[^/]*"),
+            new("docs", "/", "^/$|^/((?!(blazor/components|blazor/getting-started)).)*/[^/]*"),
         };
-
-        DefaultItem annualService = new("annual-service", "/annual-service", "pricing", "red");
 
         if (project == "blazor")
         {
-            list.Add(new ("getting-started", "/blazor/getting-started/installation", "/blazor/getting-started"));
-            list.Add(new ("ui-components", "/blazor/components/all", "/blazor/components"));
-            list.Add(annualService);
-            list.Add(new ("pro", "https://blazor-pro.masastack.com", "free-pro", "green"));
-            list.Add(new ("blog", "https://blogs.masastack.com/tags/Blazor/"));
-            list.Add(new ("official-website", "https://www.masastack.com/blazor"));
+            list.Add(new("getting-started", "/blazor/getting-started/installation", "/blazor/getting-started"));
+            list.Add(new("ui-components", "/blazor/components/all", "/blazor/components"));
         }
-        else if (project == "framework")
+
+        list.Add(new("annual-service", "/annual-service", "pricing", "red"));
+        
+        return list;
+    }
+
+    public static List<DefaultItem> GetResources(string? project)
+    {
+        var list = new List<DefaultItem>();
+
+        if (project == "blazor")
         {
-            list.Add(annualService);
-            list.Add(new ("blog", "https://blogs.masastack.com/tags/MASA-Framework/"));
-            list.Add(new ("official-website", "https://www.masastack.com/framework"));
+            list.Add(new("made-with-masa-blazor", "/blazor/resources/made-with-masa-blazor"));
+            list.Add(new("pro", "https://blazor-pro.masastack.com", "free-pro", "green"));
         }
-        else if (project == "stack")
-        {
-            list.Add(annualService);
-            list.Add(new ("blog", "https://blogs.masastack.com/tags/MASA-Stack/"));
-            list.Add(new ("official-website", "https://www.masastack.com/stack"));
-        }
-        else
-        {
-            list.Add(annualService);
-            list.Add(new ("blog", "https://blogs.masastack.com"));
-            list.Add(new ("official-website", "https://www.masastack.com"));
-        }
+
+        list.Add(new("blog", "https://blogs.masastack.com/tags/MASA-Stack/"));
+        list.Add(new("official-website", "https://www.masastack.com/stack"));
 
         return list;
     }

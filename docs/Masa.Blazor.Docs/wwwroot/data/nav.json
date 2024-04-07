@@ -342,6 +342,13 @@
     ]
   },
   {
+    "title": "resources",
+    "icon": "mdi-book-open",
+    "items": [
+      "made-with-masa-blazor"
+    ]
+  },
+  {
     "title": "about",
     "icon": "mdi-information",
     "items": [

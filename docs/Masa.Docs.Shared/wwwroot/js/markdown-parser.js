@@ -147,6 +147,24 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
                 self.renderToken(tokens, idx, options)
             );
         };
+        md.renderer.rules.td_open = (tokens, idx, options, env, self) => {
+            const nextToken = tokens[idx+1];
+            if (nextToken.type === "inline") {
+                if(nextToken.content.startsWith('tags:')) {
+                    return `<td><app-tag label="${nextToken.content}">`
+                }
+            }
+            return self.renderToken(tokens, idx, options);
+        }
+        md.renderer.rules.td_close = (tokens, idx, options, env, self) => {
+            const prevToken = tokens[idx-1];
+            if (prevToken.type === "inline") {
+                if(prevToken.content.startsWith('tags:')) {
+                    return "</app-tag></td>"
+                }
+            }
+            return self.renderToken(tokens, idx, options);
+        };
         md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
             return self.renderToken(tokens, idx, options) + "</div></div></div>";
         }
