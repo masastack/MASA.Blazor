@@ -1,5 +1,6 @@
 ﻿<MCard Width="500" Style="margin: 0 auto">
-    <MVirtualScroll Height="250" Items="_items" @ref="_vs">
+    <MVirtualScroll Height="250" Items="_items"
+                    Id="infinite-scroll-virtual">
         <ItemContent>
             <div>
                 <MListItem>
@@ -12,7 +13,7 @@
         </ItemContent>
         <FooterContent>
             <MInfiniteScroll OnLoad="@OnLoad"
-                             Parent="@_vs?.Ref">
+                             Parent="#infinite-scroll-virtual">
             </MInfiniteScroll>
         </FooterContent>
     </MVirtualScroll>
