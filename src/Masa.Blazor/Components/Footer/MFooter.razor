@@ -1,0 +1,12 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <footer id="@Id"
+            class="@GetClass()"
+            style="@GetStyle()"
+            @ref="Ref"
+            @attributes="@Attributes">
+        @ChildContent
+    </footer>
+</CascadingValue>
