@@ -1,0 +1,20 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@typeparam TItem
+
+<div id="@Id"
+     class="@GetClass()"
+     style="@GetStyle()"
+     @ref="Ref"
+     @attributes="@Attributes">
+    <div class="@_block.Element("container")">
+        <Virtualize Items="Items"
+                    ItemSize="ItemSize"
+                    OverscanCount="OverscanCount"
+                    TItem="TItem">
+            @ItemContent?.Invoke(context)
+        </Virtualize>
+    </div>
+    @FooterContent
+</div>

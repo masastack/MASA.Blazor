@@ -1,13 +1,13 @@
 ---
 title: Virtual scroller（虚拟滚动条）
-desc: "MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。"
+desc: "MVirtualScroll 组件显示一个虚拟、无限的列表。 它支持动态高度和垂直滚动。"
 related:
   - /blazor/components/lists
   - /blazor/components/data-tables
-  - /blazor/components/data-iterators
+  - /blazor/components/infinite-scroll
 ---
 
-## 组件结构解剖
+> **MVirtualScroll** 组件只是简单封装了 Blazor 官方的 [Virtualize](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/virtualization) 组件，因此它不像官方组件那样灵活和功能强大。  
 
 ## 示例
 

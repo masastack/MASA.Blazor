@@ -5,9 +5,9 @@ related:
   - /blazor/components/lists
   - /blazor/components/data-tables
   - /blazor/components/data-iterators
---- 
+---
 
-## Anatomy
+> **MVirtualScroll** component is just a simple wrapper around the Blazor official [Virtualize](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/virtualization) component, so it is not as flexible and powerful as the official component.
 
 ## Examples
 
