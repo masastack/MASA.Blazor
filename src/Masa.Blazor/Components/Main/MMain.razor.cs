@@ -1,19 +1,22 @@
 ﻿using System.ComponentModel;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public class MMain : BMain
+public partial class MMain : MasaComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private static string[] _applicationProperties =
+    {
+        "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
+    };
 
     private bool _sized;
 
     private bool IsSsr => MasaBlazor.IsSsr;
-
-    private static string[] s_applicationProperties =
-    {
-        "Top", "Bar", "Right", "Footer", "InsetFooter", "Bottom", "Left"
-    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,28 +44,32 @@ public class MMain : BMain
 
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (s_applicationProperties.Contains(e.PropertyName))
+        if (_applicationProperties.Contains(e.PropertyName))
         {
             _sized = true;
             InvokeStateHasChanged();
         }
     }
 
-    protected override void SetComponentCss()
+    private Block _block = new("m-main");
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .UseBem("m-main", css => { css.AddIf("app--sized", () => _sized); }, style =>
-            {
-                if (!IsSsr)
-                {
-                    style
-                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
-                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
-                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
-                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
-                }
-            })
-            .Element("wrap");
+        return _block
+            .AddClass("app--sized", _sized)
+            .GenerateCssClasses();
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        return StyleBuilder.Create()
+            .AddIf("padding-top", $"{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px", !IsSsr)
+            .AddIf("padding-right", $"{MasaBlazor.Application.Right}px", !IsSsr)
+            .AddIf("padding-bottom",
+                $"{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px",
+                !IsSsr)
+            .AddIf("padding-left", $"{MasaBlazor.Application.Left}px", !IsSsr)
+            .GenerateCssStyles();
     }
 
     protected override ValueTask DisposeAsyncCore()
