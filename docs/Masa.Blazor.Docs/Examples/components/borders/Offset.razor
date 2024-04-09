@@ -5,7 +5,7 @@
                         Color="primary">
             @foreach (var item in items)
             {
-                <MBorder Value="@(selectedItem == item.Text)" Offset="offset" Width="4">
+                <MBorder Value="@(selectedItem == item.Text)" Offset="offset" Size="4">
                     <MListItem Value="@item.Text">
                         <MListItemIcon>
                             <MIcon>@item.Icon</MIcon>

@@ -138,10 +138,48 @@
 /* border */
 
 .m-border {
-    border-style: solid;
-    border-width: 4px;
-    content: "";
+    position: relative;
+}
+
+.m-border:after {
+    background-color: var(--m-border-color);
+    content: '';
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
+}
+
+.m-border.m-border--active:after {
+    opacity: 1;
+    transition: opacity .3s cubic-bezier(.25,.8,.5,1);
+}
+
+.m-border--left:after, .m-border--right:after {
+    top: 0;
+    height: 100%;
+    width: var(--m-border-size);
+}
+
+.m-border--left:after {
+    left: var(--m-border-offset);
+}
+
+.m-border--right:after {
+    right: var(--m-border-offset);
+}
+
+.m-border--top:after, .m-border--bottom:after {
+    left: 0;
+    height: var(--m-border-size);
+    width: 100%;
+}
+
+.m-border--top:after {
+    top: var(--m-border-offset);
+}
+
+.m-border--bottom:after {
+    bottom: var(--m-border-offset);
 }
 
 .m-border__left, .m-border__right {
