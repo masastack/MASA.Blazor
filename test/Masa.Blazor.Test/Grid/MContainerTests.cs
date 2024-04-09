@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(container => container.Fluid, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFluidClass = classes.Contains("container--fluid");
 
             // Assert
