@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-system-bar");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.App, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-system-bar");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.Fixed, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-system-bar");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.LightsOut, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightsOutClass = classes.Contains("m-system-bar");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.SystemBar
             {
                 props.Add(systembar => systembar.Window, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasWindowClass = classes.Contains("m-system-bar");
 
             // Assert
