@@ -36,7 +36,6 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     [Parameter(CaptureUnmatchedValues = true)]
     public virtual IDictionary<string, object?> Attributes { get; set; } = new Dictionary<string, object?>();
 
-    // BlazorComponent will be merge into Masa.Blazor in feature
     public static readonly string ImplementedAssemblyName = "Masa.Blazor";
 
     private readonly PropertyWatcher _watcher;
@@ -135,7 +134,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             RefBack?.Set(value);
         }
     }
-
+    
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         _dirtyParameters = parameters.ToDictionary().Keys.ToArray();
