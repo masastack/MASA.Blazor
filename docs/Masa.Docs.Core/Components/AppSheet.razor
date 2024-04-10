@@ -6,6 +6,7 @@
         Rounded="true"
         Width="@Width"
         MaxWidth="@MaxWidth"
+        MinWidth="@MinWidth"
         @attributes="@Attributes">
     @ChildContent
 </MSheet>
@@ -29,6 +30,9 @@
 
     [Parameter]
     public StringNumber? MaxWidth { get; set; }
+
+    [Parameter]
+    public StringNumber? MinWidth { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();

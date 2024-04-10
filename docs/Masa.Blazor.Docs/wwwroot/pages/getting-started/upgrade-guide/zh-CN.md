@@ -1,5 +1,25 @@
 # 升级指南
 
+## 从 v1.2.x 升级到 v1.4.0
+
+### 组件
+
+#### DragZone
+
+该组件已弃用但未删除，建议使用 [MSortable](/blazor/labs/sortable) 组件。
+
+#### InfiniteScroll
+
+`Parent`参数现在不再支持将 **ElementReference** 类型的值，请使用 CSS 选择器字符串。改动原因请移步 [Github](https://github.com/masastack/MASA.Blazor/issues/1820#issuecomment-2041300810)。
+
+#### PageContainer
+
+内部不再使用 **Windows** 组件作为切换的容器，因此有使用内部 CSS 类名的自定义样式可能会失效。
+
+### CSS
+
+`m-application--wrap` 类名改为 `m-application__wrap`。
+
 ## 从 v1.1.x 升级到 v1.2.0
 
 ### 组件

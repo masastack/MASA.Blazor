@@ -47,7 +47,28 @@
 
         public int GetWeekNumber(int dayInMonth)
         {
-            return 0;
+            var year = DisplayedYear;
+            var month = DisplayedMonth + 1;
+            var day = dayInMonth;
+            
+            var daysInMonth = DateTime.DaysInMonth(year, month);
+            if (dayInMonth > daysInMonth)
+            {
+                if (month == 12)
+                {
+                    year++;
+                    month = 1;
+                }
+                else
+                {
+                    month++;
+                }
+
+                day = dayInMonth - daysInMonth;
+            }
+            
+            var date = new DateTime(year, month, day);
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(date, CalendarWeekRule, (DayOfWeek)FirstDayOfWeek);
         }
 
         protected override void SetComponentClass()

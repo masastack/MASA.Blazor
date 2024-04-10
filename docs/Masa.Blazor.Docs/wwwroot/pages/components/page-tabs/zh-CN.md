@@ -7,7 +7,7 @@ related:
   - /blazor/components/menus
 ---
 
-## 组件列表
+## 组件
 
 ### PPageTabs
 
@@ -50,7 +50,7 @@ related:
 - [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
   Page1：演示保存页面状态的功能
 - [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
-  Page2：演示使用`ExcludedPatterns`属性后不会保存页面状态的功能
+  Page2：演示使用`ExcludedPatterns`属性后不会缓存状态的功能，以及不可关闭的功能
 - [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)
   Page3：演示更改标签页标题的功能
 - [PageTabs4.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs4.razor)

@@ -197,9 +197,11 @@
       {
         "title": "pickers",
         "group": "components",
+        "state": "update",
         "items": [
           {
             "title": "date-pickers",
+            "state": "update",
             "exact": true
           },
           "date-pickers-month",
@@ -298,6 +300,11 @@
         "releasedOn": "v1.1.0"
       },
       {
+        "title": "page-stack",
+        "state": "new",
+        "releasedOn": "v1.4.0"
+      },
+      {
         "title": "pull-refresh",
         "state": "new",
         "releasedOn": "v1.1.1"
@@ -332,6 +339,13 @@
         "state": "new",
         "releasedOn": "v1.3.0"
       }
+    ]
+  },
+  {
+    "title": "resources",
+    "icon": "mdi-book-open",
+    "items": [
+      "made-with-masa-blazor"
     ]
   },
   {

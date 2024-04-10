@@ -8,6 +8,8 @@ namespace Masa.Blazor
 
         [Parameter] public string? ContentClass { get; set; }
 
+        [Parameter] public string? ContentStyle { get; set; }
+
         [Parameter]
         [MasaApiParameter("center center")]
         public string Origin { get; set; } = "center center";
@@ -37,6 +39,11 @@ namespace Masa.Blazor
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
+        // NEXT MAJOR: This parameter overlaps with the ChildContent parameter,
+        // but it's not possible to simply set the context for ChildContent,
+        // so we need to keep it for now util next major.
+        [Parameter] public RenderFragment<DialogContentContext>? OutcomeContent { get; set; }
+
         [Parameter] public bool Fullscreen { get; set; }
 
         [Parameter] public bool HideOverlay { get; set; }
@@ -53,9 +60,12 @@ namespace Masa.Blazor
 
         [Parameter] public bool Light { get; set; }
 
+        [Parameter] public Dictionary<string, object?>? ContentAttributes { get; set; }
+
         private readonly List<IDependent> _dependents = new();
 
-        private bool _attatched;
+        private bool _attached;
+        private DialogContentContext? _contentContext;
 
         public bool IsDark
         {
@@ -129,7 +139,7 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
 
-                _attatched = true;
+                _attached = true;
             }
         }
 
@@ -180,7 +190,7 @@ namespace Masa.Blazor
 
         protected override async ValueTask DisposeAsyncCore()
         {
-            if (!_attatched)
+            if (!_attached)
             {
                 return;
             }
@@ -217,19 +227,18 @@ namespace Masa.Blazor
                 () => OutsideClickJsModule == null || OutsideClickJsModule.Initialized == false);
         }
 
-        public Dictionary<string, object> ContentAttrs
+        public Dictionary<string, object?> ContentAttrs
         {
             get
             {
-                var attrs = new Dictionary<string, object>
-                {
-                    { "role", "document" }
-                };
+                var attrs = new Dictionary<string, object?>();
 
                 if (IsActive)
                 {
                     attrs.Add("tabindex", 0);
                 }
+
+                ContentAttributes?.ForEach(x => attrs[x.Key] = x.Value);
 
                 return attrs;
             }
@@ -258,6 +267,13 @@ namespace Masa.Blazor
 
         private bool IndependentTheme =>
             (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            _contentContext = new DialogContentContext(() => RunDirectly(false));
+        }
 
 #if NET8_0_OR_GREATER
         protected override void OnParametersSet()
@@ -297,7 +313,11 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
+
+                        // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
+                        // and the potential for breaking changes, we keep it unchanged.
                         .Add(ContentClass)
+
                         .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--persistent", () => Persistent)
                         .AddIf($"{prefix}--fullscreen", () => Fullscreen)
@@ -308,7 +328,11 @@ namespace Masa.Blazor
                     styleBuilder
                         .Add($"transform-origin: {Origin}")
                         .AddWidth(Width)
-                        .AddMaxWidth(MaxWidth);
+                        .AddMaxWidth(MaxWidth)
+
+                        // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
+                        // and the potential for breaking changes, we keep it unchanged.
+                        .Add(ContentStyle);
                 });
         }
     }

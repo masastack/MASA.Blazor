@@ -59,8 +59,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     private void OnThemeChange(Theme theme)
     {
-        var themeOptions = theme.Dark ? theme.Themes.Dark : theme.Themes.Light;
-        var style = ThemeCssBuilder.Build(themeOptions, theme.Dark);
+        var style = ThemeCssBuilder.Build(theme);
         InvokeAsync(async () =>
         {
             await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);

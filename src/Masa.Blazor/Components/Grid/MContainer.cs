@@ -1,22 +1,21 @@
-﻿namespace Masa.Blazor
-{
-    public partial class MContainer : BContainer
-    {
-        /// <summary>
-        /// Removes viewport maximum-width size breakpoints
-        /// </summary>
-        [Parameter]
-        public bool Fluid { get; set; }
+﻿namespace Masa.Blazor;
 
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("container")
-                        .AddIf("container--fluid", () => Fluid);
-                });
-        }
+public class MContainer : Container
+{
+    [Parameter] [MasaApiParameter("div")] public string Tag { get; set; } = "div";
+
+    /// <summary>
+    /// Removes viewport maximum-width size breakpoints
+    /// </summary>
+    [Parameter]
+    public bool Fluid { get; set; }
+
+    protected override string TagName => Tag;
+
+    private Block _block = new("container");
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return _block.Modifier(Fluid).GenerateCssClasses();
     }
 }

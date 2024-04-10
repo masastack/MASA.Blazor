@@ -186,6 +186,10 @@
     "PPageContainer",
     "PPageProvider"
   ],
+  "page-stack": [
+    "PPageStack",
+    "PPageStackItemInit"
+  ],
   "xgplayer": [
     "MXgplayer",
     "MXgMusicPlayer",
@@ -193,5 +197,9 @@
     "MXgplayerPlay",
     "MXgplayerTime",
     "MXgplayerStart"
+  ],
+  "splitters": [
+    "MSplitter",
+    "MSplitterPane"
   ]
 }

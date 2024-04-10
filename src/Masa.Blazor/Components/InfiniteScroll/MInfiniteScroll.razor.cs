@@ -10,7 +10,8 @@ public partial class MInfiniteScroll : BDomComponentBase
     /// The parent element that has overflow style.
     /// </summary>
     [Parameter, EditorRequired]
-    public OneOf<ElementReference, string>? Parent { get; set; }
+    [MasaApiParameter("window")]
+    public string? Parent { get; set; } = "window";
 
     [Parameter] public string? Color { get; set; }
 
@@ -43,8 +44,20 @@ public partial class MInfiniteScroll : BDomComponentBase
     [Parameter] public RenderFragment<Func<Task>>? LoadMoreContent { get; set; }
 
     private bool _isAttached;
-    private string? _parentSelector;
+    private bool _dirtyLoad;
+    private bool _firstRendered;
     private InfiniteScrollLoadStatus _loadStatus;
+    private string? _prevParent;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Manual)
+        {
+            _loadStatus = InfiniteScrollLoadStatus.Ok;
+        }
+    }
 
     public override Task SetParametersAsync(ParameterView parameters)
     {
@@ -54,6 +67,43 @@ public partial class MInfiniteScroll : BDomComponentBase
         LoadMoreText ??= I18n.T("$masaBlazor.infiniteScroll.loadMoreText");
 
         return base.SetParametersAsync(parameters);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_prevParent != Parent)
+        {
+            _prevParent = Parent;
+            if (!_firstRendered || !Manual) return;
+            await AddScrollListenerAndLoadAsync();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (Manual)
+            {
+                await DoLoadMore();
+                StateHasChanged();
+            }
+            else
+            {
+                _firstRendered = true;
+                await AddScrollListenerAndLoadAsync();
+            }
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task AddScrollListenerAndLoadAsync()
+    {
+        AddScrollListener();
+        await ScrollCallback();
     }
 
     protected override void SetComponentCss()
@@ -69,24 +119,11 @@ public partial class MInfiniteScroll : BDomComponentBase
         watcher.Watch<bool>(nameof(Manual), ManualChangeCallback);
     }
 
-    private async void ManualChangeCallback(bool val)
+    private void ManualChangeCallback(bool val)
     {
-        if (val)
+        if (!val)
         {
-            await AddScrollListener();
-        }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await DoLoadMore();
-
-            NextTick(async () => { await AddScrollListener(); });
-            StateHasChanged();
+            AddScrollListener();
         }
     }
 
@@ -96,36 +133,21 @@ public partial class MInfiniteScroll : BDomComponentBase
     [MasaApiPublicMethod]
     public async Task ResetAsync() => await DoLoadMore();
 
-    private async Task AddScrollListener()
+    private void AddScrollListener()
     {
-        if (!_isAttached && Parent is { Value: not null })
-        {
-            string? selector = null;
+        if (!_firstRendered || _isAttached || string.IsNullOrWhiteSpace(Parent)) return;
 
-            if (Parent.Value.IsT0 && Parent.Value.AsT0.Id is not null)
+        _isAttached = true;
+        _ = Js.AddHtmlElementEventListener(Parent, "scroll", ScrollCallback, false,
+            new EventListenerExtras(0, 0)
             {
-                selector = Parent.Value.AsT0.GetSelector();
-            }
-            else if (Parent.Value.IsT1)
-            {
-                selector = Parent.Value.AsT1;
-            }
-
-            if (selector is null)
-            {
-                return;
-            }
-
-            _isAttached = true;
-            _parentSelector = selector;
-
-            await Js.AddHtmlElementEventListener(selector, "scroll", OnScroll, false, new EventListenerExtras(0, 100));
-        }
+                Key = Ref.Id
+            });
     }
 
-    private async Task OnScroll()
+    private async Task ScrollCallback()
     {
-        if (_parentSelector is null || Manual || !OnLoad.HasDelegate || _loadStatus == InfiniteScrollLoadStatus.Empty)
+        if (Parent is null || Manual || !OnLoad.HasDelegate || _loadStatus == InfiniteScrollLoadStatus.Empty)
         {
             return;
         }
@@ -138,19 +160,22 @@ public partial class MInfiniteScroll : BDomComponentBase
 
         // OPTIMIZE: Combine scroll event and the following js interop.
         var exceeded = await JsInvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
-            _parentSelector,
+            Parent,
             Threshold.ToDouble());
+
         if (!exceeded)
         {
             return;
         }
 
         await DoLoadMore();
-        StateHasChanged();
+
+        _ = InvokeAsync(StateHasChanged);
     }
 
     private async Task DoLoadMore()
     {
+        _dirtyLoad = true;
         _loadStatus = InfiniteScrollLoadStatus.Loading;
 
         var eventArgs = new InfiniteScrollLoadEventArgs();
@@ -171,11 +196,11 @@ public partial class MInfiniteScroll : BDomComponentBase
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        if (_parentSelector is null)
+        if (Parent is null)
         {
             return;
         }
 
-        await Js.RemoveHtmlElementEventListener(_parentSelector, "scroll");
+        await Js.RemoveHtmlElementEventListener(Parent, "scroll", key: Ref.Id);
     }
 }

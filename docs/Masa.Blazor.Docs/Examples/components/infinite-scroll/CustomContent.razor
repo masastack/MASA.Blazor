@@ -2,7 +2,7 @@
        Height="250"
        Class="overflow-auto"
        Style="margin: 0 auto"
-       @ref="_card">
+       Id="infinite-scroll-custom">
     <MList>
         @foreach (var item in _items)
         {
@@ -16,7 +16,7 @@
     </MList>
     <MInfiniteScroll Manual
                      OnLoad="@OnLoad"
-                     Parent="@_card?.Ref">
+                     Parent="#infinite-scroll-custom">
         <LoadingContent>
             <MProgressLinear Indeterminate Color="primary"></MProgressLinear>
         </LoadingContent>

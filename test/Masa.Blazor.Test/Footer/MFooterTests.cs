@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-footer");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.App, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAppClass = classes.Contains("m-footer");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Elevation, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Fixed, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-footer");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Inset, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInsetClass = classes.Contains("m-footer");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-footer");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Padless, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPadlessClass = classes.Contains("m-footer");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-footer");
 
             // Assert
@@ -255,7 +255,7 @@ namespace Masa.Blazor.Test.Footer
             {
                 props.Add(footer => footer.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-footer");
 
             // Assert

@@ -1,15 +1,9 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MSpacer : Container
 {
-    public partial class MSpacer : BSpacer
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("spacer");
-                });
-        }
+        yield return "spacer";
     }
 }

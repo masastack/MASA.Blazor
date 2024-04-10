@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Cols, 12);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasColsClass = classes.Contains("col");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Lg, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLgClass = classes.Contains("col");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Md, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMdClass = classes.Contains("col");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Offset, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetClass = classes.Contains("col");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OffsetLg, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetLgClass = classes.Contains("col");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OffsetMd, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetMdClass = classes.Contains("col");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OffsetSm, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetSmClass = classes.Contains("col");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OffsetXl, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetXlClass = classes.Contains("col");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Order, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOrderClass = classes.Contains("col");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OrderLg, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOrderLgClass = classes.Contains("col");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OrderMd, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOrderMdClass = classes.Contains("col");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OrderSm, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOrderSmMdClass = classes.Contains("col");
 
             // Assert
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.OrderXl, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOrderXlClass = classes.Contains("col");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Sm, 3);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmClass = classes.Contains("col");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.Grid
             {
                 props.Add(col => col.Xl, 3);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasXlClass = classes.Contains("col");
 
             // Assert

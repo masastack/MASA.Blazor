@@ -278,8 +278,7 @@ namespace Masa.Blazor
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
-                _block.Modifier("app--sized", _sized)
-                    .And("clipped", ClippedLeft || ClippedRight)
+                _block.Modifier("clipped", ClippedLeft || ClippedRight)
                     .And(ClippedLeft)
                     .And(ClippedRight)
                     .And(FadeImgOnScroll)
@@ -289,6 +288,7 @@ namespace Masa.Blazor
                     .And(HideShadow)
                     .And("is-scrolled", _scroller is { CurrentScroll: > 0 })
                     .And(ShrinkOnScroll)
+                    .AddClass("app--sized", _sized)
                     .GenerateCssClasses()
             );
         }
@@ -340,14 +340,19 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await Js.AddHtmlElementEventListener(ScrollTarget, "scroll", async () =>
-                {
-                    if (!CanScroll) return;
+                await Js.AddHtmlElementEventListener(
+                    ScrollTarget,
+                    "scroll",
+                    async () =>
+                    {
+                        if (!CanScroll) return;
 
-                    await _scroller!.OnScroll(ThresholdMet);
+                        await _scroller!.OnScroll(ThresholdMet);
 
-                    StateHasChanged();
-                }, false);
+                        StateHasChanged();
+                    },
+                    false,
+                    new EventListenerExtras(key: Ref.Id));
             }
         }
 
@@ -374,7 +379,7 @@ namespace Masa.Blazor
         {
             try
             {
-                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll");
+                await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll", key: Ref.Id);
             }
             catch (Exception)
             {

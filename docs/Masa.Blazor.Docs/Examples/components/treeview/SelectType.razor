@@ -3,8 +3,14 @@
              Items="_types" ItemText="r=>r.ToString()" ItemValue="r=>r"></MSelect>
     <MRow>
         <MCol>
-            <MTreeview TItem="Data" TKey="int" OnInput="val=>_selection = val" Selectable SelectionType="_type" Items="_data"
-                       ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id">
+            <MTreeview TItem="Data"
+                       TKey="int"
+                       OnSelectUpdate="@(val => _selection = val)"
+                       Selectable
+                       SelectionType="_type" Items="_data"
+                       ItemText="r=>r.Name"
+                       ItemChildren="r=>r.Children" 
+                       ItemKey="r=>r.Id">
             </MTreeview>
         </MCol>
         <MDivider Vertical></MDivider>
@@ -29,7 +35,7 @@
 
 @code {
     private SelectionType _type;
-    private List<Data> _selection;
+    private List<Data>? _selection;
 
     private List<SelectionType> _types = new List<SelectionType>
     {

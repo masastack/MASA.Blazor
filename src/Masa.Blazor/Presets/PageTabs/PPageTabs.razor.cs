@@ -59,6 +59,9 @@ public partial class PPageTabs : PatternPathComponentBase
     #endregion
 
     [Parameter]
+    public string? CloseTabText { get; set; }
+    
+    [Parameter]
     public string? ReloadTabText { get; set; }
 
     [Parameter]
@@ -110,6 +113,7 @@ public partial class PPageTabs : PatternPathComponentBase
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
+        CloseTabText = I18n.T("$masaBlazor.pageTabs.closeTab");
         ReloadTabText = I18n.T("$masaBlazor.pageTabs.reloadTab");
         CloseTabsToTheLeftText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheLeft");
         CloseTabsToTheRightText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheRight");
@@ -133,6 +137,14 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
+    protected override PatternPath GetCurrentPatternPath()
+    {
+        var pathPattern = base.GetCurrentPatternPath();
+        var tabOptions = TabOptions?.Invoke(new PageTabPathValue(pathPattern.AbsolutePath, false));
+        pathPattern.Options = tabOptions;
+        return pathPattern;
+    }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return "p-page-tabs";
@@ -141,13 +153,18 @@ public partial class PPageTabs : PatternPathComponentBase
     [MasaApiPublicMethod]
     public void CloseAllTabs(bool disableAutoNavigation = false)
     {
-        PatternPaths.Clear();
-        TabsUpdated?.Invoke(this, Array.Empty<PatternPath>());
-        PageTabsProvider?.RemoveAllPathTitles();
+        var toClosePatternPaths = PatternPaths.Where(p => p.IsCloseable);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
+        TabsUpdated?.Invoke(this, PatternPaths.ToArray());
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
+        PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
         if (!disableAutoNavigation)
         {
-            NavigationManager.NavigateTo(NoDataPath);
+            if (PatternPaths.Count > 0)
+                NavigationManager.NavigateTo(PatternPaths[0].AbsolutePath);
+            else
+                NavigationManager.NavigateTo(NoDataPath);
         }
     }
 
@@ -155,6 +172,11 @@ public partial class PPageTabs : PatternPathComponentBase
     public void CloseCurrentTab(bool disableAutoNavigation = false)
     {
         var current = GetCurrentPatternPath();
+
+        if (!current.IsCloseable)
+        {
+            return;
+        }
 
         if (!disableAutoNavigation)
         {
@@ -232,7 +254,7 @@ public partial class PPageTabs : PatternPathComponentBase
             }
         }
 
-        if (!PatternPaths.Any(p => p.Pattern == currentPatternPath.Pattern))
+        if (!PatternPaths.Contains(currentPatternPath))
         {
             PatternPaths.Add(currentPatternPath);
         }
@@ -242,7 +264,7 @@ public partial class PPageTabs : PatternPathComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    private string GetTabTitle(PatternPath patternPath, TabOptions? tabOptions)
+    private string GetTabTitle(PatternPath patternPath)
     {
         if (PageTabsProvider != null && PageTabsProvider.PathTitles.TryGetValue(patternPath.AbsolutePath, out var titleBuilder) &&
             titleBuilder.Invoke() is { } title && !string.IsNullOrWhiteSpace(title))
@@ -250,7 +272,7 @@ public partial class PPageTabs : PatternPathComponentBase
             return title;
         }
 
-        return tabOptions?.Title ?? DefaultTabTitle(patternPath.AbsolutePath);
+        return patternPath.Options?.Title ?? DefaultTabTitle(patternPath.AbsolutePath);
     }
 
     private string DefaultTabTitle(string absolutePath)
@@ -265,6 +287,11 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private async Task HandleOnCloseTab(PatternPath patternPath, string tabTitle)
     {
+        if (!patternPath.IsCloseable)
+        {
+            return;
+        }
+
         if (AskBeforeClosing)
         {
             bool isConfirmed;
@@ -296,6 +323,12 @@ public partial class PPageTabs : PatternPathComponentBase
         TabReload?.Invoke(this, _contextmenuPath);
     }
 
+    private async Task HandleOnCloseTabOnMenu()
+    {
+        if (_contextmenuPath is null) return;
+        await HandleOnCloseTab(_contextmenuPath, GetTabTitle(_contextmenuPath));
+    }
+
     private void HandleOnCloseTabsToTheLeft()
     {
         if (_contextmenuPath is null) return;
@@ -304,10 +337,11 @@ public partial class PPageTabs : PatternPathComponentBase
 
         var index = PatternPaths.FindIndex(p => p == _contextmenuPath);
 
-        var closingAbsolutePaths = PatternPaths.Take(index + 1).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Take(index).Where(p => p.IsCloseable).ToList();
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
-        PatternPaths.RemoveRange(0, index);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         if (!PatternPaths.Contains(currentPath))
         {
@@ -329,10 +363,11 @@ public partial class PPageTabs : PatternPathComponentBase
         var startIndex = index + 1;
         var count = PatternPaths.Count - startIndex;
 
-        var closingAbsolutePaths = PatternPaths.Skip(startIndex).Take(count).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Skip(startIndex).Take(count).Where(p => p.IsCloseable).ToList();
+        var closingAbsolutePaths = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePaths);
 
-        PatternPaths.RemoveRange(startIndex, count);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         if (!PatternPaths.Contains(currentPath))
         {
@@ -387,10 +422,11 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private void CloseOtherTabs(PatternPath current)
     {
-        var closingAbsolutePath = PatternPaths.Where(p => p != current).Select(p => p.AbsolutePath).ToArray();
+        var toClosePatternPaths = PatternPaths.Where(p => p != current && p.IsCloseable).ToList();
+        var closingAbsolutePath = toClosePatternPaths.Select(p => p.AbsolutePath).ToArray();
         PageTabsProvider?.RemovePathTitles(closingAbsolutePath);
 
-        PatternPaths.RemoveAll(p => p != current);
+        PatternPaths.RemoveAll(p => toClosePatternPaths.Contains(p));
 
         NavigationManager.NavigateTo(current.AbsolutePath);
 

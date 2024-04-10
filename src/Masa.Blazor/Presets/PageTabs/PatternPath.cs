@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class PatternPath
+public record PatternPath
 {
     public PatternPath(string absolutePath)
     {
@@ -33,6 +33,10 @@ public class PatternPath
     /// Use for keeping track of the order of the path, see #1535
     /// </summary>
     public DateTime CreatedAt { get; }
+
+    public TabOptions? Options { get; set; }
+
+    public bool IsCloseable => Options?.Closeable ?? true;
 
     public void UpdatePath(string path)
     {

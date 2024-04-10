@@ -17,9 +17,8 @@
            @ref="@_tabs">
         @foreach (var patternPath in PatternPaths)
         {
-            var pathValue = new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath());
-            var tabOptions = TabOptions?.Invoke(pathValue);
-            var tabTitle = GetTabTitle(patternPath, tabOptions);
+            var tabTitle = GetTabTitle(patternPath);
+            var tabOptions = patternPath.Options;
 
             <MTab Href="@patternPath.AbsolutePath"
                   Class="@_tabBlock.AddClass(TabClass).AddClass(tabOptions?.Class).ToString()"
@@ -33,7 +32,7 @@
 
                 @if (TabIconContent != default)
                 {
-                    TabIconContent.Invoke(pathValue);
+                    TabIconContent.Invoke(new PageTabPathValue(patternPath.AbsolutePath, patternPath.AbsolutePath == NavigationManager.GetAbsolutePath()));
                 }
                 else if (tabOptions?.Icon != default)
                 {
@@ -44,14 +43,17 @@
                     @tabTitle
                 </span>
 
-                <MButton Icon
-                         Class="@_tabBlock.Element("close").Build()"
-                         OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
-                         Small
-                         OnClickStopPropagation
-                         OnClickPreventDefault>
-                    <MIcon Small>@(CloseIcon ?? "$close")</MIcon>
-                </MButton>
+                @if ((tabOptions == null) || tabOptions.Closeable)
+                {
+                    <MButton Icon
+                             Class="@_tabBlock.Element("close").Build()"
+                             OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
+                             XSmall
+                             OnClickStopPropagation
+                             OnClickPreventDefault>
+                        <MIcon Small>@(CloseIcon ?? "$close")</MIcon>
+                    </MButton>
+                }
             </MTab>
         }
 
@@ -62,10 +64,16 @@
                PositionY="@_positionY"
                CloseOnContentClick>
             <MList Dense>
+                @if (_contextmenuPath is { IsCloseable: true })
+                {
+                    <MListItem OnClick="HandleOnCloseTabOnMenu">@CloseTabText</MListItem>
+                }
+
                 @if (TabReload != null)
                 {
                     <MListItem OnClick="HandleOnReloadTab">@ReloadTabText</MListItem>
                 }
+
                 <MListItem OnClick="HandleOnCloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
                 <MListItem OnClick="HandleOnCloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
                 <MListItem OnClick="HandleOnCloseOtherTabs">@CloseOtherTabsText</MListItem>
