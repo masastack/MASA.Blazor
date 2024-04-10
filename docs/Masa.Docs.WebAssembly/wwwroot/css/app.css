@@ -1,32 +1,62 @@
-﻿.loading-progress {
-    position: relative;
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    margin: 20vh auto 1rem auto;
+﻿.gegga {
+    width: 0;
 }
 
-    .loading-progress circle {
-        fill: none;
-        stroke: #e0e0e0;
-        stroke-width: 0.6rem;
-        transform-origin: 50% 50%;
-        transform: rotate(-90deg);
-    }
+.snurra {
+    filter: url(#gegga);
+}
 
-        .loading-progress circle:last-child {
-            stroke: #1b6ec2;
-            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-            transition: stroke-dasharray 0.05s ease-in-out;
-        }
+#app.dark {
+    background-color: #131316;
+}
 
-.loading-progress-text {
+#app:not(.dark) .stopp1 {
+    stop-color: #4318FF;
+}
+
+#app:not(.dark) .stopp2 {
+    stop-color: #A18BFF;
+}
+
+#app.dark .stopp1 {
+    stop-color: #A18BFF;
+}
+
+#app.dark .stopp2 {
+    stop-color: #C5C0FF;
+}
+
+.halvan {
+    animation: Snurra1 10s infinite linear;
+    stroke-dasharray: 180 800;
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 23;
+    stroke-linecap: round;
+}
+
+.strecken {
+    animation: Snurra1 3s infinite linear;
+    stroke-dasharray: 26 54;
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 23;
+    stroke-linecap: round;
+}
+
+.skugga {
+    filter: blur(5px);
+    opacity: 0.3;
     position: absolute;
-    text-align: center;
-    font-weight: bold;
-    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+    transform: translate(3px, 3px);
 }
 
-    .loading-progress-text:after {
-        content: var(--blazor-load-percentage-text, "Loading");
+@keyframes Snurra1 {
+    0% {
+        stroke-dashoffset: -403px;
     }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
