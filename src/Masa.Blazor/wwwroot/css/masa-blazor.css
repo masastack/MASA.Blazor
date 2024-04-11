@@ -18850,6 +18850,7 @@ html.overflow-y-hidden {
     height: 24px;
     min-width: 24px;
     position: relative;
+    color: var(--m-theme-alert-color) !important;
 }
 .m-application--is-ltr .m-alert__icon {
     margin-right: 16px;
