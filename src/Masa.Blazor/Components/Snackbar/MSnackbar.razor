@@ -1,0 +1,32 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+        <Transition Name="@Transition">
+            <ShowTransitionElement Value="@Value"
+                                   Class="@GetWrapperClass()"
+                                   Style="@GetWrapperStyle()"
+                                   @onpointerenter="@HandleOnPointerEnter"
+                                   @onpointerleave="@HandleOnPointerLeave">
+                <div class="@_block.Element("content").AddClass(ContentClass)">
+                    @ChildContent
+                </div>
+                <div class="@_block.Element("action")">
+                    @if (!string.IsNullOrEmpty(Action))
+                    {
+                        <MButton Class="m-snack__btn"
+                                 Text
+                                 OnClick="@HandleOnAction">
+                            @Action
+                        </MButton>
+                    }
+                    else
+                    {
+                        @ActionContent
+                    }
+                </div>
+            </ShowTransitionElement>
+        </Transition>
+    </div>
+</CascadingValue>

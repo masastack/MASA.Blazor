@@ -40,3 +40,11 @@ Use `Text`, `Shaped`, `Outlined` and other attributes to apply different styles 
 The `Vertical` property allows you to stack the contents of **MSnackbar**.
 
 <masa-example file="Examples.components.snackbars.Vertical"></masa-example>
+
+### Contents
+
+#### ActionContent
+
+Use the `ActionContent` slot to customize the action button.
+
+<masa-example file="Examples.components.snackbars.ActionContent"></masa-example>

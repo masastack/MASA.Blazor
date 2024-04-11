@@ -32,18 +32,23 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Light.Secondary = "#5e5c71";
                 theme.Themes.Light.Accent = "#006C4F";
                 theme.Themes.Light.Error = "#BA1A1A";
-                // theme.Themes.Light.Surface = "#FCF8FD";
                 theme.Themes.Light.OnSurface = "#1C1B1F";
+                theme.Themes.Light.InverseSurface = "#131316";
+                theme.Themes.Light.InverseOnSurface = "#C9C5CA";
+                theme.Themes.Light.InversePrimary = "#C5C0FF";
 
                 theme.Themes.Dark.Primary = "#C5C0FF";
-                theme.Themes.Dark.Secondary = "#C7C4DC";
-                theme.Themes.Dark.Accent = "#67DBAF";
-                theme.Themes.Dark.Error = "#FFB4AB";
-                theme.Themes.Dark.Surface = "#131316";
                 theme.Themes.Dark.OnPrimary = "#090029";
+                theme.Themes.Dark.Secondary = "#C7C4DC";
                 theme.Themes.Dark.OnSecondary = "#302E42";
+                theme.Themes.Dark.Accent = "#67DBAF";
                 theme.Themes.Dark.OnAccent = "#003827";
+                theme.Themes.Dark.Error = "#FFB4AB";
+                theme.Themes.Dark.OnError = "#690005";
+                theme.Themes.Dark.Surface = "#131316";
                 theme.Themes.Dark.OnSurface = "#C9C5CA";
+                theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
+                theme.Themes.Dark.InversePrimary = "#4f33ff";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {

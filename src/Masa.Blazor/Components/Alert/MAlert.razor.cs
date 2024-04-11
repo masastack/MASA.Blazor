@@ -206,13 +206,15 @@ public partial class MAlert : BDomComponentBase, IThemeable
             }, style =>
             {
                 style.AddColor(ComputedColor, HasText, () => !ColoredBorder)
-                     .AddHeight(Height)
-                     .AddMaxHeight(MaxHeight)
-                     .AddMinHeight(MinHeight)
-                     .AddWidth(Width)
-                     .AddMaxWidth(MaxWidth)
-                     .AddMinWidth(MinWidth)
-                     .AddIf("display:none", () => Transition == null && !Value);
+                    .AddHeight(Height)
+                    .AddMaxHeight(MaxHeight)
+                    .AddMinHeight(MinHeight)
+                    .AddWidth(Width)
+                    .AddMaxWidth(MaxWidth)
+                    .AddMinWidth(MinWidth)
+                    .AddIf("display:none", () => Transition == null && !Value)
+                    .AddIf($"--m-theme-alert-color: var(--m-theme-on-{ComputedType})",
+                        () => Type != AlertTypes.None);
             })
             .Element("wrapper")
             .Element("content")
