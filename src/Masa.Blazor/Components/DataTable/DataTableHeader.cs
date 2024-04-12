@@ -54,4 +54,6 @@ public class DataTableHeader
     public double RealWidth { get; internal set; }
 
     public bool IsFixedShadowColumn { get; internal set; }
+
+    public bool Ellipsis { get; set; }
 }

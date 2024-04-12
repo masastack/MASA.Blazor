@@ -7,7 +7,8 @@
     {
         <th class="@CssProvider.GetClass("header", data: header)"
             style="@CssProvider.GetStyle("header", data: header)"
-            @onclick="() => HandleOnHeaderColClick(header)">
+            @onclick="() => HandleOnHeaderColClick(header)"
+            title="@header.Text">
             @if (header.Value == "data-table-select" && !SingleSelect)
             {
                 @GenSelectAll()

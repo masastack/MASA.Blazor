@@ -135,6 +135,25 @@
     border-right: none;
 }
 
+/* ellipsis in datatable */
+
+.m-data-table--fixed table {
+    table-layout: fixed;
+    min-width: 100%;
+}
+
+.m-data-table__column--ellipsis {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.m-data-table__column--ellipsis > .m-data-table-header__icon {
+    position: absolute;
+    right: 0;
+}
+
 /* border */
 
 .m-border {
