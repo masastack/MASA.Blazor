@@ -56,7 +56,7 @@ public partial class MDataTableRow<TItem>
                         .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
                         .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
                         .AddIf("first-fixed-column", () => header.IsFixedShadowColumn)
-                        .AddIf("m-data-table__column--ellipsis", () => header.Ellipsis);
+                        .AddIf("m-data-table__column--ellipsis", () => header.HasEllipsis);
                 }
             },  styleBuilder =>
             {

@@ -55,5 +55,14 @@ public class DataTableHeader
 
     public bool IsFixedShadowColumn { get; internal set; }
 
-    public bool Ellipsis { get; set; }
+    public DataTableEllipsis? Ellipsis { get; set; }
+
+    internal bool HasEllipsis => Ellipsis?.Enabled ?? false;
+}
+
+public class DataTableEllipsis
+{
+    public bool Enabled { get; set; } = true;
+
+    public bool HideTitle { get; set; }
 }

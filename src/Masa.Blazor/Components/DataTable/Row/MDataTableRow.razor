@@ -6,9 +6,11 @@
     @foreach (var header in Headers)
     {
         var props = new ItemColProps<TItem>(header, Item);
+        var title = header.Ellipsis is { Enabled: true, HideTitle: false } ? props.Value : null;
+
         <td class="@CssProvider.GetClass("cell", data: header)"
             style="@CssProvider.GetStyle("cell", data: header)"
-            title="@props.Value">
+            title="@title">
             @{
                 if (HasSlot(props))
                 {
