@@ -27,6 +27,18 @@
                     {
                         @SlotContent(props)
                     }
+                    else if (header.CellRender is not null)
+                    {
+                        var cell = header.CellRender(Item);
+                        if (cell.IsT0)
+                        {
+                            @cell.AsT0
+                        }
+                        else
+                        {
+                            @cell.AsT1
+                        }
+                    }
                     else
                     {
                         @props.Value
