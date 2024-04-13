@@ -137,7 +137,7 @@
 
 /* ellipsis in datatable */
 
-.m-data-table--fixed table {
+.m-data-table--fixed:not(.m-data-table--mobile) table {
     table-layout: fixed;
     min-width: 100%;
 }
