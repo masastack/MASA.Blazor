@@ -1,0 +1,41 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="Attributes">
+        <div class="@_block.Element("body")">
+            @ChildContent
+        </div>
+
+        <div class="@_block.Element("divider")">
+            @if (!HideDot)
+            {
+                <div class="@_block.Element("dot").Modifier(Small).And(Large)">
+                    <div class="@_block.Element("inner-dot").AddBackgroundColor(Color)"
+                         style="@(StyleBuilder.Create().AddBackgroundColor(Color))">
+                        @if (IconContent is not null)
+                        {
+                            @IconContent
+                        }
+                        else if (!string.IsNullOrWhiteSpace(Icon))
+                        {
+                            <MIcon Color="@IconColor"
+                                   Dark="@(!IsDark)"
+                                   Small="@Small">
+                                @Icon
+                            </MIcon>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (OppositeContent != null)
+        {
+            <div class="@_block.Element("opposite")">
+                @OppositeContent
+            </div>
+        }
+    </div>
+</CascadingValue>
