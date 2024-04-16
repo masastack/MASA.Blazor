@@ -1,8 +1,7 @@
 ﻿<MCard>
     <MTabs @bind-Value="_tabValue"
            BackgroundColor="red lighten-2"
-           Dark
-           @ref="_tabsRef">
+           Dark>
         @foreach (var tab in _tabs)
         {
             <MTab @key="tab" Value="tab">
@@ -34,8 +33,6 @@
 </MCard>
 
 @code {
-
-    private MTabs _tabsRef;
     private StringNumber _tabValue;
 
     private List<int> _tabs = Enumerable.Range(1, 3).ToList();
@@ -55,9 +52,5 @@
         {
             _tabValue = _tabs.LastOrDefault();
         }
-
-        StateHasChanged();
-        _ = _tabsRef.CallSlider();
     }
-
 }

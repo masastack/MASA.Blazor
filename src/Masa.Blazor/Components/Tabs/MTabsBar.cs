@@ -64,5 +64,12 @@
                 })
                 .Merge("content", css => { css.Add($"{prefix}__content"); });
         }
+
+        public override void Unregister(IGroupable item)
+        {
+            base.Unregister(item);
+
+            Tabs?.CallSliderAfterRender();
+        }
     }
 }
