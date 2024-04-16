@@ -44,7 +44,6 @@
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
             { typeof(BCascaderColumn<,>), typeof(MCascaderColumn<,>) },
-            { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
             { typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<>) }
         };
 
