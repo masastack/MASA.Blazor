@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor
 {
     public partial class MTabs : BTabs, IThemeable, IAsyncDisposable
     {
@@ -128,6 +130,7 @@
                     attrs[nameof(MTabsBar.CenterActive)] = CenterActive;
                     attrs[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
                     attrs[nameof(MTabsBar.IsDark)] = IsDark;
+                    attrs[nameof(MTabsBar.Style)] = StyleBuilder.Create().AddHeight(Height).Build();
                 })
                 .Apply<BItem, MSlideItem>()
                 .Apply<BTab, MTab>()
