@@ -424,12 +424,27 @@
                         .Select(r => r.Value)
                         .ToList();
 
-                    if (children.All(r => r.IsSelected))
+                    var selectedCount = 0;
+                    var indeterminateCount = 0;
+
+                    foreach (var item in children)
+                    {
+                        if (item.IsSelected)
+                        {
+                            selectedCount++;
+                        }
+                        else if (item.IsIndeterminate)
+                        {
+                            indeterminateCount++;
+                        }
+                    }
+
+                    if (selectedCount == children.Count)
                     {
                         nodeState.IsSelected = true;
                         nodeState.IsIndeterminate = false;
                     }
-                    else if (children.All(r => !r.IsSelected))
+                    else if (selectedCount == 0 && indeterminateCount == 0)
                     {
                         nodeState.IsSelected = false;
                         nodeState.IsIndeterminate = false;
