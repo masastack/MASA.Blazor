@@ -2,6 +2,12 @@
 {
     public partial class MTabsBar : MSlideGroup, IThemeable
     {
+        [Inject]
+        private NavigationManager NavigationManager { get; set; } = null!;
+
+        [CascadingParameter]
+        public BTabs? Tabs { get; set; }
+        
         [Parameter]
         public string? BackgroundColor { get; set; }
 
@@ -31,6 +37,11 @@
             }
         }
 #endif
+
+        protected override StringNumber InitDefaultItemValue()
+        {
+            return Tabs?.Routable is true ? NavigationManager.Uri : base.InitDefaultItemValue();
+        }
 
         protected override void SetComponentClass()
         {
