@@ -37,8 +37,8 @@ namespace Masa.Blazor
         [Parameter]
         public bool IconsAndText { get; set; }
 
-        [Parameter]
-        public StringNumber? MobileBreakpoint { get; set; }
+        // [Parameter]
+        // public StringNumber? MobileBreakpoint { get; set; }
 
         [Parameter]
         public bool Right { get; set; }
