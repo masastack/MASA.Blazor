@@ -1,6 +1,5 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
-@inject MasaBlazor MasaBlazor
 @implements IAsyncDisposable
 
 <MTabs Class="default-tabs"
@@ -64,17 +63,8 @@
         base.OnInitialized();
 
         _prevCulture = Culture;
-        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
     }
-
-    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
-    {
-        InvokeAsync(() =>
-        {
-            _tabs?.CallSlider();
-            StateHasChanged();
-        });
-    }
+    
 
     protected override void OnParametersSet()
     {
@@ -103,8 +93,6 @@
         {
             await _tabs.DisposeAsync();
         }
-
-        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
     }
 
 }

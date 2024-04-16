@@ -43,6 +43,18 @@
 
         protected override bool RTL => MasaBlazor.RTL;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+        }
+
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeAsync(CallSlider);
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
@@ -135,6 +147,7 @@
         {
             try
             {
+                MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
                 await IntersectJSModule.UnobserveAsync(Ref);
             }
             catch (Exception)
