@@ -12,16 +12,6 @@
             Tabs?.RegisterTabItem(this);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
-            {
-                Tabs?.CallSlider();
-            }
-        }
-
         protected override ValueTask DisposeAsyncCore()
         {
             Tabs?.UnregisterTabItem(this);
