@@ -37,6 +37,12 @@
         [Parameter]
         public bool Text { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+        
         private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
@@ -44,6 +50,24 @@
         internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         private readonly List<SnackbarOptions> _stack = new();
+
+        private bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return false;
+            }
+        }
 
         private bool IsPositionBottom => Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
 

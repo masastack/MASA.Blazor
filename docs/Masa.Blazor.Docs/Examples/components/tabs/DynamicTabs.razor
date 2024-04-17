@@ -1,51 +1,63 @@
 ﻿<MCard>
-    <MTabs
-        @bind-Value="tab"
-        BackgroundColor="red lighten-2"
-        Dark>
-        @foreach (var item in Enumerable.Range(0, Length))
+    <MTabs @bind-Value="_tabValue"
+           BackgroundColor="red lighten-2"
+           Dark
+           @ref="_tabsRef">
+        @foreach (var tab in _tabs)
         {
-            <MTab Value="item" @key="item">
-                Item @(item + 1)
+            <MTab @key="tab" Value="tab">
+                <span>
+                    Tab @tab
+                </span>
+                <MButton Icon OnClick="@(() => RemoveTab(tab))"
+                         OnClickStopPropagation>
+                    <MIcon>mdi-close</MIcon>
+                </MButton>
             </MTab>
         }
+        <MButton Icon Large Class="my-auto"
+                 OnClick="AddNewTab">
+            <MIcon>mdi-plus</MIcon>
+        </MButton>
     </MTabs>
+
     <MCardText Class="text-center">
-        <MButton
-            Disabled="@(Length == 0)"
-            Text
-            OnClick="() => Length--">
-            Remove Tab
-        </MButton>
-        <MDivider
-            Class="mx-4"
-            Vertical>
-        </MDivider>
-        <MButton
-            Text
-            OnClick="() => Length++">
-            Add Tab
-        </MButton>
+        <MTabsItems Value="@_tabValue">
+            @foreach (var tab in _tabs)
+            {
+            <MTabItem @key="tab" Value="tab">
+                Tab @tab
+            </MTabItem>
+            }
+        </MTabsItems>
     </MCardText>
 </MCard>
 
 @code {
 
+    private MTabs _tabsRef;
+    private StringNumber _tabValue;
 
-    int _length = 1;
+    private List<int> _tabs = Enumerable.Range(1, 3).ToList();
 
-    int Length
+    private void AddNewTab()
     {
-        get => _length;
-        set
-        {
-            _length = value;
-            tab = value - 1;
-        }
+        var newTab = _tabs.Count > 0 ? _tabs.Max() + 1 : 1;
+        _tabs.Add(newTab);
+        _tabValue = newTab;
     }
 
-    StringNumber tab;
+    private void RemoveTab(int val)
+    {
+        _tabs.Remove(val);
 
+        if (_tabValue == val)
+        {
+            _tabValue = _tabs.LastOrDefault();
+        }
 
+        StateHasChanged();
+        _ = _tabsRef.CallSlider();
+    }
 
 }

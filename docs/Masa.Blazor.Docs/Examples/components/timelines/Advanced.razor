@@ -7,9 +7,13 @@
                 <span>JL</span>
             </IconContent>
             <ChildContent>
-                <MTextField @bind-Value="_input" HideDetails="true" Flat Label="Leave a comment..." Solo OnKeyDown="HandleOnKeyDown">
+                <MTextField @bind-Value="_input"
+                            HideDetails="true" 
+                            Filled 
+                            Label="Leave a comment..."
+                            OnEnter="@Comment">
                     <AppendContent>
-                        <MButton Class="mx-0" Depressed OnClick="Comment">
+                        <MButton Class="mx-0" Depressed OnClick="@Comment">
                             Post
                         </MButton>
                     </AppendContent>
@@ -106,14 +110,6 @@
     private List<EventDemo> _events = new List<EventDemo>();
     private string _input = string.Empty;
     private int _nonce = 0;
-
-    private void HandleOnKeyDown(KeyboardEventArgs args)
-    {
-        if (args.Key == "Enter")
-        {
-            Comment();
-        }
-    }
 
     private void Comment()
     {

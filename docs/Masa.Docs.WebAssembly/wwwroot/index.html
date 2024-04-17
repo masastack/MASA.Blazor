@@ -71,7 +71,7 @@
 
     <script>
         const dark = localStorage.getItem("masablazor@theme");
-        if ((!dark && window.matchMedia('(prefers-color-scheme: dark)').matches) || dark === "dark") {
+        if (((!dark || dark === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches) || dark === "dark") {
             document.getElementById("app").classList.add("dark")
         }
     </script>

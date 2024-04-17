@@ -18,11 +18,7 @@ public partial class PSnackbar
 
     [Parameter] public string? ContentClass { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
     [Parameter] public StringNumber? Elevation { get; set; }
-
-    [Parameter] public bool Light { get; set; }
 
     [Parameter] public bool MultiLine { get; set; }
 
@@ -89,10 +85,10 @@ public partial class PSnackbar
             return Type switch
             {
                 AlertTypes.Success => "success",
-                AlertTypes.Info    => "info",
+                AlertTypes.Info => "info",
                 AlertTypes.Warning => "warning",
-                AlertTypes.Error   => "error",
-                _                  => null
+                AlertTypes.Error => "error",
+                _ => null
             };
         }
     }
@@ -106,10 +102,10 @@ public partial class PSnackbar
             return Type switch
             {
                 AlertTypes.Success => "$success",
-                AlertTypes.Error   => "$error",
-                AlertTypes.Info    => "$info",
+                AlertTypes.Error => "$error",
+                AlertTypes.Info => "$info",
                 AlertTypes.Warning => "$warning",
-                _                  => null
+                _ => null
             };
         }
     }
@@ -130,18 +126,10 @@ public partial class PSnackbar
         base.OnInitialized();
 
         _cssProvider = new ComponentCssProvider(() => Class, () => Style)
-                       .Apply("wrapper", css =>
-                       {
-                           css.Add("m-alert__wrapper");
-                       })
-                       .Apply("icon", css =>
-                       {
-                           css.Add("m-alert__icon");
-                       })
-                       .Apply("title", css =>
-                       {
-                           css.Add("m-alert__title");
-                       });
+            .Apply(css => css.Add("m-enqueued-snackbar"))
+            .Apply("wrapper", css => { css.Add("m-alert__wrapper"); })
+            .Apply("icon", css => { css.Add("m-alert__icon"); })
+            .Apply("title", css => { css.Add("m-alert__title"); });
     }
 
     private async Task HandleOnAction()

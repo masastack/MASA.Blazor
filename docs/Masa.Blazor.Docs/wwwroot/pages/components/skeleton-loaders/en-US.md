@@ -73,4 +73,4 @@ The skeleton loader is considered to be loading if one of the following conditio
 
 Disable the animation.
 
-<masa-example file="Examples.components.skeleton_loaders.BoilerplateComponent"></masa-example>
+<masa-example file="Examples.components.skeleton_loaders.Boilerplate"></masa-example>
