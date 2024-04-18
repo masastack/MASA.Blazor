@@ -10,7 +10,7 @@ namespace Masa.Blazor;
 /// <typeparam name="TValue">Numeric type or a list of numeric type</typeparam>
 /// <typeparam name="TNumeric">Numeric type</typeparam>
 #if NET6_0
-public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>, IOutsideClickJsCallback, IAsyncDisposable
+public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>, IOutsideClickJsCallback
 #else
 public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNumeric>, IOutsideClickJsCallback, IAsyncDisposable where TNumeric : struct, IComparable<TNumeric>
 #endif
@@ -723,17 +723,12 @@ public class MSliderBase<TValue, TNumeric> : MInput<TValue>, ISlider<TValue, TNu
         return Task.CompletedTask;
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
+        await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
 
-            _interopHandleReference?.Dispose();
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
+        _interopHandleReference?.Dispose();
+
+        await base.DisposeAsyncCore();
     }
 }

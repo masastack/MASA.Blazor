@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
+public partial class PDataFilter : BDomComponentBase
 {
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
@@ -174,18 +174,11 @@ public partial class PDataFilter : BDomComponentBase, IAsyncDisposable
         return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, _lowFrequencyRef, identifier);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
+        if (_lowFrequencyRef.TryGetSelector(out var selector))
         {
-            if (_lowFrequencyRef.TryGetSelector(out var selector))
-            {
-                await Js.RemoveHtmlElementEventListener(selector, "transitionend");
-            }
-        }
-        catch (Exception)
-        {
-            // ignored
+            await Js.RemoveHtmlElementEventListener(selector, "transitionend");
         }
     }
 

@@ -3,7 +3,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor;
 
-public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable, IAsyncDisposable
+public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable
 {
     public MBottomNavigation() : base(GroupType.ButtonGroup)
     {
@@ -207,18 +207,11 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         }
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
+        if (!string.IsNullOrWhiteSpace(ScrollTarget))
         {
-            if (!string.IsNullOrWhiteSpace(ScrollTarget))
-            {
-                await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
-            }
-        }
-        catch (Exception)
-        {
-            // ignored
+            await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
         }
     }
 }
