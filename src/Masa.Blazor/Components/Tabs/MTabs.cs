@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MTabs : BTabs, IThemeable, IAsyncDisposable
+    public partial class MTabs : BTabs, IThemeable
     {
         [Inject]
         protected MasaBlazor MasaBlazor { get; set; } = null!;
@@ -131,16 +131,11 @@
             }
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            try
-            {
-                await IntersectJSModule.UnobserveAsync(Ref);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            await IntersectJSModule.UnobserveAsync(Ref);
+            
+            await base.DisposeAsyncCore();
         }
     }
 }

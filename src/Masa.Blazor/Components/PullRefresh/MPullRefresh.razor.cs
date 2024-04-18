@@ -3,7 +3,7 @@ using Masa.Blazor.Utils;
 
 namespace Masa.Blazor;
 
-public partial class MPullRefresh : IAsyncDisposable
+public partial class MPullRefresh
 {
     [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
@@ -230,21 +230,14 @@ public partial class MPullRefresh : IAsyncDisposable
 
     protected override bool AfterHandleEventShouldRender() => false;
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await _scrollParentJSRef.TryDisposeAsync();
+        await _scrollParentJSRef.TryDisposeAsync();
 
-            if (_trackRef.TryGetSelector(out var trackSelector))
-            {
-                await Js.RemoveHtmlElementEventListener(trackSelector, "touchstart");
-                await Js.RemoveHtmlElementEventListener(trackSelector, "touchmove");
-            }
-        }
-        catch (Exception)
+        if (_trackRef.TryGetSelector(out var trackSelector))
         {
-            // ignored
+            await Js.RemoveHtmlElementEventListener(trackSelector, "touchstart");
+            await Js.RemoveHtmlElementEventListener(trackSelector, "touchmove");
         }
     }
 }
