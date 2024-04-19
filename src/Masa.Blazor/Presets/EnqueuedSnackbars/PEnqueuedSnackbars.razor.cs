@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets
+﻿using System.ComponentModel;
+
+namespace Masa.Blazor.Presets
 {
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
@@ -73,6 +75,18 @@
 
         private bool IsPositionTop => Position is SnackPosition.TopCenter or SnackPosition.TopLeft or SnackPosition.TopRight;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            MasaBlazor.Application.PropertyChanged += ApplicationOnPropertyChanged;
+        }
+
+        private void ApplicationOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider.Apply((cssBuilder) =>
@@ -125,6 +139,12 @@
             _stack.Remove(config);
 
             InvokeAsync(StateHasChanged);
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            MasaBlazor.Application.PropertyChanged -= ApplicationOnPropertyChanged;
+            return base.DisposeAsyncCore();
         }
     }
 }
