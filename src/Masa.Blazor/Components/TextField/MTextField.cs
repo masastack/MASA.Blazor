@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>, IAsyncDisposable
+    public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -937,17 +937,12 @@ namespace Masa.Blazor
             await base.HandleOnMouseUpAsync(args);
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            try
-            {
-                await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
-                await IntersectJSModule.UnobserveAsync(InputElement);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            await JsInvokeAsync(JsInteropConstants.UnregisterTextFieldOnMouseDown, InputSlotElement);
+            await IntersectJSModule.UnobserveAsync(InputElement);
+            
+            await base.DisposeAsyncCore();
         }
     }
 }

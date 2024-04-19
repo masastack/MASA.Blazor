@@ -1,9 +1,6 @@
-﻿using BlazorComponent.Attributes;
-using Microsoft.JSInterop;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
+public partial class MGridstack<TItem> : BDomComponentBase
 {
     [Inject]
     protected GridstackJSModule Module { get; set; } = null!;
@@ -180,19 +177,12 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
         await Module.SetStatic(_gridstackInstance, staticValue);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
+        Module.Resize -= GridstackOnResize;
+        if (_gridstackInstance is not null)
         {
-            Module.Resize -= GridstackOnResize;
-            if (_gridstackInstance is not null)
-            {
-                await _gridstackInstance.DisposeAsync();
-            }
-        }
-        catch
-        {
-            // ignored
+            await _gridstackInstance.DisposeAsync();
         }
     }
 }
