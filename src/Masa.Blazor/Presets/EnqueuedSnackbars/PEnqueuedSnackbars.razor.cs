@@ -45,6 +45,9 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool Light { get; set; }
         
+        [CascadingParameter(Name = "IsDark")]
+        public bool CascadingIsDark { get; set; }
+        
         private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
@@ -67,7 +70,7 @@ namespace Masa.Blazor.Presets
                     return false;
                 }
 
-                return false;
+                return CascadingIsDark;
             }
         }
 
