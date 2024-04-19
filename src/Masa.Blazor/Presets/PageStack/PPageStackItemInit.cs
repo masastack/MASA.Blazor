@@ -14,15 +14,21 @@ public class PPageStackItemInit : IComponent
 
     [Parameter] public string? BarColor { get; set; }
 
+    [Parameter] public StringNumber? BarHeight { get; set; }
+
     [Parameter] public string? ContentClass { get; set; }
 
     [Parameter] public string? ContentStyle { get; set; }
 
     [Parameter] public RenderFragment<PageStackGoBackContext>? BarContent { get; set; }
 
+    [Parameter] public RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
+
     [Parameter] public string? Title { get; set; }
 
     [Parameter] public RenderFragment? ActionContent { get; set; }
+
+    [Parameter] public bool Dark { get; set; }
 
     [Parameter] public bool Light { get; set; }
 
@@ -52,10 +58,13 @@ public class PPageStackItemInit : IComponent
         _prevRerenderKey = RerenderKey;
 
         PageStackItem.AppBarContent = BarContent;
+        PageStackItem.GoBackContent = GoBackContent;
         PageStackItem.AppBarColor = BarColor;
         PageStackItem.AppBarClass = BarClass;
         PageStackItem.AppBarStyle = BarStyle;
+        PageStackItem.AppBarHeight = BarHeight;
         PageStackItem.AppBarTitle = Title;
+        PageStackItem.Dark = Dark;
         PageStackItem.Light = Light;
 
         PageStackItem.ContentClass = ContentClass;
