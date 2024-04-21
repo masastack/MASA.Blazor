@@ -20561,6 +20561,33 @@ html.overflow-y-hidden {
     margin-top: 16px;
 }
 
+.m-list-item .m-list-item__avatar {
+    height: 40px;
+    min-width: 40px;
+    width: 40px;
+}
+
+.m-list--dense .m-list-item .m-list-item__avatar,
+.m-list-item--dense .m-list-item__avatar {
+    height: 36px;
+    min-width: 36px;
+    width: 36px;
+}
+
+.m-list--two-line .m-list-item .m-list-item__avatar,
+.m-list-item--two-line .m-list-item__avatar {
+    height: 44px;
+    min-width: 44px;
+    width: 44px;
+}
+
+.m-list--three-line .m-list-item .m-list-item__avatar,
+.m-list-item--three-line .m-list-item__avatar {
+    height: 48px;
+    min-width: 48px;
+    width: 48px;
+}
+
 .m-list--two-line .m-list-item,
 .m-list-item--two-line {
     min-height: 64px;
