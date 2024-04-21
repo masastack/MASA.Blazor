@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using System.Reflection.Metadata;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MButton : BButton, IButton, IThemeable
     {
@@ -76,11 +73,13 @@ namespace Masa.Blazor
         [Parameter]
         public bool Ripple { get; set; } = true;
 
-        protected virtual bool HasBackground => !(Icon || Plain || Outlined || Text);
+        private bool IsIconBtn => Icon || HasBuiltInIcon;
 
-        protected bool IsRound => Icon || Fab;
+        private bool HasBackground => !(IsIconBtn || Plain || Outlined || Text);
 
-        protected bool IsElevated => !(Icon || Text || Outlined || Depressed || Disabled || Plain) && (Elevation == null || Elevation.TryGetNumber().number > 0);
+        private bool IsRound => IsIconBtn || Fab;
+
+        private bool IsElevated => !(IsIconBtn || Text || Outlined || Depressed || Disabled || Plain) && (Elevation == null || Elevation.TryGetNumber().number > 0);
 
         protected override void SetComponentClass()
         {
@@ -99,7 +98,7 @@ namespace Masa.Blazor
                         .AddIf("m-btn--fab", () => Fab)
                         .AddIf("m-btn--fixed", () => Fixed)
                         .AddIf("m-btn--has-bg", () => HasBackground)
-                        .AddIf("m-btn--icon", () => Icon)
+                        .AddIf("m-btn--icon", () => IsIconBtn)
                         .AddIf("m-btn--left", () => Left)
                         .AddIf("m-btn--loading", () => Loading)
                         .AddIf("m-btn--outlined", () => Outlined)
@@ -131,7 +130,7 @@ namespace Masa.Blazor
                         .AddMaxWidth(MaxWidth)
                         .AddMinHeight(MinHeight)
                         .AddMaxHeight(MaxHeight)
-                        .AddColor(Color, Icon || Outlined || Plain || Text);
+                        .AddColor(Color, IsIconBtn || Outlined || Plain || Text);
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -152,14 +151,22 @@ namespace Masa.Blazor
             HasLoader = true;
 
             AbstractProvider
-                .Apply(typeof(BButtonLoader<>), typeof(BButtonLoader<MButton>))
                 .Apply<BProgressCircular, MProgressCircular>(prop =>
                 {
                     prop[nameof(MProgressCircular.Size)] = (StringNumber)23;
                     prop[nameof(MProgressCircular.Width)] = (StringNumber)2;
                     prop[nameof(MProgressCircular.Indeterminate)] = true;
                 })
-                .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));
+                .Apply<BIcon, MIcon>(prop =>
+                {
+                    prop[nameof(MIcon.XSmall)] = XSmall;
+                    prop[nameof(MIcon.Small)] = Small;
+                    if (prop.Data == null)
+                    {
+                        prop[nameof(MIcon.Large)] = Large;
+                        prop[nameof(MIcon.XLarge)] = XLarge;
+                    }
+                });
         }
 
         private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
