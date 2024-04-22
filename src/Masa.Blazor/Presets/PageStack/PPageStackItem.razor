@@ -5,6 +5,8 @@
          ContentClass="@($"m-page-stack-item {Class}")"
          ContentStyle="@Style"
          Fullscreen
+         Persistent
+         NoPersistentAnimation
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Index } })">
     <BShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
