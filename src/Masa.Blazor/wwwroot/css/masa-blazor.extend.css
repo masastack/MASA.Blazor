@@ -396,6 +396,10 @@
     visibility: visible;
 }
 
+.p-page-container.fill-height > .p-page-container__item {
+    height: 100%;
+}
+
 /* block-text */
 
 .m-presets-block-text {
