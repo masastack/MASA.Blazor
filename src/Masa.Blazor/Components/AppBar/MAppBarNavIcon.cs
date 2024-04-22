@@ -1,8 +1,22 @@
 ﻿namespace Masa.Blazor;
 
-public class MAppBarNavIcon : BDomComponentBase
+public class MAppBarNavIcon : MButton
 {
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    [MasaApiParameter(Ignored = true)]
+    public override bool Icon { get; set; } = true;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        Icon = true;
+
+        Class ??= "";
+        Class = "m-app-bar__nav-icon " + Class;
+
+        ChildContent ??= DefaultChildContent;
+    }
 
     private RenderFragment DefaultChildContent => builder =>
     {
@@ -10,14 +24,4 @@ public class MAppBarNavIcon : BDomComponentBase
         builder.AddAttribute(1, "Icon", (Icon)"$menu");
         builder.CloseComponent();
     };
-
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenComponent<MButton>(0);
-        builder.AddAttribute(1, "Class", $"m-app-bar__nav-icon {Class}");
-        builder.AddAttribute(2, nameof(MButton.Icon), true);
-        builder.AddMultipleAttributes(3, Attributes);
-        builder.AddAttribute(4, "ChildContent", ChildContent ?? DefaultChildContent);
-        builder.CloseComponent();
-    }
 }

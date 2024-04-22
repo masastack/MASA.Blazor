@@ -22,7 +22,7 @@ namespace Masa.Blazor
         public StringNumber? Elevation { get; set; }
 
         [Parameter]
-        public bool Icon { get; set; }
+        public virtual bool Icon { get; set; }
 
         [Parameter]
         public bool Fab { get; set; }
