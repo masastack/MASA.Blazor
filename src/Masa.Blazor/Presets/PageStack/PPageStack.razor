@@ -3,9 +3,11 @@
 @inherits PatternPathComponentBase
 @inject IJSRuntime JSRuntime
 
-<PPageContainer IncludePatterns="TabbedPatterns"
-                SelfPatterns="SelfPatterns"
-                OnlyRenderIncluded>
+<PPageContainer IncludePatterns="@TabbedPatterns"
+                SelfPatterns="@SelfPatterns"
+                Strict
+                Class="@Class"
+                Style="@Style">
     @ChildContent
 </PPageContainer>
 
@@ -18,8 +20,6 @@
         var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(path.AbsolutePath, StringComparison.OrdinalIgnoreCase);
 
         <PPageStackItem Active="@path.Active"
-                        Class="@Class"
-                        Style="@Style"
                         CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"
                         SelectorCaptureAction="u => path.Selector = u"
