@@ -76,6 +76,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
     private Scroller? _scroller;
     private bool _haveRendered;
+    private CancellationTokenSource _jsGetDomInfoCts = new();
 
     public bool CanScroll => HideOnScroll || !InputValue;
 
@@ -197,7 +198,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         if (IsActive)
         {
-            var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
+            var rect = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, _jsGetDomInfoCts.Token, Ref);
 
             MasaBlazor.Application.Bottom = rect.ClientHeight;
         }
@@ -209,6 +210,13 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
     protected override async ValueTask DisposeAsyncCore()
     {
+        _jsGetDomInfoCts.Cancel();
+
+        if (App)
+        {
+            MasaBlazor.Application.Bottom = 0;
+        }
+
         if (!string.IsNullOrWhiteSpace(ScrollTarget))
         {
             await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
