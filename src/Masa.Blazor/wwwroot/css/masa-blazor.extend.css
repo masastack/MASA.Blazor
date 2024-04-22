@@ -534,13 +534,13 @@ input[type=number] {
 }
 
 .theme--light.m-divider__content {
-    background-color: #FFF;
-    color: rgba(0, 0, 0, .87);
+    background-color: var(--m-theme-light-surface);
+    color: var(--m-theme-light-on-surface);
 }
 
 .theme--dark.m-divider__content {
-    background-color: #1E1E1E;
-    color: #FFF;
+    background-color: var(--m-theme-dark-surface);
+    color: var(--m-theme-dark-on-surface);
 }
 
 /* enqueued-snackbars */
