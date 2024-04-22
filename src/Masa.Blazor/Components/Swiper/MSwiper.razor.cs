@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MSwiper : BDomComponentBase, IAsyncDisposable
+public partial class MSwiper : BDomComponentBase
 {
     [Inject] private SwiperJsModule SwiperJsModule { get; set; } = null!;
 
@@ -180,18 +180,11 @@ public partial class MSwiper : BDomComponentBase, IAsyncDisposable
         await _swiperProxy!.SlidePrevAsync(speed ?? Speed);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
+        if (_swiperProxy != null)
         {
-            if (_swiperProxy != null)
-            {
-                await _swiperProxy.DisposeAsync();
-            }
-        }
-        catch
-        {
-            // ignored
+            await _swiperProxy.DisposeAsync();
         }
     }
 }

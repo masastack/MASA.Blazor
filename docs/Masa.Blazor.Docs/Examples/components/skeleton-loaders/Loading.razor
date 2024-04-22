@@ -1,0 +1,46 @@
+﻿<MContainer>
+    <div class="text-center mb-12">
+        <MButton Large OnClick="@(() => _loading = !_loading)">Toggle loading</MButton>
+    </div>
+    <MRow Justify="JustifyTypes.Center">
+        <MCol Cols="12" Md="6" Class="mb-12">
+            <div class="text-h5 text-center">
+                Using ChildContent
+            </div>
+            <MSkeletonLoader Loading="_loading"
+                             Type="list-item-two-line">
+                <MListItem TwoLine>
+                    <MListItemContent>
+                        <MListItemTitle>Title</MListItemTitle>
+                        <MListItemSubtitle>Subtitle</MListItemSubtitle>
+                    </MListItemContent>
+                </MListItem>
+            </MSkeletonLoader>
+        </MCol>
+        <MCol Cols="12" Md="6" Class="mb-12">
+            <div class="text-h5 text-center">
+                Using If condition
+            </div>
+            @if (_loading)
+            {
+                <MSkeletonLoader Type="list-item-two-line">
+                </MSkeletonLoader>
+            }
+            else
+            {
+                <MListItem TwoLine>
+                    <MListItemContent>
+                        <MListItemTitle>Title</MListItemTitle>
+                        <MListItemSubtitle>Subtitle</MListItemSubtitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+
+    private bool _loading = true;
+
+}

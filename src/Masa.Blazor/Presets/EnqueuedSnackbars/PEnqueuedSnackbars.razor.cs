@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets
+﻿using System.ComponentModel;
+
+namespace Masa.Blazor.Presets
 {
     public partial class PEnqueuedSnackbars : BDomComponentBase
     {
@@ -37,6 +39,15 @@
         [Parameter]
         public bool Text { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+        
+        [CascadingParameter(Name = "IsDark")]
+        public bool CascadingIsDark { get; set; }
+        
         private const string ROOT_CSS = "m-enqueued-snackbars";
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
@@ -45,9 +56,39 @@
 
         private readonly List<SnackbarOptions> _stack = new();
 
+        private bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return CascadingIsDark;
+            }
+        }
+
         private bool IsPositionBottom => Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
 
         private bool IsPositionTop => Position is SnackPosition.TopCenter or SnackPosition.TopLeft or SnackPosition.TopRight;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            MasaBlazor.Application.PropertyChanged += ApplicationOnPropertyChanged;
+        }
+
+        private void ApplicationOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
 
         protected override void SetComponentClass()
         {
@@ -101,6 +142,12 @@
             _stack.Remove(config);
 
             InvokeAsync(StateHasChanged);
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            MasaBlazor.Application.PropertyChanged -= ApplicationOnPropertyChanged;
+            return base.DisposeAsyncCore();
         }
     }
 }
