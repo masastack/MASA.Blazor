@@ -3,6 +3,7 @@ using Masa.Blazor.Components.Drawflow;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.Presets.PageStack;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -76,6 +77,9 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
+
+        services.TryAddScoped<IStackNavigationManagerFactory, StackNavigationManagerFactory>();
+        services.TryAddScoped(s => s.GetRequiredService<IStackNavigationManagerFactory>().Create(string.Empty));
 
         return new MasaBlazorBuilder(services);
     }

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿using Masa.Blazor.Presets.PageStack;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
 public partial class PPageStack : PatternPathComponentBase
 {
+    [Inject] private IStackNavigationManagerFactory StackNavigationManagerFactory { get; set; } = null!;
+
     enum PageType
     {
         Tab,
@@ -12,7 +15,11 @@ public partial class PPageStack : PatternPathComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public string? Name { get; set; }
+
     [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
+
+    internal StackNavigationManager InternalStackNavManager { get; private set; }
 
     internal readonly List<StackPageData> Pages = new();
 
@@ -27,27 +34,60 @@ public partial class PPageStack : PatternPathComponentBase
     private HashSet<string> _prevTabbedPatterns = new();
     private HashSet<Regex> _cachedTabbedPatterns = new();
 
+    private List<TabbedPage> _tabbedPaths = new();
+    private TabbedPage _lastActiveTabbedPage;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         UpdateRegexes();
 
-        var patternPath = GetCurrentPageData();
-        if (!IsTabbedPattern(patternPath.AbsolutePath))
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(NavigationManager.GetAbsolutePath()));
+        if (tabbedPattern is not null)
         {
-            Pages.Add(patternPath);
-            DisableRootScrollbar(true);
-        }
-        else
-        {
-            _latestTabPath = patternPath.AbsolutePath;
+            TabbedPage tabbedPage = new() { Pattern = tabbedPattern.ToString(), CreatedAt = DateTime.Now };
+            _tabbedPaths.Add(tabbedPage);
+            _lastActiveTabbedPage = tabbedPage;
+            _pageTypeOfPreviousPath = PageType.Stack;
         }
 
-        _previousPath = patternPath.AbsolutePath;
-        _lastPage = patternPath;
+        InternalStackNavManager = StackNavigationManagerFactory.Create(Name ?? string.Empty);
+        InternalStackNavManager.PagePushed += InternalStackNavManagerOnPagePushed;
+        InternalStackNavManager.PagePopped += InternalStackNavManagerOnPagePopped;
+        InternalStackNavManager.PageReplaced += InternalStackNavManagerOnPageReplaced;
+        InternalStackNavManager.LocationChanged += InternalStackNavManagerOnLocationChanged;
+    }
 
-        // NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    private void InternalStackNavManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        Console.Out.WriteLine("[PPageStack] InternalStackNavManagerOnLocationChanged: " + e.Location);
+
+        var targetPath = new Uri(e.Location).AbsolutePath;
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(targetPath));
+
+        if (tabbedPattern is not null)
+        {
+            if (_pageTypeOfPreviousPath == PageType.Tab)
+            {
+                if (Pages.Count == 1)
+                {
+                    // has an animation
+                    CloseTopPageOfStack();
+                }
+                else
+                {
+                    // no animation
+                    ClearStack();
+                }
+            }
+
+            TabbedPage tabbedPage = new() { Pattern = tabbedPattern.ToString(), CreatedAt = DateTime.Now };
+            _tabbedPaths.Add(tabbedPage);
+            _lastActiveTabbedPage = tabbedPage;
+            _pageTypeOfPreviousPath = PageType.Stack;
+            InvokeAsync(StateHasChanged);
+        }
     }
 
     protected override void OnParametersSet()
@@ -64,6 +104,39 @@ public partial class PPageStack : PatternPathComponentBase
         _prevTabbedPatterns = new HashSet<string>(TabbedPatterns);
         _cachedTabbedPatterns = TabbedPatterns
             .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
+    }
+
+    private readonly Block _block = new("p-page-container");
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        yield return "p-page-container";
+    }
+
+    private void InternalStackNavManagerOnPageReplaced(object? sender, StackChangedEventArgs e)
+    {
+        _locationChangedByUserClick = true;
+        _pageTypeOfPreviousPath = PageType.Stack;
+
+        // TODO
+    }
+
+    private void InternalStackNavManagerOnPagePopped(object? sender, StackChangedEventArgs e)
+    {
+        _locationChangedByUserClick = true;
+        _pageTypeOfPreviousPath = PageType.Stack;
+        
+        CloseTopPageOfStack();
+    }
+
+    private void InternalStackNavManagerOnPagePushed(object? sender, StackChangedEventArgs e)
+    {
+        _locationChangedByUserClick = true;
+        _pageTypeOfPreviousPath = PageType.Stack;
+
+        Console.Out.WriteLine($"[PPageStack] InternalStackNavManagerOnPagePushed: {e.Uri} {NavigationManager.Uri}");
+        Pages.Add(new StackPageData(e.Uri));
+        InvokeAsync(StateHasChanged);
     }
 
     private bool IsTabbedPattern(string absolutePath)
