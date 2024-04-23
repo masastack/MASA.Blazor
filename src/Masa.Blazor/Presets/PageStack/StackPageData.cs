@@ -4,14 +4,14 @@ public class StackPageData
 {
     public StackPageData(string absolutePath)
     {
-        Active = true;
+        Stacked = true;
         AbsolutePath = absolutePath;
-        Pattern = absolutePath.ToLower();
+        Pattern = "^" + absolutePath.ToLower() + "$";
     }
 
     public StackPageData(string pattern, string absolutePath)
     {
-        Active = true;
+        Stacked = true;
         AbsolutePath = absolutePath;
         IsSelf = true;
         Pattern = pattern.ToLower();
@@ -25,7 +25,12 @@ public class StackPageData
 
     public bool IsSelf { get; init; }
 
-    public bool Active { get; set; }
+    /// <summary>
+    /// Indicates whether the current page is already on the stack.
+    /// From the component point of view, indicates whether the
+    /// Dialog component is displayed. 
+    /// </summary>
+    public bool Stacked { get; set; }
 
     public string Selector { get; set; }
     
