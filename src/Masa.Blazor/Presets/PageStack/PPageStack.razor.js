@@ -19,8 +19,6 @@ function onDocumentClick(event) {
   console.log('strategy', strategy)
   if (strategy === "" || strategy === "true" || strategy === "push") {
     dotnet.invokeMethodAsync("Push", href);
-  } else if (strategy === "replace") {
-    dotnet.invokeMethodAsync("Replace", href);
   }
 }
 

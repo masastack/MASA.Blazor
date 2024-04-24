@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿using Masa.Blazor.Presets.PageStack;
+using Microsoft.AspNetCore.Components.Routing;
 
 // ReSharper disable MethodHasAsyncOverload
 
@@ -15,30 +16,42 @@ public class PStackPageBase : ComponentBase, IDisposable
 
     protected string? PageSelector => Page?.Selector;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         if (PageStack is null)
         {
             return;
         }
 
-        Page = PageStack.Pages.FirstOrDefault(u => u.AbsolutePath == NavigationManager.GetAbsolutePath());
-        // Todo: Page is possibly null?
+        var currentPath = NavigationManager.GetAbsolutePath();
+        if (PageStack.Pages.TryPeek(out var page) && page.AbsolutePath == currentPath)
+        {
+            Page = page;
+            Page.ActiveChanged += PageOnActiveChanged;
+            _ = RunPageActivatedAsync(Page.State);
+        }
+        else
+        {
+            PageStack.Pages.PagePushed += PagesOnPagePushed;
+        }
 
-        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-
-        await RunPageActivatedAsync(Page?.State);
         _isActive = true;
     }
 
-    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    private void PagesOnPagePushed(object? sender, StackPagesPushedEventArgs e)
     {
-        var absolutePath = new Uri(e.Location).AbsolutePath;
-        var isActive = Regex.IsMatch(absolutePath, Page!.Pattern);
-        if (_isActive == isActive) return;
-        _isActive = isActive;
+        if (Page is null)
+        {
+            Page = e.Page;
+            Page.ActiveChanged += PageOnActiveChanged;
+        }
 
-        _ = isActive ? RunPageActivatedAsync(Page.State) : RunPageDeactivatedAsync();
+        _ = RunPageActivatedAsync(Page?.State);
+    }
+
+    private void PageOnActiveChanged(object? sender, PageActiveStateEventArgs e)
+    {
+        _ = e.Active ? RunPageActivatedAsync(Page!.State) : RunPageDeactivatedAsync();
     }
 
     /// <summary>
@@ -118,6 +131,15 @@ public class PStackPageBase : ComponentBase, IDisposable
 
     public void Dispose()
     {
-        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+        if (PageStack is not null)
+        {
+            PageStack.Pages.PagePushed -= PagesOnPagePushed;
+        }
+
+        if (Page is not null)
+        {
+            Page.ActiveChanged -= PageOnActiveChanged;
+        }
+        // NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }
