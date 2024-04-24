@@ -4,12 +4,15 @@ namespace Masa.Blazor;
 
 public class StackChangedEventArgs : EventArgs
 {
-    public StackChangedEventArgs(string uri)
+    public StackChangedEventArgs(string uri, object? state = null)
     {
         Uri = uri;
+        State = state;
     }
 
     public string Uri { get; }
+
+    public object? State { get; set; }
 }
 
 public class StackNavigationManager : IDisposable
@@ -57,6 +60,19 @@ public class StackNavigationManager : IDisposable
         Console.Out.WriteLine("[StackNavigationManager] Pop: " + _navigationManager.Uri);
         PagePopped?.Invoke(this, new StackChangedEventArgs(_navigationManager.Uri));
         _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryBack);
+    }
+
+    public void Back(object? state = null)
+    {
+        Console.Out.WriteLine("[StackNavigationManager] GoBack: " + _navigationManager.Uri);
+        Go(-1, state);
+    }
+
+    public void Go(int delta, object? state = null)
+    {
+        Console.Out.WriteLine("[StackNavigationManager] Go: " + delta);
+        PagePopped?.Invoke(this, new StackChangedEventArgs(_navigationManager.Uri, state));
+        _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, delta);
     }
 
     public void PopAndReplace(string uri)

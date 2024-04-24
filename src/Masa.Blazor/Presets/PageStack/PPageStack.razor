@@ -27,6 +27,8 @@
         var isTop = i == Pages.Count - 1;
         var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(path.AbsolutePath, StringComparison.OrdinalIgnoreCase);
 
+        Console.Out.WriteLine($"[PPageStack] RenderItem {path.AbsolutePath} {isTop} {NavigationManager.GetAbsolutePath()} {canRender} ");
+
         <PPageStackItem Active="@path.Stacked"
                         CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"

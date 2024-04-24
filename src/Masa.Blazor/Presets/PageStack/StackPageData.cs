@@ -33,6 +33,10 @@ public class StackPageData
     public bool Stacked { get; set; }
 
     public string Selector { get; set; }
-    
+
+    public object? State { get; set; }
+
+    public void UpdateState(object? state) => State = state;
+
     public void UpdatePath(string absolutePath) => AbsolutePath = absolutePath;
 }

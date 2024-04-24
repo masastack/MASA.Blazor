@@ -27,7 +27,7 @@ public class PStackPageBase : ComponentBase, IDisposable
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
-        await RunPageActivatedAsync();
+        await RunPageActivatedAsync(Page?.State);
         _isActive = true;
     }
 
@@ -38,7 +38,7 @@ public class PStackPageBase : ComponentBase, IDisposable
         if (_isActive == isActive) return;
         _isActive = isActive;
 
-        _ = isActive ? RunPageActivatedAsync() : RunPageDeactivatedAsync();
+        _ = isActive ? RunPageActivatedAsync(Page.State) : RunPageDeactivatedAsync();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class PStackPageBase : ComponentBase, IDisposable
     /// In other words, it is triggered when the page is rendered in the
     /// viewport, including the <see cref="OnInitializedAsync"/>.
     /// </summary>
-    protected virtual void OnPageActivated()
+    protected virtual void OnPageActivated(object? state)
     {
     }
 
@@ -55,7 +55,7 @@ public class PStackPageBase : ComponentBase, IDisposable
     /// In other words, it is triggered when the page is rendered in the
     /// viewport, including the <see cref="OnInitializedAsync"/>.
     /// </summary>
-    protected virtual Task OnPageActivatedAsync() => Task.CompletedTask;
+    protected virtual Task OnPageActivatedAsync(object? state) => Task.CompletedTask;
 
     /// <summary>
     /// This event is triggered when a new page is pushed into the stack
@@ -71,10 +71,10 @@ public class PStackPageBase : ComponentBase, IDisposable
     /// </summary>
     protected virtual Task OnPageDeactivatedAsync() => Task.CompletedTask;
 
-    private async Task RunPageActivatedAsync()
+    private async Task RunPageActivatedAsync(object? state)
     {
-        OnPageActivated();
-        var task = OnPageActivatedAsync();
+        OnPageActivated(state);
+        var task = OnPageActivatedAsync(state);
 
         if (task.Status != TaskStatus.RanToCompletion && task.Status != TaskStatus.Canceled)
         {
