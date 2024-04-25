@@ -3,7 +3,7 @@ using Masa.Blazor.Components.Drawflow;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Xgplayer;
-using Masa.Blazor.Presets.PageStack;
+using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;

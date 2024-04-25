@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Presets.PageStack.NavController;
 
 public class PageStackNavControllerFactory : IPageStackNavControllerFactory
 {

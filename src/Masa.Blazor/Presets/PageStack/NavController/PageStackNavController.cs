@@ -1,47 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿using Masa.Blazor.Presets.PageStack.NavController;
+using Microsoft.AspNetCore.Components.Routing;
 
-namespace Masa.Blazor;
-
-public class PageStackReplacedEventArgs : EventArgs
-{
-    public PageStackReplacedEventArgs(string uri, object? state = null)
-    {
-        Uri = uri;
-        State = state;
-    }
-
-    public string Uri { get; }
-
-    public object? State { get; }
-}
-
-public class PageStackPushedEventArgs : EventArgs
-{
-    public PageStackPushedEventArgs(string uri)
-    {
-        Uri = uri;
-    }
-
-    public string Uri { get; }
-}
-
-public class PageStackPoppedEventArgs : EventArgs
-{
-    public PageStackPoppedEventArgs(int delta, object? state = null)
-    {
-        if (delta < 1)
-        {
-            throw new ArgumentOutOfRangeException(nameof(delta), "The delta must be greater than or equal to 1.");
-        }
-
-        Delta = delta;
-        State = state;
-    }
-
-    public int Delta { get; }
-
-    public object? State { get; }
-}
+namespace Masa.Blazor.Presets;
 
 public class PageStackNavController : IDisposable
 {

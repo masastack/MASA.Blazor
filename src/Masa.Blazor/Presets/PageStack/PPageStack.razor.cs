@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Presets.PageStack;
+using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
@@ -19,7 +20,7 @@ public partial class PPageStack : PatternPathComponentBase
 
     [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
 
-    internal PageStackNavController InternalPageStackNavManager { get; private set; }
+    private PageStackNavController? InternalPageStackNavManager { get; set; }
 
     internal readonly StackPages Pages = new();
 
@@ -32,8 +33,9 @@ public partial class PPageStack : PatternPathComponentBase
     private HashSet<string> _prevTabbedPatterns = new();
     private HashSet<Regex> _cachedTabbedPatterns = new();
 
-    private List<TabbedPage> _tabbedPaths = new();
-    private TabbedPage? _lastActiveTabbedPage;
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
+    private int _dotnetObjectId;
 
     protected override void OnInitialized()
     {
@@ -44,9 +46,6 @@ public partial class PPageStack : PatternPathComponentBase
         var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(NavigationManager.GetAbsolutePath()));
         if (tabbedPattern is not null)
         {
-            TabbedPage tabbedPage = new() { Pattern = tabbedPattern.ToString(), CreatedAt = DateTime.Now };
-            _tabbedPaths.Add(tabbedPage);
-            _lastActiveTabbedPage = tabbedPage;
             _pageTypeOfPreviousPath = PageType.Tab;
         }
 
@@ -55,14 +54,10 @@ public partial class PPageStack : PatternPathComponentBase
         InternalPageStackNavManager.PagePopped += InternalPageStackNavManagerOnPagePopped;
         InternalPageStackNavManager.PageReplaced += InternalPageStackNavManagerOnPageReplaced;
         InternalPageStackNavManager.LocationChanged += InternalPageStackNavManagerOnLocationChanged;
-        // NavigationManager.LocationChanged += InternalStackNavManagerOnLocationChanged;
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
     }
 
-    private IJSObjectReference? _module;
-    private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
-    private int _dotnetObjectId;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -72,7 +67,7 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _module = await Js.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor/Presets/PageStack/PPageStack.razor.js");
-             _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
+            _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
         }
     }
 
@@ -108,14 +103,6 @@ public partial class PPageStack : PatternPathComponentBase
                 }
             }
 
-            var tabbedPage = _tabbedPaths.FirstOrDefault(u => u.Pattern == tabbedPattern.ToString());
-            if (tabbedPage is null)
-            {
-                tabbedPage = new() { Pattern = tabbedPattern.ToString(), CreatedAt = DateTime.Now };
-                _tabbedPaths.Add(tabbedPage);
-            }
-
-            _lastActiveTabbedPage = tabbedPage;
             _pageTypeOfPreviousPath = PageType.Tab;
             InvokeAsync(StateHasChanged);
             return;
@@ -163,13 +150,6 @@ public partial class PPageStack : PatternPathComponentBase
             .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
     }
 
-    private readonly Block _block = new("p-page-container");
-
-    protected override IEnumerable<string> BuildComponentClass()
-    {
-        yield return "p-page-container";
-    }
-
     private void InternalPageStackNavManagerOnPageReplaced(object? sender, PageStackReplacedEventArgs e)
     {
         _locationChangedByUserClick++;
@@ -215,39 +195,36 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void CloseTopPages(int count, object? state = null)
     {
-        if (Pages.TryPeek(out var current))
+        if (!Pages.TryPeek(out var current)) return;
+
+        current.Stacked = false;
+
+        if (count > 1)
         {
-            current.Stacked = false;
-
-            // 需要先删顶部和目标页中间的页面
-
-            if (count > 1)
-            {
-                Pages.RemoveRange(Pages.Count - count, count - 1);
-            }
-
-            if (Pages.TryPeekSecondToLast(out var target))
-            {
-                target.UpdateState(state);
-                target.Activate();
-            }
-
-            StateHasChanged();
-
-            Task.Run(async () =>
-            {
-                await Task.Delay(300); // wait for the transition to complete
-
-                Pages.Pop();
-
-                if (Pages.Count == 0)
-                {
-                    DisableRootScrollbar(false);
-                }
-
-                _ = InvokeAsync(StateHasChanged);
-            });
+            Pages.RemoveRange(Pages.Count - count, count - 1);
         }
+
+        if (Pages.TryPeekSecondToLast(out var target))
+        {
+            target.UpdateState(state);
+            target.Activate();
+        }
+
+        StateHasChanged();
+
+        Task.Run(async () =>
+        {
+            await Task.Delay(300); // wait for the transition to complete
+
+            Pages.Pop();
+
+            if (Pages.Count == 0)
+            {
+                DisableRootScrollbar(false);
+            }
+
+            _ = InvokeAsync(StateHasChanged);
+        });
     }
 
     private void ClearStack()
@@ -273,10 +250,12 @@ public partial class PPageStack : PatternPathComponentBase
             await _module.DisposeAsync();
         }
 
-        InternalPageStackNavManager.PagePushed -= InternalPageStackNavManagerOnPagePushed;
-        InternalPageStackNavManager.PagePopped -= InternalPageStackNavManagerOnPagePopped;
-        InternalPageStackNavManager.PageReplaced -= InternalPageStackNavManagerOnPageReplaced;
-        // InternalStackNavManager.LocationChanged -= InternalStackNavManagerOnLocationChanged;
-        NavigationManager.LocationChanged -= InternalPageStackNavManagerOnLocationChanged;
+        if (InternalPageStackNavManager is not null)
+        {
+            InternalPageStackNavManager.PagePushed -= InternalPageStackNavManagerOnPagePushed;
+            InternalPageStackNavManager.PagePopped -= InternalPageStackNavManagerOnPagePopped;
+            InternalPageStackNavManager.PageReplaced -= InternalPageStackNavManagerOnPageReplaced;
+            InternalPageStackNavManager.LocationChanged -= InternalPageStackNavManagerOnLocationChanged;
+        }
     }
 }

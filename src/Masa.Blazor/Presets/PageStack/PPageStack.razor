@@ -3,21 +3,13 @@
 @inherits PatternPathComponentBase
 @inject IJSRuntime JSRuntime
 
-<div class="@GetClass()"
-     style="@GetStyle()"
-     id="@Id"
-     @ref="@Ref"
-     @attributes="@Attributes">
-    @foreach (var path in _tabbedPaths.OrderBy(u => u.CreatedAt))
-    {
-        <div class="@_block.Element("item").AddClass("d-none", path.Pattern != _lastActiveTabbedPage?.Pattern)"
-             @key="path.Pattern">
-            <BShouldRender Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">
-                @ChildContent
-            </BShouldRender>
-        </div>
-    }
-</div>
+<PPageContainer Style="@GetStyle()"
+                Class="@GetClass()"
+                IncludePatterns="@TabbedPatterns"
+                SelfPatterns="@SelfPatterns"
+                Strict>
+    @ChildContent
+</PPageContainer>
 
 <CascadingValue Value="this" IsFixed>
     @for (var i = 0; i < Pages.Count; i++)

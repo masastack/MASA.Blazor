@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Presets.PageStack;
 
 public class StackPageData
 {
