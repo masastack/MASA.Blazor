@@ -58,7 +58,24 @@ namespace Masa.Blazor
 #endif
             Attributes["ripple"] = ComputedRipple;
         }
-  
+
+        protected override RenderFragment GenAvatar(string? src)
+        {
+            return builder =>
+            {
+                builder.OpenComponent<MListItemAvatar>(0);
+                builder.AddAttribute(1, nameof(MListItemAvatar.Size), (StringNumber?)null);
+                builder.AddAttribute(2, "ChildContent", (RenderFragment)(sub =>
+                {
+                    sub.OpenComponent<MImage>(0);
+                    sub.AddAttribute(1, "Src", src);
+                    sub.CloseComponent();
+                }));
+
+                builder.CloseComponent();
+            };
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-list-item";
@@ -86,6 +103,13 @@ namespace Masa.Blazor
                         .AddTextColor(Color)
                         .AddTheme(IsDark, IndependentTheme);
                 });
+            
+            AbstractProvider
+                .Apply<BListItemIcon, MListItemIcon>()
+                .Apply<BIcon, MIcon>()
+                .Apply<BListItemContent, MListItemContent>()
+                .Apply<BListItemTitle, MListItemTitle>()
+                .Apply<BListItemSubtitle, MListItemSubtitle>();
         }
     }
 }

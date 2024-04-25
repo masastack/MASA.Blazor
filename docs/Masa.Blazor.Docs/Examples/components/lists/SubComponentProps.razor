@@ -1,0 +1,28 @@
+﻿<MCard Class="mx-auto"
+       MaxWidth="300"
+       Tile>
+    <MList>
+        @foreach (var item in items)
+        {
+            <MListItem
+                PrependAvatar="@item.PrependAvatar"
+                AppendIcon="@item.AppendIcon"
+                Subtitle="@item.Subtitle"
+                Title="@item.Title">
+            </MListItem>
+        }
+    </MList>
+</MCard>
+
+@code {
+
+    Item[] items =
+    [
+        new Item("Real-Time", "Subtitle of Real-Time", "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png", "mdi-clock"),
+        new Item("Audience", "Subtitle of Audience", "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png", "mdi-account"),
+        new Item("Conversions", "Subtitle of Conversions", "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png", "mdi-flag")
+    ];
+
+    record Item(string Title, string Subtitle, string PrependAvatar, string AppendIcon);
+
+}

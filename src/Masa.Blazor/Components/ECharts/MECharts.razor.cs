@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDisposable
+public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
 {
     [Inject]
     protected I18n I18n { get; set; } = null!;
@@ -283,20 +283,13 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks, IAsyncDi
         }
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await DisposeECharts();
+        await DisposeECharts();
 
-            if (_echarts is not null)
-            {
-                await _echarts.DisposeAsync();
-            }
-        }
-        catch (Exception)
+        if (_echarts is not null)
         {
-            // ignored
+            await _echarts.DisposeAsync();
         }
     }
 }

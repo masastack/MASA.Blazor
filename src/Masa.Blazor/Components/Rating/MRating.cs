@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MRating : BRating, IRating, IAsyncDisposable
+    public partial class MRating : BRating, IRating
     {
         [Inject]
         public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -145,31 +145,7 @@ namespace Masa.Blazor
 
                     if (ratingItem.Click != null)
                     {
-                        // TODO:(1.1.0) change ratingItem.Click type to MouseEventArgs!
-                        attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, e =>
-                        {
-                            ExMouseEventArgs args = new()
-                            {
-                                Detail = e.Detail,
-                                ScreenX = e.ScreenX,
-                                ScreenY = e.ScreenY,
-                                ClientX = e.ClientX,
-                                ClientY = e.ClientY,
-                                OffsetX = e.OffsetX,
-                                OffsetY = e.OffsetY,
-                                PageX = e.PageX,
-                                PageY = e.PageY,
-                                Button = e.Button,
-                                Buttons = e.Buttons,
-                                CtrlKey = e.CtrlKey,
-                                ShiftKey = e.ShiftKey,
-                                AltKey = e.AltKey,
-                                MetaKey = e.MetaKey,
-                                Type = e.Type,
-                            };
-
-                            ratingItem.Click.Invoke(args);
-                        });
+                        attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
                     }
 
                     _iconForwardRefs.TryAdd(itemIndex, new ForwardRef());
@@ -328,24 +304,19 @@ namespace Masa.Blazor
             }
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override ValueTask DisposeAsyncCore()
         {
-            try
+            foreach (var (k, v) in _iconForwardRefs)
             {
-                foreach (var (k, v) in _iconForwardRefs)
+                if (v.Current.TryGetSelector(out var selector))
                 {
-                    if (v.Current.TryGetSelector(out var selector))
-                    {
-                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
-                        _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
-                        _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
-                    }
+                    _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
+                    _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
+                    _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
                 }
             }
-            catch (Exception)
-            {
-                // ignored
-            }
+
+            return base.DisposeAsyncCore();
         }
     }
 }
