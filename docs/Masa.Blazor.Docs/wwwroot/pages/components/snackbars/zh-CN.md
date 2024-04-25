@@ -40,3 +40,11 @@ related:
 `Vertical` 属性允许您堆叠 **MSnackbar** 的内容。
 
 <masa-example file="Examples.components.snackbars.Vertical"></masa-example>
+
+### 插槽
+
+#### ActionContent
+
+使用 `ActionContent` 插槽自定义操作按钮。
+
+<masa-example file="Examples.components.snackbars.ActionContent"></masa-example>

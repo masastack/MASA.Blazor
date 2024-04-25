@@ -5,9 +5,7 @@
            Color="@ComputedColor"
            Class="@_cssProvider?.GetClass()"
            ContentClass="@ContentClass"
-           Dark="@Dark"
            Elevation="@Elevation"
-           Light="@Light"
            MultiLine="@MultiLine"
            Outlined="@Outlined"
            Rounded="@Rounded"
@@ -46,7 +44,7 @@
         @if (OnAction != null)
         {
             <MButton Class="text-capitalize"
-                     Color="@(ActionColor ?? IconColor ?? "primary")"
+                     Color="@(ActionColor ?? IconColor)"
                      Loading="@_actionLoading"
                      Text
                      OnClick="HandleOnAction">

@@ -1,22 +1,14 @@
 ﻿<div class="text-center">
     <MButton Dark
-           Color="indigo"
-           OnClick="()=>_snackbar = true">
+             Color="indigo"
+             OnClick="() => _snackbar = true">
         Open Snackbar
     </MButton>
 
     <MSnackbar @bind-Value="_snackbar"
-                Vertical Dark>
-        <ChildContent>
-            Lorem ipsum dolor sit amet
-        </ChildContent>
-        <ActionContent>
-            <MButton Color="indigo"
-                     Text
-                     OnClick="()=>_snackbar = false">
-                Close
-            </MButton>
-        </ActionContent>
+               Vertical
+               Action="Close">
+        Lorem ipsum dolor sit amet
     </MSnackbar>
 </div>
 

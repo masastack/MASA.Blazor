@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDrag : BDomComponentBase, IAsyncDisposable
+public class MDrag : BDomComponentBase
 {
     [Inject] private IJSRuntime JS { get; set; } = null!;
 
@@ -33,15 +33,8 @@ public class MDrag : BDomComponentBase, IAsyncDisposable
         builder.CloseComponent();
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await JS.InvokeVoidAsync(JsInteropConstants.UnregisterDragEvent, _elementReference);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
+        await JS.InvokeVoidAsync(JsInteropConstants.UnregisterDragEvent, _elementReference);
     }
 }

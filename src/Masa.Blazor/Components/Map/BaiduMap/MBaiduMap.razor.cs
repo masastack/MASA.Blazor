@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks, IAsyncDisposable
+    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; } = null!;
@@ -402,16 +402,11 @@
         public async ValueTask<bool> ContainsOverlayAsync(BaiduOverlayBase overlay)
             => await _baiduMap.TryInvokeAsync<bool>("contains", overlay.OverlayJSObjectRef);
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            try
+            if (_baiduMap is not null)
             {
-                if (_baiduMap is not null)
-                    await _baiduMap.DisposeAsync();
-            }
-            catch (Exception)
-            {
-                // ignored
+                await _baiduMap.DisposeAsync();
             }
         }
     }

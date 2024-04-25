@@ -5,9 +5,12 @@
 <tr>
     @foreach (var header in Headers)
     {
+        var title = header.Ellipsis is { Enabled: true, HideTitle: false } ? header.Text : null;
+
         <th class="@CssProvider.GetClass("header", data: header)"
             style="@CssProvider.GetStyle("header", data: header)"
-            @onclick="() => HandleOnHeaderColClick(header)">
+            @onclick="() => HandleOnHeaderColClick(header)"
+            title="@title">
             @if (header.Value == "data-table-select" && !SingleSelect)
             {
                 @GenSelectAll()

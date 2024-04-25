@@ -36,10 +36,11 @@ public partial class PPageContainer : PatternPathComponentBase
     [Parameter] public string? Transition { get; set; } = "";
 
     /// <summary>
-    /// Whether to only render the content if the path is included in the <see cref="IncludePatterns"/>.
+    /// Strict mode, only the patterns in <see cref="IncludePatterns"/>
+    /// and <see cref="PatternPathComponentBase.SelfPatterns"/> would be rendered.
     /// </summary>
     [Parameter]
-    public bool OnlyRenderIncluded { get; set; }
+    public bool Strict { get; set; }
 
     private readonly LRUCache<string, PatternPath> _patternPaths = new(10);
 
@@ -62,7 +63,7 @@ public partial class PPageContainer : PatternPathComponentBase
 
         var patternPath = GetCurrentPatternPath();
 
-        if (!OnlyRenderIncluded || _cachedIncludePatternRegexes.Any(r => r.IsMatch(patternPath.AbsolutePath)))
+        if (!Strict || _cachedIncludePatternRegexes.Any(r => r.IsMatch(patternPath.AbsolutePath)))
         {
             _currentPatternPath = patternPath;
             _patternPaths.Put(patternPath.Pattern, patternPath);
@@ -162,7 +163,7 @@ public partial class PPageContainer : PatternPathComponentBase
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var currentPath = NavigationManager.GetAbsolutePath();
-        if (OnlyRenderIncluded && !_cachedIncludePatternRegexes.Any(r => r.IsMatch(currentPath)))
+        if (Strict && !_cachedIncludePatternRegexes.Any(r => r.IsMatch(currentPath)))
         {
             return;
         }
@@ -185,19 +186,15 @@ public partial class PPageContainer : PatternPathComponentBase
         }
 
         // if the previous path is excluded or not included, remove it from the PatternPaths
-        if (_previousPath is not null)
+        if (_previousPath is not null
+            && (_cachedExcludePatternRegexes.Any(r => r.IsMatch(_previousPath))
+                || !_cachedIncludePatternRegexes.Any(r => r.IsMatch(_previousPath))))
         {
-            if ((_cachedExcludePatternRegexes.Count > 0
-                 && _cachedExcludePatternRegexes.Any(r => r.IsMatch(_previousPath)))
-                || (_cachedIncludePatternRegexes.Count > 0
-                    && !_cachedIncludePatternRegexes.Any(r => r.IsMatch(_previousPath))))
+            var previousPatternPath = _patternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
+            if (previousPatternPath is not null)
             {
-                var previousPatternPath = _patternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
-                if (previousPatternPath is not null)
-                {
-                    _patternPaths.Remove(previousPatternPath.Pattern);
-                    InvokeAsync(StateHasChanged);
-                }
+                _patternPaths.Remove(previousPatternPath.Pattern);
+                InvokeAsync(StateHasChanged);
             }
         }
 

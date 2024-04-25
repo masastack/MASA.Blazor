@@ -63,6 +63,12 @@ prop styles.
 
 <masa-example file="Examples.components.buttons.Icon"></masa-example>
 
+#### Icon name {released-on=v1.5.0}
+
+The `IconName` property is a convenience for using icons without the need for an additional `MIcon` component.
+
+<masa-example file="Examples.components.buttons.IconName"></masa-example>
+
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use

@@ -31,58 +31,6 @@
     <link href="_content/Masa.Docs.Shared/prism/prism-line-highlight.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/css/docs--sm-and-down.css" rel="stylesheet" media="(max-width: 960px)">
-    <style>
-        .gegga {
-            width: 0;
-        }
-
-        .snurra {
-            filter: url(#gegga);
-        }
-
-        .stopp1 {
-            stop-color: #4318FF;
-        }
-
-        .stopp2 {
-            stop-color: #A18BFF;
-        }
-
-        .halvan {
-            animation: Snurra1 10s infinite linear;
-            stroke-dasharray: 180 800;
-            fill: none;
-            stroke: url(#gradient);
-            stroke-width: 23;
-            stroke-linecap: round;
-        }
-
-        .strecken {
-            animation: Snurra1 3s infinite linear;
-            stroke-dasharray: 26 54;
-            fill: none;
-            stroke: url(#gradient);
-            stroke-width: 23;
-            stroke-linecap: round;
-        }
-
-        .skugga {
-            filter: blur(5px);
-            opacity: 0.3;
-            position: absolute;
-            transform: translate(3px, 3px);
-        }
-
-        @keyframes Snurra1 {
-            0% {
-                stroke-dashoffset: -403px;
-            }
-
-            100% {
-                stroke-dashoffset: 0;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -121,6 +69,12 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script>
+        const dark = localStorage.getItem("masablazor@theme");
+        if (((!dark || dark === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches) || dark === "dark") {
+            document.getElementById("app").classList.add("dark")
+        }
+    </script>
     <script src="js/sw.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>

@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-snack--absolute");
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-snack--bottom");
             // Assert
             Assert.IsTrue(hasBottomClass);
@@ -42,7 +42,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Centered, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCenteredClass = classes.Contains("m-snack--centered");
             // Assert
             Assert.IsTrue(hasCenteredClass);
@@ -56,7 +56,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -70,7 +70,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-snack");
 
             // Assert
@@ -100,7 +100,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasLeftClass);
@@ -114,7 +114,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -188,7 +188,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.MultiLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultiLineClass = classes.Contains("m-snack--multi-line");
             // Assert
             Assert.IsTrue(hasMultiLineClass);
@@ -202,7 +202,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -216,7 +216,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-snack--right");
             // Assert
             Assert.IsTrue(hasRightClass);
@@ -230,7 +230,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -244,7 +244,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-snack");
 
             // Assert
@@ -259,7 +259,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Text, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTextClass = classes.Contains("m-snack--text");
             // Assert
             Assert.IsTrue(hasTextClass);
@@ -273,7 +273,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-snack");
             // Assert
             Assert.IsTrue(hasTileClass);
@@ -287,7 +287,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Timeout, 5000);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTimeoutClass = classes.Contains("m-snack");
 
             // Assert
@@ -302,7 +302,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Top, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTopClass = classes.Contains("m-snack--top");
             // Assert
             Assert.IsTrue(hasTopClass);
@@ -316,7 +316,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-snack--vertical");
             // Assert
             Assert.IsTrue(hasVerticalClass);
@@ -345,7 +345,7 @@ namespace Masa.Blazor.Test.Snackbar
             {
                 props.Add(snackbar => snackbar.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-snack--active");
             // Assert
             Assert.IsTrue(hasValueClass);

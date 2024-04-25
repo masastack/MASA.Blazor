@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Timeline
             {
                 props.Add(timeline => timeline.AlignTop, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAlignTopClass = classes.Contains("m-timeline--align-top");
             // Assert
             Assert.IsTrue(hasAlignTopClass);
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Timeline
             {
                 props.Add(timeline => timeline.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-timeline--dense");
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -42,7 +42,7 @@ namespace Masa.Blazor.Test.Timeline
             {
                 props.Add(timeline => timeline.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-timeline--reverse");
             // Assert
             Assert.IsTrue(hasReverseClass);
@@ -56,7 +56,7 @@ namespace Masa.Blazor.Test.Timeline
             {
                 props.Add(timeline => timeline.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -71,7 +71,7 @@ namespace Masa.Blazor.Test.Timeline
             {
                 props.Add(timeline => timeline.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert

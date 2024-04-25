@@ -3,7 +3,7 @@ using Masa.Blazor.Components.Image;
 
 namespace Masa.Blazor
 {
-    public partial class MImage : MResponsive, IImage, IThemeable, IAsyncDisposable
+    public partial class MImage : MResponsive, IImage, IThemeable
     {
         [Inject]
         private IntersectJSModule IntersectJSModule { get; set; } = null!;
@@ -266,16 +266,9 @@ namespace Masa.Blazor
             }
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            try
-            {
-                await IntersectJSModule.UnobserveAsync(Ref);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            await IntersectJSModule.UnobserveAsync(Ref);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Treeview
 {
@@ -10,11 +13,11 @@ namespace Masa.Blazor.Test.Treeview
         {
             //Act
             var cut = RenderComponent<MTreeview<string, string>>(props =>
-             {
-                 props.Add(treeview => treeview.Hoverable, true);
+            {
+                props.Add(treeview => treeview.Hoverable, true);
                  props.Add(treeview => treeview.ItemKey, item => item);
-             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            });
+            var classes = cut.Instance.GetClass();
             var hasHoverableClass = classes.Contains("m-treeview--hoverable");
 
             // Assert
@@ -30,7 +33,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Activatable, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasActivatableClass = classes.Contains("m-treeview");
 
             // Assert
@@ -46,7 +49,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Dark, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -62,7 +65,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Dense, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-treeview");
 
             // Assert
@@ -78,7 +81,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Light, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -94,7 +97,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.MultipleActive, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleActiveClass = classes.Contains("m-treeview");
 
             // Assert
@@ -110,7 +113,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.OpenAll, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenAllClass = classes.Contains("m-treeview");
 
             // Assert
@@ -126,7 +129,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.OpenOnClick, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnClickClass = classes.Contains("m-treeview");
 
             // Assert
@@ -142,7 +145,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Rounded, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-treeview");
 
             // Assert
@@ -158,7 +161,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Selectable, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSelectableClass = classes.Contains("m-treeview");
 
             // Assert
@@ -174,7 +177,7 @@ namespace Masa.Blazor.Test.Treeview
                 props.Add(treeview => treeview.Shaped, true);
                 props.Add(treeview => treeview.ItemKey, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-treeview");
 
             // Assert

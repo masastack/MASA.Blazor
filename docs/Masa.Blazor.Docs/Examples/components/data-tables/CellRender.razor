@@ -1,0 +1,195 @@
+﻿<MDataTable Headers="_headers"
+            Items="_desserts"
+            ItemsPerPage="5"
+            Class="elevation-1">
+</MDataTable>
+
+@code {
+
+    private static RenderFragment CaloriesCell(Dessert dessert) => __builder =>
+    {
+        var color = dessert.Calories switch
+        {
+            > 400 => "red",
+            > 200 => "orange",
+            _ => "green"
+        };
+
+        <MChip Color="@color" Dark>
+            @dessert.Calories
+        </MChip>
+    };
+
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public double Iron { get; set; }
+
+        public DateOnly ExpiredAt { get; set; }
+    }
+
+    private List<DataTableHeader<Dessert>> _headers = new List<DataTableHeader<Dessert>>
+    {
+        new()
+        {
+            Text = "Dessert (100g serving)",
+            Align = DataTableHeaderAlign.Start,
+            Sortable = false,
+            Value = nameof(Dessert.Name),
+            CellRender = dessert => dessert.Name.ToUpper()
+        },
+        new()
+        {
+            Text = "Calories",
+            Value = nameof(Dessert.Calories),
+            CellRender = dessert => CaloriesCell(dessert)
+        },
+        new()
+        {
+            Text = "Fat (g)",
+            Value = nameof(Dessert.Fat),
+            Align = DataTableHeaderAlign.End,
+            CellRender = dessert => $"{dessert.Fat}g"
+        },
+        new()
+        {
+            Text = "Carbs (g)",
+            Value = nameof(Dessert.Carbs),
+            Align = DataTableHeaderAlign.End,
+            CellRender = dessert => $"{dessert.Carbs}g"
+        },
+        new()
+        {
+            Text = "Protein (g)",
+            Value = nameof(Dessert.Protein),
+            Align = DataTableHeaderAlign.End,
+            CellRender = dessert => $"{dessert.Protein}g"
+        },
+        new()
+        {
+            Text = "Iron (%)",
+            Value = nameof(Dessert.Iron),
+            CellRender = dessert => dessert.Iron.ToString("P")
+        },
+        new()
+        {
+            Text = "Expired At",
+            Value = nameof(Dessert.ExpiredAt),
+            CellRender = dessert => dessert.ExpiredAt.ToString("yy-MM-dd")
+        }
+    };
+
+    private List<Dessert> _desserts = new List<Dessert>
+    {
+        new Dessert
+        {
+            Name = "Frozen Yogurt",
+            Calories = 159,
+            Fat = 6.0,
+            Carbs = 24,
+            Protein = 4.0,
+            Iron = 0.01,
+            ExpiredAt = new DateOnly(2024, 4, 13)
+        },
+        new Dessert
+        {
+            Name = "Ice cream sandwich",
+            Calories = 237,
+            Fat = 9.0,
+            Carbs = 37,
+            Protein = 4.3,
+            Iron = 0.01,
+            ExpiredAt = new DateOnly(2024, 10, 13)
+        },
+        new Dessert
+        {
+            Name = "Eclair",
+            Calories = 262,
+            Fat = 16.0,
+            Carbs = 23,
+            Protein = 6.0,
+            Iron = 0.07,
+            ExpiredAt = new DateOnly(2024, 3, 13)
+        },
+        new Dessert
+        {
+            Name = "Cupcake",
+            Calories = 305,
+            Fat = 3.7,
+            Carbs = 67,
+            Protein = 4.3,
+            Iron = 0.08,
+            ExpiredAt = new DateOnly(2025, 7, 12)
+        },
+        new Dessert
+        {
+            Name = "Gingerbread",
+            Calories = 356,
+            Fat = 16.0,
+            Carbs = 49,
+            Protein = 3.9,
+            Iron = 0.16,
+            ExpiredAt = new DateOnly(2025, 1, 2)
+        },
+        new Dessert
+        {
+            Name = "Jelly bean",
+            Calories = 375,
+            Fat = 0.0,
+            Carbs = 94,
+            Protein = 0.0,
+            Iron = 0,
+            ExpiredAt = new DateOnly(2025, 1, 1)
+        },
+        new Dessert
+        {
+            Name = "Lollipop",
+            Calories = 392,
+            Fat = 0.2,
+            Carbs = 98,
+            Protein = 0,
+            Iron = 0.02,
+            ExpiredAt = new DateOnly(2025, 4, 30)
+        },
+        new Dessert
+        {
+            Name = "Honeycomb",
+            Calories = 408,
+            Fat = 3.2,
+            Carbs = 87,
+            Protein = 6.5,
+            Iron = 0.45,
+            ExpiredAt = new DateOnly(2023, 7, 12)
+        },
+        new Dessert
+        {
+            Name = "Donut",
+            Calories = 452,
+            Fat = 25.0,
+            Carbs = 51,
+            Protein = 4.9,
+            Iron = 0.22,
+            ExpiredAt = new DateOnly(2025, 1, 12)
+        },
+        new Dessert
+        {
+            Name = "KitKat",
+            Calories = 518,
+            Fat = 26.0,
+            Carbs = 65,
+            Protein = 7,
+            Iron = 0.06,
+            ExpiredAt = new DateOnly(2026, 4, 1)
+        }
+    };
+
+}

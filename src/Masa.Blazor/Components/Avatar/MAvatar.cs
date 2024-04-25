@@ -12,7 +12,7 @@ public class MAvatar : Container
 
     [Parameter] public bool Tile { get; set; }
 
-    [Parameter] [MasaApiParameter(48)] public StringNumber Size { get; set; } = 48;
+    [Parameter] [MasaApiParameter(48)] public StringNumber? Size { get; set; } = 48;
 
     [Parameter] public StringNumber? Height { get; set; }
 
@@ -44,7 +44,8 @@ public class MAvatar : Container
     {
         var isDirtySize = IsDirtyParameter(nameof(Size));
 
-        return StyleBuilder.Create().AddHeight(Size, isDirtySize)
+        return StyleBuilder.Create()
+            .AddHeight(Size, isDirtySize)
             .AddMinWidth(Size, isDirtySize)
             .AddWidth(Size, isDirtySize)
             .AddHeight(Height, IsDirtyParameter(nameof(Height)))

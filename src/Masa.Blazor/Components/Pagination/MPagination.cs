@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MPagination : BPagination, IPagination, IAsyncDisposable
+    public partial class MPagination : BPagination, IPagination
     {
         [Inject]
         private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -311,16 +311,9 @@ namespace Masa.Blazor
             }
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            try
-            {
-                await IntersectJSModule.UnobserveAsync(Ref);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            await IntersectJSModule.UnobserveAsync(Ref);
         }
     }
 }

@@ -1,0 +1,122 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TItem
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@typeparam TKey
+
+<CascadingValue Value="this" IsFixed>
+    <div class="@GetClass()">
+        @GenNode()
+        @GenChildrenWrapper()
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenNode() => __builder =>
+    {
+        <div class="@_block.Element("root").Modifier("active", IsActive).AddClass(ActiveClass, IsActive).AddTextColor(Color, ActiveClass is null && IsActive)"
+             style="@(StyleBuilder.Create().AddTextColor(Color, () => IsActive).Build())"
+             @onclick="HandleOnClick">
+            @GenLevel(Level)
+
+            @if (HasChildren)
+            {
+                <MIcon Class="@_block.Element("toggle").Modifier("open", IsOpen).And("loading", IsLoading).Build()"
+                       OnClick="@HandleOnToggleAsync"
+                       OnClickStopPropagation>
+                    @(IsLoading ? LoadingIcon : ExpandIcon)
+                </MIcon>
+            }
+            else
+            {
+                @GenLevel(1)
+            }
+
+            @if (Selectable)
+            {
+                <MIcon Class="@_block.Element("checkbox").Build()"
+                       Color="@((IsSelected || IsIndeterminate) ? SelectedColor : null)"
+                       Disabled="@Disabled"
+                       OnClick="@HandleOnCheckAsync"
+                       OnClickStopPropagation>
+                    @ComputedIcon
+                </MIcon>
+            }
+
+            @{
+                var context = new TreeviewItem<TItem>(Item, IsLeaf, IsSelected, IsIndeterminate, IsActive, IsOpen);
+            }
+
+            <div class="@_block.Element("content")">
+                @RenderFragments.RenderIfNotNull(
+                    PrependContent,
+                    context,
+                    css: _block.Element("prepend").Build())
+
+                @RenderFragments.RenderFragmentOrText(
+                    LabelContent,
+                    context,
+                    Text,
+                    css: _block.Element("label").Build())
+
+                @RenderFragments.RenderIfNotNull(
+                    AppendContent,
+                    context,
+                    css: _block.Element("append").Build())
+            </div>
+        </div>
+    };
+
+    private RenderFragment GenChildrenWrapper() => __builder =>
+    {
+        @if (IsOpen && ComputedChildren is not null)
+        {
+            <div class="@_block.Element("children")">
+                @foreach (var item in ComputedChildren)
+                {
+                    @GenChild(item, Disabled)
+                }
+            </div>
+        }
+    };
+
+    private RenderFragment GenLevel(int level) => __builder =>
+    {
+        for (int i = 0; i < level; i++)
+        {
+            <div class="@_block.Element("level")"></div>
+        }
+    };
+
+    private RenderFragment GenChild(TItem item, bool parentIsDisabled) => __builder =>
+    {
+        <MTreeviewNode Item="item"
+                       ParentIsDisabled="@parentIsDisabled"
+                       Activatable="@Activatable"
+                       ActiveClass="@ActiveClass"
+                       Selectable="@Selectable"
+                       SelectedColor="@SelectedColor"
+                       Color="@Color"
+                       ExpandIcon="@ExpandIcon"
+                       IndeterminateIcon="@IndeterminateIcon"
+                       OffIcon="@OffIcon"
+                       OnIcon="@OnIcon"
+                       LoadingIcon="@LoadingIcon"
+                       ItemKey="@ItemKey"
+                       ItemText="@ItemText"
+                       ItemDisabled="@ItemDisabled"
+                       ItemChildren="@ItemChildren"
+                       LoadChildren="@LoadChildren"
+                       OpenOnClick="@OpenOnClick"
+                       Rounded="@Rounded"
+                       Shaped="@Shaped"
+                       Level="@(Level + 1)"
+                       SelectionType="@SelectionType"
+                       AppendContent="@AppendContent"
+                       LabelContent="@LabelContent"
+                       PrependContent="@PrependContent">
+        </MTreeviewNode>
+    };
+
+}

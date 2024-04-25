@@ -5,13 +5,28 @@
 <tr class="@CssProvider.GetClass()" @attributes="Attributes">
     @foreach (var header in Headers)
     {
+        var props = new ItemColProps<TItem>(header, Item);
+        var title = header.Ellipsis is { Enabled: true, HideTitle: false } ? props.Value : null;
+
         <td class="@CssProvider.GetClass("cell", data: header)"
-            style="@CssProvider.GetStyle("cell", data: header)">
+            style="@CssProvider.GetStyle("cell", data: header)"
+            title="@title">
             @{
-                var props = new ItemColProps<TItem>(header, Item);
                 if (HasSlot(props))
                 {
                     @SlotContent(props)
+                }
+                else if (header.CellRender is not null)
+                {
+                    var cell = header.CellRender(Item);
+                    if (cell.IsT0)
+                    {
+                        @cell.AsT0
+                    }
+                    else
+                    {
+                        @cell.AsT1
+                    }
                 }
                 else
                 {
