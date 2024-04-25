@@ -78,8 +78,8 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
 
-        services.TryAddScoped<IStackNavigationManagerFactory, StackNavigationManagerFactory>();
-        services.TryAddScoped(s => s.GetRequiredService<IStackNavigationManagerFactory>().Create(string.Empty));
+        services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
+        services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));
 
         return new MasaBlazorBuilder(services);
     }

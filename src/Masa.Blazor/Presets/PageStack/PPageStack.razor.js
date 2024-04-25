@@ -1,27 +1,2 @@
-let dotnet;
-
-export function attachListener(handle) {
-  dotnet = handle;
-  document.addEventListener('click', onDocumentClick);
-}
-
-function onDocumentClick(event) {
-  if (dotnet === null) return;
-
-  const anchor = event.target.closest('a');
-  if (!anchor) return;
-
-  const href = anchor.getAttribute("href");
-  if (!href) return;
-
-  let strategy = anchor.getAttribute("data-page-stack-strategy");
-  strategy = strategy === null ? null : strategy.toLowerCase();
-  console.log('strategy', strategy)
-  if (strategy === "" || strategy === "true" || strategy === "push") {
-    dotnet.invokeMethodAsync("Push", href);
-  }
-}
-
-export function detachListener(handle) {
-  document.removeEventListener('click', onDocumentClick);
-}
+function t(t,e,n,o){return new(n||(n=Promise))((function(c,r){function u(t){try{s(o.next(t))}catch(t){r(t)}}function i(t){try{s(o.throw(t))}catch(t){r(t)}}function s(t){var e;t.done?c(t.value):(e=t.value,e instanceof n?e:new n((function(t){t(e)}))).then(u,i)}s((o=o.apply(t,e||[])).next())}))}const e={},n={};let o=0;function c(c){const r=o,u=n=>function(n,o){return t(this,void 0,void 0,(function*(){const t=e[n];if(null===t)return;const c=o.target.closest("a");if(!c)return;const r=c.getAttribute("href");if(!r)return;let u=c.getAttribute("data-page-stack-strategy");u=null===u?null:u.toLowerCase(),""!==u&&"true"!==u&&"push"!==u||(yield t.invokeMethodAsync("Push",r))}))}(r,n);return n[r]=u,document.addEventListener("click",u),e[r]=c,o++}function r(t){const o=n[t];document.removeEventListener("click",o),e[t]&&e[t].dispose(),delete n[t],delete e[t]}export{c as attachListener,r as detachListener};
+//# sourceMappingURL=PPageStack.razor.js.map

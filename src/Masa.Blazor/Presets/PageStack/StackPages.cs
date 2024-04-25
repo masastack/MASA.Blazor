@@ -29,13 +29,23 @@ internal class StackPages : IEnumerable
 
     internal void Pop()
     {
+        Pop(1);
+    }
+
+    internal void Pop(int count)
+    {
         if (_pages.Count == 0)
         {
             return;
         }
 
-        _pages.RemoveAt(_pages.Count - 1);
+        if (_pages.Count < count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(count),
+                "The count must be less than or equal to the number of pages.");
+        }
 
+        _pages.RemoveRange(_pages.Count - count, count);
         _pages.LastOrDefault()?.Activate();
     }
 
@@ -65,16 +75,24 @@ internal class StackPages : IEnumerable
 
     internal bool TryPeekSecondToLast([NotNullWhen(true)] out StackPageData? page)
     {
+        return TryPeekByLastIndex(1, out page);
+    }
+
+    internal bool TryPeekByLastIndex(int index, [NotNullWhen(true)] out StackPageData? page)
+    {
         page = null;
-        if (_pages.Count < 2)
+        if (_pages.Count - 1 < index)
         {
             return false;
         }
 
-        page = _pages.ElementAt(_pages.Count - 2);
+        page = _pages.ElementAt(_pages.Count - 1 - index);
+
         return true;
     }
 
+    internal void RemoveRange(int index, int count) => _pages.RemoveRange(index, count);
+    
     internal StackPageData ElementAt(int index) => _pages.ElementAt(index);
 
     internal void Clear() => _pages.Clear();

@@ -1,7 +1,4 @@
 ﻿using Masa.Blazor.Presets.PageStack;
-using Microsoft.AspNetCore.Components.Routing;
-
-// ReSharper disable MethodHasAsyncOverload
 
 namespace Masa.Blazor.Presets;
 
@@ -12,7 +9,6 @@ public class PStackPageBase : ComponentBase, IDisposable
     [CascadingParameter] private PPageStack? PageStack { get; set; }
 
     private StackPageData? Page { get; set; }
-    private bool _isActive;
 
     protected string? PageSelector => Page?.Selector;
 
@@ -34,8 +30,6 @@ public class PStackPageBase : ComponentBase, IDisposable
         {
             PageStack.Pages.PagePushed += PagesOnPagePushed;
         }
-
-        _isActive = true;
     }
 
     private void PagesOnPagePushed(object? sender, StackPagesPushedEventArgs e)
@@ -57,7 +51,7 @@ public class PStackPageBase : ComponentBase, IDisposable
     /// <summary>
     /// This event is triggered when the page is on the top of the stack.
     /// In other words, it is triggered when the page is rendered in the
-    /// viewport, including the <see cref="OnInitializedAsync"/>.
+    /// viewport, including the <see cref="OnInitialized"/>.
     /// </summary>
     protected virtual void OnPageActivated(object? state)
     {
@@ -66,21 +60,19 @@ public class PStackPageBase : ComponentBase, IDisposable
     /// <summary>
     /// This event is triggered when the page is on the top of the stack.
     /// In other words, it is triggered when the page is rendered in the
-    /// viewport, including the <see cref="OnInitializedAsync"/>.
+    /// viewport, including the <see cref="OnInitialized"/>.
     /// </summary>
     protected virtual Task OnPageActivatedAsync(object? state) => Task.CompletedTask;
 
     /// <summary>
-    /// This event is triggered when a new page is pushed into the stack
-    /// or current page is popped.
+    /// This event is triggered when a new page is pushed into the stack.
     /// </summary>
     protected virtual void OnPageDeactivated()
     {
     }
 
     /// <summary>
-    /// This event is triggered when a new page is pushed into the stack
-    /// or current page is popped.
+    /// This event is triggered when a new page is pushed into the stack.
     /// </summary>
     protected virtual Task OnPageDeactivatedAsync() => Task.CompletedTask;
 
