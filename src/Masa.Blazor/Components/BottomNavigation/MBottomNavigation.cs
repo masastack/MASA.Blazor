@@ -3,7 +3,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor;
 
-public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable, IAsyncDisposable
+public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable
 {
     public MBottomNavigation() : base(GroupType.ButtonGroup)
     {
@@ -76,6 +76,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
     private Scroller? _scroller;
     private bool _haveRendered;
+    private CancellationTokenSource _jsGetDomInfoCts = new();
 
     public bool CanScroll => HideOnScroll || !InputValue;
 
@@ -197,7 +198,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         if (IsActive)
         {
-            var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
+            var rect = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, _jsGetDomInfoCts.Token, Ref);
 
             MasaBlazor.Application.Bottom = rect.ClientHeight;
         }
@@ -207,18 +208,18 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         }
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
+        _jsGetDomInfoCts.Cancel();
+
+        if (App)
         {
-            if (!string.IsNullOrWhiteSpace(ScrollTarget))
-            {
-                await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
-            }
+            MasaBlazor.Application.Bottom = 0;
         }
-        catch (Exception)
+
+        if (!string.IsNullOrWhiteSpace(ScrollTarget))
         {
-            // ignored
+            await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
         }
     }
 }

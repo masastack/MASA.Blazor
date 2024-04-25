@@ -3,9 +3,9 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MAppBar : MToolbar, IScrollable, IAsyncDisposable
+    public partial class MAppBar : MToolbar, IScrollable
     {
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+        [Inject] private MasaBlazor? MasaBlazor { get; set; }
 
         [Parameter] public bool App { get; set; }
 
@@ -375,7 +375,7 @@ namespace Masa.Blazor
             _scroller.SavedScroll = _scroller.CurrentScroll;
         }
 
-        async ValueTask IAsyncDisposable.DisposeAsync()
+        protected override async ValueTask DisposeAsyncCore()
         {
             try
             {

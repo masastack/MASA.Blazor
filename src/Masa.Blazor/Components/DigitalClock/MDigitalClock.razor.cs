@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
+public partial class MDigitalClock<TValue> : BDomComponentBase
 {
     [Inject] protected IntersectJSModule IntersectJSModule { get; set; } = null!;
 
@@ -387,15 +387,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase, IAsyncDisposable
         await HandleOnHourClick(ComputedHour ?? 0);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await IntersectJSModule.UnobserveAsync(Ref);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
+        await IntersectJSModule.UnobserveAsync(Ref);
     }
 }

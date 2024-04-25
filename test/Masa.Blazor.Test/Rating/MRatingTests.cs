@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Clearable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-rating");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-rating");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.HalfIncrements, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHalfIncrementsClass = classes.Contains("m-rating");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Hover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHoverClass = classes.Contains("m-rating");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Large, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLargeClass = classes.Contains("m-rating");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Length, 5);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLengthClass = classes.Contains("m-rating");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-rating");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Size, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSizeClass = classes.Contains("m-rating");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Small, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmallClass = classes.Contains("m-rating");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.Value, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-rating");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.XLarge, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasXLargeClass = classes.Contains("m-rating");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.Rating
             {
                 props.Add(rating => rating.XSmall, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasXSmallClass = classes.Contains("m-rating");
 
             // Assert

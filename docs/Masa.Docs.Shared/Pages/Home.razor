@@ -11,8 +11,7 @@
                FixedTabs="MasaBlazor.Breakpoint.Xs"
                IconsAndText="@(!MasaBlazor.Breakpoint.Xs)">
             <MTab Value="@("stack")"
-                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))"
-                  Class="mr-4">
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "stack")))">
                 @if (!MasaBlazor.Breakpoint.Xs)
                 {
                     @("MASA Stack")
@@ -21,8 +20,7 @@
                 <MIcon Icon="@("$masaStack")" />
             </MTab>
             <MTab Value="@("framework")"
-                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))"
-                  Class="mr-4">
+                  OnClick="@(() => NavigationManager.NavigateTo(NavigationManager.GetRelativeUriWithQueryParameter("product", "framework")))">
                 @if (!MasaBlazor.Breakpoint.Xs)
                 {
                     @("MASA Framework")
