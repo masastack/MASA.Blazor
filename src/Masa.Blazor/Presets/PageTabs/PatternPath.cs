@@ -5,7 +5,7 @@ public record PatternPath
     public PatternPath(string absolutePath)
     {
         AbsolutePath = absolutePath;
-        Pattern = absolutePath.ToLower();
+        Pattern = "^" + absolutePath.ToLower() + "$";
         CreatedAt = DateTime.Now;
     }
 

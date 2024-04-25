@@ -52,6 +52,10 @@ namespace Masa.Blazor
 
         [Parameter] public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
 
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        public bool NoPersistentAnimation { get; set; }
+
         [Parameter] public bool Persistent { get; set; }
 
         [Parameter] public StringNumber? Width { get; set; }
@@ -172,6 +176,11 @@ namespace Masa.Blazor
         {
             if (Persistent)
             {
+                if (NoPersistentAnimation)
+                {
+                    return;
+                }
+
                 Animated = true;
                 StateHasChanged();
                 NextTick(async () =>
