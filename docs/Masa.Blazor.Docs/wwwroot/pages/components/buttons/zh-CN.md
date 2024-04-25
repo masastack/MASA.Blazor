@@ -61,6 +61,12 @@ related:
 
 <masa-example file="Examples.components.buttons.Icon"></masa-example>
 
+#### 图标名称 {released-on=v1.5.0}
+
+此用法是为了方便使用，而不需要额外的 `MIcon` 组件。
+
+<masa-example file="Examples.components.buttons.IconName"></masa-example>
+
 #### 加载器
 
 使用 `Loaders` 属性，可以通知用户正在进行处理。默认行为是使用 **MProgressCircular** 组件，但这可以自定义。
