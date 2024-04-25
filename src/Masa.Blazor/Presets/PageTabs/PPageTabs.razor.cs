@@ -212,8 +212,6 @@ public partial class PPageTabs : PatternPathComponentBase
         }
 
         TabsUpdated?.Invoke(this, PatternPaths.ToArray());
-
-        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     [MasaApiPublicMethod]
@@ -227,8 +225,8 @@ public partial class PPageTabs : PatternPathComponentBase
     {
         InvokeAsync(() =>
         {
-            NextTick(() => { _tabs?.CallSlider(); });
-
+            _tabs?.CallSliderAfterRender();
+        
             StateHasChanged();
         });
     }
@@ -349,8 +347,6 @@ public partial class PPageTabs : PatternPathComponentBase
         }
 
         TabsUpdated?.Invoke(this, PatternPaths.ToArray());
-
-        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     private void HandleOnCloseTabsToTheRight()
@@ -375,8 +371,6 @@ public partial class PPageTabs : PatternPathComponentBase
         }
 
         TabsUpdated?.Invoke(this, PatternPaths.ToArray());
-
-        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     private void HandleOnCloseOtherTabs()
@@ -401,7 +395,7 @@ public partial class PPageTabs : PatternPathComponentBase
     {
         if (args.Button == 1)
         {
-            // HACK: I don't know why this event would be triggered twice
+            // HACK: I don't know why this event would be triggered twice,
             // so I use a cancellation token to cancel the previous task
 
             _middleClickCancellationTokenSource?.Cancel();
@@ -416,8 +410,6 @@ public partial class PPageTabs : PatternPathComponentBase
         PatternPaths.Remove(patternPath);
         TabClosed?.Invoke(this, patternPath);
         PageTabsProvider?.RemovePathTitles(patternPath.AbsolutePath);
-
-        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     private void CloseOtherTabs(PatternPath current)
@@ -431,8 +423,6 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.NavigateTo(current.AbsolutePath);
 
         TabsUpdated?.Invoke(this, PatternPaths.ToArray());
-
-        NextTick(() => { _tabs?.CallSlider(); });
     }
 
     private void NavigateToNextIfCurrentClosing(PatternPath current)
