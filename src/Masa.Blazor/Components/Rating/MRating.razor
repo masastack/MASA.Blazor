@@ -1,0 +1,48 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
+         @ref="Ref"
+         @attributes="@Attributes">
+        @for (var i = 0; i < Length.ToInt32(); i++)
+        {
+            var index = i;
+            @GenItem(index)
+        }
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenItem(int index) => __builder =>
+    {
+        var ratingItem = CreateProps(index);
+        var iconLabel = IconLabel != null ? string.Format(IconLabel, index, Length) : null;
+        @if (ItemContent == null)
+        {
+            <MIcon Size="Size"
+                   Small="Small"
+                   XLarge="XLarge"
+                   Large="Large"
+                   XSmall="XSmall"
+                   Dark="Dark"
+                   Light="Light"
+                   Color="@GetColor(ratingItem)"
+                   Tag="button"
+                   RefBack="ratingItem.ForwardRef"
+                   @onexclick="@ratingItem.Click"
+                   ripple="true"
+                   aria-label="@iconLabel">
+                @GetIconName(ratingItem)
+            </MIcon>
+        }
+        else
+        {
+            @ItemContent(ratingItem)
+        }
+    };
+
+}
