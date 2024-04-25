@@ -1,28 +1,7 @@
-﻿@page "/"
-
-<h1>Test your code here!</h1>
-
-<MDataTable Headers="_headers"
+﻿<MDataTable Headers="_headers"
             Items="_desserts"
             ItemsPerPage="5"
             Class="elevation-1">
-    <ItemColContent>
-        @if (context.Header.Value == "Name")
-        {
-            <MTooltip Top>
-                <ActivatorContent Context="tooltip">
-                    <span @attributes="@tooltip.Attrs">@context.Value</span>
-                </ActivatorContent>
-                <ChildContent>
-                    @context.Value
-                </ChildContent>
-            </MTooltip>
-        }
-        else
-        {
-            @context.Value
-        }
-    </ItemColContent>
 </MDataTable>
 
 @code {
@@ -39,10 +18,6 @@
 
         public double Protein { get; set; }
 
-        public int Sodium { get; set; }
-
-        public string Calcium { get; set; }
-
         public string Iron { get; set; }
     }
 
@@ -50,12 +25,12 @@
     {
         new()
         {
-            Text = "Dessert",
+            Text = "Dessert (100g serving)",
             Align = DataTableHeaderAlign.Start,
-            Sortable = true,
+            Sortable = false,
             Value = nameof(Dessert.Name),
-            Width = 200,
-            Ellipsis = true
+            Ellipsis = new DataTableEllipsis(),
+            Width = 100
         },
         new() { Text = "Calories", Value = nameof(Dessert.Calories) },
         new() { Text = "Fat (g)", Value = nameof(Dessert.Fat) },
@@ -68,7 +43,7 @@
     {
         new Dessert
         {
-            Name = "Frozen Yogurt ABCDEFG 123qwe123qwe ",
+            Name = "Frozen Yogurt",
             Calories = 159,
             Fat = 6.0,
             Carbs = 24,
@@ -77,7 +52,7 @@
         },
         new Dessert
         {
-            Name = "Ice cream sandwich ABCDEFG 123qwe123qwe ",
+            Name = "Ice cream sandwich",
             Calories = 237,
             Fat = 9.0,
             Carbs = 37,
@@ -86,7 +61,7 @@
         },
         new Dessert
         {
-            Name = "Eclair ABCDEFG 123qwe123qwe ",
+            Name = "Eclair",
             Calories = 262,
             Fat = 16.0,
             Carbs = 23,
@@ -95,7 +70,7 @@
         },
         new Dessert
         {
-            Name = "Cupcake ABCDEFG 123qwe123qwe ",
+            Name = "Cupcake",
             Calories = 305,
             Fat = 3.7,
             Carbs = 67,
@@ -104,7 +79,7 @@
         },
         new Dessert
         {
-            Name = "Gingerbread ABCDEFG 123qwe123qwe ",
+            Name = "Gingerbread",
             Calories = 356,
             Fat = 16.0,
             Carbs = 49,
@@ -113,7 +88,7 @@
         },
         new Dessert
         {
-            Name = "Jelly bean ABCDEFG 123qwe123qwe ",
+            Name = "Jelly bean",
             Calories = 375,
             Fat = 0.0,
             Carbs = 94,
@@ -122,7 +97,7 @@
         },
         new Dessert
         {
-            Name = "Lollipop ABCDEFG 123qwe123qwe ",
+            Name = "Lollipop",
             Calories = 392,
             Fat = 0.2,
             Carbs = 98,
@@ -131,7 +106,7 @@
         },
         new Dessert
         {
-            Name = "Honeycomb ABCDEFG 123qwe123qwe ",
+            Name = "Honeycomb",
             Calories = 408,
             Fat = 3.2,
             Carbs = 87,
@@ -140,7 +115,7 @@
         },
         new Dessert
         {
-            Name = "Donut ABCDEFG 123qwe123qwe ",
+            Name = "Donut",
             Calories = 452,
             Fat = 25.0,
             Carbs = 51,
@@ -149,7 +124,7 @@
         },
         new Dessert
         {
-            Name = "KitKat ABCDEFG 123qwe123qwe ",
+            Name = "KitKat",
             Calories = 518,
             Fat = 26.0,
             Carbs = 65,

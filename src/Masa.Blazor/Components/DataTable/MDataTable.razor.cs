@@ -189,6 +189,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     }
 
     public bool HasBottom => FooterContent != null || !HideDefaultFooter;
+    
+    private bool HasEllipsis => Headers.Any(u => u.HasEllipsis);
 
     public bool IsMobile => MobileProvider?.IsMobile ?? false;
 
@@ -327,7 +329,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
                                         .And("resizable", ResizeMode != DataTableResizeMode.None)
                                         .And("resizable-overflow", ResizeMode == DataTableResizeMode.Overflow)
                                         .And("resizable-independent", ResizeMode == DataTableResizeMode.Independent)
-                                        .And("rtl", MasaBlazor.RTL)))
+                                        .And("rtl", MasaBlazor.RTL)
+                                        .And("fixed", HasEllipsis)))
                    .Element("progress")
                    .Apply("column", css => css.Add("column"))
                    .Element("empty-wrapper")

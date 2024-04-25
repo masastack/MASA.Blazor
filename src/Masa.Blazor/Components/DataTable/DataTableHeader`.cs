@@ -29,4 +29,6 @@ public class DataTableHeader<TItem> : DataTableHeader
     public Func<object?, string?, TItem, bool>? Filter { get; set; }
 
     public bool Filterable { get; set; } = true;
+
+    public Func<TItem, OneOf<string, RenderFragment>>? CellRender { get; set; }
 }

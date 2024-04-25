@@ -17,6 +17,18 @@ related:
 
 ### 属性
 
+#### 单元格省略 {released-on=v1.5.0}
+
+设置单元格的 `Width` 属性，并开启 `Ellipsis` 属性，可以让单元格内容超出时显示省略号。
+
+<masa-example file="Examples.components.data_tables.Ellipsis"></masa-example>
+
+#### 自定义单元格 {released-on=v1.5.0}
+
+除了使用插槽 `ItemColContent` 自定义单元格内容外，还可以使用 `CellRender` 属性。
+
+<masa-example file="Examples.components.data_tables.CellRender"></masa-example>
+
 #### 自定义过滤器
 
 你可以向 `CustomFilter` 属性提供一个函数，覆盖 `Search` 属性的默认过滤。 如果你需要自定义特定列的过滤，你可以给表头数据项的 `Filter` 属性提供一个函数。
@@ -96,7 +108,7 @@ related:
 
 <masa-example file="Examples.components.data_tables.ResizeMode"></masa-example>
 
-### 属性
+### 插槽
 
 #### 表头
 
@@ -104,7 +116,7 @@ related:
 
 <masa-example file="Examples.components.data_tables.Header"></masa-example>
 
-#### 项目
+#### 单元格
 
 你可以使用动态插槽 **ItemColContent** 来自定义某些列。
 
@@ -112,7 +124,7 @@ related:
 
 #### 简单复选框
 
-如果想要在数据表格的插槽模板中使用复选框，请使用 **MSimpleCheckbox** 组件，而不是 **MCheckbox** 组件。 **MSimplleChecbox** 组件被内部使用，跟随表头对齐方式。
+如果想要在数据表格的插槽模板中使用复选框，请使用 **MSimpleCheckbox** 组件，而不是 **MCheckbox** 组件。 **MSimpleCheckbox** 组件被内部使用，跟随表头对齐方式。
 
 <masa-example file="Examples.components.data_tables.SimpleCheckbox"></masa-example>
 
