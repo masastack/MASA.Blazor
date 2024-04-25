@@ -390,10 +390,13 @@
 
 .p-page-tab:not(.m-tab--active) .p-page-tab__close {
     visibility: hidden;
+    opacity: 0;
+    transition: .3s cubic-bezier(.25,.8,.5,1);
 }
 
 .p-page-tab:not(.m-tab--active):hover .p-page-tab__close {
     visibility: visible;
+    opacity: 1;
 }
 
 .p-page-container.fill-height > .p-page-container__item {

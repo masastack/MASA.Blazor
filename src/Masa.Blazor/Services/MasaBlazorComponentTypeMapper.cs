@@ -27,6 +27,7 @@
             { typeof(BListItemContent), typeof(MListItemContent) },
             { typeof(BListItemAction), typeof(MListItemAction) },
             { typeof(BListItemTitle), typeof(MListItemTitle) },
+            { typeof(BListItemSubtitle), typeof(MListItemSubtitle) },
             { typeof(BSlideGroup), typeof(MTabsBar) }, //We will remove this when Decorator come up
             { typeof(BWindow), typeof(MWindow) },
             { typeof(BWindowItem), typeof(MWindowItem) },

@@ -6,6 +6,17 @@
 
         private Block _block = new("m-list-item");
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (!IsDirtyParameter(nameof(Size)))
+            {
+                // Use css instead of size prop
+                Size = null;
+            }
+        }
+
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
