@@ -7,6 +7,8 @@ related:
   - /blazor/components/radio
 ---
 
+<app-alert type='warning' content='`Color` 参数仅支持内置的 "primary", "secondary", "accent", "surface", "success", "error", "warning", "info" 和 标准的 CSS 颜色值。'></app-alert>
+
 ## 示例
 
 ### 属性

@@ -1,51 +1,65 @@
-﻿namespace Masa.Blazor
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor;
+
+public class MBorder : Container
 {
-    public class MBorder : BBorder
+    [Parameter]
+    [MasaApiParameter(Borders.Left)]
+    public Borders Border { get; set; } = Borders.Left;
+
+    [Parameter]
+    [MasaApiParameter("primary")]
+    public string? Color { get; set; } = "primary";
+
+    [Parameter] public bool Offset { get; set; }
+
+    [Parameter] [MasaApiParameter(true)] public bool Value { get; set; } = true;
+
+    [Obsolete("Use Size instead.")]
+    [Parameter]
+    [MasaApiParameter(8)]
+    public StringNumber Width { get; set; } = 8;
+
+    [Parameter] [MasaApiParameter(8)] public StringNumber Size { get; set; } = 8;
+
+    private Block _block = new("m-border");
+
+    private bool Active => Value && Border != Borders.None;
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        protected override void SetComponentClass()
+        return _block.Modifier(Border.ToString())
+            .And("active", Active)
+            .GenerateCssClasses();
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        var size = Size;
+#pragma warning disable CS0618 // Type or member is obsolete
+        if (Width != 8)
         {
-            CssProvider
-                .Apply("wrapper", _ => { },
-                    style => { style.Add("position:relative;display:inherit;").Add(WrapperStyle); })
-                .Apply(css =>
-                {
-                    css.Add("m-border")
-                        .Add(() => Border switch
-                        {
-                            Borders.Left => "m-border__left",
-                            Borders.Right => "m-border__right",
-                            Borders.Top => "m-border__top",
-                            Borders.Bottom => "m-border__bottom",
-                            _ => "",
-                        })
-                        .AddColor(Color)
-                        .AddRounded(Rounded);
-                }, style =>
-                {
-                    style
-                        .AddIf("display:none", () => Inactive)
-                        .AddIf(() =>
-                        {
-                            var (number, unit) = ComputedWidth();
-                            return number > 0 ? $"border-width:{number}{unit}" : "";
-                        }, () => Width != null)
-                        .AddIf(() =>
-                        {
-                            var (number, unit) = ComputedWidth();
-                            if (number <= 0) return "";
-
-                            var calc = $"calc(1px - {number * 2}{unit})";
-
-                            return Border switch
-                            {
-                                Borders.Left => $"left:{calc}",
-                                Borders.Right => $"right:{calc}",
-                                Borders.Top => $"top:{calc}",
-                                Borders.Bottom => $"bottom:{calc}",
-                                _ => "",
-                            };
-                        }, () => Offset);
-                });
+            size = Width;
         }
+#pragma warning restore CS0618 // Type or member is obsolete
+
+        var styleBuilder = StyleBuilder.Create()
+            .Add("--m-border-size", size.ToUnit())
+            .Add("--m-border-offset", Offset ? $"-{size.ToUnit()}" : "0");
+
+        if (Color != null)
+        {
+            if (Color.StartsWith("#") || Color.StartsWith("rgb"))
+            {
+                styleBuilder.Add("--m-border-color", Color);
+            }
+            else
+            {
+                styleBuilder.Add("--m-border-color", $"var(--m-theme-{Color})");
+            }
+        }
+
+        return styleBuilder.GenerateCssStyles();
     }
 }

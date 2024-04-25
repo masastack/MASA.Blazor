@@ -1,6 +1,6 @@
-﻿<MCard MaxWidth="300" Class="mx-auto" Tile>
-    <MBorder Offset Border="_border" Rounded="true" Class="elevation-2" WrapperStyle="display:inline-block">
-        <MBorder Tag="span" Color="pink" Style="border-radius:0;height:50%;margin: auto 0;">
+﻿<MCard Outlined MaxWidth="300" Class="mx-auto" Tile>
+    <MBorder Offset Border="_border" Style="@OffsetBroderStyle">
+        <MBorder Color="#e91e63">
             <MCardTitle>Card Title</MCardTitle>
             <MCardSubtitle>Card Subtitle</MCardSubtitle>
         </MBorder>
@@ -31,4 +31,12 @@
 
 @code {
     private Borders _border = Borders.Bottom;
+
+    private string? OffsetBroderStyle => _border switch
+    {
+        Borders.Left or Borders.Right => "margin: -1px 0;",
+        Borders.Top or Borders.Bottom => "margin: 0 -1px",
+        _ => null
+    };
+
 }
