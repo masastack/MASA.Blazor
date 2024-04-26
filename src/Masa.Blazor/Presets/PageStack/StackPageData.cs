@@ -36,6 +36,8 @@ public class StackPageData
             return;
         }
 
+        _active = true;
+
         ActiveChanged?.Invoke(this, new PageActiveStateEventArgs(true));
     }
 
@@ -45,6 +47,8 @@ public class StackPageData
         {
             return;
         }
+
+        _active = false;
 
         ActiveChanged?.Invoke(this, new PageActiveStateEventArgs(false));
     }

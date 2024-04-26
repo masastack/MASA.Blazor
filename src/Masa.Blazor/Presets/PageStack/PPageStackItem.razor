@@ -1,24 +1,35 @@
 ﻿@namespace Masa.Blazor.Presets.PageStack
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
 
 <MDialog Transition="dialog-right-transition"
          Value="@Active"
-         ContentClass="@($"m-page-stack-item {Class}")"
-         ContentStyle="@Style"
+         ContentClass="@GetClass()"
+         ContentStyle="@GetStyle()"
          Fullscreen
          Persistent
          NoPersistentAnimation
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Index } })">
     <BShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
-            <MAppBar Class="@AppBarClass"
+            <MAppBar Class="@_block.Element("bar").AddClass(AppBarClass).Build()"
                      Style="@AppBarStyle"
-                     Height="@AppBarHeight"
-                     Fixed
-                     ElevateOnScroll
-                     ScrollTarget="@($"[page-stack-id=\"{Index}\"]>.m-dialog")"
                      Color="@AppBarColor"
-                     Light="@Light"
-                     Dark="@Dark">
+                     Dense="@AppBarDense"
+                     Short="@AppBarShort"
+                     ElevateOnScroll="@ElevateOnScroll"
+                     ExtensionContent="@ExtensionContent"
+                     ExtensionHeight="@ExtensionHeight"
+                     Fixed
+                     Flat="@AppBarFlat"
+                     Height="@(AppBarHeight == 0 ? null : AppBarHeight)"
+                     ImgContent="@ImageContent"
+                     ShrinkOnScroll="@ShrinkOnScroll"
+                     Src="@AppBarImage"
+                     ScrollTarget="@($"[page-stack-id=\"{Index}\"]>.m-dialog")"
+                     Light="@AppBarLight"
+                     Dark="@AppBarDark"
+                     >
                 <ChildContent>
                     @if (AppBarContent is not null)
                     {
@@ -41,69 +52,16 @@
                             @AppBarTitle
                         </MAppBarTitle>
 
-                        <MSpacer/>
-
-                        @ActionContent
+                        <div class="@_block.Element("actions")">
+                            @ActionContent
+                        </div>
                     }
                 </ChildContent>
             </MAppBar>
-            <div class="fill-height @ContentClass"
-                 style="@ContentStyle; padding-top: 64px;">
+            <div class="@_block.Element("content")"
+                 style="@StyleBuilder.Create().Add("padding-top", $"{ComputedBarHeight}px")">
                 @ChildContent
             </div>
         </CascadingValue>
     </BShouldRender>
 </MDialog>
-
-@code {
-
-    [Parameter] public bool Active { get; set; }
-
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public bool CanRender { get; set; }
-
-    [Parameter] public string? Class { get; set; }
-
-    [Parameter] public string? Style { get; set; }
-
-    [Parameter] public EventCallback OnGoBack { get; set; }
-
-    [Parameter] public Action<string>? SelectorCaptureAction { get; set; }
-
-    [Parameter] public int Index { get; set; }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            SelectorCaptureAction?.Invoke($"[page-stack-id=\"{Index}\"]>.m-dialog");
-        }
-    }
-
-    internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
-    internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
-    internal string? AppBarColor { get; set; }
-    internal string? AppBarClass { get; set; }
-    internal StringNumber? AppBarHeight { get; set; }
-    internal string? AppBarStyle { get; set; }
-    internal string? AppBarTitle { get; set; }
-    internal bool Light { get; set; }
-    internal bool Dark { get; set; }
-
-    internal string? ContentClass { get; set; }
-    internal string? ContentStyle { get; set; }
-
-    internal RenderFragment? ActionContent { get; set; }
-
-    private async Task HandleOnGoBack()
-    {
-        await OnGoBack.InvokeAsync();
-    }
-
-    internal void InvokeStateHasChanged()
-    {
-        StateHasChanged();
-    }
-
-}

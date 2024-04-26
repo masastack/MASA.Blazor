@@ -58,7 +58,6 @@ public partial class PPageStack : PatternPathComponentBase
         _dotNetObjectReference = DotNetObjectReference.Create(this);
     }
 
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -78,6 +77,7 @@ public partial class PPageStack : PatternPathComponentBase
         _pageTypeOfPreviousPath = PageType.Stack;
 
         Pages.Push(NavigationManager.ToAbsoluteUri(href).AbsolutePath);
+        DisableRootScrollbar(true);
 
         InvokeAsync(StateHasChanged);
     }
@@ -104,6 +104,7 @@ public partial class PPageStack : PatternPathComponentBase
             }
 
             _pageTypeOfPreviousPath = PageType.Tab;
+            DisableRootScrollbar(false);
             InvokeAsync(StateHasChanged);
             return;
         }
@@ -155,7 +156,7 @@ public partial class PPageStack : PatternPathComponentBase
         _locationChangedByUserClick++;
         _pageTypeOfPreviousPath = PageType.Stack;
 
-        Pages.UpdateTop(e.Uri, null);
+        Pages.UpdateTop(e.Uri, e.State);
     }
 
     private void InternalPageStackNavManagerOnPagePopped(object? sender, PageStackPoppedEventArgs e)
