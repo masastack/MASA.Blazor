@@ -14,6 +14,8 @@ public class PageStackNavController : IDisposable
     internal event EventHandler<PageStackPoppedEventArgs>? PagePopped;
 
     internal event EventHandler<PageStackReplacedEventArgs>? PageReplaced;
+    
+    internal event EventHandler<PageStackPushedEventArgs>? PageCleared;
 
     internal event EventHandler<LocationChangedEventArgs>? LocationChanged;
 
@@ -55,6 +57,11 @@ public class PageStackNavController : IDisposable
     {
         PageReplaced?.Invoke(this, new PageStackReplacedEventArgs(uri, state));
         _navigationManager.NavigateTo(uri, replace: true);
+    }
+
+    public void Tab(string uri)
+    {
+        PageCleared?.Invoke(this, new PageStackPushedEventArgs(uri));
     }
 
     public void Dispose()

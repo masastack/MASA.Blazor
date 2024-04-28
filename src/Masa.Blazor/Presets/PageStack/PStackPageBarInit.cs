@@ -59,37 +59,36 @@ public class PStackPageBarInit : IComponent
 
     public Task SetParametersAsync(ParameterView parameters)
     {
-        parameters.SetParameterProperties(this);
+        parameters.TryGetValue<PPageStackItem>(nameof(PageStackItem), out var pageStackItem);
+
+        if (pageStackItem is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        var hasRerenderKey = parameters.TryGetValue<string>(nameof(RerenderKey), out var rerenderKey);
 
         if (_init)
         {
-            if (_prevRerenderKey != RerenderKey)
+            if (hasRerenderKey)
             {
-                _prevRerenderKey = RerenderKey;
-                Rerender();
+                if (_prevRerenderKey != rerenderKey)
+                {
+                    _prevRerenderKey = rerenderKey;
+                    SetParameters();
+                    Rerender();
+                }
             }
 
             return Task.CompletedTask;
         }
 
         _init = true;
-        _prevRerenderKey = RerenderKey;
+        _prevRerenderKey = rerenderKey;
 
-        if (parameters.TryGetValue<IDefaultsProvider>(nameof(DefaultsProvider), out var defaultsProvider)
-            && defaultsProvider.Defaults is not null
-            && defaultsProvider.Defaults.TryGetValue(nameof(PStackPageBarInit), out var dictionary)
-            && dictionary is not null)
-        {
-            var defaults = ParameterView.FromDictionary(dictionary);
-            defaults.SetParameterProperties(this);
-        }
+        SetParameters();
 
-        if (PageStackItem is null)
-        {
-            return Task.CompletedTask;
-        }
-
-        PageStackItem.AppBarContent = BarContent;
+        PageStackItem!.AppBarContent = BarContent;
         PageStackItem.GoBackContent = GoBackContent;
         PageStackItem.ExtensionHeight = ExtensionHeight;
         PageStackItem.ExtensionContent = ExtensionContent;
@@ -114,11 +113,25 @@ public class PStackPageBarInit : IComponent
         Rerender();
 
         return Task.CompletedTask;
+
+        void SetParameters()
+        {
+            if (parameters.TryGetValue<IDefaultsProvider>(nameof(DefaultsProvider), out var defaultsProvider)
+                && defaultsProvider.Defaults is not null
+                && defaultsProvider.Defaults.TryGetValue(nameof(PStackPageBarInit), out var dictionary)
+                && dictionary is not null)
+            {
+                var defaults = ParameterView.FromDictionary(dictionary);
+                defaults.SetParameterProperties(this);
+            }
+
+            parameters.SetParameterProperties(this);
+        }
     }
 
     [MasaApiPublicMethod]
     public void Rerender()
     {
-        PageStackItem?.InvokeStateHasChanged();
+        PageStackItem?.Render();
     }
 }

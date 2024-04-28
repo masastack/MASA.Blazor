@@ -457,13 +457,12 @@
 
 /* page-stack */
 
-.m-page-stack-item .m-app-bar > .m-toolbar__content {
-    display: flex;
-    justify-content: space-between;
-}
-
-.m-page-stack-item:not(.m-page-stack-item--center-title) .m-toolbar__title {
-    flex: auto;
+.m-page-stack-item.m-page-stack-item--center-title .m-toolbar__title {
+    position: absolute;
+    padding-left: 0 !important;
+    left: 50%;
+    max-width: calc(100% - 112px);
+    transform: translateX(-50%);
 }
 
 .m-page-stack-item__content {

@@ -83,8 +83,6 @@ public partial class PPageStackItem : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        Console.Out.WriteLine($"PageStackItem [BuildComponentClass] {CenterTitle}");
-        
         return _block
             .Modifier(CenterTitle)
             .GenerateCssClasses();
@@ -95,7 +93,7 @@ public partial class PPageStackItem : MasaComponentBase
         await OnGoBack.InvokeAsync();
     }
 
-    internal void InvokeStateHasChanged()
+    internal void Render()
     {
         StateHasChanged();
     }

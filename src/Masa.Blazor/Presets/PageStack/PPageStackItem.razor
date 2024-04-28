@@ -28,8 +28,7 @@
                      Src="@AppBarImage"
                      ScrollTarget="@($"[page-stack-id=\"{Index}\"]>.m-dialog")"
                      Light="@AppBarLight"
-                     Dark="@AppBarDark"
-                     >
+                     Dark="@AppBarDark">
                 <ChildContent>
                     @if (AppBarContent is not null)
                     {
@@ -51,6 +50,8 @@
                         <MAppBarTitle>
                             @AppBarTitle
                         </MAppBarTitle>
+                        
+                        <MSpacer />
 
                         <div class="@_block.Element("actions")">
                             @ActionContent
