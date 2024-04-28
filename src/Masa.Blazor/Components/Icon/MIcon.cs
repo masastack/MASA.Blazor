@@ -29,9 +29,6 @@
         [Parameter]
         public bool XSmall { get; set; }
 
-        [Parameter]
-        public bool IsActive { get; set; } = true;
-
         private readonly Dictionary<string, string> _sizeMap = new()
         {
             { nameof(XSmall), "12px" },
@@ -163,10 +160,10 @@
                         .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark, IndependentTheme)
-                        .AddTextColor(Color, () => IsActive);
+                        .AddTextColor(Color);
                 }, styleBuilder =>
                 {
-                    styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);
+                    styleBuilder = styleBuilder.AddTextColor(Color);
 
                     var fontSize = GetSize();
                     styleBuilder.AddIf($"font-size:{fontSize}", () => fontSize != null);
