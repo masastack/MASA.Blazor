@@ -52,15 +52,15 @@ namespace Masa.Blazor
             }
         }
 
-        public override string ValidationState
+        public override string? ValidationState
         {
             get
             {
-                if (IsDisabled && !Indeterminate) return "";
+                if (IsDisabled && !Indeterminate) return null;
                 if (HasError && ShouldValidate) return "error";
                 if (HasSuccess) return "success";
                 if (HasColor) return ComputedColor;
-                return "";
+                return null;
             }
         }
 

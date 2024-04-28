@@ -74,13 +74,13 @@
 
         public virtual bool HasColor => false;
 
-        public virtual string ValidationState
+        public virtual string? ValidationState
         {
             get
             {
                 if (IsDisabled)
                 {
-                    return "";
+                    return null;
                 }
 
                 if (HasError && ShouldValidate)
@@ -98,7 +98,7 @@
                     return ComputedColor;
                 }
 
-                return "";
+                return null;
             }
         }
 
