@@ -1,8 +1,8 @@
 namespace Masa.Blazor.Presets.PageStack.NavController;
 
-public class PageStackPoppedEventArgs : EventArgs
+public class PageStackPopEventArgs : EventArgs
 {
-    public PageStackPoppedEventArgs(int delta, object? state = null)
+    public PageStackPopEventArgs(int delta, object? state = null)
     {
         if (delta < 1)
         {

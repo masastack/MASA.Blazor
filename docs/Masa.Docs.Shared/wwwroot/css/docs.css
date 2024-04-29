@@ -101,14 +101,6 @@ h1:focus {
     color: var(--md-ref-palette-neutral94) !important;
 }
 
-.doc-list-nav .theme--dark.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
-    color: var(--md-sys-color-on-surface-dark);
-}
-
-.doc-list-nav .theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
-    color: var(--md-sys-color-on-surface-light);
-}
-
 .doc-list-nav .m-list-item__subtitle {
     font-size: 0.8125rem;
 }
@@ -574,13 +566,22 @@ app-alert p {
 }
 
 .doc-markdown-body > section {
-    /*margin-bottom: 3rem;*/
+    padding-bottom: 2rem;
 }
 
-    .doc-markdown-body > section > section > section {
-        /*margin-bottom: 1.5rem;*/
-        padding-bottom: 1.5rem;
+    .doc-markdown-body > section > section {
+        padding-bottom: 1rem;
     }
+    
+    .doc-markdown-body > section > section > section {
+        padding-bottom: 0.5rem;
+    }
+
+.doc-markdown-body > section:last-child,
+.doc-markdown-body > section > section:last-child,
+.doc-markdown-body > section > section > section:last-child {
+    padding-bottom: 0;
+}
 
     .doc-markdown-body code {
         padding-top: 0;

@@ -1,12 +1,29 @@
 ﻿@page "/blazor/examples/page-stack/page1"
 @layout PageStackLayout
+@inject PageStackNavController NavController
+@inherits PStackPageBase
 
-<PPageStackItemInit Title="Page 1">
-</PPageStackItemInit>
+<PStackPageBarInit Title="Page 1">
+</PStackPageBarInit>
 
 <p class="caption">url: /blazor/examples/page-stack/page1</p>
 
 <div>
     <h3>Page 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
-    <a href="/blazor/examples/page-stack/page2/xyz">Navigate to Page 2</a>
+    <a href="/blazor/examples/page-stack/page2/xyz"
+       data-page-stack-strategy="push">
+        Navigate to Page 2
+    </a>
 </div>
+
+<a class="text-decoration-underline"
+   @onclick="@GoToPage4">
+    Navigate to Page 4
+</a>
+
+<span class="ml-2 body-2">State from page 4: @_stateFromPage4</span>
+
+<MSyntaxHighlight Code="@sourceCode"
+                  Language="razor"
+                  Style="font-size: 10px">
+</MSyntaxHighlight>

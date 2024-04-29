@@ -3,7 +3,7 @@
     color: var(--m-theme-light-on-surface);
 }
 .theme--light.m-application .text--primary {
-    color: rgba(0, 0, 0, 0.87) !important;
+    color: var(--m-theme-light-on-surface) !important;
 }
 .theme--light.m-application .text--secondary {
     color: rgba(0, 0, 0, 0.6) !important;
@@ -17,7 +17,7 @@
     color: var(--m-theme-dark-on-surface);
 }
 .theme--dark.m-application .text--primary {
-    color: #FFFFFF !important;
+    color: var(--m-theme-dark-on-surface) !important;
 }
 .theme--dark.m-application .text--secondary {
     color: rgba(255, 255, 255, 0.7) !important;
@@ -20276,7 +20276,7 @@ html.overflow-y-hidden {
     color: rgba(0, 0, 0, 0.38);
 }
 .theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
-    color: rgba(0, 0, 0, 0.87);
+    color: var(--m-theme-light-on-surface);
 }
 .theme--light.m-list-item .m-list-item__mask {
     color: rgba(0, 0, 0, 0.38);
@@ -20306,7 +20306,7 @@ html.overflow-y-hidden {
     color: rgba(255, 255, 255, 0.5);
 }
 .theme--dark.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
-    color: #FFFFFF;
+    color: var(--m-theme-dark-on-surface);
 }
 .theme--dark.m-list-item .m-list-item__mask {
     color: rgba(255, 255, 255, 0.5);
