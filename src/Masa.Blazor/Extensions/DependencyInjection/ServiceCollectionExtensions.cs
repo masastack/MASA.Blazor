@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        services.AddBlazorComponent();
+        services.AddBlazorComponent(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
     }
 
@@ -35,7 +35,7 @@ public static class ServiceCollectionExtensions
         var options = new MasaBlazorOptions();
         optionsAction.Invoke(options);
 
-        services.AddBlazorComponent(o => { o.Locale = options.Locale; });
+        services.AddBlazorComponent(o => { o.Locale = options.Locale; }, masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(optionsAction, masaBlazorServiceLifetime);
     }
 
