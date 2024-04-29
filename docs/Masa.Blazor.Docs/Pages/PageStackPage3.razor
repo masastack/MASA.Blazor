@@ -1,14 +1,20 @@
 ﻿@page "/blazor/examples/page-stack/page3"
 @layout PageStackLayout
+@inject PageStackNavController NavController
 
-<PPageStackItemInit Title="Page 3">
+<PStackPageBarInit Title="Page 3">
     <ActionContent>
-        <MButton Icon Href="/blazor/examples/page-stack/tab3">
-            <MIcon>mdi-home</MIcon>
+        <MButton IconName="mdi-home"
+                 OnClick="@(() => NavController.Tab("/blazor/examples/page-stack/tab3"))">
         </MButton>
     </ActionContent>
-</PPageStackItemInit>
+</PStackPageBarInit>
 
 <p class="caption">url: /blazor/examples/page-stack/page3</p>
 
 <h3>Page 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
+
+<MSyntaxHighlight Code="@sourceCode"
+                  Language="razor"
+                  Style="font-size: 10px">
+</MSyntaxHighlight>
