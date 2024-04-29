@@ -132,6 +132,5 @@ public class PStackPageBase : ComponentBase, IDisposable
         {
             Page.ActiveChanged -= PageOnActiveChanged;
         }
-        // NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }

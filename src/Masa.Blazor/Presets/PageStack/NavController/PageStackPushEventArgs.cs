@@ -1,8 +1,8 @@
 namespace Masa.Blazor.Presets.PageStack.NavController;
 
-public class PageStackPushedEventArgs : EventArgs
+public class PageStackPushEventArgs : EventArgs
 {
-    public PageStackPushedEventArgs(string uri)
+    public PageStackPushEventArgs(string uri)
     {
         Uri = uri;
     }

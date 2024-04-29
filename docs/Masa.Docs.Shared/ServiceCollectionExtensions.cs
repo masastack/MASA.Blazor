@@ -46,7 +46,7 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Dark.Error = "#FFB4AB";
                 theme.Themes.Dark.OnError = "#690005";
                 theme.Themes.Dark.Surface = "#131316";
-                theme.Themes.Dark.OnSurface = "#C9C5CA";
+                theme.Themes.Dark.OnSurface = "#FFFFFF";
                 theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
                 theme.Themes.Dark.InversePrimary = "#4f33ff";
             });

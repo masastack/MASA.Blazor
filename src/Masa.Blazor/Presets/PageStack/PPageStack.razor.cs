@@ -64,10 +64,10 @@ public partial class PPageStack : PatternPathComponentBase
         }
 
         InternalPageStackNavManager = PageStackNavControllerFactory.Create(Name ?? string.Empty);
-        InternalPageStackNavManager.PagePushed += InternalPageStackNavManagerOnPagePushed;
-        InternalPageStackNavManager.PagePopped += InternalPageStackNavManagerOnPagePopped;
-        InternalPageStackNavManager.PageReplaced += InternalPageStackNavManagerOnPageReplaced;
-        InternalPageStackNavManager.PageCleared += InternalPageStackNavManagerOnPageCleared;
+        InternalPageStackNavManager.StackPush += InternalStackStackNavManagerOnStackPush;
+        InternalPageStackNavManager.StackPop += InternalPageStackNavManagerOnStackPop;
+        InternalPageStackNavManager.StackReplace += InternalStackStackNavManagerOnStackReplace;
+        InternalPageStackNavManager.StackClear += InternalStackStackNavManagerOnStackClear;
         InternalPageStackNavManager.LocationChanged += InternalPageStackNavManagerOnLocationChanged;
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
@@ -134,48 +134,42 @@ public partial class PPageStack : PatternPathComponentBase
             .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
     }
 
-    private void InternalPageStackNavManagerOnPageReplaced(object? sender, PageStackReplacedEventArgs e)
+    private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
         _navCountByUserClick++;
 
         Pages.UpdateTop(e.Uri, e.State);
     }
 
-    private void InternalPageStackNavManagerOnPagePopped(object? sender, PageStackPoppedEventArgs e)
+    private void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
     {
         _navCountByUserClick++;
 
         CloseTopPages(e.Delta, e.State);
     }
 
-    private void InternalPageStackNavManagerOnPagePushed(object? sender, PageStackPushedEventArgs e)
+    private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
     {
         Push(e.Uri);
     }
 
-    private async void InternalPageStackNavManagerOnPageCleared(object? sender, PageStackPushedEventArgs e)
+    private async void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
     {
         await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
-        var backToExistingPage = _lastVisitedTabPath == GetAbsolutePath(e.Uri);
+        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.Uri) || _lastVisitedTabPath == GetAbsolutePath(e.Uri);
 
-        if (backToExistingPage)
+        if (backToLastVisitTab)
         {
             CloseTopPages(Pages.Count);
-        }
-        else
-        {
-            Pages.Clear();
-            DisableRootScrollbar(false);
-            _ = InvokeAsync(StateHasChanged);
+            return;
         }
 
-        NextTick(async () =>
-        {
-            await Task.Delay(backToExistingPage ? DelayForPageClosingAnimation : 0);
+        Pages.Clear();
+        DisableRootScrollbar(false);
+        _ = InvokeAsync(StateHasChanged);
 
-            NavigationManager.Replace(e.Uri);
-        });
+        NextTick(() => NavigationManager.Replace(e.Uri!));
     }
 
     private void InternalPageStackNavManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -276,10 +270,10 @@ public partial class PPageStack : PatternPathComponentBase
 
         if (InternalPageStackNavManager is not null)
         {
-            InternalPageStackNavManager.PagePushed -= InternalPageStackNavManagerOnPagePushed;
-            InternalPageStackNavManager.PagePopped -= InternalPageStackNavManagerOnPagePopped;
-            InternalPageStackNavManager.PageReplaced -= InternalPageStackNavManagerOnPageReplaced;
-            InternalPageStackNavManager.PageCleared -= InternalPageStackNavManagerOnPageCleared;
+            InternalPageStackNavManager.StackPush -= InternalStackStackNavManagerOnStackPush;
+            InternalPageStackNavManager.StackPop -= InternalPageStackNavManagerOnStackPop;
+            InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
+            InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
             InternalPageStackNavManager.LocationChanged -= InternalPageStackNavManagerOnLocationChanged;
         }
     }

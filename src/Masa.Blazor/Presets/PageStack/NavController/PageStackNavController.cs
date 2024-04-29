@@ -9,13 +9,13 @@ public class PageStackNavController : IDisposable
 
     private readonly NavigationManager _navigationManager;
 
-    internal event EventHandler<PageStackPushedEventArgs>? PagePushed;
+    internal event EventHandler<PageStackPushEventArgs>? StackPush;
 
-    internal event EventHandler<PageStackPoppedEventArgs>? PagePopped;
+    internal event EventHandler<PageStackPopEventArgs>? StackPop;
 
-    internal event EventHandler<PageStackReplacedEventArgs>? PageReplaced;
-    
-    internal event EventHandler<PageStackPushedEventArgs>? PageCleared;
+    internal event EventHandler<PageStackReplaceEventArgs>? StackReplace;
+
+    internal event EventHandler<PageStackClearEventArgs>? StackClear;
 
     internal event EventHandler<LocationChangedEventArgs>? LocationChanged;
 
@@ -31,17 +31,31 @@ public class PageStackNavController : IDisposable
         LocationChanged?.Invoke(this, e);
     }
 
+    /// <summary>
+    /// Push a new page onto the page stack.
+    /// </summary>
+    /// <param name="uri"></param>
     public void Push(string uri)
     {
-        PagePushed?.Invoke(this, new PageStackPushedEventArgs(uri));
+        StackPush?.Invoke(this, new PageStackPushEventArgs(uri));
         _navigationManager.NavigateTo(uri);
     }
 
+    /// <summary>
+    /// Go back one step in the page stack.
+    /// </summary>
+    /// <param name="state"></param>
     public void Pop(object? state = null)
     {
         GoBack(1, state);
     }
 
+    /// <summary>
+    /// Go back the specified number of steps in the page stack.
+    /// </summary>
+    /// <param name="delta"></param>
+    /// <param name="state"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void GoBack(int delta = 1, object? state = null)
     {
         if (delta < 1)
@@ -49,19 +63,36 @@ public class PageStackNavController : IDisposable
             throw new ArgumentOutOfRangeException(nameof(delta), "The delta must be greater than or equal to 1.");
         }
 
-        PagePopped?.Invoke(this, new PageStackPoppedEventArgs(delta, state));
+        StackPop?.Invoke(this, new PageStackPopEventArgs(delta, state));
         _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
     }
 
+    /// <summary>
+    /// Replace the current page with the new page.
+    /// </summary>
+    /// <param name="uri"></param>
+    /// <param name="state"></param>
     public void Replace(string uri, object? state = null)
     {
-        PageReplaced?.Invoke(this, new PageStackReplacedEventArgs(uri, state));
+        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(uri, state));
         _navigationManager.NavigateTo(uri, replace: true);
     }
 
-    public void Tab(string uri)
+    /// <summary>
+    /// Clear the page stack.
+    /// </summary>
+    public void Clear()
     {
-        PageCleared?.Invoke(this, new PageStackPushedEventArgs(uri));
+        StackClear?.Invoke(this, new PageStackClearEventArgs());
+    }
+
+    /// <summary>
+    /// Clear current page stack and navigate to the new tab.
+    /// </summary>
+    /// <param name="uri"></param>
+    public void GoToTab(string uri)
+    {
+        StackClear?.Invoke(this, new PageStackClearEventArgs(uri));
     }
 
     public void Dispose()
