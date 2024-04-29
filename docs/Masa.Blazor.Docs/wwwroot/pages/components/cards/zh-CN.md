@@ -66,6 +66,10 @@ related:
 
 <masa-example file="Examples.components.cards.Outlined"></masa-example>
 
+#### 子组件属性 {released-on=v1.5.0}
+
+<masa-example file="Examples.components.cards.SubComponents"></masa-example>
+
 ### 其他
 
 #### 卡片显示
@@ -115,13 +119,3 @@ related:
 使用 [MListItem](/blazor/components/lists) 和 [MSlider](/brazor/components/sliders)，我们可以创建一个独特的天气卡。列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。
 
 <masa-example file="Examples.components.cards.WeatherCard"></masa-example>
-
-#### 加载
-
-使用不确定 [MProgressLinear](/blazor/components/progress-linear) 表示加载状态。
-
-<masa-example file="Examples.components.cards.Loading"></masa-example>
-
-
-
-
