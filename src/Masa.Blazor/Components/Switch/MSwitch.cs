@@ -29,7 +29,7 @@
 
         // according to spec, should still show
         // a color when disabled and active
-        public override string ValidationState
+        public override string? ValidationState
         {
             get
             {
@@ -48,7 +48,7 @@
                     return ComputedColor;
                 }
 
-                return "";
+                return null;
             }
         }
 

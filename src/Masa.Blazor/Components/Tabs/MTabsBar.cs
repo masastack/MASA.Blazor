@@ -38,11 +38,6 @@
         }
 #endif
 
-        protected override StringNumber InitDefaultItemValue()
-        {
-            return Tabs?.Routable is true ? NavigationManager.Uri : base.InitDefaultItemValue();
-        }
-
         protected override void SetComponentClass()
         {
             base.SetComponentClass();

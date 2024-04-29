@@ -1,17 +1,19 @@
-﻿
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    public class MOtpInput: BOtpInput, IThemeable
+    public class MOtpInput : BOtpInput, IThemeable
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter]
         public string? Color { get; set; }
 
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        public bool AutoFocus { get; set; }
+
         private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -22,6 +24,22 @@ namespace Masa.Blazor
             }
         }
 #endif
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                NextTick(() =>
+                {
+                    if (AutoFocus && InputRefs.Count > 0)
+                    {
+                        _ = InputRefs[0].FocusAsync();
+                    }
+                });
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -46,8 +64,8 @@ namespace Masa.Blazor
                         .AddTheme(IsDark, IndependentTheme)
                         .Add("m-text-field")
                         .Add("m-text-field--is-booted")
-                        .AddIf("m-otp-input--plain", ()=> Plain)
-                        .AddIf("m-text-field--outlined", ()=> !Plain);
+                        .AddIf("m-otp-input--plain", () => Plain)
+                        .AddIf("m-text-field--outlined", () => !Plain);
                 })
                 .Apply("control", cssBuilder =>
                 {
@@ -65,6 +83,5 @@ namespace Masa.Blazor
 
             AbstractProvider.Apply(typeof(BOtpInputSlot<>), typeof(BOtpInputSlot<MOtpInput>));
         }
-
     }
 }
