@@ -1,17 +1,10 @@
-<MRow Align="AlignTypes.Baseline">
-    <MCol Cols="12" Md="6">
-        <MCascader @bind-Value="_value"
-                   ChangeOnSelect
-                   Items="_items"
-                   ItemText="u => u.Label"
-                   ItemValue="u => u.Value"
-                   ItemChildren="u => u.Children">
-        </MCascader>
-    </MCol>
-    <MCol Cols="12" Md="6">
-        Selected value is: @_value
-    </MCol>
-</MRow>
+<MCascader @bind-Value="_value"
+           Delimiter="-"
+           Items="_items"
+           ItemText="u => u.Label"
+           ItemValue="u => u.Value"
+           ItemChildren="u => u.Children">
+</MCascader>
 
 @code {
 

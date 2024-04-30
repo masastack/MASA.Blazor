@@ -514,5 +514,6 @@
       "utility-classes": "MASA Blazor provides a set of utility classes that can be used to quickly build a UI, including: [Border radius](/blazor/styles-and-animations/border-radius), [Colors](/blazor/styles-and-animations/color), [Display helpers](/blazor/styles-and-animations/display-helpers), [Elevation](/blazor/styles-and-animations/elevation), [Flex](/blazor/styles-and-animations/flex), [Float](/blazor/styles-and-animations/floats), [Overflow](/blazor/styles-and-animations/overflow), [Spacing](/blazor/styles-and-animations/spacing), [Text and typography](/blazor/styles-and-animations/text-and-typography).",
       "components": "MASA Blazor is a mobile-friendly component library that provides basic components, preset components, JS modules and experimental components."
     }
-  }
+  },
+  "usage-note": "* Partial code, for demonstration purposes only."
 }

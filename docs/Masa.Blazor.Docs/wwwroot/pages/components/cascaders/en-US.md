@@ -8,32 +8,21 @@ related:
 
 ## Usage
 
-The cascade selector is used to select provinces and municipalities
-
-<masa-example file="Examples.components.cascaders.Usage"></masa-example>
+<cascaders-usage></cascaders-usage>
 
 ## Examples
 
 ### Props
 
-#### Dense
+#### Delimiter {released-on=v1.5.0}
 
-You can use `Dense` prop to reduce the field height and lower max height of list items.
+`Delimiter` is used to set the delimiter, default is `/`.
 
-<masa-example file="Examples.components.cascaders.Dense"></masa-example>
+<masa-example file="Examples.components.cascaders.Delimiter"></masa-example>
 
 #### LoadChildren
 
 `Loadchildren` is used to dynamically load children
 
 <masa-example file="Examples.components.cascaders.LoadChildren"></masa-example>
-
-#### ShowAllLevels
-
-`ShowAllLevels` control show all level ,default value `true`。
-
-<masa-example file="Examples.components.cascaders.ShowAllLevels"></masa-example>
-
-
-
 
