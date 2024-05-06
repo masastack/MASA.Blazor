@@ -1564,4 +1564,5 @@ html.m-overlay-scroll-blocked {
     left: var(--m-body-scroll-x);
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 }
