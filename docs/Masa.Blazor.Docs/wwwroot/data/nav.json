@@ -122,7 +122,10 @@
         "group": "components",
         "items": [
           "autocompletes",
-          "cascaders",
+          {
+            "title": "cascaders",
+            "state": "update"
+          },
           "checkboxes",
           "file-inputs",
           "forms",

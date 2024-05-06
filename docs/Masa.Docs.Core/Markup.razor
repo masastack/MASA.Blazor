@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Docs.Core.Components
 
-<AppCode Class="@Class" Code="@Code" Language="@Language" FileName="@FileName" LineHighlights="@LineHighlights" RoundedTop0="RoundedTop0" />
+<AppCode Class="@Class" Code="@Code" Language="@Language" FileName="@FileName" LineHighlights="@LineHighlights" RoundedTop0="RoundedTop0" IsUsage="@IsUsage" />
 
 @code {
 
@@ -23,4 +23,7 @@
 
     [Parameter]
     public bool RoundedTop0 { get; set; }
+
+    [Parameter]
+    public bool IsUsage { get; set; }
 }

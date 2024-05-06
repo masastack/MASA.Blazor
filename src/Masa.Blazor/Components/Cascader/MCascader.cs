@@ -20,6 +20,9 @@ namespace Masa.Blazor
         [Parameter]
         public override bool Outlined { get; set; }
 
+        [Parameter] [MasaApiParameter("/", ReleasedOn = "v1.5.0")]
+        public string Delimiter { get; set; } = "/";
+
         private double _right;
         private List<TItem> _selectedCascadeItems = new();
         private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
@@ -176,11 +179,11 @@ namespace Masa.Blazor
             return Array.Empty<TItem>();
         }
 
-        protected override string GetText(TItem item)
+        protected override string? GetText(TItem item)
         {
             return !ShowAllLevels
                 ? base.GetText(item)
-                : string.Join(" / ", _selectedCascadeItems.Select(base.GetText));
+                : string.Join($" {Delimiter} ", _selectedCascadeItems.Select(base.GetText));
         }
 
         private bool FindAllLevelItems(TItem item, IList<TItem> searchItems, ref List<TItem> allLevelItems)
