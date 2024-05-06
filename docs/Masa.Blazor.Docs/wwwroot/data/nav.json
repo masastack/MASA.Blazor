@@ -95,8 +95,14 @@
       "bottom-navigation",
       "bottom-sheets",
       "breadcrumbs",
-      "buttons",
-      "cards",
+      {
+        "title": "buttons",
+        "state": "update"
+      },
+      {
+        "title": "cards",
+        "state": "update"
+      },
       "carousels",
       "chips",
       "copyable-text",
@@ -168,7 +174,10 @@
       },
       "images",
       "infinite-scroll",
-      "lists",
+      {
+        "title": "lists",
+        "state": "update"
+      },
       "markdowns",
       "markdown-parsers",
       "menus",
