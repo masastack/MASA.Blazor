@@ -20,7 +20,7 @@
 
 - **如何自动高亮对应路由的导航？** { #highlight-navigation }
 
-  开启 `Routable` 参数，此参数会自动高亮对应路由的导航。支持此特性的组件包括：**MList**, **MBreadcrumbs**, **MTabs** 和 **MBottomNavigation**。
+  请访问 [导航和路由的自动匹配](/blazor/features/auto-match-nav) 以获取更多信息。
 
 - **P开头的组件为什么无法使用？** { #p-starting-components }
 

@@ -1,5 +1,28 @@
 # Upgrade Guides
 
+## Upgrading form v1.4.x to v1.5.0
+
+### Components
+
+#### PageStack
+
+The component was introduced in v1.4.0 to manage the page stack. In v1.5.0, we refactored it and introduced the `PageStackNavController` service to solve some potential problems and provide more complete functionality.
+
+#### Icon
+ 
+Remove the unnecessary `IsActive` parameter.
+
+#### Border
+
+Refactor using CSS approach.
+
+- The `Rounded` and `WrapperStyle` parameters are deleted.
+- The `Color` parameter only supports built-in _primary_, _secondary_, _accent_, _surface_, _success_, _error_, _warning_, _info_ and standard CSS color values.
+  ```diff 
+  - <MBorder Color="pink"></Border>
+  + <MBorder Color="#e91e63"></Border>
+  ```
+
 ## Upgrading form v1.2.x to v1.4.0
 
 ### Components
