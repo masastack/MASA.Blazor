@@ -515,5 +515,13 @@
       "components": "MASA Blazor is a mobile-friendly component library that provides basic components, preset components, JS modules and experimental components."
     }
   },
-  "usage-note": "* Partial code, for demonstration purposes only."
+  "usage-note": "* Partial code, for demonstration purposes only.",
+  "release-notifications": {
+    "v1_5_0": {
+      "button": "add `IconName`, `LeftIconName` and `RightIconName` to simplify the usage of icon buttons.",
+      "card": "add sub-component parameter, includes `Title`, `Subtitle` and `Text`.",
+      "data-table": "add support for cell ellipsis and custom cell content in `Headers`.",
+      "list-item": "add sub-component parameters, includes `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` and `AppendIcon`."
+    }
+  }
 }

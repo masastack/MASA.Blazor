@@ -20,7 +20,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 - **How do I automatically highlight the navigation corresponding to the route?** { #highlight-navigation }
 
-  Turn on the `Routable` parameter, which will automatically highlight the navigation corresponding to the route. The components that support this feature include: **MList**, **MBreadcrumbs**, **MTabs** and **MBottomNavigation**.
+  Please visit the  [Automatic matching of navigation and route](/blazor/features/auto-match-nav) for more information.
 
 - **Why can't I use components starting with P?** { #p-starting-components }
 
