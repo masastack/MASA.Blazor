@@ -11,8 +11,10 @@
                   Dense="@Dense"
                   Class="@CssProvider.GetClass()"
                   Style="@CssProvider.GetStyle()"
+                  Id="@Id"
                   RefBack="@RefBack"
-                  TopContent="@TopContent">
+                  TopContent="@TopContent"
+                  @attributes="@Attributes">
         <ChildContent>
             @GenCaption()
             @GenColgroup()
