@@ -1,4 +1,5 @@
 ﻿@using System.Net.Http.Json;
+
 <MCard Color="red lighten-2"
        Dark>
     <MCardTitle Class="text-h5 red lighten-3">
@@ -8,49 +9,45 @@
         Explore hundreds of free API's ready for consumption! For more information visit
         <a class="grey--text text--lighten-3"
            href="https://github.com/toddmotto/public-apis"
-           target="_blank">the GitHub repository</a>.
+           target="_blank">
+            the GitHub repository
+        </a>.
     </MCardText>
     <MCardText>
         <MAutocomplete TItem="Item"
                        TValue="string"
                        TItemValue="string"
                        @bind-Value="_value"
-                       Items="Items"
+                       Items="@_entries"
                        Loading="_isLoading"
                        OnSearchInputUpdate="UpdateSearchInputAsync"
-                       OnSelectedItemUpdate="UpdateItemAsync"
+                       OnSelect="@(u => _model = u.Item)"
                        Color="white"
                        HideNoData
                        HideSelected
-                       ItemText="r=>r.Description"
-                       ItemValue="r=>r.API"
+                       ItemText="r => r.Description"
+                       ItemValue="r => r.Name"
                        Label="Public APIs"
                        Placeholder="Start typing to Search"
-                       PrependIcon="mdi-database-search"></MAutocomplete>
+                       PrependIcon="mdi-database-search">
+        </MAutocomplete>
     </MCardText>
     <MDivider></MDivider>
     <ExpandTransition>
-        <MList If="@_show"
-               class="red lighten-3">
-            @for (var i = 0; i < Fields.Count; i++)
-            {
-                var field = Fields.ElementAt(i);
-                <MListItem @key="i">
-                    <MListItemContent>
-                        <MListItemTitle>
-                            @field.Value
-                        </MListItemTitle>
-                        <MListItemSubtitle>
-                            @field.Key
-                        </MListItemSubtitle>
-                    </MListItemContent>
-                </MListItem>
-            }
-        </MList>
+        <ShowTransitionElement Value="@Show">
+            <MList Class="red lighten-3">
+                <MListItem Title="@_model?.Name" Subtitle="API"></MListItem>
+                <MListItem Title="@_model?.Auth" Subtitle="Auth"></MListItem>
+                <MListItem Title="@_model?.Category" Subtitle="Category"></MListItem>
+                <MListItem Title="@_model?.Cors" Subtitle="Cors"></MListItem>
+                <MListItem Title="@_model?.Description" Subtitle="Description"></MListItem>
+                <MListItem Title="@_model?.Https.ToString()" Subtitle="Https"></MListItem>
+            </MList>
+        </ShowTransitionElement>
     </ExpandTransition>
     <MCardActions>
         <MSpacer></MSpacer>
-        <MButton Disabled="_model==null"
+        <MButton Disabled="_model == null"
                  Color="grey darken-3"
                  OnClick="Clear">
             Clear
@@ -62,86 +59,23 @@
 </MCard>
 
 @code {
-    public class Item
-    {
-        public string API { get; set; }
 
-        public string Description { get; set; }
+    private record Item(string Name, string Description, string Auth, bool Https, string Cors, string Category);
 
-        public string Auth { get; set; }
+    [Inject] public IHttpClientFactory HttpClientFactory { get; set; } = null!;
 
-        public string HTPPS { get; set; }
-
-        public string Cors { get; set; }
-
-        public string Link { get; set; }
-
-        public string Category { get; set; }
-    }
-
-    public class Result
-    {
-        public int Count { get; set; }
-
-        public List<Item> Entries { get; set; }
-    }
-
-    private int _descriptionLimit = 60;
-    private List<Item> _entries = new List<Item>();
+    private List<Item> _entries = new();
     private bool _isLoading;
-    private Item _model;
-    private string _value;
-    private bool _show => !string.IsNullOrEmpty(_value);
-
-    [Inject]
-    public HttpClient HttpClient { get; set; }
-
-    protected List<Item> Items
-    {
-        get
-        {
-            return _entries.Select(entry =>
-            {
-                var item = new Item();
-
-                item.API = entry.API;
-                item.Auth = entry.Auth;
-                item.Category = entry.Category;
-                item.Cors = entry.Cors;
-                item.Description = entry.Description.Length > _descriptionLimit ? entry.Description.Substring(0, _descriptionLimit) + "..." : entry.Description;
-                item.HTPPS = entry.HTPPS;
-                item.Link = entry.Link;
-
-                return item;
-            }).ToList();
-        }
-    }
-
-    protected Dictionary<string, object> Fields
-    {
-        get
-        {
-            if (_model == null)
-            {
-                return new Dictionary<string, object>();
-            }
-
-            return new Dictionary<string, object>
-                {
-                    {"API",_model.API},
-                    {"Auth",_model.Auth},
-                    {"Category",_model.Category},
-                    {"Cors",_model.Cors},
-                    {"Description",_model.Description},
-                    {"HTPPS",_model.HTPPS},
-                    {"Link",_model.Link}
-                };
-        }
-    }
+    private Item? _model;
+    private string? _value;
+    private bool Show => !string.IsNullOrEmpty(_value);
+    private HttpClient? _httpClient;
 
     public async Task UpdateSearchInputAsync(string val)
     {
-        if (Items.Count > 0)
+        _httpClient ??= HttpClientFactory.CreateClient("masa-docs");
+
+        if (_entries.Count > 0)
         {
             return;
         }
@@ -153,15 +87,11 @@
 
         _isLoading = true;
 
-        var res = await HttpClient.GetFromJsonAsync<Result>("https://api.publicapis.org/entries");
-        _entries = res.Entries.Take(20).ToList();//We can't process too many items now
+        await Task.Delay(500); // Simulate a delay
+        var res = await _httpClient.GetFromJsonAsync<List<Item>>("_content/Masa.Blazor.Docs/data/demo/public-apis.json");
+        _entries = res ?? [];
 
         _isLoading = false;
-    }
-
-    public async Task UpdateItemAsync(Item item)
-    {
-        _model = item;
     }
 
     public void Clear()
@@ -169,4 +99,5 @@
         _model = null;
         _value = null;
     }
- }
+
+}

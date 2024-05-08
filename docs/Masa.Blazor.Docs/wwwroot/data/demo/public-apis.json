@@ -1,0 +1,405 @@
+﻿[
+  {
+    "name": "AdoptAPet",
+    "description": "Resource to help get pets adopted",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "true",
+    "link": "https://www.adoptapet.com/public/apis/pet_list.html",
+    "category": "animals"
+  },
+  {
+    "name": "Axolotl",
+    "description": "Collection of axolotl pictures and facts",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://theaxolotlapi.netlify.app/",
+    "category": "animals"
+  },
+  {
+    "name": "Cat Facts",
+    "description": "Daily cat facts",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://alexwohlbruck.github.io/cat-facts/",
+    "category": "animals"
+  },
+  {
+    "name": "Cataas",
+    "description": "Cat as a service (cats pictures and gifs)",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://cataas.com/",
+    "category": "animals"
+  },
+  {
+    "name": "Cats",
+    "description": "Pictures of cats from Tumblr",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "false",
+    "link": "https://docs.thecatapi.com/",
+    "category": "animals"
+  },
+  {
+    "name": "Dog Facts",
+    "description": "Random dog facts",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://dukengn.github.io/Dog-facts-API/",
+    "category": "animals"
+  },
+  {
+    "name": "Dog Facts",
+    "description": "Random facts of Dogs",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://kinduff.github.io/dog-api/",
+    "category": "animals"
+  },
+  {
+    "name": "Dogs",
+    "description": "Based on the Stanford Dogs Dataset",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://dog.ceo/dog-api/",
+    "categor": "animals"
+  },
+  {
+    "name": "eBird",
+    "description": "Retrieve recent or notable birding observations within a region",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "false",
+    "link": "https://documenter.getpostman.com/view/664302/S1ENwy59",
+    "category": "animals"
+  },
+  {
+    "name": "FishWatch",
+    "description": "Information and pictures about individual fish species",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://www.fishwatch.gov/developers",
+    "category": "animals"
+  },
+  {
+    "name": "HTTP Cat",
+    "description": "Cat for every HTTP Status",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://http.cat/",
+    "category": "animals"
+  },
+  {
+    "name": "HTTP Dog",
+    "description": "Dogs for every HTTP response status code",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://http.dog/",
+    "category": "animals"
+  },
+  {
+    "name": "IUCN",
+    "description": "IUCN Red List of Threatened Species",
+    "auth": "apiKey",
+    "https": false,
+    "cors": "false",
+    "link": "http://apiv3.iucnredlist.org/api/v3/docs",
+    "category": "animals"
+  },
+  {
+    "name": "MeowFacts",
+    "description": "Get random cat facts",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://github.com/wh-iterabb-it/meowfacts",
+    "category": "animals"
+  },
+  {
+    "name": "Movebank",
+    "description": "Movement and Migration data of animals",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://github.com/movebank/movebank-api-doc",
+    "category": "animals"
+  },
+  {
+    "name": "Petfinder",
+    "description": "Petfinder is dedicated to helping pets find homes, another resource to get pets adopted",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "true",
+    "link": "https://www.petfinder.com/developers/",
+    "categor": "animals"
+  },
+  {
+    "name": "PlaceBear",
+    "description": "Placeholder bear pictures",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://placebear.com/",
+    "category": "animals"
+  },
+  {
+    "name": "PlaceDog",
+    "description": "Placeholder Dog pictures",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://place.dog",
+    "category": "animals"
+  },
+  {
+    "name": "PlaceKitten",
+    "description": "Placeholder Kitten pictures",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://placekitten.com/",
+    "category": "animals"
+  },
+  {
+    "name": "RandomDog",
+    "description": "Random pictures of dogs",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://random.dog/woof.json",
+    "category": "animals"
+  },
+  {
+    "name": "RandomDuck",
+    "description": "Random pictures of ducks",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://random-d.uk/api",
+    "category": "animals"
+  },
+  {
+    "name": "RandomFox",
+    "description": "Random pictures of foxes",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "link": "https://randomfox.ca/floof/",
+    "category": "animals"
+  },
+  {
+    "name": "RescueGroups",
+    "description": "Adoption",
+    "auth": "false",
+    "https": true,
+    "cors": "unknown",
+    "link": "https://userguide.rescuegroups.org/display/APIDG/API+Developers+Guide+Home",
+    "category": "animals"
+  },
+  {
+    "name": "Shibe.Online",
+    "description": "Random pictures of Shiba Inu, cats or birds",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "http://shibe.online/",
+    "categor": "animals"
+  },
+  {
+    "name": "The Dog",
+    "description": "A public service all about Dogs, free to use when making your fancy new App, Website or Service",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "false",
+    "link": "https://thedogapi.com/",
+    "category": "animals"
+  },
+  {
+    "name": "xeno-canto",
+    "description": "Bird recordings",
+    "auth": "false",
+    "https": true,
+    "cors": "unknown",
+    "link": "https://xeno-canto.org/explore/api",
+    "category": "animals"
+  },
+  {
+    "name": "Zoo Animals",
+    "description": "Facts and pictures of zoo animals",
+    "auth": "false",
+    "https": true,
+    "cors": "true",
+    "link": "https://zoo-animal-api.herokuapp.com/",
+    "category": "animals"
+  },
+  {
+    "name": "Apache Superset",
+    "description": "API to manage your BI dashboards and data sources on Superset",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "true",
+    "category": "business"
+  },
+  {
+    "name": "Charity Search",
+    "description": "Non-profit charity data",
+    "auth": "apiKey",
+    "https": false,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Clearbit Logo",
+    "description": "Search for company logos and embed them in your projects",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Domainsdb.info",
+    "description": "Registered Domain Names Search",
+    "auth": "false",
+    "https": true,
+    "cors": "false",
+    "category": "business"
+  },
+  {
+    "name": "Freelancer",
+    "description": "Hire freelancers to get work done",
+    "auth": "OAuth",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Gmail",
+    "description": "Flexible, RESTful access to the user's inbox",
+    "auth": "OAuth",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Google Analytics",
+    "description": "Collect, configure and analyze your data to reach the right audience",
+    "auth": "OAuth",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Instatus",
+    "description": "Post to and update maintenance and incidents on your status page through an HTTP REST API",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Mailchimp",
+    "description": "Send marketing campaigns and transactional mails",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "mailjet",
+    "description": "Marketing email can be sent and mail templates made in MJML or HTML can be sent using API",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "markerapi",
+    "description": "Trademark Search",
+    "auth": "false",
+    "https": false,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "ORB Intelligence",
+    "description": "Company lookup",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Redash",
+    "description": "Access your queries and dashboards on Redash",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "true",
+    "category": "business"
+  },
+  {
+    "name": "Smartsheet",
+    "description": "Allows you to programmatically access and Smartsheet data and account information",
+    "auth": "OAuth",
+    "https": true,
+    "cors": "false",
+    "category": "business"
+  },
+  {
+    "name": "Square",
+    "description": "Easy way to take payments, manage refunds, and help customers checkout online",
+    "auth": "OAuth",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "SwiftKanban",
+    "description": "Kanban software, Visualize Work, Increase Organizations Lead Time, Throughput & Productivity",
+    "auth": "apiKey",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Tenders in Hungary",
+    "description": "Get data for procurements in Hungary in JSON format",
+    "auth": "false",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Tenders in Poland",
+    "description": "Get data for procurements in Poland in JSON format",
+    "auth": "false",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Tenders in Romania",
+    "description": "Get data for procurements in Romania in JSON format",
+    "auth": "false",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  },
+  {
+    "name": "Tenders in Spain",
+    "description": "Get data for procurements in Spain in JSON format",
+    "auth": "false",
+    "https": true,
+    "cors": "Unknown",
+    "category": "business"
+  }
+]
