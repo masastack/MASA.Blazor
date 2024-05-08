@@ -34,7 +34,7 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
     public async Task OnClick(string eventName, EChartsEventArgs? eventParams)
     {
         if (eventName == "click")       await _owner.OnClick.InvokeAsync(eventParams);
-        if (eventName == "dbclick")     await _owner.OnDoubleClick.InvokeAsync(eventParams);
+        if (eventName == "dblclick")     await _owner.OnDoubleClick.InvokeAsync(eventParams);
         if (eventName == "mousedown")   await _owner.OnMouseDown.InvokeAsync(eventParams);
         if (eventName == "mousemove")   await _owner.OnMouseMove.InvokeAsync(eventParams);
         if (eventName == "mouseup")     await _owner.OnMouseUp.InvokeAsync(eventParams);
@@ -49,7 +49,7 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
         List<string> events = new();
 
         if (_owner.OnClick.HasDelegate)       events.Add("click");
-        if (_owner.OnDoubleClick.HasDelegate) events.Add("dbclick");
+        if (_owner.OnDoubleClick.HasDelegate) events.Add("dblclick");
         if (_owner.OnMouseDown.HasDelegate)   events.Add("mousedown");
         if (_owner.OnMouseMove.HasDelegate)   events.Add("mousemove");
         if (_owner.OnMouseUp.HasDelegate)     events.Add("mouseup");
