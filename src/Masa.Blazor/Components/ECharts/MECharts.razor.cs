@@ -283,6 +283,18 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
         }
     }
 
+    public async ValueTask ShowLoading(object? option = null)
+    {
+        if (_echarts == null) return;
+        await _echarts.ShowLoadingAsync(option);
+    }
+
+    public async ValueTask HideLoading()
+    {
+        if (_echarts == null) return;
+        await _echarts.HideLoadingAsync();
+    }
+
     protected override async ValueTask DisposeAsyncCore()
     {
         await DisposeECharts();

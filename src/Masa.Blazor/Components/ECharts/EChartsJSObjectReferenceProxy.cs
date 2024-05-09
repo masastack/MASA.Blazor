@@ -30,6 +30,12 @@ public class EChartsJSObjectReferenceProxy : JSObjectReferenceProxy, IEChartsJSO
     public async ValueTask DisposeEChartsAsync()
         => await InvokeVoidAsync("dispose");
 
+    public async ValueTask ShowLoadingAsync(object? option = null)
+        => await InvokeVoidAsync("showLoading", option);
+
+    public async ValueTask HideLoadingAsync()
+        => await InvokeVoidAsync("hideLoading");
+
     [JSInvokable("OnEvent")]
     public async Task OnClick(string eventName, EChartsEventArgs? eventParams)
     {
