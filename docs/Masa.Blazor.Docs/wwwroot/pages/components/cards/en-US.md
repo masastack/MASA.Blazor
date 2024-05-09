@@ -66,6 +66,10 @@ An outlined card has 0 elevation and contains a soft border.
 
 <masa-example file="Examples.components.cards.Outlined"></masa-example>
 
+#### Subcomponent props {released-on=v1.5.0}
+
+<masa-example file="Examples.components.cards.SubComponents"></masa-example>
+
 ### Misc
 
 #### Card Reveal
@@ -115,9 +119,3 @@ The **MCard** component has multiple children components that help you build com
 Using [MListItems](/blazor/components/lists) and a [MSlider](/blazor/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
 
 <masa-example file="Examples.components.cards.WeatherCard"></masa-example>
-
-#### Loading
-
-Use an indeterminate [MProgressLinear](/blazor/components/progress-linear) to indicate a loading state.
-
-<masa-example file="Examples.components.cards.Loading"></masa-example>

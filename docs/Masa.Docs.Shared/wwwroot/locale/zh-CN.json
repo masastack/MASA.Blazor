@@ -611,5 +611,14 @@
       "utility-classes": "Masa Blazor提供了一组可用于快速构建UI的实用程序类，包括：[Border radius](/blazor/styles-and-animations/border-radius)，[Colors](/blazor/styles-and-animations/color)，[Display helpers](/blazor/styles-and-animations/display-helpers)，[Elevation](/blazor/styles-and-animations/elevation)，[Flex](/blazor/styles-and-animations/flex)，[Float](/blazor/styles-and-animations/floats)，[Overflow](/blazor/styles-and-animations/overflow)，[Spacing](/blazor/styles-and-animations/spacing)，[Text and typography](/blazor/styles-and-animations/text-and-typography)",
       "components": "MASA Blazor 是一个对移动端友好的组件库，提供了基础组件、预置组件、JS模块和实验性组件。"
     }
+  },
+  "usage-note": "* 部分代码，仅供演示。",
+  "release-notifications": {
+    "v1_5_0": {
+      "button": "新增 `IconName`, `LeftIconName` 和 `RightIconName` 参数以简化图标按钮的使用。",
+      "card": "新增子组件参数，包括 `Title`, `Subtitle` 和 `Text`。",
+      "data-table": "新增对单元格省略号和自定义单元格内容在 `Headers` 中的支持。",
+      "list-item": "新增子组件参数，包括 `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` 和 `AppendIcon`。"
+    }
   }
 }

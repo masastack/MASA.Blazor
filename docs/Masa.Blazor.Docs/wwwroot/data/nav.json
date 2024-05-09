@@ -95,8 +95,14 @@
       "bottom-navigation",
       "bottom-sheets",
       "breadcrumbs",
-      "buttons",
-      "cards",
+      {
+        "title": "buttons",
+        "state": "update"
+      },
+      {
+        "title": "cards",
+        "state": "update"
+      },
       "carousels",
       "chips",
       "copyable-text",
@@ -122,7 +128,10 @@
         "group": "components",
         "items": [
           "autocompletes",
-          "cascaders",
+          {
+            "title": "cascaders",
+            "state": "update"
+          },
           "checkboxes",
           "file-inputs",
           "forms",
@@ -165,7 +174,10 @@
       },
       "images",
       "infinite-scroll",
-      "lists",
+      {
+        "title": "lists",
+        "state": "update"
+      },
       "markdowns",
       "markdown-parsers",
       "menus",
@@ -302,7 +314,7 @@
       {
         "title": "page-stack",
         "state": "new",
-        "releasedOn": "v1.4.0"
+        "releasedOn": "v1.5.0"
       },
       {
         "title": "pull-refresh",

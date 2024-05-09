@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
+﻿using Masa.Blazor.Presets.PageStack;
+using Masa.Blazor.Presets.PageStack.NavController;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
 public partial class PPageStack : PatternPathComponentBase
 {
+    [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
+
     enum PageType
     {
         Tab,
@@ -12,19 +16,33 @@ public partial class PPageStack : PatternPathComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public string? Name { get; set; }
+
     [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
 
-    internal readonly List<StackPageData> Pages = new();
+    [Parameter]
+    [MasaApiParameter(defaultValue: DefaultFallbackUri)]
+    public string? FallbackUri { get; set; } = DefaultFallbackUri;
 
-    private bool _locationChangedByUserClick;
+    private PageStackNavController? InternalPageStackNavManager { get; set; }
 
-    private string? _previousPath;
-    private PageType _pageTypeOfPreviousPath;
+    private const int DelayForPageClosingAnimation = 300;
+    private const string DefaultFallbackUri = "/";
 
+    internal readonly StackPages Pages = new();
+
+    private int _navCountByUserClick;
+    private string? _lastVisitedTabPath;
+    private bool _taskForBrowserClickBack;
+    private PageType _targetPageType;
     private string? _latestTabPath;
 
     private HashSet<string> _prevTabbedPatterns = new();
     private HashSet<Regex> _cachedTabbedPatterns = new();
+
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
+    private int _dotnetObjectId;
 
     protected override void OnInitialized()
     {
@@ -32,20 +50,72 @@ public partial class PPageStack : PatternPathComponentBase
 
         UpdateRegexes();
 
-        var patternPath = GetCurrentPageData();
-        if (!IsTabbedPattern(patternPath.AbsolutePath))
+        var targetPath = NavigationManager.GetAbsolutePath();
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(targetPath));
+        if (tabbedPattern is not null)
         {
-            Pages.Add(patternPath);
-            DisableRootScrollbar(true);
+            _lastVisitedTabPath = targetPath;
+            _targetPageType = PageType.Tab;
         }
         else
         {
-            _latestTabPath = patternPath.AbsolutePath;
+            _targetPageType = PageType.Stack;
+            Push(NavigationManager.Uri);
         }
 
-        _previousPath = patternPath.AbsolutePath;
+        InternalPageStackNavManager = PageStackNavControllerFactory.Create(Name ?? string.Empty);
+        InternalPageStackNavManager.StackPush += InternalStackStackNavManagerOnStackPush;
+        InternalPageStackNavManager.StackPop += InternalPageStackNavManagerOnStackPop;
+        InternalPageStackNavManager.StackReplace += InternalStackStackNavManagerOnStackReplace;
+        InternalPageStackNavManager.StackClear += InternalStackStackNavManagerOnStackClear;
+        InternalPageStackNavManager.LocationChanged += InternalPageStackNavManagerOnLocationChanged;
 
-        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+        _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _module = await Js.InvokeAsync<IJSObjectReference>("import",
+                "./_content/Masa.Blazor/Presets/PageStack/PPageStack.razor.js");
+            _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
+        }
+    }
+
+    [JSInvokable]
+    public void Push(string href)
+    {
+        _navCountByUserClick++;
+
+        Pages.Push(GetAbsolutePath(href));
+        DisableRootScrollbar(true);
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        // 不能放在 NavigationManager.LocationChanged 事件中，因为 a 标签的点击事件会比 <see cref="Push"/> 先触发
+        if (_taskForBrowserClickBack)
+        {
+            _taskForBrowserClickBack = false;
+
+            if (_navCountByUserClick > 0)
+            {
+                _navCountByUserClick = 0;
+                return;
+            }
+
+            if (Pages.Count > 0)
+            {
+                CloseTopPageOfStack();
+            }
+        }
     }
 
     protected override void OnParametersSet()
@@ -64,95 +134,78 @@ public partial class PPageStack : PatternPathComponentBase
             .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
     }
 
-    private bool IsTabbedPattern(string absolutePath)
+    private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
-        return _cachedTabbedPatterns.Any(r => r.IsMatch(absolutePath));
+        _navCountByUserClick++;
+
+        Pages.UpdateTop(e.Uri, e.State);
     }
 
-    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    private void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
     {
-        // only two cases should be handled here:
-        // 1. user click on the browser back/forward button
-        // 2. user click on the anchor tag with href attribute
+        _navCountByUserClick++;
 
-        if (_locationChangedByUserClick)
+        CloseTopPages(e.Delta, e.State);
+    }
+
+    private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
+    {
+        Push(e.Uri);
+    }
+
+    private async void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
+    {
+        await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
+
+        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.Uri) || _lastVisitedTabPath == GetAbsolutePath(e.Uri);
+
+        if (backToLastVisitTab)
         {
-            _locationChangedByUserClick = false;
+            CloseTopPages(Pages.Count);
             return;
         }
 
-        var currentPath = NavigationManager.GetAbsolutePath();
-        var isTabbedPath = IsTabbedPattern(currentPath);
+        Pages.Clear();
+        DisableRootScrollbar(false);
+        _ = InvokeAsync(StateHasChanged);
 
-        // if the current path is a tabbed path
-        if (isTabbedPath)
+        NextTick(() => NavigationManager.Replace(e.Uri!));
+    }
+
+    private void InternalPageStackNavManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        _taskForBrowserClickBack = true;
+
+        var targetPath = new Uri(e.Location).AbsolutePath;
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(targetPath));
+
+        if (tabbedPattern is not null)
         {
-            if (_pageTypeOfPreviousPath == PageType.Tab)
-            {
-                _latestTabPath = currentPath;
-            }
-            else if (_pageTypeOfPreviousPath == PageType.Stack)
-            {
-                if (Pages.Count == 1)
-                {
-                    // has an animation
-                    CloseTopPageOfStack();
-                }
-                else
-                {
-                    // no animation
-                    ClearStack();
-                }
-
-                _previousPath = currentPath;
-                _pageTypeOfPreviousPath = PageType.Tab;
-                InvokeAsync(StateHasChanged);
-            }
-
-            return;
-        }
-
-        // if the current path is a stack path
-        var currentPatternPath = GetCurrentPageData();
-
-        if (currentPatternPath.IsSelf)
-        {
-            var topPage = Pages.LastOrDefault();
-            if (topPage is not null)
-            {
-                if (topPage.Pattern == currentPatternPath.Pattern)
-                {
-                    topPage.UpdatePath(currentPath);
-                    InvokeAsync(StateHasChanged);
-                    return;
-                }
-            }
-        }
-
-        if (Pages.Any(page => page.Pattern == currentPatternPath.Pattern))
-        {
-            CloseTopPageOfStack();
+            _lastVisitedTabPath = targetPath;
+            _targetPageType = PageType.Tab;
+            DisableRootScrollbar(false);
+            InvokeAsync(StateHasChanged);
         }
         else
         {
-            Pages.Add(currentPatternPath);
-            if (Pages.Count == 1)
-            {
-                DisableRootScrollbar(true);
-            }
+            _targetPageType = PageType.Stack;
         }
-
-        _previousPath = currentPath;
-        _pageTypeOfPreviousPath = isTabbedPath ? PageType.Tab : PageType.Stack;
-
-        InvokeAsync(StateHasChanged);
     }
+
+    private string GetAbsolutePath(string relativeUri) => NavigationManager.ToAbsoluteUri(relativeUri).AbsolutePath;
 
     private void HandleOnPrevious()
     {
-        _locationChangedByUserClick = true;
+        _navCountByUserClick++;
 
-        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryBack);
+        if (_lastVisitedTabPath is not null)
+        {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryBack);
+        }
+        else
+        {
+            NavigationManager.NavigateTo(FallbackUri ?? DefaultFallbackUri);
+        }
 
         CloseTopPageOfStack();
     }
@@ -163,45 +216,40 @@ public partial class PPageStack : PatternPathComponentBase
         HandleOnPrevious();
     }
 
-    private void CloseTopPageOfStack()
+    private void CloseTopPageOfStack(object? state = null) => CloseTopPages(1, state);
+
+    private void CloseTopPages(int count, object? state = null)
     {
-        if (Pages.Count == 0)
+        if (!Pages.TryPeek(out var current)) return;
+
+        current.Stacked = false;
+
+        if (count > 1)
         {
-            return;
+            Pages.RemoveRange(Pages.Count - count, count - 1);
         }
 
-        var current = Pages.Last();
-        current.Active = false;
+        if (Pages.TryPeekSecondToLast(out var target))
+        {
+            target.UpdateState(state);
+            target.Activate();
+        }
+
+        StateHasChanged();
 
         Task.Run(async () =>
         {
-            await Task.Delay(300); // wait for the transition to complete
-            Pages.RemoveAt(Pages.Count - 1);
+            await Task.Delay(DelayForPageClosingAnimation); // wait for the transition to complete
+
+            Pages.Pop();
 
             if (Pages.Count == 0)
             {
                 DisableRootScrollbar(false);
             }
 
-            _previousPath = Pages.LastOrDefault()?.AbsolutePath;
             _ = InvokeAsync(StateHasChanged);
         });
-    }
-
-    private void ClearStack()
-    {
-        Pages.Clear();
-        DisableRootScrollbar(false);
-        _ = InvokeAsync(StateHasChanged);
-    }
-
-    private StackPageData GetCurrentPageData() 
-    {
-        var absolutePath = NavigationManager.GetAbsolutePath();
-        var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));
-        return selfPatternRegex is null
-            ? new StackPageData(absolutePath)
-            : new StackPageData(selfPatternRegex.ToString(), absolutePath);
     }
 
     private void DisableRootScrollbar(bool disable)
@@ -212,10 +260,21 @@ public partial class PPageStack : PatternPathComponentBase
             "overflow-y-hidden");
     }
 
-    protected override ValueTask DisposeAsyncCore()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+        if (_module is not null)
+        {
+            await _module.InvokeVoidAsync("detachListener", _dotnetObjectId);
+            await _module.DisposeAsync();
+        }
 
-        return base.DisposeAsyncCore();
+        if (InternalPageStackNavManager is not null)
+        {
+            InternalPageStackNavManager.StackPush -= InternalStackStackNavManagerOnStackPush;
+            InternalPageStackNavManager.StackPop -= InternalPageStackNavManagerOnStackPop;
+            InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
+            InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
+            InternalPageStackNavManager.LocationChanged -= InternalPageStackNavManagerOnLocationChanged;
+        }
     }
 }

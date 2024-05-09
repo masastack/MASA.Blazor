@@ -3,11 +3,34 @@
     public class MRadio<TValue> : BRadio<TValue>
     {
         [Parameter]
-        public string? Color { get; set; } = "primary";
+        public string? Color { get; set; }
 
         protected bool IsFocused { get; set; }
 
-        protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
+        private string? ComputedColor
+        {
+            get
+            {
+                if (IsDisabled || !IsActive)
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrWhiteSpace(Color))
+                {
+                    return Color;
+                }
+
+                if (IsDark)
+                {
+                    return "white";
+                }
+
+                return "primary";
+            }
+        }
+
+        private string? ValidationState => RadioGroup?.ValidationState ?? ComputedColor;
 
         protected override void OnInitialized()
         {
@@ -60,8 +83,8 @@
             AbstractProvider
                 .Apply<BIcon, MIcon>(attrs =>
                 {
-                    attrs[nameof(MIcon.Color)] = Color;
-                    attrs[nameof(MIcon.IsActive)] = IsActive;
+                    attrs[nameof(MIcon.Dense)] = RadioGroup?.Dense is true;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
                 })
                 .Apply<BLabel, MLabel>(attrs =>
                 {

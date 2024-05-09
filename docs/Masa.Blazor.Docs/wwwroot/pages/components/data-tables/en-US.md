@@ -17,6 +17,18 @@ The standard data-table will by default render your data as simple rows.
 
 ### Props
 
+#### Cell ellipsis {released-on=v1.5.0}
+
+Setting the `Width` property on a cell and enabling the `Ellipsis` property will show an ellipsis when the cell content overflows.
+
+<masa-example file="Examples.components.data_tables.Ellipsis"></masa-example>
+
+#### Custom cell {released-on=v1.5.0}
+
+In addition to using the `ItemColContent` slot to customize cell content, you can also use the `CellRender` prop.
+
+<masa-example file="Examples.components.data_tables.CellRender"></masa-example>
+
 #### CustomFilter
 
 You can override the default filtering used with `Search` prop by supplying a function to the `CustomFilter` prop. If you

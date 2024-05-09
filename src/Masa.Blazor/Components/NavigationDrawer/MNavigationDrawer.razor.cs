@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reflection.Metadata;
 using BlazorComponent.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
@@ -88,7 +89,12 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public EventCallback<bool> MiniVariantChanged { get; set; }
 
-    [Parameter] public bool Permanent { get; set; }
+    [Parameter]
+    public bool Permanent
+    {
+        get => GetValue<bool>();
+        set => SetValue(value);
+    }
 
     [Parameter] public string? Src { get; set; }
 
@@ -382,7 +388,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         base.RegisterWatchers(watcher);
 
         watcher
-            .Watch<bool>(nameof(MiniVariant), CallUpdate)
             .Watch<bool?>(nameof(Value), val =>
             {
                 if (Permanent)
@@ -415,6 +420,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
                 //We will remove this when mixins applicationable finished
                 _ = UpdateApplicationAsync();
             })
+            .Watch<bool>(nameof(MiniVariant), CallUpdate)
+            .Watch<bool>(nameof(Permanent), CallUpdate)
             .Watch<bool>(nameof(ExpandOnHover), val => { UpdateMiniVariant(val, false); })
             .Watch<bool>(nameof(IsMouseover), val => { UpdateMiniVariant(!val); });
     }

@@ -80,7 +80,7 @@
             16,544 reviews
         </span>
         <MSpacer></MSpacer>
-        <MRating @bind-Value="_rating" Length="10" Readonly Items="_items">
+        <MRating @bind-Value="_rating" Length="10" Readonly>
             <ItemContent Context="props">
                 <MIcon Large Color="@(props.IsFilled ? "purple darken-4" : "")">
                     @($"mdi-numeric-{props.Index}-box")
@@ -102,20 +102,6 @@
     private bool _dialog = false;
     private double _rating = 10;
     private MTextField<string> _ref;
-
-    private List<RatingItem> _items = new List<RatingItem>
-    {
-        new RatingItem {Index = 1, IsFilled = true},
-        new RatingItem {Index = 2, IsFilled = true},
-        new RatingItem {Index = 3, IsFilled = true},
-        new RatingItem {Index = 4, IsFilled = true},
-        new RatingItem {Index = 5, IsFilled = true},
-        new RatingItem {Index = 6, IsFilled = true},
-        new RatingItem {Index = 7, IsFilled = true},
-        new RatingItem {Index = 8, IsFilled = true},
-        new RatingItem {Index = 9, IsFilled = true},
-        new RatingItem {Index = 10, IsFilled = true}
-    };
 
     private async Task Copy(FocusEventArgs args)
     {

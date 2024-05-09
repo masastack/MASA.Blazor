@@ -1,5 +1,28 @@
 # 升级指南
 
+## 从 v1.4.0 升级到 v1.5.0
+
+### 组件
+
+#### PageStack
+
+该组件在 v1.4.0 中引入用于管理页面堆栈。在 v1.5.0 中，我们对其进行了重构，并引入了 `PageStackNavController` 服务来解决一些潜在问题并提供更完整的功能。
+
+#### Icon
+
+删除了不必要的 `IsActive` 参数。
+
+#### Border
+
+使用 CSS 方案重构。
+
+- `Round` and `WrapperStyle` 参数已删除。
+- `Color` 参数现在只支持内置的 _primary_, _secondary_, _accent_, _surface_, _success_, _error_, _warning_, _info_ 和标准 CSS 颜色值。
+  ```diff 
+  - <MBorder Color="pink"></Border>
+  + <MBorder Color="#e91e63"></Border>
+  ```
+
 ## 从 v1.2.x 升级到 v1.4.0
 
 ### 组件

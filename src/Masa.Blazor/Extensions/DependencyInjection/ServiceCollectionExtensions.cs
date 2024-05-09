@@ -3,6 +3,7 @@ using Masa.Blazor.Components.Drawflow;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        services.AddBlazorComponent();
+        services.AddBlazorComponent(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
     }
 
@@ -34,7 +35,7 @@ public static class ServiceCollectionExtensions
         var options = new MasaBlazorOptions();
         optionsAction.Invoke(options);
 
-        services.AddBlazorComponent(o => { o.Locale = options.Locale; });
+        services.AddBlazorComponent(o => { o.Locale = options.Locale; }, masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(optionsAction, masaBlazorServiceLifetime);
     }
 
@@ -76,6 +77,9 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
+
+        services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
+        services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));
 
         return new MasaBlazorBuilder(services);
     }

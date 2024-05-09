@@ -11,6 +11,7 @@
 - [如何让UI紧凑？](#how-to-make-ui-compact)
 - [I18n 切换语言后文本不更新](#i18n-text-not-updated)
 - [避免 MMain 和 MAppBar 初次加载的过渡动画](#avoid-the-entry-animation-of-main-and-app-bar)
+- [全局点击防抖](#global-click-debounce)
 
 ## 问题专区
 
@@ -20,7 +21,7 @@
 
 - **如何自动高亮对应路由的导航？** { #highlight-navigation }
 
-  开启 `Routable` 参数，此参数会自动高亮对应路由的导航。支持此特性的组件包括：**MList**, **MBreadcrumbs**, **MTabs** 和 **MBottomNavigation**。
+  请访问 [导航和路由的自动匹配](/blazor/features/auto-match-nav) 以获取更多信息。
 
 - **P开头的组件为什么无法使用？** { #p-starting-components }
 
@@ -159,5 +160,71 @@
     .my-main:not(.app--sized){
       padding-left: 300px !important;
     }
+  }
+  ```
+
+- **全局点击防抖** { #global-click-debounce }
+
+  自定义一个继承自 **ComponentBase** 的基类，实现 **IHandleEvent** 接口，通过 **EventCallbackWorkItem** 判断是否为异步请求，对异步请求进行防抖处理。
+  所有继承该基类的组件在调用EventCallback时都会进入 **HandleEventAsync** 方法。
+
+  ```cs MyComponentBase.cs
+  public class MyComponentBase : ComponentBase, IHandleEvent
+  {
+      private readonly Dictionary<EventCallbackWorkItem, bool> _asyncCallbacks = new();
+      private CancellationTokenSource? _cancellationTokenSource;
+  
+      async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem callback, object? arg)
+      {
+          try
+          {
+              // 只对鼠标点击事件进行防抖
+              if (arg is MouseEventArgs { Type: "click" })
+              {
+                  // 只对异步请求进行防抖
+                  if (IsAsyncCallback(callback))
+                  {
+                      _cancellationTokenSource?.Cancel();
+                      _cancellationTokenSource = new();
+                      await Task.Delay(300, _cancellationTokenSource.Token);
+                  }
+              }
+  
+              await callback.InvokeAsync(arg);
+              StateHasChanged();
+          }
+          catch (TaskCanceledException)
+          {
+          }
+      }
+  
+      private bool IsAsyncCallback(EventCallbackWorkItem callback)
+      {
+          if (_asyncCallbacks.TryGetValue(callback, out var isAsync))
+          {
+              return isAsync;
+          }
+  
+          var field = callback.GetType().GetField("_delegate", BindingFlags.NonPublic | BindingFlags.Instance);
+          var getInvocationListMethod = field?.FieldType.GetMethod("GetInvocationList");
+          var delegates = getInvocationListMethod?.Invoke(field?.GetValue(callback), null) as Delegate[];
+          isAsync = delegates?.Any(u => u.Method.ReturnType == typeof(Task)) is true;
+  
+          _asyncCallbacks[callback] = isAsync;
+          return isAsync;
+      }
+  }
+  ```
+
+  ```razor Test.razor
+  @inherits MyComponentBase
+  
+  <button @onclick="OnClick">Click me</button>
+  
+  @code {
+      private async Task OnClick(MouseEventArgs e)
+      {
+          await Task.Delay(1000); // 模拟异步操作
+      }
   }
   ```

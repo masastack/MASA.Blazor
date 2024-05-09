@@ -34,7 +34,15 @@ public class MCarouselItem : MWindowItem, IRoutable
         await base.OnParametersSetAsync();
 
         _router = new Router(this);
+
+        var noRipple = Attributes.TryGetValue("ripple", out var ripple) && ripple is false or "false";
+
         (Tag, Attributes) = _router.GenerateRouteLink();
+
+        if (Tag == "a" && !noRipple)
+        {
+            Attributes["ripple"] = true;
+        }
     }
 
     protected override void SetComponentClass()

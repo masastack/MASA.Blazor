@@ -77,6 +77,12 @@ related:
 
 <masa-example file="Examples.components.lists.TwoLinesAndSubheader"></masa-example>
 
+#### 子组件属性 {released-on=v1.5.0}
+
+使用内置的 `Title`、`Subtitle`、`PrependAvatar`、`PrependIcon`、`AppendAvatar` 和 `AppendIcon` 属性，可以更容易地创建列表。
+
+<masa-example file="Examples.components.lists.SubComponentProps"></masa-example>
+
 ### 插槽
 
 #### 可展开的列表

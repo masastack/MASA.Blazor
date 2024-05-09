@@ -1,9 +1,9 @@
 ﻿@page "/blazor/examples/page-stack/page2/{id}"
 @layout PageStackLayout
-@inject NavigationManager NavigationManager
+@inject PageStackNavController NavController
 
-<PPageStackItemInit Title="Page 2">
-</PPageStackItemInit>
+<PStackPageBarInit Title="Page 2">
+</PStackPageBarInit>
 
 <p class="caption">url: /blazor/examples/page-stack/page2/{id}</p>
 
@@ -19,9 +19,17 @@
         }
     </h1>
     <h3>Page 2 created at @(_createdAt.ToString("HH:mm:ss zz"))</h3>
-    <a class="text-decoration-underline" @onclick="OnClick">Update Id</a>
+    <a class="text-decoration-underline" @onclick="UpdateId">Update Id</a>
     <br/>
-    <a href="/blazor/examples/page-stack/page3">Navigate to Page 3</a>
+    <a class="text-decoration-underline"
+       @onclick="@(() => NavController.Push("/blazor/examples/page-stack/page3"))">
+        Navigate to Page 3
+    </a>
+    
+    <MSyntaxHighlight Code="@sourceCode"
+                      Language="razor"
+                      Style="font-size: 10px">
+    </MSyntaxHighlight>
 </div>
 
 @code {
@@ -51,10 +59,10 @@
         }
     }
 
-    private void OnClick()
+    private void UpdateId()
     {
         var newId = Random.Shared.Next(100, 999);
-        NavigationManager.NavigateTo($"/blazor/examples/page-stack/page2/{newId}");
+        NavController.Replace($"/blazor/examples/page-stack/page2/{newId}");
     }
 
 }

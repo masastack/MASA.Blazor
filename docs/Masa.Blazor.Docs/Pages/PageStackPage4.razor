@@ -1,0 +1,29 @@
+﻿@page "/blazor/examples/page-stack/page4"
+@layout PageStackLayout
+@inject PageStackNavController NavController
+
+<PStackPageBarInit Title="Page 4">
+</PStackPageBarInit>
+
+<p class="caption">url: /blazor/examples/page-stack/page4</p>
+
+<div>
+    <h3>Page 4 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
+
+    <ul>
+        <li>
+            <a @onclick="@(() => NavController.Pop("AAA"))">AAA</a>
+        </li>
+        <li>
+            <a @onclick="@(() => NavController.Pop("BBB"))">BBB</a>
+        </li>
+        <li>
+            <a @onclick="@(() => NavController.Pop("CCC"))">CCC</a>
+        </li>
+    </ul>
+</div>
+
+<MSyntaxHighlight Code="@sourceCode"
+                  Language="razor"
+                  Style="font-size: 10px">
+</MSyntaxHighlight>

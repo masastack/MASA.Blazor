@@ -2,10 +2,11 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <IfTransitionElement class="@GetClass()"
-                         style="@GetStyle()"
+    <IfTransitionElement Class="@GetClass()"
+                         Style="@GetStyle()"
                          ReferenceCaptureAction="e => Ref = e"
                          Value="@If"
+                         @attributes="@Attributes"
                          @onclick="HandleOnClickAsync">
         @ChildContent
     </IfTransitionElement>

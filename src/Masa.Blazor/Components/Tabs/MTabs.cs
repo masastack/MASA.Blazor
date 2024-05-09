@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor
 {
     public partial class MTabs : BTabs, IThemeable
     {
@@ -35,13 +37,25 @@
         [Parameter]
         public bool IconsAndText { get; set; }
 
-        [Parameter]
-        public StringNumber? MobileBreakpoint { get; set; }
+        // [Parameter]
+        // public StringNumber? MobileBreakpoint { get; set; }
 
         [Parameter]
         public bool Right { get; set; }
 
         protected override bool RTL => MasaBlazor.RTL;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+        }
+
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeAsync(CallSlider);
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -116,6 +130,7 @@
                     attrs[nameof(MTabsBar.CenterActive)] = CenterActive;
                     attrs[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
                     attrs[nameof(MTabsBar.IsDark)] = IsDark;
+                    attrs[nameof(MTabsBar.Style)] = StyleBuilder.Create().AddHeight(Height).Build();
                 })
                 .Apply<BItem, MSlideItem>()
                 .Apply<BTab, MTab>()
@@ -133,8 +148,8 @@
 
         protected override async ValueTask DisposeAsyncCore()
         {
+            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
             await IntersectJSModule.UnobserveAsync(Ref);
-            
             await base.DisposeAsyncCore();
         }
     }

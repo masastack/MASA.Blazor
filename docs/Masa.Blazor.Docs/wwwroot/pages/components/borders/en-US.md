@@ -7,6 +7,8 @@ related:
   - /blazor/components/radio
 ---
 
+<app-alert type='warning' content='The `Color` parameter only supports built-in "primary", "secondary", "accent", "surface", "success", "error", "warning", "info" and standard CSS color values.'></app-alert>
+
 ## Examples
 
 ### Props

@@ -11,6 +11,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 - [How to make UI compact?](#how-to-make-ui-compact)
 - [I18n text not updated after language change](#i18n-text-not-updated)
 - [Avoid the entry animation of main and app bar](#avoid-the-entry-animation-of-main-and-app-bar)
+- [Global click debounce](#global-click-debounce)
 
 ## Questions
 
@@ -20,7 +21,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 - **How do I automatically highlight the navigation corresponding to the route?** { #highlight-navigation }
 
-  Turn on the `Routable` parameter, which will automatically highlight the navigation corresponding to the route. The components that support this feature include: **MList**, **MBreadcrumbs**, **MTabs** and **MBottomNavigation**.
+  Please visit the  [Automatic matching of navigation and route](/blazor/features/auto-match-nav) for more information.
 
 - **Why can't I use components starting with P?** { #p-starting-components }
 
@@ -160,5 +161,71 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
     .my-main:not(.app--sized){
       padding-left: 300px !important;
     }
+  }
+  ```
+
+- **Global click debounce** { #global-click-debounce }
+
+  Custom a base class inherited from **ComponentBase**, implement the **IHandleEvent** interface, judge whether it is an asynchronous request through **EventCallbackWorkItem**, and debounce the asynchronous request.
+  All components inherited from this base class will enter the **HandleEventAsync** method when calling EventCallback.
+
+  ```cs MyComponentBase.cs
+  public class MyComponentBase : ComponentBase, IHandleEvent
+  {
+      private readonly Dictionary<EventCallbackWorkItem, bool> _asyncCallbacks = new();
+      private CancellationTokenSource? _cancellationTokenSource;
+  
+      async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem callback, object? arg)
+      {
+          try
+          {
+              // Only debounce mouse click events
+              if (arg is MouseEventArgs { Type: "click" })
+              {
+                  // Only debounce asynchronous requests
+                  if (IsAsyncCallback(callback))
+                  {
+                      _cancellationTokenSource?.Cancel();
+                      _cancellationTokenSource = new();
+                      await Task.Delay(300, _cancellationTokenSource.Token);
+                  }
+              }
+  
+              await callback.InvokeAsync(arg);
+              StateHasChanged();
+          }
+          catch (TaskCanceledException)
+          {
+          }
+      }
+  
+      private bool IsAsyncCallback(EventCallbackWorkItem callback)
+      {
+          if (_asyncCallbacks.TryGetValue(callback, out var isAsync))
+          {
+              return isAsync;
+          }
+  
+          var field = callback.GetType().GetField("_delegate", BindingFlags.NonPublic | BindingFlags.Instance);
+          var getInvocationListMethod = field?.FieldType.GetMethod("GetInvocationList");
+          var delegates = getInvocationListMethod?.Invoke(field?.GetValue(callback), null) as Delegate[];
+          isAsync = delegates?.Any(u => u.Method.ReturnType == typeof(Task)) is true;
+  
+          _asyncCallbacks[callback] = isAsync;
+          return isAsync;
+      }
+  }
+  ```
+
+  ```razor Test.razor
+  @inherits MyComponentBase
+  
+  <button @onclick="OnClick">Click me</button>
+  
+  @code {
+      private async Task OnClick(MouseEventArgs e)
+      {
+          await Task.Delay(1000); // Simulate asynchronous operation
+      }
   }
   ```

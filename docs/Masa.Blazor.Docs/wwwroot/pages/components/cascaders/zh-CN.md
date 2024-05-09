@@ -8,19 +8,17 @@ related:
 
 ## 使用
 
-级联选择器用于选择省市区
-
-<masa-example file="Examples.components.cascaders.Usage"></masa-example>
+<cascaders-usage></cascaders-usage>
 
 ## 示例
 
 ### 属性
 
-#### 密集
+#### 分隔符 {released-on=v1.5.0}
 
-`Dense` 属性用于减少高度
+`Delimiter` 属性用于设置分隔符，默认为 `/`。
 
-<masa-example file="Examples.components.cascaders.Dense"></masa-example>
+<masa-example file="Examples.components.cascaders.Delimiter"></masa-example>
 
 #### 加载子项
 
@@ -28,8 +26,3 @@ related:
 
 <masa-example file="Examples.components.cascaders.LoadChildren"></masa-example>
 
-#### 展示完整路径
-
-`ShowAllLevels` 用于控制展示所有层级,默认为 `true`。
-
-<masa-example file="Examples.components.cascaders.ShowAllLevels"></masa-example>

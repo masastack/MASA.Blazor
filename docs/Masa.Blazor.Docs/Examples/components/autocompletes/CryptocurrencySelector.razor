@@ -1,5 +1,6 @@
 ﻿@using System.Net.Http.Json;
-<MToolbar Color="orange accent-1">
+@using YamlDotNet.Core.Tokens
+<MToolbar Color="orange accent-1" Light>
     <ChildContent>
         <MAppBarNavIcon Class="hidden-sm-and-down"></MAppBarNavIcon>
         <MToolbarTitle Class="text-h6 mr-6 hidden-sm-and-down">
@@ -13,8 +14,10 @@
                        Clearable
                        HideDetails="true"
                        HideSelected
-                       ItemText="r=>r.Name"
-                       ItemValue="r=>r.Symbol"
+                       ItemText="r => r.Name"
+                       ItemValue="r => r.Symbol"
+                       CacheItems
+                       DebounceInterval="300"
                        Label="Search for a coin..."
                        Solo>
             <NoDataContent>
@@ -57,16 +60,16 @@
     </ChildContent>
     <ExtensionContent>
         <MTabs @bind-Value="_tab"
-               HideSlider="_model==null"
+               HideSlider="@Disabled"
                Color="blue-grey"
                SliderColor="blue-grey">
-            <MTab Disabled="_model==null">
+            <MTab Disabled="@Disabled">
                 News
             </MTab>
-            <MTab Disabled="_model==null">
+            <MTab Disabled="@Disabled">
                 Trading
             </MTab>
-            <MTab Disabled="_model==null">
+            <MTab Disabled="@Disabled">
                 Blog
             </MTab>
         </MTabs>
@@ -74,43 +77,18 @@
 </MToolbar>
 
 @code {
-    class Currency
-    {
-        public string Id { get; set; }
 
-        public string Symbol { get; set; }
+    record Currency(string Id, string Symbol, string Name);
 
-        public string Name { get; set; }
-    }
+    [Inject] public IHttpClientFactory HttpClientFactory { get; set; } = null!;
+    private HttpClient? _httpClient;
 
     private bool _isLoading;
     private List<Currency> _items = new List<Currency>();
-    private string _model;
-    private StringNumber _tab;
+    private string? _model;
+    private StringNumber? _tab;
 
-    protected string Model
-    {
-        get
-        {
-            return _model;
-        }
-        set
-        {
-            _model = value;
-
-            if (value != null)
-            {
-                _tab = 0;
-            }
-            else
-            {
-                _tab = null;
-            }
-        }
-    }
-
-    [Inject]
-    public IHttpClientFactory HttpClientFactory { get; set; }
+    private bool Disabled => _model == null;
 
     public async Task Search(string val)
     {
@@ -119,10 +97,15 @@
             return;
         }
 
+        _httpClient ??= HttpClientFactory.CreateClient("masa-docs");
+
         _isLoading = true;
-        var httpClient = HttpClientFactory.CreateClient("doc");
-        var items = await httpClient.GetFromJsonAsync<List<Currency>>("/_content/Masa.Blazor.Doc/list.json");
-        _items = items.Take(20).ToList();//TODO:Wait for MSelect update
+
+        await Task.Delay(500); // Simulate network latency
+        var items = await _httpClient.GetFromJsonAsync<List<Currency>>("_content/Masa.Blazor.Docs/data/demo/coins-list.json");
+        _items = items?.Take(100).ToList() ?? new(); // TODO: for now Autocomplete cannot handle many items
+
         _isLoading = false;
     }
+
 }

@@ -79,6 +79,12 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 
 <masa-example file="Examples.components.lists.TwoLinesAndSubheader"></masa-example>
 
+#### Subcomponent props {released-on=v1.5.0}
+
+Use the built-in `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` and `AppendIcon` props to create lists more easily.
+
+<masa-example file="Examples.components.lists.SubComponentProps"></masa-example>
+
 ### Contents
 
 #### Expansion Lists
