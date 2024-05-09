@@ -11,4 +11,6 @@ public interface IEChartsJSObjectReferenceProxy : IJSObjectReference
     ValueTask ResizeAsync(double width, double height);
 
     ValueTask DisposeEChartsAsync();
+    ValueTask ShowLoadingAsync(object? option = null);
+    ValueTask HideLoadingAsync();
 }
