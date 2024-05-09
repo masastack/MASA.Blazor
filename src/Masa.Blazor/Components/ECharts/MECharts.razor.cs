@@ -252,8 +252,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
 
         optionJson = JsonSerializer.Serialize(option, new JsonSerializerOptions()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
 
         // check if the option contains "function" or "=>"
