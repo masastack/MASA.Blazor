@@ -13,21 +13,19 @@ related:
 
 <breadcrumbs-usage></breadcrumbs-usage>
 
-## 注意
-
-<app-alert type="info" content="默认情况下，**MBreadcrumbs** 将禁用路由联动。可以通过 `Linkage` 属性开启路由联动。"></app-alert>
-
 ## 示例
 
 ### 属性
 
 #### 分割线
 
-可以使用 `Divider` 属性来设置面包屑分隔符。
+使用 `Divider` 属性来自定义面包屑分隔符。
 
 <masa-example file="Examples.components.breadcrumbs.Divider"></masa-example>
 
 #### 路由联动
+
+除了使用每项的 `Disabled` 属性设置面包屑导航是否可用外，还可以使用 `Routable` 根据路由自动设置面包屑导航是否可用。
 
 <masa-example file="Examples.components.breadcrumbs.Routable"></masa-example>
 
