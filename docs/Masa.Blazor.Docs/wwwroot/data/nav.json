@@ -116,7 +116,10 @@
         "state": "deprecated"
       },
       "drawers",
-      "echarts",
+      {
+        "title": "echarts",
+        "state": "update"
+      },
       "editors",
       "enqueued-snackbars",
       "error-handler",

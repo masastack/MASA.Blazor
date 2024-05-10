@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Drawing;
+using System.Text.Json;
 
 namespace Masa.Blazor;
 
@@ -9,6 +10,9 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
 
     [Inject]
     protected EChartsJSModule Module { get; set; } = null!;
+
+    [Inject] 
+    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -76,6 +80,9 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
     [Parameter]
     public bool IncludeFunctionsInOption { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    public bool Loading { get; set; }
+
     private static readonly Regex s_functionRegex
         = new(@"""\s*function\s?\([a-zA-Z][a-zA-Z0-9,\s]*\)\s?\{((?<BR>\{)|(?<-BR>\})|[^{}]*)+\}\s*""", RegexOptions.IgnoreCase);
 
@@ -87,6 +94,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
     private IEChartsJSObjectReferenceProxy? _echarts;
     private object? _prevOption;
     private string? _prevComputedTheme;
+    private bool _prevLoading;
 
     public string? ComputedTheme
     {
@@ -145,6 +153,22 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
 
             await ReinitializeECharts();
         }
+
+        if (_prevLoading != Loading)
+        {
+            _prevLoading = Loading;
+            _ = Loading ? ShowLoading() : HideLoading();
+        }
+    }
+
+    private object GetDefaultLoadingOption()
+    {
+        var onSurface = ComputedTheme == "dark"
+            ? MasaBlazor.Theme.Themes.Dark.OnSurface
+            : MasaBlazor.Theme.Themes.Light.OnSurface;
+        var color = ColorTranslator.FromHtml(onSurface);
+        var maskColor = $"rgba({color.R}, {color.G}, {color.B}, 0.32)";
+        return new { maskColor };
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -174,6 +198,11 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
     public async Task InitECharts()
     {
         _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions, this);
+
+        if (Loading)
+        {
+            _ = ShowLoading();
+        }
 
         await SetOption();
     }
@@ -286,7 +315,7 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
     public async ValueTask ShowLoading(object? option = null)
     {
         if (_echarts == null) return;
-        await _echarts.ShowLoadingAsync(option);
+        await _echarts.ShowLoadingAsync(option ?? GetDefaultLoadingOption());
     }
 
     public async ValueTask HideLoading()

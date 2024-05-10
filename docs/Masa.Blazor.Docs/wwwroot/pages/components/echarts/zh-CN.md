@@ -30,6 +30,12 @@ tag: "JS代理"
 
 <masa-example file="Examples.components.echarts.HeightAndWidth"></masa-example>
 
+#### 加载 {released-on=v1.6.0}
+
+通过 `Loading` 属性控制加载状态。
+
+<masa-example file="Examples.components.echarts.Loading"></masa-example>
+
 #### 配置中使用 function
 
 在 `Option` 中使用 function 时，需要启用 `IncludeFunctionsInOption` 属性。下面的例子中，使用 **lambda** 设置了 tooltip 的内容，使用 **function** 设置了横坐标的名称。
