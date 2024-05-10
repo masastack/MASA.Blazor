@@ -122,6 +122,13 @@ public partial class NotificationsMenu
         return
         [
             new NotificationItem(
+                "v1.5.1 Release",
+                I18n.T("release-notifications.patch"),
+                NotificationType.Release,
+                "/blazor/getting-started/release-notes?v=v1.5.1",
+                "release notes",
+                new DateOnly(2024, 5, 10)),
+            new NotificationItem(
                 "v1.5.0 Release",
                 $"""
                  Highlights:

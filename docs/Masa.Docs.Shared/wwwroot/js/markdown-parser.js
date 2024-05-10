@@ -11,7 +11,6 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
 
     if (scope === "document") {
         addHeadingRules(md);
-        addCodeRules(md);
         addImageRules(md);
         addBlockquoteRules(md);
         addTableRules(md);
@@ -22,6 +21,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         addCodeGroupRules(parser);
     }
 
+    addCodeRules(md);
     addLinkRules(parser);
     
     function addHtmlInlineRules(md) {

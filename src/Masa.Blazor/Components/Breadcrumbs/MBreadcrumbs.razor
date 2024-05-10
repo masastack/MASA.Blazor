@@ -1,0 +1,66 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="this" IsFixed>
+        <ul class="@GetClass()"
+            style="@GetStyle()"
+            id="@Id"
+            @attributes="@Attributes">
+            @if (ChildContent == null)
+            {
+                @for (var i = 0; i < Items.Count; i++)
+                {
+                    var index = i;
+                    var item = Items[index];
+                    var isLast = index == Items.Count - 1;
+
+                    @GenGroup(item, isLast)
+                }
+            }
+            else
+            {
+                @ChildContent
+            }
+        </ul>
+    </CascadingValue>
+</CascadingValue>
+
+@code
+{
+    private RenderFragment GenGroup(BreadcrumbItem? item, bool isLast) => __builder =>
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        if (ItemContent != null)
+        {
+            @ItemContent(item)
+
+            if (!isLast)
+            {
+                @GenDivider()
+            }
+        }
+        else
+        {
+            <MBreadcrumbsItem Text="@item.Text"
+                              Href="@item.Href"
+                              Disabled="@item.Disabled"
+                              Exact="@item.Exact">
+            </MBreadcrumbsItem>
+
+            if (!isLast)
+            {
+                @GenDivider()
+            }
+        }
+    };
+
+    internal RenderFragment GenDivider()
+    {
+        return RenderFragments.RenderFragmentOrText(DividerContent, Divider, "m-breadcrumbs__divider", "li");
+    }
+}

@@ -20,9 +20,6 @@
                     cssBuilder
                         .Add("m-breadcrumbs__divider");
                 });
-
-            AbstractProvider
-                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(attrs => { attrs[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item"; });
         }
     }
 }

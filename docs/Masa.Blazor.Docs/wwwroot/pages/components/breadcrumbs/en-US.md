@@ -13,10 +13,6 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 <breadcrumbs-usage></breadcrumbs-usage>
 
-## Caveats
-
-<app-alert type="info" content="By default **MBreadcrumbs** will disable the linkage with router. You can enable the feature by using `Linkage` prop."></app-alert>
-
 ## Examples
 
 ### Props
@@ -28,6 +24,9 @@ For the icon variant, breadcrumbs can use any icon in Material Design Icons.
 <masa-example file="Examples.components.breadcrumbs.Divider"></masa-example>
 
 #### Routable
+
+In addition to using the `Disabled` property of each item to set whether the breadcrumb is enabled,
+you can also use `Routable` to automatically set whether the breadcrumb is enabled based on the route.
 
 <masa-example file="Examples.components.breadcrumbs.Routable"></masa-example>
 

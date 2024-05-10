@@ -517,6 +517,7 @@
   },
   "usage-note": "* Partial code, for demonstration purposes only.",
   "release-notifications": {
+    "patch": "Bug fixes and documentation updates.",
     "v1_5_0": {
       "button": "add `IconName`, `LeftIconName` and `RightIconName` to simplify the usage of icon buttons.",
       "card": "add sub-component parameter, includes `Title`, `Subtitle` and `Text`.",

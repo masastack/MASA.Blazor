@@ -1,0 +1,26 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<li class="@Class"
+    style="@Style"
+    id="@Id"
+    @attributes="@Attributes">
+    <Element Tag="@Tag"
+             Class="@_block.AddClass(ActiveClass, IsDisabled).Build()"
+             @attributes="@_itemAttributes">
+        @if (ChildContent != default)
+        {
+            @ChildContent((IsLast, IsDisabled))
+        }
+        else
+        {
+            @Text
+        }
+    </Element>
+</li>
+
+<!--When using razor definition without `Items` parameter-->
+@if (Breadcrumbs?.ChildContent != null && !IsLast)
+{
+    @Breadcrumbs.GenDivider()
+}

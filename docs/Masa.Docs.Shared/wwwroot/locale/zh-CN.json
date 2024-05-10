@@ -614,6 +614,7 @@
   },
   "usage-note": "* 部分代码，仅供演示。",
   "release-notifications": {
+    "patch": "已知问题修复和文档更新",
     "v1_5_0": {
       "button": "新增 `IconName`, `LeftIconName` 和 `RightIconName` 参数以简化图标按钮的使用。",
       "card": "新增子组件参数，包括 `Title`, `Subtitle` 和 `Text`。",
