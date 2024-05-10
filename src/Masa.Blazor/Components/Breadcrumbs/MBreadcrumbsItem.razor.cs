@@ -5,23 +5,11 @@ namespace Masa.Blazor;
 
 public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
 {
-    [Parameter] public string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
-
-    /// <summary>
-    /// TODO: ripple in breadcrumbs-item
-    /// </summary>
-    [Parameter]
-    public bool Ripple { get; set; }
-
-    private IRoutable? _router;
-
-    protected string WrappedTag { get; set; } = "li";
-
-    protected bool Matched { get; set; }
-
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
     [CascadingParameter] public MBreadcrumbs? Breadcrumbs { get; set; }
+
+    [Parameter] public string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
 
     [Parameter] public bool Disabled { get; set; }
 
@@ -33,8 +21,6 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
 
     [Parameter] public bool Link { get; set; }
 
-    public EventCallback<MouseEventArgs> OnClick { get; }
-
     [Parameter, MasaApiParameter("div")] public string? Tag { get; set; } = "div";
 
     [Parameter] public string? Target { get; set; }
@@ -43,11 +29,19 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
 
     [Parameter] public RenderFragment<(bool IsLast, bool IsDisabled)>? ChildContent { get; set; }
 
+    [Parameter] public bool Ripple { get; set; } = false;
+
+    private IRoutable? _router;
+
+    private bool Matched { get; set; }
+
     private bool IsDisabled => Disabled || Matched;
 
     private bool IsRoutable => Href != null && (Breadcrumbs?.Routable is true);
-    
+
     private Dictionary<string, object?> _itemAttributes = new();
+
+    public EventCallback<MouseEventArgs> OnClick { get; }
 
     protected override void OnInitialized()
     {
@@ -86,18 +80,10 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
         _router = new Router(this);
 
         (Tag, _itemAttributes) = _router.GenerateRouteLink();
+        _itemAttributes["ripple"] = Ripple;
     }
 
-    #region When using razor definition without `Items` parameter
-
-    protected bool IsLast => Breadcrumbs == null || Breadcrumbs.SubBreadcrumbsItems.Last() == this;
-
-    internal void InternalStateHasChanged()
-    {
-        StateHasChanged();
-    }
-
-    #endregion
+    private bool IsLast => Breadcrumbs == null || Breadcrumbs.SubBreadcrumbsItems.Last() == this;
 
     private bool UpdateActiveForRoutable()
     {

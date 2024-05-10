@@ -6,10 +6,6 @@ public partial class MBreadcrumbs : MasaComponentBase
 
     [Parameter] public bool Large { get; set; }
 
-    protected string Tag { get; init; } = "ul";
-
-    public bool RenderDivider { get; protected set; } = true;
-
     [Parameter, MasaApiParameter("/")] public string? Divider { get; set; } = "/";
 
     [Parameter] public RenderFragment? DividerContent { get; set; }
@@ -43,21 +39,6 @@ public partial class MBreadcrumbs : MasaComponentBase
             }
 
             return CascadingIsDark;
-        }
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender)
-        {
-            return;
-        }
-
-        if (SubBreadcrumbsItems.Any())
-        {
-            SubBreadcrumbsItems.ToList().ForEach(sub => sub.InternalStateHasChanged());
         }
     }
 

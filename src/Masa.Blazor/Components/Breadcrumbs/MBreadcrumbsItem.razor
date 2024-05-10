@@ -1,11 +1,10 @@
 ﻿@namespace Masa.Blazor
 @inherits MasaComponentBase
 
-<Element Tag="@WrappedTag"
-         Class="@Class"
-         Style="@Style"
-         id="@Id"
-         @attributes="@Attributes">
+<li class="@Class"
+    style="@Style"
+    id="@Id"
+    @attributes="@Attributes">
     <Element Tag="@Tag"
              Class="@_block.AddClass(ActiveClass, IsDisabled).Build()"
              @attributes="@_itemAttributes">
@@ -18,7 +17,7 @@
             @Text
         }
     </Element>
-</Element>
+</li>
 
 <!--When using razor definition without `Items` parameter-->
 @if (Breadcrumbs?.ChildContent != null && !IsLast)

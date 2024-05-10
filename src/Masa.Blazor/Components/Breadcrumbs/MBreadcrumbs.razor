@@ -3,11 +3,10 @@
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <CascadingValue Value="this" IsFixed>
-        <Element Tag="@Tag"
-                 Class="@GetClass()"
-                 Style="@GetStyle()"
-                 id="@Id"
-                 @attributes="@Attributes">
+        <ul class="@GetClass()"
+            style="@GetStyle()"
+            id="@Id"
+            @attributes="@Attributes">
             @if (ChildContent == null)
             {
                 @for (var i = 0; i < Items.Count; i++)
@@ -23,7 +22,7 @@
             {
                 @ChildContent
             }
-        </Element>
+        </ul>
     </CascadingValue>
 </CascadingValue>
 
@@ -40,7 +39,7 @@
         {
             @ItemContent(item)
 
-            if (RenderDivider && !isLast)
+            if (!isLast)
             {
                 @GenDivider()
             }
@@ -53,7 +52,7 @@
                               Exact="@item.Exact">
             </MBreadcrumbsItem>
 
-            if (RenderDivider && !isLast)
+            if (!isLast)
             {
                 @GenDivider()
             }
