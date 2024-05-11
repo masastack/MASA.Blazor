@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Breadcrumbs
             {
                 props.Add(breadcrumbs => breadcrumbs.Large, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLargeClass = classes.Contains("m-breadcrumbs--large");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Breadcrumbs
             {
                 props.Add(breadcrumbs => breadcrumbs.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Breadcrumbs
             {
                 props.Add(breadcrumbs => breadcrumbs.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert

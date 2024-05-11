@@ -12,6 +12,7 @@
 - [I18n 切换语言后文本不更新](#i18n-text-not-updated)
 - [避免 MMain 和 MAppBar 初次加载的过渡动画](#avoid-the-entry-animation-of-main-and-app-bar)
 - [全局点击防抖](#global-click-debounce)
+- [Blazor Server 内存使用过高](#blazor-server-memory-usage-too-high)
 
 ## 问题专区
 
@@ -228,3 +229,22 @@
       }
   }
   ```
+- **Server 模式内存使用过高** { #blazor-server-memory-usage-too-high }
+
+  根据[官方文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/host-and-deploy/server?view=aspnetcore-8.0#memory-usage-applied-to-blazor)的建议，可以通过以下几点优化：
+  
+  - [使用工作站垃圾回收并禁用并发垃圾回收](https://learn.microsoft.com/zh-cn/dotnet/standard/garbage-collection/workstation-server-gc)
+    ```xml ServerApp.csproj
+    <PropertyGroup>
+      <ServerGarbageCollection>false</ServerGarbageCollection>
+      <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    </PropertyGroup>
+    ```
+  - 减少断开连接的线路数和缩短允许线路处于断开连接状态的时间
+    ```cs Program.cs
+    services.AddServerSideBlazor().AddCircuitOptions(option =>
+    {
+        option.DisconnectedCircuitMaxRetained = 30; // default is 100
+        option.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(2); // default is 3 minutes
+    });
+    ```

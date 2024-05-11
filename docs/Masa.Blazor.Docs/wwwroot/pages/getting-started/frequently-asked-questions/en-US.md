@@ -12,6 +12,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 - [I18n text not updated after language change](#i18n-text-not-updated)
 - [Avoid the entry animation of main and app bar](#avoid-the-entry-animation-of-main-and-app-bar)
 - [Global click debounce](#global-click-debounce)
+- [Blazor Server memory usage is too high](#blazor-server-memory-usage-too-high)
 
 ## Questions
 
@@ -229,3 +230,22 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
       }
   }
   ```
+- Blazor Server memory usage is too high { #blazor-server-memory-usage-too-high }
+
+  According to the [official documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/server?view=aspnetcore-8.0#memory-usage-applied-to-blazor), you can optimize it through the following points:
+
+  - [Using workstation garbage collection with concurrent garbage collection disabled](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/workstation-server-gc)
+    ```xml ServerApp.csproj
+    <PropertyGroup>
+      <ServerGarbageCollection>false</ServerGarbageCollection>
+      <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    </PropertyGroup>
+    ```
+  - Reduce the number of disconnected circuits and the time a circuit is allowed to be in the disconnected state
+    ```cs Program.cs
+    services.AddServerSideBlazor().AddCircuitOptions(option =>
+    {
+        option.DisconnectedCircuitMaxRetained = 30; // default is 100
+        option.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(2); // default is 3 minutes
+    });
+    ```
