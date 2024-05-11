@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public class PStackPageBase : ComponentBase, IDisposable
+public class PStackPageBase : ComponentBase, IAsyncDisposable
 {
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
@@ -119,9 +119,8 @@ public class PStackPageBase : ComponentBase, IDisposable
             }
         }
     }
-
-
-    public void Dispose()
+    
+    ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (PageStack is not null)
         {
@@ -132,5 +131,12 @@ public class PStackPageBase : ComponentBase, IDisposable
         {
             Page.ActiveChanged -= PageOnActiveChanged;
         }
+        
+        return DisposeAsyncCore();
+    }
+
+    protected virtual ValueTask DisposeAsyncCore()
+    {
+        return ValueTask.CompletedTask;
     }
 }
