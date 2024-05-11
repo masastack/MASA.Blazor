@@ -1,0 +1,93 @@
+﻿@namespace Masa.Blazor
+@using Masa.Blazor.Components.Pagination
+@using Element = BlazorComponent.Web.Element
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <nav id="@Id" @ref="Ref" class="@Class" style="@Style" @attributes="@Attributes">
+        <ul class="@_block.Modifier(Circle).And(Disabled).AddTheme(IsDark, IndependentTheme)">
+            @GenPaginationIcon(PaginationIconType.First)
+
+            @foreach (var item in GetItems())
+            {
+                <li>
+                    @if (item.IsT0)
+                    {
+                        <span class="@_block.Element("more")">@item</span>
+                    }
+                    else
+                    {
+                        @GenPaginationItem(item)
+                    }
+                </li>
+            }
+
+            @GenPaginationIcon(PaginationIconType.Second)
+        </ul>
+    </nav>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenPaginationIcon(PaginationIconType iconType) => __builder =>
+    {
+        var tag = "a";
+        var disabled = iconType == PaginationIconType.First ? PrevDisabled : NextDisabled;
+        var icon = GetIcon(iconType);
+        var value = iconType == PaginationIconType.First ? Value - 1 : Value + 1;
+        Func<MouseEventArgs, Task> click = icon == PrevIcon ? HandlePreviousAsync : HandleNextAsync;
+
+        Dictionary<string, object> attrs = new()
+        {
+            ["__internal_preventDefault_onclick"] = true
+        };
+
+        if (HrefFormat is null)
+        {
+            tag = "button";
+            attrs["type"] = "button";
+        }
+        else if (!disabled)
+        {
+            attrs["href"] = string.Format(HrefFormat, value);
+        }
+
+        <Element Tag="@tag"
+                 Class="@_block.Element("navigation").Modifier(disabled).Build()"
+                 @onclick="@click"
+                 @attributes="@attrs">
+            <MIcon Icon="@icon"/>
+        </Element>
+    };
+
+    private RenderFragment GenPaginationItem(StringNumber item) => __builder =>
+    {
+        var tag = "a";
+        Dictionary<string, object> attrs = new()
+        {
+            ["__internal_preventDefault_onclick"] = true
+        };
+
+        if (HrefFormat is null)
+        {
+            tag = "button";
+            attrs["type"] = "button";
+        }
+        else
+        {
+            attrs["href"] = string.Format(HrefFormat, item);
+        }
+
+        var isActive = item.AsT1 == Value;
+
+        <Element Tag="@tag"
+                 Class="@_block.Element("item").Modifier("active", isActive).AddBackgroundColor(Color, isActive).Build()"
+                 Style="@(StyleBuilder.Create().AddBackgroundColor(Color, isActive).ToString())"
+                 @onclick="@(() => HandleItemClickAsync(item))"
+                 @attributes="@attrs">
+            @item
+        </Element>
+    };
+
+}

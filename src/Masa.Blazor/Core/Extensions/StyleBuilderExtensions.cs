@@ -19,9 +19,9 @@ public static class StyleBuilderExtensions
         return styleBuilder.AddIf(isText ? "color" : "background-color", color, func.Invoke());
     }
 
-    public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string? color)
+    public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string? color, bool apply = true)
     {
-        if (color != null && IsCssColor(color))
+        if (apply && color != null && IsCssColor(color))
         {
             styleBuilder
                 .Add("background-color", color)
