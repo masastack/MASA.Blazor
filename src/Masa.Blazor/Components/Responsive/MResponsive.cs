@@ -45,7 +45,7 @@ public class MResponsive : BResponsive
 
         if (!isNumber) return null;
 
-        var paddingBottom = (1 / ratio).ToString("P2");
+        var paddingBottom = (1 / ratio).ToString("P2", CultureInfo.InvariantCulture);
 
         return $"padding-bottom: {paddingBottom.Replace(" ", "")}";
     }
