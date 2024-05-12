@@ -90,11 +90,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Parameter] public EventCallback<bool> MiniVariantChanged { get; set; }
 
     [Parameter]
-    public bool Permanent
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    public bool Permanent { get; set; }
 
     [Parameter] public string? Src { get; set; }
 
@@ -150,6 +146,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
+    private bool _prevPermanent;
     private readonly List<IDependent> _dependents = new();
     private readonly Block _block = new("m-navigation-drawer");
 
@@ -341,6 +338,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
         Init();
 
+        _prevPermanent = Permanent;
+
         MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
 
         if (Value == null && ValueChanged.HasDelegate)
@@ -357,15 +356,22 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
+        await base.OnParametersSetAsync();
+
+        if (_prevPermanent != Permanent)
+        {
+            _prevPermanent = Permanent;
+
+            await UpdateApplicationAsync();
+        }
 
 #if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
 #endif
     }
 
