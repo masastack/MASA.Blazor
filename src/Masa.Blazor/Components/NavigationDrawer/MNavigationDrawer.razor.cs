@@ -427,7 +427,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
                 _ = UpdateApplicationAsync();
             })
             .Watch<bool>(nameof(MiniVariant), CallUpdate)
-            .Watch<bool>(nameof(Permanent), CallUpdate)
             .Watch<bool>(nameof(ExpandOnHover), val => { UpdateMiniVariant(val, false); })
             .Watch<bool>(nameof(IsMouseover), val => { UpdateMiniVariant(!val); });
     }
