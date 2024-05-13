@@ -23,9 +23,9 @@ related:
 
 <masa-example file="Examples.components.dividers.Inset"></masa-example>
 
-#### 垂直
+#### 垂直 {updated-in=v1.6.0}
 
-垂直分隔线为您提供了更多用于独特布局的工具。
+垂直分隔线为您提供了更多用于独特布局的工具。使用 `Length` 属性可以控制分隔线的长度。
 
 <masa-example file="Examples.components.dividers.Vertical"></masa-example>
 

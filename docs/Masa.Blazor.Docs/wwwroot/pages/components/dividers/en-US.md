@@ -23,9 +23,9 @@ Dividers in their simplest form display a horizontal line.
 
 <masa-example file="Examples.components.dividers.Inset"></masa-example>
 
-#### Vertical
+#### Vertical {updated-in=v1.6.0}
 
-Dividers in their simplest form display a horizontal line.
+Dividers in their simplest form display a horizontal line. Use `Length` to control the length of the divider.
 
 <masa-example file="Examples.components.dividers.Vertical"></masa-example>
 

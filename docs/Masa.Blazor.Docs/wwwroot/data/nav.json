@@ -110,7 +110,10 @@
       "defaults-providers",
       "descriptions",
       "dialogs",
-      "dividers",
+      {
+        "title": "dividers",
+        "state": "update"
+      },
       {
         "title": "drag-zone",
         "state": "deprecated"

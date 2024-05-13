@@ -8,6 +8,9 @@
         [Parameter]
         public bool Vertical { get; set; }
 
+        [Parameter]
+        public int Length { get; set; }
+
         private bool HasContent => ChildContent is not null;
 
         private bool IsCenter => HasContent && (!Left && !Right || Center);
@@ -59,6 +62,8 @@
                 {
                     styleBuilder
                         .AddIf("display:contents", () => !HasContent)
+                        .AddIf($"height: {Length}px", () => Vertical && Length > 0)
+                        .AddIf($"width: {Length}px", () => !Vertical && Length > 0)
                         .AddIf($"padding: {PaddingY}px 0", () => PaddingY > 0);
                 })
                 .Apply("hr", cssBuilder =>
@@ -71,7 +76,9 @@
                         .AddTheme(IsDark, IndependentTheme);
                 }, styleBuilder =>
                 {
-                    styleBuilder.AddIf(Style, () => !HasContent);
+                    styleBuilder
+                        .AddIf("min-height: 0", () => Vertical && Length > 0)
+                        .AddIf(Style, () => !HasContent);
                 })
                 .Apply("content", cssBuilder =>
                 {
