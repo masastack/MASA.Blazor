@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.DatePicker;
+
+namespace Masa.Blazor;
 
 public partial class MDatePicker<TValue> : MasaComponentBase
 {

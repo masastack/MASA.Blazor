@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.TimePicker;
+
+namespace Masa.Blazor;
 
 public partial class MDigitalClock<TValue> : BDomComponentBase
 {
