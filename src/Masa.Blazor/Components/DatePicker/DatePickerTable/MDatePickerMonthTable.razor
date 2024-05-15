@@ -1,0 +1,31 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@inherits MDatePickerTable<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenChildContent() => __builder =>
+    {
+        var cols = new[] { 0, 1, 2 };
+        var rows = 12 / cols.Length;
+        <tbody>
+        @for (var i = 0; i < rows; i++)
+        {
+            var row = i;
+            <tr @key="row">
+                @foreach (var col in cols)
+                {
+                    var month = row * cols.Length + col;
+                    var date = new DateOnly(DisplayedYear, month + 1, 1);
+                    <td @key="month">
+                        @GenButton(date, false, false)
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    };
+
+}

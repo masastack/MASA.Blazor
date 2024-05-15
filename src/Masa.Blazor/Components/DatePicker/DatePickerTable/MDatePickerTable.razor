@@ -1,0 +1,128 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TValue
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    @*TODO: onwheel event*@
+    <div class="@GetClass()"
+         style="@GetStyle()">
+        <Transition Name="@ComputedTransition">
+            <KeyTransitionElement Tag="table"
+                                  Value="@TableDate">
+                @GenChildContent()
+            </KeyTransitionElement>
+        </Transition>
+    </div>
+</CascadingValue>
+
+@code {
+
+    protected virtual RenderFragment GenChildContent() => __builder => { };
+
+    protected RenderFragment GenButton(DateOnly date, bool isFloating, bool isOtherMonth) => __builder =>
+    {
+        var cssBuilder = new CssBuilder();
+        var styleBuilder = new StyleBuilder();
+
+        var isAllowed = IsDateAllowed(date, Min, Max, AllowedDates);
+        var isSelected = IsSelected(date) && isAllowed;
+        var isCurrent = IsCurrent(date);
+        var color = (isSelected || isCurrent) ? (Color ?? "accent") : "";
+        cssBuilder.Add("m-btn");
+        if (isSelected)
+        {
+            cssBuilder.AddBackgroundColor(color);
+            styleBuilder.AddBackgroundColor(color);
+        }
+        else
+        {
+            cssBuilder.AddTextColor(color);
+            styleBuilder.AddTextColor(color);
+        }
+
+        isAllowed = isAllowed && !isOtherMonth;
+
+        cssBuilder
+            .AddIf("m-size--default", () => !isFloating)
+            .AddIf("m-date-picker-table__current", () => isCurrent)
+            .AddIf("m-btn--active", () => isSelected)
+            .AddIf("m-btn--flat", () => !isAllowed || Disabled)
+            .AddIf("m-btn--text", () => isSelected == isCurrent)
+            .AddIf("m-btn--rounded", () => isFloating)
+            .AddIf("m-btn--disabled", () => !isAllowed || Disabled)
+            .AddIf("m-btn--outlined", () => isCurrent && !isSelected)
+            .AddTheme(IsDark, IndependentTheme);
+
+        <button class="@cssBuilder.GetClass()"
+                style="@styleBuilder.GetStyle()"
+                type="button"
+                disabled="@(Disabled || !IsDateAllowed(date, Min, Max, AllowedDates))"
+                @onclick="@OnClick"
+                data-date="@date">
+            <div class="m-btn__content">
+                @Formatter?.Invoke(date)
+            </div>
+            
+            @GenEvents(date)
+        </button>
+
+        Task OnClick() => HandleOnClickAsync(date);
+    };
+
+    private RenderFragment GenEvents(DateOnly date) => __builder =>
+    {
+        var eventColors = GetEventColors();
+
+        if (eventColors.Any())
+        {
+            <div class="@Block.Element("events")">
+                @foreach (var color in eventColors)
+                {
+                    <div class="@(new CssBuilder().AddBackgroundColor(color).GetClass())"
+                         style="@(new StyleBuilder().AddBackgroundColor(color).GetStyle())">
+                    </div>
+                }
+            </div>
+        }
+        
+        string[] GetEventColors()
+        {
+            var eventData = false;
+            var colors = Array.Empty<string>();
+
+            if (!Events.HasValue)
+            {
+                eventData = false;
+            }
+            else if (Events.Value.IsT0)
+            {
+                eventData = Events.Value.AsT0.Contains(date);
+            }
+            else if (Events.Value.IsT1)
+            {
+                eventData = Events.Value.AsT1.Invoke(date);
+            }
+
+            if (!eventData || !EventColor.HasValue)
+            {
+                return colors;
+            }
+
+            if (EventColor.Value.IsT0)
+            {
+                colors = new[] { EventColor.Value.AsT0 };
+            }
+            else if (EventColor.Value.IsT1)
+            {
+                colors = new[] { EventColor.Value.AsT1.Invoke(date) };
+            }
+            else if (EventColor.Value.IsT2)
+            {
+                colors = EventColor.Value.AsT2.Invoke(date).ToArray();
+            }
+
+            return colors.Where(e => !string.IsNullOrWhiteSpace(e)).ToArray();
+        }
+    };
+
+}

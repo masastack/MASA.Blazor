@@ -1,0 +1,50 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         style="@GetStyle()">
+        @GenBtn(-1)
+        @GenHeader()
+        @GenBtn(+1)
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenBtn(int change) => __builder =>
+    {
+        var calculateChange = CalculateChange(change);
+        var disabled = Disabled || (change < 0 && Min != null && calculateChange < Min) ||
+                       (change > 0 && Max != null && calculateChange > Max);
+        var icon = (change < 0) == !RTL ? PrevIcon : NextIcon;
+
+        <MButton Dark="@Dark"
+                 Disabled="@disabled"
+                 Light="@Light"
+                 OnClickStopPropagation
+                 OnClick="@OnClick"
+                 IconName="@icon">
+        </MButton>
+
+        void OnClick() => OnInput.InvokeAsync(calculateChange);
+    };
+
+    private RenderFragment GenHeader() => __builder =>
+    {
+        var color = !Disabled ? (Color ?? "accent") : "";
+
+        <div class="@_block.Element("value").Modifier(Disabled)">
+            <Transition Name="@Transition">
+                <KeyTransitionElement Value="@Value"
+                                      Class="@(new CssBuilder().AddTextColor(color).GetClass())"
+                                      Style="@(new StyleBuilder().AddTextColor(color).GetStyle())">
+                    <button type="button" @onclick="HandleOnClickAsync">
+                        @RenderFragments.RenderFragmentOrText(ChildContent, Formatter(Value))
+                    </button>
+                </KeyTransitionElement>
+            </Transition>
+        </div>
+    };
+
+}

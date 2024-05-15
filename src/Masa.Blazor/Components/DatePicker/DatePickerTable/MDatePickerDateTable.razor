@@ -1,0 +1,146 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@inherits MDatePickerTable<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenChildContent() => __builder =>
+    {
+        @GenTHead()
+        @GenTBody()
+    };
+
+    private RenderFragment GenTHead() => __builder =>
+    {
+        <thead>
+        <tr>
+            @if (ShowWeek)
+            {
+                <th></th>
+            }
+
+            @foreach (var day in WeekDays)
+            {
+                <th>@day</th>
+            }
+        </tr>
+        </thead>
+    };
+
+    private RenderFragment GenTBody() => __builder =>
+    {
+        <tbody>
+        @foreach (var tr in GetRows())
+        {
+            <tr>
+                @foreach (var (tdType, dictionary) in tr)
+                {
+                    if (tdType == TDType.Week)
+                    {
+                        @GenWeekNumber((int)dictionary["weekNumber"])
+                    }
+                    else if (tdType == TDType.Date)
+                    {
+                        <td>
+                            @GenButton((DateOnly)dictionary["date"], true, false)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @if (ShowAdjacentMonths)
+                            {
+                                @GenButton((DateOnly)dictionary["date"], true, true)
+                            }
+                        </td>
+                    }
+                }
+            </tr>
+        }
+        </tbody>
+    };
+
+    private RenderFragment GenWeekNumber(int weekNumber) => __builder =>
+    {
+        <td>
+            <small class="@_dateBlock.Element("week")">
+                @weekNumber
+            </small>
+        </td>
+    };
+
+    enum TDType
+    {
+        Week,
+        Date,
+        DateOfAdjacentMonths,
+    }
+
+    private List<List<(TDType, Dictionary<string, object>)>> GetRows()
+    {
+        var trList = new List<List<(TDType, Dictionary<string, object>)>>();
+        var daysInMonth = DateTime.DaysInMonth(DisplayedYear, DisplayedMonth + 1);
+        var tdList = new List<(TDType, Dictionary<string, object>)>();
+        var day = WeekDaysBeforeFirstDayOfTheMonth;
+        if (ShowWeek)
+        {
+            // tdList.Add(GenWeekNumber(GetWeekNumber(1)));
+            tdList.Add((TDType.Week, new Dictionary<string, object>() { { "weekNumber", GetWeekNumber(1) } }));
+        }
+
+        var prevMonthYear = DisplayedMonth > 0 ? DisplayedYear : DisplayedYear - 1;
+        var prevMonth = (DisplayedMonth + 11) % 12;
+        var firstDayFormPreviousMonth = DateTime.DaysInMonth(DisplayedMonth > 0 ? DisplayedYear : DisplayedYear - 1, DisplayedMonth == 0 ? 12 : DisplayedMonth);
+        var cellsInRow = ShowWeek ? 8 : 7;
+
+        while (day-- > 0)
+        {
+            var date = new DateOnly(prevMonthYear, prevMonth + 1, firstDayFormPreviousMonth - day);
+                tdList.Add((TDType.DateOfAdjacentMonths, new Dictionary<string, object>() { { "date", date } }));
+            
+        }
+
+        for (day = 1; day <= daysInMonth; day++)
+        {
+            var date = new DateOnly(DisplayedYear, DisplayedMonth + 1, day);
+            tdList.Add((TDType.Date, new Dictionary<string, object>() { { "date", date } }));
+
+            if (tdList.Count % cellsInRow == 0)
+            {
+                trList.Add(tdList.ToList());
+                tdList.Clear();
+                if (ShowWeek && (day < daysInMonth || ShowAdjacentMonths))
+                {
+                    tdList.Add((TDType.Week, new Dictionary<string, object>() { { "weekNumber", GetWeekNumber(day + 7) } }));
+                }
+            }
+        }
+
+        var nextMonthYear = DisplayedMonth == 11 ? DisplayedYear + 1 : DisplayedYear;
+        var nextMonth = (DisplayedMonth + 1) % 12;
+        var nextMonthDay = 1;
+
+        while (tdList.Count < cellsInRow)
+        {
+            var date = new DateOnly(nextMonthYear, nextMonth + 1, nextMonthDay++);
+            tdList.Add((TDType.DateOfAdjacentMonths, new Dictionary<string, object>() { { "date", date } }));
+        }
+
+        if (tdList.Count > 0)
+        {
+            trList.Add(tdList);
+        }
+
+        return trList;
+    }
+
+    private RenderFragment GenTR(RenderFragment td) => __builder =>
+    {
+        <tr>
+            @td
+        </tr>
+    };
+
+}

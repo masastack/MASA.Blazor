@@ -1,0 +1,100 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@using Masa.Blazor.Components.TimePicker
+@using static Masa.Blazor.Components.DatePicker.MDatePickerTitle
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+
+<MPicker TitleContent="@(GenPickerTitle())"
+         ActionsContent="@ChildContent"
+         Color="@(HeaderColor ?? Color)"
+         Dark="@Dark"
+         Elevation="@Elevation"
+         Flat="@Flat"
+         FullWidth="@FullWidth"
+         Landscape="@Landscape"
+         Light="@Light"
+         Width="@Width"
+         NoTitle="@NoTitle"
+         Class="@GetClass()"
+         Style="@GetStyle()"
+         Id="@Id"
+         @attributes="@Attributes">
+    <KeyTransitionElement Value="@Selecting"
+                          Class="@_block.Element("container").Build()">
+        @if (!AmPmInTitle && IsAmPm)
+        {
+            @GenClockAmPm()
+        }
+
+        @GenClock()
+    </KeyTransitionElement>
+</MPicker>
+
+@code {
+
+    private RenderFragment GenPickerTitle() => NoTitle
+        ? null
+        : __builder =>
+        {
+            <MTimePickerTitle AmPm="@IsAmPm"
+                              AmPmReadonly="@(IsAmPm && !AmPmInTitle)"
+                              Disabled="@Disabled"
+                              Hour="@InputHour"
+                              Minute="@InputMinute"
+                              Second="@InputSecond"
+                              Period="@Period"
+                              Readonly="@Readonly"
+                              UseSeconds="@UseSeconds"
+                              Selecting="@Selecting"
+                              OnSelectingUpdate="@HandleOnSelectingUpdate"
+                              OnPeriodUpdate="@HandleOnPeriodUpdate">
+            </MTimePickerTitle>
+
+            void HandleOnSelectingUpdate(SelectingTimes selecting)
+            {
+                Selecting = selecting;
+            }
+
+            async Task HandleOnPeriodUpdate(TimePeriod period)
+            {
+                await SetPeriodAsync(period);
+
+                await OnPeriodUpdate.InvokeAsync(period);
+            }
+        };
+
+    private RenderFragment GenClockAmPm() => __builder =>
+    {
+        <div class="@_block.Element("ampm").AddTextColor(Color ?? "primary")"
+             style="@(StyleBuilder.Create().AddTextColor(Color ?? "primary"))">
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnAmClickAsync), RenderFragments.RenderText(AmText), Period == TimePeriod.Am, Disabled || Readonly)
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnPmClickAsync), RenderFragments.RenderText(PmText), Period == TimePeriod.Pm, Disabled || Readonly)
+        </div>
+    };
+
+    private RenderFragment GenClock() => __builder =>
+    {
+        var selectingHour = Selecting == SelectingTimes.Hour;
+        var selectingMinute = Selecting == SelectingTimes.Minute;
+
+        var allowedValues = selectingHour ? IsAllowedHourCb : (selectingMinute ? IsAllowedMinuteCb : IsAllowedSecondCb);
+        Func<int, string> format = selectingHour ? (IsAmPm ? val => TimeHelper.Convert24To12(val).ToString() : val => $"{val}") : val => Pad(val);
+        <MTimePickerClock AllowedValues="@allowedValues"
+                          Color="@Color"
+                          Dark="@Dark"
+                          Disabled="@Disabled"
+                          Double="@(selectingHour && !IsAmPm)"
+                          Format="@format"
+                          Light="@Light"
+                          Max="@(selectingHour ? IsAmPm && Period == TimePeriod.Am ? 11 : 23 : 59)"
+                          Min="@(selectingHour && IsAmPm && Period == TimePeriod.Pm ? 12 : 0)"
+                          Readonly="@Readonly"
+                          Scrollable="@Scrollable"
+                          Step="@(selectingHour ? 1 : 5)"
+                          Value="@(selectingHour ? InputHour : selectingMinute ? InputMinute : InputSecond)"
+                          OnInput="@HandleOnInputAsync"
+                          OnChange="@HandleOnChangeAsync">
+        </MTimePickerClock>
+    };
+
+}

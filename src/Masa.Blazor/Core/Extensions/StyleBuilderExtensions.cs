@@ -79,10 +79,14 @@ public static class StyleBuilderExtensions
             .AddSize("height", height, isImportant);
     }
 
-    public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber? width, bool isImportant = false)
+    public static StyleBuilder AddWidth(this StyleBuilder styleBuilder, StringNumber? width, bool isImportant = false, Func<bool>? predicate = null)
     {
-        return styleBuilder
-            .AddSize("width", width, isImportant);
+        if (predicate?.Invoke() is null or true)
+        {
+            styleBuilder.AddSize("width", width, isImportant);
+        }
+
+        return styleBuilder;
     }
 
     public static StyleBuilder AddMinWidth(this StyleBuilder styleBuilder, StringNumber? minWidth,

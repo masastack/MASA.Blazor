@@ -1,0 +1,35 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<ul class="@GetClass()" @ref="Ref">
+    @GenYearItems()
+</ul>
+
+@code
+{
+    private RenderFragment GenYearItems() => __builder =>
+    {
+        var selectedYear = Value > 0 ? Value : DateTime.Now.Year;
+        var maxYear = Max != null ? Max.Value.Year : (selectedYear + 100);
+        var minYear = Math.Min(maxYear, Min != null ? Min.Value.Year : (selectedYear - 100));
+
+        for (var year = maxYear; year >= minYear; year--)
+        {
+            @GenYearItem(year)
+        }
+    };
+
+    private RenderFragment GenYearItem(int year) => __builder =>
+    {
+        var active = Value == year;
+        var color = active ? Color ?? "primary" : "";
+
+        <li @key="@year"
+            class="@(new CssBuilder().AddTextColor(color).AddIf("active", () => active).GetClass())"
+            style="@(StyleBuilder.Create().AddTextColor(color))"
+            @onclick="@(() => HandleOnYearItemClickAsync(year))">
+            @Formatter(new DateOnly(year, 1, 1))
+        </li>
+    };
+}

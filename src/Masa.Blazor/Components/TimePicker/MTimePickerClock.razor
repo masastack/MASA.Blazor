@@ -1,0 +1,49 @@
+﻿@namespace Masa.Blazor.Components.TimePicker
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         @onmousedown="@HandleOnMouseDownAsync"
+         @onmousedown:preventDefault
+         @onmouseup="@HandleOnMouseUpAsync"
+         @onmouseup:stopPropagation
+         @onmouseleave="@HandleOnMouseLeaveAsync"
+         @onmousemove="@HandleOnDragMoveAsync"
+         @onmousemove:preventDefault
+         @ref="Ref">
+        <div class="@_block.Element("inner")" @ref="InnerClockElement">
+            @GenHand()
+
+            @for (var value = Min; value <= Max; value = value + Step)
+            {
+                @GenItem(value)
+            }
+
+        </div>
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenHand() => __builder =>
+    {
+        var color = Value != null ? Color ?? "accent" : "";
+        var scale = $"scaleY({HandScale(DisplayedValue)})";
+        var angle = Rotate + DegreesPerUnit * (DisplayedValue - Min);
+        <div class="@_block.Element("hand").Modifier("inner", IsInner(Value)).AddBackgroundColor(color)"
+             style="@(StyleBuilder.Create().AddBackgroundColor(color).Add("transform", $"rotate({angle}deg) {scale}"))">
+        </div>
+    };
+
+    private RenderFragment GenItem(int value) => __builder =>
+    {
+        var color = value == Value ? Color ?? "accent" : "";
+        var (x, y) = GetPosition(value);
+        <span class="@_block.Element("item").Modifier("active", value == DisplayedValue).And("disabled", Disabled || !IsAllowed(value)).AddBackgroundColor(color)"
+              style="@(StyleBuilder.Create().Add("left", $"{50 + x * 50}%").Add("top", $"{50 + y * 50}%").AddBackgroundColor(color))">
+            <span>@Format?.Invoke(value)</span>
+        </span>
+    };
+
+}

@@ -37,6 +37,7 @@ public static class RenderFragments
     public static RenderFragment? RenderIfNotNull(
         RenderFragment? fragment,
         string? css = null,
+        string? style = null,
         string wrapperTag = "div")
     {
         if (fragment is null)
@@ -48,7 +49,8 @@ public static class RenderFragments
         {
             builder.OpenElement(0, wrapperTag);
             builder.AddAttribute(1, "class", css);
-            builder.AddContent(2, fragment);
+            builder.AddAttribute(2, "style", style);
+            builder.AddContent(3, fragment);
             builder.CloseElement();
         });
     }
@@ -57,6 +59,7 @@ public static class RenderFragments
         RenderFragment<TContext>? fragment,
         TContext context,
         string? css = null,
+        string? style = null,
         string wrapperTag = "div")
     {
         if (fragment is null)
@@ -68,7 +71,8 @@ public static class RenderFragments
         {
             builder.OpenElement(0, wrapperTag);
             builder.AddAttribute(1, "class", css);
-            builder.AddContent(2, fragment(context));
+            builder.AddAttribute(2, "style", style);
+            builder.AddContent(3, fragment(context));
             builder.CloseElement();
         });
     }
@@ -121,4 +125,6 @@ public static class RenderFragments
             builder.CloseElement();
         };
     }
+
+    public static RenderFragment RenderText(string? text) => builder => builder.AddContent(0, text);
 }
