@@ -706,6 +706,11 @@ namespace Masa.Blazor
                 return;
             }
 
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync(args);
+            }
+
             await InputElement.FocusAsync();
         }
 
