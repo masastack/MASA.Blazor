@@ -12,6 +12,8 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
 
     [Inject] public IJSRuntime Js { get; set; } = null!;
 
+    [Inject] private ILoggerFactory LoggerFactory { get; set; } = null!;
+    
     [CascadingParameter] protected IDefaultsProvider? DefaultsProvider { get; set; }
 
     /// <summary>
@@ -47,6 +49,8 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     private ElementReference _ref;
     private ElementReference? _prevRef;
     private bool _elementReferenceChanged;
+    
+    protected ILogger Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
 

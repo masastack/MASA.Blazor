@@ -1,0 +1,44 @@
+﻿@namespace Masa.Blazor.Components.TimePicker
+@inherits MasaComponentBase
+@using static Masa.Blazor.Components.DatePicker.MDatePickerTitle;
+
+<div class="@GetClass()">
+    @GenTime()
+
+    @if (AmPm)
+    {
+        @GenAmPm()
+    }
+</div>
+
+@code {
+
+    private RenderFragment GenTime() => __builder =>
+    {
+        <div class="@_block.Element("time")">
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnHourClickAsync), RenderFragments.RenderText(DisplayHour), Selecting == SelectingTimes.Hour, Disabled)
+            <span>:</span>
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnMinuteClickAsync), RenderFragments.RenderText(DisplayMinute), Selecting == SelectingTimes.Minute, Disabled)
+            @if (UseSeconds)
+            {
+                <span>:</span>
+                @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnSecondClickAsync), RenderFragments.RenderText(DisplaySecond), Selecting == SelectingTimes.Second, Disabled)
+            }
+        </div>
+    };
+
+    private RenderFragment GenAmPm() => __builder =>
+    {
+        <div class="@_block.Element("ampm").Modifier("readonly", AmPmReadonly)">
+            @if (!AmPmReadonly || Period == TimePeriod.Am)
+            {
+                @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnAmClickAsync), RenderFragments.RenderText(AmText), Period == TimePeriod.Am, Disabled || Readonly)
+            }
+            @if (!AmPmReadonly || Period == TimePeriod.Pm)
+            {
+                @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnPmClickAsync), RenderFragments.RenderText(PmText), Period == TimePeriod.Pm, Disabled || Readonly)
+            }
+        </div>
+    };
+
+}
