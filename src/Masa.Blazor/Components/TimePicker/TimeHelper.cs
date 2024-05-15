@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor;
+﻿namespace Masa.Blazor.Components.TimePicker;
 
 public static class TimeHelper
 {
