@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Messages
             {
                 props.Add(messages => messages.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Messages
             {
                 props.Add(messages => messages.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert

@@ -513,7 +513,7 @@ input[type=number] {
         margin: 0;
     }
 
-.m-input-number-handler-wrap {
+.m-text-field__number {
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -521,50 +521,47 @@ input[type=number] {
     justify-content: center;
 }
 
-    .m-input-number-handler-wrap .m-input__icon {
+    .m-text-field__number .m-input__icon {
         height: 16px;
     }
 
-    .m-input-number-handler-wrap .m-input__append-inner {
+    .m-text-field__number .m-input__append-inner {
         margin-top: 0 !important;
     }
 
-.m-number-input-icon button {
+.m-input__icon--increase button,.m-input__icon--decrease button {
     width: 100%;
     font-size: 16px !important;
 }
 
-    .m-number-input-icon button::before {
+    .m-input__icon--increase button::before,.m-input__icon--decrease button::before {
         width: 24px;
     }
 
-    .m-number-input-icon button::after {
+    .m-input__icon--increase button::after,.m-input__icon--decrease button::after {
         transform: none !important;
         border-radius: 0 !important;
     }
     
-    .m-number-input-icon button:hover::after {
+    .m-input__icon--increase button:hover::after,.m-input__icon--decrease button:hover::after {
         opacity: 0.08;
         background-color: currentColor;
     }
 
-.m-number-input-down-disabled button {
+.m-text-field__number--increase-disabled .m-input__icon--increase > button,
+.m-text-field__number--decrease-disabled .m-input__icon--decrease > button {
     cursor: not-allowed !important;
 }
 
-.m-number-input-up-disabled button {
-    cursor: not-allowed !important;
-}
-
-.m-text-field:hover .m-input-number-handler-wrap {
+.m-text-field:hover .m-text-field__number {
     opacity: 1;
 }
 
-.m-input--dense .m-input-number-handler-wrap .m-input__icon {
+.m-input--dense .m-text-field__number .m-input__icon {
     height: 12px;
 }
 
-.m-input--dense .m-number-input-icon button {
+.m-input--dense .m-input__icon--increase button, .m-input--dense .m-input__icon--decrease button {
     font-size: 12px !important;
 }
 

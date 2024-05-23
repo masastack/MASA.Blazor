@@ -1,0 +1,33 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<button @ref="Ref"
+        @onclick="HandleClickAsync"
+        @onclick:preventDefault
+        @onmousedown="@(() => HasMouseDown = true)"
+        @onmouseup="@(() => HasMouseDown = false)"
+        Class="@GetClass()"
+        Style="@GetStyle()"
+        id="@Id"
+        @attributes="@Attributes">
+
+    @ChildContent?.Invoke(IsActive)
+
+    @if (!HideActions)
+    {
+        <FadeTransition>
+            <ShowTransitionElement Tag="div"
+                                   Value="!IsDisabled"
+                                   Class="@_block.Element("icon").Modifier("disable-rotate", DisableIconRotate).Build()">
+                @if (ActionsContent != null)
+                {
+                    @ActionsContent
+                }
+                else
+                {
+                    <MIcon Icon="@ExpandIcon"/>
+                }
+            </ShowTransitionElement>
+        </FadeTransition>
+    }
+</button>

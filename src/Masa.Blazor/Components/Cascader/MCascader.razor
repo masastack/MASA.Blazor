@@ -1,0 +1,28 @@
+﻿@namespace Masa.Blazor
+@typeparam TItem
+@typeparam TValue
+@inherits MSelect<TItem, TValue, TValue>
+@using Masa.Blazor.Components.Cascader
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenSelectList() => __builder =>
+    {
+        <div class="@_block.Element("columns")">
+            <MCascaderColumn Dense="@Dense"
+                             Items="@Items"
+                             ItemValue="@ItemValue"
+                             SelectedItems="@_selectedCascadeItems"
+                             ItemText="@ItemText"
+                             LoadChildren="@LoadChildren"
+                             ItemChildren="@ItemChildren"
+                             TItem="@TItem"
+                             TValue="@TValue"
+                             OnSelect="@HandleOnSelect">
+            </MCascaderColumn>
+        </div>
+    };
+
+}

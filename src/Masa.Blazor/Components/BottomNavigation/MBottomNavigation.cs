@@ -1,5 +1,6 @@
 ﻿using BlazorComponent.Web;
 using Element = BlazorComponent.Web.Element;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
@@ -99,35 +100,37 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         _scroller = new Scroller(this);
     }
 
-    protected override void SetComponentClass()
-    {
-        base.SetComponentClass();
+    private Block _block = new("m-bottom-navigation");
 
-        CssProvider
-            .Merge(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-bottom-navigation")
-                    .AddIf("m-bottom-navigation--absolute", () => Absolute)
-                    .AddIf("m-bottom-navigation--grow", () =>  Grow)
-                    .AddIf("m-bottom-navigation--fixed",  () => !Absolute &&  (App || Fixed))
-                    .AddIf("m-bottom-navigation--horizontal", () =>  Horizontal)
-                    .AddIf("m-bottom-navigation--shift", () => Shift)
-                    .AddTextColor(Color)
-                    .AddBackgroundColor(BackgroundColor);
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .Add(() => IsActive ? "transform:none" : "transform:translateY(100%)")
-                    .AddHeight(Height)
-                    .AddMinHeight(MinHeight)
-                    .AddMinWidth(MinWidth)
-                    .AddMaxHeight(MaxHeight)
-                    .AddMaxWidth(MaxWidth)
-                    .AddWidth(Width)
-                    .AddTextColor(Color)
-                    .AddBackgroundColor(BackgroundColor);
-            });
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            _block.Modifier(Absolute)
+                .And(Grow)
+                .And("fixed", !Absolute && (App || Fixed))
+                .And(Horizontal)
+                .And(Shift)
+                .AddTextColor(Color)
+                .AddBackgroundColor(BackgroundColor)
+                .GenerateCssClasses()
+        );
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        return base.BuildComponentStyle().Concat(
+            StyleBuilder.Create()
+                .AddHeight(Height)
+                .AddMinHeight(MinHeight)
+                .AddMinWidth(MinWidth)
+                .AddMaxHeight(MaxHeight)
+                .AddMaxWidth(MaxWidth)
+                .AddWidth(Width)
+                .AddTextColor(Color)
+                .AddBackgroundColor(BackgroundColor)
+                .Add("transform", $"{(IsActive ? "none" : "translateY(100%)")}")
+                .GenerateCssStyles()
+        );
     }
 
     protected override async Task OnParametersSetAsync()
@@ -156,12 +159,12 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         {
             if (!string.IsNullOrWhiteSpace(ScrollTarget) && CanScroll)
             {
-                await JsInvokeAsync(
+                await Js.InvokeVoidAsync(
                     JsInteropConstants.AddHtmlElementEventListener,
                     ScrollTarget,
                     "scroll",
                     DotNetObjectReference.Create(new Invoker(async () =>
-                        await CreateEventCallback(async () => await _scroller!.OnScroll(ThresholdMet)).InvokeAsync()))
+                        await EventCallback.Factory.Create(this, async () => await _scroller!.OnScroll(ThresholdMet)).InvokeAsync()))
                 );
             }
 
@@ -219,7 +222,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         if (!string.IsNullOrWhiteSpace(ScrollTarget))
         {
-            await JsInvokeAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
+            await Js.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, ScrollTarget, "scroll");
         }
     }
 }

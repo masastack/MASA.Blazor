@@ -1,0 +1,26 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         style="@GetStyle()"
+         @onclick="@HandleOnClickAsync"
+         @onclick:stopPropagation>
+        <div class="@_selectionBlock.Element("input")">
+            <MIcon Color="@(Value ? Color : null)"
+                   Disabled="@Disabled"
+                   Dark="@Dark"
+                   Light="@Light">
+                @ComputedIcon
+            </MIcon>
+
+            @if (Ripple && !Disabled)
+            {
+                <div class="@_selectionBlock.Element("ripple").AddTextColor(Color)"
+                     style="@(StyleBuilder.Create().AddTextColor(Color))">
+                </div>
+            }
+        </div>
+    </div>
+</CascadingValue>

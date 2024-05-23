@@ -1,0 +1,104 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits Masa.Blazor.Components.Slider.MSliderBase<IList<TValue>, TValue>
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenInput() => __builder =>
+    {
+        for (var i = 0; i < 2; i++)
+        {
+            var index = i;
+            <input value="@InternalValue[index]" disabled readonly tabindex="-1" @attributes="@InputAttrs"/>
+        }
+    };
+
+    protected override RenderFragment GenTrackContainerChild() => __builder =>
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            var index = i;
+            var (@class, style) = GetRangeTrackBackgroundStyles(index);
+            <div class="@(@class)" style="@style"></div>
+        }
+    };
+
+    protected override RenderFragment GenThumbContainer() => builder =>
+    {
+        builder.AddContent(0, GenThumbContainerCore(0, ThumbElementWrapper));
+        builder.AddContent(1, GenThumbContainerCore(1, SecondThumbElementWrapper));
+    };
+
+    private (string? @class, string? style) GetRangeTrackBackgroundStyles(int index)
+    {
+        var classBuilder = new StringBuilder();
+        {
+            if (index != 1 || Disabled)
+            {
+                classBuilder.Append("m-slider__track-background ");
+            }
+
+            if (index == 1 && !Disabled)
+            {
+                classBuilder.Append("m-slider__track-fill");
+            }
+
+            classBuilder.Append(CssClassUtils.GetColor(index != 1 || IsDisabled ? ComputedTrackColor : ""));
+            classBuilder.Append(" ");
+            classBuilder.Append(CssClassUtils.GetColor(index == 1 && !IsDisabled ? ComputedTrackFillColor : ""));
+        }
+
+        var styleBuilder = new StyleBuilder()
+            .AddBackgroundColor(index != 1 || IsDisabled ? ComputedTrackColor : "")
+            .AddBackgroundColor(index == 1 && !IsDisabled ? ComputedTrackFillColor : "");
+
+        var padding = IsDisabled ? 10 : 0;
+        if (index == 0)
+        {
+            GetTrackStyle(0, InputWidths[0], 0, -padding);
+        }
+        else if (index == 1)
+        {
+            GetTrackStyle(InputWidths[0], Math.Abs(InputWidths[1] - InputWidths[0]), padding,
+                padding * -2);
+        }
+        else
+        {
+            GetTrackStyle(InputWidths[1], Math.Abs(100 - InputWidths[1]), padding, -padding);
+        }
+
+        return (classBuilder.ToString().Trim(), styleBuilder.Build());
+        
+        void GetTrackStyle(double startLength, double endLength,
+            double startPadding = 0, double endPadding = 0)
+        {
+            var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
+            var endDir = Vertical ? "height" : "width";
+
+            var start = $"calc({startLength}% + {startPadding}px)";
+            var end = $"calc({endLength}% + {endPadding}px)";
+
+            styleBuilder
+                .Add("transition", TrackTransition)
+                .Add(startDir, start)
+                .Add(endDir, end);
+        }
+    }
+
+    protected override string GetThumbContainerStyles(int index = 0)
+    {
+        var direction = Vertical ? "top" : "left";
+        var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
+        value = Vertical ? 100 - value : value;
+
+        return StyleBuilder.Create()
+            .AddTransition(TrackTransition)
+            .Add(direction, $"{value}%")
+            .AddTextColor(ComputedThumbColor)
+            .Build();
+    }
+
+}

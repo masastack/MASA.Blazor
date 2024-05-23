@@ -1,9 +1,8 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MSlideItem : MItem
 {
-    public class MSlideItem : BItem
+    public MSlideItem() : base(GroupType.SlideGroup)
     {
-        public MSlideItem() : base(GroupType.SlideGroup)
-        {
-        }
     }
 }

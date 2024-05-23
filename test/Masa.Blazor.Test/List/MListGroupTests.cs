@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listgroup => listgroup.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-list-group--disabled");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listgroup => listgroup.NoAction, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNoActionClass = classes.Contains("m-list-group--no-action");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listgroup => listgroup.SubGroup, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSubGroupClass = classes.Contains("m-list-group--sub-group");
 
             // Assert

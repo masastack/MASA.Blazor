@@ -1,0 +1,28 @@
+﻿@namespace Masa.Blazor
+@inherits BGroupItem<ItemGroupBase>
+
+@if (IsBooted || IsEager)
+{
+    <Transition Name="@ComputedTransition"
+                OnBeforeEnter="HandleOnBefore"
+                OnAfterEnter="HandleOnAfter"
+                OnBeforeLeave="HandleOnBefore"
+                OnAfterLeave="HandleOnAfter"
+                OnEnter="HandleOnEnter">
+        <ShowTransitionElement Value="@InternalIsActive"
+                               class="@GetClass()"
+                               style="@GetStyle()"
+                               id="@Id"
+                               ReferenceCaptureAction="r => Ref = r"
+                               Tag="@Tag"
+                               @attributes="@Attributes">
+            @GenChildContent()
+        </ShowTransitionElement>
+    </Transition>
+}
+
+@code {
+
+    protected virtual RenderFragment? GenChildContent() => ChildContent;
+
+}

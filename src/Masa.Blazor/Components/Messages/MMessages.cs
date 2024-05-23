@@ -1,16 +1,43 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public partial class MMessages : MasaComponentBase
 {
-    public partial class MMessages : BMessages, IThemeable
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [Parameter] public string? Color { get; set; }
+
+    [Parameter] public List<string> Value { get; set; } = new();
+
+    [Parameter] public RenderFragment<string>? ChildContent { get; set; }
+
+    [Parameter] public bool Dark { get; set; }
+
+    [Parameter] public bool Light { get; set; }
+
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+
+    public bool IsDark
     {
-        [Parameter]
-        public string? Color { get; set; }
+        get
+        {
+            if (Dark)
+            {
+                return true;
+            }
 
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+            if (Light)
+            {
+                return false;
+            }
 
-        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+            return CascadingIsDark;
+        }
+    }
+
+    private bool IndependentTheme =>
+        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -22,35 +49,17 @@
         }
 #endif
 
-        protected override void SetComponentClass()
-        {
-            var prefix = "m-messages";
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add(prefix)
-                        .AddTheme(IsDark, IndependentTheme)
-                        .AddTextColor(Color);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddTextColor(Color);
-                })
-                .Apply("wrap", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__wrapper");
-                })
-                .Apply("message", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__message");
-                });
+    private Block _block = new("m-messages");
 
-            AbstractProvider
-                .Apply(typeof(BMessagesChildren<>), typeof(BMessagesChildren<MMessages>))
-                .Apply(typeof(BMessagesMessage<>), typeof(BMessagesMessage<MMessages>));
-        }
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return _block.AddTheme(IsDark, IndependentTheme)
+            .AddTextColor(Color)
+            .GenerateCssClasses();
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        yield return CssClassUtils.GetColor(Color) ?? string.Empty;
     }
 }

@@ -1,0 +1,225 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MInput<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenDefaultSlot() => __builder =>
+    {
+        @GenFieldset()
+
+        @GenTextFieldSlot()
+
+        @GenNumberIcon()
+
+        @GenClearIcon()
+
+        @GenIconSlot()
+
+        @RenderFragments.GenProgress(Loading, Color, LoaderHeight, ProgressContent)
+    };
+
+    protected override RenderFragment GenLabel(bool preventDefaultOnClick = false) => __builder =>
+    {
+        if (ShowLabel)
+        {
+            var (left, right) = LabelPosition;
+            
+            <MLabel Absolute
+                    Color="@ValidationState"
+                    Dark="@Dark"
+                    Disabled="@IsDisabled"
+                    Focused="@(!IsSingle && (IsFocused || ValidationState != null))"
+                    For="@Id"
+                    Left="@left"
+                    Right="@right"
+                    Light="@Light"
+                    Value="@LabelValue"
+                    @ref="@LabelReference"
+                    @onclick:preventDefault="@preventDefaultOnClick">
+                @RenderFragments.RenderFragmentOrText(LabelContent, Label, wrapperTag: null)
+            </MLabel>
+        }
+    };
+
+    protected override RenderFragment GenAppendSlot() => __builder =>
+    {
+        RenderFragment? content = null;
+
+        if (AppendOuterContent != null)
+        {
+            content = AppendOuterContent;
+        }
+        else if (!string.IsNullOrWhiteSpace(AppendOuterIcon))
+        {
+            content = GenIcon(InputIconType.AppendOuter, AppendOuterIcon, OnAppendOuterClick.HasDelegate ? HandleOnAppendOuterClickAsync : null);
+        }
+
+        if (content != null)
+        {
+            @GenSlot(InputIconType.AppendOuter, content)
+        }
+    };
+
+    protected RenderFragment GenFieldset() => __builder =>
+    {
+        if (Outlined)
+        {
+            var with = (!SingleLine && (LabelValue || IsDirty)) ? LabelWidth : 0;
+            var style = IsSingle ? null : "width: " + with + "px;";
+
+            <fieldset>
+                <legend style="@style">
+                    <span class="notranslate">
+                        @((MarkupString)LegendInnerHTML)
+                    </span>
+                </legend>
+            </fieldset>
+        }
+    };
+
+    private RenderFragment GenTextFieldSlot() => __builder =>
+    {
+        <div class="@_block.Element("slot")">
+            @GenLabel()
+            @GenPrefix()
+            @GenInput()
+            @GenSuffix()
+        </div>
+    };
+
+    protected RenderFragment GenPrefix() => __builder =>
+    {
+        if (Prefix != null)
+        {
+            <div class="@_block.Element("prefix")" @ref="PrefixElement">
+                @Prefix
+            </div>
+        }
+    };
+
+    protected RenderFragment GenSuffix() => __builder =>
+    {
+        if (Suffix != null)
+        {
+            <div class="@_block.Element("suffix")">
+                @Suffix
+            </div>
+        }
+    };
+
+    protected virtual RenderFragment GenInput() => __builder =>
+    {
+        var placeholder = PersistentPlaceholder || IsFocused || !HasLabel ? Placeholder : null;
+
+        <Element Tag="@Tag"
+                 autofocus="@Autofocus"
+                 disabled="@Disabled"
+                 id="@Id"
+                 Class="@_block.AddTextColor(TextColor).Build()"
+                 Style="@(StyleBuilder.Create().AddTextColor(TextColor).Build())"
+                 placeholder="@placeholder"
+                 readonly="@Readonly"
+                 @onblur="@HandleOnBlurAsync"
+                 @onfocus="@HandleOnFocusAsync"
+                 @onkeydown="@HandleOnKeyDownAsync"
+                 @onkeyup="@HandleOnKeyUpAsync"
+                 ReferenceCaptureAction="r => InputElement = r"
+                 @attributes="@InputAttrs"/>
+    };
+
+    private RenderFragment GenNumberIcon() => __builder =>
+    {
+        @if (Type == "number" && !Props.HideControl)
+        {
+            <div class="@_block.Element("number").Modifier("focused", IsFocused).And("increase-disabled", !UpButtonEnabled).And("decrease-disabled", !DownButtonEnabled)">
+                @GenSlot(InputIconType.AppendInner, GenIcon(InputIconType.Increase, "$increase", HandleOnNumberUpClickAsync, tabindex: -1, ripple: true))
+                @GenSlot(InputIconType.AppendInner, GenIcon(InputIconType.Decrease, "$decrease", HandleOnNumberDownClickAsync, tabindex: -1, ripple: true))
+            </div>
+        }
+    };
+
+    protected RenderFragment GenClearIcon() => __builder =>
+    {
+        if (!Clearable)
+        {
+            return;
+        }
+
+        if (!IsDirty)
+        {
+            // TODO: 20240517 新加的代码，需要测试
+            // if the text field has no content then don't display the clear icon.
+            // We add an empty div because other controls depend on a ref to append inner
+
+            @GenSlot(InputIconType.AppendInner, @<div></div>)
+        }
+        else
+        {
+            @GenSlot(InputIconType.AppendInner, GenIcon(InputIconType.Clear, ClearIcon, HandleOnClearClickAsync, -1))
+        }
+    };
+
+    protected RenderFragment GenIconSlot() => __builder =>
+    {
+        RenderFragment? content = null;
+
+        if (AppendContent != null)
+        {
+            content = AppendContent;
+        }
+        else if (!string.IsNullOrWhiteSpace(AppendIcon))
+        {
+            content = GenIcon(InputIconType.AppendInner, AppendIcon, OnAppendClick.HasDelegate ? HandleOnAppendClickAsync : null);
+        }
+
+        if (content != null)
+        {
+            @GenSlot(InputIconType.AppendInner, content, _appendInnerElementReferenceWrapper)
+        }
+    };
+
+    // TODO: 20240517 新加的代码，需要测试，之前的代码是重写整个InputSlot
+    protected override RenderFragment GenPrependInnerSlot() => __builder =>
+    {
+        RenderFragment? content = null;
+
+        if (PrependInnerContent != null)
+        {
+            content = PrependInnerContent;
+        }
+        else if (!string.IsNullOrWhiteSpace(PrependInnerIcon))
+        {
+            content = GenIcon(InputIconType.PrependInner, PrependInnerIcon, OnPrependInnerClick.HasDelegate ? HandleOnPrependInnerClickAsync : null);
+        }
+
+        if (content != null)
+        {
+            @GenSlot(InputIconType.PrependInner, content, _prependInnerElementReferenceWrapper)
+        }
+    };
+
+    protected override RenderFragment GenMessages() => __builder =>
+    {
+        <div class="@_block.Element("details")">
+            @base.GenMessages()
+
+            @if (HasCounter)
+            {
+                @(CounterContent ?? DefaultCounterContent())
+            }
+        </div>
+    };
+
+    private RenderFragment DefaultCounterContent() => __builder =>
+    {
+        <MCounter Dark="@Dark"
+                  Light="@Light"
+                  Max="@Max"
+                  Value="@ComputedCounterValue"/>
+    };
+
+}

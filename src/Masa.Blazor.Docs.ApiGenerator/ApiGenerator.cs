@@ -103,6 +103,11 @@ public class ApiGenerator : IIncrementalGenerator
     {
         if (node is ClassDeclarationSyntax classDeclarationSyntax)
         {
+            if (classDeclarationSyntax.Identifier.SyntaxTree?.FilePath?.EndsWith("MInput.Validatable.cs") is true)
+            {
+                return false;
+            }
+
             var className = classDeclarationSyntax.Identifier.ValueText;
             return Regex.IsMatch(className, "^[M|P]{1}[A-Z]{1}");
         }

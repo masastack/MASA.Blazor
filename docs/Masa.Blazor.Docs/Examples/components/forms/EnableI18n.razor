@@ -1,7 +1,6 @@
 ﻿@using System.ComponentModel.DataAnnotations
-@using FluentValidation;
 
-<MForm Model="_model" EnableValidation EnableI18n OnValidSubmit="HandleOnValidSubmit"
+<MForm Model="_model" EnableI18n OnValidSubmit="HandleOnValidSubmit"
        OnInvalidSubmit="HandleOnInvalidSubmit">
     <MTextField @bind-Value="_model.Name"
                 Counter="10"

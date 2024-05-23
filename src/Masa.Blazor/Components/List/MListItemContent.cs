@@ -1,15 +1,9 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MListItemContent : Container
 {
-    public partial class MListItemContent : BListItemContent
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-list-item__content");
-                });
-        }
+        yield return "m-list-item__content";
     }
 }

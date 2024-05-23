@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-list--dense");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-list--disabled");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Elevation, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Expand, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasExpandClass = classes.Contains("m-list");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-list--flat");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Nav, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNavClass = classes.Contains("m-list--nav");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-sheet--outlined");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-list--rounded");
 
             // Assert
@@ -254,7 +254,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-sheet--shaped");
 
             // Assert
@@ -269,7 +269,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.Subheader, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSubheaderClass = classes.Contains("m-list--subheader");
 
             // Assert
@@ -284,7 +284,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.ThreeLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasThreeLineClass = classes.Contains("m-list--three-line");
 
             // Assert
@@ -299,7 +299,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(list => list.TwoLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTwoLineClass = classes.Contains("m-list--two-line");
 
             // Assert

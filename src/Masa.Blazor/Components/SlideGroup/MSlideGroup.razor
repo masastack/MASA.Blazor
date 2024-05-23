@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor
+@inherits MItemGroup
+
+<CascadingValue Value="this" IsFixed>
+    <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+        @GenAffix("prev", HasPrev, PrevContent, PrevIcon)
+        <div class="@_block.Element("wrapper")" @ref="WrapperRef">
+            <div class="@GetContentClass()" @ref="ContentRef">
+                @ChildContent
+            </div>
+        </div>
+        @GenAffix("next", HasNext, NextContent, NextIcon)
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenAffix(string affix, bool hasAffix, RenderFragment? content, string? icon) => __builder =>
+    {
+        var disabled = !hasAffix;
+        <div class="@_block.Element(affix).Modifier(disabled)"
+             @onclick="@(() => HandleOnAffixClick(affix))">
+            @if (ShowArrows != null && hasAffix)
+            {
+                if (content != null)
+                {
+                    @content
+                }
+                else
+                {
+                    @*TODO: fade transition*@
+                    <MIcon Disabled="@disabled" Icon="@icon"/>
+                }
+            }
+        </div>
+    };
+
+}

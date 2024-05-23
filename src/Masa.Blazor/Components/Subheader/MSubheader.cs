@@ -1,12 +1,13 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MSubheader : ThemeContainer
 {
-    public partial class MSubheader : BSubheader, IThemeable
-    {
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Parameter] public bool Inset { get; set; }
+    [Parameter] public bool Inset { get; set; }
 
-        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+    private bool IndependentTheme =>
+        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
         protected override void OnParametersSet()
@@ -20,16 +21,10 @@
         }
 #endif
 
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-subheader")
-                        .AddIf("m-subheader--inset", () => Inset)
-                        .AddTheme(IsDark, IndependentTheme);
-                });
-        }
+    private Block _block = new("m-subheader");
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return _block.Modifier(Inset).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
     }
 }

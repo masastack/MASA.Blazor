@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.AutoGrow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutoGrowClass = classes.Contains("m-textarea--auto-grow");
             // Assert
             Assert.IsTrue(hasAutoGrowClass);
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Autofocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutofocusClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasAutofocusClass);
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Clearable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasClearableClass);
@@ -57,7 +57,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Counter, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCounterClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasCounterClass);
@@ -71,7 +71,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -85,7 +85,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -99,7 +99,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasDisabledClass);
@@ -113,7 +113,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasErrorClass);
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-textarea");
 
             // Assert
@@ -142,7 +142,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Filled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilledClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasFilledClass);
@@ -156,7 +156,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasFlatClass);
@@ -170,7 +170,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.FullWidth, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasFullWidthClass);
@@ -184,7 +184,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Height, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-textarea");
 
             // Assert
@@ -199,7 +199,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasHideDetailsClass);
@@ -213,7 +213,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -227,7 +227,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.LoaderHeight, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-textarea");
 
             // Assert
@@ -242,7 +242,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasLoadingClass);
@@ -256,7 +256,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.NoResize, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNoResizeClass = classes.Contains("m-textarea--no-resize");
             // Assert
             Assert.IsTrue(hasNoResizeClass);
@@ -270,7 +270,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -284,7 +284,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasPersistentHintClass);
@@ -298,7 +298,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.PersistentPlaceholder, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentPlaceholderClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasPersistentPlaceholderClass);
@@ -312,7 +312,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasReadonlyClass);
@@ -326,7 +326,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasReverseClass);
@@ -340,7 +340,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -354,7 +354,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.RowHeight, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRowHeightClass = classes.Contains("m-textarea");
 
             // Assert
@@ -369,7 +369,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Rows, 5);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRowsClass = classes.Contains("m-textarea");
 
             // Assert
@@ -384,7 +384,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -398,7 +398,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.SingleLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasSingleLineClass);
@@ -412,7 +412,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Solo, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasSoloClass);
@@ -426,7 +426,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.SoloInverted, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloInvertedClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasSoloInvertedClass);
@@ -440,7 +440,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasSuccessClass);
@@ -454,7 +454,7 @@ namespace Masa.Blazor.Test.Textarea
             {
                 props.Add(textarea => textarea.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-textarea");
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);

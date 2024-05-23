@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Routing;
-using Router = BlazorComponent.Router;
 
 namespace Masa.Blazor;
 

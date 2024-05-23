@@ -1,0 +1,36 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <IfTransitionElement
+        Tag="@Tag"
+        Value="@If"
+        Class="@GetClass()"
+        Style="@GetStyle()"
+        ReferenceCaptureAction="_ => Ref = _"
+        type="@(OnClick.HasDelegate ? "button" : null)"
+        __internal_stopPropagation_onmouseup="@OnMouseupStopPropagation"
+        __internal_preventDefault_onmouseup="@OnMouseupPreventDefault"
+        @attributes="@Attributes">
+        @if (ComputedIcon is { IsSvg: true })
+        {
+            var size = GetSize();
+
+            <svg class="@_block.Element("svg")"
+                 style="@(StyleBuilder.Create().Add("font-size", size).Add("height", size).Add("width", size).ToString())"
+                 xmlns="http://www.w3.org/2000/svg"
+                 @attributes="@SvgAttrs">
+                @foreach (var path in ComputedIcon.GetSvgPaths())
+                {
+                    <path d="@path.D" @attributes="@path.Attributes">
+                    </path>
+                }
+            </svg>
+        }
+        else
+        {
+            @ComputedIcon?.AsT0
+        }
+    </IfTransitionElement>
+</CascadingValue>

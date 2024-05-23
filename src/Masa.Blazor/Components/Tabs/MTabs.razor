@@ -1,0 +1,73 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <BCascadingValue Value="this" IsFixed>
+        <div class="@GetClass()"
+             style="@GetStyle()"
+             id="@Id"
+             @attributes="@Attributes"
+             @ref="Ref">
+            <MTabsBar Mandatory="@(!Optional)"
+                      NextIcon="@NextIcon"
+                      PrevIcon="@PrevIcon"
+                      ShowArrows="@ShowArrows"
+                      Value="@Value"
+                      ValueChanged="@ValueChanged"
+                      Color="@Color"
+                      ActiveClass="@ActiveClass"
+                      CenterActive="@CenterActive"
+                      BackgroundColor="@BackgroundColor"
+                      Dark="@Dark"
+                      Light="@Light"
+                      Style="@(StyleBuilder.Create().AddHeight(Height).Build())"
+                      @ref="TabsBarRef">
+                @if (!HideSlider)
+                {
+                    @GenSlider()
+                }
+
+                @ChildContent
+            </MTabsBar>
+
+            @if (TabItems.Any())
+            {
+                <MWindow Value="Value">
+                    @foreach (var tabItem in TabItems)
+                    {
+                        <MWindowItem Value="@tabItem.Value"
+                                     ActiveClass="@tabItem.ActiveClass"
+                                     Disabled="@tabItem.Disabled"
+                                     Class="@tabItem.Class"
+                                     Style="@tabItem.Style">
+                            @tabItem.ChildContent
+                        </MWindowItem>
+                    }
+                </MWindow>
+            }
+        </div>
+    </BCascadingValue>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenSlider() => __builder =>
+    {
+        var style = StyleBuilder.Create()
+            .AddWidth(Slider.width)
+            .AddHeight(Slider.height)
+            .AddIf("left", Slider.left.ToUnit(), !IsReversed)
+            .AddIf("right", Slider.right.ToUnit(), IsReversed)
+            .AddIf("top", Slider.top.ToUnit(), Vertical)
+            .AddIf("transition", "none", Slider.left == null);
+
+        <div class="m-tabs-slider-wrapper"
+             style="@style">
+            <div class="@_block.Extend("slider").AddBackgroundColor(SliderColor)"
+                 style="@(StyleBuilder.Create().AddBackgroundColor(SliderColor))">
+            </div>
+        </div>
+    };
+
+}

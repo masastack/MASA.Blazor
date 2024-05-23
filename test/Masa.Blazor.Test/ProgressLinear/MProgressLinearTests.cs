@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-progress-linear--absolute");
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Active, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasActiveClass = classes.Contains("m-progress-linear");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.BackgroundOpacity, 0.3);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBackgroundOpacityClass = classes.Contains("m-progress-linear");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-progress-linear");
             // Assert
             Assert.IsTrue(hasBottomClass);
@@ -72,7 +72,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.BufferValue, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBufferValueClass = classes.Contains("m-progress-linear");
 
             // Assert
@@ -87,7 +87,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -102,7 +102,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Fixed, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-progress-linear--fixed");
             // Assert
             Assert.IsTrue(hasFixedClass);
@@ -131,7 +131,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Indeterminate, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIndeterminateClass = classes.Contains("m-progress-linear");
             // Assert
             Assert.IsTrue(hasIndeterminateClass);
@@ -145,7 +145,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -160,7 +160,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Query, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasQueryClass = classes.Contains("m-progress-linear--query");
             // Assert
             Assert.IsTrue(hasQueryClass);
@@ -174,7 +174,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-progress-linear");
 
             // Assert
@@ -189,7 +189,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-progress-linear--rounded");
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -203,7 +203,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Stream, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStreamClass = classes.Contains("m-progress-linear");
 
             // Assert
@@ -218,7 +218,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Striped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStripedClass = classes.Contains("m-progress-linear--striped");
             // Assert
             Assert.IsTrue(hasStripedClass);
@@ -232,7 +232,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Top, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTopClass = classes.Contains("m-progress-linear");
             // Assert
             Assert.IsTrue(hasTopClass);
@@ -246,7 +246,7 @@ namespace Masa.Blazor.Test.ProgressLinear
             {
                 props.Add(progresslinear => progresslinear.Value, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-progress-linear");
 
             // Assert

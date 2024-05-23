@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radio => radio.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radio => radio.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(counter => counter.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIsDisabledClass = classes.Contains("m-radio--is-disabled");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(counter => counter.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIsDisabledClass = classes.Contains("m-radio");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(counter => counter.Ripple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIsDisabledClass = classes.Contains("m-radio");
 
             // Assert

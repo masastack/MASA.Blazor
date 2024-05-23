@@ -1,32 +1,28 @@
-﻿namespace Masa.Blazor
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor;
+
+public class MTabsBar : MSlideGroup
 {
-    public partial class MTabsBar : MSlideGroup, IThemeable
+    [CascadingParameter] public MTabs? Tabs { get; set; }
+
+    [Parameter] public string? BackgroundColor { get; set; }
+
+    [Parameter] public string? Color { get; set; }
+
+    protected string ComputedColor
     {
-        [Inject]
-        private NavigationManager NavigationManager { get; set; } = null!;
-
-        [CascadingParameter]
-        public BTabs? Tabs { get; set; }
-        
-        [Parameter]
-        public string? BackgroundColor { get; set; }
-
-        [Parameter]
-        public string? Color { get; set; }
-
-        protected string ComputedColor
+        get
         {
-            get
-            {
-                if (Color != null) return Color;
-                return IsDark ? "white" : "primary";
-            }
+            if (Color != null) return Color;
+            return IsDark ? "white" : "primary";
         }
+    }
 
-        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+    private bool IndependentTheme =>
+        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -38,33 +34,37 @@
         }
 #endif
 
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
+    private Block _block = new("m-tabs-bar");
 
-            const string prefix = "m-tabs-bar";
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            _block.Modifier(IsMobile)
+                .AddTextColor(ComputedColor)
+                .AddBackgroundColor(BackgroundColor)
+                .GenerateCssClasses()
+        );
+    }
 
-            CssProvider
-                .Merge(css =>
-                {
-                    css.Add(prefix)
-                       .AddIf($"{prefix}--is-mobile", () => IsMobile)
-                       .AddTheme(IsDark, IndependentTheme)
-                       .AddTextColor(ComputedColor)
-                       .AddBackgroundColor(BackgroundColor);
-                }, style =>
-                {
-                    style.AddTextColor(ComputedColor);
-                    style.AddBackgroundColor(BackgroundColor);
-                })
-                .Merge("content", css => { css.Add($"{prefix}__content"); });
-        }
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        return base.BuildComponentStyle().Concat(
+            StyleBuilder.Create()
+                .AddTextColor(ComputedColor)
+                .AddBackgroundColor(BackgroundColor)
+                .GenerateCssStyles()
+        );
+    }
 
-        public override void Unregister(IGroupable item)
-        {
-            base.Unregister(item);
+    protected override IEnumerable<string> BuildContentClass()
+    {
+        return base.BuildContentClass().Concat(_block.Element("content").GenerateCssClasses());
+    }
 
-            Tabs?.CallSliderAfterRender();
-        }
+    public override void Unregister(IGroupable item)
+    {
+        base.Unregister(item);
+
+        Tabs?.CallSliderAfterRender();
     }
 }

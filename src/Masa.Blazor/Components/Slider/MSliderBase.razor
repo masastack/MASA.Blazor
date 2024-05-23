@@ -1,0 +1,232 @@
+﻿@namespace Masa.Blazor.Components.Slider
+@typeparam TValue
+@typeparam TNumeric
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MInput<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenDefaultSlot() => __builder =>
+    {
+        @GenNormalLabel()
+        @GenSlider()
+        @GenInverseLabel()
+        @RenderFragments.GenProgress(Loading, Color, LoaderHeight, ProgressContent)
+    };
+
+    private RenderFragment GenInverseLabel() => __builder =>
+    {
+        if (InverseLabel)
+        {
+            @GenLabel()
+        }
+    };
+
+    private RenderFragment GenNormalLabel() => __builder =>
+    {
+        if (!InverseLabel)
+        {
+            @GenLabel()
+        }
+    };
+
+    private RenderFragment GenSlider() => __builder =>
+    {
+        var horizontal = !Vertical;
+        var focus = IsFocused;
+        var active = IsActive;
+        var disabled = IsDisabled;
+        var @readonly = IsReadonly;
+
+        <div
+            class="@Block.Modifier(horizontal).And(Vertical).And(focus).And(active).And(disabled).And(@readonly).AddTheme(IsDark, IndependentTheme)"
+            @onclick="HandleOnSliderClickAsync"
+            @ref="@SliderElement">
+            @GenInput()
+            @GenTrackContainer()
+            @GenSteps()
+            @GenThumbContainer()
+        </div>
+    };
+
+    protected virtual RenderFragment GenInput() => __builder =>
+    {
+        <input value="@InternalValue" disabled readonly tabindex="-1" @attributes="@InputAttrs"/>
+    };
+
+    private RenderFragment GenTrackContainer() => __builder =>
+    {
+        <div class="@Block.Element("track-container")" @ref="TrackElement">
+            @GenTrackContainerChild()
+        </div>
+    };
+
+    protected virtual RenderFragment GenTrackContainerChild() => __builder =>
+    {
+        <div class="@Block.Element("track-background").AddBackgroundColor(ComputedTrackColor)"
+             style="@GetTrackBackgroundStyle()">
+        </div>
+        <div class="@Block.Element("track-fill").AddBackgroundColor(ComputedTrackFillColor)"
+             style="@GetTrackFillStyles()">
+        </div>
+    };
+
+    private RenderFragment GenSteps() => __builder =>
+    {
+        if ((double)(dynamic)Step > 0 && ShowTicks)
+        {
+            var range = Enumerable.Range(0, Convert.ToInt32(NumTicks) + 1);
+            if (Vertical)
+            {
+                range = range.Reverse();
+            }
+
+            <div class="@Block.Element("ticks-container").Modifier("always-show", Ticks == "always" || TickLabels.Count > 0)">
+                @for (var i = 0; i < range.Count(); i++)
+                {
+                    var index = i;
+                    var (@class, style) = GetTickCss(index);
+
+                    <span @key="index"
+                          class="@(@class)"
+                          style="@style">
+                        @if (TickLabels.Count > index)
+                        {
+                            <div class="@Block.Element("tick-label")">
+                                @TickLabels[index]
+                            </div>
+                        }
+                    </span>
+                }
+            </div>
+        }
+    };
+
+    protected virtual RenderFragment GenThumbContainer() => GenThumbContainerCore(0, ThumbElementWrapper);
+
+    protected RenderFragment GenThumbContainerCore(int index, ElementReferenceWrapper elRefWrapper) => __builder =>
+    {
+        var active = IsThumbActive(index);
+        var focus = IsThumbFocus(index);
+        var showLabel = ShowThumbLabel;
+
+        <div class="@Block.Element("thumb-container").Modifier(active).And(focus).And(showLabel).AddTextColor(ComputedThumbColor)"
+             style="@GetThumbContainerStyles(index)"
+             @ref="@elRefWrapper.Value"
+             @attributes="@ThumbAttrs"
+             @onfocus="@(e => HandleOnFocusAsync(index, e))"
+             @onblur="@(e => HandleOnBlurAsync(index, e))"
+             @onkeydown="@HandleOnKeyDownAsync"
+             @onkeydown:preventDefault>
+
+            @GenThumb()
+
+            @if (ShowThumbLabel)
+            {
+                @GenThumbLabel(index)
+            }
+        </div>
+    };
+
+    private RenderFragment GenThumb() => __builder =>
+    {
+        <div class="@Block.Element("thumb").AddBackgroundColor(ComputedThumbColor)"
+             style="@(StyleBuilder.Create().AddBackgroundColor(ComputedThumbColor))">
+        </div>
+    };
+
+    private RenderFragment GenThumbLabel(int index) => __builder =>
+    {
+        <ScaleTransition Origin="bottom center">
+            <ShowTransitionElement Value="ShowThumbLabelContainer"
+                                   Class="@Block.Element("thumb-label-container").Build()">
+                <div class="@Block.Element("thumb-label").AddBackgroundColor(ComputedThumbColor)"
+                     style="@GetThumbLabelStyles()">
+                    <div>@ComputedThumbLabelContent.Invoke(index)</div>
+                </div>
+            </ShowTransitionElement>
+        </ScaleTransition>
+    };
+
+    private string GetTrackBackgroundStyle()
+    {
+        var startDir = Vertical ? MasaBlazor.RTL ? "bottom" : "top" : MasaBlazor.RTL ? "left" : "right";
+        var endDir = Vertical ? "height" : "width";
+
+        var start = "0px";
+        var end = IsDisabled ? $"calc({100 - InputWidth}% - 10px)" : $"calc({100 - InputWidth}%)";
+
+        return StyleBuilder.Create().AddBackgroundColor(ComputedTrackColor)
+            .AddTransition(TrackTransition)
+            .Add(startDir, start)
+            .Add(endDir, end)
+            .Build();
+    }
+
+    private string GetTrackFillStyles()
+    {
+        var startDir = Vertical ? "bottom" : "left";
+        var endDir = Vertical ? "top" : "right";
+        var valueDir = Vertical ? "height" : "width";
+
+        var start = MasaBlazor.RTL ? "auto" : "0";
+        var end = MasaBlazor.RTL ? "0" : "auto";
+        var value = IsDisabled ? $"calc({InputWidth}% - 10px)" : $"{InputWidth}%";
+
+        return StyleBuilder.Create()
+            .AddBackgroundColor(ComputedTrackFillColor)
+            .AddTransition(TrackTransition)
+            .Add(startDir, start)
+            .Add(endDir, end)
+            .Add(valueDir, value)
+            .Build();
+    }
+
+    private (string @class, string style) GetTickCss(int index)
+    {
+        var direction = Vertical ? "bottom" : (MasaBlazor.RTL ? "right" : "left");
+        var offsetDirection = Vertical ? (MasaBlazor.RTL ? "left" : "right") : "top";
+        var width = index * (100 / NumTicks);
+        var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
+
+        var @class = Block.Element("tick").Modifier(filled).Build();
+        var style = StyleBuilder.Create()
+            .AddWidth(TickSize)
+            .AddHeight(TickSize)
+            .Add(direction, $"calc({width}% - {TickSize / 2}px)")
+            .Add(offsetDirection, $"calc(50% - {TickSize / 2}px)")
+            .Build();
+
+        return (@class, style);
+    }
+
+    protected virtual string GetThumbContainerStyles(int index)
+    {
+        var direction = Vertical ? "top" : "left";
+        var value = MasaBlazor.RTL ? 100 - InputWidth : InputWidth;
+        value = Vertical ? 100 - value : value;
+
+        return StyleBuilder.Create()
+            .AddTransition(TrackTransition)
+            .Add(direction, $"{value}%")
+            .AddTextColor(ComputedThumbColor)
+            .Build();
+    }
+
+    private string GetThumbLabelStyles()
+    {
+        var transform = Vertical
+            ? $"translateY(20%) translateY({(ThumbSize.ToInt32() / 3) - 1}px) translateX(55%) rotate(135deg)"
+            : "translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)";
+
+        return new StyleBuilder()
+            .AddHeight(ThumbSize)
+            .AddWidth(ThumbSize)
+            .Add(transform, $"{transform}")
+            .AddBackgroundColor(ComputedThumbColor)
+            .Build();
+    }
+
+}

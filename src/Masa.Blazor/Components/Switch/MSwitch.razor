@@ -1,0 +1,56 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MSelectable<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment? GenSelection() => __builder =>
+    {
+        var color = IsLoading ? null : ValidationState;
+        var styleBuilder = StyleBuilder.Create().AddTextColor(color);
+        var thumbStyle = styleBuilder.Build();
+        var trackStyle = styleBuilder.AddBackgroundColor(ComputedTrackColor).Build();
+
+        @GenInput("checkbox")
+        @GenRipple()
+
+        <div class="@_block.Element("track").AddTextColor(color).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
+             style="@trackStyle">
+        </div>
+
+        <div class="@_block.Element("thumb").AddTextColor(color).AddTheme(IsDark, IndependentTheme)"
+             style="@thumbStyle">
+            @*TODO: FabTransition*@
+            @RenderFragments.GenProgressCircular(Loading, Color, 16, 2)
+        </div>
+
+        @GenText("left", LeftText, LeftIcon)
+        @GenText("right", RightText, RightIcon)
+    };
+
+
+    private RenderFragment GenText(string name, string? text, string? icon) => __builder =>
+    {
+        RenderFragment? childContent = null;
+
+        if (!string.IsNullOrEmpty(icon))
+        {
+            childContent = @<MIcon Small>@icon</MIcon>;
+        }
+        else if (!string.IsNullOrEmpty(text))
+        {
+            childContent = b => b.AddContent(0, text);
+        }
+
+        if (childContent is not null)
+        {
+            <span class="@_block.Element(name)">
+                @childContent
+            </span>
+        }
+    };
+
+}

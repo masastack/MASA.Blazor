@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-simple-checkbox");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-simple-checkbox");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-simple-checkbox--disabled");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Indeterminate, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIndeterminateClass = classes.Contains("m-simple-checkbox");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Ripple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRippleClass = classes.Contains("m-simple-checkbox");
 
             // Assert
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(simplecheckbox => simplecheckbox.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-simple-checkbox");
 
             // Assert

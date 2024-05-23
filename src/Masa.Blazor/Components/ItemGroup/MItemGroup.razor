@@ -1,0 +1,14 @@
+﻿@namespace Masa.Blazor
+@inherits Masa.Blazor.Components.ItemGroup.ItemGroupBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="this" IsFixed>
+        <div class="@GetClass()"
+             style="@GetStyle()"
+             id="@Id"
+             @ref="Ref"
+             @attributes="@Attributes">
+            @ChildContent
+        </div>
+    </CascadingValue>
+</CascadingValue>

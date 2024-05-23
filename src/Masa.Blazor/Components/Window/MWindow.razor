@@ -1,0 +1,55 @@
+﻿@namespace Masa.Blazor
+@inherits MItemGroup
+
+<CascadingValue Value="this" IsFixed>
+    <CascadingValue Value="Value?.ToString()" Name="WindowValue">
+        <CascadingValue Value="IsDark" Name="IsDark">
+            <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+                <div class="@GetContainerClass()" style="@GetContainerStyle()">
+                    @ChildContent
+
+                    @if (ArrowsVisible)
+                    {
+                        var prevIcon = RTL ? NextIcon : PrevIcon;
+                        var nextIcon = RTL ? PrevIcon : NextIcon;
+
+                        if (HasPrev)
+                        {
+                            <div class="@_block.Element("prev")">
+                                @if (PrevContent != null)
+                                {
+                                    @PrevContent(Prev)
+                                }
+                                else
+                                {
+                                    <MButton IconName="@prevIcon" OnClick="@Prev"/>
+                                }
+                            </div>
+                        }
+
+                        if (HasNext)
+                        {
+                            <div class="@_block.Element("next")">
+                                @if (NextContent != null)
+                                {
+                                    @NextContent(Next)
+                                }
+                                else
+                                {
+                                    <MButton IconName="@nextIcon" OnClick="@Next"/>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                @GenAppendContent()
+            </div>
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+
+    protected virtual RenderFragment? GenAppendContent() => default;
+
+}

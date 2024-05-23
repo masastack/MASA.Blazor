@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.Continuous, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasContinuousClass = classes.Contains("m-window");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-window");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-window");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-window");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.ShowArrows, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowArrowsClass = classes.Contains("m-window");
 
             // Assert
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.ShowArrowsOnHover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowArrowsOnHoverClass = classes.Contains("m-window--show-arrows-on-hover");
 
             // Assert
@@ -103,7 +103,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(window => window.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-window");
 
             // Assert

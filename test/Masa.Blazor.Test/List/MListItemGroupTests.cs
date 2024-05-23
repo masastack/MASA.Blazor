@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemgroup => listitemgroup.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-list-item-group");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemgroup => listitemgroup.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-list-item-group");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemgroup => listitemgroup.Mandatory, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-list-item");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemgroup => listitemgroup.Max, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxClass = classes.Contains("m-list-item-group");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.List
             {
                 props.Add(listitemgroup => listitemgroup.Multiple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-list-item");
 
             // Assert

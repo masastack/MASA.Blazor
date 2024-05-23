@@ -1,0 +1,107 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TItem
+@typeparam TItemValue
+@typeparam TValue
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<MList Class="m-select-list"
+       Dense="Dense"
+       role="listbox"
+       tabindex="-1">
+    @{
+        var computedItems = HideSelected ? Items.Where(u => !HasItem(u)).ToList() : Items;
+
+        @PrependItemContent
+        if (computedItems.Count > 0)
+        {
+            <Virtualize Items="@computedItems"
+                        ItemContent="@VirtualizeItemContent">
+            </Virtualize>
+        }
+        else
+        {
+            @(NoDataContent ?? DefaultNoDataContent())
+        }
+
+        @AppendItemContent
+    }
+</MList>
+
+@code {
+
+    private RenderFragment DefaultNoDataContent() => __builder =>
+    {
+        <MListItem @onmousedown:preventDefault
+                   role="undefined"
+                   Title="@NoDataText">
+        </MListItem>
+    };
+
+    private RenderFragment VirtualizeItemContent(TItem item) => __builder =>
+    {
+        var itemHeader = ItemHeader?.Invoke(item);
+        if (itemHeader != null)
+        {
+            <MSubheader>@itemHeader</MSubheader>
+            return;
+        }
+
+        var itemDivider = ItemDivider?.Invoke(item);
+        if (itemDivider is true)
+        {
+            <MDivider/>
+            return;
+        }
+
+        var computedItems = HideSelected ? Items.Where(u => !SelectedItems.Contains(u)).ToList() : Items;
+        var isActive = HasItem(item);
+        var isDisabled = GetDisabled(item);
+
+        <MListItem @onmousedown:preventDefault
+                   @key="@item"
+                   Disabled="@isDisabled"
+                   ActiveClass="@TileActiveClass"
+                   Ripple
+                   IsActive="@isActive"
+                   Highlighted="@(computedItems.IndexOf(item) == SelectedIndex)"
+                   OnClick="@OnClick"
+                   role="option"
+                   aria-selected="@isActive.ToString()">
+            @if (ItemContent == null)
+            {
+                if (Action && !HideSelected && Items.Count > 0)
+                {
+                    <MListItemAction>
+                        <MSimpleCheckbox Value="@isActive"
+                                         Color="@Color"
+                                         Ripple="@false"
+                                         ValueChanged="@OnClick">
+                        </MSimpleCheckbox>
+                    </MListItemAction>
+                }
+
+                <MListItemContent>
+                    <MListItemTitle>
+                        @((MarkupString)GetFilteredText(item))
+                    </MListItemTitle>
+                </MListItemContent>
+            }
+            else
+            {
+                @ItemContent(new SelectListItemProps<TItem>(item, OnClick))
+            }
+        </MListItem>
+
+        async Task OnClick()
+        {
+            if (isDisabled)
+            {
+                return;
+            }
+
+            await OnSelect.InvokeAsync(item);
+        }
+    };
+    
+}

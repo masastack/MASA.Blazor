@@ -1,0 +1,23 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
+         @ref="@Ref"
+         @attributes="@Attributes">
+        @*TODO: refactor this if transition-group is implemented *@
+        <Transition Name="slide-y-transition">
+            <IfTransitionElement Class="@_block.Element("wrap").Name"
+                                 Value="@(Value.Count > 0)">
+                <BShouldRender Value="@(Value.Count > 0)">
+                    @foreach (var message in Value)
+                    {
+                        @RenderFragments.RenderFragmentOrText(ChildContent, message, message, _block.Element("message").Build())
+                    }
+                </BShouldRender>
+            </IfTransitionElement>
+        </Transition>
+    </div>
+</CascadingValue>

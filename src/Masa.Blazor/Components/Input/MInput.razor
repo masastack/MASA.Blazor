@@ -1,0 +1,189 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@attribute [CascadingTypeParameter(nameof(TValue))]
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@typeparam TValue
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="IsDisabled" Name="Input_IsDisabled">
+        <div class="@GetClass()"
+             style="@GetStyle()"
+             @ref="Ref"
+             id="@Id"
+             @attributes="@Attributes">
+            @GenContent()
+        </div>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenContent() => __builder =>
+    {
+        @GenPrependSlot()
+        @GenControl()
+        @GenAppendSlot()
+    };
+
+    private RenderFragment GenPrependSlot() => __builder =>
+    {
+        RenderFragment? content = null;
+
+        if (PrependContent != null)
+        {
+            content = PrependContent;
+        }
+        else if (!string.IsNullOrWhiteSpace(PrependIcon))
+        {
+            content = GenIcon(InputIconType.PrependOuter, PrependIcon, OnPrependClick.HasDelegate ? HandleOnPrependClickAsync : null);
+        }
+
+        if (content != null)
+        {
+            @GenSlot(InputIconType.PrependOuter, content)
+        }
+    };
+
+    private RenderFragment GenControl() => __builder =>
+    {
+        <div class="@_block.Element("control")"
+             style="@GetControlStyle()">
+            @GenInputSlot()
+
+            @if (ShowDetails)
+            {
+                @GenMessages()
+            }
+        </div>
+    };
+
+    protected virtual RenderFragment GenAppendSlot() => __builder =>
+    {
+        RenderFragment? content = null;
+
+        if (AppendContent != null)
+        {
+            content = AppendContent;
+        }
+        else if (!string.IsNullOrWhiteSpace(AppendIcon))
+        {
+            content = GenIcon(InputIconType.AppendOuter, AppendIcon, OnAppendClick.HasDelegate ? HandleOnAppendClickAsync : null);
+        }
+
+        if (content != null)
+        {
+            @GenSlot(InputIconType.AppendOuter, content)
+        }
+    };
+
+    protected virtual RenderFragment GenIcon(InputIconType type, string icon, Func<MouseEventArgs, Task>? click, int? tabindex = null, bool ripple = false) => __builder =>
+    {
+        var typeStr = type switch
+        {
+            InputIconType.AppendInner => "append-inner",
+            InputIconType.AppendOuter => "append",
+            InputIconType.PrependOuter => "prepend",
+            InputIconType.PrependInner => "prepend-inner",
+            InputIconType.Clear => "clear",
+            InputIconType.Increase => "increase",
+            InputIconType.Decrease => "decrease",
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+
+        var onClick = click == null ? default : EventCallback.Factory.Create(this, click);
+
+        <div class="@_block.Element("icon").Modifier(typeStr)">
+            <MIcon Color="@ValidationState"
+                   Dark="@Dark"
+                   Disabled="@IsDisabled"
+                   Light="@Light"
+                   Icon="@icon"
+                   OnClick="@onClick"
+                   OnClickPreventDefault="@onClick.HasDelegate"
+                   OnClickStopPropagation="@onClick.HasDelegate"
+                   OnMouseupPreventDefault="@onClick.HasDelegate"
+                   OnMouseupStopPropagation="@onClick.HasDelegate"
+                   tabindex="@tabindex"
+                   ripple="@ripple"/>
+        </div>
+    };
+
+    protected RenderFragment? GenSlot(InputIconType type, RenderFragment? content, ElementReferenceWrapper? elRefWrapper = null)
+        => content == null
+            ? null
+            : __builder =>
+            {
+                var element = type.ToString().ToKebab();
+
+                if (elRefWrapper is null)
+                {
+                    <div class="@_block.Element(element)">
+                        @content
+                    </div>
+                }
+                else
+                {
+                    <div class="@_block.Element(element)" @ref="@elRefWrapper.Value">
+                        @content
+                    </div>
+                }
+            };
+
+
+    protected virtual RenderFragment GenInputSlot() => __builder =>
+    {
+        <div class="@_block.Element("slot").AddBackgroundColor(BackgroundColor)"
+             style="@(StyleBuilder.Create().AddHeight(Height).AddMinHeight(MinHeight).AddBackgroundColor(BackgroundColor))"
+             @onmousedown="@HandleOnMouseDownAsync"
+             @attributes="@InputSlotAttrs"
+             @ref="@InputSlotElement">
+            @GenPrependInnerSlot()
+            @GenDefaultSlot()
+        </div>
+    };
+
+    protected virtual RenderFragment? GenPrependInnerSlot() => default;
+
+    protected virtual RenderFragment GenDefaultSlot() => __builder =>
+    {
+        @GenLabel()
+        @ChildContent
+    };
+
+    protected virtual RenderFragment GenLabel(bool preventDefaultOnClick = false) => __builder =>
+    {
+        if (HasLabel)
+        {
+            <MLabel Color="@ValidationState"
+                    Dark="@Dark"
+                    Disabled="@IsDisabled"
+                    Focused="@HasState"
+                    For="@Id"
+                    Light="@Light"
+                    @onclick:preventDefault="@preventDefaultOnClick">
+                @RenderFragments.RenderFragmentOrText(LabelContent, Label, wrapperTag: null)
+            </MLabel>
+        }
+    };
+
+    protected virtual RenderFragment GenMessages() => __builder =>
+    {
+        <MMessages Color="@(HasHint ? "" : ValidationState)"
+                   Dark="@Dark"
+                   Light="@Light"
+                   Value="@MessagesToDisplay"
+                   ChildContent="@MessageContent"/>
+    };
+
+    public enum InputIconType
+    {
+        PrependOuter,
+        PrependInner,
+        AppendInner,
+        AppendOuter,
+        Clear,
+        Increase,
+        Decrease
+    }
+
+}

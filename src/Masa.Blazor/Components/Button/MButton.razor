@@ -1,0 +1,99 @@
+﻿@namespace Masa.Blazor
+@inherits BRoutableGroupItem<ItemGroupBase>
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    @if (Key is not null)
+    {
+        <KeyTransitionElement
+            Tag="@Tag"
+            type="@TypeAttribute"
+            class="@GetClass()"
+            style="@GetStyle()"
+            Value="@Key"
+            id="@Id"
+            ReferenceCaptureAction="reference => Ref = reference"
+            @onclick="HandleOnClick"
+            __internal_stopPropagation_onclick="@OnClickStopPropagation"
+            __internal_preventDefault_onclick="@OnClickPreventDefault"
+            @attributes="Attributes">
+
+            @GenContent()
+        </KeyTransitionElement>
+    }
+    else
+    {
+        <ShowTransitionElement
+            Tag="@Tag"
+            type="@TypeAttribute"
+            class="@GetClass()"
+            style="@GetStyle()"
+            Value="@(Show ?? true)"
+            id="@Id"
+            ReferenceCaptureAction="reference => Ref = reference"
+            @onclick="HandleOnClick"
+            __internal_stopPropagation_onclick="@OnClickStopPropagation"
+            __internal_preventDefault_onclick="@OnClickPreventDefault"
+            @attributes="Attributes">
+            @GenContent()
+        </ShowTransitionElement>
+    }
+</CascadingValue>
+
+@code {
+
+
+    RenderFragment GenContent() => __builder =>
+    {
+        if (HasLoader)
+        {
+            @if (Loading)
+            {
+                <div class="@_block.Element("loader")">
+                    @if (LoaderContent == null)
+                    {
+                        <MProgressCircular Size="23" Width="2" Indeterminate></MProgressCircular>
+                    }
+                    else
+                    {
+                        @LoaderContent
+                    }
+                </div>
+            }
+        }
+
+        <span class="@_block.Element("content")">
+            @GenIcon("left")
+            @GenIcon()
+            @ChildContent
+            @GenIcon("right")
+        </span>
+    };
+
+    RenderFragment GenIcon(string? position = null) => __builder =>
+    {
+        var (icon, left, right) = position switch
+        {
+            "left" => (LeftIconName, true, false),
+            "right" => (RightIconName, false, true),
+            _ => (IconName, false, false)
+        };
+
+        if (string.IsNullOrWhiteSpace(icon))
+        {
+            return;
+        }
+
+        var large = position == null ? Large : false;
+        var xLarge = position == null ? XLarge : false;
+
+        <MIcon Left="@left"
+               Right="@right"
+               XSmall="@XSmall"
+               Small="@Small"
+               Large="@large"
+               XLarge="@xLarge">
+            @icon
+        </MIcon>
+    };
+
+}

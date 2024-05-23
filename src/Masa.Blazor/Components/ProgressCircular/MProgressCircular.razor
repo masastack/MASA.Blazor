@@ -1,0 +1,50 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @GenSvg()
+    @GenInfo()
+</div>
+
+@code {
+
+    private RenderFragment GenSvg() => __builder =>
+    {
+        <svg style="transition: rotate(@($"{Rotate}deg"))" @attributes="@SvgAttrs">
+            @if (!Indeterminate)
+            {
+                @GenCircle("underlay", "0")
+            }
+            @GenCircle("overlay", StrokeDashOffset)
+        </svg>
+    };
+
+    private RenderFragment GenInfo() => __builder =>
+    {
+        <div class="@_block.Element("info")">
+            @ChildContent
+        </div>
+    };
+
+    private RenderFragment GenCircle(string type, string offset) => __builder =>
+    {
+        string? style = null;
+
+        if (type == "underlay" && !string.IsNullOrWhiteSpace(BackgroundColor))
+        {
+            style = $"stroke: {BackgroundColor}";
+        }
+
+        <circle class="@_block.Element(type)"
+                style="@style"
+                r=""
+                stroke-dashoffset="@offset"
+                @attributes="@CircleAttrs">
+        </circle>
+    };
+
+}

@@ -63,7 +63,6 @@ public static class ServiceCollectionExtensions
         services.TryAdd<IPopupService, PopupService>(masaBlazorServiceLifetime);
 
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
-        services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
         services.TryAddSingleton<InternalHttpClient>();
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MonacoEditorJSModule>();

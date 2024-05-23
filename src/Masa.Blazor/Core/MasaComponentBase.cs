@@ -36,7 +36,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     }
 
     [Parameter(CaptureUnmatchedValues = true)]
-    public virtual IDictionary<string, object?> Attributes { get; set; } = new Dictionary<string, object?>();
+    public virtual IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
 
     public static readonly string ImplementedAssemblyName = "Masa.Blazor";
 
@@ -236,10 +236,9 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     {
     }
 
-    protected TValue? GetValue<TValue>(TValue? @default = default, [CallerMemberName] string name = "",
-        bool disableIListAlwaysNotifying = false)
+    protected TValue? GetValue<TValue>(TValue? @default = default, [CallerMemberName] string name = "")
     {
-        return _watcher.GetValue(@default, name, disableIListAlwaysNotifying);
+        return _watcher.GetValue(@default, name);
     }
 
     protected TValue? GetComputedValue<TValue>([CallerMemberName] string name = "")

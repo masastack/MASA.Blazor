@@ -1,0 +1,88 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue   
+@inherits MTextField<TValue>
+@using Microsoft.AspNetCore.Components.Forms
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenInput() => __builder =>
+    {
+        @GenSelections()
+        <InputFile autofocus="@Autofocus"
+                   disabled="@Disabled"
+                   id="@Id"
+                   placeholder="@Placeholder"
+                   readonly="@Readonly"
+                   multiple="@Multiple"
+                   OnChange="@HandleOnFileChange"
+                   @onblur="@HandleOnBlurAsync"
+                   @onfocus="@HandleOnFocusAsync"
+                   @onkeydown="HandleOnKeyDownAsync"
+                   @ref="@InputFile"
+                   @attributes="@InputAttrs">
+        </InputFile>
+    };
+
+    private RenderFragment GenSelections() => __builder =>
+    {
+        var css = _block.Element("text")
+            .Modifier("placeholder", Placeholder != null && !IsDirty)
+            .And("chips", HasChips && SelectionContent != null)
+            .Build();
+
+        <div class="@css">
+            @if (IsDirty && SelectionContent != null)
+            {
+                for (var i = 0; i < Files.Count; i++)
+                {
+                    var index = i;
+                    var name = Files[index].Name;
+                    @SelectionContent?.Invoke((index, name))
+                }
+            }
+            else
+            {
+                if (HasChips && IsDirty)
+                {
+                    @GenChips()
+                }
+                else
+                {
+                    @GenSelectionText()
+                }
+            }
+        </div>
+    };
+
+    private RenderFragment GenChips() => __builder =>
+    {
+        foreach (var text in Text)
+        {
+            <MChip Small="@SmallChips">
+                @text
+            </MChip>
+        }
+    };
+
+    private RenderFragment GenSelectionText() => __builder =>
+    {
+        if (Text.Count < 2)
+        {
+            foreach (var text in Text)
+            {
+                @text
+            }
+        }
+        else if (ShowSize && (Counter == null || Counter == false))
+        {
+            @ComputedCounterValue
+        }
+        else
+        {
+            @($"{Text.Count} files")
+        }
+    };
+
+}

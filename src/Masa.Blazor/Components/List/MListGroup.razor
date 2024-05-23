@@ -1,0 +1,63 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <div class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
+         @ref="Ref"
+         @attributes="@Attributes">
+        <MListItem OnClick="@HandleOnClick"
+                   IsActive="@IsActive"
+                   Link
+                   Dark="@Dark"
+                   Class="@_block.Element("header").AddClass(ActiveClass, IsActive).Build()"
+                   role="button"
+                   aria-expanded="@IsActive">
+            @if (PrependIcon is not null || PrependIconContent != default)
+            {
+                @GenIcon("prepend")
+            }
+
+            @ActivatorContent
+
+            @if (AppendIcon is not null || AppendIconContent != default)
+            {
+                @GenIcon("append")
+            }
+        </MListItem>
+
+        @if (IsBooted)
+        {
+            <ExpandTransition>
+                <ShowTransitionElement Value="IsActive"
+                                       Class="@_block.Element("items").Build()">
+                    @ChildContent
+                </ShowTransitionElement>
+            </ExpandTransition>
+        }
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenIcon(string location) => __builder =>
+    {
+        var css = _block.Element("header") + "__" + location + "-icon";
+        var isPrepend = location == "prepend";
+        var iconContent = isPrepend ? PrependIconContent : AppendIconContent;
+        var icon = isPrepend ? PrependIcon : AppendIcon;
+
+        <MListItemIcon Class="@css">
+            @if (iconContent != default)
+            {
+                @iconContent
+            }
+            else
+            {
+                <MIcon Dark="@Dark" Icon="@icon"/>
+            }
+        </MListItemIcon>
+    };
+
+}

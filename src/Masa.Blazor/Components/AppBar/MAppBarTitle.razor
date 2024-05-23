@@ -1,0 +1,23 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+@{
+    var placeholderStyle = AppBarScrollRatio > 0 ? "hidden" : "visible";
+}
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    <div class="@_block.Element("content")"
+         style="@GetContentStyle()"
+         @ref="_contentElement">
+        @ChildContent
+    </div>
+    <div class="@_block.Element("placeholder")"
+         style="@placeholderStyle"
+         @ref="_placeholderElement">
+        @ChildContent
+    </div>
+</div>

@@ -52,7 +52,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Autofocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutofocusClass = classes.Contains("m-text-field");
 
             // Assert
@@ -67,7 +67,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Clearable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-text-field");
 
             // Assert
@@ -82,7 +82,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Counter, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCounterClass = classes.Contains("m-text-field");
 
             // Assert
@@ -97,7 +97,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -112,7 +112,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-text-field");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-text-field");
 
             // Assert
@@ -142,7 +142,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-text-field");
             // Assert
             Assert.IsTrue(hasErrorClass);
@@ -156,7 +156,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-text-field");
 
             // Assert
@@ -171,7 +171,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Filled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilledClass = classes.Contains("m-text-field");
             // Assert
             Assert.IsTrue(hasFilledClass);
@@ -185,7 +185,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-text-field--solo-flat");
 
             // Assert
@@ -200,7 +200,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.FullWidth, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-text-field--full-width");
 
             // Assert
@@ -215,7 +215,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Height, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-text-field");
 
             // Assert
@@ -230,7 +230,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-text-field");
 
             // Assert
@@ -245,7 +245,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -260,7 +260,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.LoaderHeight, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-text-field");
 
             // Assert
@@ -275,7 +275,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-text-field");
 
             // Assert
@@ -290,7 +290,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-text-field");
 
             // Assert
@@ -305,7 +305,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-text-field");
 
             // Assert
@@ -320,7 +320,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-text-field");
 
             // Assert
@@ -335,7 +335,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-text-field--reverse");
 
             // Assert
@@ -350,7 +350,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-text-field--rounded");
 
             // Assert
@@ -365,7 +365,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-text-field--shaped");
 
             // Assert
@@ -380,7 +380,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.SingleLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-text-field--single-line");
 
             // Assert
@@ -395,7 +395,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Solo, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloClass = classes.Contains("m-text-field--solo");
 
             // Assert
@@ -410,7 +410,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.SoloInverted, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloInvertedClass = classes.Contains("m-text-field--solo-inverted");
 
             // Assert
@@ -425,7 +425,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-text-field");
 
             // Assert
@@ -440,7 +440,7 @@ namespace Masa.Blazor.Test.TextField
             {
                 props.Add(textfield => textfield.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-text-field");
 
             // Assert

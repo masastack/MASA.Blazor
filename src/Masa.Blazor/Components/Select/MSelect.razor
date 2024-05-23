@@ -1,0 +1,223 @@
+﻿@namespace Masa.Blazor
+@typeparam TItem
+@typeparam TItemValue
+@typeparam TValue
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MTextField<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenDefaultSlot() => __builder =>
+    {
+        @GenFieldset()
+        <div class="@_block.Element("slot")">
+            @GenLabel()
+            @GenPrefix()
+            @GenSelections()
+            @GenSuffix()
+            @GenClearIcon()
+            @GenIconSlot()
+            @GenHiddenInput()
+        </div>
+        @GenMenu()
+        @RenderFragments.GenProgress(Loading, Color, LoaderHeight, ProgressContent)
+    };
+
+    protected virtual RenderFragment GenSelections() => __builder =>
+    {
+        <div class="@_block.Element("selections").AddTextColor(TextColor)"
+             style="@(StyleBuilder.Create().AddTextColor(TextColor))">
+            @{
+                SelectionType selection;
+                if (SelectionContent != null)
+                {
+                    selection = SelectionType.Slot;
+                }
+                else if (HasChips)
+                {
+                    selection = SelectionType.Chip;
+                }
+                else
+                {
+                    selection = SelectionType.Comma;
+                }
+
+                for (var index = 0; index < SelectedItems.Count; index++)
+                {
+                    var item = SelectedItems[index];
+                    var selected = index == SelectedIndex;
+                    var last = index == SelectedItems.Count - 1;
+
+                    switch (selection)
+                    {
+                        case SelectionType.Comma:
+                            @GenCommaSelection(item, index, selected, last)
+                            break;
+                        case SelectionType.Chip:
+                            @GenChipSelection(item, index, selected)
+                            break;
+                        case SelectionType.Slot:
+                            @GenSlotSelection(item, index, selected)
+                            break;
+                    }
+                }
+            }
+            @*TODO: 20240517 查看下面是什么问题，是否可以删除？*@
+            @*When SelectedItems changed,blazor will create a new input element*@
+            @*This will trigger blur event,so we and a wrapper div and key to avoid it*@
+            <div class="@_block.Element("selections__input-wrapper")" @key="true">
+                @GenInput()
+            </div>
+        </div>
+    };
+
+    private enum SelectionType
+    {
+        Comma,
+        Chip,
+        Slot
+    }
+
+    private RenderFragment GenSlotSelection(TItem item, int index, bool selected) => __builder =>
+    {
+        var disabled = GetDisabled(item);
+        @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item, index, selected, disabled))
+    };
+
+    private RenderFragment GenChipSelection(TItem item, int index, bool selected) => __builder =>
+    {
+        var isDisabled = item != null && GetDisabled(item);
+        var isInteractive = !isDisabled && IsInteractive;
+
+        <MChip Close="@(DeletableChips && isInteractive)"
+               Disabled="@isDisabled"
+               Class="m-chip--select"
+               Small="@SmallChips"
+               IsActive="@selected"
+               OnClick="@OnClick"
+               OnClickStopPropagation
+               OnCloseClick="@(() => OnChipInput(item))"
+               tabindex="-1">
+            @GetText(item)
+        </MChip>
+
+        void OnClick()
+        {
+            if (!isInteractive)
+            {
+                return;
+            }
+
+            SelectedIndex = index;
+        }
+    };
+
+    private RenderFragment GenCommaSelection(TItem item, int index, bool selected, bool last) => __builder =>
+    {
+        var color = selected ? ComputedColor : null;
+        var isDisabled = IsDisabled || GetDisabled(item);
+
+        <div class="@_block.Element("selection").Modifier("comma").And("disabled", isDisabled).AddTextColor(color)"
+             style="@(StyleBuilder.Create().AddTextColor(color))">
+            @($"{GetText(item)}{(last ? "" : ", ")}")
+        </div>
+    };
+
+    protected override RenderFragment GenInputSlot()
+    {
+        // TODO: 20240517 以前的代码没有自定义input，但是vuetify是有的
+        return base.GenInputSlot();
+    }
+
+    protected override RenderFragment GenIcon(InputIconType type, string icon, Func<MouseEventArgs, Task>? click, int? tabindex = null, bool ripple = false)
+    {
+        if (type == InputIconType.AppendInner)
+        {
+            tabindex = OnAppendClick.HasDelegate ? -1 : null;
+
+            // 'aria-hidden': 'true'
+            // 'aria-label: undefined
+        }
+
+        return base.GenIcon(type, icon, click, tabindex);
+    }
+
+    private RenderFragment GenHiddenInput() => __builder =>
+    {
+        <input type="hidden" value="@(Multiple ? string.Join(',', InternalValues) : InternalValue)"/>
+    };
+
+    private RenderFragment GenMenu() => __builder =>
+    {
+        <MMenu Value="@(MenuCanShow && IsMenuActive)"
+               ValueChanged="@ValueChanged"
+               ExternalActivator="@true"
+               Attach="@GetMenuAttach()"
+               Disabled="@(Disabled || Readonly)"
+               Eager="@Eager"
+               Auto="@ComputedMenuProps.Auto"
+               Bottom="@ComputedMenuProps.Bottom"
+               CloseOnClick="@ComputedMenuProps.CloseOnClick"
+               CloseOnContentClick="@ComputedMenuProps.CloseOnContentClick"
+               ContentStyle="@ComputedMenuProps.ContentStyle"
+               DisableKeys="@ComputedMenuProps.DisableKeys"
+               Left="@ComputedMenuProps.Left"
+               MaxHeight="@ComputedMenuProps.MaxHeight"
+               MaxWidth="@ComputedMenuProps.MaxWidth"
+               MinWidth="@ComputedMenuProps.MinWidth"
+               NudgeTop="@ComputedMenuProps.NudgeTop"
+               NudgeRight="@ComputedMenuProps.NudgeRight"
+               NudgeBottom="@ComputedMenuProps.NudgeBottom"
+               NudgeLeft="@ComputedMenuProps.NudgeLeft"
+               NudgeWidth="@ComputedMenuProps.NudgeWidth"
+               OffsetX="@ComputedMenuProps.OffsetX"
+               OffsetY="@ComputedMenuProps.OffsetY"
+               OffsetOverflow="@ComputedMenuProps.OffsetOverflow"
+               OpenOnClick="@ComputedMenuProps.OpenOnClick"
+               Right="@ComputedMenuProps.Right"
+               Top="@ComputedMenuProps.Top"
+               Transition="@ComputedMenuProps.Transition"
+               @ref="@MMenu">
+            @GenSelectList()
+        </MMenu>
+
+        void ValueChanged(bool val)
+        {
+            IsMenuActive = val;
+            IsFocused = val;
+        }
+    };
+
+    protected virtual RenderFragment GenSelectList() => GenSelectList(null, false);
+
+    protected RenderFragment GenSelectList(string? searchInput, bool noFilter) => __builder =>
+    {
+        <MSelectList TItem="@TItem"
+                     TItemValue="@TItemValue"
+                     TValue="@TValue"
+                     Action="@Multiple"
+                     Color="@ItemColor"
+                     Dense="@Dense"
+                     HideSelected="@HideSelected"
+                     Items="@ComputedItems"
+                     ItemDisabled="@ItemDisabled"
+                     ItemText="@ItemText"
+                     ItemValue="@ItemValue"
+                     NoDataText="@NoDataText"
+                     SelectedItems="@SelectedItems"
+                     OnSelect="@((u) => SelectItem(u))"
+                     ItemContent="@ItemContent"
+                     PrependItemContent="@PrependItemContent"
+                     AppendItemContent="@AppendItemContent"
+                     SelectedIndex="@MenuListIndex"
+                     NoDataContent="@NoDataContent"
+                     ItemDivider="@ItemDivider"
+                     ItemHeader="@ItemHeader"
+                     SearchInput="@searchInput"
+                     NoFilter="@noFilter">
+        </MSelectList>
+    };
+
+}

@@ -1,0 +1,67 @@
+﻿@namespace Masa.Blazor
+@inherits BRoutableGroupItem<ItemGroupBase>
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <Element Class="@GetClass()"
+             Style="@GetStyle()"
+             Tag="@Tag"
+             ReferenceCaptureAction="r => Ref = r"
+             id="@Id"
+             @onclick="HandleOnClick"
+             __internal_stopPropagation_onclick="@OnClickStopPropagation"
+             __internal_preventDefault_onclick="@OnClickPreventDefault"
+             @attributes="@Attributes">
+        @if (ItemContent != null)
+        {
+            @ItemContent?.Invoke(GenItemContext())
+        }
+        else
+        {
+            @GenAvatarCore(PrependAvatar)
+            @GenIcon(PrependIcon)
+            @GenContent()
+            @GenIcon(AppendIcon)
+            @GenAvatarCore(AppendAvatar)
+            @ChildContent
+        }
+    </Element>
+</CascadingValue>
+
+@code {
+
+    RenderFragment GenIcon(string? icon) => __builder =>
+    {
+        @if (!string.IsNullOrWhiteSpace(icon))
+        {
+            <MListItemIcon>
+                <MIcon>@icon</MIcon>
+            </MListItemIcon>
+        }
+    };
+
+    private RenderFragment GenAvatarCore(string? src) => __builder =>
+    {
+        @if (!string.IsNullOrWhiteSpace(src))
+        {
+            <MListItemAvatar Size="null">
+                <MImage Src="@src"></MImage>
+            </MListItemAvatar>
+        }
+    };
+
+    RenderFragment GenContent() => __builder =>
+    {
+        if (HasBuiltInContent)
+        {
+            <MListItemContent>
+                <MListItemTitle>
+                    @Title
+                </MListItemTitle>
+                <MListItemSubtitle>
+                    @Subtitle
+                </MListItemSubtitle>
+            </MListItemContent>
+        }
+    };
+
+}

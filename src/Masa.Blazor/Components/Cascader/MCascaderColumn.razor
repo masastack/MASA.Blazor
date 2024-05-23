@@ -1,0 +1,58 @@
+﻿@namespace Masa.Blazor.Components.Cascader
+@inherits MasaComponentBase
+@typeparam TItem
+@typeparam TValue
+
+<MList Class="@_block.Element("column").Build()" Dense="@Dense">
+    <MListItemGroup Value="SelectedItemIndex" @ref="ItemGroup">
+        @foreach (var (item, index) in Items.Select((item, index) => (item, index)))
+        {
+            var children = ItemChildren(item);
+            <MListItem @onmousedown:preventDefault
+                       Value="index"
+                       OnClick="@(() => SelectItemAsync(item))"
+                       Class="@_block.Element("column-item").Build()"
+                       Dense="@Dense"
+                       ActiveClass="@(new CssBuilder().AddTextColor(Color).GetClass())"
+                       IsActive="@(EqualityComparer<TItem>.Default.Equals(SelectedItem, item))">
+                <MListItemContent>
+                    <MListItemTitle>
+                        @ItemText(item)
+                    </MListItemTitle>
+                </MListItemContent>
+                <MListItemIcon>
+                    @if (EqualityComparer<TItem>.Default.Equals(LoadingItem, item))
+                    {
+                        <MProgressCircular Indeterminate
+                                           Size="20"
+                                           Width="2">
+                        </MProgressCircular>
+                    }
+                    else if (children is { Count: > 0 })
+                    {
+                        <MIcon>
+                            @Icon
+                        </MIcon>
+                    }
+                </MListItemIcon>
+            </MListItem>
+        }
+    </MListItemGroup>
+</MList>
+
+@if (HasChildren)
+{
+    <MCascaderColumn @key="SelectedItem"
+                     TItem="TItem"
+                     TValue="TValue"
+                     Items="Children"
+                     ColumnIndex="@(ColumnIndex + 1)"
+                     SelectedItems="@SelectedItems"
+                     Dense="@Dense"
+                     ItemText="@ItemText"
+                     LoadChildren="@LoadChildren"
+                     ItemChildren="@ItemChildren"
+                     OnSelect="@OnSelect"
+                     @ref="NextCascaderColumn">
+    </MCascaderColumn>
+}

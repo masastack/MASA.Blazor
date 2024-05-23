@@ -34,6 +34,53 @@ public static class RenderFragments
         });
     }
 
+    public static RenderFragment? GenProgressCircular(
+        StringBoolean? loading,
+        string? color,
+        StringNumber? loaderSize,
+        StringNumber? loaderWidth)
+    {
+        loading ??= false;
+        loaderSize ??= 16;
+        loaderWidth ??= 2;
+
+        // REVIEW: should return null when loading is null?
+        if (loading is { IsT1: true, AsT1: false })
+        {
+            return null;
+        }
+
+        return (RenderFragment)(builder =>
+        {
+            builder.OpenComponent<MProgressCircular>(0);
+            builder.AddAttribute(1, nameof(MProgressCircular.Size), loaderSize);
+            builder.AddAttribute(2, nameof(MProgressCircular.Indeterminate), true);
+            builder.AddAttribute(3, nameof(MProgressCircular.Color),
+                loading is not null && (loading == true || loading == "")
+                    ? color ?? "primary"
+                    : loading?.ToString() ?? string.Empty);
+            builder.AddAttribute(4, nameof(MProgressCircular.Width), loaderWidth);
+            builder.CloseComponent();
+        });
+    }
+
+    public static RenderFragment? GenRipple(bool ripple, string @class, string style)
+    {
+        if (!ripple)
+        {
+            return null;
+        }
+
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", @class);
+            builder.AddAttribute(1, "style", @style);
+            builder.AddAttribute(3, "ripple");
+            builder.CloseElement();
+        };
+    }
+
     public static RenderFragment? RenderIfNotNull(
         RenderFragment? fragment,
         string? css = null,
@@ -81,12 +128,17 @@ public static class RenderFragments
         RenderFragment? fragment,
         string? text,
         string? css = null,
-        string wrapperTag = "div")
+        string? wrapperTag = "div")
     {
+        var hasWrapper = !string.IsNullOrWhiteSpace(wrapperTag);
+
         return builder =>
         {
-            builder.OpenElement(0, wrapperTag);
-            builder.AddAttribute(1, "class", css);
+            if (hasWrapper)
+            {
+                builder.OpenElement(0, wrapperTag!);
+                builder.AddAttribute(1, "class", css);
+            }
 
             if (fragment is not null)
             {
@@ -97,7 +149,10 @@ public static class RenderFragments
                 builder.AddContent(3, text);
             }
 
-            builder.CloseElement();
+            if (hasWrapper)
+            {
+                builder.CloseElement();
+            }
         };
     }
 
@@ -106,12 +161,17 @@ public static class RenderFragments
         TContext context,
         string? text,
         string? css = null,
-        string wrapperTag = "div")
+        string? wrapperTag = "div")
     {
+        var hasWrapper = !string.IsNullOrWhiteSpace(wrapperTag);
+
         return builder =>
         {
-            builder.OpenElement(0, wrapperTag);
-            builder.AddAttribute(1, "class", css);
+            if (hasWrapper)
+            {
+                builder.OpenElement(0, wrapperTag!);
+                builder.AddAttribute(1, "class", css);
+            }
 
             if (fragment is not null)
             {
@@ -122,7 +182,10 @@ public static class RenderFragments
                 builder.AddContent(3, text);
             }
 
-            builder.CloseElement();
+            if (hasWrapper)
+            {
+                builder.CloseElement();
+            }
         };
     }
 

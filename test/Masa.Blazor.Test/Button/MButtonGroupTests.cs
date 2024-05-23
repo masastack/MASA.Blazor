@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Borderless, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBorderlessClass = classes.Contains("m-btn");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-btn");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Group, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasGroupClass = classes.Contains("m-btn");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Mandatory, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-btn");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Multiple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-btn");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-btn");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-btn");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Button
             {
                 props.Add(buttongroup => buttongroup.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-btn");
 
             // Assert

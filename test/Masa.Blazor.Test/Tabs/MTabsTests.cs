@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.AlignWithTitle, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAlignWithTitleClass = classes.Contains("m-tabs");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.CenterActive, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCenterActiveClass = classes.Contains("m-tabs");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Centered, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCenteredClass = classes.Contains("m-tabs");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-tabs");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.FixedTabs, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedTabsClass = classes.Contains("m-tabs");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Grow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasGrowClass = classes.Contains("m-tabs");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.HideSlider, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideSliderClass = classes.Contains("m-tabs");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Height, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-tabs");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.IconsAndText, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIconsAndTextClass = classes.Contains("m-tabs");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Optional, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOptionalClass = classes.Contains("m-tabs");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-tabs");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.ShowArrows, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowArrowsClass = classes.Contains("m-tabs");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-tabs");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabs => tabs.SliderSize, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSliderSizeClass = classes.Contains("m-tabs");
 
             // Assert

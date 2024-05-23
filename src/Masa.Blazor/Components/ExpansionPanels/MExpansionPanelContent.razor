@@ -1,0 +1,18 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+@if (_isBooted || Eager)
+{
+    <ExpandTransition>
+        <ShowTransitionElement Value="_isActive"
+                               Class="@GetClass()"
+                               Style="@GetStyle()"
+                               ReferenceCaptureAction="r => Ref = r"
+                               id="@Id"
+                               @attributes="@Attributes">
+            <div class="@_block.Element("wrap")">
+                @ChildContent
+            </div>
+        </ShowTransitionElement>
+    </ExpandTransition>
+}

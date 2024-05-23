@@ -1,23 +1,19 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class MListItemGroup : MItemGroup
 {
-    public partial class MListItemGroup : MItemGroup
+    public MListItemGroup() : base(GroupType.ListItemGroup)
     {
-        public MListItemGroup() : base(GroupType.ListItemGroup)
-        {
-        }
+    }
 
-        [Parameter]
-        public string? Color { get; set; }
+    [Parameter] public string? Color { get; set; }
 
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-list-item-group")
-                        .AddTextColor(Color);
-                });
-        }
+    private Block _block = new("m-list-item-group");
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            _block.AddTextColor(Color).GenerateCssClasses()
+        );
     }
 }

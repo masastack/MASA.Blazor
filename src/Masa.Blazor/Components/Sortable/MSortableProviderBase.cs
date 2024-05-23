@@ -202,7 +202,6 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         watcher.Watch<bool>(nameof(Disabled),
                 val =>
                 {
-                    Console.Out.WriteLine("[MSortableProviderBase] Disabled changed to " + val);
                     _jsObjectReference?.InvokeVoidAsync("option", "disabled", val);
                 })
             .Watch<List<string>>(nameof(Order), val => { _ = _jsObjectReference?.SortAsync(val, false); });

@@ -1,0 +1,12 @@
+﻿@namespace Masa.Blazor
+@inherits BRoutableGroupItem<ItemGroupBase>
+
+<Element Tag="@Tag"
+         Class="@GetClass()"
+         Style="@GetStyle()"
+         ReferenceCaptureAction="r => Ref = r"
+         id="@Id"
+         @onclick="HandleOnClick"
+         @attributes="@Attributes">
+    @ChildContent
+</Element>

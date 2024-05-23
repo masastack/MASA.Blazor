@@ -1,0 +1,51 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="@Attributes">
+    @for (var i = 0; i < @Length; i++)
+    {
+        var index = i;
+        @GenItem(index)
+    }
+</div>
+
+@code {
+
+    private RenderFragment GenItem(int index) => __builder =>
+    {
+        var value = Values[index];
+        <div class="@GetContentClass()">
+            <div class="@_inputBlock.Element("control")">
+                <div class="@_inputBlock.Element("slot").AddBackgroundColor(BackgroundColor)"
+                     style="@(StyleBuilder.Create().AddHeight(Height))"
+                     @onclick="@(() => HandleOnInputSlotClick(index))">
+                    <fieldset aria-hidden="true">
+                        <legend style="width: 0">
+                            <span>&#8203;</span>
+                        </legend>
+                    </fieldset>
+                    <div class="@_textFieldBlock.Element("slot")">
+                        <input @ref="InputRefs[index]"
+                               type="@Type.ToString()"
+                               readonly="@Readonly"
+                               min="@(Type == OtpInputType.Number ? 0 : null)"
+                               @bind-value="@value"
+                               maxlength="1"
+                               autoComplete="@(Type == OtpInputType.Password ? "new-password" : "off")"
+                               disabled="@Disabled"
+                               @onpastewithdata="@OnPasteWithDataAsync"
+                               @onpastewithdata:preventDefault
+                               @onpastewithdata:stopPropagation/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    };
+
+
+}

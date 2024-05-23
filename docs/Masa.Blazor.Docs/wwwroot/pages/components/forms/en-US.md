@@ -9,7 +9,7 @@ related:
 
 ## Usage
 
-The internal **MForm** component makes it easy to add validation to form input. All input components have a rule prop, which accepts different types of group functions, Boolean values and strings. These allow you to specify that the input is invalid__ or__ Conditions. Whenever the input value is changed, each function in the array will receive a new value and each array element will be scored. If the function or array element returns false or string, and the verification fails, the string value will be displayed as an error message.
+The internal **MForm** component makes it easy to add validation to form inputs. All input components have a `Rules` prop which accepts a array of type `Func<string?, StringBoolean>`. These allow you to specify conditions in which the input is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value and each array element will be evaluated. If a function or array element returns `false` or a `string`, validation has failed and the string value will be presented as an error message.
 
 <masa-example file="Examples.components.forms.Usage"></masa-example>
 
@@ -25,23 +25,23 @@ Rules allow you to apply custom validation on all form components. These are ver
 
 ### Misc
 
-#### Validation
+#### Model validation
 
-Verification can also be triggered through the submit button.
+In addition to validating on each input component via the `Rules` prop, you can also validate a single object model.
 
 <masa-example file="Examples.components.forms.Validation"></masa-example>
 
-#### Enable I18n
+#### Validation with submit and clear
 
-Enable I18n to support multilingual validation messages.How to use `II8n` please jump [I18n](I18n/features/internationalization).
-
-<masa-example file="Examples.components.forms.EnableI18n"></masa-example>
-
-#### Validation with submit & clear
-
-**MForm** component has three functions, which can be accessed by setting ref on the component. Ref allows us to access the internal methods of components, such as `<MForm @ref = "_form" > `_ form.Validate() validates all inputs and returns whether they are valid._form.Reset() clears all inputs and resets validation errors._ form.Resetvalidation() will only reset input validation without changing their state.
+You can use the methods provided by `Context` in the content of **MForm**, or use the component instance provided by `@ref` outside of **MForm**.
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
+
+#### Enable I18n
+
+Enable [I18n](/blazor/features/internationalization) to support multilingual validation messages.
+
+<masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
 #### Validate complex type with DataAnnotations 
 

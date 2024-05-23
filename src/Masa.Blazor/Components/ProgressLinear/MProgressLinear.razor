@@ -1,0 +1,90 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
+         @ref="Ref"
+         @onclick="HandleOnClickAsync"
+         @attributes="@Attributes">
+        @GenStream()
+        @GenBackground()
+        @GenBuffer()
+
+        @if (Indeterminate)
+        {
+            @GenIndeterminate()
+        }
+        else
+        {
+            @GenDeterminate()
+        }
+
+        @RenderFragments.RenderIfNotNull(ChildContent?.Invoke(Value), _block.Element("content").ToString())
+    </div>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment GenStream() => Stream
+        ? __builder =>
+        {
+            <div class="@_block.Element("stream").AddTextColor(Color)"
+                 style="@(StyleBuilder.Create().Add("width", $"{100 - NormalizedBuffer}%").AddTextColor(Color))">
+            </div>
+        }
+        : null;
+
+    private RenderFragment GenBackground() => __builder =>
+    {
+        var computedColor = BackgroundColor ?? Color;
+
+        var styleBuilder = new StyleBuilder();
+        styleBuilder.Add("opacity", (BackgroundOpacity ?? (BackgroundColor != null ? 1 : 0.3)).ToString(CultureInfo.InvariantCulture));
+        styleBuilder.Add(IsReversed ? "right" : "left", NormalizedValue + "%");
+        styleBuilder.Add("width", Math.Max(0, NormalizedBuffer - NormalizedValue) + "%");
+        styleBuilder.AddBackgroundColor(computedColor);
+
+        <div class="@_block.Element("background").AddBackgroundColor(computedColor)"
+             style="@styleBuilder.Build()">
+        </div>
+    };
+
+    private RenderFragment GenBuffer() => __builder =>
+    {
+        StringBuilder styleBuilder = new();
+        if (Active == false)
+        {
+            styleBuilder.Append("height: 0; ");
+        }
+
+        if (Indeterminate && NormalizedBuffer != 100)
+        {
+            styleBuilder.Append($"width: {NormalizedBuffer}%; ");
+        }
+
+        var style = styleBuilder.Length > 0 ? styleBuilder.ToString().Trim() : null;
+
+        <div class="@_block.Element("buffer")"
+             style="@style">
+        </div>
+    };
+
+    private RenderFragment GenIndeterminate() => __builder =>
+    {
+        <div class="@_block.Element("indeterminate").Modifier("active")">
+            <div class="long @CssClassUtils.GetColor(Color)"></div>
+            <div class="short @CssClassUtils.GetColor(Color)"></div>
+        </div>
+    };
+
+    private RenderFragment GenDeterminate() => __builder =>
+    {
+        <div class="@_block.Element("determinate").AddBackgroundColor(Color)"
+             style="@(StyleBuilder.Create().Add("width", NormalizedValue + "%").AddBackgroundColor(Color))">
+        </div>
+    };
+
+}

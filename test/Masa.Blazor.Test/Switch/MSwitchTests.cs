@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -27,7 +27,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -41,7 +41,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasDisabledClass);
@@ -55,7 +55,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasErrorClass);
@@ -69,7 +69,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-input--switch");
 
             // Assert
@@ -84,7 +84,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-input--switch--flat");
             // Assert
             Assert.IsTrue(hasFlatClass);
@@ -98,7 +98,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasHideDetailsClass);
@@ -112,7 +112,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Inset, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInsetClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasInsetClass);
@@ -126,7 +126,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -140,7 +140,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasLoadingClass);
@@ -154,7 +154,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasPersistentHintClass);
@@ -168,7 +168,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasReadonlyClass);
@@ -182,7 +182,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasSuccessClass);
@@ -196,7 +196,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
@@ -210,7 +210,7 @@ namespace Masa.Blazor.Test.Switch
             {
                 props.Add(Switch => Switch.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-input--switch");
             // Assert
             Assert.IsTrue(hasValueClass);

@@ -1,0 +1,39 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@inherits MInput<TValue>
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenDefaultSlot() => __builder =>
+    {
+        <CascadingValue Value="this" IsFixed>
+            <div class="@_block.Element("input")"
+                 id="@Id"
+                 role="radiogroup"
+                 aria-labelledby="@Id">
+                @base.GenDefaultSlot()
+            </div>
+        </CascadingValue>
+    };
+
+
+    protected override RenderFragment GenLabel(bool preventDefaultOnClick = false) => __builder =>
+    {
+        if (HasLabel)
+        {
+            <MLabel Color="@ValidationState"
+                    Dark="@Dark"
+                    Disabled="@IsDisabled"
+                    Focused="@HasState"
+                    Light="@Light"
+                    Id="@Id"
+                    Tag="legend"
+                    @onclick:preventDefault="@preventDefaultOnClick">
+                @RenderFragments.RenderFragmentOrText(LabelContent, Label, wrapperTag: null)
+            </MLabel>
+        }
+    };
+
+}

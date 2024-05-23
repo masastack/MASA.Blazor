@@ -19,7 +19,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutofocusClass = classes.Contains("m-select");
 
             //Assert
@@ -37,7 +37,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasChipsClass = classes.Contains("m-select");
 
             //Assert
@@ -55,7 +55,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-select");
 
             //Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCounterClass = classes.Contains("m-select");
 
             //Assert
@@ -91,7 +91,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-select");
 
             //Assert
@@ -109,7 +109,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDeletableChipsClass = classes.Contains("m-select");
 
             //Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-select");
 
             //Assert
@@ -145,7 +145,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-select");
 
             //Assert
@@ -163,7 +163,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-select");
 
             //Assert
@@ -181,7 +181,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-select");
 
             // Assert
@@ -199,7 +199,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilledClass = classes.Contains("m-select");
 
             //Assert
@@ -217,7 +217,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-select");
 
             //Assert
@@ -235,7 +235,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-select");
 
             //Assert
@@ -253,7 +253,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-select");
 
             // Assert
@@ -271,7 +271,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-select");
 
             //Assert
@@ -289,7 +289,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-select");
 
             //Assert
@@ -307,7 +307,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-select");
 
             // Assert
@@ -325,7 +325,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-select");
 
             //Assert
@@ -343,7 +343,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-select");
 
             //Assert
@@ -361,7 +361,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-select");
 
             //Assert
@@ -379,7 +379,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-select");
 
             //Assert
@@ -397,7 +397,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentPlaceholderClass = classes.Contains("m-select");
 
             //Assert
@@ -415,7 +415,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-select");
 
             //Assert
@@ -433,7 +433,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-select");
 
             //Assert
@@ -451,7 +451,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-select");
 
             //Assert
@@ -469,7 +469,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-select");
 
             //Assert
@@ -487,7 +487,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-select");
 
             //Assert
@@ -505,7 +505,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmallChipsClass = classes.Contains("m-select");
 
             //Assert
@@ -523,7 +523,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloClass = classes.Contains("m-select");
 
             //Assert
@@ -541,7 +541,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloInvertedClass = classes.Contains("m-select");
 
             //Assert
@@ -559,7 +559,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-select");
 
             //Assert
@@ -577,7 +577,7 @@ namespace Masa.Blazor.Test.Select
                 props.Add(select => select.ItemText, item => item);
                 props.Add(select => select.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-select");
 
             //Assert

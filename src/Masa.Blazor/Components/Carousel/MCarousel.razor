@@ -1,0 +1,47 @@
+﻿@namespace Masa.Blazor
+@inherits MWindow
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment GenAppendContent() => __builder =>
+    {
+        @if (!HideDelimiters)
+        {
+            GenDelimiters();
+        }
+
+        @if (Progress || !string.IsNullOrWhiteSpace(ProgressColor))
+        {
+            GenProgress();
+        }
+    };
+
+    private RenderFragment GenDelimiters() => __builder =>
+    {
+        <div class="@GetControlsClass()"
+             style="@GetControlsStyle()">
+            <MItemGroup Value="@InternalValue"
+                        ValueChanged="@InternalValueChanged"
+                        Mandatory="@Mandatory"
+                        TargetGroup="@GroupType.ButtonGroup">
+                @foreach (var item in Items)
+                {
+                    <MButton Value="@item.Value"
+                             Class="@_block.Element("controls__item").Build()"
+                             Small
+                             Icon>
+                        <MIcon Size="18" Icon="@DelimiterIcon"/>
+                    </MButton>
+                }
+            </MItemGroup>
+        </div>
+    };
+
+    private RenderFragment GenProgress() => __builder =>
+    {
+        <MProgressLinear Color="@ProgressColor" Value="@ProgressValue"/>
+    };
+
+}
