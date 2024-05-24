@@ -65,7 +65,10 @@
                         <ChildContent>
                             @foreach (var subNavItem in navItem.Children)
                             {
-                                <MListItem Href="@subNavItem.Url">
+                                <MListItem Href="@subNavItem.Url"
+                                           ActiveClass="primary--text"
+                                           Exact="@subNavItem.Exact"
+                                           MatchPattern="@subNavItem.MatchPattern">
                                     <MListItemContent>
                                         <MListItemTitle>@subNavItem.Name</MListItemTitle>
                                     </MListItemContent>

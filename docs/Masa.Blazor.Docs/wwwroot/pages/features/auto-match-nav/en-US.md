@@ -67,7 +67,10 @@ There are some Page components that are used in the example but not shown:
                         <ChildContent>
                             @foreach (var subNavItem in navItem.Children)
                             {
-                                <MListItem Href="@subNavItem.Url">
+                                <MListItem Href="@subNavItem.Url"
+                                           ActiveClass="primary--text"
+                                           Exact="@subNavItem.Exact"
+                                           MatchPattern="@subNavItem.MatchPattern">
                                     <MListItemContent>
                                         <MListItemTitle>@subNavItem.Name</MListItemTitle>
                                     </MListItemContent>
