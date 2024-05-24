@@ -1,4 +1,5 @@
-﻿using BlazorComponent.JSInterop.ScrollStrategy;
+﻿using Masa.Blazor.Mixins;
+using Masa.Blazor.Mixins.ScrollStrategy;
 
 namespace Masa.Blazor;
 

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.ItemGroup;
+﻿using Masa.Blazor.Mixins;
+
+namespace Masa.Blazor.Components.ItemGroup;
 
 public abstract class MItemGroupBase : MasaComponentBase
 {

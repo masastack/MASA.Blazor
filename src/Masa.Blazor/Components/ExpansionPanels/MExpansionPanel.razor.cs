@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Mixins;
+
+namespace Masa.Blazor;
 
 public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
 {

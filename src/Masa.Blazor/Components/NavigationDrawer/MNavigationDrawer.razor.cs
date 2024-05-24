@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection.Metadata;
-using BlazorComponent.Mixins;
+using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;

@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Tabs;
+using Masa.Blazor.JSModules;
 
 namespace Masa.Blazor
 {

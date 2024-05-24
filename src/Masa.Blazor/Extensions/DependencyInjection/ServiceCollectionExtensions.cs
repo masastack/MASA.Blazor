@@ -6,6 +6,8 @@ using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
 using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.JSModules;
+using Masa.Blazor.Mixins;
 using Masa.Blazor.Mixins.Activatable;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -84,6 +86,8 @@ public static class ServiceCollectionExtensions
         services.TryAddTransient<ActivatableJsModule>();
         services.TryAddTransient<InputJSModule>();
         services.TryAddTransient<TransitionJSModule>();
+        services.TryAddTransient<OutsideClickJSModule>();
+        services.TryAddTransient<ScrollStrategyJSModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
         services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));

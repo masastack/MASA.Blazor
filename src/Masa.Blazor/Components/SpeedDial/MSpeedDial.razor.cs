@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Bootable;
+using Masa.Blazor.Mixins;
 
 namespace Masa.Blazor;
 

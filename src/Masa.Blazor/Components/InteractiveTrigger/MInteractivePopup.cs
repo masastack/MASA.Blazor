@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Mixins;
+
+namespace Masa.Blazor;
 
 /// <summary>
 /// A abstract class for components that use the <see cref="MInteractiveTrigger{TValue}"/>

@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor;
+﻿namespace Masa.Blazor.JSModules;
 
 public class ResizeJSModule : JSModule, IResizeJSModule
 {
@@ -15,7 +15,7 @@ public class ResizeJSModule : JSModule, IResizeJSModule
     {
         await InvokeVoidAsync("unobserve", el);
     }
-    
+
     public async ValueTask ObserverAsync(string selector, Func<Task> handle)
     {
         await InvokeVoidAsync("observeSelector", selector, DotNetObjectReference.Create(new Invoker(handle)));

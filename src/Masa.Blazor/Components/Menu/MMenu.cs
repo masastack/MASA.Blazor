@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Mixins;
+﻿using Masa.Blazor.Mixins;
 using Masa.Blazor.Mixins.Menuable;
 
 namespace Masa.Blazor
