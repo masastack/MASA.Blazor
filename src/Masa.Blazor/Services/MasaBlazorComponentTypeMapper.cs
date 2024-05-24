@@ -6,7 +6,6 @@
         {
             { typeof(BMenu), typeof(MMenu) },
             { typeof(BTooltip), typeof(MTooltip) },
-            { typeof(BResponsive), typeof(MImage) },
         };
 
         private readonly Dictionary<Type, Type> _genericMapper = new()

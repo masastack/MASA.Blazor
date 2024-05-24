@@ -1,0 +1,52 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MResponsive
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenBody() => __builder =>
+    {
+        @GenSizer()
+        @GenImage()
+        @GenPlaceholder()
+        @GenContent()
+    };
+
+    private RenderFragment GenImage() => __builder =>
+    {
+        if (!string.IsNullOrEmpty(Src) || !string.IsNullOrEmpty(LazySrc) || !string.IsNullOrEmpty(Gradient))
+        {
+            var styleBuilder = new StyleBuilder();
+            var url = GetBackgroundImageUrl();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                styleBuilder.Add("background-image", GetBackgroundImage(url));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Position))
+            {
+                styleBuilder.Add("background-position", Position);
+            }
+
+            @* TODO: Wait for the "in-out" mode of the transition to be implemented *@
+            <div class="@_block.Element("image").Modifier("preload", IsLoading).And(Contain).And("cover", !Contain)"
+                 style="@styleBuilder.ToString()">
+            </div>
+        }
+    };
+
+    private RenderFragment GenPlaceholder() => PlaceholderContent == null
+        ? null
+        : __builder =>
+        {
+            <Transition Name="@Transition">
+                <IfTransitionElement Value="@IsLoading"
+                                     Class="@_block.Element("placeholder").Name">
+                    @PlaceholderContent
+                </IfTransitionElement>
+            </Transition>
+        };
+
+}

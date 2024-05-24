@@ -1,0 +1,40 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <Element id="@Id"
+             class="@GetClass()"
+             style="@GetStyle()"
+             ReferenceCaptureAction="r => Ref = r"
+             @attributes="@Attributes">
+        @GenBody()
+    </Element>
+</CascadingValue>
+
+@code {
+
+    protected virtual RenderFragment GenBody() => __builder =>
+    {
+        @GenSizer()
+        @GenContent()
+    };
+
+    protected RenderFragment? GenSizer() => ComputedAspectRatio == null
+        ? null
+        : __builder =>
+        {
+            var style = GenAspectStyle(ComputedAspectRatio);
+
+            <div class="@_block.Element("sizer")"
+                 style="@style">
+            </div>
+        };
+
+    protected RenderFragment GenContent() => __builder =>
+    {
+        <div class="@_block.Element("content")">
+            @ChildContent
+        </div>
+    };
+
+}
