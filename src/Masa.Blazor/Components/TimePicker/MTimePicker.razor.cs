@@ -84,9 +84,9 @@ public partial class MTimePicker : MasaComponentBase
 
     public string? PmText { get; set; }
 
-    public SelectingTimes Selecting
+    public SelectingTime Selecting
     {
-        get => GetValue(SelectingTimes.Hour);
+        get => GetValue(SelectingTime.Hour);
         set => SetValue(value);
     }
 
@@ -123,11 +123,11 @@ public partial class MTimePicker : MasaComponentBase
 
     private async Task HandleOnInputAsync(int value)
     {
-        if (Selecting == SelectingTimes.Hour)
+        if (Selecting == SelectingTime.Hour)
         {
             InputHour = IsAmPm ? TimeHelper.Convert12To24(value, Period) : value;
         }
-        else if (Selecting == SelectingTimes.Minute)
+        else if (Selecting == SelectingTime.Minute)
         {
             InputMinute = value;
         }
@@ -165,26 +165,26 @@ public partial class MTimePicker : MasaComponentBase
     {
         switch (Selecting)
         {
-            case SelectingTimes.Hour:
+            case SelectingTime.Hour:
                 await OnHourClick.InvokeAsync(value);
                 break;
-            case SelectingTimes.Minute:
+            case SelectingTime.Minute:
                 await OnMinuteClick.InvokeAsync(value);
                 break;
-            case SelectingTimes.Second:
+            case SelectingTime.Second:
                 await OnSecondClick.InvokeAsync(value);
                 break;
         }
 
-        var emitChange = Selecting == (UseSeconds ? SelectingTimes.Second : SelectingTimes.Minute);
+        var emitChange = Selecting == (UseSeconds ? SelectingTime.Second : SelectingTime.Minute);
 
-        if (Selecting == SelectingTimes.Hour)
+        if (Selecting == SelectingTime.Hour)
         {
-            Selecting = SelectingTimes.Minute;
+            Selecting = SelectingTime.Minute;
         }
-        else if (UseSeconds && Selecting == SelectingTimes.Minute)
+        else if (UseSeconds && Selecting == SelectingTime.Minute)
         {
-            Selecting = SelectingTimes.Second;
+            Selecting = SelectingTime.Second;
         }
 
         if (InputHour == LazyInputHour && InputMinute == LazyInputMinute &&
@@ -248,12 +248,12 @@ public partial class MTimePicker : MasaComponentBase
         if (InputHour != null)
         {
             var newHour = InputHour.Value + (period == TimePeriod.Am ? -12 : 12);
-            InputHour = FirstAllowed(SelectingTimes.Hour, newHour);
+            InputHour = FirstAllowed(SelectingTime.Hour, newHour);
             await EmitValueAsync();
         }
     }
 
-    private int? FirstAllowed(SelectingTimes hour, int value)
+    private int? FirstAllowed(SelectingTime hour, int value)
     {
         //TODO:
         return value;
@@ -280,7 +280,7 @@ public partial class MTimePicker : MasaComponentBase
 
         watcher
             .Watch<TimeOnly?>(nameof(Value), SetInputData)
-            .Watch<SelectingTimes>(nameof(Selecting), EmitPicker)
+            .Watch<SelectingTime>(nameof(Selecting), EmitPicker)
             .Watch<TimePickerType>(nameof(ActivePicker), SetPicker);
     }
 
@@ -293,7 +293,7 @@ public partial class MTimePicker : MasaComponentBase
         Period = (InputHour == 0 || InputHour < 12) ? TimePeriod.Am : TimePeriod.Pm;
     }
 
-    private void EmitPicker(SelectingTimes selecting)
+    private void EmitPicker(SelectingTime selecting)
     {
         var activePicker = (TimePickerType)(selecting);
         ActivePickerChanged.InvokeAsync(activePicker);
@@ -301,7 +301,7 @@ public partial class MTimePicker : MasaComponentBase
 
     private void SetPicker(TimePickerType picker)
     {
-        Selecting = (SelectingTimes)picker;
+        Selecting = (SelectingTime)picker;
         StateHasChanged();
     }
 

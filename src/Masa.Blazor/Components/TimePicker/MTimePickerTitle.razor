@@ -16,13 +16,13 @@
     private RenderFragment GenTime() => __builder =>
     {
         <div class="@_block.Element("time")">
-            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnHourClickAsync), RenderFragments.RenderText(DisplayHour), Selecting == SelectingTimes.Hour, Disabled)
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnHourClickAsync), RenderFragments.RenderText(DisplayHour), Selecting == SelectingTime.Hour, Disabled)
             <span>:</span>
-            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnMinuteClickAsync), RenderFragments.RenderText(DisplayMinute), Selecting == SelectingTimes.Minute, Disabled)
+            @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnMinuteClickAsync), RenderFragments.RenderText(DisplayMinute), Selecting == SelectingTime.Minute, Disabled)
             @if (UseSeconds)
             {
                 <span>:</span>
-                @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnSecondClickAsync), RenderFragments.RenderText(DisplaySecond), Selecting == SelectingTimes.Second, Disabled)
+                @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnSecondClickAsync), RenderFragments.RenderText(DisplaySecond), Selecting == SelectingTime.Second, Disabled)
             }
         </div>
     };

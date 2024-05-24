@@ -22,9 +22,9 @@ public partial class MTimePickerTitle : MasaComponentBase
 
     [Parameter] public bool UseSeconds { get; set; }
 
-    [Parameter] public SelectingTimes Selecting { get; set; }
+    [Parameter] public SelectingTime Selecting { get; set; }
 
-    [Parameter] public EventCallback<SelectingTimes> OnSelectingUpdate { get; set; }
+    [Parameter] public EventCallback<SelectingTime> OnSelectingUpdate { get; set; }
 
     [Parameter] public bool AmPm { get; set; }
 
@@ -78,40 +78,40 @@ public partial class MTimePickerTitle : MasaComponentBase
 
     public async Task HandleOnHourClickAsync(MouseEventArgs args)
     {
-        if (Selecting == SelectingTimes.Hour || Disabled)
+        if (Selecting == SelectingTime.Hour || Disabled)
         {
             return;
         }
 
         if (OnSelectingUpdate.HasDelegate)
         {
-            await OnSelectingUpdate.InvokeAsync(SelectingTimes.Hour);
+            await OnSelectingUpdate.InvokeAsync(SelectingTime.Hour);
         }
     }
 
     public async Task HandleOnMinuteClickAsync(MouseEventArgs args)
     {
-        if (Selecting == SelectingTimes.Minute || Disabled)
+        if (Selecting == SelectingTime.Minute || Disabled)
         {
             return;
         }
 
         if (OnSelectingUpdate.HasDelegate)
         {
-            await OnSelectingUpdate.InvokeAsync(SelectingTimes.Minute);
+            await OnSelectingUpdate.InvokeAsync(SelectingTime.Minute);
         }
     }
 
     public async Task HandleOnSecondClickAsync(MouseEventArgs args)
     {
-        if (Selecting == SelectingTimes.Second || Disabled)
+        if (Selecting == SelectingTime.Second || Disabled)
         {
             return;
         }
 
         if (OnSelectingUpdate.HasDelegate)
         {
-            await OnSelectingUpdate.InvokeAsync(SelectingTimes.Second);
+            await OnSelectingUpdate.InvokeAsync(SelectingTime.Second);
         }
     }
 

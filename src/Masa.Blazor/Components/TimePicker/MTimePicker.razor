@@ -50,7 +50,7 @@
                               OnPeriodUpdate="@HandleOnPeriodUpdate">
             </MTimePickerTitle>
 
-            void HandleOnSelectingUpdate(SelectingTimes selecting)
+            void HandleOnSelectingUpdate(SelectingTime selecting)
             {
                 Selecting = selecting;
             }
@@ -74,8 +74,8 @@
 
     private RenderFragment GenClock() => __builder =>
     {
-        var selectingHour = Selecting == SelectingTimes.Hour;
-        var selectingMinute = Selecting == SelectingTimes.Minute;
+        var selectingHour = Selecting == SelectingTime.Hour;
+        var selectingMinute = Selecting == SelectingTime.Minute;
 
         var allowedValues = selectingHour ? IsAllowedHourCb : (selectingMinute ? IsAllowedMinuteCb : IsAllowedSecondCb);
         Func<int, string> format = selectingHour ? (IsAmPm ? val => TimeHelper.Convert24To12(val).ToString() : val => $"{val}") : val => Pad(val);
