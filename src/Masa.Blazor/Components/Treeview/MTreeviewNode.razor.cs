@@ -1,10 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor.Components.Treeview
 {
-    public partial class MTreeviewNode<TItem, TKey> : MasaComponentBase, ITreeviewNode<TItem, TKey>
+    public partial class MTreeviewNode<TItem, TKey> : MasaComponentBase where TKey : notnull
     {
-        [CascadingParameter] public ITreeview<TItem, TKey>? Treeview { get; set; }
+        [CascadingParameter] public MTreeview<TItem, TKey>? Treeview { get; set; }
 
         [Parameter] public TItem Item { get; set; } = default!;
 

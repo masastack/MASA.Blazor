@@ -69,6 +69,15 @@ public class MStepper : MSheet
             });
     }
 
+    protected override RenderFragment GenBody() => builder =>
+    {
+        builder.OpenComponent<CascadingValue<MStepper>>(0);
+        builder.AddAttribute(1, "Value", this);
+        builder.AddAttribute(2, "IsFixed", true);
+        builder.AddAttribute(3, "ChildContent", (RenderFragment)(sb => base.GenBody().Invoke(sb)));
+        builder.CloseComponent();
+    };
+
     public void RegisterStep(MStepperStep step)
     {
         _steps.Add(step);

@@ -2,18 +2,16 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <BCascadingValue Value="this" IsFixed>
-        <ShowTransitionElement
-            Value="@(Show ?? true)"
-            Tag="@Tag"
-            Class="@GetClass()"
-            Style="@GetStyle()"
-            id="@Id"
-            @attributes="@Attributes"
-            ReferenceCaptureAction="r => Ref = r">
-            @GenBody()
-        </ShowTransitionElement>
-    </BCascadingValue>
+    <ShowTransitionElement
+        Value="@(Show ?? true)"
+        Tag="@Tag"
+        Class="@GetClass()"
+        Style="@GetStyle()"
+        id="@Id"
+        @attributes="@Attributes"
+        ReferenceCaptureAction="r => Ref = r">
+        @GenBody()
+    </ShowTransitionElement>
 </CascadingValue>
 
 @code {

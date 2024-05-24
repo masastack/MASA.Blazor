@@ -1,7 +1,8 @@
-﻿namespace Masa.Blazor
+﻿using Masa.Blazor.Components.Treeview;
+
+namespace Masa.Blazor
 {
-    public partial class MTreeview<TItem, TKey> : MasaComponentBase, ITreeview<TItem, TKey>, IThemeable
-        where TKey : notnull
+    public partial class MTreeview<TItem, TKey> : MasaComponentBase, IThemeable where TKey : notnull
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -204,7 +205,7 @@
                 .GenerateCssClasses();
         }
 
-        public void AddNode(ITreeviewNode<TItem, TKey> node)
+        public void AddNode(MTreeviewNode<TItem, TKey> node)
         {
             if (Nodes.TryGetValue(node.Key, out var nodeState))
             {

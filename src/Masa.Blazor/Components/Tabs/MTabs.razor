@@ -3,7 +3,7 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <BCascadingValue Value="this" IsFixed>
+    <CascadingValue Value="this" IsFixed>
         <div class="@GetClass()"
              style="@GetStyle()"
              id="@Id"
@@ -47,7 +47,7 @@
                 </MWindow>
             }
         </div>
-    </BCascadingValue>
+    </CascadingValue>
 </CascadingValue>
 
 @code {

@@ -1,10 +1,11 @@
-﻿@namespace Masa.Blazor
+﻿@using Masa.Blazor.Components.Treeview
+@namespace Masa.Blazor
 @typeparam TItem
 @typeparam TKey
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <BCascadingValue Value="this" IsFixed>
+    <CascadingValue Value="this" IsFixed>
         <div class="@GetClass()"
              style="@GetStyle()"
              id="@Id"
@@ -22,7 +23,7 @@
                 @ChildContent
             }
         </div>
-    </BCascadingValue>
+    </CascadingValue>
 </CascadingValue>
 
 @code {
