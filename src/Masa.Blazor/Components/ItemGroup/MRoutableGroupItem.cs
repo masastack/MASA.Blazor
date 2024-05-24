@@ -3,7 +3,7 @@
 namespace Masa.Blazor.Components.ItemGroup;
 
 public abstract class MRoutableGroupItem<TGroup> : MGroupItem<TGroup>, IRoutable
-    where TGroup : ItemGroupBase
+    where TGroup : MItemGroupBase
 {
     protected MRoutableGroupItem(GroupType groupType, string defaultTag = "div") : base(groupType)
     {

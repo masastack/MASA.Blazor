@@ -2,7 +2,7 @@ using Masa.Blazor.Components.ItemGroup;
 
 namespace Masa.Blazor;
 
-public partial class MListItem : MRoutableGroupItem<ItemGroupBase>, IThemeable
+public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
 {
     public MListItem() : base(GroupType.ListItemGroup)
     {

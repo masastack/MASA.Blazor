@@ -3,7 +3,7 @@
 namespace Masa.Blazor;
 
 public abstract class MGroupItem<TGroup> : MGroupable<TGroup>
-    where TGroup : ItemGroupBase
+    where TGroup : MItemGroupBase
 {
     protected MGroupItem(GroupType groupType) : base(groupType)
     {

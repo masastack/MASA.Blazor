@@ -3,7 +3,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor;
 
-public partial class MWindowItem : MGroupItem<ItemGroupBase>
+public partial class MWindowItem : MGroupItem<MItemGroupBase>
 {
     protected MWindowItem() : base(GroupType.Window, bootable: true)
     {

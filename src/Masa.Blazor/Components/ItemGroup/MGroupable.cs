@@ -1,7 +1,7 @@
 ﻿namespace Masa.Blazor.Components.ItemGroup;
 
 public abstract class MGroupable<TGroup> :  MasaComponentBase, IGroupable
-    where TGroup : ItemGroupBase
+    where TGroup : MItemGroupBase
 {
     [CascadingParameter]
     public TGroup? ItemGroup { get; set; }

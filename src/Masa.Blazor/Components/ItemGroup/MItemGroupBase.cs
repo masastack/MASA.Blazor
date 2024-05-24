@@ -1,8 +1,8 @@
 ﻿namespace Masa.Blazor.Components.ItemGroup;
 
-public abstract class ItemGroupBase : MasaComponentBase
+public abstract class MItemGroupBase : MasaComponentBase
 {
-    protected ItemGroupBase(GroupType groupType)
+    protected MItemGroupBase(GroupType groupType)
     {
         GroupType = groupType;
     }

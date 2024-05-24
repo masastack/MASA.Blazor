@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MItemGroup : ItemGroupBase, IThemeable
+public partial class MItemGroup : MItemGroupBase, IThemeable
 {
     public MItemGroup() : base(GroupType.ItemGroup)
     {

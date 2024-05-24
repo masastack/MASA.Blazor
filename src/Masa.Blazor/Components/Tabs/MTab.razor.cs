@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MTab : MRoutableGroupItem<ItemGroupBase>
+public partial class MTab : MRoutableGroupItem<MItemGroupBase>
 {
     public MTab() : base(GroupType.SlideGroup)
     {

@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MChip : MGroupItem<ItemGroupBase>, IRoutable
+public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 {
     public MChip() : base(GroupType.ChipGroup)
     {
