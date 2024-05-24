@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Input;
+
+namespace Masa.Blazor;
 
 #if NET6_0
 public partial class MSelectable<TValue> : MInput<TValue>

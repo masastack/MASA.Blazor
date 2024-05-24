@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.ItemGroup;
+
+namespace Masa.Blazor;
 
 public partial class MTab : BRoutableGroupItem<ItemGroupBase>
 {

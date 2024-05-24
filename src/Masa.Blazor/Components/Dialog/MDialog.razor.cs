@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Mixins;
+using Masa.Blazor.Components.Bootable;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor

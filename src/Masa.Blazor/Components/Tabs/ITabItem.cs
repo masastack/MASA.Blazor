@@ -1,6 +1,7 @@
-﻿namespace BlazorComponent
+﻿using Masa.Blazor.Components.ItemGroup;
+
+namespace Masa.Blazor.Components.Tabs;
+
+public interface ITabItem : IItem
 {
-    public interface ITabItem : IItem
-    {
-    }
 }

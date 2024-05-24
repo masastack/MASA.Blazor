@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Tabs;
 
 namespace Masa.Blazor
 {

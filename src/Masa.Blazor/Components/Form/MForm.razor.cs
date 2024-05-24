@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using BlazorComponent.Form;
-using Microsoft.AspNetCore.Components.Forms;
+using Masa.Blazor.Components.Input;
 
 namespace Masa.Blazor;
 

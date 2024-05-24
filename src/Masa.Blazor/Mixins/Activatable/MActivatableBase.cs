@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Mixins.Activatable;
+﻿using Masa.Blazor.Mixins.Toggleable;
+
+namespace Masa.Blazor.Mixins.Activatable;
 
 public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 {

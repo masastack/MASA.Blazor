@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Tabs;
+
+namespace Masa.Blazor;
 
 public class MTabItem : MWindowItem, ITabItem
 {

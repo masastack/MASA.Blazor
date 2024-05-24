@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Mixins.Activatable;
+
+namespace Masa.Blazor;
 
 public class MHover : MActivatableBase
 {

@@ -4,7 +4,7 @@ namespace Masa.Blazor;
 
 public interface IRoutable
 {
-    IDictionary<string, object?> Attributes { get; }
+    IDictionary<string, object> Attributes { get; }
 
     bool Disabled { get; }
 

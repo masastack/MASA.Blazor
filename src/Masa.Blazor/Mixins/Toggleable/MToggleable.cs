@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Mixins.Toggleable;
+﻿using Masa.Blazor.Mixins.Delayable;
+
+namespace Masa.Blazor.Mixins.Toggleable;
 
 public abstract class MToggleable : MDelayable
 {

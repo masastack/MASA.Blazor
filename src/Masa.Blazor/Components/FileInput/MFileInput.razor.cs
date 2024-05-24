@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
+﻿using Masa.Blazor.Components.Input;
 
 namespace Masa.Blazor;
 

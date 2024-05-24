@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.ItemGroup;
+
+namespace Masa.Blazor;
 
 public abstract class BGroupItem<TGroup> : BGroupable<TGroup>
     where TGroup : ItemGroupBase

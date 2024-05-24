@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.Bootable;
+﻿using Masa.Blazor.Mixins.Activatable;
+
+namespace Masa.Blazor.Components.Bootable;
 
 public class MBootable : MActivatable
 {

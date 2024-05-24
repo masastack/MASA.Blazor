@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Masa.Blazor.Components.Bootable;
 
 namespace Masa.Blazor.Mixins.Menuable;
 

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Bootable;
+
+namespace Masa.Blazor;
 
 public partial class MSpeedDial : MBootable
 {
