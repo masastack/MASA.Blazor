@@ -149,7 +149,7 @@ namespace Masa.Blazor
                 var textContent = ChildContent?.GetTextContent();
                 IconContent = textContent;
 
-                if (textContent is null)
+                if (string.IsNullOrWhiteSpace(textContent))
                 {
                     return;
                 }

@@ -3,7 +3,7 @@
 [GenerateOneOf]
 public partial class Icon : OneOfBase<string, SvgPath, SvgPath[]>
 {
-    public bool IsAlias => IsT0 && AsT0.StartsWith("$");
+    public bool IsAlias => IsT0 && AsT0?.StartsWith("$") is true;
 
     public bool IsCssFont => IsT0 && !AsT0.StartsWith("$");
 

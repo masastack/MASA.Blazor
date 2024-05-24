@@ -14,7 +14,9 @@ public partial class MExpansionPanelHeader : MasaComponentBase
 
     [Parameter] public bool DisableIconRotate { get; set; }
 
-    [Parameter] public string? ExpandIcon { get; set; }
+    [Parameter]
+    [MasaApiParameter("$expand")]
+    public string? ExpandIcon { get; set; } = "$expand";
 
     [Parameter] public bool HideActions { get; set; }
 
@@ -33,10 +35,11 @@ public partial class MExpansionPanelHeader : MasaComponentBase
     protected override void OnParametersSet()
     {
         Attributes["ripple"] = Ripple;
+        ExpandIcon ??= "$expand";
 
         base.OnParametersSet();
     }
-    
+
     private Block _block = new("m-expansion-panel-header");
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -53,7 +56,7 @@ public partial class MExpansionPanelHeader : MasaComponentBase
     {
         return StyleBuilder.Create().AddBackgroundColor(Color).GenerateCssStyles();
     }
-    
+
     protected virtual async Task HandleClickAsync(MouseEventArgs args)
     {
         _ = Js.InvokeVoidAsync(JsInteropConstants.Blur, Ref);
