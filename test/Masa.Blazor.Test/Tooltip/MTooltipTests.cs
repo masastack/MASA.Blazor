@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
@@ -30,7 +30,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.AllowOverflow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAllowOverflowClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasAllowOverflowClass);
@@ -45,7 +45,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasBottomClass);
@@ -60,7 +60,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.CloseDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseDelayClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -76,7 +76,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasDisabledClass);
@@ -91,7 +91,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasLeftClass);
@@ -106,7 +106,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.MaxWidth, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxWidthClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -122,7 +122,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.MinWidth, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMinWidthClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -138,7 +138,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.NudgeBottom, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeBottomClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -154,7 +154,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.NudgeLeft, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeLeftClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -170,7 +170,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.NudgeRight, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeRightClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -186,7 +186,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.NudgeTop, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeTopClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -202,7 +202,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.NudgeWidth, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeWidthClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -218,7 +218,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.OffsetOverflow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetOverflowClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasOffsetOverflowClass);
@@ -233,7 +233,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.OpenDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenDelayClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -249,7 +249,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.OpenOnClick, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnClickClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasOpenOnClickClass);
@@ -264,7 +264,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.OpenOnFocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnFocusClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasOpenOnFocusClass);
@@ -279,7 +279,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.OpenOnHover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnHoverClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasOpenOnHoverClass);
@@ -294,7 +294,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.PositionX, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPositionXClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -310,7 +310,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.PositionY, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPositionYClass = classes.Contains("m-tooltip");
 
             // Assert
@@ -326,7 +326,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasRightClass);
@@ -341,7 +341,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.Top, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTopClass = classes.Contains("m-tooltip");
             // Assert
             Assert.IsTrue(hasTopClass);
@@ -356,7 +356,7 @@ namespace Masa.Blazor.Test.Tooltip
             {
                 props.Add(tooltip => tooltip.ZIndex, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasZIndexClass = classes.Contains("m-tooltip");
 
             // Assert

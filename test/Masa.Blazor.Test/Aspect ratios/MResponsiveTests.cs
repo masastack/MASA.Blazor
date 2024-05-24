@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Responsive
             {
                 props.Add(rating => rating.AspectRatio, 16 / 9D);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-responsive");
             // Assert
             Assert.IsTrue(hasReadonlyClass);

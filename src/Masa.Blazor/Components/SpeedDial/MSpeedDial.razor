@@ -1,0 +1,22 @@
+﻿@namespace Masa.Blazor
+@inherits MBootable
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="@Attributes">
+    @ComputedActivatorContent
+
+    @*TODO: implement TransitionGroup*@
+    <Transition Name="@Transition" Origin="@Origin">
+        <ShowTransitionElement
+            Value="IsActive"
+            Tag="@Tag"
+            Class="@_block.Element("list").Name"
+            @attributes="@ContentAttributes"
+            ReferenceCaptureAction="el => ContentElement = el">
+            @ChildContent
+        </ShowTransitionElement>
+    </Transition>
+</div>

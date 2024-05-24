@@ -1,0 +1,53 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits Masa.Blazor.Mixins.Menuable.MMenuable
+
+@ComputedActivatorContent
+
+<Element Tag="@Tag"
+         class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
+         ReferenceCaptureAction="r => Ref = r"
+         @attributes="@Attributes">
+    @GenContent()
+</Element>
+
+@code {
+
+    private RenderFragment GenContent() => IsBooted
+        ? __builder =>
+        {
+            var css = _block.Element("content").Modifier("fixed", ActivatorFixed)
+                .AddClass("menuable__content__active", IsActive)
+                .AddClass(ContentClass)
+                .AddBackgroundColor(Color)
+                .Build();
+
+            var style = StyleBuilder.Create()
+                .AddMaxWidth(MaxWidth)
+                .AddMinWidth(MinWidth)
+                .Add("left", CalculatedLeft + "px")
+                .Add("top", CalculatedTop + "px")
+                .Add("opacity", (IsActive ? 0.9 : 0).ToString(CultureInfo.InvariantCulture))
+                .Add("z-index", ComputedZIndex.ToString(CultureInfo.InvariantCulture))
+                .AddBackgroundColor(Color)
+                .Build();
+
+            if (ContentStyle != null)
+            {
+                style += ";" + ContentStyle;
+            }
+
+            <Transition Name="@(Transition ?? (IsActive ? "scale-transition" : "fade-transition"))">
+                <ShowTransitionElement Value="IsActive"
+                                       Class="@css"
+                                       Style="@style"
+                                       ReferenceCaptureAction="r => ContentElement = r">
+                    @ChildContent
+                </ShowTransitionElement>
+            </Transition>
+        }
+        : null;
+
+}

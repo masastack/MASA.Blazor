@@ -11,6 +11,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

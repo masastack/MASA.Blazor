@@ -13,7 +13,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     [Inject] public IJSRuntime Js { get; set; } = null!;
 
     [Inject] private ILoggerFactory LoggerFactory { get; set; } = null!;
-    
+
     [CascadingParameter] protected IDefaultsProvider? DefaultsProvider { get; set; }
 
     /// <summary>
@@ -49,7 +49,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     private ElementReference _ref;
     private ElementReference? _prevRef;
     private bool _elementReferenceChanged;
-    
+
     protected ILogger Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
@@ -57,6 +57,9 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     [Parameter] public string? Class { get; set; }
 
     [Parameter] public string? Style { get; set; }
+
+    protected virtual bool NoClass => false;
+    protected virtual bool NoStyle => false;
 
     public string? GetClass()
     {
@@ -67,7 +70,10 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             stringBuilder.Append(' ');
         }
 
-        stringBuilder.Append(Class);
+        if (!NoClass)
+        {
+            stringBuilder.Append(Class);
+        }
 
         var css = stringBuilder.ToString().Trim();
         return css.Length == 0 ? null : css;
@@ -82,7 +88,11 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             stringBuilder.Append("; ");
         }
 
-        stringBuilder.Append(Style);
+        if (!NoStyle)
+        {
+            stringBuilder.Append(Style);
+        }
+
         var style = stringBuilder.ToString().TrimEnd();
         return style.Length == 0 ? null : style;
     }
@@ -138,7 +148,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             RefBack?.Set(value);
         }
     }
-    
+
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         _dirtyParameters = parameters.ToDictionary().Keys.ToArray();

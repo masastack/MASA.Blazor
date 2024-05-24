@@ -1,0 +1,53 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits Masa.Blazor.Mixins.Menuable.MMenuable
+
+<div style="@GetStyle()"
+     class="@GetClass()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="@Attributes">
+
+    @if (IsBooted)
+    {
+        var css = _block.Element("content")
+            .Modifier(Auto)
+            .And("fixed", ActivatorFixed)
+            .AddRounded(Tile ? "0" : Rounded)
+            .AddClass("menuable__content__active", IsActive)
+            .AddClass(ContentClass)
+            .AddTheme(IsDark, IndependentTheme)
+            .Build();
+
+        var style = StyleBuilder.Create()
+            .AddIf($"max-height", CalculatedMaxHeight, CalculatedMaxHeight != null)
+            .AddIf($"min-width", CalculatedMinWidth, CalculatedMinWidth != null)
+            .AddIf($"max-width", CalculatedMaxWidth, CalculatedMaxWidth != null)
+            .AddIf($"top", CalculatedTop.ToUnit(), CalculatedTop != null)
+            .AddIf($"left", CalculatedLeft.ToUnit(), CalculatedLeft != null)
+            .Add($"transform-origin", Origin)
+            .Add($"z-index", ComputedZIndex.ToString(CultureInfo.InvariantCulture))
+            .Build();
+
+        if (ContentStyle != null)
+        {
+            style += ";" + ContentStyle;
+        }
+
+        <CascadingValue Value="this" IsFixed>
+            <BCascadingValue Value="IsDark" Name="IsDark">
+                <Transition Name="@Transition">
+                    <ShowTransitionElement Value="IsActive"
+                                           Style="@style"
+                                           Class="@css"
+                                           ReferenceCaptureAction="el => ContentElement = el">
+                        @ChildContent
+                    </ShowTransitionElement>
+                </Transition>
+            </BCascadingValue>
+        </CascadingValue>
+    }
+
+</div>
+
+@ComputedActivatorContent

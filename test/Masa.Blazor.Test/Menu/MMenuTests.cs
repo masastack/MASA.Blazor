@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Absolute, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-menu");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.AllowOverflow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAllowOverflowClass = classes.Contains("m-menu");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Auto, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutoClass = classes.Contains("m-menu");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Bottom, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-menu");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.CloseDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseDelayClass = classes.Contains("m-menu");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.CloseOnClick, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseOnClickClass = classes.Contains("m-menu");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.CloseOnContentClick, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseOnContentClickClass = classes.Contains("m-menu");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-menu");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.DisableKeys, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableKeysClass = classes.Contains("m-menu");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-menu");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Left, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-menu");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.MaxHeight, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeBottomClass = classes.Contains("m-menu");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.MaxWidth, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeBottomClass = classes.Contains("m-menu");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.MinWidth, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeBottomClass = classes.Contains("m-menu");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.NudgeBottom, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeBottomClass = classes.Contains("m-menu");
 
             // Assert
@@ -255,7 +255,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.NudgeLeft, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeLeftClass = classes.Contains("m-menu");
 
             // Assert
@@ -271,7 +271,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.NudgeRight, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeRightClass = classes.Contains("m-menu");
 
             // Assert
@@ -287,7 +287,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.NudgeTop, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeTopClass = classes.Contains("m-menu");
 
             // Assert
@@ -303,7 +303,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.NudgeWidth, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNudgeWidthClass = classes.Contains("m-menu");
 
             // Assert
@@ -319,7 +319,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OffsetOverflow, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetOverflowClass = classes.Contains("m-menu");
 
             // Assert
@@ -335,7 +335,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OffsetX, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetXClass = classes.Contains("m-menu");
 
             // Assert
@@ -351,7 +351,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OpenDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenDelayClass = classes.Contains("m-menu");
 
             // Assert
@@ -367,7 +367,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OffsetY, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOffsetYClass = classes.Contains("m-menu");
 
             // Assert
@@ -383,7 +383,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OpenOnClick, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnClickClass = classes.Contains("m-menu");
 
             // Assert
@@ -399,7 +399,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OpenOnFocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnFocusClass = classes.Contains("m-menu");
 
             // Assert
@@ -415,7 +415,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.OpenOnHover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnHoverClass = classes.Contains("m-menu");
 
             // Assert
@@ -431,7 +431,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.PositionX, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPositionXClass = classes.Contains("m-menu");
 
             // Assert
@@ -447,7 +447,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.PositionY, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPositionYClass = classes.Contains("m-menu");
 
             // Assert
@@ -463,7 +463,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Right, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-menu");
 
             // Assert
@@ -479,7 +479,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-menu");
 
             // Assert
@@ -495,7 +495,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-menu");
 
             // Assert
@@ -511,7 +511,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.Top, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTopClass = classes.Contains("m-menu");
 
             // Assert
@@ -527,7 +527,7 @@ namespace Masa.Blazor.Test.Menu
             {
                 props.Add(menu => menu.ZIndex, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPositionYClass = classes.Contains("m-menu");
 
             // Assert

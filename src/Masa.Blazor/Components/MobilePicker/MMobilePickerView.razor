@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TColumn
+@typeparam TColumnItem
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@typeparam TColumnItemValue
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes"
+     @ontouchmove:preventDefault>
+    <CascadingValue Value="this" IsFixed>
+        @foreach (var (item, columnIndex) in FormattedColumns.Select((item, index) => (item, index)))
+        {
+            <MMobilePickerColumn TColumn="TColumn"
+                                 TColumnItem="TColumnItem"
+                                 TColumnItemValue="TColumnItemValue"
+                                 VisibleItemCount="@VisibleItemCount"
+                                 SwipeDuration="@SwipeDuration"
+                                 SelectedIndex="@item.Index"
+                                 Items="item.Values.ToList()"
+                                 ItemText="ItemText"
+                                 ItemHeight="ItemPxHeight"
+                                 ItemDisabled="ItemDisabled"
+                                 ColumnIndex="@columnIndex"
+                                 OnChange="v => HandleOnChange(columnIndex, ItemValue(item.Values[v]))">
+            </MMobilePickerColumn>
+        }
+    </CascadingValue>
+    <div class="@_block.Element("mask")"
+         style="@(StyleBuilder.Create().Add("background-size", $"100% {(WrapHeight - ItemPxHeight) / 2}px"))">
+    </div>
+    <div class="@_block.Element("picked")"
+         style="@(StyleBuilder.Create().AddHeight(ItemHeight))">
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@typeparam TColumnItem
+
+@{
+    var columnWrapperStyle = StyleBuilder.Create()
+        .Add("transform", $"translate3d(0, {Offset + BaseOffset}px, 0)")
+        .Add("transition-duration", Duration + "ms")
+        .Add("transition-property", Duration > 0 ? "all" : "none")
+        .Build();
+}
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     @ontouchstart="OnTouchstart"
+     @ontouchmove="OnTouchmove"
+     @ontouchend="OnTouchend"
+     @ontouchcancel="OnTouchend">
+    <ul class="@_block.Element("column-wrapper")"
+        style="@columnWrapperStyle"
+        @ontransitionend="@OnTransitionEnd"
+        @ref="Wrapper">
+
+        @foreach (var (item, index) in Items.Select((item, index) => (item, index)))
+        {
+            var disabled = ItemDisabled?.Invoke(item) is true;
+            var css = _block.Element("column-item").Modifier(disabled);
+            var style = StyleBuilder.Create().AddHeight(ItemHeight).Build(); // TODO: 0524 使用静态方法吧
+
+            <li class="@css"
+                style="@style"
+                @onclick="@(() => OnClickItem(index))">
+                <div class="@_block.Element("column-text")">@ItemText?.Invoke(item)</div>
+            </li>
+        }
+    </ul>
+</div>

@@ -76,6 +76,8 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
+        
+        services.TryAddTransient<ActivatableJsModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
         services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));

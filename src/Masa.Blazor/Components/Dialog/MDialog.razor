@@ -1,29 +1,29 @@
 ﻿@namespace Masa.Blazor
-@inherits BBootable
+@inherits MBootable
 
 <CascadingValue Value="IsDark" Name="IsDark">
 
     @ComputedActivatorContent
 
     <CascadingValue Value="this" IsFixed>
-        <div class="@CssProvider.GetClass()"
-             style="@CssProvider.GetStyle()"
+        <div class="@_block.Element("container").Modifier("attached", Attach != null).AddClass(Class)"
+             style="@Style"
              id="@Id"
              @ref="Ref"
              role="dialog"
              @attributes="@Attributes">
             @if (IsBooted)
             {
-                <div class="@CssProvider.GetClass("content")"
-                     style="@CssProvider.GetStyle("content")"
+                <div class="@_block.Element("content").Modifier("active", IsActive).AddTheme(IsDark, IndependentTheme)"
+                     style="z-index: @ZIndex"
                      @onkeydown="@Keydown"
                      @ref="@ContentRef"
                      @attributes="@ContentAttrs">
 
                     <Transition Name="@Transition">
                         <ShowTransitionElement Value="@IsActive"
-                                               Class="@CssProvider.GetClass("innerContent")"
-                                               Style="@CssProvider.GetStyle("innerContent")"
+                                               Class="@GetClass()"
+                                               Style="@GetStyle()"
                                                ReferenceCaptureAction="r => DialogRef = r">
                             @(OutcomeContent?.Invoke(_contentContext!) ?? ChildContent)
                         </ShowTransitionElement>

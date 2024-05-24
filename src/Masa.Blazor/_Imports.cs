@@ -19,4 +19,8 @@ global using OneOf;
 global using BemIt;
 global using Microsoft.AspNetCore.Components.Rendering;
 global using System.Text.Json.Serialization;
+global using Masa.Blazor.Components.Bootable;
 global using Masa.Blazor.Components.ItemGroup;
+global using Masa.Blazor.Mixins.Activatable;
+global using Masa.Blazor.Mixins.Delayable;
+global using Masa.Blazor.Mixins.Toggleable;

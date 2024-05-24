@@ -1,8 +1,9 @@
 ﻿using BlazorComponent.Mixins;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MDialog : BBootable, IThemeable, IDependent
+    public partial class MDialog : MBootable, IThemeable, IDependent
     {
         [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -124,10 +125,10 @@ namespace Masa.Blazor
                 {
                     // TODO: previousActiveElement
 
-                    var contains = await JsInvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, ContentRef);
+                    var contains = await Js.InvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, ContentRef);
                     if (!contains)
                     {
-                        await JsInvokeAsync(JsInteropConstants.Focus, ContentRef);
+                        await Js.InvokeVoidAsync(JsInteropConstants.Focus, ContentRef);
                     }
                 });
             }
@@ -140,8 +141,8 @@ namespace Masa.Blazor
             if (OutsideClickJsModule is { Initialized: false })
             {
                 await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
+                await Js.InvokeVoidAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
+                await Js.InvokeVoidAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
 
                 _attached = true;
             }
@@ -150,13 +151,13 @@ namespace Masa.Blazor
         private async Task<int> GetActiveZIndex(bool isActive)
         {
             return !isActive
-                ? await JsInvokeAsync<int>(JsInteropConstants.GetZIndex, ContentRef)
+                ? await Js.InvokeAsync<int>(JsInteropConstants.GetZIndex, ContentRef)
                 : await GetMaxZIndex() + 2;
         }
 
         private async Task<int> GetMaxZIndex()
         {
-            var maxZindex = await JsInvokeAsync<int>(JsInteropConstants.GetMenuOrDialogMaxZIndex,
+            var maxZindex = await Js.InvokeAsync<int>(JsInteropConstants.GetMenuOrDialogMaxZIndex,
                 new List<ElementReference> { ContentRef }, Ref);
 
             return maxZindex > StackMinZIndex ? maxZindex : StackMinZIndex;
@@ -206,12 +207,12 @@ namespace Masa.Blazor
 
             if (ContentRef.Context != null)
             {
-                await JsInvokeAsync(JsInteropConstants.DelElementFrom, ContentRef, AttachSelector);
+                await Js.InvokeVoidAsync(JsInteropConstants.DelElementFrom, ContentRef, AttachSelector);
             }
 
             if (OverlayRef?.Context != null)
             {
-                await JsInvokeAsync(JsInteropConstants.DelElementFrom, OverlayRef, AttachSelector);
+                await Js.InvokeVoidAsync(JsInteropConstants.DelElementFrom, OverlayRef, AttachSelector);
             }
         }
 
@@ -236,11 +237,11 @@ namespace Masa.Blazor
                 () => OutsideClickJsModule == null || OutsideClickJsModule.Initialized == false);
         }
 
-        public Dictionary<string, object?> ContentAttrs
+        public Dictionary<string, object> ContentAttrs
         {
             get
             {
-                var attrs = new Dictionary<string, object?>();
+                var attrs = new Dictionary<string, object>();
 
                 if (IsActive)
                 {
@@ -296,53 +297,39 @@ namespace Masa.Blazor
         }
 #endif
 
-        protected override void SetComponentClass()
+        private Block _block = new("m-dialog");
+        protected override bool NoClass => true;
+        protected override bool NoStyle => true;
+
+        protected override IEnumerable<string> BuildComponentClass()
         {
-            var prefix = "m-dialog";
+            return _block.Modifier("active", IsActive)
+                .And(Persistent)
+                .And(Fullscreen)
+                .And(Scrollable)
+                .And(Animated)
+                // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
+                // and the potential for breaking changes, we keep it unchanged.
+                .AddClass(ContentClass)
+                .GenerateCssClasses();
+        }
 
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__container")
-                        .AddIf($"{prefix}__container--attached", () => Attach != null);
-                })
-                .Apply("content", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__content")
-                        .AddIf($"{prefix}__content--active", () => IsActive)
-                        .AddTheme(IsDark, IndependentTheme);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add($"z-index: {ZIndex}");
-                })
-                .Apply("innerContent", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add(prefix)
+        protected override IEnumerable<string> BuildComponentStyle()
+        {
+            var styles = StyleBuilder.Create()
+                .Add("transform-origin", Origin)
+                .AddWidth(Width)
+                .AddMaxWidth(MaxWidth)
+                .GenerateCssStyles();
 
-                        // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
-                        // and the potential for breaking changes, we keep it unchanged.
-                        .Add(ContentClass)
+            if (ContentStyle != null)
+            {
+                // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
+                // and the potential for breaking changes, we keep it unchanged.
+                return styles.Concat(new[] { ContentStyle });
+            }
 
-                        .AddIf($"{prefix}--active", () => IsActive)
-                        .AddIf($"{prefix}--persistent", () => Persistent)
-                        .AddIf($"{prefix}--fullscreen", () => Fullscreen)
-                        .AddIf($"{prefix}--scrollable", () => Scrollable)
-                        .AddIf($"{prefix}--animated", () => Animated);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add($"transform-origin: {Origin}")
-                        .AddWidth(Width)
-                        .AddMaxWidth(MaxWidth)
-
-                        // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
-                        // and the potential for breaking changes, we keep it unchanged.
-                        .Add(ContentStyle);
-                });
+            return styles;
         }
     }
 }
