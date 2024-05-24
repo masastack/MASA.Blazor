@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Masa.Blazor.Components.ErrorHandler;
 
 namespace Masa.Blazor.Core;
 

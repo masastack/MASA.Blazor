@@ -2,7 +2,7 @@
 @using Masa.Blazor.Components.ItemGroup
 @inherits MRoutableGroupItem<MItemGroupBase>
 
-<Element Tag="@Tag"
+<MElement Tag="@Tag"
          Class="@GetClass()"
          Style="@GetStyle()"
          ReferenceCaptureAction="r => Ref = r"
@@ -10,4 +10,4 @@
          @onclick="HandleOnClick"
          @attributes="@Attributes">
     @ChildContent
-</Element>
+</MElement>

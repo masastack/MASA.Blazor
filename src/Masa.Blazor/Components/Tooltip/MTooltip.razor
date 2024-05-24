@@ -4,14 +4,14 @@
 
 @ComputedActivatorContent
 
-<Element Tag="@Tag"
+<MElement Tag="@Tag"
          class="@GetClass()"
          style="@GetStyle()"
          id="@Id"
          ReferenceCaptureAction="r => Ref = r"
          @attributes="@Attributes">
     @GenContent()
-</Element>
+</MElement>
 
 @code {
 

@@ -3,7 +3,7 @@
 @inherits MRoutableGroupItem<MItemGroupBase>
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <Element Class="@GetClass()"
+    <MElement Class="@GetClass()"
              Style="@GetStyle()"
              Tag="@Tag"
              ReferenceCaptureAction="r => Ref = r"
@@ -25,7 +25,7 @@
             @GenAvatarCore(AppendAvatar)
             @ChildContent
         }
-    </Element>
+    </MElement>
 </CascadingValue>
 
 @code {

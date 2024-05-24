@@ -1,4 +1,5 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Transition;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 

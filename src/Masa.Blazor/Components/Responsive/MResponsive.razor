@@ -2,13 +2,13 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <Element id="@Id"
+    <MElement id="@Id"
              class="@GetClass()"
              style="@GetStyle()"
              ReferenceCaptureAction="r => Ref = r"
              @attributes="@Attributes">
         @GenBody()
-    </Element>
+    </MElement>
 </CascadingValue>
 
 @code {

@@ -2,7 +2,7 @@
 @inherits MGroupItem<Masa.Blazor.Components.ItemGroup.MItemGroupBase>
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <Element Tag="@Tag"
+    <MElement Tag="@Tag"
              Class="@GetClass()"
              Style="@GetStyle()"
              ReferenceCaptureAction="_ => Ref = _"
@@ -23,7 +23,7 @@
                 @GenClose()
             }
         </div>
-    </Element>
+    </MElement>
 </CascadingValue>
 
 @code {

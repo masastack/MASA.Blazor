@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using Masa.Blazor.Components.ErrorHandler;
+
+namespace Masa.Blazor
 {
     public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {

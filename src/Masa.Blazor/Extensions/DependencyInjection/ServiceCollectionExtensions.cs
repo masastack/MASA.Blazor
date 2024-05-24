@@ -1,8 +1,10 @@
 ﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
+using Masa.Blazor.Components.ErrorHandler;
 using Masa.Blazor.Components.Input;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
+using Masa.Blazor.Components.Transition;
 using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Mixins.Activatable;
 using Masa.Blazor.Presets.PageStack.NavController;
@@ -81,6 +83,7 @@ public static class ServiceCollectionExtensions
         
         services.TryAddTransient<ActivatableJsModule>();
         services.TryAddTransient<InputJSModule>();
+        services.TryAddTransient<TransitionJSModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
         services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));

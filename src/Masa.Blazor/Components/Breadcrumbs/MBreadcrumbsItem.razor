@@ -5,7 +5,7 @@
     style="@Style"
     id="@Id"
     @attributes="@Attributes">
-    <Element Tag="@Tag"
+    <MElement Tag="@Tag"
              Class="@_block.AddClass(ActiveClass, IsDisabled).Build()"
              @attributes="@_itemAttributes">
         @if (ChildContent != default)
@@ -16,7 +16,7 @@
         {
             @Text
         }
-    </Element>
+    </MElement>
 </li>
 
 <!--When using razor definition without `Items` parameter-->
