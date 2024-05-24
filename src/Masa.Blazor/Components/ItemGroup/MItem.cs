@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public class MItem : BGroupable<ItemGroupBase>
+public class MItem : MGroupable<ItemGroupBase>
 {
     public MItem() : base(GroupType.ItemGroup)
     {

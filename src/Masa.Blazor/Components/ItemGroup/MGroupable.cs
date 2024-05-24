@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.ItemGroup;
 
-public abstract class BGroupable<TGroup> :  MasaComponentBase, IGroupable
+public abstract class MGroupable<TGroup> :  MasaComponentBase, IGroupable
     where TGroup : ItemGroupBase
 {
     [CascadingParameter]
@@ -47,21 +47,21 @@ public abstract class BGroupable<TGroup> :  MasaComponentBase, IGroupable
     private bool _firstRenderAfterBooting;
 
     /// <summary>
-    /// Initializes a base component <see cref="BGroupable{TGroup}"/> with the <see cref="GroupType"/>.
+    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="GroupType"/>.
     /// </summary>
     /// <param name="groupType">the <see cref="GroupType"/> of the groupable component.</param>
-    protected BGroupable(GroupType groupType)
+    protected MGroupable(GroupType groupType)
     {
         _groupType = groupType;
     }
 
     /// <summary>
-    /// Initializes a base component <see cref="BGroupable{TGroup}"/> with the <see cref="GroupType"/>
+    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="GroupType"/>
     /// and specifies whether to bootable.
     /// </summary>
     /// <param name="groupType">the <see cref="GroupType"/> of the groupable component.</param>
     /// <param name="bootable">determines whether bootable is enabled or not.</param>
-    protected BGroupable(GroupType groupType, bool bootable) : this(groupType)
+    protected MGroupable(GroupType groupType, bool bootable) : this(groupType)
     {
         _bootable = bootable;
     }

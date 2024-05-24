@@ -4,7 +4,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MButton : BRoutableGroupItem<ItemGroupBase>, IThemeable
+    public partial class MButton : MRoutableGroupItem<ItemGroupBase>, IThemeable
     {
         public MButton() : base(GroupType.ButtonGroup, "button")
         {

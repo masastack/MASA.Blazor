@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MExpansionPanel : BGroupItem<MExpansionPanels>
+public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
 {
     public MExpansionPanel() : base(GroupType.ExpansionPanels, true)
     {
