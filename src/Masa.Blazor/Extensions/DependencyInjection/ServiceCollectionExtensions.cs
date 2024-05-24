@@ -9,6 +9,7 @@ using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.JSModules;
 using Masa.Blazor.Mixins;
 using Masa.Blazor.Mixins.Activatable;
+using Masa.Blazor.Popup;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -66,6 +67,7 @@ public static class ServiceCollectionExtensions
                 options.Defaults);
         }, masaBlazorServiceLifetime));
 
+        services.TryAdd<IPopupProvider, PopupProvider>(masaBlazorServiceLifetime);
         services.TryAdd<IPopupService, PopupService>(masaBlazorServiceLifetime);
 
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
