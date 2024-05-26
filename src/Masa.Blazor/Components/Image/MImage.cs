@@ -169,11 +169,17 @@ public partial class MImage : MResponsive, IThemeable
         _currentSrc = Src;
     }
 
-    private Block _block = new("m-image");
+    private static Block _block = new("m-image");
+    private static ModifierBuilder _imageModifierBuilder = _block.Element("image").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(_block.AddTheme(IsDark, IndependentTheme).GenerateCssClasses());
+        return base.BuildComponentClass().Concat(
+            new[]
+            {
+                _block.Name,
+                CssClassUtils.GetTheme(IsDark, IndependentTheme)
+            });
     }
 
     private string? GetBackgroundImageUrl()

@@ -201,22 +201,23 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
         Attributes["ripple"] = ComputedRipple;
     }
 
-    private Block _block = new("m-list-item");
+    private static Block _block = new("m-list-item");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Dense)
-            .And(Disabled)
-            .And(Selectable)
-            .And(TwoLine)
-            .And(ThreeLine)
-            .And("link", IsClickable && !Inactive)
-            .And(Highlighted)
-            .And("active", InternalIsActive)
+        yield return _modifierBuilder.Add(Dense)
+            .Add(Disabled)
+            .Add(Selectable)
+            .Add(TwoLine)
+            .Add(ThreeLine)
+            .Add("link", IsClickable && !Inactive)
+            .Add(Highlighted)
+            .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddTextColor(Color)
             .AddTheme(IsDark, IndependentTheme)
             .AddClass("")
-            .GenerateCssClasses();
+            .Build();
     }
 }

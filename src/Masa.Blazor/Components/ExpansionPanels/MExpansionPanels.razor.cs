@@ -94,19 +94,24 @@ public partial class MExpansionPanels : MItemGroup
         }
 #endif
 
-    private Block _block = new("m-expansion-panels");
+    private static Block _block = new("m-expansion-panels");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Accordion)
-                .And(Flat)
-                .And(Hover)
-                .And(Focusable)
-                .And(Inset)
-                .And(Popout)
-                .And(Tile)
-                .GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder.Add(
+                    Accordion,
+                    Flat,
+                    Hover,
+                    Focusable,
+                    Inset,
+                    Popout,
+                    Tile
+                ).Build()
+            }
         );
     }
 }

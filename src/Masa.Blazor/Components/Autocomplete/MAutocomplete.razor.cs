@@ -123,12 +123,13 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
             .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
     }
 
-    private Block _block = new("m-autocomplete");
-    
+    private static Block _block = new("m-autocomplete");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier("is-selecting-index", SelectedIndex > -1).GenerateCssClasses()
+            new[] { _modifierBuilder.Add("is-selecting-index", SelectedIndex > -1).Build() }
         );
     }
 

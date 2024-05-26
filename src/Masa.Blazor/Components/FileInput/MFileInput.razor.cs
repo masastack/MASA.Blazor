@@ -171,12 +171,13 @@ public partial class MFileInput<TValue> : MTextField<TValue>
         return string.Concat(name.AsSpan(0, charsKeepOneSide), "…", name.AsSpan(name.Length - charsKeepOneSide));
     }
 
-    private Block _block = new Block("m-file-input");
+    private static Block _block = new Block("m-file-input");
+    private static ModifierBuilder _textModifierBuilder = _block.Element("text").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.GenerateCssClasses()
+            new string[] { _block.Name }
         );
     }
 

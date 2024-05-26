@@ -1,80 +1,55 @@
-﻿using BlazorComponent.Web;
-using Masa.Blazor.Mixins;
-using Element = BlazorComponent.Web.Element;
+﻿using Element = BlazorComponent.Web.Element;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable
+public class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable
 {
     public MBottomNavigation() : base(GroupType.ButtonGroup)
     {
     }
 
-    [Inject]
-    private MasaBlazor MasaBlazor { get; set; } = null!;
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Parameter]
-    public bool Absolute { get; set; }
+    [Parameter] public bool Absolute { get; set; }
 
-    [Parameter]
-    public bool App { get; set; }
+    [Parameter] public bool App { get; set; }
 
-    [Parameter]
-    public bool Fixed { get; set; }
+    [Parameter] public bool Fixed { get; set; }
 
-    [Parameter]
-    public bool Grow { get; set; }
+    [Parameter] public bool Grow { get; set; }
 
-    [Parameter]
-    [MasaApiParameter(56)]
-    public StringNumber? Height { get; set; } = 56;
+    [Parameter] [MasaApiParameter(56)] public StringNumber? Height { get; set; } = 56;
 
-    [Parameter]
-    public StringNumber? MaxHeight { get; set; }
+    [Parameter] public StringNumber? MaxHeight { get; set; }
 
-    [Parameter]
-    public StringNumber? MaxWidth { get; set; }
+    [Parameter] public StringNumber? MaxWidth { get; set; }
 
-    [Parameter]
-    public StringNumber? MinHeight { get; set; }
+    [Parameter] public StringNumber? MinHeight { get; set; }
 
-    [Parameter]
-    public StringNumber? MinWidth { get; set; }
+    [Parameter] public StringNumber? MinWidth { get; set; }
 
-    [Parameter]
-    public string? ScrollTarget { get; set; } = "window";
+    [Parameter] public string? ScrollTarget { get; set; } = "window";
 
-    [Parameter]
-    public double ScrollThreshold { get; set; }
+    [Parameter] public double ScrollThreshold { get; set; }
 
-    [Parameter]
-    public StringNumber? Width { get; set; }
+    [Parameter] public StringNumber? Width { get; set; }
 
-    [Parameter]
-    public bool HideOnScroll { get; set; }
+    [Parameter] public bool HideOnScroll { get; set; }
 
-    [Parameter]
-    public bool Horizontal { get; set; }
+    [Parameter] public bool Horizontal { get; set; }
 
-    [Parameter]
-    public bool Shift { get; set; }
+    [Parameter] public bool Shift { get; set; }
 
-    [Parameter]
-    [MasaApiParameter(true)]
-    public bool InputValue { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public bool InputValue { get; set; } = true;
 
-    [Parameter]
-    public EventCallback<bool> InputValueChanged { get; set; }
+    [Parameter] public EventCallback<bool> InputValueChanged { get; set; }
 
-    [Parameter]
-    public string? BackgroundColor { get; set; }
+    [Parameter] public string? BackgroundColor { get; set; }
 
-    [Parameter]
-    public string? Color { get; set; }
+    [Parameter] public string? Color { get; set; }
 
-    [Parameter]
-    public bool Routable { get; set; }
+    [Parameter] public bool Routable { get; set; }
 
     private Scroller? _scroller;
     private bool _haveRendered;
@@ -101,20 +76,21 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         _scroller = new Scroller(this);
     }
 
-    private Block _block = new("m-bottom-navigation");
+    private static Block _block = new("m-bottom-navigation");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Absolute)
-                .And(Grow)
-                .And("fixed", !Absolute && (App || Fixed))
-                .And(Horizontal)
-                .And(Shift)
-                .AddTextColor(Color)
-                .AddBackgroundColor(BackgroundColor)
-                .GenerateCssClasses()
-        );
+            new[]
+            {
+                _modifierBuilder
+                    .Add(Absolute, Grow, Horizontal, Shift)
+                    .Add("fixed", !Absolute && (App || Fixed))
+                    .AddTextColor(Color)
+                    .AddBackgroundColor(BackgroundColor)
+                    .Build()
+            });
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -165,7 +141,8 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
                     ScrollTarget,
                     "scroll",
                     DotNetObjectReference.Create(new Invoker(async () =>
-                        await EventCallback.Factory.Create(this, async () => await _scroller!.OnScroll(ThresholdMet)).InvokeAsync()))
+                        await EventCallback.Factory.Create(this, async () => await _scroller!.OnScroll(ThresholdMet))
+                            .InvokeAsync()))
                 );
             }
 

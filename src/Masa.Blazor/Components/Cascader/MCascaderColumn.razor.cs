@@ -135,5 +135,5 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
         return $"{ItemGroup.Ref.GetSelector()} > .m-cascader__column-item:nth-child({index + 1})";
     }
 
-    private Block _block = new("m-cascader");
+    private static Block _block = new("m-cascader");
 }

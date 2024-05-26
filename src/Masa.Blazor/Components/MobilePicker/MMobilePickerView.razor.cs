@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.MobilePicker;
+using Element = BemIt.Element;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -120,11 +121,13 @@ public partial class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> :
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-    private Block _block = new("m-mobile-picker");
+    private static Block _block = new("m-mobile-picker");
+    private static Element _view = _block.Element("view");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Element("view").AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _view.Name;
+        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

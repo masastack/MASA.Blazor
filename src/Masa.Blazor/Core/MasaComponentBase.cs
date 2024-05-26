@@ -61,7 +61,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
 
     protected virtual bool NoClass => false;
     protected virtual bool NoStyle => false;
-
+    
     public string? GetClass()
     {
         var stringBuilder = new StringBuilder();
@@ -101,6 +101,28 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     protected virtual IEnumerable<string> BuildComponentClass() => Enumerable.Empty<string>();
 
     protected virtual IEnumerable<string> BuildComponentStyle() => Enumerable.Empty<string>();
+    
+    protected string? GetClass(params string?[] classes)
+    {
+        var stringBuilder = new StringBuilder();
+        foreach (var item in classes)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+
+            if (stringBuilder.Length == 0)
+            {
+                stringBuilder.Append(' ');
+            }
+                
+            stringBuilder.Append(item);
+        }
+
+        var css = stringBuilder.ToString();
+        return css.Length == 0 ? null : css;
+    }
 
     #endregion
 

@@ -61,12 +61,15 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
         }
     }
 
-    private Block _block = new("m-cascader");
+    private static Block _block = new("m-cascader");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.GenerateCssClasses()
+            new[]
+            {
+                _block.Name
+            }
         );
     }
 

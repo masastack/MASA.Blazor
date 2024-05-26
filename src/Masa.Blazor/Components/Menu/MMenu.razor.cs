@@ -178,11 +178,13 @@ namespace Masa.Blazor
             }
         }
 
-        private Block _block = new("m-menu");
+        private static Block _block = new("m-menu");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier("attached", IsAttachSelf).GenerateCssClasses();
+            yield return _modifierBuilder.Add("attached", IsAttachSelf).Build();
         }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)

@@ -161,20 +161,19 @@ public partial class MFooter : MasaComponentBase, IThemeable
         }
 #endif
     
-    private Block _block = new("m-footer");
+    private static Block _block = new("m-footer");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Absolute)
-            .And("fixed", !Absolute && (App || Fixed))
-            .And(Padless)
-            .And(Inset)
+        yield return _modifierBuilder.Add(Absolute, Padless, Inset)
+            .Add("fixed", !Absolute && (App || Fixed))
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
             .AddElevation(Elevation)
             .AddRounded(Rounded, Tile)
             .AddClass("m-sheet")
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

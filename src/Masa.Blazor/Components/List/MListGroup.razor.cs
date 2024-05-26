@@ -70,16 +70,17 @@ public partial class MListGroup : MasaComponentBase
         _previousAbsolutePath = NavigationManager.GetAbsolutePath();
     }
 
-    private Block _block = new("m-list-group");
+    private static Block _block = new("m-list-group");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("active", IsActive)
-            .And(Disabled)
-            .And(NoAction)
-            .And(SubGroup)
+       yield return _modifierBuilder.Add("active", IsActive)
+            .Add(Disabled)
+            .Add(NoAction)
+            .Add(SubGroup)
             .AddTextColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

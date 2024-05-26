@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Masa.Blazor.Components.ItemGroup;
-using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
@@ -152,37 +151,39 @@ namespace Masa.Blazor
 
         protected override bool AfterHandleEventShouldRender() => false;
 
-        private Block _block = new("m-btn");
+        private static Block _block = new("m-btn");
+        private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(Absolute)
-                .And(Block)
-                .And(Bottom)
-                .And(Disabled)
-                .And(IsElevated)
-                .And(Fab)
-                .And(Fixed)
-                .And("has-bg", HasBackground)
-                .And("icon", IsIconBtn)
-                .And(Left)
-                .And(Loading)
-                .And(Outlined)
-                .And(Plain)
-                .And(Right)
-                .And("round", IsRound)
-                .And(Rounded)
-                .And(Text)
-                .And(Tile)
-                .And(Top)
-                .And("active", InternalIsActive)
+            yield return _blockModifierBuilder
+                .Add(Absolute)
+                .Add(Block)
+                .Add(Bottom)
+                .Add(Disabled)
+                .Add(IsElevated)
+                .Add(Fab)
+                .Add(Fixed)
+                .Add("has-bg", HasBackground)
+                .Add("icon", IsIconBtn)
+                .Add(Left)
+                .Add(Loading)
+                .Add(Outlined)
+                .Add(Plain)
+                .Add(Right)
+                .Add("round", IsRound)
+                .Add(Rounded)
+                .Add(Text)
+                .Add(Tile)
+                .Add(Top)
+                .Add("active", InternalIsActive)
                 .AddClass(ComputedActiveClass, InternalIsActive)
                 .AddClass(CssClassUtils.GetSize(XSmall, Small, Large, XLarge))
                 .AddTheme(IsDark, IndependentTheme)
                 .AddBackgroundColor(Color, HasBackground)
                 .AddTextColor(Color, !HasBackground)
                 .AddElevation(Elevation)
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Element = BemIt.Element;
+
+namespace Masa.Blazor;
 
 public partial class MMessages : MasaComponentBase
 {
@@ -49,13 +51,14 @@ public partial class MMessages : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-messages");
+    private static Block _block = new("m-messages");
+    private static Element _message = _block.Element("message");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.AddTheme(IsDark, IndependentTheme)
-            .AddTextColor(Color)
-            .GenerateCssClasses();
+        yield return _block.Name;
+        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetColor(Color, true);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

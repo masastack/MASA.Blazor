@@ -34,7 +34,7 @@
     {
         var noTransition = string.IsNullOrWhiteSpace(Transition);
 
-        var css = _block.Element("badge").AddBackgroundColor(Color).Build();
+        var css = _badgeModifierBuilder.AddBackgroundColor(Color).Build();
         var style = StyleBuilder.Create()
             .AddIf("bottom", ComputedBottom, !Inline)
             .AddIf("left", ComputedLeft, !Inline)

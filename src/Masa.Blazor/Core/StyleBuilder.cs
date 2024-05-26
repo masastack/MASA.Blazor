@@ -1,8 +1,12 @@
 ﻿namespace Masa.Blazor.Core;
 
-public class StyleBuilder
+public struct StyleBuilder
 {
     private readonly Dictionary<string, string?> _styles = new();
+
+    public StyleBuilder()
+    {
+    }
 
     public static StyleBuilder Create() => new();
 

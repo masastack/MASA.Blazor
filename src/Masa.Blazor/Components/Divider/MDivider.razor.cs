@@ -74,15 +74,16 @@ public partial class MDivider : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-divider");
+    private static Block _block = new("m-divider");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
+    private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
     private string GetWrapperClass()
     {
-        return _block.Element("wrapper")
-            .Modifier(HasContent)
-            .And("center", IsCenter)
-            .And(Left)
-            .And(Right)
+        return _wrapperModifierBuilder
+            .Add(HasContent, Left, Right)
+            .Add("center", IsCenter)
             .ToString();
     }
 
@@ -103,10 +104,10 @@ public partial class MDivider : MasaComponentBase
         return stringBuilder.Length > 0 ? stringBuilder.ToString() : null;
     }
 
-    private string? GetHRClass()
+    private string GetHRClass()
     {
-        return _block.Modifier(Inset)
-            .And(Vertical)
+        return _modifierBuilder
+            .Add(Inset, Vertical)
             .AddClass(Class, !HasContent)
             .AddTheme(IsDark, IndependentTheme)
             .ToString();

@@ -10,7 +10,7 @@ public partial class MAppBarTitle : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    private Block _block = new("m-app-bar-title");
+    private static Block _block = new("m-app-bar-title");
 
     private double _contentWidth;
     private double _left;
@@ -54,7 +54,8 @@ public partial class MAppBarTitle : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.AddClass("m-toolbar__title").GenerateCssClasses();
+        yield return _block.Name;
+        yield return "m-toolbar__title";
     }
 
     private string? GetContentStyle()

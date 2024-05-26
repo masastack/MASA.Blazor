@@ -69,14 +69,15 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         });
     }
 
-    private Block _block = new("m-application");
+    private static Block _block = new("m-application");
+    private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
+        yield return _blockModifierBuilder
+            .Add(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
             .AddTheme(IsDark, isIndependent: false)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override ValueTask DisposeAsyncCore()

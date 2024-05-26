@@ -6,7 +6,7 @@
     @ComputedActivatorContent
 
     <CascadingValue Value="this" IsFixed>
-        <div class="@_block.Element("container").Modifier("attached", Attach != null).AddClass(Class)"
+        <div class="@_containerModifierBuilder.Add("attached", Attach != null).AddClass(Class)"
              style="@Style"
              id="@Id"
              @ref="Ref"
@@ -14,7 +14,7 @@
              @attributes="@Attributes">
             @if (IsBooted)
             {
-                <div class="@_block.Element("content").Modifier("active", IsActive).AddTheme(IsDark, IndependentTheme)"
+                <div class="@_contentModifierBuilder.Add("active", IsActive).AddTheme(IsDark, IndependentTheme)"
                      style="z-index: @ZIndex"
                      @onkeydown="@Keydown"
                      @ref="@ContentRef"

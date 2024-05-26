@@ -8,12 +8,16 @@ public class MListItemGroup : MItemGroup
 
     [Parameter] public string? Color { get; set; }
 
-    private Block _block = new("m-list-item-group");
+    private static Block _block = new("m-list-item-group");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.AddTextColor(Color).GenerateCssClasses()
+            new[]
+            {
+                _block.Name,
+                CssClassUtils.GetColor(Color, true)
+            }
         );
     }
 }

@@ -29,7 +29,7 @@
                 @foreach (var item in Items)
                 {
                     <MButton Value="@item.Value"
-                             Class="@_block.Element("controls__item").Build()"
+                             Class="@_block.Element("controls__item").Name"
                              Small
                              Icon>
                         <MIcon Size="18" Icon="@DelimiterIcon"/>

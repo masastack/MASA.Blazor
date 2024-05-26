@@ -3,13 +3,13 @@
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <MElement Tag="@Tag"
-             Class="@GetClass()"
-             Style="@GetStyle()"
-             ReferenceCaptureAction="_ => Ref = _"
-             @onclick="@HandleOnClick"
-             __internal_stopPropagation_onclick="@OnClickStopPropagation"
-             __internal_preventDefault_onclick="@OnClickPreventDefault"
-             @attributes="@Attributes">
+              Class="@GetClass()"
+              Style="@GetStyle()"
+              ReferenceCaptureAction="r => Ref = r"
+              @onclick="@HandleOnClick"
+              __internal_stopPropagation_onclick="@OnClickStopPropagation"
+              __internal_preventDefault_onclick="@OnClickPreventDefault"
+              @attributes="@Attributes">
         <div class="@_block.Element("content")">
             @if (Filter)
             {
@@ -32,13 +32,15 @@
     private RenderFragment GenFilter() => __builder =>
     {
         <ExpandXTransition>
-            <MIcon If="@IsActive" Class="@_block.Element("filter").Build()" Icon="@FilterIcon" Left/>
+            <MIcon If="@IsActive"
+                   Class="@_block.Element("filter").Name"
+                   Icon="@FilterIcon" Left/>
         </ExpandXTransition>
     };
 
     private RenderFragment GenClose() => __builder =>
     {
-        <MIcon Class="@_block.Element("close").Build()"
+        <MIcon Class="@_block.Element("close").Name"
                Icon="@CloseIcon"
                OnClick="@OnCloseClick"
                OnClickPreventDefault

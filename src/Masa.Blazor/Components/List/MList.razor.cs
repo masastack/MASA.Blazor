@@ -182,26 +182,29 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
         }
 #endif
 
-    private Block _block = new("m-list");
-    private Block _sheetBlock = new("m-sheet");
+    private static Block _block = new("m-list");
+    private static Block _sheetBlock = new("m-sheet");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _sheetModifierBuilder = _sheetBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _sheetBlock.Modifier(Outlined)
-            .And(Shaped)
+        yield return _sheetModifierBuilder
+            .Add(Shaped)
             .AddTheme(IsDark, IndependentTheme)
             .AddElevation(Elevation)
-            .GenerateCssClasses().Concat(
-                _block.Modifier(Dense)
-                    .And(Disabled)
-                    .And(Flat)
-                    .And(Nav)
-                    .And(Rounded)
-                    .And(Subheader)
-                    .And(TwoLine)
-                    .And(ThreeLine)
-                    .GenerateCssClasses()
-            );
+            .Build();
+        yield return _modifierBuilder
+            .Add(
+                Dense,
+                Disabled,
+                Flat,
+                Nav,
+                Rounded,
+                Subheader,
+                TwoLine)
+            .Add(ThreeLine)
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

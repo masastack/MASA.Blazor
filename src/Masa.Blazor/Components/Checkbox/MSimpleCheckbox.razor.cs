@@ -34,12 +34,13 @@ public partial class MSimpleCheckbox : MasaComponentBase
 
     [Parameter] public bool Ripple { get; set; } = true;
 
-    private Block _block = new Block("m-simple-checkbox");
-    private Block _selectionBlock = new Block("m-input--selection-controls");
+    private static Block _block = new("m-simple-checkbox");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static Block _selectionBlock = new("m-input--selection-controls");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).Build();
     }
 
     public bool IsDark

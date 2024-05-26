@@ -56,13 +56,16 @@
             }
         }
 
-        private Block _block = new("m-input--checkbox");
+        private static Block _block = new("m-input--checkbox");
 
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
-                _block.AddClass("m-input--indeterminate", Indeterminate)
-                    .GenerateCssClasses()
+                new[]
+                {
+                    _block.Name,
+                    Indeterminate ? "m-input--indeterminate" : ""
+                }
             );
         }
 

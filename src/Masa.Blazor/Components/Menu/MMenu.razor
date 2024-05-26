@@ -10,9 +10,9 @@
 
     @if (IsBooted)
     {
-        var css = _block.Element("content")
-            .Modifier(Auto)
-            .And("fixed", ActivatorFixed)
+        var css = _contentModifierBuilder
+            .Add(Auto)
+            .Add("fixed", ActivatorFixed)
             .AddRounded(Tile ? "0" : Rounded)
             .AddClass("menuable__content__active", IsActive)
             .AddClass(ContentClass)

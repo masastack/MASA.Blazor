@@ -123,7 +123,8 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     protected TimeOnly? MaxTime;
     protected TimeOnly? MinTime;
 
-    protected Block BasePickerBlock => new("m-date-time-picker");
+    protected static Block BasePickerBlock = new Block("m-date-time-picker");
+    protected static ModifierBuilder BasePickerModifierBuilder = BasePickerBlock.CreateModifierBuilder();
 
     public bool IsDark
     {

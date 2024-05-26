@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor.Mixins;
 using Masa.Blazor.Mixins.ScrollStrategy;
+using Element = BemIt.Element;
 
 namespace Masa.Blazor;
 
@@ -56,7 +57,10 @@ public partial class MOverlay : IThemeable
         }
     }
 
-    private readonly Block _block = new("m-overlay");
+    private static readonly Block _block = new("m-overlay");
+    private static readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static readonly ModifierBuilder _scrimModifierBuilder = _block.Element("scrim").CreateModifierBuilder();
+    private static readonly Element _content = _block.Element("content");
 
     private bool _booted;
 
@@ -113,11 +117,11 @@ public partial class MOverlay : IThemeable
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("active", Value)
-            .And("absolute", Absolute || Contained)
-            .And(Contained)
+        yield return _modifierBuilder.Add("active", Value)
+            .Add("absolute", Absolute || Contained)
+            .Add(Contained)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

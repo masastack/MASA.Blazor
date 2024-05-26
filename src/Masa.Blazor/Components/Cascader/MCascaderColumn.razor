@@ -3,7 +3,7 @@
 @typeparam TItem
 @typeparam TValue
 
-<MList Class="@_block.Element("column").Build()" Dense="@Dense">
+<MList Class="@_block.Element("column").Name" Dense="@Dense">
     <MListItemGroup Value="SelectedItemIndex" @ref="ItemGroup">
         @foreach (var (item, index) in Items.Select((item, index) => (item, index)))
         {
@@ -11,7 +11,7 @@
             <MListItem @onmousedown:preventDefault
                        Value="index"
                        OnClick="@(() => SelectItemAsync(item))"
-                       Class="@_block.Element("column-item").Build()"
+                       Class="@_block.Element("column-item").Name"
                        Dense="@Dense"
                        ActiveClass="@(new CssBuilder().AddTextColor(Color).GetClass())"
                        IsActive="@(EqualityComparer<TItem>.Default.Equals(SelectedItem, item))">

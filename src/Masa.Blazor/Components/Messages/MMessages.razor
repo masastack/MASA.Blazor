@@ -14,7 +14,7 @@
                 <BShouldRender Value="@(Value.Count > 0)">
                     @foreach (var message in Value)
                     {
-                        @RenderFragments.RenderFragmentOrText(ChildContent, message, message, _block.Element("message").Build())
+                        @RenderFragments.RenderFragmentOrText(ChildContent, message, message, _message.Name)
                     }
                 </BShouldRender>
             </IfTransitionElement>

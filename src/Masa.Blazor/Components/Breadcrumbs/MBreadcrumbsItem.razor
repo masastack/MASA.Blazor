@@ -6,8 +6,8 @@
     id="@Id"
     @attributes="@Attributes">
     <MElement Tag="@Tag"
-             Class="@_block.AddClass(ActiveClass, IsDisabled).Build()"
-             @attributes="@_itemAttributes">
+              Class="@_modifierBuilder.AddClass(ActiveClass, IsDisabled).Build()"
+              @attributes="@_itemAttributes">
         @if (ChildContent != default)
         {
             @ChildContent((IsLast, IsDisabled))

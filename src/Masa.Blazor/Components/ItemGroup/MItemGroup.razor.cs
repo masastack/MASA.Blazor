@@ -85,10 +85,11 @@ public partial class MItemGroup : MItemGroupBase, IThemeable
         }
 #endif
     
-    private Block _block = new("m-item-group");
+    private static Block _block = new("m-item-group");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _block.Name;
+        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
     }
 }

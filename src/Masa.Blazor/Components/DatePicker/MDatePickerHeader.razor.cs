@@ -128,10 +128,11 @@ public partial class MDatePickerHeader : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-date-picker-header");
+    private static Block _block = new("m-date-picker-header");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
     }
 }

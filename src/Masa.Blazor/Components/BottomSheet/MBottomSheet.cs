@@ -11,10 +11,16 @@ public class MBottomSheet : MDialog
         return base.SetParametersAsync(parameters);
     }
 
-    private Block _block = new("m-bottom-sheet");
+    private static Block _block = new("m-bottom-sheet");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(_block.Modifier(Inset).GenerateCssClasses());
+        return base.BuildComponentClass().Concat(
+            new[]
+            {
+                _modifierBuilder.Add(Inset).Build()
+            }
+        );
     }
 }

@@ -38,7 +38,7 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
 
     private bool IsRoutable => Href != null && (Breadcrumbs?.Routable is true);
 
-    private Dictionary<string, object?> _itemAttributes = new();
+    private Dictionary<string, object> _itemAttributes = new();
 
     public EventCallback<MouseEventArgs> OnClick { get; }
 
@@ -103,5 +103,6 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
         await base.DisposeAsyncCore();
     }
 
-    private Block _block = new("m-breadcrumbs__item");
+    private static Block _block = new("m-breadcrumbs__item");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 }

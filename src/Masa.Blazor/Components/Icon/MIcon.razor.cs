@@ -274,19 +274,20 @@ namespace Masa.Blazor
             }
         }
 
-        private Block _block = new("m-icon");
+        private static Block _block = new("m-icon");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier("link", OnClick.HasDelegate)
-                .And(Dense)
-                .And(Left)
-                .And(Disabled)
-                .And(Right)
+            yield return _modifierBuilder.Add("link", OnClick.HasDelegate)
+                .Add(Dense)
+                .Add(Left)
+                .Add(Disabled)
+                .Add(Right)
                 .AddTheme(IsDark, IndependentTheme)
                 .AddTextColor(Color)
                 .AddClass(_iconCss, ComputedIcon is { IsSvg: false })
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

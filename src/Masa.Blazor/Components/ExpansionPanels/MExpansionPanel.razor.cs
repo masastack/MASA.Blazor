@@ -23,7 +23,8 @@ public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
         await ToggleAsync();
     }
 
-    private Block _block = new("m-expansion-panel");
+    private static Block _block = new("m-expansion-panel");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override void OnParametersSet()
     {
@@ -34,11 +35,11 @@ public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(NextActive)
-            .And("disabled", IsDisabled)
-            .And("active", InternalIsActive)
+        yield return _modifierBuilder
+            .Add(NextActive)
+            .Add("disabled", IsDisabled)
+            .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
-            .GenerateCssClasses();
+            .Build();
     }
 }

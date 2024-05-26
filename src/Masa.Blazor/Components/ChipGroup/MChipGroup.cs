@@ -28,12 +28,15 @@ public class MChipGroup : MSlideGroup
         }, immediate: true);
     }
 
-    private Block _block = new("m-chip-group");
+    private static ModifierBuilder _modifierBuilder = new Block("m-chip-group").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Column).GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder.Add(Column).Build()
+            }
         );
     }
 }

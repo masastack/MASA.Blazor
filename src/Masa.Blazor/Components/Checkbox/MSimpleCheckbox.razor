@@ -17,7 +17,7 @@
 
             @if (Ripple && !Disabled)
             {
-                <div class="@_selectionBlock.Element("ripple").AddTextColor(Color)"
+                <div class="@GetClass(_selectionBlock.Element("ripple").Name, CssClassUtils.GetColor(Color, true))"
                      style="@(StyleBuilder.Create().AddTextColor(Color))">
                 </div>
             }

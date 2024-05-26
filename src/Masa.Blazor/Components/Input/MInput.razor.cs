@@ -268,22 +268,24 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     protected bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-    private Block _block = new("m-input");
+    private static Block _block = new("m-input");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _slotModifierBuilder = _block.Element("slot").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(HasState)
-            .And("hide-details", !ShowDetails)
-            .And(IsLabelActive)
-            .And(IsDirty)
-            .And(IsDisabled)
-            .And(IsFocused)
-            .And("is-loading", Loading != null && Loading != false)
-            .And(IsReadonly)
-            .And(Dense)
+        yield return _modifierBuilder.Add(HasState)
+            .Add("hide-details", !ShowDetails)
+            .Add(IsLabelActive)
+            .Add(IsDirty)
+            .Add(IsDisabled)
+            .Add(IsFocused)
+            .Add("is-loading", Loading != null && Loading != false)
+            .Add(IsReadonly)
+            .Add(Dense)
             .AddTheme(IsDark, IndependentTheme)
             .AddTextColor(ValidationState)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

@@ -11,8 +11,10 @@ public class MDrop : ComponentBase
     [Parameter] public EventCallback<ExDragEventArgs> OnDrop { get; set; }
 
     protected ElementReference ElementReference { get; private set; }
+
+    private static readonly ModifierBuilder _modifierBuilder = new Block("m-drop").CreateModifierBuilder();
     
-    protected virtual string ClassString => new Block("m-drop").AddClass(Class).Build();
+    protected virtual string ClassString => _modifierBuilder.AddClass(Class).Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

@@ -2,8 +2,8 @@
 @inherits MData<TItem>
 @typeparam TItem
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
+<div class="@GetClass()"
+     style="@GetStyle()"
      @ref="@Ref">
 
     @HeaderContent
@@ -20,7 +20,7 @@
     
     protected virtual RenderFragment RenderEmptyWrapper(RenderFragment? childContent, string? childText) => __builder =>
     {
-        <div class="@CssProvider.GetClass("empty-wrapper")">
+        <div class="@_block.Element("empty-wrapper")">
             @ContentOrText(childContent, childText)
         </div>
     };

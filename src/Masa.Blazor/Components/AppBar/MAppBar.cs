@@ -274,23 +274,28 @@ public class MAppBar : MToolbar, IScrollable
         return new StyleBuilder().AddIf("opacity", ComputedOpacity.ToString(), ComputedOpacity.HasValue).Build();
     }
 
-    private Block _block = new("m-app-bar");
+    private static Block _block = new("m-app-bar");
+    private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier("clipped", ClippedLeft || ClippedRight)
-                .And(ClippedLeft)
-                .And(ClippedRight)
-                .And(FadeImgOnScroll)
-                .And(ElevateOnScroll)
-                .And(App)
-                .And("fixed", !Absolute && (App || Fixed))
-                .And(HideShadow)
-                .And("is-scrolled", _scroller is { CurrentScroll: > 0 })
-                .And(ShrinkOnScroll)
-                .AddClass("app--sized", _sized)
-                .GenerateCssClasses()
+            new[]
+            {
+                _blockModifierBuilder
+                    .Add("clipped", ClippedLeft || ClippedRight)
+                    .Add(ClippedLeft)
+                    .Add(ClippedRight)
+                    .Add(FadeImgOnScroll)
+                    .Add(ElevateOnScroll)
+                    .Add(App)
+                    .Add("fixed", !Absolute && (App || Fixed))
+                    .Add(HideShadow)
+                    .Add("is-scrolled", _scroller is { CurrentScroll: > 0 })
+                    .Add(ShrinkOnScroll)
+                    .AddClass("app--sized", _sized)
+                    .Build()
+            }
         );
     }
 

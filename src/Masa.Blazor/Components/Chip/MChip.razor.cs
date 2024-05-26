@@ -127,27 +127,24 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
         Attributes["tabindex"] = Matched && !Disabled ? 0 : Tabindex;
     }
 
-    private Block _block = new("m-chip");
+    private static Block _block = new("m-chip");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("clickable", IsClickable)
-            .And(Disabled)
-            .And(Draggable)
-            .And(Label)
-            .And(Link)
-            .And("no-color", string.IsNullOrWhiteSpace(Color))
-            .And(Outlined)
-            .And(Pill)
-            .And("removable", Close)
-            .And("active", InternalIsActive)
+        yield return _modifierBuilder
+            .Add("clickable", IsClickable)
+            .Add(Disabled, Draggable, Label, Link, Outlined, Pill)
+            .Add("no-color", string.IsNullOrWhiteSpace(Color))
+            .Add("removable", Close)
+            .Add("active", InternalIsActive)
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
             .AddTextColor(Color, Outlined)
             .AddTextColor(TextColor)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddClass(CssClassUtils.GetSize(XSmall, Small, Large, XLarge))
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

@@ -67,7 +67,10 @@ public partial class MPagination : MasaComponentBase
         }
     }
     
-    private Block _block = new("m-pagination");
+    private static Block _block = new("m-pagination");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _paginationModifierBuilder = _block.Element("pagination").CreateModifierBuilder();
+    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     public bool PrevDisabled => Value <= 1;
 

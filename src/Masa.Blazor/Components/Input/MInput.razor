@@ -1,6 +1,7 @@
 ﻿@namespace Masa.Blazor
 @inherits MasaComponentBase
 @attribute [CascadingTypeParameter(nameof(TValue))]
+@using BemIt.Extensions
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @typeparam TValue
 
@@ -132,7 +133,7 @@
 
     protected virtual RenderFragment GenInputSlot() => __builder =>
     {
-        <div class="@_block.Element("slot").AddBackgroundColor(BackgroundColor)"
+        <div class="@_slotModifierBuilder.AddBackgroundColor(BackgroundColor)"
              style="@(StyleBuilder.Create().AddHeight(Height).AddMinHeight(MinHeight).AddBackgroundColor(BackgroundColor))"
              @onmousedown="@HandleOnMouseDownAsync"
              @attributes="@InputSlotAttrs"

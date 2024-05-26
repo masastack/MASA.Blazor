@@ -5,7 +5,7 @@
     <hr class="@GetHRClass()" style="@GetHRStyle()" id="@Id" @ref="Ref"/>
     @if (ChildContent is not null)
     {
-        <span class="@_block.Element("content").Modifier(Inset).AddTheme(IsDark, IndependentTheme)">
+        <span class="@_contentModifierBuilder.Add(Inset).AddTheme(IsDark, IndependentTheme)">
             @ChildContent
         </span>
     }

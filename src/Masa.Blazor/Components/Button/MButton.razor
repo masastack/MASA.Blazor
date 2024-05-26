@@ -1,5 +1,6 @@
 ﻿@namespace Masa.Blazor
-@inherits Masa.Blazor.Components.ItemGroup.MRoutableGroupItem<Masa.Blazor.Components.ItemGroup.MItemGroupBase>
+@using Masa.Blazor.Components.ItemGroup
+@inherits MRoutableGroupItem<MItemGroupBase>
 
 <CascadingValue Value="IsDark" Name="IsDark">
     @if (Key is not null)
@@ -83,8 +84,8 @@
             return;
         }
 
-        var large = position == null ? Large : false;
-        var xLarge = position == null ? XLarge : false;
+        var large = position == null && Large;
+        var xLarge = position == null && XLarge;
 
         <MIcon Left="@left"
                Right="@right"

@@ -107,14 +107,18 @@ public partial class MCarousel : MWindow
         });
     }
 
-    private Block _block = new("m-carousel");
+    private static Block _block = new("m-carousel");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(HideDelimiterBackground)
-                .And("vertical-delimiters", IsVertical)
-                .GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder.Add(HideDelimiterBackground)
+                    .Add("vertical-delimiters", IsVertical)
+                    .Build()
+            }
         );
     }
 
@@ -125,7 +129,7 @@ public partial class MCarousel : MWindow
         );
     }
 
-    private string GetControlsClass() => _block.Element("controls").Build();
+    private string GetControlsClass() => _block.Element("controls").Name;
 
     private string GetControlsStyle() => StyleBuilder.Create()
         .Add("left", VerticalDelimiters == "left" && IsVertical ? "0" : "auto")

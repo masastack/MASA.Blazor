@@ -154,13 +154,16 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
         }
     }
 
-    private Block _block = new("m-otp-input");
-    private Block _textFieldBlock = new("m-text-field");
-    private Block _inputBlock = new("m-input");
+    private static Block _block = new("m-otp-input");
+    private static Block _textFieldBlock = new("m-text-field");
+    private static Block _inputBlock = new("m-input");
+    private static ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.AddTextColor(Color).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _block.Name;
+        yield return CssClassUtils.GetTextColor(Color);
+        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -170,7 +173,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     private string GetContentClass()
     {
-        var inputClasses = _inputBlock.Modifier(IsFocused).And(IsDisabled).AddTheme(IsDark, IndependentTheme);
+        var inputClasses = _inputModifierBuilder.Add(IsFocused).Add(IsDisabled).AddTheme(IsDark, IndependentTheme);
 
         StringBuilder stringBuilder = new();
         stringBuilder.Append(inputClasses);

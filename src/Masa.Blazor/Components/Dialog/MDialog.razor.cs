@@ -298,21 +298,22 @@ namespace Masa.Blazor
         }
 #endif
 
-        private Block _block = new("m-dialog");
+        private static Block _block = new("m-dialog");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
+        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
+
         protected override bool NoClass => true;
         protected override bool NoStyle => true;
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier("active", IsActive)
-                .And(Persistent)
-                .And(Fullscreen)
-                .And(Scrollable)
-                .And(Animated)
+            yield return _modifierBuilder.Add("active", IsActive)
+                .Add(Persistent, Fullscreen, Scrollable, Animated)
                 // NEXT MAJOR: ContentClass should be added into "content" element, but due to its widespread usage
                 // and the potential for breaking changes, we keep it unchanged.
                 .AddClass(ContentClass)
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

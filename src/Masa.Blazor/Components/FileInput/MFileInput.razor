@@ -27,9 +27,9 @@
 
     private RenderFragment GenSelections() => __builder =>
     {
-        var css = _block.Element("text")
-            .Modifier("placeholder", Placeholder != null && !IsDirty)
-            .And("chips", HasChips && SelectionContent != null)
+        var css = _textModifierBuilder
+            .Add("placeholder", Placeholder != null && !IsDirty)
+            .Add("chips", HasChips && SelectionContent != null)
             .Build();
 
         <div class="@css">

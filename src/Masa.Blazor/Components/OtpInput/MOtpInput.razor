@@ -21,7 +21,7 @@
         var value = Values[index];
         <div class="@GetContentClass()">
             <div class="@_inputBlock.Element("control")">
-                <div class="@_inputBlock.Element("slot").AddBackgroundColor(BackgroundColor)"
+                <div class="@GetClass(_inputBlock.Element("slot").Name, CssClassUtils.GetBackgroundColor(BackgroundColor))"
                      style="@(StyleBuilder.Create().AddHeight(Height))"
                      @onclick="@(() => HandleOnInputSlotClick(index))">
                     <fieldset aria-hidden="true">

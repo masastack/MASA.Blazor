@@ -48,15 +48,16 @@ public class MLabel : ThemeContainer
         Attributes["required"] = Required;
     }
 
-    private Block _block = new("m-label");
+    private static Block _block = new("m-label");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("active", Value)
-            .And("is-disabled", Disabled)
+        yield return _modifierBuilder.Add("active", Value)
+            .Add("is-disabled", Disabled)
             .AddTheme(IsDark, IndependentTheme)
             .AddTextColor(Color, Focused)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

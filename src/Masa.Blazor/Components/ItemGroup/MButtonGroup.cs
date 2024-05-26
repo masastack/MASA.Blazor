@@ -22,20 +22,25 @@ public class MButtonGroup : MItemGroup
 
     [Parameter] public string? Color { get; set; }
 
-    private Block _block = new("m-btn-toggle");
+    private static Block _block = new("m-btn-toggle");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Borderless)
-                .And(Dense)
-                .And(Group)
-                .And(Rounded)
-                .And(Shaped)
-                .And(Tile)
-                .AddTextColor(Color)
-                .AddBackgroundColor(BackgroundColor, !Group)
-                .GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder.Add(
+                        Borderless,
+                        Dense,
+                        Group,
+                        Rounded,
+                        Shaped,
+                        Tile)
+                    .AddTextColor(Color)
+                    .AddBackgroundColor(BackgroundColor, !Group)
+                    .Build()
+            }
         );
     }
 }

@@ -40,16 +40,17 @@ public partial class MExpansionPanelHeader : MasaComponentBase
         base.OnParametersSet();
     }
 
-    private Block _block = new("m-expansion-panel-header");
+    private static Block _block = new("m-expansion-panel-header");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _iconModifierBuilder = _block.Element("icon").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("active", IsActive)
-            .And("mousedown", HasMouseDown)
-            // .And("disabled", IsDisabled)
+        yield return _modifierBuilder.Add("active", IsActive)
+            .Add("mousedown", HasMouseDown)
+            .Add("disabled", IsDisabled)
             .AddBackgroundColor(Color)
-            // .AddClass("m-btn--disabled", IsDisabled)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

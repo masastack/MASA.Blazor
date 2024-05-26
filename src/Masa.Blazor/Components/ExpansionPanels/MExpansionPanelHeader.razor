@@ -18,7 +18,7 @@
         <FadeTransition>
             <ShowTransitionElement Tag="div"
                                    Value="!IsDisabled"
-                                   Class="@_block.Element("icon").Modifier("disable-rotate", DisableIconRotate).Build()">
+                                   Class="@_iconModifierBuilder.Add("disable-rotate", DisableIconRotate).Build()">
                 @if (ActionsContent != null)
                 {
                     @ActionsContent
