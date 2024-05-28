@@ -4,7 +4,7 @@ using Masa.Blazor.Components.ErrorHandler;
 
 namespace Masa.Blazor.Core;
 
-public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEvent
+public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
 {
     protected MasaComponentBase()
     {
@@ -67,6 +67,11 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
         var stringBuilder = new StringBuilder();
         foreach (var item in BuildComponentClass())
         {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+            
             stringBuilder.Append(item);
             stringBuilder.Append(' ');
         }
@@ -85,6 +90,11 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
         var stringBuilder = new StringBuilder();
         foreach (var item in BuildComponentStyle())
         {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+            
             stringBuilder.Append(item);
             stringBuilder.Append("; ");
         }
@@ -98,9 +108,9 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
         return style.Length == 0 ? null : style;
     }
 
-    protected virtual IEnumerable<string> BuildComponentClass() => Enumerable.Empty<string>();
+    protected virtual IEnumerable<string?> BuildComponentClass() => Enumerable.Empty<string?>();
 
-    protected virtual IEnumerable<string> BuildComponentStyle() => Enumerable.Empty<string>();
+    protected virtual IEnumerable<string?> BuildComponentStyle() => Enumerable.Empty<string?>();
     
     protected string? GetClass(params string?[] classes)
     {
@@ -265,14 +275,20 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     protected void PreventRenderingUtil(params Action[] actions)
     {
         _shouldRender = false;
-        actions.ForEach(action => action());
+        foreach (var action in actions)
+        {
+            action.Invoke();
+        }
         _shouldRender = true;
     }
 
     protected async Task PreventRenderingUtil(params Func<Task>[] funcs)
     {
         _shouldRender = false;
-        await funcs.ForEachAsync(func => func());
+        foreach (var func in funcs)
+        {
+            await func.Invoke();
+        }
         _shouldRender = true;
     }
 

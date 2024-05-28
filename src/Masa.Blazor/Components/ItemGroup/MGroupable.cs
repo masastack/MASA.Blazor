@@ -1,8 +1,6 @@
-﻿using Masa.Blazor.Mixins;
+﻿namespace Masa.Blazor.Components.ItemGroup;
 
-namespace Masa.Blazor.Components.ItemGroup;
-
-public abstract class MGroupable<TGroup> :  MasaComponentBase, IGroupable
+public abstract class MGroupable<TGroup> : MasaComponentBase, IGroupable
     where TGroup : MItemGroupBase
 {
     [CascadingParameter]

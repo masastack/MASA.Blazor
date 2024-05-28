@@ -133,7 +133,10 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
 
         await ScrollToInlineStartAsync();
 
-        await _cascaderLists.ForEachAsync(async cascaderList => await cascaderList.ScrollToSelected());
+        foreach (var cascaderList in _cascaderLists)
+        {
+            await cascaderList.ScrollToSelected();
+        }
     }
 
     private async Task ScrollToInlineStartAsync()

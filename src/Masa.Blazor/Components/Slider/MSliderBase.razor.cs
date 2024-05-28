@@ -1,9 +1,4 @@
-﻿using BlazorComponent.Web;
-using Masa.Blazor.Mixins;
-using Microsoft.AspNetCore.Components.Web;
-using StyleBuilder = BlazorComponent.StyleBuilder;
-
-namespace Masa.Blazor.Components.Slider;
+﻿namespace Masa.Blazor.Components.Slider;
 
 /// <summary>
 /// The base component for Slider and RangeSlider components, do not use.

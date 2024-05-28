@@ -2,7 +2,7 @@
 
 public struct StyleBuilder
 {
-    private readonly Dictionary<string, string?> _styles = new();
+    private StringBuilder _stringBuilder = new();
 
     public StyleBuilder()
     {
@@ -17,12 +17,13 @@ public struct StyleBuilder
 
     public StyleBuilder Add(string key, string? value, bool important)
     {
-        if (_styles.ContainsKey(key))
+        _stringBuilder.Append($"{key}: {value}");
+        if (important)
         {
-            _styles.Remove(key);
+            _stringBuilder.Append(" !important");
         }
 
-        _styles.Add(key, important ? $"{value} !important" : value);
+        _stringBuilder.Append(';');
 
         return this;
     }
@@ -32,23 +33,32 @@ public struct StyleBuilder
         return condition ? Add(key, value, important) : this;
     }
 
+    public StyleBuilder Add(string? style)
+    {
+        if (string.IsNullOrWhiteSpace(style))
+        {
+            return this;
+        }
+
+        style = style.Trim();
+        _stringBuilder.Append(style);
+
+        if (!style.EndsWith(';'))
+        {
+            _stringBuilder.Append(';');
+        }
+
+        return this;
+    }
+
     public IEnumerable<string> GenerateCssStyles()
     {
-        return _styles
-            .Where(u => !string.IsNullOrWhiteSpace(u.Value))
-            .Select(x => $"{x.Key}: {x.Value}");
+        yield return _stringBuilder.ToString();
     }
 
     public string Build()
     {
-        var stringBuilder = new StringBuilder();
-        foreach (var item in GenerateCssStyles())
-        {
-            stringBuilder.Append(item);
-            stringBuilder.Append("; ");
-        }
-
-        return stringBuilder.ToString().TrimEnd();
+        return _stringBuilder.ToString();
     }
 
     public override string ToString()

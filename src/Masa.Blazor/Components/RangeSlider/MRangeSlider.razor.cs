@@ -1,6 +1,5 @@
 ﻿using Masa.Blazor.Components.Input;
 using Masa.Blazor.Components.Slider;
-using StyleBuilder = BlazorComponent.StyleBuilder;
 
 namespace Masa.Blazor;
 

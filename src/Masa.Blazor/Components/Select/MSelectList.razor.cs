@@ -49,7 +49,7 @@ public partial class MSelectList<TItem, TItemValue, TValue> : MasaComponentBase
         return ParsedItems.IndexOf(ItemValue.Invoke(item)) > -1;
     }
 
-    protected string? TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
+    protected string? TileActiveClass => CssClassUtils.GetTextColor(Color);
 
     public bool GetDisabled(TItem item)
     {

@@ -631,7 +631,10 @@ namespace Masa.Blazor
 
         public void UpdateAll(bool val)
         {
-            Nodes.Values.ForEach(nodeState => { nodeState.IsOpen = val; });
+            foreach (var nodeState in Nodes.Values)
+            {
+                nodeState.IsOpen = val;
+            }
         }
 
         private void UpdateOpen(TKey key, bool isOpen)

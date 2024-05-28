@@ -11,7 +11,10 @@ public class PPageTabsProvider : ComponentBase, IPageTabsProvider
 
     internal void RemovePathTitles(params string[] absolutePaths)
     {
-        absolutePaths.ForEach(path => PathTitles.Remove(path));
+        foreach (var path in absolutePaths)
+        {
+            PathTitles.Remove(path);
+        }
     }
 
     internal void RemoveAllPathTitles()

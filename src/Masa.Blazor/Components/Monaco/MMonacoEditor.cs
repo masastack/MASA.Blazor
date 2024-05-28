@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
-public partial class MMonacoEditor : BDomComponentBase
+namespace Masa.Blazor;
+
+public partial class MMonacoEditor : Container
 {
     [Inject]
     protected MonacoEditorJSModule Module { get; set; } = null!;
@@ -58,13 +60,6 @@ public partial class MMonacoEditor : BDomComponentBase
 
     public IJSObjectReference? Editor { get; private set; }
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-
-        Id.ThrowIfNull(ComponentName);
-    }
-
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
@@ -82,19 +77,16 @@ public partial class MMonacoEditor : BDomComponentBase
         }
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string?> BuildComponentStyle()
     {
-        CssProvider
-            .Apply(styleAction: styleBuilder =>
-            {
-                styleBuilder
-                    .AddWidth(Width)
-                    .AddHeight(Height)
-                    .AddMinWidth(MinWidth)
-                    .AddMinHeight(MinHeight)
-                    .AddMaxHeight(MaxHeight)
-                    .AddMaxWidth(MaxWidth);
-            });
+        return StyleBuilder.Create()
+            .AddWidth(Width)
+            .AddHeight(Height)
+            .AddMinWidth(MinWidth)
+            .AddMinHeight(MinHeight)
+            .AddMaxHeight(MaxHeight)
+            .AddMaxWidth(MaxWidth)
+            .GenerateCssStyles();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -122,7 +114,7 @@ public partial class MMonacoEditor : BDomComponentBase
         };
 
         // TODO: need dispose the object reference in .NET or JS
-        Editor = await Module.Init(Id!, EditorOptions, DotNetObjectReference.Create(this));
+        Editor = await Module.Init(Ref, EditorOptions, DotNetObjectReference.Create(this));
 
         InitCompleteHandle?.Invoke();
     }

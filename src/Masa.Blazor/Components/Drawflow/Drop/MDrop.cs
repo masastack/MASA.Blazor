@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDrop : ComponentBase
+public class MDrop : MasaComponentBase
 {
     [Parameter] public string? Class { get; set; }
 

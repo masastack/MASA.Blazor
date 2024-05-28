@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using ComponentBase = Microsoft.AspNetCore.Components.ComponentBase;
+
+namespace Masa.Blazor;
 
 public class MDefaultsProvider : ComponentBase, IDefaultsProvider
 {
@@ -25,31 +27,31 @@ public class MDefaultsProvider : ComponentBase, IDefaultsProvider
     protected static void MergeDictionaryTo(IDictionary<string, IDictionary<string, object?>?> defaultsFrom,
         IDictionary<string, IDictionary<string, object?>?> defaultsTo)
     {
-        defaultsFrom.ForEach(item =>
+        foreach (var item in defaultsFrom)
         {
             var (component, cascadingParameters) = item;
 
-            if (cascadingParameters is null) return;
+            if (cascadingParameters is null) continue;
 
             if (defaultsTo.TryGetValue(component, out var currentParameters))
             {
                 if (currentParameters == null)
                 {
-                    return;
+                    continue;
                 }
 
-                cascadingParameters.ForEach(parameter =>
+                foreach (var parameter in cascadingParameters)
                 {
-                    if (currentParameters.ContainsKey(parameter.Key)) return;
+                    if (currentParameters.ContainsKey(parameter.Key)) continue;
 
                     currentParameters.Add(parameter.Key, parameter.Value);
-                });
+                }
             }
             else
             {
                 defaultsTo.Add(component, cascadingParameters);
             }
-        });
+        }
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

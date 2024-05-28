@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MMarkdownIt : BDomComponentBase
+public partial class MMarkdownIt : MasaComponentBase
 {
     [Inject]
     protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
@@ -140,11 +140,9 @@ public partial class MMarkdownIt : BDomComponentBase
             .Watch<string[]>(nameof(Quotes), GoCreateMarkdownItProxy);
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.Apply(css => { css.Add("m-markdown-it"); });
+        yield return "m-markdown-it";
     }
 
     protected override async Task OnParametersSetAsync()

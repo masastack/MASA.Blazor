@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using Element = BemIt.Element;
 
-public partial class MStepperContent: BDomComponentBase
+namespace Masa.Blazor;
+
+public partial class MStepperContent : MasaComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -121,30 +123,23 @@ public partial class MStepperContent: BDomComponentBase
         }, () => !Eager);
     }
 
+    private static Block _block = new("m-stepper");
+    private static Element _contentElement = _block.Element("content");
+    private static Element _wrapperElement = _block.Element("wrapper");
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .Apply(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-stepper__content");
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .Add("transform-origin: center top 0px")
-                    .AddIf("display:none", () => IsVertical && !IsActive && _firstRender);
-            })
-            .Apply("wrapper", cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-stepper__wrapper")
-                    .AddIf("active", () => IsActive);
-            }, styleBuilder =>
-            {
-                styleBuilder
-                    .AddIf($"height:{_height.ToUnit()}", () => _height != null && Stepper?.Vertical is true);
-            });
+        yield return _contentElement.Name;
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        yield return "transform-origin: center top 0px";
+
+        if (IsVertical && !IsActive && _firstRender)
+        {
+            yield return "display:none";
+        }
     }
 
     protected override void OnAfterRender(bool firstRender)

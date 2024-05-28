@@ -1,8 +1,9 @@
 ﻿using System.Text.Json;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
+public class MECharts : Container, IEChartsJsCallbacks
 {
     [Inject]
     protected I18n I18n { get; set; } = null!;
@@ -116,19 +117,16 @@ public partial class MECharts : BDomComponentBase, IEChartsJsCallbacks
         }
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string?> BuildComponentStyle()
     {
-        CssProvider
-            .Apply(styleAction: styleBuilder =>
-            {
-                styleBuilder
-                    .AddWidth(Width)
-                    .AddHeight(Height)
-                    .AddMinWidth(MinWidth)
-                    .AddMinHeight(MinHeight)
-                    .AddMaxHeight(MaxHeight)
-                    .AddMaxWidth(MaxWidth);
-            });
+        return StyleBuilder.Create()
+            .AddWidth(Width)
+            .AddHeight(Height)
+            .AddMinWidth(MinWidth)
+            .AddMinHeight(MinHeight)
+            .AddMaxHeight(MaxHeight)
+            .AddMaxWidth(MaxWidth)
+            .GenerateCssStyles();
     }
 
     protected override async Task OnParametersSetAsync()

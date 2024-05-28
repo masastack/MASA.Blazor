@@ -8,22 +8,6 @@ namespace Masa.Blazor.Test;
 public class ObservableObjectTests
 {
     [TestMethod]
-    public void Test()
-    {
-        var numbers = new[] { 1, 2, 3, 4 };
-        numbers.ForEach(n =>
-        {
-            if (n > 2)
-            {
-                return;
-            }
-            
-            Console.WriteLine(n);
-        });
-
-    }
-    
-    [TestMethod]
     public void ObservableObject_SimpleAssignment()
     {
         var options = new ObservableOptions();

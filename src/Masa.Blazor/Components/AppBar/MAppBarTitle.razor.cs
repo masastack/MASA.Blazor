@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MAppBarTitle : MasaComponentBase
 {

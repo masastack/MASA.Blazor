@@ -203,7 +203,10 @@ public partial class Components
         if (pageToApi.TryGetValue(Page, out var apis))
         {
             isMultipleApi = apis.Count > 1;
-            await apis.ForEachAsync(async componentName => { _apiData[componentName] = await getApiGroupAsync(componentName, true); });
+            foreach (var componentName in apis)
+            {
+                 _apiData[componentName] = await getApiGroupAsync(componentName, true);
+            }
         }
         else
         {

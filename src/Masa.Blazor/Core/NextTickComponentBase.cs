@@ -1,6 +1,6 @@
 ﻿namespace BlazorComponent;
 
-public abstract class MasaNextTickComponentBase : ComponentBase, IAsyncDisposable
+public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
 {
     private readonly Queue<(Func<Task>, Func<bool>)> _nextTickQueue = new();
 

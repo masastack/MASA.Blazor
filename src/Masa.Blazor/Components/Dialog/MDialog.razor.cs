@@ -249,7 +249,10 @@ namespace Masa.Blazor
                     attrs.Add("tabindex", 0);
                 }
 
-                ContentAttributes?.ForEach(x => attrs[x.Key] = x.Value);
+                foreach (var pair in ContentAttributes)
+                {
+                    attrs[pair.Key] = pair.Value;
+                }
 
                 return attrs;
             }
