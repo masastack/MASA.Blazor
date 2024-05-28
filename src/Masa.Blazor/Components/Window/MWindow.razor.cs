@@ -84,17 +84,19 @@ public partial class MWindow : MItemGroup
         NextIcon ??= "$next";
     }
 
-    private Block _block = new("m-window");
+    private static Block _block = new("m-window");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            _block.Modifier(ShowArrowsOnHover)
-                .GenerateCssClasses()
-        );
+        return base.BuildComponentClass().Concat(new[]
+        {
+            _modifierBuilder.Add(ShowArrowsOnHover).Build()
+        });
     }
 
-    private string GetContainerClass() => _block.Element("container").Modifier(IsActive).Build();
+    private string GetContainerClass() => _containerModifierBuilder.Add(IsActive).Build();
     private string GetContainerStyle() => StyleBuilder.Create().AddHeight(TransitionHeight).Build();
 
     protected override void RegisterWatchers(PropertyWatcher watcher)

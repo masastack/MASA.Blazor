@@ -13,7 +13,7 @@ public class MContainer : Container
     protected override string TagName => Tag;
 
     private static Block _block = new("container");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

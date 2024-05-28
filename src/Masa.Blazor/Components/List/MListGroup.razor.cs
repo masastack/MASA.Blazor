@@ -71,7 +71,8 @@ public partial class MListGroup : MasaComponentBase
     }
 
     private static Block _block = new("m-list-group");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _headerModifierBuilder = _block.Element("header").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

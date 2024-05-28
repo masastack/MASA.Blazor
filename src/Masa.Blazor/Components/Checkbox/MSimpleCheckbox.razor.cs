@@ -35,7 +35,7 @@ public partial class MSimpleCheckbox : MasaComponentBase
     [Parameter] public bool Ripple { get; set; } = true;
 
     private static Block _block = new("m-simple-checkbox");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Block _selectionBlock = new("m-input--selection-controls");
 
     protected override IEnumerable<string> BuildComponentClass()

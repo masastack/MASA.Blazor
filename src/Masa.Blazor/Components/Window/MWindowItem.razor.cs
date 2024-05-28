@@ -126,10 +126,11 @@ public partial class MWindowItem : MGroupItem<MItemGroupBase>
         return Task.CompletedTask;
     }
 
-    private Block _block = new("m-window-item");
+    private static Block _block = new("m-window-item");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("active", InternalIsActive).GenerateCssClasses();
+        yield return _modifierBuilder.Add("active", InternalIsActive).Build();
     }
 }

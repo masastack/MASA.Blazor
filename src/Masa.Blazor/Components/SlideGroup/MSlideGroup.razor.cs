@@ -82,14 +82,18 @@ namespace Masa.Blazor
             }
         }
 
-        private Block _block = new("m-slide-group");
+        private static Block _block = new("m-slide-group");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
-                _block.Modifier(IsOverflowing)
-                    .And(HasAffixes)
-                    .GenerateCssClasses()
+                new[]
+                {
+                    _modifierBuilder.Add(IsOverflowing)
+                        .Add(HasAffixes)
+                        .Build()
+                }
             );
         }
 
@@ -107,7 +111,7 @@ namespace Masa.Blazor
 
         protected virtual IEnumerable<string> BuildContentClass()
         {
-            yield return _block.Element("content").Build();
+            yield return _block.Element("content").Name;
         }
 
         private async void OnScrollOffsetChanged(double val)

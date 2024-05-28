@@ -64,8 +64,9 @@ public partial class MDatePickerTitle : MasaComponentBase
     }
 
     private static Block _block = new Block("m-date-picker-title");
-    private static ModifierBuilder _modifierBuilder =_block.CreateModifierBuilder();
-    private static ModifierBuilder _btnModiferBuilder = new Block("m-picker__title__btn").CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder =_block.CreateModifierBuilder();
+    private static Block _btnBlock = new Block("m-picker__title__btn");
+    private static ModifierBuilder _btnModiferBuilder = _btnBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

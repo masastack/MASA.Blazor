@@ -125,15 +125,15 @@ public partial class MRating : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-rating");
+    private static Block _block = new("m-rating");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(Readonly)
-            .And(Dense)
+        yield return _modifierBuilder
+            .Add(Readonly, Dense)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -172,7 +172,7 @@ public partial class MFileInput<TValue> : MTextField<TValue>
     }
 
     private static Block _block = new Block("m-file-input");
-    private static ModifierBuilder _textModifierBuilder = _block.Element("text").CreateModifierBuilder();
+    private ModifierBuilder _textModifierBuilder = _block.Element("text").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

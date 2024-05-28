@@ -413,16 +413,21 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         }
 #endif
 
-    private Block _block = new("m-select");
+    private static Block _block = new("m-select");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _selectionModifierBuilder = _block.Element("selection").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(IsMenuActive)
-                .And("is-multi", Multiple)
-                .And(Chips)
-                .And("chips--small", SmallChips)
-                .GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder.Add(IsMenuActive)
+                    .Add("is-multi", Multiple)
+                    .Add(Chips)
+                    .Add("chips--small", SmallChips)
+                    .Build()
+            }
         );
     }
 

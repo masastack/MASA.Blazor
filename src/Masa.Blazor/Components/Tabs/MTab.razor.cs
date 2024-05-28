@@ -26,14 +26,15 @@ public partial class MTab : MRoutableGroupItem<MItemGroupBase>
         Attributes["ripple"] = !Disabled && Ripple;
     }
 
-    private Block _block = new("m-tab");
+    private static Block _block = new("m-tab");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled)
-            .And("active", InternalIsActive)
+        yield return _modifierBuilder.Add(Disabled)
+            .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
-            .GenerateCssClasses();
+            .Build();
     }
 
     private async Task HandleOnClick(MouseEventArgs args)

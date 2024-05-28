@@ -12,7 +12,7 @@ public class MBottomSheet : MDialog
     }
 
     private static Block _block = new("m-bottom-sheet");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

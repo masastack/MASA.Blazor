@@ -162,7 +162,7 @@ public partial class MFooter : MasaComponentBase, IThemeable
 #endif
     
     private static Block _block = new("m-footer");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

@@ -28,7 +28,7 @@ public class MChipGroup : MSlideGroup
         }, immediate: true);
     }
 
-    private static ModifierBuilder _modifierBuilder = new Block("m-chip-group").CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = new Block("m-chip-group").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

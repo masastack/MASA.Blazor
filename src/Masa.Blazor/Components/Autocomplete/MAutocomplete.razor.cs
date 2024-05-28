@@ -124,7 +124,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
     }
 
     private static Block _block = new("m-autocomplete");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

@@ -18,7 +18,7 @@
     private RenderFragment GenContent() => IsBooted
         ? __builder =>
         {
-            var css = _block.Element("content").Modifier("fixed", ActivatorFixed)
+            var css = _contentModifierBuilder.Add("fixed", ActivatorFixed)
                 .AddClass("menuable__content__active", IsActive)
                 .AddClass(ContentClass)
                 .AddBackgroundColor(Color)

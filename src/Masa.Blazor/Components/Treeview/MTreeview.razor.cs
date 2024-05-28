@@ -194,15 +194,16 @@ namespace Masa.Blazor
         }
 #endif
 
-        private Block _block = new("m-treeview");
+        private static Block _block = new("m-treeview");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block
-                .Modifier(Hoverable)
-                .And(Dense)
+            yield return _modifierBuilder
+                .Add(Hoverable)
+                .Add(Dense)
                 .AddTheme(IsDark, IndependentTheme)
-                .GenerateCssClasses();
+                .Build();
         }
 
         public void AddNode(MTreeviewNode<TItem, TKey> node)

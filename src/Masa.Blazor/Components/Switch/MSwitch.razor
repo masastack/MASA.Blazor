@@ -17,11 +17,11 @@
         @GenInput("checkbox")
         @GenRipple()
 
-        <div class="@_block.Element("track").AddTextColor(color).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_trackModifierBuilder.AddTextColor(color).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
              style="@trackStyle">
         </div>
 
-        <div class="@_block.Element("thumb").AddTextColor(color).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_thumbModifierBuilder.AddTextColor(color).AddTheme(IsDark, IndependentTheme)"
              style="@thumbStyle">
             @*TODO: FabTransition*@
             @RenderFragments.GenProgressCircular(Loading, Color, 16, 2)

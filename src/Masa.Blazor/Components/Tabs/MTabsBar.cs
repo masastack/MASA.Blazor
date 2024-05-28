@@ -35,16 +35,17 @@ public class MTabsBar : MSlideGroup
         }
 #endif
 
-    private Block _block = new("m-tabs-bar");
+    private static Block _block = new("m-tabs-bar");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            _block.Modifier(IsMobile)
+        return base.BuildComponentClass().Concat(new[]{
+            _modifierBuilder.Add(IsMobile)
                 .AddTextColor(ComputedColor)
                 .AddBackgroundColor(BackgroundColor)
-                .GenerateCssClasses()
-        );
+                .Build()
+        });
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -59,7 +60,7 @@ public class MTabsBar : MSlideGroup
 
     protected override IEnumerable<string> BuildContentClass()
     {
-        return base.BuildContentClass().Concat(_block.Element("content").GenerateCssClasses());
+        return base.BuildContentClass().Concat(new[] { _block.Element("content").Name });
     }
 
     public override void Unregister(IGroupable item)

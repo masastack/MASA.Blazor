@@ -96,18 +96,17 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
         }
 #endif
     
-    private Block _block = new("m-system-bar");
+    private static Block _block = new("m-system-bar");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(LightsOut)
-            .And(Absolute)
-            .And("fixed", !Absolute && (App || Fixed))
-            .And(Window)
+        yield return _modifierBuilder
+            .Add(LightsOut,Absolute,Window)
+            .Add("fixed", !Absolute && (App || Fixed))
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

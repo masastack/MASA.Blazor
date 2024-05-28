@@ -10,7 +10,8 @@ public partial class MDivider : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public int Height { get; set; }
+    [Parameter] [Obsolete("This parameter is little usefulness, it will be removed in the future.")]
+    public int Height { get; set; }
 
     [Parameter] public bool Left { get; set; }
 
@@ -75,9 +76,9 @@ public partial class MDivider : MasaComponentBase
 #endif
 
     private static Block _block = new("m-divider");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
-    private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
+    private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
     private string GetWrapperClass()
     {

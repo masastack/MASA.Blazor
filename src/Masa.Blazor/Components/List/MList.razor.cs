@@ -184,8 +184,8 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
 
     private static Block _block = new("m-list");
     private static Block _sheetBlock = new("m-sheet");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _sheetModifierBuilder = _sheetBlock.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _sheetModifierBuilder = _sheetBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

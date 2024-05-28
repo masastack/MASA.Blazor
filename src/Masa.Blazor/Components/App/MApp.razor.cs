@@ -70,7 +70,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     }
 
     private static Block _block = new("m-application");
-    private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

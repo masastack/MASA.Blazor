@@ -31,7 +31,7 @@
     private RenderFragment GenStream() => Stream
         ? __builder =>
         {
-            <div class="@_block.Element("stream").AddTextColor(Color)"
+            <div class="@GetClass(_block.Element("stream").ToString(), CssClassUtils.GetTextColor(Color))"
                  style="@(StyleBuilder.Create().Add("width", $"{100 - NormalizedBuffer}%").AddTextColor(Color))">
             </div>
         }
@@ -47,7 +47,7 @@
         styleBuilder.Add("width", Math.Max(0, NormalizedBuffer - NormalizedValue) + "%");
         styleBuilder.AddBackgroundColor(computedColor);
 
-        <div class="@_block.Element("background").AddBackgroundColor(computedColor)"
+        <div class="@GetClass(_block.Element("background").ToString(), CssClassUtils.GetBackgroundColor(computedColor)))"
              style="@styleBuilder.Build()">
         </div>
     };
@@ -82,7 +82,7 @@
 
     private RenderFragment GenDeterminate() => __builder =>
     {
-        <div class="@_block.Element("determinate").AddBackgroundColor(Color)"
+        <div class="@GetClass(_block.Element("determinate").ToString(), CssClassUtils.GetBackgroundColor(Color)))"
              style="@(StyleBuilder.Create().Add("width", NormalizedValue + "%").AddBackgroundColor(Color))">
         </div>
     };

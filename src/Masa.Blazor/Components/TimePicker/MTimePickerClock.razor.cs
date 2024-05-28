@@ -299,13 +299,16 @@ public partial class MTimePickerClock : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-time-picker-clock");
+    private static Block _block = new("m-time-picker-clock");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();
+    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("indeterminate", Value == null)
+        yield return _modifierBuilder.Add("indeterminate", Value == null)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

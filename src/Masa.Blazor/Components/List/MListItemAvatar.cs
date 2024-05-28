@@ -7,7 +7,7 @@ namespace Masa.Blazor
         [Parameter] public bool Horizontal { get; set; }
 
         private static Element _element = new("m-list-item", "avatar");
-        private static ModifierBuilder _modifierBuilder = _element.CreateModifierBuilder();
+        private ModifierBuilder _modifierBuilder = _element.CreateModifierBuilder();
 
         protected override void OnParametersSet()
         {

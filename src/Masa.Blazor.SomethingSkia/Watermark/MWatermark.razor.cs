@@ -1,11 +1,12 @@
-﻿using System.Reflection;
+﻿using System.Text;
+using BemIt;
+using Masa.Blazor.Core;
 using Microsoft.Extensions.Logging;
 using SkiaSharp;
-using SkiaSharp.Views.Blazor;
 
 namespace Masa.Blazor;
 
-public partial class MWatermark : BDomComponentBase
+public partial class MWatermark : MasaComponentBase
 {
     [Inject] private InternalHttpClient HttpClient { get; set; } = null!;
 
@@ -62,18 +63,25 @@ public partial class MWatermark : BDomComponentBase
             await UpdateWatermark();
         }
     }
+    
+    private static Block _block = new("m-watermark");
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
+        yield return _block.Name;
+    }
 
-        CssProvider.UseBem("m-watermark")
-                   .Element("content", styleAction: style =>
-                   {
-                       style.Add("position: absolute;top: 0;left: 0;width: 100%;height: 100%;pointer-events: none;background-repeat: repeat;")
-                            .AddIf($"background-image:url({_base64Uri});background-size:{_backgroundSize};",
-                                () => _base64Uri is not null && _backgroundSize is not null);
-                   });
+    private string GetContentStyle()
+    {
+        StringBuilder stringBuilder =
+            new("position: absolute;top: 0;left: 0;width: 100%;height: 100%;pointer-events: none;background-repeat: repeat;");
+
+        if (_base64Uri is not null && _backgroundSize is not null)
+        {
+            stringBuilder.Append($"background-image:url({_base64Uri});background-size:{_backgroundSize};");
+        }
+        
+        return stringBuilder.ToString();
     }
 
     public async Task UpdateWatermark()

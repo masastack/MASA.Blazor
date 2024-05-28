@@ -113,11 +113,10 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
         }
 #endif
 
-    private Block _block => new("m-input--selection-controls");
+    private static Block _block => new("m-input--selection-controls");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            _block.GenerateCssClasses());
+        return base.BuildComponentClass().Concat(new[] { _block.Name });
     }
 }

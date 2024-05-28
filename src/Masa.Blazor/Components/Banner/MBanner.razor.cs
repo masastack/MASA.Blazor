@@ -88,7 +88,7 @@ namespace Masa.Blazor
         }
 
         private static Block _block = new("m-banner");
-        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {

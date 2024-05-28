@@ -107,10 +107,10 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
     private static Block Block = new("m-digital-clock");
-    private static ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
     private static BemIt.Element _itemElement = Block.Element("item");
-    private static ModifierBuilder _itemModifierBuilder = _itemElement.CreateModifierBuilder();
-    private static ModifierBuilder _itemContentModifierBuilder = Block.Element("item-content").CreateModifierBuilder();
+    private ModifierBuilder _itemModifierBuilder = _itemElement.CreateModifierBuilder();
+    private ModifierBuilder _itemContentModifierBuilder = Block.Element("item-content").CreateModifierBuilder();
     private static string _defaultActiveClass = _itemElement.Modifier("active");
 
     private ElementReference _hoursRef;

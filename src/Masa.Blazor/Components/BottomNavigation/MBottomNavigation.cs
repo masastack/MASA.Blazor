@@ -77,7 +77,7 @@ public class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestor
     }
 
     private static Block _block = new("m-bottom-navigation");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

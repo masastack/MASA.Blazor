@@ -119,8 +119,8 @@
                  autofocus="@Autofocus"
                  disabled="@Disabled"
                  id="@Id"
-                 Class="@_block.AddTextColor(TextColor).Build()"
-                 Style="@(StyleBuilder.Create().AddTextColor(TextColor).Build())"
+                 Class="@CssClassUtils.GetTextColor(TextColor)"
+                 Style="@CssStyleUtils.GetTextColor(TextColor)"
                  placeholder="@placeholder"
                  readonly="@Readonly"
                  @onblur="@HandleOnBlurAsync"
@@ -135,7 +135,7 @@
     {
         @if (Type == "number" && !Props.HideControl)
         {
-            <div class="@_block.Element("number").Modifier("focused", IsFocused).And("increase-disabled", !UpButtonEnabled).And("decrease-disabled", !DownButtonEnabled)">
+            <div class="@_numberModifierBuilder.Add("focused", IsFocused).Add("increase-disabled", !UpButtonEnabled).Add("decrease-disabled", !DownButtonEnabled)">
                 @GenSlot(InputIconType.AppendInner, GenIcon(InputIconType.Increase, "$increase", HandleOnNumberUpClickAsync, tabindex: -1, ripple: true))
                 @GenSlot(InputIconType.AppendInner, GenIcon(InputIconType.Decrease, "$decrease", HandleOnNumberDownClickAsync, tabindex: -1, ripple: true))
             </div>

@@ -12,7 +12,7 @@ public class MDrop : ComponentBase
 
     protected ElementReference ElementReference { get; private set; }
 
-    private static readonly ModifierBuilder _modifierBuilder = new Block("m-drop").CreateModifierBuilder();
+    private readonly ModifierBuilder _modifierBuilder = new Block("m-drop").CreateModifierBuilder();
     
     protected virtual string ClassString => _modifierBuilder.AddClass(Class).Build();
 

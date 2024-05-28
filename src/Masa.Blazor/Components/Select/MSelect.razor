@@ -27,7 +27,7 @@
 
     protected virtual RenderFragment GenSelections() => __builder =>
     {
-        <div class="@_block.Element("selections").AddTextColor(TextColor)"
+        <div class="@GetClass(_block.Element("selections").Name, CssClassUtils.GetTextColor(TextColor))"
              style="@(StyleBuilder.Create().AddTextColor(TextColor))">
             @{
                 SelectionType selection;
@@ -119,7 +119,7 @@
         var color = selected ? ComputedColor : null;
         var isDisabled = IsDisabled || GetDisabled(item);
 
-        <div class="@_block.Element("selection").Modifier("comma").And("disabled", isDisabled).AddTextColor(color)"
+        <div class="@_selectionModifierBuilder.Add("comma").Add("disabled", isDisabled).AddTextColor(color)"
              style="@(StyleBuilder.Create().AddTextColor(color))">
             @($"{GetText(item)}{(last ? "" : ", ")}")
         </div>

@@ -21,16 +21,20 @@
             RefreshItemsState();
         }
 
-        private Block _block = new("m-input--radio-group");
-        private Block _selectionBlock  = new("m-input--selection-controls");
+        private static Block _block = new("m-input--radio-group");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static Block _selectionBlock = new("m-input--selection-controls");
 
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
-                _block.Modifier("column", Column && !Row)
-                    .And(Row)
-                    .AddClass(_selectionBlock.Name)
-                    .GenerateCssClasses()
+                new[]
+                {
+                    _modifierBuilder.Add("column", Column && !Row)
+                        .Add(Row)
+                        .AddClass(_selectionBlock.Name)
+                        .Build()
+                }
             );
         }
 

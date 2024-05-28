@@ -28,7 +28,7 @@
             var dataId = ItemKey?.Invoke(item);
 
             <MElement Tag="@ItemTag"
-                     Class="@_block.Element("item").AddClass(ItemClass).Build()"
+                     Class="@GetClass(_block.Element("item").Name, ItemClass)"
                      Style="@ItemStyle"
                      @key="@(dataId ?? (object?)item)"
                      data-id="@dataId">

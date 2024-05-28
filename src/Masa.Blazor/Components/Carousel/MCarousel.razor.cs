@@ -108,7 +108,7 @@ public partial class MCarousel : MWindow
     }
 
     private static Block _block = new("m-carousel");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

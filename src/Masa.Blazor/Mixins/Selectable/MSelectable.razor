@@ -36,7 +36,7 @@
     {
         if (Ripple is true)
         {
-            <div class="@_block.Element("ripple").AddTextColor(ValidationState)" ripple></div>
+            <div class="@GetClass(_block.Element("ripple").Name, CssClassUtils.GetTextColor(ValidationState))" ripple></div>
         }
     };
 

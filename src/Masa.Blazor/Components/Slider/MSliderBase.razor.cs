@@ -422,13 +422,20 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
 #endif
 
-    protected readonly Block Block = new("m-slider");
-    private readonly Block _inputBlock = new("m-input__slider");
+    protected static readonly Block Block = new("m-slider");
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
+    private static readonly Block _inputBlock = new("m-input__slider");
+    private readonly ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
+    private static ModifierBuilder _thumbContainerModifierBuilder = Block.Element("thumb-container").CreateModifierBuilder();
+    private static ModifierBuilder _tickModifierBuilder = Block.Element("tick").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _inputBlock.Modifier(Vertical).And(InverseLabel).GenerateCssClasses()
+            new[]
+            {
+                _inputModifierBuilder.Add(Vertical, InverseLabel).Build()
+            }
         );
     }
 

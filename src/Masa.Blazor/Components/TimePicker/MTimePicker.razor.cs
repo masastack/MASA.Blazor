@@ -305,7 +305,7 @@ public partial class MTimePicker : MasaComponentBase
         StateHasChanged();
     }
 
-    private Block _block = new("m-time-picker-clock");
+    private static Block _block = new("m-time-picker-clock");
 
     protected override IEnumerable<string> BuildComponentClass()
     {

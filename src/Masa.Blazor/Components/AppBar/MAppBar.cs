@@ -275,7 +275,7 @@ public class MAppBar : MToolbar, IScrollable
     }
 
     private static Block _block = new("m-app-bar");
-    private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

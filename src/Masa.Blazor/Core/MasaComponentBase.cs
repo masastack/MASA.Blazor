@@ -112,7 +112,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
                 continue;
             }
 
-            if (stringBuilder.Length == 0)
+            if (stringBuilder.Length != 0)
             {
                 stringBuilder.Append(' ');
             }
@@ -120,8 +120,23 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             stringBuilder.Append(item);
         }
 
-        var css = stringBuilder.ToString();
-        return css.Length == 0 ? null : css;
+        return stringBuilder.Length == 0 ? null : stringBuilder.ToString();
+    }
+
+    protected string? GetStyle(params string?[] styles)
+    {
+        var stringBuilder = new StringBuilder();
+        foreach (var item in styles)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+
+            stringBuilder.Append(item);
+        }
+
+        return stringBuilder.Length == 0 ? null : stringBuilder.ToString();
     }
 
     #endregion

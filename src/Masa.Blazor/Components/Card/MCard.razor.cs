@@ -96,7 +96,7 @@ public partial class MCard : MSheet, IRoutable
     }
 
     private static Block _block = new("m-card");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

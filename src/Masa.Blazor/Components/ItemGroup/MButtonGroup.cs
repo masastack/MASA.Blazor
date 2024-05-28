@@ -23,7 +23,7 @@ public class MButtonGroup : MItemGroup
     [Parameter] public string? Color { get; set; }
 
     private static Block _block = new("m-btn-toggle");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

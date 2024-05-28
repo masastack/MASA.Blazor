@@ -41,7 +41,7 @@
         var @readonly = IsReadonly;
 
         <div
-            class="@Block.Modifier(horizontal).And(Vertical).And(focus).And(active).And(disabled).And(@readonly).AddTheme(IsDark, IndependentTheme)"
+            class="@_modifierBuilder.Add(horizontal, Vertical, focus, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
             @onclick="HandleOnSliderClickAsync"
             @ref="@SliderElement">
             @GenInput()
@@ -65,10 +65,10 @@
 
     protected virtual RenderFragment GenTrackContainerChild() => __builder =>
     {
-        <div class="@Block.Element("track-background").AddBackgroundColor(ComputedTrackColor)"
+        <div class="@GetClass(Block.Element("track-background").Name, CssClassUtils.GetBackgroundColor(ComputedTrackColor))"
              style="@GetTrackBackgroundStyle()">
         </div>
-        <div class="@Block.Element("track-fill").AddBackgroundColor(ComputedTrackFillColor)"
+        <div class="@GetClass(Block.Element("track-fill").Name, CssClassUtils.GetBackgroundColor(ComputedTrackFillColor))"
              style="@GetTrackFillStyles()">
         </div>
     };
@@ -112,7 +112,7 @@
         var focus = IsThumbFocus(index);
         var showLabel = ShowThumbLabel;
 
-        <div class="@Block.Element("thumb-container").Modifier(active).And(focus).And(showLabel).AddTextColor(ComputedThumbColor)"
+        <div class="@_thumbContainerModifierBuilder.Add(active, focus, showLabel).AddTextColor(ComputedThumbColor)"
              style="@GetThumbContainerStyles(index)"
              @ref="@elRefWrapper.Value"
              @attributes="@ThumbAttrs"
@@ -132,7 +132,7 @@
 
     private RenderFragment GenThumb() => __builder =>
     {
-        <div class="@Block.Element("thumb").AddBackgroundColor(ComputedThumbColor)"
+        <div class="@GetClass(Block.Element("thumb").Name, CssClassUtils.GetBackgroundColor(ComputedThumbColor))"
              style="@(StyleBuilder.Create().AddBackgroundColor(ComputedThumbColor))">
         </div>
     };
@@ -141,8 +141,8 @@
     {
         <ScaleTransition Origin="bottom center">
             <ShowTransitionElement Value="ShowThumbLabelContainer"
-                                   Class="@Block.Element("thumb-label-container").Build()">
-                <div class="@Block.Element("thumb-label").AddBackgroundColor(ComputedThumbColor)"
+                                   Class="@Block.Element("thumb-label-container").Name">
+                <div class="@GetClass(Block.Element("thumb-label").Name, CssClassUtils.GetBackgroundColor(ComputedThumbColor))"
                      style="@GetThumbLabelStyles()">
                     <div>@ComputedThumbLabelContent.Invoke(index)</div>
                 </div>
@@ -191,7 +191,7 @@
         var width = index * (100 / NumTicks);
         var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
-        var @class = Block.Element("tick").Modifier(filled).Build();
+        var @class = _tickModifierBuilder.Add(filled).Build();
         var style = StyleBuilder.Create()
             .AddWidth(TickSize)
             .AddHeight(TickSize)

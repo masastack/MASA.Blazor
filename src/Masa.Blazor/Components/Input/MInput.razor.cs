@@ -269,8 +269,8 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
     private static Block _block = new("m-input");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _slotModifierBuilder = _block.Element("slot").CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _slotModifierBuilder = _block.Element("slot").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

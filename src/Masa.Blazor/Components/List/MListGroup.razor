@@ -11,7 +11,7 @@
                    IsActive="@IsActive"
                    Link
                    Dark="@Dark"
-                   Class="@_block.Element("header").AddClass(ActiveClass, IsActive).Build()"
+                   Class="@_headerModifierBuilder.AddClass(ActiveClass, IsActive).Build()"
                    role="button"
                    aria-expanded="@IsActive">
             @if (PrependIcon is not null || PrependIconContent != default)
@@ -31,7 +31,7 @@
         {
             <ExpandTransition>
                 <ShowTransitionElement Value="IsActive"
-                                       Class="@_block.Element("items").Build()">
+                                       Class="@_block.Element("items").Name">
                     @ChildContent
                 </ShowTransitionElement>
             </ExpandTransition>

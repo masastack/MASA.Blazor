@@ -148,7 +148,7 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 #endif
 
     protected static Block Block = new("m-date-picker-table");
-    private static ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

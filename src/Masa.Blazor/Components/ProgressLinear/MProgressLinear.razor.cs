@@ -137,20 +137,22 @@ namespace Masa.Blazor
             }
         }
 
-        private Block _block = new("m-progress-linear");
+        private static Block _block = new("m-progress-linear");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(Absolute)
-                .And(Fixed)
-                .And(Query)
-                .And(Reactive)
-                .And("reverse", IsReversed)
-                .And(Rounded)
-                .And(Striped)
-                .And("visible", IsVisible)
+            yield return _modifierBuilder
+                .Add(Absolute)
+                .Add(Fixed)
+                .Add(Query)
+                .Add(Reactive)
+                .Add("reverse", IsReversed)
+                .Add(Rounded)
+                .Add(Striped)
+                .Add("visible", IsVisible)
                 .AddTheme(IsDark, IndependentTheme)
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

@@ -66,15 +66,22 @@
             }
         }
 
-        private Block _block = new("m-input--switch");
+        private static Block _block = new("m-input--switch");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static ModifierBuilder _trackModifierBuilder = _block.Element("track").CreateModifierBuilder();
+        private static ModifierBuilder _thumbModifierBuilder = _block.Element("thumb").CreateModifierBuilder();
+        
 
         protected override IEnumerable<string> BuildComponentClass()
         {
             return base.BuildComponentClass().Concat(
-                _block.Modifier(Flat)
-                    .And(Inset)
-                    .And("text", HasText)
-                    .GenerateCssClasses()
+                new []
+                {
+                    _modifierBuilder.Add(Flat)
+                        .Add(Inset)
+                        .Add("text", HasText)
+                        .Build()
+                }
             );
         }
     }

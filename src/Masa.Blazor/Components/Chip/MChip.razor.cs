@@ -128,7 +128,7 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
     }
 
     private static Block _block = new("m-chip");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

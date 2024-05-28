@@ -49,7 +49,7 @@ public class MLabel : ThemeContainer
     }
 
     private static Block _block = new("m-label");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

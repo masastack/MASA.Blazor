@@ -24,7 +24,7 @@ public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
     }
 
     private static Block _block = new("m-expansion-panel");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override void OnParametersSet()
     {

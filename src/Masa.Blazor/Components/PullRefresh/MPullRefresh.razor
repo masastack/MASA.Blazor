@@ -1,20 +1,21 @@
 ﻿@using Masa.Blazor.PullToRefresh
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 
 @namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 @inject I18n I18n
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
+<div class="@GetClass()"
+     style="@GetStyle()"
      id="@Id"
      @ref="Ref">
-    <div class="@CssProvider.GetClass("track")"
-         style="@CssProvider.GetStyle("track")"
+    <div class="@_block.Element("track")"
+         style="@(StyleBuilder.Create().Add("transition-duration", $"{_duration}ms").AddIf("transform", $"translate3d(0, {_distance}px, 0)", _distance > 0).Build())"
          @ref="@_trackRef"
          @ontouchend="OnTouchEnd"
          @ontouchcancel="OnTouchEnd">
-        <div class="@CssProvider.GetClass("header")"
-             style="@CssProvider.GetStyle("header")">
+        <div class="@_block.Element("header")"
+             style="@CssStyleUtils.GetHeight(HeadHeight)">
             @RenderLoadingStatus()
             @RenderCanReleaseStatus()
             @RenderPullingStatus()

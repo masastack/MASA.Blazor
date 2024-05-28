@@ -10,7 +10,7 @@
          @ref="Ref"
          @onclick="@HandleClick"
          @attributes="@Attributes">
-        <div class="@_selectionBlock.Element("input")">
+        <div class="@_selectionControls.Element("input")">
 
             <MIcon Icon="@(IsActive ? OnIcon : OffIcon)"
                    Dense="@(RadioGroup?.Dense is true)"
@@ -30,7 +30,7 @@
 
             @RenderFragments.GenRipple(
                 Ripple,
-                _selectionBlock.Element("ripple").AddTextColor(UseRippleState.RippleState).Build(),
+                GetClass(_selectionControls.Element("ripple").Name, CssClassUtils.GetTextColor(UseRippleState.RippleState)),
                 StyleBuilder.Create().AddTextColor(UseRippleState.RippleState).Build())
         </div>
 

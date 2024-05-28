@@ -58,8 +58,8 @@ public partial class MOverlay : IThemeable
     }
 
     private static readonly Block _block = new("m-overlay");
-    private static readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static readonly ModifierBuilder _scrimModifierBuilder = _block.Element("scrim").CreateModifierBuilder();
+    private readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private readonly ModifierBuilder _scrimModifierBuilder = _block.Element("scrim").CreateModifierBuilder();
     private static readonly Element _content = _block.Element("content");
 
     private bool _booted;

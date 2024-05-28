@@ -11,12 +11,12 @@
         <Transition Name="slide-y-transition">
             <IfTransitionElement Class="@_block.Element("wrap").Name"
                                  Value="@(Value.Count > 0)">
-                <BShouldRender Value="@(Value.Count > 0)">
+                <MShouldRender Value="@(Value.Count > 0)">
                     @foreach (var message in Value)
                     {
                         @RenderFragments.RenderFragmentOrText(ChildContent, message, message, _message.Name)
                     }
-                </BShouldRender>
+                </MShouldRender>
             </IfTransitionElement>
         </Transition>
     </div>

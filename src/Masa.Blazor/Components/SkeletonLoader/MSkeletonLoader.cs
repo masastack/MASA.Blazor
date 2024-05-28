@@ -105,16 +105,16 @@ public class MSkeletonLoader : ThemeContainer, IMeasurable
     protected override RenderFragment? GenChildContent()
         => IsLoading ? GenSkeleton() : ChildContent;
 
-    private Block _block = new("m-skeleton-loader");
+    private static Block _block = new("m-skeleton-loader");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Boilerplate)
-            .And(IsLoading)
-            .And(Tile)
+        yield return _modifierBuilder
+            .Add(Boilerplate, IsLoading, Tile)
             .AddTheme(IsDark, IndependentTheme)
             .AddElevation(Elevation)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

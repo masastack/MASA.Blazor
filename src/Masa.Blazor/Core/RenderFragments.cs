@@ -64,7 +64,7 @@ public static class RenderFragments
         });
     }
 
-    public static RenderFragment? GenRipple(bool ripple, string @class, string style)
+    public static RenderFragment? GenRipple(bool ripple, string? @class, string style)
     {
         if (!ripple)
         {

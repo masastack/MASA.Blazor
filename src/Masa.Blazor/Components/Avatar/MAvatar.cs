@@ -29,7 +29,7 @@ public class MAvatar : Container
     [Parameter] public string? Color { get; set; }
 
     private static Block _block = new("m-avatar");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

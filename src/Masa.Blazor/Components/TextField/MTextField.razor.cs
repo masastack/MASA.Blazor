@@ -324,27 +324,30 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public ElementReference AppendInnerElement => _appendInnerElementReferenceWrapper.Value;
 
-    private Block _block = new("m-text-field");
+    private static Block _block = new("m-text-field");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _numberModifierBuilder = _block.Element("number").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            _block.Modifier(FullWidth)
-                .And("prefix", Prefix != null)
-                .And("single-line", IsSingle)
-                .And("solo", IsSolo)
-                .And(SoloInverted)
-                .And("solo-flat", Flat)
-                .And(Filled)
-                .And(IsBooted)
-                .And("enclosed", IsEnclosed)
-                .And(Reverse)
-                .And(Outlined)
-                .And("placeholder", Placeholder != null)
-                .And(Rounded)
-                .And(Shaped)
-                .GenerateCssClasses()
-        );
+        return base.BuildComponentClass().Concat(new[]{
+            _modifierBuilder
+                .Add(FullWidth)
+                .Add("prefix", Prefix != null)
+                .Add("single-line", IsSingle)
+                .Add("solo", IsSolo)
+                .Add(SoloInverted)
+                .Add("solo-flat", Flat)
+                .Add(Filled)
+                .Add(IsBooted)
+                .Add("enclosed", IsEnclosed)
+                .Add(Reverse)
+                .Add(Outlined)
+                .Add("placeholder", Placeholder != null)
+                .Add(Rounded)
+                .Add(Shaped)
+                .Build()
+        });
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

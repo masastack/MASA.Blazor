@@ -202,7 +202,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     }
 
     private static Block _block = new("m-list-item");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

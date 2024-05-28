@@ -103,15 +103,16 @@
         }
 #endif
 
-        private Block _block = new("m-radio");
-        private Block _selectionBlock = new("m-input--selection-controls");
+        private static Block _block = new("m-radio");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static Block _selectionControls = new Block("m-input--selection-controls");
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier("is-disabled", Disabled || InputIsDisabled)
-                .And(IsFocused)
-                .And(IndependentTheme)
-                .GenerateCssClasses();
+            yield return _modifierBuilder.Add("is-disabled", Disabled || InputIsDisabled)
+                .Add(IsFocused)
+                .Add(IndependentTheme)
+                .Build();
         }
 
         protected bool IsActive { get; private set; }

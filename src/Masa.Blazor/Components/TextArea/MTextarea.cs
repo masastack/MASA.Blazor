@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MTextarea : MTextField<string>
+    public class MTextarea : MTextField<string>
     {
         [Parameter]
         public bool AutoGrow
@@ -41,13 +41,14 @@ namespace Masa.Blazor
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        private Block _block = new("m-textarea");
+        private static Block _block = new("m-textarea");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return base.BuildComponentClass().Concat(
-                _block.Modifier(AutoGrow).And("no-resize", AutoGrow || NoResize).GenerateCssClasses()
-            );
+            return base.BuildComponentClass().Concat(new[]{
+                _modifierBuilder.Add(AutoGrow).Add("no-resize", AutoGrow || NoResize).Build()
+            });
         }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)

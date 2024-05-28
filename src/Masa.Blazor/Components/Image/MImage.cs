@@ -170,7 +170,7 @@ public partial class MImage : MResponsive, IThemeable
     }
 
     private static Block _block = new("m-image");
-    private static ModifierBuilder _imageModifierBuilder = _block.Element("image").CreateModifierBuilder();
+    private ModifierBuilder _imageModifierBuilder = _block.Element("image").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

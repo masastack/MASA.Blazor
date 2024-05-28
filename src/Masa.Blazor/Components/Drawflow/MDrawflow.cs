@@ -22,7 +22,7 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public EventCallback OnImport { get; set; }
     
-    private static readonly ModifierBuilder _modifierBuilder = new Block("m-drawflow").CreateModifierBuilder();
+    private readonly ModifierBuilder _modifierBuilder = new Block("m-drawflow").CreateModifierBuilder();
 
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;

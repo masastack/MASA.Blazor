@@ -162,19 +162,21 @@ namespace Masa.Blazor
         }
 #endif
 
-        private Block _block = new("m-tabs");
+        private static Block _block = new("m-tabs");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(AlignWithTitle)
-                .And(Centered)
-                .And(FixedTabs)
-                .And(Grow)
-                .And(IconsAndText)
-                .And(Right)
-                .And(Vertical)
+            yield return _modifierBuilder
+                .Add(AlignWithTitle)
+                .Add(Centered)
+                .Add(FixedTabs)
+                .Add(Grow)
+                .Add(IconsAndText)
+                .Add(Right)
+                .Add(Vertical)
                 .AddTheme(IsDark, IndependentTheme)
-                .GenerateCssClasses();
+                .Build();
         }
 
         private async Task OnIntersectAsync(IntersectEventArgs e)

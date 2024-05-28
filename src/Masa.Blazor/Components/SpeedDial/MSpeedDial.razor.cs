@@ -63,18 +63,20 @@ public partial class MSpeedDial : MBootable
         return Task.CompletedTask;
     }
 
-    private Block _block = new("m-speed-dial");
+    private static Block _block = new("m-speed-dial");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Top)
-            .And(Right)
-            .And(Bottom)
-            .And(Left)
-            .And(Absolute)
-            .And(Fixed)
-            .And("direction-" + Direction)
-            .And("is-active", Value)
-            .GenerateCssClasses();
+        yield return _modifierBuilder
+            .Add(Top)
+            .Add(Right)
+            .Add(Bottom)
+            .Add(Left)
+            .Add(Absolute)
+            .Add(Fixed)
+            .Add("direction-" + Direction)
+            .Add("is-active", Value)
+            .Build();
     }
 }

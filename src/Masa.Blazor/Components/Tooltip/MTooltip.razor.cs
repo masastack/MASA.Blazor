@@ -22,16 +22,16 @@ namespace Masa.Blazor
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
-        private Block _block = new("m-tooltip");
+        private static Block _block = new("m-tooltip");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(Top)
-                .And(Right)
-                .And(Bottom)
-                .And(Left)
-                .And("attached", Attach is not { AsT1: true })
-                .GenerateCssClasses();
+            yield return _modifierBuilder
+                .Add(Top, Right, Bottom, Left)
+                .Add("attached", Attach is not { AsT1: true })
+                .Build();
         }
 
         protected double CalculatedLeft

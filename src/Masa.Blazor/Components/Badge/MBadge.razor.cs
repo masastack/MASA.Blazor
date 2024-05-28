@@ -93,9 +93,9 @@ public partial class MBadge : MasaComponentBase
     }
 
     private static Block _block = new("m-badge");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Element _badgeElement = _block.Element("badge");
-    private static ModifierBuilder _badgeModifierBuilder = _badgeElement.CreateModifierBuilder();
+    private ModifierBuilder _badgeModifierBuilder = _badgeElement.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

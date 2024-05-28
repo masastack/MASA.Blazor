@@ -152,7 +152,7 @@ namespace Masa.Blazor
         protected override bool AfterHandleEventShouldRender() => false;
 
         private static Block _block = new("m-btn");
-        private static ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
+        private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {

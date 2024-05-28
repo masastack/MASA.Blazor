@@ -147,7 +147,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
     private static Block _block = new("m-navigation-drawer");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private bool _prevPermanent;
     private readonly List<IDependent> _dependents = new();
@@ -534,9 +534,9 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     {
         return StyleBuilder.Create()
             .AddHeight(Height)
-            .Add("top", !IsBottom ? ComputedTop.ToUnit() : "auto", !IsSsr)
-            .Add("max-height", $"calc(100% - {ComputedMaxHeight.ToUnit()})", !IsSsr && ComputedMaxHeight != null)
-            .Add("transform", $"{(IsBottom ? "translateY" : "translateX")}({ComputedTransform.ToUnit("%")})",
+            .AddIf("top", !IsBottom ? ComputedTop.ToUnit() : "auto", !IsSsr)
+            .AddIf("max-height", $"calc(100% - {ComputedMaxHeight.ToUnit()})", !IsSsr && ComputedMaxHeight != null)
+            .AddIf("transform", $"{(IsBottom ? "translateY" : "translateX")}({ComputedTransform.ToUnit("%")})",
                 ComputedTransform != null)
             .AddWidth(ComputedWidth)
             .AddBackgroundColor(Color)

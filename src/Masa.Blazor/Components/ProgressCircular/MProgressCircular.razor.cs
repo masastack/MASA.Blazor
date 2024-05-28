@@ -77,14 +77,15 @@ public partial class MProgressCircular : MasaComponentBase
         { "stroke-dasharray", StrokeDashArray }
     };
 
-    private Block _block = new("m-progress-circular");
+    private static Block _block = new("m-progress-circular");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("visible", IsVisible)
-            .And(Indeterminate)
+        yield return _modifierBuilder.Add("visible", IsVisible)
+            .Add(Indeterminate)
             .AddTextColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

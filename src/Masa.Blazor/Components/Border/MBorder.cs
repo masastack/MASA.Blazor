@@ -24,14 +24,14 @@ public class MBorder : Container
     [Parameter] [MasaApiParameter(8)] public StringNumber Size { get; set; } = 8;
 
     private static Block _block = new("m-border");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private bool Active => Value && Border != Borders.None;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder
-            .Add(Border)
+            .Add(Border, "")
             .Add(Active)
             .Build();
     }

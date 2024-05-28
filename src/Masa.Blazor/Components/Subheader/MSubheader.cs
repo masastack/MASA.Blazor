@@ -21,10 +21,11 @@ public class MSubheader : ThemeContainer
         }
 #endif
 
-    private Block _block = new("m-subheader");
+    private static Block _block = new("m-subheader");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Inset).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Inset).AddTheme(IsDark, IndependentTheme).Build();
     }
 }

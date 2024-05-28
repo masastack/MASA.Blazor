@@ -10,7 +10,12 @@ public struct StyleBuilder
 
     public static StyleBuilder Create() => new();
 
-    public StyleBuilder Add(string key, string? value, bool important = false)
+    public StyleBuilder Add(string key, string? value)
+    {
+        return Add(key, value, false);
+    }
+
+    public StyleBuilder Add(string key, string? value, bool important)
     {
         if (_styles.ContainsKey(key))
         {
