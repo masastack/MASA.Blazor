@@ -198,12 +198,8 @@ public partial class MFileInput<TValue> : MTextField<TValue>
         if (InputFile?.Element is null) return;
 
         await base.HandleOnPrependClickAsync(args);
-        var input = Document.GetElementByReference(InputFile.Element.Value);
-        if (input is not null)
-        {
-            var @event = new MouseEvent("click");
-            await input.DispatchEventAsync(@event, stopPropagation: true);
-        }
+        var @event = new MouseEvent("click");
+        await Js.DispatchEventAsync(InputFile.Element.Value, @event, true);
     }
 
     public override Task HandleOnInputAsync(ChangeEventArgs args) => Task.CompletedTask;
@@ -260,23 +256,15 @@ public partial class MFileInput<TValue> : MTextField<TValue>
 
         if (InputFile?.Element is null) return;
 
-        var input = Document.GetElementByReference(InputFile.Element.Value);
-        if (input is not null)
-        {
-            var @event = new MouseEvent("click");
-            await input.DispatchEventAsync(@event, stopPropagation: true);
-        }
+        var @event = new MouseEvent("click");
+        await Js.DispatchEventAsync(InputFile.Element.Value, @event, true);
     }
 
     public override async Task HandleOnClearClickAsync(MouseEventArgs args)
     {
         if (InputFile?.Element is null) return;
 
-        var input = Document.GetElementByReference(InputFile.Element.Value);
-        if (input is not null)
-        {
-            await input.SetPropertyAsync("value", "");
-        }
+        await Js.SetPropertyAsync(InputFile.Element.Value, "value", "");
 
         if (Multiple)
         {

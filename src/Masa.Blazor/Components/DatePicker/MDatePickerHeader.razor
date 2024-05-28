@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.DatePicker
+﻿@namespace Masa.Blazor.Components.DatePicker
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
@@ -34,7 +34,7 @@
     {
         var color = !Disabled ? (Color ?? "accent") : "";
 
-        <div class="@_block.Element("value").Modifier(Disabled)">
+        <div class="@_valueModifierBuilder.Add(Disabled)">
             <Transition Name="@Transition">
                 <KeyTransitionElement Value="@Value"
                                       Class="@(CssClassUtils.GetTextColor(color))"

@@ -108,7 +108,7 @@ namespace Masa.Blazor
             if (LeaveAbsolute)
             {
                 element.ElementInfo =
-                    await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, element.Reference);
+                    await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, element.Reference);
             }
 
             if (OnLeave is not null)

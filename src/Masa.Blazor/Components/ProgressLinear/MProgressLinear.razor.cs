@@ -4,8 +4,6 @@ namespace Masa.Blazor
 {
     public partial class MProgressLinear : MasaComponentBase
     {
-        [Inject] public Document Document { get; set; } = null!;
-
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Parameter] public bool Absolute { get; set; }
@@ -85,10 +83,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            var el = Document.GetElementByReference(Ref);
-            if (el is null) return;
-
-            var rect = await el.GetBoundingClientRectAsync();
+            var rect = await Js.GetBoundingClientRectAsync(Ref);
 
             var value = args.OffsetX / rect.Width * 100;
             value = Math.Round(value, 0);

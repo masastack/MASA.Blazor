@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using System.Text.Json;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -87,12 +88,11 @@ namespace Masa.Blazor
 
         private async Task CalculateInputHeight()
         {
-            var input = Document.GetElementByReference(InputElement);
-            if (input is null) return;
-            var height = await input.GetScrollHeightWithoutHeight();
-            var minheight = Rows * RowHeight.ToInt32() * 1.0;
+            var jsonElement = await Js.InvokeAsync<JsonElement>(JsInteropConstants.ScrollHeightWithoutHeight, InputElement);
+            var height = jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : 0;
+            var minHeight = Rows * RowHeight.ToInt32() * 1.0;
 
-            ElementHeight = Math.Max(minheight, height ?? 0);
+            ElementHeight = Math.Max(minHeight, height);
         }
     }
 }

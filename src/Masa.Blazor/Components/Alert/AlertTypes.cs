@@ -1,11 +1,11 @@
-﻿namespace BlazorComponent
+﻿namespace Masa.Blazor;
+
+// TODO: rename to AlertType at v2.0
+public enum AlertTypes
 {
-    public enum AlertTypes
-    {
-        None = 0,
-        Success,
-        Info,
-        Warning,
-        Error
-    }
+    None = 0,
+    Success,
+    Info,
+    Warning,
+    Error
 }

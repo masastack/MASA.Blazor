@@ -50,7 +50,7 @@ internal sealed class ValidationEventSubscriptions : IDisposable
     private readonly EditContext _editContext;
     private readonly ValidationMessageStore _messageStore;
     private readonly IServiceProvider _serviceProvider;
-    private BlazorComponent.I18n.I18n? _i18n;
+    private I18n? _i18n;
 
     [MemberNotNullWhen(true, nameof(_i18n))]
     private bool EnableI18n { get; set; }
@@ -67,7 +67,7 @@ internal sealed class ValidationEventSubscriptions : IDisposable
         EnableI18n = enableI18n;
         if (EnableI18n)
         {
-            _i18n = _serviceProvider.GetService<BlazorComponent.I18n.I18n>();
+            _i18n = _serviceProvider.GetService<I18n>();
         }
     }
 

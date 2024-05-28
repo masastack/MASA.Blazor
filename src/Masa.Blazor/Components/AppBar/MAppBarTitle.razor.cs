@@ -83,7 +83,7 @@ public partial class MAppBarTitle : MasaComponentBase
         _width = dimensions.Width;
         _left = dimensions.Left;
 
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, _contentElement);
+        var element = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, _contentElement);
         _contentWidth = element.ScrollWidth;
     }
 

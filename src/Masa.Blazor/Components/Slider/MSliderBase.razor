@@ -40,10 +40,9 @@
         var disabled = IsDisabled;
         var @readonly = IsReadonly;
 
-        <div
-            class="@_modifierBuilder.Add(horizontal, Vertical, focus, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
-            @onclick="HandleOnSliderClickAsync"
-            @ref="@SliderElement">
+        <div class="@_modifierBuilder.Add(horizontal, Vertical, focus, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
+             @onclick="HandleOnSliderClickAsync"
+             @ref="@SliderElement">
             @GenInput()
             @GenTrackContainer()
             @GenSteps()

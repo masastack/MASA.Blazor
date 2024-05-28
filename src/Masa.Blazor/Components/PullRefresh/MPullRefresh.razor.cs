@@ -47,7 +47,7 @@ public partial class MPullRefresh
 
     private ElementReference _trackRef;
     private PullRefreshStatus _pullRefreshStatus;
-    private BlazorComponent.Web.Element? _root;
+    private Masa.Blazor.Core.Web.Element? _root;
     private int _duration;
     private bool _reachTop;
     private double _distance;

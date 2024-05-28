@@ -14,8 +14,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Inject] public Document Document { get; set; } = null!;
-
     [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter] public bool Vertical { get; set; }
@@ -285,8 +283,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         if (target.Class?.Contains("m-slider__thumb-container") ?? false)
         {
             ThumbPressed = true;
-            var container = Document.QuerySelector($"#{Id} .m-slider__thumb-container");
-            var domRect = await container.GetBoundingClientRectAsync();
+            var domRect = await Js.GetBoundingClientRectAsync($"{SliderElement.GetSelector()} .m-slider__thumb-container");
             StartOffset = Vertical
                 ? (clientX - (domRect.Top + domRect.Height / 2))
                 : (clientY - (domRect.Left + domRect.Width / 2));
@@ -344,10 +341,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
     {
-        var track = Document.GetElementByReference(TrackElement);
-        if (track == null) return 0;
-
-        var rect = await track.GetBoundingClientRectAsync();
+        var rect = await Js.GetBoundingClientRectAsync(TrackElement);
 
         var tractStart = Vertical ? rect.Top : rect.Left;
         var trackLength = Vertical ? rect.Height : rect.Width;

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using Masa.Blazor.Extensions;
+
+namespace Masa.Blazor
 {
 #if NET6_0
     public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable
@@ -6,8 +8,6 @@
     public partial class MCheckbox<TValue> : MSelectable<TValue>, IThemeable where TValue : notnull
 #endif
     {
-        [Inject] public Document Document { get; set; } = null!;
-
         [Parameter] public bool Indeterminate { get; set; }
 
         [Parameter] public string IndeterminateIcon { get; set; } = "$checkboxIndeterminate";
@@ -67,19 +67,6 @@
                     Indeterminate ? "m-input--indeterminate" : ""
                 }
             );
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
-            {
-                //It's used to prevent ripple directive,and we may remove this 
-                var inputSlot = Document.GetElementByReference(InputSlotElement);
-                await inputSlot!.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
-                await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
-            }
         }
     }
 }

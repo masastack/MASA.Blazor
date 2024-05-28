@@ -58,9 +58,17 @@ public abstract class MMenuable : MBootable
 
     [Parameter] public bool ExternalActivator { get; set; }
 
-    [Inject] [NotNull] public Window? Window { get; set; }
+    private double _documentClientHeight;
+    private double _documentClientWidth;
+    private double _documentScrollLeft;
+    private double _documentScrollTop;
 
-    [Inject] [NotNull] public Document? Document { get; set; }
+    private double _windowPageXOffset;
+    private double _windowInnerHeight;
+    private double _windowInnerWidth;
+    private double _windowPageYOffset;
+
+    internal double DocumentClientWidth => _documentClientWidth;
 
     protected virtual bool IsRtl => false;
 
@@ -258,7 +266,7 @@ public abstract class MMenuable : MBootable
 
     private double GetOffsetLeft()
     {
-        return Window.PageXOffset > 0 ? Window.PageXOffset : Document.DocumentElement.ScrollLeft;
+        return _windowPageXOffset > 0 ? _windowPageXOffset : _documentScrollLeft;
     }
 
     protected double CalcYOverflow(double top)
@@ -288,7 +296,7 @@ public abstract class MMenuable : MBootable
 
     private double GetInnerHeight()
     {
-        return Window.InnerHeight > 0 ? Window.InnerHeight : Document.DocumentElement.ClientHeight;
+        return _windowInnerHeight > 0 ? _windowInnerHeight : _documentClientHeight;
     }
 
     private void CheckForPageYOffset()
@@ -298,7 +306,7 @@ public abstract class MMenuable : MBootable
 
     private double GetOffsetTop()
     {
-        return Window.PageYOffset > 0 ? Window.PageYOffset : Document.DocumentElement.ScrollTop;
+        return _windowPageYOffset > 0 ? _windowPageYOffset : _documentScrollTop;
     }
 
     protected override void OnInitialized()
@@ -354,20 +362,20 @@ public abstract class MMenuable : MBootable
         ActivateZIndex = multipleResult.ZIndex;
 
         //Window props
-        Window.InnerHeight = windowAndDocument.InnerHeight;
-        Window.InnerWidth = windowAndDocument.InnerWidth;
-        Window.PageXOffset = windowAndDocument.PageXOffset;
-        Window.PageYOffset = windowAndDocument.PageYOffset;
+        _windowInnerHeight = windowAndDocument.InnerHeight;
+        _windowInnerWidth = windowAndDocument.InnerWidth;
+        _windowPageXOffset = windowAndDocument.PageXOffset;
+        _windowPageYOffset = windowAndDocument.PageYOffset;
 
         //Document props
-        Document.DocumentElement.ClientHeight = windowAndDocument.ClientHeight;
-        Document.DocumentElement.ClientWidth = windowAndDocument.ClientWidth;
-        Document.DocumentElement.ScrollLeft = windowAndDocument.ScrollLeft;
-        Document.DocumentElement.ScrollTop = windowAndDocument.ScrollTop;
+        _documentClientHeight = windowAndDocument.ClientHeight;
+        _documentClientWidth = windowAndDocument.ClientWidth;
+        _documentScrollLeft = windowAndDocument.ScrollLeft;
+        _documentScrollTop = windowAndDocument.ScrollTop;
 
         //TODO:CheckActivatorFixed
         CheckForPageYOffset();
-        PageWidth = Document.DocumentElement.ClientWidth;
+        PageWidth = _documentClientWidth;
 
         var dimensions = multipleResult.Dimensions;
         if (hasActivator)
@@ -380,7 +388,7 @@ public abstract class MMenuable : MBootable
 
             //Since no activator,we should re-computed it's top and left
             Dimensions.Activator.Top -= dimensions.RelativeYOffset;
-            Dimensions.Activator.Left -= Window.PageXOffset + dimensions.OffsetParentLeft;
+            Dimensions.Activator.Left -= _windowPageXOffset + dimensions.OffsetParentLeft;
         }
 
         Dimensions.Content = dimensions.Content;

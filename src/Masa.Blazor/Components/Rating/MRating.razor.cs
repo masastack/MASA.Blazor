@@ -7,8 +7,6 @@ public partial class MRating : MasaComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Inject] public Document Document { get; set; } = null!;
-
     [Parameter]
     [MasaApiParameter("accent")]
     public string BackgroundColor { get; set; } = "accent";
@@ -227,10 +225,7 @@ public partial class MRating : MasaComponentBase
     {
         if (HalfIncrements && args.Target != null)
         {
-            var target = Document.GetElementByReference(args.Target.ElementReference);
-            if (target == null) return false;
-
-            var rect = await target.GetBoundingClientRectAsync();
+            var rect = await Js.GetBoundingClientRectAsync(args.Target.ElementReference);
             if (rect != null && (args.PageX - rect.Left) < rect.Width / 2)
                 return true;
         }

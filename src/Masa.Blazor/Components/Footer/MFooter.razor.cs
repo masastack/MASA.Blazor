@@ -218,7 +218,7 @@ public partial class MFooter : MasaComponentBase, IThemeable
             return 0;
         }
 
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+        var element = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
         return element.ClientHeight;
     }
 

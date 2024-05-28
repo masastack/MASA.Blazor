@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Masa.Blazor.Components.Input;
+using Masa.Blazor.Extensions;
 
 namespace Masa.Blazor;
 
@@ -7,9 +8,6 @@ public partial class MTextField<TValue> : MInput<TValue>
 {
     [Inject]
     public MasaBlazor MasaBlazor { get; set; } = null!;
-
-    [Inject]
-    public Document Document { get; set; } = null!;
 
     [Inject]
     private IntersectJSModule IntersectJSModule { get; set; } = null!;
@@ -445,16 +443,10 @@ public partial class MTextField<TValue> : MInput<TValue>
             return;
         }
 
-        var label = Document.GetElementByReference(LabelReference.Ref);
-        if (label == null) return;
-
-        var scrollWidth = await label.GetScrollWidthAsync();
+        var scrollWidth = await Js.GetScrollWidthAsync(LabelReference.Ref);
         if (scrollWidth == null) return;
 
-        var element = Document.GetElementByReference(Ref);
-        if (element == null) return;
-
-        var offsetWidth = await element.GetOffsetWidthAsync();
+        var offsetWidth = await Js.GetOffsetWidthAsync(Ref);
         if (offsetWidth == null) return;
 
         LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
@@ -469,10 +461,7 @@ public partial class MTextField<TValue> : MInput<TValue>
             return;
         }
 
-        var prefix = Document.GetElementByReference(PrefixElement);
-        if (prefix == null) return;
-
-        var offsetWidth = await prefix.GetOffsetWidthAsync();
+        var offsetWidth = await Js.GetOffsetWidthAsync(PrefixElement);
         if (offsetWidth == null) return;
 
         PrefixWidth = offsetWidth.Value;
@@ -492,10 +481,7 @@ public partial class MTextField<TValue> : MInput<TValue>
             return;
         }
 
-        var prependInner = Document.GetElementByReference(PrependInnerElement);
-        if (prependInner is null) return;
-
-        var offsetWidth = await prependInner.GetOffsetWidthAsync();
+        var offsetWidth = await Js.GetOffsetWidthAsync(PrependInnerElement);
         if (offsetWidth == null) return;
 
         PrependWidth = offsetWidth.Value;

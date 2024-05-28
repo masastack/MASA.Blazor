@@ -7,8 +7,6 @@ namespace Masa.Blazor
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-        [Inject] public Document Document { get; set; } = null!;
-
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter] public bool If { get; set; } = true;
@@ -308,11 +306,8 @@ namespace Masa.Blazor
             {
                 _clickEventRegistered = true;
 
-                var button = Document.GetElementByReference(Ref);
-                if (button is null) return;
-
-                await button.AddEventListenerAsync("click",
-                    EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick), false,
+                await Js.AddHtmlElementEventListener<MouseEventArgs>(Ref, "click",
+                    HandleOnClick, false,
                     new EventListenerExtras
                     {
                         PreventDefault = OnClickPreventDefault,

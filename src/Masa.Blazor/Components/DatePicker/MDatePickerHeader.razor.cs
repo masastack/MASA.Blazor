@@ -132,6 +132,7 @@ public partial class MDatePickerHeader : MasaComponentBase
 
     private static Block _block = new("m-date-picker-header");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _valueModifierBuilder = _block.Element("value").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

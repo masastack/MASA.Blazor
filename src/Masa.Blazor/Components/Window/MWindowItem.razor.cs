@@ -1,16 +1,13 @@
 ﻿using Masa.Blazor.Components.ItemGroup;
-using Masa.Blazor.Mixins;
-using Element = BlazorComponent.Web.Element;
+using Element = Masa.Blazor.Core.Web.Element;
 
 namespace Masa.Blazor;
 
 public partial class MWindowItem : MGroupItem<MItemGroupBase>
 {
-    protected MWindowItem() : base(GroupType.Window, bootable: true)
+    public MWindowItem() : base(GroupType.Window, bootable: true)
     {
     }
-
-    [Inject] public Document Document { get; set; } = null!;
 
     [CascadingParameter] public MWindow? WindowGroup { get; set; }
 

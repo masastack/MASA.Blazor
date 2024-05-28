@@ -80,7 +80,7 @@ public class Scroller : IScrollable
         }
         else
         {
-            var dom = await Js.InvokeAsync<BlazorComponent.Web.Element?>(JsInteropConstants.GetDomInfo, ScrollTarget);
+            var dom = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element?>(JsInteropConstants.GetDomInfo, ScrollTarget);
             if (dom != null)
             {
                 CurrentScroll = dom.ScrollTop;

@@ -215,9 +215,9 @@ namespace Masa.Blazor
         private async Task<(double wrapper, double content)> GetWidths()
         {
             var wrapperElement =
-                await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, WrapperRef);
+                await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, WrapperRef);
             var contentElement =
-                await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, ContentRef);
+                await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, ContentRef);
             return (wrapperElement?.ClientWidth ?? 0, contentElement?.ClientWidth ?? 0);
         }
 
@@ -310,7 +310,7 @@ namespace Masa.Blazor
             double currentScrollOffset)
         {
             var selectedDomInfo =
-                await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, selected);
+                await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, selected);
             var clientWidth = selectedDomInfo.ClientWidth;
             var offsetLeft =
                 rtl ? (contentWidth - selectedDomInfo.OffsetLeft - clientWidth) : selectedDomInfo.OffsetLeft;
@@ -341,7 +341,7 @@ namespace Masa.Blazor
             double contentWidth, bool rtl)
         {
             var selectedDomInfo =
-                await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, selected);
+                await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, selected);
             var offsetLeft = selectedDomInfo.OffsetLeft;
             var clientWidth = selectedDomInfo.ClientWidth;
 

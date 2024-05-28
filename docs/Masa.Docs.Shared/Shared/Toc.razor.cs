@@ -1,8 +1,5 @@
-﻿using BlazorComponent.I18n;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using System.Text;
-using BlazorComponent.Web;
-using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Docs.Shared.Shared;
 

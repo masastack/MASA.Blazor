@@ -110,7 +110,7 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
 
         if (MasaBlazor.RTL && MMenu is not null)
         {
-            var right = Document.DocumentElement.ClientWidth - MMenu.Dimensions.Activator.Right;
+            var right = MMenu.DocumentClientWidth - MMenu.Dimensions.Activator.Right;
 
             if (MMenu.NudgeLeft is not null)
             {

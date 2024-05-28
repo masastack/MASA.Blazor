@@ -66,7 +66,7 @@ namespace Masa.Blazor
 
         [Parameter] public bool Light { get; set; }
 
-        [Parameter] public Dictionary<string, object?>? ContentAttributes { get; set; }
+        [Parameter] public Dictionary<string, object>? ContentAttributes { get; set; }
 
         private readonly List<IDependent> _dependents = new();
 
@@ -249,9 +249,12 @@ namespace Masa.Blazor
                     attrs.Add("tabindex", 0);
                 }
 
-                foreach (var pair in ContentAttributes)
+                if (ContentAttributes != null)
                 {
-                    attrs[pair.Key] = pair.Value;
+                    foreach (var pair in ContentAttributes)
+                    {
+                        attrs[pair.Key] = pair.Value;
+                    }
                 }
 
                 return attrs;

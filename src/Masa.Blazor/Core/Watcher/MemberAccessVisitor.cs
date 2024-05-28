@@ -1,23 +1,22 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace BlazorComponent
+namespace Masa.Blazor;
+
+internal class MemberAccessVisitor : ExpressionVisitor
 {
-    internal class MemberAccessVisitor : ExpressionVisitor
+    public List<PropertyInfo> PropertyInfos { get; } = new();
+
+    protected override Expression VisitMember(MemberExpression node)
     {
-        public List<PropertyInfo> PropertyInfos { get; } = new();
-
-        protected override Expression VisitMember(MemberExpression node)
+        if (node.Member is PropertyInfo propertyInfo)
         {
-            if (node.Member is PropertyInfo propertyInfo)
+            if (!PropertyInfos.Any(prop => prop.PropertyType == propertyInfo.PropertyType && prop.Name == propertyInfo.Name))
             {
-                if (!PropertyInfos.Any(prop => prop.PropertyType == propertyInfo.PropertyType && prop.Name == propertyInfo.Name))
-                {
-                    PropertyInfos.Add(propertyInfo);
-                }
+                PropertyInfos.Add(propertyInfo);
             }
-
-            return base.VisitMember(node);
         }
+
+        return base.VisitMember(node);
     }
 }

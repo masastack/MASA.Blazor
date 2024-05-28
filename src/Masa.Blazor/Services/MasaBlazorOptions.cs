@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MasaBlazorOptions : BlazorComponentOptions
+public class MasaBlazorOptions
 {
     public MasaBlazorOptions()
     {
@@ -20,6 +20,8 @@ public class MasaBlazorOptions : BlazorComponentOptions
     internal SSROptions? SSR { get; private set; }
 
     internal Theme Theme { get; }
+    
+    public Locale? Locale { get; set; }
 
     public void ConfigureBreakpoint(Action<BreakpointOptions> configure)
     {

@@ -7,7 +7,6 @@ using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
 using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.JSModules;
-using Masa.Blazor.Mixins;
 using Masa.Blazor.Mixins.Activatable;
 using Masa.Blazor.Popup;
 using Masa.Blazor.Presets.PageStack.NavController;
@@ -25,7 +24,6 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        services.AddBlazorComponent(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
     }
 
@@ -42,7 +40,6 @@ public static class ServiceCollectionExtensions
         var options = new MasaBlazorOptions();
         optionsAction.Invoke(options);
 
-        services.AddBlazorComponent(o => { o.Locale = options.Locale; }, masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(optionsAction, masaBlazorServiceLifetime);
     }
 
@@ -50,6 +47,10 @@ public static class ServiceCollectionExtensions
         Action<MasaBlazorOptions>? optionsAction = null,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
+        services.TryAddScoped<LocalStorage>();
+        services.TryAddScoped<Window>();
+        services.AddI18n();
+        
         services.TryAdd<Application>(masaBlazorServiceLifetime);
         services.TryAdd(ServiceDescriptor.Describe(typeof(MasaBlazor), sp =>
         {

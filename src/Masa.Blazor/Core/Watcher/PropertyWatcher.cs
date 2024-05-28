@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 
-namespace BlazorComponent
+namespace Masa.Blazor
 {
     /// <summary>
     /// This may has bugs,do not use now

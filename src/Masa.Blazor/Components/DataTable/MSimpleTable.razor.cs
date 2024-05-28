@@ -1,4 +1,4 @@
-﻿using Element = BlazorComponent.Web.Element;
+﻿using Element = Masa.Blazor.Core.Web.Element;
 
 namespace Masa.Blazor;
 
