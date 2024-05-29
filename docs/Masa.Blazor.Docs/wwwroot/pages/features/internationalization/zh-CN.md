@@ -7,8 +7,6 @@
 要设置默认语言环境，请在 _Program.cs_ 中调用 `AddMasaBlazor` 时提供 `Locale` 选项：
 
 ```csharp Program.cs
-@using BlazorComponent
-
 services.AddMasaBlazor(options => {
     // new Locale(current, fallback);
     options.Locale = new Locale("zh-CN", "en-US");
@@ -18,7 +16,6 @@ services.AddMasaBlazor(options => {
 ### 使用
 
 ```razor
-@using BlazorComponent.I18n
 @inject I18n I18n
 
 <h1>@I18n.T("$masaBlazor.search")</h1>
@@ -29,7 +26,6 @@ services.AddMasaBlazor(options => {
 ### 切换语言
 
 ``` razor
-@using BlazorComponent.I18n
 @inject I18n I18n
 
 <MButton OnClick="ChangeLanguage">Change Language</MButton>

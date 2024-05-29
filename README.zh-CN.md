@@ -111,7 +111,7 @@ dotnet run
 感谢所有为本项目做出过贡献的朋友。
 
 <a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
+    <img src="https://contrib.rocks/image?repo=masastack/Masa.Blazor" />
 </a>
 
 ## 💬 交流

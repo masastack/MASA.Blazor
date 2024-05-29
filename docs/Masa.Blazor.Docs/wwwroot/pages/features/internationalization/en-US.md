@@ -7,8 +7,6 @@ MASA Blazor support component language internationalization (i18n).
 To set the default locale, supply the `Locale` option when calling `AddMasaBlazor` in `Program.cs`:
 
 ```csharp Program.cs
-@using BlazorComponent
-
 services.AddMasaBlazor(options => {
     // new Locale(current, fallback);
     options.Locale = new Locale("zh-CN", "en-US");
@@ -18,7 +16,6 @@ services.AddMasaBlazor(options => {
 ### Usage
 
 ```razor
-@using BlazorComponent.I18n
 @inject I18n I18n
 
 <h1>@I18n.T("$masaBlazor.search")</h1>
@@ -29,7 +26,6 @@ services.AddMasaBlazor(options => {
 ### Change language
 
 ``` razor
-@using BlazorComponent.I18n
 @inject I18n I18n
 
 <MButton OnClick="ChangeLanguage">Change Language</MButton>

@@ -86,7 +86,6 @@
   - 通过级联参数变更通知子组件刷新（推荐）
 
     ```razor MainLayout
-    @using BlazorComponent.I18n
     @inject I18n I18n
 
     <MApp>
@@ -97,7 +96,6 @@
     ```  
     
     ``` razor PageOrComponent.razor
-    @using BlazorComponent.I18n
     @inject I18n I18n
     
     <h1>@I18n.T("$masaBlazor.search")</h1>
@@ -111,7 +109,6 @@
   - 通过I18n的事件通知子组件刷新
 
     ``` razor
-    @using BlazorComponent.I18n
     @inject I18n I18n
     @implements IDisposable
     

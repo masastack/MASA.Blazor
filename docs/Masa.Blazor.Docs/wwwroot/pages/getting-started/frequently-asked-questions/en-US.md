@@ -86,7 +86,6 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
   - Notify the child component to refresh by changing the cascading parameter (recommended)
 
     ```razor MainLayout
-    @using BlazorComponent.I18n
     @inject I18n I18n
 
     <MApp>
@@ -97,7 +96,6 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
     ```  
 
     ``` razor PageOrComponent.razor
-    @using BlazorComponent.I18n
     @inject I18n I18n
     
     <h1>@I18n.T("$masaBlazor.search")</h1>
@@ -111,7 +109,6 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
   - Notify the child component to refresh through the event of I18n
 
     ```razor MainLayout
-    @using BlazorComponent.I18n
     @inject I18n I18n
     @implements IDisposable
     
