@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace BlazorComponent
+﻿namespace Masa.Blazor
 {
     public class ThemeCssBuilder
     {

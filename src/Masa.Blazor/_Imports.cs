@@ -1,8 +1,4 @@
-﻿global using BlazorComponent;
-global using BlazorComponent.I18n;
-global using BlazorComponent.JSInterop;
-global using BlazorComponent.Web;
-global using Masa.Blazor.Core;
+﻿global using Masa.Blazor.Core;
 global using Masa.Blazor.Presets;
 global using Masa.Blazor.Services.Internals;
 global using Masa.Blazor.Extensions;
@@ -22,3 +18,5 @@ global using Masa.Blazor.Attributes;
 global using Masa.Blazor.Core.I18n;
 global using Microsoft.AspNetCore.Components.Forms;
 global using Masa.Blazor.Mixins;
+global using Masa.Blazor.Helpers;
+global using Masa.Blazor.JSInterop;

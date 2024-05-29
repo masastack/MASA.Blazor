@@ -67,7 +67,7 @@ public class ExpandTransition : Transition
 
     private async Task UpdateSize(ElementReference elementReference)
     {
-        var elementInfo = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, elementReference);
+        var elementInfo = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, elementReference);
         var size = elementInfo.OffsetHeight;
         if (size != 0)
         {

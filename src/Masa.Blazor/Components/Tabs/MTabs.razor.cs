@@ -228,7 +228,7 @@ namespace Masa.Blazor
                 }
                 else
                 {
-                    var el = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, item.Ref);
+                    var el = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, item.Ref);
                     var height = !Vertical ? SliderSize.TryGetNumber().number : el.ScrollHeight;
                     var left = Vertical ? 0 : el.OffsetLeft;
                     var right = Vertical ? 0 : el.OffsetLeft + el.OffsetWidth;

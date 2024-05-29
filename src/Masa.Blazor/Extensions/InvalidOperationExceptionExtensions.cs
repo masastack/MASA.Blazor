@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 public static class InvalidOperationExceptionExtensions
 {

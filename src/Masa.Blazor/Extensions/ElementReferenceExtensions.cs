@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace BlazorComponent.Web;
+namespace Masa.Blazor.Extensions;
 
 public static class ElementReferenceExtensions
 {
@@ -23,7 +23,7 @@ public static class ElementReferenceExtensions
     {
         selector = null;
 
-        if (elementReference.Id is null)
+        if (elementReference.Context is null)
         {
             return false;
         }

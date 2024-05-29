@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
-using BlazorComponent.Form;
+using Masa.Blazor.Components.Form;
 using Masa.Blazor.Components.Input;
 
 namespace Masa.Blazor;

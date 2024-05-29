@@ -198,8 +198,7 @@ public partial class MFileInput<TValue> : MTextField<TValue>
         if (InputFile?.Element is null) return;
 
         await base.HandleOnPrependClickAsync(args);
-        var @event = new MouseEvent("click");
-        await Js.DispatchEventAsync(InputFile.Element.Value, @event, true);
+        await Js.DispatchEventAsync(InputFile.Element.Value, "click", true);
     }
 
     public override Task HandleOnInputAsync(ChangeEventArgs args) => Task.CompletedTask;
@@ -256,8 +255,7 @@ public partial class MFileInput<TValue> : MTextField<TValue>
 
         if (InputFile?.Element is null) return;
 
-        var @event = new MouseEvent("click");
-        await Js.DispatchEventAsync(InputFile.Element.Value, @event, true);
+        await Js.DispatchEventAsync(InputFile.Element.Value, "click", true);
     }
 
     public override async Task HandleOnClearClickAsync(MouseEventArgs args)

@@ -576,7 +576,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             return 0;
         }
 
-        var element = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(
+        var element = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(
             JsInteropConstants.GetDomInfo, Ref);
         return element.ClientWidth;
     }

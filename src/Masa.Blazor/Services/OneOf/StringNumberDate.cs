@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 [GenerateOneOf]
 public partial class StringNumberDate : OneOfBase<string, int, DateTime>

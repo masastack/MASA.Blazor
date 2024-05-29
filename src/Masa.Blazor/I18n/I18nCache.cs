@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Globalization;
 
-namespace BlazorComponent.I18n;
+namespace Masa.Blazor.Core.I18n;
 
 internal static class I18nCache
 {

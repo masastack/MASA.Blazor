@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent.Form;
+﻿namespace Masa.Blazor.Components.Form;
 
 public enum ValidationResultTypes
 {

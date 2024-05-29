@@ -2,7 +2,7 @@
 
 public struct StyleBuilder
 {
-    private StringBuilder _stringBuilder = new();
+    private readonly StringBuilder _stringBuilder = new();
 
     public StyleBuilder()
     {

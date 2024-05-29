@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 public static class RenderFragmentExtensions
 {

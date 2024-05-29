@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel;
 
-namespace BlazorComponent
+namespace Masa.Blazor
 {
     public class ObservableProperty<TValue> : ObservableProperty
     {

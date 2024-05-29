@@ -1,5 +1,4 @@
-﻿using BlazorComponent;
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Input

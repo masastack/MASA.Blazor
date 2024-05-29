@@ -1,5 +1,4 @@
-﻿using BlazorComponent.Web;
-using Masa.Blazor.Components.Rating;
+﻿using Masa.Blazor.Components.Rating;
 
 namespace Masa.Blazor;
 

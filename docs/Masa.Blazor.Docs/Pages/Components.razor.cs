@@ -1,5 +1,4 @@
-﻿using BlazorComponent.I18n;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;

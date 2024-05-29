@@ -1,15 +1,4 @@
-﻿namespace Masa.Blazor.Extensions;
-
-public static class StringBuilderExtensions
-{
-    public static void AppendIf(this StringBuilder stringBuilder, string value, bool condition)
-    {
-        if (condition)
-        {
-            stringBuilder.Append(value);
-        }
-    }
-}
+﻿namespace Masa.Blazor.Core;
 
 public class CssBuilder
 {

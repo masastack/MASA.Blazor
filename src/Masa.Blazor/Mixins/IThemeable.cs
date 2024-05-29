@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent
+﻿namespace Masa.Blazor
 {
     public interface IThemeable
     {

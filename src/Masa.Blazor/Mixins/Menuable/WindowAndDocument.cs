@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor.Mixins.Menuable;
 
 public class WindowAndDocument
 {

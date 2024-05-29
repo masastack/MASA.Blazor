@@ -9,8 +9,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Inject] private Window Window { get; set; } = null!;
-
     [Inject] private IPopupProvider PopupProvider { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -56,7 +54,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     private async Task OnJSInteropReadyAsync()
     {
         await MasaBlazor.Breakpoint.InitAsync(Js);
-        await Window.AddResizeEventListenerAsync();
     }
 
     private void OnThemeChange(Theme theme)

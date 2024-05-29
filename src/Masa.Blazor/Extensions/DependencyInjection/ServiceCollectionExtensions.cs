@@ -48,7 +48,6 @@ public static class ServiceCollectionExtensions
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
         services.TryAddScoped<LocalStorage>();
-        services.TryAddScoped<Window>();
         services.AddI18n();
         
         services.TryAdd<Application>(masaBlazorServiceLifetime);

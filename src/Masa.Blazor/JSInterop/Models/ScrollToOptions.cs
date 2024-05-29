@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BlazorComponent.JSInterop;
+namespace Masa.Blazor.JSInterop;
 
 public record ScrollToOptions
 {

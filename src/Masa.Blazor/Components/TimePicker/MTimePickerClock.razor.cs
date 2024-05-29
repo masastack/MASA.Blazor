@@ -1,6 +1,4 @@
-﻿using BlazorComponent.Web;
-
-namespace Masa.Blazor.Components.TimePicker;
+﻿namespace Masa.Blazor.Components.TimePicker;
 
 public partial class MTimePickerClock : MasaComponentBase
 {

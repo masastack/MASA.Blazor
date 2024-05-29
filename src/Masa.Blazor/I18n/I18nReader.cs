@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 
-namespace BlazorComponent.I18n;
+namespace Masa.Blazor.Core.I18n;
 
 public static class I18nReader
 {

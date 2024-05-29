@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System.Runtime.Loader;
-using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Text.RegularExpressions;
 

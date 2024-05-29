@@ -80,7 +80,7 @@ public class Scroller : IScrollable
         }
         else
         {
-            var dom = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element?>(JsInteropConstants.GetDomInfo, ScrollTarget);
+            var dom = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element?>(JsInteropConstants.GetDomInfo, ScrollTarget);
             if (dom != null)
             {
                 CurrentScroll = dom.ScrollTop;
@@ -101,8 +101,11 @@ public class Scroller : IScrollable
 
         async Task GetPageYOffsetAsync()
         {
-            var window = await Js.InvokeAsync<Window>(JsInteropConstants.GetWindow);
-            CurrentScroll = window.PageYOffset;
+            var pageYOffset = await Js.GetWindowPageYOffsetAsync();
+            if (pageYOffset != null)
+            {
+                CurrentScroll = pageYOffset.Value;
+            }
         }
     }
 }

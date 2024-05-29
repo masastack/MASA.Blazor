@@ -6,7 +6,7 @@ public class ScrollStrategyJSModule : JSModule
 {
     private IJSObjectReference? _instance;
 
-    public ScrollStrategyJSModule(IJSRuntime js) : base(js, "./_content/BlazorComponent/js/scrollStrategies.js")
+    public ScrollStrategyJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/scrollStrategies.js")
     {
     }
 

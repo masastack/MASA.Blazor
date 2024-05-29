@@ -1,5 +1,4 @@
-﻿global using BlazorComponent;
-global using Masa.Blazor;
+﻿global using Masa.Blazor;
 global using Microsoft.AspNetCore.Components;
 global using Masa.Blazor.Docs;
 global using Masa.Blazor.Docs.Services;

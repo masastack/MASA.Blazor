@@ -1,5 +1,5 @@
 ﻿using Masa.Blazor.Components.ItemGroup;
-using Element = Masa.Blazor.Core.Web.Element;
+using Element = Masa.Blazor.JSInterop.Element;
 
 namespace Masa.Blazor;
 

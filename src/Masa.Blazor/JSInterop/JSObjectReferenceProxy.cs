@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor.JSInterop;
 
 public class JSObjectReferenceProxy : IJSObjectReference
 {

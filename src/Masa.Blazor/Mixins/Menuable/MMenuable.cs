@@ -58,17 +58,9 @@ public abstract class MMenuable : MBootable
 
     [Parameter] public bool ExternalActivator { get; set; }
 
-    private double _documentClientHeight;
-    private double _documentClientWidth;
-    private double _documentScrollLeft;
-    private double _documentScrollTop;
+    private WindowAndDocument _windowAndDocument = new();
 
-    private double _windowPageXOffset;
-    private double _windowInnerHeight;
-    private double _windowInnerWidth;
-    private double _windowPageYOffset;
-
-    internal double DocumentClientWidth => _documentClientWidth;
+    internal double DocumentClientWidth => _windowAndDocument.ClientWidth;
 
     protected virtual bool IsRtl => false;
 
@@ -266,7 +258,7 @@ public abstract class MMenuable : MBootable
 
     private double GetOffsetLeft()
     {
-        return _windowPageXOffset > 0 ? _windowPageXOffset : _documentScrollLeft;
+        return _windowAndDocument.PageXOffset > 0 ? _windowAndDocument.PageXOffset : _windowAndDocument.ScrollLeft;
     }
 
     protected double CalcYOverflow(double top)
@@ -296,7 +288,7 @@ public abstract class MMenuable : MBootable
 
     private double GetInnerHeight()
     {
-        return _windowInnerHeight > 0 ? _windowInnerHeight : _documentClientHeight;
+        return _windowAndDocument.InnerHeight > 0 ? _windowAndDocument.InnerHeight : _windowAndDocument.ClientHeight;
     }
 
     private void CheckForPageYOffset()
@@ -306,7 +298,7 @@ public abstract class MMenuable : MBootable
 
     private double GetOffsetTop()
     {
-        return _windowPageYOffset > 0 ? _windowPageYOffset : _documentScrollTop;
+        return _windowAndDocument.PageYOffset > 0 ? _windowAndDocument.PageYOffset : _windowAndDocument.ScrollTop;
     }
 
     protected override void OnInitialized()
@@ -350,7 +342,7 @@ public abstract class MMenuable : MBootable
         var multipleResult = await Js.InvokeAsync<MultipleResult>(JsInteropConstants.InvokeMultipleMethod, windowProps,
             documentProps,
             hasActivator, ActivatorSelector, IsDefaultAttach, ContentElement, Attached, AttachSelector, Ref);
-        var windowAndDocument = multipleResult.WindowAndDocument;
+        _windowAndDocument = multipleResult.WindowAndDocument;
 
         //We want to reduce js interop
         //And we attach content-element in last step
@@ -361,21 +353,9 @@ public abstract class MMenuable : MBootable
 
         ActivateZIndex = multipleResult.ZIndex;
 
-        //Window props
-        _windowInnerHeight = windowAndDocument.InnerHeight;
-        _windowInnerWidth = windowAndDocument.InnerWidth;
-        _windowPageXOffset = windowAndDocument.PageXOffset;
-        _windowPageYOffset = windowAndDocument.PageYOffset;
-
-        //Document props
-        _documentClientHeight = windowAndDocument.ClientHeight;
-        _documentClientWidth = windowAndDocument.ClientWidth;
-        _documentScrollLeft = windowAndDocument.ScrollLeft;
-        _documentScrollTop = windowAndDocument.ScrollTop;
-
         //TODO:CheckActivatorFixed
         CheckForPageYOffset();
-        PageWidth = _documentClientWidth;
+        PageWidth = _windowAndDocument.ClientWidth;
 
         var dimensions = multipleResult.Dimensions;
         if (hasActivator)
@@ -388,7 +368,7 @@ public abstract class MMenuable : MBootable
 
             //Since no activator,we should re-computed it's top and left
             Dimensions.Activator.Top -= dimensions.RelativeYOffset;
-            Dimensions.Activator.Left -= _windowPageXOffset + dimensions.OffsetParentLeft;
+            Dimensions.Activator.Left -= _windowAndDocument.PageXOffset + dimensions.OffsetParentLeft;
         }
 
         Dimensions.Content = dimensions.Content;

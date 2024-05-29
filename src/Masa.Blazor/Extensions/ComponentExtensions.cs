@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 public static class ComponentExtensions
 {

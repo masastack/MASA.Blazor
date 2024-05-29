@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor;
 
 #if !NET7_0_OR_GREATER
 [EventHandler("onmouseleave", typeof(MouseEventArgs), true, true)]

@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent
+﻿namespace Masa.Blazor
 {
     // TODO: rename to Border
     public enum Borders

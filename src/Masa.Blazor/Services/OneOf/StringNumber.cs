@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor;
 
 [GenerateOneOf]
 public partial class StringNumber : OneOfBase<string, int, double>

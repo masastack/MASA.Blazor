@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace BlazorComponent;
+﻿namespace Masa.Blazor.Helpers;
 
 public static class NumberHelper
 {

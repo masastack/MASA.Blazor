@@ -13,7 +13,7 @@ public abstract class TransitionElementBase : MElement
     /// <summary>
     /// The dom information about the transitional element.
     /// </summary>
-    internal Masa.Blazor.Core.Web.Element? ElementInfo { get; set; }
+    internal Masa.Blazor.JSInterop.Element? ElementInfo { get; set; }
 
     public ElementReference Reference
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 public class LocalStorage
 {

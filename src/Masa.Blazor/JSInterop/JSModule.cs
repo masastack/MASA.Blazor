@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent.JSInterop;
+﻿namespace Masa.Blazor.JSInterop;
 
 /// <summary>
 /// Helper for loading any JavaScript (ES6) module and calling its exports

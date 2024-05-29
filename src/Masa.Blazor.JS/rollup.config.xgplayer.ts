@@ -11,7 +11,7 @@ export default defineConfig([
     input: "./src/proxies/xgplayer/index.ts",
     output: [
       {
-        file: "../../../../MASA.Blazor/wwwroot/js/proxies/xgplayer-proxy.js",
+        file: "../MASA.Blazor/wwwroot/js/proxies/xgplayer-proxy.js",
         format: "esm",
         sourcemap: true,
       },

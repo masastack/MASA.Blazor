@@ -1,6 +1,6 @@
 ﻿using BemIt.Abstracts;
 
-namespace Masa.Blazor.Extensions;
+namespace Masa.Blazor.Core;
 
 public static class BlockOrElementExtensions
 {

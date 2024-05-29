@@ -6,7 +6,7 @@ public class ActivatableJsModule : JSModule
     private DotNetObjectReference<ActivatableJsModule>? _selfReference;
     private IJSObjectReference? _instance;
 
-    public ActivatableJsModule(IJSRuntime js) : base(js, "./_content/BlazorComponent/js/activatable.js")
+    public ActivatableJsModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/activatable.js")
     {
     }
 

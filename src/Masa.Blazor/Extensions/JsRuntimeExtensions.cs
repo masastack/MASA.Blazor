@@ -135,13 +135,18 @@ public static class JsRuntimeExtensions
         return jsRuntime.GetNumberPropAsync(el, "offsetWidth");
     }
 
+    public static Task<double?> GetWindowPageYOffsetAsync(this IJSRuntime jsRuntime)
+    {
+        return jsRuntime.GetNumberPropAsync("window", "pageYOffset");
+    }
+
     public static ValueTask<BoundingClientRect> GetBoundingClientRectAsync(this IJSRuntime jsRuntime,
         ElementReference el, string? attach = ".m-application")
     {
         return jsRuntime.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, el,
             attach);
     }
-    
+
     public static ValueTask<BoundingClientRect> GetBoundingClientRectAsync(this IJSRuntime jsRuntime,
         string selector, string? attach = ".m-application")
     {
@@ -149,18 +154,19 @@ public static class JsRuntimeExtensions
             attach);
     }
 
-    public static ValueTask DispatchEventAsync(this IJSRuntime jsRuntime, ElementReference el, Event @event, bool stopPropagation)
+    public static ValueTask DispatchEventAsync(this IJSRuntime jsRuntime, ElementReference el, string type,
+        bool stopPropagation)
     {
-        return jsRuntime.InvokeVoidAsync(JsInteropConstants.TriggerEvent, el, @event.Type, @event.Name,
-            stopPropagation);
+        return jsRuntime.InvokeVoidAsync(JsInteropConstants.TriggerEvent, el, type, stopPropagation);
     }
 
     public static ValueTask SetPropertyAsync(this IJSRuntime jsRuntime, ElementReference el, string key, object value)
     {
         return jsRuntime.InvokeVoidAsync(JsInteropConstants.SetProperty, el, key, value);
     }
-
-    private static async Task<double?> GetNumberPropAsync(this IJSRuntime jsRuntime, ElementReference el, string name)
+    
+    // TODO: how about return double instead of double? ?
+    private static async Task<double?> GetNumberPropAsync(this IJSRuntime jsRuntime, object el, string name)
     {
         var jsonElement = await jsRuntime.InvokeAsync<JsonElement>(JsInteropConstants.GetProp, el, name);
         return jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : null;

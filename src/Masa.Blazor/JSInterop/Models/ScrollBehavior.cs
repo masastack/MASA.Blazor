@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent.JSInterop;
+﻿namespace Masa.Blazor.JSInterop;
 
 public enum ScrollBehavior
 {

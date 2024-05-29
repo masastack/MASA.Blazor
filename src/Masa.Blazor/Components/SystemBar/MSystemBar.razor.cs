@@ -137,7 +137,7 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
             return 0;
         }
 
-        var element = await Js.InvokeAsync<Masa.Blazor.Core.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+        var element = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, Ref);
         return element?.ClientHeight ?? 0;
     }
 

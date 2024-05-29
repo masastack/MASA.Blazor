@@ -1,6 +1,6 @@
 ﻿using Force.DeepCloner;
 
-namespace BlazorComponent;
+namespace Masa.Blazor;
 
 public static class DeepClonerExtensions
 {

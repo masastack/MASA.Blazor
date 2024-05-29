@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace BlazorComponent
+namespace Masa.Blazor
 {
     public class ObservableObject : INotifyPropertyChanged
     {

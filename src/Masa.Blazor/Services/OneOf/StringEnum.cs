@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor;
 
 [GenerateOneOf]
 public partial class StringEnum<T> : OneOfBase<string, T> where T : Enum

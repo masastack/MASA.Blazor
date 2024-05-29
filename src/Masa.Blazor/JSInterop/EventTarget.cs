@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Microsoft.AspNetCore.Components.Web;
+﻿namespace Microsoft.AspNetCore.Components.Web;
 
 public class EventTarget
 {

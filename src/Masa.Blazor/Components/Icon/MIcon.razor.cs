@@ -1,5 +1,4 @@
-﻿using BlazorComponent.Helpers;
-using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
@@ -86,6 +85,9 @@ namespace Masa.Blazor
         /// </summary>
         [Parameter]
         public bool XSmall { get; set; }
+
+        private const string svgPattern1 = @"^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+";
+        private const string svgPattern2 = @"[\dz]$";
 
         private static readonly Dictionary<string, object> s_defaultSvgAttrs = new()
         {
@@ -318,7 +320,19 @@ namespace Masa.Blazor
 
         protected static bool CheckIfSvg(string iconOrPath)
         {
-            return RegexHelper.RegexSvgPath(iconOrPath);
+            return RegexSvgPath(iconOrPath);
+        }
+
+        /// <summary>
+        /// Check if the string is a valid svg path
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool RegexSvgPath(string str)
+        {
+            var reg1 = new Regex(svgPattern1, RegexOptions.IgnoreCase);
+            var reg2 = new Regex(svgPattern2, RegexOptions.IgnoreCase);
+            return reg1.Match(str).Success && reg2.Match(str).Success && str.Length > 4;
         }
     }
 }

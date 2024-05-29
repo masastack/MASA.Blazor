@@ -7,7 +7,7 @@ public class OutsideClickJSModule : JSModule
     private IJSObjectReference? _instance;
     private CancellationTokenSource? _cts;
 
-    public OutsideClickJSModule(IJSRuntime js) : base(js, "./_content/BlazorComponent/js/outside-click.js")
+    public OutsideClickJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/outside-click.js")
     {
     }
 

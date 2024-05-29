@@ -98,11 +98,9 @@ export function getParentClientWidthOrWindowInnerWidth(element: HTMLElement) {
   return element.parentElement ? element.parentElement.clientWidth : window.innerWidth;
 }
 
-export function triggerEvent(elOrString, eventType, eventName, stopPropagation) {
+export function triggerEvent(elOrString, eventType, stopPropagation) {
   var dom = getDom(elOrString);
-  var evt = document.createEvent(eventType);
-  evt.initEvent(eventName);
-
+  var evt = new Event(eventType);
   if (stopPropagation) {
     evt.stopPropagation();
   }

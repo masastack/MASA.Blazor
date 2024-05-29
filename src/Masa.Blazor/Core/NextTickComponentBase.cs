@@ -1,4 +1,4 @@
-﻿namespace BlazorComponent;
+﻿namespace Masa.Blazor;
 
 public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
 {

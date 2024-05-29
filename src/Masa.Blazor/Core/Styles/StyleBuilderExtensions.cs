@@ -1,6 +1,4 @@
-﻿namespace Masa.Blazor;
-
-using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿namespace Masa.Blazor.Core;
 
 public static class StyleBuilderExtensions
 {

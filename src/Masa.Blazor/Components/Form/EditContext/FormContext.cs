@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Form;
+﻿using Masa.Blazor.Components.Form;
 
 namespace Masa.Blazor;
 

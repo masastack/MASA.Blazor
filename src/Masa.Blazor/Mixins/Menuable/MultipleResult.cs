@@ -1,11 +1,10 @@
-﻿namespace BlazorComponent
+﻿namespace Masa.Blazor.Mixins.Menuable;
+
+public class MultipleResult
 {
-    public class MultipleResult
-    {
-        public WindowAndDocument WindowAndDocument { get; set; } = new();
+    public WindowAndDocument WindowAndDocument { get; set; } = new();
 
-        public MenuableDimensions Dimensions { get; set; } = new();
+    public MenuableDimensions Dimensions { get; set; } = new();
 
-        public int ZIndex { get; set; }
-    }
+    public int ZIndex { get; set; }
 }

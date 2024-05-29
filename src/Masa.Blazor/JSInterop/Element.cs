@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Core.Web;
+﻿namespace Masa.Blazor.JSInterop;
 
 public class Element
 {
