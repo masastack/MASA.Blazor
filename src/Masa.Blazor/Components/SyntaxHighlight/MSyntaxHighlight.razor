@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
 @if (Inline)
 {
-    <code class="@CssProvider.GetClass("code")"
-          style="@CssProvider.GetStyle("code")"
+    <code class="@GetCodeClass()"
+          style="@GetCodeStyle()"
+          id="@Id"
           @attributes="@Attributes"
           @ref="@Ref">
         @((MarkupString)_codeHtml)
@@ -12,12 +13,13 @@
 }
 else
 {
-    <pre class="@CssProvider.GetClass()"
-         style="@CssProvider.GetStyle()" 
+    <pre class="@GetClass()"
+         style="@GetStyle()"
+         id="@Id"
          @attributes="@Attributes"
          @ref="Ref">
-        <code class="@CssProvider.GetClass("code")" 
-              style="@CssProvider.GetStyle("code")">
+        <code class="@GetCodeClass()" 
+              style="@GetCodeStyle()">
             @((MarkupString)_codeHtml)
         </code>
     </pre>

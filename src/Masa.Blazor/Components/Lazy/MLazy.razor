@@ -1,15 +1,16 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
-<Element Tag="@Tag"
-         Class="@CssProvider.GetClass()"
-         Style="@CssProvider.GetStyle()"
-         ReferenceCaptureAction="u => Ref = u"
-         id="@Id">
+<MElement Tag="@Tag"
+          Class="@GetClass()"
+          Style="@GetStyle()"
+          ReferenceCaptureAction="u => Ref = u"
+          id="@Id"
+          @attributes="@Attributes">
     <Transition Name="@Transition">
-        <IfTransitionElement Class="@CssProvider.GetClass("wrapper")"
+        <IfTransitionElement Class="@_block.Element("wrapper").Name"
                              Value="_isActive">
             @ChildContent
         </IfTransitionElement>
     </Transition>
-</Element>
+</MElement>

@@ -1,13 +1,10 @@
 ﻿namespace Masa.Blazor.Popup.Components;
 
-public class PopupComponentBase : BComponentBase
+public class PopupComponentBase : MasaComponentBase
 {
     [Inject] protected I18n I18n { get; set; } = null!;
 
     [CascadingParameter] private ProviderItem? PopupItem { get; set; }
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
 
     protected bool Visible { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿@using BemIt
+@using Masa.Blazor.Core
 
-<div class="@Block.Modifier(Filled).AddTheme(CascadingIsDark).AddClass(Class)"
+<div class="@_modifierBuilder.Add(Filled).AddTheme(CascadingIsDark).AddClass(Class)"
      Style="@Style">
-    <span class="@Block.Element("title").AddClass(TitleClass)">
+    <span class="@_block.Element("title").AppendClasses(TitleClass)">
         @Title
     </span>
     @ChildContent
@@ -10,27 +11,21 @@
 
 @code {
 
-    private Block Block => new("m-outline-card");
+    private static Block _block = new("m-outline-card");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
+    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
-    [Parameter]
-    public string? Class { get; set; }
+    [Parameter] public string? Class { get; set; }
 
-    [Parameter]
-    public string? Style { get; set; }
+    [Parameter] public string? Style { get; set; }
 
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter]
-    public string? Title { get; set; }
+    [Parameter] public string? Title { get; set; }
 
-    [Parameter]
-    public string? TitleClass { get; set; }
+    [Parameter] public string? TitleClass { get; set; }
 
-    [Parameter]
-    public bool Filled { get; set; }
+    [Parameter] public bool Filled { get; set; }
 
 }

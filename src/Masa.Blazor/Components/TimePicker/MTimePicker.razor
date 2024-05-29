@@ -20,7 +20,7 @@
          Id="@Id"
          @attributes="@Attributes">
     <KeyTransitionElement Value="@Selecting"
-                          Class="@_block.Element("container").Build()">
+                          Class="@_block.Element("container").Name">
         @if (!AmPmInTitle && IsAmPm)
         {
             @GenClockAmPm()
@@ -50,7 +50,7 @@
                               OnPeriodUpdate="@HandleOnPeriodUpdate">
             </MTimePickerTitle>
 
-            void HandleOnSelectingUpdate(SelectingTimes selecting)
+            void HandleOnSelectingUpdate(SelectingTime selecting)
             {
                 Selecting = selecting;
             }
@@ -65,8 +65,8 @@
 
     private RenderFragment GenClockAmPm() => __builder =>
     {
-        <div class="@_block.Element("ampm").AddTextColor(Color ?? "primary")"
-             style="@(StyleBuilder.Create().AddTextColor(Color ?? "primary"))">
+        <div class="@GetClass(_block.Element("ampm").Name, CssClassUtils.GetTextColor(Color ?? "primary"))"
+             style="@CssStyleUtils.GetTextColor(Color ?? "primary")">
             @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnAmClickAsync), RenderFragments.RenderText(AmText), Period == TimePeriod.Am, Disabled || Readonly)
             @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnPmClickAsync), RenderFragments.RenderText(PmText), Period == TimePeriod.Pm, Disabled || Readonly)
         </div>
@@ -74,8 +74,8 @@
 
     private RenderFragment GenClock() => __builder =>
     {
-        var selectingHour = Selecting == SelectingTimes.Hour;
-        var selectingMinute = Selecting == SelectingTimes.Minute;
+        var selectingHour = Selecting == SelectingTime.Hour;
+        var selectingMinute = Selecting == SelectingTime.Minute;
 
         var allowedValues = selectingHour ? IsAllowedHourCb : (selectingMinute ? IsAllowedMinuteCb : IsAllowedSecondCb);
         Func<int, string> format = selectingHour ? (IsAmPm ? val => TimeHelper.Convert24To12(val).ToString() : val => $"{val}") : val => Pad(val);

@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor.Components.DataTable.Header
 @inherits MDataTableHeaderBase
 
-<thead class="@CssProvider.GetClass()">
+<thead class="@GetClass()">
 <tr>
     @{
         List<RenderFragment> children = new();
@@ -21,7 +21,7 @@
         if (children.Any())
         {
             <th>
-                <div class="@CssProvider.GetClass("mobile__wrapper")">
+                <div class="@Block.Element("mobile__wrapper")">
                     @foreach (var item in children)
                     {
                         @item
@@ -39,7 +39,7 @@
 
     private RenderFragment GenSelectContent(DataTableHeader header) => __builder =>
     {
-        <div class="@CssProvider.GetClass("mobile__select")">
+        <div class="@Block.Element("mobile__select")">
             @GenSelectAll()
         </div>
     };
@@ -59,7 +59,7 @@
                     @context.Item.Text
                 }
 
-                <div class="@CssProvider.GetClass("mobile__select-chips", data: context.Item)">
+                <div class="@GetSelectChipsClass(context.Item)">
                     @GenSortIcon()
                 </div>
         </MChip>;

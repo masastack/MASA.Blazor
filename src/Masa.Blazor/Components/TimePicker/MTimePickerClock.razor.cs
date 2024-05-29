@@ -1,11 +1,7 @@
-﻿using BlazorComponent.Web;
-
-namespace Masa.Blazor.Components.TimePicker;
+﻿namespace Masa.Blazor.Components.TimePicker;
 
 public partial class MTimePickerClock : MasaComponentBase
 {
-    [Inject] public Document Document { get; set; } = null!;
-
     [Parameter]
     public int? Value
     {
@@ -98,11 +94,7 @@ public partial class MTimePickerClock : MasaComponentBase
 
     protected bool IsDragging { get; set; }
 
-    protected HtmlElement? Clock => Document.GetElementByReference(Ref);
-
     public ElementReference InnerClockElement { get; set; }
-
-    protected HtmlElement? InnerClock => Document.GetElementByReference(InnerClockElement);
 
     protected double InnerRadiusScale => 0.62;
 
@@ -136,14 +128,14 @@ public partial class MTimePickerClock : MasaComponentBase
 
         if (!IsDragging) return;
 
-        if (Clock is null || InnerClock is null) return;
+        if (Ref.Context is null || InnerClockElement.Context is null) return;
 
-        var clockRect = await Clock.GetBoundingClientRectAsync();
+        var clockRect = await GetBoundingClientRectAsync(Ref);
         var width = clockRect.Width;
         var top = clockRect.Top;
         var left = clockRect.Left;
 
-        var innerClockRect = await InnerClock.GetBoundingClientRectAsync();
+        var innerClockRect = await GetBoundingClientRectAsync(InnerClockElement);
         var innerWidth = innerClockRect.Width;
 
         var clientX = args.ClientX;
@@ -170,6 +162,11 @@ public partial class MTimePickerClock : MasaComponentBase
                 return;
             }
         }
+    }
+
+    private ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference element)
+    {
+        return Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, element, ".m-application");
     }
 
     private async Task SetMouseDownValueAsync(int value)
@@ -288,24 +285,27 @@ public partial class MTimePickerClock : MasaComponentBase
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
 
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
         }
+    }
 #endif
 
-    private Block _block = new("m-time-picker-clock");
+    private static Block _block = new("m-time-picker-clock");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();
+    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier("indeterminate", Value == null)
+        yield return _modifierBuilder.Add("indeterminate", Value == null)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -314,11 +314,11 @@ public partial class MTimePickerClock : MasaComponentBase
         {
             if (Scrollable)
             {
-                var el = Document.GetElementByReference(Ref);
-                if (el is null) return;
-
-                await el.AddEventListenerAsync("wheel",
-                    EventCallback.Factory.Create<WheelEventArgs>(this, HandleOnWheelAsync), false,
+                await Js.AddHtmlElementEventListener<WheelEventArgs>(
+                    Ref,
+                    "wheel",
+                    HandleOnWheelAsync,
+                    false,
                     new EventListenerExtras() { PreventDefault = true });
             }
         }

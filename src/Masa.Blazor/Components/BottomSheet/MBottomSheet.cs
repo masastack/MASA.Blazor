@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MBottomSheet : MDialog
+public class MBottomSheet : MDialog
 {
     [Parameter] public bool Inset { get; set; }
 
@@ -11,15 +11,16 @@ public partial class MBottomSheet : MDialog
         return base.SetParametersAsync(parameters);
     }
 
-    protected override void SetComponentClass()
-    {
-        base.SetComponentClass();
+    private static Block _block = new("m-bottom-sheet");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-        CssProvider
-            .Merge("innerContent", css =>
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            new[]
             {
-                css.Add("m-bottom-sheet")
-                   .AddIf("m-bottom-sheet--inset", () => Inset);
-            });
+                _modifierBuilder.Add(Inset).Build()
+            }
+        );
     }
 }

@@ -13,7 +13,7 @@
 
             <Transition Name="fade-transition">
                 <IfTransitionElement Value="@Value"
-                                     Class="@_block.Element("scrim").AddBackgroundColor(ComputedColor).AddClass(ScrimClass).Build()"
+                                     Class="@_scrimModifierBuilder.AddBackgroundColor(ComputedColor).AddClass(ScrimClass).Build()"
                                      Style="@StyleBuilder.Create().AddBackgroundColor(ComputedColor).Build()">
                 </IfTransitionElement>
             </Transition>
@@ -21,7 +21,7 @@
 
             <Transition Name="fade-transition">
                 <ShowTransitionElement Value="@Value"
-                                       Class="@_block.Element("content").Build()"
+                                       Class="@_content.Name"
                                        ReferenceCaptureAction="r => ContentRef = r">
                     @ChildContent
                 </ShowTransitionElement>

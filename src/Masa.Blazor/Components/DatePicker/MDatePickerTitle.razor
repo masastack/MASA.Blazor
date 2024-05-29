@@ -2,17 +2,16 @@
 @inherits MasaComponentBase
 
 <div class="@GetClass()" style="@GetStyle()">
-    @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnYearBtnClickAsync), GenYearText(), SelectingYear, false, _block.Element("year").Build())
-    @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnTitleDateBtnClickAsync), GenTitleText(), !SelectingYear, false, _block.Element("date").Build())
+    @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnYearBtnClickAsync), GenYearText(), SelectingYear, false, _block.Element("year").Name)
+    @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnTitleDateBtnClickAsync), GenTitleText(), !SelectingYear, false, _block.Element("date").Name)
 </div>
 
 @code {
+
     internal static RenderFragment GenPickerButton(EventCallback<MouseEventArgs> click, RenderFragment content, bool active, bool @readonly, string? @class = null) => builder =>
     {
-        Block block = new("m-picker__title__btn");
-
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", block.Modifier(active).And("readonly", @readonly).AddClass(@class).Build());
+        builder.AddAttribute(1, "class", _btnModiferBuilder.Add(active).Add("readonly", @readonly).AddClass(@class).Build());
         builder.AddAttribute(2, "onclick", click);
         builder.AddAttribute(3, "__internal_stopPropagation_ondragover", true);
         builder.AddContent(4, content);

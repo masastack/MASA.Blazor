@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using Microsoft.AspNetCore.Components.Forms;
+using Element = BemIt.Element;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
@@ -18,6 +19,11 @@ public partial class MSplitter
     [Parameter] [MasaApiParameter(true)] public bool PushOtherPanes { get; set; } = true;
 
     [Parameter] public bool Row { get; set; }
+    
+    private static Block _block = new("m-splitter");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static Element _pane = _block.Element("pane");
+    private static ModifierBuilder _barModifierBuilder = _block.Element("bar").CreateModifierBuilder();
 
     private readonly Collection<MSplitterPane> _panes = new();
 
@@ -30,54 +36,46 @@ public partial class MSplitter
     private int _activeIndex;
     private bool _eventsBound;
 
-    protected override void SetComponentClass()
+    protected override void OnInitialized()
     {
-        base.SetComponentClass();
+        base.OnInitialized();
 
-        CssProvider
-            .UseBem("m-splitter", css =>
-            {
-                css.Modifiers(m =>
-                    m.Modifier("column", !Row).And(Row).And("dragging", _dragging)).AddTheme(CascadingIsDark, isIndependent: false);
-            })
-            .Element("pane", css =>
-            {
-                if (css.Data is MSplitterPane pane)
-                {
-                    css.Add(pane.Class);
-                }
-            }, style =>
-            {
-                if (style.Data is MSplitterPane pane)
-                {
-                    var size = Math.Round(pane.InternalSize, 2, MidpointRounding.ToZero) + "%";
+        Id??= $"splitter-{Guid.NewGuid():N}";
+    }
 
-                    if (Row)
-                    {
-                        style.AddHeight(size);
-                    }
-                    else
-                    {
-                        style.AddWidth(size);
-                    }
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        yield return _modifierBuilder
+            .Add("column", !Row)
+            .Add(Row)
+            .Add("dragging", _dragging)
+            .AddTheme(CascadingIsDark, false)
+            .Build();
+    }
 
-                    style.Add(pane.Style);
-                }
-            })
-            .Element("bar", css =>
-            {
-                css.Modifiers(m => m.Modifier("default", BarContent is null));
-            }, style =>
-            {
-                if (Row)
-                {
-                    style.AddMinHeight(BarSize);
-                }
-                else
-                {
-                    style.AddMinWidth(BarSize);
-                }
-            });
+    private string GetPaneStyle(MSplitterPane pane)
+    {
+        var styleBuilder = new StyleBuilder();
+        
+        var size = Math.Round(pane.InternalSize, 2, MidpointRounding.ToZero) + "%";
+
+        if (Row)
+        {
+            styleBuilder.AddHeight(size);
+        }
+        else
+        {
+            styleBuilder.AddWidth(size);
+        }
+
+        var style = styleBuilder.ToString();
+
+        if (!string.IsNullOrWhiteSpace(pane.Style))
+        {
+            style += $"; {pane.Style}";
+        }
+        
+        return style;
     }
 
     internal async Task RegisterAsync(MSplitterPane pane)

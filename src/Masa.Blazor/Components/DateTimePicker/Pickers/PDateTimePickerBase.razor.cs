@@ -18,7 +18,7 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
     private bool _menu;
     private DateTimePickerViewType _prevViewType;
 
-    private string Class => BasePickerBlock.Modifier("compact", IsCompact).Build();
+    private string Class => BasePickerModifierBuilder.Add("compact", IsCompact).Build();
 
     private bool IsCompact { get; set; }
 

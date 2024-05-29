@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.DatePicker;
+﻿
+
+namespace Masa.Blazor.Components.DatePicker;
 
 public partial class MDatePickerTitle : MasaComponentBase
 {
@@ -63,10 +65,13 @@ public partial class MDatePickerTitle : MasaComponentBase
             .Watch<DateOnly>(nameof(Value), (val, prev) => { IsReversing = val < prev; });
     }
 
-    private Block _block = new("m-date-picker-title");
+    private static Block _block = new Block("m-date-picker-title");
+    private ModifierBuilder _modifierBuilder =_block.CreateModifierBuilder();
+    private static Block _btnBlock = new Block("m-picker__title__btn");
+    private static ModifierBuilder _btnModiferBuilder = _btnBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).Build();
     }
 }

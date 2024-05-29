@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.DataTable
             {
                 props.Add(datatableheader => datatableheader.DisableSort, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableSortClass = classes.Contains("m-data-table-header");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.DataTable
             {
                 props.Add(datatableheader => datatableheader.EveryItem, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasEveryItemClass = classes.Contains("m-data-table-header");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.DataTable
             {
                 props.Add(datatableheader => datatableheader.ShowGroupBy, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowGroupByClass = classes.Contains("m-data-table-header");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.DataTable
             {
                 props.Add(datatableheader => datatableheader.SingleSelect, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleSelectClass = classes.Contains("m-data-table-header");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.DataTable
             {
                 props.Add(datatableheader => datatableheader.SomeItems, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSomeItemsClass = classes.Contains("m-data-table-header");
 
             // Assert

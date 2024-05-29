@@ -111,10 +111,6 @@
       "descriptions",
       "dialogs",
       "dividers",
-      {
-        "title": "drag-zone",
-        "state": "deprecated"
-      },
       "drawers",
       "echarts",
       "editors",

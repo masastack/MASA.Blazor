@@ -260,8 +260,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
 
         var containingNamespace = type.ContainingNamespace.ToString();
 
-        var isCustomType = containingNamespace is not null &&
-                           (containingNamespace.StartsWith("BlazorComponent") || containingNamespace.StartsWith("Masa.Blazor"));
+        var isCustomType = containingNamespace is not null && containingNamespace.StartsWith("Masa.Blazor");
 
         if (type.TypeKind == TypeKind.Enum)
         {

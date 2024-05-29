@@ -1,3 +1,5 @@
+using Masa.Blazor.Popup;
+
 namespace Masa.Blazor;
 
 /// <summary>
@@ -6,8 +8,6 @@ namespace Masa.Blazor;
 public partial class MApp : MasaComponentBase, IDefaultsProvider
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    [Inject] private Window Window { get; set; } = null!;
 
     [Inject] private IPopupProvider PopupProvider { get; set; } = null!;
 
@@ -54,7 +54,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     private async Task OnJSInteropReadyAsync()
     {
         await MasaBlazor.Breakpoint.InitAsync(Js);
-        await Window.AddResizeEventListenerAsync();
     }
 
     private void OnThemeChange(Theme theme)
@@ -67,14 +66,15 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         });
     }
 
-    private Block _block = new("m-application");
+    private static Block _block = new("m-application");
+    private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
+        yield return _blockModifierBuilder
+            .Add(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
             .AddTheme(IsDark, isIndependent: false)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override ValueTask DisposeAsyncCore()

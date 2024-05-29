@@ -93,21 +93,24 @@ public partial class MToolbar : MSheet
 
     protected virtual bool IsProminent => Prominent;
 
-    private Block _block = new("m-toolbar");
+    private static Block _block = new("m-toolbar");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            _block.Modifier(Absolute)
-                .And(Bottom)
-                .And(Collapse)
-                .And("collapsed", IsCollapsed)
-                .And(Dense)
-                .And("extended", IsExtended)
-                .And(Flat)
-                .And(Floating)
-                .And("prominent", IsProminent)
-                .GenerateCssClasses());
+        return base.BuildComponentClass().Concat(new[]{
+            _modifierBuilder
+                .Add(Absolute)
+                .Add(Bottom)
+                .Add(Collapse)
+                .Add("collapsed", IsCollapsed)
+                .Add(Dense)
+                .Add("extended", IsExtended)
+                .Add(Flat)
+                .Add(Floating)
+                .Add("prominent", IsProminent)
+                .Build()
+        });
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

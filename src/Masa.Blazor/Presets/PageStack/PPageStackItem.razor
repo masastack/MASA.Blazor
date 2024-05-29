@@ -10,9 +10,9 @@
          Persistent
          NoPersistentAnimation
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Index } })">
-    <BShouldRender Value="@CanRender">
+    <MShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
-            <MAppBar Class="@_block.Element("bar").AddClass(AppBarClass).Build()"
+            <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"
                      Style="@AppBarStyle"
                      Color="@AppBarColor"
                      Dense="@AppBarDense"
@@ -64,5 +64,5 @@
                 @ChildContent
             </div>
         </CascadingValue>
-    </BShouldRender>
+    </MShouldRender>
 </MDialog>

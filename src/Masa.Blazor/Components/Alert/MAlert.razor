@@ -1,5 +1,5 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
     @if (Transition != null)
@@ -8,22 +8,24 @@
             <ShowTransitionElement Value="Value"
                                    Tag="@Tag"
                                    role="alert"
-                                   Class="@CssProvider.GetClass()"
-                                   Style="@CssProvider.GetStyle()"
-                                   id="@Id">
+                                   Class="@GetClass()"
+                                   Style="@GetStyle()"
+                                   id="@Id"
+                                   @attributes="@Attributes">
                 @RenderWrapper()
             </ShowTransitionElement>
         </Transition>
     }
     else
     {
-        <Element Tag="@Tag"
-                 role="alert"
-                 Class="@CssProvider.GetClass()"
-                 style="@CssProvider.GetStyle()"
-                 id="@Id">
+        <MElement Tag="@Tag"
+                  role="alert"
+                  Class="@GetClass()"
+                  style="@GetStyle()"
+                  id="@Id"
+                  @attributes="@Attributes">
             @RenderWrapper()
-        </Element>
+        </MElement>
     }
 </CascadingValue>
 
@@ -31,8 +33,7 @@
 
     private RenderFragment RenderWrapper() => __builder =>
     {
-        <div class="@CssProvider.GetClass("wrapper")"
-             style="@CssProvider.GetStyle("wrapper")">
+        <div class="@_block.Element("wrapper")">
             @if (IsShowIcon)
             {
                 <MIcon Color="@IconColor"
@@ -42,10 +43,10 @@
                 </MIcon>
             }
 
-            <div class="@CssProvider.GetClass("content")">
+            <div class="@_block.Element("content")">
                 @if (HasTitle)
                 {
-                    <div class="@CssProvider.GetClass("title")">
+                    <div class="@_block.Element("title")">
                         @if (TitleContent == null)
                         {
                             @Title
@@ -62,8 +63,8 @@
 
             @if (Border != Borders.None)
             {
-                <div class="@CssProvider.GetClass("border")"
-                     style="@CssProvider.GetStyle("border")">
+                <div class="@_borderModifierBuilder.Add("has-color", ColoredBorder).Add(Border, Borders.None, "").AddTextColor(Color, ColoredBorder).AddClass(Type.ToString().ToLowerInvariant(), HasTypedBorder)"
+                     style="@CssStyleUtils.GetTextColor(Color, ColoredBorder)">
                 </div>
             }
 

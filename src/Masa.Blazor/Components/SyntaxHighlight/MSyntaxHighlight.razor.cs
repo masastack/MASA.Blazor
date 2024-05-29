@@ -1,47 +1,56 @@
-﻿namespace Masa.Blazor;
+﻿using Microsoft.Extensions.Primitives;
 
-public partial class MSyntaxHighlight : BDomComponentBase
+namespace Masa.Blazor;
+
+public partial class MSyntaxHighlight : MasaComponentBase
 {
-    [Inject]
-    protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
+    [Inject] protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
 
-    [Parameter, EditorRequired]
-    public string? Code { get; set; }
+    [Parameter, EditorRequired] public string? Code { get; set; }
 
-    [Parameter]
-    public string? Language { get; set; }
+    [Parameter] public string? Language { get; set; }
 
-    [Parameter]
-    public bool Inline { get; set; }
+    [Parameter] public bool Inline { get; set; }
 
-    [Parameter]
-    public bool IgnorePreCssOfTheme { get; set; }
+    [Parameter] public bool IgnorePreCssOfTheme { get; set; }
 
-    [Parameter]
-    public bool IgnoreCodeCssOfTheme { get; set; }
+    [Parameter] public bool IgnoreCodeCssOfTheme { get; set; }
 
-    [Parameter]
-    public Func<ElementReference, Task>? OnHighlighted { get; set; }
+    [Parameter] public Func<ElementReference, Task>? OnHighlighted { get; set; }
 
     private bool _firstRender = true;
     private string _codeHtml = string.Empty;
     private string? _prevCode;
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
+        yield return "hljs m-code-highlight";
 
-        CssProvider
-            .Apply(css =>
-            {
-                css.Add("hljs m-code-highlight__pre")
-                   .AddIf($"language-{Language!.ToLower()}", () => Language is not null && !IgnorePreCssOfTheme);
-            }).Apply("code", css =>
-            {
-                css.Add("m-code-highlight__code")
-                   .AddIf($"language-{Language!.ToLower()}", () => Language is not null && !IgnoreCodeCssOfTheme)
-                   .AddIf(Class, () => Inline);
-            }, style => style.AddIf(Style, () => Inline));
+        if (Language != null && !IgnorePreCssOfTheme)
+        {
+            yield return $"language-{Language.ToLower()}";
+        }
+    }
+
+    private string GetCodeClass()
+    {
+        StringBuilder stringBuilder = new("m-code-highlight__code");
+        if (Language != null && !IgnoreCodeCssOfTheme)
+        {
+            stringBuilder.Append($" language-{Language.ToLower()}");
+        }
+
+        if (Inline && !string.IsNullOrWhiteSpace(Class))
+        {
+            stringBuilder.Append($" {Class}");
+        }
+
+        return stringBuilder.ToString();
+    }
+
+    private string? GetCodeStyle()
+    {
+        return Inline ? Style : null;
     }
 
     protected override async Task OnParametersSetAsync()

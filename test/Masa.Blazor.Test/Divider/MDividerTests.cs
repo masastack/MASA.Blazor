@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Inset, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInsetClass = classes.Contains("m-divider--inset");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-divider--vertical");
 
             // Assert

@@ -20,7 +20,7 @@ public partial class PDateTimeCompactPickerView<TValue> : PDateTimePickerViewBas
 
     private TimePickerType _timeActivePicker = TimePickerType.Hour;
 
-    private Block TimePickerClockBlock => new("m-time-picker-clock"); 
+    private static Block TimePickerClockBlock => new("m-time-picker-clock"); 
 
     private string? DateTitle
     {

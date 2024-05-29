@@ -31,7 +31,7 @@
         var color = Value != null ? Color ?? "accent" : "";
         var scale = $"scaleY({HandScale(DisplayedValue)})";
         var angle = Rotate + DegreesPerUnit * (DisplayedValue - Min);
-        <div class="@_block.Element("hand").Modifier("inner", IsInner(Value)).AddBackgroundColor(color)"
+        <div class="@_handModifierBuilder.Add("inner", IsInner(Value)).AddBackgroundColor(color)"
              style="@(StyleBuilder.Create().AddBackgroundColor(color).Add("transform", $"rotate({angle}deg) {scale}"))">
         </div>
     };
@@ -40,7 +40,7 @@
     {
         var color = value == Value ? Color ?? "accent" : "";
         var (x, y) = GetPosition(value);
-        <span class="@_block.Element("item").Modifier("active", value == DisplayedValue).And("disabled", Disabled || !IsAllowed(value)).AddBackgroundColor(color)"
+        <span class="@_itemModifierBuilder.Add("active", value == DisplayedValue).Add("disabled", Disabled || !IsAllowed(value)).AddBackgroundColor(color)"
               style="@(StyleBuilder.Create().Add("left", $"{50 + x * 50}%").Add("top", $"{50 + y * 50}%").AddBackgroundColor(color))">
             <span>@Format?.Invoke(value)</span>
         </span>

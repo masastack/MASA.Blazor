@@ -1,8 +1,9 @@
 ﻿using Masa.Blazor.Components.TimePicker;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MDigitalClock<TValue> : BDomComponentBase
+public partial class MDigitalClock<TValue> : MasaComponentBase
 {
     [Inject] protected IntersectJSModule IntersectJSModule { get; set; } = null!;
 
@@ -11,22 +12,26 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     /// <summary>
     /// Allowed hours, only works when <see cref="MultiSection"/> is true.
     /// </summary>
-    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedHours { get; set; }
+    [Parameter]
+    public OneOf<Func<int, bool>, List<int>> AllowedHours { get; set; }
 
     /// <summary>
     /// Allowed Minutes, only works when <see cref="MultiSection"/> is true.
     /// </summary>
-    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedMinutes { get; set; }
+    [Parameter]
+    public OneOf<Func<int, bool>, List<int>> AllowedMinutes { get; set; }
 
     /// <summary>
     /// Allowed Seconds, only works when <see cref="MultiSection"/> is true.
     /// </summary>
-    [Parameter] public OneOf<Func<int, bool>, List<int>> AllowedSeconds { get; set; }
+    [Parameter]
+    public OneOf<Func<int, bool>, List<int>> AllowedSeconds { get; set; }
 
     /// <summary>
     /// Allowed times, only work when <see cref="MultiSection"/> is false. 
     /// </summary>
-    [Parameter] public OneOf<Func<TimeOnly, bool>, List<TimeOnly>> AllowedTimes { get; set; }
+    [Parameter]
+    public OneOf<Func<TimeOnly, bool>, List<TimeOnly>> AllowedTimes { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -60,13 +65,12 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     /// Split the time picker into at least 2 sections:
     /// hour and minute, or hour, minute and second.
     /// </summary>
-    [Parameter] public bool MultiSection { get; set; }
+    [Parameter]
+    public bool MultiSection { get; set; }
 
     [Parameter] public bool Readonly { get; set; }
 
-    [Parameter]
-    [MasaApiParameter(true)]
-    public bool Ripple { get; set; } = true;
+    [Parameter] [MasaApiParameter(true)] public bool Ripple { get; set; } = true;
 
     /// <summary>
     /// The second step (interval) of the time picker, only works when <see cref="MultiSection"/> is true.
@@ -85,7 +89,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     /// <summary>
     /// Determines whether to show the seconds section, only works when <see cref="MultiSection"/> is true.
     /// </summary>
-    [Parameter] public bool UseSeconds { get; set; }
+    [Parameter]
+    public bool UseSeconds { get; set; }
 
     [Parameter]
     public TValue? Value
@@ -100,7 +105,12 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
     [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
-    private Block Block => new("m-digital-clock");
+    private static Block Block = new("m-digital-clock");
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
+    private static BemIt.Element _itemElement = Block.Element("item");
+    private ModifierBuilder _itemModifierBuilder = _itemElement.CreateModifierBuilder();
+    private ModifierBuilder _itemContentModifierBuilder = Block.Element("item-content").CreateModifierBuilder();
+    private static string _defaultActiveClass = _itemElement.Modifier("active");
 
     private ElementReference _hoursRef;
     private ElementReference _minutesRef;
@@ -111,8 +121,6 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
     private TimeSpan? _previousStep;
 
     private TimePeriod _timePeriod;
-
-    private string? _activeItemClass;
 
     public bool IsDark
     {
@@ -162,8 +170,6 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
     private bool ComputedUseSeconds => MultiSection && UseSeconds;
 
-    private string ActiveItemClass => _activeItemClass ??= Block.Element("item").Modifier("active").Build().Split(" ").Last();
-
     private bool IsRipple => !Disabled && !Readonly && Ripple;
 
     private Func<int, bool>? IsAllowedHour24Callback
@@ -173,7 +179,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
         => TimeHelper.IsAllowedMinute(IsAllowedHour24Callback, AllowedMinutes, Max, Min, Hour);
 
     private Func<int, bool>? IsAllowedSecondCallback
-        => TimeHelper.IsAllowedSecond(IsAllowedHour24Callback, IsAllowedMinuteCallback, AllowedSeconds, Max, Min, Hour, Minute);
+        => TimeHelper.IsAllowedSecond(IsAllowedHour24Callback, IsAllowedMinuteCallback, AllowedSeconds, Max, Min, Hour,
+            Minute);
 
     private Func<int, bool>? IsAllowedHourCallback
         => TimeHelper.IsAllowedHourAmPm(IsAllowedHour24Callback, Format, _timePeriod);
@@ -192,7 +199,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
             if (Step == default)
             {
-                _singleSectionItems = Enumerable.Range(0, 24 * 60).Select(m => TimeOnly.FromTimeSpan(TimeSpan.FromMinutes(m))).ToList();
+                _singleSectionItems = Enumerable.Range(0, 24 * 60)
+                    .Select(m => TimeOnly.FromTimeSpan(TimeSpan.FromMinutes(m))).ToList();
             }
             else
             {
@@ -232,6 +240,22 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
         watcher.Watch<int?>(nameof(Hour), () => ScrollToActive("h"));
         watcher.Watch<int?>(nameof(Minute), () => ScrollToActive("m"));
         watcher.Watch<int?>(nameof(Second), () => ScrollToActive("s"));
+    }
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        yield return _modifierBuilder
+            .Add(Disabled, Readonly, MultiSection)
+            .Add(Format)
+            .Add("use-seconds", ComputedUseSeconds)
+            .AddTheme(IsDark)
+            .AddClass("m-sheet")
+            .Build();
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        return StyleBuilder.Create().AddHeight(Height).GenerateCssStyles();
     }
 
     private void OnValueChanged(TValue? value)
@@ -284,7 +308,7 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
             "h" => _hoursRef,
             "m" => _minutesRef,
             "s" => _secondsRef,
-            _   => throw new ArgumentException($"Invalid type: {type}", nameof(type))
+            _ => throw new ArgumentException($"Invalid type: {type}", nameof(type))
         };
 
         NextTick(() => ScrollToActive(@ref));
@@ -305,7 +329,7 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
     private void ScrollToActive(ElementReference @ref)
     {
-        _ = Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, @ref, $".{ActiveItemClass}", 4);
+        _ = Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, @ref, $".{_defaultActiveClass}", 4);
     }
 
     /// <summary>
@@ -353,7 +377,8 @@ public partial class MDigitalClock<TValue> : BDomComponentBase
 
         if (MultiSection)
         {
-            if (IsAllowedHour24Callback?.Invoke(time.Hour) is false || IsAllowedMinuteCallback?.Invoke(time.Minute) is false ||
+            if (IsAllowedHour24Callback?.Invoke(time.Hour) is false ||
+                IsAllowedMinuteCallback?.Invoke(time.Minute) is false ||
                 IsAllowedSecondCallback?.Invoke(time.Second) is false)
             {
                 return;

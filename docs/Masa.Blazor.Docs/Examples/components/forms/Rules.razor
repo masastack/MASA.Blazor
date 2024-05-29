@@ -1,45 +1,46 @@
-﻿@using System.ComponentModel.DataAnnotations
-
-<MContainer>
-    <MRow Justify="JustifyTypes.SpaceBetween">
-        <MCol Cols="12"
-              Md="4">
-            <MForm @ref="_form">
-                <MTextField @bind-Value="Model"
-                            Rules="ModelRules"
-                            Counter="Convert.ToInt32(_max)"
-                            Label="First name"></MTextField>
-            </MForm>
-        </MCol>
-
-        <MCol Cols="12"
-              Md="6">
+﻿<div class="d-flex flex-column align-center">
+    <MCard Title="Rule configuration" Outlined Width="360" Class="mb-2">
+        <MCardText>
             <MSlider @bind-Value="Max"
                      Label="Max characters">
             </MSlider>
 
             <MCheckbox @bind-Value="_allowSpaces"
-                       Label="Allow spaces"></MCheckbox>
+                       Label="Allow spaces">
+            </MCheckbox>
 
             <MTextField @bind-Value="Match"
-                        Label="Value must match"></MTextField>
-        </MCol>
-    </MRow>
-</MContainer>
+                        Label="Value must match">
+            </MTextField>
+        </MCardText>
+        <MCardActions>
+        </MCardActions>
+    </MCard>
+    <MCard Title="Form" Outlined Width="360">
+        <MCardText>
+            <MForm @ref="_form">
+                <MTextField @bind-Value="Model"
+                            Filled
+                            Rules="_modelRules"
+                            Counter="Convert.ToInt32(_max)"
+                            Label="First name">
+                </MTextField>
+            </MForm>
+        </MCardText>
+    </MCard>
+</div>
 
 @code {
     private MForm? _form;
     private string _model = "Foobar";
     private string _match = "Foobar";
     private bool _allowSpaces;
-    private double _max;
+    private double _max = 6;
+    private List<Func<string?, StringBoolean>> _modelRules = new();
 
-    protected string Match
+    private string Match
     {
-        get
-        {
-            return _match;
-        }
+        get => _match;
         set
         {
             _match = value;
@@ -47,12 +48,9 @@
         }
     }
 
-    protected double Max
+    private double Max
     {
-        get
-        {
-            return _max;
-        }
+        get => _max;
         set
         {
             _max = value;
@@ -60,12 +58,9 @@
         }
     }
 
-    protected string Model
+    private string Model
     {
-        get
-        {
-            return _model;
-        }
+        get => _model;
         set
         {
             _model = value;
@@ -73,31 +68,16 @@
         }
     }
 
-    protected List<Func<string, StringBoolean>> ModelRules
+    protected override void OnInitialized()
     {
-        get
-        {
-            var rules = new List<Func<string, StringBoolean>>();
+        base.OnInitialized();
 
-            if (Max > 0)
-            {
-                Func<string, StringBoolean> rule = v => v?.Length <= Max ? true : $"A maximum of {Max} characters is allowed";
-                rules.Add(rule);
-            }
+        var rules = new List<Func<string?, StringBoolean>>();
+        rules.Add(v => v?.Length <= Max ? true : $"A maximum of {Max} characters is allowed");
+        rules.Add(v => v?.IndexOf(' ') < 0 ? true : "No spaces are allowed");
+        rules.Add(v => !string.IsNullOrEmpty(v) && v == Match ? true : "Values do not match");
 
-            if (!_allowSpaces)
-            {
-                Func<string, StringBoolean> rule = v => v?.IndexOf(' ') < 0 ? true : "No spaces are allowed";
-                rules.Add(rule);
-            }
-
-            if (!string.IsNullOrEmpty(Match))
-            {
-                Func<string, StringBoolean> rule = v => !string.IsNullOrEmpty(v) && v == Match ? true : "Values do not match";
-                rules.Add(rule);
-            }
-
-            return rules;
-        }
+        _modelRules = rules; // have to assign a new instance!
     }
+
 }

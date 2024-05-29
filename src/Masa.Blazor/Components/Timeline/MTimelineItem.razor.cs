@@ -71,14 +71,17 @@ public partial class MTimelineItem : MasaComponentBase, IThemeable
         }
 #endif
 
-    private Block _block = new("m-timeline-item");
+    private static Block _block = new("m-timeline-item");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _dotModifierBuilder = _block.Element("dot").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(FillDot)
-            .And("before", Reverse ? Right : Left)
-            .And("after", Reverse ? Left : Right)
+        yield return _modifierBuilder
+            .Add(FillDot)
+            .Add("before", Reverse ? Right : Left)
+            .Add("after", Reverse ? Left : Right)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 }

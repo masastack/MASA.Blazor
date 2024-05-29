@@ -1,4 +1,4 @@
-﻿@using BlazorComponent.Web;
+﻿@inject IJSRuntime JSRuntime
 
 <MCard Class="mx-auto overflow-hidden" Style="max-width: 600px;">
     <MRow>
@@ -35,7 +35,7 @@
         <MSpacer></MSpacer>
         <MDialog @bind-Value="_dialog" Width="400">
             <ActivatorContent>
-                <MIcon @attributes="@context.Attrs">mdi-share-variant</MIcon>
+                <MButton IconName="mdi-share-variant" @attributes="@context.Attrs"></MButton>
             </ActivatorContent>
             <ChildContent>
                 <MCard>
@@ -66,8 +66,12 @@
                             <MCardTitle>Email</MCardTitle>
                         </MListItem>
                     </MList>
-                    <MTextField @ref="_ref" Label="@(_copied ? "Link copied" : "Click to copy link")"
-                                Class="pa-4" Readonly Value="@("https://g.co/kgs/nkrK43")" OnFocus="Copy">
+                    <MTextField @ref="_ref"
+                                Label="@(_copied ? "Link copied" : "Click to copy link")"
+                                Class="pa-4"
+                                Readonly
+                                Value="@_value"
+                                OnFocus="@Copy">
                     </MTextField>
                 </MCard>
             </ChildContent>
@@ -95,17 +99,16 @@
 
 @code
 {
-    [Inject]
-    public Document Document { get; set; }
-
     private bool _copied = false;
     private bool _dialog = false;
     private double _rating = 10;
     private MTextField<string> _ref;
+    private string _value = "https://g.co/kgs/nkrK43";
 
     private async Task Copy(FocusEventArgs args)
     {
-        await Document.ExecCommandAsync("selectAll", false, null);
-        _copied = await Document.ExecCommandAsync<bool>("copy", false, null);
+        await JSRuntime.InvokeVoidAsync(JsInteropConstants.Select, _ref.InputElement);
+        await JSRuntime.InvokeVoidAsync(JsInteropConstants.CopyText, _value);
+        _copied = true;
     }
 }

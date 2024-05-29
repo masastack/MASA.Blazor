@@ -9,7 +9,7 @@
                                    Style="@GetWrapperStyle()"
                                    @onpointerenter="@HandleOnPointerEnter"
                                    @onpointerleave="@HandleOnPointerLeave">
-                <div class="@_block.Element("content").AddClass(ContentClass)">
+                <div class="@GetClass(_block.Element("content").Name, ContentClass)">
                     @ChildContent
                 </div>
                 <div class="@_block.Element("action")">

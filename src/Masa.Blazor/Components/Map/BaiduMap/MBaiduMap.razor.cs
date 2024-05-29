@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MBaiduMap : BDomComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks
+    public partial class MBaiduMap : MasaComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; } = null!;
@@ -272,29 +272,23 @@
         }
 #endif
 
-        protected override void SetComponentClass()
+        protected override IEnumerable<string> BuildComponentClass()
         {
-            base.SetComponentClass();
-
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-baidumap")
-                        .AddTheme(IsDark, IndependentTheme);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddWidth(Width)
-                        .AddHeight(Height);
-                });
+            yield return "m-baidumap";
+            yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
         }
 
-        public override async Task SetParametersAsync(ParameterView parameters)
+        protected override IEnumerable<string?> BuildComponentStyle()
         {
-            await base.SetParametersAsync(parameters);
+            yield return CssStyleUtils.GetWidth(Width);
+            yield return CssStyleUtils.GetHeight(Height);
+        }
 
-            Id.ThrowIfNull(ComponentName);
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Id ??= $"map-{Guid.NewGuid():N}";
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

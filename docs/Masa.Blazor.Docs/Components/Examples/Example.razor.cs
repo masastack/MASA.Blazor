@@ -32,7 +32,6 @@ public partial class Example : NextTickComponentBase
     /// </summary>
     private static readonly List<string> s_assemblies = new()
     {
-        "BlazorComponent",
         "Masa.Blazor",
         "OneOf",
         "FluentValidation",
@@ -89,7 +88,6 @@ public partial class Example : NextTickComponentBase
 
         _objRef = DotNetObjectReference.Create(this);
 
-        CompileRazorProjectFileSystem.AddGlobalUsing("@using BlazorComponent");
         CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor");
         CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor.Presets");
 

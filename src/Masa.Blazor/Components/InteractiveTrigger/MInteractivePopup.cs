@@ -4,7 +4,7 @@
 /// A abstract class for components that use the <see cref="MInteractiveTrigger{TValue}"/>
 /// or <see cref="MInteractiveTriggers{TValue}"/> component as a trigger.
 /// </summary>
-public abstract class MInteractivePopup : ComponentBase, IOutsideClickJsCallback, IAsyncDisposable
+public abstract class MInteractivePopup : MasaComponentBase, IOutsideClickJsCallback, IAsyncDisposable
 {
     [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 

@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.CenterActive, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCenterActiveClass = classes.Contains("m-chip-group");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.Column, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasColumnClass = classes.Contains("m-chip-group");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.Mandatory, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-chip-group");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.Max, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxClass = classes.Contains("m-chip-group");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.Multiple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-chip-group");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.ChipGroup
             {
                 props.Add(chipgroup => chipgroup.ShowArrows, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowArrowsClass = classes.Contains("m-chip-group");
 
             // Assert

@@ -1,15 +1,18 @@
 ﻿@namespace Masa.Blazor
 @using Microsoft.AspNetCore.Components.Rendering
-@inherits CssProviderComponentBase
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @typeparam TValue
 @typeparam TInteractiveValue
+@inherits MasaComponentBase
 @inject NavigationManager NavigationManager
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
-     id="@ElementId">
-    @RenderLinkContent
-    @RenderPopupContent
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@ElementId"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @((RenderFragment)RenderLinkContent)
+    @((RenderFragment)RenderPopupContent)
 </div>
 
 @code {
@@ -18,8 +21,7 @@
 
     protected RenderFragment RenderSingleLink(string name, TValue? value, TValue? interactiveValue) => __builder =>
     {
-        <a class="@CssProvider.GetClass("link")"
-           style="@CssProvider.GetStyle("link")"
+        <a class="@_linkModifierBuilder.Add("disabled", IsInteractive && DisableLinkOnInteractive)"
            href="@NavigationManager.GetRelativeUriWithQueryParameters(new Dictionary<string, object?>() { { name, value  } })">
             @ChildContent?.Invoke(interactiveValue)
         </a>
@@ -29,14 +31,20 @@
     {
         @if (WithPopup)
         {
-            <div class="@CssProvider.GetClass("popup")"
-                 style="@CssProvider.GetStyle("popup")">
-                @RenderInteractiveComponent
+            var style = StyleBuilder.Create().AddIf("top", $"{Top}px", Top.HasValue)
+                .AddIf("left", $"{Left}px", Left.HasValue)
+                .AddIf("right", $"{Right}px", Right.HasValue)
+                .AddIf("bottom", $"{Bottom}px", Bottom.HasValue)
+                .Build();
+            
+            <div class="@_popupModifierBuilder.Add("active", _active).AddClass(PopupClass, _active)"
+                 style="@GetStyle(style, _active ? PopupStyle : null)">
+                @((RenderFragment)RenderInteractiveComponent)
             </div>
         }
         else
         {
-            @RenderInteractiveComponent
+            @((RenderFragment)RenderInteractiveComponent)
         }
     }
 

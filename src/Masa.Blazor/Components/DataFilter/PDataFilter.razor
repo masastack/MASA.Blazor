@@ -1,27 +1,28 @@
 ﻿@namespace Masa.Blazor.Presets
-@inherits BDomComponentBase
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
+<div class="@GetClass()"
+     style="@GetStyle()"
      id="@Id"
      @ref="Ref">
     <MInputsFilter Dense="@Dense"
                    HideDetails="@HideDetails"
                    OnFieldChanged="@OnFieldChanged"
                    @ref="_inputsFilter">
-        <div class="@CssProvider.GetClass("high-frequency")">
-            <div class="@CssProvider.GetClass("high-frequency-inputs")">
+        <div class="@_block.Element("high-frequency")">
+            <div class="@GetClass(_block.Element("high-frequency-inputs").Name, _expanded ? "hidden" : null))">
                 @HighFrequencyContent
             </div>
-            <MSpacer />
-            <div class="@CssProvider.GetClass("high-frequency-actions")">
+            <MSpacer/>
+            <div class="@_block.Element("high-frequency-actions")">
                 @if (ActionsContent is not null)
                 {
                     @ActionsContent
 
                     @if (!HideResetButton && !HideSearchButton)
                     {
-                        <MDivider Vertical Class="ml-4 mr-2" />
+                        <MDivider Vertical Class="ml-4 mr-2"/>
                     }
                 }
 
@@ -63,8 +64,15 @@
 
         @if (LowFrequencyContent != null && _isBooted)
         {
-            <div class="@CssProvider.GetClass("low-frequency")"
-                 style="@CssProvider.GetStyle("low-frequency")"
+            var style = StyleBuilder.Create()
+                .AddIf("display", "none", !_expanded && _firstRender)
+                .AddIf("opacity", "0", !_expanded)
+                .AddIf("overflow", "hidden", _expanding)
+                .AddHeight(_height)
+                .Build();
+
+            <div class="@GetClass(_block.Element("low-frequency").Name, _expanded ? "expanded" : null)"
+                 style="@style"
                  @ref="_lowFrequencyRef">
                 @LowFrequencyContent
             </div>

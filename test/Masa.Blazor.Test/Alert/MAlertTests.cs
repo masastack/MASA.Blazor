@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.ColoredBorder, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasColoredBorderClass = classes.Contains("m-alert");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-alert--dense");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Dismissible, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDismissibleClass = classes.Contains("m-alert");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Elevation, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("elevation-2");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Icon, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIconClass = classes.Contains("m-alert");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-alert--outlined");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Prominent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasProminentClass = classes.Contains("m-alert--prominent");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("rounded");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-sheet--shaped");
 
             // Assert
@@ -254,7 +254,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Text, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTextClass = classes.Contains("m-alert--text");
 
             // Assert
@@ -269,7 +269,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Tile, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("rounded");
 
             // Assert
@@ -284,7 +284,7 @@ namespace Masa.Blazor.Test.Alert
             {
                 props.Add(alert => alert.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-alert");
 
             // Assert
