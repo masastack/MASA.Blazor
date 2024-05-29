@@ -37,17 +37,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+        <PackageReference Include="BemIt" Version="2.2.0" />
         <PackageReference Include="DeepCloner" Version="0.10.4" />
 		<PackageReference Include="FluentValidation" Version="11.4.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
-		<PackageReference Include="OneOf" Version="3.0.223" />
         <PackageReference Include="OneOf" Version="3.0.223" />
         <PackageReference Include="OneOf.SourceGenerator" Version="3.0.223" />
         <PackageReference Include="Util.Reflection" Version="1.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-	    <ProjectReference Include="..\..\..\BemIt\BemIt\BemIt.csproj" />
 	    <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
