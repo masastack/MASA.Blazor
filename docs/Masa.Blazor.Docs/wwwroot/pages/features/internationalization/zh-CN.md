@@ -148,9 +148,9 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnviro
 - 添加以下扩展方法:
 
 ```csharp
-public static class BlazorComponentBuilderExtensions
+public static class MasaBlazorBuilderExtensions
 {
-    public static IBlazorComponentBuilder AddI18nForMauiBlazor(this IBlazorComponentBuilder builder, string localesDirectory)
+    public static IMasaBlazorBuilder AddI18nForMauiBlazor(this IMasaBlazorBuilder builder, string localesDirectory)
     {
         string supportedCulturesPath = localesDirectory + "/supportedCultures.json";
         bool existsCultures = FileSystem.AppPackageFileExistsAsync(supportedCulturesPath).Result;
