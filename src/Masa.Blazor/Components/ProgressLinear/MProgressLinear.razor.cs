@@ -134,6 +134,7 @@ namespace Masa.Blazor
 
         private static Block _block = new("m-progress-linear");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private ModifierBuilder _indeterminateModifierBuilder = _block.Element("indeterminate").CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {

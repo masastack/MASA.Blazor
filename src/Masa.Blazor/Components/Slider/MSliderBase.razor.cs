@@ -415,8 +415,9 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
     private static readonly Block _inputBlock = new("m-input__slider");
     private readonly ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
-    private static ModifierBuilder _thumbContainerModifierBuilder = Block.Element("thumb-container").CreateModifierBuilder();
-    private static ModifierBuilder _tickModifierBuilder = Block.Element("tick").CreateModifierBuilder();
+    private readonly ModifierBuilder _thumbContainerModifierBuilder = Block.Element("thumb-container").CreateModifierBuilder();
+    private readonly ModifierBuilder _tickModifierBuilder = Block.Element("tick").CreateModifierBuilder();
+    private readonly ModifierBuilder _ticksContainerModifierBuilder = Block.Element("ticks-container").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

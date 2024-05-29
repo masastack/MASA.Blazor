@@ -167,7 +167,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
         else if (IsInMenu)
         {
             Attributes["role"] = IsClickable ? "menuitem" : null;
-            Attributes["id"] = Id ?? $"list-item-{Id}"; // TODO:check
+            Attributes["id"] = Id ?? $"list-item-{Guid.NewGuid():N}"; // TODO:check
         }
         else if (IsInList)
         {

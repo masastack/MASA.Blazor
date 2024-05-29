@@ -20,7 +20,7 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
 
     public override bool HasColor => IsActive;
 
-    public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
+    public override string ComputedColor => Color ?? (IsDark && !AppIsDark ? "white" : "primary");
 
     private bool IsCustomValue => IsDirtyParameter(nameof(TrueValue)) && IsDirtyParameter(nameof(FalseValue));
 

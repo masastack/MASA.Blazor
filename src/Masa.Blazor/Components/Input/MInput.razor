@@ -93,7 +93,7 @@
 
         var onClick = click == null ? default : EventCallback.Factory.Create(this, click);
 
-        <div class="@_block.Element("icon").Modifier(typeStr)">
+        <div class="@_iconModifierBuilder.Add(typeStr)">
             <MIcon Color="@ValidationState"
                    Dark="@Dark"
                    Disabled="@IsDisabled"

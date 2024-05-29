@@ -29,7 +29,7 @@
 
     private RenderFragment GenAmPm() => __builder =>
     {
-        <div class="@_block.Element("ampm").Modifier("readonly", AmPmReadonly)">
+        <div class="@_ampmModifierBuilder.Add("readonly", AmPmReadonly)">
             @if (!AmPmReadonly || Period == TimePeriod.Am)
             {
                 @GenPickerButton(EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnAmClickAsync), RenderFragments.RenderText(AmText), Period == TimePeriod.Am, Disabled || Readonly)

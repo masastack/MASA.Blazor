@@ -7,6 +7,8 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     [Inject] private I18n I18n { get; set; } = null!;
 
     [CascadingParameter] protected MInputsFilter? InputsFilter { get; set; }
+    
+    [CascadingParameter(Name = "AppIsDark")] protected bool AppIsDark { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -212,7 +214,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
 
     #endregion
 
-    public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
+    public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark && !AppIsDark ? "white" : "primary");
 
     public virtual bool HasColor => false;
 
@@ -271,6 +273,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     private static Block _block = new("m-input");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _slotModifierBuilder = _block.Element("slot").CreateModifierBuilder();
+    private ModifierBuilder _iconModifierBuilder = _block.Element("icon").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

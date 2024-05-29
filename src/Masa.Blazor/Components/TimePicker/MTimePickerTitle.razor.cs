@@ -128,7 +128,8 @@ public partial class MTimePickerTitle : MasaComponentBase
         }
     }
 
-    private Block _block = new("m-time-picker-title");
+    private static Block _block = new("m-time-picker-title");
+    private ModifierBuilder _ampmModifierBuilder = _block.Element("ampm").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

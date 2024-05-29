@@ -104,7 +104,7 @@
     {
         var active = _timePeriod == period;
 
-        <li class="@Block.Element("item").Modifier(active)" @onclick="() => OnPeriodClick(period)">
+        <li class="@_itemModifierBuilder.Add(active)" @onclick="() => OnPeriodClick(period)">
             @ItemContentRenderFragment(period == TimePeriod.Am ? I18n.T("$masaBlazor.timePicker.am") : I18n.T("$masaBlazor.timePicker.pm"), active)
         </li>
     };

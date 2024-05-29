@@ -84,6 +84,7 @@
         {
             base.OnInitialized();
             RadioGroup?.AddRadio(this);
+            Id ??= "input-" + Guid.NewGuid().ToString("N");
         }
 
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;

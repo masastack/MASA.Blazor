@@ -50,6 +50,8 @@ namespace Masa.Blazor
 
         private bool _isPopupEventsRegistered;
 
+        private readonly string _contentId = $"menu-{Guid.NewGuid():N}";
+
         public bool IsDark
         {
             get
@@ -143,7 +145,7 @@ namespace Masa.Blazor
                 elements.Add(ActivatorSelector);
 
                 // do not use the ContentElement elementReference because it's delay assignment.
-                elements.Add($"#{Id}");
+                elements.Add($"#{_contentId}");
 
                 elements.AddRange(new[] { MSnackbar.ROOT_CSS_SELECTOR, PEnqueuedSnackbars.ROOT_CSS_SELECTOR });
 

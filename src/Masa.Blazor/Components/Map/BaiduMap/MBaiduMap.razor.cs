@@ -284,11 +284,11 @@
             yield return CssStyleUtils.GetHeight(Height);
         }
 
-        public override async Task SetParametersAsync(ParameterView parameters)
+        protected override void OnInitialized()
         {
-            await base.SetParametersAsync(parameters);
+            base.OnInitialized();
 
-            Id.ThrowIfNull(ComponentName);
+            Id ??= $"map-{Guid.NewGuid():N}";
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

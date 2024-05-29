@@ -36,6 +36,13 @@ public partial class MSplitter
     private int _activeIndex;
     private bool _eventsBound;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Id??= $"splitter-{Guid.NewGuid():N}";
+    }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder

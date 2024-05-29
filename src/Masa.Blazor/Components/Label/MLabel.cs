@@ -30,6 +30,8 @@ public class MLabel : ThemeContainer
     [MasaApiParameter("label")]
     public string Tag { get; set; } = "label";
 
+    protected override string TagName => Tag;
+
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 

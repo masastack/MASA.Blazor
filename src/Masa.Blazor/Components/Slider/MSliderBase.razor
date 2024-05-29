@@ -82,7 +82,7 @@
                 range = range.Reverse();
             }
 
-            <div class="@Block.Element("ticks-container").Modifier("always-show", Ticks == "always" || TickLabels.Count > 0)">
+            <div class="@_ticksContainerModifierBuilder.Add("always-show", Ticks == "always" || TickLabels.Count > 0)">
                 @for (var i = 0; i < range.Count(); i++)
                 {
                     var index = i;

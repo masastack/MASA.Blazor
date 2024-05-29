@@ -50,7 +50,8 @@ public partial class MMobilePickerColumn<TColumnItem> : MasaComponentBase
 
     protected int BaseOffset => ItemHeight * (VisibleItemCount.ToInt32(6) - 1) / 2;
 
-    private Block _block = new("m-mobile-picker");
+    private static Block _block = new("m-mobile-picker");
+    private ModifierBuilder _modifierBuilder = _block.Element("column-item").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

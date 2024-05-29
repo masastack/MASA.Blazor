@@ -172,6 +172,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         base.OnInitialized();
 
         Form?.Register(this);
+        
+        Id ??= "input-" + Guid.NewGuid().ToString("N");
 
         InternalValue = Value;
 
