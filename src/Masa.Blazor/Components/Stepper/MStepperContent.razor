@@ -1,24 +1,43 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@using Masa.Blazor.Extensions
+@inherits MasaComponentBase
 
 @if (IsBooted || Eager)
 {
     if (IsVertical)
     {
-        <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id">
-            <div class="@CssProvider.GetClass("wrapper")" style="@CssProvider.GetStyle("wrapper")" @ref="Ref">
-                @ChildContent
-            </div>
+        <div class="@GetClass()"
+             style="@GetStyle()"
+             id="@Id"
+             @ref="@Ref"
+             @attributes="@Attributes">
+            @GenWrapper()
         </div>
     }
     else
     {
         <Transition Name="@TransitionName">
-            <ShowTransitionElement Value="@IsActive" class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id">
-                <div class="@CssProvider.GetClass("wrapper")" style="@CssProvider.GetStyle("wrapper")" @ref="Ref">
-                    @ChildContent
-                </div>
+            <ShowTransitionElement Value="@IsActive"
+                                   class="@GetClass()"
+                                   style="@GetStyle()"
+                                   id="@Id"
+                                   ReferenceCaptureAction="r => Ref = r"
+                                   @attributes="Attributes">
+                @GenWrapper()
             </ShowTransitionElement>
         </Transition>
     }
+}
+
+@code {
+
+    private RenderFragment GenWrapper() => __builder =>
+    {
+        var style = Stepper?.Vertical is true ? $"height:{_height.ToUnit()}" : null;
+
+        <div class="@_wrapperElement.AppendClasses(("active", IsActive))" style="@style">
+            @ChildContent
+        </div>
+    };
+
 }

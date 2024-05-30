@@ -59,17 +59,23 @@ public partial class MCard : MSheet, IRoutable
     /// <summary>
     /// The title to display in the card, same as using <see cref="MCardTitle"/>.
     /// </summary>
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.5.0")] public string? Title { get; set; }
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    public string? Title { get; set; }
 
     /// <summary>
     /// The subtitle to display in the card, same as using <see cref="MCardSubtitle"/>.
     /// </summary>
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.5.0")] public string? Subtitle { get; set; }
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    public string? Subtitle { get; set; }
 
     /// <summary>
     /// The text to display in the card, same as using <see cref="MCardText"/>.
     /// </summary>
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.5.0")] public string? Text { get; set; }
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    public string? Text { get; set; }
 
     public bool Exact { get; }
 
@@ -89,17 +95,19 @@ public partial class MCard : MSheet, IRoutable
         Attributes["onclick"] = OnClick;
     }
 
-    private Block _block = new("m-card");
+    private static Block _block = new("m-card");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Flat)
-                .And(Hover)
-                .And("link", IsClickable)
-                .And(Disabled)
-                .And(Raised)
-                .GenerateCssClasses()
+            new[]
+            {
+                _modifierBuilder
+                    .Add(Flat, Hover, Disabled, Raised)
+                    .Add("link", IsClickable)
+                    .Build()
+            }
         );
     }
 

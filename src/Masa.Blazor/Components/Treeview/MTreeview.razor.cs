@@ -1,7 +1,8 @@
-﻿namespace Masa.Blazor
+﻿using Masa.Blazor.Components.Treeview;
+
+namespace Masa.Blazor
 {
-    public partial class MTreeview<TItem, TKey> : MasaComponentBase, ITreeview<TItem, TKey>, IThemeable
-        where TKey : notnull
+    public partial class MTreeview<TItem, TKey> : MasaComponentBase, IThemeable where TKey : notnull
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -193,18 +194,19 @@
         }
 #endif
 
-        private Block _block = new("m-treeview");
+        private static Block _block = new("m-treeview");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block
-                .Modifier(Hoverable)
-                .And(Dense)
+            yield return _modifierBuilder
+                .Add(Hoverable)
+                .Add(Dense)
                 .AddTheme(IsDark, IndependentTheme)
-                .GenerateCssClasses();
+                .Build();
         }
 
-        public void AddNode(ITreeviewNode<TItem, TKey> node)
+        public void AddNode(MTreeviewNode<TItem, TKey> node)
         {
             if (Nodes.TryGetValue(node.Key, out var nodeState))
             {
@@ -629,7 +631,10 @@
 
         public void UpdateAll(bool val)
         {
-            Nodes.Values.ForEach(nodeState => { nodeState.IsOpen = val; });
+            foreach (var nodeState in Nodes.Values)
+            {
+                nodeState.IsOpen = val;
+            }
         }
 
         private void UpdateOpen(TKey key, bool isOpen)

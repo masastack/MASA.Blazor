@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Windows
             {
                 props.Add(windowitem => windowitem.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-window-item");
 
             // Assert

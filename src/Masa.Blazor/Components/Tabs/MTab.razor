@@ -1,0 +1,13 @@
+﻿@namespace Masa.Blazor
+@using Masa.Blazor.Components.ItemGroup
+@inherits MRoutableGroupItem<MItemGroupBase>
+
+<MElement Tag="@Tag"
+         Class="@GetClass()"
+         Style="@GetStyle()"
+         ReferenceCaptureAction="r => Ref = r"
+         id="@Id"
+         @onclick="HandleOnClick"
+         @attributes="@Attributes">
+    @ChildContent
+</MElement>

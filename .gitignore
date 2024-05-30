@@ -222,3 +222,5 @@ packages/
 # source code text of Examples in Docs
 docs/**/wwwroot/pages/**/examples/
 
+src/Masa.Blazor.WasmPlayground/
+src/Masa.Blazor.SsrPlayground/

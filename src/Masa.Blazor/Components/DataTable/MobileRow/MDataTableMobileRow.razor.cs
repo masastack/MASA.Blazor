@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.DataTable;
+﻿using Element = BemIt.Element;
+
+namespace Masa.Blazor.Components.DataTable;
 
 public partial class MDataTableMobileRow<TItem>
 {
@@ -37,20 +39,29 @@ public partial class MDataTableMobileRow<TItem>
 
     public bool IsStripe => Stripe && Index % 2 == 1;
 
-    protected override void SetComponentCss()
+    private static Block _block = new("m-data-table");
+    private static Element _row = _block.Element("mobile-table-row");
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .UseBem("m-data-table")
-            .Element("mobile-table-row",cssBuilder =>
-            {
-                cssBuilder
-                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected.Invoke(Item))
-                    .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded != null && IsExpanded(Item))
-                    .AddIf("stripe", () => IsStripe)
-                    .Add(() => ItemClass?.Invoke(Item) ?? "");
-            })
-            .Element("mobile-row")
-            .Element("mobile-row__header")
-            .Element("mobile-row__cell");
+        yield return _row.Name;
+
+        if (IsSelected?.Invoke(Item) is true)
+        {
+            yield return "m-data-table__selected";
+        }
+
+        if (IsExpanded?.Invoke(Item) is true)
+        {
+            yield return "m-data-table__expanded m-data-table__expanded__row";
+        }
+        
+        if (IsStripe)
+        {
+            yield return "stripe";
+        }
+
+        yield return ItemClass?.Invoke(Item) ?? "";
+
     }
 }

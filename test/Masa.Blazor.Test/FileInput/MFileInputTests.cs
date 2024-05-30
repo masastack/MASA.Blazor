@@ -17,7 +17,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Autofocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutofocusClass = classes.Contains("m-file-input");
 
             // Assert
@@ -33,7 +33,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Chips, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasChipsClass = classes.Contains("m-file-input");
 
             // Assert
@@ -49,7 +49,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Clearable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-file-input");
 
             // Assert
@@ -65,7 +65,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Counter, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCounterClass = classes.Contains("m-file-input");
 
             // Assert
@@ -81,7 +81,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -97,7 +97,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-file-input");
 
             // Assert
@@ -113,7 +113,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-file-input");
 
             // Assert
@@ -129,7 +129,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-file-input");
 
             // Assert
@@ -145,7 +145,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-file-input");
 
             // Assert
@@ -161,7 +161,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Filled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilledClass = classes.Contains("m-file-input");
 
             // Assert
@@ -177,7 +177,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-file-input");
 
             // Assert
@@ -193,7 +193,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.FullWidth, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-file-input");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Height, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-file-input");
 
             // Assert
@@ -225,7 +225,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-file-input");
 
             // Assert
@@ -241,7 +241,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.HideInput, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideInputClass = classes.Contains("m-file-input");
 
             // Assert
@@ -257,7 +257,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -273,7 +273,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.LoaderHeight, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-file-input");
 
             // Assert
@@ -289,7 +289,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-file-input");
 
             // Assert
@@ -305,7 +305,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Multiple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-file-input");
 
             // Assert
@@ -321,7 +321,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-file-input");
 
             // Assert
@@ -337,7 +337,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-file-input");
 
             // Assert
@@ -353,7 +353,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.PersistentPlaceholder, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentPlaceholderClass = classes.Contains("m-file-input");
 
             // Assert
@@ -369,7 +369,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Reverse, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-file-input");
 
             // Assert
@@ -385,7 +385,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Rounded, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-file-input");
 
             // Assert
@@ -401,7 +401,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Shaped, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-file-input");
 
             // Assert
@@ -417,7 +417,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.ShowSize, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowSizeClass = classes.Contains("m-file-input");
 
             // Assert
@@ -433,7 +433,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.SingleLine, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-file-input");
 
             // Assert
@@ -449,7 +449,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.SmallChips, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmallChipsClass = classes.Contains("m-file-input");
 
             // Assert
@@ -465,7 +465,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Solo, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloClass = classes.Contains("m-file-input");
 
             // Assert
@@ -481,7 +481,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.SoloInverted, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloInvertedClass = classes.Contains("m-file-input");
 
             // Assert
@@ -497,7 +497,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-file-input");
 
             // Assert
@@ -513,7 +513,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.TruncateLength, 22);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTruncateLengthClass = classes.Contains("m-file-input");
 
             // Assert
@@ -529,7 +529,7 @@ namespace Masa.Blazor.Test.FileInput
             {
                 props.Add(fileinput => fileinput.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-file-input");
 
             // Assert

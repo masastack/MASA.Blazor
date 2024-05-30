@@ -1,16 +1,17 @@
 ﻿@namespace Masa.Blazor.Presets
+@inherits MasaComponentBase
 
 <MSnackbar Value="Value"
            ValueChanged="ValueChanged"
            Color="@ComputedColor"
-           Class="@_cssProvider?.GetClass()"
+           Class="@GetClass()"
+           Style="@GetStyle()"
            ContentClass="@ContentClass"
            Elevation="@Elevation"
            MultiLine="@MultiLine"
            Outlined="@Outlined"
            Rounded="@Rounded"
            Shaped="@Shaped"
-           Style="@_cssProvider?.GetStyle()"
            Text="@Text"
            Tile="@Tile"
            Timeout="@ComputedTimeout"
@@ -21,11 +22,11 @@
            Left="Left"
            OnClosed="@HandleOnClosed">
     <ChildContent>
-        <div Class="@_cssProvider?.GetClass("wrapper")">
+        <div Class="@_alertBlock.Element("wrapper")">
             @if (ComputedIcon != null)
             {
                 <MIcon Color="@IconColor"
-                       Class="@_cssProvider?.GetClass("icon")">
+                       Class="@_alertBlock.Element("icon").Name">
                     @ComputedIcon
                 </MIcon>
             }
@@ -33,7 +34,7 @@
             <div>
                 @if (Title != null)
                 {
-                    <div class="@_cssProvider?.GetClass("title")">@Title</div>
+                    <div class="@_alertBlock.Element("title")">@Title</div>
                 }
 
                 @Content

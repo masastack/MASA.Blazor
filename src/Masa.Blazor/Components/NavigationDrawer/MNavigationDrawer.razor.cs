@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection.Metadata;
-using BlazorComponent.Mixins;
+using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -146,9 +146,11 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
+    private static Block _block = new("m-navigation-drawer");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
     private bool _prevPermanent;
     private readonly List<IDependent> _dependents = new();
-    private readonly Block _block = new("m-navigation-drawer");
 
     protected object? Overlay { get; set; }
 
@@ -514,33 +516,27 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Absolute)
-            .And(Bottom)
-            .And(Clipped)
-            .And("close", !IsActive)
-            .And(App)
-            .And("fixed", !Absolute && (App || Fixed))
-            .And(Floating)
-            .And("is-mobile", IsMobile)
-            .And("is-mouseover", IsMouseover)
-            .And("mini-variant", IsMiniVariant)
-            .And("custom-mini-variant", MiniVariantWidth?.ToString() != "56")
-            .And("open", IsActive)
-            .And("open-on-hover", ExpandOnHover)
-            .And(Right)
-            .And(Temporary)
+        yield return _modifierBuilder.Add(Absolute, Bottom, Clipped, App, Floating, Right, Temporary)
+            .Add("close", !IsActive)
+            .Add("fixed", !Absolute && (App || Fixed))
+            .Add("is-mobile", IsMobile)
+            .Add("is-mouseover", IsMouseover)
+            .Add("mini-variant", IsMiniVariant)
+            .Add("custom-mini-variant", MiniVariantWidth?.ToString() != "56")
+            .Add("open", IsActive)
+            .Add("open-on-hover", ExpandOnHover)
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
     {
         return StyleBuilder.Create()
             .AddHeight(Height)
-            .Add("top", !IsBottom ? ComputedTop.ToUnit() : "auto", !IsSsr)
-            .Add("max-height", $"calc(100% - {ComputedMaxHeight.ToUnit()})", !IsSsr && ComputedMaxHeight != null)
-            .Add("transform", $"{(IsBottom ? "translateY" : "translateX")}({ComputedTransform.ToUnit("%")})",
+            .AddIf("top", !IsBottom ? ComputedTop.ToUnit() : "auto", !IsSsr)
+            .AddIf("max-height", $"calc(100% - {ComputedMaxHeight.ToUnit()})", !IsSsr && ComputedMaxHeight != null)
+            .AddIf("transform", $"{(IsBottom ? "translateY" : "translateX")}({ComputedTransform.ToUnit("%")})",
                 ComputedTransform != null)
             .AddWidth(ComputedWidth)
             .AddBackgroundColor(Color)
@@ -580,7 +576,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             return 0;
         }
 
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(
+        var element = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(
             JsInteropConstants.GetDomInfo, Ref);
         return element.ClientWidth;
     }

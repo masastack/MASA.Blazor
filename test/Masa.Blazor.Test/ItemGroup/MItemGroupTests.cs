@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.ItemGroup
             {
                 props.Add(itemgroup => itemgroup.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasdarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -30,7 +30,7 @@ namespace Masa.Blazor.Test.ItemGroup
             {
                 props.Add(itemgroup => itemgroup.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -45,7 +45,7 @@ namespace Masa.Blazor.Test.ItemGroup
             {
                 props.Add(itemgroup => itemgroup.Mandatory, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-item-group");
 
             // Assert
@@ -60,7 +60,7 @@ namespace Masa.Blazor.Test.ItemGroup
             {
                 props.Add(alert => alert.Max, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-item-group");
 
             // Assert
@@ -75,7 +75,7 @@ namespace Masa.Blazor.Test.ItemGroup
             {
                 props.Add(itemgroup => itemgroup.Multiple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-item-group");
 
             // Assert

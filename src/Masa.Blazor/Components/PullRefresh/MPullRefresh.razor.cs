@@ -36,6 +36,9 @@ public partial class MPullRefresh
     [Parameter] public RenderFragment<double>? PullingContent { get; set; }
 
     [Parameter] public RenderFragment? SuccessContent { get; set; }
+    
+    private static Block _block = new("m-pull-refresh");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private readonly Toucher _toucher = new();
     private readonly ThrottleTask _throttleTask = new(16);
@@ -44,7 +47,7 @@ public partial class MPullRefresh
 
     private ElementReference _trackRef;
     private PullRefreshStatus _pullRefreshStatus;
-    private BlazorComponent.Web.Element? _root;
+    private Masa.Blazor.JSInterop.Element? _root;
     private int _duration;
     private bool _reachTop;
     private double _distance;
@@ -60,17 +63,9 @@ public partial class MPullRefresh
         SuccessText ??= I18n.T("$masaBlazor.pullRefresh.successText");
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.UseBem("m-pull-refresh", css => { css.Modifiers(m => m.Modifier(_pullRefreshStatus, "status")).AddTheme(CascadingIsDark, isIndependent: false); })
-                   .Element("track", _ => { }, style =>
-                   {
-                       style.Add($"transition-duration: {_duration}ms;")
-                            .AddIf($"transform:translate3d(0,{_distance}px, 0)", () => _distance > 0);
-                   })
-                   .Element("header", _ => { }, style => { style.AddHeight(HeadHeight); });
+        yield return _modifierBuilder.Add(_pullRefreshStatus, "status").AddTheme(CascadingIsDark, false).Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

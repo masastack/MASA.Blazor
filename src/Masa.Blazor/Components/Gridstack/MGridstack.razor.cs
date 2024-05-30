@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MGridstack<TItem> : BDomComponentBase
+public partial class MGridstack<TItem> : MasaComponentBase
 {
     [Inject]
     protected GridstackJSModule Module { get; set; } = null!;
@@ -77,6 +77,9 @@ public partial class MGridstack<TItem> : BDomComponentBase
     [Parameter]
     public EventCallback<GridstackResizeEventArgs> OnResize { get; set; }
 
+    private static Block _block = new("m-gridstack");
+    private static Block _itemBlock = _block.Extend("item");
+
     private string? _prevItemKeys;
     private IJSObjectReference? _gridstackInstance;
 
@@ -96,14 +99,10 @@ public partial class MGridstack<TItem> : BDomComponentBase
         watcher.Watch<bool>(nameof(Readonly), (val) => { _ = SetStatic(val); });
     }
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.Apply(cssBuilder => cssBuilder.Add("m-gridstack"))
-                   .Apply("item",
-                       cssBuilder => cssBuilder.Add("m-gridstack-item").Add(ItemClass),
-                       styleBuilder => styleBuilder.Add(ItemStyle));
+        yield return _block.Name;
+        yield return "grid-stack";
     }
 
     protected override async Task OnParametersSetAsync()

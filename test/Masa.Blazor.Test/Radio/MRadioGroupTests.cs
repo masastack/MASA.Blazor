@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -27,7 +27,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Row, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRowClass = classes.Contains("m-input--radio-group--row");
             // Assert
             Assert.IsTrue(hasRowClass);
@@ -41,7 +41,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Column, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasColumnClass = classes.Contains("m-input--radio-group--column");
             // Assert
             Assert.IsTrue(hasColumnClass);
@@ -55,7 +55,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -70,7 +70,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -85,7 +85,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasDisabledClass);
@@ -99,7 +99,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasErrorClass);
@@ -113,7 +113,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(alert => alert.ErrorCount, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-input--radio-group");
 
             // Assert
@@ -128,7 +128,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasHideDetailsClass);
@@ -142,7 +142,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Mandatory, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasMandatoryClass);
@@ -156,7 +156,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasPersistentHintClass);
@@ -170,7 +170,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasReadonlyClass);
@@ -184,7 +184,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasSuccessClass);
@@ -198,7 +198,7 @@ namespace Masa.Blazor.Test.Radio
             {
                 props.Add(radiogroup => radiogroup.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-input--radio-group");
             // Assert
             Assert.IsTrue(hasSuccessClass);

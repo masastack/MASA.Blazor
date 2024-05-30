@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Masa.Blazor.Components.ErrorHandler;
 
 namespace Masa.Blazor.Core;
 
-public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEvent
+public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
 {
     protected MasaComponentBase()
     {
@@ -13,7 +14,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     [Inject] public IJSRuntime Js { get; set; } = null!;
 
     [Inject] private ILoggerFactory LoggerFactory { get; set; } = null!;
-    
+
     [CascadingParameter] protected IDefaultsProvider? DefaultsProvider { get; set; }
 
     /// <summary>
@@ -36,7 +37,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     }
 
     [Parameter(CaptureUnmatchedValues = true)]
-    public virtual IDictionary<string, object?> Attributes { get; set; } = new Dictionary<string, object?>();
+    public virtual IDictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
 
     public static readonly string ImplementedAssemblyName = "Masa.Blazor";
 
@@ -49,7 +50,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     private ElementReference _ref;
     private ElementReference? _prevRef;
     private bool _elementReferenceChanged;
-    
+
     protected ILogger Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
@@ -58,16 +59,27 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
 
     [Parameter] public string? Style { get; set; }
 
+    protected virtual bool NoClass => false;
+    protected virtual bool NoStyle => false;
+    
     public string? GetClass()
     {
         var stringBuilder = new StringBuilder();
         foreach (var item in BuildComponentClass())
         {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+            
             stringBuilder.Append(item);
             stringBuilder.Append(' ');
         }
 
-        stringBuilder.Append(Class);
+        if (!NoClass)
+        {
+            stringBuilder.Append(Class);
+        }
 
         var css = stringBuilder.ToString().Trim();
         return css.Length == 0 ? null : css;
@@ -78,18 +90,64 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
         var stringBuilder = new StringBuilder();
         foreach (var item in BuildComponentStyle())
         {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+            
             stringBuilder.Append(item);
             stringBuilder.Append("; ");
         }
 
-        stringBuilder.Append(Style);
+        if (!NoStyle)
+        {
+            stringBuilder.Append(Style);
+        }
+
         var style = stringBuilder.ToString().TrimEnd();
         return style.Length == 0 ? null : style;
     }
 
-    protected virtual IEnumerable<string> BuildComponentClass() => Enumerable.Empty<string>();
+    protected virtual IEnumerable<string?> BuildComponentClass() => Enumerable.Empty<string?>();
 
-    protected virtual IEnumerable<string> BuildComponentStyle() => Enumerable.Empty<string>();
+    protected virtual IEnumerable<string?> BuildComponentStyle() => Enumerable.Empty<string?>();
+    
+    protected string? GetClass(params string?[] classes)
+    {
+        var stringBuilder = new StringBuilder();
+        foreach (var item in classes)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+
+            if (stringBuilder.Length != 0)
+            {
+                stringBuilder.Append(' ');
+            }
+                
+            stringBuilder.Append(item);
+        }
+
+        return stringBuilder.Length == 0 ? null : stringBuilder.ToString();
+    }
+
+    protected string? GetStyle(params string?[] styles)
+    {
+        var stringBuilder = new StringBuilder();
+        foreach (var item in styles)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                continue;
+            }
+
+            stringBuilder.Append(item);
+        }
+
+        return stringBuilder.Length == 0 ? null : stringBuilder.ToString();
+    }
 
     #endregion
 
@@ -138,7 +196,7 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
             RefBack?.Set(value);
         }
     }
-    
+
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         _dirtyParameters = parameters.ToDictionary().Keys.ToArray();
@@ -217,14 +275,20 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     protected void PreventRenderingUtil(params Action[] actions)
     {
         _shouldRender = false;
-        actions.ForEach(action => action());
+        foreach (var action in actions)
+        {
+            action.Invoke();
+        }
         _shouldRender = true;
     }
 
     protected async Task PreventRenderingUtil(params Func<Task>[] funcs)
     {
         _shouldRender = false;
-        await funcs.ForEachAsync(func => func());
+        foreach (var func in funcs)
+        {
+            await func.Invoke();
+        }
         _shouldRender = true;
     }
 
@@ -236,10 +300,9 @@ public abstract class MasaComponentBase : MasaNextTickComponentBase, IHandleEven
     {
     }
 
-    protected TValue? GetValue<TValue>(TValue? @default = default, [CallerMemberName] string name = "",
-        bool disableIListAlwaysNotifying = false)
+    protected TValue? GetValue<TValue>(TValue? @default = default, [CallerMemberName] string name = "")
     {
-        return _watcher.GetValue(@default, name, disableIListAlwaysNotifying);
+        return _watcher.GetValue(@default, name);
     }
 
     protected TValue? GetComputedValue<TValue>([CallerMemberName] string name = "")

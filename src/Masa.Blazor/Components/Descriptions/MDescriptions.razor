@@ -1,42 +1,45 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@using Masa.Blazor.Extensions
+@inherits MasaComponentBase
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
-     @ref="Ref">
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="@Attributes">
     <CascadingValue Value="IsDark" Name="IsDark">
         @if (HasHeader)
         {
-            <div class="@CssProvider.GetClass("header")">
-                @RenderContentFragment("header__title", Title, TitleContent)
-                @RenderContentFragment("header__actions", ActionsContent)
+            <div class="@_header">
+                @RenderFragments.RenderFragmentOrText(TitleContent, Title, _headerTitle.Name)
+                @RenderFragments.RenderIfNotNull(ActionsContent, _headerActions.Name)
             </div>
         }
 
-        <div class="@CssProvider.GetClass("view")">
+        <div class="@_block.Extend("view")">
             <table>
                 <tbody>
                 @foreach (var row in Rows)
                 {
                     @if (Vertical)
                     {
-                        <tr class="@CssProvider.GetClass("row")">
+                        <tr class="@_block.Extend("row")">
                             @foreach (var cell in row)
                             {
                                 @if (Bordered)
                                 {
-                                    <th class="@CssProvider.GetClass("item__label") @cell.LabelClass"
-                                        style="@CssProvider.GetStyle("item__label") @cell.LabelStyle"
+                                    <th class="@_itemContainerLabel.AppendClasses(LabelClass, cell.LabelClass)"
+                                        style="@GetStyle(LabelStyle, cell.LabelStyle)"
                                         colspan="@cell.Span">
                                         @cell.Label
                                     </th>
                                 }
                                 else
                                 {
-                                    <th class="@CssProvider.GetClass("item")" colspan="@cell.Span">
-                                        <div class="@CssProvider.GetClass("item-container")">
-                                            <span class="@CssProvider.GetClass("item-container__label") @cell.LabelClass"
-                                                  style="@CssProvider.GetStyle("item-container__label") @cell.LabelStyle">
+                                    <th class="@_item.Name" colspan="@cell.Span">
+                                        <div class="@_itemContainer.Name">
+                                            <span class="@_itemContainerLabelModifierBuilder.Add("no-colon", !Colon).AddClass(LabelClass, cell.LabelClass)"
+                                                  style="@GetStyle(LabelStyle, cell.LabelStyle)">
                                                 @cell.Label
                                             </span>
                                         </div>
@@ -44,23 +47,23 @@
                                 }
                             }
                         </tr>
-                        <tr class="@CssProvider.GetClass("row")">
+                        <tr class="@_block.Extend("row")">
                             @foreach (var cell in row)
                             {
                                 @if (Bordered)
                                 {
-                                    <td class="@CssProvider.GetClass("item__content") @cell.Class"
-                                        style="@CssProvider.GetStyle("item__content") @cell.Style"
+                                    <td class="@_itemContent.AppendClasses(ContentClass, cell.Class)"
+                                        style="@GetStyle(ContentStyle, cell.Style)"
                                         colspan="@cell.Span">
                                         @cell.ChildContent
                                     </td>
                                 }
                                 else
                                 {
-                                    <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
-                                        <div class="@CssProvider.GetClass("item-container")">
-                                            <span class="@CssProvider.GetClass("item-container__content") @cell.Class"
-                                                  style="@CssProvider.GetStyle("item-container__content") @cell.Style">
+                                    <td class="@_item.Name" colspan="@cell.Span">
+                                        <div class="@_itemContainer.Name">
+                                            <span class="@_itemContainerContent.AppendClasses(ContentClass, @cell.Class)"
+                                                  style="@GetStyle(ContentStyle, cell.Style)">
                                                 @cell.ChildContent
                                             </span>
                                         </div>
@@ -71,7 +74,7 @@
                     }
                     else
                     {
-                        <tr class="@CssProvider.GetClass("row")">
+                        <tr class="@_row.Name">
                             @foreach (var cell in row)
                             {
                                 @if (Bordered)
@@ -79,27 +82,27 @@
                                     var thSpan = 1;
                                     var tdSpan = cell.Span * 2 - 1;
 
-                                    <th class="@CssProvider.GetClass("item__label") @cell.LabelClass"
-                                        style="@CssProvider.GetStyle("item__label") @cell.LabelStyle"
+                                    <th class="@_itemLabel.AppendClasses(LabelClass, cell.LabelClass)"
+                                        style="@GetStyle(LabelStyle, cell.LabelStyle)"
                                         colspan="@thSpan">
                                         @cell.Label
                                     </th>
-                                    <td class="@CssProvider.GetClass("item__content") @cell.Class"
-                                        style="@CssProvider.GetStyle("item__content") @cell.Style"
+                                    <td class="@_itemContent.AppendClasses(ContentClass, cell.Class)"
+                                        style="@GetStyle(ContentStyle, cell.Style)"
                                         colspan="@tdSpan">
                                         @cell.ChildContent
                                     </td>
                                 }
                                 else
                                 {
-                                    <td class="@CssProvider.GetClass("item")" colspan="@cell.Span">
-                                        <div class="@CssProvider.GetClass("item-container")">
-                                            <span class="@CssProvider.GetClass("item-container__label") @cell.LabelClass"
-                                                  style="@CssProvider.GetStyle("item-container__label") @cell.LabelStyle">
+                                    <td class="@_item.Name" colspan="@cell.Span">
+                                        <div class="@_itemContainer">
+                                            <span class="@_itemContainerLabelModifierBuilder.Add("no-colon", !Colon).AddClass(LabelClass, cell.LabelClass)"
+                                                  style="@GetStyle(LabelStyle, cell.LabelStyle)">
                                                 @cell.Label
                                             </span>
-                                            <span class="@CssProvider.GetClass("item-container__content") @cell.Class"
-                                                  style="@CssProvider.GetStyle("item-container__content") @cell.Style">
+                                            <span class="@_itemContainerContent.AppendClasses(ContentClass, cell.Class)"
+                                                  style="@GetStyle(ContentStyle, cell.Style)">
                                                 @cell.ChildContent
                                             </span>
                                         </div>
@@ -119,36 +122,3 @@
     </CascadingValue>
 </div>
 
-@code {
-
-    private RenderFragment RenderContentFragment(string name, RenderFragment? contentFragment = null) => __builder =>
-    {
-        @if (contentFragment != null)
-        {
-            <div class="@CssProvider.GetClass(name)">
-                @contentFragment
-            </div>
-        }
-    };
-
-    private RenderFragment RenderContentFragment(string name, string? content, RenderFragment? contentFragment = null) => __builder =>
-    {
-        var hasContent = !string.IsNullOrWhiteSpace(content);
-        var hasContentFragment = contentFragment != null;
-
-        @if (hasContent || hasContentFragment)
-        {
-            <div class="@CssProvider.GetClass(name)">
-                @if (hasContentFragment)
-                {
-                    @contentFragment
-                }
-                else
-                {
-                    @content
-                }
-            </div>
-        }
-    };
-
-}

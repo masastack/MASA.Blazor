@@ -1,6 +1,4 @@
-﻿using BlazorComponent.Attributes;
-
-namespace Masa.Docs.Core.Components;
+﻿namespace Masa.Docs.Core.Components;
 
 [JSCustomElement]
 public class AppHeading : ComponentBase

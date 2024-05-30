@@ -34,11 +34,11 @@
     {
         var color = !Disabled ? (Color ?? "accent") : "";
 
-        <div class="@_block.Element("value").Modifier(Disabled)">
+        <div class="@_valueModifierBuilder.Add(Disabled)">
             <Transition Name="@Transition">
                 <KeyTransitionElement Value="@Value"
-                                      Class="@(new CssBuilder().AddTextColor(color).GetClass())"
-                                      Style="@(new StyleBuilder().AddTextColor(color).GetStyle())">
+                                      Class="@(CssClassUtils.GetTextColor(color))"
+                                      Style="@(CssStyleUtils.GetTextColor(color))">
                     <button type="button" @onclick="HandleOnClickAsync">
                         @RenderFragments.RenderFragmentOrText(ChildContent, Formatter(Value))
                     </button>

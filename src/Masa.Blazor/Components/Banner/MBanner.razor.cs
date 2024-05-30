@@ -87,19 +87,20 @@ namespace Masa.Blazor
 #endif
         }
 
-        private Block _block = new("m-banner");
+        private static Block _block = new("m-banner");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(HasIcon)
-                .And("is-mobile", Mobile)
-                .And(SingleLine)
-                .And("sticky", IsSticky)
+            yield return _modifierBuilder
+                .Add(HasIcon, SingleLine)
+                .Add("is-mobile", Mobile)
+                .Add("sticky", IsSticky)
                 .AddBackgroundColor(Color)
                 .AddTheme(IsDark, IndependentTheme)
                 .AddClass("m-sheet")
                 .AddElevation(Elevation)
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

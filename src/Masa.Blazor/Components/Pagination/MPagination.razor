@@ -1,12 +1,11 @@
 ﻿@namespace Masa.Blazor
 @using Masa.Blazor.Components.Pagination
-@using Element = BlazorComponent.Web.Element
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <nav id="@Id" @ref="Ref" class="@Class" style="@Style" @attributes="@Attributes">
-        <ul class="@_block.Modifier(Circle).And(Disabled).AddTheme(IsDark, IndependentTheme)">
+        <ul class="@_modifierBuilder.Add(Circle).Add(Disabled).AddTheme(IsDark, IndependentTheme)">
             @GenPaginationIcon(PaginationIconType.First)
 
             @foreach (var item in GetItems())
@@ -53,12 +52,12 @@
             attrs["href"] = string.Format(HrefFormat, value);
         }
 
-        <Element Tag="@tag"
-                 Class="@_block.Element("navigation").Modifier(disabled).Build()"
+        <MElement Tag="@tag"
+                 Class="@_paginationModifierBuilder.Add(disabled).Build()"
                  @onclick="@click"
                  @attributes="@attrs">
             <MIcon Icon="@icon"/>
-        </Element>
+        </MElement>
     };
 
     private RenderFragment GenPaginationItem(StringNumber item) => __builder =>
@@ -81,13 +80,13 @@
 
         var isActive = item.AsT1 == Value;
 
-        <Element Tag="@tag"
-                 Class="@_block.Element("item").Modifier("active", isActive).AddBackgroundColor(Color, isActive).Build()"
+        <MElement Tag="@tag"
+                 Class="@_itemModifierBuilder.Add("active", isActive).AddBackgroundColor(Color, isActive).Build()"
                  Style="@(StyleBuilder.Create().AddBackgroundColor(Color, isActive).ToString())"
                  @onclick="@(() => HandleItemClickAsync(item))"
                  @attributes="@attrs">
             @item
-        </Element>
+        </MElement>
     };
 
 }

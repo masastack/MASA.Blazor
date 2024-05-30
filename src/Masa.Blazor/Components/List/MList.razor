@@ -1,0 +1,17 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="this" IsFixed>
+        <CascadingValue Value="true" Name="IsInList">
+            <IfTransitionElement Tag="@Tag"
+                                 Class="@GetClass()"
+                                 Style="@GetStyle()"
+                                 ReferenceCaptureAction="@((r) => Ref = r)"
+                                 Value="If"
+                                 @attributes="Attributes">
+                @ChildContent
+            </IfTransitionElement>
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>

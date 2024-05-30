@@ -7,11 +7,11 @@
 
         @RenderFragments.RenderIfNotNull(
             TitleContent,
-            _block.Element("title").Modifier(Landscape).AddBackgroundColor(ComputedTitleColor).Build(),
+            _titleModifierBuilder.Add(Landscape).AddBackgroundColor(ComputedTitleColor).Build(),
             StyleBuilder.Create().AddBackgroundColor(ComputedTitleColor).Build()
         )
 
-        <div class="@_block.Element("body").Modifier(NoTitle).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_bodyModifierBuilder.Add(NoTitle).AddTheme(IsDark, IndependentTheme)"
              style="@StyleBuilder.Create().AddWidth(Width, predicate: () => !FullWidth)">
             <Transition Name="@Transition">
                 @ChildContent
@@ -20,7 +20,7 @@
 
         @RenderFragments.RenderIfNotNull(
             ActionsContent,
-            _block.Element("actions").Modifier(NoTitle).AddClass("m-card__actions").Build()
+            _actionsModifierBuilder.Add(NoTitle).AddClass("m-card__actions").Build()
         )
 
     </div>

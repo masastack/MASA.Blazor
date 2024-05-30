@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using Masa.Blazor.JSInterop;
+using SkiaSharp;
 
 namespace Masa.Blazor.Presets
 {

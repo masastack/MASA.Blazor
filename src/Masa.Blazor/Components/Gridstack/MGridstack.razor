@@ -1,9 +1,10 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
+@using Masa.Blazor.Extensions
 @typeparam TItem
 
-<div class="grid-stack @CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
+<div class="@GetClass()"
+     style="@GetStyle()"
      @ref="Ref">
     @foreach (var item in Items)
     {
@@ -21,8 +22,8 @@
              gs-y="@y"
              gs-id="@key"
              @key="@key">
-            <div class="grid-stack-item-content @CssProvider.GetClass("item")"
-                 style="@CssProvider.GetStyle("item")">
+            <div class="@_itemBlock.AppendClasses("grid-stack-item-content", ItemClass)"
+                 style="@ItemStyle">
                 @ItemContent(item)
             </div>
         </div>

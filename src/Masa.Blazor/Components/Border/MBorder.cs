@@ -23,15 +23,17 @@ public class MBorder : Container
 
     [Parameter] [MasaApiParameter(8)] public StringNumber Size { get; set; } = 8;
 
-    private Block _block = new("m-border");
+    private static Block _block = new("m-border");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private bool Active => Value && Border != Borders.None;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Border.ToString())
-            .And("active", Active)
-            .GenerateCssClasses();
+        yield return _modifierBuilder
+            .Add(Border, "")
+            .Add(Active)
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

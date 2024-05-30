@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System.Runtime.Loader;
-using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Text.RegularExpressions;
 
@@ -21,7 +20,6 @@ public partial class Index : NextTickComponentBase
     /// </summary>
     private static readonly List<string> s_assemblies = new()
     {
-        "BlazorComponent",
         "Masa.Blazor",
         "OneOf",
         "FluentValidation",
@@ -72,7 +70,6 @@ public partial class Index : NextTickComponentBase
         await base.OnInitializedAsync();
         _objRef = DotNetObjectReference.Create(this);
 
-        CompileRazorProjectFileSystem.AddGlobalUsing("@using BlazorComponent");
         CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor");
         CompileRazorProjectFileSystem.AddGlobalUsing("@using Masa.Blazor.Presets");
     }

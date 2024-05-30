@@ -1,9 +1,6 @@
-using BlazorComponent;
-using Masa.Blazor;
 using Masa.Docs.Core;
 using Masa.Docs.Shared;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
-using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 // https://github.com/dotnet/aspnetcore/issues/38212

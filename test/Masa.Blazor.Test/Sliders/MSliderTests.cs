@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("dense");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-input--is-disabled");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Height, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.InverseLabel, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInverseLabelClass = classes.Contains("inverse-label");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.LoaderHeight, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Max, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Min, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMinClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("readonly");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Step, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasStepClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -254,7 +254,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -269,7 +269,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.ThumbLabel, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasThumbLabelClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -284,7 +284,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.TickSize, 2);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTickSizeClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -299,7 +299,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Ticks, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasTicksClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -314,7 +314,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-input__slider");
 
             // Assert
@@ -329,7 +329,7 @@ namespace Masa.Blazor.Test.Slider
             {
                 props.Add(slider => slider.Vertical, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasVerticalClass = classes.Contains("m-input__slider--vertical");
 
             // Assert

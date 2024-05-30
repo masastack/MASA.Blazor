@@ -1,8 +1,9 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@using Masa.Blazor.Extensions
+@inherits MasaComponentBase
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
+<div class="@GetClass()"
+     style="@GetStyle()"
      @ref="_elementReference">
     <div class="swiper-wrapper">
         <CascadingValue Value="this" IsFixed>
@@ -12,12 +13,17 @@
 
     @if (_pagination is not null)
     {
-        <div class="@CssProvider.GetClass("pagination")" style="@CssProvider.GetStyle("pagination")"></div>
+        <div class="@_paginationBlock.AppendClasses("swiper-pagination", _pagination?.Class)" 
+             style="@_pagination?.Style"></div>
     }
 
     @if (_navigation is not null)
     {
-        <div class="@CssProvider.GetClass("next")" style="@CssProvider.GetStyle("next")"></div>
-        <div class="@CssProvider.GetClass("prev")" style="@CssProvider.GetStyle("prev")"></div>
+        <div class="@_nextBlock.AppendClasses("swiper-button-next", _navigation?.Class)"
+             style="@_navigation?.Style">
+        </div>
+        <div class="@_prevBlock.AppendClasses("swiper-button-prev", _navigation?.Class)"
+             style="@_navigation?.Style">
+        </div>
     }
 </div>

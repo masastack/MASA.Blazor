@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Continuous, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasContinuousClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Dark, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Light, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Mandatory, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMandatoryClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Multiple, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.Tabs
             {
                 props.Add(tabsitems => tabsitems.Max, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxClass = classes.Contains("m-tabs-items");
 
             // Assert
@@ -103,7 +103,7 @@ namespace Masa.Blazor.Test.Tabs
         //    {
         //        props.Add(tabsitems => tabsitems.Reverse, false);
         //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var classes = cut.Instance.GetClass();
         //    var hasMultipleClass = classes.Contains("m-tabs-items");
 
         //    // Assert

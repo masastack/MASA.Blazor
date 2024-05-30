@@ -1,0 +1,164 @@
+{
+  "$masaBlazor": {
+    "badge": "Badge",
+    "close": "Close",
+    "copy": "Copy",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "ok": "OK",
+    "search": "Search",
+    "fold": "Fold",
+    "unfold": "Unfold",
+    "required": "Required.",
+    "dataIterator": {
+      "noResultsText": "No matching records found",
+      "loadingText": "Loading items..."
+    },
+    "dataTable": {
+      "itemsPerPageText": "Rows per page:",
+      "ariaLabel": {
+        "sortDescending": "Sorted descending.",
+        "sortAscending": "Sorted ascending.",
+        "sortNone": "Not sorted.",
+        "activateNone": "Activate to remove sorting.",
+        "activateDescending": "Activate to sort descending.",
+        "activateAscending": "Activate to sort ascending."
+      },
+      "sortBy": "Sort by",
+      "groupText": "group"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Items per page:",
+      "itemsPerPageAll": "All",
+      "nextPage": "Next page",
+      "prevPage": "Previous page",
+      "firstPage": "First page",
+      "lastPage": "Last page",
+      "pageText": "{0}-{1} of {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "{0} selected",
+      "nextMonthAriaLabel": "Next month",
+      "nextYearAriaLabel": "Next year",
+      "prevMonthAriaLabel": "Previous month",
+      "prevYearAriaLabel": "Previous year"
+    },
+    "noDataText": "No data available",
+    "carousel": {
+      "prev": "Previous visual",
+      "next": "Next visual",
+      "ariaLabel": {
+        "delimiter": "Carousel slide {0} of {1}"
+      }
+    },
+    "calendar": {
+      "moreEvents": "{0} more"
+    },
+    "fileInput": {
+      "counter": "{0} files",
+      "counterSize": "{0} files ({1} in total)"
+    },
+    "timePicker": {
+      "am": "AM",
+      "pm": "PM"
+    },
+    "pagination": {
+      "ariaLabel": {
+        "wrapper": "Pagination Navigation",
+        "next": "Next page",
+        "previous": "Previous page",
+        "page": "Goto Page {0}",
+        "currentPage": "Current Page, Page {0}"
+      }
+    },
+    "rating": {
+      "ariaLabel": {
+        "icon": "Rating {0} of {1}"
+      }
+    },
+    "pageTabs": {
+      "reloadTab": "Reload Tab",
+      "closeTabsToTheLeft": "Close Tabs to the Left",
+      "closeTabsToTheRight": "Close Tabs to the Right",
+      "closeOtherTabs": "Close Other Tabs",
+      "closeTab": "Close tab",
+      "closeTabConfirm": "Are you sure you want to close this tab ({0}) ?"
+    },
+    "pullRefresh": {
+      "pullingText": "Pull to refresh",
+      "canReleaseText": "Release to refresh",
+      "loadingText": "Loading...",
+      "successText": "Succeed to refresh"
+    },
+    "cron": {
+      "period": {
+        "second": "Per second",
+        "minute": "Per minute",
+        "hour": "Per hour",
+        "day": "Per day",
+        "month": "Per month",
+        "week": "Per week",
+        "year": "Per year"
+      },
+      "fromTo": "Period start from {0}{2} to {1}{2}",
+      "startFromAndExec":"Start at {0}{2} and execute every {1}{2}",
+      "weekDayOfWeek": "The {1} of the {0} week",
+      "nearestWorkDayPerMonth": "The nearest working day on the {0} of per month",
+      "lastDayOfPerMonth": "The last day of per month",
+      "lastWeekDayOfPerMonth": "The last {0} of per month",
+      "specify": "Specify",
+      "notSpecify": "Not specify",
+      "exception": {
+        "LNotSupportMonth": "Support for specifying 'L' and 'LW' with other days of the month is not implemented",
+        "LNotSupportWeek": "Support for specifying 'L' with other days of the week is not implemented",
+        "NotSupportMutilSpecifynthWeekDay": "Support for specifying multiple \"nth\" days is not implemented.",
+        "CannotSpecifyDayAndWeek": "Support for specifying both a day-of-week AND a day-of-month parameter is not implemented.",
+        "InvalidMonthValue": "Invalid Month value: {0}",
+        "InvalidWeekdayValue": "Invalid Day-of-Week value: {0}",
+        "InvalidnthDayOfWeek": "A numeric value between 1 and 5 must follow the '#' option",
+        "InvalidEveryDayOfWeek": "A numeric value between 1 and 5 must follow the '/' option",
+        "IllegalCharactersPosition": "Illegal characters for this position: {0}",
+        "IllegalCharactersAfer?": "Illegal character after '?': {0}",
+        "IllegalCharactersAfer/": "Illegal character after '/': {0}",
+        "Characters?OnlySupport": "'?' can only be specified for Day-of-Month or Day-of-Week.",
+        "MustFollowByInteger": "'/' must be followed by an integer.",
+        "InvalidMinuteAndSecond": "Minute and Second values must be between 0 and 59",
+        "InvalidHour": "Hour values must be between 0 and 23",
+        "InvalidDay": "Day of month values must be between 1 and 31",
+        "InvalidMonth": "Month values must be between 1 and 12",
+        "InvalidWeekday": "Day-of-Week values must be between 1 and 7",
+        "InvalidStartYear": "Start year must be less than stop year",
+        "OptionNotValid": "{0} option is not valid here. (pos={1})",
+        "InvalidNthOfWeek": "Nthday of week must be between 1 and 5",
+        "IncrementCannotLargeThen": "Value cannot large then {0}, now is :{1}",
+        "WOptionLargeThen31": "The 'W' option does not make sense with values larger than 31 (max number of days in a month)"
+      }
+    },
+    "Period": {
+      "Second": "second",
+      "Minute": "minute",
+      "Hour": "hour",
+      "Day": "day",
+      "Month": "month",
+      "Week": "week",
+      "Year": "year"
+    },
+    "weekNumber": {
+      "First": "1st",
+      "Second": "2nd",
+      "Third": "3rd",
+      "Fourth": "4th",
+      "Fiveth": "5th"
+    },
+    "mobileCascader": {
+      "pleaseSelect": "Please select"
+    },
+    "infiniteScroll": {
+      "emptyText": "There's no more",
+      "errorText": "Failed to load",
+      "loadingText": "Loading...",
+      "loadMoreText": "Load more"
+    }
+  }
+}

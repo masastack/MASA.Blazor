@@ -1,8 +1,11 @@
 ﻿@namespace Masa.Blazor.Presets
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()">
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
     <CascadingValue Name="IsDark" Value="IsDark">
         <CascadingValue Value="this" IsFixed="true">
             @foreach (var config in _stack)

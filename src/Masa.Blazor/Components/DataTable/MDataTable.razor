@@ -9,8 +9,8 @@
                   Width="@Width"
                   FixedHeader="@FixedHeader"
                   Dense="@Dense"
-                  Class="@CssProvider.GetClass()"
-                  Style="@CssProvider.GetStyle()"
+                  Class="@GetClass()"
+                  Style="@GetStyle()"
                   Id="@Id"
                   RefBack="@RefBack"
                   TopContent="@TopContent"
@@ -98,7 +98,7 @@
 
     protected override RenderFragment RenderEmptyWrapper(RenderFragment? childContent, string? childText) => __builder =>
     {
-        <tr class="@CssProvider.GetClass("empty-wrapper")">
+        <tr class="@_block.Element("empty-wrapper")">
             <td @attributes="@ColspanAttrs">
                 @ContentOrText(childContent, childText)
             </td>
@@ -164,13 +164,13 @@
                             group.ToList(),
                             ComputedHeaders.ToList(),
                             isOpen,
-                            CreateEventCallback(ToggleFn),
-                            CreateEventCallback(RemoveGroup))
+                            EventCallback.Factory.Create(this, ToggleFn),
+                            EventCallback.Factory.Create(this, RemoveGroup))
                     )
                 }
                 else
                 {
-                    <td class="@CssProvider.GetClass("group-header")" @attributes="@ColspanAttrs">
+                    <td class="text-start" @attributes="@ColspanAttrs">
                         <MButton Class="ma-0"
                                  Icon
                                  Small
@@ -240,7 +240,7 @@
                 @GenDefaultSimpleRow(item, index)
             </RowHeaderContent>
             <RowContentContent>
-                <tr class="@CssProvider.GetClass("expanded")">
+                <tr class="@_block.Element("expanded") m-data-table__expanded__content">
                     @ExpandedItemContent?.Invoke((ComputedHeaders, item))
                 </tr>
             </RowContentContent>
@@ -258,10 +258,10 @@
             { nameof(MDataTableRow<TItem>.ItemClass), ItemClass },
             { nameof(MDataTableRow<TItem>.Index), index },
             { nameof(MDataTableRow<TItem>.Item), item },
-            { "onclick", CreateEventCallback<MouseEventArgs>(e => HandleOnRowClickAsync(e, item)) },
-            { "oncontextmenu", CreateEventCallback<MouseEventArgs>(e => HandleOnRowContextmenuAsync(e, item)) },
+            { "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowClickAsync(e, item)) },
+            { "oncontextmenu", EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowContextmenuAsync(e, item)) },
             { "__internal_preventDefault_oncontextmenu", OnRowContextmenuPreventDefault },
-            { "ondblclick", CreateEventCallback<MouseEventArgs>(e => HandleOnRowDblClickAsync(e, item)) },
+            { "ondblclick", EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowDblClickAsync(e, item)) },
             { nameof(MDataTableRow<TItem>.HasSlot), HasSlot },
             { nameof(MDataTableRow<TItem>.SlotContent), GenRowSlot() },
             { nameof(MDataTableMobileRow<TItem>.HeaderColContent), HeaderColContent },
@@ -295,14 +295,14 @@
                 return new DataTableItemExpandOrSelectContext<TItem>(
                     item,
                     index,
-                    CreateEventCallback<bool>(val => Expand(item, val)),
-                    CreateEventCallback<bool>(val => Select(item, val)),
+                    EventCallback.Factory.Create<bool>(this, val => Expand(item, val)),
+                    EventCallback.Factory.Create<bool>(this, val => Select(item, val)),
                     IsExpanded(item),
                     IsSelected(item),
                     ComputedHeaders.ToList(),
-                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowClickAsync(e, item)),
-                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowDblClickAsync(e, item)),
-                    CreateEventCallback<MouseEventArgs>(e => HandleOnRowContextmenuAsync(e, item))
+                    EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowClickAsync(e, item)),
+                    EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowDblClickAsync(e, item)),
+                    EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowContextmenuAsync(e, item))
                 );
             }
 
@@ -351,8 +351,8 @@
     private RenderFragment GenLoading() => __builder =>
     {
         <thead>
-        <tr class="@CssProvider.GetClass("progress")">
-            <th class="@CssProvider.GetClass("column")" @attributes="@ColspanAttrs">
+        <tr class="@_block.Element("progress")">
+            <th class="column" @attributes="@ColspanAttrs">
                 @GenProgress(Loading, LoaderHeight, progressContent: ProgressContent)
             </th>
         </tr>

@@ -161,20 +161,19 @@ public partial class MFooter : MasaComponentBase, IThemeable
         }
 #endif
     
-    private Block _block = new("m-footer");
+    private static Block _block = new("m-footer");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Absolute)
-            .And("fixed", !Absolute && (App || Fixed))
-            .And(Padless)
-            .And(Inset)
+        yield return _modifierBuilder.Add(Absolute, Padless, Inset)
+            .Add("fixed", !Absolute && (App || Fixed))
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
             .AddElevation(Elevation)
             .AddRounded(Rounded, Tile)
             .AddClass("m-sheet")
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -219,7 +218,7 @@ public partial class MFooter : MasaComponentBase, IThemeable
             return 0;
         }
 
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+        var element = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, Ref);
         return element.ClientHeight;
     }
 

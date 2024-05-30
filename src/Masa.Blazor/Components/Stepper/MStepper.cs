@@ -27,16 +27,17 @@ public class MStepper : MSheet
 
     private bool IsReverse { get; set; }
 
-    private Block _block = new("m-stepper");
+    private static Block _block = new("m-stepper");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            _block.Modifier(Flat)
-                .And(_isBooted)
-                .And(Vertical)
-                .And(AltLabels)
-                .And(NonLinear).GenerateCssClasses());
+            new[]
+            {
+                _modifierBuilder.Add(Flat, _isBooted, Vertical, AltLabels, NonLinear).Build()
+            }
+        );
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -68,6 +69,15 @@ public class MStepper : MSheet
                 StateHasChanged();
             });
     }
+
+    protected override RenderFragment GenBody() => builder =>
+    {
+        builder.OpenComponent<CascadingValue<MStepper>>(0);
+        builder.AddAttribute(1, "Value", this);
+        builder.AddAttribute(2, "IsFixed", true);
+        builder.AddAttribute(3, "ChildContent", (RenderFragment)(sb => base.GenBody().Invoke(sb)));
+        builder.CloseComponent();
+    };
 
     public void RegisterStep(MStepperStep step)
     {

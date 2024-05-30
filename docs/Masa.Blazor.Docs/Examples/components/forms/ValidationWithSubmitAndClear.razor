@@ -1,64 +1,112 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
-<MForm @bind-Value="_valid" Model="_model" EnableValidation @ref="_form">
-    <MTextField @bind-Value="_model.Name"
-                Counter="10"
-                Label="Name"
-                required></MTextField>
-    <MTextField @bind-Value="_model.Email"
-                Label="E-mail"
-                required></MTextField>
-    <MSelect @bind-Value="_model.Item"
-             Items="@_items"
-             Label="Item"
-             ItemText="u => u"
-             ItemValue="u => u"></MSelect>
-    <MCheckbox @bind-Value="_model.Agree"
-               Label="Do you agree?"
-               required></MCheckbox>
-    <MButton Disabled="!_valid" Color="success" Class="mr-4" OnClick="Validate">Validate</MButton>
-    <MButton Color="error" Class="mr-4" OnClick="Reset">Reset Form</MButton>
-    <MButton Color="warning" OnClick="ResetValidation">Reset Validation</MButton>
-</MForm>
+<MRow>
+    <MCol Cols="12"
+          Md="6">
+        <MCard Title="@("Use @ref")">
+            <MCardText>
+                <MForm @bind-Value="_valid" Model="_model" @ref="_form">
+                    <MTextField @bind-Value="_model.Name"
+                                Counter="10"
+                                Label="Name"
+                                Filled>
+                    </MTextField>
+                    <MTextField @bind-Value="_model.Email"
+                                Label="E-mail"
+                                Filled>
+                    </MTextField>
+                    <MSelect @bind-Value="_model.Item"
+                             Items="@_items"
+                             Label="Item"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             Filled>
+                    </MSelect>
+                    <MCheckbox @bind-Value="_model.Agree"
+                               Label="Do you agree?">
+                    </MCheckbox>
+                </MForm>
+                <MButton Block Disabled="!_valid" Color="success" Class="mb-2" OnClick="@Validate">Validate</MButton>
+                <MButton Block Color="error" Class="mb-2" OnClick="@Reset">Reset Form</MButton>
+                <MButton Block Color="warning" OnClick="@ResetValidation">Reset Validation</MButton>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Cols="12"
+          Md="6">
+        <MCard Title="Use context">
+            <MCardText>
+                <MForm Model="_model2" Context="form">
+                    <MTextField @bind-Value="_model2.Name"
+                                Counter="10"
+                                Label="Name"
+                                Filled>
+                    </MTextField>
+                    <MTextField @bind-Value="_model2.Email"
+                                Label="E-mail"
+                                Filled>
+                    </MTextField>
+                    <MSelect @bind-Value="_model2.Item"
+                             Items="@_items"
+                             Label="Item"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             Filled>
+                    </MSelect>
+                    <MCheckbox @bind-Value="_model2.Agree"
+                               Label="Do you agree?">
+                    </MCheckbox>
+                    <MButton Block Disabled="@(!form.IsValid)" Color="success" Class="mb-2" OnClick="@(() => form.Validate())">Validate</MButton>
+                    <MButton Block Color="error" Class="mb-2" OnClick="@(() => form.Reset())">Reset Form</MButton>
+                    <MButton Block Color="warning" OnClick="@(() => form.ResetValidation())">Reset Validation</MButton>
+                </MForm>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
 
 @code {
+
     class Model
     {
         [Required]
         [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
-        public string Name { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        public string Item { get; set; }
+        public string? Name { get; set; }
+
+        [Required] [EmailAddress] public string? Email { get; set; }
+
+        [Required] public string? Item { get; set; }
+
         [RegularExpression("True", ErrorMessage = "You must agree to continue!")]
         public bool Agree { get; set; }
     }
+
     private bool _valid = true;
-    private MForm _form;
+    private MForm? _form;
     private Model _model = new();
+    private Model _model2 = new();
 
     List<string> _items = new()
-        {
-            "Item 1",
-            "Item 2",
-            "Item 3",
-            "Item 4"
-        };
+    {
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4"
+    };
 
     void Validate()
     {
-        _form.Validate();
+        _form!.Validate();
     }
 
     void Reset()
     {
-        _form.Reset();
+        _form!.Reset();
     }
 
     void ResetValidation()
     {
-        _form.ResetValidation();
+        _form!.ResetValidation();
     }
+
 }
