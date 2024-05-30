@@ -41,6 +41,8 @@ You can use the methods provided by `Context` in the content of **MForm**, or us
 
 Enable [I18n](/blazor/features/internationalization) to support multilingual validation messages.
 
+> Locale resources used in the example can be found in [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/en-US.json#L128).
+
 <masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
 #### Validate complex type with DataAnnotations 

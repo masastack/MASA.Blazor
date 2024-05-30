@@ -41,6 +41,8 @@ related:
 
 通过 `EnableI18n` 属性启用 [I18n](/blazor/features/internationalization) 以支持验证信息多语言。
 
+> 示例使用的本地话资源你能在 [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/zh-CN.json#L129) 中找到。
+
 <masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
 #### 通过 DataAnnotations 验证复杂类型
