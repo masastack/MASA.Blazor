@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@using Masa.Blazor.Extensions
+@inherits MasaComponentBase
 
 <CascadingValue Value="this" IsFixed>
     <div tabindex="@(Editable ? 0 : -1)"
-         class="@CssProvider.GetClass("step")"
-         style="@CssProvider.GetStyle("step")"
+         class="@GetClass()"
+         style="@GetStyle()"
          ripple="@Editable"
          id="@Id"
          @ref="@Ref"
@@ -19,7 +20,7 @@
 
     private RenderFragment GenStep() => __builder =>
     {
-        <span class="@CssProvider.GetClass("content")">
+        <span class="@_block.Element("step").AppendClasses(CssClassUtils.GetBackgroundColor(Color, !HasError && (Complete || _isActive)))">
             @GenStepContent()
         </span>
     };
@@ -49,7 +50,7 @@
 
     private RenderFragment GenLabel() => __builder =>
     {
-        <div class="@CssProvider.GetClass("label")">
+        <div class="@_block.Element("label")">
             @ChildContent
         </div>
     };

@@ -1,0 +1,16 @@
+﻿@namespace Masa.Blazor
+@typeparam TItem
+@typeparam TItemValue
+@typeparam TValue
+@inherits MSelect<TItem, TItemValue, TValue>
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenSelections()
+        => (HasSlot || Multiple) ? base.GenSelections() : GenInput();
+
+    protected override RenderFragment GenSelectList() => GenSelectList(InternalSearch, NoFilter || !IsSearching || FilteredItems.Count == 0);
+
+}

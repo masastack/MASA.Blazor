@@ -1,8 +1,8 @@
-﻿@using BlazorComponent.Web;
-@layout BaseLayout
+﻿@layout BaseLayout
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
 @inject NavigationManager NavigationManager
+@using Masa.Blazor.Extensions
 
 <NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL" />
@@ -61,8 +61,8 @@
 
     private async Task OnScroll()
     {
-        var window = await Js.InvokeAsync<Window>(JsInteropConstants.GetWindow);
-        var top = window.PageYOffset;
+        var pageYOffset = await Js.GetWindowPageYOffsetAsync();
+        var top = pageYOffset ?? 0;
 
         _showBackTop = top > 300;
 

@@ -1,0 +1,173 @@
+{
+  "$masaBlazor": {
+    "badge": "徽章",
+    "close": "关闭",
+    "copy": "复制",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "ok": "确认",
+    "search": "搜索",
+    "fold": "折叠",
+    "unfold": "展开",
+    "required": "必填。",
+    "dataIterator": {
+      "noResultsText": "没有符合条件的结果",
+      "loadingText": "加载中……"
+    },
+    "dataTable": {
+      "itemsPerPageText": "每页数目：",
+      "ariaLabel": {
+        "sortDescending": "：降序排列。",
+        "sortAscending": "：升序排列。",
+        "sortNone": "：未排序。",
+        "activateNone": "点击以移除排序。",
+        "activateDescending": "点击以降序排列。",
+        "activateAscending": "点击以升序排列。"
+      },
+      "sortBy": "排序方式",
+      "groupText": "分组"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "每页数目：",
+      "itemsPerPageAll": "全部",
+      "nextPage": "下一页",
+      "prevPage": "上一页",
+      "firstPage": "首页",
+      "lastPage": "尾页",
+      "pageText": "{0}-{1} 共 {2}"
+    },
+    "datePicker": {
+      "itemsSelected": "已选择 {0}",
+      "nextMonthAriaLabel": "下个月",
+      "nextYearAriaLabel": "明年",
+      "prevMonthAriaLabel": "前一个月",
+      "prevYearAriaLabel": "前一年"
+    },
+    "noDataText": "没有数据",
+    "carousel": {
+      "prev": "上一张",
+      "next": "下一张",
+      "ariaLabel": {
+        "delimiter": "第 {0} 张幻灯片（共 {1} 张）"
+      }
+    },
+    "calendar": {
+      "moreEvents": "还有 {0} 项"
+    },
+    "fileInput": {
+      "counter": "{0} 个文件",
+      "counterSize": "{0} 个文件（共 {1}）"
+    },
+    "timePicker": {
+      "am": "上午",
+      "pm": "下午"
+    },
+    "pagination": {
+      "ariaLabel": {
+        "wrapper": "分页导航",
+        "next": "下一页",
+        "previous": "上一页",
+        "page": "转到页面 {0}",
+        "currentPage": "当前页 {0}"
+      }
+    },
+    "rating": {
+      "ariaLabel": {
+        "icon": "评级 {0}（满分 {1}）"
+      }
+    },
+    "pageTabs": {
+      "reloadTab": "重新加载",
+      "closeTabsToTheLeft": "关闭左侧",
+      "closeTabsToTheRight": "关闭右侧",
+      "closeOtherTabs": "关闭其他",
+      "closeTab": "关闭标签页",
+      "closeTabConfirm": "您确定要关闭标签页（{0}）吗？"
+    },
+    "pullRefresh": {
+      "pullingText": "下拉刷新",
+      "canReleaseText": "松开刷新",
+      "loadingText": "正在加载...",
+      "successText": "刷新成功"
+    },
+    "cron": {
+      "period": {
+        "second": "每秒",
+        "minute": "每分钟",
+        "hour": "每小时",
+        "day": "每日",
+        "month": "每月",
+        "week": "每周",
+        "year": "每年"
+      },
+      "fromTo": "周期从{0}{2}到{1}{2}",
+      "startFromAndExec":"从{0}{2}开始，每{1}{2}执行一次",
+      "weekDayOfWeek": "第{0}周的{1}",
+      "nearestWorkDayPerMonth": "每月{0}号最近的工作日",
+      "lastDayOfPerMonth": "每月最后一天",
+      "lastWeekDayOfPerMonth": "每月最后一个{0}",
+      "specify": "指定",
+      "notSpecify": "不指定",
+      "exception": {
+        "LNotSupportMonth": "L/LW 不能在月份中使用",
+        "LNotSupportWeek": "L/LW 不能在星期中使用",
+        "NotSupportMutilSpecifynthWeekDay": "不支持指定多个星期几",
+        "CannotSpecifyDayAndWeek": "不支持同时指定日和星期",
+        "InvalidMonthValue": "错误的月份, 值为: {0}",
+        "InvalidWeekdayValue": "错误的星期, 值为: {0}",
+        "InvalidnthDayOfWeek": "'#'后面的数字只能是1-5",
+        "InvalidEveryDayOfWeek": "'/'后面的数字只能是1-5",
+        "IllegalCharactersPosition": "不合法的字符, 字符位置: {0}",
+        "IllegalCharactersAfer?": "在'?'后面的字符不合法: {0}",
+        "IllegalCharactersAfer/": "在'/'后面的字符不合法: {0}",
+        "Characters?OnlySupport": "'?' 仅支持日或者星期",
+        "MustFollowByInteger": "'/' 后面的值只能是正整数",
+        "InvalidMinuteAndSecond": "分钟和秒的值只能在0-59之间",
+        "InvalidHour": "小时的值只能在0-23之间",
+        "InvalidDay": "日的值只能在1-31之间",
+        "InvalidMonth": "月份的值只能在1-12之间",
+        "InvalidWeekday": "星期的值只能在1-7之间",
+        "InvalidStartYear": "开始年份必须小于结束年份",
+        "OptionNotValid": "{0} 选项在这个位置不合法. (位置={1})",
+        "InvalidNthOfWeek": "第几周的值只能在1-5之间",
+        "IncrementCannotLargeThen": "值不能大于{0}, 当前值为:{1}",
+        "WOptionLargeThen31": "'W' 选项对于大于 31 的值（一个月中的最大天数）没有意义"
+      }
+    },
+    "Period": {
+      "Second": "秒",
+      "Minute": "分钟",
+      "Hour": "小时",
+      "Day": "日",
+      "Month": "月",
+      "Week": "星期",
+      "Year": "年"
+    },
+    "weekNumber": {
+      "First": "1",
+      "Second": "2",
+      "Third": "3",
+      "Fourth": "4",
+      "Fiveth": "5"
+    },
+    "dayOfWeek": {
+      "Sunday": "日",
+      "Monday": "一",
+      "Tuesday": "二",
+      "Wednesday": "三",
+      "Thursday": "四",
+      "Friday": "五",
+      "Saturday":  "六"
+    },
+    "mobileCascader": {
+      "pleaseSelect": "请选择"
+    },
+    "infiniteScroll": {
+      "emptyText": "没有更多了",
+      "errorText": "加载失败",
+      "loadingText": "加载中...",
+      "loadMoreText": "加载更多"
+    }
+  }
+}

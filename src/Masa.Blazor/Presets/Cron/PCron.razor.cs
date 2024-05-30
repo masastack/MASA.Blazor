@@ -55,7 +55,8 @@ public partial class PCron
 
     private readonly List<CronItemModel> _cronItems = new();
 
-    private Block Block => new("m-cron");
+    private static Block _block = new("m-cron");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override void OnInitialized()
     {

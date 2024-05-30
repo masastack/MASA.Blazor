@@ -1,5 +1,6 @@
 ﻿@namespace Masa.Blazor.Components.DataTable.Header
-@inherits BDomComponentBase
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
 
 @code {
 
@@ -72,85 +73,131 @@
         }
     };
 
-    protected override void SetComponentCss()
+    protected static Block Block = new("m-data-table-header");
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .UseBem("m-data-table-header",
-                css => css.Modifiers(m => m.Modifier("mobile", IsMobile)))
-            .Apply("header",
-                cssBuilder =>
-                {
-                    var header = (DataTableHeader?)cssBuilder.Data;
-                    if (header is null) return;
+        yield return _modifierBuilder.Add("mobile", IsMobile).Build();
+    }
 
-                    if (!DisableSort && header.Sortable)
-                    {
-                        var sortIndex = Options.SortBy.IndexOf(header.Value);
-                        var beingSorted = sortIndex >= 0;
-                        var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
+    protected string GetHeaderClass(DataTableHeader header)
+    {
+        StringBuilder stringBuilder = new();
 
-                        cssBuilder
-                            .Add("sortable")
-                            .AddIf("m-data-table__divider", () => header.Divider)
-                            .AddIf("active", () => beingSorted)
-                            .AddIf(() => isDesc ? "desc" : "asc", () => beingSorted);
-                    }
+        if (!DisableSort && header.Sortable)
+        {
+            var sortIndex = Options.SortBy.IndexOf(header.Value);
+            var beingSorted = sortIndex >= 0;
+            var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
 
-                    cssBuilder
-                        .Add($"text-{header.Align.ToString().ToLower()}")
-                        .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
-                        .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
-                        .AddIf("first-fixed-column", () => header.IsFixedShadowColumn)
-                        .AddIf("m-data-table__column--ellipsis", () => header.HasEllipsis)
-                        .Add(header.Class);
-                },
-                styleBuilder =>
-                {
-                    var header = (DataTableHeader?)styleBuilder.Data;
-                    if (header is null) return;
-
-                    styleBuilder
-                        .AddWidth(header.Width)
-                        .AddMinWidth(header.Width);
-
-                    if (header.Fixed == DataTableFixed.Right)
-                    {
-                        var count = Headers.Count;
-                        var lastIndex = Headers.LastIndexOf(header);
-                        if (lastIndex > -1)
-                        {
-                            var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
-                            styleBuilder.Add($"{(MasaBlazor.RTL ? "left" : "right")}: {widths}px");
-                        }
-                    }
-                    else if (header.Fixed == DataTableFixed.Left)
-                    {
-                        var index = Headers.IndexOf(header);
-                        if (index > -1)
-                        {
-                            var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
-                            styleBuilder.Add($"{(MasaBlazor.RTL ? "right" : "left")}: {widths}px");
-                        }
-                    }
-                })
-            .Element("sort-badge")
-            .Element("col-resize")
-            .Extend("mobile__wrapper")
-            .Extend("mobile__select")
-            .Apply("mobile__select-chips", cssBuilder =>
+            stringBuilder.Append("sortable");
+            if (header.Divider)
             {
-                var data = (DataTableHeader?)cssBuilder.Data;
-                if (data is null || (data.Text is null && data.Value is null)) return;
+                stringBuilder.Append(' ');
+                stringBuilder.Append(" m-data-table__divider");
+            }
 
-                var sortIndex = Options.SortBy.IndexOf(data.Value);
-                var beingSorted = sortIndex >= 0;
-                var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
+            if (beingSorted)
+            {
+                stringBuilder.Append(' ');
+                stringBuilder.Append("active");
+            }
 
-                cssBuilder.Add("m-chip__close sortable")
-                          .AddIf("active", () => beingSorted)
-                          .AddIf("asc", () => beingSorted && !isDesc)
-                          .AddIf("desc", () => beingSorted && isDesc);
-            });
+            if (beingSorted)
+            {
+                stringBuilder.Append(' ');
+                stringBuilder.Append(isDesc ? "desc" : "asc");
+            }
+        }
+
+        stringBuilder.Append(' ');
+        stringBuilder.Append($"text-{header.Align.ToString().ToLower()}");
+
+        if (header.Fixed == DataTableFixed.Right)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--fixed-right");
+        }
+
+        if (header.Fixed == DataTableFixed.Left)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--fixed-left");
+        }
+
+        if (header.IsFixedShadowColumn)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("first-fixed-column");
+        }
+
+        if (header.HasEllipsis)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--ellipsis");
+        }
+
+        stringBuilder.Append(' ');
+        stringBuilder.Append(header.Class);
+
+        return stringBuilder.ToString();
+    }
+
+    protected string GetHeaderStyle(DataTableHeader header)
+    {
+        var styleBuilder = StyleBuilder.Create()
+            .AddWidth(header.Width)
+            .AddMinWidth(header.Width);
+
+        if (header.Fixed == DataTableFixed.Right)
+        {
+            var count = Headers.Count;
+            var lastIndex = Headers.LastIndexOf(header);
+            if (lastIndex > -1)
+            {
+                var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                styleBuilder.Add(MasaBlazor.RTL ? "left" : "right", $"{widths}px");
+            }
+        }
+        else if (header.Fixed == DataTableFixed.Left)
+        {
+            var index = Headers.IndexOf(header);
+            if (index > -1)
+            {
+                var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                styleBuilder.Add(MasaBlazor.RTL ? "right" : "left", $"{widths}px");
+            }
+        }
+
+        return styleBuilder.Build();
+    }
+
+    protected string? GetSelectChipsClass(DataTableHeader header)
+    {
+        if (header.Text is null && header.Value is null) return null;
+
+        var sortIndex = Options.SortBy.IndexOf(header.Value);
+        var beingSorted = sortIndex >= 0;
+        var isDesc = Options.SortDesc.ElementAtOrDefault(sortIndex);
+
+        StringBuilder stringBuilder = new("m-chip__close sortable");
+        if (beingSorted)
+        {
+            stringBuilder.Append(" active");
+        }
+
+        if (beingSorted && !isDesc)
+        {
+            stringBuilder.Append(" asc");
+        }
+
+        if (beingSorted && isDesc)
+        {
+            stringBuilder.Append(" desc");
+        }
+
+        return stringBuilder.ToString();
     }
 
 }

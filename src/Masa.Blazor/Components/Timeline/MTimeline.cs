@@ -25,15 +25,17 @@
         }
 #endif
 
-        private Block _block = new("m-timeline");
+        private static Block _block = new("m-timeline");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(AlignTop)
-                .And(Dense)
-                .And(Reverse)
+            yield return _modifierBuilder
+                .Add(AlignTop)
+                .Add(Dense)
+                .Add(Reverse)
                 .AddTheme(IsDark, IndependentTheme)
-                .GenerateCssClasses();
+                .Build();
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)

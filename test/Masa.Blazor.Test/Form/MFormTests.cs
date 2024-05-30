@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Form
             {
                 props.Add(form => form.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-form");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Form
             {
                 props.Add(form => form.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-form");
 
             // Assert

@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Popup.Components;
 
-public partial class EnqueuedSnackbars : BComponentBase
+public partial class EnqueuedSnackbars : MasaComponentBase
 {
     [Inject]
     private IPopupService? PopupService { get; set; }

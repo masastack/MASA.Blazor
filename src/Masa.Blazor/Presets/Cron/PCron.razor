@@ -1,8 +1,8 @@
 ﻿@namespace Masa.Blazor.Presets
 @using Masa.Blazor.Presets.Cron
 
-<div class="@Block.Modifier(Outlined).AddTheme(IsDark).AddClass(Class)"
-     style="@(new StyleBuilder().AddMinHeight(MinHeight).Add(Style).GetStyle())">
+<div class="@_modifierBuilder.Add(Outlined).AddTheme(IsDark).AddClass(Class)"
+     style="@(new StyleBuilder().AddMinHeight(MinHeight).Add(Style).ToString())">
     <CascadingValue Value="IsDark" Name="IsDark">
         <MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
             @foreach (var item in _cronItems)

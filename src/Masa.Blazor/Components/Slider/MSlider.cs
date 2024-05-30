@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Slider;
+
+namespace Masa.Blazor;
 
 #if NET6_0
 public class MSlider<TValue> : MSliderBase<TValue, TValue>

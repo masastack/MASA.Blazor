@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@using Masa.Blazor.Extensions
+@inherits MasaComponentBase
 
 <CascadingValue Value="this" IsFixed="true">
     <CascadingValue Value="IsDark" Name="IsDark">
-        <div class="@CssProvider.GetClass()"
-             style="@CssProvider.GetStyle()"
+        <div class="@GetClass()"
+             style="@GetStyle()"
              id="@Id"
              @ref="@Ref"
              @attributes="@Attributes">
@@ -16,12 +17,17 @@
             }
             else
             {
-                <div class="@CssProvider.GetClass("wrapper")"
-                     style="@CssProvider.GetStyle("wrapper")"
+                var css = _wrapper.AppendClasses(
+                    ("scrolled-to-left", HasFixed && _scrollState == 0),
+                    ("scrolling", HasFixed && _scrollState == 1),
+                    ("scrolled-to-right", HasFixed && _scrollState == 2)
+                );
+
+                <div class="@css"
+                     style="@CssStyleUtils.GetHeight(Height)"
                      @onscroll="HandleOnScrollAsync"
                      @ref="@WrapperElement">
-                    <table class="@CssProvider.GetClass("table")"
-                           style="@CssProvider.GetStyle("table")">
+                    <table style="@CssStyleUtils.GetWidth(Width)">
                         @ChildContent
                     </table>
                 </div>

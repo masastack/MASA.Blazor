@@ -145,15 +145,12 @@ public partial class MDataIterator<TItem> : MData<TItem>
                 }
             });
     }
+    
+    private static Block _block = new("m-data-iterator");
 
-    protected override void SetComponentCss()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .Apply(cssBuilder =>
-            {
-                cssBuilder
-                    .Add("m-data-iterator");
-            });
+        yield return _block.Name;
     }
 
     public bool IsExpanded(TItem item)

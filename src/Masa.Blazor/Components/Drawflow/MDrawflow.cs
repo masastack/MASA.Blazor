@@ -21,12 +21,14 @@ public class MDrawflow : MDrop, IAsyncDisposable
     [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
 
     [Parameter] public EventCallback OnImport { get; set; }
+    
+    private readonly ModifierBuilder _modifierBuilder = new Block("m-drawflow").CreateModifierBuilder();
 
     private DrawflowEditorMode? _prevMode;
     private IDrawflowJSObjectReferenceProxy? _drawflowProxy;
     private DotNetObjectReference<object>? _interopHandleReference;
 
-    protected override string ClassString => new Block("m-drawflow").Modifier(Mode, "mode").AddClass(base.ClassString).Build();
+    protected override string ClassString => _modifierBuilder.Add(Mode).AddClass(base.ClassString).Build();
 
     protected override async Task OnParametersSetAsync()
     {

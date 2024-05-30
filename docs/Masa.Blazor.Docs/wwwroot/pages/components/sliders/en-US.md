@@ -81,23 +81,21 @@ Tick marks represent predetermined values to which the user can move the slider.
 
 <masa-example file="Examples.components.sliders.Validation"></masa-example>
 
-<example file="" />
-
 #### VerticalSliders
 
 You can use the `Vertical` prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.
 
 <masa-example file="Examples.components.sliders.VerticalSliders"></masa-example>
 
-#### Contents
+### Contents
 
-### AppendAndPrepend
+#### Append and prepend
 
 Use slots such as `PrependContent` and `AppendContent` to easily customize the **MSlider** to fit any situation.
 
 <masa-example file="Examples.components.sliders.AppendAndPrepend"></masa-example>
 
-### AppendTextField
+#### Append TextField
 
 Sliders can be combined with other components in its **AppendContent**, such as **MTextField** , to add additional functionality to the component.
 

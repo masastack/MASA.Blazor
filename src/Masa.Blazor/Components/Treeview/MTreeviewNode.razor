@@ -1,4 +1,4 @@
-﻿@namespace Masa.Blazor
+﻿@namespace Masa.Blazor.Components.Treeview
 @inherits MasaComponentBase
 @typeparam TItem
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
@@ -15,14 +15,14 @@
 
     private RenderFragment GenNode() => __builder =>
     {
-        <div class="@_block.Element("root").Modifier("active", IsActive).AddClass(ActiveClass, IsActive).AddTextColor(Color, ActiveClass is null && IsActive)"
+        <div class="@_rootModifierBuilder.Add("active", IsActive).AddClass(ActiveClass, IsActive).AddTextColor(Color, ActiveClass is null && IsActive)"
              style="@(StyleBuilder.Create().AddTextColor(Color, () => IsActive).Build())"
              @onclick="HandleOnClick">
             @GenLevel(Level)
 
             @if (HasChildren)
             {
-                <MIcon Class="@_block.Element("toggle").Modifier("open", IsOpen).And("loading", IsLoading).Build()"
+                <MIcon Class="@_toggleModifierBuilder.Add("open", IsOpen).Add("loading", IsLoading).Build()"
                        OnClick="@HandleOnToggleAsync"
                        OnClickStopPropagation>
                     @(IsLoading ? LoadingIcon : ExpandIcon)
@@ -35,7 +35,7 @@
 
             @if (Selectable)
             {
-                <MIcon Class="@_block.Element("checkbox").Build()"
+                <MIcon Class="@_block.Element("checkbox").Name"
                        Color="@((IsSelected || IsIndeterminate) ? SelectedColor : null)"
                        Disabled="@Disabled"
                        OnClick="@HandleOnCheckAsync"
@@ -52,18 +52,18 @@
                 @RenderFragments.RenderIfNotNull(
                     PrependContent,
                     context,
-                    css: _block.Element("prepend").Build())
+                    css: _block.Element("prepend").Name)
 
                 @RenderFragments.RenderFragmentOrText(
                     LabelContent,
                     context,
                     Text,
-                    css: _block.Element("label").Build())
+                    css: _block.Element("label").Name)
 
                 @RenderFragments.RenderIfNotNull(
                     AppendContent,
                     context,
-                    css: _block.Element("append").Build())
+                    css: _block.Element("append").Name)
             </div>
         </div>
     };

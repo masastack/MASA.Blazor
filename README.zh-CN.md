@@ -8,7 +8,7 @@
 
 <div align="center">
 
-一套基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库
+一个遵循 Material Design 设计规范的 Blazor 组件库。
 
 [![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
 [![.NET](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
@@ -21,7 +21,7 @@
 
 ## 🚀 MASA Blazor是什么？
 
-基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，最大的减少开发者的时间成本。缩短开发周期提高开发效率。并提供一套Web解决方案示例 - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) 有多种常见场景和预设布局等精彩内容。
+一个遵循 Material Design 设计规范的 Blazor 组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，最大的减少开发者的时间成本。缩短开发周期提高开发效率。并提供一套Web解决方案示例 - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) 有多种常见场景和预设布局等精彩内容。
 
 ## ❓ 为什么选择MASA Blazor？
 
@@ -111,7 +111,7 @@ dotnet run
 感谢所有为本项目做出过贡献的朋友。
 
 <a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
+    <img src="https://contrib.rocks/image?repo=masastack/Masa.Blazor" />
 </a>
 
 ## 💬 交流

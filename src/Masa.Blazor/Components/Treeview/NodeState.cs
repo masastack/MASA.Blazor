@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor;
+﻿namespace Masa.Blazor.Components.Treeview;
 
 public class NodeState<TItem, TKey>
 {
@@ -15,7 +15,7 @@ public class NodeState<TItem, TKey>
 
     public TKey? Parent { get; }
 
-    public ITreeviewNode<TItem, TKey>? Node { get; set; }
+    public MTreeviewNode<TItem, TKey>? Node { get; set; }
 
     public bool IsActive { get; set; }
 

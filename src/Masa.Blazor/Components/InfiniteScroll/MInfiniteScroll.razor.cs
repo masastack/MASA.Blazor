@@ -1,6 +1,7 @@
-﻿namespace Masa.Blazor;
+﻿
+namespace Masa.Blazor;
 
-public partial class MInfiniteScroll : BDomComponentBase
+public partial class MInfiniteScroll : MasaComponentBase
 {
     [Inject] protected I18n I18n { get; set; } = null!;
 
@@ -106,10 +107,9 @@ public partial class MInfiniteScroll : BDomComponentBase
         await ScrollCallback();
     }
 
-    protected override void SetComponentCss()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .Apply(cssBuilder => { cssBuilder.Add("m-infinite-scroll"); });
+        yield return "m-infinite-scroll";
     }
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
@@ -159,7 +159,7 @@ public partial class MInfiniteScroll : BDomComponentBase
         }
 
         // OPTIMIZE: Combine scroll event and the following js interop.
-        var exceeded = await JsInvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
+        var exceeded = await Js.InvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
             Parent,
             Threshold.ToDouble());
 

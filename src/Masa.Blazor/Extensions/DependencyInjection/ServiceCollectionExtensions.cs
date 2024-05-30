@@ -1,8 +1,14 @@
 ﻿using Masa.Blazor;
 using Masa.Blazor.Components.Drawflow;
+using Masa.Blazor.Components.ErrorHandler;
+using Masa.Blazor.Components.Input;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
+using Masa.Blazor.Components.Transition;
 using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.JSModules;
+using Masa.Blazor.Mixins.Activatable;
+using Masa.Blazor.Popup;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -18,7 +24,6 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        services.AddBlazorComponent(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(masaBlazorServiceLifetime: masaBlazorServiceLifetime);
     }
 
@@ -35,7 +40,6 @@ public static class ServiceCollectionExtensions
         var options = new MasaBlazorOptions();
         optionsAction.Invoke(options);
 
-        services.AddBlazorComponent(o => { o.Locale = options.Locale; }, masaBlazorServiceLifetime);
         return services.AddMasaBlazorInternal(optionsAction, masaBlazorServiceLifetime);
     }
 
@@ -43,6 +47,9 @@ public static class ServiceCollectionExtensions
         Action<MasaBlazorOptions>? optionsAction = null,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
+        services.TryAddScoped<LocalStorage>();
+        services.AddI18n();
+        
         services.TryAdd<Application>(masaBlazorServiceLifetime);
         services.TryAdd(ServiceDescriptor.Describe(typeof(MasaBlazor), sp =>
         {
@@ -60,10 +67,10 @@ public static class ServiceCollectionExtensions
                 options.Defaults);
         }, masaBlazorServiceLifetime));
 
+        services.TryAdd<IPopupProvider, PopupProvider>(masaBlazorServiceLifetime);
         services.TryAdd<IPopupService, PopupService>(masaBlazorServiceLifetime);
 
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
-        services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
         services.TryAddSingleton<InternalHttpClient>();
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MonacoEditorJSModule>();
@@ -77,6 +84,12 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
+        
+        services.TryAddTransient<ActivatableJsModule>();
+        services.TryAddTransient<InputJSModule>();
+        services.TryAddTransient<TransitionJSModule>();
+        services.TryAddTransient<OutsideClickJSModule>();
+        services.TryAddTransient<ScrollStrategyJSModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
         services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));

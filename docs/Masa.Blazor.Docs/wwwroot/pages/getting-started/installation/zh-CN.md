@@ -99,7 +99,7 @@ dotnet add package Masa.Blazor
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 
 <script src="_framework/blazor.server.js"></script>
-<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+<script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 ```
 :::
 ::: code-group-item WebAssembly
@@ -110,7 +110,7 @@ dotnet add package Masa.Blazor
 <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
 
 <script src="_framework/blazor.webassembly.js"></script>
-<script src="_content/BlazorComponent/js/blazor-component.js"></script>
+<script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 ```
 :::
 ::::
@@ -118,13 +118,11 @@ dotnet add package Masa.Blazor
 ### 添加全局 using
 
 ```razor _Imports.razor
-@using BlazorComponent
 @using Masa.Blazor
 @using Masa.Blazor.Presets
 ```
 
 ```csharp _Imports.cs
-global using BlazorComponent;
 global using Masa.Blazor;
 global using Masa.Blazor.Presets;
 ```
@@ -197,13 +195,11 @@ dotnet add package Masa.Blazor
 #### 添加全局 using
 
 ```razor _Imports.razor
-@using BlazorComponent
 @using Masa.Blazor
 @using Masa.Blazor.Presets
 ```
 
 ```csharp _Imports.cs
-global using BlazorComponent;
 global using Masa.Blazor;
 global using Masa.Blazor.Presets;
 ```
@@ -228,7 +224,7 @@ global using Masa.Blazor.Presets;
 <body>
     <Routes @rendermode="InteractiveAuto" />
     <script src="_framework/blazor.web.js"></script>
-    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 </body>
 ```
 :::
@@ -249,7 +245,7 @@ global using Masa.Blazor.Presets;
 <body>
     <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
-    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 </body>
 ```
 :::
@@ -270,7 +266,7 @@ global using Masa.Blazor.Presets;
 <body>
     <Routes @rendermode="InteractiveWebAssembly" />
     <script src="_framework/blazor.web.js"></script>
-    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 </body>
 ```
 :::
@@ -368,13 +364,11 @@ dotnet add package Masa.Blazor
 #### 添加全局 using
 
 ```razor _Imports.razor
-@using BlazorComponent
 @using Masa.Blazor
 @using Masa.Blazor.Presets
 ```
 
 ```csharp _Imports.cs
-global using BlazorComponent;
 global using Masa.Blazor;
 global using Masa.Blazor.Presets;
 ```
@@ -398,7 +392,7 @@ global using Masa.Blazor.Presets;
 <body>
     <Routes />
     <script src="_framework/blazor.web.js"></script>
-    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
 </body>
 ```
 

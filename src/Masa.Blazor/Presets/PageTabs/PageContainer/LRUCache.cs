@@ -91,7 +91,10 @@ public class LRUCache<TKey, TValue> : IEnumerable<TValue> where TKey : notnull
 
     public void RemoveAll(IEnumerable<TKey> keys)
     {
-        keys.ForEach(Remove);
+        foreach (var key in Keys)
+        {
+            Remove(key);
+        }
     }
 
     public void Clear()

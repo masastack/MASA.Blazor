@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public abstract class MData<TItem> : BDomComponentBase
+public abstract class MData<TItem> : MasaComponentBase
 {
     [Parameter]
     [EditorRequired]

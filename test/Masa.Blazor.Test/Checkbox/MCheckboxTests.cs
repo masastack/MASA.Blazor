@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-input--dense");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(breadcrumbs => breadcrumbs.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-input--is-disabled");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Error, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(alert => alert.ErrorCount, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorCountClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.HideDetails, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Indeterminate, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIndeterminateClass = classes.Contains("m-input--indeterminate");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.PersistentHint, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasIndeterminateClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Ripple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRippleClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Success, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.ValidateOnBlur, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-input--checkbox");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.Checkbox
             {
                 props.Add(checkbox => checkbox.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-input--checkbox");
 
             // Assert

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.DataTable;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+
+namespace Masa.Blazor.Components.DataTable;
 
 public partial class MDataTableRow<TItem>
 {
@@ -34,54 +36,91 @@ public partial class MDataTableRow<TItem>
 
     public bool IsStripe => Stripe && Index % 2 == 1;
 
-    protected override void SetComponentCss()
+    protected override IEnumerable<string?> BuildComponentClass()
     {
-        CssProvider
-            .Apply(cssBuilder =>
+        if (IsSelected?.Invoke(Item) is true)
+        {
+            yield return "m-data-table__selected";
+        }
+        
+        if (IsExpanded?.Invoke(Item) is true)
+        {
+            yield return "m-data-table__expanded m-data-table__expanded__row";
+        }
+        
+        if (IsStripe)
+        {
+            yield return "stripe";
+        }
+
+        yield return ItemClass?.Invoke(Item);
+    }
+
+    private string GetCellClass(DataTableHeader header)
+    {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append($"text-{header.Align.ToString().ToLowerInvariant()}");
+
+        if (header.Divider)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__divider");
+        }
+
+        if (header.Fixed == DataTableFixed.Right)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--fixed-right");
+        }
+
+        if (header.Fixed == DataTableFixed.Left)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--fixed-left");
+        }
+
+        if (header.IsFixedShadowColumn)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("first-fixed-column");
+        }
+
+        if (header.HasEllipsis)
+        {
+            stringBuilder.Append(' ');
+            stringBuilder.Append("m-data-table__column--ellipsis");
+        }
+
+        stringBuilder.Append(' ');
+        stringBuilder.Append(header.Class);
+        
+        return stringBuilder.ToString();
+    }
+    
+    private string GetCellStyle(DataTableHeader<TItem> header)
+    {
+        var styleBuilder = StyleBuilder.Create();
+
+        if (header.Fixed == DataTableFixed.Right)
+        {
+            var count = Headers.Count;
+            var lastIndex = Headers.LastIndexOf(header);
+            if (lastIndex > -1)
             {
-                cssBuilder
-                    .AddIf("m-data-table__selected", () => IsSelected != null && IsSelected(Item))
-                    .AddIf("m-data-table__expanded m-data-table__expanded__row", () => IsExpanded != null && IsExpanded(Item))
-                    .AddIf("stripe", () => IsStripe)
-                    .Add(() => ItemClass?.Invoke(Item) ?? "");
-            })
-            .Apply("cell", cssBuilder =>
+                var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                styleBuilder.Add(MasaBlazor.RTL ? "left" : "right", $"{widths}px");
+            }
+        }
+        else if (header.Fixed == DataTableFixed.Left)
+        {
+            var index = Headers.IndexOf(header);
+            if (index > -1)
             {
-                if (cssBuilder.Data is DataTableHeader header)
-                {
-                    cssBuilder
-                        .Add($"text-{header.Align.ToString().ToLower()}")
-                        .Add(header.CellClass)
-                        .AddIf("m-data-table__divider", () => header.Divider)
-                        .AddIf("m-data-table__column--fixed-right", () => header.Fixed == DataTableFixed.Right)
-                        .AddIf("m-data-table__column--fixed-left", () => header.Fixed == DataTableFixed.Left)
-                        .AddIf("first-fixed-column", () => header.IsFixedShadowColumn)
-                        .AddIf("m-data-table__column--ellipsis", () => header.HasEllipsis);
-                }
-            },  styleBuilder =>
-            {
-                if (styleBuilder.Data is DataTableHeader<TItem> header)
-                {
-                    if (header.Fixed == DataTableFixed.Right)
-                    {
-                        var count = Headers.Count;
-                        var lastIndex = Headers.LastIndexOf(header);
-                        if (lastIndex > -1)
-                        {
-                            var widths = Headers.TakeLast(count - lastIndex - 1).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
-                            styleBuilder.Add($"{(MasaBlazor.RTL ? "left" : "right")}: {widths}px");
-                        }
-                    }
-                    else if (header.Fixed == DataTableFixed.Left)
-                    {
-                        var index = Headers.IndexOf(header);
-                        if (index > -1)
-                        {
-                            var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
-                            styleBuilder.Add($"{(MasaBlazor.RTL ? "right" : "left")}: {widths}px");
-                        }
-                    }
-                }
-            });
+                var widths = Headers.Take(index).Sum(u => u.Width?.ToDouble() ?? u.RealWidth);
+                styleBuilder.Add(MasaBlazor.RTL ? "right" : "left", $"{widths}px");
+            }
+        }
+
+        return styleBuilder.Build();
     }
 }

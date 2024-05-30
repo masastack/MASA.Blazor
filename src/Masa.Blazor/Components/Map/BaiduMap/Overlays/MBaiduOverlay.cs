@@ -1,8 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace Masa.Blazor
 {
-    public abstract class BaiduOverlayBase : BDomComponentBase
+    public abstract class BaiduOverlayBase : MasaComponentBase
     {
         [JsonIgnore]
         internal IJSObjectReference? OverlayJSObjectRef { get; set; }

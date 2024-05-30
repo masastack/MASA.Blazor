@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Subheader
             {
                 props.Add(subheader => subheader.Inset, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasInsetClass = classes.Contains("m-subheader--inset");
             // Assert
             Assert.IsTrue(hasInsetClass);
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Subheader
             {
                 props.Add(subheader => subheader.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Subheader
             {
                 props.Add(subheader => subheader.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert

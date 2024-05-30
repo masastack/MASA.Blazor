@@ -73,12 +73,6 @@ related:
 
 <masa-example file="Examples.components.date_pickers_month.DialogAndMenu"></masa-example>
 
-#### 国际化(TODO)
-
-日期选择器通过JavaScript日期对象支持国际化。使用区域设置道具指定BCP 47语言标记，然后使用每周第一天属性设置每周第一天。
-
-<masa-example file="Examples.components.date_pickers_month.Internationalization"></masa-example>
-
 #### 方向
 
 使用 `Orientation`属性，控制日期选择器两种方向变化，纵向（默认）和横向。

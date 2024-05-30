@@ -1,11 +1,11 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits Masa.Blazor.Core.MasaComponentBase
 
 <div id="@Id"
-     class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
-     @ref="Ref">
+     class="@GetClass()"
+     style="@GetStyle()"
+     @ref="@Ref"
+     @attributes="@Attributes">
     @ChildContent
-    <div style="@CssProvider.GetStyle("content")">
-    </div>
+    <div style="@GetContentStyle()"></div>
 </div>

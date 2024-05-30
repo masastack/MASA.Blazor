@@ -1,0 +1,53 @@
+﻿@namespace Masa.Blazor
+@inherits MGroupItem<Masa.Blazor.Components.ItemGroup.MItemGroupBase>
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <MElement Tag="@Tag"
+              Class="@GetClass()"
+              Style="@GetStyle()"
+              ReferenceCaptureAction="r => Ref = r"
+              @onclick="@HandleOnClick"
+              __internal_stopPropagation_onclick="@OnClickStopPropagation"
+              __internal_preventDefault_onclick="@OnClickPreventDefault"
+              @attributes="@Attributes">
+        <div class="@_block.Element("content")">
+            @if (Filter)
+            {
+                @GenFilter()
+            }
+
+            @ChildContent
+
+            @if (Close)
+            {
+                @GenClose()
+            }
+        </div>
+    </MElement>
+</CascadingValue>
+
+@code {
+
+    @*TODO: 240516测试一下，之前是ShowTransitionElement*@
+    private RenderFragment GenFilter() => __builder =>
+    {
+        <ExpandXTransition>
+            <MIcon If="@IsActive"
+                   Class="@_block.Element("filter").Name"
+                   Icon="@FilterIcon" Left/>
+        </ExpandXTransition>
+    };
+
+    private RenderFragment GenClose() => __builder =>
+    {
+        <MIcon Class="@_block.Element("close").Name"
+               Icon="@CloseIcon"
+               OnClick="@OnCloseClick"
+               OnClickPreventDefault
+               OnClickStopPropagation
+               Right
+               Size="18"
+               aria-label="@CloseLabel"/>
+    };
+
+}

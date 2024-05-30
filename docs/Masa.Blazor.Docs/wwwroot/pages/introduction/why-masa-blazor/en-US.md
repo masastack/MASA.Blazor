@@ -19,7 +19,7 @@ Using .NET for client-side web development provides the following advantages:
 
 ## MASA Blazor What is it?
 
-Provide a standard basic component library based on Material Design design and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, shorten the development cycle, improve development efficiency, and provide a complete set of Web solutions-MASA Blazor Pro.
+Provide a standard basic component library based on Material Design. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, shorten the development cycle, improve development efficiency, and provide a complete set of Web solutions-MASA Blazor Pro.
 
 ## Why choose MASA Blazor?
 

@@ -186,9 +186,12 @@ public partial class PPageContainer : PatternPathComponentBase
         }
 
         // if the previous path is excluded or not included, remove it from the PatternPaths
-        if (_previousPath is not null
-            && (_cachedExcludePatternRegexes.Any(r => r.IsMatch(_previousPath))
-                || !_cachedIncludePatternRegexes.Any(r => r.IsMatch(_previousPath))))
+        if (_previousPath is not null && (
+                (_cachedExcludePatternRegexes.Count > 0 &&
+                 _cachedExcludePatternRegexes.Any(r => r.IsMatch(_previousPath))) ||
+                (_cachedIncludePatternRegexes.Count > 0 &&
+                 !_cachedIncludePatternRegexes.Any(r => r.IsMatch(_previousPath))))
+           )
         {
             var previousPatternPath = _patternPaths.FirstOrDefault(p => p.AbsolutePath == _previousPath);
             if (previousPatternPath is not null)

@@ -194,7 +194,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
 
     public bool IsMobile => MobileProvider?.IsMobile ?? false;
 
-    public Dictionary<string, object?> ColspanAttrs => new()
+    public Dictionary<string, object> ColspanAttrs => new()
     {
         { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
     };
@@ -237,7 +237,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
                 {
                     var @ref = RefBack.Current;
 
-                    await JsInvokeAsync(JsInteropConstants.ResizableDataTable, @ref);
+                    await Js.InvokeVoidAsync(JsInteropConstants.ResizableDataTable, @ref);
                 }, () => RefBack.Current.Context is null);
             }
         }
@@ -252,14 +252,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
             {
                 if (ResizeMode != DataTableResizeMode.None && value?.ItemsPerPage != prevValue?.ItemsPerPage)
                 {
-                    NextTick(() => { _ = JsInvokeAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current); });
+                    NextTick(() => { _ = Js.InvokeVoidAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current); });
                 }
             })
             .Watch<DataTableResizeMode>(nameof(ResizeMode), (value, prevValue) =>
             {
                 if (prevValue == DataTableResizeMode.None)
                 {
-                    NextTick(() => { _ = JsInvokeAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); });
+                    NextTick(() => { _ = Js.InvokeVoidAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); });
                 }
             });
     }
@@ -322,20 +322,19 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
         });
     }
 
-    protected override void SetComponentCss()
+    private static Block _block = new("m-data-table");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider.UseBem("m-data-table",
-                       css => css.Modifiers(m => m.Modifier("mobile", IsMobile)
-                                        .And("resizable", ResizeMode != DataTableResizeMode.None)
-                                        .And("resizable-overflow", ResizeMode == DataTableResizeMode.Overflow)
-                                        .And("resizable-independent", ResizeMode == DataTableResizeMode.Independent)
-                                        .And("rtl", MasaBlazor.RTL)
-                                        .And("fixed", HasEllipsis)))
-                   .Element("progress")
-                   .Apply("column", css => css.Add("column"))
-                   .Element("empty-wrapper")
-                   .Element("expanded", css => css.Add("m-data-table__expanded__content"))
-                   .Apply("group-header", css => css.Add("text-start"));
+        yield return _modifierBuilder
+            .Add("mobile", IsMobile)
+            .Add("resizable", ResizeMode != DataTableResizeMode.None)
+            .Add("resizable-overflow", ResizeMode == DataTableResizeMode.Overflow)
+            .Add("resizable-independent", ResizeMode == DataTableResizeMode.Independent)
+            .Add("rtl", MasaBlazor.RTL)
+            .Add("fixed", HasEllipsis)
+            .Build();
     }
 
     public void ToggleGroup(string group)

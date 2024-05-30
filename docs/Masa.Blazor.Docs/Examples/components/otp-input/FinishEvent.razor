@@ -1,8 +1,8 @@
 ﻿<div>
     <div class="ma-auto position-relative" style="max-width: 300px">
-        <MOtpInput OtpValue="@otp" Disabled="@isLoading" OnFinish="OnFinish"></MOtpInput>
+        <MOtpInput @bind-Value="@otp" Disabled="@isLoading" OnFinish="OnFinish"></MOtpInput>
 
-        <MOverlay Absolute Value="@isLoading">
+        <MOverlay Absolute Contained Value="@isLoading">
             <MProgressCircular Indeterminate Color="primary"></MProgressCircular>
         </MOverlay>
     </div>

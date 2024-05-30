@@ -9,13 +9,13 @@ public class PageStackNavController : IDisposable
 
     private readonly NavigationManager _navigationManager;
 
-    internal event EventHandler<PageStackPushEventArgs>? StackPush;
+    public event EventHandler<PageStackPushEventArgs>? StackPush;
 
-    internal event EventHandler<PageStackPopEventArgs>? StackPop;
+    public event EventHandler<PageStackPopEventArgs>? StackPop;
 
-    internal event EventHandler<PageStackReplaceEventArgs>? StackReplace;
+    public event EventHandler<PageStackReplaceEventArgs>? StackReplace;
 
-    internal event EventHandler<PageStackClearEventArgs>? StackClear;
+    public event EventHandler<PageStackClearEventArgs>? StackClear;
 
     internal event EventHandler<LocationChangedEventArgs>? LocationChanged;
 
