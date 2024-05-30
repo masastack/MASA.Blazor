@@ -17,7 +17,7 @@ namespace Masa.Blazor.Test.Autocompletes
                   props.Add(autocomplete => autocomplete.ItemText, item => item);
                   props.Add(autocomplete => autocomplete.ItemValue, item => item);
               });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasAutofocusClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -35,7 +35,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasChipsClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -53,7 +53,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasClearableClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -71,7 +71,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCounterClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -107,7 +107,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDeletableChipsClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -125,7 +125,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -161,7 +161,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasErrorClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilledClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -197,7 +197,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -215,7 +215,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -233,7 +233,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -251,7 +251,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDetailsClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -269,7 +269,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -287,7 +287,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoaderHeightClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -305,7 +305,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -323,7 +323,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultipleClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -341,7 +341,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -359,7 +359,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentHintClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -377,7 +377,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentPlaceholderClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -395,7 +395,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -413,7 +413,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReverseClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -431,7 +431,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -449,7 +449,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -467,7 +467,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleLineClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -485,7 +485,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmallChipsClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -503,7 +503,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -521,7 +521,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSoloInvertedClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -539,7 +539,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSuccessClass = classes.Contains("m-autocomplete");
 
             // Assert
@@ -557,7 +557,7 @@ namespace Masa.Blazor.Test.Autocompletes
                 props.Add(autocomplete => autocomplete.ItemText, item => item);
                 props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasValidateOnBlurClass = classes.Contains("m-autocomplete");
 
             // Assert

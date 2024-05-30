@@ -1,17 +1,13 @@
-﻿namespace Masa.Blazor
-{
-    public partial class MTabsItems : MWindow, ITabsItems
-    {
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
+﻿namespace Masa.Blazor;
 
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-tabs-items");
-                });
-        }
+public class MTabsItems : MWindow
+{
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return base.BuildComponentClass().Concat(
+            new[]
+            {
+                "m-tabs-items"
+            });
     }
 }

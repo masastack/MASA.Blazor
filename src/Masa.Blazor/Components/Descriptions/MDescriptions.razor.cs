@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using Element = BemIt.Element;
 
-public partial class MDescriptions : BDomComponentBase, IThemeable
+namespace Masa.Blazor;
+
+public partial class MDescriptions : MasaComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -226,25 +228,27 @@ public partial class MDescriptions : BDomComponentBase, IThemeable
             }
         }
 #endif
+    
+    private static Block _block = new("m-descriptions");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static Block _header = _block.Extend("header");
+    private static Element _headerTitle = _header.Element("title");
+    private static Element _headerActions = _header.Element("actions");
+    private static Block _item = _block.Extend("item");
+    private static Element _itemLabel = _item.Element("label");
+    private static Element _itemContent = _item.Element("content");
+    private static Block _row = _block.Extend("row");
+    private static Block _itemContainer = _block.Extend("item-container");
+    private static Element _itemContainerLabel = _itemContainer.Element("label");
+    private static Element _itemContainerContent = _itemContainer.Element("content");
+    private ModifierBuilder _itemContainerLabelModifierBuilder = _itemContainerLabel.CreateModifierBuilder();
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider
-            .UseBem("m-descriptions", css => { css.Modifiers(u => u.Modifier(Dense, Bordered, AlignCenter)).AddTheme(IsDark, IndependentTheme); })
-            .Extend("header")
-            .Extend("header__title")
-            .Extend("header__actions")
-            .Extend("view")
-            .Extend("row")
-            .Extend("item")
-            .Extend("item__label", css => { css.Add(LabelClass); }, styleBuilder => { styleBuilder.Add(LabelStyle); })
-            .Extend("item__content", css => { css.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); })
-            .Extend("item-container")
-            .Extend("item-container__label", css => { css.Modifiers(u => u.Modifier("no-colon", !Colon)).Add(LabelClass); },
-                styleBuilder => { styleBuilder.Add(LabelStyle); })
-            .Extend("item-container__content", cs => { cs.Add(ContentClass); }, styleBuilder => { styleBuilder.Add(ContentStyle); });
+        yield return _modifierBuilder
+            .Add(Dense, Bordered, AlignCenter)
+            .AddTheme(IsDark, IndependentTheme)
+            .Build();
     }
 
     internal async Task Register(IDescriptionsItem descriptionsItem)

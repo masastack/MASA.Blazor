@@ -11,8 +11,8 @@
         <div class="@_block.Element("divider")">
             @if (!HideDot)
             {
-                <div class="@_block.Element("dot").Modifier(Small).And(Large)">
-                    <div class="@_block.Element("inner-dot").AddBackgroundColor(Color)"
+                <div class="@_dotModifierBuilder.Add(Small, Large)">
+                    <div class="@GetClass(_block.Element("inner-dot").Name, CssClassUtils.GetBackgroundColor(Color))"
                          style="@(StyleBuilder.Create().AddBackgroundColor(Color))">
                         @if (IconContent is not null)
                         {

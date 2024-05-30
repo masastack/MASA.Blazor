@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Utils;
+﻿using Masa.Blazor.Components.Slider;
+using Masa.Blazor.Utils;
 
 namespace Masa.Blazor;
 

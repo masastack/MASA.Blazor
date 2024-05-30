@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Masa.Blazor.Components.DatePicker;
+
+namespace Masa.Blazor.Presets;
 
 public partial class PDateDigitalClockCompactPickerView<TValue> : PDateDigitalClockPickerViewBase<TValue>
 {

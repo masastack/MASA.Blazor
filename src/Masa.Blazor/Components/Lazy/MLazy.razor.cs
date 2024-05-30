@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
-public partial class MLazy : IAsyncDisposable
+namespace Masa.Blazor;
+
+public partial class MLazy
 {
     [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
@@ -33,23 +35,20 @@ public partial class MLazy : IAsyncDisposable
 
     private const string DefaultTransition = "fade-transition";
 
+    private static Block _block = new("m-lazy");
+
     private bool _isActive;
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentStyle()
     {
-        base.SetComponentClass();
-
-        CssProvider
-            .UseBem("m-lazy", styleAction: styleAction =>
-            {
-                styleAction.AddHeight(Height)
-                           .AddMaxHeight(MaxHeight)
-                           .AddMaxWidth(MaxWidth)
-                           .AddMinHeight(MinHeight)
-                           .AddMinWidth(MinWidth)
-                           .AddWidth(Width);
-            })
-            .Element("wrapper");
+        return StyleBuilder.Create()
+            .AddHeight(Height)
+            .AddMaxHeight(MaxHeight)
+            .AddMaxWidth(MaxWidth)
+            .AddMinHeight(MinHeight)
+            .AddMinWidth(MinWidth)
+            .AddWidth(Width)
+            .GenerateCssStyles();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -76,15 +75,8 @@ public partial class MLazy : IAsyncDisposable
         await InvokeStateHasChangedAsync();
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await IntersectJSModule.UnobserveAsync(Ref);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
+        return IntersectJSModule.UnobserveAsync(Ref);
     }
 }

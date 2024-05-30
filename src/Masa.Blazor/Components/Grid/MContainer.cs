@@ -12,10 +12,11 @@ public class MContainer : Container
 
     protected override string TagName => Tag;
 
-    private Block _block = new("container");
+    private static Block _block = new("container");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Fluid).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Fluid).Build();
     }
 }

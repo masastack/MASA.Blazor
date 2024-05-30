@@ -6,8 +6,6 @@ public partial class MPagination : MasaComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Inject] public Document Document { get; set; } = null!;
-
     [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
     [Parameter] public bool Circle { get; set; }
@@ -66,8 +64,11 @@ public partial class MPagination : MasaComponentBase
             return CascadingIsDark;
         }
     }
-    
-    private Block _block = new("m-pagination");
+
+    private static Block _block = new("m-pagination");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _paginationModifierBuilder = _block.Element("pagination").CreateModifierBuilder();
+    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     public bool PrevDisabled => Value <= 1;
 
@@ -96,17 +97,15 @@ public partial class MPagination : MasaComponentBase
 
         if (firstRender)
         {
-            var el = Document.GetElementByReference(Ref);
-            if (el is null) return;
-
-            var clientWidth = await el.ParentElement.GetClientWidthAsync();
-            if (clientWidth is > 0)
+            var clientWidth =
+                await Js.InvokeAsync<double>(JsInteropConstants.GetParentClientWidthOrWindowInnerWidth, Ref);
+            if (clientWidth > 0)
             {
-                CalcMaxButtons(clientWidth.Value);
+                CalcMaxButtons(clientWidth);
             }
             else
             {
-                // clientWidth may be 0 when place in dialog
+                // clientWidth may be 0 when place in dialog,
                 // so we need to observe the element
                 await IntersectJSModule.ObserverAsync(Ref, async e =>
                 {
@@ -114,10 +113,12 @@ public partial class MPagination : MasaComponentBase
                     {
                         await InvokeAsync(async () =>
                         {
-                            clientWidth = await el.ParentElement.GetClientWidthAsync();
-                            if (clientWidth is > 0)
+                            clientWidth = await Js.InvokeAsync<double>(
+                                JsInteropConstants.GetParentClientWidthOrWindowInnerWidth,
+                                Ref);
+                            if (clientWidth > 0)
                             {
-                                CalcMaxButtons(clientWidth.Value);
+                                CalcMaxButtons(clientWidth);
                             }
                         });
                     }

@@ -15,7 +15,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.DisableFiltering, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableFilteringClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -31,7 +31,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.DisablePagination, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisablePaginationClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.DisableSort, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisableSortClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.HideDefaultFooter, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHideDefaultFooterClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -79,7 +79,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.ItemsPerPage, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasItemsPerPageClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -95,7 +95,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.Loading, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -111,7 +111,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.MultiSort, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMultiSortClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -127,7 +127,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.MustSort, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMustSortClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -143,7 +143,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.Page, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPageClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -159,7 +159,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.ServerItemsLength, -1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasServerItemsLengthClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -175,7 +175,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.SingleExpand, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleExpandClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -191,7 +191,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.SingleSelect, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSingleSelectClass = classes.Contains("m-data-iterator");
 
             // Assert
@@ -207,7 +207,7 @@ namespace Masa.Blazor.Test.DataIterators
             {
                 props.Add(dataiterator => dataiterator.SortDesc, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSortDescClass = classes.Contains("m-data-iterator");
 
             // Assert

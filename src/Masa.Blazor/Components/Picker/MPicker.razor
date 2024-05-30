@@ -1,0 +1,27 @@
+﻿@namespace Masa.Blazor
+@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
+@inherits MasaComponentBase
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+
+        @RenderFragments.RenderIfNotNull(
+            TitleContent,
+            _titleModifierBuilder.Add(Landscape).AddBackgroundColor(ComputedTitleColor).Build(),
+            StyleBuilder.Create().AddBackgroundColor(ComputedTitleColor).Build()
+        )
+
+        <div class="@_bodyModifierBuilder.Add(NoTitle).AddTheme(IsDark, IndependentTheme)"
+             style="@StyleBuilder.Create().AddWidth(Width, predicate: () => !FullWidth)">
+            <Transition Name="@Transition">
+                @ChildContent
+            </Transition>
+        </div>
+
+        @RenderFragments.RenderIfNotNull(
+            ActionsContent,
+            _actionsModifierBuilder.Add(NoTitle).AddClass("m-card__actions").Build()
+        )
+
+    </div>
+</CascadingValue>

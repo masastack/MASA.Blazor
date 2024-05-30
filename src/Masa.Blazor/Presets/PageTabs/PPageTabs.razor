@@ -21,7 +21,7 @@
             var tabOptions = patternPath.Options;
 
             <MTab Href="@patternPath.AbsolutePath"
-                  Class="@_tabBlock.AddClass(TabClass).AddClass(tabOptions?.Class).ToString()"
+                  Class="@GetClass(_tabBlock.Name, TabClass, tabOptions?.Class)"
                   Exact
                   Ripple="@Ripple"
                   @key="@patternPath.Pattern"
@@ -39,14 +39,15 @@
                     <MIcon Size="20">@tabOptions.Icon</MIcon>
                 }
 
-                <span class="@_tabBlock.Element("title").AddClass(tabOptions?.TitleClass)" style="@tabOptions?.TitleStyle">
+                <span class="@GetClass(_tabBlock.Element("title").Name, tabOptions?.TitleClass)"
+                      style="@tabOptions?.TitleStyle">
                     @tabTitle
                 </span>
 
                 @if ((tabOptions == null) || tabOptions.Closeable)
                 {
                     <MButton Icon
-                             Class="@_tabBlock.Element("close").Build()"
+                             Class="@_tabBlock.Element("close").Name"
                              OnClick="() => HandleOnCloseTab(patternPath, tabTitle)"
                              XSmall
                              OnClickStopPropagation

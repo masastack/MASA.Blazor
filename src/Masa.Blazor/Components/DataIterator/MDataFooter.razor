@@ -1,12 +1,12 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
-<div class="@CssProvider.GetClass()">
+<div class="@GetClass()">
     @PrependContent
 
     @if (ComputedDataItemsPerPageOptions.Count() > 1)
     {
-        <div class="@CssProvider.GetClass("select")">
+        <div class="@_block.Element("select")">
             @ItemsPerPageText
             <CascadingValue Value="true" Name="DisableDefaultsProvider">
                 <MSelect Items="@ComputedDataItemsPerPageOptions.ToList()"
@@ -25,7 +25,7 @@
         </div>
     }
 
-    <div class="@CssProvider.GetClass("pagination")">
+    <div class="@_block.Element("pagination")">
         @{
             var itemsLength = Pagination.ItemsLength;
             var pageStart = Pagination.PageStart;
@@ -58,7 +58,7 @@
         }
     </div>
 
-    <div class="@CssProvider.GetClass("icons-before")">
+    <div class="@_block.Element("icons-before")">
         @if (ShowFirstLastPage)
         {
             @FooterIcon(Options.Page == 1, HandleOnFirstPageAsync, RTL ? LastIcon : FirstIcon)
@@ -71,7 +71,7 @@
             @Options.Page
         </span>
     }
-    <div class="@CssProvider.GetClass("icons-after")">
+    <div class="@_block.Element("icons-after")">
         @FooterIcon(DisableNextPageIcon, HandleOnNextPageAsync, RTL ? PrevIcon : NextIcon)
         @if (ShowFirstLastPage)
         {
@@ -89,7 +89,7 @@
                  Icon
                  Text
                  OnClick="@onClick">
-            <MIcon Icon="@icon" />
+            <MIcon Icon="@icon"/>
         </MButton>
     };
 

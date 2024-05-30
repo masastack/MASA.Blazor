@@ -1,48 +1,56 @@
-﻿@using System.ComponentModel.DataAnnotations
-@using FluentValidation;
+﻿@using System.Text.RegularExpressions
 
+<MForm @bind-Value="valid">
     <MContainer>
         <MRow>
             <MCol Cols="12"
                   Md="4">
-                <MTextField @bind-Value="_form.Firstname"
+                <MTextField @bind-Value="firstName"
                             Counter="10"
                             Label="First name"
-                            required></MTextField>
+                            Required
+                            Rules="@_nameRules">
+                </MTextField>
             </MCol>
 
             <MCol Cols="12"
                   Md="4">
-                <MTextField @bind-Value="_form.Lastname"
+                <MTextField @bind-Value="lastName"
                             Counter="10"
                             Label="Last name"
-                            required></MTextField>
+                            Required
+                            Rules="@_nameRules">
+                </MTextField>
             </MCol>
 
             <MCol Cols="12"
                   Md="4">
-                <MTextField @bind-Value="_form.Email"
+                <MTextField @bind-Value="email"
                             Label="E-mail"
-                            required></MTextField>
+                            Required
+                            Rules="@_emailRules">
+                </MTextField>
             </MCol>
         </MRow>
     </MContainer>
+</MForm>
 
 @code {
-    public class Form
+    private static readonly Regex _emailRegex = new(".+@.+");
+
+    private string? firstName;
+    private string? lastName;
+    private string? email;
+    private bool valid;
+
+    private List<Func<string?, StringBoolean>> _nameRules = new()
     {
-        [Required(ErrorMessage = "Name is required")]
-        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
-        public string Firstname { get; set; }
+        value => value?.Length <= 10 ? true : "Name must be less than 10 characters",
+    };
 
-        [Required(ErrorMessage = "Name is required")]
-        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
-        public string Lastname { get; set; }
+    private List<Func<string?, StringBoolean>> _emailRules = new()
+    {
+        value => value != null && _emailRegex.Match(value).Success ? true : "E-mail must be valid",
+    };
 
-        [Required(ErrorMessage = "E-mail is required")]
-        [EmailAddress(ErrorMessage = "E-mail must be valid")]
-        public string Email { get; set; }
-    }
-
-    private Form _form = new();
 }

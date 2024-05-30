@@ -1,5 +1,35 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @if (ChildContent != null)
+    {
+        @ChildContent((_loadStatus, EventCallback.Factory.Create(this, DoLoadMore)))
+    }
+    else
+    {
+        if (_loadStatus == InfiniteScrollLoadStatus.Empty)
+        {
+            @(EmptyContent ?? DefaultEmpty)
+        }
+        else if (_loadStatus == InfiniteScrollLoadStatus.Loading)
+        {
+            @(LoadingContent ?? DefaultLoading)
+        }
+        else if (_loadStatus == InfiniteScrollLoadStatus.Error)
+        {
+            @(ErrorContent?.Invoke(DoLoadMore) ?? DefaultError)
+        }
+        else if (_dirtyLoad)
+        {
+            @(LoadMoreContent?.Invoke(DoLoadMore) ?? DefaultLoadMore)
+        }
+    }
+</div>
 
 @code {
 
@@ -44,31 +74,3 @@
     };
 
 }
-
-<div class="@CssProvider.GetClass()"
-     style="@CssProvider.GetStyle()"
-     @ref="@Ref">
-    @if (ChildContent != null)
-    {
-        @ChildContent((_loadStatus, CreateEventCallback(DoLoadMore)))
-    }
-    else
-    {
-        if (_loadStatus == InfiniteScrollLoadStatus.Empty)
-        {
-            @(EmptyContent ?? DefaultEmpty)
-        }
-        else if (_loadStatus == InfiniteScrollLoadStatus.Loading)
-        {
-            @(LoadingContent ?? DefaultLoading)
-        }
-        else if (_loadStatus == InfiniteScrollLoadStatus.Error)
-        {
-            @(ErrorContent?.Invoke(DoLoadMore) ?? DefaultError)
-        }
-        else if (_dirtyLoad)
-        {
-            @(LoadMoreContent?.Invoke(DoLoadMore) ?? DefaultLoadMore)
-        }
-    }
-</div>

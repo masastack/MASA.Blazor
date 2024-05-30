@@ -1,14 +1,14 @@
 ﻿@namespace Masa.Blazor.Components.DataTable.Header
 @inherits MDataTableHeaderBase
 
-<thead class="@CssProvider.GetClass()">
+<thead class="@GetClass()">
 <tr>
     @foreach (var header in Headers)
     {
         var title = header.Ellipsis is { Enabled: true, HideTitle: false } ? header.Text : null;
 
-        <th class="@CssProvider.GetClass("header", data: header)"
-            style="@CssProvider.GetStyle("header", data: header)"
+        <th class="@GetHeaderClass(header)"
+            style="@GetHeaderStyle(header)"
             @onclick="() => HandleOnHeaderColClick(header)"
             title="@title">
             @if (header.Value == "data-table-select" && !SingleSelect)
@@ -41,7 +41,7 @@
 
                     if (Options.MultiSort && beingSorted)
                     {
-                        <span class="@CssProvider.GetClass("sort-badge")">
+                        <span class="@Block.Element("sort-badge")">
                             @(sortIndex + 1)
                         </span>
                     }
@@ -57,7 +57,7 @@
 
                 @if (Resizable)
                 {
-                    <div class="@CssProvider.GetClass("col-resize")"></div>
+                    <div class="@Block.Element("col-resize")"></div>
                 }
             }
         </th>

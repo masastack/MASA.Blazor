@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDataFooter : BDomComponentBase, IDataFooterParameters
+    public partial class MDataFooter : MasaComponentBase, IDataFooterParameters
     {
         [Inject]
         protected I18n I18n { get; set; } = null!;
@@ -133,35 +133,12 @@
                 return ComputedDataItemsPerPageOptions.First().Value;
             }
         }
+        
+        private static Block _block = new("m-data-footer");
 
-        protected override void SetComponentCss()
+        protected override IEnumerable<string> BuildComponentClass()
         {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-footer");
-                })
-                .Apply("select", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-footer__select");
-                })
-                .Apply("pagination", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-footer__pagination");
-                })
-                .Apply("icons-before", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-footer__icons-before");
-                })
-                .Apply("icons-after", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-footer__icons-after");
-                });
+            yield return _block.Name;
         }
 
         public async Task HandleOnFirstPageAsync()

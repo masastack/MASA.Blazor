@@ -1,9 +1,7 @@
-﻿global using BlazorComponent;
-global using BlazorComponent.I18n;
-global using BlazorComponent.JSInterop;
-global using Masa.Blazor;
+﻿global using Masa.Blazor;
 global using Masa.Docs.Core.Models;
 global using Masa.Docs.Core.Services;
+global using Masa.Blazor.Core.I18n;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Rendering;
 global using Microsoft.AspNetCore.Components.Web;

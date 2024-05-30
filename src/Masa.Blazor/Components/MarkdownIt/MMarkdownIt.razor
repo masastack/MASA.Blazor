@@ -1,5 +1,5 @@
 ﻿@namespace Masa.Blazor
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
 @if (NoWrapper)
 {
@@ -7,7 +7,7 @@
 }
 else
 {
-    <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" @attributes="@Attributes" @ref="Ref">
+    <div class="@GetClass()" style="@GetStyle()" id="@Id" @attributes="@Attributes" @ref="Ref">
         @((MarkupString)_mdHtml)
     </div>
 }

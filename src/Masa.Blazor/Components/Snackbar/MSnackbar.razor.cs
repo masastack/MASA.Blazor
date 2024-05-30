@@ -113,22 +113,24 @@ public partial class MSnackbar : MasaComponentBase
         }
     }
 
-    private Block _block = new(ROOT_CSS);
+    private static Block _block = new(ROOT_CSS);
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Absolute)
-            .And("active", Value)
-            .And("bottom", Bottom || !Top)
-            .And(Centered)
-            .And("has-background", !Text && !Outlined)
-            .And(Left)
-            .And("multi-line", MultiLine && !Vertical)
-            .And(Right)
-            .And(Text)
-            .And(Top)
-            .And(Vertical)
-            .GenerateCssClasses();
+        yield return _modifierBuilder.Add(Absolute)
+            .Add("active", Value)
+            .Add("bottom", Bottom || !Top)
+            .Add(Centered)
+            .Add("has-background", !Text && !Outlined)
+            .Add(Left)
+            .Add("multi-line", MultiLine && !Vertical)
+            .Add(Right)
+            .Add(Text)
+            .Add(Top)
+            .Add(Vertical)
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -141,7 +143,7 @@ public partial class MSnackbar : MasaComponentBase
 
     private string GetWrapperClass()
     {
-        return _block.Element("wrapper")
+        return _wrapperModifierBuilder
             .AddClass("m-sheet")
             .AddClass("m-sheet--outlined", Outlined)
             .AddClass("m-sheet--shaped", Shaped)

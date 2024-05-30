@@ -1,8 +1,6 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection;
 
-public class MasaBlazorBuilder : BlazorComponentBuilder, IMasaBlazorBuilder
+public class MasaBlazorBuilder(IServiceCollection services) : IMasaBlazorBuilder
 {
-    public MasaBlazorBuilder(IServiceCollection services) : base(services)
-    {
-    }
+    public IServiceCollection Services { get; set; } = services;
 }

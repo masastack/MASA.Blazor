@@ -28,16 +28,17 @@ public class MAvatar : Container
 
     [Parameter] public string? Color { get; set; }
 
-    private Block _block = new("m-avatar");
+    private static Block _block = new("m-avatar");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(Left)
-            .And(Right)
+        yield return _modifierBuilder
+            .Add(Left)
+            .Add(Right)
             .AddRounded(Rounded, Tile)
             .AddBackgroundColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

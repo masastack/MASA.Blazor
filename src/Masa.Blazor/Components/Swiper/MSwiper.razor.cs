@@ -1,6 +1,9 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Extensions;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
-public partial class MSwiper : BDomComponentBase
+namespace Masa.Blazor;
+
+public partial class MSwiper : MasaComponentBase
 {
     [Inject] private SwiperJsModule SwiperJsModule { get; set; } = null!;
 
@@ -61,15 +64,19 @@ public partial class MSwiper : BDomComponentBase
         _swiperInteropHandle = DotNetObjectReference.Create<object>(new SwiperInteropHandle(this));
     }
 
-    protected override void SetComponentClass()
-    {
-        base.SetComponentClass();
+    private static Block _block = new("m-stepper");
+    private static Block _paginationBlock = _block.Extend("pagination");
+    private static Block _nextBlock = _block.Extend("next");
+    private static Block _prevBlock = _block.Extend("prev");
 
-        CssProvider
-            .UseBem("m-swiper", css => { css.Add("swiper"); }, style => { style.AddHeight(Height).AddWidth(Width); })
-            .Extend("pagination", css => { css.Add("swiper-pagination").Add(_pagination?.Class); }, style => { style.Add(_pagination?.Style); })
-            .Extend("next", css => { css.Add("swiper-button-next").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); })
-            .Extend("prev", css => { css.Add("swiper-button-prev").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); });
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        yield return _block.AppendClasses("swiper");
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        yield return StyleBuilder.Create().AddHeight(Height).AddWidth(Width).Build();
     }
 
     protected override async Task OnParametersSetAsync()

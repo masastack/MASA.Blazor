@@ -1,0 +1,166 @@
+﻿@namespace Masa.Blazor
+@using Masa.Blazor.Components.DatePicker
+@inherits MasaComponentBase
+@typeparam TValue
+
+<CascadingValue Value="IsDark" Name="IsDark">
+    <MPicker TitleContent="@(GenPickerTitle())"
+             ActionsContent="@ChildContent"
+             Color="@(HeaderColor ?? Color)"
+             Dark="@Dark"
+             Elevation="@Elevation"
+             Flat="@Flat"
+             FullWidth="@FullWidth"
+             Landscape="@Landscape"
+             Light="@Light"
+             Width="@Width"
+             NoTitle="@NoTitle"
+             Class="@GetClass()"
+             Style="@GetStyle()"
+             Id="@Id"
+             @attributes="@Attributes">
+        <KeyTransitionElement Value="InternalActivePicker">
+            @if (InternalActivePicker == DatePickerType.Year)
+            {
+                @GenYears()
+            }
+            else
+            {
+                @GenTableHeader()
+                if (InternalActivePicker == DatePickerType.Date)
+                {
+                    @GenDateTable()
+                }
+                else
+                {
+                    @GenMonthTable()
+                }
+            }
+        </KeyTransitionElement>
+    </MPicker>
+</CascadingValue>
+
+@code {
+
+    private RenderFragment? GenPickerTitle() => NoTitle
+        ? null
+        : __builder =>
+        {
+            <MDatePickerTitle Date="@(Formatters.TitleDate(MultipleValue))"
+                              Disabled="@Disabled"
+                              Readonly="@Readonly"
+                              SelectingYear="@(InternalActivePicker == DatePickerType.Year)"
+                              Year="@Formatters.Year(TableDate)"
+                              YearIcon="@YearIcon"
+                              Value="@MultipleValue.FirstOrDefault()"
+                              OnSelectingYearUpdate="@OnSelectingYearUpdate">
+            </MDatePickerTitle>
+
+            void OnSelectingYearUpdate(bool val)
+            {
+                InternalActivePicker = val ? DatePickerType.Year : Type;
+            }
+        };
+
+    private RenderFragment GenYears() => __builder =>
+    {
+        <MDatePickerYears Color="@Color"
+                          Format="@YearFormat"
+                          Min="@MinYear"
+                          Max="@MaxYear"
+                          Value="@TableYear"
+                          Locale="@CurrentLocale"
+                          OnInput="@OnInput">
+        </MDatePickerYears>
+
+        void OnInput(int year)
+        {
+            TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
+            InternalActivePicker = DatePickerType.Month;
+        }
+    };
+
+    private RenderFragment GenTableHeader() => __builder =>
+    {
+        <MDatePickerHeader NextIcon="@NextIcon"
+                           Color="@Color"
+                           Dark="@Dark"
+                           Disabled="@Disabled"
+                           Format="@HeaderDateFormat"
+                           Light="@Light"
+                           Min="@(InternalActivePicker == DatePickerType.Date ? MinMonth : MinYear)"
+                           Max="@(InternalActivePicker == DatePickerType.Date ? MaxMonth : MaxYear)"
+                           PrevIcon="@PrevIcon"
+                           Readonly="@Readonly"
+                           Locale="@CurrentLocale"
+                           ActivePicker="@InternalActivePicker"
+                           Value="@(Type == DatePickerType.Date ? new DateOnly(TableYear, TableMonth + 1, 1) : new DateOnly(TableYear, 1, 1))"
+                           OnInput="@OnInput"
+                           OnToggle="@OnToggle">
+        </MDatePickerHeader>
+
+        void OnInput(DateOnly val)
+        {
+            TableDate = val;
+        }
+
+        void OnToggle()
+        {
+            InternalActivePicker = InternalActivePicker == DatePickerType.Date ? DatePickerType.Month : DatePickerType.Year;
+        }
+    };
+
+    private RenderFragment GenDateTable() => __builder =>
+    {
+        <MDatePickerDateTable AllowedDates="@AllowedDates"
+                              CalendarWeekRule="@CalendarWeekRule"
+                              Color="@Color"
+                              Current="@Current"
+                              Dark="@Dark"
+                              Disabled="@Disabled"
+                              Events="@Events"
+                              EventColor="@EventColor"
+                              FirstDayOfWeek="@FirstDayOfWeek"
+                              Format="@DayFormat"
+                              Light="@Light"
+                              Min="@Min"
+                              Max="@Max"
+                              Range="@Range"
+                              Locale="@CurrentLocale"
+                              Readonly="@Readonly"
+                              Scrollable="@Scrollable"
+                              ShowAdjacentMonths="@ShowAdjacentMonths"
+                              ShowWeek="@ShowWeek"
+                              TableDate="@(new DateOnly(TableYear, TableMonth + 1, 1))"
+                              Value="@(IsMultiple ? (object)MultipleValue : Value)"
+                              WeekdayFormat="@WeekdayFormat"
+                              OnInput="@OnDateClickAsync">
+        </MDatePickerDateTable>
+    };
+
+    private RenderFragment GenMonthTable() => __builder =>
+    {
+        var isMonth = Type == DatePickerType.Month;
+
+        <MDatePickerMonthTable AllowedDates="@(isMonth ? AllowedDates : null)"
+                               Color="@Color"
+                               Current="@Current"
+                               Dark="@Dark"
+                               Disabled="@Disabled"
+                               Events="@(isMonth ? Events : default)"
+                               EventColor="@(isMonth ? EventColor : default)"
+                               Format="@MonthFormat"
+                               Light="@Light"
+                               Min="@MinMonth"
+                               Max="@MaxMonth"
+                               Locale="@CurrentLocale"
+                               Range="@Range"
+                               Readonly="@(Readonly && isMonth)"
+                               Scrollable="@Scrollable"
+                               Value="@(IsMultiple ? (object)MultipleValue : Value)"
+                               TableDate="@(new DateOnly(TableYear, 1, 1))"
+                               OnInput="@OnMonthClickAsync">
+        </MDatePickerMonthTable>
+    };
+
+}

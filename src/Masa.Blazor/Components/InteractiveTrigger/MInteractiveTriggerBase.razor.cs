@@ -3,7 +3,7 @@
 using BemIt;
 
 /// <summary>
-/// A abstract class of interactive trigger component.
+/// An abstract class of interactive trigger component.
 /// </summary>
 /// <typeparam name="TValue"></typeparam>
 /// <typeparam name="TInteractiveValue"></typeparam>
@@ -12,7 +12,7 @@ using BemIt;
 [StreamRendering]
 #endif
 
-public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue> : CssProviderComponentBase
+public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue>
 {
     [Parameter] public bool DisableLinkOnInteractive { get; set; }
 
@@ -126,19 +126,12 @@ public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue>
 
     protected abstract bool CheckInteractive();
 
-    protected override void SetComponentCss()
+    private static Block _block = new("m-interactive-trigger");
+    private ModifierBuilder _linkModifierBuilder = _block.Element("link").CreateModifierBuilder();
+    private ModifierBuilder _popupModifierBuilder = _block.Element("popup").CreateModifierBuilder();
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider.UseBem("m-interactive-trigger")
-                   .Element("link",
-                       css => { css.Modifiers(m => m.Modifier("disabled", IsInteractive && DisableLinkOnInteractive)); })
-                   .Element("popup", css => { css.Modifiers(m => m.Modifier("active", _active)).AddIf(PopupClass, () => _active); },
-                       style =>
-                       {
-                           style.AddIf($"top: {Top}px", () => Top.HasValue)
-                                .AddIf($"right: {Right}px", () => Right.HasValue)
-                                .AddIf($"bottom: {Bottom}px", () => Bottom.HasValue)
-                                .AddIf($"left: {Left}px", () => Left.HasValue)
-                                .AddIf(PopupStyle, () => _active);
-                       });
+        yield return _block.Name;
     }
 }

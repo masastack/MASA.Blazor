@@ -103,6 +103,11 @@ public class ApiGenerator : IIncrementalGenerator
     {
         if (node is ClassDeclarationSyntax classDeclarationSyntax)
         {
+            if (classDeclarationSyntax.Identifier.SyntaxTree?.FilePath?.EndsWith("MInput.Validatable.cs") is true)
+            {
+                return false;
+            }
+
             var className = classDeclarationSyntax.Identifier.ValueText;
             return Regex.IsMatch(className, "^[M|P]{1}[A-Z]{1}");
         }
@@ -281,8 +286,7 @@ public class ApiGenerator : IIncrementalGenerator
 
         var containingNamespace = type.ContainingNamespace.ToString();
 
-        var isCustomType = containingNamespace is not null &&
-                           (containingNamespace.StartsWith("BlazorComponent") || containingNamespace.StartsWith("Masa.Blazor"));
+        var isCustomType = containingNamespace is not null && containingNamespace.StartsWith("Masa.Blazor");
 
         if (type.TypeKind == TypeKind.Enum)
         {

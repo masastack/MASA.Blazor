@@ -8,12 +8,13 @@ public partial class MSortable<TItem> : MSortableProviderBase<TItem>
 
     [Parameter] [MasaApiParameter("div")] public string? ItemTag { get; set; } = "div";
 
-    private Block _block = new("m-sortable");
+    private static Block _block = new("m-sortable");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override string ContainerSelector => Ref.GetSelector();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).Build();
     }
 }

@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Elevation, 24);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.FirstDayOfWeek, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFirstDayOfWeekClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Flat, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFlatClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.FullWidth, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullWidthClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -103,7 +103,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Landscape, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLandscapeClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -118,7 +118,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -133,7 +133,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.NoTitle, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasNoTitleClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -148,7 +148,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Reactive, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReactiveClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -163,7 +163,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Readonly, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasReadonlyClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -178,7 +178,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Scrollable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollableClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -193,7 +193,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.ShowAdjacentMonths, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowAdjacentMonthsClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -208,7 +208,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.ShowCurrent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowCurrentClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -223,7 +223,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.ShowWeek, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasShowWeekClass = classes.Contains("m-picker--date");
 
             // Assert
@@ -238,7 +238,7 @@ namespace Masa.Blazor.Test.DatePicker
             {
                 props.Add(datepicker => datepicker.Width, 290);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasWidthClass = classes.Contains("m-picker--date");
 
             // Assert

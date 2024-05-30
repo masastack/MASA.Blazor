@@ -1,8 +1,8 @@
-﻿using Element = BlazorComponent.Web.Element;
+﻿using Element = Masa.Blazor.JSInterop.Element;
 
 namespace Masa.Blazor;
 
-public partial class MSimpleTable : BDomComponentBase
+public partial class MSimpleTable : MasaComponentBase
 {
     [Inject]
     private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -88,22 +88,19 @@ public partial class MSimpleTable : BDomComponentBase
     }
 #endif
 
-    protected override void SetComponentCss()
+    private static Block _block = new("m-data-table");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static BemIt.Element _wrapper = _block.Element("wrapper");
+
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        CssProvider
-            .UseBem("m-data-table",
-                css => css.Modifiers(m => m.Modifier(Dense)
-                                           .And("fixed-height", Height != null && !FixedHeader)
-                                           .And(FixedHeader)
-                                           .And("has-top", TopContent != null)
-                                           .And("has-bottom", BottomContent != null)
-                                           .AddTheme(IsDark, IndependentTheme)))
-            .Element("wrapper",
-                css => css.AddIf("scrolled-to-left", () => HasFixed && _scrollState == 0)
-                          .AddIf("scrolling", () => HasFixed && _scrollState == 1)
-                          .AddIf("scrolled-to-right", () => HasFixed && _scrollState == 2),
-                style => style.AddHeight(Height))
-            .Apply("table", styleAction: style => style.AddWidth(Width));
+        yield return _modifierBuilder.Add(Dense)
+            .Add("fixed-height", Height != null && !FixedHeader)
+            .Add(FixedHeader)
+            .Add("has-top", TopContent != null)
+            .Add("has-bottom", BottomContent != null)
+            .AddTheme(IsDark, IndependentTheme)
+            .Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -124,7 +121,7 @@ public partial class MSimpleTable : BDomComponentBase
             return;
         }
 
-        var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
+        var element = await Js.InvokeAsync<Element?>(JsInteropConstants.GetDomInfo, WrapperElement);
         if (element != null)
         {
             const double threshold = 1;

@@ -1,0 +1,68 @@
+﻿<div class="d-flex flex-column align-center justify-center">
+    <MECharts Option="@_option"
+              Width="@("100%")"
+              Height="300"
+              Loading="@_loading">
+    </MECharts>
+
+    <MButton OnClick="@RefreshAsync" Class="text-capitalize mt-2">Refresh</MButton>
+</div>
+
+@code{
+
+    private bool _loading;
+    private object? _option = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await RefreshAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task RefreshAsync()
+    {
+        _loading = true;
+        StateHasChanged();
+
+        await Task.Delay(1000);
+
+        _loading = false;
+        _option = new
+        {
+            Title = new
+            {
+                Left = "center",
+                Text = "Getting started"
+            },
+            Tooltip = new { },
+            XAxis = new
+            {
+                Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
+            },
+            YAxis = new { },
+            Series = new[]
+            {
+                new
+                {
+                    Name = "sales",
+                    Type = "bar",
+                    Data = RandomData()
+                }
+            }
+        };
+    }
+
+    private static IEnumerable<int> RandomData()
+    {
+        yield return Random.Shared.Next(0, 100);
+        yield return Random.Shared.Next(0, 100);
+        yield return Random.Shared.Next(0, 100);
+        yield return Random.Shared.Next(0, 100);
+        yield return Random.Shared.Next(0, 100);
+        yield return Random.Shared.Next(0, 100);
+    }
+
+}

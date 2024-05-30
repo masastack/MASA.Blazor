@@ -1,15 +1,15 @@
 ﻿@namespace Masa.Blazor.Components.DataTable
 @typeparam TItem
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 
-<tr class="@CssProvider.GetClass("mobile-table-row")" @attributes="@Attributes">
+<tr class="@GetClass()" @attributes="@Attributes">
     @foreach (var header in Headers)
     {
-        <td class="@CssProvider.GetClass("mobile-row", data: header)">
+        <td class="@_block.Element("mobile-row").Name">
             @{
                 if (header.Value != "data-table-select" && !HideDefaultHeader)
                 {
-                    <div class="@CssProvider.GetClass("mobile-row__header")">
+                    <div class="@_block.Element("mobile-row__header")">
                         @if (HeaderColContent != null)
                         {
                             @HeaderColContent(header)
@@ -22,7 +22,7 @@
                 }
 
                 var props = new ItemColProps<TItem>(header, Item);
-                <div class="@CssProvider.GetClass("mobile-row__cell")">
+                <div class="@_block.Element("mobile-row__cell")">
                     @if (HasSlot(props))
                     {
                         @SlotContent(props)

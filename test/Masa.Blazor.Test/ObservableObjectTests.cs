@@ -1,5 +1,4 @@
 ﻿using System;
-using BlazorComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test;
@@ -7,22 +6,6 @@ namespace Masa.Blazor.Test;
 [TestClass]
 public class ObservableObjectTests
 {
-    [TestMethod]
-    public void Test()
-    {
-        var numbers = new[] { 1, 2, 3, 4 };
-        numbers.ForEach(n =>
-        {
-            if (n > 2)
-            {
-                return;
-            }
-            
-            Console.WriteLine(n);
-        });
-
-    }
-    
     [TestMethod]
     public void ObservableObject_SimpleAssignment()
     {

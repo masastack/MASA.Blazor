@@ -71,12 +71,14 @@ public partial class MBreadcrumbs : MasaComponentBase
 #endif
     }
 
-    private Block _block = new("m-breadcrumbs");
+    private static Block _block = new("m-breadcrumbs");
+    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Large)
+        yield return _modifierBuilder
+            .Add(Large)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 }

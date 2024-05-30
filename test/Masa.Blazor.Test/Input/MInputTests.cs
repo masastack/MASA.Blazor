@@ -1,5 +1,4 @@
-﻿using BlazorComponent;
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Input
@@ -43,7 +42,7 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -58,7 +57,7 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Dark, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-input");
 
             // Assert
@@ -73,28 +72,11 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
             Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
-        public void RenderInputNoWithWithLight()
-        {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
-            {
-                props.Add(r => r.MockValidationState, "error");
-            });
-            var abstractProvider = cut.Instance.AbstractProvider;
-            var label = abstractProvider.GetMetadata<BLabel>();
-
-            // Assert
-            Assert.AreEqual("error", cut.Instance.ValidationState);
-            Assert.IsTrue(label.Attributes.ContainsKey("Color"));
-            Assert.AreEqual("error", label.Attributes["Color"]);
         }
 
         [DataTestMethod]
@@ -156,7 +138,7 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Light, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-input");
 
             // Assert
@@ -171,7 +153,7 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-input--dense");
 
             // Assert
@@ -186,7 +168,7 @@ namespace Masa.Blazor.Test.Input
             {
                 props.Add(input => input.Dense, false);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-input");
 
             // Assert

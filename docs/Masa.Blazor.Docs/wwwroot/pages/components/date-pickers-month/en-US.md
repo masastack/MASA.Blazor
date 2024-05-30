@@ -76,12 +76,6 @@ can be replaced if the user cancels.
 
 <masa-example file="Examples.components.date_pickers_month.DialogAndMenu"></masa-example>
 
-#### Internationalization(TODO)
-
-The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the locale prop, and then set the first day of the week with the first-day-of-week prop.
-
-<masa-example file="Examples.components.date_pickers_month.Internationalization"></masa-example>
-
 #### Orientation
 
 Date pickers come in two orientation variations, portrait (default) and landscape.
