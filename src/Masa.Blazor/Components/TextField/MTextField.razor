@@ -1,6 +1,5 @@
 ﻿@namespace Masa.Blazor
 @typeparam TValue
-@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits MInput<TValue>
 
 @base.BuildRenderTree
@@ -151,10 +150,8 @@
 
         if (!IsDirty)
         {
-            // TODO: 20240517 新加的代码，需要测试
             // if the text field has no content then don't display the clear icon.
             // We add an empty div because other controls depend on a ref to append inner
-
             @GenSlot(InputIconType.AppendInner, @<div></div>)
         }
         else
@@ -182,7 +179,6 @@
         }
     };
 
-    // TODO: 20240517 新加的代码，需要测试，之前的代码是重写整个InputSlot
     protected override RenderFragment GenPrependInnerSlot() => __builder =>
     {
         RenderFragment? content = null;
