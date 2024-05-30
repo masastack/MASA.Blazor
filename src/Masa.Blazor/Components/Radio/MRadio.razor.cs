@@ -75,10 +75,8 @@
         }
 
         public string? ValidationState => RadioGroup?.ValidationState ?? ComputedColor;
-        
-        // TODO: 20240517 检查是否有性能影响
-        // TODO: 20240517 没有的话 其他需要用GenRipple()的地方也改了
-        private UseRippleState UseRippleState => new(this);
+
+        private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? null : ValidationState;
 
         protected override void OnInitialized()
         {
