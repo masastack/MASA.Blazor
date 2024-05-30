@@ -27,11 +27,11 @@
                    @onfocus="OnFocus"
                    @onkeydown="OnKeyDown"
                    @onclick:stopPropagation/>
-
+            
             @RenderFragments.GenRipple(
                 Ripple,
-                GetClass(_selectionControls.Element("ripple").Name, CssClassUtils.GetTextColor(UseRippleState.RippleState)),
-                StyleBuilder.Create().AddTextColor(UseRippleState.RippleState).Build())
+                GetClass(_selectionControls.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState)),
+                StyleBuilder.Create().AddTextColor(RippleState).Build())
         </div>
 
         <MLabel For="@Id"
