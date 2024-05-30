@@ -125,6 +125,15 @@
   "ViewSource": "View source",
   "Toc": "Contents",
   "SeniorSponsor": "Senior sponsor",
+  "enableI18n-demo":{
+    "name": "User name",
+    "email": "Email address",
+    "item": "Item",
+    "required": "{0} is required",
+    "maxlength-10": "{0} must be less than 10 characters",
+    "invalid-email": "Invalid email address",
+    "required-agree": "Please agree to the terms"
+  },
   "ComponentPages": "Component Pages",
   "NextPage": "Next Page",
   "PreviousPage": "Previous Page",
