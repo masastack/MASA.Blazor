@@ -19,13 +19,13 @@ Dividers in their simplest form display a horizontal line.
 
 #### Inset
 
-Dividers in their simplest form display a horizontal line.
+Inset dividers are moved 72px to the right. This will cause them to line up with list items.
 
 <masa-example file="Examples.components.dividers.Inset"></masa-example>
 
-#### Vertical
+#### Vertical {updated-in=v1.6.0}
 
-Dividers in their simplest form display a horizontal line.
+Vertical dividers give you more tools for unique layouts. Use `Length` to control the length of the divider.
 
 <masa-example file="Examples.components.dividers.Vertical"></masa-example>
 

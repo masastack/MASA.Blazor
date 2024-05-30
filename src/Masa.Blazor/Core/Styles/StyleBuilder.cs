@@ -51,6 +51,11 @@ public struct StyleBuilder
         return this;
     }
 
+    public StyleBuilder AddLength(string name, double value, string unit = "px")
+    {
+        return Add(value == 0 ? $"{name}: 0" : $"{name}: {value}{unit}".ToString(CultureInfo.InvariantCulture));
+    }
+
     public IEnumerable<string> GenerateCssStyles()
     {
         yield return _stringBuilder.ToString();

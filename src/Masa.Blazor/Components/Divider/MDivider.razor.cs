@@ -10,16 +10,21 @@ public partial class MDivider : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] [Obsolete("This parameter is little usefulness, it will be removed in the future.")]
+    [Parameter]
+    [Obsolete("This parameter will be removed in the future, please use CSS instead.")]
     public int Height { get; set; }
 
     [Parameter] public bool Left { get; set; }
 
     [Parameter] public bool Right { get; set; }
 
+    [Parameter] public int Length { get; set; }
+
     [Parameter] public bool Dark { get; set; }
 
-    [Parameter] public bool Light { get; set; }
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    public bool Light { get; set; }
 
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
@@ -85,24 +90,32 @@ public partial class MDivider : MasaComponentBase
         return _wrapperModifierBuilder
             .Add(HasContent, Left, Right)
             .Add("center", IsCenter)
+            .AddClass(Class)
             .ToString();
     }
 
     private string? GetWrapperStyle()
     {
-        StringBuilder stringBuilder = new();
+        StyleBuilder styleBuilder = new();
 
         if (!HasContent)
         {
-            stringBuilder.Append("display:contents; ");
+            styleBuilder.Add("display:contents;");
+        }
+
+        if (Length > 0)
+        {
+            styleBuilder.AddLength(Vertical ? "height" : "width", Length);
         }
 
         if (PaddingY > 0)
         {
-            stringBuilder.Append("padding: {PaddingY}px 0;");
+            styleBuilder.Add($"padding: {PaddingY}px 0;");
         }
 
-        return stringBuilder.Length > 0 ? stringBuilder.ToString() : null;
+        styleBuilder.Add(Style);
+
+        return styleBuilder.ToString();
     }
 
     private string GetHRClass()
@@ -116,6 +129,18 @@ public partial class MDivider : MasaComponentBase
 
     private string? GetHRStyle()
     {
-        return !HasContent ? Style : null;
+        StyleBuilder styleBuilder = new();
+
+        if (!HasContent)
+        {
+            styleBuilder.Add(Style);
+        }
+
+        if (Vertical && Length > 0)
+        {
+            styleBuilder.AddLength("min-height", 0);
+        }
+
+        return styleBuilder.ToString();
     }
 }
