@@ -246,7 +246,10 @@ public partial class MFileInput<TValue> : MTextField<TValue>
 
     public override async Task HandleOnClickAsync(ExMouseEventArgs args)
     {
-        await base.HandleOnClickAsync(args);
+        if (IsFocused || IsDisabled)
+        {
+            return;
+        }
 
         if (OnClick.HasDelegate)
         {

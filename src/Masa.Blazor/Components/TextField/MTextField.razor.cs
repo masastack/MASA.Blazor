@@ -530,6 +530,11 @@ public partial class MTextField<TValue> : MInput<TValue>
             return;
         }
 
+        if (OnClick.HasDelegate)
+        {
+            await OnClick.InvokeAsync(args);
+        }
+
         await InputElement.FocusAsync();
     }
 
