@@ -30,6 +30,12 @@ Use `Dark` prop to switch to the dark theme.
 
 <masa-example file="Examples.components.echarts.HeightAndWidth"></masa-example>
 
+#### Loading {released-on=v1.6.0}
+
+Control the loading state through the `Loading` property.
+
+<masa-example file="Examples.components.echarts.Loading"></masa-example>
+
 #### Use function in option
 
 Using the function in `Option`, you need to enable the `IncludeFunctionsInOption` property. In the following example, the name of tooltip is set using **lambda**, and the label of the XAxis is set using **function**.
