@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Util.Reflection.Expressions;
 using Util.Reflection.Expressions.Abstractions;
 using FluentValidationResult = FluentValidation.Results.ValidationResult;
@@ -15,6 +17,7 @@ internal sealed class ValidationEventSubscriptions : IDisposable
     private static readonly ConcurrentDictionary<Type, IValidator> ModelFluentValidatorMap = new();
     private static readonly ConcurrentDictionary<Type, Func<object, Dictionary<string, object>>> ModelPropertiesMap = new();
     private static readonly Dictionary<Type, Type> FluentValidationTypeMap = new();
+    private static readonly ConcurrentDictionary<string, string?> DisplayNameMap = new();
 
     static ValidationEventSubscriptions()
     {
@@ -267,7 +270,19 @@ internal sealed class ValidationEventSubscriptions : IDisposable
 
         if (EnableI18n)
         {
-            message = _i18n.T(message, args: fieldIdentifier.FieldName);
+            var key = $"{fieldIdentifier.Model.GetType().FullName}.{fieldIdentifier.FieldName}";
+            if (DisplayNameMap.TryGetValue(key, out var displayName) is false)
+            {
+                displayName = fieldIdentifier.Model.GetType().GetProperty(fieldIdentifier.FieldName)!.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
+                if (displayName is not null)
+                {
+                    displayName = _i18n.T(displayName);
+                }
+
+                DisplayNameMap.TryAdd(key, displayName);
+            }
+
+            message = _i18n.T(message, args: displayName ?? fieldIdentifier.FieldName);
         }
 
         _messageStore.Add(fieldIdentifier, message);
