@@ -6,7 +6,7 @@ internal static class EmbeddedLocales
 {
     private static readonly Dictionary<string, string> s_availableResources;
     private static readonly Dictionary<CultureInfo, Dictionary<string, string>> s_localeCaches = new();
-    private static readonly Assembly s_resourcesAssembly = typeof(I18n).Assembly;
+    private static readonly Assembly s_resourcesAssembly = typeof(Masa.Blazor.I18n).Assembly;
 
     static EmbeddedLocales()
     {

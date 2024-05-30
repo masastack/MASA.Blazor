@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Options;
 
-namespace Masa.Blazor.Core.I18n;
+namespace Masa.Blazor;
 
 public class I18n
 {
@@ -9,36 +9,19 @@ public class I18n
 
     public I18n(IOptions<MasaBlazorOptions> options)
     {
-        var cultureName = options.Value.Locale?.Current;
-
-        var culture = GetValidCulture(cultureName, options.Value.Locale?.Fallback ?? "en-US");
-        CultureInfo? uiCulture = null;
-
-        var uiCultureName = options.Value.Locale?.UICurrent;
-        if (!string.IsNullOrWhiteSpace(uiCultureName))
-        {
-            uiCulture = GetValidCulture(uiCultureName, options.Value.Locale?.UIFallback ?? culture.Name);
-        }
-
-        SetCulture(culture, uiCulture);
+        SetCulture(options.Value.Locale?.UICulture ?? new CultureInfo("en-US"));
     }
 
     [NotNull] public CultureInfo? Culture { get; private set; }
 
     [NotNull] public IReadOnlyDictionary<string, string>? Locale { get; private set; }
 
-    public void SetCulture(CultureInfo culture, CultureInfo? uiCulture = null)
-    {
-        SetCultureInternal(culture, uiCulture ?? culture);
-    }
-
-    private void SetCultureInternal(CultureInfo culture, CultureInfo uiCulture)
+    public void SetCulture(CultureInfo uiCulture)
     {
         SetCultureAndLocale(uiCulture);
 
         CultureChanged?.Invoke(this, EventArgs.Empty);
 
-        CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = uiCulture;
     }
 
@@ -118,43 +101,5 @@ public class I18n
 
         Culture = uiCulture;
         Locale = I18nCache.GetLocale(uiCulture);
-    }
-
-    private static CultureInfo GetValidCulture(string? cultureName, string fallbackCultureName)
-    {
-        CultureInfo? culture = null;
-
-        try
-        {
-            culture = CultureInfo.CreateSpecificCulture(cultureName ?? fallbackCultureName);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
-
-        if (culture is null && cultureName is not null)
-        {
-            try
-            {
-                culture = CultureInfo.CreateSpecificCulture(fallbackCultureName);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-        culture ??= CultureInfo.CurrentCulture;
-
-        // https://github.com/dotnet/runtime/issues/18998#issuecomment-254565364
-        // `CultureInfo.CreateSpecificCulture` has the different behavior in different OS,
-        // so need to standardize the culture.
-        return culture.Name switch
-        {
-            "zh-Hans-CN" => new CultureInfo("zh-CN"),
-            "zh-Hant-CN" => new CultureInfo("zh-TW"),
-            _ => culture
-        };
     }
 }
