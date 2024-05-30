@@ -11,6 +11,7 @@ using Masa.Blazor.Mixins.Activatable;
 using Masa.Blazor.Popup;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -37,9 +38,6 @@ public static class ServiceCollectionExtensions
         Action<MasaBlazorOptions> optionsAction,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        var options = new MasaBlazorOptions();
-        optionsAction.Invoke(options);
-
         return services.AddMasaBlazorInternal(optionsAction, masaBlazorServiceLifetime);
     }
 
@@ -47,15 +45,18 @@ public static class ServiceCollectionExtensions
         Action<MasaBlazorOptions>? optionsAction = null,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
+        if (optionsAction != null)
+        {
+            services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
+        }
+
         services.TryAddScoped<LocalStorage>();
         services.AddI18n();
         
         services.TryAdd<Application>(masaBlazorServiceLifetime);
         services.TryAdd(ServiceDescriptor.Describe(typeof(MasaBlazor), sp =>
         {
-            var options = new MasaBlazorOptions();
-            optionsAction?.Invoke(options);
-
+            var options = sp.GetRequiredService<IOptions<MasaBlazorOptions>>().Value;
             var application = sp.GetRequiredService<Application>();
             return new MasaBlazor(
                 options.RTL,
