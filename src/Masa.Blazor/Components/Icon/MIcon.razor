@@ -3,12 +3,13 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <IfTransitionElement
+    <ToggleableTransitionElement
         Tag="@Tag"
-        Value="@If"
+        Value="@_transitionValue"
         Class="@GetClass()"
         Style="@GetStyle()"
-        ReferenceCaptureAction="_ => Ref = _"
+        ReferenceCaptureAction="r => Ref = r"
+        ConditionType="@_transitionConditionType"
         type="@(OnClick.HasDelegate ? "button" : null)"
         __internal_stopPropagation_onmouseup="@OnMouseupStopPropagation"
         __internal_preventDefault_onmouseup="@OnMouseupPreventDefault"
@@ -32,5 +33,5 @@
         {
             @ComputedIcon?.AsT0
         }
-    </IfTransitionElement>
+    </ToggleableTransitionElement>
 </CascadingValue>
