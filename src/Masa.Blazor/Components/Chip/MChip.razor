@@ -28,11 +28,10 @@
 
 @code {
 
-    @*TODO: 240516测试一下，之前是ShowTransitionElement*@
     private RenderFragment GenFilter() => __builder =>
     {
         <ExpandXTransition>
-            <MIcon If="@IsActive"
+            <MIcon TransitionShow="@IsActive"
                    Class="@_block.Element("filter").Name"
                    Icon="@FilterIcon" Left/>
         </ExpandXTransition>

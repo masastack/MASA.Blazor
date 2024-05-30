@@ -1,4 +1,5 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Transition;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
@@ -8,7 +9,10 @@ namespace Masa.Blazor
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
+        // TODO: Rename to TransitionIf in the next major version
         [Parameter] public bool If { get; set; } = true;
+
+        [Parameter] public bool TransitionShow { get; set; } = true;
 
         [Parameter] public bool Dense { get; set; }
 
@@ -109,6 +113,8 @@ namespace Masa.Blazor
         private bool _clickEventRegistered;
 
         private string? _iconCss;
+        private bool _transitionValue;
+        private ConditionType _transitionConditionType = ConditionType.Show;
 
         public bool Medium => false;
 
@@ -248,6 +254,17 @@ namespace Masa.Blazor
             if (OnClick.HasDelegate)
             {
                 Tag = "button";
+            }
+
+            if (IsDirtyParameter(nameof(If)))
+            {
+                _transitionValue = If;
+                _transitionConditionType = ConditionType.If;
+            }
+            else
+            {
+                _transitionValue = TransitionShow;
+                _transitionConditionType = ConditionType.Show;
             }
         }
 

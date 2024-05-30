@@ -4,6 +4,17 @@ namespace Masa.Blazor;
 
 public class ToggleableTransitionElement : TransitionElementBase<bool>
 {
+    public ToggleableTransitionElement(ConditionType conditionType)
+    {
+        ConditionType = conditionType;
+    }
+
+    public ToggleableTransitionElement() : this(ConditionType.Show)
+    {
+    }
+
+    [Parameter] public ConditionType ConditionType { get; set; }
+
     [Parameter(CaptureUnmatchedValues = true)]
     public override IDictionary<string, object> AdditionalAttributes
     {
@@ -45,17 +56,16 @@ public class ToggleableTransitionElement : TransitionElementBase<bool>
     {
         get
         {
-            var style = Transition?.GetStyle(State);
-            if (style != null)
+            var styleBuilder = new StyleBuilder();
+            styleBuilder.Add(base.ComputedStyle);
+            styleBuilder.Add(Transition?.GetStyle(State));
+
+            if (ConditionType == ConditionType.Show && !LazyValue)
             {
-                var stringBuilder = new StringBuilder();
-                stringBuilder.Append(base.ComputedStyle);
-                stringBuilder.Append(style);
-                stringBuilder.Append("; ");
-                return stringBuilder.ToString().TrimEnd();
+                styleBuilder.Add("display:none;");
             }
 
-            return base.ComputedStyle;
+            return styleBuilder.ToString();
         }
     }
 
@@ -163,5 +173,15 @@ public class ToggleableTransitionElement : TransitionElementBase<bool>
     private void ShowElement()
     {
         LazyValue = true;
+    }
+
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        if (ConditionType == ConditionType.If && !LazyValue)
+        {
+            return;
+        }
+
+        base.BuildRenderTree(builder);
     }
 }

@@ -1,12 +1,5 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Transition;
 
-public class IfTransitionElement : ToggleableTransitionElement
-{
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        if (LazyValue)
-        {
-            base.BuildRenderTree(builder);
-        }
-    }
-}
+namespace Masa.Blazor;
+
+public class IfTransitionElement() : ToggleableTransitionElement(ConditionType.If);
