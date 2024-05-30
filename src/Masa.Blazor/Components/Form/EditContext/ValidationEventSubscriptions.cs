@@ -270,7 +270,7 @@ internal sealed class ValidationEventSubscriptions : IDisposable
 
         if (EnableI18n)
         {
-            var key = $"{fieldIdentifier.Model.GetType().FullName}.{fieldIdentifier.FieldName}";
+            var key = $"{fieldIdentifier.Model.GetType().FullName}.{_i18n.Culture.Name}.{fieldIdentifier.FieldName}";
             if (DisplayNameMap.TryGetValue(key, out var displayName) is false)
             {
                 displayName = fieldIdentifier.Model.GetType().GetProperty(fieldIdentifier.FieldName)!.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
