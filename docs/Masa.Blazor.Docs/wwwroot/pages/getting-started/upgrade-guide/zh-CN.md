@@ -1,5 +1,36 @@
 # 升级指南
 
+## 从 v1.5.x 升级到 v1.6.0
+
+### 更改脚本
+
+```diff
+- <script src="_content/BlazorComponent/js/blazor-component.js"></script>
++ <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
+```
+
+### 删除所有有关 BlazorComponent 的引用
+
+```diff _Imports.razor
+- @using BlazorComponent
+- @using BlazorComponent.I18n
+```
+
+```diff _Imports.cs
+- global using BlazorComponent;
+- global using BlazorComponent.I18n;
+```
+
+### 组件
+
+#### DragZone
+
+该组件在 v1.4.0 中已弃用，现在已删除。建议使用 [MSortable](/blazor/labs/sortable) 组件。
+
+#### Data/DataTable
+
+`Locale` 参数一直没有实现，而且没有实现的必要，现已删除。
+
 ## 从 v1.4.0 升级到 v1.5.0
 
 ### 组件
