@@ -3,8 +3,6 @@
 [GenerateOneOf]
 public partial class Icon : OneOfBase<string, SvgPath, SvgPath[]>
 {
-    public bool IsText => IsT0;
-
     public bool IsSvg => IsT1 || IsT2;
 
     public SvgPath[] GetSvgPaths()
