@@ -172,7 +172,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         base.OnInitialized();
 
         Form?.Register(this);
-        
+
         Id ??= "input-" + Guid.NewGuid().ToString("N");
 
         InternalValue = Value;
@@ -282,7 +282,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
             CascadingIsDark = MasaBlazor.Theme.Dark;
         }
 #endif
-        
+
         SubscribeValidationStateChanged();
 
         if (ValueChanged.HasDelegate && !EqualityComparer<TValue>.Default.Equals(Value, InternalValue))
@@ -391,28 +391,26 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         return Task.CompletedTask;
     }
 
-    protected virtual void InternalValidate()
+    protected void InternalValidate()
     {
-        var previousErrorBucket = ErrorBucket;
-        ErrorBucket.Clear();
-
-        if (EditContext != null)
+        if (EditContext == null)
         {
-            if (!EqualityComparer<FieldIdentifier>.Default.Equals(ValueIdentifier, default))
-            {
-                EditContext.NotifyFieldChanged(ValueIdentifier);
-            }
-        }
-        else
-        {
+            var previousErrorBucket = ErrorBucket;
+            ErrorBucket.Clear();
             ErrorBucket.AddRange(ValidateRules(InternalValue));
             if (!previousErrorBucket.OrderBy(e => e).SequenceEqual(ErrorBucket.OrderBy(e => e)))
             {
+                Form?.UpdateValidValue();
                 StateHasChanged();
             }
+
+            return;
         }
 
-        Form?.UpdateValidValue();
+        if (!EqualityComparer<FieldIdentifier>.Default.Equals(ValueIdentifier, default))
+        {
+            EditContext.NotifyFieldChanged(ValueIdentifier);
+        }
     }
 
     private IEnumerable<string> ValidateRules(TValue? value)
@@ -497,7 +495,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         ErrorBucket.Clear();
     }
 
-    protected virtual void HandleOnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
+    protected void HandleOnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
     {
         // The following conditions require an error message to be displayed:
         // 1. Force validation, because it validates all input elements
@@ -511,11 +509,15 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         _forceStatus = false;
 
+        ErrorBucket.Clear();
+
         var editContextErrors = EditContext!.GetValidationMessages(ValueIdentifier).ToList();
         ErrorBucket.AddRange(editContextErrors);
 
         var ruleErrors = ValidateRules(InternalValue);
         ErrorBucket.AddRange(ruleErrors);
+
+        Form?.UpdateValidValue();
 
         InvokeStateHasChanged();
     }
