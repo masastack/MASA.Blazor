@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent", "src\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{E44B505E-644E-4399-AAD5-F7726AEA86F9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{961D5CBE-393B-4C65-B82D-4BA7F9433295}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Shared", "docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{7C0A9B3A-ACF3-4742-84EA-7E6F987826E6}"
@@ -39,10 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E44B505E-644E-4399-AAD5-F7726AEA86F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E44B505E-644E-4399-AAD5-F7726AEA86F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E44B505E-644E-4399-AAD5-F7726AEA86F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E44B505E-644E-4399-AAD5-F7726AEA86F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{961D5CBE-393B-4C65-B82D-4BA7F9433295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{961D5CBE-393B-4C65-B82D-4BA7F9433295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{961D5CBE-393B-4C65-B82D-4BA7F9433295}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,7 +82,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E44B505E-644E-4399-AAD5-F7726AEA86F9} = {CC0C651C-DD30-4DAD-872E-8AC484B712E5}
 		{961D5CBE-393B-4C65-B82D-4BA7F9433295} = {CC0C651C-DD30-4DAD-872E-8AC484B712E5}
 		{7C0A9B3A-ACF3-4742-84EA-7E6F987826E6} = {3A19290D-DC10-4317-89B2-2B7CD1FD4723}
 		{C72FA11E-E756-4475-8C82-82A6BCF6ACA0} = {D33F490D-1A15-44E0-BA04-291BAE3389EF}
