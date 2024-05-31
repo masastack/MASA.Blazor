@@ -9,14 +9,34 @@ public class I18n
 
     public I18n(IOptions<MasaBlazorOptions> options)
     {
-        SetCulture(options.Value.Locale?.UICulture ?? new CultureInfo("en-US"));
+        var defaultCulture = new CultureInfo("en-US");
+        SetCulture(options.Value.Locale?.Culture ?? defaultCulture, options.Value.Locale?.UICulture ?? defaultCulture);
     }
 
+    /// <summary>
+    /// The UICulture of the current thread.
+    /// </summary>
     [NotNull] public CultureInfo? Culture { get; private set; }
 
     [NotNull] public IReadOnlyDictionary<string, string>? Locale { get; private set; }
 
-    public void SetCulture(CultureInfo uiCulture)
+    /// <summary>
+    /// Sets the culture for the current thread and optionally sets the UI culture.
+    /// </summary>
+    /// <param name="culture">The culture to set for the current thread.</param>
+    /// <param name="uiCulture">Optional. The culture to set for the UI. If not provided, the value of 'culture' is used.</param>
+    public void SetCulture(CultureInfo culture, CultureInfo? uiCulture = null)
+    {
+        SetUICulture(uiCulture ?? culture);
+
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+    }
+
+    /// <summary>
+    /// Sets the UI culture for the current thread.
+    /// </summary>
+    /// <param name="uiCulture">The culture to set for the UI.</param>
+    public void SetUICulture(CultureInfo uiCulture)
     {
         SetCultureAndLocale(uiCulture);
 
