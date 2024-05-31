@@ -7,10 +7,10 @@ public class I18n
 {
     public event EventHandler? CultureChanged;
 
-    public I18n(IOptions<MasaBlazorOptions> options)
+    public I18n(MasaBlazorOptions options)
     {
         var defaultCulture = new CultureInfo("en-US");
-        SetCulture(options.Value.Locale?.Culture ?? defaultCulture, options.Value.Locale?.UICulture ?? defaultCulture);
+        SetCulture(options.Locale?.Culture ?? defaultCulture, options.Locale?.UICulture ?? defaultCulture);
     }
 
     /// <summary>
