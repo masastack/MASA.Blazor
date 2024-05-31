@@ -1,5 +1,36 @@
 # Upgrade Guides
 
+## Upgrading form v1.5.x to v1.6.0
+
+### Change the script
+
+```diff
+- <script src="_content/BlazorComponent/js/blazor-component.js"></script>
++ <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
+```
+
+### Remove all references to BlazorComponent
+
+```diff _Imports.razor
+- @using BlazorComponent
+- @using BlazorComponent.I18n
+```
+
+```diff _Imports.cs
+- global using BlazorComponent;
+- global using BlazorComponent.I18n;
+```
+
+### Components
+
+#### DragZone
+
+The component was deprecated in v1.4.0 and has now been removed. It is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+
+#### Data/DataTable
+
+The `Locale` parameter has never been implemented, and there is no need to implement it, it has now been removed.
+
 ## Upgrading form v1.4.x to v1.5.0
 
 ### Components
@@ -34,7 +65,7 @@ This component is deprecated but not deleted, it is recommended to use the [MSor
 #### InfiniteScroll
 
 The parameter `Parent` no longer supports **ElementReference** type values, please use CSS selector strings. For the reason of this change,
-please refer to [Github](https://github.com/masastack/MASA.Blazor/issues/1820#issuecomment-2041300810).
+please refer to [GitHub](https://github.com/masastack/MASA.Blazor/issues/1820#issuecomment-2041300810).
 
 #### PageContainer
 
