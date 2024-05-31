@@ -2,16 +2,26 @@
 
 public class Locale
 {
+    public CultureInfo Culture { get; }
+
     public CultureInfo UICulture { get; }
 
     public Locale(string current, string fallback = "en-US")
     {
-        UICulture = GetValidCulture(current, fallback);
+        Culture = GetValidCulture(current, fallback);
+        UICulture = Culture;
     }
 
-    public Locale(CultureInfo uiCulture)
+    public Locale(string current, string uiCurrent, string fallback, string uiFallback)
     {
-        UICulture = uiCulture;
+        Culture = GetValidCulture(current, fallback);
+        UICulture = GetValidCulture(uiCurrent, uiFallback);
+    }
+
+    public Locale(CultureInfo culture, CultureInfo? uiCulture = null)
+    {
+        Culture = culture;
+        UICulture = uiCulture ?? culture;
     }
 
     private static CultureInfo GetValidCulture(string? cultureName, string fallbackCultureName)
