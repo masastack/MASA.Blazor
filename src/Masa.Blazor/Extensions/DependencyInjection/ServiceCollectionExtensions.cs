@@ -11,7 +11,6 @@ using Masa.Blazor.Mixins.Activatable;
 using Masa.Blazor.Popup;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -45,18 +44,24 @@ public static class ServiceCollectionExtensions
         Action<MasaBlazorOptions>? optionsAction = null,
         ServiceLifetime masaBlazorServiceLifetime = ServiceLifetime.Scoped)
     {
-        if (optionsAction != null)
+        services.TryAddScoped<MasaBlazorOptions>(_ =>
         {
-            services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
-        }
+            var options = new MasaBlazorOptions();
+            optionsAction?.Invoke(options);
+            return options;
+        });
 
         services.TryAddScoped<LocalStorage>();
-        services.AddI18n();
-        
+        services.TryAddScoped<I18n>(sp =>
+        {
+            var options = sp.GetRequiredService<MasaBlazorOptions>();
+            return new I18n(options);
+        });
+
         services.TryAdd<Application>(masaBlazorServiceLifetime);
         services.TryAdd(ServiceDescriptor.Describe(typeof(MasaBlazor), sp =>
         {
-            var options = sp.GetRequiredService<IOptions<MasaBlazorOptions>>().Value;
+            var options = sp.GetRequiredService<MasaBlazorOptions>();
             var application = sp.GetRequiredService<Application>();
             return new MasaBlazor(
                 options.RTL,
@@ -85,7 +90,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
-        
+
         services.TryAddTransient<ActivatableJsModule>();
         services.TryAddTransient<InputJSModule>();
         services.TryAddTransient<TransitionJSModule>();

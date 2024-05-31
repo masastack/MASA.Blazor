@@ -8,13 +8,6 @@ public static class I18nServiceCollectionExtensions
 {
     private const string SUPPORTED_CULTURES_JSON = "supportedCultures.json";
 
-    internal static IServiceCollection AddI18n(this IServiceCollection services)
-    {
-        services.TryAddScoped<Masa.Blazor.I18n>();
-
-        return services;
-    }
-
     public static IMasaBlazorBuilder AddI18n(this IMasaBlazorBuilder builder,
         params(string cultureName, Dictionary<string, string> map)[] locales)
     {
