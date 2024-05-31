@@ -90,8 +90,8 @@ namespace Masa.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
-        private const string svgPattern1 = @"^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+";
-        private const string svgPattern2 = @"[\dz]$";
+        private static Regex _reg1 = new(@"^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+", RegexOptions.IgnoreCase);
+        private static Regex _reg2 = new(@"[\dz]$", RegexOptions.IgnoreCase);
 
         private static readonly Dictionary<string, object> s_defaultSvgAttrs = new()
         {
@@ -146,36 +146,30 @@ namespace Masa.Blazor
         {
             Icon? icon;
 
-            if (Icon != null)
+            if (Icon is { IsSvg: true })
             {
-                icon = Icon.IsAlias ? MasaBlazor.Icons.Aliases.GetIconOrDefault(Icon.AsT0) : Icon;
-            }
-            else
-            {
-                var textContent = ChildContent?.GetTextContent();
-                IconContent = textContent;
-
-                if (string.IsNullOrWhiteSpace(textContent))
-                {
-                    return;
-                }
-
-                if (textContent.StartsWith("$"))
-                {
-                    icon = MasaBlazor.Icons.Aliases.GetIconOrDefault(textContent);
-                }
-                else
-                {
-                    icon = CheckIfSvg(textContent) ? new SvgPath(textContent) : textContent;
-                }
+                ComputedIcon = Icon;
+                return;
             }
 
-            if (icon is null)
+            var iconText = Icon is { IsT0: true } ? Icon.AsT0 : ChildContent?.GetTextContent();
+            IconContent = iconText;
+
+            if (string.IsNullOrWhiteSpace(iconText))
             {
                 return;
             }
 
-            if (icon.IsSvg)
+            if (iconText.StartsWith("$"))
+            {
+                icon = MasaBlazor.Icons.Aliases.GetIconOrDefault(iconText);
+            }
+            else
+            {
+                icon = IsSvgPath(iconText) ? new SvgPath(iconText) : iconText;
+            }
+
+            if (icon!.IsSvg)
             {
                 ComputedIcon = icon;
             }
@@ -335,21 +329,14 @@ namespace Masa.Blazor
             }
         }
 
-        protected static bool CheckIfSvg(string iconOrPath)
-        {
-            return RegexSvgPath(iconOrPath);
-        }
-
         /// <summary>
         /// Check if the string is a valid svg path
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static bool RegexSvgPath(string str)
+        public static bool IsSvgPath(string str)
         {
-            var reg1 = new Regex(svgPattern1, RegexOptions.IgnoreCase);
-            var reg2 = new Regex(svgPattern2, RegexOptions.IgnoreCase);
-            return reg1.Match(str).Success && reg2.Match(str).Success && str.Length > 4;
+            return _reg1.Match(str).Success && _reg2.Match(str).Success && str.Length > 4;
         }
     }
 }
