@@ -94,6 +94,8 @@ namespace Masa.Blazor.Presets
 
         protected override IEnumerable<string> BuildComponentClass()
         {
+            yield return _block.Name;
+
             if (Position is SnackPosition.TopLeft or SnackPosition.TopRight or SnackPosition.TopCenter)
             {
                 yield return _block.Modifier("top");
