@@ -75,9 +75,9 @@
             document.getElementById("app").classList.add("dark")
         }
     </script>
-    <script src="js/sw.js?v=160"></script>
+    <script src="js/sw.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-    <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
+    <script src="_content/Masa.Blazor/js/masa-blazor.js?version="></script>
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-it-emoji.min.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-parser.js"></script>
@@ -123,15 +123,6 @@
         }).then(function () {
             Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
         });
-    </script>
-    <script>
-        const version = "1.6.0";
-        const key = "docs-version"
-        const wasmUpdateVersion = localStorage.getItem(key)
-        if (!wasmUpdateVersion || wasmUpdateVersion !== version) {
-            if ('caches' in window) { caches.keys().then(function(cacheNames) { cacheNames.forEach(function(cacheName) { caches.open(cacheName).then(function(cache) { cache.keys().then(function(requests) { requests.forEach(function(request) { cache.delete(request); }); }); }); }); }); }
-            localStorage.setItem(key, version)
-        }
     </script>
 </body>
 
