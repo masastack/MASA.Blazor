@@ -83,6 +83,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     [Parameter]
     public bool ShowExpand { get; set; }
 
+    [Parameter] public RenderFragment<DataTableHeaderSelectContext>? HeaderDataTableSelectContent { get; set; }
+
     [Parameter]
     public RenderFragment<DataTableItemExpandOrSelectContext<TItem>>? ItemDataTableExpandContent { get; set; }
 
