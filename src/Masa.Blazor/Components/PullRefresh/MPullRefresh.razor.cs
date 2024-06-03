@@ -93,7 +93,7 @@ public partial class MPullRefresh
                 Passive = false
             }, new EventListenerExtras()
             {
-                PreventDefault = true,
+                PreventDefault = false,
                 Throttle = 16
             });
         }
@@ -146,6 +146,11 @@ public partial class MPullRefresh
 
             if (_reachTop && _toucher.DeltaY >= 0 && _toucher.IsVertical)
             {
+                // HACK: In JavaScript, should dynamically set the `preventDefault()` here,
+                // but in Blazor, it's difficult to do that. so we set it to false in `AddHtmlElementEventListener`.
+                // If it's necessary, should refactor this part.
+                // args.PreventDefault();
+
                 await _throttleTask.RunAsync(async () =>
                 {
                     if (IsTouchable)
