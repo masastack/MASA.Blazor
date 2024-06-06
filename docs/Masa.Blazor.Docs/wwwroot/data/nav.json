@@ -122,7 +122,10 @@
       "editors",
       "enqueued-snackbars",
       "error-handler",
-      "expansion-panels",
+      {
+        "title": "expansion-panels",
+        "state": "update"
+      },
       "floating-action-buttons",
       "footers",
       {
