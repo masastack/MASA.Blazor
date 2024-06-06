@@ -7,6 +7,29 @@
          id="@Id"
          @ref="Ref"
          @attributes="@Attributes">
+        @GenTitle()
+        @GenText()
         @ChildContent
     </div>
 </CascadingValue>
+
+@code {
+
+    private RenderFragment GenTitle() => __builder =>
+    {
+        if (!string.IsNullOrWhiteSpace(Title))
+        {
+            <MExpansionPanelHeader>@Title</MExpansionPanelHeader>
+        }
+    };
+
+
+    private RenderFragment GenText() => __builder =>
+    {
+        if (!string.IsNullOrWhiteSpace(Text))
+        {
+            <MExpansionPanelContent>@Text</MExpansionPanelContent>
+        }
+    };
+
+}

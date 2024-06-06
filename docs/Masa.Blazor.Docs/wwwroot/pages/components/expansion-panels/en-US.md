@@ -59,6 +59,10 @@ The `readonly` attribute does the same thing as disabled , but without styling.
 
 <masa-example file="Examples.components.expansion_panels.Readonly"></masa-example>
 
+#### Subcomponent props {released-on=v1.6.0}
+
+<masa-example file="Examples.components.expansion_panels.SubComponents"></masa-example>
+
 ### Misc
 
 #### Advanced

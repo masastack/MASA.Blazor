@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Mixins;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
 {
@@ -9,6 +7,14 @@ public partial class MExpansionPanel : MGroupItem<MExpansionPanels>
     }
 
     [Parameter] public bool Readonly { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    public string? Title { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    public string? Text { get; set; }
 
     public bool NextActive => ItemGroup != null && ItemGroup.NextActiveKeys.Contains(Value);
 
