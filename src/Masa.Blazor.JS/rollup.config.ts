@@ -8,7 +8,7 @@ export default defineConfig({
   input: "./src/main.ts",
   output: [
     {
-      file: "../Masa.Blazor/wwwroot/masa-blazor.js",
+      file: "../Masa.Blazor/wwwroot/js/masa-blazor.js",
       format: "iife",
       sourcemap: true,
     },
