@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor
-@using Masa.Blazor.Extensions
 @inherits MasaComponentBase
 
 <div class="@GetClass()"
      style="@GetStyle()"
-     @ref="_elementReference">
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
     <div class="swiper-wrapper">
         <CascadingValue Value="this" IsFixed>
             @ChildContent

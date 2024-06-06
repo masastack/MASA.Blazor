@@ -6,7 +6,7 @@ public class SwiperJsModule : JSModule
     {
     }
 
-    public async ValueTask<ISwiperJSObjectReferenceProxy> Init(
+    public async ValueTask<SwiperJSObjectReferenceProxy> Init(
         ElementReference el,
         SwiperOptions options,
         DotNetObjectReference<object> interopHandle

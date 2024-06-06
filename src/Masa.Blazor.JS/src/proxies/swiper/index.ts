@@ -1,10 +1,11 @@
 import SwiperClass from "swiper";
 import { SwiperOptions } from "swiper/types/swiper-options";
 
+import { BaseProxy } from "../baseProxy";
+
 declare const Swiper: SwiperClass;
 
-class SwiperProxy {
-  swiper: SwiperClass;
+class SwiperProxy extends BaseProxy<SwiperClass> {
   handle: DotNet.DotNetObject;
 
   constructor(
@@ -26,8 +27,6 @@ class SwiperProxy {
       delete el._swiper;
     }
 
-    this.handle = handle;
-
     swiperOptions ??= {};
 
     if (swiperOptions.pagination) {
@@ -35,29 +34,32 @@ class SwiperProxy {
         swiperOptions.pagination["type"].toLowerCase();
     }
 
-    this.swiper = new (Swiper as any)(el, swiperOptions);
-    this.swiper.on("realIndexChange", (e) => this.onRealIndexChange(e, this));
+    const swiper = new (Swiper as any)(el, swiperOptions);
+    super(swiper);
+
+    this.handle = handle;
+    this.target.on("realIndexChange", (e) => this.onRealIndexChange(e, this));
 
     el._swiper = {
-      instance: this.swiper,
+      instance: this.target,
       handle: handle,
     };
   }
 
   slideTo(index: number, speed?: number, runCallbacks?: boolean) {
-    this.swiper.slideToLoop(index, speed, runCallbacks);
+    this.target.slideToLoop(index, speed, runCallbacks);
   }
 
   slideNext(speed?: number) {
-    this.swiper.slideNext(speed);
+    this.target.slideNext(speed);
   }
 
   slidePrev(speed?: number) {
-    this.swiper.slidePrev(speed);
+    this.target.slidePrev(speed);
   }
 
   dispose() {
-    this.swiper && this.swiper.destroy(true);
+    this.target && this.target.destroy(true);
     this.handle.dispose();
   }
 
