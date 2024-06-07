@@ -25,6 +25,7 @@ export function registerTextareaAutoGrowEvent(input: HTMLElement) {
 }
 
 export function unregisterTextareaAutoGrowEvent(input: HTMLElement, textareaAutoGrowNextId: number) {
+    if (!input) return;
     const inputCallback = textareaAutoGrowMap[textareaAutoGrowNextId];
     if (inputCallback) {
         input.removeEventListener('input', inputCallback);
