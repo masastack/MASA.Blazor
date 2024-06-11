@@ -12,7 +12,7 @@ namespace Masa.Blazor
 
         [Parameter, EditorRequired] public Func<TItem, TKey> ItemKey { get; set; } = null!;
 
-        [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; } = null!;
+        [Parameter, EditorRequired] public Func<TItem, List<TItem>?> ItemChildren { get; set; } = null!;
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
