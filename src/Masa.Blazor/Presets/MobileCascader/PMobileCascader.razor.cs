@@ -52,6 +52,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     private TItem? _loadingItem;
     private List<TItem> _loadedItems = new();
     private bool _visible;
+    private MTabs? _tabs;
 
     private List<TItem> SelectedItems { get; set; } = new();
 
@@ -207,6 +208,8 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
             Tabs = tabs;
         }
+
+        _tabs?.CallSlider();
     }
 
     private async Task HandleVisibleChanged(bool val)
