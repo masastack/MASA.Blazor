@@ -344,7 +344,7 @@
 
 .m-input--switch--text .m-input--switch__right {
     position: absolute;
-    right: -22px;
+    left: 30px;
     width: 30px;
     height: 30px;
     text-align: center;
@@ -365,6 +365,24 @@
     width: 44px;
     height: 44px;
     top: calc(50% - 30px);
+}
+
+.m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    width: 36px;
+    height: 36px;
+    top: calc(50% - 25px);
+}
+
+.m-application--is-ltr .m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    left: -10px;
+}
+
+.m-application--is-rtl .m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    right: -10px;
+}
+
+.m-input--switch--text .m-input--selection-controls__input {
+    width: 64px;
 }
 
 /* cascader */
