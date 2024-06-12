@@ -1,0 +1,92 @@
+﻿@if (Multiple)
+{
+    <MAutocomplete @bind-Value="@_values"
+                   Items="@_items"
+                   ItemText="@(u => u)"
+                   ItemValue="@(u => u)"
+                   Dense="@Dense"
+                   Filled="@Filled"
+                   Rounded="@Rounded"
+                   Solo="@Solo"
+                   SoloInverted="@SoloInverted"
+                   AutoSelectFirst="@AutoSelectFirst"
+                   Clearable="@Clearable"
+                   Chips="@Chips"
+                   DeletableChips="@DeletableChips"
+                   SmallChips="@SmallChips"
+                   Multiple>
+    </MAutocomplete>
+}
+else
+{
+    <MAutocomplete @bind-Value="@_value"
+                   Items="@_items"
+                   ItemText="@(u => u)"
+                   ItemValue="@(u => u)"
+                   Dense="@Dense"
+                   Filled="@Filled"
+                   Rounded="@Rounded"
+                   Solo="@Solo"
+                   SoloInverted="@SoloInverted"
+                   AutoSelectFirst="@AutoSelectFirst"
+                   Clearable="@Clearable"
+                   Chips="@Chips"
+                   DeletableChips="@DeletableChips"
+                   SmallChips="@SmallChips">
+    </MAutocomplete>
+}
+
+@code {
+    [Parameter] public bool Dense { get; set; }
+    [Parameter] public bool Filled { get; set; }
+    [Parameter] public bool Rounded { get; set; }
+    [Parameter] public bool Solo { get; set; }
+    [Parameter] public bool SoloInverted { get; set; }
+    [Parameter] public bool AutoSelectFirst { get; set; }
+    [Parameter] public bool Clearable { get; set; }
+    [Parameter] public bool Chips { get; set; }
+    [Parameter] public bool DeletableChips { get; set; }
+    [Parameter] public bool SmallChips { get; set; }
+    [Parameter] public bool Multiple { get; set; }
+
+    private List<string> _values = [];
+    private string? _value;
+    private bool _prevMultiple;
+
+    private List<string> _items = new List<string>()
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming"
+    };
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (_prevMultiple != Multiple)
+        {
+            _prevMultiple = Multiple;
+
+            if (Multiple)
+            {
+                _values = string.IsNullOrWhiteSpace(_value) ? [] : [_value];
+            }
+            else
+            {
+                _value = _values.FirstOrDefault();
+            }
+        }
+    }
+
+}
