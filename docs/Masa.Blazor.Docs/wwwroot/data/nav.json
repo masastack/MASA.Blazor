@@ -139,7 +139,10 @@
           },
           "checkboxes",
           "file-inputs",
-          "forms",
+          {
+            "title": "forms",
+            "state": "update"
+          },
           "otp-input",
           "radios",
           "range-sliders",

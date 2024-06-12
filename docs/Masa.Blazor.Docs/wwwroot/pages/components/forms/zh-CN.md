@@ -31,7 +31,7 @@ related:
 
 <masa-example file="Examples.components.forms.Validation"></masa-example>
 
-#### 通过提交和清除进行验证
+#### 通过提交和清除进行验证 {updated-in=v1.6.0}
 
 在 **MForm** 的内容里可以使用 `Context` 提供的方法，在 **MForm** 外部可以使用 `@ref` 拿到组件实例提供的方法。
 
