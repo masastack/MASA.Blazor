@@ -31,7 +31,7 @@ In addition to validating on each input component via the `Rules` prop, you can 
 
 <masa-example file="Examples.components.forms.Validation"></masa-example>
 
-#### Validation with submit and clear
+#### Validation with submit and clear {updated-in=v1.6.0}
 
 You can use the methods provided by `Context` in the content of **MForm**, or use the component instance provided by `@ref` outside of **MForm**.
 
