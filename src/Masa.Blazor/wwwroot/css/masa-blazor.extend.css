@@ -1563,3 +1563,40 @@ html.m-overlay-scroll-blocked {
     height: 100%;
     overflow-y: scroll;
 }
+
+/* toolbar */
+
+.m-toolbar.primary > .m-toolbar__content .m-btn--icon,
+.m-toolbar.primary > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-primary);
+}
+
+.m-toolbar.secondary > .m-toolbar__content .m-btn--icon,
+.m-toolbar.secondary > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-secondary);
+}
+
+.m-toolbar.accent > .m-toolbar__content .m-btn--icon,
+.m-toolbar.accent > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-accent);
+}
+
+.m-toolbar.error > .m-toolbar__content .m-btn--icon,
+.m-toolbar.error > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-error);
+}
+
+.m-toolbar.info > .m-toolbar__content .m-btn--icon,
+.m-toolbar.info > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-info);
+}
+
+.m-toolbar.success > .m-toolbar__content .m-btn--icon,
+.m-toolbar.success > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-success);
+}
+
+.m-toolbar.warning > .m-toolbar__content .m-btn--icon,
+.m-toolbar.warning > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-warning);
+}
