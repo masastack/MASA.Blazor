@@ -1,13 +1,13 @@
 ﻿@using System.Text.Json
 @using System.Text.Json.Nodes
-@inject HttpClient HttpClient
+@inject IHttpClientFactory HttpClientFactory
 
 <MCard>
     <MToolbar
         Color="primary"
         Dark
         Flat>
-        <MIcon>mdi-silverware</MIcon>
+        <MIcon Class="mr-2">mdi-silverware</MIcon>
         <MToolbarTitle>Local hotspots</MToolbarTitle>
     </MToolbar>
 
@@ -15,7 +15,7 @@
         <MCol>
             <MCardText>
                 <MTreeview
-                    @bind-Value="tree"
+                    @bind-Value="_tree"
                     LoadChildren="Fetch"
                     TKey="string"
                     TItem="Item"
@@ -41,7 +41,7 @@
             Cols="12"
             Md="6">
             <MCardText>
-                @if (tree.Count == 0)
+                @if (_tree.Count == 0)
                 {
                     <div
                         key="title"
@@ -51,7 +51,7 @@
                 }
 
                 <ScrollXTransition>
-                    @foreach (var (selection, i) in tree.Select((item, i) => (item,i)))
+                    @foreach (var (selection, i) in _tree.Select((item, i) => (item,i)))
                     {
                         <MChip
                             @key="i"
@@ -77,7 +77,7 @@
     <MCardActions>
         <MButton
             Text
-            OnClick="() => tree.Clear()">
+            OnClick="() => _tree.Clear()">
             Reset
         </MButton>
 
@@ -97,12 +97,12 @@
 
 @code {
 
-    List<JsonNode> breweries = new();
-    List<string> tree = new();
-    List<string> types = new();
-
-    List<Item> _items;
-    bool _itemsChanged = true;
+    private HttpClient? _httpClient;
+    private List<JsonNode> _breweries = new();
+    private List<string> _tree = new();
+    private List<string> _types = new();
+    private List<Item> _items = new();
+    private bool _itemsChanged = true;
 
     List<Item> items
     {
@@ -115,9 +115,9 @@
 
             var top = new Item("1", "All Breweries", new List<Item>());
 
-            if (types.Any())
+            if (_types.Any())
             {
-                top.Children = types.Select(type => new Item(type, getName(type), GetChildren(type))).ToList();
+                top.Children = _types.Select(type => new Item(type, getName(type), GetChildren(type))).ToList();
             }
 
             _items = new List<Item> {top};
@@ -130,22 +130,24 @@
 
     async Task Fetch(Item item)
     {
-        var response = await HttpClient.GetAsync("https://api.openbrewerydb.org/breweries");
+        _httpClient ??= HttpClientFactory.CreateClient("masa-docs");
+        await Task.Delay(500);
+        var response =  await _httpClient.GetAsync("_content/Masa.Blazor.Docs/data/demo/breweries.json");
         if (response.IsSuccessStatusCode)
         {
             var json = await response.Content.ReadAsStringAsync();
-            breweries = JsonSerializer.Deserialize<List<JsonNode>>(json);
+            _breweries = JsonSerializer.Deserialize<List<JsonNode>>(json) ?? new();
 
-            foreach (var brewery in breweries)
+            foreach (var brewery in _breweries)
             {
-                var type = (string)brewery["brewery_type"];
-                if (!types.Contains(type))
+                var type = (string)brewery["brewery_type"]!;
+                if (!_types.Contains(type))
                 {
-                    types.Add(type);
+                    _types.Add(type);
                 }
             }
 
-            types.Sort();
+            _types.Sort();
 
             _itemsChanged = true;
         }
@@ -154,13 +156,13 @@
     List<Item> GetChildren(string type)
     {
         List<Item> result = new();
-        foreach (var brewery in breweries)
+        foreach (var brewery in _breweries)
         {
-            if ((string)brewery["brewery_type"] != type) continue;
+            if ((string?)brewery["brewery_type"] != type) continue;
 
-            brewery["name"] = getName((string)brewery["name"]);
+            brewery["name"] = getName((string)brewery["name"]!);
 
-            var item = new Item((string)brewery["id"], (string)brewery["name"], null);
+            var item = new Item((string)brewery["id"]!, (string)brewery["name"]!, null);
             result.Add(item);
         }
 
@@ -180,19 +182,9 @@
 
         public string Name { get; set; }
 
-        public List<Item> Children { get; set; }
-
-        public Item()
-        {
-        }
-
-        public Item(string id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public Item(string id, string name, List<Item> children)
+        public List<Item>? Children { get; set; }
+        
+        public Item(string id, string name, List<Item>? children)
         {
             Id = id;
             Name = name;
