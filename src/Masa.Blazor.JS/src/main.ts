@@ -1,4 +1,5 @@
 import * as slider from "./components/slider";
+import * as textarea from "./components/textarea";
 import * as interop from "./interop";
 import { MarkdownParser } from "./proxies/markdown-it";
 
@@ -17,6 +18,7 @@ window.MasaBlazor = {
   interop: {
     ...interop,
     ...slider,
+    ...textarea
   },
   xgplayerPlugins: [],
 };

@@ -128,8 +128,6 @@ public static class JsInteropConstants
 
     public static string SetProperty => $"{JsInteropFuncNamePrefix}setProperty";
 
-    public static string ScrollHeightWithoutHeight => $"{JsInteropFuncNamePrefix}getScrollHeightWithoutHeight";
-
     public static string UpdateWindowTransition => $"{JsInteropFuncNamePrefix}updateWindowTransition";
 
     public static string InvokeMultipleMethod => $"{JsInteropFuncNamePrefix}invokeMultipleMethod";
@@ -159,4 +157,10 @@ public static class JsInteropConstants
     public static string HistoryGo => $"{JsInteropFuncNamePrefix}historyGo";
 
     public static string HistoryReplace => $"{JsInteropFuncNamePrefix}historyReplace";
+    
+    internal static string RegisterTextareaAutoGrowEvent => $"{JsInteropFuncNamePrefix}registerTextareaAutoGrowEvent";
+    
+    internal static string UnregisterTextareaAutoGrowEvent => $"{JsInteropFuncNamePrefix}unregisterTextareaAutoGrowEvent";
+    
+    internal static string CalculateTextareaHeight => $"{JsInteropFuncNamePrefix}calculateTextareaHeight";
 }

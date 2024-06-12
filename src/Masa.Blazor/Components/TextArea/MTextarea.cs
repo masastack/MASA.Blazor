@@ -1,15 +1,8 @@
-﻿using System.Text.Json;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTextarea : MTextField<string>
     {
-        [Parameter]
-        public bool AutoGrow
-        {
-            get => GetValue(false);
-            set => SetValue(value);
-        }
+        [Parameter] public bool AutoGrow { get; set; }
 
         [Parameter] public bool NoResize { get; set; }
 
@@ -17,80 +10,121 @@ namespace Masa.Blazor
 
         [Parameter] public int Rows { get; set; } = 5;
 
-        public override string Tag => "textarea";
+        private static Block _block = new("m-textarea");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private int _jsInteropId = -1; // -1 means not registered
+        private bool _jsInteropReady;
+        private bool _prevAutoGrow;
+        private StringNumber? _prevRowHeight;
 
-        protected double ElementHeight { get; set; }
+        public override string Tag => "textarea";
 
         public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
         protected override Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "rows", Rows },
-            { "style", AutoGrow && ElementHeight > 0 ? $"height:{ElementHeight}px" : null }
+            { "data-row-height", RowHeight },
+            { "data-auto-grow", AutoGrow }
         };
+
+        protected override async Task OnParametersSetAsync()
+        {
+            await base.OnParametersSetAsync();
+
+            if (_prevAutoGrow != AutoGrow)
+            {
+                _prevAutoGrow = AutoGrow;
+                if (AutoGrow)
+                {
+                    await RegisterAutoGrowEventAsync();
+                }
+                else
+                {
+                    await UnregisterAutoGrowEventAsync();
+                }
+            }
+
+            if (_prevRowHeight != RowHeight)
+            {
+                _prevRowHeight = RowHeight;
+
+                if (AutoGrow)
+                {
+                    await CalculateHeightAsync();
+                }
+            }
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender && AutoGrow)
             {
-                await CalculateInputHeight();
-                StateHasChanged();
+                _jsInteropReady = true;
+                await RegisterAutoGrowEventAsync();
             }
 
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        private static Block _block = new("m-textarea");
-        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return base.BuildComponentClass().Concat(new[]{
+            return base.BuildComponentClass().Concat(new[]
+            {
                 _modifierBuilder.Add(AutoGrow).Add("no-resize", AutoGrow || NoResize).Build()
             });
         }
 
-        protected override void RegisterWatchers(PropertyWatcher watcher)
+        private async Task RegisterAutoGrowEventAsync()
         {
-            base.RegisterWatchers(watcher);
+            if (!_jsInteropReady || _jsInteropId > -1)
+            {
+                return;
+            }
 
-            watcher
-                .Watch<bool>(nameof(AutoGrow), ReCalculateInputHeight)
-                .Watch<bool>(nameof(RowHeight), ReCalculateInputHeight);
+            _jsInteropId = await Js.InvokeAsync<int>(JsInteropConstants.RegisterTextareaAutoGrowEvent, InputElement)
+                .ConfigureAwait(false);
+
+            _ = CalculateHeightAsync();
         }
 
-        private void ReCalculateInputHeight()
+        private async Task UnregisterAutoGrowEventAsync()
         {
-            if (AutoGrow)
-            {
-                NextTick(async () =>
-                {
-                    await CalculateInputHeight();
-                    StateHasChanged();
-                });
-            }
+            await Js.InvokeVoidAsync(JsInteropConstants.UnregisterTextareaAutoGrowEvent, InputElement, _jsInteropId)
+                .ConfigureAwait(false);
+            _jsInteropId = -1;
         }
 
         protected override async Task SetValueByJsInterop(string? val)
         {
             await base.SetValueByJsInterop(val);
-            await CalculateInputHeight();
-            StateHasChanged();
+
+            if (AutoGrow)
+            {
+                await CalculateHeightAsync();
+            }
         }
 
-        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        private async Task CalculateHeightAsync()
         {
-            if (OnKeyDown.HasDelegate)
-                await OnKeyDown.InvokeAsync(args);
+            if (!_jsInteropReady)
+            {
+                return;
+            }
+
+            await Js.InvokeVoidAsync(JsInteropConstants.CalculateTextareaHeight, InputElement, Rows,
+                    RowHeight.ToString())
+                .ConfigureAwait(false);
         }
 
-        private async Task CalculateInputHeight()
+        protected override async ValueTask DisposeAsyncCore()
         {
-            var jsonElement = await Js.InvokeAsync<JsonElement>(JsInteropConstants.ScrollHeightWithoutHeight, InputElement);
-            var height = jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : 0;
-            var minHeight = Rows * RowHeight.ToInt32() * 1.0;
+            if (AutoGrow)
+            {
+                await UnregisterAutoGrowEventAsync();
+            }
 
-            ElementHeight = Math.Max(minHeight, height);
+            await base.DisposeAsyncCore();
         }
     }
 }
