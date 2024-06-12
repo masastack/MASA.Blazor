@@ -57,6 +57,7 @@ namespace Masa.Blazor.Presets
         internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         private readonly List<SnackbarOptions> _stack = new();
+        private readonly object _lock = new();
 
         private bool IsDark
         {
@@ -142,26 +143,32 @@ namespace Masa.Blazor.Presets
 
         public void EnqueueSnackbar(SnackbarOptions config)
         {
-            if (MaxCount > 0 && _stack.Count >= MaxCount)
+            lock (_lock)
             {
-                var diff = _stack.Count - MaxCount + 1;
+                if (MaxCount > 0 && _stack.Count >= MaxCount)
+                {
+                    var diff = _stack.Count - MaxCount + 1;
 
-                _stack.RemoveRange(0, diff);
+                    _stack.RemoveRange(0, diff);
+                }
+
+                _stack.Add(config);
+
+                InvokeAsync(StateHasChanged);
             }
-
-            _stack.Add(config);
-
-            InvokeAsync(StateHasChanged);
         }
 
         internal void RemoveSnackbar(Guid id)
         {
-            var config = _stack.FirstOrDefault(c => c.Id == id);
-            if (config is null) return;
+            lock (_lock)
+            {
+                var config = _stack.FirstOrDefault(c => c.Id == id);
+                if (config is null) return;
 
-            _stack.Remove(config);
+                _stack.Remove(config);
 
-            InvokeAsync(StateHasChanged);
+                InvokeAsync(StateHasChanged);
+            }
         }
 
         protected override ValueTask DisposeAsyncCore()
