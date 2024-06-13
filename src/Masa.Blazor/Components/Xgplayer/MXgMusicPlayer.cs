@@ -7,7 +7,7 @@ using Masa.Blazor.Components.Xgplayer.Plugins.Time;
 
 namespace Masa.Blazor;
 
-public class MXgMusicPlayer : BDomComponentBase, IXgplayer
+public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 {
     [Inject] private XgplayerJSModule XgplayerJSModule { get; set; } = default!;
 
@@ -170,8 +170,8 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", CssProvider.GetClass());
-        builder.AddAttribute(2, "style", CssProvider.GetStyle());
+        builder.AddAttribute(1, "class", GetClass());
+        builder.AddAttribute(2, "style", GetStyle());
         builder.AddElementReferenceCapture(3, elementReference => Ref = elementReference);
         builder.AddContent(4, RenderChildContent);
         builder.CloseElement();
@@ -186,11 +186,9 @@ public class MXgMusicPlayer : BDomComponentBase, IXgplayer
         }
     }
 
-    protected override void SetComponentCss()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentCss();
-
-        CssProvider.UseBem("m-xgplayer-music");
+        yield return "m-xgplayer-music";
     }
 
     private async Task InitAsync()

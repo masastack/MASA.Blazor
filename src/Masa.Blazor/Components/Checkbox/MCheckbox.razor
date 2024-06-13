@@ -1,0 +1,22 @@
+﻿@namespace Masa.Blazor
+@typeparam TValue
+@inherits MSelectable<TValue>
+
+@base.BuildRenderTree
+
+@code {
+
+    protected override RenderFragment? GenSelection() => __builder =>
+    {
+        <MIcon Dense="@Dense"
+               Dark="@Dark"
+               Light="@Light"
+               Color="@ValidationState">
+            @ComputedIcon
+        </MIcon>
+
+        @GenInput("checkbox")
+        @GenRipple()
+    };
+
+}

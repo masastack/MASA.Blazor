@@ -33,7 +33,12 @@ public partial class MPicker : MasaComponentBase
 
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
-    private Block _block = new("m-picker");
+    private static Block _block = new("m-picker");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static ModifierBuilder _titleModifierBuilder = _block.Element("title").CreateModifierBuilder();
+    private static ModifierBuilder _bodyModifierBuilder = _block.Element("body").CreateModifierBuilder();
+    private static ModifierBuilder _actionsModifierBuilder = _block.Element("actions").CreateModifierBuilder();
+    
 
     public bool IsDark
     {
@@ -81,12 +86,10 @@ public partial class MPicker : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Flat)
-            .And(Landscape)
-            .And(FullWidth)
+        yield return _modifierBuilder.Add(Flat, Landscape, FullWidth)
             .AddTheme(IsDark, IndependentTheme)
             .AddElevation(Elevation)
             .AddClass("m-card")
-            .GenerateCssClasses();
+            .Build();
     }
 }

@@ -31,7 +31,7 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
     {
         { nameof(MAlert.Color), new SelectParameter(new List<string>() { "red", "orange", "yellow", "green", "blue", "purple" }) },
         { nameof(MAlert.Icon), new SelectParameter(new List<string>() { "mdi-account", "mdi-heart" }) },
-        { nameof(MAlert.Border), new SelectParameter(GetNames(BlazorComponent.Borders.None)) },
+        { nameof(MAlert.Border), new SelectParameter(GetNames(Borders.None)) },
         { nameof(MAlert.Type), new SelectParameter(GetNames(AlertTypes.None), AlertTypes.Success.ToString()) }
     };
 
@@ -47,7 +47,7 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         return parameter.Key switch
         {
             nameof(MAlert.Icon) => (StringBoolean)(string)parameter.Value,
-            nameof(MAlert.Border) => Enum.Parse<BlazorComponent.Borders>((string)parameter.Value),
+            nameof(MAlert.Border) => Enum.Parse<Borders>((string)parameter.Value),
             nameof(MAlert.Type) => Enum.Parse<AlertTypes>((string)parameter.Value),
             nameof(MAlert.Elevation) => (StringNumber)(double)parameter.Value,
             _ => parameter.Value

@@ -17,7 +17,8 @@
 
         protected override RenderFragment GenChildContent() => builder =>
         {
-            new[] { ("recent", "mdi-history"), ("favorites", "mdi-heart"), ("nearby", "mdi-map-marker") }.ForEach(item =>
+            foreach (var item in new[]
+                         { ("recent", "mdi-history"), ("favorites", "mdi-heart"), ("nearby", "mdi-map-marker") })
             {
                 builder.OpenRegion(0);
                 builder.OpenComponent<MButton>(1);
@@ -34,7 +35,7 @@
                 }));
                 builder.CloseComponent();
                 builder.CloseRegion();
-            });
+            }
         };
     }
 }

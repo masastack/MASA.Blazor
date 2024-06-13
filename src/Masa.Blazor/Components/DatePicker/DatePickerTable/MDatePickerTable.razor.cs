@@ -147,10 +147,11 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
         }
 #endif
 
-    protected Block Block = new("m-date-picker-table");
+    protected static Block Block = new("m-date-picker-table");
+    private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return Block.Modifier(Disabled).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
     }
 }

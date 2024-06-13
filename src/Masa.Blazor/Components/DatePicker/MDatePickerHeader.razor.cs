@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.DatePicker;
+﻿
+
+namespace Masa.Blazor.Components.DatePicker;
 
 public partial class MDatePickerHeader : MasaComponentBase
 {
@@ -128,10 +130,12 @@ public partial class MDatePickerHeader : MasaComponentBase
         }
 #endif
 
-    private Block _block = new("m-date-picker-header");
+    private static Block _block = new("m-date-picker-header");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _valueModifierBuilder = _block.Element("value").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Disabled).AddTheme(IsDark, IndependentTheme).GenerateCssClasses();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
     }
 }

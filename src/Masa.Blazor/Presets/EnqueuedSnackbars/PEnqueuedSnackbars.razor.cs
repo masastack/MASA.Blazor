@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor.Presets
 {
-    public partial class PEnqueuedSnackbars : BDomComponentBase
+    public partial class PEnqueuedSnackbars : MasaComponentBase
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -49,12 +50,14 @@ namespace Masa.Blazor.Presets
         public bool CascadingIsDark { get; set; }
         
         private const string ROOT_CSS = "m-enqueued-snackbars";
+        private static Block _block = new(ROOT_CSS);
         internal const int DEFAULT_MAX_COUNT = 5;
         internal const SnackPosition DEFAULT_SNACK_POSITION = SnackPosition.BottomCenter;
         internal const int DEFAULT_MAX_WIDTH = 576;
         internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         private readonly List<SnackbarOptions> _stack = new();
+        private readonly object _lock = new();
 
         private bool IsDark
         {
@@ -90,24 +93,42 @@ namespace Masa.Blazor.Presets
             InvokeAsync(StateHasChanged);
         }
 
-        protected override void SetComponentClass()
+        protected override IEnumerable<string> BuildComponentClass()
         {
-            CssProvider.Apply((cssBuilder) =>
+            yield return _block.Name;
+
+            if (Position is SnackPosition.TopLeft or SnackPosition.TopRight or SnackPosition.TopCenter)
             {
-                cssBuilder.Add(ROOT_CSS)
-                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--left", () => Position == SnackPosition.TopLeft)
-                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--right", () => Position == SnackPosition.TopRight)
-                          .AddIf($"{ROOT_CSS}--top {ROOT_CSS}--center", () => Position == SnackPosition.TopCenter)
-                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--left", () => Position == SnackPosition.BottomLeft)
-                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--right", () => Position == SnackPosition.BottomRight)
-                          .AddIf($"{ROOT_CSS}--bottom {ROOT_CSS}--center", () => Position == SnackPosition.BottomCenter)
-                          .AddIf($"{ROOT_CSS}--center", () => Position == SnackPosition.Center);
-            }, styleBuilder =>
+                yield return _block.Modifier("top");
+            }
+            
+            if (Position is SnackPosition.BottomLeft or SnackPosition.BottomRight or SnackPosition.BottomCenter)
             {
-                styleBuilder.AddMaxWidth(MaxWidth)
-                    .AddIf($"bottom: {MasaBlazor.Application.Bottom}px", () => IsPositionBottom)
-                    .AddIf($"top: {MasaBlazor.Application.Top}px)", () => IsPositionTop);
-            });
+                yield return _block.Modifier("bottom");
+            }
+            
+            if (Position is SnackPosition.TopCenter or SnackPosition.BottomCenter or SnackPosition.Center)
+            {
+                yield return _block.Modifier("center");
+            }
+            
+            if (Position is SnackPosition.TopLeft or SnackPosition.BottomLeft)
+            {
+                yield return _block.Modifier("left");
+            }
+            
+            if (Position is SnackPosition.TopRight or SnackPosition.BottomRight)
+            {
+                yield return _block.Modifier("right");
+            }
+        }
+
+        protected override IEnumerable<string?> BuildComponentStyle()
+        {
+            return StyleBuilder.Create()
+                .AddMaxWidth(MaxWidth)
+                .AddIf("bottom", $"{MasaBlazor.Application.Bottom}px", IsPositionBottom)
+                .AddIf("top", $"{MasaBlazor.Application.Top}px", IsPositionTop).GenerateCssStyles();
         }
 
         protected override void OnParametersSet()
@@ -122,26 +143,32 @@ namespace Masa.Blazor.Presets
 
         public void EnqueueSnackbar(SnackbarOptions config)
         {
-            if (MaxCount > 0 && _stack.Count >= MaxCount)
+            lock (_lock)
             {
-                var diff = _stack.Count - MaxCount + 1;
+                if (MaxCount > 0 && _stack.Count >= MaxCount)
+                {
+                    var diff = _stack.Count - MaxCount + 1;
 
-                _stack.RemoveRange(0, diff);
+                    _stack.RemoveRange(0, diff);
+                }
+
+                _stack.Add(config);
+
+                InvokeAsync(StateHasChanged);
             }
-
-            _stack.Add(config);
-
-            InvokeAsync(StateHasChanged);
         }
 
         internal void RemoveSnackbar(Guid id)
         {
-            var config = _stack.FirstOrDefault(c => c.Id == id);
-            if (config is null) return;
+            lock (_lock)
+            {
+                var config = _stack.FirstOrDefault(c => c.Id == id);
+                if (config is null) return;
 
-            _stack.Remove(config);
+                _stack.Remove(config);
 
-            InvokeAsync(StateHasChanged);
+                InvokeAsync(StateHasChanged);
+            }
         }
 
         protected override ValueTask DisposeAsyncCore()

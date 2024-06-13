@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
-public partial class MSwiper : BDomComponentBase
+namespace Masa.Blazor;
+
+public partial class MSwiper : MasaComponentBase
 {
     [Inject] private SwiperJsModule SwiperJsModule { get; set; } = null!;
 
@@ -41,9 +43,8 @@ public partial class MSwiper : BDomComponentBase
 
     [Parameter] public EventCallback<int> IndexChanged { get; set; }
 
-    private ElementReference _elementReference;
     private DotNetObjectReference<object>? _swiperInteropHandle;
-    private ISwiperJSObjectReferenceProxy? _swiperProxy;
+    private SwiperJSObjectReferenceProxy? _swiperProxy;
     private bool _isJsInteropAndRefReady;
 
     private int _prevIndex;
@@ -52,7 +53,8 @@ public partial class MSwiper : BDomComponentBase
     private MSwiperNavigation? _navigation;
     private MSwiperAutoplay? _autoplay;
 
-    private CancellationTokenSource _cancellationTokenSource = new();
+    private CancellationTokenSource _ctsForInit = new();
+    private CancellationTokenSource _ctsForUpdateSlides = new();
 
     protected override void OnInitialized()
     {
@@ -61,15 +63,19 @@ public partial class MSwiper : BDomComponentBase
         _swiperInteropHandle = DotNetObjectReference.Create<object>(new SwiperInteropHandle(this));
     }
 
-    protected override void SetComponentClass()
-    {
-        base.SetComponentClass();
+    private static Block _block = new("m-swiper");
+    private static Block _paginationBlock = _block.Extend("pagination");
+    private static Block _nextBlock = _block.Extend("next");
+    private static Block _prevBlock = _block.Extend("prev");
 
-        CssProvider
-            .UseBem("m-swiper", css => { css.Add("swiper"); }, style => { style.AddHeight(Height).AddWidth(Width); })
-            .Extend("pagination", css => { css.Add("swiper-pagination").Add(_pagination?.Class); }, style => { style.Add(_pagination?.Style); })
-            .Extend("next", css => { css.Add("swiper-button-next").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); })
-            .Extend("prev", css => { css.Add("swiper-button-prev").Add(_navigation?.Class); }, style => { style.Add(_navigation?.Style); });
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        yield return _block.AppendClasses("swiper");
+    }
+
+    protected override IEnumerable<string> BuildComponentStyle()
+    {
+        yield return StyleBuilder.Create().AddHeight(Height).AddWidth(Width).Build();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -127,12 +133,12 @@ public partial class MSwiper : BDomComponentBase
             return;
         }
 
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
+        _ctsForInit.Cancel();
+        _ctsForInit = new CancellationTokenSource();
 
         await RunTaskInMicrosecondsAsync(async () =>
         {
-            var rootSelector = _elementReference.GetSelector();
+            var rootSelector = Ref.GetSelector();
 
             SwiperOptions options = new()
             {
@@ -147,8 +153,8 @@ public partial class MSwiper : BDomComponentBase
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
             };
 
-            _swiperProxy = await SwiperJsModule.Init(_elementReference, options, _swiperInteropHandle);
-        }, 16, _cancellationTokenSource.Token);
+            _swiperProxy = await SwiperJsModule.Init(Ref, options, _swiperInteropHandle);
+        }, 16, _ctsForInit.Token);
     }
 
     internal async Task UpdateIndexAsync(int index)
@@ -178,6 +184,29 @@ public partial class MSwiper : BDomComponentBase
     {
         if (_swiperProxy == null) return;
         await _swiperProxy!.SlidePrevAsync(speed ?? Speed);
+    }
+
+    /// <summary>
+    /// Same as swiper.update():
+    /// Call this after you add/remove slides manually,
+    /// or after you hide/show it,
+    /// or do any custom DOM modifications with Swiper.
+    /// </summary>
+    [MasaApiPublicMethod]
+    public async Task UpdateAsync()
+    {
+        if (_swiperProxy is null)
+        {
+            return;
+        }
+
+        _ctsForUpdateSlides.Cancel();
+        _ctsForUpdateSlides = new CancellationTokenSource();
+
+        await RunTaskInMicrosecondsAsync(
+            () => _ = _swiperProxy.InvokeVoidAsync("update"),
+            16,
+            _ctsForUpdateSlides.Token);
     }
 
     protected override async ValueTask DisposeAsyncCore()

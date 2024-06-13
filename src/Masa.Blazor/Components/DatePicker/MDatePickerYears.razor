@@ -26,7 +26,7 @@
         var color = active ? Color ?? "primary" : "";
 
         <li @key="@year"
-            class="@(new CssBuilder().AddTextColor(color).AddIf("active", () => active).GetClass())"
+            class="@GetClass(CssClassUtils.GetTextColor(color), active ? "active" : null)"
             style="@(StyleBuilder.Create().AddTextColor(color))"
             @onclick="@(() => HandleOnYearItemClickAsync(year))">
             @Formatter(new DateOnly(year, 1, 1))

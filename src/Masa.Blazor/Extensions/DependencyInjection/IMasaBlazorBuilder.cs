@@ -1,5 +1,6 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection;
 
-public interface IMasaBlazorBuilder : IBlazorComponentBuilder
+public interface IMasaBlazorBuilder
 {
+    IServiceCollection Services { get; set; }
 }

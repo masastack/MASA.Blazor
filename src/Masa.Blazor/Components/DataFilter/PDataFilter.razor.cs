@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDataFilter : BDomComponentBase
+public partial class PDataFilter : MasaComponentBase
 {
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
@@ -42,22 +42,12 @@ public partial class PDataFilter : BDomComponentBase
             _firstRender = false;
         }
     }
+    
+    private static Block _block = new("m-data-filter");
 
-    protected override void SetComponentClass()
+    protected override IEnumerable<string> BuildComponentClass()
     {
-        base.SetComponentClass();
-
-        CssProvider.UseBem("m-data-filter")
-                   .Element("high-frequency")
-                   .Element("high-frequency-inputs", css => { css.AddIf("hidden", () => _expanded); })
-                   .Element("high-frequency-actions")
-                   .Element("low-frequency", css => { css.AddIf("expanded", () => _expanded); }, style =>
-                   {
-                       style.AddIf("display: none;", () => !_expanded && _firstRender)
-                            .AddIf("opacity: 0;", () => !_expanded)
-                            .AddIf("overflow: hidden", () => _expanding)
-                            .AddHeight(_height);
-                   });
+        yield return _block.Name;
     }
 
     private async Task ShowLowFrequency()

@@ -23010,7 +23010,7 @@ html.overflow-y-hidden {
 .m-input--selection-controls__ripple > .m-ripple__container {
     transform: scale(1.2);
 }
-.m-input--selection-controls.m-input--dense .m-input--selection-controls__ripple {
+.m-input--selection-controls.m-input--dense:not(.m-input--switch--text) .m-input--selection-controls__ripple {
     width: 28px;
     height: 28px;
     left: -9px;
@@ -28332,21 +28332,21 @@ html.overflow-y-hidden {
 .m-input--switch .m-input--selection-controls__ripple {
     top: calc(50% - 24px);
 }
-.m-input--switch.m-input--dense .m-input--switch__thumb {
+.m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--switch__thumb {
     width: 18px;
     height: 18px;
 }
-.m-input--switch.m-input--dense .m-input--switch__track {
+.m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--switch__track {
     height: 12px;
     width: 32px;
 }
-.m-input--switch.m-input--dense.m-input--switch--inset .m-input--switch__track {
+.m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--switch--inset .m-input--switch__track {
     height: 22px;
     width: 44px;
     top: calc(50% - 12px);
     left: -3px;
 }
-.m-input--switch.m-input--dense .m-input--selection-controls__ripple {
+.m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--selection-controls__ripple {
     top: calc(50% - 22px);
 }
 .m-input--switch.m-input--is-dirty.m-input--is-disabled {
@@ -28355,7 +28355,7 @@ html.overflow-y-hidden {
 .m-application--is-ltr .m-input--switch .m-input--selection-controls__ripple {
     left: -14px;
 }
-.m-application--is-ltr .m-input--switch.m-input--dense .m-input--selection-controls__ripple {
+.m-application--is-ltr .m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--selection-controls__ripple {
     left: -12px;
 }
 .m-application--is-ltr .m-input--switch.m-input--is-dirty .m-input--selection-controls__ripple,
@@ -28365,7 +28365,7 @@ html.overflow-y-hidden {
 .m-application--is-rtl .m-input--switch .m-input--selection-controls__ripple {
     right: -14px;
 }
-.m-application--is-rtl .m-input--switch.m-input--dense .m-input--selection-controls__ripple {
+.m-application--is-rtl .m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--selection-controls__ripple {
     right: -12px;
 }
 .m-application--is-rtl .m-input--switch.m-input--is-dirty .m-input--selection-controls__ripple,

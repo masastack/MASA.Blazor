@@ -51,13 +51,15 @@ public partial class MMain : MasaComponentBase
         }
     }
 
-    private Block _block = new("m-main");
+    private static Block _block = new("m-main");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .AddClass("app--sized", _sized)
-            .GenerateCssClasses();
+        yield return _block.Name;
+        if (_sized)
+        {
+            yield return "app--sized";
+        }
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

@@ -59,6 +59,10 @@ ExpansionPanels  扩展面板及其内容都可以使用 `disabled` 属性禁用
 
 <masa-example file="Examples.components.expansion_panels.Readonly"></masa-example>
 
+#### 子组件属性 {released-on=v1.6.0}
+
+<masa-example file="Examples.components.expansion_panels.SubComponents"></masa-example>
+
 ### 其他
 
 #### 高级版

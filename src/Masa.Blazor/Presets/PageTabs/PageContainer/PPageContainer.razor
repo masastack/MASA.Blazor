@@ -1,4 +1,5 @@
 ﻿@namespace Masa.Blazor.Presets
+@using Masa.Blazor.Extensions
 @inherits PatternPathComponentBase
 
 <div class="@GetClass()"
@@ -8,11 +9,11 @@
      @attributes="Attributes">
     @foreach (var path in _patternPaths.OrderBy(u => u.CreatedAt))
     {
-        <div class="@_block.Element("item").AddClass("d-none", path.Pattern != _currentPatternPath?.Pattern)"
+        <div class="@_block.Element("item").AppendClasses(("d-none", path.Pattern != _currentPatternPath?.Pattern))"
              @key="path.Pattern">
-            <BShouldRender Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">
+            <MShouldRender Value="@(path.Pattern == GetCurrentPatternPath().Pattern)">
                 @ChildContent
-            </BShouldRender>
+            </MShouldRender>
         </div>
     }
 </div>

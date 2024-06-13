@@ -8,7 +8,7 @@
 
 <div align="center">
 
-A set of standard basic component libraries based on Material design specifications and BlazorComponent interaction capabilities
+A set of standard basic component libraries based on Material design specifications.
 
 [![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/masastack/Masa.Blazor/blob/develop/LICENSE)
 [![.NET](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/masastack/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
@@ -21,7 +21,7 @@ English| [简体中文](./README.zh-CN.md)
 
 ## 🚀 What is MASA Blazor?
 
-Provide a standard basic component library based on Material design specifications and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
+Provide a standard basic component library based on Material design specifications. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/masastack/Masa.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
 
 ## ❓ Why choose MASA Blazor?
 
@@ -83,7 +83,7 @@ Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before maki
 Thanks to all the friends who have contributed to this project.
 
 <a href="https://github.com/masastack/Masa.Blazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
+    <img src="https://contrib.rocks/image?repo=masastack/Masa.Blazor" />
 </a>
 
 ## 🌐 Supported browsers

@@ -1,12 +1,14 @@
 ﻿@namespace Masa.Blazor
 @typeparam TValue
 @using Masa.Blazor.Components.TimePicker
-@inherits BDomComponentBase
+@inherits MasaComponentBase
 @inject I18n I18n
 
-<div class="@(Block.Modifier(Disabled, Readonly).And(Format, "format").And("use-seconds", ComputedUseSeconds).And(MultiSection).AddTheme(IsDark).AddClass("m-sheet", Class))"
-     style="@(new StyleBuilder().AddHeight(Height).Add(Style).GetStyle())"
-     @ref="Ref">
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="@Attributes">
     @if (MultiSection)
     {
         <ul class="@Block.Element("items")" @ref="@_hoursRef">
@@ -61,7 +63,7 @@
             {
                 var active = time == InternalTime;
                 var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
-                <li class="@Block.Element("item").Modifier(active).And(disabled)"
+                <li class="@_itemModifierBuilder.Add(active).Add(disabled)"
                     @onclick="() => HandleOnTimeClick(time)">
                     @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
                 </li>
@@ -85,7 +87,7 @@
 
     private RenderFragment ItemRenderFragment(int index, bool active, Func<int, bool>? isAllowedCb, Func<int, Task> onClick, Func<int, string>? format = null) => __builder =>
     {
-        <li class="@Block.Element("item").Modifier(active).And("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
+        <li class="@_itemModifierBuilder.Add(active).Add("disabled", Disabled || isAllowedCb?.Invoke(index) is false)"
             @onclick="() => onClick(index)">
             @ItemContentRenderFragment(format?.Invoke(index) ?? index.ToString("00"), active)
         </li>
@@ -93,7 +95,7 @@
 
     private RenderFragment ItemContentRenderFragment(string content, bool active) => __builder =>
     {
-        <div class="@Block.Element("item-content").AddBackgroundColor(Color, active)" ripple="@IsRipple">
+        <div class="@_itemContentModifierBuilder.AddBackgroundColor(Color, active)" ripple="@IsRipple">
             @content
         </div>
     };
@@ -102,7 +104,7 @@
     {
         var active = _timePeriod == period;
 
-        <li class="@Block.Element("item").Modifier(active)" @onclick="() => OnPeriodClick(period)">
+        <li class="@_itemModifierBuilder.Add(active)" @onclick="() => OnPeriodClick(period)">
             @ItemContentRenderFragment(period == TimePeriod.Am ? I18n.T("$masaBlazor.timePicker.am") : I18n.T("$masaBlazor.timePicker.pm"), active)
         </li>
     };

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public abstract class MData<TItem> : BDomComponentBase
+public abstract class MData<TItem> : MasaComponentBase
 {
     [Parameter]
     [EditorRequired]
@@ -25,7 +25,7 @@ public abstract class MData<TItem> : BDomComponentBase
     }
 
     [Parameter]
-    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, string, IEnumerable<TItem>> CustomSort
+    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, IEnumerable<TItem>> CustomSort
     {
         get => _customSort ?? DefaultSortItems;
         set => _customSort = value;
@@ -73,11 +73,6 @@ public abstract class MData<TItem> : BDomComponentBase
         get => _customGroup ?? DefaultGroupItems;
         set => _customGroup = value;
     }
-
-    // TODO: check if this is implemented correctly
-    [Parameter]
-    [MasaApiParameter("en-US")]
-    public string Locale { get; set; } = "en-US";
 
     [Parameter]
     public bool DisableSort { get; set; }
@@ -128,7 +123,7 @@ public abstract class MData<TItem> : BDomComponentBase
 
     private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, string?, IEnumerable<TItem>>? _customFilter;
 
-    private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, string, IEnumerable<TItem>>? _customSort;
+    private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, IEnumerable<TItem>>? _customSort;
 
     private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, IList<bool>, IEnumerable<IGrouping<string, TItem>>>?
         _customGroup;
@@ -241,7 +236,7 @@ public abstract class MData<TItem> : BDomComponentBase
     }
 
     public static IEnumerable<TItem> DefaultSortItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> itemValues, IList<string> sortBy,
-        List<bool> sortDesc, string locale)
+        List<bool> sortDesc)
     {
         var sortedItems = default(IOrderedEnumerable<TItem>);
 
@@ -498,7 +493,7 @@ public abstract class MData<TItem> : BDomComponentBase
             sortDesc.InsertRange(0, InternalOptions.GroupDesc);
         }
 
-        return CustomSort(items, ItemValues, sortBy, sortDesc, Locale);
+        return CustomSort(items, ItemValues, sortBy, sortDesc);
     }
 
     public IEnumerable<TItem> PaginateItems(IEnumerable<TItem> items)

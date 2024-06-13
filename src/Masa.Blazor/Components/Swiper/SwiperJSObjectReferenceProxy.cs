@@ -1,31 +1,27 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.JSModules;
 
-public class SwiperJSObjectReferenceProxy : ISwiperJSObjectReferenceProxy
+namespace Masa.Blazor;
+
+public class SwiperJSObjectReferenceProxy(IJSObjectReference jsObjectReference)
+    : JSObjectReferenceBase(jsObjectReference)
 {
-    private readonly IJSObjectReference _jsObjectReference;
-
-    public SwiperJSObjectReferenceProxy(IJSObjectReference jsObjectReference)
-    {
-        _jsObjectReference = jsObjectReference;
-    }
-
     public async Task SlideToAsync(int index, int speed)
     {
-        await _jsObjectReference.InvokeVoidAsync("slideTo", index, speed);
+        await JSObjectReference.InvokeVoidAsync("slideTo", index, speed);
     }
 
     public async Task SlideNextAsync(int speed)
     {
-        await _jsObjectReference.InvokeVoidAsync("slideNext", speed);
+        await JSObjectReference.InvokeVoidAsync("slideNext", speed);
     }
 
     public async Task SlidePrevAsync(int speed)
     {
-        await _jsObjectReference.InvokeVoidAsync("slidePrev", speed);
+        await JSObjectReference.InvokeVoidAsync("slidePrev", speed);
     }
 
-    public async Task DisposeAsync()
+    protected override ValueTask DisposeAsyncCore()
     {
-        await _jsObjectReference.InvokeVoidAsync("dispose");
+        return JSObjectReference.InvokeVoidAsync("dispose");
     }
 }

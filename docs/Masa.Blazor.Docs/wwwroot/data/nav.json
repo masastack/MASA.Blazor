@@ -110,22 +110,28 @@
       "defaults-providers",
       "descriptions",
       "dialogs",
-      "dividers",
       {
-        "title": "drag-zone",
-        "state": "deprecated"
+        "title": "dividers",
+        "state": "update"
       },
       "drawers",
-      "echarts",
+      {
+        "title": "echarts",
+        "state": "update"
+      },
       "editors",
       "enqueued-snackbars",
       "error-handler",
-      "expansion-panels",
+      {
+        "title": "expansion-panels",
+        "state": "update"
+      },
       "floating-action-buttons",
       "footers",
       {
         "title": "form-inputs-and-controls",
         "group": "components",
+        "state": "update",
         "items": [
           "autocompletes",
           {
@@ -134,7 +140,10 @@
           },
           "checkboxes",
           "file-inputs",
-          "forms",
+          {
+            "title": "forms",
+            "state": "update"
+          },
           "otp-input",
           "radios",
           "range-sliders",

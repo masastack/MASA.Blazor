@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Element = BemIt.Element;
+
+namespace Masa.Blazor;
 
 public partial class MBadge : MasaComponentBase
 {
@@ -90,20 +92,18 @@ public partial class MBadge : MasaComponentBase
 #endif
     }
 
-    private Block _block = new("m-badge");
+    private static Block _block = new("m-badge");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private static Element _badgeElement = _block.Element("badge");
+    private ModifierBuilder _badgeModifierBuilder = _badgeElement.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block.Modifier(Avatar)
-            .And(Bordered)
-            .And(Bottom)
-            .And(Dot)
-            .And("icon", !string.IsNullOrWhiteSpace(Icon))
-            .And(Inline)
-            .And(Left)
-            .And("overlap", OverLap)
-            .And(Tile)
+       yield return _modifierBuilder
+            .Add(Avatar, Bordered, Bottom, Dot, Inline, Left, Tile)
+            .Add("icon", !string.IsNullOrWhiteSpace(Icon))
+            .Add("overlap", OverLap)
             .AddTheme(IsDark, IndependentTheme)
-            .GenerateCssClasses();
+            .Build();
     }
 }

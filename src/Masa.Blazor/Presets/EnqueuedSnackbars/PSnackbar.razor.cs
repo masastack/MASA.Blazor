@@ -1,8 +1,6 @@
-﻿using BlazorComponent.Abstracts;
+﻿namespace Masa.Blazor.Presets;
 
-namespace Masa.Blazor.Presets;
-
-public partial class PSnackbar
+public partial class PSnackbar : MasaComponentBase
 {
     [CascadingParameter] private PEnqueuedSnackbars? EnqueuedSnacks { get; set; }
 
@@ -11,8 +9,6 @@ public partial class PSnackbar
     [Parameter] public bool Value { get; set; } = true;
 
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
-
-    [Parameter] public string? Class { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -29,8 +25,6 @@ public partial class PSnackbar
     [Parameter] public StringBoolean? Rounded { get; set; }
 
     [Parameter] public bool Shaped { get; set; }
-
-    [Parameter] public string? Style { get; set; }
 
     [Parameter] public bool Text { get; set; }
 
@@ -71,7 +65,6 @@ public partial class PSnackbar
     [Parameter] public bool Closeable { get; set; }
 
     private bool _actionLoading;
-    private ComponentCssProvider? _cssProvider;
 
     private string? ComputedColor
     {
@@ -121,15 +114,11 @@ public partial class PSnackbar
 
     private bool ComputedCloseable => EnqueuedSnacks?.Closeable ?? Closeable;
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
+    private static Block _alertBlock = new("m-alert");
 
-        _cssProvider = new ComponentCssProvider(() => Class, () => Style)
-            .Apply(css => css.Add("m-enqueued-snackbar"))
-            .Apply("wrapper", css => { css.Add("m-alert__wrapper"); })
-            .Apply("icon", css => { css.Add("m-alert__icon"); })
-            .Apply("title", css => { css.Add("m-alert__title"); });
+    protected override IEnumerable<string?> BuildComponentClass()
+    {
+        yield return "m-enqueued-snackbar";
     }
 
     private async Task HandleOnAction()

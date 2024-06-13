@@ -1,6 +1,7 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
 
-<MForm Model="_order" EnableValidation>
+<MForm Model="_order">
     <ObjectGraphDataAnnotationsValidator />
     <MTextField @bind-Value="_order.Title" Label="Title"></MTextField>
     <MTextField @bind-Value="_order.Price" Label="Price" Type="number"></MTextField>

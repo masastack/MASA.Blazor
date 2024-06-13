@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class MDrop : ComponentBase
+public class MDrop : MasaComponentBase
 {
     [Parameter] public string? Class { get; set; }
 
@@ -11,8 +11,10 @@ public class MDrop : ComponentBase
     [Parameter] public EventCallback<ExDragEventArgs> OnDrop { get; set; }
 
     protected ElementReference ElementReference { get; private set; }
+
+    private readonly ModifierBuilder _modifierBuilder = new Block("m-drop").CreateModifierBuilder();
     
-    protected virtual string ClassString => new Block("m-drop").AddClass(Class).Build();
+    protected virtual string ClassString => _modifierBuilder.AddClass(Class).Build();
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

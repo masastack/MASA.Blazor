@@ -1,5 +1,6 @@
 ﻿@namespace Masa.Blazor.Components.DatePicker
 @inherits MasaComponentBase
+@using Masa.Blazor.Extensions
 @typeparam TValue
 
 <CascadingValue Value="IsDark" Name="IsDark">
@@ -31,30 +32,29 @@
         cssBuilder.Add("m-btn");
         if (isSelected)
         {
-            cssBuilder.AddBackgroundColor(color);
+            cssBuilder.Add(CssClassUtils.GetBackgroundColor(color));
             styleBuilder.AddBackgroundColor(color);
         }
         else
         {
-            cssBuilder.AddTextColor(color);
+            cssBuilder.Add(CssClassUtils.GetTextColor(color));
             styleBuilder.AddTextColor(color);
         }
 
         isAllowed = isAllowed && !isOtherMonth;
 
-        cssBuilder
-            .AddIf("m-size--default", () => !isFloating)
-            .AddIf("m-date-picker-table__current", () => isCurrent)
-            .AddIf("m-btn--active", () => isSelected)
-            .AddIf("m-btn--flat", () => !isAllowed || Disabled)
-            .AddIf("m-btn--text", () => isSelected == isCurrent)
-            .AddIf("m-btn--rounded", () => isFloating)
-            .AddIf("m-btn--disabled", () => !isAllowed || Disabled)
-            .AddIf("m-btn--outlined", () => isCurrent && !isSelected)
-            .AddTheme(IsDark, IndependentTheme);
+        cssBuilder.Add("m-size--default", !isFloating);
+        cssBuilder.Add("m-date-picker-table__current", isCurrent);
+        cssBuilder.Add("m-btn--active", isSelected);
+        cssBuilder.Add("m-btn--flat", !isAllowed || Disabled);
+        cssBuilder.Add("m-btn--text", isSelected == isCurrent);
+        cssBuilder.Add("m-btn--rounded", isFloating);
+        cssBuilder.Add("m-btn--disabled", !isAllowed || Disabled);
+        cssBuilder.Add("m-btn--outlined", isCurrent && !isSelected);
+        cssBuilder.Add(CssClassUtils.GetTheme(IsDark, IndependentTheme));
 
-        <button class="@cssBuilder.GetClass()"
-                style="@styleBuilder.GetStyle()"
+        <button class="@cssBuilder.ToString()"
+                style="@styleBuilder.ToString()"
                 type="button"
                 disabled="@(Disabled || !IsDateAllowed(date, Min, Max, AllowedDates))"
                 @onclick="@OnClick"
@@ -78,8 +78,8 @@
             <div class="@Block.Element("events")">
                 @foreach (var color in eventColors)
                 {
-                    <div class="@(new CssBuilder().AddBackgroundColor(color).GetClass())"
-                         style="@(new StyleBuilder().AddBackgroundColor(color).GetStyle())">
+                    <div class="@CssClassUtils.GetBackgroundColor(color)"
+                         style="@CssStyleUtils.GetBackgroundColor(color)">
                     </div>
                 }
             </div>

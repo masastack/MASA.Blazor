@@ -15,7 +15,9 @@
             <MButton Plain Color="primary" OnClick="HandleOnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
         </MSheet>
 
-        <MTabs Value="@_tabIndex" ValueChanged="val => _tabIndex = val.AsT1">
+        <MTabs Value="@_tabIndex" 
+               ValueChanged="val => _tabIndex = val.AsT1"
+               @ref="_tabs">
             @foreach (var tab in Tabs)
             {
                 <MTab>@tab</MTab>

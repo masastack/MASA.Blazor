@@ -1,0 +1,14 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <CascadingValue Value="EditContext" IsFixed>
+        <form class="@GetClass()"
+              style="@GetStyle()"
+              id="@Id"
+              @onsubmit="HandleOnSubmitAsync"
+              @attributes="@Attributes">
+            @ChildContent?.Invoke(FormContext!)
+        </form>
+    </CascadingValue>
+</CascadingValue>

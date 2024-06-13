@@ -14,7 +14,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Active, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasActiveClass = classes.Contains("m-chip");
 
             // Assert
@@ -29,7 +29,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Close, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseClass = classes.Contains("m-chip--removable");
 
             // Assert
@@ -44,7 +44,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -59,7 +59,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -74,7 +74,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-chip--disabled");
 
             // Assert
@@ -89,7 +89,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Filter, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilterClass = classes.Contains("m-chip");
 
             // Assert
@@ -104,7 +104,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Label, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFilterClass = classes.Contains("m-chip--label");
 
             // Assert
@@ -119,7 +119,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Large, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLargeClass = classes.Contains("m-size--large");
 
             // Assert
@@ -134,7 +134,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Link, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLargeClass = classes.Contains("m-size");
 
             // Assert
@@ -149,7 +149,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Outlined, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOutlinedClass = classes.Contains("m-chip--outlined");
 
             // Assert
@@ -164,7 +164,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Pill, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPillClass = classes.Contains("m-chip--pill");
 
             // Assert
@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Ripple, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasRippleClass = classes.Contains("m-chip");
 
             // Assert
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Small, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasSmallClass = classes.Contains("m-size--small");
 
             // Assert
@@ -209,7 +209,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.XSmall, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasXSmallClass = classes.Contains("m-size--x-small");
 
             // Assert
@@ -224,7 +224,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.XLarge, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasXLargeClass = classes.Contains("m-size--x-large");
 
             // Assert
@@ -239,7 +239,7 @@ namespace Masa.Blazor.Test.Chip
             {
                 props.Add(chip => chip.Draggable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDraggableClass = classes.Contains("m-chip--draggable");
 
             // Assert

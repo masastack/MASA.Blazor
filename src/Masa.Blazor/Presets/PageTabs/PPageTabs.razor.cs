@@ -92,7 +92,7 @@ public partial class PPageTabs : PatternPathComponentBase
     [Parameter]
     public Func<string, Task<bool>>? OnClose { get; set; }
 
-    private readonly Block _tabBlock = new("p-page-tab");
+    private static readonly Block _tabBlock = new("p-page-tab");
 
     protected readonly List<PatternPath> PatternPaths = new();
     

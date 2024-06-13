@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using BlazorComponent.I18n;
 
 namespace Masa.Blazor.Docs.Services;
 

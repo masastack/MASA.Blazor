@@ -1,4 +1,5 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Transition;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
@@ -95,18 +96,17 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
         }
 #endif
     
-    private Block _block = new("m-system-bar");
+    private static Block _block = new("m-system-bar");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return _block
-            .Modifier(LightsOut)
-            .And(Absolute)
-            .And("fixed", !Absolute && (App || Fixed))
-            .And(Window)
+        yield return _modifierBuilder
+            .Add(LightsOut,Absolute,Window)
+            .Add("fixed", !Absolute && (App || Fixed))
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
-            .GenerateCssClasses();
+            .Build();
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -137,7 +137,7 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
             return 0;
         }
 
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+        var element = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, Ref);
         return element?.ClientHeight ?? 0;
     }
 

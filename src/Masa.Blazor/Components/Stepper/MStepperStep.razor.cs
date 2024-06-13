@@ -1,6 +1,8 @@
-﻿namespace Masa.Blazor
+﻿using Element = BemIt.Element;
+
+namespace Masa.Blazor
 {
-    public partial class MStepperStep : BDomComponentBase
+    public partial class MStepperStep : MasaComponentBase
     {
         [CascadingParameter] public MStepper? Stepper { get; set; }
 
@@ -24,27 +26,24 @@
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
+        private static Block _block = new("m-stepper__step");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
         private bool _isActive;
         private bool _isInactive;
 
         public bool HasError => Rules.Any(validate => !validate());
 
-        protected override void SetComponentCss()
+        protected override IEnumerable<string> BuildComponentClass()
         {
-            CssProvider.UseBem("m-stepper")
-                .Element("step", css =>
-                {
-                    css.Modifiers(m => m.Modifier("active", _isActive)
-                        .And(Editable)
-                        .And("inactive", _isInactive)
-                        .And(Complete)
-                        .And("error", HasError)
-                        .AddColor("error", true, HasError));
-                }, style => { style.Add(Style); }).Apply("content", css =>
-                {
-                    css.Add("m-stepper__step__step")
-                        .AddBackgroundColor(Color, () => !HasError && (Complete || _isActive));
-                }).Element("label");
+            yield return _modifierBuilder
+                .Add("active", _isActive)
+                .Add(Editable)
+                .Add("inactive", _isInactive)
+                .Add(Complete)
+                .Add("error", HasError)
+                .AddColor("error", true, HasError)
+                .Build();
         }
 
         protected override void OnInitialized()

@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Label
             {
                 props.Add(counter => counter.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Label
             {
                 props.Add(counter => counter.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Label
             {
                 props.Add(counter => counter.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-label--is-disabled");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Label
             {
                 props.Add(counter => counter.Value, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-label--active");
 
             // Assert

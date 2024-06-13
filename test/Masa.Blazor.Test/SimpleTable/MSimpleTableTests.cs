@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.SimpleTable
             {
                 props.Add(simpletable => simpletable.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.SimpleTable
             {
                 props.Add(simpletable => simpletable.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.SimpleTable
             {
                 props.Add(simpletable => simpletable.Dense, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-data-table");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.SimpleTable
             {
                 props.Add(simpletable => simpletable.FixedHeader, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFixedHeaderClass = classes.Contains("m-data-table");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.SimpleTable
             {
                 props.Add(simpletable => simpletable.Height, 10);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasHeightClass = classes.Contains("m-data-table");
 
             // Assert

@@ -76,12 +76,17 @@ namespace Masa.Blazor
 #endif
         }
 
-        private Block _block = new("m-sheet");
+        private static Block _block = new("m-sheet");
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block.Modifier(Outlined).And(Shaped).AddTheme(IsDark, IndependentTheme).AddElevation(Elevation)
-                .AddRounded(Rounded, Tile).AddBackgroundColor(Color).GenerateCssClasses();
+            yield return _modifierBuilder
+                .Add(Outlined, Shaped)
+                .AddTheme(IsDark, IndependentTheme).AddElevation(Elevation)
+                .AddRounded(Rounded, Tile)
+                .AddBackgroundColor(Color)
+                .Build();
         }
 
         protected override IEnumerable<string> BuildComponentStyle()

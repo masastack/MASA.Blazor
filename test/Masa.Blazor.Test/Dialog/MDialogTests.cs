@@ -13,7 +13,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(alert => alert.CloseDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasCloseDelayClass = classes.Contains("m-dialog");
 
             // Assert
@@ -28,7 +28,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Dark, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("m-dialog");
 
             // Assert
@@ -43,7 +43,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Disabled, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-dialog");
 
             // Assert
@@ -58,7 +58,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Fullscreen, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasFullscreenClass = classes.Contains("m-dialog");
 
             // Assert
@@ -73,7 +73,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Light, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-dialog");
 
             // Assert
@@ -88,7 +88,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(alert => alert.MaxWidth, 1);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasMaxWidthClass = classes.Contains("m-dialog__container");
 
             // Assert
@@ -103,7 +103,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(alert => alert.Width, 64);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasWidthClass = classes.Contains("m-dialog__container");
 
             // Assert
@@ -118,7 +118,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.OpenDelay, 0);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenDelayClass = classes.Contains("m-dialog");
 
             // Assert
@@ -133,7 +133,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.OpenOnFocus, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnFocusClass = classes.Contains("m-dialog");
 
             // Assert
@@ -148,7 +148,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.OpenOnHover, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasOpenOnHoverClass = classes.Contains("m-dialog");
 
             // Assert
@@ -163,7 +163,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Persistent, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasPersistentClass = classes.Contains("m-dialog");
 
             // Assert
@@ -178,7 +178,7 @@ namespace Masa.Blazor.Test.Dialog
             {
                 props.Add(dialog => dialog.Scrollable, true);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
+            var classes = cut.Instance.GetClass();
             var hasScrollableClass = classes.Contains("m-dialog");
 
             // Assert

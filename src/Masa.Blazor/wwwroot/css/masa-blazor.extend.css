@@ -328,7 +328,7 @@
 }
 
 .m-application--is-ltr .m-input--switch--text.m-input--is-dirty .m-input--selection-controls__ripple, .m-application--is-ltr .m-input--switch--text.m-input--is-dirty .m-input--switch__thumb {
-    transform: translate(30px, 0) !important;
+    transform: translate(30px, 0);
 }
 
 .m-input--switch--text .m-input--switch__left {
@@ -344,7 +344,7 @@
 
 .m-input--switch--text .m-input--switch__right {
     position: absolute;
-    right: -22px;
+    left: 30px;
     width: 30px;
     height: 30px;
     text-align: center;
@@ -365,6 +365,24 @@
     width: 44px;
     height: 44px;
     top: calc(50% - 30px);
+}
+
+.m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    width: 36px;
+    height: 36px;
+    top: calc(50% - 25px);
+}
+
+.m-application--is-ltr .m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    left: -10px;
+}
+
+.m-application--is-rtl .m-input--switch--text.m-input--dense .m-input--selection-controls__ripple {
+    right: -10px;
+}
+
+.m-input--switch--text .m-input--selection-controls__input {
+    width: 64px;
 }
 
 /* cascader */
@@ -513,7 +531,7 @@ input[type=number] {
         margin: 0;
     }
 
-.m-input-number-handler-wrap {
+.m-text-field__number {
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -521,50 +539,47 @@ input[type=number] {
     justify-content: center;
 }
 
-    .m-input-number-handler-wrap .m-input__icon {
+    .m-text-field__number .m-input__icon {
         height: 16px;
     }
 
-    .m-input-number-handler-wrap .m-input__append-inner {
+    .m-text-field__number .m-input__append-inner {
         margin-top: 0 !important;
     }
 
-.m-number-input-icon button {
+.m-input__icon--increase button,.m-input__icon--decrease button {
     width: 100%;
     font-size: 16px !important;
 }
 
-    .m-number-input-icon button::before {
+    .m-input__icon--increase button::before,.m-input__icon--decrease button::before {
         width: 24px;
     }
 
-    .m-number-input-icon button::after {
+    .m-input__icon--increase button::after,.m-input__icon--decrease button::after {
         transform: none !important;
         border-radius: 0 !important;
     }
     
-    .m-number-input-icon button:hover::after {
+    .m-input__icon--increase button:hover::after,.m-input__icon--decrease button:hover::after {
         opacity: 0.08;
         background-color: currentColor;
     }
 
-.m-number-input-down-disabled button {
+.m-text-field__number--increase-disabled .m-input__icon--increase > button,
+.m-text-field__number--decrease-disabled .m-input__icon--decrease > button {
     cursor: not-allowed !important;
 }
 
-.m-number-input-up-disabled button {
-    cursor: not-allowed !important;
-}
-
-.m-text-field:hover .m-input-number-handler-wrap {
+.m-text-field:hover .m-text-field__number {
     opacity: 1;
 }
 
-.m-input--dense .m-input-number-handler-wrap .m-input__icon {
+.m-input--dense .m-text-field__number .m-input__icon {
     height: 12px;
 }
 
-.m-input--dense .m-number-input-icon button {
+.m-input--dense .m-input__icon--increase button, .m-input--dense .m-input__icon--decrease button {
     font-size: 12px !important;
 }
 
@@ -1565,4 +1580,41 @@ html.m-overlay-scroll-blocked {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+}
+
+/* toolbar */
+
+.m-toolbar.primary > .m-toolbar__content .m-btn--icon,
+.m-toolbar.primary > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-primary);
+}
+
+.m-toolbar.secondary > .m-toolbar__content .m-btn--icon,
+.m-toolbar.secondary > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-secondary);
+}
+
+.m-toolbar.accent > .m-toolbar__content .m-btn--icon,
+.m-toolbar.accent > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-accent);
+}
+
+.m-toolbar.error > .m-toolbar__content .m-btn--icon,
+.m-toolbar.error > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-error);
+}
+
+.m-toolbar.info > .m-toolbar__content .m-btn--icon,
+.m-toolbar.info > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-info);
+}
+
+.m-toolbar.success > .m-toolbar__content .m-btn--icon,
+.m-toolbar.success > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-success);
+}
+
+.m-toolbar.warning > .m-toolbar__content .m-btn--icon,
+.m-toolbar.warning > .m-toolbar__content .m-icon {
+    color: var(--m-theme-on-warning);
 }

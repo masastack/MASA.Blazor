@@ -1,10 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor.Components.Treeview
 {
-    public partial class MTreeviewNode<TItem, TKey> : MasaComponentBase, ITreeviewNode<TItem, TKey>
+    public partial class MTreeviewNode<TItem, TKey> : MasaComponentBase where TKey : notnull
     {
-        [CascadingParameter] public ITreeview<TItem, TKey>? Treeview { get; set; }
+        [CascadingParameter] public MTreeview<TItem, TKey>? Treeview { get; set; }
 
         [Parameter] public TItem Item { get; set; } = default!;
 
@@ -58,7 +56,10 @@ namespace Masa.Blazor
         [Parameter, MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";
 
-        private readonly Block _block = new("m-treeview-node");
+        private static readonly Block _block = new("m-treeview-node");
+        private readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private readonly ModifierBuilder _rootModifierBuilder = _block.Element("root").CreateModifierBuilder();
+        private readonly ModifierBuilder _toggleModifierBuilder = _block.Element("toggle").CreateModifierBuilder();
 
         public List<TItem>? ComputedChildren =>
             Children?.Where(r => Treeview is not null && !Treeview.IsExcluded(ItemKey(r))).ToList();
@@ -108,14 +109,14 @@ namespace Masa.Blazor
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return _block
-                .Modifier("leaf", !HasChildren)
-                .And("click", OpenOnClick)
-                .And(Disabled)
-                .And(Rounded)
-                .And(Shaped)
-                .And("selected", IsSelected)
-                .GenerateCssClasses();
+            yield return _modifierBuilder
+                .Add("leaf", !HasChildren)
+                .Add("click", OpenOnClick)
+                .Add(Disabled)
+                .Add(Rounded)
+                .Add(Shaped)
+                .Add("selected", IsSelected)
+                .Build();
         }
 
         public async Task HandleOnCheckAsync(MouseEventArgs args)
