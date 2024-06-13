@@ -18,7 +18,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v3
       with:
         find: '\?version='
-        replace: '\?version=${{ github.event.release.tag_name }}'
+        replace: '?version=${{ github.event.release.tag_name }}'
         include: 'docs/Masa.Docs.WebAssembly/wwwroot/index.html'
     - name: setting dotnet
       uses: actions/setup-dotnet@v1
