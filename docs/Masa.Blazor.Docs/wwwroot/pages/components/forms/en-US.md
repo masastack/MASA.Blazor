@@ -37,11 +37,11 @@ You can use the methods provided by `Context` in the content of **MForm**, or us
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### Enable I18n
+#### Enable I18n {updated-in=v1.6.0}
 
-Enable [I18n](/blazor/features/internationalization) to support multilingual validation messages.
+Enable [I18n](/blazor/features/internationalization) to support multilingual validation messages. Locale resources used in the example can be found in [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/en-US.json#L128).
 
-> Locale resources used in the example can be found in [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/en-US.json#L128).
+<app-alert type="warning" content="Cannot be applied to [complex types](#validate-complex-type-with-dataannotations), and only support localization for property names with an index of `0`, such as error messages for `[Range]` may not be localized correctly. Therefore, it is recommended to use FluentValidation or use additional *Resources.resx* for localization."></app-alert>
 
 <masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
