@@ -149,6 +149,24 @@
     white-space: nowrap;
 }
 
+/* editable cell in datatable */
+
+.editable-cell .m-input--is-readonly:not(:hover) > .m-input__control > .m-input__slot {
+    background: inherit;
+}
+.editable-cell .m-input--is-readonly:not(:hover) > .m-input__control > .m-input__slot:before {
+    border-style: none;
+}
+.editable-cell .m-input--is-readonly.m-text-field--outlined:not(:hover) fieldset {
+    border-style: none;
+}
+.editable-cell .m-text-field.m-text-field--solo.m-input--is-readonly:not(:hover):not(.m-text-field--solo-flat) > .m-input__control > .m-input__slot {
+    box-shadow: none;
+}
+.editable-cell .m-input--is-readonly:hover .m-text-field__number {
+    display: none;
+}
+
 /* border */
 
 .m-border {
