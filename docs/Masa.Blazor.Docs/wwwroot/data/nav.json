@@ -131,6 +131,7 @@
       {
         "title": "form-inputs-and-controls",
         "group": "components",
+        "state": "update",
         "items": [
           "autocompletes",
           {

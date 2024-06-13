@@ -37,11 +37,11 @@ related:
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### 启用I18n
+#### 启用 I18n {updated-in=v1.6.0}
 
-通过 `EnableI18n` 属性启用 [I18n](/blazor/features/internationalization) 以支持验证信息多语言。
+通过 `EnableI18n` 属性启用 [I18n](/blazor/features/internationalization) 以支持验证信息多语言。示例使用的本地话资源你能在 [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/zh-CN.json#L129) 中找到。
 
-> 示例使用的本地话资源你能在 [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/zh-CN.json#L129) 中找到。
+<app-alert type="warning" content="无法作用于[复杂类型](#section-901a8fc7-dataannotations-9a8c8bc1590d67427c7b578b)，并且只支持索引为`0`的属性名的本地化，例如`[Range]`的错误信息可能不会被正确本地化。因此推荐使用FluentValidation或者使用额外的*Resources.resx*应用本地化。"></app-alert>
 
 <masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
