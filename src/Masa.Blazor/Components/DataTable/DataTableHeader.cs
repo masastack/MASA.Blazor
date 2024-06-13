@@ -41,8 +41,6 @@ public class DataTableHeader
 
     public string? Class { get; set; }
 
-    public string? CellClass { get; set; }
-
     public StringNumber? Width { get; set; }
 
     public DataTableFixed Fixed { get; set; }

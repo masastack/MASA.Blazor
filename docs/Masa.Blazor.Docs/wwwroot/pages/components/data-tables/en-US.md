@@ -177,3 +177,9 @@ this prop will disable the built-in sorting and pagination, and you will instead
 the `Loading` prop to display a progress bar while fetching data.
 
 <masa-example file="Examples.components.data_tables.ServerSidePaginateAndSort"></masa-example>
+
+#### Editable cells {released-on=v1.6.0}
+
+Apply the `editable-cell` class to a cell to optimize the input box style.
+
+<masa-example file="Examples.components.data_tables.EditableCells"></masa-example>

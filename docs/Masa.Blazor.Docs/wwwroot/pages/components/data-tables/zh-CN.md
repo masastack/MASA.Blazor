@@ -162,3 +162,9 @@ Headers**
 OnSortByUpdate`，`OnOptionsUpdate` 等）来得知什么时候要向后端服务器请求新页面。 获取数据时，使用 `Loading` 属性显示进度条。
 
 <masa-example file="Examples.components.data_tables.ServerSidePaginateAndSort"></masa-example>
+
+#### 可编辑单元格 {released-on=v1.6.0}
+
+给单元格设置 `editable-cell` 的类名, 会优化输入框的样式。
+
+<masa-example file="Examples.components.data_tables.EditableCells"></masa-example>

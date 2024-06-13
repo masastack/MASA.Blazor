@@ -1,0 +1,276 @@
+﻿<MDataTable Headers="_headers"
+            Items="_desserts"
+            ItemsPerPage="5"
+            Class="elevation-1">
+</MDataTable>
+
+@code {
+
+    private readonly Dictionary<Guid, EditableCell<string>> _editableDessertNames = new();
+    private readonly Dictionary<Guid, EditableCell<int>> _editableCalories = new();
+
+    private RenderFragment EditableDessertName(Dessert item) => __builder =>
+    {
+        var editable = _editableDessertNames.ContainsKey(item.Id) && _editableDessertNames[item.Id].Editing;
+        var loading = editable && _editableDessertNames[item.Id].Loading;
+
+        <MTextarea @bind-Value="@item.Name"
+                   Dense
+                   AutoGrow
+                   Rows="1"
+                   HideDetails="@("auto")"
+                   Filled
+                   OnBlur="@Save"
+                   Readonly="@(!editable)"
+                   OnFocus="@Edit"
+                   Loading="@(loading)"
+                   Style="font-size: 14px">
+        </MTextarea>
+
+        Task Save() => UpdateDessertName(item);
+        void Edit() => EditDessertName(item);
+    };
+
+    private RenderFragment EditableCalories(Dessert item) => __builder =>
+    {
+        var editable = _editableCalories.ContainsKey(item.Id) && _editableCalories[item.Id].Editing;
+        var loading = editable && _editableCalories[item.Id].Loading;
+
+        <MTextField @bind-Value="@item.Calories"
+                    Dense
+                    Type="number"
+                    HideDetails="@("auto")"
+                    Outlined
+                    OnBlur="@Save"
+                    OnEnter="@Save"
+                    Readonly="@(!editable)"
+                    OnFocus="@Edit"
+                    Loading="@(loading)"
+                    Style="font-size: 14px">
+        </MTextField>
+
+        Task Save() => UpdateCalories(item);
+        void Edit() => EditCalories(item);
+    };
+
+    private async Task UpdateDessertName(Dessert item)
+    {
+        var previousValue = _editableDessertNames[item.Id].PreviousValue;
+
+        if (string.IsNullOrWhiteSpace(item.Name))
+        {
+            item.Name = previousValue;
+        }
+        else if (item.Name != previousValue)
+        {
+            _editableDessertNames[item.Id].Loading = true;
+
+            // Simulate loading
+            await Task.Delay(1000);
+
+            // If error occurs, revert back to previous value
+            // item.Name = prevName;
+
+            _editableDessertNames[item.Id].Loading = false;
+        }
+
+        _editableDessertNames[item.Id].Editing = false;
+    }
+
+    private void EditDessertName(Dessert item)
+    {
+        if (_editableDessertNames.ContainsKey(item.Id))
+        {
+            _editableDessertNames[item.Id].Editing = true;
+            _editableDessertNames[item.Id].PreviousValue = item.Name;
+        }
+        else
+        {
+            _editableDessertNames[item.Id] = new EditableCell<string>(editing: true, item.Name);
+        }
+    }
+
+    private async Task UpdateCalories(Dessert item)
+    {
+        var previousValue = _editableCalories[item.Id].PreviousValue;
+
+        if (item.Calories != previousValue)
+        {
+            _editableCalories[item.Id].Loading = true;
+
+            // Simulate loading
+            await Task.Delay(1000);
+
+            // If error occurs, revert back to previous value
+            // item.Calories = previousValue;
+
+            _editableCalories[item.Id].Loading = false;
+        }
+
+        _editableCalories[item.Id].Editing = false;
+    }
+
+    private void EditCalories(Dessert item)
+    {
+        if (_editableCalories.ContainsKey(item.Id))
+        {
+            _editableCalories[item.Id].Editing = true;
+            _editableCalories[item.Id].PreviousValue = item.Calories;
+        }
+        else
+        {
+            _editableCalories[item.Id] = new EditableCell<int>(editing: true, item.Calories);
+        }
+    }
+
+    private List<DataTableHeader<Dessert>> _headers = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _headers =
+        [
+            new()
+            {
+                Text = "Dessert (100g serving)",
+                Align = DataTableHeaderAlign.Start,
+                Sortable = false,
+                Value = nameof(Dessert.Name),
+                Class = "editable-cell",
+                CellRender = e => EditableDessertName(e),
+            },
+            new()
+            {
+                Text = "Calories",
+                Value = nameof(Dessert.Calories),
+                Class = "editable-cell",
+                Width = 150,
+                CellRender = e => EditableCalories(e)
+            },
+            new() { Text = "Fat (g)", Value = nameof(Dessert.Fat) },
+            new() { Text = "Carbs (g)", Value = nameof(Dessert.Carbs) },
+            new() { Text = "Protein (g)", Value = nameof(Dessert.Protein) },
+            new() { Text = "Iron (%)", Value = nameof(Dessert.Iron) }
+        ];
+    }
+
+    private List<Dessert> _desserts = new List<Dessert>
+    {
+        new Dessert
+        {
+            Name = "Frozen Yogurt",
+            Calories = 159,
+            Fat = 6.0,
+            Carbs = 24,
+            Protein = 4.0,
+            Iron = "1%",
+        },
+        new Dessert
+        {
+            Name = "Ice cream sandwich",
+            Calories = 237,
+            Fat = 9.0,
+            Carbs = 37,
+            Protein = 4.3,
+            Iron = "1%",
+        },
+        new Dessert
+        {
+            Name = "Eclair",
+            Calories = 262,
+            Fat = 16.0,
+            Carbs = 23,
+            Protein = 6.0,
+            Iron = "7%",
+        },
+        new Dessert
+        {
+            Name = "Cupcake",
+            Calories = 305,
+            Fat = 3.7,
+            Carbs = 67,
+            Protein = 4.3,
+            Iron = "8%",
+        },
+        new Dessert
+        {
+            Name = "Gingerbread",
+            Calories = 356,
+            Fat = 16.0,
+            Carbs = 49,
+            Protein = 3.9,
+            Iron = "16%"
+        },
+        new Dessert
+        {
+            Name = "Jelly bean",
+            Calories = 375,
+            Fat = 0.0,
+            Carbs = 94,
+            Protein = 0.0,
+            Iron = "0%",
+        },
+        new Dessert
+        {
+            Name = "Lollipop",
+            Calories = 392,
+            Fat = 0.2,
+            Carbs = 98,
+            Protein = 0,
+            Iron = "2%",
+        },
+        new Dessert
+        {
+            Name = "Honeycomb",
+            Calories = 408,
+            Fat = 3.2,
+            Carbs = 87,
+            Protein = 6.5,
+            Iron = "45%",
+        },
+        new Dessert
+        {
+            Name = "Donut",
+            Calories = 452,
+            Fat = 25.0,
+            Carbs = 51,
+            Protein = 4.9,
+            Iron = "22%",
+        },
+        new Dessert
+        {
+            Name = "KitKat",
+            Calories = 518,
+            Fat = 26.0,
+            Carbs = 65,
+            Protein = 7,
+            Iron = "6%",
+        }
+    };
+
+    private class Dessert
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        public string? Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public string? Iron { get; set; }
+    }
+
+    private class EditableCell<T>(bool editing, T? previousValue)
+    {
+        public bool Editing { get; set; } = editing;
+        public T? PreviousValue { get; set; } = previousValue;
+        public bool Loading { get; set; }
+    }
+
+}
