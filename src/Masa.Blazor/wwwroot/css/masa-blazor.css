@@ -28709,6 +28709,37 @@ html.overflow-y-hidden {
 .m-tab--disabled, .m-tab--disabled * {
     pointer-events: none;
 }
+.theme--light.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea {
+  color: #fff
+}
+
+.theme--light.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea::-moz-placeholder {
+  color: hsla(0,0%,100%,.5)
+}
+
+.theme--light.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea:-ms-input-placeholder {
+  color: hsla(0,0%,100%,.5)
+}
+
+.theme--light.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea::placeholder {
+  color: hsla(0,0%,100%,.5)
+}
+
+.theme--dark.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea {
+  color: rgba(0,0,0,.87)
+}
+
+.theme--dark.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea::-moz-placeholder {
+  color: rgba(0,0,0,.38)
+}
+
+.theme--dark.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea:-ms-input-placeholder {
+  color: rgba(0,0,0,.38)
+}
+
+.theme--dark.m-textarea.m-text-field--solo-inverted.m-input--is-focused textarea::placeholder {
+  color: rgba(0,0,0,.38)
+}
 .m-textarea textarea {
     align-self: stretch;
     flex: 1 1 auto;
