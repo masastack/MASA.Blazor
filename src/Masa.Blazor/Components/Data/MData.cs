@@ -1,14 +1,12 @@
-﻿namespace Masa.Blazor;
+﻿using System.ComponentModel;
+
+namespace Masa.Blazor;
 
 public abstract class MData<TItem> : MasaComponentBase
 {
     [Parameter]
     [EditorRequired]
-    public IEnumerable<TItem> Items
-    {
-        get => GetValue<IEnumerable<TItem>>() ?? new List<TItem>();
-        set => SetValue(value);
-    }
+    public IEnumerable<TItem> Items { get; set; } = new List<TItem>();
 
     [Parameter]
     public OneOf<string, IList<string>> SortBy
@@ -78,25 +76,13 @@ public abstract class MData<TItem> : MasaComponentBase
     public bool DisableSort { get; set; }
 
     [Parameter]
-    public bool DisablePagination
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    public bool DisablePagination { get; set; }
 
     [Parameter]
-    public bool DisableFiltering
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    public bool DisableFiltering { get; set; }
 
     [Parameter]
-    public string? Search
-    {
-        get => GetValue<string>();
-        set => SetValue(value);
-    }
+    public string? Search { get; set; }
 
     [Parameter]
     public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, string?, IEnumerable<TItem>> CustomFilter
@@ -105,12 +91,7 @@ public abstract class MData<TItem> : MasaComponentBase
         set => _customFilter = value;
     }
 
-    [Parameter]
-    public int ServerItemsLength
-    {
-        get => GetValue(-1);
-        set => SetValue(value);
-    }
+    [Parameter] [MasaApiParameter(-1)] public int ServerItemsLength { get; set; } = -1;
 
     [Parameter]
     public IEnumerable<ItemValue<TItem>> ItemValues { get; set; } = new List<ItemValue<TItem>>();
@@ -128,11 +109,7 @@ public abstract class MData<TItem> : MasaComponentBase
     private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, IList<bool>, IEnumerable<IGrouping<string, TItem>>>?
         _customGroup;
 
-    protected DataOptions InternalOptions
-    {
-        get => GetValue(new DataOptions())!;
-        set => SetValue(value);
-    }
+    protected DataOptions InternalOptions { get; init; } = new();
 
     public DataPagination Pagination => new()
     {
@@ -157,39 +134,9 @@ public abstract class MData<TItem> : MasaComponentBase
         }
     }
 
-    public IEnumerable<TItem> FilteredItems
-    {
-        get
-        {
-            return GetComputedValue(() =>
-            {
-                var items = new List<TItem>(Items);
-
-                if (!DisableFiltering && ServerItemsLength <= 0 && ItemValues != null)
-                {
-                    return CustomFilter(items, ItemValues, Search);
-                }
-
-                return items;
-            }, new[]
-            {
-                nameof(DisableFiltering),
-                nameof(ServerItemsLength),
-                nameof(ItemValues),
-                nameof(Items),
-                nameof(Search)
-            })!;
-        }
-    }
-
-    public int ItemsLength
-    {
-        get
-        {
-            return GetComputedValue(() =>
-                ServerItemsLength >= 0 ? ServerItemsLength : FilteredItems.Count());
-        }
-    }
+    public IEnumerable<TItem> FilteredItems { get; private set; } = Enumerable.Empty<TItem>();
+    
+    public int ItemsLength { get; private set; }
 
     public int PageStop
     {
@@ -209,14 +156,7 @@ public abstract class MData<TItem> : MasaComponentBase
         }
     }
 
-    public int PageCount
-    {
-        get
-        {
-            return GetComputedValue(() =>
-                InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0)));
-        }
-    }
+    public int PageCount { get; private set; }
 
     public static IEnumerable<TItem> DefaultSearchItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> itemValues, string? search)
     {
@@ -281,34 +221,43 @@ public abstract class MData<TItem> : MasaComponentBase
 
     public IEnumerable<IGrouping<string, TItem>> GroupedItems
         => IsGrouped ? GroupItems(ComputedItems) : Enumerable.Empty<IGrouping<string, TItem>>();
-
-    public IEnumerable<TItem> ComputedItems
+    
+    public IEnumerable<TItem> ComputedItems { get; private set; } = Enumerable.Empty<TItem>();
+    
+    private void UpdateComputedItems()
     {
-        get
+        var items = new List<TItem>(Items);
+
+        if (!DisableFiltering && ServerItemsLength <= 0 && ItemValues != null)
         {
-            return GetComputedValue(() =>
-            {
-                IEnumerable<TItem> items = new List<TItem>(FilteredItems);
+            FilteredItems = CustomFilter(items, ItemValues, Search);
+        }
+        else
+        {
+            FilteredItems = items;
+        }
+        
+        IEnumerable<TItem> items2 = new List<TItem>(FilteredItems);
 
-                if ((!DisableSort || InternalOptions.GroupBy.Count > 0) && ServerItemsLength <= 0)
-                {
-                    items = SortItems(items);
-                }
+        if ((!DisableSort || InternalOptions.GroupBy.Count > 0) && ServerItemsLength <= 0)
+        {
+            items2 = SortItems(items2);
+        }
 
-                if (!DisablePagination && ServerItemsLength <= 0)
-                {
-                    items = PaginateItems(items);
-                }
+        if (!DisablePagination && ServerItemsLength <= 0)
+        {
+            items2 = PaginateItems(items2);
+        }
 
-                return items;
-            }, new[]
-            {
-                nameof(FilteredItems),
-                nameof(DisableSort),
-                nameof(InternalOptions),
-                nameof(ServerItemsLength),
-                nameof(DisablePagination)
-            })!;
+        ComputedItems = items2;
+        
+        ItemsLength = ServerItemsLength >=0? ServerItemsLength : FilteredItems.Count();
+        PageCount = InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0));
+
+        if (_prevPageCount != PageCount)
+        {
+            _prevPageCount = PageCount;
+            OnPageCount.InvokeAsync(PageCount);
         }
     }
 
@@ -353,13 +302,78 @@ public abstract class MData<TItem> : MasaComponentBase
         base.RegisterWatchers(watcher);
 
         watcher
-            .Watch<int>(nameof(Page), value => { InternalOptions.Page = value; })
-            .Watch<int>(nameof(ItemsPerPage), value => { InternalOptions.ItemsPerPage = value; })
-            .Watch<bool>(nameof(MultiSort), value => { InternalOptions.MultiSort = value; })
-            .Watch<bool>(nameof(MustSort), value => { InternalOptions.MustSort = value; })
-            .Watch<int>(nameof(PageCount), value => { OnPageCount.InvokeAsync(value); })
-            .Watch<OneOf<string, IList<string>>>(nameof(SortBy), val => { InternalOptions.SortBy = WrapperInArray(val); })
-            .Watch<OneOf<bool, IList<bool>>>(nameof(SortDesc), val => { InternalOptions.SortDesc = WrapperInArray(val); });
+            .Watch<int>(nameof(Page), value =>
+            {
+                InternalOptions.Page = value;
+                UpdateComputedItems();
+            })
+            .Watch<int>(nameof(ItemsPerPage), value =>
+            {
+                InternalOptions.ItemsPerPage = value;
+                UpdateComputedItems();
+            })
+            .Watch<bool>(nameof(MultiSort), value =>
+            {
+                InternalOptions.MultiSort = value;
+                UpdateComputedItems();
+            })
+            .Watch<bool>(nameof(MustSort), value =>
+            {
+                InternalOptions.MustSort = value;
+                UpdateComputedItems();
+            })
+            .Watch<OneOf<string, IList<string>>>(nameof(SortBy), val =>
+            {
+                InternalOptions.SortBy = WrapperInArray(val);
+                UpdateComputedItems();
+            })
+            .Watch<OneOf<bool, IList<bool>>>(nameof(SortDesc), val =>
+            {
+                InternalOptions.SortDesc = WrapperInArray(val);
+                UpdateComputedItems();
+            });
+    }
+
+    private bool _prevDisableSort;
+    private bool _prevDisablePagination;
+    private bool _prevDisableFiltering;
+    private int _prevServerItemsLength;
+    private IEnumerable<ItemValue<TItem>>? _prevItemValues;
+    private IEnumerable<TItem>? _prevItems;
+    private string? _prevSearch;
+    private int _prevPageCount;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
+        CheckForUpdates();
+    }
+    
+    private void CheckForUpdates()
+    {
+        bool needUpdateComputedItems = false;
+
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevDisableSort, DisableSort);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevDisablePagination, DisablePagination);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevServerItemsLength, ServerItemsLength);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevDisableFiltering, DisableFiltering);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevItemValues, ItemValues);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevItems, Items);
+        needUpdateComputedItems |= CheckAndUpdate(ref _prevSearch, Search);
+
+        if (needUpdateComputedItems)
+        {
+            UpdateComputedItems();
+        }
+    }
+
+    private bool CheckAndUpdate<T>(ref T prevValue, T currentValue)
+    {
+        if (Equals(prevValue, currentValue)) return false;
+
+        prevValue = currentValue;
+        return true;
     }
 
     protected IList<TValue> WrapperInArray<TValue>(OneOf<TValue, IList<TValue>> val)
@@ -460,10 +474,12 @@ public abstract class MData<TItem> : MasaComponentBase
     public void UpdateOptions(Action<DataOptions> options, bool emit = true)
     {
         options?.Invoke(InternalOptions);
-
+        
         InternalOptions.Page = ServerItemsLength < 0
             ? Math.Max(1, Math.Min(InternalOptions.Page, PageCount))
             : InternalOptions.Page;
+
+        UpdateComputedItems();
 
         if (OnOptionsUpdate.HasDelegate && emit)
         {
