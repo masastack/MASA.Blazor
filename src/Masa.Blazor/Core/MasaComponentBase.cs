@@ -305,17 +305,6 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
         return _watcher.GetValue(@default, name);
     }
 
-    protected TValue? GetComputedValue<TValue>([CallerMemberName] string name = "")
-    {
-        return _watcher.GetComputedValue<TValue>(name);
-    }
-
-    protected TValue? GetComputedValue<TValue>(Expression<Func<TValue>> valueExpression,
-        [CallerMemberName] string name = "")
-    {
-        return _watcher.GetComputedValue(valueExpression, name);
-    }
-
     protected TValue? GetComputedValue<TValue>(Func<TValue> valueFactory, string[] dependencyProperties,
         [CallerMemberName] string name = "")
     {

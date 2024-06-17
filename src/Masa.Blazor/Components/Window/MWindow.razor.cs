@@ -42,7 +42,15 @@ public partial class MWindow : MItemGroup
 
     public bool IsActive => TransitionCount > 0;
 
-    public int InternalIndex => GetComputedValue<int>();
+    public int InternalIndex { get; private set; }
+
+    private int _prevInternalIndex = 0;
+    private void UpdateInternalIndex()
+    {
+        InternalIndex = Items.FindIndex(item => item.Value == InternalValue);
+        IsReverse = UpdateReverse(InternalIndex, _prevInternalIndex);
+        _prevInternalIndex = InternalIndex;
+    }
 
     public bool HasActiveItems => Items.Any(item => !item.Disabled);
 
@@ -69,15 +77,17 @@ public partial class MWindow : MItemGroup
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
+    private StringNumber _prevInternalValue;
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
 #if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
+        }
 #endif
         ActiveClass = "m-window-item--active";
         PrevIcon ??= "$prev";
@@ -103,12 +113,7 @@ public partial class MWindow : MItemGroup
     {
         base.RegisterWatchers(watcher);
 
-        watcher.Watch(nameof(InternalIndex),
-            (newVal, oldVal) => IsReverse = UpdateReverse(newVal, oldVal),
-            () => Items.FindIndex(item => item.Value == InternalValue),
-            new[] { nameof(InternalValues) },
-            false,
-            true);
+        watcher.Watch<List<StringNumber?>>(nameof(InternalValues), UpdateInternalIndex);
     }
 
     internal override void Register(IGroupable item)
@@ -136,7 +141,7 @@ public partial class MWindow : MItemGroup
     protected void Prev()
     {
         if (!HasActiveItems || !HasPrev) return;
-
+        
         var prevIndex = GetPrevIndex(InternalIndex);
         var prevItem = Items[prevIndex];
 
