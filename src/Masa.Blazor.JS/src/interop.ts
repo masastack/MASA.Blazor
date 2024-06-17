@@ -322,7 +322,7 @@ export function focus(elOrString, preventScroll: boolean = false) {
   if (!(dom instanceof HTMLElement)) {
     console.error("Unable to focus an invalid element");
   } else {
-    dom.focus({      preventScroll });
+    dom.focus({ preventScroll });
   }
 }
 
