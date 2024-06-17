@@ -24,7 +24,8 @@
                         <ShowTransitionElement Value="@IsActive"
                                                Class="@GetClass()"
                                                Style="@GetStyle()"
-                                               ReferenceCaptureAction="r => DialogRef = r">
+                                               ReferenceCaptureAction="r => DialogRef = r"
+                                               tabindex="@(IsActive ? 0 : null)">
                             @(OutcomeContent?.Invoke(_contentContext!) ?? ChildContent)
                         </ShowTransitionElement>
                     </Transition>

@@ -2,10 +2,10 @@
 
 public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
 {
-    private readonly Queue<(Func<Task>, Func<bool>)> _nextTickQueue = new();
+    private readonly Queue<Func<Task>> _nextTickQueue = new();
 
     protected bool IsDisposed { get; private set; }
-
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (_nextTickQueue.Count > 0)
@@ -13,35 +13,26 @@ public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
             var queue = _nextTickQueue.ToArray();
             _nextTickQueue.Clear();
 
-            foreach (var item in queue)
+            foreach (var callback in queue)
             {
                 if (IsDisposed)
                 {
                     return;
                 }
 
-                var (callback, moveNext) = item;
-
-                if (moveNext())
-                {
-                    _nextTickQueue.Enqueue(item);
-                }
-                else
-                {
-                    await callback();
-                }
+                await callback();
+            }
+            
+            if (_nextTickQueue.Count > 0)
+            {
+                StateHasChanged();
             }
         }
     }
 
-    private void NextTick(Func<Task> callback, Func<bool> moveNext)
-    {
-        _nextTickQueue.Enqueue((callback, moveNext));
-    }
-
     protected void NextTick(Func<Task> callback)
     {
-        NextTick(callback, () => false);
+        _nextTickQueue.Enqueue(callback);
     }
 
     protected void NextTick(Action callback)
@@ -53,9 +44,14 @@ public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
         });
     }
 
-    protected async Task NextTickIf(Func<Task> callback, Func<bool> @if)
+    /// <summary>
+    /// If the predicate is true, the callback will be executed in the next tick, otherwise it will be executed immediately.
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <param name="predicate"></param>
+    protected async Task NextTickIf(Func<Task> callback, Func<bool> predicate)
     {
-        if (@if.Invoke())
+        if (predicate.Invoke())
         {
             NextTick(callback);
         }
@@ -65,39 +61,16 @@ public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
         }
     }
 
-    protected void NextTickIf(Action callback, Func<bool> @if)
+    /// <summary>
+    /// If the predicate is true, the callback will be executed in the next tick, otherwise it will be executed immediately.
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <param name="predicate"></param>
+    protected void NextTickIf(Action callback, Func<bool> predicate)
     {
-        if (@if.Invoke())
+        if (predicate.Invoke())
         {
             NextTick(callback);
-        }
-        else
-        {
-            callback.Invoke();
-        }
-    }
-
-    protected void NextTickWhile(Func<Task> callback, Func<bool> @while)
-    {
-        if (@while.Invoke())
-        {
-            NextTick(callback, @while);
-        }
-        else
-        {
-            callback.Invoke();
-        }
-    }
-
-    protected void NextTickWhile(Action callback, Func<bool> @while)
-    {
-        if (@while.Invoke())
-        {
-            NextTick(() =>
-            {
-                callback.Invoke();
-                return Task.CompletedTask;
-            }, @while);
         }
         else
         {

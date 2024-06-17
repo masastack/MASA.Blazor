@@ -31,7 +31,7 @@ namespace Masa.Blazor
         [MasaApiParameter("dialog-transition")]
         public string? Transition { get; set; } = "dialog-transition";
 
-        [Inject] private OutsideClickJSModule? OutsideClickJsModule { get; set; }
+        [Inject] private OutsideClickJSModule OutsideClickJsModule { get; set; } = null!;
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
@@ -91,21 +91,21 @@ namespace Masa.Blazor
             }
         }
 
-        protected bool ShowOverlay => !Fullscreen && !HideOverlay;
+        private bool ShowOverlay => !Fullscreen && !HideOverlay;
 
-        protected ElementReference? OverlayRef => Overlay?.Ref;
+        private ElementReference? OverlayRef => Overlay?.Ref;
 
-        protected int StackMinZIndex { get; set; } = 200;
+        private int StackMinZIndex { get; set; } = 200;
 
-        public ElementReference ContentRef { get; set; }
+        public ElementReference ContentRef { get; private set; }
 
-        public ElementReference DialogRef { get; set; }
+        public ElementReference DialogRef { get; private set; }
 
-        protected MOverlay? Overlay { get; set; }
+        private MOverlay? Overlay { get; set; }
 
-        protected int ZIndex { get; set; }
+        private int ZIndex { get; set; }
 
-        protected bool Animated { get; set; }
+        private bool Animated { get; set; }
 
         protected override async Task WhenIsActiveUpdating(bool value)
         {
@@ -125,11 +125,10 @@ namespace Masa.Blazor
                 NextTick(async () =>
                 {
                     // TODO: previousActiveElement
-
-                    var contains = await Js.InvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, ContentRef);
+                    var contains = await Js.InvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, DialogRef);
                     if (!contains)
                     {
-                        await Js.InvokeVoidAsync(JsInteropConstants.Focus, ContentRef);
+                        await Js.InvokeVoidAsync(JsInteropConstants.Focus, DialogRef);
                     }
                 });
             }
@@ -233,9 +232,9 @@ namespace Masa.Blazor
         public void RegisterChild(IDependent dependent)
         {
             _dependents.Add(dependent);
-
-            NextTickWhile(() => { OutsideClickJsModule?.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
-                () => OutsideClickJsModule == null || OutsideClickJsModule.Initialized == false);
+            NextTickIf(
+                () => { _ = OutsideClickJsModule.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
+                () => !OutsideClickJsModule.Initialized);
         }
 
         public Dictionary<string, object> ContentAttrs
