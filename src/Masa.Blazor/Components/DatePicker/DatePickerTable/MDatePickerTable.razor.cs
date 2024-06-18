@@ -32,7 +32,14 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 
     [Parameter] public EventCallback<DateOnly> OnInput { get; set; }
 
-    [Parameter] public CultureInfo Locale { get; set; } = null!;
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnDateClick { get; set; }
+
+    /// <summary>
+    /// The input parameter is the first day of the month
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnMonthClick { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public CultureInfo Locale { get; set; } = null!;
 
     [Parameter] public CalendarWeekRule CalendarWeekRule { get; set; }
 
@@ -75,7 +82,7 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 
     protected bool IsReversing { get; set; }
 
-    private async Task HandleOnClickAsync(DateOnly value)
+    private async Task HandleOnClickAsync(DateOnly value, bool isMonth)
     {
         if (Disabled)
         {
@@ -84,10 +91,8 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 
         if (IsDateAllowed(value, Min, Max, AllowedDates) && !Readonly)
         {
-            if (OnInput.HasDelegate)
-            {
-                await OnInput.InvokeAsync(value);
-            }
+            await OnInput.InvokeAsync(value);
+            await (isMonth ? OnMonthClick : OnDateClick).InvokeAsync(value);
         }
     }
 

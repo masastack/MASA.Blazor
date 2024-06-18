@@ -15,6 +15,8 @@ public partial class MDatePickerYears : MasaComponentBase
 
     [Parameter] public EventCallback<int> OnInput { get; set; }
 
+    [Parameter] public EventCallback<int> OnYearClick { get; set; }
+
     [Parameter] public Func<DateOnly, string>? Format { get; set; }
 
     [Parameter] public CultureInfo Locale { get; set; } = null!;
@@ -35,10 +37,8 @@ public partial class MDatePickerYears : MasaComponentBase
 
     private async Task HandleOnYearItemClickAsync(int year)
     {
-        if (OnInput.HasDelegate)
-        {
-            await OnInput.InvokeAsync(year);
-        }
+        await OnInput.InvokeAsync(year);
+        await OnYearClick.InvokeAsync(year);
     }
 
     protected override IEnumerable<string> BuildComponentClass()

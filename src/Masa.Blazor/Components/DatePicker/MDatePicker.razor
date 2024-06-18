@@ -70,7 +70,8 @@
                           Max="@MaxYear"
                           Value="@TableYear"
                           Locale="@CurrentLocale"
-                          OnInput="@OnInput">
+                          OnInput="@OnInput"
+                          OnYearClick="@OnYearClick">
         </MDatePickerYears>
 
         void OnInput(int year)
@@ -134,7 +135,8 @@
                               TableDate="@(new DateOnly(TableYear, TableMonth + 1, 1))"
                               Value="@(IsMultiple ? (object)MultipleValue : Value)"
                               WeekdayFormat="@WeekdayFormat"
-                              OnInput="@OnDateClickAsync">
+                              OnInput="@OnDateClickAsync"
+                              OnDateClick="@OnDateClick">
         </MDatePickerDateTable>
     };
 
@@ -159,7 +161,8 @@
                                Scrollable="@Scrollable"
                                Value="@(IsMultiple ? (object)MultipleValue : Value)"
                                TableDate="@(new DateOnly(TableYear, 1, 1))"
-                               OnInput="@OnMonthClickAsync">
+                               OnInput="@OnMonthClickAsync"
+                               OnMonthClick="@OnMonthClick">
         </MDatePickerMonthTable>
     };
 

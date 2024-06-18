@@ -1,6 +1,5 @@
 ﻿@namespace Masa.Blazor.Components.DatePicker
 @inherits MasaComponentBase
-@using Masa.Blazor.Extensions
 @typeparam TValue
 
 <CascadingValue Value="IsDark" Name="IsDark">
@@ -20,7 +19,7 @@
 
     protected virtual RenderFragment GenChildContent() => __builder => { };
 
-    protected RenderFragment GenButton(DateOnly date, bool isFloating, bool isOtherMonth) => __builder =>
+    protected RenderFragment GenButton(DateOnly date, bool isFloating, bool isOtherMonth, bool isMonth = false) => __builder =>
     {
         var cssBuilder = new CssBuilder();
         var styleBuilder = new StyleBuilder();
@@ -66,7 +65,7 @@
             @GenEvents(date)
         </button>
 
-        Task OnClick() => HandleOnClickAsync(date);
+        Task OnClick() => HandleOnClickAsync(date, isMonth);
     };
 
     private RenderFragment GenEvents(DateOnly date) => __builder =>
