@@ -20,7 +20,7 @@
                     var month = row * cols.Length + col;
                     var date = new DateOnly(DisplayedYear, month + 1, 1);
                     <td @key="month">
-                        @GenButton(date, false, false)
+                        @GenButton(date, false, false, true)
                     </td>
                 }
             </tr>

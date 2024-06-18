@@ -112,6 +112,12 @@ public partial class MDatePicker<TValue> : MasaComponentBase
 
     [Parameter] public bool Light { get; set; }
 
+    [Parameter] public EventCallback<DateOnly> OnDateClick { get; set; }
+
+    [Parameter] public EventCallback<DateOnly> OnMonthClick { get; set; }
+
+    [Parameter] public EventCallback<int> OnYearClick { get; set; }
+
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     public bool IsDark
