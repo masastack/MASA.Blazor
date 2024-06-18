@@ -317,13 +317,13 @@ export function copy(text) {
   });
 }
 
-export function focus(selector, noScroll: boolean = false) {
-  let dom = getDom(selector);
-  if (!(dom instanceof HTMLElement))
-    throw new Error("Unable to focus an invalid element.");
-  dom.focus({
-    preventScroll: noScroll
-  })
+export function focus(elOrString, preventScroll: boolean = false) {
+  let dom = getDom(elOrString);
+  if (!(dom instanceof HTMLElement)) {
+    console.error("Unable to focus an invalid element");
+  } else {
+    dom.focus({ preventScroll });
+  }
 }
 
 export function select(elOrString) {

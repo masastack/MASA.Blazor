@@ -5,7 +5,7 @@ namespace Masa.Blazor
 {
     public partial class MMenu : MMenuable, IDependent
     {
-        [Inject] private OutsideClickJSModule? Module { get; set; }
+        [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
@@ -48,9 +48,14 @@ namespace Masa.Blazor
 
         [Parameter] public bool Light { get; set; }
 
-        private bool _isPopupEventsRegistered;
+        private static Block _block = new("m-menu");
+        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         private readonly string _contentId = $"menu-{Guid.NewGuid():N}";
+        private readonly List<IDependent> _dependents = new();
+
+        private bool _isPopupEventsRegistered;
 
         public bool IsDark
         {
@@ -75,7 +80,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected StringNumber? CalculatedLeft
+        private StringNumber? CalculatedLeft
         {
             get
             {
@@ -87,11 +92,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected string? CalculatedMaxHeight => Auto ? "200px" : MaxHeight.ConvertToUnit();
+        private string? CalculatedMaxHeight => Auto ? "200px" : MaxHeight.ConvertToUnit();
 
-        protected string? CalculatedMaxWidth => MaxWidth?.ConvertToUnit();
+        private string? CalculatedMaxWidth => MaxWidth?.ConvertToUnit();
 
-        protected string? CalculatedMinWidth
+        private string? CalculatedMinWidth
         {
             get
             {
@@ -124,11 +129,9 @@ namespace Masa.Blazor
             }
         }
 
-        protected StringNumber? CalculatedTop => !Auto ? CalcTop() : CalcYOverflow(CalcTopAuto());
+        private StringNumber? CalculatedTop => !Auto ? CalcTop() : CalcYOverflow(CalcTopAuto());
 
-        private readonly List<IDependent> _dependents = new();
-
-        protected int DefaultOffset { get; set; } = 8;
+        private int DefaultOffset { get; set; } = 8;
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
@@ -170,19 +173,18 @@ namespace Masa.Blazor
 #endif
         }
 
-        protected override void OnInitialized()
+        protected override void OnAfterRender(bool firstRender)
         {
-            base.OnInitialized();
+            base.OnAfterRender(firstRender);
 
-            if (CascadingDependent is not null)
+            if (firstRender)
             {
-                (this as IDependent).CascadingDependents.ForEach(item => item.RegisterChild(this));
+                if (CascadingDependent is not null)
+                {
+                    (this as IDependent).CascadingDependents.ForEach(item => item.RegisterChild(this));
+                }
             }
         }
-
-        private static Block _block = new("m-menu");
-        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {
@@ -211,8 +213,9 @@ namespace Masa.Blazor
         public void RegisterChild(IDependent dependent)
         {
             _dependents.Add(dependent);
-            NextTickWhile(() => { Module?.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
-                () => Module == null || Module.Initialized == false);
+            NextTickIf(
+                () => { _ = OutsideClickJSModule.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
+                () => !OutsideClickJSModule.Initialized);
         }
 
         //TODO:keydown event
@@ -228,9 +231,9 @@ namespace Masa.Blazor
                 RegisterPopupEvents(ContentElement.GetSelector()!, CloseOnContentClick);
             }
 
-            if (!OpenOnHover && CloseOnClick && Module is { Initialized: false })
+            if (!OpenOnHover && CloseOnClick && OutsideClickJSModule is { Initialized: false })
             {
-                await Module.InitializeAsync(this, DependentSelectors.ToArray());
+                await OutsideClickJSModule.InitializeAsync(this, DependentSelectors.ToArray());
             }
         }
 
@@ -267,18 +270,7 @@ namespace Masa.Blazor
 
         protected override async ValueTask DisposeAsyncCore()
         {
-            if (Module is not null)
-            {
-                try
-                {
-                    await Module.UnbindAndDisposeAsync();
-                }
-                catch (JSDisconnectedException)
-                {
-                    // ignore
-                }
-            }
-
+            await OutsideClickJSModule.UnbindAndDisposeAsync();
             await base.DisposeAsyncCore();
         }
     }

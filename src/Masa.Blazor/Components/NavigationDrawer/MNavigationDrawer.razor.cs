@@ -179,9 +179,9 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     public void RegisterChild(IDependent dependent)
     {
         _dependents.Add(dependent);
-
-        NextTickWhile(() => { OutsideClickJsModule.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
-            () => OutsideClickJsModule.Initialized == false);
+        NextTickIf(
+            () => { _ = OutsideClickJsModule.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },
+            () => !OutsideClickJsModule.Initialized);
     }
 
     public virtual async Task HandleOnMouseEnterAsync(MouseEventArgs e)
@@ -383,7 +383,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
         if (firstRender)
         {
-            await OutsideClickJsModule!.InitializeAsync(this, DependentSelectors.ToArray());
+            await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
 
             await UpdateApplicationAsync();
             ZIndex = await GetActiveZIndexAsync();
