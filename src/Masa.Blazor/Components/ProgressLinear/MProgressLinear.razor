@@ -47,7 +47,7 @@
         styleBuilder.Add("width", Math.Max(0, NormalizedBuffer - NormalizedValue) + "%");
         styleBuilder.AddBackgroundColor(computedColor);
 
-        <div class="@GetClass(_block.Element("background").ToString(), CssClassUtils.GetBackgroundColor(computedColor)))"
+        <div class="@GetClass(_block.Element("background").ToString(), CssClassUtils.GetBackgroundColor(computedColor))"
              style="@styleBuilder.Build()">
         </div>
     };
@@ -82,7 +82,7 @@
 
     private RenderFragment GenDeterminate() => __builder =>
     {
-        <div class="@GetClass(_block.Element("determinate").ToString(), CssClassUtils.GetBackgroundColor(Color)))"
+        <div class="@GetClass(_block.Element("determinate").ToString(), CssClassUtils.GetBackgroundColor(Color))"
              style="@(StyleBuilder.Create().Add("width", NormalizedValue + "%").AddBackgroundColor(Color))">
         </div>
     };
