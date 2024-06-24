@@ -208,12 +208,4 @@ public partial class MSwiper : MasaComponentBase
             16,
             _ctsForUpdateSlides.Token);
     }
-
-    protected override async ValueTask DisposeAsyncCore()
-    {
-        if (_swiperProxy != null)
-        {
-            await _swiperProxy.DisposeAsync();
-        }
-    }
 }
