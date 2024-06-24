@@ -34,7 +34,7 @@
 .m-data-table__column--fixed-right:after {
     position: absolute;
     top: 0;
-    bottom: -1px;
+    bottom: 0;
     left: 0;
     width: 30px;
     transform: translateX(-100%);
