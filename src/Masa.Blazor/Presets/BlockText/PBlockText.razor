@@ -14,7 +14,7 @@
     <div class="d-flex align-items-center">
         @foreach (var tag in Tags!)
         {
-            <MChip @key="tag"
+            <MChip @key="tag.Text"
                    Class="@($"mr-1 {tag.Class}")"
                    Color="@tag.Color"
                    Label
