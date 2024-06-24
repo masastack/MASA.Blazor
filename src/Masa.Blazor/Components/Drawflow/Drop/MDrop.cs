@@ -2,10 +2,6 @@
 
 public class MDrop : MasaComponentBase
 {
-    [Parameter] public string? Class { get; set; }
-
-    [Parameter] public string? Style { get; set; }
-
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public EventCallback<ExDragEventArgs> OnDrop { get; set; }
@@ -27,10 +23,5 @@ public class MDrop : MasaComponentBase
         builder.AddContent(7, ChildContent);
         builder.AddElementReferenceCapture(8, e => ElementReference = e);
         builder.CloseComponent();
-    }
-
-    private async Task HandleOnDragOver()
-    {
-        // ignored
     }
 }
