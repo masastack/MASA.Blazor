@@ -163,4 +163,8 @@ public static class JsInteropConstants
     internal static string UnregisterTextareaAutoGrowEvent => $"{JsInteropFuncNamePrefix}unregisterTextareaAutoGrowEvent";
     
     internal static string CalculateTextareaHeight => $"{JsInteropFuncNamePrefix}calculateTextareaHeight";
+
+    internal static string RegisterTableScrollEvent => $"{JsInteropFuncNamePrefix}registerTableScrollEvent";
+
+    internal static string UnregisterTableScrollEvent => $"{JsInteropFuncNamePrefix}unregisterTableScrollEvent";
 }
