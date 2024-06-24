@@ -1553,3 +1553,40 @@ export function historyGo(delta: number) {
 export function historyReplace(href) {
   history.replaceState(null, /*ignore title*/ '', href);
 }
+
+export function registerTableScrollEvent(wrapper: HTMLElement) {
+  const listener = () => {
+    const scrollWidth = wrapper.scrollWidth;
+    const clientWidth = wrapper.clientWidth;
+    const scrollLeft = wrapper.scrollLeft;
+
+    const rtl = wrapper.parentElement.classList.contains('m-data-table--rtl');
+
+    if (Math.abs(scrollWidth -((rtl ? -scrollLeft : scrollLeft) + clientWidth)) < 1) {
+      wrapper.classList.remove('scrolling')
+      wrapper.classList.remove('scrolled-to-left')
+      wrapper.classList.add('scrolled-to-right');
+    } else if (Math.abs(scrollLeft - (rtl ? scrollWidth - clientWidth : 0)) < 1) {
+      wrapper.classList.remove('scrolling')
+      wrapper.classList.remove('scrolled-to-right')
+      wrapper.classList.add('scrolled-to-left');
+    } else {
+      wrapper.classList.remove('scrolled-to-right');
+      wrapper.classList.remove('scrolled-to-left');
+      wrapper.classList.add('scrolling');
+    }
+  }
+
+  listener();
+
+  wrapper.addEventListener('scroll', listener)
+  wrapper["_m_table_scroll_event"] = listener
+}
+
+export function unregisterTableScrollEvent(wrapper: HTMLElement) {
+  const listener = wrapper["_m_table_scroll_event"]
+  if (listener) {
+    wrapper.removeEventListener('scroll', listener)
+    delete wrapper["_m_table_scroll_event"]
+  }
+}

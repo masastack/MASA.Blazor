@@ -106,8 +106,10 @@ public partial class MSimpleTable : MasaComponentBase
 
         if (firstRender)
         {
-            await HandleOnScrollAsync(EventArgs.Empty);
-            StateHasChanged();
+            if (HasFixed && WrapperElement.Context is not null)
+            {
+                _ = Js.InvokeVoidAsync(JsInteropConstants.RegisterTableScrollEvent, WrapperElement);
+            }
         }
     }
 
@@ -118,43 +120,11 @@ public partial class MSimpleTable : MasaComponentBase
         await RunTaskInMicrosecondsAsync(StateHasChanged, 16 * 2, _resizeCts.Token);
     }
 
-    private async Task HandleOnScrollAsync(EventArgs args)
+    protected override async ValueTask DisposeAsyncCore()
     {
-        if (!HasFixed)
+        if (HasFixed)
         {
-            return;
-        }
-        
-        _onScrollCts?.Cancel();
-        _onScrollCts = new CancellationTokenSource();
-        await RunTaskInMicrosecondsAsync(Scroll, 16 * 2, _onScrollCts.Token);
-        
-        async Task Scroll()
-        {
-            var element = await Js.InvokeAsync<Element?>(JsInteropConstants.GetDomInfo, WrapperElement);
-            if (element != null)
-            {
-                const double threshold = 1;
-            
-                if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < threshold)
-                {
-                    _scrollState = 2;
-                }
-                else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < threshold)
-                {
-                    _scrollState = 0;
-                }
-                else
-                {
-                    _scrollState = 1;
-                }
-
-                if (_prevScrollState != _scrollState)
-                {
-                    _prevScrollState = _scrollState;
-                    StateHasChanged();
-                }
-            }
+            _ = Js.InvokeVoidAsync(JsInteropConstants.UnregisterTableScrollEvent, WrapperElement);
         }
     }
 }

@@ -16,15 +16,8 @@
             }
             else
             {
-                var css = _wrapper.AppendClasses(
-                    ("scrolled-to-left", HasFixed && _scrollState == 0),
-                    ("scrolling", HasFixed && _scrollState == 1),
-                    ("scrolled-to-right", HasFixed && _scrollState == 2)
-                );
-
-                <div class="@css"
+                <div class="@_wrapper"
                      style="@CssStyleUtils.GetHeight(Height)"
-                     @onscroll="HandleOnScrollAsync"
                      @ref="@WrapperElement">
                     <table style="@CssStyleUtils.GetWidth(Width)">
                         @ChildContent

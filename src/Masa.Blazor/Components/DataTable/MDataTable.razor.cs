@@ -225,6 +225,12 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
 
         MobileProvider = new MobileProvider(this);
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+    }
+
+    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -357,6 +363,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     protected override ValueTask DisposeAsyncCore()
     {
         MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
 
         return base.DisposeAsyncCore();
     }
