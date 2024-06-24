@@ -61,18 +61,15 @@ public partial class MSimpleTable : MasaComponentBase
         }
     }
 
-    private CancellationTokenSource _cancellationTokenSource = new();
-
-    internal async Task DebounceRenderForColResizeAsync()
-    {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
-        await RunTaskInMicrosecondsAsync(StateHasChanged, 16 * 2, _cancellationTokenSource.Token);
-    }
-
-    public ElementReference WrapperElement { get; set; }
-
     private int _scrollState;
+    private int _prevScrollState;
+
+    private CancellationTokenSource? _resizeCts;
+    private CancellationTokenSource? _onScrollCts;
+
+    protected override bool AfterHandleEventShouldRender() => false;
+
+    public ElementReference WrapperElement { get; private set; }
 
     private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
@@ -114,29 +111,49 @@ public partial class MSimpleTable : MasaComponentBase
         }
     }
 
+    internal async Task DebounceRenderForColResizeAsync()
+    {
+        _resizeCts?.Cancel();
+        _resizeCts = new CancellationTokenSource();
+        await RunTaskInMicrosecondsAsync(StateHasChanged, 16 * 2, _resizeCts.Token);
+    }
+
     private async Task HandleOnScrollAsync(EventArgs args)
     {
         if (!HasFixed)
         {
             return;
         }
-
-        var element = await Js.InvokeAsync<Element?>(JsInteropConstants.GetDomInfo, WrapperElement);
-        if (element != null)
+        
+        _onScrollCts?.Cancel();
+        _onScrollCts = new CancellationTokenSource();
+        await RunTaskInMicrosecondsAsync(Scroll, 16 * 2, _onScrollCts.Token);
+        
+        async Task Scroll()
         {
-            const double threshold = 1;
+            var element = await Js.InvokeAsync<Element?>(JsInteropConstants.GetDomInfo, WrapperElement);
+            if (element != null)
+            {
+                const double threshold = 1;
             
-            if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < threshold)
-            {
-                _scrollState = 2;
-            }
-            else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < threshold)
-            {
-                _scrollState = 0;
-            }
-            else
-            {
-                _scrollState = 1;
+                if (Math.Abs(element.ScrollWidth - ((MasaBlazor.RTL ?  -element.ScrollLeft : element.ScrollLeft) + element.ClientWidth)) < threshold)
+                {
+                    _scrollState = 2;
+                }
+                else if (Math.Abs(element.ScrollLeft - (MasaBlazor.RTL ? element.ScrollWidth - element.ClientWidth : 0)) < threshold)
+                {
+                    _scrollState = 0;
+                }
+                else
+                {
+                    _scrollState = 1;
+                }
+
+                if (_prevScrollState != _scrollState)
+                {
+                    _prevScrollState = _scrollState;
+                    StateHasChanged();
+                }
             }
         }
     }
