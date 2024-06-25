@@ -25,7 +25,8 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
         PopupProvider.StateChanged += OnStateChanged;
         MasaBlazor.OnThemeChange += OnThemeChange;
-        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+        MasaBlazor.RTLChanged += OnRTLChanged;
+        MasaBlazor.DefaultsChanged += OnDefaultsChanged;
 
         OnThemeChange(MasaBlazor.Theme);
     }
@@ -46,9 +47,14 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         InvokeAsync(StateHasChanged);
     }
 
-    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    private void OnRTLChanged(object? sender, EventArgs e)
     {
-        InvokeStateHasChanged();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnDefaultsChanged(object? sender, EventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
     }
 
     private async Task OnJSInteropReadyAsync()
@@ -81,7 +87,8 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     {
         PopupProvider.StateChanged -= OnStateChanged;
         MasaBlazor.OnThemeChange -= OnThemeChange;
-        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+        MasaBlazor.RTLChanged -= OnRTLChanged;
+        MasaBlazor.DefaultsChanged -= OnDefaultsChanged;
 
         return base.DisposeAsyncCore();
     }
