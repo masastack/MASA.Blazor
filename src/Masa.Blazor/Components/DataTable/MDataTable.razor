@@ -108,7 +108,7 @@
 
     private RenderFragment GenItems() => __builder =>
     {
-        var empty = GenEmpty(Items.Count(), Pagination.ItemsLength);
+        var empty = GenEmpty(Items?.Count() ?? 0, Pagination.ItemsLength);
         if (empty is not null)
         {
             @empty

@@ -6,7 +6,7 @@ public abstract class MData<TItem> : MasaComponentBase
 {
     [Parameter]
     [EditorRequired]
-    public IEnumerable<TItem> Items { get; set; } = new List<TItem>();
+    public IEnumerable<TItem>? Items { get; set; } = new List<TItem>();
 
     [Parameter]
     public OneOf<string, IList<string>> SortBy
@@ -94,7 +94,7 @@ public abstract class MData<TItem> : MasaComponentBase
     [Parameter] [MasaApiParameter(-1)] public int ServerItemsLength { get; set; } = -1;
 
     [Parameter]
-    public IEnumerable<ItemValue<TItem>> ItemValues { get; set; } = new List<ItemValue<TItem>>();
+    public IEnumerable<ItemValue<TItem>>? ItemValues { get; set; } = new List<ItemValue<TItem>>();
 
     [Parameter]
     public EventCallback<int> OnPageCount { get; set; }
@@ -125,7 +125,7 @@ public abstract class MData<TItem> : MasaComponentBase
     {
         get
         {
-            if (InternalOptions.ItemsPerPage == -1 || !Items.Any())
+            if (InternalOptions.ItemsPerPage == -1 || Items?.Any() is not true)
             {
                 return 0;
             }
@@ -134,7 +134,7 @@ public abstract class MData<TItem> : MasaComponentBase
         }
     }
 
-    public IEnumerable<TItem> FilteredItems { get; private set; } = Enumerable.Empty<TItem>();
+    public IList<TItem> FilteredItems { get; private set; } = [];
     
     public int ItemsLength { get; private set; }
 
@@ -147,7 +147,7 @@ public abstract class MData<TItem> : MasaComponentBase
                 return ItemsLength;
             }
 
-            if (!Items.Any())
+            if (Items?.Any() is not true)
             {
                 return 0;
             }
@@ -226,11 +226,11 @@ public abstract class MData<TItem> : MasaComponentBase
     
     private void UpdateComputedItems()
     {
-        var items = new List<TItem>(Items);
+        var items = new List<TItem>(Items ?? []);
 
         if (!DisableFiltering && ServerItemsLength <= 0 && ItemValues != null)
         {
-            FilteredItems = CustomFilter(items, ItemValues, Search);
+            FilteredItems = CustomFilter(items, ItemValues, Search).ToList();
         }
         else
         {
@@ -250,7 +250,7 @@ public abstract class MData<TItem> : MasaComponentBase
         }
 
         ComputedItems = items2;
-        
+
         ItemsLength = ServerItemsLength >=0? ServerItemsLength : FilteredItems.Count();
         PageCount = InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0));
 
