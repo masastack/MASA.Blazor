@@ -1,0 +1,47 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<MCard Width="360" Outlined Class="pa-4 mx-auto">
+    <MForm @ref="_form" Model="@_model">
+        <MTextField @bind-Value="@_model.Email"
+                    Filled
+                    Dense
+                    Placeholder="Email"
+                    PersistentPlaceholder>
+        </MTextField>
+        <div class="d-flex align-center">
+            <MTextField @bind-Value="@_model.Code"
+                        Filled
+                        Dense
+                        Placeholder="Code"
+                        PersistentPlaceholder
+                        HideDetails="true"
+                        Class="mr-2">
+            </MTextField>
+            <MButton OnClick="@SendCode" Depressed Color="secondary">Send Code</MButton>
+        </div>
+    </MForm>
+</MCard>
+
+@code {
+
+    private MForm? _form;
+    private Model _model = new();
+
+    class Model
+    {
+        [Required] [EmailAddress] public string? Email { get; set; }
+
+        [Parameter] public string? Code { get; set; }
+    }
+
+    private void SendCode()
+    {
+        var isEmailValid = _form!.Validate(FieldIdentifier.Create(() => _model.Email));
+        if (isEmailValid)
+        {
+            // send code
+        }
+    }
+
+}
