@@ -113,6 +113,10 @@ public partial class MForm : MasaComponentBase
         }
     }
 
+    /// <summary>
+    /// Validate the all fields in the form
+    /// </summary>
+    /// <returns></returns>
     [MasaApiPublicMethod]
     public bool Validate()
     {
@@ -126,7 +130,7 @@ public partial class MForm : MasaComponentBase
                 valid = false;
             }
         }
-
+        
         if (EditContext != null)
         {
             var success = EditContext.Validate();
@@ -137,6 +141,44 @@ public partial class MForm : MasaComponentBase
         _ = UpdateValue(valid);
 
         return valid;
+    }
+
+    /// <summary>
+    /// Validate the specified field in the form
+    /// </summary>
+    /// <param name="validatable"></param>
+    /// <returns></returns>
+    [MasaApiParameter]
+    public bool Validate(IValidatable validatable)
+    {
+        var valid = validatable.Validate();
+
+        if (valid && EditContext is not null)
+        {
+            EditContext.NotifyFieldChanged(validatable.ValueIdentifier);
+            valid = valid && !EditContext.GetValidationMessages(validatable.ValueIdentifier).Any();
+        }
+
+        return valid;
+    }
+
+    /// <summary>
+    /// Validate the specified field in the form
+    /// </summary>
+    /// <param name="fieldIdentifier"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    [MasaApiParameter]
+    public bool Validate(FieldIdentifier fieldIdentifier)
+    {
+        var index = Validatables.FindIndex(item => item.ValueIdentifier.Equals(fieldIdentifier));
+        if (index == -1)
+        {
+            throw new ArgumentException($"Field {fieldIdentifier.FieldName} not found in form.");
+        }
+
+        var validatable = Validatables[index];
+        return Validate(validatable);
     }
 
     /// <summary>
