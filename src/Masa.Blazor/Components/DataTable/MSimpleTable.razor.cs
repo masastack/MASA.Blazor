@@ -65,7 +65,6 @@ public partial class MSimpleTable : MasaComponentBase
     private int _prevScrollState;
 
     private CancellationTokenSource? _resizeCts;
-    private CancellationTokenSource? _onScrollCts;
 
     protected override bool AfterHandleEventShouldRender() => false;
 
