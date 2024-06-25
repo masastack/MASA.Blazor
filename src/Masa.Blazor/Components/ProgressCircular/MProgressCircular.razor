@@ -14,7 +14,7 @@
 
     private RenderFragment GenSvg() => __builder =>
     {
-        <svg style="transition: rotate(@($"{Rotate}deg"))" @attributes="@SvgAttrs">
+        <svg style="transform: rotate(@($"{Rotate}deg"))" @attributes="@SvgAttrs">
             @if (!Indeterminate)
             {
                 @GenCircle("underlay", "0")
