@@ -1,14 +1,12 @@
-﻿using Masa.Blazor.Presets;
+﻿namespace Masa.Blazor.Popup.Components;
 
-namespace Masa.Blazor.Popup.Components;
-
-public partial class EnqueuedSnackbars : MasaComponentBase
+public partial class EnqueuedSnackbars : ComponentBase, IAsyncDisposable
 {
     [Inject]
-    private IPopupService? PopupService { get; set; }
+    private IPopupService PopupService { get; set; } = null!;
 
     [Inject]
-    private MasaBlazor? MasaBlazor { get; set; }
+    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public SnackPosition Position { get; set; } = PEnqueuedSnackbars.DEFAULT_SNACK_POSITION;
@@ -24,7 +22,7 @@ public partial class EnqueuedSnackbars : MasaComponentBase
 
     [Parameter]
     public bool? Closeable { get; set; }
-    
+
     [Parameter]
     public StringNumber? Elevation { get; set; }
 
@@ -42,16 +40,30 @@ public partial class EnqueuedSnackbars : MasaComponentBase
 
     private PEnqueuedSnackbars? _enqueuedSnackbars;
 
-    protected override string ComponentName => PopupComponents.SNACKBAR;
-
     protected override async Task OnInitializedAsync()
     {
-        if (PopupService is not null)
-        {
-            PopupService.SnackbarOpen += OnSnackbarOpenAsync;
-        }
+        PopupService.SnackbarOpen += OnSnackbarOpenAsync;
+        MasaBlazor.DefaultsChanged += OnDefaultsChanged;
 
         await base.OnInitializedAsync();
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        if (MasaBlazor.Defaults is not null
+            && MasaBlazor.Defaults.TryGetValue(PopupComponents.SNACKBAR, out var dictionary)
+            && dictionary is not null)
+        {
+            var defaults = ParameterView.FromDictionary(dictionary);
+            defaults.SetParameterProperties(this);
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
+
+    private async void OnDefaultsChanged(object? sender, EventArgs e)
+    {
+        await SetParametersAsync(ParameterView.Empty); // it's ok?
     }
 
     private async Task OnSnackbarOpenAsync(SnackbarOptions config)
@@ -61,18 +73,14 @@ public partial class EnqueuedSnackbars : MasaComponentBase
         await Task.CompletedTask;
     }
 
-    protected override async ValueTask DisposeAsyncCore()
+    public async ValueTask DisposeAsync()
     {
         if (_enqueuedSnackbars != null)
         {
             await _enqueuedSnackbars.DisposeAsync();
         }
 
-        if (PopupService is not null)
-        {
-            PopupService.SnackbarOpen -= OnSnackbarOpenAsync;
-        }
-
-        await base.DisposeAsyncCore();
+        PopupService.SnackbarOpen -= OnSnackbarOpenAsync;
+        MasaBlazor.DefaultsChanged -= OnDefaultsChanged;
     }
 }

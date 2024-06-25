@@ -1,10 +1,5 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    /// <summary>
-    /// Cascading this will cause additional render,we may just cascading rtl in the feature
-    /// </summary>
     public class MasaBlazor
     {
         private bool _rtl;
@@ -55,7 +50,7 @@ namespace Masa.Blazor
 
         public Breakpoint Breakpoint { get; }
 
-        public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; }
+        public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; private set; }
 
         public Theme Theme { get; }
 
@@ -68,7 +63,7 @@ namespace Masa.Blazor
         [Obsolete("Use RTLChanged instead")]
         public event Action<bool>? OnRTLChange;
 
-        public event EventHandler RTLChanged;
+        public event EventHandler? RTLChanged;
 
         public event Action<Theme>? OnThemeChange;
 
@@ -78,10 +73,12 @@ namespace Masa.Blazor
         public event EventHandler<BreakpointChangedEventArgs>? BreakpointChanged;
 
         /// <summary>
-        /// An event that fires when the the value of Mobile property from <see cref="Breakpoint"/> has changed.
+        /// An event that fires when the value of Mobile property from <see cref="Breakpoint"/> has changed.
         /// </summary>
         public event EventHandler<MobileChangedEventArgs> MobileChanged;
-
+        
+        public event EventHandler? DefaultsChanged; 
+        
         public void ToggleTheme()
         {
             Theme.Dark = !Theme.Dark;
@@ -97,6 +94,17 @@ namespace Masa.Blazor
             }
 
             ToggleTheme();
+        }
+
+        /// <summary>
+        /// Update the default configuration.
+        /// </summary>
+        /// <param name="defaultsConfig"></param>
+        public void UpdateDefaults(Action<IDictionary<string, IDictionary<string, object?>?>> defaultsConfig)
+        {
+            Defaults ??= new Dictionary<string, IDictionary<string, object?>?>();
+            defaultsConfig.Invoke(Defaults);
+            DefaultsChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
