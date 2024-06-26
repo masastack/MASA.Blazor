@@ -11,7 +11,15 @@
     "text": "使背景透明。当使用`Color`属性时，颜色将应用于按钮文本而不是背景。",
     "tile": "删除组件的**border-radius**样式",
     "type": "设置按钮的**type**属性。",
-    "value": "在组中选择组件时使用的值。如果没有提供，则使用 index。"
+    "value": "在组中选择组件时使用的值。如果没有提供，则使用 index。",
+    "iconName": "通过填写图标名,创建一个`Icon=true`的按钮,并且自动包含图标",
+    "leftIconName": "为`ChildContent`左侧创建一个指定图标名的`MIcon`",
+    "rightIconName": "参考`LeftIconName`",
+    "Key" : "搭配**Transition**组件使用",
+    "show": "控制是否显示，应搭配**Transition**组件使用",
+    "OnClickPreventDefault": "阻止默认的`OnClick`行为",
+    "OnClickStopPropagation": "阻止冒泡行为, 主要用于配合**PPageStack**的导航行为",
+    "MatchPattern": "匹配路由, 参考 `MListItem.MatchPattern`, 更多说明见[特性=>导航和路由自动匹配](https://docs.masastack.com/blazor/features/auto-match-nav)文档说明"
   },
   "contents": {
     "loaderContent": "自定义加载器"
