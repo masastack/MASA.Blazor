@@ -1,0 +1,10 @@
+{
+  "props": {
+    "defaults": "一个字典，设置子内容的组件的默认值。"
+  },
+  "contents": {
+    "childContent": "默认内容"
+  },
+  "events": {},
+  "methods": {}
+}
