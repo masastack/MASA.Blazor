@@ -1,9 +1,9 @@
 {
   "props": {
-    "defaults": "查看 [示例](https://docs.masastack.com/blazor/components/defaults-providers/#section-51764ed6) 说明"
+    "defaults": "一个字典，设置子内容的组件的默认值。"
   },
   "contents": {
-    "childContent":"不是组件，不存在插槽"
+    "childContent": "默认内容"
   },
   "events": {},
   "methods": {}
