@@ -28340,7 +28340,7 @@ html.overflow-y-hidden {
     height: 12px;
     width: 32px;
 }
-.m-input--switch.m-input--dense:not(.m-input--switch--text) .m-input--switch--inset .m-input--switch__track {
+.m-input--switch.m-input--dense.m-input--switch--inset:not(.m-input--switch--text) .m-input--switch__track {
     height: 22px;
     width: 44px;
     top: calc(50% - 12px);

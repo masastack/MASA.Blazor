@@ -4,15 +4,15 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 {
     protected override ParameterList<bool> GenToggleParameters() => new()
     {
-        { nameof(MSwitch<bool>.Inset), false },
-        { nameof(MSwitch<bool>.Dense), false },
-        { nameof(MSwitch<bool>.Flat), false },
+        { nameof(MSwitch<bool>.Inset), false }
     };
 
     protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
     {
         { nameof(MSwitch<bool>.Disabled), new CheckboxParameter("false",true) },
         { nameof(MSwitch<bool>.Loading), new CheckboxParameter("false",true) },
+        { nameof(MSwitch<bool>.Dense), new CheckboxParameter("false",true) },
+        { nameof(MSwitch<bool>.Flat), new CheckboxParameter("false",true) },
     };
 
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
