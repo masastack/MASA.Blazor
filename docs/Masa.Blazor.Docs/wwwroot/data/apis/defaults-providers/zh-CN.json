@@ -1,0 +1,10 @@
+{
+  "props": {
+    "defaults": "查看 [示例](https://docs.masastack.com/blazor/components/defaults-providers/#section-51764ed6) 说明"
+  },
+  "contents": {
+    "childContent":"不是组件，不存在插槽"
+  },
+  "events": {},
+  "methods": {}
+}
