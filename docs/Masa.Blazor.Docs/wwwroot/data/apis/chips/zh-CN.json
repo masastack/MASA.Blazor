@@ -12,13 +12,13 @@
     "pill": "移除 [MAvatar](/blazor/components/avatars) 的边距。",
     "textColor": "将指定的颜色应用于控件文本。",
     "value": "[MChipGroup](/blazor/components/chipGroups) 的子组时使用的值。",
-    "OnClickPreventDefault": "阻止默认的 `OnClick` 行为",
-    "OnClickStopPropagation": "阻止冒泡行为，主要用于配合 **PPageStack** 的导航行为",
-    "Close":"启用关闭按钮，并在点击后从DOM中移除整个组件 [示例](https://docs.masastack.com/blazor/components/chips/#section-53ef517395ed) "
+    "onClickPreventDefault": "阻止默认的 `OnClick` 行为",
+    "onClickStopPropagation": "阻止冒泡行为，主要用于配合 **PPageStack** 的导航行为",
+    "close":"启用关闭按钮，并在点击后从DOM中移除整个组件 [示例](https://docs.masastack.com/blazor/components/chips/#section-53ef517395ed) "
   },
   "contents": {},
   "events": {
-    "OnCloseClick":"启用 `Close` 时，点击关闭按钮事件"
+    "onCloseClick":"启用 `Close` 时，点击关闭按钮事件"
   },
   "methods": {}
 }
