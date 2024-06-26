@@ -58,6 +58,9 @@
 	<ItemGroup>
 		<Content Remove="package.json" />
 		<Content Remove="package-lock.json" />
+		<Content Update="wwwroot\**\*.js.map" CopyToPublishDirectory="Never" Condition="'$(Configuration)' == 'Release'" />
+		<Content Update="wwwroot\css\masa-blazor.css" CopyToPublishDirectory="Never" Condition="'$(Configuration)' == 'Release'" />
+		<Content Update="wwwroot\css\masa-blazor.extend.css" CopyToPublishDirectory="Never" Condition="'$(Configuration)' == 'Release'" />
 	</ItemGroup>
 
 	<ItemGroup>
