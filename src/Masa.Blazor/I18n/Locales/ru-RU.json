@@ -2,11 +2,11 @@
   "$masaBlazor": {
     "badge": "знак",
     "close": "Закрыть",
-    "copy": "Copy",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "ok": "OK",
+    "copy": "копировать",
+    "save": "сохранить",
+    "cancel": "отменить",
+    "delete": "удалить",
+    "ok": "подтвердить",
     "dataIterator": {
       "noResultsText": "Не найдено подходящих записей",
       "loadingText": "Запись загружается..."
@@ -69,7 +69,7 @@
     },
     "rating": {
       "ariaLabel": {
-        "icon": "Rating {0} of {1}"
+        "icon": "{0} из {1} баллов"
       }
     }
   }
