@@ -1,0 +1,15 @@
+{
+  "props": {
+    "class": "设置 `Content` 上的CSS类。",
+    "style": "将内联样式应用于 `Content` 。",
+    "label": "设置标签内容",
+    "labelClass": "设置 `Label` 上的CSS类。",
+    "labelStyle": "将内联样式应用于 `Label` 。",
+    "span": "跨越列数"
+  },
+  "contents": {
+    "childContent": "默认插槽"
+  },
+  "events": {},
+  "methods": {}
+}

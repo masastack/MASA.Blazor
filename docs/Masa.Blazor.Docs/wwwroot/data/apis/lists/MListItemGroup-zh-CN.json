@@ -1,13 +1,11 @@
 {
   "props": {
-    "max": "设置可以选择的最大数量。",
-    "multiple": "允许多个选择。",
-    "targetGroup": "",
-    "value": "组件的指定 model 值。",
-    "values": "组件的指定 model 值。"
+    "value": "单选时，选择项的 `Value`",
+    "values": "多选时，选择项的 `Value` 组成的列表"
   },
   "events": {
-    "valuesChanged": ""
+    "valueChanged": "选择项改变事件",
+    "valuesChanged": "开启 `Multiple` 多选时，选择项列表改变事件。"
   },
   "contents": {}
 }

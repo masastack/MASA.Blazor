@@ -1,12 +1,12 @@
 {
   "props": {
-    "maximumErrorCount": "最大错误次数",
-    "onErrorHandleAsync": "自定义错误消息处理",
-    "showAlert": "是否显示告警",
-    "showDetail": "是否显示异常信息"
+    "showDetail": "确定是否显示异常的堆栈跟踪。",
+    "popupType": "错误提示类型，详见 [示例](https://docs.masastack.com/blazor/components/error-handler/#section-95198bef63d0793a7c7b578b)",
+    "disablePopupIfErrorContentRender": "在错误内容即将呈现时禁用默认弹出窗口或自定义 `OnHandle` 事件。当您不想同时显示错误内容和弹出窗口时，此功能很有用。"
   },
-  "events": {},
-  "contents": {
-    "errorContent": "自定义错误异常插槽"
-  }
+  "events": {
+    "OnHandle": "引发异常时将调用的事件。建议弹出一个对话框来显示异常。如果设置此项，则默认弹出窗口将被禁用。",
+    "OnAfterHandle": "将在 `OnHandle` 之后调用的事件"
+  },
+  "contents": {}
 }
