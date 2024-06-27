@@ -1,13 +1,10 @@
 {
   "props": {
-    "offset": "Offset.",
-    "value": "value.",
-    "wrapperStyle": "wrapperStyle."
+    "offset": "设置子元素外的边框偏移",
+    "value": "控制组件可见还是隐藏。",
+    "border": "自定义边框的位置。"
   },
-  "contents": {
-    "primaryContent": "PrimaryContent.",
-    "secondaryContent": "SecondaryContent."
-  },
+  "contents": {},
   "events": {},
   "methods": {}
 }
