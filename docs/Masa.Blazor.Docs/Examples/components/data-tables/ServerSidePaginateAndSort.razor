@@ -101,7 +101,7 @@
 
         if (itemsPerPage > 0)
         {
-            items = items.Skip((page - 1) * itemsPerPage).Take(page * itemsPerPage);
+            items = items.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
         await Task.Delay(1000);
