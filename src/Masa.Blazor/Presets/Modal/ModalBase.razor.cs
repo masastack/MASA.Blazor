@@ -285,6 +285,11 @@ public partial class ModalBase
         Text = true,
     };
 
+    protected virtual string GetBodyStyle()
+    {
+        return StyleBuilder.Create().Add("padding: 24px").Add(BodyStyle).ToString();
+    }
+
     private async Task ScrollToTop()
     {
         if (AutoScrollToTop && BodyRef?.Ref != null)

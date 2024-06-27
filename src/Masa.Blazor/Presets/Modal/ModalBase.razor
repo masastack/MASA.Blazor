@@ -43,7 +43,7 @@
             }
 
             <MCardText Class="@BodyClass"
-                       Style="@($"padding: 24px; {BodyStyle}")"
+                       Style="@GetBodyStyle()"
                        @ref="BodyRef">
                 @if (FormModel == null)
                 {
