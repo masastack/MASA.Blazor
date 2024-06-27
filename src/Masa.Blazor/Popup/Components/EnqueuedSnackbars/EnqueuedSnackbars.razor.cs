@@ -68,9 +68,12 @@ public partial class EnqueuedSnackbars : ComponentBase, IAsyncDisposable
 
     private async Task OnSnackbarOpenAsync(SnackbarOptions config)
     {
-        _enqueuedSnackbars?.EnqueueSnackbar(config);
+        if (_enqueuedSnackbars is null)
+        {
+            return;
+        }
 
-        await Task.CompletedTask;
+        await _enqueuedSnackbars.EnqueueSnackbar(config);
     }
 
     public async ValueTask DisposeAsync()

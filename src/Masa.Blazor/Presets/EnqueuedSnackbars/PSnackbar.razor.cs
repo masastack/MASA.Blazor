@@ -142,7 +142,10 @@ public partial class PSnackbar : MasaComponentBase
             await OnClosed.InvokeAsync();
         }
 
-        EnqueuedSnacks?.RemoveSnackbar(EnqueueId);
+        if (EnqueuedSnacks is not null)
+        {
+            await EnqueuedSnacks.RemoveSnackbar(EnqueueId);
+        }
     }
 
     private void HandleOnClose()
