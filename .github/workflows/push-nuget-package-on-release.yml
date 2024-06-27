@@ -1,0 +1,27 @@
+name: Push nuget package on release
+on:
+  release:
+    types: [published]
+
+jobs:
+  push-nuget-on-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: git pull
+      uses: actions/checkout@v3
+    - name: setting dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          8.0.x
+          7.0.x
+          6.0.x
+        include-prerelease: true
+    - name: build
+      run: dotnet build src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj -c Release /p:ContinuousIntegrationBuild=true
+    - name: pack Masa.Blazor
+      run: dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build --include-symbols -c Release -p:PackageVersion=$GITHUB_REF_NAME
+    - name: pack Masa.Blazor.SomethingSkia
+      run: dotnet pack src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj --no-build --include-symbols -c Release -p:PackageVersion=$GITHUB_REF_NAME
+    - name: package push
+      run: dotnet nuget push "**/*.symbols.nupkg" --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
