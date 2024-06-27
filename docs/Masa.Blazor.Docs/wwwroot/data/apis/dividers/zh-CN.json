@@ -2,7 +2,8 @@
   "props": {
     "center": "Center。",
     "inset": "添加缩进 (72px)",
-    "vertical": "垂直显示分隔线"
+    "vertical": "垂直显示分隔线",
+    "length": "自定义线条长度"
   },
   "contents": {},
   "events": {},
