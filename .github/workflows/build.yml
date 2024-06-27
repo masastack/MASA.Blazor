@@ -1,4 +1,4 @@
-name: pr-docs-next
+name: Build
 
 on:
   pull_request:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - docs/**
+      - src/**
   workflow_dispatch:
 
 jobs:
