@@ -18,13 +18,13 @@ public partial class MDivider : MasaComponentBase
 
     [Parameter] public bool Right { get; set; }
 
-    [Parameter] public int Length { get; set; }
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    public int Length { get; set; }
 
     [Parameter] public bool Dark { get; set; }
 
-    [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.6.0")]
-    public bool Light { get; set; }
+    [Parameter] public bool Light { get; set; }
 
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
