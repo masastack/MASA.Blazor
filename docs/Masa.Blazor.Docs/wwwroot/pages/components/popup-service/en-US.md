@@ -163,7 +163,7 @@ Here is a simple popup component named **CustomPopupComponent** that encapsulate
 ```razor
 @inherits Masa.Blazor.Popup.Components.PopupComponentBase
 
-<MDialog Value="Visible" MaxWidth="360">
+<MDialog Value="Visible" ValueChanged="ValueChanged" MaxWidth="360">
     <MAlert Class="mb-0" Type="@Type" Dismissible Value="Visible" ValueChanged="ValueChanged">@Content</MAlert>
 </MDialog>
 
@@ -174,11 +174,12 @@ Here is a simple popup component named **CustomPopupComponent** that encapsulate
     [Parameter]
     public AlertTypes Type { get; set; }
 
-    private async Task ValueChanged(bool _)
+    private async Task ValueChanged(bool val)
     {
         await ClosePopupAsync();
     }
 }
+
 ```
 
 <masa-example file="Examples.components.popup_service.Advance"></masa-example>
