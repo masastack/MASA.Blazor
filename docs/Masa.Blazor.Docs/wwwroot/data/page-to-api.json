@@ -201,5 +201,9 @@
   "splitters": [
     "MSplitter",
     "MSplitterPane"
+  ],
+  "descriptions": [
+    "MDescriptions",
+    "MDescriptionsItem"
   ]
 }
