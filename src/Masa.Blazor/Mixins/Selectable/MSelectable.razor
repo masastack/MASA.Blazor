@@ -6,7 +6,7 @@
 
 @code {
     
-    private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? null : ValidationState;
+    private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? ValidationState : null;
 
     protected override RenderFragment GenDefaultSlot() => __builder =>
     {

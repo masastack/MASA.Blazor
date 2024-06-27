@@ -76,7 +76,7 @@
 
         public string? ValidationState => RadioGroup?.ValidationState ?? ComputedColor;
 
-        private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? null : ValidationState;
+        private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? ValidationState : null;
 
         protected override void OnInitialized()
         {
