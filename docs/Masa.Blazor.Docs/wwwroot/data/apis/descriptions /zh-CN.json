@@ -1,0 +1,27 @@
+{
+  "props": {
+    "contentClass": "设置**MDescriptionsItem**的 `Content` 上的CSS类。",
+    "contentStyle": "将内联样式应用于**MDescriptionsItem**的 `Content`。",
+    "labelClass": "设置**MDescriptionsItem**的 `Label` 上的CSS类。",
+    "labelStyle": "将内联样式应用于**MDescriptionsItem**的 `Label`。",
+    "title": "标题",
+    "bordered": "显示边框，启用时将禁用 `Colon` (冒号) ",
+    "colon": "在 `Label` 后添加冒号",
+    "alignCenter": "**MDescriptionsItem**的 `Content` 垂直方向居中，`Bordered` 启用时强制开启",
+    "dense": "紧凑",
+    "vertical": "**MDescriptionsItem**内的 `Label` 和 `Content` 垂直布置",
+    "column": "设置单行最大列数",
+    "xs": "当断点为 “Xs” 时最大列数",
+    "sm": "当断点为 “Sm” 时最大列数",
+    "md": "当断点为 “Md” 时最大列数",
+    "lg": "当断点为 “Lg” 时最大列数",
+    "xl": "当断点为 “Xl” 时最大列数"
+  },
+  "contents": {
+    "actionsContent": "操作区插槽 [示例](https://docs.masastack.com/blazor/components/descriptions/#section-5c5e6027) ",
+    "childContent": "默认插槽",
+    "titleContent": "标题位置插槽"
+  },
+  "events": {},
+  "methods": {}
+}
