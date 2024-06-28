@@ -226,33 +226,33 @@ public abstract class MData<TItem> : MasaComponentBase
     
     private void UpdateComputedItems()
     {
-        var items = new List<TItem>(Items ?? []);
+        var filteringItems = new List<TItem>(Items ?? []);
 
         if (!DisableFiltering && ServerItemsLength <= 0 && ItemValues != null)
         {
-            FilteredItems = CustomFilter(items, ItemValues, Search).ToList();
+            FilteredItems = CustomFilter(filteringItems, ItemValues, Search).ToList();
         }
         else
         {
-            FilteredItems = items;
+            FilteredItems = filteringItems;
         }
         
-        IEnumerable<TItem> items2 = new List<TItem>(FilteredItems);
+        ItemsLength = ServerItemsLength >=0? ServerItemsLength : FilteredItems.Count();
+        PageCount = InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0));
+
+        IEnumerable<TItem> computingItems = new List<TItem>(FilteredItems);
 
         if ((!DisableSort || InternalOptions.GroupBy.Count > 0) && ServerItemsLength <= 0)
         {
-            items2 = SortItems(items2);
+            computingItems = SortItems(computingItems);
         }
 
         if (!DisablePagination && ServerItemsLength <= 0)
         {
-            items2 = PaginateItems(items2);
+            computingItems = PaginateItems(computingItems);
         }
 
-        ComputedItems = items2;
-
-        ItemsLength = ServerItemsLength >=0? ServerItemsLength : FilteredItems.Count();
-        PageCount = InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0));
+        ComputedItems = computingItems;
 
         if (_prevPageCount != PageCount)
         {
