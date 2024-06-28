@@ -16,6 +16,7 @@ public abstract class MItemGroupBase : MasaComponentBase
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
+    [MasaApiParameter(Ignored = true)]
     public GroupType? TargetGroup { get; set; }
 
     [Parameter]

@@ -1,19 +1,18 @@
 {
   "props": {
     "continuous": "如果为 true，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
-    "max": "",
     "nextIcon": "如果 `ShowArrows` 为 true，则显示 \"next\" 按钮的图标",
     "prevIcon": "如果 `ShowArrows` 为 true，则显示 \"prev\" 按钮的图标",
     "reverse": "反转正常的过渡方向。",
     "showArrows": "显示 \"next\" 和 \"prev\" 按钮",
     "showArrowsOnHover": "悬停时显示 \"next\" 和 \"prev\" 按钮。必须设置 `ShowArrows` 。",
-    "targetGroup": "",
-    "value": "组件的指定 model 值。",
-    "values": "组件的指定 model 值。",
-    "vertical": "改变窗口时使用垂直转换."
+    "vertical": "改变窗口时使用垂直转换.",
+    "value": "单选时，选择项的 `Value`",
+    "values": "多选时，选择项的 `Value` 组成的列表"
   },
   "events": {
-    "valuesChanged": ""
+    "valueChanged": "选择项改变事件",
+    "valuesChanged": "开启 `Multiple` 多选时，选择项列表改变事件。"
   },
   "contents": {
   }

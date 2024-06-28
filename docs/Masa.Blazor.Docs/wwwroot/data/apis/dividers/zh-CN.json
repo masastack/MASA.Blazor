@@ -1,6 +1,8 @@
 {
   "props": {
-    "center": "Center。",
+    "left":" `Content` 居左",
+    "center": " `Content` 居中。当有 `Content` 时默认居中",
+    "right":" `Content` 居右",
     "inset": "添加缩进 (72px)",
     "vertical": "垂直显示分隔线",
     "length": "自定义线条长度"

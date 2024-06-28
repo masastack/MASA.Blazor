@@ -295,7 +295,8 @@
       "closeDelay": "关闭组件前等待的毫秒数.",
       "openDelay": "打开组件前等待的毫秒数.",
       "zIndex": "用于组件的 z-index",
-      "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。"
+      "transition": "设置组件转换。可以是一个 [built in transitions](/blazor/styles-and-animations/transitions) 或者是自己自定义的。",
+      "max": "**Group** 类组件可选子项最大数量。设置0时可使子项均不被选中。"
     },
     "contents": {
       "childContent": "默认插槽",
