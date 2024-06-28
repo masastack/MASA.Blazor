@@ -388,7 +388,7 @@ public abstract class MData<TItem> : MasaComponentBase
             t2 => t2);
     }
 
-    public(IList<string> by, IList<bool> desc, int page) Toggle(string key, IList<string> oldBy, IList<bool> oldDesc, int page, bool mustSort,
+    private (IList<string> by, IList<bool> desc, int page) Toggle(string key, IList<string> oldBy, IList<bool> oldDesc, int page, bool mustSort,
         bool multiSort)
     {
         var by = oldBy;
@@ -425,7 +425,7 @@ public abstract class MData<TItem> : MasaComponentBase
         return (by, desc, page);
     }
 
-    public void Group(string key)
+    protected void Group(string key)
     {
         var (groupBy, groupDesc, page) = Toggle(key, InternalOptions.GroupBy, InternalOptions.GroupDesc, InternalOptions.Page, true, false);
 
@@ -437,7 +437,7 @@ public abstract class MData<TItem> : MasaComponentBase
         });
     }
 
-    public void Sort(OneOf<string, List<string>> key)
+    protected void Sort(OneOf<string, List<string>> key)
     {
         if (key.IsT1)
         {
@@ -456,7 +456,7 @@ public abstract class MData<TItem> : MasaComponentBase
         });
     }
 
-    public void SortArray(List<string> sortBy)
+    private void SortArray(List<string> sortBy)
     {
         var sortDesc = sortBy.Select(s =>
         {
@@ -471,7 +471,7 @@ public abstract class MData<TItem> : MasaComponentBase
         });
     }
 
-    public void UpdateOptions(Action<DataOptions> options, bool emit = true)
+    protected void UpdateOptions(Action<DataOptions> options, bool emit = true)
     {
         options?.Invoke(InternalOptions);
         
@@ -487,12 +487,12 @@ public abstract class MData<TItem> : MasaComponentBase
         }
     }
 
-    public IEnumerable<IGrouping<string, TItem>> GroupItems(IEnumerable<TItem> items)
+    private IEnumerable<IGrouping<string, TItem>> GroupItems(IEnumerable<TItem> items)
     {
         return CustomGroup(items, ItemValues, InternalOptions.GroupBy, InternalOptions.GroupDesc);
     }
 
-    public IEnumerable<TItem> SortItems(IEnumerable<TItem> items)
+    private IEnumerable<TItem> SortItems(IEnumerable<TItem> items)
     {
         var sortBy = new List<string>();
         var sortDesc = new List<bool>();
@@ -512,7 +512,7 @@ public abstract class MData<TItem> : MasaComponentBase
         return CustomSort(items, ItemValues, sortBy, sortDesc);
     }
 
-    public IEnumerable<TItem> PaginateItems(IEnumerable<TItem> items)
+    private IEnumerable<TItem> PaginateItems(IEnumerable<TItem> items)
     {
         var cacheItems = items.ToList();
 

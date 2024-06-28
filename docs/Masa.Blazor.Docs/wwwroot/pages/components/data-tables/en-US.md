@@ -165,15 +165,14 @@ Pagination can be controlled externally by using the individual props, or by usi
 
 #### External sorting
 
-Sorting can also be controlled externally by using the individual props, or by using the the `Options` prop.
+Sorting can also be controlled externally by using the individual props, or by using the `Options` prop.
 
 <masa-example file="Examples.components.data_tables.ExternalSorting"></masa-example>
 
 #### Server-side paginate and sort
 
 If you’re loading data already paginated and sorted from a backend, you can use the `ServerItemsLength` prop. Defining
-this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (
-`OnPageUpdate`, `OnSortByUpdate`, `OnOptionsUpdate`, etc) to know when to request new pages from your backend. Use
+this prop will disable the built-in sorting and pagination, and you will instead need to use the `OnOptionsUpdate` event to know when to request new pages from your backend. Use
 the `Loading` prop to display a progress bar while fetching data.
 
 <masa-example file="Examples.components.data_tables.ServerSidePaginateAndSort"></masa-example>
