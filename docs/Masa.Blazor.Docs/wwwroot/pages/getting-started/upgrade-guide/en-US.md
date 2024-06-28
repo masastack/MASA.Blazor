@@ -29,7 +29,8 @@ The component was deprecated in v1.4.0 and has now been removed. It is recommend
 
 #### Data/DataTable
 
-The `Locale` parameter has never been implemented, and there is no need to implement it, it has now been removed.
+- For server-side pagination and sorting, the `ServerItemsLength` parameter must be provided, which is the total length of the server-side data.
+- The `Locale` parameter has never been implemented, and there is no need to implement it, it has now been removed.
 
 ## Upgrading form v1.4.x to v1.5.0
 
