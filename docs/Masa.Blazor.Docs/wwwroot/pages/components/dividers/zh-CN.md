@@ -45,7 +45,7 @@ related:
 
 #### 副标题
 
-分割线和副标题可以帮助分解内容，并可以使用相同的 `Inset` 属性来相互对齐。
+分隔线和副标题可以帮助分解内容，并可以使用相同的 `Inset` 属性来相互对齐。
 
 <masa-example file="Examples.components.dividers.SubHeaders"></masa-example>
 
