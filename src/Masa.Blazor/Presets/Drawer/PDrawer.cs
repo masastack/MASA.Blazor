@@ -27,10 +27,16 @@ public class PDrawer : ModalBase
 
     protected override void OnParametersSet()
     {
-        BodyStyle = $"overflow-y: auto;padding: 24px;{ComputedContentHeight}";
-
         Transition = ComputedTransition;
 
         base.OnParametersSet();
+    }
+
+    protected override string GetBodyStyle()
+    {
+        return StyleBuilder.Create().Add("overflow-y: auto; padding: 24px")
+            .Add(ComputedContentHeight)
+            .Add(BodyStyle)
+            .ToString();
     }
 }
