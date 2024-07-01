@@ -323,7 +323,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
         if ((Attach.IsT0 && string.IsNullOrWhiteSpace(Attach.AsT0)) || (Attach.IsT1 && Attach.AsT1))
         {
-            return Ref.GetSelector();
+            return Ref.TryGetSelector(out var selector) ? selector : null;
         }
 
         return Attach;
