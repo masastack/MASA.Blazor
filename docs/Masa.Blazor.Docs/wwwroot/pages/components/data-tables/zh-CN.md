@@ -158,8 +158,7 @@ Headers**
 
 #### 服务器端分页和排序
 
-如果你正在从后端服务器加载已经分页和排序的数据，你可以使用 `ServerItemsLength` 属性。 使用这个属性会禁用内置的排序和分页，因此，你需要用特定事件（`OnPageUpdate`，`
-OnSortByUpdate`，`OnOptionsUpdate` 等）来得知什么时候要向后端服务器请求新页面。 获取数据时，使用 `Loading` 属性显示进度条。
+如果你正在从后端服务器加载已经分页和排序的数据，你可以使用 `ServerItemsLength` 属性。 使用这个属性会禁用内置的排序和分页，因此，你需要用 `OnOptionsUpdate` 事件来得知什么时候要向后端服务器请求新页面。 获取数据时，使用 `Loading` 属性显示进度条。
 
 <masa-example file="Examples.components.data_tables.ServerSidePaginateAndSort"></masa-example>
 
