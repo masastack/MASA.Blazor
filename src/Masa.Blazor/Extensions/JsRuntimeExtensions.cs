@@ -154,10 +154,19 @@ public static class JsRuntimeExtensions
             attach);
     }
 
-    public static ValueTask DispatchEventAsync(this IJSRuntime jsRuntime, ElementReference el, string type,
+    /// <summary>
+    /// Dispatch an event on the element
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="el"></param>
+    /// <param name="eventName">The name of the event, e.g. MouseEvent, KeyboardEvent, etc.</param>
+    /// <param name="eventType">The type of the event, e.g. click, keydown, etc.</param>
+    /// <param name="stopPropagation">Whether to stop propagation</param>
+    /// <returns></returns>
+    public static ValueTask DispatchEventAsync(this IJSRuntime jsRuntime, ElementReference el, string eventName, string eventType,
         bool stopPropagation)
     {
-        return jsRuntime.InvokeVoidAsync(JsInteropConstants.TriggerEvent, el, type, stopPropagation);
+        return jsRuntime.InvokeVoidAsync(JsInteropConstants.TriggerEvent, el, eventName, eventType, stopPropagation);
     }
 
     public static ValueTask SetPropertyAsync(this IJSRuntime jsRuntime, ElementReference el, string key, object value)

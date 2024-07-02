@@ -144,8 +144,6 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
 
     public virtual bool HasPrependClick => OnPrependClick.HasDelegate;
 
-    public virtual bool HasAppendClick => OnAppendClick.HasDelegate;
-
     public virtual async Task HandleOnPrependClickAsync(MouseEventArgs args)
     {
         if (OnPrependClick.HasDelegate)
