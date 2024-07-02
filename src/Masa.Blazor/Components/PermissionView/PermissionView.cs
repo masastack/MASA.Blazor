@@ -14,6 +14,9 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
+        [Parameter]
+        public RenderFragment? FallbackContent { get; set; }
+
         [Parameter, EditorRequired]
         public string Code { get; set; } = null!;
 
@@ -37,13 +40,11 @@ namespace Masa.Blazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (User == null || Validator == null)
+            if (User == null || Validator == null || !Validator.Validate(Code, User))
             {
-                return;
+                builder.AddContent(0, FallbackContent);
             }
-
-            var valid = Validator.Validate(Code, User);
-            if (valid)
+            else
             {
                 builder.AddContent(0, ChildContent);
             }
