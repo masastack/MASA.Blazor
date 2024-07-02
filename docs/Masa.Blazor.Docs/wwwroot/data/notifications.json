@@ -56,10 +56,10 @@
     "createdAt": "2024-05-10"
   },
   {
-    "title": "v1.6.0-beta.1 Release",
-    "content": "",
+    "title": "v1.6.0",
+    "content": "Highlight:\r\n- Remove all references to BlazorComponent.\r\n- **ExpansionPanel**: add sub-component parameters, including `Title` and `Text`.\r\n- **Form**: the context object provided by `ChildContent` now offers `Validate`, `Reset`, and `ResetValidation` methods, as well as an `IsValid` property.",
     "type": 0,
-    "href": "/blazor/getting-started/release-notes?v=v1.6.0-beta.1",
-    "createdAt": "2024-05-31"
+    "href": "/blazor/getting-started/release-notes?v=v1.6.0",
+    "createdAt": "2024-07-02"
   }
 ]

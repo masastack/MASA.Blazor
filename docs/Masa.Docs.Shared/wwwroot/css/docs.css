@@ -734,10 +734,6 @@ app-alert p {
     height: 48px;
 }
 
-.theme--light.m-text-field--outlined:not(.m-input--is-focused):not(.m-input--has-state)>.m-input__control>.m-input__slot fieldset {
-    color: rgba(0,0,0,.12);;
-}
-
 ::view-transition-old(root) {
     animation: none;
 }
