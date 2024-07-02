@@ -11,27 +11,13 @@
         <td class="@GetCellClass(header)"
             style="@GetCellStyle(header)"
             title="@title">
-            @{
-                if (HasSlot(props))
-                {
-                    @SlotContent(props)
-                }
-                else if (header.CellRender is not null)
-                {
-                    var cell = header.CellRender(Item);
-                    if (cell.IsT0)
-                    {
-                        @cell.AsT0
-                    }
-                    else
-                    {
-                        @cell.AsT1
-                    }
-                }
-                else
-                {
-                    @props.Value
-                }
+            @if (HasSlot(props))
+            {
+                @SlotContent(props)
+            }
+            else
+            {
+                @props.ValueContent
             }
         </td>
     }
