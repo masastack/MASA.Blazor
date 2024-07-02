@@ -34,7 +34,7 @@
         }
         else if (!string.IsNullOrWhiteSpace(PrependIcon))
         {
-            content = GenIcon(InputIconType.PrependOuter, PrependIcon, OnPrependClick.HasDelegate ? HandleOnPrependClickAsync : null);
+            content = GenIcon(InputIconType.PrependOuter, PrependIcon, HasPrependClick ? HandleOnPrependClickAsync : null);
         }
 
         if (content != null)
