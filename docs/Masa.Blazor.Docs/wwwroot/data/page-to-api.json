@@ -1,7 +1,7 @@
 ﻿{
   "floating-action-buttons": [
-    "MButton",
-    "MSpeedDial"
+    "MSpeedDial",
+    "buttons/MButton"
   ],
   "grids": [
     "MContainer",
@@ -52,8 +52,8 @@
   "data-tables": [
     "MDataTable",
     "MDataTableHeader",
-    "MDataFooter",
-    "MSimpleCheckbox"
+    "data-iterators/MDataFooter",
+    "checkboxes/MSimpleCheckbox"
   ],
   "date-time-pickers": [
     "PDateTimePicker",
@@ -86,7 +86,7 @@
   ],
   "button-groups": [
     "MButtonGroup",
-    "MButton"
+    "buttons/MButton"
   ],
   "chip-groups": [
     "MChipGroup",
@@ -140,12 +140,8 @@
   "markdown-parsers": [
     "MMarkdownIt"
   ],
-  "not-grouped": [
-    "PPageHeader",
-    "PSidebar"
-  ],
   "date-pickers-month": [
-    "MDatePicker"
+    "date-pickers/MDatePicker"
   ],
   "scroll-to-target": [
     "MScrollToTarget",
