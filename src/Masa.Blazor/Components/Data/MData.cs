@@ -339,7 +339,7 @@ public abstract class MData<TItem> : MasaComponentBase
     private bool _prevDisableFiltering;
     private int _prevServerItemsLength;
     private IEnumerable<ItemValue<TItem>>? _prevItemValues;
-    private IEnumerable<TItem>? _prevItems;
+    private HashSet<TItem>? _prevItems;
     private string? _prevSearch;
     private int _prevPageCount;
 
@@ -359,7 +359,7 @@ public abstract class MData<TItem> : MasaComponentBase
         needUpdateComputedItems |= CheckAndUpdate(ref _prevServerItemsLength, ServerItemsLength);
         needUpdateComputedItems |= CheckAndUpdate(ref _prevDisableFiltering, DisableFiltering);
         needUpdateComputedItems |= CheckAndUpdate(ref _prevItemValues, ItemValues);
-        needUpdateComputedItems |= CheckAndUpdate(ref _prevItems, Items);
+        needUpdateComputedItems |= CheckItemsAndUpdate(ref _prevItems, Items);
         needUpdateComputedItems |= CheckAndUpdate(ref _prevSearch, Search);
 
         if (needUpdateComputedItems)
@@ -374,6 +374,26 @@ public abstract class MData<TItem> : MasaComponentBase
 
         prevValue = currentValue;
         return true;
+    }
+
+    private bool CheckItemsAndUpdate<T>(ref HashSet<T>? prevValue, IEnumerable<T>? currentValue)
+    {
+        if (prevValue == null && currentValue == null) return false;
+        if (prevValue == null || currentValue == null)
+        {
+            prevValue = currentValue != null ? [..currentValue] : null;
+            return true;
+        }
+
+        var currentSet = new HashSet<T>(currentValue);
+
+        if (!prevValue.SetEquals(currentSet))
+        {
+            prevValue = currentSet;
+            return true;
+        }
+
+        return false;
     }
 
     protected IList<TValue> WrapperInArray<TValue>(OneOf<TValue, IList<TValue>> val)
