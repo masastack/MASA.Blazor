@@ -23,8 +23,7 @@
     "MBreadcrumbsDivider"
   ],
   "buttons": [
-    "MButton",
-    "MButtonGroup"
+    "MButton"
   ],
   "cards": [
     "MCard",
