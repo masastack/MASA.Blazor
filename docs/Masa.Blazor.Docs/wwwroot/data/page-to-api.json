@@ -1,26 +1,24 @@
 ﻿{
-  "floating-action-buttons": [
-    "MButton",
-    "MSpeedDial"
-  ],
-  "grids": [
-    "MContainer",
-    "MRow",
-    "MCol",
-    "MSpacer"
-  ],
-  "aspect-ratios": [
-    "MResponsive"
-  ],
   "app-bars": [
     "MAppBar",
     "MAppBarNavIcon",
     "MAppBarTitle"
   ],
+  "application": [
+    "MApp",
+    "MMain"
+  ],
+  "aspect-ratios": [
+    "MResponsive"
+  ],
   "breadcrumbs": [
     "MBreadcrumbs",
     "MBreadcrumbsItem",
     "MBreadcrumbsDivider"
+  ],
+  "button-groups": [
+    "MButtonGroup",
+    "buttons/MButton"
   ],
   "buttons": [
     "MButton"
@@ -36,6 +34,41 @@
     "MCarousel",
     "MCarouselItem"
   ],
+  "checkboxes": [
+    "MCheckbox",
+    "MSimpleCheckbox"
+  ],
+  "chip-groups": [
+    "MChipGroup",
+    "MChip"
+  ],
+  "data-iterators": [
+    "MDataIterator",
+    "MDataFooter"
+  ],
+  "data-tables": [
+    "MDataTable",
+    "MDataTableHeader",
+    "data-iterators/MDataFooter",
+    "checkboxes/MSimpleCheckbox"
+  ],
+  "date-digital-clock-pickers": [
+    "PDateDigitalClockPicker",
+    "PDateDigitalClockPickerView",
+    "PDateDigitalClockCompactPickerView"
+  ],
+  "date-pickers-month": [
+    "date-pickers/MDatePicker"
+  ],
+  "date-time-pickers": [
+    "PDateTimePicker",
+    "PDateTimePickerView",
+    "PDateTimeCompactPickerView"
+  ],
+  "descriptions": [
+    "MDescriptions",
+    "MDescriptionsItem"
+  ],
   "echarts": [
     "MECharts"
   ],
@@ -45,52 +78,24 @@
     "MExpansionPanelHeader",
     "MExpansionPanelContent"
   ],
-  "data-iterators": [
-    "MDataIterator",
-    "MDataFooter"
+  "floating-action-buttons": [
+    "MSpeedDial",
+    "buttons/MButton"
   ],
-  "data-tables": [
-    "MDataTable",
-    "MDataTableHeader",
-    "MDataFooter",
-    "MSimpleCheckbox"
+  "grids": [
+    "MContainer",
+    "MRow",
+    "MCol",
+    "MSpacer"
   ],
-  "date-time-pickers": [
-    "PDateTimePicker",
-    "PDateTimePickerView",
-    "PDateTimeCompactPickerView"
+  "inputs-filter": [
+    "MInputsFilter",
+    "PDataFilter"
   ],
-  "date-digital-clock-pickers": [
-    "PDateDigitalClockPicker",
-    "PDateDigitalClockPickerView",
-    "PDateDigitalClockCompactPickerView"
-  ],
-  "application": [
-    "MApp",
-    "MMain"
-  ],
-  "checkboxes": [
-    "MCheckbox",
-    "MSimpleCheckbox"
-  ],
-  "radios": [
-    "MRadio",
-    "MRadioGroup"
-  ],
-  "range-sliders": [
-    "MRangeSlider",
-    "MSlider"
-  ],
-  "switches": [
-    "MSwitch"
-  ],
-  "button-groups": [
-    "MButtonGroup",
-    "MButton"
-  ],
-  "chip-groups": [
-    "MChipGroup",
-    "MChip"
+  "interactive-trigger": [
+    "MInteractiveTrigger",
+    "MInteractiveTriggers",
+    "MInteractivePopup"
   ],
   "item-groups": [
     "MItem",
@@ -106,23 +111,6 @@
     "MListItemGroup",
     "MListItemSubtitle",
     "MListItemTitle"
-  ],
-  "slide-groups": [
-    "MSlideGroup",
-    "MSlideItem"
-  ],
-  "windows": [
-    "MWindow",
-    "MWindowItem"
-  ],
-  "inputs-filter": [
-    "MInputsFilter",
-    "PDataFilter"
-  ],
-  "interactive-trigger": [
-    "MInteractiveTrigger",
-    "MInteractiveTriggers",
-    "MInteractivePopup"
   ],
   "lists": [
     "MList",
@@ -140,16 +128,34 @@
   "markdown-parsers": [
     "MMarkdownIt"
   ],
-  "not-grouped": [
-    "PPageHeader",
-    "PSidebar"
+  "page-stack": [
+    "PPageStack",
+    "PPageStackItemInit"
   ],
-  "date-pickers-month": [
-    "MDatePicker"
+  "page-tabs": [
+    "PPageTabs",
+    "PPageContainer",
+    "PPageProvider"
+  ],
+  "radios": [
+    "MRadio",
+    "MRadioGroup"
+  ],
+  "range-sliders": [
+    "MRangeSlider",
+    "MSlider"
   ],
   "scroll-to-target": [
     "MScrollToTarget",
     "MScrollToTargetTrigger"
+  ],
+  "slide-groups": [
+    "MSlideGroup",
+    "MSlideItem"
+  ],
+  "splitters": [
+    "MSplitter",
+    "MSplitterPane"
   ],
   "steppers": [
     "MStepper",
@@ -164,6 +170,9 @@
     "MSwiperPagination",
     "MSwiperNavigation",
     "MSwiperAutoplay"
+  ],
+  "switches": [
+    "MSwitch"
   ],
   "tabs": [
     "MTabs",
@@ -180,14 +189,9 @@
     "MToolbarTitle",
     "MToolbarItems"
   ],
-  "page-tabs": [
-    "PPageTabs",
-    "PPageContainer",
-    "PPageProvider"
-  ],
-  "page-stack": [
-    "PPageStack",
-    "PPageStackItemInit"
+  "windows": [
+    "MWindow",
+    "MWindowItem"
   ],
   "xgplayer": [
     "MXgplayer",
@@ -196,13 +200,5 @@
     "MXgplayerPlay",
     "MXgplayerTime",
     "MXgplayerStart"
-  ],
-  "splitters": [
-    "MSplitter",
-    "MSplitterPane"
-  ],
-  "descriptions": [
-    "MDescriptions",
-    "MDescriptionsItem"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "props": {
+    "defaults": "A dictionary that sets the default values of the child content components."
+  },
+  "contents": {},
+  "events": {},
+  "methods": {}
+}

@@ -198,37 +198,38 @@ public partial class Components
         var name = Page;
 
         var pageToApi = await BlazorDocService.ReadPageToApiAsync();
-        var isMultipleApi = false;
         if (pageToApi.TryGetValue(Page, out var apis))
         {
-            isMultipleApi = apis.Count > 1;
-            foreach (var componentName in apis)
+            foreach (var item in apis)
             {
-                 _apiData[componentName] = await getApiGroupAsync(componentName, true);
+                var (dir, componentName) = Resolve(item, Page);
+                 _apiData[componentName] = await getApiGroupAsync(dir, componentName, true);
             }
         }
         else
         {
-            var apiGroup = await getApiGroupAsync(FormatName(name));
+            var apiGroup = await getApiGroupAsync(Page, FormatName(name));
             _apiData[FormatName(name)] = apiGroup;
         }
 
-        async Task<Dictionary<string, List<ParameterInfo>>> getApiGroupAsync(string name, bool isFullname = false)
+        async Task<Dictionary<string, List<ParameterInfo>>> getApiGroupAsync(string dir, string componentName, bool isFullname = false)
         {
             var componentApiMetas = GetAllComponentApiMetas();
 
             var component = isFullname
-                ? componentApiMetas.FirstOrDefault(u => u.Name == name)
+                ? componentApiMetas.FirstOrDefault(u => u.Name == componentName)
                 : componentApiMetas.FirstOrDefault(u =>
-                    Regex.IsMatch(u.Name.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
+                    Regex.IsMatch(u.Name.ToUpper(), $"[M|P]{{1}}{componentName}s?$".ToUpper()));
 
             if (component is not null)
             {
+                componentName = component.Name;
+                
                 var parametersCacheValue = component.Parameters;
 
                 parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
 
-                var descriptionGroup = await BlazorDocService.ReadApisAsync(Page, isMultipleApi ? name : default);
+                var descriptionGroup = await BlazorDocService.ReadApisAsync(dir, componentName);
 
                 if (descriptionGroup is not null)
                 {
@@ -269,5 +270,11 @@ public partial class Components
         var list = ApiGenerator.ComponentMetas.ToList();
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
         return list;
+    }
+
+    private static (string dir, string component) Resolve(string name, string fallbackDir)
+    {
+        var sections = name.Split("/");
+        return sections.Length == 1 ? (fallbackDir, sections[0]) : (sections[0], sections[1]);
     }
 }
