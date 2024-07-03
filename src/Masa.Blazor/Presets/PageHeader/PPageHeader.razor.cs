@@ -2,6 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
+[Obsolete("Use PDataFilter instead.")]
 public partial class PPageHeader
 {
     [Inject]
