@@ -1,26 +1,24 @@
 ﻿{
-  "floating-action-buttons": [
-    "MSpeedDial",
-    "buttons/MButton"
-  ],
-  "grids": [
-    "MContainer",
-    "MRow",
-    "MCol",
-    "MSpacer"
-  ],
-  "aspect-ratios": [
-    "MResponsive"
-  ],
   "app-bars": [
     "MAppBar",
     "MAppBarNavIcon",
     "MAppBarTitle"
   ],
+  "application": [
+    "MApp",
+    "MMain"
+  ],
+  "aspect-ratios": [
+    "MResponsive"
+  ],
   "breadcrumbs": [
     "MBreadcrumbs",
     "MBreadcrumbsItem",
     "MBreadcrumbsDivider"
+  ],
+  "button-groups": [
+    "MButtonGroup",
+    "buttons/MButton"
   ],
   "buttons": [
     "MButton"
@@ -36,14 +34,13 @@
     "MCarousel",
     "MCarouselItem"
   ],
-  "echarts": [
-    "MECharts"
+  "checkboxes": [
+    "MCheckbox",
+    "MSimpleCheckbox"
   ],
-  "expansion-panels": [
-    "MExpansionPanel",
-    "MExpansionPanels",
-    "MExpansionPanelHeader",
-    "MExpansionPanelContent"
+  "chip-groups": [
+    "MChipGroup",
+    "MChip"
   ],
   "data-iterators": [
     "MDataIterator",
@@ -55,42 +52,50 @@
     "data-iterators/MDataFooter",
     "checkboxes/MSimpleCheckbox"
   ],
-  "date-time-pickers": [
-    "PDateTimePicker",
-    "PDateTimePickerView",
-    "PDateTimeCompactPickerView"
-  ],
   "date-digital-clock-pickers": [
     "PDateDigitalClockPicker",
     "PDateDigitalClockPickerView",
     "PDateDigitalClockCompactPickerView"
   ],
-  "application": [
-    "MApp",
-    "MMain"
+  "date-pickers-month": [
+    "date-pickers/MDatePicker"
   ],
-  "checkboxes": [
-    "MCheckbox",
-    "MSimpleCheckbox"
+  "date-time-pickers": [
+    "PDateTimePicker",
+    "PDateTimePickerView",
+    "PDateTimeCompactPickerView"
   ],
-  "radios": [
-    "MRadio",
-    "MRadioGroup"
+  "descriptions": [
+    "MDescriptions",
+    "MDescriptionsItem"
   ],
-  "range-sliders": [
-    "MRangeSlider",
-    "MSlider"
+  "echarts": [
+    "MECharts"
   ],
-  "switches": [
-    "MSwitch"
+  "expansion-panels": [
+    "MExpansionPanel",
+    "MExpansionPanels",
+    "MExpansionPanelHeader",
+    "MExpansionPanelContent"
   ],
-  "button-groups": [
-    "MButtonGroup",
+  "floating-action-buttons": [
+    "MSpeedDial",
     "buttons/MButton"
   ],
-  "chip-groups": [
-    "MChipGroup",
-    "MChip"
+  "grids": [
+    "MContainer",
+    "MRow",
+    "MCol",
+    "MSpacer"
+  ],
+  "inputs-filter": [
+    "MInputsFilter",
+    "PDataFilter"
+  ],
+  "interactive-trigger": [
+    "MInteractiveTrigger",
+    "MInteractiveTriggers",
+    "MInteractivePopup"
   ],
   "item-groups": [
     "MItem",
@@ -106,23 +111,6 @@
     "MListItemGroup",
     "MListItemSubtitle",
     "MListItemTitle"
-  ],
-  "slide-groups": [
-    "MSlideGroup",
-    "MSlideItem"
-  ],
-  "windows": [
-    "MWindow",
-    "MWindowItem"
-  ],
-  "inputs-filter": [
-    "MInputsFilter",
-    "PDataFilter"
-  ],
-  "interactive-trigger": [
-    "MInteractiveTrigger",
-    "MInteractiveTriggers",
-    "MInteractivePopup"
   ],
   "lists": [
     "MList",
@@ -140,12 +128,34 @@
   "markdown-parsers": [
     "MMarkdownIt"
   ],
-  "date-pickers-month": [
-    "date-pickers/MDatePicker"
+  "page-stack": [
+    "PPageStack",
+    "PPageStackItemInit"
+  ],
+  "page-tabs": [
+    "PPageTabs",
+    "PPageContainer",
+    "PPageProvider"
+  ],
+  "radios": [
+    "MRadio",
+    "MRadioGroup"
+  ],
+  "range-sliders": [
+    "MRangeSlider",
+    "MSlider"
   ],
   "scroll-to-target": [
     "MScrollToTarget",
     "MScrollToTargetTrigger"
+  ],
+  "slide-groups": [
+    "MSlideGroup",
+    "MSlideItem"
+  ],
+  "splitters": [
+    "MSplitter",
+    "MSplitterPane"
   ],
   "steppers": [
     "MStepper",
@@ -160,6 +170,9 @@
     "MSwiperPagination",
     "MSwiperNavigation",
     "MSwiperAutoplay"
+  ],
+  "switches": [
+    "MSwitch"
   ],
   "tabs": [
     "MTabs",
@@ -176,14 +189,9 @@
     "MToolbarTitle",
     "MToolbarItems"
   ],
-  "page-tabs": [
-    "PPageTabs",
-    "PPageContainer",
-    "PPageProvider"
-  ],
-  "page-stack": [
-    "PPageStack",
-    "PPageStackItemInit"
+  "windows": [
+    "MWindow",
+    "MWindowItem"
   ],
   "xgplayer": [
     "MXgplayer",
@@ -192,13 +200,5 @@
     "MXgplayerPlay",
     "MXgplayerTime",
     "MXgplayerStart"
-  ],
-  "splitters": [
-    "MSplitter",
-    "MSplitterPane"
-  ],
-  "descriptions": [
-    "MDescriptions",
-    "MDescriptionsItem"
   ]
 }
