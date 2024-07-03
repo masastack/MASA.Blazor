@@ -71,16 +71,38 @@ public class BlazorDocService
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
                     $"_content/Masa.Blazor.Docs/data/apis/{key}.json").ConfigureAwait(false);
+                apiInfo ??= new Dictionary<string, Dictionary<string, string>>();
                 var commonApis = await _commonApis.Value;
                 if (commonApis is not null && commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {
+                    Dictionary<string, Dictionary<string, string>>? extendsApiInfo = null;
+                    if (apiInfo.TryGetValue("extends", out var extends) && extends.TryGetValue("path", out var path))
+                    {
+                        var sections = path.Split("/");
+                        if (sections.Length == 2)
+                        {
+                            var dir = sections[0];
+                            var component = sections[1];
+                            extendsApiInfo = await ReadApisAsync(dir, component);
+                        }
+                    }
+
                     foreach (var (category, api) in apiInfo)
                     {
+                        if (extendsApiInfo != null && extendsApiInfo.TryGetValue(category, out var extendsApi))
+                        {
+                            foreach (var (prop, desc) in extendsApi)
+                            {
+                                api.TryAdd(prop, desc);
+                            }
+                        }
+                        
                         if (commonApiInfo.TryGetValue(category, out var commonApi))
                         {
                             foreach (var (prop, desc) in commonApi)
-                                if (api.ContainsKey(prop) is false)
-                                    api.Add(prop, desc);
+                            {
+                                api.TryAdd(prop, desc);
+                            }
                         }
                     }
                 }

@@ -205,7 +205,6 @@
       "modals",
       "monaco-editor",
       "navigation-drawers",
-      "not-grouped",
       "overlays",
       {
         "title": "page-tabs",

@@ -198,10 +198,8 @@ public partial class Components
         var name = Page;
 
         var pageToApi = await BlazorDocService.ReadPageToApiAsync();
-        var isMultipleApi = false;
         if (pageToApi.TryGetValue(Page, out var apis))
         {
-            isMultipleApi = apis.Count > 1;
             foreach (var item in apis)
             {
                 var (dir, componentName) = Resolve(item, Page);
@@ -225,11 +223,13 @@ public partial class Components
 
             if (component is not null)
             {
+                componentName = component.Name;
+                
                 var parametersCacheValue = component.Parameters;
 
                 parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
 
-                var descriptionGroup = await BlazorDocService.ReadApisAsync(dir, isMultipleApi ? componentName : default);
+                var descriptionGroup = await BlazorDocService.ReadApisAsync(dir, componentName);
 
                 if (descriptionGroup is not null)
                 {
