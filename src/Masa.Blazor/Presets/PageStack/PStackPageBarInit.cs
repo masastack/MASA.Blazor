@@ -68,49 +68,13 @@ public class PStackPageBarInit : IComponent
 
         var hasRerenderKey = parameters.TryGetValue<string>(nameof(RerenderKey), out var rerenderKey);
 
-        if (_init)
+        if (!_init || (hasRerenderKey && _prevRerenderKey != rerenderKey))
         {
-            if (hasRerenderKey)
-            {
-                if (_prevRerenderKey != rerenderKey)
-                {
-                    _prevRerenderKey = rerenderKey;
-                    SetParameters();
-                    Rerender();
-                }
-            }
-
-            return Task.CompletedTask;
+            _init = true;
+            _prevRerenderKey = rerenderKey;
+            SetParameters();
+            Rerender();
         }
-
-        _init = true;
-        _prevRerenderKey = rerenderKey;
-
-        SetParameters();
-
-        PageStackItem!.AppBarContent = BarContent;
-        PageStackItem.GoBackContent = GoBackContent;
-        PageStackItem.ExtensionHeight = ExtensionHeight;
-        PageStackItem.ExtensionContent = ExtensionContent;
-        PageStackItem.ImageContent = ImageContent;
-        PageStackItem.AppBarColor = Color;
-        PageStackItem.AppBarClass = Class;
-        PageStackItem.AppBarStyle = Style;
-        PageStackItem.AppBarHeight = Height;
-        PageStackItem.AppBarFlat = Flat;
-        PageStackItem.AppBarDense = Dense;
-        PageStackItem.AppBarShort = Short;
-        PageStackItem.AppBarTitle = Title;
-        PageStackItem.CenterTitle = CenterTitle;
-        PageStackItem.AppBarImage = Image;
-        PageStackItem.ElevateOnScroll = ElevateOnScroll;
-        PageStackItem.ShrinkOnScroll = ShrinkOnScroll;
-        PageStackItem.AppBarDark = Dark;
-        PageStackItem.AppBarLight = Light;
-
-        PageStackItem.ActionContent = ActionContent;
-
-        Rerender();
 
         return Task.CompletedTask;
 
@@ -126,6 +90,27 @@ public class PStackPageBarInit : IComponent
             }
 
             parameters.SetParameterProperties(this);
+
+            PageStackItem!.AppBarContent = BarContent;
+            PageStackItem.GoBackContent = GoBackContent;
+            PageStackItem.ExtensionHeight = ExtensionHeight;
+            PageStackItem.ExtensionContent = ExtensionContent;
+            PageStackItem.ImageContent = ImageContent;
+            PageStackItem.AppBarColor = Color;
+            PageStackItem.AppBarClass = Class;
+            PageStackItem.AppBarStyle = Style;
+            PageStackItem.AppBarHeight = Height;
+            PageStackItem.AppBarFlat = Flat;
+            PageStackItem.AppBarDense = Dense;
+            PageStackItem.AppBarShort = Short;
+            PageStackItem.AppBarTitle = Title;
+            PageStackItem.CenterTitle = CenterTitle;
+            PageStackItem.AppBarImage = Image;
+            PageStackItem.ElevateOnScroll = ElevateOnScroll;
+            PageStackItem.ShrinkOnScroll = ShrinkOnScroll;
+            PageStackItem.AppBarDark = Dark;
+            PageStackItem.AppBarLight = Light;
+            PageStackItem.ActionContent = ActionContent;
         }
     }
 
