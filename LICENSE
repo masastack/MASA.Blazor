@@ -1,12 +1,12 @@
 MIT License
 
-Copyright (c) 2021-2024 MASA-Stack
+Copyright (c) 2021 MASA-Stack
 
 Parts of the codebase in this project were originally inspired by and referenced
 from the ant-design-blazor project, which is licensed under the MIT License.
 We gratefully acknowledge the work of the ant-design-blazor team.
 
-Copyright (c) 2021-2024 ant-design-blazor contributors
+Portions Copyright (c) 2021 ant-design-blazor contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
