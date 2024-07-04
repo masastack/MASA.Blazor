@@ -66,7 +66,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected EditContext? OldEditContext { get; set; }
 
-    public FieldIdentifier ValueIdentifier { get; set; }
+    public FieldIdentifier? ValueIdentifier { get; set; }
 
     protected bool HasInput { get; set; }
 
@@ -407,9 +407,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
             return;
         }
 
-        if (!EqualityComparer<FieldIdentifier>.Default.Equals(ValueIdentifier, default))
+        if (ValueIdentifier.HasValue && !EqualityComparer<FieldIdentifier>.Default.Equals(ValueIdentifier.Value, default))
         {
-            EditContext.NotifyFieldChanged(ValueIdentifier);
+            EditContext.NotifyFieldChanged(ValueIdentifier.Value);
         }
     }
 
@@ -485,7 +485,10 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         HasInput = false;
         HasFocused = false;
 
-        EditContext?.MarkAsUnmodified(ValueIdentifier);
+        if (ValueIdentifier.HasValue)
+        {
+            EditContext?.MarkAsUnmodified(ValueIdentifier.Value);
+        }
 
         UpdateInternalValue(default, InternalValueChangeType.InternalOperation);
     }
@@ -501,7 +504,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         // 1. Force validation, because it validates all input elements
         // 2. The input pointed to by ValueIdentifier has been modified
         if (!_forceStatus && EditContext?.IsModified() is true
-                          && !EditContext.IsModified(ValueIdentifier)
+                          && !EditContext.IsModified(ValueIdentifier!.Value)
                           && InternalRules.Any() is false)
         {
             return;
@@ -511,7 +514,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         ErrorBucket.Clear();
 
-        var editContextErrors = EditContext!.GetValidationMessages(ValueIdentifier).ToList();
+        var editContextErrors = EditContext!.GetValidationMessages(ValueIdentifier!.Value).ToList();
         ErrorBucket.AddRange(editContextErrors);
 
         var ruleErrors = ValidateRules(InternalValue);

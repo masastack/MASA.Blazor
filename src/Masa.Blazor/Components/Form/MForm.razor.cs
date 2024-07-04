@@ -153,10 +153,12 @@ public partial class MForm : MasaComponentBase
     {
         var valid = validatable.Validate();
 
-        if (valid && EditContext is not null)
+        var valueIdentifier = validatable.ValueIdentifier;
+
+        if (valid && EditContext is not null && valueIdentifier.HasValue)
         {
-            EditContext.NotifyFieldChanged(validatable.ValueIdentifier);
-            valid = valid && !EditContext.GetValidationMessages(validatable.ValueIdentifier).Any();
+            EditContext.NotifyFieldChanged(valueIdentifier.Value);
+            valid = valid && !EditContext.GetValidationMessages(valueIdentifier.Value).Any();
         }
 
         return valid;
