@@ -92,7 +92,7 @@ public partial class MDataTableRow<TItem>
         }
 
         stringBuilder.Append(' ');
-        stringBuilder.Append(header.Class);
+        stringBuilder.Append(header.CellClass);
         
         return stringBuilder.ToString();
     }

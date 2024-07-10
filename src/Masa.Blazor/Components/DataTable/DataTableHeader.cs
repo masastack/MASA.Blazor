@@ -39,7 +39,15 @@ public class DataTableHeader
 
     public bool Groupable { get; set; } = true;
 
+    /// <summary>
+    /// The class of the table header cell.
+    /// </summary>
     public string? Class { get; set; }
+
+    /// <summary>
+    /// The class of the table cell.
+    /// </summary>
+    public string? CellClass { get; set; }
 
     public StringNumber? Width { get; set; }
 
