@@ -2,6 +2,7 @@
 
 public enum ConditionType
 {
+    None,
     If,
     Show
 }

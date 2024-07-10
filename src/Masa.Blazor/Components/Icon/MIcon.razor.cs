@@ -114,7 +114,7 @@ namespace Masa.Blazor
 
         private string? _iconCss;
         private bool _transitionValue;
-        private ConditionType _transitionConditionType = ConditionType.Show;
+        private ConditionType _transitionConditionType = ConditionType.None;
 
         public bool Medium => false;
 
@@ -255,10 +255,15 @@ namespace Masa.Blazor
                 _transitionValue = If;
                 _transitionConditionType = ConditionType.If;
             }
-            else
+            else if(IsDirtyParameter(nameof(TransitionShow)))
             {
                 _transitionValue = TransitionShow;
                 _transitionConditionType = ConditionType.Show;
+            }
+            else
+            {
+                _transitionValue = true;
+                _transitionConditionType = ConditionType.None;
             }
         }
 
