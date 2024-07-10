@@ -125,7 +125,7 @@ You can use the dynamic slots **HeaderColContent** to customize only certain col
 
 <masa-example file="Examples.components.data_tables.Header"></masa-example>
 
-#### Item
+#### Cell content
 
 You can use the dynamic slots **ItemColContent** to customize only certain columns.
 
