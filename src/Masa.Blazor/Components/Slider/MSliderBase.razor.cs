@@ -119,8 +119,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     public double StartOffset { get; set; }
 
-    public Dictionary<string, object> InputAttrs { get; } = new();
-
     public string? TrackTransition
     {
         get

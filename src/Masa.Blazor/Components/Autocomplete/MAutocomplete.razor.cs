@@ -81,7 +81,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         set => SetValue(value);
     }
 
-    protected override Dictionary<string, object?> InputAttrs => new()
+    protected override Dictionary<string, object> InputAttrs => new(Attributes)
     {
         { "type", Type },
         { "autocomplete", "off" }

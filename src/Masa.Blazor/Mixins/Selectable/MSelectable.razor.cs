@@ -16,8 +16,6 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
 
     [Parameter] public TValue FalseValue { get; set; } = default!;
 
-    public Dictionary<string, object> InputAttrs => new();
-
     public override bool HasColor => IsActive;
 
     public override string ComputedColor => Color ?? (IsDark && !AppIsDark ? "white" : "primary");

@@ -52,7 +52,7 @@
 
     protected virtual RenderFragment GenInput() => __builder =>
     {
-        <input value="@InternalValue" disabled readonly tabindex="-1" @attributes="@InputAttrs"/>
+        <input value="@InternalValue" disabled readonly tabindex="-1" @attributes="@Attributes"/>
     };
 
     private RenderFragment GenTrackContainer() => __builder =>
