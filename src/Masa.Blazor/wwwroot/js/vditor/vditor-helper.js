@@ -30,6 +30,12 @@ export function init(domRef, obj, value, options, isUploadHandler) {
         let { upload } = vditorOptions;
 
         let handler = (files) => {
+            const dataTransfer = new DataTransfer();
+            for (const file of files) {
+                dataTransfer.items.add(file);
+            }
+            const fileInput = domRef.querySelector('input[type=file]');
+            fileInput && fileInput.files = dataTransfer.files;
             obj.invokeMethodAsync('HandleFileChanged');
         }
 
