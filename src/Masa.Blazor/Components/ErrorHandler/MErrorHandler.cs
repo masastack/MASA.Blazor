@@ -2,24 +2,34 @@
 
 namespace Masa.Blazor
 {
+    // TODO: refactor summary
+    // 1. The OnHandle 
+    //    - should rename to OnErrorAsync
+    //    - change the type to Func<Exception, Task>?
+    //    - No longer override the default popup behavior
+    // 2. Remove PopupType and OnAfterHandle parameters
+    // 3. Add a new parameter `DisableDefaultPopup` to disable the default popup behavior
+
     public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {
-        [Inject]
-        protected ILogger<MErrorHandler> Logger { get; set; } = null!;
+        [Inject] protected ILogger<MErrorHandler> Logger { get; set; } = null!;
 
-        [Inject]
-        public IPopupService PopupService { get; set; } = null!;
+        [Inject] private IErrorBoundaryLogger ErrorBoundaryLogger { get; set; } = null!;
+
+        [Inject] public IPopupService PopupService { get; set; } = null!;
 
         /// <summary>
         /// The event that will be invoked when an exception is thrown.
         /// It's recommended to pop up a dialog to show the exception.
         /// If you set this, the default popup will be disabled.
         /// </summary>
+        // TODO: the type should be Func<Exception, Task>? and rename the parameter to OnErrorAsync
         [Parameter]
         public EventCallback<Exception> OnHandle { get; set; }
 
         /// <summary>
         /// The event that will be invoked after <see cref="OnHandle"/>.
+        /// It's recommended to log the exception here.
         /// </summary>
         [Parameter]
         public EventCallback<Exception> OnAfterHandle { get; set; }
@@ -35,35 +45,43 @@ namespace Masa.Blazor
         public bool ShowDetail { get; set; }
 
         /// <summary>
-        /// Disable the default popup or custom <see cref="OnHandle"/> event when the error content is going to render.
+        /// Disable the default popup or custom <see cref="OnHandle"/> event
+        /// when the error content is going to render.
         /// It's useful when you don't want to show the error content and popup at the same time.
         /// </summary>
         [Parameter]
         public bool DisablePopupIfErrorContentRender { get; set; }
 
+        private static RenderFragment _defaultErrorContent = builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "blazor-error-boundary");
+            builder.CloseElement();
+        };
+
         private bool _shouldRender = true;
         private bool _thrownInLifecycles;
+        private Exception? _scopedCurrentException;
+
+        // A flag to determine whether the exception has been rendered.
+        // If the exception has been rendered, we should not render it again.
+        private bool _exceptionRendered;
 
         private bool ShouldRenderErrorContent
             => _thrownInLifecycles || (OnHandle.HasDelegate == false && PopupType == ErrorPopupType.None);
 
-        protected new Exception? CurrentException { get; private set; }
-
         protected override void OnParametersSet()
         {
-            if (CurrentException is null) return;
+            if (_scopedCurrentException is null || _exceptionRendered == false) return;
 
             _thrownInLifecycles = false;
-            Recover();
-        }
 
-        public new void Recover()
-        {
-            if (CurrentException is not null)
+            if (CurrentException is null)
             {
-                CurrentException = null;
-                StateHasChanged();
+                _scopedCurrentException = null;
             }
+
+            Recover();
         }
 
         private bool CheckIfThrownInLifecycles(Exception exception)
@@ -88,9 +106,11 @@ namespace Masa.Blazor
 
         protected override async Task OnErrorAsync(Exception exception)
         {
-            Logger?.LogError(exception, "OnErrorAsync");
+            Logger.LogError(exception.Message, exception);
+            await ErrorBoundaryLogger.LogErrorAsync(exception);
 
-            CurrentException = exception;
+            _exceptionRendered = false;
+            _scopedCurrentException = exception;
 
             if (CheckIfThrownInLifecycles(exception))
             {
@@ -116,48 +136,43 @@ namespace Masa.Blazor
 
             if (OnAfterHandle.HasDelegate)
             {
-                await OnAfterHandle.InvokeAsync(exception);
+                _ = OnAfterHandle.InvokeAsync(exception);
             }
 
             _shouldRender = true;
-
-            StateHasChanged();
         }
 
         protected override bool ShouldRender() => _shouldRender;
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+            if (_scopedCurrentException is not null)
+            {
+                _exceptionRendered = true;
+            }
+
             builder.OpenComponent<CascadingValue<IErrorHandler>>(0);
             builder.AddAttribute(1, nameof(CascadingValue<IErrorHandler>.Value), this);
             builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
 
-            var content = ChildContent;
-            if (CurrentException is not null && ShouldRenderErrorContent)
+            RenderFragment? content;
+            if (_scopedCurrentException is not null && ShouldRenderErrorContent)
             {
-                if (ErrorContent is null)
-                {
-                    content = cb =>
-                    {
-                        cb.OpenElement(0, "div");
-                        cb.AddAttribute(1, "class", "blazor-error-boundary");
-                        cb.CloseElement();
-                    };
-                }
-                else
-                {
-                    content = ErrorContent.Invoke(CurrentException);
-                }
+                content = ErrorContent?.Invoke(_scopedCurrentException) ?? _defaultErrorContent;
+            }
+            else
+            {
+                content = ChildContent;
             }
 
             builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
-
             builder.CloseComponent();
         }
 
         public async Task HandleExceptionAsync(Exception exception)
         {
             await OnErrorAsync(exception);
+            StateHasChanged();
         }
     }
 }
