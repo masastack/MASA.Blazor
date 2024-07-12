@@ -1,14 +1,8 @@
 ﻿namespace Masa.Blazor;
 
-public class InputsFilterFieldChangedEventArgs : EventArgs
+public class InputsFilterFieldChangedEventArgs(string? fieldName, bool isClear) : EventArgs
 {
-    public InputsFilterFieldChangedEventArgs(string fieldName, bool isClear)
-    {
-        FieldName = fieldName;
-        IsClear = isClear;
-    }
+    public string? FieldName { get; } = fieldName;
 
-    public string FieldName { get; }
-
-    public bool IsClear { get; }
+    public bool IsClear { get; } = isClear;
 }

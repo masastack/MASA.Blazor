@@ -312,12 +312,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
             return;
         }
 
-        if (!ValueIdentifier.HasValue)
-        {
-            throw new InvalidOperationException("If you split the @bind-Value into Value and ValueChanged, the ValueExpression is required.");
-        }
-
-        await InputsFilter.FieldChange(ValueIdentifier.Value.FieldName, isClear);
+        await InputsFilter.NotifyFieldChange(ValueIdentifier?.FieldName, isClear);
     }
 
     public void ResetFilter()
