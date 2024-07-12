@@ -20,8 +20,8 @@ public class MInputsFilter : ComponentBase
         builder.AddAttribute(3, nameof(ChildContent), ChildContent);
         builder.CloseComponent();
     }
-
-    internal Task FieldChange(string fieldName, bool isClear = false)
+    
+    public Task NotifyFieldChange(string? fieldName, bool isClear = false)
         => OnFieldChanged.InvokeAsync(new InputsFilterFieldChangedEventArgs(fieldName, isClear));
 
     internal void RegisterInput(IFilterInput input)
