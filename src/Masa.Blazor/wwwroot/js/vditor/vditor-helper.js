@@ -35,7 +35,9 @@ export function init(domRef, obj, value, options, isUploadHandler) {
                 dataTransfer.items.add(file);
             }
             const fileInput = domRef.querySelector('input[type=file]');
-            fileInput && fileInput.files = dataTransfer.files;
+            if (fileInput) {
+                fileInput.files = dataTransfer.files;
+            }
             obj.invokeMethodAsync('HandleFileChanged');
         }
 
