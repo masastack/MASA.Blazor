@@ -170,7 +170,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
                 rows.Add(row);
             }
 
-            return rows;
+            return rows.Where(r => r.Count > 0).ToList();
         }
     }
 
