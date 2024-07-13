@@ -11,7 +11,7 @@
                    OnFieldChanged="@OnFieldChanged"
                    @ref="_inputsFilter">
         <div class="@_block.Element("high-frequency")">
-            <div class="@GetClass(_block.Element("high-frequency-inputs").Name, _expanded ? "hidden" : null)">
+            <div class="@GetClass(_block.Element("high-frequency-inputs").Name, ComputedExpanded ? "hidden" : null)">
                 @HighFrequencyContent
             </div>
             <MSpacer/>
@@ -22,7 +22,7 @@
 
                     @if (!HideResetButton && !HideSearchButton)
                     {
-                        <MDivider Vertical Class="ml-4 mr-2"/>
+                        <MDivider Vertical Class="mx-2"/>
                     }
                 }
 
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        @if (LowFrequencyContent != null && _isBooted)
+        @if (LowFrequencyContent != null && IsBooted)
         {
             var style = StyleBuilder.Create()
                 .AddIf("display", "none", !_expanded && _firstRender)
@@ -71,7 +71,7 @@
                 .AddHeight(_height)
                 .Build();
 
-            <div class="@GetClass(_block.Element("low-frequency").Name, _expanded ? "expanded" : null)"
+            <div class="@GetClass(_block.Element("low-frequency").Name, ComputedExpanded ? "expanded" : null)"
                  style="@style"
                  @ref="_lowFrequencyRef">
                 @LowFrequencyContent
