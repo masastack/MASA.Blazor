@@ -1435,8 +1435,13 @@ input[type=number] {
     transition: all 0.3s ease;
 }
 
-.m-data-filter__low-frequency.expanded {
-    padding: 8px 0 4px;
+.m-data-filter__low-frequency > .row {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.m-data-filter__low-frequency > * {
+    padding-top: 4px;
 }
 
 /* Watermark */
