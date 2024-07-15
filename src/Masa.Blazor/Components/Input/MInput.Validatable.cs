@@ -346,7 +346,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         {
             _internalValueChangingFromOnValueChanged = false;
         }
-        else if (ValueChanged.HasDelegate)
+        else
         {
             if (_changeType != InternalValueChangeType.Input && !DisableSetValueByJsInterop)
             {
