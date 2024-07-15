@@ -169,6 +169,7 @@
                Right="@ComputedMenuProps.Right"
                Top="@ComputedMenuProps.Top"
                Transition="@ComputedMenuProps.Transition"
+               OnScroll="@OnMenuScroll"
                @ref="@MMenu">
             @GenSelectList()
         </MMenu>
@@ -191,7 +192,7 @@
                      Color="@ItemColor"
                      Dense="@Dense"
                      HideSelected="@HideSelected"
-                     Items="@ComputedItems"
+                     Items="@VirtualizedItems"
                      ItemDisabled="@ItemDisabled"
                      ItemText="@ItemText"
                      ItemValue="@ItemValue"

@@ -1044,7 +1044,7 @@ export function getMenuableDimensions(hasActivator, activatorSelector, isDefault
 
   var dimensions = {
     activator: {} as any,
-    content: {},
+    content: {} as any,
     relativeYOffset: 0,
     offsetParentLeft: 0
   };
@@ -1077,6 +1077,8 @@ export function getMenuableDimensions(hasActivator, activatorSelector, isDefault
       }
 
       dimensions.content = measure(contentElement, isDefaultAttach)
+      dimensions.content.offsetLeft = contentElement.offsetLeft
+      dimensions.content.offsetTop = contentElement.offsetTop
     }
   }, contentElement);
 
@@ -1108,7 +1110,7 @@ function measure(el: HTMLElement, isDefaultAttach) {
   return rect
 }
 
-function getRoundedBoundedClientRect(el: Element) {
+function getRoundedBoundedClientRect(el: Element): any {
   if (!el || !el.nodeType) {
     return null
   }
@@ -1591,4 +1593,11 @@ export function unregisterTableScrollEvent(wrapper: HTMLElement) {
     wrapper.removeEventListener('scroll', listener)
     delete wrapper["_m_table_scroll_event"]
   }
+}
+
+export function isScrollNearBottom(element: HTMLElement, threshold: number = 200) {
+  if (!element) {
+    return false;
+  }
+  return element.scrollHeight - (element.scrollTop + element.clientHeight) < threshold;
 }

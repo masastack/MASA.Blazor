@@ -3,7 +3,6 @@
 @typeparam TItem
 @typeparam TItemValue
 @typeparam TValue
-@using Microsoft.AspNetCore.Components.Web.Virtualization
 
 <MList Class="m-select-list"
        Dense="Dense"
@@ -15,9 +14,10 @@
         @PrependItemContent
         if (computedItems.Count > 0)
         {
-            <Virtualize Items="@computedItems"
-                        ItemContent="@VirtualizeItemContent">
-            </Virtualize>
+            @foreach(var item in computedItems)
+            {
+                @VirtualizeItemContent(item)
+            }
         }
         else
         {

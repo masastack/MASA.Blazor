@@ -4,7 +4,6 @@ public class MenuablePosition : BoundingClientRect
 {
     public double OffsetTop { get; set; }
     public double OffsetLeft { get; set; }
-    public double ScrollHeight { get; set; }
 
     public MenuablePosition()
     {
