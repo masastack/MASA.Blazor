@@ -63,6 +63,13 @@ public class MTabsBar : MSlideGroup
         return base.BuildContentClass().Concat(new[] { _block.Element("content").Name });
     }
 
+    protected override void RefreshItemsState()
+    {
+        base.RefreshItemsState();
+
+        Tabs?.CallSlider();
+    }
+
     public override void Unregister(IGroupable item)
     {
         base.Unregister(item);

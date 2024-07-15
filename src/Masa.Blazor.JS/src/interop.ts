@@ -1600,8 +1600,14 @@ export function updateTabSlider(
   vertical: boolean,
   isReversed: boolean
 ) {
-  if (!sliderWrapper || !tab) {
-    return
+  if (!sliderWrapper) {
+    console.warn('[MTab] the element of slider wrapper is not found')
+    return;
+  }
+
+  if (!tab) {
+    console.warn('[MTab] the element of tab to be activated is not found')
+    return;
   }
 
   const height = !vertical ? sliderSize : tab.scrollHeight;

@@ -49,7 +49,7 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter(2)] public StringNumber SliderSize { get; set; } = 2;
         [Parameter] public StringNumber? Value { get; set; }
 
-        [Parameter] public EventCallback<StringNumber> ValueChanged { get; set; }
+        [Parameter] public EventCallback<StringNumber?> ValueChanged { get; set; }
 
         [Parameter] public bool Vertical { get; set; }
 
@@ -65,7 +65,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool Light { get; set; }
         private int _registeredTabItemsIndex;
-        private bool _callSliderOnAfterRender;
         private CancellationTokenSource? _callSliderCts;
         private ElementReference _sliderWrapperRef;
         private bool _isFirstRender = true;
@@ -133,7 +132,7 @@ namespace Masa.Blazor
             if (MasaBlazor.IsSsr && !IndependentTheme)
             {
                 CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+            } 
         }
 #endif
 
@@ -162,14 +161,13 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task OnValueChanged(StringNumber val)
+        private async Task OnValueChanged(StringNumber? val)
         {
             if (Value == val)
             {
                 return;
             }
             Value = val;
-            await CallSlider();
             await ValueChanged.InvokeAsync(val);
         }
 
@@ -226,7 +224,7 @@ namespace Masa.Blazor
         [MasaApiPublicMethod]
         public void CallSliderAfterRender()
         {
-            _callSliderOnAfterRender = true;
+            NextTick(CallSlider);
         }
 
         protected override async ValueTask DisposeAsyncCore()

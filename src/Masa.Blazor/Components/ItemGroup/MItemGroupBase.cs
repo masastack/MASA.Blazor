@@ -74,7 +74,7 @@ public abstract class MItemGroupBase : MasaComponentBase
         }
     }
 
-    private void RefreshItemsState()
+    protected virtual void RefreshItemsState()
     {
         Items.ForEach(item => item.RefreshState());
     }
