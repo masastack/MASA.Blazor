@@ -19,15 +19,18 @@ public class PatternPathComponentBase : MasaComponentBase
 
     protected HashSet<Regex> CachedSelfPatternRegexes = new();
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        UpsertCachedSelfPatternRegexes();
+    }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        if (_prevSelfPatterns.SetEquals(SelfPatterns)) return;
-
-        _prevSelfPatterns = new HashSet<string>(SelfPatterns);
-        CachedSelfPatternRegexes =
-            new HashSet<Regex>(SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase)));
+        UpsertCachedSelfPatternRegexes();
     }
 
     protected virtual PatternPath GetCurrentPatternPath()
@@ -37,5 +40,13 @@ public class PatternPathComponentBase : MasaComponentBase
         return selfPatternRegex is null
             ? new PatternPath(absolutePath)
             : new PatternPath(selfPatternRegex.ToString(), absolutePath);
+    }
+
+    private void UpsertCachedSelfPatternRegexes()
+    {
+        if (_prevSelfPatterns.SetEquals(SelfPatterns)) return;
+
+        _prevSelfPatterns = [..SelfPatterns];
+        CachedSelfPatternRegexes = [..SelfPatterns.Select(p => new Regex(p, RegexOptions.IgnoreCase))];
     }
 }
