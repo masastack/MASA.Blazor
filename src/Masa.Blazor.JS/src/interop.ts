@@ -1592,3 +1592,38 @@ export function unregisterTableScrollEvent(wrapper: HTMLElement) {
     delete wrapper["_m_table_scroll_event"]
   }
 }
+
+export function updateTabSlider(
+  sliderWrapper: HTMLElement,
+  tab: HTMLElement,
+  sliderSize: number,
+  vertical: boolean,
+  isReversed: boolean
+) {
+  if (!sliderWrapper) {
+    console.warn('[MTab] the element of slider wrapper is not found')
+    return;
+  }
+
+  if (!tab) {
+    console.warn('[MTab] the element of tab to be activated is not found')
+    return;
+  }
+
+  const height = !vertical ? sliderSize : tab.scrollHeight;
+  const left = vertical ? 0 : tab.offsetLeft;
+  const right = vertical ? 0 : tab.offsetLeft + tab.offsetWidth;
+  const top = tab.offsetTop;
+  const width = vertical ? sliderSize : tab.clientWidth;
+  sliderWrapper.style.width = `${width}px`;
+  sliderWrapper.style.height = `${height}px`;
+  if (!isReversed) {
+    sliderWrapper.style.left = `${left}px`;
+  }
+  if (isReversed) {
+    sliderWrapper.style.right = `${right}px`;
+  }
+  if (vertical) {
+    sliderWrapper.style.top = `${top}px`;
+  }
+}

@@ -116,13 +116,6 @@ public partial class MWindow : MItemGroup
         watcher.Watch<List<StringNumber?>>(nameof(InternalValues), UpdateInternalIndex);
     }
 
-    internal override void Register(IGroupable item)
-    {
-        base.Register(item);
-
-        StateHasChanged();
-    }
-
     public void RenderState()
     {
         StateHasChanged();

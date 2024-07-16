@@ -47,25 +47,9 @@ namespace Masa.Blazor
         [Parameter] public string? SliderColor { get; set; }
 
         [Parameter] [MasaApiParameter(2)] public StringNumber SliderSize { get; set; } = 2;
-
         [Parameter] public StringNumber? Value { get; set; }
 
-        private EventCallback<StringNumber>? _valueChanged;
-
-        [Parameter]
-        public EventCallback<StringNumber> ValueChanged
-        {
-            get
-            {
-                if (_valueChanged.HasValue)
-                {
-                    return _valueChanged.Value;
-                }
-
-                return EventCallback.Factory.Create<StringNumber>(this, (v) => Value = v);
-            }
-            set => _valueChanged = value;
-        }
+        [Parameter] public EventCallback<StringNumber?> ValueChanged { get; set; }
 
         [Parameter] public bool Vertical { get; set; }
 
@@ -80,10 +64,10 @@ namespace Masa.Blazor
         [Parameter] public bool Dark { get; set; }
 
         [Parameter] public bool Light { get; set; }
-        private StringNumber? _prevValue;
         private int _registeredTabItemsIndex;
-        private bool _callSliderOnAfterRender;
         private CancellationTokenSource? _callSliderCts;
+        private ElementReference _sliderWrapperRef;
+        private bool _isFirstRender = true;
 
         private List<ITabItem> TabItems { get; set; } = new();
 
@@ -132,17 +116,7 @@ namespace Masa.Blazor
             {
                 await ResizeJSModule.ObserverAsync(Ref, OnResize);
                 await IntersectJSModule.ObserverAsync(Ref, OnIntersectAsync);
-                _callSliderOnAfterRender = true;
-            }
-            else if (_prevValue != Value)
-            {
-                _prevValue = Value;
-                _callSliderOnAfterRender = true;
-            }
-
-            if (_callSliderOnAfterRender)
-            {
-                _callSliderOnAfterRender = false;
+                _isFirstRender = false;
                 await CallSlider();
             }
         }
@@ -158,7 +132,7 @@ namespace Masa.Blazor
             if (MasaBlazor.IsSsr && !IndependentTheme)
             {
                 CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+            } 
         }
 #endif
 
@@ -187,9 +161,19 @@ namespace Masa.Blazor
             }
         }
 
+        private async Task OnValueChanged(StringNumber? val)
+        {
+            if (Value == val)
+            {
+                return;
+            }
+            Value = val;
+            await ValueChanged.InvokeAsync(val);
+        }
+
         public bool IsReversed => RTL && Vertical;
 
-        public MSlideGroup? Instance => TabsBarRef as MSlideGroup;
+        public MItemGroup? Instance => TabsBarRef as MItemGroup;
 
         public void RegisterTabItem(ITabItem tabItem)
         {
@@ -212,40 +196,16 @@ namespace Masa.Blazor
         [MasaApiPublicMethod]
         public async Task CallSlider()
         {
-            if (HideSlider) return;
+            if (HideSlider || _isFirstRender) return;
 
-            _callSliderCts?.Cancel();
-            _callSliderCts = new();
-
-            try
-            {
-                await Task.Delay(16, _callSliderCts.Token);
-
-                var item = Instance?.Items?.FirstOrDefault(item => item.Value == Instance.Value);
-                if (item?.Ref.Context == null)
-                {
-                    Slider = (0, 0, 0, 0, 0);
-                }
-                else
-                {
-                    var el = await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, item.Ref);
-                    var height = !Vertical ? SliderSize.TryGetNumber().number : el.ScrollHeight;
-                    var left = Vertical ? 0 : el.OffsetLeft;
-                    var right = Vertical ? 0 : el.OffsetLeft + el.OffsetWidth;
-                    var top = el.OffsetTop;
-                    var width = Vertical
-                        ? SliderSize.TryGetNumber().number
-                        : el.ClientWidth; // REVIEW: el.ScrollWidth was used in Vuetify2
-
-                    Slider = (height, left, right, top, width);
-                }
-
-                StateHasChanged();
-            }
-            catch (TaskCanceledException)
-            {
-                // ignored
-            }
+            var item = Instance?.Items.FirstOrDefault(item => item.Value == Value);
+            await Js.InvokeVoidAsync(
+                JsInteropConstants.UpdateTabSlider,
+                _sliderWrapperRef,
+                item?.Ref,
+                SliderSize.TryGetNumber().number,
+                Vertical,
+                IsReversed);
         }
 
         private async Task OnResize()
@@ -264,7 +224,7 @@ namespace Masa.Blazor
         [MasaApiPublicMethod]
         public void CallSliderAfterRender()
         {
-            _callSliderOnAfterRender = true;
+            NextTick(CallSlider);
         }
 
         protected override async ValueTask DisposeAsyncCore()

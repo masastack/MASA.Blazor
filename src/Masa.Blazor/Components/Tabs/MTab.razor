@@ -3,11 +3,13 @@
 @inherits MRoutableGroupItem<MItemGroupBase>
 
 <MElement Tag="@Tag"
-         Class="@GetClass()"
-         Style="@GetStyle()"
-         ReferenceCaptureAction="r => Ref = r"
-         id="@Id"
-         @onclick="HandleOnClick"
-         @attributes="@Attributes">
-    @ChildContent
+          Class="@GetClass()"
+          Style="@GetStyle()"
+          ReferenceCaptureAction="r => Ref = r"
+          id="@Id"
+          @onclick="HandleOnClick"
+          @attributes="@Attributes">
+    <MShouldRender Value="InternalIsActive">
+        @ChildContent
+    </MShouldRender>
 </MElement>

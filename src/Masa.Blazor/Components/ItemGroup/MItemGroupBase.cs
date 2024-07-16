@@ -51,7 +51,10 @@ public abstract class MItemGroupBase : MasaComponentBase
         set => SetValue(value);
     }
 
-    protected StringNumber? InternalValue => InternalValues?.LastOrDefault();
+    protected StringNumber? InternalValue => InternalValues.LastOrDefault();
+
+    private HashSet<StringNumber?> _prevInternalValues = [];
+    private CancellationTokenSource? _cts;
 
     protected override void OnParametersSet()
     {
@@ -64,10 +67,14 @@ public abstract class MItemGroupBase : MasaComponentBase
             GroupType = TargetGroup.Value;
         }
 
-        RefreshItemsState();
+        if (!_prevInternalValues.SetEquals(InternalValues))
+        {
+            _prevInternalValues = [..InternalValues];
+           RefreshItemsState();
+        }
     }
 
-    private void RefreshItemsState()
+    protected virtual void RefreshItemsState()
     {
         Items.ForEach(item => item.RefreshState());
     }
@@ -77,7 +84,7 @@ public abstract class MItemGroupBase : MasaComponentBase
         return _registeredItemsIndex++;
     }
 
-    internal virtual void Register(IGroupable item)
+    internal virtual async Task Register(IGroupable item)
     {
         item.Value ??= InitDefaultItemValue();
 
@@ -89,26 +96,22 @@ public abstract class MItemGroupBase : MasaComponentBase
         {
             if (InternalValues.Count == 0)
             {
-                InternalValues = new List<StringNumber?>() { item.Value };
+                InternalValues = [item.Value];
 
                 if (Multiple)
                 {
-                    if (ValuesChanged.HasDelegate)
-                    {
-                        ValuesChanged.InvokeAsync(InternalValues.ToList());
-                    }
+                    await ValuesChanged.InvokeAsync(InternalValues.ToList());
                 }
                 else
                 {
-                    if (ValueChanged.HasDelegate)
-                    {
-                        ValueChanged.InvokeAsync(item.Value);
-                    }
+                    await ValueChanged.InvokeAsync(item.Value);
                 }
             }
         }
 
-        RefreshItemsState();
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+        await RunTaskInMicrosecondsAsync(RefreshItemsState, 16, _cts.Token);
     }
 
     public virtual void Unregister(IGroupable item)
@@ -153,8 +156,6 @@ public abstract class MItemGroupBase : MasaComponentBase
                 {
                     InternalValues = Values.ToList();
                 }
-
-                StateHasChanged();
             }
         }
         else
@@ -170,8 +171,6 @@ public abstract class MItemGroupBase : MasaComponentBase
                 {
                     InternalValues = new List<StringNumber?>() { Value };
                 }
-
-                StateHasChanged();
             }
         }
 
@@ -184,13 +183,13 @@ public abstract class MItemGroupBase : MasaComponentBase
         {
             if (!IsDirtyParameter(nameof(Values))) return;
 
-            InternalValues = Values == null ? new List<StringNumber?>() : Values.ToList();
+            InternalValues = Values == null ? [] : Values.ToList();
         }
         else
         {
             if (!IsDirtyParameter(nameof(Value))) return;
 
-            InternalValues = Value == null ? new List<StringNumber?>() : new List<StringNumber?>() { Value };
+            InternalValues = Value == null ? [] : [Value];
         }
     }
 

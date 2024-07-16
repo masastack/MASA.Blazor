@@ -167,4 +167,6 @@ public static class JsInteropConstants
     internal static string RegisterTableScrollEvent => $"{JsInteropFuncNamePrefix}registerTableScrollEvent";
 
     internal static string UnregisterTableScrollEvent => $"{JsInteropFuncNamePrefix}unregisterTableScrollEvent";
+    
+    internal static string UpdateTabSlider => $"{JsInteropFuncNamePrefix}updateTabSlider";
 }
