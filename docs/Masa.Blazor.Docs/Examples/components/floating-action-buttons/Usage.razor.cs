@@ -27,11 +27,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MButton.XSmall), new CheckboxParameter("false", true) },
     };
 
-    protected override ParameterList<SliderParameter> GenSliderParameters() => new()
-    {
-        { nameof(MButton.Elevation), new SliderParameter(2, 0, 24) }
-    };
-
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
         { nameof(MButton.Color), new SelectParameter(new List<string>() { "accent", "primary", "secondary" }) },
@@ -44,20 +39,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         builder.AddAttribute(2, "ChildContent", (RenderFragment)(b => b.AddContent(0, "mdi-heart")));
         builder.CloseComponent();
     };
-
-    protected override object? CastValue(ParameterItem<object?> parameter)
-    {
-        if (parameter.Value == null)
-        {
-            return parameter.Value;
-        }
-
-        return parameter.Key switch
-        {
-            nameof(MButton.Elevation) => (StringNumber)(double)parameter.Value,
-            _ => parameter.Value
-        };
-    }
 
     protected override Dictionary<string, object>? GenAdditionalParameters()
     {

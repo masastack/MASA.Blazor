@@ -19,11 +19,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MCard.Loading), new CheckboxParameter() },
     };
 
-    protected override ParameterList<SliderParameter> GenSliderParameters() => new()
-    {
-        { nameof(MButton.Elevation), new SliderParameter(2, 0, 24) }
-    };
-
     protected override RenderFragment GenChildContent() => builder =>
     {
         builder.OpenComponent<MCardTitle>(0);
@@ -68,7 +63,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         return parameter.Key switch
         {
-            nameof(MCard.Elevation) => (StringNumber)(double)parameter.Value,
             nameof(MCard.Loading) => (StringBoolean)(bool)parameter.Value,
             _ => parameter.Value
         };
