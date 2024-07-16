@@ -14,7 +14,7 @@
                       PrevIcon="@PrevIcon"
                       ShowArrows="@ShowArrows"
                       Value="@Value"
-                      ValueChanged="@ValueChanged"
+                      ValueChanged="@OnValueChanged"
                       Color="@Color"
                       ActiveClass="@ActiveClass"
                       CenterActive="@CenterActive"
@@ -54,16 +54,8 @@
 
     private RenderFragment GenSlider() => __builder =>
     {
-        var style = StyleBuilder.Create()
-            .AddWidth(Slider.width)
-            .AddHeight(Slider.height)
-            .AddIf("left", Slider.left.ToUnit(), !IsReversed)
-            .AddIf("right", Slider.right.ToUnit(), IsReversed)
-            .AddIf("top", Slider.top.ToUnit(), Vertical)
-            .AddIf("transition", "none", Slider.left == null);
-
         <div class="m-tabs-slider-wrapper"
-             style="@style">
+             @ref="@_sliderWrapperRef">
             <div class="@GetClass("m-tabs-slider", CssClassUtils.GetBackgroundColor(SliderColor))"
                  style="@(StyleBuilder.Create().AddBackgroundColor(SliderColor))">
             </div>

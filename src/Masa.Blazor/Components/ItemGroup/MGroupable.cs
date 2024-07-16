@@ -99,7 +99,7 @@ public abstract class MGroupable<TGroup> : MasaComponentBase, IGroupable
 
         if (this is IGroupable item)
         {
-            ItemGroup!.Register(item);
+            await ItemGroup!.Register(item);
         }
 
         await base.OnInitializedAsync();
@@ -132,10 +132,9 @@ public abstract class MGroupable<TGroup> : MasaComponentBase, IGroupable
         if (!Matched || HasRoutableAncestor) return;
 
         await SetInternalIsActive(ValueMatched);
-        StateHasChanged();
     }
 
-    protected virtual async Task ToggleAsync()
+    protected async Task ToggleAsync()
     {
         if (!Matched) return;
 
@@ -149,6 +148,7 @@ public abstract class MGroupable<TGroup> : MasaComponentBase, IGroupable
             if (InternalIsActive != val || force)
             {
                 InternalIsActive = val;
+                StateHasChanged();
             }
         }
         else
