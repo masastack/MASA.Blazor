@@ -34,6 +34,8 @@ namespace Masa.Blazor
 
         [Parameter] [MasaApiParameter("auto")] public StringNumber MaxHeight { get; set; } = "auto";
 
+        [Parameter] public EventCallback<WheelEventArgs> OnScroll { get; set; }
+        
         [Parameter] public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
 
         [Parameter] public string? Origin { get; set; }

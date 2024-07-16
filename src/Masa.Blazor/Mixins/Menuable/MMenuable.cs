@@ -167,7 +167,6 @@ public abstract class MMenuable : MBootable
     {
         OffsetTop = PositionY ?? AbsoluteY,
         OffsetLeft = PositionX ?? AbsoluteX,
-        ScrollHeight = 0,
         Top = PositionY ?? AbsoluteY,
         Bottom = PositionY ?? AbsoluteY,
         Left = PositionX ?? AbsoluteX,

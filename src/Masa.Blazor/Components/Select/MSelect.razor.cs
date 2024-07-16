@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Masa.Blazor.Components.Input;
-using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -155,6 +154,8 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     protected List<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
 
     protected virtual List<TItem> ComputedItems => AllItems;
+    
+    private List<TItem> VirtualizedItems => MMenu?.Auto is true ? ComputedItems : ComputedItems.Take(lastItem).ToList();
 
     protected List<TItem> ComputedItemsIfHideSelected =>
         HideSelected ? ComputedItems.Where(item => !SelectedItems.Contains(item)).ToList() : ComputedItems;
@@ -731,6 +732,39 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
             // the user has no selected indexes
             // and is probably tabbing out
             await Blur();
+        }
+    }
+
+    private int lastItem = 20;
+    private CancellationTokenSource? _scrollCts;
+
+    private async Task OnMenuScroll(WheelEventArgs args)
+    {
+        try
+        {
+            if (!IsMenuActive || lastItem > ComputedItems.Count)
+            {
+                return;
+            }
+
+            _scrollCts?.Cancel();
+            _scrollCts = new CancellationTokenSource();
+            await Task.Delay(16, _scrollCts.Token);
+
+            var content = MMenu?.Dimensions.Content;
+            if (content is not null)
+            {
+                var showMoreItems = await Js.InvokeAsync<bool>(JsInteropConstants.IsScrollNearBottom, MMenu!.ContentElement, 200);
+                if (showMoreItems)
+                {
+                    lastItem += 20;
+                    StateHasChanged();
+                }
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            // ignored
         }
     }
 

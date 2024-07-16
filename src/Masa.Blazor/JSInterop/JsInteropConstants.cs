@@ -167,6 +167,12 @@ public static class JsInteropConstants
     internal static string RegisterTableScrollEvent => $"{JsInteropFuncNamePrefix}registerTableScrollEvent";
 
     internal static string UnregisterTableScrollEvent => $"{JsInteropFuncNamePrefix}unregisterTableScrollEvent";
-    
+
     internal static string UpdateTabSlider => $"{JsInteropFuncNamePrefix}updateTabSlider";
+
+    /// <summary>
+    /// Check if the scroll is near the bottom of the element.
+    /// Arguments: element, threshold
+    /// </summary>
+    public static string IsScrollNearBottom => $"{JsInteropFuncNamePrefix}isScrollNearBottom";
 }

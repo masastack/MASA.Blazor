@@ -1044,7 +1044,7 @@ export function getMenuableDimensions(hasActivator, activatorSelector, isDefault
 
   var dimensions = {
     activator: {} as any,
-    content: {},
+    content: {} as any,
     relativeYOffset: 0,
     offsetParentLeft: 0
   };
@@ -1077,6 +1077,8 @@ export function getMenuableDimensions(hasActivator, activatorSelector, isDefault
       }
 
       dimensions.content = measure(contentElement, isDefaultAttach)
+      dimensions.content.offsetLeft = contentElement.offsetLeft
+      dimensions.content.offsetTop = contentElement.offsetTop
     }
   }, contentElement);
 
@@ -1626,4 +1628,11 @@ export function updateTabSlider(
   if (vertical) {
     sliderWrapper.style.top = `${top}px`;
   }
+}
+
+export function isScrollNearBottom(element: HTMLElement, threshold: number = 200) {
+  if (!element) {
+    return false;
+  }
+  return element.scrollHeight - (element.scrollTop + element.clientHeight) < threshold;
 }
