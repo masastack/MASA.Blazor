@@ -44,7 +44,9 @@
                                        Class="@css"
                                        Style="@style"
                                        ReferenceCaptureAction="r => ContentElement = r">
-                    @ChildContent
+                    <MShouldRender Value="@IsActive">
+                        @ChildContent
+                    </MShouldRender>
                 </ShowTransitionElement>
             </Transition>
         }
