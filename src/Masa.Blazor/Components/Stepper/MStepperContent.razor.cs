@@ -18,6 +18,7 @@ public partial class MStepperContent : MasaComponentBase
     private bool _firstRender = true;
     private StringNumber _height = 0;
     private bool _transitionEndListenerAdded;
+    private ElementReference _wrapper;
 
     protected bool IsBooted { get; set; }
 
@@ -215,7 +216,7 @@ public partial class MStepperContent : MasaComponentBase
 
     private async Task<T> GetProp<T>(string identifier)
     {
-        return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, Ref, identifier);
+        return await Js.InvokeAsync<T>(JsInteropConstants.GetProp, _wrapper, identifier);
     }
 
     protected override ValueTask DisposeAsyncCore()
