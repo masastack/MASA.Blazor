@@ -35,8 +35,12 @@
     {
         var style = Stepper?.Vertical is true ? $"height:{_height.ToUnit()}" : null;
 
-        <div class="@_wrapperElement.AppendClasses(("active", IsActive))" style="@style">
-            @ChildContent
+        <div class="@_wrapperElement.AppendClasses(("active", IsActive))"
+             style="@style"
+             @ref="_wrapper">
+            <MShouldRender Value="@IsActive">
+                @ChildContent
+            </MShouldRender>
         </div>
     };
 
