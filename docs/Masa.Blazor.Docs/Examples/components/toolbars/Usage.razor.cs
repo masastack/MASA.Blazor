@@ -12,11 +12,6 @@
             { nameof(MToolbar.Shaped), false },
         };
 
-        protected override ParameterList<SliderParameter> GenSliderParameters() => new()
-        {
-            { nameof(MToolbar.Elevation), new SliderParameter(4, 0, 24) }
-        };
-
         protected override ParameterList<SelectParameter> GenSelectParameters() => new()
         {
            { nameof(MToolbar.Color), new SelectParameter(new List<string>() { "red", "orange", "yellow", "green", "blue", "purple" }) },
@@ -40,7 +35,6 @@
             return parameter.Key switch
             {
                 nameof(MToolbar.Rounded) => (StringBoolean)(bool)parameter.Value,
-                nameof(MToolbar.Elevation) => (StringNumber)(double)parameter.Value,
                 _ => parameter.Value
             };
         }

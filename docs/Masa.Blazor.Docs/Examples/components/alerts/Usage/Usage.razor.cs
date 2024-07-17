@@ -22,11 +22,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MAlert.Dismissible), new CheckboxParameter("false", true) }
     };
 
-    protected override ParameterList<SliderParameter> GenSliderParameters() => new()
-    {
-        { nameof(MAlert.Elevation), new SliderParameter(0, 0, 24) }
-    };
-
     protected override ParameterList<SelectParameter> GenSelectParameters() => new()
     {
         { nameof(MAlert.Color), new SelectParameter(new List<string>() { "red", "orange", "yellow", "green", "blue", "purple" }) },
@@ -49,7 +44,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
             nameof(MAlert.Icon) => (StringBoolean)(string)parameter.Value,
             nameof(MAlert.Border) => Enum.Parse<Borders>((string)parameter.Value),
             nameof(MAlert.Type) => Enum.Parse<AlertTypes>((string)parameter.Value),
-            nameof(MAlert.Elevation) => (StringNumber)(double)parameter.Value,
             _ => parameter.Value
         };
     }

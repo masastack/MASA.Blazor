@@ -12,11 +12,6 @@
             { nameof(MAppBar.Shaped), false },
         };
 
-        protected override ParameterList<SliderParameter> GenSliderParameters() => new()
-        {
-            { nameof(MAppBar.Elevation), new SliderParameter(4, 0, 24) }
-        };
-
         protected override ParameterList<SelectParameter> GenSelectParameters() => new()
         {
            { nameof(MAppBar.Color), new SelectParameter(new List<string>() { "red", "orange", "yellow", "green", "blue", "purple" }) },
@@ -40,7 +35,6 @@
             return parameter.Key switch
             {
                 nameof(MAppBar.Rounded) => (StringBoolean)(bool)parameter.Value,
-                nameof(MAppBar.Elevation) => (StringNumber)(double)parameter.Value,
                 _ => parameter.Value
             };
         }

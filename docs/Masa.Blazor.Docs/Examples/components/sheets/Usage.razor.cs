@@ -11,7 +11,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
     protected override ParameterList<SliderParameter> GenSliderParameters() => new()
     {
-        { nameof(MSheet.Elevation), new SliderParameter(1, 0, 24, false) },
         { nameof(MSheet.Height), new SliderParameter(100, 50 , 250, false) },
         { nameof(MSheet.Width), new SliderParameter(100, 50, 250, false) },
     };
@@ -34,7 +33,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
 
         return parameter.Key switch
         {
-            nameof(MSheet.Elevation) => (StringNumber)(double)parameter.Value,
             nameof(MSheet.Height) => (StringNumber)(double)parameter.Value,
             nameof(MSheet.Width) => (StringNumber)(double)parameter.Value,
             nameof(MSheet.Rounded) => (StringBoolean)(bool)parameter.Value,
