@@ -184,6 +184,7 @@ public abstract class MGroupable<TGroup> : MasaComponentBase, IGroupable
                 }
 
                 InternalIsActive = val;
+                StateHasChanged();
             }
         }
     }
