@@ -1,10 +1,12 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, IDisposable
+public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, IFilterInput, IDisposable
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [CascadingParameter] protected MInputsFilter? InputsFilter { get; set; }
 
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
@@ -31,6 +33,11 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
         base.OnInitialized();
 
         MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
+
+        if (InputsFilter is not null && ValueChanged.HasDelegate)
+        {
+            InputsFilter.RegisterInput(this);
+        }
 
         CheckViewType();
     }
@@ -105,6 +112,13 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
         _menu = false;
         await ValueChanged.InvokeAsync(InternalDateTime);
         await OnConfirm.InvokeAsync();
+        InputsFilter?.NotifyFieldChange(null); // TODO: support for form
+    }
+
+    public void ResetFilter()
+    {
+        InternalDateTime = default;
+        _ = ValueChanged.InvokeAsync(default);
     }
 
     public void Dispose()
