@@ -177,7 +177,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         InternalValue = Value;
 
-        if (InputsFilter != null)
+        if (InputsFilter != null && ValueChanged.HasDelegate)
         {
             InputsFilter.RegisterInput(this);
             Dense = InputsFilter.Dense;
@@ -490,7 +490,13 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
             EditContext?.MarkAsUnmodified(ValueIdentifier.Value);
         }
 
-        UpdateInternalValue(default, InternalValueChangeType.InternalOperation);
+        // If the input is not bound to a ValueChanged event,
+        // We assume it's a scenario like "read-only" or "value set automatically by other property",
+        // So we would not reset the value.
+        if (ValueChanged.HasDelegate)
+        {
+            UpdateInternalValue(default, InternalValueChangeType.InternalOperation);
+        }
     }
 
     public void ResetValidation()

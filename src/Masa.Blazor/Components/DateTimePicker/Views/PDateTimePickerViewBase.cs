@@ -196,7 +196,7 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
 
     protected async Task TimeChanged(TimeOnly? time)
     {
-        if (!time.HasValue || time.Value == InternalTime.Value)
+        if (!time.HasValue || (InternalTime.HasValue && InternalTime == time.Value))
         {
             return;
         }
