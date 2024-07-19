@@ -54,6 +54,7 @@
   ],
   "date-digital-clock-pickers": [
     "PDateDigitalClockPicker",
+    "PDefaultDateTimePickerActivator",
     "PDateDigitalClockPickerView",
     "PDateDigitalClockCompactPickerView"
   ],
@@ -62,6 +63,7 @@
   ],
   "date-time-pickers": [
     "PDateTimePicker",
+    "PDefaultDateTimePickerActivator",
     "PDateTimePickerView",
     "PDateTimeCompactPickerView"
   ],

@@ -71,6 +71,13 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
 
     [Parameter] [MasaApiParameter(false)] public StringBoolean? Loading { get; set; } = false;
 
+    /// <summary>
+    /// Set the custom attributes of the root element.
+    /// It is different from the default @attributes,
+    /// the default @attributes are set on the input element.
+    /// </summary>
+    [Parameter] public IDictionary<string, object> RootAttributes { get; set; } = new Dictionary<string, object>();
+
     [Parameter] public RenderFragment<string>? MessageContent { get; set; }
 
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
