@@ -22,6 +22,20 @@ Using the `DateTimePickerViewType` enumeration to set the rendering mode of the 
 | `Desktop` | Desktop view, use non-compact view and use menu pop-up                                                        |
 | `Mobile`  | Mobile view, use compact view and use dialog pop-up                                                           |
 
+## Examples
+
+### Configure default activator {#default-activator released-on=v1.7.0}
+
+By default, use a [MTextField](/blazor/components/text-fields) as the activator. You can configure the default activator with **PDefaultDateTimePickerActivator**.
+
+<masa-example file="Examples.labs.date_time_pickers.DefaultActivator"></masa-example>
+
+### Custom activator {#custom-activator}
+
+Customize the activator using the `ActivatorContent` slot.
+
+<masa-example file="Examples.labs.date_time_pickers.CustomActivator"></masa-example>
+
 ## View components
 
 ### DateTimePickerView

@@ -1,0 +1,14 @@
+﻿<PDateTimePicker @bind-Value="_date"
+                 TimeFormat="TimeFormat.Hr24">
+    <ActivatorContent>
+        <MButton Text @attributes="@context.Attrs">
+            @_date
+        </MButton>
+    </ActivatorContent>
+</PDateTimePicker>
+
+@code {
+
+    private DateTime _date;
+
+}

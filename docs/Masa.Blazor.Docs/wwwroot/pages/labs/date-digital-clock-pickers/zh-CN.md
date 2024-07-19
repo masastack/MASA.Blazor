@@ -8,7 +8,7 @@ related:
   - /blazor/labs/date-time-pickers
 ---
 
-## 使用
+## 使用 {#usage}
 
 <masa-example file="Examples.labs.date_digital_clock_pickers.Picker"></masa-example>
 
@@ -22,7 +22,21 @@ related:
 | `Desktop` | 桌面视图，使用非紧凑视图并使用菜单弹出                    |
 | `Mobile`  | 移动端视图，使用紧凑视图并使用对话框弹出                   |
 
-## 视图组件
+## 示例 {#examples}
+
+### 配置默认触发器 {#default-activator released-on=v1.7.0}
+
+默认使用一个 [MTextField](/blazor/components/text-fields) 作为触发器。可以通过 **PDefaultDateTimePickerActivator** 配置默认触发器。
+
+<masa-example file="Examples.labs.date_digital_clock_pickers.DefaultActivator"></masa-example>
+
+### 自定义触发器 {#custom-activator}
+
+使用 `ActivatorContent` 插槽自定义触发器。
+
+<masa-example file="Examples.labs.date_digital_clock_pickers.CustomActivator"></masa-example>
+
+## 视图组件 {#view-components}
 
 ### DateDigitalClockPickerView
 

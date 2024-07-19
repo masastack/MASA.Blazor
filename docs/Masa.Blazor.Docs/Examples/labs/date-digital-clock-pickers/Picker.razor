@@ -10,15 +10,6 @@
 <PDateDigitalClockPicker @bind-Value="_date"
                          TimeFormat="TimeFormat.Hr24"
                          ViewType="_pickerViewType">
-    <ActivatorContent>
-        <MTextField @bind-Value="_date"
-                    Label="Pick a date time"
-                    Clearable
-                    Filled
-                    Readonly
-                    @attributes="@context.Attrs">
-        </MTextField>
-    </ActivatorContent>
 </PDateDigitalClockPicker>
 
 @code {

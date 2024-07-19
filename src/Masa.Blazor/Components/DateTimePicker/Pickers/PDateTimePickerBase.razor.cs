@@ -1,6 +1,9 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Masa.Blazor.Components.DateTimePicker.Pickers;
 
-public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, IFilterInput, IDisposable
+namespace Masa.Blazor.Presets;
+
+public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, IDateTimePicker, IFilterInput,
+    IDisposable
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
@@ -10,7 +13,10 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
-    [Parameter] [MasaApiParameter(DateTimePickerViewType.Auto)]
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(DateTimePickerViewType.Auto)]
     public DateTimePickerViewType ViewType { get; set; }
 
     [Parameter] public string? TabItemTransition { get; set; }
@@ -27,6 +33,15 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
     private bool IsDialog { get; set; }
 
     internal TValue? InternalDateTime { get; set; }
+
+    private PDefaultDateTimePickerActivator? _defaultActivator;
+
+    public void UpdateActivator(PDefaultDateTimePickerActivator pDefaultDateTimePickerActivator)
+    {
+        _defaultActivator = pDefaultDateTimePickerActivator;
+        
+        StateHasChanged();
+    }
 
     protected override void OnInitialized()
     {
@@ -79,7 +94,7 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
                 IsDialog = mobile;
                 break;
             case DateTimePickerViewType.Dialog:
-                IsCompact  = mobile;
+                IsCompact = mobile;
                 IsDialog = true;
                 break;
             case DateTimePickerViewType.Desktop:
