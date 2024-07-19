@@ -13,8 +13,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    protected ThemeCssBuilder ThemeCssBuilder { get; } = new();
-
     public IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
 
     protected bool IsDark => MasaBlazor?.Theme is { Dark: true };
@@ -28,7 +26,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         MasaBlazor.RTLChanged += OnRTLChanged;
         MasaBlazor.DefaultsChanged += OnDefaultsChanged;
 
-        OnThemeChange(MasaBlazor.Theme);
+        _ = UpsertThemeStyle(MasaBlazor.Theme);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -64,12 +62,16 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     private void OnThemeChange(Theme theme)
     {
-        var style = ThemeCssBuilder.Build(theme);
         InvokeAsync(async () =>
         {
-            await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", style);
+            await UpsertThemeStyle(theme);
             StateHasChanged();
         });
+    }
+
+    private async Task UpsertThemeStyle(Theme theme)
+    {
+        await Js.InvokeVoidAsync(JsInteropConstants.UpsertThemeStyle, "masa-blazor-theme-stylesheet", ThemeCssBuilder.Build(theme));
     }
 
     private static Block _block = new("m-application");

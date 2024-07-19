@@ -95,3 +95,27 @@ The CSS of the theme style will automatically generate a `<style>` tag with an `
 Through the `MasaBlazor` service, you can change the theme at runtime.
 
 <masa-example file="Examples.features.theme.DynamicallyModifyTheme"></masa-example>
+
+## Avoid flicker {released-on=v1.7.0}
+
+When the application starts, the custom theme will be dynamically generated and applied to the application through JavaScript.This may cause a brief flicker when the application is loaded.
+To avoid this, you can add the **MAppThemeStylesheet** component in the `head` tag to apply the theme in advance.
+
+:::: code-group
+::: code-group-item Blazor Server
+```razor _Host.cshtml
+<head>
+    <!-- Other content -->
+    <component type="typeof(MAppThemeStylesheet)" render-mode="ServerPrerendered" />
+</head>
+```
+:::
+::: code-group-item Blazor Web App
+``` razor App.razor
+<head>
+    <!-- Other content -->
+    <MAppThemeStylesheet />
+</head>
+```
+:::
+::::

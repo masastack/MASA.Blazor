@@ -8,25 +8,14 @@ public partial class MSsrThemeProvider : IDisposable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    private readonly ThemeCssBuilder _themeCssBuilder = new();
-    private string? _themeCss;
-
     protected override void OnInitialized()
     {
-        BuildThemeCss(MasaBlazor.Theme);
         MasaBlazor.OnThemeChange += MasaBlazorOnOnThemeChange;
     }
 
     private void MasaBlazorOnOnThemeChange(Theme theme)
     {
-        BuildThemeCss(theme);
-
         InvokeAsync(StateHasChanged);
-    }
-
-    private void BuildThemeCss(Theme theme)
-    {
-        _themeCss = _themeCssBuilder.Build(theme);
     }
 
     public void Dispose()
