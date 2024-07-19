@@ -1411,7 +1411,6 @@ input[type=number] {
     display: flex;
     align-items: center;
     min-height: 40px;
-    margin-bottom: 8px;
 }
 
 .m-data-filter__high-frequency-inputs {
@@ -1424,7 +1423,7 @@ input[type=number] {
 
 .m-data-filter__high-frequency-inputs.hidden {
     opacity: 0;
-    top: 40px;
+    top: 44px;
 }
 
 .m-data-filter__high-frequency-actions {
@@ -1436,8 +1435,13 @@ input[type=number] {
     transition: all 0.3s ease;
 }
 
-.m-data-filter__low-frequency.expanded {
-    margin-bottom: 8px;
+.m-data-filter__low-frequency > .row {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.m-data-filter__low-frequency > * {
+    padding-top: 4px;
 }
 
 /* Watermark */

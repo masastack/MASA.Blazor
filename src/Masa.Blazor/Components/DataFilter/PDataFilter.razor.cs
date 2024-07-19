@@ -20,6 +20,19 @@ public partial class PDataFilter : MasaComponentBase
 
     [Parameter] public EventCallback OnSearch { get; set; }
 
+    /// <summary>
+    /// Reset all the input fields and trigger the <see cref="OnSearch"/> event
+    /// if this event is not set. 
+    /// </summary>
+    [Parameter]
+    public EventCallback OnReset { get; set; }
+
+    /// <summary>
+    /// Expand the low frequency content when the component is initialized.
+    /// </summary>
+    [Parameter]
+    public bool ExpandFirst { get; set; }
+
     private bool _expanded;
     private bool _searching;
     private bool _resetting;
@@ -33,6 +46,21 @@ public partial class PDataFilter : MasaComponentBase
     private IJSObjectReference? _jsModule;
     private bool _isBooted;
 
+    private bool ComputedExpanded
+    {
+        get
+        {
+            if (_firstRender && ExpandFirst)
+            {
+                return true;
+            }
+
+            return _expanded;
+        }
+    }
+
+    private bool IsBooted => ExpandFirst || _isBooted;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -40,9 +68,17 @@ public partial class PDataFilter : MasaComponentBase
         if (firstRender)
         {
             _firstRender = false;
+
+            if (ExpandFirst)
+            {
+                _expanded = true;
+                var scrollHeight = await GetProp<double>("scrollHeight");
+                _height = scrollHeight == 0 ? "auto" : scrollHeight;
+                StateHasChanged();
+            }
         }
     }
-    
+
     private static Block _block = new("m-data-filter");
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -65,8 +101,6 @@ public partial class PDataFilter : MasaComponentBase
             StateHasChanged();
 
             _height = scrollHeight == 0 ? "auto" : scrollHeight;
-
-            StateHasChanged();
         }
         else
         {
@@ -87,9 +121,9 @@ public partial class PDataFilter : MasaComponentBase
                     Logger.Log(LogLevel.Warning, "Failed to get LowFrequency's element reference");
                 }
             });
-
-            StateHasChanged();
         }
+
+        StateHasChanged();
     }
 
     private async Task OnTransition(TransitionEventArgs e)
@@ -151,7 +185,14 @@ public partial class PDataFilter : MasaComponentBase
 
         try
         {
-            await OnSearch.InvokeAsync();
+            if (OnReset.HasDelegate)
+            {
+                await OnReset.InvokeAsync();
+            }
+            else
+            {
+                await OnSearch.InvokeAsync();
+            }
         }
         finally
         {

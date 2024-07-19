@@ -6,7 +6,7 @@ related:
   - /blazor/labs/date-digital-clock-pickers
 ---
 
-## 使用
+## 使用 {#usage}
 
 支持以下表单组件：
 
@@ -22,7 +22,7 @@ related:
 
 <masa-example file="Examples.labs.inputs_filter.Usage"></masa-example>
 
-## 数据筛选器
+## 数据筛选器 {#data-filter}
 
 **PDataFilter** 组件内置了 **MInputsFilter** 组件，其中包含内置的重置、搜索和展开/折叠操作。
 
