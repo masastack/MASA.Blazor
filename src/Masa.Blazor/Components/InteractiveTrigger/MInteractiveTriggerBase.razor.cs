@@ -116,7 +116,7 @@ public abstract partial class MInteractiveTriggerBase<TValue, TInteractiveValue>
         {
             // The html generated from the server is rendered on the page
             // before a short delay. With delay and [StreamRendering],
-            // set active to true, there will be a short transition animation. 
+            // set active to true, there will be a short transition animation.
 
             await Task.Delay(1);
 

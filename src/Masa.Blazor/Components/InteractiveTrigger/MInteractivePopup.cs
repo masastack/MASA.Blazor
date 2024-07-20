@@ -4,14 +4,14 @@
 /// A abstract class for components that use the <see cref="MInteractiveTrigger{TValue}"/>
 /// or <see cref="MInteractiveTriggers{TValue}"/> component as a trigger.
 /// </summary>
-public abstract class MInteractivePopup : MasaComponentBase, IOutsideClickJsCallback, IAsyncDisposable
+public abstract class MInteractivePopup : MasaComponentBase, IOutsideClickJsCallback
 {
     [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Inject] protected NavigationManager NavigationManager { get; set; } = null!;
 
     /// <summary>
-    /// The query name of url for trigger a interactive popup. 
+    /// The query name of url for trigger a interactive popup.
     /// </summary>
     [Parameter] public string QueryName { get; set; } = null!;
 
@@ -39,18 +39,8 @@ public abstract class MInteractivePopup : MasaComponentBase, IOutsideClickJsCall
         NavigationManager.NavigateWithQueryParameter(QueryName, (string?)null);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await DisposeAsync();
-            await OutsideClickJSModule.UnbindAndDisposeAsync();
-        }
-        catch (JSDisconnectedException)
-        {
-            // ignore
-        }
+        await OutsideClickJSModule.UnbindAndDisposeAsync();
     }
-
-    protected virtual Task DisposeAsync() => Task.CompletedTask;
 }
