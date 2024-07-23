@@ -1304,6 +1304,11 @@ export function checkIfThresholdIsExceededWhenScrolling(el: Element, parent: any
     parentElement = document.querySelector(parent);
   }
 
+  if (!parentElement) {
+    console.warn('[MInfiniteScroll] failed to get parent element with selector:', parent);
+    return;
+  }
+
   const rect = el.getBoundingClientRect();
   const elementTop = rect.top;
   const current = isWindow(parentElement)
