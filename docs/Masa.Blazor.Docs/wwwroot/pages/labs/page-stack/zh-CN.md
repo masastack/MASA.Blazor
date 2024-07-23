@@ -51,7 +51,9 @@ related:
 
 ### data-page-stack-strategy
 
-对于 `Push` 操作，可以在`a`标签或组件上添加内置的 `data-page-stack-strategy="push"` 属性，以便在点击时自动推入堆栈。
+<app-alert type="warning" content="建议使用 `PPageStackLink` 组件，以避免连续点击导致多次触发。"></app-alert>
+
+对于 `Push` 操作，可以在`a`标签或组件上添加内置的 `data-page-stack-strategy="push"` 属性，以便在点击时自动将新页面推入堆栈。
 
 > `data-page-stack-strategy` 属性的值可以不填，默认为 `push`。
 
@@ -59,6 +61,20 @@ related:
 <a href="/stack-page" data-page-stack-strategy="push">Stack page</a>
 
 <MButton Href="/stack-page" data-page-stack-strategy>Stack page</MButton>
+```
+
+### PPageStackLink {released-on=v1.7.0}
+
+`a` 标签存在一个无法避免的问题：连续点击会导致多次触发。**PPageStackLink** 是一个专门用于页面堆栈的链接组件，可以避免这个问题。
+
+```razor
+<PPageStackLink Href="/stack-page">Stack page</PPageStackLink>
+
+<PPageStackLink Href="/stack-page">
+    <CustomContent Context="push">
+        <MButton OnClick="push">Stack page</MButton>
+    </CustomContent>
+</PageStackLink>
 ```
 
 ### PStackPageBarInit

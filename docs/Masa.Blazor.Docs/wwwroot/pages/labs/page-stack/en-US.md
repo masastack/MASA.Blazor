@@ -52,6 +52,8 @@ Used to control the navigation of the page stack.
 
 ### data-page-stack-strategy
 
+<app-alert type="warning" content="It is recommended to use the **PPageStackLink** component to avoid multiple triggers due to continuous clicks."></app-alert>
+
 For the `Push` operation, you can add the built-in `data-page-stack-strategy="push"` attribute to the `a` tag or
 component to automatically push onto the stack when clicked.
 
@@ -61,6 +63,20 @@ component to automatically push onto the stack when clicked.
 <a href="/stack-page" data-page-stack-strategy="push">Stack page</a>
 
 <MButton Href="/stack-page" data-page-stack-strategy>Stack page</MButton>
+```
+
+### PPageStackLink {released-on=v1.7.0}
+
+The `a` tag has an unavoidable problem: continuous clicks will cause multiple triggers. `PPageStackLink` is a link component specifically for page stacks that can avoid this problem.
+
+```razor
+<PPageStackLink Href="/stack-page">Stack page</PPageStackLink>
+
+<PPageStackLink Href="/stack-page">
+    <CustomContent Context="push">
+        <MButton OnClick="push">Stack page</MButton>
+    </CustomContent>
+</PageStackLink>
 ```
 
 ### PStackPageBarInit

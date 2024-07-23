@@ -10,10 +10,7 @@
 
 <div>
     <h3>Page 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
-    <a href="/blazor/examples/page-stack/page2/xyz"
-       data-page-stack-strategy="push">
-        Navigate to Page 2
-    </a>
+    <PPageStackLink Href="/blazor/examples/page-stack/page2/xyz">Navigate to Page 2</PPageStackLink>
 </div>
 
 <a class="text-decoration-underline"

@@ -4,9 +4,8 @@ public partial class PageStackTab3
 {
     private string sourceCode =
         """
-        <a href="/blazor/examples/page-stack/page1"
-           data-page-stack-strategy="push">
+        <PageStackLink Href="/blazor/examples/page-stack/page1">
             Navigate to Page 1
-        </a>
+        </PageStackLink>
         """;
 }
