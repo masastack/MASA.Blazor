@@ -76,7 +76,7 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
     <CustomContent Context="push">
         <MButton OnClick="push">Stack page</MButton>
     </CustomContent>
-</PageStackLink>
+</PPageStackLink>
 ```
 
 ### PStackPageBarInit

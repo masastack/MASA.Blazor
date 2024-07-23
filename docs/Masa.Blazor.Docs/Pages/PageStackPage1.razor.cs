@@ -9,9 +9,9 @@ public partial class PageStackPage1
         @inject PageStackNavController NavController
         @inherits PStackPageBase
 
-        <PageStackLink Href="/blazor/examples/page-stack/page2/xyz">
+        <PPageStackLink Href="/blazor/examples/page-stack/page2/xyz">
             Navigate to Page 2
-        </PageStackLink>
+        </PPageStackLink>
 
         <a @onclick="@GoToPage4">
             Navigate to Page 4
