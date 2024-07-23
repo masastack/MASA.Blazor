@@ -18,7 +18,7 @@ public partial class PPageStackItem : MasaComponentBase
     {
         if (firstRender)
         {
-            SelectorCaptureAction?.Invoke($"[page-stack-id=\"{Index}\"]>.m-dialog");
+            SelectorCaptureAction?.Invoke($"[page-stack-id=\"{Index}\"] .m-page-stack-item__content");
         }
     }
 
