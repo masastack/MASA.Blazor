@@ -6,8 +6,12 @@ namespace Masa.Blazor.Presets;
 public class PageStackNavController : IDisposable
 {
     private readonly IJSRuntime _jsRuntime;
-
     private readonly NavigationManager _navigationManager;
+
+    /// <summary>
+    /// Records the timestamp of the last action, shared by all actions.
+    /// </summary>
+    private long _lastActionTimestamp;
 
     public event EventHandler<PageStackPushEventArgs>? StackPush;
 
@@ -37,8 +41,11 @@ public class PageStackNavController : IDisposable
     /// <param name="uri"></param>
     public void Push(string uri)
     {
-        StackPush?.Invoke(this, new PageStackPushEventArgs(uri));
-        _navigationManager.NavigateTo(uri);
+        ExecuteIfTimeElapsed(() =>
+        {
+            StackPush?.Invoke(this, new PageStackPushEventArgs(uri));
+            _navigationManager.NavigateTo(uri);
+        });
     }
 
     /// <summary>
@@ -63,8 +70,11 @@ public class PageStackNavController : IDisposable
             throw new ArgumentOutOfRangeException(nameof(delta), "The delta must be greater than or equal to 1.");
         }
 
-        StackPop?.Invoke(this, new PageStackPopEventArgs(delta, state));
-        _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+        ExecuteIfTimeElapsed(() =>
+        {
+            StackPop?.Invoke(this, new PageStackPopEventArgs(delta, state));
+            _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+        });
     }
 
     /// <summary>
@@ -74,8 +84,11 @@ public class PageStackNavController : IDisposable
     /// <param name="state"></param>
     public void Replace(string uri, object? state = null)
     {
-        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(uri, state));
-        _navigationManager.NavigateTo(uri, replace: true);
+        ExecuteIfTimeElapsed(() =>
+        {
+            StackReplace?.Invoke(this, new PageStackReplaceEventArgs(uri, state));
+            _navigationManager.NavigateTo(uri, replace: true);
+        });
     }
 
     /// <summary>
@@ -83,7 +96,7 @@ public class PageStackNavController : IDisposable
     /// </summary>
     public void Clear()
     {
-        StackClear?.Invoke(this, new PageStackClearEventArgs());
+        ExecuteIfTimeElapsed(() => { StackClear?.Invoke(this, new PageStackClearEventArgs()); });
     }
 
     /// <summary>
@@ -92,11 +105,22 @@ public class PageStackNavController : IDisposable
     /// <param name="uri"></param>
     public void GoToTab(string uri)
     {
-        StackClear?.Invoke(this, new PageStackClearEventArgs(uri));
+        ExecuteIfTimeElapsed(() => { StackClear?.Invoke(this, new PageStackClearEventArgs(uri)); });
     }
 
     public void Dispose()
     {
         _navigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+    private void ExecuteIfTimeElapsed(Action action)
+    {
+        var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        if (now - _lastActionTimestamp > 250)
+        {
+            action();
+        }
+
+        _lastActionTimestamp = now;
     }
 }
