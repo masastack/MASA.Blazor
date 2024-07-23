@@ -493,6 +493,10 @@
 
 /* page-stack */
 
+.m-page-stack-item {
+    overflow: hidden;
+}
+
 .m-page-stack-item.m-page-stack-item--center-title .m-toolbar__title {
     position: absolute;
     padding-left: 0 !important;
@@ -503,6 +507,7 @@
 
 .m-page-stack-item__content {
     height: 100%;
+    overflow-y: auto;
 }
 
 /* block-text */
