@@ -1,18 +1,11 @@
 ﻿using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
 public partial class PPageStack : PatternPathComponentBase
 {
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
-
-    enum PageType
-    {
-        Tab,
-        Stack
-    }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -31,9 +24,13 @@ public partial class PPageStack : PatternPathComponentBase
 
     internal readonly StackPages Pages = new();
 
-    private int _navCountByUserClick;
+    /// <summary>
+    /// Determines whether the popstate event is triggered by user action,
+    /// different from the browser's back button.
+    /// </summary>
+    private bool _popstateByUserAction;
+
     private string? _lastVisitedTabPath;
-    private bool _taskForBrowserClickBack;
     private PageType _targetPageType;
     private string? _latestTabPath;
     private long _lastOnPreviousClickTimestamp;
@@ -90,33 +87,29 @@ public partial class PPageStack : PatternPathComponentBase
     {
         Pages.Push(GetAbsolutePath(href));
         DisableRootScrollbar(true);
-
         InvokeAsync(StateHasChanged);
     }
     
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
-        _taskForBrowserClickBack = true;
-
-        var targetPath = absolutePath;
-        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(targetPath));
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
         
         if (tabbedPattern is not null)
         {
-            _lastVisitedTabPath = targetPath;
+            _lastVisitedTabPath = absolutePath;
             _targetPageType = PageType.Tab;
             DisableRootScrollbar(false);
-            InvokeAsync(StateHasChanged);
+            StateHasChanged();
         }
         else
         {
             _targetPageType = PageType.Stack;
         }
 
-        if (_navCountByUserClick > 0)
+        if (_popstateByUserAction)
         {
-            _navCountByUserClick = 0;
+            _popstateByUserAction = false;
             return;
         }
 
@@ -124,8 +117,6 @@ public partial class PPageStack : PatternPathComponentBase
         {
             CloseTopPageOfStack();
         }
-
-        InvokeAsync(StateHasChanged);
     }
 
     protected override void OnParametersSet()
@@ -146,28 +137,26 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
-        _navCountByUserClick++;
-
-        Pages.UpdateTop(e.Uri, e.State);
+        Pages.UpdateTop(e.RelativeUri, e.State);
     }
 
     private void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
     {
-        _navCountByUserClick++;
+        _popstateByUserAction = true;
 
         CloseTopPages(e.Delta, e.State);
     }
 
     private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
     {
-        Push(e.Uri);
+        Push(e.RelativeUri);
     }
 
     private async void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
     {
         await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
-        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.Uri) || _lastVisitedTabPath == GetAbsolutePath(e.Uri);
+        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) || _lastVisitedTabPath == GetAbsolutePath(e.RelativeUri);
 
         if (backToLastVisitTab)
         {
@@ -179,7 +168,7 @@ public partial class PPageStack : PatternPathComponentBase
         DisableRootScrollbar(false);
         _ = InvokeAsync(StateHasChanged);
 
-        NextTick(() => NavigationManager.Replace(e.Uri!));
+        NextTick(() => NavigationManager.Replace(e.RelativeUri!));
     }
 
     private string GetAbsolutePath(string relativeUri) => NavigationManager.ToAbsoluteUri(relativeUri).AbsolutePath;
@@ -190,7 +179,7 @@ public partial class PPageStack : PatternPathComponentBase
 
         if (now - _lastOnPreviousClickTimestamp > 250)
         {
-            _navCountByUserClick++;
+            _popstateByUserAction = true;
 
             if (_lastVisitedTabPath is not null)
             {
@@ -226,7 +215,7 @@ public partial class PPageStack : PatternPathComponentBase
             target.Activate();
         }
 
-        StateHasChanged();
+        InvokeAsync(StateHasChanged);
 
         Task.Run(async () =>
         {
@@ -266,5 +255,11 @@ public partial class PPageStack : PatternPathComponentBase
             InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
             InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
         }
+    }
+
+    private enum PageType
+    {
+        Tab,
+        Stack
     }
 }

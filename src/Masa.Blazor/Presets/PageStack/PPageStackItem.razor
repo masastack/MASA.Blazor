@@ -3,13 +3,13 @@
 @inherits MasaComponentBase
 
 <MDialog Transition="dialog-right-transition"
-         Value="@Active"
+         Value="@Data.Stacked"
          ContentClass="@GetClass()"
          ContentStyle="@GetStyle()"
          Fullscreen
          Persistent
          NoPersistentAnimation
-         ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Index } })">
+         ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })">
     <MShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
             <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"
@@ -26,7 +26,7 @@
                      ImgContent="@ImageContent"
                      ShrinkOnScroll="@ShrinkOnScroll"
                      Src="@AppBarImage"
-                     ScrollTarget="@($"[page-stack-id=\"{Index}\"]>.m-dialog")"
+                     ScrollTarget="@Data.Selector"
                      Light="@AppBarLight"
                      Dark="@AppBarDark">
                 <ChildContent>

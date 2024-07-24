@@ -1,27 +1,25 @@
 ﻿namespace Masa.Blazor.Presets.PageStack;
 
-public class StackPageData
+public class StackPageData(string absolutePath, int id)
 {
-    public StackPageData(string absolutePath)
-    {
-        Stacked = true;
-        AbsolutePath = absolutePath;
-    }
+    public int Id { get; } = id;
 
-    public Guid Id { get; init; } = Guid.NewGuid();
-
-    public string AbsolutePath { get; private set; }
+    public string AbsolutePath { get; private set; } = absolutePath;
 
     /// <summary>
     /// Indicates whether the current page is already on the stack.
     /// From the component point of view, indicates whether the
     /// Dialog component is displayed. 
     /// </summary>
-    public bool Stacked { get; set; }
+    public bool Stacked { get; internal set; } = true;
 
-    public string Selector { get; set; }
+    /// <summary>
+    /// The selector for the content area below the AppBar,
+    /// which is also the topmost scrollable area.
+    /// </summary>
+    public string Selector => $"[page-stack-id=\"{Id}\"] .m-page-stack-item__content";
 
-    public object? State { get; set; }
+    public object? State { get; private set; }
 
     public void UpdateState(object? state) => State = state;
 
@@ -56,12 +54,7 @@ public class StackPageData
     public event EventHandler<PageActiveStateEventArgs>? ActiveChanged;
 }
 
-public class PageActiveStateEventArgs : EventArgs
+public class PageActiveStateEventArgs(bool active) : EventArgs
 {
-    public PageActiveStateEventArgs(bool active)
-    {
-        Active = active;
-    }
-
-    public bool Active { get; }
+    public bool Active { get; } = active;
 }

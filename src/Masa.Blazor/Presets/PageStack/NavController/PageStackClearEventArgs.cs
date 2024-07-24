@@ -2,14 +2,14 @@ namespace Masa.Blazor.Presets.PageStack.NavController;
 
 public class PageStackClearEventArgs : EventArgs
 {
-    public PageStackClearEventArgs(string uri)
+    public PageStackClearEventArgs(string relativeUri)
     {
-        Uri = uri;
+        RelativeUri = relativeUri;
     }
 
     public PageStackClearEventArgs()
     {
     }
 
-    public string? Uri { get; }
+    public string? RelativeUri { get; }
 }

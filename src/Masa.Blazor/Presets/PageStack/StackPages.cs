@@ -5,7 +5,8 @@ namespace Masa.Blazor.Presets.PageStack;
 
 internal class StackPages : IEnumerable
 {
-    private List<StackPageData> _pages = new();
+    private int _index;
+    private readonly List<StackPageData> _pages = [];
 
     internal event EventHandler<StackPagesPushedEventArgs>? PagePushed;
 
@@ -13,7 +14,7 @@ internal class StackPages : IEnumerable
 
     internal void Push(string absolutePath)
     {
-        var page = new StackPageData(absolutePath);
+        var page = new StackPageData(absolutePath, _index++);
         Push(page);
     }
 
@@ -92,7 +93,7 @@ internal class StackPages : IEnumerable
     }
 
     internal void RemoveRange(int index, int count) => _pages.RemoveRange(index, count);
-    
+
     internal StackPageData ElementAt(int index) => _pages.ElementAt(index);
 
     internal void Clear() => _pages.Clear();
@@ -100,12 +101,7 @@ internal class StackPages : IEnumerable
     public IEnumerator GetEnumerator() => _pages.GetEnumerator();
 }
 
-internal class StackPagesPushedEventArgs : EventArgs
+internal class StackPagesPushedEventArgs(StackPageData page) : EventArgs
 {
-    public StackPagesPushedEventArgs(StackPageData page)
-    {
-        Page = page;
-    }
-
-    public StackPageData Page { get; }
+    public StackPageData Page { get; } = page;
 }

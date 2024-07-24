@@ -1,5 +1,8 @@
 ﻿@page "/blazor/examples/page-stack/tab3"
+@using Masa.Blazor.Presets.PageStack.NavController
 @layout PageStackLayout
+@inject PageStackNavController NavController
+@implements IDisposable
 
 <p class="caption">url: /blazor/examples/page-stack/tab3</p>
 
@@ -12,3 +15,24 @@
                   Language="html"
                   Style="font-size: 10px">
 </MSyntaxHighlight>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        NavController.PageClosed += NavControllerOnPageClosed;
+    }
+
+    private void NavControllerOnPageClosed(object? sender, PageStackPageClosedEventArgs e)
+    {
+        Console.Out.WriteLine($"{e.RelativeUri} closed");
+    }
+
+    public void Dispose()
+    {
+        NavController.PageClosed -= NavControllerOnPageClosed;
+    }
+
+}

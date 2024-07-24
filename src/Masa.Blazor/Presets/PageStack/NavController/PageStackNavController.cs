@@ -1,50 +1,49 @@
 ﻿using Masa.Blazor.Presets.PageStack.NavController;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public class PageStackNavController : IDisposable
+public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navigationManager)
 {
-    private readonly IJSRuntime _jsRuntime;
-    private readonly NavigationManager _navigationManager;
-
     /// <summary>
     /// Records the timestamp of the last action, shared by all actions.
     /// </summary>
     private long _lastActionTimestamp;
 
+    /// <summary>
+    /// Occurs when a new page is pushed onto the page stack.
+    /// </summary>
     public event EventHandler<PageStackPushEventArgs>? StackPush;
 
+    /// <summary>
+    /// Occurs when a page is popped from the page stack.
+    /// </summary>
     public event EventHandler<PageStackPopEventArgs>? StackPop;
 
+    /// <summary>
+    /// Occurs when a page is replaced by a new page.
+    /// </summary>
     public event EventHandler<PageStackReplaceEventArgs>? StackReplace;
 
+    /// <summary>
+    /// Occurs when the page stack is cleared.
+    /// </summary>
     public event EventHandler<PageStackClearEventArgs>? StackClear;
 
-    internal event EventHandler<LocationChangedEventArgs>? LocationChanged;
-
-    public PageStackNavController(IJSRuntime jsRuntime, NavigationManager navigationManager)
-    {
-        _jsRuntime = jsRuntime;
-        _navigationManager = navigationManager;
-        _navigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-    }
-
-    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        LocationChanged?.Invoke(this, e);
-    }
+    /// <summary>
+    /// Occurs when the page is closed.
+    /// </summary>
+    public event EventHandler<PageStackPageClosedEventArgs>? PageClosed;
 
     /// <summary>
     /// Push a new page onto the page stack.
     /// </summary>
-    /// <param name="uri"></param>
-    public void Push(string uri)
+    /// <param name="relativeUri"></param>
+    public void Push(string relativeUri)
     {
         ExecuteIfTimeElapsed(() =>
         {
-            StackPush?.Invoke(this, new PageStackPushEventArgs(uri));
-            _navigationManager.NavigateTo(uri);
+            StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri));
+            navigationManager.NavigateTo(relativeUri);
         });
     }
 
@@ -73,21 +72,21 @@ public class PageStackNavController : IDisposable
         ExecuteIfTimeElapsed(() =>
         {
             StackPop?.Invoke(this, new PageStackPopEventArgs(delta, state));
-            _ = _jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+            _ = jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
         });
     }
 
     /// <summary>
     /// Replace the current page with the new page.
     /// </summary>
-    /// <param name="uri"></param>
+    /// <param name="relativeUri"></param>
     /// <param name="state"></param>
-    public void Replace(string uri, object? state = null)
+    public void Replace(string relativeUri, object? state = null)
     {
         ExecuteIfTimeElapsed(() =>
         {
-            StackReplace?.Invoke(this, new PageStackReplaceEventArgs(uri, state));
-            _navigationManager.NavigateTo(uri, replace: true);
+            StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
+            navigationManager.NavigateTo(relativeUri, replace: true);
         });
     }
 
@@ -102,15 +101,15 @@ public class PageStackNavController : IDisposable
     /// <summary>
     /// Clear current page stack and navigate to the new tab.
     /// </summary>
-    /// <param name="uri"></param>
-    public void GoToTab(string uri)
+    /// <param name="relativeUri"></param>
+    public void GoToTab(string relativeUri)
     {
-        ExecuteIfTimeElapsed(() => { StackClear?.Invoke(this, new PageStackClearEventArgs(uri)); });
+        ExecuteIfTimeElapsed(() => { StackClear?.Invoke(this, new PageStackClearEventArgs(relativeUri)); });
     }
 
-    public void Dispose()
+    internal void NotifyPageClosed(string relativeUri)
     {
-        _navigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+        PageClosed?.Invoke(this, new PageStackPageClosedEventArgs(relativeUri));
     }
 
     private void ExecuteIfTimeElapsed(Action action)
