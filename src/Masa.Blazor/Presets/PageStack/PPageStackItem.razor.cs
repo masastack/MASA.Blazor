@@ -2,25 +2,15 @@
 
 public partial class PPageStackItem : MasaComponentBase
 {
-    [Parameter] public bool Active { get; set; }
+    [Inject] private PageStackNavController NavController { get; set; } = null!;
+
+    [Parameter] [EditorRequired] public StackPageData Data { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public bool CanRender { get; set; }
 
     [Parameter] public EventCallback OnGoBack { get; set; }
-
-    [Parameter] public Action<string>? SelectorCaptureAction { get; set; }
-
-    [Parameter] public int Index { get; set; }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            SelectorCaptureAction?.Invoke($"[page-stack-id=\"{Index}\"] .m-page-stack-item__content");
-        }
-    }
 
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
@@ -95,5 +85,12 @@ public partial class PPageStackItem : MasaComponentBase
     internal void Render()
     {
         StateHasChanged();
+    }
+
+    protected override ValueTask DisposeAsyncCore()
+    {
+        NavController.NotifyPageClosed(Data.AbsolutePath);
+
+        return base.DisposeAsyncCore();
     }
 }

@@ -1,14 +1,8 @@
 namespace Masa.Blazor.Presets.PageStack.NavController;
 
-public class PageStackReplaceEventArgs : EventArgs
+public class PageStackReplaceEventArgs(string relativeUri, object? state = null) : EventArgs
 {
-    public PageStackReplaceEventArgs(string uri, object? state = null)
-    {
-        Uri = uri;
-        State = state;
-    }
+    public string RelativeUri { get; } = relativeUri;
 
-    public string Uri { get; }
-
-    public object? State { get; }
+    public object? State { get; } = state;
 }
