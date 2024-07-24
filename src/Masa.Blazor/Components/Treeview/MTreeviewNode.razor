@@ -15,7 +15,7 @@
 
     private RenderFragment GenNode() => __builder =>
     {
-        <div class="@_rootModifierBuilder.Add("active", IsActive).AddClass(ActiveClass, IsActive).AddTextColor(Color, ActiveClass is null && IsActive)"
+        <div class="@_rootModifierBuilder.Add("active", IsActive).Add("selectable", SelectOnRowClick).AddClass(ActiveClass, IsActive).AddTextColor(Color, ActiveClass is null && IsActive)"
              style="@(StyleBuilder.Create().AddTextColor(Color, () => IsActive).Build())"
              @onclick="HandleOnClick">
             @GenLevel(Level)
@@ -96,6 +96,7 @@
                        Activatable="@Activatable"
                        ActiveClass="@ActiveClass"
                        Selectable="@Selectable"
+                       SelectOnRowClick="@SelectOnRowClick"
                        SelectedColor="@SelectedColor"
                        Color="@Color"
                        ExpandIcon="@ExpandIcon"

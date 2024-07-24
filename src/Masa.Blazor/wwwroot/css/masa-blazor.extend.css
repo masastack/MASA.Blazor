@@ -1645,3 +1645,9 @@ html.m-overlay-scroll-blocked {
 .m-toolbar.warning > .m-toolbar__content .m-icon {
     color: var(--m-theme-on-warning);
 }
+
+/* treeview */
+
+.m-treeview-node__root--selectable {
+    cursor: pointer;
+}

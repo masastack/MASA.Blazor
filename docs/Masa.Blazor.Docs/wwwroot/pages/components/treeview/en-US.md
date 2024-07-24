@@ -63,9 +63,11 @@ Setting `Rounded` prop You can make treeview nodes rounded.
 
 <masa-example file="Examples.components.treeview.Rounded"></masa-example>
 
-#### Selectable
+#### Selectable {updated-in=v1.7.0}
 
 Setting `Selectable` prop You can easily select treeview nodes and children.
+
+> Starting from v1.7.0, the `SelectOnRowClick` prop has been added, and its default value is `true` to select nodes on row click.
 
 <masa-example file="Examples.components.treeview.Selectable"></masa-example>
 
