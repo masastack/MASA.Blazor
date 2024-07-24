@@ -30,6 +30,8 @@
 
         [Parameter] public bool Selectable { get; set; }
 
+        [Parameter] public bool SelectOnRowClick { get; set; }
+
         [Parameter] public string? IndeterminateIcon { get; set; }
 
         [Parameter] public string? OnIcon { get; set; }
@@ -151,10 +153,18 @@
                 await CheckChildrenAsync();
                 await OpenAsync();
             }
-            else if (Activatable && !Disabled)
+            else if (!Disabled)
             {
-                Treeview.UpdateActive(Key, !IsActive);
-                await Treeview.EmitActiveAsync();
+                if (Activatable)
+                {
+                    Treeview.UpdateActive(Key, !IsActive);
+                    await Treeview.EmitActiveAsync();
+                }
+
+                if (Selectable && SelectOnRowClick)
+                {
+                    await HandleOnCheckAsync(args);
+                }
             }
         }
 
