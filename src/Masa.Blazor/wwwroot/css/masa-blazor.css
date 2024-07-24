@@ -3385,7 +3385,7 @@ progress {
 
 .dialog-transition-enter-active, .dialog-transition-leave-active {
     /* HACK: Temporarily comment out this code block because in high latency situations,
-         the transition animation of the dialog may not complete, 
+         the transition animation of the dialog may not complete,
          which can result in this CSS not being removed, making the dialog unclickable.
          Fix this when refactoring transition!*/
     /*pointer-events: none !important;*/
@@ -18274,19 +18274,6 @@ html.overflow-y-hidden {
 .theme--light.m-btn.m-btn--icon {
     color: var(--m-theme-light-on-surface);
 }
-.theme--light.m-btn:hover::before {
-    opacity: 0.08;
-}
-.theme--light.m-btn:focus::before {
-    opacity: 0.24;
-}
-.theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before {
-    opacity: 0.18;
-}
-.theme--light.m-btn--active:focus::before {
-    opacity: 0.16;
-}
-
 .theme--dark.m-btn {
     color: var(--m-theme-dark-on-surface);
 }
@@ -18309,17 +18296,31 @@ html.overflow-y-hidden {
 .theme--dark.m-btn.m-btn--icon {
     color: var(--m-theme-dark-on-surface);
 }
-.theme--dark.m-btn:hover::before {
-    opacity: 0.08;
-}
-.theme--dark.m-btn:focus::before {
-    opacity: 0.24;
-}
-.theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
-    opacity: 0.18;
-}
-.theme--dark.m-btn--active:focus::before {
-    opacity: 0.32;
+@media (hover: hover) {
+    .theme--light.m-btn:hover::before {
+        opacity: 0.08;
+    }
+    .theme--light.m-btn:focus::before {
+        opacity: 0.24;
+    }
+    .theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before {
+        opacity: 0.18;
+    }
+    .theme--light.m-btn--active:focus::before {
+        opacity: 0.16;
+    }
+    .theme--dark.m-btn:hover::before {
+        opacity: 0.08;
+    }
+    .theme--dark.m-btn:focus::before {
+        opacity: 0.24;
+    }
+    .theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
+        opacity: 0.18;
+    }
+    .theme--dark.m-btn--active:focus::before {
+        opacity: 0.32;
+    }
 }
 
 .m-btn {
