@@ -2,7 +2,7 @@
 
 public class TransitionJSModule : JSModule
 {
-    public TransitionJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/transition.js?version=v1.4.0")
+    public TransitionJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/transition.js?version=v1.7.0")
     {
     }
 
