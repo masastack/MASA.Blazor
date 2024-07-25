@@ -1,9 +1,9 @@
 ﻿namespace Masa.Blazor;
 
-public class BreakpointChangedEventArgs : MobileChangedEventArgs
+public class BreakpointChangedEventArgs(Breakpoints breakpoint, bool breakpointChanged, bool mobile, bool mobileChanged)
+    : MobileChangedEventArgs(mobile, mobileChanged)
 {
-    /// <summary>
-    /// Indicates whether the value of Mobile property has changed. First time is always false.
-    /// </summary>
-    public bool MobileChanged { get; set; }
+    public Breakpoints Breakpoint { get; } = breakpoint;
+
+    internal bool BreakpointChanged { get; } = breakpointChanged;
 }

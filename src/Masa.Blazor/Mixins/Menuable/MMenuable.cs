@@ -304,10 +304,10 @@ public abstract class MMenuable : MBootable
     {
         base.OnInitialized();
 
-        MasaBlazor.BreakpointChanged += MasaBlazorOnBreakpointChanged;
+        MasaBlazor.WindowSizeChanged += MasaBlazorOnWindowSizeChanged;
     }
 
-    private async void MasaBlazorOnBreakpointChanged(object? sender, BreakpointChangedEventArgs e)
+    private async void MasaBlazorOnWindowSizeChanged(object? sender, WindowSizeChangedEventArgs e)
     {
         if (!IsActive)
         {
@@ -427,7 +427,7 @@ public abstract class MMenuable : MBootable
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        MasaBlazor.BreakpointChanged -= MasaBlazorOnBreakpointChanged;
+        MasaBlazor.WindowSizeChanged -= MasaBlazorOnWindowSizeChanged;
 
         if (ContentElement.Context is not null)
         {

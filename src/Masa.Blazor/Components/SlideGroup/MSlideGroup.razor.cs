@@ -56,15 +56,13 @@ namespace Masa.Blazor
         {
             base.OnInitialized();
 
-            MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+            MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
             IsMobile = MasaBlazor.Breakpoint.Mobile;
         }
 
-        private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+        private async void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
         {
-            if (!e.MobileChanged) return;
-
-            IsMobile = MasaBlazor.Breakpoint.Mobile;
+            IsMobile = e.Mobile;
             await InvokeStateHasChangedAsync();
         }
 
@@ -385,7 +383,7 @@ namespace Masa.Blazor
 
         protected override async ValueTask DisposeAsyncCore()
         {
-            MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+            MasaBlazor.MobileChanged -= MasaBlazorOnMobileChanged;
             await ResizeJSModule.UnobserveAsync(Ref);
         }
     }

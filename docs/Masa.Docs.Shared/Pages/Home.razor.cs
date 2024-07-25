@@ -12,8 +12,6 @@ public partial class Home : ComponentBase
     [SupplyParameterFromQuery(Name = "v")]
     [Parameter] public string? Version { get; set; }
     
-    private bool _prevXs;
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -21,19 +19,10 @@ public partial class Home : ComponentBase
         MasaBlazor.BreakpointChanged += MasaBlazorOnBreakpointChanged;
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _prevXs = MasaBlazor.Breakpoint.Xs;
-        }
-    }
-
     private void MasaBlazorOnBreakpointChanged(object? sender, BreakpointChangedEventArgs e)
     {
-        if (_prevXs != MasaBlazor.Breakpoint.Xs)
+        if (e.Breakpoint == Breakpoints.Xs)
         {
-            _prevXs = MasaBlazor.Breakpoint.Xs;
             InvokeAsync(StateHasChanged);
         }
     }

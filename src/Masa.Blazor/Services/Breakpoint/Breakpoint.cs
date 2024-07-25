@@ -13,8 +13,6 @@ public class BreakpointOptions
 
 public class Breakpoint
 {
-    private bool _prevMobile;
-
     public Breakpoint()
     {
     }
@@ -81,7 +79,7 @@ public class Breakpoint
             Breakpoints.Xs => Thresholds.Xs,
             Breakpoints.Sm => Thresholds.Sm,
             Breakpoints.Md => Thresholds.Md,
-            _              => Thresholds.Lg,
+            _ => Thresholds.Lg,
         };
     }
 
@@ -90,9 +88,9 @@ public class Breakpoint
     public double ScrollBarWidth { get; internal set; }
 
     [Obsolete("Use MasaBlazor.BreakpointChanged instead")]
-    public event EventHandler<BreakpointChangedEventArgs> OnUpdate;
+    public event EventHandler<BreakpointChangedEventArgs>? OnUpdate;
 
-    internal Action<BreakpointChangedEventArgs> OnChanged;
+    internal Action<WindowSizeChangedEventArgs>? OnWindowResize;
 
     public void Deconstruct(
         out double width,
@@ -110,7 +108,7 @@ public class Breakpoint
     {
         JSRuntime = jsRuntime;
 
-        await UpdateAsync();
+        await ResizeAsync();
 
         _ = JSRuntime.AddHtmlElementEventListener("window", "resize", ResizeAsync,
             new EventListenerOptions { Passive = true },
@@ -118,11 +116,6 @@ public class Breakpoint
     }
 
     private async Task ResizeAsync()
-    {
-        await UpdateAsync();
-    }
-
-    public async Task UpdateAsync()
     {
         var height = await GetClientSizeAsync("Height");
         var width = await GetClientSizeAsync("Width");
@@ -152,6 +145,9 @@ public class Breakpoint
         LgAndDown = (xs || sm || md || lg) && !xl;
         LgAndUp = !(xs || sm || md) && (lg || xl);
         XlOnly = xl;
+
+        var prevBreakpoint = Name;
+        var prevMobile = Mobile;
 
         if (xs)
         {
@@ -186,19 +182,18 @@ public class Breakpoint
             Mobile = current <= max;
         }
 
-        var eventArgs = new BreakpointChangedEventArgs();
+        var breakpointChanged = prevBreakpoint != Name;
+        var mobileChanged = prevMobile != Mobile;
+        var eventArgs = new WindowSizeChangedEventArgs(Name, breakpointChanged, Mobile, mobileChanged);
 
         Initialized = true;
 
-        if (_prevMobile != Mobile)
+        if (breakpointChanged)
         {
-            _prevMobile = Mobile;
-            eventArgs.MobileChanged = true;
+            OnUpdate?.Invoke(this, eventArgs);
         }
 
-        OnUpdate?.Invoke(this, eventArgs);
-
-        OnChanged?.Invoke(eventArgs);
+        OnWindowResize?.Invoke(eventArgs);
     }
 
     private async Task<double> GetClientSizeAsync(string sizeName)
