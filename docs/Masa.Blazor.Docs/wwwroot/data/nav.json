@@ -350,6 +350,11 @@
         "releasedOn": "v1.0.4"
       },
       {
+        "title": "toggles",
+        "state": "new",
+        "releasedOn": "v1.7.0"
+      },
+      {
         "title": "watermark",
         "state": "new",
         "releasedOn": "v1.1.1"

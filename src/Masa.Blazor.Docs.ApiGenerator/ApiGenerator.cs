@@ -181,8 +181,7 @@ public class ApiGenerator : IIncrementalGenerator
 
                 if (attrs.Any(attr => attr.AttributeClass?.Name == BlazorParameterAttributeName))
                 {
-                    var type = parameterSymbol.Type as INamedTypeSymbol;
-                    if (type is null || ignoreParameters.Contains(parameterSymbol.Name))
+                    if (ignoreParameters.Contains(parameterSymbol.Name))
                     {
                         continue;
                     }
@@ -196,32 +195,42 @@ public class ApiGenerator : IIncrementalGenerator
                         defaultValue = GetDefaultValueOnApiParameterAttribute(apiParameterAttribute);
                     }
 
-                    var typeText = GetTypeText(type);
+                    var isObsolete =
+                        attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == "ObsoleteAttribute") is not null;
 
-                    if (!s_typeDescCache.TryGetValue(typeText, out var typeDesc))
+                    if (parameterSymbol.Type is ITypeParameterSymbol typeParameterSymbol)
                     {
-                        typeDesc = GetTypeDesc(type);
-                        if (!string.IsNullOrWhiteSpace(typeDesc))
+                        defaultParameters.Add(new ParameterInfo(parameterSymbol.Name, typeParameterSymbol.Name, null,
+                            defaultValue, isObsolete, false, releasedOn));
+                    }
+                    else if (parameterSymbol.Type is INamedTypeSymbol namedTypeSymbol)
+                    {
+                        var typeText = GetTypeText(namedTypeSymbol);
+
+                        if (!s_typeDescCache.TryGetValue(typeText, out var typeDesc))
                         {
-                            s_typeDescCache.Add(typeText, typeDesc!);
+                            typeDesc = GetTypeDesc(namedTypeSymbol);
+                            if (!string.IsNullOrWhiteSpace(typeDesc))
+                            {
+                                s_typeDescCache.Add(typeText, typeDesc!);
+                            }
                         }
-                    }
 
-                    var isObsolete = attrs.FirstOrDefault(attr => attr.AttributeClass?.Name == "ObsoleteAttribute") is not null;
+                        var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue,
+                            isObsolete, false, releasedOn);
 
-                    var parameterInfo = new ParameterInfo(parameterSymbol.Name, typeText, typeDesc, defaultValue, isObsolete, false, releasedOn);
-
-                    if (type.Name.StartsWith("RenderFragment"))
-                    {
-                        contentParameters.Add(parameterInfo);
-                    }
-                    else if (type.Name.StartsWith("EventCallback"))
-                    {
-                        eventParameters.Add(parameterInfo);
-                    }
-                    else
-                    {
-                        defaultParameters.Add(parameterInfo);
+                        if (namedTypeSymbol.Name.StartsWith("RenderFragment"))
+                        {
+                            contentParameters.Add(parameterInfo);
+                        }
+                        else if (namedTypeSymbol.Name.StartsWith("EventCallback"))
+                        {
+                            eventParameters.Add(parameterInfo);
+                        }
+                        else
+                        {
+                            defaultParameters.Add(parameterInfo);
+                        }
                     }
                 }
             }

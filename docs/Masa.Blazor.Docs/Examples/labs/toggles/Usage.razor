@@ -1,0 +1,11 @@
+﻿<div class="text-center">
+    <MToggle @bind-Value="_on" DataOn="@("mdi-check")" DataOff="@("mdi-close")">
+        <MButton OnClick="@context.Toggle" IconName="@context.Data"/>
+    </MToggle>
+</div>
+
+@code {
+
+    private bool _on;
+
+}
