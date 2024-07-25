@@ -1,0 +1,18 @@
+﻿<div class="text-center">
+    <MToggle @bind-Value="_on" DataOn="_dataOn" DataOff="_dataOff">
+        <MButton OnClick="@context.Toggle" LeftIconName="@context.Data?.Icon">
+            @context.Data?.Label
+        </MButton>
+    </MToggle>
+</div>
+
+@code {
+
+    private bool _on;
+
+    private record Model(string Label, string Icon);
+
+    private Model _dataOn = new Model("On", "mdi-check");
+    private Model _dataOff = new Model("Off", "mdi-close");
+
+}

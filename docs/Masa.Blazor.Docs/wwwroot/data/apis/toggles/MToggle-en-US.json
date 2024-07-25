@@ -1,0 +1,10 @@
+{
+  "props": {
+    "dataOn": "The data when `Value` is `true`",
+    "dataOff": "The data when `Value` is `false`"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

@@ -1,0 +1,31 @@
+﻿<div class="text-center">
+    <MMenu @bind-Value="_on" OffsetY>
+        <ActivatorContent Context="activator">
+            <MToggle Value="_on" DataOn="@("mdi-toggle-switch")" DataOff="@("mdi-toggle-switch-off")">
+                <MButton IconName="@context.Data" @attributes="@activator.Attrs"/>
+            </MToggle>
+        </ActivatorContent>
+        <ChildContent>
+            <MList>
+                @foreach (var item in items)
+                {
+                    <MListItem Title="@item"/>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
+</div>
+
+@code {
+
+    private bool _on;
+
+    string[] items =
+    [
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    ];
+
+}

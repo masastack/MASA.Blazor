@@ -1,0 +1,10 @@
+{
+  "props": {
+    "dataOn": "当 `Value` 为`true`时的值",
+    "dataOff": "当 `Value` 为`false`时的值"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}
