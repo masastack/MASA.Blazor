@@ -137,14 +137,14 @@
                 Align = DataTableHeaderAlign.Start,
                 Sortable = false,
                 Value = nameof(Dessert.Name),
-                Class = "editable-cell",
+                CellClass = "editable-cell",
                 CellRender = e => EditableDessertName(e),
             },
             new()
             {
                 Text = "Calories",
                 Value = nameof(Dessert.Calories),
-                Class = "editable-cell",
+                CellClass = "editable-cell",
                 Width = 150,
                 CellRender = e => EditableCalories(e)
             },
