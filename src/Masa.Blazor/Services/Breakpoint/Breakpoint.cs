@@ -16,7 +16,7 @@ public class Breakpoint
     public Breakpoint()
     {
     }
-
+    
     private IJSRuntime? JSRuntime { get; set; }
 
     /// <summary>
@@ -182,11 +182,13 @@ public class Breakpoint
             Mobile = current <= max;
         }
 
-        var breakpointChanged = prevBreakpoint != Name;
-        var mobileChanged = prevMobile != Mobile;
-        var eventArgs = new WindowSizeChangedEventArgs(Name, breakpointChanged, Mobile, mobileChanged);
-
+        // when breakpoint service is initialized at the first time,
+        // breakpointChanged and mobileChanged are always true
+        var breakpointChanged = Initialized == false || prevBreakpoint != Name;
+        var mobileChanged = Initialized == false || prevMobile != Mobile;
         Initialized = true;
+
+        var eventArgs = new WindowSizeChangedEventArgs(Name, breakpointChanged, Mobile, mobileChanged);
 
         if (breakpointChanged)
         {

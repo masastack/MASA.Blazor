@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
+public partial class MDataTable<TItem> : MDataIterator<TItem>
 {
     [Inject]
     public MasaBlazor MasaBlazor { get; set; } = null!;
@@ -78,6 +78,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     public bool ShowSelect { get; set; }
 
     [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.4.0")]
     public bool FixedSelect { get; set; }
 
     [Parameter]
@@ -127,8 +128,6 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
         get => GetValue(DataTableResizeMode.None);
         set => SetValue(value);
     }
-
-    protected MobileProvider? MobileProvider { get; set; }
 
     public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
     {
@@ -194,9 +193,34 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
     
     private bool HasEllipsis => Headers.Any(u => u.HasEllipsis);
 
-    public bool IsMobile => MobileProvider?.IsMobile ?? false;
+    private bool IsMobile { get; set; }
+    
+    private void CalculateIsMobile()
+    {
+        var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
 
-    public Dictionary<string, object> ColspanAttrs => new()
+        if (width == 0)
+        {
+            IsMobile = false;
+            return;
+        }
+
+        if (mobileBreakpoint.Equals(MobileBreakpoint))
+        {
+            IsMobile = mobile;
+            return;
+        }
+
+        if (MobileBreakpoint.IsT1)
+        {
+            IsMobile = width < MobileBreakpoint.AsT1;
+            return;
+        }
+
+        IsMobile = name == MobileBreakpoint.AsT0;
+    }
+
+    public Dictionary<string, object?> ColspanAttrs => new()
     {
         { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
     };
@@ -223,8 +247,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
         CustomFilter = CustomFilterWithColumns;
         ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
 
-        MobileProvider = new MobileProvider(this);
-        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        CalculateIsMobile();
+        MasaBlazor.WindowSizeChanged += MasaBlazorWindowSizeChanged;
         MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
     }
 
@@ -277,10 +301,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
         return Headers.FirstOrDefault(h => h.Value == value)?.Text ?? value;
     }
 
-    private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    private void MasaBlazorWindowSizeChanged(object? sender, WindowSizeChangedEventArgs e)
     {
-        MobileProvider = new MobileProvider(this);
-        await InvokeStateHasChangedAsync();
+        CalculateIsMobile();
+        InvokeAsync(StateHasChanged);
     }
 
     public Task HandleOnRowClickAsync(MouseEventArgs args, TItem item)
@@ -362,7 +386,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>, IMobile
 
     protected override ValueTask DisposeAsyncCore()
     {
-        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+        MasaBlazor.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
         MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
 
         return base.DisposeAsyncCore();

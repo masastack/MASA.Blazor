@@ -189,7 +189,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
     {
         base.OnInitialized();
 
-        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        MasaBlazor.BreakpointChanged += BreakpointOnOnUpdate;
     }
 
     
@@ -197,7 +197,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
     {
         base.OnAfterRender(firstRender);
 
-        // DescriptionItem may be update after render, so we need to render twice
+        // DescriptionItem may be updated after render, so we need to render twice
         if (_renderTwice)
         {
             _renderTwice = false;
@@ -209,9 +209,9 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
         }
     }
 
-    private async void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
     {
-        await InvokeStateHasChangedAsync();
+        InvokeAsync(StateHasChanged);
     }
 
     private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
@@ -277,7 +277,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
 
     protected override ValueTask DisposeAsyncCore()
     {
-        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+        MasaBlazor.BreakpointChanged -= BreakpointOnOnUpdate;
 
         return base.DisposeAsyncCore();
     }
