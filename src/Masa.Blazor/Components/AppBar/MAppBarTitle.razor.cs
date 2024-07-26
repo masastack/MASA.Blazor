@@ -25,18 +25,17 @@ public partial class MAppBarTitle : MasaComponentBase
     {
         base.OnInitialized();
 
-        MasaBlazor.BreakpointChanged += MasaBlazorOnBreakpointChanged;
+        MasaBlazor.WindowSizeChanged += MasaBlazorOnBreakpointChanged;
     }
 
-    private async void MasaBlazorOnBreakpointChanged(object? sender, BreakpointChangedEventArgs e)
+    private async void MasaBlazorOnBreakpointChanged(object? sender, WindowSizeChangedEventArgs e)
     {
-        if (Math.Abs(_windowsWidth - MasaBlazor.Breakpoint.Width) > 0.01)
-        {
-            _windowsWidth = MasaBlazor.Breakpoint.Width;
+        if (!(Math.Abs(_windowsWidth - MasaBlazor.Breakpoint.Width) > 0.01)) return;
 
-            await UpdateDimensions();
-            await InvokeAsync(StateHasChanged);
-        }
+        _windowsWidth = MasaBlazor.Breakpoint.Width;
+
+        await UpdateDimensions();
+        await InvokeAsync(StateHasChanged);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -89,7 +88,7 @@ public partial class MAppBarTitle : MasaComponentBase
 
     protected override ValueTask DisposeAsyncCore()
     {
-        MasaBlazor.BreakpointChanged -= MasaBlazorOnBreakpointChanged;
+        MasaBlazor.WindowSizeChanged -= MasaBlazorOnBreakpointChanged;
         return base.DisposeAsyncCore();
     }
 }

@@ -25,22 +25,17 @@
     {
         base.OnInitialized();
 
-        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
     }
 
-    private void BreakpointOnOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
     {
-        if (!e.MobileChanged)
-        {
-            return;
-        }
-
         InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+        MasaBlazor.MobileChanged -= MasaBlazorOnMobileChanged;
     }
 
 }

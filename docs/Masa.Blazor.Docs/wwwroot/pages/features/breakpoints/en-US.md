@@ -64,9 +64,6 @@ public class Breakpoint
 
     // Scrollbar
     public double ScrollBarWidth { get; set; }
-
-    // Call if resize
-    public event Func<Task> OnUpdate;
 }
 ```
 

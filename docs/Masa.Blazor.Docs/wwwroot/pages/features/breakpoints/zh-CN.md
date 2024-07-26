@@ -64,9 +64,6 @@ public class Breakpoint
 
     // 滚动条宽度
     public double ScrollBarWidth { get; set; }
-
-    // 大小发生变化时触发的事件
-    public event Func<Task> OnUpdate;
 }
 ```
 

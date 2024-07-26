@@ -15,16 +15,20 @@
         {
             RTL = rtl;
             Breakpoint = breakpoint;
-            Breakpoint.OnChanged = e =>
+            Breakpoint.OnWindowResize = e =>
             {
-                BreakpointChanged?.Invoke(this, e);
+                WindowSizeChanged?.Invoke(this, e);
+
+                if (e.BreakpointChanged)
+                {
+                    BreakpointChanged?.Invoke(this, e);
+                }
 
                 if (e.MobileChanged)
                 {
                     MobileChanged?.Invoke(this, e);
                 }
             };
-
             Application = application;
             Theme = theme;
             Icons = icons;
@@ -66,6 +70,11 @@
         public event EventHandler? RTLChanged;
 
         public event Action<Theme>? OnThemeChange;
+
+        /// <summary>
+        /// An event that fires when the window size has changed.
+        /// </summary>
+        public event EventHandler<WindowSizeChangedEventArgs>? WindowSizeChanged; 
 
         /// <summary>
         /// An event that fires when the breakpoint has changed.

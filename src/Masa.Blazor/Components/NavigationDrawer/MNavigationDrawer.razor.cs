@@ -342,7 +342,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
         _prevPermanent = Permanent;
 
-        MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
+        MasaBlazor.BreakpointChanged += OnBreakpointOnUpdate;
 
         if (Value == null && ValueChanged.HasDelegate)
         {
@@ -592,7 +592,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     protected override async ValueTask DisposeAsyncCore()
     {
         RemoveApplication();
-        MasaBlazor!.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
+        MasaBlazor!.BreakpointChanged -= OnBreakpointOnUpdate;
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         NavigationManager!.LocationChanged -= OnLocationChanged;
         await OutsideClickJsModule.UnbindAndDisposeAsync();
