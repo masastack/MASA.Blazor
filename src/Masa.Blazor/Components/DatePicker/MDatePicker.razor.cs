@@ -322,6 +322,32 @@ public partial class MDatePicker<TValue> : MasaComponentBase
         yield return "m-picker--date";
     }
 
+    private async Task OnYearClickAsync(int year)
+    {
+        TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
+        if (Type == DatePickerType.Year)
+        {
+            // multiple mode is not supported in year mode 
+
+            Value = TableDate is TValue val ? val : default;
+
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(Value);
+            }
+
+            //REVIEW:  
+            if (OnInput.HasDelegate)
+            {
+                await OnInput.InvokeAsync();
+            }
+        }
+        else
+        {
+            InternalActivePicker = DatePickerType.Month;
+        }
+    }
+
     private async Task OnMonthClickAsync(DateOnly value)
     {
         if (Type == DatePickerType.Date)

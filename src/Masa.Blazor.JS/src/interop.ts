@@ -473,7 +473,8 @@ export function scrollToElement(target, offset: number, behavior?: ScrollBehavio
 export function scrollToActiveElement(
   container,
   element = ".active",
-  position: "center" | number = "center"
+  position: "center" | number = "center",
+  smooth: boolean = false
 ) {
   let containerEl: HTMLElement = getDom(container);
 
@@ -486,12 +487,9 @@ export function scrollToActiveElement(
     return;
   }
 
-  if (position === 'center') {
-    containerEl.scrollTop = activeEl.offsetTop - containerEl.offsetHeight / 2 + activeEl.offsetHeight / 2;
-  }
-  else {
-    containerEl.scrollTop = activeEl.offsetTop - position
-  }
+  const top: number = position === 'center' ? activeEl.offsetTop - containerEl.offsetHeight / 2 + activeEl.offsetHeight / 2 : activeEl.offsetTop - position;
+
+  containerEl.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
 }
 
 export function addClsToFirstChild(element, className) {

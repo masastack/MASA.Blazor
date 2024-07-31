@@ -21,6 +21,8 @@ public partial class MDatePickerYears : MasaComponentBase
 
     [Parameter] public CultureInfo Locale { get; set; } = null!;
 
+    [Parameter] public DatePickerType Type { get; set; }
+
     private Func<DateOnly, string> Formatter
     {
         get
@@ -39,6 +41,11 @@ public partial class MDatePickerYears : MasaComponentBase
     {
         await OnInput.InvokeAsync(year);
         await OnYearClick.InvokeAsync(year);
+
+        if (Type == DatePickerType.Year)
+        {
+            _ = ScrollToActiveElementAsync(true);
+        }
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -52,14 +59,14 @@ public partial class MDatePickerYears : MasaComponentBase
 
         if (firstRender)
         {
-            var handle = DotNetObjectReference.Create(new IntersectInvoker(OnIntersectAsync));
+            var handle = DotNetObjectReference.Create(new IntersectInvoker(_ => ScrollToActiveElementAsync()));
             await IntersectJSModule.ObserverAsync(Ref, handle);
         }
     }
-
-    private async Task OnIntersectAsync(IntersectEventArgs arg)
+    
+    private async Task ScrollToActiveElementAsync(bool smooth = false)
     {
-        await Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, Ref);
+        await Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, Ref, ".active", "center", smooth);
     }
 
     protected override async ValueTask DisposeAsyncCore()
