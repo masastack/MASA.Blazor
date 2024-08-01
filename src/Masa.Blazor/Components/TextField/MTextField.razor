@@ -39,7 +39,7 @@
                     Value="@LabelValue"
                     @ref="@LabelReference"
                     @onclick:preventDefault="@preventDefaultOnClick">
-                @RenderFragments.RenderFragmentOrText(LabelContent, Label, wrapperTag: null)
+                @RenderFragments.RenderFragmentOrText(LabelContent, ComputedLabel, wrapperTag: null)
             </MLabel>
         }
     };

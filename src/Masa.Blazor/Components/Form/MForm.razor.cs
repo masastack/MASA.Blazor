@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Reflection;
 using Masa.Blazor.Components.Form;
 using Masa.Blazor.Components.Input;
@@ -7,8 +8,6 @@ namespace Masa.Blazor;
 
 public partial class MForm : MasaComponentBase
 {
-    [Inject] public IServiceProvider ServiceProvider { get; set; } = null!;
-
     [Parameter] public RenderFragment<FormContext>? ChildContent { get; set; }
 
     [Parameter] public EventCallback<EventArgs> OnSubmit { get; set; }
@@ -33,19 +32,30 @@ public partial class MForm : MasaComponentBase
 
     [Parameter] public EventCallback OnInvalidSubmit { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(true, ReleasedOn = "v1.7.0")]
+    public bool AutoLabel { get; set; } = true;
+
+    internal ConcurrentDictionary<string, string> AutoLabelMap { get; } = new();
+
     private static readonly ConcurrentDictionary<Type, PropertyInfo[]> s_modelPropertiesMap = new();
 
     private object? _oldModel;
-    private IDisposable? _editContextValidation;
 
     public EditContext? EditContext { get; protected set; }
 
     public FormContext? FormContext { get; private set; }
 
-    private ValidationMessageStore? ValidationMessageStore { get; set; }
+    internal ValidationMessageStore? ValidationMessageStore { get; private set; }
 
-    private List<IValidatable> Validatables { get; } = new();
-    
+    public List<IValidatable> Validatables { get; } = new();
+
+    /// <summary>
+    /// The type of property attribute used to generate the label,
+    /// the default value is same as <see cref="FFormAutoLabelOptionsAttributeType"/>.
+    /// </summary>
+    internal Type? LabelAttributeType { get; set; } = typeof(DisplayNameAttribute);
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -54,9 +64,7 @@ public partial class MForm : MasaComponentBase
         {
             EditContext = new EditContext(Model);
             FormContext = new FormContext(EditContext, this);
-
             ValidationMessageStore = new ValidationMessageStore(EditContext);
-            _editContextValidation = EditContext.EnableValidation(ValidationMessageStore, ServiceProvider, EnableI18n);
 
             _oldModel = Model;
         }
@@ -78,14 +86,41 @@ public partial class MForm : MasaComponentBase
         _ = UpdateValue(valid);
     }
 
-    public void Register(IValidatable validatable)
+    /// <summary>
+    /// Register a validatable component to the form
+    /// </summary>
+    /// <param name="validatable"></param>
+    internal void Register(IValidatable validatable)
     {
         Validatables.Add(validatable);
+        OnValidatableChanged?.Invoke(this,
+            new ValidatableChangedEventArgs(validatable, ValidatableChangedType.Register));
     }
 
+    /// <summary>
+    /// Unregister a validatable component from the form
+    /// </summary>
+    /// <param name="validatable"></param>
     internal void Remove(IValidatable validatable)
     {
         Validatables.Remove(validatable);
+        OnValidatableChanged?.Invoke(this,
+            new ValidatableChangedEventArgs(validatable, ValidatableChangedType.Unregister));
+    }
+
+    public event EventHandler<ValidatableChangedEventArgs>? OnValidatableChanged;
+
+    public enum ValidatableChangedType
+    {
+        Register,
+        Unregister
+    }
+
+    public class ValidatableChangedEventArgs(IValidatable validatable, ValidatableChangedType type) : EventArgs
+    {
+        public IValidatable Validatable { get; } = validatable;
+
+        public ValidatableChangedType Type { get; } = type;
     }
 
     private async Task HandleOnSubmitAsync(EventArgs args)
@@ -130,7 +165,7 @@ public partial class MForm : MasaComponentBase
                 valid = false;
             }
         }
-        
+
         if (EditContext != null)
         {
             var success = EditContext.Validate();
@@ -338,6 +373,31 @@ public partial class MForm : MasaComponentBase
     }
 
     [MasaApiPublicMethod]
+    public void Reset(FieldIdentifier fieldIdentifier)
+    {
+        var validatable = Validatables.FirstOrDefault(item => item.ValueIdentifier.Equals(fieldIdentifier));
+        if (validatable is null)
+        {
+            throw new ArgumentException($"Field {fieldIdentifier.FieldName} not found in form.");
+        }
+        
+        Reset(validatable);
+    }
+
+    [MasaApiPublicMethod]
+    public void Reset(IValidatable validatable)
+    {
+        if (validatable.ValueIdentifier.HasValue)
+        {
+            EditContext?.MarkAsUnmodified(validatable.ValueIdentifier.Value);
+        }
+        
+        validatable.Reset();
+
+        UpdateValidValue();
+    }
+
+    [MasaApiPublicMethod]
     public void ResetValidation()
     {
         EditContext?.MarkAsUnmodified();
@@ -348,6 +408,31 @@ public partial class MForm : MasaComponentBase
         }
 
         _ = UpdateValue(true);
+    }
+    
+    [MasaApiPublicMethod]
+    public void ResetValidation(FieldIdentifier fieldIdentifier)
+    {
+        var validatable = Validatables.FirstOrDefault(item => item.ValueIdentifier.Equals(fieldIdentifier));
+        if (validatable is null)
+        {
+            throw new ArgumentException($"Field {fieldIdentifier.FieldName} not found in form.");
+        }
+        
+        ResetValidation(validatable);
+    }
+    
+    [MasaApiPublicMethod]
+    public void ResetValidation(IValidatable validatable)
+    {
+        if (validatable.ValueIdentifier.HasValue)
+        {
+            EditContext?.MarkAsUnmodified(validatable.ValueIdentifier.Value);
+        }
+        
+        validatable.ResetValidation();
+
+        UpdateValidValue();
     }
 
     private async Task UpdateValue(bool val)
@@ -361,12 +446,5 @@ public partial class MForm : MasaComponentBase
             Value = val;
             StateHasChanged();
         }
-    }
-
-    protected override async ValueTask DisposeAsyncCore()
-    {
-        _editContextValidation?.Dispose();
-
-        await base.DisposeAsyncCore();
     }
 }

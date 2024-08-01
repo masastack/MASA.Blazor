@@ -9,6 +9,17 @@
               @onsubmit="HandleOnSubmitAsync"
               @attributes="@Attributes">
             @ChildContent?.Invoke(FormContext!)
+
+            @if (AutoLabel)
+            {
+                <Masa.Blazor.Components.Form.FormInputLabelAutoGenerator />
+            }
+
+            @if (EditContext is not null)
+            {
+                <Masa.Blazor.Components.Form.ObjectGraphDataAnnotationsValidator />
+                <Masa.Blazor.Components.Form.FluentValidationValidator />
+            }
         </form>
     </CascadingValue>
 </CascadingValue>

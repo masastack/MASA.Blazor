@@ -1,8 +1,9 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Input;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInput
+public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInput, IInput
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
@@ -120,7 +121,11 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
 
     protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
 
-    public virtual bool HasLabel => LabelContent != null || Label != null;
+    public virtual bool HasLabel => LabelContent != null || ComputedLabel != null;
+
+    public string? ComputedLabel => Label ?? _formLabel;
+
+    private string? _formLabel;
 
     public virtual bool HasDetails => MessagesToDisplay.Count > 0;
 
@@ -325,5 +330,10 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     public void ResetFilter()
     {
         Reset();
+    }
+
+    public void SetFormLabel(string input)
+    {
+        _formLabel = input;
     }
 }

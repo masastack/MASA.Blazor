@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Form;
+using Masa.Blazor.Components.Input;
 
 namespace Masa.Blazor;
 
@@ -21,9 +22,21 @@ public class FormContext
 
     public bool Validate() => Form.Validate();
 
+    public bool Validate(FieldIdentifier fieldIdentifier) => Form.Validate(fieldIdentifier);
+
+    public bool Validate(IValidatable validatable) => Form.Validate(validatable);
+
     public void Reset() => Form.Reset();
 
+    public void Reset(FieldIdentifier fieldIdentifier) => Form.Reset(fieldIdentifier);
+
+    public void Reset(IValidatable validatable) => Form.Reset(validatable);
+
     public void ResetValidation() => Form.ResetValidation();
+
+    public void ResetValidation(FieldIdentifier fieldIdentifier) => Form.ResetValidation(fieldIdentifier);
+
+    public void ResetValidation(IValidatable validatable) => Form.ResetValidation(validatable);
 
     public bool IsValid => Form.Value;
 
