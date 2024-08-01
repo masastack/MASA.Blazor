@@ -64,7 +64,7 @@ public partial class MPagination : MasaComponentBase
         set => SetValue(value);
     }
 
-    private bool prevMiniVariant;
+    private bool _internalMiniVariant;
 
     public bool IsDark
     {
@@ -109,11 +109,11 @@ public partial class MPagination : MasaComponentBase
         }
 #endif
 
-        if (IsDirtyParameter(nameof(MiniVariant)))
+        if (IsAuto is false)
         {
-            if (MiniVariant != prevMiniVariant)
+            if (MiniVariant != _internalMiniVariant)
             {
-                prevMiniVariant = MiniVariant;
+                _internalMiniVariant = MiniVariant;
             }
         }
     }
@@ -306,54 +306,76 @@ public partial class MPagination : MasaComponentBase
     protected override async ValueTask DisposeAsyncCore()
     {
         await IntersectJSModule.UnobserveAsync(Ref);
+        MasaBlazor.WindowSizeChanged -= MasaBlazor_WindowSizeChanged;
     }
 
     protected override void OnInitialized()
     {
-        MasaBlazor.WindowSizeChanged -= MasaBlazor_WindowSizeChanged;
-        MasaBlazor.WindowSizeChanged += MasaBlazor_WindowSizeChanged;
+        base.OnInitialized();
+        if (IsAuto)
+        {
+            MasaBlazor.WindowSizeChanged -= MasaBlazor_WindowSizeChanged;
+            MasaBlazor.WindowSizeChanged += MasaBlazor_WindowSizeChanged;
+        }
     }
-    
+
     private async void MasaBlazor_WindowSizeChanged(object? sender, BreakpointChangedEventArgs e)
     {
-        if (IsDirtyParameter(nameof(MiniVariant)))
+        if (IsAuto is true)
         {
-            return;
+            var isMiniVaraint = IsMiniVariant();
+            if (isMiniVaraint != _internalMiniVariant)
+            {
+                _internalMiniVariant = isMiniVaraint;
+                if (MiniVariantChanged.HasDelegate)
+                {
+                    await MiniVariantChanged.InvokeAsync(_internalMiniVariant);
+                }
+                StateHasChanged();
+            }
         }
 
-        var isM = CalMobileBreakpoint();
-        if (isM != prevMiniVariant)
-        {
-            prevMiniVariant = isM;
-            if (MiniVariantChanged.HasDelegate)
-            {
-                await MiniVariantChanged.InvokeAsync(prevMiniVariant);
-            }
-            StateHasChanged();
-        }
+        
     }
-    
-    private bool CalMobileBreakpoint() => CalMobileBreakpoint(MasaBlazor, MobileBreakpoint);
-    
-    private static bool CalMobileBreakpoint(MasaBlazor masaBlazor, OneOf<Breakpoints, double> mbpParam)
+
+    private bool IsMiniVariant()
     {
-        var (width, mobile, name, mobileBreakpoint) = masaBlazor.Breakpoint;
+        var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
 
         if (width == 0)
         {
             return false;
         }
 
-        if (mobileBreakpoint.Equals(mbpParam))
+        if (mobileBreakpoint.Equals(MobileBreakpoint))
         {
             return mobile;
         }
 
-        if (mbpParam.IsT1)
+        if (MobileBreakpoint.IsT1)
         {
-            return width <= mbpParam.AsT1;
+            return width <= MobileBreakpoint.AsT1;
         }
 
-        return name <= mbpParam.AsT0;
+        return name <= MobileBreakpoint.AsT0;
+    }
+    private bool? isAuto;
+    private bool IsAuto => isAuto ?? InitializeIsAuto();
+    private bool InitializeIsAuto()
+    {
+        if (isAuto is null)
+        {
+            var minichangedHasDelegate = MiniVariantChanged.HasDelegate;
+            var miniHasDelegate = IsDirtyParameter(nameof(MiniVariant));
+            isAuto = (minichangedHasDelegate, miniHasDelegate) switch
+            {
+                (true, true) => true,
+                (false, true) => false,
+                (true, false) => true,
+                (false, false) => true,
+            };
+        }
+
+        return isAuto!.Value;
     }
 }
