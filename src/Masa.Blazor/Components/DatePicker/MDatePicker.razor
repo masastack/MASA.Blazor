@@ -46,7 +46,7 @@
         ? null
         : __builder =>
         {
-            <MDatePickerTitle Date="@(Formatters.TitleDate(MultipleValue))"
+            <MDatePickerTitle Date="@(Type == DatePickerType.Year ? Formatters.Year(TableDate) : Formatters.TitleDate(MultipleValue))"
                               Disabled="@Disabled"
                               Readonly="@Readonly"
                               SelectingYear="@(InternalActivePicker == DatePickerType.Year)"
@@ -70,15 +70,10 @@
                           Max="@MaxYear"
                           Value="@TableYear"
                           Locale="@CurrentLocale"
-                          OnInput="@OnInput"
+                          Type="@Type"
+                          OnInput="@OnYearClickAsync"
                           OnYearClick="@OnYearClick">
         </MDatePickerYears>
-
-        void OnInput(int year)
-        {
-            TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
-            InternalActivePicker = DatePickerType.Month;
-        }
     };
 
     private RenderFragment GenTableHeader() => __builder =>
