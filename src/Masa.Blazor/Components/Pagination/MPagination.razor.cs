@@ -47,6 +47,25 @@ public partial class MPagination : MasaComponentBase
 
     [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
+    [Parameter, MasaApiParameter(false, "v1.7.0")]
+    public bool MiniVariant
+    {
+        get => GetValue<bool>(false);
+        set => SetValue(value);
+    }
+
+    [Parameter, MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public EventCallback<bool> MiniVariantChanged { get; set; }
+
+    [Parameter, MasaApiParameter(600, "v1.7.0")]
+    public OneOf<Breakpoints, double> MobileBreakpoint
+    {
+        get => GetValue<OneOf<Breakpoints, double>>(600);
+        set => SetValue(value);
+    }
+
+    private bool prevMiniVariant;
+
     public bool IsDark
     {
         get
@@ -79,17 +98,25 @@ public partial class MPagination : MasaComponentBase
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
 
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+#if NET8_0_OR_GREATER
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
         }
 #endif
+
+        if (IsDirtyParameter(nameof(MiniVariant)))
+        {
+            if (MiniVariant != prevMiniVariant)
+            {
+                prevMiniVariant = MiniVariant;
+            }
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -279,5 +306,54 @@ public partial class MPagination : MasaComponentBase
     protected override async ValueTask DisposeAsyncCore()
     {
         await IntersectJSModule.UnobserveAsync(Ref);
+    }
+
+    protected override void OnInitialized()
+    {
+        MasaBlazor.WindowSizeChanged -= MasaBlazor_WindowSizeChanged;
+        MasaBlazor.WindowSizeChanged += MasaBlazor_WindowSizeChanged;
+    }
+    
+    private async void MasaBlazor_WindowSizeChanged(object? sender, BreakpointChangedEventArgs e)
+    {
+        if (IsDirtyParameter(nameof(MiniVariant)))
+        {
+            return;
+        }
+
+        var isM = CalMobileBreakpoint();
+        if (isM != prevMiniVariant)
+        {
+            prevMiniVariant = isM;
+            if (MiniVariantChanged.HasDelegate)
+            {
+                await MiniVariantChanged.InvokeAsync(prevMiniVariant);
+            }
+            StateHasChanged();
+        }
+    }
+    
+    private bool CalMobileBreakpoint() => CalMobileBreakpoint(MasaBlazor, MobileBreakpoint);
+    
+    private static bool CalMobileBreakpoint(MasaBlazor masaBlazor, OneOf<Breakpoints, double> mbpParam)
+    {
+        var (width, mobile, name, mobileBreakpoint) = masaBlazor.Breakpoint;
+
+        if (width == 0)
+        {
+            return false;
+        }
+
+        if (mobileBreakpoint.Equals(mbpParam))
+        {
+            return mobile;
+        }
+
+        if (mbpParam.IsT1)
+        {
+            return width <= mbpParam.AsT1;
+        }
+
+        return name <= mbpParam.AsT0;
     }
 }
