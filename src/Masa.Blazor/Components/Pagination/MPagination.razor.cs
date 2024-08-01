@@ -364,9 +364,9 @@ public partial class MPagination : MasaComponentBase
     {
         if (isAuto is null)
         {
-            var minichangedHasDelegate = MiniVariantChanged.HasDelegate;
-            var miniHasDelegate = IsDirtyParameter(nameof(MiniVariant));
-            isAuto = (minichangedHasDelegate, miniHasDelegate) switch
+            var hasDelegate = MiniVariantChanged.HasDelegate;
+            var isDirty = IsDirtyParameter(nameof(MiniVariant));
+            isAuto = (hasDelegate, isDirty) switch
             {
                 (true, true) => true,
                 (false, true) => false,
