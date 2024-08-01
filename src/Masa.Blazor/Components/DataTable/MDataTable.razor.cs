@@ -129,6 +129,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         set => SetValue(value);
     }
 
+    private bool _prevIsMobile;
+
     public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
     {
         get
@@ -193,31 +195,19 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     
     private bool HasEllipsis => Headers.Any(u => u.HasEllipsis);
 
-    private bool IsMobile { get; set; }
-    
-    private void CalculateIsMobile()
+    private bool IsMobile
     {
-        var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
-
-        if (width == 0)
+        get
         {
-            IsMobile = false;
-            return;
-        }
+            var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
 
-        if (mobileBreakpoint.Equals(MobileBreakpoint))
-        {
-            IsMobile = mobile;
-            return;
-        }
+            if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
+            {
+                return mobile;
+            }
 
-        if (MobileBreakpoint.IsT1)
-        {
-            IsMobile = width < MobileBreakpoint.AsT1;
-            return;
+            return MobileBreakpoint.IsT1 ? width < MobileBreakpoint.AsT1 : name <= MobileBreakpoint.AsT0;
         }
-
-        IsMobile = name == MobileBreakpoint.AsT0;
     }
 
     public Dictionary<string, object?> ColspanAttrs => new()
@@ -247,7 +237,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         CustomFilter = CustomFilterWithColumns;
         ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
 
-        CalculateIsMobile();
+        _prevIsMobile = IsMobile;
         MasaBlazor.WindowSizeChanged += MasaBlazorWindowSizeChanged;
         MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
     }
@@ -303,7 +293,13 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
 
     private void MasaBlazorWindowSizeChanged(object? sender, WindowSizeChangedEventArgs e)
     {
-        CalculateIsMobile();
+        if (_prevIsMobile == IsMobile)
+        {
+            return;
+        }
+
+        _prevIsMobile = IsMobile;
+
         InvokeAsync(StateHasChanged);
     }
 

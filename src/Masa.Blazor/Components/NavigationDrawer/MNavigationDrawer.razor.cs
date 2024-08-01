@@ -43,7 +43,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Parameter]
     public OneOf<Breakpoints, double>? MobileBreakpoint
     {
-        get => GetValue(MasaBlazor.Breakpoint.MobileBreakpoint);
+        get => GetValue<OneOf<Breakpoints, double>?>();
         set => SetValue(value);
     }
 
@@ -150,6 +150,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private bool _prevPermanent;
+    private bool _prevIsMobile;
     private readonly List<IDependent> _dependents = new();
 
     protected object? Overlay { get; set; }
@@ -170,7 +171,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         set => SetValue(value);
     }
 
-    protected bool IsMobile => !Stateless && !Permanent && IsMobileBreakpoint; //TODO: fix mobile
+    protected bool IsMobile => !Stateless && !Permanent && IsMobileBreakpoint;
 
     protected bool ReactsToClick => !Stateless && !Permanent && (IsMobile || Temporary);
 
@@ -299,17 +300,14 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     {
         get
         {
-            var mobile = MasaBlazor.Breakpoint.Mobile;
-            var width = MasaBlazor.Breakpoint.Width;
-            var name = MasaBlazor.Breakpoint.Name;
-            var mobileBreakpoint = MasaBlazor.Breakpoint.MobileBreakpoint;
+            var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
 
-            if (Equals(mobileBreakpoint.Value, MobileBreakpoint?.Value))
+            if (MobileBreakpoint is null || Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
             {
                 return mobile;
             }
 
-            return mobileBreakpoint.IsT1 ? width < mobileBreakpoint.AsT1 : name == mobileBreakpoint.AsT0;
+            return MobileBreakpoint.Value.IsT1 ? width < MobileBreakpoint.Value.AsT1 : name <= MobileBreakpoint.Value.AsT0;
         }
     }
 
@@ -318,8 +316,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     protected bool ReactsToMobile => App && !DisableResizeWatcher && !Permanent && !Stateless && !Temporary;
 
     protected bool ReactsToRoute => !DisableRouteWatcher && !Stateless && (Temporary || IsMobile);
-
-    protected bool IsFullscreen => MasaBlazor != null && MasaBlazor.Breakpoint.SmAndDown;
 
     public IEnumerable<string> DependentSelectors
     {
@@ -342,7 +338,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
         _prevPermanent = Permanent;
 
-        MasaBlazor.BreakpointChanged += OnBreakpointOnUpdate;
+        MasaBlazor.WindowSizeChanged += MasaBlazorWindowSizeChanged;
 
         if (Value == null && ValueChanged.HasDelegate)
         {
@@ -444,12 +440,14 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
     }
 
-    private async void OnBreakpointOnUpdate(object? sender, BreakpointChangedEventArgs e)
+    private async void MasaBlazorWindowSizeChanged(object? sender, WindowSizeChangedEventArgs e)
     {
-        if (!e.MobileChanged)
+        if (_prevIsMobile == IsMobile)
         {
             return;
         }
+
+        _prevIsMobile = IsMobile;
 
         if (!ReactsToResize || !ReactsToMobile)
         {
@@ -510,6 +508,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
         else if (!Temporary)
         {
+            _prevIsMobile = IsMobile;
             IsActive = !IsMobile;
         }
     }
@@ -592,7 +591,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     protected override async ValueTask DisposeAsyncCore()
     {
         RemoveApplication();
-        MasaBlazor!.BreakpointChanged -= OnBreakpointOnUpdate;
+        MasaBlazor!.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         NavigationManager!.LocationChanged -= OnLocationChanged;
         await OutsideClickJsModule.UnbindAndDisposeAsync();
