@@ -328,9 +328,9 @@ public partial class MPagination : MasaComponentBase
             {
                 InvokeAsync(() => {
                     _internalMiniVariant = isMiniVaraint;
-                    await MiniVariantChanged.InvokeAsync(_internalMiniVariant);
+                    _ = MiniVariantChanged.InvokeAsync(_internalMiniVariant);
                     StateHasChanged();
-                })
+                });
             }
         }
 
