@@ -8,18 +8,29 @@
         <ul class="@_modifierBuilder.Add(Circle).Add(Disabled).AddTheme(IsDark, IndependentTheme)">
             @GenPaginationIcon(PaginationIconType.First)
 
-            @foreach (var item in GetItems())
+            @if (_internalMiniVariant)
             {
-                <li>
-                    @if (item.IsT0)
-                    {
-                        <span class="@_block.Element("more")">@item</span>
-                    }
-                    else
-                    {
-                        @GenPaginationItem(item)
-                    }
-                </li>
+                <div class="m-pagination__mini">
+                    <span class="m-pagination__current">@Value</span>
+                    <span class="m-pagination__separator">/</span>
+                    <span class="m-pagination__total">@Length</span>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in GetItems())
+                {
+                    <li>
+                        @if (item.IsT0)
+                        {
+                            <span class="@_block.Element("more")">@item</span>
+                        }
+                        else
+                        {
+                            @GenPaginationItem(item)
+                        }
+                    </li>
+                }
             }
 
             @GenPaginationIcon(PaginationIconType.Second)
