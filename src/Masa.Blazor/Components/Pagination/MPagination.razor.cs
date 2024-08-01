@@ -326,12 +326,11 @@ public partial class MPagination : MasaComponentBase
             var isMiniVaraint = IsMiniVariant();
             if (isMiniVaraint != _internalMiniVariant)
             {
-                _internalMiniVariant = isMiniVaraint;
-                if (MiniVariantChanged.HasDelegate)
-                {
+                InvokeAsync(() => {
+                    _internalMiniVariant = isMiniVaraint;
                     await MiniVariantChanged.InvokeAsync(_internalMiniVariant);
-                }
-                StateHasChanged();
+                    StateHasChanged();
+                })
             }
         }
 
