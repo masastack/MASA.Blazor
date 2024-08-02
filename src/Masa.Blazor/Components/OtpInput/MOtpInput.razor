@@ -18,7 +18,7 @@
 
     private RenderFragment GenItem(int index) => __builder =>
     {
-        var value = Values[index];
+        var value = _otp[index];
         <div class="@GetContentClass()">
             <div class="@_inputBlock.Element("control")">
                 <div class="@GetClass(_inputBlock.Element("slot").Name, CssClassUtils.GetBackgroundColor(BackgroundColor))"
@@ -30,7 +30,7 @@
                         </legend>
                     </fieldset>
                     <div class="@_textFieldBlock.Element("slot")">
-                        <input @ref="InputRefs[index]"
+                        <input @ref="_inputRefs[index]"
                                type="@Type.ToString()"
                                readonly="@Readonly"
                                min="@(Type == OtpInputType.Number ? 0 : null)"
