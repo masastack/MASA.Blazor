@@ -5,12 +5,15 @@
     "nextIcon": "指定用于下一个图标的图标",
     "prevIcon": "指定用于上一个图标的图标",
     "totalVisible": "指定最大可见分页数",
-    "value": "当前选定页面"
+    "value": "当前选定页面",
+    "miniVariant": "使用迷你变体",
+    "mobileBreakpoint": "指定迷你变体应用时的断点，默认为 600px"
   },
   "events": {
     "onInput": "被绑定模型的更新",
     "onNext": "转到下一个项目时发出",
-    "onPrevious": "转到上一个项目时发出"
+    "onPrevious": "转到上一个项目时发出",
+    "miniVariantChanged": "当迷你变体更改时触发"
   },
   "contents": {}
 }

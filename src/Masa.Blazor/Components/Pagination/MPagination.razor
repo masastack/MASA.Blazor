@@ -4,7 +4,9 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <nav id="@Id" @ref="Ref" class="@Class" style="@Style" @attributes="@Attributes">
+    <nav id="@Id" @ref="Ref" class="@Class" style="@Style"
+         role="navigation"
+         @attributes="@Attributes">
         <ul class="@_modifierBuilder.Add(Circle).Add(Disabled).AddTheme(IsDark, IndependentTheme)">
             @GenPaginationIcon(PaginationIconType.First)
 
@@ -12,7 +14,7 @@
             {
                 <div class="m-pagination__mini">
                     <span class="m-pagination__current">@Value</span>
-                    <span class="m-pagination__separator">/</span>
+                    <span class="m-pagination__slash">/</span>
                     <span class="m-pagination__total">@Length</span>
                 </div>
             }

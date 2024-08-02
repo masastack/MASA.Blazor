@@ -1546,6 +1546,10 @@ a.m-pagination__item {
     text-align: center;
 }
 
+.m-pagination__slash {
+    margin: 0 8px;
+}
+
 /* InteractiveTrigger */
 
 .m-interactive-trigger {
