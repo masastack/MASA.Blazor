@@ -386,7 +386,7 @@ public partial class MTextField<TValue> : MInput<TValue>
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(Outlined), SetLabelWidthAsync)
-            .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync))
+            .Watch<string>(nameof(Label), () => NextTick(SetLabelWidthAsync)) //TODO:form auto label
             .Watch<string>(nameof(Prefix), SetPrefixWidthAsync);
     }
 

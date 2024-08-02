@@ -66,7 +66,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected EditContext? OldEditContext { get; set; }
 
-    public FieldIdentifier? ValueIdentifier { get; set; }
+    public FieldIdentifier? ValueIdentifier => ValueExpression is null ? null : FieldIdentifier.Create(ValueExpression);
 
     protected bool HasInput { get; set; }
 
@@ -353,22 +353,12 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
                 _ = SetValueByJsInterop(Formatter(val));
             }
 
-            _ = ValueChanged.InvokeAsync(val.TryDeepClone());
-        }
+                _ = ValueChanged.InvokeAsync(val.TryDeepClone());
+            }
     }
-
+    
     protected virtual void SubscribeValidationStateChanged()
     {
-        if (ValueExpression != null)
-        {
-            ValueIdentifier = FieldIdentifier.Create(ValueExpression);
-        }
-        else
-        {
-            //No ValueExpression,subscribe is unnecessary
-            return;
-        }
-
         //When EditContext update,we should re-subscribe OnValidationStateChanged
         if (OldEditContext != EditContext)
         {

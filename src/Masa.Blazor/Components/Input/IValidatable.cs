@@ -2,7 +2,7 @@
 
 public interface IValidatable
 {
-    FieldIdentifier? ValueIdentifier { get; set; }
+    FieldIdentifier? ValueIdentifier { get; }
 
     bool Validate();
 

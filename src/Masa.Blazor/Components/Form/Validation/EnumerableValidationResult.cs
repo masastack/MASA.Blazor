@@ -2,6 +2,7 @@
 
 namespace Masa.Blazor
 {
+    [Obsolete]
     public class EnumerableValidationResult : ValidationResult
     {
         public EnumerableValidationResult()
@@ -13,6 +14,7 @@ namespace Masa.Blazor
         public List<ValidationResultDescriptor> Descriptors { get; } = new();
     }
 
+    [Obsolete]
     public class ValidationResultDescriptor
     {
         public ValidationResultDescriptor(object objectInstance, List<ValidationResult> results)
