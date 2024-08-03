@@ -10,7 +10,7 @@
 
     protected override RenderFragment GenDefaultSlot() => __builder =>
     {
-        <div class="@_block.Element("input")">
+        <div class="@ControlBlock.Element("input")" ripple>
             @GenSelection()
         </div>
         @GenLabel(true)
@@ -38,7 +38,7 @@
     {
         if (Ripple is true)
         {
-            <div class="@GetClass(_block.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState))" ripple></div>
+            <div class="@GetClass(ControlBlock.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState))" ripple></div>
         }
     };
 
