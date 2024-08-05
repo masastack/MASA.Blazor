@@ -96,9 +96,6 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
         return Task.CompletedTask;
     }
 
-    protected bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
 #if NET8_0_OR_GREATER
         protected override void OnParametersSet()
         {
@@ -111,10 +108,10 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
         }
 #endif
 
-    private static Block _block => new("m-input--selection-controls");
+    protected static Block ControlBlock => new("m-input--selection-controls");
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(new[] { _block.Name });
+        return base.BuildComponentClass().Concat(new[] { ControlBlock.Name });
     }
 }

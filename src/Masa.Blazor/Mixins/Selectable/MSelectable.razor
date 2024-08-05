@@ -10,7 +10,7 @@
 
     protected override RenderFragment GenDefaultSlot() => __builder =>
     {
-        <div class="@_block.Element("input")">
+        <div class="@ControlBlock.Element("input")" ripple>
             @GenSelection()
         </div>
         @GenLabel(true)
@@ -32,14 +32,6 @@
                @onfocus="@HandleOnFocus"
                @onkeydown="@HandleOnKeyDown"
                @attributes="@Attributes"/>
-    };
-
-    protected RenderFragment GenRipple() => __builder =>
-    {
-        if (Ripple is true)
-        {
-            <div class="@GetClass(_block.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState))" ripple></div>
-        }
     };
 
 }
