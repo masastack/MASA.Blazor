@@ -34,12 +34,4 @@
                @attributes="@Attributes"/>
     };
 
-    protected RenderFragment GenRipple() => __builder =>
-    {
-        if (Ripple is true)
-        {
-            <div class="@GetClass(ControlBlock.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState))" ripple></div>
-        }
-    };
-
 }
