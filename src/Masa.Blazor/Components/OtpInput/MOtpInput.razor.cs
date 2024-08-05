@@ -69,11 +69,17 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     private int _prevFocusIndex;
     private string? _prevValue;
 
-    private List<ElementReference> InputRefs { get; } = new();
+    private List<ElementReference> _inputRefs = [];
 
-    private List<string> Values { get; set; } = new();
+    /// <summary>
+    /// Always keep the length of _otp equal to Length
+    /// </summary>
+    private List<string> _otp = [];
 
-    private string ComputedValue => string.Join("", Values);
+    /// <summary>
+    /// Get the latest value of otp
+    /// </summary>
+    private string ComputedValue => string.Join("", _otp);
 
     protected override async Task OnParametersSetAsync()
     {
@@ -88,21 +94,25 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 #endif
         if (_prevValue != Value)
         {
+            Value ??= string.Empty;
+            var prevValueLength = _prevValue?.Length ?? 0;
+            var valueLength = Value.Length;
             _prevValue = Value;
 
-            if (Value != null)
+            for (var i = 0; i < Math.Max(prevValueLength, valueLength); i++)
             {
-                for (int i = 0; i < Value.Length; i++)
+                if (i >= _otp.Count)
                 {
-                    if (Values.Count < i + 1)
-                    {
-                        Values.Add(Value[i].ToString());
-                    }
-                    else
-                    {
-                        Values[i] = Value[i].ToString();
-                    }
+                    continue;
                 }
+
+                _otp[i] = i < valueLength ? Value[i].ToString() : string.Empty;
+            }
+
+            if (Value != ComputedValue)
+            {
+                _prevValue = ComputedValue;
+                await ValueChanged.InvokeAsync(_prevValue);
             }
         }
 
@@ -110,26 +120,24 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
         {
             _prevLength = Length;
 
-            if (Values.Count > Length)
+            if (_otp.Count > Length)
             {
-                for (int i = Length; i < Values.Count; i++)
-                {
-                    Values.RemoveAt(i);
-                }
+                _otp = _otp.Take(Length).ToList();
 
                 if (ValueChanged.HasDelegate)
                 {
-                    await ValueChanged.InvokeAsync(ComputedValue);
+                    _prevValue = ComputedValue;
+                    await ValueChanged.InvokeAsync(_prevValue);
                 }
             }
             else
             {
-                for (int i = 0; i < Length; i++)
+                for (var i = 0; i < Length; i++)
                 {
-                    if (Values.Count() < (i + 1))
-                        Values.Add(string.Empty);
-                    if (InputRefs.Count() < (i + 1))
-                        InputRefs.Add(new ElementReference());
+                    if (_otp.Count < (i + 1))
+                        _otp.Add(string.Empty);
+                    if (_inputRefs.Count < (i + 1))
+                        _inputRefs.Add(new ElementReference());
                 }
             }
         }
@@ -142,13 +150,13 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
         if (firstRender)
         {
             _handle = DotNetObjectReference.Create(new Invoker<OtpJsResult>(GetResultFromJs));
-            await Js.InvokeVoidAsync(JsInteropConstants.RegisterOTPInputOnInputEvent, InputRefs, _handle);
+            await Js.InvokeVoidAsync(JsInteropConstants.RegisterOTPInputOnInputEvent, _inputRefs, _handle);
 
             NextTick(() =>
             {
-                if (AutoFocus && InputRefs.Count > 0)
+                if (AutoFocus && _inputRefs.Count > 0)
                 {
-                    _ = InputRefs[0].FocusAsync();
+                    _ = _inputRefs[0].FocusAsync();
                 }
             });
         }
@@ -200,7 +208,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
                     await OnInput.InvokeAsync(result.Value);
                 }
 
-                if (result.Index >= Length - 1 && !Values.Any(p => string.IsNullOrEmpty(p)) && OnFinish.HasDelegate)
+                if (result.Index >= Length - 1 && !_otp.Any(p => string.IsNullOrEmpty(p)) && OnFinish.HasDelegate)
                 {
                     await OnFinish.InvokeAsync(ComputedValue);
                 }
@@ -232,7 +240,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
                 if (containsActiveElement)
                 {
-                    var item = InputRefs[index];
+                    var item = _inputRefs[index];
                     await item.FocusAsync();
                 }
             }
@@ -241,37 +249,37 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     private int GetFirstEmptyIndex()
     {
-        for (int i = 0; i < Values.Count; i++)
+        for (int i = 0; i < _otp.Count; i++)
         {
-            if (string.IsNullOrEmpty(Values[i]))
+            if (string.IsNullOrEmpty(_otp[i]))
             {
                 return i;
             }
         }
 
-        return Values.Count - 1;
+        return _otp.Count - 1;
     }
 
     private async Task ApplyValues(int index, string value)
     {
-        var temp = new List<string>(Values.ToArray());
+        var temp = new List<string>(_otp.ToArray());
         temp[index] = value;
         temp.RemoveAll(p => string.IsNullOrEmpty(p));
 
-        Values[index] = value;
+        _otp[index] = value;
 
         await Task.Yield();
         await InvokeAsync(StateHasChanged);
 
-        Values[index] = String.Empty;
+        _otp[index] = String.Empty;
 
-        Values = temp;
+        _otp = temp;
 
         var count = temp.Count;
 
         for (int i = 0; i < this.Length - count; i++)
         {
-            Values.Add(String.Empty);
+            _otp.Add(String.Empty);
         }
 
         await InvokeAsync(StateHasChanged);
@@ -295,13 +303,13 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
                 if (changeIndex >= this.Length)
                     break;
 
-                Values[changeIndex] = clipboardData[i].ToString();
+                _otp[changeIndex] = clipboardData[i].ToString();
             }
 
             var newFocusIndex = Math.Min(events.Index + clipboardData.Length - 1, this.Length - 1);
             await FocusAsync(newFocusIndex);
 
-            var hasEmptyValue = Values.Any(string.IsNullOrWhiteSpace);
+            var hasEmptyValue = _otp.Any(string.IsNullOrWhiteSpace);
 
             if (!hasEmptyValue)
             {
@@ -324,7 +332,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     private async Task HandleOnInputSlotClick(int optIndex)
     {
-        if (IsFocused || IsDisabled || InputRefs.ElementAtOrDefault(optIndex).Context is null)
+        if (IsFocused || IsDisabled || _inputRefs.ElementAtOrDefault(optIndex).Context is null)
         {
             return;
         }
@@ -335,6 +343,6 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     protected override async ValueTask DisposeAsyncCore()
     {
         _handle?.Dispose();
-        await Js.InvokeVoidAsync(JsInteropConstants.UnregisterOTPInputOnInputEvent, InputRefs);
+        await Js.InvokeVoidAsync(JsInteropConstants.UnregisterOTPInputOnInputEvent, _inputRefs);
     }
 }
