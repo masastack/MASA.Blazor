@@ -7,28 +7,44 @@
 
 @code {
 
+    private string? CurrentColor => IsLoading ? null : ValidationState;
+
+    private StyleBuilder GetStyleBuilder() => StyleBuilder.Create().AddTextColor(CurrentColor);
+
+    protected override RenderFragment GenDefaultSlot() => __builder =>
+    {
+        var trackStyle = GetStyleBuilder().AddBackgroundColor(ComputedTrackColor).Build();
+
+        <div class="@ControlBlock.Element("wrapper")">
+            <div class="@_trackModifierBuilder.AddTextColor(CurrentColor).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
+                 style="@trackStyle">
+            </div>
+
+            <div class="@ControlBlock.Element("input")" ripple>
+                @GenSelection()
+            </div>
+
+            <div class="@_block.Element("text")">
+                @GenText("left", LeftText, LeftIcon)
+                @GenText("right", RightText, RightIcon)
+            </div>
+        </div>
+
+        @GenLabel(true)
+    };
+
     protected override RenderFragment? GenSelection() => __builder =>
     {
-        var color = IsLoading ? null : ValidationState;
-        var styleBuilder = StyleBuilder.Create().AddTextColor(color);
+        var styleBuilder = GetStyleBuilder();
         var thumbStyle = styleBuilder.Build();
-        var trackStyle = styleBuilder.AddBackgroundColor(ComputedTrackColor).Build();
 
         @GenInput("checkbox")
-        @GenRipple()
 
-        <div class="@_trackModifierBuilder.AddTextColor(color).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
-             style="@trackStyle">
-        </div>
-
-        <div class="@_thumbModifierBuilder.AddTextColor(color).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_thumbModifierBuilder.AddTextColor(CurrentColor).AddTheme(IsDark, IndependentTheme)"
              style="@thumbStyle">
             @*TODO: FabTransition*@
-            @RenderFragments.GenProgressCircular(Loading, Color, 16, 2)
+            @RenderFragments.GenProgressCircular(Loading, CurrentColor, 16, 2)
         </div>
-
-        @GenText("left", LeftText, LeftIcon)
-        @GenText("right", RightText, RightIcon)
     };
 
 
