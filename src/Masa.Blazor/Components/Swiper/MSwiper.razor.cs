@@ -208,4 +208,25 @@ public partial class MSwiper : MasaComponentBase
             16,
             _ctsForUpdateSlides.Token);
     }
+
+    /// <summary>
+    /// Invoke a method of the Swiper instance.
+    /// </summary>
+    /// <param name="funcName">The name of the method</param>
+    /// <param name="args">The arguments of the method</param>
+    /// <example>
+    /// js: swiper.updateAutoHeight(speed);
+    /// <br />
+    /// c#: await MSwiperInstance.InvokeVoidAsync("updateAutoHeight", speed);
+    /// </example>
+    [MasaApiParameter]
+    public async Task InvokeVoidAsync(string funcName, params object[] args)
+    {
+        if (_swiperProxy is null)
+        {
+            return;
+        }
+
+        await _swiperProxy.InvokeVoidAsync(funcName, args);
+    }
 }
