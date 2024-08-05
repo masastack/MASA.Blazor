@@ -47,6 +47,12 @@ Use the `Length` property to set the length of **MPagination**. If the number of
 
 <masa-example file="Examples.components.paginations.Length"></masa-example>
 
+#### Mini variant {released-on=v1.7.0}
+
+By default, when the browser window is less than *600px*, the mini style is automatically used. Use the `MinVariant` property to set the mini style of the pagination.
+
+<masa-example file="Examples.components.paginations.MiniVariant"></masa-example>
+
 #### TotalVisible
 
 You can also manually set the maximum number of visible pages through the `TotalVisible` property.

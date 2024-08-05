@@ -1,5 +1,20 @@
 # 升级指南
 
+## 从 v1.6.x 升级到 v1.7.0 {#upgrading-from-v1-6-x-to-v1-7-0}
+
+### 组件 {#components}
+
+#### Pagination
+
+新增了一个迷你样式的UI，现在当浏览器窗口小于 *600px* 时，会自动使用。如果不想使用迷你样式，可以通过 `MiniVariant` 属性手动设置。
+
+```diff
+  <MPagination @bind-Value="page"
+               Length="10"
++              MiniVariant="false"              
+  ></MPagination>
+```
+
 ## 从 v1.5.x 升级到 v1.6.0
 
 ### 更改脚本

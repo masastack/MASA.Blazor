@@ -1,5 +1,20 @@
 # Upgrade Guides
 
+## Upgrading form v1.6.x to v1.7.0
+
+### Components
+
+#### Pagination
+
+A mini style UI has been added, now when the browser window is less than *600px*, it will automatically use it. If you don't want to use the mini style, you can manually set it through the `MiniVariant` property.
+
+```diff
+  <MPagination @bind-Value="page"
+               Length="10"
++              MiniVariant="false"
+  ></MPagination>
+```
+
 ## Upgrading form v1.5.x to v1.6.0
 
 ### Change the script
