@@ -119,8 +119,7 @@
              @attributes="@ThumbAttrs"
              @onfocus="@(e => HandleOnFocusAsync(index, e))"
              @onblur="@(e => HandleOnBlurAsync(index, e))"
-             @onkeydown="@HandleOnKeyDownAsync"
-             @onkeydown:preventDefault>
+             @onkeydown="@HandleOnKeyDownAsync">
 
             @GenThumb()
 
