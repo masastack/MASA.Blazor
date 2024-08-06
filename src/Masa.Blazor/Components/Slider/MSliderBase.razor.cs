@@ -34,7 +34,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     [Parameter] public string? TrackFillColor { get; set; }
 
-    [Parameter] [MasaApiParameter(2)] public double TrackSize { get; set; } = 2;
+    [Parameter] [MasaApiParameter(2, ReleasedOn = "v1.7.0")] public double TrackSize { get; set; } = 2;
 
     [Parameter] [MasaApiParameter(2)] public double TickSize { get; set; } = 2;
 
