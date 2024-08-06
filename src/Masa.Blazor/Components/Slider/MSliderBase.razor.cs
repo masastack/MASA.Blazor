@@ -28,9 +28,13 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     [Parameter] [MasaApiParameter(false)] public StringBoolean Ticks { get; set; } = false;
 
+    [Parameter] [MasaApiParameter("primary")] public override string? Color { get; set; } = "primary";
+
     [Parameter] public string? TrackColor { get; set; }
 
     [Parameter] public string? TrackFillColor { get; set; }
+
+    [Parameter] [MasaApiParameter(2)] public double TrackSize { get; set; } = 2;
 
     [Parameter] [MasaApiParameter(2)] public double TickSize { get; set; } = 2;
 
@@ -157,12 +161,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
                 return TrackColor;
             }
 
-            if (IsDark)
-            {
-                return ValidationState;
-            }
-
-            return string.IsNullOrEmpty(ValidationState) ? "primary lighten-3" : ValidationState;
+            return ValidationState ?? ComputedColor;
         }
     }
 
@@ -180,7 +179,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
                 return TrackFillColor;
             }
 
-            return string.IsNullOrEmpty(ValidationState) ? ComputedColor : ValidationState;
+            return ValidationState ?? ComputedColor;
         }
     }
 

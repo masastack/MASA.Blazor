@@ -1687,3 +1687,13 @@ html.m-overlay-scroll-blocked {
 .m-input--switch--text.m-input--is-dirty .m-input--switch__right {
     color: #fff
 }
+
+/* slider */
+
+.m-slider__track-background {
+    opacity: 0.38;
+}
+
+.m-slider__track-background, .m-slider__track-fill {
+    border-radius: 6px;
+}

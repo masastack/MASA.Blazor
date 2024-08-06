@@ -57,7 +57,9 @@
 
     private RenderFragment GenTrackContainer() => __builder =>
     {
-        <div class="@Block.Element("track-container")" @ref="TrackElement">
+        <div class="@Block.Element("track-container")"
+             style="--m-slider-track-size: @($"{TrackSize}px")"
+             @ref="TrackElement">
             @GenTrackContainerChild()
         </div>
     };
@@ -108,10 +110,10 @@
     protected RenderFragment GenThumbContainerCore(int index, ElementReferenceWrapper elRefWrapper) => __builder =>
     {
         var active = IsThumbActive(index);
-        var focus = IsThumbFocus(index);
+        var focused = IsThumbFocus(index);
         var showLabel = ShowThumbLabel;
 
-        <div class="@_thumbContainerModifierBuilder.Add(active, focus, showLabel).AddTextColor(ComputedThumbColor)"
+        <div class="@_thumbContainerModifierBuilder.Add(active, focused, showLabel).AddTextColor(ComputedThumbColor)"
              style="@GetThumbContainerStyles(index)"
              @ref="@elRefWrapper.Value"
              @attributes="@ThumbAttrs"
@@ -131,8 +133,8 @@
 
     private RenderFragment GenThumb() => __builder =>
     {
-        <div class="@GetClass(Block.Element("thumb").Name, CssClassUtils.GetBackgroundColor(ComputedThumbColor))"
-             style="@(StyleBuilder.Create().AddBackgroundColor(ComputedThumbColor))">
+        <div class="@GetClass(Block.Element("thumb").Name, CssClassUtils.GetTextColor(ComputedThumbColor))"
+             style="@CssStyleUtils.GetTextColor(ComputedThumbColor)">
         </div>
     };
 

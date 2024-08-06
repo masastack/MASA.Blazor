@@ -23186,14 +23186,12 @@ html.overflow-y-hidden {
     margin-bottom: 24px;
 }
 .theme--light.m-slider .m-slider__track-background,
-.theme--light.m-slider .m-slider__track-fill,
-.theme--light.m-slider .m-slider__thumb {
+.theme--light.m-slider .m-slider__track-fill {
     background: rgba(0, 0, 0, 0.26);
 }
 
 .theme--dark.m-slider .m-slider__track-background,
-.theme--dark.m-slider .m-slider__track-fill,
-.theme--dark.m-slider .m-slider__thumb {
+.theme--dark.m-slider .m-slider__track-fill {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -23248,6 +23246,7 @@ html.overflow-y-hidden {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-color: currentColor;
 }
 .m-slider__thumb:before {
     transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
@@ -23256,7 +23255,7 @@ html.overflow-y-hidden {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    /*background: currentColor;*/
+    background: currentColor;
     opacity: 0.3;
     position: absolute;
     left: -12px;
@@ -23343,13 +23342,16 @@ html.overflow-y-hidden {
 }
 .m-slider--horizontal .m-slider__track-container {
     width: 100%;
-    height: 2px;
+    height: var(--m-slider-track-size);
     left: 0;
     top: 50%;
     transform: translateY(-50%);
 }
-.m-slider--horizontal .m-slider__track-background, .m-slider--horizontal .m-slider__track-fill {
-    height: 100%;
+.m-slider--horizontal .m-slider__track-background {
+    height: inherit;
+}
+.m-slider--horizontal .m-slider__track-fill {
+    height: calc(var(--m-slider-track-size) + 1px);
 }
 .m-slider--horizontal .m-slider__ticks-container {
     left: 0;
@@ -23391,13 +23393,17 @@ html.overflow-y-hidden {
 }
 .m-slider--vertical .m-slider__track-container {
     height: 100%;
-    width: 2px;
+    width: var(--m-slider-track-size);
     left: 50%;
     top: 0;
     transform: translateX(-50%);
 }
-.m-slider--vertical .m-slider__track-background, .m-slider--vertical .m-slider__track-fill {
-    width: 100%;
+.m-slider--vertical .m-slider__track-background {
+    width: inherit;
+}
+.m-slider--vertical .m-slider__track-fill {
+    width: calc(var(--m-slider-track-size) + 1px);
+    transform: translateX(-0.5px);
 }
 .m-slider--vertical .m-slider__thumb-container {
     left: 50%;
