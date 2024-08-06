@@ -1,16 +1,12 @@
 ﻿@namespace Masa.Blazor
 @inherits MasaComponentBase
-@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @typeparam TValue
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <div class="@GetClass()"
          style="@GetStyle()"
-         id="@Id"
-         @ref="Ref"
-         @onclick="@HandleClick"
-         @attributes="@Attributes">
-        <div class="@_selectionControls.Element("input")">
+         @ref="Ref">
+        <div class="@_selectionControls.Element("input").AppendClasses(CssClassUtils.GetTextColor(RippleState))" ripple>
 
             <MIcon Icon="@(IsActive ? OnIcon : OffIcon)"
                    Dense="@(RadioGroup?.Dense is true)"
@@ -23,21 +19,17 @@
                    checked="@IsActive"
                    value="@Value"
                    @onblur="OnBlur"
-                   @onchange="OnChange"
+                   @onchange="@HandleOnChange"
                    @onfocus="OnFocus"
                    @onkeydown="OnKeyDown"
-                   @onclick:stopPropagation/>
-            
-            @RenderFragments.GenRipple(
-                Ripple,
-                GetClass(_selectionControls.Element("ripple").Name, CssClassUtils.GetTextColor(RippleState)),
-                StyleBuilder.Create().AddTextColor(RippleState).Build())
+                   @onclick:stopPropagation
+                   @attributes="@Attributes"/>
         </div>
 
         <MLabel For="@Id"
                 Color="@ValidationState"
                 Focused="@HasState"
-                @onclick:preventDefault>
+                @onclick:stopPropagation>
             @RenderFragments.RenderFragmentOrText(LabelContent, Label, wrapperTag: null)
         </MLabel>
     </div>

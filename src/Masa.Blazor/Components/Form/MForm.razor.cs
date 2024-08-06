@@ -36,6 +36,8 @@ public partial class MForm : MasaComponentBase
     [MasaApiParameter(true, ReleasedOn = "v1.7.0")]
     public bool AutoLabel { get; set; } = true;
 
+    [Parameter] public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
+
     internal ConcurrentDictionary<string, string> AutoLabelMap { get; } = new();
 
     private static readonly ConcurrentDictionary<Type, PropertyInfo[]> s_modelPropertiesMap = new();
@@ -52,7 +54,7 @@ public partial class MForm : MasaComponentBase
 
     /// <summary>
     /// The type of property attribute used to generate the label,
-    /// the default value is same as <see cref="FFormAutoLabelOptionsAttributeType"/>.
+    /// the default value is same as <see cref="AutoLabelOptions.AttributeType"/>.
     /// </summary>
     internal Type? LabelAttributeType { get; set; } = typeof(DisplayNameAttribute);
 
@@ -221,10 +223,7 @@ public partial class MForm : MasaComponentBase
     /// <summary>
     /// parse form validation result,if parse faield throw exception
     /// </summary>
-    /// <param name="validationResult">
-    /// validation result
-    /// see deatils https://blazor.masastack.com/components/forms
-    /// </param>
+    /// <param name="validationResult"></param>
     [MasaApiPublicMethod]
     public void ParseFormValidation(string validationResult)
     {
@@ -235,11 +234,7 @@ public partial class MForm : MasaComponentBase
     /// <summary>
     /// parse form validation result,if parse failed return false
     /// </summary>
-    /// <param name="validationResult">
-    /// validation result
-    /// see deatils https://blazor.masastack.com/components/forms
-    /// </param>
-    /// <returns></returns>
+    /// <param name="validationResult"></param>
     [MasaApiPublicMethod]
     public bool TryParseFormValidation(string validationResult)
     {

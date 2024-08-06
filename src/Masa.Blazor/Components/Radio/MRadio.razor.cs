@@ -138,7 +138,7 @@
 
         protected bool IsReadonly => Readonly || RadioGroup?.IsReadonly is true;
 
-        private async Task HandleClick(MouseEventArgs args)
+        private async Task HandleOnChange()
         {
             if (IsDisabled || IsReadonly || IsActive)
             {

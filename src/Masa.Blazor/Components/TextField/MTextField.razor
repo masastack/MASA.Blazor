@@ -21,7 +21,7 @@
         @RenderFragments.GenProgress(Loading, Color, LoaderHeight, ProgressContent)
     };
 
-    protected override RenderFragment GenLabel(bool preventDefaultOnClick = false) => __builder =>
+    protected override RenderFragment GenLabel(bool preventDefaultOnClick = false, bool stopPropagationOnClick = false) => __builder =>
     {
         if (ShowLabel)
         {
@@ -38,7 +38,8 @@
                     Light="@Light"
                     Value="@LabelValue"
                     @ref="@LabelReference"
-                    @onclick:preventDefault="@preventDefaultOnClick">
+                    __internal_stopPropagation_onclick="@stopPropagationOnClick"
+                    __internal_preventDefault_onclick="@preventDefaultOnClick">
                 @RenderFragments.RenderFragmentOrText(LabelContent, ComputedLabel, wrapperTag: null)
             </MLabel>
         }

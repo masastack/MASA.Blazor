@@ -43,20 +43,13 @@ public class FormContext
     /// <summary>
     /// parse form validation result,if parse failed throw exception
     /// </summary>
-    /// <param name="validationResult">
-    /// validation result
-    /// see details https://blazor.masastack.com/components/forms
-    /// </param>
+    /// <param name="validationResult"></param>
     public void ParseFormValidation(string validationResult) => Form.ParseFormValidation(validationResult);
 
     /// <summary>
     /// parse form validation result,if parse failed return false
     /// </summary>
-    /// <param name="validationResult">
-    /// validation result
-    /// see details https://blazor.masastack.com/components/forms
-    /// </param>
-    /// <returns></returns>
+    /// <param name="validationResult"></param>
     public bool TryParseFormValidation(string validationResult) => Form.TryParseFormValidation(validationResult);
 
     public void ParseFormValidation(IEnumerable<ValidationResult> validationResults) =>
