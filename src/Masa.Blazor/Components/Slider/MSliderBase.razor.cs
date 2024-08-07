@@ -109,6 +109,9 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     public bool IsActive { get; set; }
 
+    /// <summary>
+    /// Prevent click event if dragging took place
+    /// </summary>
     public bool NoClick { get; set; }
 
     public ElementReference SliderElement { get; set; }
@@ -312,6 +315,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         {
             await OnChange.InvokeAsync(InternalValue);
             NoClick = true;
+
+            // HACK: 折中方案，Vueitfy在点击slider后thumb定位后不会聚焦，使用NoClick变量控制实现的。
+            // 但在 Blazor 中，Slider的Click事件是在Blazor中触发的，此方法(HandleOnSliderEndSwiping)是在js互操作中触发的，
+            // 因为js互操作存在延迟，就会导致 MRangeSlider 中的 HandleOnSliderClickAsync 拿到的 NoClick 变量不是最新的。
+            // 除非把 slider 的 click 事件和 NoClick 变量都在 js 中维护，但 NoClick 的状态又依赖 Value 的更新，
+            // 所以很难全部在 js 中维护，所以这里永远将 IsFocused=false 来解决。
+            // 这也会导致点击thumb无法聚焦的问题，但此问题相比点击slider聚焦的问题，影响较小。
+            IsFocused = false;
         }
 
         IsActive = false;
@@ -397,15 +408,15 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
 #if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
 
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
         }
+    }
 #endif
 
     protected static readonly Block Block = new("m-slider");
@@ -445,20 +456,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     {
         IsFocused = true;
 
-        if (OnFocus.HasDelegate)
-        {
-            await OnFocus.InvokeAsync(args);
-        }
+        await OnFocus.InvokeAsync(args);
     }
 
     public virtual async Task HandleOnBlurAsync(int index, FocusEventArgs args)
     {
         IsFocused = false;
 
-        if (OnBlur.HasDelegate)
-        {
-            await OnBlur.InvokeAsync(args);
-        }
+        await OnBlur.InvokeAsync(args);
     }
 
     public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -537,15 +542,10 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         return value;
     }
 
-    public Task HandleOnOutsideClickAsync()
+    public async Task HandleOnOutsideClickAsync()
     {
-        NextTick(async () =>
-        {
-            await HandleOnBlurAsync(0, new FocusEventArgs());
-            StateHasChanged();
-        });
-
-        return Task.CompletedTask;
+        await HandleOnBlurAsync(0, new FocusEventArgs());
+        StateHasChanged();
     }
 
     protected override async ValueTask DisposeAsyncCore()
