@@ -14,8 +14,6 @@ public class PDefaultDateTimePickerActivator : ComponentBase
 
     [Parameter] public StringBoolean HideDetails { get; set; } = "true";
 
-    [Parameter] public string? Label { get; set; }
-
     [Parameter] public bool Outlined { get; set; }
 
     [Parameter] public bool Solo { get; set; }
