@@ -1,13 +1,22 @@
 ﻿using System.Collections.Concurrent;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Masa.Blazor.Components.Form;
 using Masa.Blazor.Components.Input;
+using ValidationResult = Masa.Blazor.Components.Form.ValidationResult;
 
 namespace Masa.Blazor;
 
 public partial class MForm : MasaComponentBase
 {
+    /// <summary>
+    /// Auto generate label for the form fields.
+    /// The default logic is to use the <see cref="DisplayAttribute"/> attribute.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public bool AutoLabel { get; set; }
+
     [Parameter] public RenderFragment<FormContext>? ChildContent { get; set; }
 
     [Parameter] public EventCallback<EventArgs> OnSubmit { get; set; }
@@ -33,16 +42,16 @@ public partial class MForm : MasaComponentBase
     [Parameter] public EventCallback OnInvalidSubmit { get; set; }
 
     [Parameter]
-    [MasaApiParameter(true, ReleasedOn = "v1.7.0")]
-    public bool AutoLabel { get; set; } = true;
-
-    [Parameter] public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
+    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
 
     internal ConcurrentDictionary<string, string> AutoLabelMap { get; } = new();
 
     private static readonly ConcurrentDictionary<Type, PropertyInfo[]> s_modelPropertiesMap = new();
 
     private object? _oldModel;
+
+    private bool ComputedAutoLabel => AutoLabel || EnableI18n;
 
     public EditContext? EditContext { get; protected set; }
 
@@ -56,7 +65,7 @@ public partial class MForm : MasaComponentBase
     /// The type of property attribute used to generate the label,
     /// the default value is same as <see cref="AutoLabelOptions.AttributeType"/>.
     /// </summary>
-    internal Type? LabelAttributeType { get; set; } = typeof(DisplayNameAttribute);
+    internal Type? LabelAttributeType { get; set; } = typeof(DisplayAttribute);
 
     protected override void OnParametersSet()
     {

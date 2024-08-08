@@ -1,0 +1,45 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel
+
+<MForm Model="_model"
+       AutoLabel
+       Class="mx-auto"
+       Style="width: 360px">
+    <MTextField @bind-Value="_model.Name" Filled>
+    </MTextField>
+    <MSelect @bind-Value="_model.Item"
+             Items="@_sports"
+             Filled
+             ItemText="u => u"
+             ItemValue="u => u">
+    </MSelect>
+    <MButton Type="submit" Block Color="primary">Submit</MButton>
+
+    @* <Masa.Blazor.Components.Form.AutoLabelOptions AttributeType="@typeof(DisplayAttribute)"/> *@
+</MForm>
+
+@code {
+
+    class Model
+    {
+        [Display(Name = "Username")]
+        [Required]
+        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
+        public string Name { get; set; }
+
+        [Display(Name = "Favorite sport")]
+        [Required] public string Item { get; set; }
+    }
+
+    private bool _valid = true;
+    private Model _model = new();
+
+    List<string> _sports = new()
+    {
+        "Basketball",
+        "Football",
+        "Tennis",
+        "Swimming"
+    };
+
+}

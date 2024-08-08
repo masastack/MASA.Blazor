@@ -2,9 +2,9 @@
 
 ## Upgrading form v1.6.x to v1.7.0
 
-### Components
+### Components {#v1-7-0-components}
 
-#### Pagination
+#### Pagination {#v1-7-0-pagination}
 
 A mini style UI has been added, now when the browser window is less than *600px*, it will automatically use it. If you don't want to use the mini style, you can manually set it through the `MiniVariant` property.
 
@@ -13,6 +13,40 @@ A mini style UI has been added, now when the browser window is less than *600px*
                Length="10"
 +              MiniVariant="false"
   ></MPagination>
+```
+
+#### Form {#v1-7-0-form}
+
+DataAnnotations validation now natively supports complex types, no need to reference additional libraries and code.
+
+```diff .csproj
+- <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+```
+
+```diff .razor
+  <MForm>
+-     <ObjectGraphDataAnnotationsValidator />
+      @foreach (var person in _order.Persons)
+      {
+          <MTextField @bind-Value="person.Name" Label="Name"></MTextField>
+      }
+  </MForm>
+
+  @code {
+    public class Order
+    {
+-       [ValidateComplexType]
+        public List<Person> Persons { get; set; }
+    }
+
+    public class Person
+    {
+        [Required]
+        public string Name { get; set; }
+    }
+
+    private Order _order = new() { Persons = [] };
+  }
 ```
 
 ## Upgrading form v1.5.x to v1.6.0
