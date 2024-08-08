@@ -35,13 +35,13 @@
     private RenderFragment GenSlider() => __builder =>
     {
         var horizontal = !Vertical;
-        var focus = IsFocused;
+        var focused = IsFocused;
         var active = IsActive;
         var disabled = IsDisabled;
         var @readonly = IsReadonly;
 
-        <div class="@_modifierBuilder.Add(horizontal, Vertical, focus, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
-             @onclick="HandleOnSliderClickAsync"
+        <div class="@_modifierBuilder.Add(horizontal, Vertical, focused, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
+             @onclick="@HandleOnSliderClickAsync"
              @ref="@SliderElement">
             @GenInput()
             @GenTrackContainer()
