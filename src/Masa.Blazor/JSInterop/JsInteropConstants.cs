@@ -175,4 +175,6 @@ public static class JsInteropConstants
     /// Arguments: element, threshold
     /// </summary>
     public static string IsScrollNearBottom => $"{JsInteropFuncNamePrefix}isScrollNearBottom";
+
+    public static string MatchesSelector => $"{JsInteropFuncNamePrefix}matchesSelector";
 }
