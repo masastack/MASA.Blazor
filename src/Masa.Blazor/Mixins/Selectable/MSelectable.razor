@@ -6,11 +6,9 @@
 
 @code {
     
-    private string? RippleState => !IsDisabled && !string.IsNullOrWhiteSpace(ValidationState) ? ValidationState : null;
-
     protected override RenderFragment GenDefaultSlot() => __builder =>
     {
-        <div class="@ControlBlock.Element("input")" ripple>
+        <div class="@ControlInputClasses" ripple="@Ripple">
             @GenSelection()
         </div>
         @GenLabel(false, true)
@@ -31,7 +29,8 @@
                @onchange="@HandleOnChange"
                @onfocus="@HandleOnFocus"
                @onkeydown="@HandleOnKeyDown"
-               @attributes="@Attributes"/>
+               @attributes="@Attributes"
+               @ref="@InputElement"/>
     };
 
 }

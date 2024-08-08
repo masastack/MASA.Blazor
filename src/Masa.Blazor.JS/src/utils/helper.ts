@@ -1,3 +1,5 @@
+export const IN_BROWSER = typeof window !== 'undefined'
+
 export function addOnceEventListener (
   el: EventTarget,
   eventName: string,
@@ -14,7 +16,7 @@ export function addOnceEventListener (
 
 let passiveSupported = false
 try {
-  if (typeof window !== 'undefined') {
+  if (IN_BROWSER) {
     const testListenerOpts = Object.defineProperty({}, 'passive', {
       get: () => {
         passiveSupported = true
@@ -183,7 +185,7 @@ export function getDom(elOrString: Element | string | undefined) {
 }
 
 export const canUseDom = !!(
-  typeof window !== 'undefined' &&
+  IN_BROWSER &&
   typeof document !== 'undefined' &&
   window.document &&
   window.document.createElement
