@@ -1584,6 +1584,10 @@ html.m-overlay-scroll-blocked {
 
 /* switch */
 
+.m-input--is-focused .m-input--selection-controls__input::before {
+    opacity: 0.12;
+}
+
 .m-input--switch--inset .m-input--switch__track {
     width: 48px;
 }
@@ -1686,6 +1690,22 @@ html.m-overlay-scroll-blocked {
 
 .m-input--switch--text.m-input--is-dirty .m-input--switch__right {
     color: #fff
+}
+
+.m-input--switch .m-input--selection-controls__wrapper {
+    margin-inline-end: 10px;
+}
+
+.m-input--dense.m-input--switch .m-input--selection-controls__wrapper {
+    margin-inline-end: 6px;
+}
+
+.m-input--switch--inset .m-input--selection-controls__wrapper {
+    margin-inline-end: 6px;
+}
+
+.m-input--dense.m-input--switch--inset .m-input--selection-controls__wrapper {
+    margin-inline-end: 2px;
 }
 
 /* slider */

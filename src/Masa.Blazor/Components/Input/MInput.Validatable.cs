@@ -8,6 +8,10 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 {
     [Inject] private InputJSModule InputJSModule { get; set; } = null!;
 
+    [CascadingParameter] public MForm? Form { get; set; }
+
+    [CascadingParameter] public EditContext? EditContext { get; set; }
+
     [Parameter] public bool Disabled { get; set; }
 
     [Parameter] public bool Readonly { get; set; }
@@ -24,10 +28,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
 
     [Parameter] public Expression<Func<TValue>>? ValueExpression { get; set; }
-
-    [CascadingParameter] public MForm? Form { get; set; }
-
-    [CascadingParameter] public EditContext? EditContext { get; set; }
 
     [Parameter] public bool Error { get; set; }
 
@@ -145,6 +145,19 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     public virtual bool IsReadonly => Readonly || Form is { Readonly: true };
 
+    public ValidateOn ValidateOn
+    {
+        get
+        {
+            if (IsDirtyParameter(nameof(ValidateOnBlur)))
+            {
+                return ValidateOnBlur ? ValidateOn.Blur : ValidateOn.Input;
+            }
+            
+            return Form?.ValidateOn ?? ValidateOn.Input;
+        }
+    }
+
     public virtual bool ShouldValidate
     {
         get
@@ -154,9 +167,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
                 return true;
             }
 
-            if (ValidateOnBlur)
+            if (ValidateOn == ValidateOn.Blur)
             {
-                return HasFocused && !IsFocused;
+                return HasFocused;
             }
 
             return HasInput || HasFocused;
@@ -210,7 +223,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
             }
         }
 
-        if (!ValidateOnBlur)
+        if (ValidateOn == ValidateOn.Input)
         {
             //We removed NextTick since it doesn't trigger render
             //and validate may not be called
@@ -263,7 +276,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         if (!val && !IsDisabled)
         {
             HasFocused = true;
-            if (ValidateOnBlur)
+
+            if (ValidateOn == ValidateOn.Blur)
             {
                 InternalValidate();
             }
@@ -330,16 +344,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         // mark it with hasInput
         HasInput = true;
 
-        if (ValidateOnlyInFocusedState)
+        if (ValidateOn == ValidateOn.Input)
         {
-            if (HasFocused)
-            {
-                NextTickIf(InternalValidate, () => !ValidateOnBlur);
-            }
-        }
-        else
-        {
-            NextTickIf(InternalValidate, () => !ValidateOnBlur);
+            NextTick(InternalValidate);
         }
 
         if (_internalValueChangingFromOnValueChanged)
@@ -353,8 +360,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
                 _ = SetValueByJsInterop(Formatter(val));
             }
 
-                _ = ValueChanged.InvokeAsync(val.TryDeepClone());
-            }
+            _ = ValueChanged.InvokeAsync(val.TryDeepClone());
+        }
     }
     
     protected virtual void SubscribeValidationStateChanged()

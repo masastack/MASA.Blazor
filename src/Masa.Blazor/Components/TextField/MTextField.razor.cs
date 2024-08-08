@@ -181,7 +181,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public bool HasCounter => Counter != false && Counter != null;
 
-    public override string ComputedColor
+    public override string? ComputedColor
     {
         get
         {
@@ -618,7 +618,7 @@ public partial class MTextField<TValue> : MInput<TValue>
             }
         }
 
-        if (!ValidateOnBlur)
+        if (ValidateOn == ValidateOn.Input)
         {
             //We removed NextTick since it doesn't trigger render
             //and validate may not be called

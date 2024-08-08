@@ -22918,10 +22918,6 @@ html.overflow-y-hidden {
 .m-input--checkbox.m-input--dense {
     margin-top: 4px;
 }
-.m-input--selection-controls {
-    margin-top: 16px;
-    padding-top: 4px;
-}
 .m-input--selection-controls > .m-input__append-outer,
 .m-input--selection-controls > .m-input__prepend-outer {
     margin-top: 0;
@@ -22940,7 +22936,6 @@ html.overflow-y-hidden {
     display: inline-flex;
     flex: 1 1 auto;
     height: auto;
-    margin-inline-start: 10px;
 }
 .m-input--selection-controls__input {
     color: inherit;
@@ -27285,9 +27280,6 @@ html.overflow-y-hidden {
 }
 .m-input--radio-group--column legend {
     padding-bottom: 8px;
-}
-.m-input--radio-group--column .m-radio:not(:last-child):not(:only-child) {
-    margin-bottom: 8px;
 }
 .m-input--radio-group--column .m-input--radio-group__input {
     flex-direction: column;
