@@ -92,30 +92,6 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
         }
 
 #endif
-        if (_prevValue != Value)
-        {
-            Value ??= string.Empty;
-            var prevValueLength = _prevValue?.Length ?? 0;
-            var valueLength = Value.Length;
-            _prevValue = Value;
-
-            for (var i = 0; i < Math.Max(prevValueLength, valueLength); i++)
-            {
-                if (i >= _otp.Count)
-                {
-                    continue;
-                }
-
-                _otp[i] = i < valueLength ? Value[i].ToString() : string.Empty;
-            }
-
-            if (Value != ComputedValue)
-            {
-                _prevValue = ComputedValue;
-                await ValueChanged.InvokeAsync(_prevValue);
-            }
-        }
-
         if (_prevLength != Length)
         {
             _prevLength = Length;
@@ -139,6 +115,30 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
                     if (_inputRefs.Count < (i + 1))
                         _inputRefs.Add(new ElementReference());
                 }
+            }
+        }
+
+        if (_prevValue != Value)
+        {
+            Value ??= string.Empty;
+            var prevValueLength = _prevValue?.Length ?? 0;
+            var valueLength = Value.Length;
+            _prevValue = Value;
+
+            for (var i = 0; i < Math.Max(prevValueLength, valueLength); i++)
+            {
+                if (i >= _otp.Count)
+                {
+                    continue;
+                }
+
+                _otp[i] = i < valueLength ? Value[i].ToString() : string.Empty;
+            }
+
+            if (Value != ComputedValue)
+            {
+                _prevValue = ComputedValue;
+                await ValueChanged.InvokeAsync(_prevValue);
             }
         }
     }
