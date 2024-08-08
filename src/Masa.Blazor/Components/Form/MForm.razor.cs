@@ -41,7 +41,9 @@ public partial class MForm : MasaComponentBase
 
     [Parameter] public EventCallback OnInvalidSubmit { get; set; }
 
-    [Parameter] public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
 
     internal ConcurrentDictionary<string, string> AutoLabelMap { get; } = new();
 

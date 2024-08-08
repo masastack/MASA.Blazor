@@ -4,7 +4,9 @@
     "enableValidation": "Enable form validation.",
     "model": "Objects that require form validation.",
     "readonly": "",
-    "value": "Whether the verification is successful."
+    "value": "Whether the verification is successful.",
+    "autoLabel": "Whether to automatically generate labels for form items.",
+    "validateOn": "Validation timing, options: input, blur, submit."
   },
   "events": {
     "onInvalidSubmit": "",

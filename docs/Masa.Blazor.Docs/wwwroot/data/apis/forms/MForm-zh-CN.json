@@ -4,7 +4,9 @@
     "enableValidation": "开启表单校验",
     "model": "需要表单校验的对象",
     "readonly": "",
-    "value": "是否校验成功"
+    "value": "是否校验成功",
+    "validateOn": "校验时机，可选输入时验证、失去光标时验证和提交时验证",
+    "autoLabel": "是否自动添加标签"
   },
   "events": {
     "onInvalidSubmit": "",
