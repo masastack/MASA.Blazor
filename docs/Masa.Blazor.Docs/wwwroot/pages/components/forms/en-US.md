@@ -23,6 +23,19 @@ Rules allow you to apply custom validation on all form components. These are ver
 
 <masa-example file="Examples.components.forms.Rules"></masa-example>
 
+#### Auto label {released-on=v1.7.0}
+
+When `AutoLabel` is `true`, **MForm** will automatically get the value of the `[Display]` or `[DisplayName]` attribute of the form field as the label.
+By default, it resolves the `[Display]` attribute, and you can also configure the `AttributeType` to resolve the `[DisplayName]` attribute by setting the `Masa.Blazor.Components.Form.AutoLabelOptions` subcomponent.
+
+<masa-example file="Examples.components.forms.AutoLabel"></masa-example>
+
+#### Validate on {released-on=v1.7.0}
+
+The `ValidateOn` prop is used to specify when to validate the form, with optional values of `Input`, `Blur` and `Submit`.
+
+<masa-example file="Examples.components.forms.ValidateOnDemo"></masa-example>
+
 ### Misc
 
 #### Model validation
@@ -37,31 +50,21 @@ Validate a single field using the `Validate` method of the **MForm** instance.
 
 <masa-example file="Examples.components.forms.ValidateField"></masa-example>
 
-#### Validation with submit and clear {updated-in=v1.6.0}
+#### Submit and clear {#submit-and-clear updated-in=v1.6.0}
 
 You can use the methods provided by `Context` in the content of **MForm**, or use the component instance provided by `@ref` outside of **MForm**.
 
 <masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
-#### Enable I18n {updated-in=v1.6.0}
+#### DataAnnotations with I18n {#enable-i18n updated-in=v1.6.0}
 
 Enable [I18n](/blazor/features/internationalization) to support multilingual validation messages. Locale resources used in the example can be found in [GitHub](https://github.com/masastack/MASA.Blazor/blob/0f4a450479bceb816d58bbbb7b8f8ca7655e2f94/docs/Masa.Docs.Shared/wwwroot/locale/en-US.json#L128).
 
-<app-alert type="warning" content="Cannot be applied to [complex types](#validate-complex-type-with-dataannotations), and only support localization for property names with an index of `0`, such as error messages for `[Range]` may not be localized correctly. Therefore, it is recommended to use FluentValidation or use additional *Resources.resx* for localization."></app-alert>
+<app-alert type="warning" content="Only support localization for property names with an index of `0`, such as error messages for `[Range]` may not be localized correctly."></app-alert>
 
 <masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
-#### Validate complex type with DataAnnotations 
-
-Use `[ValidateComplexType]` attribute and `<ObjectGraphDataAnnotationsValidator />` to validate complex types.
-
-```xml Project.csproj
-<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
-```
-
-<masa-example file="Examples.components.forms.ValidateComplexType"></masa-example>
-
-#### Validate with FluentValidation
+#### Validate with FluentValidation {#fluent-validation}
 
 <app-alert type="warning" content="Validators need to be registered, see [FluentValidation Dependency Injection](https://docs.fluentvalidation.net/en/latest/di.html) for details."></app-alert>
 
@@ -69,7 +72,7 @@ Use `[ValidateComplexType]` attribute and `<ObjectGraphDataAnnotationsValidator 
 
 <masa-example file="Examples.components.forms.ValidateWithFluentValidation"></masa-example>
 
-#### Parse external validation result
+#### Parse external validation result {#parse-form-validation}
 
 **MForm** supports parsing of `ValidationResult` , which users can use as `FormContext.ParseFormValidation' parameter that displays the validation results in a front-end form, using the validation collection as an example.
 

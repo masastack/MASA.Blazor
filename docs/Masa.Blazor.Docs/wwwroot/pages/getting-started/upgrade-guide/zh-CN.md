@@ -2,9 +2,9 @@
 
 ## 从 v1.6.x 升级到 v1.7.0 {#upgrading-from-v1-6-x-to-v1-7-0}
 
-### 组件 {#components}
+### 组件 {#v1-7-0-components}
 
-#### Pagination
+#### Pagination {#v1-7-0-pagination}
 
 新增了一个迷你样式的UI，现在当浏览器窗口小于 *600px* 时，会自动使用。如果不想使用迷你样式，可以通过 `MiniVariant` 属性手动设置。
 
@@ -13,6 +13,40 @@
                Length="10"
 +              MiniVariant="false"              
   ></MPagination>
+```
+
+#### Form {#v1-7-0-form}
+
+DataAnnotations 验证现在内置支持复杂类型，不需要引用额外的类库和代码。
+
+```diff .csproj
+- <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+```
+
+```diff .razor
+  <MForm>
+-     <ObjectGraphDataAnnotationsValidator />
+      @foreach (var person in _order.Persons)
+      {
+          <MTextField @bind-Value="person.Name" Label="Name"></MTextField>
+      }
+  </MForm>
+
+  @code {
+    public class Order
+    {
+-       [ValidateComplexType]
+        public List<Person> Persons { get; set; }
+    }
+
+    public class Person
+    {
+        [Required]
+        public string Name { get; set; }
+    }
+
+    private Order _order = new() { Persons = [] };
+  }
 ```
 
 ## 从 v1.5.x 升级到 v1.6.0

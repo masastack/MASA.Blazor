@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using IComponent = Microsoft.AspNetCore.Components.IComponent;
 
 namespace Masa.Blazor.Components.Form;
@@ -17,7 +16,8 @@ public class AutoLabelOptions : IComponent
     /// Supported types are <see cref="DisplayAttribute"/> and <see cref="System.ComponentModel.DisplayNameAttribute"/>.
     /// </summary>
     [Parameter]
-    public Type? AttributeType { get; set; } = typeof(DisplayNameAttribute);
+    [MasaApiParameter(nameof(DisplayAttribute))]
+    public Type? AttributeType { get; set; } = typeof(DisplayAttribute);
 
     private bool _init;
 

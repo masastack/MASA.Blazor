@@ -25,17 +25,17 @@
 
     private class Model
     {
-        [DisplayName("enableI18n-demo.name")]
+        [Display(Name = "enableI18n-demo.name")]
         [Required(ErrorMessage = "enableI18n-demo.required")]
         [MaxLength(10, ErrorMessage = "enableI18n-demo.maxlength-10")]
         public string? Name { get; set; }
 
-        [DisplayName("enableI18n-demo.email")]
+        [Display(Name = "enableI18n-demo.email")]
         [Required(ErrorMessage = "enableI18n-demo.required")]
         [EmailAddress(ErrorMessage = "enableI18n-demo.invalid-email")]
         public string? Email { get; set; }
 
-        [DisplayName("enableI18n-demo.item")]
+        [Display(Name = "enableI18n-demo.item")]
         [Required(ErrorMessage = "enableI18n-demo.required")]
         public string? Item { get; set; }
 

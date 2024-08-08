@@ -1,0 +1,59 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel
+
+<div style="width: 360px;" class="mx-auto">
+    <MRadioGroup @bind-Value="@_validateOn" HideDetails="true" Label="Validate On">
+        <MRadio Value="ValidateOn.Input" Label="On input"></MRadio>
+        <MRadio Value="ValidateOn.Blur" Label="On blur"></MRadio>
+        <MRadio Value="ValidateOn.Submit" Label="On submit"></MRadio>
+    </MRadioGroup>
+
+    <MDivider Class="my-2" />
+
+    <MForm Model="_model"
+           ValidateOn="_validateOn"
+           AutoLabel>
+        <MTextField @bind-Value="_model.Name" Filled
+                    Hint="Least 5 characters"
+                    PersistentHint>
+        </MTextField>
+        <MSelect @bind-Value="_model.Item"
+                 Items="@_sports"
+                 Filled
+                 ItemText="u => u"
+                 ItemValue="u => u">
+        </MSelect>
+        <MSlider @bind-Value="_model.Age" ThumbLabel="@("always")"></MSlider>
+        <MButton Type="submit" Block Color="primary">Submit</MButton>
+    </MForm>
+</div>
+@code {
+
+    class Model
+    {
+        [Display(Name = "Username")]
+        [Required]
+        [MinLength(5)]
+        public string Name { get; set; }
+
+        [Display(Name = "Favorite sport")]
+        [Required] public string Item { get; set; }
+
+        [Display(Name = "Age")]
+        [Range(18, 60)]
+        public int Age { get; set; }
+    }
+
+    private bool _valid = true;
+    private Model _model = new();
+    private ValidateOn _validateOn;
+
+    List<string> _sports = new()
+    {
+        "Basketball",
+        "Football",
+        "Tennis",
+        "Swimming"
+    };
+
+}

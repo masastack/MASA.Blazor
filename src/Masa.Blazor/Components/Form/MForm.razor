@@ -10,7 +10,7 @@
               @attributes="@Attributes">
             @ChildContent?.Invoke(FormContext!)
 
-            @if (AutoLabel)
+            @if (ComputedAutoLabel)
             {
                 <Masa.Blazor.Components.Form.FormInputLabelAutoGenerator />
             }
