@@ -35,6 +35,11 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     public event EventHandler<PageStackPageClosedEventArgs>? PageClosed;
 
     /// <summary>
+    /// Occurs when user invoked the <see cref="GoBackToPage(string)"/> method.
+    /// </summary>
+    internal event EventHandler<PageStackGoBackToPageEventArgs>? StackGoBackTo;
+
+    /// <summary>
     /// Push a new page onto the page stack.
     /// </summary>
     /// <param name="relativeUri"></param>
@@ -77,6 +82,16 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     }
 
     /// <summary>
+    /// Go back to the specified page in the page stack.
+    /// If the page is not found, do nothing.
+    /// </summary>
+    /// <param name="absolutePath"></param>
+    public void GoBackToPage(string absolutePath)
+    {
+        ExecuteIfTimeElapsed(() => StackGoBackTo?.Invoke(this, new PageStackGoBackToPageEventArgs(absolutePath)));
+    }
+
+    /// <summary>
     /// Replace the current page with the new page.
     /// </summary>
     /// <param name="relativeUri"></param>
@@ -102,7 +117,17 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     /// Clear current page stack and navigate to the new tab.
     /// </summary>
     /// <param name="relativeUri"></param>
+    [Obsolete("Use GoBackToTab instead.")]
     public void GoToTab(string relativeUri)
+    {
+        GoBackToTab(relativeUri);
+    }
+
+    /// <summary>
+    /// Clear current page stack and navigate to the new tab.
+    /// </summary>
+    /// <param name="relativeUri"></param>
+    public void GoBackToTab(string relativeUri)
     {
         ExecuteIfTimeElapsed(() => { StackClear?.Invoke(this, new PageStackClearEventArgs(relativeUri)); });
     }
