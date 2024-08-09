@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navigationManager)
+public class PageStackNavController(IJSRuntime jsRuntime)
 {
     /// <summary>
     /// Records the timestamp of the last action, shared by all actions.
@@ -45,11 +45,7 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     /// <param name="relativeUri"></param>
     public void Push(string relativeUri)
     {
-        ExecuteIfTimeElapsed(() =>
-        {
-            StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri));
-            navigationManager.NavigateTo(relativeUri);
-        });
+        ExecuteIfTimeElapsed(() => StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri)));
     }
 
     /// <summary>
@@ -86,9 +82,21 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     /// If the page is not found, do nothing.
     /// </summary>
     /// <param name="absolutePath"></param>
-    public void GoBackToPage(string absolutePath)
+    public void GoBackToPage(string absolutePath, object? state = null)
     {
-        ExecuteIfTimeElapsed(() => StackGoBackTo?.Invoke(this, new PageStackGoBackToPageEventArgs(absolutePath)));
+        ExecuteIfTimeElapsed(() => StackGoBackTo?.Invoke(this, new PageStackGoBackToPageEventArgs(absolutePath, state)));
+    }
+
+    /// <summary>
+    /// Go back to the specified page in the page stack 
+    /// and then invoke the <see cref="Replace(string, object?)"/> method.
+    /// </summary>
+    /// <param name="absolutePath"></param>
+    /// <param name="replaceUri"></param>
+    /// <param name="state"></param>
+    public void GoBackToPage(string absolutePath, string replaceUri, object? state = null)
+    {
+        ExecuteIfTimeElapsed(() => StackGoBackTo?.Invoke(this, new PageStackGoBackToPageEventArgs(absolutePath, state, replaceUri)));
     }
 
     /// <summary>
@@ -98,11 +106,7 @@ public class PageStackNavController(IJSRuntime jsRuntime, NavigationManager navi
     /// <param name="state"></param>
     public void Replace(string relativeUri, object? state = null)
     {
-        ExecuteIfTimeElapsed(() =>
-        {
-            StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
-            navigationManager.NavigateTo(relativeUri, replace: true);
-        });
+        ExecuteIfTimeElapsed(() => StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state)));
     }
 
     /// <summary>

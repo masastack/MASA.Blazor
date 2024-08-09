@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
+using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Presets;
 
@@ -71,21 +72,6 @@ public partial class PPageStack : PatternPathComponentBase
         _dotNetObjectReference = DotNetObjectReference.Create(this);
     }
 
-    private void InternalPageStackNavManagerOnStackGoBackTo(object? sender, PageStackGoBackToPageEventArgs e)
-    {
-        var delta = Pages.GetDelta(e.AbsolutePath);
-        if (delta == -1)
-        {
-            return;
-        }
-
-        _popstateByUserAction = true;
-
-        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
-
-        CloseTopPages(delta, null);
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -105,12 +91,12 @@ public partial class PPageStack : PatternPathComponentBase
         DisableRootScrollbar(true);
         InvokeAsync(StateHasChanged);
     }
-    
+
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
         var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
-        
+
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = absolutePath;
@@ -153,7 +139,13 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
-        Pages.UpdateTop(e.RelativeUri, e.State);
+        InternalReplaceHandler(e.RelativeUri, e.State);
+    }
+
+    private void InternalReplaceHandler(string relativeUri, object? state)
+    {
+        Pages.UpdateTop(relativeUri, state);
+        NavigationManager.Replace(relativeUri);
     }
 
     private void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
@@ -166,6 +158,7 @@ public partial class PPageStack : PatternPathComponentBase
     private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
     {
         Push(e.RelativeUri);
+        NavigationManager.NavigateTo(e.RelativeUri);
     }
 
     private async void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
@@ -185,6 +178,27 @@ public partial class PPageStack : PatternPathComponentBase
         _ = InvokeAsync(StateHasChanged);
 
         NextTick(() => NavigationManager.Replace(e.RelativeUri!));
+    }
+
+    private async void InternalPageStackNavManagerOnStackGoBackTo(object? sender, PageStackGoBackToPageEventArgs e)
+    {
+        var delta = Pages.GetDelta(e.AbsolutePath);
+        if (delta == -1)
+        {
+            return;
+        }
+
+        _popstateByUserAction = true;
+
+        await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+
+        CloseTopPages(delta, e.State);
+
+        if (e.ReplaceUri is not null)
+        {
+            await Task.Delay(DelayForPageClosingAnimation);
+            InternalReplaceHandler(e.ReplaceUri, e.State);
+        }
     }
 
     private string GetAbsolutePath(string relativeUri) => NavigationManager.ToAbsoluteUri(relativeUri).AbsolutePath;
