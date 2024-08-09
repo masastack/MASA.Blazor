@@ -348,12 +348,17 @@ public class ApiGenerator : IIncrementalGenerator
 
         return null;
 
-        static string? GetClassTypeText(INamedTypeSymbol? type)
+        static string? GetClassTypeText(INamedTypeSymbol type)
         {
             var properties = type.GetMembers().Where(m => m.Kind == SymbolKind.Property)
                 .Select(m =>
                 {
-                    var type = (m as IPropertySymbol).Type;
+                    var type = (m as IPropertySymbol)?.Type;
+                    if (type == null)
+                    {
+                        return (m.Name, Type: string.Empty);
+                    }
+
                     if (type.TypeKind == TypeKind.TypeParameter)
                     {
                         return (m.Name, Type: type.Name);
