@@ -18,6 +18,11 @@
    @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page1"))">
    Go back to page 1
 </a>
+<br />
+<a class="text-decoration-underline"
+   @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page2/xyz", "/blazor/examples/page-stack/page2/abc"))">
+    Go back to page 2 and replace with /abc
+</a>
 
 <MSyntaxHighlight Code="@sourceCode"
                   Language="razor"

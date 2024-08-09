@@ -12,6 +12,12 @@ public partial class PageStackPage3
             </ActionContent>
         </PStackPageBarInit>
 
-        <a @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page1"))">Go back to page 1</a>
+        <a @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page1"))">
+            Go back to page 1
+        </a>
+
+        <a @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page2/xyz", "/blazor/examples/page-stack/page2/abc"))">
+            Go back to page 2 and replace with "/abc"
+        </a>
         """;
 }
