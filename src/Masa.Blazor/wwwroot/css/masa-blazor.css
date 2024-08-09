@@ -22937,6 +22937,16 @@ html.overflow-y-hidden {
     flex: 1 1 auto;
     height: auto;
 }
+.m-input--selection-controls {
+    --m-selection-control-size: 40px;
+}
+.m-input--selection-controls.m-input--dense {
+    --m-selection-control-size: 28px;
+}
+.m-input--selection-controls__wrapper {
+    width: var(--m-selection-control-size);
+    height: var(--m-selection-control-size);
+}
 .m-input--selection-controls__input {
     color: inherit;
     display: inline-flex;
@@ -22948,15 +22958,11 @@ html.overflow-y-hidden {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    width: 40px;
-    height: 40px;
+    width: var(--m-selection-control-size);
+    height: var(--m-selection-control-size);
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-}
-.m-input--dense .m-input--selection-controls__input {
-    width: 28px;
-    height: 28px;
 }
 .m-input--selection-controls__input::before {
     content: "";
@@ -27307,7 +27313,7 @@ html.overflow-y-hidden {
 }
 
 .m-input--radio-group.m-input--radio-group--row .m-radio {
-    margin-right: 16px;
+    margin-right: 8px;
 }
 .theme--light.m-input--range-slider.m-input--slider.m-input--is-disabled .m-slider.m-slider .m-slider__thumb {
     background: #fafafa;
@@ -28273,16 +28279,11 @@ html.overflow-y-hidden {
 }
 
 .m-input--selection-controls__wrapper {
-    width: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
     flex: none;
-}
-.m-input--dense .m-input--selection-controls__wrapper {
-    width: 36px;
-    height: 28px;
 }
 .m-input--switch__track, .m-input--switch__thumb {
     background-color: currentColor;
