@@ -92,6 +92,17 @@ internal class StackPages : IEnumerable
         return true;
     }
 
+    /// <summary>
+    /// Get the number of pages between the current page and the specified page.
+    /// </summary>
+    /// <param name="absolutePath"></param>
+    /// <returns></returns>
+    internal int GetDelta(string absolutePath)
+    {
+        var lastIndex = _pages.FindLastIndex(x => x.AbsolutePath == absolutePath);
+        return lastIndex == -1 ? -1 : _pages.Count - 1 - lastIndex;
+    }
+
     internal void RemoveRange(int index, int count) => _pages.RemoveRange(index, count);
 
     internal StackPageData ElementAt(int index) => _pages.ElementAt(index);

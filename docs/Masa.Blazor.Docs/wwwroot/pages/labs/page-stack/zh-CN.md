@@ -39,9 +39,10 @@ related:
 | `Push`    | 将新页面推入堆栈。                  |
 | `Pop`     | 将当前页面弹出堆栈，同等于 `GoBack(1)`。 |
 | `GoBack`  | 返回到指定的前几个页面。               |
+| `GoBackToPage` | 返回到指定页面。                   |
 | `Replace` | 替换当前页面。                    |
 | `Clear`   | 清空当前页面堆栈。                  |
-| `GoToTab` | 清空当前堆栈并跳转到指定选项卡。           |
+| `GoBackToTab` | 清空当前堆栈并跳转到指定选项卡。           |
 
 ```razor
 @inject PageStackNavController NavController

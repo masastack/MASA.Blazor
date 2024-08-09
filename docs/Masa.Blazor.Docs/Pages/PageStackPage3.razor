@@ -14,6 +14,11 @@
 
 <h3>Page 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
 
+<a class="text-decoration-underline"
+   @onclick="@(() => NavController.GoBackToPage("/blazor/examples/page-stack/page1"))">
+   Go back to page 1
+</a>
+
 <MSyntaxHighlight Code="@sourceCode"
                   Language="razor"
                   Style="font-size: 10px">

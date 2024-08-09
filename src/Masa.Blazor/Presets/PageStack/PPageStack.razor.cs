@@ -66,8 +66,24 @@ public partial class PPageStack : PatternPathComponentBase
         InternalPageStackNavManager.StackPop += InternalPageStackNavManagerOnStackPop;
         InternalPageStackNavManager.StackReplace += InternalStackStackNavManagerOnStackReplace;
         InternalPageStackNavManager.StackClear += InternalStackStackNavManagerOnStackClear;
+        InternalPageStackNavManager.StackGoBackTo += InternalPageStackNavManagerOnStackGoBackTo;
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
+
+    private void InternalPageStackNavManagerOnStackGoBackTo(object? sender, PageStackGoBackToPageEventArgs e)
+    {
+        var delta = Pages.GetDelta(e.AbsolutePath);
+        if (delta == -1)
+        {
+            return;
+        }
+
+        _popstateByUserAction = true;
+
+        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+
+        CloseTopPages(delta, null);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -254,6 +270,7 @@ public partial class PPageStack : PatternPathComponentBase
             InternalPageStackNavManager.StackPop -= InternalPageStackNavManagerOnStackPop;
             InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
             InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
+            InternalPageStackNavManager.StackGoBackTo -= InternalPageStackNavManagerOnStackGoBackTo;
         }
     }
 

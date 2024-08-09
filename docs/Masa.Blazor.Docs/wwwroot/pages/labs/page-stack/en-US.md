@@ -35,14 +35,15 @@ related:
 
 Used to control the navigation of the page stack.
 
-| Method name | Description                                                     |
-|-------------|-----------------------------------------------------------------|
-| `Push`      | Push a new page onto the stack.                                 |
-| `Pop`       | Pop the current page from the stack, equivalent to `GoBack(1)`. |
-| `GoBack`    | Return to the specified number of pages.                        |
-| `Replace`   | Replace the current page.                                       |
-| `Clear`     | Clear the current page stack.                                   |
-| `GoToTab`   | Clear the current stack and jump to the specified tab.          |
+| Method name    | Description                                                     |
+|----------------|-----------------------------------------------------------------|
+| `Push`         | Push a new page onto the stack.                                 |
+| `Pop`          | Pop the current page from the stack, equivalent to `GoBack(1)`. |
+| `GoBack`       | Return to the specified number of pages.                        |
+| `GoBackToPage` | Return to the specified page.                                   |
+| `Replace`      | Replace the current page.                                       |
+| `Clear`        | Clear the current page stack.                                   |
+| `GoBackToTab`  | Clear the current stack and jump to the specified tab.          |
 
 ```razor
 @inject PageStackNavController NavController
