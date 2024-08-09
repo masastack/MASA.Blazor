@@ -165,7 +165,7 @@
 
     static List<string> animals = new() { "Dog", "Cat", "Rabbit", "Turtle", "Snake" };
 
-    MForm form;
+    MForm? form;
     bool terms;
     bool conditions;
     bool snackbar;
@@ -173,17 +173,17 @@
 
     Model model = new();
 
-    bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();
+    bool FormIsValid => form?.Value is true;
 
     void ResetForm()
     {
-        form.Reset();
+        form?.Reset();
     }
 
     void Submit()
     {
         snackbar = true;
-        form.Reset();
+        form?.Reset();
     }
 
     public class Model
