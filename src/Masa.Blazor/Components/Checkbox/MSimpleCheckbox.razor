@@ -7,20 +7,13 @@
          style="@GetStyle()"
          @onclick="@HandleOnClickAsync"
          @onclick:stopPropagation>
-        <div class="@_selectionBlock.Element("input")">
+        <div class="@_selectionBlock.Element("input")" ripple="@(Ripple && !Disabled)">
             <MIcon Color="@(Value ? Color : null)"
                    Disabled="@Disabled"
                    Dark="@Dark"
                    Light="@Light">
                 @ComputedIcon
             </MIcon>
-
-            @if (Ripple && !Disabled)
-            {
-                <div class="@GetClass(_selectionBlock.Element("ripple").Name, CssClassUtils.GetColor(Color, true))"
-                     style="@(StyleBuilder.Create().AddTextColor(Color))">
-                </div>
-            }
         </div>
     </div>
 </CascadingValue>
