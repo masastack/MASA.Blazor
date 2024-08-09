@@ -22973,9 +22973,6 @@ html.overflow-y-hidden {
 .m-input--selection-controls__input:hover:before {
     opacity: 0.04;
 }
-.m-input:not(.m0input--selection-controls) input {
-    max-height: none;
-}
 .m-input--selection-controls__input .m-icon {
     width: 100%;
 }
@@ -22992,7 +22989,7 @@ html.overflow-y-hidden {
     -ms-user-select: none;
     user-select: none;
 }
-.m-input--selection-controls__input + .m-label {
+.m-input--selection-controls__input + .m-label, .m-input--selection-controls__wrapper + .m-label {
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
