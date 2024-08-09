@@ -65,7 +65,7 @@
         </MChip>;
 
         RenderFragment<SelectListItemProps<DataTableHeader>> itemContent = context =>
-            @<BListItemContent>
+            @<MListItemContent>
                 @if (HeaderColContent != null)
                 {
                     @HeaderColContent(context.Item!)
@@ -74,7 +74,7 @@
                 {
                     @context.Item!.Text
                 }
-        </BListItemContent>;
+            </MListItemContent>;
 
         @if (MultiSort)
         {
