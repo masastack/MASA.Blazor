@@ -16,9 +16,11 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
 
     [Parameter] public TValue FalseValue { get; set; } = default!;
 
+    private bool _focusVisible;
+
     public override bool HasColor => IsActive;
 
-    public override string? ComputedColor => Color ?? (IsDark && !AppIsDark ? "white" : "primary");
+    public override string? ComputedColor => Color;
 
     private bool IsCustomValue => IsDirtyParameter(nameof(TrueValue)) && IsDirtyParameter(nameof(FalseValue));
 
@@ -80,6 +82,7 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
     public async Task HandleOnBlur(FocusEventArgs args)
     {
         IsFocused = false;
+        _focusVisible = false;
 
         await Task.CompletedTask;
     }
@@ -87,31 +90,35 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
     public async Task HandleOnFocus(FocusEventArgs args)
     {
         IsFocused = true;
-
-        await Task.CompletedTask;
+        _focusVisible = await Js.InvokeAsync<bool>(JsInteropConstants.MatchesSelector, InputElement, ":focus-visible");
     }
 
-    public Task HandleOnKeyDown(KeyboardEventArgs args)
+    protected virtual Task HandleOnKeyDown(KeyboardEventArgs args)
     {
         return Task.CompletedTask;
     }
 
 #if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
 
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
+        if (MasaBlazor.IsSsr && !IndependentTheme)
+        {
+            CascadingIsDark = MasaBlazor.Theme.Dark;
         }
+    }
 #endif
 
     protected static Block ControlBlock => new("m-input--selection-controls");
+    protected static BemIt.Element ControlWrapper => ControlBlock.Element("wrapper");
+
+    private ModifierBuilder _controlInputModifierBuilder = ControlBlock.Element("input").CreateModifierBuilder();
+
+    protected string ControlInputClasses => _controlInputModifierBuilder.Add(_focusVisible).Build();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(new[] { ControlBlock.Name });
+        return base.BuildComponentClass().Concat([ControlBlock.Name]);
     }
 }

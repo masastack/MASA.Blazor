@@ -15,12 +15,12 @@
     {
         var trackStyle = GetStyleBuilder().AddBackgroundColor(ComputedTrackColor).Build();
 
-        <div class="@ControlBlock.Element("wrapper")">
+        <div class="@ControlWrapper.Name">
             <div class="@_trackModifierBuilder.AddTextColor(CurrentColor).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
                  style="@trackStyle">
             </div>
 
-            <div class="@ControlBlock.Element("input")" ripple>
+            <div class="@ControlInputClasses" ripple="@Ripple">
                 @GenSelection()
             </div>
 

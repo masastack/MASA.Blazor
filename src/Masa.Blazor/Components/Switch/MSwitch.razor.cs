@@ -26,7 +26,7 @@
         public string? TrackColor { get; set; }
 
         public override bool HasColor => IsActive || HasText;
-        
+
         public string? ComputedTrackColor => HasText ? TrackColor ?? ValidationState : null;
 
         // according to spec, should still show
@@ -70,7 +70,6 @@
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
         private static ModifierBuilder _trackModifierBuilder = _block.Element("track").CreateModifierBuilder();
         private static ModifierBuilder _thumbModifierBuilder = _block.Element("thumb").CreateModifierBuilder();
-        
 
         protected override IEnumerable<string> BuildComponentClass()
         {
@@ -83,6 +82,14 @@
                         .Build()
                 }
             );
+        }
+
+        protected override async Task HandleOnKeyDown(KeyboardEventArgs args)
+        {
+            if ((args.Key == "ArrowLeft" && IsActive) || (args.Key == "ArrowRight" && !IsActive))
+            {
+                await HandleOnChange();
+            }
         }
     }
 }

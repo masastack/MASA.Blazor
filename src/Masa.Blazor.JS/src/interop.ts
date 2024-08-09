@@ -4,7 +4,7 @@ import throttle from "just-throttle";
 import { parseDragEvent, parseTouchEvent, touchEvents } from "./events/EventType";
 import { registerExtraEvents } from "./events/index";
 import registerRippleObserver from "./ripple";
-import { canUseDom, getBlazorId, getDom, getElementSelector } from "./utils/helper";
+import { canUseDom, getBlazorId, getDom, getElementSelector, IN_BROWSER } from "./utils/helper";
 
 window.onload = function () {
   registerExtraEvents();
@@ -1638,4 +1638,19 @@ export function isScrollNearBottom(element: HTMLElement, threshold: number = 200
     return false;
   }
   return element.scrollHeight - (element.scrollTop + element.clientHeight) < threshold;
+}
+
+export function matchesSelector (el: Element | undefined, selector: string): boolean | null {
+  const supportsSelector = IN_BROWSER &&
+    typeof CSS !== 'undefined' &&
+    typeof CSS.supports !== 'undefined' &&
+    CSS.supports(`selector(${selector})`)
+
+  if (!supportsSelector) return false;
+
+  try {
+    return !!el && el.matches(selector)
+  } catch (err) {
+    return false;
+  }
 }

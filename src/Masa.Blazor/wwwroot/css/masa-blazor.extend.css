@@ -1582,9 +1582,9 @@ html.m-overlay-scroll-blocked {
     cursor: pointer;
 }
 
-/* switch */
+/* switch/checkbox */
 
-.m-input--is-focused .m-input--selection-controls__input::before {
+.m-input--is-focused .m-input--selection-controls__input--focus-visible::before {
     opacity: 0.12;
 }
 
@@ -1708,8 +1708,12 @@ html.m-overlay-scroll-blocked {
     margin-inline-end: 2px;
 }
 
-/* slider */
+.m-select-list .m-list-item__action > .m-simple-checkbox .m-input--selection-controls__input {
+    height: auto;
+    width: auto;
+}
 
+/* slider */
 .m-slider__track-background {
     opacity: 0.38;
 }
