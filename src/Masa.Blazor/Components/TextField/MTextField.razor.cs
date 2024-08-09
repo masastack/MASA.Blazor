@@ -181,18 +181,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public bool HasCounter => Counter != false && Counter != null;
 
-    public override string? ComputedColor
-    {
-        get
-        {
-            if (!SoloInverted || !IsFocused)
-            {
-                return base.ComputedColor;
-            }
-
-            return Color ?? "primary";
-        }
-    }
+    public override string? ComputedColor => !SoloInverted || !IsFocused ? base.ComputedColor : Color;
 
     public override bool HasColor => IsFocused;
 

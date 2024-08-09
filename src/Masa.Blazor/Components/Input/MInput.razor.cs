@@ -11,7 +11,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     
     [CascadingParameter(Name = "AppIsDark")] protected bool AppIsDark { get; set; }
 
-    [Parameter] public virtual string? Color { get; set; }
+    [Parameter][MasaApiParameter("primary")] public string? Color { get; set; } = "primary";
 
     [Parameter] public string? BackgroundColor { get; set; }
 
@@ -224,7 +224,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
 
     #endregion
 
-    public virtual string? ComputedColor => IsDisabled ? null : Color ?? (IsDark && !AppIsDark ? "white" : "black");
+    public virtual string? ComputedColor => IsDisabled ? null : Color;
 
     public virtual bool HasColor => false;
 
