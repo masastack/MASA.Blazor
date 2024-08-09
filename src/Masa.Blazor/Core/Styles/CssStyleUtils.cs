@@ -2,8 +2,6 @@ namespace Masa.Blazor.Core;
 
 public static class CssStyleUtils
 {
-    private static Regex _colorRegex = new(@"rgb\((\d+),\s*(\d+),\s*(\d+)\)", RegexOptions.Compiled);
-
     public static string? GetTextColor(string? color, bool condition = true)
     {
         if (!condition || string.IsNullOrWhiteSpace(color) || !IsCssColor(color))
@@ -36,6 +34,6 @@ public static class CssStyleUtils
 
     private static bool IsCssColor(string color)
     {
-        return _colorRegex.Match(color).Success;
+        return color.StartsWith("#") || color.StartsWith("rgb") || color.StartsWith("hsl");
     }
 }
