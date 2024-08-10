@@ -1,6 +1,7 @@
 ﻿using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor.Presets;
 
@@ -148,11 +149,18 @@ public partial class PPageStack : PatternPathComponentBase
         NavigationManager.Replace(relativeUri);
     }
 
-    private void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
+    private async void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
     {
         _popstateByUserAction = true;
 
         CloseTopPages(e.Delta, e.State);
+        await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -e.Delta);
+
+        if (!string.IsNullOrWhiteSpace(e.ReplaceUri))
+        {
+            await Task.Delay(DelayForPageClosingAnimation);
+            InternalReplaceHandler(e.ReplaceUri, e.State);
+        }
     }
 
     private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
@@ -194,7 +202,7 @@ public partial class PPageStack : PatternPathComponentBase
 
         CloseTopPages(delta, e.State);
 
-        if (e.ReplaceUri is not null)
+        if (!string.IsNullOrWhiteSpace(e.ReplaceUri))
         {
             await Task.Delay(DelayForPageClosingAnimation);
             InternalReplaceHandler(e.ReplaceUri, e.State);
