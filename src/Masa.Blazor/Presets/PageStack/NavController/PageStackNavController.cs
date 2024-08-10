@@ -114,7 +114,7 @@ public class PageStackNavController()
     /// <param name="state"></param>
     public void Replace(string relativeUri, object? state = null)
     {
-        ExecuteIfTimeElapsed(() => StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state)));
+        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
     }
 
     /// <summary>
