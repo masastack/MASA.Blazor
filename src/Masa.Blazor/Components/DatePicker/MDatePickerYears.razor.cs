@@ -13,6 +13,9 @@ public partial class MDatePickerYears : MasaComponentBase
 
     [Parameter] public int Value { get; set; }
 
+    // for issue #2097
+    [Parameter] public DateOnly TableDate { get; set; }
+
     [Parameter] public EventCallback<int> OnInput { get; set; }
 
     [Parameter] public EventCallback<int> OnYearClick { get; set; }

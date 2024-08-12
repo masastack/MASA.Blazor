@@ -29,7 +29,7 @@
             class="@GetClass(CssClassUtils.GetTextColor(color), active ? "active" : null)"
             style="@(StyleBuilder.Create().AddTextColor(color))"
             @onclick="@(() => HandleOnYearItemClickAsync(year))">
-            @Formatter(new DateOnly(year, 1, 1))
+            @Formatter(new DateOnly(year, TableDate.Month, TableDate.Day))
         </li>
     };
 }
