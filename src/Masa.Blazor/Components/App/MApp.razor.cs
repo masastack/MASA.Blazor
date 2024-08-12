@@ -9,7 +9,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Inject] private IPopupProvider PopupProvider { get; set; } = null!;
+    [Inject] private IPopupService InternalPopupService { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -17,11 +17,13 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     protected bool IsDark => MasaBlazor?.Theme is { Dark: true };
 
+    private PopupService PopupService => (PopupService)InternalPopupService;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        PopupProvider.StateChanged += OnStateChanged;
+        PopupService.StateChanged += OnStateChanged;
         MasaBlazor.OnThemeChange += OnThemeChange;
         MasaBlazor.RTLChanged += OnRTLChanged;
         MasaBlazor.DefaultsChanged += OnDefaultsChanged;
@@ -87,7 +89,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     protected override ValueTask DisposeAsyncCore()
     {
-        PopupProvider.StateChanged -= OnStateChanged;
+        PopupService.StateChanged -= OnStateChanged;
         MasaBlazor.OnThemeChange -= OnThemeChange;
         MasaBlazor.RTLChanged -= OnRTLChanged;
         MasaBlazor.DefaultsChanged -= OnDefaultsChanged;
