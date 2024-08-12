@@ -1,0 +1,12 @@
+{
+  "props": {},
+  "events": {},
+  "contents": {},
+  "methods": {
+    "openAsync": "Open the specified type of popup component and wait for the result.",
+    "open": "Open the specified type of popup component.",
+    "close": "Close the specified type of popup component.",
+    "clear": "Clear all opened popup components.",
+    "enqueueSnackbarAsync": "Enqueue a snackbar to show."
+  }
+}

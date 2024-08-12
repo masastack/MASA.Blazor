@@ -2,16 +2,36 @@
 
 public interface IPopupService
 {
-    Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters);
+    /// <summary>
+    /// Clear all opened popup components.
+    /// </summary>
+    void Clear();
 
-    void Open(Type componentType, IDictionary<string, object?>? parameters = null);
-
+    /// <summary>
+    /// Close the specified type of popup component.
+    /// </summary>
+    /// <param name="componentType"></param>
     void Close(Type componentType);
 
-    #region Snackbar
-
-    event Func<SnackbarOptions, Task> SnackbarOpen;
+    /// <summary>
+    /// Enqueue a snackbar to show.
+    /// </summary>
+    /// <param name="options"></param>
+    /// <returns></returns
     Task EnqueueSnackbarAsync(SnackbarOptions options);
 
-    #endregion
+    /// <summary>
+    /// Open the specified type of popup component and wait for the result.
+    /// </summary>
+    /// <param name="componentType"></param>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
+    Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters);
+
+    /// <summary>
+    /// Open the specified type of popup component.
+    /// </summary>
+    /// <param name="componentType"></param>
+    /// <param name="parameters"></param>
+    void Open(Type componentType, IDictionary<string, object?>? parameters = null);
 }

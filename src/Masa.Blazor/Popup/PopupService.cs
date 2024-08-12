@@ -5,45 +5,84 @@ namespace Masa.Blazor;
 
 public class PopupService : IPopupService
 {
-    private readonly IPopupProvider _popupProvider;
+    private readonly List<ProviderItem> _items = [];
+    private readonly object _obj = new();
 
-    public event Func<SnackbarOptions, Task>? SnackbarOpen;
+    internal event EventHandler? StateChanged;
+    internal event Func<SnackbarOptions, Task>? SnackbarOpen;
 
-    public PopupService(IPopupProvider popupProvider)
+    public PopupService()
     {
-        _popupProvider = popupProvider;
-
         _ = OpenAsync(typeof(EnqueuedSnackbars), new Dictionary<string, object?>());
     }
 
     public void Open(Type componentType, IDictionary<string, object?>? parameters = null)
     {
-        OpenComponent(componentType, parameters);
+        Add(componentType, parameters);
     }
 
     public Task<object?> OpenAsync(Type componentType, IDictionary<string, object?> parameters)
     {
-        return OpenComponent(componentType, parameters).TaskCompletionSource.Task;
+        return Add(componentType, parameters).TaskCompletionSource.Task;
     }
 
     public void Close(Type componentType)
     {
-        var item = _popupProvider.GetItems().LastOrDefault(u => u.ComponentType == componentType);
+        var item = GetItems().LastOrDefault(u => u.ComponentType == componentType);
         if (item is not null)
         {
-            _popupProvider.Remove(item);
+            Remove(item);
         }
+    }
+
+    public void Clear()
+    {
+        _items.Clear();
+        StateHasChanged();
     }
 
     public async Task EnqueueSnackbarAsync(SnackbarOptions options)
     {
-        if (SnackbarOpen is null) return;
+        if (SnackbarOpen is null)
+            return;
 
         await SnackbarOpen.Invoke(options);
     }
 
-    private ProviderItem OpenComponent(Type componentType, IDictionary<string, object?>? parameters)
+    internal ProviderItem Add(Type componentType, IDictionary<string, object?>? attributes)
     {
-        return _popupProvider.Add(componentType, parameters, this, nameof(PopupService));
+        var item = new ProviderItem(componentType, attributes, this);
+
+        lock (_obj)
+        {
+            _items.Add(item);
+
+            StateHasChanged();
+
+            return item;
+        }
+    }
+
+    internal void Remove(ProviderItem item)
+    {
+        lock (_obj)
+        {
+            _items.Remove(item);
+
+            StateHasChanged();
+        }
+    }
+
+    internal IEnumerable<ProviderItem> GetItems()
+    {
+        lock (_obj)
+        {
+            return _items;
+        }
+    }
+
+    private void StateHasChanged()
+    {
+        StateChanged?.Invoke(this, EventArgs.Empty);
     }
 }

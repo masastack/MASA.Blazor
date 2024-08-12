@@ -1,0 +1,30 @@
+[
+  {
+    "name": "IPopupService",
+    "parameters": {
+      "methods": [
+        {
+          "name": "OpenAsync",
+          "type": "(Type componentType, Dictionary<string, object?> parameters) => Task<object?>"
+        },
+        {
+          "name": "Open",
+          "type": "(Type componentType, Dictionary<string, object?> parameters) => void"
+        },
+        {
+          "name": "Close",
+          "type": "(Type componentType) => void"
+        },
+        {
+          "name": "Clear",
+          "type": "() => void",
+          "releasedOn": "v1.7.0"
+        },
+        {
+          "name": "EnqueueSnackbarAsync",
+          "type": "(SnackbarOptions options) => Task"
+        }
+      ]
+    }
+  }
+]

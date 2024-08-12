@@ -3,7 +3,7 @@
 public partial class EnqueuedSnackbars : ComponentBase, IAsyncDisposable
 {
     [Inject]
-    private IPopupService PopupService { get; set; } = null!;
+    private IPopupService InternalPopupService { get; set; } = null!;
 
     [Inject]
     private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -39,6 +39,8 @@ public partial class EnqueuedSnackbars : ComponentBase, IAsyncDisposable
     public bool Text { get; set; }
 
     private PEnqueuedSnackbars? _enqueuedSnackbars;
+
+    private PopupService PopupService => (PopupService)InternalPopupService;
 
     protected override async Task OnInitializedAsync()
     {

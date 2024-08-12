@@ -139,6 +139,9 @@
     "PPageContainer",
     "PPageProvider"
   ],
+  "popup-service": [
+    "IPopupService"
+  ],
   "radios": [
     "MRadio",
     "MRadioGroup"
