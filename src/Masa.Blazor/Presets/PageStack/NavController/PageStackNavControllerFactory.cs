@@ -4,19 +4,8 @@ namespace Masa.Blazor.Presets.PageStack.NavController;
 
 public class PageStackNavControllerFactory : IPageStackNavControllerFactory
 {
-    private readonly IJSRuntime _jsRuntime;
-
-    internal readonly ConcurrentDictionary<string, Lazy<PageStackNavController>> _managers = new();
-
-    public PageStackNavControllerFactory(IJSRuntime jsRuntime)
-    {
-        _jsRuntime = jsRuntime;
-    }
+    private readonly ConcurrentDictionary<string, Lazy<PageStackNavController>> _managers = new();
 
     public PageStackNavController Create(string name)
-    {
-        return _managers.GetOrAdd(name,
-                _ => new Lazy<PageStackNavController>(() => new PageStackNavController(_jsRuntime)))
-            .Value;
-    }
+        => _managers.GetOrAdd(name, _ => new Lazy<PageStackNavController>(() => new PageStackNavController())).Value;
 }

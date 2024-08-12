@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public class PageStackNavController(IJSRuntime jsRuntime)
+public class PageStackNavController()
 {
     /// <summary>
     /// Records the timestamp of the last action, shared by all actions.
@@ -65,16 +65,24 @@ public class PageStackNavController(IJSRuntime jsRuntime)
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void GoBack(int delta = 1, object? state = null)
     {
+        GoBackAndReplace(delta, null, state);
+    }
+
+    /// <summary>
+    /// Go back to specified number of steps in the page stack,
+    /// and then invoke the <see cref="Replace(string, object?)"/> method.
+    /// </summary>
+    /// <param name="delta"></param>
+    /// <param name="replaceUri"></param>
+    /// <param name="state"></param>
+    public void GoBackAndReplace(int delta, string? replaceUri, object? state = null)
+    {
         if (delta < 1)
         {
             throw new ArgumentOutOfRangeException(nameof(delta), "The delta must be greater than or equal to 1.");
         }
 
-        ExecuteIfTimeElapsed(() =>
-        {
-            StackPop?.Invoke(this, new PageStackPopEventArgs(delta, state));
-            _ = jsRuntime.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
-        });
+        ExecuteIfTimeElapsed(() => StackPop?.Invoke(this, new PageStackPopEventArgs(delta, replaceUri, state)));
     }
 
     /// <summary>
@@ -94,7 +102,7 @@ public class PageStackNavController(IJSRuntime jsRuntime)
     /// <param name="absolutePath"></param>
     /// <param name="replaceUri"></param>
     /// <param name="state"></param>
-    public void GoBackToPage(string absolutePath, string replaceUri, object? state = null)
+    public void GoBackToPageAndReplace(string absolutePath, string replaceUri, object? state = null)
     {
         ExecuteIfTimeElapsed(() => StackGoBackTo?.Invoke(this, new PageStackGoBackToPageEventArgs(absolutePath, state, replaceUri)));
     }
@@ -106,7 +114,7 @@ public class PageStackNavController(IJSRuntime jsRuntime)
     /// <param name="state"></param>
     public void Replace(string relativeUri, object? state = null)
     {
-        ExecuteIfTimeElapsed(() => StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state)));
+        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
     }
 
     /// <summary>
