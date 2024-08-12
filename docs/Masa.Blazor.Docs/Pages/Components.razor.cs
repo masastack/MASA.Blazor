@@ -203,7 +203,7 @@ public partial class Components
             foreach (var item in apis)
             {
                 var (dir, componentName) = Resolve(item, Page);
-                 _apiData[componentName] = await getApiGroupAsync(dir, componentName, true);
+                _apiData[componentName] = await getApiGroupAsync(dir, componentName, true);
             }
         }
         else
@@ -214,7 +214,9 @@ public partial class Components
 
         async Task<Dictionary<string, List<ParameterInfo>>> getApiGroupAsync(string dir, string componentName, bool isFullname = false)
         {
+            var otherApis = await BlazorDocService.GetOtherApisAsync();
             var componentApiMetas = GetAllComponentApiMetas();
+            componentApiMetas.AddRange(otherApis);
 
             var component = isFullname
                 ? componentApiMetas.FirstOrDefault(u => u.Name == componentName)
@@ -224,7 +226,7 @@ public partial class Components
             if (component is not null)
             {
                 componentName = component.Name;
-                
+
                 var parametersCacheValue = component.Parameters;
 
                 parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
@@ -265,7 +267,7 @@ public partial class Components
         return name?.TrimEnd('s').ToPascal();
     }
 
-    private static IEnumerable<ComponentMeta> GetAllComponentApiMetas()
+    private static List<ComponentMeta> GetAllComponentApiMetas()
     {
         var list = ApiGenerator.ComponentMetas.ToList();
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);

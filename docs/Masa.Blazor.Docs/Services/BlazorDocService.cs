@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Masa.Blazor.Docs.Services;
 
@@ -12,6 +13,7 @@ public class BlazorDocService
     private readonly Lazy<Task<Dictionary<string, Dictionary<string, Dictionary<string, string>>>?>> _commonApis;
 
     private Dictionary<string, List<string>>? _apiInPageCache;
+    private List<ComponentMeta>? _otherApis;
 
     public BlazorDocService(IHttpClientFactory factory, I18n i18n)
     {
@@ -61,6 +63,29 @@ public class BlazorDocService
         return _apiInPageCache ?? new Dictionary<string, List<string>>();
     }
 
+    public async Task<List<ComponentMeta>> GetOtherApisAsync()
+    {
+        if (_otherApis is not null)
+        {
+            return _otherApis;
+        }
+
+        try
+        {
+            var json = await _httpClient.GetStringAsync("_content/Masa.Blazor.Docs/data/other-apis.json");
+            _otherApis = JsonSerializer.Deserialize<List<ComponentMeta>>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web)
+            {
+                UnmappedMemberHandling = System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip
+            });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        return _otherApis ?? [];
+    }
+
     public async Task<Dictionary<string, Dictionary<string, string>>?> ReadApisAsync(string kebabCaseComponent, string? apiName = null)
     {
         var key = $"{kebabCaseComponent}/{(apiName is null ? "" : apiName + "-")}{_i18n.Culture.Name}";
@@ -96,7 +121,7 @@ public class BlazorDocService
                                 api.TryAdd(prop, desc);
                             }
                         }
-                        
+
                         if (commonApiInfo.TryGetValue(category, out var commonApi))
                         {
                             foreach (var (prop, desc) in commonApi)

@@ -1,0 +1,12 @@
+{
+  "props": {},
+  "events": {},
+  "contents": {},
+  "methods": {
+    "openAsync": "打开指定类型的弹出组件，可等待结果",
+    "open": "打开指定类型的弹出组件",
+    "close": "关闭指定类型的弹出组件",
+    "clear": "关闭所有弹出组件",
+    "enqueueSnackbarAsync": "新增消息提示"
+  }
+}
