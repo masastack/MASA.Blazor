@@ -73,7 +73,6 @@ public static class ServiceCollectionExtensions
                 options.Defaults);
         }, masaBlazorServiceLifetime));
 
-        services.TryAdd<IPopupProvider, PopupProvider>(masaBlazorServiceLifetime);
         services.TryAdd<IPopupService, PopupService>(masaBlazorServiceLifetime);
 
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
