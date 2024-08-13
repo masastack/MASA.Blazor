@@ -215,7 +215,7 @@ class PDFViewerApplication {
       { passive: false }
     );
 
-    container.addEventListener(
+    container.firstElementChild.addEventListener(
       "touchmove",
       (e: TouchEvent) => {
         if (e.touches.length === 2) {
