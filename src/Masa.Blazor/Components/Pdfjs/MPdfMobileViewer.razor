@@ -1,0 +1,26 @@
+﻿<div class="m-pdf-mobile-viewer">
+    <div id="viewerContainer" tabindex="0">
+        <div id="viewer" class="pdfViewer"></div>
+    </div>
+
+    <div id="loadingBar">
+        <div class="progress"></div>
+        <div class="glimmer"></div>
+    </div>
+</div>
+
+@code {
+    [Inject] private PdfMobileViewerJSModule JsModule { get; set; } = null!;
+
+    [Parameter] [EditorRequired] public string? Url { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            await JsModule.Init("viewerContainer", "viewer", Url);
+        }
+    }
+}

@@ -32,7 +32,8 @@
     "build:scrollToTarget": "rollup --config rollup.config.scrollToTargetJSInterop.ts",
     "build:pageStack": "rollup --config rollup.config.pageStack.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts",
-    "build:transition": "rollup --config rollup.config.transition.ts"
+    "build:transition": "rollup --config rollup.config.transition.ts",
+    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts"
   },
   "author": "",
   "license": "MIT",
@@ -60,6 +61,7 @@
     "markdown-it-header-sections": "^1.0.0",
     "markdown-it-todo": "^1.0.5",
     "monaco-editor": "^0.36.1",
+    "pdfjs-dist": "^4.5.136",
     "punycode": "^2.1.1",
     "rollup": "^2.79.1",
     "rollup-plugin-terser": "^7.0.2",
