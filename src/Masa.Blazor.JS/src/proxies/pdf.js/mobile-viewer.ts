@@ -84,7 +84,7 @@ class PDFViewerApplication {
       this.pdfHistory.initialize({
         fingerprint: pdfDocument.fingerprints[0],
       });
-      this.loadingBar.hide();
+      // this.loadingBar.hide();
     } catch (reason) {
       let key = "pdfjs-loading-error";
       if (reason instanceof InvalidPDFException) {
@@ -97,7 +97,7 @@ class PDFViewerApplication {
       self.l10n.get(key, null, null).then((msg) => {
         self.error(msg, { message: reason?.message });
       });
-      self.loadingBar.hide();
+      // self.loadingBar.hide();
     }
   }
 
@@ -121,10 +121,10 @@ class PDFViewerApplication {
     }
   }
 
-  get loadingBar() {
-    const bar = document.getElementById("loadingBar");
-    return shadow(this, "loadingBar", new pdfjsViewer.ProgressBar(bar));
-  }
+  // get loadingBar() {
+  //   const bar = document.getElementById("loadingBar");
+  //   return shadow(this, "loadingBar", new pdfjsViewer.ProgressBar(bar));
+  // }
 
   error(message, moreInfo) {
     const moreInfoText = [`PDF.js v${version || "?"} (build: ${build || "?"})`];
@@ -149,9 +149,9 @@ class PDFViewerApplication {
   progress(level) {
     const percent = Math.round(level * 100);
     // Updating the bar if value increases.
-    if (percent > this.loadingBar.percent || isNaN(percent)) {
-      this.loadingBar.percent = percent;
-    }
+    // if (percent > this.loadingBar.percent || isNaN(percent)) {
+    //   this.loadingBar.percent = percent;
+    // }
   }
 
   get pagesCount() {
@@ -283,7 +283,7 @@ class PDFViewerApplication {
 
   startDistance = 0;
 
-  _wheel(e: WheelEvent) {
+  _wheel = (e: WheelEvent) => {
     if (e.ctrlKey) {
       e.preventDefault();
       if (e.deltaY < 0) {
@@ -292,7 +292,7 @@ class PDFViewerApplication {
         this.zoomOut();
       }
     }
-  }
+  };
 
   getDistance(touches) {
     const dx = touches[0].pageX - touches[1].pageX;

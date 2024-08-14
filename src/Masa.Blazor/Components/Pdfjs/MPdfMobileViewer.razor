@@ -4,20 +4,15 @@
 <div class="m-pdf-mobile-viewer" @ref="Ref">
     <div class="viewerContainer">
         <div class="viewer pdfViewer"></div>
-    </div>
 
-    <div id="loadingBar">
-        <div class="progress"></div>
-        <div class="glimmer"></div>
+        <footer>
+            @GenBtn("previous", "mdi-arrow-up")
+            @GenBtn("next", "mdi-arrow-down")
+            <div class="pagination"></div>
+            @GenBtn("zoomOut", "mdi-magnify-minus-outline")
+            @GenBtn("zoomIn", "mdi-magnify-plus-outline")
+        </footer>
     </div>
-
-    <footer>
-        @GenBtn("previous", "mdi-arrow-up")
-        @GenBtn("next", "mdi-arrow-down")
-        <div class="pagination"></div>
-        @GenBtn("zoomOut", "mdi-magnify-minus-outline")
-        @GenBtn("zoomIn", "mdi-magnify-plus-outline")
-    </footer>
 </div>
 
 @code {

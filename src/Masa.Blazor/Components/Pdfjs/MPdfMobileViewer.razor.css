@@ -14,7 +14,7 @@
 }
 
 .m-pdf-mobile-viewer .viewer {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .m-pdf-mobile-viewer canvas {
