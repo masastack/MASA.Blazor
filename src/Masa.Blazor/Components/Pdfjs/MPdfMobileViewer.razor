@@ -1,26 +1,32 @@
-﻿<div class="m-pdf-mobile-viewer">
-    <div id="viewerContainer" tabindex="0">
-        <div id="viewer" class="pdfViewer"></div>
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div class="m-pdf-mobile-viewer" @ref="Ref">
+    <div class="viewerContainer">
+        <div class="viewer pdfViewer"></div>
     </div>
 
     <div id="loadingBar">
         <div class="progress"></div>
         <div class="glimmer"></div>
     </div>
+
+    <footer>
+        @GenBtn("previous", "mdi-arrow-up")
+        @GenBtn("next", "mdi-arrow-down")
+        <div class="pagination"></div>
+        @GenBtn("zoomOut", "mdi-magnify-minus-outline")
+        @GenBtn("zoomIn", "mdi-magnify-plus-outline")
+    </footer>
 </div>
 
 @code {
-    [Inject] private PdfMobileViewerJSModule JsModule { get; set; } = null!;
 
-    [Parameter] [EditorRequired] public string? Url { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private RenderFragment GenBtn(string key, string icon) => __builder =>
     {
-        await base.OnAfterRenderAsync(firstRender);
+        <MButton Class="@key" Text Tile>
+            <MIcon>@icon</MIcon>
+        </MButton>
+    };
 
-        if (firstRender)
-        {
-            await JsModule.Init("viewerContainer", "viewer", Url);
-        }
-    }
 }

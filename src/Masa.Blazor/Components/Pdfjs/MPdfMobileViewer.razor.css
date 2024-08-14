@@ -1,101 +1,118 @@
 ﻿.m-pdf-mobile-viewer .hidden {
-  display: none;
+    display: none;
 }
+
 .m-pdf-mobile-viewer [hidden] {
-  display: none !important;
+    display: none !important;
 }
 
-.m-pdf-mobile-viewer #viewerContainer {
-  position: absolute;
-  overflow: auto;
-  width: 100%;
+.m-pdf-mobile-viewer .viewerContainer {
+    position: absolute;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
 }
 
-.m-pdf-mobile-viewer #viewer {
-    overflow:hidden;
+.m-pdf-mobile-viewer .viewer {
+    overflow: hidden;
 }
 
 .m-pdf-mobile-viewer canvas {
-  margin: auto;
-  display: block;
+    margin: auto;
+    display: block;
 }
 
 .m-pdf-mobile-viewer .pdfViewer .page .loadingIcon {
-  width: 2.9rem;
-  height: 2.9rem;
-  background: url("images/spinner.png") no-repeat left top / 38rem;
-  border: medium none;
-  animation: 1s steps(10, end) 0s normal none infinite moveDefault;
-  display: block;
-  position: absolute;
-  top: calc((100% - 2.9rem) / 2);
-  left: calc((100% - 2.9rem) / 2);
+    width: 2.9rem;
+    height: 2.9rem;
+    background: url("images/spinner.png") no-repeat left top / 38rem;
+    border: medium none;
+    animation: 1s steps(10, end) 0s normal none infinite moveDefault;
+    display: block;
+    position: absolute;
+    top: calc((100% - 2.9rem) / 2);
+    left: calc((100% - 2.9rem) / 2);
 }
 
 @keyframes moveDefault {
-  from {
-    background-position: 0 top;
-  }
+    from {
+        background-position: 0 top;
+    }
 
-  to {
-    background-position: -39rem top;
-  }
+    to {
+        background-position: -39rem top;
+    }
 }
 
 .m-pdf-mobile-viewer #loadingBar {
-  /* Define this variable here, and not in :root, to avoid reflowing the
+    /* Define this variable here, and not in :root, to avoid reflowing the
      entire viewer when updating progress (see issue 15958). */
-  --progressBar-percent: 0%;
-
-  position: relative;
-  height: 0.6rem;
-  background-color: rgb(51 51 51 / 1);
-  border-bottom: 1px solid rgb(51 51 51 / 1);
+    --progressBar-percent: 0%;
+    position: relative;
+    height: 0.6rem;
+    background-color: rgb(51 51 51 / 1);
+    border-bottom: 1px solid rgb(51 51 51 / 1);
 }
 
 .m-pdf-mobile-viewer #loadingBar .progress {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  transform: scaleX(var(--progressBar-percent));
-  transform-origin: 0 0;
-  height: 100%;
-  background-color: rgb(221 221 221 / 1);
-  overflow: hidden;
-  transition: transform 200ms;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    transform: scaleX(var(--progressBar-percent));
+    transform-origin: 0 0;
+    height: 100%;
+    background-color: rgb(221 221 221 / 1);
+    overflow: hidden;
+    transition: transform 200ms;
 }
 
 @keyframes progressIndeterminate {
-  0% {
-    transform: translateX(0%);
-  }
-  50% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .m-pdf-mobile-viewer #loadingBar.indeterminate .progress {
-  transform: none;
-  background-color: rgb(153 153 153 / 1);
-  transition: none;
+    transform: none;
+    background-color: rgb(153 153 153 / 1);
+    transition: none;
 }
 
 .m-pdf-mobile-viewer #loadingBar.indeterminate .progress .glimmer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 5rem;
-  background-image: linear-gradient(
-    to right,
-    rgb(153 153 153 / 1) 0%,
-    rgb(255 255 255 / 1) 50%,
-    rgb(153 153 153 / 1) 100%
-  );
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  animation: progressIndeterminate 2s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5rem;
+    background-image: linear-gradient( to right, rgb(153 153 153 / 1) 0%, rgb(255 255 255 / 1) 50%, rgb(153 153 153 / 1) 100% );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    animation: progressIndeterminate 2s linear infinite;
+}
+
+.m-pdf-mobile-viewer footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    background-color: var(--m-theme-light-inverse-surface);
+    color: var(--m-theme-light-inverse-on-surface);
+}
+
+.m-pdf-mobile-viewer footer ::deep > * {
+    flex: 1;
+    color: inherit;
+    text-align: center;
+    margin: auto 0;
 }

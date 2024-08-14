@@ -6,8 +6,8 @@ internal class PdfMobileViewerJSModule : JSModule
     {
     }
 
-    public async ValueTask Init(string container, string viewer, string url)
+    public async ValueTask Init(ElementReference el, string url)
     {
-        await InvokeVoidAsync("init", container, viewer, url);
+        await InvokeVoidAsync("init", el, url);
     }
 }

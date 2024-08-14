@@ -1,6 +1,6 @@
 import {
-    build, getDocument, GlobalWorkerOptions, InvalidPDFException, MissingPDFException, shadow,
-    UnexpectedResponseException, version
+    build, getDocument, GlobalWorkerOptions, InvalidPDFException, MissingPDFException,
+    PDFDocumentProxy, shadow, UnexpectedResponseException, version
 } from "pdfjs-dist";
 import * as pdfjsViewer from "pdfjs-dist/legacy/web/pdf_viewer.mjs";
 
@@ -17,15 +17,32 @@ const DEFAULT_SCALE_VALUE = "auto";
 
 class PDFViewerApplication {
   pdfLoadingTask: any;
-  pdfDocument: any;
-  pdfViewer: any;
+  pdfDocument: PDFDocumentProxy;
+  pdfViewer: pdfjsViewer.PDFViewer;
   pdfHistory: any;
   pdfLinkService: any;
   eventBus: any;
   value: number;
   l10n: pdfjsViewer.GenericL10n;
+  root: HTMLElement;
+  previous: HTMLElement;
+  next: HTMLElement;
+  zoomInBtn: HTMLElement;
+  zoomOutBtn: HTMLElement;
+  container: HTMLDivElement;
+  viewerDiv: HTMLElement;
+  pagination: HTMLElement;
 
-  constructor() {
+  constructor(root: HTMLElement) {
+    this.root = root;
+    this.previous = root.querySelector(".previous");
+    this.next = root.querySelector(".next");
+    this.zoomInBtn = root.querySelector(".zoomIn");
+    this.zoomOutBtn = root.querySelector(".zoomOut");
+    this.container = root.querySelector(".viewerContainer");
+    this.viewerDiv = this.container.firstElementChild as HTMLElement;
+    this.pagination = root.querySelector(".pagination");
+
     this.pdfLoadingTask = null;
     this.pdfDocument = null;
     this.pdfViewer = null;
@@ -52,8 +69,6 @@ class PDFViewerApplication {
     const loadingTask = getDocument({
       url,
       maxImageSize: MAX_IMAGE_SIZE,
-      // cMapUrl: CMAP_URL,
-      // cMapPacked: CMAP_PACKED,
     });
     this.pdfLoadingTask = loadingTask;
 
@@ -151,27 +166,34 @@ class PDFViewerApplication {
     this.pdfViewer.currentPageNumber = val;
   }
 
-  zoomIn(ticks = 0) {
+  _zoomIn = () => this.zoomIn();
+  _zoomOut = () => this.zoomOut();
+  _previousClick = () => this.page--;
+  _nextClick = () => this.page++;
+
+  zoomIn(ticks = undefined) {
     let newScale = this.pdfViewer.currentScale;
     do {
-      newScale = (newScale * DEFAULT_SCALE_DELTA).toFixed(2);
+      newScale = Number((newScale * DEFAULT_SCALE_DELTA).toFixed(2));
       newScale = Math.ceil(newScale * 10) / 10;
       newScale = Math.min(MAX_SCALE, newScale);
     } while (--ticks && newScale < MAX_SCALE);
-    this.pdfViewer.currentScaleValue = newScale;
+    this.pdfViewer.currentScaleValue = newScale.toFixed(2);
   }
 
-  zoomOut(ticks = 0) {
+  zoomOut(ticks = undefined) {
     let newScale = this.pdfViewer.currentScale;
     do {
-      newScale = (newScale / DEFAULT_SCALE_DELTA).toFixed(2);
+      newScale = Number((newScale / DEFAULT_SCALE_DELTA).toFixed(2));
       newScale = Math.floor(newScale * 10) / 10;
       newScale = Math.max(MIN_SCALE, newScale);
     } while (--ticks && newScale > MIN_SCALE);
-    this.pdfViewer.currentScaleValue = newScale;
+    this.pdfViewer.currentScaleValue = newScale.toFixed(2);
   }
 
-  initUI(container: HTMLDivElement) {
+  previousPage() {}
+
+  initUI() {
     const eventBus = new pdfjsViewer.EventBus();
     this.eventBus = eventBus;
 
@@ -183,7 +205,7 @@ class PDFViewerApplication {
     this.l10n = new pdfjsViewer.GenericL10n(null);
 
     const pdfViewer = new pdfjsViewer.PDFViewer({
-      container,
+      container: this.container,
       eventBus,
       linkService,
       l10n: this.l10n,
@@ -199,67 +221,108 @@ class PDFViewerApplication {
     });
     linkService.setHistory(this.pdfHistory);
 
-    eventBus.on("pagesinit", function () {
+    eventBus.on("pagesinit", () => {
       // We can use pdfViewer now, e.g. let's change default scale.
       pdfViewer.currentScaleValue = DEFAULT_SCALE_VALUE;
+      this.pagination.textContent = `${pdfViewer.currentPageNumber} / ${this.pagesCount}`;
     });
 
-    container.firstElementChild.addEventListener(
-      "touchstart",
-      (e: TouchEvent) => {
-        if (e.touches.length === 2) {
-          this.startDistance = this.getDistance(e.touches);
-          e.preventDefault();
-        }
+    eventBus.on(
+      "pagechanging",
+      (evt) => {
+        const page = evt.pageNumber;
+        const numPages = this.pagesCount;
+        this.pagination.textContent = `${page} / ${numPages}`;
       },
-      { passive: false }
+      true
     );
 
-    container.firstElementChild.addEventListener(
-      "touchmove",
-      (e: TouchEvent) => {
-        if (e.touches.length === 2) {
-          const currentDistance = this.getDistance(e.touches);
-          const scaleChange = currentDistance / this.startDistance;
-          console.log(
-            "old this.pdfViewer.currentScaleValue",
-            this.pdfViewer.currentScaleValue
-          );
-          this.pdfViewer.currentScaleValue *= scaleChange;
-          console.log(
-            "new this.pdfViewer.currentScaleValue",
-            this.pdfViewer.currentScaleValue
-          );
-          this.startDistance = currentDistance;
+    // container.firstElementChild.addEventListener(
+    //   "touchstart",
+    //   (e: TouchEvent) => {
+    //     if (e.touches.length === 2) {
+    //       this.startDistance = this.getDistance(e.touches);
+    //       console.log("touchstart startDistance", this.startDistance);
+    //       e.preventDefault();
+    //     }
+    //   },
+    //   { passive: false }
+    // );
 
-          e.preventDefault();
-        }
-      },
-      { passive: false }
-    );
+    // container.firstElementChild.addEventListener(
+    //   "touchmove",
+    //   (e: TouchEvent) => {
+    //     if (e.touches.length === 2) {
+    //       const currentDistance = this.getDistance(e.touches);
+    //       console.log("touchmove currentDistance", currentDistance);
+    //       const scaleChange = currentDistance / this.startDistance;
+    //       console.log(
+    //         "old this.pdfViewer.currentScaleValue",
+    //         this.pdfViewer.currentScaleValue
+    //       );
+    //       this.pdfViewer.currentScaleValue *= scaleChange;
+    //       console.log(
+    //         "new this.pdfViewer.currentScaleValue",
+    //         this.pdfViewer.currentScaleValue
+    //       );
+    //       this.startDistance = currentDistance;
+
+    //       e.preventDefault();
+    //     }
+    //   },
+    //   { passive: false }
+    // );
+
+    this.viewerDiv.addEventListener("wheel", this._wheel);
+    this.previous &&
+      this.previous.addEventListener("click", this._previousClick);
+    this.next && this.next.addEventListener("click", this._nextClick);
+    this.zoomInBtn && this.zoomInBtn.addEventListener("click", this._zoomIn);
+    this.zoomOutBtn && this.zoomOutBtn.addEventListener("click", this._zoomOut);
   }
 
   startDistance = 0;
+
+  _wheel(e: WheelEvent) {
+    if (e.ctrlKey) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        this.zoomIn();
+      } else {
+        this.zoomOut();
+      }
+    }
+  }
 
   getDistance(touches) {
     const dx = touches[0].pageX - touches[1].pageX;
     const dy = touches[0].pageY - touches[1].pageY;
     return Math.sqrt(dx * dx + dy * dy);
   }
+
+  destroy() {
+    this.viewerDiv.removeEventListener("wheel", this._wheel);
+
+    this.previous &&
+      this.previous.removeEventListener("click", this._previousClick);
+    this.next && this.next.removeEventListener("click", this._nextClick);
+    this.zoomInBtn && this.zoomInBtn.removeEventListener("click", this._zoomIn);
+    this.zoomOutBtn &&
+      this.zoomOutBtn.removeEventListener("click", this._zoomOut);
+  }
 }
 
-function init(viewerContainer: string, viewer: string, url: string) {
-  const container = document.getElementById(viewerContainer) as HTMLDivElement;
-  console.log("container", container);
-  const pdfViewerApp = new PDFViewerApplication();
-  console.log("import.meta.url", import.meta.url);
+function init(root: HTMLElement, url: string) {
+  const pdfViewerApp = new PDFViewerApplication(root);
 
   GlobalWorkerOptions.workerSrc = new URL(
     "./pdf.worker.min.js",
     import.meta.url
   ).toString();
-  pdfViewerApp.initUI(container);
+  pdfViewerApp.initUI();
   pdfViewerApp.open(url);
+
+  return pdfViewerApp;
 }
 
 export { init };
