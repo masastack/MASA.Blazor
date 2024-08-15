@@ -220,6 +220,8 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public List<DataTableHeader<TItem>> HeadersWithoutCustomFilters
         => Headers.Where(header => header.Filter == null && header.Filterable).ToList();
 
+    public bool HasHeaderFilter => HeadersWithCustomFilters.Count > 0;
+
     public Dictionary<string, bool> OpenCache { get; } = new();
 
     public DataOptions Options => InternalOptions;
@@ -284,6 +286,19 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     NextTick(() => { _ = Js.InvokeVoidAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); });
                 }
             });
+    }
+
+    protected override void CheckForUpdates()
+    {
+        // If there is a header filter, we need to update the computed items each render
+        if (HasHeaderFilter)
+        {
+            UpdateComputedItems();
+        }
+        else
+        {
+            base.CheckForUpdates();
+        }
     }
 
     private string GetText(string value)
