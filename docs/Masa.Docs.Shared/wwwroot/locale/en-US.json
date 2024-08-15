@@ -125,7 +125,7 @@
   "ViewSource": "View source",
   "Toc": "Contents",
   "SeniorSponsor": "Senior sponsor",
-  "enableI18n-demo":{
+  "enableI18n-demo": {
     "name": "User name",
     "email": "Email address",
     "item": "Item",
@@ -227,6 +227,7 @@
   "page-tabs": "Page tabs",
   "page-stack": "Page stack",
   "paginations": "Paginations",
+  "pdf-mobile-viewer": "PDF mobile viewer",
   "pickers": "Pickers",
   "date-pickers": "Date pickers",
   "date-pickers-month": "Date pickers month",
@@ -420,6 +421,7 @@
     "page-tabs": "The PageTabs is used to record the visited pages",
     "page-stack": "Provides a container similar to a page stack, mainly for mobile",
     "paginations": "The Pagination component is used to separate long sets of data",
+    "pdf-mobile-viewer": "A PDF viewer designed for the mobile",
     "date-pickers": "DatePickers is a fully featured date selection component that lets users select a date, or range of dates",
     "date-pickers-month": "DatePicker can be used as a standalone month picker component",
     "time-pickers": "The MTimePicker is stand-alone component that can be utilized in many existing MASA Blazor components",

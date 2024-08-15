@@ -24,13 +24,31 @@ public partial class MPdfMobileViewer : MasaComponentBase
 
     private IJSObjectReference? _jsObjectReference;
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        Url.ThrowIfNull(ComponentName);
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
 
         if (firstRender)
         {
-            _jsObjectReference = await JsModule.Init(Ref, Url, MaxCanvasPixels);
+            if (string.IsNullOrWhiteSpace(Url))
+            {
+                return;
+            }
+
+            string url = Url;
+            if (url.StartsWith("_content") is true)
+            {
+                url = "/" + url;
+            }
+
+            _jsObjectReference = await JsModule.Init(Ref, url, MaxCanvasPixels);
         }
     }
 

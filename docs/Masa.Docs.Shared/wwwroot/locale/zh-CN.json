@@ -126,7 +126,7 @@
   "Toc": "目录",
   "SeniorSponsor": "高级赞助商",
   "Sponsor": "赞助商",
-  "enableI18n-demo":{
+  "enableI18n-demo": {
     "name": "姓名",
     "email": "邮箱地址",
     "item": "项目",
@@ -223,6 +223,7 @@
   "page-tabs": "Page tabs（页面选项卡）",
   "page-stack": "Page stack（页面堆栈）",
   "paginations": "Paginations（分页）",
+  "pdf-mobile-viewer": "PDF mobile viewer（PDF移动端查看器）",
   "pickers": "Pickers（选择器）",
   "date-pickers": "Date pickers（日期选择器）",
   "date-pickers-month": "Date pickers month（月份选择器）",
@@ -532,6 +533,7 @@
     "page-tabs": "页面选项卡用于记录访问过的页面",
     "page-stack": "提供了一个累死页面堆栈的容器，主要用于移动的",
     "paginations": "分页组件用于分离长数据集",
+    "pdf-mobile-viewer": "PDF移动端查看器",
     "date-pickers": "功能齐全的日期选择组件",
     "date-pickers-month": "可以用作一个独立的月份选择器组件",
     "time-pickers": "为用户提供了选择时间的视觉表现",
