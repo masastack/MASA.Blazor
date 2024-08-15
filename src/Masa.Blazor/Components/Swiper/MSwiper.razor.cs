@@ -81,18 +81,7 @@ public partial class MSwiper : MasaComponentBase
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
-
-        if (_prevIndex != Index)
-        {
-            _prevIndex = Index;
-
-            if (_swiperProxy is null)
-            {
-                return;
-            }
-
-            await _swiperProxy.SlideToAsync(Index, Speed);
-        }
+        await SliderToIndexAsync(Speed);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -154,7 +143,21 @@ public partial class MSwiper : MasaComponentBase
             };
 
             _swiperProxy = await SwiperJsModule.Init(Ref, options, _swiperInteropHandle);
+
+            await SliderToIndexAsync(0);
         }, 16, _ctsForInit.Token);
+    }
+
+    private async Task SliderToIndexAsync(int speed)
+    {
+        if (_swiperProxy is null || _prevIndex == Index)
+        {
+            return;
+        }
+
+        _prevIndex = Index;
+
+        await _swiperProxy.SlideToAsync(Index, speed);
     }
 
     internal async Task UpdateIndexAsync(int index)
