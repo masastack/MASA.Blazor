@@ -1,18 +1,11 @@
 import {
     build, getDocument, GlobalWorkerOptions, InvalidPDFException, MissingPDFException,
-    PDFDocumentProxy, shadow, UnexpectedResponseException, version
+    PDFDocumentProxy, UnexpectedResponseException, version
 } from "pdfjs-dist";
 import * as pdfjsViewer from "pdfjs-dist/legacy/web/pdf_viewer.mjs";
 
-const MAX_CANVAS_PIXELS = 0; // CSS-only zooming.
 const TEXT_LAYER_MODE = 0; // DISABLE
 const MAX_IMAGE_SIZE = 1024 * 1024;
-// const CMAP_URL = "../../node_modules/pdfjs-dist/cmaps/";
-// const CMAP_PACKED = true;
-
-const DEFAULT_SCALE_DELTA = 1.1;
-const MIN_SCALE = 0.25;
-const MAX_SCALE = 10.0;
 const DEFAULT_SCALE_VALUE = "auto";
 
 class PDFViewerApplication {
@@ -24,7 +17,6 @@ class PDFViewerApplication {
   eventBus: any;
   value: number;
   l10n: pdfjsViewer.GenericL10n;
-  root: HTMLElement;
   previous: HTMLElement;
   next: HTMLElement;
   zoomInBtn: HTMLElement;
@@ -32,16 +24,66 @@ class PDFViewerApplication {
   container: HTMLDivElement;
   viewerDiv: HTMLElement;
   pagination: HTMLElement;
+  maxCanvasPixels: number;
+  startDistance = 0;
 
-  constructor(root: HTMLElement) {
-    this.root = root;
-    this.previous = root.querySelector(".previous");
-    this.next = root.querySelector(".next");
-    this.zoomInBtn = root.querySelector(".zoomIn");
-    this.zoomOutBtn = root.querySelector(".zoomOut");
-    this.container = root.querySelector(".viewerContainer");
+  _zoomIn = () => this.zoomIn();
+
+  _zoomOut = () => this.zoomOut();
+
+  _previousClick = () => this.page--;
+
+  _nextClick = () => this.page++;
+
+  _touchstart = (e: TouchEvent) => {
+    if (e.touches.length === 2) {
+      this.startDistance = getDistance(e.touches);
+      console.log("touchstart startDistance", this.startDistance);
+      e.preventDefault();
+    }
+  };
+
+  _touchmove = (e: TouchEvent) => {
+    if (e.touches.length === 2) {
+      const currentDistance = getDistance(e.touches);
+      if (Math.abs(currentDistance - this.startDistance) > 10) {
+        const scaleChange = currentDistance / this.startDistance;
+        this.startDistance = currentDistance;
+        const origin = getCenter(e.touches);
+        if (scaleChange > 1) {
+          this.zoomIn(origin);
+        } else {
+          this.zoomOut(origin);
+        }
+      }
+
+      e.preventDefault();
+    }
+  };
+
+  _wheel = (e: WheelEvent) => {
+    if (e.ctrlKey) {
+      e.preventDefault();
+
+      const origin = [e.clientX, e.clientY];
+
+      if (e.deltaY < 0) {
+        this.zoomIn(origin);
+      } else {
+        this.zoomOut(origin);
+      }
+    }
+  };
+
+  constructor(container: HTMLDivElement, maxCanvasPixels: number) {
+    this.container = container;
+    this.maxCanvasPixels = maxCanvasPixels;
+    this.previous = container.querySelector(".previous");
+    this.next = container.querySelector(".next");
+    this.zoomInBtn = container.querySelector(".zoomIn");
+    this.zoomOutBtn = container.querySelector(".zoomOut");
     this.viewerDiv = this.container.firstElementChild as HTMLElement;
-    this.pagination = root.querySelector(".pagination");
+    this.pagination = container.querySelector(".pagination");
 
     this.pdfLoadingTask = null;
     this.pdfDocument = null;
@@ -166,32 +208,19 @@ class PDFViewerApplication {
     this.pdfViewer.currentPageNumber = val;
   }
 
-  _zoomIn = () => this.zoomIn();
-  _zoomOut = () => this.zoomOut();
-  _previousClick = () => this.page--;
-  _nextClick = () => this.page++;
-
-  zoomIn(ticks = undefined) {
-    let newScale = this.pdfViewer.currentScale;
-    do {
-      newScale = Number((newScale * DEFAULT_SCALE_DELTA).toFixed(2));
-      newScale = Math.ceil(newScale * 10) / 10;
-      newScale = Math.min(MAX_SCALE, newScale);
-    } while (--ticks && newScale < MAX_SCALE);
-    this.pdfViewer.currentScaleValue = newScale.toFixed(2);
+  zoomIn(origin: any[] = null) {
+    this.pdfViewer.updateScale({
+      scaleFactor: 1.1,
+      origin,
+    });
   }
 
-  zoomOut(ticks = undefined) {
-    let newScale = this.pdfViewer.currentScale;
-    do {
-      newScale = Number((newScale / DEFAULT_SCALE_DELTA).toFixed(2));
-      newScale = Math.floor(newScale * 10) / 10;
-      newScale = Math.max(MIN_SCALE, newScale);
-    } while (--ticks && newScale > MIN_SCALE);
-    this.pdfViewer.currentScaleValue = newScale.toFixed(2);
+  zoomOut(origin: any[] = null) {
+    this.pdfViewer.updateScale({
+      scaleFactor: 0.9,
+      origin,
+    });
   }
-
-  previousPage() {}
 
   initUI() {
     const eventBus = new pdfjsViewer.EventBus();
@@ -209,7 +238,7 @@ class PDFViewerApplication {
       eventBus,
       linkService,
       l10n: this.l10n,
-      maxCanvasPixels: MAX_CANVAS_PIXELS,
+      maxCanvasPixels: this.maxCanvasPixels,
       textLayerMode: TEXT_LAYER_MODE,
     });
     this.pdfViewer = pdfViewer;
@@ -224,7 +253,9 @@ class PDFViewerApplication {
     eventBus.on("pagesinit", () => {
       // We can use pdfViewer now, e.g. let's change default scale.
       pdfViewer.currentScaleValue = DEFAULT_SCALE_VALUE;
-      this.pagination.textContent = `${pdfViewer.currentPageNumber} / ${this.pagesCount}`;
+      if (this.pagination) {
+        this.pagination.textContent = `${pdfViewer.currentPageNumber} / ${this.pagesCount}`;
+      }
     });
 
     eventBus.on(
@@ -232,46 +263,20 @@ class PDFViewerApplication {
       (evt) => {
         const page = evt.pageNumber;
         const numPages = this.pagesCount;
-        this.pagination.textContent = `${page} / ${numPages}`;
+        if (this.pagination) {
+          this.pagination.textContent = `${page} / ${numPages}`;
+        }
       },
       true
     );
 
-    // container.firstElementChild.addEventListener(
-    //   "touchstart",
-    //   (e: TouchEvent) => {
-    //     if (e.touches.length === 2) {
-    //       this.startDistance = this.getDistance(e.touches);
-    //       console.log("touchstart startDistance", this.startDistance);
-    //       e.preventDefault();
-    //     }
-    //   },
-    //   { passive: false }
-    // );
+    this.container.addEventListener("touchstart", this._touchstart, {
+      passive: false,
+    });
 
-    // container.firstElementChild.addEventListener(
-    //   "touchmove",
-    //   (e: TouchEvent) => {
-    //     if (e.touches.length === 2) {
-    //       const currentDistance = this.getDistance(e.touches);
-    //       console.log("touchmove currentDistance", currentDistance);
-    //       const scaleChange = currentDistance / this.startDistance;
-    //       console.log(
-    //         "old this.pdfViewer.currentScaleValue",
-    //         this.pdfViewer.currentScaleValue
-    //       );
-    //       this.pdfViewer.currentScaleValue *= scaleChange;
-    //       console.log(
-    //         "new this.pdfViewer.currentScaleValue",
-    //         this.pdfViewer.currentScaleValue
-    //       );
-    //       this.startDistance = currentDistance;
-
-    //       e.preventDefault();
-    //     }
-    //   },
-    //   { passive: false }
-    // );
+    this.container.addEventListener("touchmove", this._touchmove, {
+      passive: false,
+    });
 
     this.viewerDiv.addEventListener("wheel", this._wheel);
     this.previous &&
@@ -281,26 +286,9 @@ class PDFViewerApplication {
     this.zoomOutBtn && this.zoomOutBtn.addEventListener("click", this._zoomOut);
   }
 
-  startDistance = 0;
-
-  _wheel = (e: WheelEvent) => {
-    if (e.ctrlKey) {
-      e.preventDefault();
-      if (e.deltaY < 0) {
-        this.zoomIn();
-      } else {
-        this.zoomOut();
-      }
-    }
-  };
-
-  getDistance(touches) {
-    const dx = touches[0].pageX - touches[1].pageX;
-    const dy = touches[0].pageY - touches[1].pageY;
-    return Math.sqrt(dx * dx + dy * dy);
-  }
-
   destroy() {
+    this.container.removeEventListener("touchstart", this._touchstart);
+    this.container.removeEventListener("touchmove", this._touchstart);
     this.viewerDiv.removeEventListener("wheel", this._wheel);
 
     this.previous &&
@@ -312,8 +300,27 @@ class PDFViewerApplication {
   }
 }
 
-function init(root: HTMLElement, url: string) {
-  const pdfViewerApp = new PDFViewerApplication(root);
+function getCenter(touches: TouchList) {
+  const centerX = (touches[0].clientX + touches[1].clientX) / 2;
+  const centerY = (touches[0].clientY + touches[1].clientY) / 2;
+  return [centerX, centerY];
+}
+
+function getDistance(touches: TouchList) {
+  const dx = touches[0].pageX - touches[1].pageX;
+  const dy = touches[0].pageY - touches[1].pageY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function init(
+  viewerContainer: HTMLDivElement,
+  url: string,
+  maxCanvasPixels: number = 0
+) {
+  const pdfViewerApp = new PDFViewerApplication(
+    viewerContainer,
+    maxCanvasPixels
+  );
 
   GlobalWorkerOptions.workerSrc = new URL(
     "./pdf.worker.min.js",

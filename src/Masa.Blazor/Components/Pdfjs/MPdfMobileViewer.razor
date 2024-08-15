@@ -1,10 +1,11 @@
 ﻿@namespace Masa.Blazor
 @inherits MasaComponentBase
 
-<div class="m-pdf-mobile-viewer" @ref="Ref">
-    <div class="viewerContainer">
-        <div class="viewer pdfViewer"></div>
+<div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+    <div class="viewer pdfViewer"></div>
 
+    @if (!HideToolbar)
+    {
         <footer>
             @GenBtn("previous", "mdi-arrow-up")
             @GenBtn("next", "mdi-arrow-down")
@@ -12,7 +13,7 @@
             @GenBtn("zoomOut", "mdi-magnify-minus-outline")
             @GenBtn("zoomIn", "mdi-magnify-plus-outline")
         </footer>
-    </div>
+    }
 </div>
 
 @code {

@@ -60,7 +60,7 @@
                 </ChildContent>
             </MAppBar>
             <div class="@_block.Element("content")"
-                 style="@StyleBuilder.Create().Add("padding-top", $"{ComputedBarHeight}px")">
+                 style="@($"--m-page-stack-item-bar-height: {ComputedBarHeight}px;")">
                 @ChildContent
             </div>
         </CascadingValue>
