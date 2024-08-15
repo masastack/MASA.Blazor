@@ -1,0 +1,7 @@
+﻿{
+  "props": {
+    "hideToolbar": "Hide the toolbar",
+    "maxCanvasPixels": "The maximum supported canvas size in total pixels, i.e.width* height. Use `-1` for no limit, or `0` for CSS-only zooming",
+    "url": "The URL of PDF file to display."
+  }
+}

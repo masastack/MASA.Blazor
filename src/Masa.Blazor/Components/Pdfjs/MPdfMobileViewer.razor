@@ -1,0 +1,28 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
+    <div class="viewer pdfViewer"></div>
+
+    @if (!HideToolbar)
+    {
+        <footer>
+            @GenBtn("previous", "mdi-arrow-up")
+            @GenBtn("next", "mdi-arrow-down")
+            <div class="pagination"></div>
+            @GenBtn("zoomOut", "mdi-magnify-minus-outline")
+            @GenBtn("zoomIn", "mdi-magnify-plus-outline")
+        </footer>
+    }
+</div>
+
+@code {
+
+    private RenderFragment GenBtn(string key, string icon) => __builder =>
+    {
+        <MButton Class="@key" Text Tile>
+            <MIcon>@icon</MIcon>
+        </MButton>
+    };
+
+}

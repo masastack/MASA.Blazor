@@ -434,6 +434,7 @@
 .m-page-stack-item__content {
     height: 100%;
     overflow-y: auto;
+    padding-top: var(--m-page-stack-item-bar-height);
 }
 
 /* block-text */

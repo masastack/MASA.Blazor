@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "target":"ES2016",
+    "module": "ES2020",
     "paths": {
       "utils/*": ["./src/utils/*"],
       "events/*": ["./src/events/*"],

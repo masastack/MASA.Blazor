@@ -325,6 +325,11 @@
         "releasedOn": "v1.5.0"
       },
       {
+        "title": "pdf-mobile-viewer",
+        "state": "new",
+        "releasedOn": "v1.7.0"
+      },
+      {
         "title": "pull-refresh",
         "state": "new",
         "releasedOn": "v1.1.1"
