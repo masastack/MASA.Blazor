@@ -224,7 +224,7 @@ public abstract class MData<TItem> : MasaComponentBase
     
     public IEnumerable<TItem> ComputedItems { get; private set; } = Enumerable.Empty<TItem>();
     
-    private void UpdateComputedItems()
+    protected void UpdateComputedItems()
     {
         var filteringItems = new List<TItem>(Items ?? []);
 
@@ -237,7 +237,7 @@ public abstract class MData<TItem> : MasaComponentBase
             FilteredItems = filteringItems;
         }
         
-        ItemsLength = ServerItemsLength >=0? ServerItemsLength : FilteredItems.Count();
+        ItemsLength = ServerItemsLength >=0 ? ServerItemsLength : FilteredItems.Count();
         PageCount = InternalOptions.ItemsPerPage <= 0 ? 1 : (int)Math.Ceiling(ItemsLength / (InternalOptions.ItemsPerPage * 1.0));
 
         IEnumerable<TItem> computingItems = new List<TItem>(FilteredItems);
@@ -350,7 +350,7 @@ public abstract class MData<TItem> : MasaComponentBase
         CheckForUpdates();
     }
     
-    private void CheckForUpdates()
+    protected virtual void CheckForUpdates()
     {
         bool needUpdateComputedItems = false;
 
