@@ -223,6 +223,16 @@ namespace Masa.Blazor
             Attributes["ripple"] = Ripple;
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await Js.AddClickEventListener(Ref, HandleOnClick, OnClickStopPropagation, OnClickPreventDefault);
+            }
+        }
+
         protected async Task HandleOnClick(MouseEventArgs args)
         {
             if (!Fab && args.Detail > 0)
@@ -236,6 +246,13 @@ namespace Masa.Blazor
             }
 
             await ToggleAsync();
+        }
+
+        protected override async ValueTask DisposeAsyncCore()
+        {
+            await Js.RemoveClickEventListener(Ref, "click");
+
+            await base.DisposeAsyncCore();
         }
     }
 }

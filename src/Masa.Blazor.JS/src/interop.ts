@@ -1,7 +1,7 @@
 import debounceIt from "just-debounce-it";
 import throttle from "just-throttle";
 
-import { parseDragEvent, parseTouchEvent, touchEvents } from "./events/EventType";
+import { parseDragEvent, parseMouseEvent, parseTouchEvent, touchEvents } from "./events/EventType";
 import { registerExtraEvents } from "./events/index";
 import registerRippleObserver from "./ripple";
 import { canUseDom, getBlazorId, getDom, getElementSelector, IN_BROWSER } from "./utils/helper";
@@ -189,10 +189,12 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
     let obj: any = {}
 
     if (touchEvents.includes(e.type)) {
-      obj = parseTouchEvent(e)
+      obj = parseTouchEvent(e);
+    } else if (e instanceof MouseEvent) {
+      obj = parseMouseEvent(e);
     } else {
       for (var k in e) {
-        if (typeof e[k] == 'string' || typeof e[k] == 'number') {
+        if (typeof e[k] == "string" || typeof e[k] == "number") {
           obj[k] = e[k];
         }
       }
