@@ -1,6 +1,7 @@
 ﻿---
 title: PDF Mobile Viewer
 desc: "A PDF viewer designed for mobile."
+tag: "JS Proxy"
 ---
 
 Before using, you need to include the style sheet:

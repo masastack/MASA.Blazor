@@ -26,5 +26,54 @@
         }
       ]
     }
+  },
+  {
+    "name": "PageStackNavController",
+    "parameters": {
+      "events": [
+        {
+          "name": "PageClosed",
+          "type": "EventHandler<PageStackPageClosedEventArgs>"
+        }
+      ],
+      "methods": [
+        {
+          "name": "Push",
+          "type": "(string relativeUri) => void"
+        },
+        {
+          "name": "Pop",
+          "type": "(object? state = null) => void"
+        },
+        {
+          "name": "GoBack",
+          "type": "(int delta = 1, object? state = null) => void"
+        },
+        {
+          "name": "GoBackAndReplace",
+          "type": "(int delta, string? replaceUri, object? state = null) => void"
+        },
+        {
+          "name": "GoBackToPage",
+          "type": "(string absolutePath, object? state = null) => void"
+        },
+        {
+          "name": "GoBackToPageAndReplace",
+          "type": "(string absolutePath, string replaceUri, object? state = null) => void"
+        },
+        {
+          "name": "Replace",
+          "type": "(string relativeUri, object? state = null) => void"
+        },
+        {
+          "name": "Clear",
+          "type": "() => void"
+        },
+        {
+          "name": "GoBackToTab",
+          "type": "(string relativeUri) => void"
+        }
+      ]
+    }
   }
 ]
