@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 
 namespace Masa.Blazor.Extensions;
 
@@ -43,37 +44,52 @@ public static class JsRuntimeExtensions
         );
     }
 
-
-    public static async Task AddHtmlElementEventListener<T>(this IJSRuntime jsRuntime, string selector, string type,
-        Func<T, Task> callback,
+    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, string selector, string type,
+        Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
         await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
             selector,
             type,
-            DotNetObjectReference.Create(new Invoker<T>(callback)),
+            DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
             options.Value,
             extras
         );
     }
 
-    public static async Task AddHtmlElementEventListener<T>(this IJSRuntime jsRuntime, ElementReference el, string type,
-        Func<T, Task> callback,
+    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el, string type,
+        Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
         await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
             el.GetSelector(),
             type,
-            DotNetObjectReference.Create(new Invoker<T>(callback)),
+            DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
             options.Value,
             extras
         );
+    }
+
+    public static async Task AddClickEventListener(this IJSRuntime jsRuntime, ElementReference elementReference, Func<MouseEventArgs, Task> callback, bool stopPropagation, bool preventDefault)
+    {
+        await jsRuntime.AddHtmlElementEventListener(elementReference, "click", callback, false, new EventListenerExtras(stopPropagation, preventDefault));
     }
 
     public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
         string? key = null)
     {
         await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, selector, type, key);
+    }
+
+    public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
+        string? key = null)
+    {
+        await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, el.GetSelector(), type, key);
+    }
+
+    public static async Task RemoveClickEventListener(this IJSRuntime jSRuntime, ElementReference el, string? key = null)
+    {
+        await jSRuntime.RemoveHtmlElementEventListener(el.GetSelector(), "click", key);
     }
 
     public static async Task ScrollTo(this IJSRuntime jsRuntime, string selector, double? top, double? left = null,
@@ -173,7 +189,7 @@ public static class JsRuntimeExtensions
     {
         return jsRuntime.InvokeVoidAsync(JsInteropConstants.SetProperty, el, key, value);
     }
-    
+
     // TODO: how about return double instead of double? ?
     private static async Task<double?> GetNumberPropAsync(this IJSRuntime jsRuntime, object el, string name)
     {

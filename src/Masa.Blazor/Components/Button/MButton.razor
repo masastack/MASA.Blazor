@@ -13,11 +13,7 @@
             Value="@Key"
             id="@Id"
             ReferenceCaptureAction="reference => Ref = reference"
-            @onclick="HandleOnClick"
-            __internal_stopPropagation_onclick="@OnClickStopPropagation"
-            __internal_preventDefault_onclick="@OnClickPreventDefault"
             @attributes="Attributes">
-
             @GenContent()
         </KeyTransitionElement>
     }
@@ -31,9 +27,6 @@
             Value="@(Show ?? true)"
             id="@Id"
             ReferenceCaptureAction="reference => Ref = reference"
-            @onclick="HandleOnClick"
-            __internal_stopPropagation_onclick="@OnClickStopPropagation"
-            __internal_preventDefault_onclick="@OnClickPreventDefault"
             @attributes="Attributes">
             @GenContent()
         </ShowTransitionElement>
@@ -41,7 +34,6 @@
 </CascadingValue>
 
 @code {
-
 
     RenderFragment GenContent() => __builder =>
     {
