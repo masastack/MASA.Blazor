@@ -1,12 +1,11 @@
 import SwiperClass from "swiper";
 import { SwiperOptions } from "swiper/types/swiper-options";
 
-import { BaseProxy } from "../baseProxy";
-
 declare const Swiper: SwiperClass;
 
-class SwiperProxy extends BaseProxy<SwiperClass> {
+class SwiperProxy {
   handle: DotNet.DotNetObject;
+  swiper: SwiperClass;
 
   constructor(
     el: HTMLElement,
@@ -35,32 +34,37 @@ class SwiperProxy extends BaseProxy<SwiperClass> {
     }
 
     const swiper = new (Swiper as any)(el, swiperOptions);
-    super(swiper);
-
+    this.swiper = swiper;
     this.handle = handle;
-    this.target.on("realIndexChange", (e) => this.onRealIndexChange(e, this));
+    this.swiper.on("realIndexChange", (e) => this.onRealIndexChange(e, this));
 
     el._swiper = {
-      instance: this.target,
+      instance: this.swiper,
       handle: handle,
     };
   }
 
   slideTo(index: number, speed?: number, runCallbacks?: boolean) {
-    this.target.slideToLoop(index, speed, runCallbacks);
+    this.swiper.slideToLoop(index, speed, runCallbacks);
   }
 
   slideNext(speed?: number) {
-    this.target.slideNext(speed);
+    this.swiper.slideNext(speed);
   }
 
   slidePrev(speed?: number) {
-    this.target.slidePrev(speed);
+    this.swiper.slidePrev(speed);
   }
 
   dispose() {
-    this.target && this.target.destroy(true);
+    this.swiper && this.swiper.destroy(true);
     this.handle.dispose();
+  }
+
+  invokeVoid(prop: string, ...args: any[]) {
+    if (this.swiper[prop] && typeof this.swiper[prop] === "function") {
+      this.swiper[prop](...args);
+    }
   }
 
   async onRealIndexChange(e: SwiperClass, that: SwiperProxy) {
