@@ -1,7 +1,5 @@
 ﻿using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace Masa.Blazor.Presets;
 

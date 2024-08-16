@@ -1,0 +1,16 @@
+﻿{
+  "events": {
+    "PageClosed": "a event occurs when a stack page is closed"
+  },
+  "methods": {
+    "Push": "push a new page onto the page stack",
+    "Pop": "Go back one step in the page stack",
+    "goBack": "Go back the specified number of steps in the page stack",
+    "goBackAndReplace": "Go back to specified number of steps in the page stack, and then invoke the Replace method",
+    "goBackToPage": "Go back to the specified page in the page stack. If the page is not found, do nothing",
+    "goBackToPageAndReplace": "Go back to the specified page in the page stack and then invoke the Replace method",
+    "Replace": "Replace the current page with a new page",
+    "Clear": "Clear the page stack",
+    "goBackToTab": "Clear current page stack and navigate to a tab"
+  }
+}

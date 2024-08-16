@@ -1,0 +1,16 @@
+{
+  "events": {
+    "PageClosed": "当堆栈页面关闭时触发"
+  },
+  "methods": {
+    "Push": "将新页面推送到页面堆栈",
+    "Pop": "在页面堆栈中后退一步",
+    "goBack": "在页面堆栈中后退指定步数",
+    "goBackAndReplace": "在页面堆栈中后退指定步数，然后调用Replace方法",
+    "goBackToPage": "在页面堆栈中后退到指定页面。如果未找到页面，则不执行任何操作",
+    "goBackToPageAndReplace": "在页面堆栈中后退到指定页面，然后调用Replace方法",
+    "Replace": "用新页面替换当前页面",
+    "Clear": "清除页面堆栈",
+    "goBackToTab": "清除当前页面堆栈并导航到选项卡"
+  }
+}

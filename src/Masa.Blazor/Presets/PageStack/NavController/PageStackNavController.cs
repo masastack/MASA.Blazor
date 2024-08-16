@@ -126,7 +126,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to the new tab.
+    /// Clear current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     [Obsolete("Use GoBackToTab instead.")]
@@ -136,7 +136,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to the new tab.
+    /// Clear current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     public void GoBackToTab(string relativeUri)
