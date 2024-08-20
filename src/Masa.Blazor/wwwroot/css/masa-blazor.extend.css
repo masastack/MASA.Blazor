@@ -421,6 +421,9 @@
 
 .m-page-stack-item {
     overflow: hidden;
+    position: unset;
+    height: 100vh;
+    height: -webkit-fill-available; /* for iOS */
 }
 
 .m-page-stack-item.m-page-stack-item--center-title .m-toolbar__title {
