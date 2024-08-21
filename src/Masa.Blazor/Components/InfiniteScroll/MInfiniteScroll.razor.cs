@@ -133,6 +133,16 @@ public partial class MInfiniteScroll : MasaComponentBase
     [MasaApiPublicMethod]
     public async Task ResetAsync() => await DoLoadMore();
 
+    /// <summary>
+    /// Reset internal status to <see cref="InfiniteScrollLoadStatus.Ok"/>
+    /// </summary>
+    [MasaApiPublicMethod]
+    public void ResetStatus()
+    {
+        _loadStatus = InfiniteScrollLoadStatus.Ok;
+        StateHasChanged();
+    }
+
     private void AddScrollListener()
     {
         if (!_firstRendered || _isAttached || string.IsNullOrWhiteSpace(Parent)) return;
