@@ -38,7 +38,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
     "@microsoft/dotnet-js-interop": "6.0.11",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-json": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -49,6 +52,7 @@
     "@types/echarts": "^4.9.16",
     "@types/node": "^18.7.14",
     "@types/sortablejs": "^1.15.8",
+    "core-js": "3",
     "drawflow": "^0.0.59",
     "gridstack": "^7.2.1",
     "just-debounce-it": "^3.2.0",

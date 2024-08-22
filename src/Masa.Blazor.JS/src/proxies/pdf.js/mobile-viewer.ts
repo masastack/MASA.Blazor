@@ -1,8 +1,13 @@
+import "core-js/modules/es.array.at.js";
+import "core-js/modules/es.string.replace-all";
+import "core-js/modules/web.structured-clone.js";
+import "core-js/proposals/promise-with-resolvers";
+
 import {
     build, getDocument, GlobalWorkerOptions, InvalidPDFException, MissingPDFException,
     PDFDocumentProxy, UnexpectedResponseException, version
 } from "pdfjs-dist";
-import * as pdfjsViewer from "pdfjs-dist/legacy/web/pdf_viewer.mjs";
+import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 
 const TEXT_LAYER_MODE = 0; // DISABLE
 const MAX_IMAGE_SIZE = 1024 * 1024;
