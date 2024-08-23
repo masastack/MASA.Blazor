@@ -14,6 +14,7 @@ public class Router : IRoutable
         Exact = routable.Exact;
         NavigationManager = routable.NavigationManager;
         MatchPattern = routable.MatchPattern;
+        Logger = routable.Logger;
     }
 
     public IDictionary<string, object?> Attributes { get; set; }
@@ -35,4 +36,6 @@ public class Router : IRoutable
     public string? MatchPattern { get; set; }
 
     public NavigationManager NavigationManager { get; set; }
+
+    public ILogger Logger { get; set; }
 }

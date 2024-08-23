@@ -51,7 +51,7 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     private ElementReference? _prevRef;
     private bool _elementReferenceChanged;
 
-    protected ILogger Logger => LoggerFactory.CreateLogger(GetType());
+    public ILogger Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
 
