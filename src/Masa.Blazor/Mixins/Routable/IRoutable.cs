@@ -4,6 +4,8 @@ namespace Masa.Blazor;
 
 public interface IRoutable
 {
+    ILogger Logger { get; }
+
     IDictionary<string, object> Attributes { get; }
 
     bool Disabled { get; }
@@ -40,7 +42,7 @@ public interface IRoutable
 
     public int Tabindex => Attributes.TryGetValue("tabindex", out var tabindex) ? Convert.ToInt32(tabindex) : 0;
 
-    public(string tag, Dictionary<string, object>) GenerateRouteLink()
+    public (string tag, Dictionary<string, object>) GenerateRouteLink()
     {
         string tag;
         Dictionary<string, object> attrs = new(Attributes);
@@ -69,7 +71,15 @@ public interface IRoutable
 
         var absolutePath = NavigationManager.GetAbsolutePath();
 
-        return MatchRoute(Href, absolutePath, Exact, MatchPattern);
+        try
+        {
+            return MatchRoute(Href, absolutePath, Exact, MatchPattern);
+        }
+        catch (RegexParseException)
+        {
+            Logger.LogError("Invalid regular expression pattern: {MatchPattern}", MatchPattern);
+            return false;
+        }
     }
 
     public static bool MatchRoute(string href, string absolutePath, bool exact, string? matchPattern)
