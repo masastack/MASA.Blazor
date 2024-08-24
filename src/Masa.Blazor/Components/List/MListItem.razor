@@ -4,14 +4,14 @@
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <MElement Class="@GetClass()"
-             Style="@GetStyle()"
-             Tag="@Tag"
-             ReferenceCaptureAction="r => Ref = r"
-             id="@Id"
-             @onclick="HandleOnClick"
-             __internal_stopPropagation_onclick="@OnClickStopPropagation"
-             __internal_preventDefault_onclick="@OnClickPreventDefault"
-             @attributes="@Attributes">
+              Style="@GetStyle()"
+              Tag="@Tag"
+              ReferenceCaptureAction="r => Ref = r"
+              id="@Id"
+              @onclick="HandleOnClick"
+              __internal_stopPropagation_onclick="@OnClickStopPropagation"
+              __internal_preventDefault_onclick="@OnClickPreventDefault"
+              @attributes="@Attributes">
         @if (ItemContent != null)
         {
             @ItemContent?.Invoke(GenItemContext())
@@ -52,15 +52,25 @@
 
     RenderFragment GenContent() => __builder =>
     {
-        if (HasBuiltInContent)
+        var hasTitle = !string.IsNullOrWhiteSpace(Title);
+        var hasSubtitle = !string.IsNullOrWhiteSpace(Subtitle);
+
+        if (hasTitle || hasSubtitle)
         {
             <MListItemContent>
-                <MListItemTitle>
-                    @Title
-                </MListItemTitle>
-                <MListItemSubtitle>
-                    @Subtitle
-                </MListItemSubtitle>
+                @if (hasTitle)
+                {
+                    <MListItemTitle>
+                        @Title
+                    </MListItemTitle>
+                }
+
+                @if (hasSubtitle)
+                {
+                    <MListItemSubtitle>
+                        @Subtitle
+                    </MListItemSubtitle>
+                }
             </MListItemContent>
         }
     };
