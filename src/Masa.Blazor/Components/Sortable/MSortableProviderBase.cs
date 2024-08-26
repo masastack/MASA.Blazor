@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Sortable;
+using Masa.Blazor.Utils;
 
 namespace Masa.Blazor;
 
@@ -181,6 +182,8 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     private DotNetObjectReference<SortableJSInteropHandle>? _sortableJSInteropHandle;
     private SortableJSObjectReference? _jsObjectReference;
 
+    private RenderRateLimiter? _renderRateLimiter;
+
     protected abstract string ContainerSelector { get; }
 
     protected override void OnInitialized()
@@ -189,6 +192,8 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
         _prevItems = Items;
         _prevItemKeys = GetItemKeys();
+        _renderRateLimiter = new RenderRateLimiter(
+            $"{ComponentName} is rendering too frequently. Check the Items parameter to ensure its reference doesn't change frequently.");
 
         _sortableJSInteropHandle = DotNetObjectReference.Create(new SortableJSInteropHandle(this));
     }
@@ -200,10 +205,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(Disabled),
-                val =>
-                {
-                    _jsObjectReference?.InvokeVoidAsync("option", "disabled", val);
-                })
+                val => { _jsObjectReference?.InvokeVoidAsync("option", "disabled", val); })
             .Watch<List<string>>(nameof(Order), val => { _ = _jsObjectReference?.SortAsync(val, false); });
     }
 
@@ -218,6 +220,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         {
             _prevItems = Items;
             _prevItemKeys = GetItemKeys();
+            _renderRateLimiter?.RecordRender();
             RefreshOrder();
         }
         else
