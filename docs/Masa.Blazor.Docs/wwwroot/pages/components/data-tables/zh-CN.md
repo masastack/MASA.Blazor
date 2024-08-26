@@ -78,9 +78,12 @@ related:
 
 <masa-example file="Examples.components.data_tables.MultiSort"></masa-example>
 
-#### 行选择
+#### 行选择 {#showselect updated-in=v1.7.0}
 
 `ShowSelect` 属性将在默认表头中渲染一个复选框以切换所有行是否被选择，同时也为每个默认行渲染一个复选框。你还可以使用 `SingleSelect` 属性，指定能同时选择多行还是只能选择一行。
+`ItemKey` 属性用于指定行的唯一标识，也是行选择的依据。 
+
+> 在 v1.7.0 版本中，新增了 `@bind-Selected` 用法来代替 `@bind-Value`，更方便设置默认选中的行。
 
 <masa-example file="Examples.components.data_tables.RowSelection"></masa-example>
 
