@@ -76,19 +76,25 @@ public partial class MDataIterator<TItem> : MData<TItem>
     public RenderFragment? ProgressContent { get; set; }
 
     // NEXT: This parameter should be the keys of selected items. not selected items.
-    [Parameter]
+    /// <summary>
+    /// Gets or sets the selected items.
+    /// </summary>
+    [Parameter, Obsolete("Use Selected instead.")] 
     public IEnumerable<TItem>? Value
     {
         get => GetValue<IEnumerable<TItem>>();
         set => SetValue(value);
     }
 
-    [Parameter]
+    [Parameter, Obsolete("Use SelectedChanged instead.")]
     public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
 
     // NEXT: This parameter should be Value, but it's not possible to have two parameters with the same name.
     // This will be changed in next major version.  
     // And the type of Selected should be generic type(TKey) instead of string.
+    /// <summary>
+    /// Gets or sets the selected items by their keys.
+    /// </summary>
     [Parameter]
     [MasaApiParameter(ReleasedOn = "v1.7.0")]
     public IEnumerable<string>? Selected { get; set; }
