@@ -75,15 +75,33 @@ public partial class MDataIterator<TItem> : MData<TItem>
     [Parameter]
     public RenderFragment? ProgressContent { get; set; }
 
-    [Parameter]
+    // NEXT: This parameter should be the keys of selected items. not selected items.
+    /// <summary>
+    /// Gets or sets the selected items.
+    /// </summary>
+    [Parameter, Obsolete("Use Selected instead.")] 
     public IEnumerable<TItem>? Value
     {
         get => GetValue<IEnumerable<TItem>>();
         set => SetValue(value);
     }
 
-    [Parameter]
+    [Parameter, Obsolete("Use SelectedChanged instead.")]
     public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
+
+    // NEXT: This parameter should be Value, but it's not possible to have two parameters with the same name.
+    // This will be changed in next major version.  
+    // And the type of Selected should be generic type(TKey) instead of string.
+    /// <summary>
+    /// Gets or sets the selected items by their keys.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public IEnumerable<string>? Selected { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    public EventCallback<IEnumerable<string>> SelectedChanged { get; set; }
 
     [Parameter]
     public EventCallback<(TItem, bool)> OnItemSelect { get; set; }
@@ -107,6 +125,13 @@ public partial class MDataIterator<TItem> : MData<TItem>
     protected Dictionary<string, bool> Expansion { get; private set; } = new();
 
     protected Dictionary<string, bool> Selection { get; } = new();
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        UpdateSelection();
+    }
 
     public override Task SetParametersAsync(ParameterView parameters)
     {
@@ -121,31 +146,49 @@ public partial class MDataIterator<TItem> : MData<TItem>
     {
         base.RegisterWatchers(watcher);
 
-        watcher
-            .Watch<IEnumerable<TItem>>(nameof(Value), val =>
-            {
-                if (val is null) return;
-
-                var keys = new List<string>();
-
-                foreach (var item in val)
-                {
-                    var key = ItemKey?.Invoke(item);
-                    if (key is null) return;
-
-                    Selection[key] = true;
-
-                    keys.Add(key);
-                }
-
-                // Unselect those in selection but not in Value when updating Value
-                foreach (var (key, _) in Selection)
-                {
-                    Selection[key] = keys.Contains(key);
-                }
-            });
+        watcher.Watch<IEnumerable<TItem>>(nameof(Value), UpdateSelection)
+            .Watch<IEnumerable<string>>(nameof(Selected), UpdateSelection);
     }
-    
+
+    private void UpdateSelection()
+    {
+        List<string>? keys = null;
+
+        if (Value is not null)
+        {
+            keys = [];
+            foreach (var item in Value)
+            {
+                var key = ItemKey?.Invoke(item);
+                if (key is null) continue;
+
+                Selection[key] = true;
+
+                keys.Add(key);
+            }
+        }
+        else if (Selected is not null)
+        {
+            keys = [];
+            foreach (var item in Selected)
+            {
+                Selection[item] = true;
+                keys.Add(item);
+            }
+        }
+
+        if (keys is null)
+        {
+            return;
+        }
+
+        // Unselect those in selection but not in Value when updating Value
+        foreach (var (key, _) in Selection)
+        {
+            Selection[key] = keys.Contains(key);
+        }
+    }
+
     private static Block _block = new("m-data-iterator");
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -272,13 +315,16 @@ public partial class MDataIterator<TItem> : MData<TItem>
     private void UpdateSelectedItemsAsValue()
     {
         var selectedItems = Items.Where(IsSelected);
+
         if (ValueChanged.HasDelegate)
         {
             ValueChanged.InvokeAsync(selectedItems);
         }
-        else
+
+        var selected = selectedItems.Select(ItemKey);
+        if (SelectedChanged.HasDelegate)
         {
-            Value = selectedItems;
+            SelectedChanged.InvokeAsync(selected);
         }
     }
 }

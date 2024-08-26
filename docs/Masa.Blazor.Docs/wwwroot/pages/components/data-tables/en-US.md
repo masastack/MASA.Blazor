@@ -86,10 +86,13 @@ arrays to both `SortBy` and `SortDesc` to programmatically control the sorting, 
 
 <masa-example file="Examples.components.data_tables.MultiSort"></masa-example>
 
-#### ShowSelect
+#### ShowSelect {updated-in=v1.7.0}
 
 The `ShowSelect` prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default
 row. You can also switch between allowing multiple selected rows at the same time or just one with the `SingleSelect` prop.
+The `ItemKey` prop is used to specify a unique identifier for rows, which is used for row selection.
+
+> In version 1.7.0, the `@bind-Selected` usage was added to replace `@bind-Value`, making it easier to set the default selected rows.
 
 <masa-example file="Examples.components.data_tables.RowSelection"></masa-example>
 

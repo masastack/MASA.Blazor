@@ -1717,6 +1717,18 @@ html.m-overlay-scroll-blocked {
     width: auto;
 }
 
+.m-simple-checkbox {
+    --m-selection-control-size: 40px;
+}
+
+.m-data-table .m-simple-checkbox.m-data-table__checkbox {
+    margin-left: -8px;
+}
+
+.m-data-table--dense .m-simple-checkbox.m-data-table__checkbox {
+    --m-selection-control-size: 32px;
+}
+
 /* slider */
 .m-slider__track-background {
     opacity: 0.38;
