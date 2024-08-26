@@ -9,12 +9,12 @@
     {
         @if (!HideDelimiters)
         {
-            GenDelimiters();
+            @GenDelimiters()
         }
 
         @if (Progress || !string.IsNullOrWhiteSpace(ProgressColor))
         {
-            GenProgress();
+            @GenProgress()
         }
     };
 
