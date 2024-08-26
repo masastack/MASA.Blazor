@@ -46,6 +46,7 @@ public class MCarouselItem : MWindowItem, IRoutable
             builder.AddAttribute(1, "Class", "m-carousel__item");
             builder.AddAttribute(2, "Src", Src);
             builder.AddAttribute(3, "Height", ((MCarousel?)WindowGroup)?.InternalHeight);
+            builder.AddAttribute(4, "ChildContent", ChildContent);
             builder.CloseComponent();
         };
     }
