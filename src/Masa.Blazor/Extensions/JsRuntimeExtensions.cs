@@ -35,13 +35,16 @@ public static class JsRuntimeExtensions
         Func<Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
-            el.GetSelector(),
-            type,
-            DotNetObjectReference.Create(new Invoker(callback)),
-            options.Value,
-            extras
-        );
+        if (el.TryGetSelector(out var selector))
+        {
+            await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+                selector,
+                type,
+                DotNetObjectReference.Create(new Invoker(callback)),
+                options.Value,
+                extras
+            );
+        }
     }
 
     public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, string selector, string type,
@@ -57,17 +60,21 @@ public static class JsRuntimeExtensions
         );
     }
 
-    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el, string type,
+    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el,
+        string type,
         Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
-            el.GetSelector(),
-            type,
-            DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
-            options.Value,
-            extras
-        );
+        if (el.TryGetSelector(out var selector))
+        {
+            await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+                selector,
+                type,
+                DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
+                options.Value,
+                extras
+            );
+        }
     }
 
     public static async Task AddClickEventListener(this IJSRuntime jsRuntime, ElementReference elementReference, Func<MouseEventArgs, Task> callback, bool stopPropagation, bool preventDefault)
@@ -84,12 +91,18 @@ public static class JsRuntimeExtensions
     public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
         string? key = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, el.GetSelector(), type, key);
+        if (el.TryGetSelector(out var selector))
+        {
+            await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, selector, type, key);
+        }
     }
 
     public static async Task RemoveClickEventListener(this IJSRuntime jSRuntime, ElementReference el, string? key = null)
     {
-        await jSRuntime.RemoveHtmlElementEventListener(el.GetSelector(), "click", key);
+        if (el.TryGetSelector(out var selector))
+        {
+            await jSRuntime.RemoveHtmlElementEventListener(selector, "click", key);
+        }
     }
 
     public static async Task ScrollTo(this IJSRuntime jsRuntime, string selector, double? top, double? left = null,

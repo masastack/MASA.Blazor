@@ -4,11 +4,6 @@ namespace Masa.Blazor.Extensions;
 
 public static class ElementReferenceExtensions
 {
-    public static string? GetSelector(this ElementReference? elementReference)
-    {
-        return elementReference?.GetSelector();
-    }
-
     public static string GetSelector(this ElementReference elementReference)
     {
         if (elementReference.TryGetSelector(out var selector))
@@ -16,7 +11,8 @@ public static class ElementReferenceExtensions
             return selector;
         }
 
-        throw new InvalidOperationException($"ElementReference {elementReference.Id} does not have a selector.");
+        throw new InvalidOperationException(
+            "ElementReference has not been configured correctly. This issue may occur during pre-rendering; it can be ignored, or you can disable pre-rendering.");
     }
 
     public static bool TryGetSelector(this ElementReference elementReference, [NotNullWhen(true)] out string? selector)
