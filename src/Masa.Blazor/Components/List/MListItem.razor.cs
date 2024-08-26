@@ -125,8 +125,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
 
     protected override bool IsRoutable => Href != null && List?.Routable is true;
 
-    private bool HasBuiltInContent => !string.IsNullOrWhiteSpace(Title) || !string.IsNullOrWhiteSpace(Subtitle);
-
     protected override bool AfterHandleEventShouldRender() => false;
 
     protected virtual async Task HandleOnClick(MouseEventArgs args)
