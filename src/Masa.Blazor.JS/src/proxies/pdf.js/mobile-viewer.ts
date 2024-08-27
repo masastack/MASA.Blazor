@@ -328,7 +328,7 @@ function init(
   );
 
   GlobalWorkerOptions.workerSrc = new URL(
-    "./pdf.worker.min.js",
+    "./pdf.worker.js",
     import.meta.url
   ).toString();
   pdfViewerApp.initUI();
