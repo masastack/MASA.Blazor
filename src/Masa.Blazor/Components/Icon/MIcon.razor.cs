@@ -160,9 +160,15 @@ namespace Masa.Blazor
                 return;
             }
 
-            if (iconText.StartsWith("$"))
+            if (iconText.StartsWith('$'))
             {
                 icon = MasaBlazor.Icons.Aliases.GetIconOrDefault(iconText);
+                
+                // If the icon is not found, return
+                if (icon is null)
+                {
+                    return;
+                }
             }
             else
             {
