@@ -9,7 +9,7 @@ import typescript from "@rollup/plugin-typescript";
 export default defineConfig({
   input: [
     "./src/proxies/pdf.js/mobile-viewer.ts",
-    "pdfjs-dist/build/pdf.worker.min.mjs",
+    "./src/proxies/pdf.js/pdf.worker.js",
   ],
   output: [
     {
@@ -21,11 +21,11 @@ export default defineConfig({
   ],
   plugins: [
     typescript(),
-    resolve(),
-    commonjs(),
     getBabelOutputPlugin({
       presets: ["@babel/preset-env"],
     }),
+    resolve(),
+    commonjs(),
     terser(),
   ],
   watch: {
