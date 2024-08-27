@@ -1,0 +1,103 @@
+@namespace Masa.Blazor.MasaTable
+@typeparam TItem
+
+<div class="masa-table-viewer">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <div class="masa-table-viewer__header">
+                    <div class=""></div>
+                    @foreach (var template in ComputedColumnTemplates)
+                    {
+                        <div class="masa-table-viewer__header-column"
+                             style="">
+                            <div class="masa-table-viewer__header-column-content">
+                                @RenderFragments.GenTypeIcon(template.Column.Type, true)
+                                @template.Column.Name
+                                @* <MSpacer/> *@
+                                @* <MMenu MinWidth="180" OffsetY> *@
+                                @*     <ActivatorContent> *@
+                                @*         <MButton Class="menu" *@
+                                @*                  Small *@
+                                @*                  IconName="mdi-menu-down-outline" *@
+                                @*                  @attributes="@context.Attrs"> *@
+                                @*         </MButton> *@
+                                @*     </ActivatorContent> *@
+                                @*     <ChildContent> *@
+                                @*         <MList Dense Class="masa-table-viewer__header_column-menu-content"> *@
+                                @*             <MListItem Link *@
+                                @*                        PrependIcon="mdi-eye-off-outline" *@
+                                @*                        Title="Hide" *@
+                                @*                        OnClick="@(() => HandleOnColumnHide(item.Id))"/> *@
+                                @*             <MListItem Link *@
+                                @*                        PrependIcon="mdi-delete-variant" *@
+                                @*                        Title="Delete" *@
+                                @*                        OnClick="@(() => HandleOnColumnDelete(item.Id))"/> *@
+                                @*         </MList> *@
+                                @*     </ChildContent> *@
+                                @* </MMenu> *@
+                            </div>
+                        </div>
+                    }
+                    <div class="masa-table-viewer__header-column">
+                        <div class="masa-table-viewer__header-column-content">
+                            <ColumnEdit></ColumnEdit>
+                        </div>
+                    </div>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Rows)
+        {
+            <tr>
+                <td>
+                    <div class="masa-table-viewer__row">
+                        @foreach (var template in ComputedColumnTemplates)
+                        {
+                            <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()">
+                                <div class="masa-table-viewer__cell-content">
+                                    @GenCell(template.Column.Type, template.Value.Invoke(item))
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private RenderFragment GenCell(ColumnType columnType, object value) => __builder =>
+    {
+        switch (columnType)
+        {
+            case ColumnType.Checkbox:
+                var isChecked = (bool)value;
+                <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
+                       Color="@(isChecked ? "primary" : "")">
+                </MIcon>
+                break;
+            case ColumnType.Text:
+            case ColumnType.Email:
+            case ColumnType.Link:
+            case ColumnType.Phone:
+            case ColumnType.Image:
+            case ColumnType.Select:
+            case ColumnType.MultiSelect:
+            case ColumnType.Date:
+            case ColumnType.CreatedAt:
+            case ColumnType.Number:
+            case ColumnType.Progress:
+            case ColumnType.Rate:
+                @value.ToString()
+                break;
+        }
+    };
+
+}

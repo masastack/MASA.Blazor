@@ -1,0 +1,14 @@
+﻿<MListItem Link
+           PrependIcon="@PrependIcon"
+           Title="@Title"
+           OnClick="@OnClick"/>
+
+@code {
+
+    [Parameter] public string? PrependIcon { get; set; }
+
+    [Parameter] public string? Title { get; set; }
+
+    [Parameter] public EventCallback OnClick { get; set; }
+
+}

@@ -1,0 +1,98 @@
+﻿.masa-table__toolbar .masa-table__toolbar-tabs .view-tab.active {
+  background-color: var(--m-theme-surface-container);
+}
+
+.masa-table__toolbar .masa-table__toolbar-tabs .view-tab {
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.masa-table__toolbar-actions {
+  padding: 8px;
+  background-color: var(--m-theme-surface-container);
+}
+
+.masa-table-viewer {
+  font-size: 14px;
+}
+
+.masa-table-viewer > table {
+  border-collapse: collapse;
+}
+
+.masa-table-viewer__header {
+  display: flex;
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__header-column {
+  width: 180px;
+  padding: 0 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__header-column:last-child {
+  border-right: none;
+}
+
+.masa-table-viewer__header-column-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.masa-table-viewer__header-column-content .menu {
+  display: none;
+}
+
+.masa-table-viewer__header-column-content:hover .menu {
+  display: block;
+}
+
+.masa-table-viewer__row {
+  display: flex;
+  width: 100%;
+  /*min-width: -webkit-max-content;*/
+  /*min-width: -moz-max-content;*/
+  /*min-width: max-content;*/
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all .3s ease;
+}
+
+.masa-table-viewer__row:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__cell {
+  width: 180px;
+  padding: 7px 8px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__cell.checkbox {
+  justify-content: center;
+}
+
+.masa-table-viewer__cell.number {
+  justify-content: flex-end;
+}
+
+.masa-table-viewer__cell-content {
+  overflow: hidden;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+}
+
+.m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
+.m-application--is-ltr .masa-table__menu-list .m-list-item__icon:first-child {
+  margin-right: 16px;
+}

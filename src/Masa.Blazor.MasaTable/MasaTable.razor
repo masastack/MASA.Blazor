@@ -1,0 +1,154 @@
+﻿@using System.Text.Json
+@typeparam TItem
+@attribute [CascadingTypeParameter(nameof(TItem))]
+@inject IPopupService PopupService
+
+<pre style="font-size: 9px">
+@_json
+</pre>
+<div class="masa-table">
+    @if (_internalSheet is not null)
+    {
+        <Toolbar ActiveView="@_internalSheet.ActiveViewId"
+                 ActiveViewChanged="@HandleOnActiveViewChanged"
+                 ColumnOrder="@_columnOrder"
+                 ColumnOrderChanged="@HandleOnColumnOrderChanged"
+                 Views="_internalSheet.Views"
+                 Columns="_internalSheet.Columns"
+                 OnViewAdd="@AddNewView"
+                 OnViewDelete="@DeleteView"
+                 OnColumnEditClick="@OpenColumnEditDialog"
+                 HiddenColumnIds="@_hiddenColumnIds"
+                 OnColumnToggle="@ToggleColumn"
+                 OnRelease="@Release"/>
+    }
+
+    <Viewer ColumnTemplates="@_activeViewColumns"
+            ColumnOrder="_columnOrder"
+            Rows="@Items"/>
+</div>
+
+<ColumnDialog @ref="_columnEditDialog"
+              OnSave="UpsertColumn">
+</ColumnDialog>
+
+@code {
+
+    private HashSet<string> _hiddenColumnIds = [];
+    private ColumnDialog? _columnEditDialog;
+    
+    private void AddNewView()
+    {
+        var view = new View()
+        {
+            Id = Guid.NewGuid(),
+            Name = "New view",
+            Type = ViewType.Grid,
+            Columns = _internalSheet.ActiveView.Columns.Select(u => u.ShallowClone()).ToList()
+        };
+
+        _internalSheet.Views.Add(view);
+        // _internalSheet.ActiveViewId = view.Id;
+
+        HandleOnActiveViewChanged(view.Id);
+    }
+
+    private async Task DeleteView(View view)
+    {
+        if (_internalSheet.Views.Count < 1)
+        {
+            return;
+        }
+
+        var confirmed =
+            await PopupService.ConfirmAsync(
+                "Delete view",
+                $"Are you sure you want to delete this view ({view.Name})?",
+                AlertTypes.Error);
+
+        if (!confirmed) return;
+
+        if (_internalSheet.ActiveViewId == view.Id)
+        {
+            _internalSheet.Views.Remove(_internalSheet.ActiveView);
+        }
+
+        _internalSheet.ActiveViewId = Sheet.Views.First().Id;
+    }
+
+    private void ToggleColumn(string columnId)
+    {
+        var viewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.Id == columnId);
+        if (viewColumn.Hidden)
+        {
+            viewColumn.Hidden = false;
+            _hiddenColumnIds.Remove(columnId);
+        }
+        else
+        {
+            viewColumn.Hidden = true;
+            _hiddenColumnIds.Add(columnId);
+        }
+    }
+
+    private void OpenColumnEditDialog(Column column)
+    {
+        _columnEditDialog?.Open(column);
+    }
+
+    private void UpsertColumn(Column data)
+    {
+        if (data.Id == null)
+        {
+            // TODO: add new column, need this?
+            return;
+        }
+
+        // update column
+
+        var column = _internalSheet!.Columns.FirstOrDefault(u => u.Id == data.Id);
+        if (column is null)
+        {
+            return;
+        }
+
+        column.Name = data.Name;
+        column.Type = data.Type;
+        column.AdditionalValue = data.AdditionalValue;
+    }
+
+    private void HandleOnActiveViewChanged(Guid viewId)
+    {
+        _internalSheet.ActiveViewId = viewId;
+        
+        _columnOrder.Clear();
+        _hiddenColumnIds.Clear();
+        
+        foreach (var viewColumn in _internalSheet.ActiveView.Columns)
+        {
+            _activeViewColumns.FirstOrDefault(u => u.Column.Id == viewColumn.Id).ViewColumn = viewColumn;
+            
+            if (viewColumn.Hidden)
+            {
+                _hiddenColumnIds.Add(viewColumn.Id);
+            }
+            
+            _columnOrder.Add(viewColumn.Id);
+        }
+
+        Console.Out.WriteLine("[MasaTable] HandleOnActiveViewChanged: " + JsonSerializer.Serialize(_columnOrder));
+    }
+
+    private void HandleOnColumnOrderChanged(List<string> order)
+    {
+        _columnOrder = order;
+
+        _internalSheet.ActiveView.Columns.Sort((x, y) =>
+        {
+            var xIndex = order.IndexOf(x.Id);
+            var yIndex = order.IndexOf(y.Id);
+            return xIndex.CompareTo(yIndex);
+        });
+    }
+
+}

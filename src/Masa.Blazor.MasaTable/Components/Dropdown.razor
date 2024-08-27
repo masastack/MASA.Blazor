@@ -1,0 +1,21 @@
+﻿<MMenu MinWidth="180" OffsetY>
+    <ActivatorContent>
+        <MButton Class="menu"
+                 Small
+                 IconName="@Icon"
+                 @attributes="@context.Attrs">
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MList Dense Class="masa-table-viewer__header_column-menu-content">
+            @ChildContent
+        </MList>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter] public string? Icon { get; set; } = "mdi-dots-horizontal";
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

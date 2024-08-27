@@ -1,0 +1,144 @@
+﻿@using Masa.Blazor.MasaTable
+
+
+<Masa.Blazor.MasaTable.MasaTable OnSave="SaveSheet"
+                                 Items="@_myRecords"
+                                 ColumnTemplate="@ColumnTemplate"
+                                 TItem="MyRecord">
+</Masa.Blazor.MasaTable.MasaTable>
+
+
+@code {
+
+    #region mock data
+
+    public class MyRecord
+    {
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int Age { get; set; }
+        public bool GoOrNot { get; set; }
+        public string? Homepage { get; set; }
+    }
+
+    public static class MyRecordMock
+    {
+        public static List<MyRecord> GetMockData()
+        {
+            return new List<MyRecord>
+            {
+                new MyRecord
+                {
+                    Name = "John Doe",
+                    Description = "A simple description",
+                    Age = 30,
+                    GoOrNot = true,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "Jane Doe",
+                    Description = "Another simple description",
+                    Age = 25,
+                    GoOrNot = false,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "John Smith",
+                    Description = "A simple description",
+                    Age = 30,
+                    GoOrNot = true,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "Jane Smith",
+                    Description = "Another simple description",
+                    Age = 25,
+                    GoOrNot = false,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "John Doe",
+                    Description = "A simple description",
+                    Age = 30,
+                    GoOrNot = true,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "Jane Doe",
+                    Description = "Another simple description",
+                    Age = 25,
+                    GoOrNot = false,
+                    Homepage = "https://example.com"
+                },
+                new MyRecord
+                {
+                    Name = "John Smith",
+                    Description = "A simple description",
+                    Age = 30,
+                    GoOrNot = true,
+                    Homepage = "https://example.com"
+                },
+            };
+        }
+    }
+
+    #endregion
+
+    private List<MyRecord> _myRecords = new();
+
+    private Func<ValueTask<Sheet>> _sheetProvider;
+
+    private List<ColumnTemplate<MyRecord, object>> ColumnTemplate(MyRecord record)
+    {
+        var name = new ColumnTemplate<MyRecord, object>(nameof(record.Name), ColumnType.Text, u => u.Name);
+        var age = new ColumnTemplate<MyRecord, object>(nameof(record.Age), ColumnType.Number, u => u.Age);
+        var getOrNot = new ColumnTemplate<MyRecord, object>(nameof(record.GoOrNot), ColumnType.Checkbox, u => u.GoOrNot);
+
+        return [name, age, getOrNot];
+    }
+
+    private async Task SaveSheet(Sheet sheet)
+    {
+        // TODO: save sheet
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _myRecords = MyRecordMock.GetMockData();
+
+        // _sheetProvider = async () =>
+        // {
+        //     var defaultSheet = Sheet.CreateDefault();
+        //     // var defaultView = defaultSheet.Views.First();
+        //     // defaultSheet.Columns.Add(new Column()
+        //     // {
+        //     //     Id = Guid.NewGuid(),
+        //     //     Name = "文本",
+        //     //     Type = ColumnType.Text
+        //     // });
+        //     // defaultSheet.Columns.Add(new Column()
+        //     // {
+        //     //     Id = Guid.NewGuid(),
+        //     //     Name = "数字",
+        //     //     Type = ColumnType.Number
+        //     // });
+        //     // defaultSheet.Columns.Add(new Column()
+        //     // {
+        //     //     Id = Guid.NewGuid(),
+        //     //     Name = "日期",
+        //     //     Type = ColumnType.Date
+        //     // });
+        //     // defaultView.Columns = defaultSheet.Columns.Select(u => new ViewColumn(u.Id)).ToList();
+        //
+        //     return defaultSheet;
+        // };
+    }
+
+}

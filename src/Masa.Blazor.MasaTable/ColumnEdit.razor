@@ -1,0 +1,97 @@
+﻿<MMenu @bind-Value="_menu"
+       @bind-Value:after="MenuChanged"
+       CloseOnContentClick="false"
+       ContentClass="pa-6"
+       MinWidth="340"
+       MaxWidth="340">
+    <ActivatorContent>
+        <MButton IconName="mdi-plus" @attributes="@context.Attrs"></MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MForm OnValidSubmit="@HandleOnSubmit">
+            <MTextField @bind-Value="@_columnName"
+                        Filled
+                        TValue="string"
+                        OnChange="@HandleOnColumnNameChange"
+                        Label="column-name"
+                        Required>
+            </MTextField>
+            <MSelect @bind-Value="@_columnType"
+                     Items="@_columnTypeMetadata"
+                     ItemValue="u => u.Value"
+                     ItemText="u => u.Name"
+                     Filled
+                     Label="column-type"
+                     TItem="(string Name, ColumnType Value)"
+                     TItemValue="ColumnType"
+                     TValue="ColumnType"
+                     OnSelect="@HandleOnColumnTypeSelect">
+            </MSelect>
+            <div class="d-flex justify-end">
+                <MButton Class="mr-2" OnClick="@(() => _menu = false)">Cancel</MButton>
+                <MButton Type="submit" Color="primary">Confirm</MButton>
+            </div>
+        </MForm>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter] public Column? Column { get; set; }
+
+    private bool _menu;
+    private ColumnType _columnType;
+    private string? _columnName;
+    private bool _isNameDirty;
+
+    private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
+
+    private void HandleOnColumnNameChange()
+    {
+        _isNameDirty = true;
+    }
+
+    private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
+    {
+        if (_isNameDirty)
+        {
+            return;
+        }
+
+        _columnName = item.Item.Name;
+    }
+
+    private void MenuChanged()
+    {
+        if (!_menu) return;
+
+        if (Column is null)
+        {
+            _columnName = nameof(ColumnType.Text);
+            _columnType = ColumnType.Text;
+            _isNameDirty = false;
+        }
+        else
+        {
+            _columnName = Column.Name;
+            _columnType = Column.Type;
+        }
+    }
+
+    private void HandleOnSubmit()
+    {
+        Console.Out.WriteLine("HandleOnSubmit");
+    }
+
+    public static IList<(string Name, T Value)> GetEnumMetadata<T>() where T : Enum
+    {
+        var metadataList = new List<(string Name, T Value)>();
+        foreach (var value in Enum.GetValues(typeof(T)))
+        {
+            metadataList.Add((value.ToString(), (T)value));
+        }
+
+        return metadataList;
+    }
+
+}
