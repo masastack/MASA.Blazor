@@ -9,12 +9,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
     [Parameter] [EditorRequired] public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
 
-    [Parameter]
-    public List<string>? Order
-    {
-        get => GetValue<List<string>>();
-        set => SetValue(value);
-    }
+    [Parameter] public List<string>? Order { get; set; }
 
     [Parameter] public EventCallback<List<string>> OrderChanged { get; set; }
 
@@ -178,6 +173,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     private IEnumerable<TItem>? _prevItems;
     private HashSet<string> _prevItemKeys;
     private List<string> _internalOrder;
+    private string[] _prevOrder = [];
 
     private DotNetObjectReference<SortableJSInteropHandle>? _sortableJSInteropHandle;
     private SortableJSObjectReference? _jsObjectReference;
@@ -205,8 +201,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(Disabled),
-                val => { _jsObjectReference?.InvokeVoidAsync("option", "disabled", val); })
-            .Watch<List<string>>(nameof(Order), val => { _ = _jsObjectReference?.SortAsync(val, false); });
+            val => { _jsObjectReference?.InvokeVoidAsync("option", "disabled", val); });
     }
 
     protected override void OnParametersSet()
@@ -231,6 +226,12 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
                 _prevItemKeys = keys;
                 SortByInternalOrder();
             }
+        }
+
+        if (Order is not null && !_prevOrder.SequenceEqual(Order))
+        {
+            _prevOrder = Order.ToArray();
+            _ = _jsObjectReference?.SortAsync(Order, false);
         }
     }
 
