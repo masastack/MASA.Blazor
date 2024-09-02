@@ -12,7 +12,7 @@
         @{
             var outline = _menu ? "" : "-outline";
         }
-        <MToggle Value="UnreadNotifications.Count > 0" 
+        <MToggle Value="UnreadNotifications.Count > 0"
                  DataOn="@($"mdi-bell-ring{outline}")"
                  DataOff="@($"mdi-bell{outline}")"
                  Context="toggleContext">
@@ -41,7 +41,7 @@
                 }
             </MButton>
         </MToolbar>
-        <MDivider />
+        <MDivider/>
         <MResponsive MaxHeight="340"
                      MinHeight="204"
                      Style="overflow-y: scroll">
@@ -52,7 +52,7 @@
                         @I18n.T("notifications.done", ReadNotifications.Count)
                     </p>
 
-                    <MIcon Icon="@("$masaBlazor")" Size="96" Color="#D7D7D7" />
+                    <MIcon Icon="@("$masaBlazor")" Size="96" Color="#D7D7D7"/>
                 </div>
             }
             else
@@ -62,7 +62,7 @@
                     {
                         if (index != 0)
                         {
-                            <MDivider Class="my-1" />
+                            <MDivider Class="my-1"/>
                         }
 
                         <MListItem Ripple="false">
@@ -81,8 +81,15 @@
 
                                     <MChip Outlined Small Href="@item.Href" OnClick="@(() => OnClick(item))">
                                         @I18n.T($"notifications.{item.HrefText}")
-                                        <MIcon XSmall Icon="@("mdi-open-in-new")" Class="ml-1" />
+                                        <MIcon XSmall Icon="@("mdi-open-in-new")" Class="ml-1"/>
                                     </MChip>
+                                    @if (item.UpgradeGuide != null)
+                                    {
+                                        <MChip Outlined Small Href="@item.UpgradeGuide" Class="ml-2">
+                                            @I18n.T($"notifications.upgrade-guide")
+                                            <MIcon XSmall Icon="@("mdi-open-in-new")" Class="ml-1"/>
+                                        </MChip>
+                                    }
                                 </div>
                             </MListItemContent>
                             @if (!_showArchived)

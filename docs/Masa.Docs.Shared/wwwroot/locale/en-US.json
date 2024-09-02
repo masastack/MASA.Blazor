@@ -514,7 +514,8 @@
     "viewUnread": "View unread({0})",
     "done": "All done",
     "release-notes": "Release notes",
-    "view-details": "View details"
+    "view-details": "View details",
+    "upgrade-guide": "Upgrade guide"
   },
   "intro": {
     "blazor": {
