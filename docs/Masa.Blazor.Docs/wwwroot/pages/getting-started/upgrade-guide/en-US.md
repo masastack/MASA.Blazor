@@ -49,6 +49,17 @@ DataAnnotations validation now natively supports complex types, no need to refer
   }
 ```
 
+#### Treeview {#v1-7-0-treeview}
+
+After enabling the `Selectable` property, you can now select by clicking on the row. To disable this functionality, you need to set `SelectOnRowClick` to `false`.
+
+```diff
+  <MTreeview @bind-Value="_selected"
++            SelectOnRowClick="false"
+             Selectable="true">
+  </MTreeview>
+```
+
 ## Upgrading form v1.5.x to v1.6.0
 
 ### Change the script

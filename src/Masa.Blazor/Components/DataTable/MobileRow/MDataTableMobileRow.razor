@@ -9,7 +9,7 @@
             @{
                 if (header.Value != "data-table-select" && !HideDefaultHeader)
                 {
-                    <div class="@_block.Element("mobile-row__header")">
+                    <div class="@_block.Element("mobile-row__header").AppendClasses(header.Class)">
                         @if (HeaderColContent != null)
                         {
                             @HeaderColContent(header)
@@ -22,7 +22,7 @@
                 }
 
                 var props = new ItemColProps<TItem>(header, Item);
-                <div class="@_block.Element("mobile-row__cell")">
+                <div class="@_block.Element("mobile-row__cell").AppendClasses(header.CellClass)">
                     @if (HasSlot(props))
                     {
                         @SlotContent(props)
