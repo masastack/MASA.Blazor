@@ -38,6 +38,8 @@ public partial class NotificationsMenu
         public NotificationType Type { get; init; }
 
         public string Href { get; init; }
+        
+        public string? UpgradeGuide { get; init; }
 
         public DateOnly CreatedAt { get; init; }
 

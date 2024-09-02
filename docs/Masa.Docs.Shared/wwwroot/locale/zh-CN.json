@@ -604,7 +604,8 @@
     "viewRead": "查看已读（{0}）",
     "done": "全部完成",
     "release-notes": "发行说明",
-    "view-details": "查看详情"
+    "view-details": "查看详情",
+    "upgrade-guide": "升级指南"
   },
   "intro": {
     "blazor": {

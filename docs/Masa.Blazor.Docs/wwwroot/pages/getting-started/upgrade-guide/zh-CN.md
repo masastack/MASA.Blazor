@@ -49,6 +49,17 @@ DataAnnotations 验证现在内置支持复杂类型，不需要引用额外的�
   }
 ```
 
+#### Treeview {#v1-7-0-treeview}
+
+现在应用 `Selectable` 属性后，可以通过单击行来选择。要禁用此功能，需要将 `SelectOnRowClick` 设置为 `false`。
+
+```diff
+  <MTreeview @bind-Value="_selected"
++            SelectOnRowClick="false"
+             Selectable="true">
+  </MTreeview>
+```
+
 ## 从 v1.5.x 升级到 v1.6.0
 
 ### 更改脚本
