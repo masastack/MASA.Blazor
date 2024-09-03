@@ -53,7 +53,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     private bool _forceStatus;
     private bool _internalValueChangingFromOnValueChanged;
     private CancellationTokenSource? _cancellationTokenSource;
-
+    private EditContext? _prevEditContext;
     private InternalValueChangeType _changeType;
 
     protected void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
@@ -63,8 +63,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     }
 
     protected virtual TValue? DefaultValue => default;
-
-    protected EditContext? OldEditContext { get; set; }
 
     public FieldIdentifier? ValueIdentifier => ValueExpression is null ? null : FieldIdentifier.Create(ValueExpression);
 
@@ -364,23 +362,31 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         }
     }
     
-    protected virtual void SubscribeValidationStateChanged()
+    protected void SubscribeValidationStateChanged()
     {
         //When EditContext update,we should re-subscribe OnValidationStateChanged
-        if (OldEditContext != EditContext)
-        {
-            if (OldEditContext != null)
-            {
-                OldEditContext.OnValidationStateChanged -= HandleOnValidationStateChanged;
-            }
+        if (_prevEditContext == EditContext) return;
 
-            if (EditContext != null)
+        if (_prevEditContext != null)
+        {
+            _prevEditContext.OnValidationStateChanged -= HandleOnValidationStateChanged;
+        }
+
+        if (EditContext != null)
+        {
+            // assume the ValueExpression would not change after the component is initialized
+            if (ValueIdentifier.HasValue)
             {
                 EditContext.OnValidationStateChanged += HandleOnValidationStateChanged;
             }
-
-            OldEditContext = EditContext;
+            else
+            {
+                Logger.LogWarning(
+                    $"{(string.IsNullOrWhiteSpace(Label) ? "" : $"[{Label}] ")}ValueExpression was missing, the validation is not working. Ignore this warning if validation is not needed.");
+            }
         }
+
+        _prevEditContext = EditContext;
     }
 
     protected virtual Task OnIsFocusedChange(bool val)
