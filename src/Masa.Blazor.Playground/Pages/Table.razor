@@ -19,6 +19,8 @@
         public int Age { get; set; }
         public bool GoOrNot { get; set; }
         public string? Homepage { get; set; }
+        public DateTimeOffset Birthday { get; set; }
+        public int Favorite { get; set; }
     }
 
     public static class MyRecordMock
@@ -33,7 +35,9 @@
                     Description = "A simple description",
                     Age = 30,
                     GoOrNot = true,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now,
+                    Favorite = 1
                 },
                 new MyRecord
                 {
@@ -41,7 +45,9 @@
                     Description = "Another simple description",
                     Age = 25,
                     GoOrNot = false,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-300),
+                    Favorite = 2
                 },
                 new MyRecord
                 {
@@ -49,7 +55,9 @@
                     Description = "A simple description",
                     Age = 30,
                     GoOrNot = true,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-100),
+                    Favorite = 3
                 },
                 new MyRecord
                 {
@@ -57,7 +65,9 @@
                     Description = "Another simple description",
                     Age = 25,
                     GoOrNot = false,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-672),
+                    Favorite = 4
                 },
                 new MyRecord
                 {
@@ -65,7 +75,9 @@
                     Description = "A simple description",
                     Age = 30,
                     GoOrNot = true,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-1000),
+                    Favorite = 0
                 },
                 new MyRecord
                 {
@@ -73,7 +85,9 @@
                     Description = "Another simple description",
                     Age = 25,
                     GoOrNot = false,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-120),
+                    Favorite = 3
                 },
                 new MyRecord
                 {
@@ -81,7 +95,9 @@
                     Description = "A simple description",
                     Age = 30,
                     GoOrNot = true,
-                    Homepage = "https://example.com"
+                    Homepage = "https://example.com",
+                    Birthday = DateTimeOffset.Now.AddDays(-88),
+                    Favorite = 2
                 },
             };
         }
@@ -98,8 +114,11 @@
         var name = new ColumnTemplate<MyRecord, object>(nameof(record.Name), ColumnType.Text, u => u.Name);
         var age = new ColumnTemplate<MyRecord, object>(nameof(record.Age), ColumnType.Number, u => u.Age);
         var getOrNot = new ColumnTemplate<MyRecord, object>(nameof(record.GoOrNot), ColumnType.Checkbox, u => u.GoOrNot);
+        var birthday = new ColumnTemplate<MyRecord, object>(nameof(record.Birthday), ColumnType.Date, u => u.Birthday);
+        var homepage = new ColumnTemplate<MyRecord, object>(nameof(record.Homepage), ColumnType.Link, u => u.Homepage);
+        var favorite = new ColumnTemplate<MyRecord, object>(nameof(record.Favorite), ColumnType.Select, u => u.Favorite);
 
-        return [name, age, getOrNot];
+        return [name, age, getOrNot, homepage, birthday, favorite];
     }
 
     private async Task SaveSheet(Sheet sheet)
