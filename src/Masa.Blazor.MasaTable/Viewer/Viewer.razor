@@ -1,4 +1,7 @@
 @namespace Masa.Blazor.MasaTable
+@using System.Globalization
+@using System.Text.Json
+@using Masa.Blazor.MasaTable.ColumnConfigs
 @typeparam TItem
 
 <div class="masa-table-viewer">
@@ -59,7 +62,7 @@
                         {
                             <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()">
                                 <div class="masa-table-viewer__cell-content">
-                                    @GenCell(template.Column.Type, template.Value.Invoke(item))
+                                    @GenCell(template.Column, template.Value.Invoke(item))
                                 </div>
                             </div>
                         }
@@ -73,9 +76,9 @@
 
 @code {
 
-    private RenderFragment GenCell(ColumnType columnType, object value) => __builder =>
+    private RenderFragment GenCell(Column column, object value) => __builder =>
     {
-        switch (columnType)
+        switch (column.Type)
         {
             case ColumnType.Checkbox:
                 var isChecked = (bool)value;
@@ -86,11 +89,29 @@
             case ColumnType.Text:
             case ColumnType.Email:
             case ColumnType.Link:
+                <a href="@value" target="_blank">@value</a>
+                break;
             case ColumnType.Phone:
             case ColumnType.Image:
             case ColumnType.Select:
             case ColumnType.MultiSelect:
             case ColumnType.Date:
+                var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
+                if (column.ConfigObject is DateConfig dateConfig)
+                {
+                    format = dateConfig.Format!;
+                }
+
+                if (DateTimeOffset.TryParse(value.ToString(), out var date))
+                {
+                    <span>@date.ToString(format)</span>
+                }
+                else
+                {
+                    <span>@value</span>
+                }
+
+                break;
             case ColumnType.CreatedAt:
             case ColumnType.Number:
             case ColumnType.Progress:

@@ -2,8 +2,8 @@
        @bind-Value:after="MenuChanged"
        CloseOnContentClick="false"
        ContentClass="pa-6"
-       MinWidth="340"
-       MaxWidth="340">
+       MinWidth="440"
+       MaxWidth="440">
     <ActivatorContent>
         <MButton IconName="mdi-plus" @attributes="@context.Attrs"></MButton>
     </ActivatorContent>
@@ -21,13 +21,14 @@
                      ItemValue="u => u.Value"
                      ItemText="u => u.Name"
                      Filled
+                     HideDetails="true"
                      Label="column-type"
                      TItem="(string Name, ColumnType Value)"
                      TItemValue="ColumnType"
                      TValue="ColumnType"
                      OnSelect="@HandleOnColumnTypeSelect">
             </MSelect>
-            <div class="d-flex justify-end">
+            <div class="d-flex justify-end mt-4">
                 <MButton Class="mr-2" OnClick="@(() => _menu = false)">Cancel</MButton>
                 <MButton Type="submit" Color="primary">Confirm</MButton>
             </div>

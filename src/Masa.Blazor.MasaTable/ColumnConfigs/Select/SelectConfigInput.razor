@@ -1,0 +1,72 @@
+﻿@namespace Masa.Blazor.MasaTable.ColumnConfigs
+@inherits ConfigInputBase<SelectConfig>
+
+<MDivider Class="mt-4 mb-2"/>
+
+<div class="d-flex justify-space-between align-center mb-2">
+    <span>Option config</span>
+    <MCheckbox @bind-Value="@color"
+               Label="Color"
+               Dense
+               HideDetails="true">
+    </MCheckbox>
+</div>
+
+@foreach (var option in Config.Options)
+{
+    <div class="d-flex justify-space-between align-center mb-2">
+        <MTextField @bind-Value="@option.Label"
+                    Label="Text"
+                    Class="mr-2"
+                    Filled
+                    Dense
+                    HideDetails="true">
+        </MTextField>
+        <MTextField @bind-Value="@option.Value"
+                    Label="Value"
+                    Class="mr-2"
+                    Filled
+                    Dense
+                    HideDetails="true">
+        </MTextField>
+        <MButton IconName="mdi-delete-outline"
+                 OnClick="@(() => RemoveOption(option))">
+        </MButton>
+    </div>
+}
+
+<MButton LeftIconName="mdi-plus"
+         OnClick="@AddOption"
+         Class="mt-1"
+         Small
+         Outlined
+         Block>
+    Add option
+</MButton>
+
+@code {
+
+    private bool color;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Config.Options.Count == 0)
+        {
+            Config.Options.Add(new SelectOption());
+        }
+    }
+
+    private void AddOption()
+    {
+        Config.Options.Add(new SelectOption());
+    }
+
+    private void RemoveOption(SelectOption option)
+    {
+        Config.Options.Remove(option);
+        UpdateValue();
+    }
+
+}

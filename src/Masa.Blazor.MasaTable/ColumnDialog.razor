@@ -1,6 +1,5 @@
-﻿@using System.Text.Json
-<MDialog @bind-Value="_menu"
-         MaxWidth="340"
+﻿<MDialog @bind-Value="_menu"
+         Width="440"
          ContentClass="px-6 pt-7 pb-6"
          Persistent>
     <MForm OnValidSubmit="@HandleOnSubmit">
@@ -17,6 +16,7 @@
                  ItemText="u => u.Name"
                  Filled
                  Label="column-type"
+                 HideDetails="true"
                  TItem="(string Name, ColumnType Value)"
                  TItemValue="ColumnType"
                  TValue="ColumnType"
@@ -24,9 +24,13 @@
         </MSelect>
         @if (_columnType == ColumnType.Date)
         {
-            <DateInputs @bind-Value="@_additionalValue"/>
+            <DateConfigInput @bind-Value="@_additionalValue"/>
         }
-        <div class="d-flex justify-end">
+        else if (_columnType == ColumnType.Select)
+        {
+            <SelectConfigInput @bind-Value="@_additionalValue"/>
+        }
+        <div class="d-flex justify-end mt-4">
             <MButton Class="mr-2" OnClick="@(() => _menu = false)">Cancel</MButton>
             <MButton Type="submit" Color="primary">Confirm</MButton>
         </div>
@@ -71,7 +75,7 @@
         _column ??= new();
         _column.Name = _columnName;
         _column.Type = _columnType;
-        _column.AdditionalValue = _additionalValue;
+        _column.Config = _additionalValue;
         OnSave.InvokeAsync(_column);
         _menu = false;
     }
