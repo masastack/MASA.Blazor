@@ -108,7 +108,6 @@ class BaiduMapProxy {
       title: marker.title,
     });
 
-    console.log(marker.icon);
     if (marker.icon && marker.icon.url) {
       const { url, size, options } = marker.icon;
       const opts: BMapGL.IconOptions = {};
@@ -206,7 +205,7 @@ if (typeof BMapGL !== "undefined") {
     polygon.setPath(bmapPoints);
   };
 
-  console.log("BMapGL is loaded");
+  console.info("BMapGL is loaded");
 } else {
   console.error("BMapGL is not defined");
 }
