@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Masa.Blazor.Utils;
 
 namespace Masa.Blazor;
 
@@ -13,11 +14,8 @@ public class BreakpointOptions
 
 public class Breakpoint
 {
-    public Breakpoint()
-    {
-    }
-    
-    private IJSRuntime? JSRuntime { get; set; }
+    private readonly Throttle _throttle = new(500);
+    private IJSRuntime? _jsRuntime;
 
     /// <summary>
     /// Indicates that the breakpoint has been calculated. If not, the breakpoint will not work.
@@ -104,15 +102,23 @@ public class Breakpoint
         mobileBreakpoint = MobileBreakpoint;
     }
 
-    public async Task InitAsync(IJSRuntime jsRuntime)
+    public void Init(IJSRuntime jsRuntime)
     {
-        JSRuntime = jsRuntime;
+        _throttle.Execute(() =>
+        {
+            if (_jsRuntime is not null)
+            {
+                return;
+            }
 
-        await ResizeAsync();
+            _jsRuntime = jsRuntime;
 
-        _ = JSRuntime.AddHtmlElementEventListener("window", "resize", ResizeAsync,
-            new EventListenerOptions { Passive = true },
-            new EventListenerExtras(debounce: 200));
+            _ = ResizeAsync();
+
+            _ = _jsRuntime.AddHtmlElementEventListener("window", "resize", ResizeAsync,
+                new EventListenerOptions { Passive = true },
+                new EventListenerExtras(debounce: 200));
+        });
     }
 
     private async Task ResizeAsync()
@@ -207,12 +213,12 @@ public class Breakpoint
 
     private async Task<double?> GetNumberPropAsync(string selector, string name)
     {
-        if (JSRuntime is null)
+        if (_jsRuntime is null)
         {
-            throw new NullReferenceException("JSRuntime is null. Please call UpdateJsRuntime(IJSRuntime jsRuntime) first.");
+            throw new NullReferenceException("JSRuntime is not initialized.");
         }
 
-        var jsonElement = await JSRuntime.InvokeAsync<JsonElement>(JsInteropConstants.GetProp, selector, name);
+        var jsonElement = await _jsRuntime.InvokeAsync<JsonElement>(JsInteropConstants.GetProp, selector, name);
         return jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : null;
     }
 }
