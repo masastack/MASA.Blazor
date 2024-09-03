@@ -33,21 +33,25 @@ namespace Masa.Blazor
             set => SetValue(value);
         }
 
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.7.1")]
+        public BaiduMapIcon? Icon { get; set; }
+
         protected override void RegisterWatchers(PropertyWatcher watcher)
         {
             base.RegisterWatchers(watcher);
 
-            watcher.Watch<string>(nameof(Title), async (val)
-                => await OverlayJSObjectRef.TryInvokeVoidAsync("setTitle", val));
+            watcher.Watch<string>(nameof(Title), (val) => InvokeJsMethod("setTitle", val))
+                .Watch<GeoPoint>(nameof(Point), (val) => InvokeJsMethod("setPosition", val))
+                .Watch<Size>(nameof(Offset), (val) => InvokeJsMethod("setOffset", val))
+                .Watch<float>(nameof(Rotation), (val) => InvokeJsMethod("setRotation", val));
 
-            watcher.Watch<GeoPoint>(nameof(Point), async (val)
-                => await OverlayJSObjectRef.TryInvokeVoidAsync("setPosition", val));
+            return;
 
-            watcher.Watch<Size>(nameof(Offset), async (val)
-                => await OverlayJSObjectRef.TryInvokeVoidAsync("setOffset", val));
-
-            watcher.Watch<float>(nameof(Rotation), async (val)
-                => await OverlayJSObjectRef.TryInvokeVoidAsync("setRotation", val));
+            void InvokeJsMethod(string methodName, object args)
+            {
+                _ = OverlayJSObjectRef.TryInvokeVoidAsync(methodName, args);
+            }
         }
     }
 }

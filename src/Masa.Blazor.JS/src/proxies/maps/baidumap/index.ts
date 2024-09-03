@@ -5,8 +5,7 @@ class BaiduMapProxy {
   constructor(containerId, initArgs) {
     this.instance = new BMapGL.Map(containerId);
 
-    if (initArgs.enableScrollWheelZoom)
-      this.instance.enableScrollWheelZoom();
+    if (initArgs.enableScrollWheelZoom) this.instance.enableScrollWheelZoom();
 
     this.instance.setMaxZoom(initArgs.maxZoom);
     this.instance.setMinZoom(initArgs.minZoom);
@@ -14,12 +13,11 @@ class BaiduMapProxy {
 
     this.instance.setMapType(initArgs.mapTypeString);
 
-    if (initArgs.trafficOn)
-      this.instance.setTrafficOn();
+    if (initArgs.trafficOn) this.instance.setTrafficOn();
 
     if (initArgs.dark)
       this.instance.setMapStyleV2({
-        styleId: initArgs.darkThemeId
+        styleId: initArgs.darkThemeId,
       });
   }
 
@@ -28,25 +26,27 @@ class BaiduMapProxy {
 
     events.forEach((event_name) => {
       this.instance.addEventListener(event_name, async function (e) {
-        if (event_name == "dragstart" ||
+        if (
+          event_name == "dragstart" ||
           event_name == "dragging" ||
           event_name == "dragend" ||
-          event_name == "dblclick") {
+          event_name == "dblclick"
+        ) {
           await dotNetHelper.invokeMethodAsync("OnEvent", event_name, {
             latlng: e.point,
             pixel: e.pixel,
           });
-        }
-        else if (event_name == "click" ||
+        } else if (
+          event_name == "click" ||
           event_name == "rightclick" ||
           event_name == "rightdblclick" ||
-          event_name == "mousemove") {
+          event_name == "mousemove"
+        ) {
           await dotNetHelper.invokeMethodAsync("OnEvent", event_name, {
             latlng: e.latlng,
             pixel: e.pixel,
           });
-        }
-        else {
+        } else {
           await dotNetHelper.invokeMethodAsync("OnEvent", event_name, null);
         }
       });
@@ -74,7 +74,6 @@ class BaiduMapProxy {
   getMapType = () => this.instance.getMapType();
 
   setTrafficOn = () => this.instance.setTrafficOn();
-
   setTrafficOff = () => this.instance.setTrafficOff();
 
   setMapStyleV2 = (options) => this.instance.setMapStyleV2(options);
@@ -94,7 +93,7 @@ class BaiduMapProxy {
       strokeOpacity: circle.strokeOpacity,
       strokeStyle: circle.strokeStyle == 0 ? "solid" : "dashed",
       fillColor: circle.fillColor,
-      fillOpacity: circle.fillOpacity
+      fillOpacity: circle.fillOpacity,
     });
 
     this.instance.addOverlay(c);
@@ -106,8 +105,25 @@ class BaiduMapProxy {
     var m = new BMapGL.Marker(marker.point, {
       offset: marker.offset,
       rotation: marker.rotation,
-      title: marker.title
+      title: marker.title,
     });
+
+    if (marker.icon && marker.icon.url) {
+      const { url, size, options } = marker.icon;
+      const opts: BMapGL.IconOptions = {};
+      if (options) {
+        if (options.anchor) {
+          opts.anchor = new BMapGL.Size(options.anchor.width, options.anchor.height);
+        }
+
+        if (options.imageOffset) {
+          opts.imageOffset = new BMapGL.Size(options.imageOffset.width, options.imageOffset.height);
+        }
+      }
+      m.setIcon(
+        new BMapGL.Icon(url, new BMapGL.Size(size.width, size.height), opts)
+      );
+    }
 
     this.instance.addOverlay(m);
 
@@ -117,7 +133,7 @@ class BaiduMapProxy {
   addLabel(label) {
     var l = new BMapGL.Label(label.content, {
       offset: label.offset,
-      position: label.position
+      position: label.position,
     });
 
     this.instance.addOverlay(l);
@@ -126,8 +142,7 @@ class BaiduMapProxy {
   }
 
   addPolyline(polyline) {
-    if (polyline.points == null)
-      return null;
+    if (polyline.points == null) return null;
 
     var pl = new BMapGL.Polyline(polyline.points, {
       strokeColor: polyline.strokeColor,
@@ -135,8 +150,8 @@ class BaiduMapProxy {
       strokeOpacity: polyline.strokeOpacity,
       strokeStyle: polyline.strokeStyle == 0 ? "solid" : "dashed",
       geodesic: polyline.geodesic,
-      clip: polyline.clip
-    });
+      clip: polyline.clip,
+    } as any);
 
     this.instance.addOverlay(pl);
 
@@ -144,11 +159,10 @@ class BaiduMapProxy {
   }
 
   addPolygon(polygon) {
-    if (polygon.points == null)
-      return null;
+    if (polygon.points == null) return null;
 
     var bmapPoints = [];
-    polygon.points.forEach(element => {
+    polygon.points.forEach((element) => {
       bmapPoints.push(toBMapGLPoint(element));
     });
 
@@ -158,7 +172,7 @@ class BaiduMapProxy {
       strokeOpacity: polygon.strokeOpacity,
       strokeStyle: polygon.strokeStyle == 0 ? "solid" : "dashed",
       fillColor: polygon.fillColor,
-      fillOpacity: polygon.fillOpacity
+      fillOpacity: polygon.fillOpacity,
     });
 
     this.instance.addOverlay(pg);
@@ -169,28 +183,31 @@ class BaiduMapProxy {
   contains(overlay) {
     var os = this.instance.getOverlays();
     for (let index = 0; index < os.length; index++) {
-      if (os[index] === overlay)
-        return true;
+      if (os[index] === overlay) return true;
     }
     return false;
   }
 
   destroyMap() {
-    if (this.instance != null)
-      delete this.instance;
+    if (this.instance != null) delete this.instance;
   }
 }
 
-BMapGL.Polygon.prototype.setPathWithGeoPoint = (points, polygon) => {
-  if (points == null)
-    return;
+if (typeof BMapGL !== "undefined") {
+  BMapGL.Polygon.prototype.setPathWithGeoPoint = (points, polygon) => {
+    if (points == null) return;
 
-  var bmapPoints = [];
-  points.forEach(element => {
-    bmapPoints.push(toBMapGLPoint(element));
-  });
+    var bmapPoints = [];
+    points.forEach((element) => {
+      bmapPoints.push(toBMapGLPoint(element));
+    });
 
-  polygon.setPath(bmapPoints);
+    polygon.setPath(bmapPoints);
+  };
+
+  console.info("BMapGL is loaded");
+} else {
+  console.error("BMapGL is not defined");
 }
 
 const toBMapGLPoint = (point) => new BMapGL.Point(point.lng, point.lat);
@@ -201,6 +218,6 @@ const init = (containerId, initArgs) => {
   }
 
   return null;
-}
+};
 
-export { init }
+export { init };
