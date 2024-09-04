@@ -154,12 +154,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     {
                         Fixed = FixedSelect ? DataTableFixed.Left : DataTableFixed.None,
                         Width = "56px",
-                        Value = "data-table-select"
+                        Value = "data-table-select",
+                        Sortable = false
                     });
                 }
                 else
                 {
                     var header = headers[index];
+                    header.Sortable = false;
                     if (header.Width == null)
                     {
                         header.Width = "1px";
@@ -175,12 +177,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     headers.Insert(0, new DataTableHeader<TItem>
                     {
                         Width = "1px",
-                        Value = "data-table-expand"
+                        Value = "data-table-expand",
+                        Sortable = false
                     });
                 }
                 else
                 {
                     var header = headers[index];
+                    header.Sortable = false;
                     if (header.Width == null)
                     {
                         header.Width = "1px";
