@@ -3,19 +3,35 @@
 @attribute [CascadingTypeParameter(nameof(TItem))]
 @inject IPopupService PopupService
 
-<pre style="font-size: 9px">
-@_json
-</pre>
 <div class="masa-table">
+    <div class="d-flex">
+        <MSpacer/>
+        <MSelect @bind-Value="@_selectedMode"
+                 Items="@_modes"
+                 ItemValue="u => u"
+                 ItemText="u => u"
+                 Label="Mode"
+                 Dense
+                 Outlined
+                 HideDetails="true"
+                 Style="max-width: 160px;"
+                 MenuProps="@(m => { m.Transition = "slide-y-transition"; m.OffsetY = true; })">
+        </MSelect>
+    </div>
+
     @if (_internalSheet is not null)
     {
-        <Toolbar ActiveView="@_internalSheet.ActiveViewId"
+        <Toolbar Mode="@_selectedMode"
+                 ActiveView="@_internalSheet.ActiveViewId"
                  ActiveViewChanged="@HandleOnActiveViewChanged"
                  ColumnOrder="@_columnOrder"
                  ColumnOrderChanged="@HandleOnColumnOrderChanged"
+                 RowHeight="_rowHeight"
+                 RowHeightChanged="@HandleOnRowHeightChanged"
                  Views="_internalSheet.Views"
                  Columns="_internalSheet.Columns"
                  OnViewAdd="@AddNewView"
+                 OnViewRename="@RenameView"
                  OnViewDelete="@DeleteView"
                  OnColumnEditClick="@OpenColumnEditDialog"
                  HiddenColumnIds="@_hiddenColumnIds"
@@ -24,7 +40,9 @@
     }
 
     <Viewer ColumnTemplates="@_activeViewColumns"
+            HiddenColumnIds="@_hiddenColumnIds"
             ColumnOrder="_columnOrder"
+            RowHeight="@_rowHeight"
             Rows="@Items"/>
 </div>
 
@@ -36,7 +54,8 @@
 
     private HashSet<string> _hiddenColumnIds = [];
     private ColumnDialog? _columnEditDialog;
-    
+    private RowHeight _rowHeight;
+
     private void AddNewView()
     {
         var view = new View()
@@ -44,13 +63,21 @@
             Id = Guid.NewGuid(),
             Name = "New view",
             Type = ViewType.Grid,
-            Columns = _internalSheet.ActiveView.Columns.Select(u => u.ShallowClone()).ToList()
+            Columns = _internalSheet.ActiveView.Columns.Select(u => u.Create(u.ColumnId)).ToList()
         };
 
         _internalSheet.Views.Add(view);
-        // _internalSheet.ActiveViewId = view.Id;
 
         HandleOnActiveViewChanged(view.Id);
+    }
+
+    private void RenameView((Guid id, string Name) args)
+    {
+        var view = _internalSheet.Views.FirstOrDefault(u => u.Id == args.id);
+        if (view is not null)
+        {
+            view.Name = args.Name;
+        }
     }
 
     private async Task DeleteView(View view)
@@ -71,14 +98,18 @@
         if (_internalSheet.ActiveViewId == view.Id)
         {
             _internalSheet.Views.Remove(_internalSheet.ActiveView);
+            _internalSheet.ActiveViewId = _internalSheet.Views.First().Id;
         }
-
-        _internalSheet.ActiveViewId = Sheet.Views.First().Id;
+        else
+        {
+            var index = _internalSheet.Views.IndexOf(view);
+            _internalSheet.Views.RemoveAt(index);
+        }
     }
 
     private void ToggleColumn(string columnId)
     {
-        var viewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.Id == columnId);
+        var viewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.ColumnId == columnId);
         if (viewColumn.Hidden)
         {
             viewColumn.Hidden = false;
@@ -120,20 +151,22 @@
     private void HandleOnActiveViewChanged(Guid viewId)
     {
         _internalSheet.ActiveViewId = viewId;
-        
+
+        _rowHeight = _internalSheet.ActiveView.RowHeight;
+
         _columnOrder.Clear();
         _hiddenColumnIds.Clear();
-        
+
         foreach (var viewColumn in _internalSheet.ActiveView.Columns)
         {
-            _activeViewColumns.FirstOrDefault(u => u.Column.Id == viewColumn.Id).ViewColumn = viewColumn;
-            
+            _activeViewColumns.FirstOrDefault(u => u.Column.Id == viewColumn.ColumnId).ViewColumn = viewColumn;
+
             if (viewColumn.Hidden)
             {
-                _hiddenColumnIds.Add(viewColumn.Id);
+                _hiddenColumnIds.Add(viewColumn.ColumnId);
             }
-            
-            _columnOrder.Add(viewColumn.Id);
+
+            _columnOrder.Add(viewColumn.ColumnId);
         }
 
         Console.Out.WriteLine("[MasaTable] HandleOnActiveViewChanged: " + JsonSerializer.Serialize(_columnOrder));
@@ -145,10 +178,17 @@
 
         _internalSheet.ActiveView.Columns.Sort((x, y) =>
         {
-            var xIndex = order.IndexOf(x.Id);
-            var yIndex = order.IndexOf(y.Id);
+            var xIndex = order.IndexOf(x.ColumnId);
+            var yIndex = order.IndexOf(y.ColumnId);
             return xIndex.CompareTo(yIndex);
         });
+    }
+
+    private void HandleOnRowHeightChanged(RowHeight rowHeight)
+    {
+        _rowHeight = rowHeight;
+
+        _internalSheet.ActiveView.RowHeight = rowHeight;
     }
 
 }

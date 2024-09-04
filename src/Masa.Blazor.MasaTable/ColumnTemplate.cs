@@ -4,7 +4,7 @@ public class ColumnTemplate<TItem, TValue>
 {
     public Func<TItem, TValue>? Value { get; }
 
-    public Column Column { get; }
+    public Column Column { get; internal set; }
 
     internal ViewColumn ViewColumn { get; set; }
 
@@ -17,13 +17,10 @@ public class ColumnTemplate<TItem, TValue>
         };
 
         Value = value;
-        ViewColumn = new(Column);
-    }
-
-    internal ColumnTemplate(ViewColumn viewColumn, Func<TItem, TValue> value)
-    {
-        Column = viewColumn.Column;
-        ViewColumn = viewColumn;
-        Value = value;
+        // ViewColumn = new(Column);
+        ViewColumn = new ViewColumn()
+        {
+            ColumnId = id
+        };
     }
 }

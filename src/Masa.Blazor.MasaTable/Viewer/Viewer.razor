@@ -1,10 +1,8 @@
 @namespace Masa.Blazor.MasaTable
 @using System.Globalization
-@using System.Text.Json
-@using Masa.Blazor.MasaTable.ColumnConfigs
 @typeparam TItem
 
-<div class="masa-table-viewer">
+<div class="masa-table-viewer masa-table-viewer--@RowHeight.ToString().ToLowerInvariant()">
     <table>
         <thead>
         <tr>
@@ -87,6 +85,8 @@
                 </MIcon>
                 break;
             case ColumnType.Text:
+                @value.ToString()
+                break;
             case ColumnType.Email:
             case ColumnType.Link:
                 <a href="@value" target="_blank">@value</a>
@@ -94,6 +94,8 @@
             case ColumnType.Phone:
             case ColumnType.Image:
             case ColumnType.Select:
+                @GenSelectCell(column.ConfigObject, value)
+                break;
             case ColumnType.MultiSelect:
             case ColumnType.Date:
                 var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
@@ -104,11 +106,11 @@
 
                 if (DateTimeOffset.TryParse(value.ToString(), out var date))
                 {
-                    <span>@date.ToString(format)</span>
+                    @date.ToString(format)
                 }
                 else
                 {
-                    <span>@value</span>
+                    @value
                 }
 
                 break;
@@ -120,5 +122,28 @@
                 break;
         }
     };
+
+    private RenderFragment GenSelectCell(object? configObject, object value) => __builder =>
+    {
+        var text = value.ToString();
+        if (configObject is SelectConfig config)
+        {
+            var option = config.Options.FirstOrDefault(u => u.Value == value.ToString());
+            if (option is not null)
+            {
+                text = option.Label;
+
+                if (config.Color)
+                {
+                    var isDarken = option.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option.Color" Dark="isDarken">@text</MChip>
+                    return;
+                }
+            }
+        }
+
+        @text
+    };
+
 
 }

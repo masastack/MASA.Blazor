@@ -1,9 +1,8 @@
 ﻿@namespace Masa.Blazor.MasaTable.ColumnConfigs
 @inherits ConfigInputBase<DateConfig>
 
-<MSelect Value="@Config.Format"
-         ValueChanged="@DateTemplateChanged"
-         ValueExpression="() => Config.Format"
+<MSelect @bind-Value="@Config.Format"
+         @bind-Value:after="UpdateValue"
          TValue="string?"
          TItemValue="string"
          TItem="Tuple<string, string>"
@@ -33,12 +32,8 @@
         // TODO: 时区
         _items = _dateTemplates.Select(template => new Tuple<string, string>(DateTime.Now.ToString(template), template)).ToList();
         Config.Format ??= _dateTemplates.First();
-    }
-
-    private void DateTemplateChanged(string? value)
-    {
-        Config.Format = value;
+        
+        // update value using the default format
         UpdateValue();
     }
-
 }

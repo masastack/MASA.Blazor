@@ -5,7 +5,8 @@
 
 <div class="d-flex justify-space-between align-center mb-2">
     <span>Option config</span>
-    <MCheckbox @bind-Value="@color"
+    <MCheckbox @bind-Value="@Config.Color"
+               @bind-Value:after="@ColorChanged"
                Label="Color"
                Dense
                HideDetails="true">
@@ -15,7 +16,17 @@
 @foreach (var option in Config.Options)
 {
     <div class="d-flex justify-space-between align-center mb-2">
+        @if (Config.Color)
+        {
+            <ColorPicker @bind-Color="@option.Color"
+                         @bind-Color:after="UpdateValue"
+                         Class="ml-n2 mr-2"/>
+        }
+
         <MTextField @bind-Value="@option.Label"
+                    @bind-Value:after="@UpdateValue"
+                    UpdateOnChange
+                    Autofocus
                     Label="Text"
                     Class="mr-2"
                     Filled
@@ -23,6 +34,8 @@
                     HideDetails="true">
         </MTextField>
         <MTextField @bind-Value="@option.Value"
+                    @bind-Value:after="@UpdateValue"
+                    UpdateOnChange
                     Label="Value"
                     Class="mr-2"
                     Filled
@@ -30,6 +43,8 @@
                     HideDetails="true">
         </MTextField>
         <MButton IconName="mdi-delete-outline"
+                 Class="mr-n2"
+                 tabindex="-1"
                  OnClick="@(() => RemoveOption(option))">
         </MButton>
     </div>
@@ -46,26 +61,45 @@
 
 @code {
 
-    private bool color;
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         if (Config.Options.Count == 0)
         {
-            Config.Options.Add(new SelectOption());
+            AddOption();
         }
     }
 
     private void AddOption()
     {
-        Config.Options.Add(new SelectOption());
+        var option = new SelectOption();
+        if (Config.Color)
+        {
+            option.Color = ColorPicker.GetColor(Config.Options.Count);
+        }
+        Config.Options.Add(option);
     }
 
     private void RemoveOption(SelectOption option)
     {
         Config.Options.Remove(option);
+        UpdateValue();
+    }
+
+    private void ColorChanged()
+    {
+        for (int i = 0; i < Config.Options.Count; i++)
+        {
+            string? color = null;
+            if (Config.Color)
+            {
+                color = ColorPicker.GetColor(i);
+            }
+
+            Config.Options[i].Color = color;
+        }
+        
         UpdateValue();
     }
 

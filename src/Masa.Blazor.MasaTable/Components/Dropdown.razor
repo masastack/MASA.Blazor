@@ -1,10 +1,18 @@
-﻿<MMenu MinWidth="180" OffsetY>
+﻿<MMenu MinWidth="180" OffsetY Transition="slide-y-transition">
     <ActivatorContent>
-        <MButton Class="menu"
-                 Small
-                 IconName="@Icon"
-                 @attributes="@context.Attrs">
-        </MButton>
+        @if (ActivatorContent is null)
+        {
+            <MButton Class="menu"
+                     Small
+                     IconName="@Icon"
+                     Show="@TransitionShow"
+                     @attributes="@context.Attrs">
+            </MButton>
+        }
+        else
+        {
+            @ActivatorContent(context)
+        }
     </ActivatorContent>
     <ChildContent>
         <MList Dense Class="masa-table-viewer__header_column-menu-content">
@@ -15,7 +23,11 @@
 
 @code {
 
+    [Parameter] public bool TransitionShow { get; set; }
+
     [Parameter] public string? Icon { get; set; } = "mdi-dots-horizontal";
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 }

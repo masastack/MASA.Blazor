@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.MasaTable;
+﻿using System.Text.Json.Serialization;
+
+namespace Masa.Blazor.MasaTable;
 
 public class View
 {
@@ -8,29 +10,58 @@ public class View
 
     public ViewType Type { get; set; }
 
-    public List<Guid> Rows { get; set; } = [];
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public RowHeight RowHeight { get; set; }
 
     public List<ViewColumn> Columns { get; set; } = [];
 }
 
-public class ViewColumn(Column column)
+public enum RowHeight
 {
-    public string Id => Column.Id;
+    Low,
+    Medium,
+    High
+}
+
+public class ViewColumn
+{
+    [JsonPropertyName("id")] public string ColumnId { get; init; }
 
     public int Width { get; set; }
 
     public bool Hidden { get; set; }
 
-    internal Column Column { get; } = column;
-    
-    public ViewColumn ShallowClone()
+    // [JsonIgnore]
+    // internal Column Column { get; set; }
+
+    public ViewColumn()
     {
-        return new ViewColumn(Column)
-        {
-            Width = Width,
-            Hidden = Hidden
-        };
     }
+
+    public ViewColumn(string columnColumnId)
+    {
+        ColumnId = columnColumnId;
+    }
+
+    public ViewColumn Create(string columnId)
+    {
+        return new ViewColumn(columnId);
+    }
+
+    // public ViewColumn(Column column)
+    // {
+    //     Column = column;
+    //     Id = column.Id!;
+    // }
+    //
+    // public ViewColumn ShallowClone()
+    // {
+    //     return new ViewColumn(Column)
+    //     {
+    //         Width = Width,
+    //         Hidden = Hidden
+    //     };
+    // }
 }
 
 public enum ViewType

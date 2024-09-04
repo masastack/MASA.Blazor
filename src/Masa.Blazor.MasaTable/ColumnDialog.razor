@@ -1,16 +1,17 @@
 ﻿<MDialog @bind-Value="_menu"
+         @bind-Value:after="OnDialogChanged"
          Width="440"
          ContentClass="px-6 pt-7 pb-6"
          Persistent>
     <MForm OnValidSubmit="@HandleOnSubmit">
-        <MTextField @bind-Value="@_columnName"
+        <MTextField @bind-Value="@_column.Name"
                     Filled
                     TValue="string"
                     OnChange="@HandleOnColumnNameChange"
                     Label="column-name"
                     Required>
         </MTextField>
-        <MSelect @bind-Value="@_columnType"
+        <MSelect @bind-Value="@_column.Type"
                  Items="@_columnTypeMetadata"
                  ItemValue="u => u.Value"
                  ItemText="u => u.Name"
@@ -22,14 +23,18 @@
                  TValue="ColumnType"
                  OnSelect="@HandleOnColumnTypeSelect">
         </MSelect>
-        @if (_columnType == ColumnType.Date)
-        {
-            <DateConfigInput @bind-Value="@_additionalValue"/>
-        }
-        else if (_columnType == ColumnType.Select)
-        {
-            <SelectConfigInput @bind-Value="@_additionalValue"/>
-        }
+
+        <div class="mt-6">
+            @if (_column.Type == ColumnType.Date)
+            {
+                <DateConfigInput @bind-Value="@_column.Config"/>
+            }
+            else if (_column.Type == ColumnType.Select)
+            {
+                <SelectConfigInput @bind-Value="@_column.Config"/>
+            }
+        </div>
+
         <div class="d-flex justify-end mt-4">
             <MButton Class="mr-2" OnClick="@(() => _menu = false)">Cancel</MButton>
             <MButton Type="submit" Color="primary">Confirm</MButton>
@@ -43,11 +48,7 @@
 
     private bool _menu;
 
-    private Column? _column;
-
-    private ColumnType _columnType;
-    private string? _columnName;
-    private string? _additionalValue;
+    private Column _column = new();
 
     private bool _isNameDirty;
 
@@ -60,22 +61,20 @@
 
     private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
     {
-        _additionalValue = null;
+        _column.Config = null;
 
         if (_isNameDirty)
         {
             return;
         }
 
-        _columnName = item.Item.Name;
+        _column.Name = item.Item.Name;
     }
 
     private void HandleOnSubmit()
     {
-        _column ??= new();
-        _column.Name = _columnName;
-        _column.Type = _columnType;
-        _column.Config = _additionalValue;
+        Console.Out.WriteLine($"HandleOnSubmit {_column.Config}");
+
         OnSave.InvokeAsync(_column);
         _menu = false;
     }
@@ -91,20 +90,35 @@
         return metadataList;
     }
 
+    private void OnDialogChanged()
+    {
+        if (!_menu)
+        {
+            _column.Config = null;
+        }
+    }
+
     internal void Open(Column column)
     {
-        _column = column;
+        _column = new Column()
+        {
+            Id = column.Id,
+            Name = column.Name,
+            Type = column.Type,
+            Config = column.Config
+        };
 
-        _columnName = column.Name;
-        _columnType = column.Type;
         _menu = true;
         StateHasChanged();
     }
 
     internal void Open()
     {
-        _columnName = nameof(ColumnType.Text);
-        _columnType = ColumnType.Text;
+        _column = new Column
+        {
+            Name = nameof(ColumnType.Text),
+            Type = ColumnType.Text
+        };
         _isNameDirty = false;
         _menu = true;
         StateHasChanged();

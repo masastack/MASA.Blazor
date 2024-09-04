@@ -15,6 +15,10 @@ public partial class MasaTable<TItem>
 
     [Parameter] public Func<TItem, List<ColumnTemplate<TItem, object>>> ColumnTemplate { get; set; }
 
+    // ReSharper disable once StaticMemberInGenericType
+    private static string[] _modes = ["view", "edit"];
+
+    private string? _selectedMode = "view";
     private Sheet? _internalSheet;
     private List<ColumnTemplate<TItem, object>> _activeViewColumns;
 
@@ -76,23 +80,23 @@ public partial class MasaTable<TItem>
         else
         {
             // var columnIds = _internalSheet.ActiveView.Columns.Where(u => u.Hidden == false).Select(u => u.Id).ToList();
+            foreach (var template in firstColumnTemplate)
+            {
+                template.Column = _internalSheet.Columns.FirstOrDefault(u => u.Id == template.Column.Id) ??
+                                  template.Column;
+                // template.ViewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.Id == template.Column.Id) ?? template.ViewColumn;
+            }
+
             _activeViewColumns = firstColumnTemplate;
         }
-        
-        _hiddenColumnIds = new HashSet<string>(_internalSheet.ActiveView.Columns.Where(u => u.Hidden).Select(u => u.Id));
 
-        var json = System.Text.Json.JsonSerializer.Serialize(_internalSheet);
-        Console.Out.WriteLine("json = " + json);
+        _rowHeight = _internalSheet.ActiveView.RowHeight;
+        _hiddenColumnIds =
+            new HashSet<string>(_internalSheet.ActiveView.Columns.Where(u => u.Hidden).Select(u => u.ColumnId));
     }
 
-    private string _json;
     private async Task Release()
     {
-        // TODO:
-        _json = JsonSerializer.Serialize(_internalSheet, new JsonSerializerOptions()
-        {
-            WriteIndented = true
-        });
-        Console.Out.WriteLine($"Release = {_json}");
+        await OnSave.InvokeAsync(_internalSheet);
     }
 }

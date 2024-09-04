@@ -49,7 +49,7 @@ public class Column
         ConfigObject = Type switch
         {
             ColumnType.Date => JsonSerializer.Deserialize<DateConfig>(Config),
-            ColumnType.MultiSelect => JsonSerializer.Deserialize<MultiSelectValue>(Config),
+            ColumnType.MultiSelect or ColumnType.Select => JsonSerializer.Deserialize<SelectConfig>(Config),
             _ => null
         };
     }
