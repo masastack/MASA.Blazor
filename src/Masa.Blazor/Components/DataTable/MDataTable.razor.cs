@@ -30,6 +30,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public RenderFragment? FootContent { get; set; }
 
     [Parameter]
+    [MasaApiParameter(600)]
     public OneOf<Breakpoints, double> MobileBreakpoint { get; set; } = 600;
 
     [Parameter]
@@ -200,6 +201,13 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         get
         {
             var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
+
+            // HACK: before MasaBlazor service is initialized, the breakpoint is 0
+            // so we need to return false to prevent the table from being displayed in mobile mode
+            if (width == 0)
+            {
+                return false;
+            }
 
             if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
             {
