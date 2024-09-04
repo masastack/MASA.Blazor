@@ -58,11 +58,11 @@
     }
 }
 .theme--light.m-app-bar.m-toolbar.m-sheet {
-    background-color: #f5f5f5;
+    background-color: var(--m-theme-light-surface-container);
 }
 
 .theme--dark.m-app-bar.m-toolbar.m-sheet {
-    background-color: #272727;
+    background-color: var(--m-theme-dark-surface-container);
 }
 
 .m-sheet.m-app-bar.m-toolbar {
@@ -24694,13 +24694,13 @@ html.overflow-y-hidden {
     padding: 3px 0;
 }
 .theme--light.m-footer {
-    background-color: #f5f5f5;
-    color: rgba(0, 0, 0, 0.87);
+    background-color: var(--m-theme-light-surface-container);
+    color: var(--m-theme-light-on-surface);
 }
 
 .theme--dark.m-footer {
-    background-color: #272727;
-    color: #FFFFFF;
+    background-color: var(--m-theme-dark-surface-container);
+    color: var(--m-theme-dark-on-surface);
 }
 
 .m-sheet.m-footer {
