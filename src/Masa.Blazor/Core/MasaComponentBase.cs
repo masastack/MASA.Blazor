@@ -14,6 +14,8 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     [Inject] public IJSRuntime Js { get; set; } = null!;
 
     [Inject] private ILoggerFactory LoggerFactory { get; set; } = null!;
+    
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [CascadingParameter] protected IDefaultsProvider? DefaultsProvider { get; set; }
 
@@ -51,7 +53,8 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     private ElementReference? _prevRef;
     private bool _elementReferenceChanged;
 
-    public ILogger Logger => LoggerFactory.CreateLogger(GetType());
+    [JsonIgnore]
+    public ILogger? Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
 
@@ -230,6 +233,15 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
+
+        // Before the interactive component publishing released by Blazor in .NET 8.0,
+        // only need to initialize the breakpoint service in the root component (MApp).
+        // But after the interactive component publishing,
+        // need to try to initialize the breakpoint service in each component.
+        if (firstRender)
+        {
+            MasaBlazor.Breakpoint.Init(Js);
+        }
 
         // TODO: is this necessary?
         if (_elementReferenceChanged)

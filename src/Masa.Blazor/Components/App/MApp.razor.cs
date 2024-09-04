@@ -31,17 +31,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         _ = UpsertThemeStyle(MasaBlazor.Theme);
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            await OnJSInteropReadyAsync();
-            StateHasChanged();
-        }
-    }
-
     private void OnStateChanged(object? sender, EventArgs e)
     {
         InvokeAsync(StateHasChanged);
@@ -55,11 +44,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     private void OnDefaultsChanged(object? sender, EventArgs e)
     {
         InvokeAsync(StateHasChanged);
-    }
-
-    private async Task OnJSInteropReadyAsync()
-    {
-        await MasaBlazor.Breakpoint.InitAsync(Js);
     }
 
     private void OnThemeChange(Theme theme)

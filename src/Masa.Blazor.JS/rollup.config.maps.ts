@@ -1,8 +1,10 @@
 import { defineConfig } from "rollup";
 import { terser } from "rollup-plugin-terser";
 
+import typescript from "@rollup/plugin-typescript";
+
 export default defineConfig({
-  input: "./src/proxies/maps/baidumap/index.js",
+  input: "./src/proxies/maps/baidumap/index.ts",
   output: [
     {
       file: "../Masa.Blazor/wwwroot/js/proxies/baidumap-proxy.js",
@@ -10,5 +12,5 @@ export default defineConfig({
       sourcemap: true,
     },
   ],
-  plugins: [terser()],
+  plugins: [typescript(), terser()],
 });

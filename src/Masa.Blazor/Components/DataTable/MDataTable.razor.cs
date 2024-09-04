@@ -30,6 +30,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public RenderFragment? FootContent { get; set; }
 
     [Parameter]
+    [MasaApiParameter(600)]
     public OneOf<Breakpoints, double> MobileBreakpoint { get; set; } = 600;
 
     [Parameter]
@@ -153,12 +154,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     {
                         Fixed = FixedSelect ? DataTableFixed.Left : DataTableFixed.None,
                         Width = "56px",
-                        Value = "data-table-select"
+                        Value = "data-table-select",
+                        Sortable = false
                     });
                 }
                 else
                 {
                     var header = headers[index];
+                    header.Sortable = false;
                     if (header.Width == null)
                     {
                         header.Width = "1px";
@@ -174,12 +177,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     headers.Insert(0, new DataTableHeader<TItem>
                     {
                         Width = "1px",
-                        Value = "data-table-expand"
+                        Value = "data-table-expand",
+                        Sortable = false
                     });
                 }
                 else
                 {
                     var header = headers[index];
+                    header.Sortable = false;
                     if (header.Width == null)
                     {
                         header.Width = "1px";
@@ -200,6 +205,13 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         get
         {
             var (width, mobile, name, mobileBreakpoint) = MasaBlazor.Breakpoint;
+
+            // HACK: before MasaBlazor service is initialized, the breakpoint is 0
+            // so we need to return false to prevent the table from being displayed in mobile mode
+            if (width == 0)
+            {
+                return false;
+            }
 
             if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
             {

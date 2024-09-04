@@ -80,11 +80,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
     /// Gets or sets the selected items.
     /// </summary>
     [Parameter, Obsolete("Use Selected instead.")] 
-    public IEnumerable<TItem>? Value
-    {
-        get => GetValue<IEnumerable<TItem>>();
-        set => SetValue(value);
-    }
+    public IEnumerable<TItem>? Value { get; set; }
 
     [Parameter, Obsolete("Use SelectedChanged instead.")]
     public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
@@ -112,6 +108,9 @@ public partial class MDataIterator<TItem> : MData<TItem>
     [Parameter]
     public EventCallback<(IEnumerable<TItem>, bool)> OnToggleSelectAll { get; set; }
 
+    private IEnumerable<TItem>? _prevValue;
+    private IEnumerable<string>? _prevSelected;
+
     public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
 
     public bool SomeItems => SelectableItems.Any(IsSelected);
@@ -130,7 +129,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
     {
         base.OnInitialized();
 
-        UpdateSelection();
+        UpdateSelection(init: true);
     }
 
     public override Task SetParametersAsync(ParameterView parameters)
@@ -142,16 +141,23 @@ public partial class MDataIterator<TItem> : MData<TItem>
         return base.SetParametersAsync(parameters);
     }
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
+    protected override void OnParametersSet()
     {
-        base.RegisterWatchers(watcher);
+        base.OnParametersSet();
 
-        watcher.Watch<IEnumerable<TItem>>(nameof(Value), UpdateSelection)
-            .Watch<IEnumerable<string>>(nameof(Selected), UpdateSelection);
+        UpdateSelection();
     }
 
-    private void UpdateSelection()
+    private void UpdateSelection(bool init = false)
     {
+        if (!init && ReferenceEquals(_prevSelected, Selected) && ReferenceEquals(_prevValue, Value))
+        {
+            return;
+        }
+
+        _prevSelected = Selected;
+        _prevValue = Value;
+
         List<string>? keys = null;
 
         if (Value is not null)
