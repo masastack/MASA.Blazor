@@ -38,6 +38,7 @@ public static class MasaBlazorPreset
         OnWarning = "#FFFFFF",
         Surface = "#FFFFFF",
         OnSurface = "#000000DE",
+        SurfaceContainer = "#f5f5f5",
         InverseSurface = "#121212",
         InverseOnSurface = "#FFFFFF",
         InversePrimary = "#2196F3"
@@ -62,6 +63,7 @@ public static class MasaBlazorPreset
         OnWarning = "#FFFFFF",
         Surface = "#121212",
         OnSurface = "#FFFFFF",
+        SurfaceContainer = "#272727",
         InverseSurface = "#FFFFFF",
         InverseOnSurface = "#000000DE",
         InversePrimary = "#1976D2"
