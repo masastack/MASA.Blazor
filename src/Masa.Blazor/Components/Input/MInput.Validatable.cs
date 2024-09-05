@@ -235,8 +235,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected virtual bool DisableSetValueByJsInterop => false;
 
-    protected virtual bool ValidateOnlyInFocusedState => true;
-
     protected virtual bool WatchValueChangeImmediately => true;
 
     protected virtual async Task SetValueByJsInterop(string? val)

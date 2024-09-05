@@ -210,8 +210,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-    protected override bool ValidateOnlyInFocusedState => false;
-
     protected virtual Task SetInternalValueAsync(double internalValue)
     {
         var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
