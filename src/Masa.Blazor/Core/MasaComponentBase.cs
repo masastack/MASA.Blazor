@@ -54,7 +54,7 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     private bool _elementReferenceChanged;
 
     [JsonIgnore]
-    public ILogger? Logger => LoggerFactory.CreateLogger(GetType());
+    public ILogger Logger => LoggerFactory.CreateLogger(GetType());
 
     #region Build class and style
 

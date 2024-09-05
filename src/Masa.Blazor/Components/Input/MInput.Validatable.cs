@@ -50,6 +50,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         set => SetValue(value);
     }
 
+    private bool _hasInput;
+    private bool _hasFocused;
+    private bool _isResetting;
     private bool _forceStatus;
     private bool _internalValueChangingFromOnValueChanged;
     private CancellationTokenSource? _cancellationTokenSource;
@@ -65,10 +68,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     protected virtual TValue? DefaultValue => default;
 
     public FieldIdentifier? ValueIdentifier => ValueExpression is null ? null : FieldIdentifier.Create(ValueExpression);
-
-    protected bool HasInput { get; set; }
-
-    protected bool HasFocused { get; set; }
 
     public virtual ElementReference InputElement { get; set; }
 
@@ -167,10 +166,10 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
             if (ValidateOn == ValidateOn.Blur)
             {
-                return HasFocused;
+                return _hasFocused;
             }
 
-            return HasInput || HasFocused;
+            return _hasInput || _hasFocused;
         }
     }
 
@@ -273,7 +272,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     {
         if (!val && !IsDisabled)
         {
-            HasFocused = true;
+            _hasFocused = true;
 
             if (ValidateOn == ValidateOn.Blur)
             {
@@ -340,7 +339,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     {
         // If it's the first time we're setting input,
         // mark it with hasInput
-        HasInput = true;
+        _hasInput = true;
 
         if (ValidateOn == ValidateOn.Input)
         {
@@ -396,6 +395,13 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected void InternalValidate()
     {
+        if (_isResetting)
+        {
+            _isResetting = false;
+            _hasInput = false;
+            _hasFocused = false;
+        }
+
         if (EditContext == null)
         {
             var previousErrorBucket = ErrorBucket;
@@ -464,8 +470,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         if (force)
         {
-            HasInput = true;
-            HasFocused = true;
+            _hasInput = true;
+            _hasFocused = true;
         }
 
         if (InternalRules.Any())
@@ -483,10 +489,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     public void Reset()
     {
-        ErrorBucket.Clear();
-
-        HasInput = false;
-        HasFocused = false;
+        _hasInput = false;
+        _hasFocused = false;
+        _isResetting = true;
 
         if (ValueIdentifier.HasValue)
         {
@@ -504,7 +509,9 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     public void ResetValidation()
     {
-        ErrorBucket.Clear();
+        _hasInput = false;
+        _hasFocused = false;
+        _isResetting = true;
     }
 
     protected void HandleOnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
