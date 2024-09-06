@@ -1,5 +1,4 @@
 ﻿@namespace Masa.Blazor.Presets.PageStack
-@using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits MasaComponentBase
 
 <MDialog Transition="dialog-right-transition"
@@ -9,6 +8,7 @@
          Fullscreen
          Persistent
          NoPersistentAnimation
+         NoOutsideClick
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })">
     <MShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>

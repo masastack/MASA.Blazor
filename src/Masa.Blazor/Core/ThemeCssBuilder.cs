@@ -42,14 +42,17 @@ public static class ThemeCssBuilder
               
                   --m-theme-surface: {{options.Surface}};
                   --m-theme-on-surface: {{options.OnSurface}};
+                  --m-theme-surface-container: {{options.SurfaceContainer}};
                   --m-theme-inverse-surface: {{options.InverseSurface}};
                   --m-theme-inverse-on-surface: {{options.InverseOnSurface}};
                   --m-theme-inverse-primary: {{options.InversePrimary}};
               
                   --m-theme-light-surface: {{light.Surface}};
                   --m-theme-light-on-surface: {{light.OnSurface}};
+                  --m-theme-light-surface-container: {{light.SurfaceContainer}};
                   --m-theme-dark-surface: {{dark.Surface}};
                   --m-theme-dark-on-surface: {{dark.OnSurface}};
+                  --m-theme-dark-surface-container: {{dark.SurfaceContainer}};
                   --m-theme-light-inverse-surface: {{light.InverseSurface}};
                   --m-theme-light-inverse-on-surface: {{light.InverseOnSurface}};
                   --m-theme-light-inverse-primary: {{light.InversePrimary}};

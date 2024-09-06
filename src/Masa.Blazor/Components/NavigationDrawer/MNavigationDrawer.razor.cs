@@ -591,9 +591,9 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     protected override async ValueTask DisposeAsyncCore()
     {
         RemoveApplication();
-        MasaBlazor!.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
+        MasaBlazor.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
-        NavigationManager!.LocationChanged -= OnLocationChanged;
+        NavigationManager.LocationChanged -= OnLocationChanged;
         await OutsideClickJsModule.UnbindAndDisposeAsync();
         await base.DisposeAsyncCore();
     }

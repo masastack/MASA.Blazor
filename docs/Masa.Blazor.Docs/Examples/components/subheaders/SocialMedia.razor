@@ -22,7 +22,7 @@
                 {
                     <MCol Cols="12" Sm="6" Md="4">
                         <MCard>
-                            <MImage Src="@($"https://picsum.photos/200/300?image={GetImage(type,card)}")" Height="300">
+                            <MImage Src="@("_content/Masa.Blazor.Docs/img/" + GetImage(type, card) + "-250x300.jpg")" Height="250">
                                 <span class="text-h5 white--text pl-4 pt-4 d-inline-block">@card</span>
                             </MImage>
 
@@ -60,7 +60,7 @@
         var row = Array.IndexOf(types, type);
         var col = Array.IndexOf(cards, card)+1;
 
-        return 550 + types.Length * row + col;
+        return 660 + types.Length * row + col;
     }
     
     public class Social

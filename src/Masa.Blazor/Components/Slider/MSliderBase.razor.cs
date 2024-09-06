@@ -210,8 +210,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-    protected override bool ValidateOnlyInFocusedState => false;
-
     protected virtual Task SetInternalValueAsync(double internalValue)
     {
         var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
@@ -314,7 +312,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
             await OnChange.InvokeAsync(InternalValue);
             NoClick = true;
 
-            // HACK: 折中方案，Vueitfy在点击slider后thumb定位后不会聚焦，使用NoClick变量控制实现的。
+            // HACK: [RangeSlider] 折中方案，Vueitfy在点击slider后thumb定位后不会聚焦，使用NoClick变量控制实现的。
             // 但在 Blazor 中，Slider的Click事件是在Blazor中触发的，此方法(HandleOnSliderEndSwiping)是在js互操作中触发的，
             // 因为js互操作存在延迟，就会导致 MRangeSlider 中的 HandleOnSliderClickAsync 拿到的 NoClick 变量不是最新的。
             // 除非把 slider 的 click 事件和 NoClick 变量都在 js 中维护，但 NoClick 的状态又依赖 Value 的更新，
@@ -551,6 +549,8 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
 
         _interopHandleReference?.Dispose();
+
+        await OutsideClickJSModule.UnbindAndDisposeAsync();
 
         await base.DisposeAsyncCore();
     }

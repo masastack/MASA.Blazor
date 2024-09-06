@@ -68,6 +68,11 @@ namespace Masa.Blazor
 
         [Parameter] public Dictionary<string, object>? ContentAttributes { get; set; }
 
+        /// <summary>
+        /// Disable the outside click event, internal use only for PageStack.
+        /// </summary>
+        [Parameter] [MasaApiParameter(Ignored = true)] public bool NoOutsideClick { get; set; }
+
         private readonly List<IDependent> _dependents = new();
 
         private bool _attached;
@@ -138,12 +143,15 @@ namespace Masa.Blazor
 
         private async Task AttachAsync(bool value)
         {
-            if (OutsideClickJsModule is { Initialized: false })
+            if (!NoOutsideClick && OutsideClickJsModule is { Initialized: false })
             {
                 await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
+            }
+
+            if (_attached == false)
+            {
                 await Js.InvokeVoidAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
                 await Js.InvokeVoidAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
-
                 _attached = true;
             }
         }
@@ -214,6 +222,11 @@ namespace Masa.Blazor
             {
                 await Js.InvokeVoidAsync(JsInteropConstants.DelElementFrom, OverlayRef, AttachSelector);
             }
+            
+            if (!NoOutsideClick)
+            {
+                await OutsideClickJsModule.UnbindAndDisposeAsync();
+            }
         }
 
         public override async Task HandleOnOutsideClickAsync()
@@ -231,6 +244,11 @@ namespace Masa.Blazor
 
         public void RegisterChild(IDependent dependent)
         {
+            if (NoOutsideClick)
+            {
+                return;
+            }
+            
             _dependents.Add(dependent);
             NextTickIf(
                 () => { _ = OutsideClickJsModule.UpdateDependentElementsAsync(DependentSelectors.ToArray()); },

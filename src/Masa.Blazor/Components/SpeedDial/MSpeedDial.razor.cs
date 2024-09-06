@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 
 public partial class MSpeedDial : MBootable
 {
-    [Inject] private OutsideClickJSModule? OutsideClickJSModule { get; set; }
+    [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -78,5 +78,11 @@ public partial class MSpeedDial : MBootable
             .Add("direction-" + Direction)
             .Add("is-active", Value)
             .Build();
+    }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        await OutsideClickJSModule.UnbindAndDisposeAsync();
+        await base.DisposeAsyncCore();
     }
 }
