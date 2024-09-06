@@ -1729,6 +1729,20 @@ html.m-overlay-scroll-blocked {
     --m-selection-control-size: 32px;
 }
 
+.m-input--selection-controls {
+    margin-top: 8px;
+    padding-top: 4px;
+}
+
+.m-input--selection-controls .m-input__slot {
+    margin-bottom: 0;
+}
+
+.m-input--selection-controls.m-input--dense {
+    margin-top: 4px;
+    padding-top: 0;
+}
+
 /* slider */
 .m-slider__track-background {
     opacity: 0.38;
