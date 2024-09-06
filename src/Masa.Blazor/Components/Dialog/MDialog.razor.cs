@@ -222,6 +222,11 @@ namespace Masa.Blazor
             {
                 await Js.InvokeVoidAsync(JsInteropConstants.DelElementFrom, OverlayRef, AttachSelector);
             }
+            
+            if (!NoOutsideClick)
+            {
+                await OutsideClickJsModule.UnbindAndDisposeAsync();
+            }
         }
 
         public override async Task HandleOnOutsideClickAsync()
