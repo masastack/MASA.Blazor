@@ -6,19 +6,19 @@
         <MTab>City</MTab>
         <MTab>Abstract</MTab>
 
-        @foreach (var item in Enumerable.Range(1, 3))
+        @for (int i = 0; i < 3; i++)
         {
+            var tab = i;
             <MTabItem>
                 <MContainer Fluid>
                     <MRow>
-                        @foreach (var col in Enumerable.Range(1, 6))
+                        @for (int j = 0; j < 3; j++)
                         {
-                            <MCol
-                                Cols="12"
-                                Md="4">
+                            var localVariable = 660 + (tab * 3) + j;
+                            <MCol Cols="12"
+                                  Md="4">
                                 <MImage
-                                    Src="@($"https://picsum.photos/500/300?image={col * item * 5 + 10}")"
-                                    LazySrc="@($"https://picsum.photos/10/6?image={col * item * 5 + 10}")"
+                                    Src="@("_content/Masa.Blazor.Docs/img/" + (localVariable) + "-250x300.jpg")"
                                     AspectRatio="1">
                                 </MImage>
                             </MCol>

@@ -18,11 +18,11 @@
             <MSubheader>May</MSubheader>
             <MContainer Fluid>
                 <MRow>
-                    @for (var i = 1; i <= 6; i++)
+                    @for (var i = 1; i <= 3; i++)
                     {
-                        var index = i + 20;
+                        var index = i + 660;
                         <MCol Cols="4">
-                            <MImage Src="@($"https://randomuser.me/api/portraits/men/{index}.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
+                            <MImage Src="@("_content/Masa.Blazor.Docs/img/" + (index) + "-250x300.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
                         </MCol>
                     }
                 </MRow>
@@ -31,11 +31,11 @@
             <MSubheader>June</MSubheader>
             <MContainer Fluid>
                 <MRow>
-                    @for (var i = 1; i <= 6; i++)
+                    @for (var i = 1; i <= 3; i++)
                     {
-                        var index = i + 5;
+                        var index = i + 663;
                         <MCol Cols="4">
-                            <MImage Src="@($"https://randomuser.me/api/portraits/women/{index}.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
+                            <MImage Src="@("_content/Masa.Blazor.Docs/img/" + (index) + "-250x300.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
                         </MCol>
                     }
                 </MRow>

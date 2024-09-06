@@ -2,10 +2,10 @@
     <MRow>
         @for (var index = 0; index < 9; index++)
         {
-            var localVariable = index;
+            var localVariable = 660+ index;
             <MCol Cols="4">
-                <MImage Src="@("https://picsum.photos/500/300?image=" + (localVariable * 5 + 10))"
-                        LazySrc="@("https://picsum.photos/500/6?image=" + (localVariable * 5 + 10))" AspectRatio="1"
+                <MImage Src="@("_content/Masa.Blazor.Docs/img/" + (localVariable) + "-250x300.jpg")"
+                         AspectRatio="1"
                         Class="grey lighten-2">
                     <PlaceholderContent>
                         <MRow Class="fill-height ma-0"
