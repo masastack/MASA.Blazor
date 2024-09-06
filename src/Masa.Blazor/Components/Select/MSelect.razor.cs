@@ -963,4 +963,10 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
             await Blur();
         }
     }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        await OutsideClickJSModule.UnbindAndDisposeAsync();
+        await base.DisposeAsyncCore();
+    }
 }
