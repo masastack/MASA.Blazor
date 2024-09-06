@@ -20,6 +20,9 @@ public partial class MasaTable<TItem>
 
     private string? _selectedMode = "view";
     private Sheet? _internalSheet;
+
+    private List<ColumnTemplate<TItem, object>> _allTemplateColumns = [];
+    
     private List<ColumnTemplate<TItem, object>> _activeViewColumns;
 
     private List<string> _columnOrder = [];
@@ -64,30 +67,37 @@ public partial class MasaTable<TItem>
         }
 
         var firstItem = Items.FirstOrDefault();
-        var firstColumnTemplate = ColumnTemplate.Invoke(firstItem);
+        _allTemplateColumns = ColumnTemplate.Invoke(firstItem);
 
         if (_internalSheet.Columns.Count == 0)
         {
-            foreach (var columnTemplate in firstColumnTemplate)
+            foreach (var columnTemplate in _allTemplateColumns)
             {
                 columnTemplate.Column.Name = columnTemplate.Column.Type.ToString();
             }
 
-            _activeViewColumns = firstColumnTemplate;
-            _internalSheet.Columns = firstColumnTemplate.Select(u => u.Column).ToList();
-            _internalSheet.ActiveView.Columns = firstColumnTemplate.Select(u => u.ViewColumn).ToList();
+            _activeViewColumns = _allTemplateColumns;
+            _internalSheet.Columns = _allTemplateColumns.Select(u => u.Column).ToList();
+            _internalSheet.ActiveView.Columns = _allTemplateColumns.Select(u => u.ViewColumn).ToList();
         }
         else
         {
             // var columnIds = _internalSheet.ActiveView.Columns.Where(u => u.Hidden == false).Select(u => u.Id).ToList();
-            foreach (var template in firstColumnTemplate)
+            foreach (var template in _allTemplateColumns)
             {
-                template.Column = _internalSheet.Columns.FirstOrDefault(u => u.Id == template.Column.Id) ??
-                                  template.Column;
+                var column = _internalSheet.Columns.FirstOrDefault(u => u.Id == template.Column.Id);
+
+                if (column is null)
+                {
+                    template.ViewColumn.Hidden = true;
+                    _internalSheet.Columns.Add(template.Column);
+                }
+                else
+                {
+                    template.Column = column;
+                }
                 // template.ViewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.Id == template.Column.Id) ?? template.ViewColumn;
             }
-
-            _activeViewColumns = firstColumnTemplate;
         }
 
         _rowHeight = _internalSheet.ActiveView.RowHeight;

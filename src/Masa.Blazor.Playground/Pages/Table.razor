@@ -24,6 +24,7 @@
         public string? Homepage { get; set; }
         public DateTimeOffset Birthday { get; set; }
         public int Favorite { get; set; }
+        public int[] Favorites { get; set; }
     }
 
     public static class MyRecordMock
@@ -40,7 +41,8 @@
                     GoOrNot = true,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now,
-                    Favorite = 1
+                    Favorite = 1,
+                    Favorites = [1, 2]
                 },
                 new MyRecord
                 {
@@ -50,7 +52,8 @@
                     GoOrNot = false,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-300),
-                    Favorite = 2
+                    Favorite = 2,
+                    Favorites = [2, 3]
                 },
                 new MyRecord
                 {
@@ -60,7 +63,8 @@
                     GoOrNot = true,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-100),
-                    Favorite = 3
+                    Favorite = 3,
+                    Favorites = [4]
                 },
                 new MyRecord
                 {
@@ -70,7 +74,8 @@
                     GoOrNot = false,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-672),
-                    Favorite = 4
+                    Favorite = 4,
+                    Favorites = [1,3,4]
                 },
                 new MyRecord
                 {
@@ -80,7 +85,8 @@
                     GoOrNot = true,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-1000),
-                    Favorite = 0
+                    Favorite = 0,
+                    Favorites = [2]
                 },
                 new MyRecord
                 {
@@ -90,7 +96,8 @@
                     GoOrNot = false,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-120),
-                    Favorite = 3
+                    Favorite = 3,
+                    Favorites = [0]
                 },
                 new MyRecord
                 {
@@ -100,7 +107,8 @@
                     GoOrNot = true,
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-88),
-                    Favorite = 2
+                    Favorite = 2,
+                    Favorites = [3,4]
                 },
             };
         }
@@ -123,8 +131,10 @@
         var birthday = new ColumnTemplate<MyRecord, object>(nameof(record.Birthday), ColumnType.Date, u => u.Birthday);
         var homepage = new ColumnTemplate<MyRecord, object>(nameof(record.Homepage), ColumnType.Link, u => u.Homepage);
         var favorite = new ColumnTemplate<MyRecord, object>(nameof(record.Favorite), ColumnType.Select, u => u.Favorite);
+        var favorites = new ColumnTemplate<MyRecord, object>(nameof(record.Favorites), ColumnType.MultiSelect, u => u.Favorites);
+        
 
-        return [name, age, getOrNot, homepage, birthday, favorite];
+        return [name, age, getOrNot, homepage, birthday, favorite, favorites];
     }
 
     private async Task SaveSheet(Sheet sheet)

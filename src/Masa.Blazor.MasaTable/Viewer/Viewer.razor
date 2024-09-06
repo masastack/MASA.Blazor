@@ -88,15 +88,20 @@
                 @value.ToString()
                 break;
             case ColumnType.Email:
+                break;
             case ColumnType.Link:
                 <a href="@value" target="_blank">@value</a>
                 break;
             case ColumnType.Phone:
+                break;
             case ColumnType.Image:
+                break;
             case ColumnType.Select:
                 @GenSelectCell(column.ConfigObject, value)
                 break;
             case ColumnType.MultiSelect:
+                @GenMultiSelectCell(column.ConfigObject, value)
+                break;
             case ColumnType.Date:
                 var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
                 if (column.ConfigObject is DateConfig dateConfig)
@@ -115,8 +120,11 @@
 
                 break;
             case ColumnType.CreatedAt:
+                break;
             case ColumnType.Number:
+                break;
             case ColumnType.Progress:
+                break;
             case ColumnType.Rate:
                 @value.ToString()
                 break;
@@ -145,5 +153,32 @@
         @text
     };
 
+
+    private RenderFragment GenMultiSelectCell(object? configObject, object value) => __builder =>
+    {
+        if (value is not IEnumerable<string> values)
+        {
+            return;
+        }
+
+        if (configObject is SelectConfig config)
+        {
+            foreach (var item in values)
+            {
+                var option = config.Options.FirstOrDefault(u => u.Value == value.ToString());
+                if (option is not null)
+                {
+                    var isDarken = option.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option.Color" Dark="isDarken">@option.Label</MChip>
+                }
+                else
+                {
+                    @(item + ",")
+                }
+            }
+        }
+
+        @(string.Join(", ", values))
+    };
 
 }
