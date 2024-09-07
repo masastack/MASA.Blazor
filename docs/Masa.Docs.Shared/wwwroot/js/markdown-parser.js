@@ -37,7 +37,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
             }
 
             if (customElements.get(tag)){
-                return content.replace(">", ` masa-blazor-custom-element>`)
+                return content.substring(0, content.lastIndexOf('>')) + ` masa-blazor-custom-element>`;
             }
 
             return content;
