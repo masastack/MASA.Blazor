@@ -420,4 +420,31 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
     }
 
     #endregion
+
+    /// <summary>
+    /// Invoke a callback event and use the error handler to catch exceptions
+    /// when an error occurs.
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <param name="args"></param>
+    /// <typeparam name="TEventArgs"></typeparam>
+    protected async Task InvokeCallbackAsync<TEventArgs>(EventCallback<TEventArgs> callback, TEventArgs args)
+    {
+        try
+        {
+            if (callback.HasDelegate)
+            {
+                await callback.InvokeAsync(args);
+            }
+        }
+        catch (Exception e)
+        {
+            if (ErrorHandler is null)
+            {
+                throw;
+            }
+
+            await ErrorHandler.HandleExceptionAsync(e);
+        }
+    }
 }
