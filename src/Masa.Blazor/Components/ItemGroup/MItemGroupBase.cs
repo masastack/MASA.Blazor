@@ -10,7 +10,8 @@ public abstract class MItemGroupBase : MasaComponentBase
     }
 
     [Parameter]
-    public string? ActiveClass { get; set; }
+    [MasaApiParameter("m-item--active")]
+    public string? ActiveClass { get; set; } = "m-item--active";
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

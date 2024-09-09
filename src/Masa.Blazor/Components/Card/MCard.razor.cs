@@ -92,7 +92,7 @@ public partial class MCard : MSheet, IRoutable
         (Tag, Attributes) = _router.GenerateRouteLink();
 
         Attributes["ripple"] = Ripple && IsClickable;
-        Attributes["onclick"] = OnClick;
+        Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, args => InvokeCallbackAsync(OnClick, args));
     }
 
     private static Block _block = new("m-card");

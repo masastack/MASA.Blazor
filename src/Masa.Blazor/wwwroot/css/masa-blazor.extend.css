@@ -937,6 +937,10 @@ input[type=number] {
     margin-right: 12px;
 }
 
+.m-snack .m-alert__title {
+    word-break: break-word;
+}
+
 /* tab */
 
 .m-tab {

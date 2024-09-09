@@ -240,10 +240,7 @@ namespace Masa.Blazor
                 await Js.InvokeVoidAsync(JsInteropConstants.Blur, Ref);
             }
 
-            if (OnClick.HasDelegate)
-            {
-                await OnClick.InvokeAsync(args);
-            }
+            await InvokeCallbackAsync(OnClick, args);
 
             await ToggleAsync();
         }
