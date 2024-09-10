@@ -8,7 +8,7 @@ public class ColumnTemplate<TItem, TValue>
 
     internal ViewColumn ViewColumn { get; set; }
 
-    public ColumnTemplate(string id, ColumnType type, Func<TItem, TValue> value)
+    public ColumnTemplate(string id, ColumnType type)
     {
         Column = new()
         {
@@ -16,11 +16,14 @@ public class ColumnTemplate<TItem, TValue>
             Type = type
         };
 
-        Value = value;
-        // ViewColumn = new(Column);
         ViewColumn = new ViewColumn()
         {
             ColumnId = id
         };
+    }
+
+    public ColumnTemplate(string id, ColumnType type, Func<TItem, TValue> value) : this(id, type)
+    {
+        Value = value;
     }
 }

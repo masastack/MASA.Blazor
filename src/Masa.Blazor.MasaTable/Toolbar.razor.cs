@@ -20,8 +20,6 @@ public partial class Toolbar
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
-    [Parameter] public EventCallback<HashSet<string>> HiddenColumnIdsChanged { get; set; }
-
     [Parameter] public IList<View> Views { get; set; } = [];
 
     [Parameter] public IList<Column> Columns { get; set; } = [];
@@ -31,8 +29,6 @@ public partial class Toolbar
     [Parameter] public EventCallback<View> OnViewDelete { get; set; }
 
     [Parameter] public EventCallback<(Guid id, string Name)> OnViewRename { get; set; }
-
-    [Parameter] public EventCallback OnRelease { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
@@ -46,8 +42,13 @@ public partial class Toolbar
 
     private void ActiveChanged(StringNumber value)
     {
-        var guid = Guid.Parse(value.ToString()!);
-        ActiveViewChanged.InvokeAsync(guid);
+        var viewId = Guid.Parse(value.ToString()!);
+        if (viewId == ActiveView)
+        {
+            return;
+        }
+
+        ActiveViewChanged.InvokeAsync(viewId);
     }
 
     private void RenameView(View view)

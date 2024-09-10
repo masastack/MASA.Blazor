@@ -144,10 +144,15 @@
                    Context="column">
             @{
                 var hidden = HiddenColumnIds.Contains(column.Id);
+                var isIgnore = column.Id == Preset.ActionsColumnId;
+                var ignoreClass = isIgnore ? "ignore-elements" : "";
             }
-            <MListItem Class="@(hidden ? "grey--text" : "")">
+            <MListItem Class="@(hidden ? $"grey--text {ignoreClass}" : ignoreClass)">
                 <MListItemAction>
-                    <MIcon Class="handle" Style="cursor: move; color: inherit;">mdi-drag</MIcon>
+                    @if (!isIgnore)
+                    {
+                        <MIcon Class="handle" Style="cursor: move; color: inherit;">mdi-drag</MIcon>
+                    }
                 </MListItemAction>
                 <MListItemContent>
                     <MListItemTitle Class="d-flex align-center">

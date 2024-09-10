@@ -10,9 +10,10 @@ public enum ColumnType
     Select = 11,
     MultiSelect = 12,
     Date = 20,
-    CreatedAt = 21,
     Number = 30,
     Progress = 31,
-    Rate = 32,
+    Rating = 32,
     Checkbox = 33,
+    Actions = 40,
+    Custom = 100
 }

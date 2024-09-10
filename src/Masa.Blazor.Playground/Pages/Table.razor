@@ -7,6 +7,10 @@
                                  Sheet="@_sheet"
                                  Items="@_myRecords"
                                  ColumnTemplate="@ColumnTemplate"
+                                 OnUpdate="@HandleOnUpdate"
+                                 OnDelete="@HandleOnDelete"
+                                 OnAction1="@(() => { })"
+                                 OnAction2="@(() => { })"
                                  TItem="MyRecord">
 </Masa.Blazor.MasaTable.MasaTable>
 
@@ -25,6 +29,10 @@
         public DateTimeOffset Birthday { get; set; }
         public int Favorite { get; set; }
         public int[] Favorites { get; set; }
+        public int Progress { get; set; }
+        public double Rating { get; set; }
+        public string Image { get; set; }
+        public string[] Images { get; set; }
     }
 
     public static class MyRecordMock
@@ -42,7 +50,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now,
                     Favorite = 1,
-                    Favorites = [1, 2]
+                    Favorites = [1, 2],
+                    Progress = 12,
+                    Rating = 2,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -53,7 +65,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-300),
                     Favorite = 2,
-                    Favorites = [2, 3]
+                    Favorites = [2, 3],
+                    Progress = 13,
+                    Rating = 1,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -64,7 +80,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-100),
                     Favorite = 3,
-                    Favorites = [4]
+                    Favorites = [4],
+                    Progress = 14,
+                    Rating = 3.5,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -75,7 +95,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-672),
                     Favorite = 4,
-                    Favorites = [1,3,4]
+                    Favorites = [1, 3, 4],
+                    Progress = 14,
+                    Rating = 4,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -86,7 +110,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-1000),
                     Favorite = 0,
-                    Favorites = [2]
+                    Favorites = [2],
+                    Progress = 12,
+                    Rating = 3,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -97,7 +125,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-120),
                     Favorite = 3,
-                    Favorites = [0]
+                    Favorites = [0],
+                    Progress = 10,
+                    Rating = 1.5,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
                 new MyRecord
                 {
@@ -108,7 +140,11 @@
                     Homepage = "https://example.com",
                     Birthday = DateTimeOffset.Now.AddDays(-88),
                     Favorite = 2,
-                    Favorites = [3,4]
+                    Favorites = [3, 4],
+                    Progress = 14,
+                    Rating = 0,
+                    Image = "https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png",
+                    Images = ["https://cdn.masastack.com/stack/images/website/masa-blazor/cards/halcyon.png"]
                 },
             };
         }
@@ -132,17 +168,20 @@
         var homepage = new ColumnTemplate<MyRecord, object>(nameof(record.Homepage), ColumnType.Link, u => u.Homepage);
         var favorite = new ColumnTemplate<MyRecord, object>(nameof(record.Favorite), ColumnType.Select, u => u.Favorite);
         var favorites = new ColumnTemplate<MyRecord, object>(nameof(record.Favorites), ColumnType.MultiSelect, u => u.Favorites);
-        
+        var progress = new ColumnTemplate<MyRecord, object>(nameof(record.Progress), ColumnType.Progress, u => u.Progress);
+        var rating = new ColumnTemplate<MyRecord, object>(nameof(record.Rating), ColumnType.Rating, u => u.Rating);
+        var image = new ColumnTemplate<MyRecord, object>(nameof(record.Image), ColumnType.Image, u => u.Image);
+        var images = new ColumnTemplate<MyRecord, object>(nameof(record.Images), ColumnType.Image, u => u.Images);
 
-        return [name, age, getOrNot, homepage, birthday, favorite, favorites];
+        return [name, image, age, getOrNot, homepage, birthday, favorite, favorites, progress, rating];
     }
 
     private async Task SaveSheet(Sheet sheet)
     {
         // TODO: save sheet
-        
+
         var json = JsonSerializer.Serialize(sheet);
-        
+
         await LocalStorage.SetItemAsync("sheet", json);
         await JSRuntime.InvokeVoidAsync(JsInteropConstants.Log, sheet);
     }
@@ -156,4 +195,15 @@
             StateHasChanged();
         }
     }
+
+    private void HandleOnUpdate(MyRecord record)
+    {
+        Console.Out.WriteLine("Update record");
+    }
+    
+    private void HandleOnDelete(MyRecord record)
+    {
+        Console.Out.WriteLine("Delete record");
+    }
+
 }

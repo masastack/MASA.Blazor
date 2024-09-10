@@ -37,7 +37,7 @@ public class Column
     private string? _config;
 
     internal object? ConfigObject { get; private set; }
-
+    
     private void UpdateCacheConfig()
     {
         if (string.IsNullOrWhiteSpace(Config))
@@ -50,7 +50,18 @@ public class Column
         {
             ColumnType.Date => JsonSerializer.Deserialize<DateConfig>(Config),
             ColumnType.MultiSelect or ColumnType.Select => JsonSerializer.Deserialize<SelectConfig>(Config),
-            _ => null
+            ColumnType.Number => JsonSerializer.Deserialize<NumberConfig>(Config),
+            ColumnType.Progress => JsonSerializer.Deserialize<ProgressConfig>(Config),
+            ColumnType.Email => null,
+            ColumnType.Image => null,
+            ColumnType.Link => null,
+            ColumnType.Phone => null,
+            ColumnType.Checkbox => null,
+            ColumnType.Rating => null,
+            ColumnType.Text => null,
+            ColumnType.Actions => JsonSerializer.Deserialize<ActionsConfig>(Config),
+            _ => throw new NotSupportedException($"Column type '{Type}' is not supported.")
+
         };
     }
 }

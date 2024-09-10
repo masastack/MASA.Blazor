@@ -11,13 +11,24 @@ public partial class Viewer<TItem>
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
     [Parameter] public RowHeight RowHeight { get; set; }
-    
+
     [Parameter] public IEnumerable<TItem> Rows { get; set; } = [];
 
     [Parameter] public EventCallback<string> OnColumnHide { get; set; }
 
-    // TODO: column delete
-    [Parameter] public EventCallback<string> OnColumnDelete { get; set; }
+    [Parameter] public EventCallback<TItem> OnUpdate { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnDelete { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnAction1 { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnAction2 { get; set; }
+
+    private bool _imageViewer;
+    private IList<string> _imagesToView = [];
+
+    private bool HasActions => OnUpdate.HasDelegate || OnDelete.HasDelegate ||
+                               OnAction1.HasDelegate || OnAction2.HasDelegate;
 
     private IEnumerable<ColumnTemplate<TItem, object>> ComputedColumnTemplates
     {
@@ -28,13 +39,17 @@ public partial class Viewer<TItem>
         }
     }
 
-    private void HandleOnColumnHide(string columnId)
+    private void OpenImageViewer(IList<string> images)
     {
-        _ = OnColumnHide.InvokeAsync(columnId);
+        _imageViewer = true;
+        _imagesToView = images;
     }
 
-    private void HandleOnColumnDelete(string columnId)
+    private void OnImageViewerChanged()
     {
-        _ = OnColumnDelete.InvokeAsync(columnId);
+        if (_imageViewer == false)
+        {
+            _imagesToView = [];
+        }
     }
 }

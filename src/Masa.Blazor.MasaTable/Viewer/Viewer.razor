@@ -1,4 +1,5 @@
 @namespace Masa.Blazor.MasaTable
+@using System.Collections
 @using System.Globalization
 @typeparam TItem
 
@@ -41,16 +42,11 @@
                             </div>
                         </div>
                     }
-                    <div class="masa-table-viewer__header-column">
-                        <div class="masa-table-viewer__header-column-content">
-                            <ColumnEdit></ColumnEdit>
-                        </div>
-                    </div>
                 </div>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
+            </th >
+        </tr >
+        </thead >
+        <tbody >
         @foreach (var item in Rows)
         {
             <tr>
@@ -60,7 +56,7 @@
                         {
                             <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()">
                                 <div class="masa-table-viewer__cell-content">
-                                    @GenCell(template.Column, template.Value.Invoke(item))
+                                    @GenCell(template.Column, template.Value?.Invoke(item), item)
                                 </div>
                             </div>
                         }
@@ -68,33 +64,57 @@
                 </td>
             </tr>
         }
-        </tbody>
-    </table>
-</div>
+        </tbody >
+    </table >
+</div >
+
+<MDialog @bind-Value="_imageViewer"
+         @bind-Value:after="OnImageViewerChanged"
+         ContentClass="image-viewer">
+    <MCarousel HideDelimiters
+               ShowArrows="@(_imagesToView.Count > 1)">
+        @foreach (var item in _imagesToView)
+        {
+            <MCarouselItem Src="@item" OnClick="@(() => _imageViewer = false)">
+            </MCarouselItem>
+        }
+    </MCarousel >
+</MDialog >
 
 @code {
 
-    private RenderFragment GenCell(Column column, object value) => __builder =>
+    private RenderFragment GenCell(Column column, object? value, TItem? item = default) => __builder =>
     {
         switch (column.Type)
         {
             case ColumnType.Checkbox:
-                var isChecked = (bool)value;
+                var isChecked = (bool?)value is true;
                 <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
                        Color="@(isChecked ? "primary" : "")">
                 </MIcon>
                 break;
             case ColumnType.Text:
-                @value.ToString()
+                @value?.ToString()
                 break;
             case ColumnType.Email:
+                @if (value is not null)
+                {
+                    <a href="mailto:@value">@value</a>
+                }
+
                 break;
             case ColumnType.Link:
                 <a href="@value" target="_blank">@value</a>
                 break;
             case ColumnType.Phone:
+                @if (value is not null)
+                {
+                    <a href="tel:@value">@value</a>
+                }
+
                 break;
             case ColumnType.Image:
+                @GenImageCell(value)
                 break;
             case ColumnType.Select:
                 @GenSelectCell(column.ConfigObject, value)
@@ -103,40 +123,48 @@
                 @GenMultiSelectCell(column.ConfigObject, value)
                 break;
             case ColumnType.Date:
-                var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
-                if (column.ConfigObject is DateConfig dateConfig)
-                {
-                    format = dateConfig.Format!;
-                }
-
-                if (DateTimeOffset.TryParse(value.ToString(), out var date))
-                {
-                    @date.ToString(format)
-                }
-                else
-                {
-                    @value
-                }
-
-                break;
-            case ColumnType.CreatedAt:
+                @GenDateCell(column.ConfigObject, value)
                 break;
             case ColumnType.Number:
+                @GenNumberCell(column.ConfigObject, value)
                 break;
             case ColumnType.Progress:
+                @GenProgressCell(column.ConfigObject, value)
                 break;
-            case ColumnType.Rate:
-                @value.ToString()
+            case ColumnType.Rating:
+                @GenRatingCell(value)
+                break;
+            case ColumnType.Actions:
+                @GenActionsCell(column.ConfigObject, value, item)
+                ;
                 break;
         }
     };
 
-    private RenderFragment GenSelectCell(object? configObject, object value) => __builder =>
+    private RenderFragment GenDateCell(object? configObject, object? value) => __builder =>
     {
-        var text = value.ToString();
+        var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
+        if (configObject is DateConfig dateConfig)
+        {
+            format = dateConfig.Format!;
+        }
+
+        if (DateTimeOffset.TryParse(value?.ToString(), out var date))
+        {
+            @date.ToString(format)
+        }
+        else
+        {
+            @value
+        }
+    };
+
+    private RenderFragment GenSelectCell(object? configObject, object? value) => __builder =>
+    {
+        var text = value?.ToString();
         if (configObject is SelectConfig config)
         {
-            var option = config.Options.FirstOrDefault(u => u.Value == value.ToString());
+            var option = config.Options.FirstOrDefault(u => u.Value == text);
             if (option is not null)
             {
                 text = option.Label;
@@ -154,31 +182,176 @@
     };
 
 
-    private RenderFragment GenMultiSelectCell(object? configObject, object value) => __builder =>
+    private RenderFragment GenMultiSelectCell(object? configObject, object? value) => __builder =>
     {
-        if (value is not IEnumerable<string> values)
+        IList<string?> values = [];
+
+        if (value is IEnumerable enumerable)
         {
-            return;
+            foreach (var obj in enumerable)
+            {
+                values.Add(obj?.ToString());
+            }
         }
 
         if (configObject is SelectConfig config)
         {
             foreach (var item in values)
             {
-                var option = config.Options.FirstOrDefault(u => u.Value == value.ToString());
-                if (option is not null)
+                var option = config.Options.FirstOrDefault(u => u.Value == item);
+                var label = option?.Label ?? item;
+                if (config.Color)
                 {
-                    var isDarken = option.Color?.Contains("darken") is true;
-                    <MChip Label Small Color="@option.Color" Dark="isDarken">@option.Label</MChip>
+                    var isDarken = option?.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option?.Color" Dark="isDarken">@label</MChip>
                 }
                 else
                 {
-                    @(item + ",")
+                    <span class="option">@label</span>
+                }
+            }
+
+            return;
+        }
+
+        foreach (var item in values)
+        {
+            <span class="option">@item</span>
+        }
+    };
+
+    private RenderFragment GenProgressCell(object? configObject, object? value) => __builder =>
+    {
+        if (configObject is ProgressConfig config)
+        {
+            if (int.TryParse(value?.ToString(), out var progress))
+            {
+                <MProgressLinear Value="progress"
+                                 Color="@config.Color"
+                                 Height="8"
+                                 Striped="@config.Striped">
+                </MProgressLinear>
+            }
+            else
+            {
+                @("Invalid progress value: " + value)
+            }
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenRatingCell(object? value) => __builder =>
+    {
+        if (double.TryParse(value?.ToString(), out var rating))
+        {
+            <MRating Value="@rating"
+                     Color="yellow darken-3"
+                     BackgroundColor="grey darken-1"
+                     EmptyIcon="mdi-star"
+                     Small
+                     HalfIncrements
+                     Readonly>
+            </MRating>
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenNumberCell(object? configObject, object? value) => __builder =>
+    {
+        if (configObject is NumberConfig config)
+        {
+            if (double.TryParse(value?.ToString(), out var number))
+            {
+                var format = config.Type switch
+                {
+                    NumberType.Currency => "C",
+                    NumberType.Number => "N",
+                    NumberType.Percentage => "P",
+                    _ => "D"
+                };
+
+                @number.ToString(format, new CultureInfo("zh-CN"))
+            }
+            else
+            {
+                @value
+            }
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenImageCell(object? value) => __builder =>
+    {
+        List<string> urls = [];
+
+        if (value is string str)
+        {
+            urls.Add(str);
+        }
+        else if (value is IEnumerable enumerable)
+        {
+            foreach (var item in enumerable)
+            {
+                if (item is string str2)
+                {
+                    urls.Add(str2);
                 }
             }
         }
 
-        @(string.Join(", ", values))
+        if (urls.Count > 0)
+        {
+            <div class="image-list" @onclick="@(() => OpenImageViewer(urls))">
+                @foreach (var url in urls)
+                {
+                    <img src="@url" alt=""/>
+                }
+            </div>
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenActionsCell(object? columnConfig, object? value, TItem item) => __builder =>
+    {
+        if (columnConfig is ActionsConfig config)
+        {
+            @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip)
+            @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip)
+            @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip)
+            @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip)
+        }
+        else
+        {
+            @GenAction(OnUpdate, "mdi-pencil-outline", "Update")
+            @GenAction(OnDelete, "mdi-delete-outline", "Delete")
+            @GenAction(OnAction1, "mdi-numeric-1", "Action 1")
+            @GenAction(OnAction2, "mdi-numeric-2", "Action 2")
+        }
+
+        return;
+
+        RenderFragment GenAction(EventCallback<TItem> callback, string? icon, string? tooltip) => __builder =>
+        {
+            @if (callback.HasDelegate)
+            {
+                <MButton IconName="@icon"
+                         Small
+                         OnClick="@(() => callback.InvokeAsync(item))">
+                </MButton>
+            }
+        };
     };
 
 }

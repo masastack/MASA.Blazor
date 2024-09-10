@@ -1,11 +1,9 @@
-﻿@using System.Text.Json
-@typeparam TItem
+﻿@typeparam TItem
 @attribute [CascadingTypeParameter(nameof(TItem))]
 @inject IPopupService PopupService
 
 <div class="masa-table">
-    <div class="d-flex">
-        <MSpacer/>
+    <div class="d-flex align-center mb-4">
         <MSelect @bind-Value="@_selectedMode"
                  Items="@_modes"
                  ItemValue="u => u"
@@ -17,6 +15,13 @@
                  Style="max-width: 160px;"
                  MenuProps="@(m => { m.Transition = "slide-y-transition"; m.OffsetY = true; })">
         </MSelect>
+
+        <MSpacer/>
+
+        @if (IsEditMode)
+        {
+            <MButton Color="primary" Class="ml-2" OnClick="@Release">Release</MButton>
+        }
     </div>
 
     @if (_internalSheet is not null)
@@ -30,29 +35,31 @@
                  RowHeightChanged="@HandleOnRowHeightChanged"
                  Views="_internalSheet.Views"
                  Columns="_internalSheet.Columns"
+                 HiddenColumnIds="@_hiddenColumnIds"
                  OnViewAdd="@AddNewView"
                  OnViewRename="@RenameView"
                  OnViewDelete="@DeleteView"
                  OnColumnEditClick="@OpenColumnEditDialog"
-                 HiddenColumnIds="@_hiddenColumnIds"
-                 OnColumnToggle="@ToggleColumn"
-                 OnRelease="@Release"/>
+                 OnColumnToggle="@ToggleColumn"/>
     }
 
-    <Viewer ColumnTemplates="@_activeViewColumns"
+    <Viewer ColumnTemplates="@_activeViewTemplateColumns"
             HiddenColumnIds="@_hiddenColumnIds"
             ColumnOrder="_columnOrder"
             RowHeight="@_rowHeight"
-            Rows="@Items"/>
+            Rows="@Items"
+            OnUpdate="@OnUpdate"
+            OnDelete="@OnDelete"
+            OnAction1="@OnAction1"
+            OnAction2="@OnAction2"/>
 </div>
 
 <ColumnDialog @ref="_columnEditDialog"
-              OnSave="UpsertColumn">
+              OnSave="UpdateColumn">
 </ColumnDialog>
 
 @code {
 
-    private HashSet<string> _hiddenColumnIds = [];
     private ColumnDialog? _columnEditDialog;
     private RowHeight _rowHeight;
 
@@ -127,16 +134,8 @@
         _columnEditDialog?.Open(column);
     }
 
-    private void UpsertColumn(Column data)
+    private void UpdateColumn(Column data)
     {
-        if (data.Id == null)
-        {
-            // TODO: add new column, need this?
-            return;
-        }
-
-        // update column
-
         var column = _internalSheet!.Columns.FirstOrDefault(u => u.Id == data.Id);
         if (column is null)
         {
@@ -146,30 +145,21 @@
         column.Name = data.Name;
         column.Type = data.Type;
         column.Config = data.Config;
+
+        var template = _activeViewTemplateColumns.FirstOrDefault(u => u.Column.Id == data.Id);
+        if (template is not null)
+        {
+            template.Column = column;
+        }
     }
 
     private void HandleOnActiveViewChanged(Guid viewId)
     {
         _internalSheet.ActiveViewId = viewId;
 
-        _rowHeight = _internalSheet.ActiveView.RowHeight;
+        AlignColumns();
 
-        _columnOrder.Clear();
-        _hiddenColumnIds.Clear();
-
-        foreach (var viewColumn in _internalSheet.ActiveView.Columns)
-        {
-            _activeViewColumns.FirstOrDefault(u => u.Column.Id == viewColumn.ColumnId).ViewColumn = viewColumn;
-
-            if (viewColumn.Hidden)
-            {
-                _hiddenColumnIds.Add(viewColumn.ColumnId);
-            }
-
-            _columnOrder.Add(viewColumn.ColumnId);
-        }
-
-        Console.Out.WriteLine("[MasaTable] HandleOnActiveViewChanged: " + JsonSerializer.Serialize(_columnOrder));
+        UpdateState();
     }
 
     private void HandleOnColumnOrderChanged(List<string> order)

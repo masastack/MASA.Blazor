@@ -26,17 +26,17 @@
 
 .masa-table-viewer--low {
   --mt-line-clamp: 1;
-  --mt-row-height: 36px;
+  --mt-row-height: 41px;
 }
 
 .masa-table-viewer--medium {
   --mt-line-clamp: 2;
-  --mt-row-height: 57px;
+  --mt-row-height: 62px;
 }
 
 .masa-table-viewer--high {
   --mt-line-clamp: 4;
-  --mt-row-height: 99px;
+  --mt-row-height: 104px;
 }
 
 .masa-table-viewer > table {
@@ -94,22 +94,31 @@
 
 .masa-table-viewer__cell {
   width: 180px;
-  padding: 7px 8px;
+  padding: 6px 8px;
   position: relative;
   display: flex;
   align-items: flex-start;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.masa-table-viewer__cell:last-child {
+  border-right: none;
+}
+
 .masa-table-viewer__cell.checkbox {
   justify-content: center;
 }
 
-.masa-table-viewer__cell.number {
-  justify-content: flex-end;
+.masa-table-viewer__cell.number .masa-table-viewer__cell-content {
+  text-align: right;
 }
 
 .masa-table-viewer__cell-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .masa-table-viewer__cell.text .masa-table-viewer__cell-content,
@@ -126,4 +135,41 @@
 .m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
 .m-application--is-ltr .masa-table__menu-list .m-list-item__icon:first-child {
   margin-right: 16px;
+}
+
+.masa-table-viewer__cell.multiselect .m-chip, .masa-table-viewer__cell.multiselect .option {
+  margin-right: 4px;
+}
+
+.masa-table-viewer__cell.multiselect .m-chip:last-child, .masa-table-viewer__cell.multiselect .option:last-child {
+  margin-right: 0;
+}
+
+.masa-table-viewer__cell.multiselect .option:not(:last-child):after {
+  content: ',';
+}
+
+.masa-table-viewer__cell.rating .m-rating .m-icon {
+  padding: 4px;
+}
+
+.masa-table-viewer__cell.image .image-list {
+  display: contents;
+  cursor: zoom-in;
+}
+
+.masa-table-viewer__cell.image img {
+  height: 100%;
+}
+
+.m-dialog.image-viewer {
+  box-shadow: none;
+  outline: none;
+  cursor: zoom-out;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.m-dialog.image-viewer .m-image__image--cover {
+  background-size: contain;
 }

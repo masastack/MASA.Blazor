@@ -47,21 +47,6 @@ public class ViewColumn
     {
         return new ViewColumn(columnId);
     }
-
-    // public ViewColumn(Column column)
-    // {
-    //     Column = column;
-    //     Id = column.Id!;
-    // }
-    //
-    // public ViewColumn ShallowClone()
-    // {
-    //     return new ViewColumn(Column)
-    //     {
-    //         Width = Width,
-    //         Hidden = Hidden
-    //     };
-    // }
 }
 
 public enum ViewType

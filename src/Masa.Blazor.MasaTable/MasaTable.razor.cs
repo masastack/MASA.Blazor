@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Masa.Blazor.MasaTable.ColumnConfigs;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.MasaTable;
@@ -15,19 +16,31 @@ public partial class MasaTable<TItem>
 
     [Parameter] public Func<TItem, List<ColumnTemplate<TItem, object>>> ColumnTemplate { get; set; }
 
+    [Parameter] public EventCallback<TItem> OnUpdate { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnDelete { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnAction1 { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnAction2 { get; set; }
+
     // ReSharper disable once StaticMemberInGenericType
     private static string[] _modes = ["view", "edit"];
 
-    private string? _selectedMode = "view";
+    private string? _selectedMode = "edit";
     private Sheet? _internalSheet;
+    private bool _defaultSheetFlag = false;
 
-    private List<ColumnTemplate<TItem, object>> _allTemplateColumns = [];
-    
-    private List<ColumnTemplate<TItem, object>> _activeViewColumns;
-
+    private List<ColumnTemplate<TItem, object>> _activeViewTemplateColumns = [];
     private List<string> _columnOrder = [];
+    private HashSet<string> _hiddenColumnIds = [];
 
     private View? ActiveView => _internalSheet?.Views.FirstOrDefault(v => v.Id == _internalSheet.ActiveViewId);
+
+    private bool IsEditMode => _selectedMode == "edit";
+
+    private bool HasActions => OnUpdate.HasDelegate || OnDelete.HasDelegate ||
+                               OnAction1.HasDelegate || OnAction2.HasDelegate;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -39,24 +52,22 @@ public partial class MasaTable<TItem>
                 $"{nameof(MasaTable)} requires one of {nameof(Sheet)} or {nameof(SheetProvider)}, but both were provided.");
         }
 
-        _internalSheet = await ResolveSheetRequestAsync();
-
-        ResolveColumns();
-    }
-
-    private async ValueTask<Sheet> ResolveSheetRequestAsync()
-    {
-        if (SheetProvider is not null)
+        var defaultSheet = Sheet is null && SheetProvider is null;
+        if (_defaultSheetFlag != defaultSheet)
         {
-            return await SheetProvider();
-        }
+            _defaultSheetFlag = defaultSheet;
 
-        if (Sheet is not null)
-        {
-            return Sheet;
-        }
+            if (_defaultSheetFlag)
+            {
+                _internalSheet = Sheet.CreateDefault();
+            }
+            else
+            {
+                _internalSheet = (SheetProvider is not null) ? await SheetProvider() : Sheet;
+            }
 
-        return Sheet.CreateDefault();
+            ResolveColumns();
+        }
     }
 
     private void ResolveColumns()
@@ -66,43 +77,128 @@ public partial class MasaTable<TItem>
             return;
         }
 
+        _columnOrder.Clear();
+
         var firstItem = Items.FirstOrDefault();
-        _allTemplateColumns = ColumnTemplate.Invoke(firstItem);
+        _activeViewTemplateColumns = ColumnTemplate.Invoke(firstItem);
 
         if (_internalSheet.Columns.Count == 0)
         {
-            foreach (var columnTemplate in _allTemplateColumns)
+            foreach (var columnTemplate in _activeViewTemplateColumns)
             {
-                columnTemplate.Column.Name = columnTemplate.Column.Type.ToString();
+                columnTemplate.Column.Name = columnTemplate.Column.Id;
             }
 
-            _activeViewColumns = _allTemplateColumns;
-            _internalSheet.Columns = _allTemplateColumns.Select(u => u.Column).ToList();
-            _internalSheet.ActiveView.Columns = _allTemplateColumns.Select(u => u.ViewColumn).ToList();
+            if (HasActions)
+            {
+                _activeViewTemplateColumns.Add(
+                    new ColumnTemplate<TItem, object>(Preset.ActionsColumnId, ColumnType.Actions));
+            }
+
+            _internalSheet.Columns = _activeViewTemplateColumns.Select(u => u.Column).ToList();
+            _internalSheet.ActiveView.Columns = _activeViewTemplateColumns.Select(u => u.ViewColumn).ToList();
         }
         else
         {
-            // var columnIds = _internalSheet.ActiveView.Columns.Where(u => u.Hidden == false).Select(u => u.Id).ToList();
-            foreach (var template in _allTemplateColumns)
-            {
-                var column = _internalSheet.Columns.FirstOrDefault(u => u.Id == template.Column.Id);
+            AlignColumns(firstTime: true);
+        }
 
-                if (column is null)
+        UpdateState();
+    }
+
+    private void UpdateState()
+    {
+        _rowHeight = _internalSheet.ActiveView.RowHeight;
+        _hiddenColumnIds.Clear();
+        _columnOrder.Clear();
+        foreach (var viewColumn in _internalSheet.ActiveView.Columns)
+        {
+            if (viewColumn.Hidden)
+            {
+                _hiddenColumnIds.Add(viewColumn.ColumnId);
+            }
+
+            _columnOrder.Add(viewColumn.ColumnId);
+        }
+    }
+
+    private void AlignColumns(bool firstTime = false)
+    {
+        var templateColumnIds = _activeViewTemplateColumns.Select(u => u.Column.Id).ToList();
+        var sheetColumnIds = _internalSheet.Columns.Select(u => u.Id).ToList();
+
+        // columns in the template but not in the sheet
+        var addColumns = templateColumnIds.Except(sheetColumnIds).ToList();
+        if (addColumns.Count > 0)
+        {
+            foreach (var columnTemplate in _activeViewTemplateColumns)
+            {
+                if (addColumns.Contains(columnTemplate.Column.Id))
                 {
-                    template.ViewColumn.Hidden = true;
-                    _internalSheet.Columns.Add(template.Column);
+                    columnTemplate.Column.Name = columnTemplate.Column.Id;
+                    columnTemplate.ViewColumn.Hidden = true;
+                    if (firstTime)
+                    {
+                        _internalSheet.Columns.Add(columnTemplate.Column);
+                    }
+
+                    _internalSheet.ActiveView.Columns.Add(columnTemplate.ViewColumn);
                 }
-                else
-                {
-                    template.Column = column;
-                }
-                // template.ViewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.Id == template.Column.Id) ?? template.ViewColumn;
             }
         }
 
-        _rowHeight = _internalSheet.ActiveView.RowHeight;
-        _hiddenColumnIds =
-            new HashSet<string>(_internalSheet.ActiveView.Columns.Where(u => u.Hidden).Select(u => u.ColumnId));
+        // columns in the sheet but not in the template
+        var removeColumns = sheetColumnIds.Except(templateColumnIds).ToList();
+        if (removeColumns.Count > 0)
+        {
+            foreach (var columnId in removeColumns)
+            {
+                if (columnId == Preset.ActionsColumnId)
+                {
+                    continue;
+                }
+
+                if (firstTime)
+                {
+                    var column = _internalSheet.Columns.FirstOrDefault(u => u.Id == columnId);
+                    if (column is not null)
+                    {
+                        _internalSheet.Columns.Remove(column);
+                    }
+                }
+
+                var viewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.ColumnId == columnId);
+                if (viewColumn is not null)
+                {
+                    _internalSheet.ActiveView.Columns.Remove(viewColumn);
+                }
+            }
+        }
+
+        if (firstTime)
+        {
+            // if actions column is not in the sheet but required
+            if (HasActions)
+            {
+                if (_activeViewTemplateColumns.All(u => u.Column.Id != Preset.ActionsColumnId))
+                {
+                    var actionsTemplate = new ColumnTemplate<TItem, object>(Preset.ActionsColumnId, ColumnType.Actions);
+                    actionsTemplate.Column.Name = "Actions";
+                    _activeViewTemplateColumns.Add(actionsTemplate);
+                }
+            }
+
+            foreach (var columnTemplate in _activeViewTemplateColumns)
+            {
+                var inputColumn = _internalSheet.Columns.FirstOrDefault(u => u.Id == columnTemplate.Column.Id);
+                if (inputColumn is not null)
+                {
+                    columnTemplate.Column.Type = inputColumn.Type;
+                    columnTemplate.Column.Name = inputColumn.Name;
+                    columnTemplate.Column.Config = inputColumn.Config;
+                }
+            }
+        }
     }
 
     private async Task Release()

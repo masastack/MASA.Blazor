@@ -7,7 +7,6 @@
         <MTextField @bind-Value="@_column.Name"
                     Filled
                     TValue="string"
-                    OnChange="@HandleOnColumnNameChange"
                     Label="column-name"
                     Required>
         </MTextField>
@@ -25,13 +24,23 @@
         </MSelect>
 
         <div class="mt-6">
-            @if (_column.Type == ColumnType.Date)
+            @switch (_column.Type)
             {
-                <DateConfigInput @bind-Value="@_column.Config"/>
-            }
-            else if (_column.Type == ColumnType.Select)
-            {
-                <SelectConfigInput @bind-Value="@_column.Config"/>
+                case ColumnType.Date:
+                    <DateConfigInput @bind-Value="@_column.Config"/>
+                    break;
+                case ColumnType.Select or ColumnType.MultiSelect:
+                    <SelectConfigInput @bind-Value="@_column.Config"/>
+                    break;
+                case ColumnType.Progress:
+                    <ProgressConfigInput @bind-Value="@_column.Config"/>
+                    break;
+                case ColumnType.Number:
+                    <NumberConfigInput @bind-Value="@_column.Config"/>
+                    break;
+                case ColumnType.Actions:
+                    <ActionsConfigInput @bind-Value="@_column.Config"/>
+                    break;
             }
         </div>
 
@@ -50,25 +59,11 @@
 
     private Column _column = new();
 
-    private bool _isNameDirty;
-
     private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
-
-    private void HandleOnColumnNameChange()
-    {
-        _isNameDirty = true;
-    }
 
     private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
     {
         _column.Config = null;
-
-        if (_isNameDirty)
-        {
-            return;
-        }
-
-        _column.Name = item.Item.Name;
     }
 
     private void HandleOnSubmit()
@@ -119,7 +114,6 @@
             Name = nameof(ColumnType.Text),
             Type = ColumnType.Text
         };
-        _isNameDirty = false;
         _menu = true;
         StateHasChanged();
     }
