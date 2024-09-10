@@ -91,7 +91,8 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     /// Selectors that do not lead to dragging
     /// </summary>
     [Parameter]
-    public string? Filter { get; set; }
+    [MasaApiParameter(".ignore-elements")]
+    public string? Filter { get; set; } = ".ignore-elements";
 
     /// <summary>
     /// Ignore the HTML5 DnD behaviour and force the fallback to be used
@@ -117,7 +118,8 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     /// Drag handle selector within list items
     /// </summary>
     [Parameter]
-    public string? Handle { get; set; }
+    [MasaApiParameter(".handle")]
+    public string? Handle { get; set; } = ".handle";
 
     /// <summary>
     /// Will always use inverted swap zone if set to true
