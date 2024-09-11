@@ -20,8 +20,11 @@ public class MAppBarNavIcon : MButton
 
     private RenderFragment DefaultChildContent => builder =>
     {
-        builder.OpenComponent<MIcon>(0);
-        builder.AddAttribute(1, "Icon", (Icon)"$menu");
-        builder.CloseComponent();
+        if (IconName == null)
+        {
+            builder.OpenComponent<MIcon>(0);
+            builder.AddAttribute(1, "Icon", (Icon)"$menu");
+            builder.CloseComponent();
+        }
     };
 }
