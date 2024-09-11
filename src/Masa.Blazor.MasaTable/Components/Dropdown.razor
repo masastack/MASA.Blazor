@@ -5,7 +5,6 @@
             <MButton Class="menu"
                      Small
                      IconName="@Icon"
-                     Show="@TransitionShow"
                      @attributes="@context.Attrs">
             </MButton>
         }
@@ -15,15 +14,13 @@
         }
     </ActivatorContent>
     <ChildContent>
-        <MList Dense Class="masa-table-viewer__header_column-menu-content">
+        <MList Dense Class="masa-table-dropdown">
             @ChildContent
         </MList>
     </ChildContent>
 </MMenu>
 
 @code {
-
-    [Parameter] public bool TransitionShow { get; set; }
 
     [Parameter] public string? Icon { get; set; } = "mdi-dots-horizontal";
 

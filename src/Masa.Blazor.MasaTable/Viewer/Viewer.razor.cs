@@ -14,7 +14,9 @@ public partial class Viewer<TItem>
 
     [Parameter] public IEnumerable<TItem> Rows { get; set; } = [];
 
-    [Parameter] public EventCallback<string> OnColumnHide { get; set; }
+    [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
+
+    [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
 
     [Parameter] public EventCallback<TItem> OnUpdate { get; set; }
 

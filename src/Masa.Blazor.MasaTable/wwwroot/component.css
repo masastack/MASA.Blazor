@@ -130,6 +130,7 @@
   text-overflow: ellipsis;
   white-space: pre-wrap;
   word-break: break-word;
+  line-height: 1.7;
 }
 
 .m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
@@ -172,4 +173,8 @@
 
 .m-dialog.image-viewer .m-image__image--cover {
   background-size: contain;
+}
+
+.masa-table-dropdown .masa-table-dropdown-item .m-list-item__icon {
+  margin-right: 12px;
 }

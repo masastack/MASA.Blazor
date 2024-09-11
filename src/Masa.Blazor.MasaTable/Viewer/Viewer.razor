@@ -17,36 +17,19 @@
                             <div class="masa-table-viewer__header-column-content">
                                 @RenderFragments.GenTypeIcon(template.Column.Type, true)
                                 @template.Column.Name
-                                @* <MSpacer/> *@
-                                @* <MMenu MinWidth="180" OffsetY> *@
-                                @*     <ActivatorContent> *@
-                                @*         <MButton Class="menu" *@
-                                @*                  Small *@
-                                @*                  IconName="mdi-menu-down-outline" *@
-                                @*                  @attributes="@context.Attrs"> *@
-                                @*         </MButton> *@
-                                @*     </ActivatorContent> *@
-                                @*     <ChildContent> *@
-                                @*         <MList Dense Class="masa-table-viewer__header_column-menu-content"> *@
-                                @*             <MListItem Link *@
-                                @*                        PrependIcon="mdi-eye-off-outline" *@
-                                @*                        Title="Hide" *@
-                                @*                        OnClick="@(() => HandleOnColumnHide(item.Id))"/> *@
-                                @*             <MListItem Link *@
-                                @*                        PrependIcon="mdi-delete-variant" *@
-                                @*                        Title="Delete" *@
-                                @*                        OnClick="@(() => HandleOnColumnDelete(item.Id))"/> *@
-                                @*         </MList> *@
-                                @*     </ChildContent> *@
-                                @* </MMenu> *@
+                                <MSpacer/>
+                                <Dropdown Icon="mdi-menu-down-outline">
+                                    <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
+                                    <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
+                                </Dropdown>
                             </div>
                         </div>
                     }
                 </div>
-            </th >
-        </tr >
-        </thead >
-        <tbody >
+            </th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Rows)
         {
             <tr>
@@ -64,9 +47,9 @@
                 </td>
             </tr>
         }
-        </tbody >
-    </table >
-</div >
+        </tbody>
+    </table>
+</div>
 
 <MDialog @bind-Value="_imageViewer"
          @bind-Value:after="OnImageViewerChanged"
@@ -78,8 +61,8 @@
             <MCarouselItem Src="@item" OnClick="@(() => _imageViewer = false)">
             </MCarouselItem>
         }
-    </MCarousel >
-</MDialog >
+    </MCarousel>
+</MDialog>
 
 @code {
 
@@ -325,20 +308,12 @@
 
     private RenderFragment GenActionsCell(object? columnConfig, object? value, TItem item) => __builder =>
     {
-        if (columnConfig is ActionsConfig config)
-        {
-            @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip)
-            @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip)
-            @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip)
-            @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip)
-        }
-        else
-        {
-            @GenAction(OnUpdate, "mdi-pencil-outline", "Update")
-            @GenAction(OnDelete, "mdi-delete-outline", "Delete")
-            @GenAction(OnAction1, "mdi-numeric-1", "Action 1")
-            @GenAction(OnAction2, "mdi-numeric-2", "Action 2")
-        }
+        ActionsConfig config = columnConfig as ActionsConfig ?? new ActionsConfig();
+
+        @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip)
+        @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip)
+        @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip)
+        @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip)
 
         return;
 
@@ -346,10 +321,18 @@
         {
             @if (callback.HasDelegate)
             {
-                <MButton IconName="@icon"
-                         Small
-                         OnClick="@(() => callback.InvokeAsync(item))">
-                </MButton>
+                <MTooltip Top Disabled="@(tooltip is null)">
+                    <ActivatorContent>
+                        <MButton IconName="@icon"
+                                 Small
+                                 OnClick="@(() => callback.InvokeAsync(item))"
+                                 @attributes="@context.Attrs">
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        @tooltip
+                    </ChildContent>
+                </MTooltip>
             }
         };
     };

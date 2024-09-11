@@ -91,8 +91,9 @@ public partial class MasaTable<TItem>
 
             if (HasActions)
             {
-                _activeViewTemplateColumns.Add(
-                    new ColumnTemplate<TItem, object>(Preset.ActionsColumnId, ColumnType.Actions));
+                var actionsTemplate = new ColumnTemplate<TItem, object>(Preset.ActionsColumnId, ColumnType.Actions);
+                actionsTemplate.Column.Name = "Actions";
+                _activeViewTemplateColumns.Add(actionsTemplate);
             }
 
             _internalSheet.Columns = _activeViewTemplateColumns.Select(u => u.Column).ToList();

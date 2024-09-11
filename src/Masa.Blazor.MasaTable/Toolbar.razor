@@ -38,19 +38,29 @@
                         }
                     </div>
 
-                    <ExpandXTransition>
-                        <Dropdown TransitionShow="@hasAction">
+                    <Dropdown>
+                        <ActivatorContent Context="dropdown">
+                            <ExpandXTransition>
+                                <MButton Class="menu"
+                                         Small
+                                         IconName="mdi-dots-horizontal"
+                                         Show="@hasAction"
+                                         @attributes="@dropdown.Attrs">
+                                </MButton>
+                            </ExpandXTransition>
+                        </ActivatorContent>
+                        <ChildContent>
                             <DropdownItem PrependIcon="mdi-rename-outline"
                                           Title="Rename view"
-                                          OnClick="@(() => RenameView(view))"/>
+                                          OnClick="@(() => RenameView(view))" />
                             @if (Views.Count > 1)
                             {
                                 <DropdownItem PrependIcon="mdi-trash-can-outline"
                                               Title="Delete view"
-                                              OnClick="@(() => OnViewDelete.InvokeAsync(view))"/>
+                                              OnClick="@(() => OnViewDelete.InvokeAsync(view))" />
                             }
-                        </Dropdown>
-                    </ExpandXTransition>
+                        </ChildContent>
+                    </Dropdown>
                 </MButton>
             </MItem>
         }
@@ -158,14 +168,14 @@
                     <MListItemTitle Class="d-flex align-center">
                         @RenderFragments.GenTypeIcon(column.Type)
                         <span>@column.Name</span>
-                        <MSpacer/>
+                        <MSpacer />
                         <MToggle Value="@(!hidden)"
                                  DataOn="@("mdi-eye-outline")"
                                  DataOff="@("mdi-eye-off-outline")"
                                  TData="string">
                             <MButton IconName="@context.Data"
                                      Style="color: inherit"
-                                     OnClick="@(() => OnColumnToggle.InvokeAsync(column.Id))"/>
+                                     OnClick="@(() => OnColumnToggle.InvokeAsync(column.Id))" />
                         </MToggle>
                         <MButton IconName="mdi-pencil-outline"
                                  Style="color: inherit"

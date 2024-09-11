@@ -48,6 +48,8 @@
             ColumnOrder="_columnOrder"
             RowHeight="@_rowHeight"
             Rows="@Items"
+            OnColumnToggle="@ToggleColumn"
+            OnColumnEditClick="@OpenColumnEditDialog"
             OnUpdate="@OnUpdate"
             OnDelete="@OnDelete"
             OnAction1="@OnAction1"
