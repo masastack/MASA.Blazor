@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using BemIt;
 using Masa.Blazor.MasaTable.ColumnConfigs;
 using Microsoft.AspNetCore.Components;
 
@@ -26,6 +27,8 @@ public partial class MasaTable<TItem>
 
     // ReSharper disable once StaticMemberInGenericType
     private static string[] _modes = ["view", "edit"];
+    
+    private static Block _block = new Block("m-gen-table");
 
     private string? _selectedMode = "edit";
     private Sheet? _internalSheet;

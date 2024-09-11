@@ -50,17 +50,21 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.masa-table-viewer__header {
+  background: #FFFFFF;
+}
+
 .masa-table-viewer__header-column {
   width: 180px;
   padding: 0 8px;
   position: relative;
   display: flex;
   align-items: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.masa-table-viewer__header-column:last-child {
-  border-right: none;
+.masa-table-viewer__header-column:first-child {
+  border-left: none;
 }
 
 .masa-table-viewer__header-column-content {
@@ -89,7 +93,11 @@
 }
 
 .masa-table-viewer__row:hover {
-  background-color: rgba(0, 0, 0, 0.12);
+  background: #eeeeee;
+}
+
+.masa-table-viewer__row {
+  background: #FFFFFF;
 }
 
 .masa-table-viewer__cell {
@@ -98,11 +106,11 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.masa-table-viewer__cell:last-child {
-  border-right: none;
+.masa-table-viewer__cell:first-child {
+  border-left: none;
 }
 
 .masa-table-viewer__cell.checkbox {
@@ -177,4 +185,18 @@
 
 .masa-table-dropdown .masa-table-dropdown-item .m-list-item__icon {
   margin-right: 12px;
+}
+
+.masa-table-viewer__header-column.actions {
+  position: sticky;
+  z-index: 1;
+  background: inherit;
+  right: 0;
+}
+
+.masa-table-viewer__cell.actions {
+  position: sticky;
+  z-index: 1;
+  background: inherit;
+  right: 0;
 }

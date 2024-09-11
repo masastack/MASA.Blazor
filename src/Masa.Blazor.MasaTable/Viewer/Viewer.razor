@@ -12,7 +12,7 @@
                     <div class=""></div>
                     @foreach (var template in ComputedColumnTemplates)
                     {
-                        <div class="masa-table-viewer__header-column"
+                        <div class="masa-table-viewer__header-column @template.Column.Type.ToString().ToLowerInvariant()"
                              style="">
                             <div class="masa-table-viewer__header-column-content">
                                 @RenderFragments.GenTypeIcon(template.Column.Type, true)
