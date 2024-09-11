@@ -47,6 +47,7 @@ public class MCarouselItem : MWindowItem, IRoutable
             builder.AddAttribute(2, "Src", Src);
             builder.AddAttribute(3, "Height", ((MCarousel?)WindowGroup)?.InternalHeight);
             builder.AddAttribute(4, "ChildContent", ChildContent);
+            builder.AddAttribute(5, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, OnClick));
             builder.CloseComponent();
         };
     }
