@@ -3,16 +3,16 @@
 @inject IJSRuntime JSRuntime
 
 
-<Masa.Blazor.MasaTable.MasaTable OnSave="SaveSheet"
-                                 Sheet="@_sheet"
-                                 Items="@_myRecords"
-                                 ColumnTemplate="@ColumnTemplate"
-                                 OnUpdate="@HandleOnUpdate"
-                                 OnDelete="@HandleOnDelete"
-                                 OnAction1="@(() => { })"
-                                 OnAction2="@(() => { })"
-                                 TItem="MyRecord">
-</Masa.Blazor.MasaTable.MasaTable>
+<MConfigurableTable OnSave="SaveSheet"
+                    Sheet="@_sheet"
+                    Items="@_myRecords"
+                    Height="300"
+                    ColumnTemplate="@ColumnTemplate"
+                    OnUpdate="@HandleOnUpdate"
+                    OnDelete="@HandleOnDelete"
+                    OnAction1="@(() => { })"
+                    TItem="MyRecord">
+</MConfigurableTable>
 
 
 @code {
@@ -200,7 +200,7 @@
     {
         Console.Out.WriteLine("Update record");
     }
-    
+
     private void HandleOnDelete(MyRecord record)
     {
         Console.Out.WriteLine("Delete record");

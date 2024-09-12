@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.MasaTable;
 
-public partial class MasaTable<TItem>
+public partial class MConfigurableTable<TItem> : NextTickComponentBase
 {
     [Parameter] public Sheet? Sheet { get; set; }
 
@@ -14,6 +14,8 @@ public partial class MasaTable<TItem>
     [Parameter] public EventCallback<Sheet> OnSave { get; set; }
 
     [Parameter] public IEnumerable<TItem>? Items { get; set; }
+
+    [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public Func<TItem, List<ColumnTemplate<TItem, object>>> ColumnTemplate { get; set; }
 
@@ -27,7 +29,7 @@ public partial class MasaTable<TItem>
 
     // ReSharper disable once StaticMemberInGenericType
     private static string[] _modes = ["view", "edit"];
-    
+
     private static Block _block = new Block("m-gen-table");
 
     private string? _selectedMode = "edit";
@@ -37,6 +39,8 @@ public partial class MasaTable<TItem>
     private List<ColumnTemplate<TItem, object>> _activeViewTemplateColumns = [];
     private List<string> _columnOrder = [];
     private HashSet<string> _hiddenColumnIds = [];
+
+    private Viewer<TItem>? _viewer;
 
     private View? ActiveView => _internalSheet?.Views.FirstOrDefault(v => v.Id == _internalSheet.ActiveViewId);
 

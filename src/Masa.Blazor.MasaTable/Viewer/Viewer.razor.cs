@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Masa.Blazor.Core;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor.MasaTable;
 
-public partial class Viewer<TItem>
+public partial class Viewer<TItem> : IAsyncDisposable
 {
+    [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
+
     [Parameter] public List<ColumnTemplate<TItem, object>> ColumnTemplates { get; set; } = [];
 
     [Parameter] public IList<string> ColumnOrder { get; set; } = [];
@@ -13,6 +17,8 @@ public partial class Viewer<TItem>
     [Parameter] public RowHeight RowHeight { get; set; }
 
     [Parameter] public IEnumerable<TItem> Rows { get; set; } = [];
+
+    [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
@@ -28,9 +34,15 @@ public partial class Viewer<TItem>
 
     private bool _imageViewer;
     private IList<string> _imagesToView = [];
+    private MSimpleTable? _simpleTable;
 
-    private bool HasActions => OnUpdate.HasDelegate || OnDelete.HasDelegate ||
-                               OnAction1.HasDelegate || OnAction2.HasDelegate;
+    private HashSet<EventCallback<TItem>> _actions = [];
+    private StyleBuilder _headerColumnStyleBuilder = new();
+    private IJSObjectReference? _tableJSObjectReference;
+
+    private int ActionsCount => _actions.Count(u => u.HasDelegate);
+
+    private bool HasActions => ActionsCount > 0;
 
     private IEnumerable<ColumnTemplate<TItem, object>> ComputedColumnTemplates
     {
@@ -38,6 +50,29 @@ public partial class Viewer<TItem>
         {
             return ColumnTemplates.Where(c => !HiddenColumnIds.Contains(c.Column.Id))
                 .OrderBy(u => ColumnOrder.IndexOf(u.Column.Id));
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _actions = [OnUpdate, OnDelete, OnAction1, OnAction2];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            // TODO: dispose
+            
+            // TODO: 隐藏的列显示时需要去注册reisze
+            
+            _tableJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/Masa.Blazor.MasaTable/MConfigurableTable.razor.js");
+            await _tableJSObjectReference.InvokeVoidAsync("resizableDataTable", _simpleTable.Ref);
         }
     }
 
@@ -52,6 +87,30 @@ public partial class Viewer<TItem>
         if (_imageViewer == false)
         {
             _imagesToView = [];
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (_tableJSObjectReference != null)
+                await _tableJSObjectReference.DisposeAsync().ConfigureAwait(false);
+        }
+        catch (JSDisconnectedException)
+        {
+            // ignored
+        }
+        // HACK: remove this after https://github.com/dotnet/aspnetcore/issues/52119 is fixed
+        catch (JSException e) when (e.Message.Contains("has it been disposed")
+                                    && (OperatingSystem.IsWindows() || OperatingSystem.IsAndroid() ||
+                                        OperatingSystem.IsIOS()))
+        {
+            // ignored
+        }
+        catch (InvalidOperationException e) when (e.Message.Contains("prerendering"))
+        {
+            // ignored
         }
     }
 }

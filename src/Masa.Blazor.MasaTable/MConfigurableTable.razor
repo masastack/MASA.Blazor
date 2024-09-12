@@ -1,6 +1,7 @@
 ﻿@typeparam TItem
 @attribute [CascadingTypeParameter(nameof(TItem))]
 @inject IPopupService PopupService
+@inherits NextTickComponentBase
 
 <div class="masa-table">
     <div class="d-flex align-center mb-4">
@@ -48,12 +49,14 @@
             ColumnOrder="_columnOrder"
             RowHeight="@_rowHeight"
             Rows="@Items"
+            Height="@Height"
             OnColumnToggle="@ToggleColumn"
             OnColumnEditClick="@OpenColumnEditDialog"
             OnUpdate="@OnUpdate"
             OnDelete="@OnDelete"
             OnAction1="@OnAction1"
-            OnAction2="@OnAction2"/>
+            OnAction2="@OnAction2"
+            @ref="_viewer"/>
 </div>
 
 <ColumnDialog @ref="_columnEditDialog"

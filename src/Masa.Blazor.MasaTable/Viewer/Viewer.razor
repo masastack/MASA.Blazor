@@ -1,55 +1,109 @@
 @namespace Masa.Blazor.MasaTable
 @using System.Collections
 @using System.Globalization
+@using Masa.Blazor.Core
 @typeparam TItem
 
-<div class="masa-table-viewer masa-table-viewer--@RowHeight.ToString().ToLowerInvariant()">
-    <table>
-        <thead>
-        <tr>
-            <th>
-                <div class="masa-table-viewer__header">
-                    <div class=""></div>
-                    @foreach (var template in ComputedColumnTemplates)
-                    {
-                        <div class="masa-table-viewer__header-column @template.Column.Type.ToString().ToLowerInvariant()"
-                             style="">
-                            <div class="masa-table-viewer__header-column-content">
-                                @RenderFragments.GenTypeIcon(template.Column.Type, true)
-                                @template.Column.Name
-                                <MSpacer/>
-                                <Dropdown Icon="mdi-menu-down-outline">
-                                    <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
-                                    <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
-                                </Dropdown>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Rows)
+<MSimpleTable FixedHeader
+              Class="@($"masa-table-viewer masa-table-viewer--{RowHeight.ToString().ToLowerInvariant()}")"
+              Height="@Height"
+              @ref="_simpleTable">
+    <thead>
+    <tr>
+        @foreach (var template in ComputedColumnTemplates)
         {
-            <tr>
-                <td>
-                    <div class="masa-table-viewer__row">
-                        @foreach (var template in ComputedColumnTemplates)
-                        {
-                            <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()">
-                                <div class="masa-table-viewer__cell-content">
-                                    @GenCell(template.Column, template.Value?.Invoke(item), item)
-                                </div>
-                            </div>
-                        }
+            var type = template.Column.Type.ToString().ToLowerInvariant();
+            // var styleBuilder = new StyleBuilder();
+            _headerColumnStyleBuilder.Clear();
+            _headerColumnStyleBuilder.AddWidth(template.ViewColumn.Width, predicate: () => template.ViewColumn.Width != 0);
+            _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", ActionsCount.ToString(), template.Column.Type == ColumnType.Actions);
+
+            <th class="masa-table-viewer__header-column @type"
+                style="@_headerColumnStyleBuilder.Build()">
+                <div class="masa-table-viewer__header-column-content">
+                    @RenderFragments.GenTypeIcon(template.Column.Type, true)
+                    <span class="text-truncate">
+                        @template.Column.Name
+                    </span>
+                    <MSpacer/>
+                    <Dropdown Icon="mdi-menu-down-outline">
+                        <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
+                        <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
+                    </Dropdown>
+                </div>
+                <div class="masa-table-viewer__header-column-resize"></div>
+            </th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Rows)
+    {
+        <tr class="masa-table-viewer__row">
+            @foreach (var template in ComputedColumnTemplates)
+            {
+                var type = template.Column.Type.ToString().ToLowerInvariant();
+
+                <td class="@type">
+                    <div class="masa-table-viewer__cell @type">
+                        <div class="masa-table-viewer__cell-content">
+                            @GenCell(template.Column, template.Value?.Invoke(item), item)
+                        </div>
                     </div>
                 </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
+            }
+        </tr>
+    }
+    </tbody>
+</MSimpleTable>
+
+@* <div class="masa-table-viewer masa-table-viewer--@RowHeight.ToString().ToLowerInvariant()"> *@
+@*     <table> *@
+@*         <thead> *@
+@*         <tr> *@
+@*             <th> *@
+@*                 <div class="masa-table-viewer__header"> *@
+@*                     <div class=""></div> *@
+@*                     @foreach (var template in ComputedColumnTemplates) *@
+@*                     { *@
+@*                         <div class="masa-table-viewer__header-column @template.Column.Type.ToString().ToLowerInvariant()" *@
+@*                              style=""> *@
+@*                             <div class="masa-table-viewer__header-column-content"> *@
+@*                                 @RenderFragments.GenTypeIcon(template.Column.Type, true) *@
+@*                                 @template.Column.Name *@
+@*                                 <MSpacer/> *@
+@*                                 <Dropdown Icon="mdi-menu-down-outline"> *@
+@*                                     <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem> *@
+@*                                     <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem> *@
+@*                                 </Dropdown> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     } *@
+@*                 </div> *@
+@*             </th> *@
+@*         </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*         @foreach (var item in Rows) *@
+@*         { *@
+@*             <tr> *@
+@*                 <td> *@
+@*                     <div class="masa-table-viewer__row"> *@
+@*                         @foreach (var template in ComputedColumnTemplates) *@
+@*                         { *@
+@*                             <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()"> *@
+@*                                 <div class="masa-table-viewer__cell-content"> *@
+@*                                     @GenCell(template.Column, template.Value?.Invoke(item), item) *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         } *@
+@*                     </div> *@
+@*                 </td> *@
+@*             </tr> *@
+@*         } *@
+@*         </tbody> *@
+@*     </table> *@
+@* </div> *@
 
 <MDialog @bind-Value="_imageViewer"
          @bind-Value:after="OnImageViewerChanged"
@@ -119,7 +173,6 @@
                 break;
             case ColumnType.Actions:
                 @GenActionsCell(column.ConfigObject, value, item)
-                ;
                 break;
         }
     };
@@ -310,31 +363,29 @@
     {
         ActionsConfig config = columnConfig as ActionsConfig ?? new ActionsConfig();
 
-        @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip)
-        @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip)
-        @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip)
-        @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip)
+        @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip, item)
+        @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip, item)
+        @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip, item)
+        @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip, item)
+    };
 
-        return;
-
-        RenderFragment GenAction(EventCallback<TItem> callback, string? icon, string? tooltip) => __builder =>
+    private RenderFragment GenAction(EventCallback<TItem> callback, string? icon, string? tooltip, TItem item) => __builder =>
+    {
+        @if (callback.HasDelegate)
         {
-            @if (callback.HasDelegate)
-            {
-                <MTooltip Top Disabled="@(tooltip is null)">
-                    <ActivatorContent>
-                        <MButton IconName="@icon"
-                                 Small
-                                 OnClick="@(() => callback.InvokeAsync(item))"
-                                 @attributes="@context.Attrs">
-                        </MButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        @tooltip
-                    </ChildContent>
-                </MTooltip>
-            }
-        };
+            <MTooltip Top Disabled="@(tooltip is null)">
+                <ActivatorContent>
+                    <MButton IconName="@icon"
+                             Small
+                             OnClick="@(() => callback.InvokeAsync(item))"
+                             @attributes="@context.Attrs">
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    @tooltip
+                </ChildContent>
+            </MTooltip>
+        }
     };
 
 }

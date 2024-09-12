@@ -21,7 +21,7 @@
 
 .masa-table-viewer {
   font-size: 14px;
-  overflow:auto;
+  overflow: auto;
 }
 
 .masa-table-viewer--low {
@@ -39,8 +39,9 @@
   --mt-row-height: 104px;
 }
 
-.masa-table-viewer > table {
+.masa-table-viewer table {
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .masa-table-viewer__header {
@@ -56,14 +57,35 @@
 
 .masa-table-viewer__header-column {
   width: 180px;
-  padding: 0 8px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  min-width: 112px;
+  /*padding: 0 8px;*/
+  /*position: relative;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*border-left: 1px solid rgba(0, 0, 0, 0.12);*/
+}
+
+.masa-table-viewer__header-column.rating {
+  --m-configurable-table-rating-min-width: calc(120px + 32px);
+  width: var(--m-configurable-table-rating-min-width);
+  min-width: var(--m-configurable-table-rating-min-width);
+}
+
+.masa-table-viewer__header-column.actions {  
+  --m-configurable-table-actions-min-width: calc((var(--m-configurable-table-actions-count) * 28px) + 32px);
+  width: var(--m-configurable-table-actions-min-width);
+  min-width: var(--m-configurable-table-actions-min-width);
 }
 
 .masa-table-viewer__header-column:first-child {
+  /*border-left: none;*/
+}
+
+.masa-table-viewer thead > tr > th, .masa-table-viewer tbody > tr > td {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer thead > tr > th:first-child, .masa-table-viewer tbody > tr > td:first-child {
   border-left: none;
 }
 
@@ -73,7 +95,7 @@
   width: 100%;
 }
 
-.masa-table-viewer__header-column-content .menu {
+.masa-table-viewer__header-column-content .menu:not([aria-expanded]) {
   display: none;
 }
 
@@ -81,15 +103,31 @@
   display: block;
 }
 
+.masa-table-viewer__header-column-resize {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 1;
+  height: 100%;
+}
+
 .masa-table-viewer__row {
-  display: flex;
-  width: 100%;
-  /*min-width: -webkit-max-content;*/
-  /*min-width: -moz-max-content;*/
-  /*min-width: max-content;*/
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  transition: all .3s ease;
-  height: var(--mt-row-height);
+  /*display: flex;*/
+  /*width: 100%;*/
+  /*!*min-width: -webkit-max-content;*!*/
+  /*!*min-width: -moz-max-content;*!*/
+  /*!*min-width: max-content;*!*/
+  /*border-bottom: 1px solid rgba(0, 0, 0, 0.12);*/
+  /*transition: all .3s ease;*/
+  /*height: var(--mt-row-height);*/
+}
+
+.masa-table-viewer__row > td {
+  height: var(--mt-row-height) !important;
 }
 
 .masa-table-viewer__row:hover {
@@ -101,8 +139,8 @@
 }
 
 .masa-table-viewer__cell {
-  width: 180px;
-  padding: 6px 8px;
+  height: inherit;
+  padding: 7px 0;
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -130,7 +168,8 @@
 }
 
 .masa-table-viewer__cell.text .masa-table-viewer__cell-content,
-.masa-table-viewer__cell.date .masa-table-viewer__cell-content{
+.masa-table-viewer__cell.link .masa-table-viewer__cell-content,
+.masa-table-viewer__cell.date .masa-table-viewer__cell-content {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--mt-line-clamp);
@@ -139,6 +178,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   line-height: 1.7;
+  max-height: calc(var(--mt-line-clamp) * 1.7em);
 }
 
 .m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
@@ -187,16 +227,36 @@
   margin-right: 12px;
 }
 
-.masa-table-viewer__header-column.actions {
+.masa-table-viewer thead>tr>th.actions, .masa-table-viewer tbody>tr>td.actions {
   position: sticky;
   z-index: 1;
   background: inherit;
   right: 0;
 }
 
-.masa-table-viewer__cell.actions {
-  position: sticky;
-  z-index: 1;
-  background: inherit;
-  right: 0;
+.masa-table-viewer thead>tr>th.actions:after, .masa-table-viewer tbody>tr>td.actions:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  transform: translateX(-100%);
+  transition: box-shadow .3s;
+  content: '';
+  pointer-events: none;
+  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
 }
+
+/*.masa-table-viewer__header-column.actions {*/
+/*  position: sticky;*/
+/*  z-index: 1;*/
+/*  background: inherit;*/
+/*  right: 0;*/
+/*}*/
+
+/*.masa-table-viewer__cell.actions {*/
+/*  position: sticky;*/
+/*  z-index: 1;*/
+/*  background: inherit;*/
+/*  right: 0;*/
+/*}*/
