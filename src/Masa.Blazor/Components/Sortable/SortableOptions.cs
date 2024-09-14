@@ -104,4 +104,6 @@ public class SortableOptions
     /// Threshold of the swap zone
     /// </summary>
     public double SwapThreshold { get; set; } = 1;
+
+    public string? Ignore { get; set; }
 }
