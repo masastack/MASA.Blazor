@@ -1,4 +1,6 @@
-﻿using Masa.Blazor.Core;
+﻿using BemIt;
+using Masa.Blazor.Core;
+using Masa.Blazor.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -10,7 +12,9 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     [Parameter] public List<ColumnTemplate<TItem, object>> ColumnTemplates { get; set; } = [];
 
-    [Parameter] public IList<string> ColumnOrder { get; set; } = [];
+    [Parameter] public List<string> ColumnOrder { get; set; } = [];
+
+    [Parameter] public EventCallback<List<string>> ColumnOrderChanged { get; set; }
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
@@ -24,6 +28,8 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
 
+    [Parameter] public EventCallback<(string ColumnId, double Width)> OnColumnResize { get; set; }
+
     [Parameter] public EventCallback<TItem> OnUpdate { get; set; }
 
     [Parameter] public EventCallback<TItem> OnDelete { get; set; }
@@ -32,25 +38,33 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     [Parameter] public EventCallback<TItem> OnAction2 { get; set; }
 
+    // ReSharper disable once StaticMemberInGenericType
+    private static Block _block = new("masa-table-viewer");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
+    private bool _sized;
+
     private bool _imageViewer;
     private IList<string> _imagesToView = [];
     private MSimpleTable? _simpleTable;
+    private string? _tableSelector;
+
+    private HashSet<string>? _prevHiddenColumnIds;
 
     private HashSet<EventCallback<TItem>> _actions = [];
     private StyleBuilder _headerColumnStyleBuilder = new();
     private IJSObjectReference? _tableJSObjectReference;
+    private DotNetObjectReference<Viewer<TItem>>? _dotNetObjectReference;
 
     private int ActionsCount => _actions.Count(u => u.HasDelegate);
 
     private bool HasActions => ActionsCount > 0;
 
-    private IEnumerable<ColumnTemplate<TItem, object>> ComputedColumnTemplates
+    private IList<ColumnTemplate<TItem, object>> _visibleColumnTemplates = [];
+
+    private IEnumerable<ColumnTemplate<TItem, object>> OrderedColumnTemplates
     {
-        get
-        {
-            return ColumnTemplates.Where(c => !HiddenColumnIds.Contains(c.Column.Id))
-                .OrderBy(u => ColumnOrder.IndexOf(u.Column.Id));
-        }
+        get { return _visibleColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)); }
     }
 
     protected override void OnInitialized()
@@ -58,6 +72,19 @@ public partial class Viewer<TItem> : IAsyncDisposable
         base.OnInitialized();
 
         _actions = [OnUpdate, OnDelete, OnAction1, OnAction2];
+
+        _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevHiddenColumnIds is null || _prevHiddenColumnIds.SetEquals(HiddenColumnIds) is false)
+        {
+            _prevHiddenColumnIds = HiddenColumnIds;
+            _visibleColumnTemplates = ColumnTemplates.Where(c => !HiddenColumnIds.Contains(c.Column.Id)).ToList();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -67,13 +94,25 @@ public partial class Viewer<TItem> : IAsyncDisposable
         if (firstRender)
         {
             // TODO: dispose
-            
-            // TODO: 隐藏的列显示时需要去注册reisze
-            
+
             _tableJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor.MasaTable/MConfigurableTable.razor.js");
-            await _tableJSObjectReference.InvokeVoidAsync("resizableDataTable", _simpleTable.Ref);
+                "./_content/Masa.Blazor.MasaTable/MTemplateTable.razor.js");
+            await _tableJSObjectReference.InvokeVoidAsync("resizableDataTable", _simpleTable.Ref,
+                _dotNetObjectReference);
+
+            _sized = true;
+            StateHasChanged();
         }
+    }
+
+    internal string? GetTableSelector()
+    {
+        if (_simpleTable?.Ref.TryGetSelector(out var selector) is true)
+        {
+            return _tableSelector ??= selector + " table";
+        }
+
+        return null;
     }
 
     private void OpenImageViewer(IList<string> images)
@@ -88,6 +127,12 @@ public partial class Viewer<TItem> : IAsyncDisposable
         {
             _imagesToView = [];
         }
+    }
+
+    [JSInvokable]
+    public void OnColumnWidthResize(string columnId, double width)
+    {
+        OnColumnResize.InvokeAsync((columnId, width));
     }
 
     public async ValueTask DisposeAsync()

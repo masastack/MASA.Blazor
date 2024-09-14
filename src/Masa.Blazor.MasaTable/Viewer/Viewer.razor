@@ -1,50 +1,67 @@
 @namespace Masa.Blazor.MasaTable
 @using System.Collections
 @using System.Globalization
+@using BemIt
 @using Masa.Blazor.Core
 @typeparam TItem
 
 <MSimpleTable FixedHeader
-              Class="@($"masa-table-viewer masa-table-viewer--{RowHeight.ToString().ToLowerInvariant()}")"
+              Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
               Height="@Height"
               @ref="_simpleTable">
-    <thead>
-    <tr>
-        @foreach (var template in ComputedColumnTemplates)
-        {
-            var type = template.Column.Type.ToString().ToLowerInvariant();
-            // var styleBuilder = new StyleBuilder();
-            _headerColumnStyleBuilder.Clear();
-            _headerColumnStyleBuilder.AddWidth(template.ViewColumn.Width, predicate: () => template.ViewColumn.Width != 0);
-            _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", ActionsCount.ToString(), template.Column.Type == ColumnType.Actions);
 
-            <th class="masa-table-viewer__header-column @type"
-                style="@_headerColumnStyleBuilder.Build()">
-                <div class="masa-table-viewer__header-column-content">
-                    @RenderFragments.GenTypeIcon(template.Column.Type, true)
-                    <span class="text-truncate">
-                        @template.Column.Name
-                    </span>
-                    <MSpacer/>
-                    <Dropdown Icon="mdi-menu-down-outline">
-                        <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
-                        <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
-                    </Dropdown>
-                </div>
-                <div class="masa-table-viewer__header-column-resize"></div>
-            </th>
-        }
+    <thead>
+    <tr id="test-todo-update">
+        <MSortableProvider Items="_visibleColumnTemplates"
+                           ItemKey="@(u => u.Column.Id)"
+                           GhostClass="accent"
+                           Container="#test-todo-update"
+                           Order="@ColumnOrder"
+                           OrderChanged="@ColumnOrderChanged">
+            <ItemContent Context="context">
+                @{
+                    var template = context.Item;
+                    var type = template.Column.Type.ToString().ToLowerInvariant();
+                    var isActionsType = template.Column.Type == ColumnType.Actions;
+                    var sortableHandleCss = isActionsType ? "ignore-elements" : "handle";
+                    _headerColumnStyleBuilder.Clear();
+                    _headerColumnStyleBuilder.AddWidth(template.ViewColumn.Width, predicate: () => template.ViewColumn.Width != 0);
+                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", ActionsCount.ToString(), isActionsType);
+                }
+
+                <th class="masa-table-viewer__header-column @sortableHandleCss @type"
+                    style="@_headerColumnStyleBuilder.Build()"
+                    data-column-id="@template.Column.Id"
+                    @key="@(template.Column.Id)">
+                    <div class="masa-table-viewer__header-column-content">
+                        @RenderFragments.GenTypeIcon(template.Column.Type, true)
+                        <span class="text-truncate">
+                            @template.Column.Name
+                        </span>
+                        <MSpacer/>
+                        <Dropdown Icon="mdi-menu-down-outline">
+                            <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
+                            <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
+                        </Dropdown>
+                    </div>
+                    @if (!isActionsType)
+                    {
+                        <div class="masa-table-viewer__header-column-resize"></div>
+                    }
+                </th>
+            </ItemContent>
+        </MSortableProvider>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Rows)
     {
         <tr class="masa-table-viewer__row">
-            @foreach (var template in ComputedColumnTemplates)
+            @foreach (var template in OrderedColumnTemplates)
             {
                 var type = template.Column.Type.ToString().ToLowerInvariant();
 
-                <td class="@type">
+                <td class="@type" @key="template.Column.Id">
                     <div class="masa-table-viewer__cell @type">
                         <div class="masa-table-viewer__cell-content">
                             @GenCell(template.Column, template.Value?.Invoke(item), item)
@@ -56,54 +73,6 @@
     }
     </tbody>
 </MSimpleTable>
-
-@* <div class="masa-table-viewer masa-table-viewer--@RowHeight.ToString().ToLowerInvariant()"> *@
-@*     <table> *@
-@*         <thead> *@
-@*         <tr> *@
-@*             <th> *@
-@*                 <div class="masa-table-viewer__header"> *@
-@*                     <div class=""></div> *@
-@*                     @foreach (var template in ComputedColumnTemplates) *@
-@*                     { *@
-@*                         <div class="masa-table-viewer__header-column @template.Column.Type.ToString().ToLowerInvariant()" *@
-@*                              style=""> *@
-@*                             <div class="masa-table-viewer__header-column-content"> *@
-@*                                 @RenderFragments.GenTypeIcon(template.Column.Type, true) *@
-@*                                 @template.Column.Name *@
-@*                                 <MSpacer/> *@
-@*                                 <Dropdown Icon="mdi-menu-down-outline"> *@
-@*                                     <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem> *@
-@*                                     <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem> *@
-@*                                 </Dropdown> *@
-@*                             </div> *@
-@*                         </div> *@
-@*                     } *@
-@*                 </div> *@
-@*             </th> *@
-@*         </tr> *@
-@*         </thead> *@
-@*         <tbody> *@
-@*         @foreach (var item in Rows) *@
-@*         { *@
-@*             <tr> *@
-@*                 <td> *@
-@*                     <div class="masa-table-viewer__row"> *@
-@*                         @foreach (var template in ComputedColumnTemplates) *@
-@*                         { *@
-@*                             <div class="masa-table-viewer__cell @template.Column.Type.ToString().ToLowerInvariant()"> *@
-@*                                 <div class="masa-table-viewer__cell-content"> *@
-@*                                     @GenCell(template.Column, template.Value?.Invoke(item), item) *@
-@*                                 </div> *@
-@*                             </div> *@
-@*                         } *@
-@*                     </div> *@
-@*                 </td> *@
-@*             </tr> *@
-@*         } *@
-@*         </tbody> *@
-@*     </table> *@
-@* </div> *@
 
 <MDialog @bind-Value="_imageViewer"
          @bind-Value:after="OnImageViewerChanged"

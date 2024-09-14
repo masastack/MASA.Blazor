@@ -33,7 +33,8 @@
     "build:pageStack": "rollup --config rollup.config.pageStack.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts",
     "build:transition": "rollup --config rollup.config.transition.ts",
-    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts"
+    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts",
+    "build:configurableTable": "rollup --config rollup.config.configurableTable.ts"
   },
   "author": "",
   "license": "MIT",

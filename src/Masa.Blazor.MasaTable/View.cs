@@ -27,7 +27,7 @@ public class ViewColumn
 {
     [JsonPropertyName("id")] public string ColumnId { get; init; }
 
-    public int Width { get; set; }
+    public double Width { get; set; }
 
     public bool Hidden { get; set; }
 

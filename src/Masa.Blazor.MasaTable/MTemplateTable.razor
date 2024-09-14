@@ -1,7 +1,9 @@
 ﻿@typeparam TItem
 @attribute [CascadingTypeParameter(nameof(TItem))]
 @inject IPopupService PopupService
+@using Microsoft.JSInterop
 @inherits NextTickComponentBase
+@inject IJSRuntime JSRuntime
 
 <div class="masa-table">
     <div class="d-flex align-center mb-4">
@@ -47,11 +49,13 @@
     <Viewer ColumnTemplates="@_activeViewTemplateColumns"
             HiddenColumnIds="@_hiddenColumnIds"
             ColumnOrder="_columnOrder"
+            ColumnOrderChanged="@HandleOnColumnOrderChanged"
             RowHeight="@_rowHeight"
             Rows="@Items"
             Height="@Height"
             OnColumnToggle="@ToggleColumn"
             OnColumnEditClick="@OpenColumnEditDialog"
+            OnColumnResize="@ResizeColumn"
             OnUpdate="@OnUpdate"
             OnDelete="@OnDelete"
             OnAction1="@OnAction1"
@@ -121,7 +125,12 @@
 
     private void ToggleColumn(string columnId)
     {
-        var viewColumn = _internalSheet.ActiveView.Columns.FirstOrDefault(u => u.ColumnId == columnId);
+        var viewColumn = _internalSheet?.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnId);
+        if (viewColumn is null)
+        {
+            return;
+        }
+
         if (viewColumn.Hidden)
         {
             viewColumn.Hidden = false;
@@ -132,6 +141,17 @@
             viewColumn.Hidden = true;
             _hiddenColumnIds.Add(columnId);
         }
+    }
+
+    private void ResizeColumn((string ColumnId, double Width) args)
+    {
+        var viewColumn = _internalSheet!.ActiveView!.Columns.FirstOrDefault(u => u.ColumnId == args.ColumnId);
+        if (viewColumn is null)
+        {
+            return;
+        }
+
+        viewColumn.Width = args.Width;
     }
 
     private void OpenColumnEditDialog(Column column)
@@ -160,11 +180,15 @@
 
     private void HandleOnActiveViewChanged(Guid viewId)
     {
+        // reset the width of the table
+        _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.SetStyle, _viewer?.GetTableSelector(), "width", null);
+        
         _internalSheet.ActiveViewId = viewId;
 
         AlignColumns();
 
         UpdateState();
+        
     }
 
     private void HandleOnColumnOrderChanged(List<string> order)

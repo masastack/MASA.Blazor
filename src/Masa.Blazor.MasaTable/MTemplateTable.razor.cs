@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.MasaTable;
 
-public partial class MConfigurableTable<TItem> : NextTickComponentBase
+public partial class MTemplateTable<TItem> : NextTickComponentBase
 {
     [Parameter] public Sheet? Sheet { get; set; }
 
@@ -26,6 +26,8 @@ public partial class MConfigurableTable<TItem> : NextTickComponentBase
     [Parameter] public EventCallback<TItem> OnAction1 { get; set; }
 
     [Parameter] public EventCallback<TItem> OnAction2 { get; set; }
+    
+    // TODO: 详情按钮没做
 
     // ReSharper disable once StaticMemberInGenericType
     private static string[] _modes = ["view", "edit"];
@@ -204,6 +206,25 @@ public partial class MConfigurableTable<TItem> : NextTickComponentBase
                     columnTemplate.Column.Type = inputColumn.Type;
                     columnTemplate.Column.Name = inputColumn.Name;
                     columnTemplate.Column.Config = inputColumn.Config;
+                }
+                
+                var viewColumn = _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
+                if (viewColumn is not null)
+                {
+                    columnTemplate.ViewColumn.Width = viewColumn.Width;
+                    columnTemplate.ViewColumn.Hidden = viewColumn.Hidden;
+                }
+            }
+        }
+        else
+        {
+            foreach (var columnTemplate in _activeViewTemplateColumns)
+            {
+                var viewColumn = _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
+                if (viewColumn is not null)
+                {
+                    columnTemplate.ViewColumn.Width = viewColumn.Width;
+                    columnTemplate.ViewColumn.Hidden = viewColumn.Hidden;
                 }
             }
         }

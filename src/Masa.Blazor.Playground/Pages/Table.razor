@@ -3,16 +3,16 @@
 @inject IJSRuntime JSRuntime
 
 
-<MConfigurableTable OnSave="SaveSheet"
-                    Sheet="@_sheet"
-                    Items="@_myRecords"
-                    Height="300"
-                    ColumnTemplate="@ColumnTemplate"
-                    OnUpdate="@HandleOnUpdate"
-                    OnDelete="@HandleOnDelete"
-                    OnAction1="@(() => { })"
-                    TItem="MyRecord">
-</MConfigurableTable>
+<MTemplateTable OnSave="SaveSheet"
+                Sheet="@_sheet"
+                Items="@_myRecords"
+                Height="300"
+                ColumnTemplate="@ColumnTemplate"
+                OnUpdate="@HandleOnUpdate"
+                OnDelete="@HandleOnDelete"
+                OnAction1="@(() => { })"
+                TItem="MyRecord">
+</MTemplateTable>
 
 
 @code {
