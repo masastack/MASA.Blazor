@@ -8,6 +8,8 @@ public partial class MSortable<TItem> : MSortableProviderBase<TItem>
 
     [Parameter] [MasaApiParameter("div")] public string? ItemTag { get; set; } = "div";
 
+    [Parameter] public override string? Handle { get; set; }
+
     private static Block _block = new("m-sortable");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
