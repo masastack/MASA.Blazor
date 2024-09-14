@@ -122,6 +122,12 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     public virtual string? Handle { get; set; } = ".handle";
 
     /// <summary>
+    /// The selector of the list items that are ignored
+    /// </summary>
+    [Parameter]
+    public string? Ignore { get; set; }
+
+    /// <summary>
     /// Will always use inverted swap zone if set to true
     /// </summary>
     [Parameter]
@@ -261,6 +267,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
             ChosenClass = ChosenClass,
             Delay = Delay,
             DelayOnTouchOnly = DelayOnTouchOnly,
+            Ignore = Ignore,
             Disabled = Disabled,
             Draggable = Draggable,
             DragClass = DragClass,

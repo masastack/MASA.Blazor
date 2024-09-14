@@ -1,6 +1,7 @@
 import Sortable, { GroupOptions, SortableEvent, SortableOptions } from "sortablejs";
 
 type Options = Omit<SortableOptions, "store" | "group"> & {
+  ignore?: string;
   group: {
     name: string;
     pulls?: string[] | undefined;
@@ -22,13 +23,42 @@ class SortableProxy {
     this.el = el;
     this.handle = handle;
 
-    const { group, ...rest } = options;
+    const { group, ignore, ...rest } = options;
     if (!rest.draggable) {
       delete rest.draggable;
     }
 
+    const ignoreElements = [...this.el.querySelectorAll(ignore)];
+
     this.sortable = new Sortable(el, {
       ...rest,
+      scroll: true,
+      onMove: (evt, originalEvent) => {
+        if (ignoreElements.length) {
+          let dragged: HTMLElement;
+          let target: HTMLElement;
+
+          if (evt.dragged.classList.contains("m-sortable__item")) {
+            dragged = evt.dragged.firstElementChild as HTMLElement;
+          } else {
+            dragged = evt.dragged as HTMLElement;
+          }
+
+          if (evt.related.classList.contains("m-sortable__item")) {
+            target = evt.related.firstElementChild as HTMLElement;
+          } else {
+            target = evt.related as HTMLElement;
+          }
+
+          if (
+            ignoreElements.includes(dragged) ||
+            ignoreElements.includes(target)
+          ) {
+            return false;
+          }
+        }
+        return true;
+      },
       group: group && {
         name: group.name,
         pull: group.pulls,
