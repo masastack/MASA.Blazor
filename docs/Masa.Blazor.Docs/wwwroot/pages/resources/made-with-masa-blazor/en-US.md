@@ -12,7 +12,8 @@ A list of projects using MASA Blazor. If your project uses MASA Blazor, feel fre
 
 ## Community Projects
 
-<app-alert type="warning" content="No guarantee of project code quality and functionality, for reference only."></app-alert>
+<app-alert type="warning" content="No guarantee of project code quality and functionality, for reference only."><
+/app-alert>
 
 | Project                                                           | Tag           | Description                                           |
 |-------------------------------------------------------------------|---------------|-------------------------------------------------------|
@@ -20,4 +21,5 @@ A list of projects using MASA Blazor. If your project uses MASA Blazor, feel fre
 | [CnGal](https://github.com/CnGal/CnGalWebSite)                    | tags:web;pwa  | CnGal Information Station                             |
 | [SwashbucklerDiary](https://github.com/Yu-Core/SwashbucklerDiary) | tags:maui;web | An open source cross platform local diary application |
 | [ThingsGateway](https://github.com/kimdiego2098/ThingsGateway)    | tags:web;iot  | NetCore 跨平台边缘采集网关(工业设备采集)                             |
-| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      |                                                       |
+| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      | A demo of weather forecast                            |
+| [AnotherFSM](https://github.com/Naoki326/AnotherFSM)              | tags: wasm    | Finite state machine tool built on Drawflow           |

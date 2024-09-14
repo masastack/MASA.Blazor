@@ -93,3 +93,7 @@ builder.Services.AddServerSideBlazor(options =>
 
 }
 ```
+
+## 社区资源
+
+- 基于 Drawflow 构建的有限状态机工具 [AnotherFSM](https://github.com/Naoki326/AnotherFSM)

@@ -18173,7 +18173,7 @@ html.overflow-y-hidden {
     opacity: 0.12;
 }
 .theme--light.m-icon.m-icon.m-icon--disabled {
-    color: rgba(0, 0, 0, 0.38) !important;
+    color: rgba(0, 0, 0, 0.24) !important;
 }
 
 .theme--dark.m-icon {
@@ -18183,7 +18183,7 @@ html.overflow-y-hidden {
     opacity: 0.24;
 }
 .theme--dark.m-icon.m-icon.m-icon--disabled {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(255, 255, 255, 0.42) !important;
 }
 
 .m-icon.m-icon {

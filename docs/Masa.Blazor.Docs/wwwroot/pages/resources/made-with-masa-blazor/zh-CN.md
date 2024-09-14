@@ -8,7 +8,7 @@
 |---------------------------------------------------------------------------|--------------------------------|-------------------------------------------|
 | [Masa.Blazor.Pro](https://github.com/masastack/MASA.Blazor.Pro)           | tags:webapp;global interactive | Material design admin template for blazor |
 | [Masa.Blazor.MauiDemo](https://github.com/masastack/Masa.Blazor.MauiDemo) | tags:maui;server               | MAUI hybrid with MASA Blazor Sample App   |
-| [OfficialWebsite](https://github.com/masastack/OfficialWebsite)           | tags:static SSR         | MASA 官网源码                                 |
+| [OfficialWebsite](https://github.com/masastack/OfficialWebsite)           | tags:static SSR                | MASA 官网源码                                 |
 
 ## 社区项目
 
@@ -20,4 +20,5 @@
 | [CnGal](https://github.com/CnGal/CnGalWebSite)                    | tags:web;pwa  | CnGal Information Station                              |
 | [SwashbucklerDiary](https://github.com/Yu-Core/SwashbucklerDiary) | tags:maui;web | An open source, cross platform local diary application |
 | [ThingsGateway](https://github.com/kimdiego2098/ThingsGateway)    | tags:web;iot  | NetCore 跨平台边缘采集网关(工业设备采集)                              |
-| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      |                                                        |
+| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      | 天气预报示例                                                 |
+| [AnotherFSM](https://github.com/Naoki326/AnotherFSM)              | tags:wasm     | 基于 Drawflow 构建的有限状态机工具                                 |
