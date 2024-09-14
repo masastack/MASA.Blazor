@@ -26,10 +26,13 @@ public partial class MDataTableMobileRow<TItem>
     public RenderFragment<DataTableHeader>? HeaderColContent { get; set; }
 
     [Parameter]
-    public Func<TItem, bool>? IsSelected { get; set; }
+    public bool Disabled { get; set; }
 
     [Parameter]
-    public Func<TItem, bool>? IsExpanded { get; set; }
+    public bool IsSelected { get; set; }
+
+    [Parameter]
+    public bool IsExpanded { get; set; }
 
     [Parameter]
     public Func<TItem, string?>? ItemClass { get; set; }
@@ -46,12 +49,12 @@ public partial class MDataTableMobileRow<TItem>
     {
         yield return _row.Name;
 
-        if (IsSelected?.Invoke(Item) is true)
+        if (IsSelected)
         {
             yield return "m-data-table__selected";
         }
 
-        if (IsExpanded?.Invoke(Item) is true)
+        if (IsExpanded)
         {
             yield return "m-data-table__expanded m-data-table__expanded__row";
         }
@@ -59,6 +62,11 @@ public partial class MDataTableMobileRow<TItem>
         if (IsStripe)
         {
             yield return "stripe";
+        }
+
+        if (Disabled)
+        {
+            yield return "m-data-table__disabled";
         }
 
         yield return ItemClass?.Invoke(Item) ?? "";
