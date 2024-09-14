@@ -250,11 +250,16 @@
 
     private RenderFragment GenDefaultSimpleRow(TItem item, int index) => __builder =>
     {
+        var disabled = IsSelectable(item) == false;
+        var isSelected = IsSelected(item);
+        var isExpanded = IsExpanded(item);
+        
         Dictionary<string, object?> parameters = new()
         {
             { nameof(MDataTableRow<TItem>.Headers), ComputedHeaders },
-            { nameof(MDataTableRow<TItem>.IsSelected), (Func<TItem, bool>)IsSelected },
-            { nameof(MDataTableRow<TItem>.IsExpanded), (Func<TItem, bool>)IsExpanded },
+            { nameof(MDataTableRow<TItem>.IsSelected), isSelected },
+            { nameof(MDataTableRow<TItem>.IsExpanded), isExpanded },
+            { nameof(MDataTableRow<TItem>.Disabled), disabled},
             { nameof(MDataTableRow<TItem>.Stripe), Stripe },
             { nameof(MDataTableRow<TItem>.ItemClass), ItemClass },
             { nameof(MDataTableRow<TItem>.Index), index },
@@ -298,8 +303,8 @@
                     index,
                     EventCallback.Factory.Create<bool>(this, val => Expand(item, val)),
                     EventCallback.Factory.Create<bool>(this, val => Select(item, val)),
-                    IsExpanded(item),
-                    IsSelected(item),
+                    isExpanded,
+                    isSelected,
                     ComputedHeaders.ToList(),
                     EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowClickAsync(e, item)),
                     EventCallback.Factory.Create<MouseEventArgs>(this, e => HandleOnRowDblClickAsync(e, item)),
@@ -315,10 +320,8 @@
                 }
                 else
                 {
-                    var expanded = IsExpanded(item);
-
-                    <MIcon Class="@($"m-data-table__expand-icon {(expanded ? "m-data-table__expand-icon--active" : "")}")"
-                           OnClick="@(() => Expand(item, !expanded))"
+                    <MIcon Class="@($"m-data-table__expand-icon {(isExpanded ? "m-data-table__expand-icon--active" : "")}")"
+                           OnClick="@(() => Expand(item, !isExpanded))"
                            OnClickStopPropagation>
                         @ExpandIcon
                     </MIcon>
@@ -326,15 +329,15 @@
             }
             else if (HasSelect((context)))
             {
-                if (ItemDataTableSelectContent != null)
+            if (ItemDataTableSelectContent != null)
                 {
                     @ItemDataTableSelectContent(CreateExpandOrSelectContext())
                 }
                 else
                 {
                     <MSimpleCheckbox Class="m-data-table__checkbox"
-                                     Value="@IsSelected(item)"
-                                     Disabled="@(!IsSelectable(item))"
+                                     Value="@isSelected"
+                                     Disabled="@disabled"
                                      Color="@(CheckboxColor ?? "")"
                                      ValueChanged="val => Select(item, val)">
                     </MSimpleCheckbox>

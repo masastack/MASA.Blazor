@@ -301,7 +301,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
 
     public bool IsSelectable(TItem item)
     {
-        return SelectableKey?.Invoke(item) != false;
+        return SelectableKey?.Invoke(item) is null or true;
     }
 
     public void ToggleSelectAll(bool value)
