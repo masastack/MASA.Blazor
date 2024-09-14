@@ -56,17 +56,27 @@ public struct StyleBuilder
         return Add(value == 0 ? $"{name}: 0" : $"{name}: {value}{unit}".ToString(CultureInfo.InvariantCulture));
     }
 
+    public void Clear()
+    {
+        _stringBuilder.Clear();
+    }
+
     public IEnumerable<string> GenerateCssStyles()
     {
         yield return _stringBuilder.ToString();
     }
 
-    public string Build()
+    public string? Build()
     {
+        if (_stringBuilder.Length == 0)
+        {
+            return null;
+        }
+
         return _stringBuilder.ToString();
     }
 
-    public override string ToString()
+    public override string? ToString()
     {
         return Build();
     }

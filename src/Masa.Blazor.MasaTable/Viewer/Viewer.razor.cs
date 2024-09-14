@@ -50,6 +50,7 @@ public partial class Viewer<TItem> : IAsyncDisposable
     private string? _tableSelector;
 
     private HashSet<string>? _prevHiddenColumnIds;
+    private List<string>? _prevColumnOrder;
 
     private HashSet<EventCallback<TItem>> _actions = [];
     private StyleBuilder _headerColumnStyleBuilder = new();
@@ -61,11 +62,7 @@ public partial class Viewer<TItem> : IAsyncDisposable
     private bool HasActions => ActionsCount > 0;
 
     private IList<ColumnTemplate<TItem, object>> _visibleColumnTemplates = [];
-
-    private IEnumerable<ColumnTemplate<TItem, object>> OrderedColumnTemplates
-    {
-        get { return _visibleColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)); }
-    }
+    private IList<ColumnTemplate<TItem, object>> OrderedColumnTemplates = [];
 
     protected override void OnInitialized()
     {
@@ -84,6 +81,12 @@ public partial class Viewer<TItem> : IAsyncDisposable
         {
             _prevHiddenColumnIds = HiddenColumnIds;
             _visibleColumnTemplates = ColumnTemplates.Where(c => !HiddenColumnIds.Contains(c.Column.Id)).ToList();
+        }
+
+        if (_prevColumnOrder is null || _prevColumnOrder.SequenceEqual(ColumnOrder) is false)
+        {
+            _prevColumnOrder = ColumnOrder;
+            OrderedColumnTemplates = _visibleColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)).ToList();
         }
     }
 
