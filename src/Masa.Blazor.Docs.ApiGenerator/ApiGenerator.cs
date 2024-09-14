@@ -221,14 +221,30 @@ public class ApiGenerator : IIncrementalGenerator
 
                         if (namedTypeSymbol.Name.StartsWith("RenderFragment"))
                         {
+                            // same name parameter from base class has been overridden, so ignore it.
+                            if (contentParameters.Any(u => u.Name == parameterInfo.Name))
+                            {
+                                continue;
+                            }
+
                             contentParameters.Add(parameterInfo);
                         }
                         else if (namedTypeSymbol.Name.StartsWith("EventCallback"))
                         {
+                            if (eventParameters.Any(u => u.Name == parameterInfo.Name))
+                            {
+                                continue;
+                            }
+                            
                             eventParameters.Add(parameterInfo);
                         }
                         else
                         {
+                            if (defaultParameters.Any(u => u.Name == parameterInfo.Name))
+                            {
+                                continue;
+                            }
+                            
                             defaultParameters.Add(parameterInfo);
                         }
                     }

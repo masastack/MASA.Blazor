@@ -18173,7 +18173,7 @@ html.overflow-y-hidden {
     opacity: 0.12;
 }
 .theme--light.m-icon.m-icon.m-icon--disabled {
-    color: rgba(0, 0, 0, 0.38) !important;
+    color: rgba(0, 0, 0, 0.24) !important;
 }
 
 .theme--dark.m-icon {
@@ -18183,7 +18183,7 @@ html.overflow-y-hidden {
     opacity: 0.24;
 }
 .theme--dark.m-icon.m-icon.m-icon--disabled {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(255, 255, 255, 0.42) !important;
 }
 
 .m-icon.m-icon {
@@ -21714,6 +21714,7 @@ html.overflow-y-hidden {
     transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     width: 100%;
     z-index: inherit;
+    outline: none;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 .m-dialog:not(.m-dialog--fullscreen) {

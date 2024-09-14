@@ -90,3 +90,7 @@ builder.Services.AddServerSideBlazor(options =>
 
 }
 ```
+
+## Community Projects
+
+- A tool for finite state machine built on Drawflow [AnotherFSM](https://github.com/Naoki326/AnotherFSM)
