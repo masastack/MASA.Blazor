@@ -23,6 +23,12 @@ Use `Grayscale` to make the image gray.
 
 <masa-example file="Examples.labs.watermark.Color"></masa-example>
 
+#### Chinese
+
+To display Chinese, you need to provide a font that supports Chinese.
+
+<masa-example file="Examples.labs.watermark.Chinese"></masa-example>
+
 ### Misc
 
 #### Fallback to text

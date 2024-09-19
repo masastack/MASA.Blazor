@@ -31,6 +31,10 @@ public partial class MWatermark : MasaComponentBase
 
     [Parameter] public int GapY { get; set; }
 
+    [MasaApiParameter(ReleasedOn = "v1.7.3")]
+    [Parameter]
+    public SKTypeface? Typeface { get; set; }
+
     /// <summary>
     /// Determines whether the watermark is grayscale. Only works when <see cref="Image"/> is not null.
     /// </summary>
@@ -58,7 +62,8 @@ public partial class MWatermark : MasaComponentBase
                 nameof(Top),
                 nameof(GapX),
                 nameof(GapY),
-                nameof(Grayscale)))
+                nameof(Grayscale),
+                nameof(Typeface)))
         {
             await UpdateWatermark();
         }
@@ -127,7 +132,8 @@ public partial class MWatermark : MasaComponentBase
             TextSize = TextSize,
             Color = Color,
             IsAntialias = true,
-            Style = SKPaintStyle.Fill
+            Style = SKPaintStyle.Fill,
+            Typeface = Typeface
         };
 
         SKRect textBounds = new();

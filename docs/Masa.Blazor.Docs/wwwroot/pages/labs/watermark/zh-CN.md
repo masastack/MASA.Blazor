@@ -21,6 +21,12 @@ desc: "给某个区域加上水印。"
 
 <masa-example file="Examples.labs.watermark.Color"></masa-example>
 
+#### 中文
+
+设置中文需要提供支持中文的字体。
+
+<masa-example file="Examples.labs.watermark.Chinese"></masa-example>
+
 ### 其他
 
 #### 回退到文字

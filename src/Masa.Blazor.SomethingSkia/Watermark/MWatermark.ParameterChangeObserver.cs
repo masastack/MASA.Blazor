@@ -20,6 +20,7 @@ public partial class MWatermark
     private int __prevGapX;
     private int __prevGapY;
     private bool __prevIsGrayscale;
+    private SKTypeface? __prevTypeface;
 
     private bool AnyParameterChanged(params string[] parameterNames)
     {
@@ -83,6 +84,12 @@ public partial class MWatermark
         {
             __prevIsGrayscale = Grayscale;
             anyChanged = parameterNames.Contains(nameof(Grayscale));
+        }
+        
+        if (__prevTypeface != Typeface)
+        {
+            __prevTypeface = Typeface;
+            anyChanged = parameterNames.Contains(nameof(Typeface));
         }
 
         return anyChanged;
