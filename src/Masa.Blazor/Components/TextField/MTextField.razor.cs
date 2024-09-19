@@ -485,9 +485,15 @@ public partial class MTextField<TValue> : MInput<TValue>
             return false;
         }
 
-        await InputElement.FocusAsync();
-
-        return true;
+        try
+        {
+            await InputElement.FocusAsync();
+            return true;
+        }
+        catch (JSException)
+        {
+            return false;
+        }
     }
 
     private async Task OnResize()
