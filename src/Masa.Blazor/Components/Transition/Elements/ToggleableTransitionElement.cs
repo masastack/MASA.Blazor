@@ -4,11 +4,6 @@ namespace Masa.Blazor;
 
 public class ToggleableTransitionElement : TransitionElementBase<bool>
 {
-    public ToggleableTransitionElement(ConditionType conditionType = ConditionType.Show)
-    {
-        ConditionType = conditionType;
-    }
-
     [Parameter] public ConditionType ConditionType { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
