@@ -2,4 +2,12 @@
 
 namespace Masa.Blazor;
 
-public class ShowTransitionElement() : ToggleableTransitionElement(ConditionType.Show);
+public class ShowTransitionElement : ToggleableTransitionElement
+{
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        ConditionType = ConditionType.Show;
+    }
+}
