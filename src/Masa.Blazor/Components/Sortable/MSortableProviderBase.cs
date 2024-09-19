@@ -188,7 +188,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
 
     private RenderRateLimiter? _renderRateLimiter;
 
-    protected abstract string ContainerSelector { get; }
+    protected abstract string? ContainerSelector { get; }
 
     protected override void OnInitialized()
     {
@@ -247,16 +247,23 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     {
         await base.OnAfterRenderAsync(firstRender);
 
-        if (firstRender)
-        {
-            if (_sortableJSInteropHandle is null)
-            {
-                return;
-            }
+        await InitAsync();
+    }
 
-            _jsObjectReference =
-                await SortableJSModule.InitAsync(ContainerSelector, GenOptions(), Order, _sortableJSInteropHandle);
+    private async Task InitAsync()
+    {
+        if (_jsObjectReference is not null)
+        {
+            return;
         }
+        
+        if (_sortableJSInteropHandle is null || ContainerSelector is null)
+        {
+            return;
+        }
+        
+        _jsObjectReference =
+            await SortableJSModule.InitAsync(ContainerSelector, GenOptions(), Order, _sortableJSInteropHandle);
     }
 
     private SortableOptions GenOptions()
