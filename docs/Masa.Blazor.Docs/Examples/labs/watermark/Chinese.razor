@@ -1,26 +1,34 @@
 ﻿@using SkiaSharp
 
-<MWatermark Text="雅黑" Typeface="@_typeface">
+@* Needs register HttpClient with builder.HostEnvironment.BaseAddress in Program.cs *@
+@inject IHttpClientFactory HttpClientFactory
+
+@* uncomment the following line when hosting on server side *@
+@* @inject IWebHostEnvironment Environment *@
+
+<MWatermark Text="中文" Typeface="@_typeface">
     <div style="height: 300px;"></div>
 </MWatermark>
 
 @code {
 
-    private SKTypeface? _typeface = SKTypeface.FromFamilyName("Microsoft YaHei");
-    
-    // protected override void OnAfterRender(bool firstRender)
-    // {
-    //     if (firstRender)
-    //     {
-    //         _typeface = SKTypeface.FromFile(GetFontPath());
-    //         StateHasChanged();
-    //     }
-    // }
+    private SKTypeface? _typeface;
 
-    // private static string GetFontPath()
-    // {
-    //     // Server side
-    //     var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //     return Path.Combine(dir, "wwwroot", "ABC.ttf");
-    // }
+    protected override async Task OnInitializedAsync()
+    {
+        _typeface = await GetFontAsync();
+    }
+
+    private async Task<SKTypeface> GetFontAsync()
+    {
+        // Server side
+        // var path = Path.Combine(Environment.WebRootPath, "SourceHanSansCN-Normal.otf");
+        // return SKTypeface.FromFile(path);
+
+        // Client side
+        var httpClient = HttpClientFactory.CreateClient("masa-docs");
+        await using var stream = await httpClient.GetStreamAsync("_content/Masa.Blazor.Docs/fonts/SourceHanSansCN-Normal.otf");
+        return SKTypeface.FromStream(stream);
+    }
+
 }
