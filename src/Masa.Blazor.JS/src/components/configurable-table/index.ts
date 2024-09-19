@@ -1,137 +1,118 @@
-export function resizableDataTable(dataTable: HTMLElement, dotNETHelper: DotNet.DotNetObject) {
-  const table = dataTable.querySelector("table");
-  const header = table.querySelector("thead").getElementsByTagName("tr")[0];
+class ResizableDataTable {
+  private dataTable: HTMLElement;
+  private dotnetHelper: DotNet.DotNetObject;
+  private table: HTMLTableElement;
+  private header: HTMLTableRowElement;
+  private pageX: number;
+  private curCol: HTMLElement;
+  private nxtCol: HTMLElement;
+  private curColWidth: number;
+  private nxtColWidth: number;
+  private tableWidth: number;
+  private documentEventRegistered: boolean;
 
-  let pageX: number;
-  let curCol: HTMLElement;
-  let nxtCol: HTMLElement;
-  let curColWidth: number;
-  let nxtColWidth: number;
-  let tableWidth: number;
-  let documentEventRegistered = false;
+  constructor(dataTable: HTMLElement, dotNETHelper: DotNet.DotNetObject) {
+    this.dataTable = dataTable;
+    this.dotnetHelper = dotNETHelper;
+    this.table = this.dataTable.querySelector("table");
+    this.header = this.table.querySelector("thead").getElementsByTagName("tr")[0];
+    this.documentEventRegistered = false;
 
-  var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      if (mutation.addedNodes.length) {
-        (Array.from(mutation.addedNodes) as HTMLElement[]).forEach((el) => {
-          const resizeActivator: HTMLDivElement = el.querySelector(
-            ".masa-table-viewer__header-column-resize"
-          );
-          if (resizeActivator) {
-            setListeners(resizeActivator);
-          }
-        });
-      }
-
-      if (mutation.removedNodes.length) {
-        (Array.from(mutation.removedNodes) as HTMLElement[]).forEach((el) => {
-          const resizeActivator: HTMLDivElement = el.querySelector(
-            ".masa-table-viewer__header-column-resize"
-          );
-          if (resizeActivator) {
-            resizeActivator.removeEventListener("mousedown", mousedown);
-          }
-        });
-      }
-    });
-  });
-
-  header && observer.observe(header, { childList: true });
-  // todo: remove observer on dispose
-
-  const cols = header ? header.children : [];
-  if (!cols) return;
-
-  for (var i = 0; i < cols.length; i++) {
-    const col: any = cols[i];
-    const colResizeDiv: HTMLDivElement = col.querySelector(
-      ".masa-table-viewer__header-column-resize"
-    );
-    if (!colResizeDiv) continue;
-
-    setListeners(colResizeDiv);
+    this.init();
   }
 
-  function setListeners(div: HTMLDivElement) {
-    div.addEventListener("click", (e) => e.stopPropagation());
-    div.addEventListener("mousedown", mousedown);
-
-    if (documentEventRegistered === false) {
-      document.addEventListener("mousemove", mousemove);
-      document.addEventListener("mouseup", mouseup);
+  private init() {
+    if (!this.documentEventRegistered) {
+      document.addEventListener("mousemove", this.mousemove.bind(this));
+      document.addEventListener("mouseup", this.mouseup.bind(this));
+      this.documentEventRegistered = true;
     }
+
+    this.header.addEventListener("mousedown", this.wrapperMousedown.bind(this));
   }
 
-  function paddingDiff(col) {
-    if (getStyleVal(col, "box-sizing") == "border-box") {
+  private paddingDiff(col: HTMLElement): number {
+    if (this.getStyleVal(col, "box-sizing") == "border-box") {
       return 0;
     }
 
-    var padLeft = getStyleVal(col, "padding-left");
-    var padRight = getStyleVal(col, "padding-right");
+    const padLeft = this.getStyleVal(col, "padding-left");
+    const padRight = this.getStyleVal(col, "padding-right");
     return parseInt(padLeft) + parseInt(padRight);
   }
 
-  function getStyleVal(elm, css) {
+  private getStyleVal(elm: HTMLElement, css: string): string {
     return window.getComputedStyle(elm, null).getPropertyValue(css);
   }
 
-  function mousedown (e: MouseEvent) {
-    curCol = (e.target as HTMLElement).parentElement;
-    nxtCol = curCol.nextElementSibling as HTMLElement;
-    pageX = e.pageX;
+  private wrapperMousedown(e: MouseEvent) {
+    if (e.target instanceof HTMLElement && e.target.classList.contains("masa-table-viewer__header-column-resize")) {
+      this.mousedown(e);
+    }
+  }
 
-    tableWidth = table.offsetWidth;
+  private mousedown(e: MouseEvent) {
+    this.curCol = (e.target as HTMLElement).parentElement;
+    this.nxtCol = this.curCol.nextElementSibling as HTMLElement;
+    this.pageX = e.pageX;
 
-    var padding = paddingDiff(curCol);
+    this.tableWidth = this.table.offsetWidth;
 
-    curColWidth = curCol.offsetWidth - padding;
-    if (nxtCol) nxtColWidth = nxtCol.offsetWidth - padding;
-  };
+    const padding = this.paddingDiff(this.curCol);
 
-  function mousemove(e: MouseEvent) {
-    if (curCol) {
-      let diffX = e.pageX - pageX;
+    this.curColWidth = this.curCol.offsetWidth - padding;
+    if (this.nxtCol) this.nxtColWidth = this.nxtCol.offsetWidth - padding;
+  }
 
-      const isRtl = dataTable.classList.contains("m-data-table--rtl");
+  private mousemove(e: MouseEvent) {
+    if (this.curCol) {
+      let diffX = e.pageX - this.pageX;
+
+      const isRtl = this.dataTable.classList.contains("m-data-table--rtl");
       if (isRtl) {
         diffX = 0 - diffX;
       }
 
-      let newCurColWidth = curColWidth + diffX;
+      let newCurColWidth = this.curColWidth + diffX;
 
-      const minWidth = getComputedStyle(curCol).minWidth;
+      const minWidth = getComputedStyle(this.curCol).minWidth;
       if (minWidth && newCurColWidth < parseInt(minWidth)) {
         newCurColWidth = parseInt(minWidth);
-        diffX = newCurColWidth - curColWidth;
+        diffX = newCurColWidth - this.curColWidth;
       }
 
       const maxWidth = 300;
       if (newCurColWidth > maxWidth) {
         newCurColWidth = maxWidth;
-        diffX = newCurColWidth - curColWidth;
+        diffX = newCurColWidth - this.curColWidth;
       }
 
-      const columnId = curCol.getAttribute('data-column-id');
-      dotNETHelper.invokeMethodAsync("OnColumnWidthResize", columnId, newCurColWidth);
+      const columnId = this.curCol.getAttribute("data-id");
+      this.dotnetHelper.invokeMethodAsync("OnColumnWidthResize", columnId, newCurColWidth);
 
-      curCol.style.width = newCurColWidth + "px";
-      table.style.width = tableWidth + diffX + "px";
+      this.curCol.style.width = newCurColWidth + "px";
+      this.table.style.width = this.tableWidth + diffX + "px";
     }
-  };
+  }
 
-  function mouseup(e: MouseEvent) {
-    if (curCol) {
-      for (let i = 0; i < cols.length; i++) {
-        const col: any = cols[i];
-        col.style.width = col["offsetWidth"] + "px";
-      }
-    }
-    curCol = undefined;
-    nxtCol = undefined;
-    pageX = undefined;
-    nxtColWidth = undefined;
-    curColWidth = undefined;
-    tableWidth = undefined;
-  };
+  private mouseup(e: MouseEvent) {
+    this.curCol = undefined;
+    this.nxtCol = undefined;
+    this.pageX = undefined;
+    this.nxtColWidth = undefined;
+    this.curColWidth = undefined;
+    this.tableWidth = undefined;
+  }
+
+  public dispose() {
+    this.header.removeEventListener("mousedown", this.wrapperMousedown.bind(this));
+    document.removeEventListener("mousemove", this.mousemove.bind(this));
+    document.removeEventListener("mouseup", this.mouseup.bind(this));
+    this.documentEventRegistered = false;
+    this.dotnetHelper.dispose();
+  }
+}
+
+export function init(  dataTable: HTMLElement,  dotNETHelper: DotNet.DotNetObject) {
+  return new ResizableDataTable(dataTable, dotNETHelper);
 }

@@ -1,11 +1,15 @@
-﻿<MMenu MinWidth="180" OffsetY Transition="slide-y-transition">
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<MMenu MinWidth="180" OffsetY Transition="slide-y-transition">
     <ActivatorContent>
         @if (ActivatorContent is null)
         {
             <MButton Class="menu"
                      Small
                      IconName="@Icon"
-                     @attributes="@context.Attrs">
+                     @attributes="@context.Attrs"
+                     @ref="_defaultBtn">
             </MButton>
         }
         else
@@ -27,4 +31,15 @@
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
+
+    private MButton? _defaultBtn;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && _defaultBtn is not null)
+        {
+            _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, _defaultBtn.Ref, "pointerdown");
+        }
+    }
+
 }

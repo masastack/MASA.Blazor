@@ -2,6 +2,7 @@
 using Masa.Blazor.Core;
 using Masa.Blazor.Extensions;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 
 namespace Masa.Blazor.MasaTable;
@@ -41,8 +42,10 @@ public partial class Viewer<TItem> : IAsyncDisposable
     // ReSharper disable once StaticMemberInGenericType
     private static Block _block = new("masa-table-viewer");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private StyleBuilder _styleBuilder = new();
 
     private bool _sized;
+    private ElementReference _headerTrRef;
 
     private bool _imageViewer;
     private IList<string> _imagesToView = [];
@@ -61,7 +64,14 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     private bool HasActions => ActionsCount > 0;
 
-    private IList<ColumnTemplate<TItem, object>> _visibleColumnTemplates = [];
+    private int RowHeightValue => RowHeight switch
+    {
+        RowHeight.Low => 42,
+        RowHeight.Medium => 63,
+        RowHeight.High => 105,
+        _ => throw new ArgumentOutOfRangeException()
+    };
+
     private IList<ColumnTemplate<TItem, object>> OrderedColumnTemplates = [];
 
     protected override void OnInitialized()
@@ -77,17 +87,7 @@ public partial class Viewer<TItem> : IAsyncDisposable
     {
         base.OnParametersSet();
 
-        if (_prevHiddenColumnIds is null || _prevHiddenColumnIds.SetEquals(HiddenColumnIds) is false)
-        {
-            _prevHiddenColumnIds = HiddenColumnIds;
-            _visibleColumnTemplates = ColumnTemplates.Where(c => !HiddenColumnIds.Contains(c.Column.Id)).ToList();
-        }
-
-        if (_prevColumnOrder is null || _prevColumnOrder.SequenceEqual(ColumnOrder) is false)
-        {
-            _prevColumnOrder = ColumnOrder;
-            OrderedColumnTemplates = _visibleColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)).ToList();
-        }
+        OrderedColumnTemplates = ColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)).ToList();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -100,7 +100,7 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
             _tableJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor.MasaTable/MTemplateTable.razor.js");
-            await _tableJSObjectReference.InvokeVoidAsync("resizableDataTable", _simpleTable.Ref,
+            await _tableJSObjectReference.InvokeVoidAsync("init", _simpleTable.Ref,
                 _dotNetObjectReference);
 
             _sized = true;
@@ -116,6 +116,11 @@ public partial class Viewer<TItem> : IAsyncDisposable
         }
 
         return null;
+    }
+
+    private ValueTask<ItemsProviderResult<TItem>> ItemsProvider(ItemsProviderRequest _)
+    {
+        return new ValueTask<ItemsProviderResult<TItem>>(new ItemsProviderResult<TItem>(Rows, Rows.Count()));
     }
 
     private void OpenImageViewer(IList<string> images)
@@ -143,7 +148,10 @@ public partial class Viewer<TItem> : IAsyncDisposable
         try
         {
             if (_tableJSObjectReference != null)
+            {
+                await _tableJSObjectReference.InvokeVoidAsync("dispose");
                 await _tableJSObjectReference.DisposeAsync().ConfigureAwait(false);
+            }
         }
         catch (JSDisconnectedException)
         {

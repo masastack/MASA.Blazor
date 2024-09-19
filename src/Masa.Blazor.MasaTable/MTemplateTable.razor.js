@@ -1,109 +1,89 @@
-function resizableDataTable(dataTable, dotNETHelper) {
-    const table = dataTable.querySelector("table");
-    const header = table.querySelector("thead").getElementsByTagName("tr")[0];
-    let pageX;
-    let curCol;
-    let nxtCol;
-    let curColWidth;
-    let tableWidth;
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.addedNodes.length) {
-                Array.from(mutation.addedNodes).forEach((el) => {
-                    const resizeActivator = el.querySelector(".masa-table-viewer__header-column-resize");
-                    if (resizeActivator) {
-                        setListeners(resizeActivator);
-                    }
-                });
-            }
-            if (mutation.removedNodes.length) {
-                Array.from(mutation.removedNodes).forEach((el) => {
-                    const resizeActivator = el.querySelector(".masa-table-viewer__header-column-resize");
-                    if (resizeActivator) {
-                        resizeActivator.removeEventListener("mousedown", mousedown);
-                    }
-                });
-            }
-        });
-    });
-    header && observer.observe(header, { childList: true });
-    const cols = header ? header.children : [];
-    if (!cols)
-        return;
-    for (var i = 0; i < cols.length; i++) {
-        const col = cols[i];
-        const colResizeDiv = col.querySelector(".masa-table-viewer__header-column-resize");
-        if (!colResizeDiv)
-            continue;
-        setListeners(colResizeDiv);
+class ResizableDataTable {
+    constructor(dataTable, dotNETHelper) {
+        this.dataTable = dataTable;
+        this.dotnetHelper = dotNETHelper;
+        this.table = this.dataTable.querySelector("table");
+        this.header = this.table.querySelector("thead").getElementsByTagName("tr")[0];
+        this.documentEventRegistered = false;
+        this.init();
     }
-    function setListeners(div) {
-        div.addEventListener("click", (e) => e.stopPropagation());
-        div.addEventListener("mousedown", mousedown);
-        {
-            document.addEventListener("mousemove", mousemove);
-            document.addEventListener("mouseup", mouseup);
+    init() {
+        if (!this.documentEventRegistered) {
+            document.addEventListener("mousemove", this.mousemove.bind(this));
+            document.addEventListener("mouseup", this.mouseup.bind(this));
+            this.documentEventRegistered = true;
         }
+        this.header.addEventListener("mousedown", this.wrapperMousedown.bind(this));
     }
-    function paddingDiff(col) {
-        if (getStyleVal(col, "box-sizing") == "border-box") {
+    paddingDiff(col) {
+        if (this.getStyleVal(col, "box-sizing") == "border-box") {
             return 0;
         }
-        var padLeft = getStyleVal(col, "padding-left");
-        var padRight = getStyleVal(col, "padding-right");
+        const padLeft = this.getStyleVal(col, "padding-left");
+        const padRight = this.getStyleVal(col, "padding-right");
         return parseInt(padLeft) + parseInt(padRight);
     }
-    function getStyleVal(elm, css) {
+    getStyleVal(elm, css) {
         return window.getComputedStyle(elm, null).getPropertyValue(css);
     }
-    function mousedown(e) {
-        curCol = e.target.parentElement;
-        nxtCol = curCol.nextElementSibling;
-        pageX = e.pageX;
-        tableWidth = table.offsetWidth;
-        var padding = paddingDiff(curCol);
-        curColWidth = curCol.offsetWidth - padding;
-        if (nxtCol)
-            nxtCol.offsetWidth - padding;
+    wrapperMousedown(e) {
+        if (e.target instanceof HTMLElement && e.target.classList.contains("masa-table-viewer__header-column-resize")) {
+            this.mousedown(e);
+        }
     }
-    function mousemove(e) {
-        if (curCol) {
-            let diffX = e.pageX - pageX;
-            const isRtl = dataTable.classList.contains("m-data-table--rtl");
+    mousedown(e) {
+        this.curCol = e.target.parentElement;
+        this.nxtCol = this.curCol.nextElementSibling;
+        this.pageX = e.pageX;
+        this.tableWidth = this.table.offsetWidth;
+        const padding = this.paddingDiff(this.curCol);
+        this.curColWidth = this.curCol.offsetWidth - padding;
+        if (this.nxtCol)
+            this.nxtColWidth = this.nxtCol.offsetWidth - padding;
+    }
+    mousemove(e) {
+        if (this.curCol) {
+            let diffX = e.pageX - this.pageX;
+            const isRtl = this.dataTable.classList.contains("m-data-table--rtl");
             if (isRtl) {
                 diffX = 0 - diffX;
             }
-            let newCurColWidth = curColWidth + diffX;
-            const minWidth = getComputedStyle(curCol).minWidth;
+            let newCurColWidth = this.curColWidth + diffX;
+            const minWidth = getComputedStyle(this.curCol).minWidth;
             if (minWidth && newCurColWidth < parseInt(minWidth)) {
                 newCurColWidth = parseInt(minWidth);
-                diffX = newCurColWidth - curColWidth;
+                diffX = newCurColWidth - this.curColWidth;
             }
             const maxWidth = 300;
             if (newCurColWidth > maxWidth) {
                 newCurColWidth = maxWidth;
-                diffX = newCurColWidth - curColWidth;
+                diffX = newCurColWidth - this.curColWidth;
             }
-            const columnId = curCol.getAttribute('data-column-id');
-            dotNETHelper.invokeMethodAsync("OnColumnWidthResize", columnId, newCurColWidth);
-            curCol.style.width = newCurColWidth + "px";
-            table.style.width = tableWidth + diffX + "px";
+            const columnId = this.curCol.getAttribute("data-id");
+            this.dotnetHelper.invokeMethodAsync("OnColumnWidthResize", columnId, newCurColWidth);
+            this.curCol.style.width = newCurColWidth + "px";
+            this.table.style.width = this.tableWidth + diffX + "px";
         }
     }
-    function mouseup(e) {
-        if (curCol) {
-            for (let i = 0; i < cols.length; i++) {
-                const col = cols[i];
-                col.style.width = col["offsetWidth"] + "px";
-            }
-        }
-        curCol = undefined;
-        nxtCol = undefined;
-        pageX = undefined;
-        curColWidth = undefined;
-        tableWidth = undefined;
+    mouseup(e) {
+        this.curCol = undefined;
+        this.nxtCol = undefined;
+        this.pageX = undefined;
+        this.nxtColWidth = undefined;
+        this.curColWidth = undefined;
+        this.tableWidth = undefined;
+    }
+    dispose() {
+        this.header.removeEventListener("mousedown", this.wrapperMousedown.bind(this));
+        document.removeEventListener("mousemove", this.mousemove.bind(this));
+        document.removeEventListener("mouseup", this.mouseup.bind(this));
+        this.documentEventRegistered = false;
+        this.dotnetHelper.dispose();
     }
 }
+function init(dataTable, dotNETHelper) {
+    return new ResizableDataTable(dataTable, dotNETHelper);
+}
 
-export { resizableDataTable };
+export { init };
 //# sourceMappingURL=MTemplateTable.razor.js.map

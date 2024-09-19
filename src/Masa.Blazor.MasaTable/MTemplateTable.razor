@@ -182,13 +182,12 @@
     {
         // reset the width of the table
         _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.SetStyle, _viewer?.GetTableSelector(), "width", null);
-        
+
         _internalSheet.ActiveViewId = viewId;
 
         AlignColumns();
 
         UpdateState();
-        
     }
 
     private void HandleOnColumnOrderChanged(List<string> order)
@@ -197,8 +196,8 @@
 
         _internalSheet.ActiveView.Columns.Sort((x, y) =>
         {
-            var xIndex = order.IndexOf(x.ColumnId);
-            var yIndex = order.IndexOf(y.ColumnId);
+            var xIndex = _columnOrder.IndexOf(x.ColumnId);
+            var yIndex = _columnOrder.IndexOf(y.ColumnId);
             return xIndex.CompareTo(yIndex);
         });
     }
