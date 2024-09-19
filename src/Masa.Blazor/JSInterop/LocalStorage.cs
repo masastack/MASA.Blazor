@@ -37,6 +37,9 @@ function() {
 
     public async Task SetItemAsync(string key, string value)
     {
+        // after serialization, the double quotes are escaped as \u0022, we need to replace it with \\" to make it work in JS
+        value = value.Replace("\\u0022", @"\\""");
+
         await _jsRuntime.InvokeVoidAsync("eval", $"({SET_ITEM_SCRIPT})('{key}', '{value}')");
     }
 
