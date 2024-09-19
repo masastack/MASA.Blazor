@@ -1,0 +1,26 @@
+﻿@using SkiaSharp
+
+<MWatermark Text="雅黑" Typeface="@_typeface">
+    <div style="height: 300px;"></div>
+</MWatermark>
+
+@code {
+
+    private SKTypeface? _typeface = SKTypeface.FromFamilyName("Microsoft YaHei");
+    
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         _typeface = SKTypeface.FromFile(GetFontPath());
+    //         StateHasChanged();
+    //     }
+    // }
+
+    // private static string GetFontPath()
+    // {
+    //     // Server side
+    //     var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    //     return Path.Combine(dir, "wwwroot", "ABC.ttf");
+    // }
+}
