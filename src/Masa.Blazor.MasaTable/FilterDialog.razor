@@ -1,0 +1,153 @@
+﻿<PModal @bind-Value="dialog"
+        Width="640"
+        Title="Filters">
+
+    @if (_filters.Count == 0)
+    {
+        <p class="grey--text">No filters applied</p>
+    }
+
+    @* @foreach (var filter in _filters) *@
+    @for (int i = 0; i < _filters.Count; i++)
+    {
+        var index = i;
+        var filter = _filters[index];
+
+        <div class="d-flex align-center mb-2">
+            <div style="width: 86px; max-width: 86px;"
+                 class="mr-2">
+                @if (index == 0)
+                {
+                    <span>When</span>
+                }
+                else if (index == 1)
+                {
+                    <MSelect @bind-Value="@_operator"
+                             Items="@Operators"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             Class="filter-operator"
+                             Dense
+                             Outlined
+                             HideDetails="@true">
+                    </MSelect>
+                }
+                else
+                {
+                    <span>@_operator</span>
+                }
+            </div>
+
+            <MSelect @bind-Value="@filter.ColumnId"
+                     Items="_computedColumns"
+                     ItemText="u => u.Name"
+                     ItemValue="u => u.Id"
+                     Label="Field"
+                     TItem="Column"
+                     TItemValue="string"
+                     TValue="string"
+                     Class="mr-2"
+                     Style="max-width: 150px"
+                     Dense
+                     Filled
+                     HideDetails="@true"
+                     OnSelect="@filter.OnSelect">
+            </MSelect>
+            <MSelect @bind-Value="@filter.Func"
+                     Items="@filter.FuncList"
+                     ItemText="u => u"
+                     ItemValue="u => u"
+                     Label="Func"
+                     Class="mr-2"
+                     Style="max-width: 200px"
+                     Dense
+                     Filled
+                     HideDetails="@true">
+            </MSelect>
+            @if (!_noExpectedFuncs.Contains(filter.Func))
+            {
+                <MTextField @bind-Value="@filter.Expected"
+                            Label="Expected"
+                            Filled
+                            Dense
+                            HideDetails="@true">
+                </MTextField>
+            }
+            <MSpacer/>
+            <MButton IconName="mdi-close"
+                     Class="mr-2">
+            </MButton>
+        </div>
+    }
+
+    <MButton Text
+             LeftIconName="mdi-plus"
+             Color="primary"
+             OnClick="@AddNewFilter">
+        Add filter
+    </MButton>
+</PModal>
+
+@code {
+
+    [Parameter] public IList<Column> Columns { get; set; } = [];
+
+    [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
+
+    [Parameter] public Guid ActiveViewId { get; set; }
+
+    private static readonly IList<string> Operators = ["and", "or"];
+    private static readonly HashSet<string> _noExpectedFuncs = ["Empty", "NotEmpty"];
+
+    private HashSet<string> _prevHiddenColumnIds = [];
+    private Guid _prevActiveViewId;
+
+    private IList<Column> _computedColumns = [];
+
+    /// <summary>
+    /// accepted values: "and", "or"
+    /// </summary>
+    private string _operator = "and";
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevActiveViewId != ActiveViewId || !_prevHiddenColumnIds.SetEquals(HiddenColumnIds))
+        {
+            _prevActiveViewId = ActiveViewId;
+            _prevHiddenColumnIds = HiddenColumnIds;
+            _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
+        }
+    }
+
+    private bool dialog;
+
+    private List<Filter> _filters = [];
+
+    internal void Open()
+    {
+        dialog = true;
+        StateHasChanged();
+    }
+
+    internal void OpenWithFilter(Column column)
+    {
+        dialog = true;
+        var filter = new Filter(column);
+        _filters.Add(filter);
+        StateHasChanged();
+    }
+
+    private void AddNewFilter()
+    {
+        if (Columns.Count == 0)
+        {
+            return;
+        }
+
+        var filter = new Filter(Columns.First());
+        _filters.Add(filter);
+    }
+
+}

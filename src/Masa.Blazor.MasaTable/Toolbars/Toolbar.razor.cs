@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Masa.Blazor.MasaTable;
+﻿namespace Masa.Blazor.MasaTable.Toolbars;
 
 public partial class Toolbar
 {
@@ -34,7 +32,10 @@ public partial class Toolbar
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
 
+    [Parameter] public EventCallback OnFilterClick { get; set; }
+
     private bool _configDialog;
+    private bool _filterDialog;
     private Guid _renamingView;
     private string? _newViewName;
     

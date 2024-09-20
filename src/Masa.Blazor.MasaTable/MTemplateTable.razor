@@ -43,7 +43,8 @@
                  OnViewRename="@RenameView"
                  OnViewDelete="@DeleteView"
                  OnColumnEditClick="@OpenColumnEditDialog"
-                 OnColumnToggle="@ToggleColumn"/>
+                 OnColumnToggle="@ToggleColumn"
+                 OnFilterClick="@(() => _filterDialog.Open())"/>
     }
 
     <Viewer ColumnTemplates="@_activeViewTemplateColumns"
@@ -67,9 +68,19 @@
               OnSave="UpdateColumn">
 </ColumnDialog>
 
+@if (_internalSheet != null)
+{
+    <FilterDialog @ref="_filterDialog"
+                  ActiveViewId="@_internalSheet.ActiveViewId"
+                  Columns="_internalSheet.Columns"
+                  HiddenColumnIds="@_hiddenColumnIds">
+    </FilterDialog>
+}
+
 @code {
 
     private ColumnDialog? _columnEditDialog;
+    private FilterDialog? _filterDialog;
     private RowHeight _rowHeight;
 
     private void AddNewView()
@@ -210,3 +221,4 @@
     }
 
 }
+

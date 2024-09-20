@@ -1,9 +1,4 @@
-﻿using System.Text.Json;
-using BemIt;
-using Masa.Blazor.MasaTable.ColumnConfigs;
-using Microsoft.AspNetCore.Components;
-
-namespace Masa.Blazor.MasaTable;
+﻿namespace Masa.Blazor.MasaTable;
 
 public partial class MTemplateTable<TItem> : NextTickComponentBase
 {

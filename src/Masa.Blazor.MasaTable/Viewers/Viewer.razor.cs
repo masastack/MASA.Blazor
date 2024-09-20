@@ -1,11 +1,7 @@
-﻿using BemIt;
-using Masa.Blazor.Core;
-using Masa.Blazor.Extensions;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
+﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 
-namespace Masa.Blazor.MasaTable;
+namespace Masa.Blazor.MasaTable.Viewers;
 
 public partial class Viewer<TItem> : IAsyncDisposable
 {

@@ -1,10 +1,8 @@
-@namespace Masa.Blazor.MasaTable
 @using System.Collections
 @using System.Globalization
 @using BemIt
 @using Masa.Blazor.Core
 @using Microsoft.AspNetCore.Components.Web.Virtualization
-@using Masa.Blazor.MasaTable.Viewer
 @typeparam TItem
 
 <MSimpleTable FixedHeader
@@ -42,7 +40,7 @@
                     @if (!hidden)
                     {
                         <div class="masa-table-viewer__header-column-content">
-                            @RenderFragments.GenTypeIcon(template.Column.Type, true)
+                            @Templates.GenTypeIcon(template.Column.Type, true)
                             <span class="text-truncate">
                                 @template.Column.Name
                             </span>

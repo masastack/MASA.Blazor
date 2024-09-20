@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.MasaTable.ColumnConfigs;
 

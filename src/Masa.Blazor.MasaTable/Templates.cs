@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace Masa.Blazor.MasaTable;
 
-namespace Masa.Blazor.MasaTable;
-
-public static class RenderFragments
+public static class Templates
 {
     public static RenderFragment GenTypeIcon(ColumnType columnType, bool small = false) => builder =>
     {
