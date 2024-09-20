@@ -1,0 +1,34 @@
+﻿@using SkiaSharp
+
+@* Needs register HttpClient with builder.HostEnvironment.BaseAddress in Program.cs *@
+@inject IHttpClientFactory HttpClientFactory
+
+@* uncomment the following line when hosting on server side *@
+@* @inject IWebHostEnvironment Environment *@
+
+<MWatermark Text="中文" Typeface="@_typeface">
+    <div style="height: 300px;"></div>
+</MWatermark>
+
+@code {
+
+    private SKTypeface? _typeface;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _typeface = await GetFontAsync();
+    }
+
+    private async Task<SKTypeface> GetFontAsync()
+    {
+        // Server side
+        // var path = Path.Combine(Environment.WebRootPath, "SourceHanSansCN-Normal.otf");
+        // return SKTypeface.FromFile(path);
+
+        // Client side
+        var httpClient = HttpClientFactory.CreateClient("masa-docs");
+        await using var stream = await httpClient.GetStreamAsync("_content/Masa.Blazor.Docs/fonts/SourceHanSansCN-Normal.otf");
+        return SKTypeface.FromStream(stream);
+    }
+
+}

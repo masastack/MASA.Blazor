@@ -5,7 +5,7 @@ namespace Masa.Blazor;
 
 public class MAppBar : MToolbar, IScrollable
 {
-    [Inject] private MasaBlazor? MasaBlazor { get; set; }
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter] public bool App { get; set; }
 
@@ -51,13 +51,21 @@ public class MAppBar : MToolbar, IScrollable
     private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
 
     private readonly string[] _applicationProperties =
-    {
+    [
         "Left", "Bar", "Right"
-    };
+    ];
 
     private bool _isBooted;
     private Scroller? _scroller;
     private bool _sized;
+
+    private bool _prevValue;
+    private bool _prevClippedLeft;
+    private bool _prevClippedRight;
+    private bool _prevInvertedScroll;
+    private bool _prevIsExtended;
+    private bool _prevIsProminent;
+    private double _prevComputedHeight;
 
     public int? Transform { get; private set; } = 0;
 
@@ -228,6 +236,14 @@ public class MAppBar : MToolbar, IScrollable
     {
         base.OnInitialized();
 
+        _prevValue = Value;
+        _prevClippedLeft = ClippedLeft;
+        _prevClippedRight = ClippedRight;
+        _prevInvertedScroll = InvertedScroll;
+        _prevIsExtended = IsExtended;
+        _prevIsProminent = IsProminent;
+        _prevComputedHeight = ComputedHeight.ToDouble();
+
         _scroller = new Scroller(this)
         {
             IsActive = Value
@@ -238,7 +254,8 @@ public class MAppBar : MToolbar, IScrollable
             _scroller.IsActive = false;
         }
 
-        MasaBlazor!.Application.PropertyChanged += ApplicationPropertyChanged;
+        UpdateApplication();
+        MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
 
         if (IsSsr)
         {
@@ -256,6 +273,76 @@ public class MAppBar : MToolbar, IScrollable
             _isBooted = true;
             Attributes["data-booted"] = "true";
             StateHasChanged();
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_scroller != null)
+        {
+            _scroller.ScrollThreshold = ScrollThreshold;
+        }
+
+        CheckAndUpdateApplication();
+    }
+
+    private void CheckAndUpdateApplication()
+    {
+        var needsUpdate = false;
+
+        if (_prevValue != Value)
+        {
+            _prevValue = Value;
+
+            if (_scroller is not null)
+            {
+                _scroller.IsActive = Value;
+            }
+            
+            needsUpdate = true;
+        }
+        
+        if (_prevClippedLeft != ClippedLeft)
+        {
+            _prevClippedLeft = ClippedLeft;
+            needsUpdate = true;
+        }
+        
+        if (_prevClippedRight != ClippedRight)
+        {
+            _prevClippedRight = ClippedRight;
+            needsUpdate = true;
+        }
+        
+        if (_prevInvertedScroll != InvertedScroll)
+        {
+            _prevInvertedScroll = InvertedScroll;
+            needsUpdate = true;
+        }
+        
+        if (_prevIsExtended != IsExtended)
+        {
+            _prevIsExtended = IsExtended;
+            needsUpdate = true;
+        }
+        
+        if (_prevIsProminent != IsProminent)
+        {
+            _prevIsProminent = IsProminent;
+            needsUpdate = true;
+        }
+        
+        if (Math.Abs(_prevComputedHeight - ComputedHeight.ToDouble()) > 0.1)
+        {
+            _prevComputedHeight = ComputedHeight.ToDouble();
+            needsUpdate = true;
+        }
+
+        if (needsUpdate)
+        {
+            UpdateApplication();
         }
     }
 
@@ -310,18 +397,6 @@ public class MAppBar : MToolbar, IScrollable
         );
     }
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (_scroller != null)
-        {
-            _scroller.ScrollThreshold = ScrollThreshold;
-        }
-
-        UpdateApplication();
-    }
-
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenComponent<CascadingValue<MAppBar>>(0);
@@ -333,7 +408,6 @@ public class MAppBar : MToolbar, IScrollable
 
     private void UpdateApplication()
     {
-        if (MasaBlazor == null) return;
         if (!App) return;
 
         var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;

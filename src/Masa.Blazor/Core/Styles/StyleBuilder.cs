@@ -61,6 +61,12 @@ public struct StyleBuilder
         _stringBuilder.Clear();
     }
 
+    public StyleBuilder Reset()
+    {
+        _stringBuilder.Clear();
+        return this;
+    }
+
     public IEnumerable<string> GenerateCssStyles()
     {
         yield return _stringBuilder.ToString();

@@ -2,4 +2,12 @@
 
 namespace Masa.Blazor;
 
-public class IfTransitionElement() : ToggleableTransitionElement(ConditionType.If);
+public class IfTransitionElement : ToggleableTransitionElement
+{
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
+        ConditionType = ConditionType.If;
+    }
+}

@@ -26,6 +26,12 @@
     <ExamplesSourceFile Include="Examples\**\*.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\fonts\SourceHanSansCN-Normal.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>

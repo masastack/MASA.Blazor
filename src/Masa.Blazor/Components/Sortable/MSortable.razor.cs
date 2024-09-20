@@ -13,7 +13,7 @@ public partial class MSortable<TItem> : MSortableProviderBase<TItem>
     private static Block _block = new("m-sortable");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    protected override string ContainerSelector => Ref.GetSelector();
+    protected override string? ContainerSelector => Ref.TryGetSelector(out var selector) ? selector : null;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
