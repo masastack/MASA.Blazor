@@ -280,6 +280,7 @@ namespace Masa.Blazor
         public async Task EmitActiveAsync()
         {
             var active = Nodes.Values.Where(r => r.IsActive).Select(r => r.Item!).ToList();
+            _oldActive = active.Select(ItemKey).ToList();
 
             if (OnActiveUpdate.HasDelegate)
             {
@@ -288,7 +289,7 @@ namespace Masa.Blazor
 
             if (ActiveChanged.HasDelegate)
             {
-                await ActiveChanged.InvokeAsync(active.Select(ItemKey).ToList());
+                await ActiveChanged.InvokeAsync(_oldActive);
             }
 
             if (!ActiveChanged.HasDelegate && !OnActiveUpdate.HasDelegate)
@@ -308,6 +309,7 @@ namespace Masa.Blazor
         public async Task EmitOpenAsync()
         {
             var open = Nodes.Values.Where(r => r.IsOpen).Select(r => r.Item!).ToList();
+            _oldOpen = open.Select(ItemKey).ToList();
 
             if (OnOpenUpdate.HasDelegate)
             {
@@ -316,7 +318,7 @@ namespace Masa.Blazor
 
             if (OpenChanged.HasDelegate)
             {
-                await OpenChanged.InvokeAsync(open.Select(ItemKey).ToList());
+                await OpenChanged.InvokeAsync(_oldOpen);
             }
 
             if (!OpenChanged.HasDelegate && !OnOpenUpdate.HasDelegate)
@@ -361,6 +363,8 @@ namespace Masa.Blazor
                 return r.IsSelected && !r.Children.Any();
             }).Select(r => r.Item).ToList();
 
+            _oldValue = selected.Select(ItemKey).ToList();
+
             var onSelectUpdate = OnSelectUpdate.HasDelegate ? OnSelectUpdate : OnInput;
             if (onSelectUpdate.HasDelegate)
             {
@@ -369,7 +373,7 @@ namespace Masa.Blazor
 
             if (ValueChanged.HasDelegate)
             {
-                await ValueChanged.InvokeAsync(selected.Select(ItemKey).ToList());
+                await ValueChanged.InvokeAsync(_oldValue);
             }
 
             if (!ValueChanged.HasDelegate && !onSelectUpdate.HasDelegate)
@@ -565,6 +569,15 @@ namespace Masa.Blazor
             return keys;
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            _oldActive = Active ?? [];
+            _oldOpen = Open ?? [];
+            _oldValue = Value ?? [];
+        }
+
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
@@ -587,25 +600,22 @@ namespace Masa.Blazor
                 }
             }
 
-            var value = Value ?? new List<TKey>();
-            if (!ListComparer.Equals(_oldValue, value))
+            if (!ListComparer.Equals(_oldValue, Value))
             {
                 await HandleUpdate(_oldValue, Value, UpdateSelectedByValue, EmitSelectedAsync);
-                _oldValue = value;
+                _oldValue = Value ?? [];
             }
 
-            var active = Active ?? new List<TKey>();
-            if (!ListComparer.Equals(_oldActive, active))
+            if (!ListComparer.Equals(_oldActive, Active))
             {
                 await HandleUpdate(_oldActive, Active, UpdateActive, EmitActiveAsync);
-                _oldActive = active;
+                _oldActive = Active ?? [];
             }
 
-            var open = Open ?? new List<TKey>();
-            if (!ListComparer.Equals(_oldOpen, open))
+            if (!ListComparer.Equals(_oldOpen, Open))
             {
                 await HandleUpdate(_oldOpen, Open, UpdateOpen, EmitOpenAsync);
-                _oldOpen = open;
+                _oldOpen = Open ?? [];
             }
 
             if (_prevSearch != Search)
