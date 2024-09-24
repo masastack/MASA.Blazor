@@ -18323,6 +18323,33 @@ html.overflow-y-hidden {
     }
 }
 
+@media (hover: none) {
+    .m-btn-toggle .theme--light.m-btn:hover::before {
+        opacity: 0.08;
+    }
+    .m-btn-toggle .theme--light.m-btn:focus::before {
+        opacity: 0.24;
+    }
+    .m-btn-toggle .theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before {
+        opacity: 0.18;
+    }
+    .m-btn-toggle .theme--light.m-btn--active:focus::before {
+        opacity: 0.16;
+    }
+    .m-btn-toggle .theme--dark.m-btn:hover::before {
+        opacity: 0.08;
+    }
+    .m-btn-toggle .theme--dark.m-btn:focus::before {
+        opacity: 0.24;
+    }
+    .m-btn-toggle .theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
+        opacity: 0.18;
+    }
+    .m-btn-toggle .theme--dark.m-btn--active:focus::before {
+        opacity: 0.32;
+    }
+}
+
 .m-btn {
     align-items: center;
     border-radius: 4px;
