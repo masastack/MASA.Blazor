@@ -19,6 +19,8 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     [Parameter] public IEnumerable<TItem> Rows { get; set; } = [];
 
+    [Parameter] public Func<TItem, bool>? Filter { get; set; }
+
     [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
@@ -46,10 +48,12 @@ public partial class Viewer<TItem> : IAsyncDisposable
     private bool _imageViewer;
     private IList<string> _imagesToView = [];
     private MSimpleTable? _simpleTable;
+    private Virtualize<TItem>? _virtualizeComponent;
     private string? _tableSelector;
 
     private HashSet<string>? _prevHiddenColumnIds;
     private List<string>? _prevColumnOrder;
+    private Func<TItem, bool>? _prevFilter;
 
     private HashSet<EventCallback<TItem>> _actions = [];
     private StyleBuilder _headerColumnStyleBuilder = new();
@@ -76,6 +80,8 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
         _actions = [OnUpdate, OnDelete, OnAction1, OnAction2];
 
+        _prevFilter = Filter;
+
         _dotNetObjectReference = DotNetObjectReference.Create(this);
     }
 
@@ -84,6 +90,12 @@ public partial class Viewer<TItem> : IAsyncDisposable
         base.OnParametersSet();
 
         OrderedColumnTemplates = ColumnTemplates.OrderBy(u => ColumnOrder.IndexOf(u.Column.Id)).ToList();
+
+        if (_prevFilter != Filter)
+        {
+            _prevFilter = Filter;
+            _virtualizeComponent?.RefreshDataAsync();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -116,6 +128,13 @@ public partial class Viewer<TItem> : IAsyncDisposable
 
     private ValueTask<ItemsProviderResult<TItem>> ItemsProvider(ItemsProviderRequest _)
     {
+        if (Filter is not null)
+        {
+            var filteredRows = Rows.Where(Filter);
+            return new ValueTask<ItemsProviderResult<TItem>>(
+                new ItemsProviderResult<TItem>(filteredRows, filteredRows.Count()));
+        }
+
         return new ValueTask<ItemsProviderResult<TItem>>(new ItemsProviderResult<TItem>(Rows, Rows.Count()));
     }
 

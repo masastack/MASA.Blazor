@@ -1,21 +1,24 @@
-﻿<PModal @bind-Value="dialog"
+﻿@namespace Masa.Blazor.MasaTable.FilterDialogs
+
+<PModal @bind-Value="dialog"
         Width="640"
-        Title="Filters">
+        Title="Filters"
+        Persistent
+        OnSave="HandleOnSave">
 
     @if (_filters.Count == 0)
     {
         <p class="grey--text">No filters applied</p>
     }
 
-    @* @foreach (var filter in _filters) *@
     @for (int i = 0; i < _filters.Count; i++)
     {
         var index = i;
         var filter = _filters[index];
 
         <div class="d-flex align-center mb-2">
-            <div style="width: 86px; max-width: 86px;"
-                 class="mr-2">
+            <div style="width: 86px; min-width: 86px;"
+                 class="mr-2 text-right">
                 @if (index == 0)
                 {
                     <span>When</span>
@@ -68,6 +71,7 @@
             {
                 <MTextField @bind-Value="@filter.Expected"
                             Label="Expected"
+                            Class="mr-2"
                             Filled
                             Dense
                             HideDetails="@true">
@@ -75,7 +79,7 @@
             }
             <MSpacer/>
             <MButton IconName="mdi-close"
-                     Class="mr-2">
+                     OnClick="@(() => RemoveFilter(filter))">
             </MButton>
         </div>
     }
@@ -95,6 +99,8 @@
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
     [Parameter] public Guid ActiveViewId { get; set; }
+
+    [Parameter] public EventCallback<(IEnumerable<Filter> Filter, string Operator)> OnSave { get; set; }
 
     private static readonly IList<string> Operators = ["and", "or"];
     private static readonly HashSet<string> _noExpectedFuncs = ["Empty", "NotEmpty"];
@@ -148,6 +154,22 @@
 
         var filter = new Filter(Columns.First());
         _filters.Add(filter);
+    }
+
+    private void RemoveFilter(Filter filter)
+    {
+        _filters.Remove(filter);
+    }
+
+    private void HandleOnSave()
+    {
+        dialog = false;
+        var result = new FilterRequest
+        {
+            Options = _filters.Select(u => u as FilterOption).ToList(),
+            Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or
+        };
+        OnSave.InvokeAsync((_filters, _operator));
     }
 
 }

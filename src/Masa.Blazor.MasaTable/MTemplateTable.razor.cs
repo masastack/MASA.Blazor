@@ -21,7 +21,7 @@ public partial class MTemplateTable<TItem> : NextTickComponentBase
     [Parameter] public EventCallback<TItem> OnAction1 { get; set; }
 
     [Parameter] public EventCallback<TItem> OnAction2 { get; set; }
-    
+
     // TODO: 详情按钮没做
 
     // ReSharper disable once StaticMemberInGenericType
@@ -202,8 +202,9 @@ public partial class MTemplateTable<TItem> : NextTickComponentBase
                     columnTemplate.Column.Name = inputColumn.Name;
                     columnTemplate.Column.Config = inputColumn.Config;
                 }
-                
-                var viewColumn = _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
+
+                var viewColumn =
+                    _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
                 if (viewColumn is not null)
                 {
                     columnTemplate.ViewColumn.Width = viewColumn.Width;
@@ -215,7 +216,8 @@ public partial class MTemplateTable<TItem> : NextTickComponentBase
         {
             foreach (var columnTemplate in _activeViewTemplateColumns)
             {
-                var viewColumn = _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
+                var viewColumn =
+                    _internalSheet.ActiveView?.Columns.FirstOrDefault(u => u.ColumnId == columnTemplate.Column.Id);
                 if (viewColumn is not null)
                 {
                     columnTemplate.ViewColumn.Width = viewColumn.Width;

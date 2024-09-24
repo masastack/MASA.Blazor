@@ -1,26 +1,16 @@
-﻿namespace Masa.Blazor.MasaTable;
+﻿namespace Masa.Blazor.MasaTable.FilterDialogs;
 
-public class Filter
+public class Filter : FilterOption
 {
-    public string ColumnId { get; set; }
-
-    public string Func { get; set; }
-
-    public string? Expected { get; set; }
-
     public Column Column { get; private set; }
 
     public string[] FuncList { get; private set; }
-
-    public Filter()
-    {
-    }
 
     public Filter(Column column)
     {
         Column = column;
         ColumnId = column.Id;
-
+        
         UpdateOperator();
     }
 

@@ -64,7 +64,8 @@
     <Virtualize ItemsProvider="@ItemsProvider"
                 Context="item"
                 ItemSize="RowHeightValue"
-                OverscanCount="1">
+                OverscanCount="1"
+                @ref="_virtualizeComponent">
         <tr class="masa-table-viewer__row">
             @foreach (var template in OrderedColumnTemplates)
             {

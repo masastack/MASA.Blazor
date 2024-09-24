@@ -1,6 +1,8 @@
 ﻿@typeparam TItem
 @attribute [CascadingTypeParameter(nameof(TItem))]
 @inject IPopupService PopupService
+@using System.Text.Json
+@using Masa.Blazor.MasaTable.FilterDialogs
 @using Microsoft.JSInterop
 @inherits NextTickComponentBase
 @inject IJSRuntime JSRuntime
@@ -53,6 +55,7 @@
             ColumnOrderChanged="@HandleOnColumnOrderChanged"
             RowHeight="@_rowHeight"
             Rows="@Items"
+            Filter="@_filterExpression"
             Height="@Height"
             OnColumnToggle="@ToggleColumn"
             OnColumnEditClick="@OpenColumnEditDialog"
@@ -73,7 +76,8 @@
     <FilterDialog @ref="_filterDialog"
                   ActiveViewId="@_internalSheet.ActiveViewId"
                   Columns="_internalSheet.Columns"
-                  HiddenColumnIds="@_hiddenColumnIds">
+                  HiddenColumnIds="@_hiddenColumnIds"
+                  OnSave="@SaveFilter">
     </FilterDialog>
 }
 
@@ -220,5 +224,33 @@
         _internalSheet.ActiveView.RowHeight = rowHeight;
     }
 
-}
+    private Func<TItem, bool>? _filterExpression;
 
+    private void SaveFilter((IEnumerable<Filter> Filters, string Operator) request)
+    {
+        if (request.Filters.Count() == 0)
+        {
+            _filterExpression = null;
+            return;
+        }
+
+        var filters = request.Filters.Select(filter =>
+        {
+            var template = _activeViewTemplateColumns.FirstOrDefault(u => u.Column.Id == filter.ColumnId);
+            return (template.Value, filter.Func, filter.Expected, template.Column.Id);
+        });
+
+        try
+        {
+            _filterExpression = ExpressionHelper<TItem>.GetExpression(filters, request.Operator);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        Console.Out.WriteLine("SaveFilter " + JsonSerializer.Serialize(request));
+    }
+
+}
