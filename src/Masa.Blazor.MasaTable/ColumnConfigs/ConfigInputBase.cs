@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Masa.Blazor.MasaTable.ColumnConfigs;
+﻿namespace Masa.Blazor.MasaTable.ColumnConfigs;
 
 public abstract class ConfigInputBase<TConfig> : ComponentBase where TConfig : new()
 {

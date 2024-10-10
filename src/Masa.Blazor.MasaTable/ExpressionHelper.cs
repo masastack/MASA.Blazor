@@ -6,98 +6,104 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 
-public static class ExpressionHelper<TItem>
+public class ExpressionHelper<TItem>
 {
-    private static readonly MethodInfo? _startsWithMethod;
-    private static readonly MethodInfo? _endsWithMethod;
-    private static readonly MethodInfo? _containsMethod;
-    private static readonly MethodInfo? _emptyMethod;
+    private readonly MethodInfo? _startsWithMethod;
+    private readonly MethodInfo? _endsWithMethod;
+    private readonly MethodInfo? _containsMethod;
+    private readonly MethodInfo? _emptyMethod;
 
-    private static readonly ConcurrentDictionary<string, Expression> _propertySelectors;
-    private static readonly ParameterExpression _parameterExpression = Expression.Parameter(typeof(TItem), "u");
+    private readonly ConcurrentDictionary<string, Expression> _propertySelectors;
 
-    static ExpressionHelper()
+    protected ParameterExpression ParameterExpression { get; init; }
+
+    public ExpressionHelper()
     {
         _propertySelectors = new ConcurrentDictionary<string, Expression>();
-        _startsWithMethod = typeof(string).GetMethod("StartsWith", new[] { typeof(string) });
-        _endsWithMethod = typeof(string).GetMethod("EndsWith", new[] { typeof(string) });
-        _containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
-        _emptyMethod = typeof(string).GetMethod("IsNullOrEmpty")!;
+        _startsWithMethod = typeof(string).GetMethod("StartsWith", [typeof(string)]);
+        _endsWithMethod = typeof(string).GetMethod("EndsWith", [typeof(string)]);
+        _containsMethod = typeof(string).GetMethod("Contains", [typeof(string)]);
+        _emptyMethod = typeof(string).GetMethod("IsNullOrEmpty", [typeof(string)]);
+
+        ParameterExpression = Expression.Parameter(typeof(TItem), "u");
     }
 
-    public static Func<TItem, bool> GetExpression(
-        IEnumerable<(Func<TItem, object> propertySelector, string func, string expected, string key)> filters,
-        string operatorType)
+    protected Expression GetExpression2(string expected, string func, Func<TItem, object> propertySelector,
+        string key, Type type)
     {
-        var expressions = new List<Expression>();
+        Expression expectedExpression;
 
-        foreach (var (propertySelector, func, expected, key) in filters)
+        if (type == typeof(decimal))
         {
-            switch (func)
-            {
-                case "StartsWith":
-                    expressions.Add(CreateStartsWithExpression(propertySelector, expected, key));
-                    break;
-                case "NotStartsWith":
-                    expressions.Add(Expression.Not(CreateStartsWithExpression(propertySelector, expected, key)));
-                    break;
-                case "EndsWith":
-                    expressions.Add(CreateEndsWithExpression(propertySelector, expected, key));
-                    break;
-                case "NotEndsWith":
-                    expressions.Add(Expression.Not(CreateEndsWithExpression(propertySelector, expected, key)));
-                    break;
-                case "Contains":
-                    expressions.Add(Call(propertySelector, expected, key, _containsMethod!));
-                    break;
-                case "NotContains":
-                    expressions.Add(Expression.Not(Call(propertySelector, expected, key, _containsMethod!)));
-                    break;
-                case "Empty":
-                    expressions.Add(Call(propertySelector, key, _emptyMethod!));
-                    break;
-                case "NotEmpty":
-                    expressions.Add(Expression.Not(Call(propertySelector, key, _emptyMethod!)));
-                    break;
-            }
+            expectedExpression = Expression.Constant(Convert.ToDecimal(expected));
+        }
+        else
+        {
+            expectedExpression = Expression.Constant(expected);
         }
 
-        var combinedExpression = operatorType == "and"
-            ? expressions.Aggregate(Expression.AndAlso)
-            : expressions.Aggregate(Expression.OrElse);
-
-        return Expression.Lambda<Func<TItem, bool>>(combinedExpression, _parameterExpression).Compile();
+        return func switch
+        {
+            "StartsWith" => CreateStartsWithExpression(propertySelector, expected, key),
+            "NotStartsWith" => Expression.Not(CreateStartsWithExpression(propertySelector, expected, key)),
+            "EndsWith" => CreateEndsWithExpression(propertySelector, expected, key),
+            "NotEndsWith" => Expression.Not(CreateEndsWithExpression(propertySelector, expected, key)),
+            "Contains" => Call(propertySelector, expected, key, _containsMethod!),
+            "NotContains" => Expression.Not(Call(propertySelector, expected, key, _containsMethod!)),
+            "Equal" => Expression.Equal(GetProperty(propertySelector, key), expectedExpression),
+            "NotEqual" => Expression.NotEqual(GetProperty(propertySelector, key), expectedExpression),
+            "Empty" => Expression.Call(_emptyMethod, GetProperty(propertySelector, key)),
+            "NotEmpty" => Expression.Not(Expression.Call(_emptyMethod, GetProperty(propertySelector, key))),
+            _ => throw new NotSupportedException($"The function {func} is not supported.")
+        };
     }
 
-    private static MethodCallExpression CreateStartsWithExpression(Func<TItem, object> propertySelector, string value,
+    private Expression CreateStartsWithExpression(Func<TItem, object> propertySelector, string value,
         string key)
-        => Call(propertySelector, value, key, _startsWithMethod!);
+    {
+        return Call(propertySelector, value, key, _startsWithMethod!);
+    }
 
-    private static MethodCallExpression CreateEndsWithExpression(Func<TItem, object> propertySelector, string value,
+    private Expression CreateEndsWithExpression(Func<TItem, object> propertySelector, string value,
         string key)
         => Call(propertySelector, value, key, _endsWithMethod!);
 
-    private static Expression GetOrAddInvocationExpression(Func<TItem, object> propertySelector, string key)
+    private Expression Call(Func<TItem, object> propertySelector, string value, string key,
+        MethodInfo method, bool notNullRequired = true)
+    {
+        var property = GetProperty(propertySelector, key);
+        var callExpression = Expression.Call(property, method, Expression.Constant(value));
+
+        if (notNullRequired)
+        {
+            var nullCheck = Expression.NotEqual(property, Expression.Constant(null));
+            var conditionalExpression = Expression.Condition(nullCheck, callExpression, Expression.Constant(false));
+            return conditionalExpression;
+        }
+
+        return callExpression;
+    }
+
+    private MethodCallExpression Call(Func<TItem, object> propertyAccess, string key, MethodInfo method)
+    {
+        var invocationExpression = GetProperty(propertyAccess, key);
+        return Expression.Call(invocationExpression, method);
+    }
+
+    private Expression GetProperty(Func<TItem, object> propertySelector, string key, Type? type = null)
     {
         var fullKey = typeof(TItem).FullName + "." + key;
         return _propertySelectors.GetOrAdd(fullKey, _ =>
         {
-            var propertyAccess = Expression.Invoke(Expression.Constant(propertySelector), _parameterExpression);
-            var asString = Expression.Convert(propertyAccess, typeof(string));
-            return asString;
+            var propertyAccess = Expression.Invoke(Expression.Constant(propertySelector), ParameterExpression);
+            var stringExpression = Expression.Call(propertyAccess, typeof(object).GetMethod("ToString")!);
+
+            if (type is not null)
+            {
+                return Expression.Call(type.GetMethod("Parse", [typeof(string)]), stringExpression);
+            }
+
+            return stringExpression;
         });
-    }
-
-    private static MethodCallExpression Call(Func<TItem, object> propertySelector, string value, string key,
-        MethodInfo method)
-    {
-        var invocationExpression = GetOrAddInvocationExpression(propertySelector, key);
-        return Expression.Call(invocationExpression, method, Expression.Constant(value));
-    }
-
-    private static MethodCallExpression Call(Func<TItem, object> propertyAccess, string key, MethodInfo method)
-    {
-        var invocationExpression = GetOrAddInvocationExpression(propertyAccess, key);
-        return Expression.Call(invocationExpression, method);
     }
 }

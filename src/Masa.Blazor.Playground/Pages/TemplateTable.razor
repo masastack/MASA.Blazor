@@ -1,0 +1,10 @@
+﻿@using GraphQL
+@using GraphQL.Client.Abstractions
+@using GraphQL.Client.Http
+@using Masa.Blazor.Components.TemplateTable
+@inject GraphQLHttpClient GraphQLClient
+
+<MTemplateTable SheetProvider="@_sheetProvider"
+                ItemsProvider="@_itemsProvider"
+                OnDelete="() => { }">
+</MTemplateTable>

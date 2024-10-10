@@ -1,0 +1,60 @@
+﻿<MMenu MaxWidth="216" OffsetX Left ContentClass="pa-4">
+    <ActivatorContent>
+        <MButton IconName="mdi-checkbox-blank"
+                 Class="@Class"
+                 Color="@Color"
+                 tabindex="-1"
+                 @attributes="@context.Attrs">
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MItemGroup Value="@Color" ValueChanged="SelectColor">
+            @foreach (var color in BuiltInColors)
+            {
+                @GenItem(color, "darken-3")
+            }
+
+            <MDivider Class="my-2"/>
+
+            @foreach (var color in BuiltInColors)
+            {
+                @GenItem(color, "lighten-3")
+            }
+        </MItemGroup>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    private static readonly string[] BuiltInColors = ["red", "pink", "purple", "deep-purple", "indigo", "blue", "light-blue", "cyan", "teal", "green", "light-green", "lime", "yellow", "amber", "orange", "deep-orange", "brown", "grey", "blue-grey"];
+
+    [Parameter] public string? Color { get; set; }
+
+    [Parameter] public EventCallback<string?> ColorChanged { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+
+    internal static string GetColor(int index)
+    {
+        var color = BuiltInColors.ElementAtOrDefault(index);
+        return color != null ? $"{color} darken-3" : "red darken-3";
+    }
+
+    private void SelectColor(StringNumber color)
+    {
+        ColorChanged.InvokeAsync(color.ToString());
+    }
+
+    private RenderFragment GenItem(string color, string variant) => __builder =>
+    {
+        var variantColor = $"{color} {variant}";
+
+        <MItem Value="@variantColor">
+            <MButton IconName="@(context.Active ? "mdi-checkbox-marked" : "mdi-checkbox-blank")"
+                     Color="@variantColor"
+                     OnClick="@context.Toggle">
+            </MButton>
+        </MItem>
+    };
+
+}

@@ -1,8 +1,15 @@
+using System.Text.Json;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.SystemTextJson;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor(opts => opts.DetailedErrors = true);
 builder.Services.AddMasaBlazor();
 builder.Services.AddHttpClient();
+
+builder.Services.AddSingleton<GraphQLHttpClient>(_ => new GraphQLHttpClient("http://localhost:5297/graphql",
+    new SystemTextJsonSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web))));
 
 builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 

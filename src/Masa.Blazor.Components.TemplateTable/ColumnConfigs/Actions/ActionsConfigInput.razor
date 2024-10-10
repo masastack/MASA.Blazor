@@ -1,0 +1,99 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@inherits ConfigInputBase<ActionsConfig>
+
+<MDivider Class="mb-5" />
+
+<div class="d-flex align-center mb-4">
+    <MTextField @bind-Value="@Config.UpdateIcon"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Update icon"
+                Class="mr-2"
+                Filled
+                Dense
+                HideDetails="true"
+                PrependIcon="@Config.UpdateIcon">
+    </MTextField>
+    <MTextField @bind-Value="@Config.UpdateTooltip"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Update tooltip"
+                Filled
+                Dense
+                HideDetails="true">
+    </MTextField>
+</div>
+
+<div class="d-flex align-center mb-4">
+    <MTextField @bind-Value="@Config.DeleteIcon"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Delete icon"
+                Class="mr-2"
+                Filled
+                Dense
+                HideDetails="true"
+                PrependIcon="@Config.DeleteIcon">
+    </MTextField>
+    <MTextField @bind-Value="@Config.DeleteTooltip"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Delete tooltip"
+                Filled
+                Dense
+                HideDetails="true">
+    </MTextField>
+</div>
+
+<div class="d-flex align-center mb-4">
+    <MTextField @bind-Value="@Config.Action1Icon"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Action1 icon"
+                Class="mr-2"
+                Filled
+                Dense
+                HideDetails="true"
+                PrependIcon="@Config.Action1Icon">
+    </MTextField>
+    <MTextField @bind-Value="@Config.Action1Tooltip"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Action1 tooltip"
+                Filled
+                Dense
+                HideDetails="true">
+    </MTextField>
+</div>
+
+<div class="d-flex align-center mb-4">
+    <MTextField @bind-Value="@Config.Action2Icon"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Action2 icon"
+                Class="mr-2"
+                Filled
+                Dense
+                HideDetails="true"
+                PrependIcon="@Config.Action2Icon">
+    </MTextField>
+    <MTextField @bind-Value="@Config.Action2Tooltip"
+                @bind-Value:after="@UpdateValue"
+                UpdateOnChange
+                Label="Action2 tooltip"
+                Filled
+                Dense
+                HideDetails="true">
+    </MTextField>
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        UpdateValue();
+    }
+
+}

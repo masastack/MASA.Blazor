@@ -224,11 +224,12 @@
         _internalSheet.ActiveView.RowHeight = rowHeight;
     }
 
+    private FilterExpressionGenerator<TItem> _filterExpressionGenerator = new();
     private Func<TItem, bool>? _filterExpression;
 
     private void SaveFilter((IEnumerable<Filter> Filters, string Operator) request)
     {
-        if (request.Filters.Count() == 0)
+        if (!request.Filters.Any())
         {
             _filterExpression = null;
             return;
@@ -237,12 +238,18 @@
         var filters = request.Filters.Select(filter =>
         {
             var template = _activeViewTemplateColumns.FirstOrDefault(u => u.Column.Id == filter.ColumnId);
-            return (template.Value, filter.Func, filter.Expected, template.Column.Id);
+
+            if (template is null)
+            {
+                throw new InvalidOperationException($"Column with id {filter.ColumnId} not found");
+            }
+
+            return new FilterExpressionMeta<TItem>(template.Value, filter.Func, filter.Expected, template.Column.Type, template.Column.Id);
         });
 
         try
         {
-            _filterExpression = ExpressionHelper<TItem>.GetExpression(filters, request.Operator);
+            _filterExpression = _filterExpressionGenerator.GetWhereExpression(request.Operator, filters);
         }
         catch (Exception e)
         {

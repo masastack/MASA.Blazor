@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{729665A4-B387-4E03-A27D-0D72BF1E3169}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable", "src\Masa.Blazor.Components.TemplateTable\Masa.Blazor.Components.TemplateTable.csproj", "{0A381D1D-77DE-41FD-A27C-ACEF41A2A800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolateDemo", "src\HotChocolateDemo\HotChocolateDemo.csproj", "{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Contracts", "src\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj", "{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A381D1D-77DE-41FD-A27C-ACEF41A2A800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A381D1D-77DE-41FD-A27C-ACEF41A2A800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A381D1D-77DE-41FD-A27C-ACEF41A2A800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A381D1D-77DE-41FD-A27C-ACEF41A2A800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

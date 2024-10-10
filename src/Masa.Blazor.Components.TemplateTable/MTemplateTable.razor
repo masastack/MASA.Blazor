@@ -1,0 +1,252 @@
+﻿@using Force.DeepCloner
+@using Masa.Blazor.Components.TemplateTable
+@using Masa.Blazor.Components.TemplateTable.ColumnDialogs
+@using Masa.Blazor.Components.TemplateTable.FilterDialogs
+@using Masa.Blazor.Components.TemplateTable.Viewers
+@using Microsoft.JSInterop
+@using Masa.Blazor.Components.TemplateTable.Toolbars
+@namespace Masa.Blazor
+@inject IJSRuntime JSRuntime
+@inject IPopupService PopupService
+
+<Toolbar DefaultViewId="@_sheet.DefaultViewId"
+         ActiveView="@_sheet.ActiveViewId"
+         ActiveViewChanged="@HandleOnActiveViewChanged"
+         ColumnOrder="@_columnOrder"
+         ColumnOrderChanged="@HandleOnColumnOrderChanged"
+         RowHeight="_rowHeight"
+         RowHeightChanged="@HandleOnRowHeightChanged"
+         Views="_sheet.Views"
+         Columns="_sheet.Columns"
+         HiddenColumnIds="@_hiddenColumnIds"
+         OnViewAdd="@AddNewView"
+         OnViewRename="@RenameView"
+         OnViewDelete="@DeleteView"
+         OnColumnEditClick="@OpenColumnEditDialog"
+         OnColumnToggle="@ToggleColumn"
+         HasFilter="@(_filter?.Options.Count > 0)"
+         OnFilterClick="@(() => _filterDialog.Open())"/>
+
+<Viewer ViewColumns="@_viewColumns"
+        HiddenColumnIds="@_hiddenColumnIds"
+        ColumnOrder="@_columnOrder"
+        ColumnOrderChanged="@HandleOnColumnOrderChanged"
+        RowHeight="@_rowHeight"
+        Rows="@_items"
+        Sort="@_sort"
+        OnSortUpdate="@SortUpdate"
+        Height="@Height"
+        OnColumnToggle="@ToggleColumn"
+        OnColumnEditClick="@OpenColumnEditDialog"
+        OnColumnResize="@ResizeColumn"
+        OnUpdate="@OnUpdate"
+        OnDelete="@OnDelete"
+        OnAction1="@OnAction1"
+        OnAction2="@OnAction2"
+        @ref="_viewer">
+</Viewer>
+<div class="d-flex align-center">
+    <div>
+        @{
+            var pageStart = (_pageIndex - 1) * _pageSize + 1;
+            var pageStop = Math.Min(_pageIndex * _pageSize, _totalCount);
+        }
+
+        @pageStart - @pageStop of @_totalCount
+    </div>
+
+    <div>
+        <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
+        <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
+    </div>
+</div>
+
+<ColumnDialog @ref="_columnEditDialog"
+              OnSave="@UpdateColumn">
+</ColumnDialog>
+
+<FilterDialog @ref="_filterDialog"
+              ActiveView="@_sheet.ActiveView"
+              Columns="@_sheet.Columns"
+              HiddenColumnIds="@_hiddenColumnIds"
+              OnSave="@SaveFilter">
+</FilterDialog>
+
+@code {
+
+    private HashSet<string> _hiddenColumnIds = [];
+    private List<string> _columnOrder = [];
+    private RowHeight _rowHeight;
+    private Viewer? _viewer;
+
+    private ColumnDialog? _columnEditDialog;
+    private FilterDialog? _filterDialog;
+
+    private void AddNewView()
+    {
+        var view = new View()
+        {
+            Id = Guid.NewGuid(),
+            Name = "New view",
+            Type = ViewType.Grid,
+            Columns = _sheet.ActiveViewColumns.DeepClone()
+        };
+
+        _sheet.Views.Add(view);
+        _sheet.ActiveViewId = view.Id;
+        
+        ResetSheet();
+    }
+
+    private void RenameView((Guid id, string Name) args)
+    {
+        var view = _sheet.Views.FirstOrDefault(u => u.Id == args.id);
+        if (view is not null)
+        {
+            view.Name = args.Name;
+        }
+    }
+
+    private async Task DeleteView(View view)
+    {
+        if (_sheet.Views.Count < 1)
+        {
+            return;
+        }
+
+        var confirmed =
+            await PopupService.ConfirmAsync(
+                "Delete view",
+                $"Are you sure you want to delete this view ({view.Name})?",
+                AlertTypes.Error);
+
+        if (!confirmed) return;
+
+        _sheet.Views.Remove(view);
+
+        if (_sheet.ActiveViewId == view.Id)
+        {
+            _sheet.ActiveViewId = _sheet.Views.First().Id;
+        }
+    }
+
+    private async Task HandleOnActiveViewChanged(Guid viewId)
+    {
+        _sheet.ActiveViewId = viewId;
+
+        ResetSheet();
+
+        // TODO: 如果这个视图没有数据，就加载数据
+        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+    }
+
+    private void ResetSheet()
+    {
+        // reset the width of the table
+        _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.SetStyle, _viewer?.GetTableSelector(), "width", null);
+
+        UpdateStateOfActiveView();
+    }
+
+
+    private void HandleOnColumnOrderChanged(List<string> columnOrder)
+    {
+        _columnOrder = columnOrder;
+
+        Console.Out.WriteLine("Column order changed to: " + string.Join(", ", columnOrder));
+
+        _sheet.ActiveViewColumns.Sort((x, y) =>
+        {
+            var xIndex = _columnOrder.IndexOf(x.ColumnId);
+            var yIndex = _columnOrder.IndexOf(y.ColumnId);
+            return xIndex.CompareTo(yIndex);
+        });
+    }
+
+    private void HandleOnRowHeightChanged(RowHeight rowHeight)
+    {
+        _rowHeight = rowHeight;
+        _sheet.UpdateActiveViewRowHeight(rowHeight);
+    }
+
+    private void ToggleColumn(string columnId)
+    {
+        if (columnId == Preset.ActionsColumnId)
+        {
+            var hasActions = !_sheet.ActiveViewHasActions;
+            _sheet.UpdateActiveViewHasActions(hasActions);
+            if (hasActions)
+            {
+                _hiddenColumnIds.Remove(Preset.ActionsColumnId);
+            }
+            else
+            {
+                _hiddenColumnIds.Add(Preset.ActionsColumnId);
+            }
+
+            return;
+        }
+
+        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
+        if (viewColumn is null)
+        {
+            return;
+        }
+
+        if (viewColumn.Hidden)
+        {
+            viewColumn.Hidden = false;
+            _hiddenColumnIds.Remove(columnId);
+        }
+        else
+        {
+            viewColumn.Hidden = true;
+            _hiddenColumnIds.Add(columnId);
+        }
+    }
+
+    private void OpenColumnEditDialog(Column column)
+    {
+        _columnEditDialog?.Open(column);
+    }
+
+    private void UpdateColumn(Column data)
+    {
+        var column = _sheet.Columns.FirstOrDefault(u => u.Id == data.Id);
+        if (column is null)
+        {
+            return;
+        }
+
+        column.Name = data.Name;
+        column.Type = data.Type;
+        column.Config = data.Config;
+
+        var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
+        viewColumn?.AttachColumn(column);
+    }
+
+    private async Task SaveFilter(Filter filter)
+    {
+        _filter = filter;
+        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+    }
+
+    private async Task SortUpdate(Sort sort)
+    {
+        _sort = sort;
+        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+    }
+
+    private void ResizeColumn((string ColumnId, double Width) args)
+    {
+        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == args.ColumnId);
+        if (viewColumn is null)
+        {
+            return;
+        }
+
+        viewColumn.Width = args.Width;
+    }
+
+}

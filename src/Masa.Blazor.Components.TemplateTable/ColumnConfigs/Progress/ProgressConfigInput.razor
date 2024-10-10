@@ -1,0 +1,43 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@inherits ConfigInputBase<ProgressConfig>
+
+<div class="d-flex justify-space-between align-center mb-2">
+    <span>Color</span>
+    <MCheckbox @bind-Value="@Config.Striped"
+               @bind-Value:after="@UpdateValue"
+               Label="Striped" Dense HideDetails="true">
+    </MCheckbox>
+</div>
+<MItemGroup Value="@Config.Color" ValueChanged="@SelectColor">
+    @foreach (var color in BuiltInColors)
+    {
+        <MItem Value="@color">
+            <MButton IconName="@(context.Active ? "mdi-checkbox-marked" : "mdi-checkbox-blank")"
+                     Color="@color"
+                     OnClick="@context.Toggle">
+            </MButton>
+        </MItem>
+    }
+</MItemGroup>
+
+@code {
+
+    private static readonly string[] BuiltInColors = ["red", "pink", "purple", "blue", "green", "yellow", "orange",];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Config.Color ??= BuiltInColors.First();
+        
+        // update value using the default color
+        UpdateValue();
+    }
+
+    private void SelectColor(StringNumber color)
+    {
+        Config.Color = color.ToString();
+        UpdateValue();
+    }
+
+}

@@ -5,9 +5,6 @@ namespace Masa.Blazor.MasaTable;
 public class Sheet
 {
     private Guid _prevActiveViewId;
-    private List<ViewColumn> _activeViewColumns = [];
-    private List<string> _activeViewColumnOrder = [];
-    private HashSet<string> _hiddenColumnIds = [];
 
     /// <summary>
     /// All columns without state.

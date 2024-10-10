@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7"/>
+        <PackageReference Include="GraphQL.Client.Abstractions" Version="6.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj" />
+      <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
+    </ItemGroup>
+
+</Project>

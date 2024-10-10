@@ -1,0 +1,369 @@
+﻿@using System.Globalization
+@using BemIt
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<MSimpleTable FixedHeader
+              Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
+              Style="@($"--mt-row-height: {RowHeightValue}px")"
+              Height="@Height"
+              @ref="_simpleTable">
+    <thead>
+    <tr @ref="_headerTrRef">
+        <MSortableProvider Items="ViewColumns"
+                           ItemKey="@(u => u.ColumnId)"
+                           GhostClass="accent"
+                           ContainerRef="@_headerTrRef"
+                           ForceFallback
+                           Ignore=".actions"
+                           Order="@ColumnOrder"
+                           OrderChanged="@ColumnOrderChanged">
+            <ItemContent Context="context">
+                @{
+                    var template = context.Item;
+                    var type = template.Column.Type.ToString().ToLowerInvariant();
+                    var isActionsType = template.Column.Type == ColumnType.Actions;
+                    var sortableHandleCss = isActionsType ? "ignore-elements" : "handle";
+                    var hidden = HiddenColumnIds.Contains(template.ColumnId);
+                    _headerColumnStyleBuilder.Clear();
+                    _headerColumnStyleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
+                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", ActionsCount.ToString(), isActionsType);
+                    _headerColumnStyleBuilder.AddIf("display", "none", hidden);
+                }
+
+                <th class="masa-table-viewer__header-column @sortableHandleCss @type"
+                    style="@_headerColumnStyleBuilder.Build()"
+                    @key="@(template.Column.Id)"
+                    @attributes="@context.Attrs">
+                    @if (!hidden)
+                    {
+                        <div class="masa-table-viewer__header-column-content">
+                            <ColumnName Data="@template.Column" 
+                                        Sort="@Sort"
+                                        OnClick="@OnSortUpdate"/>
+                            <MSpacer/>
+                            <Dropdown Icon="mdi-menu-down-outline">
+                                @if (!isActionsType)
+                                {
+                                    <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
+                                }
+                                <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
+                            </Dropdown>
+                        </div>
+                        @if (!isActionsType)
+                        {
+                            <Resizor/>
+                        }
+                    }
+                </th>
+            </ItemContent>
+        </MSortableProvider>
+    </tr>
+    </thead>
+    <tbody>
+    <Virtualize Items="Rows"
+                Context="item"
+                ItemSize="RowHeightValue"
+                OverscanCount="1">
+        <tr class="masa-table-viewer__row">
+            @foreach (var template in _orderedViewColumns)
+            {
+                var type = template.Column.Type.ToString().ToLowerInvariant();
+                var hidden = HiddenColumnIds.Contains(template.Column.Id);
+
+                <td class="@type"
+                    style="@(hidden ? "display:none" : "")"
+                    @key="template.Column.Id">
+                    @if (!hidden)
+                    {
+                        <div class="masa-table-viewer__cell @type">
+                            <div class="masa-table-viewer__cell-content">
+                                @if (template.Column.Type == ColumnType.Actions)
+                                {
+                                    @GenActionsCell(new ActionsConfig(), item)
+                                }
+                                else
+                                {
+                                    var key = item.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
+                                    if (key is not null)
+                                    {
+                                        var value = item[key];
+                                        @GenCell(template.Column, value, item)
+                                    }
+                                    else
+                                    {
+                                        <div class="error--text">
+                                            @("Key not found: " + template.ColumnId)
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                </td>
+            }
+        </tr>
+    </Virtualize>
+    </tbody>
+</MSimpleTable>
+
+<MDialog @bind-Value="_imageViewer"
+         @bind-Value:after="OnImageViewerChanged"
+         ContentClass="image-viewer">
+    <MCarousel HideDelimiters
+               ShowArrows="@(_imagesToView.Count > 1)">
+        @foreach (var item in _imagesToView)
+        {
+            <MCarouselItem Src="@item" OnClick="@(() => _imageViewer = false)">
+            </MCarouselItem>
+        }
+    </MCarousel>
+</MDialog>
+
+
+@code {
+
+    private RenderFragment GenCell(Column column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
+    {
+        switch (column.Type)
+        {
+            case ColumnType.Checkbox:
+                var isChecked = value.GetBoolean();
+                <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
+                       Color="@(isChecked ? "primary" : "")">
+                </MIcon>
+                break;
+            case ColumnType.Text:
+                @value.GetString()
+                break;
+            case ColumnType.Email:
+                var email = value.GetString();
+                @if (email is not null)
+                {
+                    <a href="mailto:@email">@email</a>
+                }
+
+                break;
+            case ColumnType.Link:
+                <a href="@value" target="_blank">@value</a>
+                break;
+            case ColumnType.Phone:
+                var phone = value.GetString();
+                @if (phone is not null)
+                {
+                    <a href="tel:@phone">@phone</a>
+                }
+
+                break;
+            case ColumnType.Image:
+                @GenImageCell(value)
+                break;
+            case ColumnType.Select:
+                @GenSelectCell(column.ConfigObject, value)
+                break;
+            case ColumnType.MultiSelect:
+                @GenMultiSelectCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Date:
+                @GenDateCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Number:
+                @GenNumberCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Progress:
+                @GenProgressCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Rating:
+                @GenRatingCell(value)
+                break;
+            @* case ColumnType.Actions: *@
+            @*     @GenActionsCell(column.ConfigObject, value, item) *@
+            @*     break; *@
+        }
+    };
+
+    private RenderFragment GenDateCell(object? configObject, JsonElement value) => __builder =>
+    {
+        var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
+        if (configObject is DateConfig dateConfig)
+        {
+            format = dateConfig.Format!;
+        }
+
+        if (value.TryGetDateTimeOffset(out var date))
+        {
+            @date.ToString(format)
+        }
+        else
+        {
+            @value
+        }
+    };
+
+    private RenderFragment GenSelectCell(object? configObject, JsonElement value) => __builder =>
+    {
+        var text = value.GetString();
+
+        if (configObject is SelectConfig config)
+        {
+            var option = config.Options.FirstOrDefault(u => u.Value == text);
+            if (option is not null)
+            {
+                text = option.Label;
+
+                if (config.Color)
+                {
+                    var isDarken = option.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option.Color" Dark="isDarken">@text</MChip>
+                    return;
+                }
+            }
+        }
+
+        @text
+    };
+
+
+    private RenderFragment GenMultiSelectCell(object? configObject, JsonElement value) => __builder =>
+    {
+        IEnumerable<string> values = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()) : [value.GetString()];
+
+        if (configObject is SelectConfig config)
+        {
+            foreach (var item in values)
+            {
+                var option = config.Options.FirstOrDefault(u => u.Value == item);
+                var label = option?.Label ?? item;
+                if (config.Color)
+                {
+                    var isDarken = option?.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option?.Color" Dark="isDarken">@label</MChip>
+                }
+                else
+                {
+                    <span class="option">@label</span>
+                }
+            }
+
+            return;
+        }
+
+        foreach (var item in values)
+        {
+            <span class="option">@item</span>
+        }
+    };
+
+    private RenderFragment GenProgressCell(object? configObject, JsonElement value) => __builder =>
+    {
+        if (configObject is ProgressConfig config)
+        {
+            if (value.TryGetDouble(out var progress))
+            {
+                <MProgressLinear Value="progress"
+                                 Color="@config.Color"
+                                 Height="8"
+                                 Striped="@config.Striped">
+                </MProgressLinear>
+            }
+            else
+            {
+                @("Invalid progress value: " + value.GetString())
+            }
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenRatingCell(JsonElement value) => __builder =>
+    {
+        if (value.TryGetDouble(out var rating))
+        {
+            <MRating Value="@rating"
+                     Color="yellow darken-3"
+                     BackgroundColor="grey darken-1"
+                     EmptyIcon="mdi-star"
+                     Small
+                     HalfIncrements
+                     Readonly>
+            </MRating>
+        }
+        else
+        {
+            @value.GetString()
+        }
+    };
+
+    private RenderFragment GenNumberCell(object? configObject, JsonElement value) => __builder =>
+    {
+        if (configObject is NumberConfig config)
+        {
+            if (value.TryGetDecimal(out var number))
+            {
+                var format = config.Type switch
+                {
+                    NumberType.Currency => "C",
+                    NumberType.Number => "N",
+                    NumberType.Percentage => "P",
+                    _ => "D"
+                };
+
+                @number.ToString(format, new CultureInfo("zh-CN"))
+
+                return;
+            }
+        }
+
+        @value.ToString()
+    };
+
+    private RenderFragment GenImageCell(JsonElement value) => __builder =>
+    {
+        var urls = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()).ToList() : [value.GetString()];
+
+        if (urls.Count > 0)
+        {
+            <div class="image-list" @onclick="@(() => OpenImageViewer(urls))">
+                @foreach (var url in urls)
+                {
+                    <img src="@url" alt=""/>
+                }
+            </div>
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenActionsCell(object? columnConfig, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
+    {
+        ActionsConfig config = columnConfig as ActionsConfig ?? new ActionsConfig();
+
+        @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip, item)
+        @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip, item)
+        @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip, item)
+        @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip, item)
+    };
+
+    private RenderFragment GenAction(EventCallback<IReadOnlyDictionary<string, JsonElement>> callback, string? icon, string? tooltip, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
+    {
+        @if (callback.HasDelegate)
+        {
+            <MTooltip Top Disabled="@(tooltip is null)">
+                <ActivatorContent>
+                    <MButton IconName="@icon"
+                             Small
+                             OnClick="@(() => callback.InvokeAsync(item))"
+                             @attributes="@context.Attrs">
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    @tooltip
+                </ChildContent>
+            </MTooltip>
+        }
+    };
+
+}

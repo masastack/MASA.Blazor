@@ -1,0 +1,198 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
+
+<PModal @bind-Value="dialog"
+        Width="640"
+        Title="Filters"
+        Persistent
+        OnSave="HandleOnSave">
+
+    @if (_filters.Count == 0)
+    {
+        <p class="grey--text">No filters applied</p>
+    }
+
+    @for (int i = 0; i < _filters.Count; i++)
+    {
+        var index = i;
+        var filter = _filters[index];
+
+        <div class="d-flex align-center mb-2">
+            <div style="width: 86px; min-width: 86px;"
+                 class="mr-2 text-right">
+                @if (index == 0)
+                {
+                    <span>When</span>
+                }
+                else if (index == 1)
+                {
+                    <MSelect @bind-Value="@_operator"
+                             Items="@Operators"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             Class="filter-operator"
+                             Dense
+                             Outlined
+                             HideDetails="@true">
+                    </MSelect>
+                }
+                else
+                {
+                    <span>@_operator</span>
+                }
+            </div>
+
+            <MSelect @bind-Value="@filter.ColumnId"
+                     Items="_computedColumns"
+                     ItemText="u => u.Name"
+                     ItemValue="u => u.Id"
+                     Label="Field"
+                     TItem="Column"
+                     TItemValue="string"
+                     TValue="string"
+                     Class="mr-2"
+                     Style="max-width: 150px"
+                     Dense
+                     Filled
+                     HideDetails="@true"
+                     OnSelect="@filter.OnSelect">
+            </MSelect>
+            <MSelect @bind-Value="@filter.Func"
+                     Items="@filter.FuncList"
+                     ItemText="u => u"
+                     ItemValue="u => u"
+                     Label="Func"
+                     Class="mr-2"
+                     Style="max-width: 200px"
+                     Dense
+                     Filled
+                     HideDetails="@true">
+            </MSelect>
+            @if (!_noExpectedFuncs.Contains(filter.Func))
+            {
+                <MTextField @bind-Value="@filter.Expected"
+                            Label="Expected"
+                            Class="mr-2"
+                            Filled
+                            Dense
+                            HideDetails="@true">
+                </MTextField>
+            }
+            <MSpacer/>
+            <MButton IconName="mdi-close"
+                     OnClick="@(() => RemoveFilter(filter))">
+            </MButton>
+        </div>
+    }
+
+    <MButton Text
+             LeftIconName="mdi-plus"
+             Color="primary"
+             OnClick="@AddNewFilter">
+        Add filter
+    </MButton>
+</PModal>
+
+@code {
+
+    [Parameter] public IList<Column> Columns { get; set; } = [];
+
+    [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
+
+    [Parameter] public View? ActiveView { get; set; }
+
+    [Parameter] public EventCallback<Filter> OnSave { get; set; }
+
+    private static readonly IList<string> Operators = ["and", "or"];
+    private static readonly HashSet<string> _noExpectedFuncs = ["Empty", "NotEmpty"];
+
+    private HashSet<string> _prevHiddenColumnIds = [];
+    private Guid _prevActiveViewId;
+
+    private IList<Column> _computedColumns = [];
+
+    /// <summary>
+    /// accepted values: "and", "or"
+    /// </summary>
+    private string _operator = "and";
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (ActiveView is not null && (_prevActiveViewId != ActiveView.Id || !_prevHiddenColumnIds.SetEquals(HiddenColumnIds)))
+        {
+            _prevActiveViewId = ActiveView.Id;
+            _prevHiddenColumnIds = HiddenColumnIds;
+            _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
+
+            if (ActiveView.Filter is not null)
+            {
+                _filters.Clear();
+                foreach (var option in ActiveView.Filter.Options)
+                {
+                    var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId);
+                    if (column is null)
+                    {
+                        continue;
+                    }
+
+                    _filters.Add(new FilterModel(column)
+                    {
+                        Func = option.Func,
+                        Expected = option.Expected
+                    });
+                }
+
+                _operator = ActiveView.Filter.Operator == FilterOperator.And ? "and" : "or";
+            }
+        }
+    }
+
+    private bool dialog;
+
+    private List<FilterModel> _filters = [];
+
+    internal void Open()
+    {
+        dialog = true;
+        StateHasChanged();
+    }
+
+    internal void OpenWithFilter(Column column)
+    {
+        dialog = true;
+        var filter = new FilterModel(column);
+        _filters.Add(filter);
+        StateHasChanged();
+    }
+
+    private void AddNewFilter()
+    {
+        if (Columns.Count == 0)
+        {
+            return;
+        }
+
+        var filter = new FilterModel(Columns.First());
+        _filters.Add(filter);
+    }
+
+    private void RemoveFilter(FilterModel filterModel)
+    {
+        _filters.Remove(filterModel);
+    }
+
+    private void HandleOnSave()
+    {
+        dialog = false;
+
+        var request = new Filter
+        {
+            Options = _filters.Select(u => u as FilterOption).ToList(),
+            Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or
+        };
+
+        OnSave.InvokeAsync(request);
+    }
+
+}

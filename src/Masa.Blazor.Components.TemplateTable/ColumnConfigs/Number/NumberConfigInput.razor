@@ -1,0 +1,10 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@inherits ConfigInputBase<NumberConfig>
+
+<MRadioGroup @bind-Value="@Config.Type"
+             @bind-Value:after="UpdateValue"
+             TValue="NumberType">
+    <MRadio Value="@NumberType.Number" Label="Number"></MRadio>
+    <MRadio Value="@NumberType.Currency" Label="Currency"></MRadio>
+    <MRadio Value="@NumberType.Percentage" Label="Percentage"></MRadio>
+</MRadioGroup>
