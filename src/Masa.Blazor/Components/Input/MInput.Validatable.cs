@@ -43,12 +43,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     [Parameter] public List<string>? SuccessMessages { get; set; }
 
-    [Parameter]
-    public IEnumerable<Func<TValue?, StringBoolean>>? Rules
-    {
-        get => GetValue<IEnumerable<Func<TValue?, StringBoolean>>>();
-        set => SetValue(value);
-    }
+    [Parameter] public IEnumerable<Func<TValue?, StringBoolean>>? Rules { get; set; }
 
     private bool _hasInput;
     private bool _hasFocused;
@@ -258,11 +253,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
             {
                 // waiting for InternalValue to be assigned
                 NextTick(InternalValidate);
-            }).Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
-            {
-                Console.Out.WriteLine($"Rules HashCode: {Rules?.GetHashCode()}");
-                // waiting for InternalValue to be assigned
-                // NextTick(InternalValidate);
             });
     }
 
