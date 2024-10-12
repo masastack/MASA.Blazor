@@ -11,6 +11,20 @@ body:
       label: Masa.Blazor version
     validations:
       required: true
+  - type: dropdown
+    id: hosting-model
+    attributes:
+      label: Hosting model
+      options:
+        - Blazor Server
+        - Blazor WebAssembly
+        - Static Server
+        - Interactive Server
+        - Interactive WebAssembly
+        - Interactive Auto
+        - Blazor Hybird(MAUI/WPF/WinForm)
+      validations:
+        required: true
   - type: textarea
     attributes:
       label: Describe the bug
@@ -41,16 +55,3 @@ body:
       label: .NET version
       description: |
         Run `dotnet --version`
-  - type: dropdown
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
-  - type: textarea
-    attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
