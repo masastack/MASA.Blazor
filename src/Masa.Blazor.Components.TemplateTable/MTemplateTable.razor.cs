@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.FilterDialogs;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MTemplateTable
 {
@@ -46,7 +44,8 @@ public partial class MTemplateTable
               sort {
                 options {
                   columnId
-                  direction
+                  orderBy
+                  index
                 }
               }
             }
@@ -62,19 +61,16 @@ public partial class MTemplateTable
         }
         """;
 
-    private SheetManager _sheet = new();
+    private SheetInfo _sheet = new();
     private bool _init;
     private ICollection<IReadOnlyDictionary<string, JsonElement>> _items = [];
     private IList<ViewColumn> _viewColumns = [];
 
-    private Filter? _filter;
-    private Sort _sort = new();
 
     private long _totalCount;
-    private int _pageIndex = 1;
-    private int _pageSize = 5;
     private bool _hasPreviousPage;
     private bool _hasNextPage;
+    private bool _loading;
 
     private bool HasActions => OnUpdate.HasDelegate || OnDelete.HasDelegate ||
                                OnAction1.HasDelegate || OnAction2.HasDelegate;
@@ -87,7 +83,9 @@ public partial class MTemplateTable
         {
             _init = true;
             await RefreshSheetAsync(GetSheetProviderRequest());
-            await RefreshItemsAsync(GetItemsProviderRequest(1, 5, _sheet.ActiveView?.Filter));
+            _sheet.ActiveView.PageIndex = 1;
+            _sheet.ActiveView.PageSize = 5;
+            await RefreshItemsAsync(GetItemsProviderRequest());
         }
     }
 
@@ -96,12 +94,7 @@ public partial class MTemplateTable
         if (SheetProvider is not null)
         {
             var result = await SheetProvider(request);
-            _sheet = result.Sheet;
-        }
-
-        if (HasActions)
-        {
-            _sheet.Columns.Add(CreateActionsColumn());
+            _sheet = SheetInfo.From(result.Sheet);
         }
 
         UpdateStateOfActiveView();
@@ -111,11 +104,23 @@ public partial class MTemplateTable
     {
         if (ItemsProvider is not null)
         {
-            var result = await ItemsProvider(request);
-            _totalCount = result.Result.TotalCount;
-            _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
-            _hasNextPage = result.Result.PageInfo.HasNextPage;
-            _items = result.Result.Items ?? [];
+            _loading = true;
+
+            try
+            {
+                var result = await ItemsProvider(request);
+                await Task.Delay(500); // TODO: just for testing, remove it if implemented
+                _totalCount = result.Result.TotalCount;
+                _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
+                _hasNextPage = result.Result.PageInfo.HasNextPage;
+                _items = result.Result.Items ?? [];
+                
+                _sheet.UpdateActiveViewItems(_items, _hasPreviousPage, _hasNextPage);
+            }
+            finally
+            {
+                _loading = false;
+            }
         }
     }
 
@@ -123,8 +128,8 @@ public partial class MTemplateTable
     {
         _rowHeight = _sheet.ActiveViewRowHeight;
         _viewColumns = _sheet.ActiveViewColumns.ToList(); // needs different instance
-        _filter = _sheet.ActiveView?.Filter;
-        _sort = _sheet.ActiveView?.Sort ?? new Sort();
+        _hasNextPage = _sheet.ActiveView?.HasNextPage ?? false;
+        _hasPreviousPage = _sheet.ActiveView?.HasPreviousPage ?? false;
 
         _hiddenColumnIds.Clear();
         _columnOrder.Clear();
@@ -178,28 +183,27 @@ public partial class MTemplateTable
         return new SheetProviderRequest(SheetQuery);
     }
 
-    private ItemsProviderRequest GetItemsProviderRequest(int pageIndex, int pageSize,
-        Filter? filterRequest = null, Sort? sortRequest = null)
+    private ItemsProviderRequest GetItemsProviderRequest()
     {
-        _pageIndex = pageIndex;
-        _pageSize = pageSize;
-
         return new ItemsProviderRequest()
         {
-            PageIndex = _pageIndex,
-            PageSize = _pageSize,
-            FilterRequest = filterRequest,
-            SortRequest = sortRequest
+            PageIndex = _sheet.ActiveView.PageIndex,
+            PageSize = _sheet.ActiveView.PageSize,
+            FilterRequest = _sheet.ActiveView.Filter,
+            SortRequest = _sheet.ActiveView.Sort
         };
     }
 
     private async Task HandleOnNextPage()
     {
-        await RefreshItemsAsync(GetItemsProviderRequest(_pageIndex + 1, _pageSize));
+        _sheet.ActiveView.PageIndex++;
+
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private async Task HandleOnPreviousPage()
     {
-        await RefreshItemsAsync(GetItemsProviderRequest(_pageIndex - 1, _pageSize));
+        _sheet.ActiveView.PageIndex--;
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 }

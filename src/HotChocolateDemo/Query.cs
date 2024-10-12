@@ -1,5 +1,7 @@
-﻿using Masa.Blazor.Components.TemplateTable;
+﻿using System.Text.Json;
+using Masa.Blazor.Components.TemplateTable;
 using Masa.Blazor.Components.TemplateTable.ColumnConfigs;
+using Path = System.IO.Path;
 
 namespace HotChocolateDemo;
 
@@ -39,6 +41,14 @@ public class Query
 
     public Sheet GetSheet()
     {
+        // 从文件中读取数据
+        var file = Path.Combine(Directory.GetCurrentDirectory(), "sheet.json");
+        if (File.Exists(file))
+        {
+            var json = File.ReadAllText(file);
+            return JsonSerializer.Deserialize<Sheet>(json);
+        }
+
         List<Column> fakeColumns =
         [
             new Column("Name", "Name", ColumnType.Text),

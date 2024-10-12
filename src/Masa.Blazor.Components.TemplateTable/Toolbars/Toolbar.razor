@@ -81,7 +81,11 @@
                 筛选
             </MBadge>
         </MButton>
-        <MButton LeftIconName="mdi-sort" Text>排序</MButton>
+        <MButton LeftIconName="mdi-sort" Text OnClick="@OnSortClick">
+            <MBadge Value="@HasSort" Dot Color="red">
+                排序
+            </MBadge>
+        </MButton>
         <MMenu MinWidth="160">
             <ActivatorContent>
                 <MButton LeftIconName="mdi-format-line-spacing"

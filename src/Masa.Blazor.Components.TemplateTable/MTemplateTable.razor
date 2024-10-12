@@ -5,9 +5,12 @@
 @using Masa.Blazor.Components.TemplateTable.Viewers
 @using Microsoft.JSInterop
 @using Masa.Blazor.Components.TemplateTable.Toolbars
+@using Masa.Blazor.Components.TemplateTable.SortDialogs
 @namespace Masa.Blazor
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
+
+<MButton OnClick="SaveSheet">Save Sheet</MButton>
 
 <Toolbar DefaultViewId="@_sheet.DefaultViewId"
          ActiveView="@_sheet.ActiveViewId"
@@ -24,16 +27,19 @@
          OnViewDelete="@DeleteView"
          OnColumnEditClick="@OpenColumnEditDialog"
          OnColumnToggle="@ToggleColumn"
-         HasFilter="@(_filter?.Options.Count > 0)"
-         OnFilterClick="@(() => _filterDialog.Open())"/>
+         HasFilter="@(_sheet.ActiveView?.Filter?.Options.Count > 0)"
+         HasSort="@(_sheet.ActiveView?.Sort?.Options.Count > 0)"
+         OnFilterClick="@(() => _filterDialog.Open())"
+         OnSortClick="@(() => _sortDialog.Open())"/>
 
 <Viewer ViewColumns="@_viewColumns"
         HiddenColumnIds="@_hiddenColumnIds"
         ColumnOrder="@_columnOrder"
         ColumnOrderChanged="@HandleOnColumnOrderChanged"
+        Loading="@_loading"
         RowHeight="@_rowHeight"
         Rows="@_items"
-        Sort="@_sort"
+        Sort="@_sheet.ActiveView?.Sort"
         OnSortUpdate="@SortUpdate"
         Height="@Height"
         OnColumnToggle="@ToggleColumn"
@@ -45,21 +51,24 @@
         OnAction2="@OnAction2"
         @ref="_viewer">
 </Viewer>
-<div class="d-flex align-center">
-    <div>
-        @{
-            var pageStart = (_pageIndex - 1) * _pageSize + 1;
-            var pageStop = Math.Min(_pageIndex * _pageSize, _totalCount);
-        }
+@if (_sheet.ActiveView is not null)
+{
+    <div class="d-flex align-center">
+        <div>
+            @{
+                var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize + 1;
+                var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
+            }
 
-        @pageStart - @pageStop of @_totalCount
-    </div>
+            @pageStart - @pageStop of @_totalCount
+        </div>
 
-    <div>
-        <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
-        <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
+        <div>
+            <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
+            <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
+        </div>
     </div>
-</div>
+}
 
 <ColumnDialog @ref="_columnEditDialog"
               OnSave="@UpdateColumn">
@@ -72,6 +81,20 @@
               OnSave="@SaveFilter">
 </FilterDialog>
 
+<SortDialog @ref="_sortDialog"
+            ActiveView="@_sheet.ActiveView"
+            Columns="@_sheet.Columns"
+            HiddenColumnIds="@_hiddenColumnIds"
+            OnSave="@SortUpdate">
+</SortDialog>
+
+<p style="font-size: 12px;white-space: break-spaces">
+    @(JsonSerializer.Serialize(_sheet.Views, new JsonSerializerOptions()
+    {
+        WriteIndented = true
+    }))
+</p>
+
 @code {
 
     private HashSet<string> _hiddenColumnIds = [];
@@ -81,20 +104,17 @@
 
     private ColumnDialog? _columnEditDialog;
     private FilterDialog? _filterDialog;
+    private SortDialog? _sortDialog;
 
     private void AddNewView()
     {
-        var view = new View()
-        {
-            Id = Guid.NewGuid(),
-            Name = "New view",
-            Type = ViewType.Grid,
-            Columns = _sheet.ActiveViewColumns.DeepClone()
-        };
+        var clonedView = _sheet.ActiveView.DeepClone();
+        clonedView.Id = Guid.NewGuid();
+        clonedView.Name = "New view";
 
-        _sheet.Views.Add(view);
-        _sheet.ActiveViewId = view.Id;
-        
+        _sheet.Views.Add(clonedView);
+        _sheet.ActiveViewId = clonedView.Id;
+
         ResetSheet();
     }
 
@@ -122,7 +142,8 @@
 
         if (!confirmed) return;
 
-        _sheet.Views.Remove(view);
+        var viewInfo = _sheet.Views.FirstOrDefault(v => v.Id == view.Id);
+        _sheet.Views.Remove(viewInfo);
 
         if (_sheet.ActiveViewId == view.Id)
         {
@@ -136,8 +157,17 @@
 
         ResetSheet();
 
-        // TODO: 如果这个视图没有数据，就加载数据
-        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+        if (_sheet.ActiveView?.Rows is null)
+        {
+            _sheet.ActiveView.PageIndex = 1;
+            _sheet.ActiveView.PageSize = 5; // TODO:使用用户输入的值
+
+            await RefreshItemsAsync(GetItemsProviderRequest());
+        }
+        else
+        {
+            _items = _sheet.ActiveView.Rows;
+        }
     }
 
     private void ResetSheet()
@@ -228,14 +258,16 @@
 
     private async Task SaveFilter(Filter filter)
     {
-        _filter = filter;
-        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+        _sheet.ActiveView.Filter = filter;
+        _sheet.ActiveView.PageIndex = 1;
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private async Task SortUpdate(Sort sort)
     {
-        _sort = sort;
-        await RefreshItemsAsync(GetItemsProviderRequest(1, _pageSize, _filter, _sort));
+        _sheet.ActiveView.Sort = sort;
+        _sheet.ActiveView.PageIndex = 1;
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private void ResizeColumn((string ColumnId, double Width) args)
@@ -247,6 +279,26 @@
         }
 
         viewColumn.Width = args.Width;
+    }
+
+    private async Task SaveSheet()
+    {
+        await OnSave.InvokeAsync(new Sheet()
+        {
+            Columns = _sheet.Columns,
+            Views = _sheet.Views.Select(v => new View()
+            {
+                Id = v.Id,
+                Name = v.Name,
+                Columns = v.Columns,
+                RowHeight = v.RowHeight,
+                HasActions = v.HasActions,
+                Sort = v.Sort,
+                Filter = v.Filter,
+            }).ToList(),
+            ActiveViewId = _sheet.ActiveViewId,
+            DefaultViewId = _sheet.DefaultViewId,
+        });
     }
 
 }

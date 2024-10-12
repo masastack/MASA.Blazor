@@ -2,6 +2,7 @@
 @using BemIt
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
+
 <MSimpleTable FixedHeader
               Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
               Style="@($"--mt-row-height: {RowHeightValue}px")"
@@ -37,7 +38,7 @@
                     @if (!hidden)
                     {
                         <div class="masa-table-viewer__header-column-content">
-                            <ColumnName Data="@template.Column" 
+                            <ColumnName Data="@template.Column"
                                         Sort="@Sort"
                                         OnClick="@OnSortUpdate"/>
                             <MSpacer/>
@@ -59,6 +60,17 @@
         </MSortableProvider>
     </tr>
     </thead>
+    @if (Loading)
+    {
+        <thead>
+        <tr class="m-data-table__progress">
+            <th class="column" colspan="1000">
+                @*TODO: 设置为正常的colspan*@
+                <MProgressLinear Absolute Indeterminate Color="primary"></MProgressLinear>
+            </th>
+        </tr>
+        </thead>
+    }
     <tbody>
     <Virtualize Items="Rows"
                 Context="item"

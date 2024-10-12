@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable;
+﻿using System.Text.Json.Serialization;
+
+namespace Masa.Blazor.Components.TemplateTable;
 
 public class Sort
 {
@@ -16,14 +18,19 @@ public class Sort
 
 public class SortOption
 {
+    public SortOption()
+    {
+    }
+
     public string ColumnId { get; set; }
 
-    public SortDirection Direction { get; set; }
-    
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public SortOrder OrderBy { get; set; }
+
     public int Index { get; set; }
 }
 
-public enum SortDirection
+public enum SortOrder
 {
     Asc,
     Desc

@@ -127,7 +127,7 @@ public readonly struct ItemsProviderRequest
 
         foreach (var option in sortRequest.Options)
         {
-            arguments.Add($"{option.ColumnId.ToCamelCase()}: {option.Direction.ToString().ToUpperInvariant()}");
+            arguments.Add($"{option.ColumnId.ToCamelCase()}: {option.OrderBy.ToString().ToUpperInvariant()}");
         }
 
         return $"order: {{{string.Join(", ", arguments)}}}";

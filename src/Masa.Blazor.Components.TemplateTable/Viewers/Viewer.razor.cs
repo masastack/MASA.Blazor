@@ -26,11 +26,13 @@ public partial class Viewer : IAsyncDisposable
     [Parameter]
     public HashSet<string> HiddenColumnIds { get; set; } = [];
 
+    [Parameter] public bool Loading { get; set; }
+
     [Parameter] public RowHeight RowHeight { get; set; }
 
     [Parameter] public ICollection<IReadOnlyDictionary<string, JsonElement>> Rows { get; set; } = [];
 
-    [Parameter] public Sort Sort { get; set; } = new();
+    [Parameter] public Sort? Sort { get; set; }
 
     [Parameter] public EventCallback<Sort> OnSortUpdate { get; set; }
 

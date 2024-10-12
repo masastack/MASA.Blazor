@@ -18,19 +18,19 @@
 
     [Parameter] public Column Data { get; set; } = null!;
 
-    [Parameter] public Sort Sort { get; set; } = null!;
+    [Parameter] public Sort? Sort { get; set; }
 
     [Parameter] public EventCallback<Sort> OnClick { get; set; }
 
     private ElementReference _ref;
 
-    private SortOption? SortOption => Sort.Options.FirstOrDefault(u => u.ColumnId == Data.Id);
+    private SortOption? SortOption => Sort?.Options.FirstOrDefault(u => u.ColumnId == Data.Id);
 
     private int Index
     {
         get
         {
-            if (SortOption is null)
+            if (SortOption is null || Sort is null)
             {
                 return 0;
             }
@@ -56,10 +56,10 @@
                 return "";
             }
 
-            return SortOption.Direction switch
+            return SortOption.OrderBy switch
             {
-                SortDirection.Asc => "active asc",
-                SortDirection.Desc => "active desc",
+                SortOrder.Asc => "active asc",
+                SortOrder.Desc => "active desc",
                 _ => ""
             };
         }
@@ -67,27 +67,29 @@
 
     private async Task HandleOnClick()
     {
+        var sort = Sort ?? new();
+
         if (SortOption is null)
         {
             var sortOption = new SortOption
             {
                 ColumnId = Data.Id,
-                Direction = SortDirection.Asc,
-                Index = Sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0
+                OrderBy = SortOrder.Asc,
+                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0
             };
 
-            Sort.Options.Add(sortOption);
+            sort.Options.Add(sortOption);
         }
-        else if (SortOption.Direction == SortDirection.Asc)
+        else if (SortOption.OrderBy == SortOrder.Asc)
         {
-            SortOption.Direction = SortDirection.Desc;
+            SortOption.OrderBy = SortOrder.Desc;
         }
         else
         {
-            Sort.Options.Remove(SortOption);
+            sort.Options.Remove(SortOption);
         }
 
-        await OnClick.InvokeAsync(Sort);
+        await OnClick.InvokeAsync(sort);
     }
 
 }

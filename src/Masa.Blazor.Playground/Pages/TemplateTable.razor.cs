@@ -1,10 +1,13 @@
 ﻿using GraphQL;
 using Masa.Blazor.Components.TemplateTable;
+using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Playground.Pages;
 
 public partial class TemplateTable
 {
+    [Inject] private HttpClient HttpClient { get; set; } = null!;
+
     private SheetProvider? _sheetProvider;
     private ItemsProvider? _itemsProvider;
     private bool _sheetRequested;
@@ -40,5 +43,10 @@ public partial class TemplateTable
             var response = await GraphQLClient.SendQueryAsync<ItemsProviderResult>(request);
             return response.Data;
         };
+    }
+
+    private async Task Save(Sheet sheet)
+    {
+        await HttpClient.PostAsJsonAsync("http://localhost:5297/sheet", sheet);
     }
 }

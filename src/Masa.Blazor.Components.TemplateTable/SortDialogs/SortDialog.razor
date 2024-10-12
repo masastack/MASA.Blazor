@@ -1,0 +1,142 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.SortDialogs
+
+<PModal @bind-Value="dialog"
+        Width="640"
+        Title="Sorting"
+        Persistent
+        BodyStyle="min-height: 180px"
+        OnCancel="@HandleOnCancel"
+        OnSave="@HandleOnSave">
+    @for (var i = 0; i < _sorts.Count; i++)
+    {
+        var index = i;
+        var option = _sorts[index];
+        <div class="d-flex align-center justify-end mb-2">
+            <div class="mr-2 text-right">
+                @(index == 0 ? "Sort by" : "Then by")
+                <span class="font-weight-bold">
+                    @($"{option.Column.Name}({option.ColumnId})")
+                </span>
+            </div>
+
+            <MSelect @bind-Value="@option.OrderBy"
+                     Items="@_directions"
+                     ItemValue="u => u.Value"
+                     ItemText="u => u.Label"
+                     Class="mr-2"
+                     Dense
+                     Filled
+                     HideDetails="@true"
+                     Style="width: 160px; max-width: 160px;">
+            </MSelect>
+
+            <MButton IconName="mdi-close"
+                     OnClick="@(() => RemoveSort(option))">
+            </MButton>
+        </div>
+    }
+
+    @if (ComputedColumns.Count > 0)
+    {
+        <div class="text-right">
+            <SortBy Columns="@ComputedColumns"
+                    OnSelect="@AddSort">
+                @(_sorts.Count == 0 ? "Sort by" : "Then by")
+            </SortBy>
+        </div>
+    }
+
+</PModal>
+
+@code
+{
+    [Parameter] public IList<Column> Columns { get; set; } = [];
+
+    [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
+
+    [Parameter] public View ActiveView { get; set; } = null!;
+
+    [Parameter] public EventCallback<Sort> OnSave { get; set; }
+
+    private static (SortOrder Value, string Label)[] _directions =
+    [
+        (SortOrder.Asc, "ascending"),
+        (SortOrder.Desc, "descending")
+    ];
+
+    private bool dialog;
+    private IList<Column> _computedColumns = [];
+
+    private IList<SortModel> _sorts = [];
+
+    private IEnumerable<string> SortColumnIds => _sorts.Select(u => u.Column.Id);
+
+    private IList<Column> ComputedColumns => _computedColumns.Where(u => !SortColumnIds.Contains(u.Id)).ToList();
+
+    private void SetSorts()
+    {
+        _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
+
+        if (ActiveView.Sort is null)
+        {
+            _sorts = [];
+            return;
+        }
+        
+        _sorts.Clear();
+
+        foreach (var option in ActiveView.Sort.Options.OrderBy(u => u.Index))
+        {
+            var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId);
+            if (column is null)
+            {
+                continue;
+            }
+
+            _sorts.Add(new SortModel(column, option.Index)
+            {
+                OrderBy = option.OrderBy
+            });
+        }
+    }
+
+    private int GetNextIndex()
+    {
+        return _sorts.MaxBy(u => u.Index)?.Index + 1 ?? 0;
+    }
+
+    internal void Open()
+    {
+        SetSorts();
+        dialog = true;
+        StateHasChanged();
+    }
+
+    private void AddSort(Column column)
+    {
+        _sorts.Add(new SortModel(column, GetNextIndex()));
+    }
+
+    private void RemoveSort(SortModel model)
+    {
+        _sorts.Remove(model);
+    }
+
+    private void HandleOnCancel()
+    {
+        _sorts.Clear();
+        dialog = false;
+    }
+
+    private void HandleOnSave()
+    {
+        dialog = false;
+
+        var sort = new Sort()
+        {
+            Options = _sorts.Select(u => u.ToSortOption()).ToList()
+        };
+
+        OnSave.InvokeAsync(sort);
+    }
+}

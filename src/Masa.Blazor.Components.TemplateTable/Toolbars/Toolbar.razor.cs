@@ -18,7 +18,7 @@ public partial class Toolbar
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
-    [Parameter] public IList<View> Views { get; set; } = [];
+    [Parameter] public IList<ViewInfo> Views { get; set; } = [];
 
     [Parameter] public IList<Column> Columns { get; set; } = [];
 
@@ -34,8 +34,12 @@ public partial class Toolbar
 
     [Parameter] public EventCallback OnFilterClick { get; set; }
 
+    [Parameter] public EventCallback OnSortClick { get; set; }
+
     [Parameter] public bool HasFilter { get; set; }
-    
+
+    [Parameter] public bool HasSort { get; set; }
+
     private bool _configDialog;
     private bool _filterDialog;
     private Guid _renamingView;

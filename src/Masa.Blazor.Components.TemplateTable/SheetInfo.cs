@@ -3,7 +3,7 @@
 namespace Masa.Blazor.Components.TemplateTable;
 
 // TODO: rename this
-public class SheetManager
+public class SheetInfo
 {
     /// <summary>
     /// All columns without state.
@@ -23,22 +23,22 @@ public class SheetManager
     /// <summary>
     /// All views of the sheet.
     /// </summary>
-    public List<View> Views { get; set; } = [];
-    
+    public List<ViewInfo> Views { get; set; } = [];
+
     [JsonIgnore] internal List<ViewColumn> ActiveViewColumns => ActiveView?.Columns ?? [];
 
     [JsonIgnore] internal RowHeight ActiveViewRowHeight => ActiveView?.RowHeight ?? RowHeight.Low;
 
     [JsonIgnore] internal bool ActiveViewHasActions => ActiveView?.HasActions ?? false;
 
-    internal View? ActiveView => Views.FirstOrDefault(v => v.Id == ActiveViewId);
+    internal ViewInfo? ActiveView => Views.FirstOrDefault(v => v.Id == ActiveViewId);
 
-    internal static SheetManager From(Sheet sheet)
+    internal static SheetInfo From(Sheet sheet)
     {
-        return new SheetManager
+        return new SheetInfo
         {
             Columns = sheet.Columns,
-            Views = sheet.Views,
+            Views = sheet.Views.Select(v => new ViewInfo(v)).ToList(),
             ActiveViewId = sheet.ActiveViewId,
             DefaultViewId = sheet.DefaultViewId
         };
@@ -62,5 +62,17 @@ public class SheetManager
         }
 
         ActiveView.HasActions = hasActions;
+    }
+
+    internal void UpdateActiveViewItems(ICollection<IReadOnlyDictionary<string, JsonElement>> items, bool hasPreviousPage, bool hasNextPage)
+    {
+        if (ActiveView is null)
+        {
+            return;
+        }
+
+        ActiveView.Rows = items;
+        ActiveView.HasPreviousPage = hasPreviousPage;
+        ActiveView.HasNextPage = hasNextPage;
     }
 }
