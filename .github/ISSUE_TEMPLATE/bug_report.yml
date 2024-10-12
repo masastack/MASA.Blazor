@@ -23,8 +23,8 @@ body:
         - Interactive WebAssembly
         - Interactive Auto
         - Blazor Hybird(MAUI/WPF/WinForm)
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Describe the bug
