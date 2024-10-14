@@ -166,6 +166,7 @@
                    Order="@ColumnOrder"
                    OrderChanged="@ColumnOrderChanged"
                    Handle=".handle"
+                   Ignore=".ignore-elements"
                    Context="column">
             @{
                 var hidden = HiddenColumnIds.Contains(column.Id);

@@ -122,7 +122,7 @@ public class MTemplateTableTests
                 new SortOption()
                 {
                     ColumnId = "name",
-                    Direction = SortDirection.Asc
+                    OrderBy = SortOrder.Asc
                 }
             ]
         };
@@ -143,7 +143,7 @@ public class MTemplateTableTests
                 new SortOption()
                 {
                     ColumnId = "name",
-                    Direction = SortDirection.Desc
+                    OrderBy = SortOrder.Desc
                 }
             ]
         };
@@ -164,12 +164,12 @@ public class MTemplateTableTests
                 new SortOption()
                 {
                     ColumnId = "name",
-                    Direction = SortDirection.Asc
+                    OrderBy = SortOrder.Asc
                 },
                 new SortOption()
                 {
                     ColumnId = "age",
-                    Direction = SortDirection.Desc
+                    OrderBy = SortOrder.Desc
                 }
             ]
         };

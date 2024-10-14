@@ -97,6 +97,11 @@ public partial class MTemplateTable
             _sheet = SheetInfo.From(result.Sheet);
         }
 
+        if (HasActions && _sheet.Columns.All(u => u.Id != Preset.ActionsColumnId))
+        {
+            _sheet.Columns.Add(CreateActionsColumn());
+        }
+
         UpdateStateOfActiveView();
     }
 
@@ -114,7 +119,7 @@ public partial class MTemplateTable
                 _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
                 _hasNextPage = result.Result.PageInfo.HasNextPage;
                 _items = result.Result.Items ?? [];
-                
+
                 _sheet.UpdateActiveViewItems(_items, _hasPreviousPage, _hasNextPage);
             }
             finally

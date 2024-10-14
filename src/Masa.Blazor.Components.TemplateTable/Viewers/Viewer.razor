@@ -15,7 +15,7 @@
                            GhostClass="accent"
                            ContainerRef="@_headerTrRef"
                            ForceFallback
-                           Ignore=".actions"
+                           Ignore=".ignore-elements"
                            Order="@ColumnOrder"
                            OrderChanged="@ColumnOrderChanged">
             <ItemContent Context="context">
@@ -37,23 +37,12 @@
                     @attributes="@context.Attrs">
                     @if (!hidden)
                     {
-                        <div class="masa-table-viewer__header-column-content">
-                            <ColumnName Data="@template.Column"
-                                        Sort="@Sort"
-                                        OnClick="@OnSortUpdate"/>
-                            <MSpacer/>
-                            <Dropdown Icon="mdi-menu-down-outline">
-                                @if (!isActionsType)
-                                {
-                                    <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(template.Column))"></DropdownItem>
-                                }
-                                <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(template.Column.Id))"></DropdownItem>
-                            </Dropdown>
-                        </div>
-                        @if (!isActionsType)
-                        {
-                            <Resizor/>
-                        }
+                        <ColumnName Data="@template.Column"
+                                    Sort="@Sort"
+                                    OnClick="@OnSortUpdate"
+                                    IsActionsType="@isActionsType"
+                                    OnColumnToggle="@OnColumnToggle"
+                                    OnColumnEditClick="@OnColumnEditClick"/>
                     }
                 </th>
             </ItemContent>
