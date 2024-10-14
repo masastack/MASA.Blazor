@@ -8,7 +8,7 @@ public class SheetInfo
     /// <summary>
     /// All columns without state.
     /// </summary>
-    public List<Column> Columns { get; set; } = [];
+    public List<ColumnInfo> Columns { get; set; } = [];
 
     /// <summary>
     /// The identifier of the default view, which is the first view and cannot be deleted.
@@ -37,7 +37,7 @@ public class SheetInfo
     {
         return new SheetInfo
         {
-            Columns = sheet.Columns,
+            Columns = sheet.Columns.Select(c => new ColumnInfo(c)).ToList(),
             Views = sheet.Views.Select(v => new ViewInfo(v)).ToList(),
             ActiveViewId = sheet.ActiveViewId,
             DefaultViewId = sheet.DefaultViewId

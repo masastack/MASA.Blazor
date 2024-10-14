@@ -7,10 +7,10 @@ public partial class Viewer : IAsyncDisposable
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
     /// <summary>
-    /// View columns without order, that will be ordered by <see cref="ColumnOrder"/>.
+    /// View columns without an order, that will be ordered by <see cref="ColumnOrder"/>.
     /// </summary>
     [Parameter]
-    public ICollection<ViewColumn> ViewColumns { get; set; } = [];
+    public ICollection<ViewColumnInfo> ViewColumns { get; set; } = [];
 
     /// <summary>
     /// The order of view columns.
@@ -89,7 +89,7 @@ public partial class Viewer : IAsyncDisposable
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private IList<ViewColumn> _orderedViewColumns = [];
+    private IList<ViewColumnInfo> _orderedViewColumns = [];
 
     protected override void OnInitialized()
     {

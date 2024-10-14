@@ -123,7 +123,7 @@
 
 @code {
 
-    private RenderFragment GenCell(Column column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
+    private RenderFragment GenCell(ColumnInfo column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
     {
         switch (column.Type)
         {

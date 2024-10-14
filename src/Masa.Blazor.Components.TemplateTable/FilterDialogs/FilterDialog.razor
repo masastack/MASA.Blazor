@@ -46,7 +46,7 @@
                      ItemText="u => u.Name"
                      ItemValue="u => u.Id"
                      Label="Field"
-                     TItem="Column"
+                     TItem="ColumnInfo"
                      TItemValue="string"
                      TValue="string"
                      Class="mr-2"
@@ -94,7 +94,7 @@
 
 @code {
 
-    [Parameter] public IList<Column> Columns { get; set; } = [];
+    [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
@@ -108,7 +108,7 @@
     private HashSet<string> _prevHiddenColumnIds = [];
     private Guid _prevActiveViewId;
 
-    private IList<Column> _computedColumns = [];
+    private IList<ColumnInfo> _computedColumns = [];
 
     /// <summary>
     /// accepted values: "and", "or"

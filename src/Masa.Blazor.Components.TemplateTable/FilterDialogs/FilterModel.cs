@@ -14,7 +14,7 @@ public class FilterModel : FilterOption
         UpdateOperator();
     }
 
-    public void OnSelect((Column Column, bool Selected) item)
+    public void OnSelect((ColumnInfo Column, bool Selected) item)
     {
         Column = item.Column;
         ColumnId = item.Column.Id;

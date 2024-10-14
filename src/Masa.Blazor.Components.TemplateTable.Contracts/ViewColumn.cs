@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
-
-namespace Masa.Blazor.Components.TemplateTable;
+﻿namespace Masa.Blazor.Components.TemplateTable;
 
 public class ViewColumn
 {
@@ -10,12 +7,4 @@ public class ViewColumn
     public double Width { get; set; }
 
     public bool Hidden { get; set; }
-
-    [JsonIgnore]
-    internal Column Column { get; set; }
-
-    internal void AttachColumn(Column column)
-    {
-        Column = column;
-    }
 }

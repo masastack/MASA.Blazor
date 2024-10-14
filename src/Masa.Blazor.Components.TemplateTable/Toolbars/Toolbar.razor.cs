@@ -20,7 +20,7 @@ public partial class Toolbar
 
     [Parameter] public IList<ViewInfo> Views { get; set; } = [];
 
-    [Parameter] public IList<Column> Columns { get; set; } = [];
+    [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
     [Parameter] public EventCallback OnViewAdd { get; set; }
 

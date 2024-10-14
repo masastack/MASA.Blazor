@@ -64,7 +64,7 @@ public partial class MTemplateTable
     private SheetInfo _sheet = new();
     private bool _init;
     private ICollection<IReadOnlyDictionary<string, JsonElement>> _items = [];
-    private IList<ViewColumn> _viewColumns = [];
+    private ICollection<ViewColumnInfo> _viewColumns = [];
 
 
     private long _totalCount;
@@ -132,14 +132,14 @@ public partial class MTemplateTable
     private void UpdateStateOfActiveView()
     {
         _rowHeight = _sheet.ActiveViewRowHeight;
-        _viewColumns = _sheet.ActiveViewColumns.ToList(); // needs different instance
         _hasNextPage = _sheet.ActiveView?.HasNextPage ?? false;
         _hasPreviousPage = _sheet.ActiveView?.HasPreviousPage ?? false;
 
+        _viewColumns = []; // needs different instance
         _hiddenColumnIds.Clear();
         _columnOrder.Clear();
 
-        foreach (var viewColumn in _viewColumns)
+        foreach (var viewColumn in _sheet.ActiveViewColumns)
         {
             if (viewColumn.Hidden)
             {
@@ -151,7 +151,7 @@ public partial class MTemplateTable
             var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);
             if (column is not null)
             {
-                viewColumn.AttachColumn(column);
+                _viewColumns.Add(ViewColumnInfo.From(viewColumn, column));
             }
         }
 
@@ -162,9 +162,9 @@ public partial class MTemplateTable
         }
     }
 
-    private static Column CreateActionsColumn()
+    private static ColumnInfo CreateActionsColumn()
     {
-        return new()
+        return new ColumnInfo()
         {
             Id = Preset.ActionsColumnId,
             Name = "Actions",
@@ -172,15 +172,10 @@ public partial class MTemplateTable
         };
     }
 
-    private static ViewColumn CreateActionsViewColumn()
+    private static ViewColumnInfo CreateActionsViewColumn()
     {
         var column = CreateActionsColumn();
-        return new()
-        {
-            ColumnId = Preset.ActionsColumnId,
-            Hidden = false,
-            Column = column
-        };
+        return ViewColumnInfo.From(Preset.ActionsColumnId, false, column);
     }
 
     private SheetProviderRequest GetSheetProviderRequest()

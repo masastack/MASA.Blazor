@@ -5,7 +5,7 @@ public class Sheet
     /// <summary>
     /// All columns without state.
     /// </summary>
-    public List<Column> Columns { get; set; } = [];
+    public IEnumerable<Column> Columns { get; set; } = [];
     
     /// <summary>
     /// The identifier of the default view, which is the first view and cannot be deleted.
@@ -20,5 +20,5 @@ public class Sheet
     /// <summary>
     /// All views of the sheet.
     /// </summary>
-    public List<View> Views { get; set; } = [];
+    public IEnumerable<View> Views { get; set; } = [];
 }

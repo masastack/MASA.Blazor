@@ -103,12 +103,12 @@
 }
 
 .masa-table-viewer__header-column-content .menu:not([aria-expanded]) {
-  display: none;
+  opacity: 0;
 }
 
 .masa-table-viewer__header-column-content:hover .menu {
-  display: block;
   color: inherit;
+  opacity: 1;
 }
 
 .masa-table-viewer__header-column-content {

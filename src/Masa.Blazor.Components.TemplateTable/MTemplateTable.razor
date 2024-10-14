@@ -253,7 +253,7 @@
         column.Config = data.Config;
 
         var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
-        viewColumn?.AttachColumn(column);
+        viewColumn.Column = column;
     }
 
     private async Task SaveFilter(Filter filter)
@@ -283,22 +283,14 @@
 
     private async Task SaveSheet()
     {
-        await OnSave.InvokeAsync(new Sheet()
+        var sheet = new Sheet()
         {
-            Columns = _sheet.Columns,
-            Views = _sheet.Views.Select(v => new View()
-            {
-                Id = v.Id,
-                Name = v.Name,
-                Columns = v.Columns,
-                RowHeight = v.RowHeight,
-                HasActions = v.HasActions,
-                Sort = v.Sort,
-                Filter = v.Filter,
-            }).ToList(),
+            Columns = _sheet.Columns.Select(Column (u) => u),
+            Views = _sheet.Views.Select(View (u) => u),
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,
-        });
+        };
+        await OnSave.InvokeAsync(sheet);
     }
 
 }

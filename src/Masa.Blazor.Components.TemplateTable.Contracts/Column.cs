@@ -15,9 +15,9 @@ public class Column
         Type = type;
     }
 
-    public Column(string id, string name, ColumnType type, object? config) : this(id, name, type)
+    public Column(string id, string name, ColumnType type, object? configObject) : this(id, name, type)
     {
-        Config = System.Text.Json.JsonSerializer.Serialize(config);
+        Config = System.Text.Json.JsonSerializer.Serialize(configObject);
     }
 
     public string Id { get; init; }
@@ -28,6 +28,4 @@ public class Column
     public ColumnType Type { get; set; }
 
     public string? Config { get; set; }
-
-    internal object? ConfigObject { get; set; }
 }

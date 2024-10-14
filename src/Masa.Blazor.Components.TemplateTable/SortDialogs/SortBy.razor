@@ -22,7 +22,7 @@
                  FullWidth
                  HideDetails="@true"
                  Label="Sort by"
-                 TItem="Column"
+                 TItem="ColumnInfo"
                  TItemValue="string"
                  TValue="string"
                  OnSelect="@(t => HandleOnSelect(t.Item))">
@@ -32,16 +32,16 @@
 
 @code {
 
-    [Parameter] public IList<Column> Columns { get; set; } = [];
+    [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
-    [Parameter] public EventCallback<Column> OnSelect { get; set; }
+    [Parameter] public EventCallback<ColumnInfo> OnSelect { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     private bool menu;
     private string? value;
 
-    private void HandleOnSelect(Column column)
+    private void HandleOnSelect(ColumnInfo column)
     {
         OnSelect.InvokeAsync(column);
         menu = false;

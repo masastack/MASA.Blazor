@@ -50,7 +50,7 @@
 
 @code
 {
-    [Parameter] public IList<Column> Columns { get; set; } = [];
+    [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
@@ -65,13 +65,13 @@
     ];
 
     private bool dialog;
-    private IList<Column> _computedColumns = [];
+    private IList<ColumnInfo> _computedColumns = [];
 
     private IList<SortModel> _sorts = [];
 
     private IEnumerable<string> SortColumnIds => _sorts.Select(u => u.Column.Id);
 
-    private IList<Column> ComputedColumns => _computedColumns.Where(u => !SortColumnIds.Contains(u.Id)).ToList();
+    private IList<ColumnInfo> ComputedColumns => _computedColumns.Where(u => !SortColumnIds.Contains(u.Id)).ToList();
 
     private void SetSorts()
     {
