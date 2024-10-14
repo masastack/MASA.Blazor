@@ -168,6 +168,10 @@
     "MSlideGroup",
     "MSlideItem"
   ],
+  "sortable": [
+    "MSortable",
+    "MSortableProvider"
+  ],
   "splitters": [
     "MSplitter",
     "MSplitterPane"
