@@ -136,16 +136,10 @@ public partial class MTemplateTable
         _hasPreviousPage = _sheet.ActiveView?.HasPreviousPage ?? false;
 
         _viewColumns = []; // needs different instance
-        _hiddenColumnIds.Clear();
         _columnOrder.Clear();
 
         foreach (var viewColumn in _sheet.ActiveViewColumns)
         {
-            if (viewColumn.Hidden)
-            {
-                _hiddenColumnIds.Add(viewColumn.ColumnId);
-            }
-
             _columnOrder.Add(viewColumn.ColumnId);
 
             var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);

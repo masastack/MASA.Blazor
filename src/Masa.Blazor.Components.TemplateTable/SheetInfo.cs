@@ -27,6 +27,10 @@ public class SheetInfo
 
     [JsonIgnore] internal List<ViewColumn> ActiveViewColumns => ActiveView?.Columns ?? [];
 
+    [JsonIgnore]
+    internal HashSet<string> ActiveViewHiddenColumnIds
+        => ActiveViewColumns.Where(c => c.Hidden).Select(c => c.ColumnId).ToHashSet();
+
     [JsonIgnore] internal RowHeight ActiveViewRowHeight => ActiveView?.RowHeight ?? RowHeight.Low;
 
     [JsonIgnore] internal bool ActiveViewHasActions => ActiveView?.HasActions ?? false;
@@ -62,9 +66,17 @@ public class SheetInfo
         }
 
         ActiveView.HasActions = hasActions;
+        var actionsColumn = ActiveView.Columns.FirstOrDefault(u => u.ColumnId == Preset.ActionsColumnId);
+        if (actionsColumn is null)
+        {
+            return;
+        }
+        
+        actionsColumn.Hidden = !hasActions;
     }
 
-    internal void UpdateActiveViewItems(ICollection<IReadOnlyDictionary<string, JsonElement>> items, bool hasPreviousPage, bool hasNextPage)
+    internal void UpdateActiveViewItems(ICollection<IReadOnlyDictionary<string, JsonElement>> items,
+        bool hasPreviousPage, bool hasNextPage)
     {
         if (ActiveView is null)
         {

@@ -2,7 +2,16 @@
 
 public class ViewColumn
 {
-    public required string ColumnId { get; init; }
+    public ViewColumn()
+    {
+    }
+
+    public ViewColumn(string columnId)
+    {
+        ColumnId = columnId;
+    }
+
+    public string ColumnId { get; init; }
 
     public double Width { get; set; }
 

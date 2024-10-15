@@ -76,10 +76,7 @@ public class Query
             })
         ];
 
-        List<ViewColumn> fakedViewColumns = fakeColumns.Select(u => new ViewColumn()
-        {
-            ColumnId = u.Id
-        }).ToList();
+        List<ViewColumn> fakedViewColumns = fakeColumns.Select(u => new ViewColumn(u.Id)).ToList();
 
         View fakeView = new()
         {

@@ -30,19 +30,19 @@
             @switch (_column.Type)
             {
                 case ColumnType.Date:
-                    <DateConfigInput @bind-Value="@_column.Config"/>
+                    <DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
                     break;
                 case ColumnType.Select or ColumnType.MultiSelect:
-                    <SelectConfigInput @bind-Value="@_column.Config"/>
+                    <SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
                     break;
                 case ColumnType.Progress:
-                    <ProgressConfigInput @bind-Value="@_column.Config"/>
+                    <ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
                     break;
                 case ColumnType.Number:
-                    <NumberConfigInput @bind-Value="@_column.Config"/>
+                    <NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
                     break;
                 case ColumnType.Actions:
-                    <ActionsConfigInput @bind-Value="@_column.Config"/>
+                    <ActionsConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
                     break;
             }
         </div>
@@ -56,11 +56,11 @@
 
 @code {
 
-    [Parameter] public EventCallback<Column> OnSave { get; set; }
+    [Parameter] public EventCallback<ColumnInfo> OnSave { get; set; }
 
     private bool _menu;
 
-    private Column _column = new();
+    private ColumnInfo _column = new();
 
     private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
 
@@ -71,8 +71,6 @@
 
     private void HandleOnSubmit()
     {
-        Console.Out.WriteLine($"HandleOnSubmit {_column.Config}");
-
         OnSave.InvokeAsync(_column);
         _menu = false;
     }
@@ -87,6 +85,12 @@
 
         return metadataList;
     }
+    
+    private void HandleOnConfigUpdate(object config)
+    {
+        _column.ConfigObject = config;
+        _column.Config = JsonSerializer.Serialize(config);
+    }
 
     private void OnDialogChanged()
     {
@@ -98,27 +102,15 @@
 
     internal void Open(Column column)
     {
-        _column = new Column()
+        _column = new ColumnInfo()
         {
             Id = column.Id,
             Name = column.Name,
             Type = column.Type,
-            Config = column.Config
+            Config = column.Config,
         };
 
         _menu = true;
         StateHasChanged();
     }
-
-    internal void Open()
-    {
-        _column = new Column
-        {
-            Name = nameof(ColumnType.Text),
-            Type = ColumnType.Text
-        };
-        _menu = true;
-        StateHasChanged();
-    }
-
 }

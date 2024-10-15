@@ -10,6 +10,7 @@
          ItemText="u => u.Item1"
          ItemValue="u => u.Item2"
          Filled
+         Clearable
          Label="date-format">
 </MSelect>
 
@@ -31,8 +32,7 @@
 
         // TODO: 时区
         _items = _dateTemplates.Select(template => new Tuple<string, string>(DateTime.Now.ToString(template), template)).ToList();
-        Config.Format ??= _dateTemplates.First();
-        
+
         // update value using the default format
         UpdateValue();
     }

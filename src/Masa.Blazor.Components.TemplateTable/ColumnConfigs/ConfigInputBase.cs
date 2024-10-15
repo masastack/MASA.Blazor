@@ -4,7 +4,7 @@ public abstract class ConfigInputBase<TConfig> : ComponentBase where TConfig : n
 {
     [Parameter] public string? Value { get; set; }
 
-    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+    [Parameter] public EventCallback<object> OnUpdate { get; set; }
 
     protected TConfig Config { get; set; } = new();
 
@@ -24,6 +24,6 @@ public abstract class ConfigInputBase<TConfig> : ComponentBase where TConfig : n
 
     protected void UpdateValue()
     {
-        ValueChanged.InvokeAsync(JsonSerializer.Serialize(Config));
+        OnUpdate.InvokeAsync(Config);
     }
 }

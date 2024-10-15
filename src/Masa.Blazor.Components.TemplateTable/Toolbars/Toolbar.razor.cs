@@ -24,6 +24,8 @@ public partial class Toolbar
 
     [Parameter] public EventCallback OnViewAdd { get; set; }
 
+    [Parameter] public EventCallback<View> OnViewReset { get; set; }
+
     [Parameter] public EventCallback<View> OnViewDelete { get; set; }
 
     [Parameter] public EventCallback<(Guid id, string Name)> OnViewRename { get; set; }
@@ -36,6 +38,8 @@ public partial class Toolbar
 
     [Parameter] public EventCallback OnSortClick { get; set; }
 
+    [Parameter] public bool HasCustom { get; set; }
+
     [Parameter] public bool HasFilter { get; set; }
 
     [Parameter] public bool HasSort { get; set; }
@@ -44,8 +48,32 @@ public partial class Toolbar
     private bool _filterDialog;
     private Guid _renamingView;
     private string? _newViewName;
-    
+
     private bool IsDefaultView => ActiveView == DefaultViewId;
+
+    private async Task SaveAsNewView()
+    {
+        var confirmed = await PopupService.ConfirmAsync(
+            "Save as new view",
+            "Do you want to save the current view as a new view?");
+
+        if (confirmed)
+        {
+            await OnViewAdd.InvokeAsync();
+        }
+    }
+
+    private async Task ResetView()
+    {
+        var confirmed = await PopupService.ConfirmAsync(
+            "Reset view",
+            "Do you want to reset the current view to the default view?");
+
+        if (confirmed)
+        {
+            await OnViewReset.InvokeAsync();
+        }
+    }
 
     private void ActiveChanged(StringNumber value)
     {

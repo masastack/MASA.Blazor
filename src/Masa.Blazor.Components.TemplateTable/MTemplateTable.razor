@@ -21,19 +21,21 @@
          RowHeightChanged="@HandleOnRowHeightChanged"
          Views="_sheet.Views"
          Columns="_sheet.Columns"
-         HiddenColumnIds="@_hiddenColumnIds"
+         HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
          OnViewAdd="@AddNewView"
+         OnViewReset="@ResetView"
          OnViewRename="@RenameView"
          OnViewDelete="@DeleteView"
          OnColumnEditClick="@OpenColumnEditDialog"
          OnColumnToggle="@ToggleColumn"
+         HasCustom="@HasCustomConfiguration"
          HasFilter="@(_sheet.ActiveView?.Filter?.Options.Count > 0)"
          HasSort="@(_sheet.ActiveView?.Sort?.Options.Count > 0)"
-         OnFilterClick="@(() => _filterDialog.Open())"
-         OnSortClick="@(() => _sortDialog.Open())"/>
+         OnFilterClick="@(() => _filterDialog?.Open())"
+         OnSortClick="@(() => _sortDialog?.Open())"/>
 
 <Viewer ViewColumns="@_viewColumns"
-        HiddenColumnIds="@_hiddenColumnIds"
+        HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
         ColumnOrder="@_columnOrder"
         ColumnOrderChanged="@HandleOnColumnOrderChanged"
         Loading="@_loading"
@@ -77,14 +79,14 @@
 <FilterDialog @ref="_filterDialog"
               ActiveView="@_sheet.ActiveView"
               Columns="@_sheet.Columns"
-              HiddenColumnIds="@_hiddenColumnIds"
+              HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
               OnSave="@SaveFilter">
 </FilterDialog>
 
 <SortDialog @ref="_sortDialog"
             ActiveView="@_sheet.ActiveView"
             Columns="@_sheet.Columns"
-            HiddenColumnIds="@_hiddenColumnIds"
+            HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
             OnSave="@SortUpdate">
 </SortDialog>
 
@@ -97,25 +99,66 @@
 
 @code {
 
-    private HashSet<string> _hiddenColumnIds = [];
+    // private HashSet<string> _hiddenColumnIds = [];
     private List<string> _columnOrder = [];
     private RowHeight _rowHeight;
     private Viewer? _viewer;
+
+    private ICollection<string>? _defaultColumnIds;
 
     private ColumnDialog? _columnEditDialog;
     private FilterDialog? _filterDialog;
     private SortDialog? _sortDialog;
 
+    private bool HasCustomConfiguration
+    {
+        get
+        {
+            if (_sheet.ActiveView is null)
+            {
+                return false;
+            }
+
+            ICollection<string> columnIds = [];
+            foreach (var column in _sheet.ActiveView.Columns)
+            {
+                if (column.Hidden)
+                {
+                    return true;
+                }
+
+                columnIds.Add(column.ColumnId);
+            }
+
+            _defaultColumnIds ??= _sheet.Columns.Select(u => u.Id).ToList();
+            _defaultColumnIds.Remove(Preset.ActionsColumnId);
+            columnIds.Remove(Preset.ActionsColumnId);
+
+            return !_defaultColumnIds.SequenceEqual(columnIds);
+        }
+    }
+
     private void AddNewView()
     {
         var clonedView = _sheet.ActiveView.DeepClone();
         clonedView.Id = Guid.NewGuid();
-        clonedView.Name = "New view";
+        clonedView.Name = "Copy of " + clonedView.Name;
 
         _sheet.Views.Add(clonedView);
         _sheet.ActiveViewId = clonedView.Id;
 
         ResetSheet();
+    }
+
+    private async Task ResetView()
+    {
+        _sheet.ActiveView.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
+        // _hiddenColumnIds = [];
+        _columnOrder = [];
+        _sheet.ActiveView.Filter = null;
+        _sheet.ActiveView.Sort = null;
+        _sheet.ActiveView.PageIndex = 1;
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private void RenameView((Guid id, string Name) args)
@@ -201,37 +244,17 @@
 
     private void ToggleColumn(string columnId)
     {
-        if (columnId == Preset.ActionsColumnId)
-        {
-            var hasActions = !_sheet.ActiveViewHasActions;
-            _sheet.UpdateActiveViewHasActions(hasActions);
-            if (hasActions)
-            {
-                _hiddenColumnIds.Remove(Preset.ActionsColumnId);
-            }
-            else
-            {
-                _hiddenColumnIds.Add(Preset.ActionsColumnId);
-            }
-
-            return;
-        }
-
         var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
         if (viewColumn is null)
         {
             return;
         }
 
-        if (viewColumn.Hidden)
+        viewColumn.Hidden = !viewColumn.Hidden;
+
+        if (columnId == Preset.ActionsColumnId)
         {
-            viewColumn.Hidden = false;
-            _hiddenColumnIds.Remove(columnId);
-        }
-        else
-        {
-            viewColumn.Hidden = true;
-            _hiddenColumnIds.Add(columnId);
+            _sheet.ActiveView!.HasActions = !_sheet.ActiveView.HasActions;
         }
     }
 
@@ -240,7 +263,7 @@
         _columnEditDialog?.Open(column);
     }
 
-    private void UpdateColumn(Column data)
+    private void UpdateColumn(ColumnInfo data)
     {
         var column = _sheet.Columns.FirstOrDefault(u => u.Id == data.Id);
         if (column is null)
@@ -251,9 +274,10 @@
         column.Name = data.Name;
         column.Type = data.Type;
         column.Config = data.Config;
+        column.ConfigObject = data.ConfigObject;
 
-        var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
-        viewColumn.Column = column;
+        // var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
+        // viewColumn.Column = column;
     }
 
     private async Task SaveFilter(Filter filter)
@@ -285,7 +309,7 @@
     {
         var sheet = new Sheet()
         {
-            Columns = _sheet.Columns.Select(Column (u) => u),
+            Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(Column (u) => u),
             Views = _sheet.Views.Select(View (u) => u),
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,

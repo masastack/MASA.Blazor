@@ -1,3 +1,5 @@
+@inject IPopupService PopupService
+
 <div class="masa-table__toolbar">
     <MItemGroup Value="@ActiveView.ToString()"
                 ValueChanged="@ActiveChanged"
@@ -65,17 +67,15 @@
                 </MButton>
             </MItem>
         }
-
-        <MButton IconName="mdi-plus"
-                 Class="ml-1"
-                 OnClick="@OnViewAdd">
-        </MButton>
-
     </MItemGroup>
 
 
     <div class="masa-table__toolbar-actions">
-        <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">表格配置</MButton>
+        <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
+            <MBadge Value="@HasCustom" Dot Color="red">
+                表格配置
+            </MBadge>
+        </MButton>
         <MButton LeftIconName="mdi-filter-variant" Text OnClick="@OnFilterClick">
             <MBadge Value="@HasFilter" Dot Color="red">
                 筛选
@@ -147,14 +147,19 @@
             </ChildContent>
         </MMenu>
         <MSpacer/>
-        @if (IsDefaultView)
-        {
-            <MButton Color="primary"
-                     Depressed
-                     OnClick="@OnViewAdd">
-                保存为新的视图
-            </MButton>
-        }
+
+        <MButton Color="secondary"
+                 Depressed
+                 Class="mr-2"
+                 OnClick="@ResetView">
+            重置
+        </MButton>
+
+        <MButton Color="primary"
+                 Depressed
+                 OnClick="@SaveAsNewView">
+            保存为新的视图
+        </MButton>
     </div>
 
 </div>
