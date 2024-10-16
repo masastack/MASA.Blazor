@@ -25,24 +25,26 @@ public class SheetInfo
     /// </summary>
     public List<ViewInfo> Views { get; set; } = [];
 
-    [JsonIgnore] internal List<ViewColumn> ActiveViewColumns => ActiveView?.Columns ?? [];
+    [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView?.Columns ?? [];
 
     [JsonIgnore]
     internal HashSet<string> ActiveViewHiddenColumnIds
         => ActiveViewColumns.Where(c => c.Hidden).Select(c => c.ColumnId).ToHashSet();
 
-    [JsonIgnore] internal RowHeight ActiveViewRowHeight => ActiveView?.RowHeight ?? RowHeight.Low;
+    [JsonIgnore] internal RowHeight ActiveViewRowHeight => ActiveView?.Value.RowHeight ?? RowHeight.Low;
 
-    [JsonIgnore] internal bool ActiveViewHasActions => ActiveView?.HasActions ?? false;
+    [JsonIgnore] internal bool ActiveViewHasActions => ActiveView?.Value.HasActions ?? false;
 
-    internal ViewInfo? ActiveView => Views.FirstOrDefault(v => v.Id == ActiveViewId);
+    internal ViewInfo? ActiveView => Views.FirstOrDefault(v => v.Value.Id == ActiveViewId);
 
     internal static SheetInfo From(Sheet sheet)
     {
+        var columnInfos = sheet.Columns.Select(c => new ColumnInfo(c)).ToList();
+
         return new SheetInfo
         {
-            Columns = sheet.Columns.Select(c => new ColumnInfo(c)).ToList(),
-            Views = sheet.Views.Select(v => new ViewInfo(v)).ToList(),
+            Columns = columnInfos,
+            Views = sheet.Views.Select(v => ViewInfo.From(v, columnInfos)).ToList(),
             ActiveViewId = sheet.ActiveViewId,
             DefaultViewId = sheet.DefaultViewId
         };
@@ -55,24 +57,7 @@ public class SheetInfo
             return;
         }
 
-        ActiveView.RowHeight = rowHeight;
-    }
-
-    internal void UpdateActiveViewHasActions(bool hasActions)
-    {
-        if (ActiveView is null)
-        {
-            return;
-        }
-
-        ActiveView.HasActions = hasActions;
-        var actionsColumn = ActiveView.Columns.FirstOrDefault(u => u.ColumnId == Preset.ActionsColumnId);
-        if (actionsColumn is null)
-        {
-            return;
-        }
-        
-        actionsColumn.Hidden = !hasActions;
+        ActiveView.Value.RowHeight = rowHeight;
     }
 
     internal void UpdateActiveViewItems(ICollection<IReadOnlyDictionary<string, JsonElement>> items,

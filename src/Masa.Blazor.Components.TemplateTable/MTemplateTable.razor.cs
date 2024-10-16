@@ -64,8 +64,6 @@ public partial class MTemplateTable
     private SheetInfo _sheet = new();
     private bool _init;
     private ICollection<IReadOnlyDictionary<string, JsonElement>> _items = [];
-    private ICollection<ViewColumnInfo> _viewColumns = [];
-
 
     private long _totalCount;
     private bool _hasPreviousPage;
@@ -135,7 +133,6 @@ public partial class MTemplateTable
         _hasNextPage = _sheet.ActiveView?.HasNextPage ?? false;
         _hasPreviousPage = _sheet.ActiveView?.HasPreviousPage ?? false;
 
-        _viewColumns = []; // needs different instance
         _columnOrder.Clear();
 
         foreach (var viewColumn in _sheet.ActiveViewColumns)
@@ -145,14 +142,18 @@ public partial class MTemplateTable
             var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);
             if (column is not null)
             {
-                _viewColumns.Add(ViewColumnInfo.From(viewColumn, column));
+                viewColumn.Column = column;
             }
         }
 
         if (_sheet.ActiveViewHasActions)
         {
             _columnOrder.Add(Preset.ActionsColumnId);
-            _viewColumns.Add(CreateActionsViewColumn());
+
+            if (_sheet.ActiveViewColumns.All(u => u.ColumnId != Preset.ActionsColumnId))
+            {
+                _sheet.ActiveViewColumns.Add(CreateActionsViewColumn());
+            }
         }
     }
 
@@ -183,8 +184,8 @@ public partial class MTemplateTable
         {
             PageIndex = _sheet.ActiveView.PageIndex,
             PageSize = _sheet.ActiveView.PageSize,
-            FilterRequest = _sheet.ActiveView.Filter,
-            SortRequest = _sheet.ActiveView.Sort
+            FilterRequest = _sheet.ActiveView.Value.Filter,
+            SortRequest = _sheet.ActiveView.Value.Sort
         };
     }
 

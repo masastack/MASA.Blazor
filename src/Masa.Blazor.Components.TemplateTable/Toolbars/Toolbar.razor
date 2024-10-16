@@ -8,9 +8,9 @@
                 ActiveClass="active">
         @foreach (var view in Views)
         {
-            <MItem Value="@view.Id.ToString()">
+            <MItem Value="@view.Value.Id.ToString()">
                 @{
-                    var editing = _renamingView == view.Id;
+                    var editing = _renamingView == view.Value.Id;
                     var hasAction = !editing && context.Active;
                 }
                 <MButton Text
@@ -21,8 +21,8 @@
 
                     <div style="max-width: 160px;"
                          class="text-truncate"
-                         title="@view.Name">
-                        @if (_renamingView == view.Id)
+                         title="@view.Value.Name">
+                        @if (_renamingView == view.Value.Id)
                         {
                             <MTextField @bind-Value="@_newViewName"
                                         OnBlur="@UpdateViewName"
@@ -36,7 +36,7 @@
                         }
                         else
                         {
-                            @view.Name
+                            @view.Value.Name
                         }
                     </div>
 
@@ -56,10 +56,10 @@
                             <ChildContent>
                                 <DropdownItem PrependIcon="mdi-rename-outline"
                                               Title="Rename view"
-                                              OnClick="@(() => RenameView(view))"/>
+                                              OnClick="@(() => RenameView(view.Value))"/>
                                 <DropdownItem PrependIcon="mdi-trash-can-outline"
                                               Title="Delete view"
-                                              OnClick="@(() => OnViewDelete.InvokeAsync(view))"/>
+                                              OnClick="@(() => OnViewDelete.InvokeAsync(view.Value))"/>
 
                             </ChildContent>
                         </Dropdown>
