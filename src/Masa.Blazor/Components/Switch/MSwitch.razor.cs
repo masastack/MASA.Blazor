@@ -26,7 +26,7 @@
         public string? TrackColor { get; set; }
 
         public override bool HasColor => IsActive || HasText;
-        
+
         public string? ComputedTrackColor => HasText ? TrackColor ?? ValidationState : null;
 
         // according to spec, should still show
@@ -68,9 +68,8 @@
 
         private static Block _block = new("m-input--switch");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-        private static ModifierBuilder _trackModifierBuilder = _block.Element("track").CreateModifierBuilder();
-        private static ModifierBuilder _thumbModifierBuilder = _block.Element("thumb").CreateModifierBuilder();
-        
+        private ModifierBuilder _trackModifierBuilder = _block.Element("track").CreateModifierBuilder();
+        private ModifierBuilder _thumbModifierBuilder = _block.Element("thumb").CreateModifierBuilder();
 
         protected override IEnumerable<string> BuildComponentClass()
         {

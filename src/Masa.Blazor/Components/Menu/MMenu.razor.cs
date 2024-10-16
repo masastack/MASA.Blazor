@@ -51,8 +51,8 @@ namespace Masa.Blazor
         [Parameter] public bool Light { get; set; }
 
         private static Block _block = new("m-menu");
-        private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
+        private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         private readonly string _contentId = $"menu-{Guid.NewGuid():N}";
         private readonly List<IDependent> _dependents = new();

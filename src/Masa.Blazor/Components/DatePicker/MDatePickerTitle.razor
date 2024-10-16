@@ -11,7 +11,7 @@
     internal static RenderFragment GenPickerButton(EventCallback<MouseEventArgs> click, RenderFragment content, bool active, bool @readonly, string? @class = null) => builder =>
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", _btnModiferBuilder.Add(active).Add("readonly", @readonly).AddClass(@class).Build());
+        builder.AddAttribute(1, "class", _btnBlock.CreateModifierBuilder().Add(active).Add("readonly", @readonly).AddClass(@class).Build());
         builder.AddAttribute(2, "onclick", click);
         builder.AddAttribute(3, "__internal_stopPropagation_ondragover", true);
         builder.AddContent(4, content);

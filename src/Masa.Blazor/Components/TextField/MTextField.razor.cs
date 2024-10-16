@@ -324,7 +324,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     private static Block _block = new("m-text-field");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _numberModifierBuilder = _block.Element("number").CreateModifierBuilder();
+    private ModifierBuilder _numberModifierBuilder = _block.Element("number").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

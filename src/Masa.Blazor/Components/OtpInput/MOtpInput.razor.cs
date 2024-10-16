@@ -165,7 +165,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     private static Block _block = new("m-otp-input");
     private static Block _textFieldBlock = new("m-text-field");
     private static Block _inputBlock = new("m-input");
-    private static ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
+    private ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

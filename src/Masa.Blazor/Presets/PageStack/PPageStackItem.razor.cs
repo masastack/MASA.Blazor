@@ -80,7 +80,7 @@ public partial class PPageStackItem : MasaComponentBase
     internal RenderFragment? ActionContent { get; set; }
 
     private static Block _block = new("m-page-stack-item");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
