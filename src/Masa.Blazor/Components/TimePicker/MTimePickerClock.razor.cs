@@ -298,8 +298,8 @@ public partial class MTimePickerClock : MasaComponentBase
 
     private static Block _block = new("m-time-picker-clock");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();
-    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
+    private ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();
+    private ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

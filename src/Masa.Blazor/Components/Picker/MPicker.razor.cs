@@ -35,9 +35,9 @@ public partial class MPicker : MasaComponentBase
 
     private static Block _block = new("m-picker");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _titleModifierBuilder = _block.Element("title").CreateModifierBuilder();
-    private static ModifierBuilder _bodyModifierBuilder = _block.Element("body").CreateModifierBuilder();
-    private static ModifierBuilder _actionsModifierBuilder = _block.Element("actions").CreateModifierBuilder();
+    private ModifierBuilder _titleModifierBuilder = _block.Element("title").CreateModifierBuilder();
+    private ModifierBuilder _bodyModifierBuilder = _block.Element("body").CreateModifierBuilder();
+    private ModifierBuilder _actionsModifierBuilder = _block.Element("actions").CreateModifierBuilder();
     
 
     public bool IsDark
