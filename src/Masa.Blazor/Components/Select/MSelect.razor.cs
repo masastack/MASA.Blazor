@@ -416,7 +416,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
     private static Block _block = new("m-select");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _selectionModifierBuilder = _block.Element("selection").CreateModifierBuilder();
+    private ModifierBuilder _selectionModifierBuilder = _block.Element("selection").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
