@@ -5,8 +5,9 @@ namespace Masa.Blazor;
 
 public class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestorRoutable
 {
-    public MBottomNavigation() : base(GroupType.ButtonGroup)
+    public MBottomNavigation()
     {
+        GroupType = GroupType.ButtonGroup;
     }
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;

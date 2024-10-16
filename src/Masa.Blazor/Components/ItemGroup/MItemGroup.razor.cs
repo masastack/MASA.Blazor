@@ -5,11 +5,7 @@ namespace Masa.Blazor;
 
 public partial class MItemGroup : MItemGroupBase, IThemeable
 {
-    public MItemGroup() : base(GroupType.ItemGroup)
-    {
-    }
-
-    public MItemGroup(GroupType groupType) : base(groupType)
+    public MItemGroup(): base(GroupType.ItemGroup)
     {
     }
 

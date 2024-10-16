@@ -40,7 +40,7 @@ public abstract class MItemGroupBase : MasaComponentBase
 
     private int _registeredItemsIndex;
 
-    public GroupType GroupType { get; private set; }
+    public GroupType GroupType { get; protected set; }
 
     public List<IGroupable> Items { get; } = new();
 

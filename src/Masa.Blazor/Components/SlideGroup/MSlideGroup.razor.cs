@@ -5,12 +5,9 @@ namespace Masa.Blazor
 {
     public partial class MSlideGroup : MItemGroup
     {
-        public MSlideGroup() : base(GroupType.SlideGroup)
+        public MSlideGroup()
         {
-        }
-
-        protected MSlideGroup(GroupType groupType) : base(groupType)
-        {
+            GroupType = GroupType.SlideGroup;
         }
 
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
