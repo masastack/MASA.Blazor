@@ -1,0 +1,12 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div id="@Id"
+     class="@GetClass()"
+     style="@GetStyle()"
+     @attributes="@Attributes">
+    <div class="@_block.Element("content")"
+         style="@GetContenetStyle()">
+        @ChildContent
+    </div>
+</div>
