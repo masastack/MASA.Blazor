@@ -1656,3 +1656,45 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
     return false;
   }
 }
+
+export function prepareSticky(containerElOrString: string, root: HTMLElement, offsetTop: number, offsetBottom: number) {
+  let containerRect;
+  if (containerElOrString === "window") {
+    containerRect = { top: 0, bottom: window.innerHeight };
+  } else {
+    containerRect = getDom(containerElOrString).getBoundingClientRect();
+  }
+
+  const rootRect = root.getBoundingClientRect();
+
+  console.log('offsetTop', offsetTop, 'offsetBottom', offsetBottom);
+
+  const fixedTop = getFixedTop(rootRect, containerRect, offsetTop);
+  const fixedBottom = getFixedBottom(rootRect, containerRect, offsetBottom);
+
+  console.log('fixedTop', fixedTop, 'fixedBottom', fixedBottom);
+
+  return { fixedTop, fixedBottom, width: rootRect.width, height: rootRect.height };
+
+  function getFixedTop(placeholderReact, targetRect, offsetTop) {
+    if (
+      isNumberValid(offsetTop) &&
+      targetRect.top > placeholderReact.top - offsetTop
+    ) {
+      return offsetTop + targetRect.top + "px";
+    }
+    return undefined;
+  }
+
+  function getFixedBottom(placeholderReact, targetRect, offsetBottom) {
+    if (isNumberValid(offsetBottom) && targetRect.bottom < placeholderReact.bottom + offsetBottom) {
+      const targetBottomOffset = window.innerHeight - targetRect.bottom;
+      return offsetBottom + targetBottomOffset + 'px';
+    }
+    return undefined;
+  }
+
+  function isNumberValid(n: number) {
+    return n !== undefined && n !== null;
+  }
+}
