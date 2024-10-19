@@ -8,6 +8,6 @@
      @attributes="@Attributes">
     <div class="@_block.Element("content")"
          style="@GetContentStyle()">
-        @ChildContent
+        @ChildContent?.Invoke(_sticky)
     </div>
 </div>

@@ -2,7 +2,7 @@
 
 public partial class MSticky : MasaComponentBase
 {
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment<bool>? ChildContent { get; set; }
 
     [Parameter] public double? OffsetTop { get; set; }
 
@@ -12,13 +12,15 @@ public partial class MSticky : MasaComponentBase
 
     [Parameter]
     [MasaApiParameter("window")]
-    public string? Container { get; set; } = "window";
+    public string? ScrollTarget { get; set; } = "window";
 
     [Parameter] public int ZIndex { get; set; }
 
     private static Block _block = new("m-sticky");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private StyleBuilder _contentStyleBuilder = new();
+
+    private bool _sticky;
     private string? _top;
     private string? _bottom;
     private double? _height;
@@ -28,37 +30,57 @@ public partial class MSticky : MasaComponentBase
         if (firstRender)
         {
             await OnScrollAsync();
-            await Js.AddHtmlElementEventListener(Container, "scroll", OnScrollAsync, false,
+            await Js.AddHtmlElementEventListener(
+                ScrollTarget ?? "window",
+                "scroll",
+                OnScrollAsync,
+                false,
                 new EventListenerExtras(key: Ref.Id));
         }
     }
 
     private async Task OnScrollAsync()
     {
-        var fixedResult =
-            await Js.InvokeAsync<FixedResult>(JsInteropConstants.prepareSticky, Container, Ref, OffsetTop,
-                OffsetBottom);
+        if (Disabled)
+        {
+            return;
+        }
+        
+        var fixedResult = await Js.InvokeAsync<StickyScrollResult>(
+            JsInteropConstants.prepareSticky,
+            ScrollTarget,
+            Ref,
+            OffsetTop,
+            OffsetBottom);
 
         var prevTop = _top;
         var prevBottom = _bottom;
 
-        _top = null;
-        _bottom = null;
-        _height = null;
+        var sticky = false;
+        string? top = null;
+        string? bottom = null;
+        double? height = null;
 
         if (fixedResult.FixedTop is not null)
         {
-            _top = fixedResult.FixedTop;
-            _height = fixedResult.Height;
+            top = fixedResult.FixedTop;
+            height = fixedResult.Height;
+            sticky = true;
         }
         else if (fixedResult.FixedBottom is not null)
         {
-            _bottom = fixedResult.FixedBottom;
-            _height = fixedResult.Height;
+            bottom = fixedResult.FixedBottom;
+            height = fixedResult.Height;
+            sticky = true;
         }
 
-        if (_top != prevTop || _bottom != prevBottom)
+        if (top != prevTop || bottom != prevBottom)
         {
+            _top = top;
+            _bottom = bottom;
+            _height = height;
+            _sticky = sticky;
+
             await InvokeAsync(StateHasChanged);
         }
     }
@@ -86,6 +108,6 @@ public partial class MSticky : MasaComponentBase
             .AddIf("bottom", _bottom, hasBottom)
             .ToString();
     }
-
-    record FixedResult(double Width, double Height, string? FixedTop, string? FixedBottom);
 }
+
+file record StickyScrollResult(double Width, double Height, string? FixedTop, string? FixedBottom);
