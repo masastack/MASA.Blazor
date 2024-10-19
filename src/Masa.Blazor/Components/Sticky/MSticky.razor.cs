@@ -17,9 +17,7 @@ public partial class MSticky : MasaComponentBase
     [MasaApiParameter("window")]
     public string? ScrollTarget { get; set; } = "window";
 
-    [Parameter]
-    [MasaApiParameter(1)]
-    public int ZIndex { get; set; } = 1;
+    [Parameter] [MasaApiParameter(1)] public int ZIndex { get; set; } = 1;
 
     private static Block _block = new("m-sticky");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -31,13 +29,17 @@ public partial class MSticky : MasaComponentBase
     private double? _height;
     private double? _width;
 
+    private string? _selector;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await OnScrollAsync();
+
+            _selector = ScrollTarget ?? "window";
             await Js.AddHtmlElementEventListener(
-                ScrollTarget ?? "window",
+                _selector,
                 "scroll",
                 OnScrollAsync,
                 false,
@@ -51,7 +53,7 @@ public partial class MSticky : MasaComponentBase
         {
             return;
         }
-        
+
         var fixedResult = await Js.InvokeAsync<StickyScrollResult>(
             JsInteropConstants.prepareSticky,
             ScrollTarget,
@@ -97,7 +99,8 @@ public partial class MSticky : MasaComponentBase
 
     protected override IEnumerable<string?> BuildComponentStyle()
     {
-        return base.BuildComponentStyle().Concat(StyleBuilder.Create().AddHeight(_height).AddWidth(_width).GenerateCssStyles());
+        return base.BuildComponentStyle()
+            .Concat(StyleBuilder.Create().AddHeight(_height).AddWidth(_width).GenerateCssStyles());
     }
 
     protected override IEnumerable<string?> BuildComponentClass()
@@ -119,6 +122,14 @@ public partial class MSticky : MasaComponentBase
             .AddHeight(_height, predicate: () => _sticky)
             .AddWidth(_width, predicate: () => _sticky)
             .ToString();
+    }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        if (_selector is not null)
+        {
+            await Js.RemoveHtmlElementEventListener(_selector, "scroll", Ref.Id);
+        }
     }
 }
 
