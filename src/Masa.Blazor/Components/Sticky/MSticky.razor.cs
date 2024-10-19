@@ -10,11 +10,16 @@ public partial class MSticky : MasaComponentBase
 
     [Parameter] public bool Disabled { get; set; }
 
+    /// <summary>
+    /// The selector of the scroll target. Default is window.
+    /// </summary>
     [Parameter]
     [MasaApiParameter("window")]
     public string? ScrollTarget { get; set; } = "window";
 
-    [Parameter] public int ZIndex { get; set; }
+    [Parameter]
+    [MasaApiParameter(1)]
+    public int ZIndex { get; set; } = 1;
 
     private static Block _block = new("m-sticky");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -24,6 +29,7 @@ public partial class MSticky : MasaComponentBase
     private string? _top;
     private string? _bottom;
     private double? _height;
+    private double? _width;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -60,17 +66,20 @@ public partial class MSticky : MasaComponentBase
         string? top = null;
         string? bottom = null;
         double? height = null;
+        double? width = null;
 
         if (fixedResult.FixedTop is not null)
         {
             top = fixedResult.FixedTop;
             height = fixedResult.Height;
+            width = fixedResult.Width;
             sticky = true;
         }
         else if (fixedResult.FixedBottom is not null)
         {
             bottom = fixedResult.FixedBottom;
             height = fixedResult.Height;
+            width = fixedResult.Width;
             sticky = true;
         }
 
@@ -79,6 +88,7 @@ public partial class MSticky : MasaComponentBase
             _top = top;
             _bottom = bottom;
             _height = height;
+            _width = width;
             _sticky = sticky;
 
             await InvokeAsync(StateHasChanged);
@@ -87,7 +97,7 @@ public partial class MSticky : MasaComponentBase
 
     protected override IEnumerable<string?> BuildComponentStyle()
     {
-        return base.BuildComponentStyle().Concat(StyleBuilder.Create().AddHeight(_height).GenerateCssStyles());
+        return base.BuildComponentStyle().Concat(StyleBuilder.Create().AddHeight(_height).AddWidth(_width).GenerateCssStyles());
     }
 
     protected override IEnumerable<string?> BuildComponentClass()
@@ -106,6 +116,8 @@ public partial class MSticky : MasaComponentBase
             .Add("z-index", ZIndex.ToString(CultureInfo.InvariantCulture), ZIndex > 0)
             .AddIf("top", _top, hasTop)
             .AddIf("bottom", _bottom, hasBottom)
+            .AddHeight(_height, predicate: () => _sticky)
+            .AddWidth(_width, predicate: () => _sticky)
             .ToString();
     }
 }
