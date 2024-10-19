@@ -1667,12 +1667,8 @@ export function prepareSticky(containerElOrString: string, root: HTMLElement, of
 
   const rootRect = root.getBoundingClientRect();
 
-  console.log('offsetTop', offsetTop, 'offsetBottom', offsetBottom);
-
   const fixedTop = getFixedTop(rootRect, containerRect, offsetTop);
   const fixedBottom = getFixedBottom(rootRect, containerRect, offsetBottom);
-
-  console.log('fixedTop', fixedTop, 'fixedBottom', fixedBottom);
 
   return { fixedTop, fixedBottom, width: rootRect.width, height: rootRect.height };
 
