@@ -2,7 +2,7 @@ import { getScrollParents, hasScrollbar } from "utils/getScrollParent";
 import { convertToUnit } from "utils/helper";
 
 type StrategyProps = {
-  strategy: "block" | "close";
+  strategy: "none" | "block" | "close" | "reposition";
   contained: boolean | undefined;
 };
 
