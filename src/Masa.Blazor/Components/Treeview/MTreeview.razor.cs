@@ -569,15 +569,6 @@ namespace Masa.Blazor
             return keys;
         }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            _oldActive = Active ?? [];
-            _oldOpen = Open ?? [];
-            _oldValue = Value ?? [];
-        }
-
         protected override async Task OnParametersSetAsync()
         {
             await base.OnParametersSetAsync();
@@ -600,22 +591,19 @@ namespace Masa.Blazor
                 }
             }
 
-            if (!ListComparer.Equals(_oldValue, Value))
+            if ((ValueChanged.HasDelegate || Value != null) && !ListComparer.Equals(_oldValue, Value))
             {
                 await HandleUpdate(_oldValue, Value, UpdateSelectedByValue, EmitSelectedAsync);
-                _oldValue = Value ?? [];
             }
 
-            if (!ListComparer.Equals(_oldActive, Active))
+            if ((ActiveChanged.HasDelegate || Active != null) && !ListComparer.Equals(_oldActive, Active))
             {
                 await HandleUpdate(_oldActive, Active, UpdateActive, EmitActiveAsync);
-                _oldActive = Active ?? [];
             }
 
-            if (!ListComparer.Equals(_oldOpen, Open))
+            if ((OpenChanged.HasDelegate || Open != null) && !ListComparer.Equals(_oldOpen, Open))
             {
                 await HandleUpdate(_oldOpen, Open, UpdateOpen, EmitOpenAsync);
-                _oldOpen = Open ?? [];
             }
 
             if (_prevSearch != Search)
