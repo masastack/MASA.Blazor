@@ -1,72 +1,79 @@
 import { getScrollParents, hasScrollbar } from "utils/getScrollParent";
 import { convertToUnit } from "utils/helper";
 
-export interface StrategyProps {
-  strategy: "none" | "block"; // | "close" | "reposition"
+type StrategyProps = {
+  strategy: "block" | "close";
   contained: boolean | undefined;
-}
+};
 
-class ScrollStrategies {
-  root: HTMLElement;
-  contentEl: HTMLElement;
-  options: StrategyProps;
+type ScrollStrategyData = {
+  root: HTMLElement | undefined;
+  contentEl: HTMLElement | undefined;
+  targetEl: HTMLElement | undefined;
+  invoker?: DotNet.DotNetObject;
+};
 
-  // maybe only used for block strategy
-  scrollElements: HTMLElement[];
-  scrollableParent: Element | null;
+type ScrollStrategyResult = {
+  bind?: () => void;
+  unbind: () => void;
+};
 
-  constructor(
-    root: HTMLElement,
-    contentEl: HTMLElement,
-    options: StrategyProps
-  ) {
-    if (!root) {
-      return;
-    }
-
-    this.root = root;
-    this.contentEl = contentEl;
-    this.options = options;
-  }
-
-  bind() {
-    if (this.options.strategy === "block") {
-      this._prepareBlock();
-      this._blockScroll();
-    }
-  }
-
-  unbind() {
-    if (this.options.strategy === "block") {
-      this._unblockScroll();
-    }
-  }
-
-  _prepareBlock() {
-    const offsetParent = this.root.offsetParent;
-    this.scrollElements = [
-      ...new Set([
-        ...getScrollParents(
-          this.contentEl,
-          this.options.contained ? offsetParent : undefined
-        ),
-      ]),
-    ];
-
-    this.scrollableParent = ((el) => hasScrollbar(el) && el)(
-      offsetParent || document.documentElement
+export function useScrollStrategies(
+  props: StrategyProps,
+  root: HTMLElement | undefined,
+  contentEl: HTMLElement | undefined,
+  targetEl: HTMLElement | undefined,
+  dotNet?: DotNet.DotNetObject
+): ScrollStrategyResult {
+  if (props.strategy === "block") {
+    return useBlockScrollStrategy(
+      {
+        root,
+        contentEl,
+        targetEl,
+      },
+      props
+    );
+  } else {
+    return useInvokerScrollStrategy(
+      {
+        root,
+        contentEl,
+        targetEl,
+        invoker: dotNet,
+      },
+      props
     );
   }
+}
 
-  _blockScroll() {
-    if (this.scrollableParent) {
-      this.root.classList.add("m-overlay--scroll-blocked");
+function useBlockScrollStrategy(
+  data: ScrollStrategyData,
+  options: StrategyProps
+): ScrollStrategyResult {
+  const offsetParent = data.root.offsetParent;
+  const scrollElements = [
+    ...new Set([
+      ...getScrollParents(
+        data.contentEl,
+        options.contained ? offsetParent : undefined
+      ),
+    ]),
+  ];
+
+  const scrollableParent = ((el) => hasScrollbar(el) && el)(
+    offsetParent || document.documentElement
+  );
+
+  const bind = () => {
+    if (scrollableParent) {
+      data.root.classList.add("m-overlay--scroll-blocked");
     }
 
     const scrollbarWidth =
       window.innerWidth - document.documentElement.offsetWidth;
 
-    this.scrollElements
+    scrollElements
       .filter((el) => !el.classList.contains("m-overlay-scroll-blocked"))
       .forEach((el, i) => {
         el.style.setProperty(
@@ -84,37 +91,64 @@ class ScrollStrategies {
 
         el.classList.add("m-overlay-scroll-blocked");
       });
-  }
+  };
 
-  _unblockScroll() {
-    this.scrollElements
-      .filter((el) => el.classList.contains("m-overlay-scroll-blocked"))
-      .forEach((el, i) => {
-        const x = parseFloat(el.style.getPropertyValue("--m-body-scroll-x"));
-        const y = parseFloat(el.style.getPropertyValue("--m-body-scroll-y"));
+  bind();
 
-        const scrollBehavior = el.style.scrollBehavior;
+  return {
+    bind,
+    unbind: () => {
+      scrollElements
+        .filter((el) => el.classList.contains("m-overlay-scroll-blocked"))
+        .forEach((el, i) => {
+          const x = parseFloat(el.style.getPropertyValue("--m-body-scroll-x"));
+          const y = parseFloat(el.style.getPropertyValue("--m-body-scroll-y"));
 
-        el.style.scrollBehavior = "auto";
-        el.style.removeProperty("--m-body-scroll-x");
-        el.style.removeProperty("--m-body-scroll-y");
-        el.style.removeProperty("--m-scrollbar-offset");
-        el.classList.remove("m-overlay-scroll-blocked");
+          const scrollBehavior = el.style.scrollBehavior;
 
-        el.scrollLeft = -x;
-        el.scrollTop = -y;
+          el.style.scrollBehavior = "auto";
+          el.style.removeProperty("--m-body-scroll-x");
+          el.style.removeProperty("--m-body-scroll-y");
+          el.style.removeProperty("--m-scrollbar-offset");
+          el.classList.remove("m-overlay-scroll-blocked");
 
-        el.style.scrollBehavior = scrollBehavior;
-      });
+          el.scrollLeft = -x;
+          el.scrollTop = -y;
 
-    if (this.scrollableParent) {
-      this.root.classList.remove("m-overlay--scroll-blocked");
-    }
-  }
+          el.style.scrollBehavior = scrollBehavior;
+        });
+
+      if (scrollableParent) {
+        data.root.classList.remove("m-overlay--scroll-blocked");
+      }
+    },
+  };
 }
 
-function init(root: HTMLElement, contentEl: HTMLElement, props: StrategyProps) {
-  return new ScrollStrategies(root, contentEl, props);
-}
+function useInvokerScrollStrategy(
+  data: ScrollStrategyData,
+  options: StrategyProps
+) {
+  const el = data.targetEl ?? data.contentEl;
 
-export { init };
+  const onScroll = () => {
+    data.invoker?.invokeMethodAsync(
+      "ScrollStrategy_OnScroll",
+      options.strategy
+    );
+  };
+
+  const scrollElements = [document, ...getScrollParents(el)];
+  scrollElements.forEach((el) =>
+    el.addEventListener("scroll", onScroll, { passive: true })
+  );
+
+  return {
+    unbind: () => {
+      data.invoker?.dispose();
+      scrollElements.forEach((el) =>
+        el.removeEventListener("scroll", onScroll)
+      );
+    },
+  };
+}
