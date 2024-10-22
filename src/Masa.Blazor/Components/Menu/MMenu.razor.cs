@@ -1,11 +1,13 @@
-﻿using Masa.Blazor.Mixins;
-using Masa.Blazor.Mixins.Menuable;
+﻿using Masa.Blazor.Mixins.Menuable;
+using Masa.Blazor.Mixins.ScrollStrategy;
 
 namespace Masa.Blazor
 {
     public partial class MMenu : MMenuable, IDependent
     {
         [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
+
+        [Inject] private ScrollStrategyJSModule ScrollStrategyJSModule { get; set; } = default!;
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
@@ -35,7 +37,7 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter("auto")] public StringNumber MaxHeight { get; set; } = "auto";
 
         [Parameter] public EventCallback<WheelEventArgs> OnScroll { get; set; }
-        
+
         [Parameter] public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
 
         [Parameter] public string? Origin { get; set; }
@@ -50,6 +52,10 @@ namespace Masa.Blazor
 
         [Parameter] public bool Light { get; set; }
 
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        public ScrollStrategy ScrollStrategy { get; set; } = ScrollStrategy.Reposition;
+
         private static Block _block = new("m-menu");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
         private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
@@ -58,6 +64,8 @@ namespace Masa.Blazor
         private readonly List<IDependent> _dependents = new();
 
         private bool _isPopupEventsRegistered;
+        private ScrollStrategyResult? _scrollStrategyResult;
+        private DotNetObjectReference<MMenu>? _dotNetObjectReference;
 
         public bool IsDark
         {
@@ -231,11 +239,37 @@ namespace Masa.Blazor
                 _isPopupEventsRegistered = true;
 
                 RegisterPopupEvents(ContentElement.GetSelector()!, CloseOnContentClick);
+
+                if (ScrollStrategy != ScrollStrategy.None || (Absolute && ScrollStrategy != ScrollStrategy.Reposition))
+                {
+                    _dotNetObjectReference ??= DotNetObjectReference.Create(this);
+
+                    _scrollStrategyResult = await ScrollStrategyJSModule.CreateScrollStrategy(Ref, ContentElement,
+                        new ScrollStrategyOptions(ScrollStrategy.Reposition), _dotNetObjectReference);
+                }
             }
 
             if (!OpenOnHover && CloseOnClick && OutsideClickJSModule is { Initialized: false })
             {
                 await OutsideClickJSModule.InitializeAsync(this, DependentSelectors.ToArray());
+            }
+        }
+
+        [JSInvokable("ScrollStrategy_OnScroll")]
+        public async Task ScrollStrategy_OnScroll(string strategy)
+        {
+            switch (strategy)
+            {
+                case "close":
+                    RunDirectly(false);
+                    break;
+                case "reposition":
+                    await UpdateDimensionsAsync();
+                    StateHasChanged();
+                    break;
+                default:
+                    Logger.LogWarning("Unknown scroll strategy: {0}", strategy);
+                    break;
             }
         }
 
@@ -273,6 +307,8 @@ namespace Masa.Blazor
         protected override async ValueTask DisposeAsyncCore()
         {
             await OutsideClickJSModule.UnbindAndDisposeAsync();
+            _scrollStrategyResult?.Unbind?.Invoke();
+            _scrollStrategyResult?.Dispose?.Invoke();
             await base.DisposeAsyncCore();
         }
     }

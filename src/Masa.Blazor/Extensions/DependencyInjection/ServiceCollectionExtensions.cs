@@ -95,7 +95,7 @@ public static class ServiceCollectionExtensions
         services.TryAddTransient<InputJSModule>();
         services.TryAddTransient<TransitionJSModule>();
         services.TryAddTransient<OutsideClickJSModule>();
-        services.TryAddTransient<ScrollStrategyJSModule>();
+        services.TryAddScoped<ScrollStrategyJSModule>();
         services.TryAddScoped<PdfMobileViewerJSModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
