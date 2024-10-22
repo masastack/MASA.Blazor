@@ -66,9 +66,9 @@
         }
 
         <MElement Tag="@tag"
-                 Class="@_navigationModifierBuilder.Add(disabled).Build()"
-                 @onclick="@click"
-                 @attributes="@attrs">
+                  Class="@_navigationModifierBuilder.Add(disabled).AddElevation(Elevation).Build()"
+                  @onclick="@click"
+                  @attributes="@attrs">
             <MIcon Icon="@icon"/>
         </MElement>
     };
@@ -92,12 +92,13 @@
         }
 
         var isActive = item.AsT1 == Value;
-
+        var elevation = isActive ? Elevation + 2 : Elevation;
+        
         <MElement Tag="@tag"
-                 Class="@_itemModifierBuilder.Add("active", isActive).AddBackgroundColor(Color, isActive).Build()"
-                 Style="@(StyleBuilder.Create().AddBackgroundColor(Color, isActive).ToString())"
-                 @onclick="@(() => HandleItemClickAsync(item))"
-                 @attributes="@attrs">
+                  Class="@_itemModifierBuilder.Add("active", isActive).AddElevation(elevation).AddBackgroundColor(Color, isActive).Build()"
+                  Style="@(StyleBuilder.Create().AddBackgroundColor(Color, isActive).ToString())"
+                  @onclick="@(() => HandleItemClickAsync(item))"
+                  @attributes="@attrs">
             @item
         </MElement>
     };
