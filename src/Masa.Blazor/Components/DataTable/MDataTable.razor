@@ -3,7 +3,7 @@
 @inherits MDataIterator<TItem>
 @using Masa.Blazor.Components.DataTable
 
-<CascadingValue Value="@(Headers.Any(h => h.Fixed != DataTableFixed.None))"
+<CascadingValue Value="@HasFixedColumn"
                 Name="DataTableHasFixed">
     <MSimpleTable Height="@Height"
                   Width="@Width"
@@ -49,7 +49,7 @@
 
     private RenderFragment GenColgroup() => __builder =>
     {
-        <MDataTableColgroup Headers="@ComputedHeaders.ToList()" />
+        <MDataTableColgroup Headers="@ComputedHeaders.ToList()"/>
     };
 
     private RenderFragment GenHeaders() => __builder =>
@@ -77,7 +77,7 @@
                               OnToggleSelectAll="@ToggleSelectAll"
                               OnSort="@Sort"
                               OnGroup="@Group"
-                              @attributes="@HeaderProps" />
+                              @attributes="@HeaderProps"/>
         }
 
         @if (Loading == true)
@@ -176,14 +176,14 @@
                                  Icon
                                  Small
                                  OnClick="@ToggleFn">
-                            <MIcon Icon="@(isOpen ? "$minus" : "$plus")" />
+                            <MIcon Icon="@(isOpen ? "$minus" : "$plus")"/>
                         </MButton>
                         @($"{GetText(Options.GroupBy[0])}: {group.Key}")
                         <MButton Class="ma-0"
                                  Icon
                                  Small
                                  OnClick="@RemoveGroup">
-                            <MIcon Icon="@("$close")" />
+                            <MIcon Icon="@("$close")"/>
                         </MButton>
                     </td>
                 }
@@ -253,13 +253,13 @@
         var disabled = IsSelectable(item) == false;
         var isSelected = IsSelected(item);
         var isExpanded = IsExpanded(item);
-        
+
         Dictionary<string, object?> parameters = new()
         {
             { nameof(MDataTableRow<TItem>.Headers), ComputedHeaders },
             { nameof(MDataTableRow<TItem>.IsSelected), isSelected },
             { nameof(MDataTableRow<TItem>.IsExpanded), isExpanded },
-            { nameof(MDataTableRow<TItem>.Disabled), disabled},
+            { nameof(MDataTableRow<TItem>.Disabled), disabled },
             { nameof(MDataTableRow<TItem>.Stripe), Stripe },
             { nameof(MDataTableRow<TItem>.ItemClass), ItemClass },
             { nameof(MDataTableRow<TItem>.Index), index },
@@ -287,11 +287,13 @@
 
         bool HasSelect(ItemColProps<TItem> props) => props.Header.Value == "data-table-select" && ShowSelect;
 
+        bool HasNumber(ItemColProps<TItem> props) => props.Header.Value == "data-table-no" && ShowSerialNumber;
+
         bool HasItemColContent() => ItemColContent is not null;
 
         bool HasSlot(ItemColProps<TItem> props)
         {
-            return HasExpand(props) || HasSelect(props) || HasItemColContent();
+            return HasExpand(props) || HasSelect(props) || HasNumber(props) || HasItemColContent();
         }
 
         RenderFragment<ItemColProps<TItem>> GenRowSlot() => context => __builder =>
@@ -327,9 +329,9 @@
                     </MIcon>
                 }
             }
-            else if (HasSelect((context)))
+            else if (HasSelect(context))
             {
-            if (ItemDataTableSelectContent != null)
+                if (ItemDataTableSelectContent != null)
                 {
                     @ItemDataTableSelectContent(CreateExpandOrSelectContext())
                 }
@@ -342,6 +344,10 @@
                                      ValueChanged="val => Select(item, val)">
                     </MSimpleCheckbox>
                 }
+            }
+            else if (HasNumber(context))
+            {
+                <span>@(index + 1 + (Pagination.Page - 1) * Pagination.ItemsPerPage)</span>
             }
             else if (HasItemColContent())
             {

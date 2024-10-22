@@ -5,6 +5,11 @@
 <tr class="@GetClass()" @attributes="@Attributes">
     @foreach (var header in Headers)
     {
+        if (header.Value == "data-table-no")
+        {
+            continue;
+        }
+
         <td class="@_block.Element("mobile-row").Name">
             @{
                 if (header.Value != "data-table-select" && !HideDefaultHeader)
@@ -43,8 +48,7 @@
                     {
                         @props.Value
                     }
-                </div>
-            }
+                </div>}
         </td>
     }
 </tr>
