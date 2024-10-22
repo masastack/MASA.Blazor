@@ -95,10 +95,7 @@
                             }
                         }
 
-                        <li class="@_itemModifierBuilder.Add(active).Add(adjacent).Add(Disabled)"
-                            @onclick="() => HandleOnTimeClick(time)">
-                            @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
-                        </li>
+                        @GenSingleItem(active, adjacent, Disabled, time)
                     }
                 }
                 else
@@ -109,6 +106,7 @@
                         var index = i;
                         var time = _singleSectionItems[index];
 
+                        var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
                         var active = time == InternalTime;
                         var adjacent = false;
                         if (!haveGotActive)
@@ -124,10 +122,7 @@
                             }
                         }
 
-                        <li class="@_itemModifierBuilder.Add(active).Add(adjacent).Add(Disabled)"
-                            @onclick="() => HandleOnTimeClick(time)">
-                            @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
-                        </li>
+                        @GenSingleItem(active, adjacent, disabled, time)
                     }
                 }
             }
@@ -136,6 +131,14 @@
 </div>
 
 @code {
+
+    private RenderFragment GenSingleItem(bool active, bool adjacent, bool disabled, TimeOnly time) => __builder =>
+    {
+        <li class="@_itemModifierBuilder.Add(active).Add(adjacent).Add(disabled)"
+            @onclick="() => HandleOnTimeClick(time)">
+            @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
+        </li>
+    };
 
     private RenderFragment ItemsRenderFragment(int count, int step, int? current, Func<int, bool>? isAllowedCb, Func<int, Task> onClick) => __builder =>
     {
