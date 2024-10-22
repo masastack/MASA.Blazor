@@ -33,6 +33,10 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     [Parameter]
     public OneOf<Func<TimeOnly, bool>, List<TimeOnly>> AllowedTimes { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    public bool HideDisallowedTimes { get; set; }
+
     [Parameter] public string? Color { get; set; }
 
     [Parameter] public bool Disabled { get; set; }
@@ -111,6 +115,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     private ModifierBuilder _itemModifierBuilder = _itemElement.CreateModifierBuilder();
     private ModifierBuilder _itemContentModifierBuilder = Block.Element("item-content").CreateModifierBuilder();
     private static string _defaultActiveClass = _itemElement.Modifier("active");
+    private static string _defaultAdjacentClass = _itemElement.Modifier("adjacent");
 
     private ElementReference _hoursRef;
     private ElementReference _minutesRef;
@@ -141,7 +146,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     }
 
     /// <summary>
-    /// 24 hour format
+    /// 24-hour format
     /// </summary>
     private int? Hour
     {
@@ -164,7 +169,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     private TimeOnly? InternalTime { get; set; }
 
     /// <summary>
-    /// Hour in 12 or 24 hour format, it depends on <see cref="Format"/> property.
+    /// Hour in 12 or 24-hour format, it depends on <see cref="Format"/> property.
     /// </summary>
     private int? ComputedHour => Format == TimeFormat.AmPm ? TimeHelper.Convert24To12(Hour ?? 0) : Hour;
 
@@ -292,7 +297,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     }
 
     /// <summary>
-    /// Scroll to active element for multi section
+    /// Scroll to an active element for multi sections
     /// </summary>
     /// <param name="type"></param>
     /// <exception cref="ArgumentException"></exception>
@@ -315,7 +320,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     }
 
     /// <summary>
-    /// Scroll to active element for single section
+    /// Scroll to an active element for a single section
     /// </summary>
     private void ScrollToActive()
     {
@@ -330,12 +335,13 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     private void ScrollToActive(ElementReference @ref)
     {
         _ = Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, @ref, $".{_defaultActiveClass}", 4);
+        _ = Js.InvokeVoidAsync(JsInteropConstants.ScrollToActiveElement, @ref, $".{_defaultAdjacentClass}", 4);
     }
 
     /// <summary>
     /// Handle hour click
     /// </summary>
-    /// <param name="hour">value in 12 or 24 hour format</param>
+    /// <param name="hour">value in 12 or 24-hour format</param>
     private async Task HandleOnHourClick(int hour)
     {
         var hour24 = Format == TimeFormat.AmPm

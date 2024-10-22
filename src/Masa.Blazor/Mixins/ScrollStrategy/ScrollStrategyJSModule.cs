@@ -2,30 +2,32 @@
 
 namespace Masa.Blazor.Mixins;
 
-public class ScrollStrategyJSModule : JSModule
+public class ScrollStrategyJSModule(IJSRuntime js)
+    : JSModule(js, "./_content/Masa.Blazor/js/scrollStrategies.js?version=2")
 {
-    private IJSObjectReference? _instance;
-
-    public ScrollStrategyJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/scrollStrategies.js")
+    public async ValueTask<ScrollStrategyResult> CreateScrollStrategy(ElementReference root,
+        ElementReference contentRef, ScrollStrategyOptions options)
     {
+        var instance = await InvokeAsync<IJSObjectReference>("useScrollStrategies", options, root, contentRef, null);
+
+        return new ScrollStrategyResult(
+            () => _ = instance!.InvokeVoidAsync("bind"),
+            () => _ = instance!.InvokeVoidAsync("unbind"),
+            () => _ = instance!.DisposeAsync()
+        );
     }
 
-    public bool Initialized { get; private set; }
-
-    public async Task InitializeAsync(ElementReference root, ElementReference contentRef, ScrollStrategyOptions options)
+    public async ValueTask<ScrollStrategyResult> CreateScrollStrategy<TComponent>(ElementReference root,
+        ElementReference contentRef, ScrollStrategyOptions options,
+        DotNetObjectReference<TComponent> dotNetObjectReference) where TComponent : class
     {
-        _instance = await InvokeAsync<IJSObjectReference>("init", root, contentRef, options);
+        var instance = await InvokeAsync<IJSObjectReference>("useScrollStrategies", options, root, contentRef, null,
+            dotNetObjectReference);
 
-        Initialized = true;
-    }
-
-    public async Task BindAsync()
-    {
-        await _instance.TryInvokeVoidAsync("bind");
-    }
-
-    public async Task UnbindAsync()
-    {
-        await _instance.TryInvokeVoidAsync("unbind");
+        return new ScrollStrategyResult(
+            () => _ = instance!.InvokeVoidAsync("bind"),
+            () => _ = instance!.InvokeVoidAsync("unbind"),
+            () => _ = instance!.DisposeAsync()
+        );
     }
 }

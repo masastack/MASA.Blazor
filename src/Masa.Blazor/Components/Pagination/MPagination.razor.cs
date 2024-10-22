@@ -64,6 +64,9 @@ public partial class MPagination : MasaComponentBase
         set => SetValue(value);
     }
 
+    [Parameter, MasaApiParameter(2, ReleasedOn = "v1.8.0")]
+    public int Elevation { get; set; } = 2;
+
     private bool _internalMiniVariant;
 
     public bool IsDark

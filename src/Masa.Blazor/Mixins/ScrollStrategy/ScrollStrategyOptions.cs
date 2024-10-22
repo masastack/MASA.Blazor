@@ -1,20 +1,9 @@
 ﻿namespace Masa.Blazor.Mixins.ScrollStrategy;
 
-public class ScrollStrategyOptions
+public class ScrollStrategyOptions(Blazor.ScrollStrategy strategy, bool contained = false)
 {
-    public ScrollStrategyOptions(ScrollStrategy strategy, bool contained)
-    {
-        Strategy = strategy;
-        Contained = contained;
-    }
-
     [JsonConverter(typeof(JsonCamelStringEnumConverter))]
-    public ScrollStrategy Strategy { get; set; }
+    public Blazor.ScrollStrategy Strategy { get; set; } = strategy;
 
-    public bool Contained { get; set; }
-}
-
-public enum ScrollStrategy
-{
-    Block
+    public bool Contained { get; set; } = contained;
 }
