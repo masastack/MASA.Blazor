@@ -478,6 +478,7 @@ namespace Masa.Blazor
                 {
                     //control by parent
                     nodeState.IsSelected = isSelected;
+                    nodeState.IsIndeterminate = false;
                     UpdateChildrenSelected(nodeState.Children, isSelected);
                 }
             }
