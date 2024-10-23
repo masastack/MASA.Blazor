@@ -9,10 +9,6 @@ public class MItem : MGroupable<MItemGroupBase>
     {
     }
 
-    public MItem(GroupType groupType) : base(groupType)
-    {
-    }
-
     [Parameter] public RenderFragment<ItemContext>? ChildContent { get; set; }
 
     protected override void OnAfterRender(bool firstRender)

@@ -5,8 +5,9 @@ namespace Masa.Blazor;
 
 public partial class MWindow : MItemGroup
 {
-    public MWindow() : base(GroupType.Window)
+    public MWindow()
     {
+        GroupType = GroupType.Window;
         Mandatory = true;
     }
 

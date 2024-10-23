@@ -2,8 +2,9 @@
 
 public partial class MExpansionPanels : MItemGroup
 {
-    public MExpansionPanels() : base(GroupType.ExpansionPanels)
+    public MExpansionPanels()
     {
+        GroupType = GroupType.ExpansionPanels;
     }
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;

@@ -2,8 +2,9 @@
 
 public class MButtonGroup : MItemGroup
 {
-    public MButtonGroup() : base(GroupType.ButtonGroup)
+    public MButtonGroup()
     {
+        GroupType = GroupType.ButtonGroup;
     }
 
     [Parameter] public bool Borderless { get; set; }
