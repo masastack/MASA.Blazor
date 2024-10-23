@@ -1755,3 +1755,9 @@ html.m-overlay-scroll-blocked {
 .m-slider__track-background, .m-slider__track-fill {
     border-radius: 6px;
 }
+
+/* sticky */
+
+.m-sticky--fixed .m-sticky__content {
+    position: fixed;
+}

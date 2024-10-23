@@ -59,20 +59,86 @@
     else
     {
         <ul class="@Block.Element("items")" @ref="_timesRef">
-            @foreach (var time in _singleSectionItems)
-            {
-                var active = time == InternalTime;
-                var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
-                <li class="@_itemModifierBuilder.Add(active).Add(disabled)"
-                    @onclick="() => HandleOnTimeClick(time)">
-                    @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
-                </li>
+            @{
+                var haveGotAdjacent = false;
+                var haveGotActive = false;
+
+                if (HideDisallowedTimes)
+                {
+                    var items = _singleSectionItems.Where(u => IsAllowedTimeCallback?.Invoke(u) is null or true).ToList();
+                    for (int i = 0; i < items.Count(); i++)
+                    {
+                        var index = i;
+                        var time = items[index];
+
+                        var active = time == InternalTime;
+                        var adjacent = false;
+                        if (!haveGotActive)
+                        {
+                            haveGotActive = active;
+                            if (!active && !haveGotAdjacent)
+                            {
+                                var isLast = index == items.Count - 1;
+                                if (isLast)
+                                {
+                                    adjacent = true;
+                                    haveGotAdjacent = true;
+                                }
+                                else
+                                {
+                                    adjacent = InternalTime < time.Add(Step);
+                                    if (adjacent)
+                                    {
+                                        haveGotAdjacent = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        @GenSingleItem(active, adjacent, Disabled, time)
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < _singleSectionItems.Count; i++)
+                    {
+                        // ReSharper disable once InlineTemporaryVariable
+                        var index = i;
+                        var time = _singleSectionItems[index];
+
+                        var disabled = Disabled || IsAllowedTimeCallback?.Invoke(time) is false;
+                        var active = time == InternalTime;
+                        var adjacent = false;
+                        if (!haveGotActive)
+                        {
+                            haveGotActive = active;
+                            if (!active && !haveGotAdjacent)
+                            {
+                                adjacent = InternalTime < time.Add(Step);
+                                if (adjacent)
+                                {
+                                    haveGotAdjacent = true;
+                                }
+                            }
+                        }
+
+                        @GenSingleItem(active, adjacent, disabled, time)
+                    }
+                }
             }
         </ul>
     }
 </div>
 
 @code {
+
+    private RenderFragment GenSingleItem(bool active, bool adjacent, bool disabled, TimeOnly time) => __builder =>
+    {
+        <li class="@_itemModifierBuilder.Add(active).Add(adjacent).Add(disabled)"
+            @onclick="() => HandleOnTimeClick(time)">
+            @ItemContentRenderFragment(time.ToString(Format == TimeFormat.Hr24 ? "HH:mm" : "hh:mm tt"), active)
+        </li>
+    };
 
     private RenderFragment ItemsRenderFragment(int count, int step, int? current, Func<int, bool>? isAllowedCb, Func<int, Task> onClick) => __builder =>
     {
