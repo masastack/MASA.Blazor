@@ -140,7 +140,7 @@ public abstract class MItemGroupBase : MasaComponentBase
         await ToggleAsync(item.Value);
     }
 
-    public async Task ToggleAsync(StringNumber? key)
+    public virtual async Task ToggleAsync(StringNumber? key)
     {
         // have to invoke the InternalValues's setter
         InternalValues = UpdateInternalValues(key);

@@ -254,6 +254,14 @@ namespace Masa.Blazor
 
         public bool HasPrev => HasAffixes && ScrollOffset != 0;
 
+        public override async Task ToggleAsync(StringNumber? key)
+        {
+            await base.ToggleAsync(key);
+            
+            // needs an after render to scroll to the selected item
+            StateHasChanged();
+        }
+
         private async Task HandleOnAffixClick(string direction)
         {
             await ScrollTo(direction);
