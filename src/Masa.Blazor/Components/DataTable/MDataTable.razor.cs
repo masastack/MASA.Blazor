@@ -85,6 +85,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     [Parameter]
     public bool ShowExpand { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    public bool ShowSerialNumber { get; set; }
+
     [Parameter] public RenderFragment<DataTableHeaderSelectContext>? HeaderDataTableSelectContent { get; set; }
 
     [Parameter]
@@ -131,6 +135,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     }
 
     private bool _prevIsMobile;
+    
+    private bool HasFixedColumn => Headers.Any(h => h.Fixed != DataTableFixed.None);
+
+    private bool HasLeftFixedColumn => Headers.Any(h => h.Fixed == DataTableFixed.Left);
 
     public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
     {
@@ -145,15 +153,40 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                           .Where(header => header.Value == null || InternalOptions.GroupBy.FirstOrDefault(by => by == header.Value) == null)
                           .ToList();
 
+            if (ShowSerialNumber)
+            {
+                var index = headers.FindIndex(r => r.Value == "data-table-no");
+                if (index == -1)
+                {
+                    headers.Insert(0, new DataTableHeader<TItem>()
+                    {
+                        Width = "56px",
+                        Value = "data-table-no",
+                        Fixed = HasLeftFixedColumn ? DataTableFixed.Left : DataTableFixed.None,
+                        Sortable = false
+                    });
+                }
+                else
+                {
+                    var header = headers[index];
+                    header.Sortable = false;
+                    if (header.Width == null)
+                    {
+                        header.Width = "56px";
+                    }
+                }
+            }
+
             if (ShowSelect)
             {
+                var fixedSelect = FixedSelect || HasLeftFixedColumn;
                 var index = headers.FindIndex(r => r.Value == "data-table-select");
                 if (index < 0)
                 {
                     headers.Insert(0, new DataTableHeader<TItem>
                     {
-                        Fixed = FixedSelect ? DataTableFixed.Left : DataTableFixed.None,
-                        Width = "56px",
+                        Fixed = fixedSelect ? DataTableFixed.Left : DataTableFixed.None,
+                        Width = "64px",
                         Value = "data-table-select",
                         Sortable = false
                     });
@@ -164,7 +197,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     header.Sortable = false;
                     if (header.Width == null)
                     {
-                        header.Width = "1px";
+                        header.Width = "64px";
                     }
                 }
             }
