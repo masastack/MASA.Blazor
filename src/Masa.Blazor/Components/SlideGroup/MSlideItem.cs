@@ -1,10 +1,9 @@
-﻿using Masa.Blazor.Mixins;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class MSlideItem : MItem
 {
-    public MSlideItem() : base(GroupType.SlideGroup)
+    public MSlideItem()
     {
+        GroupType = GroupType.SlideGroup;
     }
 }
