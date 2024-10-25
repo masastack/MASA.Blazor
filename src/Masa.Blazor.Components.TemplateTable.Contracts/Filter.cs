@@ -23,4 +23,14 @@ public class FilterOption
     public string Func { get; set; }
 
     public string Expected { get; set; } = string.Empty;
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public ExpectedType Type { get; set; }
+}
+
+public enum ExpectedType
+{
+    String,
+    Number,
+    Boolean
 }

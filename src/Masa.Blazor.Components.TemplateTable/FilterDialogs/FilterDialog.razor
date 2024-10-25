@@ -103,7 +103,7 @@
     [Parameter] public EventCallback<Filter> OnSave { get; set; }
 
     private static readonly IList<string> Operators = ["and", "or"];
-    private static readonly HashSet<string> _noExpectedFuncs = ["Empty", "NotEmpty"];
+    private static readonly HashSet<string> _noExpectedFuncs = [..FilterTypes.SupportedBooleanFilters];
 
     private HashSet<string> _prevHiddenColumnIds = [];
     private Guid _prevActiveViewId;
@@ -136,11 +136,14 @@
                         continue;
                     }
 
-                    _filters.Add(new FilterModel(column)
+                    var filterOption = new FilterModel(column)
                     {
                         Func = option.Func,
                         Expected = option.Expected
-                    });
+                    };
+
+                    StandardToLogical(filterOption);
+                    _filters.Add(filterOption);
                 }
 
                 _operator = ActiveView.Filter.Operator == FilterOperator.And ? "and" : "or";
@@ -188,11 +191,34 @@
 
         var request = new Filter
         {
-            Options = _filters.Select(u => u as FilterOption).ToList(),
+            Options = _filters.Select(u =>
+            {
+                var item = u.ToFilterOption();
+                LogicalToStandard(item);
+                return item;
+            }).ToList(),
             Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or
         };
 
         OnSave.InvokeAsync(request);
+    }
+
+    private void LogicalToStandard(FilterOption option)
+    {
+        if (FilterTypes.SupportedBooleanFilters.Contains(option.Func))
+        {
+            var isEq = option.Func == FilterTypes.BooleanFilterEqTrue;
+            option.Func = "eq";
+            option.Expected = isEq ? "true" : "false";
+        }
+    }
+
+    private void StandardToLogical(FilterOption option)
+    {
+        if (option.Type == ExpectedType.Boolean)
+        {
+            option.Func = option.Expected == "true" ? FilterTypes.BooleanFilterEqTrue : FilterTypes.BooleanFilterEqFalse;
+        }
     }
 
 }

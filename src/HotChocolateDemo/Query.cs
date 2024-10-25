@@ -41,12 +41,31 @@ public class Query
 
     public Sheet GetSheet()
     {
+        // 如果添加了新列
+        var levelColumn = new Column(id: "Level", name: "Level", type: ColumnType.Select, new SelectConfig()
+        {
+            Color = true,
+            Options =
+            [
+                new SelectOption("One", "1"),
+                new SelectOption("Two", "2"),
+                new SelectOption("Three", "3")
+            ]
+        });
+
         // 从文件中读取数据
         var file = Path.Combine(Directory.GetCurrentDirectory(), "sheet.json");
         if (File.Exists(file))
         {
             var json = File.ReadAllText(file);
-            return JsonSerializer.Deserialize<Sheet>(json);
+            var sheet = JsonSerializer.Deserialize<Sheet>(json);
+
+            if (sheet.Columns.Any(c => c.Id == "Level"))
+            {
+                return sheet;
+            }
+
+            sheet.Columns = sheet.Columns.Append(levelColumn).ToList();
         }
 
         List<Column> fakeColumns =
@@ -73,7 +92,8 @@ public class Query
                     new SelectOption("C# 9.0 and .NET 5.0 Modern Cross-Platform Development.",
                         "C# 9.0 and .NET 5.0 Modern Cross-Platform Development.")
                 ]
-            })
+            }),
+            levelColumn
         ];
 
         List<ViewColumn> fakedViewColumns = fakeColumns.Select(u => new ViewColumn(u.Id)).ToList();
@@ -114,18 +134,18 @@ public class Query
     private static IEnumerable<User> _fakeUsers = new List<User>
     {
         new User("John", 20, "https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png", true,
-            new DateTime(2004, 1, 1), ["C# in depth.", "Pro C# 7."]),
+            new DateTime(2004, 1, 1), ["C# in depth.", "Pro C# 7."], 1),
         new User("Doe", 30, "https://cdn.masastack.com/stack/images/website/masa-blazor/doddgu.png", false,
-            new DateTime(1994, 4, 12), []),
-        new User("Jane", 25, "", true, new DateTime(1999, 5, 6), []),
+            new DateTime(1994, 4, 12), [], 2),
+        new User("Jane", 25, "", true, new DateTime(1999, 5, 6), [], 1),
         new User("Alice", 22, "https://cdn.masastack.com/stack/images/website/masa-blazor/marcus1.png", false,
-            new DateTime(2002, 6, 7), ["CLR via C#.", "C# 9 and .NET 5."]),
+            new DateTime(2002, 6, 7), ["CLR via C#.", "C# 9 and .NET 5."], 3),
         new User("Bob", 28, "", true, new DateTime(1996, 7, 8),
-            ["C# 9.0 in a Nutshell.", "C# 9.0 Pocket Reference."]),
-        new User("Eve", 30, "", false, new DateTime(1992, 8, 9), []),
-        new User("Mallory", 45, "", true, new DateTime(1990, 9, 10), []),
-        new User("Charlie", 35, "", false, new DateTime(1988, 10, 11), ["C# 9.0 All-in-One For Dummies."]),
-        new User("David", 30, "", true, new DateTime(1986, 11, 12), []),
-        new User("Frank", 50, "", false, new DateTime(1984, 12, 13), [])
+            ["C# 9.0 in a Nutshell.", "C# 9.0 Pocket Reference.", "C# 9.0 All-in-One For Dummies."], 2),
+        new User("Eve", 30, "", false, new DateTime(1992, 8, 9), [], 1),
+        new User("Mallory", 45, "", true, new DateTime(1990, 9, 10), [], 3),
+        new User("Charlie", 35, "", false, new DateTime(1988, 10, 11), ["C# 9.0 All-in-One For Dummies."], 1),
+        new User("David", 30, "", true, new DateTime(1986, 11, 12), [], 3),
+        new User("Frank", 50, "", false, new DateTime(1984, 12, 13), [], 2)
     };
 }

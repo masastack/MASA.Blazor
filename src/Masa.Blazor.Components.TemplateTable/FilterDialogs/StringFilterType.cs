@@ -4,27 +4,23 @@ public static class FilterTypes
 {
     public static readonly string[] SupportedStringFilters =
     [
-        "eq", "neq", "contains", "ncontains", "startsWith", "nstartsWith", "endsWith", "nendsWith",
-        "in", "nin"
+        "eq", "neq", "contains", "ncontains", "startsWith", "nstartsWith", "endsWith", "nendsWith", //"in", "nin"
     ];
 
     public static readonly string[] SupportedComparableFilters =
     [
-        "Equals", "NotEquals", "GreaterThan", "NotGreaterThan",
-        "GreaterThanOrEqual", "NotGreaterThanOrEqual", "LessThan", "NotLessThan",
-        "LessThanOrEqual", "NotLessThanOrEqual", //"In", "NotIn"
+        "eq", "neq", "gt", "ngt", "gte", "ngte", "lt", "nlt", "lte", "nlte", //"in", "nin"
     ];
 
     public static readonly string[] SupportedBooleanFilters =
     [
-        "Equals", "NotEquals"
+        BooleanFilterEqTrue,
+        BooleanFilterEqFalse,
     ];
 
-    public static readonly string[] SupportedEnumFilters =
-    [
-        "Equals", "NotEquals", "In", "NotIn"
-    ];
-
+    public const string BooleanFilterEqTrue = "bool-eq-true";
+    public const string BooleanFilterEqFalse = "bool-eq-false";
+    
     public static readonly string[] SupportedListFilters =
     [
         "All", "None", "Some", "Any"

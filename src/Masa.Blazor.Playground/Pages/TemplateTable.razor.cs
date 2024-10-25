@@ -1,4 +1,5 @@
 ﻿using GraphQL;
+using GraphQL.Client.Abstractions;
 using Masa.Blazor.Components.TemplateTable;
 using Microsoft.AspNetCore.Components;
 
@@ -7,6 +8,8 @@ namespace Masa.Blazor.Playground.Pages;
 public partial class TemplateTable
 {
     [Inject] private HttpClient HttpClient { get; set; } = null!;
+
+    [Inject] private IPopupService PopupService { get; set; } = default!;
 
     private SheetProvider? _sheetProvider;
     private ItemsProvider? _itemsProvider;
@@ -41,6 +44,12 @@ public partial class TemplateTable
             };
 
             var response = await GraphQLClient.SendQueryAsync<ItemsProviderResult>(request);
+
+            if (response.Errors?.Length > 0)
+            {
+                await PopupService.EnqueueSnackbarAsync("Error: " + response.Errors[0].Message, AlertTypes.Error);
+            }
+
             return response.Data;
         };
     }

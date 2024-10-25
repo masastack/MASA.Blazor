@@ -94,14 +94,14 @@ public readonly struct ItemsProviderRequest
         if (filterRequest.Options.Count == 1)
         {
             var option = filterRequest.Options.First();
-            argumentsBuilder.Append($"{{{option.ColumnId.ToCamelCase()}: {{{option.Func}: \"{option.Expected}\"}}}}");
+            argumentsBuilder.Append($"{{{option.ColumnId.ToCamelCase()}: {{{option.Func}: {FormatExpected(option)}}}}}");
         }
         else
         {
             foreach (var option in filterRequest.Options)
             {
                 argumentsBuilder.Append(
-                    $"{{{option.ColumnId.ToCamelCase()}: {{{option.Func}: \"{option.Expected}\"}}}}, ");
+                    $"{{{option.ColumnId.ToCamelCase()}: {{{option.Func}: {FormatExpected(option)}}}}}, ");
             }
 
             argumentsBuilder.Remove(argumentsBuilder.Length - 2, 2);
@@ -131,6 +131,11 @@ public readonly struct ItemsProviderRequest
         }
 
         return $"order: {{{string.Join(", ", arguments)}}}";
+    }
+
+    private static string FormatExpected(FilterOption option)
+    {
+        return option.Type == ExpectedType.String ? "\"" + option.Expected + "\"" : option.Expected;
     }
 }
 
