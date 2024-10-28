@@ -12,4 +12,4 @@ public class Author
     public string Name { get; set; }
 }
 
-public record User(string Name, int Age, string Avatar, bool Done, DateTime Birthday, string[] FavoriteBooks, int Level);
+public record User(string Name, int Age, string Avatar, bool Done, DateTime Birthday, string[] FavoriteBooks, string Level);

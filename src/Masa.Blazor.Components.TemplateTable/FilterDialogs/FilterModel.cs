@@ -2,11 +2,16 @@
 
 public class FilterModel : FilterOption
 {
-    public Column Column { get; private set; }
+    public ColumnInfo Column { get; private set; }
+
+    public List<SelectOption>? SelectOptions { get; private set; }
+
+    // TODO: 初始化
+    public List<string> MultiSelect { get; internal set; } = [];
 
     public string[] FuncList { get; private set; }
 
-    public FilterModel(Column column)
+    public FilterModel(ColumnInfo column)
     {
         Column = column;
         ColumnId = column.Id;
@@ -34,41 +39,42 @@ public class FilterModel : FilterOption
 
     private void UpdateOperator()
     {
-        if (Column.Type is ColumnType.Text or ColumnType.Link or ColumnType.Email or ColumnType.Phone)
+        SelectOptions = null;
+
+        switch (Column.Type)
         {
-            FuncList = FilterTypes.SupportedStringFilters;
-            Func = FuncList[0];
-            Type = ExpectedType.String;
-        }
-        else if (Column.Type is ColumnType.Number or ColumnType.Rating or ColumnType.Progress or ColumnType.Date)
-        {
-            FuncList = FilterTypes.SupportedComparableFilters;
-            Func = FuncList[0];
-            Type = Column.Type is ColumnType.Date ? ExpectedType.String : ExpectedType.Number;
-        }
-        else if (Column.Type == ColumnType.Checkbox)
-        {
-            FuncList = FilterTypes.SupportedBooleanFilters;
-            Func = FuncList[0];
-            Type = ExpectedType.Boolean;
-        }
-        else if (Column.Type == ColumnType.Select)
-        {
-            FuncList = ["Equal", "NotEqual", "Empty", "NotEmpty"];
-            Func = FuncList[0];
-            Type = ExpectedType.String;
-        }
-        else if (Column.Type == ColumnType.MultiSelect)
-        {
-            FuncList = ["Equal", "NotEqual", "ContainsAny", "ContainsAll", "NotContains", "Empty", "NotEmpty"];
-            Func = FuncList[0];
-            Type = ExpectedType.String;
-        }
-        else if (Column.Type == ColumnType.Image)
-        {
-            FuncList = ["Empty", "NotEmpty"];
-            Func = FuncList[0];
-            Type = ExpectedType.String;
+            case ColumnType.Text or ColumnType.Link or ColumnType.Email or ColumnType.Phone:
+                FuncList = FilterTypes.SupportedStringFilters;
+                Func = FuncList[0];
+                Type = ExpectedType.String;
+                break;
+            case ColumnType.Number or ColumnType.Rating or ColumnType.Progress or ColumnType.Date:
+                FuncList = FilterTypes.SupportedComparableFilters;
+                Func = FuncList[0];
+                Type = Column.Type is ColumnType.Date ? ExpectedType.String : ExpectedType.Number;
+                break;
+            case ColumnType.Checkbox:
+                FuncList = FilterTypes.SupportedBooleanFilters;
+                Func = FuncList[0];
+                Type = ExpectedType.Boolean;
+                break;
+            case ColumnType.Select:
+                FuncList = FilterTypes.SupportedSelectFilters;
+                Func = FuncList[0];
+                Type = ExpectedType.String;
+                SelectOptions = (Column.ConfigObject as SelectConfig)?.Options;
+                break;
+            case ColumnType.MultiSelect:
+                FuncList = FilterTypes.SupportedMultiSelectFilters;
+                Func = FuncList[0];
+                Type = ExpectedType.String;
+                SelectOptions = (Column.ConfigObject as SelectConfig)?.Options;
+                break;
+            case ColumnType.Image:
+                FuncList = FilterTypes.EmptyFilters;
+                Func = FuncList[0];
+                Type = ExpectedType.String;
+                break;
         }
     }
 }

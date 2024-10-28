@@ -134,18 +134,18 @@ public class Query
     private static IEnumerable<User> _fakeUsers = new List<User>
     {
         new User("John", 20, "https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png", true,
-            new DateTime(2004, 1, 1), ["C# in depth.", "Pro C# 7."], 1),
+            new DateTime(2004, 1, 1), ["C# in depth.", "Pro C# 7."], "1"),
         new User("Doe", 30, "https://cdn.masastack.com/stack/images/website/masa-blazor/doddgu.png", false,
-            new DateTime(1994, 4, 12), [], 2),
-        new User("Jane", 25, "", true, new DateTime(1999, 5, 6), [], 1),
+            new DateTime(1994, 4, 12), [], "2"),
+        new User("Jane", 25, "", true, new DateTime(1999, 5, 6), [], string.Empty),
         new User("Alice", 22, "https://cdn.masastack.com/stack/images/website/masa-blazor/marcus1.png", false,
-            new DateTime(2002, 6, 7), ["CLR via C#.", "C# 9 and .NET 5."], 3),
+            new DateTime(2002, 6, 7), ["CLR via C#.", "C# 9 and .NET 5."], "3"),
         new User("Bob", 28, "", true, new DateTime(1996, 7, 8),
-            ["C# 9.0 in a Nutshell.", "C# 9.0 Pocket Reference.", "C# 9.0 All-in-One For Dummies."], 2),
-        new User("Eve", 30, "", false, new DateTime(1992, 8, 9), [], 1),
-        new User("Mallory", 45, "", true, new DateTime(1990, 9, 10), [], 3),
-        new User("Charlie", 35, "", false, new DateTime(1988, 10, 11), ["C# 9.0 All-in-One For Dummies."], 1),
-        new User("David", 30, "", true, new DateTime(1986, 11, 12), [], 3),
-        new User("Frank", 50, "", false, new DateTime(1984, 12, 13), [], 2)
+            ["C# 9.0 in a Nutshell.", "C# 9.0 Pocket Reference.", "C# 9.0 All-in-One For Dummies."], "2"),
+        new User("Eve", 30, "", false, new DateTime(1992, 8, 9), [], "1"),
+        new User("Mallory", 45, "", true, new DateTime(1990, 9, 10), [], "3"),
+        new User("Charlie", 35, "", false, new DateTime(1988, 10, 11), ["C# 9.0 All-in-One For Dummies."], "1"),
+        new User("David", 30, "", true, new DateTime(1986, 11, 12), [], "3"),
+        new User("Frank", 50, "", false, new DateTime(1984, 12, 13), [], "2")
     };
 }

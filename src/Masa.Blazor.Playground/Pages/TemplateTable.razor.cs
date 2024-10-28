@@ -35,6 +35,7 @@ public partial class TemplateTable
                   done
                   birthday
                   favoriteBooks
+                  level
                 }
                 """);
 
