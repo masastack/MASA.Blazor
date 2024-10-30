@@ -38,6 +38,7 @@ public partial class MTemplateTable
                   columnId
                   func
                   expected
+                  type
                 }
                 operator
               }

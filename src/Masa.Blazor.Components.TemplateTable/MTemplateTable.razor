@@ -304,7 +304,7 @@
         var sheet = new Sheet()
         {
             Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(Column (u) => u),
-            Views = _sheet.Views.Select(View (u) => u.Value),
+            Views = _sheet.Views.Select(View (u) => u.ToView()),
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,
         };

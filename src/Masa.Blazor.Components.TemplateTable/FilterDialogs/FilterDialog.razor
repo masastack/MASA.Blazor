@@ -347,6 +347,40 @@
                 _ => throw new NotSupportedException($"Unsupported filter func: {option.Func}")
             };
         }
+        else if (option.Column.Type == ColumnType.MultiSelect)
+        {
+            Console.Out.WriteLine("option.Expected: " + option.Expected);
+            if (option.Func == "any")
+            {
+                option.Func = option.Expected == "true" ? FilterTypes.MultiSelectNotEmpty : FilterTypes.MultiSelectEmpty;
+            }
+            else
+            {
+                if (option.Func == "some")
+                {
+                    option.Func = FilterTypes.MultiSelectContainsOne;
+                }
+                else if (option.Func == "none")
+                {
+                    option.Func = FilterTypes.MultiSelectNotContains;
+                }
+
+                if (option.Expected == "{ in: [] }")
+                {
+                    option.Expected = string.Empty;
+                }
+
+                var firstQuote = option.Expected.IndexOf('"');
+                var lastQuote = option.Expected.LastIndexOf('"');
+
+                if (firstQuote != -1 && lastQuote != -1)
+                {
+                    var values = option.Expected.Substring(firstQuote + 1, lastQuote - firstQuote - 1).Split(", ");
+                    Console.Out.WriteLine("values: " + string.Join(", ", values));
+                    option.MultiSelect = values.ToList();
+                }
+            }
+        }
     }
 
 }

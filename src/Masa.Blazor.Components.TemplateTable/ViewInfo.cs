@@ -44,4 +44,10 @@ public class ViewInfo
             Columns = viewColumnInfos
         };
     }
+
+    public View ToView()
+    {
+        Value.Columns = Columns.Select(c => c as ViewColumn).ToList();
+        return Value;
+    }
 }
