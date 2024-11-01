@@ -26,6 +26,13 @@
                  OnSelect="@HandleOnColumnTypeSelect">
         </MSelect>
 
+        @if (_column.Type == ColumnType.Text)
+        {
+            <MSwitch @bind-Value="_column.Searchable"
+                     Label="Searchable">
+            </MSwitch>
+        }
+
         <div class="mt-6">
             @switch (_column.Type)
             {
@@ -67,6 +74,7 @@
     private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
     {
         _column.Config = null;
+        _column.Searchable = _column.Type == ColumnType.Text;
     }
 
     private void HandleOnSubmit()
@@ -85,7 +93,7 @@
 
         return metadataList;
     }
-    
+
     private void HandleOnConfigUpdate(object config)
     {
         _column.ConfigObject = config;
@@ -108,9 +116,11 @@
             Name = column.Name,
             Type = column.Type,
             Config = column.Config,
+            Searchable = column.Searchable
         };
 
         _menu = true;
         StateHasChanged();
     }
+
 }

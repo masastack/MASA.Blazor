@@ -10,92 +10,87 @@
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
 
-<MButton OnClick="SaveSheet">Save Sheet</MButton>
+<div class="m-template-table">
+    <Toolbar DefaultViewId="@_sheet.DefaultViewId"
+             ActiveView="@_sheet.ActiveViewId"
+             ActiveViewChanged="@HandleOnActiveViewChanged"
+             ColumnOrder="@_columnOrder"
+             ColumnOrderChanged="@HandleOnColumnOrderChanged"
+             RowHeight="_rowHeight"
+             RowHeightChanged="@HandleOnRowHeightChanged"
+             Views="_sheet.Views"
+             Columns="_sheet.Columns"
+             HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+             OnViewAdd="@AddNewView"
+             OnViewReset="@ResetView"
+             OnViewRename="@RenameView"
+             OnViewDelete="@DeleteView"
+             OnColumnEditClick="@OpenColumnEditDialog"
+             OnColumnToggle="@ToggleColumn"
+             HasCustom="@HasCustomConfiguration"
+             HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
+             HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
+             OnFilterClick="@(() => _filterDialog?.Open())"
+             OnSortClick="@(() => _sortDialog?.Open())"
+             OnSearch="@Search"
+             OnSave="@SaveSheet"/>
 
-<Toolbar DefaultViewId="@_sheet.DefaultViewId"
-         ActiveView="@_sheet.ActiveViewId"
-         ActiveViewChanged="@HandleOnActiveViewChanged"
-         ColumnOrder="@_columnOrder"
-         ColumnOrderChanged="@HandleOnColumnOrderChanged"
-         RowHeight="_rowHeight"
-         RowHeightChanged="@HandleOnRowHeightChanged"
-         Views="_sheet.Views"
-         Columns="_sheet.Columns"
-         HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-         OnViewAdd="@AddNewView"
-         OnViewReset="@ResetView"
-         OnViewRename="@RenameView"
-         OnViewDelete="@DeleteView"
-         OnColumnEditClick="@OpenColumnEditDialog"
-         OnColumnToggle="@ToggleColumn"
-         HasCustom="@HasCustomConfiguration"
-         HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
-         HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
-         OnFilterClick="@(() => _filterDialog?.Open())"
-         OnSortClick="@(() => _sortDialog?.Open())"/>
-
-<Viewer ViewColumns="@_sheet.ActiveViewColumns"
-        HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-        ColumnOrder="@_columnOrder"
-        ColumnOrderChanged="@HandleOnColumnOrderChanged"
-        Loading="@_loading"
-        RowHeight="@_rowHeight"
-        Rows="@_items"
-        Sort="@_sheet.ActiveView?.Value?.Sort"
-        OnSortUpdate="@SortUpdate"
-        Height="@Height"
-        OnColumnToggle="@ToggleColumn"
-        OnColumnEditClick="@OpenColumnEditDialog"
-        OnColumnResize="@ResizeColumn"
-        OnUpdate="@OnUpdate"
-        OnDelete="@OnDelete"
-        OnAction1="@OnAction1"
-        OnAction2="@OnAction2"
-        @ref="_viewer">
-</Viewer>
-@if (_sheet.ActiveView is not null)
-{
-    <div class="d-flex align-center">
-        <div>
-            @{
-                var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize + 1;
-                var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
-            }
-
-            @pageStart - @pageStop of @_totalCount
-        </div>
-
-        <div>
-            <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
-            <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
-        </div>
-    </div>
-}
-
-<ColumnDialog @ref="_columnEditDialog"
-              OnSave="@UpdateColumn">
-</ColumnDialog>
-
-<FilterDialog @ref="_filterDialog"
-              ActiveView="@_sheet.ActiveView?.Value"
-              Columns="@_sheet.Columns"
-              HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-              OnSave="@SaveFilter">
-</FilterDialog>
-
-<SortDialog @ref="_sortDialog"
-            ActiveView="@_sheet.ActiveView?.Value"
-            Columns="@_sheet.Columns"
+    <Viewer ViewColumns="@_sheet.ActiveViewColumns"
             HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-            OnSave="@SortUpdate">
-</SortDialog>
-
-<p style="font-size: 12px;white-space: break-spaces">
-    @(JsonSerializer.Serialize(_sheet.Views, new JsonSerializerOptions()
+            ColumnOrder="@_columnOrder"
+            ColumnOrderChanged="@HandleOnColumnOrderChanged"
+            Loading="@_loading"
+            RowHeight="@_rowHeight"
+            Rows="@_items"
+            Sort="@_sheet.ActiveView?.Value?.Sort"
+            OnSortUpdate="@SortUpdate"
+            Height="@Height"
+            OnColumnToggle="@ToggleColumn"
+            OnColumnEditClick="@OpenColumnEditDialog"
+            OnColumnResize="@ResizeColumn"
+            OnUpdate="@OnUpdate"
+            OnDelete="@OnDelete"
+            OnAction1="@OnAction1"
+            OnAction2="@OnAction2"
+            @ref="_viewer">
+    </Viewer>
+    @if (_sheet.ActiveView is not null)
     {
-        WriteIndented = true
-    }))
-</p>
+        <div class="d-flex align-center">
+            <div>
+                @{
+                    var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize + 1;
+                    var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
+                }
+
+                @pageStart - @pageStop of @_totalCount
+            </div>
+
+            <div>
+                <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
+                <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
+            </div>
+        </div>
+    }
+
+    <ColumnDialog @ref="_columnEditDialog"
+                  OnSave="@UpdateColumn">
+    </ColumnDialog>
+
+    <FilterDialog @ref="_filterDialog"
+                  ActiveView="@_sheet.ActiveView?.Value"
+                  Columns="@_sheet.Columns"
+                  HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                  OnSave="@SaveFilter">
+    </FilterDialog>
+
+    <SortDialog @ref="_sortDialog"
+                ActiveView="@_sheet.ActiveView?.Value"
+                Columns="@_sheet.Columns"
+                HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                OnSave="@SortUpdate">
+    </SortDialog>
+</div>
 
 @code {
 
@@ -152,7 +147,6 @@
     private async Task ResetView()
     {
         _sheet.ActiveView.Value.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
-        // _hiddenColumnIds = [];
         _columnOrder = [];
         _sheet.ActiveView.Value.Filter = null;
         _sheet.ActiveView.Value.Sort = null;
@@ -269,6 +263,7 @@
         column.Type = data.Type;
         column.Config = data.Config;
         column.ConfigObject = data.ConfigObject;
+        column.Searchable = data.Searchable;
 
         // var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
         // viewColumn.Column = column;
@@ -284,6 +279,12 @@
     private async Task SortUpdate(Sort sort)
     {
         _sheet.ActiveView.Value.Sort = sort;
+        _sheet.ActiveView.PageIndex = 1;
+        await RefreshItemsAsync(GetItemsProviderRequest());
+    }
+
+    private async Task Search()
+    {
         _sheet.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }

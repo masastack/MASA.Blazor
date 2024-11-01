@@ -4,6 +4,8 @@ namespace Masa.Blazor.Components.TemplateTable;
 
 public class Filter
 {
+    public string? Search { get; set; }
+
     public List<FilterOption> Options { get; set; } = [];
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

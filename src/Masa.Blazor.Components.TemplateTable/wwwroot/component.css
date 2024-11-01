@@ -19,10 +19,9 @@
 }
 
 .masa-table__toolbar-actions {
-  display: flex;
-  align-items: center;
-  padding: 8px;
+  padding: 16px 12px;
   background-color: var(--m-theme-surface-container);
+  border-radius: 4px;
 }
 
 .masa-table-viewer--low {

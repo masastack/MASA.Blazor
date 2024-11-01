@@ -14,6 +14,7 @@ public class ColumnInfo : Column
         Name = column.Name;
         Type = column.Type;
         Config = column.Config;
+        Searchable = column.Searchable;
         ConfigObject = UpdateConfigObject(column.Type, column.Config);
     }
 

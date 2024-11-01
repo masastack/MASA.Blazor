@@ -2,7 +2,7 @@
 
 public class ViewInfo
 {
-    public View? Value { get; set; }
+    public View Value { get; set; }
 
     public List<ViewColumnInfo> Columns { get; set; }
 
@@ -49,5 +49,10 @@ public class ViewInfo
     {
         Value.Columns = Columns.Select(c => c as ViewColumn).ToList();
         return Value;
+    }
+
+    public List<ViewColumnInfo> GetSearchableColumn()
+    {
+        return Columns.Where(c => c.Column.Searchable).ToList();
     }
 }

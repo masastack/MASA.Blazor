@@ -28,4 +28,6 @@ public class Column
     public ColumnType Type { get; set; }
 
     public string? Config { get; set; }
+
+    public bool Searchable { get; set; }
 }

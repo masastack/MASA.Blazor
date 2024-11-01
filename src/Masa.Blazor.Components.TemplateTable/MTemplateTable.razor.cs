@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.TemplateTable.FilterDialogs;
+
+namespace Masa.Blazor;
 
 public partial class MTemplateTable
 {
@@ -41,6 +43,7 @@ public partial class MTemplateTable
                   type
                 }
                 operator
+                search
               }
               sort {
                 options {
@@ -55,6 +58,7 @@ public partial class MTemplateTable
               id
               name
               type
+              searchable
             }
             activeViewId
             defaultViewId
@@ -112,6 +116,25 @@ public partial class MTemplateTable
 
             try
             {
+                if (!string.IsNullOrWhiteSpace(request.FilterRequest?.Search))
+                {
+                    var searchableColumns = _sheet.Columns.Where(u => u.Searchable).ToList();
+                    if (searchableColumns.Count > 0)
+                    {
+                        foreach (var searchableColumn in searchableColumns)
+                        {
+                            request.FilterRequest.Options.Add(new FilterOption()
+                            {
+                                ColumnId = searchableColumn.Id,
+                                Func = FilterTypes.Contains,
+                                Expected = request.FilterRequest.Search
+                            });
+                        }
+
+                        request.FilterRequest.Operator = FilterOperator.Or;
+                    }
+                }
+
                 var result = await ItemsProvider(request);
                 await Task.Delay(500); // TODO: just for testing, remove it if implemented
                 _totalCount = result.Result.TotalCount;
@@ -185,7 +208,12 @@ public partial class MTemplateTable
         {
             PageIndex = _sheet.ActiveView.PageIndex,
             PageSize = _sheet.ActiveView.PageSize,
-            FilterRequest = _sheet.ActiveView.Value.Filter,
+            FilterRequest = new Filter()
+            {
+                Operator = _sheet.ActiveView.Value.Filter.Operator,
+                Search = _sheet.ActiveView.Value.Filter.Search,
+                Options = [.._sheet.ActiveView.Value.Filter.Options]
+            },
             SortRequest = _sheet.ActiveView.Value.Sort
         };
     }

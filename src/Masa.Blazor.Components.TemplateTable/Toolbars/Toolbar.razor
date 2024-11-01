@@ -1,167 +1,166 @@
 @inject IPopupService PopupService
 
 <div class="masa-table__toolbar">
-    <MItemGroup Value="@ActiveView.ToString()"
-                ValueChanged="@ActiveChanged"
-                Class="masa-table__toolbar-tabs"
-                Mandatory
-                ActiveClass="active">
-        @foreach (var view in Views)
-        {
-            <MItem Value="@view.Value.Id.ToString()">
-                @{
-                    var editing = _renamingView == view.Value.Id;
-                    var hasAction = !editing && context.Active;
-                }
-                <MButton Text
-                         Large
-                         Class="@($"view-tab {context.ActiveClass}")"
-                         OnClick="@context.Toggle"
-                         Ripple="@(!editing)">
+    <MRow Class="mb-1" Dense>
+        <MCol Cols="12" Sm="4">
+            <MSelect Value="ActiveView"
+                     ValueChanged="ActiveViewChanged"
+                     Items="@Views"
+                     ItemText="v => v.Value.Name"
+                     ItemValue="v => v.Value.Id"
+                     Outlined
+                     Dense
+                     HideDetails="true"
+                     TItem="ViewInfo"
+                     TItemValue="Guid"
+                     TValue="Guid"
+                     OnSelect="@(tuple => OnActiveViewChanged(tuple.Item))">
+            </MSelect>
+        </MCol>
 
-                    <div style="max-width: 160px;"
-                         class="text-truncate"
-                         title="@view.Value.Name">
-                        @if (_renamingView == view.Value.Id)
-                        {
-                            <MTextField @bind-Value="@_newViewName"
-                                        OnBlur="@UpdateViewName"
-                                        OnEnter="@UpdateViewName"
-                                        Autofocus
-                                        Dense
-                                        HideDetails="true"
-                                        Required
-                                        Style="margin-bottom: 5px;">
-                            </MTextField>
-                        }
-                        else
-                        {
-                            @view.Value.Name
-                        }
-                    </div>
+        <MCol Cols="12" OffsetSm="2" Sm="6" Class="text-right">
+            @if (!IsDefaultView)
+            {
+                <MMenu @bind-Value="_renameMenu"
+                       ContentClass="pa-2">
+                    <ActivatorContent>
+                        <MButton Class="mr-1"
+                                 OnClick="@RenameView"
+                                 @attributes="@context.Attrs">
+                            重命名
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MTextField @bind-Value="@_newViewName"
+                                    OnBlur="@UpdateViewName"
+                                    OnEnter="@UpdateViewName"
+                                    Autofocus
+                                    Dense
+                                    HideDetails="true"
+                                    Required>
+                        </MTextField>
+                    </ChildContent>
+                </MMenu>
+                <MButton Class="mr-1" Color="error" OnClick="@HandleOnDelete">删除</MButton>
+            }
+            <MButton Color="primary" OnClick="@OnSave">保存</MButton>
+        </MCol>
+    </MRow>
+    <MRow Class="masa-table__toolbar-actions"
+          NoGutters>
+        <MCol Cols="12" Md="6" Class="mb-2">
+            <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
+                <MBadge Value="@HasCustom" Dot Color="red">
+                    表格配置
+                </MBadge>
+            </MButton>
+            <MButton LeftIconName="mdi-filter-variant" Text OnClick="@OnFilterClick">
+                <MBadge Value="@HasFilter" Dot Color="red">
+                    筛选
+                </MBadge>
+            </MButton>
+            <MButton LeftIconName="mdi-sort" Text OnClick="@OnSortClick">
+                <MBadge Value="@HasSort" Dot Color="red">
+                    排序
+                </MBadge>
+            </MButton>
+            <MMenu MinWidth="160">
+                <ActivatorContent>
+                    <MButton LeftIconName="mdi-format-line-spacing"
+                             Text
+                             @attributes="@context.Attrs">
+                        行高
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    <MList Dense>
+                        <MListItemGroup Value="@((int)RowHeight)"
+                                        ValueChanged="@((val) => RowHeightChanged.InvokeAsync((RowHeight)val.AsT1))"
+                                        Mandatory
+                                        Color="primary">
+                            <MListItem Value="0">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            低
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="1">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            中
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="2">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            高
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                        </MListItemGroup>
+                    </MList>
+                </ChildContent>
+            </MMenu>
+        </MCol>
 
-                    @if (!IsDefaultView)
-                    {
-                        <Dropdown>
-                            <ActivatorContent Context="dropdown">
-                                <ExpandXTransition>
-                                    <MButton Class="menu"
-                                             Small
-                                             IconName="mdi-dots-horizontal"
-                                             Show="@hasAction"
-                                             @attributes="@dropdown.Attrs">
-                                    </MButton>
-                                </ExpandXTransition>
-                            </ActivatorContent>
-                            <ChildContent>
-                                <DropdownItem PrependIcon="mdi-rename-outline"
-                                              Title="Rename view"
-                                              OnClick="@(() => RenameView(view.Value))"/>
-                                <DropdownItem PrependIcon="mdi-trash-can-outline"
-                                              Title="Delete view"
-                                              OnClick="@(() => OnViewDelete.InvokeAsync(view.Value))"/>
+        @{
+            var searchableColumns = _activeViewInfo?.GetSearchableColumn();
+            var hasSearch = searchableColumns?.Count > 0;
+            if (hasSearch)
+            {
+                var placeholder = $"Search for {string.Join(", ", searchableColumns.Select(u => u.Column.Name))}";
 
-                            </ChildContent>
-                        </Dropdown>
-                    }
-                </MButton>
-            </MItem>
+                <MCol Cols="12" Md="6" Class="mb-2">
+                    <MTextField @bind-Value="_activeViewInfo!.Value.Filter.Search"
+                                Placeholder="@placeholder"
+                                PersistentPlaceholder
+                                Outlined
+                                Clearable
+                                Dense
+                                HideDetails="true"
+                                OnEnter="@OnSearch"
+                                OnClearClick="@OnSearch">
+                    </MTextField>
+                </MCol>
+            }
         }
-    </MItemGroup>
-
-
-    <div class="masa-table__toolbar-actions">
-        <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
-            <MBadge Value="@HasCustom" Dot Color="red">
-                表格配置
-            </MBadge>
-        </MButton>
-        <MButton LeftIconName="mdi-filter-variant" Text OnClick="@OnFilterClick">
-            <MBadge Value="@HasFilter" Dot Color="red">
-                筛选
-            </MBadge>
-        </MButton>
-        <MButton LeftIconName="mdi-sort" Text OnClick="@OnSortClick">
-            <MBadge Value="@HasSort" Dot Color="red">
-                排序
-            </MBadge>
-        </MButton>
-        <MMenu MinWidth="160">
-            <ActivatorContent>
-                <MButton LeftIconName="mdi-format-line-spacing"
-                         Text
-                         @attributes="@context.Attrs">
-                    行高
-                </MButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MList Dense>
-                    <MListItemGroup Value="@((int)RowHeight)"
-                                    ValueChanged="@((val) => RowHeightChanged.InvokeAsync((RowHeight)val.AsT1))"
-                                    Mandatory
-                                    Color="primary">
-                        <MListItem Value="0">
-                            <ItemContent>
-                                <MListItemAction>
-                                    <FadeTransition>
-                                        <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                    </FadeTransition>
-                                </MListItemAction>
-                                <MListItemContent>
-                                    <MListItemTitle>
-                                        低
-                                    </MListItemTitle>
-                                </MListItemContent>
-                            </ItemContent>
-                        </MListItem>
-                        <MListItem Value="1">
-                            <ItemContent>
-                                <MListItemAction>
-                                    <FadeTransition>
-                                        <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                    </FadeTransition>
-                                </MListItemAction>
-                                <MListItemContent>
-                                    <MListItemTitle>
-                                        中
-                                    </MListItemTitle>
-                                </MListItemContent>
-                            </ItemContent>
-                        </MListItem>
-                        <MListItem Value="2">
-                            <ItemContent>
-                                <MListItemAction>
-                                    <FadeTransition>
-                                        <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                    </FadeTransition>
-                                </MListItemAction>
-                                <MListItemContent>
-                                    <MListItemTitle>
-                                        高
-                                    </MListItemTitle>
-                                </MListItemContent>
-                            </ItemContent>
-                        </MListItem>
-                    </MListItemGroup>
-                </MList>
-            </ChildContent>
-        </MMenu>
-        <MSpacer/>
-
-        <MButton Color="secondary"
-                 Depressed
-                 Class="mr-2"
-                 OnClick="@ResetView">
-            重置
-        </MButton>
-
-        <MButton Color="primary"
-                 Depressed
-                 OnClick="@SaveAsNewView">
-            保存为新的视图
-        </MButton>
-    </div>
-
+        <MCol Cols="12" Md="hasSearch ? 12 : 6" Class="text-right">
+            <MButton Color="secondary"
+                     Depressed
+                     Class="mr-1"
+                     OnClick="@ResetView">
+                重置
+            </MButton>
+            <MButton Color="primary"
+                     Depressed
+                     OnClick="@SaveAsNewView">
+                保存为新的视图
+            </MButton>
+        </MCol>
+    </MRow>
 </div>
 
 <MDialog @bind-Value="_configDialog" MaxWidth="400">
@@ -211,6 +210,5 @@
 
 <MDialog @bind-Value="_filterDialog"
          MaxWidth="400">
-
     <MButton Outlined Block>Add filter</MButton>
 </MDialog>

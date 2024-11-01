@@ -38,6 +38,10 @@ public partial class Toolbar
 
     [Parameter] public EventCallback OnSortClick { get; set; }
 
+    [Parameter] public EventCallback OnSearch { get; set; }
+
+    [Parameter] public EventCallback OnSave { get; set; }
+
     [Parameter] public bool HasCustom { get; set; }
 
     [Parameter] public bool HasFilter { get; set; }
@@ -46,10 +50,19 @@ public partial class Toolbar
 
     private bool _configDialog;
     private bool _filterDialog;
-    private Guid _renamingView;
     private string? _newViewName;
+    private bool _renameMenu;
+
+    private ViewInfo? _activeViewInfo;
 
     private bool IsDefaultView => ActiveView == DefaultViewId;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        _activeViewInfo ??= Views.FirstOrDefault(v => v.Value.Id == ActiveView);
+    }
 
     private async Task SaveAsNewView()
     {
@@ -75,21 +88,14 @@ public partial class Toolbar
         }
     }
 
-    private void ActiveChanged(StringNumber value)
+    private void OnActiveViewChanged(ViewInfo viewInfo)
     {
-        var viewId = Guid.Parse(value.ToString()!);
-        if (viewId == ActiveView)
-        {
-            return;
-        }
-
-        ActiveViewChanged.InvokeAsync(viewId);
+        _activeViewInfo = viewInfo;
     }
 
-    private void RenameView(View view)
+    private void RenameView()
     {
-        _renamingView = view.Id;
-        _newViewName = view.Name;
+        _newViewName = _activeViewInfo?.Value.Name;
     }
 
     private async Task UpdateViewName()
@@ -99,9 +105,14 @@ public partial class Toolbar
             return;
         }
 
-        await OnViewRename.InvokeAsync((_renamingView, _newViewName));
+        await OnViewRename.InvokeAsync((ActiveView, _newViewName));
 
-        _renamingView = Guid.Empty;
         _newViewName = null;
+        _renameMenu = false;
+    }
+
+    private Task HandleOnDelete()
+    {
+        return OnViewDelete.InvokeAsync(_activeViewInfo!.Value);
     }
 }
