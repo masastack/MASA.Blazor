@@ -191,7 +191,7 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         get
         {
-            Dictionary<string, object> attributes = new(Attributes) { { "type", Type } };
+            Dictionary<string, object> attributes = new(Attributes);
 
             if (Type == "number")
             {
@@ -200,6 +200,11 @@ public partial class MTextField<TValue> : MInput<TValue>
                 if (Props.Max.HasValue)
                     attributes.Add("max", Props.Max);
                 attributes.Add("step", Props.Step);
+                attributes.Add("type", "text");
+            }
+            else
+            {
+                attributes.Add("type", Type);
             }
 
             return attributes;
@@ -548,6 +553,11 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public override Task HandleOnInputAsync(ChangeEventArgs args)
     {
+        if (IsNumberType)
+        {
+            return Task.CompletedTask;
+        }
+
         return HandleOnInputOrChangeEvent(args, OnInput);
     }
 
@@ -555,6 +565,11 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         return HandleOnInputOrChangeEvent(args, OnChange);
     }
+    
+    private bool IsNumberType => Type == "number";
+
+    protected override bool ShouldSetValueByJSInteropWhenInternalValueChange =>
+        IsNumberType || base.ShouldSetValueByJSInteropWhenInternalValueChange;
 
     private async Task HandleOnInputOrChangeEvent(ChangeEventArgs args, EventCallback<TValue> cb,
         [CallerArgumentExpression("cb")] string cbName = "")
@@ -563,7 +578,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
         var succeed = TryConvertTo<TValue>(originValue, out var result);
 
-        var updateOnChange = UpdateOnBlur || UpdateOnChange;
+        var updateOnChange = UpdateOnBlur || UpdateOnChange || IsNumberType;
 
         if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
         {
@@ -596,6 +611,13 @@ public partial class MTextField<TValue> : MInput<TValue>
         if (succeeded)
         {
             _badInput = false;
+
+            if (Type == "number")
+            {
+                var d = decimal.Parse(originValue);
+                DisplayValue = d.ToString(Props.PrecisionFormat);
+            }
+
             UpdateInternalValue(convertedValue, InternalValueChangeType.Input);
         }
         else
@@ -603,12 +625,13 @@ public partial class MTextField<TValue> : MInput<TValue>
             _badInput = true;
             UpdateInternalValue(default, InternalValueChangeType.Input);
 
-            if (Type.ToLower() == "number")
+            if (Type.Equals("number", StringComparison.OrdinalIgnoreCase))
             {
                 // reset the value of input element if failed to convert
                 if (!string.IsNullOrEmpty(originValue))
                 {
-                    _ = SetValueByJsInterop("");
+                    DisplayValue = "";
+                    _ = SetValueByJsInterop();
                 }
             }
         }
@@ -625,14 +648,27 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         if (Type != "number" || !BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
             return InternalValue;
+        
+        var returnValue =  Props.Min != null && value < Props.Min
+            ? Props.Min.Value
+            : Props.Max != null && value > Props.Max
+                ? Props.Max.Value
+                : value;
 
-        if (Props.Min != null && value < Props.Min &&
-            BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out var returnValue))
-            return returnValue;
+        if (BindConverter.TryConvertTo<TValue>(returnValue.ToString(), CultureInfo.InvariantCulture,
+                out var internalValue))
+        {
+            DisplayValue = returnValue.ToString(Props.PrecisionFormat);
+            return internalValue;
+        }
 
-        if (Props.Max != null && value > Props.Max &&
-            BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
-            return returnValue;
+        // if (Props.Min != null && value < Props.Min &&
+        //     BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out var returnValue))
+        //     return returnValue;
+        //
+        // if (Props.Max != null && value > Props.Max &&
+        //     BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
+        //     return returnValue;
 
         return InternalValue;
     }
@@ -661,6 +697,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
             if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
             {
+                DisplayValue = value.ToString(Props.PrecisionFormat);
                 UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
 
                 await OnChange.InvokeAsync(internalValue);
@@ -688,6 +725,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
             if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
             {
+                DisplayValue = value.ToString(Props.PrecisionFormat);
                 UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
 
                 await OnChange.InvokeAsync(internalValue);

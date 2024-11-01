@@ -119,7 +119,10 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         base.RegisterWatchers(watcher);
 
         watcher
-            .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
+            .Watch<string>(nameof(InternalSearch), (val) =>
+            {
+                DisplayValue = val; _ = SetValueByJsInterop(); 
+            })
             .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
     }
 
@@ -166,7 +169,8 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
     {
         if (SelectedIndex > -1)
         {
-            await SetValueByJsInterop(string.Empty);
+            DisplayValue = string.Empty;
+            await SetValueByJsInterop();
             return;
         }
 

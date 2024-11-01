@@ -95,9 +95,9 @@
             _jsInteropId = -1;
         }
 
-        protected override async Task SetValueByJsInterop(string? val)
+        protected override async Task SetValueByJsInterop()
         {
-            await base.SetValueByJsInterop(val);
+            await base.SetValueByJsInterop();
 
             if (AutoGrow)
             {

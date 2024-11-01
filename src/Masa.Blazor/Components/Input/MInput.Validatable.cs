@@ -54,6 +54,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     private EditContext? _prevEditContext;
     private InternalValueChangeType _changeType;
 
+    protected string? DisplayValue { get; set; }
+
     protected void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
     {
         _changeType = changeType;
@@ -200,7 +202,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
             if (!DisableSetValueByJsInterop)
             {
-                _ = SetValueByJsInterop(Formatter(Value));
+                _ = SetValueByJsInterop();
             }
         }
     }
@@ -232,11 +234,11 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected virtual bool WatchValueChangeImmediately => true;
 
-    protected virtual async Task SetValueByJsInterop(string? val)
+    protected virtual async Task SetValueByJsInterop()
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new();
-        await Retry(() => InputJSModule.SetValue(val),
+        await Retry(() => InputJSModule.SetValue(DisplayValue),
             () => InputJSModule is not { Initialized: true },
             cancellationToken: _cancellationTokenSource.Token);
     }
@@ -312,7 +314,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
             if (!DisableSetValueByJsInterop)
             {
-                _ = SetValueByJsInterop(Formatter(val));
+                _ = SetValueByJsInterop();
             }
 
             InternalValue = val;
@@ -340,18 +342,21 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         }
         else
         {
-            if (_changeType != InternalValueChangeType.Input && !DisableSetValueByJsInterop)
+            if (ShouldSetValueByJSInteropWhenInternalValueChange)
             {
-                _ = SetValueByJsInterop(Formatter(val));
+                _ = SetValueByJsInterop();
             }
 
             _ = ValueChanged.InvokeAsync(val.TryDeepClone());
         }
     }
-    
+
+    protected virtual bool ShouldSetValueByJSInteropWhenInternalValueChange
+        => _changeType == InternalValueChangeType.InternalOperation && !DisableSetValueByJsInterop;
+
     protected void SubscribeValidationStateChanged()
     {
-        //When EditContext update,we should re-subscribe OnValidationStateChanged
+        //When EditContext update, we should re-subscribe OnValidationStateChanged
         if (_prevEditContext == EditContext) return;
 
         if (_prevEditContext != null)
