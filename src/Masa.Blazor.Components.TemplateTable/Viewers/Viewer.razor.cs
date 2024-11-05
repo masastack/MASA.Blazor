@@ -1,4 +1,5 @@
 ﻿using BemIt;
+using Masa.Blazor.Components.TemplateTable.DetailDialogs;
 
 namespace Masa.Blazor.Components.TemplateTable.Viewers;
 
@@ -37,7 +38,7 @@ public partial class Viewer : IAsyncDisposable
     [Parameter] public EventCallback<Sort> OnSortUpdate { get; set; }
 
     /// <summary>
-    /// The height of table.
+    /// The height of the table.
     /// </summary>
     [Parameter]
     public StringNumber? Height { get; set; }
@@ -47,6 +48,10 @@ public partial class Viewer : IAsyncDisposable
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
 
     [Parameter] public EventCallback<(string ColumnId, double Width)> OnColumnResize { get; set; }
+
+    [Parameter] public EventCallback<List<string>> OnImagePreview { get; set; }
+
+    [Parameter] public EventCallback<List<DetailItem>> OnDetail { get; set; }
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnUpdate { get; set; }
 
@@ -64,8 +69,6 @@ public partial class Viewer : IAsyncDisposable
     private bool _sized;
     private ElementReference _headerTrRef;
 
-    private bool _imageViewer;
-    private IList<string> _imagesToView = [];
     private MSimpleTable? _simpleTable;
     private string? _tableSelector;
 
@@ -133,20 +136,6 @@ public partial class Viewer : IAsyncDisposable
         }
 
         return null;
-    }
-
-    private void OpenImageViewer(IList<string> images)
-    {
-        _imageViewer = true;
-        _imagesToView = images;
-    }
-
-    private void OnImageViewerChanged()
-    {
-        if (_imageViewer == false)
-        {
-            _imagesToView = [];
-        }
     }
 
     [JSInvokable]

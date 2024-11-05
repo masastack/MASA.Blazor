@@ -1,5 +1,7 @@
 ﻿@using System.Globalization
 @using BemIt
+@using HotChocolate.Utilities
+@using Masa.Blazor.Components.TemplateTable.DetailDialogs
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
 
@@ -107,56 +109,26 @@
     </tbody>
 </MSimpleTable>
 
-<MDialog @bind-Value="_imageViewer"
-         @bind-Value:after="OnImageViewerChanged"
-         ContentClass="image-viewer">
-    <MCarousel HideDelimiters
-               ShowArrows="@(_imagesToView.Count > 1)">
-        @foreach (var item in _imagesToView)
-        {
-            <MCarouselItem Src="@item" OnClick="@(() => _imageViewer = false)">
-            </MCarouselItem>
-        }
-    </MCarousel>
-</MDialog>
-
-
 @code {
 
-    private RenderFragment GenCell(ColumnInfo column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
+    internal static RenderFragment GenStaticCell(ColumnInfo column, JsonElement value) => __builder =>
     {
         switch (column.Type)
         {
             case ColumnType.Checkbox:
-                var isChecked = value.GetBoolean();
-                <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
-                       Color="@(isChecked ? "primary" : "")">
-                </MIcon>
+                @GenCheckboxCell(value)
                 break;
             case ColumnType.Text:
-                @value.GetString()
+                @GenTextCell(value)
                 break;
             case ColumnType.Email:
-                var email = value.GetString();
-                @if (email is not null)
-                {
-                    <a href="mailto:@email">@email</a>
-                }
-
+                @GenEmailCell(value)
                 break;
             case ColumnType.Link:
-                <a href="@value" target="_blank">@value</a>
+                @GenLinkCell(value)
                 break;
             case ColumnType.Phone:
-                var phone = value.GetString();
-                @if (phone is not null)
-                {
-                    <a href="tel:@phone">@phone</a>
-                }
-
-                break;
-            case ColumnType.Image:
-                @GenImageCell(value)
+                @GenPhoneCell(value)
                 break;
             case ColumnType.Select:
                 @GenSelectCell(column.ConfigObject, value)
@@ -176,13 +148,55 @@
             case ColumnType.Rating:
                 @GenRatingCell(value)
                 break;
-            @* case ColumnType.Actions: *@
-            @*     @GenActionsCell(column.ConfigObject, value, item) *@
-            @*     break; *@
         }
     };
 
-    private RenderFragment GenDateCell(object? configObject, JsonElement value) => __builder =>
+    private RenderFragment GenCell(ColumnInfo column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
+    {
+        if (column.Type == ColumnType.Image)
+        {
+            @GenImageCell(value)
+        }
+        else
+        {
+            @GenStaticCell(column, value)
+        }
+    };
+
+    private static RenderFragment GenCheckboxCell(JsonElement value) => __builder =>
+    {
+        var isChecked = value.GetBoolean();
+        <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
+               Color="@(isChecked ? "primary" : "")">
+        </MIcon>
+    };
+
+    private static RenderFragment GenTextCell(JsonElement value) => __builder => { @value.GetString() };
+
+    private static RenderFragment GenEmailCell(JsonElement value) => __builder =>
+    {
+        var email = value.GetString();
+        @if (email is not null)
+        {
+            <a href="mailto:@email">@email</a>
+        }
+    };
+
+    private static RenderFragment GenLinkCell(JsonElement value) => __builder =>
+    {
+        <a href="@value" target="_blank">@value</a>
+    };
+
+    private static RenderFragment GenPhoneCell(JsonElement value) => __builder =>
+    {
+        var phone = value.GetString();
+        @if (phone is not null)
+        {
+            <a href="tel:@phone">@phone</a>
+        }
+    };
+
+    private static RenderFragment GenDateCell(object? configObject, JsonElement value) => __builder =>
     {
         var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
         if (configObject is DateConfig dateConfig)
@@ -200,7 +214,7 @@
         }
     };
 
-    private RenderFragment GenSelectCell(object? configObject, JsonElement value) => __builder =>
+    private static RenderFragment GenSelectCell(object? configObject, JsonElement value) => __builder =>
     {
         var text = value.GetString();
 
@@ -223,8 +237,7 @@
         @text
     };
 
-
-    private RenderFragment GenMultiSelectCell(object? configObject, JsonElement value) => __builder =>
+    private static RenderFragment GenMultiSelectCell(object? configObject, JsonElement value) => __builder =>
     {
         IEnumerable<string> values = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()) : [value.GetString()];
 
@@ -254,7 +267,7 @@
         }
     };
 
-    private RenderFragment GenProgressCell(object? configObject, JsonElement value) => __builder =>
+    private static RenderFragment GenProgressCell(object? configObject, JsonElement value) => __builder =>
     {
         if (configObject is ProgressConfig config)
         {
@@ -277,7 +290,7 @@
         @value
     };
 
-    private RenderFragment GenRatingCell(JsonElement value) => __builder =>
+    private static RenderFragment GenRatingCell(JsonElement value) => __builder =>
     {
         if (value.TryGetDouble(out var rating))
         {
@@ -296,7 +309,7 @@
         }
     };
 
-    private RenderFragment GenNumberCell(object? configObject, JsonElement value) => __builder =>
+    private static RenderFragment GenNumberCell(object? configObject, JsonElement value) => __builder =>
     {
         if (configObject is NumberConfig config)
         {
@@ -325,7 +338,7 @@
 
         if (urls.Count > 0)
         {
-            <div class="image-list" @onclick="@(() => OpenImageViewer(urls))">
+            <div class="image-list" @onclick="@(() => OnImagePreview.InvokeAsync(urls))">
                 @foreach (var url in urls)
                 {
                     <img src="@url" alt=""/>
@@ -340,7 +353,25 @@
 
     private RenderFragment GenActionsCell(object? columnConfig, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
     {
-        ActionsConfig config = columnConfig as ActionsConfig ?? new ActionsConfig();
+        var config = columnConfig as ActionsConfig ?? new ActionsConfig();
+
+        @if (OnDelete.HasDelegate)
+        {
+            List<DetailItem> detailItems = [];
+
+            foreach (var viewColumn in _orderedViewColumns)
+            {
+                var key = item.Keys.FirstOrDefault(u => string.Equals(u, viewColumn.ColumnId, StringComparison.OrdinalIgnoreCase));
+                if (key is null || HiddenColumnIds.Contains(viewColumn.ColumnId))
+                {
+                    continue;
+                }
+
+                detailItems.Add(new DetailItem(viewColumn.Column, item[key]));
+            }
+
+            @GenAction(OnDetail, "mdi-magnify", "Details", detailItems)
+        }
 
         @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip, item)
         @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip, item)
@@ -348,7 +379,7 @@
         @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip, item)
     };
 
-    private RenderFragment GenAction(EventCallback<IReadOnlyDictionary<string, JsonElement>> callback, string? icon, string? tooltip, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
+    private RenderFragment GenAction<TEventArgs>(EventCallback<TEventArgs> callback, string? icon, string? tooltip, TEventArgs item) => __builder =>
     {
         @if (callback.HasDelegate)
         {

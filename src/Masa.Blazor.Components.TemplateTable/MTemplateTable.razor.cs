@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Components.TemplateTable.FilterDialogs;
+﻿using System.Runtime.InteropServices.Marshalling;
+using Masa.Blazor.Components.TemplateTable.FilterDialogs;
 
 namespace Masa.Blazor;
 
@@ -11,6 +12,8 @@ public partial class MTemplateTable
     [Parameter] public EventCallback<Sheet> OnSave { get; set; }
 
     [Parameter] public StringNumber? Height { get; set; }
+
+    [Parameter] public bool Detail { get; set; }
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnUpdate { get; set; }
 

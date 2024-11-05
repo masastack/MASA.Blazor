@@ -6,6 +6,7 @@
 @using Microsoft.JSInterop
 @using Masa.Blazor.Components.TemplateTable.Toolbars
 @using Masa.Blazor.Components.TemplateTable.SortDialogs
+@using Masa.Blazor.Components.TemplateTable.DetailDialogs
 @namespace Masa.Blazor
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
@@ -48,6 +49,8 @@
             OnColumnToggle="@ToggleColumn"
             OnColumnEditClick="@OpenColumnEditDialog"
             OnColumnResize="@ResizeColumn"
+            OnImagePreview="@OpenImageViewer"
+            OnDetail="@(Detail ? OpenDetailDialog : default)"
             OnUpdate="@OnUpdate"
             OnDelete="@OnDelete"
             OnAction1="@OnAction1"
@@ -90,6 +93,14 @@
                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                 OnSave="@SortUpdate">
     </SortDialog>
+
+    <ImageViewer @ref="_imageViewer"/>
+
+    @if (Detail)
+    {
+        <DetailDialog @ref="_detailDialog"
+                      OnImagePreview="@OpenImageViewer"/>
+    }
 </div>
 
 @code {
@@ -103,6 +114,8 @@
     private ColumnDialog? _columnEditDialog;
     private FilterDialog? _filterDialog;
     private SortDialog? _sortDialog;
+    private DetailDialog? _detailDialog;
+    private ImageViewer? _imageViewer;
 
     private bool HasCustomConfiguration
     {
@@ -214,7 +227,6 @@
         UpdateStateOfActiveView();
     }
 
-
     private void HandleOnColumnOrderChanged(List<string> columnOrder)
     {
         _columnOrder = columnOrder;
@@ -249,6 +261,16 @@
     private void OpenColumnEditDialog(Column column)
     {
         _columnEditDialog?.Open(column);
+    }
+
+    private void OpenDetailDialog(List<DetailItem> data)
+    {
+        _detailDialog?.Open(data);
+    }
+
+    private void OpenImageViewer(IList<string> images)
+    {
+        _imageViewer?.Open(images);
     }
 
     private void UpdateColumn(ColumnInfo data)

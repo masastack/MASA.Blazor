@@ -1,0 +1,58 @@
+﻿@using Masa.Blazor.Components.TemplateTable.Viewers
+<PDrawer @bind-Value="@_dialog"
+         BodyClass="detail-dialog">
+    <MDescriptions Column="1" @key="_data">
+        @foreach (var item in _data)
+        {
+            <MDescriptionsItem Label="@item.Column.Name"
+                               LabelStyle="white-space: pre"
+                               Class="@item.Column.Type.ToString().ToLower()">
+                @if (item.Column.Type == ColumnType.Image)
+                {
+                    @GenImageCell(item.Value)
+                }
+                else
+                {
+                    @Viewer.GenStaticCell(item.Column, item.Value)
+                }
+            </MDescriptionsItem>
+        }
+    </MDescriptions>
+</PDrawer>
+
+@code {
+
+    [Parameter] public EventCallback<IList<string>> OnImagePreview { get; set; }
+
+    private bool _dialog;
+    private List<DetailItem> _data = [];
+
+    internal void Open(List<DetailItem> data)
+    {
+        _dialog = true;
+        _data = data;
+        StateHasChanged();
+    }
+
+    private RenderFragment GenImageCell(JsonElement value) => __builder =>
+    {
+        var urls = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()).ToList() : [value.GetString()];
+
+        if (urls.Count > 0)
+        {
+            <div class="image-list"
+                 @onclick="@(() => OnImagePreview.InvokeAsync(urls))">
+                @foreach (var url in urls)
+                {
+                    <img src="@url" alt=""
+                         style="max-height: 48px;"/>
+                }
+            </div>
+
+            return;
+        }
+
+        @value
+    };
+
+}
