@@ -19,7 +19,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
 
     [Parameter] public int Md { get; set; }
 
-    [Parameter, MasaApiParameter(3)] public int Column { get; set; } = 3;
+    [Parameter] public int Column { get; set; }
 
     [Parameter] public int Lg { get; set; }
 
@@ -83,6 +83,11 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
     {
         get
         {
+            if (Column > 0)
+            {
+                return Column;
+            }
+
             var val = 0;
 
             if (MasaBlazor.Breakpoint.XsOnly)
@@ -106,12 +111,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
                 val = Xl;
             }
 
-            if (val == 0)
-            {
-                return Column;
-            }
-
-            return val;
+            return val == 0 ? 3 : val;
         }
     }
 
