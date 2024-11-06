@@ -37,8 +37,12 @@ public class PopupService : IPopupService
 
     public void Clear()
     {
-        _items.Clear();
-        StateHasChanged();
+        lock (_obj)
+        {
+            _items.RemoveAll(u => u.ComponentType != typeof(EnqueuedSnackbars));
+
+            StateHasChanged();
+        }
     }
 
     public async Task EnqueueSnackbarAsync(SnackbarOptions options)
