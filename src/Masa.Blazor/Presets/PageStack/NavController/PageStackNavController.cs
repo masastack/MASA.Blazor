@@ -20,7 +20,7 @@ public class PageStackNavController()
     public event EventHandler<PageStackPopEventArgs>? StackPop;
 
     /// <summary>
-    /// Occurs when a page is replaced by a new page.
+    /// Occurs when a new page replaces a page.
     /// </summary>
     public event EventHandler<PageStackReplaceEventArgs>? StackReplace;
 
@@ -38,6 +38,11 @@ public class PageStackNavController()
     /// Occurs when user invoked the <see cref="GoBackToPage(string)"/> method.
     /// </summary>
     internal event EventHandler<PageStackGoBackToPageEventArgs>? StackGoBackTo;
+
+    /// <summary>
+    /// Occurs when the active tab is changed.
+    /// </summary>
+    public event EventHandler<PageStackTabChangedEventArgs>? TabChanged;
 
     /// <summary>
     /// Push a new page onto the page stack.
@@ -126,7 +131,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to a tab.
+    /// Clear the current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     [Obsolete("Use GoBackToTab instead.")]
@@ -136,7 +141,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to a tab.
+    /// Clear the current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     public void GoBackToTab(string relativeUri)
@@ -147,6 +152,11 @@ public class PageStackNavController()
     internal void NotifyPageClosed(string relativeUri)
     {
         PageClosed?.Invoke(this, new PageStackPageClosedEventArgs(relativeUri));
+    }
+
+    internal void NotifyTabChanged(string currentTabPath, Regex currentTabPattern)
+    {
+        TabChanged?.Invoke(this, new PageStackTabChangedEventArgs(currentTabPath, currentTabPattern.IsMatch));
     }
 
     private void ExecuteIfTimeElapsed(Action action)

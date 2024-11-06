@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
@@ -25,15 +26,17 @@ public partial class PPageStack : PatternPathComponentBase
     internal readonly StackPages Pages = new();
 
     /// <summary>
-    /// Determines whether the popstate event is triggered by user action,
+    /// Determines whether user action triggers the popstate event,
     /// different from the browser's back button.
     /// </summary>
     private bool _popstateByUserAction;
 
     private string? _lastVisitedTabPath;
     private PageType _targetPageType;
-    private string? _latestTabPath;
     private long _lastOnPreviousClickTimestamp;
+
+    // just for knowing whether the tab has been changed
+    private (Regex Pattern, string AbsolutePath) _lastVisitedTab;
 
     private HashSet<string> _prevTabbedPatterns = new();
     private HashSet<Regex> _cachedTabbedPatterns = new();
@@ -54,12 +57,16 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _lastVisitedTabPath = targetPath;
             _targetPageType = PageType.Tab;
+
+            _lastVisitedTab = (tabbedPattern, targetPath);
         }
         else
         {
             _targetPageType = PageType.Stack;
             Push(NavigationManager.Uri);
         }
+
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
         InternalPageStackNavManager = PageStackNavControllerFactory.Create(Name ?? string.Empty);
         InternalPageStackNavManager.StackPush += InternalStackStackNavManagerOnStackPush;
@@ -69,6 +76,20 @@ public partial class PPageStack : PatternPathComponentBase
         InternalPageStackNavManager.StackGoBackTo += InternalPageStackNavManagerOnStackGoBackTo;
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var currentPath = NavigationManager.GetAbsolutePath();
+        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(currentPath));
+
+        if (tabbedPattern is not null && _lastVisitedTab.Pattern != tabbedPattern)
+        {
+            Console.Out.WriteLine($"Tab {_lastVisitedTab.AbsolutePath} to Tab {currentPath}");
+            _lastVisitedTab = (tabbedPattern, currentPath);
+
+            InternalPageStackNavManager?.NotifyTabChanged(currentPath, tabbedPattern);
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -171,7 +192,8 @@ public partial class PPageStack : PatternPathComponentBase
     {
         await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
-        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) || _lastVisitedTabPath == GetAbsolutePath(e.RelativeUri);
+        var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) ||
+                                 _lastVisitedTabPath == GetAbsolutePath(e.RelativeUri);
 
         if (backToLastVisitTab)
         {
@@ -278,11 +300,7 @@ public partial class PPageStack : PatternPathComponentBase
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        if (_module is not null)
-        {
-            await _module.InvokeVoidAsync("detachListener", _dotnetObjectId);
-            await _module.DisposeAsync();
-        }
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
 
         if (InternalPageStackNavManager is not null)
         {
@@ -291,6 +309,12 @@ public partial class PPageStack : PatternPathComponentBase
             InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
             InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
             InternalPageStackNavManager.StackGoBackTo -= InternalPageStackNavManagerOnStackGoBackTo;
+        }
+
+        if (_module is not null)
+        {
+            await _module.InvokeVoidAsync("detachListener", _dotnetObjectId);
+            await _module.DisposeAsync();
         }
     }
 
