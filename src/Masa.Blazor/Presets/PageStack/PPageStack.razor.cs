@@ -85,9 +85,7 @@ public partial class PPageStack : PatternPathComponentBase
 
         if (tabbedPattern is not null && _lastVisitedTab.Pattern != tabbedPattern)
         {
-            Console.Out.WriteLine($"Tab {_lastVisitedTab.AbsolutePath} to Tab {currentPath}");
             _lastVisitedTab = (tabbedPattern, currentPath);
-
             InternalPageStackNavManager?.NotifyTabChanged(currentPath, tabbedPattern);
         }
     }
