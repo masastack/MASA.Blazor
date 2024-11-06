@@ -1,6 +1,7 @@
 {
   "events": {
-    "PageClosed": "当堆栈页面关闭时触发"
+    "PageClosed": "当堆栈页面关闭时触发",
+    "TabChanged": "当选项卡更改时触发，页面入栈或出栈时不会触发"
   },
   "methods": {
     "Push": "将新页面推送到页面堆栈",

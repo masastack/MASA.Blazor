@@ -33,6 +33,8 @@ related:
 
 ### PageStackNavController
 
+#### Methods
+
 Used to control the navigation of the page stack.
 
 | Method name              | Description                                                              |
@@ -52,6 +54,13 @@ Used to control the navigation of the page stack.
 
 <MButton OnClick="@(() => NavController.Push("/stack-page"))">Go to stack page</MButton>
 ```
+
+#### Events {updated-in=v1.8.0}
+
+| Event name   | Description                                                                                                        | Usage scenario                                                        |
+|--------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `PageClosed` | Triggered when the stack page is closed.                                                                           | -                                                                     |
+| `TabChanged` | Triggered when the tab is switched, including system-level return. It will not be triggered when pushed or popped. | Reset some states of the old tab page when switching, such as popups. |
 
 ### data-page-stack-strategy
 

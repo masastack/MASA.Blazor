@@ -1,6 +1,7 @@
 ﻿{
   "events": {
-    "PageClosed": "a event occurs when a stack page is closed"
+    "PageClosed": "a event occurs when a stack page is closed",
+    "TabChanged": "a event occurs when a tab is changed, it will not be triggered when a page is pushed or popped"
   },
   "methods": {
     "Push": "push a new page onto the page stack",

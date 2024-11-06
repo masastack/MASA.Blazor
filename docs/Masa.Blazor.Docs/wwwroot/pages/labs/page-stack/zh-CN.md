@@ -32,6 +32,8 @@ related:
 
 ### PageStackNavController
 
+#### 方法 {#methods}
+
 用于控制页面堆栈的导航。
 
 | 方法名                    | 说明                                                                      |
@@ -51,6 +53,13 @@ related:
 
 <MButton OnClick="@(() => NavController.Push("/stack-page"))">Go to stack page</MButton>
 ```
+
+#### 事件 {#events updated-in=v1.8.0}
+
+| 事件名          | 说明                            | 使用场景                 |
+|--------------|-------------------------------|----------------------|
+| `PageClosed` | 堆栈页面关闭时触发。                    | -                    |
+| `TabChanged` | 选项卡切换时触发，包括系统级返回时。入栈或出栈时不会触发。 | 切换时重置旧tab页的某些状态，如弹窗。 |
 
 ### data-page-stack-strategy
 
