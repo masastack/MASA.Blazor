@@ -206,7 +206,7 @@ public class FluentValidationValidator : ComponentBase, IDisposable
 
     public void Dispose()
     {
-        EditContext.OnValidationRequested += EditContextOnOnValidationRequested;
-        EditContext.OnFieldChanged += EditContextOnOnFieldChanged;
+        EditContext.OnValidationRequested -= EditContextOnOnValidationRequested;
+        EditContext.OnFieldChanged -= EditContextOnOnFieldChanged;
     }
 }
