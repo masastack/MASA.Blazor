@@ -126,8 +126,7 @@ export function useTouch(
       }
     }
 
-    // TODO: 我添加的代码
-    dragging();
+    applyDragStyles();
 
     if (!isDragging) return;
 
@@ -155,8 +154,7 @@ export function useTouch(
 
     isDragging = false;
 
-    // TODO: 我添加的代码
-    dragging();
+    applyDragStyles();
 
     const velocity = getVelocity(e.changedTouches[0].identifier);
     const vx = Math.abs(velocity.x);
@@ -197,7 +195,7 @@ export function useTouch(
       : undefined;
   };
 
-  const dragging = () => {
+  const applyDragStyles = () => {
     const dragStyles = getDragStyles();
 
     if (isDragging) {
