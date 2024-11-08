@@ -197,9 +197,8 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
         bottom: 0;
         display: inline-block;
         left: 0;
-        margin: 0 -.7em;
         position: absolute;
-        right: 0;
+        right: -16px;
         top: 0;
     }
 

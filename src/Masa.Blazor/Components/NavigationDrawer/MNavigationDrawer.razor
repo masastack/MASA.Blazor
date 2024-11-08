@@ -7,20 +7,23 @@
             <MOverlay ZIndex="@ZIndex"
                       Absolute="@(!Fixed)"
                       Value="@ShowOverlay"
+                      Opacity="@_overlayOpacity"
+                      ScrimStyle="@_overlayScrimStyle"
+                      Color="@OverlayColor"
                       @ref="Overlay">
             </MOverlay>
 
             @*TODO: Directives,Listeners*@
             <MElement Tag="@Tag"
-                     Class="@GetClass()"
-                     Style="@GetStyle()"
-                     id="@Id"
-                     ReferenceCaptureAction="element => Ref = element"
-                     data-booted="true"
-                     @attributes="@Attributes"
-                     @onmouseenter="HandleOnMouseEnterAsync"
-                     @onmouseleave="HandleOnMouseLeaveAsync"
-                     @onclick="HandleOnClickAsync">
+                      Class="@GetClass()"
+                      Style="@GetStyle()"
+                      id="@Id"
+                      ReferenceCaptureAction="element => Ref = element"
+                      data-booted="true"
+                      @attributes="@Attributes"
+                      @onmouseenter="HandleOnMouseEnterAsync"
+                      @onmouseleave="HandleOnMouseLeaveAsync"
+                      @onclick="HandleOnClickAsync">
                 @GenBackground()
 
                 @GenPosition("prepend")

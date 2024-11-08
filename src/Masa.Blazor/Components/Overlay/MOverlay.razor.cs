@@ -31,6 +31,8 @@ public partial class MOverlay : IThemeable
 
     [Parameter] public string? ScrimClass { get; set; }
 
+    [Parameter] [MasaApiParameter("v1.8.0")] public string? ScrimStyle { get; set; }
+
     [Parameter] [MasaApiParameter(5)] public int ZIndex { get; set; } = 5;
 
     [Parameter] [MasaApiParameter(true)] public bool Dark { get; set; } = true;
