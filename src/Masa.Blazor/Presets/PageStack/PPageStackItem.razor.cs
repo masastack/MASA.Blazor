@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets.PageStack;
+﻿using Masa.Blazor.Presets.Drawer;
+
+namespace Masa.Blazor.Presets.PageStack;
 
 public partial class PPageStackItem : MasaComponentBase
 {
@@ -11,6 +13,8 @@ public partial class PPageStackItem : MasaComponentBase
     [Parameter] public bool CanRender { get; set; }
 
     [Parameter] public EventCallback OnGoBack { get; set; }
+
+    private TouchJSObjectResult? _touchJSObjectResult;
 
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
@@ -72,6 +76,51 @@ public partial class PPageStackItem : MasaComponentBase
     private static Block _block = new("m-page-stack-item");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
+    private bool _hasRendered;
+    private MDialog? dialog;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            // await NextTickIf(UseTouchAsync, () => dialog?.ContentRef.Id is null);
+
+            // await Retry(async () =>
+            // {
+            //     Console.Out.WriteLine("dialog.ContentRef.Id: " + dialog?.ContentRef.Id);
+            //     await UseTouchAsync();
+            // }, () => dialog?.ContentRef.Context is null);
+
+            int retryTimes = 10;
+            while (dialog?.ContentRef.Context is null && retryTimes > 0)
+            {
+                await Task.Delay(100);
+                retryTimes--;
+            }
+        }
+    }
+
+    private async Task UseTouchAsync()
+    {
+        var touch = new Touch(Js, OnTouchMove, OnTouchEnd);
+        _touchJSObjectResult = await touch.UseTouchAsync(dialog!.ContentRef, GetTouchState());
+    }
+
+    private TouchState GetTouchState()
+    {
+        return new TouchState(Data.Stacked, "right");
+    }
+
+    private void OnTouchMove(bool isDragging, double dragProgress)
+    {
+    }
+
+    private void OnTouchEnd(bool isActive)
+    {
+    }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add(CenterTitle).Build();
@@ -90,6 +139,8 @@ public partial class PPageStackItem : MasaComponentBase
     protected override ValueTask DisposeAsyncCore()
     {
         NavController.NotifyPageClosed(Data.AbsolutePath);
+
+        _touchJSObjectResult?.Un();
 
         return base.DisposeAsyncCore();
     }

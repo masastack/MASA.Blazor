@@ -145,6 +145,14 @@ export function getEventTarget(target: HTMLElement | EventTarget) {
   return eventTarget;
 }
 
+export function getElement(elOrString: HTMLElement | string): HTMLElement {
+  if (typeof elOrString === "string") {
+    return document.querySelector(elOrString);
+  } else {
+    return elOrString;
+  }
+}
+
 export function getDom(elOrString: Element | string | undefined) {
   let element: HTMLElement;
 

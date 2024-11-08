@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.NavigationDrawer;
+﻿namespace Masa.Blazor.Presets.Drawer;
 
 public class Touch : IAsyncDisposable
 {
@@ -17,10 +17,9 @@ public class Touch : IAsyncDisposable
         _dotNetObjectReference = DotNetObjectReference.Create(this);
 
         _moduleTask = new Lazy<Task<IJSObjectReference>>(
-            () => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import",
-                "./_content/Masa.Blazor/js/components/navigation-drawer-touch.js").AsTask()
-        );
+            () => jsRuntime
+                .InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/components/drawer-touch.js")
+                .AsTask());
     }
 
     public async ValueTask<TouchJSObjectResult> UseTouchAsync(ElementReference el, TouchState state)
@@ -84,4 +83,4 @@ public class Touch : IAsyncDisposable
 
 public record TouchJSObjectResult(Action<TouchState> SyncState, Action Un);
 
-public record TouchState(bool IsActive, bool IsTemporary, double Width, bool Touchless, string Position);
+public record TouchState(bool IsActive, string Position);

@@ -3,10 +3,7 @@ import { getElement } from "utils/helper";
 
 type State = {
   isActive: boolean;
-  isTemporary: boolean;
-  width: number;
-  touchless: boolean;
-  position: "left" | "right" | "top" | "bottom";
+  position: "left" | "right";
 };
 
 export function useTouch(
@@ -15,10 +12,13 @@ export function useTouch(
   state: State
 ) {
   const el = getElement(elOrString);
-  
+
   if (!el) {
-    oops()
+    return;
   }
+
+  console.log("el", el);
+  console.log("state", state);
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
   window.addEventListener("touchmove", onTouchmove, { passive: false });
@@ -43,31 +43,22 @@ export function useTouch(
         ? pos
         : state.position === "right"
         ? document.documentElement.clientWidth - pos
-        : state.position === "top"
-        ? pos
-        : state.position === "bottom"
-        ? document.documentElement.clientHeight - pos
-        : oops()) - (active ? state.width : 0)
+        : oops()) - (active ? document.documentElement.clientWidth : 0)
     );
   }
 
   function getProgress(pos: number, limit = true): number {
     const progress =
       state.position === "left"
-        ? (pos - offset) / state.width
+        ? (pos - offset) / document.documentElement.clientWidth
         : state.position === "right"
-        ? (document.documentElement.clientWidth - pos - offset) / state.width
-        : state.position === "top"
-        ? (pos - offset) / state.width
-        : state.position === "bottom"
-        ? (document.documentElement.clientHeight - pos - offset) / state.width
+        ? (document.documentElement.clientWidth - pos - offset) /
+          document.documentElement.clientWidth
         : oops();
     return limit ? Math.max(0, Math.min(1, progress)) : progress;
   }
 
   function onTouchstart(e: TouchEvent) {
-    if (state.touchless) return;
-
     transformBeforeTouchMove = el.style.transform ?? null;
     transitionBeforeTouchMove = el.style.transition ?? null;
 
@@ -80,25 +71,19 @@ export function useTouch(
         ? touchX < touchZone
         : state.position === "right"
         ? touchX > document.documentElement.clientWidth - touchZone
-        : state.position === "top"
-        ? touchY < touchZone
-        : state.position === "bottom"
-        ? touchY > document.documentElement.clientHeight - touchZone
         : oops();
 
     const inElement: boolean =
       state.isActive &&
       (state.position === "left"
-        ? touchX < state.width
+        ? touchX < document.documentElement.clientWidth
         : state.position === "right"
-        ? touchX > document.documentElement.clientWidth - state.width
-        : state.position === "top"
-        ? touchY < state.width
-        : state.position === "bottom"
-        ? touchY > document.documentElement.clientHeight - state.width
+        ? touchX >
+          document.documentElement.clientWidth -
+            document.documentElement.clientWidth
         : oops());
 
-    if (inTouchZone || inElement || (state.isActive && state.isTemporary)) {
+    if (inTouchZone || inElement || state.isActive) {
       start = [touchX, touchY];
 
       offset = getOffset(isHorizontal ? touchX : touchY, state.isActive);
@@ -189,13 +174,13 @@ export function useTouch(
       ? {
           transform:
             state.position === "left"
-              ? `translateX(calc(-100% + ${dragProgress * state.width}px))`
+              ? `translateX(calc(-100% + ${
+                  dragProgress * document.documentElement.clientWidth
+                }px))`
               : state.position === "right"
-              ? `translateX(calc(100% - ${dragProgress * state.width}px))`
-              : state.position === "top"
-              ? `translateY(calc(-100% + ${dragProgress * state.width}px))`
-              : state.position === "bottom"
-              ? `translateY(calc(100% - ${dragProgress * state.width}px))`
+              ? `translateX(calc(100% - ${
+                  dragProgress * document.documentElement.clientWidth
+                }px))`
               : oops(),
           transition: "none",
         }

@@ -34,7 +34,8 @@
     "build:sortable": "rollup --config rollup.config.sortable.ts",
     "build:transition": "rollup --config rollup.config.transition.ts",
     "build:pdfjs": "rollup --config rollup.config.pdfjs.ts",
-    "build:navDrawerTouch": "rollup --config rollup.config.navigationDrawerTouch.ts"
+    "build:navDrawerTouch": "rollup --config rollup.config.navigationDrawerTouch.ts",
+    "build:drawerTouch": "rollup --config rollup.config.drawerTouch.ts"
   },
   "author": "",
   "license": "MIT",
