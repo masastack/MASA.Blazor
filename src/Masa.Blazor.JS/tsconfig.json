@@ -9,6 +9,7 @@
     "paths": {
       "utils/*": ["./src/utils/*"],
       "events/*": ["./src/events/*"],
+      "mixins/*": ["./src/mixins/*"],
     }
   }
 }

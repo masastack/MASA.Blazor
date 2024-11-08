@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Reflection.Metadata;
-using Masa.Blazor.Mixins;
+using Masa.Blazor.Components.NavigationDrawer;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -10,6 +9,10 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
+
+    [Inject] private OutsideClickJSModule OutsideClickJsModule { get; set; } = null!;
+
+    [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
     [Parameter] public bool Bottom { get; set; }
 
@@ -28,15 +31,17 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         set => SetValue(value);
     }
 
-    [Parameter] [MasaApiParameter(56)] public StringNumber? MiniVariantWidth { get; set; } = 56;
+    [Parameter]
+    [MasaApiParameter(DefaultMiniVariantWidth)]
+    public StringNumber? MiniVariantWidth { get; set; } = DefaultMiniVariantWidth;
 
     [Parameter] public bool Right { get; set; }
 
     [Parameter] public bool Touchless { get; set; }
 
     [Parameter]
-    [MasaApiParameter("256px")]
-    public StringNumber Width { get; set; } = "256px";
+    [MasaApiParameter(DefaultWidth)]
+    public StringNumber? Width { get; set; } = DefaultWidth;
 
     [Parameter] public string? Color { get; set; }
 
@@ -60,18 +65,11 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Parameter] public RenderFragment? PrependContent { get; set; }
 
     /// <summary>
-    /// Indicates the component should not be render as a SSR component.
-    /// It's useful when you want render components interactively under SSR.
+    /// Indicates the component should not be rendered as an SSR component.
+    /// It's useful when you want to render components interactively under SSR.
     /// </summary>
     [Parameter]
     public bool NoSsr { get; set; }
-
-    private CancellationTokenSource? _cancellationTokenSource;
-    private bool _disposed;
-
-    [Inject] private OutsideClickJSModule OutsideClickJsModule { get; set; } = null!;
-
-    [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
     [Parameter]
     public bool ExpandOnHover
@@ -89,8 +87,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public EventCallback<bool> MiniVariantChanged { get; set; }
 
-    [Parameter]
-    public bool Permanent { get; set; }
+    [Parameter] public bool Permanent { get; set; }
 
     [Parameter] public string? Src { get; set; }
 
@@ -118,6 +115,10 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public bool HideOverlay { get; set; }
 
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
+
     [Parameter] public bool Dark { get; set; }
 
     [Parameter] public bool Light { get; set; }
@@ -142,16 +143,24 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
     }
 
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
+    private const double DefaultMiniVariantWidth = 56;
+    private const double DefaultWidth = 256;
 
     private static Block _block = new("m-navigation-drawer");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
     private bool _prevPermanent;
     private bool _prevIsMobile;
+    private StringNumber _prevWidth;
     private readonly List<IDependent> _dependents = new();
+
+    private bool _isDragging;
+    private TouchJSObjectResult? _touchJSObjectResult;
+    private double _overlayOpacity;
+    private string? _overlayScrimStyle;
+
+    private CancellationTokenSource? _cancellationTokenSource;
+    private bool _disposed;
 
     protected object? Overlay { get; set; }
 
@@ -175,7 +184,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected bool ReactsToClick => !Stateless && !Permanent && (IsMobile || Temporary);
 
-    protected bool ShowOverlay => !HideOverlay && IsActive && (IsMobile || Temporary);
+    protected bool ShowOverlay => !HideOverlay && (IsActive || _isDragging) && (IsMobile || Temporary);
 
     public void RegisterChild(IDependent dependent)
     {
@@ -228,6 +237,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     {
         if (!CloseConditional()) return;
         IsActive = false;
+        StateHasChanged();
     }
 
     private bool IsSsr => MasaBlazor.IsSsr && !NoSsr;
@@ -286,7 +296,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
     }
 
-    protected StringNumber? ComputedWidth => IsMiniVariant ? MiniVariantWidth : Width;
+    protected StringNumber ComputedWidth =>
+        IsMiniVariant ? MiniVariantWidth ?? DefaultMiniVariantWidth : Width ?? DefaultWidth;
 
     protected bool HasApp => App && (!IsMobile && !Temporary);
 
@@ -307,7 +318,9 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
                 return mobile;
             }
 
-            return MobileBreakpoint.Value.IsT1 ? width < MobileBreakpoint.Value.AsT1 : name <= MobileBreakpoint.Value.AsT0;
+            return MobileBreakpoint.Value.IsT1
+                ? width < MobileBreakpoint.Value.AsT1
+                : name <= MobileBreakpoint.Value.AsT0;
         }
     }
 
@@ -353,7 +366,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
+    
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
@@ -363,6 +376,12 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             _prevPermanent = Permanent;
 
             await UpdateApplicationAsync();
+        }
+
+        if (_prevWidth != Width)
+        {
+            _prevWidth = Width ?? DefaultWidth;
+            SyncStateToTouchJS();
         }
 
 #if NET8_0_OR_GREATER
@@ -380,6 +399,9 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         if (firstRender)
         {
             await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
+
+            var touch = new Touch(Js, OnTouchMove, OnTouchEnd);
+            _touchJSObjectResult = await touch.UseTouchAsync(Ref, GetTouchState());
 
             await UpdateApplicationAsync();
             ZIndex = await GetActiveZIndexAsync();
@@ -423,6 +445,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
                 //We will remove this when mixins applicationable finished
                 _ = UpdateApplicationAsync();
+
+                SyncStateToTouchJS();
             })
             .Watch<bool>(nameof(MiniVariant), CallUpdate)
             .Watch<bool>(nameof(ExpandOnHover), val => { UpdateMiniVariant(val, false); })
@@ -515,14 +539,16 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected override IEnumerable<string> BuildComponentClass()
     {
+        var isActive = IsActive || _isDragging;
+
         yield return _modifierBuilder.Add(Absolute, Bottom, Clipped, App, Floating, Right, Temporary)
-            .Add("close", !IsActive)
+            .Add("close", !isActive)
             .Add("fixed", !Absolute && (App || Fixed))
             .Add("is-mobile", IsMobile)
             .Add("is-mouseover", IsMouseover)
             .Add("mini-variant", IsMiniVariant)
             .Add("custom-mini-variant", MiniVariantWidth?.ToString() != "56")
-            .Add("open", IsActive)
+            .Add("open", isActive)
             .Add("open-on-hover", ExpandOnHover)
             .AddTheme(IsDark, IndependentTheme)
             .AddBackgroundColor(Color)
@@ -541,6 +567,32 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             .AddBackgroundColor(Color)
             .GenerateCssStyles();
     }
+
+    private double ComputedOverlayOpacity => OverlayOpacity?.ToDouble() ?? 0.32;
+
+    private void OnTouchMove(bool dragging, double progress)
+    {
+        _isDragging = dragging;
+        _overlayOpacity = progress * ComputedOverlayOpacity;
+        _overlayScrimStyle = "transition: none;";
+        StateHasChanged();
+    }
+
+    private void OnTouchEnd(bool active)
+    {
+        IsActive = active;
+        _isDragging = false;
+        _overlayOpacity = ComputedOverlayOpacity;
+        _overlayScrimStyle = null;
+
+        StateHasChanged();
+    }
+
+    private void SyncStateToTouchJS() => _touchJSObjectResult?.SyncState(GetTouchState());
+
+    private TouchState GetTouchState()
+        => new(IsActive, ReactsToClick, ComputedWidth.ToDouble(), Touchless,
+            MasaBlazor.RTL ? (Right ? "left" : "right") : (Right ? "right" : "left"));
 
     protected async void CallUpdate()
     {
@@ -594,6 +646,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         MasaBlazor.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         NavigationManager.LocationChanged -= OnLocationChanged;
+        _touchJSObjectResult?.Un();
         await OutsideClickJsModule.UnbindAndDisposeAsync();
         await base.DisposeAsyncCore();
     }
