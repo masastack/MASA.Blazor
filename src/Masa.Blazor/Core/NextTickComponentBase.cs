@@ -97,6 +97,24 @@ public abstract class NextTickComponentBase : ComponentBase, IAsyncDisposable
             }
         }
     }
+    
+    protected static async Task RetryIf(Func<Task> action, Func<bool> predicate, int delay = 100, int maxRetryAttempts = 5)
+    {
+        var retryTimes = maxRetryAttempts;
+        while (retryTimes > 0)
+        {
+            if (predicate.Invoke())
+            {
+                await Task.Delay(delay);
+                retryTimes--;
+            }
+            else
+            {
+                await action.Invoke();
+                break;
+            }
+        }
+    }
 
     protected virtual ValueTask DisposeAsyncCore() => ValueTask.CompletedTask;
 

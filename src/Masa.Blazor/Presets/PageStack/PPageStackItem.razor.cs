@@ -12,6 +12,8 @@ public partial class PPageStackItem : MasaComponentBase
 
     [Parameter] public EventCallback OnGoBack { get; set; }
 
+    private TouchJSObjectResult? _touchJSObjectResult;
+
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
     internal RenderFragment<Dictionary<string, object?>>? ImageContent { get; set; }
@@ -72,6 +74,40 @@ public partial class PPageStackItem : MasaComponentBase
     private static Block _block = new("m-page-stack-item");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
+    private bool _hasRendered;
+    private MDialog? dialog;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            _ = RetryIf(UseTouchAsync, () => dialog?.ContentRef.Context is null);
+        }
+    }
+
+    private async Task UseTouchAsync()
+    {
+        var touch = new Touch(Js, OnTouchEnd);
+        _touchJSObjectResult = await touch.UseTouchAsync(dialog!.ContentRef, GetTouchState());
+    }
+
+    private TouchState GetTouchState()
+    {
+        return new TouchState(Data.Stacked, "right");
+    }
+
+    private void OnTouchEnd(bool isActive)
+    {
+        if (isActive)
+        {
+            return;
+        }
+
+        _ = OnGoBack.InvokeAsync();
+    }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add(CenterTitle).Build();
@@ -90,6 +126,8 @@ public partial class PPageStackItem : MasaComponentBase
     protected override ValueTask DisposeAsyncCore()
     {
         NavController.NotifyPageClosed(Data.AbsolutePath);
+
+        _touchJSObjectResult?.Un();
 
         return base.DisposeAsyncCore();
     }

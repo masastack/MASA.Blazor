@@ -1,26 +1,20 @@
-﻿namespace Masa.Blazor.Components.NavigationDrawer;
+﻿namespace Masa.Blazor.Presets.PageStack;
 
 public class Touch : IAsyncDisposable
 {
-    private readonly Action<bool, double> _onMove;
     private readonly Action<bool> _onEnd;
     private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
     private readonly DotNetObjectReference<Touch> _dotNetObjectReference;
 
-    private bool _prevIsDragging;
-    private double _prevDragProgress;
-
-    public Touch(IJSRuntime jsRuntime, Action<bool, double> onMove, Action<bool> onEnd)
+    public Touch(IJSRuntime jsRuntime, Action<bool> onEnd)
     {
-        _onMove = onMove;
         _onEnd = onEnd;
         _dotNetObjectReference = DotNetObjectReference.Create(this);
 
         _moduleTask = new Lazy<Task<IJSObjectReference>>(
-            () => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import",
-                "./_content/Masa.Blazor/js/components/navigation-drawer-touch.js").AsTask()
-        );
+            () => jsRuntime
+                .InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/components/page-stack-touch.js")
+                .AsTask());
     }
 
     public async ValueTask<TouchJSObjectResult> UseTouchAsync(ElementReference el, TouchState state)
@@ -41,18 +35,19 @@ public class Touch : IAsyncDisposable
 
     private TouchJSObjectResult CreateTouchJSObjectResult(IJSObjectReference jsObjectReference)
     {
-        return new TouchJSObjectResult(SyncState, Dispose);
-
-        void SyncState(TouchState newState)
-        {
-            _ = jsObjectReference.InvokeVoidAsync("syncState", newState);
-        }
+        return new TouchJSObjectResult(Dispose);
 
         void Dispose()
         {
             _ = jsObjectReference.InvokeVoidAsync("dispose");
             _ = jsObjectReference.DisposeAsync();
         }
+    }
+
+    [JSInvokable]
+    public void TouchEnd(bool isActive)
+    {
+        _onEnd.Invoke(isActive);
     }
 
     public async ValueTask DisposeAsync()
@@ -63,25 +58,8 @@ public class Touch : IAsyncDisposable
             await module.DisposeAsync();
         }
     }
-
-    [JSInvokable]
-    public void TouchMove(bool isDragging, double dragProgress)
-    {
-        if (_prevIsDragging == isDragging && !(Math.Abs(_prevDragProgress - dragProgress) > 0.000001)) return;
-
-        _prevDragProgress = dragProgress;
-        _prevIsDragging = isDragging;
-
-        _onMove.Invoke(isDragging, dragProgress);
-    }
-
-    [JSInvokable]
-    public void TouchEnd(bool isActive)
-    {
-        _onEnd.Invoke(isActive);
-    }
 }
 
-public record TouchJSObjectResult(Action<TouchState> SyncState, Action Un);
+public record TouchJSObjectResult(Action Un);
 
-public record TouchState(bool IsActive, bool IsTemporary, double Width, bool Touchless, string Position);
+public record TouchState(bool IsActive, string Position);

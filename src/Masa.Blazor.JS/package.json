@@ -31,6 +31,7 @@
     "build:xgplayer": "rollup --config rollup.config.xgplayer.ts",
     "build:scrollToTarget": "rollup --config rollup.config.scrollToTargetJSInterop.ts",
     "build:pageStack": "rollup --config rollup.config.pageStack.ts",
+    "build:pageStackTouch": "rollup --config rollup.config.pageStackTouch.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts",
     "build:transition": "rollup --config rollup.config.transition.ts",
     "build:pdfjs": "rollup --config rollup.config.pdfjs.ts",

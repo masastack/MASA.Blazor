@@ -3,10 +3,7 @@ import { getElement } from "utils/helper";
 
 type State = {
   isActive: boolean;
-  isTemporary: boolean;
-  width: number;
-  touchless: boolean;
-  position: "left" | "right" | "top" | "bottom";
+  position: "left" | "right";
 };
 
 export function useTouch(
@@ -15,10 +12,8 @@ export function useTouch(
   state: State
 ) {
   const el = getElement(elOrString);
-  
-  if (!el) {
-    oops()
-  }
+
+  if (!el) return;
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
   window.addEventListener("touchmove", onTouchmove, { passive: false });
@@ -34,42 +29,36 @@ export function useTouch(
   let offset = 0;
   let start: [number, number] | undefined;
 
-  let transformBeforeTouchMove = el.style.transform ?? null;
-  let transitionBeforeTouchMove = el.style.transition ?? null;
-
   function getOffset(pos: number, active: boolean): number {
     return (
       (state.position === "left"
         ? pos
         : state.position === "right"
         ? document.documentElement.clientWidth - pos
-        : state.position === "top"
-        ? pos
-        : state.position === "bottom"
-        ? document.documentElement.clientHeight - pos
-        : oops()) - (active ? state.width : 0)
+        : oops()) - (active ? document.documentElement.clientWidth : 0)
     );
   }
 
   function getProgress(pos: number, limit = true): number {
     const progress =
       state.position === "left"
-        ? (pos - offset) / state.width
+        ? (pos - offset) / document.documentElement.clientWidth
         : state.position === "right"
-        ? (document.documentElement.clientWidth - pos - offset) / state.width
-        : state.position === "top"
-        ? (pos - offset) / state.width
-        : state.position === "bottom"
-        ? (document.documentElement.clientHeight - pos - offset) / state.width
+        ? (document.documentElement.clientWidth - pos - offset) /
+          document.documentElement.clientWidth
         : oops();
     return limit ? Math.max(0, Math.min(1, progress)) : progress;
   }
 
-  function onTouchstart(e: TouchEvent) {
-    if (state.touchless) return;
+  function isActiveElement(e: TouchEvent) {
+    return (
+      (e.target as HTMLElement).closest(".m-page-stack-item").parentElement ===
+      el
+    );
+  }
 
-    transformBeforeTouchMove = el.style.transform ?? null;
-    transitionBeforeTouchMove = el.style.transition ?? null;
+  function onTouchstart(e: TouchEvent) {
+    if (!isActiveElement(e)) return;
 
     const touchX = e.changedTouches[0].clientX;
     const touchY = e.changedTouches[0].clientY;
@@ -80,25 +69,17 @@ export function useTouch(
         ? touchX < touchZone
         : state.position === "right"
         ? touchX > document.documentElement.clientWidth - touchZone
-        : state.position === "top"
-        ? touchY < touchZone
-        : state.position === "bottom"
-        ? touchY > document.documentElement.clientHeight - touchZone
         : oops();
 
     const inElement: boolean =
       state.isActive &&
       (state.position === "left"
-        ? touchX < state.width
+        ? touchX < document.documentElement.clientWidth
         : state.position === "right"
-        ? touchX > document.documentElement.clientWidth - state.width
-        : state.position === "top"
-        ? touchY < state.width
-        : state.position === "bottom"
-        ? touchY > document.documentElement.clientHeight - state.width
+        ? touchX > 0
         : oops());
 
-    if (inTouchZone || inElement || (state.isActive && state.isTemporary)) {
+    if (inTouchZone || inElement || state.isActive) {
       start = [touchX, touchY];
 
       offset = getOffset(isHorizontal ? touchX : touchY, state.isActive);
@@ -111,6 +92,8 @@ export function useTouch(
   }
 
   function onTouchmove(e: TouchEvent) {
+    if (!isActiveElement(e)) return;
+
     const touchX = e.changedTouches[0].clientX;
     const touchY = e.changedTouches[0].clientY;
 
@@ -133,8 +116,6 @@ export function useTouch(
       }
     }
 
-    applyDragStyles();
-
     if (!isDragging) return;
 
     e.preventDefault();
@@ -149,10 +130,12 @@ export function useTouch(
       offset = getOffset(isHorizontal ? touchX : touchY, false);
     }
 
-    dotNetObject.invokeMethodAsync("TouchMove", isDragging, dragProgress);
+    applyStyles();
   }
 
   function onTouchend(e: TouchEvent) {
+    if (!isActiveElement(e)) return;
+
     maybeDragging = false;
 
     if (!isDragging) return;
@@ -160,8 +143,6 @@ export function useTouch(
     addMovement(e);
 
     isDragging = false;
-
-    applyDragStyles();
 
     const velocity = getVelocity(e.changedTouches[0].identifier);
     const vx = Math.abs(velocity.x);
@@ -181,40 +162,42 @@ export function useTouch(
       state.isActive = dragProgress > 0.5;
     }
 
-    dotNetObject.invokeMethodAsync("TouchEnd", state.isActive);
+    applyStyles();
+
+    setTimeout(
+      () => dotNetObject.invokeMethodAsync("TouchEnd", state.isActive),
+      200 // the transition duration of root element is 200ms
+    );
   }
 
-  const getDragStyles = () => {
-    return isDragging
-      ? {
-          transform:
-            state.position === "left"
-              ? `translateX(calc(-100% + ${dragProgress * state.width}px))`
-              : state.position === "right"
-              ? `translateX(calc(100% - ${dragProgress * state.width}px))`
-              : state.position === "top"
-              ? `translateY(calc(-100% + ${dragProgress * state.width}px))`
-              : state.position === "bottom"
-              ? `translateY(calc(100% - ${dragProgress * state.width}px))`
-              : oops(),
-          transition: "none",
-        }
-      : undefined;
-  };
-
-  const applyDragStyles = () => {
-    const dragStyles = getDragStyles();
-
+  const applyStyles = () => {
     if (isDragging) {
-      el.style.setProperty("transform", dragStyles?.transform || "none");
-      el.style.setProperty("transition", dragStyles?.transition || null);
+      const transform =
+        state.position === "left"
+          ? `translateX(calc(-100% + ${
+              dragProgress * document.documentElement.clientWidth
+            }px))`
+          : state.position === "right"
+          ? `translateX(calc(100% - ${
+              dragProgress * document.documentElement.clientWidth
+            }px))`
+          : oops();
+
+      el.style.setProperty("transform", transform);
+      el.style.setProperty("transition", "none");
     } else {
-      el.style.setProperty("transform", transformBeforeTouchMove);
-      el.style.setProperty("transition", transitionBeforeTouchMove);
+      if (state.isActive) {
+        el.style.removeProperty("transform");
+      } else {
+        el.style.setProperty("transform", "translateX(100%)");
+      }
+
+      el.style.removeProperty("transition");
     }
   };
 
   return {
+    // not used for now
     syncState: (newState: State) => {
       state = newState;
     },
