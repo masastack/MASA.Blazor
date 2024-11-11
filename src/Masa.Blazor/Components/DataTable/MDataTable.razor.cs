@@ -425,6 +425,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
             .Build();
     }
 
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        if (Height != null)
+        {
+            yield return "--m-data-table-height: " + Height.ToUnit();
+        }
+    }
+
     public void ToggleGroup(string group)
     {
         var open = OpenCache.GetValueOrDefault(group);
