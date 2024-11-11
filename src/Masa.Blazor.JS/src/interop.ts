@@ -1396,8 +1396,6 @@ export function resizableDataTable(dataTable: HTMLElement) {
   const cols = row ? row.children : [];
   if (!cols) return;
 
-  table.style.overflow = 'hidden';
-
   const tableHeight = table.offsetHeight;
 
   for (var i = 0; i < cols.length; i++) {
