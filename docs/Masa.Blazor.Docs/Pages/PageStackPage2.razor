@@ -18,7 +18,7 @@
             <span>Id: @Id</span>
         }
     </h1>
-    <h3>Page 2 created at @(_createdAt.ToString("HH:mm:ss zz"))</h3>
+    <h3>Page 2 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</h3>
     <a class="text-decoration-underline" @onclick="UpdateId">Update Id</a>
     <br/>
     <a class="text-decoration-underline"
@@ -36,14 +36,14 @@
 
     [Parameter] public string Id { get; set; } = default!;
 
-    private DateTimeOffset _createdAt;
+    private DateTimeOffset _pageCreatedAt;
 
     private string? _prevId;
     private bool _loading;
 
     protected override void OnInitialized()
     {
-        _createdAt = DateTimeOffset.UtcNow;
+        _pageCreatedAt = DateTimeOffset.UtcNow;
     }
 
     protected override async Task OnParametersSetAsync()

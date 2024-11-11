@@ -20,4 +20,6 @@ public partial class PageStackPage3
             Go back to page 2 and replace with "/abc"
         </a>
         """;
+    
+    private DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
 }

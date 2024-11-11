@@ -12,4 +12,6 @@ public partial class PageStackPage4
             <li><a @onclick="@(() => NavController.Pop("CCC"))">CCC</a></li>
         </ul>
         """;
+    
+    private DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
 }

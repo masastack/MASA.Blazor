@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Presets.Drawer;
-
-namespace Masa.Blazor.Presets.PageStack;
+﻿namespace Masa.Blazor.Presets.PageStack;
 
 public partial class PPageStackItem : MasaComponentBase
 {
@@ -85,26 +83,13 @@ public partial class PPageStackItem : MasaComponentBase
 
         if (firstRender)
         {
-            // await NextTickIf(UseTouchAsync, () => dialog?.ContentRef.Id is null);
-
-            // await Retry(async () =>
-            // {
-            //     Console.Out.WriteLine("dialog.ContentRef.Id: " + dialog?.ContentRef.Id);
-            //     await UseTouchAsync();
-            // }, () => dialog?.ContentRef.Context is null);
-
-            int retryTimes = 10;
-            while (dialog?.ContentRef.Context is null && retryTimes > 0)
-            {
-                await Task.Delay(100);
-                retryTimes--;
-            }
+            _ = RetryIf(UseTouchAsync, () => dialog?.ContentRef.Context is null);
         }
     }
 
     private async Task UseTouchAsync()
     {
-        var touch = new Touch(Js, OnTouchMove, OnTouchEnd);
+        var touch = new Touch(Js, OnTouchEnd);
         _touchJSObjectResult = await touch.UseTouchAsync(dialog!.ContentRef, GetTouchState());
     }
 
@@ -113,12 +98,14 @@ public partial class PPageStackItem : MasaComponentBase
         return new TouchState(Data.Stacked, "right");
     }
 
-    private void OnTouchMove(bool isDragging, double dragProgress)
-    {
-    }
-
     private void OnTouchEnd(bool isActive)
     {
+        if (isActive)
+        {
+            return;
+        }
+
+        _ = OnGoBack.InvokeAsync();
     }
 
     protected override IEnumerable<string> BuildComponentClass()

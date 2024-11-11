@@ -31,6 +31,7 @@ public partial class PageStackPage1
         }
         """;
 
+    private DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
     private string? _stateFromPage4;
 
     private void GoToPage4()
