@@ -1393,18 +1393,21 @@ export function unregisterDragEvent(el: HTMLElement) {
 export function resizableDataTable(dataTable: HTMLElement) {
   const table = dataTable.querySelector('table')
   const row = table.querySelector('.m-data-table-header').getElementsByTagName('tr')[0];
-  const cols = row ? row.children : [];
+  const cols = row ? Array.from(row.children) : [];
   if (!cols) return;
 
   const tableHeight = table.offsetHeight;
   const registrations = [];
 
-  for (var i = 0; i < cols.length; i++) {
+  for (var i = 0; i < [...cols].length; i++) {
     const col: any = cols[i];
     const colResizeDiv: HTMLDivElement = col.querySelector(
       ".m-data-table-header__col-resize"
     );
-    if (!colResizeDiv) continue;
+    if (!colResizeDiv) {
+      cols.splice(i, 1);
+      continue;
+    }
     colResizeDiv.style.height = tableHeight + "px";
 
     let minWidth = (col.firstElementChild as HTMLElement).offsetWidth; // width of span

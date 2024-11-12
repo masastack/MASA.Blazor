@@ -127,6 +127,11 @@
     border-right: thin solid rgba(255,255,255,.12);
 }
 
+.m-data-table--resizable .m-data-table__wrapper:not(.scrolled-to-left) th.first-fixed-column,
+.m-data-table--resizable .m-data-table__wrapper:not(.scrolled-to-left) td.first-fixed-column {
+    border-right: none;
+}
+
 .m-data-table--resizable:not(.m-data-table--rtl) th:last-child, .m-data-table--resizable:not(.m-data-table--rtl) td:last-child {
     border-right: none;
 }
