@@ -1397,21 +1397,30 @@ export function resizableDataTable(dataTable: HTMLElement) {
   if (!cols) return;
 
   const tableHeight = table.offsetHeight;
+  const registrations = [];
 
   for (var i = 0; i < cols.length; i++) {
     const col: any = cols[i];
-    const colResizeDiv: HTMLDivElement = col.querySelector(".m-data-table-header__col-resize");
-    if (!colResizeDiv) continue
-    colResizeDiv.style.height = tableHeight + "px"
+    const colResizeDiv: HTMLDivElement = col.querySelector(
+      ".m-data-table-header__col-resize"
+    );
+    if (!colResizeDiv) continue;
+    colResizeDiv.style.height = tableHeight + "px";
 
     let minWidth = (col.firstElementChild as HTMLElement).offsetWidth; // width of span
     minWidth = minWidth + 32 + 18 + 1 + 1; // 32:padding 18:sort
-    if(!col.style.minWidth){
+    if (!col.style.minWidth) {
       col.minWidth = minWidth;
       col.style.minWidth = minWidth + "px";
     }
 
-    setListeners(colResizeDiv);
+    registrations.push(setListeners(colResizeDiv));
+  }
+
+  return {
+    un: () => {
+      registrations.forEach(un => un());
+    }
   }
 
   function setListeners(div: HTMLDivElement) {
@@ -1422,9 +1431,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
     let nxtColWidth: number;
     let tableWidth: number;
 
-    div.addEventListener('click', e => e.stopPropagation());
+    const click = (e: MouseEvent) => e.stopPropagation();
 
-    div.addEventListener('mousedown', function (e) {
+    const mousedown = (e: MouseEvent) => {
       curCol = (e.target as HTMLElement).parentElement;
       nxtCol = curCol.nextElementSibling as HTMLElement;
       pageX = e.pageX;
@@ -1436,9 +1445,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
       curColWidth = curCol.offsetWidth - padding;
       if (nxtCol)
         nxtColWidth = nxtCol.offsetWidth - padding;
-    });
+    };
 
-    document.addEventListener("mousemove", function (e) {
+    const mousemove = (e: MouseEvent) => {
       if (curCol) {
         let diffX = e.pageX - pageX;
 
@@ -1487,9 +1496,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
           }
         }
       }
-    });
+    }
 
-    document.addEventListener('mouseup', function (e) {
+    const mouseup = (e: MouseEvent) => {
       if (curCol) {
         for (let i = 0; i < cols.length; i++) {
           const col:any = cols[i];
@@ -1502,7 +1511,19 @@ export function resizableDataTable(dataTable: HTMLElement) {
       nxtColWidth = undefined;
       curColWidth = undefined;
       tableWidth = undefined;
-    });
+    }
+
+    div.addEventListener('click', click);
+    div.addEventListener('mousedown', mousedown);
+    document.addEventListener("mousemove", mousemove);
+    document.addEventListener('mouseup', mouseup);
+
+    return () => {
+      div.removeEventListener('click', click);
+      div.removeEventListener('mousedown', mousedown);
+      document.removeEventListener("mousemove", mousemove);
+      document.removeEventListener('mouseup', mouseup);
+    }
   }
 
   function paddingDiff(col) {
