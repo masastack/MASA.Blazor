@@ -56,7 +56,7 @@ public partial class MDataTableHeaderBase: MasaComponentBase
 
     protected string GetHeaderClass(DataTableHeader header)
     {
-        StringBuilder stringBuilder = new();
+        CssBuilder stringBuilder = new();
 
         if (!DisableSort && header.Sortable)
         {
@@ -64,55 +64,46 @@ public partial class MDataTableHeaderBase: MasaComponentBase
             var beingSorted = sortIndex >= 0;
             var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
 
-            stringBuilder.Append("sortable");
+            stringBuilder.Add("sortable");
             if (header.Divider)
             {
-                stringBuilder.Append(' ');
-                stringBuilder.Append(" m-data-table__divider");
+                stringBuilder.Add(" m-data-table__divider");
             }
 
             if (beingSorted)
             {
-                stringBuilder.Append(' ');
-                stringBuilder.Append("active");
+                stringBuilder.Add("active");
             }
 
             if (beingSorted)
             {
-                stringBuilder.Append(' ');
-                stringBuilder.Append(isDesc ? "desc" : "asc");
+                stringBuilder.Add(isDesc ? "desc" : "asc");
             }
         }
 
-        stringBuilder.Append(' ');
-        stringBuilder.Append($"text-{header.Align.ToString().ToLower()}");
+        stringBuilder.Add($"text-{header.Align.ToString().ToLower()}");
 
         if (header.Fixed == DataTableFixed.Right)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--fixed-right");
+            stringBuilder.Add("m-data-table__column--fixed-right");
         }
 
         if (header.Fixed == DataTableFixed.Left)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--fixed-left");
+            stringBuilder.Add("m-data-table__column--fixed-left");
         }
 
         if (header.IsFixedShadowColumn)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("first-fixed-column");
+            stringBuilder.Add("first-fixed-column");
         }
 
         if (header.HasEllipsis)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--ellipsis");
+            stringBuilder.Add("m-data-table__column--ellipsis");
         }
 
-        stringBuilder.Append(' ');
-        stringBuilder.Append(header.Class);
+        stringBuilder.Add(header.Class);
 
         return stringBuilder.ToString();
     }

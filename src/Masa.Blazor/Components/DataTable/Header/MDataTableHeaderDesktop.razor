@@ -59,10 +59,11 @@
                     </span>
                 }
 
-                @if (Resizable)
+                @if (Resizable && header.Resizable)
                 {
                     <div class="@Block.Element("col-resize")"
-                         style="max-height: var(--m-data-table-height)"></div>
+                         style="max-height: var(--m-data-table-height)">
+                    </div>
                 }
             }
         </th>

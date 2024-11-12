@@ -53,14 +53,21 @@ public class DataTableHeader
 
     public DataTableFixed Fixed { get; set; }
 
+    public DataTableEllipsis? Ellipsis { get; set; }
+
+    /// <summary>
+    /// Determines whether the column is resizable.
+    /// It's only effective when the ResizeMode is set.
+    /// Supported since v1.8.0.
+    /// </summary>
+    public bool Resizable { get; set; } = true;
+
     /// <summary>
     /// The real width of the column, but 0 if <see cref="Width"/> is not null.
     /// </summary>
-    public double RealWidth { get; internal set; }
+    internal double RealWidth { get; set; }
 
-    public bool IsFixedShadowColumn { get; internal set; }
-
-    public DataTableEllipsis? Ellipsis { get; set; }
+    internal bool IsFixedShadowColumn { get; set; }
 
     internal bool HasEllipsis => Ellipsis?.Enabled ?? false;
 }

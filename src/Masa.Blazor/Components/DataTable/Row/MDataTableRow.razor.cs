@@ -66,42 +66,36 @@ public partial class MDataTableRow<TItem>
 
     private string GetCellClass(DataTableHeader header)
     {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.Append($"text-{header.Align.ToString().ToLowerInvariant()}");
+        var stringBuilder = new CssBuilder();
+        stringBuilder.Add($"text-{header.Align.ToString().ToLowerInvariant()}");
 
         if (header.Divider)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__divider");
+            stringBuilder.Add("m-data-table__divider");
         }
 
         if (header.Fixed == DataTableFixed.Right)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--fixed-right");
+            stringBuilder.Add("m-data-table__column--fixed-right");
         }
 
         if (header.Fixed == DataTableFixed.Left)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--fixed-left");
+            stringBuilder.Add("m-data-table__column--fixed-left");
         }
 
         if (header.IsFixedShadowColumn)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("first-fixed-column");
+            stringBuilder.Add("first-fixed-column");
         }
 
         if (header.HasEllipsis)
         {
-            stringBuilder.Append(' ');
-            stringBuilder.Append("m-data-table__column--ellipsis");
+            stringBuilder.Add("m-data-table__column--ellipsis");
         }
 
-        stringBuilder.Append(' ');
-        stringBuilder.Append(header.CellClass);
-        
+        stringBuilder.Add(header.CellClass);
+
         return stringBuilder.ToString();
     }
     
