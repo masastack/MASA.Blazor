@@ -22,6 +22,7 @@ const offlineAssetsExclude = [
   /blazor.boot.json$/, // used to detect whether any of the boot resources have changed
   /^index\.html$/,
   /masa-blazor\.js$/,
+  /masa-blazor\.css$/,
   /Masa\.Blazor\.wasm$/
 ];
 
