@@ -54,7 +54,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     private EditContext? _prevEditContext;
     private InternalValueChangeType _changeType;
 
-    protected void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
+    protected virtual void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
     {
         _changeType = changeType;
         InternalValue = value;
@@ -340,18 +340,24 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         }
         else
         {
-            if (_changeType != InternalValueChangeType.Input && !DisableSetValueByJsInterop)
-            {
-                _ = SetValueByJsInterop(Formatter(val));
-            }
-
-            _ = ValueChanged.InvokeAsync(val.TryDeepClone());
+            var newValue = ConvertAndSetValueByJSInterop(val);
+            _ = ValueChanged.InvokeAsync(newValue.TryDeepClone());
         }
+    }
+
+    protected virtual TValue? ConvertAndSetValueByJSInterop(TValue? val)
+    {
+        if (_changeType != InternalValueChangeType.Input && !DisableSetValueByJsInterop)
+        {
+            _ = SetValueByJsInterop(Formatter(val));
+        }
+
+        return val;
     }
     
     protected void SubscribeValidationStateChanged()
     {
-        //When EditContext update,we should re-subscribe OnValidationStateChanged
+        //When EditContext update, we should re-subscribe OnValidationStateChanged
         if (_prevEditContext == EditContext) return;
 
         if (_prevEditContext != null)
