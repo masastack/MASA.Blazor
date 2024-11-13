@@ -98,7 +98,7 @@ You can add icons to the text field with `PrependIcon`, `AppendIcon` and `Append
 
 <masa-example file="Examples.components.text_fields.Icons"></masa-example>
 
-#### Input Number
+#### Input Number {updated-in=v1.8.0}
 
 Numeric-only input box.
 
