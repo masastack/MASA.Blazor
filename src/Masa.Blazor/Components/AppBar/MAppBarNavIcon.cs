@@ -11,11 +11,12 @@ public class MAppBarNavIcon : MButton
         base.OnParametersSet();
 
         Icon = true;
-
-        Class ??= "";
-        Class = "m-app-bar__nav-icon " + Class;
-
         ChildContent ??= DefaultChildContent;
+    }
+
+    protected override IEnumerable<string> BuildComponentClass()
+    {
+        return ["m-app-bar__nav-icon", ..base.BuildComponentClass()];
     }
 
     private RenderFragment DefaultChildContent => builder =>
