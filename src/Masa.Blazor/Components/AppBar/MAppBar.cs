@@ -264,18 +264,6 @@ public class MAppBar : MToolbar, IScrollable
         }
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender)
-        {
-            _isBooted = true;
-            Attributes["data-booted"] = "true";
-            StateHasChanged();
-        }
-    }
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -428,6 +416,12 @@ public class MAppBar : MToolbar, IScrollable
 
         if (firstRender)
         {
+            _isBooted = true;
+            Attributes["data-booted"] = "true";
+            _scroller?.OnScroll(ThresholdMet);
+
+            StateHasChanged();
+
             await Js.AddHtmlElementEventListener(
                 ScrollTarget,
                 "scroll",
