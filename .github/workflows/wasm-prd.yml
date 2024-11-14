@@ -34,7 +34,7 @@ jobs:
     - name: build
       run: dotnet build Masa.Blazor.Docs.sln
     - name: publish
-      run: dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release
+      run: dotnet publish docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release -f net8.0
     - name: setup python
       uses: actions/setup-python@v4
       with:
@@ -50,7 +50,7 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net9.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/docs/Masa.Docs.WebAssembly/bin/Release/net8.0/publish/wwwroot/ oss://masa-blazor-wasm-v1/
     - name: run index-create tools
       env:
         MASA_DOC_DOMAIN: "/"
