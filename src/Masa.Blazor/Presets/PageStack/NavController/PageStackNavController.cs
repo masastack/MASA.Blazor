@@ -47,10 +47,11 @@ public class PageStackNavController()
     /// <summary>
     /// Push a new page onto the page stack.
     /// </summary>
-    /// <param name="relativeUri"></param>
-    public void Push(string relativeUri)
+    /// <param name="relativeUri">the relative URI of the new page</param>
+    /// <param name="clearStack">determine whether to push new page and remove all old pages</param>
+    public void Push(string relativeUri, bool clearStack = false)
     {
-        ExecuteIfTimeElapsed(() => StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri)));
+        ExecuteIfTimeElapsed(() => StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri, clearStack)));
     }
 
     /// <summary>
