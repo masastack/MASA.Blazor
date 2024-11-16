@@ -118,9 +118,10 @@ public class PageStackNavController()
     /// </summary>
     /// <param name="relativeUri"></param>
     /// <param name="state"></param>
-    public void Replace(string relativeUri, object? state = null)
+    /// <param name="clearStack">determine whether to replace the current page and remove all previous pages</param>
+    public void Replace(string relativeUri, object? state = null, bool clearStack = false)
     {
-        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
+        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state, clearStack));
     }
 
     /// <summary>

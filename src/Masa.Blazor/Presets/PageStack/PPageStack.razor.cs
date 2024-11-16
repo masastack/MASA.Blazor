@@ -36,6 +36,12 @@ public partial class PPageStack : PatternPathComponentBase
     /// and clear the stack in the next popstate event.
     /// </summary>
     private string? _uriForPushAndClearStack;
+    
+    /// <summary>
+    /// The flag to indicate whether to replace the top page
+    /// and clear the previous pages in the stack in the next popstate event.
+    /// </summary>
+    private (string relativeUri, object? state)? _uriForReplaceAndClearStack;
 
     private string? _lastVisitedTabPath;
     private PageType _targetPageType;
@@ -135,6 +141,16 @@ public partial class PPageStack : PatternPathComponentBase
             return;
         }
 
+        if (_uriForReplaceAndClearStack.HasValue)
+        {
+            var (relativeUri, state) = _uriForReplaceAndClearStack.Value;
+            
+            Pages.RemoveRange(0, Pages.Count - 1);
+            InternalReplaceHandler(relativeUri, state);
+            _uriForReplaceAndClearStack = null;
+            return;
+        }
+
         var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
 
         if (tabbedPattern is not null)
@@ -179,6 +195,13 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
+        if (e.ClearStack)
+        {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -(Pages.Count - 1));
+            _uriForReplaceAndClearStack = (e.RelativeUri, e.State);
+            return;
+        }
+
         InternalReplaceHandler(e.RelativeUri, e.State);
     }
 
