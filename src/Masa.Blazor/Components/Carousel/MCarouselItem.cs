@@ -10,8 +10,6 @@ public class MCarouselItem : MWindowItem, IRoutable
 
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    [Parameter] public string? Tag { get; set; }
-
     [Parameter] public string? Target { get; set; }
 
     [Parameter] public string? Src { get; set; }
