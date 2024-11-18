@@ -1,4 +1,4 @@
-﻿using Force.DeepCloner;
+﻿using DeepCloner.Core;
 
 namespace Masa.Blazor;
 
