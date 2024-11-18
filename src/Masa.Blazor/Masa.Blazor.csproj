@@ -45,7 +45,7 @@
 
 	<ItemGroup>
         <PackageReference Include="BemIt" Version="2.2.0" />
-        <PackageReference Include="DeepCloner" Version="0.10.4" />
+        <PackageReference Include="DeepCloner.Core" Version="0.1.0" />
 		<PackageReference Include="FluentValidation" Version="11.4.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
         <PackageReference Include="OneOf" Version="3.0.223" />
