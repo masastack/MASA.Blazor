@@ -31,6 +31,18 @@ public partial class PPageStack : PatternPathComponentBase
     /// </summary>
     private bool _popstateByUserAction;
 
+    /// <summary>
+    /// The flag to indicate whether to push a new page
+    /// and clear the stack in the next popstate event.
+    /// </summary>
+    private string? _uriForPushAndClearStack;
+    
+    /// <summary>
+    /// The flag to indicate whether to replace the top page
+    /// and clear the previous pages in the stack in the next popstate event.
+    /// </summary>
+    private (string relativeUri, object? state)? _uriForReplaceAndClearStack;
+
     private string? _lastVisitedTabPath;
     private PageType _targetPageType;
     private long _lastOnPreviousClickTimestamp;
@@ -113,6 +125,32 @@ public partial class PPageStack : PatternPathComponentBase
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
+        if (_uriForPushAndClearStack is not null)
+        {
+            Push(_uriForPushAndClearStack);
+            NavigationManager.NavigateTo(_uriForPushAndClearStack);
+            _uriForPushAndClearStack = null;
+
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(300); // wait for the transition to complete
+                Pages.RemoveRange(0, Pages.Count - 1);
+                await InvokeAsync(StateHasChanged);
+            });
+
+            return;
+        }
+
+        if (_uriForReplaceAndClearStack.HasValue)
+        {
+            var (relativeUri, state) = _uriForReplaceAndClearStack.Value;
+            
+            Pages.RemoveRange(0, Pages.Count - 1);
+            InternalReplaceHandler(relativeUri, state);
+            _uriForReplaceAndClearStack = null;
+            return;
+        }
+
         var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
 
         if (tabbedPattern is not null)
@@ -157,6 +195,13 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
     {
+        if (e.ClearStack)
+        {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -(Pages.Count - 1));
+            _uriForReplaceAndClearStack = (e.RelativeUri, e.State);
+            return;
+        }
+
         InternalReplaceHandler(e.RelativeUri, e.State);
     }
 
@@ -182,6 +227,15 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
     {
+        if (e.ClearStack)
+        {
+            // after calling history.go, a popstate event callback will be triggered,
+            // where the logic of the stack page is processed (push new page, clean up old page)
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
+            _uriForPushAndClearStack = e.RelativeUri;
+            return;
+        }
+
         Push(e.RelativeUri);
         NavigationManager.NavigateTo(e.RelativeUri);
     }
