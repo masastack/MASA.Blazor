@@ -4,11 +4,16 @@ import { terser } from "rollup-plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig({
-  input: "./src/components/navigation-drawer/touch.ts",
+  input:{
+    "components/page-stack/touch": "./src/components/page-stack/touch.ts",
+    "components/page-stack/index": "./src/components/page-stack/index.ts",
+    "components/navigation-drawer/touch": "./src/components/navigation-drawer/touch.ts",
+    "mixins/touch": "./src/mixins/touch.ts",
+  },
   output: [
     {
-      file: "../MASA.Blazor/wwwroot/js/components/navigation-drawer-touch.js",
-      format: "esm",
+      dir: "../MASA.Blazor/wwwroot/js",
+      format: "es",
       sourcemap: true,
     },
   ],

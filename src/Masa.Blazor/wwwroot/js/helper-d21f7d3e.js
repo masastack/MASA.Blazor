@@ -1,0 +1,2 @@
+const e="undefined"!=typeof window;let t=!1;try{if(e){const e=Object.defineProperty({},"passive",{get:()=>{t=!0}});window.addEventListener("testListener",e,e),window.removeEventListener("testListener",e,e)}}catch(e){console.warn(e)}function n(e){return"string"==typeof e?document.querySelector(e):e}Object.freeze({enter:13,tab:9,delete:46,esc:27,space:32,up:38,down:40,left:37,right:39,end:35,home:36,del:46,backspace:8,insert:45,pageup:33,pagedown:34,shift:16});export{n as g};
+//# sourceMappingURL=helper-d21f7d3e.js.map
