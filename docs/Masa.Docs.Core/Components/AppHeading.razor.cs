@@ -55,7 +55,7 @@ public class AppHeading : ComponentBase
             {
                 childBuilder.OpenElement(0, "a");
                 childBuilder.AddAttribute(1, "href", Href);
-                childBuilder.AddAttribute(2, "class", "text-decoration-none text-right text-md-left");
+                childBuilder.AddAttribute(2, "class", "text-decoration-none");
                 childBuilder.AddEventPreventDefaultAttribute(3, "onclick", true);
                 childBuilder.AddAttribute(4, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, () => OnClick(Href!)));
                 childBuilder.AddContent(5, "#");

@@ -196,11 +196,19 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
     .m-heading > a {
         bottom: 0;
         display: inline-block;
-        left: 0;
+        left: -0.7em;
         position: absolute;
-        right: -16px;
+        right: 0;
         top: 0;
     }
+
+@media (max-width: 959px) {
+    .m-heading > a {
+        text-align: right;
+        left: 0;
+        right: -0.7em;
+    }
+}
 
         .m-heading > a:not(:hover):not(:focus) {
             opacity: 0;
