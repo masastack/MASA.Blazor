@@ -59,8 +59,6 @@ public partial class NotificationsMenu
 
         public string GetContent(string key)
         {
-            Console.Out.WriteLine("Key: " + key);
-            
             if (Content.TryGetValue(key, out var content))
             {
                 return content;
