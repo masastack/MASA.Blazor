@@ -18,11 +18,9 @@ export default defineConfig({
     "components/transition/index": "./src/components/transition/index.ts",
 
     "mixins/activatable/index": "./src/mixins/activatable.ts",
-    // "mixins/delayable/index": "./src/mixins/delayable.ts",
     "mixins/intersect/index": "./src/mixins/intersect.ts",
     "mixins/outside-click/index": "./src/mixins/outside-click.ts",
     "mixins/resize/index": "./src/mixins/resize.ts",
-    // "mixins/touch/index": "./src/mixins/touch.ts",
 
     // the following files are introduced in the main.ts
     // "components/slider/index": "./src/components/slider/index.ts",
@@ -32,6 +30,7 @@ export default defineConfig({
     {
       dir: "../MASA.Blazor/wwwroot/js",
       format: "es",
+      chunkFileNames: "chunks/[name].js",
       sourcemap: true,
     },
   ],
