@@ -1,5 +1,19 @@
 # Upgrade Guides
 
+## Upgrading form v1.7.x to v1.8.0
+
+### Components {#v1-8-0-components}
+
+#### Pagination {#v1-8-0-pagination}
+
+The way to set the shadow is changed from setting the `box-shadow` style to using the `Elevation` parameter.
+If you use custom styles, please note to modify to use the elevation style.
+
+```diff
+- <MPagination Class="css-to-hide-shadow" />
++ <MPagination Elevation="0" />
+```
+
 ## Upgrading form v1.6.x to v1.7.0
 
 ### Components {#v1-7-0-components}
