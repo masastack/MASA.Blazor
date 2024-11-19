@@ -2,7 +2,7 @@
 
 public class ResizeJSModule : JSModule, IResizeJSModule
 {
-    public ResizeJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/resize.js")
+    public ResizeJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/resize/index.js")
     {
     }
 
