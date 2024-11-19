@@ -1,5 +1,18 @@
 # 升级指南
 
+## 从 v1.7.x 升级到 v1.8.0 {#upgrading-from-v1-7-x-to-v1-8-0}
+
+### 组件 {#v1-8-0-components}
+
+#### Pagination {#v1-8-0-pagination}
+
+应用阴影的方式从 `box-shadow`样式已经改为使用 `Elevation` 参数，如果你使用了自定义样式，请注意修改为使用 `elevation` 样式。
+
+```diff
+- <MPagination Class="css-to-hide-shadow" />
++ <MPagination Elevation="0" />
+```
+
 ## 从 v1.6.x 升级到 v1.7.0 {#upgrading-from-v1-6-x-to-v1-7-0}
 
 ### 组件 {#v1-7-0-components}

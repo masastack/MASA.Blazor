@@ -77,7 +77,7 @@
                                     @item.CreatedAt
                                 </div>
                                 <div class="text-caption">
-                                    <DocumentMarkdownIt Source="@item.Content"></DocumentMarkdownIt>
+                                    <DocumentMarkdownIt Source="@item.GetContent(I18n.Culture.TwoLetterISOLanguageName)"></DocumentMarkdownIt>
 
                                     <MChip Outlined Small Href="@item.Href" OnClick="@(() => OnClick(item))">
                                         @I18n.T($"notifications.{item.HrefText}")
