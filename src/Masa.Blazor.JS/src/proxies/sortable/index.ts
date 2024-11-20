@@ -32,7 +32,7 @@ class SortableProxy {
       ...rest,
       scroll: true,
       onMove: (evt, originalEvent) => {
-        const ignoreElements = [...this.el.querySelectorAll(ignore)];
+        const ignoreElements = Array.from(this.el.querySelectorAll(ignore));
         if (ignoreElements.length) {
           let dragged: HTMLElement;
           let target: HTMLElement;
