@@ -19,7 +19,7 @@ public class Touch : IAsyncDisposable
         _moduleTask = new Lazy<Task<IJSObjectReference>>(
             () => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
-                "./_content/Masa.Blazor/js/components/navigation-drawer-touch.js").AsTask()
+                "./_content/Masa.Blazor/js/components/navigation-drawer/touch.js").AsTask()
         );
     }
 

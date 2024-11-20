@@ -3,7 +3,7 @@
 namespace Masa.Blazor.Mixins;
 
 public class ScrollStrategyJSModule(IJSRuntime js)
-    : JSModule(js, "./_content/Masa.Blazor/js/scrollStrategies.js?version=2")
+    : JSModule(js, "./_content/Masa.Blazor/js/components/overlay/scroll-strategy.js")
 {
     public async ValueTask<ScrollStrategyResult> CreateScrollStrategy(ElementReference root,
         ElementReference contentRef, ScrollStrategyOptions options)

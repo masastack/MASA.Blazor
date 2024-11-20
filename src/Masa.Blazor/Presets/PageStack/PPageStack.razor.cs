@@ -109,7 +109,7 @@ public partial class PPageStack : PatternPathComponentBase
         if (firstRender)
         {
             _module = await Js.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor/Presets/PageStack/PPageStack.razor.js");
+                "./_content/Masa.Blazor/js/components/page-stack/index.js");
             _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
         }
     }

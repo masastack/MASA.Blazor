@@ -2,7 +2,7 @@
 
 public class ScrollToTargetJSModule : JSModule
 {
-    public ScrollToTargetJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/scroll-to-target.js")
+    public ScrollToTargetJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/scroll-to-target/index.js")
     {
     }
 
