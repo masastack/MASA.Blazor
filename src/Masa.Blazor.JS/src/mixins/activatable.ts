@@ -17,7 +17,6 @@ class Activatable extends Delayable {
   closeOnOutsideClick: boolean;
   closeOnContentClick: boolean;
 
-  isActive: boolean;
   activatorListeners: Listeners = {};
   popupListeners: Listeners = {};
 

@@ -704,8 +704,8 @@ export function getMenuOrDialogMaxZIndex(exclude: Element[] = [], element: Eleme
   const zis = [getZIndex(base)]
 
   const activeElements = [
-    ...document.getElementsByClassName('m-menu__content--active'),
-    ...document.getElementsByClassName('m-dialog__content--active'),
+    ...Array.from(document.getElementsByClassName('m-menu__content--active')),
+    ...Array.from(document.getElementsByClassName('m-dialog__content--active')),
   ]
 
   // Get z-index for all active dialogs
@@ -719,7 +719,7 @@ export function getMenuOrDialogMaxZIndex(exclude: Element[] = [], element: Eleme
 }
 
 export function getMaxZIndex() {
-  return [...document.all].reduce((r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0), 0)
+  return Array.from(document.all).reduce((r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0), 0)
 }
 
 export function getStyle(element, styleProp) {

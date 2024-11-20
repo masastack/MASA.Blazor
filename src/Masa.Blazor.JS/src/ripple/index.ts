@@ -4,7 +4,7 @@ export default function registerRippleObserver() {
   const observer = new MutationObserver((mutationsList, observer) => {
     for (const mutation of mutationsList) {
       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-        for (const node of mutation.addedNodes) {
+        for (const node of Array.from(mutation.addedNodes)) {
           if (node instanceof HTMLElement) {
             if (
               node.nodeType === Node.ELEMENT_NODE &&
@@ -49,7 +49,7 @@ export default function registerRippleObserver() {
       }
 
       if (mutation.type === "childList" && mutation.removedNodes.length > 0) {
-        for (const node of mutation.removedNodes) {
+        for (const node of Array.from(mutation.removedNodes)) {
           if (node instanceof HTMLElement) {
             if (node.nodeType === Node.ELEMENT_NODE && node._ripple) {
               removeListeners(node);
@@ -94,7 +94,7 @@ export default function registerRippleObserver() {
     return options;
   }
 
-  const initialElements = document.querySelectorAll("[ripple]");
+  const initialElements = Array.from(document.querySelectorAll("[ripple]"));
 
   for (const element of initialElements) {
     updateRipple(element, convertRippleAttributeToOptions(element), false);
