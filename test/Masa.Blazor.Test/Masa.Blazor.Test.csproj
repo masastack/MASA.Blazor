@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -16,10 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Masa.Blazor\Masa.Blazor.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Table" />
   </ItemGroup>
 
 </Project>
