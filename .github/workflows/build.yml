@@ -33,3 +33,5 @@ jobs:
       run: dotnet workload list
     - name: build
       run: dotnet build Masa.Blazor.sln
+    - name: test
+      run: dotnet test test/Masa.Blazor.Test/Masa.Blazor.Test.csproj
