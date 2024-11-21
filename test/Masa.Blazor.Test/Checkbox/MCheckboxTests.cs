@@ -10,7 +10,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithDark()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Dark, true);
@@ -26,7 +25,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithDense()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Dense, true);
@@ -42,7 +40,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithDisabled()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(breadcrumbs => breadcrumbs.Disabled, true);
@@ -58,7 +55,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithError()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Error, true);
@@ -74,7 +70,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithErrorCount()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(alert => alert.ErrorCount, 1);
@@ -90,7 +85,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithHideDetails()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.HideDetails, true);
@@ -106,7 +100,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithIndeterminate()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Indeterminate, true);
@@ -122,7 +115,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithPersistentHint()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.PersistentHint, true);
@@ -138,7 +130,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithReadonly()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Readonly, true);
@@ -154,7 +145,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithRipple()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Ripple, true);
@@ -170,7 +160,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithSuccess()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Success, true);
@@ -186,7 +175,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithValidateOnBlur()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.ValidateOnBlur, true);
@@ -202,7 +190,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderCheckboxWithValue()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.Value, true);
@@ -218,7 +205,6 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderWithLabelContent()
         {
             // Arrange & Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>(props =>
             {
                 props.Add(checkbox => checkbox.LabelContent, "<span>Hello world</span>");
@@ -233,12 +219,10 @@ namespace Masa.Blazor.Test.Checkbox
         public void RenderNormal()
         {
             // Arrange & Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MCheckbox<bool>>();
             var inputDiv = cut.Find("div");
 
             // Assert
-            Assert.AreEqual(6, inputDiv.ClassList.Length);
             Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
             Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Divider
 {
@@ -13,8 +14,8 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Dark, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
+            var divider = cut.Find(".m-divider__wrapper").FirstElementChild;
+            var hasDarkClass = divider.ClassList.Contains("theme--dark");
 
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -28,8 +29,8 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Light, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
+            var divider = cut.Find(".m-divider__wrapper").FirstElementChild;
+            var hasLightClass = divider.ClassList.Contains("theme--light");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -43,8 +44,8 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Inset, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasInsetClass = classes.Contains("m-divider--inset");
+            var divider = cut.Find(".m-divider__wrapper").FirstElementChild;
+            var hasInsetClass = divider.ClassList.Contains("m-divider--inset");
 
             // Assert
             Assert.IsTrue(hasInsetClass);
@@ -58,8 +59,8 @@ namespace Masa.Blazor.Test.Divider
             {
                 props.Add(divider => divider.Vertical, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasVerticalClass = classes.Contains("m-divider--vertical");
+            var divider = cut.Find(".m-divider__wrapper").FirstElementChild;
+            var hasVerticalClass = divider.ClassList.Contains("m-divider--vertical");
 
             // Assert
             Assert.IsTrue(hasVerticalClass);

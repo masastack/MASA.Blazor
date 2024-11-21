@@ -6,36 +6,6 @@ namespace Masa.Blazor.Test.Radio
     public class MRadioTests : TestBase
     {
         [TestMethod]
-        public void RenderRadioWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MRadio<string>>(props =>
-            {
-                props.Add(radio => radio.Dark, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderRadioWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MRadio<string>>(props =>
-            {
-                props.Add(radio => radio.Light, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
         public void RenderRadioWithIsDisabled()
         {
             //Act

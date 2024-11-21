@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Runtime.CompilerServices;
+using System.ComponentModel;
+
+[assembly:InternalsVisibleTo("Masa.Blazor.Test")]
 
 namespace Masa.Blazor
 {

@@ -122,7 +122,7 @@ namespace Masa.Blazor.Test.Picker
         //    var style = inputSlotDiv.GetAttribute("style");
 
         //    // Assert
-        //    Assert.AreEqual("width: 290px", style);
+        //    Assert.AreEqual("width: 290px;", style);
         //}
     }
 }

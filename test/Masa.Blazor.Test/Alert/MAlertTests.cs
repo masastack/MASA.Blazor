@@ -4,33 +4,28 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Masa.Blazor.Test.Alert
 {
     [TestClass]
-    public class MAlertTests : TestBase
+    public class MAlertTests : TestBase<MAlert>
     {
         [TestMethod]
-        public void RenderAlertWithColoredBorder()
+        public void Border()
         {
-            //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = Render(props =>
             {
-                props.Add(alert => alert.ColoredBorder, true);
+                props.Add(alert => alert.Border, Borders.Left);
             });
-            var classes = cut.Instance.GetClass();
-            var hasColoredBorderClass = classes.Contains("m-alert");
 
-            // Assert
-            Assert.IsTrue(hasColoredBorderClass);
+            cut.Find(".m-alert__border");
         }
 
         [TestMethod]
         public void RenderAlertWithDense()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Dense, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasDenseClass = classes.Contains("m-alert--dense");
+            var hasDenseClass = cut.ClassList.Contains("m-alert--dense");
 
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -40,12 +35,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithDark()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Dark, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
+            var hasDarkClass = cut.ClassList.Contains("theme--dark");
 
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -55,27 +49,23 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithDismissible()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = Render(props =>
             {
                 props.Add(alert => alert.Dismissible, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasDismissibleClass = classes.Contains("m-alert");
 
-            // Assert
-            Assert.IsTrue(hasDismissibleClass);
+            cut.Find(".m-alert__dismissible");
         }
 
         [TestMethod]
         public void RenderAlertWithElevation()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Elevation, 2);
             });
-            var classes = cut.Instance.GetClass();
-            var hasElevationClass = classes.Contains("elevation-2");
+            var hasElevationClass = cut.ClassList.Contains("elevation-2");
 
             // Assert
             Assert.IsTrue(hasElevationClass);
@@ -85,27 +75,25 @@ namespace Masa.Blazor.Test.Alert
         public void RenderWithHeight()
         {
             // Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.Height, 100);
             });
-            var inputSlotDiv = cut.Find(".m-alert");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = cut.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px", style);
+            Assert.AreEqual("height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderAlertWithIcon()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Icon, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasIconClass = classes.Contains("m-alert");
+            var hasIconClass = cut.ClassList.Contains("m-alert");
 
             // Assert
             Assert.IsTrue(hasIconClass);
@@ -115,12 +103,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithWithLight()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Light, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
+            var hasLightClass = cut.ClassList.Contains("theme--light");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -130,72 +117,67 @@ namespace Masa.Blazor.Test.Alert
         public void RenderWithMaxHeight()
         {
             // Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.MaxHeight, 100);
             });
-            var inputSlotDiv = cut.Find(".m-alert");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = cut.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-height: 100px", style);
+            Assert.AreEqual("max-height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMaxWidth()
         {
             // Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.MaxWidth, 100);
             });
-            var inputSlotDiv = cut.Find(".m-alert");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = cut.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-width: 100px", style);
+            Assert.AreEqual("max-width: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMinWidth()
         {
             // Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.MinWidth, 100);
             });
-            var inputSlotDiv = cut.Find(".m-alert");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = cut.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-width: 100px", style);
+            Assert.AreEqual("min-width: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMinHeight()
         {
             // Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.MinHeight, 100);
             });
-            var inputSlotDiv = cut.Find(".m-alert");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = cut.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-height: 100px", style);
+            Assert.AreEqual("min-height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderAlertWithOutlined()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Outlined, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasOutlinedClass = classes.Contains("m-alert--outlined");
+            var hasOutlinedClass = cut.ClassList.Contains("m-alert--outlined");
 
             // Assert
             Assert.IsTrue(hasOutlinedClass);
@@ -205,12 +187,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithProminent()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Prominent, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasProminentClass = classes.Contains("m-alert--prominent");
+            var hasProminentClass = cut.ClassList.Contains("m-alert--prominent");
 
             // Assert
             Assert.IsTrue(hasProminentClass);
@@ -220,12 +201,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithRounded()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Rounded, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasRoundedClass = classes.Contains("rounded");
+            var hasRoundedClass = cut.ClassList.Contains("rounded");
 
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -235,12 +215,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithShaped()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Shaped, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasShapedClass = classes.Contains("m-sheet--shaped");
+            var hasShapedClass = cut.ClassList.Contains("m-sheet--shaped");
 
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -250,12 +229,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithText()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Text, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasTextClass = classes.Contains("m-alert--text");
+            var hasTextClass = cut.ClassList.Contains("m-alert--text");
 
             // Assert
             Assert.IsTrue(hasTextClass);
@@ -265,12 +243,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithTile()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Tile, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasRoundedClass = classes.Contains("rounded");
+            var hasRoundedClass = cut.ClassList.Contains("rounded-0");
 
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -280,12 +257,11 @@ namespace Masa.Blazor.Test.Alert
         public void RenderAlertWithValue()
         {
             //Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(alert => alert.Value, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasValueClass = classes.Contains("m-alert");
+            var hasValueClass = cut.ClassList.Contains("m-alert");
 
             // Assert
             Assert.IsTrue(hasValueClass);
@@ -295,7 +271,7 @@ namespace Masa.Blazor.Test.Alert
         public void RenderWithChildContent()
         {
             // Arrange & Act
-            var cut = RenderComponent<MAlert>(props =>
+            var cut = Render(props =>
             {
                 props.Add(alert => alert.ChildContent, "<span>Hello world</span>");
             });

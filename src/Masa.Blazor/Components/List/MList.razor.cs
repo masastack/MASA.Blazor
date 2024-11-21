@@ -190,6 +190,7 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _sheetModifierBuilder
+            .Add(Outlined)
             .Add(Shaped)
             .AddTheme(IsDark, IndependentTheme)
             .AddElevation(Elevation)

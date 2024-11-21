@@ -1,4 +1,7 @@
-﻿using Bunit;
+﻿using System;
+using System.Collections.Generic;
+using AngleSharp.Dom;
+using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Autocompletes
@@ -6,37 +9,42 @@ namespace Masa.Blazor.Test.Autocompletes
     [TestClass]
     public class MAutocompleteTests : TestBase
     {
-        [TestMethod]
-        public void RenderAutocompleteWithAutofocus()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-              {
-                  props.Add(autocomplete => autocomplete.Autofocus, true);
-                  props.Add(autocomplete => autocomplete.ItemText, item => item);
-                  props.Add(autocomplete => autocomplete.ItemValue, item => item);
-              });
-            var classes = cut.Instance.GetClass();
-            var hasAutofocusClass = classes.Contains("m-autocomplete");
+        private record Model(string Name, string Value);
 
-            // Assert
-            Assert.IsTrue(hasAutofocusClass);
+        private IRenderedComponent<MAutocomplete<Model, string, string>> Render(
+            Action<ComponentParameterCollectionBuilder<MAutocomplete<Model, string, string>>> parameterBuilder = null)
+        {
+            return RenderComponent<MAutocomplete<Model, string, string>>(props =>
+            {
+                props.Add(a => a.Value, "Value1");
+                props.Add(a => a.Items, new List<Model>()
+                {
+                    new Model("Name1", "Value1"),
+                    new Model("Name2", "Value2"),
+                    new Model("Name3", "Value3"),
+                });
+                props.Add(a => a.ItemText, item => item.Name);
+                props.Add(a => a.ItemValue, item => item.Value);
+                parameterBuilder?.Invoke(props);
+            });
+        }
+
+        private IElement RenderAndGetRootElement(
+            Action<ComponentParameterCollectionBuilder<MAutocomplete<Model, string, string>>> parameterBuilder = null,
+            string tag = "div")
+        {
+            return Render(parameterBuilder).Find(tag);
         }
 
         [TestMethod]
         public void RenderAutocompleteWithChips()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(autocomplete => autocomplete.Chips, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.GetClass();
-            var hasChipsClass = classes.Contains("m-autocomplete");
+            var hasChipsClass = cut.ClassList.Contains("m-select--chips");
 
             // Assert
             Assert.IsTrue(hasChipsClass);
@@ -46,522 +54,54 @@ namespace Masa.Blazor.Test.Autocompletes
         public void RenderAutocompleteWithClearable()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            var cut = Render(props =>
             {
                 props.Add(autocomplete => autocomplete.Clearable, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.GetClass();
-            var hasClearableClass = classes.Contains("m-autocomplete");
 
-            // Assert
-            Assert.IsTrue(hasClearableClass);
-        }
+            cut.Render();
 
-        [TestMethod]
-        public void RenderAutocompleteWithCounter()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Counter, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasCounterClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasCounterClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithDark()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Dark, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasDarkClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
+            cut.Find(".m-input__icon--clear");
         }
 
         [TestMethod]
         public void RenderAutocompleteWithDeletableChips()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            var cut = Render(props =>
             {
-                props.Add(autocomplete => autocomplete.DeletableChips, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+                props.Add(a => a.Chips, true);
+                props.Add(a => a.DeletableChips, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasDeletableChipsClass = classes.Contains("m-autocomplete");
 
-            // Assert
-            Assert.IsTrue(hasDeletableChipsClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithDense()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Dense, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasDenseClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasDenseClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithDisabled()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Disabled, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasDisabledClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasDisabledClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithError()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Error, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasErrorClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasErrorClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithFilled()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Filled, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasFilledClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasFilledClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithFlat()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Flat, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasFlatClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasFlatClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithFullWidth()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.FullWidth, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasFullWidthClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasFullWidthClass);
-        }
-
-        [TestMethod]
-        public void RenderWithHeight()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Height, 100);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasHeightClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasHeightClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithHideDetails()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.HideDetails, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasHideDetailsClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasHideDetailsClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithLight()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Light, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLightClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithLoaderHeight()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.LoaderHeight, 2);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLoaderHeightClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasLoaderHeightClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithLoading()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Loading, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLoadingClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasLoadingClass);
+            cut.Find(".m-chip__close");
         }
 
         [TestMethod]
         public void RenderAutocompleteWithMultiple()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            var cut = RenderAndGetRootElement(props =>
             {
                 props.Add(autocomplete => autocomplete.Multiple, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
             });
-            var classes = cut.Instance.GetClass();
-            var hasMultipleClass = classes.Contains("m-autocomplete");
 
             // Assert
-            Assert.IsTrue(hasMultipleClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithOutlined()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Outlined, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasOutlinedClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasOutlinedClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithPersistentHint()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.PersistentHint, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasPersistentHintClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasPersistentHintClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithPersistentPlaceholder()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.PersistentPlaceholder, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasPersistentPlaceholderClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasPersistentPlaceholderClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithReadonly()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Readonly, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasReadonlyClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasReadonlyClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithReverse()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Reverse, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasReverseClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasReverseClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithRounded()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Rounded, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRoundedClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasRoundedClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithShaped()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Shaped, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasShapedClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasShapedClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithSingleLine()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.SingleLine, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasSingleLineClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasSingleLineClass);
+            Assert.IsTrue(cut.ClassList.Contains("m-select--is-multi"));
         }
 
         [TestMethod]
         public void RenderAutocompleteWithSmallChips()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            var cut = Render(props =>
             {
-                props.Add(autocomplete => autocomplete.SmallChips, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+                props.Add(a => a.Chips, true);
+                props.Add(a => a.SmallChips, true);
             });
-            var classes = cut.Instance.GetClass();
-            var hasSmallChipsClass = classes.Contains("m-autocomplete");
-
+            
             // Assert
-            Assert.IsTrue(hasSmallChipsClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithSolo()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Solo, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasSoloClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasSoloClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithSoloInverted()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.SoloInverted, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasSoloInvertedClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasSoloInvertedClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithSuccess()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.Success, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasSuccessClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasSuccessClass);
-        }
-
-        [TestMethod]
-        public void RenderAutocompleteWithValidateOnBlur()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
-            {
-                props.Add(autocomplete => autocomplete.ValidateOnBlur, true);
-                props.Add(autocomplete => autocomplete.ItemText, item => item);
-                props.Add(autocomplete => autocomplete.ItemValue, item => item);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasValidateOnBlurClass = classes.Contains("m-autocomplete");
-
-            // Assert
-            Assert.IsTrue(hasValidateOnBlurClass);
+            cut.Find(".m-chip.m-size--small");
         }
     }
 }
