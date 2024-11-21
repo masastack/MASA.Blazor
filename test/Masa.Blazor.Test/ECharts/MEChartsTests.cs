@@ -18,7 +18,7 @@ namespace Masa.Blazor.Test.ECharts
         //    var style = inputSlotDiv.GetAttribute("style");
 
         //    // Assert
-        //    Assert.AreEqual("height: 400px", style);
+        //    Assert.AreEqual("height: 400px;", style);
         //}
     }
 }

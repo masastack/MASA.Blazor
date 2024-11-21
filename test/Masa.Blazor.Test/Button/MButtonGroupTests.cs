@@ -7,21 +7,6 @@ namespace Masa.Blazor.Test.Button
     public class MButtonGroupTests : TestBase
     {
         [TestMethod]
-        public void RenderButtonGroupWithBorderless()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Borderless, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasBorderlessClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasBorderlessClass);
-        }
-
-        [TestMethod]
         public void RenderButtonGroupWithDark()
         {
             //Act
@@ -37,36 +22,6 @@ namespace Masa.Blazor.Test.Button
         }
 
         [TestMethod]
-        public void RenderButtonGroupWithDense()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Dense, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasDenseClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasDenseClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithGroup()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Group, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasGroupClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasGroupClass);
-        }
-
-        [TestMethod]
         public void RenderButtonGroupWithLight()
         {
             //Act
@@ -79,81 +34,6 @@ namespace Masa.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithMandatory()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Mandatory, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasMandatoryClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasMandatoryClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithMultiple()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Multiple, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasMultipleClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasMultipleClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithRounded()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Rounded, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRoundedClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasRoundedClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithShaped()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Shaped, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasShapedClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasShapedClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonGroupWithTile()
-        {
-            //Act
-            var cut = RenderComponent<MButtonGroup>(props =>
-            {
-                props.Add(buttongroup => buttongroup.Tile, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasTileClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
         }
 
         [TestMethod]

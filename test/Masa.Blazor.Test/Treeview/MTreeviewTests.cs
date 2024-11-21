@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,15 +9,26 @@ namespace Masa.Blazor.Test.Treeview
     [TestClass]
     public class MTreeviewTests : TestBase
     {
+        private record Model(string Name, string Value, List<Model> Children);
+
+        private IRenderedComponent<MTreeview<Model, string>> RenderTreeview(
+            Action<ComponentParameterCollectionBuilder<MTreeview<Model, string>>> parameterBuilder = null)
+        {
+            return RenderComponent<MTreeview<Model, string>>(props =>
+            {
+                props.Add(t => t.Items, new List<Model>());
+                props.Add(t => t.ItemText, u => u.Name);
+                props.Add(t => t.ItemKey, u => u.Value);
+                props.Add(t => t.ItemChildren, u => u.Children);
+                parameterBuilder?.Invoke(props);
+            });
+        }
+
         [TestMethod]
         public void RenderTreeviewWithHoverable()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
-            {
-                props.Add(treeview => treeview.Hoverable, true);
-                 props.Add(treeview => treeview.ItemKey, item => item);
-            });
+            var cut = RenderTreeview(props => { props.Add(treeview => treeview.Hoverable, true); });
             var classes = cut.Instance.GetClass();
             var hasHoverableClass = classes.Contains("m-treeview--hoverable");
 
@@ -28,10 +40,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithActivatable()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Activatable, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasActivatableClass = classes.Contains("m-treeview");
@@ -44,10 +55,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithDark()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Dark, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
@@ -60,10 +70,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithDense()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Dense, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasDenseClass = classes.Contains("m-treeview");
@@ -76,10 +85,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithLight()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Light, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
@@ -92,10 +100,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithMultipleActive()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.MultipleActive, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasMultipleActiveClass = classes.Contains("m-treeview");
@@ -108,10 +115,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithOpenAll()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.OpenAll, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasOpenAllClass = classes.Contains("m-treeview");
@@ -124,10 +130,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithOpenOnClick()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.OpenOnClick, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasOpenOnClickClass = classes.Contains("m-treeview");
@@ -140,10 +145,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithRounded()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Rounded, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-treeview");
@@ -156,10 +160,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithSelectable()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Selectable, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasSelectableClass = classes.Contains("m-treeview");
@@ -172,10 +175,9 @@ namespace Masa.Blazor.Test.Treeview
         public void RenderTreeviewWithShaped()
         {
             //Act
-            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            var cut = RenderTreeview(props =>
             {
                 props.Add(treeview => treeview.Shaped, true);
-                props.Add(treeview => treeview.ItemKey, item => item);
             });
             var classes = cut.Instance.GetClass();
             var hasShapedClass = classes.Contains("m-treeview");

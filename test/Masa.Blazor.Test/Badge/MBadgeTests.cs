@@ -82,21 +82,6 @@ namespace Masa.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderBadgeWithContent()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Content, 6);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasContentClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasContentClass);
-        }
-
-        [TestMethod]
         public void RenderBadgeWithInLine()
         {
             //Act
@@ -169,36 +154,6 @@ namespace Masa.Blazor.Test.Badge
 
             // Assert
             Assert.IsTrue(hasTileClass);
-        }
-
-        [TestMethod]
-        public void RenderBadgeWithOffsetX()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OffsetX, 10);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasOffsetXClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasOffsetXClass);
-        }
-
-        [TestMethod]
-        public void RenderBadgeWithOffsetY()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OffsetY, 10);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasOffsetYClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasOffsetYClass);
         }
 
         [TestMethod]

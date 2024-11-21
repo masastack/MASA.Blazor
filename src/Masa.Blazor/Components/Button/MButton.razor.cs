@@ -38,8 +38,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool Rounded { get; set; }
 
-        [Parameter] public bool Shaped { get; set; }
-
         [Parameter] public bool Small { get; set; }
 
         [Parameter] public bool Text { get; set; }

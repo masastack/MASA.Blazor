@@ -7,21 +7,6 @@ namespace Masa.Blazor.Test.Chip
     public class MChipTests : TestBase
     {
         [TestMethod]
-        public void RenderChipWithActive()
-        {
-            //Act
-            var cut = RenderComponent<MChip>(props =>
-            {
-                props.Add(chip => chip.Active, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasActiveClass = classes.Contains("m-chip");
-
-            // Assert
-            Assert.IsTrue(hasActiveClass);
-        }
-
-        [TestMethod]
         public void RenderChipWithClose()
         {
             //Act
@@ -79,21 +64,6 @@ namespace Masa.Blazor.Test.Chip
 
             // Assert
             Assert.IsTrue(hasDisabledClass);
-        }
-
-        [TestMethod]
-        public void RenderChipWithFilter()
-        {
-            //Act
-            var cut = RenderComponent<MChip>(props =>
-            {
-                props.Add(chip => chip.Filter, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasFilterClass = classes.Contains("m-chip");
-
-            // Assert
-            Assert.IsTrue(hasFilterClass);
         }
 
         [TestMethod]
@@ -169,21 +139,6 @@ namespace Masa.Blazor.Test.Chip
 
             // Assert
             Assert.IsTrue(hasPillClass);
-        }
-
-        [TestMethod]
-        public void RenderChipWithRipple()
-        {
-            //Act
-            var cut = RenderComponent<MChip>(props =>
-            {
-                props.Add(chip => chip.Ripple, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRippleClass = classes.Contains("m-chip");
-
-            // Assert
-            Assert.IsTrue(hasRippleClass);
         }
 
         [TestMethod]

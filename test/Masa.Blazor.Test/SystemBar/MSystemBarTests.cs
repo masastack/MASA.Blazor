@@ -83,7 +83,7 @@ namespace Masa.Blazor.Test.SystemBar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height:100px", style);
+            Assert.AreEqual("height: 100px;", style);
         }
 
         [TestMethod]

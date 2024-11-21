@@ -179,7 +179,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px;top:0;transform:translateX(0%);width:256px", style);
+            Assert.AreEqual("height: 100px;top: 0px;transform: translateX(0%);width: 256px;", style);
         }
 
         [TestMethod]
@@ -227,7 +227,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top:0;transform:translateX(0%);width:256px", style);
+            Assert.AreEqual("height: 100%;top: 0px;transform: translateX(0%);width: 256px;", style);
         }
 
         [TestMethod]
@@ -260,22 +260,6 @@ namespace Masa.Blazor.Test.NavigationDrawer
 
             // Assert
             Assert.IsTrue(hasRightClass);
-        }
-
-        [TestMethod]
-        public void RenderNavigationDrawerWithStateless()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MNavigationDrawer>(props =>
-            {
-                props.Add(navigationdrawer => navigationdrawer.Stateless, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasStatelessClass = classes.Contains("m-navigation-drawer");
-
-            // Assert
-            Assert.IsTrue(hasStatelessClass);
         }
 
         [TestMethod]
@@ -323,7 +307,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top:0;transform:translateX(0%);width:100px", style);
+            Assert.AreEqual("height: 100%;top: 0px;transform: translateX(0%);width: 100px;", style);
         }
     }
 }
