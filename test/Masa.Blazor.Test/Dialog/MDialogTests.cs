@@ -81,36 +81,6 @@ namespace Masa.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RenderDialogWithMaxWidth()
-        {
-            //Act
-            var cut = RenderComponent<MDialog>(props =>
-            {
-                props.Add(alert => alert.MaxWidth, 1);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasMaxWidthClass = classes.Contains("m-dialog__container");
-
-            // Assert
-            Assert.IsTrue(hasMaxWidthClass);
-        }
-
-        [TestMethod]
-        public void RenderDialogWithWidth()
-        {
-            //Act
-            var cut = RenderComponent<MDialog>(props =>
-            {
-                props.Add(alert => alert.Width, 64);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasWidthClass = classes.Contains("m-dialog__container");
-
-            // Assert
-            Assert.IsTrue(hasWidthClass);
-        }
-
-        [TestMethod]
         public void RenderDialogWithOpenDelay()
         {
             //Act

@@ -350,6 +350,11 @@
         "releasedOn": "v1.1.1"
       },
       {
+        "title": "sticky",
+        "state": "new",
+        "releasedOn": "v1.8.0"
+      },
+      {
         "title": "swiper",
         "state": "new",
         "releasedOn": "v1.0.4"

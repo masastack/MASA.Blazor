@@ -40,7 +40,7 @@ public abstract class MItemGroupBase : MasaComponentBase
 
     private int _registeredItemsIndex;
 
-    public GroupType GroupType { get; private set; }
+    public GroupType GroupType { get; protected set; }
 
     public List<IGroupable> Items { get; } = new();
 
@@ -140,7 +140,7 @@ public abstract class MItemGroupBase : MasaComponentBase
         await ToggleAsync(item.Value);
     }
 
-    public async Task ToggleAsync(StringNumber? key)
+    public virtual async Task ToggleAsync(StringNumber? key)
     {
         // have to invoke the InternalValues's setter
         InternalValues = UpdateInternalValues(key);

@@ -12,7 +12,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public RenderFragment? CaptionContent { get; set; }
 
     [Parameter]
-    public IEnumerable<DataTableHeader<TItem>> Headers { get; set; } = new List<DataTableHeader<TItem>>();
+    public IEnumerable<DataTableHeader<TItem>> Headers { get; set; } = [];
 
     [Parameter]
     public RenderFragment? TopContent { get; set; }
@@ -85,6 +85,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     [Parameter]
     public bool ShowExpand { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    public bool ShowSerialNumber { get; set; }
+
     [Parameter] public RenderFragment<DataTableHeaderSelectContext>? HeaderDataTableSelectContent { get; set; }
 
     [Parameter]
@@ -124,36 +128,58 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
 
     [Parameter]
     [MasaApiParameter(ReleasedOn = "v1.0.4")]
-    public DataTableResizeMode ResizeMode
-    {
-        get => GetValue(DataTableResizeMode.None);
-        set => SetValue(value);
-    }
+    public DataTableResizeMode ResizeMode { get; set; }
 
     private bool _prevIsMobile;
+    private DataTableResizeMode _prevResizeMode;
+    private IJSObjectReference? _resizableJSResult;
+
+    private bool HasFixedColumn => Headers.Any(h => h.Fixed != DataTableFixed.None);
+
+    private bool HasLeftFixedColumn => Headers.Any(h => h.Fixed == DataTableFixed.Left);
 
     public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
     {
         get
         {
-            if (Headers == null)
-            {
-                return new List<DataTableHeader<TItem>>();
-            }
-
             var headers = Headers
                           .Where(header => header.Value == null || InternalOptions.GroupBy.FirstOrDefault(by => by == header.Value) == null)
                           .ToList();
 
+            if (ShowSerialNumber)
+            {
+                var index = headers.FindIndex(r => r.Value == "data-table-no");
+                if (index == -1)
+                {
+                    headers.Insert(0, new DataTableHeader<TItem>()
+                    {
+                        Width = "56px",
+                        Value = "data-table-no",
+                        Fixed = HasLeftFixedColumn ? DataTableFixed.Left : DataTableFixed.None,
+                        Sortable = false
+                    });
+                }
+                else
+                {
+                    var header = headers[index];
+                    header.Sortable = false;
+                    if (header.Width == null)
+                    {
+                        header.Width = "56px";
+                    }
+                }
+            }
+
             if (ShowSelect)
             {
+                var fixedSelect = FixedSelect || HasLeftFixedColumn;
                 var index = headers.FindIndex(r => r.Value == "data-table-select");
                 if (index < 0)
                 {
                     headers.Insert(0, new DataTableHeader<TItem>
                     {
-                        Fixed = FixedSelect ? DataTableFixed.Left : DataTableFixed.None,
-                        Width = "56px",
+                        Fixed = fixedSelect ? DataTableFixed.Left : DataTableFixed.None,
+                        Width = "64px",
                         Value = "data-table-select",
                         Sortable = false
                     });
@@ -164,7 +190,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
                     header.Sortable = false;
                     if (header.Width == null)
                     {
-                        header.Width = "1px";
+                        header.Width = "64px";
                     }
                 }
             }
@@ -252,8 +278,57 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
 
         _prevIsMobile = IsMobile;
+        _prevResizeMode = ResizeMode;
+        
         MasaBlazor.WindowSizeChanged += MasaBlazorWindowSizeChanged;
         MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        
+        // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
+        Headers ??= [];
+
+        if (_prevResizeMode != ResizeMode)
+        {
+            // resize mode from none to other, that means we need to initialize the js interop for resizable
+            if (_prevResizeMode == DataTableResizeMode.None)
+            {
+                if (_resizableJSResult is not null)
+                {
+                    await DisposeResizableJS();
+                }
+
+                // wait for the element to resize to be loaded
+                NextTick(async () =>
+                {
+                    _resizableJSResult = await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.ResizableDataTable,
+                        RefBack.Current);
+                });
+            }
+            // resize mode from other to none, that means we need to dispose the js interop for resizable
+            else if (ResizeMode == DataTableResizeMode.None)
+            {
+                if (_resizableJSResult is not null)
+                {
+                    await DisposeResizableJS();
+                }
+            }
+
+            _prevResizeMode = ResizeMode;
+        }
+    }
+    
+    private async Task DisposeResizableJS()
+    {
+        if (_resizableJSResult is not null)
+        {
+            await _resizableJSResult.InvokeVoidAsync("un");
+            await _resizableJSResult.DisposeAsync();
+            _resizableJSResult = null;
+        }
     }
 
     private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
@@ -269,12 +344,13 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         {
             if (ResizeMode != DataTableResizeMode.None)
             {
-                await NextTickIf(async () =>
-                {
-                    var @ref = RefBack.Current;
-
-                    await Js.InvokeVoidAsync(JsInteropConstants.ResizableDataTable, @ref);
-                }, () => RefBack.Current.Context is null);
+                await NextTickIf(
+                    async () =>
+                    {
+                        _resizableJSResult = await Js.InvokeAsync<IJSObjectReference>(
+                            JsInteropConstants.ResizableDataTable,
+                            RefBack.Current);
+                    }, () => RefBack.Current.Context is null);
             }
         }
     }
@@ -288,21 +364,17 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
             {
                 if (ResizeMode != DataTableResizeMode.None && value?.ItemsPerPage != prevValue?.ItemsPerPage)
                 {
-                    NextTick(() => { _ = Js.InvokeVoidAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current); });
-                }
-            })
-            .Watch<DataTableResizeMode>(nameof(ResizeMode), (value, prevValue) =>
-            {
-                if (prevValue == DataTableResizeMode.None)
-                {
-                    NextTick(() => { _ = Js.InvokeVoidAsync(JsInteropConstants.ResizableDataTable, RefBack.Current); });
+                    NextTick(() =>
+                    {
+                        _ = Js.InvokeVoidAsync(JsInteropConstants.UpdateDataTableResizeHeight, RefBack.Current);
+                    });
                 }
             });
     }
 
     protected override void CheckForUpdates()
     {
-        // If there is a header filter, we need to update the computed items each render
+        // If there is a header filter, we need to update the computed items each renders
         if (HasHeaderFilter)
         {
             UpdateComputedItems();
@@ -392,6 +464,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
             .Build();
     }
 
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        if (Height != null)
+        {
+            yield return "--m-data-table-height: " + Height.ToUnit();
+        }
+    }
+
     public void ToggleGroup(string group)
     {
         var open = OpenCache.GetValueOrDefault(group);
@@ -407,11 +487,12 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         });
     }
 
-    protected override ValueTask DisposeAsyncCore()
+    protected override async ValueTask DisposeAsyncCore()
     {
         MasaBlazor.WindowSizeChanged -= MasaBlazorWindowSizeChanged;
         MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
 
-        return base.DisposeAsyncCore();
+        await DisposeResizableJS();
+        await base.DisposeAsyncCore();
     }
 }

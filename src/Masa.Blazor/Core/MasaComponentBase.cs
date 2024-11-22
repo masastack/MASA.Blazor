@@ -97,9 +97,12 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
             {
                 continue;
             }
-            
+
             stringBuilder.Append(item);
-            stringBuilder.Append("; ");
+            if (!item.EndsWith(';'))
+            {
+                stringBuilder.Append(';');
+            }
         }
 
         if (!NoStyle)

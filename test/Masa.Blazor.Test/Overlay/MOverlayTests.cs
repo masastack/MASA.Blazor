@@ -1,4 +1,5 @@
-﻿using Bunit;
+﻿using AngleSharp.Css.Dom;
+using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Overlay
@@ -10,10 +11,7 @@ namespace Masa.Blazor.Test.Overlay
         public void RenderOverlayWithDark()
         {
             //Act
-            var cut = RenderComponent<MOverlay>(props =>
-            {
-                props.Add(overlay => overlay.Dark, true);
-            });
+            var cut = RenderComponent<MOverlay>(props => { props.Add(overlay => overlay.Dark, true); });
             var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
@@ -25,10 +23,7 @@ namespace Masa.Blazor.Test.Overlay
         public void RenderOverlayWithLight()
         {
             //Act
-            var cut = RenderComponent<MOverlay>(props =>
-            {
-                props.Add(overlay => overlay.Light, true);
-            });
+            var cut = RenderComponent<MOverlay>(props => { props.Add(overlay => overlay.Light, true); });
             var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("m-overlay");
 
@@ -40,10 +35,7 @@ namespace Masa.Blazor.Test.Overlay
         public void RenderOverlayWithValue()
         {
             //Act
-            var cut = RenderComponent<MOverlay>(props =>
-            {
-                props.Add(overlay => overlay.Value, true);
-            });
+            var cut = RenderComponent<MOverlay>(props => { props.Add(overlay => overlay.Value, true); });
             var classes = cut.Instance.GetClass();
             var hasValueClass = classes.Contains("m-overlay--active");
 
@@ -55,10 +47,7 @@ namespace Masa.Blazor.Test.Overlay
         public void RenderOverlayWithAbsolute()
         {
             //Act
-            var cut = RenderComponent<MOverlay>(props =>
-            {
-                props.Add(overlay => overlay.Absolute, true);
-            });
+            var cut = RenderComponent<MOverlay>(props => { props.Add(overlay => overlay.Absolute, true); });
             var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-overlay--absolute");
 
@@ -72,28 +61,24 @@ namespace Masa.Blazor.Test.Overlay
             // Act
             var cut = RenderComponent<MOverlay>(props =>
             {
+                props.Add(p => p.Value, true);
                 props.Add(p => p.Opacity, 0.46);
             });
-            var overlayDiv = cut.Find(".m-overlay__scrim");
-            var style = overlayDiv.GetAttribute("style");
-
-            // Assert
-            Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
+            var root = cut.Find(".m-overlay");
+            var opacity = root.GetStyle()["--m-overlay-opacity"];
+            Assert.AreEqual(opacity, "0.46");
         }
 
         [TestMethod]
         public void RenderWithZIndex()
         {
             // Act
-            var cut = RenderComponent<MOverlay>(props =>
-            {
-                props.Add(p => p.ZIndex, 5);
-            });
-            var overlayDiv = cut.Find(".m-overlay__scrim");
-            var style = overlayDiv.GetAttribute("style");
+            var cut = RenderComponent<MOverlay>(props => { props.Add(p => p.ZIndex, 5); });
+            var root = cut.Find(".m-overlay");
+            var zIndex = root.GetStyle()["z-index"];
 
             // Assert
-            Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
+            Assert.AreEqual(zIndex, "5");
         }
     }
 }

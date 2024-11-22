@@ -2,8 +2,9 @@
 
 public class MListItemGroup : MItemGroup
 {
-    public MListItemGroup() : base(GroupType.ListItemGroup)
+    public MListItemGroup()
     {
+        GroupType = GroupType.ListItemGroup;
     }
 
     [Parameter] public string? Color { get; set; }

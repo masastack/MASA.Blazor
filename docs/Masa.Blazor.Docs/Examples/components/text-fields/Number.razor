@@ -1,21 +1,31 @@
 ﻿<MContainer>
     <MRow>
-        <MCol Cols="12" Sm="6" Md="4">
-            <MTextField Type="number" TValue="decimal" @bind-Value="basicValue" Outlined Label="Basic"></MTextField>
+        <MCol Cols="12" Sm="6">
+            <MTextField Type="number" @bind-Value="value1" Filled Label="Basic"></MTextField>
         </MCol>
-        <MCol Cols="12" Sm="6" Md="4">
-            <MTextField Type="number" TValue="decimal" @bind-Value="limitInputValue" Solo Label="Limit Input" NumberProps="@(prop => { prop.Min = 1; prop.Max = 10; prop.Step = 0.1m; })">
+        <MCol Cols="12" Sm="6">
+            <MTextField Type="number" @bind-Value="value2" Filled Label="Min 1, Max 10, Step 0.1"
+                        NumberProps="@(prop => { prop.Min = 1; prop.Max = 10; prop.Step = 0.1m; })">
             </MTextField>
         </MCol>
-        <MCol Cols="12" Sm="6" Md="4">
-            <MTextField Type="number" TValue="decimal" Label="Hide Control Button" @bind-Value="closeControlValue" NumberProps="@(prop => { prop.Min = 10; prop.Max = 1000; prop.Step = 10m; prop.HideControl = true; })">
+        <MCol Cols="12" Sm="6">
+            <MTextField Type="number" @bind-Value="value3" Filled
+                        Label="Hide control"
+                        NumberProps="@(prop => { prop.HideControl = true; })">
+            </MTextField>
+        </MCol>
+        <MCol Cols="12" Sm="6">
+            <MTextField Type="number" @bind-Value="value4" Filled
+                        Label="Precision 0.00, Step 0.01"
+                        NumberProps="@(prop => { prop.Precision = 2; prop.Step = 0.01m; })">
             </MTextField>
         </MCol>
     </MRow>
 </MContainer>
 
 @code {
-    decimal basicValue = 1;
-    decimal limitInputValue = 1;
-    decimal closeControlValue = 10;
+    int value1 = 1;
+    double value2 = 1d;
+    decimal value3 = 1m;
+    decimal value4 = 1.1m;
 }

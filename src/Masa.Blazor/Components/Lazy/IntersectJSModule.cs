@@ -2,7 +2,7 @@
 
 public class IntersectJSModule : JSModule
 {
-    public IntersectJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/intersect.js")
+    public IntersectJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/intersect/index.js")
     {
     }
 

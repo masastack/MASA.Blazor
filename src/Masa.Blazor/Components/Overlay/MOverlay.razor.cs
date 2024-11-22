@@ -31,6 +31,8 @@ public partial class MOverlay : IThemeable
 
     [Parameter] public string? ScrimClass { get; set; }
 
+    [Parameter] [MasaApiParameter("v1.8.0")] public string? ScrimStyle { get; set; }
+
     [Parameter] [MasaApiParameter(5)] public int ZIndex { get; set; } = 5;
 
     [Parameter] [MasaApiParameter(true)] public bool Dark { get; set; } = true;
@@ -133,27 +135,30 @@ public partial class MOverlay : IThemeable
         }
     }
 
+    private ScrollStrategyResult? _scrollStrategyResult;
+
     private async Task HideScroll()
     {
-        if (!ScrollStrategyJSModule.Initialized)
+        if (_scrollStrategyResult is null)
         {
-            await ScrollStrategyJSModule.InitializeAsync(Ref, ContentRef,
-                new(ScrollStrategy.Block, Contained));
+            _scrollStrategyResult =
+                await ScrollStrategyJSModule.CreateScrollStrategy(Ref, ContentRef,
+                    new(ScrollStrategy.Block, Contained));
         }
-
-        await ScrollStrategyJSModule.BindAsync();
+        else
+        {
+            _scrollStrategyResult.Bind?.Invoke();
+        }
     }
 
     private async Task ShowScroll()
     {
-        await ScrollStrategyJSModule.UnbindAsync();
+        _scrollStrategyResult?.Unbind?.Invoke();
     }
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        if (ScrollStrategyJSModule.Initialized)
-        {
-            await ShowScroll();
-        }
+        _scrollStrategyResult?.Unbind?.Invoke();
+        _scrollStrategyResult?.Dispose?.Invoke();
     }
 }

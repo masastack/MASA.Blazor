@@ -17,8 +17,9 @@
 
             @if (EditContext is not null)
             {
-                <Masa.Blazor.Components.Form.ObjectGraphDataAnnotationsValidator />
-                <Masa.Blazor.Components.Form.FluentValidationValidator />
+                <Masa.Blazor.Components.Form.ObjectGraphDataAnnotationsValidator @key="EditContext" />
+                @*the @key must be unique, so use the Model in the following code*@
+                <Masa.Blazor.Components.Form.FluentValidationValidator @key="Model" />
             }
         </form>
     </CascadingValue>

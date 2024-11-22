@@ -20,7 +20,7 @@ public class PageStackNavController()
     public event EventHandler<PageStackPopEventArgs>? StackPop;
 
     /// <summary>
-    /// Occurs when a page is replaced by a new page.
+    /// Occurs when a new page replaces a page.
     /// </summary>
     public event EventHandler<PageStackReplaceEventArgs>? StackReplace;
 
@@ -40,12 +40,18 @@ public class PageStackNavController()
     internal event EventHandler<PageStackGoBackToPageEventArgs>? StackGoBackTo;
 
     /// <summary>
+    /// Occurs when the active tab is changed.
+    /// </summary>
+    public event EventHandler<PageStackTabChangedEventArgs>? TabChanged;
+
+    /// <summary>
     /// Push a new page onto the page stack.
     /// </summary>
-    /// <param name="relativeUri"></param>
-    public void Push(string relativeUri)
+    /// <param name="relativeUri">the relative URI of the new page</param>
+    /// <param name="clearStack">determine whether to push new page and remove all old pages</param>
+    public void Push(string relativeUri, bool clearStack = false)
     {
-        ExecuteIfTimeElapsed(() => StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri)));
+        ExecuteIfTimeElapsed(() => StackPush?.Invoke(this, new PageStackPushEventArgs(relativeUri, clearStack)));
     }
 
     /// <summary>
@@ -112,9 +118,10 @@ public class PageStackNavController()
     /// </summary>
     /// <param name="relativeUri"></param>
     /// <param name="state"></param>
-    public void Replace(string relativeUri, object? state = null)
+    /// <param name="clearStack">determine whether to replace the current page and remove all previous pages</param>
+    public void Replace(string relativeUri, object? state = null, bool clearStack = false)
     {
-        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state));
+        StackReplace?.Invoke(this, new PageStackReplaceEventArgs(relativeUri, state, clearStack));
     }
 
     /// <summary>
@@ -126,7 +133,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to a tab.
+    /// Clear the current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     [Obsolete("Use GoBackToTab instead.")]
@@ -136,7 +143,7 @@ public class PageStackNavController()
     }
 
     /// <summary>
-    /// Clear current page stack and navigate to a tab.
+    /// Clear the current page stack and navigate to a tab.
     /// </summary>
     /// <param name="relativeUri"></param>
     public void GoBackToTab(string relativeUri)
@@ -147,6 +154,11 @@ public class PageStackNavController()
     internal void NotifyPageClosed(string relativeUri)
     {
         PageClosed?.Invoke(this, new PageStackPageClosedEventArgs(relativeUri));
+    }
+
+    internal void NotifyTabChanged(string currentTabPath, Regex currentTabPattern)
+    {
+        TabChanged?.Invoke(this, new PageStackTabChangedEventArgs(currentTabPath, currentTabPattern.IsMatch));
     }
 
     private void ExecuteIfTimeElapsed(Action action)

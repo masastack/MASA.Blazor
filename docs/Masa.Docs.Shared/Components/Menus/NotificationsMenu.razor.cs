@@ -16,7 +16,7 @@ public partial class NotificationsMenu
         }
         
         public NotificationItem(string title,
-            string content,
+            Dictionary<string, string> content,
             NotificationType type,
             string href,
             string hrefAlias,
@@ -33,7 +33,7 @@ public partial class NotificationsMenu
 
         public string Title { get; init; }
 
-        public string Content { get; init; }
+        public Dictionary<string, string> Content { get; init; }
 
         public NotificationType Type { get; init; }
 
@@ -56,6 +56,16 @@ public partial class NotificationsMenu
             NotificationType.Release => "release-notes",
             _ => "view-details"
         };
+
+        public string GetContent(string key)
+        {
+            if (Content.TryGetValue(key, out var content))
+            {
+                return content;
+            }
+
+            return Content.First().Value;
+        }
     }
 
     [Inject] private IHttpClientFactory HttpClientFactory { get; set; } = null!;

@@ -27216,13 +27216,8 @@ html.overflow-y-hidden {
     text-decoration: none;
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
     width: auto;
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-}
-.m-pagination__item--active {
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 .m-pagination__navigation {
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     display: inline-flex;
     justify-content: center;
@@ -28583,10 +28578,12 @@ html.overflow-y-hidden {
     z-index: 1;
 }
 
-.m-application--is-ltr .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows):not(.m-slide-group--is-overflowing) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tab:first-child, .m-application--is-ltr .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows):not(.m-slide-group--is-overflowing) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tabs-slider-wrapper + .m-tab {
+.m-application--is-ltr .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tab:first-child,
+.m-application--is-ltr .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tabs-slider-wrapper + .m-tab {
     margin-left: 42px;
 }
-.m-application--is-rtl .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows):not(.m-slide-group--is-overflowing) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tab:first-child, .m-application--is-rtl .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows):not(.m-slide-group--is-overflowing) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tabs-slider-wrapper + .m-tab {
+.m-application--is-rtl .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tab:first-child,
+.m-application--is-rtl .m-tabs--align-with-title > .m-tabs-bar:not(.m-tabs-bar--show-arrows) > .m-slide-group__wrapper > .m-tabs-bar__content > .m-tabs-slider-wrapper + .m-tab {
     margin-right: 42px;
 }
 

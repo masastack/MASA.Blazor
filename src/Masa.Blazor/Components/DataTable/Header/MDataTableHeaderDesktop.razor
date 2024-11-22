@@ -15,6 +15,10 @@
             {
                 @GenSelectAll()
             }
+            else if (header.Value == "data-table-no")
+            {
+                @GenNumber()
+            }
             else
             {
                 @if (!DisableSort && header.Sortable && header.Align == DataTableHeaderAlign.End)
@@ -55,9 +59,11 @@
                     </span>
                 }
 
-                @if (Resizable)
+                @if (Resizable && header.Resizable)
                 {
-                    <div class="@Block.Element("col-resize")"></div>
+                    <div class="@Block.Element("col-resize")"
+                         style="max-height: var(--m-data-table-height)">
+                    </div>
                 }
             }
         </th>

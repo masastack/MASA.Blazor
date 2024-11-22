@@ -5,12 +5,9 @@ namespace Masa.Blazor
 {
     public partial class MSlideGroup : MItemGroup
     {
-        public MSlideGroup() : base(GroupType.SlideGroup)
+        public MSlideGroup()
         {
-        }
-
-        protected MSlideGroup(GroupType groupType) : base(groupType)
-        {
+            GroupType = GroupType.SlideGroup;
         }
 
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
@@ -256,6 +253,14 @@ namespace Masa.Blazor
         public bool HasNext => HasAffixes && (ContentWidth > Math.Abs(ScrollOffset) + WrapperWidth);
 
         public bool HasPrev => HasAffixes && ScrollOffset != 0;
+
+        public override async Task ToggleAsync(StringNumber? key)
+        {
+            await base.ToggleAsync(key);
+            
+            // needs an after render to scroll to the selected item
+            StateHasChanged();
+        }
 
         private async Task HandleOnAffixClick(string direction)
         {

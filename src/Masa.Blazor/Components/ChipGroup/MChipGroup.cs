@@ -2,8 +2,9 @@
 
 public class MChipGroup : MSlideGroup
 {
-    public MChipGroup() : base(GroupType.ChipGroup)
+    public MChipGroup()
     {
+        GroupType = GroupType.ChipGroup;
     }
 
     [Parameter]

@@ -177,4 +177,6 @@ public static class JsInteropConstants
     public static string IsScrollNearBottom => $"{JsInteropFuncNamePrefix}isScrollNearBottom";
 
     public static string MatchesSelector => $"{JsInteropFuncNamePrefix}matchesSelector";
+    
+    public static string prepareSticky => $"{JsInteropFuncNamePrefix}prepareSticky";
 }

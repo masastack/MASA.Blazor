@@ -9,7 +9,8 @@
          Persistent
          NoPersistentAnimation
          NoOutsideClick
-         ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })">
+         ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })"
+         @ref="dialog">
     <MShouldRender Value="@CanRender">
         <CascadingValue Value="this" IsFixed>
             <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"

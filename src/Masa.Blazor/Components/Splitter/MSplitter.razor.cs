@@ -23,7 +23,7 @@ public partial class MSplitter
     private static Block _block = new("m-splitter");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Element _pane = _block.Element("pane");
-    private static ModifierBuilder _barModifierBuilder = _block.Element("bar").CreateModifierBuilder();
+    private ModifierBuilder _barModifierBuilder = _block.Element("bar").CreateModifierBuilder();
 
     private readonly Collection<MSplitterPane> _panes = new();
 

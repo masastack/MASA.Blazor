@@ -18,7 +18,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;height: 100px", style);
+            Assert.AreEqual("height: 100px !important;", style);
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-height: 100px", style);
+            Assert.AreEqual("max-height: 100px !important;", style);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-width: 100px", style);
+            Assert.AreEqual("max-width: 100px !important;", style);
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-height: 100px", style);
+            Assert.AreEqual("min-height: 100px !important;", style);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-width: 100px", style);
+            Assert.AreEqual("min-width: 100px !important;", style);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px;min-width: 100px;width: 100px", style);
+            Assert.AreEqual("height: 100px !important;min-width: 100px !important;width: 100px !important;", style);
         }
 
         [TestMethod]
@@ -183,7 +183,7 @@ namespace Masa.Blazor.Test.List
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;width: 100px", style);
+            Assert.AreEqual("width: 100px !important;", style);
         }
 
         [TestMethod]

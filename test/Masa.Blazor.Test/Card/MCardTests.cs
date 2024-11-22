@@ -45,7 +45,7 @@ namespace Masa.Blazor.Test.Card
                 props.Add(alert => alert.Elevation, 24);
             });
             var classes = cut.Instance.GetClass();
-            var hasElevationClass = classes.Contains("m-card");
+            var hasElevationClass = classes.Contains("elevation-24");
 
             // Assert
             Assert.IsTrue(hasElevationClass);
@@ -78,7 +78,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px", style);
+            Assert.AreEqual("height: 100px;", style);
         }
 
         [TestMethod]
@@ -93,22 +93,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("width: 100px", style);
-        }
-
-        [TestMethod]
-        public void RenderCardWithHover()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Hover, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasHoverClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasHoverClass);
+            Assert.AreEqual("width: 100px;", style);
         }
 
         [TestMethod]
@@ -127,36 +112,6 @@ namespace Masa.Blazor.Test.Card
         }
 
         [TestMethod]
-        public void RenderCardWithLoaderHeight()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.LoaderHeight, 4);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLoaderHeightClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasLoaderHeightClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithLoading()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Loading, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasLoadingClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasLoadingClass);
-        }
-
-        [TestMethod]
         public void RenderWithMaxHeight()
         {
             // Act
@@ -168,7 +123,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-height: 100px", style);
+            Assert.AreEqual("max-height: 100px;", style);
         }
 
         [TestMethod]
@@ -183,7 +138,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-width: 100px", style);
+            Assert.AreEqual("max-width: 100px;", style);
         }
 
         [TestMethod]
@@ -198,7 +153,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-height: 100px", style);
+            Assert.AreEqual("min-height: 100px;", style);
         }
 
         [TestMethod]
@@ -213,7 +168,7 @@ namespace Masa.Blazor.Test.Card
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-width: 100px", style);
+            Assert.AreEqual("min-width: 100px;", style);
         }
 
         [TestMethod]
@@ -229,81 +184,6 @@ namespace Masa.Blazor.Test.Card
 
             // Assert
             Assert.IsTrue(hasOutlinedClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithRaised()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Raised, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRaisedClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasRaisedClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithRipple()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Ripple, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRippleClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasRippleClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithRounded()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Rounded, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRoundedClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasRoundedClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithShaped()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Shaped, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasShapedClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasShapedClass);
-        }
-
-        [TestMethod]
-        public void RenderCardWithTile()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Tile, true);
-            });
-            var classes = cut.Instance.GetClass();
-            var hasTileClass = classes.Contains("m-card");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
         }
 
         [TestMethod]

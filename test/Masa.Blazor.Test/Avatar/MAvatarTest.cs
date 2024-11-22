@@ -62,7 +62,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
+            Assert.AreEqual("height: 48px !important;min-width: 48px !important;width: 48px !important;", style);
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;height: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;height: 48px !important;", style);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;width: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;width: 48px !important;", style);
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-height: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-height: 48px !important;", style);
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-width: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-width: 48px !important;", style);
         }
 
         [TestMethod]
@@ -152,7 +152,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-height: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-height: 48px !important;", style);
         }
 
         [TestMethod]
@@ -167,7 +167,7 @@ namespace Masa.Blazor.Test.Avatar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-width: 48px", style);
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-width: 48px !important;", style);
         }
     }
 }

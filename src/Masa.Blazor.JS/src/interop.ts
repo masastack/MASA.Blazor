@@ -704,8 +704,8 @@ export function getMenuOrDialogMaxZIndex(exclude: Element[] = [], element: Eleme
   const zis = [getZIndex(base)]
 
   const activeElements = [
-    ...document.getElementsByClassName('m-menu__content--active'),
-    ...document.getElementsByClassName('m-dialog__content--active'),
+    ...Array.from(document.getElementsByClassName('m-menu__content--active')),
+    ...Array.from(document.getElementsByClassName('m-dialog__content--active')),
   ]
 
   // Get z-index for all active dialogs
@@ -719,7 +719,7 @@ export function getMenuOrDialogMaxZIndex(exclude: Element[] = [], element: Eleme
 }
 
 export function getMaxZIndex() {
-  return [...document.all].reduce((r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0), 0)
+  return Array.from(document.all).reduce((r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0), 0)
 }
 
 export function getStyle(element, styleProp) {
@@ -1393,27 +1393,37 @@ export function unregisterDragEvent(el: HTMLElement) {
 export function resizableDataTable(dataTable: HTMLElement) {
   const table = dataTable.querySelector('table')
   const row = table.querySelector('.m-data-table-header').getElementsByTagName('tr')[0];
-  const cols = row ? row.children : [];
+  const cols = row ? Array.from(row.children) : [];
   if (!cols) return;
 
-  table.style.overflow = 'hidden';
-
   const tableHeight = table.offsetHeight;
+  const registrations = [];
 
-  for (var i = 0; i < cols.length; i++) {
+  for (var i = 0; i < [...cols].length; i++) {
     const col: any = cols[i];
-    const colResizeDiv: HTMLDivElement = col.querySelector(".m-data-table-header__col-resize");
-    if (!colResizeDiv) continue
-    colResizeDiv.style.height = tableHeight + "px"
+    const colResizeDiv: HTMLDivElement = col.querySelector(
+      ".m-data-table-header__col-resize"
+    );
+    if (!colResizeDiv) {
+      cols.splice(i, 1);
+      continue;
+    }
+    colResizeDiv.style.height = tableHeight + "px";
 
     let minWidth = (col.firstElementChild as HTMLElement).offsetWidth; // width of span
     minWidth = minWidth + 32 + 18 + 1 + 1; // 32:padding 18:sort
-    if(!col.style.minWidth){
+    if (!col.style.minWidth) {
       col.minWidth = minWidth;
       col.style.minWidth = minWidth + "px";
     }
 
-    setListeners(colResizeDiv);
+    registrations.push(setListeners(colResizeDiv));
+  }
+
+  return {
+    un: () => {
+      registrations.forEach(un => un());
+    }
   }
 
   function setListeners(div: HTMLDivElement) {
@@ -1424,9 +1434,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
     let nxtColWidth: number;
     let tableWidth: number;
 
-    div.addEventListener('click', e => e.stopPropagation());
+    const click = (e: MouseEvent) => e.stopPropagation();
 
-    div.addEventListener('mousedown', function (e) {
+    const mousedown = (e: MouseEvent) => {
       curCol = (e.target as HTMLElement).parentElement;
       nxtCol = curCol.nextElementSibling as HTMLElement;
       pageX = e.pageX;
@@ -1438,9 +1448,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
       curColWidth = curCol.offsetWidth - padding;
       if (nxtCol)
         nxtColWidth = nxtCol.offsetWidth - padding;
-    });
+    };
 
-    document.addEventListener("mousemove", function (e) {
+    const mousemove = (e: MouseEvent) => {
       if (curCol) {
         let diffX = e.pageX - pageX;
 
@@ -1489,9 +1499,9 @@ export function resizableDataTable(dataTable: HTMLElement) {
           }
         }
       }
-    });
+    }
 
-    document.addEventListener('mouseup', function (e) {
+    const mouseup = (e: MouseEvent) => {
       if (curCol) {
         for (let i = 0; i < cols.length; i++) {
           const col:any = cols[i];
@@ -1504,7 +1514,19 @@ export function resizableDataTable(dataTable: HTMLElement) {
       nxtColWidth = undefined;
       curColWidth = undefined;
       tableWidth = undefined;
-    });
+    }
+
+    div.addEventListener('click', click);
+    div.addEventListener('mousedown', mousedown);
+    document.addEventListener("mousemove", mousemove);
+    document.addEventListener('mouseup', mouseup);
+
+    return () => {
+      div.removeEventListener('click', click);
+      div.removeEventListener('mousedown', mousedown);
+      document.removeEventListener("mousemove", mousemove);
+      document.removeEventListener('mouseup', mouseup);
+    }
   }
 
   function paddingDiff(col) {
@@ -1654,5 +1676,43 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
     return !!el && el.matches(selector)
   } catch (err) {
     return false;
+  }
+}
+
+export function prepareSticky(containerElOrString: string, root: HTMLElement, offsetTop: number, offsetBottom: number) {
+  let containerRect;
+  if (containerElOrString === "window") {
+    containerRect = { top: 0, bottom: window.innerHeight };
+  } else {
+    containerRect = getDom(containerElOrString).getBoundingClientRect();
+  }
+
+  const rootRect = root.getBoundingClientRect();
+
+  const fixedTop = getFixedTop(rootRect, containerRect, offsetTop);
+  const fixedBottom = getFixedBottom(rootRect, containerRect, offsetBottom);
+
+  return { fixedTop, fixedBottom, width: rootRect.width, height: rootRect.height };
+
+  function getFixedTop(placeholderReact, targetRect, offsetTop) {
+    if (
+      isNumberValid(offsetTop) &&
+      targetRect.top > placeholderReact.top - offsetTop
+    ) {
+      return offsetTop + targetRect.top + "px";
+    }
+    return undefined;
+  }
+
+  function getFixedBottom(placeholderReact, targetRect, offsetBottom) {
+    if (isNumberValid(offsetBottom) && targetRect.bottom < placeholderReact.bottom + offsetBottom) {
+      const targetBottomOffset = window.innerHeight - targetRect.bottom;
+      return offsetBottom + targetBottomOffset + 'px';
+    }
+    return undefined;
+  }
+
+  function isNumberValid(n: number) {
+    return n !== undefined && n !== null;
   }
 }

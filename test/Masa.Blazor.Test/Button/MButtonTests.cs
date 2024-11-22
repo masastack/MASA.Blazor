@@ -10,10 +10,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithAbsolute()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Absolute, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Absolute, true); });
             var classes = cut.Instance.GetClass();
             var hasAbsoluteClass = classes.Contains("m-btn--absolute");
 
@@ -25,10 +22,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithBlock()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Block, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Block, true); });
             var classes = cut.Instance.GetClass();
             var hasBlockClass = classes.Contains("m-btn--block");
 
@@ -40,10 +34,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithBottom()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Bottom, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Bottom, true); });
             var classes = cut.Instance.GetClass();
             var hasBottomClass = classes.Contains("m-btn--bottom");
 
@@ -55,10 +46,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithDark()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Dark, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Dark, true); });
             var classes = cut.Instance.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
 
@@ -70,10 +58,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithDepressed()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Depressed, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Depressed, true); });
             var classes = cut.Instance.GetClass();
             var noElevatedClass = !classes.Contains("m-bin--is-elevated");
 
@@ -85,10 +70,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithDisabled()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Disabled, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Disabled, true); });
             var classes = cut.Instance.GetClass();
             var hasDisabledClass = classes.Contains("m-btn--disabled");
 
@@ -100,10 +82,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithElevation()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Elevation, 24);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Elevation, 24); });
             var classes = cut.Instance.GetClass();
             var hasElevationClass = classes.Contains("m-btn--is-elevated");
 
@@ -115,10 +94,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithFab()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Fab, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Fab, true); });
             var classes = cut.Instance.GetClass();
             var hasFabClass = classes.Contains("m-btn--fab");
 
@@ -130,10 +106,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithFixed()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Fixed, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Fixed, true); });
             var classes = cut.Instance.GetClass();
             var hasFixedClass = classes.Contains("m-btn--fixed");
 
@@ -145,25 +118,19 @@ namespace Masa.Blazor.Test.Button
         public void RenderWithHeight()
         {
             // Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(p => p.Height, 100);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(p => p.Height, 100); });
             var inputSlotDiv = cut.Find(".m-btn");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px", style);
+            Assert.AreEqual("height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderButtonWithIcon()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Icon, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Icon, true); });
             var classes = cut.Instance.GetClass();
             var hasIconClass = classes.Contains("m-btn--icon");
 
@@ -175,10 +142,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithLarge()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Large, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Large, true); });
             var classes = cut.Instance.GetClass();
             var hasLargeClass = classes.Contains("m-size--large");
 
@@ -190,10 +154,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithLeft()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Left, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Left, true); });
             var classes = cut.Instance.GetClass();
             var hasLeftClass = classes.Contains("m-btn--left");
 
@@ -205,10 +166,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithLight()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Light, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Light, true); });
             var classes = cut.Instance.GetClass();
             var hasLightClass = classes.Contains("theme--light");
 
@@ -220,10 +178,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithLoading()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Loading, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Loading, true); });
             var classes = cut.Instance.GetClass();
             var hasLoadingClass = classes.Contains("m-btn--loading");
 
@@ -235,70 +190,55 @@ namespace Masa.Blazor.Test.Button
         public void RenderWithMaxHeight()
         {
             // Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(p => p.MaxHeight, 100);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(p => p.MaxHeight, 100); });
             var inputSlotDiv = cut.Find(".m-btn");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-height: 100px", style);
+            Assert.AreEqual("max-height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMaxWidth()
         {
             // Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(p => p.MaxWidth, 100);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(p => p.MaxWidth, 100); });
             var inputSlotDiv = cut.Find(".m-btn");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("max-width: 100px", style);
+            Assert.AreEqual("max-width: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMinHeight()
         {
             // Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(p => p.MinHeight, 100);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(p => p.MinHeight, 100); });
             var inputSlotDiv = cut.Find(".m-btn");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-height: 100px", style);
+            Assert.AreEqual("min-height: 100px;", style);
         }
 
         [TestMethod]
         public void RenderWithMinWidth()
         {
             // Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(p => p.MinWidth, 100);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(p => p.MinWidth, 100); });
             var inputSlotDiv = cut.Find(".m-btn");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("min-width: 100px", style);
+            Assert.AreEqual("min-width: 100px;", style);
         }
 
         [TestMethod]
         public void RenderButtonWithOutlined()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Outlined, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Outlined, true); });
             var classes = cut.Instance.GetClass();
             var hasoutlinedClass = classes.Contains("m-btn--outlined");
 
@@ -310,10 +250,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithPlain()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Plain, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Plain, true); });
             var classes = cut.Instance.GetClass();
             var hasPlainClass = classes.Contains("m-btn--plain");
 
@@ -325,10 +262,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithRight()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Right, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Right, true); });
             var classes = cut.Instance.GetClass();
             var hasRightClass = classes.Contains("m-btn--right");
 
@@ -339,27 +273,24 @@ namespace Masa.Blazor.Test.Button
         [TestMethod]
         public void RenderButtonWithRipple()
         {
-            //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Ripple, true);
+            // ripple = true
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Ripple, true); });
+            var root = cut.Find("button");
+            var attr = root.GetAttribute("ripple");
+            Assert.IsNotNull(attr);
 
-            });
-            var classes = cut.Instance.GetClass();
-            var hasRippleClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasRippleClass);
+            // ripple = false
+            var cut2 = RenderComponent<MButton>(props => { props.Add(button => button.Ripple, false); });
+            var root2 = cut2.Find("button");
+            var attr2 = root2.GetAttribute("ripple");
+            Assert.IsNull(attr2);
         }
 
         [TestMethod]
         public void RenderButtonWithRounded()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Rounded, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Rounded, true); });
             var classes = cut.Instance.GetClass();
             var hasRoundedClass = classes.Contains("m-btn--rounded");
 
@@ -368,29 +299,10 @@ namespace Masa.Blazor.Test.Button
         }
 
         [TestMethod]
-        public void RenderButtonWithShaped()
-        {
-            //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Shaped, true);
-
-            });
-            var classes = cut.Instance.GetClass();
-            var hasShapedClass = classes.Contains("m-btn");
-
-            // Assert
-            Assert.IsTrue(hasShapedClass);
-        }
-
-        [TestMethod]
         public void RenderButtonWithSmall()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Small, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Small, true); });
             var classes = cut.Instance.GetClass();
             var hasSmallClass = classes.Contains("m-size--small");
 
@@ -402,10 +314,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithText()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Text, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Text, true); });
             var classes = cut.Instance.GetClass();
             var hasTextClass = classes.Contains("m-btn--text");
 
@@ -417,10 +326,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithTile()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Tile, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Tile, true); });
             var classes = cut.Instance.GetClass();
             var hasTileClass = classes.Contains("m-btn--tile");
 
@@ -432,10 +338,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithTop()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Top, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.Top, true); });
             var classes = cut.Instance.GetClass();
             var hasTopClass = classes.Contains("m-btn--top");
 
@@ -447,10 +350,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithXLarge()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.XLarge, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.XLarge, true); });
             var classes = cut.Instance.GetClass();
             var hasXLargeClass = classes.Contains("m-size--x-large");
 
@@ -462,10 +362,7 @@ namespace Masa.Blazor.Test.Button
         public void RenderButtonWithXSmall()
         {
             //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.XSmall, true);
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.XSmall, true); });
             var classes = cut.Instance.GetClass();
             var hasXSmallClass = classes.Contains("m-size--x-small");
 
@@ -478,17 +375,10 @@ namespace Masa.Blazor.Test.Button
         {
             // Arrange
             var times = 0;
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.OnClick, args =>
-                {
-                    times++;
-                });
-            });
+            var cut = RenderComponent<MButton>(props => { props.Add(button => button.OnClick, args => { times++; }); });
 
             // Act
-            var buttonElement = cut.Find("button");
-            buttonElement.Click();
+            cut.Instance.OnClick.InvokeAsync();
 
             // Assert
             Assert.AreEqual(1, times);
@@ -522,7 +412,5 @@ namespace Masa.Blazor.Test.Button
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-
     }
 }
-

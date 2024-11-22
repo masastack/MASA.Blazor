@@ -113,9 +113,9 @@ public partial class MSnackbar : MasaComponentBase
         }
     }
 
-    private static Block _block = new(ROOT_CSS);
+    private static Block _block =  new(ROOT_CSS);
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
+    private ModifierBuilder _wrapperModifierBuilder = _block.Element("wrapper").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {

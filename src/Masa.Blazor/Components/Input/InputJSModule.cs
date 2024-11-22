@@ -9,7 +9,7 @@ public class InputJSModule : JSModule
 
     public bool Initialized { get; private set; }
 
-    public InputJSModule(IJSRuntime js) : base(js,  "./_content/Masa.Blazor/js/input.js")
+    public InputJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/input/index.js")
     {
     }
 

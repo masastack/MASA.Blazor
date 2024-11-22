@@ -95,7 +95,7 @@ related:
 
 <masa-example file="Examples.components.text_fields.Icons"></masa-example>
 
-#### 数字输入框
+#### 数字输入框 {#input-number updated-in=v1.8.0}
 
 仅限数字的输入框。
 

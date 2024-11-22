@@ -17,13 +17,14 @@
 
     private RenderFragment GenAffix(string affix, bool hasAffix, RenderFragment? content, string? icon) => __builder =>
     {
-        var disabled = !hasAffix;
-        var css = GetAffixModifierBuilder(affix).Add(disabled);
-        <div class="@css"
-             @onclick="@(() => HandleOnAffixClick(affix))">
-            @if (ShowArrows != null && hasAffix)
-            {
-                if (content != null)
+        if (HasAffixes)
+        {
+            var disabled = !hasAffix;
+            var css = GetAffixModifierBuilder(affix).Add(disabled);
+
+            <div class="@css"
+                 @onclick="@(() => HandleOnAffixClick(affix))">
+                @if (content != null)
                 {
                     @content
                 }
@@ -32,8 +33,8 @@
                     @*TODO: fade transition*@
                     <MIcon Disabled="@disabled" Icon="@icon"/>
                 }
-            }
-        </div>
+            </div>
+        }
     };
 
     private ModifierBuilder _prevModifierBuilder = _block.Element("prev").CreateModifierBuilder();

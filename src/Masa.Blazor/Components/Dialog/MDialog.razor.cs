@@ -324,7 +324,7 @@ namespace Masa.Blazor
         private static Block _block = new("m-dialog");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
         private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
-        private static ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
+        private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
 
         protected override bool NoClass => true;
         protected override bool NoStyle => true;

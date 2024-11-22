@@ -1,22 +1,29 @@
 {
   "props": {
+    "activator": "Designate a custom activator when the `ActivatorContent` slot is not used. String can be any valid querySelector and Object can be any valid Node.",
     "attach": "Specifies which DOM element that this component should detach to.String can be any valid querySelector and Object can be any valid Node. This will attach to the root [MApp](/blazor/components/apps) component by default.",
     "closeDelay": "Closing master delay time.",
+    "contentAttributes": "Custom HTML attributes for the content element of the dialog.",
     "contentClass": "Applies a custom class to the detached element. This is useful because the content is moved to the beginning of the [MApp](/blazor/components/apps) component (unless the `Attach` prop is provided) and is not targettable by classes passed directly on the component.",
+    "contentStyle": "Applies a custom style to the detached element. This is useful because the content is moved to the beginning of the [MApp](/blazor/components/apps) component (unless the `Attach` prop is provided) and is not targettable by stylees passed directly on the component.",
     "disabled": "Disables the ability to open the component.",
+    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
+    "noPersistentAnimation": "Disables the bounce effect when clicking outside of a `ChildContent`'s content when using the `Persistent` prop.",
     "openDelay": "Open master delay time",
     "openOnClick": "Designates whether the component should activate when its activator is clicked.",
     "openOnFocus": "Designates whether the component should activate when its activator is cursor selected.",
     "openOnHover": "Designates whether component should activate when its activator is hovered.",
     "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
-    "overlayScrimClass": "overlayScrimClass",
+    "overlayScrimClass": "Sets the DOM class on the overlay.",
+    "permanent": "The lazy content would be created in a `[data-permanent]` element.It's useful when you use this component in a layout.",
     "persistent": "Clicking outside of the element will not deactivate it.",
     "scrollable": "When set to true, expects a v-card and a v-card-text component with a designated height. ",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/blazor/styles-and-animations/transitions) or one your own.",
     "value": "Controls whether the component is visible or hidden."
   },
   "contents": {
-    "activatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation."
+    "activatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation.",
+    "outcomeContent": "**NEXT MAJOR**: This parameter overlaps with the ChildContent parameter,but it's not possible to simply set the context for ChildContent,so we need to keep it for now util next major."
   },
   "events": {
     "onOutsideClick": "Event that fires when clicking outside an active dialog."

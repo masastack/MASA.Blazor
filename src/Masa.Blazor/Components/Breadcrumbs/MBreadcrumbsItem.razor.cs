@@ -104,5 +104,5 @@ public partial class MBreadcrumbsItem : MasaComponentBase, IRoutable
     }
 
     private static Block _block = new("m-breadcrumbs__item");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 }

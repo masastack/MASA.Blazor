@@ -14,7 +14,7 @@
             <Transition Name="fade-transition">
                 <IfTransitionElement Value="@Value"
                                      Class="@_scrimModifierBuilder.AddBackgroundColor(ComputedColor).AddClass(ScrimClass).Build()"
-                                     Style="@StyleBuilder.Create().AddBackgroundColor(ComputedColor).Build()">
+                                     Style="@StyleBuilder.Create().AddBackgroundColor(ComputedColor).Add(ScrimStyle).Build()">
                 </IfTransitionElement>
             </Transition>
 

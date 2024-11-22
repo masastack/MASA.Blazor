@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Masa.Blazor.Test.ProgressLinear
 {
     [TestClass]
-    public class MProgressLinearTests : TestBase
+    public class MProgressLinearTests : TestBase<MProgressLinear>
     {
         [TestMethod]
         public void RenderProgressLinearWithAbsolute()
@@ -112,15 +112,14 @@ namespace Masa.Blazor.Test.ProgressLinear
         public void RenderWithHeight()
         {
             // Act
-            var cut = RenderComponent<MProgressLinear>(props =>
+            var root = RenderAndGetRootElement(props =>
             {
                 props.Add(p => p.Height, 4);
             });
-            var inputSlotDiv = cut.Find(".m-progress-linear");
-            var style = inputSlotDiv.GetAttribute("style");
+            var style = root.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height:4px", style);
+            Assert.AreEqual("height: 4px;", style);
         }
 
         [TestMethod]

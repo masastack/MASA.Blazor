@@ -34,6 +34,11 @@
         {
           "name": "PageClosed",
           "type": "EventHandler<PageStackPageClosedEventArgs>"
+        },
+        {
+          "name": "TabChanged",
+          "type": "EventHandler<PageStackTabChangedEventArgs>",
+          "releasedOn": "v1.8.0"
         }
       ],
       "methods": [

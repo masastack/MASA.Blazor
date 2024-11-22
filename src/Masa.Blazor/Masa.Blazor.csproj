@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<Version>0.1.0</Version>
 		<Description>Blazor UI component library based on Material Design</Description>
 		<RepositoryUrl>https://github.com/masastack/MASA.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageProjectUrl>https://blazor.masastack.com</PackageProjectUrl>
+		<PackageProjectUrl>https://docs.masastack.com</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
@@ -37,9 +37,15 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
+	</ItemGroup>
+
 	<ItemGroup>
         <PackageReference Include="BemIt" Version="2.2.0" />
-        <PackageReference Include="DeepCloner" Version="0.10.4" />
+        <PackageReference Include="DeepCloner.Core" Version="0.1.0" />
 		<PackageReference Include="FluentValidation" Version="11.4.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
         <PackageReference Include="OneOf" Version="3.0.223" />

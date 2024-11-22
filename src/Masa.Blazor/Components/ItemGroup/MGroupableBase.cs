@@ -30,28 +30,28 @@ public abstract class MGroupableBase<TGroup> : MasaComponentBase, IGroupable
     }
 
     /// <summary>
-    /// the <see cref="GroupType"/> of the groupable component.
+    /// the <see cref="Mixins.GroupType"/> of the groupable component.
     /// </summary>
-    private readonly GroupType _groupType;
+    public GroupType GroupType { get; protected set; }
 
     protected bool? UserActive;
     private StringNumber? _value;
     private bool _firstRenderAfterBooting;
 
     /// <summary>
-    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="GroupType"/>.
+    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="Mixins.GroupType"/>.
     /// </summary>
-    /// <param name="groupType">the <see cref="GroupType"/> of the groupable component.</param>
+    /// <param name="groupType">the <see cref="Mixins.GroupType"/> of the groupable component.</param>
     protected MGroupableBase(GroupType groupType)
     {
-        _groupType = groupType;
+        GroupType = groupType;
     }
 
     /// <summary>
-    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="GroupType"/>
+    /// Initializes a base component <see cref="MGroupable{TGroup}"/> with the <see cref="Mixins.GroupType"/>
     /// and specifies whether to bootable.
     /// </summary>
-    /// <param name="groupType">the <see cref="GroupType"/> of the groupable component.</param>
+    /// <param name="groupType">the <see cref="Mixins.GroupType"/> of the groupable component.</param>
     /// <param name="bootable">determines whether bootable is enabled or not.</param>
     protected MGroupableBase(GroupType groupType, bool bootable) : this(groupType)
     {
@@ -69,7 +69,7 @@ public abstract class MGroupableBase<TGroup> : MasaComponentBase, IGroupable
     /// </summary>
     protected IAncestorRoutable? RoutableAncestor => HasRoutableAncestor ? (IAncestorRoutable)ItemGroup! : null;
 
-    protected bool Matched => ItemGroup != null && (ItemGroup.GroupType == _groupType);
+    protected bool Matched => ItemGroup != null && (ItemGroup.GroupType == GroupType);
 
     protected bool ValueMatched => Matched && ItemGroup!.InternalValues.Contains(Value);
 

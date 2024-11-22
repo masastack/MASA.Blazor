@@ -64,6 +64,9 @@ public partial class MPagination : MasaComponentBase
         set => SetValue(value);
     }
 
+    [Parameter, MasaApiParameter(2, ReleasedOn = "v1.8.0")]
+    public int Elevation { get; set; } = 2;
+
     private bool _internalMiniVariant;
 
     public bool IsDark
@@ -85,9 +88,9 @@ public partial class MPagination : MasaComponentBase
     }
 
     private static Block _block = new("m-pagination");
-    private static ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _navigationModifierBuilder = _block.Element("navigation").CreateModifierBuilder();
-    private static ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _navigationModifierBuilder = _block.Element("navigation").CreateModifierBuilder();
+    private ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
     public bool PrevDisabled => Value <= 1;
 

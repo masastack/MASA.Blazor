@@ -247,8 +247,6 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     protected double PrependWidth { get; set; }
 
-    private string? NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
-
     protected(StringNumber left, StringNumber right) LabelPosition
     {
         get
@@ -264,42 +262,8 @@ public partial class MTextField<TValue> : MInput<TValue>
         }
     }
 
-    public bool UpButtonEnabled
-    {
-        get
-        {
-            if (Props.Max == null)
-            {
-                return true;
-            }
-
-            if (BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
-            {
-                return value < Props.Max;
-            }
-
-            return false;
-        }
-    }
-
-    public bool DownButtonEnabled
-    {
-        get
-        {
-            if (Props.Min == null)
-            {
-                return true;
-            }
-
-            if (BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
-            {
-                return value > Props.Min;
-            }
-
-            return false;
-        }
-    }
-
+    public bool UpButtonEnabled { get; set; } =  true;
+    public bool DownButtonEnabled { get; set; } = true;
     public MLabel? LabelReference { get; set; }
 
     public ElementReference PrefixElement { get; set; }
@@ -313,7 +277,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     private static Block _block = new("m-text-field");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _numberModifierBuilder = _block.Element("number").CreateModifierBuilder();
+    private ModifierBuilder _numberModifierBuilder = _block.Element("number").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
@@ -383,7 +347,7 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         var localeExists = !string.IsNullOrWhiteSpace(Locale);
         var formatExists = !string.IsNullOrWhiteSpace(Format);
-
+        
         if (localeExists || formatExists)
         {
             if (val is DateTime dt)
@@ -392,6 +356,11 @@ public partial class MTextField<TValue> : MInput<TValue>
                     format: formatExists ? Format : null,
                     provider: localeExists ? CurrentLocale : null);
             }
+        }
+
+        if (IsNumberType && Props.Precision.HasValue && BindConverter.TryConvertToDecimal(val?.ToString(), CultureInfo.InvariantCulture, out var value))
+        {
+            return value.ToString(Props.PrecisionFormat);
         }
 
         return base.Formatter(val);
@@ -537,13 +506,6 @@ public partial class MTextField<TValue> : MInput<TValue>
         {
             await OnBlur.InvokeAsync(args);
         }
-
-        var checkValue = CheckNumberValidate();
-
-        if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
-        {
-            UpdateInternalValue(checkValue, InternalValueChangeType.InternalOperation);
-        }
     }
 
     public override Task HandleOnInputAsync(ChangeEventArgs args)
@@ -556,6 +518,8 @@ public partial class MTextField<TValue> : MInput<TValue>
         return HandleOnInputOrChangeEvent(args, OnChange);
     }
 
+    private bool IsNumberType => Type.Equals("number", StringComparison.OrdinalIgnoreCase);
+
     private async Task HandleOnInputOrChangeEvent(ChangeEventArgs args, EventCallback<TValue> cb,
         [CallerArgumentExpression("cb")] string cbName = "")
     {
@@ -563,7 +527,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
         var succeed = TryConvertTo<TValue>(originValue, out var result);
 
-        var updateOnChange = UpdateOnBlur || UpdateOnChange;
+        var updateOnChange = UpdateOnBlur || UpdateOnChange || IsNumberType;
 
         if ((cbName == nameof(OnInput) && !updateOnChange) || (cbName == nameof(OnChange) && updateOnChange))
         {
@@ -575,6 +539,32 @@ public partial class MTextField<TValue> : MInput<TValue>
         {
             await cb.InvokeAsync(result);
         }
+    }
+
+    protected override void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
+    {
+        base.UpdateInternalValue(value, changeType);
+
+        if (IsNumberType && value is IConvertible convertible)
+        {
+            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
+
+            UpButtonEnabled = !Props.Max.HasValue || decimalValue < Props.Max;
+            DownButtonEnabled = !Props.Min.HasValue || decimalValue > Props.Min;
+        }
+    }
+
+    protected override TValue? ConvertAndSetValueByJSInterop(TValue? val)
+    {
+        if (IsNumberType && Props.Precision.HasValue && val is IConvertible convertible)
+        {
+            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
+            var newValue = Math.Round(decimalValue, Props.Precision.Value);
+            _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
+            return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
+        }
+
+        return base.ConvertAndSetValueByJSInterop(val);
     }
 
     private static bool TryConvertTo<T>(string? value, out T? result)
@@ -596,20 +586,18 @@ public partial class MTextField<TValue> : MInput<TValue>
         if (succeeded)
         {
             _badInput = false;
-            UpdateInternalValue(convertedValue, InternalValueChangeType.Input);
+            var validValue = GetValidValue(convertedValue);
+            UpdateInternalValue(validValue, InternalValueChangeType.Input);
         }
         else
         {
             _badInput = true;
             UpdateInternalValue(default, InternalValueChangeType.Input);
 
-            if (Type.ToLower() == "number")
+            if (IsNumberType)
             {
                 // reset the value of input element if failed to convert
-                if (!string.IsNullOrEmpty(originValue))
-                {
-                    _ = SetValueByJsInterop("");
-                }
+                _ = SetValueByJsInterop(0.ToString(Props.PrecisionFormat));
             }
         }
 
@@ -621,20 +609,24 @@ public partial class MTextField<TValue> : MInput<TValue>
         }
     }
 
-    private TValue CheckNumberValidate()
+    private TValue GetValidValue(TValue val)
     {
-        if (Type != "number" || !BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
-            return InternalValue;
+        if (IsNumberType && val is IConvertible convertible)
+        {
+            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
 
-        if (Props.Min != null && value < Props.Min &&
-            BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out var returnValue))
-            return returnValue;
+            if (Props.Min.HasValue && decimalValue < Props.Min)
+            {
+                return (TValue)Convert.ChangeType(Props.Min, typeof(TValue), CultureInfo.InvariantCulture);
+            }
 
-        if (Props.Max != null && value > Props.Max &&
-            BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
-            return returnValue;
+            if (Props.Max.HasValue && decimalValue > Props.Max)
+            {
+                return (TValue)Convert.ChangeType(Props.Max, typeof(TValue), CultureInfo.InvariantCulture);
+            }
+        }
 
-        return InternalValue;
+        return val;
     }
 
     public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
@@ -645,25 +637,27 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
     {
-        if (UpButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out decimal value))
+        if (UpButtonEnabled)
         {
-            if (Props.Min != null && value < Props.Min)
+            if (InternalValue is IConvertible convertible)
             {
-                value = Props.Min.Value;
-            }
+                var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
 
-            value += Props.Step;
+                if (Props.Min != null && decimalValue < Props.Min)
+                {
+                    decimalValue = Props.Min.Value;
+                }
 
-            if (Props.Max != null && value > Props.Max)
-            {
-                value = Props.Max.Value;
-            }
+                decimalValue += Props.Step;
 
-            if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
-            {
-                UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
+                if (Props.Max != null && decimalValue > Props.Max)
+                {
+                    decimalValue = Props.Max.Value;
+                }
 
-                await OnChange.InvokeAsync(internalValue);
+                var newValue = (TValue)Convert.ChangeType(decimalValue, typeof(TValue), CultureInfo.InvariantCulture);
+                UpdateInternalValue(newValue, InternalValueChangeType.InternalOperation);
+                await OnChange.InvokeAsync(newValue);
             }
         }
 
@@ -672,25 +666,27 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public async Task HandleOnNumberDownClickAsync(MouseEventArgs args)
     {
-        if (DownButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
+        if (DownButtonEnabled)
         {
-            if (Props.Max != null && value > Props.Max)
+            if (InternalValue is IConvertible convertible)
             {
-                value = Props.Max.Value;
-            }
+                var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
 
-            value -= Props.Step;
+                if (Props.Max != null && decimalValue > Props.Max)
+                {
+                    decimalValue = Props.Max.Value;
+                }
 
-            if (Props.Min != null && value < Props.Min)
-            {
-                value = Props.Min.Value;
-            }
+                decimalValue -= Props.Step;
 
-            if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
-            {
-                UpdateInternalValue(internalValue, InternalValueChangeType.InternalOperation);
+                if (Props.Min != null && decimalValue < Props.Min)
+                {
+                    decimalValue = Props.Min.Value;
+                }
 
-                await OnChange.InvokeAsync(internalValue);
+                var newValue = (TValue)Convert.ChangeType(decimalValue, typeof(TValue), CultureInfo.InvariantCulture);
+                UpdateInternalValue(newValue, InternalValueChangeType.InternalOperation);
+                await OnChange.InvokeAsync(newValue);
             }
         }
 

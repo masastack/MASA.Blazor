@@ -5,8 +5,9 @@ namespace Masa.Blazor;
 
 public partial class MWindow : MItemGroup
 {
-    public MWindow() : base(GroupType.Window)
+    public MWindow()
     {
+        GroupType = GroupType.Window;
         Mandatory = true;
     }
 
@@ -96,7 +97,7 @@ public partial class MWindow : MItemGroup
 
     private static Block _block = new("m-window");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private static ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
+    private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
