@@ -73,6 +73,13 @@ namespace Masa.Blazor
         /// </summary>
         [Parameter] [MasaApiParameter(Ignored = true)] public bool NoOutsideClick { get; set; }
 
+        /// <summary>
+        /// Disable to focus on the dialog when it's opened.
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        public bool DisableAutoFocus { get; set; }
+
         private readonly List<IDependent> _dependents = new();
 
         private bool _attached;
@@ -127,15 +134,18 @@ namespace Masa.Blazor
             {
                 ZIndex = await GetActiveZIndex(true);
 
-                NextTick(async () =>
+                if (!DisableAutoFocus)
                 {
-                    // TODO: previousActiveElement
-                    var contains = await Js.InvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, DialogRef);
-                    if (!contains)
+                    NextTick(async () =>
                     {
-                        await Js.InvokeVoidAsync(JsInteropConstants.Focus, DialogRef);
-                    }
-                });
+                        // TODO: previousActiveElement
+                        var contains = await Js.InvokeAsync<bool>(JsInteropConstants.ContainsActiveElement, DialogRef);
+                        if (!contains)
+                        {
+                            await Js.InvokeVoidAsync(JsInteropConstants.Focus, DialogRef);
+                        }
+                    });
+                }
             }
 
             await base.WhenIsActiveUpdating(value);
