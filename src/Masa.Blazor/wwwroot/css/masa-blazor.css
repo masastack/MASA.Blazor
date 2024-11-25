@@ -18330,7 +18330,7 @@ html.overflow-y-hidden {
     .m-btn-toggle .theme--light.m-btn:focus::before {
         opacity: 0.24;
     }
-    .m-btn-toggle .theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before {
+    .m-btn-toggle .theme--light.m-btn--active:hover::before, .m-btn-toggle .theme--light.m-btn--active::before {
         opacity: 0.18;
     }
     .m-btn-toggle .theme--light.m-btn--active:focus::before {
@@ -18342,7 +18342,7 @@ html.overflow-y-hidden {
     .m-btn-toggle .theme--dark.m-btn:focus::before {
         opacity: 0.24;
     }
-    .m-btn-toggle .theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
+    .m-btn-toggle .theme--dark.m-btn--active:hover::before, .m-btn-toggle .theme--dark.m-btn--active::before {
         opacity: 0.18;
     }
     .m-btn-toggle .theme--dark.m-btn--active:focus::before {
