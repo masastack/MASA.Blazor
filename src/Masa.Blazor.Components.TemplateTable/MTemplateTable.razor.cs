@@ -65,6 +65,9 @@ public partial class MTemplateTable
             }
             activeViewId
             defaultViewId
+            pagination {
+              pageSizeOptions
+            }
           }
         }
         """;
@@ -149,8 +152,7 @@ public partial class MTemplateTable
             }
             catch (Exception e)
             {
-                var exp = new Exception("Failed to get items.", e);
-                await PopupService.EnqueueSnackbarAsync(exp);
+                await PopupService.EnqueueSnackbarAsync(e);
             }
             finally
             {
