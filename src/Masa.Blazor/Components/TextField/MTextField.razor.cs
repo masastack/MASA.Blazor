@@ -545,20 +545,32 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         base.UpdateInternalValue(value, changeType);
 
-        if (IsNumberType && value is IConvertible convertible)
+        if (IsNumeric(value, out var numeric))
         {
-            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
+            var decimalValue = Convert.ToDecimal(numeric, CultureInfo.InvariantCulture);
 
             UpButtonEnabled = !Props.Max.HasValue || decimalValue < Props.Max;
             DownButtonEnabled = !Props.Min.HasValue || decimalValue > Props.Min;
         }
     }
 
+    private bool IsNumeric(TValue? value, out IConvertible numeric)
+    {
+        numeric = default;
+        if (IsNumberType && value is not string && value is IConvertible convertible)
+        {
+            numeric = convertible;
+            return true;
+        }
+
+        return false;
+    }
+
     protected override TValue? ConvertAndSetValueByJSInterop(TValue? val)
     {
-        if (IsNumberType && Props.Precision.HasValue && val is IConvertible convertible)
+        if (Props.Precision.HasValue && IsNumeric(val, out var numeric))
         {
-            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
+            var decimalValue = Convert.ToDecimal(numeric, CultureInfo.InvariantCulture);
             var newValue = Math.Round(decimalValue, Props.Precision.Value);
             _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
             return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
@@ -611,9 +623,9 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     private TValue GetValidValue(TValue val)
     {
-        if (IsNumberType && val is IConvertible convertible)
+        if (IsNumeric(val, out var numeric))
         {
-            var decimalValue = Convert.ToDecimal(convertible, CultureInfo.InvariantCulture);
+            var decimalValue = Convert.ToDecimal(numeric, CultureInfo.InvariantCulture);
 
             if (Props.Min.HasValue && decimalValue < Props.Min)
             {
