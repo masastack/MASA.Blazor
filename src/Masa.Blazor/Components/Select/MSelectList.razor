@@ -57,6 +57,7 @@
         var computedItems = HideSelected ? Items.Where(u => !SelectedItems.Contains(u)).ToList() : Items;
         var isActive = HasItem(item);
         var isDisabled = GetDisabled(item);
+        var highlight = computedItems.IndexOf(item) == SelectedIndex;
 
         <MListItem @onmousedown:preventDefault
                    @key="@item"
@@ -64,7 +65,7 @@
                    ActiveClass="@TileActiveClass"
                    Ripple
                    IsActive="@isActive"
-                   Highlighted="@(computedItems.IndexOf(item) == SelectedIndex)"
+                   Highlighted="@highlight"
                    OnClick="@OnClick"
                    role="option"
                    aria-selected="@isActive.ToString()">
@@ -103,5 +104,4 @@
             await OnSelect.InvokeAsync(item);
         }
     };
-    
 }
