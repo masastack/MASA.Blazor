@@ -1,3 +1,4 @@
+@using System.Globalization
 @inject IPopupService PopupService
 
 <div class="masa-table__toolbar">
@@ -163,7 +164,32 @@
     </MRow>
 </div>
 
-<MDialog @bind-Value="_configDialog" MaxWidth="400">
+<PModal @bind-Value="_configDialog"
+        Title="表格配置"
+        MaxWidth="400"
+        Persistent>
+    <MDivider Class="mb-4" Left>
+        分页设置
+    </MDivider>
+    <MSelect Value="@PageSizeOptions"
+             ValueChanged="@HandleOnPageSizeOptionsChange"
+             TItem="int"
+             TItemValue="int"
+             TValue="List<int>"
+             Items="@_itemsPerPageOptions"
+             ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
+             ItemValue="u => u"
+             Dense
+             Filled
+             Label="每页数量"
+             Multiple
+             HideDetails="@("auto")"
+             Messages="@_messages"
+             MenuProps="m => m.OffsetY = true">
+    </MSelect>
+    <MDivider Class="mt-4" Left>
+        列设置
+    </MDivider>
     <MList Dense Class="masa-table__menu-list">
         <MSortable Items="@Columns"
                    ItemKey="@(column => column.Id)"
@@ -206,7 +232,7 @@
             </MListItem>
         </MSortable>
     </MList>
-</MDialog>
+</PModal>
 
 <MDialog @bind-Value="_filterDialog"
          MaxWidth="400">

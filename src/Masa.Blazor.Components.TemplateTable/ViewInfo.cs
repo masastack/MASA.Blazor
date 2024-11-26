@@ -8,9 +8,9 @@ public class ViewInfo
 
     public ICollection<IReadOnlyDictionary<string, JsonElement>>? Rows { get; set; }
 
-    public int PageIndex { get; set; }
+    public int PageIndex { get; set; } = 1;
 
-    public int PageSize { get; set; }
+    public int PageSize { get; set; } = 5;
 
     public bool HasPreviousPage { get; set; }
 

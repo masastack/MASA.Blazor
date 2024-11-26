@@ -48,12 +48,19 @@ public partial class Toolbar
 
     [Parameter] public bool HasSort { get; set; }
 
+    [Parameter] public List<int> PageSizeOptions { get; set; } = [];
+
+    [Parameter] public EventCallback<List<int>> PageSizeOptionsChanged { get; set; }
+
     private bool _configDialog;
     private bool _filterDialog;
     private string? _newViewName;
     private bool _renameMenu;
 
     private ViewInfo? _activeViewInfo;
+
+    private List<int> _itemsPerPage = [5, 10, 20, 50];
+    private IList<int> _itemsPerPageOptions = [5, 10, 20, 50];
 
     private bool IsDefaultView => ActiveView == DefaultViewId;
 
@@ -114,5 +121,20 @@ public partial class Toolbar
     private Task HandleOnDelete()
     {
         return OnViewDelete.InvokeAsync(_activeViewInfo!.Value);
+    }
+
+    private List<string> _messages = [];
+
+    private void HandleOnPageSizeOptionsChange(List<int> val)
+    {
+        if (val.Count == 0)
+        {
+            _messages.Add("At least one option is required.");
+            return;
+        }
+
+        _messages.Clear();
+
+        PageSizeOptionsChanged.InvokeAsync(val);
     }
 }

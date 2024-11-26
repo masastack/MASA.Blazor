@@ -1,0 +1,64 @@
+﻿@using OneOf
+
+<MDataFooter Pagination="@_pagination"
+             Options="@_options"
+             ItemsPerPageOptions="@_itemsPerPageOptions"
+             ShowItemsPerPageOptionsEvenIfOne
+             OnOptionsUpdate="@HandleOnOptionsUpdate"
+></MDataFooter>
+
+@code {
+    [Parameter] public int PageIndex { get; set; }
+
+    [Parameter] public int PageStart { get; set; }
+
+    [Parameter] public long PageStop { get; set; }
+
+    [Parameter] public int ItemsPerPage { get; set; }
+
+    [Parameter] public long ItemsLength { get; set; }
+
+    [Parameter] public List<int> PageSizeOptions { get; set; } = [];
+
+    [Parameter] public EventCallback<(int PageIndex, int PageSize)> OnPaginationUpdate { get; set; }
+
+    private static readonly List<OneOf<int, DataItemsPerPageOption>> DefaultPageSizeOptions = [5, 10, 20, 50];
+
+    private DataPagination _pagination = new();
+    private DataOptions _options = new();
+
+    private List<OneOf<int, DataItemsPerPageOption>> _itemsPerPageOptions = DefaultPageSizeOptions;
+
+    private List<int>? _prevPageSizeOptions;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevPageSizeOptions != PageSizeOptions)
+        {
+            PageSizeOptions.Sort();
+
+            _prevPageSizeOptions = PageSizeOptions;
+            _itemsPerPageOptions = PageSizeOptions.Count == 0
+                ? DefaultPageSizeOptions
+                : PageSizeOptions.Select(u => (OneOf<int, DataItemsPerPageOption>)u).ToList();
+        }
+
+        _pagination.Page = PageIndex;
+        _pagination.PageStart = PageStart;
+        _pagination.PageStop = (int)PageStop;
+        _pagination.ItemsPerPage = ItemsPerPage;
+        _pagination.ItemsLength = (int)ItemsLength;
+
+        _options.Page = PageIndex;
+        _options.ItemsPerPage = ItemsPerPage;
+    }
+
+    private void HandleOnOptionsUpdate(Action<DataOptions> optionsAction)
+    {
+        optionsAction.Invoke(_options);
+        OnPaginationUpdate.InvokeAsync((_options.Page, _options.ItemsPerPage));
+    }
+
+}

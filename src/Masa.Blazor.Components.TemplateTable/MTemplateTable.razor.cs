@@ -147,6 +147,11 @@ public partial class MTemplateTable
 
                 _sheet.UpdateActiveViewItems(_items, _hasPreviousPage, _hasNextPage);
             }
+            catch (Exception e)
+            {
+                var exp = new Exception("Failed to get items.", e);
+                await PopupService.EnqueueSnackbarAsync(exp);
+            }
             finally
             {
                 _loading = false;
@@ -221,16 +226,10 @@ public partial class MTemplateTable
         };
     }
 
-    private async Task HandleOnNextPage()
+    private async Task HandleOnPaginationUpdateAsync((int PageIndex, int PageSize) data)
     {
-        _sheet.ActiveView.PageIndex++;
-
-        await RefreshItemsAsync(GetItemsProviderRequest());
-    }
-
-    private async Task HandleOnPreviousPage()
-    {
-        _sheet.ActiveView.PageIndex--;
+        _sheet.ActiveView.PageIndex = data.PageIndex;
+        _sheet.ActiveView.PageSize = data.PageSize;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 }

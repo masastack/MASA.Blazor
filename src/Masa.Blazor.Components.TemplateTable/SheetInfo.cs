@@ -25,6 +25,11 @@ public class SheetInfo
     /// </summary>
     public List<ViewInfo> Views { get; set; } = [];
 
+    /// <summary>
+    /// The options for pagination.
+    /// </summary>
+    public Pagination Pagination { get; set; } = new();
+
     [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView?.Columns ?? [];
 
     [JsonIgnore]
@@ -45,6 +50,7 @@ public class SheetInfo
         {
             Columns = columnInfos,
             Views = sheet.Views.Select(v => ViewInfo.From(v, columnInfos)).ToList(),
+            Pagination = sheet.Pagination,
             ActiveViewId = sheet.ActiveViewId,
             DefaultViewId = sheet.DefaultViewId
         };

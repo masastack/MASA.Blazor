@@ -1,4 +1,4 @@
-﻿@using Force.DeepCloner
+﻿@using DeepCloner.Core
 @using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.ColumnDialogs
 @using Masa.Blazor.Components.TemplateTable.FilterDialogs
@@ -7,6 +7,7 @@
 @using Masa.Blazor.Components.TemplateTable.Toolbars
 @using Masa.Blazor.Components.TemplateTable.SortDialogs
 @using Masa.Blazor.Components.TemplateTable.DetailDialogs
+@using Masa.Blazor.Components.TemplateTable.Paginations
 @namespace Masa.Blazor
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
@@ -19,6 +20,8 @@
              ColumnOrderChanged="@HandleOnColumnOrderChanged"
              RowHeight="_rowHeight"
              RowHeightChanged="@HandleOnRowHeightChanged"
+             PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
+             PageSizeOptionsChanged="@HandleOnPageSizeOptionsChanged"
              Views="_sheet.Views"
              Columns="_sheet.Columns"
              HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
@@ -57,23 +60,20 @@
             OnAction2="@OnAction2"
             @ref="_viewer">
     </Viewer>
+
     @if (_sheet.ActiveView is not null)
     {
-        <div class="d-flex align-center">
-            <div>
-                @{
-                    var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize + 1;
-                    var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
-                }
+        var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize;
+        var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
 
-                @pageStart - @pageStop of @_totalCount
-            </div>
-
-            <div>
-                <MButton IconName="$prev" Disabled="@(!_hasPreviousPage)" OnClick="@HandleOnPreviousPage"></MButton>
-                <MButton IconName="$next" Disabled="@(!_hasNextPage)" OnClick="@HandleOnNextPage"></MButton>
-            </div>
-        </div>
+        <Pagination PageIndex="@_sheet.ActiveView.PageIndex"
+                    PageStart="@pageStart"
+                    PageStop="@pageStop"
+                    ItemsPerPage="@_sheet.ActiveView.PageSize"
+                    ItemsLength="@_totalCount"
+                    PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
+                    OnPaginationUpdate="@HandleOnPaginationUpdateAsync">
+        </Pagination>
     }
 
     <ColumnDialog @ref="_columnEditDialog"
@@ -246,6 +246,25 @@
         _rowHeight = rowHeight;
         _sheet.UpdateActiveViewRowHeight(rowHeight);
     }
+    
+    private async Task HandleOnPageSizeOptionsChanged(List<int> pageSizeOptions)
+    {
+        _sheet.Pagination.PageSizeOptions = pageSizeOptions;
+        if (pageSizeOptions.Count == 0)
+        {
+            return;
+        }
+
+        pageSizeOptions.Sort();
+
+        if (!pageSizeOptions.Contains(_sheet.ActiveView.PageSize))
+        {
+            _sheet.ActiveView.PageIndex = 1;
+            _sheet.ActiveView.PageSize = pageSizeOptions.First();
+
+            await RefreshItemsAsync(GetItemsProviderRequest());
+        }
+    }
 
     private void ToggleColumn(string columnId)
     {
@@ -328,6 +347,7 @@
         {
             Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(Column (u) => u),
             Views = _sheet.Views.Select(View (u) => u.ToView()),
+            Pagination = _sheet.Pagination,
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,
         };
