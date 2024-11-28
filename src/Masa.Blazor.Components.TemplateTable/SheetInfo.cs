@@ -5,6 +5,8 @@ namespace Masa.Blazor.Components.TemplateTable;
 // TODO: rename this
 public class SheetInfo
 {
+    private Guid _activeViewId;
+
     /// <summary>
     /// All columns without state.
     /// </summary>
@@ -18,7 +20,21 @@ public class SheetInfo
     /// <summary>
     /// The identifier of the active view.
     /// </summary>
-    public Guid ActiveViewId { get; set; }
+    public Guid ActiveViewId
+    {
+        get => _activeViewId;
+        set
+        {
+            _activeViewId = value;
+            
+            // Add the Actions column if it doesn't exist for rendering action column. 
+            var view = Views.FirstOrDefault(v => v.Value.Id == value);
+            if (view is not null && view.Columns.All(c => c.ColumnId != Preset.ActionsColumnId))
+            {
+                view.Columns.Add(Preset.CreateActionsViewColumn());
+            }
+        }
+    }
 
     /// <summary>
     /// All views of the sheet.

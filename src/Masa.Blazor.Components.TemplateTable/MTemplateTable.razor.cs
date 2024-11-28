@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices.Marshalling;
+﻿using Masa.Blazor.Attributes;
 using Masa.Blazor.Components.TemplateTable.FilterDialogs;
 
 namespace Masa.Blazor;
@@ -13,15 +13,9 @@ public partial class MTemplateTable
 
     [Parameter] public StringNumber? Height { get; set; }
 
-    [Parameter] public bool Detail { get; set; }
+    [Parameter] [MasaApiParameter(true)] public bool Detail { get; set; } = true;
 
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnUpdate { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnDelete { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction1 { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction2 { get; set; }
+    [Parameter] public RenderFragment? ActionsContent { get; set; }
 
     private const string SheetQuery =
         """
@@ -81,9 +75,6 @@ public partial class MTemplateTable
     private bool _hasNextPage;
     private bool _loading;
 
-    private bool HasActions => OnUpdate.HasDelegate || OnDelete.HasDelegate ||
-                               OnAction1.HasDelegate || OnAction2.HasDelegate;
-
     protected override async Task OnParametersSetAsync()
     {
         // base.OnParametersSetAsync();
@@ -104,11 +95,7 @@ public partial class MTemplateTable
         {
             var result = await SheetProvider(request);
             _sheet = SheetInfo.From(result.Sheet);
-        }
-
-        if (HasActions && _sheet.Columns.All(u => u.Id != Preset.ActionsColumnId))
-        {
-            _sheet.Columns.Add(CreateActionsColumn());
+            _sheet.Columns.Add(Preset.CreateActionsColumn());
         }
 
         UpdateStateOfActiveView();
@@ -186,25 +173,9 @@ public partial class MTemplateTable
 
             if (_sheet.ActiveViewColumns.All(u => u.ColumnId != Preset.ActionsColumnId))
             {
-                _sheet.ActiveViewColumns.Add(CreateActionsViewColumn());
+                _sheet.ActiveViewColumns.Add(Preset.CreateActionsViewColumn());
             }
         }
-    }
-
-    private static ColumnInfo CreateActionsColumn()
-    {
-        return new ColumnInfo()
-        {
-            Id = Preset.ActionsColumnId,
-            Name = "Actions",
-            Type = ColumnType.Actions
-        };
-    }
-
-    private static ViewColumnInfo CreateActionsViewColumn()
-    {
-        var column = CreateActionsColumn();
-        return ViewColumnInfo.From(Preset.ActionsColumnId, false, column);
     }
 
     private SheetProviderRequest GetSheetProviderRequest()

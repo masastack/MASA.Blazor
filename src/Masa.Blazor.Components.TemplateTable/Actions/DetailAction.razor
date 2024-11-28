@@ -1,0 +1,30 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.Actions
+
+<MTooltip Top Disabled="@(Tooltip is null)">
+    <ActivatorContent>
+        <MButton IconName="@Icon"
+                 Small
+                 OnClick="@HandleOnClick"
+                 @attributes="@context.Attrs">
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        @Tooltip
+    </ChildContent>
+</MTooltip>
+
+@code {
+
+    [CascadingParameter(Name = "DetailAction")]
+    private Action? Data { get; set; }
+
+    [Parameter] public string? Tooltip { get; set; } = "Details";
+
+    [Parameter] public string? Icon { get; set; } = "mdi-information-outline";
+
+    private void HandleOnClick()
+    {
+        Data?.Invoke();
+    }
+
+}

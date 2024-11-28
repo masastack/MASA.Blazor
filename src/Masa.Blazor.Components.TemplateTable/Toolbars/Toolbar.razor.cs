@@ -41,6 +41,8 @@ public partial class Toolbar
     [Parameter] public EventCallback OnSearch { get; set; }
 
     [Parameter] public EventCallback OnSave { get; set; }
+    
+    [Parameter] public bool HasActions { get; set; }
 
     [Parameter] public bool HasCustom { get; set; }
 

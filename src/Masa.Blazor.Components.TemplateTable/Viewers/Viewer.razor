@@ -1,9 +1,8 @@
 ﻿@using System.Globalization
 @using BemIt
-@using HotChocolate.Utilities
 @using Masa.Blazor.Components.TemplateTable.DetailDialogs
 @using Microsoft.AspNetCore.Components.Web.Virtualization
-
+@using Masa.Blazor.Components.TemplateTable.Actions
 
 <MSimpleTable FixedHeader
               Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
@@ -26,10 +25,10 @@
                     var type = template.Column.Type.ToString().ToLowerInvariant();
                     var isActionsType = template.Column.Type == ColumnType.Actions;
                     var sortableHandleCss = isActionsType ? "ignore-elements" : "handle";
-                    var hidden = HiddenColumnIds.Contains(template.ColumnId);
+                    var hidden = isActionsType ? !HasActions : HiddenColumnIds.Contains(template.ColumnId);
                     _headerColumnStyleBuilder.Clear();
                     _headerColumnStyleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
-                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", ActionsCount.ToString(), isActionsType);
+                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), isActionsType);
                     _headerColumnStyleBuilder.AddIf("display", "none", hidden);
                 }
 
@@ -51,6 +50,7 @@
         </MSortableProvider>
     </tr>
     </thead>
+
     @if (Loading)
     {
         <thead>
@@ -62,6 +62,7 @@
         </tr>
         </thead>
     }
+
     <tbody>
     <Virtualize Items="Rows"
                 Context="item"
@@ -71,7 +72,8 @@
             @foreach (var template in _orderedViewColumns)
             {
                 var type = template.Column.Type.ToString().ToLowerInvariant();
-                var hidden = HiddenColumnIds.Contains(template.Column.Id);
+                var isAction = template.Column.Type == ColumnType.Actions;
+                var hidden = isAction ? !HasActions : HiddenColumnIds.Contains(template.Column.Id);
 
                 <td class="@type"
                     style="@(hidden ? "display:none" : "")"
@@ -353,49 +355,13 @@
 
     private RenderFragment GenActionsCell(object? columnConfig, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
     {
-        var config = columnConfig as ActionsConfig ?? new ActionsConfig();
+        Action? detailAction = () => OnDetail.InvokeAsync(item);
 
-        @if (OnDelete.HasDelegate)
-        {
-            List<DetailItem> detailItems = [];
-
-            foreach (var viewColumn in _orderedViewColumns)
-            {
-                var key = item.Keys.FirstOrDefault(u => string.Equals(u, viewColumn.ColumnId, StringComparison.OrdinalIgnoreCase));
-                if (key is null || HiddenColumnIds.Contains(viewColumn.ColumnId))
-                {
-                    continue;
-                }
-
-                detailItems.Add(new DetailItem(viewColumn.Column, item[key]));
-            }
-
-            @GenAction(OnDetail, "mdi-magnify", "Details", detailItems)
-        }
-
-        @GenAction(OnUpdate, config.UpdateIcon, config.UpdateTooltip, item)
-        @GenAction(OnDelete, config.DeleteIcon, config.DeleteTooltip, item)
-        @GenAction(OnAction1, config.Action1Icon, config.Action1Tooltip, item)
-        @GenAction(OnAction2, config.Action2Icon, config.Action2Tooltip, item)
-    };
-
-    private RenderFragment GenAction<TEventArgs>(EventCallback<TEventArgs> callback, string? icon, string? tooltip, TEventArgs item) => __builder =>
-    {
-        @if (callback.HasDelegate)
-        {
-            <MTooltip Top Disabled="@(tooltip is null)">
-                <ActivatorContent>
-                    <MButton IconName="@icon"
-                             Small
-                             OnClick="@(() => callback.InvokeAsync(item))"
-                             @attributes="@context.Attrs">
-                    </MButton>
-                </ActivatorContent>
-                <ChildContent>
-                    @tooltip
-                </ChildContent>
-            </MTooltip>
-        }
+        <CascadingValue Value="item" Name="RowData">
+            <CascadingValue Value="detailAction" Name="DetailAction">
+                @(ActionsContent ?? (Detail ? (RenderFragment)(@<DetailAction/>) : default))
+            </CascadingValue>
+        </CascadingValue>
     };
 
 }

@@ -1,5 +1,7 @@
 ﻿using BemIt;
 using Masa.Blazor.Components.TemplateTable.DetailDialogs;
+using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Masa.Blazor.Components.TemplateTable.Viewers;
 
@@ -43,6 +45,10 @@ public partial class Viewer : IAsyncDisposable
     [Parameter]
     public StringNumber? Height { get; set; }
 
+    [Parameter] public bool HasActions { get; set; }
+
+    [Parameter] public bool Detail { get; set; }
+
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
@@ -51,7 +57,7 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public EventCallback<List<string>> OnImagePreview { get; set; }
 
-    [Parameter] public EventCallback<List<DetailItem>> OnDetail { get; set; }
+    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnDetail { get; set; }
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnUpdate { get; set; }
 
@@ -60,6 +66,8 @@ public partial class Viewer : IAsyncDisposable
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction1 { get; set; }
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction2 { get; set; }
+
+    [Parameter] public RenderFragment? ActionsContent { get; set; }
 
     // ReSharper disable once StaticMemberInGenericType
     private static Block _block = new("masa-table-viewer");
@@ -75,14 +83,11 @@ public partial class Viewer : IAsyncDisposable
     private HashSet<string>? _prevHiddenColumnIds;
     private List<string>? _prevColumnOrder;
 
-    private HashSet<EventCallback<IReadOnlyDictionary<string, JsonElement>>> _actions = [];
     private StyleBuilder _headerColumnStyleBuilder = new();
     private IJSObjectReference? _tableJSObjectReference;
     private DotNetObjectReference<Viewer>? _dotNetObjectReference;
 
-    private int ActionsCount => _actions.Count(u => u.HasDelegate);
-
-    private bool HasActions => ActionsCount > 0;
+    private int _actionsCount = 0;
 
     private int RowHeightValue => RowHeight switch
     {
@@ -98,9 +103,21 @@ public partial class Viewer : IAsyncDisposable
     {
         base.OnInitialized();
 
-        _actions = [OnUpdate, OnDelete, OnAction1, OnAction2];
+        InitActionsCount();
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
+
+    private void InitActionsCount()
+    {
+        if (ActionsContent is null)
+        {
+            return;
+        }
+        
+        var builder = new RenderTreeBuilder();
+        ActionsContent.Invoke(builder);
+        _actionsCount = builder.GetFrames().Array.Where(u => u.FrameType == RenderTreeFrameType.Component).Count();
     }
 
     protected override void OnParametersSet()

@@ -21,4 +21,8 @@
       <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <UpToDateCheckInput Remove="ColumnConfigs\Actions\ActionsConfigInput.razor" />
+    </ItemGroup>
+
 </Project>

@@ -1,12 +1,33 @@
-﻿@using GraphQL
-@using GraphQL.Client.Abstractions
+﻿@using System.Text.Json
 @using GraphQL.Client.Http
-@using Masa.Blazor.Components.TemplateTable
+@using Masa.Blazor.Components.TemplateTable.Actions
 @inject GraphQLHttpClient GraphQLClient
 
 <MTemplateTable SheetProvider="@_sheetProvider"
                 ItemsProvider="@_itemsProvider"
-                Detail
-                OnSave="Save"
-                OnDelete="() => { }">
+                OnSave="Save">
+    <ActionsContent>
+        <DetailAction/>
+        <UpdateAction/>
+        <DeleteAction Icon="mdi-delete-variant" Tooltip="删除" OnClick="OnDelete"/>
+        <ActionTemplate Icon="mdi-home" Tooltip="Custom Action !" OnClick="OnCustomAction"/>
+    </ActionsContent>
 </MTemplateTable>
+
+@code {
+
+    private void OnCustomAction(IReadOnlyDictionary<string, JsonElement> data)
+    {
+        Console.Out.WriteLine($"Custom Action Clicked {data["name"].GetString()}");
+    }
+
+    private async Task OnDelete(IReadOnlyDictionary<string, JsonElement> data)
+    {
+        await PopupService.ConfirmAsync("Are you sure to delete this item?", data["name"].GetString(), AlertTypes.Warning, async _ =>
+        {
+            await Task.Delay(1000);
+            Console.Out.WriteLine("Deleted");
+        });
+    }
+
+}

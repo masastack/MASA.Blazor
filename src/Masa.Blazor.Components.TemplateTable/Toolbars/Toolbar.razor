@@ -166,75 +166,90 @@
 
 <PModal @bind-Value="_configDialog"
         Title="表格配置"
-        MaxWidth="400"
+        MaxWidth="600"
         Persistent>
-    <MDivider Class="mb-4" Left>
-        分页设置
-    </MDivider>
-    <MSelect Value="@PageSizeOptions"
-             ValueChanged="@HandleOnPageSizeOptionsChange"
-             TItem="int"
-             TItemValue="int"
-             TValue="List<int>"
-             Items="@_itemsPerPageOptions"
-             ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
-             ItemValue="u => u"
-             Dense
-             Filled
-             Label="每页数量"
-             Multiple
-             HideDetails="@("auto")"
-             Messages="@_messages"
-             MenuProps="m => m.OffsetY = true">
-    </MSelect>
-    <MDivider Class="mt-4" Left>
-        列设置
-    </MDivider>
-    <MList Dense Class="masa-table__menu-list">
-        <MSortable Items="@Columns"
-                   ItemKey="@(column => column.Id)"
-                   Order="@ColumnOrder"
-                   OrderChanged="@ColumnOrderChanged"
-                   Handle=".handle"
-                   Ignore=".ignore-elements"
-                   Context="column">
-            @{
-                var hidden = HiddenColumnIds.Contains(column.Id);
-                var isIgnore = column.Id == Preset.ActionsColumnId;
-                var ignoreClass = isIgnore ? "ignore-elements" : "";
-            }
-            <MListItem Class="@(hidden ? $"grey--text {ignoreClass}" : ignoreClass)">
-                <MListItemAction>
-                    @if (!isIgnore)
-                    {
-                        <MIcon Class="handle" Style="cursor: move; color: inherit;">mdi-drag</MIcon>
+    <div class="pb-3">
+        <MDivider Class="mb-3" Left>
+            列设置
+        </MDivider>
+        <div @ref="@_columnsRef">
+            <MSortableProvider Items="@Columns"
+                               ItemKey="@(column => column.Id)"
+                               Order="@ColumnOrder"
+                               OrderChanged="@ColumnOrderChanged"
+                               ContainerRef="@_columnsRef"
+                               GhostClass="accent--text"
+                               Handle=".handle"
+                               Ignore=".ignore-elements">
+                <ItemContent Context="sortContext">
+                    @{
+                        var isAction = sortContext.Item.Id == Preset.ActionsColumnId;
+                        var hidden = isAction ? !HasActions : HiddenColumnIds.Contains(sortContext.Item.Id);
+                        var ignoreClass = isAction ? "ignore-elements" : "";
+                        var css = $"my-1 mr-2 handle {ignoreClass}";
                     }
-                </MListItemAction>
-                <MListItemContent>
-                    <MListItemTitle Class="d-flex align-center">
-                        @Templates.GenTypeIcon(column.Type)
-                        <span>@column.Name</span>
-                        <MSpacer/>
+                    <MChip Draggable="@(!isAction)"
+                           Label
+                           Class="@css"
+                           Style="cursor: grab"
+                           Color="@(hidden ? "grey" : "secondary")"
+                           Outlined
+                           Attributes="@sortContext.Attrs">
+                        @Templates.GenTypeIcon(sortContext.Item.Type, small: true)
+                        <span class="mr-2">@sortContext.Item.Name</span>
+                        @if (!isAction)
+                        {
+                            <MButton IconName="mdi-pencil-outline"
+                                     Small
+                                     Style="color: inherit"
+                                     OnClick="@(() => OnColumnEditClick.InvokeAsync(sortContext.Item))">
+                            </MButton>
+                            <MDivider Vertical Length="16" Class="my-auto mx-1"/>
+                        }
                         <MToggle Value="@(!hidden)"
                                  DataOn="@("mdi-eye-outline")"
                                  DataOff="@("mdi-eye-off-outline")"
                                  TData="string">
                             <MButton IconName="@context.Data"
+                                     Small
                                      Style="color: inherit"
-                                     OnClick="@(() => OnColumnToggle.InvokeAsync(column.Id))"/>
+                                     OnClick="@(() => OnColumnToggle.InvokeAsync(sortContext.Item.Id))"/>
                         </MToggle>
-                        <MButton IconName="mdi-pencil-outline"
-                                 Style="color: inherit"
-                                 OnClick="@(() => OnColumnEditClick.InvokeAsync(column))">
-                        </MButton>
-                    </MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-        </MSortable>
-    </MList>
+                    </MChip>
+                </ItemContent>
+            </MSortableProvider>
+        </div>
+    </div>
+    <div>
+        <MDivider Class="mb-3" Left>
+            分页设置
+        </MDivider>
+        <MSelect Value="@PageSizeOptions"
+                 ValueChanged="@HandleOnPageSizeOptionsChange"
+                 TItem="int"
+                 TItemValue="int"
+                 TValue="List<int>"
+                 Items="@_itemsPerPageOptions"
+                 ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
+                 ItemValue="u => u"
+                 Dense
+                 Filled
+                 Label="每页数量"
+                 Multiple
+                 HideDetails="@("auto")"
+                 Messages="@_messages"
+                 MenuProps="m => m.OffsetY = true">
+        </MSelect>
+    </div>
 </PModal>
 
 <MDialog @bind-Value="_filterDialog"
          MaxWidth="400">
     <MButton Outlined Block>Add filter</MButton>
 </MDialog>
+
+@code {
+
+    private ElementReference _columnsRef;
+
+}

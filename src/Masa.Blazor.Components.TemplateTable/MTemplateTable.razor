@@ -31,6 +31,7 @@
              OnViewDelete="@DeleteView"
              OnColumnEditClick="@OpenColumnEditDialog"
              OnColumnToggle="@ToggleColumn"
+             HasActions="@_sheet.ActiveViewHasActions"
              HasCustom="@HasCustomConfiguration"
              HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
              HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
@@ -48,16 +49,15 @@
             Rows="@_items"
             Sort="@_sheet.ActiveView?.Value?.Sort"
             OnSortUpdate="@SortUpdate"
+            HasActions="@_sheet.ActiveViewHasActions"
             Height="@Height"
             OnColumnToggle="@ToggleColumn"
             OnColumnEditClick="@OpenColumnEditDialog"
             OnColumnResize="@ResizeColumn"
             OnImagePreview="@OpenImageViewer"
-            OnDetail="@(Detail ? OpenDetailDialog : default)"
-            OnUpdate="@OnUpdate"
-            OnDelete="@OnDelete"
-            OnAction1="@OnAction1"
-            OnAction2="@OnAction2"
+            Detail="@Detail"
+            OnDetail="@OpenDetailDialog"
+            ActionsContent="@ActionsContent"
             @ref="_viewer">
     </Viewer>
 
@@ -96,11 +96,7 @@
 
     <ImageViewer @ref="_imageViewer"/>
 
-    @if (Detail)
-    {
-        <DetailDialog @ref="_detailDialog"
-                      OnImagePreview="@OpenImageViewer"/>
-    }
+    <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer"/>
 </div>
 
 @code {
@@ -231,7 +227,10 @@
     {
         _columnOrder = columnOrder;
 
-        Console.Out.WriteLine("Column order changed to: " + string.Join(", ", columnOrder));
+        if (!columnOrder.Contains(Preset.ActionsColumnId))
+        {
+            columnOrder.Add(Preset.ActionsColumnId);
+        }
 
         _sheet.ActiveViewColumns.Sort((x, y) =>
         {
@@ -246,7 +245,7 @@
         _rowHeight = rowHeight;
         _sheet.UpdateActiveViewRowHeight(rowHeight);
     }
-    
+
     private async Task HandleOnPageSizeOptionsChanged(List<int> pageSizeOptions)
     {
         _sheet.Pagination.PageSizeOptions = pageSizeOptions;
@@ -268,13 +267,14 @@
 
     private void ToggleColumn(string columnId)
     {
-        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
-        viewColumn.Hidden = !viewColumn.Hidden;
-
         if (columnId == Preset.ActionsColumnId)
         {
             _sheet.ActiveView!.Value.HasActions = !_sheet.ActiveView.Value.HasActions;
+            return;
         }
+
+        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
+        viewColumn.Hidden = !viewColumn.Hidden;
     }
 
     private void OpenColumnEditDialog(Column column)
@@ -282,9 +282,21 @@
         _columnEditDialog?.Open(column);
     }
 
-    private void OpenDetailDialog(List<DetailItem> data)
+    private void OpenDetailDialog(IReadOnlyDictionary<string, JsonElement> item)
     {
-        _detailDialog?.Open(data);
+        List<DetailItem> detailItems = [];
+        foreach (var viewColumn in _sheet.ActiveViewColumns)
+        {
+            var key = item.Keys.FirstOrDefault(u => string.Equals(u, viewColumn.ColumnId, StringComparison.OrdinalIgnoreCase));
+            if (key is null || _sheet.ActiveViewHiddenColumnIds.Contains(viewColumn.ColumnId))
+            {
+                continue;
+            }
+
+            detailItems.Add(new DetailItem(viewColumn.Column, item[key]));
+        }
+
+        _detailDialog?.Open(detailItems);
     }
 
     private void OpenImageViewer(IList<string> images)

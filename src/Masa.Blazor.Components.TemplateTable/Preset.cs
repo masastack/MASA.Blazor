@@ -4,6 +4,25 @@ internal static class Preset
 {
     internal static string ActionsColumnId { get; } = "__internal_actions";
     
+    internal static ColumnInfo CreateActionsColumn()
+    {
+        return new ColumnInfo()
+        {
+            Id = ActionsColumnId,
+            Name = "Actions",
+            Type = ColumnType.Actions
+        };
+    }
+
+    internal static ViewColumnInfo CreateActionsViewColumn()
+    {
+        return new ViewColumnInfo()
+        {
+            ColumnId = ActionsColumnId,
+            Column = CreateActionsColumn()
+        };
+    }
+
     internal static IReadOnlyDictionary<ColumnType, string> ColumnTypeIcons { get; } =
         new Dictionary<ColumnType, string>
         {
