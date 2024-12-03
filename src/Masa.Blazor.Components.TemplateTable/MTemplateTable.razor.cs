@@ -26,7 +26,7 @@ public partial class MTemplateTable
 
     [Parameter] [MasaApiParameter(true)] public bool Detail { get; set; } = true;
 
-    [Parameter] public RenderFragment? ActionsContent { get; set; }
+    [Parameter] public RenderFragment? RowActionsContent { get; set; }
 
     private const string SheetQuery =
         """
