@@ -149,9 +149,19 @@
             }
         }
         <MCol Cols="12" Md="hasSearch ? 12 : 6" Class="text-right">
+            @if (HasSelect)
+            {
+                <MButton Disabled="@(!HasSelectedKeys)"
+                         Color="error"
+                         Depressed
+                         Class="mr-1"
+                         Loading="@_removing"
+                         OnClick="@HandleOnRowRemove">
+                    批量删除
+                </MButton>
+            }
             <MButton Color="secondary"
                      Depressed
-                     Class="mr-1"
                      OnClick="@ResetView">
                 重置
             </MButton>
@@ -172,7 +182,7 @@
         <MDivider Class="mb-3" Left>
             列设置
         </MDivider>
-        <div @ref="@_columnsRef">
+        <div class="m-template-table__toolbar-columns" @ref="@_columnsRef">
             <MSortableProvider Items="@Columns"
                                ItemKey="@(column => column.Id)"
                                Order="@ColumnOrder"
@@ -180,24 +190,40 @@
                                ContainerRef="@_columnsRef"
                                GhostClass="accent--text"
                                Handle=".handle"
-                               Ignore=".ignore-elements">
+                               Ignore=".ignore-element">
                 <ItemContent Context="sortContext">
                     @{
-                        var isAction = sortContext.Item.Id == Preset.ActionsColumnId;
-                        var hidden = isAction ? !HasActions : HiddenColumnIds.Contains(sortContext.Item.Id);
-                        var ignoreClass = isAction ? "ignore-elements" : "";
-                        var css = $"my-1 mr-2 handle {ignoreClass}";
+                        bool hidden, handle, editable;
+                        if (sortContext.Item.Id == Preset.ActionsColumnId)
+                        {
+                            hidden = !HasActions;
+                            handle = false;
+                            editable = false;
+                        }
+                        else if (sortContext.Item.Id == Preset.RowSelectColumnId)
+                        {
+                            hidden = !HasSelect;
+                            handle = false;
+                            editable = false;
+                        }
+                        else
+                        {
+                            hidden = HiddenColumnIds.Contains(sortContext.Item.Id);
+                            handle = true;
+                            editable = true;
+                        }
+
+                        var css = $"{(handle ? "handle" : "ignore-element")} {(hidden ? "hidden" : "")}";
                     }
-                    <MChip Draggable="@(!isAction)"
+                    <MChip Draggable="@handle"
                            Label
                            Class="@css"
-                           Style="cursor: grab"
-                           Color="@(hidden ? "grey" : "secondary")"
+                           Color="@(hidden ? "grey" : "black")"
                            Outlined
                            Attributes="@sortContext.Attrs">
                         @Templates.GenTypeIcon(sortContext.Item.Type, small: true)
                         <span class="mr-2">@sortContext.Item.Name</span>
-                        @if (!isAction)
+                        @if (editable)
                         {
                             <MButton IconName="mdi-pencil-outline"
                                      Small

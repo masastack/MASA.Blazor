@@ -1,4 +1,5 @@
-﻿@using DeepCloner.Core
+﻿@using System.Diagnostics.CodeAnalysis
+@using DeepCloner.Core
 @using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.ColumnDialogs
 @using Masa.Blazor.Components.TemplateTable.FilterDialogs
@@ -12,92 +13,103 @@
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
 
-<div class="m-template-table">
-    <Toolbar DefaultViewId="@_sheet.DefaultViewId"
-             ActiveView="@_sheet.ActiveViewId"
-             ActiveViewChanged="@HandleOnActiveViewChanged"
-             ColumnOrder="@_columnOrder"
-             ColumnOrderChanged="@HandleOnColumnOrderChanged"
-             RowHeight="_rowHeight"
-             RowHeightChanged="@HandleOnRowHeightChanged"
-             PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
-             PageSizeOptionsChanged="@HandleOnPageSizeOptionsChanged"
-             Views="_sheet.Views"
-             Columns="_sheet.Columns"
-             HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-             OnViewAdd="@AddNewView"
-             OnViewReset="@ResetView"
-             OnViewRename="@RenameView"
-             OnViewDelete="@DeleteView"
-             OnColumnEditClick="@OpenColumnEditDialog"
-             OnColumnToggle="@ToggleColumn"
-             HasActions="@_sheet.ActiveViewHasActions"
-             HasCustom="@HasCustomConfiguration"
-             HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
-             HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
-             OnFilterClick="@(() => _filterDialog?.Open())"
-             OnSortClick="@(() => _sortDialog?.Open())"
-             OnSearch="@Search"
-             OnSave="@SaveSheet"/>
+@if (_sheet is not null)
+{
+    <div class="m-template-table">
+        <Toolbar DefaultViewId="@_sheet.DefaultViewId"
+                 ActiveView="@_sheet.ActiveViewId"
+                 ActiveViewChanged="@HandleOnActiveViewChanged"
+                 ColumnOrder="@_columnOrder"
+                 ColumnOrderChanged="@HandleOnColumnOrderChanged"
+                 RowHeight="_rowHeight"
+                 RowHeightChanged="@HandleOnRowHeightChanged"
+                 PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
+                 PageSizeOptionsChanged="@HandleOnPageSizeOptionsChanged"
+                 Views="_sheet.Views"
+                 Columns="_sheet.Columns"
+                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                 OnViewAdd="@AddNewView"
+                 OnViewReset="@ResetView"
+                 OnViewRename="@RenameView"
+                 OnViewDelete="@DeleteView"
+                 OnColumnEditClick="@OpenColumnEditDialog"
+                 OnColumnToggle="@ToggleColumn"
+                 HasSelectedKeys="@(SelectedKeys.Count > 0)"
+                 HasActions="@_sheet.ActiveViewHasActions"
+                 HasSelect="@_sheet.ActiveViewShowSelect"
+                 HasCustom="@HasCustomConfiguration"
+                 HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
+                 HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
+                 OnFilterClick="@(() => _filterDialog?.Open())"
+                 OnSortClick="@(() => _sortDialog?.Open())"
+                 OnRowRemove="@Remove"
+                 OnSearch="@Search"
+                 OnSave="@SaveSheet"/>
 
-    <Viewer ViewColumns="@_sheet.ActiveViewColumns"
-            HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-            ColumnOrder="@_columnOrder"
-            ColumnOrderChanged="@HandleOnColumnOrderChanged"
-            Loading="@_loading"
-            RowHeight="@_rowHeight"
-            Rows="@_items"
-            Sort="@_sheet.ActiveView?.Value?.Sort"
-            OnSortUpdate="@SortUpdate"
-            HasActions="@_sheet.ActiveViewHasActions"
-            Height="@Height"
-            OnColumnToggle="@ToggleColumn"
-            OnColumnEditClick="@OpenColumnEditDialog"
-            OnColumnResize="@ResizeColumn"
-            OnImagePreview="@OpenImageViewer"
-            Detail="@Detail"
-            OnDetail="@OpenDetailDialog"
-            ActionsContent="@ActionsContent"
-            @ref="_viewer">
-    </Viewer>
-
-    @if (_sheet.ActiveView is not null)
-    {
-        var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize;
-        var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
-
-        <Pagination PageIndex="@_sheet.ActiveView.PageIndex"
-                    PageStart="@pageStart"
-                    PageStop="@pageStop"
-                    ItemsPerPage="@_sheet.ActiveView.PageSize"
-                    ItemsLength="@_totalCount"
-                    PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
-                    OnPaginationUpdate="@HandleOnPaginationUpdateAsync">
-        </Pagination>
-    }
-
-    <ColumnDialog @ref="_columnEditDialog"
-                  OnSave="@UpdateColumn">
-    </ColumnDialog>
-
-    <FilterDialog @ref="_filterDialog"
-                  ActiveView="@_sheet.ActiveView?.Value"
-                  Columns="@_sheet.Columns"
-                  HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-                  OnSave="@SaveFilter">
-    </FilterDialog>
-
-    <SortDialog @ref="_sortDialog"
-                ActiveView="@_sheet.ActiveView?.Value"
-                Columns="@_sheet.Columns"
+        <Viewer ViewColumns="@_sheet.ActiveViewColumns"
                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-                OnSave="@SortUpdate">
-    </SortDialog>
+                ColumnOrder="@_columnOrder"
+                ColumnOrderChanged="@HandleOnColumnOrderChanged"
+                Loading="@_loading"
+                RowHeight="@_rowHeight"
+                Rows="@_rows"
+                Sort="@_sheet.ActiveView?.Value?.Sort"
+                OnSortUpdate="@SortUpdate"
+                HasActions="@_sheet.ActiveViewHasActions"
+                ShowSelect="@_sheet.ActiveViewShowSelect"
+                Height="@Height"
+                OnColumnToggle="@ToggleColumn"
+                OnColumnEditClick="@OpenColumnEditDialog"
+                OnColumnResize="@ResizeColumn"
+                OnImagePreview="@OpenImageViewer"
+                Detail="@Detail"
+                OnDetail="@OpenDetailDialog"
+                CheckboxColor="@CheckboxColor"
+                SelectedKeys="@SelectedKeys"
+                OnSelect="@HandleOnSelect"
+                OnSelectAll="@HandleOnSelectAll"
+                ActionsContent="@ActionsContent"
+                @ref="_viewer">
+        </Viewer>
 
-    <ImageViewer @ref="_imageViewer"/>
+        @if (_sheet.ActiveView is not null)
+        {
+            var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize;
+            var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
 
-    <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer"/>
-</div>
+            <Pagination PageIndex="@_sheet.ActiveView.PageIndex"
+                        PageStart="@pageStart"
+                        PageStop="@pageStop"
+                        ItemsPerPage="@_sheet.ActiveView.PageSize"
+                        ItemsLength="@_totalCount"
+                        PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
+                        OnPaginationUpdate="@HandleOnPaginationUpdateAsync">
+            </Pagination>
+        }
+
+        <ColumnDialog @ref="_columnEditDialog"
+                      OnSave="@UpdateColumn">
+        </ColumnDialog>
+
+        <FilterDialog @ref="_filterDialog"
+                      ActiveView="@_sheet.ActiveView?.Value"
+                      Columns="@_sheet.Columns"
+                      HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                      OnSave="@SaveFilter">
+        </FilterDialog>
+
+        <SortDialog @ref="_sortDialog"
+                    ActiveView="@_sheet.ActiveView?.Value"
+                    Columns="@_sheet.Columns"
+                    HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                    OnSave="@SortUpdate">
+        </SortDialog>
+
+        <ImageViewer @ref="_imageViewer"/>
+
+        <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer"/>
+    </div>
+}
 
 @code {
 
@@ -157,7 +169,7 @@
     {
         _sheet.ActiveView.Value.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
         _columnOrder = [];
-        _sheet.ActiveView.Value.Filter = null;
+        _sheet.ActiveView.Value.Filter = new();
         _sheet.ActiveView.Value.Sort = null;
         _sheet.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
@@ -198,11 +210,11 @@
 
     private async Task HandleOnActiveViewChanged(Guid viewId)
     {
-        _sheet.ActiveViewId = viewId;
+        _sheet!.SetActiveView(viewId);
 
         ResetSheet();
 
-        if (_sheet.ActiveView?.Rows is null)
+        if (_sheet.ActiveView.Rows is null)
         {
             _sheet.ActiveView.PageIndex = 1;
             _sheet.ActiveView.PageSize = 5; // TODO:使用用户输入的值
@@ -211,7 +223,7 @@
         }
         else
         {
-            _items = _sheet.ActiveView.Rows;
+            _rows = _sheet.ActiveView.Rows;
         }
     }
 
@@ -227,10 +239,18 @@
     {
         _columnOrder = columnOrder;
 
-        if (!columnOrder.Contains(Preset.ActionsColumnId))
+        if (!_columnOrder.Contains(Preset.ActionsColumnId))
         {
-            columnOrder.Add(Preset.ActionsColumnId);
+            _columnOrder.Add(Preset.ActionsColumnId);
         }
+
+        Console.Out.WriteLine("[TemplateTable] ColumnOrderChanged Before: " + string.Join(",", _columnOrder));
+        if (!_columnOrder.Contains(Preset.RowSelectColumnId))
+        {
+            _columnOrder.Insert(0, Preset.RowSelectColumnId);
+        }
+
+        Console.Out.WriteLine("[TemplateTable] ColumnOrderChanged: " + string.Join(",", _columnOrder));
 
         _sheet.ActiveViewColumns.Sort((x, y) =>
         {
@@ -273,6 +293,12 @@
             return;
         }
 
+        if (columnId == Preset.RowSelectColumnId)
+        {
+            _sheet.ActiveView!.Value.ShowSelect = !_sheet.ActiveView.Value.ShowSelect;
+            return;
+        }
+
         var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
         viewColumn.Hidden = !viewColumn.Hidden;
     }
@@ -302,6 +328,58 @@
     private void OpenImageViewer(IList<string> images)
     {
         _imageViewer?.Open(images);
+    }
+
+    private string? ItemKeyName => _sheet.ItemKeyName;
+    private List<string> SelectedKeys => _sheet.ActiveView.Selection.Select(u => u.Key).ToList();
+
+    private void HandleOnSelect((Row, bool) args)
+    {
+        var (item, selected) = args;
+
+        _sheet.ActiveView.Selection.Remove(item);
+        if (selected)
+        {
+            _sheet.ActiveView.Selection.Add(item);
+        }
+
+        _ = UpdateSelectedValue().ConfigureAwait(false);
+
+        StateHasChanged();
+    }
+
+    private async Task UpdateSelectedValue()
+    {
+        if (SelectedChanged.HasDelegate)
+        {
+            await SelectedChanged.InvokeAsync(
+                _sheet.ActiveView.Selection.Select(u => u.Key).ToArray()
+            );
+        }
+    }
+
+    private void HandleOnSelectAll(bool selected)
+    {
+        if (_sheet.ActiveView?.Rows is null)
+        {
+            return;
+        }
+
+        _sheet.ActiveView.Selection.Clear();
+        if (selected)
+        {
+            foreach (var item in _sheet.ActiveView.Rows)
+            {
+                if (item.Key is not null)
+                {
+                    _sheet.ActiveView.Selection.Add(item);
+                }
+            }
+        }
+
+        UpdateSelectedValue().ConfigureAwait(false);
+
+        StateHasChanged();
     }
 
     private void UpdateColumn(ColumnInfo data)
@@ -342,6 +420,11 @@
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
+    private async Task Remove()
+    {
+        await OnRemove.InvokeAsync(_sheet.ActiveView.Selection);
+    }
+
     private void ResizeColumn((string ColumnId, double Width) args)
     {
         var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == args.ColumnId);
@@ -357,11 +440,12 @@
     {
         var sheet = new Sheet()
         {
-            Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(Column (u) => u),
-            Views = _sheet.Views.Select(View (u) => u.ToView()),
+            Columns = _sheet.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
+            Views = _sheet.Views.Select(View (u) => u.ToView()).ToList(),
             Pagination = _sheet.Pagination,
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,
+            ItemKeyName = _sheet.ItemKeyName
         };
         await OnSave.InvokeAsync(sheet);
     }

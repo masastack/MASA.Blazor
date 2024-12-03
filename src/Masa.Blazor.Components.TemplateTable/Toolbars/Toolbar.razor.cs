@@ -41,8 +41,14 @@ public partial class Toolbar
     [Parameter] public EventCallback OnSearch { get; set; }
 
     [Parameter] public EventCallback OnSave { get; set; }
-    
+
+    [Parameter] public EventCallback OnRowRemove { get; set; }
+
+    [Parameter] public bool HasSelectedKeys { get; set; }
+
     [Parameter] public bool HasActions { get; set; }
+
+    [Parameter] public bool HasSelect { get; set; }
 
     [Parameter] public bool HasCustom { get; set; }
 
@@ -94,6 +100,26 @@ public partial class Toolbar
         if (confirmed)
         {
             await OnViewReset.InvokeAsync();
+        }
+    }
+
+    private bool _removing;
+
+    private async Task HandleOnRowRemove()
+    {
+        if (OnRowRemove.HasDelegate)
+        {
+            _removing = true;
+            StateHasChanged();
+
+            try
+            {
+                await OnRowRemove.InvokeAsync();
+            }
+            finally
+            {
+                _removing = false;
+            }
         }
     }
 

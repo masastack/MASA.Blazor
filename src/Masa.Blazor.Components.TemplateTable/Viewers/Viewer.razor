@@ -1,6 +1,5 @@
 ﻿@using System.Globalization
 @using BemIt
-@using Masa.Blazor.Components.TemplateTable.DetailDialogs
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Masa.Blazor.Components.TemplateTable.Actions
 
@@ -22,17 +21,32 @@
             <ItemContent Context="context">
                 @{
                     var template = context.Item;
+                    bool handle, hidden;
+                    if (template.Column.Id == Preset.ActionsColumnId)
+                    {
+                        handle = false;
+                        hidden = !HasActions;
+                    }
+                    else if (template.Column.Id == Preset.RowSelectColumnId)
+                    {
+                        handle = false;
+                        hidden = !ShowSelect;
+                    }
+                    else
+                    {
+                        handle = true;
+                        hidden = HiddenColumnIds.Contains(template.ColumnId);
+                    }
+
                     var type = template.Column.Type.ToString().ToLowerInvariant();
-                    var isActionsType = template.Column.Type == ColumnType.Actions;
-                    var sortableHandleCss = isActionsType ? "ignore-elements" : "handle";
-                    var hidden = isActionsType ? !HasActions : HiddenColumnIds.Contains(template.ColumnId);
+                    var handleCss = handle ? "handle" : "ignore-elements";
                     _headerColumnStyleBuilder.Clear();
                     _headerColumnStyleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
-                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), isActionsType);
+                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), template.Column.Type is ColumnType.Actions);
                     _headerColumnStyleBuilder.AddIf("display", "none", hidden);
                 }
 
-                <th class="masa-table-viewer__header-column @sortableHandleCss @type"
+                <th class="masa-table-viewer__header-column @handleCss @type"
                     style="@_headerColumnStyleBuilder.Build()"
                     @key="@(template.Column.Id)"
                     @attributes="@context.Attrs">
@@ -41,9 +55,11 @@
                         <ColumnName Data="@template.Column"
                                     Sort="@Sort"
                                     OnClick="@OnSortUpdate"
-                                    IsActionsType="@isActionsType"
                                     OnColumnToggle="@OnColumnToggle"
-                                    OnColumnEditClick="@OnColumnEditClick"/>
+                                    OnColumnEditClick="@OnColumnEditClick"
+                                    IsSelectedAll="@IsSelectAll"
+                                    OnSelectAll="@OnSelectAll"
+                                    CheckboxColor="@CheckboxColor"/>
                     }
                 </th>
             </ItemContent>
@@ -71,9 +87,21 @@
         <tr class="masa-table-viewer__row">
             @foreach (var template in _orderedViewColumns)
             {
+                bool hidden;
+                if (template.Column.Id == Preset.ActionsColumnId)
+                {
+                    hidden = !HasActions;
+                }
+                else if (template.Column.Id == Preset.RowSelectColumnId)
+                {
+                    hidden = !ShowSelect;
+                }
+                else
+                {
+                    hidden = HiddenColumnIds.Contains(template.ColumnId);
+                }
+
                 var type = template.Column.Type.ToString().ToLowerInvariant();
-                var isAction = template.Column.Type == ColumnType.Actions;
-                var hidden = isAction ? !HasActions : HiddenColumnIds.Contains(template.Column.Id);
 
                 <td class="@type"
                     style="@(hidden ? "display:none" : "")"
@@ -84,15 +112,19 @@
                             <div class="masa-table-viewer__cell-content">
                                 @if (template.Column.Type == ColumnType.Actions)
                                 {
-                                    @GenActionsCell(new ActionsConfig(), item)
+                                    @GenActionsCell(item.Data)
+                                }
+                                else if (template.Column.Type == ColumnType.RowSelect)
+                                {
+                                    @GenRowSelectCell(item)
                                 }
                                 else
                                 {
-                                    var key = item.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
+                                    var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
                                     if (key is not null)
                                     {
-                                        var value = item[key];
-                                        @GenCell(template.Column, value, item)
+                                        var value = item.Data[key];
+                                        @GenCell(template.Column, value, item.Data)
                                     }
                                     else
                                     {
@@ -112,7 +144,7 @@
 </MSimpleTable>
 
 @code {
-
+    
     internal static RenderFragment GenStaticCell(ColumnInfo column, JsonElement value) => __builder =>
     {
         switch (column.Type)
@@ -353,15 +385,27 @@
         @value
     };
 
-    private RenderFragment GenActionsCell(object? columnConfig, IReadOnlyDictionary<string, JsonElement> item) => __builder =>
+    private RenderFragment GenActionsCell(IReadOnlyDictionary<string, JsonElement> item) => __builder =>
     {
         Action? detailAction = () => OnDetail.InvokeAsync(item);
 
         <CascadingValue Value="item" Name="RowData">
             <CascadingValue Value="detailAction" Name="DetailAction">
-                @(ActionsContent ?? (Detail ? (RenderFragment)(@<DetailAction/>) : default))
+                @(ActionsContent ?? (Detail
+                    ? (RenderFragment)(@<DetailAction/>)
+                    : default))
             </CascadingValue>
         </CascadingValue>
     };
+    
+    private RenderFragment GenRowSelectCell(Row item) => __builder =>
+    {
+        var isSelected = item.Key is not null && SelectedKeys.Contains(item.Key);
 
+        <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Value="@isSelected"
+                         ValueChanged="val => OnSelect((item, val))"
+                         Color="@(CheckboxColor)">
+        </MSimpleCheckbox>
+    };
 }

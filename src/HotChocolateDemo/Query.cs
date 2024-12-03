@@ -62,6 +62,7 @@ public class Query
 
             if (sheet.Columns.Any(c => c.Id == "Level"))
             {
+                sheet.ItemKeyName ??= nameof(User.Name);
                 return sheet;
             }
 
@@ -125,7 +126,8 @@ public class Query
             Columns = fakeColumns,
             Views = [fakeView],
             ActiveViewId = fakeView.Id,
-            DefaultViewId = fakeView.Id
+            DefaultViewId = fakeView.Id,
+            ItemKeyName = nameof(User.Name)
         };
 
         return fakeSheet;

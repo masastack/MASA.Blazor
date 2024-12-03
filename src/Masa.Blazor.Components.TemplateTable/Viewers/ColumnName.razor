@@ -3,12 +3,20 @@
 <div @ref="_ref"
      class="masa-table-viewer__header-column-content @Class"
      @onclick="@HandleOnClick">
-    @Templates.GenTypeIcon(Data.Type, true)
-    <span class="text-truncate">
-        @Data.Name
-    </span>
+    @if (IsRowSelect)
+    {
+        <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Value="@IsSelectedAll"
+                         ValueChanged="@OnSelectAll"
+                         Color="@CheckboxColor"/>
+    }
+    else
+    {
+        @Templates.GenTypeIcon(Data.Type, true)
+        <span class="text-truncate">@Data.Name</span>
+    }
 
-    @if (!IsActionsType)
+    @if (!Internal)
     {
         <MIcon Small Class="sort-icon">$sort</MIcon>
 
@@ -18,16 +26,21 @@
         }
     }
 
-    <Dropdown Icon="mdi-menu-down-outline">
-        @if (!IsActionsType)
-        {
-            <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline" OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></DropdownItem>
-        }
-        <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline" OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></DropdownItem>
-    </Dropdown>
+    @if (!IsRowSelect)
+    {
+        <Dropdown Icon="mdi-menu-down-outline">
+            @if (!Internal)
+            {
+                <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline"
+                              OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></DropdownItem>
+            }
+            <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline"
+                          OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></DropdownItem>
+        </Dropdown>
+    }
 </div>
 
-@if (!IsActionsType)
+@if (!Internal)
 {
     <Resizor/>
 }
@@ -39,22 +52,30 @@
     [Parameter] public Sort? Sort { get; set; }
 
     [Parameter] public EventCallback<Sort> OnClick { get; set; }
-
-    [Parameter] public bool IsActionsType { get; set; }
-
+    
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
+
+    [Parameter] public bool IsSelectedAll { get; set; }
+
+    [Parameter] public EventCallback<bool> OnSelectAll { get; set; }
+
+    [Parameter] public string? CheckboxColor { get; set; }
 
     private ElementReference _ref;
 
     private SortOption? SortOption => Sort?.Options.FirstOrDefault(u => u.ColumnId == Data.Id);
 
+    private bool IsRowSelect => Data.Type == ColumnType.RowSelect;
+
+    private bool Internal => IsRowSelect || Data.Type is ColumnType.Actions;
+
     private int Index
     {
         get
         {
-            if (SortOption is null || Sort is null || IsActionsType)
+            if (SortOption is null || Sort is null || Internal)
             {
                 return 0;
             }
@@ -91,11 +112,11 @@
 
     private async Task HandleOnClick()
     {
-        if (IsActionsType)
+        if (Internal)
         {
             return;
         }
-        
+
         var sort = Sort ?? new();
 
         if (SortOption is null)

@@ -18,5 +18,6 @@ public enum ColumnType
     Rating = 32,
     Checkbox = 33,
     Actions = 40,
+    RowSelect = 41,
     Custom = 100
 }

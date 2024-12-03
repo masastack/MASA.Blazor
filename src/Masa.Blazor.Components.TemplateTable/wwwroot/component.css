@@ -218,6 +218,14 @@
   max-height: calc(var(--mt-line-clamp) * 1.7em);
 }
 
+.masa-table-viewer__cell.rowselect .masa-table-viewer__cell-content {
+  overflow: visible;
+}
+
+.masa-table-viewer--low .masa-table-viewer__cell.rowselect .m-data-table__checkbox {
+  margin-top: -4px; 
+}
+
 .m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
 .m-application--is-ltr .masa-table__menu-list .m-list-item__icon:first-child {
   margin-right: 16px;
@@ -299,4 +307,17 @@
 
 .filter-operator .m-input__append-inner {
   margin-top: 14px !important;
+}
+
+.m-template-table__toolbar-columns .ignore-element {
+  border-width: thin;
+  border-style: dashed;
+}
+
+.m-template-table__toolbar-columns .m-chip {
+  margin: 4px 8px 4px 0;
+}
+
+.m-template-table__toolbar-columns .m-chip.handle {
+  cursor: grab;
 }

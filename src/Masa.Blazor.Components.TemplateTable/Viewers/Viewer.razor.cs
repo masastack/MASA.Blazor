@@ -33,7 +33,7 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public RowHeight RowHeight { get; set; }
 
-    [Parameter] public ICollection<IReadOnlyDictionary<string, JsonElement>> Rows { get; set; } = [];
+    [Parameter] public ICollection<Row> Rows { get; set; } = [];
 
     [Parameter] public Sort? Sort { get; set; }
 
@@ -47,6 +47,10 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public bool HasActions { get; set; }
 
+    [Parameter] public bool ShowSelect { get; set; }
+
+    [Parameter] public string? CheckboxColor { get; set; }
+
     [Parameter] public bool Detail { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
@@ -59,15 +63,15 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnDetail { get; set; }
 
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnUpdate { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnDelete { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction1 { get; set; }
-
-    [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnAction2 { get; set; }
-
     [Parameter] public RenderFragment? ActionsContent { get; set; }
+
+    [Parameter] public List<string> SelectedKeys { get; set; } = [];
+
+    [Parameter] public List<string> SelectableKeys { get; set; } = [];
+
+    [Parameter] public Action<(Row Item, bool Selected)> OnSelect { get; set; } = default!;
+
+    [Parameter] public Action<bool> OnSelectAll { get; set; } = default!;
 
     // ReSharper disable once StaticMemberInGenericType
     private static Block _block = new("masa-table-viewer");
@@ -88,6 +92,8 @@ public partial class Viewer : IAsyncDisposable
     private DotNetObjectReference<Viewer>? _dotNetObjectReference;
 
     private int _actionsCount = 0;
+
+    private bool IsSelectAll => Rows.All(u => SelectedKeys.Contains(u.Key));
 
     private int RowHeightValue => RowHeight switch
     {

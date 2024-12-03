@@ -3,7 +3,10 @@
 internal static class Preset
 {
     internal static string ActionsColumnId { get; } = "__internal_actions";
+    internal static string RowSelectColumnId { get; } = "__internal_select";
     
+    internal static string[] InternalColumnIds { get; } = [ActionsColumnId, RowSelectColumnId];
+
     internal static ColumnInfo CreateActionsColumn()
     {
         return new ColumnInfo()
@@ -20,6 +23,26 @@ internal static class Preset
         {
             ColumnId = ActionsColumnId,
             Column = CreateActionsColumn()
+        };
+    }
+    
+    internal static ColumnInfo CreateSelectColumn()
+    {
+        return new ColumnInfo()
+        {
+            Id = RowSelectColumnId,
+            Name = "Select",
+            Type = ColumnType.RowSelect
+        };
+    }
+    
+    internal static ViewColumnInfo CreateSelectViewColumn()
+    {
+        return new ViewColumnInfo()
+        {
+            ColumnId = RowSelectColumnId,
+            Width = 64,
+            Column = CreateSelectColumn()
         };
     }
 
@@ -39,6 +62,7 @@ internal static class Preset
             [ColumnType.Select] = "mdi-checkbox-marked-circle-outline",
             [ColumnType.Text] = "mdi-text-long",
             [ColumnType.Actions] = "mdi-dots-horizontal",
+            [ColumnType.RowSelect]= "mdi-selection",
             [ColumnType.Custom] = "mdi-cog-outline"
         };
 }

@@ -20,8 +20,7 @@ public partial class TemplateTable
         _sheetProvider = async req =>
         {
             var request = new GraphQLRequest(req.Query);
-            var response = await GraphQLClient.SendQueryAsync<SheetProviderResult>(request);
-            return response.Data;
+            return await GraphQLClient.SendQueryAsync<SheetProviderResult>(request);
         };
 
         _itemsProvider = async req =>
@@ -43,7 +42,8 @@ public partial class TemplateTable
             {
                 Query = formatQuery
             };
-
+            
+            //TODO: 和sheetprovider一样把异常放到组件内处理
             var response = await GraphQLClient.SendQueryAsync<ItemsProviderResult>(request);
 
             if (response.Errors?.Length > 0)

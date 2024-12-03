@@ -16,7 +16,9 @@ public class View
 
     public List<ViewColumn> Columns { get; set; } = [];
 
-    public bool HasActions { get; set; }
+    public bool HasActions { get; set; } = true;
+
+    public bool ShowSelect { get; set; } = true;
 
     public Filter? Filter { get; set; }
 

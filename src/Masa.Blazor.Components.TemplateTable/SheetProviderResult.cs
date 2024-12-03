@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable;
+﻿using GraphQL;
+
+namespace Masa.Blazor.Components.TemplateTable;
 
 public readonly struct SheetProviderResult
 {

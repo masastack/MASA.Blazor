@@ -1,3 +1,5 @@
-﻿namespace Masa.Blazor.Components.TemplateTable;
+﻿using GraphQL;
 
-public delegate ValueTask<SheetProviderResult> SheetProvider(SheetProviderRequest request);
+namespace Masa.Blazor.Components.TemplateTable;
+
+public delegate ValueTask<GraphQLResponse<SheetProviderResult>> SheetProvider(SheetProviderRequest request);

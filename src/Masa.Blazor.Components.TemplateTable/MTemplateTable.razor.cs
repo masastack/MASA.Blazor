@@ -1,13 +1,24 @@
 ﻿using Masa.Blazor.Attributes;
 using Masa.Blazor.Components.TemplateTable.FilterDialogs;
+using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor;
 
 public partial class MTemplateTable
 {
+    [Inject] private ILogger<MTemplateTable> Logger { get; set; } = default!;
+    
     [Parameter] public SheetProvider? SheetProvider { get; set; }
 
     [Parameter] public ItemsProvider? ItemsProvider { get; set; }
+
+    [Parameter] public ICollection<string> Selected { get; set; } = [];
+
+    [Parameter] public EventCallback<ICollection<string>> SelectedChanged { get; set; }
+
+    [Parameter] public string? CheckboxColor { get; set; }
+
+    [Parameter] public EventCallback<ICollection<Row>> OnRemove { get; set; }
 
     [Parameter] public EventCallback<Sheet> OnSave { get; set; }
 
@@ -23,6 +34,7 @@ public partial class MTemplateTable
           sheet {
             views {
               hasActions
+              showSelect
               id
               name
               rowHeight
@@ -59,6 +71,7 @@ public partial class MTemplateTable
             }
             activeViewId
             defaultViewId
+            itemKeyName
             pagination {
               pageSizeOptions
             }
@@ -66,9 +79,9 @@ public partial class MTemplateTable
         }
         """;
 
-    private SheetInfo _sheet = new();
+    private SheetInfo? _sheet;
     private bool _init;
-    private ICollection<IReadOnlyDictionary<string, JsonElement>> _items = [];
+    private ICollection<Row> _rows = [];
 
     private long _totalCount;
     private bool _hasPreviousPage;
@@ -83,9 +96,12 @@ public partial class MTemplateTable
         {
             _init = true;
             await RefreshSheetAsync(GetSheetProviderRequest());
-            _sheet.ActiveView.PageIndex = 1;
-            _sheet.ActiveView.PageSize = 5;
-            await RefreshItemsAsync(GetItemsProviderRequest());
+            if (_sheet is not null)
+            {
+                _sheet.ActiveView.PageIndex = 1;
+                _sheet.ActiveView.PageSize = 5;
+                await RefreshItemsAsync(GetItemsProviderRequest());
+            }
         }
     }
 
@@ -93,12 +109,30 @@ public partial class MTemplateTable
     {
         if (SheetProvider is not null)
         {
-            var result = await SheetProvider(request);
-            _sheet = SheetInfo.From(result.Sheet);
-            _sheet.Columns.Add(Preset.CreateActionsColumn());
-        }
+            try
+            {
+                var result = await SheetProvider(request);
+                if (result.Errors?.Length > 0)
+                {
+                    await PopupService.EnqueueSnackbarAsync("Error: " + result.Errors[0].Message, AlertTypes.Error);
+                    return;
+                }
 
-        UpdateStateOfActiveView();
+                _sheet = SheetInfo.From(result.Data.Sheet);
+
+                // add select and actions columns, they are not in the column data
+                // because they are controlled by the ShowSelect and HasActions properties
+                _sheet.Columns.Add(Preset.CreateActionsColumn());
+                _sheet.Columns.Add(Preset.CreateSelectColumn());
+
+                UpdateStateOfActiveView();
+            }
+            catch (Exception e)
+            {
+                await PopupService.EnqueueSnackbarAsync(e);
+                Logger.LogDebug(e, "Error while refreshing sheet");
+            }
+        }
     }
 
     private async Task RefreshItemsAsync(ItemsProviderRequest request)
@@ -133,13 +167,24 @@ public partial class MTemplateTable
                 _totalCount = result.Result.TotalCount;
                 _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
                 _hasNextPage = result.Result.PageInfo.HasNextPage;
-                _items = result.Result.Items ?? [];
+                
+                if (string.IsNullOrWhiteSpace(ItemKeyName))
+                {
+                    throw new InvalidOperationException("The 'ItemKeyName' was missing.");
+                }
+                
+                _rows = (result.Result.Items ?? []).Select(i =>
+                {
+                    i.TryGetNotNullValue(ItemKeyName, out var value);
+                    return new Row(value, i);
+                }).ToList();
 
-                _sheet.UpdateActiveViewItems(_items, _hasPreviousPage, _hasNextPage);
+                _sheet.UpdateActiveViewItems(_rows, _hasPreviousPage, _hasNextPage);
             }
             catch (Exception e)
             {
                 await PopupService.EnqueueSnackbarAsync(e);
+                Logger.LogDebug(e, "Error while refreshing items");
             }
             finally
             {
@@ -185,16 +230,20 @@ public partial class MTemplateTable
 
     private ItemsProviderRequest GetItemsProviderRequest()
     {
-        return new ItemsProviderRequest()
-        {
-            PageIndex = _sheet.ActiveView.PageIndex,
-            PageSize = _sheet.ActiveView.PageSize,
-            FilterRequest = new Filter()
+        var filterRequest = _sheet.ActiveView?.Value.Filter is null
+            ? null
+            : new Filter()
             {
                 Operator = _sheet.ActiveView.Value.Filter.Operator,
                 Search = _sheet.ActiveView.Value.Filter.Search,
                 Options = [.._sheet.ActiveView.Value.Filter.Options]
-            },
+            };
+
+        return new ItemsProviderRequest()
+        {
+            PageIndex = _sheet.ActiveView.PageIndex,
+            PageSize = _sheet.ActiveView.PageSize,
+            FilterRequest = filterRequest,
             SortRequest = _sheet.ActiveView.Value.Sort
         };
     }

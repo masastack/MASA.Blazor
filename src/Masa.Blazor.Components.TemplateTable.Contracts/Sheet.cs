@@ -20,12 +20,19 @@ public class Sheet
     /// <summary>
     /// All views of the sheet.
     /// </summary>
-    public IEnumerable<View> Views { get; set; } = [];
+    public IList<View> Views { get; set; } = [];
 
     /// <summary>
     /// The options for pagination.
     /// </summary>
     public Pagination Pagination { get; set; } = new();
+
+    /// <summary>
+    /// The identifier of the row item.
+    /// </summary>
+    public string? ItemKeyName { get; set; }
+    
+    // TODO: 支持建列自动隐藏（添加新的属性，如HideItemKeyColumn）
 }
 
 public class Pagination

@@ -1,11 +1,15 @@
 ﻿@using System.Text.Json
 @using GraphQL.Client.Http
+@using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.Actions
 @inject GraphQLHttpClient GraphQLClient
 
 <MTemplateTable SheetProvider="@_sheetProvider"
                 ItemsProvider="@_itemsProvider"
-                OnSave="Save">
+                Height="300"
+                Detail
+                OnSave="@Save"
+                OnRemove="@Remove">
     <ActionsContent>
         <DetailAction/>
         <UpdateAction/>
@@ -28,6 +32,17 @@
             await Task.Delay(1000);
             Console.Out.WriteLine("Deleted");
         });
+    }
+
+    private async Task Remove(ICollection<Row> items)
+    {
+        var keyString = string.Join(", ", items.Select(u => u.Key));
+        var message = $"Are you sure to delete {items.Count()} items({keyString})?";
+        var confirmed = await PopupService.ConfirmAsync(message, AlertTypes.Warning);
+        if (confirmed)
+        {
+            Console.Out.WriteLine("Deleted");
+        }
     }
 
 }
