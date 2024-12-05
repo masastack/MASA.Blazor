@@ -174,17 +174,6 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
         }
     }
 
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-
-        if (Column < 1)
-        {
-            throw new InvalidOperationException(
-                $"The {ComponentName} component requires a value greater than 0 for the '{nameof(Column)}' parameter.");
-        }
-    }
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
