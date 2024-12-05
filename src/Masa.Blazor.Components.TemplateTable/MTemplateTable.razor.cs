@@ -79,7 +79,7 @@ public partial class MTemplateTable
         }
         """;
 
-    private SheetInfo? _sheet;
+    private SheetInfo? _sheet = null;
     private bool _init;
     private ICollection<Row> _rows = [];
 
@@ -137,6 +137,11 @@ public partial class MTemplateTable
 
     private async Task RefreshItemsAsync(ItemsProviderRequest request)
     {
+        if (_sheet is null)
+        {
+            return;
+        }
+        
         if (ItemsProvider is not null)
         {
             _loading = true;
@@ -163,20 +168,28 @@ public partial class MTemplateTable
                 }
 
                 var result = await ItemsProvider(request);
-                await Task.Delay(500); // TODO: just for testing, remove it if implemented
                 _totalCount = result.Result.TotalCount;
                 _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
                 _hasNextPage = result.Result.PageInfo.HasNextPage;
                 
-                if (string.IsNullOrWhiteSpace(ItemKeyName))
+                if (string.IsNullOrWhiteSpace(_sheet.ItemKeyName))
                 {
-                    throw new InvalidOperationException("The 'ItemKeyName' was missing.");
+                    throw new InvalidOperationException("The 'ItemKeyName' is required.");
                 }
                 
-                _rows = (result.Result.Items ?? []).Select(i =>
+                _rows = (result.Result.Items ?? []).Select(item =>
                 {
-                    i.TryGetNotNullValue(ItemKeyName, out var value);
-                    return new Row(value, i);
+                    if (!item.TryGetValueWithCaseInsensitiveKey(_sheet.ItemKeyName, out var value))
+                    {
+                        throw new InvalidOperationException("Cannot find the item key that named " + _sheet.ItemKeyName);
+                    }
+
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        throw new InvalidOperationException("The item key should not be null or empty");
+                    }
+
+                    return new Row(value, item);
                 }).ToList();
 
                 _sheet.UpdateActiveViewItems(_rows, _hasPreviousPage, _hasNextPage);
@@ -195,9 +208,9 @@ public partial class MTemplateTable
 
     private void UpdateStateOfActiveView()
     {
-        _rowHeight = _sheet.ActiveViewRowHeight;
-        _hasNextPage = _sheet.ActiveView?.HasNextPage ?? false;
-        _hasPreviousPage = _sheet.ActiveView?.HasPreviousPage ?? false;
+        _rowHeight = _sheet!.ActiveViewRowHeight;
+        _hasNextPage = _sheet.ActiveView.HasNextPage;
+        _hasPreviousPage = _sheet.ActiveView.HasPreviousPage;
 
         _columnOrder.Clear();
 
@@ -230,7 +243,7 @@ public partial class MTemplateTable
 
     private ItemsProviderRequest GetItemsProviderRequest()
     {
-        var filterRequest = _sheet.ActiveView?.Value.Filter is null
+        var filterRequest = _sheet!.ActiveView.Value.Filter is null
             ? null
             : new Filter()
             {
@@ -250,7 +263,7 @@ public partial class MTemplateTable
 
     private async Task HandleOnPaginationUpdateAsync((int PageIndex, int PageSize) data)
     {
-        _sheet.ActiveView.PageIndex = data.PageIndex;
+        _sheet!.ActiveView.PageIndex = data.PageIndex;
         _sheet.ActiveView.PageSize = data.PageSize;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }

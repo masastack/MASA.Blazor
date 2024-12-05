@@ -45,6 +45,7 @@ public partial class TemplateTable
             
             //TODO: 和sheetprovider一样把异常放到组件内处理
             var response = await GraphQLClient.SendQueryAsync<ItemsProviderResult>(request);
+            await Task.Delay(500); // TODO: just for testing, remove it if implemented
 
             if (response.Errors?.Length > 0)
             {

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Masa.Blazor.Components.TemplateTable;
 
 // TODO: rename this
-public class SheetInfo
+internal class SheetInfo
 {
     private Guid _activeViewId;
 
@@ -59,7 +59,7 @@ public class SheetInfo
     /// <summary>
     /// The identifier of the row item.
     /// </summary>
-    public string? ItemKeyName { get; set; }
+    public required string ItemKeyName { get; set; }
 
     [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView?.Columns ?? [];
 
@@ -73,7 +73,7 @@ public class SheetInfo
 
     [JsonIgnore] internal bool ActiveViewShowSelect => ActiveView?.Value.ShowSelect ?? false;
 
-    internal ViewInfo ActiveView { get; private set; } = default!;
+    public required ViewInfo ActiveView { get; set; }
 
     internal static SheetInfo From(Sheet sheet)
     {
@@ -82,26 +82,27 @@ public class SheetInfo
             throw new InvalidOperationException("The sheet must have at least one view.");
         }
 
+        if (string.IsNullOrWhiteSpace(sheet.ItemKeyName))
+        {
+            throw new InvalidOperationException("The 'ItemKeyName' is required.");
+        }
+
         var columnInfos = sheet.Columns.Select(c => new ColumnInfo(c)).ToList();
         var views = sheet.Views.Select(v => ViewInfo.From(v, columnInfos)).ToList();
         var activeView = views.FirstOrDefault(v => v.Value.Id == sheet.ActiveViewId)
                          ?? views.FirstOrDefault(v => v.Value.Id == sheet.DefaultViewId)
                          ?? views.First();
 
-        var sheetInfo = new SheetInfo
+        return new SheetInfo
         {
             Columns = columnInfos,
             Views = views,
             Pagination = sheet.Pagination,
-            ActiveViewId = sheet.ActiveViewId,
             DefaultViewId = sheet.DefaultViewId,
-            ItemKeyName = sheet.ItemKeyName
+            ItemKeyName = sheet.ItemKeyName,
+            ActiveView = activeView,
+            ActiveViewId = activeView.Value.Id
         };
-
-        sheetInfo.ActiveViewId = activeView.Value.Id;
-        sheetInfo.ActiveView = activeView;
-
-        return sheetInfo;
     }
 
     internal void SetActiveView(Guid viewId)
@@ -113,22 +114,12 @@ public class SheetInfo
 
     internal void UpdateActiveViewRowHeight(RowHeight rowHeight)
     {
-        if (ActiveView is null)
-        {
-            return;
-        }
-
         ActiveView.Value.RowHeight = rowHeight;
     }
 
     internal void UpdateActiveViewItems(ICollection<Row> items,
         bool hasPreviousPage, bool hasNextPage)
     {
-        if (ActiveView is null)
-        {
-            return;
-        }
-
         ActiveView.Rows = items;
         ActiveView.HasPreviousPage = hasPreviousPage;
         ActiveView.HasNextPage = hasNextPage;

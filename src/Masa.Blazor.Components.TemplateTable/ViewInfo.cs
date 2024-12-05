@@ -8,7 +8,7 @@ public class ViewInfo
 
     public ICollection<Row>? Rows { get; set; }
     
-    public ICollection<Row> Selection { get; set; } = [];
+    public Dictionary<Row, bool> Selection { get; set; } = [];
 
     public int PageIndex { get; set; } = 1;
 

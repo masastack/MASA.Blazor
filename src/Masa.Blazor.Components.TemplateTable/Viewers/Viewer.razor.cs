@@ -1,5 +1,4 @@
 ﻿using BemIt;
-using Masa.Blazor.Components.TemplateTable.DetailDialogs;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 
@@ -67,7 +66,7 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public List<string> SelectedKeys { get; set; } = [];
 
-    [Parameter] public List<string> SelectableKeys { get; set; } = [];
+    // [Parameter] public List<string> SelectableKeys { get; set; } = [];
 
     [Parameter] public Action<(Row Item, bool Selected)> OnSelect { get; set; } = default!;
 
@@ -93,7 +92,16 @@ public partial class Viewer : IAsyncDisposable
 
     private int _actionsCount = 0;
 
-    private bool IsSelectAll => Rows.All(u => SelectedKeys.Contains(u.Key));
+    private (bool Indeterminate, bool AllSelected) SelectionState
+    {
+        get
+        {
+            var length = Rows.Count;
+            var count = Rows.Count(item => SelectedKeys.Contains(item.Key));
+            var allSelected = length == count;
+            return (count > 0 && !allSelected, allSelected);
+        }
+    }
 
     private int RowHeightValue => RowHeight switch
     {
@@ -120,10 +128,12 @@ public partial class Viewer : IAsyncDisposable
         {
             return;
         }
-        
+
         var builder = new RenderTreeBuilder();
         ActionsContent.Invoke(builder);
-        _actionsCount = builder.GetFrames().Array.Where(u => u.FrameType == RenderTreeFrameType.Component).Count();
+#pragma warning disable BL0006
+        _actionsCount = builder.GetFrames().Array.Count(u => u.FrameType == RenderTreeFrameType.Component);
+#pragma warning restore BL0006
     }
 
     protected override void OnParametersSet()
@@ -143,7 +153,7 @@ public partial class Viewer : IAsyncDisposable
 
             _tableJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor.Components.TemplateTable/MTemplateTable.razor.js");
-            await _tableJSObjectReference.InvokeVoidAsync("init", _simpleTable.Ref,
+            await _tableJSObjectReference.InvokeVoidAsync("init", _simpleTable?.Ref,
                 _dotNetObjectReference);
 
             _sized = true;

@@ -1,5 +1,4 @@
-﻿@using System.Diagnostics.CodeAnalysis
-@using DeepCloner.Core
+﻿@using DeepCloner.Core
 @using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.ColumnDialogs
 @using Masa.Blazor.Components.TemplateTable.FilterDialogs
@@ -38,8 +37,8 @@
                  HasActions="@_sheet.ActiveViewHasActions"
                  HasSelect="@_sheet.ActiveViewShowSelect"
                  HasCustom="@HasCustomConfiguration"
-                 HasFilter="@(_sheet.ActiveView?.Value?.Filter?.Options.Count > 0)"
-                 HasSort="@(_sheet.ActiveView?.Value?.Sort?.Options.Count > 0)"
+                 HasFilter="@(_sheet.ActiveView.Value.Filter?.Options.Count > 0)"
+                 HasSort="@(_sheet.ActiveView.Value.Sort?.Options.Count > 0)"
                  OnFilterClick="@(() => _filterDialog?.Open())"
                  OnSortClick="@(() => _sortDialog?.Open())"
                  OnRowRemove="@Remove"
@@ -53,7 +52,7 @@
                 Loading="@_loading"
                 RowHeight="@_rowHeight"
                 Rows="@_rows"
-                Sort="@_sheet.ActiveView?.Value?.Sort"
+                Sort="@_sheet.ActiveView.Value.Sort"
                 OnSortUpdate="@SortUpdate"
                 HasActions="@_sheet.ActiveViewHasActions"
                 ShowSelect="@_sheet.ActiveViewShowSelect"
@@ -72,8 +71,7 @@
                 @ref="_viewer">
         </Viewer>
 
-        @if (_sheet.ActiveView is not null)
-        {
+        @{
             var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize;
             var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
 
@@ -92,14 +90,14 @@
         </ColumnDialog>
 
         <FilterDialog @ref="_filterDialog"
-                      ActiveView="@_sheet.ActiveView?.Value"
+                      ActiveView="@_sheet.ActiveView.Value"
                       Columns="@_sheet.Columns"
                       HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                       OnSave="@SaveFilter">
         </FilterDialog>
 
         <SortDialog @ref="_sortDialog"
-                    ActiveView="@_sheet.ActiveView?.Value"
+                    ActiveView="@_sheet.ActiveView.Value"
                     Columns="@_sheet.Columns"
                     HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                     OnSave="@SortUpdate">
@@ -129,7 +127,7 @@
     {
         get
         {
-            if (_sheet.ActiveView is null)
+            if (_sheet?.ActiveView is null)
             {
                 return false;
             }
@@ -155,7 +153,7 @@
 
     private void AddNewView()
     {
-        var clonedView = _sheet.ActiveView.DeepClone();
+        var clonedView = _sheet!.ActiveView.DeepClone();
         clonedView.Value.Id = Guid.NewGuid();
         clonedView.Value.Name = "Copy of " + clonedView.Value.Name;
 
@@ -167,7 +165,7 @@
 
     private async Task ResetView()
     {
-        _sheet.ActiveView.Value.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
+        _sheet!.ActiveView.Value.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
         _columnOrder = [];
         _sheet.ActiveView.Value.Filter = new();
         _sheet.ActiveView.Value.Sort = null;
@@ -177,7 +175,7 @@
 
     private void RenameView((Guid id, string Name) args)
     {
-        var view = _sheet.Views.FirstOrDefault(u => u.Value.Id == args.id);
+        var view = _sheet!.Views.FirstOrDefault(u => u.Value.Id == args.id);
         if (view is not null)
         {
             view.Value.Name = args.Name;
@@ -186,20 +184,20 @@
 
     private async Task DeleteView(View view)
     {
-        if (_sheet.Views.Count < 1)
+        if (_sheet!.Views.Count < 1)
         {
             return;
         }
 
-        var confirmed =
-            await PopupService.ConfirmAsync(
-                "Delete view",
-                $"Are you sure you want to delete this view ({view.Name})?",
-                AlertTypes.Error);
+        // TODO: i18n
+        var confirmed = await PopupService.ConfirmAsync(
+            "Delete view",
+            $"Are you sure you want to delete this view ({view.Name})?",
+            AlertTypes.Warning);
 
         if (!confirmed) return;
 
-        var viewInfo = _sheet.Views.FirstOrDefault(v => v.Value.Id == view.Id);
+        var viewInfo = _sheet.Views.First(v => v.Value.Id == view.Id);
         _sheet.Views.Remove(viewInfo);
 
         if (_sheet.ActiveViewId == view.Id)
@@ -225,6 +223,8 @@
         {
             _rows = _sheet.ActiveView.Rows;
         }
+
+        await SelectedChanged.InvokeAsync(SelectedKeys);
     }
 
     private void ResetSheet()
@@ -252,7 +252,7 @@
 
         Console.Out.WriteLine("[TemplateTable] ColumnOrderChanged: " + string.Join(",", _columnOrder));
 
-        _sheet.ActiveViewColumns.Sort((x, y) =>
+        _sheet!.ActiveViewColumns.Sort((x, y) =>
         {
             var xIndex = _columnOrder.IndexOf(x.ColumnId);
             var yIndex = _columnOrder.IndexOf(y.ColumnId);
@@ -263,12 +263,12 @@
     private void HandleOnRowHeightChanged(RowHeight rowHeight)
     {
         _rowHeight = rowHeight;
-        _sheet.UpdateActiveViewRowHeight(rowHeight);
+        _sheet!.UpdateActiveViewRowHeight(rowHeight);
     }
 
     private async Task HandleOnPageSizeOptionsChanged(List<int> pageSizeOptions)
     {
-        _sheet.Pagination.PageSizeOptions = pageSizeOptions;
+        _sheet!.Pagination.PageSizeOptions = pageSizeOptions;
         if (pageSizeOptions.Count == 0)
         {
             return;
@@ -289,17 +289,17 @@
     {
         if (columnId == Preset.ActionsColumnId)
         {
-            _sheet.ActiveView!.Value.HasActions = !_sheet.ActiveView.Value.HasActions;
+            _sheet!.ActiveView.Value.HasActions = !_sheet.ActiveView.Value.HasActions;
             return;
         }
 
         if (columnId == Preset.RowSelectColumnId)
         {
-            _sheet.ActiveView!.Value.ShowSelect = !_sheet.ActiveView.Value.ShowSelect;
+            _sheet!.ActiveView.Value.ShowSelect = !_sheet.ActiveView.Value.ShowSelect;
             return;
         }
 
-        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == columnId);
+        var viewColumn = _sheet!.ActiveViewColumns.First(u => u.ColumnId == columnId);
         viewColumn.Hidden = !viewColumn.Hidden;
     }
 
@@ -311,7 +311,7 @@
     private void OpenDetailDialog(IReadOnlyDictionary<string, JsonElement> item)
     {
         List<DetailItem> detailItems = [];
-        foreach (var viewColumn in _sheet.ActiveViewColumns)
+        foreach (var viewColumn in _sheet!.ActiveViewColumns)
         {
             var key = item.Keys.FirstOrDefault(u => string.Equals(u, viewColumn.ColumnId, StringComparison.OrdinalIgnoreCase));
             if (key is null || _sheet.ActiveViewHiddenColumnIds.Contains(viewColumn.ColumnId))
@@ -330,18 +330,15 @@
         _imageViewer?.Open(images);
     }
 
-    private string? ItemKeyName => _sheet.ItemKeyName;
-    private List<string> SelectedKeys => _sheet.ActiveView.Selection.Select(u => u.Key).ToList();
+    private IEnumerable<Row> SelectedItems => _sheet?.ActiveView.Selection.Where(u => u.Value).Select(u => u.Key) ?? [];
+
+    private List<string> SelectedKeys => SelectedItems.Select(u => u.Key).ToList();
 
     private void HandleOnSelect((Row, bool) args)
     {
         var (item, selected) = args;
 
-        _sheet.ActiveView.Selection.Remove(item);
-        if (selected)
-        {
-            _sheet.ActiveView.Selection.Add(item);
-        }
+        _sheet!.ActiveView.Selection[item] = selected;
 
         _ = UpdateSelectedValue().ConfigureAwait(false);
 
@@ -352,29 +349,20 @@
     {
         if (SelectedChanged.HasDelegate)
         {
-            await SelectedChanged.InvokeAsync(
-                _sheet.ActiveView.Selection.Select(u => u.Key).ToArray()
-            );
+            await SelectedChanged.InvokeAsync(SelectedKeys);
         }
     }
 
     private void HandleOnSelectAll(bool selected)
     {
-        if (_sheet.ActiveView?.Rows is null)
+        if (_sheet!.ActiveView.Rows is null)
         {
             return;
         }
-
-        _sheet.ActiveView.Selection.Clear();
-        if (selected)
+        
+        foreach (var item in _sheet.ActiveView.Rows)
         {
-            foreach (var item in _sheet.ActiveView.Rows)
-            {
-                if (item.Key is not null)
-                {
-                    _sheet.ActiveView.Selection.Add(item);
-                }
-            }
+            _sheet.ActiveView.Selection[item] = selected;
         }
 
         UpdateSelectedValue().ConfigureAwait(false);
@@ -384,7 +372,7 @@
 
     private void UpdateColumn(ColumnInfo data)
     {
-        var column = _sheet.Columns.FirstOrDefault(u => u.Id == data.Id);
+        var column = _sheet!.Columns.FirstOrDefault(u => u.Id == data.Id);
         if (column is null)
         {
             return;
@@ -402,32 +390,32 @@
 
     private async Task SaveFilter(Filter filter)
     {
-        _sheet.ActiveView.Value.Filter = filter;
+        _sheet!.ActiveView.Value.Filter = filter;
         _sheet.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private async Task SortUpdate(Sort sort)
     {
-        _sheet.ActiveView.Value.Sort = sort;
+        _sheet!.ActiveView.Value.Sort = sort;
         _sheet.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private async Task Search()
     {
-        _sheet.ActiveView.PageIndex = 1;
+        _sheet!.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
     private async Task Remove()
     {
-        await OnRemove.InvokeAsync(_sheet.ActiveView.Selection);
+        await OnRemove.InvokeAsync(SelectedItems.ToArray());
     }
 
     private void ResizeColumn((string ColumnId, double Width) args)
     {
-        var viewColumn = _sheet.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == args.ColumnId);
+        var viewColumn = _sheet!.ActiveViewColumns.FirstOrDefault(u => u.ColumnId == args.ColumnId);
         if (viewColumn is null)
         {
             return;
@@ -440,7 +428,7 @@
     {
         var sheet = new Sheet()
         {
-            Columns = _sheet.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
+            Columns = _sheet!.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
             Views = _sheet.Views.Select(View (u) => u.ToView()).ToList(),
             Pagination = _sheet.Pagination,
             ActiveViewId = _sheet.ActiveViewId,

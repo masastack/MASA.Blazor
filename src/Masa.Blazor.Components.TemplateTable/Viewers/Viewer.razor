@@ -57,7 +57,8 @@
                                     OnClick="@OnSortUpdate"
                                     OnColumnToggle="@OnColumnToggle"
                                     OnColumnEditClick="@OnColumnEditClick"
-                                    IsSelectedAll="@IsSelectAll"
+                                    IsIndeterminate="@SelectionState.Indeterminate"
+                                    IsSelectedAll="@SelectionState.AllSelected"
                                     OnSelectAll="@OnSelectAll"
                                     CheckboxColor="@CheckboxColor"/>
                     }

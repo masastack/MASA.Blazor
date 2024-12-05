@@ -6,6 +6,7 @@
     @if (IsRowSelect)
     {
         <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Indeterminate="@IsIndeterminate"
                          Value="@IsSelectedAll"
                          ValueChanged="@OnSelectAll"
                          Color="@CheckboxColor"/>
@@ -58,6 +59,8 @@
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
 
     [Parameter] public bool IsSelectedAll { get; set; }
+
+    [Parameter] public bool IsIndeterminate { get; set; }
 
     [Parameter] public EventCallback<bool> OnSelectAll { get; set; }
 

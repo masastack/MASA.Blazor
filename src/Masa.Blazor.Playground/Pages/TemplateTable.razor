@@ -4,21 +4,26 @@
 @using Masa.Blazor.Components.TemplateTable.Actions
 @inject GraphQLHttpClient GraphQLClient
 
+<h3>@(string.Join(',', _selected))</h3>
+
 <MTemplateTable SheetProvider="@_sheetProvider"
                 ItemsProvider="@_itemsProvider"
+                @bind-Selected="@_selected"
                 Height="300"
                 Detail
                 OnSave="@Save"
                 OnRemove="@Remove">
-    <ActionsContent>
+    <RowActionsContent>
         <DetailAction/>
         <UpdateAction/>
         <DeleteAction Icon="mdi-delete-variant" Tooltip="删除" OnClick="OnDelete"/>
         <ActionTemplate Icon="mdi-home" Tooltip="Custom Action !" OnClick="OnCustomAction"/>
-    </ActionsContent>
+    </RowActionsContent>
 </MTemplateTable>
 
 @code {
+
+    private ICollection<string> _selected = [];
 
     private void OnCustomAction(IReadOnlyDictionary<string, JsonElement> data)
     {
