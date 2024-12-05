@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.DataTable;
+
+namespace Masa.Blazor;
 
 // public class MDataIterator<TItem> : BDataIterator<TItem>, IDataIterator<TItem>, ILoadable
 public partial class MDataIterator<TItem> : MData<TItem>
@@ -110,6 +112,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
 
     private IEnumerable<TItem>? _prevValue;
     private IEnumerable<string>? _prevSelected;
+    private IEnumerable<TItem>? _prevExpanded;
 
     public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
 
@@ -117,14 +120,10 @@ public partial class MDataIterator<TItem> : MData<TItem>
 
     public IEnumerable<TItem> SelectableItems => ComputedItems.Where(IsSelectable);
 
-    private IEnumerable<TItem>? _prevExpanded;
+    private Dictionary<string, bool> Expansion { get; set; } = new();
 
-    public bool IsEmpty => !Items.Any() || Pagination.ItemsLength == 0;
+    private Dictionary<SelectionKey<TItem>, bool> Selection { get; } = new();
 
-    protected Dictionary<string, bool> Expansion { get; private set; } = new();
-
-    protected Dictionary<string, bool> Selection { get; } = new();
-    
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -168,18 +167,19 @@ public partial class MDataIterator<TItem> : MData<TItem>
                 var key = ItemKey?.Invoke(item);
                 if (key is null) continue;
 
-                Selection[key] = true;
-
+                SelectionKey<TItem> selectionKeyKey = new(key, item);
+                Selection[selectionKeyKey] = true;
                 keys.Add(key);
             }
         }
         else if (Selected is not null)
         {
             keys = [];
-            foreach (var item in Selected)
+            foreach (var key in Selected)
             {
-                Selection[item] = true;
-                keys.Add(item);
+                SelectionKey<TItem> selectionKeyKey = new(key, default);
+                Selection[selectionKeyKey] = true;
+                keys.Add(key);
             }
         }
 
@@ -191,7 +191,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
         // Unselect those in selection but not in Value when updating Value
         foreach (var (key, _) in Selection)
         {
-            Selection[key] = keys.Contains(key);
+            Selection[key] = keys.Contains(key.Key);
         }
     }
 
@@ -202,7 +202,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
         yield return _block.Name;
     }
 
-    public bool IsExpanded(TItem item)
+    protected bool IsExpanded(TItem item)
     {
         var key = ItemKey?.Invoke(item);
         if (string.IsNullOrEmpty(key))
@@ -227,7 +227,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
         return Expansion.TryGetValue(key, out var expanded) && expanded;
     }
 
-    public void Expand(TItem item, bool value = true)
+    protected void Expand(TItem item, bool value = true)
     {
         if (SingleExpand)
         {
@@ -258,7 +258,7 @@ public partial class MDataIterator<TItem> : MData<TItem>
         ExpandedChanged.InvokeAsync(expanded);
     }
 
-    public bool IsSelected(TItem item)
+    protected bool IsSelected(TItem item)
     {
         var key = ItemKey?.Invoke(item);
         if (key == null)
@@ -266,15 +266,11 @@ public partial class MDataIterator<TItem> : MData<TItem>
             return false;
         }
 
-        if (Selection.TryGetValue(key, out var selected))
-        {
-            return selected;
-        }
-
-        return false;
+        SelectionKey<TItem> selectionKey = new(key, item);
+        return Selection.GetValueOrDefault(selectionKey, false);
     }
 
-    public void Select(TItem item, bool value = true)
+    protected void Select(TItem item, bool value = true)
     {
         if (!IsSelectable(item))
         {
@@ -292,25 +288,28 @@ public partial class MDataIterator<TItem> : MData<TItem>
             throw new InvalidOperationException("ItemKey or key should not be null");
         }
 
-        Selection[key] = value;
+        SelectionKey<TItem> selectionKey = new(key, item);
+
+        Selection[selectionKey] = value;
 
         UpdateSelectedItemsAsValue();
 
         OnItemSelect.InvokeAsync((item, value));
     }
 
-    public bool IsSelectable(TItem item)
+    protected bool IsSelectable(TItem item)
     {
         return SelectableKey?.Invoke(item) is null or true;
     }
 
-    public void ToggleSelectAll(bool value)
+    protected void ToggleSelectAll(bool value)
     {
         foreach (var item in SelectableItems)
         {
             var key = ItemKey?.Invoke(item);
             if (key == null) continue;
-            Selection[key] = value;
+            SelectionKey<TItem> selectionKey = new(key, item);
+            Selection[selectionKey] = value;
         }
 
         UpdateSelectedItemsAsValue();
@@ -320,17 +319,15 @@ public partial class MDataIterator<TItem> : MData<TItem>
 
     private void UpdateSelectedItemsAsValue()
     {
-        var selectedItems = Items.Where(IsSelected);
+        var selected = Selection.Where(u => u.Value).ToList();
 
         if (ValueChanged.HasDelegate)
         {
-            ValueChanged.InvokeAsync(selectedItems);
+            _ = ValueChanged.InvokeAsync(selected.Select(u => u.Key.Item)!);
         }
-
-        var selected = selectedItems.Select(ItemKey);
-        if (SelectedChanged.HasDelegate)
+        else if (SelectedChanged.HasDelegate)
         {
-            SelectedChanged.InvokeAsync(selected);
+            _ = SelectedChanged.InvokeAsync(selected.Select(u => u.Key.Key));
         }
     }
 }
