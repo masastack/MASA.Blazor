@@ -402,19 +402,19 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         InvokeAsync(StateHasChanged);
     }
 
-    public Task HandleOnRowClickAsync(MouseEventArgs args, TItem item)
+    private Task HandleOnRowClickAsync(MouseEventArgs args, TItem item)
     {
         var rowMouseEventArgs = new DataTableRowMouseEventArgs<TItem>(item, IsMobile, IsSelected(item), IsExpanded(item), args);
         return OnRowClick.InvokeAsync(rowMouseEventArgs);
     }
 
-    public Task HandleOnRowContextmenuAsync(MouseEventArgs args, TItem item)
+    private Task HandleOnRowContextmenuAsync(MouseEventArgs args, TItem item)
     {
         var rowMouseEventArgs = new DataTableRowMouseEventArgs<TItem>(item, IsMobile, IsSelected(item), IsExpanded(item), args);
         return OnRowContextmenu.InvokeAsync(rowMouseEventArgs);
     }
 
-    public Task HandleOnRowDblClickAsync(MouseEventArgs args, TItem item)
+    private Task HandleOnRowDblClickAsync(MouseEventArgs args, TItem item)
     {
         var rowMouseEventArgs = new DataTableRowMouseEventArgs<TItem>(item, IsMobile, IsSelected(item), IsExpanded(item), args);
         var e = OnRowDblClick.HasDelegate ? OnRowDblClick : OnRowDbClick;

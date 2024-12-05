@@ -159,17 +159,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
         return ItemDisabled?.Invoke(item) is true || item!.Equals(_loadingItem);
     }
 
-    private async Task OnCancel()
-    {
-        if (VisibleChanged.HasDelegate)
-        {
-            await VisibleChanged.InvokeAsync(false);
-        }
-        else
-        {
-            Visible  = false;
-        }
-    }
+    private Task OnCancel() => HandleVisibleChanged(false);
 
     private async Task HandleOnConfirm()
     {

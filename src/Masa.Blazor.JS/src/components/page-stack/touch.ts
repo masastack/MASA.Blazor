@@ -51,10 +51,8 @@ export function useTouch(
   }
 
   function isActiveElement(e: TouchEvent) {
-    return (
-      (e.target as HTMLElement).closest(".m-page-stack-item").parentElement ===
-      el
-    );
+    const pageStackItem = (e.target as HTMLElement).closest(".m-page-stack-item");
+    return pageStackItem && pageStackItem.parentElement === el;
   }
 
   function onTouchstart(e: TouchEvent) {
