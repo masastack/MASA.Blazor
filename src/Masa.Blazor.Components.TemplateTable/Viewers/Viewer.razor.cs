@@ -74,6 +74,7 @@ public partial class Viewer : IAsyncDisposable
 
     // ReSharper disable once StaticMemberInGenericType
     private static Block _block = new("masa-table-viewer");
+    private ModifierBuilder _rowModifierBuilder = _block.Element("row").CreateModifierBuilder();
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private StyleBuilder _styleBuilder = new();
 

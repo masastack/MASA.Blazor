@@ -85,7 +85,11 @@
                 Context="item"
                 ItemSize="RowHeightValue"
                 OverscanCount="1">
-        <tr class="masa-table-viewer__row">
+        @{
+            var isSelected = SelectedKeys.Contains(item.Key);
+        }
+
+        <tr class="@_rowModifierBuilder.AddClass("m-data-table__selected", isSelected)">
             @foreach (var template in _orderedViewColumns)
             {
                 bool hidden;
@@ -117,7 +121,7 @@
                                 }
                                 else if (template.Column.Type == ColumnType.RowSelect)
                                 {
-                                    @GenRowSelectCell(item)
+                                    @GenRowSelectCell(item, isSelected)
                                 }
                                 else
                                 {
@@ -399,12 +403,10 @@
         </CascadingValue>
     };
     
-    private RenderFragment GenRowSelectCell(Row item) => __builder =>
+    private RenderFragment GenRowSelectCell(Row item, bool selected) => __builder =>
     {
-        var isSelected = SelectedKeys.Contains(item.Key);
-
         <MSimpleCheckbox Class="m-data-table__checkbox"
-                         Value="@isSelected"
+                         Value="@selected"
                          ValueChanged="val => OnSelect((item, val))"
                          Color="@(CheckboxColor)">
         </MSimpleCheckbox>

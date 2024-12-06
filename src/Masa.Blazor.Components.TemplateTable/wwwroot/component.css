@@ -166,14 +166,6 @@
   height: var(--mt-row-height) !important;
 }
 
-.masa-table-viewer__row:hover {
-  background: #eeeeee;
-}
-
-.masa-table-viewer__row {
-  background: #FFFFFF;
-}
-
 .masa-table-viewer__cell {
   height: inherit;
   padding: 6.5px 0;
