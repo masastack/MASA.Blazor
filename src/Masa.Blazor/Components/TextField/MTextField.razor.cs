@@ -541,9 +541,9 @@ public partial class MTextField<TValue> : MInput<TValue>
         }
     }
 
-    protected override void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
+    protected override void UpdateInternalValue(TValue? value, InternalValueChangeType changeType, bool force = false)
     {
-        base.UpdateInternalValue(value, changeType);
+        base.UpdateInternalValue(value, changeType, force);
 
         if (IsNumeric(value, out var numeric))
         {
@@ -568,12 +568,15 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     protected override TValue? ConvertAndSetValueByJSInterop(TValue? val)
     {
-        if (Props.Precision.HasValue && IsNumeric(val, out var numeric))
+        if (IsNumeric(val, out var numeric))
         {
             var decimalValue = Convert.ToDecimal(numeric, CultureInfo.InvariantCulture);
-            var newValue = Math.Round(decimalValue, Props.Precision.Value);
-            _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
-            return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
+            if (Props.Precision.HasValue)
+            {
+                var newValue = Math.Round(decimalValue, Props.Precision.Value);
+                _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
+                return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
+            }
         }
 
         return base.ConvertAndSetValueByJSInterop(val);
@@ -598,8 +601,15 @@ public partial class MTextField<TValue> : MInput<TValue>
         if (succeeded)
         {
             _badInput = false;
-            var validValue = GetValidValue(convertedValue);
-            UpdateInternalValue(validValue, InternalValueChangeType.Input);
+            
+            // the value would be changed internally if it's out of range,
+            // so we need to update the change type to InternalOperation
+            var (validValue, changed) = GetValidValue(convertedValue);
+
+            UpdateInternalValue(
+                validValue,
+                changed ? InternalValueChangeType.InternalOperation : InternalValueChangeType.Input, 
+                changed);
         }
         else
         {
@@ -621,7 +631,7 @@ public partial class MTextField<TValue> : MInput<TValue>
         }
     }
 
-    private TValue GetValidValue(TValue val)
+    private (TValue value, bool changed) GetValidValue(TValue val)
     {
         if (IsNumeric(val, out var numeric))
         {
@@ -629,16 +639,16 @@ public partial class MTextField<TValue> : MInput<TValue>
 
             if (Props.Min.HasValue && decimalValue < Props.Min)
             {
-                return (TValue)Convert.ChangeType(Props.Min, typeof(TValue), CultureInfo.InvariantCulture);
+                return ((TValue)Convert.ChangeType(Props.Min, typeof(TValue), CultureInfo.InvariantCulture), true);
             }
 
             if (Props.Max.HasValue && decimalValue > Props.Max)
             {
-                return (TValue)Convert.ChangeType(Props.Max, typeof(TValue), CultureInfo.InvariantCulture);
+                return ((TValue)Convert.ChangeType(Props.Max, typeof(TValue), CultureInfo.InvariantCulture), true);
             }
         }
 
-        return val;
+        return (val, false);
     }
 
     public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)

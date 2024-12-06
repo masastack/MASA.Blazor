@@ -54,10 +54,18 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     private EditContext? _prevEditContext;
     private InternalValueChangeType _changeType;
 
-    protected virtual void UpdateInternalValue(TValue? value, InternalValueChangeType changeType)
+    protected virtual void UpdateInternalValue(TValue? value, InternalValueChangeType changeType, bool force = false)
     {
         _changeType = changeType;
-        InternalValue = value;
+
+        if (force)
+        {
+            OnInternalValueChange(value);
+        }
+        else
+        {
+            InternalValue = value;
+        }
     }
 
     protected virtual TValue? DefaultValue => default;
