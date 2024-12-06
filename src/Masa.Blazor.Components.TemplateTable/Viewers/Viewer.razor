@@ -401,7 +401,7 @@
     
     private RenderFragment GenRowSelectCell(Row item) => __builder =>
     {
-        var isSelected = item.Key is not null && SelectedKeys.Contains(item.Key);
+        var isSelected = SelectedKeys.Contains(item.Key);
 
         <MSimpleCheckbox Class="m-data-table__checkbox"
                          Value="@isSelected"

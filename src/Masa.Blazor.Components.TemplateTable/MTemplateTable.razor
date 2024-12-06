@@ -223,8 +223,6 @@
         {
             _rows = _sheet.ActiveView.Rows;
         }
-
-        await SelectedChanged.InvokeAsync(SelectedKeys);
     }
 
     private void ResetSheet()
@@ -340,17 +338,7 @@
 
         _sheet!.ActiveView.Selection[item] = selected;
 
-        _ = UpdateSelectedValue().ConfigureAwait(false);
-
         StateHasChanged();
-    }
-
-    private async Task UpdateSelectedValue()
-    {
-        if (SelectedChanged.HasDelegate)
-        {
-            await SelectedChanged.InvokeAsync(SelectedKeys);
-        }
     }
 
     private void HandleOnSelectAll(bool selected)
@@ -364,8 +352,6 @@
         {
             _sheet.ActiveView.Selection[item] = selected;
         }
-
-        UpdateSelectedValue().ConfigureAwait(false);
 
         StateHasChanged();
     }

@@ -7,14 +7,10 @@ namespace Masa.Blazor;
 public partial class MTemplateTable
 {
     [Inject] private ILogger<MTemplateTable> Logger { get; set; } = default!;
-    
+
     [Parameter] public SheetProvider? SheetProvider { get; set; }
 
     [Parameter] public ItemsProvider? ItemsProvider { get; set; }
-
-    [Parameter] public ICollection<string> Selected { get; set; } = [];
-
-    [Parameter] public EventCallback<ICollection<string>> SelectedChanged { get; set; }
 
     [Parameter] public string? CheckboxColor { get; set; }
 
@@ -141,7 +137,7 @@ public partial class MTemplateTable
         {
             return;
         }
-        
+
         if (ItemsProvider is not null)
         {
             _loading = true;
@@ -171,17 +167,18 @@ public partial class MTemplateTable
                 _totalCount = result.Result.TotalCount;
                 _hasPreviousPage = result.Result.PageInfo.HasPreviousPage;
                 _hasNextPage = result.Result.PageInfo.HasNextPage;
-                
+
                 if (string.IsNullOrWhiteSpace(_sheet.ItemKeyName))
                 {
                     throw new InvalidOperationException("The 'ItemKeyName' is required.");
                 }
-                
+
                 _rows = (result.Result.Items ?? []).Select(item =>
                 {
                     if (!item.TryGetValueWithCaseInsensitiveKey(_sheet.ItemKeyName, out var value))
                     {
-                        throw new InvalidOperationException("Cannot find the item key that named " + _sheet.ItemKeyName);
+                        throw new InvalidOperationException("Cannot find the item key that named " +
+                                                            _sheet.ItemKeyName);
                     }
 
                     if (string.IsNullOrWhiteSpace(value))
