@@ -149,7 +149,8 @@
             }
         }
         <MCol Cols="12" Md="hasSearch ? 12 : 6" Class="text-right">
-            @if (HasSelect)
+            @ViewActionsContent
+            @if (ShowBulkDelete && HasSelect)
             {
                 <MButton Disabled="@(!HasSelectedKeys)"
                          Color="error"
@@ -174,100 +175,124 @@
     </MRow>
 </div>
 
-<PModal @bind-Value="_configDialog"
-        Title="表格配置"
-        MaxWidth="600"
-        Persistent>
-    <div class="pb-3">
-        <MDivider Class="mb-3" Left>
-            列设置
-        </MDivider>
-        <div class="m-template-table__toolbar-columns" @ref="@_columnsRef">
-            <MSortableProvider Items="@Columns"
-                               ItemKey="@(column => column.Id)"
-                               Order="@ColumnOrder"
-                               OrderChanged="@ColumnOrderChanged"
-                               ContainerRef="@_columnsRef"
-                               GhostClass="accent--text"
-                               Handle=".handle"
-                               Ignore=".ignore-element">
-                <ItemContent Context="sortContext">
-                    @{
-                        bool hidden, handle, editable;
-                        if (sortContext.Item.Id == Preset.ActionsColumnId)
-                        {
-                            hidden = !HasActions;
-                            handle = false;
-                            editable = false;
-                        }
-                        else if (sortContext.Item.Id == Preset.RowSelectColumnId)
-                        {
-                            hidden = !HasSelect;
-                            handle = false;
-                            editable = false;
-                        }
-                        else
-                        {
-                            hidden = HiddenColumnIds.Contains(sortContext.Item.Id);
-                            handle = true;
-                            editable = true;
-                        }
+<PDrawer @bind-Value="_configDialog"
+         Title="表格配置"
+         MaxWidth="600"
+         ContentClass="m-template-table__config">
+    <MExpansionPanels Flat Multiple Accordion @bind-Values="_panels">
+        <MExpansionPanel Title="全局设置">
+            <MExpansionPanelContent>
+                <div class="mb-3">
+                    <MDivider Class="mb-3" Left>
+                        列设置
+                    </MDivider>
+                    <div class="m-template-table__toolbar-columns" @ref="@_columnsRef">
+                        <MSortableProvider Items="@Columns"
+                                           ItemKey="@(column => column.Id)"
+                                           Order="@ColumnOrder"
+                                           OrderChanged="@ColumnOrderChanged"
+                                           ContainerRef="@_columnsRef"
+                                           GhostClass="accent--text"
+                                           Handle=".handle"
+                                           Ignore=".ignore-element">
+                            <ItemContent Context="sortContext">
+                                @{
+                                    bool hidden, handle, editable;
+                                    if (sortContext.Item.Id == Preset.ActionsColumnId)
+                                    {
+                                        hidden = !HasActions;
+                                        handle = false;
+                                        editable = false;
+                                    }
+                                    else if (sortContext.Item.Id == Preset.RowSelectColumnId)
+                                    {
+                                        hidden = !HasSelect;
+                                        handle = false;
+                                        editable = false;
+                                    }
+                                    else
+                                    {
+                                        hidden = HiddenColumnIds.Contains(sortContext.Item.Id);
+                                        handle = true;
+                                        editable = true;
+                                    }
 
-                        var css = $"{(handle ? "handle" : "ignore-element")} {(hidden ? "hidden" : "")}";
-                    }
-                    <MChip Draggable="@handle"
-                           Label
-                           Class="@css"
-                           Color="@(hidden ? "grey" : "black")"
-                           Outlined
-                           Attributes="@sortContext.Attrs">
-                        @Templates.GenTypeIcon(sortContext.Item.Type, small: true)
-                        <span class="mr-2">@sortContext.Item.Name</span>
-                        @if (editable)
-                        {
-                            <MButton IconName="mdi-pencil-outline"
-                                     Small
-                                     Style="color: inherit"
-                                     OnClick="@(() => OnColumnEditClick.InvokeAsync(sortContext.Item))">
-                            </MButton>
-                            <MDivider Vertical Length="16" Class="my-auto mx-1"/>
-                        }
-                        <MToggle Value="@(!hidden)"
-                                 DataOn="@("mdi-eye-outline")"
-                                 DataOff="@("mdi-eye-off-outline")"
-                                 TData="string">
-                            <MButton IconName="@context.Data"
-                                     Small
-                                     Style="color: inherit"
-                                     OnClick="@(() => OnColumnToggle.InvokeAsync(sortContext.Item.Id))"/>
-                        </MToggle>
-                    </MChip>
-                </ItemContent>
-            </MSortableProvider>
-        </div>
-    </div>
-    <div>
-        <MDivider Class="mb-3" Left>
-            分页设置
-        </MDivider>
-        <MSelect Value="@PageSizeOptions"
-                 ValueChanged="@HandleOnPageSizeOptionsChange"
-                 TItem="int"
-                 TItemValue="int"
-                 TValue="List<int>"
-                 Items="@_itemsPerPageOptions"
-                 ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
-                 ItemValue="u => u"
-                 Dense
-                 Filled
-                 Label="每页数量"
-                 Multiple
-                 HideDetails="@("auto")"
-                 Messages="@_messages"
-                 MenuProps="m => m.OffsetY = true">
-        </MSelect>
-    </div>
-</PModal>
+                                    var css = $"{(handle ? "handle" : "ignore-element")} {(hidden ? "hidden" : "")}";
+                                }
+                                <MChip Draggable="@handle"
+                                       Label
+                                       Class="@css"
+                                       Color="@(hidden ? "grey" : "black")"
+                                       Outlined
+                                       Attributes="@sortContext.Attrs">
+                                    @Templates.GenTypeIcon(sortContext.Item.Type, small: true)
+                                    <span class="mr-2">@sortContext.Item.Name</span>
+                                    @if (editable)
+                                    {
+                                        <MButton IconName="mdi-pencil-outline"
+                                                 Small
+                                                 Style="color: inherit"
+                                                 OnClick="@(() => OnColumnEditClick.InvokeAsync(sortContext.Item))">
+                                        </MButton>
+                                        <MDivider Vertical Length="16" Class="my-auto mx-1"/>
+                                    }
+                                    <MToggle Value="@(!hidden)"
+                                             DataOn="@("mdi-eye-outline")"
+                                             DataOff="@("mdi-eye-off-outline")"
+                                             TData="string">
+                                        <MButton IconName="@context.Data"
+                                                 Small
+                                                 Style="color: inherit"
+                                                 OnClick="@(() => OnColumnToggle.InvokeAsync(sortContext.Item.Id))"/>
+                                    </MToggle>
+                                </MChip>
+                            </ItemContent>
+                        </MSortableProvider>
+                    </div>
+                </div>
+                <div>
+                    <MDivider Class="mb-3" Left>
+                        分页设置
+                    </MDivider>
+                    <MSelect Value="@PageSizeOptions"
+                             ValueChanged="@HandleOnPageSizeOptionsChange"
+                             TItem="int"
+                             TItemValue="int"
+                             TValue="List<int>"
+                             Items="@_itemsPerPageOptions"
+                             ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
+                             ItemValue="u => u"
+                             Dense
+                             Filled
+                             Label="每页数量"
+                             Multiple
+                             HideDetails="@("auto")"
+                             Messages="@_messages"
+                             MenuProps="m => m.OffsetY = true">
+                    </MSelect>
+                </div>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+        <MExpansionPanel Title="视图设置">
+            <MExpansionPanelContent>
+                <MSwitch Value="@ShowBulkDelete"
+                         ValueChanged="@ShowBulkDeleteChanged"
+                         TValue="bool"
+                         HideDetails="true"
+                         Label="Show the bulk delete action"
+                         Inset>
+                </MSwitch>
+                <MSwitch Value="@ShowDetail"
+                         ValueChanged="@ShowDetailChanged"
+                         Hint="Only works on default column action"
+                         PersistentHint
+                         Label="Show the default detail action"
+                         Inset>
+                </MSwitch>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+    </MExpansionPanels>
+</PDrawer>
 
 <MDialog @bind-Value="_filterDialog"
          MaxWidth="400">
@@ -277,5 +302,7 @@
 @code {
 
     private ElementReference _columnsRef;
+
+    private List<StringNumber> _panels = [0, 1];
 
 }

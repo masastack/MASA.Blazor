@@ -20,9 +20,9 @@ public partial class MTemplateTable
 
     [Parameter] public StringNumber? Height { get; set; }
 
-    [Parameter] [MasaApiParameter(true)] public bool Detail { get; set; } = true;
-
     [Parameter] public RenderFragment? RowActionsContent { get; set; }
+
+    [Parameter] public RenderFragment<ICollection<Row>>? ViewActionsContent { get; set; }
 
     private const string SheetQuery =
         """
@@ -31,6 +31,8 @@ public partial class MTemplateTable
             views {
               hasActions
               showSelect
+              showDetail
+              showBulkDelete
               id
               name
               rowHeight

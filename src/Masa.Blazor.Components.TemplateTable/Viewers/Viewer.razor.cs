@@ -50,7 +50,7 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public string? CheckboxColor { get; set; }
 
-    [Parameter] public bool Detail { get; set; }
+    [Parameter] public bool HideDetail { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 

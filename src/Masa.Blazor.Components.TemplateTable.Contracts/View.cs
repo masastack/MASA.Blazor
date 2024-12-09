@@ -20,6 +20,10 @@ public class View
 
     public bool ShowSelect { get; set; } = true;
 
+    public bool ShowBulkDelete { get; set; } = true;
+
+    public bool ShowDetail { get; set; } = true;
+
     public Filter? Filter { get; set; }
 
     public Sort? Sort { get; set; }

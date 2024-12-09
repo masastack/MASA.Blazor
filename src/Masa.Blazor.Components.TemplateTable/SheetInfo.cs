@@ -61,7 +61,7 @@ internal class SheetInfo
     /// </summary>
     public required string ItemKeyName { get; set; }
 
-    [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView?.Columns ?? [];
+    [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView.Columns;
 
     [JsonIgnore]
     internal HashSet<string> ActiveViewHiddenColumnIds

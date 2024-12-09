@@ -313,3 +313,9 @@
 .m-template-table__toolbar-columns .m-chip.handle {
   cursor: grab;
 }
+
+.m-template-table__config .m-expansion-panels .m-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}

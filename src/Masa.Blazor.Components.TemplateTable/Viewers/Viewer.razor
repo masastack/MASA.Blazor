@@ -396,9 +396,9 @@
 
         <CascadingValue Value="item" Name="RowData">
             <CascadingValue Value="detailAction" Name="DetailAction">
-                @(ActionsContent ?? (Detail
-                    ? (RenderFragment)(@<DetailAction/>)
-                    : default))
+                @(ActionsContent ?? (HideDetail
+                    ? default
+                    : (RenderFragment)(@<DetailAction/>)))
             </CascadingValue>
         </CascadingValue>
     };

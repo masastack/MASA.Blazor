@@ -56,9 +56,19 @@ public partial class Toolbar
 
     [Parameter] public bool HasSort { get; set; }
 
+    [Parameter] public bool ShowDetail { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowDetailChanged { get; set; }
+
+    [Parameter] public bool ShowBulkDelete { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowBulkDeleteChanged { get; set; }
+
     [Parameter] public List<int> PageSizeOptions { get; set; } = [];
 
     [Parameter] public EventCallback<List<int>> PageSizeOptionsChanged { get; set; }
+
+    [Parameter] public RenderFragment? ViewActionsContent { get; set; }
 
     private bool _configDialog;
     private bool _filterDialog;
