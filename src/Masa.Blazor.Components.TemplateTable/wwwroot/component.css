@@ -301,6 +301,16 @@
   margin-top: 14px !important;
 }
 
+.m-template-table__toolbar-actions {
+  display: flex;
+  align-content: center;
+  justify-content: end;
+}
+
+.m-template-table__toolbar-actions > .m-btn:not(:last-child) {
+  margin-right: 4px;
+}
+
 .m-template-table__toolbar-columns .ignore-element {
   border-width: thin;
   border-style: dashed;

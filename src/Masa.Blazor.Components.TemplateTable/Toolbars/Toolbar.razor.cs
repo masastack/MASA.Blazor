@@ -113,13 +113,13 @@ public partial class Toolbar
         }
     }
 
-    private bool _removing;
+    private bool _deleting;
 
-    private async Task HandleOnRowRemove()
+    private async Task HandleOnBulkDelete()
     {
         if (OnRowRemove.HasDelegate)
         {
-            _removing = true;
+            _deleting = true;
             StateHasChanged();
 
             try
@@ -128,7 +128,7 @@ public partial class Toolbar
             }
             finally
             {
-                _removing = false;
+                _deleting = false;
             }
         }
     }

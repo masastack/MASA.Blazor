@@ -148,16 +148,15 @@
                 </MCol>
             }
         }
-        <MCol Cols="12" Md="hasSearch ? 12 : 6" Class="text-right">
+        <MCol Cols="12" Md="hasSearch ? 12 : 6" Class="m-template-table__toolbar-actions">
             @ViewActionsContent
             @if (ShowBulkDelete && HasSelect)
             {
                 <MButton Disabled="@(!HasSelectedKeys)"
                          Color="error"
                          Depressed
-                         Class="mr-1"
-                         Loading="@_removing"
-                         OnClick="@HandleOnRowRemove">
+                         Loading="@_deleting"
+                         OnClick="@HandleOnBulkDelete">
                     批量删除
                 </MButton>
             }

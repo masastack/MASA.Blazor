@@ -29,6 +29,7 @@
                  Views="_sheet.Views"
                  Columns="_sheet.Columns"
                  HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
+                 ViewActionsContent="@(ViewActionsContent?.Invoke(SelectedItems.ToArray()))"
                  OnViewAdd="@AddNewView"
                  OnViewReset="@ResetView"
                  OnViewRename="@RenameView"
