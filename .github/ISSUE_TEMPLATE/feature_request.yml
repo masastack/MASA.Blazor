@@ -8,8 +8,8 @@ body:
       label: Proposal and motivation
       description: |
         In a few sentences, describe the feature you are proposing and the problem it will solve.
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Additional context

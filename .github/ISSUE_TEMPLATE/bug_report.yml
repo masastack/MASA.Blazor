@@ -1,7 +1,7 @@
 name: Bug Report
 description: Create a report about something that is not working
 title: "[Bug Report] "
-label: "type/bug"
+labels: "type/bug"
 body:
   - type: markdown
     attributes:
