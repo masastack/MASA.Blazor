@@ -1,0 +1,17 @@
+name: Feature Request
+description: Suggest a new idea for specific component or this project
+labels: "type/enhancement"
+title: "[Feature Request] "
+body:
+  - type: textarea
+    attributes:
+      label: Proposal and motivation
+      description: |
+        In a few sentences, describe the feature you are proposing and the problem it will solve.
+      validations:
+        required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        If you have a proposal for how to implement this feature, please provide that here. Such as api design or code snippets.
