@@ -6,7 +6,8 @@
     "selectable": "Allow text selection inside MListItem. This prop uses (user-select)[https://developer.mozilla.org/en-US/docs/Web/CSS/user-select]",
     "threeLine": "Increases list-item height for three lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
     "twoLine": "Increases list-item height for two lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
-    "value": "The value used when a child of a (MItemGroup)[components/item-groups/api/MItemGroup]."
+    "value": "The value used when a child of a (MItemGroup)[components/item-groups/api/MItemGroup].",
+    "slim": "Reduces horizontal spacing between icons, avatars, and actions in list items to make them more compact."
   },
   "events": {},
   "contents": {

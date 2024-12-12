@@ -77,11 +77,17 @@ related:
 
 <masa-example file="Examples.components.lists.TwoLinesAndSubheader"></masa-example>
 
-#### 子组件属性 {released-on=v1.5.0}
+#### 子组件属性 {#subcomponent-props released-on=v1.5.0}
 
 使用内置的 `Title`、`Subtitle`、`PrependAvatar`、`PrependIcon`、`AppendAvatar` 和 `AppendIcon` 属性，可以更容易地创建列表。
 
 <masa-example file="Examples.components.lists.SubComponentProps"></masa-example>
+
+#### 紧凑 {#slim released-on=v1.9.0}
+
+`Slim` 属性用于精简列表项目中图标、头像和操作之前的水平间距，使其更加紧凑。
+
+<masa-example file="Examples.components.lists.Slim"></masa-example>
 
 ### 插槽
 
