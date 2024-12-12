@@ -129,6 +129,10 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
     [Parameter]
     public StringNumber? Width { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    public bool Slim { get; set; }
+
     public bool IsDark
     {
         get
@@ -205,6 +209,7 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
                 Subheader,
                 TwoLine)
             .Add(ThreeLine)
+            .Add(Slim)
             .Build();
     }
 

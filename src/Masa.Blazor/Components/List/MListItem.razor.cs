@@ -88,6 +88,10 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [MasaApiParameter(ReleasedOn = "v1.5.0")]
     public string? AppendAvatar { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    public bool Slim { get; set; }
+
     [Parameter] public bool Dark { get; set; }
 
     [Parameter] public bool Light { get; set; }
@@ -205,6 +209,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add(Dense)
+            .Add(Slim)
             .Add(Disabled)
             .Add(Selectable)
             .Add(TwoLine)
