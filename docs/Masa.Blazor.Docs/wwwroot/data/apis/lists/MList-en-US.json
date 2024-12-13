@@ -8,7 +8,8 @@
     "shaped": "Applies a large border radius on the top left and bottom right of the card.",
     "subheader": "Removes top padding. Used when previous sibling is a header",
     "threeLine": "Increases list-item height for three lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
-    "twoLine": "Increases list-item height for two lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers."
+    "twoLine": "Increases list-item height for two lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
+    "slim": "Reduces horizontal spacing between icons, avatars, and actions in list items to make them more compact."
   },
   "events": {},
   "contents": {}

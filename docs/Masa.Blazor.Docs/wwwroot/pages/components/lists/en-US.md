@@ -85,6 +85,12 @@ Use the built-in `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAva
 
 <masa-example file="Examples.components.lists.SubComponentProps"></masa-example>
 
+#### Slim {released-on=v1.9.0}
+
+Using the `Slim` property on **MList** will reduce the horizontal spacing before icons, avatars, and actions in list items, making them more compact.
+
+<masa-example file="Examples.components.lists.Slim"></masa-example>
+
 ### Contents
 
 #### Expansion Lists

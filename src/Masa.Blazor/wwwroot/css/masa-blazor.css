@@ -20479,6 +20479,46 @@ html.overflow-y-hidden {
     margin-left: 32px;
 }
 
+.m-application--is-ltr .m-list--slim .m-list-item__action:last-of-type:not(:only-child),
+.m-application--is-ltr .m-list--slim .m-list-item__avatar:last-of-type:not(:only-child),
+.m-application--is-ltr .m-list--slim .m-list-item__icon:last-of-type:not(:only-child),
+.m-application--is-ltr .m-list-item--slim .m-list-item__action:last-of-type:not(:only-child),
+.m-application--is-ltr .m-list-item--slim .m-list-item__avatar:last-of-type:not(:only-child),
+.m-application--is-ltr .m-list-item--slim .m-list-item__icon:last-of-type:not(:only-child){
+    margin-left: 8px;
+}
+
+.m-application--is-rtl .m-list--slim .m-list-item__action:last-of-type:not(:only-child),
+.m-application--is-rtl .m-list--slim .m-list-item__avatar:last-of-type:not(:only-child),
+.m-application--is-rtl .m-list--slim .m-list-item__icon:last-of-type:not(:only-child),
+.m-application--is-rtl .m-list-item--slim .m-list-item__action:last-of-type:not(:only-child),
+.m-application--is-rtl .m-list-item--slim .m-list-item__avatar:last-of-type:not(:only-child),
+.m-application--is-rtl .m-list-item--slim .m-list-item__icon:last-of-type:not(:only-child){
+    margin-right: 8px;
+}
+
+.m-application--is-ltr .m-list--slim .m-list-item__avatar:first-child,
+.m-application--is-ltr .m-list-item--slim .m-list-item__avatar:first-child {
+    margin-right: 8px;
+}
+.m-application--is-rtl .m-list--slim .m-list-item__avatar:first-child
+.m-application--is-ltr .m-list-item--slim .m-list-item__avatar:first-child {
+    margin-left: 8px;
+}
+
+.m-application--is-ltr .m-list--slim .m-list-item .m-list-item__action:first-child,
+.m-application--is-ltr .m-list-item--slim .m-list-item__action:first-child,
+.m-application--is-ltr .m-list--slim .m-list-item__icon:first-child,
+.m-application--is-ltr .m-list-item--slim .m-list-item__icon:first-child {
+    margin-right: 20px;
+}
+.m-application--is-rtl .m-list--slim .m-list-item__action:first-child,
+.m-application--is-rtl .m-list-item--slim .m-list-item__action:first-child,
+.m-application--is-rtl .m-list--slim .m-list-item__icon:first-child,
+.m-application--is-rtl .m-list-item--slim .m-list-item__icon:first-child {
+    margin-left: 20px;
+}
+
 .m-list-item__action,
 .m-list-item__avatar,
 .m-list-item__icon {
