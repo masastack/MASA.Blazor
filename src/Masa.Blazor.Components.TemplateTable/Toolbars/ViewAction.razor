@@ -1,0 +1,85 @@
+﻿@if (Role == Role.Manager && ViewInfo.Value.IsDefaultView)
+{
+    <MButton Text
+             Color="primary"
+             Small
+             OnClick="@OnSaveAsNewView">
+        @AsNewViewText
+    </MButton>
+}
+else
+{
+    <MMenu OffsetY MinWidth="200" ContentClass="px-2">
+        <ActivatorContent>
+            <MButton Text Color="primary" Small @attributes="@context.Attrs">
+                视图操作
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MList Slim Dense>
+                <MMenu @bind-Value="_renameMenu"
+                       ContentClass="pa-2">
+                    <ActivatorContent>
+                        <MListItem Title="重命名"
+                                   OnClick="@RenameView"
+                                   PrependIcon="mdi-pencil"
+                                   @attributes="@context.Attrs"/>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MTextField @bind-Value="@_newViewName"
+                                    OnBlur="@UpdateViewName"
+                                    OnEnter="@UpdateViewName"
+                                    Autofocus
+                                    Dense
+                                    HideDetails="true"
+                                    Required>
+                        </MTextField>
+                    </ChildContent>
+                </MMenu>
+                <MListItem Title="删除" PrependIcon="mdi-delete" OnClick="@OnViewDelete"/>
+                <MDivider Class="my-2"/>
+
+                <MListItem Title="@AsNewViewText"
+                           PrependIcon="mdi-content-save-move"
+                           OnClick="@OnSaveAsNewView"/>
+            </MList>
+        </ChildContent>
+    </MMenu>
+}
+
+@code {
+
+    [Parameter] public Role Role { get; set; }
+
+    [Parameter] public ViewInfo ViewInfo { get; set; } = null!;
+
+    [Parameter] public EventCallback OnSaveAsNewView { get; set; }
+
+    [Parameter] public EventCallback<string> OnViewRename { get; set; }
+
+    [Parameter] public EventCallback OnViewDelete { get; set; }
+
+    private bool _renameMenu;
+    private string? _newViewName;
+
+    private string AsNewViewText => Role is Role.Manager ? "保存为新视图" : "保存为个人视图";
+
+    private void RenameView()
+    {
+        _newViewName = ViewInfo?.Value.Name;
+    }
+
+    private void UpdateViewName()
+    {
+        if (string.IsNullOrWhiteSpace(_newViewName))
+        {
+            return;
+        }
+
+        _renameMenu = false;
+        _newViewName = null;
+
+        OnViewRename.InvokeAsync(_newViewName);
+    }
+
+}

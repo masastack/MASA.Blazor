@@ -1,5 +1,4 @@
 ﻿using GraphQL;
-using GraphQL.Client.Abstractions;
 using Masa.Blazor.Components.TemplateTable;
 using Microsoft.AspNetCore.Components;
 
@@ -12,6 +11,7 @@ public partial class TemplateTable
     [Inject] private IPopupService PopupService { get; set; } = default!;
 
     private SheetProvider? _sheetProvider;
+    private UserViewsProvider? _userViewsProvider;
     private ItemsProvider? _itemsProvider;
     private bool _sheetRequested;
 
@@ -22,6 +22,8 @@ public partial class TemplateTable
             var request = new GraphQLRequest(req.Query);
             return await GraphQLClient.SendQueryAsync<SheetProviderResult>(request);
         };
+
+        _userViewsProvider = async () => await HttpClient.GetFromJsonAsync<List<View>>("http://localhost:5297/views/cyx");
 
         _itemsProvider = async req =>
         {

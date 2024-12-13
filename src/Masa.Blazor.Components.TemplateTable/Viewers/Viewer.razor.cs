@@ -6,7 +6,9 @@ namespace Masa.Blazor.Components.TemplateTable.Viewers;
 
 public partial class Viewer : IAsyncDisposable
 {
-    [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
+    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = default!;
 
     /// <summary>
     /// View columns without an order, that will be ordered by <see cref="ColumnOrder"/>.
@@ -87,7 +89,6 @@ public partial class Viewer : IAsyncDisposable
     private HashSet<string>? _prevHiddenColumnIds;
     private List<string>? _prevColumnOrder;
 
-    private StyleBuilder _headerColumnStyleBuilder = new();
     private IJSObjectReference? _tableJSObjectReference;
     private DotNetObjectReference<Viewer>? _dotNetObjectReference;
 
@@ -112,7 +113,7 @@ public partial class Viewer : IAsyncDisposable
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private IList<ViewColumnInfo> _orderedViewColumns = [];
+    private List<ViewColumnInfo> _orderedViewColumns = [];
 
     protected override void OnInitialized()
     {
@@ -203,5 +204,111 @@ public partial class Viewer : IAsyncDisposable
         {
             // ignored
         }
+    }
+
+    private (bool hidden, string? css, string? style) GetCss(ViewColumnInfo template)
+    {
+        bool hidden;
+        if (template.Column.Id == Preset.ActionsColumnId)
+        {
+            hidden = !HasActions;
+        }
+        else if (template.Column.Id == Preset.RowSelectColumnId)
+        {
+            hidden = !ShowSelect;
+        }
+        else
+        {
+            hidden = HiddenColumnIds.Contains(template.ColumnId);
+        }
+
+        var fixedLeft = template.Column.Type is ColumnType.RowSelect || template.Fixed == ColumnFixed.Left;
+        var fixedRight = template.Column.Type is ColumnType.Actions || template.Fixed == ColumnFixed.Right;
+
+        CssBuilder cssBuilder = new();
+        cssBuilder.Add("d-none", hidden);
+        cssBuilder.Add(template.Column.Type.ToString().ToLowerInvariant());
+        cssBuilder.Add("m-data-table__column--fixed-left", fixedLeft);
+        cssBuilder.Add("m-data-table__column--fixed-right", fixedRight);
+
+        StyleBuilder styleBuilder = new();
+        if (fixedLeft)
+        {
+            var index = _orderedViewColumns.IndexOf(template);
+            if (index > -1)
+            {
+                var widths = _orderedViewColumns.Take(index).Sum(u => u.Width);
+                styleBuilder.Add(MasaBlazor.RTL ? "right": "left", $"{widths}px");
+            }
+        }
+        else if (fixedRight)
+        {
+            var count = _orderedViewColumns.Count;
+            var lastIndex = _orderedViewColumns.LastIndexOf(template);
+            if (lastIndex > -1)
+            {
+                var widths = _orderedViewColumns.TakeLast(count - lastIndex - 1).Sum(u => u.Width);
+                styleBuilder.Add(MasaBlazor.RTL ? "left": "right", $"{widths}px");
+            }
+        }
+
+        return (hidden, cssBuilder.ToString(), styleBuilder.ToString());
+    }
+
+    private (bool hidden, string? css, string? style) GetHeaderColCss(ViewColumnInfo template)
+    {
+        bool handle, hidden;
+        if (template.Column.Id == Preset.ActionsColumnId)
+        {
+            handle = false;
+            hidden = !HasActions;
+        }
+        else if (template.Column.Id == Preset.RowSelectColumnId)
+        {
+            handle = false;
+            hidden = !ShowSelect;
+        }
+        else
+        {
+            handle = true;
+            hidden = HiddenColumnIds.Contains(template.ColumnId);
+        }
+        
+        var fixedLeft = template.Column.Type is ColumnType.RowSelect || template.Fixed == ColumnFixed.Left;
+        var fixedRight = template.Column.Type is ColumnType.Actions || template.Fixed == ColumnFixed.Right;
+        
+        CssBuilder cssBuilder = new();
+        cssBuilder.Add("masa-table-viewer__header-column");
+        cssBuilder.Add(handle ? "handle" : "ignore-elements");
+        cssBuilder.Add("d-none", hidden);
+        cssBuilder.Add(template.Column.Type.ToString().ToLowerInvariant());
+        cssBuilder.Add("m-data-table__column--fixed-left", fixedLeft);
+        cssBuilder.Add("m-data-table__column--fixed-right", fixedRight);
+
+        StyleBuilder styleBuilder = new();
+        styleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
+        styleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), template.Column.Type is ColumnType.Actions);
+
+        if (fixedLeft)
+        {
+            var index = _orderedViewColumns.IndexOf(template);
+            if (index > -1)
+            {
+                var widths = _orderedViewColumns.Take(index).Sum(u => u.Width);
+                styleBuilder.Add(MasaBlazor.RTL ? "right": "left", $"{widths}px");
+            }
+        }
+        else if (fixedRight)
+        {
+            var count = _orderedViewColumns.Count;
+            var lastIndex = _orderedViewColumns.LastIndexOf(template);
+            if (lastIndex > -1)
+            {
+                var widths = _orderedViewColumns.TakeLast(count - lastIndex - 1).Sum(u => u.Width);
+                styleBuilder.Add(MasaBlazor.RTL ? "left": "right", $"{widths}px");
+            }
+        }
+
+        return (hidden, cssBuilder.ToString(), styleBuilder.ToString());
     }
 }

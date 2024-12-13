@@ -19,7 +19,7 @@
 }
 
 .masa-table__toolbar-actions {
-  padding: 16px 12px;
+  padding: 12px 12px;
   background-color: var(--m-theme-surface-container);
   border-radius: 4px;
 }
@@ -58,7 +58,7 @@
   background: #FFFFFF;
 }
 
-.masa-table-viewer__header-column {
+.masa-table-viewer__header-column:not(.rowselect) {
   width: 180px;
   min-width: 136px;
 }
@@ -210,11 +210,11 @@
   max-height: calc(var(--mt-line-clamp) * 1.7em);
 }
 
-.masa-table-viewer__cell.rowselect .masa-table-viewer__cell-content {
+td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
   overflow: visible;
 }
 
-.masa-table-viewer--low .masa-table-viewer__cell.rowselect .m-data-table__checkbox {
+.masa-table-viewer--low td.rowselect .masa-table-viewer__cell .m-data-table__checkbox {
   margin-top: -4px; 
 }
 
@@ -273,25 +273,25 @@
   margin-right: 12px;
 }
 
-.masa-table-viewer thead > tr > th.actions, .masa-table-viewer tbody > tr > td.actions {
-  position: sticky;
-  z-index: 1;
-  background: inherit;
-  right: -1px;
-}
+/*.masa-table-viewer thead > tr > th.actions, .masa-table-viewer tbody > tr > td.actions {*/
+/*  position: sticky;*/
+/*  z-index: 1;*/
+/*  background: inherit;*/
+/*  right: -1px;*/
+/*}*/
 
-.masa-table-viewer thead > tr > th.actions:after, .masa-table-viewer tbody > tr > td.actions:after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  transform: translateX(-100%);
-  transition: box-shadow .3s;
-  content: '';
-  pointer-events: none;
-  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
-}
+/*.masa-table-viewer thead > tr > th.actions:after, .masa-table-viewer tbody > tr > td.actions:after {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  width: 30px;*/
+/*  transform: translateX(-100%);*/
+/*  transition: box-shadow .3s;*/
+/*  content: '';*/
+/*  pointer-events: none;*/
+/*  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);*/
+/*}*/
 
 .filter-operator .m-input__slot {
   height: 52px;
@@ -327,5 +327,19 @@
 .m-template-table__config .m-expansion-panels .m-expansion-panel {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
+
+.m-template-table__view-select.m-select {
+  font-size: 20px;
+}
+
+.m-template-table__view-select .m-select__selection {
+  padding: 7px 0;
+  margin: 0 4px 0 0;
+}
+
+.m-template-table__view-select:hover .m-input__slot {
+  background-color: var(--m-theme-surface-container) !important;
+}
+

@@ -27,6 +27,12 @@ public class View
     public Filter? Filter { get; set; }
 
     public Sort? Sort { get; set; }
+
+    public string? Owner { get; set; } = "SYSTEM";
+
+    public bool IsDefaultView => Owner is null;
+
+    public bool IsUserView => !IsDefaultView && Owner != "SYSTEM";
 }
 
 public enum RowHeight

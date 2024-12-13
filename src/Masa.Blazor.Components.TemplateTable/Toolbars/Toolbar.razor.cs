@@ -10,6 +10,8 @@ public partial class Toolbar
 
     [Parameter] public Guid ActiveView { get; set; }
 
+    [Parameter] public Role Role { get; set; }
+
     [Parameter] public EventCallback<Guid> ActiveViewChanged { get; set; }
 
     [Parameter] public RowHeight RowHeight { get; set; }
@@ -18,7 +20,7 @@ public partial class Toolbar
 
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
-    [Parameter] public IList<ViewInfo> Views { get; set; } = [];
+    [Parameter] public List<ViewInfo> Views { get; set; } = [];
 
     [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
@@ -80,12 +82,24 @@ public partial class Toolbar
     private List<int> _itemsPerPage = [5, 10, 20, 50];
     private IList<int> _itemsPerPageOptions = [5, 10, 20, 50];
 
-    private bool IsDefaultView => ActiveView == DefaultViewId;
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
+        Views.Sort((a, b) =>
+        {
+            if (a.Value.Owner is null)
+            {
+                return -1;
+            }
+
+            if (a.Value.Owner == "SYSTEM")
+            {
+                return 0;
+            }
+
+            return 1;
+        });
         _activeViewInfo ??= Views.FirstOrDefault(v => v.Value.Id == ActiveView);
     }
 
@@ -143,17 +157,9 @@ public partial class Toolbar
         _newViewName = _activeViewInfo?.Value.Name;
     }
 
-    private async Task UpdateViewName()
+    private async Task UpdateViewName(string newName)
     {
-        if (string.IsNullOrWhiteSpace(_newViewName))
-        {
-            return;
-        }
-
-        await OnViewRename.InvokeAsync((ActiveView, _newViewName));
-
-        _newViewName = null;
-        _renameMenu = false;
+        await OnViewRename.InvokeAsync((ActiveView, newName));
     }
 
     private Task HandleOnDelete()

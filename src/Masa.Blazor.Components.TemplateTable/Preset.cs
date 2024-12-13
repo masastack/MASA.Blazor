@@ -41,7 +41,7 @@ internal static class Preset
         return new ViewColumnInfo()
         {
             ColumnId = RowSelectColumnId,
-            Width = 64,
+            Width = 56,
             Column = CreateSelectColumn()
         };
     }

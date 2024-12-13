@@ -10,6 +10,8 @@ public partial class MTemplateTable
 
     [Parameter] public SheetProvider? SheetProvider { get; set; }
 
+    [Parameter] public UserViewsProvider? UserViewsProvider { get; set; }
+
     [Parameter] public ItemsProvider? ItemsProvider { get; set; }
 
     [Parameter] public string? CheckboxColor { get; set; }
@@ -23,6 +25,9 @@ public partial class MTemplateTable
     [Parameter] public RenderFragment? RowActionsContent { get; set; }
 
     [Parameter] public RenderFragment<ICollection<Row>>? ViewActionsContent { get; set; }
+
+    // TODO: rename this?
+    [Parameter] public Role Role { get; set; }
 
     private const string SheetQuery =
         """
@@ -58,7 +63,8 @@ public partial class MTemplateTable
                   orderBy
                   index
                 }
-              }
+              },
+              owner
             }
             columns {
               config

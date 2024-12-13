@@ -20,39 +20,16 @@
                            OrderChanged="@ColumnOrderChanged">
             <ItemContent Context="context">
                 @{
-                    var template = context.Item;
-                    bool handle, hidden;
-                    if (template.Column.Id == Preset.ActionsColumnId)
-                    {
-                        handle = false;
-                        hidden = !HasActions;
-                    }
-                    else if (template.Column.Id == Preset.RowSelectColumnId)
-                    {
-                        handle = false;
-                        hidden = !ShowSelect;
-                    }
-                    else
-                    {
-                        handle = true;
-                        hidden = HiddenColumnIds.Contains(template.ColumnId);
-                    }
-
-                    var type = template.Column.Type.ToString().ToLowerInvariant();
-                    var handleCss = handle ? "handle" : "ignore-elements";
-                    _headerColumnStyleBuilder.Clear();
-                    _headerColumnStyleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
-                    _headerColumnStyleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), template.Column.Type is ColumnType.Actions);
-                    _headerColumnStyleBuilder.AddIf("display", "none", hidden);
+                    var (hidden, css, style) = GetHeaderColCss(context.Item);
                 }
 
-                <th class="masa-table-viewer__header-column @handleCss @type"
-                    style="@_headerColumnStyleBuilder.Build()"
-                    @key="@(template.Column.Id)"
+                <th class="@css"
+                    style="@style"
+                    @key="@(context.Item.Column.Id)"
                     @attributes="@context.Attrs">
                     @if (!hidden)
                     {
-                        <ColumnName Data="@template.Column"
+                        <ColumnName Data="@context.Item.Column"
                                     Sort="@Sort"
                                     OnClick="@OnSortUpdate"
                                     OnColumnToggle="@OnColumnToggle"
@@ -92,28 +69,14 @@
         <tr class="@_rowModifierBuilder.AddClass("m-data-table__selected", isSelected)">
             @foreach (var template in _orderedViewColumns)
             {
-                bool hidden;
-                if (template.Column.Id == Preset.ActionsColumnId)
-                {
-                    hidden = !HasActions;
-                }
-                else if (template.Column.Id == Preset.RowSelectColumnId)
-                {
-                    hidden = !ShowSelect;
-                }
-                else
-                {
-                    hidden = HiddenColumnIds.Contains(template.ColumnId);
-                }
+                var (hidden, css, style) = GetCss(template);
 
-                var type = template.Column.Type.ToString().ToLowerInvariant();
-
-                <td class="@type"
-                    style="@(hidden ? "display:none" : "")"
+                <td class="@css"
+                    style="@style"
                     @key="template.Column.Id">
                     @if (!hidden)
                     {
-                        <div class="masa-table-viewer__cell @type">
+                        <div class="masa-table-viewer__cell">
                             <div class="masa-table-viewer__cell-content">
                                 @if (template.Column.Type == ColumnType.Actions)
                                 {
@@ -149,7 +112,7 @@
 </MSimpleTable>
 
 @code {
-    
+
     internal static RenderFragment GenStaticCell(ColumnInfo column, JsonElement value) => __builder =>
     {
         switch (column.Type)
@@ -402,7 +365,7 @@
             </CascadingValue>
         </CascadingValue>
     };
-    
+
     private RenderFragment GenRowSelectCell(Row item, bool selected) => __builder =>
     {
         <MSimpleCheckbox Class="m-data-table__checkbox"
@@ -411,4 +374,5 @@
                          Color="@(CheckboxColor)">
         </MSimpleCheckbox>
     };
+
 }

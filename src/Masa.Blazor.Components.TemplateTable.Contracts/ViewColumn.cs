@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable;
+﻿using System.Text.Json.Serialization;
+
+namespace Masa.Blazor.Components.TemplateTable;
 
 public class ViewColumn
 {
@@ -16,4 +18,14 @@ public class ViewColumn
     public double Width { get; set; }
 
     public bool Hidden { get; set; }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public ColumnFixed Fixed { get; set; }
+}
+
+public enum ColumnFixed
+{
+    None,
+    Left,
+    Right
 }

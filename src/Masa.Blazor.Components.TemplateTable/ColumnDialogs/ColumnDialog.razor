@@ -1,11 +1,11 @@
 ﻿@using Masa.Blazor.Components.TemplateTable.ColumnConfigs
 @namespace Masa.Blazor.Components.TemplateTable.ColumnDialogs
 
-<MDialog @bind-Value="_menu"
+<PDrawer @bind-Value="_menu"
          @bind-Value:after="OnDialogChanged"
          Width="440"
-         ContentClass="px-6 pt-7 pb-6"
-         Persistent>
+         FormModel="_column"
+         OnSave="@HandleOnSubmit">
     <MForm OnValidSubmit="@HandleOnSubmit">
         <MTextField @bind-Value="@_column.Name"
                     Filled
@@ -13,6 +13,7 @@
                     Label="column-name"
                     Required>
         </MTextField>
+        
         <MSelect @bind-Value="@_column.Type"
                  Items="@_columnTypeMetadata"
                  ItemValue="u => u.Value"
@@ -29,9 +30,18 @@
         @if (_column.Type == ColumnType.Text)
         {
             <MSwitch @bind-Value="_column.Searchable"
+                     Inset
                      Label="Searchable">
             </MSwitch>
         }
+
+        <MDivider Left>视图配置</MDivider>
+        
+        <MRadioGroup HideDetails="true" TValue="ColumnFixed">
+            <MRadio Value="ColumnFixed.None" Label="None"></MRadio>
+            <MRadio Value="ColumnFixed.Left" Label="Left"></MRadio>
+            <MRadio Value="ColumnFixed.Right" Label="Right"></MRadio>
+        </MRadioGroup>
 
         <div class="mt-6">
             @switch (_column.Type)
@@ -56,7 +66,7 @@
             <MButton Type="submit" Color="primary">Confirm</MButton>
         </div>
     </MForm>
-</MDialog>
+</PDrawer>
 
 @code {
 

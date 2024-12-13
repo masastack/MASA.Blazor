@@ -5,9 +5,11 @@
 @inject GraphQLHttpClient GraphQLClient
 
 <MTemplateTable SheetProvider="@_sheetProvider"
+                UserViewsProvider="@_userViewsProvider"
                 ItemsProvider="@_itemsProvider"
                 Height="300"
                 OnSave="@Save"
+                CheckboxColor="primary"
                 OnRemove="@Remove">
     <ViewActionsContent>
         <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
