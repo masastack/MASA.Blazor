@@ -734,6 +734,8 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         if (args.Key is KeyCodes.Enter or KeyCodes.NumpadEnter)
         {
+            await UpdateValueImmediatelyAsync();
+            
             if (OnEnter.HasDelegate)
             {
                 await OnEnter.InvokeAsync();
@@ -746,6 +748,19 @@ public partial class MTextField<TValue> : MInput<TValue>
         {
             await OnKeyDown.InvokeAsync(args);
         }
+    }
+
+    /// <summary>
+    /// Update the bound value immediately.
+    /// For some scenarios, like OnEnter event and inner icon click event,
+    /// we need to update the value immediately.
+    /// </summary>
+    [MasaApiPublicMethod]
+    public async Task UpdateValueImmediatelyAsync()
+    {
+        var originValue = await Js.InvokeAsync<string>(JsInteropConstants.GetProp, InputElement, "value");
+
+        await HandleOnInputOrChangeEvent(new ChangeEventArgs { Value = originValue }, OnChange, nameof(OnChange));
     }
 
     public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
