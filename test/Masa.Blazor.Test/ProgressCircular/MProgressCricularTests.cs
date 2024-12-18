@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.ProgressCircular
+﻿namespace Masa.Blazor.Test.ProgressCircular
 {
     [TestClass]
     public class MProgressCircularTests : TestBase

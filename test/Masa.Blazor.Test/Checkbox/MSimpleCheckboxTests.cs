@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Checkbox
+﻿namespace Masa.Blazor.Test.Checkbox
 {
     [TestClass]
     public class MSimpleCheckboxTests : TestBase

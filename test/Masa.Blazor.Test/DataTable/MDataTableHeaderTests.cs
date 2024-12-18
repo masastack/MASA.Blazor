@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Components.DataTable;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.DataTable
 {

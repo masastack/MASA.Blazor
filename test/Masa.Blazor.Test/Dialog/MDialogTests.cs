@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Dialog
+﻿namespace Masa.Blazor.Test.Dialog
 {
     [TestClass]
     public class MDialogTests : TestBase

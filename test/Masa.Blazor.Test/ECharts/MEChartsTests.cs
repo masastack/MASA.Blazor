@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.ECharts
+﻿namespace Masa.Blazor.Test.ECharts
 {
     [TestClass]
     public class MEChartsTests : TestBase
