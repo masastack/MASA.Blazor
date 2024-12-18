@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Windows
+﻿namespace Masa.Blazor.Test.Windows
 {
     [TestClass]
     public class MWindowTests : TestBase

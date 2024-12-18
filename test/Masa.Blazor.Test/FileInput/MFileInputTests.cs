@@ -1,6 +1,5 @@
 ﻿using Bunit;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace Masa.Blazor.Test.FileInput

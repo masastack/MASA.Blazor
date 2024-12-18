@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using AngleSharp.Dom;
 using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Autocompletes
 {

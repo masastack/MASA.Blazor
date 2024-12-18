@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.DataTable
+﻿namespace Masa.Blazor.Test.DataTable
 {
     [TestClass]
     public class MDataTableTests : TestBase

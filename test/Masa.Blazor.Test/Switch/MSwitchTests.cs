@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Switch
+﻿namespace Masa.Blazor.Test.Switch
 {
     [TestClass]
     public class MSwitchTests : TestBase

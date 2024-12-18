@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.SimpleTable
+﻿namespace Masa.Blazor.Test.SimpleTable
 {
     [TestClass]
     public class MSimpleTableTests : TestBase

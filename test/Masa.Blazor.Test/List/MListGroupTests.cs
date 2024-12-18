@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.List
+﻿namespace Masa.Blazor.Test.List
 {
     [TestClass]
     public class MListGroupTests : TestBase

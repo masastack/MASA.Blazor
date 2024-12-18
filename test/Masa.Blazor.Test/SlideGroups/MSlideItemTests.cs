@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.SlideGroups
+﻿namespace Masa.Blazor.Test.SlideGroups
 {
     [TestClass]
     public class MSlideItemTests : TestBase

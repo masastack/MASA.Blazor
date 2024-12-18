@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Messages
+﻿namespace Masa.Blazor.Test.Messages
 {
     [TestClass]
     public class MMessagesTests : TestBase
