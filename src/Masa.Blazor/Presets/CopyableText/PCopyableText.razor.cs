@@ -1,14 +1,12 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Element = BemIt.Element;
 
-public partial class PCopyableText
+namespace Masa.Blazor.Presets;
+
+public partial class PCopyableText : MasaComponentBase
 {
     [Inject] public I18n I18n { get; set; } = null!;
 
-    [Inject] public IJSRuntime Js { get; set; } = null!;
-
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public string? Class { get; set; }
 
     [Parameter] public string? ContentClass { get; set; }
 
@@ -22,9 +20,8 @@ public partial class PCopyableText
 
     [Parameter] public bool DisableTooltip { get; set; }
 
+    // TODO: Change name to OnCopied?
     [Parameter] public EventCallback OnCopy { get; set; }
-
-    [Parameter] public string? Style { get; set; }
 
     [Parameter] public string? Text { get; set; }
 
@@ -34,9 +31,27 @@ public partial class PCopyableText
 
     [Parameter] public string? TooltipStyle { get; set; }
 
-    private bool _copying;
+    [Parameter]
+    [MasaApiParameter(CopyableTextVariant.AppendIcon, ReleasedOn = "v1.9.0")]
+    public CopyableTextVariant Variant { get; set; }
 
-    protected ElementReference Ref { get; set; }
+    [Parameter]
+    [MasaApiParameter(true, ReleasedOn = "v1.9.0")]
+    public bool Ripple { get; set; } = true;
+
+    private static Block _root = new("m-presets-copyable-text"); // TODO: rename to m-copyable-text in v2.0
+    private static Element _icon = _root.Element("icon");
+    private static Element _content = _root.Element("content");
+
+    private ModifierBuilder _rootModifierBuilder = _root.CreateModifierBuilder();
+    private ModifierBuilder _contentModifierBuilder = _content.CreateModifierBuilder();
+
+    private bool _copying;
+    private ElementReference _contentRef;
+
+    private string Icon => _copying ? CopiedIcon! : CopyIcon!;
+
+    private bool ComputedRipple => Variant == CopyableTextVariant.Content && !DisableTooltip && Ripple;
 
     public override Task SetParametersAsync(ParameterView parameters)
     {
@@ -47,7 +62,10 @@ public partial class PCopyableText
         return base.SetParametersAsync(parameters);
     }
 
-    private string Icon => _copying ? CopiedIcon! : CopyIcon!;
+    protected override IEnumerable<string?> BuildComponentClass()
+    {
+        yield return _rootModifierBuilder.Add(Variant).Build();
+    }
 
     private async Task HandleOnCopy()
     {
@@ -55,7 +73,7 @@ public partial class PCopyableText
 
         _copying = true;
 
-        await InvokeJsCopy();
+        InvokeJsCopy();
 
         if (OnCopy.HasDelegate)
         {
@@ -67,15 +85,10 @@ public partial class PCopyableText
         _copying = false;
     }
 
-    private async Task InvokeJsCopy()
+    private void InvokeJsCopy()
     {
-        if (string.IsNullOrEmpty(Text))
-        {
-            await Js.InvokeVoidAsync(JsInteropConstants.CopyChild, Ref);
-        }
-        else
-        {
-            await Js.InvokeVoidAsync(JsInteropConstants.CopyText, Text);
-        }
+        _ = string.IsNullOrEmpty(Text)
+            ? Js.InvokeVoidAsync(JsInteropConstants.CopyChild, _contentRef).ConfigureAwait(false)
+            : Js.InvokeVoidAsync(JsInteropConstants.CopyText, Text).ConfigureAwait(false);
     }
 }

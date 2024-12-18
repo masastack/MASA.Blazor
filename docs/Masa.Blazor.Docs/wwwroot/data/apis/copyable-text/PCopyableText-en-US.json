@@ -1,19 +1,10 @@
 {
   "props": {
-    "contentClass": "contentClass。",
-    "contentStyle": "contentStyle",
-    "copiedIcon": "copiedIcon",
-    "copyIcon": "copyIcon。",
-    "copyIconColor": "copyIconColor。",
-    "disableTooltip": "disableTooltip。",
-    "text": "text。",
-    "tooltip": "tooltip。",
-    "tooltipClass": "tooltipClass。",
-    "tooltipStyle": "tooltipStyle。"
+    "text": "Custom content to copy",
+    "tooltip": "Custom tooltip text",
+    "variant": "The default variant is `AppendIcon`, which copies after clicking the icon. The `Content` variant copies after clicking the text."
   },
-  "contents": {
-    "onCopy": "OnCopy"
-  },
+  "contents": {},
   "events": {},
   "methods": {}
 }

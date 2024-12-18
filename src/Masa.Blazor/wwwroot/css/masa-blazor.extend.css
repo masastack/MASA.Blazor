@@ -460,11 +460,14 @@
     display: inline-block;
 }
 
-    .m-presets-copyable-text .m-presets-copyable-text__content {
-    }
+.m-presets-copyable-text--variant-content {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
 
-    .m-presets-copyable-text .m-presets-copyable-text__icon {
-    }
+.m-presets-copyable-text--variant-content:hover {
+    background-color: var(--m-theme-surface-container)
+}
 
 .m-snack__content {
     word-break: break-word;

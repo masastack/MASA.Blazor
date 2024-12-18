@@ -1,18 +1,10 @@
 {
   "props": {
-    "contentClass": "contentClass。",
-    "contentStyle": "contentStyle",
-    "copiedIcon": "copiedIcon",
-    "copyIcon": "copyIcon。",
-    "copyIconColor": "copyIconColor。",
-    "disableTooltip": "disableTooltip。",
-    "text": "text。",
-    "tooltip": "tooltip。",
-    "tooltipClass": "tooltipClass。",
-    "tooltipStyle": "tooltipStyle。"
+    "text": "自定义复制的内容",
+    "tooltip": "自定义提示文本",
+    "variant": "默认变体为`AppendIcon`，点击图标后复制。`Content` 变体为点击文本后复制。"
   },
   "contents": {
-    "onCopy": "OnCopy"
   },
   "events": {},
   "methods": {}

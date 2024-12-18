@@ -28,6 +28,12 @@ related:
 
 <masa-example file="Examples.components.copyable_text.Tooltip"></masa-example>
 
+#### Variant
+
+`CopyableTextVariant.Content` provides a variant that allows copying by clicking on the content.
+
+<masa-example file="Examples.components.copyable_text.Variant"></masa-example>
+
 ### Misc
 
 #### Text truncate

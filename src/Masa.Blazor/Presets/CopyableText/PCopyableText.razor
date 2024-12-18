@@ -1,28 +1,73 @@
 ﻿@namespace Masa.Blazor.Presets
+@inherits MasaComponentBase
 
-<div class="m-presets-copyable-text @Class" style="@Style">
-    <span class="m-presets-copyable-text__content @ContentClass"
-          style="@ContentStyle"
-          @ref="Ref">
-        @ChildContent
-    </span>
+<div class="@GetClass()"
+     style="@GetStyle()"
+     ripple="@ComputedRipple"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @if (Variant == CopyableTextVariant.Content)
+    {
+        @TooltipContent(TextContent)
+    }
+    else
+    {
+        @TextContent()
+    }
 
-    <MTooltip ContentClass="@TooltipClass"
-              ContentStyle="@TooltipStyle"
-              Disabled="@DisableTooltip" 
-              Top>
-        <ActivatorContent>
-            <MIcon Class="m-presets-copyable-text__icon"
-                   Color="@CopyIconColor"
-                   Disabled="_copying"
-                   Small
-                   OnClick="HandleOnCopy"
-                   @attributes="@context.Attrs">
-                @Icon
-            </MIcon>
-        </ActivatorContent>
-        <ChildContent>
-            @Tooltip
-        </ChildContent>
-    </MTooltip>
+    @if (Variant == CopyableTextVariant.AppendIcon)
+    {
+        @TooltipContent(IconContent)
+    }
 </div>
+
+@code {
+
+    private RenderFragment IconContent(ActivatorProps context) => __builder =>
+    {
+        <MIcon Class="@_icon.Name"
+               Color="@CopyIconColor"
+               Disabled="_copying"
+               Small
+               OnClick="@HandleOnCopy"
+               @attributes="@context.Attrs">
+            @Icon
+        </MIcon>
+    };
+
+    private RenderFragment TooltipContent(RenderFragment<ActivatorProps> activator) => __builder =>
+    {
+        <MTooltip ContentClass="@TooltipClass"
+                  ContentStyle="@TooltipStyle"
+                  Disabled="@DisableTooltip"
+                  Top
+                  ActivatorContent="@activator">
+            @Tooltip
+        </MTooltip>
+    };
+
+    private RenderFragment TextContent(ActivatorProps? context = null) => __builder =>
+    {
+        <span class="@_contentModifierBuilder.AddClass(ContentClass)"
+              style="@ContentStyle"
+              @ref="_contentRef"
+              @attributes="@context?.Attrs"
+              @onclick="@Copy">
+            @ChildContent
+        </span>
+        return;
+
+        void Copy()
+        {
+            if (context is null)
+            {
+                return;
+            }
+
+            InvokeJsCopy();
+        }
+    };
+
+
+}
