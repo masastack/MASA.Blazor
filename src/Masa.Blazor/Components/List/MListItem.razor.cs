@@ -131,7 +131,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     {
         if (args.Detail > 0)
         {
-            await Js.InvokeVoidAsync(JsInteropConstants.Blur, Ref);
+            _ = Js.InvokeVoidAsync(JsInteropConstants.Blur, Ref);
         }
 
         if (OnClick.HasDelegate)
