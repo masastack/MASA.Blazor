@@ -1,0 +1,32 @@
+﻿<MCard Class="mx-auto"
+       MaxWidth="300"
+       Tile>
+    <MList Slim="@_slim"
+           Dense>
+        <MSubheader>
+            <MCheckbox @bind-Value="_slim" Label="Slim"></MCheckbox>
+        </MSubheader>
+        @foreach (var item in _items)
+        {
+            <MListItem PrependIcon="@item.Icon" Title="@item.Text"/>
+        }
+    </MList>
+</MCard>
+
+@code{
+    private bool _slim = true;
+
+    private Item[] _items =
+    [
+        new Item { Text = "Real-Time", Icon = "mdi-clock" },
+        new Item { Text = "Audience", Icon = "mdi-account" },
+        new Item { Text = "Conversions", Icon = "mdi-flag" }
+    ];
+
+    class Item
+    {
+        public string Text { get; set; }
+        public string Icon { get; set; }
+    }
+
+}
