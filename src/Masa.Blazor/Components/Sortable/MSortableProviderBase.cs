@@ -219,23 +219,6 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         Items.ThrowIfNull(ComponentName);
         ItemKey.ThrowIfNull(ComponentName);
 
-        if (!Equals(_prevItems, Items))
-        {
-            _prevItems = Items;
-            _prevItemKeys = GetItemKeys();
-            _renderRateLimiter?.RecordRender();
-            RefreshOrder();
-        }
-        else
-        {
-            var keys = GetItemKeys();
-            if (!_prevItemKeys.SetEquals(keys))
-            {
-                _prevItemKeys = keys;
-                SortByInternalOrder();
-            }
-        }
-
         if (Order is not null && !_prevOrder.SequenceEqual(Order))
         {
             _prevOrder = Order.ToArray();
@@ -300,9 +283,10 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         _ = OrderChanged.InvokeAsync(order);
     }
 
-    public async ValueTask UpdateOrder(List<string> order)
+    public ValueTask UpdateOrder(List<string> order)
     {
         UpdateOrderInternal(order);
+        return ValueTask.CompletedTask;
     }
 
     public async ValueTask HandleOnAdd(string key, List<string> order)
@@ -317,30 +301,6 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         UpdateOrderInternal(order);
 
         await OnRemove.InvokeAsync(key);
-    }
-
-    private void RefreshOrder()
-    {
-        if (_jsObjectReference is null)
-        {
-            return;
-        }
-
-        NextTick(async () =>
-        {
-            var order = await _jsObjectReference.ToArrayAsync();
-            UpdateOrderInternal(order);
-        });
-    }
-
-    private void SortByInternalOrder()
-    {
-        if (_jsObjectReference is null)
-        {
-            return;
-        }
-
-        NextTick(() => _ = _jsObjectReference.SortAsync(_internalOrder, false));
     }
 
     protected override async ValueTask DisposeAsyncCore()
