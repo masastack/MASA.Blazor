@@ -1,4 +1,4 @@
-﻿@if (Role == Role.Manager && ViewInfo.Value.IsDefaultView)
+﻿@if (OnlyCanSaveAsNewView)
 {
     <MButton Text
              Color="primary"
@@ -9,39 +9,62 @@
 }
 else
 {
-    <MMenu OffsetY MinWidth="200" ContentClass="px-2">
+    <MMenu OffsetY
+           MinWidth="200"
+           ContentClass="px-2">
         <ActivatorContent>
-            <MButton Text Color="primary" Small @attributes="@context.Attrs">
+            <MButton Text
+                     Color="primary"
+                     Loading="@Loading"
+                     Small
+                     @attributes="@context.Attrs">
                 视图操作
             </MButton>
         </ActivatorContent>
         <ChildContent>
             <MList Slim Dense>
-                <MMenu @bind-Value="_renameMenu"
-                       ContentClass="pa-2">
-                    <ActivatorContent>
-                        <MListItem Title="重命名"
-                                   OnClick="@RenameView"
-                                   PrependIcon="mdi-pencil"
-                                   @attributes="@context.Attrs"/>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MTextField @bind-Value="@_newViewName"
-                                    OnBlur="@UpdateViewName"
-                                    OnEnter="@UpdateViewName"
-                                    Autofocus
-                                    Dense
-                                    HideDetails="true"
-                                    Required>
-                        </MTextField>
-                    </ChildContent>
-                </MMenu>
-                <MListItem Title="删除" PrependIcon="mdi-delete" OnClick="@OnViewDelete"/>
-                <MDivider Class="my-2"/>
+                @if (ViewInfo.State != ViewState.Unsaved)
+                {
+                    <MListItem Title="@AsNewViewText"
+                               PrependIcon="mdi-content-save-move"
+                               OnClick="@OnSaveAsNewView"/>
+                }
 
-                <MListItem Title="@AsNewViewText"
-                           PrependIcon="mdi-content-save-move"
-                           OnClick="@OnSaveAsNewView"/>
+                @if (ViewInfo.State != ViewState.Unsaved && CanEditView)
+                {
+                    <MDivider Class="my-2"/>
+                }
+
+                @if (CanEditView)
+                {
+                    @if (Role == Role.User)
+                    {
+                        <MListItem Title="保存" PrependIcon="mdi-content-save" OnClick="@OnViewSave"/>
+                    }
+
+                    <MMenu @bind-Value="_renameMenu"
+                           ContentClass="pa-2">
+                        <ActivatorContent>
+                            @*https://github.com/masastack/MASA.Blazor/issues/2284*@
+                            <MListItem Title="重命名"
+                                       PrependIcon="mdi-pencil"
+                                       OnClick="@RenameView"
+                                       @attributes="@context.Attrs"/>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <MTextField @bind-Value="@_newViewName"
+                                        OnBlur="@UpdateViewName"
+                                        OnEnter="@UpdateViewName"
+                                        Autofocus
+                                        Dense
+                                        HideDetails="true"
+                                        Required>
+                            </MTextField>
+                        </ChildContent>
+                    </MMenu>
+
+                    <MListItem Title="删除" PrependIcon="mdi-delete" OnClick="@OnViewDelete"/>
+                }
             </MList>
         </ChildContent>
     </MMenu>
@@ -53,20 +76,28 @@ else
 
     [Parameter] public ViewInfo ViewInfo { get; set; } = null!;
 
+    [Parameter] public bool Loading { get; set; }
+
     [Parameter] public EventCallback OnSaveAsNewView { get; set; }
 
     [Parameter] public EventCallback<string> OnViewRename { get; set; }
 
     [Parameter] public EventCallback OnViewDelete { get; set; }
 
+    [Parameter] public EventCallback OnViewSave { get; set; }
+
     private bool _renameMenu;
     private string? _newViewName;
 
     private string AsNewViewText => Role is Role.Manager ? "保存为新视图" : "保存为个人视图";
 
+    private bool OnlyCanSaveAsNewView => ViewInfo.IsDefaultView || (ViewInfo.AccessRole is Role.Manager && Role is Role.User);
+
+    private bool CanEditView => (Role is Role.Manager && ViewInfo.AccessRole is Role.Manager) || (Role is Role.User && ViewInfo.AccessRole is Role.User);
+
     private void RenameView()
     {
-        _newViewName = ViewInfo?.Value.Name;
+        _newViewName = ViewInfo.Value.Name;
     }
 
     private void UpdateViewName()

@@ -35,11 +35,12 @@
                  OnViewReset="@ResetView"
                  OnViewRename="@RenameView"
                  OnViewDelete="@DeleteView"
+                 OnViewSave="@SaveView"
                  OnColumnEditClick="@OpenColumnEditDialog"
                  OnColumnToggle="@ToggleColumn"
                  HasSelectedKeys="@(SelectedKeys.Count > 0)"
-                 HasActions="@_sheet.ActiveViewHasActions"
-                 HasSelect="@_sheet.ActiveViewShowSelect"
+                 HasActions="@_sheet.ActiveView.Value.ShowActions"
+                 HasSelect="@_sheet.ActiveView.Value.ShowSelect"
                  HasCustom="@HasCustomConfiguration"
                  HasFilter="@(_sheet.ActiveView.Value.Filter?.Options.Count > 0)"
                  HasSort="@(_sheet.ActiveView.Value.Sort?.Options.Count > 0)"
@@ -49,7 +50,7 @@
                  OnSearch="@Search"
                  OnSave="@SaveSheet"/>
 
-        <Viewer ViewColumns="@_sheet.ActiveViewColumns"
+        <Viewer ViewColumns="@_sheet.ActiveView.Columns"
                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                 ColumnOrder="@_columnOrder"
                 ColumnOrderChanged="@HandleOnColumnOrderChanged"
@@ -58,8 +59,8 @@
                 Rows="@_rows"
                 Sort="@_sheet.ActiveView.Value.Sort"
                 OnSortUpdate="@SortUpdate"
-                HasActions="@_sheet.ActiveViewHasActions"
-                ShowSelect="@_sheet.ActiveViewShowSelect"
+                HasActions="@_sheet.ActiveView.Value.ShowActions"
+                ShowSelect="@_sheet.ActiveView.Value.ShowSelect"
                 Height="@Height"
                 OnColumnToggle="@ToggleColumn"
                 OnColumnEditClick="@OpenColumnEditDialog"
@@ -155,21 +156,37 @@
         }
     }
 
-    private void AddNewView()
+    private async Task AddNewView()
     {
         var clonedView = _sheet!.ActiveView.DeepClone();
+
         clonedView.Value.Id = Guid.NewGuid();
         clonedView.Value.Name = "Copy of " + clonedView.Value.Name;
+        var count = _sheet.Views.Count(u => u.Value.Name == clonedView.Value.Name);
+        if (count > 0)
+        {
+            clonedView.Value.Name += $" ({count})";
+        }
+
+        clonedView.IsDefaultView = false;
+        clonedView.AccessRole = Role;
+        clonedView.State = ViewState.Unsaved;
 
         _sheet.Views.Add(clonedView);
-        _sheet.ActiveViewId = clonedView.Value.Id;
+        _sheet.SetActiveView(clonedView.Value.Id);
 
         ResetSheet();
     }
 
     private async Task ResetView()
     {
-        _sheet!.ActiveView.Value.Columns = _sheet.Columns.Where(u => u.Id != Preset.ActionsColumnId).Select(u => new ViewColumn(u.Id)).ToList();
+        foreach (var column in _sheet.ActiveView.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.ColumnId)))
+        {
+            column.Hidden = false;
+            column.Width = 0;
+            column.Fixed = ColumnFixed.None;
+        }
+
         _columnOrder = [];
         _sheet.ActiveView.Value.Filter = new();
         _sheet.ActiveView.Value.Sort = null;
@@ -186,7 +203,7 @@
         }
     }
 
-    private async Task DeleteView(View view)
+    private async Task DeleteView(ViewInfo view)
     {
         if (_sheet!.Views.Count < 1)
         {
@@ -196,17 +213,48 @@
         // TODO: i18n
         var confirmed = await PopupService.ConfirmAsync(
             "Delete view",
-            $"Are you sure you want to delete this view ({view.Name})?",
+            $"Are you sure you want to delete this view ({view.Value.Name})?",
             AlertTypes.Warning);
 
         if (!confirmed) return;
 
-        var viewInfo = _sheet.Views.First(v => v.Value.Id == view.Id);
+        if (view.State != ViewState.Unsaved)
+        {
+            try
+            {
+                await OnUserViewDelete.InvokeAsync(view.Value);
+            }
+            catch (Exception e)
+            {
+                await PopupService.EnqueueSnackbarAsync(e);
+                return;
+            }
+        }
+
+        var viewInfo = _sheet.Views.First(v => v.Value.Id == view.Value.Id);
         _sheet.Views.Remove(viewInfo);
 
-        if (_sheet.ActiveViewId == view.Id)
+        if (_sheet.ActiveViewId == view.Value.Id)
         {
-            _sheet.ActiveViewId = _sheet.Views.First().Value.Id;
+            _sheet.SetActiveView(_sheet.Views.First().Value.Id);
+        }
+    }
+
+    private async Task SaveView()
+    {
+        if (!OnUserViewAdd.HasDelegate)
+        {
+            return;
+        }
+
+        try
+        {
+            await OnUserViewAdd.InvokeAsync(_sheet!.ActiveView.ToView());
+            _sheet.ActiveView.State = ViewState.Unmodified;
+        }
+        catch (Exception e)
+        {
+            await PopupService.EnqueueSnackbarAsync(e);
         }
     }
 
@@ -291,7 +339,7 @@
     {
         if (columnId == Preset.ActionsColumnId)
         {
-            _sheet!.ActiveView.Value.HasActions = !_sheet.ActiveView.Value.HasActions;
+            _sheet!.ActiveView.Value.ShowActions = !_sheet.ActiveView.Value.ShowActions;
             return;
         }
 
@@ -351,7 +399,7 @@
         {
             return;
         }
-        
+
         foreach (var item in _sheet.ActiveView.Rows)
         {
             _sheet.ActiveView.Selection[item] = selected;

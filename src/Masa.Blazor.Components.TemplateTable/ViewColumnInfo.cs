@@ -2,6 +2,18 @@
 
 public class ViewColumnInfo : ViewColumn
 {
+    public ViewColumnInfo()
+    {
+        if (Column?.Id == Preset.ActionsColumnId)
+        {
+            Fixed = ColumnFixed.Right;
+        }
+        else if (Column?.Id == Preset.RowSelectColumnId)
+        {
+            Fixed = ColumnFixed.Left;
+        }
+    }
+
     [JsonIgnore] internal ColumnInfo Column { get; set; }
 
     internal static ViewColumnInfo From(ViewColumn viewColumn, ColumnInfo column)

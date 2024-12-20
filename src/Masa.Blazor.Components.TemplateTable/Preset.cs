@@ -2,9 +2,9 @@
 
 internal static class Preset
 {
-    internal static string ActionsColumnId { get; } = "__internal_actions";
-    internal static string RowSelectColumnId { get; } = "__internal_select";
-    
+    internal static string ActionsColumnId => "__internal_actions";
+    internal static string RowSelectColumnId => "__internal_select";
+
     internal static string[] InternalColumnIds { get; } = [ActionsColumnId, RowSelectColumnId];
 
     internal static ColumnInfo CreateActionsColumn()
@@ -22,7 +22,8 @@ internal static class Preset
         return new ViewColumnInfo()
         {
             ColumnId = ActionsColumnId,
-            Column = CreateActionsColumn()
+            Column = CreateActionsColumn(),
+            Fixed = ColumnFixed.Right
         };
     }
     
@@ -41,8 +42,9 @@ internal static class Preset
         return new ViewColumnInfo()
         {
             ColumnId = RowSelectColumnId,
+            Column = CreateSelectColumn(),
+            Fixed = ColumnFixed.Left,
             Width = 56,
-            Column = CreateSelectColumn()
         };
     }
 

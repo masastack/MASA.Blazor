@@ -58,6 +58,10 @@
   background: #FFFFFF;
 }
 
+.masa-table-viewer__header-column.rowselect {
+  width: 56px;
+}
+
 .masa-table-viewer__header-column:not(.rowselect) {
   width: 180px;
   min-width: 136px;
@@ -301,6 +305,31 @@ td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
   margin-top: 14px !important;
 }
 
+.m-template-table__view-select.m-select {
+  font-size: 20px;
+  max-width: 380px;
+}
+
+.m-template-table__view-select .m-select__selection {
+  padding: 7px 0;
+  margin: 0 4px 0 0;
+}
+
+.m-template-table__view-select:hover .m-input__slot {
+  background-color: var(--m-theme-surface-container) !important;
+}
+
+.m-template-table__view-select-item {
+  width: 100%;
+}
+
+.m-template-table__view-select-item .m-divider {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+}
+
 .m-template-table__toolbar-actions {
   display: flex;
   align-content: center;
@@ -329,17 +358,3 @@ td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
   border-radius: 4px;
   margin-bottom: 16px;
 }
-
-.m-template-table__view-select.m-select {
-  font-size: 20px;
-}
-
-.m-template-table__view-select .m-select__selection {
-  padding: 7px 0;
-  margin: 0 4px 0 0;
-}
-
-.m-template-table__view-select:hover .m-input__slot {
-  background-color: var(--m-theme-surface-container) !important;
-}
-

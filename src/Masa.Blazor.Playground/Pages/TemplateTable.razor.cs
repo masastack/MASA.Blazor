@@ -23,8 +23,6 @@ public partial class TemplateTable
             return await GraphQLClient.SendQueryAsync<SheetProviderResult>(request);
         };
 
-        _userViewsProvider = async () => await HttpClient.GetFromJsonAsync<List<View>>("http://localhost:5297/views/cyx");
-
         _itemsProvider = async req =>
         {
             var formatQuery = req.FormatQuery(

@@ -3,9 +3,9 @@
 
 <div class="masa-table__toolbar">
     <MRow Class="mb-1" Dense>
-        <MCol Cols="12" Md="4" Class="d-flex align-end">
+        <MCol Cols="12" Md="@(Role == Role.Manager ? 12 : 5)" Class="d-flex align-end">
             @{
-                var firstUserView = Views.FirstOrDefault(u => u.Value.IsUserView);
+                var firstUserView = Views.FirstOrDefault(u => u.IsUserView);
             }
             <MSelect Value="ActiveView"
                      ValueChanged="ActiveViewChanged"
@@ -21,34 +21,59 @@
                      TItemValue="Guid"
                      TValue="Guid"
                      OnSelect="@(tuple => OnActiveViewChanged(tuple.Item))">
+                <SelectionContent>
+                    @GenModifiedChip(context.Item)
+                </SelectionContent>
                 <ItemContent>
-                    <div style="width:100%">
+                    <div class="m-template-table__view-select-item">
                         @if (context.Item == firstUserView)
                         {
-                            <MDivider/>
+                            <MDivider @key="@context.Item"/>
                         }
-                        <MListItemContent>@context.Item.Value.Name</MListItemContent>
+                        @GenModifiedChip(context.Item)
                     </div>
                 </ItemContent>
             </MSelect>
 
             @if (_activeViewInfo is not null)
             {
-                <ViewAction Role="@Role"
+                <ViewAction Loading="@_viewActionLoading"
+                            Role="@Role"
                             ViewInfo="@_activeViewInfo"
                             OnSaveAsNewView="@SaveAsNewView"
                             OnViewDelete="@HandleOnDelete"
-                            OnViewRename="@UpdateViewName"/>
+                            OnViewRename="@UpdateViewName"
+                            OnViewSave="@HandleOnViewSave"/>
+            }
+
+            @if (Role == Role.Manager)
+            {
+                <MTooltip Top>
+                    <ActivatorContent>
+                        <MButton Class="ml-1"
+                                 Color="primary"
+                                 Text
+                                 Small
+                                 OnClick="@OnSave"
+                                 @attributes="@context.Attrs">
+                            保存
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        保存所有设置及视图
+                    </ChildContent>
+                </MTooltip>
             }
         </MCol>
-        @{
+        @if (Role == Role.User)
+        {
             var searchableColumns = _activeViewInfo?.GetSearchableColumn();
             var hasSearch = searchableColumns?.Count > 0;
             if (hasSearch)
             {
                 var placeholder = $"Search for {string.Join(", ", searchableColumns.Select(u => u.Column.Name))}";
 
-                <MCol Cols="12" Md="6" OffsetMd="2" Align="AlignTypes.Center">
+                <MCol Cols="12" Md="6" OffsetMd="1" Align="AlignTypes.Center">
                     <MTextField @bind-Value="_activeViewInfo!.Value.Filter.Search"
                                 Placeholder="@placeholder"
                                 PersistentPlaceholder
@@ -174,6 +199,10 @@
                     <MDivider Class="mb-3" Left>
                         列设置
                     </MDivider>
+                    <MAlert Color="grey" Dense Text Tag="ul">
+                        <li>拖动以调整列顺序，列顺序只影响当前视图</li>
+                        <li>列的可见性也只影响当前视图</li>
+                    </MAlert>
                     <div class="m-template-table__toolbar-columns" @ref="@_columnsRef">
                         <MSortableProvider Items="@Columns"
                                            ItemKey="@(column => column.Id)"
@@ -292,5 +321,18 @@
     private ElementReference _columnsRef;
 
     private List<StringNumber> _panels = [0, 1];
+
+    private static RenderFragment GenModifiedChip(ViewInfo viewInfo) => __builder =>
+    {
+        <div class="d-flex align-center justify-space-between"
+             style="width: 100%">
+            @viewInfo.Value.Name
+
+            @if (viewInfo.State is ViewState.Modified or ViewState.Unsaved)
+            {
+                <MChip Color="warning" Style="flex:none" Small Outlined>未保存</MChip>
+            }
+        </div>
+    };
 
 }

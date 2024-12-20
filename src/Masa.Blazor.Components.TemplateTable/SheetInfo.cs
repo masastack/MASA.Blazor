@@ -6,8 +6,6 @@ namespace Masa.Blazor.Components.TemplateTable;
 // TODO: rename this
 internal class SheetInfo
 {
-    private Guid _activeViewId;
-
     /// <summary>
     /// All columns without state.
     /// </summary>
@@ -21,30 +19,7 @@ internal class SheetInfo
     /// <summary>
     /// The identifier of the active view.
     /// </summary>
-    public Guid ActiveViewId
-    {
-        get => _activeViewId;
-        set
-        {
-            _activeViewId = value;
-
-            // Add the Actions column if it doesn't exist. 
-            var view = Views.FirstOrDefault(v => v.Value.Id == value);
-            if (view is not null)
-            {
-                var columnIds = view.Columns.Select(c => c.ColumnId).ToArray();
-                if (!columnIds.Contains(Preset.ActionsColumnId))
-                {
-                    view.Columns.Add(Preset.CreateActionsViewColumn());
-                }
-
-                if (!columnIds.Contains(Preset.RowSelectColumnId))
-                {
-                    view.Columns.Insert(0, Preset.CreateSelectViewColumn());
-                }
-            }
-        }
-    }
+    public Guid ActiveViewId { get; private set; }
 
     /// <summary>
     /// All views of the sheet.
@@ -69,10 +44,6 @@ internal class SheetInfo
 
     [JsonIgnore] internal RowHeight ActiveViewRowHeight => ActiveView?.Value.RowHeight ?? RowHeight.Low;
 
-    [JsonIgnore] internal bool ActiveViewHasActions => ActiveView?.Value.HasActions ?? false;
-
-    [JsonIgnore] internal bool ActiveViewShowSelect => ActiveView?.Value.ShowSelect ?? false;
-
     public required ViewInfo ActiveView { get; set; }
 
     internal static SheetInfo From(Sheet sheet)
@@ -88,10 +59,17 @@ internal class SheetInfo
         }
 
         var columnInfos = sheet.Columns.Select(c => new ColumnInfo(c)).ToList();
-        var views = sheet.Views.Select(v => ViewInfo.From(v, columnInfos)).ToList();
-        var activeView = views.FirstOrDefault(v => v.Value.Id == sheet.ActiveViewId)
-                         ?? views.FirstOrDefault(v => v.Value.Id == sheet.DefaultViewId)
-                         ?? views.First();
+        var views = sheet.Views.Select(v => ViewInfo.From(v, columnInfos, Role.Manager)).ToList();
+
+        var defaultView = views.FirstOrDefault(v => v.Value.Id == sheet.DefaultViewId);
+        if (defaultView is null)
+        {
+            throw new InvalidOperationException($"The default view with id {sheet.DefaultViewId} is not found.");
+        }
+
+        defaultView.IsDefaultView = true;
+
+        var activeView = views.FirstOrDefault(v => v.Value.Id == sheet.ActiveViewId) ?? defaultView;
 
         return new SheetInfo
         {
@@ -108,6 +86,22 @@ internal class SheetInfo
     internal void SetActiveView(Guid viewId)
     {
         var view = Views.First(v => v.Value.Id == viewId);
+
+        #region Add the Actions column if it doesn't exist.
+
+        var columnIds = view.Columns.Select(c => c.ColumnId).ToArray();
+        if (!columnIds.Contains(Preset.ActionsColumnId))
+        {
+            view.Columns.Add(Preset.CreateActionsViewColumn());
+        }
+
+        if (!columnIds.Contains(Preset.RowSelectColumnId))
+        {
+            view.Columns.Insert(0, Preset.CreateSelectViewColumn());
+        }
+
+        #endregion
+
         ActiveViewId = viewId;
         ActiveView = view;
     }

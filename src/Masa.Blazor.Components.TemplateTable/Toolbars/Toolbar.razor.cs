@@ -28,7 +28,7 @@ public partial class Toolbar
 
     [Parameter] public EventCallback<View> OnViewReset { get; set; }
 
-    [Parameter] public EventCallback<View> OnViewDelete { get; set; }
+    [Parameter] public EventCallback<ViewInfo> OnViewDelete { get; set; }
 
     [Parameter] public EventCallback<(Guid id, string Name)> OnViewRename { get; set; }
 
@@ -43,6 +43,8 @@ public partial class Toolbar
     [Parameter] public EventCallback OnSearch { get; set; }
 
     [Parameter] public EventCallback OnSave { get; set; }
+
+    [Parameter] public EventCallback OnViewSave { get; set; }
 
     [Parameter] public EventCallback OnRowRemove { get; set; }
 
@@ -76,9 +78,11 @@ public partial class Toolbar
     private bool _filterDialog;
     private string? _newViewName;
     private bool _renameMenu;
+    private bool _viewActionLoading;
 
     private ViewInfo? _activeViewInfo;
 
+    private List<string> _messages = [];
     private List<int> _itemsPerPage = [5, 10, 20, 50];
     private IList<int> _itemsPerPageOptions = [5, 10, 20, 50];
 
@@ -88,19 +92,18 @@ public partial class Toolbar
 
         Views.Sort((a, b) =>
         {
-            if (a.Value.Owner is null)
-            {
-                return -1;
-            }
-
-            if (a.Value.Owner == "SYSTEM")
+            if (a.IsDefaultView || b.IsDefaultView)
             {
                 return 0;
             }
 
-            return 1;
+            return a.AccessRole.CompareTo(b.AccessRole);
         });
-        _activeViewInfo ??= Views.FirstOrDefault(v => v.Value.Id == ActiveView);
+
+        if (_activeViewInfo?.Value.Id != ActiveView)
+        {
+            _activeViewInfo = Views.FirstOrDefault(v => v.Value.Id == ActiveView);
+        }
     }
 
     private async Task SaveAsNewView()
@@ -162,12 +165,25 @@ public partial class Toolbar
         await OnViewRename.InvokeAsync((ActiveView, newName));
     }
 
-    private Task HandleOnDelete()
+    private async Task HandleOnViewSave()
     {
-        return OnViewDelete.InvokeAsync(_activeViewInfo!.Value);
+        _viewActionLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            await OnViewSave.InvokeAsync();
+        }
+        finally
+        {
+            _viewActionLoading = false;
+        }
     }
 
-    private List<string> _messages = [];
+    private Task HandleOnDelete()
+    {
+        return OnViewDelete.InvokeAsync(_activeViewInfo);
+    }
 
     private void HandleOnPageSizeOptionsChange(List<int> val)
     {

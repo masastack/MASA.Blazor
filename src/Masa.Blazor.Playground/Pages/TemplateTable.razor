@@ -4,9 +4,19 @@
 @using Masa.Blazor.Components.TemplateTable.Actions
 @inject GraphQLHttpClient GraphQLClient
 
+<MButtonGroup Value="(int)_role"
+              ValueChanged="v => _role = (Role)v.ToInt32()">
+    <MButton Value="(int)Role.Manager">Manager</MButton>
+    <MButton Value="(int)Role.User">User</MButton>
+</MButtonGroup>
+
 <MTemplateTable SheetProvider="@_sheetProvider"
-                UserViewsProvider="@_userViewsProvider"
                 ItemsProvider="@_itemsProvider"
+                UserViews="_userViews"
+                OnUserViewAdd="@OnUserViewAdd"
+                OnUserViewUpdate="@OnUserViewUpdate"
+                OnUserViewDelete="@OnUserViewDelete"
+                Role="@_role"
                 Height="300"
                 OnSave="@Save"
                 CheckboxColor="primary"
@@ -23,7 +33,33 @@
 </MTemplateTable>
 
 @code {
-    
+    private Role _role;
+    private IList<View> _userViews = [];
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _userViews = await HttpClient.GetFromJsonAsync<IList<View>>("http://localhost:5297/views/cyx");
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnUserViewAdd(View view)
+    {
+        await HttpClient.PostAsJsonAsync("http://localhost:5297/views/cyx", view);
+    }
+
+    private async Task OnUserViewDelete(View view)
+    {
+        await HttpClient.DeleteAsync("http://localhost:5297/views/cyx/" + view.Id);
+    }
+
+    private async Task OnUserViewUpdate(View view)
+    {
+        
+    }
+
     private void OnCustomAction(IReadOnlyDictionary<string, JsonElement> data)
     {
         Console.Out.WriteLine($"Custom Action Clicked {data["name"].GetString()}");
@@ -51,7 +87,7 @@
 
     private async Task OnExport(ICollection<Row> items)
     {
-        Console.Out.WriteLine("Export: "+string.Join(',', items.Select(u => u.Key)));
+        Console.Out.WriteLine("Export: " + string.Join(',', items.Select(u => u.Key)));
     }
 
 }

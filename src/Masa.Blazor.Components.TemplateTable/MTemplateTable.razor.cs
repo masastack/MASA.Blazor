@@ -6,11 +6,17 @@ namespace Masa.Blazor;
 
 public partial class MTemplateTable
 {
-    [Inject] private ILogger<MTemplateTable> Logger { get; set; } = default!;
+    [Inject] private ILogger<MTemplateTable> Logger { get; set; } = null!;
 
     [Parameter] public SheetProvider? SheetProvider { get; set; }
 
-    [Parameter] public UserViewsProvider? UserViewsProvider { get; set; }
+    [Parameter] public IList<View>? UserViews { get; set; }
+
+    [Parameter] public EventCallback<View> OnUserViewAdd { get; set; }
+
+    [Parameter] public EventCallback<View> OnUserViewUpdate { get; set; }
+
+    [Parameter] public EventCallback<View> OnUserViewDelete { get; set; }
 
     [Parameter] public ItemsProvider? ItemsProvider { get; set; }
 
@@ -26,15 +32,15 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<ICollection<Row>>? ViewActionsContent { get; set; }
 
-    // TODO: rename this?
     [Parameter] public Role Role { get; set; }
 
+    // TODO: Sheet请求服务不一定是GraphQL的，需要支持普通的HTTP请求
     private const string SheetQuery =
         """
         query {
           sheet {
             views {
-              hasActions
+              showActions
               showSelect
               showDetail
               showBulkDelete
@@ -63,8 +69,7 @@ public partial class MTemplateTable
                   orderBy
                   index
                 }
-              },
-              owner
+              }
             }
             columns {
               config
@@ -92,6 +97,8 @@ public partial class MTemplateTable
     private bool _hasNextPage;
     private bool _loading;
 
+    private IList<View>? _prevUserViews;
+
     protected override async Task OnParametersSetAsync()
     {
         // base.OnParametersSetAsync();
@@ -105,6 +112,20 @@ public partial class MTemplateTable
                 _sheet.ActiveView.PageIndex = 1;
                 _sheet.ActiveView.PageSize = 5;
                 await RefreshItemsAsync(GetItemsProviderRequest());
+            }
+        }
+
+        if (_sheet is not null)
+        {
+            if (!Equals(_prevUserViews, UserViews))
+            {
+                _sheet.Views.RemoveAll(v => v.AccessRole == Role.User);
+
+                if (UserViews is not null)
+                {
+                    var columns = _sheet.Columns;
+                    _sheet.Views.AddRange(UserViews.Select(v => ViewInfo.From(v, columns, Role.User)));
+                }
             }
         }
     }
@@ -213,32 +234,65 @@ public partial class MTemplateTable
 
     private void UpdateStateOfActiveView()
     {
+        /*
+         * 1. 还原视图的行高
+         * 2. 还原视图的分页信息
+         * 3. 还原列顺序
+         * 4. 还原列的配置信息
+         */
+
         _rowHeight = _sheet!.ActiveViewRowHeight;
         _hasNextPage = _sheet.ActiveView.HasNextPage;
         _hasPreviousPage = _sheet.ActiveView.HasPreviousPage;
 
         _columnOrder.Clear();
 
-        foreach (var viewColumn in _sheet.ActiveViewColumns)
-        {
-            _columnOrder.Add(viewColumn.ColumnId);
+        var selectColumnExists = false;
+        var actionsColumnExists = false;
 
+        foreach (var viewColumn in _sheet.ActiveView.Columns)
+        {
             var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);
             if (column is not null)
             {
                 viewColumn.Column = column;
             }
+
+            if (viewColumn.ColumnId == Preset.RowSelectColumnId)
+            {
+                selectColumnExists = true;
+            }
+            else if (viewColumn.ColumnId == Preset.ActionsColumnId)
+            {
+                actionsColumnExists = true;
+            }
+            else
+            {
+                _columnOrder.Add(viewColumn.ColumnId);
+            }
         }
 
-        if (_sheet.ActiveViewHasActions)
+        if (_sheet.ActiveView.Value.ShowSelect)
         {
-            _columnOrder.Add(Preset.ActionsColumnId);
+            if (!selectColumnExists)
+            {
+                _sheet.ActiveViewColumns.Insert(0, Preset.CreateSelectViewColumn());
+            }
 
-            if (_sheet.ActiveViewColumns.All(u => u.ColumnId != Preset.ActionsColumnId))
+            _columnOrder.Insert(0, Preset.RowSelectColumnId);
+        }
+
+        if (_sheet.ActiveView.Value.ShowActions)
+        {
+            if (!actionsColumnExists)
             {
                 _sheet.ActiveViewColumns.Add(Preset.CreateActionsViewColumn());
             }
+
+            _columnOrder.Add(Preset.ActionsColumnId);
         }
+
+        Console.Out.WriteLine($"[MTemplateTable] UpdateStateOfActiveView {string.Join(',', _columnOrder)}");
     }
 
     private SheetProviderRequest GetSheetProviderRequest()

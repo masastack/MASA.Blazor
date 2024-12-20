@@ -16,7 +16,7 @@ public class View
 
     public List<ViewColumn> Columns { get; set; } = [];
 
-    public bool HasActions { get; set; } = true;
+    public bool ShowActions { get; set; } = true;
 
     public bool ShowSelect { get; set; } = true;
 
@@ -27,12 +27,6 @@ public class View
     public Filter? Filter { get; set; }
 
     public Sort? Sort { get; set; }
-
-    public string? Owner { get; set; } = "SYSTEM";
-
-    public bool IsDefaultView => Owner is null;
-
-    public bool IsUserView => !IsDefaultView && Owner != "SYSTEM";
 }
 
 public enum RowHeight

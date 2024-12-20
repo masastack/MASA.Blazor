@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text.Json;
 using HotChocolate.Types.Pagination;
 using HotChocolateDemo;
@@ -40,21 +41,28 @@ app.MapPost("/sheet", async (Sheet sheet) =>
     return true;
 });
 
-app.MapPost("/views/{user-id}", async (Sheet sheet, string userId) =>
+app.MapPost("/views/{userId}", async (View view, string userId) =>
 {
     var path = Path.Combine(Environment.CurrentDirectory, $"views-{userId}.json");
-    // 文件存在则覆盖，不存在则创建
+    List<View> views = [];
     if (File.Exists(path))
     {
-        File.Delete(path);
+        var json = File.ReadAllText(path);
+        views = JsonSerializer.Deserialize<List<View>>(json);
     }
 
-    var json = JsonSerializer.Serialize(sheet);
-    await File.WriteAllTextAsync(path, json);
-    return true;
+    var got = views.FirstOrDefault(v => v.Id == view.Id);
+    if (got is not null)
+    {
+        views.Remove(got);
+    }
+
+    views.Add(view);
+    var json2 = JsonSerializer.Serialize(views);
+    await File.WriteAllTextAsync(path, json2);
 });
 
-app.MapGet("/views/{user-id}", (string userId) =>
+app.MapGet("/views/{userId}", (string userId) =>
 {
     var path = Path.Combine(Environment.CurrentDirectory, $"views-{userId}.json");
     if (!File.Exists(path))
@@ -64,6 +72,28 @@ app.MapGet("/views/{user-id}", (string userId) =>
 
     var json = File.ReadAllText(path);
     return JsonSerializer.Deserialize<List<View>>(json);
+});
+
+app.MapDelete("/views/{userId}/{viewId}", (string userId, Guid viewId) =>
+{
+    var path = Path.Combine(Environment.CurrentDirectory, $"views-{userId}.json");
+    if (!File.Exists(path))
+    {
+        return false;
+    }
+
+    var json = File.ReadAllText(path);
+    var views = JsonSerializer.Deserialize<List<View>>(json);
+    var view = views.FirstOrDefault(v => v.Id == viewId);
+    if (view is null)
+    {
+        return false;
+    }
+
+    views.Remove(view);
+    var json2 = JsonSerializer.Serialize(views);
+    File.WriteAllText(path, json2);
+    return true;
 });
 
 app.Run();

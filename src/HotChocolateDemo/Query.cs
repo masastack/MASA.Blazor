@@ -106,7 +106,6 @@ public class Query
             Columns = fakedViewColumns,
             RowHeight = RowHeight.Medium,
             Type = ViewType.Grid,
-            HasActions = true,
             Filter = new Filter()
             {
                 Options =

@@ -141,6 +141,8 @@ public partial class Viewer : IAsyncDisposable
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+        Console.Out.WriteLine($"[Viewer] OnParametersSet ColumnOrder: {string.Join(", ", ColumnOrder)}");
+        Console.Out.WriteLine($"[Viewer] OnParametersSet ViewColumns: {string.Join(", ", ViewColumns.Select(u => u.ColumnId))}");
 
         _orderedViewColumns = ViewColumns.OrderBy(u => ColumnOrder.IndexOf(u.ColumnId)).ToList();
     }
