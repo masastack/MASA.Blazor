@@ -20,7 +20,6 @@ namespace Masa.Blazor.Test.TextField
             Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field"));
             Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field--is-booted"));
             Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
-
         }
 
         [DataTestMethod]
@@ -445,6 +444,13 @@ namespace Masa.Blazor.Test.TextField
 
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
+        }
+
+        [TestMethod]
+        public void IsNullable()
+        {
+            Assert.IsTrue(MTextField<double?>.IsNullable<double?>());
+            Assert.IsFalse(MTextField<double>.IsNullable<double>());
         }
     }
 }
