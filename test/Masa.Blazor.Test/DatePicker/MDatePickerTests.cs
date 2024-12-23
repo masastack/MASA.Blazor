@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.DatePicker
+﻿namespace Masa.Blazor.Test.DatePicker
 {
     [TestClass]
     public class MDatePickerTests : TestBase

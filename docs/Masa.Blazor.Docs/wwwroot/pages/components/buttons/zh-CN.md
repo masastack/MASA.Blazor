@@ -69,7 +69,7 @@ related:
 
 #### 加载器
 
-使用 `Loaders` 属性，可以通知用户正在进行处理。默认行为是使用 **MProgressCircular** 组件，但这可以自定义。
+使用 `Loadering` 属性，可以通知用户正在进行处理。默认行为是使用 **MProgressCircular** 组件，但这可以自定义。
 
 <masa-example file="Examples.components.buttons.Loaders"></masa-example>
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Picker
+﻿namespace Masa.Blazor.Test.Picker
 {
     [TestClass]
     public class MPickerTests : TestBase

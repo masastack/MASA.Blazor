@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Radio
+﻿namespace Masa.Blazor.Test.Radio
 {
     [TestClass]
     public class MRadioTests : TestBase

@@ -575,11 +575,20 @@ public partial class MTextField<TValue> : MInput<TValue>
             {
                 var newValue = Math.Round(decimalValue, Props.Precision.Value);
                 _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
-                return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
+                var isNullable = IsNullable<TValue>();
+                return (TValue)Convert.ChangeType(
+                    newValue,
+                    isNullable ? Nullable.GetUnderlyingType(typeof(TValue))! : typeof(TValue),
+                    CultureInfo.InvariantCulture);
             }
         }
 
         return base.ConvertAndSetValueByJSInterop(val);
+    }
+
+    internal static bool IsNullable<T>()
+    {
+        return Nullable.GetUnderlyingType(typeof(T)) != null || !typeof(T).IsValueType;
     }
 
     private static bool TryConvertTo<T>(string? value, out T? result)
@@ -734,6 +743,8 @@ public partial class MTextField<TValue> : MInput<TValue>
     {
         if (args.Key is KeyCodes.Enter or KeyCodes.NumpadEnter)
         {
+            await UpdateValueImmediatelyAsync();
+            
             if (OnEnter.HasDelegate)
             {
                 await OnEnter.InvokeAsync();
@@ -746,6 +757,19 @@ public partial class MTextField<TValue> : MInput<TValue>
         {
             await OnKeyDown.InvokeAsync(args);
         }
+    }
+
+    /// <summary>
+    /// Update the bound value immediately.
+    /// For some scenarios, like OnEnter event and inner icon click event,
+    /// we need to update the value immediately.
+    /// </summary>
+    [MasaApiPublicMethod]
+    public async Task UpdateValueImmediatelyAsync()
+    {
+        var originValue = await Js.InvokeAsync<string>(JsInteropConstants.GetProp, InputElement, "value");
+
+        await HandleOnInputOrChangeEvent(new ChangeEventArgs { Value = originValue }, OnChange, nameof(OnChange));
     }
 
     public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)

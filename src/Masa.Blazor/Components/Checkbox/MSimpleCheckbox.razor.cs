@@ -38,9 +38,16 @@ public partial class MSimpleCheckbox : MasaComponentBase
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Block _selectionBlock = new("m-input--selection-controls");
 
+    private string? ComputedColor => Disabled || !Value ? null : Color;
+
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Disabled).Build();
+        yield return _modifierBuilder.Add(Disabled).AddTextColor(ComputedColor).Build();
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        yield return new StyleBuilder().AddTextColor(ComputedColor).ToString();
     }
 
     public bool IsDark

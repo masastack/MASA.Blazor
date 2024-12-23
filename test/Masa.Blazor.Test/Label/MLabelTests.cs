@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Masa.Blazor.Test.Label
+﻿namespace Masa.Blazor.Test.Label
 {
     [TestClass]
     public class MLabelTests : TestBase

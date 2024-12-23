@@ -1,6 +1,5 @@
 ﻿using AngleSharp.Css.Dom;
 using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Overlay
 {
