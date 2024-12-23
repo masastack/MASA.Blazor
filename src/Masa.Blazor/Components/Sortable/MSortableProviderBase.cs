@@ -179,8 +179,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     [Parameter] public EventCallback<string> OnRemove { get; set; }
 
     private IEnumerable<TItem>? _prevItems;
-    private HashSet<string> _prevItemKeys;
-    private List<string> _internalOrder;
+    private HashSet<string> _prevItemKeys = [];
     private string[] _prevOrder = [];
 
     private DotNetObjectReference<SortableJSInteropHandle>? _sortableJSInteropHandle;
@@ -219,6 +218,23 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         Items.ThrowIfNull(ComponentName);
         ItemKey.ThrowIfNull(ComponentName);
 
+        if (!Equals(_prevItems, Items))
+        {
+            _prevItems = Items;
+            _prevItemKeys = GetItemKeys();
+            _renderRateLimiter?.RecordRender();
+            SortByOrder();
+        }
+        else
+        {
+            var keys = GetItemKeys();
+            if (!_prevItemKeys.SetEquals(keys))
+            {
+                _prevItemKeys = keys;
+                SortByOrder();
+            }
+        }
+
         if (Order is not null && !_prevOrder.SequenceEqual(Order))
         {
             _prevOrder = Order.ToArray();
@@ -239,12 +255,12 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         {
             return;
         }
-        
+
         if (_sortableJSInteropHandle is null || ContainerSelector is null)
         {
             return;
         }
-        
+
         _jsObjectReference =
             await SortableJSModule.InitAsync(ContainerSelector, GenOptions(), Order, _sortableJSInteropHandle);
     }
@@ -277,30 +293,32 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         };
     }
 
-    private void UpdateOrderInternal(List<string> order)
-    {
-        _internalOrder = order;
-        _ = OrderChanged.InvokeAsync(order);
-    }
-
     public ValueTask UpdateOrder(List<string> order)
     {
-        UpdateOrderInternal(order);
+        _ = OrderChanged.InvokeAsync(order);
         return ValueTask.CompletedTask;
     }
 
     public async ValueTask HandleOnAdd(string key, List<string> order)
     {
-        UpdateOrderInternal(order);
-
+        _ = OrderChanged.InvokeAsync(order);
         await OnAdd.InvokeAsync(key);
     }
 
     public async ValueTask HandleOnRemove(string key, List<string> order)
     {
-        UpdateOrderInternal(order);
-
+        _ = OrderChanged.InvokeAsync(order);
         await OnRemove.InvokeAsync(key);
+    }
+
+    private void SortByOrder()
+    {
+        if (_jsObjectReference is null)
+        {
+            return;
+        }
+
+        NextTick(() => _ = _jsObjectReference.SortAsync(Order, false).ConfigureAwait(false));
     }
 
     protected override async ValueTask DisposeAsyncCore()
