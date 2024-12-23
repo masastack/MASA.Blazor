@@ -28,7 +28,6 @@ public class MSortableProvider<TItem> : MSortableProviderBase<TItem>
     {
         builder.AddContent(0, sb =>
         {
-            var i = 0;
             foreach (var item in Items)
             {
                 Dictionary<string, object?> attrs = new()
@@ -36,7 +35,7 @@ public class MSortableProvider<TItem> : MSortableProviderBase<TItem>
                     { "data-id", ItemKey(item) }
                 };
                 var context = new SortableItemContext<TItem>(item, attrs);
-                sb.AddContent(i++, ItemContent?.Invoke(context));
+                sb.AddContent(1, ItemContent?.Invoke(context));
             }
         });
     }

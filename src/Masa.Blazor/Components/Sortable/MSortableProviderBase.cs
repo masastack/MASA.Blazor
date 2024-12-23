@@ -179,8 +179,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
     [Parameter] public EventCallback<string> OnRemove { get; set; }
 
     private IEnumerable<TItem>? _prevItems;
-    private HashSet<string> _prevItemKeys;
-    private List<string> _internalOrder;
+    private HashSet<string> _prevItemKeys = [];
     private string[] _prevOrder = [];
 
     private DotNetObjectReference<SortableJSInteropHandle>? _sortableJSInteropHandle;
@@ -224,7 +223,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
             _prevItems = Items;
             _prevItemKeys = GetItemKeys();
             _renderRateLimiter?.RecordRender();
-            RefreshOrder();
+            SortByOrder();
         }
         else
         {
@@ -232,7 +231,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
             if (!_prevItemKeys.SetEquals(keys))
             {
                 _prevItemKeys = keys;
-                SortByInternalOrder();
+                SortByOrder();
             }
         }
 
@@ -256,12 +255,12 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         {
             return;
         }
-        
+
         if (_sortableJSInteropHandle is null || ContainerSelector is null)
         {
             return;
         }
-        
+
         _jsObjectReference =
             await SortableJSModule.InitAsync(ContainerSelector, GenOptions(), Order, _sortableJSInteropHandle);
     }
@@ -294,53 +293,32 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         };
     }
 
-    private void UpdateOrderInternal(List<string> order)
+    public ValueTask UpdateOrder(List<string> order)
     {
-        _internalOrder = order;
         _ = OrderChanged.InvokeAsync(order);
-    }
-
-    public async ValueTask UpdateOrder(List<string> order)
-    {
-        UpdateOrderInternal(order);
+        return ValueTask.CompletedTask;
     }
 
     public async ValueTask HandleOnAdd(string key, List<string> order)
     {
-        UpdateOrderInternal(order);
-
+        _ = OrderChanged.InvokeAsync(order);
         await OnAdd.InvokeAsync(key);
     }
 
     public async ValueTask HandleOnRemove(string key, List<string> order)
     {
-        UpdateOrderInternal(order);
-
+        _ = OrderChanged.InvokeAsync(order);
         await OnRemove.InvokeAsync(key);
     }
 
-    private void RefreshOrder()
+    private void SortByOrder()
     {
         if (_jsObjectReference is null)
         {
             return;
         }
 
-        NextTick(async () =>
-        {
-            var order = await _jsObjectReference.ToArrayAsync();
-            UpdateOrderInternal(order);
-        });
-    }
-
-    private void SortByInternalOrder()
-    {
-        if (_jsObjectReference is null)
-        {
-            return;
-        }
-
-        NextTick(() => _ = _jsObjectReference.SortAsync(_internalOrder, false));
+        NextTick(() => _ = _jsObjectReference.SortAsync(Order, false).ConfigureAwait(false));
     }
 
     protected override async ValueTask DisposeAsyncCore()
