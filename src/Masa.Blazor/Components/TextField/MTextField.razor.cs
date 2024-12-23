@@ -575,11 +575,20 @@ public partial class MTextField<TValue> : MInput<TValue>
             {
                 var newValue = Math.Round(decimalValue, Props.Precision.Value);
                 _ = SetValueByJsInterop(newValue.ToString(Props.PrecisionFormat, CultureInfo.InvariantCulture));
-                return (TValue)Convert.ChangeType(newValue, typeof(TValue), CultureInfo.InvariantCulture);
+                var isNullable = IsNullable<TValue>();
+                return (TValue)Convert.ChangeType(
+                    newValue,
+                    isNullable ? Nullable.GetUnderlyingType(typeof(TValue))! : typeof(TValue),
+                    CultureInfo.InvariantCulture);
             }
         }
 
         return base.ConvertAndSetValueByJSInterop(val);
+    }
+
+    private static bool IsNullable<T>()
+    {
+        return Nullable.GetUnderlyingType(typeof(T)) != null || !typeof(T).IsValueType;
     }
 
     private static bool TryConvertTo<T>(string? value, out T? result)
