@@ -586,7 +586,7 @@ public partial class MTextField<TValue> : MInput<TValue>
         return base.ConvertAndSetValueByJSInterop(val);
     }
 
-    private static bool IsNullable<T>()
+    internal static bool IsNullable<T>()
     {
         return Nullable.GetUnderlyingType(typeof(T)) != null || !typeof(T).IsValueType;
     }
