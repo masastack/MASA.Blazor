@@ -150,7 +150,7 @@
 
 .masa-table-viewer__header-column-resize {
   position: absolute;
-  right: -1px;
+  right: 0;
   top: 0;
   bottom: 0;
   width: 4px;
@@ -357,4 +357,14 @@ td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   margin-bottom: 16px;
+}
+
+.m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right:last-of-type,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left:last-of-type:after {
+  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
+.m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left:last-of-type:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right:last-of-type:after {
+  box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 15%);
 }

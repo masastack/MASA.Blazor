@@ -145,11 +145,6 @@ public partial class MTemplateTable
 
                 _sheet = SheetInfo.From(result.Data.Sheet);
 
-                // add select and actions columns, they are not in the column data
-                // because they are controlled by the ShowSelect and HasActions properties
-                _sheet.Columns.Add(Preset.CreateActionsColumn());
-                _sheet.Columns.Add(Preset.CreateSelectColumn());
-
                 UpdateStateOfActiveView();
             }
             catch (Exception e)
@@ -245,54 +240,54 @@ public partial class MTemplateTable
         _hasNextPage = _sheet.ActiveView.HasNextPage;
         _hasPreviousPage = _sheet.ActiveView.HasPreviousPage;
 
-        _columnOrder.Clear();
+        // _sheet.ActiveView.Order.Clear();
 
-        var selectColumnExists = false;
-        var actionsColumnExists = false;
+        // var selectColumnExists = false;
+        // var actionsColumnExists = false;
 
-        foreach (var viewColumn in _sheet.ActiveView.Columns)
-        {
-            var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);
-            if (column is not null)
-            {
-                viewColumn.Column = column;
-            }
+        // foreach (var viewColumn in _sheet.ActiveView.Columns)
+        // {
+        //     var column = _sheet.Columns.FirstOrDefault(u => u.Id == viewColumn.ColumnId);
+        //     if (column is not null)
+        //     {
+        //         viewColumn.Column = column;
+        //     }
+        //
+        //     if (viewColumn.ColumnId == Preset.RowSelectColumnId)
+        //     {
+        //         selectColumnExists = true;
+        //     }
+        //     else if (viewColumn.ColumnId == Preset.ActionsColumnId)
+        //     {
+        //         actionsColumnExists = true;
+        //     }
+        //     else
+        //     {
+        //         _sheet.ActiveView.Order.Add(viewColumn.ColumnId);
+        //     }
+        // }
+        //
+        // if (_sheet.ActiveView.Value.ShowSelect)
+        // {
+        //     if (!selectColumnExists)
+        //     {
+        //         _sheet.ActiveViewColumns.Insert(0, Preset.CreateSelectViewColumn());
+        //     }
+        //
+        //     _sheet.ActiveView.Order.Insert(0, Preset.RowSelectColumnId);
+        // }
+        //
+        // if (_sheet.ActiveView.Value.ShowActions)
+        // {
+        //     if (!actionsColumnExists)
+        //     {
+        //         _sheet.ActiveViewColumns.Add(Preset.CreateActionsViewColumn());
+        //     }
+        //
+        //     _sheet.ActiveView.Order.Add(Preset.ActionsColumnId);
+        // }
 
-            if (viewColumn.ColumnId == Preset.RowSelectColumnId)
-            {
-                selectColumnExists = true;
-            }
-            else if (viewColumn.ColumnId == Preset.ActionsColumnId)
-            {
-                actionsColumnExists = true;
-            }
-            else
-            {
-                _columnOrder.Add(viewColumn.ColumnId);
-            }
-        }
-
-        if (_sheet.ActiveView.Value.ShowSelect)
-        {
-            if (!selectColumnExists)
-            {
-                _sheet.ActiveViewColumns.Insert(0, Preset.CreateSelectViewColumn());
-            }
-
-            _columnOrder.Insert(0, Preset.RowSelectColumnId);
-        }
-
-        if (_sheet.ActiveView.Value.ShowActions)
-        {
-            if (!actionsColumnExists)
-            {
-                _sheet.ActiveViewColumns.Add(Preset.CreateActionsViewColumn());
-            }
-
-            _columnOrder.Add(Preset.ActionsColumnId);
-        }
-
-        Console.Out.WriteLine($"[MTemplateTable] UpdateStateOfActiveView {string.Join(',', _columnOrder)}");
+        // Console.Out.WriteLine($"[MTemplateTable] UpdateStateOfActiveView {string.Join(',', _sheet.ActiveView.Order)}");
     }
 
     private SheetProviderRequest GetSheetProviderRequest()

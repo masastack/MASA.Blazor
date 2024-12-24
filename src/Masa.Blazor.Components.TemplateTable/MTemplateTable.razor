@@ -19,7 +19,7 @@
                  Role="@Role"
                  ActiveView="@_sheet.ActiveViewId"
                  ActiveViewChanged="@HandleOnActiveViewChanged"
-                 ColumnOrder="@_columnOrder"
+                 ColumnOrder="@_sheet.ActiveView.Order"
                  ColumnOrderChanged="@HandleOnColumnOrderChanged"
                  RowHeight="_rowHeight"
                  RowHeightChanged="@HandleOnRowHeightChanged"
@@ -52,7 +52,7 @@
 
         <Viewer ViewColumns="@_sheet.ActiveView.Columns"
                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-                ColumnOrder="@_columnOrder"
+                ColumnOrder="@_sheet.ActiveView.Order"
                 ColumnOrderChanged="@HandleOnColumnOrderChanged"
                 Loading="@_loading"
                 RowHeight="@_rowHeight"
@@ -116,7 +116,6 @@
 
 @code {
 
-    private List<string> _columnOrder = [];
     private RowHeight _rowHeight;
     private Viewer? _viewer;
 
@@ -187,7 +186,7 @@
             column.Fixed = ColumnFixed.None;
         }
 
-        _columnOrder = [];
+        _sheet.ActiveView.Order = [];
         _sheet.ActiveView.Value.Filter = new();
         _sheet.ActiveView.Value.Sort = null;
         _sheet.ActiveView.PageIndex = 1;
@@ -287,27 +286,17 @@
 
     private void HandleOnColumnOrderChanged(List<string> columnOrder)
     {
-        _columnOrder = columnOrder;
+        _sheet.ActiveView.Order = columnOrder;
 
-        if (!_columnOrder.Contains(Preset.ActionsColumnId))
+        if (!_sheet.ActiveView.Order.Contains(Preset.ActionsColumnId))
         {
-            _columnOrder.Add(Preset.ActionsColumnId);
+            _sheet.ActiveView.Order.Add(Preset.ActionsColumnId);
         }
 
-        Console.Out.WriteLine("[TemplateTable] ColumnOrderChanged Before: " + string.Join(",", _columnOrder));
-        if (!_columnOrder.Contains(Preset.RowSelectColumnId))
+        if (!_sheet.ActiveView.Order.Contains(Preset.RowSelectColumnId))
         {
-            _columnOrder.Insert(0, Preset.RowSelectColumnId);
+            _sheet.ActiveView.Order.Insert(0, Preset.RowSelectColumnId);
         }
-
-        Console.Out.WriteLine("[TemplateTable] ColumnOrderChanged: " + string.Join(",", _columnOrder));
-
-        _sheet!.ActiveViewColumns.Sort((x, y) =>
-        {
-            var xIndex = _columnOrder.IndexOf(x.ColumnId);
-            var yIndex = _columnOrder.IndexOf(y.ColumnId);
-            return xIndex.CompareTo(yIndex);
-        });
     }
 
     private void HandleOnRowHeightChanged(RowHeight rowHeight)
