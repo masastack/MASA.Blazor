@@ -15,10 +15,6 @@ Tooltips can wrap any element.
 
 <masa-example file="Examples.components.tooltips.Usage"></masa-example>
 
-## Caveats
-
-<app-alert type="info" content="In order to correctly position **MTooltip**, a position support (`Top` | `Bottom ` |`Left ` | `Right`) is required."></app-alert>
-
 ## Examples
 
 ### Props
