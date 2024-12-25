@@ -1,4 +1,3 @@
-﻿using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Mixins.Menuable;
 
 namespace Masa.Blazor
