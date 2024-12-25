@@ -19,7 +19,7 @@ related:
 
 ### 属性 {#props}
 
-#### 对其 {#alignment}
+#### 对齐 {#alignment}
 
 提示可以对齐到激活器元素的四个侧面。
 
