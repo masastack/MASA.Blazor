@@ -9,15 +9,12 @@
         </MCol>
 
         <MCol Cols="12" Class="mt-12">
-            <MTooltip @bind-Value="show" Top>
+            <MTooltip @bind-Value="show" Top Text="Programmatic tooltip">
                 <ActivatorContent>
                     <MButton Icon @attributes="@context.Attrs">
                         <MIcon Color="grey lighten-1">mdi-cart</MIcon>
                     </MButton>
                 </ActivatorContent>
-                <ChildContent>
-                    <span>Programmatic tooltip</span>
-                </ChildContent>
             </MTooltip>
         </MCol>
     </MRow>

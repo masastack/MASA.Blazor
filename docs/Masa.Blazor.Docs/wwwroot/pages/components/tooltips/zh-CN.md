@@ -7,27 +7,25 @@ related:
   - /blazor/components/menus
 ---
 
-## 使用
+> v1.9.0 开始可以使用 `Text` 属性来设置文本类型的提示。
+
+## 使用 {#usage}
 
 提示组件可以包装任何元素。
 
 <masa-example file="Examples.components.tooltips.Usage"></masa-example>
 
-## 注意
+## 示例 {#examples}
 
-<app-alert type="info" content="为了正确定位 **MTooltip**，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。"></app-alert>
+### 属性 {#props}
 
-## 示例
-
-### 属性
-
-#### 对其
+#### 对其 {#alignment}
 
 提示可以对齐到激活器元素的四个侧面。
 
 <masa-example file="Examples.components.tooltips.Alignment"></masa-example>
 
-#### 可见性
+#### 可见性 {#visibility}
 
 可使用 `@bind-Value` 编程性修改提示可见性。
 

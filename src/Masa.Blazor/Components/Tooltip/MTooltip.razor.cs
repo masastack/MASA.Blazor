@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Mixins.Menuable;
+﻿using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.Mixins.Menuable;
 
 namespace Masa.Blazor
 {
@@ -12,6 +13,9 @@ namespace Masa.Blazor
 
         [Parameter] public string? Color { get; set; }
 
+        /// <summary>
+        /// The content that will be displayed in the tooltip.
+        /// </summary>
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter] [MasaApiParameter("span")] public string Tag { get; set; } = "span";
@@ -19,6 +23,14 @@ namespace Masa.Blazor
         [Parameter] public string? Transition { get; set; }
 
         [Parameter] public string? ContentStyle { get; set; }
+
+        /// <summary>
+        /// The text that will be displayed in the tooltip.
+        /// If the <see cref="ChildContent"/> is set, this will be ignored. 
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(ReleasedOn = "v1.9.0")]
+        public string? Text { get; set; }
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
