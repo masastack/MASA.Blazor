@@ -7,15 +7,13 @@ related:
   - /blazor/components/menus
 ---
 
+> Starting from v1.9.0, you can use the `Text` property to set a text type tooltip.
+
 ## Usage
 
 Tooltips can wrap any element.
 
 <masa-example file="Examples.components.tooltips.Usage"></masa-example>
-
-## Caveats
-
-<app-alert type="info" content="In order to correctly position **MTooltip**, a position support (`Top` | `Bottom ` |`Left ` | `Right`) is required."></app-alert>
 
 ## Examples
 
