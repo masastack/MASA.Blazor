@@ -19,6 +19,12 @@ Tooltips can wrap any element.
 
 ### Props
 
+#### Activator {released-on=v1.9.0}
+
+In addition to specifying an activator element using `ActivatorContent`, you can also use the `Activator` property to specify a CSS selector as the activator. `parent` is a predefined selector that points to the parent element.
+
+<masa-example file="Examples.components.tooltips.Activator"></masa-example>
+
 #### Alignment
 
 A tooltip can be aligned to any of the four sides of the activator element.

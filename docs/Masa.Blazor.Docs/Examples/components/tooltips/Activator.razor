@@ -1,0 +1,18 @@
+﻿<div class="text-center d-flex align-center justify-space-around">
+    <MButton Id="tooltip-activator-id">
+        ID as activator
+        <MTooltip Activator="#tooltip-activator-id"
+                  Text="Tooltip"/>
+    </MButton>
+
+    <MButton Class="tooltip-activator-css-selector">
+        CSS selector as activator
+        <MTooltip Activator=".tooltip-activator-css-selector"
+                  Text="Tooltip"/>
+    </MButton>
+
+    <MButton>
+        Parent as activator
+        <MTooltip Activator="parent" Text="Tooltip"/>
+    </MButton>
+</div>
