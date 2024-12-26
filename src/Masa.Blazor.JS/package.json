@@ -17,7 +17,8 @@
     "build:swiper": "rollup --config rollup.config.swiper.ts",
     "build:xgplayer": "rollup --config rollup.config.xgplayer.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts",
-    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts"
+    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts",
+    "build:templatetable": "rollup --config rollup.config.template-table.ts"
   },
   "author": "",
   "license": "MIT",

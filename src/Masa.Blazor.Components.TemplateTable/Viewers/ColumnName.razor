@@ -29,14 +29,14 @@
 
     @if (!IsRowSelect)
     {
-        <Dropdown Icon="mdi-menu-down-outline">
+        <Dropdown>
             @if (!Internal)
             {
-                <DropdownItem Title="Edit" PrependIcon="mdi-pencil-outline"
-                              OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></DropdownItem>
+                <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
+                           OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
             }
-            <DropdownItem Title="Hide" PrependIcon="mdi-eye-off-outline"
-                          OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></DropdownItem>
+            <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
+                       OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
         </Dropdown>
     }
 </div>
@@ -53,7 +53,7 @@
     [Parameter] public Sort? Sort { get; set; }
 
     [Parameter] public EventCallback<Sort> OnClick { get; set; }
-    
+
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }

@@ -1,4 +1,5 @@
 ﻿using BemIt;
+using Masa.Blazor.Components.TemplateTable.Actions;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 
@@ -52,7 +53,7 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public string? CheckboxColor { get; set; }
 
-    [Parameter] public bool HideDetail { get; set; }
+    [Parameter] public bool ShowDetail { get; set; }
 
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
@@ -64,7 +65,9 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public EventCallback<IReadOnlyDictionary<string, JsonElement>> OnDetail { get; set; }
 
-    [Parameter] public RenderFragment? ActionsContent { get; set; }
+    [Parameter] public RowActionsContext RowActionsContext { get; set; } = null!;
+
+    [Parameter] public bool HasCustomRowActions { get; set; }
 
     [Parameter] public List<string> SelectedKeys { get; set; } = [];
 
@@ -93,6 +96,10 @@ public partial class Viewer : IAsyncDisposable
     private DotNetObjectReference<Viewer>? _dotNetObjectReference;
 
     private int _actionsCount = 0;
+    private List<ViewColumnInfo> _orderedViewColumns = [];
+
+    private string? _lastLeftFixedColumnId;
+    private string? _firstRightFixedColumnId;
 
     private (bool Indeterminate, bool AllSelected) SelectionState
     {
@@ -113,29 +120,12 @@ public partial class Viewer : IAsyncDisposable
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private List<ViewColumnInfo> _orderedViewColumns = [];
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        InitActionsCount();
-
         _dotNetObjectReference = DotNetObjectReference.Create(this);
-    }
-
-    private void InitActionsCount()
-    {
-        if (ActionsContent is null)
-        {
-            return;
-        }
-
-        var builder = new RenderTreeBuilder();
-        ActionsContent.Invoke(builder);
-#pragma warning disable BL0006
-        _actionsCount = builder.GetFrames().Array.Count(u => u.FrameType == RenderTreeFrameType.Component);
-#pragma warning restore BL0006
     }
 
     protected override void OnParametersSet()
@@ -143,6 +133,8 @@ public partial class Viewer : IAsyncDisposable
         base.OnParametersSet();
 
         _orderedViewColumns = ViewColumns.OrderBy(u => ColumnOrder.IndexOf(u.ColumnId)).ToList();
+        _lastLeftFixedColumnId = _orderedViewColumns.LastOrDefault(u => u.Fixed == ColumnFixed.Left)?.ColumnId;
+        _firstRightFixedColumnId = _orderedViewColumns.FirstOrDefault(u => u.Fixed == ColumnFixed.Right)?.ColumnId;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -230,6 +222,8 @@ public partial class Viewer : IAsyncDisposable
         cssBuilder.Add(template.Column.Type.ToString().ToLowerInvariant());
         cssBuilder.Add("m-data-table__column--fixed-left", fixedLeft);
         cssBuilder.Add("m-data-table__column--fixed-right", fixedRight);
+        cssBuilder.Add("first-fixed-column",
+            template.ColumnId == _lastLeftFixedColumnId || template.ColumnId == _firstRightFixedColumnId);
 
         StyleBuilder styleBuilder = new();
         if (fixedLeft)
@@ -238,7 +232,7 @@ public partial class Viewer : IAsyncDisposable
             if (index > -1)
             {
                 var widths = _orderedViewColumns.Take(index).Sum(u => u.Width);
-                styleBuilder.Add(MasaBlazor.RTL ? "right": "left", $"{widths}px");
+                styleBuilder.Add(MasaBlazor.RTL ? "right" : "left", $"{widths}px");
             }
         }
         else if (fixedRight)
@@ -248,7 +242,7 @@ public partial class Viewer : IAsyncDisposable
             if (lastIndex > -1)
             {
                 var widths = _orderedViewColumns.TakeLast(count - lastIndex - 1).Sum(u => u.Width);
-                styleBuilder.Add(MasaBlazor.RTL ? "left": "right", $"{widths}px");
+                styleBuilder.Add(MasaBlazor.RTL ? "left" : "right", $"{widths}px");
             }
         }
 
@@ -273,10 +267,10 @@ public partial class Viewer : IAsyncDisposable
             handle = true;
             hidden = HiddenColumnIds.Contains(template.ColumnId);
         }
-        
+
         var fixedLeft = template.Column.Type is ColumnType.RowSelect || template.Fixed == ColumnFixed.Left;
         var fixedRight = template.Column.Type is ColumnType.Actions || template.Fixed == ColumnFixed.Right;
-        
+
         CssBuilder cssBuilder = new();
         cssBuilder.Add("masa-table-viewer__header-column");
         cssBuilder.Add(handle ? "handle" : "ignore-elements");
@@ -284,10 +278,19 @@ public partial class Viewer : IAsyncDisposable
         cssBuilder.Add(template.Column.Type.ToString().ToLowerInvariant());
         cssBuilder.Add("m-data-table__column--fixed-left", fixedLeft);
         cssBuilder.Add("m-data-table__column--fixed-right", fixedRight);
+        cssBuilder.Add("first-fixed-column",
+            template.ColumnId == _lastLeftFixedColumnId || template.ColumnId == _firstRightFixedColumnId);
 
         StyleBuilder styleBuilder = new();
-        styleBuilder.AddWidth(template.Width, predicate: () => template.Width != 0);
-        styleBuilder.AddIf("--m-configurable-table-actions-count", _actionsCount.ToString(), template.Column.Type is ColumnType.Actions);
+
+        var width = template.Column.Type is ColumnType.Actions
+            ? (RowActionsContext?.Width ?? 0)
+            : template.Width;
+
+        if (width > 0)
+        {
+            styleBuilder.AddWidth(width);
+        }
 
         if (fixedLeft)
         {
@@ -295,7 +298,7 @@ public partial class Viewer : IAsyncDisposable
             if (index > -1)
             {
                 var widths = _orderedViewColumns.Take(index).Sum(u => u.Width);
-                styleBuilder.Add(MasaBlazor.RTL ? "right": "left", $"{widths}px");
+                styleBuilder.Add(MasaBlazor.RTL ? "right" : "left", $"{widths}px");
             }
         }
         else if (fixedRight)
@@ -305,7 +308,7 @@ public partial class Viewer : IAsyncDisposable
             if (lastIndex > -1)
             {
                 var widths = _orderedViewColumns.TakeLast(count - lastIndex - 1).Sum(u => u.Width);
-                styleBuilder.Add(MasaBlazor.RTL ? "left": "right", $"{widths}px");
+                styleBuilder.Add(MasaBlazor.RTL ? "left" : "right", $"{widths}px");
             }
         }
 

@@ -355,15 +355,65 @@
 
     private RenderFragment GenActionsCell(IReadOnlyDictionary<string, JsonElement> item) => __builder =>
     {
-        Action? detailAction = () => OnDetail.InvokeAsync(item);
+        Action detailAction = () => OnDetail.InvokeAsync(item);
 
-        <CascadingValue Value="item" Name="RowData">
-            <CascadingValue Value="detailAction" Name="DetailAction">
-                @(ActionsContent ?? (HideDetail
-                    ? default
-                    : (RenderFragment)(@<DetailAction/>)))
-            </CascadingValue>
-        </CascadingValue>
+        if (HasCustomRowActions)
+        {
+            foreach (var action in RowActionsContext.DisplayActions.OrderBy(u => u.Index))
+            {
+                var click = action.InternalId == RowDetailAction.DefaultId ? detailAction : () => action.OnClick.InvokeAsync(item);
+
+                <MTooltip Top Disabled="@(action.Text is null)">
+                    <ActivatorContent>
+                        <MButton IconName="@action.Icon"
+                                 Small
+                                 OnClick="@click"
+                                 @attributes="@context.Attrs">
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        @action.Text
+                    </ChildContent>
+                </MTooltip>
+            }
+
+            if (RowActionsContext.MenuActions.Count > 0)
+            {
+                <MMenu OffsetY Left>
+                    <ActivatorContent>
+                        <MButton IconName="mdi-dots-horizontal"
+                                 Small
+                                 @attributes="@context.Attrs"/>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MList Dense Slim>
+                            @foreach (var action in RowActionsContext.MenuActions.OrderBy(u => u.Index))
+                            {
+                                var click = action.InternalId == RowDetailAction.DefaultId ? detailAction : () => action.OnClick.InvokeAsync(item);
+                                
+                                <MListItem Title="@action.Text"
+                                           OnClick="@click"/>
+                            }
+                        </MList>
+                    </ChildContent>
+                </MMenu>
+            }
+        }
+        else if (ShowDetail)
+        {
+            <MTooltip Top>
+                <ActivatorContent>
+                    <MButton IconName="@RowDetailAction.DefaultIcon"
+                             Small
+                             OnClick="@detailAction"
+                             @attributes="@context.Attrs">
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    @RowDetailAction.DefaultText
+                </ChildContent>
+            </MTooltip>
+        }
     };
 
     private RenderFragment GenRowSelectCell(Row item, bool selected) => __builder =>

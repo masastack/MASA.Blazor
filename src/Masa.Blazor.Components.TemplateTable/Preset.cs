@@ -13,7 +13,7 @@ internal static class Preset
         {
             Id = ActionsColumnId,
             Name = "Actions",
-            Type = ColumnType.Actions
+            Type = ColumnType.Actions,
         };
     }
 
@@ -23,7 +23,8 @@ internal static class Preset
         {
             ColumnId = ActionsColumnId,
             Column = CreateActionsColumn(),
-            Fixed = ColumnFixed.Right
+            Fixed = ColumnFixed.Right,
+            Width = 61
         };
     }
     

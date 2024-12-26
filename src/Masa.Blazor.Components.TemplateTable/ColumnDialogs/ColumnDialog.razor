@@ -13,14 +13,13 @@
                     Label="column-name"
                     Required>
         </MTextField>
-        
+
         <MSelect @bind-Value="@_column.Type"
                  Items="@_columnTypeMetadata"
                  ItemValue="u => u.Value"
                  ItemText="u => u.Name"
                  Filled
                  Label="column-type"
-                 HideDetails="true"
                  TItem="(string Name, ColumnType Value)"
                  TItemValue="ColumnType"
                  TValue="ColumnType"
@@ -31,35 +30,41 @@
         {
             <MSwitch @bind-Value="_column.Searchable"
                      Inset
-                     Label="Searchable">
+                     Label="Searchable"
+                     Class="mt-0 pt-0">
             </MSwitch>
         }
 
+        @if (HasColumnTypeConfig)
+        {
+            <div class="mt-6">
+                @switch (_column.Type)
+                {
+                    case ColumnType.Date:
+                        <DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
+                        break;
+                    case ColumnType.Select or ColumnType.MultiSelect:
+                        <SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
+                        break;
+                    case ColumnType.Progress:
+                        <ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
+                        break;
+                    case ColumnType.Number:
+                        <NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
+                        break;
+                }
+            </div>
+        }
+
         <MDivider Left>视图配置</MDivider>
-        
-        <MRadioGroup HideDetails="true" TValue="ColumnFixed">
+
+        <MRadioGroup @bind-Value="_columnFixed"
+                     HideDetails="true"
+                     TValue="ColumnFixed">
             <MRadio Value="ColumnFixed.None" Label="None"></MRadio>
             <MRadio Value="ColumnFixed.Left" Label="Left"></MRadio>
             <MRadio Value="ColumnFixed.Right" Label="Right"></MRadio>
         </MRadioGroup>
-
-        <div class="mt-6">
-            @switch (_column.Type)
-            {
-                case ColumnType.Date:
-                    <DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                    break;
-                case ColumnType.Select or ColumnType.MultiSelect:
-                    <SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                    break;
-                case ColumnType.Progress:
-                    <ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                    break;
-                case ColumnType.Number:
-                    <NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                    break;
-            }
-        </div>
 
         <div class="d-flex justify-end mt-4">
             <MButton Class="mr-2" OnClick="@(() => _menu = false)">Cancel</MButton>
@@ -69,14 +74,16 @@
 </PDrawer>
 
 @code {
-
-    [Parameter] public EventCallback<ColumnInfo> OnSave { get; set; }
+    [Parameter] public EventCallback<(ColumnInfo, ColumnFixed)> OnSave { get; set; }
 
     private bool _menu;
 
     private ColumnInfo _column = new();
+    private ColumnFixed _columnFixed;
 
     private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
+
+    private bool HasColumnTypeConfig => _column.Type is ColumnType.Date or ColumnType.Select or ColumnType.MultiSelect or ColumnType.Progress or ColumnType.Number;
 
     private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
     {
@@ -86,7 +93,7 @@
 
     private void HandleOnSubmit()
     {
-        OnSave.InvokeAsync(_column);
+        OnSave.InvokeAsync((_column, _columnFixed));
         _menu = false;
     }
 
@@ -115,7 +122,7 @@
         }
     }
 
-    internal void Open(Column column)
+    internal void Open(Column column, ColumnFixed @fixed)
     {
         _column = new ColumnInfo()
         {
@@ -123,8 +130,10 @@
             Name = column.Name,
             Type = column.Type,
             Config = column.Config,
-            Searchable = column.Searchable
+            Searchable = column.Searchable,
         };
+
+        _columnFixed = @fixed;
 
         _menu = true;
         StateHasChanged();

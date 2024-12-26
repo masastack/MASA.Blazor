@@ -1,5 +1,6 @@
 ﻿@using DeepCloner.Core
 @using Masa.Blazor.Components.TemplateTable
+@using Masa.Blazor.Components.TemplateTable.Actions
 @using Masa.Blazor.Components.TemplateTable.ColumnDialogs
 @using Masa.Blazor.Components.TemplateTable.FilterDialogs
 @using Masa.Blazor.Components.TemplateTable.Viewers
@@ -11,6 +12,7 @@
 @namespace Masa.Blazor
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
+@implements IDisposable
 
 @if (_sheet is not null)
 {
@@ -28,7 +30,7 @@
                  @bind-ShowDetail="@_sheet.ActiveView.Value.ShowDetail"
                  @bind-ShowBulkDelete="@_sheet.ActiveView.Value.ShowBulkDelete"
                  Views="_sheet.Views"
-                 Columns="_sheet.Columns"
+                 Columns="_allColumns"
                  HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                  ViewActionsContent="@(ViewActionsContent?.Invoke(SelectedItems.ToArray()))"
                  OnViewAdd="@AddNewView"
@@ -66,13 +68,14 @@
                 OnColumnEditClick="@OpenColumnEditDialog"
                 OnColumnResize="@ResizeColumn"
                 OnImagePreview="@OpenImageViewer"
-                HideDetail="@(!_sheet.ActiveView.Value.ShowDetail)"
+                ShowDetail="@(_sheet.ActiveView.Value.ShowDetail)"
                 OnDetail="@OpenDetailDialog"
                 CheckboxColor="@CheckboxColor"
                 SelectedKeys="@SelectedKeys"
                 OnSelect="@HandleOnSelect"
                 OnSelectAll="@HandleOnSelectAll"
-                ActionsContent="@RowActionsContent"
+                RowActionsContext="@_rowActionsContext"
+                HasCustomRowActions="@HasCustomRowActions"
                 @ref="_viewer">
         </Viewer>
 
@@ -111,8 +114,13 @@
         <ImageViewer @ref="_imageViewer"/>
 
         <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer"/>
+
     </div>
 }
+
+<CascadingValue Value="@_rowActionsContext" IsFixed>
+    @RowActionsContent
+</CascadingValue>
 
 @code {
 
@@ -126,6 +134,10 @@
     private SortDialog? _sortDialog;
     private DetailDialog? _detailDialog;
     private ImageViewer? _imageViewer;
+
+    private RowActionsContext _rowActionsContext = new();
+
+    private bool HasCustomRowActions => RowActionsContent is not null;
 
     private bool HasCustomConfiguration
     {
@@ -155,6 +167,30 @@
         }
     }
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _rowActionsContext.StateChanged += OnRowActionsInitialized;
+    }
+
+    private void OnRowActionsInitialized()
+    {
+        EnsureActiveViewActionsColumnWidthCorrectly();
+
+        StateHasChanged();
+    }
+
+    private void EnsureActiveViewActionsColumnWidthCorrectly()
+    {
+        var actionsColumn = _sheet?.ActiveView.Columns.FirstOrDefault(u => u.ColumnId == Preset.ActionsColumnId);
+        if (actionsColumn is null) return;
+        if (HasCustomRowActions)
+        {
+            actionsColumn.Width = _rowActionsContext.Width;
+        }
+    }
+
     private async Task AddNewView()
     {
         var clonedView = _sheet!.ActiveView.DeepClone();
@@ -173,6 +209,7 @@
 
         _sheet.Views.Add(clonedView);
         _sheet.SetActiveView(clonedView.Value.Id);
+        EnsureActiveViewActionsColumnWidthCorrectly();
 
         ResetSheet();
     }
@@ -344,7 +381,8 @@
 
     private void OpenColumnEditDialog(Column column)
     {
-        _columnEditDialog?.Open(column);
+        var viewColumn = _sheet.ActiveView.Columns.First(u => u.ColumnId == column.Id);
+        _columnEditDialog?.Open(column, viewColumn.Fixed);
     }
 
     private void OpenDetailDialog(IReadOnlyDictionary<string, JsonElement> item)
@@ -397,22 +435,19 @@
         StateHasChanged();
     }
 
-    private void UpdateColumn(ColumnInfo data)
+    private void UpdateColumn((ColumnInfo data, ColumnFixed columnFixed) arg)
     {
-        var column = _sheet!.Columns.FirstOrDefault(u => u.Id == data.Id);
-        if (column is null)
-        {
-            return;
-        }
+        var (data, columnFixed) = arg;
 
+        var column = _sheet!.Columns.First(u => u.Id == data.Id);
         column.Name = data.Name;
         column.Type = data.Type;
         column.Config = data.Config;
         column.ConfigObject = data.ConfigObject;
         column.Searchable = data.Searchable;
 
-        // var viewColumn = _viewColumns.FirstOrDefault(u => u.Column.Id == data.Id);
-        // viewColumn.Column = column;
+        var viewColumn = _sheet.ActiveViewColumns.First(u => u.ColumnId == data.Id);
+        viewColumn.Fixed = columnFixed;
     }
 
     private async Task SaveFilter(Filter filter)
@@ -463,6 +498,11 @@
             ItemKeyName = _sheet.ItemKeyName
         };
         await OnSave.InvokeAsync(sheet);
+    }
+
+    public void Dispose()
+    {
+        _rowActionsContext.StateChanged -= OnRowActionsInitialized;
     }
 
 }

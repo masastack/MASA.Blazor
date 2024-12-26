@@ -15,7 +15,7 @@ public class ViewColumn
 
     public string ColumnId { get; init; }
 
-    public double Width { get; set; }
+    public double Width { get; set; } = 180;
 
     public bool Hidden { get; set; }
 

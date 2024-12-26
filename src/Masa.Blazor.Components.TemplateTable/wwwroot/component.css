@@ -42,7 +42,6 @@
 }
 
 .masa-table-viewer table {
-  border-collapse: collapse;
   table-layout: fixed;
   min-width: 100%;
 }
@@ -78,12 +77,16 @@
 }
 
 .masa-table-viewer__header-column.actions {
-  --m-configurable-table-actions-min-width: calc((var(--m-configurable-table-actions-count) * 28px) + 32px);
-  width: max(var(--m-configurable-table-actions-min-width), var(--m-configurable-table-min-width));
-  min-width: max(var(--m-configurable-table-actions-min-width), var(--m-configurable-table-min-width));
+  min-width: 61px;
 }
 
-.masa-table-viewer thead > tr > th:not(.actions), .masa-table-viewer tbody > tr > td:not(.actions) {
+.m-data-table__wrapper.scrolling .m-data-table__column--fixed-right.first-fixed-column,
+.m-data-table__wrapper.scrolled-to-left .m-data-table__column--fixed-right.first-fixed-column {
+  border-left: none;
+}
+
+.masa-table-viewer thead > tr > th,
+.masa-table-viewer tbody > tr > td {
   border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -357,14 +360,4 @@ td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   margin-bottom: 16px;
-}
-
-.m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right:last-of-type,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left:last-of-type:after {
-  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
-}
-
-.m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left:last-of-type:after,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right:last-of-type:after {
-  box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 15%);
 }

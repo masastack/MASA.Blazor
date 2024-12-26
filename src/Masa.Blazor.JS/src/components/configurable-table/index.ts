@@ -16,7 +16,6 @@ class ResizableDataTable {
     this.dataTable = dataTable;
     this.dotnetHelper = dotNETHelper;
     this.wrapper = this.dataTable.querySelector(".m-data-table__wrapper");
-    console.log('this.wrapper', this.wrapper)
     this.table = this.dataTable.querySelector("table");
     this.header = this.table.querySelector("thead").getElementsByTagName("tr")[0];
     this.documentEventRegistered = false;
@@ -33,6 +32,7 @@ class ResizableDataTable {
 
     this.header.addEventListener("mousedown", this.wrapperMousedown.bind(this));
     this.wrapper.addEventListener('scroll', this.scroll.bind(this));
+    this.scroll(null);
   }
 
   private paddingDiff(col: HTMLElement): number {
@@ -60,13 +60,20 @@ class ResizableDataTable {
     const clientWidth = this.wrapper.clientWidth;
     const scrollLeft = this.wrapper.scrollLeft;
 
+    if (scrollWidth == clientWidth) {
+      this.wrapper.classList.remove('scrolling');
+      this.wrapper.classList.remove('scrolled-to-right');
+      this.wrapper.classList.remove('scrolled-to-left');
+      return
+    }
+
     const rtl = this.wrapper.parentElement.classList.contains('m-data-table--rtl');
 
     if (Math.abs(scrollWidth -((rtl ? -scrollLeft : scrollLeft) + clientWidth)) < 1) {
       this.wrapper.classList.remove('scrolling')
       this.wrapper.classList.remove('scrolled-to-left')
       this.wrapper.classList.add('scrolled-to-right');
-    } else if (Math.abs(scrollLeft - (rtl ? scrollWidth - clientWidth : 0)) < 1) {
+    } else if (scrollLeft == 0) {
       this.wrapper.classList.remove('scrolling')
       this.wrapper.classList.remove('scrolled-to-right')
       this.wrapper.classList.add('scrolled-to-left');
