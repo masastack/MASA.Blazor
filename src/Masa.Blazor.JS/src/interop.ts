@@ -1589,7 +1589,14 @@ export function registerTableScrollEvent(wrapper: HTMLElement) {
   const listener = () => {
     const scrollWidth = wrapper.scrollWidth;
     const clientWidth = wrapper.clientWidth;
-    const scrollLeft = wrapper.scrollLeft;
+    const scrollLeft =  wrapper.scrollLeft;
+
+    if (scrollWidth == clientWidth) {
+      wrapper.classList.remove('scrolling');
+      wrapper.classList.remove('scrolled-to-right');
+      wrapper.classList.remove('scrolled-to-left');
+      return;
+    }
 
     const rtl = wrapper.parentElement.classList.contains('m-data-table--rtl');
 
@@ -1597,7 +1604,7 @@ export function registerTableScrollEvent(wrapper: HTMLElement) {
       wrapper.classList.remove('scrolling')
       wrapper.classList.remove('scrolled-to-left')
       wrapper.classList.add('scrolled-to-right');
-    } else if (Math.abs(scrollLeft - (rtl ? scrollWidth - clientWidth : 0)) < 1) {
+    } else if (scrollLeft == 0) {
       wrapper.classList.remove('scrolling')
       wrapper.classList.remove('scrolled-to-right')
       wrapper.classList.add('scrolled-to-left');

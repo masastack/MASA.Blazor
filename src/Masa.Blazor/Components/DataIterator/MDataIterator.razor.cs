@@ -2,7 +2,6 @@
 
 namespace Masa.Blazor;
 
-// public class MDataIterator<TItem> : BDataIterator<TItem>, IDataIterator<TItem>, ILoadable
 public partial class MDataIterator<TItem> : MData<TItem>
 {
     [Inject]
