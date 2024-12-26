@@ -55,13 +55,17 @@
     pointer-events: none;
 }
 
-.m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right.first-fixed-column:after,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left.first-fixed-column:after {
+.m-data-table > .m-data-table__wrapper.scrolled-to-left .m-data-table__column--fixed-right.first-fixed-column:after,
+.m-data-table > .m-data-table__wrapper.scrolling .m-data-table__column--fixed-right.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.scrolling .m-data-table__column--fixed-left.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.scrolled-to-right .m-data-table__column--fixed-left.first-fixed-column:after {
     box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
 }
 
-.m-data-table > .m-data-table__wrapper:not(.scrolled-to-left) .m-data-table__column--fixed-left.first-fixed-column:after,
-.m-application--is-rtl .m-data-table > .m-data-table__wrapper:not(.scrolled-to-right) .m-data-table__column--fixed-right.first-fixed-column:after {
+.m-data-table > .m-data-table__wrapper.scrolled-to-right .m-data-table__column--fixed-left.first-fixed-column:after,
+.m-data-table > .m-data-table__wrapper.scrolling .m-data-table__column--fixed-left.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.scrolling .m-data-table__column--fixed-right.first-fixed-column:after,
+.m-application--is-rtl .m-data-table > .m-data-table__wrapper.scrolled-to-left .m-data-table__column--fixed-right.first-fixed-column:after {
     box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 15%);
 }
 
