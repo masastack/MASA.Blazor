@@ -212,3 +212,22 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
     return `${Number(str)}${unit}`
   }
 }
+
+export function getActivator(selector: string): HTMLElement | null {
+  if (selector.startsWith("$parent.")) {
+    const parentSelector = selector.replace("$parent.", "");
+    const parentElement = document.querySelector(parentSelector)?.parentElement;
+    if (!parentElement) {
+      return null;
+    }
+
+    // special case for MButton component
+    if (parentElement.classList.contains('m-btn__content')) {
+      return parentElement.parentElement as HTMLElement;
+    }
+
+    return parentElement;
+  } else {
+    return document.querySelector(selector);
+  }
+}
