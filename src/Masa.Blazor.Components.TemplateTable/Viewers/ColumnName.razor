@@ -27,7 +27,7 @@
         }
     }
 
-    @if (!IsRowSelect)
+    @if (!IsRowSelect && Editable)
     {
         <Dropdown>
             @if (!Internal)
@@ -49,6 +49,8 @@
 @code {
 
     [Parameter] public Column Data { get; set; } = null!;
+
+    [Parameter] public bool Editable { get; set; }
 
     [Parameter] public Sort? Sort { get; set; }
 

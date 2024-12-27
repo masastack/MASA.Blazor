@@ -91,11 +91,14 @@
     <MRow Class="masa-table__toolbar-actions"
           NoGutters>
         <MCol Cols="12" Md="6">
-            <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
-                <MBadge Value="@HasCustom" Dot Color="red">
-                    表格配置
-                </MBadge>
-            </MButton>
+            @if (Editable)
+            {
+                <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
+                    <MBadge Value="@HasCustom" Dot Color="red">
+                        表格配置
+                    </MBadge>
+                </MButton>
+            }
             <MButton LeftIconName="mdi-filter-variant" Text OnClick="@OnFilterClick">
                 <MBadge Value="@HasFilter" Dot Color="red">
                     筛选

@@ -107,6 +107,8 @@ public partial class MTemplateTable
     private IList<View>? _prevUserViews;
 
     private Sheet? _prevSheet;
+    
+    private bool Editable => Role == _sheet?.ActiveView.AccessRole;
 
     protected override async Task OnParametersSetAsync()
     {

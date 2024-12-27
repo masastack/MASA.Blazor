@@ -33,6 +33,8 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public bool Loading { get; set; }
 
+    [Parameter] public bool Editable { get; set; }
+
     [Parameter] public RowHeight RowHeight { get; set; }
 
     [Parameter] public ICollection<Row> Rows { get; set; } = [];
@@ -119,7 +121,6 @@ public partial class Viewer : IAsyncDisposable
         RowHeight.High => 105,
         _ => throw new ArgumentOutOfRangeException()
     };
-
 
     protected override void OnInitialized()
     {
