@@ -1,3 +1,5 @@
+import { getActivator } from "utils/helper";
+
 import { parseMouseEvent } from "../events/EventType";
 import Delayable from "./delayable";
 
@@ -32,10 +34,7 @@ class Activatable extends Delayable {
   ) {
     super(openDelay, closeDelay, dotNetHelper);
 
-    const activator = document.querySelector(activatorSelector);
-    if (activator) {
-      this.activator = activator as HTMLElement;
-    }
+    this.activator = getActivator(activatorSelector);
 
     this.disabled = disabled;
     this.openOnClick = openOnClick;

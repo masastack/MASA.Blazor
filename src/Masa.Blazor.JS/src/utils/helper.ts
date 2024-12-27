@@ -1,3 +1,5 @@
+const activator_parent_prefix = "$parent.";
+
 export const IN_BROWSER = typeof window !== 'undefined'
 
 export function addOnceEventListener (
@@ -210,5 +212,24 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
     return undefined
   } else {
     return `${Number(str)}${unit}`
+  }
+}
+
+export function getActivator(selector: string): HTMLElement | null {
+  if (selector.startsWith(activator_parent_prefix)) {
+    const parentSelector = selector.replace(activator_parent_prefix, "");
+    const parentElement = document.querySelector(parentSelector)?.parentElement;
+    if (!parentElement) {
+      return null;
+    }
+
+    // special case for MButton component
+    if (parentElement.classList.contains('m-btn__content')) {
+      return parentElement.parentElement as HTMLElement;
+    }
+
+    return parentElement;
+  } else {
+    return document.querySelector(selector);
   }
 }

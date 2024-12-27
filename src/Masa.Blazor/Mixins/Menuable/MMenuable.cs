@@ -177,7 +177,7 @@ public abstract class MMenuable : MBootable
 
     protected double AbsoluteYOffset => PageYOffset - RelativeYOffset;
 
-    protected bool HasActivator => ActivatorContent != null || ExternalActivator;
+    protected bool HasActivator => ActivatorContent != null || Activator is not null || ExternalActivator;
 
     protected virtual string? DefaultAttachSelector => default;
 

@@ -1,5 +1,6 @@
 {
   "props": {
+    "activator": "指定CSS选择器作为激活器的元素；使用`parent`将激活器设置为父元素",
     "allowOverflow": "移除内容的溢出重新定位",
     "attach": "指定此组件应该与哪个 DOM 元素分离。to.String 可以是任何有效的 querySelector，对象可以是任何有效的 Node。这将默认挂载到根节点 (MApp)[/components/apps]。",
     "contentClass": "将自定义类应用于分离的元素。这很有用，因为内容被移动到 (MApp)[/components/apps] 组件的开头（除非提供了 `Attach` 属性），并且不被直接作为目标传递到组件上的类。",
