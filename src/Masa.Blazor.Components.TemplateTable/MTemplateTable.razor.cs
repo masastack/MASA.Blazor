@@ -9,7 +9,7 @@ public partial class MTemplateTable
 {
     [Inject] private ILogger<MTemplateTable> Logger { get; set; } = null!;
 
-    [Parameter] public SheetProvider? SheetProvider { get; set; }
+    [Parameter] [EditorRequired] public Sheet? Sheet { get; set; }
 
     [Parameter] public IList<View>? UserViews { get; set; }
 
@@ -106,28 +106,23 @@ public partial class MTemplateTable
 
     private IList<View>? _prevUserViews;
 
+    private Sheet? _prevSheet;
+
     protected override async Task OnParametersSetAsync()
     {
         // base.OnParametersSetAsync();
 
-        if (_init == false)
+        if (_prevSheet != Sheet)
         {
-            _init = true;
-            await RefreshSheetAsync(GetSheetProviderRequest());
+            _prevSheet = Sheet;
+
+            FormatSheet();
             if (_sheet is not null)
             {
                 _sheet.ActiveView.PageIndex = 1;
                 _sheet.ActiveView.PageSize = 5;
                 await RefreshItemsAsync(GetItemsProviderRequest());
-            }
-        }
-
-        if (_sheet is not null)
-        {
-            if (!Equals(_prevUserViews, UserViews))
-            {
-                _sheet.Views.RemoveAll(v => v.AccessRole == Role.User);
-
+                
                 if (UserViews is not null)
                 {
                     var columns = _sheet.Columns;
@@ -137,30 +132,12 @@ public partial class MTemplateTable
         }
     }
 
-    private async Task RefreshSheetAsync(SheetProviderRequest request)
+    private void FormatSheet()
     {
-        if (SheetProvider is not null)
-        {
-            try
-            {
-                var result = await SheetProvider(request);
-                if (result.Errors?.Length > 0)
-                {
-                    await PopupService.EnqueueSnackbarAsync("Error: " + result.Errors[0].Message, AlertTypes.Error);
-                    return;
-                }
+        _sheet = SheetInfo.From(Sheet);
+        _allColumns = [Preset.CreateSelectColumn(), .._sheet.Columns, Preset.CreateActionsColumn()];
 
-                _sheet = SheetInfo.From(result.Data.Sheet);
-                _allColumns = [Preset.CreateSelectColumn(), .._sheet.Columns, Preset.CreateActionsColumn()];
-
-                UpdateStateOfActiveView();
-            }
-            catch (Exception e)
-            {
-                await PopupService.EnqueueSnackbarAsync(e);
-                Logger.LogDebug(e, "Error while refreshing sheet");
-            }
-        }
+        UpdateStateOfActiveView();
     }
 
     private async Task RefreshItemsAsync(ItemsProviderRequest request)
@@ -240,11 +217,6 @@ public partial class MTemplateTable
         _rowHeight = _sheet!.ActiveViewRowHeight;
         _hasNextPage = _sheet.ActiveView.HasNextPage;
         _hasPreviousPage = _sheet.ActiveView.HasPreviousPage;
-    }
-
-    private SheetProviderRequest GetSheetProviderRequest()
-    {
-        return new SheetProviderRequest(SheetQuery);
     }
 
     private ItemsProviderRequest GetItemsProviderRequest()

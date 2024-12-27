@@ -491,7 +491,7 @@
         var sheet = new Sheet()
         {
             Columns = _sheet!.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
-            Views = _sheet.Views.Select(View (u) => u.ToView()).ToList(),
+            Views = _sheet.Views.Where(u => u.AccessRole == Role.Manager).Select(View (u) => u.ToView()).ToList(),
             Pagination = _sheet.Pagination,
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,

@@ -23,6 +23,7 @@ public class ViewColumnInfo : ViewColumn
             ColumnId = viewColumn.ColumnId,
             Width = viewColumn.Width,
             Hidden = viewColumn.Hidden,
+            Fixed = viewColumn.Fixed,
             Column = column
         };
     }
@@ -33,7 +34,7 @@ public class ViewColumnInfo : ViewColumn
         {
             ColumnId = columnId,
             Hidden = hidden,
-            Column = column
+            Column = column,
         };
     }
 }
