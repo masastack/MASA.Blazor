@@ -48,7 +48,7 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
         { "aria-expanded", IsActive }
     };
 
-    protected string ActivatorId => _activatorId ??= $"_activator_{Guid.NewGuid()}";
+    internal string ActivatorId => _activatorId ??= $"_activator_{Guid.NewGuid()}";
 
     public string ActivatorSelector => Activator == "parent" ? $"$parent.{Ref.GetSelector()}" : (Activator ?? $"[{ActivatorId}]");
 

@@ -1,3 +1,5 @@
+const activator_parent_prefix = "$parent.";
+
 export const IN_BROWSER = typeof window !== 'undefined'
 
 export function addOnceEventListener (
@@ -214,8 +216,8 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 }
 
 export function getActivator(selector: string): HTMLElement | null {
-  if (selector.startsWith("$parent.")) {
-    const parentSelector = selector.replace("$parent.", "");
+  if (selector.startsWith(activator_parent_prefix)) {
+    const parentSelector = selector.replace(activator_parent_prefix, "");
     const parentElement = document.querySelector(parentSelector)?.parentElement;
     if (!parentElement) {
       return null;
