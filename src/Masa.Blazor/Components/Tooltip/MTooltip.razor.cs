@@ -134,13 +134,13 @@ namespace Masa.Blazor
                 return CalcYOverflow(top);
             }
         }
-    }
 
-    internal enum Position
-    {
-        Top,
-        Right,
-        Bottom,
-        Left
+        private enum Position
+        {
+            Top,
+            Right,
+            Bottom,
+            Left
+        }
     }
 }
