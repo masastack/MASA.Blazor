@@ -3,7 +3,10 @@
 
 <MRadioGroup @bind-Value="@Config.Type"
              @bind-Value:after="UpdateValue"
+             Label="Format"
+             Class="mt-0 pt-0"
              TValue="NumberType">
+    <MRadio Value="@NumberType.Default" Label="Default"></MRadio>
     <MRadio Value="@NumberType.Number" Label="Number"></MRadio>
     <MRadio Value="@NumberType.Currency" Label="Currency"></MRadio>
     <MRadio Value="@NumberType.Percentage" Label="Percentage"></MRadio>

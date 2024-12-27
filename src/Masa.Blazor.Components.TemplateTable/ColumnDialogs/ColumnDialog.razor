@@ -35,25 +35,12 @@
             </MSwitch>
         }
 
-        @if (HasColumnTypeConfig)
-        {
-            <div class="mt-6">
-                @switch (_column.Type)
-                {
-                    case ColumnType.Date:
-                        <DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                        break;
-                    case ColumnType.Select or ColumnType.MultiSelect:
-                        <SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                        break;
-                    case ColumnType.Progress:
-                        <ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                        break;
-                    case ColumnType.Number:
-                        <NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>
-                        break;
-                }
-            </div>
+        @{
+            var configInput = GenConfigInput();
+            if (configInput is not null)
+            {
+                <div>@configInput</div>
+            }
         }
 
         <MDivider Left>视图配置</MDivider>
@@ -74,6 +61,33 @@
 </PDrawer>
 
 @code {
+
+    private RenderFragment? GenConfigInput()
+    {
+        RenderFragment? input = null;
+
+        switch (_column.Type)
+        {
+            case ColumnType.Date:
+                input = @<DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Select or ColumnType.MultiSelect:
+                input = @<SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Progress:
+                input = @<ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Number:
+                input = @<NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Link:
+                input = @<LInkConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+        }
+
+        return input;
+    }
+
     [Parameter] public EventCallback<(ColumnInfo, ColumnFixed)> OnSave { get; set; }
 
     private bool _menu;

@@ -33,14 +33,13 @@ public class ColumnInfo : Column
             ColumnType.MultiSelect or ColumnType.Select => JsonSerializer.Deserialize<SelectConfig>(config),
             ColumnType.Number => JsonSerializer.Deserialize<NumberConfig>(config),
             ColumnType.Progress => JsonSerializer.Deserialize<ProgressConfig>(config),
+            ColumnType.Link => JsonSerializer.Deserialize<LinkConfig>(config),
             ColumnType.Email => null,
             ColumnType.Image => null,
-            ColumnType.Link => null,
             ColumnType.Phone => null,
             ColumnType.Checkbox => null,
             ColumnType.Rating => null,
             ColumnType.Text => null,
-            ColumnType.Actions => JsonSerializer.Deserialize<ActionsConfig>(config),
             _ => throw new NotSupportedException($"Column type '{type}' is not supported.")
         };
     }

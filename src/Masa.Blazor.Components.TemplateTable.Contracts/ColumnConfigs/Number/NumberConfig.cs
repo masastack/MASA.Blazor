@@ -7,6 +7,7 @@ public class NumberConfig
 
 public enum NumberType
 {
+    Default,
     Number,
     Currency,
     Percentage

@@ -127,7 +127,7 @@
                 @GenEmailCell(value)
                 break;
             case ColumnType.Link:
-                @GenLinkCell(value)
+                @GenLinkCell(column.ConfigObject, value)
                 break;
             case ColumnType.Phone:
                 @GenPhoneCell(value)
@@ -184,9 +184,15 @@
         }
     };
 
-    private static RenderFragment GenLinkCell(JsonElement value) => __builder =>
+    private static RenderFragment GenLinkCell(object? configObject, JsonElement? value) => __builder =>
     {
-        <a href="@value" target="_blank">@value</a>
+        var href = value.ToString();
+        if (configObject is LinkConfig linkConfig && !string.IsNullOrWhiteSpace(linkConfig.Url))
+        {
+            href = linkConfig.Url.Replace("{query}", value.ToString());
+        }
+        
+        <a href="@href" target="_blank">@value</a>
     };
 
     private static RenderFragment GenPhoneCell(JsonElement value) => __builder =>
@@ -322,7 +328,7 @@
                     NumberType.Currency => "C",
                     NumberType.Number => "N",
                     NumberType.Percentage => "P",
-                    _ => "D"
+                    _ => ""
                 };
 
                 @number.ToString(format, new CultureInfo("zh-CN"))

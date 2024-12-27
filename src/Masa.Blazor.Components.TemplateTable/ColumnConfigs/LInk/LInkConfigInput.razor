@@ -1,0 +1,35 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@inherits ConfigInputBase<LinkConfig>
+
+<MTextField @bind-Value="@Config.Url"
+            @bind-Value:after="UpdateValue"
+            Filled
+            Clearable
+            Label="Url template"
+            Placeholder="e.g. http://www.bing.com/search?q={query}"
+            Rules="@_rules"
+            PersistentPlaceholder>
+</MTextField>
+
+@code {
+
+    private List<Func<string?, StringBoolean>> _rules = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _rules.Add(value =>
+        {
+            if (string.IsNullOrWhiteSpace(value)) return true;
+
+            if (!value!.Contains("{query}"))
+            {
+                return "the url template must contain {query}";
+            }
+
+            return true;
+        });
+    }
+
+}
