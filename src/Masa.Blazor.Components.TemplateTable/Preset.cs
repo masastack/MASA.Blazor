@@ -2,9 +2,28 @@
 
 internal static class Preset
 {
+    private static Dictionary<ColumnType, string> ColumnTypeIcons { get; } = new()
+    {
+        [ColumnType.Checkbox] = "mdi-checkbox-marked-outline",
+        [ColumnType.Switch] = "mdi-toggle-switch-outline",
+        [ColumnType.Date] = "mdi-calendar-blank-outline",
+        [ColumnType.Email] = "mdi-email-outline",
+        [ColumnType.Image] = "mdi-image-outline",
+        [ColumnType.Link] = "mdi-link-variant",
+        [ColumnType.MultiSelect] = "mdi-format-list-checkbox",
+        [ColumnType.Number] = "mdi-numeric",
+        [ColumnType.Phone] = "mdi-phone-outline",
+        [ColumnType.Progress] = "mdi-calendar-clock",
+        [ColumnType.Rating] = "mdi-star-outline",
+        [ColumnType.Select] = "mdi-checkbox-marked-circle-outline",
+        [ColumnType.Text] = "mdi-text-long",
+        [ColumnType.Actions] = "mdi-dots-horizontal",
+        [ColumnType.RowSelect] = "mdi-selection",
+        [ColumnType.Custom] = "mdi-cog-outline"
+    };
+
     internal static string ActionsColumnId => "__internal_actions";
     internal static string RowSelectColumnId => "__internal_select";
-
     internal static string[] InternalColumnIds { get; } = [ActionsColumnId, RowSelectColumnId];
 
     internal static ColumnInfo CreateActionsColumn()
@@ -27,7 +46,7 @@ internal static class Preset
             Width = 61
         };
     }
-    
+
     internal static ColumnInfo CreateSelectColumn()
     {
         return new ColumnInfo()
@@ -37,7 +56,7 @@ internal static class Preset
             Type = ColumnType.RowSelect
         };
     }
-    
+
     internal static ViewColumnInfo CreateSelectViewColumn()
     {
         return new ViewColumnInfo()
@@ -49,23 +68,9 @@ internal static class Preset
         };
     }
 
-    internal static IReadOnlyDictionary<ColumnType, string> ColumnTypeIcons { get; } =
-        new Dictionary<ColumnType, string>
-        {
-            [ColumnType.Checkbox] = "mdi-checkbox-marked-outline",
-            [ColumnType.Date] = "mdi-calendar-blank-outline",
-            [ColumnType.Email] = "mdi-email-outline",
-            [ColumnType.Image] = "mdi-image-outline",
-            [ColumnType.Link] = "mdi-link-variant",
-            [ColumnType.MultiSelect] = "mdi-format-list-checkbox",
-            [ColumnType.Number] = "mdi-numeric",
-            [ColumnType.Phone] = "mdi-phone-outline",
-            [ColumnType.Progress] = "mdi-calendar-clock",
-            [ColumnType.Rating] = "mdi-star-outline",
-            [ColumnType.Select] = "mdi-checkbox-marked-circle-outline",
-            [ColumnType.Text] = "mdi-text-long",
-            [ColumnType.Actions] = "mdi-dots-horizontal",
-            [ColumnType.RowSelect]= "mdi-selection",
-            [ColumnType.Custom] = "mdi-cog-outline"
-        };
+    internal static string? GetColumnTypeIcon(ColumnType columnType)
+    {
+        ColumnTypeIcons.TryGetValue(columnType, out var icon);
+        return icon;
+    }
 }

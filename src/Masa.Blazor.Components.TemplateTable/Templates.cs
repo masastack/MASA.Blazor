@@ -9,7 +9,7 @@ public static class Templates
         builder.AddAttribute(2, nameof(MIcon.Class), "mr-1");
         builder.AddAttribute(3, nameof(MIcon.Style), "color: inherit;");
         builder.AddAttribute(4, "ChildContent",
-            (RenderFragment)(c => c.AddContent(0, Preset.ColumnTypeIcons[columnType])));
+            (RenderFragment)(c => c.AddContent(0, Preset.GetColumnTypeIcon(columnType))));
         builder.CloseComponent();
     };
 }

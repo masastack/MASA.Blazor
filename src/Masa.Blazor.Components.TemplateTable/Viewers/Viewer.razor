@@ -121,6 +121,9 @@
             case ColumnType.Checkbox:
                 @GenCheckboxCell(value)
                 break;
+            case ColumnType.Switch:
+                @GenSwitchCell(value)
+                break;
             case ColumnType.Text:
                 @GenTextCell(value)
                 break;
@@ -170,8 +173,13 @@
     {
         var isChecked = value.GetBoolean();
         <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
-               Color="@(isChecked ? "primary" : "")">
-        </MIcon>
+               Color="@(isChecked ? "primary" : "")" />
+    };
+    
+    private static RenderFragment GenSwitchCell(JsonElement value) => __builder =>
+    {
+        var isChecked = value.GetBoolean();
+        <MSwitch Value="@isChecked" Inset Disabled />
     };
 
     private static RenderFragment GenTextCell(JsonElement value) => __builder => { @value.GetString() };

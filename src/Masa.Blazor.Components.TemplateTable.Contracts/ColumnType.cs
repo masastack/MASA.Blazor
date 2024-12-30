@@ -16,8 +16,9 @@ public enum ColumnType
     Number = 30,
     Progress = 31,
     Rating = 32,
-    Checkbox = 33,
-    Actions = 40,
-    RowSelect = 41,
+    Checkbox = 40,
+    Switch = 41,
+    Actions = 90,
+    RowSelect = 91,
     Custom = 100
 }
