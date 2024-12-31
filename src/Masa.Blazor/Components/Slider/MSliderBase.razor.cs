@@ -423,6 +423,18 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     private readonly ModifierBuilder _tickModifierBuilder = Block.Element("tick").CreateModifierBuilder();
     private readonly ModifierBuilder _ticksContainerModifierBuilder = Block.Element("ticks-container").CreateModifierBuilder();
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+    }
+
+    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
@@ -431,21 +443,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
                 _inputModifierBuilder.Add(Vertical, InverseLabel).Build()
             }
         );
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender)
-        {
-            MasaBlazor.OnRTLChange += OnRTLChange;
-        }
-    }
-
-    private void OnRTLChange(bool rtl)
-    {
-        InvokeStateHasChanged();
     }
 
     public virtual async Task HandleOnFocusAsync(int index, FocusEventArgs args)
@@ -546,6 +543,8 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     protected override async ValueTask DisposeAsyncCore()
     {
+        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+
         await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
 
         _interopHandleReference?.Dispose();
