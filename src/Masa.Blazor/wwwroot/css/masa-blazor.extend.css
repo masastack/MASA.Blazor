@@ -102,6 +102,10 @@
     min-width: 100%;
 }
 
+.m-data-table--resizable:not(.m-data-table--fixed-header) > .m-data-table__wrapper > table > thead > tr > th {
+    position: relative;
+}
+
 .m-data-table--resizable > .m-data-table__wrapper > table > thead > tr > th > .m-data-table-header__col-resize {
     position: absolute;
     top: 0;
