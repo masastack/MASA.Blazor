@@ -5,7 +5,7 @@ namespace Masa.Blazor.Mixins.Activatable;
 public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 {
     [Inject]
-    private ActivatableJsModule? Module { get; set; }
+    private ActivatableJsModule? ActivatableJSModule { get; set; }
 
     [Parameter]
     public bool Disabled
@@ -48,9 +48,9 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
         { "aria-expanded", IsActive }
     };
 
-    protected string ActivatorId => _activatorId ??= $"_activator_{Guid.NewGuid()}";
+    internal string ActivatorId => _activatorId ??= $"_activator_{Guid.NewGuid()}";
 
-    public string ActivatorSelector => Activator ?? $"[{ActivatorId}]";
+    public string ActivatorSelector => Activator == "parent" ? $"$parent.{Ref.GetSelector()}" : (Activator ?? $"[{ActivatorId}]");
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -58,7 +58,7 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 
         if (firstRender)
         {
-            await Module!.InitializeAsync(this);
+            await ActivatableJSModule!.InitializeAsync(this);
         }
     }
 
@@ -100,7 +100,7 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 
     private void ResetActivatorEvents()
     {
-        _ = Module?.ResetEvents();
+        _ = ActivatableJSModule?.ResetEvents();
     }
 
     public virtual Task HandleOnClickAsync(MouseEventArgs args)
@@ -117,7 +117,7 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 
     protected void UpdateActiveInJS(bool val)
     {
-        _ = Module?.SetActive(val);
+        _ = ActivatableJSModule?.SetActive(val);
     }
 
     protected virtual void RunDirectly(bool val)
@@ -127,16 +127,16 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
 
     protected void RegisterPopupEvents(string selector, bool closeOnContentClick)
     {
-        _ = Module?.RegisterPopup(selector, closeOnContentClick);
+        _ = ActivatableJSModule?.RegisterPopup(selector, closeOnContentClick);
     }
 
     protected void ResetPopupEvents(bool closeOnContentClick)
     {
-        _ = Module?.ResetPopupEvents(closeOnContentClick);
+        _ = ActivatableJSModule?.ResetPopupEvents(closeOnContentClick);
     }
 
     protected void ResetDelay()
     {
-        _ = Module?.ResetDelay(OpenDelay, CloseDelay);
+        _ = ActivatableJSModule?.ResetDelay(OpenDelay, CloseDelay);
     }
 }

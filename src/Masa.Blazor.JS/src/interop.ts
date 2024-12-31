@@ -4,7 +4,9 @@ import throttle from "just-throttle";
 import { parseDragEvent, parseMouseEvent, parseTouchEvent, touchEvents } from "./events/EventType";
 import { registerExtraEvents } from "./events/index";
 import registerRippleObserver from "./ripple";
-import { canUseDom, getBlazorId, getDom, getElementSelector, IN_BROWSER } from "./utils/helper";
+import {
+    canUseDom, getActivator, getBlazorId, getDom, getElementSelector, IN_BROWSER
+} from "./utils/helper";
 
 window.onload = function () {
   registerExtraEvents();
@@ -1050,7 +1052,7 @@ export function getMenuableDimensions(hasActivator, activatorSelector, isDefault
   };
 
   if (hasActivator) {
-    var activator = document.querySelector(activatorSelector);
+    var activator = getActivator(activatorSelector)
     dimensions.activator = measure(activator, isDefaultAttach)
     dimensions.activator.offsetLeft = activator.offsetLeft
     if (!isDefaultAttach) {

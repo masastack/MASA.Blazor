@@ -19,6 +19,12 @@ related:
 
 ### 属性 {#props}
 
+#### 触发器 {#activator released-on=v1.9.0}
+
+除了使用 `ActivatorContent` 指定触发器元素外，还可以使用 `Activator` 属性指定CSS选择器作为触发器。`parent` 是预定义的指向父元素的选择器。
+
+<masa-example file="Examples.components.tooltips.Activator"></masa-example>
+
 #### 对齐 {#alignment}
 
 提示可以对齐到激活器元素的四个侧面。
