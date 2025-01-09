@@ -15,9 +15,10 @@ export function useTouch(
   state: State
 ) {
   const el = getElement(elOrString);
-  
+
   if (!el) {
-    oops()
+    console.warn("The root element of MNavigationDrawer component is not found, touching to open/close will not work.");
+    return {};
   }
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
