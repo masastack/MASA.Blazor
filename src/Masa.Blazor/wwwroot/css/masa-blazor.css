@@ -18966,10 +18966,6 @@ html.overflow-y-hidden {
 .m-autocomplete.m-select.m-input--is-focused input {
     min-width: 64px;
 }
-.m-autocomplete:not(.m-input--is-focused).m-select--chips input {
-    max-height: 0;
-    padding: 0;
-}
 .m-autocomplete--is-selecting-index input {
     opacity: 0;
 }
