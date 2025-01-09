@@ -121,7 +121,7 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
 
     private async Task UpdateApplicationAsync()
     {
-        if (!App)
+        if (!App || IsDisposed)
         {
             return;
         }

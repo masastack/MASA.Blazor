@@ -396,7 +396,7 @@ public class MAppBar : MToolbar, IScrollable
 
     private void UpdateApplication()
     {
-        if (!App) return;
+        if (!App || IsDisposed) return;
 
         var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
