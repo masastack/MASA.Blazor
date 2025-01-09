@@ -160,7 +160,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private string? _overlayScrimStyle;
 
     private CancellationTokenSource? _cancellationTokenSource;
-    private bool _disposed;
 
     protected object? Overlay { get; set; }
 
@@ -601,7 +600,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected async Task UpdateApplicationAsync()
     {
-        if (!App)
+        if (!App || IsDisposed)
         {
             return;
         }
@@ -639,7 +638,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             await MiniVariantChanged.InvokeAsync(false);
         }
     }
-
+    
     protected override async ValueTask DisposeAsyncCore()
     {
         RemoveApplication();

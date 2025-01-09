@@ -173,7 +173,7 @@ public class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, IAncestor
     {
         // TODO: implement applicationable
 
-        if (!App)
+        if (!App || IsDisposed)
         {
             return;
         }
