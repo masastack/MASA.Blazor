@@ -199,7 +199,7 @@ public partial class MFooter : MasaComponentBase, IThemeable
 
     private async Task UpdateApplicationAsync()
     {
-        if (!App)
+        if (!App || IsDisposed)
         {
             return;
         }
