@@ -917,9 +917,10 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         {
             await SetValue(default);
         }
+        
+        await TryInvokeFieldChangeOfInputsFilter();
 
-        // if all items have been delete,
-        // open menu
+        // if all items have been deleted, open the menu
         IsMenuActive = SelectedItems.Count == 0;
 
         SelectedIndex = -1;
