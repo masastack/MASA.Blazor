@@ -1,3 +1,23 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+
+<MMenu @bind-Value="v" Bottom>
+    <ActivatorContent>
+        <MButton @attributes="@context.Attrs">BUtton</MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MList>
+            <MListItem Href="/">Home</MListItem>
+            <MListItem Href="/test">Test</MListItem>
+            <MListItem Href="/counter">Counter</MListItem>
+        </MList>
+    </ChildContent>
+</MMenu>
+<div style="height: 150vh"></div>
+
+@code {
+
+    private bool v = true;
+
+}

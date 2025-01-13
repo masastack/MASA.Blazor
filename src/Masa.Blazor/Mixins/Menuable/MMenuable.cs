@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Masa.Blazor.Components.Bootable;
+﻿using Masa.Blazor.Components.Bootable;
 
 namespace Masa.Blazor.Mixins.Menuable;
 
@@ -13,7 +12,9 @@ public abstract class MMenuable : MBootable
 
     [Parameter] public string? ContentClass { get; set; }
 
-    [Parameter] public StringNumber? MaxWidth { get; set; }
+    [Parameter]
+    [MasaApiParameter("auto")]
+    public StringNumber? MaxWidth { get; set; } = "auto";
 
     [Parameter] public StringNumber? MinWidth { get; set; }
 
@@ -62,7 +63,7 @@ public abstract class MMenuable : MBootable
 
     internal double DocumentClientWidth => _windowAndDocument.ClientWidth;
 
-    protected virtual bool IsRtl => false;
+    public virtual bool IsRtl => false;
 
     protected double ComputedLeft
     {

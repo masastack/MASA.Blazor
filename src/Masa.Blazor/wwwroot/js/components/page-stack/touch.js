@@ -1,2 +1,167 @@
-import{u as t}from"../../chunks/touch.js";import{a as e}from"../../chunks/helper.js";import"../../chunks/tslib.es6.js";function n(n,o,c){const s=e(n);if(!s)return;window.addEventListener("touchstart",w,{passive:!0}),window.addEventListener("touchmove",y,{passive:!1}),window.addEventListener("touchend",M,{passive:!0});const r=["left","right"].includes(c.position),{addMovement:u,endTouch:d,getVelocity:a}=t();let m,l=!1,h=!1,p=0,f=0;function v(t,e){return("left"===c.position?t:"right"===c.position?document.documentElement.clientWidth-t:i())-(e?document.documentElement.clientWidth:0)}function E(t,e=!0){const n="left"===c.position?(t-f)/document.documentElement.clientWidth:"right"===c.position?(document.documentElement.clientWidth-t-f)/document.documentElement.clientWidth:i();return e?Math.max(0,Math.min(1,n)):n}function g(t){const e=t.target.closest(".m-page-stack-item");return e&&e.parentElement===s}function w(t){if(!g(t))return;const e=t.changedTouches[0].clientX,n=t.changedTouches[0].clientY,o="left"===c.position?e<25:"right"===c.position?e>document.documentElement.clientWidth-25:i(),s=c.isActive&&("left"===c.position?e<document.documentElement.clientWidth:"right"===c.position?e>0:i());(o||s||c.isActive)&&(m=[e,n],f=v(r?e:n,c.isActive),p=E(r?e:n),l=f>-20&&f<80,d(t),u(t))}function y(t){if(!g(t))return;const e=t.changedTouches[0].clientX,n=t.changedTouches[0].clientY;if(l){if(!t.cancelable)return void(l=!1);const i=Math.abs(e-m[0]),o=Math.abs(n-m[1]);(r?i>o&&i>3:o>i&&o>3)?(h=!0,l=!1):(r?o:i)>3&&(l=!1)}if(!h)return;t.preventDefault(),u(t);const i=E(r?e:n,!1);p=Math.max(0,Math.min(1,i)),i>1?f=v(r?e:n,!0):i<0&&(f=v(r?e:n,!1)),W()}function M(t){if(!g(t))return;if(l=!1,!h)return;u(t),h=!1;const e=a(t.changedTouches[0].identifier),n=Math.abs(e.x),s=Math.abs(e.y),d=r?n>s&&n>400:s>n&&s>3;c.isActive=d?e.direction===({left:"right",right:"left",top:"down",bottom:"up"}[c.position]||i()):p>.5,W(),setTimeout((()=>o.invokeMethodAsync("TouchEnd",c.isActive)),200)}const W=()=>{if(h){const t="left"===c.position?`translateX(calc(-100% + ${p*document.documentElement.clientWidth}px))`:"right"===c.position?`translateX(calc(100% - ${p*document.documentElement.clientWidth}px))`:i();s.style.setProperty("transform",t),s.style.setProperty("transition","none")}else c.isActive?s.style.removeProperty("transform"):s.style.setProperty("transform","translateX(100%)"),s.style.removeProperty("transition")};return{syncState:t=>{c=t},dispose:()=>{o.dispose(),window.removeEventListener("touchstart",w),window.removeEventListener("touchmove",y),window.removeEventListener("touchend",M)}}}function i(){throw new Error}export{n as useTouch};
+import { u as useVelocity } from '../../chunks/touch.js';
+import { a as getElement } from '../../chunks/helper.js';
+import '../../chunks/tslib.es6.js';
+
+function useTouch(elOrString, dotNetObject, state) {
+    const el = getElement(elOrString);
+    if (!el)
+        return;
+    window.addEventListener("touchstart", onTouchstart, { passive: true });
+    window.addEventListener("touchmove", onTouchmove, { passive: false });
+    window.addEventListener("touchend", onTouchend, { passive: true });
+    const isHorizontal = ["left", "right"].includes(state.position);
+    const { addMovement, endTouch, getVelocity } = useVelocity();
+    let maybeDragging = false;
+    let isDragging = false;
+    let dragProgress = 0;
+    let offset = 0;
+    let start;
+    function getOffset(pos, active) {
+        return ((state.position === "left"
+            ? pos
+            : state.position === "right"
+                ? document.documentElement.clientWidth - pos
+                : oops()) - (active ? document.documentElement.clientWidth : 0));
+    }
+    function getProgress(pos, limit = true) {
+        const progress = state.position === "left"
+            ? (pos - offset) / document.documentElement.clientWidth
+            : state.position === "right"
+                ? (document.documentElement.clientWidth - pos - offset) /
+                    document.documentElement.clientWidth
+                : oops();
+        return limit ? Math.max(0, Math.min(1, progress)) : progress;
+    }
+    function isActiveElement(e) {
+        const pageStackItem = e.target.closest(".m-page-stack-item");
+        return pageStackItem && pageStackItem.parentElement === el;
+    }
+    function onTouchstart(e) {
+        if (!isActiveElement(e))
+            return;
+        const touchX = e.changedTouches[0].clientX;
+        const touchY = e.changedTouches[0].clientY;
+        const touchZone = 25;
+        const inTouchZone = state.position === "left"
+            ? touchX < touchZone
+            : state.position === "right"
+                ? touchX > document.documentElement.clientWidth - touchZone
+                : oops();
+        const inElement = state.isActive &&
+            (state.position === "left"
+                ? touchX < document.documentElement.clientWidth
+                : state.position === "right"
+                    ? touchX > 0
+                    : oops());
+        if (inTouchZone || inElement || state.isActive) {
+            start = [touchX, touchY];
+            offset = getOffset(isHorizontal ? touchX : touchY, state.isActive);
+            dragProgress = getProgress(isHorizontal ? touchX : touchY);
+            maybeDragging = offset > -20 && offset < 80;
+            endTouch(e);
+            addMovement(e);
+        }
+    }
+    function onTouchmove(e) {
+        if (!isActiveElement(e))
+            return;
+        const touchX = e.changedTouches[0].clientX;
+        const touchY = e.changedTouches[0].clientY;
+        if (maybeDragging) {
+            if (!e.cancelable) {
+                maybeDragging = false;
+                return;
+            }
+            const dx = Math.abs(touchX - start[0]);
+            const dy = Math.abs(touchY - start[1]);
+            const thresholdMet = isHorizontal ? dx > dy && dx > 3 : dy > dx && dy > 3;
+            if (thresholdMet) {
+                isDragging = true;
+                maybeDragging = false;
+            }
+            else if ((isHorizontal ? dy : dx) > 3) {
+                maybeDragging = false;
+            }
+        }
+        if (!isDragging)
+            return;
+        e.preventDefault();
+        addMovement(e);
+        const progress = getProgress(isHorizontal ? touchX : touchY, false);
+        dragProgress = Math.max(0, Math.min(1, progress));
+        if (progress > 1) {
+            offset = getOffset(isHorizontal ? touchX : touchY, true);
+        }
+        else if (progress < 0) {
+            offset = getOffset(isHorizontal ? touchX : touchY, false);
+        }
+        applyStyles();
+    }
+    function onTouchend(e) {
+        if (!isActiveElement(e))
+            return;
+        maybeDragging = false;
+        if (!isDragging)
+            return;
+        addMovement(e);
+        isDragging = false;
+        const velocity = getVelocity(e.changedTouches[0].identifier);
+        const vx = Math.abs(velocity.x);
+        const vy = Math.abs(velocity.y);
+        const thresholdMet = isHorizontal ? vx > vy && vx > 400 : vy > vx && vy > 3;
+        if (thresholdMet) {
+            state.isActive =
+                velocity.direction ===
+                    ({
+                        left: "right",
+                        right: "left",
+                        top: "down",
+                        bottom: "up",
+                    }[state.position] || oops());
+        }
+        else {
+            state.isActive = dragProgress > 0.5;
+        }
+        applyStyles();
+        setTimeout(() => dotNetObject.invokeMethodAsync("TouchEnd", state.isActive), 200 // the transition duration of root element is 200ms
+        );
+    }
+    const applyStyles = () => {
+        if (isDragging) {
+            const transform = state.position === "left"
+                ? `translateX(calc(-100% + ${dragProgress * document.documentElement.clientWidth}px))`
+                : state.position === "right"
+                    ? `translateX(calc(100% - ${dragProgress * document.documentElement.clientWidth}px))`
+                    : oops();
+            el.style.setProperty("transform", transform);
+            el.style.setProperty("transition", "none");
+        }
+        else {
+            if (state.isActive) {
+                el.style.removeProperty("transform");
+            }
+            else {
+                el.style.setProperty("transform", "translateX(100%)");
+            }
+            el.style.removeProperty("transition");
+        }
+    };
+    return {
+        // not used for now
+        syncState: (newState) => {
+            state = newState;
+        },
+        dispose: () => {
+            dotNetObject.dispose();
+            window.removeEventListener("touchstart", onTouchstart);
+            window.removeEventListener("touchmove", onTouchmove);
+            window.removeEventListener("touchend", onTouchend);
+        },
+    };
+}
+function oops() {
+    throw new Error();
+}
+
+export { useTouch };
 //# sourceMappingURL=touch.js.map

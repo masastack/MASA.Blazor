@@ -3,6 +3,8 @@ export {};
 declare global {
   export const Blazor: Blazor;
 
+  function parseInt(s: string | number, radix?: number): number
+
   interface Blazor {
     registerCustomEventType: (
       eventName: string,

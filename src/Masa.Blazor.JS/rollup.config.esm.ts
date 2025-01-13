@@ -21,6 +21,7 @@ export default defineConfig({
     "mixins/intersect/index": "./src/mixins/intersect.ts",
     "mixins/outside-click/index": "./src/mixins/outside-click.ts",
     "mixins/resize/index": "./src/mixins/resize.ts",
+    "mixins/menuable/index": "./src/mixins/menuable.ts",
 
     // the following files are introduced in the main.ts
     // "components/slider/index": "./src/components/slider/index.ts",
@@ -34,7 +35,9 @@ export default defineConfig({
       sourcemap: true,
     },
   ],
-  plugins: [typescript(), resolve(), terser()],
+  plugins: [typescript(), resolve(),
+    // terser()
+  ],
   watch: {
     exclude: "node_modules/**",
   },

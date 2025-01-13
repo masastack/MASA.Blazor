@@ -63,7 +63,7 @@ namespace Masa.Blazor
         private readonly string _contentId = $"menu-{Guid.NewGuid():N}";
         private readonly List<IDependent> _dependents = new();
 
-        private bool _isPopupEventsRegistered;
+        private bool _jsInteropEventInit;
         private ScrollStrategyResult? _scrollStrategyResult;
         private DotNetObjectReference<MMenu>? _dotNetObjectReference;
 
@@ -145,7 +145,7 @@ namespace Masa.Blazor
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
-        protected override bool IsRtl => MasaBlazor.RTL;
+        public override bool IsRtl => MasaBlazor.RTL;
 
         public IEnumerable<string> DependentSelectors
         {
@@ -230,15 +230,30 @@ namespace Masa.Blazor
 
         //TODO:keydown event
 
-        protected override async Task WhenIsActiveUpdating(bool value)
-        {
-            await base.WhenIsActiveUpdating(value);
+        private MenuableJSObjectResult? _menuableJSObjectResult;
 
-            if (!_isPopupEventsRegistered && ContentElement.Context is not null)
+        private async Task InitMenuableAsync()
+        {
+            var menuable = new Menuable(Js);
+            _menuableJSObjectResult =
+                await menuable.UseMenuableAsync(ActivatorSelector, ContentElement, HasActivator,
+                    new IMenuable2(Absolute, Auto, OffsetY, NudgeWidth?.ToString(), NudgeTop?.ToString(),
+                        NudgeBottom?.ToString(), OffsetOverflow,
+                        AllowOverflow, MinWidth?.ToString(), MaxWidth?.ToString(), MaxHeight?.ToString(), IsRtl,
+                        ContentStyle, Origin));
+        }
+
+        protected override async Task ActivateAsync()
+        {
+            if (!_jsInteropEventInit && ContentElement.Context is not null)
             {
-                _isPopupEventsRegistered = true;
+                _jsInteropEventInit = true;
+
+                await Js.InvokeVoidAsync(JsInteropConstants.AddElementTo, ContentElement, AttachSelector);
 
                 RegisterPopupEvents(ContentElement.GetSelector()!, CloseOnContentClick);
+
+                await InitMenuableAsync();
 
                 if (ScrollStrategy != ScrollStrategy.None || (Absolute && ScrollStrategy != ScrollStrategy.Reposition))
                 {
@@ -247,12 +262,19 @@ namespace Masa.Blazor
                     _scrollStrategyResult = await ScrollStrategyJSModule.CreateScrollStrategy(Ref, ContentElement,
                         new ScrollStrategyOptions(ScrollStrategy.Reposition), _dotNetObjectReference);
                 }
+                
+                NextTick(_menuableJSObjectResult?.UpdateDimensions);
+            }
+            else
+            {
+                _menuableJSObjectResult?.UpdateDimensions();
             }
 
             if (!OpenOnHover && CloseOnClick && OutsideClickJSModule is { Initialized: false })
             {
                 await OutsideClickJSModule.InitializeAsync(this, DependentSelectors.ToArray());
             }
+         
         }
 
         [JSInvokable("ScrollStrategy_OnScroll")]
@@ -264,7 +286,8 @@ namespace Masa.Blazor
                     RunDirectly(false);
                     break;
                 case "reposition":
-                    await UpdateDimensionsAsync();
+                    // await UpdateDimensionsAsync();
+                    _menuableJSObjectResult?.UpdateDimensions();
                     StateHasChanged();
                     break;
                 default:

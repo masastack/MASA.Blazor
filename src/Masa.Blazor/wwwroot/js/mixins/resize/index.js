@@ -1,2 +1,115 @@
-import{b as e}from"../../chunks/tslib.es6.js";var r=function(e,r,n){var i=null,t=null,o=n&&n.leading,s=n&&n.trailing;null==o&&(o=!0);null==s&&(s=!o);1==o&&(s=!1);var u=function(){i&&(clearTimeout(i),i=null)},l=function(){var n=o&&!i,u=this,l=arguments;if(t=function(){return e.apply(u,l)},i||(i=setTimeout((function(){if(i=null,s)return t()}),r)),n)return n=!1,t()};return l.cancel=u,l.flush=function(){var e=t;u(),e&&e()},l};function n(n,i){if(!i)throw new Error("the handle from .NET cannot be null");if(!n)return void i.dispose();const t=r((()=>{i&&i.invokeMethodAsync("Invoke")}),300,{trailing:!0}),o=new ResizeObserver(((r=[])=>e(this,void 0,void 0,(function*(){r.length&&t()}))));n._resizeObserver=Object(n._resizeObserver),n._resizeObserver={handle:i,observer:o},o.observe(n)}function i(e){e&&e._resizeObserver&&(e._resizeObserver.observer.unobserve(e),e._resizeObserver.handle.dispose(),delete e._resizeObserver)}function t(e,r){if(e){const i=document.querySelector(e);i&&n(i,r)}}function o(e){if(e){const r=document.querySelector(e);r&&i(r)}}export{n as observe,t as observeSelector,i as unobserve,o as unobserveSelector};
+import { b as __awaiter } from '../../chunks/tslib.es6.js';
+
+var functionThrottle = throttle;
+
+function throttle(fn, interval, options) {
+  var timeoutId = null;
+  var throttledFn = null;
+  var leading = (options && options.leading);
+  var trailing = (options && options.trailing);
+
+  if (leading == null) {
+    leading = true; // default
+  }
+
+  if (trailing == null) {
+    trailing = !leading; //default
+  }
+
+  if (leading == true) {
+    trailing = false; // forced because there should be invocation per call
+  }
+
+  var cancel = function() {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  var flush = function() {
+    var call = throttledFn;
+    cancel();
+
+    if (call) {
+      call();
+    }
+  };
+
+  var throttleWrapper = function() {
+    var callNow = leading && !timeoutId;
+    var context = this;
+    var args = arguments;
+
+    throttledFn = function() {
+      return fn.apply(context, args);
+    };
+
+    if (!timeoutId) {
+      timeoutId = setTimeout(function() {
+        timeoutId = null;
+
+        if (trailing) {
+          return throttledFn();
+        }
+      }, interval);
+    }
+
+    if (callNow) {
+      callNow = false;
+      return throttledFn();
+    }
+  };
+
+  throttleWrapper.cancel = cancel;
+  throttleWrapper.flush = flush;
+
+  return throttleWrapper;
+}
+
+function observe(el, handle) {
+    if (!handle) {
+        throw new Error("the handle from .NET cannot be null");
+    }
+    if (!el) {
+        handle.dispose();
+        return;
+    }
+    const throttled = functionThrottle(() => {
+        if (!handle)
+            return;
+        handle.invokeMethodAsync("Invoke");
+    }, 300, { trailing: true });
+    const observer = new ResizeObserver((entries = []) => __awaiter(this, void 0, void 0, function* () {
+        if (!entries.length)
+            return;
+        throttled();
+    }));
+    el._resizeObserver = Object(el._resizeObserver);
+    el._resizeObserver = { handle, observer };
+    observer.observe(el);
+}
+function unobserve(el) {
+    if (!el)
+        return;
+    if (!el._resizeObserver)
+        return;
+    el._resizeObserver.observer.unobserve(el);
+    el._resizeObserver.handle.dispose();
+    delete el._resizeObserver;
+}
+function observeSelector(selector, handle) {
+    if (selector) {
+        const el = document.querySelector(selector);
+        el && observe(el, handle);
+    }
+}
+function unobserveSelector(selector) {
+    if (selector) {
+        const el = document.querySelector(selector);
+        el && unobserve(el);
+    }
+}
+
+export { observe, observeSelector, unobserve, unobserveSelector };
 //# sourceMappingURL=index.js.map

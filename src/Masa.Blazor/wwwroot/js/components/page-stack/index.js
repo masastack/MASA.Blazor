@@ -1,2 +1,52 @@
-import{b as t}from"../../chunks/tslib.es6.js";const e={},n={},o={};let s=0;function i(i){const r=s,c=n=>function(n,o){return t(this,void 0,void 0,(function*(){const t=e[n];if(null===t)return;const s=o.target.closest("a");if(!s)return;const i=s.getAttribute("href");if(!i)return;let r=s.getAttribute("data-page-stack-strategy");r=null===r?null:r.toLowerCase(),""!==r&&"true"!==r&&"push"!==r||(yield t.invokeMethodAsync("Push",i))}))}(r,n),u=()=>i.invokeMethodAsync("Popstate",window.location.pathname);return n[r]=c,o[r]=u,e[r]=i,document.addEventListener("click",c),window.addEventListener("popstate",u),s++}function r(t){const s=n[t];s&&document.removeEventListener("click",s);const i=o[t];i&&window.removeEventListener("popstate",i),e[t]&&e[t].dispose(),delete n[t],delete o[t],delete e[t]}export{i as attachListener,r as detachListener};
+import { b as __awaiter } from '../../chunks/tslib.es6.js';
+
+const dotnetRefs = {};
+const clickHandlers = {};
+const popstateHandlers = {};
+let nextId = 0;
+function attachListener(handle) {
+    const id = nextId;
+    const clickHandler = (event) => onDocumentClick(id, event);
+    const popstateHandler = () => handle.invokeMethodAsync("Popstate", window.location.pathname);
+    clickHandlers[id] = clickHandler;
+    popstateHandlers[id] = popstateHandler;
+    dotnetRefs[id] = handle;
+    document.addEventListener("click", clickHandler);
+    window.addEventListener("popstate", popstateHandler);
+    return nextId++;
+}
+function onDocumentClick(id, event) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const dotnet = dotnetRefs[id];
+        if (dotnet === null)
+            return;
+        const anchor = event.target.closest("a");
+        if (!anchor)
+            return;
+        const href = anchor.getAttribute("href");
+        if (!href)
+            return;
+        let strategy = anchor.getAttribute("data-page-stack-strategy");
+        strategy = strategy === null ? null : strategy.toLowerCase();
+        if (strategy === "" || strategy === "true" || strategy === "push") {
+            yield dotnet.invokeMethodAsync("Push", href);
+        }
+    });
+}
+function detachListener(id) {
+    const clickHandler = clickHandlers[id];
+    if (clickHandler) {
+        document.removeEventListener("click", clickHandler);
+    }
+    const popstateHandler = popstateHandlers[id];
+    if (popstateHandler) {
+        window.removeEventListener("popstate", popstateHandler);
+    }
+    dotnetRefs[id] && dotnetRefs[id].dispose();
+    delete clickHandlers[id];
+    delete popstateHandlers[id];
+    delete dotnetRefs[id];
+}
+
+export { attachListener, detachListener };
 //# sourceMappingURL=index.js.map

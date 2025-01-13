@@ -1,2 +1,129 @@
-import{_ as t}from"../../chunks/tslib.es6.js";import{p as e,a as n,b as i}from"../../chunks/EventType.js";import{g as s}from"../../chunks/helper.js";function o(t,i){let o={target:{}};return"mouse"===t?o=Object.assign(Object.assign({},o),e(i)):"touch"===t&&(o=Object.assign(Object.assign({},o),n(i))),o.target=s(i.target),o}function u(t,e,n){let i=!1;for(const s of t.composedPath()){if(s===n)break;if(a(s,e)){i=!0;break}}return i}function a(t,e){const n=["_blazorEvents_1","stopPropagationFlags",e];let i=t,s=0;for(;i[n[s]];)i=i[n[s]],s++;return s==n.length&&"boolean"==typeof i&&i}var h,r,l,c,p,d;class m{constructor(e,n,i,s){h.add(this),this.input=n,this.inputSlot=i,this.dotnetHelper=e,this.debounce=s,t(this,h,"m",r).call(this)}setValue(t){this.input.value=t}}function v(t,e,n,i){return new m(t,e,n,i)}h=new WeakSet,r=function(){this.input&&this.inputSlot&&(t(this,h,"m",p).call(this),t(this,h,"m",d).call(this),this.input&&(this.input instanceof HTMLInputElement||this.input instanceof HTMLTextAreaElement)&&t(this,h,"m",l).call(this))},l=function(){let e,n=!1;this.input.addEventListener("compositionstart",(t=>{n=!0})),this.input.addEventListener("compositionend",(t=>{n=!1;const e=i(t);e.value=this.input.value,-1!==this.input.maxLength&&e.value.length>this.input.maxLength&&(e.value=e.value.substring(0,this.input.maxLength)),this.dotnetHelper.invokeMethodAsync("OnInput",e)})),this.input.addEventListener("input",(t=>{if(!n){var s=i(t);clearTimeout(e),e=setTimeout((()=>{this.dotnetHelper.invokeMethodAsync("OnInput",s)}),this.debounce)}})),this.input.addEventListener("change",(e=>{var n=i(e);t(this,h,"m",c).call(this,e),this.dotnetHelper.invokeMethodAsync("OnChange",n)}))},c=function(t){if("number"===t.target.type){const e=t.target.value,n=t.target.valueAsNumber;e&&e!==n.toString()&&(this.input.value=isNaN(n)?"":n.toString())}},p=function(){this.inputSlot.addEventListener("click",(t=>{if(!u(t,"click",this.inputSlot)){var e=o("mouse",t);this.dotnetHelper.invokeMethodAsync("OnClick",e)}}))},d=function(){this.inputSlot.addEventListener("mouseup",(t=>{if(!u(t,"mouseup",this.inputSlot)){var e=o("mouse",t);this.dotnetHelper.invokeMethodAsync("OnMouseUp",e)}}))};export{v as init};
+import { _ as __classPrivateFieldGet } from '../../chunks/tslib.es6.js';
+import { p as parseMouseEvent, a as parseTouchEvent, b as parseChangeEvent } from '../../chunks/EventType.js';
+import { g as getEventTarget } from '../../chunks/helper.js';
+
+function createSharedEventArgs(type, e) {
+    let args = { target: {} };
+    if (type === 'mouse') {
+        args = Object.assign(Object.assign({}, args), parseMouseEvent(e));
+    }
+    else if (type === 'touch') {
+        args = Object.assign(Object.assign({}, args), parseTouchEvent(e));
+    }
+    args.target = getEventTarget(e.target);
+    return args;
+}
+
+// @event:stopPropagation only works in Blazor,
+// so need to capture it manually.
+function checkIfStopPropagationExistsInComposedPath(event, eventName, util) {
+    let stopPropagation = false;
+    for (const eventTarget of event.composedPath()) {
+        if (eventTarget === util) {
+            break;
+        }
+        if (checkIfStopPropagation(eventTarget, eventName)) {
+            stopPropagation = true;
+            break;
+        }
+    }
+    return stopPropagation;
+}
+function checkIfStopPropagation(eventTarget, eventName) {
+    const nestProps = ["_blazorEvents_1", "stopPropagationFlags", eventName];
+    let isFlag = eventTarget;
+    let i = 0;
+    while (isFlag[nestProps[i]]) {
+        isFlag = isFlag[nestProps[i]];
+        i++;
+    }
+    return i == nestProps.length && typeof isFlag === "boolean" && isFlag;
+}
+
+var _Input_instances, _Input_registerAllEvents, _Input_registerInputEvent, _Input_formatNumberValue, _Input_registerClickEvent, _Input_registerMouseUpEvent;
+class Input {
+    constructor(dotnetHelper, input, inputSlot, debounce) {
+        _Input_instances.add(this);
+        this.input = input;
+        this.inputSlot = inputSlot;
+        this.dotnetHelper = dotnetHelper;
+        this.debounce = debounce;
+        __classPrivateFieldGet(this, _Input_instances, "m", _Input_registerAllEvents).call(this);
+    }
+    setValue(value) {
+        this.input.value = value;
+    }
+}
+_Input_instances = new WeakSet(), _Input_registerAllEvents = function _Input_registerAllEvents() {
+    if (!this.input || !this.inputSlot)
+        return;
+    __classPrivateFieldGet(this, _Input_instances, "m", _Input_registerClickEvent).call(this);
+    __classPrivateFieldGet(this, _Input_instances, "m", _Input_registerMouseUpEvent).call(this);
+    if (!(this.input &&
+        (this.input instanceof HTMLInputElement ||
+            this.input instanceof HTMLTextAreaElement)))
+        return;
+    __classPrivateFieldGet(this, _Input_instances, "m", _Input_registerInputEvent).call(this);
+}, _Input_registerInputEvent = function _Input_registerInputEvent() {
+    let compositionInputting = false;
+    let timeout;
+    this.input.addEventListener("compositionstart", (_) => {
+        compositionInputting = true;
+    });
+    this.input.addEventListener("compositionend", (event) => {
+        compositionInputting = false;
+        const changeEventArgs = parseChangeEvent(event);
+        changeEventArgs.value = this.input.value;
+        if (this.input.maxLength !== -1 &&
+            changeEventArgs.value.length > this.input.maxLength) {
+            changeEventArgs.value = changeEventArgs.value.substring(0, this.input.maxLength);
+        }
+        this.dotnetHelper.invokeMethodAsync("OnInput", changeEventArgs);
+    });
+    this.input.addEventListener("input", (event) => {
+        if (compositionInputting)
+            return;
+        var changeEventArgs = parseChangeEvent(event);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            this.dotnetHelper.invokeMethodAsync("OnInput", changeEventArgs);
+        }, this.debounce);
+    });
+    this.input.addEventListener('change', (event) => {
+        var changeEventArgs = parseChangeEvent(event);
+        __classPrivateFieldGet(this, _Input_instances, "m", _Input_formatNumberValue).call(this, event);
+        this.dotnetHelper.invokeMethodAsync("OnChange", changeEventArgs);
+    });
+}, _Input_formatNumberValue = function _Input_formatNumberValue(event) {
+    if (event.target.type === "number") {
+        const value = event.target.value;
+        const valueAsNumber = event.target.valueAsNumber;
+        if (!!value && value !== valueAsNumber.toString()) {
+            this.input.value = isNaN(valueAsNumber)
+                ? ""
+                : valueAsNumber.toString();
+        }
+    }
+}, _Input_registerClickEvent = function _Input_registerClickEvent() {
+    this.inputSlot.addEventListener("click", (e) => {
+        if (checkIfStopPropagationExistsInComposedPath(e, "click", this.inputSlot)) {
+            return;
+        }
+        var eventArgs = createSharedEventArgs("mouse", e);
+        this.dotnetHelper.invokeMethodAsync("OnClick", eventArgs);
+    });
+}, _Input_registerMouseUpEvent = function _Input_registerMouseUpEvent() {
+    this.inputSlot.addEventListener("mouseup", (e) => {
+        if (checkIfStopPropagationExistsInComposedPath(e, "mouseup", this.inputSlot)) {
+            return;
+        }
+        var eventArgs = createSharedEventArgs("mouse", e);
+        this.dotnetHelper.invokeMethodAsync("OnMouseUp", eventArgs);
+    });
+};
+function init(dotnetHelper, input, inputSlot, debounce) {
+    return new Input(dotnetHelper, input, inputSlot, debounce);
+}
+
+export { init };
 //# sourceMappingURL=index.js.map

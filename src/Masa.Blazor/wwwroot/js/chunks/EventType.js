@@ -1,2 +1,101 @@
-function e(e){return{detail:e.detail,screenX:e.screenX,screenY:e.screenY,clientX:e.clientX,clientY:e.clientY,offsetX:e.offsetX,offsetY:e.offsetY,pageX:e.pageX,pageY:e.pageY,button:e.button,buttons:e.buttons,ctrlKey:e.ctrlKey,shiftKey:e.shiftKey,altKey:e.altKey,metaKey:e.metaKey,type:e.type}}function t(e){return{detail:e.detail,touches:n(e.touches),targetTouches:n(e.targetTouches),changedTouches:n(e.changedTouches),ctrlKey:e.ctrlKey,shiftKey:e.shiftKey,altKey:e.altKey,metaKey:e.metaKey,type:e.type}}function n(e){const t=[];for(let n=0;n<e.length;n++){const c=e[n];t.push({identifier:c.identifier,clientX:c.clientX,clientY:c.clientY,screenX:c.screenX,screenY:c.screenY,pageX:c.pageX,pageY:c.pageY})}return t}function c(e){const t=e.target;if(function(e){return-1!==r.indexOf(e.getAttribute("type"))}(t)){const e=function(e){const t=e.value,n=e.type;switch(n){case"date":case"month":case"week":return t;case"datetime-local":return 16===t.length?t+":00":t;case"time":return 5===t.length?t+":00":t}throw new Error(`Invalid element type '${n}'.`)}(t);return{value:e}}if(function(e){return e instanceof HTMLSelectElement&&"select-multiple"===e.type}(t)){const e=t;return{value:Array.from(e.options).filter((e=>e.selected)).map((e=>e.value))}}{const e=function(e){return!!e&&"INPUT"===e.tagName&&"checkbox"===e.getAttribute("type")}(t);return{value:e?!!t.checked:t.value}}}const r=["date","datetime-local","month","time","week"];export{t as a,c as b,e as p};
+// see https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web.JS/src/Rendering/Events/EventTypes.ts
+function parseMouseEvent(event) {
+    return {
+        detail: event.detail,
+        screenX: event.screenX,
+        screenY: event.screenY,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        offsetX: event.offsetX,
+        offsetY: event.offsetY,
+        pageX: event.pageX,
+        pageY: event.pageY,
+        button: event.button,
+        buttons: event.buttons,
+        ctrlKey: event.ctrlKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        metaKey: event.metaKey,
+        type: event.type,
+    };
+}
+function parseTouchEvent(event) {
+    return {
+        detail: event.detail,
+        touches: parseTouch(event.touches),
+        targetTouches: parseTouch(event.targetTouches),
+        changedTouches: parseTouch(event.changedTouches),
+        ctrlKey: event.ctrlKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        metaKey: event.metaKey,
+        type: event.type,
+    };
+}
+function parseTouch(touchList) {
+    const touches = [];
+    for (let i = 0; i < touchList.length; i++) {
+        const touch = touchList[i];
+        touches.push({
+            identifier: touch.identifier,
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+            screenX: touch.screenX,
+            screenY: touch.screenY,
+            pageX: touch.pageX,
+            pageY: touch.pageY,
+        });
+    }
+    return touches;
+}
+function parseChangeEvent(event) {
+    const element = event.target;
+    if (isTimeBasedInput(element)) {
+        const normalizedValue = normalizeTimeBasedValue(element);
+        return { value: normalizedValue };
+    }
+    else if (isMultipleSelectInput(element)) {
+        const selectElement = element;
+        const selectedValues = Array.from(selectElement.options)
+            .filter((option) => option.selected)
+            .map((option) => option.value);
+        return { value: selectedValues };
+    }
+    else {
+        const targetIsCheckbox = isCheckbox(element);
+        const newValue = targetIsCheckbox ? !!element["checked"] : element["value"];
+        return { value: newValue };
+    }
+}
+function isTimeBasedInput(element) {
+    return timeBasedInputs.indexOf(element.getAttribute("type")) !== -1;
+}
+const timeBasedInputs = ["date", "datetime-local", "month", "time", "week"];
+function normalizeTimeBasedValue(element) {
+    const value = element.value;
+    const type = element.type;
+    switch (type) {
+        case "date":
+        case "month":
+            return value;
+        case "datetime-local":
+            return value.length === 16 ? value + ":00" : value; // Convert yyyy-MM-ddTHH:mm to yyyy-MM-ddTHH:mm:00
+        case "time":
+            return value.length === 5 ? value + ":00" : value; // Convert hh:mm to hh:mm:00
+        case "week":
+            // For now we are not going to normalize input type week as it is not trivial
+            return value;
+    }
+    throw new Error(`Invalid element type '${type}'.`);
+}
+function isMultipleSelectInput(element) {
+    return (element instanceof HTMLSelectElement && element.type === "select-multiple");
+}
+function isCheckbox(element) {
+    return (!!element &&
+        element.tagName === "INPUT" &&
+        element.getAttribute("type") === "checkbox");
+}
+
+export { parseTouchEvent as a, parseChangeEvent as b, parseMouseEvent as p };
 //# sourceMappingURL=EventType.js.map

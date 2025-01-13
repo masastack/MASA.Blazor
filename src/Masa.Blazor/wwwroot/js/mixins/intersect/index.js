@@ -1,2 +1,106 @@
-import{b as t}from"../../chunks/tslib.es6.js";import{g as o}from"../../chunks/helper.js";function r(r,n,i){var c;if(!n)throw new Error("the handle cannot be null");if(!r)return void n.dispose();if(r._intersect)return;const a=null!==(c=null==i?void 0:i.once)&&void 0!==c&&c,g=s(i),u=new IntersectionObserver(((i=[],s)=>t(this,void 0,void 0,(function*(){const t=i.map((t=>({isIntersecting:t.isIntersecting,target:o(t.target)}))),s=t.some((t=>t.isIntersecting));a&&!s||(yield n.invokeMethodAsync("Invoke",{isIntersecting:s,entries:t})),s&&a&&e(r)}))),g);r._intersect=Object(r._intersect),r._intersect={handle:n,observer:u},u.observe(r)}function e(t){if(!t)return;const o=t._intersect;o&&(o.observer.unobserve(t),o.handle.dispose(),delete t._intersect)}function n(t,o,e){if(t){const n=document.querySelector(t);n&&r(n,o,e)}}function i(t){if(t){const o=document.querySelector(t);o&&e(o)}}function s(t){if(!t)return null;const o=t.rootSelector?document.querySelector(t.rootSelector):null;return"None"!==t.autoRootMargin&&("Top"===t.autoRootMargin&&"0px"!==t.rootMarginBottom?t.rootMarginTop=c(o,t.rootMarginBottom,!1)+"px":"Right"===t.autoRootMargin&&"0px"!==t.rootMarginLeft?t.rootMarginRight=c(o,t.rootMarginLeft,!1)+"px":"Bottom"===t.autoRootMargin&&"0px"!==t.rootMarginTop?t.rootMarginBottom=c(o,t.rootMarginTop,!1)+"px":"Left"===t.autoRootMargin&&"0px"!==t.rootMarginRight&&(t.rootMarginLeft=c(o,t.rootMarginRight,!1)+"px")),{rootMargin:`${t.rootMarginTop} ${t.rootMarginRight} ${t.rootMarginBottom} ${t.rootMarginLeft}`,root:o,threshold:t.threshold}}function c(t,o,r){t=t||document.documentElement;const e=parseInt(o);if(isNaN(e))return 0;var n=r?t.clientWidth:t.clientHeight;return Math.abs(e)-n}export{s as formatToStandardOptions,r as observe,n as observeSelector,e as unobserve,i as unobserveSelector};
+import { b as __awaiter } from '../../chunks/tslib.es6.js';
+import { g as getEventTarget } from '../../chunks/helper.js';
+
+function observe(el, handle, options) {
+    var _a;
+    if (!handle) {
+        throw new Error("the handle cannot be null");
+    }
+    if (!el) {
+        handle.dispose();
+        return;
+    }
+    if (el["_intersect"]) {
+        return;
+    }
+    const once = (_a = options === null || options === void 0 ? void 0 : options.once) !== null && _a !== void 0 ? _a : false;
+    const standardOptions = formatToStandardOptions(options);
+    const observer = new IntersectionObserver((entries = [], observer) => __awaiter(this, void 0, void 0, function* () {
+        const computedEntries = entries.map((entry) => ({
+            isIntersecting: entry.isIntersecting,
+            target: getEventTarget(entry.target),
+        }));
+        const isIntersecting = computedEntries.some((e) => e.isIntersecting);
+        if (!once || isIntersecting) {
+            yield handle.invokeMethodAsync("Invoke", {
+                isIntersecting,
+                entries: computedEntries,
+            });
+        }
+        if (isIntersecting && once) {
+            unobserve(el);
+        }
+    }), standardOptions);
+    el["_intersect"] = Object(el["_intersect"]);
+    el["_intersect"] = { handle, observer };
+    observer.observe(el);
+}
+function unobserve(el) {
+    if (!el)
+        return;
+    const observe = el["_intersect"];
+    if (!observe)
+        return;
+    observe.observer.unobserve(el);
+    observe.handle.dispose();
+    delete el["_intersect"];
+}
+function observeSelector(selector, handle, options) {
+    if (selector) {
+        const el = document.querySelector(selector);
+        el && observe(el, handle, options);
+    }
+}
+function unobserveSelector(selector) {
+    if (selector) {
+        const el = document.querySelector(selector);
+        el && unobserve(el);
+    }
+}
+function formatToStandardOptions(options) {
+    if (!options) {
+        return null;
+    }
+    const root = options.rootSelector
+        ? document.querySelector(options.rootSelector)
+        : null;
+    if (options.autoRootMargin !== "None") {
+        if (options.autoRootMargin === "Top" &&
+            options.rootMarginBottom !== "0px") {
+            options.rootMarginTop =
+                calcAuto(root, options.rootMarginBottom, false) + "px";
+        }
+        else if (options.autoRootMargin === "Right" &&
+            options.rootMarginLeft !== "0px") {
+            options.rootMarginRight =
+                calcAuto(root, options.rootMarginLeft, false) + "px";
+        }
+        else if (options.autoRootMargin === "Bottom" &&
+            options.rootMarginTop !== "0px") {
+            options.rootMarginBottom =
+                calcAuto(root, options.rootMarginTop, false) + "px";
+        }
+        else if (options.autoRootMargin === "Left" &&
+            options.rootMarginRight !== "0px") {
+            options.rootMarginLeft =
+                calcAuto(root, options.rootMarginRight, false) + "px";
+        }
+    }
+    return {
+        rootMargin: `${options.rootMarginTop} ${options.rootMarginRight} ${options.rootMarginBottom} ${options.rootMarginLeft}`,
+        root,
+        threshold: options.threshold,
+    };
+}
+function calcAuto(container, margin, x) {
+    container = container || document.documentElement;
+    const marginValue = parseInt(margin);
+    if (isNaN(marginValue)) {
+        return 0;
+    }
+    var clientValue = x ? container.clientWidth : container.clientHeight;
+    return Math.abs(marginValue) - clientValue;
+}
+
+export { formatToStandardOptions, observe, observeSelector, unobserve, unobserveSelector };
 //# sourceMappingURL=index.js.map

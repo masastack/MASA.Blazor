@@ -1,2 +1,78 @@
-import{b as n}from"../../chunks/helper.js";class e{constructor(e,t){this._onTransitionEnd=e=>{const t=this._getTransitionLeaveEnter(e);t&&this.handle&&this.handle.invokeMethodAsync("OnTransitionEnd",n(e.target),"leave"==t?0:1)},this._onTransitionCancel=e=>{const t=this._getTransitionLeaveEnter(e);t&&this.handle&&this.handle.invokeMethodAsync("OnTransitionCancel",n(e.target),"leave"==t?0:1)},this.handle=t,this.el=e,this.el.addEventListener("transitionend",this._onTransitionEnd),this.el.addEventListener("transitioncancel",this._onTransitionCancel)}_getTransitionLeaveEnter(n){const e=n.target.className.split(" ");return e.some((n=>n.includes("transition-leave")))?"leave":e.some((n=>n.includes("transition-enter")))?"enter":void 0}reset(n){this.el.removeEventListener("transitionend",this._onTransitionEnd),this.el.removeEventListener("transitioncancel",this._onTransitionCancel),this.el=n,this.el.addEventListener("transitionend",this._onTransitionEnd),this.el.addEventListener("transitioncancel",this._onTransitionCancel)}dispose(){this.el.removeEventListener("transitionend",this._onTransitionEnd),this.el.removeEventListener("transitioncancel",this._onTransitionCancel),delete t[this.handle._id],this.handle.dispose(),this.handle=null}}let t={number:e};function i(n,i){let s;if(s="string"==typeof n?document.querySelector(n):n,!s||!i)return null;const r=i._id;if(t[r])return t[r];const o=new e(s,i);return t[r]=o,o}export{i as init};
+import { b as getBlazorId } from '../../chunks/helper.js';
+
+class Transition {
+    constructor(elOrSelector, handle) {
+        this._onTransitionEnd = (e) => {
+            const leaveEnter = this._getTransitionLeaveEnter(e);
+            if (!leaveEnter)
+                return;
+            this.handle &&
+                this.handle.invokeMethodAsync("OnTransitionEnd", getBlazorId(e.target), leaveEnter == "leave" ? 0 : 1);
+        };
+        this._onTransitionCancel = (e) => {
+            const leaveEnter = this._getTransitionLeaveEnter(e);
+            if (!leaveEnter)
+                return;
+            this.handle &&
+                this.handle.invokeMethodAsync("OnTransitionCancel", getBlazorId(e.target), leaveEnter == "leave" ? 0 : 1);
+        };
+        this.handle = handle;
+        this.el = elOrSelector;
+        this.el.addEventListener("transitionend", this._onTransitionEnd);
+        this.el.addEventListener("transitioncancel", this._onTransitionCancel);
+    }
+    _getTransitionLeaveEnter(e) {
+        const classNames = e.target.className.split(" ");
+        if (classNames.some((n) => n.includes("transition-leave"))) {
+            return "leave";
+        }
+        else if (classNames.some((n) => n.includes("transition-enter"))) {
+            return "enter";
+        }
+        else {
+            return undefined;
+        }
+    }
+    reset(el) {
+        this.el.removeEventListener("transitionend", this._onTransitionEnd);
+        this.el.removeEventListener("transitioncancel", this._onTransitionCancel);
+        this.el = el;
+        this.el.addEventListener("transitionend", this._onTransitionEnd);
+        this.el.addEventListener("transitioncancel", this._onTransitionCancel);
+    }
+    dispose() {
+        this.el.removeEventListener("transitionend", this._onTransitionEnd);
+        this.el.removeEventListener("transitioncancel", this._onTransitionCancel);
+        delete transitionInstances[this.handle["_id"]];
+        this.handle.dispose();
+        this.handle = null;
+    }
+}
+// Store all instances of transition,
+// avoid creating multiple instances of the same element,
+// because we can't guarantee that js interop will only call the instantiation method once
+let transitionInstances = {
+    number: Transition,
+};
+function init(elOrSelector, handle) {
+    let el;
+    if (typeof elOrSelector === "string") {
+        el = document.querySelector(elOrSelector);
+    }
+    else {
+        el = elOrSelector;
+    }
+    if (!el || !handle) {
+        return null;
+    }
+    const dotNetObjectId = handle["_id"];
+    if (transitionInstances[dotNetObjectId]) {
+        return transitionInstances[dotNetObjectId];
+    }
+    const transitionEl = new Transition(el, handle);
+    transitionInstances[dotNetObjectId] = transitionEl;
+    return transitionEl;
+}
+
+export { init };
 //# sourceMappingURL=index.js.map

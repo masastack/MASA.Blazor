@@ -1,2 +1,178 @@
-import{d as t}from"../../chunks/helper.js";import{p as e}from"../../chunks/EventType.js";class s{constructor(t,e,s){this.openDelay=t,this.closeDelay=e,this.dotNetHelper=s}clearDelay(){clearTimeout(this.openTimeout),clearTimeout(this.closeTimeout)}runDelay(t,e){this.clearDelay();const s=parseInt(this[`${t}Delay`],10);this[`${t}Timeout`]=setTimeout(e||(()=>{const e={open:!0,close:!1}[t];this.setActive(e)}),s)}setActive(t){this.isActive!=t&&(this.isActive=t,this.dotNetHelper.invokeMethodAsync("SetActive",this.isActive))}resetDelay(t,e){this.openDelay=t,this.closeDelay=e}}class i extends s{constructor(e,s,i,o,n,r,c,p){super(r,c,p),this.activatorListeners={},this.popupListeners={},this.activator=t(e),this.disabled=s,this.openOnClick=i,this.openOnHover=o,this.openOnFocus=n,this.dotNetHelper=p}resetActivator(t){const e=document.querySelector(t);e&&(this.activator=e),this.resetActivatorEvents(this.disabled,this.openOnHover,this.openOnFocus)}addActivatorEvents(){if(!this.activator||this.disabled)return;this.activatorListeners=this.genActivatorListeners();const t=Object.keys(this.activatorListeners);for(const e of t)this.activator.addEventListener(e,this.activatorListeners[e])}genActivatorListeners(){if(this.disabled)return{};const t={};return this.openOnHover?(t.mouseenter=t=>{this.runDelay("open")},t.mouseleave=t=>{this.runDelay("close")}):this.openOnClick&&(t.click=t=>{this.activator&&this.activator.focus(),t.stopPropagation(),this.dotNetHelper.invokeMethodAsync("OnClick",e(t)),this.setActive(!this.isActive)}),this.openOnFocus&&(t.focus=t=>{t.stopPropagation(),this.runDelay("open")},t.blur=t=>{this.runDelay("close")}),t}removeActivatorEvents(){if(!this.activator)return;const t=Object.keys(this.activatorListeners);for(const e of t)this.activator.removeEventListener(e,this.activatorListeners[e]);this.activatorListeners={}}resetActivatorEvents(t,e,s){this.disabled=t,this.openOnHover=e,this.openOnFocus=s,this.removeActivatorEvents(),this.addActivatorEvents()}runDelaying(t){this.runDelay(t?"open":"close")}registerPopup(t,e){const s=document.querySelector(t);s?(this.popupElement=s,this.closeOnContentClick=e,this.addPopupEvents()):console.error("popup not exists")}addPopupEvents(){if(!this.popupElement||this.disabled)return;this.popupListeners=this.genPopupListeners();const t=Object.keys(this.popupListeners);for(const e of t)this.popupElement.addEventListener(e,this.popupListeners[e])}removePopupEvents(){if(!this.popupElement)return;const t=Object.keys(this.popupListeners);for(const e of t)this.popupElement.removeEventListener(e,this.popupListeners[e]);this.popupListeners={}}genPopupListeners(){if(this.disabled)return;const t={};return!this.disabled&&this.openOnHover&&(t.mouseenter=t=>{this.runDelay("open")},t.mouseleave=t=>{this.runDelay("close")}),this.closeOnContentClick&&(t.click=t=>{this.setActive(!1)}),t}resetPopupEvents(t){this.closeOnContentClick=t,this.removePopupEvents(),this.addPopupEvents()}}function o(t,e,s,o,n,r,c,p){var a=new i(t,e,s,o,n,r,c,p);return a.addActivatorEvents(),a}export{o as init};
+import { d as getActivator } from '../../chunks/helper.js';
+import { p as parseMouseEvent } from '../../chunks/EventType.js';
+
+class Delayable {
+    constructor(openDelay, closeDelay, dotNetHelper) {
+        this.openDelay = openDelay;
+        this.closeDelay = closeDelay;
+        this.dotNetHelper = dotNetHelper;
+    }
+    clearDelay() {
+        clearTimeout(this.openTimeout);
+        clearTimeout(this.closeTimeout);
+    }
+    runDelay(type, cb) {
+        this.clearDelay();
+        const delay = parseInt(this[`${type}Delay`], 10);
+        this[`${type}Timeout`] = setTimeout(cb ||
+            (() => {
+                const isActive = { open: true, close: false }[type];
+                this.setActive(isActive);
+            }), delay);
+    }
+    setActive(active) {
+        if (this.isActive == active) {
+            return;
+        }
+        this.isActive = active;
+        this.dotNetHelper.invokeMethodAsync("SetActive", this.isActive);
+    }
+    resetDelay(openDelay, closeDelay) {
+        this.openDelay = openDelay;
+        this.closeDelay = closeDelay;
+    }
+}
+
+class Activatable extends Delayable {
+    constructor(activatorSelector, disabled, openOnClick, openOnHover, openOnFocus, openDelay, closeDelay, dotNetHelper) {
+        super(openDelay, closeDelay, dotNetHelper);
+        this.activatorListeners = {};
+        this.popupListeners = {};
+        this.activator = getActivator(activatorSelector);
+        this.disabled = disabled;
+        this.openOnClick = openOnClick;
+        this.openOnHover = openOnHover;
+        this.openOnFocus = openOnFocus;
+        this.dotNetHelper = dotNetHelper;
+    }
+    //#region activators
+    resetActivator(selector) {
+        const activator = document.querySelector(selector);
+        if (activator) {
+            this.activator = activator;
+        }
+        this.resetActivatorEvents(this.disabled, this.openOnHover, this.openOnFocus);
+    }
+    addActivatorEvents() {
+        if (!this.activator || this.disabled)
+            return;
+        this.activatorListeners = this.genActivatorListeners();
+        const keys = Object.keys(this.activatorListeners);
+        for (const key of keys) {
+            this.activator.addEventListener(key, this.activatorListeners[key]);
+        }
+    }
+    genActivatorListeners() {
+        if (this.disabled)
+            return {};
+        const listeners = {};
+        if (this.openOnHover) {
+            listeners.mouseenter = (e) => {
+                this.runDelay("open");
+            };
+            listeners.mouseleave = (e) => {
+                this.runDelay("close");
+            };
+        }
+        else if (this.openOnClick) {
+            listeners.click = (e) => {
+                if (this.activator)
+                    this.activator.focus();
+                e.stopPropagation();
+                this.dotNetHelper.invokeMethodAsync("OnClick", parseMouseEvent(e));
+                this.setActive(!this.isActive);
+            };
+        }
+        if (this.openOnFocus) {
+            listeners.focus = (e) => {
+                e.stopPropagation();
+                this.runDelay("open");
+            };
+            listeners.blur = (e) => {
+                this.runDelay("close");
+            };
+        }
+        return listeners;
+    }
+    removeActivatorEvents() {
+        if (!this.activator)
+            return;
+        const keys = Object.keys(this.activatorListeners);
+        for (const key of keys) {
+            this.activator.removeEventListener(key, this.activatorListeners[key]);
+        }
+        this.activatorListeners = {};
+    }
+    resetActivatorEvents(disabled, openOnHover, openOnFocus) {
+        this.disabled = disabled;
+        this.openOnHover = openOnHover;
+        this.openOnFocus = openOnFocus;
+        this.removeActivatorEvents();
+        this.addActivatorEvents();
+    }
+    runDelaying(val) {
+        this.runDelay(val ? "open" : "close");
+    }
+    //#endregion
+    //#region popups
+    registerPopup(popupSelector, closeOnContentClick) {
+        const popup = document.querySelector(popupSelector);
+        if (!popup) {
+            console.error("popup not exists");
+            return;
+        }
+        this.popupElement = popup;
+        this.closeOnContentClick = closeOnContentClick;
+        this.addPopupEvents();
+    }
+    addPopupEvents() {
+        if (!this.popupElement || this.disabled)
+            return;
+        this.popupListeners = this.genPopupListeners();
+        const keys = Object.keys(this.popupListeners);
+        for (const key of keys) {
+            this.popupElement.addEventListener(key, this.popupListeners[key]);
+        }
+    }
+    removePopupEvents() {
+        if (!this.popupElement)
+            return;
+        const keys = Object.keys(this.popupListeners);
+        for (const key of keys) {
+            this.popupElement.removeEventListener(key, this.popupListeners[key]);
+        }
+        this.popupListeners = {};
+    }
+    genPopupListeners() {
+        if (this.disabled)
+            return;
+        const listeners = {};
+        if (!this.disabled && this.openOnHover) {
+            listeners.mouseenter = (e) => {
+                this.runDelay("open");
+            };
+            listeners.mouseleave = (e) => {
+                this.runDelay("close");
+            };
+        }
+        if (this.closeOnContentClick) {
+            listeners.click = (e) => {
+                this.setActive(false);
+            };
+        }
+        return listeners;
+    }
+    resetPopupEvents(closeOnContentClick) {
+        this.closeOnContentClick = closeOnContentClick;
+        this.removePopupEvents();
+        this.addPopupEvents();
+    }
+}
+function init(activatorSelector, disabled, openOnClick, openOnHover, openOnFocus, openDelay, closeDelay, dotNetHelper) {
+    var instance = new Activatable(activatorSelector, disabled, openOnClick, openOnHover, openOnFocus, openDelay, closeDelay, dotNetHelper);
+    instance.addActivatorEvents();
+    return instance;
+}
+
+export { init };
 //# sourceMappingURL=index.js.map
