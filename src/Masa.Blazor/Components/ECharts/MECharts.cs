@@ -36,7 +36,7 @@ public class MECharts : Container, IEChartsJsCallbacks
     public Action<EChartsInitOptions>? InitOptions { get; set; }
 
     [Parameter]
-    public object Option { get; set; } = new { };
+    public object? Option { get; set; }
 
     [Parameter]
     public bool Light { get; set; }
@@ -224,7 +224,7 @@ public class MECharts : Container, IEChartsJsCallbacks
     {
         if (_echarts == null) return;
 
-        option ??= Option;
+        option ??= Option ?? new { };
 
         if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {
