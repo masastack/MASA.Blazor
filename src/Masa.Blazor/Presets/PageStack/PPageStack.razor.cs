@@ -36,12 +36,18 @@ public partial class PPageStack : PatternPathComponentBase
     /// and clear the stack in the next popstate event.
     /// </summary>
     private string? _uriForPushAndClearStack;
-    
+
     /// <summary>
     /// The flag to indicate whether to replace the top page
     /// and clear the previous pages in the stack in the next popstate event.
     /// </summary>
     private (string relativeUri, object? state)? _uriForReplaceAndClearStack;
+
+    /// <summary>
+    /// The flag to indicate whether to go back to a specific page
+    /// and then replace it with a new page.
+    /// </summary>
+    private (string relativeUri, object? state, int delta)? _uriForGoBackToAndReplace;
 
     private string? _lastVisitedTabPath;
     private PageType _targetPageType;
@@ -125,6 +131,8 @@ public partial class PPageStack : PatternPathComponentBase
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
+        Console.Out.WriteLine("[PageStack] Popstate: " + absolutePath);
+
         if (_uriForPushAndClearStack is not null)
         {
             Push(_uriForPushAndClearStack);
@@ -133,7 +141,7 @@ public partial class PPageStack : PatternPathComponentBase
 
             _ = Task.Run(async () =>
             {
-                await Task.Delay(300); // wait for the transition to complete
+                await Task.Delay(DelayForPageClosingAnimation); // wait for the transition to complete
                 Pages.RemoveRange(0, Pages.Count - 1);
                 await InvokeAsync(StateHasChanged);
             });
@@ -144,10 +152,20 @@ public partial class PPageStack : PatternPathComponentBase
         if (_uriForReplaceAndClearStack.HasValue)
         {
             var (relativeUri, state) = _uriForReplaceAndClearStack.Value;
-            
+
             Pages.RemoveRange(0, Pages.Count - 1);
             InternalReplaceHandler(relativeUri, state);
             _uriForReplaceAndClearStack = null;
+            return;
+        }
+
+        if (_uriForGoBackToAndReplace.HasValue)
+        {
+            var (replaceUri, state, delta) = _uriForGoBackToAndReplace.Value;
+            NavigationManager.Replace(replaceUri);
+            replaceUri = GetAbsolutePath(replaceUri);
+            CloseTopPages(delta, state, replaceUri);
+            _uriForGoBackToAndReplace = null;
             return;
         }
 
@@ -240,9 +258,9 @@ public partial class PPageStack : PatternPathComponentBase
         NavigationManager.NavigateTo(e.RelativeUri);
     }
 
-    private async void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
+    private void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
     {
-        await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
+        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
         var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) ||
                                  _lastVisitedTabPath == GetAbsolutePath(e.RelativeUri);
@@ -268,17 +286,18 @@ public partial class PPageStack : PatternPathComponentBase
             return;
         }
 
-        _popstateByUserAction = true;
-
-        await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
-
-        CloseTopPages(delta, e.State);
-
-        if (!string.IsNullOrWhiteSpace(e.ReplaceUri))
+        if (string.IsNullOrWhiteSpace(e.ReplaceUri))
         {
-            await Task.Delay(DelayForPageClosingAnimation);
-            InternalReplaceHandler(e.ReplaceUri, e.State);
+            _popstateByUserAction = true;
+            
+            CloseTopPages(delta, e.State);
         }
+        else
+        {
+            _uriForGoBackToAndReplace = (e.ReplaceUri, e.State, delta);
+        }
+
+        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
     }
 
     private string GetAbsolutePath(string relativeUri) => NavigationManager.ToAbsoluteUri(relativeUri).AbsolutePath;
@@ -308,20 +327,33 @@ public partial class PPageStack : PatternPathComponentBase
 
     private void CloseTopPageOfStack(object? state = null) => CloseTopPages(1, state);
 
-    private void CloseTopPages(int count, object? state = null)
+    private void CloseTopPages(int count, object? state = null, string? absolutePath = null)
     {
         if (!Pages.TryPeek(out var current)) return;
 
+        // Set the stacked state to false, which directly determines whether the dialog is displayed
+        // and will perform a transition animation
         current.Stacked = false;
 
+        // When the count of pages to be deleted is greater than 1,
+        // delete the pages between the top of the stack and the target page
+        // For example, if the stack has 5 pages: [1,2,3,4,5], delete 3(count) pages,
+        // then delete the page 3 and page 4
         if (count > 1)
         {
             Pages.RemoveRange(Pages.Count - count, count - 1);
         }
 
+        // The stack is now [1,2,5], update the state of the 2nd page
         if (Pages.TryPeekSecondToLast(out var target))
         {
             target.UpdateState(state);
+
+            if (!string.IsNullOrWhiteSpace(absolutePath))
+            {
+                target.UpdatePath(absolutePath);
+            }
+
             target.Activate();
         }
 
@@ -329,8 +361,11 @@ public partial class PPageStack : PatternPathComponentBase
 
         Task.Run(async () =>
         {
-            await Task.Delay(DelayForPageClosingAnimation); // wait for the transition to complete
+            // wait for a transition animation from left to right to complete,
+            // known animation time is 300 ms
+            await Task.Delay(DelayForPageClosingAnimation);
 
+            // Remove page 5 and display page 2
             Pages.Pop();
 
             if (Pages.Count == 0)
