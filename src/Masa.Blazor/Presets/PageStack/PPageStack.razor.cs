@@ -131,8 +131,6 @@ public partial class PPageStack : PatternPathComponentBase
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
-        Console.Out.WriteLine("[PageStack] Popstate: " + absolutePath);
-
         if (_uriForPushAndClearStack is not null)
         {
             Push(_uriForPushAndClearStack);
