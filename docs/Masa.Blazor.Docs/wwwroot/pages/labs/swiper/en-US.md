@@ -36,6 +36,25 @@ You need to reference the following files before using it:
 
 <masa-example file="Examples.labs.swiper.SpaceBetween"></masa-example>
 
+#### Auto height
+
+By default, the highest slide determines the height of the Swiper.
+If you need to adapt the height, you can set the `AutoHeight` property.
+
+For scenarios where the content in the **MSwiperSlide** is loaded asynchronously, 
+it is recommended to add a conditional judgment outside the **MSwiperSlide** component
+to recalculate the height after the content is loaded.
+
+```razor
+<MSwiper AutoHeight>
+    @if (content is not null) {
+        <MSwiperSlide>@content</MSwiperSlide>
+    } 
+</MSwiper>
+```
+
+<masa-example file="Examples.labs.swiper.AutoHeight"></masa-example>
+
 ### Module components
 
 #### Navigation

@@ -1,0 +1,21 @@
+﻿<MCheckbox @bind-Value="@autoHeight" HideDetails="@true" Label="AutoHeight"></MCheckbox>
+
+<MSwiper AutoHeight="@autoHeight" @key="@autoHeight">
+    <MSwiperSlide Style="background-color: var(--m-theme-surface-container); height: 200px;"
+                  Class="d-flex align-center justify-center">
+        <h3> Slide 1 </h3>
+    </MSwiperSlide>
+    <MSwiperSlide Style="background-color: var(--m-theme-surface-container); height: 300px;"
+                  Class="d-flex align-center justify-center">
+        <h3> Slide 2 </h3>
+    </MSwiperSlide>
+    <MSwiperSlide Style="background-color: var(--m-theme-surface-container); height: 200px;"
+                  Class="d-flex align-center justify-center">
+        <h3> Slide 3 </h3>
+    </MSwiperSlide>
+</MSwiper>
+
+@code {
+
+    private bool autoHeight = true;
+}
