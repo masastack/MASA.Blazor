@@ -127,7 +127,7 @@ related:
 当堆栈页首次加载，以及从其他页面返回时触发。
 
 ```razor MyStackPage.razor
-@inherit PStackPageBase
+@inherits PStackPageBase
 
 @code {
     protected override void OnPageActivated(object? state)
