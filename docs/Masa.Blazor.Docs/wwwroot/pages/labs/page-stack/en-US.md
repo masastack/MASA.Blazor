@@ -133,7 +133,7 @@ you can inherit **PStackPageBase** and get the root element of the stack page th
 Triggered when the stack page is first loaded and when returning from other pages.
 
 ```razor MyStackPage.razor
-@inherit PStackPageBase
+@inherits PStackPageBase
 
 @code {
     protected override void OnPageActivated(object? state)

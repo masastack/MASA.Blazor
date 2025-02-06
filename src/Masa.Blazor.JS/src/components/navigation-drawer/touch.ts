@@ -112,6 +112,8 @@ export function useTouch(
   }
 
   function onTouchmove(e: TouchEvent) {
+    if (state.touchless) return;
+
     const touchX = e.changedTouches[0].clientX;
     const touchY = e.changedTouches[0].clientY;
 
@@ -156,7 +158,7 @@ export function useTouch(
   function onTouchend(e: TouchEvent) {
     maybeDragging = false;
 
-    if (!isDragging) return;
+    if (state.touchless || !isDragging) return;
 
     addMovement(e);
 
