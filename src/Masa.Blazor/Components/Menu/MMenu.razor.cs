@@ -236,11 +236,11 @@ namespace Masa.Blazor
         {
             var menuable = new Menuable(Js);
             _menuableJSObjectResult =
-                await menuable.UseMenuableAsync(ActivatorSelector, ContentElement, HasActivator,
-                    new IMenuable2(Absolute, Auto, OffsetY, NudgeWidth?.ToString(), NudgeTop?.ToString(),
+                await menuable.UseMenuableAsync(Ref, ActivatorSelector, ContentElement, HasActivator,
+                    new IMenuable2(Top, Right, Bottom, Left, Absolute, Auto, OffsetY, NudgeWidth?.ToString(), NudgeTop?.ToString(),
                         NudgeBottom?.ToString(), OffsetOverflow,
                         AllowOverflow, MinWidth?.ToString(), MaxWidth?.ToString(), MaxHeight?.ToString(), IsRtl,
-                        ContentStyle, Origin));
+                        ContentStyle, Origin, ZIndex?.ToString(), IsDefaultAttach));
         }
 
         protected override async Task ActivateAsync()
@@ -274,7 +274,6 @@ namespace Masa.Blazor
             {
                 await OutsideClickJSModule.InitializeAsync(this, DependentSelectors.ToArray());
             }
-         
         }
 
         [JSInvokable("ScrollStrategy_OnScroll")]

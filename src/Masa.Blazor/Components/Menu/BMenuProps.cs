@@ -16,7 +16,7 @@ public class BMenuProps
 
     public StringNumber? MaxHeight { get; set; }
 
-    public StringNumber? MaxWidth { get; set; }
+    public StringNumber? MaxWidth { get; set; } = "auto";
 
     public StringNumber? MinWidth { get; set; }
 

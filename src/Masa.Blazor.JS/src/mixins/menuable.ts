@@ -1,6 +1,12 @@
 import { convertToUnit, getActivator } from "utils/helper";
 
+import { getActiveZIndex } from "./stackable";
+
 type Options = {
+  top: boolean;
+  right: boolean;
+  bottom: boolean;
+  left: boolean;
   absolute: boolean;
   auto: boolean;
   offsetY: boolean;
@@ -15,9 +21,12 @@ type Options = {
   maxHeight: number | string;
   contentStyle: string;
   origin: string;
+  zIndex: string | number;
+  isDefaultAttach: boolean;
 };
 
 export function useMenuable(
+  rootElement: HTMLElement,
   activatorSelector: string,
   contentElement: HTMLElement,
   hasActivator: boolean,
@@ -29,7 +38,6 @@ export function useMenuable(
   console.log("options", options);
 
   let hasWindow,
-    attach,
     activatorFixed,
     pageYOffset,
     pageWidth,
@@ -95,7 +103,7 @@ export function useMenuable(
 
       dimensions2.activator = measure(activator);
       dimensions2.activator.offsetLeft = activator.offsetLeft;
-      if (attach !== false) {
+      if (!options.isDefaultAttach) {
         // account for css padding causing things to not line up
         // this is mostly for v-autocomplete, hopefully it won't break anything
         dimensions2.activator.offsetTop = activator.offsetTop;
@@ -129,6 +137,7 @@ export function useMenuable(
   }
 
   function setStyles() {
+    console.log('setStyles 1', contentElement.style.display)
     contentElement.style.cssText = options.contentStyle;
 
     //TODO: 要判断已存在就不更新吗？
@@ -136,11 +145,13 @@ export function useMenuable(
     contentElement.style.minWidth = calculatedMinWidth();
     contentElement.style.maxWidth = calculatedMaxWidth();
     contentElement.style.top = calculatedTop();
-    console.log("top", calculatedTop());
     contentElement.style.left = calculatedLeft();
-    console.log("Left", calculatedLeft());
     contentElement.style.transformOrigin = options.origin;
-
+    contentElement.style.zIndex = (
+      options.zIndex ||
+      getActiveZIndex(rootElement, contentElement, true, undefined, 6)
+    ).toString();
+    console.log('setStyles 2', contentElement.style.display)
   }
 
   function calculatedTop() {
@@ -177,14 +188,14 @@ export function useMenuable(
 
     const minWidth = Math.min(
       dimensions.activator.width +
-        Number(options.nudgeWidth) +
-        (options.auto ? 16 : 0),
+      Number(options.nudgeWidth) +
+      (options.auto ? 16 : 0),
       Math.max(pageWidth - 24, 0)
     );
 
     const calculatedMaxWidth2 = isNaN(parseInt(calculatedMaxWidth()))
-      ? minWidth
-      : parseInt(calculatedMaxWidth());
+    ? minWidth
+    : parseInt(calculatedMaxWidth());
 
     return convertToUnit(Math.min(calculatedMaxWidth2, minWidth)) || "0";
   }
@@ -196,12 +207,12 @@ export function useMenuable(
   function calcLeft(menuWidth: number) {
     const left = computedLeft();
     return convertToUnit(
-      attach !== false ? left : calcXOverflow(left, menuWidth)
+      !options.isDefaultAttach ? left : calcXOverflow(left, menuWidth)
     );
   }
   function calcTop() {
     const top = computedTop();
-    return convertToUnit(attach !== false ? top : calcYOverflow(top));
+    return convertToUnit(!options.isDefaultAttach ? top : calcYOverflow(top));
   }
 
   function calcTopAuto() {
@@ -248,7 +259,7 @@ export function useMenuable(
   function computedLeft() {
     const a = dimensions.activator;
     const c = dimensions.content;
-    const activatorLeft = (attach !== false ? a.offsetLeft : a.left) || 0;
+    const activatorLeft = (!options.isDefaultAttach ? a.offsetLeft : a.left) || 0;
     const minWidth = Math.max(a.width, c.width);
     let left = 0;
     left += activatorLeft;
@@ -271,10 +282,10 @@ export function useMenuable(
     const c = dimensions.content;
     let top = 0;
 
-    if (top) top += a.height - c.height;
-    if (attach !== false) top += a.offsetTop;
+    if (options.top) top += a.height - c.height;
+    if (!options.isDefaultAttach) top += a.offsetTop;
     else top += a.top + pageYOffset;
-    if (options.offsetY) top += top ? -a.height : a.height;
+    if (options.offsetY) top += options.top ? -a.height : a.height;
     if (options.nudgeTop) top -= parseInt(options.nudgeTop);
     if (options.nudgeBottom) top += parseInt(options.nudgeBottom);
 
@@ -339,7 +350,7 @@ export function useMenuable(
   }
 
   function checkActivatorFixed() {
-    if (attach !== false) {
+    if (!options.isDefaultAttach) {
       activatorFixed = false;
       return;
     }
@@ -386,7 +397,7 @@ export function useMenuable(
     const rect = getRoundedBoundedClientRect(el);
 
     // Account for activator margin
-    if (attach !== false) {
+    if (!options.isDefaultAttach) {
       const style = window.getComputedStyle(el);
 
       rect.left = parseInt(style.marginLeft!);
@@ -417,9 +428,13 @@ export function useMenuable(
         return;
       }
 
+      console.log("display to inline-block", el.style.display);
+
       el.style.display = "inline-block";
       cb();
+      console.log("display to none", el.style.display);
       el.style.display = "none";
+      console.log("display to none 2", el.style.display);
     });
   }
 }

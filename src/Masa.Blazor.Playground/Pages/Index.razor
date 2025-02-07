@@ -2,22 +2,53 @@
 
 <h1>Test your code here!</h1>
 
-<MMenu @bind-Value="v" Bottom>
-    <ActivatorContent>
-        <MButton @attributes="@context.Attrs">BUtton</MButton>
-    </ActivatorContent>
-    <ChildContent>
-        <MList>
-            <MListItem Href="/">Home</MListItem>
-            <MListItem Href="/test">Test</MListItem>
-            <MListItem Href="/counter">Counter</MListItem>
-        </MList>
-    </ChildContent>
-</MMenu>
+@* <MMenu @bind-Value="v"  *@
+@*        Bottom  *@
+@*        OffsetY> *@
+@*     <ActivatorContent> *@
+@*         <MButton @attributes="@context.Attrs">BUtton</MButton> *@
+@*     </ActivatorContent> *@
+@*     <ChildContent> *@
+@*         <MList> *@
+@*             <MListItem >Home</MListItem> *@
+@*             <MListItem >Test</MListItem> *@
+@*             <MListItem >Counter</MListItem> *@
+@*         </MList> *@
+@*     </ChildContent> *@
+@* </MMenu> *@
+
+<MSelect Items="_items"
+         @bind-Value="@value2"
+         ItemText="u => u.Label"
+         ItemValue="u => u.Value"
+         Filled
+         Label="Filled style"
+         Dense></MSelect>
+
 <div style="height: 150vh"></div>
 
 @code {
 
     private bool v = true;
 
+    private string value2;
+    
+    List<Item> _items = new()
+    {
+        new Item("Foo", "1"),
+        new Item("Bar", "2"),
+        new Item("Fizz", "3"),
+        new Item("Buzz", "4"),
+    };
+    
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
 }

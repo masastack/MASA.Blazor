@@ -15,6 +15,14 @@ try {
 catch (e) {
     console.warn(e);
 } /* eslint-disable-line no-console */
+function getZIndex(el) {
+    if (!el || el.nodeType !== Node.ELEMENT_NODE)
+        return 0;
+    const index = +window.getComputedStyle(el).getPropertyValue('z-index');
+    if (!index)
+        return getZIndex(el.parentNode);
+    return index;
+}
 // KeyboardEvent.keyCode aliases
 Object.freeze({
     enter: 13,
@@ -127,5 +135,5 @@ function getActivator(selector) {
     }
 }
 
-export { getElement as a, getBlazorId as b, convertToUnit as c, getActivator as d, getEventTarget as g };
+export { getElement as a, getBlazorId as b, convertToUnit as c, getActivator as d, getZIndex as e, getEventTarget as g };
 //# sourceMappingURL=helper.js.map

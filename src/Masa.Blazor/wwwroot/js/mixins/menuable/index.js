@@ -1,6 +1,40 @@
-import { d as getActivator, c as convertToUnit } from '../../chunks/helper.js';
+import { e as getZIndex, d as getActivator, c as convertToUnit } from '../../chunks/helper.js';
 
-function useMenuable(activatorSelector, contentElement, hasActivator, options) {
+function getActiveZIndex(el, content, isActive, stackExclude = [], stackMinZIndex = 0) {
+    if (typeof window === "undefined")
+        return 0;
+    // Return current zindex if not active
+    const index = !isActive
+        ? getZIndex(content)
+        : getMaxZIndex(el, stackExclude || [content], stackMinZIndex) + 2;
+    if (index == null)
+        return index;
+    // Return max current z-index (excluding self) + 2
+    // (2 to leave room for an overlay below, if needed)
+    return parseInt(index);
+}
+function getMaxZIndex(el, exclude = [], stackMinZIndex = 0) {
+    const base = el;
+    // Start with lowest allowed z-index or z-index of
+    // base component's element, whichever is greater
+    const zis = [stackMinZIndex, getZIndex(base)];
+    // Convert the NodeList to an array to
+    // prevent an Edge bug with Symbol.iterator
+    // https://github.com/vuetifyjs/vuetify/issues/2146
+    const activeElements = [
+        ...document.getElementsByClassName("m-menu__content--active"),
+        ...document.getElementsByClassName("m-dialog__content--active"),
+    ];
+    // Get z-index for all active dialogs
+    for (let index = 0; index < activeElements.length; index++) {
+        if (!exclude.includes(activeElements[index])) {
+            zis.push(getZIndex(activeElements[index]));
+        }
+    }
+    return Math.max(...zis);
+}
+
+function useMenuable(rootElement, activatorSelector, contentElement, hasActivator, options) {
     console.log("activatorSelector", activatorSelector);
     console.log("contentElement", contentElement);
     console.log("hasActivator", hasActivator);
@@ -30,11 +64,6 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
             scrollHeight: 0,
         },
     };
-    updateDimensions();
-    // requestAnimationFrame(updateDimensions);
-    // setTimeout(() => {
-    //   updateDimensions();
-    // }, 300);
     return {
         updateDimensions,
     };
@@ -57,10 +86,13 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
                 return;
             dimensions2.activator = measure(activator);
             dimensions2.activator.offsetLeft = activator.offsetLeft;
-            {
+            if (!options.isDefaultAttach) {
                 // account for css padding causing things to not line up
                 // this is mostly for v-autocomplete, hopefully it won't break anything
                 dimensions2.activator.offsetTop = activator.offsetTop;
+            }
+            else {
+                dimensions2.activator.offsetTop = 0;
             }
         }
         // Display and hide to get dimensions
@@ -81,16 +113,18 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
         });
     }
     function setStyles() {
+        console.log('setStyles 1', contentElement.style.display);
         contentElement.style.cssText = options.contentStyle;
         //TODO: 要判断已存在就不更新吗？
         contentElement.style.maxHeight = calculatedMaxHeight();
         contentElement.style.minWidth = calculatedMinWidth();
         contentElement.style.maxWidth = calculatedMaxWidth();
         contentElement.style.top = calculatedTop();
-        console.log("top", calculatedTop());
         contentElement.style.left = calculatedLeft();
-        console.log("Left", calculatedLeft());
         contentElement.style.transformOrigin = options.origin;
+        contentElement.style.zIndex = (options.zIndex ||
+            getActiveZIndex(rootElement, contentElement, true, undefined, 6)).toString();
+        console.log('setStyles 2', contentElement.style.display);
     }
     function calculatedTop() {
         return !options.auto
@@ -100,7 +134,7 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
     function calculatedLeft() {
         const menuWidth = Math.max(dimensions.content.width, parseFloat(calculatedMinWidth()));
         if (!options.auto)
-            return calcLeft() || "0";
+            return calcLeft(menuWidth) || "0";
         return convertToUnit(calcXOverflow(calcLeftAuto(), menuWidth)) || "0";
     }
     function calcLeftAuto() {
@@ -127,11 +161,11 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
     }
     function calcLeft(menuWidth) {
         const left = computedLeft();
-        return convertToUnit(left );
+        return convertToUnit(!options.isDefaultAttach ? left : calcXOverflow(left, menuWidth));
     }
     function calcTop() {
         const top = computedTop();
-        return convertToUnit(top );
+        return convertToUnit(!options.isDefaultAttach ? top : calcYOverflow(top));
     }
     function calcTopAuto() {
         const activeTile = contentElement.querySelector(".m-list-item--active");
@@ -156,7 +190,7 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
     function computedLeft() {
         const a = dimensions.activator;
         const c = dimensions.content;
-        const activatorLeft = (a.offsetLeft ) || 0;
+        const activatorLeft = (!options.isDefaultAttach ? a.offsetLeft : a.left) || 0;
         const minWidth = Math.max(a.width, c.width);
         let left = 0;
         left += activatorLeft;
@@ -168,11 +202,14 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
         const a = dimensions.activator;
         const c = dimensions.content;
         let top = 0;
-        if (top)
+        if (options.top)
             top += a.height - c.height;
-        top += a.offsetTop;
+        if (!options.isDefaultAttach)
+            top += a.offsetTop;
+        else
+            top += a.top + pageYOffset;
         if (options.offsetY)
-            top += top ? -a.height : a.height;
+            top += options.top ? -a.height : a.height;
         if (options.nudgeTop)
             top -= parseInt(options.nudgeTop);
         if (options.nudgeBottom)
@@ -229,10 +266,19 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
         return pageYOffset - relativeYOffset;
     }
     function checkActivatorFixed() {
-        {
+        if (!options.isDefaultAttach) {
             activatorFixed = false;
             return;
         }
+        let el = getActivator(activatorSelector);
+        while (el) {
+            if (window.getComputedStyle(el).position === "fixed") {
+                activatorFixed = true;
+                return;
+            }
+            el = el.offsetParent;
+        }
+        activatorFixed = false;
     }
     function checkForPageYOffset() {
         if (hasWindow) {
@@ -262,7 +308,7 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
             return null;
         const rect = getRoundedBoundedClientRect(el);
         // Account for activator margin
-        {
+        if (!options.isDefaultAttach) {
             const style = window.getComputedStyle(el);
             rect.left = parseInt(style.marginLeft);
             rect.top = parseInt(style.marginTop);
@@ -287,9 +333,12 @@ function useMenuable(activatorSelector, contentElement, hasActivator, options) {
                 cb();
                 return;
             }
+            console.log("display to inline-block", el.style.display);
             el.style.display = "inline-block";
             cb();
+            console.log("display to none", el.style.display);
             el.style.display = "none";
+            console.log("display to none 2", el.style.display);
         });
     }
 }

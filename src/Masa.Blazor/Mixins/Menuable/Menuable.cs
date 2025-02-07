@@ -13,6 +13,7 @@ internal class Menuable
     }
 
     internal async ValueTask<MenuableJSObjectResult> UseMenuableAsync(
+        ElementReference rootRef,
         string activatorSelector,
         ElementReference contentRef,
         bool hasActivator,
@@ -20,7 +21,7 @@ internal class Menuable
     {
         var moduleTask = await _moduleTask.Value;
         var jsObjectReference =
-            await moduleTask.InvokeAsync<IJSObjectReference>("useMenuable", activatorSelector, contentRef,
+            await moduleTask.InvokeAsync<IJSObjectReference>("useMenuable", rootRef, activatorSelector, contentRef,
                 hasActivator,
                 options);
         return CreateMenuableJSObjectResult(jsObjectReference);

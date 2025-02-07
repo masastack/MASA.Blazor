@@ -399,7 +399,7 @@ public abstract class MMenuable : MBootable
 
         await base.WhenIsActiveUpdating(value);
     }
-
+    
     private async Task CallActivateAsync()
     {
         await ActivateAsync();

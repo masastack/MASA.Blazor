@@ -82,6 +82,8 @@ function useTouch(elOrString, dotNetObject, state) {
         }
     }
     function onTouchmove(e) {
+        if (state.touchless)
+            return;
         const touchX = e.changedTouches[0].clientX;
         const touchY = e.changedTouches[0].clientY;
         if (maybeDragging) {
@@ -117,7 +119,7 @@ function useTouch(elOrString, dotNetObject, state) {
     }
     function onTouchend(e) {
         maybeDragging = false;
-        if (!isDragging)
+        if (state.touchless || !isDragging)
             return;
         addMovement(e);
         isDragging = false;

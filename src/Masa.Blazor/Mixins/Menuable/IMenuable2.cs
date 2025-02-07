@@ -1,6 +1,10 @@
 ﻿namespace Masa.Blazor.Mixins.Menuable;
 
 public record IMenuable2(
+    bool Top,
+    bool Right,
+    bool Bottom,
+    bool Left,
     bool Absolute,
     bool Auto,
     bool OffsetY,
@@ -14,5 +18,7 @@ public record IMenuable2(
     string? MaxHeight,
     bool IsRtl,
     string? ContentStyle,
-    string? Origin
+    string? Origin,
+    string? ZIndex,
+    bool IsDefaultAttach
 );
