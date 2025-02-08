@@ -1,5 +1,4 @@
-﻿
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MInfiniteScroll : MasaComponentBase
 {
@@ -23,7 +22,7 @@ public partial class MInfiniteScroll : MasaComponentBase
         set => SetValue(value);
     }
 
-    [Parameter] [MasaApiParameter(250)] public StringNumber Threshold { get; set; } = 250;
+    [Parameter] [MasaApiParameter(100)] public StringNumber Threshold { get; set; } = 100;
 
     [Parameter]
     public RenderFragment<(InfiniteScrollLoadStatus Status, EventCallback OnLoad)>? ChildContent { get; set; }
@@ -103,8 +102,8 @@ public partial class MInfiniteScroll : MasaComponentBase
 
     private async Task AddScrollListenerAndLoadAsync()
     {
-        AddScrollListener();
-        await ScrollCallback();
+        await AddScrollListener();
+        await OnScrollInternal();
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -143,19 +142,21 @@ public partial class MInfiniteScroll : MasaComponentBase
         StateHasChanged();
     }
 
-    private void AddScrollListener()
+    private IJSObjectReference? _jsObjectReference;
+
+    private async Task AddScrollListener()
     {
         if (!_firstRendered || _isAttached || string.IsNullOrWhiteSpace(Parent)) return;
 
         _isAttached = true;
-        _ = Js.AddHtmlElementEventListener(Parent, "scroll", ScrollCallback, false,
-            new EventListenerExtras(0, 0)
-            {
-                Key = Ref.Id
-            });
+
+        _jsObjectReference =
+            await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.RegisterInfiniteScrollJSInterop, Ref, Parent,
+                Threshold.ToDouble(), DotNetObjectReference.Create(this));
     }
 
-    private async Task ScrollCallback()
+    [JSInvokable]
+    public async Task OnScrollInternal()
     {
         if (Parent is null || Manual || !OnLoad.HasDelegate || _loadStatus == InfiniteScrollLoadStatus.Empty)
         {
@@ -168,15 +169,7 @@ public partial class MInfiniteScroll : MasaComponentBase
             return;
         }
 
-        // OPTIMIZE: Combine scroll event and the following js interop.
-        var exceeded = await Js.InvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
-            Parent,
-            Threshold.ToDouble());
-
-        if (!exceeded)
-        {
-            return;
-        }
+        Console.Out.WriteLine("[MInfiniteScroll] OnScrollInternal");
 
         await DoLoadMore();
 
@@ -211,6 +204,10 @@ public partial class MInfiniteScroll : MasaComponentBase
             return;
         }
 
-        await Js.RemoveHtmlElementEventListener(Parent, "scroll", key: Ref.Id);
+        if (_jsObjectReference is not null)
+        {
+            await _jsObjectReference.InvokeVoidAsync("dispose");
+            await _jsObjectReference.TryDisposeAsync();
+        }
     }
 }

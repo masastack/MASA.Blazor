@@ -233,3 +233,7 @@ export function getActivator(selector: string): HTMLElement | null {
     return document.querySelector(selector);
   }
 }
+
+export function isWindow(element: any | Window): element is Window {
+  return element === window
+}
