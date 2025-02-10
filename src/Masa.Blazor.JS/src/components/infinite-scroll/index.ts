@@ -19,8 +19,6 @@ export function registerInfiniteScrollJSInterop(
     return;
   }
 
-  console.log('enable', enable)
-
   let containerEl: Element | Window;
   if (container === "window") {
     containerEl = window;
@@ -38,9 +36,9 @@ export function registerInfiniteScrollJSInterop(
   }
 
   containerEl.addEventListener("scroll", onScroll);
+  onScroll();
 
-  async function onScroll(e: Event) {
-    console.log('enable 2', enable)
+  async function onScroll() {
     if (enable === false) return;
 
     const rect = el.getBoundingClientRect();
@@ -48,13 +46,13 @@ export function registerInfiniteScrollJSInterop(
     const current = isWindow(containerEl)
       ? window.innerHeight
       : containerEl.getBoundingClientRect().bottom;
-
     if (current >= elementTop - threshold) {
-      await dotnetHelper.invokeMethodAsync("OnScrollInternal");
+      await dotnetHelper.invokeMethodAsync("OnScrollInternal", false);
     }
   }
 
   return {
+    check: onScroll,
     updateThreshold: (t: number) => (threshold = t),
     updateEnable: (s: boolean) => (enable = s),
     dispose: () => {
