@@ -15,13 +15,9 @@ public partial class MInfiniteScroll : MasaComponentBase
 
     [Parameter] public string? Color { get; set; }
 
-    [Parameter]
-    public bool Manual
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    [Parameter] public bool Manual { get; set; }
 
+    // TODO: [v2] no need to use OneOf here, just use int
     [Parameter] [MasaApiParameter(100)] public StringNumber Threshold { get; set; } = 100;
 
     [Parameter]
@@ -47,15 +43,22 @@ public partial class MInfiniteScroll : MasaComponentBase
     private bool _dirtyLoad;
     private bool _firstRendered;
     private InfiniteScrollLoadStatus _loadStatus;
+    private bool _enable = true;
+
+    private bool _prevManual;
     private string? _prevParent;
+    private StringNumber? _prevThreshold;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        _prevThreshold = Threshold;
+
         if (Manual)
         {
             _loadStatus = InfiniteScrollLoadStatus.Ok;
+            _enable = false;
         }
     }
 
@@ -78,6 +81,21 @@ public partial class MInfiniteScroll : MasaComponentBase
             _prevParent = Parent;
             if (!_firstRendered || !Manual) return;
             await AddScrollListenerAndLoadAsync();
+        }
+
+        if (_prevThreshold != Threshold)
+        {
+            _prevThreshold = Threshold;
+            if (!_firstRendered || !Manual) return;
+            SyncThresholdToJS();
+        }
+
+        if (_prevManual != Manual)
+        {
+            _prevManual = Manual;
+            _enable = !Manual;
+            if (!_firstRendered) return;
+            SyncEnableToJS();
         }
     }
 
@@ -111,26 +129,16 @@ public partial class MInfiniteScroll : MasaComponentBase
         yield return "m-infinite-scroll";
     }
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
-    {
-        base.RegisterWatchers(watcher);
-
-        watcher.Watch<bool>(nameof(Manual), ManualChangeCallback);
-    }
-
-    private void ManualChangeCallback(bool val)
-    {
-        if (!val)
-        {
-            AddScrollListener();
-        }
-    }
-
     /// <summary>
     /// Reset and invoke <see cref="OnLoad"/> again.
     /// </summary>
     [MasaApiPublicMethod]
-    public async Task ResetAsync() => await DoLoadMore();
+    public async Task ResetAsync()
+    {
+        _enable = !Manual;
+        SyncEnableToJS();
+        await DoLoadMore();
+    }
 
     /// <summary>
     /// Reset internal status to <see cref="InfiniteScrollLoadStatus.Ok"/>
@@ -139,6 +147,8 @@ public partial class MInfiniteScroll : MasaComponentBase
     public void ResetStatus()
     {
         _loadStatus = InfiniteScrollLoadStatus.Ok;
+        _enable = !Manual;
+        SyncEnableToJS();
         StateHasChanged();
     }
 
@@ -151,8 +161,12 @@ public partial class MInfiniteScroll : MasaComponentBase
         _isAttached = true;
 
         _jsObjectReference =
-            await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.RegisterInfiniteScrollJSInterop, Ref, Parent,
-                Threshold.ToDouble(), DotNetObjectReference.Create(this));
+            await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.RegisterInfiniteScrollJSInterop,
+                Ref,
+                Parent,
+                Threshold.ToDouble(),
+                _enable,
+                DotNetObjectReference.Create(this));
     }
 
     [JSInvokable]
@@ -169,11 +183,8 @@ public partial class MInfiniteScroll : MasaComponentBase
             return;
         }
 
-        Console.Out.WriteLine("[MInfiniteScroll] OnScrollInternal");
-
         await DoLoadMore();
-
-        _ = InvokeAsync(StateHasChanged);
+        StateHasChanged();
     }
 
     private async Task DoLoadMore()
@@ -187,6 +198,12 @@ public partial class MInfiniteScroll : MasaComponentBase
         {
             await OnLoad.InvokeAsync(eventArgs);
             _loadStatus = eventArgs.Status;
+
+            if (_loadStatus == InfiniteScrollLoadStatus.Empty)
+            {
+                _enable = false;
+                SyncEnableToJS();
+            }
         }
         catch (Exception e)
         {
@@ -195,6 +212,16 @@ public partial class MInfiniteScroll : MasaComponentBase
             Logger.LogWarning(e, "Failed to load more");
             StateHasChanged();
         }
+    }
+
+    private void SyncEnableToJS()
+    {
+        _ = _jsObjectReference.TryInvokeVoidAsync("updateEnable", _enable);
+    }
+
+    private void SyncThresholdToJS()
+    {
+        _ = _jsObjectReference.TryInvokeVoidAsync("updateThreshold", Threshold.ToDouble());
     }
 
     protected override async ValueTask DisposeAsyncCore()
