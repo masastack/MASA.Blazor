@@ -47,7 +47,7 @@
     {
         <span>@LoadingText</span>
         <MProgressCircular Indeterminate
-                           Size="24"
+                           Size="16"
                            Color="@Color"
                            Class="m-infinite-scroll__loader"/>
     };
@@ -55,17 +55,19 @@
     RenderFragment DefaultError => __builder =>
     {
         <span>@ErrorText</span>
-        <MButton OnClick="@DoLoadMore" Color="@Color"
+        <MButton OnClick="@DoLoadMore"
+                 Color="@Color"
+                 Small
                  Class="m-infinite-scroll__retry"
-                 Icon
+                 IconName="$retry"
                  Text>
-            <MIcon>$retry</MIcon>
         </MButton>
     };
 
     RenderFragment DefaultLoadMore => __builder =>
     {
         <MButton OnClick="@DoLoadMore"
+                 Small
                  Color="@Color"
                  Class="m-infinite-scroll__load-more"
                  Outlined>

@@ -124,7 +124,7 @@ public static class JsInteropConstants
 
     public static string GetElementTranslateY => $"{JsInteropFuncNamePrefix}getElementTranslateY";
 
-    internal static string CheckIfThresholdIsExceededWhenScrolling => $"{JsInteropFuncNamePrefix}checkIfThresholdIsExceededWhenScrolling";
+    internal static string RegisterInfiniteScrollJSInterop => $"{JsInteropFuncNamePrefix}registerInfiniteScrollJSInterop";
 
     public static string SetProperty => $"{JsInteropFuncNamePrefix}setProperty";
 

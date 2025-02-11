@@ -2,7 +2,7 @@
        Height="250"
        Class="overflow-auto"
        Style="margin: 0 auto"
-       Id="infinite-scroll-manual">
+       Id="infinite-scroll-error">
     <MList>
         @foreach (var item in _items)
         {
@@ -14,34 +14,49 @@
             <MDivider/>
         }
     </MList>
-    <MInfiniteScroll Manual
-                     OnLoad="@OnLoad"
-                     Parent="#infinite-scroll-manual">
+    <MInfiniteScroll OnLoad="@OnLoad"
+                     Parent="#infinite-scroll-error">
     </MInfiniteScroll>
 </MCard>
 
 @code {
     private static readonly List<string> MockItems = Enumerable.Range(1, 30).Select(n => "Item " + n).ToList();
-
-    private List<string> _items = [];
-    private int _page = 1;
     private readonly int pageSize = 8;
+
+    private int _page = 1;
+    private List<string> _items = [];
+
+    private bool _mockError = true;
 
     private async Task OnLoad(InfiniteScrollLoadEventArgs args)
     {
-        var append = await MockRequest();
+        try
+        {
+            var append = await MockRequest();
 
-        _page++;
+            _page++;
 
-        args.Status = append.Count < pageSize ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
+            args.Status = append.Count < pageSize ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
 
-        _items.AddRange(append);
+            _items.AddRange(append);
+        }
+        catch
+        {
+            args.Status = InfiniteScrollLoadStatus.Error;
+        }
     }
 
     private async Task<List<string>> MockRequest()
     {
         await Task.Delay(1000);
 
+        if (_page == 2 && _mockError)
+        {
+            _mockError = false;
+            throw new Exception("Failed to load");
+        }
+
         return MockItems.Skip((_page - 1) * pageSize).Take(pageSize).ToList();
     }
+
 }

@@ -8,7 +8,7 @@
                         <MListItemTitle>@context</MListItemTitle>
                     </MListItemContent>
                 </MListItem>
-                <MDivider />
+                <MDivider/>
             </div>
         </ItemContent>
         <FooterContent>
@@ -21,39 +21,27 @@
 
 
 @code {
+    private static readonly List<string> MockItems = Enumerable.Range(1, 100).Select(n => "Item " + n).ToList();
+    private readonly int pageSize = 10;
 
-    private MVirtualScroll<string>? _vs;
-    private int _count;
-    private bool _mockError;
-    private List<string> _items = new();
+    private int _page = 1;
+    private List<string> _items = [];
 
     private async Task OnLoad(InfiniteScrollLoadEventArgs args)
     {
         var append = await MockRequest();
 
-        args.Status = append.Count == 0 ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
+        _page++;
+
+        args.Status = append.Count < pageSize ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
 
         _items.AddRange(append);
     }
 
     private async Task<List<string>> MockRequest()
     {
-        if (_count >= 3)
-        {
-            return new List<string>();
-        }
+        await Task.Delay(1000);
 
-        await Task.Delay(2000);
-
-        if (_count == 1 && !_mockError)
-        {
-            _mockError = true;
-            throw new TimeoutException("Mock error");
-        }
-
-        _count++;
-
-        return Enumerable.Range(_items.Count, 10).Select(n => n.ToString()).ToList();
+        return MockItems.Skip((_page - 1) * pageSize).Take(pageSize).ToList();
     }
-
 }

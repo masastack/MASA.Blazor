@@ -28,11 +28,12 @@ status of the component.
 
 ### Props
 
-#### Color
+#### Error
 
-Using `Color` to set the color of the state.
+The `OnLoad` event will automatically handle exceptions and set the status to `Error`.
+If you manually handle the exception, you can set the `Error` property to `true` to display the error content.
 
-<masa-example file="Examples.components.infinite_scroll.Color"></masa-example>
+<masa-example file="Examples.components.infinite_scroll.Error"></masa-example>
 
 #### Manual
 

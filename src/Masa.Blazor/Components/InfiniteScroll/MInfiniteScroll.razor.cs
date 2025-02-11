@@ -1,5 +1,4 @@
-﻿
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MInfiniteScroll : MasaComponentBase
 {
@@ -9,6 +8,7 @@ public partial class MInfiniteScroll : MasaComponentBase
 
     /// <summary>
     /// The parent element that has overflow style.
+    /// Accepts 'window' or a CSS selector.
     /// </summary>
     [Parameter, EditorRequired]
     [MasaApiParameter("window")]
@@ -16,14 +16,10 @@ public partial class MInfiniteScroll : MasaComponentBase
 
     [Parameter] public string? Color { get; set; }
 
-    [Parameter]
-    public bool Manual
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    [Parameter] public bool Manual { get; set; }
 
-    [Parameter] [MasaApiParameter(250)] public StringNumber Threshold { get; set; } = 250;
+    // TODO: [v2] no need to use OneOf here, just use int
+    [Parameter] [MasaApiParameter(100)] public StringNumber Threshold { get; set; } = 100;
 
     [Parameter]
     public RenderFragment<(InfiniteScrollLoadStatus Status, EventCallback OnLoad)>? ChildContent { get; set; }
@@ -48,15 +44,27 @@ public partial class MInfiniteScroll : MasaComponentBase
     private bool _dirtyLoad;
     private bool _firstRendered;
     private InfiniteScrollLoadStatus _loadStatus;
-    private string? _prevParent;
+
+    /// <summary>
+    /// Disable scroll event if <see cref="Manual"/> is true
+    /// or load status is <see cref="InfiniteScrollLoadStatus.Empty"/>.
+    /// </summary>
+    private bool _enable = true;
+
+    private bool _prevManual;
+    private StringNumber? _prevThreshold;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        _prevThreshold = Threshold;
+        _prevManual = Manual;
+
         if (Manual)
         {
             _loadStatus = InfiniteScrollLoadStatus.Ok;
+            _enable = false;
         }
     }
 
@@ -74,11 +82,19 @@ public partial class MInfiniteScroll : MasaComponentBase
     {
         await base.OnParametersSetAsync();
 
-        if (_prevParent != Parent)
+        if (_prevThreshold != Threshold)
         {
-            _prevParent = Parent;
-            if (!_firstRendered || !Manual) return;
-            await AddScrollListenerAndLoadAsync();
+            _prevThreshold = Threshold;
+            if (!_firstRendered) return;
+            SyncThresholdToJS();
+        }
+
+        if (_prevManual != Manual)
+        {
+            _prevManual = Manual;
+            _enable = !Manual;
+            if (!_firstRendered) return;
+            SyncEnableToJS();
         }
     }
 
@@ -86,25 +102,17 @@ public partial class MInfiniteScroll : MasaComponentBase
     {
         if (firstRender)
         {
+            _firstRendered = true;
+            await AddScrollListener();
+
             if (Manual)
             {
                 await DoLoadMore();
                 StateHasChanged();
             }
-            else
-            {
-                _firstRendered = true;
-                await AddScrollListenerAndLoadAsync();
-            }
         }
 
         await base.OnAfterRenderAsync(firstRender);
-    }
-
-    private async Task AddScrollListenerAndLoadAsync()
-    {
-        AddScrollListener();
-        await ScrollCallback();
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -112,26 +120,16 @@ public partial class MInfiniteScroll : MasaComponentBase
         yield return "m-infinite-scroll";
     }
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
-    {
-        base.RegisterWatchers(watcher);
-
-        watcher.Watch<bool>(nameof(Manual), ManualChangeCallback);
-    }
-
-    private void ManualChangeCallback(bool val)
-    {
-        if (!val)
-        {
-            AddScrollListener();
-        }
-    }
-
     /// <summary>
     /// Reset and invoke <see cref="OnLoad"/> again.
     /// </summary>
     [MasaApiPublicMethod]
-    public async Task ResetAsync() => await DoLoadMore();
+    public async Task ResetAsync()
+    {
+        _enable = !Manual;
+        SyncEnableToJS();
+        await DoLoadMore();
+    }
 
     /// <summary>
     /// Reset internal status to <see cref="InfiniteScrollLoadStatus.Ok"/>
@@ -140,22 +138,30 @@ public partial class MInfiniteScroll : MasaComponentBase
     public void ResetStatus()
     {
         _loadStatus = InfiniteScrollLoadStatus.Ok;
+        _enable = !Manual;
+        SyncEnableToJS();
         StateHasChanged();
     }
 
-    private void AddScrollListener()
+    private IJSObjectReference? _jsObjectReference;
+
+    private async Task AddScrollListener()
     {
         if (!_firstRendered || _isAttached || string.IsNullOrWhiteSpace(Parent)) return;
 
         _isAttached = true;
-        _ = Js.AddHtmlElementEventListener(Parent, "scroll", ScrollCallback, false,
-            new EventListenerExtras(0, 0)
-            {
-                Key = Ref.Id
-            });
+
+        _jsObjectReference =
+            await Js.InvokeAsync<IJSObjectReference>(JsInteropConstants.RegisterInfiniteScrollJSInterop,
+                Ref,
+                Parent,
+                Threshold.ToDouble(),
+                _enable,
+                DotNetObjectReference.Create(this));
     }
 
-    private async Task ScrollCallback()
+    [JSInvokable]
+    public async Task OnScrollInternal(bool abc)
     {
         if (Parent is null || Manual || !OnLoad.HasDelegate || _loadStatus == InfiniteScrollLoadStatus.Empty)
         {
@@ -168,19 +174,12 @@ public partial class MInfiniteScroll : MasaComponentBase
             return;
         }
 
-        // OPTIMIZE: Combine scroll event and the following js interop.
-        var exceeded = await Js.InvokeAsync<bool>(JsInteropConstants.CheckIfThresholdIsExceededWhenScrolling, Ref,
-            Parent,
-            Threshold.ToDouble());
-
-        if (!exceeded)
-        {
-            return;
-        }
-
         await DoLoadMore();
 
-        _ = InvokeAsync(StateHasChanged);
+        // ensure the data has been rendered on the page before checking the scroll position
+        NextTick(CheckIfNeedLoadMore);
+
+        StateHasChanged();
     }
 
     private async Task DoLoadMore()
@@ -194,6 +193,12 @@ public partial class MInfiniteScroll : MasaComponentBase
         {
             await OnLoad.InvokeAsync(eventArgs);
             _loadStatus = eventArgs.Status;
+
+            if (_loadStatus == InfiniteScrollLoadStatus.Empty)
+            {
+                _enable = false;
+                SyncEnableToJS();
+            }
         }
         catch (Exception e)
         {
@@ -204,6 +209,17 @@ public partial class MInfiniteScroll : MasaComponentBase
         }
     }
 
+    private void SyncEnableToJS()
+        => _ = _jsObjectReference.TryInvokeVoidAsync("updateEnable", _enable);
+
+    private void SyncThresholdToJS()
+        => _ = _jsObjectReference.TryInvokeVoidAsync("updateThreshold", Threshold.ToDouble());
+
+    /// <summary>
+    /// Load the next page if there is still space to load.
+    /// </summary>
+    private void CheckIfNeedLoadMore() => _ = _jsObjectReference.TryInvokeVoidAsync("check");
+
     protected override async ValueTask DisposeAsyncCore()
     {
         if (Parent is null)
@@ -211,6 +227,10 @@ public partial class MInfiniteScroll : MasaComponentBase
             return;
         }
 
-        await Js.RemoveHtmlElementEventListener(Parent, "scroll", key: Ref.Id);
+        if (_jsObjectReference is not null)
+        {
+            await _jsObjectReference.InvokeVoidAsync("dispose");
+            await _jsObjectReference.TryDisposeAsync();
+        }
     }
 }

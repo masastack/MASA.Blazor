@@ -25,6 +25,7 @@ export default defineConfig({
     // the following files are introduced in the main.ts
     // "components/slider/index": "./src/components/slider/index.ts",
     // "components/textarea/index": "./src/components/textarea/index.ts",
+    // "components/infinite-scroll/index": "./src/components/infinite-scroll/index.ts",
   },
   output: [
     {

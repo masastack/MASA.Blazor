@@ -849,6 +849,7 @@ input[type=number] {
     align-items: center;
     justify-content: center;
     padding: 8px;
+    min-height: 44px;
 }
 
 .theme--light.m-application .m-infinite-scroll {
