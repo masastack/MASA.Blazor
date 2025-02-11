@@ -1289,33 +1289,6 @@ export function getElementTranslateY(element) {
   return Number(translateY);
 }
 
-// export function checkIfThresholdIsExceededWhenScrolling(el: Element, parent: any, threshold: number) {
-//   if (!el || !parent) return
-
-//   let parentElement: HTMLElement | Window
-
-//   if (parent == "window") {
-//     parentElement = window;
-//   } else if (parent == "document") {
-//     parentElement = document.documentElement;
-//   } else {
-//     parentElement = document.querySelector(parent);
-//   }
-
-//   if (!parentElement) {
-//     console.warn('[MInfiniteScroll] failed to get parent element with selector:', parent);
-//     return;
-//   }
-
-//   const rect = el.getBoundingClientRect();
-//   const elementTop = rect.top;
-//   const current = isWindow(parentElement)
-//     ? window.innerHeight
-//     : parentElement.getBoundingClientRect().bottom
-
-//   return (current >= elementTop - threshold)
-// }
-
 export function get_top_domain() {
   var i, h,
     weird_cookie = 'weird_get_top_level_domain=cookie',
