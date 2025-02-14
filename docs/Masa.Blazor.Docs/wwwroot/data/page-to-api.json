@@ -80,6 +80,10 @@
     "MDescriptions",
     "MDescriptionsItem"
   ],
+  "driverjs": [
+    "MDriverJS",
+    "MDriverJSStep" 
+  ],
   "echarts": [
     "MECharts"
   ],

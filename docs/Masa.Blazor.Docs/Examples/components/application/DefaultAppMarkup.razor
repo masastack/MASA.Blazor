@@ -1,8 +1,14 @@
 ﻿@attribute [JSCustomElement]
 
-<Markup Class="pb-4" Code="@Code" Language="@Language" FileName="@FileName" LineHighlights="@LineHighlights"></Markup>
+<Markup Id="@Id"
+        Class="@($"pb-4 {Class}")"
+        Code="@Code"
+        Language="@Language"
+        FileName="@FileName"
+        LineHighlights="@LineHighlights"/>
 
 @code {
+
     [Parameter]
     public string? Code { get; set; }
 
@@ -14,4 +20,11 @@
 
     [Parameter]
     public string? LineHighlights { get; set; }
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
 }
