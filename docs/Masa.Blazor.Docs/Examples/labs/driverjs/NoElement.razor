@@ -1,0 +1,22 @@
+﻿<MDriverJS @ref="_driverJs">
+    <MDriverJSStep Title="No element specified"
+                   Description="You can have popovers without elements as well."></MDriverJSStep>
+    <MDriverJSStep Element="#install-cli pre"
+                   Title="Add the package"
+                   Description="Before using the package, you need to install it."></MDriverJSStep>
+    <MDriverJSStep Element="#install-style pre"
+                   Title="Add the style"
+                   Description="The style is required to use the package."></MDriverJSStep>
+</MDriverJS>
+
+<MButton Color="primary"
+         Class="text-none"
+         OnClick="@(() => _driverJs?.Drive())">
+    Start the tour
+</MButton>
+
+@code {
+
+    private MDriverJS? _driverJs;
+
+}

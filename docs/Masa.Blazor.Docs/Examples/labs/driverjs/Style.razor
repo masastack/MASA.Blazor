@@ -1,0 +1,42 @@
+﻿<MDriverJS PopoverClass="driverjs-style-demo"
+           OverlayColor="white"
+           OverlayOpacity="0.12f"
+           @ref="_driverJs">
+    <MDriverJSStep Element="#install-cli pre"
+                   Title="Add the package"
+                   Description="Before using the package, you need to install it."></MDriverJSStep>
+    <MDriverJSStep Element="#install-style pre"
+                   Title="Add the style"
+                   Description="The style is required to use the package."></MDriverJSStep>
+    <MDriverJSStep Element="#style [aria-label='view-source']"
+                   Title="View source"
+                   Description="You can view the source code of the example."></MDriverJSStep>
+</MDriverJS>
+
+<MButton Color="primary"
+         Class="text-none"
+         OnClick="@(() => _driverJs?.Drive())">
+    Start the tour
+</MButton>
+
+<!-- Just for demonstration, it is not recommended to use the style tag in razor -->
+<style>
+    .driverjs-style-demo {
+        border-radius: 0.25rem;
+        padding: 1rem;
+        background-color: lightblue;
+    }
+
+    .driverjs-style-demo .driver-popover-arrow-side-top.driver-popover-arrow,
+    .driverjs-style-demo .driver-popover-arrow-side-right.driver-popover-arrow,
+    .driverjs-style-demo .driver-popover-arrow-side-bottom.driver-popover-arrow,
+    .driverjs-style-demo .driver-popover-arrow-side-left.driver-popover-arrow {
+        border-top-color: lightblue;
+    }
+</style>
+
+@code {
+
+    private MDriverJS? _driverJs;
+
+}

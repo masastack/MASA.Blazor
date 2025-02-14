@@ -305,6 +305,11 @@
         "releasedOn": "v1.0.4"
       },
       {
+        "title": "driverjs",
+        "state": "new",
+        "releasedOn": "v1.9.0"
+      },
+      {
         "title": "inputs-filter",
         "state": "new",
         "releasedOn": "v1.1.0"

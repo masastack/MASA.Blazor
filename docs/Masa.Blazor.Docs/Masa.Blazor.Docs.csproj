@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.DriverJS\Masa.Blazor.JSComponents.DriverJS.csproj" />
     <ProjectReference Include="..\Masa.Docs.Core\Masa.Docs.Core.csproj" />
   </ItemGroup>
 
