@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{899B9B4C-57B7-48C9-8574-A48BE8E4E93A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.JSComponents.DriverJS", "src\Masa.Blazor.JSComponents.DriverJS\Masa.Blazor.JSComponents.DriverJS.csproj", "{48022885-A4DC-468A-BBC1-5E80A74534B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SomethingSkia", "src\Masa.Blazor.SomethingSkia\Masa.Blazor.SomethingSkia.csproj", "{66E24E7A-12CD-4A48-974D-05403EF3F017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ApiGenerator", "src\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj", "{5C1E1B8B-D690-462A-AA5C-625A9317414F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Docs.ComponentApiGenerator", "src\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj", "{9A541611-C391-4A84-BD88-634C314B372A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{899B9B4C-57B7-48C9-8574-A48BE8E4E93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899B9B4C-57B7-48C9-8574-A48BE8E4E93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899B9B4C-57B7-48C9-8574-A48BE8E4E93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899B9B4C-57B7-48C9-8574-A48BE8E4E93A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48022885-A4DC-468A-BBC1-5E80A74534B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48022885-A4DC-468A-BBC1-5E80A74534B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48022885-A4DC-468A-BBC1-5E80A74534B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48022885-A4DC-468A-BBC1-5E80A74534B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E24E7A-12CD-4A48-974D-05403EF3F017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E24E7A-12CD-4A48-974D-05403EF3F017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E24E7A-12CD-4A48-974D-05403EF3F017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E24E7A-12CD-4A48-974D-05403EF3F017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1E1B8B-D690-462A-AA5C-625A9317414F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1E1B8B-D690-462A-AA5C-625A9317414F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1E1B8B-D690-462A-AA5C-625A9317414F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1E1B8B-D690-462A-AA5C-625A9317414F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A541611-C391-4A84-BD88-634C314B372A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A541611-C391-4A84-BD88-634C314B372A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A541611-C391-4A84-BD88-634C314B372A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A541611-C391-4A84-BD88-634C314B372A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

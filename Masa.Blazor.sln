@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\wasm-try.yml = .github\workflows\wasm-try.yml
 		.github\workflows\doc-index-dev.yml = .github\workflows\doc-index-dev.yml
 		.github\workflows\doc-index-prd.yml = .github\workflows\doc-index-prd.yml
+		.github\workflows\push-nuget-package-manually.yml = .github\workflows\push-nuget-package-manually.yml
+		.github\workflows\push-nuget-package-on-release.yml = .github\workflows\push-nuget-package-on-release.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{4234D98C-4DCA-404D-AE9D-EB9DC91FC8DC}"
