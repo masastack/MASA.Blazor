@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/1 - Component/">
+    <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  </Folder>
+  <Folder Name="/2 - Development/">
+    <Project Path="src/Masa.Blazor.Playground/Masa.Blazor.Playground.csproj" />
+  </Folder>
+</Solution>

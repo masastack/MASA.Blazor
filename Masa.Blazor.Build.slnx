@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/Masa.Blazor.Docs.ApiGenerator/Masa.Blazor.Docs.ApiGenerator.csproj" />
+  <Project Path="src/Masa.Blazor.Docs.ComponentApiGenerator/Masa.Blazor.Docs.ComponentApiGenerator.csproj" />
+  <Project Path="src/Masa.Blazor.JSComponents.DriverJS/Masa.Blazor.JSComponents.DriverJS.csproj" />
+  <Project Path="src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj" />
+  <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+</Solution>
