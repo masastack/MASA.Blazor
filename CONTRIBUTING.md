@@ -26,9 +26,9 @@ git submodule foreach git checkout main
 
 ### Choose an appropriate solution 
 
-- **Masa.Blazor.sln**: the solution for all projects.
-- **Masa.Blazor.Playground.sln**: the solution for developing the MASA Blazor library with a small project for testing.
-- **Masa.Blazor.Docs.sln**: the solution for developing the docs site.
+- **Masa.Blazor.slnx**: the solution for all projects.
+- **Masa.Blazor.Playground.slnx**: the solution for developing the MASA Blazor library with a small project for testing.
+- **Masa.Blazor.Docs.slnx**: the solution for developing the docs site.
 
 ### Project structure
 

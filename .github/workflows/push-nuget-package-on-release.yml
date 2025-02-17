@@ -19,7 +19,7 @@ jobs:
           6.0.x
         include-prerelease: true
     - name: build
-      run: dotnet build Masa.Blazor.Build.sln -c Release /p:ContinuousIntegrationBuild=true
+      run: dotnet build Masa.Blazor.Build.slnx -c Release /p:ContinuousIntegrationBuild=true
     - name: pack Masa.Blazor
       run: dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build --include-symbols -c Release -p:PackageVersion=$GITHUB_REF_NAME
     - name: pack Masa.Blazor.SomethingSkia

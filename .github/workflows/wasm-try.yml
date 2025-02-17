@@ -30,7 +30,7 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools-net7
     - name: build
-      run: dotnet build Masa.Try.sln
+      run: dotnet build Masa.Try.slnx
     - name: publish
       run: dotnet publish src/Masa.Try.WebAssembly/Masa.Try.WebAssembly.csproj -c Release
     - name: setup oss
