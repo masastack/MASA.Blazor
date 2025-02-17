@@ -1,3 +1,4 @@
+import * as infiniteScroll from "./components/infinite-scroll";
 import * as slider from "./components/slider";
 import * as textarea from "./components/textarea";
 import * as interop from "./interop";
@@ -18,7 +19,8 @@ window.MasaBlazor = {
   interop: {
     ...interop,
     ...slider,
-    ...textarea
+    ...textarea,
+    ...infiniteScroll,
   },
   xgplayerPlugins: [],
 };
