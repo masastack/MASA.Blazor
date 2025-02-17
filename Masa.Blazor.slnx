@@ -59,5 +59,6 @@
     <File Path=".github/workflows/push-nuget-package-on-release.yml" />
     <File Path=".github/workflows/wasm-prd.yml" />
     <File Path=".github/workflows/wasm-try.yml" />
+    <File Path=".github\workflows\build.yml" />
   </Folder>
 </Solution>
