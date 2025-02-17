@@ -271,6 +271,7 @@ public partial class Components
     {
         var list = ApiGenerator.ComponentMetas.ToList();
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
+        list.AddRange(DriverJSApiGenerator.ComponentMetas);
         return list;
     }
 

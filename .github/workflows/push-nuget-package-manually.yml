@@ -23,10 +23,12 @@ jobs:
           6.0.x
         include-prerelease: true
     - name: build
-      run: dotnet build src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj -c Release /p:ContinuousIntegrationBuild=true
+      run: dotnet build Masa.Blazor.Build.slnx -c Release /p:ContinuousIntegrationBuild=true
     - name: pack Masa.Blazor
       run: dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build --include-symbols -c Release -p:PackageVersion=${{github.event.inputs.version}}
     - name: pack Masa.Blazor.SomethingSkia
       run: dotnet pack src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj --no-build --include-symbols -c Release -p:PackageVersion=${{github.event.inputs.version}}
+    - name: pack Masa.Blazor.JSComponents.DriverJS
+      run: dotnet pack src/Masa.Blazor.JSComponents.DriverJS/Masa.Blazor.JSComponents.DriverJS.csproj --no-build --include-symbols -c Release -p:PackageVersion=${{github.event.inputs.version}}
     - name: package push
       run: dotnet nuget push "**/*.symbols.nupkg" --skip-duplicate -k ${{secrets.NUGET_TOKEN}}  -s https://api.nuget.org/v3/index.json

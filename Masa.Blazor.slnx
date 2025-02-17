@@ -1,0 +1,64 @@
+<Solution>
+  <Folder Name="/1 - Test/">
+    <Project Path="test/Masa.Blazor.Test/Masa.Blazor.Test.csproj" />
+  </Folder>
+  <Folder Name="/2 - Component/">
+    <Project Path="src/Masa.Blazor.JSComponents.DriverJS/Masa.Blazor.JSComponents.DriverJS.csproj" />
+    <Project Path="src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj" />
+    <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  </Folder>
+  <Folder Name="/3 - Development/">
+    <Project Path="src/Masa.Blazor.Playground/Masa.Blazor.Playground.csproj" />
+  </Folder>
+  <Folder Name="/4 - Docs/">
+    <Project Path="docs/Masa.Docs.Core/Masa.Docs.Core.csproj" />
+    <Project Path="docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj" />
+    <Project Path="docs/Masa.Docs.Server/Masa.Docs.Server.csproj" />
+    <Project Path="docs/Masa.Docs.Shared/Masa.Docs.Shared.csproj" />
+    <Project Path="docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj" />
+  </Folder>
+  <Folder Name="/4 - Docs/ApiGenerator/">
+    <Project Path="src/Masa.Blazor.Docs.ApiGenerator/Masa.Blazor.Docs.ApiGenerator.csproj" />
+    <Project Path="src/Masa.Blazor.Docs.ComponentApiGenerator/Masa.Blazor.Docs.ComponentApiGenerator.csproj" />
+  </Folder>
+  <Folder Name="/4 - Docs/Product Docs/">
+    <Project Path="docs/Masa.Blazor.Docs/Masa.Blazor.Docs.csproj" />
+    <Project Path="docs/MASA.Docs/src/Masa.Framework.Docs/Masa.Framework.Docs.csproj" />
+    <Project Path="docs/MASA.Docs/src/Masa.Stack.Docs/Masa.Stack.Docs.csproj" />
+  </Folder>
+  <Folder Name="/5 - Try/">
+    <Project Path="src/Masa.Try.Server/Masa.Try.Server.csproj" />
+    <Project Path="src/Masa.Try.Shared/Masa.Try.Shared.csproj" />
+    <Project Path="src/Masa.Try.WebAssembly/Masa.Try.WebAssembly.csproj" />
+  </Folder>
+  <Folder Name="/9 - Solution Itms/">
+    <File Path=".gitignore" />
+    <File Path=".gitlab-ci.yml" />
+    <File Path=".gitmodules" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="Dockerfile" />
+    <File Path="README.md" />
+    <File Path="README.zh-CN.md" />
+  </Folder>
+  <Folder Name="/9 - Solution Itms/.github/">
+    <File Path=".github/pull_request_template.md" />
+  </Folder>
+  <Folder Name="/9 - Solution Itms/.github/ISSUE_TEMPLATE/">
+    <File Path=".github/ISSUE_TEMPLATE/bug_report.md" />
+    <File Path=".github/ISSUE_TEMPLATE/feature_request.md" />
+  </Folder>
+  <Folder Name="/9 - Solution Itms/.github/workflows/">
+    <File Path=".github/workflows/close-stale.yml" />
+    <File Path=".github/workflows/doc-index-dev.yml" />
+    <File Path=".github/workflows/doc-index-prd.yml" />
+    <File Path=".github/workflows/issue-labeled.yml" />
+    <File Path=".github/workflows/mirror-gitlab.yml" />
+    <File Path=".github/workflows/needs-triage.yml" />
+    <File Path=".github/workflows/pr-docs-next.yml" />
+    <File Path=".github/workflows/push-nuget-package-manually.yml" />
+    <File Path=".github/workflows/push-nuget-package-on-release.yml" />
+    <File Path=".github/workflows/wasm-prd.yml" />
+    <File Path=".github/workflows/wasm-try.yml" />
+    <File Path=".github\workflows\build.yml" />
+  </Folder>
+</Solution>
