@@ -15,6 +15,7 @@ public class ActivatableJsModule : JSModule
         _owner = owner;
         _selfReference = DotNetObjectReference.Create(this);
         _instance = await InvokeAsync<IJSObjectReference>("init",
+            _owner.IsActive,
             _owner.ActivatorSelector,
             _owner.Disabled,
             _owner.OpenOnClick,
