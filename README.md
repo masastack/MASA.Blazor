@@ -119,7 +119,7 @@ Thanks to all the friends who have contributed to this project.
 
 ## 👥 Development team
 
-The Digital Flash technical team is an efficient, stable and innovative team. The team adheres to the original intention of enriching the Blazor ecosystem, and it is the pursuit of the Digital Flash technical team to continue to work hard to bring a better experience to the developers. Thank you for your support and use.
+The MASA technical team is an efficient, stable and innovative team. The team adheres to the original intention of enriching the Blazor ecosystem, and it is the pursuit of the MASA technical team to continue to work hard to bring a better experience to the developers. Thank you for your support and use.
 
 ## 📜 Code of conduct
 
