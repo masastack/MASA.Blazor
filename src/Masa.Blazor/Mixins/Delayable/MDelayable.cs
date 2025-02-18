@@ -16,7 +16,7 @@ public abstract class MDelayable : MasaComponentBase, IDelayable
         set => SetValue(value);
     }
 
-    protected bool IsActive { get; private set; }
+    public bool IsActive { get; protected set; }
 
     public Func<Task>? BeforeShowContent { get; set; }
 

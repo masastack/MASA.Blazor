@@ -23,6 +23,7 @@ class Activatable extends Delayable {
   popupListeners: Listeners = {};
 
   constructor(
+    isActive: boolean,
     activatorSelector: string,
     disabled: boolean,
     openOnClick: boolean,
@@ -33,6 +34,8 @@ class Activatable extends Delayable {
     dotNetHelper: DotNet.DotNetObject
   ) {
     super(openDelay, closeDelay, dotNetHelper);
+
+    this.isActive = isActive;
 
     this.activator = getActivator(activatorSelector);
 
@@ -212,6 +215,7 @@ class Activatable extends Delayable {
 }
 
 function init(
+  isActive: boolean,
   activatorSelector: string,
   disabled: boolean,
   openOnClick: boolean,
@@ -222,6 +226,7 @@ function init(
   dotNetHelper: DotNet.DotNetObject
 ) {
   var instance = new Activatable(
+    isActive,
     activatorSelector,
     disabled,
     openOnClick,

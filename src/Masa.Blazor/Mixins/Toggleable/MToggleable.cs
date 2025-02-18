@@ -26,6 +26,17 @@ public abstract class MToggleable : MDelayable
     private bool _preventOnValueChanged;
     private bool _value;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Value)
+        {
+            IsActive = Value;
+            _ = SetActiveInternal(true);
+        }
+    }
+
     private void InternalOnValueChanged(bool val)
     {
         if (_preventOnValueChanged)
