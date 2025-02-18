@@ -1,0 +1,11 @@
+﻿@namespace Masa.Blazor
+@inherits Masa.Blazor.Core.DisposableComponentBase
+
+<div class="m-quill">
+    @if (ToolbarContent is not null)
+    {
+        <div class="m-quill-toolbar">@ToolbarContent</div>
+    }
+
+    <div class="m-quill-editor"></div>
+</div>
