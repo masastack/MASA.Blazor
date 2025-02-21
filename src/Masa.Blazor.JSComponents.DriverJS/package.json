@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MI",
+  "license": "MIT",
   "dependencies": {
     "driver.js": "^1.3.5"
   },
