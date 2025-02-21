@@ -6,8 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
         <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
-
-        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,3 +25,4 @@
         <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>
+
