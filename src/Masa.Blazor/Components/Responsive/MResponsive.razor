@@ -2,13 +2,15 @@
 @inherits MasaComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
-    <MElement id="@Id"
-             class="@GetClass()"
-             style="@GetStyle()"
-             ReferenceCaptureAction="r => Ref = r"
-             @attributes="@Attributes">
+    <ToggleableTransitionElement Value="@TransitionValue"
+                                 ConditionType="@TransitionType"
+                                 Class="@GetClass()"
+                                 Style="@GetStyle()"
+                                 ReferenceCaptureAction="r => Ref = r"
+                                 id="@Id"
+                                 @attributes="@Attributes">
         @GenBody()
-    </MElement>
+    </ToggleableTransitionElement>
 </CascadingValue>
 
 @code {
@@ -32,7 +34,7 @@
 
     protected RenderFragment GenContent() => __builder =>
     {
-        <div class="@_block.Element("content")">
+        <div class="@_block.Element("content").AppendClasses(ContentClass)">
             @ChildContent
         </div>
     };
