@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using BemIt.Extensions;
+
+namespace Masa.Blazor;
 
 public static class ThemeCssBuilder
 {
@@ -66,7 +68,8 @@ public static class ThemeCssBuilder
             Build(combinePrefix, nameof(options.Warning).ToLowerInvariant(), hasOnColor: true),
             Build(combinePrefix, nameof(options.Error).ToLowerInvariant(), hasOnColor: true),
             Build(combinePrefix, nameof(options.Surface).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, options.UserDefined)
+            Build(combinePrefix, options.UserDefined),
+            BuildBgCssClass(combinePrefix, nameof(options.SurfaceContainer).ToKebab())
         };
 
         return string.Concat(lstCss);
@@ -120,5 +123,16 @@ public static class ThemeCssBuilder
     private static string Build(string combinePrefix, Dictionary<string, string> userDefined)
     {
         return string.Join("", userDefined.Select(x => Build(combinePrefix, x.Key.ToLowerInvariant())));
+    }
+    
+    private static string BuildBgCssClass(string combinePrefix, string className)
+    {
+        return $$"""
+
+               {{combinePrefix}}.{{className}} {
+                   background-color: var(--m-theme-{{className}}) !important;
+                   border-color: var(--m-theme-{{className}}) !important;
+               }
+               """;
     }
 }
