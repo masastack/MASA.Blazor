@@ -1,4 +1,5 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Transition;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
@@ -21,6 +22,10 @@ public partial class MResponsive : MasaComponentBase
     [Parameter] public StringNumber? MinWidth { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool TransitionValue { get; set; }
+
+    [Parameter] public ConditionType TransitionType { get; set; }
 
     [Parameter] public bool Dark { get; set; }
 
