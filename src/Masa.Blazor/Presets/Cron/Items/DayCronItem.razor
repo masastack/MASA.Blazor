@@ -5,8 +5,9 @@
 
 @code {
 
-    public DayCronItem() : base(PeriodTypes.Day)
+    public DayCronItem()
     {
+        Period = PeriodTypes.Day;
     }
 
     protected override RenderFragment RadiosContent() => __builder =>
