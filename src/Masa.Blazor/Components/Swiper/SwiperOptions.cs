@@ -17,6 +17,8 @@ public class SwiperOptions
 
     public int SpaceBetween { get; set; }
 
+    public bool Nested { get; set; }
+
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public SwiperAutoplayOptions? Autoplay { get; set; }
 
