@@ -2,7 +2,8 @@
 
 public partial class MonthCronItem : SecondCronItem
 {
-    public MonthCronItem() : base(PeriodTypes.Month)
+    public MonthCronItem()
     {
+        Period = PeriodTypes.Month;
     }
 }

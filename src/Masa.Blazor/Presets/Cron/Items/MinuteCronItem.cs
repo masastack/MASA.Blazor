@@ -2,7 +2,8 @@
 
 public partial class MinuteCronItem : SecondCronItem
 {
-    public MinuteCronItem() : base(PeriodTypes.Minute)
+    public MinuteCronItem()
     {
+        Period = PeriodTypes.Minute;
     }
 }

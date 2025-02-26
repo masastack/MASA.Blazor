@@ -5,8 +5,9 @@
 
 @code {
 
-    public YearCronItem() : base(PeriodTypes.Year)
+    public YearCronItem()
     {
+        Period = PeriodTypes.Year;
     }
 
     protected override RenderFragment RadiosContent() => __builder =>

@@ -4,11 +4,6 @@ namespace Masa.Blazor.Presets.Cron;
 
 public partial class CronItemBase : ComponentBase
 {
-    public CronItemBase(PeriodTypes period)
-    {
-        _period = period;
-    }
-
     [Inject] protected I18n I18n { get; set; } = null!;
 
     [Parameter] public string? Value { get; set; }
@@ -17,7 +12,7 @@ public partial class CronItemBase : ComponentBase
 
     [Parameter] public EventCallback<CronItemModel> CronValueHasChanged { get; set; }
 
-    private readonly PeriodTypes _period;
+    protected PeriodTypes Period { get; init; }
 
     protected CronTypes SelectedCronType;
 
@@ -39,12 +34,12 @@ public partial class CronItemBase : ComponentBase
 
     protected override void OnInitialized()
     {
-        if (_period != PeriodTypes.Week && _period != PeriodTypes.Year)
+        if (Period != PeriodTypes.Week && Period != PeriodTypes.Year)
         {
-            I18NUnitText = I18n.T($"$masaBlazor.period.{_period}");
+            I18NUnitText = I18n.T($"$masaBlazor.period.{Period}");
         }
 
-        switch (_period)
+        switch (Period)
         {
             case PeriodTypes.Second:
             case PeriodTypes.Minute:
@@ -77,7 +72,7 @@ public partial class CronItemBase : ComponentBase
                 break;
         }
 
-        if (_period == PeriodTypes.Week)
+        if (Period == PeriodTypes.Week)
         {
             WeekNumbers = Enum.GetValues<WeekNumbers>().ToList();
             DayOfWeeks = Enum.GetValues<DayOfWeek>().ToList();
@@ -236,7 +231,7 @@ public partial class CronItemBase : ComponentBase
                 val = (1 + (int)CronItemData.SelectDayOfWeek)  + "#" + CronItemData.SelectWeekNumber.ToString("d");
                 break;
             case CronTypes.LastOfPeriod:
-                if (_period == PeriodTypes.Day)
+                if (Period == PeriodTypes.Day)
                 {
                     val = "L";
                 }
@@ -266,7 +261,7 @@ public partial class CronItemBase : ComponentBase
 
         if (CronValueHasChanged.HasDelegate)
         {
-            await CronValueHasChanged.InvokeAsync(new CronItemModel() { Period = _period, CronValue = val });
+            await CronValueHasChanged.InvokeAsync(new CronItemModel() { Period = Period, CronValue = val });
         }
     }
 
@@ -328,7 +323,7 @@ public partial class CronItemBase : ComponentBase
         else if (Value.Contains('L'))
         {
             SelectedCronType = CronTypes.LastOfPeriod;
-            if (_period == PeriodTypes.Week)
+            if (Period == PeriodTypes.Week)
             {
                 CronItemData.LastPeriodOfWeek = int.Parse(Value[0].ToString());
             }

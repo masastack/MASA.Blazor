@@ -5,8 +5,9 @@
 
 @code {
 
-    public SecondCronItem(PeriodTypes period = PeriodTypes.Second) : base(period)
+    public SecondCronItem()
     {
+        Period = PeriodTypes.Second;
     }
 
     protected override RenderFragment RadiosContent() => __builder =>
