@@ -111,8 +111,8 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         md.renderer.rules.fence = (tokens, idx, options, env, self) => {
             if (tokens[idx].markup === "```") {
                 const content = tokens[idx].content;
-                const id = tokens[idx].attrs.find((attr) => attr[0] === "id")?.[1];
-                const className = tokens[idx].attrs.find((attr) => attr[0] === "class")?.[1];
+                const id = tokens[idx].attrs?.find((attr) => attr[0] === "id")?.[1];
+                const className = tokens[idx].attrs?.find((attr) => attr[0] === "class")?.[1];
 
                 const [lang, fileName, lineHighlights] = resolveCodeInfo(tokens[idx].info)
 
