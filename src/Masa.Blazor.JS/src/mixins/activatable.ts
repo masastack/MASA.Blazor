@@ -88,7 +88,12 @@ class Activatable extends Delayable {
       listeners.click = (e: MouseEvent) => {
         if (this.activator) this.activator.focus();
 
-        e.stopPropagation();
+        // if there is no click event from blazor on the element, stop propagation
+        const target = e.composedPath().find(e => e === this.activator)
+        console.log('target', target, target._blazorEvents_1)
+        if (!target?._blazorEvents_1?.handlers?.click) {
+          e.stopPropagation();
+        }
 
         this.dotNetHelper.invokeMethodAsync("OnClick", parseMouseEvent(e));
 
@@ -98,7 +103,11 @@ class Activatable extends Delayable {
 
     if (this.openOnFocus) {
       listeners.focus = (e: FocusEvent) => {
-        e.stopPropagation();
+        // if there is no focus event from blazor on the element, stop propagation
+        const target = e.composedPath().find(e => e === this.activator)
+        if (!target?._blazorEvents_1?.handlers?.focus) {
+          e.stopPropagation();
+        }
 
         this.runDelay("open");
       };

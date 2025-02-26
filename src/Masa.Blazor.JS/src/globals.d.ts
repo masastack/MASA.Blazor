@@ -198,6 +198,14 @@ declare global {
     class?: string;
   }
 
+  interface EventTarget {
+    _blazorEvents_1?: {
+      handlers: {
+        [key: string]: any
+      }
+    }
+  }
+
   namespace DotNet {
     interface DotNetObject {
       dispose(): void;
