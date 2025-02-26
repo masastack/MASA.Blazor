@@ -293,7 +293,7 @@ class PDFViewerApplication {
 
   destroy() {
     this.container.removeEventListener("touchstart", this._touchstart);
-    this.container.removeEventListener("touchmove", this._touchstart);
+    this.container.removeEventListener("touchmove", this._touchmove);
     this.viewerDiv.removeEventListener("wheel", this._wheel);
 
     this.previous &&
