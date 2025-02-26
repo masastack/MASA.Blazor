@@ -90,7 +90,6 @@ class Activatable extends Delayable {
 
         // if there is no click event from blazor on the element, stop propagation
         const target = e.composedPath().find(e => e === this.activator)
-        console.log('target', target, target._blazorEvents_1)
         if (!target?._blazorEvents_1?.handlers?.click) {
           e.stopPropagation();
         }
