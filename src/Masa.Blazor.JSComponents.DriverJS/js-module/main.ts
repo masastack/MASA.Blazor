@@ -10,14 +10,6 @@ export function init() {
       return driverObj;
     },
   };
-
-  // const driverObj = driver(config);
-
-  // if (drive) {
-  //   driverObj.drive();
-  // }
-
-  // return driverObj;
 }
 
 export function drive(config: Config, stepIndex?: number) {

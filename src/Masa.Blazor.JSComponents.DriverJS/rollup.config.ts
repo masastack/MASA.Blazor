@@ -4,7 +4,6 @@ import css from "rollup-plugin-import-css";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
-
 export default defineConfig({
   input: "./js-module/main.ts",
   output: [
@@ -16,7 +15,7 @@ export default defineConfig({
   plugins: [
     typescript(),
     resolve(),
-    // terser(),
+    terser(),
     css({
       output: "wwwroot/driver.css",
     }),
