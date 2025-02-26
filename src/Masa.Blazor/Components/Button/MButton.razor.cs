@@ -219,15 +219,10 @@ namespace Masa.Blazor
 #endif
 
             Attributes["ripple"] = Ripple;
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
+            if (OnClick.HasDelegate)
             {
-                await Js.AddClickEventListener(Ref, HandleOnClick, OnClickStopPropagation, OnClickPreventDefault);
+                Console.Out.WriteLine("[MButton] OnClick has delegate");
+                Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
             }
         }
 
@@ -238,16 +233,9 @@ namespace Masa.Blazor
                 await Js.InvokeVoidAsync(JsInteropConstants.Blur, Ref);
             }
 
-            await InvokeCallbackAsync(OnClick, args);
+            await OnClick.InvokeAsync(args);
 
             await ToggleAsync();
-        }
-
-        protected override async ValueTask DisposeAsyncCore()
-        {
-            await Js.RemoveClickEventListener(Ref, "click");
-
-            await base.DisposeAsyncCore();
         }
     }
 }
