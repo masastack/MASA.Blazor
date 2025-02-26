@@ -4,7 +4,9 @@ desc: "A PDF viewer designed for mobile."
 tag: "JS Proxy"
 ---
 
-Before using, you need to include the style sheet:
+```shell
+dotnet add package Masa.Blazor.JSComponents.PdfJS
+```
 
 ``` html
 <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.5.136/web/pdf_viewer.min.css" rel="stylesheet">
