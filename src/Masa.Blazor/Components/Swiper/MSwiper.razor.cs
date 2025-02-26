@@ -43,6 +43,9 @@ public partial class MSwiper : MasaComponentBase
 
     [Parameter] public EventCallback<int> IndexChanged { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    public bool Nested { get; set; }
+
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
     private bool _isJsInteropAndRefReady;
@@ -137,6 +140,7 @@ public partial class MSwiper : MasaComponentBase
                 Loop = Loop,
                 Parallax = Parallax,
                 SpaceBetween = SpaceBetween,
+                Nested = Nested,
                 Autoplay = _autoplay?.GetOptions(),
                 Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
