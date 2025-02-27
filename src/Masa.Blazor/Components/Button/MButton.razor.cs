@@ -221,7 +221,6 @@ namespace Masa.Blazor
             Attributes["ripple"] = Ripple;
             if (OnClick.HasDelegate)
             {
-                Console.Out.WriteLine("[MButton] OnClick has delegate");
                 Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
             }
         }
