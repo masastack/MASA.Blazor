@@ -1,11 +1,13 @@
-﻿using Masa.Blazor.Components.Pdfjs;
+﻿using BemIt;
+using Masa.Blazor.Attributes;
+using Masa.Blazor.Core;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor;
 
 public partial class MPdfMobileViewer : MasaComponentBase
 {
-    [Inject] private PdfMobileViewerJSModule JsModule { get; set; } = null!;
-
     [Parameter]
     [EditorRequired]
     public string? Url { get; set; }
@@ -42,13 +44,18 @@ public partial class MPdfMobileViewer : MasaComponentBase
                 return;
             }
 
-            string url = Url;
+            var url = Url;
             if (url.StartsWith("_content") is true)
             {
                 url = "/" + url;
             }
 
-            _jsObjectReference = await JsModule.Init(Ref, url, MaxCanvasPixels);
+            var importJSReference = await Js
+                .InvokeAsync<IJSObjectReference>("import",
+                    "./_content/Masa.Blazor.JSComponents.PdfJS/mobile-viewer.js").ConfigureAwait(false);
+            _jsObjectReference = await importJSReference
+                .InvokeAsync<IJSObjectReference>("init", Ref, url, MaxCanvasPixels).ConfigureAwait(false);
+            _ = importJSReference.DisposeAsync().ConfigureAwait(false);
         }
     }
 
@@ -65,4 +72,3 @@ public partial class MPdfMobileViewer : MasaComponentBase
         await _jsObjectReference.TryInvokeVoidAsync("destroy");
     }
 }
-

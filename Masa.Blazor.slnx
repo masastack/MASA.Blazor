@@ -6,6 +6,7 @@
     <Project Path="src/Masa.Blazor.JSComponents.DriverJS/Masa.Blazor.JSComponents.DriverJS.csproj" />
     <Project Path="src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj" />
     <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+    <Project Path="src\Masa.Blazor.JSComponents.PdfJS\Masa.Blazor.JSComponents.PdfJS.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/3 - Development/">
     <Project Path="src/Masa.Blazor.Playground/Masa.Blazor.Playground.csproj" />

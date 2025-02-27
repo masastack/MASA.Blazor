@@ -2,7 +2,6 @@
 using Masa.Blazor.Components.Drawflow;
 using Masa.Blazor.Components.ErrorHandler;
 using Masa.Blazor.Components.Input;
-using Masa.Blazor.Components.Pdfjs;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
@@ -96,7 +95,6 @@ public static class ServiceCollectionExtensions
         services.TryAddTransient<TransitionJSModule>();
         services.TryAddTransient<OutsideClickJSModule>();
         services.TryAddScoped<ScrollStrategyJSModule>();
-        services.TryAddScoped<PdfMobileViewerJSModule>();
 
         services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
         services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));
