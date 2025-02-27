@@ -19,6 +19,7 @@
 
     <ItemGroup>
         <None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
+        <None Remove="tsconfig.json" />
     </ItemGroup>
 
     <ItemGroup>
