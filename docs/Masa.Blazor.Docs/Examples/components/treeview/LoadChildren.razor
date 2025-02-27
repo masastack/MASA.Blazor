@@ -1,4 +1,6 @@
 ﻿@using System.Net.Http.Json;
+@inject IHttpClientFactory HttpClientFactory
+
 <MCard>
     <MCardTitle class="indigo white--text text-h5">
         User Directory
@@ -158,8 +160,7 @@
     private List<int> _active;
     private User _selected;
 
-    [Inject]
-    public HttpClient HttpClient { get; set; }
+    private HttpClient _httpClient;
 
     protected User Selected
     {
@@ -195,7 +196,8 @@
     public async Task FetchUsers(User item)
     {
         await Task.Delay(1500);
-        _users = await HttpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
+        _httpClient ??= HttpClientFactory.CreateClient("masa-docs");
+        _users =  await _httpClient.GetFromJsonAsync< System.Collections.Generic.List<User>>("_content/Masa.Blazor.Docs/data/demo/users.json");
         item.Children = _users;
     }
 

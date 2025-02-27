@@ -592,19 +592,34 @@ namespace Masa.Blazor
                 }
             }
 
-            if ((ValueChanged.HasDelegate || Value != null) && !ListComparer.Equals(_oldValue, Value))
+            if (ValueChanged.HasDelegate)
             {
-                await HandleUpdate(_oldValue, Value, UpdateSelectedByValue, EmitSelectedAsync);
-            }
+                Value ??= [];
 
-            if ((ActiveChanged.HasDelegate || Active != null) && !ListComparer.Equals(_oldActive, Active))
-            {
-                await HandleUpdate(_oldActive, Active, UpdateActive, EmitActiveAsync);
+                if (!ListComparer.Equals(_oldValue, Value))
+                {
+                    await HandleUpdate(_oldValue, Value, UpdateSelectedByValue, EmitSelectedAsync);
+                }
             }
-
-            if ((OpenChanged.HasDelegate || Open != null) && !ListComparer.Equals(_oldOpen, Open))
+            
+            if (ActiveChanged.HasDelegate)
             {
-                await HandleUpdate(_oldOpen, Open, UpdateOpen, EmitOpenAsync);
+                Active ??= [];
+
+                if (!ListComparer.Equals(_oldActive, Active))
+                {
+                    await HandleUpdate(_oldActive, Active, UpdateActive, EmitActiveAsync);
+                }
+            }
+            
+            if (OpenChanged.HasDelegate)
+            {
+                Open ??= [];
+
+                if (!ListComparer.Equals(_oldOpen, Open))
+                {
+                    await HandleUpdate(_oldOpen, Open, UpdateOpen, EmitOpenAsync);
+                }
             }
 
             if (_prevSearch != Search)
