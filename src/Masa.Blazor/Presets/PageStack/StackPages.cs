@@ -50,7 +50,7 @@ internal class StackPages : IEnumerable
         _pages.LastOrDefault()?.Activate();
     }
 
-    internal void UpdateTop(string absolutePath, object? state)
+    internal void UpdateTop(string relativeUri, object? state)
     {
         if (_pages.Count == 0)
         {
@@ -58,7 +58,14 @@ internal class StackPages : IEnumerable
         }
 
         var page = _pages.Last();
-        page.UpdatePath(absolutePath);
+
+        var queryIndex = relativeUri.IndexOf('?');
+        if (queryIndex != -1)
+        {
+            relativeUri = relativeUri[..queryIndex];
+        }
+
+        page.UpdatePath(relativeUri);
         page.UpdateState(state);
     }
 
