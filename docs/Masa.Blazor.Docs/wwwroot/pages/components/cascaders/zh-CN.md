@@ -6,13 +6,17 @@ related:
   - /blazor/components/selects
 ---
 
-## 使用
+## 使用 {#usage}
 
 <cascaders-usage></cascaders-usage>
 
-## 示例
+## 示例 {#examples}
 
-### 属性
+### 属性 {#props}
+
+#### 绑定列表 {#bind-list released-on=v1.9.0}
+
+<masa-example file="Examples.components.cascaders.BindList"></masa-example>
 
 #### 分隔符 {released-on=v1.5.0}
 
@@ -20,7 +24,7 @@ related:
 
 <masa-example file="Examples.components.cascaders.Delimiter"></masa-example>
 
-#### 加载子项
+#### 加载子项 {#loadchildren}
 
 `LoadChildren` 用于动态加载子项
 

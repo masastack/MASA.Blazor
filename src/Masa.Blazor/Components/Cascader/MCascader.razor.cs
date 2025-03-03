@@ -9,7 +9,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     [Parameter, MasaApiParameter(true)] public bool ShowAllLevels { get; set; } = true;
 
-    [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; } = null!;
+    [Parameter, EditorRequired] public Func<TItem, List<TItem>>? ItemChildren { get; set; }
 
     [Parameter] public Func<TItem, Task>? LoadChildren { get; set; }
 
@@ -21,9 +21,9 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     private TValue? _prevValue;
     private double _right;
-    private List<TItem> _selectedCascadeItems = [];
-    private List<TItem> _tempSelectedCascadeItems = [];
-    private List<MCascaderColumn<TItem, TItemValue>> _cascaderLists = new();
+    private List<TItem> _selectedItems = [];
+    private List<TItem> _displaySelectedItems = [];
+    private List<MCascaderColumn<TItem, TItemValue>> _cascaderLists = [];
 
     public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
@@ -60,15 +60,15 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
             if (!EqualityComparer<TValue>.Default.Equals(_prevValue, Value))
             {
                 _prevValue = Value;
-                _selectedCascadeItems.Clear();
-                Console.Out.WriteLine("selectedcascaderitems cleared~");
+                _selectedItems.Clear();
 
                 var valueItem = SelectedItems.FirstOrDefault();
                 if (valueItem is not null)
                 {
-                    _selectedCascadeItems.Clear();
-                    FindAllLevelItems(valueItem, ComputedItems, ref _selectedCascadeItems);
-                    _selectedCascadeItems.Reverse();
+                    _selectedItems.Clear();
+                    FindAllLevelItems(valueItem, ComputedItems, ref _selectedItems);
+                    _selectedItems.Reverse();
+                    _displaySelectedItems = [.._selectedItems];
                 }
             }
         }
@@ -76,20 +76,39 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
         {
             if (Value is IList<TItemValue> value)
             {
-                var notEqual = _prevValue is null || _prevValue is IList<TItemValue> prevValue && !prevValue.SequenceEqual(value);
+                var notEqual = _prevValue is null ||
+                               _prevValue is IList<TItemValue> prevValue && !prevValue.SequenceEqual(value);
                 if (notEqual)
                 {
                     _prevValue = Value;
-                    _selectedCascadeItems.Clear();
-                    Console.Out.WriteLine("selectedcascaderitems2 cleared~");
+                    _selectedItems.Clear();
+                    TItem? targetItem = default;
+
                     foreach (var itemValue in value)
                     {
-                        var item = ComputedItems.FirstOrDefault(i => EqualityComparer<TItemValue>.Default.Equals(ItemValue(i), itemValue));
-                        if (item is not null)
+                        if (targetItem is null)
                         {
-                            _selectedCascadeItems.Add(item);
+                            targetItem = ComputedItems.FirstOrDefault(i =>
+                                EqualityComparer<TItemValue>.Default.Equals(ItemValue(i), itemValue));
                         }
+                        else
+                        {
+                            if (ItemChildren is not null)
+                            {
+                                targetItem = ItemChildren(targetItem).FirstOrDefault(i =>
+                                    EqualityComparer<TItemValue>.Default.Equals(ItemValue(i), itemValue));
+                            }
+                        }
+
+                        if (targetItem is null)
+                        {
+                            break;
+                        }
+
+                        _selectedItems.Add(targetItem);
                     }
+
+                    _displaySelectedItems = [.._selectedItems];
                 }
             }
         }
@@ -109,10 +128,8 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     private async Task HandleOnSelect((TItem item, bool isLast, int columnIndex) args)
     {
-        _tempSelectedCascadeItems.RemoveRange(args.columnIndex, _tempSelectedCascadeItems.Count - args.columnIndex);
-        _tempSelectedCascadeItems.Add(args.item);
-
-        Console.Out.WriteLine("HandleOnSelect {0}", ItemValue(args.item));
+        _displaySelectedItems.RemoveRange(args.columnIndex, _displaySelectedItems.Count - args.columnIndex);
+        _displaySelectedItems.Add(args.item);
 
         if (ChangeOnSelect)
         {
@@ -133,9 +150,8 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
     {
-        _selectedCascadeItems = _tempSelectedCascadeItems.ToList();
-        Console.Out.WriteLine("SelectItem {0}", _selectedCascadeItems.Count);
-        
+        _selectedItems = _displaySelectedItems.ToList();
+
         if (typeof(TValue) == typeof(TItemValue))
         {
             var value = ItemValue(item);
@@ -145,11 +161,10 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
                 await SetValue(val);
                 _prevValue = val;
             }
-            
         }
         else
         {
-            var values = _selectedCascadeItems.Select(ItemValue).ToList();
+            var values = _selectedItems.Select(ItemValue).ToList();
             if (values is TValue val)
             {
                 // await ValueChanged.InvokeAsync(val);
@@ -226,14 +241,13 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
         foreach (var item in items)
         {
-            var children = ItemChildren(item);
-            if (children != null && children.Any())
+            var children = ItemChildren?.Invoke(item);
+            if (children is not { Count: > 0 }) continue;
+
+            var childrenSelectedItems = FindSelectedItems(children).ToList();
+            if (childrenSelectedItems.Count > 0)
             {
-                var childrenSelectedItems = FindSelectedItems(children).ToList();
-                if (childrenSelectedItems.Any())
-                {
-                    return childrenSelectedItems;
-                }
+                return childrenSelectedItems;
             }
         }
 
@@ -244,13 +258,11 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
     {
         return !ShowAllLevels
             ? base.GetText(item)
-            : string.Join($" {Delimiter} ", _selectedCascadeItems.Select(base.GetText));
+            : string.Join($" {Delimiter} ", _selectedItems.Select(base.GetText));
     }
 
     private bool FindAllLevelItems(TItem item, IList<TItem> searchItems, ref List<TItem> allLevelItems)
     {
-        allLevelItems ??= new List<TItem>();
-
         if (searchItems.Contains(item))
         {
             allLevelItems.Add(item);
@@ -259,7 +271,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
         foreach (var searchItem in searchItems)
         {
-            var children = ItemChildren(searchItem);
+            var children = ItemChildren?.Invoke(searchItem);
             if (children is { Count: > 0 })
             {
                 var find = FindAllLevelItems(item, children, ref allLevelItems);

@@ -36,7 +36,7 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
 
     internal TItem? SelectedItem { get; set; }
 
-    protected int SelectedItemIndex { get; set; }
+    protected int SelectedItemIndex { get; set; } = -1;
 
     private bool IsLast => Children == null || Children.Count == 0;
 
@@ -86,8 +86,6 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
             _renderActiveSelectedOrNot = false;
             
             var selectedItem = SelectedItems is not null ? SelectedItems.ElementAtOrDefault(ColumnIndex) : default;
-            // Console.Out.WriteLine("ColumnIndex {0} SelectedItem {1}", ColumnIndex, ItemValue?.Invoke(selectedItem)?.ToString());
-            Console.Out.WriteLine($"ColumnIndex {ColumnIndex} Count {SelectedItems.Count} SelectedItem {(selectedItem is null ? "null" : ItemValue?.Invoke(selectedItem)?.ToString())}");;
             if (selectedItem is not null)
             {
                 SelectedItem = selectedItem;
@@ -118,8 +116,7 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
 
     protected async Task SelectItemAsync(TItem item)
     {
-        // clear the child cascader's selection if the item is equal to SelectedItem
-        if (EqualityComparer<TItem>.Default.Equals(SelectedItem, item))
+        if (Cascader?.ChangeOnSelect is true && EqualityComparer<TItem>.Default.Equals(SelectedItem, item))
         {
             NextCascaderColumn?.Clear();
         }

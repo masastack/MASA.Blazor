@@ -1,40 +1,17 @@
-﻿namespace Masa.Blazor.Docs.Examples.components.cascaders;
+﻿<MCascader @bind-Value="_value"
+           Items="_items"
+           ItemText="u => u.Label"
+           ItemValue="u => u.Value"
+           ItemChildren="u => u.Children"
+           PersistentHint
+           Hint="@("bind-Value is: [" + string.Join(", ", _value ?? []) + "]")">
+</MCascader>
 
-public class Usage : Masa.Blazor.Docs.Components.Usage
-{
+@code {
+
     private record Item(string Value, string Label, List<Item> Children);
 
-    public Usage() : base(typeof(MCascader<Item, string, string>))
-    {
-    }
-
-    protected override ParameterList<CheckboxParameter> GenCheckboxParameters() => new()
-    {
-        { nameof(MCascader<Item, string, string>.Dense), new CheckboxParameter("false", true) },
-        { nameof(MCascader<Item, string, string>.ShowAllLevels), new CheckboxParameter("false", true) },
-        { nameof(MCascader<Item, string, string>.ChangeOnSelect), new CheckboxParameter("false", true) },
-    };
-
-    protected override Dictionary<string, object>? GenAdditionalParameters()
-    {
-        return new Dictionary<string, object>()
-        {
-            { nameof(MCascader<Item, string, string>.Value), _value },
-            {
-                nameof(MCascader<Item, string, string>.ValueChanged),
-                EventCallback.Factory.Create<string>(this, x => _value = x)
-            },
-            { nameof(MCascader<Item, string, string>.Items), _items },
-            { nameof(MCascader<Item, string, string>.ItemText), (Func<Item, string>)(x => x.Label) },
-            {
-                nameof(MCascader<Item, string, string>.ItemChildren),
-                (Func<Item, List<Item>>)(x => x.Children)
-            },
-            { nameof(MCascader<Item, string, string>.ItemValue), (Func<Item, string>)(x => x.Value) },
-        };
-    }
-
-    private string _value;
+    private List<string>? _value;
 
     private readonly List<Item> _items =
     [
@@ -80,4 +57,5 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
             new Item("54", "扬州", [])
         ])
     ];
+
 }
