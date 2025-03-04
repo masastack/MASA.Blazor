@@ -34,7 +34,7 @@ public class MActivatable : MActivatableBase, IActivatable
     {
         if (!IsBooted && val)
         {
-            // for now the js-interop is not read,
+            // the js-interop is not ready,
             // so we need to sync the active state to js
             // at the time of first render
             _syncActiveStateToJS = true;
