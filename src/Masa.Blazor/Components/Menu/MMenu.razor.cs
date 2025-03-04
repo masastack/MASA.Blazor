@@ -208,17 +208,7 @@ namespace Masa.Blazor
             watcher.Watch<bool>(nameof(CloseOnContentClick), () => ResetPopupEvents(CloseOnContentClick));
         }
 
-        protected override void RunDirectly(bool val)
-        {
-            if (ActivatorContent is not null || CloseOnContentClick)
-            {
-                UpdateActiveInJS(val);
-            }
-            else
-            {
-                _ = SetActive(val);
-            }
-        }
+        protected override bool ShouldUpdateActiveInJS => ActivatorContent is not null || CloseOnContentClick;
 
         public void RegisterChild(IDependent dependent)
         {
@@ -230,9 +220,9 @@ namespace Masa.Blazor
 
         //TODO:keydown event
 
-        protected override async Task WhenIsActiveUpdating(bool value)
+        protected override async Task OnActiveUpdatingAsync(bool active)
         {
-            await base.WhenIsActiveUpdating(value);
+            await base.OnActiveUpdatingAsync(active);
 
             if (!_isPopupEventsRegistered && ContentElement.Context is not null)
             {
