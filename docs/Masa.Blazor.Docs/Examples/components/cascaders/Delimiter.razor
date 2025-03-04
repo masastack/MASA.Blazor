@@ -8,96 +8,53 @@
 
 @code {
 
-    public class CascaderNode
-    {
-        public string Value { get; set; }
-        public string Label { get; set; }
-        public List<CascaderNode> Children { get; set; }
-    }
+    private record Item(string Value, string Label, List<Item> Children);
 
     private string _value;
 
-    private List<CascaderNode> _items = new List<CascaderNode>()
-    {
-        new CascaderNode()
-        {
-            Value = "1",
-            Label = "湖北",
-            Children = new List<CascaderNode>()
-            {
-                new CascaderNode
-                {
-                    Value = "11", Label = "武汉", Children = new List<CascaderNode>()
-                    {
-                        new CascaderNode
-                        {
-                            Value = "111", Label = "武昌区", Children = new List<CascaderNode>()
-                            {
-                                new CascaderNode { Value = "1111", Label = "黄鹤楼街道" },
-                                new CascaderNode { Value = "1112", Label = "白沙洲街道" }
-                            }
-                        },
-                        new CascaderNode { Value = "112", Label = "洪山区" }
-                    }
-                },
-                new CascaderNode { Value = "12", Label = "黄石" },
-                new CascaderNode { Value = "13", Label = "宜昌" }
-            }
-        },
-        new CascaderNode()
-        {
-            Value = "2",
-            Label = "浙江",
-            Children = new List<CascaderNode>()
-            {
-                new CascaderNode { Value = "21", Label = "杭州" },
-                new CascaderNode { Value = "22", Label = "温州" },
-                new CascaderNode { Value = "23", Label = "义乌" },
-                new CascaderNode { Value = "24", Label = "宁波" }
-            }
-        },
-        new CascaderNode()
-        {
-            Value = "3",
-            Label = "上海",
-            Children = new List<CascaderNode>()
-            {
-                new CascaderNode { Value = "31", Label = "徐汇区" },
-                new CascaderNode { Value = "32", Label = "黄浦区" },
-                new CascaderNode { Value = "33", Label = "浦东新区" },
-                new CascaderNode { Value = "34", Label = "崇明区" }
-            }
-        },
-        new CascaderNode()
-        {
-            Value = "4",
-            Label = "北京",
-            Children = new List<CascaderNode>()
-            {
-                new CascaderNode { Value = "41", Label = "朝阳" },
-                new CascaderNode { Value = "42", Label = "东城" },
-                new CascaderNode { Value = "43", Label = "西城" }
-            }
-        },
-        new CascaderNode()
-        {
-            Value = "5",
-            Label = "江苏",
-            Children = new List<CascaderNode>()
-            {
-                new CascaderNode
-                {
-                    Value = "51", Label = "南京", Children = new List<CascaderNode>()
-                    {
-                        new CascaderNode { Value = "511", Label = "鼓楼区" },
-                        new CascaderNode { Value = "512", Label = "玄武区" }
-                    }
-                },
-                new CascaderNode { Value = "52", Label = "苏州" },
-                new CascaderNode { Value = "53", Label = "无锡" },
-                new CascaderNode { Value = "54", Label = "扬州" }
-            }
-        }
-    };
+    private readonly List<Item> _items =
+    [
+        new Item("1", "湖北", [
+            new Item("11", "武汉", [
+                new Item("111", "武昌区", [
+                    new Item("1111", "黄鹤楼街道", []),
+                    new Item("1112", "白沙洲街道", [])
+                ]),
+                new Item("112", "洪山区", [])
+            ]),
+            new Item("12", "黄石", []),
+            new Item("13", "宜昌", [])
+        ]),
+
+        new Item("2", "浙江", [
+            new Item("21", "杭州", []),
+            new Item("22", "温州", []),
+            new Item("23", "义乌", []),
+            new Item("24", "宁波", [])
+        ]),
+
+        new Item("3", "上海", [
+            new Item("31", "徐汇区", []),
+            new Item("32", "黄浦区", []),
+            new Item("33", "浦东新区", []),
+            new Item("34", "崇明区", [])
+        ]),
+
+        new Item("4", "北京", [
+            new Item("41", "朝阳", []),
+            new Item("42", "东城", []),
+            new Item("43", "西城", [])
+        ]),
+
+        new Item("5", "江苏", [
+            new Item("51", "南京", [
+                new Item("511", "鼓楼区", []),
+                new Item("512", "玄武区", [])
+            ]),
+            new Item("52", "苏州", []),
+            new Item("53", "无锡", []),
+            new Item("54", "扬州", [])
+        ])
+    ];
 
 }

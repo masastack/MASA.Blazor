@@ -8,7 +8,7 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
 
     [Parameter] public string? Color { get; set; } = "primary";
 
-    [CascadingParameter] protected MCascader<TItem, TValue>? Cascader { get; set; }
+    [CascadingParameter] protected ICascader<TItem, TValue>? Cascader { get; set; }
 
     [Parameter] [EditorRequired] public IList<TItem> Items { get; set; } = null!;
 
@@ -34,9 +34,9 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
 
     protected IList<TItem>? Children { get; set; }
 
-    protected TItem? SelectedItem { get; set; }
+    internal TItem? SelectedItem { get; set; }
 
-    protected int SelectedItemIndex { get; set; }
+    protected int SelectedItemIndex { get; set; } = -1;
 
     private bool IsLast => Children == null || Children.Count == 0;
 
@@ -71,20 +71,33 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
         ArgumentNullException.ThrowIfNull(ItemText);
     }
 
+    private bool _renderActiveSelectedOrNot = false;
     public void ActiveSelectedOrNot()
     {
-        var selectedItem = SelectedItems is not null ? SelectedItems.ElementAtOrDefault(ColumnIndex) : default;
-        if (selectedItem is not null)
+        _renderActiveSelectedOrNot = true;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (_renderActiveSelectedOrNot)
         {
-            SelectedItem = selectedItem;
-            SelectedItemIndex = Items.IndexOf(selectedItem);
-            Children = ItemChildren(selectedItem);
-        }
-        else
-        {
-            SelectedItem = default;
-            SelectedItemIndex = -1;
-            Children = null;
+            _renderActiveSelectedOrNot = false;
+            
+            var selectedItem = SelectedItems is not null ? SelectedItems.ElementAtOrDefault(ColumnIndex) : default;
+            if (selectedItem is not null)
+            {
+                SelectedItem = selectedItem;
+                SelectedItemIndex = Items.IndexOf(selectedItem);
+                Children = ItemChildren(selectedItem);
+            }
+            else
+            {
+                SelectedItem = default;
+                SelectedItemIndex = -1;
+                Children = null;
+            }
         }
     }
 
@@ -103,8 +116,7 @@ public partial class MCascaderColumn<TItem, TValue> : MasaComponentBase
 
     protected async Task SelectItemAsync(TItem item)
     {
-        // clear the child cascader's selection if the item is equal to SelectedItem
-        if (EqualityComparer<TItem>.Default.Equals(SelectedItem, item))
+        if (Cascader?.ChangeOnSelect is true && EqualityComparer<TItem>.Default.Equals(SelectedItem, item))
         {
             NextCascaderColumn?.Clear();
         }

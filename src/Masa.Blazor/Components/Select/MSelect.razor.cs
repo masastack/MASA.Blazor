@@ -350,7 +350,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         return Task.CompletedTask;
     }
 
-    protected virtual async void OnMenuActiveChange(bool val)
+    protected async void OnMenuActiveChange(bool val)
     {
         if ((Multiple && !val) || GetMenuIndex() > -1)
         {
