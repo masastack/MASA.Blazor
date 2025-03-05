@@ -119,18 +119,18 @@ namespace Masa.Blazor
 
         private bool Animated { get; set; }
 
-        protected override async Task WhenIsActiveUpdating(bool value)
+        protected override async Task OnActiveUpdatingAsync(bool active)
         {
             if (ContentRef.Context is not null)
             {
-                await AttachAsync(value);
+                await AttachAsync(active);
             }
             else
             {
-                NextTick(() => AttachAsync(value));
+                NextTick(() => AttachAsync(active));
             }
 
-            if (value)
+            if (active)
             {
                 ZIndex = await GetActiveZIndex(true);
 
@@ -148,7 +148,7 @@ namespace Masa.Blazor
                 }
             }
 
-            await base.WhenIsActiveUpdating(value);
+            await base.OnActiveUpdatingAsync(active);
         }
 
         private async Task AttachAsync(bool value)

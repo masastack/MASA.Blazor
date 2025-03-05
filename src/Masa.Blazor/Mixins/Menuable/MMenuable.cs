@@ -385,9 +385,9 @@ public abstract class MMenuable : MBootable
         }
     }
 
-    protected override async Task WhenIsActiveUpdating(bool value)
+    protected override async Task OnActiveUpdatingAsync(bool active)
     {
-        if (value)
+        if (active)
         {
             await CallActivateAsync();
         }
@@ -396,7 +396,7 @@ public abstract class MMenuable : MBootable
             await CallDeactivateAsync();
         }
 
-        await base.WhenIsActiveUpdating(value);
+        await base.OnActiveUpdatingAsync(active);
     }
 
     private async Task CallActivateAsync()

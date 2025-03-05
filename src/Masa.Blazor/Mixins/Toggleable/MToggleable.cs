@@ -26,17 +26,6 @@ public abstract class MToggleable : MDelayable
     private bool _preventOnValueChanged;
     private bool _value;
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        if (Value)
-        {
-            IsActive = Value;
-            _ = SetActiveInternal(true);
-        }
-    }
-
     private void InternalOnValueChanged(bool val)
     {
         if (_preventOnValueChanged)
@@ -52,12 +41,12 @@ public abstract class MToggleable : MDelayable
     {
     }
 
-    protected override async Task WhenIsActiveUpdating(bool val)
+    protected override async Task OnActiveUpdatingAsync(bool active)
     {
-        if (ValueChanged.HasDelegate && val != Value)
+        if (ValueChanged.HasDelegate && active != Value)
         {
             _preventOnValueChanged = true;
-            await ValueChanged.InvokeAsync(val);
+            await ValueChanged.InvokeAsync(active);
         }
     }
 }
