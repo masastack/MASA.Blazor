@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Presets.PageStack.NavController;
+﻿using System.Diagnostics.CodeAnalysis;
+using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
 
