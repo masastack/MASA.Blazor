@@ -18,7 +18,7 @@ public partial class PPageStack : PatternPathComponentBase
     [MasaApiParameter(defaultValue: DefaultFallbackUri)]
     public string? FallbackUri { get; set; } = DefaultFallbackUri;
 
-    private PageStackNavController? InternalPageStackNavManager { get; set; }
+    private PageStackNavController? InternalPageStackNavController { get; set; }
 
     private const int DelayForPageClosingAnimation = 300;
     private const string DefaultFallbackUri = "/";
@@ -30,6 +30,11 @@ public partial class PPageStack : PatternPathComponentBase
     /// different from the browser's back button.
     /// </summary>
     private bool _popstateByUserAction;
+
+    /// <summary>
+    /// Records for popstate event to invoke the stack pop event.
+    /// </summary>
+    private (int Delta, int Count)? _deltaAndStackCount;
 
     /// <summary>
     /// The flag to indicate whether to push a new page
@@ -86,12 +91,8 @@ public partial class PPageStack : PatternPathComponentBase
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
-        InternalPageStackNavManager = PageStackNavControllerFactory.Create(Name ?? string.Empty);
-        InternalPageStackNavManager.StackPush += InternalStackStackNavManagerOnStackPush;
-        InternalPageStackNavManager.StackPop += InternalPageStackNavManagerOnStackPop;
-        InternalPageStackNavManager.StackReplace += InternalStackStackNavManagerOnStackReplace;
-        InternalPageStackNavManager.StackClear += InternalStackStackNavManagerOnStackClear;
-        InternalPageStackNavManager.StackGoBackTo += InternalPageStackNavManagerOnStackGoBackTo;
+        InternalPageStackNavController = PageStackNavControllerFactory.Create(Name ?? string.Empty);
+        InternalPageStackNavController.BindComponent(this);
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
     }
@@ -104,7 +105,7 @@ public partial class PPageStack : PatternPathComponentBase
         if (tabbedPattern is not null && _lastVisitedTab.Pattern != tabbedPattern)
         {
             _lastVisitedTab = (tabbedPattern, currentPath);
-            InternalPageStackNavManager?.NotifyTabChanged(currentPath, tabbedPattern);
+            InternalPageStackNavController?.NotifyTabChanged(currentPath, tabbedPattern);
         }
     }
 
@@ -131,6 +132,12 @@ public partial class PPageStack : PatternPathComponentBase
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
+        if (Pages.Count == 0)
+        {
+            return;
+        }
+
+        // continue to process the push event that needs to clear the stack
         if (_uriForPushAndClearStack is not null)
         {
             Push(_uriForPushAndClearStack);
@@ -147,6 +154,7 @@ public partial class PPageStack : PatternPathComponentBase
             return;
         }
 
+        // continue to process the replace event that needs to clear the stack
         if (_uriForReplaceAndClearStack.HasValue)
         {
             var (relativeUri, state) = _uriForReplaceAndClearStack.Value;
@@ -157,18 +165,22 @@ public partial class PPageStack : PatternPathComponentBase
             return;
         }
 
+        // continue to process the go back to event and replace with a new page
         if (_uriForGoBackToAndReplace.HasValue)
         {
             var (replaceUri, state, delta) = _uriForGoBackToAndReplace.Value;
+
+            InternalPageStackNavController?.NotifyStackPopped(delta, replaceUri, state, Pages.Count == delta);
+
             NavigationManager.Replace(replaceUri);
             replaceUri = GetAbsolutePath(replaceUri);
             CloseTopPages(delta, state, replaceUri);
             _uriForGoBackToAndReplace = null;
+
             return;
         }
 
         var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
-
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = absolutePath;
@@ -180,13 +192,26 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _targetPageType = PageType.Stack;
         }
+        
+        if (_deltaAndStackCount.HasValue)
+        {
+            var (delta, count) = _deltaAndStackCount.Value;
+            InternalPageStackNavController?.NotifyStackPopped(delta, clearing: delta >= count);
+            _deltaAndStackCount = null;
+        }
+        else
+        {
+            InternalPageStackNavController?.NotifyStackPopped(1, clearing: Pages.Count == 1);
+        }
 
+        // ignore the popstate event triggered by the user action(back button)
         if (_popstateByUserAction)
         {
             _popstateByUserAction = false;
             return;
         }
 
+        // pop the top page of the stack by the browser's back button
         if (Pages.Count > 0)
         {
             CloseTopPageOfStack();
@@ -209,7 +234,7 @@ public partial class PPageStack : PatternPathComponentBase
             .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
     }
 
-    private void InternalStackStackNavManagerOnStackReplace(object? sender, PageStackReplaceEventArgs e)
+    internal void Replace(PageStackReplaceEventArgs e)
     {
         if (e.ClearStack)
         {
@@ -227,7 +252,7 @@ public partial class PPageStack : PatternPathComponentBase
         NavigationManager.Replace(relativeUri);
     }
 
-    private async void InternalPageStackNavManagerOnStackPop(object? sender, PageStackPopEventArgs e)
+    internal async Task StackPop(PageStackPopEventArgs e)
     {
         _popstateByUserAction = true;
 
@@ -241,7 +266,7 @@ public partial class PPageStack : PatternPathComponentBase
         }
     }
 
-    private void InternalStackStackNavManagerOnStackPush(object? sender, PageStackPushEventArgs e)
+    internal void Push(PageStackPushEventArgs e)
     {
         if (e.ClearStack)
         {
@@ -256,8 +281,10 @@ public partial class PPageStack : PatternPathComponentBase
         NavigationManager.NavigateTo(e.RelativeUri);
     }
 
-    private void InternalStackStackNavManagerOnStackClear(object? sender, PageStackClearEventArgs e)
+    internal void Clear(PageStackClearEventArgs e)
     {
+        _deltaAndStackCount = (Pages.Count, Pages.Count);
+        
         _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
         var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) ||
@@ -276,7 +303,7 @@ public partial class PPageStack : PatternPathComponentBase
         NextTick(() => NavigationManager.Replace(e.RelativeUri!));
     }
 
-    private async void InternalPageStackNavManagerOnStackGoBackTo(object? sender, PageStackGoBackToPageEventArgs e)
+    internal void GoBackTo(PageStackGoBackToPageEventArgs e)
     {
         var delta = Pages.GetDelta(e.AbsolutePath);
         if (delta == -1)
@@ -287,7 +314,9 @@ public partial class PPageStack : PatternPathComponentBase
         if (string.IsNullOrWhiteSpace(e.ReplaceUri))
         {
             _popstateByUserAction = true;
-            
+
+            _deltaAndStackCount = (delta, Pages.Count);
+
             CloseTopPages(delta, e.State);
         }
         else
@@ -387,14 +416,7 @@ public partial class PPageStack : PatternPathComponentBase
     {
         NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
 
-        if (InternalPageStackNavManager is not null)
-        {
-            InternalPageStackNavManager.StackPush -= InternalStackStackNavManagerOnStackPush;
-            InternalPageStackNavManager.StackPop -= InternalPageStackNavManagerOnStackPop;
-            InternalPageStackNavManager.StackReplace -= InternalStackStackNavManagerOnStackReplace;
-            InternalPageStackNavManager.StackClear -= InternalStackStackNavManagerOnStackClear;
-            InternalPageStackNavManager.StackGoBackTo -= InternalPageStackNavManagerOnStackGoBackTo;
-        }
+        InternalPageStackNavController?.UnbindComponent();
 
         if (_module is not null)
         {
