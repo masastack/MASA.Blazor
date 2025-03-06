@@ -2,7 +2,7 @@ namespace Masa.Blazor.Presets.PageStack.NavController;
 
 public class PageStackPopEventArgs : EventArgs
 {
-    public PageStackPopEventArgs(int delta, string? replaceUri = null, object? state = null, bool clearing = false)
+    public PageStackPopEventArgs(int delta, string? replaceUri = null, object? state = null, bool isStackEmpty = false)
     {
         if (delta < 1)
         {
@@ -12,7 +12,7 @@ public class PageStackPopEventArgs : EventArgs
         Delta = delta;
         ReplaceUri = replaceUri;
         State = state;
-        Clearing = clearing;
+        IsStackEmpty = isStackEmpty;
     }
 
     /// <summary>
@@ -27,5 +27,5 @@ public class PageStackPopEventArgs : EventArgs
     /// <summary>
     /// True if the stack is empty after popping.
     /// </summary>
-    public bool Clearing { get; }
+    public bool IsStackEmpty { get; }
 }
