@@ -72,7 +72,7 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
             input = (TValue)(object)(!val);
         }
 
-        Validate(input);
+        Validate(input, force: true);
 
         UpdateInternalValue(input, InternalValueChangeType.InternalOperation);
 

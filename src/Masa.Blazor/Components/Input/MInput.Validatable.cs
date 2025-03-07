@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using Masa.Blazor.Components.Form;
 using Masa.Blazor.Components.Input;
 
 namespace Masa.Blazor;
@@ -90,7 +92,10 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         protected set => SetValue(value);
     }
 
-    public List<string> ErrorBucket { get; protected set; } = new();
+    public List<string> ErrorBucket => [.._ruleErrorBucket, .._editContextErrorBucket];
+
+    private List<string> _ruleErrorBucket = [];
+    private List<string> _editContextErrorBucket = [];
 
     public virtual bool HasError => ErrorMessages is { Count: > 0 } || ErrorBucket.Count > 0 || Error;
 
@@ -135,7 +140,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
                 return ErrorBucket;
             }
 
-            return new List<string>();
+            return [];
         }
     }
 
@@ -406,18 +411,18 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         if (EditContext == null)
         {
-            var previousErrorBucket = ErrorBucket;
-            ErrorBucket.Clear();
-            ErrorBucket.AddRange(ValidateRules(InternalValue));
-            if (!previousErrorBucket.OrderBy(e => e).SequenceEqual(ErrorBucket.OrderBy(e => e)))
+            List<string> previousErrorBucket = [.._ruleErrorBucket];
+            _ruleErrorBucket.Clear();
+            _ruleErrorBucket.AddRange(ValidateRules(InternalValue));
+            if (!previousErrorBucket.OrderBy(e => e).SequenceEqual(_ruleErrorBucket.OrderBy(e => e)))
             {
                 Form?.UpdateValidValue();
                 StateHasChanged();
             }
-
+        
             return;
         }
-
+        
         if (ValueIdentifier.HasValue && !EqualityComparer<FieldIdentifier>.Default.Equals(ValueIdentifier.Value, default))
         {
             EditContext.NotifyFieldChanged(ValueIdentifier.Value);
@@ -456,15 +461,40 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         await Js.InvokeVoidAsync(JsInteropConstants.Blur, InputElement).ConfigureAwait(false);
     }
 
-    public bool Validate()
+    public bool Validate(bool force = false)
     {
-        return Validate(default);
+        return Validate(InternalValue, force);
     }
 
-    protected bool Validate(TValue? val)
+    public bool Validate(out FieldValidationResult result, bool force = false)
     {
-        var force = true;
+        return Validate(InternalValue, out result, force);
+    }
 
+    protected bool Validate(TValue? val, bool force = false)
+    {
+        return SharedValidate(val, force);
+    }
+
+    protected bool Validate(TValue? val, out FieldValidationResult result, bool force = false)
+    {
+        AssertValueIdentifier();
+
+        result = new FieldValidationResult(ValueIdentifier.Value, []);
+
+        return SharedValidate(val, force, in result);
+    }
+
+    /// <summary>
+    /// The method only validates the <see cref="Rules"/>, not include the EditContext validation.
+    /// The EditContext validation will be triggered by <see cref="HandleOnValidationStateChanged"/>.
+    /// </summary>
+    /// <param name="val"></param>
+    /// <param name="force"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    private bool SharedValidate(TValue? val, bool force, in FieldValidationResult? result = null)
+    {
         _forceStatus = force;
 
         //No rules should be valid. 
@@ -478,12 +508,14 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         if (InternalRules.Any())
         {
-            var value = EqualityComparer<TValue>.Default.Equals(val, default) ? InternalValue : val;
+            _ruleErrorBucket.Clear();
+            _ruleErrorBucket.AddRange(ValidateRules(val));
+            valid = _ruleErrorBucket.Count == 0;
 
-            ErrorBucket.Clear();
-            ErrorBucket.AddRange(ValidateRules(value));
-
-            valid = ErrorBucket.Count == 0;
+            if (result is not null && valid == false)
+            {
+                result.ErrorMessages.AddRange(_ruleErrorBucket);
+            }
         }
 
         return valid;
@@ -530,17 +562,27 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
         _forceStatus = false;
 
-        ErrorBucket.Clear();
-
+        _ruleErrorBucket.Clear();
+        _editContextErrorBucket.Clear();
+        
         var editContextErrors = EditContext!.GetValidationMessages(ValueIdentifier!.Value).ToList();
-        ErrorBucket.AddRange(editContextErrors);
-
+        _editContextErrorBucket.AddRange(editContextErrors);
+        
         var ruleErrors = ValidateRules(InternalValue);
-        ErrorBucket.AddRange(ruleErrors);
-
+        _ruleErrorBucket.AddRange(ruleErrors);
+        
         Form?.UpdateValidValue();
 
         InvokeStateHasChanged();
+    }
+
+    [MemberNotNull(nameof(ValueIdentifier))]
+    private void AssertValueIdentifier()
+    {
+        if (!ValueIdentifier.HasValue)
+        {
+            throw new InvalidOperationException("ValueExpression required for validation result.");
+        }
     }
 
     protected override ValueTask DisposeAsyncCore()

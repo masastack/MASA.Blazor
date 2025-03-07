@@ -264,12 +264,16 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         {
             if (Required)
             {
-                var rules = new List<Func<TValue, StringBoolean>>()
-                    { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
-                return Rules is null ? rules : rules.Concat(Rules);
+                yield return v => s_defaultRequiredRule(v) ? true : RequiredMessage;
             }
 
-            return Rules ?? Enumerable.Empty<Func<TValue, StringBoolean>>();
+            if (Rules is not null)
+            {
+                foreach (var rule in Rules)
+                {
+                    yield return rule;
+                }
+            }
         }
     }
 
@@ -312,10 +316,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         return styleList.Length > 0 ? string.Join("; ", styleList).Trim(' ') : null;
     }
 
-    protected virtual IEnumerable<string> BuildControlStyle()
-    {
-        return Enumerable.Empty<string>();
-    }
+    protected virtual IEnumerable<string> BuildControlStyle() => [];
 
     protected async Task TryInvokeFieldChangeOfInputsFilter(bool isClear = false)
     {
@@ -327,13 +328,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         await InputsFilter.NotifyFieldChange(ValueIdentifier?.FieldName, isClear);
     }
 
-    public void ResetFilter()
-    {
-        Reset();
-    }
+    public void ResetFilter() => Reset();
 
-    public void SetFormLabel(string input)
-    {
-        _formLabel = input;
-    }
+    public void SetFormLabel(string input) => _formLabel = input;
 }

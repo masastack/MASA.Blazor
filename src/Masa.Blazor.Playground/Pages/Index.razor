@@ -1,3 +1,87 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+
+@using System.ComponentModel.DataAnnotations
+@using System.Text
+
+<MForm Model="_model"
+       OnValidSubmit="HandleOnValidSubmit"
+       OnInvalidSubmit="HandleOnInvalidSubmit"
+       @ref="_form">
+    <MTextField @bind-Value="_model.Name"
+                Counter="10"
+                Required
+                Filled
+                Label="Name">
+    </MTextField>
+    <MTextField @bind-Value="_model.Email"
+                Filled
+                Label="E-mail">
+    </MTextField>
+    <MSelect @bind-Value="_model.Item"
+             Items="@_items"
+             Filled
+             Label="Item"
+             ItemText="u => u"
+             ItemValue="u => u">
+    </MSelect>
+    <MCheckbox @bind-Value="_model.Agree"
+               Label="Do you agree?">
+    </MCheckbox>
+    @* <MButton Type="submit">Submit</MButton> *@
+    <MButton OnClick="Submit">Submit</MButton>
+</MForm>
+
+@code {
+
+    class Model
+    {
+        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
+        public string Name { get; set; }
+
+        [Required] [EmailAddress] public string Email { get; set; }
+        [Required] public string Item { get; set; }
+
+        [RegularExpression("True", ErrorMessage = "You must agree to continue!")]
+        public bool Agree { get; set; }
+    }
+
+    private bool _valid = true;
+    private MForm _form;
+    private Model _model = new();
+
+    List<string> _items = new()
+    {
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4"
+    };
+
+    private void HandleOnValidSubmit()
+    {
+        //valid
+    }
+
+    private void HandleOnInvalidSubmit()
+    {
+        //invalid
+    }
+
+    private void Submit()
+    {
+        if (!_form.Validate(out var validationResults))
+        {
+            StringBuilder builder = new();
+            foreach (var validationResult in validationResults)
+            {
+                builder.AppendLine("Field: " + validationResult.Field.FieldName);
+                builder.AppendLine("Message: " + string.Join(", ", validationResult.ErrorMessages));
+            }
+            
+            Console.WriteLine(builder.ToString());
+        }
+    }
+
+}

@@ -166,26 +166,65 @@ public partial class MForm : MasaComponentBase
     [MasaApiPublicMethod]
     public bool Validate()
     {
-        var valid = true;
+        return SharedValidate(null);
+    }
 
-        foreach (var validatable in Validatables)
-        {
-            var success = validatable.Validate();
-            if (!success)
-            {
-                valid = false;
-            }
-        }
+    /// <summary>
+    /// Validate the all fields and get the validation result
+    /// </summary>
+    /// <param name="results">The validation result</param>
+    /// <returns></returns>
+    [MasaApiPublicMethod]
+    public bool Validate(out List<FieldValidationResult> results)
+    {
+        results = [];
+        return SharedValidate(results);
+    }
+
+    private bool SharedValidate(in List<FieldValidationResult>? fieldResults)
+    {
+        var editContextValid = true;
+        var ruleValid = true;
 
         if (EditContext != null)
         {
-            var success = EditContext.Validate();
-
-            valid = valid && success;
+            editContextValid = EditContext.Validate();
         }
 
-        _ = UpdateValue(valid);
+        foreach (var validatable in Validatables)
+        {
+            bool success;
 
+            if (fieldResults is not null)
+            {
+                success = validatable.Validate(out var fieldValidationResult, force: true);
+
+                if (!editContextValid && EditContext != null)
+                {
+                    var validationMessages = EditContext.GetValidationMessages(validatable.ValueIdentifier!.Value);
+                    fieldValidationResult.ErrorMessages.AddRange(validationMessages);
+                }
+
+                if (fieldValidationResult.ErrorMessages.Count > 0)
+                {
+                    fieldResults.Add(fieldValidationResult);
+                }
+            }
+            else
+            {
+                success = validatable.Validate(force: true);
+            }
+
+            if (ruleValid && !success)
+            {
+                ruleValid = false;
+            }
+        }
+        
+        var valid = editContextValid && ruleValid;
+
+        _ = UpdateValue(valid);
+        
         return valid;
     }
 
@@ -384,7 +423,7 @@ public partial class MForm : MasaComponentBase
         {
             throw new ArgumentException($"Field {fieldIdentifier.FieldName} not found in form.");
         }
-        
+
         Reset(validatable);
     }
 
@@ -395,7 +434,7 @@ public partial class MForm : MasaComponentBase
         {
             EditContext?.MarkAsUnmodified(validatable.ValueIdentifier.Value);
         }
-        
+
         validatable.Reset();
 
         UpdateValidValue();
@@ -413,7 +452,7 @@ public partial class MForm : MasaComponentBase
 
         _ = UpdateValue(true);
     }
-    
+
     [MasaApiPublicMethod]
     public void ResetValidation(FieldIdentifier fieldIdentifier)
     {
@@ -422,10 +461,10 @@ public partial class MForm : MasaComponentBase
         {
             throw new ArgumentException($"Field {fieldIdentifier.FieldName} not found in form.");
         }
-        
+
         ResetValidation(validatable);
     }
-    
+
     [MasaApiPublicMethod]
     public void ResetValidation(IValidatable validatable)
     {
@@ -433,7 +472,7 @@ public partial class MForm : MasaComponentBase
         {
             EditContext?.MarkAsUnmodified(validatable.ValueIdentifier.Value);
         }
-        
+
         validatable.ResetValidation();
 
         UpdateValidValue();
