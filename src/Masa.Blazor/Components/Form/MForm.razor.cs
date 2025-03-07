@@ -19,8 +19,6 @@ public partial class MForm : MasaComponentBase
 
     [Parameter] public RenderFragment<FormContext>? ChildContent { get; set; }
 
-    [Parameter] public EventCallback<EventArgs> OnSubmit { get; set; }
-
     [Parameter] public object? Model { get; set; }
 
     [Parameter]
@@ -37,9 +35,11 @@ public partial class MForm : MasaComponentBase
 
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
 
-    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public EventCallback<SubmitEventArgs> OnSubmit { get; set; }
 
-    [Parameter] public EventCallback OnInvalidSubmit { get; set; }
+    [Parameter] public EventCallback<SubmitEventArgs> OnValidSubmit { get; set; }
+
+    [Parameter] public EventCallback<SubmitEventArgs> OnInvalidSubmit { get; set; }
 
     [Parameter]
     [MasaApiParameter(ReleasedOn = "v1.7.0")]
@@ -136,26 +136,21 @@ public partial class MForm : MasaComponentBase
 
     private async Task HandleOnSubmitAsync(EventArgs args)
     {
-        var valid = Validate();
+        var valid = Validate(out var fieldValidationResults);
+        var submitEventArgs = new SubmitEventArgs(fieldValidationResults, FormContext);
 
         if (OnSubmit.HasDelegate)
         {
-            await OnSubmit.InvokeAsync(args);
+            await OnSubmit.InvokeAsync(submitEventArgs);
         }
 
         if (valid)
         {
-            if (OnValidSubmit.HasDelegate)
-            {
-                await OnValidSubmit.InvokeAsync();
-            }
+            await OnValidSubmit.InvokeAsync(submitEventArgs);
         }
         else
         {
-            if (OnInvalidSubmit.HasDelegate)
-            {
-                await OnInvalidSubmit.InvokeAsync();
-            }
+            await OnInvalidSubmit.InvokeAsync(submitEventArgs);
         }
     }
 

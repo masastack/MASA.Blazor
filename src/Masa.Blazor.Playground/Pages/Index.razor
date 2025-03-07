@@ -1,11 +1,13 @@
 ﻿@page "/"
-
+@using Microsoft.AspNetCore.Components.Forms
 <h1>Test your code here!</h1>
 
 @using System.ComponentModel.DataAnnotations
 @using System.Text
+@using Masa.Blazor.Components.Form
 
 <MForm Model="_model"
+       OnSubmit="HandleOnSubmit"
        OnValidSubmit="HandleOnValidSubmit"
        OnInvalidSubmit="HandleOnInvalidSubmit"
        @ref="_form">
@@ -29,8 +31,8 @@
     <MCheckbox @bind-Value="_model.Agree"
                Label="Do you agree?">
     </MCheckbox>
-    @* <MButton Type="submit">Submit</MButton> *@
-    <MButton OnClick="Submit">Submit</MButton>
+    <MButton Type="submit">Submit</MButton>
+    @* <MButton OnClick="Submit">Submit</MButton> *@
 </MForm>
 
 @code {
@@ -59,14 +61,20 @@
         "Item 4"
     };
 
-    private void HandleOnValidSubmit()
+    private void HandleOnValidSubmit(SubmitEventArgs args)
     {
-        //valid
+        Console.Out.WriteLine($"ValidSubmit Valid: {args.Valid}, {args.Results.Count} ");
     }
 
-    private void HandleOnInvalidSubmit()
+    private void HandleOnInvalidSubmit(SubmitEventArgs args)
     {
         //invalid
+        Console.Out.WriteLine($"InvalidSubmit Valid: {args.Valid}, {args.Results.Count}");
+    }
+
+    private void HandleOnSubmit(SubmitEventArgs args)
+    {
+        Console.Out.WriteLine($"Submit Valid: {args.Valid}, {args.Results.Count}");
     }
 
     private void Submit()
