@@ -38,6 +38,13 @@ related:
 
 ### 其他 {#misc}
 
+#### 错误信息 {#error-messages released-on=v1.9.0}
+ 
+提交事件的 **SubmitEventArgs** 参数包含了表单验证的结果。
+**MForm** 实例的 `Validate` 方法也提供了相应的重载。
+
+<masa-example file="Examples.components.forms.ErrorMessages"></masa-example>
+
 #### 模型验证 {#model-validation}
 
 除了在每个输入组件上通过 `Rules` 属性进行验证之外，还可以对单个对象模型进行验证。

@@ -38,6 +38,13 @@ The `ValidateOn` prop is used to specify when to validate the form, with optiona
 
 ### Misc
 
+#### Error messages {#error-messages released-on=v1.9.0}
+
+The **SubmitEventArgs** parameter of the submit event contains the result of the form validation.
+The `Validate` method of the **MForm** instance also provides the corresp onding overload.
+
+<masa-example file="Examples.components.forms.ErrorMessages"></masa-example>
+
 #### Model validation
 
 In addition to validating on each input component via the `Rules` prop, you can also validate a single object model.

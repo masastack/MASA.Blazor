@@ -94,8 +94,8 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     public List<string> ErrorBucket => [.._ruleErrorBucket, .._editContextErrorBucket];
 
-    private List<string> _ruleErrorBucket = [];
-    private List<string> _editContextErrorBucket = [];
+    private readonly List<string> _ruleErrorBucket = [];
+    private readonly List<string> _editContextErrorBucket = [];
 
     public virtual bool HasError => ErrorMessages is { Count: > 0 } || ErrorBucket.Count > 0 || Error;
 
@@ -478,9 +478,7 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
 
     protected bool Validate(TValue? val, out FieldValidationResult result, bool force = false)
     {
-        AssertValueIdentifier();
-
-        result = new FieldValidationResult(ValueIdentifier.Value, []);
+        result = new FieldValidationResult(Id, ValueIdentifier?.FieldName, []);
 
         return SharedValidate(val, force, in result);
     }
@@ -574,15 +572,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
         Form?.UpdateValidValue();
 
         InvokeStateHasChanged();
-    }
-
-    [MemberNotNull(nameof(ValueIdentifier))]
-    private void AssertValueIdentifier()
-    {
-        if (!ValueIdentifier.HasValue)
-        {
-            throw new InvalidOperationException("ValueExpression required for validation result.");
-        }
     }
 
     protected override ValueTask DisposeAsyncCore()
