@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Masa.Blazor.Presets.PageStack;
 
-internal class StackPages : IEnumerable
+internal class StackPages : IEnumerable<string>
 {
     private int _index;
     private readonly List<StackPageData> _pages = [];
@@ -115,6 +115,11 @@ internal class StackPages : IEnumerable
     internal StackPageData ElementAt(int index) => _pages.ElementAt(index);
 
     internal void Clear() => _pages.Clear();
+
+    IEnumerator<string> IEnumerable<string>.GetEnumerator()
+    {
+        return _pages.Select(x => x.AbsolutePath).GetEnumerator();
+    }
 
     public IEnumerator GetEnumerator() => _pages.GetEnumerator();
 }

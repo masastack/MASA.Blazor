@@ -66,15 +66,71 @@ public class PageStackNavController()
     /// <summary>
     /// Push a new page onto the page stack.
     /// </summary>
-    /// <param name="relativeUri">the relative URI of the new page</param>
-    /// <param name="clearStack">determine whether to push new page and remove all old pages</param>
+    /// <param name="relativeUri">The relative URI of the new page</param>
+    /// <param name="clearStack">Determine whether to push new page and remove all old pages</param>
     public void Push(string relativeUri, bool clearStack = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackPushEventArgs(relativeUri, clearStack, _boundComponent.Pages.Count == 0);
+            var countOfTopPagesToRemove = clearStack ? -1 : 0;
+            var eventArgs = new PageStackPushEventArgs(
+                relativeUri, countOfTopPagesToRemove, _boundComponent.Pages.Count == 0);
+
+            StackPush?.Invoke(this, eventArgs);
+
+            _boundComponent.Push(eventArgs);
+        });
+    }
+
+    /// <summary>
+    /// Push a new page onto the page stack and remove the specified number of top pages excluding the new page.
+    /// </summary>
+    /// <param name="relativeUri">The relative URI of the new page</param>
+    /// <param name="countOfTopPagesToRemove">The number of top pages to remove</param>
+    public void Push(string relativeUri, int countOfTopPagesToRemove)
+    {
+        ExecuteIfTimeElapsed(() =>
+        {
+            AssertComponentBound();
+
+            var eventArgs = new PageStackPushEventArgs(
+                relativeUri, countOfTopPagesToRemove, _boundComponent.Pages.Count == 0);
+
+            StackPush?.Invoke(this, eventArgs);
+
+            _boundComponent.Push(eventArgs);
+        });
+    }
+
+    /// <summary>
+    /// Push a new page onto the page stack and remove all pages until the specified page.
+    /// If the <see cref="removeUntilPage"/> is not found, no page will be removed.
+    /// </summary>
+    /// <param name="relativeUri">The relative URI of the new page</param>
+    /// <param name="removeUntilPage">The page to remove until, accepts the absolute path of the page</param>
+    /// <example>
+    /// <code>
+    /// // known pages:  page1 -> page2 -> page3
+    /// Push("/page4", "/page1");
+    /// // result: page1 -> page4
+    /// </code>
+    /// </example>
+    public void Push(string relativeUri, string removeUntilPage)
+    {
+        ExecuteIfTimeElapsed(() =>
+        {
+            AssertComponentBound();
+
+            var delta = _boundComponent.Pages.GetDelta(removeUntilPage);
+            if (delta == -1)
+            {
+                delta = 0;
+            }
+
+            var eventArgs = new PageStackPushEventArgs(
+                relativeUri, delta, _boundComponent.Pages.Count == 0);
 
             StackPush?.Invoke(this, eventArgs);
 
