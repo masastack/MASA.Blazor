@@ -38,9 +38,9 @@ public partial class PPageStack : PatternPathComponentBase
 
     /// <summary>
     /// The flag to indicate whether to push a new page
-    /// and clear the stack in the next popstate event.
+    /// and remove top pages in the next popstate event.
     /// </summary>
-    private string? _uriForPushAndClearStack;
+    private (string relativeUri, int delta)? _callbackForPushAndRemove;
 
     /// <summary>
     /// The flag to indicate whether to replace the top page
@@ -138,16 +138,25 @@ public partial class PPageStack : PatternPathComponentBase
         }
 
         // continue to process the push event that needs to clear the stack
-        if (_uriForPushAndClearStack is not null)
+        if (_callbackForPushAndRemove.HasValue)
         {
-            Push(_uriForPushAndClearStack);
-            NavigationManager.NavigateTo(_uriForPushAndClearStack);
-            _uriForPushAndClearStack = null;
+            var (relativeUri, delta) = _callbackForPushAndRemove.Value;
+
+            var startIndex = Pages.Count - delta;
+            if (startIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(delta),
+                    "The delta must be less than or equal to the number of pages in the stack.");
+            }
+
+            Push(relativeUri);
+            NavigationManager.NavigateTo(relativeUri);
+            _callbackForPushAndRemove = null;
 
             _ = Task.Run(async () =>
             {
                 await Task.Delay(DelayForPageClosingAnimation); // wait for the transition to complete
-                Pages.RemoveRange(0, Pages.Count - 1);
+                Pages.RemoveRange(startIndex, delta);
                 await InvokeAsync(StateHasChanged);
             });
 
@@ -266,14 +275,15 @@ public partial class PPageStack : PatternPathComponentBase
         }
     }
 
-    internal void Push(PageStackPushEventArgs e)
+    internal void Push(PageStackPushEventArgs e, Action? afterPush = null)
     {
-        if (e.ClearStack)
+        if (e.CountOfTopPagesToRemove != 0)
         {
             // after calling history.go, a popstate event callback will be triggered,
-            // where the logic of the stack page is processed (push new page, clean up old page)
-            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
-            _uriForPushAndClearStack = e.RelativeUri;
+            // where the logic of the stack page is processed (push new page, remove old pages)
+            var delta = e.CountOfTopPagesToRemove == -1 ? Pages.Count : e.CountOfTopPagesToRemove;
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
+            _callbackForPushAndRemove = (e.RelativeUri, delta);
             return;
         }
 
