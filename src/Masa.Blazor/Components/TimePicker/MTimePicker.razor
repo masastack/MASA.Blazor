@@ -92,6 +92,7 @@
                           Scrollable="@Scrollable"
                           Step="@(selectingHour ? 1 : 5)"
                           Value="@(selectingHour ? InputHour : selectingMinute ? InputMinute : InputSecond)"
+                          Selecting="@Selecting"
                           OnInput="@HandleOnInputAsync"
                           OnChange="@HandleOnChangeAsync">
         </MTimePickerClock>

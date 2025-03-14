@@ -1,3 +1,9 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+
+<MTimePicker @bind-Value="_picker"></MTimePicker>
+
+@code {
+    private TimeOnly? _picker;
+}
