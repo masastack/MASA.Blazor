@@ -30,6 +30,7 @@ class PDFViewerApplication {
   viewerDiv: HTMLElement;
   pagination: HTMLElement;
   maxCanvasPixels: number;
+  maxImageSize: number;
   startDistance = 0;
 
   _zoomIn = () => this.zoomIn();
@@ -99,7 +100,7 @@ class PDFViewerApplication {
     this.value = 0;
   }
 
-  async open(url: string) {
+  async open(url: string, maxImageSize: number) {
     if (this.pdfLoadingTask) {
       // We need to destroy already opened document
       return this.close().then(
@@ -115,7 +116,7 @@ class PDFViewerApplication {
     // Loading document.
     const loadingTask = getDocument({
       url,
-      maxImageSize: MAX_IMAGE_SIZE,
+      maxImageSize,
     });
     this.pdfLoadingTask = loadingTask;
 
@@ -320,11 +321,12 @@ function getDistance(touches: TouchList) {
 function init(
   viewerContainer: HTMLDivElement,
   url: string,
-  maxCanvasPixels: number = 0
+  maxCanvasPixels: number = 0,
+  maxImageSize: number = MAX_IMAGE_SIZE
 ) {
   const pdfViewerApp = new PDFViewerApplication(
     viewerContainer,
-    maxCanvasPixels
+    maxCanvasPixels,
   );
 
   GlobalWorkerOptions.workerSrc = new URL(
@@ -332,7 +334,7 @@ function init(
     import.meta.url
   ).toString();
   pdfViewerApp.initUI();
-  pdfViewerApp.open(url);
+  pdfViewerApp.open(url, maxImageSize);
 
   return pdfViewerApp;
 }

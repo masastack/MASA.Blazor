@@ -22,7 +22,16 @@ public partial class MPdfMobileViewer : MasaComponentBase
     /// </summary>
     [Parameter]
     [MasaApiParameter(0)]
-    public long MaxCanvasPixels { get; set; } = 0;
+    public long MaxCanvasPixels { get; set; }
+
+    /// <summary>
+    /// The maximum allowed image size in total pixels, i.e., width * height.
+    /// Images above this value will not be rendered.
+    /// Use -1 for no limit.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter("1024 * 1024")]
+    public long MaxImageSize { get; set; } = 1024 * 1024;
 
     private IJSObjectReference? _jsObjectReference;
 
@@ -54,7 +63,7 @@ public partial class MPdfMobileViewer : MasaComponentBase
                 .InvokeAsync<IJSObjectReference>("import",
                     "./_content/Masa.Blazor.JSComponents.PdfJS/mobile-viewer.js").ConfigureAwait(false);
             _jsObjectReference = await importJSReference
-                .InvokeAsync<IJSObjectReference>("init", Ref, url, MaxCanvasPixels).ConfigureAwait(false);
+                .InvokeAsync<IJSObjectReference>("init", Ref, url, MaxCanvasPixels, MaxImageSize).ConfigureAwait(false);
             _ = importJSReference.DisposeAsync().ConfigureAwait(false);
         }
     }
