@@ -120,9 +120,6 @@ public partial class MTimePickerClock : MasaComponentBase
         ValueOnMouseUp = null;
         IsDragging = true;
 
-        var isTouch = args is TouchEventArgs;
-        Console.Out.WriteLine($"touchstart!!~~~ isTouch:{isTouch}");
-
         await OnDragMove(args);
     }
 
@@ -149,7 +146,6 @@ public partial class MTimePickerClock : MasaComponentBase
             default:
                 return;
         }
-
 
         if (!IsDragging && type != "click") return;
 
@@ -341,7 +337,7 @@ public partial class MTimePickerClock : MasaComponentBase
                     "wheel",
                     HandleOnWheelAsync,
                     false,
-                    new EventListenerExtras() { PreventDefault = true });
+                    new EventListenerExtras { PreventDefault = true });
             }
         }
     }

@@ -125,8 +125,6 @@ public partial class MTimePicker : MasaComponentBase
     {
         var (value, selecting) = args;
 
-        Console.Out.WriteLine("input selecting: " + selecting);
-        
         if (selecting == SelectingTime.Hour)
         {
             InputHour = IsAmPm ? TimeHelper.Convert12To24(value, Period) : value;
