@@ -140,9 +140,12 @@ export function getBoundingClientRect(elOrString, attach = "body") {
   return result;
 }
 
-var htmlElementEventListenerConfigs: { [prop: string]: HtmlElementEventListenerConfig[] } = {}
+var htmlElementEventListenerId = 1;
+var htmlElementEventListenerConfigs: { [id: number]: HtmlElementEventListenerConfig[] } = {}
 
 type HtmlElementEventListenerConfig = {
+  el?: HTMLElement | Window;
+  type?: string;
   listener?: (args: any) => void;
   options?: any;
   handle?: DotNet.DotNetObject;
@@ -153,7 +156,7 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
   type: string,
   invoker: DotNet.DotNetObject,
   options?: boolean | AddEventListenerOptions,
-  extras?: Partial<Pick<Event, "stopPropagation" | "preventDefault">> & { relatedTarget?: string, throttle?: number, debounce?: number, key?: string }) {
+  extras?: Partial<Pick<Event, "stopPropagation" | "preventDefault">> & { relatedTarget?: string, throttle?: number, debounce?: number }) {
   let htmlElement: HTMLElement | Window
 
   if (selector == "window") {
@@ -166,10 +169,10 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   if (!htmlElement) {
     // throw new Error("Unable to find the element.");
-    return false;
+    return 0;
   }
 
-  var key = extras?.key || `${selector}:${type}`;
+  var key = htmlElementEventListenerId;
 
   //save for remove
   const config: HtmlElementEventListenerConfig = {};
@@ -229,6 +232,8 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   config.options = options;
   config.handle = invoker
+  config.el = htmlElement;
+  config.type = type;
 
   if (htmlElementEventListenerConfigs[key]) {
     htmlElementEventListenerConfigs[key].push(config);
@@ -238,31 +243,18 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   htmlElement.addEventListener(type, config.listener, config.options);
 
-  return true;
+  return htmlElementEventListenerId++;
 }
 
-export function removeHtmlElementEventListener(selector, type, k?: string) {
-  let htmlElement: any
-
-  if (selector == "window") {
-    htmlElement = window;
-  } else if (selector == "document") {
-    htmlElement = document.documentElement;
-  } else {
-    htmlElement = document.querySelector(selector);
-  }
-
-  var k = k || `${selector}:${type}`;
-
-  var configs = htmlElementEventListenerConfigs[k];
-
+export function removeHtmlElementEventListener(eventId: number) {
+  var configs = htmlElementEventListenerConfigs[eventId];
   if (configs) {
     configs.forEach(item => {
       item.handle.dispose();
-      htmlElement?.removeEventListener(type, item.listener, item.options);
+      item.el.removeEventListener(item.type, item.listener, item.options);
     });
 
-    htmlElementEventListenerConfigs[k] = []
+    delete htmlElementEventListenerConfigs[eventId]
   }
 }
 

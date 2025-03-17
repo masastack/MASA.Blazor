@@ -36,6 +36,11 @@ public partial class MSplitter
     private int _activeIndex;
     private bool _eventsBound;
 
+    private long _mousemoveEventId;
+    private long _mouseupEventId;
+    private long _touchmoveEventId;
+    private long _touchendEventId;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -195,39 +200,37 @@ public partial class MSplitter
 
     private async Task BindEvents()
     {
-        await Js.AddHtmlElementEventListener<MouseEventArgs>("document", "mousemove", HandleMousemove, new EventListenerOptions()
+        _mousemoveEventId = await Js.AddHtmlElementEventListener<MouseEventArgs>("document", "mousemove", HandleMousemove, new EventListenerOptions
         {
             Passive = false
         }, new EventListenerExtras
         {
             Throttle = 16,
-            PreventDefault = true,
-            Key = $"{Id}_mousemove"
+            PreventDefault = true
         });
 
-        await Js.AddHtmlElementEventListener("document", "mouseup", HandleMouseup, false, new EventListenerExtras($"{Id}_mouseup"));
+        _mouseupEventId = await Js.AddHtmlElementEventListener("document", "mouseup", HandleMouseup, false);
 
-        await Js.AddHtmlElementEventListener<TouchEventArgs>("document", "touchmove", HandleMousemove, new EventListenerOptions()
+        _touchmoveEventId = await Js.AddHtmlElementEventListener<TouchEventArgs>("document", "touchmove", HandleMousemove, new EventListenerOptions
         {
             Passive = false
         }, new EventListenerExtras
         {
             Throttle = 16,
-            PreventDefault = true,
-            Key = $"{Id}_touchmove"
+            PreventDefault = true
         });
 
-        await Js.AddHtmlElementEventListener("document", "touchend", HandleMouseup, false, new EventListenerExtras($"{Id}_touchend"));
+        _touchendEventId = await Js.AddHtmlElementEventListener("document", "touchend", HandleMouseup, false);
     }
 
     private async Task UnbindEvents()
     {
         try
         {
-            await Js.RemoveHtmlElementEventListener("document", "mousemove", $"{Id}_mousemove");
-            await Js.RemoveHtmlElementEventListener("document", "mouseup", $"{Id}_mouseup");
-            await Js.RemoveHtmlElementEventListener("document", "touchmove", $"{Id}_touchmove");
-            await Js.RemoveHtmlElementEventListener("document", "touchend", $"{Id}_touchend");
+            await Js.RemoveHtmlElementEventListener(_mousemoveEventId);
+            await Js.RemoveHtmlElementEventListener(_mouseupEventId);
+            await Js.RemoveHtmlElementEventListener(_touchmoveEventId);
+            await Js.RemoveHtmlElementEventListener(_touchendEventId);
         }
         catch (Exception)
         {

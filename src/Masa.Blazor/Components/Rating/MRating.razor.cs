@@ -125,6 +125,8 @@ public partial class MRating : MasaComponentBase
     private static Block _block = new("m-rating");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
+    private HashSet<long[]> _eventIdsGroup = [];
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder
@@ -143,13 +145,15 @@ public partial class MRating : MasaComponentBase
             {
                 if (v.ForwardRef.Current.TryGetSelector(out var selector))
                 {
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseenter",
+                    var mouseenterEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseenter",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseEnter), false);
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseleave",
+                    var mouseleaveEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseleave",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseLeave), false);
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mousemove",
+                    var mousemoveEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mousemove",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseMove), false,
                         new EventListenerExtras(0, 16));
+                    
+                    _eventIdsGroup.Add([mouseenterEventId, mouseleaveEventId, mousemoveEventId]);
                 }
             }
         }
@@ -285,13 +289,11 @@ public partial class MRating : MasaComponentBase
 
     protected override ValueTask DisposeAsyncCore()
     {
-        foreach (var (k, v) in _cachedItems)
+        foreach (var eventIds in _eventIdsGroup)
         {
-            if (v.ForwardRef.Current.TryGetSelector(out var selector))
+            foreach (var t in eventIds)
             {
-                _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
-                _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
-                _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
+                _ = Js.RemoveHtmlElementEventListener(t);
             }
         }
 

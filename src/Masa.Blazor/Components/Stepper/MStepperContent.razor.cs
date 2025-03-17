@@ -19,6 +19,7 @@ public partial class MStepperContent : MasaComponentBase
     private StringNumber _height = 0;
     private bool _transitionEndListenerAdded;
     private ElementReference _wrapper;
+    private long _transitionendEventId;
 
     protected bool IsBooted { get; set; }
 
@@ -164,8 +165,12 @@ public partial class MStepperContent : MasaComponentBase
         {
             _transitionEndListenerAdded = true;
 
-            _ = Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector, "transitionend", OnTransition,
-                false);
+            _ = Task.Run(async () =>
+            {
+                _transitionendEventId = await Js.AddHtmlElementEventListener<StepperTransitionEventArgs>(selector,
+                    "transitionend", OnTransition,
+                    false);
+            });
         }
     }
 
@@ -223,17 +228,7 @@ public partial class MStepperContent : MasaComponentBase
     {
         Stepper?.UnRegisterContent(this);
 
-        if (Ref.TryGetSelector(out var selector))
-        {
-            try
-            {
-                _ = Js.RemoveHtmlElementEventListener(selector, "transitionend");
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
+        _ = Js.RemoveHtmlElementEventListener( _transitionendEventId);
 
         return base.DisposeAsyncCore();
     }
