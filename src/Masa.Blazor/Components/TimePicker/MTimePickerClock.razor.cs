@@ -189,11 +189,6 @@ public partial class MTimePickerClock : MasaComponentBase
 
         IsDragging = false;
 
-        await Test();
-    }
-
-    private async Task Test()
-    {
         if (ValueOnMouseUp == null || !IsAllowed(ValueOnMouseUp.Value)) return;
 
         await OnChange.InvokeAsync(ValueOnMouseUp.Value);
