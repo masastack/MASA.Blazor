@@ -14,7 +14,7 @@ public class EventListenerOptions
 
     public EventListenerOptions(bool passive)
     {
-        Passive = true;
+        Passive = passive;
     }
 }
 
