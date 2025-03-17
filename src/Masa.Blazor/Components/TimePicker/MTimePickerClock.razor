@@ -11,12 +11,8 @@
          @onmouseleave="@OnMouseLeave"
          @onmousemove="@OnDragMove"
          @onmousemove:preventDefault
-         @ontouchstart="@OnMouseDown"
-         @ontouchstart:preventDefault
          @ontouchend="@OnMouseUp"
          @ontouchend:stopPropagation
-         @ontouchmove="@OnDragMove"
-         @ontouchmove:preventDefault
          @ref="Ref">
         <div class="@_block.Element("inner")" @ref="InnerClockElement">
             @GenHand()

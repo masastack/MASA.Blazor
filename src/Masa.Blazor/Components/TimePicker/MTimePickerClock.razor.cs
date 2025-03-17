@@ -109,7 +109,7 @@ public partial class MTimePickerClock : MasaComponentBase
     protected int? InputValue { get; set; }
 
     protected double Degrees => DegreesPerUnit * Math.PI / 180;
-    
+
     private bool NonInteractive => Readonly || Disabled;
 
     private async Task OnMouseDown(object args)
@@ -149,12 +149,11 @@ public partial class MTimePickerClock : MasaComponentBase
             default:
                 return;
         }
-        
+
 
         if (!IsDragging && type != "click") return;
-        Console.WriteLine("click type: " + type);
 
-        var selecting = Selecting; 
+        var selecting = Selecting;
 
         var clockRect = await GetBoundingClientRectAsync(Ref);
         var width = clockRect.Width;
@@ -187,13 +186,10 @@ public partial class MTimePickerClock : MasaComponentBase
             }
         }
     }
-    
-    private bool _mouseUpped;
 
     protected async Task OnMouseUp()
     {
         if (NonInteractive) return;
-        
 
         IsDragging = false;
 
@@ -216,7 +212,7 @@ public partial class MTimePickerClock : MasaComponentBase
             await OnMouseUp();
         }
     }
-    
+
     private ValueTask<BoundingClientRect> GetBoundingClientRectAsync(ElementReference element)
     {
         return Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, element, ".m-application");
@@ -228,13 +224,6 @@ public partial class MTimePickerClock : MasaComponentBase
         ValueOnMouseUp = value;
 
         await UpdateAsync(value, selecting);
-
-        // Console.Out.WriteLine("MouseUpped!!~~~");
-        // if (_mouseUpped)
-        // {
-        //     _mouseUpped = false;
-        //     await Test();
-        // }
     }
 
     private async Task UpdateAsync(int value, SelectingTime selecting)
@@ -339,8 +328,11 @@ public partial class MTimePickerClock : MasaComponentBase
     {
         if (firstRender)
         {
-            // _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchstart", OnMouseDown,
-            //     new EventListenerOptions() { Passive = false }, new EventListenerExtras() { PreventDefault = true });
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchstart", OnMouseDown,
+                new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
+
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchmove", OnDragMove,
+                new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
 
             if (Scrollable)
             {
