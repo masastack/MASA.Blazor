@@ -106,7 +106,7 @@ class PDFViewerApplication {
       return this.close().then(
         function () {
           // ... and repeat the open() call.
-          return this.open(url);
+          return this.open(url, maxImageSize);
         }.bind(this)
       );
     }
