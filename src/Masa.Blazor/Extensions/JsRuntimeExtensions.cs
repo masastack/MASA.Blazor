@@ -5,6 +5,16 @@ namespace Masa.Blazor.Extensions;
 
 public static class JsRuntimeExtensions
 {
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
     public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
         Action callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
@@ -18,6 +28,16 @@ public static class JsRuntimeExtensions
         );
     }
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
     public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
         Func<Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
@@ -31,6 +51,16 @@ public static class JsRuntimeExtensions
         );
     }
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="el"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
     public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
         Func<Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
@@ -49,6 +79,17 @@ public static class JsRuntimeExtensions
         return -1;
     }
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <typeparam name="TEventArgs"></typeparam>
+    /// <returns></returns>
     public static async Task<long> AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, string selector, string type,
         Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
@@ -62,6 +103,17 @@ public static class JsRuntimeExtensions
         );
     }
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="el"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <typeparam name="TEventArgs"></typeparam>
+    /// <returns></returns>
     public static async Task<long> AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el,
         string type,
         Func<TEventArgs, Task> callback,
@@ -81,11 +133,11 @@ public static class JsRuntimeExtensions
         return -1;
     }
 
-    public static async Task<long> AddClickEventListener(this IJSRuntime jsRuntime, ElementReference elementReference, Func<MouseEventArgs, Task> callback, bool stopPropagation, bool preventDefault)
-    {
-        return await jsRuntime.AddHtmlElementEventListener(elementReference, "click", callback, false, new EventListenerExtras(stopPropagation, preventDefault));
-    }
-
+    /// <summary>
+    /// Remove an event listener from an HTML element using the unique ID returned by AddHtmlElementEventListener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="eventId"></param>
     public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, long eventId)
     {
         if (eventId <= 0) return;
