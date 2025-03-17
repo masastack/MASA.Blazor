@@ -23,7 +23,7 @@ public partial class MTimePickerClock : MasaComponentBase
 
     [Parameter] public Func<int, bool>? AllowedValues { get; set; }
 
-    [Parameter] public EventCallback<int> OnInput { get; set; }
+    [Parameter] public EventCallback<(int, SelectingTime)> OnInput { get; set; }
 
     [Parameter] public EventCallback<int> OnChange { get; set; }
 
@@ -34,6 +34,8 @@ public partial class MTimePickerClock : MasaComponentBase
     [Parameter] public int Step { get; set; } = 1;
 
     [Parameter] public Func<int, string>? Format { get; set; }
+
+    [Parameter] public SelectingTime Selecting { get; set; }
 
     [Parameter] public bool Dark { get; set; }
 
@@ -84,7 +86,7 @@ public partial class MTimePickerClock : MasaComponentBase
 
         if (value != DisplayedValue)
         {
-            await UpdateAsync(value);
+            await UpdateAsync(value, Selecting);
         }
     }
 
@@ -108,27 +110,46 @@ public partial class MTimePickerClock : MasaComponentBase
 
     protected double Degrees => DegreesPerUnit * Math.PI / 180;
 
-    protected async Task HandleOnMouseDownAsync(MouseEventArgs arg)
+    private bool NonInteractive => Readonly || Disabled;
+
+    private async Task OnMouseDown(object args)
     {
-        if (Readonly || Disabled)
-        {
-            return;
-        }
+        if (NonInteractive) return;
 
         ValueOnMouseDown = null;
         ValueOnMouseUp = null;
         IsDragging = true;
 
-        await HandleOnDragMoveAsync(arg);
+        await OnDragMove(args);
     }
 
-    protected async Task HandleOnDragMoveAsync(MouseEventArgs args)
+    private async Task OnDragMove(object args)
     {
-        if (Readonly || Disabled) return;
-
-        if (!IsDragging) return;
+        if (NonInteractive) return;
 
         if (Ref.Context is null || InnerClockElement.Context is null) return;
+
+        string type;
+        double clientX, clientY;
+        switch (args)
+        {
+            case MouseEventArgs mouseEventArgs:
+                type = mouseEventArgs.Type;
+                clientX = mouseEventArgs.ClientX;
+                clientY = mouseEventArgs.ClientY;
+                break;
+            case TouchEventArgs touchEventArgs:
+                type = touchEventArgs.Type;
+                clientX = touchEventArgs.Touches[0].ClientX;
+                clientY = touchEventArgs.Touches[0].ClientY;
+                break;
+            default:
+                return;
+        }
+
+        if (!IsDragging && type != "click") return;
+
+        var selecting = Selecting;
 
         var clockRect = await GetBoundingClientRectAsync(Ref);
         var width = clockRect.Width;
@@ -138,8 +159,6 @@ public partial class MTimePickerClock : MasaComponentBase
         var innerClockRect = await GetBoundingClientRectAsync(InnerClockElement);
         var innerWidth = innerClockRect.Width;
 
-        var clientX = args.ClientX;
-        var clientY = args.ClientY;
         var center = (X: width / 2, Y: -width / 2);
         var coords = (X: clientX - left, Y: top - clientY);
         var handAngle = Math.Round(Angle(center, coords) - Rotate + 360) % 360;
@@ -151,16 +170,37 @@ public partial class MTimePickerClock : MasaComponentBase
             var value = AngleToValue(handAngle + i * DegreesPerUnit, insideClick);
             if (IsAllowed(value))
             {
-                await SetMouseDownValueAsync(value);
+                await SetMouseDownValueAsync(value, selecting);
                 return;
             }
 
             value = AngleToValue(handAngle - i * DegreesPerUnit, insideClick);
             if (IsAllowed(value))
             {
-                await SetMouseDownValueAsync(value);
+                await SetMouseDownValueAsync(value, selecting);
                 return;
             }
+        }
+    }
+
+    protected async Task OnMouseUp()
+    {
+        if (NonInteractive) return;
+
+        IsDragging = false;
+
+        if (ValueOnMouseUp == null || !IsAllowed(ValueOnMouseUp.Value)) return;
+
+        await OnChange.InvokeAsync(ValueOnMouseUp.Value);
+    }
+
+    protected async Task OnMouseLeave()
+    {
+        if (NonInteractive) return;
+
+        if (IsDragging)
+        {
+            await OnMouseUp();
         }
     }
 
@@ -169,25 +209,22 @@ public partial class MTimePickerClock : MasaComponentBase
         return Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, element, ".m-application");
     }
 
-    private async Task SetMouseDownValueAsync(int value)
+    private async Task SetMouseDownValueAsync(int value, SelectingTime selecting)
     {
-        if (ValueOnMouseDown == null)
-        {
-            ValueOnMouseDown = value;
-        }
-
+        ValueOnMouseDown ??= value;
         ValueOnMouseUp = value;
-        await UpdateAsync(value);
+
+        await UpdateAsync(value, selecting);
     }
 
-    private async Task UpdateAsync(int value)
+    private async Task UpdateAsync(int value, SelectingTime selecting)
     {
         if (InputValue != value)
         {
             InputValue = value;
             if (OnInput.HasDelegate)
             {
-                await OnInput.InvokeAsync(value);
+                await OnInput.InvokeAsync((value, selecting));
             }
         }
     }
@@ -221,36 +258,6 @@ public partial class MTimePickerClock : MasaComponentBase
         var dy = p1.Y - p0.Y;
 
         return Math.Sqrt(dx * dx + dy * dy);
-    }
-
-    protected async Task HandleOnMouseUpAsync(MouseEventArgs arg)
-    {
-        if (Readonly || Disabled)
-        {
-            return;
-        }
-
-        IsDragging = false;
-        if (ValueOnMouseUp != null && IsAllowed(ValueOnMouseUp.Value))
-        {
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(ValueOnMouseUp.Value);
-            }
-        }
-    }
-
-    protected async Task HandleOnMouseLeaveAsync(MouseEventArgs arg)
-    {
-        if (Readonly || Disabled)
-        {
-            return;
-        }
-
-        if (IsDragging)
-        {
-            await HandleOnMouseUpAsync(arg);
-        }
     }
 
     private bool IsInner(int? value)
@@ -312,14 +319,20 @@ public partial class MTimePickerClock : MasaComponentBase
     {
         if (firstRender)
         {
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchstart", OnMouseDown,
+                new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
+
+            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchmove", OnDragMove,
+                new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
+
             if (Scrollable)
             {
-                await Js.AddHtmlElementEventListener<WheelEventArgs>(
+                _ = Js.AddHtmlElementEventListener<WheelEventArgs>(
                     Ref,
                     "wheel",
                     HandleOnWheelAsync,
                     false,
-                    new EventListenerExtras() { PreventDefault = true });
+                    new EventListenerExtras { PreventDefault = true });
             }
         }
     }

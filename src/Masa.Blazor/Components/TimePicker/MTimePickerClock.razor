@@ -4,13 +4,15 @@
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <div class="@GetClass()"
-         @onmousedown="@HandleOnMouseDownAsync"
+         @onmousedown="@OnMouseDown"
          @onmousedown:preventDefault
-         @onmouseup="@HandleOnMouseUpAsync"
+         @onmouseup="@OnMouseUp"
          @onmouseup:stopPropagation
-         @onmouseleave="@HandleOnMouseLeaveAsync"
-         @onmousemove="@HandleOnDragMoveAsync"
+         @onmouseleave="@OnMouseLeave"
+         @onmousemove="@OnDragMove"
          @onmousemove:preventDefault
+         @ontouchend="@OnMouseUp"
+         @ontouchend:stopPropagation
          @ref="Ref">
         <div class="@_block.Element("inner")" @ref="InnerClockElement">
             @GenHand()
