@@ -219,7 +219,8 @@ namespace Masa.Blazor
 #endif
 
             Attributes["ripple"] = Ripple;
-            if (OnClick.HasDelegate)
+
+            if (OnClick.HasDelegate || ItemGroup is not null)
             {
                 Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
             }
