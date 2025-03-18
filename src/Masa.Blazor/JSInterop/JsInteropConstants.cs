@@ -16,8 +16,14 @@ public static class JsInteropConstants
         
     public static string GetParentClientWidthOrWindowInnerWidth => $"{JsInteropFuncNamePrefix}getParentClientWidthOrWindowInnerWidth";
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
     public static string AddHtmlElementEventListener => $"{JsInteropFuncNamePrefix}addHtmlElementEventListener";
 
+    /// <summary>
+    /// Remove an event listener from an HTML element using the unique ID returned by AddHtmlElementEventListener.
+    /// </summary>
     public static string RemoveHtmlElementEventListener => $"{JsInteropFuncNamePrefix}removeHtmlElementEventListener";
 
     public static string Contains => $"{JsInteropFuncNamePrefix}contains";

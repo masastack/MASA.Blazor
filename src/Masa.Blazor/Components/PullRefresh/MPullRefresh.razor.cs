@@ -52,6 +52,9 @@ public partial class MPullRefresh
     private bool _reachTop;
     private double _distance;
 
+    private long _touchstartEventId;
+    private long _touchmoveEventId;
+
     private bool IsTouchable => _pullRefreshStatus != PullRefreshStatus.Loading && _pullRefreshStatus != PullRefreshStatus.Success && !Disabled;
 
     protected override void OnParametersSet()
@@ -78,18 +81,18 @@ public partial class MPullRefresh
 
             var trackSelector = _trackRef.GetSelector()!;
 
-            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchstart", OnTouchStart, new EventListenerOptions()
+            _ = Task.Run(async () =>
             {
-                Passive = true
-            });
+                _touchstartEventId = await Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchstart",
+                    OnTouchStart, new EventListenerOptions(passive: true));
 
-            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchmove", OnTouchMove, new EventListenerOptions()
-            {
-                Passive = false
-            }, new EventListenerExtras()
-            {
-                PreventDefault = false,
-                Throttle = 16
+                _touchmoveEventId = await Js.AddHtmlElementEventListener<TouchEventArgs>(trackSelector, "touchmove",
+                    OnTouchMove, new EventListenerOptions(passive: false),
+                    new EventListenerExtras
+                    {
+                        PreventDefault = false,
+                        Throttle = 16
+                    });
             });
         }
     }
@@ -234,10 +237,7 @@ public partial class MPullRefresh
     {
         await _scrollParentJSRef.TryDisposeAsync();
 
-        if (_trackRef.TryGetSelector(out var trackSelector))
-        {
-            await Js.RemoveHtmlElementEventListener(trackSelector, "touchstart");
-            await Js.RemoveHtmlElementEventListener(trackSelector, "touchmove");
-        }
+        await Js.RemoveHtmlElementEventListener(_touchstartEventId);
+        await Js.RemoveHtmlElementEventListener(_touchmoveEventId);
     }
 }

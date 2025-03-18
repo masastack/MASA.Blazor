@@ -44,6 +44,7 @@ public partial class PDataFilter : MasaComponentBase
 
     private MInputsFilter? _inputsFilter;
     private IJSObjectReference? _jsModule;
+    private long _transitionendEventId;
     private bool _isBooted;
 
     private bool ComputedExpanded
@@ -112,7 +113,7 @@ public partial class PDataFilter : MasaComponentBase
 
                 if (_lowFrequencyRef.TryGetSelector(out var selector))
                 {
-                    _ = Js.AddHtmlElementEventListener<TransitionEventArgs>(selector, "transitionend", OnTransition, false);
+                    _transitionendEventId = await Js.AddHtmlElementEventListener<TransitionEventArgs>(selector, "transitionend", OnTransition, false);
 
                     await ShowLowFrequency();
                 }
@@ -207,10 +208,7 @@ public partial class PDataFilter : MasaComponentBase
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        if (_lowFrequencyRef.TryGetSelector(out var selector))
-        {
-            await Js.RemoveHtmlElementEventListener(selector, "transitionend");
-        }
+        await Js.RemoveHtmlElementEventListener(_transitionendEventId);
     }
 
     private class TransitionEventArgs

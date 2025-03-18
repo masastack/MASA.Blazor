@@ -315,19 +315,23 @@ public partial class MTimePickerClock : MasaComponentBase
             .Build();
     }
 
+    private long _touchstartEventId;
+    private long _touchmoveEventId;
+    private long _wheelEventId;
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchstart", OnMouseDown,
+            _touchstartEventId = await Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchstart", OnMouseDown,
                 new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
 
-            _ = Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchmove", OnDragMove,
+            _touchmoveEventId = await Js.AddHtmlElementEventListener<TouchEventArgs>(Ref, "touchmove", OnDragMove,
                 new EventListenerOptions { Passive = false }, new EventListenerExtras { PreventDefault = true });
 
             if (Scrollable)
             {
-                _ = Js.AddHtmlElementEventListener<WheelEventArgs>(
+                _wheelEventId = await Js.AddHtmlElementEventListener<WheelEventArgs>(
                     Ref,
                     "wheel",
                     HandleOnWheelAsync,
@@ -335,5 +339,14 @@ public partial class MTimePickerClock : MasaComponentBase
                     new EventListenerExtras { PreventDefault = true });
             }
         }
+    }
+
+    protected override ValueTask DisposeAsyncCore()
+    {
+        _ = Js.RemoveHtmlElementEventListener(_touchstartEventId);
+        _ = Js.RemoveHtmlElementEventListener(_touchmoveEventId);
+        _ = Js.RemoveHtmlElementEventListener(_wheelEventId);
+        
+        return base.DisposeAsyncCore();
     }
 }

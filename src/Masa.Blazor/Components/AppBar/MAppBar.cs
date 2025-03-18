@@ -350,12 +350,12 @@ public class MAppBar : MToolbar, IScrollable
 
     private static Block _block = new("m-app-bar");
     private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
+    private long _scrollEventId;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            new[]
-            {
+            [
                 _blockModifierBuilder
                     .Add("clipped", ClippedLeft || ClippedRight)
                     .Add(ClippedLeft)
@@ -369,7 +369,7 @@ public class MAppBar : MToolbar, IScrollable
                     .Add(ShrinkOnScroll)
                     .AddClass("app--sized", _sized)
                     .Build()
-            }
+            ]
         );
     }
 
@@ -422,7 +422,7 @@ public class MAppBar : MToolbar, IScrollable
 
             StateHasChanged();
 
-            await Js.AddHtmlElementEventListener(
+            _scrollEventId = await Js.AddHtmlElementEventListener(
                 ScrollTarget,
                 "scroll",
                 async () =>
@@ -433,8 +433,7 @@ public class MAppBar : MToolbar, IScrollable
 
                     StateHasChanged();
                 },
-                false,
-                new EventListenerExtras(key: Ref.Id));
+                false);
         }
     }
 
@@ -474,7 +473,7 @@ public class MAppBar : MToolbar, IScrollable
     {
         try
         {
-            await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll", key: Ref.Id);
+            await Js.RemoveHtmlElementEventListener(_scrollEventId);
         }
         catch (Exception)
         {

@@ -5,11 +5,21 @@ namespace Masa.Blazor.Extensions;
 
 public static class JsRuntimeExtensions
 {
-    public static async Task AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
+    public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
         Action callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+        return await jsRuntime.InvokeAsync<long>(JsInteropConstants.AddHtmlElementEventListener,
             selector,
             type,
             DotNetObjectReference.Create(new Invoker(callback)),
@@ -18,11 +28,21 @@ public static class JsRuntimeExtensions
         );
     }
 
-    public static async Task AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
+    public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
         Func<Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+        return await jsRuntime.InvokeAsync<long>(JsInteropConstants.AddHtmlElementEventListener,
             selector,
             type,
             DotNetObjectReference.Create(new Invoker(callback)),
@@ -31,13 +51,23 @@ public static class JsRuntimeExtensions
         );
     }
 
-    public static async Task AddHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="el"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <returns></returns>
+    public static async Task<long> AddHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
         Func<Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
         if (el.TryGetSelector(out var selector))
         {
-            await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+            return await jsRuntime.InvokeAsync<long>(JsInteropConstants.AddHtmlElementEventListener,
                 selector,
                 type,
                 DotNetObjectReference.Create(new Invoker(callback)),
@@ -45,13 +75,26 @@ public static class JsRuntimeExtensions
                 extras
             );
         }
+
+        return -1;
     }
 
-    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, string selector, string type,
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="selector"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <typeparam name="TEventArgs"></typeparam>
+    /// <returns></returns>
+    public static async Task<long> AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, string selector, string type,
         Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+        return await jsRuntime.InvokeAsync<long>(JsInteropConstants.AddHtmlElementEventListener,
             selector,
             type,
             DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
@@ -60,14 +103,25 @@ public static class JsRuntimeExtensions
         );
     }
 
-    public static async Task AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el,
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="el"></param>
+    /// <param name="type"></param>
+    /// <param name="callback"></param>
+    /// <param name="options"></param>
+    /// <param name="extras"></param>
+    /// <typeparam name="TEventArgs"></typeparam>
+    /// <returns></returns>
+    public static async Task<long> AddHtmlElementEventListener<TEventArgs>(this IJSRuntime jsRuntime, ElementReference el,
         string type,
         Func<TEventArgs, Task> callback,
         OneOf<EventListenerOptions, bool> options, EventListenerExtras? extras = null)
     {
         if (el.TryGetSelector(out var selector))
         {
-            await jsRuntime.InvokeVoidAsync(JsInteropConstants.AddHtmlElementEventListener,
+            return await jsRuntime.InvokeAsync<long>(JsInteropConstants.AddHtmlElementEventListener,
                 selector,
                 type,
                 DotNetObjectReference.Create(new Invoker<TEventArgs>(callback)),
@@ -75,34 +129,19 @@ public static class JsRuntimeExtensions
                 extras
             );
         }
+
+        return -1;
     }
 
-    public static async Task AddClickEventListener(this IJSRuntime jsRuntime, ElementReference elementReference, Func<MouseEventArgs, Task> callback, bool stopPropagation, bool preventDefault)
+    /// <summary>
+    /// Remove an event listener from an HTML element using the unique ID returned by AddHtmlElementEventListener.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="eventId"></param>
+    public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, long eventId)
     {
-        await jsRuntime.AddHtmlElementEventListener(elementReference, "click", callback, false, new EventListenerExtras(stopPropagation, preventDefault));
-    }
-
-    public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, string selector, string type,
-        string? key = null)
-    {
-        await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, selector, type, key);
-    }
-
-    public static async Task RemoveHtmlElementEventListener(this IJSRuntime jsRuntime, ElementReference el, string type,
-        string? key = null)
-    {
-        if (el.TryGetSelector(out var selector))
-        {
-            await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, selector, type, key);
-        }
-    }
-
-    public static async Task RemoveClickEventListener(this IJSRuntime jSRuntime, ElementReference el, string? key = null)
-    {
-        if (el.TryGetSelector(out var selector))
-        {
-            await jSRuntime.RemoveHtmlElementEventListener(selector, "click", key);
-        }
+        if (eventId <= 0) return;
+        await jsRuntime.InvokeVoidAsync(JsInteropConstants.RemoveHtmlElementEventListener, eventId);
     }
 
     public static async Task ScrollTo(this IJSRuntime jsRuntime, string selector, double? top, double? left = null,
