@@ -48,6 +48,10 @@ export function blockScroll() {
     return;
   }
 
+  if (doc.scrollLeft === 0 && doc.scrollTop === 0) {
+    return;
+  }
+
   doc.style.setProperty("--m-page-stack-scroll-x", convertToUnit(-doc.scrollLeft));
   doc.style.setProperty("--m-page-stack-scroll-y", convertToUnit(-doc.scrollTop));
   doc.classList.add("m-page-stack-scroll-blocked");
