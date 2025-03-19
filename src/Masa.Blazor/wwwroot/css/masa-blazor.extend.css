@@ -446,6 +446,15 @@
     padding-top: var(--m-page-stack-item-bar-height);
 }
 
+html.m-page-stack-scroll-blocked {
+    position: fixed;
+    top: var(--m-page-stack-scroll-y);
+    left: var(--m-page-stack-scroll-x);
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
 /* block-text */
 
 .m-presets-block-text {
