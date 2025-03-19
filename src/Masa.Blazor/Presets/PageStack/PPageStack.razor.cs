@@ -198,7 +198,7 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _lastVisitedTabPath = absolutePath;
             _targetPageType = PageType.Tab;
-            UnblockScroll(false);
+            UnblockScroll();
             StateHasChanged();
         }
         else
@@ -311,7 +311,7 @@ public partial class PPageStack : PatternPathComponentBase
         }
 
         Pages.Clear();
-        UnblockScroll(false);
+        UnblockScroll();
         _ = InvokeAsync(StateHasChanged);
 
         NextTick(() => NavigationManager.Replace(e.RelativeUri!));
@@ -411,7 +411,7 @@ public partial class PPageStack : PatternPathComponentBase
 
             if (Pages.Count == 0)
             {
-                UnblockScroll(false);
+                UnblockScroll();
             }
 
             _ = InvokeAsync(StateHasChanged);
@@ -423,7 +423,7 @@ public partial class PPageStack : PatternPathComponentBase
         _module?.InvokeVoidAsync("blockScroll").ConfigureAwait(false);
     }
 
-    private void UnblockScroll(bool disable)
+    private void UnblockScroll()
     {
         _module?.InvokeVoidAsync("unblockScroll").ConfigureAwait(false);
     }
