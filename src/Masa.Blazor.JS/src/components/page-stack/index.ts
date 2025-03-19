@@ -1,3 +1,5 @@
+import { convertToUnit } from "utils/helper";
+
 const dotnetRefs: { [prop: number]: DotNet.DotNetObject } = {};
 const clickHandlers: { [prop: number]: (e: MouseEvent) => void } = {};
 const popstateHandlers: { [prop: number]: () => void } = {};
@@ -31,8 +33,50 @@ async function onDocumentClick(id: number, event: MouseEvent) {
   let strategy = anchor.getAttribute("data-page-stack-strategy");
   strategy = strategy === null ? null : strategy.toLowerCase();
   if (strategy === "" || strategy === "true" || strategy === "push") {
+    if (!document.querySelector("[page-stack-id]")) {
+      blockScroll();
+    }
+
     await dotnet.invokeMethodAsync("Push", href);
   }
+}
+
+export function blockScroll() {
+  const doc = document.documentElement;
+
+  if (doc.classList.contains("m-page-stack-scroll-blocked")) {
+    return;
+  }
+
+  if (doc.scrollLeft === 0 && doc.scrollTop === 0) {
+    return;
+  }
+
+  doc.style.setProperty("--m-page-stack-scroll-x", convertToUnit(-doc.scrollLeft));
+  doc.style.setProperty("--m-page-stack-scroll-y", convertToUnit(-doc.scrollTop));
+  doc.classList.add("m-page-stack-scroll-blocked");
+}
+
+export function unblockScroll() {
+  const doc = document.documentElement;
+  if (!doc.classList.contains("m-page-stack-scroll-blocked")) {
+    return;
+  }
+
+  const x = parseFloat(doc.style.getPropertyValue("--m-page-stack-scroll-x"));
+  const y = parseFloat(doc.style.getPropertyValue("--m-page-stack-scroll-y"));
+
+  const scrollBehavior = doc.style.scrollBehavior;
+
+  doc.style.scrollBehavior = "auto";
+  doc.style.removeProperty("--m-page-stack-scroll-x");
+  doc.style.removeProperty("--m-page-stack-scroll-y");
+  doc.classList.remove("m-page-stack-scroll-blocked");
+
+  doc.scrollLeft = -x;
+  doc.scrollTop = -y;
+
+  doc.style.scrollBehavior = scrollBehavior;
 }
 
 export function detachListener(id: number) {

@@ -7,7 +7,7 @@ namespace Masa.Blazor.Presets;
 public partial class PPageStack : PatternPathComponentBase
 {
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
-
+    
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public string? Name { get; set; }
@@ -124,8 +124,12 @@ public partial class PPageStack : PatternPathComponentBase
     [JSInvokable]
     public void Push(string href)
     {
+        if (Pages.Count == 0)
+        {
+            BlockScroll();
+        }
+
         Pages.Push(GetAbsolutePath(href));
-        DisableRootScrollbar(true);
         InvokeAsync(StateHasChanged);
     }
 
@@ -194,7 +198,7 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _lastVisitedTabPath = absolutePath;
             _targetPageType = PageType.Tab;
-            DisableRootScrollbar(false);
+            UnblockScroll();
             StateHasChanged();
         }
         else
@@ -275,7 +279,7 @@ public partial class PPageStack : PatternPathComponentBase
         }
     }
 
-    internal void Push(PageStackPushEventArgs e, Action? afterPush = null)
+    internal void Push(PageStackPushEventArgs e)
     {
         if (e.CountOfTopPagesToRemove != 0)
         {
@@ -307,7 +311,7 @@ public partial class PPageStack : PatternPathComponentBase
         }
 
         Pages.Clear();
-        DisableRootScrollbar(false);
+        UnblockScroll();
         _ = InvokeAsync(StateHasChanged);
 
         NextTick(() => NavigationManager.Replace(e.RelativeUri!));
@@ -407,19 +411,21 @@ public partial class PPageStack : PatternPathComponentBase
 
             if (Pages.Count == 0)
             {
-                DisableRootScrollbar(false);
+                UnblockScroll();
             }
 
             _ = InvokeAsync(StateHasChanged);
         });
     }
 
-    private void DisableRootScrollbar(bool disable)
+    private void BlockScroll()
     {
-        _ = Js.InvokeVoidAsync(
-            disable ? JsInteropConstants.AddCls : JsInteropConstants.RemoveCls,
-            "html",
-            "overflow-y-hidden");
+        _module?.InvokeVoidAsync("blockScroll").ConfigureAwait(false);
+    }
+
+    private void UnblockScroll()
+    {
+        _module?.InvokeVoidAsync("unblockScroll").ConfigureAwait(false);
     }
 
     protected override async ValueTask DisposeAsyncCore()
