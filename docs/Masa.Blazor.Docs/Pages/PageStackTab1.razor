@@ -3,4 +3,17 @@
 
 <p class="caption">url: /blazor/examples/page-stack/tab1</p>
 
-<h3>Tab 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
+<p class="text-h5">Tab 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</p>
+
+<p>
+    <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Persistent</MChip>
+    <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Self</MChip>
+</p>
+
+<MAlert Type="AlertTypes.Info" Dense>
+    此标签页不会持久化，所以在你切换到其他标签页时会被销毁。
+    <br/>
+    This tab is not persistent, so it will be destroyed when you navigate to another tab.
+    You can check the change of time in the title of the tab.
+</MAlert>
+

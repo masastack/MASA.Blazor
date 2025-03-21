@@ -153,6 +153,9 @@
     "PPageContainer",
     "PPageProvider"
   ],
+  "pdf-mobile-viewer": [
+    "MPdfMobileViewer"
+  ],
   "popup-service": [
     "IPopupService"
   ],

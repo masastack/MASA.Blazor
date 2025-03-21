@@ -1,15 +1,16 @@
 ﻿@namespace Masa.Blazor.Presets
 @using Masa.Blazor.Presets.PageStack
-@inherits PatternPathComponentBase
+@inherits MasaComponentBase
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
-<PPageContainer Style="@GetStyle()"
-                Class="@GetClass()"
-                IncludePatterns="@TabbedPatterns"
-                SelfPatterns="@SelfPatterns"
-                Strict>
+<PPageStackContainer Id="@Id"
+                     Class="@Class"
+                     Style="@Style"
+                     TabRules="@TabRules"
+                     @attributes="@Attributes">
     @ChildContent
-</PPageContainer>
+</PPageStackContainer>
 
 <CascadingValue Value="this" IsFixed>
     @for (var i = 0; i < Pages.Count; i++)

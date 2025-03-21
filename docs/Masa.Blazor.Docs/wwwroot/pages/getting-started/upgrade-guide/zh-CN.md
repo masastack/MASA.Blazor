@@ -1,5 +1,62 @@
 # 升级指南
 
+## 从 v1.8.x 升级到 v1.9.0 {#upgrading-from-v1-8-x-to-v1-9-0}
+
+### 组件 {#v1-9-0-components}
+
+#### Cascader {#v1-9-0-cascader}
+
+添加了新的泛型参数 `TItemValue`。如果你拆分了 `@bind-Value`，你需要传递一个额外的类型为 `TItemValue` 的参数。
+
+```diff
+  <MCascader Value="@value"
+             ValueChanged="@ValueChanged"
+             TItem="AbcItem"
+             TValue="string"
++            TItemValue="string"
+             ... />
+```
+
+#### PdfMobileViewer {#v1-9-0-pdf-mobile-viewer}
+
+此组件已移至单独的项目。 如果你正在使用此组件，则需要导入新包。
+
+```cli
+dotnet add package MASA.Blazor.JSComponents.PdfJS
+```
+
+#### PageStack {#v1-9-0-page-stack}
+
+删除了 `TabbedPatterns` 和 `SelfPatterns` 属性，使用 `TabRules` 代替。
+
+```diff
+  <PPageStack
+-     TabbedPatterns="_tabbedPatterns"
+-     SelfPatterns="_selfPatterns"
++     TabRules="_tabRules" />
+
+      @code {
+-         private string[] _tabbedPatterns =
+-         [
+-             "/blazor/examples/page-stack/tab1",
+-             "/blazor/examples/page-stack/tab2",
+-             "/blazor/examples/page-stack/tab3"
+-         ];
+
+-         private string[] _selfPatterns =
+-         [
+-             "/blazor/examples/page-stack/tab2",
+-         ];
+      
++         private readonly HashSet<TabRule> _tabbedPatterns =
++         [
++             new TabRule("/blazor/examples/page-stack/tab1"),
++             new TabRule("/blazor/examples/page-stack/tab2", Self: true),
++             new TabRule("/blazor/examples/page-stack/tab3"),
++         ];
+      }
+```
+
 ## 从 v1.7.x 升级到 v1.8.0 {#upgrading-from-v1-7-x-to-v1-8-0}
 
 ### 组件 {#v1-8-0-components}

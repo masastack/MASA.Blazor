@@ -5,27 +5,29 @@
 <PStackPageBarInit Title="Page 2">
 </PStackPageBarInit>
 
-<p class="caption">url: /blazor/examples/page-stack/page2/{id}</p>
+<p class="caption">url: /blazor/examples/page-stack/page2/
+    @if (_loading)
+    {
+        <MProgressCircular Indeterminate Size="16"/>
+    }
+    else
+    {
+        <span>@Id</span>
+    }
+</p>
 
 <div>
-    <h1>
-        @if (_loading)
-        {
-            <MProgressCircular Indeterminate/>
-        }
-        else
-        {
-            <span>Id: @Id</span>
-        }
-    </h1>
-    <h3>Page 2 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</h3>
-    <a class="text-decoration-underline" @onclick="UpdateId">Update Id</a>
-    <br/>
+    <p class="text-h6">Page 2 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</p>
+
+    <div>
+        <a class="text-decoration-underline" @onclick="UpdateId">Update Id</a>
+    </div>
+
     <a class="text-decoration-underline"
        @onclick="@(() => NavController.Push("/blazor/examples/page-stack/page3"))">
         Navigate to Page 3
     </a>
-    
+
     <MSyntaxHighlight Code="@sourceCode"
                       Language="razor"
                       Style="font-size: 10px">

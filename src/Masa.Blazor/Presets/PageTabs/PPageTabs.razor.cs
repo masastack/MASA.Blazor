@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Presets;
 
-public partial class PPageTabs : PatternPathComponentBase
+public partial class PPageTabs
 {
     [Inject]
     private I18n I18n { get; set; } = null!;
@@ -94,7 +94,7 @@ public partial class PPageTabs : PatternPathComponentBase
 
     private static readonly Block _tabBlock = new("p-page-tab");
 
-    protected readonly List<PatternPath> PatternPaths = new();
+    private readonly List<PatternPath> PatternPaths = new();
     
     private bool _menuValue;
     private string? _noDataPath;
@@ -137,7 +137,7 @@ public partial class PPageTabs : PatternPathComponentBase
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
-    protected override PatternPath GetCurrentPatternPath()
+    internal override PatternPath GetCurrentPatternPath()
     {
         var pathPattern = base.GetCurrentPatternPath();
         var tabOptions = TabOptions?.Invoke(new PageTabPathValue(pathPattern.AbsolutePath, false));
@@ -203,7 +203,7 @@ public partial class PPageTabs : PatternPathComponentBase
             var exists = paths.Contains(current);
             if (exists)
             {
-                // simple implementation: just try to navigate to the first tab
+                // simple implementation: try to navigate to the first tab
                 var nextPath = PatternPaths.FirstOrDefault()?.AbsolutePath;
                 nextPath ??= NoDataPath;
 
