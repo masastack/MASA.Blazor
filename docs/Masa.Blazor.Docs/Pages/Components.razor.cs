@@ -272,6 +272,7 @@ public partial class Components
         var list = ApiGenerator.ComponentMetas.ToList();
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
         list.AddRange(DriverJSApiGenerator.ComponentMetas);
+        list.AddRange(PdfJSApiGenerator.ComponentMetas);
         return list;
     }
 
