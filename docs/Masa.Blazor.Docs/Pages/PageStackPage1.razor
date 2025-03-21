@@ -8,10 +8,11 @@
 
 <p class="caption">url: /blazor/examples/page-stack/page1</p>
 
-<div>
-    <h3>Page 1 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</h3>
-    <PPageStackLink Href="/blazor/examples/page-stack/page2/xyz">Navigate to Page 2</PPageStackLink>
-</div>
+<p class="text-h6">Page 1 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</p>
+
+<PPageStackLink Href="/blazor/examples/page-stack/page2/xyz">Navigate to Page 2</PPageStackLink>
+
+<br />
 
 <a class="text-decoration-underline"
    @onclick="@GoToPage4">

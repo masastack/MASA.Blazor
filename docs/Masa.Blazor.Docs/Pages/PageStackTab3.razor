@@ -6,10 +6,14 @@
 
 <p class="caption">url: /blazor/examples/page-stack/tab3</p>
 
-<div>
-    <h3>Tab 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</h3>
-    <PPageStackLink Href="/blazor/examples/page-stack/page1">Navigate to Page 1</PPageStackLink>
-</div>
+<p class="text-h5">Tab 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</p>
+
+<p>
+    <MChip Label Color="primary">Persistent</MChip>
+    <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Self</MChip>
+</p>
+
+<PPageStackLink Href="/blazor/examples/page-stack/page1">Navigate to Page 1</PPageStackLink>
 
 <MSyntaxHighlight Code="@sourceCode"
                   Language="html"

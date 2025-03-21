@@ -4,15 +4,20 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public partial class PPageStack : PatternPathComponentBase
+public partial class PPageStack: MasaComponentBase
 {
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
-    
+
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public string? Name { get; set; }
 
-    [Parameter] [EditorRequired] public IEnumerable<string> TabbedPatterns { get; set; } = Array.Empty<string>();
+    /// <summary>
+    /// Tab rules to match and manage.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    public HashSet<TabRule> TabRules { get; set; } = [];
 
     [Parameter]
     [MasaApiParameter(defaultValue: DefaultFallbackUri)]
@@ -62,11 +67,21 @@ public partial class PPageStack : PatternPathComponentBase
     private (Regex Pattern, string AbsolutePath) _lastVisitedTab;
 
     private HashSet<string> _prevTabbedPatterns = new();
-    private HashSet<Regex> _cachedTabbedPatterns = new();
+
+    private HashSet<TabRule> _prevTabPatterns = new();
+    private IEnumerable<string> _persistentTabPatterns = [];
+    private IEnumerable<string> _nonPersistentTabPatterns = [];
 
     private IJSObjectReference? _module;
     private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
     private int _dotnetObjectId;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        UpdateRegexes();
+    }
 
     protected override void OnInitialized()
     {
@@ -75,13 +90,13 @@ public partial class PPageStack : PatternPathComponentBase
         UpdateRegexes();
 
         var targetPath = NavigationManager.GetAbsolutePath();
-        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(targetPath));
+        var tabbedPattern = TabRules.FirstOrDefault(u => u.Regex.IsMatch(targetPath));
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = targetPath;
             _targetPageType = PageType.Tab;
 
-            _lastVisitedTab = (tabbedPattern, targetPath);
+            _lastVisitedTab = (tabbedPattern.Regex, targetPath);
         }
         else
         {
@@ -100,12 +115,13 @@ public partial class PPageStack : PatternPathComponentBase
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var currentPath = NavigationManager.GetAbsolutePath();
-        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(u => u.IsMatch(currentPath));
+        var tabbedPattern = TabRules.FirstOrDefault(u => u.Regex.IsMatch(currentPath));
 
-        if (tabbedPattern is not null && _lastVisitedTab.Pattern != tabbedPattern)
+        if (tabbedPattern is not null && _lastVisitedTab.Pattern != tabbedPattern.Regex)
         {
-            _lastVisitedTab = (tabbedPattern, currentPath);
-            InternalPageStackNavController?.NotifyTabChanged(currentPath, tabbedPattern);
+            _lastVisitedTabPath = currentPath;
+            _lastVisitedTab = (tabbedPattern.Regex, currentPath);
+            InternalPageStackNavController?.NotifyTabChanged(currentPath, tabbedPattern.Regex);
         }
     }
 
@@ -193,7 +209,7 @@ public partial class PPageStack : PatternPathComponentBase
             return;
         }
 
-        var tabbedPattern = _cachedTabbedPatterns.FirstOrDefault(r => r.IsMatch(absolutePath));
+        var tabbedPattern = TabRules.FirstOrDefault(r => r.Regex.IsMatch(absolutePath));
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = absolutePath;
@@ -205,7 +221,7 @@ public partial class PPageStack : PatternPathComponentBase
         {
             _targetPageType = PageType.Stack;
         }
-        
+
         if (_deltaAndStackCount.HasValue)
         {
             var (delta, count) = _deltaAndStackCount.Value;
@@ -231,20 +247,13 @@ public partial class PPageStack : PatternPathComponentBase
         }
     }
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        UpdateRegexes();
-    }
-
     private void UpdateRegexes()
     {
-        if (_prevTabbedPatterns.SetEquals(TabbedPatterns)) return;
+        if (_prevTabPatterns.SetEquals(TabRules)) return;
+        _prevTabPatterns = new HashSet<TabRule>(TabRules);
 
-        _prevTabbedPatterns = new HashSet<string>(TabbedPatterns);
-        _cachedTabbedPatterns = TabbedPatterns
-            .Select(p => new Regex(p, RegexOptions.IgnoreCase)).ToHashSet();
+        _persistentTabPatterns = TabRules.Where(u => u.Persistent).Select(u => u.Pattern);
+        _nonPersistentTabPatterns = TabRules.Where(u => !u.Persistent).Select(u => u.Pattern);
     }
 
     internal void Replace(PageStackReplaceEventArgs e)
@@ -298,7 +307,7 @@ public partial class PPageStack : PatternPathComponentBase
     internal void Clear(PageStackClearEventArgs e)
     {
         _deltaAndStackCount = (Pages.Count, Pages.Count);
-        
+
         _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
 
         var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) ||
