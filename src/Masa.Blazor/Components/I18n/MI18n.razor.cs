@@ -32,7 +32,7 @@ public partial class MI18n : MasaComponentBase
     {
         InvokeAsync(() =>
         {
-            AnalyzeI18nValue();
+            AnalyzeI18nValue(true);
             StateHasChanged();
         });
     }
@@ -41,12 +41,12 @@ public partial class MI18n : MasaComponentBase
     {
         base.OnParametersSet();
 
-        AnalyzeI18nValue();
+        AnalyzeI18nValue(false);
     }
 
-    private void AnalyzeI18nValue()
+    private void AnalyzeI18nValue(bool force)
     {
-        if (_prevKey == Key && Equals(_prevCulture, I18n.Culture)) return;
+        if (!force && _prevKey == Key && Equals(_prevCulture, I18n.Culture)) return;
 
         _prevKey = Key;
         _prevCulture = I18n.Culture;
