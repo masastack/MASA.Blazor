@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MMonacoEditor : Container
+public class MMonacoEditor : Container
 {
     [Inject]
     protected MonacoEditorJSModule Module { get; set; } = null!;
@@ -37,45 +37,14 @@ public partial class MMonacoEditor : Container
     public Action? InitCompleteHandle { get; set; }
 
     [Parameter]
-    public string? Value
-    {
-        get => _value;
-        set
-        {
-            if (_value != value)
-            {
-                _value = value;
-                _valueChangedByUser = true;
-            }
-
-            SetValue(value);
-        }
-    }
+    public string? Value { get; set; }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
-    private string? _value;
-    private bool _valueChangedByUser;
+    private string? _prevValue;
 
     public IJSObjectReference? Editor { get; private set; }
-
-    protected override void RegisterWatchers(PropertyWatcher watcher)
-    {
-        base.RegisterWatchers(watcher);
-
-        watcher
-            .Watch<string>(nameof(Value), ValueChangeCallback);
-    }
-
-    private async void ValueChangeCallback(string? val)
-    {
-        if (_valueChangedByUser)
-        {
-            _valueChangedByUser = false;
-            await SetValueAsync(_value);
-        }
-    }
 
     protected override IEnumerable<string?> BuildComponentStyle()
     {
@@ -87,6 +56,24 @@ public partial class MMonacoEditor : Container
             .AddMaxHeight(MaxHeight)
             .AddMaxWidth(MaxWidth)
             .GenerateCssStyles();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        _prevValue = Value;
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevValue != Value)
+        {
+            _prevValue = Value;
+            _ = SetValueAsync(Value);
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -182,12 +169,7 @@ public partial class MMonacoEditor : Container
     [JSInvokable]
     public async Task OnChange(string value)
     {
-        _value = value;
-        _valueChangedByUser = false;
-
-        if (ValueChanged.HasDelegate)
-        {
-            await ValueChanged.InvokeAsync(value);
-        }
+        _prevValue = value;
+        await ValueChanged.InvokeAsync(value);
     }
 }
