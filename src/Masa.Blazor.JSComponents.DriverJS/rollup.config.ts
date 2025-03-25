@@ -8,7 +8,7 @@ export default defineConfig({
   input: "./js-module/main.ts",
   output: [
     {
-      file: "MDriverJS.razor.js",
+      file: "wwwroot/MDriverJS.js",
       format: "esm",
     },
   ],
