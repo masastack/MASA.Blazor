@@ -62,6 +62,8 @@ public partial class Example : NextTickComponentBase
     private bool _showExpands;
     private string? _sourceCode;
     private static bool _initialize;
+    private string? _category;
+    private string? _title;
     private Type? _type;
     private Guid _typeIdentity;
     private DotNetObjectReference<Example>? _objRef;
@@ -119,14 +121,14 @@ public partial class Example : NextTickComponentBase
         _ = _monacoEditor?.AddCommandAsync(2097, _objRef!, nameof(RunCode));
     }
 
-    private async void OnMasaBlazorOnOnThemeChange(Theme theme)
+    private void OnMasaBlazorOnOnThemeChange(Theme theme)
     {
         if (_monacoEditor is null)
         {
             return;
         }
 
-        await _monacoEditor.SetThemeAsync(theme.Dark ? "vs-dark" : "vs");
+        _ = _monacoEditor.SetThemeAsync(theme.Dark ? "vs-dark" : "vs");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -147,20 +149,11 @@ public partial class Example : NextTickComponentBase
 
                     var segments = NavigationManager.GetSegments();
 
-                    var category = segments[2].TrimEnd('/');
-                    var title = segments[3].TrimEnd('/');
-
+                    _category = segments[2].TrimEnd('/');
+                    _title = segments[3].TrimEnd('/');
                     var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
                     _type = Type.GetType($"{executingAssemblyName}.{File}");
-
-                    if (_type == null)
-                    {
-                        StateHasChanged();
-                        return;
-                    }
-
-                    _sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
-
+                    
                     StateHasChanged();
                 }
             });
@@ -171,21 +164,14 @@ public partial class Example : NextTickComponentBase
 
     private async Task RestoreCode()
     {
-        var segments = NavigationManager.GetSegments();
-
-        var category = segments[2].TrimEnd('/');
-        var title = segments[3].TrimEnd('/');
-
-        var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-        _type = Type.GetType($"{executingAssemblyName}.{File}");
         _typeIdentity = Guid.NewGuid();
 
-        if (_type == null ||  _monacoEditor is null)
+        if (_category == null || _title == null ||  _type == null ||  _monacoEditor is null)
         {
             return;
         }
 
-        var sourceCode = await DocService.ReadExampleAsync(category, title, _type.Name);
+        var sourceCode = await DocService.ReadExampleAsync(_category, _title, _type.Name);
         await _monacoEditor!.SetValueAsync(sourceCode);
     }
 
@@ -210,6 +196,12 @@ public partial class Example : NextTickComponentBase
         if (!_showExpands)
         {
             _showExpands = true;
+
+            if (_category is not null && _title is not null && _type is not null)
+            {
+                _sourceCode = await DocService.ReadExampleAsync(_category, _title, _type.Name);
+            }
+
             StateHasChanged();
 
             _options["theme"] = MasaBlazor.Theme.Dark ? "vs-dark" : "vs";
@@ -304,6 +296,7 @@ public partial class Example : NextTickComponentBase
     protected override ValueTask DisposeAsyncCore()
     {
         _objRef?.Dispose();
+        MasaBlazor.OnThemeChange -= OnMasaBlazorOnOnThemeChange;
         return base.DisposeAsyncCore();
     }
 }
