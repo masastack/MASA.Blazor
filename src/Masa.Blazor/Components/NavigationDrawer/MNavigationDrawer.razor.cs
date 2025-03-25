@@ -590,8 +590,10 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private void SyncStateToTouchJS() => _touchJSObjectResult?.SyncState(GetTouchState());
 
     private TouchState GetTouchState()
-        => new(IsActive, ReactsToClick, ComputedWidth.ToDouble(), Touchless,
-            MasaBlazor.RTL ? (Right ? "left" : "right") : (Right ? "right" : "left"));
+    {
+        var position = Bottom ? "bottom" : (MasaBlazor.RTL ? (Right ? "left" : "right") : (Right ? "right" : "left"));
+        return new TouchState(IsActive, ReactsToClick, ComputedWidth.ToDouble(), Touchless, position);
+    }
 
     protected async void CallUpdate()
     {
