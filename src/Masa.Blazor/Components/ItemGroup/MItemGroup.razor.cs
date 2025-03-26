@@ -40,27 +40,37 @@ public partial class MItemGroup : MItemGroupBase, IThemeable
     protected override List<StringNumber?> UpdateInternalValues(StringNumber? value)
     {
         var internalValues = InternalValues.ToList();
+        var valueExists = internalValues.Contains(value);
 
-        if (internalValues.Contains(value))
+        if (Multiple)
         {
-            internalValues.Remove(value);
+            if (valueExists)
+            {
+                internalValues.Remove(value);
+                ToggleButUnselect = true;
+            }
+            else
+            {
+                if (Max == null || internalValues.Count < Max.TryGetNumber().number)
+                {
+                    internalValues.Add(value);
+                }
+            }
         }
         else
         {
-            if (!Multiple)
+            if (valueExists)
+            {
+                if (!Mandatory)
+                {
+                    internalValues.Remove(value);
+                }
+            }
+            else
             {
                 internalValues.Clear();
-            }
-
-            if (Max == null || internalValues.Count < Max.TryGetNumber().number)
-            {
                 internalValues.Add(value);
             }
-        }
-
-        if (Mandatory && internalValues.Count == 0)
-        {
-            internalValues.Add(value);
         }
 
         return internalValues;

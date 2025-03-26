@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Mixins;
+using Util.Reflection.Expressions.Abstractions;
 
 namespace Masa.Blazor.Components.ItemGroup;
 
@@ -46,13 +47,11 @@ public abstract class MItemGroupBase : MasaComponentBase
 
     protected List<StringNumber?> AllValues => Items.Select(item => item.Value).ToList();
 
-    internal List<StringNumber?> InternalValues
-    {
-        get => GetValue<List<StringNumber?>>(new()) ?? new List<StringNumber?>();
-        set => SetValue(value);
-    }
+    internal List<StringNumber?> InternalValues { get; private set; } = [];
 
     protected StringNumber? InternalValue => InternalValues.LastOrDefault();
+
+    protected bool ToggleButUnselect { get; set; }
 
     private HashSet<StringNumber?> _prevInternalValues = [];
     private CancellationTokenSource? _cts;
@@ -71,8 +70,13 @@ public abstract class MItemGroupBase : MasaComponentBase
         if (!_prevInternalValues.SetEquals(InternalValues))
         {
             _prevInternalValues = [..InternalValues];
-           RefreshItemsState();
+           OnInternalValuesChanged();
         }
+    }
+
+    protected virtual void OnInternalValuesChanged()
+    {
+        RefreshItemsState();
     }
 
     protected virtual void RefreshItemsState()
@@ -80,14 +84,9 @@ public abstract class MItemGroupBase : MasaComponentBase
         Items.ForEach(item => item.RefreshState());
     }
 
-    protected StringNumber InitDefaultItemValue()
+    internal async Task Register(IGroupable item)
     {
-        return _registeredItemsIndex++;
-    }
-
-    internal virtual async Task Register(IGroupable item)
-    {
-        item.Value ??= InitDefaultItemValue();
+        item.Value ??= _registeredItemsIndex++;
 
         Items.Add(item);
 
@@ -112,7 +111,11 @@ public abstract class MItemGroupBase : MasaComponentBase
 
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
-        await RunTaskInMicrosecondsAsync(RefreshItemsState, 16, _cts.Token);
+        await RunTaskInMicrosecondsAsync(() =>
+        {
+            RefreshItemsState();
+            OnItemsUpdate();
+        }, 16, _cts.Token);
     }
 
     public virtual void Unregister(IGroupable item)
@@ -125,6 +128,8 @@ public abstract class MItemGroupBase : MasaComponentBase
         }
     }
 
+    protected virtual void OnItemsUpdate() {}
+    
     private async Task UpdateMandatoryAsync(bool last = false)
     {
         if (Items.Count == 0) return;
@@ -142,7 +147,6 @@ public abstract class MItemGroupBase : MasaComponentBase
 
     public virtual async Task ToggleAsync(StringNumber? key)
     {
-        // have to invoke the InternalValues's setter
         InternalValues = UpdateInternalValues(key);
 
         if (Multiple)
@@ -153,10 +157,7 @@ public abstract class MItemGroupBase : MasaComponentBase
             }
             else
             {
-                if (Values != null)
-                {
-                    InternalValues = Values.ToList();
-                }
+                StateHasChanged();
             }
         }
         else
@@ -168,10 +169,7 @@ public abstract class MItemGroupBase : MasaComponentBase
             }
             else
             {
-                if (Value != null)
-                {
-                    InternalValues = new List<StringNumber?>() { Value };
-                }
+                StateHasChanged();
             }
         }
 
@@ -197,24 +195,34 @@ public abstract class MItemGroupBase : MasaComponentBase
     protected virtual List<StringNumber?> UpdateInternalValues(StringNumber? key)
     {
         var internalValues = InternalValues.ToList();
+        var valueExists = internalValues.Contains(key);
 
-        if (internalValues.Contains(key))
+        if (Multiple)
         {
-            internalValues.Remove(key);
+            if (valueExists)
+            {
+                internalValues.Remove(key);
+                ToggleButUnselect = true;
+            }
+            else
+            {
+                internalValues.Add(key);
+            }
         }
         else
         {
-            if (!Multiple)
+            if (valueExists)
+            {
+                if (!Mandatory)
+                {
+                    internalValues.Remove(key);
+                }
+            }
+            else
             {
                 internalValues.Clear();
+                internalValues.Add(key);
             }
-
-            internalValues.Add(key);
-        }
-
-        if (Mandatory && internalValues.Count == 0)
-        {
-            internalValues.Add(key);
         }
 
         return internalValues;

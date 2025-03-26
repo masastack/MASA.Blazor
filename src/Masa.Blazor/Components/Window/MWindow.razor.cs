@@ -101,20 +101,34 @@ public partial class MWindow : MItemGroup
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(new[]
-        {
+        return base.BuildComponentClass().Concat([
             _modifierBuilder.Add(ShowArrowsOnHover).Build()
-        });
+        ]);
     }
 
     private string GetContainerClass() => _containerModifierBuilder.Add(IsActive).Build();
     private string GetContainerStyle() => StyleBuilder.Create().AddHeight(TransitionHeight).Build();
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
+    protected override void OnInternalValuesChanged()
     {
-        base.RegisterWatchers(watcher);
+        base.OnInternalValuesChanged();
+        
+        UpdateInternalIndex();
+    }
 
-        watcher.Watch<List<StringNumber?>>(nameof(InternalValues), UpdateInternalIndex);
+    protected override void OnItemsUpdate()
+    {
+        base.OnItemsUpdate();
+        
+        // HasNext property needs the latest items count
+        StateHasChanged();
+    }
+
+    protected override void RefreshItemsState()
+    {
+        base.RefreshItemsState();
+        
+        UpdateInternalIndex();
     }
 
     public void RenderState()

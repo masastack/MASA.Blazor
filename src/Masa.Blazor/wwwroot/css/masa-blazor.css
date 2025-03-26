@@ -23134,7 +23134,14 @@ html.overflow-y-hidden {
     contain: content;
     display: flex;
     flex: 1 1 auto;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scrollbar-color: rgba(0, 0, 0, 0);
+}
+
+.m-slide-group__wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .m-slide-group__next--disabled,

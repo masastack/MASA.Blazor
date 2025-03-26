@@ -1,5 +1,5 @@
 ﻿<MSheet Class="mx-auto" MaxWidth="700">
-    <MSlideGroup Multiple ShowArrows="@(true)">
+    <MSlideGroup @bind-Values="v" Multiple ShowArrows="@(true)">
         @foreach (var item in Enumerable.Range(1, 25))
         {
             <MSlideItem>
@@ -16,3 +16,9 @@
         }
     </MSlideGroup>
 </MSheet>
+
+@code {
+
+    private List<StringNumber> v = [];
+
+}
