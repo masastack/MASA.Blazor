@@ -16,6 +16,7 @@ export default defineConfig({
     "components/scroll-to-target/index":
       "./src/components/scroll-to-target/index.ts",
     "components/transition/index": "./src/components/transition/index.ts",
+    "components/window/touch": "./src/components/window/touch.ts",
 
     "mixins/activatable/index": "./src/mixins/activatable.ts",
     "mixins/intersect/index": "./src/mixins/intersect.ts",

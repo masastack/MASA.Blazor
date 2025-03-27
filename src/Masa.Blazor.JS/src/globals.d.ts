@@ -1,3 +1,5 @@
+import { TouchStoredHandlers } from "./components/window/touch";
+
 export {};
 
 declare global {
@@ -182,6 +184,9 @@ declare global {
       showTimer?: number;
       showTimerCommit?: (() => void) | null;
     };
+    _touchHandlers: {
+      [id: number]: TouchStoredHandlers
+    }
   }
 
   interface TransitionEvent {
