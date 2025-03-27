@@ -22,7 +22,7 @@ public class MChipGroup : MSlideGroup
         {
             if (val)
             {
-                ScrollOffset = 0;
+                UpdateScrollOffset(0);
             }
 
             NextTick(OnResize);

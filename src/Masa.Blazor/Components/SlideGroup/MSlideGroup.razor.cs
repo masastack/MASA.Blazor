@@ -30,6 +30,7 @@ namespace Masa.Blazor
         private StringNumber? _prevInternalValue;
         private bool _prevIsOverflowing;
         private CancellationTokenSource? _cts;
+        private bool _firstRendered;
 
         protected bool RTL => MasaBlazor.RTL;
 
@@ -43,11 +44,7 @@ namespace Masa.Blazor
 
         protected double ContentWidth { get; set; }
 
-        protected double ScrollOffset
-        {
-            get => GetValue<double>();
-            set => SetValue(value);
-        }
+        protected double ScrollOffset { get; private set; }
 
         protected override void OnInitialized()
         {
@@ -82,21 +79,11 @@ namespace Masa.Blazor
 
         protected override IEnumerable<string> BuildComponentClass()
         {
-            return base.BuildComponentClass().Concat(
-                new[]
-                {
-                    _modifierBuilder.Add(IsOverflowing)
-                        .Add(HasAffixes)
-                        .Build()
-                }
-            );
-        }
-
-        protected override void RegisterWatchers(PropertyWatcher watcher)
-        {
-            base.RegisterWatchers(watcher);
-
-            watcher.Watch<double>(nameof(ScrollOffset), OnScrollOffsetChanged);
+            return base.BuildComponentClass().Concat([
+                _modifierBuilder.Add(IsOverflowing)
+                    .Add(HasAffixes)
+                    .Build()
+            ]);
         }
 
         private string GetContentClass()
@@ -109,8 +96,10 @@ namespace Masa.Blazor
             yield return _block.Element("content").Name;
         }
 
-        private async void OnScrollOffsetChanged(double val)
+        protected void UpdateScrollOffset(double val)
         {
+            ScrollOffset = val;
+            
             if (RTL)
             {
                 val = -val;
@@ -127,10 +116,9 @@ namespace Masa.Blazor
                 scroll = -scroll;
             }
 
-            if (ContentRef.Context != null)
+            if (WrapperRef.Context != null)
             {
-                await Js.InvokeVoidAsync(JsInteropConstants.SetStyle, ContentRef, "transform",
-                    $"translateX({scroll}px)");
+                _ = Js.ScrollTo(WrapperRef, 0, -scroll).ConfigureAwait(false);
             }
         }
 
@@ -140,8 +128,6 @@ namespace Masa.Blazor
             var x = Math.Abs(val);
             return Math.Sign(val) * (x / ((1 / c - 2) * (1 - x) + 1));
         }
-
-        private bool _firstRendered;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -157,7 +143,7 @@ namespace Masa.Blazor
             {
                 var needSetWidths = false;
                 StringNumber? value = null;
-
+                
                 if (_prevItemsLength != Items.Count)
                 {
                     _prevItemsLength = Items.Count;
@@ -169,7 +155,7 @@ namespace Masa.Blazor
                 {
                     _prevInternalValue = InternalValue;
                     value = InternalValue;
-                    needSetWidths = true;
+                    needSetWidths = !ToggleButUnselect;
                 }
 
                 if (_prevIsOverflowing != IsOverflowing)
@@ -178,6 +164,7 @@ namespace Masa.Blazor
                     // Make sure the value of WrapperWidth is after IsOverflowing takes effect.
                     StateHasChanged();
 
+                    await GetWidths(true);
                     value = Value;
                     needSetWidths = true;
                 }
@@ -187,33 +174,34 @@ namespace Masa.Blazor
                     await SetWidths(value);
                 }
             }
+
+            ToggleButUnselect = false;
         }
 
-        public async Task SetWidths(StringNumber? selectedValue = null)
+        public async Task SetWidths(StringNumber? selectedValue = null, bool getWidthsForce = false)
         {
             _cts?.Cancel();
             _cts = new CancellationTokenSource();
             await RunTaskInMicrosecondsAsync(async () =>
             {
-                (WrapperWidth, ContentWidth) = await GetWidths();
-
-                // The first time IsOverflowing is true, WrapperWidth will become smaller
-                // because the left and right arrows will display 
+                await GetWidths(getWidthsForce);
                 IsOverflowing = WrapperWidth + 1 < ContentWidth;
-
                 await ScrollToView(selectedValue);
-
                 StateHasChanged();
             }, 16, _cts.Token);
         }
 
-        private async Task<(double wrapper, double content)> GetWidths()
+        private async Task GetWidths(bool force = false)
         {
-            var wrapperElement =
-                await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, WrapperRef);
-            var contentElement =
-                await Js.InvokeAsync<Masa.Blazor.JSInterop.Element>(JsInteropConstants.GetDomInfo, ContentRef);
-            return (wrapperElement?.ClientWidth ?? 0, contentElement?.ClientWidth ?? 0);
+            if (WrapperWidth == 0 || force)
+            {
+                WrapperWidth = await Js.InvokeAsync<double>(JsInteropConstants.GetProp, WrapperRef, "clientWidth");
+            }
+
+            if (ContentWidth == 0 || force)
+            {
+                ContentWidth = await Js.InvokeAsync<double>(JsInteropConstants.GetProp, ContentRef, "clientWidth");
+            }
         }
 
         public bool IsOverflowing { get; protected set; }
@@ -254,19 +242,9 @@ namespace Masa.Blazor
 
         public bool HasPrev => HasAffixes && ScrollOffset != 0;
 
-        public override async Task ToggleAsync(StringNumber? key)
-        {
-            await base.ToggleAsync(key);
-            
-            // needs an after render to scroll to the selected item
-            StateHasChanged();
-        }
-
         private async Task HandleOnAffixClick(string direction)
         {
             await ScrollTo(direction);
-
-            StateHasChanged();
         }
 
         protected async Task ScrollToView(StringNumber? selectedValue)
@@ -295,16 +273,15 @@ namespace Masa.Blazor
 
             if (Items.FindIndex(u => u.Value == selectedValue) == 0 || (!CenterActive && !IsOverflowing))
             {
-                ScrollOffset = 0;
+                UpdateScrollOffset(0);
             }
             else if (CenterActive)
             {
-                ScrollOffset = await CalculateCenteredOffset(selectedItem.Ref, WrapperWidth, ContentWidth, RTL);
+                UpdateScrollOffset(await CalculateCenteredOffset(selectedItem.Ref, WrapperWidth, ContentWidth, RTL));
             }
             else if (IsOverflowing)
             {
-                ScrollOffset =
-                    await CalculateUpdatedOffset(selectedItem.Ref, WrapperWidth, ContentWidth, RTL, ScrollOffset);
+                UpdateScrollOffset(await CalculateUpdatedOffset(selectedItem.Ref, WrapperWidth, ContentWidth, RTL, ScrollOffset));
             }
         }
 
@@ -362,8 +339,8 @@ namespace Masa.Blazor
 
         protected async Task ScrollTo(string direction)
         {
-            (WrapperWidth, ContentWidth) = await GetWidths();
-            ScrollOffset = CalculateNewOffset(direction, WrapperWidth, ContentWidth, RTL, ScrollOffset);
+            await GetWidths();
+            UpdateScrollOffset(CalculateNewOffset(direction, WrapperWidth, ContentWidth, RTL, ScrollOffset));
         }
 
         protected static double CalculateNewOffset(string direction, double wrapperWidth, double contentWidth, bool rtl,
@@ -383,7 +360,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            await SetWidths();
+            await SetWidths(getWidthsForce: true);
         }
 
         protected override async ValueTask DisposeAsyncCore()
