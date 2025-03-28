@@ -86,7 +86,7 @@ public partial class MDriverJS : DisposableComponentBase
         if (firstRender)
         {
             _importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJs.js").ConfigureAwait(false);
+                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js").ConfigureAwait(false);
 
             _hasRendered = true;
 
