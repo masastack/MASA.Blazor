@@ -38,6 +38,11 @@ public partial class MWindow : MItemGroup
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
 
+    private bool _prevTouchless;
+    private int _useTouchId;
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<MWindow>? _dotNetObjectReference;
+
     protected bool IsReverse { get; set; }
 
     protected bool RTL => MasaBlazor.RTL;
@@ -86,10 +91,6 @@ public partial class MWindow : MItemGroup
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
-    private int _useTouchId;
-    private IJSObjectReference? _module;
-    private DotNetObjectReference<MWindow>? _dotNetObjectReference;
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -112,20 +113,46 @@ public partial class MWindow : MItemGroup
         NextIcon ??= "$next";
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        
+        if (_prevTouchless != Touchless)
+        {
+            _prevTouchless = Touchless;
+
+            if (Touchless)
+            {
+                await CleanupTouchAsync();
+            }
+            else
+            { 
+                await UseTouchAsync();
+            }
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
 
         if (firstRender)
         {
-            _module = await Js.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor/js/components/window/touch.js");
-            _useTouchId = await _module.InvokeAsync<int>("useTouch", Ref, new TouchValue(
-                new Dictionary<string, AddEventListenerOptions>
-                {
-                    { "touchstart", new AddEventListenerOptions { Passive = true, StopPropagation = true } }
-                }), _dotNetObjectReference);
+            if (!Touchless)
+            {
+                await UseTouchAsync();
+            }
         }
+    }
+
+    private async Task UseTouchAsync()
+    {
+        _module = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/components/window/touch.js");
+        _useTouchId = await _module.InvokeAsync<int>("useTouch", Ref, new TouchValue(
+            new Dictionary<string, AddEventListenerOptions>
+            {
+                { "touchstart", new AddEventListenerOptions { Passive = true, StopPropagation = true } }
+            }), _dotNetObjectReference);
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -258,13 +285,21 @@ public partial class MWindow : MItemGroup
         }
     }
 
+    private async Task CleanupTouchAsync()
+    {
+        if (_module is null) return;
+
+        await _module.InvokeVoidAsync("cleanupTouch", Ref, _useTouchId);
+        await _module.DisposeAsync();
+        _module = null;
+    }
+
     protected override async ValueTask DisposeAsyncCore()
     {
         if (_module is not null)
         {
-            _dotNetObjectReference.Dispose();
-            await _module.InvokeVoidAsync("cleanupTouch", Ref, _useTouchId);
-            await _module.DisposeAsync();
+            _dotNetObjectReference?.Dispose();
+            await CleanupTouchAsync().ConfigureAwait(false);
         }
 
         await base.DisposeAsyncCore();
