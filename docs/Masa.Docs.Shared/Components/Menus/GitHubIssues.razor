@@ -117,6 +117,7 @@
         await InvokeAsync(StateHasChanged);
 
         _componentNames.Clear();
+        lastSegment = lastSegment.TrimEnd('/');
 
         if (pageToApi.TryGetValue(lastSegment, out var components))
         {
@@ -127,7 +128,7 @@
             _componentNames.Add("component/" + lastSegment.ToPascal().TrimEnd('s'));
         }
 
-        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", new[] { string.Join(',', _componentNames) }, lastSegment);
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", [string.Join(',', _componentNames)], lastSegment);
 
         _searching = false;
         await InvokeAsync(StateHasChanged);

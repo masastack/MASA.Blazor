@@ -1,0 +1,46 @@
+﻿@inject GithubService GithubService
+@inject I18n I18n
+
+@if (_latestBlazorBuild != null)
+{
+    <MDivider/>
+    <div class="d-flex align-center justify-end text-caption pa-2">
+        @GenBtn(_latestBlazorBuild.Sha?[..8], "mdi-source-commit", $"https://github.com/masastack/MASA.Blazor/commit/{_latestBlazorBuild.Sha}", "latest-build")
+        @GenBtn(_latestBlazorBuild.Version, "mdi-tag-outline", $"https://github.com/masastack/MASA.Blazor/releases/tag/{_latestBlazorBuild.Version}", "latest-release")
+    </div>
+}
+
+@code {
+
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; } = null!;
+
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
+    private GithubService.LatestBuild? _latestBlazorBuild;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (Project == "blazor")
+            {
+                _latestBlazorBuild = await GithubService.GetLatestBuildAsync("masastack", "Masa.Blazor");
+                StateHasChanged();
+            }
+        }
+    }
+
+    private RenderFragment GenBtn(string? text, string leftIcon, string href, string tooltip) => __builder =>
+    {
+        @if (text != null)
+        {
+            <MButton Class="text-none" LeftIconName="@leftIcon" Href="@href" Small Target="_blank" Text>
+                <MTooltip Activator="parent" Text="@I18n.T(tooltip)"></MTooltip>
+                @text
+            </MButton>
+        }
+    };
+
+}

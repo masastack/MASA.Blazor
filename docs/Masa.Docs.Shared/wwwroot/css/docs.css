@@ -35,6 +35,10 @@
     --md-ref-palette-neutral-variant90: #e5e1ec;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 h1:focus {
     outline: none;
 }

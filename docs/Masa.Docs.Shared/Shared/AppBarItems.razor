@@ -13,19 +13,9 @@
         <MSpacer />
     }
 
-    @if (MasaBlazor.Breakpoint.SmAndUp)
+    @if (!string.IsNullOrEmpty(Project))
     {
-        @if (!string.IsNullOrEmpty(Project))
-        {
-            <Search @ref="_algoliaSearch" Class="mr-6" Style="max-width: 340px;" />
-        }
-    }
-    else
-    {
-        @if (!string.IsNullOrEmpty(Project))
-        {
-            <Search @ref="_algoliaSearch" />
-        }
+        <Search @ref="_algoliaSearch" Class="mr-2" />
     }
 
     <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />

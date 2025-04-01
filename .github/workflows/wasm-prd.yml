@@ -14,12 +14,18 @@ jobs:
       with:
         submodules: 'recursive'
     - run: git submodule foreach git checkout main
-    - name: Find and replace
+    - name: Find and replace for index.html
       uses: jacobtomlinson/gha-find-replace@v3
       with:
         find: '\?version='
         replace: '?version=${{ github.event.release.tag_name }}'
         include: 'docs/Masa.Docs.WebAssembly/wwwroot/index.html'
+    - name: Find and replace for Octokit
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: 'docs_token_read_only'
+        replace: '${{ secrets.DOC_READ }}'
+        include: 'docs/Masa.Docs.Core/Services/GithubService.cs'
     - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:

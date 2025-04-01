@@ -10,15 +10,18 @@
                    Class="default-nav"
                    Right="RTL"
                    App
-                   Floating
                    Width="300"
                    Clipped>
-    <CascadingValue Value="this" IsFixed>
-        <DefaultList Class="doc-list-nav"
-                     Routable
-                     Items="Navs" />
-    </CascadingValue>
-    <div class="pt-12"></div>
+    <ChildContent>
+        <CascadingValue Value="this" IsFixed>
+            <DefaultList Class="doc-list-nav"
+                         Routable
+                         Items="Navs"/>
+        </CascadingValue>
+    </ChildContent>
+    <AppendContent>
+        <NavDrawerAppend />
+    </AppendContent>
 </MNavigationDrawer>
 
 @code {
