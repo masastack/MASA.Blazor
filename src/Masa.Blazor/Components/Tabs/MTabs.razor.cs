@@ -198,7 +198,7 @@ namespace Masa.Blazor
         {
             if (HideSlider || _isFirstRender) return;
 
-            var item = Instance?.Items.FirstOrDefault(item => item.Value == Value);
+            var item = Instance?.Items.FirstOrDefault(item => item.InternalIsActive);
             await Js.InvokeVoidAsync(
                 JsInteropConstants.UpdateTabSlider,
                 _sliderWrapperRef,
