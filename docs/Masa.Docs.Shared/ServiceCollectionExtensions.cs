@@ -18,9 +18,8 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<DocService>();
         services.AddScoped<AppService>();
-        services.AddSingleton<GithubService>();
-
-        services.AddMemoryCache();
+        services.AddScoped<ExpiryLocalStorage>();
+        services.AddScoped<GithubService>();
 
         var masaBlazorBuilder = services.AddMasaBlazor(options =>
         {

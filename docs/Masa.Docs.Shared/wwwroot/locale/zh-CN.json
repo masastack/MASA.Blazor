@@ -630,5 +630,7 @@
       "data-table": "新增对单元格省略号和自定义单元格内容在 `Headers` 中的支持。",
       "list-item": "新增子组件参数，包括 `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` 和 `AppendIcon`。"
     }
-  }
+  },
+  "latest-build": "文档构建版本",
+  "latest-release": "最新发行版"
 }

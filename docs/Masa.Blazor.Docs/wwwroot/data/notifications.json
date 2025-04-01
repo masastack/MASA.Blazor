@@ -46,5 +46,16 @@
     "href": "/blazor/getting-started/release-notes?v=v1.8.0",
     "upgradeGuide": "/blazor/getting-started/upgrade-guide#upgrading-from-v1-7-x-to-v1-8-0",
     "createdAt": "2024-11-02"
+  },
+  {
+    "title": "v1.9.0",
+    "content": {
+      "en": "Highlights:\r\n- [Tour](/blazor/labs/driverjs): a guide component based on Driver.js.\r\n- [Cascader](/blazor/components/cascaders): supports binding values of type `List<TItemValue>`.\r\n- PageStack: Supports deleting a specified number of top pages when visiting a new page; When there is a scrollbar on the tab page, it will not automatically scroll to the top when visiting a new page; Allows setting tab pages to not persist.\r\n- SlideGroup, Tabs, ChipGroup, Window, TabItems, Carousel support touch swiping.\r\n- [Tooltip](/blazor/components/tooltips): Added the `Text` property to simplify usage; Supports setting the trigger to `parent` in the container to trigger the parent element.",
+      "zh": "亮点:\r\n- [Tour](/blazor/labs/driverjs)：基于 Driver.js 实现的引导组件。\r\n- [Cascader](/blazor/components/cascaders)：支持绑定类型为`List<TItemValue>`的值。\r\n- PageStack：支持访问新页面时删除指定数量的栈顶页面；Tab页在存在滚动条的情况下，访问新页面时不会自动滚动到顶部；允许设置tab页不持久化。\r\n- SlideGroup、Tabs、ChipGroup、Window、TabItems、Carousel 支持触摸滑动。\r\n- [Tooltip](/blazor/components/tooltips)：添加`Text`属性，简化用法；支持在容器里设置触发器为`parent`来实现父元素触发。"
+    },
+    "type": 0,
+    "href": "/blazor/getting-started/release-notes?v=v1.9.0",
+    "upgradeGuide": "/blazor/getting-started/upgrade-guide#upgrading-from-v1-8-x-to-v1-9-0",
+    "createdAt": "2025-04-07"
   }
 ]
