@@ -7,6 +7,8 @@ public interface IGroupable
     bool Disabled { get; set; }
 
     StringNumber? Value { get; set; }
+    
+    bool InternalIsActive { get; }
 
     ElementReference Ref { get; set; }
 

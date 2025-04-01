@@ -1605,7 +1605,7 @@ export function updateTabSlider(
   }
 
   if (!tab) {
-    console.warn('[MTab] the element of tab to be activated is not found')
+    sliderWrapper.style.cssText = "";
     return;
   }
 
