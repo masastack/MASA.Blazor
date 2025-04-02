@@ -100,15 +100,7 @@ public partial class Components
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
 
-    private string ApiGithubUri
-    {
-        get
-        {
-            var lastSegment = _apiData.Keys.Count > 1 ? $"{CurrentApi}-{Culture}" : Culture;
-
-            return $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/data/apis/{Page}/{lastSegment}.json";
-        }
-    }
+    private string ApiGithubUri => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/data/apis/{Page}";
 
     private string ComponentGithubUri
         => $"https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/wwwroot/pages/{_group}/{Page}/{Culture}.md";

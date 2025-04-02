@@ -19,16 +19,21 @@
     public string? Project { get; set; }
 
     private GithubService.LatestBuild? _latestBlazorBuild;
+    private string? _prevProject;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnParametersSetAsync()
     {
-        if (firstRender)
+        await base.OnParametersSetAsync();
+
+        if (_prevProject != Project)
         {
             if (Project == "blazor")
             {
                 _latestBlazorBuild = await GithubService.GetLatestBuildAsync("masastack", "Masa.Blazor");
-                StateHasChanged();
+                if (_latestBlazorBuild is null) return;
             }
+
+            _prevProject = Project;
         }
     }
 
