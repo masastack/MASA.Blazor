@@ -9,6 +9,8 @@ related:
 
 > [Masa.Blazor.MauiDemo](https://github.com/masastack/Masa.Blazor.MauiDemo) 项目中有更多的使用示例。
 
+<app-alert type="warning" content="**PageStack** 组件不会删除旧页面的DOM，新页面直接覆盖在旧页面上；在 MAUI Blazor Hybrid app 上，Webview 的性能会因页面堆栈的增加而下降；具体多少页面后会呈明显下降取决于页面的复杂度，请及时替代或删除不会再访问的页面。"></app-alert>
+
 ## 示例
 
 - [PageStackLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor)

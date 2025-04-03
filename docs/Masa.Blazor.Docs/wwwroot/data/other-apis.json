@@ -44,7 +44,7 @@
       "methods": [
         {
           "name": "Push",
-          "type": "(string relativeUri) => void"
+          "type": "(string relativeUri, [overloads...]) => void"
         },
         {
           "name": "Pop",
