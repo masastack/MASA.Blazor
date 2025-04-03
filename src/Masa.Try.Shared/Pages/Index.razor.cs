@@ -206,6 +206,7 @@ public partial class Index : NextTickComponentBase
     private async Task<List<PortableExecutableReference>?> GetReference()
     {
         var portableExecutableReferences = new List<PortableExecutableReference>();
+        
         if (MasaTrySharedExtension.WebAssembly)
         {
             foreach (var asm in s_assemblies)
