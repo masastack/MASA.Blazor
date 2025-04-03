@@ -9,6 +9,8 @@ related:
 
 > [Masa.Blazor.MauiDemo](https://github.com/masastack/Masa.Blazor.MauiDemo) has more usage examples.
 
+<app-alert type="warning" content="The **PageStack** component does not remove the DOM of old pages; instead, new pages are directly overlaid on top of the old ones. In a MAUI Blazor Hybrid app, the performance of the WebView degrades as the page stack grows due to the accumulation of DOM elements in memory. The exact number of pages after which the performance drop becomes noticeable depends on the complexity of the pages. To maintain optimal performance, it is recommended to replace or remove pages that will no longer be accessed."></app-alert>
+
 ## Example
 
 - [PageStackLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor)

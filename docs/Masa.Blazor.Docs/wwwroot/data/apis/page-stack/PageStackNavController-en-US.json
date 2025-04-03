@@ -4,7 +4,7 @@
     "TabChanged": "a event occurs when a tab is changed, it will not be triggered when a page is pushed or popped"
   },
   "methods": {
-    "Push": "push a new page onto the page stack",
+    "Push": "push a new page onto the page stack; the second parameter is optional and used to remove the top page of the stack",
     "Pop": "Go back one step in the page stack",
     "goBack": "Go back the specified number of steps in the page stack",
     "goBackAndReplace": "Go back to specified number of steps in the page stack, and then invoke the Replace method",
