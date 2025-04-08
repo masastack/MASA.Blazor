@@ -345,22 +345,28 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     protected override string? Formatter(object? val)
     {
+        if (IsNumberType && Props.Precision.HasValue && BindConverter.TryConvertToDecimal(val?.ToString(), CultureInfo.InvariantCulture, out var value))
+        {
+            return value.ToString(Props.PrecisionFormat);
+        }
+        
         var localeExists = !string.IsNullOrWhiteSpace(Locale);
         var formatExists = !string.IsNullOrWhiteSpace(Format);
         
         if (localeExists || formatExists)
         {
-            if (val is DateTime dt)
+            var format = formatExists ? Format : null;
+            var provider = localeExists ? CurrentLocale : null;
+            return val switch
             {
-                return dt.ToString(
-                    format: formatExists ? Format : null,
-                    provider: localeExists ? CurrentLocale : null);
-            }
-        }
-
-        if (IsNumberType && Props.Precision.HasValue && BindConverter.TryConvertToDecimal(val?.ToString(), CultureInfo.InvariantCulture, out var value))
-        {
-            return value.ToString(Props.PrecisionFormat);
+                DateTime dt => dt.ToString(format: format, provider: provider),
+    
+                DateOnly dateOnly => dateOnly.ToString(format: format, provider: provider),
+    
+                TimeOnly timeOnly => timeOnly.ToString(format: format, provider: provider),
+    
+                _ => base.Formatter(val)
+            };
         }
 
         return base.Formatter(val);
