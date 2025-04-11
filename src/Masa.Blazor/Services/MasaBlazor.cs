@@ -2,8 +2,6 @@
 {
     public class MasaBlazor
     {
-        private bool _rtl;
-
         public MasaBlazor(
             bool rtl,
             Breakpoint breakpoint,
@@ -38,13 +36,13 @@
 
         public bool RTL
         {
-            get => _rtl;
+            get;
             set
             {
-                if (_rtl != value)
+                if (field != value)
                 {
-                    _rtl = value;
-                    OnRTLChange?.Invoke(_rtl);
+                    field = value;
+                    OnRTLChange?.Invoke(field);
                     RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -74,7 +72,7 @@
         /// <summary>
         /// An event that fires when the window size has changed.
         /// </summary>
-        public event EventHandler<WindowSizeChangedEventArgs>? WindowSizeChanged; 
+        public event EventHandler<WindowSizeChangedEventArgs>? WindowSizeChanged;
 
         /// <summary>
         /// An event that fires when the breakpoint has changed.
@@ -85,9 +83,9 @@
         /// An event that fires when the value of Mobile property from <see cref="Breakpoint"/> has changed.
         /// </summary>
         public event EventHandler<MobileChangedEventArgs> MobileChanged;
-        
-        public event EventHandler? DefaultsChanged; 
-        
+
+        public event EventHandler? DefaultsChanged;
+
         public void ToggleTheme()
         {
             Theme.Dark = !Theme.Dark;

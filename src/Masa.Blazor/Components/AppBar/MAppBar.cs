@@ -464,26 +464,15 @@ public class MAppBar : MToolbar, IScrollable
         }
 
         if (!Bottom)
-            MasaBlazor!.Application.Top = 0;
+            MasaBlazor.Application.Top = 0;
         else
-            MasaBlazor!.Application.Bottom = 0;
+            MasaBlazor.Application.Bottom = 0;
     }
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await Js.RemoveHtmlElementEventListener(_scrollEventId);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
-
-        if (MasaBlazor == null) return;
-
         RemoveApplication();
-
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+        await Js.RemoveHtmlElementEventListener(_scrollEventId);
     }
 }
