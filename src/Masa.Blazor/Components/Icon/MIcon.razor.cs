@@ -111,6 +111,7 @@ namespace Masa.Blazor
         };
 
         private bool _clickEventRegistered;
+        private long _clickEventId;
 
         private string? _iconCss;
         private bool _transitionValue;
@@ -330,7 +331,7 @@ namespace Masa.Blazor
             {
                 _clickEventRegistered = true;
 
-                await Js.AddHtmlElementEventListener<MouseEventArgs>(Ref, "click",
+                _clickEventId = await Js.AddHtmlElementEventListener<MouseEventArgs>(Ref, "click",
                     HandleOnClick, false,
                     new EventListenerExtras
                     {
@@ -348,6 +349,17 @@ namespace Masa.Blazor
         public static bool IsSvgPath(string str)
         {
             return _reg1.Match(str).Success && _reg2.Match(str).Success && str.Length > 4;
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            if (_clickEventId != 0)
+            {
+                _clickEventRegistered = false;
+                _ = Js.RemoveHtmlElementEventListener(_clickEventId);
+            }
+
+            return base.DisposeAsyncCore();
         }
     }
 }
