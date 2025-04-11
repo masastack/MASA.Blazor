@@ -25,9 +25,6 @@ namespace Masa.Blazor
             {
                 if (field == value) return;
                 field = value;
-
-                Console.Out.WriteLine("[Application] Top: " + field);
-
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Top)));
             }
         }
