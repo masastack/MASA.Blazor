@@ -660,8 +660,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
 
         if (Right)
-            MasaBlazor!.Application.Right = 0;
+            MasaBlazor.Application.Right = 0;
         else
-            MasaBlazor!.Application.Left = 0;
+            MasaBlazor.Application.Left = 0;
     }
 }

@@ -1,111 +1,90 @@
 ﻿using System.Runtime.CompilerServices;
 using System.ComponentModel;
 
-[assembly:InternalsVisibleTo("Masa.Blazor.Test")]
+[assembly: InternalsVisibleTo("Masa.Blazor.Test")]
 
 namespace Masa.Blazor
 {
     public class Application : INotifyPropertyChanged
     {
-        private double _bar;
-        private double _top;
-        private double _left;
-        private double _insetFooter;
-        private double _right;
-        private double _bottom;
-        private double _footer;
-
         public double Bar
         {
-            get => _bar;
+            get;
             internal set
             {
-                if (_bar != value)
-                {
-                    _bar = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bar)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bar)));
             }
         }
 
         public double Top
         {
-            get => _top;
+            get;
             internal set
             {
-                if (_top != value)
-                {
-                    _top = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Top)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Top)));
             }
         }
 
         public double Left
         {
-            get => _left;
+            get;
             internal set
             {
-                if (_left != value)
-                {
-                    _left = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Left)));
             }
         }
 
         public double InsetFooter
         {
-            get => _insetFooter;
+            get;
             internal set
             {
-                if (_insetFooter != value)
-                {
-                    _insetFooter = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InsetFooter)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InsetFooter)));
             }
         }
 
         public double Right
         {
-            get => _right;
+            get;
             internal set
             {
-                if (_right != value)
-                {
-                    _right = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Right)));
             }
         }
 
         public double Bottom
         {
-            get => _bottom;
+            get;
             internal set
             {
-                if (_bottom != value)
-                {
-                    _bottom = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bottom)));
-                }
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bottom)));
             }
         }
 
         public double Footer
         {
-            get => _footer;
+            get;
             internal set
             {
-                if (_footer != value)
-                {
-                    _footer = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Footer)));
-                }
+                if (field == value) return;
+
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Footer)));
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

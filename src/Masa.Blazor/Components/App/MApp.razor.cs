@@ -13,14 +13,14 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     public IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
 
-    protected bool IsDark => MasaBlazor?.Theme is { Dark: true };
+    protected bool IsDark => MasaBlazor.Theme is { Dark: true };
 
     private PopupService PopupService => (PopupService)InternalPopupService;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
+        
         PopupService.StateChanged += OnStateChanged;
         MasaBlazor.OnThemeChange += OnThemeChange;
         MasaBlazor.RTLChanged += OnRTLChanged;
