@@ -24,8 +24,7 @@ public partial class MDatePickerDateTable<TValue> : MDatePickerTable<TValue>
 
             var range = Enumerable.Range(0, 7);
             return WeekdayFormatter != null
-                ? range.Select(i =>
-                    WeekdayFormatter(DateOnly.Parse($"2017-01-{first + i + 15}"))) // 2017-01-15 is Sunday
+                ? range.Select(i => WeekdayFormatter(new DateOnly(2017, 1, first + i + 15))) // 2017-01-15 is Sunday
                 : range.Select(i => new[] { "S", "M", "T", "W", "T", "F", "S" }[(i + first) % 7]);
         }
     }
