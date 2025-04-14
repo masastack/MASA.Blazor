@@ -265,6 +265,7 @@ public partial class Components
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
         list.AddRange(DriverJSApiGenerator.ComponentMetas);
         list.AddRange(PdfJSApiGenerator.ComponentMetas);
+        list.AddRange(MobileComponentsApiGenerator.ComponentMetas);
         return list;
     }
 
