@@ -147,7 +147,7 @@ public partial class MWindow : MItemGroup
 
     private async Task UseTouchAsync()
     {
-        _module = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/components/window/touch.js");
+        _module = await Js.InvokeAsync<IJSObjectReference>("import", $"./_content/Masa.Blazor/js/{JSManifest.WindowTouchJs}");
         _useTouchId = await _module.InvokeAsync<int>("useTouch", Ref, new TouchValue(
             new Dictionary<string, AddEventListenerOptions>
             {

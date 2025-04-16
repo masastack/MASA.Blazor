@@ -55,11 +55,13 @@
 
     <ItemGroup>
 	    <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	    <ProjectReference Include="..\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\..\README.md" Pack="true" PackagePath="" />
 		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
+		<AdditionalFiles Include="wwwroot\js\manifest.json" />
 	</ItemGroup>
 
 	<ItemGroup>
