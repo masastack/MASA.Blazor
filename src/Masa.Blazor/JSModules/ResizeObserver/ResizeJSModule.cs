@@ -1,11 +1,8 @@
 ﻿namespace Masa.Blazor.JSModules;
 
-public class ResizeJSModule : JSModule, IResizeJSModule
+public class ResizeJSModule(IJSRuntime js)
+    : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.ResizeIndexJs}"), IResizeJSModule
 {
-    public ResizeJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/resize/index.js")
-    {
-    }
-
     public async ValueTask ObserverAsync(ElementReference el, Func<Task> handle)
     {
         await InvokeVoidAsync("observe", el, DotNetObjectReference.Create(new Invoker(handle)));
