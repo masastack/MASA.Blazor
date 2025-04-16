@@ -16,8 +16,7 @@
     "build:drawflow": "rollup --config rollup.config.drawflow.ts",
     "build:swiper": "rollup --config rollup.config.swiper.ts",
     "build:xgplayer": "rollup --config rollup.config.xgplayer.ts",
-    "build:sortable": "rollup --config rollup.config.sortable.ts",
-    "build:pdfjs": "rollup --config rollup.config.pdfjs.ts"
+    "build:sortable": "rollup --config rollup.config.sortable.ts"
   },
   "author": "",
   "license": "MIT",
@@ -50,7 +49,6 @@
     "markdown-it-header-sections": "^1.0.0",
     "markdown-it-todo": "^1.0.5",
     "monaco-editor": "^0.36.1",
-    "pdfjs-dist": "^4.5.136",
     "punycode": "^2.1.1",
     "rollup": "^2.79.1",
     "rollup-plugin-delete": "^2.2.0",
