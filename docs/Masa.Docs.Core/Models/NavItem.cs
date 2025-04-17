@@ -35,9 +35,5 @@ public class NavItem : IDefaultItem<NavItem>
     
     public string? ReleasedOn { get; set; }
 
-    public bool? Hidden { get; set; }
-
     public string? Segment => (Group ?? Title);
-
-    public bool IsHidden => Hidden.HasValue && Hidden.Value && (Children != null && Children.All(c => c.IsHidden));
 }

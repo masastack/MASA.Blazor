@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.DriverJS\Masa.Blazor.JSComponents.DriverJS.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.PdfJS\Masa.Blazor.JSComponents.PdfJS.csproj" />
+    <ProjectReference Include="..\..\src\Masa.Blazor.MobileComponents\Masa.Blazor.MobileComponents.csproj" />
     <ProjectReference Include="..\Masa.Docs.Core\Masa.Docs.Core.csproj" />
   </ItemGroup>
 

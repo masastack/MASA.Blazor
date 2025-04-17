@@ -109,7 +109,19 @@ public partial class Components
     {
         await base.OnParametersSetAsync();
 
-        _group = NavigationManager.GetAbsolutePath().StartsWith("/blazor/components", StringComparison.OrdinalIgnoreCase) ? "components" : "labs";
+        var absolutePath = NavigationManager.GetAbsolutePath();
+        if (absolutePath.StartsWith("/blazor/components", StringComparison.OrdinalIgnoreCase))
+        {
+            _group = "components";
+        }
+        else if (absolutePath.StartsWith("/blazor/labs", StringComparison.OrdinalIgnoreCase))
+        {
+            _group = "labs";
+        }
+        else if (absolutePath.StartsWith("/blazor/mobiles", StringComparison.OrdinalIgnoreCase))
+        {
+            _group = "mobiles";
+        }
 
         if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
@@ -265,6 +277,7 @@ public partial class Components
         list.AddRange(SomethingSkiaApiGenerator.ComponentMetas);
         list.AddRange(DriverJSApiGenerator.ComponentMetas);
         list.AddRange(PdfJSApiGenerator.ComponentMetas);
+        list.AddRange(MobileComponentsApiGenerator.ComponentMetas);
         return list;
     }
 
