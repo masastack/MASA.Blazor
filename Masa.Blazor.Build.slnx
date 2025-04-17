@@ -5,4 +5,6 @@
   <Project Path="src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj" />
   <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
   <Project Path="src\Masa.Blazor.JSComponents.PdfJS\Masa.Blazor.JSComponents.PdfJS.csproj" Type="Classic C#" />
+  <Project Path="src\Masa.Blazor.MobileComponents\Masa.Blazor.MobileComponents.csproj" Type="Classic C#" />
+  <Project Path="src\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj" Type="Classic C#" />
 </Solution>
