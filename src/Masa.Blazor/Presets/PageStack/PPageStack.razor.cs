@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public partial class PPageStack: MasaComponentBase
+public partial class PPageStack : MasaComponentBase
 {
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
 
@@ -76,6 +76,8 @@ public partial class PPageStack: MasaComponentBase
     private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
     private int _dotnetObjectId;
 
+    private string? _controllerName;
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -86,6 +88,9 @@ public partial class PPageStack: MasaComponentBase
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        // assume the Name will not be changed
+        _controllerName = Name ?? string.Empty;
 
         UpdateRegexes();
 
@@ -106,7 +111,7 @@ public partial class PPageStack: MasaComponentBase
 
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
 
-        InternalPageStackNavController = PageStackNavControllerFactory.Create(Name ?? string.Empty);
+        InternalPageStackNavController = PageStackNavControllerFactory.Create(_controllerName);
         InternalPageStackNavController.BindComponent(this);
 
         _dotNetObjectReference = DotNetObjectReference.Create(this);
@@ -137,6 +142,9 @@ public partial class PPageStack: MasaComponentBase
         }
     }
 
+    [MasaApiPublicMethod]
+    public void GoBack() => HandleOnPrevious();
+
     [JSInvokable]
     public void Push(string href)
     {
@@ -153,6 +161,11 @@ public partial class PPageStack: MasaComponentBase
     public void Popstate(string absolutePath)
     {
         if (Pages.Count == 0)
+        {
+            return;
+        }
+
+        if (PageStackNavControllerFactory.Current != (_controllerName))
         {
             return;
         }
@@ -290,6 +303,8 @@ public partial class PPageStack: MasaComponentBase
 
     internal void Push(PageStackPushEventArgs e)
     {
+        PageStackNavControllerFactory.Activate(_controllerName!);
+
         if (e.CountOfTopPagesToRemove != 0)
         {
             // after calling history.go, a popstate event callback will be triggered,
@@ -434,6 +449,7 @@ public partial class PPageStack: MasaComponentBase
 
     private void UnblockScroll()
     {
+        PageStackNavControllerFactory.Inactivate(_controllerName!);
         _module?.InvokeVoidAsync("unblockScroll").ConfigureAwait(false);
     }
 

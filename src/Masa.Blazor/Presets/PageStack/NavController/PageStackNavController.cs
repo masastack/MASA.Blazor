@@ -3,7 +3,7 @@ using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
 
-public class PageStackNavController()
+public class PageStackNavController(string name)
 {
     /// <summary>
     /// Records the timestamp of the last action, shared by all actions.
@@ -49,6 +49,8 @@ public class PageStackNavController()
     /// Occurs when the active tab is changed.
     /// </summary>
     public event EventHandler<PageStackTabChangedEventArgs>? TabChanged;
+
+    public string Name { get; init; } = name;
 
     internal void BindComponent(PPageStack component) => _boundComponent = component;
 
