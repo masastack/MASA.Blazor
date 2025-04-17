@@ -101,14 +101,19 @@ public class GithubService(ExpiryLocalStorage localStorage, ILogger<GithubServic
         try
         {
             var client = CreateClient(owner, repo);
-            var response = await client.Actions.Workflows.Runs.ListByWorkflow(owner, repo,
+
+            var releaseResponse = await client.Repository.Release.GetLatest(owner, repo);
+            if (releaseResponse is null) return null;
+            var release = releaseResponse.TagName;
+            
+            var runsResponse = await client.Actions.Workflows.Runs.ListByWorkflow(owner, repo,
                 ".github/workflows/wasm-prd.yml",
                 new WorkflowRunsRequest
                 {
                     Status = CheckRunStatusFilter.Success
                 });
 
-            var latest = response.WorkflowRuns.FirstOrDefault();
+            var latest = runsResponse.WorkflowRuns.FirstOrDefault();
             if (latest == null) return null;
             var commitSha = latest.HeadSha;
             string? release;
