@@ -1,11 +1,7 @@
 ﻿namespace Masa.Blazor;
 
-public class IntersectJSModule : JSModule
+public class IntersectJSModule(IJSRuntime js) : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.IntersectIndexJs}")
 {
-    public IntersectJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/intersect/index.js")
-    {
-    }
-
     public async ValueTask ObserverAsync(
         ElementReference el,
         DotNetObjectReference<IntersectInvoker> handle,

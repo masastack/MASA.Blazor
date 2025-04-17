@@ -132,7 +132,7 @@ public partial class PPageStack: MasaComponentBase
         if (firstRender)
         {
             _module = await Js.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor/js/components/page-stack/index.js");
+                $"./_content/Masa.Blazor/js/{JSManifest.PageStackIndexJs}");
             _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
         }
     }

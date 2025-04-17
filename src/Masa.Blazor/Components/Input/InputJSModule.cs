@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.Input;
 
-public class InputJSModule : JSModule
+public class InputJSModule(IJSRuntime js) : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.InputIndexJs}")
 {
     private IInputJsCallbacks? _owner;
     private DotNetObjectReference<InputJSModule>? _selfReference;
@@ -8,10 +8,6 @@ public class InputJSModule : JSModule
     private bool _isDisposed;
 
     public bool Initialized { get; private set; }
-
-    public InputJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/input/index.js")
-    {
-    }
 
     public async ValueTask InitializeAsync(IInputJsCallbacks owner)
     {

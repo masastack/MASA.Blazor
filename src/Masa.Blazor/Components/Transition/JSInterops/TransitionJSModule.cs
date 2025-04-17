@@ -1,11 +1,8 @@
 ﻿namespace Masa.Blazor.Components.Transition;
 
-public class TransitionJSModule : JSModule
+public class TransitionJSModule(IJSRuntime js)
+    : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.TransitionIndexJs}")
 {
-    public TransitionJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/transition/index.js")
-    {
-    }
-
     public bool Initialized { get; private set; }
 
     public async ValueTask<IJSObjectReference?> InitAsync(ElementReference elementReference,

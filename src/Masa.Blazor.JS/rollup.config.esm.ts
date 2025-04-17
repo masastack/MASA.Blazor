@@ -1,4 +1,6 @@
 import { defineConfig } from "rollup";
+import del from "rollup-plugin-delete";
+import outputManifest from "rollup-plugin-output-manifest";
 import { terser } from "rollup-plugin-terser";
 
 import resolve from "@rollup/plugin-node-resolve";
@@ -30,13 +32,27 @@ export default defineConfig({
   },
   output: [
     {
+      entryFileNames: "[name]-[hash].js",
       dir: "../MASA.Blazor/wwwroot/js",
       format: "es",
-      chunkFileNames: "chunks/[name].js",
+      chunkFileNames: "chunks/[name]-[hash].js",
       sourcemap: true,
     },
   ],
-  plugins: [typescript(), resolve(), terser()],
+  plugins: [
+    typescript(),
+    resolve(),
+    terser(),
+    outputManifest(),
+    del({
+      targets: [
+        "../MASA.Blazor/wwwroot/js/components/*",
+        "../MASA.Blazor/wwwroot/js/mixins/*",
+        "../MASA.Blazor/wwwroot/js/chunks/*",
+      ],
+      force: true,
+    }),
+  ],
   watch: {
     exclude: "node_modules/**",
   },

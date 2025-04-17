@@ -13,7 +13,7 @@ public class Touch : IAsyncDisposable
 
         _moduleTask = new Lazy<Task<IJSObjectReference>>(
             () => jsRuntime
-                .InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/components/page-stack/touch.js")
+                .InvokeAsync<IJSObjectReference>("import", $"./_content/Masa.Blazor/js/{JSManifest.PageStackTouchJs}")
                 .AsTask());
     }
 
