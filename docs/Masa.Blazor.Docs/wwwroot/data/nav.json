@@ -67,13 +67,8 @@
     "title": "ui-components",
     "icon": "mdi-layers-triple",
     "group": "components",
-    "hidden": true,
     "state": "update",
     "items": [
-      {
-        "title": "all",
-        "hidden": false
-      },
       "alerts",
       "application",
       "aspect-ratios",
@@ -182,26 +177,14 @@
         "state": "breaking-change"
       },
       "images",
-      "infinite-scroll",
       {
         "title": "lists",
         "state": "update"
       },
+      "infinite-scroll",
       "markdowns",
       "markdown-parsers",
       "menus",
-      {
-        "title": "mobiles",
-        "group": "components",
-        "items": [
-          "mobile-cascader",
-          "mobile-date-pickers",
-          "mobile-date-time-pickers",
-          "mobile-pickers",
-          "mobile-picker-views",
-          "mobile-time-pickers"
-        ]
-      },
       "modals",
       "monaco-editor",
       "navigation-drawers",
@@ -268,15 +251,32 @@
     ]
   },
   {
+    "title": "mobiles",
+    "icon": "mdi-cellphone",
+    "group": "mobiles",
+    "items": [
+      "mobile-cascader",
+      "mobile-date-pickers",
+      "mobile-date-time-pickers",
+      "mobile-pickers",
+      "mobile-picker-views",
+      "mobile-time-pickers",
+      "page-stack",
+      {
+        "title": "pdf-mobile-viewer",
+        "state": "nuget",
+        "releasedOn": "v1.7.0"
+      },
+      "pull-refresh",
+      "swiper"
+    ]
+  },
+  {
     "title": "js-modules",
     "icon": "$languageJavascript",
     "state": "new",
     "items": [
-      {
-        "title": "intersection-observer",
-        "state": "new",
-        "releasedOn": "v1.1.0"
-      }
+      "intersection-observer"
     ]
   },
   {
@@ -284,101 +284,33 @@
     "icon": "mdi-flask",
     "state": "new",
     "items": [
-      {
-        "title": "date-digital-clock-pickers",
-        "state": "new",
-        "releasedOn": "v1.0.2"
-      },
-      {
-        "title": "date-time-pickers",
-        "state": "new",
-        "releasedOn": "v1.0.2"
-      },
-      {
-        "title": "digital-clocks",
-        "state": "new",
-        "releasedOn": "v1.0.2"
-      },
-      {
-        "title": "drawflow",
-        "state": "new",
-        "releasedOn": "v1.0.4"
-      },
+      "date-digital-clock-pickers",
+      "date-time-pickers",
+      "digital-clocks",
+      "drawflow",
       {
         "title": "driverjs",
         "state": "new",
         "releasedOn": "v1.9.0"
       },
-      {
-        "title": "inputs-filter",
-        "state": "new",
-        "releasedOn": "v1.1.0"
-      },
-      {
-        "title": "interactive-trigger",
-        "state": "new",
-        "releasedOn": "v1.3.0"
-      },
-      {
-        "title": "lazy",
-        "state": "new",
-        "releasedOn": "v1.1.0"
-      },
-      {
-        "title": "page-stack",
-        "state": "new",
-        "releasedOn": "v1.5.0"
-      },
-      {
-        "title": "pdf-mobile-viewer",
-        "state": "new",
-        "releasedOn": "v1.7.0"
-      },
-      {
-        "title": "pull-refresh",
-        "state": "new",
-        "releasedOn": "v1.1.1"
-      },
-      {
-        "title": "scroll-to-target",
-        "state": "new",
-        "releasedOn": "v1.3.4"
-      },
-      {
-        "title": "sortable",
-        "state": "new",
-        "releasedOn": "v1.4.0"
-      },
-      {
-        "title": "splitters",
-        "state": "new",
-        "releasedOn": "v1.1.1"
-      },
+      "inputs-filter",
+      "interactive-trigger",
+      "lazy",
+      "scroll-to-target",
+      "sortable",
+      "splitters",
       {
         "title": "sticky",
         "state": "new",
         "releasedOn": "v1.8.0"
       },
       {
-        "title": "swiper",
-        "state": "new",
-        "releasedOn": "v1.0.4"
-      },
-      {
         "title": "toggles",
         "state": "new",
         "releasedOn": "v1.7.0"
       },
-      {
-        "title": "watermark",
-        "state": "new",
-        "releasedOn": "v1.1.1"
-      },
-      {
-        "title": "xgplayer",
-        "state": "new",
-        "releasedOn": "v1.3.0"
-      }
+      "watermark",
+      "xgplayer"
     ]
   },
   {

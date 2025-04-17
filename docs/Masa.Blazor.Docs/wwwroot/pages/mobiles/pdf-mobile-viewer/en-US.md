@@ -4,6 +4,8 @@ desc: "A PDF viewer designed for mobile."
 tag: "JS Proxy"
 ---
 
+## Installation
+
 ```shell
 dotnet add package Masa.Blazor.JSComponents.PdfJS
 ```
@@ -14,7 +16,7 @@ dotnet add package Masa.Blazor.JSComponents.PdfJS
 
 ## Usage
 
-<masa-example file="Examples.labs.pdf_mobile_viewer.Usage" no-actions="true"></masa-example>
+<masa-example file="Examples.mobiles.pdf_mobile_viewer.Usage" no-actions="true"></masa-example>
 
 ```razor
 <MPdfMobileViewer Url="_content/Masa.Blazor.Docs/img/compressed.tracemonkey-pldi-09.pdf" /> 

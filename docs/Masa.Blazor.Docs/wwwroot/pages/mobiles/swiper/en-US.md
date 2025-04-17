@@ -18,7 +18,7 @@ You need to reference the following files before using it:
 
 ## Usage
 
-<masa-example file="Examples.labs.swiper.Default"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Default"></masa-example>
 
 ## Examples
 
@@ -26,15 +26,15 @@ You need to reference the following files before using it:
 
 #### Vertical
 
-<masa-example file="Examples.labs.swiper.Vertical"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Vertical"></masa-example>
 
 #### Loop
 
-<masa-example file="Examples.labs.swiper.Loop"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Loop"></masa-example>
 
 #### Space between
 
-<masa-example file="Examples.labs.swiper.SpaceBetween"></masa-example>
+<masa-example file="Examples.mobiles.swiper.SpaceBetween"></masa-example>
 
 #### Auto height
 
@@ -53,18 +53,18 @@ to recalculate the height after the content is loaded.
 </MSwiper>
 ```
 
-<masa-example file="Examples.labs.swiper.AutoHeight"></masa-example>
+<masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 
 ### Module components
 
 #### Navigation
 
-<masa-example file="Examples.labs.swiper.Navigation"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Navigation"></masa-example>
 
 #### Pagination
 
-<masa-example file="Examples.labs.swiper.Pagination"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Pagination"></masa-example>
 
 #### Autoplay
 
-<masa-example file="Examples.labs.swiper.Autoplay"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Autoplay"></masa-example>

@@ -29,7 +29,7 @@ related:
   Except for the tabbed page list, other pages will enter the page stack with an animation effect from right to left,
   and exit will destroy the page.
 
-<masa-example file="Examples.labs.page_stack.Usage" no-actions="true"></masa-example>
+<masa-example file="Examples.mobiles.page_stack.Usage" no-actions="true"></masa-example>
 
 ## Built-in components and classes
 

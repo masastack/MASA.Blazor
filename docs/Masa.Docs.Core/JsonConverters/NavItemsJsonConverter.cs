@@ -68,10 +68,6 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "releasedOn":
                                 navItem.ReleasedOn = reader.GetString();
                                 break;
-                            case "hidden":
-                                var hidden = reader.GetBoolean();
-                                navItem.Hidden = hidden;
-                                break;
                             case "items":
                                 navItem.Children = ReadSubItems(ref reader);
                                 break;

@@ -4,6 +4,8 @@ desc: "专为移动设备设计的 PDF 查看器。"
 tag: "JS代理"
 ---
 
+## 安装 {#installation}
+
 ```shell
 dotnet add package Masa.Blazor.JSComponents.PdfJS
 ```
@@ -14,7 +16,7 @@ dotnet add package Masa.Blazor.JSComponents.PdfJS
 
 ## 使用 {#usage}
 
-<masa-example file="Examples.labs.pdf_mobile_viewer.Usage" no-actions="true"></masa-example>
+<masa-example file="Examples.mobiles.pdf_mobile_viewer.Usage" no-actions="true"></masa-example>
 
 ```razor
 <MPdfMobileViewer Url="_content/Masa.Blazor.Docs/img/compressed.tracemonkey-pldi-09.pdf" /> 

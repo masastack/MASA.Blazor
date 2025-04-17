@@ -28,7 +28,7 @@ related:
 
   除了选项卡页面列表，其他页面都会通过从右到左的动画效果进入页面堆栈，移出即销毁。
 
-<masa-example file="Examples.labs.page_stack.Usage" no-actions="true"></masa-example>
+<masa-example file="Examples.mobiles.page_stack.Usage" no-actions="true"></masa-example>
 
 ## 内置组件和类
 

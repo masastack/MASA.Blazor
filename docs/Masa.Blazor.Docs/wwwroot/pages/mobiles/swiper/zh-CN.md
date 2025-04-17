@@ -18,7 +18,7 @@ related:
 
 ## 使用 {#usage}
 
-<masa-example file="Examples.labs.swiper.Default"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Default"></masa-example>
 
 ## 示例 {#examples}
 
@@ -26,15 +26,15 @@ related:
 
 #### 竖向 {#vertical}
 
-<masa-example file="Examples.labs.swiper.Vertical"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Vertical"></masa-example>
 
 #### 循环 {#loop}
 
-<masa-example file="Examples.labs.swiper.Loop"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Loop"></masa-example>
 
 #### 间隔 {#space-between}
 
-<masa-example file="Examples.labs.swiper.SpaceBetween"></masa-example>
+<masa-example file="Examples.mobiles.swiper.SpaceBetween"></masa-example>
 
 #### 自动高度 {#auto-height}
 
@@ -50,18 +50,18 @@ related:
 </MSwiper>
 ```
 
-<masa-example file="Examples.labs.swiper.AutoHeight"></masa-example>
+<masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 
 ### 模块组件 {#module-components}
 
 #### 导航 {#navigation}
 
-<masa-example file="Examples.labs.swiper.Navigation"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Navigation"></masa-example>
 
 #### 分页 {#pagination}
 
-<masa-example file="Examples.labs.swiper.Pagination"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Pagination"></masa-example>
 
 #### 自动播放 {#autoplay}
 
-<masa-example file="Examples.labs.swiper.Autoplay"></masa-example>
+<masa-example file="Examples.mobiles.swiper.Autoplay"></masa-example>

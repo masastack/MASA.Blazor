@@ -8,17 +8,23 @@ related:
   - /blazor/components/buttons
 ---
 
+## Installation
+
+```shell
+dotnet add package Masa.Blazor.MobileComponents
+```
+
 ## Examples
 
 ### Events
 
 #### Load children
 
-<masa-example file="Examples.components.mobile_cascader.LoadChildren"></masa-example>
+<masa-example file="Examples.mobiles.mobile_cascader.LoadChildren"></masa-example>
 
 #### On confirm
 
-<masa-example file="Examples.components.mobile_cascader.OnConfirm"></masa-example>
+<masa-example file="Examples.mobiles.mobile_cascader.OnConfirm"></masa-example>
 
 
 
