@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
-        <PackageIcon>../../imgs/logo-96x96.png</PackageIcon>
+        <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="../../imgs/logo-96x96.png" Pack="true" PackagePath="$(PackageIcon)" />
+        <None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
         <Content Remove="tsconfig.json;package.json" />
     </ItemGroup>
 
