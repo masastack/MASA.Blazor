@@ -35,11 +35,29 @@ public class ThemeOptions
 
     public string? OnWarning { get; set; }
 
+    public string? SurfaceDim { get; set; }
+
     public string? Surface { get; set; }
+
+    public string? SurfaceBright { get; set; }
+
+    public string? SurfaceContainerLowest { get; set; }
+
+    public string? SurfaceContainerLow { get; set; }
+
+    public string? SurfaceContainer { get; set; }
+
+    public string? SurfaceContainerHigh { get; set; }
+
+    public string? SurfaceContainerHighest { get; set; }
 
     public string? OnSurface { get; set; }
 
-    public string? SurfaceContainer { get; set; }
+    public string? OnSurfaceVariant { get; set; }
+
+    public string? Outline { get; set; }
+
+    public string? OutlineVariant { get; set; }
 
     public string? InverseSurface { get; set; }
 

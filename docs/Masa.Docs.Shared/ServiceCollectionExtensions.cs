@@ -23,6 +23,8 @@ public static class ServiceCollectionExtensions
 
         var masaBlazorBuilder = services.AddMasaBlazor(options =>
         {
+            // TODO: 多主题支持
+            
             options.ConfigureTheme(theme =>
             {
                 theme.Dark = false;
@@ -31,11 +33,12 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Light.Secondary = "#5e5c71";
                 theme.Themes.Light.Accent = "#006C4F";
                 theme.Themes.Light.Error = "#BA1A1A";
-                theme.Themes.Light.OnSurface = "#1C1B1F";
-                theme.Themes.Light.InverseSurface = "#131316";
-                theme.Themes.Light.InverseOnSurface = "#C9C5CA";
-                theme.Themes.Light.InversePrimary = "#C5C0FF";
-
+                // theme.Themes.Light.OnSurface = "#1C1B1F";
+                // theme.Themes.Light.SurfaceContainer = "#FFFFFF";
+                // theme.Themes.Light.InverseSurface = "#131316";
+                // theme.Themes.Light.InverseOnSurface = "#C9C5CA";
+                // theme.Themes.Light.InversePrimary = "#C5C0FF";
+                
                 theme.Themes.Dark.Primary = "#C5C0FF";
                 theme.Themes.Dark.OnPrimary = "#090029";
                 theme.Themes.Dark.Secondary = "#C7C4DC";
@@ -44,10 +47,12 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Dark.OnAccent = "#003827";
                 theme.Themes.Dark.Error = "#FFB4AB";
                 theme.Themes.Dark.OnError = "#690005";
-                theme.Themes.Dark.Surface = "#131316";
-                theme.Themes.Dark.OnSurface = "#FFFFFF";
-                theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
-                theme.Themes.Dark.InversePrimary = "#4f33ff";
+                // theme.Themes.Dark.OnSurface = "#e4e0f0";
+                // theme.Themes.Dark.Surface = "#13121d";
+                // theme.Themes.Dark.SurfaceContainer = "#13121d";
+                // theme.Themes.Dark.SurfaceContainerLow = "#1b1a25";
+                // theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
+                // theme.Themes.Dark.InversePrimary = "#4f33ff";
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {

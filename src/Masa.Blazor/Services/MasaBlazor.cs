@@ -102,6 +102,13 @@
 
             ToggleTheme();
         }
+        
+        // TODO: 动态更新主题
+        public void UpdateTheme(Action<Theme> themeConfig)
+        {
+            themeConfig.Invoke(Theme);
+            OnThemeChange?.Invoke(Theme);
+        }
 
         /// <summary>
         /// Update the default configuration.
