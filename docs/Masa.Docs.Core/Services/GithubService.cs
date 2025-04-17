@@ -116,16 +116,6 @@ public class GithubService(ExpiryLocalStorage localStorage, ILogger<GithubServic
             var latest = runsResponse.WorkflowRuns.FirstOrDefault();
             if (latest == null) return null;
             var commitSha = latest.HeadSha;
-            string? release;
-            if (latest.Event == "release")
-            {
-                release = latest.DisplayTitle;
-            }
-            else
-            {
-                latest = response.WorkflowRuns.FirstOrDefault(u => u.Event == "release");
-                release = latest?.HeadBranch;
-            }
 
             latestBuild = new LatestBuild(commitSha, release);
             await localStorage.SetExpiryItemAsync(key, latestBuild, TimeSpan.FromHours(1));
