@@ -65,8 +65,10 @@ public class ThemeOptions
 
     public string? InversePrimary { get; set; }
 
-    public Dictionary<string, string> UserDefined { get; } = new();
+    public Dictionary<string, ColorPairing> UserDefined { get; } = new();
 }
+
+public record ColorPairing(string Color, string? OnColor = null);
 
 public class Theme
 {

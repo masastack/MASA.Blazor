@@ -38,6 +38,7 @@ public static class ServiceCollectionExtensions
                 // theme.Themes.Light.InverseSurface = "#131316";
                 // theme.Themes.Light.InverseOnSurface = "#C9C5CA";
                 // theme.Themes.Light.InversePrimary = "#C5C0FF";
+                theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
                 
                 theme.Themes.Dark.Primary = "#C5C0FF";
                 theme.Themes.Dark.OnPrimary = "#090029";
@@ -53,6 +54,7 @@ public static class ServiceCollectionExtensions
                 // theme.Themes.Dark.SurfaceContainerLow = "#1b1a25";
                 // theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
                 // theme.Themes.Dark.InversePrimary = "#4f33ff";
+                theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {

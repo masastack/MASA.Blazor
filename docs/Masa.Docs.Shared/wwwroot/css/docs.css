@@ -362,10 +362,6 @@ a.text-dec-none {
     width: fit-content !important;
 }
 
-.theme--dark.default-tabs > .m-tabs-bar {
-    background-color: transparent;    
-}
-
 .default-tabs .m-tab {
     font-weight: 400 !important;
     font-size: 1rem !important;
@@ -380,10 +376,6 @@ a.text-dec-none {
 .default-tabs .m-tab:before {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-}
-
-.theme--light.default-tabs .m-tab:not(.m-tab--active) {
-    color: #485585 !important;
 }
 
     .default-tabs .m-tab--active:focus::before {
@@ -508,10 +500,6 @@ app-alert p {
 
 .doc-markdown-body li > p {
     margin-bottom: 8px !important;
-}
-
-.doc-drawer .theme--dark.m-toolbar {
-    background-color: inherit;
 }
 
 .m-select.light-border .m-input__slot fieldset {

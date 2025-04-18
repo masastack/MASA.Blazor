@@ -7,22 +7,14 @@
 }
 
 /* fixed in datatable */
-.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper):not(.m-data-table__selected),
-.theme--light.m-data-table > .m-data-table__wrapper > table > thead > tr {
-    background: #FFFFFF;
+.theme--light.m-data-table .m-data-table__column--fixed-left,
+.theme--light.m-data-table .m-data-table__column--fixed-right {
+    background: var(--m-theme-light-surface-container-low)
 }
 
-.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr:hover:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) {
-    background: #eeeeee;
-}
-
-.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper):not(.m-data-table__selected),
-.theme--dark.m-data-table > .m-data-table__wrapper > table > thead > tr {
-    background: #1E1E1E;
-}
-
-.theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr:hover:not(.stripe):not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) {
-    background: #616161;
+.theme--dark.m-data-table .m-data-table__column--fixed-left,
+.theme--dark.m-data-table .m-data-table__column--fixed-right {
+    background: var(--m-theme-dark-surface-container-low)
 }
 
 .m-data-table__column--fixed-right, .m-data-table__column--fixed-left {
@@ -85,11 +77,11 @@
 
 /* strip in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: #fafafa;
+    background: var(--m-theme-light-surface-container-lowest);
 }
 
 .theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: #212121;
+    background: var(--m-theme-dark-surface-container-lowest);
 }
 
 .m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th.m-data-table__column--fixed-left {
