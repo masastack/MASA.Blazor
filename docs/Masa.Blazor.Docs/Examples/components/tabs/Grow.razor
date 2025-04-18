@@ -1,11 +1,11 @@
 ﻿<MCard Color="basil">
     <MCardTitle Class="text-center justify-center py-6">
-        <h1 class="font-weight-bold text-h2 basil--text">BASiL</h1>
+        <h1 class="font-weight-bold text-h2">BASiL</h1>
     </MCardTitle>
 
     <MTabs @bind-Value="tab"
-           BackgroundColor="transparent"
-           Color="basil"
+           BackgroundColor="basil"
+           Light
            Grow>
         @foreach (var item in items)
         {
@@ -17,23 +17,13 @@
         @foreach (var item in items)
         {
             <MTabItem Value="@item">
-                <MCard Color="basil" Flat>
+                <MCard Color="basil" Rounded="@("0")" Flat Light>
                     <MCardText>@text</MCardText>
                 </MCard>
             </MTabItem>
         }
     </MTabsItems>
 </MCard>
-
-<style>
-/* Helper classes */
-.basil {
-  background-color: #FFFBE6 !important;
-}
-.basil--text {
-  color: #356859 !important;
-}
-</style>
 
 @code {
 
