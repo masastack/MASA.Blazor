@@ -9,12 +9,12 @@
 /* fixed in datatable */
 .theme--light.m-data-table .m-data-table__column--fixed-left,
 .theme--light.m-data-table .m-data-table__column--fixed-right {
-    background: var(--m-theme-light-surface-container-low)
+    background: rgba(var(--m-theme-surface-container-low))
 }
 
 .theme--dark.m-data-table .m-data-table__column--fixed-left,
 .theme--dark.m-data-table .m-data-table__column--fixed-right {
-    background: var(--m-theme-dark-surface-container-low)
+    background: rgba(var(--m-theme-surface-container-low))
 }
 
 .m-data-table__column--fixed-right, .m-data-table__column--fixed-left {
@@ -77,11 +77,11 @@
 
 /* strip in datatable */
 .theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: var(--m-theme-light-surface-container-lowest);
+    background: rgba(var(--m-theme-surface-container-lowest));
 }
 
 .theme--dark.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: var(--m-theme-dark-surface-container-lowest);
+    background: rgba(var(--m-theme-surface-container-lowest));
 }
 
 .m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th.m-data-table__column--fixed-left {
@@ -175,7 +175,7 @@
 }
 
 .m-border:after {
-    background-color: var(--m-border-color);
+    background-color: rgba(var(--m-border-color));
     content: '';
     opacity: 0;
     pointer-events: none;
@@ -338,6 +338,7 @@
     max-height: inherit;
     min-width: inherit;
     padding: 8px 0;
+    background-color: rgba(var(--m-theme-surface-container-low));
 }
 
 .m-cascader__column {
@@ -581,13 +582,13 @@ input[type=number] {
 }
 
 .theme--light.m-divider__content {
-    background-color: var(--m-theme-light-surface);
-    color: var(--m-theme-light-on-surface);
+    background-color: rgba(var(--m-theme-surface));
+    color: rgba(var(--m-theme-on-surface));
 }
 
 .theme--dark.m-divider__content {
-    background-color: var(--m-theme-dark-surface);
-    color: var(--m-theme-dark-on-surface);
+    background-color: rgba(var(--m-theme-surface));
+    color: rgba(var(--m-theme-on-surface));
 }
 
 /* enqueued-snackbars */
@@ -1325,26 +1326,10 @@ input[type=number] {
 
 /* menu */
 
-.theme--light.m-menu__content {
-    background: #FFFFFF;
-    color: rgba(0, 0, 0, 0.87);
-}
-
-.theme--dark.m-menu__content {
-    background: #1e1e1e;
-    color: #FFFFFF;
-}
-
-/* dialog */
-
-.theme--light.m-dialog__content .m-dialog {
-    background: var(--m-theme-light-surface);
-    color: var(--m-theme-light-on-surface);
-}
-
-.theme--dark.m-dialog__content .m-dialog {
-    background: var(--m-theme-dark-surface);
-    color: var(--m-theme-dark-on-surface);
+.theme--light .m-date-time-picker, .theme--light.m-date-time-picker,
+.theme--dark .m-date-time-picker, .theme--dark.m-date-time-picker {
+    background: rgba(var(--m-theme-surface-container));
+    color: rgba(var(--m-theme-on-surface));
 }
 
 /* data-filter */
@@ -1558,37 +1543,37 @@ html.m-overlay-scroll-blocked {
 
 .m-toolbar.primary > .m-toolbar__content .m-btn--icon,
 .m-toolbar.primary > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-primary);
+    color: rgba(var(--m-theme-on-primary));
 }
 
 .m-toolbar.secondary > .m-toolbar__content .m-btn--icon,
 .m-toolbar.secondary > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-secondary);
+    color: rgba(var(--m-theme-on-secondary));
 }
 
 .m-toolbar.accent > .m-toolbar__content .m-btn--icon,
 .m-toolbar.accent > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-accent);
+    color: rgba(var(--m-theme-on-accent));
 }
 
 .m-toolbar.error > .m-toolbar__content .m-btn--icon,
 .m-toolbar.error > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-error);
+    color: rgba(var(--m-theme-on-error));
 }
 
 .m-toolbar.info > .m-toolbar__content .m-btn--icon,
 .m-toolbar.info > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-info);
+    color: rgba(var(--m-theme-on-info));
 }
 
 .m-toolbar.success > .m-toolbar__content .m-btn--icon,
 .m-toolbar.success > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-success);
+    color: rgba(var(--m-theme-on-success));
 }
 
 .m-toolbar.warning > .m-toolbar__content .m-btn--icon,
 .m-toolbar.warning > .m-toolbar__content .m-icon {
-    color: var(--m-theme-on-warning);
+    color: rgba(var(--m-theme-on-warning));
 }
 
 /* treeview */

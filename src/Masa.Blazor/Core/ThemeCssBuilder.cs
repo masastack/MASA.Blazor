@@ -5,41 +5,51 @@ public static class ThemeCssBuilder
     private static string BuildOtherCssVariable(ThemeOptions options)
     {
         return $"""
-               {BuildCssVariable("primary", options.Primary, options.OnPrimary)}
-               {BuildCssVariable("secondary", options.Secondary, options.OnSecondary)}
-               {BuildCssVariable("accent", options.Accent, options.OnAccent)}
-               {BuildCssVariable("info", options.Info, options.OnInfo)}
-               {BuildCssVariable("success", options.Success, options.OnSuccess)}
-               {BuildCssVariable("warning", options.Warning, options.OnWarning)}
-               {BuildCssVariable("error", options.Error, options.OnError)}
-               {BuildCssVariable(options.UserDefined)}
+                {BuildCssVariable("primary", options.Primary, options.OnPrimary)}
+                  {BuildCssVariable("secondary", options.Secondary, options.OnSecondary)}
+                  {BuildCssVariable("accent", options.Accent, options.OnAccent)}
+                  {BuildCssVariable("info", options.Info, options.OnInfo)}
+                  {BuildCssVariable("success", options.Success, options.OnSuccess)}
+                  {BuildCssVariable("warning", options.Warning, options.OnWarning)}
+                  {BuildCssVariable("error", options.Error, options.OnError)}
+                  {BuildCssVariable(options.UserDefined)}
 
-               --m-theme-surface-dim: {options.SurfaceDim};
-               --m-theme-surface: {options.Surface};
-               --m-theme-surface-bright: {options.SurfaceBright};
-               --m-theme-surface-container-lowest: {options.SurfaceContainerLowest};
-               --m-theme-surface-container-low: {options.SurfaceContainerLow};
-               --m-theme-surface-container: {options.SurfaceContainer};
-               --m-theme-surface-container-high: {options.SurfaceContainerHigh};
-               --m-theme-surface-container-highest: {options.SurfaceContainerHighest};
-               --m-theme-on-surface: {options.OnSurface};
-               --m-theme-on-surface-variant: {options.OnSurfaceVariant};
-               --m-theme-outline: {options.Outline};
-               --m-theme-outline-variant: {options.OutlineVariant};
-               --m-theme-inverse-surface: {options.InverseSurface};
-               --m-theme-inverse-on-surface: {options.InverseOnSurface};
-               --m-theme-inverse-primary: {options.InversePrimary};
-               """;
+                  {BuildCssVariable("surface-dim", options.SurfaceDim)}
+                  {BuildCssVariable("surface", options.Surface)}
+                  {BuildCssVariable("surface-bright", options.SurfaceBright)}
+                  {BuildCssVariable("surface-container-lowest", options.SurfaceContainerLowest)}
+                  {BuildCssVariable("surface-container-low", options.SurfaceContainerLow)}
+                  {BuildCssVariable("surface-container", options.SurfaceContainer)}
+                  {BuildCssVariable("surface-container-high", options.SurfaceContainerHigh)}
+                  {BuildCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
+                  {BuildCssVariable("on-surface", options.OnSurface)}
+                  {BuildCssVariable("on-surface-variant", options.OnSurfaceVariant)}
+                  {BuildCssVariable("outline", options.Outline)}
+                  {BuildCssVariable("outline-variant", options.OutlineVariant)}
+                  {BuildCssVariable("inverse-surface", options.InverseSurface)}
+                  {BuildCssVariable("inverse-on-surface", options.InverseOnSurface)}
+                  {BuildCssVariable("inverse-primary", options.InversePrimary)}
+                """;
+    }
+
+    private static string? BuildCssVariable(string name, string? color)
+    {
+        if (string.IsNullOrWhiteSpace(color))
+        {
+            return null;
+        }
+
+        return $"--m-theme-{name}: {ColorParser.ParseColorAsString(color)};";
     }
 
     private static string BuildScope(string theme, bool dark, ThemeOptions options)
     {
         return $$"""
-               .theme-{{theme}} {
-                 color-scheme: {{(dark ? "dark" : "normal")}};
-                 {{BuildOtherCssVariable(options)}}
-               }
-               """;
+                 .theme--{{theme}} {
+                   color-scheme: {{(dark ? "dark" : "normal")}};
+                   {{BuildOtherCssVariable(options)}}
+                 }
+                 """;
     }
 
     public static string Build(Theme theme)
@@ -57,7 +67,7 @@ public static class ThemeCssBuilder
         {
             $$"""
               :root {
-                  {{BuildOtherCssVariable(options)}}
+                {{BuildOtherCssVariable(options)}}
               }
               {{BuildScope("light", false, light)}}
               {{BuildScope("dark", true, dark)}}
@@ -106,18 +116,20 @@ public static class ThemeCssBuilder
 
         if (!string.IsNullOrWhiteSpace(color))
         {
+            var value = ColorParser.ParseColorAsString(color);
             stringBuilder.AppendLine(
                 $"""
-                --m-theme-{role}: {color};
-                    --m-theme-{role}-text: {color};
-                """);
+                 --m-theme-{role}: {value};
+                   --m-theme-{role}-text: {value};
+                 """);
         }
-        
+
         if (!string.IsNullOrWhiteSpace(onColor))
         {
-            stringBuilder.Append($"    --m-theme-on-{role}: {onColor};");
+            var value = ColorParser.ParseColorAsString(onColor);
+            stringBuilder.Append($"  --m-theme-on-{role}: {value};");
         }
-        
+
         return stringBuilder.ToString();
     }
 
@@ -131,14 +143,14 @@ public static class ThemeCssBuilder
         var str = $$"""
 
                     {{combinePrefix}}.{{bg}} {
-                        background-color: var(--m-theme-{{bg}}) !important;
+                        background-color: rgba(var(--m-theme-{{bg}})) !important;
                     """;
 
         if (!string.IsNullOrWhiteSpace(group))
         {
             str += $$"""
 
-                         color: var(--m-theme-on-{{group}}) !important;
+                         color: rgba(var(--m-theme-on-{{group}})) !important;
                      }
                      """;
         }
@@ -151,8 +163,8 @@ public static class ThemeCssBuilder
         return $$"""
 
                  {{combinePrefix}}.{{text}}--text {
-                     color: var(--m-theme-{{text}}) !important;
-                     caret-color: var(--m-theme-{{text}}) !important;
+                     color: rgba(var(--m-theme-{{text}})) !important;
+                     caret-color: rgba(var(--m-theme-{{text}})) !important;
                  }
                  """;
     }
@@ -162,7 +174,7 @@ public static class ThemeCssBuilder
         return $$"""
 
                  {{combinePrefix}}.{{border}} {
-                     border-color: var(--m-theme-{{border}}) !important;
+                     border-color: rgba(var(--m-theme-{{border}})) !important;
                  }
                  """;
     }

@@ -55,11 +55,11 @@ h1:focus {
 }
 
     .m-bar--underline.theme--light {
-        border-bottom-color: var(--m-theme-light-outline) !important;
+        border-bottom-color: rgba(var(--m-theme-outline)) !important;
     }
 
     .m-bar--underline.theme--dark {
-        border-bottom-color: var(--m-theme-dark-outline) !important;
+        border-bottom-color: rgba(var(--m-theme-outline)) !important;
     }
 
 .text-mono {
@@ -424,12 +424,12 @@ app-alert p {
         border-width: 2px;
         border-style: solid;
         --tw-border-opacity: 1;
-        border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+        border-color: rgba(234, 236, 239, rgba(var(--tw-border-opacity)));
     }
 
     .custom-table table th {
         --tw-bg-opacity: 1;
-        background-color: rgba(243, 244, 245, var(--tw-bg-opacity));
+        background-color: rgba(243, 244, 245, rgba(var(--tw-bg-opacity)));
         text-align: left;
         font-weight: 600;
     }
@@ -445,7 +445,7 @@ app-alert p {
             border-right-width: 2px;
             border-style: solid;
             --tw-border-opacity: 1;
-            border-color: rgba(234, 236, 239, var(--tw-border-opacity));
+            border-color: rgba(234, 236, 239, rgba(var(--tw-border-opacity)));
         }
 
 .api-table table td p {
@@ -665,11 +665,11 @@ app-alert p {
 }
 
 .theme--light.typography-active-item {
-    background-color: var(--m-theme-light-surface-container);
-    border-color: var(--m-theme-light-surface-container);
+    background-color: rgba(var(--m-theme-surface-container));
+    border-color: rgba(var(--m-theme-surface-container));
 }
 
 .theme--dark.typography-active-item {
-    background-color: var(--m-theme-dark-surface-container);
-    border-color: var(--m-theme-dark-surface-container);
+    background-color: rgba(var(--m-theme-surface-container));
+    border-color: rgba(var(--m-theme-surface-container));
 }
