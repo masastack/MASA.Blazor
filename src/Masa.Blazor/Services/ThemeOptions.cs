@@ -50,7 +50,7 @@ public class ThemeOptions
     public string? SurfaceContainerHigh { get; set; }
 
     public string? SurfaceContainerHighest { get; set; }
-    
+
     public string? OnSurface { get; set; }
 
     public string? OnSurfaceVariant { get; set; }
@@ -64,7 +64,7 @@ public class ThemeOptions
     public string? InverseOnSurface { get; set; }
 
     public string? InversePrimary { get; set; }
-    
+
     // TODO: Scrim, Shadow
 
     public Variables Variables { get; } = new();
@@ -82,8 +82,23 @@ public class Variables
     public float DisabledOpacity { get; set; } = 0.38f;
     public float SelectedOpacity { get; set; } = 0.08f;
     public float ActivatedOpacity { get; set; } = 0.12f;
+
+    /// <summary>
+    /// Highlight opacity for a background
+    /// </summary>
+    public float HighlightOpacity { get; set; } = 0.32f;
+    
+    /// <summary>
+    /// High emphasis opacity for text and icons
+    /// </summary>
     public float HighEmphasisOpacity { get; set; } = 0.87f;
+    /// <summary>
+    /// Medium emphasis opacity for text and icons
+    /// </summary>
     public float MediumEmphasisOpacity { get; set; } = 0.6f;
+    /// <summary>
+    /// Low emphasis opacity for text and icons
+    /// </summary>
     public float LowEmphasisOpacity { get; set; } = 0.38f;
 
     public override string ToString()
@@ -95,6 +110,7 @@ public class Variables
                 --m-disabled-opacity: {DisabledOpacity};
                 --m-selected-opacity: {SelectedOpacity};
                 --m-activated-opacity: {ActivatedOpacity};
+                --m-highlight-opacity: {HighlightOpacity};
                 --m-high-emphasis-opacity: {HighEmphasisOpacity};
                 --m-medium-emphasis-opacity: {MediumEmphasisOpacity};
                 --m-low-emphasis-opacity: {LowEmphasisOpacity};

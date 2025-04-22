@@ -20039,9 +20039,6 @@ html.overflow-y-hidden {
 .m-subheader--inset {
     margin-left: 56px;
 }
-.m-list.primary > .m-list-item, .m-list.secondary > .m-list-item, .m-list.accent > .m-list-item, .m-list.success > .m-list-item, .m-list.error > .m-list-item, .m-list.warning > .m-list-item, .m-list.info > .m-list-item {
-    color: #FFFFFF;
-}
 
 .theme--light.m-list,
 .theme--dark.m-list {
@@ -20051,12 +20048,6 @@ html.overflow-y-hidden {
 .theme--light.m-list .m-list--disabled,
 .theme--dark.m-list .m-list--disabled {
     color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity));
-}
-.theme--light.m-list .m-list-group--active:before,
-.theme--light.m-list .m-list-group--active:after,
-.theme--dark.m-list .m-list-group--active:before,
-.theme--dark.m-list .m-list-group--active:after {
-    background: rgba(255, 255, 255, 0.12);
 }
 
 .m-sheet.m-list {
@@ -20263,64 +20254,40 @@ html.overflow-y-hidden {
 .m-application--is-rtl .m-list--dense.m-list--nav .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
     padding-right: 80px;
 }
-.theme--light.m-list-item--disabled {
-    color: rgba(0, 0, 0, 0.38);
+.theme--light.m-list-item--disabled, .theme--dark.m-list-item--disabled {
+    color: rgba(var(-m-theme-on-surface), var(--m-disabled-opacity));
 }
-.theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
-    color: rgba(var(--m-theme-on-surface));
-}
-.theme--light.m-list-item .m-list-item__mask {
-    color: rgba(0, 0, 0, 0.38);
-    background: #eeeeee;
-}
-.theme--light.m-list-item:not(.m-list-item--disabled) .m-list-item__subtitle,
-.theme--light.m-list-item:not(.m-list-item--disabled) .m-list-item__action-text {
-    color: rgba(0, 0, 0, 0.6);
-}
-.theme--light.m-list-item:hover::before {
-    opacity: 0.04;
-}
-.theme--light.m-list-item:focus::before {
-    opacity: 0.12;
-}
-.theme--light.m-list-item--active:hover::before, .theme--light.m-list-item--active::before {
-    opacity: 0.12;
-}
-.theme--light.m-list-item--active:focus::before {
-    opacity: 0.16;
-}
-.theme--light.m-list-item.m-list-item--highlighted::before {
-    opacity: 0.16;
-}
-
-.theme--dark.m-list-item--disabled {
-    color: rgba(255, 255, 255, 0.5);
-}
+.theme--light.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled),
 .theme--dark.m-list-item:not(.m-list-item--active):not(.m-list-item--disabled) {
     color: rgba(var(--m-theme-on-surface));
 }
+.theme--light.m-list-item .m-list-item__mask,
 .theme--dark.m-list-item .m-list-item__mask {
-    color: rgba(255, 255, 255, 0.5);
-    background: #494949;
+    color: rgba(var(--m-theme-on-surface), var(--m-low-emphasis-opacity));
+    background: rgba(var(--m-theme-surface-container-high));
 }
+.theme--light.m-list-item:not(.m-list-item--disabled) .m-list-item__subtitle,
+.theme--light.m-list-item:not(.m-list-item--disabled) .m-list-item__action-text,
 .theme--dark.m-list-item:not(.m-list-item--disabled) .m-list-item__subtitle,
 .theme--dark.m-list-item:not(.m-list-item--disabled) .m-list-item__action-text {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity));
 }
-.theme--dark.m-list-item:hover::before {
-    opacity: 0.08;
+.theme--light.m-list-item:hover::before, .theme--dark.m-list-item:hover::before {
+    opacity: var(--m-hover-opacity);
 }
-.theme--dark.m-list-item:focus::before {
-    opacity: 0.24;
+.theme--light.m-list-item:focus::before, .theme--dark.m-list-item:focus::before {
+    opacity: var(--m-focus-opacity);
 }
+.theme--light.m-list-item--active:hover::before, .theme--light.m-list-item--active::before,
 .theme--dark.m-list-item--active:hover::before, .theme--dark.m-list-item--active::before {
-    opacity: 0.24;
+    opacity: var(--m-activated-opacity);
 }
-.theme--dark.m-list-item--active:focus::before {
-    opacity: 0.32;
+.theme--light.m-list-item--active:focus::before, .theme--dark.m-list-item--active:focus::before {
+    opacity: calc(var(--m-activated-opacity) + var(--m-focus-opacity));
 }
+.theme--light.m-list-item.m-list-item--highlighted::before,
 .theme--dark.m-list-item.m-list-item--highlighted::before {
-    opacity: 0.32;
+    opacity: var(--m-highlight-opacity);
 }
 
 .m-list-item {
