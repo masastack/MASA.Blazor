@@ -23,6 +23,7 @@ public static class ThemeCssBuilder
                   {BuildColorCssVariable("surface-container-high", options.SurfaceContainerHigh)}
                   {BuildColorCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
                   {BuildColorCssVariable("on-surface", options.OnSurface)}
+                  {BuildColorCssVariable("surface-variant", options.SurfaceVariant)}
                   {BuildColorCssVariable("on-surface-variant", options.OnSurfaceVariant)}
                   {BuildColorCssVariable("outline", options.Outline)}
                   {BuildColorCssVariable("outline-variant", options.OutlineVariant)}

@@ -37,7 +37,6 @@ public static class MasaBlazorPreset
         OnSuccess = "#FFFFFF",
         OnWarning = "#FFFFFF",
         OnSurface = "#000000",
-        OnSurfaceVariant = "#000000",
         SurfaceDim = "#FFFFFF",
         Surface = "#FFFFFF",
         SurfaceBright = "#FFFFFF",
@@ -50,7 +49,9 @@ public static class MasaBlazorPreset
         OutlineVariant = "#dcdcdc",
         InverseSurface = "#121212",
         InverseOnSurface = "#FFFFFF",
-        InversePrimary = "#2196F3"
+        InversePrimary = "#2196F3",
+        SurfaceVariant = "#424242", // 不是material设计规范的颜色角色
+        OnSurfaceVariant = "#EEEEEE",
     };
 
     private static ThemeOptions DarkTheme => new()
@@ -71,7 +72,6 @@ public static class MasaBlazorPreset
         OnSuccess = "#FFFFFF",
         OnWarning = "#FFFFFF",
         OnSurface = "#FFFFFF",
-        OnSurfaceVariant = "#FFFFFF",
         SurfaceDim = "#121212",
         Surface = "#121212",
         SurfaceBright = "#121212",
@@ -84,6 +84,8 @@ public static class MasaBlazorPreset
         OutlineVariant = "#393939",
         InverseSurface = "#FFFFFF",
         InverseOnSurface = "#000000DE",
-        InversePrimary = "#1976D2"
+        InversePrimary = "#1976D2",
+        SurfaceVariant = "#c8c8c8",
+        OnSurfaceVariant = "#000000"
     };
 }
