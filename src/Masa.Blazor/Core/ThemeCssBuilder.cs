@@ -2,37 +2,39 @@
 
 public static class ThemeCssBuilder
 {
-    private static string BuildOtherCssVariable(ThemeOptions options)
+    private static string BuildThemeCssVariable(ThemeOptions options)
     {
         return $"""
-                {BuildCssVariable("primary", options.Primary, options.OnPrimary)}
-                  {BuildCssVariable("secondary", options.Secondary, options.OnSecondary)}
-                  {BuildCssVariable("accent", options.Accent, options.OnAccent)}
-                  {BuildCssVariable("info", options.Info, options.OnInfo)}
-                  {BuildCssVariable("success", options.Success, options.OnSuccess)}
-                  {BuildCssVariable("warning", options.Warning, options.OnWarning)}
-                  {BuildCssVariable("error", options.Error, options.OnError)}
-                  {BuildCssVariable(options.UserDefined)}
+                {BuildColorCssVariable("primary", options.Primary, options.OnPrimary)}
+                  {BuildColorCssVariable("secondary", options.Secondary, options.OnSecondary)}
+                  {BuildColorCssVariable("accent", options.Accent, options.OnAccent)}
+                  {BuildColorCssVariable("info", options.Info, options.OnInfo)}
+                  {BuildColorCssVariable("success", options.Success, options.OnSuccess)}
+                  {BuildColorCssVariable("warning", options.Warning, options.OnWarning)}
+                  {BuildColorCssVariable("error", options.Error, options.OnError)}
+                  {BuildColorCssVariable(options.UserDefined)}
 
-                  {BuildCssVariable("surface-dim", options.SurfaceDim)}
-                  {BuildCssVariable("surface", options.Surface)}
-                  {BuildCssVariable("surface-bright", options.SurfaceBright)}
-                  {BuildCssVariable("surface-container-lowest", options.SurfaceContainerLowest)}
-                  {BuildCssVariable("surface-container-low", options.SurfaceContainerLow)}
-                  {BuildCssVariable("surface-container", options.SurfaceContainer)}
-                  {BuildCssVariable("surface-container-high", options.SurfaceContainerHigh)}
-                  {BuildCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
-                  {BuildCssVariable("on-surface", options.OnSurface)}
-                  {BuildCssVariable("on-surface-variant", options.OnSurfaceVariant)}
-                  {BuildCssVariable("outline", options.Outline)}
-                  {BuildCssVariable("outline-variant", options.OutlineVariant)}
-                  {BuildCssVariable("inverse-surface", options.InverseSurface)}
-                  {BuildCssVariable("inverse-on-surface", options.InverseOnSurface)}
-                  {BuildCssVariable("inverse-primary", options.InversePrimary)}
+                  {BuildColorCssVariable("surface-dim", options.SurfaceDim)}
+                  {BuildColorCssVariable("surface", options.Surface)}
+                  {BuildColorCssVariable("surface-bright", options.SurfaceBright)}
+                  {BuildColorCssVariable("surface-container-lowest", options.SurfaceContainerLowest)}
+                  {BuildColorCssVariable("surface-container-low", options.SurfaceContainerLow)}
+                  {BuildColorCssVariable("surface-container", options.SurfaceContainer)}
+                  {BuildColorCssVariable("surface-container-high", options.SurfaceContainerHigh)}
+                  {BuildColorCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
+                  {BuildColorCssVariable("on-surface", options.OnSurface)}
+                  {BuildColorCssVariable("on-surface-variant", options.OnSurfaceVariant)}
+                  {BuildColorCssVariable("outline", options.Outline)}
+                  {BuildColorCssVariable("outline-variant", options.OutlineVariant)}
+                  {BuildColorCssVariable("inverse-surface", options.InverseSurface)}
+                  {BuildColorCssVariable("inverse-on-surface", options.InverseOnSurface)}
+                  {BuildColorCssVariable("inverse-primary", options.InversePrimary)}
+
+                  {options.Variables.ToString()}
                 """;
     }
 
-    private static string? BuildCssVariable(string name, string? color)
+    private static string? BuildColorCssVariable(string name, string? color)
     {
         if (string.IsNullOrWhiteSpace(color))
         {
@@ -42,12 +44,17 @@ public static class ThemeCssBuilder
         return $"--m-theme-{name}: {ColorParser.ParseColorAsString(color)};";
     }
 
+    private static string BuildNumberCssVariable(string name, float value)
+    {
+        return $"--m-{name}: {value};";
+    }
+
     private static string BuildScope(string theme, bool dark, ThemeOptions options)
     {
         return $$"""
                  .theme--{{theme}} {
                    color-scheme: {{(dark ? "dark" : "normal")}};
-                   {{BuildOtherCssVariable(options)}}
+                   {{BuildThemeCssVariable(options)}}
                  }
                  """;
     }
@@ -67,7 +74,7 @@ public static class ThemeCssBuilder
         {
             $$"""
               :root {
-                {{BuildOtherCssVariable(options)}}
+                {{BuildThemeCssVariable(options)}}
               }
               {{BuildScope("light", false, light)}}
               {{BuildScope("dark", true, dark)}}
@@ -110,7 +117,7 @@ public static class ThemeCssBuilder
         return string.Concat(lstCss);
     }
 
-    private static string BuildCssVariable(string role, string? color, string? onColor)
+    private static string BuildColorCssVariable(string role, string? color, string? onColor)
     {
         var stringBuilder = new StringBuilder();
 
@@ -133,9 +140,9 @@ public static class ThemeCssBuilder
         return stringBuilder.ToString();
     }
 
-    private static string BuildCssVariable(Dictionary<string, ColorPairing> userDefined)
+    private static string BuildColorCssVariable(Dictionary<string, ColorPairing> userDefined)
     {
-        return string.Join("", userDefined.Select(x => BuildCssVariable(x.Key, x.Value.Color, x.Value.OnColor)));
+        return string.Join("", userDefined.Select(x => BuildColorCssVariable(x.Key, x.Value.Color, x.Value.OnColor)));
     }
 
     private static string BuildBgCssClass(string combinePrefix, string bg, string? group = null)
