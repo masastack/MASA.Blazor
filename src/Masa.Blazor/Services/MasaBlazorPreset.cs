@@ -42,9 +42,9 @@ public static class MasaBlazorPreset
         SurfaceBright = "#FFFFFF",
         SurfaceContainerLowest = "#FFFFFF",
         SurfaceContainerLow = "#FFFFFF",
-        SurfaceContainer = "#FFFFFF", // #f5f5f5
-        SurfaceContainerHigh = "#EEEEEE", // f5f5f5
-        SurfaceContainerHighest = "#EEEEEE",
+        SurfaceContainer = "#FFFFFF",
+        SurfaceContainerHigh = "#f5f5f5",
+        SurfaceContainerHighest = "#e0e0e0",
         Outline = "#dcdcdc",
         OutlineVariant = "#dcdcdc",
         InverseSurface = "#121212",
@@ -78,7 +78,7 @@ public static class MasaBlazorPreset
         SurfaceContainerLowest = "#212121", // 212121
         SurfaceContainerLow = "#212121",
         SurfaceContainer = "#212121", // 272727
-        SurfaceContainerHigh = "#424242", //303030
+        SurfaceContainerHigh = "#303030", //303030
         SurfaceContainerHighest = "#424242",
         Outline = "#393939",
         OutlineVariant = "#393939",

@@ -53,7 +53,7 @@ public static class ThemeCssBuilder
     private static string BuildScope(string theme, bool dark, ThemeOptions options)
     {
         return $$"""
-                 .theme--{{theme}} {
+                 .m-theme--{{theme}} {
                    color-scheme: {{(dark ? "dark" : "normal")}};
                    {{BuildThemeCssVariable(options)}}
                  }

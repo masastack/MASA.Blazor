@@ -30,7 +30,7 @@
 
     private RenderFragment GenHand() => __builder =>
     {
-        var color = Value != null ? Color ?? "accent" : "";
+        var color = Value != null ? Color : "";
         var scale = $"scaleY({HandScale(DisplayedValue)})";
         var angle = Rotate + DegreesPerUnit * (DisplayedValue - Min);
         <div class="@_handModifierBuilder.Add("inner", IsInner(Value)).AddBackgroundColor(color)"
@@ -40,7 +40,7 @@
 
     private RenderFragment GenItem(int value) => __builder =>
     {
-        var color = value == Value ? Color ?? "accent" : "";
+        var color = value == Value ? Color : "";
         var (x, y) = GetPosition(value);
         <span class="@_itemModifierBuilder.Add("active", value == DisplayedValue).Add("disabled", Disabled || !IsAllowed(value)).AddBackgroundColor(color)"
               style="@(StyleBuilder.Create().Add("left", $"{50 + x * 50}%").Add("top", $"{50 + y * 50}%").AddBackgroundColor(color))">
