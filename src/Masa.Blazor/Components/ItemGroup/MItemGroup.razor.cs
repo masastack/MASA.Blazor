@@ -13,30 +13,6 @@ public partial class MItemGroup : MItemGroupBase, IThemeable
 
     [Parameter] public StringNumber? Max { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public virtual bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     protected override List<StringNumber?> UpdateInternalValues(StringNumber? value)
     {
         var internalValues = InternalValues.ToList();
@@ -97,5 +73,6 @@ public partial class MItemGroup : MItemGroupBase, IThemeable
     {
         yield return _block.Name;
         yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetTheme(ComputedTheme);
     }
 }

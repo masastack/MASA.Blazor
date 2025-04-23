@@ -3,15 +3,13 @@ using Masa.Blazor.JSModules;
 
 namespace Masa.Blazor
 {
-    public partial class MTabs : MasaComponentBase, IThemeable
+    public partial class MTabs : ThemeComponentBase, IThemeable
     {
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Inject] protected IResizeJSModule ResizeJSModule { get; set; } = null!;
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
         [Parameter] public string? ActiveClass { get; set; }
 
@@ -61,9 +59,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool Routable { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
         private int _registeredTabItemsIndex;
         private CancellationTokenSource? _callSliderCts;
         private ElementReference _sliderWrapperRef;
@@ -75,24 +70,6 @@ namespace Masa.Blazor
 
         protected (StringNumber height, StringNumber left, StringNumber right, StringNumber top, StringNumber width)
             Slider { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         protected bool RTL => MasaBlazor.RTL;
 
@@ -150,6 +127,7 @@ namespace Masa.Blazor
                 .Add(Right)
                 .Add(Vertical)
                 .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 

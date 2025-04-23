@@ -13,7 +13,9 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
 
     public IDictionary<string, IDictionary<string, object?>?>? Defaults => MasaBlazor.Defaults;
 
-    protected bool IsDark => MasaBlazor.Theme is { Dark: true };
+    private bool IsDark => MasaBlazor.Theme is { DefaultTheme: "dark" };
+
+    private string Theme => MasaBlazor.Theme.DefaultTheme;
 
     private PopupService PopupService => (PopupService)InternalPopupService;
 
@@ -66,6 +68,7 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
         yield return _blockModifierBuilder
             .Add(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
             .AddTheme(IsDark, isIndependent: false)
+            .AddTheme(Theme)
             .Build();
     }
 

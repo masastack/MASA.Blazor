@@ -18235,66 +18235,59 @@ html.overflow-y-hidden {
     fill: currentColor;
 }
 
-.theme--light.m-btn, .theme--dark.m-btn {
+.m-btn  {
     color: rgba(var(--m-theme-on-surface));
 }
-.theme--light.m-btn.m-btn--disabled, .theme--dark.m-btn.m-btn--disabled {
+.m-btn.m-btn--disabled {
     color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity)) !important;
 }
-.theme--light.m-btn.m-btn--disabled .m-icon,
-.theme--light.m-btn.m-btn--disabled .m-btn__loading,
-.theme--dark.m-btn.m-btn--disabled .m-icon,
-.theme--dark.m-btn.m-btn--disabled .m-btn__loading {
+.m-btn.m-btn--disabled .m-icon,
+.m-btn.m-btn--disabled .m-btn__loading {
     color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity)) !important;
 }
-.theme--light.m-btn.m-btn--disabled.m-btn--has-bg,
-.theme--dark.m-btn.m-btn--disabled.m-btn--has-bg {
+.m-btn.m-btn--disabled.m-btn--has-bg {
     background-color: rgba(var(--m-theme-on-surface), calc(var(--m-disabled-opacity, .36) / 3)) !important;
 }
-.theme--light.m-btn.m-btn--has-bg, .theme--dark.m-btn.m-btn--has-bg {
+.m-btn.m-btn--has-bg {
     background-color: rgba(var(--m-theme-surface-container-low));
 }
-.theme--light.m-btn.m-btn--outlined.m-btn--text, .theme--dark.m-btn.m-btn--outlined.m-btn--text {
+.m-btn.m-btn--outlined.m-btn--text {
     border-color: rgba(var(--m-theme-outline));
 }
-.theme--light.m-btn.m-btn--icon, .theme--dark.m-btn.m-btn--icon {
+.m-btn.m-btn--icon {
     color: rgba(var(--m-theme-on-surface));
 }
 @media (hover: hover) {
-    .theme--light.m-btn:hover::before, .theme--dark.m-btn:hover::before {
+    .m-btn:hover::before {
         opacity: var(--m-hover-opacity);
     }
 
-    .theme--light.m-btn:focus-visible::before, .theme--dark.m-btn:focus-visible::before {
+    .m-btn:focus-visible::before {
         opacity: var(--m-focus-opacity);
     }
 
-    .theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before,
-    .theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
+    .m-btn--active:hover::before, .m-btn--active::before {
         opacity: var(--m-activated-opacity);
     }
 
-    .theme--light.m-btn--active:focus-visible::before,
-    .theme--dark.m-btn--active:focus-visible::before {
+    .m-btn--active:focus-visible::before {
         opacity: calc(var(--m-activated-opacity) + var(--m-hover-opacity));
     }
 }
 @media (hover: none) {
-    .theme--light.m-btn:hover::before, .theme--dark.m-btn:hover::before {
+    .m-btn:hover::before {
         opacity: var(--m-hover-opacity);
     }
 
-    .theme--light.m-btn:focus-visible::before, .theme--dark.m-btn:focus-visible::before {
+    .m-btn:focus-visible::before {
         opacity: var(--m-focus-opacity);
     }
 
-    .theme--light.m-btn--active:hover::before, .theme--light.m-btn--active::before,
-    .theme--dark.m-btn--active:hover::before, .theme--dark.m-btn--active::before {
+    .m-btn--active:hover::before, .m-btn--active::before {
         opacity: var(--m-activated-opacity);
     }
 
-    .theme--light.m-btn--active:focus-visible::before,
-    .theme--dark.m-btn--active:focus-visible::before {
+    .m-btn--active:focus-visible::before {
         opacity: calc(var(--m-activated-opacity) + var(--m-hover-opacity));
     }
 }

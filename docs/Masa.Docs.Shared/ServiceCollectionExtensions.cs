@@ -4,7 +4,8 @@ namespace Masa.Docs.Shared;
 
 public static class ServiceCollectionExtensions
 {
-    public static IMasaBlazorBuilder AddMasaDocs(this IServiceCollection services, string baseUri, string mode = BlazorMode.Server)
+    public static IMasaBlazorBuilder AddMasaDocs(this IServiceCollection services, string baseUri,
+        string mode = BlazorMode.Server)
     {
         BlazorMode.Current = mode;
 
@@ -24,10 +25,11 @@ public static class ServiceCollectionExtensions
         var masaBlazorBuilder = services.AddMasaBlazor(options =>
         {
             // TODO: 多主题支持
-            
+
             options.ConfigureTheme(theme =>
             {
-                theme.Dark = false;
+                // theme.Dark = false;
+                theme.DefaultTheme = "masa";
 
                 theme.Themes.Light.Primary = "#4f33ff";
                 theme.Themes.Light.Secondary = "#5e5c71";
@@ -39,7 +41,7 @@ public static class ServiceCollectionExtensions
                 // theme.Themes.Light.InverseOnSurface = "#C9C5CA";
                 // theme.Themes.Light.InversePrimary = "#C5C0FF";
                 theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
-                
+
                 theme.Themes.Dark.Primary = "#C5C0FF";
                 theme.Themes.Dark.OnPrimary = "#090029";
                 theme.Themes.Dark.Secondary = "#C7C4DC";
@@ -48,13 +50,18 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Dark.OnAccent = "#003827";
                 theme.Themes.Dark.Error = "#FFB4AB";
                 theme.Themes.Dark.OnError = "#690005";
-                // theme.Themes.Dark.OnSurface = "#e4e0f0";
+                // theme.Themes.Dark.OnSurface = "#e4e0f0";F
                 // theme.Themes.Dark.Surface = "#13121d";
                 // theme.Themes.Dark.SurfaceContainer = "#13121d";
                 // theme.Themes.Dark.SurfaceContainerLow = "#1b1a25";
                 // theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
                 // theme.Themes.Dark.InversePrimary = "#4f33ff";
                 theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
+
+                theme.Themes.Add("masa", false, custom =>
+                {
+                    custom.Primary = "#c10d0d";
+                });
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>
             {
@@ -67,18 +74,21 @@ public static class ServiceCollectionExtensions
                     });
                 aliases.UserDefined["masaFramework"] = new SvgPath[]
                 {
-                    new("M12 2H22V12H12V2Z", new Dictionary<string, object?>() {  { "fill-opacity", "0.5" } }),
+                    new("M12 2H22V12H12V2Z", new Dictionary<string, object?>() { { "fill-opacity", "0.5" } }),
                     new("M11.9999 2H2V21.9998H11.9999V2Z"),
-                    new("M16.9999 21.9999C19.7613 21.9999 21.9999 19.7613 21.9999 16.9999C21.9999 14.2386 19.7613 12 16.9999 12C14.2386 12 12 14.2386 12 16.9999C12 19.7613 14.2386 21.9999 16.9999 21.9999Z"),
+                    new(
+                        "M16.9999 21.9999C19.7613 21.9999 21.9999 19.7613 21.9999 16.9999C21.9999 14.2386 19.7613 12 16.9999 12C14.2386 12 12 14.2386 12 16.9999C12 19.7613 14.2386 21.9999 16.9999 21.9999Z"),
                 };
                 aliases.UserDefined["masaStack"] = new SvgPath[]
                 {
                     new("M7 2C4.23858 2 2 4.23857 2 7C2 9.76142 4.23858 12 7 12H12V7C12 4.23857 9.76142 2 7 2Z"),
-                    new("M2 7C2 7 2 7 2 7V17C2 19.7614 4.23858 22 7 22C9.76142 22 12 19.7614 12 17L12 12H7C4.23858 12 2 9.76142 2 7Z",
-                        new Dictionary<string, object?>() {  { "fill-opacity", "0.5" } }),
+                    new(
+                        "M2 7C2 7 2 7 2 7V17C2 19.7614 4.23858 22 7 22C9.76142 22 12 19.7614 12 17L12 12H7C4.23858 12 2 9.76142 2 7Z",
+                        new Dictionary<string, object?>() { { "fill-opacity", "0.5" } }),
                     new("M22 7C22 4.23857 19.7614 2 17 2C14.2386 2 12 4.23857 12 7V12H17C19.7614 12 22 9.76142 22 7Z",
-                        new Dictionary<string, object?>() {  { "fill-opacity", "0.5" } }),
-                    new("M12 7V17C12 19.7614 14.2386 22 17 22C19.7614 22 22 19.7614 22 17V7.00926C21.995 9.76642 19.7583 12 17 12H12L12 7Z"),
+                        new Dictionary<string, object?>() { { "fill-opacity", "0.5" } }),
+                    new(
+                        "M12 7V17C12 19.7614 14.2386 22 17 22C19.7614 22 22 19.7614 22 17V7.00926C21.995 9.76642 19.7583 12 17 12H12L12 7Z"),
                 };
                 aliases.UserDefined["wechat"] = new SvgPath(
                     "M9.5,4C5.36,4 2,6.69 2,10C2,11.89 3.08,13.56 4.78,14.66L4,17L6.5,15.5C7.39,15.81 8.37,16 9.41,16C9.15,15.37 9,14.7 9,14C9,10.69 12.13,8 16,8C16.19,8 16.38,8 16.56,8.03C15.54,5.69 12.78,4 9.5,4M6.5,6.5A1,1 0 0,1 7.5,7.5A1,1 0 0,1 6.5,8.5A1,1 0 0,1 5.5,7.5A1,1 0 0,1 6.5,6.5M11.5,6.5A1,1 0 0,1 12.5,7.5A1,1 0 0,1 11.5,8.5A1,1 0 0,1 10.5,7.5A1,1 0 0,1 11.5,6.5M16,9C12.69,9 10,11.24 10,14C10,16.76 12.69,19 16,19C16.67,19 17.31,18.92 17.91,18.75L20,20L19.38,18.13C20.95,17.22 22,15.71 22,14C22,11.24 19.31,9 16,9M14,11.5A1,1 0 0,1 15,12.5A1,1 0 0,1 14,13.5A1,1 0 0,1 13,12.5A1,1 0 0,1 14,11.5M18,11.5A1,1 0 0,1 19,12.5A1,1 0 0,1 18,13.5A1,1 0 0,1 17,12.5A1,1 0 0,1 18,11.5Z");

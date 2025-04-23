@@ -49,19 +49,6 @@ public partial class MCarousel : MWindow
 
     private Timer? _timer;
 
-    public override bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            return !Light;
-        }
-    }
-
     public override bool ArrowsVisible => !IsVertical && base.ArrowsVisible;
 
     private bool IsVertical => VerticalDelimiters is not null;

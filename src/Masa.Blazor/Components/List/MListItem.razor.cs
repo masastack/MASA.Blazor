@@ -1,5 +1,4 @@
 using Masa.Blazor.Components.ItemGroup;
-using Masa.Blazor.Mixins;
 
 namespace Masa.Blazor;
 
@@ -91,30 +90,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [Parameter]
     [MasaApiParameter(ReleasedOn = "v1.9.0")]
     public bool Slim { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
@@ -220,6 +195,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddTextColor(Color)
             .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddClass("")
             .Build();
     }

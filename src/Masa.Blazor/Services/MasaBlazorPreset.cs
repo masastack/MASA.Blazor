@@ -1,26 +1,10 @@
 ﻿namespace Masa.Blazor;
 
-public static class MasaBlazorPreset
+internal static class MasaBlazorPreset
 {
-    public static Breakpoint Breakpoint => new()
+    internal static ThemeOptions LightTheme { get; } = new()
     {
-        MobileBreakpoint = 1264,
-        ScrollBarWidth = 16,
-        Thresholds = new BreakpointThresholds()
-        {
-            Xs = 600,
-            Sm = 960,
-            Md = 1280,
-            Lg = 1920
-        }
-    };
-
-    public static Icons Icons => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
-
-    public static Theme Theme => new(false, LightTheme, DarkTheme);
-
-    private static ThemeOptions LightTheme => new()
-    {
+        IsDarkScheme = false,
         CombinePrefix = ".m-application",
         Primary = "#1976D2",
         Secondary = "#424242",
@@ -51,11 +35,12 @@ public static class MasaBlazorPreset
         InverseOnSurface = "#FFFFFF",
         InversePrimary = "#2196F3",
         SurfaceVariant = "#424242", // 不是material设计规范的颜色角色
-        OnSurfaceVariant = "#EEEEEE",
+        OnSurfaceVariant = "#EEEEEE"
     };
 
-    private static ThemeOptions DarkTheme => new()
+    internal static ThemeOptions DarkTheme { get; } = new()
     {
+        IsDarkScheme = true,
         CombinePrefix = ".m-application",
         Primary = "#a5c8ff",
         Secondary = "#424242",
@@ -88,4 +73,21 @@ public static class MasaBlazorPreset
         SurfaceVariant = "#c8c8c8",
         OnSurfaceVariant = "#000000"
     };
+
+    internal static Breakpoint Breakpoint { get; } = new()
+    {
+        MobileBreakpoint = 1264,
+        ScrollBarWidth = 16,
+        Thresholds = new BreakpointThresholds()
+        {
+            Xs = 600,
+            Sm = 960,
+            Md = 1280,
+            Lg = 1920
+        }
+    };
+
+    internal static Icons Icons { get; } = new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
+
+    internal static Theme Theme { get; } = new(LightTheme, DarkTheme);
 }

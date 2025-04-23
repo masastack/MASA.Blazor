@@ -2,25 +2,18 @@
 
 public class MasaBlazorOptions
 {
-    public MasaBlazorOptions()
-    {
-        Breakpoint = MasaBlazorPreset.Breakpoint;
-        Theme = MasaBlazorPreset.Theme;
-        Icons = MasaBlazorPreset.Icons;
-    }
-
     public IDictionary<string, IDictionary<string, object?>?>? Defaults { get; set; }
 
     public bool RTL { get; set; }
 
-    internal Breakpoint Breakpoint { get; }
+    internal Breakpoint Breakpoint { get; } = MasaBlazorPreset.Breakpoint;
 
-    internal Icons Icons { get; }
+    internal Icons Icons { get; } = MasaBlazorPreset.Icons;
 
     internal SSROptions? SSR { get; private set; }
 
-    internal Theme Theme { get; }
-    
+    internal Theme Theme { get; } = MasaBlazorPreset.Theme;
+
     public Locale? Locale { get; set; }
 
     public void ConfigureBreakpoint(Action<BreakpointOptions> configure)

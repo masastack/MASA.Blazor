@@ -8,6 +8,12 @@ public static class ModifierBuilderExtensions
         return builder;
     }
 
+    public static ModifierBuilder AddTheme(this ModifierBuilder builder, string name)
+    {
+        builder.AddClass("theme--" + name);
+        return builder;
+    }
+
     public static ModifierBuilder AddBackgroundColor(this ModifierBuilder builder, string? color, bool apply = true)
     {
         return builder.AddColor(color, false, apply);

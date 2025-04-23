@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Blazor
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <CascadingValue Value="this" IsFixed>
@@ -19,8 +19,7 @@
                       ActiveClass="@ActiveClass"
                       CenterActive="@CenterActive"
                       BackgroundColor="@BackgroundColor"
-                      Dark="@Dark"
-                      Light="@Light"
+                      Theme="@ComputedTheme"
                       Style="@(StyleBuilder.Create().AddHeight(Height).Build())"
                       @ref="TabsBarRef">
                 @if (!HideSlider)

@@ -5,7 +5,7 @@
 /// The active state is must be controlled by its parent group component.
 /// </summary>
 /// <typeparam name="TGroup"></typeparam>
-public abstract class MGroupableBase<TGroup> : MasaComponentBase, IGroupable
+public abstract class MGroupableBase<TGroup> : ThemeComponentBase, IGroupable
     where TGroup : MItemGroupBase
 {
     [CascadingParameter]
