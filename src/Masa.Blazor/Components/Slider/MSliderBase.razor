@@ -40,7 +40,7 @@
         var disabled = IsDisabled;
         var @readonly = IsReadonly;
 
-        <div class="@_modifierBuilder.Add(horizontal, Vertical, focused, active, disabled, @readonly).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_modifierBuilder.Add(horizontal, Vertical, focused, active, disabled, @readonly).AddTheme(ComputedTheme)"
              @onclick="@HandleOnSliderClickAsync"
              @ref="@SliderElement">
             @GenInput()

@@ -57,7 +57,7 @@ public class MLabel : ThemeContainer
     {
         yield return _modifierBuilder.Add("active", Value)
             .Add("is-disabled", Disabled)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddTextColor(Color, Focused)
             .Build();
     }

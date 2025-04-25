@@ -67,7 +67,6 @@ public partial class MApp : MasaComponentBase, IDefaultsProvider
     {
         yield return _blockModifierBuilder
             .Add(MasaBlazor.RTL ? "is-rtl" : "is-ltr")
-            .AddTheme(IsDark, isIndependent: false)
             .AddTheme(Theme)
             .Build();
     }

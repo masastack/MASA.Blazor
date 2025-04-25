@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.TimePicker;
 
-public partial class MTimePickerClock : MasaComponentBase
+public partial class MTimePickerClock
 {
     [Parameter]
     public int? Value
@@ -36,31 +36,6 @@ public partial class MTimePickerClock : MasaComponentBase
     [Parameter] public Func<int, string>? Format { get; set; }
 
     [Parameter] public SelectingTime Selecting { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
 
     protected int DisplayedValue => Value ?? Min;
 
@@ -311,7 +286,7 @@ public partial class MTimePickerClock : MasaComponentBase
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add("indeterminate", Value == null)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

@@ -21,12 +21,12 @@ public class Theme
     }
 
     [Obsolete($"Use {nameof(DefaultTheme)} instead.")]
-    public bool Dark { get; set; }
+    public bool Dark { get; internal set; }
 
     /// <summary>
     /// Specifies the default theme to be used, which can either be "light", "dark" or a custom theme name.
     /// </summary>
-    public string DefaultTheme { get; set; } = "light";
+    public string DefaultTheme { get; internal set; } = "light";
 
     public Themes Themes { get; }
 

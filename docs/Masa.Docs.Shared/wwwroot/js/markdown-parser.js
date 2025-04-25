@@ -262,28 +262,21 @@ window.prismHighlightLines = function (pre) {
     }
 }
 
-window.updateThemeOfElementsFromMarkdown = function (isDark) {
+window.updateThemeOfElementsFromMarkdown = function (theme) {
     const customElements = document.querySelectorAll('[masa-blazor-custom-element]');
     
     [...customElements].map(e => {
-        e.setAttribute("dark", isDark)
+        e.setAttribute("theme", theme)
     });
 
     const elements = document.querySelectorAll('[masa-blazor-html]');
     [...elements].map(e => {
-        if (isDark) {
-            if (e.className.includes('theme--light')) {
-                e.className = e.className.replace('theme--light', 'theme--dark')
-            } else {
-                e.className += " theme--dark";
-            }
-        } else {
-            if (e.className.includes('theme--dark')) {
-
-                e.className = e.className.replace('theme--dark', 'theme--light')
-            } else {
-                e.className += " theme--light";
-            }
-        }
+        // TODO: 使用主题名称
+        const classList = Array.from(e.classList);
+        const themeClassRegex = /^theme--/;
+        const newClasses = classList.map(cn => {
+            return themeClassRegex.test(cn) ? "theme--" + theme : cn;
+        })
+        e.className = newClasses.join(' ');
     })
 }

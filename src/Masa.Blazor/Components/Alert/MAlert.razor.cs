@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MAlert : MasaComponentBase, IThemeable
+public partial class MAlert : ThemeComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -67,30 +67,6 @@ public partial class MAlert : MasaComponentBase, IThemeable
     [Parameter] public StringNumber? MinWidth { get; set; }
 
     [Parameter] public StringNumber? Width { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private string ComputedType => Type != AlertTypes.None ? Type.ToString().ToLower() : "";
 
@@ -176,7 +152,7 @@ public partial class MAlert : MasaComponentBase, IThemeable
             .AddColor(ComputedColor, HasText, !ColoredBorder)
             .AddElevation(Elevation)
             .AddRounded(Rounded, Tile)
-            .AddTheme(IsDarkTheme, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

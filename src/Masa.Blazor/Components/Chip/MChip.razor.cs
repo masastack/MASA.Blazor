@@ -113,7 +113,6 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
             .Add("no-color", string.IsNullOrWhiteSpace(Color))
             .Add("removable", Close)
             .Add("active", InternalIsActive)
-            .AddTheme(IsDark, IndependentTheme)
             .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .AddTextColor(Color, Outlined)

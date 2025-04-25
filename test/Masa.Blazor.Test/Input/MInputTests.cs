@@ -100,20 +100,6 @@ namespace Masa.Blazor.Test.Input
         }
 
         [TestMethod]
-        public void RenderIsDarkComputedColorShouldBeWhite()
-        {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
-            {
-                props.Add(r => r.MockIsDark, true);
-            });
-
-            // Assert
-            Assert.IsTrue(cut.Instance.IsDark);
-            Assert.AreEqual("primary", cut.Instance.ComputedColor);
-        }
-
-        [TestMethod]
         public void RenderInputWithWithDense()
         {
             //Act

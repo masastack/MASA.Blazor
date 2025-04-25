@@ -4,7 +4,7 @@ public class ThemeOptions
 {
     internal bool IsDarkScheme { get; set; }
 
-    internal string ColorScheme => IsDarkScheme ? "dark" : "normal";
+    public string ColorScheme => IsDarkScheme ? "dark" : "normal";
 
     public string? CombinePrefix { get; set; }
 
@@ -60,10 +60,6 @@ public class ThemeOptions
     public string? SurfaceVariant { get; set; }
 
     public string? OnSurfaceVariant { get; set; }
-
-    public string? Outline { get; set; }
-
-    public string? OutlineVariant { get; set; }
 
     public string? InverseSurface { get; set; }
 

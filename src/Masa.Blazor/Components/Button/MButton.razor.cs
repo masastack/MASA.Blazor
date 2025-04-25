@@ -153,7 +153,6 @@ namespace Masa.Blazor
                 .Add("active", InternalIsActive)
                 .AddClass(ComputedActiveClass, InternalIsActive)
                 .AddClass(CssClassUtils.GetSize(XSmall, Small, Large, XLarge))
-                .AddTheme(IsDark, IndependentTheme)
                 .AddTheme(ComputedTheme)
                 .AddBackgroundColor(Color, HasBackground)
                 .AddTextColor(Color, !HasBackground)

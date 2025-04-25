@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor.Components.DatePicker;
 
-public partial class MDatePickerHeader : MasaComponentBase
+public partial class MDatePickerHeader : ThemeComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -38,30 +38,6 @@ public partial class MDatePickerHeader : MasaComponentBase
     [Parameter] public DatePickerType ActivePicker { get; set; }
 
     [Parameter] public CultureInfo Locale { get; set; } = null!;
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     public bool RTL => MasaBlazor.RTL;
 
@@ -136,6 +112,6 @@ public partial class MDatePickerHeader : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(ComputedTheme).Build();
     }
 }

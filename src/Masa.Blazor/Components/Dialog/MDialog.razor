@@ -14,7 +14,7 @@
              @attributes="@Attributes">
             @if (IsBooted)
             {
-                <div class="@_contentModifierBuilder.Add("active", IsActive).AddTheme(IsDark, IndependentTheme)"
+                <div class="@_contentModifierBuilder.Add("active", IsActive).AddTheme(ComputedTheme)"
                      style="z-index: @ZIndex"
                      @onkeydown="@Keydown"
                      @ref="@ContentRef"

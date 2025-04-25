@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MBanner : MasaComponentBase
+    public partial class MBanner : ThemeComponentBase
     {
         protected bool IsSticky => Sticky || App;
 
@@ -34,30 +33,6 @@ namespace Masa.Blazor
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter] [MasaApiParameter(true)] public bool Value { get; set; } = true;
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         /// <summary>
         /// This should be down in next version
@@ -97,7 +72,7 @@ namespace Masa.Blazor
                 .Add("is-mobile", Mobile)
                 .Add("sticky", IsSticky)
                 .AddBackgroundColor(Color)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddClass("m-sheet")
                 .AddElevation(Elevation)
                 .Build();

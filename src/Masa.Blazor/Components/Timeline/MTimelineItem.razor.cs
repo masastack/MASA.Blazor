@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MTimelineItem : MasaComponentBase, IThemeable
+public partial class MTimelineItem : IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -32,30 +32,6 @@ public partial class MTimelineItem : MasaComponentBase, IThemeable
 
     [Parameter] public RenderFragment? IconContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
@@ -81,7 +57,7 @@ public partial class MTimelineItem : MasaComponentBase, IThemeable
             .Add(FillDot)
             .Add("before", Reverse ? Right : Left)
             .Add("after", Reverse ? Left : Right)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 }

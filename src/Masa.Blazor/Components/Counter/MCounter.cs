@@ -32,7 +32,7 @@ public class MCounter : ThemeContainer
             yield return "error--text";
         }
 
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme) ?? string.Empty;
+        yield return CssClassUtils.GetTheme(ComputedTheme) ?? string.Empty;
     }
 
     protected override RenderFragment GenChildContent() => builder =>

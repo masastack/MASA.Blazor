@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Components.Bootable;
-using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
@@ -35,8 +34,6 @@ namespace Masa.Blazor
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         [Parameter] public string? Attach { get; set; }
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -62,10 +59,6 @@ namespace Masa.Blazor
 
         [Parameter] public StringNumber? Width { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
         [Parameter] public Dictionary<string, object>? ContentAttributes { get; set; }
 
         /// <summary>
@@ -84,24 +77,6 @@ namespace Masa.Blazor
 
         private bool _attached;
         private DialogContentContext? _contentContext;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         private bool ShowOverlay => !Fullscreen && !HideOverlay;
 

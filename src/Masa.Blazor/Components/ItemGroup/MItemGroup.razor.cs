@@ -72,7 +72,6 @@ public partial class MItemGroup : MItemGroupBase, IThemeable
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _block.Name;
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
         yield return CssClassUtils.GetTheme(ComputedTheme);
     }
 }

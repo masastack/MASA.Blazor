@@ -1,5 +1,4 @@
-﻿using Masa.Blazor.Mixins;
-using Masa.Blazor.Mixins.ScrollStrategy;
+﻿using Masa.Blazor.Mixins.ScrollStrategy;
 using Element = BemIt.Element;
 
 namespace Masa.Blazor;
@@ -34,30 +33,6 @@ public partial class MOverlay : IThemeable
     [Parameter] [MasaApiParameter("v1.8.0")] public string? ScrimStyle { get; set; }
 
     [Parameter] [MasaApiParameter(5)] public int ZIndex { get; set; } = 5;
-
-    [Parameter] [MasaApiParameter(true)] public bool Dark { get; set; } = true;
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private static readonly Block _block = new("m-overlay");
     private readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -122,7 +97,7 @@ public partial class MOverlay : IThemeable
         yield return _modifierBuilder.Add("active", Value)
             .Add("absolute", Absolute || Contained)
             .Add(Contained)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

@@ -2,15 +2,9 @@
 
 public static class ModifierBuilderExtensions
 {
-    public static ModifierBuilder AddTheme(this ModifierBuilder builder, bool isDark, bool isIndependent = false)
-    {
-        builder.AddClass(CssClassUtils.GetTheme(isDark, isIndependent));
-        return builder;
-    }
-
     public static ModifierBuilder AddTheme(this ModifierBuilder builder, string name)
     {
-        builder.AddClass("theme--" + name);
+        builder.AddClass(CssClassUtils.GetTheme(name));
         return builder;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MSheet : MasaComponentBase
+    public partial class MSheet
     {
 #if NET8_0_OR_GREATER
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -12,30 +12,6 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter("div")] public virtual string Tag { get; set; } = "div";
 
         [Parameter] public bool? Show { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         [Parameter] public bool Outlined { get; set; }
 
@@ -83,7 +59,8 @@ namespace Masa.Blazor
         {
             yield return _modifierBuilder
                 .Add(Outlined, Shaped)
-                .AddTheme(IsDark, IndependentTheme).AddElevation(Elevation)
+                .AddTheme(ComputedTheme)
+                .AddElevation(Elevation)
                 .AddRounded(Rounded, Tile)
                 .AddBackgroundColor(Color)
                 .Build();

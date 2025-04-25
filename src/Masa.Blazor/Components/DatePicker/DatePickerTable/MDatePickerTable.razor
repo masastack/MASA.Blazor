@@ -1,5 +1,5 @@
 ﻿@namespace Masa.Blazor.Components.DatePicker
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 @typeparam TValue
 
 <CascadingValue Value="IsDark" Name="IsDark">
@@ -50,7 +50,7 @@
         cssBuilder.Add("m-btn--rounded", isFloating);
         cssBuilder.Add("m-btn--disabled", !isAllowed || Disabled);
         cssBuilder.Add("m-btn--outlined", isCurrent && !isSelected);
-        cssBuilder.Add(CssClassUtils.GetTheme(IsDark, IndependentTheme));
+        cssBuilder.Add(CssClassUtils.GetTheme(ComputedTheme));
 
         <button class="@cssBuilder.ToString()"
                 style="@styleBuilder.ToString()"

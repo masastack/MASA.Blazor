@@ -178,7 +178,7 @@ public partial class MImage : MResponsive, IThemeable
             new[]
             {
                 _block.Name,
-                CssClassUtils.GetTheme(IsDark, IndependentTheme)
+                CssClassUtils.GetTheme(ComputedTheme)
             });
     }
 

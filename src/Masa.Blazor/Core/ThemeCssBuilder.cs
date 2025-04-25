@@ -25,8 +25,6 @@ public static class ThemeCssBuilder
                   {BuildCssVariable("on-surface", options.OnSurface)}
                   {BuildCssVariable("surface-variant", options.SurfaceVariant)}
                   {BuildCssVariable("on-surface-variant", options.OnSurfaceVariant)}
-                  {BuildCssVariable("outline", options.Outline)}
-                  {BuildCssVariable("outline-variant", options.OutlineVariant)}
                   {BuildCssVariable("inverse-surface", options.InverseSurface)}
                   {BuildCssVariable("inverse-on-surface", options.InverseOnSurface)}
                   {BuildCssVariable("inverse-primary", options.InversePrimary)}

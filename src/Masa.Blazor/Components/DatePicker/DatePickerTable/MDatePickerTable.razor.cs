@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.DatePicker;
 
-public partial class MDatePickerTable<TValue> : MasaComponentBase
+public partial class MDatePickerTable<TValue> : ThemeComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -48,30 +48,6 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
     {
         get => GetValue<DateOnly>();
         set => SetValue(value);
-    }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
     }
 
     public int DisplayedMonth => TableDate.Month - 1;
@@ -157,6 +133,6 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(ComputedTheme).Build();
     }
 }

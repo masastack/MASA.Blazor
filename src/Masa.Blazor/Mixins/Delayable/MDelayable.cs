@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Mixins.Delayable;
 
-public abstract class MDelayable : MasaComponentBase, IDelayable
+public abstract class MDelayable : ThemeComponentBase, IDelayable
 {
     [Parameter]
     public int OpenDelay

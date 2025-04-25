@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MOtpInput : MasaComponentBase, IThemeable
+public partial class MOtpInput : ThemeComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -171,7 +171,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     {
         yield return _block.Name;
         yield return CssClassUtils.GetTextColor(Color);
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetTheme(ComputedTheme);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -181,7 +181,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     private string GetContentClass()
     {
-        var inputClasses = _inputModifierBuilder.Add(IsFocused).Add(IsDisabled).AddTheme(IsDark, IndependentTheme);
+        var inputClasses = _inputModifierBuilder.Add(IsFocused).Add(IsDisabled).AddTheme(ComputedTheme);
 
         StringBuilder stringBuilder = new();
         stringBuilder.Append(inputClasses);

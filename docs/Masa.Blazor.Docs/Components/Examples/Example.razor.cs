@@ -25,7 +25,7 @@ public partial class Example : NextTickComponentBase
 
     [Parameter] public bool NoActions { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
+    [Parameter] public string? Theme { get; set; }
 
     /// <summary>
     /// 编译器需要使用的程序集
@@ -56,8 +56,8 @@ public partial class Example : NextTickComponentBase
     };
 
     private bool _rendered;
-    private bool _prevDark;
-    private bool _dark;
+    private string _prevTheme;
+    private string _theme;
     private bool _expand;
     private bool _showExpands;
     private string? _sourceCode;
@@ -77,10 +77,10 @@ public partial class Example : NextTickComponentBase
 
         ArgumentException.ThrowIfNullOrEmpty(File);
 
-        if (_prevDark != Dark)
+        if (_prevTheme != Theme)
         {
-            _prevDark = Dark;
-            _dark = Dark;
+            _prevTheme = Theme;
+            _theme = Theme;
         }
     }
 
@@ -139,8 +139,8 @@ public partial class Example : NextTickComponentBase
         {
             NextTick(async () =>
             {
-                _dark = Dark;
-                _prevDark = Dark;
+                _theme = Theme;
+                _prevTheme = Theme;
 
                 if (!_rendered)
                 {
@@ -187,7 +187,7 @@ public partial class Example : NextTickComponentBase
 
     private async Task ToggleTheme()
     {
-        _dark = !_dark;
+        _theme = _theme == "light" ? "dark" : "light";
         await Task.CompletedTask;
     }
 

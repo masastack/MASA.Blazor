@@ -52,6 +52,17 @@ public class Themes(ThemeOptions light, ThemeOptions dark)
         themeConfigure.Invoke(themeOptions);
         UserDefined.Add(name, themeOptions);
     }
+    
+    public bool Exists(string name)
+    {
+        if (string.Equals(name, "light", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(name, "dark", StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        return UserDefined.ContainsKey(name);
+    }
 
     private static bool IsBuiltIn(string name)
     {

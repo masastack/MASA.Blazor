@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Blazor
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
 <CascadingValue Value="IsDark" Name="IsDark">
     <div class="@GetClass()" style="@GetStyle()" id="@Id" @ref="Ref" @attributes="@Attributes">
@@ -11,7 +11,7 @@
             StyleBuilder.Create().AddBackgroundColor(ComputedTitleColor).Build()
         )
 
-        <div class="@_bodyModifierBuilder.Add(NoTitle).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_bodyModifierBuilder.Add(NoTitle).AddTheme(ComputedTheme)"
              style="@StyleBuilder.Create().AddWidth(Width, predicate: () => !FullWidth)">
             <Transition Name="@Transition">
                 @ChildContent

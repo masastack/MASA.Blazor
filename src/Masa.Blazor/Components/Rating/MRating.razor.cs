@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MRating : MasaComponentBase
+public partial class MRating
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -67,30 +67,6 @@ public partial class MRating : MasaComponentBase
 
     [Parameter] [MasaApiParameter(5)] public StringNumber Length { get; set; } = 5;
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private bool _running;
     private double _value;
     private double _hoverIndex = -1;
@@ -131,7 +107,7 @@ public partial class MRating : MasaComponentBase
     {
         yield return _modifierBuilder
             .Add(Readonly, Dense)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

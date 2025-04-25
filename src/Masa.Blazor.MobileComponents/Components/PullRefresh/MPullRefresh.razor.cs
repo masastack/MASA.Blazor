@@ -68,7 +68,7 @@ public partial class MPullRefresh
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(_pullRefreshStatus, "status").AddTheme(CascadingIsDark, false).Build();
+        yield return _modifierBuilder.Add(_pullRefreshStatus, "status").AddTheme(ComputedTheme).Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MDivider : MasaComponentBase
+public partial class MDivider : ThemeComponentBase
 {
     [Parameter] public bool Inset { get; set; }
 
@@ -21,30 +21,6 @@ public partial class MDivider : MasaComponentBase
     [Parameter]
     [MasaApiParameter(ReleasedOn = "v1.6.0")]
     public int Length { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private bool HasContent => ChildContent is not null;
 
@@ -123,7 +99,7 @@ public partial class MDivider : MasaComponentBase
         return _modifierBuilder
             .Add(Inset, Vertical)
             .AddClass(Class, !HasContent)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .ToString();
     }
 

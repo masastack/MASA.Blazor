@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MProgressLinear : MasaComponentBase
+    public partial class MProgressLinear
     {
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -47,30 +47,6 @@ namespace Masa.Blazor
         [Parameter] public bool Indeterminate { get; set; }
 
         [Parameter] public double Value { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         private bool IsReversed => MasaBlazor.RTL != Reverse;
 
@@ -147,7 +123,7 @@ namespace Masa.Blazor
                 .Add(Rounded)
                 .Add(Striped)
                 .Add("visible", IsVisible)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 

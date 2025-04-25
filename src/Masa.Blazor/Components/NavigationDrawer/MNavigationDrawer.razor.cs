@@ -4,7 +4,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallback, IDependent
+public partial class MNavigationDrawer : ThemeComponentBase, IOutsideClickJsCallback, IDependent
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -118,30 +118,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private const double DefaultMiniVariantWidth = 56;
     private const double DefaultWidth = 256;
@@ -549,7 +525,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             .Add("custom-mini-variant", MiniVariantWidth?.ToString() != "56")
             .Add("open", isActive)
             .Add("open-on-hover", ExpandOnHover)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .Build();
     }

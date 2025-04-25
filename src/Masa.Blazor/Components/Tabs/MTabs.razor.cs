@@ -126,7 +126,6 @@ namespace Masa.Blazor
                 .Add(IconsAndText)
                 .Add(Right)
                 .Add(Vertical)
-                .AddTheme(IsDark, IndependentTheme)
                 .AddTheme(ComputedTheme)
                 .Build();
         }

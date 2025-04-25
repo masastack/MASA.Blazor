@@ -1,7 +1,7 @@
 ﻿@using BemIt
 @using Masa.Blazor.Core
 
-<div class="@_modifierBuilder.Add(Filled).AddTheme(CascadingIsDark).AddClass(Class)"
+<div class="@_modifierBuilder.Add(Filled).AddTheme(CascadingTheme).AddClass(Class)"
      Style="@Style">
     <span class="@_block.Element("title").AppendClasses(TitleClass)">
         @Title
@@ -14,7 +14,8 @@
     private static Block _block = new("m-outline-card");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+    [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
+    public string CascadingTheme { get; set; } = null!;
 
     [Parameter] public string? Class { get; set; }
 

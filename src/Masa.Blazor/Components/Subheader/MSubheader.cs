@@ -26,6 +26,6 @@ public class MSubheader : ThemeContainer
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Inset).AddTheme(IsDark, IndependentTheme).Build();
+        yield return _modifierBuilder.Add(Inset).AddTheme(ComputedTheme).Build();
     }
 }

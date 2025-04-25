@@ -60,15 +60,15 @@ public partial class BaseLayout
 
         switch (themeStr)
         {
-            case "light" when MasaBlazor.Theme.Dark:
-            case "dark" when !MasaBlazor.Theme.Dark:
+            case "light" when MasaBlazor.Theme.DefaultTheme == "dark":
+            case "dark" when MasaBlazor.Theme.DefaultTheme == "light":
                 MasaBlazor.ToggleTheme();
                 break;
             case "system" or null:
                 try
                 {
                     var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-                    if (darkPrefer != MasaBlazor.Theme.Dark)
+                    if (MasaBlazor.Theme.DefaultTheme != (darkPrefer ? "dark" : "light"))
                     {
                         MasaBlazor.ToggleTheme();
                     }

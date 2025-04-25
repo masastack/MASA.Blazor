@@ -75,19 +75,19 @@ public static class CssClassUtils
         return GetColor(color, false);
     }
 
-    public static string GetTheme(bool isDark, bool isIndependent = false)
-    {
-        StringBuilder stringBuilder = new();
-
-        stringBuilder.Append(isDark ? "theme--dark" : "theme--light");
-
-        if (isIndependent)
-        {
-            stringBuilder.Append(" theme--independent");
-        }
-
-        return stringBuilder.ToString();
-    }
+    // public static string GetTheme(bool isDark, bool isIndependent = false)
+    // {
+    //     StringBuilder stringBuilder = new();
+    //
+    //     stringBuilder.Append(isDark ? "theme--dark" : "theme--light");
+    //
+    //     if (isIndependent)
+    //     {
+    //         stringBuilder.Append(" theme--independent");
+    //     }
+    //
+    //     return stringBuilder.ToString();
+    // }
     
     public static string GetTheme(string name) 
     {

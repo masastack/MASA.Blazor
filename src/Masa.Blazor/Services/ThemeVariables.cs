@@ -2,6 +2,7 @@
 
 public class ThemeVariables
 {
+    public float BorderOpacity { get; set; } = 0.12f;
     public float IdleOpacity { get; set; } = 0.04f;
     public float HoverOpacity { get; set; } = 0.04f;
     public float FocusOpacity { get; set; } = 0.12f;
@@ -16,6 +17,7 @@ public class ThemeVariables
     public override string ToString()
     {
         return $"""
+                --m-border-opacity: {BorderOpacity};
                 --m-idle-opacity: {IdleOpacity};
                 --m-hover-opacity: {HoverOpacity};
                 --m-focus-opacity: {FocusOpacity};

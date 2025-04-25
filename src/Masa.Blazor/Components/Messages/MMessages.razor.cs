@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MMessages : MasaComponentBase
+public partial class MMessages : ThemeComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -11,30 +11,6 @@ public partial class MMessages : MasaComponentBase
     [Parameter] public List<string> Value { get; set; } = new();
 
     [Parameter] public RenderFragment<string>? ChildContent { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private bool IndependentTheme =>
         (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
@@ -57,7 +33,7 @@ public partial class MMessages : MasaComponentBase
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _block.Name;
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetTheme(ComputedTheme);
         yield return CssClassUtils.GetColor(Color, true);
     }
 

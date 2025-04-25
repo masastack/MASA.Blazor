@@ -104,10 +104,11 @@
             {
                 try
                 {
-                    var isDark = await IsDarkPreferColor();
-                    if (isDark != MasaBlazor.Theme.Dark)
+                    var preferDark = await IsDarkPreferColor();
+                    var targetTheme = preferDark ? "dark" : "light";
+                    if (MasaBlazor.Theme.DefaultTheme != targetTheme)
                     {
-                        ToggleThemeInternal(isDark);
+                        ToggleThemeInternal(targetTheme);
                     }
                 }
                 catch (JSException)
@@ -116,19 +117,21 @@
                 }
                 break;
             }
-            case "light" when MasaBlazor.Theme.Dark:
-                ToggleThemeInternal(false);
+            case "light" when MasaBlazor.Theme.DefaultTheme == "dark":
+                ToggleThemeInternal("light");
                 break;
-            case "dark" when !MasaBlazor.Theme.Dark:
-                ToggleThemeInternal(true);
+            case "dark" when MasaBlazor.Theme.DefaultTheme == "light":
+                ToggleThemeInternal("dark");
                 break;
         }
         _ = UpdateThemeInLocalStorage(option);
 
-        void ToggleThemeInternal(bool dark)
+        void ToggleThemeInternal(string theme)
         {
-            MasaBlazor.ToggleTheme();
-            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+            // TODO: 调用 switchTheme js方法
+            
+            MasaBlazor.SetTheme(theme);
+            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", theme);
         }
     }
 

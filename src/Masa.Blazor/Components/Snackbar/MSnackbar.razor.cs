@@ -4,7 +4,7 @@ using Timer = System.Timers.Timer;
 
 namespace Masa.Blazor;
 
-public partial class MSnackbar : MasaComponentBase
+public partial class MSnackbar
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
         
@@ -55,30 +55,6 @@ public partial class MSnackbar : MasaComponentBase
     [Parameter] public bool Text { get; set; }
 
     [Parameter] public bool Outlined { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private const string ROOT_CSS = "m-snack";
     internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
@@ -151,7 +127,7 @@ public partial class MSnackbar : MasaComponentBase
             .AddTextColor(Color, Text || Outlined)
             .AddRounded(Rounded, Tile)
             .AddElevation(Elevation)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

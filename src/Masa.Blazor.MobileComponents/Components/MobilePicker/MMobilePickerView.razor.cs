@@ -4,7 +4,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> : MasaComponentBase
+public partial class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue>
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -35,30 +35,6 @@ public partial class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> :
     }
 
     [Parameter] public EventCallback<List<TColumnItemValue>> ValueChanged { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     protected List<MobilePickerColumn<TColumnItem>> FormattedColumns { get; set; } = new();
 
@@ -127,7 +103,7 @@ public partial class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> :
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _view.Name;
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetTheme(ComputedTheme);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()

@@ -2,11 +2,9 @@
 
 namespace Masa.Blazor;
 
-public partial class MDescriptions : MasaComponentBase, IThemeable
+public partial class MDescriptions : ThemeComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedOn = "v1.1.1")]
     public bool AlignCenter { get; set; }
@@ -47,33 +45,11 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
     private readonly List<IDescriptionsItem> _descriptionItems = new();
 
     private CancellationTokenSource _ctsForRegister = new();
     private CancellationTokenSource _ctsForUnregister = new();
     private bool _renderTwice = true;
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private bool HasTitle => !string.IsNullOrWhiteSpace(Title) || TitleContent != null;
 
@@ -236,7 +212,7 @@ public partial class MDescriptions : MasaComponentBase, IThemeable
     {
         yield return _modifierBuilder
             .Add(Dense, Bordered, AlignCenter)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

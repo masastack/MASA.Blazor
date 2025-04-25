@@ -5,7 +5,7 @@
 {
     if (_type == null)
     {
-        <MAlert Type="AlertTypes.Error" Outlined Dark="Dark">
+        <MAlert Type="AlertTypes.Error" Outlined Theme="@_theme">
             The file "@File" doesn't exist.
         </MAlert>
     }
@@ -14,10 +14,11 @@
         <MSheet Class="m-example"
                 Outlined
                 Color="surface"
-                Dark="Dark"
-                Rounded="true">
+                Theme="@_theme"
+                Rounded="true"
+                masa-blazor-custom-element>
             <div style="min-height: 52px">
-                <MSheet Class="pa-4 m-example__comp" Color="surface" Rounded="true" Dark="_dark" Light="!_dark">
+                <MSheet Class="pa-4 m-example__comp" Color="surface" Rounded="true" Theme="@_theme">
                     @if (_type is not null)
                     {
                         <MErrorHandler>
@@ -107,5 +108,5 @@
 }
 else
 {
-    <MSkeletonLoader Dark="Dark" MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
+    <MSkeletonLoader Theme="@_theme" MinHeight="250" MaxHeight="250" Type="card"></MSkeletonLoader>
 }

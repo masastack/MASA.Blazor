@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MIcon : MasaComponentBase
+    public partial class MIcon : ThemeComponentBase
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -29,30 +29,6 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter("i")] public string? Tag { get; set; } = "i";
 
         [Parameter] public Dictionary<string, object>? SvgAttributes { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         [Parameter] public string? Color { get; set; }
 
@@ -307,7 +283,7 @@ namespace Masa.Blazor
                 .Add(Left)
                 .Add(Disabled)
                 .Add(Right)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddTextColor(Color)
                 .AddClass(_iconCss, ComputedIcon is { IsSvg: false })
                 .Build();

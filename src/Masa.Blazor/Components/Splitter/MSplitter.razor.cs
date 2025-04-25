@@ -8,8 +8,6 @@ public partial class MSplitter
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
     [Parameter] [MasaApiParameter(8)] public int BarSize { get; set; } = 8;
 
     [Parameter] public RenderFragment? BarContent { get; set; }
@@ -54,7 +52,7 @@ public partial class MSplitter
             .Add("column", !Row)
             .Add(Row)
             .Add("dragging", _dragging)
-            .AddTheme(CascadingIsDark, false)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

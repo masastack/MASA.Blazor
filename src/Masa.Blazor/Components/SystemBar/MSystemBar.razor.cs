@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
+public partial class MSystemBar : IThemeable, ITransitionIf
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -41,14 +41,6 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     [Parameter] public bool If { get; set; } = true;
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark => Dark ? true : (Light ? false : CascadingIsDark);
 
     protected virtual async Task HandleOnClickAsync(MouseEventArgs args)
     {
@@ -104,7 +96,7 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
         yield return _modifierBuilder
             .Add(LightsOut,Absolute,Window)
             .Add("fixed", !Absolute && (App || Fixed))
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .Build();
     }

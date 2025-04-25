@@ -29,7 +29,7 @@ public static class ServiceCollectionExtensions
             options.ConfigureTheme(theme =>
             {
                 // theme.Dark = false;
-                theme.DefaultTheme = "masa";
+                // theme.DefaultTheme = "masa";
 
                 theme.Themes.Light.Primary = "#4f33ff";
                 theme.Themes.Light.Secondary = "#5e5c71";

@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MBadge : MasaComponentBase
+public partial class MBadge : ThemeComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -43,14 +43,6 @@ public partial class MBadge : MasaComponentBase
     [Parameter] public bool Inline { get; set; }
 
     [Parameter] public bool Left { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark => Dark || (!Light && CascadingIsDark);
 
     private int Offset => OverLap ? (Dot ? 8 : 12) : (Dot ? 2 : 4);
 
@@ -103,7 +95,7 @@ public partial class MBadge : MasaComponentBase
             .Add(Avatar, Bordered, Bottom, Dot, Inline, Left, Tile)
             .Add("icon", !string.IsNullOrWhiteSpace(Icon))
             .Add("overlap", OverLap)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 }

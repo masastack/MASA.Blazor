@@ -52,15 +52,8 @@ h1:focus {
 .m-bar--underline {
     border-width: 0 0 thin 0;
     border-style: solid;
+    border-bottom-color: rgba(var(--m-theme-outline-variant)) !important;
 }
-
-    .m-bar--underline.theme--light {
-        border-bottom-color: rgba(var(--m-theme-outline)) !important;
-    }
-
-    .m-bar--underline.theme--dark {
-        border-bottom-color: rgba(var(--m-theme-outline)) !important;
-    }
 
 .text-mono {
     font-family: Roboto Mono, monospace;

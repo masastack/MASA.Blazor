@@ -112,7 +112,7 @@ public class MSkeletonLoader : ThemeContainer, IMeasurable
     {
         yield return _modifierBuilder
             .Add(Boilerplate, IsLoading, Tile)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddElevation(Elevation)
             .Build();
     }

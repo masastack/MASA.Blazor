@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MTimeline : ThemeContainer
+    public class MTimeline : ThemeContainer
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -34,7 +34,7 @@
                 .Add(AlignTop)
                 .Add(Dense)
                 .Add(Reverse)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 

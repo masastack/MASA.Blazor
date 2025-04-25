@@ -194,7 +194,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
             .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddTextColor(Color)
-            .AddTheme(IsDark, IndependentTheme)
             .AddTheme(ComputedTheme)
             .AddClass("")
             .Build();

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MBreadcrumbs : MasaComponentBase
+public partial class MBreadcrumbs : ThemeComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -17,30 +17,6 @@ public partial class MBreadcrumbs : MasaComponentBase
     [Parameter] public RenderFragment<BreadcrumbItem>? ItemContent { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     #region When using razor definition without Items parameter
 
@@ -78,7 +54,7 @@ public partial class MBreadcrumbs : MasaComponentBase
     {
         yield return _modifierBuilder
             .Add(Large)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 }

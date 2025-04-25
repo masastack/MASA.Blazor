@@ -29,8 +29,6 @@ internal static class MasaBlazorPreset
         SurfaceContainer = "#FFFFFF",
         SurfaceContainerHigh = "#f5f5f5",
         SurfaceContainerHighest = "#e0e0e0",
-        Outline = "#dcdcdc",
-        OutlineVariant = "#dcdcdc",
         InverseSurface = "#121212",
         InverseOnSurface = "#FFFFFF",
         InversePrimary = "#2196F3",
@@ -60,13 +58,11 @@ internal static class MasaBlazorPreset
         SurfaceDim = "#121212",
         Surface = "#121212",
         SurfaceBright = "#121212",
-        SurfaceContainerLowest = "#212121", // 212121
-        SurfaceContainerLow = "#212121",
-        SurfaceContainer = "#212121", // 272727
-        SurfaceContainerHigh = "#303030", //303030
+        SurfaceContainerLowest = "#0B0B0B",
+        SurfaceContainerLow = "#191919",
+        SurfaceContainer = "#272727",
+        SurfaceContainerHigh = "#303030",
         SurfaceContainerHighest = "#424242",
-        Outline = "#393939",
-        OutlineVariant = "#393939",
         InverseSurface = "#FFFFFF",
         InverseOnSurface = "#000000DE",
         InversePrimary = "#1976D2",

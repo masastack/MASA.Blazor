@@ -16,7 +16,7 @@
             .AddRounded(Tile ? "0" : Rounded)
             .AddClass("menuable__content__active", IsActive)
             .AddClass(ContentClass)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
 
         var style = StyleBuilder.Create()

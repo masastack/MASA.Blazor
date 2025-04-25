@@ -1,8 +1,6 @@
-﻿using Element = Masa.Blazor.JSInterop.Element;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public partial class MSimpleTable : MasaComponentBase
+public partial class MSimpleTable : ThemeComponentBase
 {
     [Inject]
     private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -33,33 +31,6 @@ public partial class MSimpleTable : MasaComponentBase
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-
-    [Parameter]
-    public bool Dark { get; set; }
-
-    [Parameter]
-    public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private int _scrollState;
     private int _prevScrollState;
@@ -95,7 +66,7 @@ public partial class MSimpleTable : MasaComponentBase
             .Add(FixedHeader)
             .Add("has-top", TopContent != null)
             .Add("has-bottom", BottomContent != null)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 
