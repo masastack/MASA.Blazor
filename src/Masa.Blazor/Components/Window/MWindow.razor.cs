@@ -88,9 +88,6 @@ public partial class MWindow : MItemGroup
         }
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -102,12 +99,6 @@ public partial class MWindow : MItemGroup
     {
         base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
         ActiveClass = "m-window-item--active";
         PrevIcon ??= "$prev";
         NextIcon ??= "$next";

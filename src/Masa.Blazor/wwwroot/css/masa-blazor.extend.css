@@ -1,7 +1,6 @@
 ﻿/* fixed in datatable */
-m-data-table .m-data-table__column--fixed-left,
-m-data-table .m-data-table__column--fixed-right {
-    background: rgba(var(--m-theme-surface-container-low))
+.m-data-table .scrolled-to-left tr, .m-data-table .scrolled-to-right tr, .m-data-table .scrolling tr {
+    background: rgba(var(--m-theme-surface-container-low));
 }
 
 .m-data-table__column--fixed-right, .m-data-table__column--fixed-left {
@@ -323,7 +322,7 @@ m-data-table .m-data-table__column--fixed-right {
 .m-cascader__column {
     min-width: 180px;
     padding: 0;
-    border-right: 1px solid #f0f0f0;
+    border-right: 1px solid rgba(var(--m-theme-outline-variant));
     overflow-y: auto;
 }
 
@@ -773,8 +772,8 @@ input[type=number] {
     z-index: 2;
     transform: translateY(-50%);
     pointer-events: none;
-    border-top: 1px solid rgba(var(--m-theme-outline));
-    border-bottom: 1px solid rgba(var(--m-theme-outline));
+    border-top: 1px solid rgba(var(--m-theme-outline-variant));
+    border-bottom: 1px solid rgba(var(--m-theme-outline-variant));
 }
 
 .m-mobile-picker__mask {
@@ -790,7 +789,7 @@ input[type=number] {
 }
 
 .m-mobile-picker__view .m-mobile-picker__mask {
-    background-image: linear-gradient(180deg, rgba(var(--m-theme-on-surface), .9), rgba(var(--m-theme-on-surface), .4)), linear-gradient(0deg, rgba(var(--m-theme-on-surface), .9), rgba(var(--m-theme-on-surface), .4));
+    background-image: linear-gradient(180deg, rgba(var(--m-theme-surface-container-low), .9), rgba(var(--m-theme-surface-container-low), .4)), linear-gradient(0deg, rgba(var(--m-theme-surface-container-low), .9), rgba(var(--m-theme-surface-container-low), .4));
 }
 
 /* infinite scroll */
@@ -1188,8 +1187,8 @@ input[type=number] {
 }
 
 .m-digital-clock .m-digital-clock__item--active .m-digital-clock__item-content {
-    color: rgba(var(--m-theme-on-surface));
-    background-color: rgba(var(--m-theme-surface-container-low));
+    background-color: rgba(var(--m-theme-surface-variant));
+    color: rgba(var(--m-theme-on-surface-variant));
 }
 
 .m-digital-clock .m-digital-clock__item--disabled {
@@ -1636,7 +1635,12 @@ html.m-overlay-scroll-blocked {
 }
 
 /* sticky */
-
 .m-sticky--fixed .m-sticky__content {
     position: fixed;
+}
+
+/* theme provider */
+.m-theme-provider {
+    background: rgba(var(--m-theme-surface));
+    color: rgba(var(--m-theme-on-surface));
 }

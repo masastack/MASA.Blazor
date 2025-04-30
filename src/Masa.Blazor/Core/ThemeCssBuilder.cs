@@ -30,6 +30,9 @@ public static class ThemeCssBuilder
                   {BuildCssVariable("inverse-primary", options.InversePrimary)}
 
                   {options.Variables}
+                  
+                  --m-theme-outline: var(--m-theme-on-surface), var(--m-low-emphasis-opacity);
+                  --m-theme-outline-variant: var(--m-theme-on-surface), var(--m-border-opacity);
                 """;
     }
 
@@ -48,7 +51,6 @@ public static class ThemeCssBuilder
               }
               {{BuildThemeCssVariables(theme.Themes)}}
               """,
-            $"{combinePrefix}a {{ color: {options.Primary}; }}",
             BuildBgCssClass(combinePrefix, "surface-dim", "surface"),
             BuildBgCssClass(combinePrefix, "surface", "surface"),
             BuildBgCssClass(combinePrefix, "surface-bright", "surface"),

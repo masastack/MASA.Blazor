@@ -88,9 +88,9 @@ public static class CssClassUtils
     //
     //     return stringBuilder.ToString();
     // }
-    
-    public static string GetTheme(string name) 
+
+    public static string? GetTheme(string? name)
     {
-        return $"theme--{name}";
+        return string.IsNullOrWhiteSpace(name) ? null : $"theme--{name}";
     }
 }

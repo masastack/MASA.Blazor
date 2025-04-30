@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <div class="@GetClass()"
          style="@GetStyle()"
          @onclick="@HandleOnClickAsync"

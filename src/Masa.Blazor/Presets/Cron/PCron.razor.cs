@@ -20,9 +20,6 @@ public partial class PCron
 
     [Parameter] public EventCallback<string> OnChange { get; set; }
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
     public string CascadingTheme { get; set; } = null!;
 

@@ -186,9 +186,6 @@ namespace Masa.Blazor
             return (defaultAliases.ContentFormatter?.Invoke(icon), defaultAliases.CssFormatter?.Invoke(icon));
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
@@ -221,13 +218,6 @@ namespace Masa.Blazor
         {
             base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-
-#endif
             if (OnClick.HasDelegate)
             {
                 Tag = "button";

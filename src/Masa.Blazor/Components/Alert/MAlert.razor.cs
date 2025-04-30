@@ -107,9 +107,6 @@ public partial class MAlert : ThemeComponentBase, IThemeable
 
     private bool IsDarkTheme => LogicalDark || IsDark;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     private bool HasTitle => !string.IsNullOrWhiteSpace(Title) || TitleContent is not null;
 
     private RenderFragment? IconContent { get; set; }
@@ -119,13 +116,6 @@ public partial class MAlert : ThemeComponentBase, IThemeable
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         (IsShowIcon, IconContent) = ComputedIcon();
     }

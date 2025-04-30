@@ -3,7 +3,7 @@
 
 <div class="@_modifierBuilder.Add(Outlined).AddTheme(ComputedTheme).AddClass(Class)"
      style="@(new StyleBuilder().AddMinHeight(MinHeight).Add(Style).ToString())">
-    <CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
         <MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
             @foreach (var item in _cronItems)
             {

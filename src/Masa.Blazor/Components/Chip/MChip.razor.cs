@@ -77,19 +77,9 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 
     public int Tabindex => _router?.Tabindex ?? 0;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         CloseIcon ??= "$delete";
 
@@ -114,7 +104,7 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
             .Add("removable", Close)
             .Add("active", InternalIsActive)
             .AddTheme(ComputedTheme)
-            .AddBackgroundColor(Color)
+            .AddBackgroundColor(Color, !Outlined)
             .AddTextColor(Color, Outlined)
             .AddTextColor(TextColor)
             .AddClass(ComputedActiveClass, InternalIsActive)
@@ -126,7 +116,7 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
     {
         return new StyleBuilder()
             .AddIf("display", "none", !Active)
-            .AddBackgroundColor(Color)
+            .AddBackgroundColor(Color, !Outlined)
             .AddTextColor(Color, () => Outlined)
             .AddTextColor(TextColor)
             .GenerateCssStyles();

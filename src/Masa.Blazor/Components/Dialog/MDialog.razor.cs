@@ -284,27 +284,12 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
             _contentContext = new DialogContentContext(() => RunDirectly(false));
         }
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
         private static Block _block = new("m-dialog");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

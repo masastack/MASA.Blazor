@@ -74,19 +74,9 @@ public partial class MPagination
 
     protected int MaxButtons { get; set; }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         if (IsAuto is false)
         {

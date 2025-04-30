@@ -4,8 +4,6 @@ namespace Masa.Blazor;
 
 public class MLabel : ThemeContainer
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     [Parameter] public bool Disabled { get; set; }
 
     [Parameter] [MasaApiParameter(0)] public StringNumber? Left { get; set; } = 0;
@@ -32,20 +30,10 @@ public class MLabel : ThemeContainer
 
     protected override string TagName => Tag;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-
-#endif
         Attributes["for"] = For;
         Attributes["required"] = Required;
     }

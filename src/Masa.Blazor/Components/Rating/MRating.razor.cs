@@ -7,8 +7,7 @@ public partial class MRating
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
-    [MasaApiParameter("accent")]
-    public string BackgroundColor { get; set; } = "accent";
+    public string? BackgroundColor { get; set; }
 
     [Parameter]
     [MasaApiParameter("primary")]
@@ -82,21 +81,6 @@ public partial class MRating
         MouseLeave,
         MouseMove
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
     private static Block _block = new("m-rating");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

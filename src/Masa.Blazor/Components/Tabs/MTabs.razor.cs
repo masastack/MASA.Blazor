@@ -3,7 +3,7 @@ using Masa.Blazor.JSModules;
 
 namespace Masa.Blazor
 {
-    public partial class MTabs : ThemeComponentBase, IThemeable
+    public partial class MTabs
     {
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -97,21 +97,6 @@ namespace Masa.Blazor
                 await CallSlider();
             }
         }
-
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            } 
-        }
-#endif
 
         private static Block _block = new("m-tabs");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

@@ -3,7 +3,7 @@
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <nav id="@Id" @ref="Ref" class="@Class" style="@Style"
          role="navigation"
          @attributes="@Attributes">

@@ -72,21 +72,6 @@ public partial class MSystemBar : IThemeable, ITransitionIf
             .Watch<bool>(nameof(Window), CallUpdate)
             .Watch<StringNumber>(nameof(Height), CallUpdate);
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
     
     private static Block _block = new("m-system-bar");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

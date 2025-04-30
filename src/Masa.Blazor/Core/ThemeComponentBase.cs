@@ -2,9 +2,6 @@
 
 public abstract class ThemeComponentBase : MasaComponentBase
 {
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
     public string CascadingTheme { get; set; } = null!;
 

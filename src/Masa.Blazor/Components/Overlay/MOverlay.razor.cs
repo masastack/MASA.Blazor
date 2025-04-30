@@ -66,9 +66,6 @@ public partial class MOverlay : IThemeable
 
     private bool _isActive;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -82,14 +79,6 @@ public partial class MOverlay : IThemeable
         {
             _isActive = Value;
         }
-
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
     }
 
     protected override IEnumerable<string> BuildComponentClass()

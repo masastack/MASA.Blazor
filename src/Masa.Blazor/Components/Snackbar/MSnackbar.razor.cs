@@ -6,8 +6,6 @@ namespace Masa.Blazor;
 
 public partial class MSnackbar
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-        
     [Parameter] public bool Absolute { get; set; }
 
     [Parameter] public bool Value { get; set; }
@@ -61,19 +59,9 @@ public partial class MSnackbar
 
     private Timer? Timer { get; set; }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
 
         Transition ??= "m-snack-transition";
 

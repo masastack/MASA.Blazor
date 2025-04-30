@@ -338,9 +338,6 @@ public partial class MNavigationDrawer : ThemeComponentBase, IOutsideClickJsCall
 
         NavigationManager.LocationChanged += OnLocationChanged;
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
     
     protected override async Task OnParametersSetAsync()
     {
@@ -358,13 +355,6 @@ public partial class MNavigationDrawer : ThemeComponentBase, IOutsideClickJsCall
             _prevWidth = Width ?? DefaultWidth;
             SyncStateToTouchJS();
         }
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

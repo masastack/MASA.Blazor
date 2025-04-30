@@ -44,12 +44,6 @@ related:
 
 <masa-example file="Examples.components.system_bars.LightOut"></masa-example>
 
-#### 主题
-
-可以将 `Dark` 或 `Light` 主题变量应用于 **MSystemBar**。
-
-<masa-example file="Examples.components.system_bars.Theme"></masa-example>
-
 #### 窗口
 
 带有窗口控件和状态信息的窗口栏。

@@ -5,8 +5,6 @@ namespace Masa.Blazor;
 
 public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutable, IThemeable
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     // TODO: add cascading value in Menu
     [CascadingParameter(Name = "IsInMenu")]
     public bool IsInMenu { get; set; }
@@ -127,9 +125,6 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
     [MasaApiParameter(ReleasedOn = "v1.9.0")]
     public bool Slim { get; set; }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected List<MListGroup> Groups { get; } = new();
 
     protected override void OnInitialized()
@@ -149,18 +144,6 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
     {
         Groups.Remove(listGroup);
     }
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
     private static Block _block = new("m-list");
     private static Block _sheetBlock = new("m-sheet");

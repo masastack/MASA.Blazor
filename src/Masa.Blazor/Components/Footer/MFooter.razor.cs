@@ -121,21 +121,6 @@ public partial class MFooter : ThemeComponentBase, IThemeable
             InvokeStateHasChanged();
         }
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
     
     private static Block _block = new("m-footer");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

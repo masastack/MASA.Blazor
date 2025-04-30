@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor.Components.DatePicker
 @inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <div class="@GetClass()"
          style="@GetStyle()">
         @GenBtn(-1)
@@ -32,7 +32,7 @@
 
     private RenderFragment GenHeader() => __builder =>
     {
-        var color = !Disabled ? (Color ?? "accent") : "";
+        var color = !Disabled ? Color : "";
 
         <div class="@_valueModifierBuilder.Add(Disabled)">
             <Transition Name="@Transition">

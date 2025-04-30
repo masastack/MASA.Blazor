@@ -93,11 +93,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
 
     private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected bool IsClickable => Router?.IsClickable is true || Matched;
 
     public bool IsLink => Router?.IsLink is true;
@@ -169,12 +164,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
 
         SetAttrs();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         Attributes["ripple"] = ComputedRipple;
     }
 

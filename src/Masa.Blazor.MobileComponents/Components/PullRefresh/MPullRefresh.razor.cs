@@ -5,8 +5,6 @@ namespace Masa.Blazor;
 
 public partial class MPullRefresh
 {
-    [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
-
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public bool Disabled { get; set; }

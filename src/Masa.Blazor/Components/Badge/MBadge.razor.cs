@@ -69,21 +69,6 @@ public partial class MBadge : ThemeComponentBase
 
     private bool IsRtl => MasaBlazor.RTL;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-    }
-
     private static Block _block = new("m-badge");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Element _badgeElement = _block.Element("badge");

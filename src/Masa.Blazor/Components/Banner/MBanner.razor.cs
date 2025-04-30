@@ -47,21 +47,6 @@ namespace Masa.Blazor
             ValueChanged.InvokeAsync(Value);
         });
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-        }
-
         private static Block _block = new("m-banner");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 

@@ -227,10 +227,6 @@
             { BaiduMapType.Satellite, "B_SATELLITE_MAP" },
         };
 
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -240,13 +236,6 @@
                 _prevDark = Dark;
                 _ = _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = Dark ? DarkThemeId : string.Empty });
             }
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         }
 
         protected override IEnumerable<string> BuildComponentClass()

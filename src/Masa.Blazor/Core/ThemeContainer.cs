@@ -2,9 +2,6 @@ namespace Masa.Blazor.Core;
 
 public abstract class ThemeContainer : Container
 {
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
     public string CascadingTheme { get; set; } = null!;
 

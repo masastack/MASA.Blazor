@@ -11,30 +11,6 @@ public class MTabsBar : MSlideGroup
 
     [Parameter] public string? Color { get; set; }
 
-    protected string ComputedColor
-    {
-        get
-        {
-            if (Color != null) return Color;
-            return IsDark ? "white" : "primary";
-        }
-    }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     private static Block _block = new("m-tabs-bar");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -42,7 +18,7 @@ public class MTabsBar : MSlideGroup
     {
         return base.BuildComponentClass().Concat(new[]{
             _modifierBuilder.Add(IsMobile)
-                .AddTextColor(ComputedColor)
+                .AddTextColor(Color)
                 .AddBackgroundColor(BackgroundColor)
                 .Build()
         });
@@ -52,7 +28,7 @@ public class MTabsBar : MSlideGroup
     {
         return base.BuildComponentStyle().Concat(
             StyleBuilder.Create()
-                .AddTextColor(ComputedColor)
+                .AddTextColor(Color)
                 .AddBackgroundColor(BackgroundColor)
                 .GenerateCssStyles()
         );

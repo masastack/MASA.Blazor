@@ -263,21 +263,6 @@ public partial class MTimePickerClock
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
-
     private static Block _block = new("m-time-picker-clock");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();

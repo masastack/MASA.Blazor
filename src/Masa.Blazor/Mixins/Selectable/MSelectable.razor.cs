@@ -98,18 +98,6 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
         return Task.CompletedTask;
     }
 
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
-
     protected static Block ControlBlock => new("m-input--selection-controls");
     protected static BemIt.Element ControlWrapper => ControlBlock.Element("wrapper");
 

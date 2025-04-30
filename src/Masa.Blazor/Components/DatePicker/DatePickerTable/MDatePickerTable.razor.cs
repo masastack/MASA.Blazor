@@ -113,21 +113,6 @@ public partial class MDatePickerTable<TValue> : ThemeComponentBase
             .Watch<DateOnly>(nameof(TableDate), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     protected static Block Block = new("m-date-picker-table");
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
 

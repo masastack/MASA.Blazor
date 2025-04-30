@@ -8,7 +8,7 @@ public partial class MDatePickerHeader : ThemeComponentBase
 
     [Parameter] public bool Disabled { get; set; }
 
-    [Parameter] public string? Color { get; set; } = "accent";
+    [Parameter] public string? Color { get; set; }
 
     [Parameter] public DateOnly? Min { get; set; }
 
@@ -90,21 +90,6 @@ public partial class MDatePickerHeader : ThemeComponentBase
         watcher
             .Watch<DateOnly>(nameof(Value), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
     private static Block _block = new("m-date-picker-header");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

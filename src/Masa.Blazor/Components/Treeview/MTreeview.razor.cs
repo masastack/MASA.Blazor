@@ -81,8 +81,8 @@ namespace Masa.Blazor
         [Parameter] public string? ActiveClass { get; set; }
 
         [Parameter]
-        [MasaApiParameter("accent")]
-        public string? SelectedColor { get; set; } = "accent";
+        [MasaApiParameter("primary")]
+        public string? SelectedColor { get; set; } = "primary";
 
         [Parameter]
         [MasaApiParameter("primary")]
@@ -149,9 +149,6 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
@@ -161,18 +158,6 @@ namespace Masa.Blazor
             ItemKey.ThrowIfNull(ComponentName);
             ItemChildren.ThrowIfNull(ComponentName);
         }
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
         private static Block _block = new("m-treeview");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

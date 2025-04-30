@@ -4,9 +4,6 @@ namespace Masa.Blazor
 {
     public partial class MSheet
     {
-#if NET8_0_OR_GREATER
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter] [MasaApiParameter("div")] public virtual string Tag { get; set; } = "div";
@@ -36,21 +33,6 @@ namespace Masa.Blazor
         [Parameter] public StringNumber? MaxHeight { get; set; }
 
         [Parameter] public StringNumber? MinHeight { get; set; }
-
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-        }
 
         private static Block _block = new("m-sheet");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

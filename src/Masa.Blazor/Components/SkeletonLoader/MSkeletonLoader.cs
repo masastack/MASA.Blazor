@@ -31,11 +31,6 @@ public class MSkeletonLoader : ThemeContainer, IMeasurable
 
     private bool IsLoading => ChildContent is null || Loading;
 
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -80,12 +75,6 @@ public class MSkeletonLoader : ThemeContainer, IMeasurable
     {
         base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
         if (IsLoading && !Boilerplate)
         {
             Attributes["aria-busy"] = true;

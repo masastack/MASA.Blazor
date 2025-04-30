@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MDatePicker<TValue> : MasaComponentBase
+public partial class MDatePicker<TValue>
 {
     [Inject] protected I18n I18n { get; set; }
 
@@ -108,35 +108,11 @@ public partial class MDatePicker<TValue> : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
     [Parameter] public EventCallback<DateOnly> OnDateClick { get; set; }
 
     [Parameter] public EventCallback<DateOnly> OnMonthClick { get; set; }
 
     [Parameter] public EventCallback<int> OnYearClick { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     protected DatePickerType InternalActivePicker
     {

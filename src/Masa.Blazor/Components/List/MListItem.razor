@@ -2,7 +2,7 @@
 @using Masa.Blazor.Components.ItemGroup
 @inherits MRoutableGroupItem<MItemGroupBase>
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <MElement Class="@GetClass()"
               Style="@GetStyle()"
               Tag="@Tag"

@@ -4,11 +4,7 @@ namespace Masa.Blazor;
 
 public partial class MOtpInput : ThemeComponentBase, IThemeable
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     [CascadingParameter] public MForm? Form { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -38,31 +34,6 @@ public partial class MOtpInput : ThemeComponentBase, IThemeable
 
     [Parameter] public EventCallback<string> OnInput { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     private DotNetObjectReference<Invoker<OtpJsResult>>? _handle;
 
     private int _prevLength;
@@ -85,13 +56,6 @@ public partial class MOtpInput : ThemeComponentBase, IThemeable
     {
         await base.OnParametersSetAsync();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-
-#endif
         if (_prevLength != Length)
         {
             _prevLength = Length;

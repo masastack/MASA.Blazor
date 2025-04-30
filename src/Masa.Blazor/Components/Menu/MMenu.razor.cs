@@ -137,21 +137,12 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
             Transition ??= "m-menu-transition";
             Origin ??= "top left";
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         }
 
         protected override void OnAfterRender(bool firstRender)

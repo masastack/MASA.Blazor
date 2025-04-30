@@ -21,8 +21,8 @@
     display: flex;
     justify-content: space-around;
     align-content: center;
-    background-color: var(--m-theme-light-inverse-surface);
-    color: var(--m-theme-light-inverse-on-surface);
+    background-color: rgba(var(--m-theme-surface-variant));
+    color: rgba(var(--m-theme-on-surface-variant));
 }
 
 .m-pdf-mobile-viewer footer ::deep > * {

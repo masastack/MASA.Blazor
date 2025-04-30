@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MSimpleCheckbox : MasaComponentBase
+public partial class MSimpleCheckbox
 {
     [Parameter] public string? Color { get; set; }
 
@@ -26,12 +26,6 @@ public partial class MSimpleCheckbox : MasaComponentBase
 
     [Parameter] public bool Readonly { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
     [Parameter] public bool Ripple { get; set; } = true;
 
     private static Block _block = new("m-simple-checkbox");
@@ -48,24 +42,6 @@ public partial class MSimpleCheckbox : MasaComponentBase
     protected override IEnumerable<string?> BuildComponentStyle()
     {
         yield return new StyleBuilder().AddTextColor(ComputedColor).ToString();
-    }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
     }
 
     public string ComputedIcon

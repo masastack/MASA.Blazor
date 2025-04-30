@@ -16,93 +16,92 @@
                 Color="surface"
                 Theme="@_theme"
                 Rounded="true"
+                MinHeight="52"
                 masa-blazor-custom-element>
-            <div style="min-height: 52px">
-                <MSheet Class="pa-4 m-example__comp" Color="surface" Rounded="true" Theme="@_theme">
-                    @if (_type is not null)
-                    {
-                        <MErrorHandler>
-                            <DynamicComponent Type="_type" @key="_typeIdentity"></DynamicComponent>
-                        </MErrorHandler>
-                    }
-                </MSheet>
-
-                @if (!NoActions) 
+            <MSheet Class="pa-4 m-example__comp" Color="surface" Rounded="true" Theme="@_theme">
+                @if (_type is not null)
                 {
-                    <AppDivider />
-
-                    <MLazy MinHeight="52" Class="text-end pa-2">
-                        @foreach (var tooltip in _tooltips)
-                        {
-                            <AppTooltipButton Icon="@tooltip.Icon"
-                                              Path="@tooltip.Path"
-                                              Href="@tooltip.href"
-                                              Target="@(tooltip.href != null ? "_blank" : null)"
-                                              Class="mx-2"
-                                              OnClick="@tooltip.OnClick" />
-                        }
-                    </MLazy>
-
-                    @if (_showExpands)
-                    {
-                        <AppDivider />
-
-                        <ExpandTransition>
-                            <ShowTransitionElement Value="_expand">
-                                <div class="d-flex justify-end pa-2">
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1"
-                                                       OnClick="CopyCode"
-                                                       StaticIcon="mdi-content-copy"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-copy"
-                                                       ProcessText="code-copying"
-                                                       FinishText="code-copied">
-                                    </AppStatefulButton>
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1 hidden-xs-only"
-                                                       OnClick="RestoreCode"
-                                                       StaticIcon="mdi-restore"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-restore"
-                                                       ProcessText="code-restoring">
-                                    </AppStatefulButton>
-                                    @if (!string.IsNullOrWhiteSpace(_sourceCodeUri))
-                                    {
-                                        <MButton Small="true"
-                                                 Color="primary"
-                                                 Class="text-none mr-1 hidden-xs-only"
-                                                 Text
-                                                 Href="@($"https://try.masastack.com?path={_sourceCodeUri}")">
-                                            <MIcon Left>mdi-open-in-new</MIcon>
-                                            <MI18n Key="code-run-external"></MI18n>
-                                        </MButton>
-                                    }
-                                    <AppStatefulButton Small
-                                                       Text
-                                                       Class="text-none mr-1 hidden-xs-only"
-                                                       OnClick="RunCode"
-                                                       StaticIcon="mdi-play-circle-outline"
-                                                       FinishIcon="mdi-check"
-                                                       StaticText="code-run"
-                                                       ProcessText="code-running">
-                                    </AppStatefulButton>
-                                </div>
-
-                                <AppDivider />
-
-                                <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
-                                               Value="@_sourceCode"
-                                               EditorOptions="_options"
-                                               @ref=_monacoEditor>
-                                </MMonacoEditor>
-                            </ShowTransitionElement>
-                        </ExpandTransition>
-                    }
+                    <MErrorHandler>
+                        <DynamicComponent Type="_type" @key="_typeIdentity"></DynamicComponent>
+                    </MErrorHandler>
                 }
-            </div>
+            </MSheet>
+
+            @if (!NoActions)
+            {
+                <AppDivider/>
+
+                <MLazy MinHeight="52" Class="text-end pa-2">
+                    @foreach (var tooltip in _tooltips)
+                    {
+                        <AppTooltipButton Icon="@tooltip.Icon"
+                                          Path="@tooltip.Path"
+                                          Href="@tooltip.href"
+                                          Target="@(tooltip.href != null ? "_blank" : null)"
+                                          Class="mx-2"
+                                          OnClick="@tooltip.OnClick"/>
+                    }
+                </MLazy>
+
+                @if (_showExpands)
+                {
+                    <AppDivider/>
+
+                    <ExpandTransition>
+                        <ShowTransitionElement Value="_expand">
+                            <div class="d-flex justify-end pa-2">
+                                <AppStatefulButton Small
+                                                   Text
+                                                   Class="text-none mr-1"
+                                                   OnClick="CopyCode"
+                                                   StaticIcon="mdi-content-copy"
+                                                   FinishIcon="mdi-check"
+                                                   StaticText="code-copy"
+                                                   ProcessText="code-copying"
+                                                   FinishText="code-copied">
+                                </AppStatefulButton>
+                                <AppStatefulButton Small
+                                                   Text
+                                                   Class="text-none mr-1 hidden-xs-only"
+                                                   OnClick="RestoreCode"
+                                                   StaticIcon="mdi-restore"
+                                                   FinishIcon="mdi-check"
+                                                   StaticText="code-restore"
+                                                   ProcessText="code-restoring">
+                                </AppStatefulButton>
+                                @if (!string.IsNullOrWhiteSpace(_sourceCodeUri))
+                                {
+                                    <MButton Small="true"
+                                             Color="primary"
+                                             Class="text-none mr-1 hidden-xs-only"
+                                             Text
+                                             Href="@($"https://try.masastack.com?path={_sourceCodeUri}")">
+                                        <MIcon Left>mdi-open-in-new</MIcon>
+                                        <MI18n Key="code-run-external"></MI18n>
+                                    </MButton>
+                                }
+                                <AppStatefulButton Small
+                                                   Text
+                                                   Class="text-none mr-1 hidden-xs-only"
+                                                   OnClick="RunCode"
+                                                   StaticIcon="mdi-play-circle-outline"
+                                                   FinishIcon="mdi-check"
+                                                   StaticText="code-run"
+                                                   ProcessText="code-running">
+                                </AppStatefulButton>
+                            </div>
+
+                            <AppDivider/>
+
+                            <MMonacoEditor InitCompleteHandle="InitCompleteHandle"
+                                           Value="@_sourceCode"
+                                           EditorOptions="_options"
+                                           @ref=_monacoEditor>
+                            </MMonacoEditor>
+                        </ShowTransitionElement>
+                    </ExpandTransition>
+                }
+            }
         </MSheet>
     }
 }
