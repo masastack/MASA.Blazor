@@ -21924,6 +21924,10 @@ html.overflow-y-hidden {
     width: 100%;
     opacity: var(--m-medium-emphasis-opacity);
 }
+.m-input--selection-controls__input--dirty.m-input--selection-controls__input .m-icon,
+.m-input--has-state .m-input--selection-controls__input .m-icon {
+    opacity: 1;
+}
 .m-input--selection-controls__input input[role=checkbox],
 .m-input--selection-controls__input input[role=radio],
 .m-input--selection-controls__input input[role=switch] {

@@ -103,7 +103,7 @@ public partial class MSelectable<TValue> : MInput<TValue> where TValue : notnull
 
     private ModifierBuilder _controlInputModifierBuilder = ControlBlock.Element("input").CreateModifierBuilder();
 
-    protected string ControlInputClasses => _controlInputModifierBuilder.Add(_focusVisible).Build();
+    protected string ControlInputClasses => _controlInputModifierBuilder.Add(_focusVisible).Add("dirty", IsActive).Build();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
