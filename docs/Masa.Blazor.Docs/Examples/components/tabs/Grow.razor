@@ -13,7 +13,7 @@
         }
     </MTabs>
 
-    <MTabsItems Value="@tab">
+    <MTabsItems @bind-Value="@tab">
         @foreach (var item in items)
         {
             <MTabItem Value="@item">

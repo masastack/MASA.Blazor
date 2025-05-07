@@ -68,7 +68,7 @@
         </ExtensionContent>
     </MToolbar>
 
-    <MTabsItems Value="currentItem">
+    <MTabsItems @bind-Value="currentItem">
         @foreach (var item in items.Concat(more))
         {
             <MTabItem Value="item">
