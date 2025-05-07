@@ -31,9 +31,9 @@
                 @ChildContent
             </MTabsBar>
 
-            @if (TabItems.Any())
+            @if (TabItems.Count > 0)
             {
-                <MWindow Value="Value">
+                <MWindow Value="Value" ValueChanged="@ValueChanged">
                     @foreach (var tabItem in TabItems)
                     {
                         <MWindowItem Value="@tabItem.Value"
