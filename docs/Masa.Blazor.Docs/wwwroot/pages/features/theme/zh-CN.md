@@ -1,71 +1,34 @@
 # 主题配置 {#theme-configuration}
 
-轻松地通过编程的方式改变应用程序的颜色。重新构建默认样式表并根据您的特定需求自定义框架的各个方面。
+MASA Blazor 遵循 [Material Design 3](https://m3.material.io/styles/color/roles) 的主题配置规范，允许您自定义应用程序的默认文本颜色、表面等角色。
 
-## 浅色和深色 {#light-and-dark}
+## 设置 {#setup updated-in=v1.10.0}
 
-MASA Blazor 支持**浅色**和**深色**主题。默认情况下，您的应用程序将使用浅色主题。要切换到深色主题，请在注册服务时设置启用深色主题：
+MASA Blazor 包含两种预置的主题，**light** 和 **dark**，你可以在 [Github](https://github.com/masastack/MASA.Blazor/blob/main/src/Masa.Blazor/Services/MasaBlazorPreset.cs) 源码里找到它们的定义。
+
+要设置应用程序的默认主题，请使用 `DefaultTheme` 选项。
 
 ```csharp Program.cs
 builder.Services.AddMasaBlazor(options =>
 {
     options.ConfigureTheme(theme =>
     {
-        theme.Dark = true;
+        theme.DefaultTheme = "dark";
     });
 });
 ```
 
-当您将组件指定为浅色或深色时，除非另有说明，否则它的所有子组件都将继承并应用相同的主题。
+## 自定义主题 {#customizing updated-in=v1.10.0}
 
-## 自定义主题 {#customizing updated-in=v1.3.2}
+在注册服务时使用 `ConfigureTheme` 方法修改预置的 **light** 和 **dark** 主题，还可以使用 `Add` 方法添加新的主题。
+另外可以通过 `ThemeOptions.Variables` 属性修改供主题使用的 CSS 变量。
 
-默认情况下，MASA Blazor 为所有组件应用标准主题。
+以本文档的主题设置为例：
+- 修改了内置的 **light**和 **dark** 中某些颜色角色的值，并添加了一个名为 **basil** 的自定义颜色角色（你可以在示例 [Grow](/blazor/components/tabs#grow) 中看到它的使用）。
+- 最后添加了一个名为 **camel** 的以骆驼色为主的自定义主题；你可以通过 [Material Theme Builder](https://www.figma.com/community/plugin/1034969338659738588/material-theme-builder) 创建自己的主题。
 
 ```csharp
-public static class MasaBlazorPreset
-{
-    private static ThemeOptions LightTheme => new()
-    {
-        CombinePrefix = ".m-application",
-        Primary = "#1976D2",
-        Secondary = "#424242",
-        Accent = "#82B1FF",
-        Error = "#FF5252",
-        Info = "#2196F3",
-        Success = "#4CAF50",
-        Warning = "#FB8C00",
-        Surface = "#FFFFFF",
-        OnPrimary = "#FFFFFF",
-        OnSecondary = "#FFFFFF",
-        OnAccent = "#FFFFFF",
-        OnSurface = "#000000DE",
-        UserDefined = new Dictionary<string, string>()
-    };
-
-    private static ThemeOptions DarkTheme => new()
-    {
-        CombinePrefix = ".m-application",
-        Primary = "#2196F3",
-        Secondary = "#424242",
-        Accent = "#FF4081",
-        Error = "#FF5252",
-        Info = "#2196F3",
-        Success = "#4CAF50",
-        Warning = "#FB8C00",
-        Surface = "#121212",
-        OnPrimary = "#000000",
-        OnSecondary = "#000000",
-        OnAccent = "#000000",
-        UserDefined = new Dictionary<string, string>()
-    };
-}
-```
-
-这可以轻松更改。只需在注册服务时设置主题属性即可。您可以选择修改所有或部分主题属性，其余的将从默认值继承。
-
-```csharp Program.cs
-builder.Services.AddMasaBlazor(options =>
+services.AddMasaBlazor(options =>
 {
     options.ConfigureTheme(theme =>
     {
@@ -73,24 +36,53 @@ builder.Services.AddMasaBlazor(options =>
         theme.Themes.Light.Secondary = "#5e5c71";
         theme.Themes.Light.Accent = "#006C4F";
         theme.Themes.Light.Error = "#BA1A1A";
-        theme.Themes.Light.OnSurface = "#1C1B1F";
+        theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
         theme.Themes.Dark.Primary = "#C5C0FF";
+        theme.Themes.Dark.OnPrimary = "#090029";
         theme.Themes.Dark.Secondary = "#C7C4DC";
-        theme.Themes.Dark.Accent = "#67DBAF";
-        theme.Themes.Dark.Error = "#FFB4AB";
-        theme.Themes.Dark.Surface = "#131316";
-        theme.Themes.Dark.OnPrimary = "#2400A2";
         theme.Themes.Dark.OnSecondary = "#302E42";
+        theme.Themes.Dark.Accent = "#67DBAF";
         theme.Themes.Dark.OnAccent = "#003827";
-        theme.Themes.Dark.OnSurface = "#C9C5CA";
-    });
+        theme.Themes.Dark.Error = "#FFB4AB";
+        theme.Themes.Dark.OnError = "#690005";
+        theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
+
+        // 例：修改暗黑主题下outline变体的透明度，常用用于分割线
+        // theme.Themes.Dark.Variables.BorderOpacity = 0.2f;
+        
+        // ...
+
+        theme.Themes.Add("camel", true, custom =>
+        {
+            custom.Primary = "#ffb68a";
+            custom.OnPrimary = "#522300";
+            custom.Secondary = "#e5bfa9";
+            custom.OnSecondary = "#432b1c";
+            custom.Accent = "#cbc992";
+            custom.OnAccent = "#333209";
+            custom.Error = "#ffb4ab";
+            custom.OnError = "#690005";
+            custom.Surface = "#1a120d";
+            custom.OnSurface = "#f0dfd7";
+            custom.SurfaceDim = "#1a120d";
+            custom.SurfaceBright = "#413732";
+            custom.SurfaceContainer = "#261e19";
+            custom.SurfaceContainerLow = "#221a15";
+            custom.SurfaceContainerLowest = "#140d08";
+            custom.SurfaceContainerHigh = "#312823";
+            custom.SurfaceContainerHighest = "#3d332d";
+            custom.InversePrimary = "#8c4f26";
+            custom.InverseSurface = "#f0dfd7";
+            custom.InverseOnSurface = "#382e29";
+        });
+    }
 });
 ```
 
 主题样式的 CSS 会在应用启动时自动生成一个 `id` 为 `masa-blazor-theme-stylesheet` 的 `<style>` 标签，并插入到 `<head>` 标签中。
 
-## 动态更改主题 {#toggle-theme-dynamically}
+## 动态更改主题 {#change-theme}
 
 通过 `MasaBlazor` 服务，您可以在运行时更改主题。
 
