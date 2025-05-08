@@ -24,7 +24,7 @@ public class MActivatable : MActivatableBase, IActivatable
         }
     }
 
-    protected virtual bool ShouldUpdateActiveInJS => ActivatorContent is not null;
+    protected virtual bool ShouldUpdateActiveInJS => ActivatorContent is not null || !string.IsNullOrWhiteSpace(Activator);
 
     RenderFragment? IActivatable.ComputedActivatorContent => ComputedActivatorContent;
 
