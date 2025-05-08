@@ -67,8 +67,7 @@ public class MMarkdown : Container
 
     protected override IEnumerable<string?> BuildComponentClass()
     {
-        // set class will override the "vditor" class set by vditor,
-        // to avoid overriding, use "vditor" class as default value
+        // Returning the default "vditor" class ensures it remains applied
         yield return "vditor";
         if (Options != null && Options.TryGetValue("theme", out var theme) && theme is "dark")
         {
