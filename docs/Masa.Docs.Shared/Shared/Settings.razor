@@ -21,23 +21,6 @@
     </PrependContent>
     <ChildContent>
         <MContainer>
-            <div class="mb-4">
-                <div class="font-weight-black ps-1 mb-2">@I18n.T("theme")</div>
-                <MRadioGroup @bind-Value="_theme"
-                             TValue="string" 
-                             OnChange="@ToggleTheme"
-                             Class="mt-0">
-                    @foreach (var (opt, icon) in s_themeOptions)
-                    {
-                        <MRadio Value="opt" Style="height: 32px">
-                            <LabelContent>
-                                <MIcon Left>@icon</MIcon>
-                                @opt
-                            </LabelContent>
-                        </MRadio>
-                    }
-                </MRadioGroup>
-            </div>
             <div>
                 <div class="font-weight-black ps-1 mb-2">@I18n.T("direction")</div>
                 <MItemGroup Value="@MasaBlazor.RTL.ToString()" ActiveClass="primary">
@@ -74,66 +57,6 @@
 
     [Parameter]
     public EventCallback<bool?> ValueChanged { get; set; }
-
-    private string? _theme;
-
-    private static (string opt, string icon)[] s_themeOptions = { ("light", "mdi-weather-sunny"), ("dark", "mdi-weather-night"), ("system", "mdi-desktop-classic") };
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            _theme = await GetThemeFromLocalStorage() ?? "system";
-            StateHasChanged();
-        }
-    }
-
-    private ValueTask<bool> IsDarkPreferColor() => JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-
-    private Task<string?> GetThemeFromLocalStorage() => LocalStorage.GetItemAsync("masablazor@theme");
-
-    private Task UpdateThemeInLocalStorage(string value) => LocalStorage.SetItemAsync("masablazor@theme", value);
-
-    private async Task ToggleTheme(string option)
-    {
-        switch (option)
-        {
-            case "system":
-            {
-                try
-                {
-                    var preferDark = await IsDarkPreferColor();
-                    var targetTheme = preferDark ? "dark" : "light";
-                    if (MasaBlazor.Theme.DefaultTheme != targetTheme)
-                    {
-                        ToggleThemeInternal(targetTheme);
-                    }
-                }
-                catch (JSException)
-                {
-                    // ignored
-                }
-                break;
-            }
-            case "light" when MasaBlazor.Theme.DefaultTheme == "dark":
-                ToggleThemeInternal("light");
-                break;
-            case "dark" when MasaBlazor.Theme.DefaultTheme == "light":
-                ToggleThemeInternal("dark");
-                break;
-        }
-        _ = UpdateThemeInLocalStorage(option);
-
-        void ToggleThemeInternal(string theme)
-        {
-            // TODO: 调用 switchTheme js方法
-            
-            MasaBlazor.SetTheme(theme);
-            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", theme);
-        }
-    }
 
     private void ToggleRTL(bool rtl)
     {

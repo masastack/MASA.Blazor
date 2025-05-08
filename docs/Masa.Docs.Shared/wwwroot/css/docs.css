@@ -2,6 +2,18 @@ html {
   overflow-y: scroll;
 }
 
+::-webkit-scrollbar-track {
+  background: rgba(var(--m-theme-surface));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--m-theme-outline-variant));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--m-theme-outline));
+}
+
 h1:focus {
     outline: none;
 }
@@ -34,6 +46,10 @@ h1:focus {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.theme--dark.intro-card, .theme--dark.default-app-bar, .theme--dark.default-nav {
+    background-color: rgba(var(--m-theme-surface)) !important;
+}
 
 .ordinary-text {
     font-weight: 400 !important;
@@ -103,16 +119,12 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
 }
 
 .default-toc li {
-    border-left: 2px solid #E5E5E5;
+    border-left: 1px solid rgba(var(--m-theme-outline-variant));
 }
 
-.theme--dark.default-toc li {
-    border-left-color: #373c3e;
+.default-toc li.primary--text {
+    border-left-color: currentColor;
 }
-
-    .default-toc li.primary--text {
-        border-left-color: currentColor;
-    }
 
 .default-toc .m-toc-link {
     color: inherit;
@@ -207,6 +219,8 @@ h6.m-heading {
     height: 32px;
     line-height: 32px;
     font-size: 14px;
+    background-color: rgba(var(--m-theme-surface-container-low));
+    color: rgba(var(--m-theme-on-surface));
 }
 
     .github-issues--loaded a {
@@ -218,7 +232,6 @@ h6.m-heading {
 }
 
 .toc-content {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;

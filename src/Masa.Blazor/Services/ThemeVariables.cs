@@ -18,16 +18,16 @@ public class ThemeVariables
     {
         return $"""
                 --m-border-opacity: {BorderOpacity};
-                --m-idle-opacity: {IdleOpacity};
-                --m-hover-opacity: {HoverOpacity};
-                --m-focus-opacity: {FocusOpacity};
-                --m-disabled-opacity: {DisabledOpacity};
-                --m-selected-opacity: {SelectedOpacity};
-                --m-activated-opacity: {ActivatedOpacity};
-                --m-highlight-opacity: {HighlightOpacity};
-                --m-high-emphasis-opacity: {HighEmphasisOpacity};
-                --m-medium-emphasis-opacity: {MediumEmphasisOpacity};
-                --m-low-emphasis-opacity: {LowEmphasisOpacity};
+                  --m-idle-opacity: {IdleOpacity};
+                  --m-hover-opacity: {HoverOpacity};
+                  --m-focus-opacity: {FocusOpacity};
+                  --m-disabled-opacity: {DisabledOpacity};
+                  --m-selected-opacity: {SelectedOpacity};
+                  --m-activated-opacity: {ActivatedOpacity};
+                  --m-highlight-opacity: {HighlightOpacity};
+                  --m-high-emphasis-opacity: {HighEmphasisOpacity};
+                  --m-medium-emphasis-opacity: {MediumEmphasisOpacity};
+                  --m-low-emphasis-opacity: {LowEmphasisOpacity};
                 """;
     }
 }

@@ -6,13 +6,13 @@ public class MasaBlazorOptions
 
     public bool RTL { get; set; }
 
-    internal Breakpoint Breakpoint { get; } = MasaBlazorPreset.Breakpoint;
+    internal Breakpoint Breakpoint { get; } = MasaBlazorPreset.GetBreakpoint();
 
-    internal Icons Icons { get; } = MasaBlazorPreset.Icons;
+    internal Icons Icons { get; } = MasaBlazorPreset.GetIcons();
 
     internal SSROptions? SSR { get; private set; }
 
-    internal Theme Theme { get; } = MasaBlazorPreset.Theme;
+    internal Theme Theme { get; } = MasaBlazorPreset.GetTheme();
 
     public Locale? Locale { get; set; }
 
@@ -20,9 +20,9 @@ public class MasaBlazorOptions
     {
         var defaultBreakpointOptions = new BreakpointOptions()
         {
-            MobileBreakpoint = MasaBlazorPreset.Breakpoint.MobileBreakpoint,
-            ScrollBarWidth = MasaBlazorPreset.Breakpoint.ScrollBarWidth,
-            Thresholds = MasaBlazorPreset.Breakpoint.Thresholds
+            MobileBreakpoint = Breakpoint.MobileBreakpoint,
+            ScrollBarWidth = Breakpoint.ScrollBarWidth,
+            Thresholds = Breakpoint.Thresholds
         };
         configure.Invoke(defaultBreakpointOptions);
 

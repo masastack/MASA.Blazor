@@ -28,18 +28,10 @@ public static class ServiceCollectionExtensions
 
             options.ConfigureTheme(theme =>
             {
-                // theme.Dark = false;
-                // theme.DefaultTheme = "masa";
-
                 theme.Themes.Light.Primary = "#4f33ff";
                 theme.Themes.Light.Secondary = "#5e5c71";
                 theme.Themes.Light.Accent = "#006C4F";
                 theme.Themes.Light.Error = "#BA1A1A";
-                // theme.Themes.Light.OnSurface = "#1C1B1F";
-                // theme.Themes.Light.SurfaceContainer = "#FFFFFF";
-                // theme.Themes.Light.InverseSurface = "#131316";
-                // theme.Themes.Light.InverseOnSurface = "#C9C5CA";
-                // theme.Themes.Light.InversePrimary = "#C5C0FF";
                 theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
                 theme.Themes.Dark.Primary = "#C5C0FF";
@@ -50,17 +42,94 @@ public static class ServiceCollectionExtensions
                 theme.Themes.Dark.OnAccent = "#003827";
                 theme.Themes.Dark.Error = "#FFB4AB";
                 theme.Themes.Dark.OnError = "#690005";
-                // theme.Themes.Dark.OnSurface = "#e4e0f0";F
-                // theme.Themes.Dark.Surface = "#13121d";
-                // theme.Themes.Dark.SurfaceContainer = "#13121d";
-                // theme.Themes.Dark.SurfaceContainerLow = "#1b1a25";
-                // theme.Themes.Dark.InverseOnSurface = "#1C1B1F";
-                // theme.Themes.Dark.InversePrimary = "#4f33ff";
                 theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
-                theme.Themes.Add("masa", false, custom =>
+                theme.Themes.Add("masa-light", false, custom =>
                 {
-                    custom.Primary = "#c10d0d";
+                    custom.Primary = "#4318ff";
+                    custom.Secondary = "#5e5c71";
+                    custom.Accent = "#006c4f";
+                    custom.Error = "#ba1a1a";
+                    custom.Surface = "#fcf8fd";
+                    custom.OnSurface = "#1c1b1f";
+                    custom.SurfaceDim = "#ddd9dd";
+                    custom.SurfaceBright = "#fcf8fd";
+                    custom.SurfaceContainer = "#f1ecf1";
+                    custom.SurfaceContainerLow = "#f6f2f7";
+                    custom.SurfaceContainerLowest = "#ffffff";
+                    custom.SurfaceContainerHigh = "#ebe7ec";
+                    custom.SurfaceContainerHighest = "#e5e1e6";
+                    custom.InversePrimary = "#c5c0ff";
+                    custom.InverseSurface = "#313034";
+                    custom.InverseOnSurface = "#f4eff4";
+                });
+                
+                theme.Themes.Add("masa-dark", true, custom =>
+                {
+                    custom.Primary = "#c5c0ff";
+                    custom.OnPrimary = "#2400a2";
+                    custom.Secondary = "#c7c4dc";
+                    custom.OnSecondary = "#302e42";
+                    custom.Accent = "#67dbaf";
+                    custom.OnAccent = "#003827";
+                    custom.Error = "#ffb4ab";
+                    custom.OnError = "#690005";
+                    custom.Surface = "#131316";
+                    custom.OnSurface = "#c9c5ca";
+                    custom.SurfaceDim = "#131316";
+                    custom.SurfaceBright = "#3a393c";
+                    custom.SurfaceContainer = "#201f23";
+                    custom.SurfaceContainerLow = "#1c1b1f";
+                    custom.SurfaceContainerLowest = "#0e0e11";
+                    custom.SurfaceContainerHigh = "#2a292d";
+                    custom.SurfaceContainerHighest = "#353438";
+                    custom.InversePrimary = "#4f33ff";
+                    custom.InverseSurface = "#e5e1e6";
+                    custom.InverseOnSurface = "#1c1b1f";
+                });
+                
+                theme.Themes.Add("greenery", false, custom =>
+                {
+                    custom.Primary = "#386a1f";
+                    custom.Secondary = "#55624c";
+                    custom.Accent = "#386666";
+                    custom.Error = "#ba1a1a";
+                    custom.Surface = "#f8faf0";
+                    custom.OnSurface = "#1a1c18";
+                    custom.SurfaceDim = "#d9dbd1";
+                    custom.SurfaceBright = "#f8faf0";
+                    custom.SurfaceContainer = "#edefe5";
+                    custom.SurfaceContainerLow = "#f3f5eb";
+                    custom.SurfaceContainerLowest = "#ffffff";
+                    custom.SurfaceContainerHigh = "#e7e9df";
+                    custom.SurfaceContainerHighest = "#e1e3da";
+                    custom.InversePrimary = "#9dd67d";
+                    custom.InverseSurface = "#2f312d";
+                    custom.InverseOnSurface = "#f1f1ea";
+                });
+                
+                theme.Themes.Add("camel", true, custom =>
+                {
+                    custom.Primary = "#ffb68a";
+                    custom.OnPrimary = "#522300";
+                    custom.Secondary = "#e5bfa9";
+                    custom.OnSecondary = "#432b1c";
+                    custom.Accent = "#cbc992";
+                    custom.OnAccent = "#333209";
+                    custom.Error = "#ffb4ab";
+                    custom.OnError = "#690005";
+                    custom.Surface = "#1a120d";
+                    custom.OnSurface = "#f0dfd7";
+                    custom.SurfaceDim = "#1a120d";
+                    custom.SurfaceBright = "#413732";
+                    custom.SurfaceContainer = "#261e19";
+                    custom.SurfaceContainerLow = "#221a15";
+                    custom.SurfaceContainerLowest = "#140d08";
+                    custom.SurfaceContainerHigh = "#312823";
+                    custom.SurfaceContainerHighest = "#3d332d";
+                    custom.InversePrimary = "#8c4f26";
+                    custom.InverseSurface = "#f0dfd7";
+                    custom.InverseOnSurface = "#382e29";
                 });
             });
             options.ConfigureIcons(IconSet.MaterialDesignIcons, aliases =>

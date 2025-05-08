@@ -2,7 +2,7 @@
 
 internal static class MasaBlazorPreset
 {
-    internal static ThemeOptions LightTheme { get; } = new()
+    internal static ThemeOptions GetLightTheme() => new()
     {
         IsDarkScheme = false,
         CombinePrefix = ".m-application",
@@ -36,7 +36,7 @@ internal static class MasaBlazorPreset
         OnSurfaceVariant = "#EEEEEE"
     };
 
-    internal static ThemeOptions DarkTheme { get; } = new()
+    internal static ThemeOptions GetDarkTheme() => new()
     {
         IsDarkScheme = true,
         CombinePrefix = ".m-application",
@@ -70,7 +70,7 @@ internal static class MasaBlazorPreset
         OnSurfaceVariant = "#000000"
     };
 
-    internal static Breakpoint Breakpoint { get; } = new()
+    internal static Breakpoint GetBreakpoint() => new()
     {
         MobileBreakpoint = 1264,
         ScrollBarWidth = 16,
@@ -83,7 +83,7 @@ internal static class MasaBlazorPreset
         }
     };
 
-    internal static Icons Icons { get; } = new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
+    internal static Icons GetIcons() => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
 
-    internal static Theme Theme { get; } = new(LightTheme, DarkTheme);
+    internal static Theme GetTheme() => new(GetLightTheme(), GetDarkTheme());
 }

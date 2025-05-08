@@ -8,7 +8,7 @@
     <MContainer Style="padding-top: 64px;">
         <MTabs Value="@Product"
                Color="primary"
-               BackgroundColor="surface"
+               BackgroundColor="transparent"
                Centered="@(!MasaBlazor.Breakpoint.Xs)"
                FixedTabs="MasaBlazor.Breakpoint.Xs"
                IconsAndText="@(!MasaBlazor.Breakpoint.Xs)">
@@ -43,7 +43,7 @@
 
         <MDivider Style="position: relative; margin-top: -1px;" />
 
-        <MTabsItems Value="@Product" Class="mt-8 surface">
+        <MTabsItems Value="@Product" Class="mt-8 transparent">
             <MTabItem Value="@("stack")" Transition="">
                 <StackIntro />
             </MTabItem>
