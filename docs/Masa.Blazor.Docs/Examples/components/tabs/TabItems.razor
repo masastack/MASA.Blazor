@@ -1,6 +1,6 @@
 ﻿<MCard>
     <MTabs
-        @bind-Value="tab"
+        @bind-Value="value"
         BackgroundColor="primary"
         Dark>
         @foreach (var (tab, _) in items)
@@ -11,7 +11,7 @@
         }
     </MTabs>
 
-    <MTabsItems Value="tab">
+    <MTabsItems @bind-Value="value">
         @foreach (var (tab, content) in items)
         {
             <MTabItem Value="tab">
@@ -25,7 +25,7 @@
 
 @code {
 
-    StringNumber tab;
+    StringNumber value;
 
     List<(string tab, string content)> items = new()
     {
