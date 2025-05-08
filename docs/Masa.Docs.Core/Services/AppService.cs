@@ -4,21 +4,20 @@ public class AppService
 {
     public const int AppBarHeight = 96;
     public const int MobileAppBarHeight = 64;
-    public const string ColorForNewState = "#05CD99";
-    public const string ColorForUpdateState = "#FF5252";
-    public const string ColorForBreakingChangeState = "#E040FB";
-    public const string ColorForDeprecatedState = "#9E9E9E";
-
-    private List<MarkdownItTocContent>? _toc;
+    public const string ColorForNewState = "green";
+    public const string ColorForUpdateState = "red";
+    public const string ColorForBreakingChangeState = "orange";
+    public const string ColorForDeprecatedState = "gray";
+    public const string ColorForLabsState = "purple";
 
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
 
     public List<MarkdownItTocContent>? Toc
     {
-        get => _toc;
+        get;
         set
         {
-            _toc = value;
+            field = value;
             TocChanged?.Invoke(this, value);
         }
     }

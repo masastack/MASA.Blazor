@@ -55,7 +55,8 @@
     "new": "NEW",
     "update": "UPDATE",
     "breaking-change": "BC",
-    "deprecated": "DEPRECATED"
+    "deprecated": "DEPRECATED",
+    "labs": "LAB"
   },
   "tag": {
     "preset": "Preset",
@@ -257,6 +258,7 @@
   "data-tables": "Data tables",
   "simple-tables": "Simple tables",
   "tabs": "Tabs",
+  "theme-providers": "Theme providers",
   "timelines": "Timelines",
   "toggles": "Toggles",
   "enqueued-snackbars": "Enqueued snackbars",
@@ -446,6 +448,7 @@
     "data-tables": "The DataTables component is used for displaying tabular data",
     "simple-tables": "The SimpleTables component is a simple wrapper component around the <table> element",
     "tabs": "The Tabs component is used for hiding content behind a selectable item",
+    "theme-providers": "Allows you to style a section of your application in a different theme from the default",
     "timelines": "Timelines is very useful for displaying chronological information",
     "toast": "The component is used to convey important information to the user through the use contextual types icons and color",
     "tooltips": "The Tooltips component is useful for conveying information when a user hovers over an element",
