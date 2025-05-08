@@ -18,7 +18,7 @@
 
         <ExtensionContent>
             <MTabs
-                @bind-Value="tabs"
+                @bind-Value="tab"
                 FixedTabs>
                 <MTab
                     Value="@("mobile-tabs-5-1")"
@@ -41,7 +41,7 @@
         </ExtensionContent>
     </MToolbar>
 
-    <MTabsItems Value="tabs">
+    <MTabsItems @bind-Value="tab">
         @foreach (var item in Enumerable.Range(1, 3))
         {
             <MTabItem
@@ -56,7 +56,7 @@
 
 @code {
 
-    StringNumber tabs;
+    StringNumber tab;
 
     string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
