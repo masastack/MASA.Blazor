@@ -86,4 +86,19 @@ internal static class MasaBlazorPreset
     internal static Icons GetIcons() => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
 
     internal static Theme GetTheme() => new(GetLightTheme(), GetDarkTheme());
+    
+    internal static ThemeVariables GetThemeVariables() => new()
+    {
+        BorderOpacity = 0.12f,
+        IdleOpacity = 0.04f,
+        HoverOpacity = 0.04f,
+        FocusOpacity = 0.12f,
+        DisabledOpacity = 0.38f,
+        SelectedOpacity = 0.08f,
+        ActivatedOpacity = 0.12f,
+        HighlightOpacity = 0.32f,
+        HighEmphasisOpacity = 0.87f,
+        MediumEmphasisOpacity = 0.6f,
+        LowEmphasisOpacity = 0.38f
+    };
 }

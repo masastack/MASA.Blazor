@@ -2,17 +2,17 @@
 
 public class ThemeVariables
 {
-    public float BorderOpacity { get; set; } = 0.12f;
-    public float IdleOpacity { get; set; } = 0.04f;
-    public float HoverOpacity { get; set; } = 0.04f;
-    public float FocusOpacity { get; set; } = 0.12f;
-    public float DisabledOpacity { get; set; } = 0.38f;
-    public float SelectedOpacity { get; set; } = 0.08f;
-    public float ActivatedOpacity { get; set; } = 0.12f;
-    public float HighlightOpacity { get; set; } = 0.32f;
-    public float HighEmphasisOpacity { get; set; } = 0.87f;
-    public float MediumEmphasisOpacity { get; set; } = 0.6f;
-    public float LowEmphasisOpacity { get; set; } = 0.38f;
+    public float BorderOpacity { get; set; }
+    public float IdleOpacity { get; set; }
+    public float HoverOpacity { get; set; }
+    public float FocusOpacity { get; set; }
+    public float DisabledOpacity { get; set; }
+    public float SelectedOpacity { get; set; }
+    public float ActivatedOpacity { get; set; }
+    public float HighlightOpacity { get; set; }
+    public float HighEmphasisOpacity { get; set; }
+    public float MediumEmphasisOpacity { get; set; }
+    public float LowEmphasisOpacity { get; set; }
 
     public override string ToString()
     {

@@ -69,7 +69,7 @@ public class ThemeOptions
 
     // TODO: Scrim, Shadow
 
-    public ThemeVariables Variables { get; } = new();
+    public ThemeVariables Variables { get; } = MasaBlazorPreset.GetThemeVariables();
 
     public Dictionary<string, ColorPairing> UserDefined { get; } = new();
 
