@@ -646,23 +646,6 @@ app-alert p {
     height: 48px;
 }
 
-::view-transition-old(root) {
-    animation: none;
-}
-::view-transition-new(root) {
-    mix-blend-mode: normal;
-    animation: clip .3s ease-in;
-}
-
-@keyframes clip {
-    from {
-        clip-path: circle(0% at var(--x) var(--y));
-    }
-    to{
-        clip-path: circle(100% at var(--x) var(--y));
-    }
-}
-
 @media (min-width: 1264px) {
     .m-main.doc-main:not(.app--sized) {
         padding-left: 300px !important;

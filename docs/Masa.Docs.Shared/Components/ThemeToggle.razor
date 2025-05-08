@@ -150,8 +150,6 @@
 
         void ToggleThemeInternal(string theme)
         {
-            // TODO: 调用 switchTheme js方法
-
             MasaBlazor.SetTheme(theme);
             _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", theme);
         }
