@@ -21,7 +21,7 @@
     </MTabs>
 
     <MCardText Class="text-center">
-        <MTabsItems Value="@_tabValue">
+        <MTabsItems @bind-Value="@_tabValue">
             @foreach (var tab in _tabs)
             {
             <MTabItem @key="tab" Value="tab">

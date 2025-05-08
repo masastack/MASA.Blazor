@@ -1,3 +1,5 @@
+import { get$ParentElement } from "utils/helper";
+
 class OutsideClick {
   dotNetHelper: DotNet.DotNetObject;
   listener: (e: MouseEvent & KeyboardEvent & FocusEvent) => void;
@@ -46,6 +48,11 @@ class OutsideClick {
 
   checkEvent(e: MouseEvent) {
     return this.excludedSelectors.some((selector) => {
+      const parentElement = get$ParentElement(selector);
+      if (parentElement) {
+        return parentElement.contains(e.target as HTMLElement);
+      }
+
       const elements = Array.from(document.querySelectorAll(selector));
       return elements.some(el => el.contains(e.target as HTMLElement));
     });

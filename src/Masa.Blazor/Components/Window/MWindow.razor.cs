@@ -62,6 +62,11 @@ public partial class MWindow : MItemGroup
     private void UpdateInternalIndex()
     {
         InternalIndex = Items.FindIndex(item => item.Value == InternalValue);
+        if (_prevInternalIndex == InternalIndex)
+        {
+            return;
+        }
+
         IsReverse = UpdateReverse(InternalIndex, _prevInternalIndex);
         _prevInternalIndex = InternalIndex;
     }
