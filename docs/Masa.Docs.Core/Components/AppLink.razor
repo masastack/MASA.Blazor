@@ -5,6 +5,7 @@
    class="app-link text-decoration-none primary--text font-weight-medium d-inline-flex"
    @onclick="@OnClick"
    @onclick:preventDefault="IsSamePage"
+   @onclick:stopPropagation="StopPropagation"
    @attributes="@Attributes">
     @if (!IsSamePage)
     {
