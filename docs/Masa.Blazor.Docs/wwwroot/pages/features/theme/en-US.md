@@ -1,17 +1,17 @@
 # Theme configuration
 
-Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.
+Customize your application’s default text colors, surfaces, and more. Modify your theme programmatically in real time. MASA Blazor comes with standard support for light and dark variants.
 
-## Light and dark
+## Setup
 
-MASA Blazor supports **light** and **dark** themes. By default, your application will use the light theme. To switch to the dark theme, set the enable dark theme when registering the service:
+MASA Blazor comes with two themes pre-installed, light and dark. To set the default theme of your application, use the DefaultTheme option.
 
 ```csharp Program.cs
 builder.Services.AddMasaBlazor(options =>
 {
     options.ConfigureTheme(theme =>
     {
-        theme.Dark = true;
+        theme.DefaultTheme = "dark";
     });
 });
 ```

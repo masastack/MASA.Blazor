@@ -24,8 +24,6 @@ public static class ServiceCollectionExtensions
 
         var masaBlazorBuilder = services.AddMasaBlazor(options =>
         {
-            // TODO: 多主题支持
-
             options.ConfigureTheme(theme =>
             {
                 theme.Themes.Light.Primary = "#4f33ff";
