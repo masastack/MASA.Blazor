@@ -36,6 +36,7 @@ services.AddMasaBlazor(options =>
         theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
         theme.Themes.Dark.Primary = "#C5C0FF";
+        theme.Themes.Dark.OnPrimary = "#000000";
         theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
         // 例：修改暗黑主题下outline变体的透明度，常用用于分割线

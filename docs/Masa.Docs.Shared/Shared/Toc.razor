@@ -22,7 +22,7 @@
     <ChildContent>
         @if (_toc.Any())
         {
-            <div class="toc-content mb-2 ml-6 secondary--text">@I18n.T("Toc")</div>
+            <div class="toc-content mb-2 ml-6 text--secondary">@I18n.T("Toc")</div>
         }
         <ul class="mb-6">
             @foreach (var item in _toc)
@@ -31,7 +31,7 @@
 
                 <MScrollToTargetTrigger Target="@item.Anchor" @key="@item.Anchor">
                     @{
-                        var color = context.IsActive ? "primary--text" : "secondary--text";
+                        var color = context.IsActive ? "primary--text" : "text--secondary";
                     }
 
                     <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item) toc-li @color">

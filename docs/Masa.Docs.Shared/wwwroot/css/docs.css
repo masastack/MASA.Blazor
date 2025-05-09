@@ -119,7 +119,7 @@ h1+p, app-heading[level="1"]+p, .app-heading+p {
 }
 
 .default-toc li {
-    border-left: 1px solid rgba(var(--m-theme-outline-variant));
+    border-left: 2px solid rgba(var(--m-theme-outline-variant));
 }
 
 .default-toc li.primary--text {

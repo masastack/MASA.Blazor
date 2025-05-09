@@ -6,10 +6,10 @@
     color: rgba(var(--m-theme-on-surface)) !important;
 }
 .m-application .text--secondary {
-    color: rgba(var(-m-theme-on-surface), var(--m-medium-emphasis-opacity)) !important;
+    color: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity)) !important;
 }
 .m-application .text--disabled {
-    color: rgba(var(-m-theme-on-surface), var(--m-disabled-opacity)) !important;
+    color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity)) !important;
 }
 
 .m-application {
