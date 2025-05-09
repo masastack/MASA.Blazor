@@ -3,7 +3,10 @@
 @inject IJSRuntime JSRuntime
 @inject I18n I18n
 
-<MButton IconName="mdi-theme-light-dark">
+<MButton Icon>
+    <MBadge Value="_badge" Color="green" Dot>
+        <MIcon>mdi-theme-light-dark</MIcon>
+    </MBadge>
     <MDialog Activator="parent"
              MaxWidth="1000">
         <MCard Title="@I18n.T("theme")"
@@ -67,7 +70,8 @@
                                                 <AppLink
                                                     Href="https://m3.material.io/styles/color/system/how-the-system-works#3cfa9a7f-7d8c-45b0-9b6b-7dee16d858d6"
                                                     Content="material.io"
-                                                    StopPropagation/>.
+                                                    StopPropagation/>
+                                                .
                                             </MListItemSubtitle>
                                         </MListItemContent>
                                     </MListItem>
@@ -104,6 +108,7 @@
 @code {
 
     private StringNumber? _theme;
+    private bool _badge = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
