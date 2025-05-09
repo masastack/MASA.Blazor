@@ -26,20 +26,7 @@ public static class ServiceCollectionExtensions
         {
             options.ConfigureTheme(theme =>
             {
-                theme.Themes.Light.Primary = "#4f33ff";
-                theme.Themes.Light.Secondary = "#5e5c71";
-                theme.Themes.Light.Accent = "#006C4F";
-                theme.Themes.Light.Error = "#BA1A1A";
                 theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
-
-                theme.Themes.Dark.Primary = "#C5C0FF";
-                theme.Themes.Dark.OnPrimary = "#090029";
-                theme.Themes.Dark.Secondary = "#C7C4DC";
-                theme.Themes.Dark.OnSecondary = "#302E42";
-                theme.Themes.Dark.Accent = "#67DBAF";
-                theme.Themes.Dark.OnAccent = "#003827";
-                theme.Themes.Dark.Error = "#FFB4AB";
-                theme.Themes.Dark.OnError = "#690005";
                 theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
                 theme.Themes.Add("masa-light", false, custom =>

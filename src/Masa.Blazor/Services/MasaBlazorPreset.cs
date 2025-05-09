@@ -6,7 +6,7 @@ internal static class MasaBlazorPreset
     {
         IsDarkScheme = false,
         CombinePrefix = ".m-application",
-        Primary = "#1976D2",
+        Primary = "#4318ff",
         Secondary = "#424242",
         Accent = "#82B1FF",
         Error = "#FF5252",
@@ -40,7 +40,7 @@ internal static class MasaBlazorPreset
     {
         IsDarkScheme = true,
         CombinePrefix = ".m-application",
-        Primary = "#a5c8ff",
+        Primary = "#C5C0FF",
         Secondary = "#424242",
         Accent = "#FF4081",
         Error = "#FF5252",
@@ -94,7 +94,6 @@ internal static class MasaBlazorPreset
         HoverOpacity = 0.04f,
         FocusOpacity = 0.12f,
         DisabledOpacity = 0.38f,
-        SelectedOpacity = 0.08f,
         ActivatedOpacity = 0.12f,
         HighlightOpacity = 0.32f,
         HighEmphasisOpacity = 0.87f,
