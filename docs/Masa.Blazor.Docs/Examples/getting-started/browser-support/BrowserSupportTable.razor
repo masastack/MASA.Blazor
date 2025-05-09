@@ -1,52 +1,46 @@
 ﻿@inject I18n I18n
 @attribute [JSCustomElement]
 
-<div class="overflow-hidden mb-4 m-sheet m-sheet--outlined @ThemeClass rounded">
-    <div class="m-data-table @ThemeClass">
-        <div class="m-data-table__wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>@I18n.T("browser")</th>
-                        <th>@I18n.T("support-status")</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Chromium (Chrome, Edge Insider)</td>
-                        <td>@I18n.T("supported")</td>
-                    </tr>
-                    <tr>
-                        <td>Edge</td>
-                        <td>@I18n.T("supported")</td>
-                    </tr>
-                    <tr>
-                        <td>Firefox</td>
-                        <td>@I18n.T("supported")</td>
-                    </tr>
-                    <tr>
-                        <td>Safari 10+</td>
-                        <td>@I18n.T("supported")</td>
-                    </tr>
-                    <tr>
-                        <td>IE11/Safari 9</td>
-                        <td>@I18n.T("supported-with-polyfill")</td>
-                    </tr>
-                    <tr>
-                        <td>IE9 / IE10</td>
-                        <td>@I18n.T("not-supported")</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<AppSheet Theme="@Theme">
+    <MSimpleTable>
+        <thead>
+        <tr>
+            <th>@I18n.T("browser")</th>
+            <th>@I18n.T("support-status")</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Chromium (Chrome, Edge Insider)</td>
+            <td>@I18n.T("supported")</td>
+        </tr>
+        <tr>
+            <td>Edge</td>
+            <td>@I18n.T("supported")</td>
+        </tr>
+        <tr>
+            <td>Firefox</td>
+            <td>@I18n.T("supported")</td>
+        </tr>
+        <tr>
+            <td>Safari 10+</td>
+            <td>@I18n.T("supported")</td>
+        </tr>
+        <tr>
+            <td>IE11/Safari 9</td>
+            <td>@I18n.T("supported-with-polyfill")</td>
+        </tr>
+        <tr>
+            <td>IE9 / IE10</td>
+            <td>@I18n.T("not-supported")</td>
+        </tr>
+        </tbody>
+    </MSimpleTable>
+</AppSheet>
 
 @code {
 
     [Parameter]
-    public bool Dark { get; set; }
-
-    private string ThemeClass => Dark ? "theme--dark" : "theme--light";
+    public string? Theme { get; set; }
 
 }

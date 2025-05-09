@@ -187,7 +187,18 @@ public partial class Example : NextTickComponentBase
 
     private async Task ToggleTheme()
     {
-        _theme = _theme == "light" ? "dark" : "light";
+        var appTheme = MasaBlazor.Theme.DefaultTheme;
+        var appDark = MasaBlazor.Theme.CurrentTheme.IsDarkScheme;
+
+        if (appDark)
+        {
+            _theme = _theme == "light" ? appTheme : "light";
+        }
+        else
+        {
+            _theme = _theme == "dark" ? appTheme : "dark";
+        }
+
         await Task.CompletedTask;
     }
 

@@ -4,8 +4,8 @@
 <div class="pb-4">
     @if (Model is not null)
     {
-        <MLazy MinHeight="48">
-            <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
+        <MLazy MinHeight="40">
+            <MTabs @bind-Value="_tabValue" Height="40" SliderColor="secondary">
                 @foreach (var tab in Tabs)
                 {
                     <MTab Class="text-none">@tab</MTab>
@@ -13,12 +13,14 @@
             </MTabs>
         </MLazy>
 
-        <MTabsItems Dark="Dark" Value="_tabValue">
+        <MTabsItems Value="_tabValue">
             @foreach (var tabItem in TabItems)
             {
                 <MTabItem>
-                    <Markup Code="@tabItem.Code" Language="@tabItem.Lang"
+                    <Markup Code="@tabItem.Code"
+                            Language="@tabItem.Lang"
                             FileName="@tabItem.FileName"
+                            RoundedTop0
                             LineHighlights="@tabItem.LineHighlights">
                     </Markup>
                 </MTabItem>
@@ -29,9 +31,6 @@
 
 @code {
     
-    [Parameter]
-    public bool Dark { get; set; }
-
     [Parameter]
     public Dictionary<string, MarkupModel>? Model { get; set; }
     

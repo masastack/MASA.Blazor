@@ -244,14 +244,8 @@ ul:not([class]), ol:not([class]) {
     margin-bottom: 16px;
 }
 
-.theme--light code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
-    background-color: #f0f3f9 !important;
-    /*color: #1B2559;*/
-}
-
-.theme--dark code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
-    background-color: #272a2c !important;
-    /*color: #1B2559;*/
+code:not(.m-code-highlight__code):not(.demo__markdown-parsers__highlight code) {
+    background-color: rgba(var(--m-theme-surface-container-highest), var(--m-low-emphasis-opacity));
 }
 
 .m-code-highlight__pre .m-code-highlight__code {

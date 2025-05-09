@@ -1,23 +1,44 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
+@inject MasaBlazor MasaBlazor
+@implements IDisposable
 
-<a class="d-flex justify-center" 
+<a class="d-flex justify-center"
    style="width: 100%; height:100%"
    href="/"
    @attributes="@Attributes">
-    <MImage Src="@($"https://cdn.masastack.com/images/logo-h-en{(IsDark ? "--dark" : "")}.png?x-oss-process=image/resize,w_360")"
-            alt="@I18n.T("logo")"
-            Class="shrink"
-            MaxWidth="180"
-            Width="@("100%")"
-            Height="39"/>
+    <MImage
+        Src="@($"https://cdn.masastack.com/images/logo-h-en{(isDark ? "--dark" : "")}.png?x-oss-process=image/resize,w_360")"
+        alt="@I18n.T("logo")"
+        Class="shrink"
+        MaxWidth="180"
+        Width="@("100%")"
+        Height="39"/>
 </a>
 
 @code {
 
-    [CascadingParameter(Name = "IsDark")]
-    private bool IsDark { get; set; }
-    
+    private bool isDark;
+
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MasaBlazor.OnThemeChange += OnThemeChange;
+    }
+
+    private void OnThemeChange(Theme theme)
+    {
+        isDark = theme.CurrentTheme.IsDarkScheme;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        MasaBlazor.OnThemeChange -= OnThemeChange;
+    }
+
 }

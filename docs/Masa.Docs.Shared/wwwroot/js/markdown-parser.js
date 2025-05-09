@@ -116,7 +116,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
 
                 const [lang, fileName, lineHighlights] = resolveCodeInfo(tokens[idx].info)
 
-                return `<default-app-markup id="${id}" class="${className}" code="${content.replaceAll(
+                return `<default-app-markup ${id ? `id=${id}`: ""}" ${className ? `class=${className}` : ""} code="${content.replaceAll(
                     '"',
                     "&quot;"
                 )}" language="${lang}" file-name="${fileName || ""}" line-highlights="${lineHighlights || ""}"></default-app-markup>\n`;
