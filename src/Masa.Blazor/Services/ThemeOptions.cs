@@ -2,7 +2,7 @@
 
 public class ThemeOptions
 {
-    internal bool IsDarkScheme { get; set; }
+    public bool IsDarkScheme { get; internal set; }
 
     public string ColorScheme => IsDarkScheme ? "dark" : "normal";
 

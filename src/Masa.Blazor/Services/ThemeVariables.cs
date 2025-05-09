@@ -7,7 +7,6 @@ public class ThemeVariables
     public float HoverOpacity { get; set; }
     public float FocusOpacity { get; set; }
     public float DisabledOpacity { get; set; }
-    public float SelectedOpacity { get; set; }
     public float ActivatedOpacity { get; set; }
     public float HighlightOpacity { get; set; }
     public float HighEmphasisOpacity { get; set; }
@@ -22,7 +21,6 @@ public class ThemeVariables
                   --m-hover-opacity: {HoverOpacity};
                   --m-focus-opacity: {FocusOpacity};
                   --m-disabled-opacity: {DisabledOpacity};
-                  --m-selected-opacity: {SelectedOpacity};
                   --m-activated-opacity: {ActivatedOpacity};
                   --m-highlight-opacity: {HighlightOpacity};
                   --m-high-emphasis-opacity: {HighEmphasisOpacity};
