@@ -1,9 +1,9 @@
 ﻿@namespace Masa.Blazor
 @using Masa.Blazor.Components.DatePicker
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 @typeparam TValue
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <MPicker TitleContent="@(GenPickerTitle())"
              ActionsContent="@ChildContent"
              Color="@(HeaderColor ?? Color)"

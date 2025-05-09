@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Components.ItemGroup;
-using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -66,12 +65,6 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 
     [Parameter] public string? Target { get; set; }
 
-    [Parameter] public bool Light { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
     private IRoutable? _router;
 
     public bool Exact { get; }
@@ -84,37 +77,9 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 
     public int Tabindex => _router?.Tabindex ?? 0;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         CloseIcon ??= "$delete";
 
@@ -138,8 +103,8 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
             .Add("no-color", string.IsNullOrWhiteSpace(Color))
             .Add("removable", Close)
             .Add("active", InternalIsActive)
-            .AddTheme(IsDark, IndependentTheme)
-            .AddBackgroundColor(Color)
+            .AddTheme(ComputedTheme)
+            .AddBackgroundColor(Color, !Outlined)
             .AddTextColor(Color, Outlined)
             .AddTextColor(TextColor)
             .AddClass(ComputedActiveClass, InternalIsActive)
@@ -151,7 +116,7 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
     {
         return new StyleBuilder()
             .AddIf("display", "none", !Active)
-            .AddBackgroundColor(Color)
+            .AddBackgroundColor(Color, !Outlined)
             .AddTextColor(Color, () => Outlined)
             .AddTextColor(TextColor)
             .GenerateCssStyles();

@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Text.Json;
 
 namespace Masa.Blazor;
@@ -10,9 +9,6 @@ public class MECharts : Container, IEChartsJsCallbacks
 
     [Inject]
     protected EChartsJSModule Module { get; set; } = null!;
-
-    [Inject]
-    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -74,9 +70,6 @@ public class MECharts : Container, IEChartsJsCallbacks
     [Parameter]
     public EventCallback<EChartsEventArgs> OnContextMenu { get; set; }
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [Parameter]
     public bool IncludeFunctionsInOption { get; set; }
 
@@ -116,11 +109,6 @@ public class MECharts : Container, IEChartsJsCallbacks
             if (Light)
             {
                 return "light";
-            }
-
-            if (CascadingIsDark)
-            {
-                return "dark";
             }
 
             return null;

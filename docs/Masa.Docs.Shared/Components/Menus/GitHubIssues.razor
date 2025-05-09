@@ -18,16 +18,16 @@
     else
     {
         <div class="github-issues github-issues--loaded rounded">
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{Labels}")">
                 <MIcon Class="emphasize1-color mr-1" Size="16">mdi-plus</MIcon>
                 <span>Issues</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-alert-circle-outline</MIcon>
                 <span>@_openCount</span>&nbsp;
                 <span>Open</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-check</MIcon>
                 <span>@_closeCount</span>&nbsp;
                 <span>Closed</span>

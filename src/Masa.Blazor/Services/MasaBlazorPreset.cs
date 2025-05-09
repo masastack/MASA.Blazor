@@ -1,8 +1,76 @@
 ﻿namespace Masa.Blazor;
 
-public static class MasaBlazorPreset
+internal static class MasaBlazorPreset
 {
-    public static Breakpoint Breakpoint => new()
+    internal static ThemeOptions GetLightTheme() => new()
+    {
+        IsDarkScheme = false,
+        CombinePrefix = ".m-application",
+        Primary = "#4318ff",
+        Secondary = "#424242",
+        Accent = "#82B1FF",
+        Error = "#FF5252",
+        Info = "#2196F3",
+        Success = "#4CAF50",
+        Warning = "#FB8C00",
+        OnPrimary = "#FFFFFF",
+        OnSecondary = "#FFFFFF",
+        OnAccent = "#FFFFFF",
+        OnError = "#FFFFFF",
+        OnInfo = "#FFFFFF",
+        OnSuccess = "#FFFFFF",
+        OnWarning = "#FFFFFF",
+        OnSurface = "#000000",
+        SurfaceDim = "#FFFFFF",
+        Surface = "#FFFFFF",
+        SurfaceBright = "#FFFFFF",
+        SurfaceContainerLowest = "#FFFFFF",
+        SurfaceContainerLow = "#FFFFFF",
+        SurfaceContainer = "#FFFFFF",
+        SurfaceContainerHigh = "#f5f5f5",
+        SurfaceContainerHighest = "#e0e0e0",
+        InverseSurface = "#121212",
+        InverseOnSurface = "#FFFFFF",
+        InversePrimary = "#2196F3",
+        SurfaceVariant = "#424242", // 不是material设计规范的颜色角色
+        OnSurfaceVariant = "#EEEEEE"
+    };
+
+    internal static ThemeOptions GetDarkTheme() => new()
+    {
+        IsDarkScheme = true,
+        CombinePrefix = ".m-application",
+        Primary = "#C5C0FF",
+        Secondary = "#424242",
+        Accent = "#FF4081",
+        Error = "#FF5252",
+        Info = "#2196F3",
+        Success = "#4CAF50",
+        Warning = "#FB8C00",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnAccent = "#000000",
+        OnError = "#FFFFFF",
+        OnInfo = "#FFFFFF",
+        OnSuccess = "#FFFFFF",
+        OnWarning = "#FFFFFF",
+        OnSurface = "#FFFFFF",
+        SurfaceDim = "#121212",
+        Surface = "#121212",
+        SurfaceBright = "#121212",
+        SurfaceContainerLowest = "#111111",
+        SurfaceContainerLow = "#1E1E1E",
+        SurfaceContainer = "#2B2B2B",
+        SurfaceContainerHigh = "#383838",
+        SurfaceContainerHighest = "#454545",
+        InverseSurface = "#FFFFFF",
+        InverseOnSurface = "#000000",
+        InversePrimary = "#1976D2",
+        SurfaceVariant = "#c8c8c8",
+        OnSurfaceVariant = "#000000"
+    };
+
+    internal static Breakpoint GetBreakpoint() => new()
     {
         MobileBreakpoint = 1264,
         ScrollBarWidth = 16,
@@ -15,57 +83,21 @@ public static class MasaBlazorPreset
         }
     };
 
-    public static Icons Icons => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
+    internal static Icons GetIcons() => new(IconSet.MaterialDesignIcons, new MaterialDesignIconsAliases());
 
-    public static Theme Theme => new(false, LightTheme, DarkTheme);
-
-    private static ThemeOptions LightTheme => new()
+    internal static Theme GetTheme() => new(GetLightTheme(), GetDarkTheme());
+    
+    internal static ThemeVariables GetThemeVariables() => new()
     {
-        CombinePrefix = ".m-application",
-        Primary = "#1976D2",
-        OnPrimary = "#FFFFFF",
-        Secondary = "#424242",
-        OnSecondary = "#FFFFFF",
-        Accent = "#82B1FF",
-        OnAccent = "#FFFFFF",
-        Error = "#FF5252",
-        OnError = "#FFFFFF",
-        Info = "#2196F3",
-        OnInfo = "#FFFFFF",
-        Success = "#4CAF50",
-        OnSuccess = "#FFFFFF",
-        Warning = "#FB8C00",
-        OnWarning = "#FFFFFF",
-        Surface = "#FFFFFF",
-        OnSurface = "#000000DE",
-        SurfaceContainer = "#f5f5f5",
-        InverseSurface = "#121212",
-        InverseOnSurface = "#FFFFFF",
-        InversePrimary = "#2196F3"
-    };
-
-    private static ThemeOptions DarkTheme => new()
-    {
-        CombinePrefix = ".m-application",
-        Primary = "#2196F3",
-        OnPrimary = "#000000",
-        Secondary = "#424242",
-        OnSecondary = "#000000",
-        Accent = "#FF4081",
-        OnAccent = "#000000",
-        Error = "#FF5252",
-        OnError = "#FFFFFF",
-        Info = "#2196F3",
-        OnInfo = "#FFFFFF",
-        Success = "#4CAF50",
-        OnSuccess = "#FFFFFF",
-        Warning = "#FB8C00",
-        OnWarning = "#FFFFFF",
-        Surface = "#121212",
-        OnSurface = "#FFFFFF",
-        SurfaceContainer = "#272727",
-        InverseSurface = "#FFFFFF",
-        InverseOnSurface = "#000000DE",
-        InversePrimary = "#1976D2"
+        BorderOpacity = 0.12f,
+        IdleOpacity = 0.04f,
+        HoverOpacity = 0.04f,
+        FocusOpacity = 0.12f,
+        DisabledOpacity = 0.38f,
+        ActivatedOpacity = 0.12f,
+        HighlightOpacity = 0.32f,
+        HighEmphasisOpacity = 0.87f,
+        MediumEmphasisOpacity = 0.6f,
+        LowEmphasisOpacity = 0.38f
     };
 }

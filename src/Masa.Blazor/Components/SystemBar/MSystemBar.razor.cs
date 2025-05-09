@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
+public partial class MSystemBar : IThemeable, ITransitionIf
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -42,14 +42,6 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
 
     [Parameter] public bool If { get; set; } = true;
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark => Dark ? true : (Light ? false : CascadingIsDark);
-
     protected virtual async Task HandleOnClickAsync(MouseEventArgs args)
     {
         if (OnClick.HasDelegate)
@@ -80,21 +72,6 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
             .Watch<bool>(nameof(Window), CallUpdate)
             .Watch<StringNumber>(nameof(Height), CallUpdate);
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
     
     private static Block _block = new("m-system-bar");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -104,7 +81,7 @@ public partial class MSystemBar : MasaComponentBase, IThemeable, ITransitionIf
         yield return _modifierBuilder
             .Add(LightsOut,Absolute,Window)
             .Add("fixed", !Absolute && (App || Fixed))
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .Build();
     }

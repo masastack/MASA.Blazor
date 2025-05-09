@@ -1,8 +1,8 @@
 ﻿@namespace Masa.Blazor
 @inherits MasaComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
-    <CascadingValue Value="IsDark" Name="AppIsDark">
+<CascadingValue Value="IsDark" Name="AppIsDark"> @*TODO: 处理 AppIsDark，不需要了*@
+    <CascadingValue Value="Theme" Name="MasaBlazorCascadingTheme">
         <CascadingValue Value="this" TValue="IDefaultsProvider" IsFixed="true">
             <div class="@GetClass()"
                  style="@GetStyle()"

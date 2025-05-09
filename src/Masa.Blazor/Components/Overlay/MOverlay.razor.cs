@@ -1,5 +1,4 @@
-﻿using Masa.Blazor.Mixins;
-using Masa.Blazor.Mixins.ScrollStrategy;
+﻿using Masa.Blazor.Mixins.ScrollStrategy;
 using Element = BemIt.Element;
 
 namespace Masa.Blazor;
@@ -35,30 +34,6 @@ public partial class MOverlay : IThemeable
 
     [Parameter] [MasaApiParameter(5)] public int ZIndex { get; set; } = 5;
 
-    [Parameter] [MasaApiParameter(true)] public bool Dark { get; set; } = true;
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private static readonly Block _block = new("m-overlay");
     private readonly ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private readonly ModifierBuilder _scrimModifierBuilder = _block.Element("scrim").CreateModifierBuilder();
@@ -91,9 +66,6 @@ public partial class MOverlay : IThemeable
 
     private bool _isActive;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -107,14 +79,6 @@ public partial class MOverlay : IThemeable
         {
             _isActive = Value;
         }
-
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -122,7 +86,7 @@ public partial class MOverlay : IThemeable
         yield return _modifierBuilder.Add("active", Value)
             .Add("absolute", Absolute || Contained)
             .Add(Contained)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

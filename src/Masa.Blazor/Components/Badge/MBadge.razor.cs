@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MBadge : MasaComponentBase
+public partial class MBadge : ThemeComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -44,14 +44,6 @@ public partial class MBadge : MasaComponentBase
 
     [Parameter] public bool Left { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark => Dark || (!Light && CascadingIsDark);
-
     private int Offset => OverLap ? (Dot ? 8 : 12) : (Dot ? 2 : 4);
 
     private const string AUTO = "auto";
@@ -77,21 +69,6 @@ public partial class MBadge : MasaComponentBase
 
     private bool IsRtl => MasaBlazor.RTL;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-    }
-
     private static Block _block = new("m-badge");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private static Element _badgeElement = _block.Element("badge");
@@ -103,7 +80,7 @@ public partial class MBadge : MasaComponentBase
             .Add(Avatar, Bordered, Bottom, Dot, Inline, Left, Tile)
             .Add("icon", !string.IsNullOrWhiteSpace(Icon))
             .Add("overlap", OverLap)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 }

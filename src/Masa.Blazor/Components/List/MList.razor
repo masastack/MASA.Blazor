@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <CascadingValue Value="this" IsFixed>
         <CascadingValue Value="true" Name="IsInList">
             <IfTransitionElement Tag="@Tag"

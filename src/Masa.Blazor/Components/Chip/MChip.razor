@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
 @inherits MGroupItem<Masa.Blazor.Components.ItemGroup.MItemGroupBase>
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <MElement Tag="@Tag"
               Class="@GetClass()"
               Style="@GetStyle()"

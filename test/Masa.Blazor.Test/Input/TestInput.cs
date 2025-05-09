@@ -29,7 +29,5 @@ namespace Masa.Blazor.Test.Input
 
         [Parameter]
         public bool? MockIsDark { get; set; }
-
-        public override bool IsDark => MockIsDark ?? base.IsDark;
     }
 }

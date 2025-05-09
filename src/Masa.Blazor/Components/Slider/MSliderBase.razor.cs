@@ -400,21 +400,6 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         return IsFocused;
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
-
     protected static readonly Block Block = new("m-slider");
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
     private static readonly Block _inputBlock = new("m-input__slider");

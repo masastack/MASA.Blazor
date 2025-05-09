@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInput, IInput
+public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInput, IInput
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
@@ -92,30 +92,6 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     [Parameter] public EventCallback<MouseEventArgs> OnPrependClick { get; set; }
 
     [Parameter] public EventCallback<MouseEventArgs> OnAppendClick { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public virtual bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     protected bool HasMouseDown { get; set; }
 
@@ -300,7 +276,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
             .Add("is-loading", Loading != null && Loading != false)
             .Add(IsReadonly)
             .Add(Dense)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddTextColor(ValidationState)
             .Build();
     }

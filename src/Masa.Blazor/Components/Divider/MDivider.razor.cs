@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MDivider : MasaComponentBase
+public partial class MDivider : ThemeComponentBase
 {
     [Parameter] public bool Inset { get; set; }
 
@@ -22,30 +22,6 @@ public partial class MDivider : MasaComponentBase
     [MasaApiParameter(ReleasedOn = "v1.6.0")]
     public int Length { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private bool HasContent => ChildContent is not null;
 
     private bool IsCenter => HasContent && (!Left && !Right || Center);
@@ -64,21 +40,6 @@ public partial class MDivider : MasaComponentBase
     }
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
     private static Block _block = new("m-divider");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -123,7 +84,7 @@ public partial class MDivider : MasaComponentBase
         return _modifierBuilder
             .Add(Inset, Vertical)
             .AddClass(Class, !HasContent)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .ToString();
     }
 

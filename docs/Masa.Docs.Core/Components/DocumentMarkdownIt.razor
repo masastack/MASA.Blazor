@@ -15,11 +15,13 @@
 
 @code {
 
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
     [CascadingParameter]
     private MScrollToTarget? ScrollToTargetComp { get; set; }
     
-    [CascadingParameter(Name = "IsDark")]
-    private bool IsDark { get; set; }
+    [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
+    private string? CascadingTheme { get; set; }
 
     [Parameter, EditorRequired]
     public string? Source { get; set; }
@@ -39,7 +41,7 @@
 
     private async Task OnAfterRendered()
     {
-        await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", IsDark);
+        await JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", CascadingTheme);
 
         ScrollToTargetComp?.RetryObserveTargets();
     }

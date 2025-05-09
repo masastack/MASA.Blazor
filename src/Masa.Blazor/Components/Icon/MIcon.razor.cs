@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MIcon : MasaComponentBase
+    public partial class MIcon : ThemeComponentBase
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -29,30 +29,6 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter("i")] public string? Tag { get; set; } = "i";
 
         [Parameter] public Dictionary<string, object>? SvgAttributes { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         [Parameter] public string? Color { get; set; }
 
@@ -210,9 +186,6 @@ namespace Masa.Blazor
             return (defaultAliases.ContentFormatter?.Invoke(icon), defaultAliases.CssFormatter?.Invoke(icon));
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
@@ -245,13 +218,6 @@ namespace Masa.Blazor
         {
             base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-
-#endif
             if (OnClick.HasDelegate)
             {
                 Tag = "button";
@@ -307,7 +273,7 @@ namespace Masa.Blazor
                 .Add(Left)
                 .Add(Disabled)
                 .Add(Right)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddTextColor(Color)
                 .AddClass(_iconCss, ComputedIcon is { IsSvg: false })
                 .Build();

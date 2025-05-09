@@ -3,7 +3,7 @@ using Util.Reflection.Expressions.Abstractions;
 
 namespace Masa.Blazor.Components.ItemGroup;
 
-public abstract class MItemGroupBase : MasaComponentBase
+public abstract class MItemGroupBase : ThemeComponentBase
 {
     protected MItemGroupBase(GroupType groupType)
     {

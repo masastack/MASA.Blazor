@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor.Presets
 {
-    public partial class PEnqueuedSnackbars : MasaComponentBase
+    public partial class PEnqueuedSnackbars
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -39,15 +39,6 @@ namespace Masa.Blazor.Presets
 
         [Parameter]
         public bool Text { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-        
-        [CascadingParameter(Name = "IsDark")]
-        public bool CascadingIsDark { get; set; }
         
         private const string ROOT_CSS = "m-enqueued-snackbars";
         private static Block _block = new(ROOT_CSS);
@@ -58,24 +49,6 @@ namespace Masa.Blazor.Presets
 
         private readonly List<SnackbarOptions> _stack = new();
         private readonly SemaphoreSlim _semaphore = new(1, 1);
-
-        private bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         private bool IsPositionBottom => Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
 

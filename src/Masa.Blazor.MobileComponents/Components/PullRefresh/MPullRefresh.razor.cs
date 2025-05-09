@@ -5,8 +5,6 @@ namespace Masa.Blazor;
 
 public partial class MPullRefresh
 {
-    [CascadingParameter(Name = "IsDark")] private bool CascadingIsDark { get; set; }
-
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public bool Disabled { get; set; }
@@ -68,7 +66,7 @@ public partial class MPullRefresh
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(_pullRefreshStatus, "status").AddTheme(CascadingIsDark, false).Build();
+        yield return _modifierBuilder.Add(_pullRefreshStatus, "status").AddTheme(ComputedTheme).Build();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

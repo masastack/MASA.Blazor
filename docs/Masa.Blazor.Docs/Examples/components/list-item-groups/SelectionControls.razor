@@ -9,11 +9,11 @@
             {
                 if (item == "")
                 {
-                    <MDivider @key="@($"divider-{i}")"></MDivider>
+                    <MDivider></MDivider>
                 }
                 else
                 {
-                    <MListItem @key="@($"item-{i}")" Value="item" ActiveClass="deep-purple--text text--accent-4">
+                    <MListItem Value="item" ActiveClass="deep-purple--text text--accent-4">
                         <ItemContent>
                             <MListItemContent>
                                 <MListItemTitle>@item</MListItemTitle>

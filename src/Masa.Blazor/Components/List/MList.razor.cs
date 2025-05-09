@@ -3,10 +3,8 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable, IThemeable
+public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutable, IThemeable
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     // TODO: add cascading value in Menu
     [CascadingParameter(Name = "IsInMenu")]
     public bool IsInMenu { get; set; }
@@ -22,12 +20,6 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
     [Parameter] public bool Routable { get; set; }
 
     [Parameter] [MasaApiParameter("div")] public virtual string Tag { get; set; } = "div";
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     [Parameter] [MasaApiParameter(true)] public bool If { get; set; } = true;
 
@@ -133,27 +125,6 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
     [MasaApiParameter(ReleasedOn = "v1.9.0")]
     public bool Slim { get; set; }
 
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected List<MListGroup> Groups { get; } = new();
 
     protected override void OnInitialized()
@@ -174,18 +145,6 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
         Groups.Remove(listGroup);
     }
 
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     private static Block _block = new("m-list");
     private static Block _sheetBlock = new("m-sheet");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -196,7 +155,7 @@ public partial class MList : MasaComponentBase, ITransitionIf, IAncestorRoutable
         yield return _sheetModifierBuilder
             .Add(Outlined)
             .Add(Shaped)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddElevation(Elevation)
             .Build();
         yield return _modifierBuilder

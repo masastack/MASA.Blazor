@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MBaiduMap : MasaComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks
+    public partial class MBaiduMap : ThemeComponentBase, IThemeable, IMap<BaiduOverlayBase>, IBaiduMapJsCallbacks
     {
         [Inject]
         public BaiduMapJSModule Module { get; set; } = null!;
@@ -92,37 +92,6 @@
         public string? DarkThemeId { get; set; }
 
         [Parameter]
-        public bool Dark
-        {
-            get => GetValue(false);
-            set => SetValue(value);
-        }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")]
-        public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
-
-        [Parameter]
         public EventCallback<BaiduMapEventArgs> OnClick { get; set; }
 
         [Parameter]
@@ -195,6 +164,8 @@
         public EventCallback<GeoPoint> CenterChanged { get; set; }
 
         private CancellationTokenSource _movingCts = new();
+        private bool _prevDark;
+        private bool _firstRendered;
 
         public async ValueTask HandleOnMapTypeChanged()
         {
@@ -256,26 +227,21 @@
             { BaiduMapType.Satellite, "B_SATELLITE_MAP" },
         };
 
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-        private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-            if (MasaBlazor.IsSsr && !IndependentTheme)
+            if (_firstRendered && _prevDark != Dark)
             {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
+                _prevDark = Dark;
+                _ = _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = Dark ? DarkThemeId : string.Empty });
             }
         }
-#endif
 
         protected override IEnumerable<string> BuildComponentClass()
         {
             yield return "m-baidumap";
-            yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+            yield return CssClassUtils.GetTheme(ComputedTheme);
         }
 
         protected override IEnumerable<string?> BuildComponentStyle()
@@ -289,6 +255,7 @@
             base.OnInitialized();
 
             Id ??= $"map-{Guid.NewGuid():N}";
+            _prevDark = Dark;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -311,6 +278,8 @@
                 }, this);
 
                 StateHasChanged();
+
+                _firstRendered = true;
             }
         }
 
@@ -361,9 +330,6 @@
 
             watcher.Watch<bool>(nameof(TrafficOn), async (val) =>
                 await _baiduMap.TryInvokeVoidAsync(val ? "setTrafficOn" : "setTrafficOff"));
-
-            watcher.Watch<bool>(nameof(Dark), async (val) =>
-                await _baiduMap.TryInvokeVoidAsync("setMapStyleV2", new { StyleId = val ? DarkThemeId : string.Empty }));
 
             watcher.Watch<GeoPoint>(nameof(Center), async (val) =>
             {

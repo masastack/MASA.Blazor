@@ -1,10 +1,10 @@
 ﻿@namespace Masa.Blazor
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
 @if (_booted || Eager)
 {
-    <CascadingValue Value="IsDark" Name="IsDark">
+    <CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
         <div class="@GetClass()"
              style="@GetStyle()"
              id="@Id"

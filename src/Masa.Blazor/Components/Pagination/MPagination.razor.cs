@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MPagination : MasaComponentBase
+public partial class MPagination
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -41,12 +41,6 @@ public partial class MPagination : MasaComponentBase
 
     [Parameter] public string? Color { get; set; } = "primary";
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
     [Parameter, MasaApiParameter(false, "v1.7.0")]
     public bool MiniVariant
     {
@@ -69,24 +63,6 @@ public partial class MPagination : MasaComponentBase
 
     private bool _internalMiniVariant;
 
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private static Block _block = new("m-pagination");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _navigationModifierBuilder = _block.Element("navigation").CreateModifierBuilder();
@@ -98,19 +74,9 @@ public partial class MPagination : MasaComponentBase
 
     protected int MaxButtons { get; set; }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         if (IsAuto is false)
         {

@@ -45,20 +45,6 @@ namespace Masa.Blazor.Test.Input
         }
 
         [TestMethod]
-        public void RenderInputNoWithWithDark()
-        {
-            //Act
-            var cut = RenderAndGetRootElement(props =>
-            {
-                props.Add(input => input.Dark, false);
-            });
-            var hasDarkClass = cut.ClassList.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
         public void RenderInputWithWithLight()
         {
             //Act
@@ -96,20 +82,6 @@ namespace Masa.Blazor.Test.Input
             var cut = RenderComponent<TestInput>();
 
             // Assert
-            Assert.AreEqual("primary", cut.Instance.ComputedColor);
-        }
-
-        [TestMethod]
-        public void RenderIsDarkComputedColorShouldBeWhite()
-        {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
-            {
-                props.Add(r => r.MockIsDark, true);
-            });
-
-            // Assert
-            Assert.IsTrue(cut.Instance.IsDark);
             Assert.AreEqual("primary", cut.Instance.ComputedColor);
         }
 

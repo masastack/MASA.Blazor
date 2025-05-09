@@ -88,19 +88,45 @@
 
         public void ToggleTheme()
         {
-            Theme.Dark = !Theme.Dark;
-
+            Theme.DefaultTheme = Theme.DefaultTheme == "dark" ? "light" : "dark";
+            Theme.Dark = Theme.DefaultTheme == "dark";
             OnThemeChange?.Invoke(Theme);
         }
 
         public void SetTheme(bool dark)
         {
-            if (Theme.Dark == dark)
+            if (Theme.DefaultTheme == (dark ? "dark" : "light"))
             {
                 return;
             }
 
             ToggleTheme();
+        }
+
+        public void SetTheme(string name)
+        {
+            if (Theme.DefaultTheme == name)
+            {
+                return;
+            }
+
+            if (Theme.Themes.Exists(name))
+            {
+                Theme.DefaultTheme = name;
+                Theme.Dark = Theme.DefaultTheme == "dark";
+                OnThemeChange?.Invoke(Theme);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Theme '{name}' does not exist.");
+            }
+        }
+
+        // TODO: 动态更新主题
+        public void UpdateTheme(Action<Theme> themeConfig)
+        {
+            themeConfig.Invoke(Theme);
+            OnThemeChange?.Invoke(Theme);
         }
 
         /// <summary>

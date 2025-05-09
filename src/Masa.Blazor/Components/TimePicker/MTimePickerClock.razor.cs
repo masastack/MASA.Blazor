@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.TimePicker;
 
-public partial class MTimePickerClock : MasaComponentBase
+public partial class MTimePickerClock
 {
     [Parameter]
     public int? Value
@@ -36,31 +36,6 @@ public partial class MTimePickerClock : MasaComponentBase
     [Parameter] public Func<int, string>? Format { get; set; }
 
     [Parameter] public SelectingTime Selecting { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
 
     protected int DisplayedValue => Value ?? Min;
 
@@ -288,21 +263,6 @@ public partial class MTimePickerClock : MasaComponentBase
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
-
     private static Block _block = new("m-time-picker-clock");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _handModifierBuilder = _block.Element("hand").CreateModifierBuilder();
@@ -311,7 +271,7 @@ public partial class MTimePickerClock : MasaComponentBase
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add("indeterminate", Value == null)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

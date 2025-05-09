@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MProgressLinear : MasaComponentBase
+    public partial class MProgressLinear
     {
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -48,30 +48,6 @@ namespace Masa.Blazor
 
         [Parameter] public double Value { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
-
         private bool IsReversed => MasaBlazor.RTL != Reverse;
 
         protected bool IsVisible { get; set; } = true;
@@ -113,19 +89,10 @@ namespace Masa.Blazor
 
         protected int NormalizedBuffer => NormalizeValue(BufferValue);
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
             if (string.IsNullOrWhiteSpace(Color))
             {
                 Color = "primary";
@@ -147,7 +114,7 @@ namespace Masa.Blazor
                 .Add(Rounded)
                 .Add(Striped)
                 .Add("visible", IsVisible)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 

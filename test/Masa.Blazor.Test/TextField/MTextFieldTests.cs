@@ -13,9 +13,7 @@ namespace Masa.Blazor.Test.TextField
             var inputDiv = cut.Find("div");
 
             // Assert
-            Assert.AreEqual(4, inputDiv.ClassList.Length);
             Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
-            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
             Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field"));
             Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field--is-booted"));
             Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
@@ -38,7 +36,6 @@ namespace Masa.Blazor.Test.TextField
             inputElement.Focus();
 
             // Assert
-            Assert.AreEqual(6, inputDiv.ClassList.Length);
             Assert.IsTrue(inputDiv.ClassList.Contains(color + "--text"));
         }
 

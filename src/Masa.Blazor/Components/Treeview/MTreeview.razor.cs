@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MTreeview<TItem, TKey> : MasaComponentBase, IThemeable where TKey : notnull
+    public partial class MTreeview<TItem, TKey> : IThemeable where TKey : notnull
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -70,10 +70,6 @@ namespace Masa.Blazor
 
         [Parameter] public EventCallback<List<TItem>> OnOpenUpdate { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
         [Parameter] public bool Hoverable { get; set; }
 
         [Parameter] public bool Dense { get; set; }
@@ -85,8 +81,8 @@ namespace Masa.Blazor
         [Parameter] public string? ActiveClass { get; set; }
 
         [Parameter]
-        [MasaApiParameter("accent")]
-        public string? SelectedColor { get; set; } = "accent";
+        [MasaApiParameter("primary")]
+        public string? SelectedColor { get; set; } = "primary";
 
         [Parameter]
         [MasaApiParameter("primary")]
@@ -110,8 +106,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool OpenOnClick { get; set; }
 
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         private List<TItem>? _oldItems;
         private string? _oldItemsKeys;
         private List<TKey> _oldValue = new();
@@ -119,24 +113,6 @@ namespace Masa.Blazor
         private List<TKey> _oldOpen = new();
         private string? _prevSearch;
         private CancellationTokenSource? _searchUpdateCts;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         public List<TItem> ComputedItems
         {
@@ -173,9 +149,6 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
@@ -186,18 +159,6 @@ namespace Masa.Blazor
             ItemChildren.ThrowIfNull(ComponentName);
         }
 
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
         private static Block _block = new("m-treeview");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -206,7 +167,7 @@ namespace Masa.Blazor
             yield return _modifierBuilder
                 .Add(Hoverable)
                 .Add(Dense)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 

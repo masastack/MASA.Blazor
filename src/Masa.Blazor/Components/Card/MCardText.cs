@@ -2,7 +2,8 @@
 
 public class MCardText : Container
 {
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+    [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
+    public string CascadingTheme { get; set; } = null!;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
@@ -10,7 +11,7 @@ public class MCardText : Container
             new[]
             {
                 "m-card__text",
-                CssClassUtils.GetTheme(CascadingIsDark, false)
+                CssClassUtils.GetTheme(CascadingTheme)
             }
         );
     }

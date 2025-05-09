@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MPicker : MasaComponentBase
+public partial class MPicker
 {
     [Parameter] public bool Flat { get; set; }
 
@@ -27,36 +27,11 @@ public partial class MPicker : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
     private static Block _block = new("m-picker");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _titleModifierBuilder = _block.Element("title").CreateModifierBuilder();
     private ModifierBuilder _bodyModifierBuilder = _block.Element("body").CreateModifierBuilder();
     private ModifierBuilder _actionsModifierBuilder = _block.Element("actions").CreateModifierBuilder();
-    
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     public string ComputedTitleColor
     {
@@ -67,27 +42,10 @@ public partial class MPicker : MasaComponentBase
         }
     }
 
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder.Add(Flat, Landscape, FullWidth)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddElevation(Elevation)
             .AddClass("m-card")
             .Build();

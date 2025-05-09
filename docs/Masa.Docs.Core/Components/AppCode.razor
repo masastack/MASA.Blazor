@@ -6,8 +6,8 @@
     <div id="@Id" Class="app-code @Class" @attributes="@context.Attrs">
         @if (FileNameExists)
         {
-            <MLazy MinHeight="48">
-                <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Dark Color="#47464E">
+            <MLazy MinHeight="40">
+                <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Height="40">
                     <MIcon Dense Class="mr-1">mdi-file-tree</MIcon>
                     @FileName
                 </MToolbar>
@@ -30,15 +30,14 @@
         else
         {
             <FadeTransition>
-                <AppCopyButton Show="@context.Hover" Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
+                <AppCopyButton Show="@context.Hover" Content="@Code"
+                               Class="@($"mr-n2 mt-n{(FileNameExists ? "3" : "2")}")"></AppCopyButton>
             </FadeTransition>
         }
     </div>
 </MHover>
 
 @code {
-
-    [CascadingParameter(Name = "IsDark")] public bool IsDark { get; set; }
 
     [Parameter] [EditorRequired] public string? Code { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public partial class MAlert : MasaComponentBase, IThemeable
+public partial class MAlert : ThemeComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -68,30 +68,6 @@ public partial class MAlert : MasaComponentBase, IThemeable
 
     [Parameter] public StringNumber? Width { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private string ComputedType => Type != AlertTypes.None ? Type.ToString().ToLower() : "";
 
     private string ComputedColor => Color ?? ComputedType;
@@ -131,9 +107,6 @@ public partial class MAlert : MasaComponentBase, IThemeable
 
     private bool IsDarkTheme => LogicalDark || IsDark;
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     private bool HasTitle => !string.IsNullOrWhiteSpace(Title) || TitleContent is not null;
 
     private RenderFragment? IconContent { get; set; }
@@ -143,13 +116,6 @@ public partial class MAlert : MasaComponentBase, IThemeable
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         (IsShowIcon, IconContent) = ComputedIcon();
     }
@@ -176,7 +142,7 @@ public partial class MAlert : MasaComponentBase, IThemeable
             .AddColor(ComputedColor, HasText, !ColoredBorder)
             .AddElevation(Elevation)
             .AddRounded(Rounded, Tile)
-            .AddTheme(IsDarkTheme, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

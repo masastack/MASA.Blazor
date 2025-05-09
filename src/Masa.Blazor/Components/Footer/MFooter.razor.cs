@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MFooter : MasaComponentBase, IThemeable
+public partial class MFooter : ThemeComponentBase, IThemeable
 {
     private readonly string[] _applicationProperties =
     {
@@ -59,30 +59,6 @@ public partial class MFooter : MasaComponentBase, IThemeable
     [Parameter] public bool Tile { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     private StringNumber? ComputedBottom => ComputeBottom();
 
@@ -145,21 +121,6 @@ public partial class MFooter : MasaComponentBase, IThemeable
             InvokeStateHasChanged();
         }
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
     
     private static Block _block = new("m-footer");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -168,7 +129,7 @@ public partial class MFooter : MasaComponentBase, IThemeable
     {
         yield return _modifierBuilder.Add(Absolute, Padless, Inset)
             .Add("fixed", !Absolute && (App || Fixed))
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .AddElevation(Elevation)
             .AddRounded(Rounded, Tile)

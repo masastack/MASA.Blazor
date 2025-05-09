@@ -1,21 +1,26 @@
 ﻿@inject MasaBlazor MasaBlazor
 
-<MSwitch Value="_isDark" TValue="bool" ValueChanged="IsDarkChanged" Label="@(_isDark ? "Dark" : "Light")" />
+<MRadioGroup @bind-Value="theme" @bind-Value:after="OnChange">
+    <MRadio Value="@("light")" Label="Light"></MRadio>
+    <MRadio Value="@("dark")" Label="Dark"></MRadio>
+    <MRadio Value="@("greenery")" Label="Greenery"></MRadio>
+    <MRadio Value="@("camel")" Label="Camel"></MRadio>
+</MRadioGroup>
 
 @code {
 
-    bool _isDark;
+    string theme;
 
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        _isDark = MasaBlazor?.Theme?.Dark ?? false;
-        return base.OnInitializedAsync();
+        base.OnInitialized();
+        
+        theme = MasaBlazor.Theme.DefaultTheme;
     }
 
-    private void IsDarkChanged(bool isDark)
+    private void OnChange()
     {
-        _isDark = isDark;
-        MasaBlazor.ToggleTheme();
+        MasaBlazor.SetTheme(theme);
     }
 
 }

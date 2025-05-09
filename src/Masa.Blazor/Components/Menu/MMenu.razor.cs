@@ -14,8 +14,6 @@ namespace Masa.Blazor
         [CascadingParameter(Name = "AppIsDark")]
         public bool AppIsDark { get; set; }
 
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         [Parameter] public bool Auto { get; set; }
 
         [Parameter] [MasaApiParameter(true)] public bool CloseOnClick { get; set; } = true;
@@ -48,10 +46,6 @@ namespace Masa.Blazor
 
         [Parameter] public string? Transition { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
         [Parameter]
         [MasaApiParameter(ReleasedOn = "v1.8.0")]
         public ScrollStrategy ScrollStrategy { get; set; } = ScrollStrategy.Reposition;
@@ -66,29 +60,6 @@ namespace Masa.Blazor
         private bool _isPopupEventsRegistered;
         private ScrollStrategyResult? _scrollStrategyResult;
         private DotNetObjectReference<MMenu>? _dotNetObjectReference;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                if (CascadingIsDark)
-                {
-                    return true;
-                }
-
-                return AppIsDark;
-            }
-        }
 
         private StringNumber? CalculatedLeft
         {
@@ -166,21 +137,12 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
             Transition ??= "m-menu-transition";
             Origin ??= "top left";
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         }
 
         protected override void OnAfterRender(bool firstRender)

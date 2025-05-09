@@ -58,27 +58,24 @@ public partial class BaseLayout
     {
         var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
 
-        switch (themeStr)
+        if (themeStr == "system")
         {
-            case "light" when MasaBlazor.Theme.Dark:
-            case "dark" when !MasaBlazor.Theme.Dark:
-                MasaBlazor.ToggleTheme();
-                break;
-            case "system" or null:
-                try
+            try
+            {
+                var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
+                if (MasaBlazor.Theme.DefaultTheme != (darkPrefer ? "dark" : "light"))
                 {
-                    var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-                    if (darkPrefer != MasaBlazor.Theme.Dark)
-                    {
-                        MasaBlazor.ToggleTheme();
-                    }
+                    MasaBlazor.ToggleTheme();
                 }
-                catch (JSException)
-                {
-                    // ignored
-                }
-
-                break;
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(themeStr))
+        {
+            MasaBlazor.SetTheme(themeStr);
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
 @inherits Masa.Blazor.Components.ItemGroup.MItemGroupBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <CascadingValue Value="this" IsFixed>
         <div class="@GetClass()"
              style="@GetStyle()"

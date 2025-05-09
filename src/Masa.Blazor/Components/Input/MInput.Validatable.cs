@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Masa.Blazor.Components.Form;
 using Masa.Blazor.Components.Input;
@@ -287,13 +286,6 @@ public partial class MInput<TValue> : IInputJsCallbacks, IValidatable
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
 
         SubscribeValidationStateChanged();
 

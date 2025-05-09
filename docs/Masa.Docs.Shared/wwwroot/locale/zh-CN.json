@@ -52,7 +52,8 @@
     "new": "新增",
     "update": "更新",
     "breaking-change": "破坏更新",
-    "deprecated": "弃用"
+    "deprecated": "弃用",
+    "labs": "实验"
   },
   "tag": {
     "preset": "预置",
@@ -253,6 +254,7 @@
   "data-tables": "Data tables（数据表格）",
   "simple-tables": "Simple tables（简单表格）",
   "tabs": "Tabs（选项卡）",
+  "theme-providers": "Theme providers（主题提供程序）",
   "timelines": "Timelines（时间轴）",
   "toggles": "Toggles（切换）",
   "enqueued-snackbars": "Enqueued snackbars（消息队列）",
@@ -558,6 +560,7 @@
     "data-tables": "DataTables 组件用于显示表格数据",
     "simple-tables": "SimpleTables 组件是 table 元素的简单封装组件",
     "tabs": "Tabs 组件用于将内容隐藏在可选择的项目后面",
+    "theme-providers": "允许您以与默认主题不同的主题来设计应用程序的一部分",
     "timelines": "Timelines 对于显示时间顺序信息非常有用",
     "toast": "该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息",
     "tooltips": "当用户悬停在元素上时， Tooltips 组件可用于传递信息",

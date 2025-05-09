@@ -59,8 +59,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool Ripple { get; set; } = true;
 
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         [Parameter] public bool Block { get; set; }
 
         [Parameter] public string? Color { get; set; }
@@ -86,10 +84,6 @@ namespace Masa.Blazor
         [Parameter] public bool OnClickStopPropagation { get; set; }
 
         [Parameter] public bool OnClickPreventDefault { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
 
         [Parameter] public bool? Show { get; set; }
 
@@ -119,24 +113,6 @@ namespace Masa.Blazor
 
         [MemberNotNullWhen(true, nameof(IconName))]
         protected bool HasBuiltInIcon => !string.IsNullOrWhiteSpace(IconName);
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         private bool IsIconBtn => Icon || HasBuiltInIcon;
 
@@ -177,7 +153,7 @@ namespace Masa.Blazor
                 .Add("active", InternalIsActive)
                 .AddClass(ComputedActiveClass, InternalIsActive)
                 .AddClass(CssClassUtils.GetSize(XSmall, Small, Large, XLarge))
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddBackgroundColor(Color, HasBackground)
                 .AddTextColor(Color, !HasBackground)
                 .AddElevation(Elevation)
@@ -204,19 +180,9 @@ namespace Masa.Blazor
             HasLoader = true;
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
 
             Attributes["ripple"] = Ripple;
 

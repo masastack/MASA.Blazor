@@ -2,40 +2,13 @@
 
 namespace Masa.Blazor
 {
-    public partial class MSheet : MasaComponentBase
+    public partial class MSheet
     {
-#if NET8_0_OR_GREATER
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-#endif
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         [Parameter] [MasaApiParameter("div")] public virtual string Tag { get; set; } = "div";
 
         [Parameter] public bool? Show { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         [Parameter] public bool Outlined { get; set; }
 
@@ -61,21 +34,6 @@ namespace Masa.Blazor
 
         [Parameter] public StringNumber? MinHeight { get; set; }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-        }
-
         private static Block _block = new("m-sheet");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -83,7 +41,8 @@ namespace Masa.Blazor
         {
             yield return _modifierBuilder
                 .Add(Outlined, Shaped)
-                .AddTheme(IsDark, IndependentTheme).AddElevation(Elevation)
+                .AddTheme(ComputedTheme)
+                .AddElevation(Elevation)
                 .AddRounded(Rounded, Tile)
                 .AddBackgroundColor(Color)
                 .Build();

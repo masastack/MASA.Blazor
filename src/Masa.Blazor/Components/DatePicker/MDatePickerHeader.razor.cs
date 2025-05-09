@@ -2,13 +2,13 @@
 
 namespace Masa.Blazor.Components.DatePicker;
 
-public partial class MDatePickerHeader : MasaComponentBase
+public partial class MDatePickerHeader : ThemeComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter] public bool Disabled { get; set; }
 
-    [Parameter] public string? Color { get; set; } = "accent";
+    [Parameter] public string? Color { get; set; }
 
     [Parameter] public DateOnly? Min { get; set; }
 
@@ -38,30 +38,6 @@ public partial class MDatePickerHeader : MasaComponentBase
     [Parameter] public DatePickerType ActivePicker { get; set; }
 
     [Parameter] public CultureInfo Locale { get; set; } = null!;
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     public bool RTL => MasaBlazor.RTL;
 
@@ -115,27 +91,12 @@ public partial class MDatePickerHeader : MasaComponentBase
             .Watch<DateOnly>(nameof(Value), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     private static Block _block = new("m-date-picker-header");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private ModifierBuilder _valueModifierBuilder = _block.Element("value").CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(ComputedTheme).Build();
     }
 }

@@ -241,6 +241,10 @@
         ]
       },
       "tabs",
+      {
+        "title": "theme-providers",
+        "state": "labs"
+      },
       "timelines",
       "tooltips",
       {
