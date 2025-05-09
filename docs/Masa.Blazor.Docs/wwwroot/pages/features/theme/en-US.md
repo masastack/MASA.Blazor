@@ -35,6 +35,7 @@ services.AddMasaBlazor(options =>
         theme.Themes.Light.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
 
         theme.Themes.Dark.Primary = "#C5C0FF";
+        theme.Themes.Dark.OnPrimary = "#000000";
         theme.Themes.Dark.UserDefined["basil"] = new ColorPairing("#FFFBE6", "#356859");
         
         // example: Modify the opacity of the outline variant 
