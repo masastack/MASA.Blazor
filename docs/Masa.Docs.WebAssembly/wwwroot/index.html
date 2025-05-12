@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="keywords" content="Masa.Blazor,Masa Blazor,Blazor,Blazor组件库,dotnet,Material Design,数闪,组件库,webassembly,wasm" />
-    <meta name="description" content="遵循 Material Design 设计规范的 Blazor 组件库。Provide standard blazor component library based on the interaction ability of material design" />
-    <title>MASA Blazor</title>
+    <meta name="keywords" content="Masa文档, Masa Stack, Masa Framework, Masa Blazor, Masa.Blazor, Blazor, Blazor Component, Blazor 组件库, Material Design, 数闪" />
+    <title>MASA Docs</title>
     <base href="/" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_512">
@@ -72,6 +71,48 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://docs.masastack.com",
+            "name": "MASA Docs",
+            "alternateName": "MASA Stack, MASA Framework, MASA Blazor",
+            "description": "MASA Docs is a documentation site for MASA Stack, MASA Framework, and MASA Blazor."
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "MASA 文档",
+            "url": "https://docs.masastack.com",
+            "description": "MASA 文档提供了关于 MASA Stack、MASA Framework 和 MASA Blazor 的详细信息和指南。",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "MASA Stack",
+                        "item": "https://docs.masastack.com/stack/masa-stack-1.0/introduce"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "MASA Framework",
+                        "item": "https://docs.masastack.com/framework/concepts/overview"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "MASA Blazor",
+                        "item": "https://docs.masastack.com/blazor/introduction/why-masa-blazor"
+                    }
+                ]
+            }
+        }
+    </script>
     <script>
         const dark = localStorage.getItem("masablazor@theme");
         if (((!dark || dark === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches) || dark === "dark") {
