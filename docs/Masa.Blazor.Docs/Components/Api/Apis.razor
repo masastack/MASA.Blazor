@@ -9,7 +9,7 @@
                     ValueChanged="@(v => ValueChanged.InvokeAsync(v?.ToString()))"
                     Column
                     Mandatory
-                    ActiveClass="primary primary--text">
+                    ActiveClass="primary--text">
             @foreach (var key in Data.Keys)
             {
                 <MChip Value="@key" Outlined Filter>@key</MChip>
