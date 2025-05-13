@@ -14,6 +14,8 @@ public partial class PPageStackItem : MasaComponentBase
 
     private TouchJSObjectResult? _touchJSObjectResult;
 
+    private string Transition => Data.DisableTransition ? string.Empty : "dialog-right-transition";
+
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
     internal RenderFragment<Dictionary<string, object?>>? ImageContent { get; set; }
