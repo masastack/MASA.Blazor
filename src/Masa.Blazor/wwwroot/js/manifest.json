@@ -4,7 +4,7 @@
   "components/overlay/scroll-strategy.js": "components/overlay/scroll-strategy-dc362cab.js",
   "components/page-stack/index.js": "components/page-stack/index-c7271ebd.js",
   "components/page-stack/touch.js": "components/page-stack/touch-64592f9e.js",
-  "components/scroll-to-target/index.js": "components/scroll-to-target/index-0c459122.js",
+  "components/scroll-to-target/index.js": "components/scroll-to-target/index-d22e7344.js",
   "components/transition/index.js": "components/transition/index-339f8848.js",
   "components/window/touch.js": "components/window/touch-f601a168.js",
   "mixins/activatable/index.js": "mixins/activatable/index-82cb7376.js",

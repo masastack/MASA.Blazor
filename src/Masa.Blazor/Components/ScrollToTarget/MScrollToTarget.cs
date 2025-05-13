@@ -50,12 +50,11 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
 
     [Parameter] public bool DisableIntersectAfterTriggering { get; set; }
 
-    private bool _task;
-
     private TargetContext _targetContext = new();
     private List<string> _activeStack = new();
     private bool _hasRendered;
     private List<Action>? _tasks;
+    private string? lastTarget;
 
     private DotNetObjectReference<ScrollToTargetJSInteropHandle>? _jsInteropHandle;
     private ScrollToTargetJSObjectReference? _scrollToTargetJSObjectReference;
@@ -178,10 +177,13 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
         _scrollToTargetJSObjectReference?.ObserveAsync(target);
     }
 
-    private string lastTarget;
-
     internal async ValueTask UpdateActiveTarget(string target)
     {
+        if (_targetContext.ActiveTarget == target)
+        {
+            return;
+        }
+        
         lastTarget = target;
 
         if (_disableIntersecting)

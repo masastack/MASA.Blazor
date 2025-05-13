@@ -1,9 +1,12 @@
+import debounceIt from "just-debounce-it";
+
 import { formatToStandardOptions, IntersectionObserverOptions } from "../../mixins/intersect";
 
 class ScrollToTargetJSInterop {
   activeStack: string[] = [];
   handle: DotNet.DotNetObject;
   options?: IntersectionObserverInit | null;
+  debouncedUpdate: () => void;
 
   constructor(
     handle: DotNet.DotNetObject,
@@ -11,6 +14,13 @@ class ScrollToTargetJSInterop {
   ) {
     this.handle = handle;
     this.options = formatToStandardOptions(options);
+
+    this.debouncedUpdate = debounceIt(async () => {
+      await this.handle.invokeMethodAsync(
+        "UpdateActiveTarget",
+        this.activeStack[this.activeStack.length - 1]
+      );
+    }, 16);
   }
 
   observe(id: string) {
@@ -36,10 +46,7 @@ class ScrollToTargetJSInterop {
           this.activeStack.splice(this.activeStack.indexOf(id), 1);
         }
 
-        await this.handle.invokeMethodAsync(
-          "UpdateActiveTarget",
-          this.activeStack[this.activeStack.length - 1]
-        );
+        this.debouncedUpdate();
       },
       this.options
     );
