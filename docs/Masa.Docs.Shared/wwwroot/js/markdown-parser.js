@@ -280,3 +280,10 @@ window.updateThemeOfElementsFromMarkdown = function (theme) {
         e.className = newClasses.join(' ');
     })
 }
+
+window.updateAppCodeGroup = function (tab) {
+    const codeGroups = document.querySelectorAll("app-code-group");
+    for (const codeGroup of codeGroups) {
+        codeGroup.setAttribute('tab', tab);
+    }
+}
