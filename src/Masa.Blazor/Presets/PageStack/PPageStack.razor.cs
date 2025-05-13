@@ -57,7 +57,7 @@ public partial class PPageStack: MasaComponentBase
     /// The flag to indicate whether to go back to a specific page
     /// and then replace it with a new page.
     /// </summary>
-    private (string relativeUri, object? state, int delta)? _uriForGoBackToAndReplace;
+    private (string relativeUri, object? state, int delta, bool disableTransition)? _uriForGoBackToAndReplace;
 
     private string? _lastVisitedTabPath;
     private PageType _targetPageType;
@@ -197,13 +197,13 @@ public partial class PPageStack: MasaComponentBase
         // continue to process the go back to event and replace with a new page
         if (_uriForGoBackToAndReplace.HasValue)
         {
-            var (replaceUri, state, delta) = _uriForGoBackToAndReplace.Value;
+            var (replaceUri, state, delta, disableTransition) = _uriForGoBackToAndReplace.Value;
 
             InternalPageStackNavController?.NotifyStackPopped(delta, replaceUri, state, Pages.Count == delta);
 
             NavigationManager.Replace(replaceUri);
             replaceUri = GetAbsolutePath(replaceUri);
-            CloseTopPages(delta, state, replaceUri);
+            CloseTopPages(delta, disableTransition, state, replaceUri);
             _uriForGoBackToAndReplace = null;
 
             return;
@@ -278,12 +278,15 @@ public partial class PPageStack: MasaComponentBase
     {
         _popstateByUserAction = true;
 
-        CloseTopPages(e.Delta, e.State);
+        CloseTopPages(e.Delta, e.DisableTransition, e.State);
         await Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -e.Delta);
 
         if (!string.IsNullOrWhiteSpace(e.ReplaceUri))
         {
-            await Task.Delay(DelayForPageClosingAnimation);
+            if (!e.DisableTransition)
+            {
+                await Task.Delay(DelayForPageClosingAnimation);
+            }
             InternalReplaceHandler(e.ReplaceUri, e.State);
         }
     }
@@ -315,7 +318,7 @@ public partial class PPageStack: MasaComponentBase
 
         if (backToLastVisitTab)
         {
-            CloseTopPages(Pages.Count);
+            CloseTopPages(Pages.Count, e.DisableTransition);
             return;
         }
 
@@ -340,11 +343,11 @@ public partial class PPageStack: MasaComponentBase
 
             _deltaAndStackCount = (delta, Pages.Count);
 
-            CloseTopPages(delta, e.State);
+            CloseTopPages(delta, e.DisableTransition, e.State);
         }
         else
         {
-            _uriForGoBackToAndReplace = (e.ReplaceUri, e.State, delta);
+            _uriForGoBackToAndReplace = (e.ReplaceUri, e.State, delta, e.DisableTransition);
         }
 
         _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -delta);
@@ -375,9 +378,9 @@ public partial class PPageStack: MasaComponentBase
         _lastOnPreviousClickTimestamp = now;
     }
 
-    private void CloseTopPageOfStack(object? state = null) => CloseTopPages(1, state);
+    private void CloseTopPageOfStack(object? state = null) => CloseTopPages(1, false, state);
 
-    private void CloseTopPages(int count, object? state = null, string? absolutePath = null)
+    private void CloseTopPages(int count, bool disableTransition, object? state = null, string? absolutePath = null)
     {
         if (!Pages.TryPeek(out var current)) return;
 
@@ -385,10 +388,12 @@ public partial class PPageStack: MasaComponentBase
         // and will perform a transition animation
         current.Stacked = false;
 
+        current.DisableTransition = disableTransition;
+
         // When the count of pages to be deleted is greater than 1,
-        // delete the pages between the top of the stack and the target page
+        // delete the pages between the top of the stack and the target page,
         // For example, if the stack has 5 pages: [1,2,3,4,5], delete 3(count) pages,
-        // then delete the page 3 and page 4
+        // then delete page 3 and page 4
         if (count > 1)
         {
             Pages.RemoveRange(Pages.Count - count, count - 1);
@@ -411,9 +416,12 @@ public partial class PPageStack: MasaComponentBase
 
         Task.Run(async () =>
         {
-            // wait for a transition animation from left to right to complete,
-            // known animation time is 300 ms
-            await Task.Delay(DelayForPageClosingAnimation);
+            if (!current.DisableTransition)
+            {
+                // wait for a transition animation from left to right to complete,
+                // known animation time is 300 ms
+                await Task.Delay(DelayForPageClosingAnimation);
+            }
 
             // Remove page 5 and display page 2
             Pages.Pop();

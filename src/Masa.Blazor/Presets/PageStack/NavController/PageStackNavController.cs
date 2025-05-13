@@ -3,7 +3,7 @@ using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
 
-public class PageStackNavController()
+public class PageStackNavController
 {
     /// <summary>
     /// Records the timestamp of the last action, shared by all actions.
@@ -142,9 +142,10 @@ public class PageStackNavController()
     /// Go back one step in the page stack.
     /// </summary>
     /// <param name="state"></param>
-    public void Pop(object? state = null)
+    /// <param name="disableTransition"></param>
+    public void Pop(object? state = null, bool disableTransition = false)
     {
-        GoBack(1, state);
+        GoBack(1, state, disableTransition);
     }
 
     /// <summary>
@@ -152,10 +153,10 @@ public class PageStackNavController()
     /// </summary>
     /// <param name="delta"></param>
     /// <param name="state"></param>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public void GoBack(int delta = 1, object? state = null)
+    /// <param name="disableTransition"></param>
+    public void GoBack(int delta = 1, object? state = null, bool disableTransition = false)
     {
-        GoBackAndReplace(delta, null, state);
+        GoBackAndReplace(delta, null, state, disableTransition);
     }
 
     /// <summary>
@@ -165,7 +166,8 @@ public class PageStackNavController()
     /// <param name="delta"></param>
     /// <param name="replaceUri"></param>
     /// <param name="state"></param>
-    public void GoBackAndReplace(int delta, string? replaceUri, object? state = null)
+    /// <param name="disableTransition"></param>
+    public void GoBackAndReplace(int delta, string? replaceUri, object? state = null, bool disableTransition = false)
     {
         if (delta < 1)
         {
@@ -176,7 +178,7 @@ public class PageStackNavController()
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackPopEventArgs(delta, replaceUri, state, delta == _boundComponent.Pages.Count);
+            var eventArgs = new PageStackPopEventArgs(delta, replaceUri, state, delta == _boundComponent.Pages.Count, disableTransition);
 
             StackPop?.Invoke(this, eventArgs);
 
@@ -193,13 +195,14 @@ public class PageStackNavController()
     /// </summary>
     /// <param name="absolutePath"></param>
     /// <param name="state"></param>
-    public void GoBackToPage(string absolutePath, object? state = null)
+    /// <param name="disableTransition"></param>
+    public void GoBackToPage(string absolutePath, object? state = null, bool disableTransition = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackGoBackToPageEventArgs(absolutePath, state);
+            var eventArgs = new PageStackGoBackToPageEventArgs(absolutePath, state, disableTransition: disableTransition);
             StackGoBackTo?.Invoke(this, eventArgs);
 
             _boundComponent.GoBackTo(eventArgs);
@@ -213,13 +216,14 @@ public class PageStackNavController()
     /// <param name="absolutePath"></param>
     /// <param name="replaceUri"></param>
     /// <param name="state"></param>
-    public void GoBackToPageAndReplace(string absolutePath, string replaceUri, object? state = null)
+    /// <param name="disableTransition"></param>
+    public void GoBackToPageAndReplace(string absolutePath, string replaceUri, object? state = null, bool disableTransition = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackGoBackToPageEventArgs(absolutePath, state, replaceUri);
+            var eventArgs = new PageStackGoBackToPageEventArgs(absolutePath, state, replaceUri, disableTransition);
 
             StackGoBackTo?.Invoke(this, eventArgs);
 
@@ -246,13 +250,13 @@ public class PageStackNavController()
     /// <summary>
     /// Clear the page stack.
     /// </summary>
-    public void Clear()
+    public void Clear(bool disableTransition = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackClearEventArgs();
+            var eventArgs = new PageStackClearEventArgs(disableTransition);
             StackClear?.Invoke(this, eventArgs);
 
             _boundComponent.Clear(eventArgs);
@@ -273,13 +277,14 @@ public class PageStackNavController()
     /// Clear the current page stack and navigate to a tab.
     /// </summary>
     /// <param name="uri">The tab URI to navigate to.</param>
-    public void GoBackToTab(string uri)
+    /// <param name="disableTransition"></param>
+    public void GoBackToTab(string uri, bool disableTransition = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackClearEventArgs(uri);
+            var eventArgs = new PageStackClearEventArgs(uri, disableTransition);
             StackClear?.Invoke(this, eventArgs);
 
             _boundComponent.Clear(eventArgs);
@@ -296,6 +301,12 @@ public class PageStackNavController()
         TabChanged?.Invoke(this, new PageStackTabChangedEventArgs(currentTabPath, currentTabPattern.IsMatch));
     }
 
+    /// <summary>
+    /// Execute the action if the time elapsed since the last action is greater than 250 ms.
+    /// Avoids the problem of multiple navigation actions in a short time
+    /// causing the page stack to be unable to be maintained normally.
+    /// </summary>
+    /// <param name="action"></param>
     private void ExecuteIfTimeElapsed(Action action)
     {
         var now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
