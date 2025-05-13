@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor.Presets.PageStack
 @inherits MasaComponentBase
 
-<MDialog Transition="dialog-right-transition"
+<MDialog Transition="@Transition"
          Value="@Data.Stacked"
          ContentClass="@GetClass()"
          ContentStyle="@GetStyle()"
