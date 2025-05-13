@@ -12,7 +12,10 @@ window.scrollToElement = function (hash, offset) {
 
 window.updateHash = function (hash) {
   if (!hash) return
-  history.replaceState({}, "", window.location.pathname + hash)
+  // window.location.hash = hash; // this will cause the page to scroll to the element, we don't want that
+  const url = new URL(window.location.href);
+  url.hash = hash;
+  history.replaceState({}, "", url.href)
 }
 
 window.backTop = function () {

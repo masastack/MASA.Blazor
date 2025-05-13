@@ -4,7 +4,7 @@
 
 <MHover>
     <div id="@Id" Class="app-code @Class" @attributes="@context.Attrs">
-        @if (FileNameExists)
+        @if (HasToolbar)
         {
             <MLazy MinHeight="40">
                 <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Height="40">
@@ -31,7 +31,8 @@
         {
             <FadeTransition>
                 <AppCopyButton Show="@context.Hover" Content="@Code"
-                               Class="@($"mr-n2 mt-n{(FileNameExists ? "3" : "2")}")"></AppCopyButton>
+                               HasToolbar="@HasToolbar"
+                               Class="@($"mr-n2 mt-n{(HasToolbar ? "3" : "2")}")"></AppCopyButton>
             </FadeTransition>
         }
     </div>
@@ -55,13 +56,13 @@
 
     [Parameter] public bool IsUsage { get; set; }
 
-    private bool FileNameExists => !string.IsNullOrWhiteSpace(FileName);
+    private bool HasToolbar => !string.IsNullOrWhiteSpace(FileName);
 
     private string ComputedClass
     {
         get
         {
-            if (RoundedTop0 || FileNameExists)
+            if (RoundedTop0 || HasToolbar)
             {
                 return "rounded-b";
             }
