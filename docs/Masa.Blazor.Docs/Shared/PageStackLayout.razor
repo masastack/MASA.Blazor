@@ -3,7 +3,7 @@
 
 <MApp>
     <MMain>
-        <PPageStack TabRules="@_tabbedPatterns"
+        <PPageStack TabRules="@_tabRules"
                     FallbackUri="/blazor/examples/page-stack/tab1">
             <MContainer>
                 @Body
@@ -12,19 +12,25 @@
     </MMain>
 
     <MBottomNavigation App Routable Color="primary">
-        <MButton Href="/blazor/examples/page-stack/tab1">Tab 1</MButton>
-        <MButton Href="/blazor/examples/page-stack/tab2/Today">Tab 2</MButton>
-        <MButton Href="/blazor/examples/page-stack/tab3">Tab 3</MButton>
+        <PPageStackTab Href="/blazor/examples/page-stack/tab1">
+            <MButton @attributes="@context.Attrs">Tab 1</MButton>
+        </PPageStackTab>
+        <PPageStackTab Href="/blazor/examples/page-stack/tab2/Today">
+            <MButton @attributes="@context.Attrs">Tab 2</MButton>
+        </PPageStackTab>
+        <PPageStackTab Href="/blazor/examples/page-stack/tab3">
+            <MButton @attributes="@context.Attrs">Tab 3</MButton>
+        </PPageStackTab>
     </MBottomNavigation>
 </MApp>
 
 @code {
 
-    private readonly HashSet<TabRule> _tabbedPatterns =
+    private readonly HashSet<TabRule> _tabRules =
     [
-        new TabRule("/blazor/examples/page-stack/tab1", Persistent: false),
-        new TabRule("/blazor/examples/page-stack/tab2", Self: true),
-        new TabRule("/blazor/examples/page-stack/tab3"),
+        new("/blazor/examples/page-stack/tab1", Persistent: false),
+        new("/blazor/examples/page-stack/tab2", Self: true),
+        new("/blazor/examples/page-stack/tab3")
     ];
 
 }
