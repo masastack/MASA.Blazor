@@ -8,8 +8,6 @@ using Masa.Blazor.Components.Transition;
 using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.JSModules;
 using Masa.Blazor.Mixins.Activatable;
-using Masa.Blazor.Popup;
-using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -95,9 +93,6 @@ public static class ServiceCollectionExtensions
         services.TryAddTransient<TransitionJSModule>();
         services.TryAddTransient<OutsideClickJSModule>();
         services.TryAddScoped<ScrollStrategyJSModule>();
-
-        services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
-        services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));
 
         return new MasaBlazorBuilder(services);
     }
