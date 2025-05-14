@@ -1,5 +1,7 @@
-﻿using Masa.Blazor.Presets.PageStack;
+﻿using System.Text.RegularExpressions;
+using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
+using Masa.Blazor.SourceGenerated;
 using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets.PageStack;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+
+namespace Masa.Blazor.Presets;
 
 public class PPageStackTab : MasaComponentBase
 {

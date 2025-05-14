@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
