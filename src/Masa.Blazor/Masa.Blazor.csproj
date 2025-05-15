@@ -2,16 +2,18 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
-		<Nullable>enable</Nullable>
-		<Version>0.1.0</Version>
 		<Description>Blazor UI component library based on Material Design</Description>
 		<RepositoryUrl>https://github.com/masastack/MASA.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageProjectUrl>https://docs.masastack.com</PackageProjectUrl>
+		<PackageTags>blazor;masa;material design;vuetify</PackageTags>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Company>masastack</Company>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
