@@ -31,7 +31,7 @@ public partial class MWatermark : MasaComponentBase
 
     [Parameter] public int GapY { get; set; }
 
-    [MasaApiParameter(ReleasedOn = "v1.7.3")]
+    [MasaApiParameter(ReleasedIn = "v1.7.3")]
     [Parameter]
     public SKTypeface? Typeface { get; set; }
 

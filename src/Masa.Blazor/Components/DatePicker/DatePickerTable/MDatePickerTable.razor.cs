@@ -32,14 +32,14 @@ public partial class MDatePickerTable<TValue> : ThemeComponentBase
 
     [Parameter] public EventCallback<DateOnly> OnInput { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnDateClick { get; set; }
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public EventCallback<DateOnly> OnDateClick { get; set; }
 
     /// <summary>
     /// The input parameter is the first day of the month
     /// </summary>
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnMonthClick { get; set; }
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public EventCallback<DateOnly> OnMonthClick { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public CultureInfo Locale { get; set; } = null!;
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public CultureInfo Locale { get; set; } = null!;
 
     [Parameter] public CalendarWeekRule CalendarWeekRule { get; set; }
 

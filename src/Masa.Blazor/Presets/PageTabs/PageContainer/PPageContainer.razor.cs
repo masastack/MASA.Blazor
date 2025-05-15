@@ -23,7 +23,7 @@ public partial class PPageContainer : PatternPathComponentBase
     /// The content of the matched path would be cached in the DOM.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.0.2")]
+    [MasaApiParameter(ReleasedIn = "v1.0.2")]
     public IEnumerable<string> IncludePatterns { get; set; } = Array.Empty<string>();
 
     /// <summary>

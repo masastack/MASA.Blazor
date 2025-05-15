@@ -11,7 +11,7 @@ public partial class PDateDigitalClockCompactPickerView<TValue> : PDateDigitalCl
     /// <summary>
     /// Switch to time picker automatically when selecting a date
     /// </summary>
-    [Parameter] [MasaApiParameter(defaultValue: true, releasedOn: "v1.6.0")]
+    [Parameter] [MasaApiParameter(defaultValue: true, releasedIn: "v1.6.0")]
     public bool AutoSwitchToTime { get; set; } = true;
 
     private const string DATE = "date";

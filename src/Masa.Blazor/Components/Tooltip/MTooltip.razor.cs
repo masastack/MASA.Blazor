@@ -28,7 +28,7 @@ namespace Masa.Blazor
         /// If the <see cref="ChildContent"/> is set, this will be ignored. 
         /// </summary>
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.9.0")]
+        [MasaApiParameter(ReleasedIn = "v1.9.0")]
         public string? Text { get; set; }
 
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";

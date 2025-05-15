@@ -2,6 +2,6 @@
 
 public enum ScrollBehavior
 {
-    Auto,
-    Smooth
+    Auto = 0,
+    Smooth = 1
 }

@@ -31,7 +31,7 @@ public partial class MWindow : MItemGroup
 
     [Parameter] public bool Vertical { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.9.0")] public bool Touchless { get; set; }
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")] public bool Touchless { get; set; }
 
     private static Block _block = new("m-window");
     private StringNumber _prevInternalValue;

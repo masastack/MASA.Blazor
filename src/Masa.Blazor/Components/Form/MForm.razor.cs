@@ -14,7 +14,7 @@ public partial class MForm : MasaComponentBase
     /// The default logic is to use the <see cref="DisplayAttribute"/> attribute.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    [MasaApiParameter(ReleasedIn = "v1.7.0")]
     public bool AutoLabel { get; set; }
 
     [Parameter] public RenderFragment<FormContext>? ChildContent { get; set; }
@@ -42,7 +42,7 @@ public partial class MForm : MasaComponentBase
     [Parameter] public EventCallback<SubmitEventArgs> OnInvalidSubmit { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    [MasaApiParameter(ReleasedIn = "v1.7.0")]
     public ValidateOn ValidateOn { get; set; } = ValidateOn.Input;
 
     internal ConcurrentDictionary<string, string> AutoLabelMap { get; } = new();

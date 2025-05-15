@@ -9,7 +9,7 @@ public partial class MOtpInput : ThemeComponentBase, IThemeable
     [Parameter] public string? Color { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public bool AutoFocus { get; set; }
 
     [Parameter] public int Length { get; set; } = 6;

@@ -6,17 +6,17 @@ public sealed class MasaApiParameterAttribute : Attribute
 
     public bool Ignored { get; set; }
 
-    public string? ReleasedOn { get; set; }
+    public string? ReleasedIn { get; set; }
 
     public MasaApiParameterAttribute(object defaultValue)
     {
         DefaultValue = defaultValue;
     }
 
-    public MasaApiParameterAttribute(object defaultValue, string releasedOn)
+    public MasaApiParameterAttribute(object defaultValue, string releasedIn)
     {
         DefaultValue = defaultValue;
-        ReleasedOn = releasedOn;
+        ReleasedIn = releasedIn;
     }
 
     public MasaApiParameterAttribute()

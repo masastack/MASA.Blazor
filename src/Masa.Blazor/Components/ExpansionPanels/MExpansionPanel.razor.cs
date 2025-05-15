@@ -11,11 +11,11 @@ public partial class MExpansionPanel : MGroupableBase<MExpansionPanels>
     [Parameter] public bool Readonly { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    [MasaApiParameter(ReleasedIn = "v1.6.0")]
     public string? Title { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    [MasaApiParameter(ReleasedIn = "v1.6.0")]
     public string? Text { get; set; }
     
     [Parameter]

@@ -32,7 +32,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     [Parameter] public string? TrackFillColor { get; set; }
 
-    [Parameter] [MasaApiParameter(2, ReleasedOn = "v1.7.0")] public double TrackSize { get; set; } = 2;
+    [Parameter] [MasaApiParameter(2, ReleasedIn = "v1.7.0")] public double TrackSize { get; set; } = 2;
 
     [Parameter] [MasaApiParameter(2)] public double TickSize { get; set; } = 2;
 
@@ -45,11 +45,11 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     [MasaApiParameter(Ignored = true)] public override EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.1.1")]
+    [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public EventCallback<TValue> OnStart { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.1.1")]
+    [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public EventCallback<TValue> OnEnd { get; set; }
 
     protected virtual double GetRoundedValue(int index)

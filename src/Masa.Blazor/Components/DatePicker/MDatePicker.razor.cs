@@ -64,7 +64,7 @@ public partial class MDatePicker<TValue>
     [Parameter] public bool ShowAdjacentMonths { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.4.0")]
+    [MasaApiParameter(ReleasedIn = "v1.4.0")]
     public bool ShowWeek { get; set; }
 
     [Parameter]

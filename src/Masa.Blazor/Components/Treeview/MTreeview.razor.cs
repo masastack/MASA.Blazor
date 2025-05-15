@@ -28,7 +28,7 @@ namespace Masa.Blazor
 
         [Parameter] public bool Selectable { get; set; }
 
-        [MasaApiParameter(true, ReleasedOn = "v1.7.0")]
+        [MasaApiParameter(true, ReleasedIn = "v1.7.0")]
         [Parameter]
         public bool SelectOnRowClick { get; set; } = true;
 

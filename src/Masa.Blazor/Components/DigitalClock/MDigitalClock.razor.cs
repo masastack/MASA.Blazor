@@ -32,7 +32,7 @@ public partial class MDigitalClock<TValue> : ThemeComponentBase
     public OneOf<Func<TimeOnly, bool>, List<TimeOnly>> AllowedTimes { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    [MasaApiParameter(ReleasedIn = "v1.8.0")]
     public bool HideDisallowedTimes { get; set; }
 
     [Parameter] public string? Color { get; set; }

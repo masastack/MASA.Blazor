@@ -79,14 +79,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public bool ShowSelect { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.4.0")]
+    [MasaApiParameter(ReleasedIn = "v1.4.0")]
     public bool FixedSelect { get; set; }
 
     [Parameter]
     public bool ShowExpand { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    [MasaApiParameter(ReleasedIn = "v1.8.0")]
     public bool ShowSerialNumber { get; set; }
 
     [Parameter] public RenderFragment<DataTableHeaderSelectContext>? HeaderDataTableSelectContent { get; set; }
@@ -127,7 +127,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public bool OnRowContextmenuPreventDefault { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.0.4")]
+    [MasaApiParameter(ReleasedIn = "v1.0.4")]
     public DataTableResizeMode ResizeMode { get; set; }
 
     private bool _prevIsMobile;

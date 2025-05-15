@@ -6,7 +6,7 @@ public partial class MDescriptions : ThemeComponentBase, IThemeable
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.1.1")]
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public bool AlignCenter { get; set; }
 
     [Parameter, MasaApiParameter(true)] public bool Colon { get; set; } = true;

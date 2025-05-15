@@ -43,7 +43,7 @@ public partial class MSwiper : MasaComponentBase
 
     [Parameter] public EventCallback<int> IndexChanged { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Nested { get; set; }
 
     private DotNetObjectReference<object>? _swiperInteropHandle;

@@ -47,7 +47,7 @@ namespace Masa.Blazor
         [Parameter] public string? Transition { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public ScrollStrategy ScrollStrategy { get; set; } = ScrollStrategy.Reposition;
 
         private static Block _block = new("m-menu");
