@@ -10,7 +10,7 @@ related:
 
 **MMobilePickerView** is the content area of [PMobilePicker](/blazor/mobiles/mobile-pickers).
 
-## Installation
+## Installation {released-on=v1.10.0}
 
 ```shell
 dotnet add package Masa.Blazor.MobileComponents

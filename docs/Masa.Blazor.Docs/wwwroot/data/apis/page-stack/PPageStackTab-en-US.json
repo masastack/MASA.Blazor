@@ -1,0 +1,9 @@
+﻿{
+  "props": {
+    "name": "The unique name of the PageStackNavController. This is only needed if your app has multiple stack components.",
+    "href": "The page address to navigate to"
+  },
+  "events": {
+    "onNavigate": "The event triggered when clicked. Overriding will override the default jump behavior"
+  }
+}

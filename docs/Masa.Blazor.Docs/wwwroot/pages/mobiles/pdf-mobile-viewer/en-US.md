@@ -4,7 +4,7 @@ desc: "A PDF viewer designed for mobile."
 tag: "JS Proxy"
 ---
 
-## Installation
+## Installation {released-on=v1.9.0}
 
 ```shell
 dotnet add package Masa.Blazor.JSComponents.PdfJS

@@ -4,7 +4,7 @@ desc: "专为移动设备设计的 PDF 查看器。"
 tag: "JS代理"
 ---
 
-## 安装 {#installation}
+## 安装 {#installation released-on=v1.9.0}
 
 ```shell
 dotnet add package Masa.Blazor.JSComponents.PdfJS

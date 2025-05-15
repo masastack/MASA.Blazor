@@ -265,7 +265,10 @@
       "mobile-pickers",
       "mobile-picker-views",
       "mobile-time-pickers",
-      "page-stack",
+      {
+        "title": "page-stack",
+        "state": "update"
+      },
       {
         "title": "pdf-mobile-viewer",
         "state": "nuget",

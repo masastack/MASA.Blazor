@@ -48,7 +48,7 @@ public class PageStackNavController
 
     /// <summary>
     /// Occurs when the active tab is changed.
-    /// </summary>q
+    /// </summary>
     public event EventHandler<PageStackTabChangedEventArgs>? TabChanged;
 
     /// <summary>

@@ -7,7 +7,7 @@ related:
   - /blazor/mobiles/mobile-time-pickers
 ---
 
-## Installation
+## Installation {released-on=v1.10.0}
 
 ```shell
 dotnet add package Masa.Blazor.MobileComponents
@@ -26,7 +26,7 @@ options, you can use an empty string for placeholder."></app-alert>
 
 <masa-example file="Examples.mobiles.mobile_pickers.Cascade"></masa-example>
 
-#### Custom item height.
+#### Custom item height
 
 You can customize the height of the option through `Itemheight`. Currently, only `px` is supported.
 

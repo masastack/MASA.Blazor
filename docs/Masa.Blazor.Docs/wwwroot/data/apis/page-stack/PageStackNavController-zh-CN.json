@@ -1,7 +1,8 @@
 {
   "events": {
     "PageClosed": "当堆栈页面关闭时触发",
-    "TabChanged": "当选项卡更改时触发，页面入栈或出栈时不会触发"
+    "TabChanged": "当选项卡更改时触发，页面入栈或出栈时不会触发",
+    "TabRefreshRequested": "请求刷新事件"
   },
   "methods": {
     "Push": "将新页面推送到页面堆栈；第二个参数是可选的，用于删除栈顶的页面",

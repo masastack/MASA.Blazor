@@ -145,6 +145,7 @@
   ],
   "page-stack": [
     "PPageStack",
+    "PPageStackTab",
     "PStackPageBarInit",
     "PageStackNavController"
   ],

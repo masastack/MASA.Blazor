@@ -5,7 +5,7 @@ desc: "Pull down to refresh, usually used in mobile apps"
 
 <app-alert type="warning" content="Only works on mobile, because only implement touch events. So you need to open the browser's mobile mode(`F12`, `Ctrl+Shift+M`) to see the effect."></app-alert>
 
-## Installation
+## Installation {released-on=v1.10.0}
 
 ```shell
 dotnet add package Masa.Blazor.MobileComponents

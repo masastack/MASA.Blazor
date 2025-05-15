@@ -11,15 +11,30 @@ related:
 
 <app-alert type="warning" content="The **PageStack** component does not remove the DOM of old pages; instead, new pages are directly overlaid on top of the old ones. In a MAUI Blazor Hybrid app, the performance of the WebView degrades as the page stack grows due to the accumulation of DOM elements in memory. The exact number of pages after which the performance drop becomes noticeable depends on the complexity of the pages. To maintain optimal performance, it is recommended to replace or remove pages that will no longer be accessed."></app-alert>
 
+## Installation {released-on=v1.10.0}
+
+```shell
+dotnet add package Masa.Blazor.MobileComponents
+```
+
+```c# Program.cs l:3
+builder.Services
+    .AddMasaBlazor()
+    .AddMobileComponents();
+```
+
 ## Example
 
 - [PageStackLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor)
 
-  Layout: Put the **PPageStack** component in the **MMain** component, and `@Body` as the child content.
+  - Through `TabRules` to specify the tabbed pages, the content of the page will be cached after the first visit.
+  - Wrap the `a` tag with the **PPageStackTab** component to change the navigation behavior and provide additional functionality.
 
 - [PageStackTab1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageStackTab1.razor), [PageStackTab2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageStackTab2.razor), [PageStackTab3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageStackTab3.razor)
 
-  Through `TabbedPatterns` to specify the tabbed pages, the content of the page will be cached after the first visit.
+  - Tab 1 page is not persistent and does not use route parameters.
+  - Tab 2 page is persistent but uses route parameters.
+  - Tab 3 page is persistent and does not use route parameters; clicking again when activated will trigger the refresh-requested event.
 
 - [PageStackPage1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageStackPage1.razor),
   [PageStackPage2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageStackPage2.razor),
@@ -57,14 +72,15 @@ Used to control the navigation of the page stack.
 <MButton OnClick="@(() => NavController.Push("/stack-page"))">Go to stack page</MButton>
 ```
 
-#### Events {updated-in=v1.8.0}
+#### Events
 
-| Event name   | Description                                                                                                        | Usage scenario                                                        |
-|--------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `PageClosed` | Triggered when the stack page is closed.                                                                           | -                                                                     |
-| `TabChanged` | Triggered when the tab is switched, including system-level return. It will not be triggered when pushed or popped. | Reset some states of the old tab page when switching, such as popups. |
+| Event name            | Description                                                                                                        | Usage scenario                                                        |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `PageClosed`          | Triggered when the stack page is closed.                                                                           | -                                                                     |
+| `TabChanged`          | Triggered when the tab is switched, including system-level return. It will not be triggered when pushed or popped. | Reset some states of the old tab page when switching, such as popups. |
+| `TabRefreshRequested` | Tab refresh request.                                                                                               | Used with [Pull to refresh](/blazor/mobiles/pull-refresh) component.  |
 
-### data-page-stack-strategy
+### data-page-stack-strategy(not recommended) {#data-page-stack-strategy}
 
 <app-alert type="warning" content="It is recommended to use the **PPageStackLink** component to avoid multiple triggers due to continuous clicks."></app-alert>
 
@@ -92,6 +108,62 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
     </CustomContent>
 </PPageStackLink>
 ```
+
+### PPageStackTab {released-on=v1.10.0}
+
+**PPageStackTab** component provides two features:
+
+- The default `a` tag or component navigation behavior adds a record to the browser history, which increases the history when switching tabs.
+  In a MAUI Blazor Hybrid app, it is challenging to implement the back button on the tab page to exit the application.
+  Wrapping the `a` tag or component with the **PPageStackTab** component changes the default navigation behavior to replace the current page with the `replace` method, thus not increasing the history.
+
+  ```razor
+  <PPagStackTab href="/tab-1">
+      <a @attributes="@context.Attrs">Stack page</a>
+  </PPagStackTab>
+  ```
+
+- When the activated tab is clicked again, it will trigger the `TabRefreshRequested` event. When used with the [Pull to refresh component](/blazor/mobiles/pull-refresh), it can achieve a pull-to-refresh effect.
+
+  ```razor
+  @inject PageStackNavController NavController
+  @implements IDisposable
+  
+  <MPullRefresh @ref="_pullRefresh" OnRefresh="...">
+      ...
+  </MPullRefresh>
+  
+  @code {
+      private MPullRefresh? _pullRefresh;
+  
+      protected override void OnInitialized()
+      {
+          base.OnInitialized();
+
+          NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
+      }
+  
+      private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
+      {
+          if (_pullToRefresh is null)
+          {
+              return;
+          }
+
+          if (e.TargetHref?.Equals("/tab-1", StringComparison.OrdinalIgnoreCase) is not true)
+          {
+              return;
+          }
+
+          await _pullRefresh.SimulateRefreshAsync();
+      }
+  
+      public void Dispose()
+      {
+          NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
+      }
+  }
+  ```
 
 ### PStackPageBarInit
 

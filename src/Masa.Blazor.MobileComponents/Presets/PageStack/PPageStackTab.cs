@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor.Presets;
 
-public class PPageStackTab : MasaComponentBase
+public class PPageStackTab : ComponentBase
 {
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
+
     [Parameter] public string? Name { get; set; }
 
     [Parameter] [EditorRequired] public RenderFragment<PageStackTabContext>? ChildContent { get; set; }
