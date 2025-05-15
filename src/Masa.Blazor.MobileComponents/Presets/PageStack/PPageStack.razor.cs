@@ -62,47 +62,29 @@ public partial class PPageStack: MasaComponentBase
     private (string relativeUri, object? state, int delta, bool disableTransition)? _uriForGoBackToAndReplace;
 
     private string? _lastVisitedTabPath;
-    private PageType _targetPageType;
     private long _lastOnPreviousClickTimestamp;
 
     // just for knowing whether the tab has been changed
     private (Regex Pattern, string AbsolutePath) _lastVisitedTab;
 
-    private HashSet<string> _prevTabbedPatterns = new();
-
-    private HashSet<TabRule> _prevTabPatterns = new();
-    private IEnumerable<string> _persistentTabPatterns = [];
-    private IEnumerable<string> _nonPersistentTabPatterns = [];
-
     private IJSObjectReference? _module;
     private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
     private int _dotnetObjectId;
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        UpdateRegexes();
-    }
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
-        UpdateRegexes();
 
         var targetPath = NavigationManager.GetAbsolutePath();
         var tabbedPattern = TabRules.FirstOrDefault(u => u.Regex.IsMatch(targetPath));
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = targetPath;
-            _targetPageType = PageType.Tab;
 
             _lastVisitedTab = (tabbedPattern.Regex, targetPath);
         }
         else
         {
-            _targetPageType = PageType.Stack;
             Push(NavigationManager.Uri);
         }
 
@@ -185,7 +167,7 @@ public partial class PPageStack: MasaComponentBase
             return;
         }
 
-        // continue to process the replace event that needs to clear the stack
+        // continue to process the replacement event that needs to clear the stack
         if (_uriForReplaceAndClearStack.HasValue)
         {
             var (relativeUri, state) = _uriForReplaceAndClearStack.Value;
@@ -215,13 +197,8 @@ public partial class PPageStack: MasaComponentBase
         if (tabbedPattern is not null)
         {
             _lastVisitedTabPath = absolutePath;
-            _targetPageType = PageType.Tab;
             UnblockScroll();
             StateHasChanged();
-        }
-        else
-        {
-            _targetPageType = PageType.Stack;
         }
 
         if (_deltaAndStackCount.HasValue)
@@ -247,15 +224,6 @@ public partial class PPageStack: MasaComponentBase
         {
             CloseTopPageOfStack();
         }
-    }
-
-    private void UpdateRegexes()
-    {
-        if (_prevTabPatterns.SetEquals(TabRules)) return;
-        _prevTabPatterns = new HashSet<TabRule>(TabRules);
-
-        _persistentTabPatterns = TabRules.Where(u => u.Persistent).Select(u => u.Pattern);
-        _nonPersistentTabPatterns = TabRules.Where(u => !u.Persistent).Select(u => u.Pattern);
     }
 
     internal void Replace(PageStackReplaceEventArgs e)
@@ -458,11 +426,5 @@ public partial class PPageStack: MasaComponentBase
             await _module.InvokeVoidAsync("detachListener", _dotnetObjectId);
             await _module.DisposeAsync();
         }
-    }
-
-    private enum PageType
-    {
-        Tab,
-        Stack
     }
 }

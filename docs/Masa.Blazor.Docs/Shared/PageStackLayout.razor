@@ -16,7 +16,9 @@
             <MButton @attributes="@context.Attrs">Tab 1</MButton>
         </PPageStackTab>
         <PPageStackTab Href="/blazor/examples/page-stack/tab2/Today">
-            <MButton @attributes="@context.Attrs">Tab 2</MButton>
+            <MButton MatchPattern="@("^/blazor/examples/page-stack/tab2/*")"
+                     @attributes="@context.Attrs">Tab 2
+            </MButton>
         </PPageStackTab>
         <PPageStackTab Href="/blazor/examples/page-stack/tab3">
             <MButton @attributes="@context.Attrs">Tab 3</MButton>
@@ -28,9 +30,9 @@
 
     private readonly HashSet<TabRule> _tabRules =
     [
-        new("/blazor/examples/page-stack/tab1", Persistent: false),
-        new("/blazor/examples/page-stack/tab2", Self: true),
-        new("/blazor/examples/page-stack/tab3")
+        new("^/blazor/examples/page-stack/tab1$", Persistent: false),
+        new("^/blazor/examples/page-stack/tab2/*", Self: true),
+        new("^/blazor/examples/page-stack/tab3$")
     ];
 
 }

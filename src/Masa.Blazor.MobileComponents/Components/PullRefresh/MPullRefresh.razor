@@ -22,7 +22,9 @@
             @RenderSuccessStatus()
         </div>
 
-        @ChildContent
+        <MShouldRender Value="@IsRenderStatus">
+            @ChildContent
+        </MShouldRender>
     </div>
 </div>
 
@@ -34,11 +36,11 @@
         {
             if (LoadingContent is null)
             {
-                <MProgressCircular Indeterminate Size="24" Width="2" />
+                <MProgressCircular Indeterminate Size="24" Width="2"/>
             }
             else
             {
-                @LoadingContent(_distance);
+                @LoadingContent(_distance)
             }
         }
     };
@@ -53,7 +55,7 @@
             }
             else
             {
-                @CanReleaseContent(_distance);
+                @CanReleaseContent(_distance)
             }
         }
     };
@@ -68,7 +70,7 @@
             }
             else
             {
-                @PullingContent(_distance);
+                @PullingContent(_distance)
             }
         }
     };

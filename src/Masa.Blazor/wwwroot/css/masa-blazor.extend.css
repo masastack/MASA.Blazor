@@ -392,7 +392,11 @@
     opacity: 1;
 }
 
-.p-page-container.fill-height > .p-page-container__item {
+.p-page-container,
+.p-page-container__item,
+.p-page-container__item .container,
+.p-page-container__item > .m-pull-refresh,
+.p-page-container__item .container > .m-pull-refresh {
     height: 100%;
 }
 

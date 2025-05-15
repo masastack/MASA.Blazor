@@ -10,6 +10,9 @@ public class PStackPageBase : ComponentBase, IAsyncDisposable
 
     private StackPageData? Page { get; set; }
 
+    /// <summary>
+    /// The root selector of the stack page.
+    /// </summary>
     protected string? PageSelector => Page?.Selector;
 
     protected override void OnInitialized()

@@ -45,13 +45,18 @@ public partial class MPullRefresh
 
     private ElementReference _trackRef;
     private PullRefreshStatus _pullRefreshStatus;
-    private Masa.Blazor.JSInterop.Element? _root;
     private int _duration;
     private bool _reachTop;
     private double _distance;
 
     private long _touchstartEventId;
     private long _touchmoveEventId;
+
+    /// <summary>
+    /// Only render <see cref="ChildContent"/> when the status is <see cref="PullRefreshStatus.Default"/>.
+    /// We don't want to render it when loading, pulling, or releasing.
+    /// </summary>
+    private bool IsRenderStatus => _pullRefreshStatus == PullRefreshStatus.Default;
 
     private bool IsTouchable => _pullRefreshStatus != PullRefreshStatus.Loading && _pullRefreshStatus != PullRefreshStatus.Success && !Disabled;
 
@@ -94,6 +99,30 @@ public partial class MPullRefresh
             });
         }
     }
+    
+    /// <summary>
+    /// Simulates a pull-to-refresh action programmatically.
+    /// </summary>
+    [MasaApiPublicMethod]
+    public async Task SimulateRefreshAsync()
+    {
+        if (_pullRefreshStatus == PullRefreshStatus.Default)
+        {
+            _duration = 300;
+            SetStatus(HeadHeight, true);
+
+            try
+            {
+                await OnRefresh.InvokeAsync();
+                await SetResultStatus();
+            }
+            catch (Exception e)
+            {
+                SetStatus(0);
+                await OnError.InvokeAsync(e);
+            }
+        }
+    }
 
     private void SetStatus(double distance, bool isLoading = false)
     {
@@ -106,7 +135,6 @@ public partial class MPullRefresh
         else if (distance == 0)
         {
             _pullRefreshStatus = PullRefreshStatus.Default;
-            _root = null;
             _throttleTask.Cancel();
         }
         else if (distance < Threshold)
@@ -143,7 +171,7 @@ public partial class MPullRefresh
             if (_reachTop && _toucher.DeltaY >= 0 && _toucher.IsVertical)
             {
                 // HACK: In JavaScript, should dynamically set the `preventDefault()` here,
-                // but in Blazor, it's difficult to do that. so we set it to false in `AddHtmlElementEventListener`.
+                // but in Blazor, it's challenging to do that. So we set it to false in `AddHtmlElementEventListener`.
                 // If it's necessary, should refactor this part.
                 // args.PreventDefault();
 

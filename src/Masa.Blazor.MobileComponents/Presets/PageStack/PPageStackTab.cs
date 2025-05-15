@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using Masa.Blazor.Presets.PageStack.NavController;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor.Presets;
 
 public class PPageStackTab : MasaComponentBase
 {
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.AddContent(0, ChildContent?.Invoke(_context));
-    }
-
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+
+    [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
+    [Parameter] public string? Name { get; set; }
 
     [Parameter] [EditorRequired] public RenderFragment<PageStackTabContext>? ChildContent { get; set; }
 
@@ -17,19 +16,18 @@ public class PPageStackTab : MasaComponentBase
 
     [Parameter] [EditorRequired] public string? Href { get; set; }
 
-    [Parameter] public bool Refreshable { get; set; } = true;
-
-    [Parameter] public bool RefreshOnDblClick { get; set; }
-
     private readonly PageStackTabContext _context = new();
+
+    private PageStackNavController? _internalPageStackNavController;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
+        _internalPageStackNavController = PageStackNavControllerFactory.Create(Name ?? string.Empty);
+
         _context.Attrs["__internal_preventDefault_onclick"] = true;
         _context.Attrs["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
-        _context.Attrs["ondblclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnDblClick);
     }
 
     protected override void OnParametersSet()
@@ -39,10 +37,22 @@ public class PPageStackTab : MasaComponentBase
         _context.Attrs["href"] = Href;
     }
 
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        builder.AddContent(0, ChildContent?.Invoke(_context));
+    }
+
     private async Task HandleOnClick()
     {
         if (string.IsNullOrWhiteSpace(Href))
         {
+            return;
+        }
+
+        var tabPath = _internalPageStackNavController?.LastVisitedTabPath ?? NavigationManager.GetAbsolutePath();
+        if (tabPath.Equals(Href, StringComparison.OrdinalIgnoreCase))
+        {
+            _internalPageStackNavController?.NotifyTabRefresh(Href);
             return;
         }
 
@@ -54,11 +64,6 @@ public class PPageStackTab : MasaComponentBase
         {
             NavigationManager.Replace(Href);
         }
-    }
-
-    private void HandleOnDblClick()
-    {
-        if (!RefreshOnDblClick) return;
     }
 }
 
