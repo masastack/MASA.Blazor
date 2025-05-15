@@ -435,7 +435,8 @@ export function scrollTo(target, options: ScrollToOptions) {
 export function scrollToTarget(
   target: string,
   container: string = null,
-  offset: number = 0
+  offset: number = 0,
+  behavior: ScrollBehavior = "smooth"
 ) {
   const targetEl: HTMLElement = document.querySelector(target);
   if (targetEl) {
@@ -450,7 +451,7 @@ export function scrollToTarget(
       : document.documentElement
     containerEl.scrollTo({
       top: top - offset,
-      behavior: "smooth",
+      behavior: behavior
     });
   }
 }
