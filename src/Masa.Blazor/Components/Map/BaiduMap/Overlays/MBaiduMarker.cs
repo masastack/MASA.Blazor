@@ -34,7 +34,7 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.7.1")]
+        [MasaApiParameter(ReleasedIn = "v1.7.1")]
         public BaiduMapIcon? Icon { get; set; }
 
         protected override void RegisterWatchers(PropertyWatcher watcher)

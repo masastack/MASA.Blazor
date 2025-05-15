@@ -51,7 +51,7 @@ public class MScrollToTarget : ComponentBase, IAsyncDisposable
     [Parameter] public bool DisableIntersectAfterTriggering { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ScrollBehavior.Smooth, "v1.9.5")]
+    [MasaApiParameter(ScrollBehavior.Smooth, "v1.10.0")]
     public ScrollBehavior ScrollBehavior { get; set; } = ScrollBehavior.Smooth;
 
     private TargetContext _targetContext = new();

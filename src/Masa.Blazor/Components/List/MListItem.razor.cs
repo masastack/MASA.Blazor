@@ -64,31 +64,31 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [Parameter] public bool OnClickPreventDefault { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Title { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Subtitle { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? PrependIcon { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? PrependAvatar { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? AppendIcon { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? AppendAvatar { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
 
     private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);

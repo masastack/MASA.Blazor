@@ -90,15 +90,15 @@ namespace Masa.Blazor
         [Parameter] public string? Key { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public string? IconName { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public string? LeftIconName { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public string? RightIconName { get; set; }
 
         /// <summary>

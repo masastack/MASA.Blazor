@@ -122,7 +122,7 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
     public StringNumber? Width { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
 
     protected List<MListGroup> Groups { get; } = new();

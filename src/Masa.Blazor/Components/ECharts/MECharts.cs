@@ -73,10 +73,10 @@ public class MECharts : Container, IEChartsJsCallbacks
     [Parameter]
     public bool IncludeFunctionsInOption { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")]
     public bool Loading { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public object? LoadingOptions { get; set; }
 
     private static readonly Regex s_functionRegex

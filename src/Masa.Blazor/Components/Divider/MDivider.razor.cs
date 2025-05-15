@@ -19,7 +19,7 @@ public partial class MDivider : ThemeComponentBase
     [Parameter] public bool Right { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    [MasaApiParameter(ReleasedIn = "v1.6.0")]
     public int Length { get; set; }
 
     private bool HasContent => ChildContent is not null;

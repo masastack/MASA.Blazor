@@ -93,11 +93,11 @@ public partial class MDataIterator<TItem> : MData<TItem>
     /// Gets or sets the selected items by their keys.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    [MasaApiParameter(ReleasedIn = "v1.7.0")]
     public IEnumerable<string>? Selected { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.7.0")]
+    [MasaApiParameter(ReleasedIn = "v1.7.0")]
     public EventCallback<IEnumerable<string>> SelectedChanged { get; set; }
 
     [Parameter]

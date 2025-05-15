@@ -18,7 +18,7 @@ public partial class PPageStack: MasaComponentBase
     /// Tab rules to match and manage.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public HashSet<TabRule> TabRules { get; set; } = [];
 
     [Parameter]

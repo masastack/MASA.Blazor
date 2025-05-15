@@ -52,7 +52,7 @@ namespace Masa.Blazor
         [Parameter] public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public bool NoPersistentAnimation { get; set; }
 
         [Parameter] public bool Persistent { get; set; }
@@ -70,7 +70,7 @@ namespace Masa.Blazor
         /// Disable to focus on the dialog when it's opened.
         /// </summary>
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public bool DisableAutoFocus { get; set; }
 
         private readonly List<IDependent> _dependents = new();

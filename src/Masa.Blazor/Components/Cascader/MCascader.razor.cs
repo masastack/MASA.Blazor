@@ -16,7 +16,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
     [Parameter] public override bool Outlined { get; set; }
 
     [Parameter]
-    [MasaApiParameter("/", ReleasedOn = "v1.5.0")]
+    [MasaApiParameter("/", ReleasedIn = "v1.5.0")]
     public string Delimiter { get; set; } = "/";
 
     private TValue? _prevValue;

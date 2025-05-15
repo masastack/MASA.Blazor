@@ -48,7 +48,7 @@ public partial class MPagination
         set => SetValue(value);
     }
 
-    [Parameter, MasaApiParameter(ReleasedOn = "v1.7.0")]
+    [Parameter, MasaApiParameter(ReleasedIn = "v1.7.0")]
     public EventCallback<bool> MiniVariantChanged { get; set; }
 
     [Parameter, MasaApiParameter(600, "v1.7.0")]
@@ -58,7 +58,7 @@ public partial class MPagination
         set => SetValue(value);
     }
 
-    [Parameter, MasaApiParameter(2, ReleasedOn = "v1.8.0")]
+    [Parameter, MasaApiParameter(2, ReleasedIn = "v1.8.0")]
     public int Elevation { get; set; } = 2;
 
     private bool _internalMiniVariant;
