@@ -1,0 +1,9 @@
+﻿{
+  "props": {
+    "name": "PageStackNavController 的唯一名称。仅当你的应用中有多个堆栈组件时才需要设置",
+    "href": "导航到的页面地址"
+  },
+  "events": {
+    "onNavigate": "点击时触发的事件，重写会覆盖默认的跳转行为"
+  }
+}

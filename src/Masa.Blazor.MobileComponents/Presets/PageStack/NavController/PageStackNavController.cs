@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
@@ -50,6 +51,16 @@ public class PageStackNavController
     /// </summary>
     public event EventHandler<PageStackTabChangedEventArgs>? TabChanged;
 
+    /// <summary>
+    /// Occurs when a tab is requested a refresh.
+    /// </summary>
+    public event EventHandler<PageStackTabRefreshRequestedEventArgs>? TabRefreshRequested;
+    
+    /// <summary>
+    /// Records the last visited tab path.
+    /// </summary>
+    internal string? LastVisitedTabPath { get; private set; }
+    
     internal void BindComponent(PPageStack component) => _boundComponent = component;
 
     internal void UnbindComponent() => _boundComponent = null;
@@ -298,7 +309,13 @@ public class PageStackNavController
 
     internal void NotifyTabChanged(string currentTabPath, Regex currentTabPattern)
     {
+        LastVisitedTabPath = currentTabPath;
         TabChanged?.Invoke(this, new PageStackTabChangedEventArgs(currentTabPath, currentTabPattern.IsMatch));
+    }
+
+    internal void NotifyTabRefresh(string targetHref)
+    {
+        TabRefreshRequested?.Invoke(this, new PageStackTabRefreshRequestedEventArgs(targetHref));
     }
 
     /// <summary>

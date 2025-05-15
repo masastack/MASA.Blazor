@@ -513,7 +513,7 @@
   "trouble-shooting": "Trouble Shooting",
   "access-guide": "Access Guide",
   "feature": {
-    "released-on": "Released on {0}",
+    "released-on": "Released in {0}",
     "updated-in": "Updated in {0}"
   },
   "notifications": {

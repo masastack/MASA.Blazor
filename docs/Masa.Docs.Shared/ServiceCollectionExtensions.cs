@@ -155,6 +155,8 @@ public static class ServiceCollectionExtensions
             });
         });
 
+        masaBlazorBuilder.AddMobileComponents();
+
         services.AddMasaBlazorDocs();
 
         return masaBlazorBuilder;

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets.PageStack;
+﻿using System.Text.RegularExpressions;
+
+namespace Masa.Blazor.Presets.PageStack;
 
 /// <summary>
 /// Rule for <see cref="PPageStack"/> tabs.

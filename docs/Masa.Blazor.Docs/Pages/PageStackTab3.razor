@@ -4,29 +4,35 @@
 @inject PageStackNavController NavController
 @implements IDisposable
 
-<p class="caption">url: /blazor/examples/page-stack/tab3</p>
+<MPullRefresh OnRefresh="OnRefreshAsync" @ref="_pullToRefresh">
+    <p class="caption">url: /blazor/examples/page-stack/tab3</p>
 
-<p class="text-h5">Tab 3 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</p>
+    <p class="text-h5">Tab 3 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</p>
 
-<p>
-    <MChip Label Color="primary">Persistent</MChip>
-    <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Self</MChip>
-</p>
+    <p>
+        <MChip Label Color="primary">Persistent</MChip>
+        <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Self</MChip>
+    </p>
 
-<PPageStackLink Href="/blazor/examples/page-stack/page1">Navigate to Page 1</PPageStackLink>
+    <PPageStackLink Href="/blazor/examples/page-stack/page1">Navigate to Page 1</PPageStackLink>
 
-<MSyntaxHighlight Code="@sourceCode"
-                  Language="html"
-                  Style="font-size: 10px">
-</MSyntaxHighlight>
+    <MSyntaxHighlight Code="@sourceCode"
+                      Language="html"
+                      Style="font-size: 10px">
+    </MSyntaxHighlight>
+</MPullRefresh>
 
 @code {
+
+    private readonly DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
+    private MPullRefresh? _pullToRefresh;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         NavController.PageClosed += NavControllerOnPageClosed;
+        NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
     }
 
     private void NavControllerOnPageClosed(object? sender, PageStackPageClosedEventArgs e)
@@ -34,9 +40,31 @@
         Console.Out.WriteLine($"{e.RelativeUri} closed");
     }
 
+    private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
+    {
+        if (_pullToRefresh is null)
+        {
+            return;
+        }
+
+        if (e.TargetHref?.Equals("/blazor/examples/page-stack/tab3", StringComparison.OrdinalIgnoreCase) is not true)
+        {
+            return;
+        }
+
+        await _pullToRefresh.SimulateRefreshAsync();
+    }
+
+    private async Task OnRefreshAsync()
+    {
+        // simulate a long-running task
+        await Task.Delay(2000);
+    }
+
     public void Dispose()
     {
         NavController.PageClosed -= NavControllerOnPageClosed;
+        NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
     }
 
 }

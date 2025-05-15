@@ -1,9 +1,10 @@
 ﻿@page "/blazor/examples/page-stack/tab2/{parameter}"
 @layout PageStackLayout
+@inject NavigationManager NavigationManager
 
 <p class="caption">url: /blazor/examples/page-stack/tab2/{parameter}</p>
 
-<p class="text-h5"><b>@Parameter</b> created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</p>
+<p class="text-h5"><b>@Parameter</b> created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</p>
 
 <p>
     <MChip Label Color="primary">Persistent</MChip>
@@ -20,13 +21,31 @@
 </MAlert>
 
 <ul>
-    <li><a href="/blazor/examples/page-stack/tab2/Today">Today</a></li>
-    <li><a href="/blazor/examples/page-stack/tab2/Tomorrow">Tomorrow</a></li>
-    <li><a href="/blazor/examples/page-stack/tab2/ThisWeek">ThisWeek</a></li>
-    <li><a href="/blazor/examples/page-stack/tab2/Done">Done</a></li>
+    <li>@RenderAnchor("/blazor/examples/page-stack/tab2/Today", "Today")</li>
+    <li>@RenderAnchor("/blazor/examples/page-stack/tab2/Tomorrow", "Tomorrow")</li>
+    <li>@RenderAnchor("/blazor/examples/page-stack/tab2/ThisWeek", "ThisWeek")</li>
+    <li>@RenderAnchor("/blazor/examples/page-stack/tab2/Done", "Done")</li>
 </ul>
 
 @code {
 
     [Parameter] public string? Parameter { get; set; }
+
+    private readonly DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
+
+    /// <summary>
+    /// Render anchor tag with a replacement navigation.
+    /// </summary>
+    /// <param name="href"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    private RenderFragment RenderAnchor(string href, string content) => __builder =>
+    {
+        <a href="@href"
+           @onclick:preventDefault
+           @onclick="@(() => NavigationManager.NavigateTo(href, replace: true))">
+            @content
+        </a>
+    };
+
 }

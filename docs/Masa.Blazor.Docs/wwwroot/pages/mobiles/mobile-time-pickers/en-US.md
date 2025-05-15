@@ -8,7 +8,7 @@ related:
   - /blazor/mobiles/mobile-date-pickers
 ---
 
-## Installation
+## Installation {released-on=v1.10.0}
 
 ```shell
 dotnet add package Masa.Blazor.MobileComponents

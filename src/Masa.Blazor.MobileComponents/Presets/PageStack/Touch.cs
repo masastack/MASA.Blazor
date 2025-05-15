@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets.PageStack;
+﻿using Masa.Blazor.SourceGenerated;
+
+namespace Masa.Blazor.Presets.PageStack;
 
 public class Touch : IAsyncDisposable
 {

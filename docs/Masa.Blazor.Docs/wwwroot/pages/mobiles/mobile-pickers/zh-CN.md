@@ -7,17 +7,17 @@ related:
   - /blazor/mobiles/mobile-time-pickers
 ---
 
-## 安装 {#installation}
+## 安装 {#installation released-on=v1.10.0}
 
 ```shell
 dotnet add package Masa.Blazor.MobileComponents
 ```
 
-## 示例
+## 示例 {#example}
 
-### 属性
+### 属性 {#props}
 
-#### 级联
+#### 级联 {#cascade}
 
 使用级联的 `Columns` 和 `ItemChildren` 字段可以实现选项级联的效果。
 
@@ -25,7 +25,7 @@ dotnet add package Masa.Blazor.MobileComponents
 
 <masa-example file="Examples.mobiles.mobile_pickers.Cascade"></masa-example>
 
-#### 自定义项高度
+#### 自定义项高度 {#custom-item-height}
 
 通过 `1Itemheight` 可以自定义选项的高度。目前只支持 `px` 。
 

@@ -3,7 +3,7 @@
 
 <p class="caption">url: /blazor/examples/page-stack/tab1</p>
 
-<p class="text-h5">Tab 1 created at @(DateTimeOffset.UtcNow.ToString("HH:mm:ss zz"))</p>
+<p class="text-h5">Tab 1 created at @(_pageCreatedAt.ToString("HH:mm:ss zz"))</p>
 
 <p>
     <MChip Label Disabled Class="text-decoration-line-through" Color="primary">Persistent</MChip>
@@ -17,3 +17,8 @@
     You can check the change of time in the title of the tab.
 </MAlert>
 
+@code {
+
+    private readonly DateTimeOffset _pageCreatedAt = DateTimeOffset.UtcNow;
+
+}
