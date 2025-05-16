@@ -5,7 +5,6 @@ using Masa.Blazor.Components.Input;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
-using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.JSModules;
 using Masa.Blazor.Mixins.Activatable;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -81,7 +80,6 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
         services.TryAddScoped<SwiperJsModule>();
-        services.TryAddScoped<XgplayerJSModule>();
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using Masa.Blazor.Components.Xgplayer;
-using Masa.Blazor.Components.Xgplayer.Plugins;
-using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
-using Masa.Blazor.Components.Xgplayer.Plugins.Play;
+﻿using Masa.Blazor.Components.Xgplayer;
 
 namespace Masa.Blazor;
 

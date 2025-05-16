@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Masa.Blazor.Components.Xgplayer.Plugins;
+﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 
 namespace Masa.Blazor;
