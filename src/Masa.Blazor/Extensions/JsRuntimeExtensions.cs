@@ -248,4 +248,14 @@ public static class JsRuntimeExtensions
         var jsonElement = await jsRuntime.InvokeAsync<JsonElement>(JsInteropConstants.GetProp, el, name);
         return jsonElement.ValueKind == JsonValueKind.Number ? jsonElement.GetDouble() : null;
     }
+
+    /// <summary>
+    /// Toggle mourning mode
+    /// </summary>
+    /// <param name="jsRuntime">The instance of IJSRuntime</param>
+    /// <param name="force">Force the mourning mode on or off</param>
+    public static async Task ToggleMourningModeAsync(this IJSRuntime jsRuntime, bool force)
+    {
+        await jsRuntime.InvokeVoidAsync(JsInteropConstants.ToggleMourningMode, force);
+    }
 }

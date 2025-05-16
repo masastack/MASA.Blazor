@@ -185,4 +185,6 @@ public static class JsInteropConstants
     public static string MatchesSelector => $"{JsInteropFuncNamePrefix}matchesSelector";
     
     public static string prepareSticky => $"{JsInteropFuncNamePrefix}prepareSticky";
+
+    public static string ToggleMourningMode => $"{JsInteropFuncNamePrefix}toggleMourningMode";
 }

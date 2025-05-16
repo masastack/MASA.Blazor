@@ -102,3 +102,12 @@ To avoid this, you can add the **MAppThemeStylesheet** component in the `head` t
 ```
 :::
 ::::
+
+## Mourning mode {released-on=v1.10.0}
+
+Mourning mode refers to changing the appearance of the user interface in certain specific situations (such as mourning days), such as using a black-and-white filter to express mourning.
+To achieve this, add the `filter: grayscale(100%)` style to the root element.
+
+Masa Blazor provides a built-in JavaScript method **toggleMourningMode** to implement this functionality.
+
+<masa-example file="Examples.features.theme.MourningMode"></masa-example>
