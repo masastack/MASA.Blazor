@@ -4,7 +4,11 @@ desc: "A HTML5 video player component base on [Xigua Video Playerv3.0.11](https:
 tag: "JS Proxy"
 ---
 
-You need to reference the following files before using it:
+## Installation {released-on=v1.10.0}
+
+```shell
+dotnet add package Masa.Blazor.JSComponents.Xgplayer
+```
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xgplayer@3.0.11/dist/index.min.css"/>
