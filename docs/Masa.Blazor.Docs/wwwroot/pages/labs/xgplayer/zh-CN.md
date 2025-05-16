@@ -4,7 +4,11 @@ desc: "一个基于 [Xigua Video Playervv3.0.11](https://h5player.bytedance.com/
 tag: "JS代理"
 ---
 
-在使用之前你必须引入以下文件：
+## 安装 {#installation released-on=v1.10.0}
+
+```shell
+dotnet add package Masa.Blazor.JSComponents.Xgplayer
+```
 
 ```html
 <link rel="stylesheet" href="https://cdn.masastack.com/npm/xgplayer/3.0.11/xgplayer.min.css"/>

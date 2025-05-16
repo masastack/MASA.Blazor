@@ -278,6 +278,7 @@ public partial class Components
         list.AddRange(DriverJSApiGenerator.ComponentMetas);
         list.AddRange(PdfJSApiGenerator.ComponentMetas);
         list.AddRange(MobileComponentsApiGenerator.ComponentMetas);
+        list.AddRange(XgplayerApiGenerator.ComponentMetas);
         return list;
     }
 

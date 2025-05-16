@@ -1,23 +1,26 @@
-﻿using Masa.Blazor.Components.Xgplayer;
+﻿using System.Globalization;
+using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
+using Masa.Blazor.Core;
+using Masa.Blazor.Extensions;
+using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor;
 
 public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 {
-    [Inject] private XgplayerJSModule XgplayerJSModule { get; set; } = default!;
-
-    [Inject] private I18n I18n { get; set; } = default!;
+    [Inject] private I18n I18n { get; set; } = null!;
 
     /// <summary>
     /// Media resource URL, when the URL is in the form of an array,
     /// [Source tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source) will be used for playback.
     /// </summary>
-    [Parameter] [EditorRequired] public XgplayerUrl Url { get; set; } = default!;
+    [Parameter] [EditorRequired] public XgplayerUrl Url { get; set; } = null!;
 
     [Parameter] public StringNumber? Width { get; set; }
 
@@ -37,7 +40,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [Parameter] public bool AutoplayMuted { get; set; }
 
     /// <summary>
-    /// Default playback rate for media element, reference values: 0.5, 0.75, 1, 1.5, 2
+    /// Default playback rate for a media element, reference values: 0.5, 0.75, 1, 1.5, 2
     /// </summary>
     [Parameter] [MasaApiParameter(1)] public float DefaultPlaybackRate { get; set; } = 1;
 
@@ -52,7 +55,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [Parameter] public bool Loop { get; set; }
 
     /// <summary>
-    /// The second of video to start playing
+    /// The second of the video to start playing
     /// </summary>
     [Parameter] public double StartTime { get; set; }
 
@@ -92,7 +95,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 
     /// <summary>
     /// For most scenarios, you can use <see cref="OnFullscreenChange"/>.
-    /// For scenarios where you need to click the full screen button to enter full screen
+    /// For scenarios where you need to click the full-screen button to enter full screen
     /// when using this component in Webview, you may need to use this event.
     /// </summary>
     [Parameter] public EventCallback OnFullscreenTouchend { get; set; }
@@ -201,10 +204,18 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             return;
         }
 
-        await RunTaskInMicrosecondsAsync(
-            async () => XgplayerJSObjectReference = await XgplayerJSModule.InitAsync(Ref.GetSelector(), Url, GenOptions(), _jsInteropHandle),
-            100,
-            _cancellationTokenSource.Token);
+        await RunTaskInMicrosecondsAsync(TestAsync, 100, _cancellationTokenSource.Token);
+    }
+
+    private IJSObjectReference? _importJSObjectReference;
+
+    private async Task TestAsync()
+    {
+       _importJSObjectReference = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
+            .ConfigureAwait(false);
+       
+        var jsObjectReference = await _importJSObjectReference.InvokeAsync<IJSObjectReference>("init", Ref.GetSelector(), Url, GenOptions(), _jsInteropHandle);
+        XgplayerJSObjectReference = new XgplayerJSObjectReference(jsObjectReference);
     }
 
     protected virtual XgplayerOptions GenOptions()
@@ -294,6 +305,11 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 
     protected override async ValueTask DisposeAsyncCore()
     {
+        if (_importJSObjectReference != null)
+        {
+            await _importJSObjectReference.DisposeAsync();
+        }
+
         if (XgplayerJSObjectReference != null)
         {
             try
