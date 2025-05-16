@@ -5,8 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
+        <PackageTags>blazor;masa;masa.blazor;masa blazor</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
-        <RootNamespace>Masa.Blazor.JSComponents.PdfMobileViewer</RootNamespace>
+        <Company>masastack</Company>
     </PropertyGroup>
 
     <ItemGroup>
