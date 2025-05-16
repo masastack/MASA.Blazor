@@ -1,0 +1,18 @@
+﻿@using Masa.Blazor.Extensions
+@inject IJSRuntime JSRuntime
+
+<MSwitch @bind-Value="_mourning"
+         @bind-Value:after="@OnUpdated"
+         Label="Mourning Mode">
+</MSwitch>
+
+@code {
+
+    private bool _mourning;
+
+    private void OnUpdated()
+    {
+        _ = JSRuntime.ToggleMourningModeAsync(_mourning);
+    }
+
+}

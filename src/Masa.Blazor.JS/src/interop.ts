@@ -1687,3 +1687,7 @@ export function prepareSticky(containerElOrString: string, root: HTMLElement, of
     return n !== undefined && n !== null;
   }
 }
+
+export function toggleMourningMode(mourning: boolean) {
+  document.documentElement.classList.toggle('m-mourning-mode', mourning);
+}

@@ -1648,3 +1648,9 @@ html.m-overlay-scroll-blocked {
     background: rgba(var(--m-theme-surface));
     color: rgba(var(--m-theme-on-surface));
 }
+
+/* mourning mode */
+.m-mourning-mode {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
