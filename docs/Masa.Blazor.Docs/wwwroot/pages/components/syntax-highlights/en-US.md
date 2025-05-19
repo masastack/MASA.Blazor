@@ -6,7 +6,11 @@ related:
   - /blazor/components/markdown-parsers
 ---
 
-## Usage
+## Installation {released-on=v1.10.0}
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
 
 - Using prism with CDN, such as [jsdelivr](https://www.jsdelivr.com/)
 
@@ -31,5 +35,7 @@ related:
 <!-- and it's easy to individually load additional languages -->
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/csharp.min.js"></script>
 ```
+
+## Usage
 
 <masa-example file="Examples.components.syntax_highlights.Usage"></masa-example>

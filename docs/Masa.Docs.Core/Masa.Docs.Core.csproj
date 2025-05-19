@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.MarkdownIt\Masa.Blazor.JSComponents.MarkdownIt.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.SomethingSkia\Masa.Blazor.SomethingSkia.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>

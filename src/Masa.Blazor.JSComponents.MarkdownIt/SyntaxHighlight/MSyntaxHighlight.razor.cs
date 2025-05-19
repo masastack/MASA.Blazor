@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using System.Text;
 
 namespace Masa.Blazor;
 
 public partial class MSyntaxHighlight : MasaComponentBase
 {
-    [Inject] protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
-
     [Parameter, EditorRequired] public string? Code { get; set; }
 
     [Parameter] public string? Language { get; set; }
@@ -21,6 +19,7 @@ public partial class MSyntaxHighlight : MasaComponentBase
     private bool _firstRender = true;
     private string _codeHtml = string.Empty;
     private string? _prevCode;
+    private IJSObjectReference? _importJSObjectReference;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
@@ -89,11 +88,36 @@ public partial class MSyntaxHighlight : MasaComponentBase
             return;
         }
 
-        _codeHtml = await MarkdownItJSModule.Highlight(Code, Language, streaming: false);
+        _importJSObjectReference = await Js.InvokeAsync<IJSObjectReference>("import",
+            "./_content/Masa.Blazor.JSComponents.MarkdownIt/markdown-it.js");
+
+        _codeHtml = await Highlight(Code, Language, streaming: false) ?? String.Empty;
 
         if (OnHighlighted != null)
         {
             NextTick(async () => { await OnHighlighted.Invoke(Ref); });
+        }
+    }
+
+    private async ValueTask<string?> Highlight(string code, string? language, bool streaming = false)
+    {
+        if (streaming)
+        {
+            var dataReference =
+                await _importJSObjectReference.TryInvokeAsync<IJSStreamReference>("highlightToStream", code, language);
+            await using var dataReferenceStream = await dataReference.OpenReadStreamAsync();
+            using var reader = new StreamReader(dataReferenceStream);
+            return await reader.ReadToEndAsync();
+        }
+
+        return await _importJSObjectReference.TryInvokeAsync<string>("highlight", code, language);
+    }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        if (_importJSObjectReference is not null)
+        {
+            await _importJSObjectReference.DisposeAsync();
         }
     }
 }

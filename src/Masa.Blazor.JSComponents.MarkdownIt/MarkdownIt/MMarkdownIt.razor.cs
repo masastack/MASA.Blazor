@@ -2,9 +2,6 @@
 
 public partial class MMarkdownIt : MasaComponentBase
 {
-    [Inject]
-    protected MarkdownItJSModule MarkdownItJSModule { get; set; } = null!;
-
     /// <summary>
     /// Enable markdown-it-header-sections plugin.
     /// </summary>
@@ -20,77 +17,51 @@ public partial class MMarkdownIt : MasaComponentBase
     #region MarkdownItOptions
 
     /// <summary>
-    /// Enable HTML tags in source
+    /// Enable HTML tags in a source
     /// </summary>
     [Parameter]
-    public bool Html
-    {
-        get => GetValue(false);
-        set => SetValue(value);
-    }
+    public bool Html { get; set; }
 
     /// <summary>
     /// Use '/' to close single tags (<br />).
     /// This is only for full CommonMark compatibility.
     /// </summary>
     [Parameter]
-    public bool XHtmlOut
-    {
-        get => GetValue(false);
-        set => SetValue(value);
-    }
+    public bool XHtmlOut { get; set; }
 
     /// <summary>
     /// Convert '\n' in paragraphs into br tag.
     /// </summary>
     [Parameter]
-    public bool Breaks
-    {
-        get => GetValue(false);
-        set => SetValue(value);
-    }
+    public bool Breaks { get; set; }
 
     /// <summary>
     /// CSS language prefix for fenced blocks.
     /// Can be useful for external highlighters.
     /// </summary>
     [Parameter]
-    public string? LangPrefix
-    {
-        get => GetValue("language-");
-        set => SetValue(value);
-    }
+    [MasaApiParameter("language-")]
+    public string? LangPrefix { get; set; } = "language-";
 
     /// <summary>
     /// Autoconvert URL-like text to links
     /// </summary>
     [Parameter]
-    public bool Linkify
-    {
-        get => GetValue(false);
-        set => SetValue(value);
-    }
+    public bool Linkify { get; set; }
 
     /// <summary>
     /// Enable some language-neutral replacement + quotes beautification
     /// </summary>
     [Parameter]
-    public bool Typographer
-    {
-        get => GetValue(false);
-        set => SetValue(value);
-    }
+    public bool Typographer { get; set; }
 
     /// <summary>
-    ///  Double + single quotes replacement pairs,
+    /// Double + single quotes replacement pairs,
     /// when typographer enabled, and smartquotes on. 
     /// </summary>
     [Parameter]
-    public string[]? Quotes
-    {
-        get => GetValue(new[] { "“", "”", "‘", "’" });
-        set => SetValue(value);
-    }
+    [MasaApiParameter("[\"“\", \"”\", \"‘\", \"’\"]")]
+    public string[]? Quotes { get; set; } = ["“", "”", "‘", "’"];
 
     #endregion
 
@@ -125,19 +96,26 @@ public partial class MMarkdownIt : MasaComponentBase
 
     private string? _prevSource;
     private IJSObjectReference? _markdownIt;
+    private IJSObjectReference? _importJSObjectReference;
+    private bool _prevHtml;
+    private bool _prevXHtmlOut;
+    private bool _prevBreaks;
+    private string? _prevLangPrefix;
+    private bool _prevLinkify;
+    private bool _prevTypographer;
+    private string[]? _prevQuotes;
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
+    protected override void OnInitialized()
     {
-        base.RegisterWatchers(watcher);
-
-        watcher
-            .Watch<bool>(nameof(Html), GoCreateMarkdownItProxy)
-            .Watch<bool>(nameof(XHtmlOut), GoCreateMarkdownItProxy)
-            .Watch<bool>(nameof(Breaks), GoCreateMarkdownItProxy)
-            .Watch<string>(nameof(LangPrefix), GoCreateMarkdownItProxy)
-            .Watch<bool>(nameof(Linkify), GoCreateMarkdownItProxy)
-            .Watch<bool>(nameof(Typographer), GoCreateMarkdownItProxy)
-            .Watch<string[]>(nameof(Quotes), GoCreateMarkdownItProxy);
+        base.OnInitialized();
+        
+        _prevHtml = Html;
+        _prevXHtmlOut = XHtmlOut;
+        _prevBreaks = Breaks;
+        _prevLangPrefix = LangPrefix;
+        _prevLinkify = Linkify;
+        _prevTypographer = Typographer;
+        _prevQuotes = Quotes;
     }
 
     protected override IEnumerable<string> BuildComponentClass()
@@ -149,10 +127,64 @@ public partial class MMarkdownIt : MasaComponentBase
     {
         await base.OnParametersSetAsync();
 
+        var needsRecreate = false;
+        var needsParse = false;
+        
         if (_prevSource != Source)
         {
             _prevSource = Source;
+            await TryParse();
+        }
 
+        if (_prevHtml != Html)
+        {
+            _prevHtml = Html;
+            needsRecreate = true;
+        }
+        
+        if (_prevXHtmlOut != XHtmlOut)
+        {
+            _prevXHtmlOut = XHtmlOut;
+            needsRecreate = true;
+        }
+        
+        if (_prevBreaks != Breaks)
+        {
+            _prevBreaks = Breaks;
+            needsRecreate = true;
+        }
+        
+        if (_prevLangPrefix != LangPrefix)
+        {
+            _prevLangPrefix = LangPrefix;
+            needsRecreate = true;
+        }
+        
+        if (_prevLinkify != Linkify)
+        {
+            _prevLinkify = Linkify;
+            needsRecreate = true;
+        }
+        
+        if (_prevTypographer != Typographer)
+        {
+            _prevTypographer = Typographer;
+            needsRecreate = true;
+        }
+        
+        if (_prevQuotes != Quotes)
+        {
+            _prevQuotes = Quotes;
+            needsRecreate = true;
+        }
+
+        if (needsRecreate)
+        {
+            await CreateMarkdownItProxy();
+            NextTick(TryParse);
+        }
+        else if (needsParse)
+        {
             await TryParse();
         }
     }
@@ -168,14 +200,12 @@ public partial class MMarkdownIt : MasaComponentBase
         }
     }
 
-    private async void GoCreateMarkdownItProxy()
-    {
-        await CreateMarkdownItProxy();
-        NextTick(async () => { await TryParse(); });
-    }
-
     private async Task CreateMarkdownItProxy()
     {
+        _importJSObjectReference ??= await Js.InvokeAsync<IJSObjectReference>("import",
+                "./_content/Masa.Blazor.JSComponents.MarkdownIt/markdown-it.js")
+            .ConfigureAwait(false);
+
         var options = new MarkdownItOptions()
         {
             Html = Html,
@@ -187,7 +217,14 @@ public partial class MMarkdownIt : MasaComponentBase
             Quotes = Quotes
         };
 
-        _markdownIt = await MarkdownItJSModule.Create(options, HeaderSections, AnchorOptions, Scope);
+        if (_markdownIt is not null)
+        {
+            await _markdownIt.DisposeAsync();
+        }
+
+        _markdownIt =
+            await _importJSObjectReference.InvokeAsync<IJSObjectReference>("create", options, HeaderSections,
+                AnchorOptions, Scope);
     }
 
     private async Task TryParse()
@@ -200,7 +237,7 @@ public partial class MMarkdownIt : MasaComponentBase
         }
         else
         {
-            var result = await MarkdownItJSModule.ParseAll(_markdownIt, Source);
+            var result = await ParseAll(_markdownIt, Source);
 
             if (result is null) return;
 
@@ -219,7 +256,7 @@ public partial class MMarkdownIt : MasaComponentBase
 
         NextTick(async () =>
         {
-            await MarkdownItJSModule.AfterRender(_markdownIt);
+            await AfterRender(_markdownIt);
 
             if (OnAfterRendered.HasDelegate)
             {
@@ -229,4 +266,13 @@ public partial class MMarkdownIt : MasaComponentBase
 
         StateHasChanged();
     }
+
+    private async ValueTask<string?> Parse(IJSObjectReference instance, string source)
+        => await _importJSObjectReference.TryInvokeAsync<string>("parse", instance, source);
+
+    private async ValueTask<MarkdownItParsedResult?> ParseAll(IJSObjectReference instance, string source)
+        => await _importJSObjectReference.TryInvokeAsync<MarkdownItParsedResult>("parseAll", instance, source);
+
+    private async Task AfterRender(IJSObjectReference instance)
+        => await _importJSObjectReference.TryInvokeVoidAsync("afterRender", instance);
 }

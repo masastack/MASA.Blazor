@@ -3,7 +3,7 @@
 public class MarkdownItAnchorOptions
 {
     /// <summary>
-    /// Minimum level to apply anchors, or array of selected levels. Default value is 1. 
+    /// Minimum level to apply anchors, or array of selected levels. The default value is 1. 
     /// </summary>
     public int Level { get; set; } = 1;
 
