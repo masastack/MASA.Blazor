@@ -76,7 +76,6 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<InternalHttpClient>();
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MonacoEditorJSModule>();
-        services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
         services.TryAddScoped<SwiperJsModule>();

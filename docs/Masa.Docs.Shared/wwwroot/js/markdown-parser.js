@@ -15,6 +15,7 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         addBlockquoteRules(md);
         addTableRules(md);
         addHtmlInlineRules(md)
+        addLinkRules(parser);
 
         parser.useContainer("code-group");
         parser.useContainer("code-group-item");
@@ -22,7 +23,6 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
     }
 
     addCodeRules(md);
-    addLinkRules(parser);
     
     function addHtmlInlineRules(md) {
         md.renderer.rules.html_inline = (tokens, idx, options, env, self) => {

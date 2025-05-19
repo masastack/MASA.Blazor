@@ -279,6 +279,7 @@ public partial class Components
         list.AddRange(PdfJSApiGenerator.ComponentMetas);
         list.AddRange(MobileComponentsApiGenerator.ComponentMetas);
         list.AddRange(XgplayerApiGenerator.ComponentMetas);
+        list.AddRange(MarkdownItApiGenerator.ComponentMetas);
         return list;
     }
 

@@ -6,6 +6,12 @@ related:
   - /blazor/components/markdown-parsers
 ---
 
+## 安装 {#installation released-on=v1.10.0}
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
 - 通过 CDN（例如 [BootCDN](https://www.bootcdn.cn/)）使用 prism:
 
 ```html

@@ -22,6 +22,12 @@ This component built-in the following third-party markdown-it plugins:
 
 > **prism** and **highlightjs** highlighting schemes are supported, see the [MSyntaxHighlight](/blazor/components/syntax-highlights) component for details.
 
+## Installation
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
 ## Usage
 
 <masa-example file="Examples.components.markdown_parsers.Usage"></masa-example>

@@ -103,6 +103,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
     private XgplayerUrl? _prevUrl;
+    private IJSObjectReference? _importJSObjectReference;
     private DotNetObjectReference<XgplayerJSInteropHandle>? _jsInteropHandle;
 
     private IXgplayerControls? _controls;
@@ -204,12 +205,10 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             return;
         }
 
-        await RunTaskInMicrosecondsAsync(TestAsync, 100, _cancellationTokenSource.Token);
+        await RunTaskInMicrosecondsAsync(CreateXgplayerAsync, 100, _cancellationTokenSource.Token);
     }
 
-    private IJSObjectReference? _importJSObjectReference;
-
-    private async Task TestAsync()
+    private async Task CreateXgplayerAsync()
     {
        _importJSObjectReference = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
             .ConfigureAwait(false);
