@@ -95,8 +95,8 @@ public partial class MMarkdownIt : MasaComponentBase
     private string _mdHtml = string.Empty;
 
     private string? _prevSource;
-    private IJSObjectReference? _markdownIt;
     private IJSObjectReference? _importJSObjectReference;
+    private IJSObjectReference? _markdownItObjectReference;
     private bool _prevHtml;
     private bool _prevXHtmlOut;
     private bool _prevBreaks;
@@ -133,7 +133,7 @@ public partial class MMarkdownIt : MasaComponentBase
         if (_prevSource != Source)
         {
             _prevSource = Source;
-            await TryParse();
+            needsParse = true;
         }
 
         if (_prevHtml != Html)
@@ -217,19 +217,19 @@ public partial class MMarkdownIt : MasaComponentBase
             Quotes = Quotes
         };
 
-        if (_markdownIt is not null)
+        if (_markdownItObjectReference is not null)
         {
-            await _markdownIt.DisposeAsync();
+            await _markdownItObjectReference.DisposeAsync();
         }
 
-        _markdownIt =
+        _markdownItObjectReference =
             await _importJSObjectReference.InvokeAsync<IJSObjectReference>("create", options, HeaderSections,
                 AnchorOptions, Scope);
     }
 
     private async Task TryParse()
     {
-        if (_markdownIt is null) return;
+        if (_markdownItObjectReference is null) return;
 
         if (Source == null)
         {
@@ -237,7 +237,7 @@ public partial class MMarkdownIt : MasaComponentBase
         }
         else
         {
-            var result = await ParseAll(_markdownIt, Source);
+            var result = await ParseAll(_markdownItObjectReference, Source);
 
             if (result is null) return;
 
@@ -256,7 +256,7 @@ public partial class MMarkdownIt : MasaComponentBase
 
         NextTick(async () =>
         {
-            await AfterRender(_markdownIt);
+            await AfterRender(_markdownItObjectReference);
 
             if (OnAfterRendered.HasDelegate)
             {
@@ -275,4 +275,17 @@ public partial class MMarkdownIt : MasaComponentBase
 
     private async Task AfterRender(IJSObjectReference instance)
         => await _importJSObjectReference.TryInvokeVoidAsync("afterRender", instance);
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        if (_importJSObjectReference is not null)
+        {
+            await _importJSObjectReference.DisposeAsync();
+        }
+        
+        if (_markdownItObjectReference is not null)
+        {
+           await _markdownItObjectReference.DisposeAsync();
+        }
+    }
 }
