@@ -36,7 +36,7 @@ class SwiperProxy {
     const swiper = new (Swiper as any)(el, swiperOptions);
     this.swiper = swiper;
     this.handle = handle;
-    this.swiper.on("realIndexChange", (e) => this.onRealIndexChange(e, this));
+    this.swiper.on("activeIndexChange", (e) => this.onRealIndexChange(e, this));
 
     el._swiper = {
       instance: this.swiper,
@@ -69,7 +69,7 @@ class SwiperProxy {
 
   async onRealIndexChange(e: SwiperClass, that: SwiperProxy) {
     if (that.handle) {
-      await that.handle.invokeMethodAsync("OnIndexChanged", e.realIndex);
+      await that.handle.invokeMethodAsync("OnIndexChanged", e.originalParams.loop ? e.realIndex : e.activeIndex);
     }
   }
 }

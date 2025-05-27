@@ -4,8 +4,6 @@ namespace Masa.Blazor;
 
 public partial class MSwiper : MasaComponentBase
 {
-    [Inject] private SwiperJsModule SwiperJsModule { get; set; } = null!;
-
     [Parameter] public StringNumber? Height { get; set; }
 
     [Parameter] public StringNumber? Width { get; set; }
@@ -46,6 +44,7 @@ public partial class MSwiper : MasaComponentBase
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Nested { get; set; }
 
+    private SwiperJsModule? _swiperJSModule;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
     private bool _isJsInteropAndRefReady;
@@ -146,7 +145,8 @@ public partial class MSwiper : MasaComponentBase
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
             };
 
-            _swiperProxy = await SwiperJsModule.Init(Ref, options, _swiperInteropHandle);
+            _swiperJSModule ??= new SwiperJsModule(Js);
+            _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
 
             await SliderToIndexAsync(0);
         }, 16, _ctsForInit.Token);

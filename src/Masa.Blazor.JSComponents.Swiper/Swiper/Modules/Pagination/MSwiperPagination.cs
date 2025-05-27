@@ -5,8 +5,8 @@ namespace Masa.Blazor;
 public class MSwiperPagination : SwiperModuleBase
 {
     /// <summary>
-    /// If true then clicking on pagination button will cause transition to appropriate slide.
-    /// Only for bullets pagination type.
+    /// If true then clicking on pagination button will cause transition to the appropriate slide.
+    /// Only for bullet pagination type.
     /// </summary>
     [Parameter] public bool Clickable { get; set; }
 
@@ -14,7 +14,7 @@ public class MSwiperPagination : SwiperModuleBase
 
     /// <summary>
     /// Good to enable if you use bullets pagination with a lot of slides.
-    /// So it will keep only few bullets visible at the same time.
+    /// So it will keep only a few bullets visible at the same time.
     /// </summary>
     [Parameter] public bool DynamicBullets { get; set; }
 

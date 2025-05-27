@@ -280,6 +280,7 @@ public partial class Components
         list.AddRange(MobileComponentsApiGenerator.ComponentMetas);
         list.AddRange(XgplayerApiGenerator.ComponentMetas);
         list.AddRange(MarkdownItApiGenerator.ComponentMetas);
+        list.AddRange(SwiperApiGenerator.ComponentMetas);
         return list;
     }
 
