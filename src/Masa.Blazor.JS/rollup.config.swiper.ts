@@ -7,7 +7,7 @@ export default defineConfig({
   input: "./src/proxies/swiper/index.ts",
   output: [
     {
-      file: "../MASA.Blazor/wwwroot/js/proxies/swiper-proxy.js",
+      file: "../MASA.Blazor.JSComponents.Swiper/wwwroot/swiper.js",
       format: "esm",
       sourcemap: true,
     },

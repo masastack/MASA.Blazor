@@ -8,11 +8,17 @@ related:
   - /blazor/components/slide-groups
 ---
 
-You need to reference the following files before using it:
+## Installation {released-on=v1.10.0}
+
+```shell
+dotnet add package Masa.Blazor.JSComponents.Swiper
+```
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+```
 
+```html
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 ```
 

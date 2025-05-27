@@ -78,7 +78,6 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<MonacoEditorJSModule>();
         services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
-        services.TryAddScoped<SwiperJsModule>();
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
