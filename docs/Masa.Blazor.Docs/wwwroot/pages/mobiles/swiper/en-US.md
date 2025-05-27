@@ -61,6 +61,10 @@ to recalculate the height after the content is loaded.
 
 <masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 
+#### Virtual {released-on=v1.10.0}
+
+<masa-example file="Examples.mobiles.swiper.Virtual"></masa-example>
+
 ### Module components
 
 #### Navigation

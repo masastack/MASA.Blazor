@@ -58,6 +58,10 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 
 <masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 
+#### 虚拟 {#virtual released-on=v1.10.0}
+
+<masa-example file="Examples.mobiles.swiper.Virtual"></masa-example>
+
 ### 模块组件 {#module-components}
 
 #### 导航 {#navigation}
