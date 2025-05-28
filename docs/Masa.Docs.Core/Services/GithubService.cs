@@ -127,4 +127,27 @@ public class GithubService(ExpiryLocalStorage localStorage, ILogger<GithubServic
             return null;
         }
     }
+
+    public async ValueTask<int> GetStarCountAsync(string owner, string repo)
+    {
+        var key = repo + "__starCount";
+        var starCount = await localStorage.GetExpiryItemAsync<int?>(key);
+        if (starCount.HasValue)
+        {
+            return starCount.Value;
+        }
+        try
+        {
+            var client = CreateClient(owner, repo);
+            var repository = await client.Repository.Get(owner, repo);
+            starCount = repository.StargazersCount;
+            await localStorage.SetExpiryItemAsync(key, starCount, TimeSpan.FromHours(1));
+            return starCount.Value;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error fetching star count");
+            return 0;
+        }
+}
 }
