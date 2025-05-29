@@ -136,6 +136,7 @@ public class GithubService(ExpiryLocalStorage localStorage, ILogger<GithubServic
         {
             return starCount.Value;
         }
+
         try
         {
             var client = CreateClient(owner, repo);
