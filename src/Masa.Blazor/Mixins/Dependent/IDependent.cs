@@ -2,7 +2,7 @@
 
 public interface IDependent
 {
-    void RegisterChild(IDependent dependent);
+    void AddDependent(IDependent dependent);
 
     IDependent? CascadingDependent { get; }
 
