@@ -16,7 +16,7 @@ public partial class MPagination : MasaComponentBase
     /// The format of the link href. It's useful for SEO.
     /// </summary>
     /// <example>
-    /// ”/page/{0}“
+    /// “/page/{0}“
     /// </example>
     [Parameter]
     public string? HrefFormat { get; set; }
@@ -92,9 +92,9 @@ public partial class MPagination : MasaComponentBase
     private ModifierBuilder _navigationModifierBuilder = _block.Element("navigation").CreateModifierBuilder();
     private ModifierBuilder _itemModifierBuilder = _block.Element("item").CreateModifierBuilder();
 
-    public bool PrevDisabled => Value <= 1;
+    private bool PrevDisabled => Value <= 1;
 
-    public bool NextDisabled => Value >= Length;
+    private bool NextDisabled => Value >= Length;
 
     protected int MaxButtons { get; set; }
 
@@ -183,68 +183,86 @@ public partial class MPagination : MasaComponentBase
         }
     }
 
-    private IEnumerable<StringNumber> CreateRange(int length, int start = 0)
+    private IEnumerable<StringNumber> CreateRange(int from, int to)
     {
-        return Enumerable.Range(0, length).Select(i => (StringNumber)(start + i));
+        var range = new List<StringNumber>();
+
+        from = from > 0 ? from : 1;
+
+        for (int i = from; i <= to; i++)
+        {
+            range.Add(i);
+        }
+
+        return range;
     }
 
-    public IEnumerable<StringNumber> GetItems()
+    private IEnumerable<StringNumber> GetItems()
     {
+        if (ComputedTotalVisible == 0)
+        {
+            return [];
+        }
+
+        // Get the maximum number of visible buttons
+        var maxLength = Math.Min(ComputedTotalVisible, Length);
+        if (MaxButtons != 0)
+        {
+            maxLength = Math.Min(maxLength, MaxButtons);
+        }
+
+        // If the total number of items is less than or equal to the maximum visible buttons,
+        if (Length <= maxLength)
+        {
+            return CreateRange(1, Length);
+        }
+
         List<StringNumber> items = new();
 
-        var start = 1;
+        var even = maxLength % 2 == 0 ? 1 : 0;
+        var left = (int)Math.Floor((maxLength / 2m));
+        var right = Length - left + 1 + even;
 
-        if (Length <= 0)
+        if (Value > left && Value < right)
         {
-            return items;
+            var firstItem = 1;
+            var lastItem = Length;
+            var start = Value - left + 2;
+            var end = Value + left - 2 - even;
+            StringNumber secondItem = (start - 1) == (firstItem + 1) ? 2 : "...";
+            StringNumber beforeLastItem = (end + 1) == (lastItem - 1) ? (end + 1) : "...";
+
+            items.Add(1);
+            items.Add(secondItem);
+            items.AddRange(CreateRange(start, end));
+            items.Add(beforeLastItem);
+            items.Add(Length);
         }
-
-        if (ComputedTotalVisible <= 1)
+        else if (Value == left)
         {
-            items.Add(Value);
-            return items;
-        }
-
-        if (Length <= ComputedTotalVisible)
-        {
-            items.AddRange(CreateRange(Length, start));
-            return items;
-        }
-
-        var even = ComputedTotalVisible % 2 == 0;
-        var middle = even ? ComputedTotalVisible / 2d : Math.Floor(ComputedTotalVisible / 2d);
-        var left = even ? middle : middle + 1;
-        var right = Length - middle;
-
-        if (left - Value >= 0)
-        {
-            items.AddRange(CreateRange(Math.Max(1, ComputedTotalVisible - 1), start));
+            var end = Value + left - 1 - even;
+            items.AddRange(CreateRange(1, end));
             items.Add("...");
             items.Add(Length);
         }
-        else if (Value - right >= (even ? 1 : 0))
+        else if (Value == right)
         {
-            var rangeLength = ComputedTotalVisible - 1;
-            var rangeStart = Length - rangeLength + start;
-            items.Add(start);
+            var start = Value - left + 1;
+            items.Add(1);
             items.Add("...");
-            items.AddRange(CreateRange(rangeLength, rangeStart));
+            items.AddRange(CreateRange(start, Length));
         }
         else
         {
-            var rangeLength = Math.Max(1, ComputedTotalVisible - 3);
-            var rangeStart = rangeLength == 1 ? Value : Value - Convert.ToInt32(Math.Ceiling(rangeLength / 2d)) + start;
-            items.Add(start);
+            items.AddRange(CreateRange(1, left));
             items.Add("...");
-            items.AddRange(CreateRange(rangeLength, rangeStart));
-            items.Add("...");
-            items.Add(Length);
+            items.AddRange(CreateRange(right, Length));
         }
 
         return items;
     }
 
-    public virtual async Task HandlePreviousAsync(MouseEventArgs args)
+    private async Task HandlePreviousAsync(MouseEventArgs args)
     {
         if (PrevDisabled)
         {
@@ -268,7 +286,7 @@ public partial class MPagination : MasaComponentBase
         }
     }
 
-    public virtual async Task HandleNextAsync(MouseEventArgs args)
+    private async Task HandleNextAsync(MouseEventArgs args)
     {
         if (NextDisabled)
         {
@@ -292,7 +310,7 @@ public partial class MPagination : MasaComponentBase
         }
     }
 
-    public virtual async Task HandleItemClickAsync(StringNumber item)
+    private async Task HandleItemClickAsync(StringNumber item)
     {
         Value = item.AsT1;
         if (ValueChanged.HasDelegate)
@@ -322,22 +340,21 @@ public partial class MPagination : MasaComponentBase
         }
     }
 
-    private async void MasaBlazor_WindowSizeChanged(object? sender, BreakpointChangedEventArgs e)
+    private void MasaBlazor_WindowSizeChanged(object? sender, BreakpointChangedEventArgs e)
     {
-        if (IsAuto is true)
+        if (IsAuto)
         {
-            var isMiniVaraint = IsMiniVariant();
-            if (isMiniVaraint != _internalMiniVariant)
+            var isMiniVariant = IsMiniVariant();
+            if (isMiniVariant != _internalMiniVariant)
             {
-                InvokeAsync(() => {
-                    _internalMiniVariant = isMiniVaraint;
+                InvokeAsync(() =>
+                {
+                    _internalMiniVariant = isMiniVariant;
                     _ = MiniVariantChanged.InvokeAsync(_internalMiniVariant);
                     StateHasChanged();
                 });
             }
         }
-
-        
     }
 
     private bool IsMiniVariant()
@@ -361,8 +378,10 @@ public partial class MPagination : MasaComponentBase
 
         return name <= MobileBreakpoint.AsT0;
     }
+
     private bool? isAuto;
     private bool IsAuto => isAuto ?? InitializeIsAuto();
+
     private bool InitializeIsAuto()
     {
         if (isAuto is null)
