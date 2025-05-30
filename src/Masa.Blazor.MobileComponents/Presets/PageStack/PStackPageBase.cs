@@ -34,7 +34,7 @@ public class PStackPageBase : ComponentBase, IAsyncDisposable
             PageStack.Pages.PagePushed += PagesOnPagePushed;
         }
     }
-
+    
     private void PagesOnPagePushed(object? sender, StackPagesPushedEventArgs e)
     {
         if (Page is null)

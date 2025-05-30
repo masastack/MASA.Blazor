@@ -403,6 +403,7 @@ public class ApiGenerator : IIncrementalGenerator
         {
             nameof(String)  => "string",
             nameof(Boolean) => "bool",
+            nameof(Single)  => "float",
             nameof(Double)  => "double",
             nameof(Int32)   => "int",
             nameof(Int64)   => "long",

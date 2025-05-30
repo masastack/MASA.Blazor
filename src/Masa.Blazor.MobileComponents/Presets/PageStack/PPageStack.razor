@@ -19,7 +19,8 @@
         var isTop = i == Pages.Count - 1;
         var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(pageData.AbsolutePath, StringComparison.OrdinalIgnoreCase);
 
-        <PPageStackItem Data="pageData"
+        <PPageStackItem AppBarVisible="@AppBarAlwaysVisible"
+                        Data="pageData"
                         CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"
                         @key="@pageData.Id">

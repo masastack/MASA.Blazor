@@ -165,20 +165,22 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
   }
   ```
 
-### PStackPageBarInit
+### PStackPageBar {released-on=v1.10.0}
+
+<app-alert type="error" content="The **PStackPageBarInit** component has been deprecated, please use the **PStackPageBar** component instead."></app-alert>
 
 Used to initialize the AppBar at the top of the stack page. Most properties are consistent
 with [MAppBar](/blazor/components/app-bars).
 
 ```razor MyStackPage.razor
-<PStackPageBarInit Title="Order detail"
-                   CenterTitle 
-                   Flat
-                   Color="primary">
-</PStackPageBarInit>
+<PStackPageBar Title="Order detail"
+               CenterTitle 
+               Flat
+               Color="primary">
+</PStackPageBar>
 ```
 
-The following are the parameters of **PStackPageBarInit** that are different from **MAppBar**:
+The following are the parameters of **PStackPageBar** that are different from **MAppBar**:
 
 | Main parameters | Description                                                                                                |
 |-----------------|------------------------------------------------------------------------------------------------------------|
@@ -188,7 +190,6 @@ The following are the parameters of **PStackPageBarInit** that are different fro
 | `BarContent`    | Custom the entire content.                                                                                 |
 | `GoBackContent` | Custom the back button.                                                                                    |
 | `ActionContent` | Set the right operation area.                                                                              |
-| `RerenderKey`   | Used for forced rendering. When the content of `BarContent` cannot be refreshed after use, you can use it. |
 
 ### PStackPageBase
 

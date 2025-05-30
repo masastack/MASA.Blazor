@@ -32,9 +32,6 @@ else
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object?> Attributes { get; set; } = [];
 
-    private CancellationTokenSource? _cts;
-    private long _time;
-
     private void OnClick()
     {
         if (Href is null)

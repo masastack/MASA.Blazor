@@ -163,19 +163,21 @@ builder.Services
   }
   ```
 
-### PStackPageBarInit
+### PStackPageBar {released-on=v1.10.0}
+
+<app-alert type="error" content="**PStackPageBarInit** 组件已废弃，请使用 **PStackPageBar** 组件。"></app-alert>
 
 初始化堆栈页面顶部的 AppBar。大部分属性和 [MAppBar](/blazor/components/app-bars)一致。
 
 ```razor MyStackPage.razor
-<PStackPageBarInit Title="Order detail"
-                   CenterTitle 
-                   Flat
-                   Color="primary">
-</PStackPageBarInit>
+<PStackPageBar Title="Order detail"
+               CenterTitle 
+               Flat
+               Color="primary">
+</PStackPageBar>
 ```
 
-以下是 **PStackPageBarInit** 不同于 **MAppBar** 的参数：
+以下是 **PStackPageBar** 不同于 **MAppBar** 的参数：
 
 | 参数名称            | 说明                                  |
 |-----------------|-------------------------------------|
@@ -185,7 +187,6 @@ builder.Services
 | `BarContent`    | 自定义整个内容。                            |
 | `GoBackContent` | 自定义返回按钮。                            |
 | `ActionContent` | 设置右侧操作区域。                           |
-| `RerenderKey`   | 用于强制渲染。当使用`BarContent`后其内容无法刷新时可使用。 |
 
 ### PStackPageBase
 

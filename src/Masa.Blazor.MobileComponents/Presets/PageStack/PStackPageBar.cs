@@ -2,18 +2,17 @@
 
 namespace Masa.Blazor.Presets;
 
-[Obsolete("This component is deprecated, please use PStackPageBar instead.")]
-public class PStackPageBarInit : IComponent
+public class PStackPageBar : IComponent
 {
     [CascadingParameter] protected IDefaultsProvider? DefaultsProvider { get; set; }
 
     [CascadingParameter] private PPageStackItem? PageStackItem { get; set; }
 
-    [Parameter] public string? RerenderKey { get; set; }
-
     [Parameter] public string? Class { get; set; }
 
     [Parameter] public string? Style { get; set; }
+
+    [Parameter] public bool Collapse { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
@@ -43,16 +42,13 @@ public class PStackPageBarInit : IComponent
 
     [Parameter] public int ExtensionHeight { get; set; } = 48;
 
-    [Parameter] public bool ElevateOnScroll { get; set; } = true;
+    [Parameter] public bool ElevateOnScroll { get; set; }
 
     [Parameter] public bool ShrinkOnScroll { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
+    [Parameter] public string? Theme { get; set; }
 
-    [Parameter] public bool Light { get; set; }
-
-    private bool _init;
-    private string? _prevRerenderKey;
+    [Parameter] public StringNumber? Elevation { get; set; }
 
     public void Attach(RenderHandle renderHandle)
     {
@@ -67,15 +63,8 @@ public class PStackPageBarInit : IComponent
             return Task.CompletedTask;
         }
 
-        var hasRerenderKey = parameters.TryGetValue<string>(nameof(RerenderKey), out var rerenderKey);
-
-        if (!_init || (hasRerenderKey && _prevRerenderKey != rerenderKey))
-        {
-            _init = true;
-            _prevRerenderKey = rerenderKey;
-            SetParameters();
-            Rerender();
-        }
+        SetParameters();
+        Rerender();
 
         return Task.CompletedTask;
 
@@ -83,7 +72,7 @@ public class PStackPageBarInit : IComponent
         {
             if (parameters.TryGetValue<IDefaultsProvider>(nameof(DefaultsProvider), out var defaultsProvider)
                 && defaultsProvider.Defaults is not null
-                && defaultsProvider.Defaults.TryGetValue(nameof(PStackPageBarInit), out var dictionary)
+                && defaultsProvider.Defaults.TryGetValue(nameof(PStackPageBar), out var dictionary)
                 && dictionary is not null)
             {
                 var defaults = ParameterView.FromDictionary(dictionary);
@@ -100,6 +89,7 @@ public class PStackPageBarInit : IComponent
             PageStackItem.ImageContent = ImageContent;
             PageStackItem.AppBarColor = Color;
             PageStackItem.AppBarClass = Class;
+            PageStackItem.Elevation = Elevation;
             PageStackItem.AppBarStyle = Style;
             PageStackItem.AppBarHeight = Height;
             PageStackItem.AppBarFlat = Flat;
@@ -110,13 +100,13 @@ public class PStackPageBarInit : IComponent
             PageStackItem.AppBarImage = Image;
             PageStackItem.ElevateOnScroll = ElevateOnScroll;
             PageStackItem.ShrinkOnScroll = ShrinkOnScroll;
-            PageStackItem.AppBarTheme = Dark ? "dark" : "light";
+            PageStackItem.AppBarTheme = Theme;
             PageStackItem.ActionContent = ActionContent;
+            PageStackItem.AppBarCollapse = Collapse;
         }
     }
 
-    [MasaApiPublicMethod]
-    public void Rerender()
+    private void Rerender()
     {
         PageStackItem?.Render();
     }

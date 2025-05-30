@@ -11,19 +11,26 @@ public partial class PPageStackItem : MasaComponentBase
     [Parameter] public bool CanRender { get; set; }
 
     [Parameter] public EventCallback OnGoBack { get; set; }
+    
+    [Parameter] public bool AppBarVisible { get; set; }
 
     private TouchJSObjectResult? _touchJSObjectResult;
 
     private string Transition => Data.DisableTransition ? string.Empty : "dialog-right-transition";
 
+    private bool IncludingAppBar => AppBarVisible || Visible;
+
+    internal bool Visible { get; set; }
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
     internal RenderFragment<Dictionary<string, object?>>? ImageContent { get; set; }
     internal RenderFragment? ExtensionContent { get; set; }
     internal int ExtensionHeight { get; set; } = 48;
     internal string? AppBarColor { get; set; }
+    internal bool AppBarCollapse { get; set; }
     internal string? AppBarClass { get; set; }
     internal bool AppBarFlat { get; set; }
+    internal StringNumber? Elevation { get; set; }
     internal int AppBarHeight { get; set; }
     internal bool AppBarDense { get; set; }
     internal bool AppBarShort { get; set; }
@@ -33,13 +40,17 @@ public partial class PPageStackItem : MasaComponentBase
     internal bool CenterTitle { get; set; }
     internal bool ElevateOnScroll { get; set; }
     internal bool ShrinkOnScroll { get; set; }
-    internal bool AppBarLight { get; set; }
-    internal bool AppBarDark { get; set; }
+    internal string? AppBarTheme { get; set; }
 
     private int ComputedBarHeight
     {
         get
         {
+            if (!IncludingAppBar)
+            {
+                return 0;
+            }
+
             var height = ComputeBarHeight();
 
             if (ExtensionContent is not null)
@@ -76,8 +87,7 @@ public partial class PPageStackItem : MasaComponentBase
     private static Block _block = new("m-page-stack-item");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    private bool _hasRendered;
-    private MDialog? dialog;
+    private MDialog? _dialog;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -85,14 +95,14 @@ public partial class PPageStackItem : MasaComponentBase
 
         if (firstRender)
         {
-            _ = RetryIf(UseTouchAsync, () => dialog?.ContentRef.Context is null);
+            _ = RetryIf(UseTouchAsync, () => _dialog?.ContentRef.Context is null);
         }
     }
 
     private async Task UseTouchAsync()
     {
         var touch = new Touch(Js, OnTouchEnd);
-        _touchJSObjectResult = await touch.UseTouchAsync(dialog!.ContentRef, GetTouchState());
+        _touchJSObjectResult = await touch.UseTouchAsync(_dialog!.ContentRef, GetTouchState());
     }
 
     private TouchState GetTouchState()
