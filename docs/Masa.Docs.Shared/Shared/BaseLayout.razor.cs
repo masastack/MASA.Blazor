@@ -6,10 +6,6 @@ namespace Masa.Docs.Shared.Shared;
 
 public partial class BaseLayout
 {
-    private static readonly Project s_emptyProject = new("MASA Stack",
-        "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
-        "https://github.com/masastack");
-
     private bool? _showSettings;
     private bool? _showMobileMenuList;
     private bool _hideAppBarNavIcon;
@@ -103,10 +99,13 @@ public partial class BaseLayout
 
     private void UpdateProjectInfo()
     {
-        if (!(_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)))
-        {
-            _projectInfo = s_emptyProject;
-        }
+        if (_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)) return;
+
+        _projectInfo = new Project(
+            "MASA Stack",
+            null,
+            "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
+            "https://github.com/masastack");
     }
 
     private void OnCultureChanged(string cultureName)

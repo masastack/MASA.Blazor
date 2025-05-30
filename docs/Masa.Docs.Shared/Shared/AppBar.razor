@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@inject MasaBlazor MasaBlazor
+﻿@inject MasaBlazor MasaBlazor
 @implements IDisposable
 
 <MAppBar Id="app-bar"
@@ -14,13 +13,13 @@
         <Logo />
     </div>
 
-    @if (HideAppBarNavIcon is false && Project is not null)
+    @if (HideAppBarNavIcon is false && ProjectInfo is not null)
     {
         <MAppBarNavIcon Class="hidden-lg-and-up"
                         @onclick="OnAppBarNavIconClick" />
     }
 
-    <AppBarItems RepoUrl="@RepoUrl"
+    <AppBarItems ProjectInfo="@ProjectInfo"
                  OnCultureChanged="OnCultureChanged"
                  OnDotClick="OnDotClick" 
                  OnSettingsClick="OnSettingsClick">
@@ -32,14 +31,11 @@
     [CascadingParameter(Name = "Culture")]
     public string? Culture { get; set; }
 
-    [CascadingParameter(Name = "project")]
-    public string? Project { get; set; }
-
     [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
 
     [Parameter]
-    public string? RepoUrl { get; set; }
+    public Project? ProjectInfo { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }

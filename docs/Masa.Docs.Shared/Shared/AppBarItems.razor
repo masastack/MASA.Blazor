@@ -1,60 +1,90 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
+@inject GithubService GithubService
 @implements IDisposable
 
 <div class="flex-1-1-auto d-flex align-center justify-end ml-4">
     @if (MasaBlazor.Breakpoint.LgAndUp)
     {
-        <Tabs />
+        <Tabs/>
     }
 
     @if (MasaBlazor.Breakpoint.XsOnly)
     {
-        <MSpacer />
+        <MSpacer/>
     }
 
-    @if (!string.IsNullOrEmpty(Project))
+    @if (ProjectInfo != null)
     {
-        <Search @ref="_algoliaSearch" Class="mr-2" />
+        <Search @ref="_algoliaSearch" Class="mr-2"/>
     }
 
-    <LanguageMenu OnCultureChanged="OnCultureChangedLocal" />
+    <LanguageMenu OnCultureChanged="OnCultureChangedLocal"/>
 
-    <NotificationsMenu />
-
-    <ThemeToggle />
+    <ThemeToggle/>
 
     @if (MasaBlazor.Breakpoint.LgAndUp)
     {
-        <ToolIcons RepoUrl="@RepoUrl" OnSettingsClick="OnSettingsClick" />
+        @if (!string.IsNullOrWhiteSpace(ProjectInfo?.RepoUrl))
+        {
+            @if (_starCount == 0)
+            {
+                <AppTooltipButton Href="@ProjectInfo.RepoUrl"
+                                  Target="_blank"
+                                  Icon="mdi-github"
+                                  Path="star-me">
+                </AppTooltipButton>
+            }
+            else
+            {
+                <MButton Href="@ProjectInfo.RepoUrl"
+                         Target="_blank"
+                         Text
+                         Large
+                         Class="pr-2">
+                    <MTooltip Activator="parent" Text="@(I18n.T("star-me"))" Bottom></MTooltip>
+                    <MIcon Left Size="24">mdi-github</MIcon>
+                    @StarCount
+                </MButton>
+            }
+        }
+
+        @if (ProjectInfo?.RepoUrl.Contains("MASA.Blazor", StringComparison.OrdinalIgnoreCase) is true && Culture == "zh-CN")
+        {
+            <AppTooltipButton Href="https://gitee.com/blazorcomponent/MASA.Blazor"
+                              Target="_blank"
+                              Icon="M512 1024C230.4 1024 0 793.6 0 512S230.4 0 512 0s512 230.4 512 512-230.4 512-512 512z m259.2-569.6H480c-12.8 0-25.6 12.8-25.6 25.6v64c0 12.8 12.8 25.6 25.6 25.6h176c12.8 0 25.6 12.8 25.6 25.6v12.8c0 41.6-35.2 76.8-76.8 76.8h-240c-12.8 0-25.6-12.8-25.6-25.6V416c0-41.6 35.2-76.8 76.8-76.8h355.2c12.8 0 25.6-12.8 25.6-25.6v-64c0-12.8-12.8-25.6-25.6-25.6H416c-105.6 0-188.8 86.4-188.8 188.8V768c0 12.8 12.8 25.6 25.6 25.6h374.4c92.8 0 169.6-76.8 169.6-169.6v-144c0-12.8-12.8-25.6-25.6-25.6z"
+                              IconSvgAttrs="@(new Dictionary<string, object?>() { { "viewBox", "0 0 1024 1024" } })"
+                              Path="gitee">
+            </AppTooltipButton>
+        }
+
+        <NotificationsMenu/>
+
+        <AppTooltipButton OnClick="@OnSettingsClick"
+                          Icon="mdi-cog-outline"
+                          Path="settings">
+        </AppTooltipButton>
     }
     else
     {
-        <MobileToolIcons OnDotClick="OnDotClick" />
+        <MButton IconName="mdi-dots-vertical" OnClick="@OnDotClick"/>
     }
 </div>
 
 @code {
 
-    [CascadingParameter(Name = "project")]
-    public string? Project { get; set; }
+    [CascadingParameter(Name = "Culture")]
+    public string? Culture { get; set; }
 
     [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
-    
+
     [Parameter]
-    public string? RepoUrl { get; set; }
+    public Project? ProjectInfo { get; set; }
 
     [Parameter]
     public EventCallback<string> OnCultureChanged { get; set; }
-
-    private Search? _algoliaSearch;
-
-    public async Task OnCultureChangedLocal(string value)
-    {
-        await OnCultureChanged.InvokeAsync(value);
-        await _algoliaSearch!.InitDocSearchAsync();
-    }
 
     [Parameter]
     public EventCallback OnDotClick { get; set; }
@@ -62,16 +92,65 @@
     [Parameter]
     public EventCallback OnSettingsClick { get; set; }
 
+    private int _starCount;
+    private string? _prevRepo;
+    private Search? _algoliaSearch;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        
+
         MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
     }
 
     private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
     {
         InvokeAsync(StateHasChanged);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_prevRepo != ProjectInfo?.Repo)
+        {
+            _prevRepo = ProjectInfo?.Repo;
+
+            await UpdateStarCountAsync();
+        }
+    }
+
+    private async Task UpdateStarCountAsync()
+    {
+        if (string.IsNullOrWhiteSpace(ProjectInfo?.Repo))
+        {
+            _starCount = 0;
+        }
+        else
+        {
+            _starCount = await GithubService.GetStarCountAsync("masastack", ProjectInfo.Repo);
+        }
+
+        StateHasChanged();
+    }
+
+    private string? StarCount
+    {
+        get
+        {
+            return _starCount switch
+            {
+                0 => null,
+                < 1000 => _starCount.ToString(),
+                _ => $"{_starCount / 1000.0:F1}K"
+            };
+        }
+    }
+
+    public async Task OnCultureChangedLocal(string value)
+    {
+        await OnCultureChanged.InvokeAsync(value);
+        await _algoliaSearch!.InitDocSearchAsync();
     }
 
     public void Dispose()
