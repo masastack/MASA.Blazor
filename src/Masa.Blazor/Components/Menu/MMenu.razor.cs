@@ -191,7 +191,7 @@ namespace Masa.Blazor
             {
                 if (CascadingDependent is not null)
                 {
-                    (this as IDependent).CascadingDependents.ForEach(item => item.RegisterChild(this));
+                    (this as IDependent).CascadingDependents.ForEach(item => item.AddDependent(this));
                 }
             }
         }
@@ -210,7 +210,7 @@ namespace Masa.Blazor
 
         protected override bool ShouldUpdateActiveInJS => ActivatorContent is not null || CloseOnContentClick;
 
-        public void RegisterChild(IDependent dependent)
+        public void AddDependent(IDependent dependent)
         {
             _dependents.Add(dependent);
             NextTickIf(

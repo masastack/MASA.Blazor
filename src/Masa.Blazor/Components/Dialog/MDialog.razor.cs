@@ -80,7 +80,7 @@ namespace Masa.Blazor
         [MasaApiParameter(ReleasedOn = "v1.8.0")]
         public bool DisableAutoFocus { get; set; }
 
-        private readonly List<IDependent> _dependents = new();
+        private readonly HashSet<IDependent> _dependents = new();
 
         private bool _attached;
         private DialogContentContext? _contentContext;
@@ -155,7 +155,9 @@ namespace Masa.Blazor
         {
             if (!NoOutsideClick && OutsideClickJsModule is { Initialized: false })
             {
-                await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
+                var dependentSelectors = DependentSelectors.ToArray();
+                await OutsideClickJsModule.InitializeAsync(this, dependentSelectors);
+                CascadingDependent?.AddDependent(this);
             }
 
             if (_attached == false)
@@ -252,7 +254,17 @@ namespace Masa.Blazor
             }
         }
 
-        public void RegisterChild(IDependent dependent)
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (firstRender && CascadingDependent is not null)
+            {
+                (this as IDependent).CascadingDependents.ForEach(item => item.AddDependent(this));
+            }
+        }
+
+        public void AddDependent(IDependent dependent)
         {
             if (NoOutsideClick)
             {

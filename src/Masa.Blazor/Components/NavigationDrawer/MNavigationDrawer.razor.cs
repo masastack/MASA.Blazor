@@ -185,7 +185,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected bool ShowOverlay => !HideOverlay && (IsActive || _isDragging) && (IsMobile || Temporary);
 
-    public void RegisterChild(IDependent dependent)
+    public void AddDependent(IDependent dependent)
     {
         _dependents.Add(dependent);
         NextTickIf(
