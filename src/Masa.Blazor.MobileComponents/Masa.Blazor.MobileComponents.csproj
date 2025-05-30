@@ -13,11 +13,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <SupportedPlatform Include="browser"/>
+        <SupportedPlatform Include="browser" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.33"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25" />
     </ItemGroup>
 
     <ItemGroup>
