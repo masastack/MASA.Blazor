@@ -58,7 +58,7 @@ public partial class MRichVideo : MasaComponentBase
                            muted
                            loading="lazy">
                         <source src="{{Data.Src}}" type="video/mp4">
-                        <p>您的浏览器不支持} video 标签。</p>
+                        <p>Your browser does not support HTML5 video.</p>
                     </video>
                     """;
 

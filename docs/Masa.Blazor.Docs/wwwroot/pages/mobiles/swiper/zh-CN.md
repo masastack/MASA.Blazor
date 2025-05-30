@@ -60,7 +60,7 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 
 #### 虚拟 {#virtual released-on=v1.10.0}
 
-<app-alert type="warning" content="目前无法对列表做增量更新"><app-alert>
+<app-alert type="warning" content="目前无法对列表做增量更新"></app-alert>
 
 <masa-example file="Examples.mobiles.swiper.Virtual"></masa-example>
 
