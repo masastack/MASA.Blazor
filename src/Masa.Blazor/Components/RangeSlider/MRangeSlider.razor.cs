@@ -52,7 +52,7 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
         return RoundValue(DoubleInternalValues[index]);
     }
 
-    internal override async Task HandleOnSliderClickAsync(MouseEventArgs args)
+    protected override async Task HandleOnSliderClickAsync(MouseEventArgs args)
     {
         if (!IsActive)
         {
@@ -118,7 +118,7 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
             InternalValueChangeType.InternalOperation);
     }
 
-    public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+    protected override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
         if (ActiveThumb == null)
         {
@@ -171,14 +171,14 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
         return 1;
     }
 
-    public override Task HandleOnFocusAsync(int index, FocusEventArgs args)
+    protected override Task HandleOnFocusAsync(int index, FocusEventArgs args)
     {
         ActiveThumb = index;
         _value = DoubleInternalValue;
         return base.HandleOnFocusAsync(index,args);
     }
 
-    public override Task HandleOnBlurAsync(int index, FocusEventArgs args)
+    protected override Task HandleOnBlurAsync(int index, FocusEventArgs args)
     {
         _value = DoubleInternalValue;
         ActiveThumb = null;

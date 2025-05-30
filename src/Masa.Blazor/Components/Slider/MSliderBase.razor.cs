@@ -8,7 +8,7 @@
 #if NET6_0
 public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback
 #else
-public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback, IAsyncDisposable
+public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback
     where TNumeric : struct, IComparable<TNumeric>
 #endif
 {
@@ -57,7 +57,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         return RoundValue(DoubleInternalValue);
     }
 
-    public RenderFragment<int> ComputedThumbLabelContent
+    private RenderFragment<int> ComputedThumbLabelContent
     {
         get
         {
@@ -184,7 +184,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    public string ComputedThumbColor
+    public string? ComputedThumbColor
     {
         get
         {
@@ -253,7 +253,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    public virtual async Task HandleOnSliderClickAsync(MouseEventArgs args)
+    protected virtual async Task HandleOnSliderClickAsync(MouseEventArgs args)
     {
         if (NoClick)
         {
@@ -271,7 +271,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     internal virtual async Task HandleOnSliderMouseDownAsync(SliderMouseEventArgs args)
         => await HandleOnSliderStartSwiping(args.MouseEventArgs.Target!, args.MouseEventArgs.ClientX, args.MouseEventArgs.ClientY);
 
-    protected async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
+    private async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
     {
         _ = OnStart.InvokeAsync(InternalValue);
 
@@ -400,7 +400,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         return IsFocused;
     }
 
-    protected static readonly Block Block = new("m-slider");
+    private static readonly Block Block = new("m-slider");
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
     private static readonly Block _inputBlock = new("m-input__slider");
     private readonly ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
@@ -430,21 +430,21 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         );
     }
 
-    public virtual async Task HandleOnFocusAsync(int index, FocusEventArgs args)
+    protected virtual async Task HandleOnFocusAsync(int index, FocusEventArgs args)
     {
         IsFocused = true;
 
         await OnFocus.InvokeAsync(args);
     }
 
-    public virtual async Task HandleOnBlurAsync(int index, FocusEventArgs args)
+    protected virtual async Task HandleOnBlurAsync(int index, FocusEventArgs args)
     {
         IsFocused = false;
 
         await OnBlur.InvokeAsync(args);
     }
 
-    public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+    protected virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
         if (!IsInteractive)
         {
