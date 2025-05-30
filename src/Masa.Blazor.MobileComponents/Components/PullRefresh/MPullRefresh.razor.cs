@@ -106,6 +106,9 @@ public partial class MPullRefresh
     [MasaApiPublicMethod]
     public async Task SimulateRefreshAsync()
     {
+        // Ensure the scroll parent is scrolled to the top before refreshing.
+        _ = Js.ScrollTo(_scrollParentJSRef, 0).ConfigureAwait(false);
+
         if (_pullRefreshStatus == PullRefreshStatus.Default)
         {
             _duration = 300;

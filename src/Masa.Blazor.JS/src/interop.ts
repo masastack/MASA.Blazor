@@ -429,6 +429,8 @@ export function scrollTo(target, options: ScrollToOptions) {
       behavior: options.behavior
     }
     dom.scrollTo(o)
+  } else if (dom === window) {
+    window.scrollTo(options);
   }
 }
 

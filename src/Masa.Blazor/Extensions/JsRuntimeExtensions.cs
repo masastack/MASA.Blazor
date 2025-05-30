@@ -160,6 +160,12 @@ public static class JsRuntimeExtensions
         }
     }
 
+    public static async Task ScrollTo(this IJSRuntime jsRuntime, IJSObjectReference el, double? top, double? left = null,
+        ScrollBehavior behavior = ScrollBehavior.Smooth)
+    {
+        await jsRuntime.InvokeVoidAsync(JsInteropConstants.ScrollTo, el, new ScrollToOptions(left, top, behavior));
+    }
+
     public static async Task ScrollIntoView(this IJSRuntime jsRuntime, ElementReference el,
         ScrollLogicalPosition? block,
         ScrollLogicalPosition? inline, ScrollBehavior behavior = ScrollBehavior.Smooth)
