@@ -262,17 +262,19 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
 
         await ThumbElement.FocusAsync();
-        await HandleOnMouseMoveAsync(args);
+        await HandleOnMouseMoveAsync(args, null);
     }
 
-    public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
-        => await HandleOnSliderStartSwiping(args.Target!, args.Touches[0].ClientX, args.Touches[0].ClientY);
+    internal virtual async Task HandleOnTouchStartAsync(SliderTouchEventArgs args)
+        => await HandleOnSliderStartSwiping(args.TouchEventArgs.Target!, args.TouchEventArgs.Touches[0].ClientX, args.TouchEventArgs.Touches[0].ClientY);
 
-    public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
-        => await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
+    internal virtual async Task HandleOnSliderMouseDownAsync(SliderMouseEventArgs args)
+        => await HandleOnSliderStartSwiping(args.MouseEventArgs.Target!, args.MouseEventArgs.ClientX, args.MouseEventArgs.ClientY);
 
     protected async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
     {
+        _ = OnStart.InvokeAsync(InternalValue);
+
         _oldValue = InternalValue;
         IsActive = true;
 
@@ -296,16 +298,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
                 return InvokeStateHasChangedAsync();
             }, 300, _mouseCancellationTokenSource.Token);
         }
-
-        await OnStart.InvokeAsync(InternalValue);
     }
 
-    public async Task HandleOnSliderEndSwiping()
+    internal async Task HandleOnSliderEndSwiping(SliderEventArgs args)
     {
         _mouseCancellationTokenSource?.Cancel();
         ThumbPressed = false;
 
-        await OnEnd.InvokeAsync(InternalValue);
+        _ = OnEnd.InvokeAsync(InternalValue);
 
         if (!EqualityComparer<TValue>.Default.Equals(_oldValue, InternalValue))
         {
@@ -326,14 +326,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         StateHasChanged();
     }
 
-    public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
+    internal virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args, BoundingClientRect? trackRect)
     {
         if (args.Type == "mousemove")
         {
             ThumbPressed = true;
         }
 
-        var val = await ParseMouseMoveAsync(args);
+        var val = await ParseMouseMoveAsync(args, trackRect);
 
         await SetInternalValueAsync(val);
 
@@ -343,9 +343,9 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
+    protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args, BoundingClientRect? trackRect)
     {
-        var rect = await Js.GetBoundingClientRectAsync(TrackElement);
+        var rect = trackRect ?? await Js.GetBoundingClientRectAsync(TrackElement);
 
         var tractStart = Vertical ? rect.Top : rect.Left;
         var trackLength = Vertical ? rect.Height : rect.Width;
