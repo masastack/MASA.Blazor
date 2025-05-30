@@ -1,0 +1,46 @@
+﻿@namespace Masa.Blazor.Components.VideoFeed
+@inherits MasaComponentBase
+
+<div class="@_modifierBuilder.Add("fullscreen", _fullscreen).Add("horizontal", _videoMetadata.IsHorizontal)">
+    @((MarkupString)(_markup ?? string.Empty))
+    @if (_videoMetadata.IsHorizontal)
+    {
+        <MButton Outlined
+                 Rounded
+                 Small
+                 Dark
+                 Class="fullscreen-btn"
+                 OnClick="@HandleOnFullscreen"
+                 OnClickStopPropagation>
+            全屏播放
+        </MButton>
+    }
+</div>
+
+@if (_available)
+{
+    <MVideoControls VideoMetadata="@_videoMetadata"
+                    Fullscreen="@_fullscreen"
+                    IsPlaying="@_internalPlaying"
+                    Title="@Data.Title"
+                    Subtitle="@Data.Subtitle"
+                    OnPauseVideo="@Pause"
+                    OnPlayVideo="@Play"
+                    UpdateVideoTimeInJS="@UpdateVideoTimeInJS"
+                    OnCloseFullscreen="@CloseFullscreen"
+                    @ref="_videoControls">
+        <ActionsContent>
+            <div class="m-video-feed__actions">
+                @ActionsContent?.Invoke(Data)
+                <MToggle Value="@Muted"
+                         ValueChanged="@MutedChanged"
+                         DataOn="@("mdi-volume-off")"
+                         Dataoff="@("mdi-volume-high")">
+                    <MButton IconName="@context.Data"
+                             OnClick="@context.Toggle"
+                             OnClickStopPropagation/>
+                </MToggle>
+            </div>
+        </ActionsContent>
+    </MVideoControls>
+}
