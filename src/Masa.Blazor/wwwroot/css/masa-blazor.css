@@ -19390,7 +19390,7 @@ html.overflow-y-hidden {
 .m-chip--link::before {
     transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
-.m-chip--link:focus::before {
+.m-chip--link:focus-visible::before {
     opacity: 0.32;
 }
 
@@ -20105,13 +20105,13 @@ html.overflow-y-hidden {
 .m-list-item:hover::before {
     opacity: var(--m-hover-opacity);
 }
-.m-list-item:focus::before {
+.m-list-item:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
 .m-list-item--active:hover::before, .m-list-item--active::before {
     opacity: var(--m-activated-opacity);
 }
-.m-list-item--active:focus::before {
+.m-list-item--active:focus-visible::before {
     opacity: calc(var(--m-activated-opacity) + var(--m-focus-opacity));
 }
 .m-list-item.m-list-item--highlighted::before {
@@ -21665,7 +21665,7 @@ html.overflow-y-hidden {
 .m-card--link .m-chip {
     cursor: pointer;
 }
-.m-card--link:focus:before {
+.m-card--link:focus-visible:before {
     opacity: 0.08;
 }
 .m-card--link:before {
@@ -23243,27 +23243,27 @@ html.overflow-y-hidden {
 .m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header:hover::before {
     opacity: var(--m-hover-opacity);
 }
-.m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header:focus::before {
+.m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
 .m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header--active:hover::before,
 .m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header--active::before {
     opacity: var(--m-activated-opacity);
 }
-.m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header--active:focus::before {
+.m-expansion-panels.m-expansion-panels--focusable .m-expansion-panel-header--active:focus-visible::before {
     opacity: calc(var(--m-focus-opacity) + var(--m-hover-opacity));
 }
 .m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover:hover::before {
     opacity: var(--m-hover-opacity);
 }
-.m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover:focus::before {
+.m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
 .m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover--active:hover::before,
 .m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover--active::before {
     opacity: var(--m-activated-opacity);
 }
-.m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover--active:focus::before {
+.m-expansion-panels.m-expansion-panels--hover > .m-expansion-panel > .m-expansion-panel-header:hover--active:focus-visible::before {
     opacity: calc(var(--m-focus-opacity) + var(--m-hover-opacity));
 }
 
@@ -23385,7 +23385,7 @@ html.overflow-y-hidden {
 .m-application--is-rtl .m-expansion-panel-header {
     text-align: right;
 }
-.m-expansion-panel-header:not(.m-expansion-panel-header--mousedown):focus::before {
+.m-expansion-panel-header:not(.m-expansion-panel-header--mousedown):focus-visible::before {
     opacity: 0.12;
 }
 .m-expansion-panel-header:before {
@@ -27052,13 +27052,13 @@ html.overflow-y-hidden {
 .m-tabs .m-tab:hover::before {
     opacity: var(--m-hover-opacity);
 }
-.m-tabs .m-tab:focus::before {
+.m-tabs .m-tab:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
 .m-tabs .m-tab--active:hover::before, .m-tabs .m-tab--active::before {
     opacity: var(--m-activated-opacity);
 }
-.m-tabs .m-tab--active:focus::before {
+.m-tabs .m-tab--active:focus-visible::before {
     opacity: calc(var(--m-focus-opacity) + var(--m-activated-opacity));
 }
 
@@ -27916,8 +27916,8 @@ html.overflow-y-hidden {
 .m-treeview .m-treeview-node--click > .m-treeview-node__root:hover::before {
     opacity: var(--m-hover-opacity);
 }
-.m-treeview--hoverable .m-treeview-node__root:focus::before,
-.m-treeview .m-treeview-node--click > .m-treeview-node__root:focus::before {
+.m-treeview--hoverable .m-treeview-node__root:focus-visible::before,
+.m-treeview .m-treeview-node--click > .m-treeview-node__root:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
 .m-treeview--hoverable .m-treeview-node__root--active:hover::before, .m-treeview--hoverable .m-treeview-node__root--active::before,
@@ -27925,14 +27925,14 @@ html.overflow-y-hidden {
 .m-treeview .m-treeview-node--click > .m-treeview-node__root--active::before {
     opacity: var(--m-activated-opacity);
 }
-.m-treeview--hoverable .m-treeview-node__root--active:focus::before,
-.m-treeview .m-treeview-node--click > .m-treeview-node__root--active:focus::before {
+.m-treeview--hoverable .m-treeview-node__root--active:focus-visible::before,
+.m-treeview .m-treeview-node--click > .m-treeview-node__root--active:focus-visible::before {
     opacity: calc(var(--m-focus-opacity) + var(--m-activated-opacity));
 }
 .m-treeview .m-treeview-node__root.m-treeview-node--active:hover::before, .m-treeview .m-treeview-node__root.m-treeview-node--active::before {
     opacity: calc(var(--m-hover-opacity) + var(--m-activated-opacity));
 }
-.m-treeview .m-treeview-node__root.m-treeview-node--active:focus::before {
+.m-treeview .m-treeview-node__root.m-treeview-node--active:focus-visible::before {
     opacity: calc(var(--m-focus-opacity) + var(--m-activated-opacity));
 }
 .m-treeview .m-treeview-node--disabled > .m-treeview-node__root > .m-treeview-node__content {
