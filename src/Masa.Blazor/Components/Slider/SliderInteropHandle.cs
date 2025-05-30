@@ -1,7 +1,6 @@
-﻿using Masa.Blazor.Components.Slider;
-using Masa.Blazor.Utils;
+﻿using Masa.Blazor.Utils;
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Components.Slider;
 
 #if NET6_0
 public class SliderInteropHandle<TValue, TNumeric>
@@ -18,18 +17,24 @@ public class SliderInteropHandle<TValue, TNumeric> where TNumeric : struct, ICom
     }
 
     [JSInvokable]
-    public Task OnMouseDownInternal(ExMouseEventArgs args)
+    public Task OnMouseDownInternal(SliderMouseEventArgs args)
         => _slider.HandleOnSliderMouseDownAsync(args);
 
     [JSInvokable]
-    public Task OnTouchStartInternal(ExTouchEventArgs args)
+    public Task OnTouchStartInternal(SliderTouchEventArgs args)
         => _slider.HandleOnTouchStartAsync(args);
 
     [JSInvokable]
-    public Task OnMouseUpInternal()
-        => _slider.HandleOnSliderEndSwiping();
+    public Task OnMouseUpInternal(SliderEventArgs args)
+        => _slider.HandleOnSliderEndSwiping(args);
 
     [JSInvokable]
-    public Task OnMouseMoveInternal(MouseEventArgs args)
-        => _throttleTask.RunAsync(() => _slider.HandleOnMouseMoveAsync(args));
+    public Task OnMouseMoveInternal(SliderEventArgs args)
+        => _throttleTask.RunAsync(() => _slider.HandleOnMouseMoveAsync(args.MouseEventArgs, args.TrackRect));
 }
+
+public record SliderEventArgs(MouseEventArgs MouseEventArgs, BoundingClientRect? TrackRect);
+
+public record SliderMouseEventArgs(ExMouseEventArgs MouseEventArgs, BoundingClientRect? TrackRect);
+
+public record SliderTouchEventArgs(ExTouchEventArgs TouchEventArgs, BoundingClientRect? TrackRect);

@@ -21,6 +21,8 @@ export function registerSliderEvents(
   el.addEventListener("mousedown", onSliderMouseDown);
   el.addEventListener("touchstart", onSliderMouseDown);
 
+  const trackElement = el.querySelector(".m-slider__track-container");
+
   return sliderHandleId++;
 
   async function onSliderMouseDown(e: MouseEvent | TouchEvent) {
@@ -40,37 +42,51 @@ export function registerSliderEvents(
       mouseUpOptions
     );
 
+    var trackRect = trackElement.getBoundingClientRect();
+
     if (isTouchEvent) {
-      await dotnetHelper.invokeMethodAsync(
-        "OnTouchStartInternal",
-        createSharedEventArgs("touch", e)
-      );
+      await dotnetHelper.invokeMethodAsync("OnTouchStartInternal", {
+        touchEventArgs: createSharedEventArgs("touch", e),
+        trackRect,
+      });
     } else {
-      await dotnetHelper.invokeMethodAsync(
-        "OnMouseDownInternal",
-        createSharedEventArgs("mouse", e)
-      );
+      await dotnetHelper.invokeMethodAsync("OnMouseDownInternal", {
+        mouseEventArgs: createSharedEventArgs("mouse", e),
+        trackRect,
+      });
     }
   }
 
-  async function onSliderMouseUp(e: Event) {
+  async function onSliderMouseUp(e: MouseEvent | TouchEvent) {
     e.stopPropagation();
 
     app.removeEventListener("touchmove", onMouseMove, mouseMoveOptions as any);
     app.removeEventListener("mousemove", onMouseMove, mouseMoveOptions as any);
 
-    await dotnetHelper.invokeMethodAsync("OnMouseUpInternal");
+    const isTouchEvent = "touches" in e;
+    const payload = {
+      type: e.type,
+      clientX: isTouchEvent ? e.changedTouches[0].clientX : e.clientX,
+      clientY: isTouchEvent ? e.changedTouches[0].clientY : e.clientY,
+    };
+
+    await dotnetHelper.invokeMethodAsync("OnMouseUpInternal", payload);
   }
 
   async function onMouseMove(e: MouseEvent | TouchEvent) {
     const isTouchEvent = "touches" in e;
-    const payload = {
+    const mouseEventArgs = {
       type: e.type,
       clientX: isTouchEvent ? e.touches[0].clientX : e.clientX,
       clientY: isTouchEvent ? e.touches[0].clientY : e.clientY,
     };
 
-    await dotnetHelper.invokeMethodAsync("OnMouseMoveInternal", payload);
+    var trackRect = trackElement.getBoundingClientRect();
+
+    await dotnetHelper.invokeMethodAsync("OnMouseMoveInternal", {
+      mouseEventArgs,
+      trackRect,
+    });
   }
 }
 
