@@ -5,16 +5,12 @@
   "props": {
     "centerTitle": "居中显示标题",
     "image": "标题栏背景图片",
-    "title": "标题栏标题",
-    "rerenderKey": "强制刷新标识"
+    "title": "标题栏标题"
   },
   "contents": {
     "actionContent": "自定义标题栏右侧操作区域",
     "barContent": "自定义整个标题栏",
     "goBackContent": "自定义返回按钮区域",
     "imageContent": "自定义标题栏背景图片"
-  },
-  "methods": {
-    "rerender": "强制刷新"
   }
 }

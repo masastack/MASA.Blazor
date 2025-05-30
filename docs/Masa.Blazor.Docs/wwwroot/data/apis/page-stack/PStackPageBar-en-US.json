@@ -5,16 +5,12 @@
   "props": {
     "centerTitle": "Determine whether the title is centered",
     "image": "Background image of the title bar",
-    "title": "Title of the title bar",
-    "rerenderKey": "A key to determine whether to force re-render the bar"
+    "title": "Title of the title bar"
   },
   "contents": {
     "actionContent": "Customize the right operation area of the title bar",
     "barContent": "Customize the entire title bar",
     "goBackContent": "Customize the return button area",
     "imageContent": "Customize the background image area"
-  },
-  "methods": {
-    "rerender": "Force to re-render the bar"
   }
 }
