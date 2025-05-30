@@ -15,6 +15,7 @@
     "build:baidumap": "rollup --config rollup.config.maps.ts",
     "build:drawflow": "rollup --config rollup.config.drawflow.ts",
     "build:swiper": "rollup --config rollup.config.swiper.ts",
+    "build:video-feed": "rollup --config rollup.config.video-feed.ts",
     "build:xgplayer": "rollup --config rollup.config.xgplayer.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts"
   },
