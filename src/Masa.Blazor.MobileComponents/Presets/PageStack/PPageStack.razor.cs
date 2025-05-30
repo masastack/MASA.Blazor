@@ -25,6 +25,14 @@ public partial class PPageStack: MasaComponentBase
     [MasaApiParameter(defaultValue: DefaultFallbackUri)]
     public string? FallbackUri { get; set; } = DefaultFallbackUri;
 
+    /// <summary>
+    /// Each page in the stack will have an app bar by default. If set to false,
+    /// only the page that include the <see cref="PStackPageBar"/> component will have an app bar.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(true, "v1.10.0")]
+    public bool AppBarAlwaysVisible { get; set; } = true;
+
     private PageStackNavController? InternalPageStackNavController { get; set; }
 
     private const int DelayForPageClosingAnimation = 300;

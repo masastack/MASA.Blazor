@@ -10,17 +10,20 @@
          NoPersistentAnimation
          NoOutsideClick
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })"
-         @ref="dialog">
-    <MShouldRender Value="@CanRender">
-        <CascadingValue Value="this" IsFixed>
+         @ref="_dialog">
+    <CascadingValue Value="this" IsFixed>
+        @if (IncludingAppBar)
+        {
             <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"
                      Style="@AppBarStyle"
+                     Collapse="@AppBarCollapse"
                      Color="@AppBarColor"
                      Dense="@AppBarDense"
                      Short="@AppBarShort"
                      ElevateOnScroll="@ElevateOnScroll"
                      ExtensionContent="@ExtensionContent"
                      ExtensionHeight="@ExtensionHeight"
+                     Elevation="@Elevation"
                      Fixed
                      Flat="@AppBarFlat"
                      Height="@(AppBarHeight == 0 ? null : AppBarHeight)"
@@ -28,8 +31,7 @@
                      ShrinkOnScroll="@ShrinkOnScroll"
                      Src="@AppBarImage"
                      ScrollTarget="@Data.Selector"
-                     Light="@AppBarLight"
-                     Dark="@AppBarDark">
+                     Theme="@AppBarTheme">
                 <ChildContent>
                     @if (AppBarContent is not null)
                     {
@@ -52,7 +54,7 @@
                             @AppBarTitle
                         </MAppBarTitle>
 
-                        <MSpacer />
+                        <MSpacer/>
 
                         <div class="@_block.Element("actions")">
                             @ActionContent
@@ -60,10 +62,11 @@
                     }
                 </ChildContent>
             </MAppBar>
-            <div class="@_block.Element("content")"
-                 style="@($"--m-page-stack-item-bar-height: {ComputedBarHeight}px;")">
-                @ChildContent
-            </div>
-        </CascadingValue>
-    </MShouldRender>
+        }
+
+        <div class="@_block.Element("content")"
+             style="@($"--m-page-stack-item-bar-height: {ComputedBarHeight}px;")">
+            @ChildContent
+        </div>
+    </CascadingValue>
 </MDialog>
