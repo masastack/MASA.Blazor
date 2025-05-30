@@ -48,11 +48,6 @@ public class PStackPageBar : IComponent
 
     [Parameter] public string? Theme { get; set; }
 
-    /// <summary>
-    /// Determines whether the bar overlaps the content below it.
-    /// </summary>
-    [Parameter] public bool Overlap { get; set; }
-
     [Parameter] public StringNumber? Elevation { get; set; }
 
     public void Attach(RenderHandle renderHandle)
@@ -107,7 +102,6 @@ public class PStackPageBar : IComponent
             PageStackItem.ShrinkOnScroll = ShrinkOnScroll;
             PageStackItem.AppBarTheme = Theme;
             PageStackItem.ActionContent = ActionContent;
-            PageStackItem.Overlap = Overlap;
             PageStackItem.AppBarCollapse = Collapse;
         }
     }

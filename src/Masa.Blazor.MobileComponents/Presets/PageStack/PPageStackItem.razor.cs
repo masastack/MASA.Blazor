@@ -41,13 +41,12 @@ public partial class PPageStackItem : MasaComponentBase
     internal bool ElevateOnScroll { get; set; } = true;
     internal bool ShrinkOnScroll { get; set; }
     internal string? AppBarTheme { get; set; }
-    internal bool Overlap { get; set; }
 
     private int ComputedBarHeight
     {
         get
         {
-            if (Overlap || !IncludingAppBar)
+            if (!IncludingAppBar)
             {
                 return 0;
             }
