@@ -63,6 +63,8 @@ to recalculate the height after the content is loaded.
 
 #### Virtual {released-on=v1.10.0}
 
+<app-alert type="warning" content="Currently, incremental updates to the list are not supported."><app-alert>
+
 <masa-example file="Examples.mobiles.swiper.Virtual"></masa-example>
 
 ### Module components
