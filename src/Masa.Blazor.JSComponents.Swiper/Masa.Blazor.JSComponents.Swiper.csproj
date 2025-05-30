@@ -10,6 +10,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
         <Company>masastack</Company>
+        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.33"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -28,10 +29,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj"/>
         <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AdditionalFiles Include="Swiper\MSwiper.razor" />
     </ItemGroup>
 
 </Project>

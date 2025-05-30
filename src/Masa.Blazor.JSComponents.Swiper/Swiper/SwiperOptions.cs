@@ -27,4 +27,10 @@ public class SwiperOptions
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public SwiperNavigationOptions? Navigation { get; set; }
+    
+    public int SlidesPerView { get; set; }
+    
+    public bool Virtual { get; set; }
+    
+    public bool CenteredSlides { get; set; }
 }

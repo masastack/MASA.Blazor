@@ -2,7 +2,7 @@
 
 public class SwiperJsModule : JSModule
 {
-    public SwiperJsModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/swiper-proxy.js")
+    public SwiperJsModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor.JSComponents.Swiper/swiper.js")
     {
     }
 

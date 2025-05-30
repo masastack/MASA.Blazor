@@ -44,6 +44,21 @@ public partial class MSwiper : MasaComponentBase
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Nested { get; set; }
 
+    /// <summary>
+    /// Number of slides per view (slides visible at the same time on slider's container).
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public int SlidesPerView { get; set; } = 1;
+
+    /// <summary>
+    /// If true, then active slide will be centered, not always on the left side.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public bool CenteredSlides { get; set; }
+
+    /// <summary>
+    /// Enables virtual slides functionality.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public bool Virtual { get; set; }
+
     private SwiperJsModule? _swiperJSModule;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
@@ -77,7 +92,7 @@ public partial class MSwiper : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentStyle()
     {
-        yield return StyleBuilder.Create().AddHeight(Height).AddWidth(Width).Build();
+        yield return StyleBuilder.Create().AddHeight(Height).AddWidth(Width).Add("--swiper-theme-color", "rgba(var(--m-theme-primary))").Build();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -140,6 +155,9 @@ public partial class MSwiper : MasaComponentBase
                 Parallax = Parallax,
                 SpaceBetween = SpaceBetween,
                 Nested = Nested,
+                SlidesPerView = SlidesPerView,
+                Virtual = Virtual,
+                CenteredSlides = CenteredSlides,
                 Autoplay = _autoplay?.GetOptions(),
                 Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
