@@ -9,11 +9,14 @@ type State = {
 export function useTouch(
   elOrString: HTMLElement | string,
   dotNetObject: DotNet.DotNetObject,
-  state: State
+  state: State,
+  previousPageId: number = -1
 ) {
   const el = getElement(elOrString);
 
   if (!el) return;
+
+  const previousPageEl = previousPageId > -1 ? getElement("[page-stack-id='" + previousPageId + "']") : null;
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
   window.addEventListener("touchmove", onTouchmove, { passive: false });
@@ -89,7 +92,7 @@ export function useTouch(
     }
   }
 
-  function onTouchmove(e: TouchEvent) {
+  async function onTouchmove(e: TouchEvent) {
     if (!isActiveElement(e)) return;
 
     const touchX = e.changedTouches[0].clientX;
@@ -183,6 +186,12 @@ export function useTouch(
 
       el.style.setProperty("transform", transform);
       el.style.setProperty("transition", "none");
+
+      if (previousPageEl) {
+        previousPageEl.style.setProperty('--m-page-stack-item-progress', `${dragProgress.toFixed(2)}`);
+        console.log(previousPageEl.firstElementChild);
+        (previousPageEl.firstElementChild as HTMLElement).style.setProperty('transition', 'none');
+      }
     } else {
       if (state.isActive) {
         el.style.removeProperty("transform");
@@ -191,6 +200,14 @@ export function useTouch(
       }
 
       el.style.removeProperty("transition");
+
+      if (previousPageEl) {
+        previousPageEl.style.setProperty('--m-page-stack-item-progress', "0");
+        (previousPageEl.firstElementChild as HTMLElement).style.removeProperty('transition');
+        setTimeout(() => {
+          previousPageEl.style.removeProperty('--m-page-stack-item-progress');
+        }, 300);
+      }
     }
   };
 

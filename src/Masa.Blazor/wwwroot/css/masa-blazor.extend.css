@@ -406,6 +406,11 @@
     overflow: hidden;
 }
 
+.m-page-stack-item--inactive {
+    transform: translateX(calc(var(--m-page-stack-item-inactive-x) * var(--m-page-stack-item-progress, 1)));
+    transition: transform .3s ease;
+}
+
 .m-page-stack-item.m-page-stack-item--center-title .m-toolbar__title {
     position: absolute;
     padding-left: 0 !important;
