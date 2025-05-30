@@ -13,7 +13,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 #endif
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
-
+    
     [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter] public bool Vertical { get; set; }
@@ -51,6 +51,12 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public EventCallback<TValue> OnEnd { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public bool Rtl { get; set; }
+
+    protected bool ComputedRtl => IsDirtyParameter(nameof(Rtl)) ? Rtl : MasaBlazor.RTL;
 
     protected virtual double GetRoundedValue(int index)
     {
@@ -358,7 +364,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
             clickPos = 1 - clickPos;
         }
 
-        if (MasaBlazor.RTL)
+        if (ComputedRtl)
         {
             clickPos = 1 - clickPos;
         }
@@ -495,7 +501,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         var steps = Max - Min / step;
         if (directionCodes.Contains(args.Key))
         {
-            var increase = MasaBlazor.RTL
+            var increase = ComputedRtl
                 ? new[] { KeyCodes.ArrowLeft, KeyCodes.ArrowUp }
                 : new[] { KeyCodes.ArrowRight, KeyCodes.ArrowUp };
             var direction = increase.Contains(args.Key) ? 1 : -1;

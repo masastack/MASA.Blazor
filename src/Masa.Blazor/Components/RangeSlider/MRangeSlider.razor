@@ -75,7 +75,7 @@
         void GetTrackStyle(double startLength, double endLength,
             double startPadding = 0, double endPadding = 0)
         {
-            var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
+            var startDir = Vertical ? (ComputedRtl ? "top" : "bottom") : (ComputedRtl ? "right" : "left");
             var endDir = Vertical ? "height" : "width";
 
             var start = $"calc({startLength}% + {startPadding}px)";
@@ -91,7 +91,7 @@
     protected override string GetThumbContainerStyles(int index = 0)
     {
         var direction = Vertical ? "top" : "left";
-        var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
+        var value = ComputedRtl ? 100 - InputWidths[index] : InputWidths[index];
         value = Vertical ? 100 - value : value;
 
         return StyleBuilder.Create()
