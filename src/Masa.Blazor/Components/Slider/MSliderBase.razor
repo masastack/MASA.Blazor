@@ -152,7 +152,7 @@
 
     private string GetTrackBackgroundStyle()
     {
-        var startDir = Vertical ? MasaBlazor.RTL ? "bottom" : "top" : MasaBlazor.RTL ? "left" : "right";
+        var startDir = Vertical ? ComputedRtl ? "bottom" : "top" : ComputedRtl ? "left" : "right";
         var endDir = Vertical ? "height" : "width";
 
         var start = "0px";
@@ -171,8 +171,8 @@
         var endDir = Vertical ? "top" : "right";
         var valueDir = Vertical ? "height" : "width";
 
-        var start = MasaBlazor.RTL ? "auto" : "0";
-        var end = MasaBlazor.RTL ? "0" : "auto";
+        var start = ComputedRtl ? "auto" : "0";
+        var end = ComputedRtl ? "0" : "auto";
         var value = IsDisabled ? $"calc({InputWidth}% - 10px)" : $"{InputWidth}%";
 
         return StyleBuilder.Create()
@@ -186,10 +186,10 @@
 
     private (string @class, string style) GetTickCss(int index)
     {
-        var direction = Vertical ? "bottom" : (MasaBlazor.RTL ? "right" : "left");
-        var offsetDirection = Vertical ? (MasaBlazor.RTL ? "left" : "right") : "top";
+        var direction = Vertical ? "bottom" : (ComputedRtl ? "right" : "left");
+        var offsetDirection = Vertical ? (ComputedRtl ? "left" : "right") : "top";
         var width = index * (100 / NumTicks);
-        var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
+        var filled = ComputedRtl ? (100 - InputWidth) < width : width < InputWidth;
 
         var @class = _tickModifierBuilder.Add(filled).Build();
         var style = StyleBuilder.Create()
@@ -205,7 +205,7 @@
     protected virtual string GetThumbContainerStyles(int index)
     {
         var direction = Vertical ? "top" : "left";
-        var value = MasaBlazor.RTL ? 100 - InputWidth : InputWidth;
+        var value = ComputedRtl ? 100 - InputWidth : InputWidth;
         value = Vertical ? 100 - value : value;
 
         return StyleBuilder.Create()
