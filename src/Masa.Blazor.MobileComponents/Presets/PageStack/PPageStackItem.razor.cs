@@ -38,7 +38,7 @@ public partial class PPageStackItem : MasaComponentBase
     internal string? AppBarTitle { get; set; }
     internal string? AppBarImage { get; set; }
     internal bool CenterTitle { get; set; }
-    internal bool ElevateOnScroll { get; set; } = true;
+    internal bool ElevateOnScroll { get; set; }
     internal bool ShrinkOnScroll { get; set; }
     internal string? AppBarTheme { get; set; }
 
