@@ -189,7 +189,6 @@ export function useTouch(
 
       if (previousPageEl) {
         previousPageEl.style.setProperty('--m-page-stack-item-progress', `${dragProgress.toFixed(2)}`);
-        console.log(previousPageEl.firstElementChild);
         (previousPageEl.firstElementChild as HTMLElement).style.setProperty('transition', 'none');
       }
     } else {
