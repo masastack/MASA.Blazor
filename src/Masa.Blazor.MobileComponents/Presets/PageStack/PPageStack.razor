@@ -4,8 +4,8 @@
 @inject NavigationManager NavigationManager
 
 <PPageStackContainer Id="@Id"
-                     Class="@Class"
-                     Style="@Style"
+                     Class="@GetClass()"
+                     Style="@GetStyle()"
                      TabRules="@TabRules"
                      @attributes="@Attributes">
     @ChildContent
@@ -20,6 +20,7 @@
         var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(pageData.AbsolutePath, StringComparison.OrdinalIgnoreCase);
 
         <PPageStackItem AppBarVisible="@AppBarAlwaysVisible"
+                        DisableUnderlaySlide="@DisableUnderlaySlide"
                         Data="pageData"
                         CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"

@@ -19,19 +19,19 @@ public class Touch : IAsyncDisposable
                 .AsTask());
     }
 
-    public async ValueTask<TouchJSObjectResult> UseTouchAsync(ElementReference el, TouchState state)
+    public async ValueTask<TouchJSObjectResult> UseTouchAsync(ElementReference el, TouchState state, int previousPageId)
     {
         var moduleTask = await _moduleTask.Value;
         var jsObjectReference =
-            await moduleTask.InvokeAsync<IJSObjectReference>("useTouch", el, _dotNetObjectReference, state);
+            await moduleTask.InvokeAsync<IJSObjectReference>("useTouch", el, _dotNetObjectReference, state, previousPageId);
         return CreateTouchJSObjectResult(jsObjectReference);
     }
 
-    public async ValueTask<TouchJSObjectResult> UseTouchAsync(string selector, TouchState state)
+    public async ValueTask<TouchJSObjectResult> UseTouchAsync(string selector, TouchState state, int previousPageId)
     {
         var moduleTask = await _moduleTask.Value;
         var jsObjectReference =
-            await moduleTask.InvokeAsync<IJSObjectReference>("useTouch", selector, _dotNetObjectReference, state);
+            await moduleTask.InvokeAsync<IJSObjectReference>("useTouch", selector, _dotNetObjectReference, state, previousPageId);
         return CreateTouchJSObjectResult(jsObjectReference);
     }
 

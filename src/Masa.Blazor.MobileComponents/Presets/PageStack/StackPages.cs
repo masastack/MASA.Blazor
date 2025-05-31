@@ -22,8 +22,9 @@ internal class StackPages : IEnumerable<string>
     {
         PagePushed?.Invoke(this, new StackPagesPushedEventArgs(page));
 
-        _pages.LastOrDefault()?.Deactivate();
-        page.Activate();
+        var lastPage = _pages.LastOrDefault();
+        lastPage?.Deactivate();
+        page.Activate(lastPage?.Id ?? -1);
 
         _pages.Add(page);
     }

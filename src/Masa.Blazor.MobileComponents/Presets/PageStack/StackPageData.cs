@@ -2,7 +2,7 @@
 
 public class StackPageData(string absolutePath, int id)
 {
-    private bool _active;
+    internal int PreviousPageId { get; private set; } = -1;
     
     public int Id { get; } = id;
 
@@ -32,30 +32,34 @@ public class StackPageData(string absolutePath, int id)
     /// </summary>
     public object? State { get; private set; }
 
+    public bool Active { get; private set; }
+    
     internal void UpdateState(object? state) => State = state;
 
     internal void UpdatePath(string absolutePath) => AbsolutePath = absolutePath;
 
-    internal void Activate()
+    internal void Activate(int previousPageId = -1)
     {
-        if (_active)
+        if (Active)
         {
             return;
         }
+        
+        PreviousPageId = previousPageId;
 
-        _active = true;
+        Active = true;
 
         ActiveChanged?.Invoke(this, new PageActiveStateEventArgs(true));
     }
 
     internal void Deactivate()
     {
-        if (!_active)
+        if (!Active)
         {
             return;
         }
 
-        _active = false;
+        Active = false;
 
         ActiveChanged?.Invoke(this, new PageActiveStateEventArgs(false));
     }
