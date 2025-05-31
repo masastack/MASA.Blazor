@@ -204,7 +204,7 @@ export function useTouch(
       el.style.removeProperty("transition");
 
       if (underlaySlideEl) {
-        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', "0");
+        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', state.isActive ? "1" : "0");
         underlaySlideEl.style.removeProperty('transition');
         setTimeout(() => {
           underlaySlideEl.style.removeProperty('--m-page-stack-item-progress');

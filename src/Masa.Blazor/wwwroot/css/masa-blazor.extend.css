@@ -403,7 +403,7 @@
 /* page-stack */
 
 .m-page-stack {
-    transition: transform .3s ease;
+    transition: transform .3s cubic-bezier(.25,.8,.25,1);
 }
 
 .m-page-stack--has-pages:not(.m-page-stack--disable-underlay-slide) {
@@ -416,7 +416,7 @@
 
 .m-page-stack-item--inactive:not(.m-page-stack-item--disable-underlay-slide) {
     transform: translateX(calc(-48px * var(--m-page-stack-item-progress, 1)));
-    transition: transform .3s ease;
+    transition: transform .3s cubic-bezier(.25,.8,.25,1);
 }
 
 .m-page-stack-item.m-page-stack-item--center-title .m-toolbar__title {
