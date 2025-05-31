@@ -402,12 +402,20 @@
 
 /* page-stack */
 
+.m-page-stack {
+    transition: transform .3s ease;
+}
+
+.m-page-stack--has-pages:not(.m-page-stack--disable-underlay-slide) {
+    transform: translateX(calc(-48px * var(--m-page-stack-item-progress, 1)));
+}
+
 .m-page-stack-item {
     overflow: hidden;
 }
 
-.m-page-stack-item--inactive {
-    transform: translateX(calc(var(--m-page-stack-item-inactive-x) * var(--m-page-stack-item-progress, 1)));
+.m-page-stack-item--inactive:not(.m-page-stack-item--disable-underlay-slide) {
+    transform: translateX(calc(-48px * var(--m-page-stack-item-progress, 1)));
     transition: transform .3s ease;
 }
 

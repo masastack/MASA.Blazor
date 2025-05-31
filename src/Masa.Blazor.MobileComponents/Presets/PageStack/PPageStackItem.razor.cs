@@ -14,6 +14,8 @@ public partial class PPageStackItem : MasaComponentBase
 
     [Parameter] public bool AppBarVisible { get; set; }
 
+    [Parameter] public bool DisableUnderlaySlide { get; set; }
+
     private TouchJSObjectResult? _touchJSObjectResult;
 
     private string Transition => Data.DisableTransition ? string.Empty : "dialog-right-transition";
@@ -122,12 +124,10 @@ public partial class PPageStackItem : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(CenterTitle).Add(Data.Active ? "active" : "inactive").Build();
-    }
-
-    protected override IEnumerable<string?> BuildComponentStyle()
-    {
-        yield return "--m-page-stack-item-inactive-x: -48px";
+        yield return _modifierBuilder.Add(CenterTitle)
+            .Add(Data.Active ? "active" : "inactive")
+            .Add(DisableUnderlaySlide)
+            .Build();
     }
 
     private async Task HandleOnGoBack()

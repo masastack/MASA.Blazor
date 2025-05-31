@@ -16,7 +16,10 @@ export function useTouch(
 
   if (!el) return;
 
-  const previousPageEl = previousPageId > -1 ? getElement("[page-stack-id='" + previousPageId + "']") : null;
+  const underlaySlideEl =
+    previousPageId > -1
+      ? getElement("[page-stack-id='" + previousPageId + "'] .m-page-stack-item")
+      : getElement(".m-page-stack");
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
   window.addEventListener("touchmove", onTouchmove, { passive: false });
@@ -187,9 +190,9 @@ export function useTouch(
       el.style.setProperty("transform", transform);
       el.style.setProperty("transition", "none");
 
-      if (previousPageEl) {
-        previousPageEl.style.setProperty('--m-page-stack-item-progress', `${dragProgress.toFixed(2)}`);
-        (previousPageEl.firstElementChild as HTMLElement).style.setProperty('transition', 'none');
+      if (underlaySlideEl) {
+        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', `${dragProgress.toFixed(2)}`);
+        underlaySlideEl.style.setProperty('transition', 'none');
       }
     } else {
       if (state.isActive) {
@@ -200,11 +203,11 @@ export function useTouch(
 
       el.style.removeProperty("transition");
 
-      if (previousPageEl) {
-        previousPageEl.style.setProperty('--m-page-stack-item-progress', "0");
-        (previousPageEl.firstElementChild as HTMLElement).style.removeProperty('transition');
+      if (underlaySlideEl) {
+        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', "0");
+        underlaySlideEl.style.removeProperty('transition');
         setTimeout(() => {
-          previousPageEl.style.removeProperty('--m-page-stack-item-progress');
+          underlaySlideEl.style.removeProperty('--m-page-stack-item-progress');
         }, 300);
       }
     }
