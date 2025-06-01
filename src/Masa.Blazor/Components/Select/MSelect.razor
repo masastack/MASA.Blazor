@@ -82,7 +82,7 @@
         @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item, index, selected, disabled))
     };
 
-    private RenderFragment GenChipSelection(TItem item, int index, bool selected) => __builder =>
+    protected virtual RenderFragment GenChipSelection(TItem item, int index, bool selected) => __builder =>
     {
         var isDisabled = item != null && GetDisabled(item);
         var isInteractive = !isDisabled && IsInteractive;

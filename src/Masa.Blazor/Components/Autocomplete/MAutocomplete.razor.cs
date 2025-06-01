@@ -214,7 +214,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
 
         if (nextItem is null)
         {
-            await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
+            await SetsValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
         }
         else
         {

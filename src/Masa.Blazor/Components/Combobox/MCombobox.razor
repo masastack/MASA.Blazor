@@ -1,0 +1,202 @@
+﻿@namespace Masa.Blazor
+@typeparam TItem
+@typeparam TValue
+@inherits MAutocomplete<TItem, string, TValue>
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    protected override RenderFragment GenInput()
+    {
+        // TODO: paste
+
+        return base.GenInput();
+    }
+
+    protected override RenderFragment GenChipSelection(TItem item, int index, bool selected)
+    {
+        // TODO: double click to edit
+
+        return base.GenChipSelection(item, index, selected);
+    }
+
+    protected override async Task OnChipInput(TItem item)
+    {
+        await base.OnChipInput(item);
+
+        _editingIndex = -1;
+    }
+
+    public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+    {
+        var keyCode = args.Key;
+
+        if (args.CtrlKey || !(new[] { KeyCodes.Home, KeyCodes.End }.Contains(keyCode)))
+        {
+            await base.HandleOnKeyDownAsync(args);
+        }
+
+        // if use is at selection index of 0
+        // create a new tag
+        var selectionStart = await Js.InvokeAsync<int>(JsInteropConstants.GetProp, InputElement, "selectionStart");
+        Console.Out.WriteLine("[MCombobox] selectionStart: " + selectionStart);
+        if (Multiple && keyCode == KeyCodes.ArrowLeft && selectionStart == 0)
+        {
+            await UpdateSelf();
+        }
+        else if (keyCode == KeyCodes.Enter)
+        {
+            await OnEnterDown(args);
+        }
+    }
+
+    private async Task OnEnterDown(KeyboardEventArgs args)
+    {
+        // TODO: 测试有用吗？
+        await Js.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, InputElement);
+
+        var menuIndex = GetMenuIndex();
+        if (menuIndex > -1)
+        {
+            return;
+        }
+
+        NextTick(UpdateSelf);
+    }
+
+    protected override async Task OnTabDown(KeyboardEventArgs args)
+    {
+        if (Multiple && !string.IsNullOrEmpty(InternalSearch) && GetMenuIndex() == -1)
+        {
+            // TODO: need remove stopPropagation?
+            await Js.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, InputElement);
+
+            await UpdateTags();
+            return;
+        }
+
+        await base.OnTabDown(args);
+    }
+
+    protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
+    {
+        if (_editingIndex > -1)
+        {
+            await UpdateEditing();
+        }
+        else
+        {
+            await base.SelectItem(item, closeOnSelect);
+
+            if (!string.IsNullOrEmpty(InternalSearch) && Multiple && GetText(item)?.Contains(InternalSearch, StringComparison.CurrentCultureIgnoreCase) is true)
+            {
+                InternalSearch = null;
+            }
+        }
+    }
+
+    protected override void SetSelectedItems()
+    {
+        if (InternalValue is null || (InternalValue is string str && string.IsNullOrEmpty(str)))
+        {
+            SelectedItems.Clear();
+        }
+        else
+        {
+            // TODO: ??? js 
+            // this.selectedItems = this.multiple ? this.internalValue : [this.internalValue]
+        }
+    }
+
+    protected override Task SetsValue(TValue value)
+    {
+        // TODO: js
+        //await SetsValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
+        // VSelect.options.methods.setValue.call(this, value === undefined ? this.internalSearch : value)
+        return base.SetsValue(value);
+    }
+
+    private async Task UpdateSelf()
+    {
+        if (Multiple)
+        {
+            await UpdateTags();
+        }
+        else
+        {
+            await UpdateCombobox();
+        }
+    }
+
+    private async Task UpdateTags()
+    {
+        var menuIndex = GetMenuIndex();
+
+        // If the user is not searching
+        // and no menu item is selected
+        // or if the search is empty
+        // do nothing
+        if ((menuIndex < 0 && !SearchIsDirty) || string.IsNullOrEmpty(InternalSearch))
+        {
+            return;
+        }
+
+        if (_editingIndex > -1)
+        {
+            await UpdateEditing();
+        }
+    }
+
+    private async Task UpdateEditing()
+    {
+        var value = InternalValue is string str ? [str] : InternalValue as IList<string>;
+        var index = SelectedItems.FindIndex(item => GetText(item)?.Equals(InternalSearch, StringComparison.OrdinalIgnoreCase) is true);
+
+        // If user enters a duplicate text on chip edit,
+        // don't add it, move it to the end of the list
+        if (index > -1)
+        {
+            var item = value[index];
+
+            value.RemoveAt(index);
+            value.Add(item);
+        }
+        else
+        {
+            value[_editingIndex] = InternalSearch;
+        }
+
+        await SetsValue((TValue)value);
+        _editingIndex = -1;
+        InternalSearch = null;
+    }
+
+    private async Task UpdateCombobox()
+    {
+        // If search is not dirty, do nothing
+        if (!SearchIsDirty)
+        {
+            return;
+        }
+
+        // The internal search is not matching
+        // the internal value, update the input
+        // TODO: logic missing
+        // if (InternalSearch != GetText(InternalValue))
+
+        var isUsingSlot = SelectionContent is not null || HasChips;
+        if (isUsingSlot)
+        {
+            InternalSearch = null;
+        }
+    }
+
+    public override Task HandleOnClearClickAsync(MouseEventArgs args)
+    {
+        _editingIndex = -1;
+
+        return base.HandleOnClearClickAsync(args);
+    }
+
+}

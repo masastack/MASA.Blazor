@@ -173,7 +173,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         }
     }
 
-    protected virtual IList<TItem> SelectedItems { get; set; } = new List<TItem>();
+    protected virtual List<TItem> SelectedItems { get; set; } = [];
 
     protected string TilesSelector =>
         $"{MMenu!.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
@@ -464,7 +464,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         {
             if (value is TValue val)
             {
-                await SetValue(val);
+                await SetsValue(val);
             }
 
             if (closeOnSelect)
@@ -490,7 +490,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
             if (internalValues is TValue val)
             {
-                await SetValue(val);
+                await SetsValue(val);
             }
         }
 
@@ -818,7 +818,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         
         var value = Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default;
 
-        await SetValue(value);
+        await SetsValue(value);
 
         if (OnClearClick.HasDelegate)
         {
@@ -892,7 +892,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         return MenuListIndex;
     }
 
-    private async Task OnChipInput(TItem item)
+    protected virtual async Task OnChipInput(TItem item)
     {
         if (Multiple)
         {
@@ -900,7 +900,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         }
         else
         {
-            await SetValue(default);
+            await SetsValue(default);
         }
         
         await TryInvokeFieldChangeOfInputsFilter();
@@ -930,7 +930,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         return func;
     }
 
-    protected async Task SetValue(TValue value)
+    protected virtual async Task SetsValue(TValue value)
     {
         if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
         {

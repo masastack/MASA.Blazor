@@ -27,7 +27,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-    protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
+    protected override List<TItem> SelectedItems => FindSelectedItems(Items).ToList();
 
     protected override BMenuProps GetDefaultMenuProps()
     {
@@ -158,7 +158,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
             if (value is TValue val)
             {
                 // await ValueChanged.InvokeAsync(val);
-                await SetValue(val);
+                await SetsValue(val);
                 _prevValue = val;
             }
         }
@@ -168,7 +168,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
             if (values is TValue val)
             {
                 // await ValueChanged.InvokeAsync(val);
-                await SetValue(val);
+                await SetsValue(val);
                 _prevValue = val;
             }
         }
