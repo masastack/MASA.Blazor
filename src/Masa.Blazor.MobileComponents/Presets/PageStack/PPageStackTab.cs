@@ -32,7 +32,7 @@ public class PPageStackTab : ComponentBase, IDisposable
         _context.Attrs["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
     }
 
-    private void InternalPageStackNavControllerOnTabBadgeUpdated(object? sender, PageStackTabBadgeUpdateEventArgs e)
+    private void InternalPageStackNavControllerOnTabBadgeUpdated(object? sender, PageStackTabBadgeUpdateRequestedEventArgs e)
     {
         if (Href?.Equals(e.TargetHref, StringComparison.OrdinalIgnoreCase) is not true)
         {
@@ -80,7 +80,7 @@ public class PPageStackTab : ComponentBase, IDisposable
         }
     }
 
-    private static RenderFragment<RenderFragment> CreateBadgeContent(PageStackTabBadgeUpdateEventArgs args)
+    private static RenderFragment<RenderFragment> CreateBadgeContent(PageStackTabBadgeUpdateRequestedEventArgs args)
     {
         return value =>
         {

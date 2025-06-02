@@ -2,7 +2,9 @@
   "events": {
     "PageClosed": "a event occurs when a stack page is closed",
     "TabChanged": "a event occurs when a tab is changed, it will not be triggered when a page is pushed or popped",
-    "TabRefreshRequested": "a event occurs when a refresh is requested"
+    "TabRefreshRequested": "a event occurs when a refresh is requested",
+    "RequestTabBadgeUpdate": "a event occurs when a tab badge update is requested",
+    "RequestTabBadgeClear": "a event occurs when a tab badge clear is requested"
   },
   "methods": {
     "Push": "push a new page onto the page stack; the second parameter is optional and used to remove the top page of the stack",
