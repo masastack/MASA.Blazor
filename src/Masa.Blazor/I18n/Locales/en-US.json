@@ -78,6 +78,8 @@
       }
     },
     "pageTabs": {
+      "pinTab": "Pin Tab",
+      "unpinTab": "Unpin Tab",
       "reloadTab": "Reload Tab",
       "closeTabsToTheLeft": "Close Tabs to the Left",
       "closeTabsToTheRight": "Close Tabs to the Right",
