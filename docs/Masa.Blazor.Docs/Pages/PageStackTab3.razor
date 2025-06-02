@@ -16,6 +16,8 @@
 
     <PPageStackLink Href="/blazor/examples/page-stack/page1">Navigate to Page 1</PPageStackLink>
 
+    <MButton OnClick="@AddBadge">Add badge to Tab 3</MButton>
+
     <MSyntaxHighlight Code="@sourceCode"
                       Language="html"
                       Style="font-size: 10px">
@@ -59,6 +61,14 @@
     {
         // simulate a long-running task
         await Task.Delay(2000);
+
+        NavController.NotifyTabBadgeClear("/blazor/examples/page-stack/tab3");
+    }
+
+    private void AddBadge()
+    {
+        NavController.NotifyTabBadgeUpdated(
+            new PageStackTabBadgeUpdateEventArgs("/blazor/examples/page-stack/tab3", dot: true));
     }
 
     public void Dispose()

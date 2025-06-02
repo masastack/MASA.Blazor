@@ -21,7 +21,9 @@
             </MButton>
         </PPageStackTab>
         <PPageStackTab Href="/blazor/examples/page-stack/tab3">
-            <MButton @attributes="@context.Attrs">Tab 3</MButton>
+            <MButton @attributes="@context.Attrs">
+                @context.GenBadgeContent("Tab 3")
+            </MButton>
         </PPageStackTab>
     </MBottomNavigation>
 </MApp>

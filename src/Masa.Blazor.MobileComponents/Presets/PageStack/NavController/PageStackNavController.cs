@@ -55,12 +55,14 @@ public class PageStackNavController
     /// Occurs when a tab is requested a refresh.
     /// </summary>
     public event EventHandler<PageStackTabRefreshRequestedEventArgs>? TabRefreshRequested;
-    
+
+    internal event EventHandler<PageStackTabBadgeUpdateEventArgs>? TabBadgeUpdated;
+
     /// <summary>
     /// Records the last visited tab path.
     /// </summary>
     internal string? LastVisitedTabPath { get; private set; }
-    
+
     internal void BindComponent(PPageStack component) => _boundComponent = component;
 
     internal void UnbindComponent() => _boundComponent = null;
@@ -189,7 +191,8 @@ public class PageStackNavController
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackPopEventArgs(delta, replaceUri, state, delta == _boundComponent.Pages.Count, disableTransition);
+            var eventArgs = new PageStackPopEventArgs(delta, replaceUri, state, delta == _boundComponent.Pages.Count,
+                disableTransition);
 
             StackPop?.Invoke(this, eventArgs);
 
@@ -213,7 +216,8 @@ public class PageStackNavController
         {
             AssertComponentBound();
 
-            var eventArgs = new PageStackGoBackToPageEventArgs(absolutePath, state, disableTransition: disableTransition);
+            var eventArgs =
+                new PageStackGoBackToPageEventArgs(absolutePath, state, disableTransition: disableTransition);
             StackGoBackTo?.Invoke(this, eventArgs);
 
             _boundComponent.GoBackTo(eventArgs);
@@ -228,7 +232,8 @@ public class PageStackNavController
     /// <param name="replaceUri"></param>
     /// <param name="state"></param>
     /// <param name="disableTransition"></param>
-    public void GoBackToPageAndReplace(string absolutePath, string replaceUri, object? state = null, bool disableTransition = false)
+    public void GoBackToPageAndReplace(string absolutePath, string replaceUri, object? state = null,
+        bool disableTransition = false)
     {
         ExecuteIfTimeElapsed(() =>
         {
@@ -316,6 +321,18 @@ public class PageStackNavController
     internal void NotifyTabRefresh(string targetHref)
     {
         TabRefreshRequested?.Invoke(this, new PageStackTabRefreshRequestedEventArgs(targetHref));
+    }
+
+    public void NotifyTabBadgeUpdated(PageStackTabBadgeUpdateEventArgs eventArgs)
+    {
+        eventArgs.Value = true;
+        TabBadgeUpdated?.Invoke(this, eventArgs);
+    }
+
+    public void NotifyTabBadgeClear(string targetHref)
+    {
+        var eventArgs = new PageStackTabBadgeUpdateEventArgs(targetHref, false);
+        TabBadgeUpdated?.Invoke(this, eventArgs);
     }
 
     /// <summary>
