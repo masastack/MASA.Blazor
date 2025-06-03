@@ -56,6 +56,9 @@ public class PageStackNavController
     /// </summary>
     public event EventHandler<PageStackTabRefreshRequestedEventArgs>? TabRefreshRequested;
 
+    /// <summary>
+    /// Occurs when a tab badge update is requested.
+    /// </summary>
     internal event EventHandler<PageStackTabBadgeUpdateRequestedEventArgs>? TabBadgeUpdated;
 
     /// <summary>
@@ -326,21 +329,19 @@ public class PageStackNavController
     /// <summary>
     /// Request an update for the tab badge.
     /// </summary>
-    /// <param name="requestedEventArgs"></param>
-    public void RequestTabBadgeUpdate(PageStackTabBadgeUpdateRequestedEventArgs requestedEventArgs)
+    /// <param name="eventArgs"></param>
+    public void RequestTabBadgeUpdate(PageStackTabBadgeUpdateRequestedEventArgs eventArgs)
     {
-        requestedEventArgs.Value = true;
-        TabBadgeUpdated?.Invoke(this, requestedEventArgs);
+        TabBadgeUpdated?.Invoke(this, eventArgs);
     }
 
     /// <summary>
     /// Request to clear a badge for a specific tab.
     /// </summary>
-    /// <param name="targetHref"></param>
+    /// <param name="targetHref">The tab href to clear the badge for.</param>
     public void RequestTabBadgeClear(string targetHref)
     {
-        var eventArgs = new PageStackTabBadgeUpdateRequestedEventArgs(targetHref, false);
-        TabBadgeUpdated?.Invoke(this, eventArgs);
+        TabBadgeUpdated?.Invoke(this, PageStackTabBadgeUpdateRequestedEventArgs.CreateClearEventArgs(targetHref));
     }
 
     /// <summary>
