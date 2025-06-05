@@ -74,11 +74,13 @@ Used to control the navigation of the page stack.
 
 #### Events
 
-| Event name            | Description                                                                                                        | Usage scenario                                                        |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `PageClosed`          | Triggered when the stack page is closed.                                                                           | -                                                                     |
-| `TabChanged`          | Triggered when the tab is switched, including system-level return. It will not be triggered when pushed or popped. | Reset some states of the old tab page when switching, such as popups. |
-| `TabRefreshRequested` | Tab refresh request.                                                                                               | Used with [Pull to refresh](/blazor/mobiles/pull-refresh) component.  |
+| Event name              | Description                                                                                                        | Usage scenario                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `PageClosed`            | Triggered when the stack page is closed.                                                                           | -                                                                     |
+| `TabChanged`            | Triggered when the tab is switched, including system-level return. It will not be triggered when pushed or popped. | Reset some states of the old tab page when switching, such as popups. |
+| `TabRefreshRequested`   | Tab refresh request.                                                                                               | Used with [Pull to refresh](/blazor/mobiles/pull-refresh) component.  |
+| `RequestTabBadgeUpdate` | Tab badge update request.                                                                                          | New message notification                                              |
+| `RequestTabBadgeClear`  | Tab badge clear request.                                                                                           |                                                                       |
 
 ### data-page-stack-strategy(not recommended) {#data-page-stack-strategy}
 
