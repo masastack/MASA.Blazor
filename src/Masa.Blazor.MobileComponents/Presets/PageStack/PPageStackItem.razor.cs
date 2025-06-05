@@ -11,8 +11,10 @@ public partial class PPageStackItem : MasaComponentBase
     [Parameter] public bool CanRender { get; set; }
 
     [Parameter] public EventCallback OnGoBack { get; set; }
-    
+
     [Parameter] public bool AppBarVisible { get; set; }
+
+    [Parameter] public bool DisableUnderlaySlide { get; set; }
 
     private TouchJSObjectResult? _touchJSObjectResult;
 
@@ -102,7 +104,7 @@ public partial class PPageStackItem : MasaComponentBase
     private async Task UseTouchAsync()
     {
         var touch = new Touch(Js, OnTouchEnd);
-        _touchJSObjectResult = await touch.UseTouchAsync(_dialog!.ContentRef, GetTouchState());
+        _touchJSObjectResult = await touch.UseTouchAsync(_dialog!.ContentRef, GetTouchState(), Data.PreviousPageId);
     }
 
     private TouchState GetTouchState()
@@ -122,7 +124,10 @@ public partial class PPageStackItem : MasaComponentBase
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(CenterTitle).Build();
+        yield return _modifierBuilder.Add(CenterTitle)
+            .Add(Data.Active ? "active" : "inactive")
+            .Add(DisableUnderlaySlide)
+            .Build();
     }
 
     private async Task HandleOnGoBack()

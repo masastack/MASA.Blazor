@@ -33,6 +33,13 @@ public partial class PPageStack: MasaComponentBase
     [MasaApiParameter(true, "v1.10.0")]
     public bool AppBarAlwaysVisible { get; set; } = true;
 
+    /// <summary>
+    /// If set to true, the container and stack pages
+    /// will not slide with a transition animation
+    /// </summary>
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    [Parameter] public bool DisableUnderlaySlide { get; set; }
+
     private PageStackNavController? InternalPageStackNavController { get; set; }
 
     private const int DelayForPageClosingAnimation = 300;
@@ -126,6 +133,21 @@ public partial class PPageStack: MasaComponentBase
             _module = await Js.InvokeAsync<IJSObjectReference>("import",
                 $"./_content/Masa.Blazor/js/{JSManifest.PageStackIndexJs}");
             _dotnetObjectId = await _module.InvokeAsync<int>("attachListener", _dotNetObjectReference);
+        }
+    }
+
+    protected override IEnumerable<string?> BuildComponentClass()
+    {
+        yield return "m-page-stack";
+
+        if (Pages.Count > 0 && Pages.ElementAt(0).Stacked)
+        {
+            yield return "m-page-stack--has-pages";
+        }
+
+        if (DisableUnderlaySlide)
+        {
+            yield return "m-page-stack--disable-underlay-slide";
         }
     }
 
@@ -289,7 +311,14 @@ public partial class PPageStack: MasaComponentBase
     {
         _deltaAndStackCount = (Pages.Count, Pages.Count);
 
-        _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
+        if (_lastVisitedTabPath is not null)
+        {
+            _ = Js.InvokeVoidAsync(JsInteropConstants.HistoryGo, -Pages.Count);
+        }
+        else
+        {
+            NavigationManager.NavigateTo(FallbackUri ?? DefaultFallbackUri);
+        }
 
         var backToLastVisitTab = string.IsNullOrWhiteSpace(e.RelativeUri) ||
                                  _lastVisitedTabPath == GetAbsolutePath(e.RelativeUri);

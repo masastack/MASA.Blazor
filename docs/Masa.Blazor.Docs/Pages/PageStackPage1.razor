@@ -3,8 +3,7 @@
 @inject PageStackNavController NavController
 @inherits PStackPageBase
 
-<PStackPageBarInit Title="Page 1">
-</PStackPageBarInit>
+<PStackPageBar Title="Page 1" />
 
 <p class="caption">url: /blazor/examples/page-stack/page1</p>
 
@@ -20,6 +19,10 @@
 </a>
 
 <span class="ml-2 body-2">State from page 4: @_stateFromPage4</span>
+
+<br />
+
+<PPageStackLink Href="/blazor/examples/page-stack/page5">Navigate to Page 5</PPageStackLink>
 
 <MSyntaxHighlight Code="@sourceCode"
                   Language="razor"

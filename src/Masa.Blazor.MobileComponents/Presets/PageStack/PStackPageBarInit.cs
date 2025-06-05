@@ -43,7 +43,7 @@ public class PStackPageBarInit : IComponent
 
     [Parameter] public int ExtensionHeight { get; set; } = 48;
 
-    [Parameter] public bool ElevateOnScroll { get; set; } = true;
+    [Parameter] public bool ElevateOnScroll { get; set; }
 
     [Parameter] public bool ShrinkOnScroll { get; set; }
 
