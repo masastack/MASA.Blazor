@@ -6,7 +6,8 @@
             <PPageTabs @ref="_pageTabs"
                        NoDataPath="@s_noDataPath"
                        TabOptions="@TabOptions"
-                       SelfPatterns="@s_selfPatterns">
+                       SelfPatterns="@s_selfPatterns"
+                       FixedTabs="@_fixedTabs">
             </PPageTabs>
         </MAppBar>
 
@@ -45,11 +46,16 @@
         "/blazor/examples/page-tabs/page2"
     };
 
+    private string[] _fixedTabs =
+    [
+        "/blazor/examples/page-tabs/page1"
+    ];
+
     private TabOptions? TabOptions(PageTabPathValue pathValue)
     {
         if (pathValue.AbsolutePath == "/blazor/examples/page-tabs/page2")
         {
-            return new TabOptions("Custom tab title", "mdi-tab", "font-weight-bold", false);
+            return new TabOptions("Custom title", "mdi-tab", "font-weight-bold", closeable: false);
         }
 
         return null;

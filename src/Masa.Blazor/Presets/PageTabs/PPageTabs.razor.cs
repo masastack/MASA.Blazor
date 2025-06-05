@@ -59,18 +59,31 @@ public partial class PPageTabs
     #endregion
 
     [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.closeTab")]
     public string? CloseTabText { get; set; }
-    
+
     [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.reloadTab")]
     public string? ReloadTabText { get; set; }
 
     [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.pinTab", "v1.10.0")]
+    public string? PinTabText { get; set; }
+
+    [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.unpinTab", "v1.10.0")]
+    public string? UnpinTabText { get; set; }
+
+    [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.closeTabsToTheLeft")]
     public string? CloseTabsToTheLeftText { get; set; }
 
     [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.closeTabsToTheRight")]
     public string? CloseTabsToTheRightText { get; set; }
 
     [Parameter]
+    [MasaApiParameter("$masaBlazor.pageTabs.closeOtherTabs")]
     public string? CloseOtherTabsText { get; set; }
 
     [Parameter]
@@ -92,10 +105,14 @@ public partial class PPageTabs
     [Parameter]
     public Func<string, Task<bool>>? OnClose { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public IEnumerable<string>? FixedTabs { get; set; } = [];
+
     private static readonly Block _tabBlock = new("p-page-tab");
 
     private readonly List<PatternPath> PatternPaths = new();
-    
+
     private bool _menuValue;
     private string? _noDataPath;
     private string? _previousPath;
@@ -107,12 +124,17 @@ public partial class PPageTabs
 
     private MTabs? _tabs;
 
+    private PatternPath? _currentPatternPath;
     internal EventHandler<PatternPath>? TabClosed;
     internal EventHandler<PatternPath>? TabReload;
     internal EventHandler<PatternPath[]>? TabsUpdated;
 
+    private bool ContextmenuFixed => _contextmenuPath?.Options.Fixed is true;
+
     public override async Task SetParametersAsync(ParameterView parameters)
     {
+        PinTabText = I18n.T("$masaBlazor.pageTabs.pinTab");
+        UnpinTabText = I18n.T("$masaBlazor.pageTabs.unpinTab");
         CloseTabText = I18n.T("$masaBlazor.pageTabs.closeTab");
         ReloadTabText = I18n.T("$masaBlazor.pageTabs.reloadTab");
         CloseTabsToTheLeftText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheLeft");
@@ -126,8 +148,22 @@ public partial class PPageTabs
     {
         base.OnInitialized();
 
-        var pathPattern = GetCurrentPatternPath();
-        PatternPaths.Add(pathPattern);
+        if (FixedTabs != null)
+        {
+            foreach (var fixedTab in FixedTabs)
+            {
+                var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(fixedTab));
+                PatternPaths.Add(selfPatternRegex is null
+                    ? new PatternPath(fixedTab, isFixed: true)
+                    : new PatternPath(selfPatternRegex.ToString(), fixedTab, isFixed: true));
+            }
+        }
+
+        _currentPatternPath = GetCurrentPatternPath();
+        if (!PatternPaths.Contains(_currentPatternPath))
+        {
+            PatternPaths.Add(_currentPatternPath);
+        }
 
         if (PageTabsProvider != null)
         {
@@ -141,7 +177,7 @@ public partial class PPageTabs
     {
         var pathPattern = base.GetCurrentPatternPath();
         var tabOptions = TabOptions?.Invoke(new PageTabPathValue(pathPattern.AbsolutePath, false));
-        pathPattern.Options = tabOptions;
+        pathPattern.Options = tabOptions ?? new();
         return pathPattern;
     }
 
@@ -226,15 +262,15 @@ public partial class PPageTabs
         InvokeAsync(() =>
         {
             _tabs?.CallSliderAfterRender();
-        
+
             StateHasChanged();
         });
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var currentPatternPath = GetCurrentPatternPath();
-        var currentPath = currentPatternPath.AbsolutePath;
+        _currentPatternPath = GetCurrentPatternPath();
+        var currentPath = _currentPatternPath.AbsolutePath;
 
         // only the path is changed, not the query string
         if (_previousPath == currentPath)
@@ -242,9 +278,9 @@ public partial class PPageTabs
             return;
         }
 
-        if (currentPatternPath.IsSelf)
+        if (_currentPatternPath.IsSelf)
         {
-            var renderedPathPattern = PatternPaths.FirstOrDefault(p => currentPatternPath == p);
+            var renderedPathPattern = PatternPaths.FirstOrDefault(p => _currentPatternPath == p);
             if (renderedPathPattern is not null)
             {
                 renderedPathPattern.UpdatePath(NavigationManager.GetAbsolutePath());
@@ -252,9 +288,9 @@ public partial class PPageTabs
             }
         }
 
-        if (!PatternPaths.Contains(currentPatternPath))
+        if (!PatternPaths.Contains(_currentPatternPath))
         {
-            PatternPaths.Add(currentPatternPath);
+            PatternPaths.Add(_currentPatternPath);
         }
 
         _previousPath = currentPath;
@@ -313,6 +349,52 @@ public partial class PPageTabs
         }
 
         CloseTab(patternPath);
+    }
+
+    private void ToggleFixed()
+    {
+        if (_contextmenuPath is null)
+        {
+            return;
+        }
+
+        var currentPatternPath = PatternPaths.FirstOrDefault(u => u == _contextmenuPath);
+        if (currentPatternPath is null)
+        {
+            return;
+        }
+
+        var toggleToFixed = !currentPatternPath.Options.Fixed;
+        var lastIndex = PatternPaths.FindLastIndex(u => u.Options.Fixed);
+        var index = PatternPaths.IndexOf(currentPatternPath);
+
+        if (lastIndex == index)
+        {
+            currentPatternPath.Options.Fixed = toggleToFixed;
+        }
+        else
+        {
+            PatternPaths.Remove(currentPatternPath);
+            currentPatternPath.Options.Fixed = toggleToFixed;
+
+            int insertIndex;
+            if (currentPatternPath.Options.Fixed)
+            {
+                insertIndex = lastIndex + 1;
+                if (insertIndex >= PatternPaths.Count)
+                {
+                    insertIndex = PatternPaths.Count;
+                }
+            }
+            else
+            {
+                insertIndex = lastIndex;
+            }
+
+            PatternPaths.Insert(insertIndex, currentPatternPath);
+        }
+
+        _tabs?.CallSliderAfterRender();
     }
 
     private void HandleOnReloadTab()

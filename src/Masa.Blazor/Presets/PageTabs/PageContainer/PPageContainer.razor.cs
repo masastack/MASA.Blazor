@@ -134,8 +134,11 @@ public partial class PPageContainer : PatternPathComponentBase
         InvokeAsync(() =>
         {
             _patternPaths.Remove(e.Pattern);
-            StateHasChanged();
-            _patternPaths.Put(e.Pattern, e);
+            NextTick(() =>
+            {
+                _patternPaths.Put(e.Pattern, e);
+                StateHasChanged();
+            });
             StateHasChanged();
         });
     }

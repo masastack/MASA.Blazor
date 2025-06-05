@@ -2,19 +2,21 @@
 
 internal record PatternPath
 {
-    public PatternPath(string absolutePath)
+    public PatternPath(string absolutePath, bool isClosable = true, bool isFixed = false)
     {
         AbsolutePath = absolutePath;
         Pattern = "^" + absolutePath.ToLower() + "$";
         CreatedAt = DateTime.Now;
+        Options = new TabOptions { Closeable = isClosable, Fixed = isFixed };
     }
 
-    public PatternPath(string pattern, string absolutePath)
+    public PatternPath(string pattern, string absolutePath, bool isClosable = true, bool isFixed = false)
     {
         AbsolutePath = absolutePath;
         Pattern = pattern.ToLower();
-        IsSelf = true;
         CreatedAt = DateTime.Now;
+        Options = new TabOptions { Closeable = isClosable, Fixed = isFixed };
+        IsSelf = true;
     }
 
     public string AbsolutePath { get; private set; }
@@ -33,10 +35,10 @@ internal record PatternPath
     /// Use for keeping track of the order of the path, see #1535
     /// </summary>
     public DateTime CreatedAt { get; }
+    
+    public TabOptions Options { get; set; } = new();
 
-    public TabOptions? Options { get; set; }
-
-    public bool IsCloseable => Options?.Closeable ?? true;
+    public bool IsCloseable => Options.Closeable;
 
     public void UpdatePath(string path)
     {
@@ -45,7 +47,7 @@ internal record PatternPath
 
     public virtual bool Equals(PatternPath? other)
     {
-        return Pattern == other?.Pattern && IsSelf == other?.IsSelf;
+        return Pattern == other?.Pattern && IsSelf == other.IsSelf;
     }
 
     public override int GetHashCode()
