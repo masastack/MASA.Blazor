@@ -2,6 +2,7 @@
 @typeparam TItem
 @typeparam TItemValue
 @typeparam TValue
+@using Masa.Blazor.Components.Select
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @inherits MTextField<TValue>
 
@@ -76,15 +77,15 @@
         Slot
     }
 
-    private RenderFragment GenSlotSelection(TItem item, int index, bool selected) => __builder =>
+    private RenderFragment GenSlotSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
     {
         var disabled = GetDisabled(item);
-        @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item, index, selected, disabled))
+        @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item.Item, index, selected, disabled, GetText(item)))
     };
 
-    protected virtual RenderFragment GenChipSelection(TItem item, int index, bool selected) => __builder =>
+    internal virtual RenderFragment GenChipSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
     {
-        var isDisabled = item != null && GetDisabled(item);
+        var isDisabled = GetDisabled(item);
         var isInteractive = !isDisabled && IsInteractive;
 
         <MChip Close="@(DeletableChips && isInteractive)"
@@ -110,7 +111,7 @@
         }
     };
 
-    private RenderFragment GenCommaSelection(TItem item, int index, bool selected, bool last) => __builder =>
+    private RenderFragment GenCommaSelection(SelectedItem<TItem> item, int index, bool selected, bool last) => __builder =>
     {
         var color = selected ? ComputedColor : null;
         var isDisabled = IsDisabled || GetDisabled(item);
@@ -178,6 +179,10 @@
         {
             IsMenuActive = val;
             IsFocused = val;
+            if (!val)
+            {
+                MenuListIndex = -1;
+            }
         }
     };
 
@@ -198,7 +203,7 @@
                      ItemValue="@ItemValue"
                      NoDataText="@NoDataText"
                      SelectedItems="@SelectedItems"
-                     OnSelect="@((u) => SelectItem(u))"
+                     OnSelect="@((u) => SelectItem(new SelectedItem<TItem>(u)))"
                      ItemContent="@ItemContent"
                      PrependItemContent="@PrependItemContent"
                      AppendItemContent="@AppendItemContent"

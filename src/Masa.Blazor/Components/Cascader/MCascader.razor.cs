@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Cascader;
+using Masa.Blazor.Components.Select;
 
 namespace Masa.Blazor;
 
@@ -27,7 +28,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-    protected override List<TItem> SelectedItems => FindSelectedItems(Items).ToList();
+    internal override List<SelectedItem<TItem>> SelectedItems => FindSelectedItems(Items).ToList();
 
     protected override BMenuProps GetDefaultMenuProps()
     {
@@ -66,7 +67,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
                 if (valueItem is not null)
                 {
                     _selectedItems.Clear();
-                    FindAllLevelItems(valueItem, ComputedItems, ref _selectedItems);
+                    FindAllLevelItems(valueItem.Item, ComputedItems, ref _selectedItems);
                     _selectedItems.Reverse();
                     _displaySelectedItems = [.._selectedItems];
                 }
@@ -133,11 +134,11 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
         if (ChangeOnSelect)
         {
-            await SelectItem(args.item, closeOnSelect: args.isLast);
+            await SelectItem(new SelectedItem<TItem>(args.item), closeOnSelect: args.isLast);
         }
         else if (args.isLast)
         {
-            await SelectItem(args.item);
+            await SelectItem(new SelectedItem<TItem>(args.item));
         }
 
         NextTick(async () =>
@@ -148,13 +149,13 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
         });
     }
 
-    protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
+    internal override async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
     {
         _selectedItems = _displaySelectedItems.ToList();
 
         if (typeof(TValue) == typeof(TItemValue))
         {
-            var value = ItemValue(item);
+            var value = ItemValue(item.Item);
             if (value is TValue val)
             {
                 // await ValueChanged.InvokeAsync(val);
@@ -178,7 +179,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
             IsMenuActive = false;
         }
 
-        _ = OnSelect.InvokeAsync((item, true));
+        _ = OnSelect.InvokeAsync((item.Item, true));
     }
 
     protected override async Task OnMenuBeforeShowContent()
@@ -231,9 +232,9 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
         }
     }
 
-    private IEnumerable<TItem> FindSelectedItems(IList<TItem> items)
+    private IEnumerable<SelectedItem<TItem>> FindSelectedItems(IList<TItem> items)
     {
-        var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
+        var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item))).Select(u => new SelectedItem<TItem>(u)).ToList();
         if (selectedItems.Any())
         {
             return selectedItems;
@@ -251,7 +252,7 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
             }
         }
 
-        return Array.Empty<TItem>();
+        return [];
     }
 
     protected override string? GetText(TItem item)

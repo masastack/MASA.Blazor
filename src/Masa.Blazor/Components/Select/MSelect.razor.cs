@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Masa.Blazor.Components.Input;
+using Masa.Blazor.Components.Select;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -61,11 +62,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     public bool Eager { get; set; }
 
     [Parameter]
-    public bool Multiple
-    {
-        get => GetValue<bool>();
-        set => SetValue(value);
-    }
+    public bool Multiple { get; set; }
 
     //TODO:OpenOnClear
 
@@ -118,10 +115,9 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
     protected int MenuListIndex { get; private set; } = -1;
 
-    public int SelectedIndex { get; set; } = -1;
+    protected int SelectedIndex { get; set; } = -1;
 
     protected MMenu? MMenu { get; set; }
-
 
     protected BMenuProps ComputedMenuProps
     {
@@ -158,7 +154,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     private List<TItem> VirtualizedItems => MMenu?.Auto is true ? ComputedItems : ComputedItems.Take(lastItem).ToList();
 
     protected List<TItem> ComputedItemsIfHideSelected =>
-        HideSelected ? ComputedItems.Where(item => !SelectedItems.Contains(item)).ToList() : ComputedItems;
+        HideSelected ? ComputedItems.Where(item => !SelectedItems.Any(u => u.Item?.Equals(item) is true)).ToList() : ComputedItems;
 
     protected IList<TItemValue> InternalValues
     {
@@ -173,7 +169,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         }
     }
 
-    protected virtual List<TItem> SelectedItems { get; set; } = [];
+    internal virtual List<SelectedItem<TItem>> SelectedItems { get; set; } = [];
 
     protected string TilesSelector =>
         $"{MMenu!.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
@@ -192,12 +188,19 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     };
 
     protected virtual string? GetText(TItem? item) => item is null ? null : ItemText(item);
+    
+    internal string? GetText(SelectedItem<TItem>? item) => item is null ? null : item.InputText ?? GetText(item.Item);
 
     protected TItemValue? GetValue(TItem item) => ItemValue(item);
 
     protected bool GetDisabled(TItem item) => ItemDisabled?.Invoke(item) is true;
 
-    protected virtual bool EnableSpaceKeDownPreventDefault => true;
+    internal bool GetDisabled(SelectedItem<TItem> item) => item.Item is not null && GetDisabled(item.Item);
+    
+    protected virtual IEnumerable<string> KeysForKeyDownWithPreventDefault { get; } =
+    [
+        KeyCodes.Space
+    ];
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -216,21 +219,20 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
         CachedItems = CacheItems ? Items : new List<TItem>();
     }
-
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
 
         if (firstRender)
         {
-            var keys = new List<string> { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape };
+            string[] keys =
+            [
+                KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape,
+                ..KeysForKeyDownWithPreventDefault
+            ];
 
-            if (EnableSpaceKeDownPreventDefault)
-            {
-                keys.Add(KeyCodes.Space);
-            }
-
-            await Js.InvokeVoidAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown", keys);
+            _ = Js.InvokeVoidAsync(JsInteropConstants.PreventDefaultForSpecificKeys, InputElement, keys);
         }
         else
         {
@@ -270,7 +272,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
             });
         }
 
-        NextTickIf(SetSelectedItems, () => ItemValue is null);
+        SetSelectedItems();
 
         StateHasChanged();
     }
@@ -339,9 +341,9 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     {
         if (isLazyContent)
         {
-            if (OutsideClickJSModule?.Initialized is true && MMenu!.ContentElement.Context is not null)
+            if (OutsideClickJSModule.Initialized && MMenu!.ContentElement.Context is not null)
             {
-                _ = OutsideClickJSModule.UpdateDependentElementsAsync(InputSlotElement.GetSelector()!, MMenu.ContentElement.GetSelector()!);
+                _ = OutsideClickJSModule.UpdateDependentElementsAsync(InputSlotElement.GetSelector(), MMenu.ContentElement.GetSelector());
             }
         }
 
@@ -449,17 +451,18 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         if (index > -1 && index < ComputedItems.Count)
         {
             var item = ComputedItems[index];
-            await SelectItem(item);
+            await SelectItem(new SelectedItem<TItem>(item));
         }
     }
 
-    protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
+    internal virtual async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
     {
         _onSelectItemInvoked = true;
 
         bool isSelected;
 
-        var value = ItemValue(item);
+        var value = item.InputText is not null ? (TItemValue)(object)item.InputText : ItemValue(item.Item);
+
         if (!Multiple)
         {
             if (value is TValue val)
@@ -500,16 +503,16 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         }
         else
         {
-            var index = ComputedItems.IndexOf(item);
+            var index = ComputedItems.IndexOf(item.Item);
             if (index > -1)
             {
                 await SetMenuIndex(index);
             }
         }
 
-        _ = OnSelectedItemUpdate.InvokeAsync(item);
+        _ = OnSelectedItemUpdate.InvokeAsync(item.Item);
 
-        _ = OnSelect.InvokeAsync((item, isSelected));
+        _ = OnSelect.InvokeAsync((item.Item, isSelected));
     }
 
     public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -649,11 +652,11 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
         if (lastIndex == -1) return;
 
-        var lastItem = ComputedItemsIfHideSelected.ElementAt(lastIndex);
+        var last = ComputedItemsIfHideSelected.ElementAt(lastIndex);
 
         MenuListIndex = lastIndex;
 
-        if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled?.Invoke(lastItem) is true)
+        if (ItemDivider(last) || ItemHeader(last) is not null || ItemDisabled?.Invoke(last) is true)
         {
             PrevTile();
         }
@@ -868,7 +871,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
     protected virtual void SetSelectedItems()
     {
-        var selectedItems = new List<TItem>();
+        var selectedItems = new List<SelectedItem<TItem>>();
 
         var values = InternalValues;
 
@@ -878,7 +881,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
             if (index > -1)
             {
-                selectedItems.Add(AllItems[index]);
+                selectedItems.Add(new SelectedItem<TItem>(AllItems[index], null));
             }
         }
 
@@ -892,7 +895,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
         return MenuListIndex;
     }
 
-    protected virtual async Task OnChipInput(TItem item)
+    internal virtual async Task OnChipInput(SelectedItem<TItem> item)
     {
         if (Multiple)
         {

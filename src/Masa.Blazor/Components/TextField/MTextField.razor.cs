@@ -599,16 +599,24 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     private static bool TryConvertTo<T>(string? value, out T? result)
     {
-        var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
-
-        if (succeeded)
+        try
         {
-            result = val;
-            return true;
-        }
+            var succeeded = BindConverter.TryConvertTo<T>(value, CultureInfo.InvariantCulture, out var val);
 
-        result = default;
-        return false;
+            if (succeeded)
+            {
+                result = val;
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
+        catch (InvalidOperationException)
+        {
+            result = default;
+            return false;
+        }
     }
 
     private void UpdateValue(string? originValue, bool succeeded, TValue? convertedValue)
