@@ -26,6 +26,8 @@ public class FormContext
 
     public bool Validate(IValidatable validatable) => _form.Validate(validatable);
 
+    public bool Validate(out List<FieldValidationResult> results) => _form.Validate(out results);
+
     public void Reset() => _form.Reset();
 
     public void Reset(FieldIdentifier fieldIdentifier) => _form.Reset(fieldIdentifier);
@@ -41,13 +43,13 @@ public class FormContext
     public bool IsValid => _form.Value;
 
     /// <summary>
-    /// parse form validation result,if parse failed throw exception
+    /// parse form validation result, if parse failed throw exception
     /// </summary>
     /// <param name="validationResult"></param>
     public void ParseFormValidation(string validationResult) => _form.ParseFormValidation(validationResult);
 
     /// <summary>
-    /// parse form validation result,if parse failed return false
+    /// parse form validation result, if parse failed return false
     /// </summary>
     /// <param name="validationResult"></param>
     public bool TryParseFormValidation(string validationResult) => _form.TryParseFormValidation(validationResult);
