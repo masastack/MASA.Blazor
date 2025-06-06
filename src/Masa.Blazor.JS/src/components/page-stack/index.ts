@@ -90,21 +90,21 @@ export function detachListener(id: number) {
   const clickHandler = clickHandlers[id];
   if (clickHandler) {
     document.removeEventListener("click", clickHandler);
+    delete clickHandlers[id];
   }
 
   const popstateHandler = popstateHandlers[id];
   if (popstateHandler) {
     window.removeEventListener("popstate", popstateHandler);
+    delete popstateHandlers[id];
   }
 
   const scrollHandler = scrollHandlers[id];
   if (scrollHandler) {
     window.removeEventListener("scroll", scrollHandler);
+    delete scrollHandlers[id];
   }
 
   dotnetRefs[id] && dotnetRefs[id].dispose();
-
-  delete clickHandlers[id];
-  delete popstateHandlers[id];
   delete dotnetRefs[id];
 }
