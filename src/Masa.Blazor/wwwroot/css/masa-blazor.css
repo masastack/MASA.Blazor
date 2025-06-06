@@ -18799,7 +18799,6 @@ html.overflow-y-hidden {
     width: 100%;
 }
 .m-text-field > .m-input__control > .m-input__slot:before {
-    border-color: inherit;
     border-style: solid;
     border-width: thin 0 0 0;
 }
