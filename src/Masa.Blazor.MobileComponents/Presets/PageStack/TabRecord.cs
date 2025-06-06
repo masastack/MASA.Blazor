@@ -2,8 +2,10 @@
 
 namespace Masa.Blazor.Presets;
 
-internal record TabRecord(TabRule Rule, string AbsolutePath)
+public record TabRecord(TabRule Rule, string AbsolutePath)
 {
+    internal int Id { get; init; }
+
     internal DateTime CreatedAt { get; } = DateTime.Now;
 
     public virtual bool Equals(TabRecord? other)

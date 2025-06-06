@@ -166,6 +166,19 @@ public static class JsRuntimeExtensions
         await jsRuntime.InvokeVoidAsync(JsInteropConstants.ScrollTo, el, new ScrollToOptions(left, top, behavior));
     }
 
+    /// <summary>
+    /// Scroll to a specific position in the document.
+    /// </summary>
+    /// <param name="jsRuntime"></param>
+    /// <param name="top"></param>
+    /// <param name="left"></param>
+    /// <param name="behavior"></param>
+    public static async Task ScrollTo(this IJSRuntime jsRuntime, double? top, double? left = null,
+        ScrollBehavior behavior = ScrollBehavior.Smooth)
+    {
+        await jsRuntime.InvokeVoidAsync(JsInteropConstants.ScrollTo, "document", new ScrollToOptions(left, top, behavior));
+    }
+
     public static async Task ScrollIntoView(this IJSRuntime jsRuntime, ElementReference el,
         ScrollLogicalPosition? block,
         ScrollLogicalPosition? inline, ScrollBehavior behavior = ScrollBehavior.Smooth)

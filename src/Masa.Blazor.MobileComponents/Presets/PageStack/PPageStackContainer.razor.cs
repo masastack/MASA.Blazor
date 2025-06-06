@@ -10,12 +10,15 @@ public partial class PPageStackContainer : MasaComponentBase
 
     [Parameter] public HashSet<TabRule> TabRules { get; set; } = [];
 
+    [Parameter] public EventCallback<TabRecord> OnActiveTabUpdate { get; set; }
+
     private static readonly Block _block = new("p-page-container");
 
-    private HashSet<TabRule> _prevTabRules = [];
-    private HashSet<TabRecord> _tabs = [];
+    private readonly HashSet<TabRecord> _tabs = [];
     private string? _lastVisitedPage;
     private TabRecord? _lastVisitedTab;
+    private int _lastTabId = 1;
+    private string? currentPath;
 
     protected override void OnInitialized()
     {
@@ -30,14 +33,18 @@ public partial class PPageStackContainer : MasaComponentBase
 
         if (_lastVisitedPage is null)
         {
-            var absolutePath = NavigationManager.GetAbsolutePath();
+            currentPath = NavigationManager.GetAbsolutePath();
 
-            var matched = TabRules.FirstOrDefault(r => r.Regex.IsMatch(absolutePath));
+            var matched = TabRules.FirstOrDefault(r => r.Regex.IsMatch(currentPath));
             if (matched is not null)
             {
-                _lastVisitedTab = new TabRecord(matched, absolutePath);
+                _lastVisitedTab = new TabRecord(matched, currentPath)
+                {
+                    Id = _lastTabId++
+                };
                 _tabs.Add(_lastVisitedTab);
                 _lastVisitedPage = _lastVisitedTab.AbsolutePath;
+                _ = OnActiveTabUpdate.InvokeAsync(_lastVisitedTab).ConfigureAwait(false);
             }
         }
     }
@@ -49,7 +56,7 @@ public partial class PPageStackContainer : MasaComponentBase
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        var currentPath = NavigationManager.GetAbsolutePath();
+        currentPath = NavigationManager.GetAbsolutePath();
 
         // avoid multiple clicks on the same tab
         if (_lastVisitedPage == currentPath)
@@ -84,13 +91,20 @@ public partial class PPageStackContainer : MasaComponentBase
                 _lastVisitedTab = p with { AbsolutePath = currentPath };
                 _tabs.Remove(p);
                 _tabs.Add(_lastVisitedTab);
+                OnActiveTabUpdate.InvokeAsync(_lastVisitedTab);
             }
         }
 
         if (!exists)
         {
-            _lastVisitedTab = new TabRecord(matched, currentPath);
+            _lastVisitedTab = _tabs.FirstOrDefault(u => u.Rule == matched)
+                              ?? new TabRecord(matched, currentPath)
+                              {
+                                  Id = _lastTabId++
+                              };
+
             _tabs.Add(_lastVisitedTab);
+            OnActiveTabUpdate.InvokeAsync(_lastVisitedTab);
         }
 
         InvokeAsync(StateHasChanged);
