@@ -39,8 +39,8 @@
   {
     "title": "v1.8.0",
     "content": {
-      "en": "Highlights:\r\n- [Sticky](/blazor/labs/sticky): new component that make elements stick of the viewport when scrolling.\r\n- **NavigationDrawer** and **PageStack** supports touching to expand or collapse.\r\n- **Menu**: add `ScrollStrategy` parameter to control the behavior of menu during scrolling.\r\n- **PageStackNavController**:\r\n  - `Push` and `Replace` methods add a new `clearStack` argument that using for clear the stack.\r\n  - new **TabChanged** event for changes to currently active tab.\r\n- **TextField**: add support for setting precision for number type.",
-      "zh": "亮点:\r\n- [Sticky](/blazor/labs/sticky)：新组件，当滚动时使元素固定在视口上。\r\n- **NavigationDrawer** 和 **PageStack** 支付触摸展开或关闭。\r\n- **Menu**：添加 `ScrollStrategy` 策略以在滚动时控制菜单的行为。\r\n- **PageStackNavController**: \r\n  - `Push` 和 `Replace` 方法添加了一个新的`clearStack`参数，用于清空现有的堆栈。\r\n  - 新的 `TabChanged` 事件，激活标签更改时触发。\r\n- **TextField**: 数字类型现在支持设置精度。"
+      "en": "Highlights:\r\n- [Sticky](/blazor/components/sticky): new component that make elements stick of the viewport when scrolling.\r\n- **NavigationDrawer** and **PageStack** supports touching to expand or collapse.\r\n- **Menu**: add `ScrollStrategy` parameter to control the behavior of menu during scrolling.\r\n- **PageStackNavController**:\r\n  - `Push` and `Replace` methods add a new `clearStack` argument that using for clear the stack.\r\n  - new **TabChanged** event for changes to currently active tab.\r\n- **TextField**: add support for setting precision for number type.",
+      "zh": "亮点:\r\n- [Sticky](/blazor/components/sticky)：新组件，当滚动时使元素固定在视口上。\r\n- **NavigationDrawer** 和 **PageStack** 支付触摸展开或关闭。\r\n- **Menu**：添加 `ScrollStrategy` 策略以在滚动时控制菜单的行为。\r\n- **PageStackNavController**: \r\n  - `Push` 和 `Replace` 方法添加了一个新的`clearStack`参数，用于清空现有的堆栈。\r\n  - 新的 `TabChanged` 事件，激活标签更改时触发。\r\n- **TextField**: 数字类型现在支持设置精度。"
     },
     "type": 0,
     "href": "/blazor/getting-started/release-notes?v=v1.8.0",
@@ -50,8 +50,8 @@
   {
     "title": "v1.9.0",
     "content": {
-      "en": "Highlights:\r\n- [Tour](/blazor/labs/driverjs): a guide component based on Driver.js.\r\n- [Cascader](/blazor/components/cascaders): supports binding values of type `List<TItemValue>`.\r\n- PageStack: Supports deleting a specified number of top pages when visiting a new page; When there is a scrollbar on the tab page, it will not automatically scroll to the top when visiting a new page; Allows setting tab pages to not persist.\r\n- SlideGroup, Tabs, ChipGroup, Window, TabItems, Carousel support touch swiping.\r\n- [Tooltip](/blazor/components/tooltips): Added the `Text` property to simplify usage; Supports setting the trigger to `parent` in the container to trigger the parent element.",
-      "zh": "亮点:\r\n- [Tour](/blazor/labs/driverjs)：基于 Driver.js 实现的引导组件。\r\n- [Cascader](/blazor/components/cascaders)：支持绑定类型为`List<TItemValue>`的值。\r\n- PageStack：支持访问新页面时删除指定数量的栈顶页面；Tab页在存在滚动条的情况下，访问新页面时不会自动滚动到顶部；允许设置tab页不持久化。\r\n- SlideGroup、Tabs、ChipGroup、Window、TabItems、Carousel 支持触摸滑动。\r\n- [Tooltip](/blazor/components/tooltips)：添加`Text`属性，简化用法；支持在容器里设置触发器为`parent`来实现父元素触发。"
+      "en": "Highlights:\r\n- [Tour](/blazor/components/driverjs): a guide component based on Driver.js.\r\n- [Cascader](/blazor/components/cascaders): supports binding values of type `List<TItemValue>`.\r\n- PageStack: Supports deleting a specified number of top pages when visiting a new page; When there is a scrollbar on the tab page, it will not automatically scroll to the top when visiting a new page; Allows setting tab pages to not persist.\r\n- SlideGroup, Tabs, ChipGroup, Window, TabItems, Carousel support touch swiping.\r\n- [Tooltip](/blazor/components/tooltips): Added the `Text` property to simplify usage; Supports setting the trigger to `parent` in the container to trigger the parent element.",
+      "zh": "亮点:\r\n- [Tour](/blazor/components/driverjs)：基于 Driver.js 实现的引导组件。\r\n- [Cascader](/blazor/components/cascaders)：支持绑定类型为`List<TItemValue>`的值。\r\n- PageStack：支持访问新页面时删除指定数量的栈顶页面；Tab页在存在滚动条的情况下，访问新页面时不会自动滚动到顶部；允许设置tab页不持久化。\r\n- SlideGroup、Tabs、ChipGroup、Window、TabItems、Carousel 支持触摸滑动。\r\n- [Tooltip](/blazor/components/tooltips)：添加`Text`属性，简化用法；支持在容器里设置触发器为`parent`来实现父元素触发。"
     },
     "type": 0,
     "href": "/blazor/getting-started/release-notes?v=v1.9.0",

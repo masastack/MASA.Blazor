@@ -2,10 +2,11 @@
 title: Progress circular（进度环）
 desc: "该组件用于向用户展示环形的数据。 它也可以设置为不确定的状态来表示加载。"
 related:
-  - /blazor/components/cards
   - /blazor/components/progress-linear
-  - /blazor/components/lists
+  - /blazor/components/popup-service
 ---
+
+> 可以通过 [IPopupService](/blazor/components/popup-service#progress) 封装的方法实现全局加载效果。
 
 ## 使用
 

@@ -1,6 +1,6 @@
 ﻿# 交叉观察者
 
-**IntersectJSModule** 使用了 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)。它提供了一个易于使用的接口，用于检测元素是否在用户的视口中可见。这也用于 [MLazy](/blazor/labs/lazy) 组件。
+**IntersectJSModule** 使用了 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)。它提供了一个易于使用的接口，用于检测元素是否在用户的视口中可见。这也用于 [MLazy](/blazor/components/lazy) 组件。
 
 ## 使用
 

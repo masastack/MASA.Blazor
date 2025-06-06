@@ -10,11 +10,9 @@
   {
     "title": "getting-started",
     "icon": "mdi-flash",
-    "state": "update",
     "items": [
       {
-        "title": "installation",
-        "state": "update"
+        "title": "installation"
       },
       "browser-support",
       "frequently-asked-questions",
@@ -27,13 +25,12 @@
   {
     "title": "features",
     "icon": "mdi-image-edit",
-    "state": "new",
+    "state": "update",
     "items": [
       "bidirectionality",
       "breakpoints",
       {
-        "title": "icon-fonts",
-        "state": "update"
+        "title": "icon-fonts"
       },
       "internationalization",
       "auto-match-nav",
@@ -42,8 +39,7 @@
         "state": "update"
       },
       {
-        "title": "ssr",
-        "state": "new"
+        "title": "ssr"
       }
     ]
   },
@@ -91,12 +87,10 @@
       "bottom-sheets",
       "breadcrumbs",
       {
-        "title": "buttons",
-        "state": "update"
+        "title": "buttons"
       },
       {
-        "title": "cards",
-        "state": "update"
+        "title": "cards"
       },
       "carousels",
       "chips",
@@ -106,32 +100,33 @@
       "descriptions",
       "dialogs",
       {
-        "title": "dividers",
-        "state": "update"
+        "title": "dividers"
       },
       "drawers",
+      "drawflow",
       {
-        "title": "echarts",
-        "state": "update"
+        "title": "echarts"
+      },
+      {
+        "title": "driverjs",
+        "state": "labs"
       },
       "editors",
       "enqueued-snackbars",
       "error-handler",
       {
-        "title": "expansion-panels",
-        "state": "update"
+        "title": "expansion-panels"
       },
       "floating-action-buttons",
       "footers",
       {
         "title": "form-inputs-and-controls",
         "group": "components",
-        "state": "update",
+        "state": "new",
         "items": [
           "autocompletes",
           {
-            "title": "cascaders",
-            "state": "update"
+            "title": "cascaders"
           },
           "checkboxes",
           {
@@ -140,8 +135,7 @@
           },
           "file-inputs",
           {
-            "title": "forms",
-            "state": "update"
+            "title": "forms"
           },
           "otp-input",
           "radios",
@@ -149,8 +143,7 @@
           "selects",
           "sliders",
           {
-            "title": "switches",
-            "state": "update"
+            "title": "switches"
           },
           "textareas",
           "text-fields"
@@ -177,15 +170,16 @@
       "icons",
       "i18ns",
       {
-        "title": "image-captcha",
-        "state": "breaking-change"
+        "title": "image-captcha"
       },
       "images",
       {
-        "title": "lists",
-        "state": "update"
+        "title": "lists"
       },
       "infinite-scroll",
+      "inputs-filter",
+      "interactive-trigger",
+      "lazy",
       "markdowns",
       "markdown-parsers",
       "menus",
@@ -198,21 +192,21 @@
         "state": "update"
       },
       {
-        "title": "paginations",
-        "state": "update"
+        "title": "paginations"
       },
       {
         "title": "pickers",
         "group": "components",
-        "state": "update",
         "items": [
           {
             "title": "date-pickers",
-            "state": "update",
             "exact": true
           },
           "date-pickers-month",
-          "time-pickers"
+          "time-pickers",
+          "date-digital-clock-pickers",
+          "date-time-pickers",
+          "digital-clocks"
         ]
       },
       "popup-service",
@@ -225,21 +219,23 @@
         ]
       },
       "ratings",
+      "scroll-to-target",
       "sheets",
       "skeleton-loaders",
       "snackbars",
+      "sortable",
+      "splitters",
       "steppers",
+      "sticky",
       "subheaders",
       "syntax-highlights",
       {
         "title": "tables",
         "group": "components",
-        "state": "update",
         "items": [
           "data-iterators",
           {
-            "title": "data-tables",
-            "state": "update"
+            "title": "data-tables"
           },
           "simple-tables"
         ]
@@ -250,12 +246,14 @@
         "state": "labs"
       },
       "timelines",
+      "toggles",
       "tooltips",
       {
-        "title": "treeview",
-        "state": "update"
+        "title": "treeview"
       },
-      "virtual-scroll"
+      "virtual-scroll",
+      "watermark",
+      "xgplayer"
     ]
   },
   {
@@ -274,9 +272,7 @@
         "state": "update"
       },
       {
-        "title": "pdf-mobile-viewer",
-        "state": "nuget",
-        "releasedOn": "v1.7.0"
+        "title": "pdf-mobile-viewer"
       },
       "pull-refresh",
       "swiper"
@@ -285,43 +281,8 @@
   {
     "title": "js-modules",
     "icon": "$languageJavascript",
-    "state": "new",
     "items": [
       "intersection-observer"
-    ]
-  },
-  {
-    "title": "labs",
-    "icon": "mdi-flask",
-    "state": "new",
-    "items": [
-      "date-digital-clock-pickers",
-      "date-time-pickers",
-      "digital-clocks",
-      "drawflow",
-      {
-        "title": "driverjs",
-        "state": "new",
-        "releasedOn": "v1.9.0"
-      },
-      "inputs-filter",
-      "interactive-trigger",
-      "lazy",
-      "scroll-to-target",
-      "sortable",
-      "splitters",
-      {
-        "title": "sticky",
-        "state": "new",
-        "releasedOn": "v1.8.0"
-      },
-      {
-        "title": "toggles",
-        "state": "new",
-        "releasedOn": "v1.7.0"
-      },
-      "watermark",
-      "xgplayer"
     ]
   },
   {

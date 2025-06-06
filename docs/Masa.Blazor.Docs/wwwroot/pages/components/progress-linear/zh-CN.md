@@ -2,10 +2,11 @@
 title: Progress linear（进度条）
 desc: "该组件用于将数据环传递给用户。 也可以将其置于不确定状态来描述加载。"
 related:
-  - /blazor/components/cards
   - /blazor/components/progress-circular
-  - /blazor/components/lists
+  - /blazor/components/popup-service
 ---
+
+> 可以通过 [IPopupService](/blazor/components/popup-service#progress) 封装的方法实现全局加载效果。
 
 ## 使用
 

@@ -2,10 +2,11 @@
 title: Progress linear
 desc: "The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading."
 related:
-  - /blazor/components/cards
   - /blazor/components/progress-circular
-  - /blazor/components/lists
+  - /blazor/components/popup-service
 ---
+
+> You use the encapsulated methods of [IPopupService](/blazor/components/popup-service#progress) to achieve a global loading effect.
 
 ## Usage
 

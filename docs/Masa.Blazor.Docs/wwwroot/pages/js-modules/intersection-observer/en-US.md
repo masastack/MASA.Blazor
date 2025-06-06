@@ -1,6 +1,6 @@
 ﻿# Intersection observer
 
-The **IntersectJSModule** utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user’s viewport. This is also used for the [MLazy](/blazor/labs/lazy) component.
+The **IntersectJSModule** utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user’s viewport. This is also used for the [MLazy](/blazor/components/lazy) component.
 
 ## Usage
 
