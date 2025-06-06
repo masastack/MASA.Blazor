@@ -176,6 +176,7 @@
   "footers": "Footers（页脚）",
   "form-inputs-and-controls": "Form inputs and controls（表单和控制）",
   "autocompletes": "Autocompletes（自动补全）",
+  "combobox": "Combobox（组合选择框）",
   "cascaders": "Cascaders（级联菜单）",
   "checkboxes": "Checkboxes（复选框）",
   "file-inputs": "File inputs（文件上传）",

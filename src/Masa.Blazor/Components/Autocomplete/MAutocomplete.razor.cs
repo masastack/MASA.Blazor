@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Components.Select;
+
+namespace Masa.Blazor;
 
 public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>
 {
@@ -39,7 +41,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
 
     public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-    protected IList<TItemValue?> SelectedValues => SelectedItems.Select(GetValue).ToList();
+    protected IList<TItemValue?> SelectedValues => SelectedItems.Select(u => GetValue(u.Item)).ToList();
 
     protected bool HasDisplayedItems => HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
 
@@ -48,30 +50,75 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         return SelectedValues.IndexOf(GetValue(item)) > -1;
     }
 
-    protected List<TItem> FilteredItems
+    private bool _prevNoFilter;
+    private bool _prevSearching;
+    private string? _prevInternalSearch;
+    private IList<TItem>? _prevItems;
+
+    protected List<TItem>? FilteredItems
     {
         get
         {
-            return GetComputedValue(() =>
+            bool changed = false;
+            
+            if (_prevNoFilter != NoFilter)
             {
-                if (!IsSearching || NoFilter || InternalSearch is null)
-                {
-                    return AllItems;
-                }
+                _prevNoFilter = NoFilter;
+                changed = true;
+            }
 
-                return AllItems.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
-            }, new[]
+            if (_prevSearching != IsSearching)
             {
-                nameof(NoFilter),
-                nameof(InternalSearch),
-                nameof(Items)
-            })!;
+                _prevSearching = IsSearching;
+                changed = true;
+            }
+
+            if (_prevInternalSearch != InternalSearch)
+            {
+                _prevInternalSearch = InternalSearch;
+                changed = true;
+            }
+
+            if (!Equals(_prevItems, Items))
+            {
+                _prevItems = Items;
+                changed = true;
+            }
+
+            if (!changed)
+            {
+                return field ??= AllItems;
+            }
+            
+            if (!IsSearching || NoFilter || InternalSearch is null)
+            {
+                field = AllItems;
+            }
+            else
+            {
+                field = AllItems.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+            }
+
+            if (field.Count == 0)
+            {
+                _ = SetMenuIndex(-1);
+            }
+            
+            return field;
         }
     }
 
-    protected bool IsSearching => (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
+    protected bool IsSearching
+    {
+        get
+        {
+            if (Multiple && SearchIsDirty) return true;
+            var text = SelectedItem is null ? null : SelectedItem.InputText ?? GetText(SelectedItem.Item);
+            return SearchIsDirty && InternalSearch != text;
+        }
+    }
 
-    protected TItem? SelectedItem => SelectedItems.LastOrDefault();
+    internal SelectedItem<TItem>? SelectedItem => SelectedItems.LastOrDefault();
 
     protected bool SearchIsDirty => !string.IsNullOrEmpty(InternalSearch);
 
@@ -112,14 +159,14 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         }
     }
 
-    protected override bool EnableSpaceKeDownPreventDefault => false;
+    protected override IEnumerable<string> KeysForKeyDownWithPreventDefault { get; } = [];
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
     {
         base.RegisterWatchers(watcher);
 
         watcher
-            .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
+            .Watch<string>(nameof(InternalSearch), OnInternalSearchChanged)
             .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
     }
 
@@ -133,6 +180,11 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         );
     }
 
+    protected virtual void OnInternalSearchChanged(string? val)
+    {
+        _ = SetValueByJsInterop(val);
+    }
+
     protected override async Task OnIsFocusedChange(bool val)
     {
         if (val)
@@ -142,11 +194,11 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         else
         {
             await Blur();
-            UpdateSelf();
+            await UpdateSelf();
         }
     }
 
-    protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
+    internal override async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
     {
         await base.SelectItem(item, closeOnSelect);
         SetSearch();
@@ -195,7 +247,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         var curIndex = SelectedIndex;
         var curItem = SelectedItems.ElementAtOrDefault(curIndex);
 
-        if (!IsInteractive || GetDisabled(curItem))
+        if (!IsInteractive || (curItem is not null && GetDisabled(curItem)))
         {
             return;
         }
@@ -214,7 +266,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
 
         if (nextItem is null)
         {
-            await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
+            await SetsValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
         }
         else
         {
@@ -239,7 +291,7 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
     protected override async Task OnTabDown(KeyboardEventArgs args)
     {
         await base.OnTabDown(args);
-        UpdateSelf();
+        await UpdateSelf();
     }
 
     protected override Task OnUpDown(string code)
@@ -351,14 +403,16 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         }
     }
 
-    private void UpdateSelf()
+    protected virtual Task UpdateSelf()
     {
         if (!SearchIsDirty && !EqualityComparer<TValue>.Default.Equals(InternalValue, default))
         {
-            return;
+            return Task.CompletedTask;
         }
 
         SetSearch();
+
+        return Task.CompletedTask;
     }
 
     private void SetSearch()
@@ -367,7 +421,9 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
         {
             if (!Multiple || string.IsNullOrEmpty(InternalSearch) || !IsMenuActive)
             {
-                InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot) ? null : GetText(SelectedItem);
+                InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot)
+                    ? null
+                    : GetText(SelectedItem);
                 StateHasChanged();
             }
         });

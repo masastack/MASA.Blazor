@@ -54,7 +54,7 @@
             return;
         }
 
-        var computedItems = HideSelected ? Items.Where(u => !SelectedItems.Contains(u)).ToList() : Items;
+        var computedItems = HideSelected ? Items.Where(u => !SelectedItems.Any(v => v.Item?.Equals(u) is true)).ToList() : Items;
         var isActive = HasItem(item);
         var isDisabled = GetDisabled(item);
 

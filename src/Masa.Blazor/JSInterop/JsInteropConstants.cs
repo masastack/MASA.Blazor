@@ -98,8 +98,8 @@ public static class JsInteropConstants
 
     public static string GetImageDimensions => $"{JsInteropFuncNamePrefix}getImageDimensions";
 
-    public static string EnablePreventDefaultForEvent => $"{JsInteropFuncNamePrefix}enablePreventDefaultForEvent";
-
+    internal static string PreventDefaultForSpecificKeys => $"{JsInteropFuncNamePrefix}preventDefaultForSpecificKeys";
+    
     public static string GetBoundingClientRects => $"{JsInteropFuncNamePrefix}getBoundingClientRects";
 
     public static string GetSize => $"{JsInteropFuncNamePrefix}getSize";

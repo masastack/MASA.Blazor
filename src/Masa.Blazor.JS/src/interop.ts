@@ -796,27 +796,17 @@ export function getImageDimensions(src: string) {
   })
 }
 
-export function enablePreventDefaultForEvent(element: any, event: string, condition?: any) {
+export function preventDefaultForSpecificKeys(
+  element: any,
+  keyCodes: string[]
+) {
   const dom = getDom(element);
   if (!dom) return;
-  if (event === 'keydown') {
-    dom.addEventListener(event, (e: KeyboardEvent) => {
-      if (Array.isArray(condition)) {
-        var codes = condition as string[];
-        if (codes.includes(e.code)) {
-          e.preventDefault();
-        }
-      } else {
-        e.preventDefault();
-      }
-    })
-  } else {
-    dom.addEventListener(event, e => {
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
-    })
-  }
+  dom.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (keyCodes.includes(e.code)) {
+      e.preventDefault();
+    }
+  });
 }
 
 export function getBoundingClientRects(selector) {

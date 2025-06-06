@@ -134,6 +134,10 @@
             "state": "update"
           },
           "checkboxes",
+          {
+            "title":"combobox",
+            "state": "labs"
+          },
           "file-inputs",
           {
             "title": "forms",

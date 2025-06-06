@@ -1,0 +1,21 @@
+﻿<MCombobox Items="@items"
+           @bind-Value="val"
+           ItemValue="u => u"
+           ItemText="u => u"
+           Hint="@(val is not null ? $"Selected: {val}" : "No selection")"
+           PersistentHint>
+</MCombobox>
+
+@code {
+
+    private string? val;
+
+    private string[] items =
+    [
+        "Programming",
+        "Design",
+        "Vue",
+        "Vuetify"
+    ];
+
+}

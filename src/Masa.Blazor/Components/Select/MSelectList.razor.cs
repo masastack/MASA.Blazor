@@ -1,3 +1,5 @@
+using Masa.Blazor.Components.Select;
+
 namespace Masa.Blazor;
 
 public partial class MSelectList<TItem, TItemValue, TValue> : MasaComponentBase
@@ -32,7 +34,7 @@ public partial class MSelectList<TItem, TItemValue, TValue> : MasaComponentBase
 
     [Parameter] public string? NoDataText { get; set; }
 
-    [Parameter] public IEnumerable<TItem> SelectedItems { get; set; } = null!;
+    [Parameter] public List<SelectedItem<TItem>> SelectedItems { get; set; } = null!;
 
     [Parameter] public RenderFragment? NoDataContent { get; set; }
 
@@ -42,7 +44,23 @@ public partial class MSelectList<TItem, TItemValue, TValue> : MasaComponentBase
 
     [Parameter] public int SelectedIndex { get; set; }
 
-    private IList<TItemValue?> ParsedItems => SelectedItems.Select(item => ItemValue(item)).ToList();
+    private IList<TItemValue?> ParsedItems
+    {
+        get
+        {
+            return SelectedItems.Select(u =>
+            {
+                if (u.InputText != null
+                    && BindConverter.TryConvertTo<TItemValue?>(u.InputText, CultureInfo.InvariantCulture,
+                        out var value))
+                {
+                    return value;
+                }
+
+                return ItemValue(u.Item);
+            }).ToList();
+        }
+    }
 
     protected bool HasItem(TItem item)
     {

@@ -1,0 +1,46 @@
+﻿<MRow>
+    <MCol Cols="12">
+        <MCombobox Items="@items"
+                   @bind-Value="val"
+                   ItemValue="u => u"
+                   ItemText="u => u"
+                   Label="Default chips"
+                   Multiple
+                   Chips>
+        </MCombobox>
+    </MCol>
+    <MCol Cols="12">
+        <MCombobox Items="@items"
+                   @bind-Value="val"
+                   ItemValue="u => u"
+                   ItemText="u => u"
+                   Label="Custom chips using SelectionContent"
+                   Multiple
+                   Chips>
+            <SelectionContent>
+                <MChip IsActive="@context.Selected"
+                       Disabled="@context.Disabled">
+                    <MAvatar Class="primary"
+                             Left>
+                        @context.Text?[..1]?.ToUpper()
+                    </MAvatar>
+                    @context.Text
+                </MChip>
+            </SelectionContent>
+        </MCombobox>
+    </MCol>
+</MRow>
+
+@code {
+
+    private List<string> val = [];
+
+    private string[] items =
+    [
+        "Programming",
+        "Design",
+        "Blazor",
+        "Masa Blazor"
+    ];
+
+}
