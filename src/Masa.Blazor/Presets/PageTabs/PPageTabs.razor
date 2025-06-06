@@ -65,7 +65,7 @@
                PositionY="@_positionY"
                CloseOnContentClick>
             <MList Dense>
-                <MListItem OnClick="@ToggleFixed">@(ContextmenuFixed ? PinTabText : UnpinTabText)</MListItem>
+                <MListItem OnClick="@ToggleFixed">@(ContextmenuFixed ? UnpinTabText : PinTabText)</MListItem>
                 @if (TabReload != null)
                 {
                     <MListItem OnClick="@HandleOnReloadTab">@ReloadTabText</MListItem>
