@@ -95,7 +95,7 @@ internal static class MasaBlazorPreset
         FocusOpacity = 0.12f,
         DisabledOpacity = 0.38f,
         ActivatedOpacity = 0.12f,
-        HighlightOpacity = 0.32f,
+        HighlightOpacity = 0.16f,
         HighEmphasisOpacity = 0.87f,
         MediumEmphasisOpacity = 0.6f,
         LowEmphasisOpacity = 0.38f

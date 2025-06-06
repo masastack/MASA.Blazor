@@ -73,8 +73,6 @@ public static class ThemeCssBuilder
             BuildTextCssClass(combinePrefix, "success"),
             BuildTextCssClass(combinePrefix, "warning"),
             BuildTextCssClass(combinePrefix, "error"),
-            BuildTextCssClass(combinePrefix, "on-surface"),
-            BuildTextCssClass(combinePrefix, "on-surface-variant"),
             BuildBorderCssClass(combinePrefix, "outline"),
             BuildBorderCssClass(combinePrefix, "outline-variant"),
         };
