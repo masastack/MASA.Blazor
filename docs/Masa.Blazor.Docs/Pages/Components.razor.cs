@@ -116,7 +116,7 @@ public partial class Components
         }
         else if (absolutePath.StartsWith("/blazor/labs", StringComparison.OrdinalIgnoreCase))
         {
-            _group = "labs";
+            _group = "components";
         }
         else if (absolutePath.StartsWith("/blazor/mobiles", StringComparison.OrdinalIgnoreCase))
         {

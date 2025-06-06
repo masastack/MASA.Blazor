@@ -158,7 +158,7 @@ After enabling the `Selectable` property, you can now select by clicking on the 
 
 #### DragZone
 
-The component was deprecated in v1.4.0 and has now been removed. It is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+The component was deprecated in v1.4.0 and has now been removed. It is recommended to use the [MSortable](/blazor/components/sortable) component instead.
 
 #### Data/DataTable
 
@@ -194,7 +194,7 @@ Refactor using CSS approach.
 
 #### DragZone
 
-This component is deprecated but not deleted, it is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+This component is deprecated but not deleted, it is recommended to use the [MSortable](/blazor/components/sortable) component instead.
 
 #### InfiniteScroll
 

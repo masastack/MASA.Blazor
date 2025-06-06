@@ -4,7 +4,7 @@ desc: "**MDragZone** 组件基于[Sorttable.js](https://github.com/SortableJS/So
 tag: "JS代理"
 ---
 
-<app-alert type="error" content="此组件已经废弃，请使用 [MSortable](/blazor/labs/sortable) 组件。"></app-alert>
+<app-alert type="error" content="此组件已经废弃，请使用 [MSortable](/blazor/components/sortable) 组件。"></app-alert>
 
 ## 使用
 

@@ -155,7 +155,7 @@ DataAnnotations 验证现在内置支持复杂类型，不需要引用额外的�
 
 #### DragZone
 
-该组件在 v1.4.0 中已弃用，现在已删除。建议使用 [MSortable](/blazor/labs/sortable) 组件。
+该组件在 v1.4.0 中已弃用，现在已删除。建议使用 [MSortable](/blazor/components/sortable) 组件。
 
 #### Data/DataTable
 
@@ -191,7 +191,7 @@ DataAnnotations 验证现在内置支持复杂类型，不需要引用额外的�
 
 #### DragZone
 
-该组件已弃用但未删除，建议使用 [MSortable](/blazor/labs/sortable) 组件。
+该组件已弃用但未删除，建议使用 [MSortable](/blazor/components/sortable) 组件。
 
 #### InfiniteScroll
 
