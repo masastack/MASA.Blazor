@@ -21,6 +21,9 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         parser.useContainer("code-group-item");
         addCodeGroupRules(parser);
     }
+    else if (scope === "desc") {
+        addLinkRules(parser);
+    }
 
     addCodeRules(md);
     

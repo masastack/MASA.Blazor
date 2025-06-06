@@ -32,6 +32,6 @@ dotnet add package Masa.Blazor.JSComponents.DriverJS
 
 <masa-example file="Examples.labs.driverjs.Highlight"></masa-example>
 
-#### 不制定元素 {#no-element}
+#### 不指定元素 {#no-element}
 
 <masa-example file="Examples.labs.driverjs.NoElement"></masa-example>

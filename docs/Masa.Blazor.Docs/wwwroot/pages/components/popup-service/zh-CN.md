@@ -8,9 +8,9 @@ related:
   - /blazor/components/enqueued-snackbars
 ---
 
-## 组件
+## 组件 {#components}
 
-### 消息条
+### 消息条 {#snackbar}
 
 <masa-example file="Examples.components.popup_service.Snackbar"></masa-example>
 
@@ -32,7 +32,7 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-### 确认
+### 确认 {#confirm}
 
 <masa-example file="Examples.components.popup_service.Confirm"></masa-example>
 
@@ -60,7 +60,7 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-### 输入确认
+### 输入确认 {#prompt}
 
 <masa-example file="Examples.components.popup_service.Prompt"></masa-example>
 
@@ -88,7 +88,7 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-### 进度
+### 进度 {#progress}
 
 封装了 [MCircleProgress](/blazor/components/progress-circle) 和 [MLinearProgress](/blazor/components/progress-linear) 组件。
 
@@ -150,7 +150,7 @@ services.AddMasaBlazor(options =>
 })
 ```
 
-## 高级用法
+## 高级用法 {#advance}
 
 你可以使用 `IPopupService.OpenAsync` 打开你自己的组件。
 这里有一些必要的步骤：
