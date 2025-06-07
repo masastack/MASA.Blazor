@@ -76,31 +76,14 @@
         Chip,
         Slot
     }
-
-    private RenderFragment GenSlotSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
+    
+    private (bool Disabled, bool IsInteractive, Action OnClick) GetChipContext(SelectedItem<TItem> item, int index)
     {
         var disabled = GetDisabled(item);
-        @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item.Item, index, selected, disabled, GetText(item)))
-    };
+        var isInteractive = !disabled && IsInteractive;
+        return (disabled, isInteractive, Click);
 
-    internal virtual RenderFragment GenChipSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
-    {
-        var isDisabled = GetDisabled(item);
-        var isInteractive = !isDisabled && IsInteractive;
-
-        <MChip Close="@(DeletableChips && isInteractive)"
-               Disabled="@isDisabled"
-               Class="m-chip--select"
-               Small="@SmallChips"
-               IsActive="@selected"
-               OnClick="@OnClick"
-               OnClickStopPropagation
-               OnCloseClick="@(() => OnChipInput(item))"
-               tabindex="-1">
-            @GetText(item)
-        </MChip>
-
-        void OnClick()
+        void Click()
         {
             if (!isInteractive)
             {
@@ -109,6 +92,30 @@
 
             SelectedIndex = index;
         }
+    }
+
+    private RenderFragment GenSlotSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
+    {
+        var (disabled, _, onClick) = GetChipContext(item, index);
+
+        @SelectionContent?.Invoke(new SelectSelectionProps<TItem>(item.Item, index, selected, disabled, onClick, GetText(item)))
+    };
+
+    internal virtual RenderFragment GenChipSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
+    {
+        var (isDisabled, isInteractive, onClick) = GetChipContext(item, index);
+
+        <MChip Close="@(DeletableChips && isInteractive)"
+               Disabled="@isDisabled"
+               Class="m-chip--select"
+               Small="@SmallChips"
+               IsActive="@selected"
+               OnClick="@onClick"
+               OnClickStopPropagation
+               OnCloseClick="@(() => OnChipInput(item))"
+               tabindex="-1">
+            @GetText(item)
+        </MChip>
     };
 
     private RenderFragment GenCommaSelection(SelectedItem<TItem> item, int index, bool selected, bool last) => __builder =>
