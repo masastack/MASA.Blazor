@@ -5,6 +5,7 @@ public class SelectSelectionProps<TItem>(
     int index,
     bool selected,
     bool disabled,
+    Action select,
     string? text = null)
 {
     /// <summary>
@@ -24,4 +25,6 @@ public class SelectSelectionProps<TItem>(
     /// The text of selected item or user input from the <see cref="MCombobox{TItem,TValue}"/> component.
     /// </summary>
     public string? Text { get; } = text;
+
+    public Action Select { get; init; } = select;
 }

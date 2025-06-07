@@ -1,1 +1,35 @@
-﻿TODO
+﻿<MRow>
+    <MCol Cols="12">
+        <MCombobox @bind-Value="_chips"
+                   Items="_items"
+                   ItemText="u => u"
+                   ItemValue="u => u"
+                   Chips
+                   Clearable
+                   Label="Your favorite hobbies"
+                   Multiple
+                   PrependIcon="mdi-filter-variant"
+                   Solo>
+            <SelectionContent>
+                <MChip Close
+                       IsActive="@context.Selected"
+                       OnClick="@context.Select"
+                       OnCloseClick="() => Remove(context.Text)">
+                    <strong>@context.Text</strong>&nbsp;
+                    <span>(interest)</span>
+                </MChip>
+            </SelectionContent>
+        </MCombobox>
+    </MCol>
+</MRow>
+
+@code {
+    private List<string> _chips = ["Programming", "Playing video games", "Watching movies", "Sleeping"];
+    private List<string> _items = ["Streaming", "Eating"];
+
+    private void Remove(string item)
+    {
+        _chips.Remove(item);
+    }
+
+}
