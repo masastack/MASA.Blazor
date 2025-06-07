@@ -5,51 +5,35 @@ function init(
   elOrString: GridStackElement = ".grid-stack",
   dotNet: DotNet.DotNetObject
 ) {
-  const grid = GridStack.init(options, elOrString);
+  let grid = GridStack.init(options, elOrString);
   grid["dotNet"] = dotNet;
-  addEvents(grid);
-  return grid;
-}
+  addEvents();
 
-function setStatic(grid: GridStack, staticValue: boolean) {
-  if (grid) {
-    grid.setStatic(staticValue);
-  }
-}
-
-function reload(grid: GridStack) {
-  if (grid) {
-    const opts = { ...grid.opts };
-    const el = grid.el;
-    grid.destroy(false);
-    const dotNet = grid["dotNet"];
-    grid = GridStack.init(opts, el);
-    grid["dotNet"] = dotNet;
-    addEvents(grid);
-    return grid;
+  function addEvents() {
+    grid.on("resizestop", function (event: Event, el: GridItemHTMLElement) {
+      dotNet.invokeMethodAsync("OnResize", resize(event, el));
+    });
   }
 
-  return grid;
-}
-
-function save(grid: GridStack) {
-  if (grid) {
-    const widgets = grid.save();
-    if (Array.isArray(widgets)) {
-      return widgets.map(({ content, ...rest }) => rest);
-    }
-  }
-
-  return [];
-}
-
-function addEvents(grid: GridStack) {
-  if (!grid) return;
-
-  const dotNet: DotNet.DotNetObject = grid["dotNet"];
-  grid.on("resizestop", function (event: Event, el: GridItemHTMLElement) {
-    dotNet.invokeMethodAsync("OnResize", resize(event, el));
-  });
+  return {
+    setStatic: (value: boolean) => grid.setStatic(value),
+    reload: () => {
+      const opts = { ...grid.opts };
+      const el = grid.el;
+      grid.destroy(false);
+      grid = GridStack.init(opts, el);
+      grid["dotNet"] = dotNet;
+      addEvents();
+      return grid;
+    },
+    save: () => {
+      const widgets = grid.save();
+      if (Array.isArray(widgets)) {
+        return widgets.map(({ content, ...rest }) => rest);
+      }
+      return [];
+    },
+  };
 }
 
 function resize(event: Event, el: GridItemHTMLElement) {
@@ -59,4 +43,4 @@ function resize(event: Event, el: GridItemHTMLElement) {
   return { id, x, y, w, h, width, height };
 }
 
-export { init, reload, setStatic, save };
+export { init };

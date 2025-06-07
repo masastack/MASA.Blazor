@@ -9,5 +9,6 @@
   <Project Path="src\Masa.Blazor.JSComponents.Xgplayer\Masa.Blazor.JSComponents.Xgplayer.csproj" />
   <Project Path="src/Masa.Blazor.JSComponents.MarkdownIt/Masa.Blazor.JSComponents.MarkdownIt.csproj" />
   <Project Path="src\Masa.Blazor.JSComponents.Swiper\Masa.Blazor.JSComponents.Swiper.csproj" />
+  <Project Path="src\Masa.Blazor.JSComponents.Gridstack\Masa.Blazor.JSComponents.Gridstack.csproj" />
   <Project Path="src\Masa.Blazor.MobileComponents\Masa.Blazor.MobileComponents.csproj" />
 </Solution>

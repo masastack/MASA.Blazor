@@ -2,9 +2,6 @@
 
 public partial class MGridstack<TItem> : MasaComponentBase
 {
-    [Inject]
-    protected GridstackJSModule Module { get; set; } = null!;
-
     [Parameter, EditorRequired]
     public List<TItem> Items { get; set; } = new();
 
@@ -81,7 +78,7 @@ public partial class MGridstack<TItem> : MasaComponentBase
     private static Block _itemBlock = _block.Extend("item");
 
     private string? _prevItemKeys;
-    private IJSObjectReference? _gridstackInstance;
+    private GridstackJSModule? _gridstackInstance;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -138,9 +135,10 @@ public partial class MGridstack<TItem> : MasaComponentBase
                 Rtl = Rtl
             };
 
-            _gridstackInstance = await Module.Init(options, Ref);
+            _gridstackInstance = new GridstackJSModule(Js);
+            await _gridstackInstance.Init(options, Ref);
 
-            Module.Resize += GridstackOnResize;
+            _gridstackInstance.Resize += GridstackOnResize;
 
             if (Readonly)
             {
@@ -151,9 +149,9 @@ public partial class MGridstack<TItem> : MasaComponentBase
 
     public async ValueTask<List<GridstackWidget>> OnSave()
     {
-        if (_gridstackInstance is null) return new List<GridstackWidget>();
+        if (_gridstackInstance is null) return [];
 
-        return await Module.Save(_gridstackInstance);
+        return await _gridstackInstance.Save();
     }
 
     private void GridstackOnResize(object? sender, GridstackResizeEventArgs e)
@@ -167,21 +165,23 @@ public partial class MGridstack<TItem> : MasaComponentBase
     public async Task Reload()
     {
         if (_gridstackInstance is null) return;
-        _gridstackInstance = await Module.Reload(_gridstackInstance);
+        await _gridstackInstance.Reload();
     }
 
     private async Task SetStatic(bool staticValue)
     {
         if (_gridstackInstance is null) return;
-        await Module.SetStatic(_gridstackInstance, staticValue);
+        await _gridstackInstance.SetStatic(staticValue);
     }
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        Module.Resize -= GridstackOnResize;
-        if (_gridstackInstance is not null)
+        if (_gridstackInstance is null)
         {
-            await _gridstackInstance.DisposeAsync();
+            return;
         }
+
+        _gridstackInstance.Resize -= GridstackOnResize;
+        await (_gridstackInstance as IAsyncDisposable).DisposeAsync();
     }
 }

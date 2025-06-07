@@ -281,6 +281,7 @@ public partial class Components
         list.AddRange(XgplayerApiGenerator.ComponentMetas);
         list.AddRange(MarkdownItApiGenerator.ComponentMetas);
         list.AddRange(SwiperApiGenerator.ComponentMetas);
+        list.AddRange(GridstackApiGenerator.ComponentMetas);
         return list;
     }
 
