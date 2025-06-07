@@ -9,6 +9,9 @@ public class PPageStackTab : ComponentBase, IDisposable
 
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
 
+    /// <summary>
+    /// The name of <see cref="PageStackNavController"/>.
+    /// </summary>
     [Parameter] public string? Name { get; set; }
 
     [Parameter] [EditorRequired] public RenderFragment<PageStackTabContext>? ChildContent { get; set; }

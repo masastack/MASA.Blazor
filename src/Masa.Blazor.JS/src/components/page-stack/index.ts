@@ -1,8 +1,10 @@
+import debounceIt from "just-debounce-it";
 import { convertToUnit } from "utils/helper";
 
 const dotnetRefs: { [prop: number]: DotNet.DotNetObject } = {};
 const clickHandlers: { [prop: number]: (e: MouseEvent) => void } = {};
 const popstateHandlers: { [prop: number]: () => void } = {};
+const scrollHandlers: { [prop: number]: () => void } = {};
 let nextId = 0;
 
 export function attachListener(handle: DotNet.DotNetObject) {
@@ -10,12 +12,17 @@ export function attachListener(handle: DotNet.DotNetObject) {
   const clickHandler = (event: MouseEvent) => onDocumentClick(id, event);
   const popstateHandler = () =>
     handle.invokeMethodAsync("Popstate", window.location.pathname);
+  const scrollHandler = debounceIt(() => {
+    handle.invokeMethodAsync("Scroll", window.pageYOffset)
+  }, 100);
   clickHandlers[id] = clickHandler;
   popstateHandlers[id] = popstateHandler;
+  scrollHandlers[id] = scrollHandler;
   dotnetRefs[id] = handle;
 
   document.addEventListener("click", clickHandler);
   window.addEventListener("popstate", popstateHandler);
+  window.addEventListener("scroll", scrollHandler, { passive: true });
 
   return nextId++;
 }
@@ -83,16 +90,21 @@ export function detachListener(id: number) {
   const clickHandler = clickHandlers[id];
   if (clickHandler) {
     document.removeEventListener("click", clickHandler);
+    delete clickHandlers[id];
   }
 
   const popstateHandler = popstateHandlers[id];
   if (popstateHandler) {
     window.removeEventListener("popstate", popstateHandler);
+    delete popstateHandlers[id];
+  }
+
+  const scrollHandler = scrollHandlers[id];
+  if (scrollHandler) {
+    window.removeEventListener("scroll", scrollHandler, { passive: true });
+    delete scrollHandlers[id];
   }
 
   dotnetRefs[id] && dotnetRefs[id].dispose();
-
-  delete clickHandlers[id];
-  delete popstateHandlers[id];
   delete dotnetRefs[id];
 }

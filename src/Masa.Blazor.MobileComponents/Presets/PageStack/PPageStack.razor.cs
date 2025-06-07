@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Masa.Blazor.JSInterop;
 using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
 using Masa.Blazor.SourceGenerated;
@@ -78,6 +79,13 @@ public partial class PPageStack: MasaComponentBase
 
     private string? _lastVisitedTabPath;
     private long _lastOnPreviousClickTimestamp;
+
+    private TabRecord? _activeTab;
+    
+    /// <summary>
+    /// Stores the scroll positions of each persistent tab.
+    /// </summary>
+    private readonly Dictionary<int, double> _scrollPositions = new();
 
     // just for knowing whether the tab has been changed
     private (Regex Pattern, string AbsolutePath) _lastVisitedTab;
@@ -256,6 +264,17 @@ public partial class PPageStack: MasaComponentBase
         }
     }
 
+    [JSInvokable("Scroll")]
+    public void OnWindowScroll(double pageYOffset)
+    {
+        if (_activeTab is null || !_activeTab.Rule.Persistent)
+        {
+            return;
+        }
+
+        _scrollPositions[_activeTab.Id] = pageYOffset;
+    }
+
     internal void Replace(PageStackReplaceEventArgs e)
     {
         if (e.ClearStack)
@@ -383,6 +402,16 @@ public partial class PPageStack: MasaComponentBase
         }
 
         _lastOnPreviousClickTimestamp = now;
+    }
+ 
+    private void OnActiveTabUpdate(TabRecord activeTabId)
+    {
+        _activeTab = activeTabId;
+
+        if (_scrollPositions.TryGetValue(_activeTab.Id, out var pageYOffset))
+        {
+           _ = Js.ScrollTo(pageYOffset, 0, ScrollBehavior.Auto);
+        }
     }
 
     private void CloseTopPageOfStack(object? state = null) => CloseTopPages(1, false, state);
