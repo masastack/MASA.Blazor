@@ -1,0 +1,14 @@
+# 忽略构建输出目录
+dist/
+lib/
+
+# 忽略npm包文件
+node_modules/
+
+# 忽略锁文件
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 其他不需要格式化的文件
+*.min.js
