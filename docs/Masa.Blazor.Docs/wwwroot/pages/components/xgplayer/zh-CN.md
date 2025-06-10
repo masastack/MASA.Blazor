@@ -1,7 +1,7 @@
 ﻿---
 title: Xgplayer（西瓜视频播放器）
 desc: "一个基于 [Xigua Video Playervv3.0.11](https://h5player.bytedance.com/) 的 HTML5 视频播放器组件。"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 ## 安装 {#installation released-on=v1.10.0}

@@ -1,7 +1,7 @@
 ﻿---
 title: Drawflow
 desc: "A simple flow component base on [Drawflow](https://github.com/jerosoler/Drawflow)."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 You need to reference the following files before using it:

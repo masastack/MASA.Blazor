@@ -1,7 +1,7 @@
 ﻿---
 title: Sortable（可排序的）
 desc: "基于 [Sortablejs](https://github.com/SortableJS/Sortable) 的现代浏览器和触摸设备的可重新排序的拖放列表。"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 ## 使用

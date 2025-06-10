@@ -1,7 +1,7 @@
 ---
 title: ECharts
 desc: "A proxy component for [ECharts](https://echarts.apache.org/examples/en/index.html)"
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 ## Usage

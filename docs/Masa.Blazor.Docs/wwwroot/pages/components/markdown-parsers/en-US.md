@@ -1,7 +1,7 @@
 ---
 title: Markdown parsers
 desc: "Packaging based on [markdown-it(v13.0.1)](https://github.com/markdown-it/markdown-it)."
-tag: JS Proxy
+tag: JS Wrapper
 related:
   - /blazor/components/syntax-highlights
   - /blazor/components/markdowns

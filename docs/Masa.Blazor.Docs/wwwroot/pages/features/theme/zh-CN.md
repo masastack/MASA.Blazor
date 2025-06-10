@@ -102,7 +102,7 @@ services.AddMasaBlazor(options =>
 :::
 ::::
 
-## 追悼模式 {#mourning-mode released-in=v1.10.0}
+## 追悼模式 {#mourning-mode released-on=v1.10.0}
 
 追悼模式是指在某些特定情况下（如哀悼日）改变用户界面的外观，比如使用黑白滤镜来表达哀悼之情。
 只需将 `filter: grayscale(100%)` 样式添加到根元素即可实现。

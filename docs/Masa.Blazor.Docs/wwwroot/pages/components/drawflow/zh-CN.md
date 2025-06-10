@@ -1,7 +1,7 @@
 ﻿---
 title: Drawflow（流程）
 desc: "一个基于 [Drawflow](https://github.com/jerosoler/Drawflow) 的流程组件。"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 在使用之前你必须引入以下文件：

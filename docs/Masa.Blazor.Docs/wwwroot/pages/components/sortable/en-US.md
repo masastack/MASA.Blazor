@@ -1,7 +1,7 @@
 ﻿---
 title: Sortable
 desc: "Reorderable drag-and-drop lists for modern browsers and touch devices. Base on [Sortablejs](https://github.com/SortableJS/Sortable)."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 ## Usage

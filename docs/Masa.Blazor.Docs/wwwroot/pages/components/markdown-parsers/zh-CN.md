@@ -1,7 +1,7 @@
 ---
 title: Markdown解析器
 desc: "基于 [markdown-it(v13.0.1)](https://github.com/markdown-it/markdown-it) 封装。"
-tag: JS代理
+tag: 基于JS封装
 related:
   - /blazor/components/syntax-highlights
   - /blazor/components/markdowns

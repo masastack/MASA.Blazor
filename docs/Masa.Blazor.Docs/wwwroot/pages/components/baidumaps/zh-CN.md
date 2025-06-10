@@ -1,7 +1,7 @@
 ---
 title: Baidu maps（百度地图）
 desc: "[BaiduMaps JavaScript API GL](https://lbsyun.baidu.com/index.php?title=jspopularGL)"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 ## 使用

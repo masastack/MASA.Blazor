@@ -1,7 +1,7 @@
 ---
 title: ECharts（图表）
 desc: "一个代理了 [ECharts](https://echarts.apache.org/examples/zh/index.html) 的组件"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 ## 使用
