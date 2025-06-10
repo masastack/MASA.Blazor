@@ -101,7 +101,7 @@ export function detachListener(id: number) {
 
   const scrollHandler = scrollHandlers[id];
   if (scrollHandler) {
-    window.removeEventListener("scroll", scrollHandler, { passive: true });
+    window.removeEventListener("scroll", scrollHandler, { passive: true } as any);
     delete scrollHandlers[id];
   }
 
