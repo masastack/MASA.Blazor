@@ -392,7 +392,7 @@ public class ComponentApiGenerator : IIncrementalGenerator
 
     private static string? GetReleasedOnOnApiParameterAttribute(AttributeData apiParameterAttributeData)
     {
-        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedOn").Value;
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedIn").Value;
 
         if (typedConstant.IsNull)
         {
