@@ -41,7 +41,7 @@ public class GridstackJSModule : JSModule
     {
         AssertInit();
 
-        _instance = await _instance.InvokeAsync<IJSObjectReference>("reload");
+        await _instance.InvokeVoidAsync("reload");
     }
 
     public async ValueTask<List<GridstackWidget>> Save()

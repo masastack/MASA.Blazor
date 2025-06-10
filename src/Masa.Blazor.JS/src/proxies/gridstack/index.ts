@@ -1,4 +1,9 @@
-import { GridItemHTMLElement, GridStack, GridStackElement, GridStackOptions } from "gridstack";
+import {
+  GridItemHTMLElement,
+  GridStack,
+  GridStackElement,
+  GridStackOptions,
+} from "gridstack";
 
 function init(
   options: GridStackOptions = {},
