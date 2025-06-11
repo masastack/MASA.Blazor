@@ -61,7 +61,7 @@
   "tag": {
     "preset": "Preset",
     "service": "Service",
-    "js-proxy": "JS proxy"
+    "js-proxy": "JS Wrapper"
   },
   "v1-banner": {
     "content": "Your are viewing the documentation for {0}. It is recommended to upgrade if you are using an older version!",

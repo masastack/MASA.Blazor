@@ -1,7 +1,7 @@
 ﻿---
 title: Xgplayer
 desc: "A HTML5 video player component base on [Xigua Video Playerv3.0.11](https://h5player.bytedance.com/en)."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 ## Installation {released-on=v1.10.0}

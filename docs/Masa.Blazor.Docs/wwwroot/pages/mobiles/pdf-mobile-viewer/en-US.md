@@ -1,7 +1,7 @@
 ﻿---
 title: PDF Mobile Viewer
 desc: "A PDF viewer designed for mobile."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 ## Installation {released-on=v1.9.0}

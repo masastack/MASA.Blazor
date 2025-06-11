@@ -1,7 +1,7 @@
 ﻿---
 title: Swiper
 desc: "A mobile touch slider component base on [Swiper](https://github.com/nolimits4web/swiper)."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 related:
   - /blazor/components/carousels
   - /blazor/components/windows

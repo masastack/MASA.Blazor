@@ -1,7 +1,7 @@
 ﻿---
 title: Tour
 desc: "A tour component based on [driver.js](https://github.com/kamranahmedse/driver.js)."
-tag: "JS Proxy"
+tag: "JS Wrapper"
 ---
 
 > This component was introduced in [v1.9.0](/blazor/getting-started/release-notes?v=v1.9.0).

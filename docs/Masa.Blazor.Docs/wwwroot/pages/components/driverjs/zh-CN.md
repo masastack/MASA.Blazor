@@ -1,7 +1,7 @@
 ﻿---
 title: Tour（引导）
 desc: "一个基于 [driver.js](https://github.com/kamranahmedse/driver.js) 的引导组件。"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 > 该组件在 [v1.9.0](/blazor/getting-started/release-notes?v=v1.9.0) 版本中引入。

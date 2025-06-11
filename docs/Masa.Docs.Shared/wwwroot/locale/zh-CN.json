@@ -58,7 +58,7 @@
   "tag": {
     "preset": "预置",
     "service": "服务",
-    "js-proxy": "JS代理"
+    "js-proxy": "基于JS封装"
   },
   "v1-banner": {
     "content": "您正在查看{0}的文档。如果您正在使用旧的版本，建议升级。",

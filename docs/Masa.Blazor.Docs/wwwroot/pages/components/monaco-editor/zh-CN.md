@@ -1,7 +1,7 @@
 ---
 title: Monaco editor
 desc: "[Monaco editor](https://microsoft.github.io/monaco-editor/) 是支持 [VS Code](https://github.com/microsoft/vscode) 的代码编辑器。"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
 ## 使用
