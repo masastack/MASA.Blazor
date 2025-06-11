@@ -311,11 +311,6 @@ a.text-dec-none {
     padding-left: 0 !important;
 }
 
-    .doc-list-nav .m-list-group.m-list-group--default .m-list-item__title {
-        font-weight: 500;
-        font-size: 1rem;
-    }
-
     .doc-list-nav .m-list-item.m-list-item--default {
         margin-bottom: 0px !important;
     }

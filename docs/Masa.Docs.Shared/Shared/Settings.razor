@@ -1,7 +1,6 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
 @inject LocalStorage LocalStorage
-@inject IJSRuntime JSRuntime
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
@@ -28,29 +27,55 @@
                         <MCol Cols="6">
                             <MItem Value="@("False")">
                                 <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleRTL(false)">
+                                         OnClick="() => ToggleRtl(false)">
                                     LTR
-                                    <MIcon Right>M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0 5,6A4,4 0 0,0 9,10Z</MIcon>
+                                    <MIcon Right>M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0
+                                        5,6A4,4 0 0,0 9,10Z
+                                    </MIcon>
                                 </MButton>
                             </MItem>
                         </MCol>
                         <MCol Cols="6">
                             <MItem Value="@("True")">
                                 <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleRTL(true)">
+                                         OnClick="() => ToggleRtl(true)">
                                     RTL
-                                    <MIcon Right>M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0 6,6A4,4 0 0,0 10,10Z</MIcon>
+                                    <MIcon Right>M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0
+                                        6,6A4,4 0 0,0 10,10Z
+                                    </MIcon>
                                 </MButton>
                             </MItem>
                         </MCol>
                     </MRow>
                 </MItemGroup>
             </div>
+            @if (Project == "blazor")
+            {
+                <MDivider Class="my-4"/>
+                <div class="d-flex align-center justify-space-between">
+                    <div class="flex">
+                        <MBadge Color="green" Dot Inline>
+                            <MLabel>@I18n.T("nav-component-group-by-type")</MLabel>
+                        </MBadge>
+                        <div class="m-messages">@I18n.T("nav-component-group-by-type-desc")</div>
+                    </div>
+                    <MSwitch Inset
+                             HideDetails="@true"
+                             Value="@(Config?.NavComponentsGroupByType ?? true)"
+                             ValueChanged="@OnGroupByTypeChange"
+                             TValue="bool"
+                             Class="mt-0"
+                    ></MSwitch>
+                </div>
+            }
         </MContainer>
     </ChildContent>
 </MNavigationDrawer>
 
 @code {
+
+    [CascadingParameter(Name = "project")]
+    private string? Project { get; set; }
 
     [Parameter]
     public bool? Value { get; set; }
@@ -58,7 +83,21 @@
     [Parameter]
     public EventCallback<bool?> ValueChanged { get; set; }
 
-    private void ToggleRTL(bool rtl)
+    [Parameter]
+    public Config? Config { get; set; }
+
+    [Parameter]
+    public EventCallback<Config> ConfigChanged { get; set; }
+
+    private async Task OnGroupByTypeChange(bool value)
+    {
+        var newConfig = Config is null ? new Config(value) : Config with { NavComponentsGroupByType = value };
+        await ConfigChanged.InvokeAsync(newConfig);
+
+        _ = LocalStorage.SetItemAsync("masablazor@config", newConfig);
+    }
+
+    private void ToggleRtl(bool rtl)
     {
         if (rtl == MasaBlazor.RTL)
         {

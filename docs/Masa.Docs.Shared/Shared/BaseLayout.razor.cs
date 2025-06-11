@@ -14,6 +14,7 @@ public partial class BaseLayout
     private Project? _projectInfo;
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
+    private Config? _config;
 
     internal Action? OnAppBarNavIconClick { get; set; }
 
@@ -32,6 +33,7 @@ public partial class BaseLayout
             await InitTheme();
             await InitRTL();
             await InitLang();
+            await InitConfig();
 
             _projectMap = await DocService.ReadProjectMapAsync();
 
@@ -83,6 +85,11 @@ public partial class BaseLayout
             _culture = new CultureInfo(langStr);
             I18n.SetCulture(_culture);
         }
+    }
+
+    private async Task InitConfig()
+    {
+        _config = await LocalStorage.GetItemAsync<Config>("masablazor@config");
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)

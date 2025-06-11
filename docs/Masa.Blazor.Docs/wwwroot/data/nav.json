@@ -65,134 +65,332 @@
     "group": "components",
     "state": "update",
     "items": [
-      "alerts",
-      "application",
-      "aspect-ratios",
-      "avatars",
-      "badges",
-      "baidumaps",
-      "banners",
+      {
+        "title": "alerts",
+        "type": "feedback"
+      },
+      {
+        "title": "application",
+        "type": ""
+      },
+      {
+        "title": "aspect-ratios",
+        "type": "images-and-icons"
+      },
+      {
+        "title": "avatars",
+        "type": "images-and-icons"
+      },
+      {
+        "title": "badges",
+        "type": "feedback"
+      },
+      {
+        "title": "baidumaps",
+        "type": "misc"
+      },
+      {
+        "title": "banners",
+        "type": "feedback"
+      },
       {
         "title": "bars",
         "group": "components",
         "items": [
-          "app-bars",
-          "toolbars",
-          "system-bars"
+          {
+            "title": "app-bars",
+            "type": "navigation"
+          },
+          {
+            "title": "toolbars",
+            "type": "containment"
+          },
+          {
+            "title": "system-bars",
+            "type": "navigation"
+          }
         ]
       },
-      "block-text",
-      "borders",
-      "bottom-navigation",
-      "bottom-sheets",
-      "breadcrumbs",
       {
-        "title": "buttons"
+        "title": "block-text",
+        "type": "data-display"
       },
       {
-        "title": "cards"
+        "title": "borders",
+        "type": "feedback"
       },
-      "carousels",
-      "chips",
-      "copyable-text",
-      "cron",
-      "defaults-providers",
-      "descriptions",
-      "dialogs",
       {
-        "title": "dividers"
+        "title": "bottom-navigation",
+        "type": "navigation"
       },
-      "drawers",
-      "drawflow",
       {
-        "title": "echarts"
+        "title": "bottom-sheets",
+        "type": "containment"
+      },
+      {
+        "title": "breadcrumbs",
+        "type": "navigation"
+      },
+      {
+        "title": "buttons",
+        "type": "containment"
+      },
+      {
+        "title": "cards",
+        "type": "containment"
+      },
+      {
+        "title": "carousels",
+        "type": "selection"
+      },
+      {
+        "title": "chips",
+        "type": "containment"
+      },
+      {
+        "title": "copyable-text",
+        "type": "data-display"
+      },
+      {
+        "title": "cron",
+        "type": "misc"
+      },
+      {
+        "title": "defaults-providers",
+        "type": "providers"
+      },
+      {
+        "title": "descriptions",
+        "type": "data-display"
+      },
+      {
+        "title": "dialogs",
+        "type": "containment"
+      },
+      {
+        "title": "dividers",
+        "type": "containment"
+      },
+      {
+        "title": "drawers",
+        "type": "containment"
+      },
+      {
+        "title": "drawflow",
+        "type": "misc"
+      },
+      {
+        "title": "echarts",
+        "type": "data-display"
       },
       {
         "title": "driverjs",
-        "state": "labs"
+        "state": "labs",
+        "type": "feedback"
       },
-      "editors",
-      "enqueued-snackbars",
-      "error-handler",
       {
-        "title": "expansion-panels"
+        "title": "editors",
+        "type": "form"
       },
-      "floating-action-buttons",
-      "footers",
+      {
+        "title": "enqueued-snackbars",
+        "type": "feedback"
+      },
+      {
+        "title": "error-handler",
+        "type": "feedback"
+      },
+      {
+        "title": "expansion-panels",
+        "type": "selection"
+      },
+      {
+        "title": "floating-action-buttons",
+        "type": "navigation"
+      },
+      {
+        "title": "footers",
+        "type": "navigation"
+      },
       {
         "title": "form-inputs-and-controls",
         "group": "components",
         "state": "new",
         "items": [
-          "autocompletes",
           {
-            "title": "cascaders"
+            "title": "autocompletes",
+            "type": "form"
           },
-          "checkboxes",
           {
-            "title":"combobox",
-            "state": "labs"
+            "title": "cascaders",
+            "type": "form"
           },
-          "file-inputs",
           {
-            "title": "forms"
+            "title": "checkboxes",
+            "type": "form"
           },
-          "otp-input",
-          "radios",
-          "range-sliders",
-          "selects",
-          "sliders",
           {
-            "title": "switches"
+            "title": "combobox",
+            "state": "labs",
+            "type": "form"
           },
-          "textareas",
-          "text-fields"
+          {
+            "title": "file-inputs",
+            "type": "form"
+          },
+          {
+            "title": "forms",
+            "type": "form"
+          },
+          {
+            "title": "otp-input",
+            "type": "form"
+          },
+          {
+            "title": "radios",
+            "type": "form"
+          },
+          {
+            "title": "range-sliders",
+            "type": "form"
+          },
+          {
+            "title": "selects",
+            "type": "form"
+          },
+          {
+            "title": "sliders",
+            "type": "form"
+          },
+          {
+            "title": "switches",
+            "type": "form"
+          },
+          {
+            "title": "textareas",
+            "type": "form"
+          },
+          {
+            "title": "text-fields",
+            "type": "form"
+          }
         ]
       },
       {
         "title": "grids",
-        "exact": true
+        "exact": true,
+        "type": "containment"
       },
-      "gridstack",
+      {
+        "title": "gridstack",
+        "type": "containment"
+      },
       {
         "title": "groups",
         "group": "components",
         "items": [
-          "button-groups",
-          "chip-groups",
-          "item-groups",
-          "list-item-groups",
-          "slide-groups",
-          "windows"
+          {
+            "title": "button-groups",
+            "type": "selection"
+          },
+          {
+            "title": "chip-groups",
+            "type": "selection"
+          },
+          {
+            "title": "item-groups",
+            "type": "selection"
+          },
+          {
+            "title": "list-item-groups",
+            "type": "selection"
+          },
+          {
+            "title": "slide-groups",
+            "type": "selection"
+          },
+          {
+            "title": "windows",
+            "type": "selection"
+          }
         ]
       },
-      "hover",
-      "icons",
-      "i18ns",
       {
-        "title": "image-captcha"
+        "title": "hover",
+        "type": "feedback"
       },
-      "images",
       {
-        "title": "lists"
+        "title": "icons",
+        "type": "images-and-icons"
       },
-      "infinite-scroll",
-      "inputs-filter",
-      "interactive-trigger",
-      "lazy",
-      "markdowns",
-      "markdown-parsers",
-      "menus",
-      "modals",
-      "monaco-editor",
-      "navigation-drawers",
-      "overlays",
+      {
+        "title": "i18ns",
+        "type": "misc"
+      },
+      {
+        "title": "image-captcha",
+        "type": "form"
+      },
+      {
+        "title": "images",
+        "type": "images-and-icons"
+      },
+      {
+        "title": "lists",
+        "type": "containment"
+      },
+      {
+        "title": "infinite-scroll",
+        "type": "data-display"
+      },
+      {
+        "title": "inputs-filter",
+        "type": "data-display"
+      },
+      {
+        "title": "interactive-trigger",
+        "type": "misc"
+      },
+      {
+        "title": "lazy",
+        "type": "misc"
+      },
+      {
+        "title": "markdowns",
+        "type": "form"
+      },
+      {
+        "title": "markdown-parsers",
+        "type": "data-display"
+      },
+      {
+        "title": "menus",
+        "type": "containment"
+      },
+      {
+        "title": "modals",
+        "type": "containment"
+      },
+      {
+        "title": "monaco-editor",
+        "type": "form"
+      },
+      {
+        "title": "navigation-drawers",
+        "type": "navigation"
+      },
+      {
+        "title": "overlays",
+        "type": "navigation"
+      },
       {
         "title": "page-tabs",
-        "state": "update"
+        "state": "update",
+        "type": "navigation"
       },
       {
-        "title": "paginations"
+        "title": "paginations",
+        "type": "navigation"
       },
       {
         "title": "pickers",
@@ -200,60 +398,148 @@
         "items": [
           {
             "title": "date-pickers",
-            "exact": true
+            "exact": true,
+            "type": "pickers"
           },
-          "date-pickers-month",
-          "time-pickers",
-          "date-digital-clock-pickers",
-          "date-time-pickers",
-          "digital-clocks"
+          {
+            "title": "date-pickers-month",
+            "type": "pickers"
+          },
+          {
+            "title": "time-pickers",
+            "type": "pickers"
+          },
+          {
+            "title": "date-digital-clock-pickers",
+            "type": "pickers"
+          },
+          {
+            "title": "date-time-pickers",
+            "type": "pickers"
+          },
+          {
+            "title": "digital-clocks",
+            "type": "pickers"
+          }
         ]
       },
-      "popup-service",
+      {
+        "title": "popup-service",
+        "type": "services"
+      },
       {
         "title": "progress",
         "group": "components",
         "items": [
-          "progress-circular",
-          "progress-linear"
+          {
+            "title": "progress-circular",
+            "type": "feedback"
+          },
+          {
+            "title": "progress-linear",
+            "type": "feedback"
+          }
         ]
       },
-      "ratings",
-      "scroll-to-target",
-      "sheets",
-      "skeleton-loaders",
-      "snackbars",
-      "sortable",
-      "splitters",
-      "steppers",
-      "sticky",
-      "subheaders",
-      "syntax-highlights",
+      {
+        "title": "ratings",
+        "type": "feedback"
+      },
+      {
+        "title": "scroll-to-target",
+        "type": "navigation"
+      },
+      {
+        "title": "sheets",
+        "type": "containment"
+      },
+      {
+        "title": "skeleton-loaders",
+        "type": "feedback"
+      },
+      {
+        "title": "snackbars",
+        "type": "feedback"
+      },
+      {
+        "title": "sortable",
+        "type": "containment"
+      },
+      {
+        "title": "splitters",
+        "type": "containment"
+      },
+      {
+        "title": "steppers",
+        "type": "selection"
+      },
+      {
+        "title": "sticky",
+        "type": "containment"
+      },
+      {
+        "title": "subheaders",
+        "type": "containment"
+      },
+      {
+        "title": "syntax-highlights",
+        "type": "data-display"
+      },
       {
         "title": "tables",
         "group": "components",
         "items": [
-          "data-iterators",
           {
-            "title": "data-tables"
+            "title": "data-iterators",
+            "type": "data-display"
           },
-          "simple-tables"
+          {
+            "title": "data-tables",
+            "type": "data-display"
+          },
+          {
+            "title": "simple-tables",
+            "type": "data-display"
+          }
         ]
       },
-      "tabs",
+      {
+        "title": "tabs",
+        "type": "navigation"
+      },
       {
         "title": "theme-providers",
-        "state": "labs"
+        "state": "labs",
+        "type": "providers"
       },
-      "timelines",
-      "toggles",
-      "tooltips",
       {
-        "title": "treeview"
+        "title": "timelines",
+        "type": "feedback"
       },
-      "virtual-scroll",
-      "watermark",
-      "xgplayer"
+      {
+        "title": "toggles",
+        "type": "selection"
+      },
+      {
+        "title": "tooltips",
+        "type": "containment"
+      },
+      {
+        "title": "treeview",
+        "type": "data-display"
+      },
+      {
+        "title": "virtual-scroll",
+        "type": "data-display"
+      },
+      {
+        "title": "watermark",
+        "type": "containment"
+      },
+      {
+        "title": "xgplayer",
+        "type": "images-and-icons"
+      }
     ]
   },
   {

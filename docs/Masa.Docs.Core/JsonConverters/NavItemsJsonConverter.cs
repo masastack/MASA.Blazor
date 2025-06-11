@@ -71,6 +71,23 @@ public class NavItemsJsonConverter : JsonConverter<List<NavItem>>
                             case "items":
                                 navItem.Children = ReadSubItems(ref reader);
                                 break;
+                            case "type":
+                                navItem.ComponentType = reader.GetString() switch
+                                {
+                                    "containment" => ComponentType.Containment,
+                                    "navigation" => ComponentType.Navigation,
+                                    "form" => ComponentType.Form,
+                                    "data-display" => ComponentType.DataDisplay,
+                                    "selection" => ComponentType.Selection,
+                                    "feedback" => ComponentType.Feedback,
+                                    "images-and-icons" => ComponentType.ImagesAndIcons,
+                                    "pickers" => ComponentType.Pickers,
+                                    "providers" => ComponentType.Providers,
+                                    "services" => ComponentType.Services,
+                                    "misc" => ComponentType.Misc,
+                                    _ => ComponentType.Unknown
+                                };
+                                break;
                         }
                     }
                     else if (reader.TokenType == JsonTokenType.EndObject)

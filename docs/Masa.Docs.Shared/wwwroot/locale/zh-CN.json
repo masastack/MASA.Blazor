@@ -637,5 +637,20 @@
     }
   },
   "latest-build": "文档构建版本",
-  "latest-release": "最新发行版"
+  "latest-release": "最新发行版",
+  "component-type": {
+    "containment": "容器组件",
+    "navigation": "导航式组件",
+    "form": "表单输入和控制",
+    "dataDisplay": "数据展示",
+    "selection": "选择组件",
+    "feedback": "反馈式组件",
+    "imagesAndIcons": "图像和图标组件",
+    "pickers": "选择器组件",
+    "providers": "提供程序组件",
+    "services": "服务",
+    "misc": "其他"
+  },
+  "nav-component-group-by-type": "组件按类型分类",
+  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分类"
 }
