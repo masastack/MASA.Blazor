@@ -15,11 +15,11 @@ dotnet add package Masa.Blazor.JSComponents.Gridstack
 ```
 
 ```html
-<link href="https://cdn.masastack.com/npm/gridstack.js/12.2.2/gridstack.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/gridstack.js/12.2.1/gridstack.min.css" rel="stylesheet">
 ```
 
 ```html
-<script src="https://cdn.masastack.com/npm/gridstack.js/12.2.2/gridstack-all.min.js"></script>
+<script src="https://cdn.masastack.com/npm/gridstack.js/12.2.1/gridstack-all.min.js"></script>
 ```
 
 ## 使用 {#usage}
