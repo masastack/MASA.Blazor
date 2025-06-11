@@ -547,5 +547,20 @@
     }
   },
   "latest-build": "Latest doc build",
-  "latest-release": "Latest release"
+  "latest-release": "Latest release",
+  "component-type": {
+    "containment": "Containment",
+    "navigation": "Navigation",
+    "form": "Form",
+    "dataDisplay": "Data Display",
+    "selection": "Selection",
+    "feedback": "Feedback",
+    "imagesAndIcons": "Images and Icons",
+    "pickers": "Pickers",
+    "providers": "Providers",
+    "services": "Services",
+    "misc": "Miscellaneous"
+  },
+  "nav-component-group-by-type": "Components grouped by type",
+  "nav-component-group-by-type-desc": "Group the components in the left navigation by type"
 }

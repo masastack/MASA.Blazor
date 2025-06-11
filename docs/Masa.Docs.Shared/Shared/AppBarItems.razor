@@ -63,7 +63,9 @@
 
         <AppTooltipButton OnClick="@OnSettingsClick"
                           Icon="mdi-cog-outline"
-                          Path="settings">
+                          Path="settings"
+                          Dot="@SettingsDot"
+                          DotColor="green">
         </AppTooltipButton>
     }
     else
@@ -80,6 +82,9 @@
     [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
 
+    [CascadingParameter(Name = "project")]
+    public string? Project { get; set; }
+
     [Parameter]
     public Project? ProjectInfo { get; set; }
 
@@ -92,9 +97,14 @@
     [Parameter]
     public EventCallback OnSettingsClick { get; set; }
 
+    [Parameter]
+    public Config? Config { get; set; }
+
     private int _starCount;
     private string? _prevRepo;
     private Search? _algoliaSearch;
+
+    private bool SettingsDot => Project == "blazor" && Config?.NavComponentsGroupByType is not false;
 
     protected override void OnInitialized()
     {

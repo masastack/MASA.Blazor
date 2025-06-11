@@ -26,6 +26,8 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public List<DefaultItem>? Children { get; set; }
 
+    public ComponentType ComponentType { get; }
+
     public string? Target
     {
         get

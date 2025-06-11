@@ -2,7 +2,9 @@
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
 @{
-    RenderFragment prependIconContent = string.IsNullOrWhiteSpace(Item?.Icon) ? null : @<MIcon Color="primary">@Item.Icon</MIcon>;
+    RenderFragment prependIconContent = string.IsNullOrWhiteSpace(Item?.Icon)
+        ? null
+        : @<MIcon Color="primary">@Item.Icon</MIcon>;
 }
 
 <MListGroup Group="@_group"
@@ -11,32 +13,42 @@
             SubGroup="SubGroup"
             PrependIconContent="prependIconContent">
     <ActivatorContent>
-        <NavItemContent Item="Item" />
+        <NavItemContent Item="Item"/>
     </ActivatorContent>
     <ChildContent>
-        @foreach (var child in Item?.Children ?? new())
+        @if (Item?.Title == "ui-components" && ComponentsGroupByType)
         {
-            if (child.Heading is not null)
+            <TypedList Items="@Item.Children"/>
+        }
+        else
+        {
+            foreach (var child in Item?.Children ?? new())
             {
-                <MSubheader Class="text--primary font-weight-black text-uppercase" Inset>@child.Heading</MSubheader>
-            }
-            else if (child.Divider)
-            {
-                <MDivider Inset Class="mt-3 mb-2 ml-16"></MDivider>
-            }
-            else if (child.HasChildren())
-            {
-                <DefaultListGroup Item="@child" SubGroup></DefaultListGroup>
-            }
-            else
-            {
-                <DefaultListItem Item="child"></DefaultListItem>
+                if (child.Heading is not null)
+                {
+                    <MSubheader Class="text--primary font-weight-black text-uppercase" Inset>@child.Heading</MSubheader>
+                }
+                else if (child.Divider)
+                {
+                    <MDivider Inset Class="mt-3 mb-2 ml-16"></MDivider>
+                }
+                else if (child.HasChildren())
+                {
+                    <DefaultListGroup Item="@child" SubGroup></DefaultListGroup>
+                }
+                else
+                {
+                    <DefaultListItem Item="child"></DefaultListItem>
+                }
             }
         }
     </ChildContent>
 </MListGroup>
 
 @code {
+
+    [CascadingParameter(Name = "ComponentsGroupByType")]
+    private bool ComponentsGroupByType { get; set; }
 
     [Parameter]
     public string? Icon { get; set; }
