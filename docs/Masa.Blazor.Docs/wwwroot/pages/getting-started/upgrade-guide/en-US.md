@@ -1,5 +1,86 @@
 # Upgrade Guides
 
+## Upgrading form v1.9.x to v1.10.0
+
+### Features {#v1-10-0-features}
+
+#### Themes {#v1-10-0-themes}
+
+- Name of the cascading `CascadingIsDark` is no longer used, replaced by `MasaBlazorCascadingTheme` of type `string`.
+- All CSS variables related to colors are now just rgb color values, if you are using these variables, please note to modify.
+  ```diff
+    .test {
+  -   color: var(--m-theme-primary);
+  +   color: rgba(var(--m-theme-primary), 1);
+    }
+  ```
+- The `Light` and `Dark` properties are marked as deprecated, still available but recommended to use the `Theme` property in the future.
+  ```diff
+  - <MButton Dark></MButton>
+  + <MButton Theme="dark"></MButton>
+  ```
+- CSS has been slightly adjusted to adapt to the color system of **Material Design 3**, which may cause color inconsistencies between versions.
+  If you encounter any issues, please contact us.
+
+### Components {#v1-10-0-components}
+
+#### Mobile components {#mobile-components}
+
+The following components have been moved to a standalone project. If you are using these components, you need to import the new package.
+
+```cli
+dotnet add package MASA.Blazor.MobileComponents
+```
+
+- [PMobileCascader](/blazor/mobiles/mobile-cascader)
+- [PMobileDatePicker](/blazor/mobiles/mobile-date-pickers)
+- [PMobileDateTimePicker](/blazor/mobiles/mobile-date-time-pickers)
+- [PMobilePicker](/blazor/mobiles/mobile-pickers)
+- [MMobilePickerView](/blazor/mobiles/mobile-picker-views)
+- [PMobileTimePicker](/blazor/mobiles/mobile-time-pickers)
+- [MPdfMobileViewer](/blazor/mobiles/pdf-mobile-viewer)
+- [MPullRefresh](/blazor/mobiles/pull-refresh)
+- [PPageStack](/blazor/mobiles/page-stack)
+  - Add the `AddMobileComponents` extension method when injecting the MasaBlazor service in your _Program.cs_ file:
+    ```diff
+      builder.Services
+          .AddMasaBlazor()
+    +     .AddMobileComponents();
+     ```
+  - **PageStackBarInit** component has been deprecated, use **PPageStackBar** instead. No longer need to force re-render by setting `RerenderKey`.
+
+#### Swiper
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Swiper
+```
+
+#### Gridstack
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Gridstack
+```
+
+#### MarkdownIt and SyntaxHighlight
+
+The components have been moved to a standalone project. If you are using these components, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
+#### Xgplayer
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Xgplayer
+```
+
 ## Upgrading form v1.8.x to v1.9.0
 
 ### Components {#v1-9-0-components}
