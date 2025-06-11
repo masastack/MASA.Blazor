@@ -1,10 +1,11 @@
-﻿namespace Masa.Blazor;
+﻿using System.Runtime.CompilerServices;
+
+namespace Masa.Blazor;
+
+public record GridstackItem<TItem>(TItem Item, GridstackWidget Options);
 
 public partial class MGridstack<TItem> : MasaComponentBase
 {
-    [Inject]
-    protected GridstackJSModule Module { get; set; } = null!;
-
     [Parameter, EditorRequired]
     public List<TItem> Items { get; set; } = new();
 
@@ -14,8 +15,11 @@ public partial class MGridstack<TItem> : MasaComponentBase
     [Parameter, EditorRequired]
     public Func<TItem, string> ItemKey { get; set; } = null!;
 
-    [Parameter]
+    [Parameter, Obsolete("Use ItemWidget instead.")]
     public Func<TItem, GridstackWidgetPosition>? ItemPosition { get; set; }
+
+    [Parameter, EditorRequired, MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public Func<TItem, GridstackWidget>? ItemOptions { get; set; }
 
     [Parameter]
     public string? ItemClass { get; set; }
@@ -77,11 +81,29 @@ public partial class MGridstack<TItem> : MasaComponentBase
     [Parameter]
     public EventCallback<GridstackResizeEventArgs> OnResize { get; set; }
 
+    [Parameter]
+    [MasaApiParameter("auto", ReleasedIn = "v1.10.0")]
+    public StringNumber? CellHeight { get; set; } = "auto";
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public bool SizeToContent { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(GridstackResizeHandle.SouthEast, ReleasedIn = "v1.10.0")]
+    public GridstackResizeHandle ResizeHandle { get; set; } = GridstackResizeHandle.SouthEast;
+
+    [Parameter]
+    [MasaApiParameter(true, ReleasedIn = "v1.10.0")]
+    public bool ResizeAutoHide { get; set; } = true;
+
     private static Block _block = new("m-gridstack");
     private static Block _itemBlock = _block.Extend("item");
 
-    private string? _prevItemKeys;
-    private IJSObjectReference? _gridstackInstance;
+    private HashSet<string> _prevItemKeys = [];
+    private HashSet<GridstackItem<TItem>> _itemOptions = new();
+
+    private GridstackJSModule? _gridstackInstance;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -111,10 +133,35 @@ public partial class MGridstack<TItem> : MasaComponentBase
 
         if (Column < 0) Column = 12;
 
-        var itemKeys = string.Join("", Items.Select(ItemKey));
-        if (_prevItemKeys is not null && _prevItemKeys != itemKeys)
+        var itemKeys = Items.Select(ItemKey).ToHashSet();
+        if (!_prevItemKeys.SetEquals(itemKeys))
         {
             _prevItemKeys = itemKeys;
+            _itemOptions = Items.Select(item =>
+            {
+                if (ItemOptions is not null)
+                {
+                    var options = ItemOptions(item);
+                    options.Id = ItemKey(item);
+                    return new GridstackItem<TItem>(item, options);
+                }
+
+                if (ItemPosition is not null)
+                {
+                    var position = ItemPosition(item);
+                    return new GridstackItem<TItem>(item, new GridstackWidget()
+                    {
+                        Id = ItemKey(item),
+                        X = position.X,
+                        Y = position.Y,
+                        H = position.H,
+                        W = position.W
+                    });
+                }
+
+                return new GridstackItem<TItem>(item, new GridstackWidget());
+            }).ToHashSet();
+
             NextTick(async () => { await Reload(); });
         }
     }
@@ -125,7 +172,7 @@ public partial class MGridstack<TItem> : MasaComponentBase
 
         if (firstRender)
         {
-            _prevItemKeys = string.Join("", Items.Select(ItemKey));
+            _prevItemKeys = Items.Select(ItemKey).ToHashSet();
 
             var options = new GridstackOptions()
             {
@@ -135,12 +182,16 @@ public partial class MGridstack<TItem> : MasaComponentBase
                 Float = Float,
                 Margin = Margin,
                 MinRow = MinRow,
-                Rtl = Rtl
+                Rtl = Rtl,
+                CellHeight = FormatCellHeight(CellHeight),
+                SizeToContent = SizeToContent,
+                Resizable = new GridstackResizable(ResizeAutoHide, ResizeHandle)
             };
 
-            _gridstackInstance = await Module.Init(options, Ref);
+            _gridstackInstance = new GridstackJSModule(Js);
+            await _gridstackInstance.Init(options, Ref);
 
-            Module.Resize += GridstackOnResize;
+            _gridstackInstance.Resize += GridstackOnResize;
 
             if (Readonly)
             {
@@ -149,11 +200,26 @@ public partial class MGridstack<TItem> : MasaComponentBase
         }
     }
 
+    private string FormatCellHeight(StringNumber? cellHeight)
+    {
+        if (cellHeight is null)
+        {
+            return "auto";
+        }
+
+        if (cellHeight.IsT1 || cellHeight.IsT2)
+        {
+            return cellHeight.ToDouble() == 0 ? "0" : $"{cellHeight}px";
+        }
+
+        return cellHeight.AsT0;
+    }
+
     public async ValueTask<List<GridstackWidget>> OnSave()
     {
-        if (_gridstackInstance is null) return new List<GridstackWidget>();
+        if (_gridstackInstance is null) return [];
 
-        return await Module.Save(_gridstackInstance);
+        return await _gridstackInstance.Save();
     }
 
     private void GridstackOnResize(object? sender, GridstackResizeEventArgs e)
@@ -167,21 +233,23 @@ public partial class MGridstack<TItem> : MasaComponentBase
     public async Task Reload()
     {
         if (_gridstackInstance is null) return;
-        _gridstackInstance = await Module.Reload(_gridstackInstance);
+        await _gridstackInstance.Reload();
     }
 
     private async Task SetStatic(bool staticValue)
     {
         if (_gridstackInstance is null) return;
-        await Module.SetStatic(_gridstackInstance, staticValue);
+        await _gridstackInstance.SetStatic(staticValue);
     }
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        Module.Resize -= GridstackOnResize;
-        if (_gridstackInstance is not null)
+        if (_gridstackInstance is null)
         {
-            await _gridstackInstance.DisposeAsync();
+            return;
         }
+
+        _gridstackInstance.Resize -= GridstackOnResize;
+        await (_gridstackInstance as IAsyncDisposable).DisposeAsync();
     }
 }

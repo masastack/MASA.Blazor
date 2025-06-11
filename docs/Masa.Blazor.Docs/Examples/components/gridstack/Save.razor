@@ -17,18 +17,18 @@
 
 <MGridstack Items="@_items"
             ItemKey="item => item.ToString()"
-            ItemClass="blue"
+            ItemClass="surface-container-highest d-flex align-center justify-center rounded"
             Margin="6"
             TItem="int"
             ItemPosition="@_itemPosition"
             DisableOneColumnMode
             @ref="@_gridstack">
     <ItemContent>
-        <div class="text-center">@context</div>
+        @context
     </ItemContent>
 </MGridstack>
 
-<MDivider />
+<MDivider/>
 
 <MTextarea Readonly
            Filled
@@ -90,8 +90,8 @@
 
 <style>
     .gridstack-save-and-load__textarea textarea {
-      line-height: 1;
-      font-family: monospace;
-      font-size: small;
+        line-height: 1;
+        font-family: monospace;
+        font-size: small;
     }
 </style>

@@ -1,12 +1,29 @@
 ﻿<MGridstack Items="@_items"
             ItemKey="item => item.ToString()"
-            ItemClass="blue"
+            ItemClass="surface-container-highest d-flex align-center justify-center rounded"
             Margin="6"
             TItem="int"
-            ItemPosition="ItemSize"
+            ItemOptions="ItemSize"
             DisableOneColumnMode>
     <ItemContent>
-        <div class="text-center">@context</div>
+        @if (context == 2)
+        {
+            <div class="d-flex flex-column">
+                <MIcon Size="64" Icon="@("mdi-lock-outline")"/>
+                Resize locked, move not allowed
+            </div>
+        }
+        else if (context == 3)
+        {
+            <div class="d-flex flex-column">
+                <MIcon Size="64" Icon="@("mdi-lock-outline")"/>
+                Resize locked
+            </div>
+        }
+        else
+        {
+            @context
+        }
     </ItemContent>
 </MGridstack>
 
@@ -14,12 +31,13 @@
 
     private readonly List<int> _items = Enumerable.Range(1, 11).ToList();
 
-    static GridstackWidgetPosition ItemSize(int item)
+    static GridstackWidget ItemSize(int item)
     {
         return item switch
         {
             1 => new(4, 2),
-            2 => new(4, 4),
+            2 => new(4, 4) { Locked = true, NoMove = true, NoResize = true },
+            3 => new(2, 2) { Locked = true, NoResize = true },
             6 => new(2, 4),
             7 => new(4, 2),
             9 => new(4, 2),

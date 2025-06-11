@@ -1,4 +1,7 @@
-﻿namespace Masa.Blazor;
+﻿using System.Text.Json.Serialization;
+using Masa.Blazor.JSInterop;
+
+namespace Masa.Blazor;
 
 public class GridstackOptions
 {
@@ -31,9 +34,15 @@ public class GridstackOptions
     /// minimum rows amount which is handy to prevent grid from collapsing when empty. Default is 0. You can also do this with min-height CSS attribute on the grid div in pixels, which will round to the closest row.
     /// </summary>
     public int MinRow { get; set; }
-    
+
     /// <summary>
     /// if true turns grid to RTL.
     /// </summary>
     public bool Rtl { get; set; }
+
+    public string CellHeight { get; set; } = "auto";
+
+    public bool SizeToContent { get; set; }
+
+    public GridstackResizable? Resizable { get; set; }
 }
