@@ -9,8 +9,6 @@ public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInp
 
     [CascadingParameter] protected MInputsFilter? InputsFilter { get; set; }
     
-    [CascadingParameter(Name = "AppIsDark")] protected bool AppIsDark { get; set; }
-
     [Parameter][MasaApiParameter("primary")] public string? Color { get; set; } = "primary";
 
     [Parameter] public string? BackgroundColor { get; set; }
