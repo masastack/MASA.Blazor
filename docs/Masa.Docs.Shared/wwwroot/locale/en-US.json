@@ -300,6 +300,7 @@
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
   "all": "All components",
+  "activator": "Activator",
   "basic-concepts": "Basic concepts",
   "best-practices": "Best practices",
   "faq": "FAQ",

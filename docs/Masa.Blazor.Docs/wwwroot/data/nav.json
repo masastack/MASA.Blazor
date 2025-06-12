@@ -44,6 +44,16 @@
     ]
   },
   {
+    "title": "basic-concepts",
+    "icon": "mdi-lightbulb-outline",
+    "state": "new",
+    "items": [
+      {
+        "title": "activator"
+      }
+    ]
+  },
+  {
     "title": "styles-and-animations",
     "icon": "mdi-palette",
     "items": [
