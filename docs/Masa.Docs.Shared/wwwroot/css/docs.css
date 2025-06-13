@@ -464,28 +464,10 @@ app-alert p {
     margin: 16px 0;
 }
 
-.doc-markdown-body > section {
-    padding-bottom: 2rem;
-}
-
-    .doc-markdown-body > section > section {
-        padding-bottom: 1rem;
-    }
-    
-    .doc-markdown-body > section > section > section {
-        padding-bottom: 0.5rem;
-    }
-
-.doc-markdown-body > section:last-child,
-.doc-markdown-body > section > section:last-child,
-.doc-markdown-body > section > section > section:last-child {
+.doc-markdown-body code {
+    padding-top: 0;
     padding-bottom: 0;
 }
-
-    .doc-markdown-body code {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
 
 .doc-markdown-body li > p {
     margin-bottom: 8px !important;
