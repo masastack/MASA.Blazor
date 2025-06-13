@@ -4,8 +4,7 @@
 
 `@bind-Value` 是 Blazor 提供的一种双向数据绑定指令，它简化了将组件的参数值与代码中的变量或属性关联起来的过程。
 
-> [!NOTE]
-> 重要提示：虽然本文以 `@bind-Value` 为例，但双向绑定不限于 `Value` 属性。Blazor 支持任何属性的双向绑定，如 `@bind-Text`、
+> 虽然本文以 `@bind-Value` 为例，但双向绑定不限于 `Value` 属性。Blazor 支持任何属性的双向绑定，如 `@bind-Text`、
 `@bind-Selected` 等，只要组件遵循相应的命名约定。
 
 在 MASA Blazor 的组件设计中，一个支持双向绑定的组件通常会包含以下三个关键参数，这些参数在许多输入组件的基类（如 `MInput`
@@ -85,7 +84,7 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 }
 ```
 
-### 使用 @bind-Value:after 处理变更事件 {#bind-value-after}
+### 处理变更事件 {#bind-value-after}
 
 有时，您希望在值更新之后执行某些异步操作，例如调用 API 或重新加载数据。我们推荐使用 Blazor 提供的 `@bind-Value:after` 修饰符。
 
@@ -109,7 +108,7 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 
 ## 常见问题与解决方案 {#common-issues}
 
-### 问题一：值变化后执行逻辑的正确方式 {#issue-executing-logic-after-value-change}
+### 问题一：值变化后执行逻辑的正确方式 {#issue1}
 
 **问题**：我想在值变化后执行一些逻辑，应该拆开 `@bind-Value` 吗？
 
@@ -125,8 +124,8 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 
     private async Task OnMyVarChanged(string newValue)
     {
-        myVar = newValue; // 必须手动更新
-        // ... 执行其他逻辑 ...
+        myVar = newValue; // have to manually update the variable
+        // ... execute other logic ...
     }
 }
 ```
@@ -149,7 +148,7 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 
 使用 `@bind-Value:after` 更清晰地表达了您的意图——"在绑定完成后做某事"，并避免了手动更新状态的步骤。
 
-### 问题二：表单无法验证 {#issue-form-validation}
+### 问题二：表单无法验证 {#issue2}
 
 **问题**：在表单中使用 `@bind-Value` 时，验证为什么不生效？
 
@@ -164,29 +163,27 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 ❌ **错误写法**（缺少 ValueExpression）：
 
 ```razor
-<MForm Model="Model">
-    <MTextField Value="Model.UserName" 
-               ValueChanged="@((val) => { Model.UserName = val; DoSomething(); })" />
+<MForm Model="_model">
+    <MTextField Value="_model.UserName" 
+                ValueChanged="@((val) => { _model.UserName = val; })" />
 </MForm>
 ```
 
 ✅ **正确写法**：
 
-或者使用局部变量进行更清晰的处理：
+或者使用局部变量进行更清晰地处理：
 
 ```razor
-<MForm Model="Model">
-    <MTextField Value="Model.UserName" 
-               ValueChanged="OnUserNameChanged"
-               ValueExpression="@(() => Model.UserName)" />
+<MForm Model="_model">
+    <MTextField Value="_model.UserName" 
+                ValueChanged="OnUserNameChanged"
+                ValueExpression="@(() => _model.UserName)" />
 </MForm>
 
 @code {
     private void OnUserNameChanged(string? value)
     {
-        Model.UserName = value;
-        // 执行其他逻辑
-        DoSomething();
+        _model.UserName = value;
     }
 }
 ```

@@ -301,6 +301,7 @@
   "product.framework": "MASA Framework",
   "all": "All components",
   "activator": "Activator",
+  "two-way-binding": "Two-way binding",
   "basic-concepts": "Basic concepts",
   "best-practices": "Best practices",
   "faq": "FAQ",
@@ -396,7 +397,7 @@
     "switches": "The Switches component provides users the ability to choose between two distinct values",
     "textareas": "Textareas components are used for collecting large amounts of textual data",
     "text-fields": "Text fields components are used for collecting user provided information",
-    "grids": "The grid is used to create specific layouts within an application’s content",
+    "grids": "The grid is used to create specific layouts within an application's content",
     "gridstack": "Build interactive dashboards in minutes",
     "button-groups": "The ButtonGroups component is a simple wrapper for MItemGroup built specifically to work with MButton",
     "chip-groups": "The ChipGroups supercharges the MChip component by providing groupable functionality",
@@ -565,3 +566,4 @@
   "nav-component-group-by-type": "Components grouped by type",
   "nav-component-group-by-type-desc": "Group the components in the left navigation by type"
 }
+

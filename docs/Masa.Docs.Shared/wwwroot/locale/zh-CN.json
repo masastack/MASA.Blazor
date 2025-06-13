@@ -44,6 +44,7 @@
   "ssr": "服务端渲染",
   "direction": "双向性",
   "layouts": "布局",
+  "two-way-binding": "双向绑定",
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
@@ -652,5 +653,4 @@
     "misc": "其他"
   },
   "nav-component-group-by-type": "组件按类型分类",
-  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分类"
-}
+
