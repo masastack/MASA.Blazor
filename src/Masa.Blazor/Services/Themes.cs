@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using System.Collections.ObjectModel;
+
+namespace Masa.Blazor;
 
 public class Themes(ThemeOptions light, ThemeOptions dark)
 {
@@ -52,7 +54,7 @@ public class Themes(ThemeOptions light, ThemeOptions dark)
         themeConfigure.Invoke(themeOptions);
         UserDefined.Add(name, themeOptions);
     }
-    
+
     public bool Exists(string name)
     {
         if (string.Equals(name, "light", StringComparison.OrdinalIgnoreCase) ||
@@ -68,5 +70,25 @@ public class Themes(ThemeOptions light, ThemeOptions dark)
     {
         return string.Equals(name, "light", StringComparison.OrdinalIgnoreCase) ||
                string.Equals(name, "dark", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Get all themes including built-in light and dark themes, and user-defined themes.
+    /// </summary>
+    /// <returns>A read-only dictionary containing all themes.</returns>
+    public IReadOnlyDictionary<string, ThemeOptions> GetAll()
+    {
+        var result = new Dictionary<string, ThemeOptions>(UserDefined.Count + 2)
+        {
+            { "light", Light },
+            { "dark", Dark }
+        };
+
+        foreach (var item in UserDefined)
+        {
+            result.Add(item.Key, item.Value);
+        }
+
+        return new ReadOnlyDictionary<string, ThemeOptions>(result);
     }
 }

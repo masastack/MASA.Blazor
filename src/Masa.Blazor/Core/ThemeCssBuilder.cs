@@ -2,6 +2,59 @@
 
 public static class ThemeCssBuilder
 {
+    public static string Build(Theme theme)
+    {
+        var options = theme.CurrentTheme;
+        var combinePrefix = options.CombinePrefix;
+        combinePrefix ??= string.Empty;
+        combinePrefix = combinePrefix.EndsWith(' ') ? combinePrefix : $"{combinePrefix} ";
+
+        var lstCss = new List<string>()
+        {
+            $$"""
+              :root {
+                {{BuildCssVariables(options)}}
+              }
+              {{BuildThemeCssVariables(theme.Themes)}}
+              """,
+            BuildBgCssClass(combinePrefix, "surface-dim", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-bright", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-lowest", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-low", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-high", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-highest", "on-surface"),
+            BuildBgCssClass(combinePrefix, "inverse-surface", "inverse-on-surface"),
+            BuildBgCssClass(combinePrefix, "primary", "on-primary"),
+            BuildBgCssClass(combinePrefix, "secondary", "on-secondary"),
+            BuildBgCssClass(combinePrefix, "accent", "on-accent"),
+            BuildBgCssClass(combinePrefix, "info", "on-info"),
+            BuildBgCssClass(combinePrefix, "success", "on-success"),
+            BuildBgCssClass(combinePrefix, "warning", "on-warning"),
+            BuildBgCssClass(combinePrefix, "error", "on-error"),
+            BuildTextCssClass(combinePrefix, "primary"),
+            BuildTextCssClass(combinePrefix, "secondary"),
+            BuildTextCssClass(combinePrefix, "accent"),
+            BuildTextCssClass(combinePrefix, "info"),
+            BuildTextCssClass(combinePrefix, "success"),
+            BuildTextCssClass(combinePrefix, "warning"),
+            BuildTextCssClass(combinePrefix, "error"),
+            BuildTextCssClass(combinePrefix, "inverse-primary"),
+            BuildTextCssClass(combinePrefix, "inverse-on-surface"),
+            BuildBorderCssClass(combinePrefix, "outline"),
+            BuildBorderCssClass(combinePrefix, "outline-variant"),
+        };
+
+        foreach (var kv in options.UserDefined)
+        {
+            lstCss.Add(BuildTextCssClass(combinePrefix, kv.Key));
+            lstCss.Add(BuildBgCssClass(combinePrefix, kv.Key, kv.Key));
+        }
+
+        return string.Concat(lstCss);
+    }
+
     private static string BuildCssVariables(ThemeOptions options)
     {
         return $"""
@@ -23,8 +76,6 @@ public static class ThemeCssBuilder
                   {BuildCssVariable("surface-container-high", options.SurfaceContainerHigh)}
                   {BuildCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
                   {BuildCssVariable("on-surface", options.OnSurface)}
-                  {BuildCssVariable("surface-variant", options.SurfaceVariant)}
-                  {BuildCssVariable("on-surface-variant", options.OnSurfaceVariant)}
                   {BuildCssVariable("inverse-surface", options.InverseSurface)}
                   {BuildCssVariable("inverse-on-surface", options.InverseOnSurface)}
                   {BuildCssVariable("inverse-primary", options.InversePrimary)}
@@ -34,56 +85,6 @@ public static class ThemeCssBuilder
                   --m-theme-outline: var(--m-theme-on-surface), var(--m-low-emphasis-opacity);
                   --m-theme-outline-variant: var(--m-theme-on-surface), var(--m-border-opacity);
                 """;
-    }
-
-    public static string Build(Theme theme)
-    {
-        var options = theme.CurrentTheme;
-        var combinePrefix = options.CombinePrefix;
-        combinePrefix ??= string.Empty;
-        combinePrefix = combinePrefix.EndsWith(' ') ? combinePrefix : $"{combinePrefix} ";
-
-        var lstCss = new List<string>()
-        {
-            $$"""
-              :root {
-                {{BuildCssVariables(options)}}
-              }
-              {{BuildThemeCssVariables(theme.Themes)}}
-              """,
-            BuildBgCssClass(combinePrefix, "surface-dim", "surface"),
-            BuildBgCssClass(combinePrefix, "surface", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-bright", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-container-lowest", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-container-low", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-container", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-container-high", "surface"),
-            BuildBgCssClass(combinePrefix, "surface-container-highest", "surface"),
-            BuildBgCssClass(combinePrefix, "primary", "primary"),
-            BuildBgCssClass(combinePrefix, "secondary", "secondary"),
-            BuildBgCssClass(combinePrefix, "accent", "accent"),
-            BuildBgCssClass(combinePrefix, "info", "info"),
-            BuildBgCssClass(combinePrefix, "success", "success"),
-            BuildBgCssClass(combinePrefix, "warning", "warning"),
-            BuildBgCssClass(combinePrefix, "error", "error"),
-            BuildTextCssClass(combinePrefix, "primary"),
-            BuildTextCssClass(combinePrefix, "secondary"),
-            BuildTextCssClass(combinePrefix, "accent"),
-            BuildTextCssClass(combinePrefix, "info"),
-            BuildTextCssClass(combinePrefix, "success"),
-            BuildTextCssClass(combinePrefix, "warning"),
-            BuildTextCssClass(combinePrefix, "error"),
-            BuildBorderCssClass(combinePrefix, "outline"),
-            BuildBorderCssClass(combinePrefix, "outline-variant"),
-        };
-
-        foreach (var kv in options.UserDefined)
-        {
-            lstCss.Add(BuildTextCssClass(combinePrefix, kv.Key));
-            lstCss.Add(BuildBgCssClass(combinePrefix, kv.Key, kv.Key));
-        }
-
-        return string.Concat(lstCss);
     }
 
     private static string BuildCssVariable(string role, string? color, string? onColor)
@@ -114,7 +115,7 @@ public static class ThemeCssBuilder
         return string.Join("", userDefined.Select(x => BuildCssVariable(x.Key, x.Value.Color, x.Value.OnColor)));
     }
 
-    private static string BuildBgCssClass(string combinePrefix, string bg, string? group = null)
+    private static string BuildBgCssClass(string combinePrefix, string bg, string? text = null)
     {
         var str = $$"""
 
@@ -122,11 +123,11 @@ public static class ThemeCssBuilder
                         background-color: rgba(var(--m-theme-{{bg}})) !important;
                     """;
 
-        if (!string.IsNullOrWhiteSpace(group))
+        if (!string.IsNullOrWhiteSpace(text))
         {
             str += $$"""
 
-                         color: rgba(var(--m-theme-on-{{group}})) !important;
+                         color: rgba(var(--m-theme-{{text}})) !important;
                      }
                      """;
         }
@@ -174,6 +175,7 @@ public static class ThemeCssBuilder
         {
             stringBuilder.AppendLine(BuildScope(userDefined.Key, userDefined.Value));
         }
+
         return stringBuilder.ToString();
     }
 
