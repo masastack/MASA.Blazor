@@ -49,7 +49,12 @@
     "state": "new",
     "items": [
       {
-        "title": "activator"
+        "title": "activator",
+        "state": "new"
+      },
+      {
+        "title": "two-way-binding",
+        "state": "new"
       }
     ]
   },
