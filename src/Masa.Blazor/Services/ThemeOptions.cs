@@ -57,10 +57,6 @@ public class ThemeOptions
 
     public string? OnSurface { get; set; }
 
-    public string? SurfaceVariant { get; set; }
-
-    public string? OnSurfaceVariant { get; set; }
-
     public string? InverseSurface { get; set; }
 
     public string? InverseOnSurface { get; set; }

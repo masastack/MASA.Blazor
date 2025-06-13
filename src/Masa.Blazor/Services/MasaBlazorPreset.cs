@@ -29,11 +29,9 @@ internal static class MasaBlazorPreset
         SurfaceContainer = "#FFFFFF",
         SurfaceContainerHigh = "#f5f5f5",
         SurfaceContainerHighest = "#e0e0e0",
-        InverseSurface = "#121212",
-        InverseOnSurface = "#FFFFFF",
-        InversePrimary = "#2196F3",
-        SurfaceVariant = "#424242", // 不是material设计规范的颜色角色
-        OnSurfaceVariant = "#EEEEEE"
+        InverseSurface = "#424242",
+        InverseOnSurface = "#EEEEEE",
+        InversePrimary = "#2196F3"
     };
 
     internal static ThemeOptions GetDarkTheme() => new()
@@ -63,11 +61,9 @@ internal static class MasaBlazorPreset
         SurfaceContainer = "#2B2B2B",
         SurfaceContainerHigh = "#383838",
         SurfaceContainerHighest = "#454545",
-        InverseSurface = "#FFFFFF",
+        InverseSurface = "#c8c8c8",
         InverseOnSurface = "#000000",
-        InversePrimary = "#1976D2",
-        SurfaceVariant = "#c8c8c8",
-        OnSurfaceVariant = "#000000"
+        InversePrimary = "#4f33ff"
     };
 
     internal static Breakpoint GetBreakpoint() => new()

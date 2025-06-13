@@ -1204,8 +1204,8 @@ input[type=number] {
 }
 
 .m-digital-clock .m-digital-clock__item--active .m-digital-clock__item-content {
-    background-color: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background-color: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
 }
 
 .m-digital-clock .m-digital-clock__item--disabled {

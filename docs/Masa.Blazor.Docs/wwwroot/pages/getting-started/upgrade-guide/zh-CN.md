@@ -1,5 +1,86 @@
 # 升级指南
 
+## 从 v1.9.x 升级到 v1.10.0 {#upgrading-from-v1-9-x-to-v1-10-0}
+
+### 特性 {#v1-10-0-features}
+
+#### Theme {#v1-10-0-theme}
+
+- 名为 **CascadingIsDark** 的级联已不再使用，改为使用 `string` 类型的 **MasaBlazorCascadingTheme**。
+- 所有关于颜色的CSS变量现在只是rgb颜色值，如果你在使用这些变量，请注意修改。
+  ```diff
+    .test {
+  -   color: var(--m-theme-primary);
+  +   color: rgba(var(--m-theme-primary), 1);
+    }
+  ```
+- `Light`和`Dark`属性标记为过时属性，仍然可用，但后续建议使用 `Theme` 属性。
+  ```diff
+  - <MButton Dark></MButton>
+  + <MButton Theme="dark"></MButton>
+  ```
+- CSS 为了适配 **Material Design 3** 的颜色规则系统进行了微调，可能出现前后版本颜色不一致的情况。
+  如有遇到问题请联系我们。
+
+### 组件 {#v1-10-0-components}
+
+#### 移动端组件 {#mobile-components}
+
+以下组件已移至单独的项目。如果你正在使用这些组件，则需要导入新包。
+
+```cli
+dotnet add package Masa.Blazor.MobileComponents
+```
+
+- [PMobileCascader](/blazor/mobiles/mobile-cascader)
+- [PMobileDatePicker](/blazor/mobiles/mobile-date-pickers)
+- [PMobileDateTimePicker](/blazor/mobiles/mobile-date-time-pickers)
+- [PMobilePicker](/blazor/mobiles/mobile-pickers)
+- [MMobilePickerView](/blazor/mobiles/mobile-picker-views)
+- [PMobileTimePicker](/blazor/mobiles/mobile-time-pickers)
+- [PPageStack](/blazor/mobiles/page-stack)
+- [MPdfMobileViewer](/blazor/mobiles/pdf-mobile-viewer)
+- [MPullRefresh](/blazor/mobiles/pull-refresh)
+  - 需要在注入 MasaBlazor 服务时添加 `AddMobileComponents` 扩展方法。
+    ```diff
+      builder.Services
+          .AddMasaBlazor()
+    +     .AddMobileComponents();
+     ```
+  - **PStackPageBarInit** 组件已废弃，使用 **PPageStackBar** 代替。不再需要通过设置 `RerenderKey` 强制重新渲染。 
+
+#### Swiper
+
+此组件已移至单独的项目。如果你正在使用此组件，则需要导入新包。
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Swiper
+```
+
+#### Gridstack
+
+此组件已移至单独的项目。如果你正在使用此组件，则需要导入新包。
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Gridstack
+```
+
+#### MarkdownIt and SyntaxHighlight
+
+此组件已移至单独的项目。如果你正在使用此组件，则需要导入新包。
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
+#### Xgplayer
+
+此组件已移至单独的项目。如果你正在使用此组件，则需要导入新包。
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Xgplayer
+```
+
 ## 从 v1.8.x 升级到 v1.9.0 {#upgrading-from-v1-8-x-to-v1-9-0}
 
 ### 组件 {#v1-9-0-components}

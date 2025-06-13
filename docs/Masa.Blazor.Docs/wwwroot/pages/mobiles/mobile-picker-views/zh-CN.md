@@ -28,11 +28,11 @@ dotnet add package Masa.Blazor.MobileComponents
 级联选择的数据嵌套深度需要一致，如果某些选项没有子选项，则可以使用空字符串作为占位符。
 <!--/alert:warning-->
 
-<masa-example file="Examples.mobiles.mobil_picker_views.Cascade"></masa-example>
+<masa-example file="Examples.mobiles.mobile_picker_views.Cascade"></masa-example>
 
 #### 禁止选择某项 {#disabled-item}
 
-<masa-example file="Examples.mobiles.mobil_picker_views.ItemDisabled"></masa-example>
+<masa-example file="Examples.mobiles.mobile_picker_views.ItemDisabled"></masa-example>
 
 #### 自定义项高度 {#custom-item-height}
 

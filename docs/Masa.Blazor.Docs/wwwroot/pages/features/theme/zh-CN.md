@@ -24,7 +24,7 @@ builder.Services.AddMasaBlazor(options =>
 另外可以通过 `ThemeOptions.Variables` 属性修改供主题使用的 CSS 变量。
 
 以本文档的主题设置为例：
-- 修改了内置的 **light**和 **dark** 中某些颜色角色的值，并添加了一个名为 **basil** 的自定义颜色角色（你可以在示例 [Grow](/blazor/components/tabs#grow) 中看到它的使用）。
+- 修改了内置的 **light** 和 **dark** 中某些颜色角色的值，并添加了一个名为 **basil** 的自定义颜色角色（你可以在示例 [Grow](/blazor/components/tabs#grow) 中看到它的使用）。
 - 最后添加了一个名为 **camel** 的以骆驼色为主的自定义主题；你可以通过 [Material Theme Builder](https://www.figma.com/community/plugin/1034969338659738588/material-theme-builder) 创建自己的主题。
 
 ```csharp
@@ -72,6 +72,12 @@ services.AddMasaBlazor(options =>
 ```
 
 主题样式的 CSS 会在应用启动时自动生成一个 `id` 为 `masa-blazor-theme-stylesheet` 的 `<style>` 标签，并插入到 `<head>` 标签中。
+
+### 主题规范 {#specification released-on=v1.10.0}
+
+"light" 和 "dark" 为默认主题，其他主题为文档内自定义主题。
+
+<masa-example file="Examples.features.theme.Specification"></masa-example>
 
 ## 动态更改主题 {#change-theme}
 

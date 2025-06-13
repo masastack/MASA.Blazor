@@ -11,9 +11,6 @@ namespace Masa.Blazor
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
-        [CascadingParameter(Name = "AppIsDark")]
-        public bool AppIsDark { get; set; }
-
         [Parameter] public bool Auto { get; set; }
 
         [Parameter] [MasaApiParameter(true)] public bool CloseOnClick { get; set; } = true;

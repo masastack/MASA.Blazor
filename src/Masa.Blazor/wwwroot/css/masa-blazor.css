@@ -19609,7 +19609,6 @@ html.overflow-y-hidden {
     max-width: 0px;
     width: 0px;
     vertical-align: text-bottom;
-    margin: 0 -1px;
 }
 .m-divider--vertical.m-divider--inset {
     margin-top: 8px;
@@ -20877,8 +20876,8 @@ html.overflow-y-hidden {
 }
 .m-badge__badge {
     border-radius: 10px;
-    background: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
     display: inline-block;
     font-size: 12px;
     height: 20px;
@@ -21706,8 +21705,8 @@ html.overflow-y-hidden {
 }
 .m-carousel__controls {
     align-items: center;
-    background: rgba(var(--m-theme-surface-variant), var(--m-low-emphasis-opacity));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface), var(--m-low-emphasis-opacity));
+    color: rgba(var(--m-theme-inverse-on-surface));
     bottom: 0;
     display: flex;
     height: 50px;
@@ -22256,8 +22255,8 @@ html.overflow-y-hidden {
     align-items: center;
     justify-content: center;
     font-size: 0.75rem;
-    background: rgba(var(--m-theme-surface-variant), .7);
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface), .7);
+    color: rgba(var(--m-theme-inverse-on-surface));
     width: 32px;
     height: 32px;
     border-radius: 50% 50% 0;
@@ -23045,8 +23044,8 @@ html.overflow-y-hidden {
     font-size: 12px;
 }
 .m-date-picker-table .m-btn.m-btn--active {
-    background-color: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background-color: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
 }
 
 .m-date-picker-table--month td {
@@ -26694,13 +26693,13 @@ html.overflow-y-hidden {
     background: rgba(var(--m-theme-surface-container));
 }
 .m-stepper .m-stepper__step:not(.m-stepper__step--active):not(.m-stepper__step--complete):not(.m-stepper__step--error) .m-stepper__step__step {
-    background: rgba(var(--m-theme-surface-variant), var(--m-low-emphasis-opacity));
+    background: rgba(var(--m-theme-inverse-surface), var(--m-low-emphasis-opacity));
 }
 .m-stepper .m-stepper__step__step {
-    color: rgba(var(--m-theme-on-surface-variant));
+    color: rgba(var(--m-theme-inverse-on-surface));
 }
 .m-stepper .m-stepper__step__step .m-icon {
-    color: rgba(var(--m-theme-on-surface-variant));
+    color: rgba(var(--m-theme-inverse-on-surface));
 }
 .m-stepper .m-stepper__header .m-divider {
     border-color: rgba(var(--m-theme-outline-variant));
@@ -26709,7 +26708,7 @@ html.overflow-y-hidden {
     color: rgba(var(--m-theme-on-surface), var(--m-high-emphasis-opacity));
 }
 .m-stepper .m-stepper__step--inactive.m-stepper__step--editable:not(.m-stepper__step--error):hover .m-stepper__step__step {
-    background: rgba(var(--m-theme-surface-variant), var(--m-medium-emphasis-opacity));
+    background: rgba(var(--m-theme-inverse-surface), var(--m-medium-emphasis-opacity));
 }
 .m-stepper .m-stepper__step__label {
     color: rgba(var(--m-theme-on-surface), var(--m-low-emphasis-opacity));
@@ -27768,9 +27767,9 @@ html.overflow-y-hidden {
     padding: 10px;
 }
 .m-time-picker-clock__hand {
-    background: rgba(var(--m-theme-surface-variant));
-    border-color: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface));
+    border-color: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
     height: calc(50% - 4px);
     width: 2px;
     bottom: 50%;
@@ -27858,8 +27857,8 @@ html.overflow-y-hidden {
     width: 40px;
 }
 .m-time-picker-clock__item--active {
-    background: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
     cursor: default;
     z-index: 2;
 }
@@ -27880,8 +27879,8 @@ html.overflow-y-hidden {
     display: inline;
 }
 .m-tooltip__content {
-    background: rgba(var(--m-theme-surface-variant));
-    color: rgba(var(--m-theme-on-surface-variant));
+    background: rgba(var(--m-theme-inverse-surface));
+    color: rgba(var(--m-theme-inverse-on-surface));
     border-radius: 4px;
     font-size: 14px;
     line-height: 22px;
