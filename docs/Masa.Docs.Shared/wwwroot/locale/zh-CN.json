@@ -653,4 +653,5 @@
     "misc": "其他"
   },
   "nav-component-group-by-type": "组件按类型分类",
-
+  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分类"
+}

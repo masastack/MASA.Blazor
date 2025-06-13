@@ -91,7 +91,7 @@ Sometimes, you may want to perform certain asynchronous operations after a value
 ```razor
 <MCheckbox @bind-Value="agree"
            @bind-Value:after="HandleAgreeUpdated">
-</MChecbox>
+</MCheckbox>
 
 @code {
     private bool agree;

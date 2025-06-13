@@ -93,7 +93,7 @@ Blazor 编译器在编译时会将其"解糖"（desugar）为类似下面的形�
 ```razor
 <MCheckbox @bind-Value="agree"
            @bind-Value:after="HandleAgreeUpdated">
-</MChecbox>
+</MCheckbox>
 
 @code {
     private bool agree;

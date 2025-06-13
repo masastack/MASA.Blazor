@@ -2,7 +2,7 @@
 
 public class ActivatorProps(Dictionary<string, object> attrs)
 {
-    public Dictionary<string, object> Attrs { get; set; } = attrs;
+    public Dictionary<string, object> Attrs { get; internal set; } = attrs;
 
     /// <summary>
     /// Merges the current trigger attributes with another set of attributes.
@@ -11,10 +11,13 @@ public class ActivatorProps(Dictionary<string, object> attrs)
     /// <returns>Returns a new dictionary containing the merged attributes.</returns>
     public Dictionary<string, object> MergeAttrs(Dictionary<string, object> other)
     {
-        return new Dictionary<string, object>()
-            .Concat(Attrs)
-            .Concat(other)
-            .GroupBy(p => p.Key)
-            .ToDictionary(g => g.Key, g => g.First().Value);
+        var merged = new Dictionary<string, object>(Attrs);
+
+        foreach (var kvp in other)
+        {
+            merged[kvp.Key] = kvp.Value;
+        }
+
+        return merged;
     }
 }
