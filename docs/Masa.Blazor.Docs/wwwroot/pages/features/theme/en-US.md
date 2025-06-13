@@ -73,6 +73,10 @@ services.AddMasaBlazor(options =>
 
 The CSS of the theme style will automatically generate a `<style>` tag with an `id` of `masa-blazor-theme-stylesheet` and insert it into the `<head>` tag when the application starts.
 
+### Theme specification {#specification released-on=v1.10.0}
+
+<masa-example file="Examples.features.theme.Specification"></masa-example>
+
 ## Change theme
 
 Through the `MasaBlazor` service, you can change the theme at runtime.
