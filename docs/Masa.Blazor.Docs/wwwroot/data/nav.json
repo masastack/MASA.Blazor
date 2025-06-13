@@ -44,6 +44,21 @@
     ]
   },
   {
+    "title": "basic-concepts",
+    "icon": "mdi-lightbulb-outline",
+    "state": "new",
+    "items": [
+      {
+        "title": "activator",
+        "state": "new"
+      },
+      {
+        "title": "two-way-binding",
+        "state": "new"
+      }
+    ]
+  },
+  {
     "title": "styles-and-animations",
     "icon": "mdi-palette",
     "items": [

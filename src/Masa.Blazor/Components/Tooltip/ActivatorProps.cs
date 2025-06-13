@@ -1,12 +1,23 @@
-﻿namespace Masa.Blazor
+﻿namespace Masa.Blazor;
+
+public class ActivatorProps(Dictionary<string, object> attrs)
 {
-    public class ActivatorProps
+    public Dictionary<string, object> Attrs { get; internal set; } = attrs;
+
+    /// <summary>
+    /// Merges the current trigger attributes with another set of attributes.
+    /// </summary>
+    /// <param name="other">The other set of attributes to merge with.</param>
+    /// <returns>Returns a new dictionary containing the merged attributes.</returns>
+    public Dictionary<string, object> MergeAttrs(Dictionary<string, object> other)
     {
-        public ActivatorProps(Dictionary<string, object> attrs)
+        var merged = new Dictionary<string, object>(Attrs);
+
+        foreach (var kvp in other)
         {
-            Attrs = attrs;
+            merged[kvp.Key] = kvp.Value;
         }
 
-        public Dictionary<string, object> Attrs { get; set; }
+        return merged;
     }
 }
