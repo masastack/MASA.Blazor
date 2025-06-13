@@ -1,0 +1,17 @@
+﻿@inject IPopupService PopupService
+
+<MEmptyState Title="Something Went Wrong"
+             Text="There might be a problem with your connection or our servers. Please check your internet connection or try again later. We appreciate your patience."
+             Image="_content/Masa.Docs.Shared/img/404.png"
+             ActionText="Retry Request"
+             OnActionClick="@OnActionClick">
+</MEmptyState>
+
+@code {
+
+    private void OnActionClick()
+    {
+        _ = PopupService.EnqueueSnackbarAsync("Action clicked", "You clicked the action button!");
+    }
+
+}

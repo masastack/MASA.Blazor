@@ -208,6 +208,11 @@
         "type": "form"
       },
       {
+        "title": "empty-states",
+        "type": "feedback",
+        "state": "new"
+      },
+      {
         "title": "enqueued-snackbars",
         "type": "feedback"
       },

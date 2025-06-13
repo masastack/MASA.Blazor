@@ -262,6 +262,7 @@
   "theme-providers": "Theme providers",
   "timelines": "Timelines",
   "toggles": "Toggles",
+  "empty-states": "Empty state",
   "enqueued-snackbars": "Enqueued snackbars",
   "tooltips": "Tooltips",
   "treeview": "Treeview",

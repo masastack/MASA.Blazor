@@ -1,0 +1,89 @@
+﻿@namespace Masa.Blazor
+@inherits ThemeComponentBase
+
+<div id="@Id"
+     class="@GetClass()"
+     style="@GetStyle()"
+     @ref="@Ref"
+     @attributes="@Attributes">
+    @{
+        var media = MediaContent is not null;
+        var image = !string.IsNullOrWhiteSpace(Image);
+        var icon = !string.IsNullOrWhiteSpace(Icon);
+    }
+    @if (media || image || icon)
+    {
+        <div class="@_block.Element("media")">
+            @if (media)
+            {
+                var defaults = new Dictionary<string, IDictionary<string, object?>?>
+                {
+                    {
+                        nameof(MImage), new Dictionary<string, object?>()
+                        {
+                            { nameof(MImage.Src), Image },
+                            { nameof(MImage.Height), ComputedSize },
+                            { nameof(MImage.Contain), true }
+                        }
+                    },
+                    {
+                        nameof(MIcon), new Dictionary<string, object?>()
+                        {
+                            { nameof(MIcon.Icon), new Icon(Icon) },
+                            { nameof(MIcon.Size), ComputedSize }
+                        }
+                    }
+                };
+
+                <MDefaultsProvider Defaults="@defaults">
+                    @MediaContent
+                </MDefaultsProvider>
+            }
+            else if (image)
+            {
+                <MImage Src="@Image" Height="@ComputedSize" Contain/>
+            }
+            else
+            {
+                <MIcon Icon="@Icon" Color="@Color" Size="@ComputedSize"/>
+            }
+        </div>
+    }
+
+    @RenderFragments.RenderFragmentOrText(HeadlineContent, Headline, _block.Element("headline").Name)
+
+    @RenderFragments.RenderFragmentOrText(TitleContent, Title, _block.Element("title").Name)
+
+    @RenderFragments.RenderFragmentOrText(TextContent, Text, css: _block.Element("text").Name, style: CssStyleUtils.GetWidth(TextWidth, "max-width"))
+
+    @RenderFragments.RenderIfNotNull(ChildContent, css: _block.Element("content").Name)
+
+    @if (HasActions)
+    {
+        var defaults = new Dictionary<string, IDictionary<string, object?>?>
+        {
+            {
+                nameof(MButton), new Dictionary<string, object?>()
+                {
+                    { nameof(MButton.Class), _block.Element("action-btn").Name },
+                    { nameof(MButton.ChildContent), (RenderFragment)(b => b.AddContent(0, ActionText)) },
+                    { nameof(MButton.Color), Color ?? "inverse-surface" }, 
+                    { nameof(MButton.Href), Href } 
+                }
+            }
+        };
+
+        <div class="@_block.Element("actions")">
+            <MDefaultsProvider Defaults="@defaults">
+                @if (ActionsContent is not null)
+                {
+                    @ActionsContent.Invoke(_actionContext)
+                }
+                else
+                {
+                    <MButton OnClick="@HandleOnActionClick">@ActionText</MButton>
+                }
+            </MDefaultsProvider>
+        </div>
+    }
+</div>
