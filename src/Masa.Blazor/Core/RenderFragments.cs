@@ -128,7 +128,8 @@ public static class RenderFragments
         RenderFragment? fragment,
         string? text,
         string? css = null,
-        string? wrapperTag = "div")
+        string? wrapperTag = "div",
+        string? style = null)
     {
         var hasWrapper = !string.IsNullOrWhiteSpace(wrapperTag);
 
@@ -138,15 +139,16 @@ public static class RenderFragments
             {
                 builder.OpenElement(0, wrapperTag!);
                 builder.AddAttribute(1, "class", css);
+                builder.AddAttribute(2, "style", style);
             }
 
             if (fragment is not null)
             {
-                builder.AddContent(2, fragment);
+                builder.AddContent(3, fragment);
             }
             else
             {
-                builder.AddContent(3, text);
+                builder.AddContent(4, text);
             }
 
             if (hasWrapper)

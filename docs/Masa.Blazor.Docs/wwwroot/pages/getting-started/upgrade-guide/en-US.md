@@ -1,6 +1,6 @@
 # Upgrade Guides
 
-## Upgrading form v1.9.x to v1.10.0
+## Upgrading from v1.9.x to v1.10.0
 
 ### Features {#v1-10-0-features}
 
@@ -81,7 +81,7 @@ The component has been moved to a standalone project. If you are using this comp
 dotnet add package Masa.Blazor.JSComponents.Xgplayer
 ```
 
-## Upgrading form v1.8.x to v1.9.0
+## Upgrading from v1.8.x to v1.9.0
 
 ### Components {#v1-9-0-components}
 
@@ -140,7 +140,7 @@ The `TabbedPatterns` and `SelfPatterns` properties have been removed, use `TabRu
       }
 ```
 
-## Upgrading form v1.7.x to v1.8.0
+## Upgrading from v1.7.x to v1.8.0
 
 ### Components {#v1-8-0-components}
 
@@ -154,7 +154,7 @@ If you use custom styles, please note to modify to use the elevation style.
 + <MPagination Elevation="0" />
 ```
 
-## Upgrading form v1.6.x to v1.7.0
+## Upgrading from v1.6.x to v1.7.0
 
 ### Components {#v1-7-0-components}
 
@@ -214,7 +214,7 @@ After enabling the `Selectable` property, you can now select by clicking on the 
   </MTreeview>
 ```
 
-## Upgrading form v1.5.x to v1.6.0
+## Upgrading from v1.5.x to v1.6.0
 
 ### Change the script
 
@@ -246,7 +246,7 @@ The component was deprecated in v1.4.0 and has now been removed. It is recommend
 - For server-side pagination and sorting, the `ServerItemsLength` parameter must be provided, which is the total length of the server-side data.
 - The `Locale` parameter has never been implemented, and there is no need to implement it, it has now been removed.
 
-## Upgrading form v1.4.x to v1.5.0
+## Upgrading from v1.4.x to v1.5.0
 
 ### Components
 
@@ -269,7 +269,7 @@ Refactor using CSS approach.
   + <MBorder Color="#e91e63"></Border>
   ```
 
-## Upgrading form v1.2.x to v1.4.0
+## Upgrading from v1.2.x to v1.4.0
 
 ### Components
 
@@ -290,7 +290,7 @@ No longer use the **Windows** component as the switching container internally, s
 
 The class name `m-application--wrap` is changed to `m-application__wrap`.
 
-## Upgrading form v1.1.x to v1.2.0
+## Upgrading from v1.1.x to v1.2.0
 
 ### Components
 
@@ -300,7 +300,7 @@ The class name `m-application--wrap` is changed to `m-application__wrap`.
 
 - Removed the `FixedRight` property, now you can set the fixed position of the column through the `Fixed` property in the `Headers`.
 
-## Upgrading form v1.0.x to v1.1.0
+## Upgrading from v1.0.x to v1.1.0
 
 ### Components
 

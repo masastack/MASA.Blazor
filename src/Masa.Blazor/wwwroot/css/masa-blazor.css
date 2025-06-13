@@ -28122,4 +28122,73 @@ html.overflow-y-hidden {
     right: 0;
 }
 
+.m-empty-state {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    padding: 16px;
+}
+.m-empty-state--start {
+    align-items: flex-start;
+}
+.m-empty-state--center {
+    align-items: center;
+}
+.m-empty-state--end {
+    align-items: flex-end;
+}
+
+.m-empty-state__media {
+    text-align: center;
+    width: 100%;
+}
+.m-empty-state__media .v-icon {
+    color: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity));
+}
+
+.m-empty-state__headline {
+    color: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity));
+    font-size: 3.75rem;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.m-empty-state--mobile .m-empty-state__headline {
+    font-size: 2.125rem;
+}
+
+.m-empty-state__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.m-empty-state__text {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.425;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.m-empty-state__content {
+    padding: 24px 0;
+}
+
+.m-empty-state__actions {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+}
+
+.m-empty-state__action-btn.m-btn {
+    background-color: initial;
+    color: initial;
+}
+
 @import url(masa-blazor.extend.css);

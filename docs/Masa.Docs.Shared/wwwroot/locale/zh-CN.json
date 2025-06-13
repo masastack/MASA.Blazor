@@ -259,6 +259,7 @@
   "theme-providers": "Theme providers（主题提供程序）",
   "timelines": "Timelines（时间轴）",
   "toggles": "Toggles（切换）",
+  "empty-states": "Empty state（空状态）",
   "enqueued-snackbars": "Enqueued snackbars（消息队列）",
   "tooltips": "Tooltips（工具提示）",
   "treeview": "Treeview（树形视图）",
