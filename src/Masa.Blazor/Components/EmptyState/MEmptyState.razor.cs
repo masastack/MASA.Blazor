@@ -21,7 +21,7 @@ public partial class MEmptyState : ThemeComponentBase
     [Parameter] public StringNumber? MinWidth { get; set; }
     [Parameter] public StringNumber? Size { get; set; }
     [Parameter] public string? Text { get; set; }
-    [Parameter] public string? TextWidth { get; set; }
+    [Parameter] public StringNumber? TextWidth { get; set; }
     [Parameter] public string? Title { get; set; }
     [Parameter] public StringNumber? Width { get; set; }
     [Parameter] public EventCallback<MouseEventArgs> OnActionClick { get; set; }
@@ -70,7 +70,7 @@ public partial class MEmptyState : ThemeComponentBase
 
     private async Task HandleOnActionClick(MouseEventArgs args)
     {
-        await OnActionClick.InvokeAsync();
+        await OnActionClick.InvokeAsync(args);
     }
 }
 
