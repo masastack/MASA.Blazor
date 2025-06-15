@@ -95,7 +95,7 @@
            _data = new List<string> { "项目1", "项目2", "项目3" };
            
            _isLoading = false;
-           // 数据加载完成后再次调用StateHasChanged更新UI
+           // 这里不需要调用StateHasChanged，框架会自动处理
        }
    }
    ```
