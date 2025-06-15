@@ -53,6 +53,10 @@
         "state": "new"
       },
       {
+        "title": "rendering",
+        "state": "new"
+      },
+      {
         "title": "two-way-binding",
         "state": "new"
       }

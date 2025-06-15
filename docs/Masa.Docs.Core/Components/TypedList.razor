@@ -5,10 +5,10 @@
 {
     @if (groupItem.Key != ComponentType.Unknown)
     {
-        <MDivider Inset Class="mt-4"></MDivider>
+        <MDivider Inset Class="mt-3 mb-1"></MDivider>
 
-        <MSubheader Class="text--primary font-weight-black text-uppercase"
-                    Style="padding-left: 72px">
+        <MSubheader class="text--primary font-weight-black text-uppercase surface-container"
+                    style="padding-left: 72px; position: sticky; top: 0; z-index: 1;">
             @I18n.T("component-type." + groupItem.Key)
         </MSubheader>
     }
@@ -43,7 +43,7 @@
             }
         }
 
-        _group = flatItems.GroupBy(u => u.ComponentType).OrderBy(u => u.Key);
+        _group = flatItems.OrderBy(u => u.Title).GroupBy(u => u.ComponentType).OrderBy(u => u.Key);
     }
 
 }

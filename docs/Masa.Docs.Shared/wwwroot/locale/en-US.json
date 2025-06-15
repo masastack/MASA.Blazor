@@ -302,6 +302,7 @@
   "product.framework": "MASA Framework",
   "all": "All components",
   "activator": "Activator",
+  "rendering": "Rendering",
   "two-way-binding": "Two-way binding",
   "basic-concepts": "Basic concepts",
   "best-practices": "Best practices",
