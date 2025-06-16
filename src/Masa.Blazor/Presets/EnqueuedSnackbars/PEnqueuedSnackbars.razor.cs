@@ -39,7 +39,15 @@ namespace Masa.Blazor.Presets
 
         [Parameter]
         public bool Text { get; set; }
-        
+
+        /// <summary>
+        /// The duration in milliseconds for which duplicate messages will be filtered.
+        /// Filter by message fingerprint, which is combined from the title and content of the message.
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(1000, ReleasedIn = "v1.10.0")]
+        public int DuplicateMessageFilterDuration { get; set; } = 1000;
+
         private const string ROOT_CSS = "m-enqueued-snackbars";
         private static Block _block = new(ROOT_CSS);
         internal const int DEFAULT_MAX_COUNT = 5;
@@ -48,11 +56,17 @@ namespace Masa.Blazor.Presets
         internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
         private readonly List<SnackbarOptions> _stack = new();
+
         private readonly SemaphoreSlim _semaphore = new(1, 1);
 
-        private bool IsPositionBottom => Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
+        // Use for tracking recently displayed messages to filter duplicates
+        private readonly Dictionary<string, DateTime> _recentMessages = new();
 
-        private bool IsPositionTop => Position is SnackPosition.TopCenter or SnackPosition.TopLeft or SnackPosition.TopRight;
+        private bool IsPositionBottom =>
+            Position is SnackPosition.BottomCenter or SnackPosition.BottomLeft or SnackPosition.BottomRight;
+
+        private bool IsPositionTop =>
+            Position is SnackPosition.TopCenter or SnackPosition.TopLeft or SnackPosition.TopRight;
 
         protected override void OnInitialized()
         {
@@ -74,22 +88,22 @@ namespace Masa.Blazor.Presets
             {
                 yield return _block.Modifier("top");
             }
-            
+
             if (Position is SnackPosition.BottomLeft or SnackPosition.BottomRight or SnackPosition.BottomCenter)
             {
                 yield return _block.Modifier("bottom");
             }
-            
+
             if (Position is SnackPosition.TopCenter or SnackPosition.BottomCenter or SnackPosition.Center)
             {
                 yield return _block.Modifier("center");
             }
-            
+
             if (Position is SnackPosition.TopLeft or SnackPosition.BottomLeft)
             {
                 yield return _block.Modifier("left");
             }
-            
+
             if (Position is SnackPosition.TopRight or SnackPosition.BottomRight)
             {
                 yield return _block.Modifier("right");
@@ -120,6 +134,8 @@ namespace Masa.Blazor.Presets
 
             try
             {
+                if (IsDuplicateMessage(config)) return;
+
                 if (MaxCount > 0 && _stack.Count >= MaxCount)
                 {
                     var diff = _stack.Count - MaxCount + 1;
@@ -135,6 +151,46 @@ namespace Masa.Blazor.Presets
             {
                 _semaphore.Release();
             }
+        }
+
+        private bool IsDuplicateMessage(SnackbarOptions config)
+        {
+            // If the filter duration is set to 0, do not perform duplicate message filtering
+            if (DuplicateMessageFilterDuration <= 0) return false;
+
+            // Get message fingerprint using SnackbarOptions.MessageFingerprint property
+            var messageFingerprint = config.MessageFingerprint;
+
+            // Check if the same message has been shown in the timeout window
+            if (_recentMessages.TryGetValue(messageFingerprint, out var lastShownTime))
+            {
+                // Skip if the message is within the filter duration window
+                if ((DateTime.UtcNow - lastShownTime).TotalMilliseconds < DuplicateMessageFilterDuration)
+                {
+                    return true;
+                }
+            }
+
+            // Only clean up expired records when the dictionary becomes large (e.g., over 100 records)
+            if (_recentMessages.Count > 100)
+            {
+                var keysToRemove = _recentMessages
+                    .Where(kv => (DateTime.UtcNow - kv.Value).TotalMilliseconds >= DuplicateMessageFilterDuration)
+                    .Select(kv => kv.Key)
+                    .ToList();
+
+                foreach (var key in keysToRemove)
+                {
+                    _recentMessages.Remove(key);
+                }
+            }
+
+            // Update or add timestamp for the current message
+            _recentMessages[messageFingerprint] = DateTime.UtcNow;
+
+            // We've already checked time-based filtering above, and we're outside the filter window,
+            // so we should allow the message to be displayed even if it's already in the stack
+            return false;
         }
 
         internal async Task RemoveSnackbar(Guid id)

@@ -1,0 +1,59 @@
+<MContainer>
+    <MRow Align="AlignTypes.Center">
+        <MCol Cols="12" Md="6">
+            <MSlider @bind-Value="_filterDuration"
+                     Label="Filter Duration (ms)"
+                     Min="0"
+                     Max="3000"
+                     Step="100"
+                     ThumbLabel="@("always")"
+                     HideDetails="@true">
+            </MSlider>
+        </MCol>
+        <MCol Cols="12" Md="6">
+            <MButton Color="primary" OnClick="@ShowMessage" Block Class="text-none">
+                Add a message
+            </MButton>
+        </MCol>
+    </MRow>
+</MContainer>
+
+<PEnqueuedSnackbars @ref="_enqueuedSnackbars"
+                    DuplicateMessageFilterDuration="_filterDuration"
+                    Position="SnackPosition.BottomRight">
+</PEnqueuedSnackbars>
+
+<MCard Outlined>
+    <MCardText>
+        @foreach (var item in _clicks)
+        {
+            <div>@item.ToLongTimeString()</div>
+        }
+    </MCardText>
+</MCard>
+
+@code {
+    private PEnqueuedSnackbars? _enqueuedSnackbars;
+    private int _filterDuration = 1000;
+    private List<TimeOnly> _clicks = [];
+
+    private async Task ShowMessage()
+    {
+        if (_enqueuedSnackbars == null)
+        {
+            return;
+        }
+
+        var clickedAt = TimeOnly.FromDateTime(DateTime.UtcNow);
+        var options = new SnackbarOptions("Notification", "The message would not update", AlertTypes.Info);
+
+        _clicks.Add(clickedAt);
+        if (_clicks.Count > 5)
+        {
+            _clicks.RemoveAt(0);
+        }
+
+        await _enqueuedSnackbars.EnqueueSnackbar(options);
+    }
+
+}
