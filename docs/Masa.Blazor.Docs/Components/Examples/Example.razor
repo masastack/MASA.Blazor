@@ -17,11 +17,17 @@
                 MinHeight="52"
                 masa-blazor-custom-element>
             <MSheet Class="pa-4 m-example__comp" Rounded="true" Theme="@_theme">
-                @if (_type is not null)
+                @if (_type is not null && DisableReason is null)
                 {
                     <MErrorHandler>
                         <DynamicComponent Type="_type" @key="_typeIdentity"></DynamicComponent>
                     </MErrorHandler>
+                }
+                else if (DisableReason is not null)
+                {
+                    <MAlert Type="AlertTypes.Warning" Class="mb-0">
+                        @DisableReason
+                    </MAlert>
                 }
             </MSheet>
 
