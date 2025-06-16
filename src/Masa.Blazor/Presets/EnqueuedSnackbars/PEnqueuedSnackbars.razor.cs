@@ -134,7 +134,11 @@ namespace Masa.Blazor.Presets
 
             try
             {
-                if (IsDuplicateMessage(config)) return;
+                if (IsDuplicateMessage(config))
+                {
+                    _semaphore.Release();
+                    return;
+                }
 
                 if (MaxCount > 0 && _stack.Count >= MaxCount)
                 {
