@@ -45,6 +45,7 @@
   "direction": "双向性",
   "layouts": "布局",
   "two-way-binding": "双向绑定",
+  "rendering": "渲染",
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
