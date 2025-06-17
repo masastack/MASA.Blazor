@@ -27,6 +27,8 @@ public partial class Example : NextTickComponentBase
 
     [Parameter] public string? Theme { get; set; }
 
+    [Parameter] public string? DisableReason { get; set; }
+
     /// <summary>
     /// 编译器需要使用的程序集
     /// </summary>

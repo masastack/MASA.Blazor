@@ -37,7 +37,9 @@
                         MinHeight="400"
                         MaxHeight="400"
                         Rounded="@("t")">
-                        <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
+                        <MErrorHandler>
+                            <DynamicComponent Type="@_type" Parameters="@Parameters"></DynamicComponent>
+                        </MErrorHandler>
                     </MSheet>
                 </MCol>
 
