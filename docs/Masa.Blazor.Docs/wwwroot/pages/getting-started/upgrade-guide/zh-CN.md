@@ -11,7 +11,7 @@
   ```diff
     .test {
   -   color: var(--m-theme-primary);
-  +   color: rgba(var(--m-theme-primary), 1);
+  +   color: rgba(var(--m-theme-primary));
     }
   ```
 - `Light`和`Dark`属性标记为过时属性，仍然可用，但后续建议使用 `Theme` 属性。

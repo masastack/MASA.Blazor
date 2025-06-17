@@ -11,7 +11,7 @@
   ```diff
     .test {
   -   color: var(--m-theme-primary);
-  +   color: rgba(var(--m-theme-primary), 1);
+  +   color: rgba(var(--m-theme-primary));
     }
   ```
 - The `Light` and `Dark` properties are marked as deprecated, still available but recommended to use the `Theme` property in the future.

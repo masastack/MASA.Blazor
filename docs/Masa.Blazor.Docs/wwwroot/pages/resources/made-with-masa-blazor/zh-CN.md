@@ -14,11 +14,12 @@
 
 <app-alert type="warning" content="不对项目代码质量和功能做任何保证，仅供参考。"></app-alert>
 
-| 项目                                                                | 类型            | 说明                                                     |
-|-------------------------------------------------------------------|---------------|--------------------------------------------------------|
-| [ChatGpt.Desktop](https://github.com/239573049/ChatGpt.Desktop)   | tags:web;maui | ChatGpt Desktop support Android，IOS，Mac，Linux，Win，Web  |
-| [CnGal](https://github.com/CnGal/CnGalWebSite)                    | tags:web;pwa  | CnGal Information Station                              |
+| 项目                                                                | 类型            | 说明                                                    |
+|-------------------------------------------------------------------|---------------|-------------------------------------------------------|
+| [ChatGpt.Desktop](https://github.com/239573049/ChatGpt.Desktop)   | tags:web;maui | ChatGpt Desktop support Android，IOS，Mac，Linux，Win，Web |
+| [CnGal](https://github.com/CnGal/CnGalWebSite)                    | tags:web;pwa  | CnGal Information Station                             |
 | [SwashbucklerDiary](https://github.com/Yu-Core/SwashbucklerDiary) | tags:maui;web | An open source, cross platform local diary application |
-| [ThingsGateway](https://github.com/kimdiego2098/ThingsGateway)    | tags:web;iot  | NetCore 跨平台边缘采集网关(工业设备采集)                              |
-| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      | 天气预报示例                                                 |
-| [AnotherFSM](https://github.com/Naoki326/AnotherFSM)              | tags:wasm     | 基于 Drawflow 构建的有限状态机工具                                 |
+| [ThingsGateway](https://github.com/kimdiego2098/ThingsGateway)    | tags:web;iot  | NetCore 跨平台边缘采集网关(工业设备采集)                             |
+| [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      | 天气预报示例                                                |
+| [AnotherFSM](https://github.com/Naoki326/AnotherFSM)              | tags:wasm     | 基于 Drawflow 构建的有限状态机工具                                |
+| [Wordpuzzle](https://www.wordpuzzle.win/) | tags:wasm | Wordpuzzle 是一个基于 Blazor WASM 的文字游戏                    |

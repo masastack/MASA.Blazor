@@ -23,3 +23,4 @@ A list of projects using MASA Blazor. If your project uses MASA Blazor, feel fre
 | [ThingsGateway](https://github.com/kimdiego2098/ThingsGateway)    | tags:web;iot  | NetCore 跨平台边缘采集网关(工业设备采集)                             |
 | [YourWeather](https://github.com/Yu-Core/YourWeather)             | tags:web      | A demo of weather forecast                            |
 | [AnotherFSM](https://github.com/Naoki326/AnotherFSM)              | tags: wasm    | Finite state machine tool built on Drawflow           |
+| [Wordpuzzle](https://www.wordpuzzle.win/) | tags:wasm | Wordpuzzle is a text game based on Blazor WASM         |
