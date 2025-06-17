@@ -71,7 +71,7 @@ public class MMarkdown : Container
         yield return "vditor";
         if (Options != null && Options.TryGetValue("theme", out var theme) && theme is "dark")
         {
-            yield return "vditor-dark";
+            yield return "vditor--dark";
         }
     }
 
