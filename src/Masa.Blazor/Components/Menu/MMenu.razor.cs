@@ -70,7 +70,33 @@ namespace Masa.Blazor
             }
         }
 
-        private string? CalculatedMaxHeight => Auto ? "200px" : MaxHeight.ConvertToUnit();
+        private string? CalculatedMaxHeight => Auto ? "200px" : ComputedMaxHeight;
+
+        private string? ComputedMaxHeight
+        {
+            get
+            {
+                var dynamicMaxHeight = Dimensions.Content.MaxHeight;
+                if (MaxHeight.IsT0)
+                {
+                    if (MaxHeight.AsT0 == "auto")
+                    {
+                        return dynamicMaxHeight + "px";
+                    }
+                    else
+                    {
+                        // 100%? how to handle this?
+                        return MaxHeight.ToString();
+                    }
+                }
+                else
+                {
+                    var inputMaxHeight = MaxHeight.ToDouble();
+                    var minMaxHeight = Math.Min(inputMaxHeight, dynamicMaxHeight);
+                    return minMaxHeight + "px";
+                }
+            }
+        }
 
         private string? CalculatedMaxWidth => MaxWidth?.ConvertToUnit();
 

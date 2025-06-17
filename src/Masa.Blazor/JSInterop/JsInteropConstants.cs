@@ -136,7 +136,7 @@ public static class JsInteropConstants
 
     public static string UpdateWindowTransition => $"{JsInteropFuncNamePrefix}updateWindowTransition";
 
-    public static string InvokeMultipleMethod => $"{JsInteropFuncNamePrefix}invokeMultipleMethod";
+    internal static string InvokeMultipleMethod => $"{JsInteropFuncNamePrefix}invokeMultipleMethod";
 
     public static string SetCookie => $"{JsInteropFuncNamePrefix}setCookie";
 

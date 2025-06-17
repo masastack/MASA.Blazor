@@ -1094,7 +1094,12 @@ function measure(el: HTMLElement, isDefaultAttach) {
     rect.top = parseInt(style.marginTop!)
   }
 
-  return rect
+  const maxHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  return {
+    ...rect,
+    maxHeight,
+  };
 }
 
 function getRoundedBoundedClientRect(el: Element) {
