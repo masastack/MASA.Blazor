@@ -1,23 +1,28 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 
 namespace Masa.Blazor
 {
     public class ItemValue<TItem>
     {
-        private Func<TItem, object>? _factory;
-
-        public ItemValue(string? name)
+        public ItemValue(string? name = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
-        public string Name { get; }
+        internal ItemValue(Func<TItem, object?> factory)
+        {
+            Factory = factory ?? throw new ArgumentNullException(nameof(factory));
+        }
 
-        public Func<TItem, object>? Factory
+        public string? Name { get; }
+
+        [field: AllowNull, MaybeNull]
+        public Func<TItem, object?> Factory
         {
             get
             {
-                if (_factory != null) return _factory;
+                if (field != null) return field;
 
                 try
                 {
@@ -26,21 +31,19 @@ namespace Masa.Blazor
                     var valueExpression = Expression.Convert(propertyExpression, typeof(object));
 
                     var lambdaExpression = Expression.Lambda<Func<TItem, object>>(valueExpression, parameterExpression);
-                    _factory = lambdaExpression.Compile();
+                    field = lambdaExpression.Compile();
                 }
                 catch (Exception)
                 {
-                    _factory = null;
+                    throw new ArgumentException(
+                        $"The property '{Name}' does not exist on type '{typeof(TItem).FullName}'.", nameof(Name));
                 }
 
-                return _factory;
+                return field;
             }
         }
 
-        public object? Invoke(TItem item)
-        {
-            return Factory?.Invoke(item);
-        }
+        public object? Invoke(TItem item) => Factory.Invoke(item);
 
         public static implicit operator string(ItemValue<TItem> itemValue) => itemValue.Name;
 

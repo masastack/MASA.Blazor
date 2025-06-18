@@ -17,6 +17,12 @@ The standard data-table will by default render your data as simple rows.
 
 ### Props
 
+#### ValueExpression {released-on=v1.11.0}
+
+The `DataTableHeader<TItem>.ValueExpression` property allows you to specify an expression to get the value of the data table. This is useful when working with complex objects in your data table.
+
+<masa-example file="Examples.components.data_tables.ValueExpression"></masa-example>
+
 #### Cell ellipsis {released-on=v1.5.0}
 
 Setting the `Width` property on a cell and enabling the `Ellipsis` property will show an ellipsis when the cell content overflows.
