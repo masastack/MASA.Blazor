@@ -2,6 +2,8 @@ class ResizableDataTable {
     constructor(dataTable, dotNETHelper) {
         this.dataTable = dataTable;
         this.dotnetHelper = dotNETHelper;
+        this.wrapper = this.dataTable.querySelector(".m-data-table__wrapper");
+        console.log('this.wrapper', this.wrapper);
         this.table = this.dataTable.querySelector("table");
         this.header = this.table.querySelector("thead").getElementsByTagName("tr")[0];
         this.documentEventRegistered = false;
@@ -14,6 +16,7 @@ class ResizableDataTable {
             this.documentEventRegistered = true;
         }
         this.header.addEventListener("mousedown", this.wrapperMousedown.bind(this));
+        this.wrapper.addEventListener('scroll', this.scroll.bind(this));
     }
     paddingDiff(col) {
         if (this.getStyleVal(col, "box-sizing") == "border-box") {
@@ -29,6 +32,27 @@ class ResizableDataTable {
     wrapperMousedown(e) {
         if (e.target instanceof HTMLElement && e.target.classList.contains("masa-table-viewer__header-column-resize")) {
             this.mousedown(e);
+        }
+    }
+    scroll(e) {
+        const scrollWidth = this.wrapper.scrollWidth;
+        const clientWidth = this.wrapper.clientWidth;
+        const scrollLeft = this.wrapper.scrollLeft;
+        const rtl = this.wrapper.parentElement.classList.contains('m-data-table--rtl');
+        if (Math.abs(scrollWidth - ((rtl ? -scrollLeft : scrollLeft) + clientWidth)) < 1) {
+            this.wrapper.classList.remove('scrolling');
+            this.wrapper.classList.remove('scrolled-to-left');
+            this.wrapper.classList.add('scrolled-to-right');
+        }
+        else if (Math.abs(scrollLeft - (rtl ? scrollWidth - clientWidth : 0)) < 1) {
+            this.wrapper.classList.remove('scrolling');
+            this.wrapper.classList.remove('scrolled-to-right');
+            this.wrapper.classList.add('scrolled-to-left');
+        }
+        else {
+            this.wrapper.classList.remove('scrolled-to-right');
+            this.wrapper.classList.remove('scrolled-to-left');
+            this.wrapper.classList.add('scrolling');
         }
     }
     mousedown(e) {
@@ -75,6 +99,7 @@ class ResizableDataTable {
     }
     dispose() {
         this.header.removeEventListener("mousedown", this.wrapperMousedown.bind(this));
+        this.wrapper.removeEventListener('scroll', this.scroll.bind(this));
         document.removeEventListener("mousemove", this.mousemove.bind(this));
         document.removeEventListener("mouseup", this.mouseup.bind(this));
         this.documentEventRegistered = false;

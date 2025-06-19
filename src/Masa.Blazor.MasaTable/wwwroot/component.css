@@ -98,7 +98,7 @@
 
 .masa-table-viewer__header-column-resize {
   position: absolute;
-  right: -1px;
+  right: 0;
   top: 0;
   bottom: 0;
   width: 4px;

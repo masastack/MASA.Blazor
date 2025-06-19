@@ -5,12 +5,13 @@
 @inject GraphQLHttpClient GraphQLClient
 
 <MButtonGroup Value="(int)_role"
-              ValueChanged="v => _role = (Role)v.ToInt32()">
+              ValueChanged="v => _role = (Role)v.ToInt32()"
+              Mandatory>
     <MButton Value="(int)Role.Manager">Manager</MButton>
     <MButton Value="(int)Role.User">User</MButton>
 </MButtonGroup>
 
-<MTemplateTable SheetProvider="@_sheetProvider"
+<MTemplateTable Sheet="_sheet"
                 ItemsProvider="@_itemsProvider"
                 UserViews="_userViews"
                 OnUserViewAdd="@OnUserViewAdd"
@@ -24,22 +25,25 @@
     <ViewActionsContent>
         <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
     </ViewActionsContent>
-    <RowActionsContent>
-        <DetailAction/>
-        <UpdateAction/>
-        <DeleteAction Icon="mdi-delete-variant" Tooltip="删除" OnClick="OnDelete"/>
-        <ActionTemplate Icon="mdi-home" Tooltip="Custom Action !" OnClick="OnCustomAction"/>
-    </RowActionsContent>
+    @* <RowActionsContent> *@
+    @*     <RowDetailAction Icon="mdi-eye" Text="详情" /> *@
+    @*     <RowAction Icon="mdi-star" Text="Custom Action !" OnClick="OnCustomAction"/> *@
+    @*     <RowAction Icon="mdi-delete-variant" Text="删除" Index="3" Menu OnClick="OnDelete"/> *@
+    @* </RowActionsContent> *@
 </MTemplateTable>
 
 @code {
     private Role _role;
+
+    private Sheet? _sheet;
+    
     private IList<View> _userViews = [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            _sheet = await HttpClient.GetFromJsonAsync<Sheet>("http://localhost:5297/sheet");
             _userViews = await HttpClient.GetFromJsonAsync<IList<View>>("http://localhost:5297/views/cyx");
             StateHasChanged();
         }

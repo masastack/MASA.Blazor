@@ -35,7 +35,7 @@ public class Query
         {
             return _fakeUsers;
         }
-
+        
         return _fakeUsers.Where(u => u.Name == name);
     }
 

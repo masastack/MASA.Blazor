@@ -10,19 +10,12 @@ public partial class TemplateTable
 
     [Inject] private IPopupService PopupService { get; set; } = default!;
 
-    private SheetProvider? _sheetProvider;
     private UserViewsProvider? _userViewsProvider;
     private ItemsProvider? _itemsProvider;
     private bool _sheetRequested;
 
     protected override async Task OnInitializedAsync()
     {
-        _sheetProvider = async req =>
-        {
-            var request = new GraphQLRequest(req.Query);
-            return await GraphQLClient.SendQueryAsync<SheetProviderResult>(request);
-        };
-
         _itemsProvider = async req =>
         {
             var formatQuery = req.FormatQuery(
