@@ -2,6 +2,10 @@
 
 public class ThemeOptions
 {
+    public bool IsDarkScheme { get; internal set; }
+
+    public string ColorScheme => IsDarkScheme ? "dark" : "normal";
+
     public string? CombinePrefix { get; set; }
 
     public string? Primary { get; set; }
@@ -35,11 +39,23 @@ public class ThemeOptions
 
     public string? OnWarning { get; set; }
 
+    public string? SurfaceDim { get; set; }
+
     public string? Surface { get; set; }
 
-    public string? OnSurface { get; set; }
+    public string? SurfaceBright { get; set; }
+
+    public string? SurfaceContainerLowest { get; set; }
+
+    public string? SurfaceContainerLow { get; set; }
 
     public string? SurfaceContainer { get; set; }
+
+    public string? SurfaceContainerHigh { get; set; }
+
+    public string? SurfaceContainerHighest { get; set; }
+
+    public string? OnSurface { get; set; }
 
     public string? InverseSurface { get; set; }
 
@@ -47,33 +63,14 @@ public class ThemeOptions
 
     public string? InversePrimary { get; set; }
 
-    public Dictionary<string, string> UserDefined { get; } = new();
-}
+    // TODO: Scrim, Shadow
 
-public class Theme
-{
-    public Theme(bool dark, ThemeOptions lightTheme, ThemeOptions darkTheme)
+    public ThemeVariables Variables { get; } = MasaBlazorPreset.GetThemeVariables();
+
+    public Dictionary<string, ColorPairing> UserDefined { get; } = new();
+
+    public ThemeOptions ShallowCopy()
     {
-        Dark = dark;
-        Themes = new Themes(lightTheme, darkTheme);
+        return (ThemeOptions)this.MemberwiseClone();
     }
-
-    public bool Dark { get; set; }
-
-    public Themes Themes { get; }
-
-    public ThemeOptions CurrentTheme => Dark ? Themes.Dark : Themes.Light;
-}
-
-public class Themes
-{
-    public Themes(ThemeOptions light, ThemeOptions dark)
-    {
-        Light = light;
-        Dark = dark;
-    }
-
-    public ThemeOptions Dark { get; }
-
-    public ThemeOptions Light { get; }
 }

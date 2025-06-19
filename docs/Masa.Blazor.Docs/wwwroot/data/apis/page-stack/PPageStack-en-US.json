@@ -2,6 +2,7 @@
   "props": {
     "fallbackUri": "In the stack page, if there is no previous page after clicking the return button in the upper left corner, the page to jump to",
     "name": "The unique name of PageStackNavController. Only need to be set when there are multiple stack components in your application",
-    "tabbedPatterns": "A regular expression representing a group of pages that are bottom tabbed pages, used to distinguish pages of stack pages"
+    "tabRules": "Set the rules for all tab pages. `Pattern` accepts a regular expression that matches the URL; `Persistent` indicates whether to cache the current tab page state; `Self` can be enabled when the route has parameter matching",
+    "appBarAlwaysVisible": "Each page in the stack will have an app bar by default. If set to `false`, only the page that include the [PStackPageBar](/blazor/mobiles/page-stack#pstackpagebar) component will have an app bar."
   }
 }

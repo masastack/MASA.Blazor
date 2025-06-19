@@ -1,0 +1,11 @@
+{
+  "extends": {
+    "path": "autocompletes/MAutocomplete"
+  },
+  "props": {
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

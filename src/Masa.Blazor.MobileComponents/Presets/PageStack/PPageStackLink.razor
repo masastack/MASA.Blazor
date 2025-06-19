@@ -1,0 +1,45 @@
+﻿@namespace Masa.Blazor.Presets
+
+@if (CustomContent is null)
+{
+    <a href="@Href"
+       @onclick="@OnClick"
+       @onclick:preventDefault
+       @attributes="@Attributes">
+        @ChildContent
+    </a>
+}
+else
+{
+    @CustomContent?.Invoke(OnClick)
+}
+
+@code {
+    [Inject] private PageStackNavController NavController { get; set; } = null!;
+
+    [Parameter] public string? Href { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// A custom content to replace the anchor tag, useful for user-defined components.
+    /// Provides a push action to navigate to the specified page,
+    /// same as the <see cref="PageStackNavController.Push"/>.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<Action>? CustomContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object?> Attributes { get; set; } = [];
+
+    private void OnClick()
+    {
+        if (Href is null)
+        {
+            return;
+        }
+
+        NavController.Push(Href);
+    }
+
+}

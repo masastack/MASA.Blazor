@@ -9,7 +9,7 @@ export default defineConfig({
   input: "./src/proxies/gridstack/index.ts",
   output: [
     {
-      file: "../Masa.Blazor/wwwroot/js/proxies/gridstack-proxy.js",
+      file: "../Masa.Blazor.JSComponents.Gridstack/wwwroot/gridstack-interop.js",
       format: "esm",
       sourcemap: true,
     },

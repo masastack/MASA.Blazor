@@ -33,7 +33,7 @@ public class PatternPathComponentBase : MasaComponentBase
         UpsertCachedSelfPatternRegexes();
     }
 
-    protected virtual PatternPath GetCurrentPatternPath()
+    internal virtual PatternPath GetCurrentPatternPath()
     {
         var absolutePath = NavigationManager.GetAbsolutePath();
         var selfPatternRegex = CachedSelfPatternRegexes.FirstOrDefault(r => r.IsMatch(absolutePath));

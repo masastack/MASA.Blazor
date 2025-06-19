@@ -3,11 +3,11 @@
 @inject I18n I18n
 
 <MHover>
-    <div Class="app-code @Class" @attributes="@context.Attrs">
-        @if (FileNameExists)
+    <div id="@Id" Class="app-code @Class" @attributes="@context.Attrs">
+        @if (HasToolbar)
         {
-            <MLazy MinHeight="48">
-                <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Dark Color="#47464E">
+            <MLazy MinHeight="40">
+                <MToolbar Dense Class="px-1 elevation-0 text-body-2 rounded-t" Height="40">
                     <MIcon Dense Class="mr-1">mdi-file-tree</MIcon>
                     @FileName
                 </MToolbar>
@@ -30,7 +30,9 @@
         else
         {
             <FadeTransition>
-                <AppCopyButton Show="@context.Hover" Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
+                <AppCopyButton Show="@context.Hover" Content="@Code"
+                               HasToolbar="@HasToolbar"
+                               Class="@($"mr-n2 mt-n{(HasToolbar ? "3" : "2")}")"></AppCopyButton>
             </FadeTransition>
         }
     </div>
@@ -38,11 +40,11 @@
 
 @code {
 
-    [CascadingParameter(Name = "IsDark")] public bool IsDark { get; set; }
-
     [Parameter] [EditorRequired] public string? Code { get; set; }
 
     [Parameter] [EditorRequired] public string? Language { get; set; }
+
+    [Parameter] public string? Id { get; set; }
 
     [Parameter] public string? Class { get; set; }
 
@@ -54,13 +56,13 @@
 
     [Parameter] public bool IsUsage { get; set; }
 
-    private bool FileNameExists => !string.IsNullOrWhiteSpace(FileName);
+    private bool HasToolbar => !string.IsNullOrWhiteSpace(FileName);
 
     private string ComputedClass
     {
         get
         {
-            if (RoundedTop0 || FileNameExists)
+            if (RoundedTop0 || HasToolbar)
             {
                 return "rounded-b";
             }

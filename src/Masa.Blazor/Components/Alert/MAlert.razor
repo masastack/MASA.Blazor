@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     @if (Transition != null)
     {
         <Transition Name="@Transition">
@@ -37,7 +37,6 @@
             @if (IsShowIcon)
             {
                 <MIcon Color="@IconColor"
-                       Dark="@IsDarkTheme"
                        Class="m-alert__icon">
                     @IconContent
                 </MIcon>
@@ -63,7 +62,7 @@
 
             @if (Border != Borders.None)
             {
-                <div class="@_borderModifierBuilder.Add("has-color", ColoredBorder).Add(Border, Borders.None, "").AddTextColor(Color, ColoredBorder).AddClass(Type.ToString().ToLowerInvariant(), HasTypedBorder)"
+                <div class="@_borderModifierBuilder.Add("has-color", ColoredBorder).Add(Border, Borders.None, "").AddTextColor(Color, ColoredBorder).AddTextColor(Type.ToString().ToLowerInvariant(), HasTypedBorder)"
                      style="@CssStyleUtils.GetTextColor(Color, ColoredBorder)">
                 </div>
             }

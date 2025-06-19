@@ -1,7 +1,7 @@
 ---
 title: Markdown parsers
 desc: "Packaging based on [markdown-it(v13.0.1)](https://github.com/markdown-it/markdown-it)."
-tag: JS Proxy
+tag: JS Wrapper
 related:
   - /blazor/components/syntax-highlights
   - /blazor/components/markdowns
@@ -21,6 +21,12 @@ This component built-in the following third-party markdown-it plugins:
 > About how to customize rules and custom containers, please refer to the [source code]((https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Docs.Shared/wwwroot/js/markdown-parser.js)) of this document.
 
 > **prism** and **highlightjs** highlighting schemes are supported, see the [MSyntaxHighlight](/blazor/components/syntax-highlights) component for details.
+
+## Installation
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
 
 ## Usage
 

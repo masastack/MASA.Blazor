@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="src\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj" />
+  <Project Path="src/Masa.Blazor.Docs.ApiGenerator/Masa.Blazor.Docs.ApiGenerator.csproj" />
+  <Project Path="src/Masa.Blazor.Docs.ComponentApiGenerator/Masa.Blazor.Docs.ComponentApiGenerator.csproj" />
+  <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  <Project Path="src/Masa.Blazor.SomethingSkia/Masa.Blazor.SomethingSkia.csproj" />
+  <Project Path="src/Masa.Blazor.JSComponents.DriverJS/Masa.Blazor.JSComponents.DriverJS.csproj" />
+  <Project Path="src\Masa.Blazor.JSComponents.PdfJS\Masa.Blazor.JSComponents.PdfJS.csproj" />
+  <Project Path="src\Masa.Blazor.JSComponents.Xgplayer\Masa.Blazor.JSComponents.Xgplayer.csproj" />
+  <Project Path="src/Masa.Blazor.JSComponents.MarkdownIt/Masa.Blazor.JSComponents.MarkdownIt.csproj" />
+  <Project Path="src\Masa.Blazor.JSComponents.Swiper\Masa.Blazor.JSComponents.Swiper.csproj" />
+  <Project Path="src\Masa.Blazor.JSComponents.Gridstack\Masa.Blazor.JSComponents.Gridstack.csproj" />
+  <Project Path="src\Masa.Blazor.MobileComponents\Masa.Blazor.MobileComponents.csproj" />
+</Solution>

@@ -97,6 +97,18 @@
         public bool DisableNextPageIcon => Options?.ItemsPerPage <= 0 || Options?.Page * Options?.ItemsPerPage >= Pagination?.ItemsLength ||
                                            Pagination?.PageStop < 0;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            
+            MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+        }
+
+        private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+
         public override Task SetParametersAsync(ParameterView parameters)
         {
             ItemsPerPageText = I18n.T("$masaBlazor.dataFooter.itemsPerPageText");
@@ -109,19 +121,6 @@
         protected override void OnParametersSet()
         {
             Parameters?.Invoke(this);
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
-            {
-                MasaBlazor.OnRTLChange += OnRTLChange;
-            }
-        }
-
-        private void OnRTLChange(bool obj)
-        {
-            InvokeStateHasChanged();
         }
 
         private int ItemsPagePageValue
@@ -207,6 +206,12 @@
                     options.ItemsPerPage = Options.ItemsPerPage;
                 });
             }
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+            return base.DisposeAsyncCore();
         }
     }
 }

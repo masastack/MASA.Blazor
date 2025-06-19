@@ -13,11 +13,12 @@ related:
 
 一组访问过的标签页组件，可以通过点击标签页切换到对应的页面。
 
-| 主要参数           | 说明                                                                                                                   | 
-|----------------|----------------------------------------------------------------------------------------------------------------------|
-| `TabOptions`   | 可以通过 `TabOptions` 属性自定义标签页的标题和图标。如果通过 **PPageTabsProvider** 组件提供的 `UpdateTabTitle` 方法更改标题，将会覆盖 `TabOptions` 属性设置的标题。 |
+| 主要参数          | 说明                                                                                                                   | 
+|---------------|----------------------------------------------------------------------------------------------------------------------|
+| `TabOptions`  | 可以通过 `TabOptions` 属性自定义标签页的标题和图标。如果通过 **PPageTabsProvider** 组件提供的 `UpdateTabTitle` 方法更改标题，将会覆盖 `TabOptions` 属性设置的标题。 |
 | `SelfPatterns` | 用于模糊匹配路径，所有匹配成功的路径都会显示在同一个标签页中。行为与`<a></a>`标签的 `href` 属性的 `_self` 类似。                                                |
-| `OnClose`      | 自定义关闭标签页的行为。返回 `true` 表示关闭标签页，返回 `false` 表示不关闭标签页。                                                                   |
+| `FixedTabs`   | 固定标签页的路径列表。固定标签页不会被关闭。                                                                                     |
+| `OnClose`     | 自定义关闭标签页的行为。返回 `true` 表示关闭标签页，返回 `false` 表示不关闭标签页。                                                                   |
 
 > 需配合 **PPageContainer** 组件一起使用。
 
@@ -48,7 +49,7 @@ related:
 - [PageTabsLayout.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageTabsLayout.razor)
   布局：演示使用 **PPageTabs**、**PPageContainer**和**PPageTabsProvider** 组件，以及如何使用 `TabOptions` 属性自定义标签页的标题和图标。
 - [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
-  Page1：演示保存页面状态的功能
+  Page1：演示保存页面状态和固定标签页的功能
 - [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
   Page2：演示使用`ExcludedPatterns`属性后不会缓存状态的功能，以及不可关闭的功能
 - [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)

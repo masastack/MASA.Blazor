@@ -17,6 +17,7 @@ A set of visited tab components that can be switched to the corresponding page b
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TabOptions`      | Customize the title and icon of the tab. If you change the title through the `UpdateTabTitle` method provided by the **PPageTabsProvider** component, the title set by the `TabOptions` parameter will be overwritten. |
 | `SelfPatterns`    | Used for fuzzy matching paths. All successful paths are displayed in the same tab. The behavior is similar to `_self` of the `href` attribute of the `<a></a>` tag.                                                    |
+| `FixedTabs`       | A list of paths for fixed tabs. Fixed tabs cannot be closed.                                                                                                                                                           |
 | `OnClose`         | Customize the behavior of closing the tab. Return `true` to close the tab and return `false` to not close the tab.                                                                                                     |
 
 > It needs to be used with the **PPageContainer** component.
@@ -53,7 +54,7 @@ The specific source codes are listed below:
   Layout: demonstrate the use of **PPageTabs**, **PPageContainer** and **PPageTabsProvider** components, and how to
   use `TabOptions` to customize the title and icon of the tab.
 - [PageTabs1.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs1.razor)
-  Page1: demonstrate the ability to save page state.
+  Page1: demonstrate the ability to save page state and the function of fixed tabs.
 - [PageTabs2.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs2.razor)
   Page2: demonstrate that the state will not be cached after using the `ExcludedPatterns` property, and the function of not being able to close.
 - [PageTabs3.razor](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Pages/PageTabs3.razor)

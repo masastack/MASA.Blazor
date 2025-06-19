@@ -1,8 +1,8 @@
 ﻿@namespace Masa.Blazor
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <ToggleableTransitionElement
         Tag="@Tag"
         Value="@_transitionValue"

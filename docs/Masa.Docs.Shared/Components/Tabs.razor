@@ -4,38 +4,30 @@
 
 <MTabs Class="default-tabs"
        Color="primary"
+       BackgroundColor="transparent"
        Routable
+       Optional
        @ref="_tabs">
     @foreach (var item in _internalMenu)
     {
-        <MTab Ripple="false"
-              Href="@item.Href"
+        if (Project != null && item.Href == "/")
+        {
+            continue;
+        }
+        
+        <MTab Href="@item.Href"
               Target="@item.Target"
               MatchPattern="@item.MatchPattern">
-            @if (item.Href == "/")
-            {
-                <MBadge Color="primary"
-                        Content="@Project"
-                        Class="text-capitalize"
-                        Value="@(!string.IsNullOrWhiteSpace(Project))">
-                    @I18n.T(item.Title)
-                </MBadge>
-            }
-            else
-            {
-                <MBadge Color="@item.StateBackgroundColor"
-                        Content="@I18n.T(item.State)"
-                        Value="@(!string.IsNullOrWhiteSpace(item.State))">
-                    @I18n.T(item.Title)
-                </MBadge>
-            }
+            <MBadge Color="@item.StateBackgroundColor"
+                    Content="@I18n.T(item.State)"
+                    Value="@(!string.IsNullOrWhiteSpace(item.State))">
+                @I18n.T(item.Title)
+            </MBadge>
         </MTab>
     }
 
     @if (_resourcesMenu.Any())
     {
-        <MDivider Vertical Class="ml-8 mr-4 my-auto" Length="16" />
-
         <AppMenu Items="_resourcesMenu" TItem="DefaultItem" MinWidth="200">
             <ActivatorContent>
                 <MButton Height="48" Text Class="m-tab" @attributes="@context.Attrs">
@@ -64,7 +56,7 @@
 
         _prevCulture = Culture;
     }
-    
+
 
     protected override void OnParametersSet()
     {

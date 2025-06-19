@@ -1,15 +1,12 @@
 ﻿namespace Masa.Blazor.Mixins;
 
-public class OutsideClickJSModule : JSModule
+public class OutsideClickJSModule(IJSRuntime js)
+    : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.OutsideClickIndexJs}")
 {
     private IOutsideClickJsCallback? _owner;
     private DotNetObjectReference<OutsideClickJSModule>? _selfReference;
     private IJSObjectReference? _instance;
     private CancellationTokenSource? _cts;
-
-    public OutsideClickJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/outside-click/index.js")
-    {
-    }
 
     public bool Initialized { get; private set; }
 

@@ -1,4 +1,4 @@
-﻿using Masa.Blazor.Mixins;
+﻿using Masa.Blazor.Components.Window;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
@@ -31,6 +31,18 @@ public partial class MWindow : MItemGroup
 
     [Parameter] public bool Vertical { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")] public bool Touchless { get; set; }
+
+    private static Block _block = new("m-window");
+    private StringNumber _prevInternalValue;
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+    private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
+
+    private bool _prevTouchless;
+    private int _useTouchId;
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<MWindow>? _dotNetObjectReference;
+
     protected bool IsReverse { get; set; }
 
     protected bool RTL => MasaBlazor.RTL;
@@ -46,9 +58,15 @@ public partial class MWindow : MItemGroup
     public int InternalIndex { get; private set; }
 
     private int _prevInternalIndex = 0;
+
     private void UpdateInternalIndex()
     {
         InternalIndex = Items.FindIndex(item => item.Value == InternalValue);
+        if (_prevInternalIndex == InternalIndex)
+        {
+            return;
+        }
+
         IsReverse = UpdateReverse(InternalIndex, _prevInternalIndex);
         _prevInternalIndex = InternalIndex;
     }
@@ -75,51 +93,131 @@ public partial class MWindow : MItemGroup
         }
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
 
-    private StringNumber _prevInternalValue;
+        _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
         ActiveClass = "m-window-item--active";
         PrevIcon ??= "$prev";
         NextIcon ??= "$next";
     }
 
-    private static Block _block = new("m-window");
-    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
-    private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        
+        if (_prevTouchless != Touchless)
+        {
+            _prevTouchless = Touchless;
+
+            if (Touchless)
+            {
+                await CleanupTouchAsync();
+            }
+            else
+            { 
+                await UseTouchAsync();
+            }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            if (!Touchless)
+            {
+                await UseTouchAsync();
+            }
+        }
+    }
+
+    private async Task UseTouchAsync()
+    {
+        _module = await Js.InvokeAsync<IJSObjectReference>("import", $"./_content/Masa.Blazor/js/{JSManifest.WindowTouchJs}");
+        _useTouchId = await _module.InvokeAsync<int>("useTouch", Ref, new TouchValue(
+            new Dictionary<string, AddEventListenerOptions>
+            {
+                { "touchstart", new AddEventListenerOptions { Passive = true, StopPropagation = true } }
+            }), _dotNetObjectReference);
+    }
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(new[]
-        {
+        return base.BuildComponentClass().Concat([
             _modifierBuilder.Add(ShowArrowsOnHover).Build()
-        });
+        ]);
     }
 
     private string GetContainerClass() => _containerModifierBuilder.Add(IsActive).Build();
     private string GetContainerStyle() => StyleBuilder.Create().AddHeight(TransitionHeight).Build();
 
-    protected override void RegisterWatchers(PropertyWatcher watcher)
+    protected override void OnInternalValuesChanged()
     {
-        base.RegisterWatchers(watcher);
+        base.OnInternalValuesChanged();
 
-        watcher.Watch<List<StringNumber?>>(nameof(InternalValues), UpdateInternalIndex);
+        UpdateInternalIndex();
+    }
+
+    protected override void OnItemsUpdate()
+    {
+        base.OnItemsUpdate();
+
+        // HasNext property needs the latest items count
+        StateHasChanged();
+    }
+
+    protected override void RefreshItemsState()
+    {
+        base.RefreshItemsState();
+
+        UpdateInternalIndex();
     }
 
     public void RenderState()
     {
         StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void OnTouchend(string direction)
+    {
+        if (Touchless)
+        {
+            return;
+        }
+        
+        if (direction is "left")
+        {
+            if (InternalReverse)
+            {
+                Prev();
+            }
+            else
+            {
+                Next();
+            }
+        }
+        else if (direction is "right")
+        {
+            if (InternalReverse)
+            {
+                Next();
+            }
+            else
+            {
+                Prev();
+            }
+        }
     }
 
     protected void Next()
@@ -132,17 +230,17 @@ public partial class MWindow : MItemGroup
         _ = ToggleAsync(nextItem.Value);
     }
 
-    protected void Prev()
+    private void Prev()
     {
         if (!HasActiveItems || !HasPrev) return;
-        
+
         var prevIndex = GetPrevIndex(InternalIndex);
         var prevItem = Items[prevIndex];
 
         _ = ToggleAsync(prevItem.Value);
     }
 
-    protected int GetNextIndex(int currentIndex)
+    private int GetNextIndex(int currentIndex)
     {
         var nextIndex = (currentIndex + 1) % Items.Count;
         var nextItem = Items[nextIndex];
@@ -152,7 +250,7 @@ public partial class MWindow : MItemGroup
         return nextIndex;
     }
 
-    protected int GetPrevIndex(int currentIndex)
+    private int GetPrevIndex(int currentIndex)
     {
         var prevIndex = (currentIndex + Items.Count - 1) % Items.Count;
         var prevItem = Items[prevIndex];
@@ -181,5 +279,25 @@ public partial class MWindow : MItemGroup
         {
             return val < oldVal;
         }
+    }
+
+    private async Task CleanupTouchAsync()
+    {
+        if (_module is null) return;
+
+        await _module.InvokeVoidAsync("cleanupTouch", Ref, _useTouchId);
+        await _module.DisposeAsync();
+        _module = null;
+    }
+
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        if (_module is not null)
+        {
+            _dotNetObjectReference?.Dispose();
+            await CleanupTouchAsync().ConfigureAwait(false);
+        }
+
+        await base.DisposeAsyncCore();
     }
 }

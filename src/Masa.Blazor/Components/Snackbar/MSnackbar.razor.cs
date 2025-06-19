@@ -4,10 +4,8 @@ using Timer = System.Timers.Timer;
 
 namespace Masa.Blazor;
 
-public partial class MSnackbar : MasaComponentBase
+public partial class MSnackbar
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-        
     [Parameter] public bool Absolute { get; set; }
 
     [Parameter] public bool Value { get; set; }
@@ -56,48 +54,14 @@ public partial class MSnackbar : MasaComponentBase
 
     [Parameter] public bool Outlined { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private const string ROOT_CSS = "m-snack";
     internal const string ROOT_CSS_SELECTOR = $".{ROOT_CSS}";
 
     private Timer? Timer { get; set; }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
 
         Transition ??= "m-snack-transition";
 
@@ -151,7 +115,7 @@ public partial class MSnackbar : MasaComponentBase
             .AddTextColor(Color, Text || Outlined)
             .AddRounded(Rounded, Tile)
             .AddElevation(Elevation)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

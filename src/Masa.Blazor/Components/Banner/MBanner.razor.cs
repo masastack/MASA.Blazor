@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MBanner : MasaComponentBase
+    public partial class MBanner : ThemeComponentBase
     {
         protected bool IsSticky => Sticky || App;
 
@@ -35,30 +34,6 @@ namespace Masa.Blazor
 
         [Parameter] [MasaApiParameter(true)] public bool Value { get; set; } = true;
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
-
         /// <summary>
         /// This should be down in next version
         /// </summary>
@@ -72,21 +47,6 @@ namespace Masa.Blazor
             ValueChanged.InvokeAsync(Value);
         });
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-        }
-
         private static Block _block = new("m-banner");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -97,7 +57,7 @@ namespace Masa.Blazor
                 .Add("is-mobile", Mobile)
                 .Add("sticky", IsSticky)
                 .AddBackgroundColor(Color)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddClass("m-sheet")
                 .AddElevation(Elevation)
                 .Build();

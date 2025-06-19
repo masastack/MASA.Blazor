@@ -1,0 +1,27 @@
+{
+  "name": "Masa.Blazor.JSComponents.PdfJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^4.34.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "core-js": "3",
+    "pdfjs-dist": "4.5.136"
+  }
+}

@@ -1,0 +1,32 @@
+﻿<MCombobox Items="@items"
+           @bind-Value="val"
+           ItemValue="u => u"
+           ItemText="u => u"
+           Label="Add some tags"
+           HideSelected
+           SearchInput="@_search"
+           OnSearchInputUpdate="(search) => _search = search"
+           Multiple
+           Chips
+           SmallChips>
+    <NoDataContent>
+        <div class="px-2">
+            No results matching "<strong>@_search</strong>". Press <kbd>enter</kbd> to create a new one
+        </div>
+    </NoDataContent>
+</MCombobox>
+
+@code {
+
+    private List<string> val = [];
+    private string? _search;
+
+    private string[] items =
+    [
+        "Programming",
+        "Design",
+        "Blazor",
+        "Masa Blazor"
+    ];
+
+}

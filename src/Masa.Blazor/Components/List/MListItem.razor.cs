@@ -1,5 +1,4 @@
 using Masa.Blazor.Components.ItemGroup;
-using Masa.Blazor.Mixins;
 
 namespace Masa.Blazor;
 
@@ -65,63 +64,34 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [Parameter] public bool OnClickPreventDefault { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Title { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Subtitle { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? PrependIcon { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? PrependAvatar { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? AppendIcon { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? AppendAvatar { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.9.0")]
+    [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
-
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
 
     protected bool IsClickable => Router?.IsClickable is true || Matched;
 
@@ -194,12 +164,6 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
 
         SetAttrs();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         Attributes["ripple"] = ComputedRipple;
     }
 
@@ -219,7 +183,7 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
             .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddTextColor(Color)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddClass("")
             .Build();
     }

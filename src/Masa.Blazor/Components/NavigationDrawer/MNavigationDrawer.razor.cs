@@ -4,7 +4,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallback, IDependent
+public partial class MNavigationDrawer : ThemeComponentBase, IOutsideClickJsCallback, IDependent
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -119,30 +119,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     [Parameter] public RenderFragment<Dictionary<string, object?>>? ImgContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private const double DefaultMiniVariantWidth = 56;
     private const double DefaultWidth = 256;
 
@@ -160,7 +136,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private string? _overlayScrimStyle;
 
     private CancellationTokenSource? _cancellationTokenSource;
-    private bool _disposed;
 
     protected object? Overlay { get; set; }
 
@@ -186,7 +161,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected bool ShowOverlay => !HideOverlay && (IsActive || _isDragging) && (IsMobile || Temporary);
 
-    public void RegisterChild(IDependent dependent)
+    public void AddDependent(IDependent dependent)
     {
         _dependents.Add(dependent);
         NextTickIf(
@@ -363,9 +338,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
         NavigationManager.LocationChanged += OnLocationChanged;
     }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
     
     protected override async Task OnParametersSetAsync()
     {
@@ -383,13 +355,6 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             _prevWidth = Width ?? DefaultWidth;
             SyncStateToTouchJS();
         }
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -550,7 +515,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             .Add("custom-mini-variant", MiniVariantWidth?.ToString() != "56")
             .Add("open", isActive)
             .Add("open-on-hover", ExpandOnHover)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddBackgroundColor(Color)
             .Build();
     }
@@ -591,8 +556,10 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
     private void SyncStateToTouchJS() => _touchJSObjectResult?.SyncState(GetTouchState());
 
     private TouchState GetTouchState()
-        => new(IsActive, ReactsToClick, ComputedWidth.ToDouble(), Touchless,
-            MasaBlazor.RTL ? (Right ? "left" : "right") : (Right ? "right" : "left"));
+    {
+        var position = Bottom ? "bottom" : (MasaBlazor.RTL ? (Right ? "left" : "right") : (Right ? "right" : "left"));
+        return new TouchState(IsActive, ReactsToClick, ComputedWidth.ToDouble(), Touchless, position);
+    }
 
     protected async void CallUpdate()
     {
@@ -601,7 +568,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
 
     protected async Task UpdateApplicationAsync()
     {
-        if (!App)
+        if (!App || IsDisposed)
         {
             return;
         }
@@ -639,7 +606,7 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
             await MiniVariantChanged.InvokeAsync(false);
         }
     }
-
+    
     protected override async ValueTask DisposeAsyncCore()
     {
         RemoveApplication();
@@ -659,8 +626,8 @@ public partial class MNavigationDrawer : MasaComponentBase, IOutsideClickJsCallb
         }
 
         if (Right)
-            MasaBlazor!.Application.Right = 0;
+            MasaBlazor.Application.Right = 0;
         else
-            MasaBlazor!.Application.Left = 0;
+            MasaBlazor.Application.Left = 0;
     }
 }

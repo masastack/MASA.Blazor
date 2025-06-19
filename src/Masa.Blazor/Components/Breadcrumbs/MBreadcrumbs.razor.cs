@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MBreadcrumbs : MasaComponentBase
+public partial class MBreadcrumbs : ThemeComponentBase
 {
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -18,30 +18,6 @@ public partial class MBreadcrumbs : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     #region When using razor definition without Items parameter
 
     internal List<MBreadcrumbsItem> SubBreadcrumbsItems { get; } = new();
@@ -56,21 +32,6 @@ public partial class MBreadcrumbs : MasaComponentBase
 
     #endregion
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-#endif
-    }
-
     private static Block _block = new("m-breadcrumbs");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -78,7 +39,7 @@ public partial class MBreadcrumbs : MasaComponentBase
     {
         yield return _modifierBuilder
             .Add(Large)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 }

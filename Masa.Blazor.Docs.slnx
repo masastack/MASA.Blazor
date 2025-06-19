@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/1 - Component/">
+    <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  </Folder>
+  <Folder Name="/2 - Docs/">
+    <Project Path="docs/Masa.Docs.Core/Masa.Docs.Core.csproj" />
+    <Project Path="docs/Masa.Docs.Indexing/Masa.Docs.Indexing.csproj" />
+    <Project Path="docs/Masa.Docs.Server/Masa.Docs.Server.csproj" />
+    <Project Path="docs/Masa.Docs.Shared/Masa.Docs.Shared.csproj" />
+    <Project Path="docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj" />
+  </Folder>
+  <Folder Name="/2 - Docs/ApiGenerator/">
+    <Project Path="src/Masa.Blazor.Docs.ApiGenerator/Masa.Blazor.Docs.ApiGenerator.csproj" />
+  </Folder>
+  <Folder Name="/2 - Docs/Product Docs/">
+    <Project Path="docs/Masa.Blazor.Docs/Masa.Blazor.Docs.csproj" />
+    <Project Path="docs/MASA.Docs/src/Masa.Framework.Docs/Masa.Framework.Docs.csproj" />
+    <Project Path="docs/MASA.Docs/src/Masa.Stack.Docs/Masa.Stack.Docs.csproj" />
+  </Folder>
+</Solution>

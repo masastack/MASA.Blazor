@@ -1,30 +1,34 @@
 ﻿using Masa.Blazor.Components.Cascader;
+using Masa.Blazor.Components.Select;
 
 namespace Masa.Blazor;
 
-public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
+public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>,
+    ICascader<TItem, TItemValue>
 {
     [Parameter] public bool ChangeOnSelect { get; set; }
 
     [Parameter, MasaApiParameter(true)] public bool ShowAllLevels { get; set; } = true;
 
-    [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; } = null!;
+    [Parameter, EditorRequired] public Func<TItem, List<TItem>>? ItemChildren { get; set; }
 
     [Parameter] public Func<TItem, Task>? LoadChildren { get; set; }
 
     [Parameter] public override bool Outlined { get; set; }
 
     [Parameter]
-    [MasaApiParameter("/", ReleasedOn = "v1.5.0")]
+    [MasaApiParameter("/", ReleasedIn = "v1.5.0")]
     public string Delimiter { get; set; } = "/";
 
+    private TValue? _prevValue;
     private double _right;
-    private List<TItem> _selectedCascadeItems = new();
-    private List<MCascaderColumn<TItem, TValue>> _cascaderLists = new();
+    private List<TItem> _selectedItems = [];
+    private List<TItem> _displaySelectedItems = [];
+    private List<MCascaderColumn<TItem, TItemValue>> _cascaderLists = [];
 
     public override Action<TextFieldNumberProperty>? NumberProps { get; set; }
 
-    protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
+    internal override List<SelectedItem<TItem>> SelectedItems => FindSelectedItems(Items).ToList();
 
     protected override BMenuProps GetDefaultMenuProps()
     {
@@ -52,12 +56,62 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
     {
         base.OnParametersSet();
 
-        var valueItem = SelectedItems.FirstOrDefault();
-        if (valueItem is not null)
+        if (typeof(TValue) == typeof(TItemValue))
         {
-            _selectedCascadeItems.Clear();
-            FindAllLevelItems(valueItem, ComputedItems, ref _selectedCascadeItems);
-            _selectedCascadeItems.Reverse();
+            if (!EqualityComparer<TValue>.Default.Equals(_prevValue, Value))
+            {
+                _prevValue = Value;
+                _selectedItems.Clear();
+
+                var valueItem = SelectedItems.FirstOrDefault();
+                if (valueItem is not null)
+                {
+                    _selectedItems.Clear();
+                    FindAllLevelItems(valueItem.Item, ComputedItems, ref _selectedItems);
+                    _selectedItems.Reverse();
+                    _displaySelectedItems = [.._selectedItems];
+                }
+            }
+        }
+        else
+        {
+            if (Value is IList<TItemValue> value)
+            {
+                var notEqual = _prevValue is null ||
+                               _prevValue is IList<TItemValue> prevValue && !prevValue.SequenceEqual(value);
+                if (notEqual)
+                {
+                    _prevValue = Value;
+                    _selectedItems.Clear();
+                    TItem? targetItem = default;
+
+                    foreach (var itemValue in value)
+                    {
+                        if (targetItem is null)
+                        {
+                            targetItem = ComputedItems.FirstOrDefault(i =>
+                                EqualityComparer<TItemValue>.Default.Equals(ItemValue(i), itemValue));
+                        }
+                        else
+                        {
+                            if (ItemChildren is not null)
+                            {
+                                targetItem = ItemChildren(targetItem).FirstOrDefault(i =>
+                                    EqualityComparer<TItemValue>.Default.Equals(ItemValue(i), itemValue));
+                            }
+                        }
+
+                        if (targetItem is null)
+                        {
+                            break;
+                        }
+
+                        _selectedItems.Add(targetItem);
+                    }
+
+                    _displaySelectedItems = [.._selectedItems];
+                }
+            }
         }
     }
 
@@ -65,28 +119,26 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        return base.BuildComponentClass().Concat(
-            new[]
-            {
-                _block.Name
-            }
-        );
+        return base.BuildComponentClass().Concat([_block.Name]);
     }
 
-    public void Register(MCascaderColumn<TItem, TValue> cascaderColumn)
+    public void Register(MCascaderColumn<TItem, TItemValue> cascaderColumn)
     {
         _cascaderLists.Add(cascaderColumn);
     }
 
     private async Task HandleOnSelect((TItem item, bool isLast, int columnIndex) args)
     {
+        _displaySelectedItems.RemoveRange(args.columnIndex, _displaySelectedItems.Count - args.columnIndex);
+        _displaySelectedItems.Add(args.item);
+
         if (ChangeOnSelect)
         {
-            await SelectItem(args.item, closeOnSelect: args.isLast);
+            await SelectItem(new SelectedItem<TItem>(args.item), closeOnSelect: args.isLast);
         }
         else if (args.isLast)
         {
-            await SelectItem(args.item);
+            await SelectItem(new SelectedItem<TItem>(args.item));
         }
 
         NextTick(async () =>
@@ -95,6 +147,39 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
                 $"{MMenu.ContentElement.GetSelector()} .m-cascader__column:nth-child({args.columnIndex + 1})";
             await Js.ScrollIntoParentView(selector, true, true);
         });
+    }
+
+    internal override async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
+    {
+        _selectedItems = _displaySelectedItems.ToList();
+
+        if (typeof(TValue) == typeof(TItemValue))
+        {
+            var value = ItemValue(item.Item);
+            if (value is TValue val)
+            {
+                // await ValueChanged.InvokeAsync(val);
+                await SetsValue(val);
+                _prevValue = val;
+            }
+        }
+        else
+        {
+            var values = _selectedItems.Select(ItemValue).ToList();
+            if (values is TValue val)
+            {
+                // await ValueChanged.InvokeAsync(val);
+                await SetsValue(val);
+                _prevValue = val;
+            }
+        }
+
+        if (closeOnSelect)
+        {
+            IsMenuActive = false;
+        }
+
+        _ = OnSelect.InvokeAsync((item.Item, true));
     }
 
     protected override async Task OnMenuBeforeShowContent()
@@ -147,9 +232,9 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
         }
     }
 
-    private IEnumerable<TItem> FindSelectedItems(IList<TItem> items)
+    private IEnumerable<SelectedItem<TItem>> FindSelectedItems(IList<TItem> items)
     {
-        var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
+        var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item))).Select(u => new SelectedItem<TItem>(u)).ToList();
         if (selectedItems.Any())
         {
             return selectedItems;
@@ -157,31 +242,28 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
 
         foreach (var item in items)
         {
-            var children = ItemChildren(item);
-            if (children != null && children.Any())
+            var children = ItemChildren?.Invoke(item);
+            if (children is not { Count: > 0 }) continue;
+
+            var childrenSelectedItems = FindSelectedItems(children).ToList();
+            if (childrenSelectedItems.Count > 0)
             {
-                var childrenSelectedItems = FindSelectedItems(children).ToList();
-                if (childrenSelectedItems.Any())
-                {
-                    return childrenSelectedItems;
-                }
+                return childrenSelectedItems;
             }
         }
 
-        return Array.Empty<TItem>();
+        return [];
     }
 
     protected override string? GetText(TItem item)
     {
         return !ShowAllLevels
             ? base.GetText(item)
-            : string.Join($" {Delimiter} ", _selectedCascadeItems.Select(base.GetText));
+            : string.Join($" {Delimiter} ", _selectedItems.Select(base.GetText));
     }
 
     private bool FindAllLevelItems(TItem item, IList<TItem> searchItems, ref List<TItem> allLevelItems)
     {
-        allLevelItems ??= new List<TItem>();
-
         if (searchItems.Contains(item))
         {
             allLevelItems.Add(item);
@@ -190,7 +272,7 @@ public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>
 
         foreach (var searchItem in searchItems)
         {
-            var children = ItemChildren(searchItem);
+            var children = ItemChildren?.Invoke(searchItem);
             if (children is { Count: > 0 })
             {
                 var find = FindAllLevelItems(item, children, ref allLevelItems);

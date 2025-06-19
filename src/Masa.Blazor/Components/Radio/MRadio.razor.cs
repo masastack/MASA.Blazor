@@ -1,9 +1,9 @@
 ﻿namespace Masa.Blazor
 {
 #if NET6_0
-    public partial class MRadio<TValue> : MasaComponentBase, IRadio<TValue>, IRippleState
+    public partial class MRadio<TValue> : IRadio<TValue>, IRippleState
 #else
-    public partial class MRadio<TValue> : MasaComponentBase, IRadio<TValue>, IRippleState where TValue : notnull
+    public partial class MRadio<TValue> : IRadio<TValue>, IRippleState where TValue : notnull
 #endif
     {
         [CascadingParameter] public IRadioGroup<TValue>? RadioGroup { get; set; }
@@ -35,12 +35,6 @@
         [Parameter] public string? Label { get; set; }
 
         [Parameter] [MasaApiParameter(true)] public bool Ripple { get; set; } = true;
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
         [CascadingParameter(Name = "Input_IsDisabled")]
         protected bool InputIsDisabled { get; set; }
@@ -85,23 +79,6 @@
             Id ??= "input-" + Guid.NewGuid().ToString("N");
         }
 
-        [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
         private static Block _block = new("m-radio");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
         private static Block _selectionControls = new Block("m-input--selection-controls");
@@ -110,29 +87,11 @@
         {
             yield return _modifierBuilder.Add("is-disabled", Disabled || InputIsDisabled)
                 .Add(IsFocused)
-                .Add(IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 
         protected bool IsActive { get; private set; }
-
-        protected bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         public bool IsDisabled => Disabled || RadioGroup?.IsDisabled is true;
 

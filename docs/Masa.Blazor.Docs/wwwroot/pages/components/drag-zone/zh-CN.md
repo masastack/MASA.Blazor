@@ -1,10 +1,10 @@
 ---
 title: DragZone（拖放）
 desc: "**MDragZone** 组件基于[Sorttable.js](https://github.com/SortableJS/Sortable)实现的可拖放功能"
-tag: "JS代理"
+tag: "基于JS封装"
 ---
 
-<app-alert type="error" content="此组件已经废弃，请使用 [MSortable](/blazor/labs/sortable) 组件。"></app-alert>
+<app-alert type="error" content="此组件已经废弃，请使用 [MSortable](/blazor/components/sortable) 组件。"></app-alert>
 
 ## 使用
 

@@ -2,8 +2,6 @@
 {
     public class MasaBlazor
     {
-        private bool _rtl;
-
         public MasaBlazor(
             bool rtl,
             Breakpoint breakpoint,
@@ -38,13 +36,13 @@
 
         public bool RTL
         {
-            get => _rtl;
+            get;
             set
             {
-                if (_rtl != value)
+                if (field != value)
                 {
-                    _rtl = value;
-                    OnRTLChange?.Invoke(_rtl);
+                    field = value;
+                    OnRTLChange?.Invoke(field);
                     RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -74,7 +72,7 @@
         /// <summary>
         /// An event that fires when the window size has changed.
         /// </summary>
-        public event EventHandler<WindowSizeChangedEventArgs>? WindowSizeChanged; 
+        public event EventHandler<WindowSizeChangedEventArgs>? WindowSizeChanged;
 
         /// <summary>
         /// An event that fires when the breakpoint has changed.
@@ -85,24 +83,50 @@
         /// An event that fires when the value of Mobile property from <see cref="Breakpoint"/> has changed.
         /// </summary>
         public event EventHandler<MobileChangedEventArgs> MobileChanged;
-        
-        public event EventHandler? DefaultsChanged; 
-        
+
+        public event EventHandler? DefaultsChanged;
+
         public void ToggleTheme()
         {
-            Theme.Dark = !Theme.Dark;
-
+            Theme.DefaultTheme = Theme.DefaultTheme == "dark" ? "light" : "dark";
+            Theme.Dark = Theme.DefaultTheme == "dark";
             OnThemeChange?.Invoke(Theme);
         }
 
         public void SetTheme(bool dark)
         {
-            if (Theme.Dark == dark)
+            if (Theme.DefaultTheme == (dark ? "dark" : "light"))
             {
                 return;
             }
 
             ToggleTheme();
+        }
+
+        public void SetTheme(string name)
+        {
+            if (Theme.DefaultTheme == name)
+            {
+                return;
+            }
+
+            if (Theme.Themes.Exists(name))
+            {
+                Theme.DefaultTheme = name;
+                Theme.Dark = Theme.DefaultTheme == "dark";
+                OnThemeChange?.Invoke(Theme);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Theme '{name}' does not exist.");
+            }
+        }
+
+        // TODO: 动态更新主题
+        public void UpdateTheme(Action<Theme> themeConfig)
+        {
+            themeConfig.Invoke(Theme);
+            OnThemeChange?.Invoke(Theme);
         }
 
         /// <summary>

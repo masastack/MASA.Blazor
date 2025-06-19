@@ -15,14 +15,17 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         addBlockquoteRules(md);
         addTableRules(md);
         addHtmlInlineRules(md)
+        addLinkRules(parser);
 
         parser.useContainer("code-group");
         parser.useContainer("code-group-item");
         addCodeGroupRules(parser);
     }
+    else if (scope === "desc") {
+        addLinkRules(parser);
+    }
 
     addCodeRules(md);
-    addLinkRules(parser);
     
     function addHtmlInlineRules(md) {
         md.renderer.rules.html_inline = (tokens, idx, options, env, self) => {
@@ -111,13 +114,12 @@ window.MasaBlazor.extendMarkdownIt = function (parser) {
         md.renderer.rules.fence = (tokens, idx, options, env, self) => {
             if (tokens[idx].markup === "```") {
                 const content = tokens[idx].content;
+                const id = tokens[idx].attrs?.find((attr) => attr[0] === "id")?.[1];
+                const className = tokens[idx].attrs?.find((attr) => attr[0] === "class")?.[1];
 
                 const [lang, fileName, lineHighlights] = resolveCodeInfo(tokens[idx].info)
-
-                return `<default-app-markup code="${content.replaceAll(
-                    '"',
-                    "&quot;"
-                )}" language="${lang}" file-name="${fileName || ""}" line-highlights="${lineHighlights || ""}"></default-app-markup>\n`;
+                
+                return `<default-app-markup ${id ? `id=${id}`: ""} ${className ? `class=${className}` : ""} code="${content.replaceAll('"',"&quot;")}" language="${lang}" file-name="${fileName || ""}" line-highlights="${lineHighlights || ""}"></default-app-markup>\n`;
             }
         };
     }
@@ -260,28 +262,28 @@ window.prismHighlightLines = function (pre) {
     }
 }
 
-window.updateThemeOfElementsFromMarkdown = function (isDark) {
+window.updateThemeOfElementsFromMarkdown = function (theme) {
     const customElements = document.querySelectorAll('[masa-blazor-custom-element]');
     
     [...customElements].map(e => {
-        e.setAttribute("dark", isDark)
+        e.setAttribute("theme", theme)
     });
 
     const elements = document.querySelectorAll('[masa-blazor-html]');
     [...elements].map(e => {
-        if (isDark) {
-            if (e.className.includes('theme--light')) {
-                e.className = e.className.replace('theme--light', 'theme--dark')
-            } else {
-                e.className += " theme--dark";
-            }
-        } else {
-            if (e.className.includes('theme--dark')) {
-
-                e.className = e.className.replace('theme--dark', 'theme--light')
-            } else {
-                e.className += " theme--light";
-            }
-        }
+        // TODO: 使用主题名称
+        const classList = Array.from(e.classList);
+        const themeClassRegex = /^theme--/;
+        const newClasses = classList.map(cn => {
+            return themeClassRegex.test(cn) ? "theme--" + theme : cn;
+        })
+        e.className = newClasses.join(' ');
     })
+}
+
+window.updateAppCodeGroup = function (tab) {
+    const codeGroups = document.querySelectorAll("app-code-group");
+    for (const codeGroup of codeGroups) {
+        codeGroup.setAttribute('tab', tab);
+    }
 }

@@ -1,8 +1,9 @@
-﻿using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
+﻿using Masa.Blazor.Components.Transition;
+using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MResponsive : MasaComponentBase
+public partial class MResponsive : ThemeComponentBase
 {
     [Parameter] public StringNumber? AspectRatio { get; set; }
 
@@ -22,29 +23,9 @@ public partial class MResponsive : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
+    [Parameter] public bool TransitionValue { get; set; }
 
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
+    [Parameter] public ConditionType TransitionType { get; set; }
 
     private Block _block = new("m-responsive");
 

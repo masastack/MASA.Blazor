@@ -7,12 +7,19 @@ public class EventListenerOptions
     public bool Once { get; set; }
 
     public bool Passive { get; set; }
+
+    public EventListenerOptions()
+    {
+    }
+
+    public EventListenerOptions(bool passive)
+    {
+        Passive = passive;
+    }
 }
 
 public class EventListenerExtras
 {
-    public string? Key { get; set; }
-
     public bool StopPropagation { get; set; }
 
     public bool PreventDefault { get; set; }
@@ -31,19 +38,8 @@ public class EventListenerExtras
         PreventDefault = preventDefault;
     }
 
-    public EventListenerExtras(string key)
-    {
-        Key = key;
-    }
-
     public EventListenerExtras(int debounce)
     {
-        Debounce = debounce;
-    }
-
-    public EventListenerExtras(string key, int debounce)
-    {
-        Key = key;
         Debounce = debounce;
     }
 

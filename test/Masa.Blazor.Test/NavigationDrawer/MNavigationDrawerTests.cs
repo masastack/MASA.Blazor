@@ -1,4 +1,5 @@
-﻿using Bunit;
+﻿using AngleSharp.Css.Dom;
+using Bunit;
 
 namespace Masa.Blazor.Test.NavigationDrawer
 {
@@ -178,7 +179,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px;top: 0px;transform: translateX(0%);width: 256px;", style);
+            Assert.IsTrue(style.Contains("height: 100px;"));
         }
 
         [TestMethod]
@@ -221,12 +222,13 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var cut = RenderComponent<MNavigationDrawer>(props =>
             {
                 props.Add(p => p.MiniVariantWidth, 56);
+                props.Add(p => p.MiniVariant, true);
             });
             var inputSlotDiv = cut.Find(".m-navigation-drawer");
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top: 0px;transform: translateX(0%);width: 256px;", style);
+            Assert.IsTrue(style.Contains("width: 56px;"));
         }
 
         [TestMethod]
@@ -306,7 +308,7 @@ namespace Masa.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top: 0px;transform: translateX(0%);width: 100px;", style);
+            Assert.IsTrue(style.Contains("width: 100px;"));
         }
     }
 }

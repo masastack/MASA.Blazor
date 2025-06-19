@@ -16,8 +16,14 @@ public static class JsInteropConstants
         
     public static string GetParentClientWidthOrWindowInnerWidth => $"{JsInteropFuncNamePrefix}getParentClientWidthOrWindowInnerWidth";
 
+    /// <summary>
+    /// Add an event listener to an HTML element, returning a unique ID for the listener.
+    /// </summary>
     public static string AddHtmlElementEventListener => $"{JsInteropFuncNamePrefix}addHtmlElementEventListener";
 
+    /// <summary>
+    /// Remove an event listener from an HTML element using the unique ID returned by AddHtmlElementEventListener.
+    /// </summary>
     public static string RemoveHtmlElementEventListener => $"{JsInteropFuncNamePrefix}removeHtmlElementEventListener";
 
     public static string Contains => $"{JsInteropFuncNamePrefix}contains";
@@ -92,8 +98,8 @@ public static class JsInteropConstants
 
     public static string GetImageDimensions => $"{JsInteropFuncNamePrefix}getImageDimensions";
 
-    public static string EnablePreventDefaultForEvent => $"{JsInteropFuncNamePrefix}enablePreventDefaultForEvent";
-
+    internal static string PreventDefaultForSpecificKeys => $"{JsInteropFuncNamePrefix}preventDefaultForSpecificKeys";
+    
     public static string GetBoundingClientRects => $"{JsInteropFuncNamePrefix}getBoundingClientRects";
 
     public static string GetSize => $"{JsInteropFuncNamePrefix}getSize";
@@ -124,13 +130,13 @@ public static class JsInteropConstants
 
     public static string GetElementTranslateY => $"{JsInteropFuncNamePrefix}getElementTranslateY";
 
-    internal static string CheckIfThresholdIsExceededWhenScrolling => $"{JsInteropFuncNamePrefix}checkIfThresholdIsExceededWhenScrolling";
+    internal static string RegisterInfiniteScrollJSInterop => $"{JsInteropFuncNamePrefix}registerInfiniteScrollJSInterop";
 
     public static string SetProperty => $"{JsInteropFuncNamePrefix}setProperty";
 
     public static string UpdateWindowTransition => $"{JsInteropFuncNamePrefix}updateWindowTransition";
 
-    public static string InvokeMultipleMethod => $"{JsInteropFuncNamePrefix}invokeMultipleMethod";
+    internal static string InvokeMultipleMethod => $"{JsInteropFuncNamePrefix}invokeMultipleMethod";
 
     public static string SetCookie => $"{JsInteropFuncNamePrefix}setCookie";
 
@@ -179,4 +185,6 @@ public static class JsInteropConstants
     public static string MatchesSelector => $"{JsInteropFuncNamePrefix}matchesSelector";
     
     public static string prepareSticky => $"{JsInteropFuncNamePrefix}prepareSticky";
+
+    public static string ToggleMourningMode => $"{JsInteropFuncNamePrefix}toggleMourningMode";
 }

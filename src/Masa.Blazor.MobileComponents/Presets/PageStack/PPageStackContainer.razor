@@ -1,0 +1,19 @@
+﻿@namespace Masa.Blazor.Presets.PageStack
+@inherits MasaComponentBase
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="Ref"
+     @attributes="Attributes">
+    @foreach (var tab in _tabs.OrderBy(u => u.CreatedAt))
+    {
+        <div class="@_block.Element("item").AppendClasses(("d-none", tab.Rule.Regex != _lastVisitedTab?.Rule.Regex))"
+             @key="tab.Rule.Regex"
+             data-page-stack-tab="@tab.Id">
+            <MShouldRender Value="@(tab.Rule.Regex.IsMatch(NavigationManager.GetAbsolutePath()))">
+                @ChildContent
+            </MShouldRender>
+        </div>
+    }
+</div>

@@ -2,16 +2,18 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
-		<Nullable>enable</Nullable>
-		<Version>0.1.0</Version>
 		<Description>Blazor UI component library based on Material Design</Description>
 		<RepositoryUrl>https://github.com/masastack/MASA.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageProjectUrl>https://docs.masastack.com</PackageProjectUrl>
+		<PackageTags>blazor;masa;material design;vuetify</PackageTags>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Company>masastack</Company>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
@@ -20,15 +22,15 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.25" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.25" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.14" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.14" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
@@ -55,11 +57,13 @@
 
     <ItemGroup>
 	    <ProjectReference Include="..\Masa.Blazor.Docs.ApiGenerator\Masa.Blazor.Docs.ApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	    <ProjectReference Include="..\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\..\README.md" Pack="true" PackagePath="" />
 		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
+		<AdditionalFiles Include="wwwroot\js\manifest.json" />
 	</ItemGroup>
 
 	<ItemGroup>

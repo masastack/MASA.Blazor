@@ -1,4 +1,6 @@
-﻿namespace Masa.Docs.Core.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Masa.Docs.Core.Models;
 
 public interface IDefaultItem<TItem>
 {
@@ -21,10 +23,13 @@ public interface IDefaultItem<TItem>
     string? ReleasedOn { get; set; }
 
     List<TItem>? Children { get; }
+    
+    ComponentType ComponentType { get; }
 
+    [MemberNotNullWhen(true, nameof(Children))]
     bool HasChildren()
     {
-        return Children is not null && Children.Any();
+        return Children is not null && Children.Count > 0;
     }
 
     string? Target

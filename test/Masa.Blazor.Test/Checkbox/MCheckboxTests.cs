@@ -213,17 +213,5 @@ namespace Masa.Blazor.Test.Checkbox
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-
-        [TestMethod]
-        public void RenderNormal()
-        {
-            // Arrange & Act
-            var cut = RenderComponent<MCheckbox<bool>>();
-            var inputDiv = cut.Find("div");
-
-            // Assert
-            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
-            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
-        }
     }
 }

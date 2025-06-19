@@ -23,6 +23,7 @@ class Activatable extends Delayable {
   popupListeners: Listeners = {};
 
   constructor(
+    isActive: boolean,
     activatorSelector: string,
     disabled: boolean,
     openOnClick: boolean,
@@ -33,6 +34,8 @@ class Activatable extends Delayable {
     dotNetHelper: DotNet.DotNetObject
   ) {
     super(openDelay, closeDelay, dotNetHelper);
+
+    this.isActive = isActive;
 
     this.activator = getActivator(activatorSelector);
 
@@ -85,7 +88,11 @@ class Activatable extends Delayable {
       listeners.click = (e: MouseEvent) => {
         if (this.activator) this.activator.focus();
 
-        e.stopPropagation();
+        // if there is no click event from blazor on the element, stop propagation
+        const target = e.composedPath().find(e => e === this.activator)
+        if (!target?._blazorEvents_1?.handlers?.click) {
+          e.stopPropagation();
+        }
 
         this.dotNetHelper.invokeMethodAsync("OnClick", parseMouseEvent(e));
 
@@ -95,7 +102,11 @@ class Activatable extends Delayable {
 
     if (this.openOnFocus) {
       listeners.focus = (e: FocusEvent) => {
-        e.stopPropagation();
+        // if there is no focus event from blazor on the element, stop propagation
+        const target = e.composedPath().find(e => e === this.activator)
+        if (!target?._blazorEvents_1?.handlers?.focus) {
+          e.stopPropagation();
+        }
 
         this.runDelay("open");
       };
@@ -212,6 +223,7 @@ class Activatable extends Delayable {
 }
 
 function init(
+  isActive: boolean,
   activatorSelector: string,
   disabled: boolean,
   openOnClick: boolean,
@@ -222,6 +234,7 @@ function init(
   dotNetHelper: DotNet.DotNetObject
 ) {
   var instance = new Activatable(
+    isActive,
     activatorSelector,
     disabled,
     openOnClick,

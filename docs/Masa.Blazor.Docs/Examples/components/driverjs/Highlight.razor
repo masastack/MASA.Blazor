@@ -1,0 +1,19 @@
+﻿@using Masa.Blazor.JSComponents.DriverJS
+<MDriverJS @ref="_driverJs"></MDriverJS>
+
+<MButton Color="primary"
+         Class="text-none"
+         OnClick="@HighlightTitle">
+    Highlight the title
+</MButton>
+
+@code {
+
+    private MDriverJS? _driverJs;
+
+    private void HighlightTitle()
+    {
+        _driverJs?.Highlight(new(".app-heading", new Popover("Tour component", "This component is based on Driver.js!")));
+    }
+
+}

@@ -52,8 +52,8 @@
 
         [Parameter] public string? ActiveClass { get; set; }
 
-        [Parameter, MasaApiParameter("accent")]
-        public string? SelectedColor { get; set; } = "accent";
+        [Parameter, MasaApiParameter("primary")]
+        public string? SelectedColor { get; set; } = "primary";
 
         [Parameter, MasaApiParameter("primary")]
         public string? Color { get; set; } = "primary";

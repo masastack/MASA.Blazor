@@ -1,12 +1,12 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 @typeparam TValue
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <div class="@GetClass()"
          style="@GetStyle()"
          @ref="Ref">
-        <div class="@_selectionControls.Element("input").AppendClasses(CssClassUtils.GetTextColor(RippleState))" ripple>
+        <div class="@_selectionControls.Element("input").AppendClasses((CssClassUtils.GetTextColor(RippleState), true), ("m-input--selection-controls__input--dirty", IsActive))" ripple>
 
             <MIcon Icon="@(IsActive ? OnIcon : OffIcon)"
                    Dense="@(RadioGroup?.Dense is true)"

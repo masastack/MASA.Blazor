@@ -14,6 +14,10 @@ related:
 
 ### Props
 
+#### Bind List {#bind-list released-on=v1.9.0}
+
+<masa-example file="Examples.components.cascaders.BindList"></masa-example>
+
 #### Delimiter {released-on=v1.5.0}
 
 `Delimiter` is used to set the delimiter, default is `/`.

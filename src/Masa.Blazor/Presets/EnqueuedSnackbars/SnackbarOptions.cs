@@ -70,4 +70,6 @@ public class SnackbarOptions
     public string? ActionColor { get; set; }
 
     public Func<Task>? OnAction { get; set; }
+
+    public string MessageFingerprint => $"{Title}|{Content}";
 }

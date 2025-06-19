@@ -1,7 +1,7 @@
 ---
 title: Markdown解析器
 desc: "基于 [markdown-it(v13.0.1)](https://github.com/markdown-it/markdown-it) 封装。"
-tag: JS代理
+tag: 基于JS封装
 related:
   - /blazor/components/syntax-highlights
   - /blazor/components/markdowns
@@ -23,21 +23,27 @@ related:
 
 > 支持 **prism** 和 **highlightjs** 两种高亮方案，详情请查看 [MSyntaxHighlight](/blazor/components/syntax-highlights) 组件。
 
-## 使用
+## 安装 {#installation released-on=v1.10.0}
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
+## 使用 {#usage}
 
 <masa-example file="Examples.components.markdown_parsers.Usage"></masa-example>
 
-## 示例
+## 示例 {#examples}
 
-### 属性
+### 属性 {#props}
 
-#### 选项
+#### 选项 {#options}
 
 完整选项列表请移步 [markdown-it](https://github.com/markdown-it/markdown-it#init-with-presets-and-options)。
 
 <masa-example file="Examples.components.markdown_parsers.Options"></masa-example>
 
-### 事件
+### 事件 {#events}
 
 #### OnFrontMatterParsed
 
@@ -51,9 +57,9 @@ Front Matter 是一种用于在 Markdown 文件中添加元数据的格式，它
 
 <masa-example file="Examples.components.markdown_parsers.OnTocParsed"></masa-example>
 
-### 其他
+### 其他 {#misc}
 
-#### 使用第三方插件
+#### 使用第三方插件 {#use-third-party-plugins}
 
 举个例子，如何使用 [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji) 插件。使用 `window.MasaBlazor.extendMarkdownIt` 方法可以对 `markdown-it` 进行扩展。
 

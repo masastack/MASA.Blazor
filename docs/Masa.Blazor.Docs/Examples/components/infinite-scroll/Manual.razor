@@ -11,49 +11,37 @@
                     <MListItemTitle>@item</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MDivider />
+            <MDivider/>
         }
     </MList>
-    <MInfiniteScroll OnLoad="@OnLoad"
-                     Manual
+    <MInfiniteScroll Manual
+                     OnLoad="@OnLoad"
                      Parent="#infinite-scroll-manual">
     </MInfiniteScroll>
 </MCard>
 
 @code {
+    private static readonly List<string> MockItems = Enumerable.Range(1, 30).Select(n => "Item " + n).ToList();
 
-    private MCard? _card;
-    private int _count;
-    private bool _mockError;
-    private List<string> _items = new();
+    private List<string> _items = [];
+    private int _page = 1;
+    private readonly int pageSize = 8;
 
     private async Task OnLoad(InfiniteScrollLoadEventArgs args)
     {
         var append = await MockRequest();
 
-        args.Status = append.Count == 0 ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
+        _page++;
+
+        args.Status = append.Count < pageSize ? InfiniteScrollLoadStatus.Empty : InfiniteScrollLoadStatus.Ok;
 
         _items.AddRange(append);
     }
 
     private async Task<List<string>> MockRequest()
     {
-        if (_count >= 3)
-        {
-            return new List<string>();
-        }
+        await Task.Delay(1000);
 
-        await Task.Delay(2000);
-
-        if (_count == 1 && !_mockError)
-        {
-            _mockError = true;
-            throw new TimeoutException("Mock error");
-        }
-
-        _count++;
-
-        return Enumerable.Range(_items.Count, 10).Select(n => n.ToString()).ToList();
+        return MockItems.Skip((_page - 1) * pageSize).Take(pageSize).ToList();
     }
-
 }

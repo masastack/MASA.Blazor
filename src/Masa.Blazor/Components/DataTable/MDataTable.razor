@@ -129,6 +129,7 @@
         {
             if (!OpenCache.TryGetValue(group.Key, out var isOpen))
             {
+                isOpen = true;
                 OpenCache[group.Key] = true;
             }
 

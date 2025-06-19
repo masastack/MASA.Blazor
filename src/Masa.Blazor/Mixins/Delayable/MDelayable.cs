@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Mixins.Delayable;
 
-public abstract class MDelayable : MasaComponentBase, IDelayable
+public abstract class MDelayable : ThemeComponentBase, IDelayable
 {
     [Parameter]
     public int OpenDelay
@@ -16,7 +16,9 @@ public abstract class MDelayable : MasaComponentBase, IDelayable
         set => SetValue(value);
     }
 
-    protected bool IsActive { get; private set; }
+    private bool _firstActive = true;
+
+    public bool IsActive { get; protected set; }
 
     public Func<Task>? BeforeShowContent { get; set; }
 
@@ -40,7 +42,7 @@ public abstract class MDelayable : MasaComponentBase, IDelayable
             isLazyContent = await ShowLazyContent();
         }
 
-        await WhenIsActiveUpdating(value);
+        await OnActiveUpdatingAsync(value);
 
         if (value && _cancellationTokenSource.Token.IsCancellationRequested)
         {
@@ -55,6 +57,9 @@ public abstract class MDelayable : MasaComponentBase, IDelayable
         }
 
         StateHasChanged();
+
+        await OnActiveUpdatedAsync(_firstActive, value);
+        _firstActive = false;
 
         if (value && AfterShowContent is not null)
         {
@@ -71,7 +76,23 @@ public abstract class MDelayable : MasaComponentBase, IDelayable
         return Task.FromResult(false);
     }
 
-    protected virtual Task WhenIsActiveUpdating(bool value)
+    /// <summary>
+    /// Called before the active state is updated
+    /// </summary>
+    /// <param name="active">The active state</param>
+    /// <returns></returns>
+    protected virtual Task OnActiveUpdatingAsync(bool active)
+    {
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Called after the active state is updated and the component is rendered
+    /// </summary>
+    /// <param name="firstActive">The first time when component is activated and rendered</param>
+    /// <param name="active">The active state</param>
+    /// <returns></returns>
+    protected virtual Task OnActiveUpdatedAsync(bool firstActive, bool active)
     {
         return Task.CompletedTask;
     }

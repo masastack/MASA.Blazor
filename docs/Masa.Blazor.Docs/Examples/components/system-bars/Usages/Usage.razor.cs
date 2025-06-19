@@ -23,11 +23,6 @@ public class Usage : Masa.Blazor.Docs.Components.Usage
         { nameof(MSystemBar.LightsOut), new CheckboxParameter("false", true) }
     };
 
-    protected override Dictionary<string, object>? GenAdditionalParameters() => new()
-    {
-        { nameof(MSystemBar.Color), "orange" }
-    };
-
     protected override object? CastValue(ParameterItem<object?> parameter)
     {
         if (parameter.Value == null)

@@ -403,6 +403,7 @@ public class ApiGenerator : IIncrementalGenerator
         {
             nameof(String)  => "string",
             nameof(Boolean) => "bool",
+            nameof(Single)  => "float",
             nameof(Double)  => "double",
             nameof(Int32)   => "int",
             nameof(Int64)   => "long",
@@ -447,7 +448,7 @@ public class ApiGenerator : IIncrementalGenerator
 
     private static string? GetReleasedOnOnApiParameterAttribute(AttributeData apiParameterAttributeData)
     {
-        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedOn").Value;
+        var typedConstant = apiParameterAttributeData.NamedArguments.FirstOrDefault(u => u.Key == "ReleasedIn").Value;
 
         if (typedConstant.IsNull)
         {

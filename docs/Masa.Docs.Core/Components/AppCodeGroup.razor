@@ -1,59 +1,58 @@
-﻿@using System.Text.Json.Serialization
-@attribute [JSCustomElement]
+﻿@attribute [JSCustomElement]
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <div class="pb-4">
     @if (Model is not null)
     {
-        <MLazy MinHeight="48">
-            <MTabs Dark="Dark" @bind-Value="_tabValue" Class="mb-1">
-                @foreach (var tab in Tabs)
+        <MLazy MinHeight="40">
+            <MTabs @bind-Value="_tabValue" @bind-Value:after="OnTabChanged" Height="40" SliderColor="secondary">
+                @foreach (var tab in Model.Keys)
                 {
-                    <MTab Class="text-none">@tab</MTab>
+                    <MTab Class="text-none" Value="tab">@tab</MTab>
                 }
             </MTabs>
         </MLazy>
 
-        <MTabsItems Dark="Dark" Value="_tabValue">
-            @foreach (var tabItem in TabItems)
+        <MTabsItems Value="_tabValue">
+            @foreach (var (tab, tabItem) in Model)
             {
-                <MTabItem>
-                    <Markup Code="@tabItem.Code" Language="@tabItem.Lang"
+                <MTabItem Value="@tab">
+                    <Markup Code="@tabItem.Code"
+                            Language="@tabItem.Lang"
                             FileName="@tabItem.FileName"
+                            RoundedTop0
                             LineHighlights="@tabItem.LineHighlights">
                     </Markup>
                 </MTabItem>
             }
-        </MTabsItems>
+        </MTabsItems> 
     }
 </div>
 
 @code {
-    
-    [Parameter]
-    public bool Dark { get; set; }
 
     [Parameter]
     public Dictionary<string, MarkupModel>? Model { get; set; }
-    
+
+    [Parameter] public string? Tab { get; set; }
+
     private StringNumber? _tabValue;
 
-    private IEnumerable<string> Tabs => (Model ?? new()).Keys;
-
-    private IEnumerable<MarkupModel> TabItems => (Model ?? new()).Values;
-
-    public class MarkupModel
+    protected override void OnParametersSet()
     {
-        [JsonPropertyName("code")]
-        public string? Code { get; set; }
+        base.OnParametersSet();
 
-        [JsonPropertyName("lang")]
-        public string? Lang { get; set; }
-
-        [JsonPropertyName("fileName")]
-        public string? FileName { get; set; }
-
-        [JsonPropertyName("lineHighlights")]
-        public string? LineHighlights { get; set; }
+        if (Tab != null && _tabValue != Tab)
+        {
+            _tabValue = Tab;
+        }
     }
 
+    private void OnTabChanged()
+    {
+        _ = JSRuntime.InvokeVoidAsync("updateAppCodeGroup", _tabValue?.ToString());
+    }
+
+    public record MarkupModel(string Code, string Lang, string? FileName, string? LineHighlights);
 }

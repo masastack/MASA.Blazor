@@ -1,0 +1,150 @@
+﻿@inject IJSRuntime JSRuntime
+@inject MasaBlazor MasaBlazor
+
+<MButtonGroup @bind-Value="@_themeName" @bind-Value:after="OnThemeChanged" Mandatory  Color="primary" Class="mb-4" >
+    @foreach (var item in MasaBlazor.Theme.Themes.GetAll())
+    {
+        <MButton Value="@item.Key" Class="text-none">@item.Key</MButton>
+    }
+</MButtonGroup>
+
+<MThemeProvider Theme="@_themeName.ToString()" WithBackground>
+    <MRow Dense Class="pa-4 ma-0" Style="background:rgba(var(--m-theme-primary), 0.3)">
+        <MCol Cols="3">
+            <MCard Tile Elevation="0">
+                @GenBase("primary", _currentThemeOptions?.Primary)
+                @GenBaseText("primary", _currentThemeOptions?.OnPrimary)
+            </MCard>
+        </MCol>
+        <MCol Cols="3">
+            <MCard Tile Elevation="0">
+                @GenBase("secondary", _currentThemeOptions?.Secondary)
+                @GenBaseText("secondary", _currentThemeOptions?.OnSecondary)
+            </MCard>
+        </MCol>
+        <MCol Cols="3">
+            <MCard Tile Elevation="0">
+                @GenBase("accent", _currentThemeOptions?.Accent)
+                @GenBaseText("accent", _currentThemeOptions?.OnAccent)
+            </MCard>
+        </MCol>
+        <MCol Cols="3">
+            <MCard Tile Elevation="0">
+                @GenBase("error", _currentThemeOptions?.Error)
+                @GenBaseText("error", _currentThemeOptions?.OnError)
+            </MCard>
+        </MCol>
+        <MCol Cols="9">
+            <MRow Dense>
+                <MCol Cols="4">
+                    <MCard Tile Elevation="0">
+                        @GenBase("surface-dim", _currentThemeOptions?.SurfaceDim)
+                    </MCard>
+                </MCol>
+                <MCol Cols="4">
+                    <MCard Tile Elevation="0">
+                        @GenBase("surface", _currentThemeOptions?.Surface)
+                    </MCard>
+                </MCol>
+                <MCol Cols="4">
+                    <MCard Tile Elevation="0">
+                        @GenBase("surface-bright", _currentThemeOptions?.SurfaceBright)
+                    </MCard>
+                </MCol>
+                <MCol Cols="12">
+                    <MCard Tile Elevation="0" Class="d-flex">
+                        @GenBase("surface-container-lowest", _currentThemeOptions?.SurfaceContainerLowest)
+                        @GenBase("surface-container-low", _currentThemeOptions?.SurfaceContainerLow)
+                        @GenBase("surface-container", _currentThemeOptions?.SurfaceContainer)
+                        @GenBase("surface-container-high", _currentThemeOptions?.SurfaceContainerHigh)
+                        @GenBase("surface-container-highest", _currentThemeOptions?.SurfaceContainerHighest)
+                    </MCard>
+                </MCol>
+                <MCol Cols="12">
+                    <MCard Tile Elevation="0" Class="d-flex">
+                        @GenItem(css: null, style: "background: rgba(var(--m-theme-on-surface)); color: rgba(var(--m-theme-surface));", "On Surface", 40, _currentThemeOptions?.OnSurface)
+                        @GenStyle("outline", color: null)
+                        @GenStyle("outline-variant", color: null)
+                    </MCard>
+                </MCol>
+            </MRow>
+        </MCol>
+        <MCol Cols="3" Align="AlignTypes.End">
+            <MRow Dense>
+                <MCol Cols="12">
+                    <MCard Tile Elevation="0">
+                        @GenItem(css: "inverse-surface", style: null, text: "Inverse Surface", height: 40, color: _currentThemeOptions?.InverseSurface)
+                        @GenStyle("inverse-on-surface", _currentThemeOptions?.InverseOnSurface)
+                        @GenStyle("inverse-primary", _currentThemeOptions?.InversePrimary)
+                    </MCard>
+                </MCol>
+            </MRow>
+        </MCol>
+    </MRow>
+</MThemeProvider>
+
+@code {
+
+    private StringNumber _themeName = "light";
+    private ThemeOptions? _currentThemeOptions;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _currentThemeOptions = MasaBlazor.Theme.CurrentTheme;
+    }
+
+    private void OnThemeChanged()
+    {
+        _currentThemeOptions = MasaBlazor.Theme.Themes[_themeName.ToString()!];
+    }
+
+    private RenderFragment GenBase(string role, string? color) => GenItem(
+        css: role,
+        style: null,
+        text: role,
+        height: 78,
+        color);
+
+    private RenderFragment GenBaseText(string role, string? color) => GenItem(
+        css: null,
+        style: $"background: rgba(var(--m-theme-on-{role})); color: rgba(var(--m-theme-{role}-text));",
+        text: "on " + role,
+        height: 40,
+        color);
+
+    private RenderFragment GenStyle(string role, string? color) => GenItem(
+        css: null,
+        style: $"background: rgba(var(--m-theme-{role})); color: rgba(var(--m-theme-{role}-text));",
+        text: role,
+        height: 40,
+        color);
+
+    private RenderFragment GenItem(string? css, string? style, string text, int height, string? color) => __builder =>
+    {
+        <MHover Disabled="@(color is null)">
+            <div class="px-4 pt-2 text-capitalize flex-grow-1 rounded-0 text-body-2 @css"
+                 style="@style position: relative; height: @($"{height}px")"
+                 @attributes="@context.Attrs">
+                @text.Replace("-", " ")
+                <Transition Name="fade-transition">
+                    <MButton IconName="$copy" Show="@context.Hover" Absolute Small
+                             Style="color: inherit; right: 6px; bottom: 6px;"
+                             OnClick="@(() => CopyText(color))">
+                        <MTooltip Activator="parent" Text="@color" Left></MTooltip>
+                    </MButton>
+                </Transition>
+            </div>
+        </MHover>
+
+        void CopyText(string? t)
+        {
+            if (string.IsNullOrEmpty(t))
+                return;
+
+            JSRuntime.InvokeVoidAsync(JsInteropConstants.CopyText, t).ConfigureAwait(false);
+        }
+    };
+
+}

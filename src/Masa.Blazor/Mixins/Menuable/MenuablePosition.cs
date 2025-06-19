@@ -4,6 +4,7 @@ public class MenuablePosition : BoundingClientRect
 {
     public double OffsetTop { get; set; }
     public double OffsetLeft { get; set; }
+    public double MaxHeight { get; set; }
 
     public MenuablePosition()
     {

@@ -11,11 +11,6 @@ namespace Masa.Blazor
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
-        [CascadingParameter(Name = "AppIsDark")]
-        public bool AppIsDark { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         [Parameter] public bool Auto { get; set; }
 
         [Parameter] [MasaApiParameter(true)] public bool CloseOnClick { get; set; } = true;
@@ -48,12 +43,8 @@ namespace Masa.Blazor
 
         [Parameter] public string? Transition { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public ScrollStrategy ScrollStrategy { get; set; } = ScrollStrategy.Reposition;
 
         private static Block _block = new("m-menu");
@@ -67,29 +58,6 @@ namespace Masa.Blazor
         private ScrollStrategyResult? _scrollStrategyResult;
         private DotNetObjectReference<MMenu>? _dotNetObjectReference;
 
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                if (CascadingIsDark)
-                {
-                    return true;
-                }
-
-                return AppIsDark;
-            }
-        }
-
         private StringNumber? CalculatedLeft
         {
             get
@@ -102,7 +70,33 @@ namespace Masa.Blazor
             }
         }
 
-        private string? CalculatedMaxHeight => Auto ? "200px" : MaxHeight.ConvertToUnit();
+        private string? CalculatedMaxHeight => Auto ? "200px" : ComputedMaxHeight;
+
+        private string? ComputedMaxHeight
+        {
+            get
+            {
+                var dynamicMaxHeight = Dimensions.Content.MaxHeight;
+                if (MaxHeight.IsT0)
+                {
+                    if (MaxHeight.AsT0 == "auto")
+                    {
+                        return dynamicMaxHeight + "px";
+                    }
+                    else
+                    {
+                        // 100%? how to handle this?
+                        return MaxHeight.ToString();
+                    }
+                }
+                else
+                {
+                    var inputMaxHeight = MaxHeight.ToDouble();
+                    var minMaxHeight = Math.Min(inputMaxHeight, dynamicMaxHeight);
+                    return minMaxHeight + "px";
+                }
+            }
+        }
 
         private string? CalculatedMaxWidth => MaxWidth?.ConvertToUnit();
 
@@ -166,21 +160,12 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
             Transition ??= "m-menu-transition";
             Origin ??= "top left";
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -191,7 +176,7 @@ namespace Masa.Blazor
             {
                 if (CascadingDependent is not null)
                 {
-                    (this as IDependent).CascadingDependents.ForEach(item => item.RegisterChild(this));
+                    (this as IDependent).CascadingDependents.ForEach(item => item.AddDependent(this));
                 }
             }
         }
@@ -208,19 +193,9 @@ namespace Masa.Blazor
             watcher.Watch<bool>(nameof(CloseOnContentClick), () => ResetPopupEvents(CloseOnContentClick));
         }
 
-        protected override void RunDirectly(bool val)
-        {
-            if (ActivatorContent is not null || CloseOnContentClick)
-            {
-                UpdateActiveInJS(val);
-            }
-            else
-            {
-                _ = SetActive(val);
-            }
-        }
+        protected override bool ShouldUpdateActiveInJS => ActivatorContent is not null || CloseOnContentClick;
 
-        public void RegisterChild(IDependent dependent)
+        public void AddDependent(IDependent dependent)
         {
             _dependents.Add(dependent);
             NextTickIf(
@@ -230,9 +205,9 @@ namespace Masa.Blazor
 
         //TODO:keydown event
 
-        protected override async Task WhenIsActiveUpdating(bool value)
+        protected override async Task OnActiveUpdatingAsync(bool active)
         {
-            await base.WhenIsActiveUpdating(value);
+            await base.OnActiveUpdatingAsync(active);
 
             if (!_isPopupEventsRegistered && ContentElement.Context is not null)
             {

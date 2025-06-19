@@ -1,19 +1,18 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
 @inject LocalStorage LocalStorage
-@inject IJSRuntime JSRuntime
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
-                   Class="doc-drawer"
                    Fixed
+                   Color="surface"
                    Right="!MasaBlazor.RTL"
                    Temporary
                    HideOverlay
                    Touchless
                    Width="349">
     <PrependContent>
-        <MToolbar Class="m-bar--underline" Flat Height="96">
+        <MToolbar Class="m-bar--underline" Color="surface" Flat Height="96">
             <h3>
                 @I18n.T("settings")
             </h3>
@@ -21,23 +20,6 @@
     </PrependContent>
     <ChildContent>
         <MContainer>
-            <div class="mb-4">
-                <div class="font-weight-black ps-1 mb-2">@I18n.T("theme")</div>
-                <MRadioGroup @bind-Value="_theme"
-                             TValue="string" 
-                             OnChange="@ToggleTheme"
-                             Class="mt-0">
-                    @foreach (var (opt, icon) in s_themeOptions)
-                    {
-                        <MRadio Value="opt" Style="height: 32px">
-                            <LabelContent>
-                                <MIcon Left>@icon</MIcon>
-                                @opt
-                            </LabelContent>
-                        </MRadio>
-                    }
-                </MRadioGroup>
-            </div>
             <div>
                 <div class="font-weight-black ps-1 mb-2">@I18n.T("direction")</div>
                 <MItemGroup Value="@MasaBlazor.RTL.ToString()" ActiveClass="primary">
@@ -45,29 +27,55 @@
                         <MCol Cols="6">
                             <MItem Value="@("False")">
                                 <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleRTL(false)">
+                                         OnClick="() => ToggleRtl(false)">
                                     LTR
-                                    <MIcon Right>M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0 5,6A4,4 0 0,0 9,10Z</MIcon>
+                                    <MIcon Right>M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0
+                                        5,6A4,4 0 0,0 9,10Z
+                                    </MIcon>
                                 </MButton>
                             </MItem>
                         </MCol>
                         <MCol Cols="6">
                             <MItem Value="@("True")">
                                 <MButton Block Large Depressed Class="@($"justify-space-between {context.ActiveClass}")"
-                                         OnClick="() => ToggleRTL(true)">
+                                         OnClick="() => ToggleRtl(true)">
                                     RTL
-                                    <MIcon Right>M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0 6,6A4,4 0 0,0 10,10Z</MIcon>
+                                    <MIcon Right>M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0
+                                        6,6A4,4 0 0,0 10,10Z
+                                    </MIcon>
                                 </MButton>
                             </MItem>
                         </MCol>
                     </MRow>
                 </MItemGroup>
             </div>
+            @if (Project == "blazor")
+            {
+                <MDivider Class="my-4"/>
+                <div class="d-flex align-center justify-space-between">
+                    <div class="flex">
+                        <MBadge Color="green" Dot Inline>
+                            <MLabel>@I18n.T("nav-component-group-by-type")</MLabel>
+                        </MBadge>
+                        <div class="m-messages">@I18n.T("nav-component-group-by-type-desc")</div>
+                    </div>
+                    <MSwitch Inset
+                             HideDetails="@true"
+                             Value="@(Config?.NavComponentsGroupByType ?? true)"
+                             ValueChanged="@OnGroupByTypeChange"
+                             TValue="bool"
+                             Class="mt-0"
+                    ></MSwitch>
+                </div>
+            }
         </MContainer>
     </ChildContent>
 </MNavigationDrawer>
 
 @code {
+
+    [CascadingParameter(Name = "project")]
+    private string? Project { get; set; }
 
     [Parameter]
     public bool? Value { get; set; }
@@ -75,64 +83,21 @@
     [Parameter]
     public EventCallback<bool?> ValueChanged { get; set; }
 
-    private string? _theme;
+    [Parameter]
+    public Config? Config { get; set; }
 
-    private static (string opt, string icon)[] s_themeOptions = { ("light", "mdi-weather-sunny"), ("dark", "mdi-weather-night"), ("system", "mdi-desktop-classic") };
+    [Parameter]
+    public EventCallback<Config> ConfigChanged { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private async Task OnGroupByTypeChange(bool value)
     {
-        await base.OnAfterRenderAsync(firstRender);
+        var newConfig = Config is null ? new Config(value) : Config with { NavComponentsGroupByType = value };
+        await ConfigChanged.InvokeAsync(newConfig);
 
-        if (firstRender)
-        {
-            _theme = await GetThemeFromLocalStorage() ?? "system";
-            StateHasChanged();
-        }
+        _ = LocalStorage.SetItemAsync("masablazor@config", newConfig);
     }
 
-    private ValueTask<bool> IsDarkPreferColor() => JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-
-    private Task<string?> GetThemeFromLocalStorage() => LocalStorage.GetItemAsync("masablazor@theme");
-
-    private Task UpdateThemeInLocalStorage(string value) => LocalStorage.SetItemAsync("masablazor@theme", value);
-
-    private async Task ToggleTheme(string option)
-    {
-        switch (option)
-        {
-            case "system":
-            {
-                try
-                {
-                    var isDark = await IsDarkPreferColor();
-                    if (isDark != MasaBlazor.Theme.Dark)
-                    {
-                        ToggleThemeInternal(isDark);
-                    }
-                }
-                catch (JSException)
-                {
-                    // ignored
-                }
-                break;
-            }
-            case "light" when MasaBlazor.Theme.Dark:
-                ToggleThemeInternal(false);
-                break;
-            case "dark" when !MasaBlazor.Theme.Dark:
-                ToggleThemeInternal(true);
-                break;
-        }
-        _ = UpdateThemeInLocalStorage(option);
-
-        void ToggleThemeInternal(bool dark)
-        {
-            MasaBlazor.ToggleTheme();
-            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
-        }
-    }
-
-    private void ToggleRTL(bool rtl)
+    private void ToggleRtl(bool rtl)
     {
         if (rtl == MasaBlazor.RTL)
         {

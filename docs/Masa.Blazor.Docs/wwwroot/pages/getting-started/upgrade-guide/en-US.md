@@ -1,6 +1,146 @@
 # Upgrade Guides
 
-## Upgrading form v1.7.x to v1.8.0
+## Upgrading from v1.9.x to v1.10.0
+
+### Features {#v1-10-0-features}
+
+#### Themes {#v1-10-0-themes}
+
+- Name of the cascading `CascadingIsDark` is no longer used, replaced by `MasaBlazorCascadingTheme` of type `string`.
+- All CSS variables related to colors are now just rgb color values, if you are using these variables, please note to modify.
+  ```diff
+    .test {
+  -   color: var(--m-theme-primary);
+  +   color: rgba(var(--m-theme-primary));
+    }
+  ```
+- The `Light` and `Dark` properties are marked as deprecated, still available but recommended to use the `Theme` property in the future.
+  ```diff
+  - <MButton Dark></MButton>
+  + <MButton Theme="dark"></MButton>
+  ```
+- CSS has been slightly adjusted to adapt to the color system of **Material Design 3**, which may cause color inconsistencies between versions.
+  If you encounter any issues, please contact us.
+
+### Components {#v1-10-0-components}
+
+#### Mobile components {#mobile-components}
+
+The following components have been moved to a standalone project. If you are using these components, you need to import the new package.
+
+```cli
+dotnet add package MASA.Blazor.MobileComponents
+```
+
+- [PMobileCascader](/blazor/mobiles/mobile-cascader)
+- [PMobileDatePicker](/blazor/mobiles/mobile-date-pickers)
+- [PMobileDateTimePicker](/blazor/mobiles/mobile-date-time-pickers)
+- [PMobilePicker](/blazor/mobiles/mobile-pickers)
+- [MMobilePickerView](/blazor/mobiles/mobile-picker-views)
+- [PMobileTimePicker](/blazor/mobiles/mobile-time-pickers)
+- [MPdfMobileViewer](/blazor/mobiles/pdf-mobile-viewer)
+- [MPullRefresh](/blazor/mobiles/pull-refresh)
+- [PPageStack](/blazor/mobiles/page-stack)
+  - Add the `AddMobileComponents` extension method when injecting the MasaBlazor service in your _Program.cs_ file:
+    ```diff
+      builder.Services
+          .AddMasaBlazor()
+    +     .AddMobileComponents();
+     ```
+  - **PageStackBarInit** component has been deprecated, use **PPageStackBar** instead. No longer need to force re-render by setting `RerenderKey`.
+
+#### Swiper
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Swiper
+```
+
+#### Gridstack
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Gridstack
+```
+
+#### MarkdownIt and SyntaxHighlight
+
+The components have been moved to a standalone project. If you are using these components, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
+
+#### Xgplayer
+
+The component has been moved to a standalone project. If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package Masa.Blazor.JSComponents.Xgplayer
+```
+
+## Upgrading from v1.8.x to v1.9.0
+
+### Components {#v1-9-0-components}
+
+#### Cascader {#v1-9-0-cascader}
+
+Added a new generic parameter `TItemValue`.
+If you have separated the `@bind-Value`, you need to pass an additional parameter of type `TItemValue`.
+
+```diff
+  <MCascader Value="@value"
+             ValueChanged="@ValueChanged"
+             TItem="AbcItem"
+             TValue="string"
++            TItemValue="string"
+             ... />
+```
+
+#### PdfMobileViewer {#v1-9-0-pdf-mobile-viewer}
+
+The component has been moved to a standalone project.
+If you are using this component, you need to import the new package.
+
+```cli
+dotnet add package MASA.Blazor.JSComponents.PdfJS
+```
+
+#### PageStack {#v1-9-0-page-stack}
+
+The `TabbedPatterns` and `SelfPatterns` properties have been removed, use `TabRules` instead.
+
+```diff
+  <PPageStack
+-     TabbedPatterns="_tabbedPatterns"
+-     SelfPatterns="_selfPatterns"
++     TabRules="_tabRules" />
+
+      @code {
+-         private string[] _tabbedPatterns =
+-         [
+-             "/blazor/examples/page-stack/tab1",
+-             "/blazor/examples/page-stack/tab2",
+-             "/blazor/examples/page-stack/tab3"
+-         ];
+
+-         private string[] _selfPatterns =
+-         [
+-             "/blazor/examples/page-stack/tab2",
+-         ];
+      
++         private readonly HashSet<TabRule> _tabbedPatterns =
++         [
++             new TabRule("/blazor/examples/page-stack/tab1"),
++             new TabRule("/blazor/examples/page-stack/tab2", Self: true),
++             new TabRule("/blazor/examples/page-stack/tab3"),
++         ];
+      }
+```
+
+## Upgrading from v1.7.x to v1.8.0
 
 ### Components {#v1-8-0-components}
 
@@ -14,7 +154,7 @@ If you use custom styles, please note to modify to use the elevation style.
 + <MPagination Elevation="0" />
 ```
 
-## Upgrading form v1.6.x to v1.7.0
+## Upgrading from v1.6.x to v1.7.0
 
 ### Components {#v1-7-0-components}
 
@@ -74,7 +214,7 @@ After enabling the `Selectable` property, you can now select by clicking on the 
   </MTreeview>
 ```
 
-## Upgrading form v1.5.x to v1.6.0
+## Upgrading from v1.5.x to v1.6.0
 
 ### Change the script
 
@@ -99,14 +239,14 @@ After enabling the `Selectable` property, you can now select by clicking on the 
 
 #### DragZone
 
-The component was deprecated in v1.4.0 and has now been removed. It is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+The component was deprecated in v1.4.0 and has now been removed. It is recommended to use the [MSortable](/blazor/components/sortable) component instead.
 
 #### Data/DataTable
 
 - For server-side pagination and sorting, the `ServerItemsLength` parameter must be provided, which is the total length of the server-side data.
 - The `Locale` parameter has never been implemented, and there is no need to implement it, it has now been removed.
 
-## Upgrading form v1.4.x to v1.5.0
+## Upgrading from v1.4.x to v1.5.0
 
 ### Components
 
@@ -129,13 +269,13 @@ Refactor using CSS approach.
   + <MBorder Color="#e91e63"></Border>
   ```
 
-## Upgrading form v1.2.x to v1.4.0
+## Upgrading from v1.2.x to v1.4.0
 
 ### Components
 
 #### DragZone
 
-This component is deprecated but not deleted, it is recommended to use the [MSortable](/blazor/labs/sortable) component instead.
+This component is deprecated but not deleted, it is recommended to use the [MSortable](/blazor/components/sortable) component instead.
 
 #### InfiniteScroll
 
@@ -150,7 +290,7 @@ No longer use the **Windows** component as the switching container internally, s
 
 The class name `m-application--wrap` is changed to `m-application__wrap`.
 
-## Upgrading form v1.1.x to v1.2.0
+## Upgrading from v1.1.x to v1.2.0
 
 ### Components
 
@@ -160,7 +300,7 @@ The class name `m-application--wrap` is changed to `m-application__wrap`.
 
 - Removed the `FixedRight` property, now you can set the fixed position of the column through the `Fixed` property in the `Headers`.
 
-## Upgrading form v1.0.x to v1.1.0
+## Upgrading from v1.0.x to v1.1.0
 
 ### Components
 

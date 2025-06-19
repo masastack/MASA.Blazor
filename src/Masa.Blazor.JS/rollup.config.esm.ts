@@ -1,4 +1,6 @@
 import { defineConfig } from "rollup";
+import del from "rollup-plugin-delete";
+import outputManifest from "rollup-plugin-output-manifest";
 import { terser } from "rollup-plugin-terser";
 
 import resolve from "@rollup/plugin-node-resolve";
@@ -16,6 +18,7 @@ export default defineConfig({
     "components/scroll-to-target/index":
       "./src/components/scroll-to-target/index.ts",
     "components/transition/index": "./src/components/transition/index.ts",
+    "components/window/touch": "./src/components/window/touch.ts",
 
     "mixins/activatable/index": "./src/mixins/activatable.ts",
     "mixins/intersect/index": "./src/mixins/intersect.ts",
@@ -25,16 +28,31 @@ export default defineConfig({
     // the following files are introduced in the main.ts
     // "components/slider/index": "./src/components/slider/index.ts",
     // "components/textarea/index": "./src/components/textarea/index.ts",
+    // "components/infinite-scroll/index": "./src/components/infinite-scroll/index.ts",
   },
   output: [
     {
+      entryFileNames: "[name]-[hash].js",
       dir: "../MASA.Blazor/wwwroot/js",
       format: "es",
-      chunkFileNames: "chunks/[name].js",
+      chunkFileNames: "chunks/[name]-[hash].js",
       sourcemap: true,
     },
   ],
-  plugins: [typescript(), resolve(), terser()],
+  plugins: [
+    typescript(),
+    resolve(),
+    terser(),
+    outputManifest(),
+    del({
+      targets: [
+        "../MASA.Blazor/wwwroot/js/components/*",
+        "../MASA.Blazor/wwwroot/js/mixins/*",
+        "../MASA.Blazor/wwwroot/js/chunks/*",
+      ],
+      force: true,
+    }),
+  ],
   watch: {
     exclude: "node_modules/**",
   },

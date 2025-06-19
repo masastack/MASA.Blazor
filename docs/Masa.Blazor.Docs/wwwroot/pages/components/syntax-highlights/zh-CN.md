@@ -1,10 +1,16 @@
 ---
 title: 语法高亮
 desc: "支持 [prism](https://prismjs.com/) 和 [highlightjs](https://highlightjs.org/) 两种高亮方案。需要在`_Host.cshtml`或`index.html`引入其中一种方案的 js 和 css 文件。"
-tag: JS代理
+tag: 基于JS封装
 related:
   - /blazor/components/markdown-parsers
 ---
+
+## 安装 {#installation released-on=v1.10.0}
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
 
 - 通过 CDN（例如 [BootCDN](https://www.bootcdn.cn/)）使用 prism:
 

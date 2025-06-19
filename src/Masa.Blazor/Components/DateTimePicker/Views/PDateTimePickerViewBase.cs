@@ -2,7 +2,7 @@
 
 public class PDateTimePickerViewBase<TValue> : ComponentBase
 {
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
+    [CascadingParameter(Name = "MasaBlazorCascadingTheme")] public string? CascadingTheme { get; set; }
 
     [Parameter] public DatePickerType? ActiveDatePicker { get; set; }
 
@@ -127,24 +127,6 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     protected ModifierBuilder BasePickerModifierBuilder = BasePickerBlock.CreateModifierBuilder();
     protected string ViewModifier =
         BasePickerBlock.Element("view").CreateModifierBuilder().Add("compact").Build();
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     protected override void OnParametersSet()
     {

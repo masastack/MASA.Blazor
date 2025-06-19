@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Components.Bootable;
-using Masa.Blazor.Mixins;
 using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
@@ -35,8 +34,6 @@ namespace Masa.Blazor
 
         [CascadingParameter] public IDependent? CascadingDependent { get; set; }
 
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
         [Parameter] public string? Attach { get; set; }
 
         [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -55,16 +52,12 @@ namespace Masa.Blazor
         [Parameter] public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
 
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.5.0")]
+        [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public bool NoPersistentAnimation { get; set; }
 
         [Parameter] public bool Persistent { get; set; }
 
         [Parameter] public StringNumber? Width { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
 
         [Parameter] public Dictionary<string, object>? ContentAttributes { get; set; }
 
@@ -77,31 +70,13 @@ namespace Masa.Blazor
         /// Disable to focus on the dialog when it's opened.
         /// </summary>
         [Parameter]
-        [MasaApiParameter(ReleasedOn = "v1.8.0")]
+        [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public bool DisableAutoFocus { get; set; }
 
-        private readonly List<IDependent> _dependents = new();
+        private readonly HashSet<IDependent> _dependents = new();
 
         private bool _attached;
         private DialogContentContext? _contentContext;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         private bool ShowOverlay => !Fullscreen && !HideOverlay;
 
@@ -119,18 +94,18 @@ namespace Masa.Blazor
 
         private bool Animated { get; set; }
 
-        protected override async Task WhenIsActiveUpdating(bool value)
+        protected override async Task OnActiveUpdatingAsync(bool active)
         {
             if (ContentRef.Context is not null)
             {
-                await AttachAsync(value);
+                await AttachAsync(active);
             }
             else
             {
-                NextTick(() => AttachAsync(value));
+                NextTick(() => AttachAsync(active));
             }
 
-            if (value)
+            if (active)
             {
                 ZIndex = await GetActiveZIndex(true);
 
@@ -148,14 +123,16 @@ namespace Masa.Blazor
                 }
             }
 
-            await base.WhenIsActiveUpdating(value);
+            await base.OnActiveUpdatingAsync(active);
         }
 
         private async Task AttachAsync(bool value)
         {
             if (!NoOutsideClick && OutsideClickJsModule is { Initialized: false })
             {
-                await OutsideClickJsModule.InitializeAsync(this, DependentSelectors.ToArray());
+                var dependentSelectors = DependentSelectors.ToArray();
+                await OutsideClickJsModule.InitializeAsync(this, dependentSelectors);
+                CascadingDependent?.AddDependent(this);
             }
 
             if (_attached == false)
@@ -252,7 +229,17 @@ namespace Masa.Blazor
             }
         }
 
-        public void RegisterChild(IDependent dependent)
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (firstRender && CascadingDependent is not null)
+            {
+                (this as IDependent).CascadingDependents.ForEach(item => item.AddDependent(this));
+            }
+        }
+
+        public void AddDependent(IDependent dependent)
         {
             if (NoOutsideClick)
             {
@@ -309,27 +296,12 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
             _contentContext = new DialogContentContext(() => RunDirectly(false));
         }
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
 
         private static Block _block = new("m-dialog");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();

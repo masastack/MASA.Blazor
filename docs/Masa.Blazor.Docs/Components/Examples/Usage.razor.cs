@@ -4,7 +4,7 @@
 public partial class Usage : NextTickComponentBase
 {
     [Parameter]
-    public bool Dark { get; set; }
+    public string? Theme { get; set; }
     
     private const string DefaultKey = "default";
 
@@ -37,6 +37,11 @@ public partial class Usage : NextTickComponentBase
         _sliderParameters = GenSliderParameters();
         _selectParameters = GenSelectParameters();
         _childContent = GenChildContent();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

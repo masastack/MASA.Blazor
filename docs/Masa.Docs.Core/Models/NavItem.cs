@@ -24,7 +24,7 @@ public class NavItem : IDefaultItem<NavItem>
     public bool Divider { get; set; }
 
     public string? Href { get; set; }
-    
+
     public bool Exact { get; set; }
 
     public string? Icon { get; set; }
@@ -32,12 +32,26 @@ public class NavItem : IDefaultItem<NavItem>
     public string? State { get; set; }
 
     public string? StateBackgroundColor { get; set; }
-    
-    public string? ReleasedOn { get; set; }
 
-    public bool? Hidden { get; set; }
+    public string? ReleasedOn { get; set; }
 
     public string? Segment => (Group ?? Title);
 
-    public bool IsHidden => Hidden.HasValue && Hidden.Value && (Children != null && Children.All(c => c.IsHidden));
+    public ComponentType ComponentType { get; set; }
+}
+
+public enum ComponentType
+{
+    Unknown,
+    Containment,
+    Navigation,
+    Form,
+    DataDisplay,
+    Selection,
+    Feedback,
+    ImagesAndIcons,
+    Pickers,
+    Providers,
+    Services,
+    Misc
 }

@@ -12,6 +12,9 @@ public partial class AppLink
     [EditorRequired]
     public string Content { get; set; } = null!;
 
+    [Parameter]
+    public bool StopPropagation { get; set; }
+
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();
 

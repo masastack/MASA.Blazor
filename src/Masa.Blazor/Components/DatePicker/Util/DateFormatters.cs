@@ -29,17 +29,31 @@ public static class DateFormatters
     /// <returns></returns>
     public static Func<DateOnly, string> AbbreviatedDayOfWeek(CultureInfo locale)
     {
-        return date => locale.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
+        // try
+        // {
+            return date => locale.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
+        // }
+        // catch (ArgumentOutOfRangeException)
+        // {
+        //     return date => CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
+        // }
     }
     
     /// <summary>
-    /// Get shortest day of week name
+    /// Get the shortest day of week name
     /// </summary>
     /// <param name="locale"></param>
     /// <returns></returns>
     public static Func<DateOnly, string> ShortestDayOfWeek(CultureInfo locale)
     {
-        return date => locale.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+        // try
+        // {
+            return date => locale.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+        // }
+        // catch (ArgumentOutOfRangeException)
+        // {
+        //     return date => CultureInfo.InvariantCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+        // }
     }
 
     /// <summary>
@@ -70,7 +84,14 @@ public static class DateFormatters
     /// <returns></returns>
     public static Func<DateOnly, string> Month(CultureInfo locale)
     {
-        return date => locale.DateTimeFormat.GetMonthName(date.Month);
+        try
+        {
+            return date => locale.DateTimeFormat.GetMonthName(date.Month);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            return date => CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(date.Month);
+        }
     }
 
     /// <summary>
@@ -80,6 +101,13 @@ public static class DateFormatters
     /// <returns></returns>
     public static Func<DateOnly, string> AbbreviatedMonth(CultureInfo locale)
     {
-        return date => locale.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
+        try
+        {
+            return date => locale.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            return date => CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
+        }
     }
 }

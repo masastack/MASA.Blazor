@@ -15,9 +15,10 @@ export function useTouch(
   state: State
 ) {
   const el = getElement(elOrString);
-  
+
   if (!el) {
-    oops()
+    console.warn("The root element of MNavigationDrawer component is not found, touching to open/close will not work.");
+    return {};
   }
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
@@ -111,6 +112,8 @@ export function useTouch(
   }
 
   function onTouchmove(e: TouchEvent) {
+    if (state.touchless) return;
+
     const touchX = e.changedTouches[0].clientX;
     const touchY = e.changedTouches[0].clientY;
 
@@ -155,7 +158,7 @@ export function useTouch(
   function onTouchend(e: TouchEvent) {
     maybeDragging = false;
 
-    if (!isDragging) return;
+    if (state.touchless || !isDragging) return;
 
     addMovement(e);
 

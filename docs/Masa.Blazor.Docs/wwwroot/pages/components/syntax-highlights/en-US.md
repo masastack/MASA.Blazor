@@ -1,12 +1,16 @@
 ---
 title: Syntax highlights
 desc: "[prism](https://prismjs.com/) and [highlightjs](https://highlightjs.org/) are supported. You need to introduce the js and css files one of the them in `_Host.cshtml` or `index.html`."
-tag: JS Proxy
+tag: JS Wrapper
 related:
   - /blazor/components/markdown-parsers
 ---
 
-## Usage
+## Installation {released-on=v1.10.0}
+
+``` shell
+dotnet add package Masa.Blazor.JSComponents.MarkdownIt
+```
 
 - Using prism with CDN, such as [jsdelivr](https://www.jsdelivr.com/)
 
@@ -31,5 +35,7 @@ related:
 <!-- and it's easy to individually load additional languages -->
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/csharp.min.js"></script>
 ```
+
+## Usage
 
 <masa-example file="Examples.components.syntax_highlights.Usage"></masa-example>

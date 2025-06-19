@@ -30,6 +30,7 @@ public partial class MSticky : MasaComponentBase
     private double? _width;
 
     private string? _selector;
+    private long _scrollEventId;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -38,12 +39,11 @@ public partial class MSticky : MasaComponentBase
             await OnScrollAsync();
 
             _selector = ScrollTarget ?? "window";
-            await Js.AddHtmlElementEventListener(
+            _scrollEventId = await Js.AddHtmlElementEventListener(
                 _selector,
                 "scroll",
                 OnScrollAsync,
-                false,
-                new EventListenerExtras(key: Ref.Id));
+                false);
         }
     }
 
@@ -126,10 +126,7 @@ public partial class MSticky : MasaComponentBase
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        if (_selector is not null)
-        {
-            await Js.RemoveHtmlElementEventListener(_selector, "scroll", Ref.Id);
-        }
+        await Js.RemoveHtmlElementEventListener( _scrollEventId);
     }
 }
 

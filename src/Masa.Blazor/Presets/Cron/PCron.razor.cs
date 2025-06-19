@@ -20,28 +20,37 @@ public partial class PCron
 
     [Parameter] public EventCallback<string> OnChange { get; set; }
 
+    [CascadingParameter(Name = "MasaBlazorCascadingTheme")]
+    public string CascadingTheme { get; set; } = null!;
+
     [Parameter] public bool Dark { get; set; }
 
     [Parameter] public bool Light { get; set; }
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
+    [Parameter] public string? Theme { get; set; }
 
-    public bool IsDark
+    public bool IsDark => ComputedTheme == "dark";
+
+    public string ComputedTheme
     {
         get
         {
+            if (Theme != null)
+            {
+                return Theme;
+            }
+
             if (Dark)
             {
-                return true;
+                return "dark";
             }
 
             if (Light)
             {
-                return false;
+                return "light";
             }
 
-            return CascadingIsDark;
+            return CascadingTheme;
         }
     }
 
@@ -163,7 +172,8 @@ public partial class PCron
 
     private void ChangeTimeItemDefaultValue(CronItemModel cronItem)
     {
-        if (cronItem.Period != PeriodTypes.Second && cronItem.Period != PeriodTypes.Minute && cronItem.Period != PeriodTypes.Hour)
+        if (cronItem.Period != PeriodTypes.Second && cronItem.Period != PeriodTypes.Minute &&
+            cronItem.Period != PeriodTypes.Hour)
         {
             SetCronValueToZeroWhenDefault(PeriodTypes.Second);
             SetCronValueToZeroWhenDefault(PeriodTypes.Minute);

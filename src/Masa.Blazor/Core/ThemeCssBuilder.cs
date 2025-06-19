@@ -5,10 +5,6 @@ public static class ThemeCssBuilder
     public static string Build(Theme theme)
     {
         var options = theme.CurrentTheme;
-        var dark = theme.Themes.Dark;
-        var light = theme.Themes.Light;
-        var isDark = theme.Dark;
-
         var combinePrefix = options.CombinePrefix;
         combinePrefix ??= string.Empty;
         combinePrefix = combinePrefix.EndsWith(' ') ? combinePrefix : $"{combinePrefix} ";
@@ -17,108 +13,179 @@ public static class ThemeCssBuilder
         {
             $$"""
               :root {
-                  color-scheme: {{(isDark ? "dark" : "normal")}};
-                  {{BuildCssVariable("primary", options.Primary)}}
-                  {{BuildCssVariable("secondary", options.Secondary)}}
-                  {{BuildCssVariable("accent", options.Accent)}}
-                  {{BuildCssVariable("info", options.Info)}}
-                  {{BuildCssVariable("success", options.Success)}}
-                  {{BuildCssVariable("warning", options.Warning)}}
-                  {{BuildCssVariable("error", options.Error)}}
-                  {{BuildCssVariable(options.UserDefined)}}
-
-                  --m-theme-on-primary: {{options.OnPrimary}};
-                  --m-theme-on-secondary: {{options.OnSecondary}};
-                  --m-theme-on-accent: {{options.OnAccent}};
-                  --m-theme-on-error: {{options.OnError}};
-                  --m-theme-on-info: {{options.OnInfo}};
-                  --m-theme-on-success: {{options.OnSuccess}};
-                  --m-theme-on-warning: {{options.OnWarning}};
-
-                  --m-theme-surface: {{options.Surface}};
-                  --m-theme-on-surface: {{options.OnSurface}};
-                  --m-theme-surface-container: {{options.SurfaceContainer}};
-                  --m-theme-inverse-surface: {{options.InverseSurface}};
-                  --m-theme-inverse-on-surface: {{options.InverseOnSurface}};
-                  --m-theme-inverse-primary: {{options.InversePrimary}};
-
-                  --m-theme-light-surface: {{light.Surface}};
-                  --m-theme-light-on-surface: {{light.OnSurface}};
-                  --m-theme-light-surface-container: {{light.SurfaceContainer}};
-                  --m-theme-dark-surface: {{dark.Surface}};
-                  --m-theme-dark-on-surface: {{dark.OnSurface}};
-                  --m-theme-dark-surface-container: {{dark.SurfaceContainer}};
-                  --m-theme-light-inverse-surface: {{light.InverseSurface}};
-                  --m-theme-light-inverse-on-surface: {{light.InverseOnSurface}};
-                  --m-theme-light-inverse-primary: {{light.InversePrimary}};
-                  --m-theme-dark-inverse-surface: {{dark.InverseSurface}};
-                  --m-theme-dark-inverse-on-surface: {{dark.InverseOnSurface}};
-                  --m-theme-dark-inverse-primary: {{dark.InversePrimary}};
+                {{BuildCssVariables(options)}}
               }
-
+              {{BuildThemeCssVariables(theme.Themes)}}
               """,
-            $"{combinePrefix}a {{ color: {options.Primary}; }}",
-            Build(combinePrefix, nameof(options.Primary).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Secondary).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Accent).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Info).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Success).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Warning).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Error).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, nameof(options.Surface).ToLowerInvariant(), hasOnColor: true),
-            Build(combinePrefix, options.UserDefined)
+            BuildBgCssClass(combinePrefix, "surface-dim", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-bright", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-lowest", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-low", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-high", "on-surface"),
+            BuildBgCssClass(combinePrefix, "surface-container-highest", "on-surface"),
+            BuildBgCssClass(combinePrefix, "inverse-surface", "inverse-on-surface"),
+            BuildBgCssClass(combinePrefix, "primary", "on-primary"),
+            BuildBgCssClass(combinePrefix, "secondary", "on-secondary"),
+            BuildBgCssClass(combinePrefix, "accent", "on-accent"),
+            BuildBgCssClass(combinePrefix, "info", "on-info"),
+            BuildBgCssClass(combinePrefix, "success", "on-success"),
+            BuildBgCssClass(combinePrefix, "warning", "on-warning"),
+            BuildBgCssClass(combinePrefix, "error", "on-error"),
+            BuildTextCssClass(combinePrefix, "primary"),
+            BuildTextCssClass(combinePrefix, "secondary"),
+            BuildTextCssClass(combinePrefix, "accent"),
+            BuildTextCssClass(combinePrefix, "info"),
+            BuildTextCssClass(combinePrefix, "success"),
+            BuildTextCssClass(combinePrefix, "warning"),
+            BuildTextCssClass(combinePrefix, "error"),
+            BuildTextCssClass(combinePrefix, "inverse-primary"),
+            BuildTextCssClass(combinePrefix, "inverse-on-surface"),
+            BuildBorderCssClass(combinePrefix, "outline"),
+            BuildBorderCssClass(combinePrefix, "outline-variant"),
         };
+
+        foreach (var kv in options.UserDefined)
+        {
+            lstCss.Add(BuildTextCssClass(combinePrefix, kv.Key));
+            lstCss.Add(BuildBgCssClass(combinePrefix, kv.Key, kv.Key));
+        }
 
         return string.Concat(lstCss);
     }
 
-    private static string BuildCssVariable(string role, string? value)
+    private static string BuildCssVariables(ThemeOptions options)
     {
-        return string.IsNullOrWhiteSpace(value)
-            ? string.Empty
-            : $"""
-               --m-theme-{role}: {value};
-                   --m-theme-{role}-text: {value};
-               """;
+        return $"""
+                {BuildCssVariable("primary", options.Primary, options.OnPrimary)}
+                  {BuildCssVariable("secondary", options.Secondary, options.OnSecondary)}
+                  {BuildCssVariable("accent", options.Accent, options.OnAccent)}
+                  {BuildCssVariable("info", options.Info, options.OnInfo)}
+                  {BuildCssVariable("success", options.Success, options.OnSuccess)}
+                  {BuildCssVariable("warning", options.Warning, options.OnWarning)}
+                  {BuildCssVariable("error", options.Error, options.OnError)}
+                  {BuildCssVariable(options.UserDefined)}
+
+                  {BuildCssVariable("surface-dim", options.SurfaceDim)}
+                  {BuildCssVariable("surface", options.Surface)}
+                  {BuildCssVariable("surface-bright", options.SurfaceBright)}
+                  {BuildCssVariable("surface-container-lowest", options.SurfaceContainerLowest)}
+                  {BuildCssVariable("surface-container-low", options.SurfaceContainerLow)}
+                  {BuildCssVariable("surface-container", options.SurfaceContainer)}
+                  {BuildCssVariable("surface-container-high", options.SurfaceContainerHigh)}
+                  {BuildCssVariable("surface-container-highest", options.SurfaceContainerHighest)}
+                  {BuildCssVariable("on-surface", options.OnSurface)}
+                  {BuildCssVariable("inverse-surface", options.InverseSurface)}
+                  {BuildCssVariable("inverse-on-surface", options.InverseOnSurface)}
+                  {BuildCssVariable("inverse-primary", options.InversePrimary)}
+
+                  {options.Variables}
+                  
+                  --m-theme-outline: var(--m-theme-on-surface), var(--m-low-emphasis-opacity);
+                  --m-theme-outline-variant: var(--m-theme-on-surface), var(--m-border-opacity);
+                """;
     }
 
-    private static string BuildCssVariable(Dictionary<string, string> userDefined)
-    {
-        return string.Join("", userDefined.Select(x => BuildCssVariable(x.Key, x.Value)));
-    }
-
-    private static string Build(string combinePrefix, string selector, bool hasOnColor = false)
+    private static string BuildCssVariable(string role, string? color, string? onColor)
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.Append($$"""
 
-                               {{combinePrefix}}.{{selector}} {
-                                   background-color: var(--m-theme-{{selector}}) !important;
-                                   border-color: var(--m-theme-{{selector}}) !important;
-                               """);
-
-        if (hasOnColor)
+        if (!string.IsNullOrWhiteSpace(color))
         {
-            stringBuilder.Append($"""
-
-                                      color: var(--m-theme-on-{selector}) !important;
-                                  """);
+            var value = ColorParser.ParseColorAsString(color);
+            stringBuilder.AppendLine(
+                $"""
+                 --m-theme-{role}: {value};
+                   --m-theme-{role}-text: {value};
+                 """);
         }
 
-        stringBuilder.Append($$"""
-
-                               }
-                               {{combinePrefix}}.{{selector}}--text {
-                                   color: var(--m-theme-{{selector}}) !important;
-                                   caret-color: var(--m-theme-{{selector}}) !important;
-                               }
-                               """);
+        if (!string.IsNullOrWhiteSpace(onColor))
+        {
+            var value = ColorParser.ParseColorAsString(onColor);
+            stringBuilder.Append($"  --m-theme-on-{role}: {value};");
+        }
 
         return stringBuilder.ToString();
     }
 
-    private static string Build(string combinePrefix, Dictionary<string, string> userDefined)
+    private static string BuildCssVariable(Dictionary<string, ColorPairing> userDefined)
     {
-        return string.Join("", userDefined.Select(x => Build(combinePrefix, x.Key.ToLowerInvariant())));
+        return string.Join("", userDefined.Select(x => BuildCssVariable(x.Key, x.Value.Color, x.Value.OnColor)));
+    }
+
+    private static string BuildBgCssClass(string combinePrefix, string bg, string? text = null)
+    {
+        var str = $$"""
+
+                    {{combinePrefix}}.{{bg}} {
+                        background-color: rgba(var(--m-theme-{{bg}})) !important;
+                    """;
+
+        if (!string.IsNullOrWhiteSpace(text))
+        {
+            str += $$"""
+
+                         color: rgba(var(--m-theme-{{text}})) !important;
+                     }
+                     """;
+        }
+
+        return str;
+    }
+
+    private static string BuildTextCssClass(string combinePrefix, string text)
+    {
+        return $$"""
+
+                 {{combinePrefix}}.{{text}}--text {
+                     color: rgba(var(--m-theme-{{text}})) !important;
+                     caret-color: rgba(var(--m-theme-{{text}})) !important;
+                 }
+                 """;
+    }
+
+    private static string BuildBorderCssClass(string combinePrefix, string border)
+    {
+        return $$"""
+
+                 {{combinePrefix}}.{{border}} {
+                     border-color: rgba(var(--m-theme-{{border}})) !important;
+                 }
+                 """;
+    }
+
+    private static string? BuildCssVariable(string name, string? color)
+    {
+        if (string.IsNullOrWhiteSpace(color))
+        {
+            return null;
+        }
+
+        return $"--m-theme-{name}: {ColorParser.ParseColorAsString(color)};";
+    }
+
+    private static string BuildThemeCssVariables(Themes themes)
+    {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine(BuildScope("light", themes.Light));
+        stringBuilder.AppendLine(BuildScope("dark", themes.Dark));
+        foreach (var userDefined in themes.UserDefined)
+        {
+            stringBuilder.AppendLine(BuildScope(userDefined.Key, userDefined.Value));
+        }
+
+        return stringBuilder.ToString();
+    }
+
+    private static string BuildScope(string theme, ThemeOptions options)
+    {
+        return $$"""
+                 .theme--{{theme}} {
+                   color-scheme: {{options.ColorScheme}};
+                   {{BuildCssVariables(options)}}
+                 }
+                 """;
     }
 }

@@ -1,20 +1,30 @@
 ﻿namespace Masa.Blazor;
 
-public class SelectSelectionProps<TItem>
+public class SelectSelectionProps<TItem>(
+    TItem? item,
+    int index,
+    bool selected,
+    bool disabled,
+    Action select,
+    string? text = null)
 {
-    public SelectSelectionProps(TItem item, int index, bool selected, bool disabled)
-    {
-        Item = item;
-        Index = index;
-        Selected = selected;
-        Disabled = disabled;
-    }
+    /// <summary>
+    /// The selected item.
+    /// May be null if the context is from a custom input in a <see cref="MCombobox{TItem,TValue}"/> component.
+    /// For custom inputs, use the <see cref="Text"/> property to get the user input.
+    /// </summary>
+    public TItem? Item { get; } = item;
 
-    public TItem Item { get; }
+    public int Index { get; } = index;
 
-    public int Index { get; }
+    public bool Selected { get; } = selected;
 
-    public bool Selected { get; }
+    public bool Disabled { get; } = disabled;
 
-    public bool Disabled { get; }
+    /// <summary>
+    /// The text of selected item or user input from the <see cref="MCombobox{TItem,TValue}"/> component.
+    /// </summary>
+    public string? Text { get; } = text;
+
+    public Action Select { get; init; } = select;
 }

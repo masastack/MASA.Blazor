@@ -1,20 +1,18 @@
 ﻿namespace Masa.Blazor.Mixins.Activatable;
 
-public class ActivatableJsModule : JSModule
+public class ActivatableJsModule(IJSRuntime js)
+    : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.ActivatableIndexJs}")
 {
     private IActivatableJsCallbacks? _owner;
     private DotNetObjectReference<ActivatableJsModule>? _selfReference;
     private IJSObjectReference? _instance;
-
-    public ActivatableJsModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/mixins/activatable/index.js")
-    {
-    }
 
     public async ValueTask InitializeAsync(IActivatableJsCallbacks owner)
     {
         _owner = owner;
         _selfReference = DotNetObjectReference.Create(this);
         _instance = await InvokeAsync<IJSObjectReference>("init",
+            _owner.IsActive,
             _owner.ActivatorSelector,
             _owner.Disabled,
             _owner.OpenOnClick,

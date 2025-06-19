@@ -2,6 +2,8 @@
 
 public interface IActivatableJsCallbacks : IDelayable, IOutsideClickJsCallback
 {
+    bool IsActive { get; }
+
     string ActivatorSelector { get; }
 
     bool Disabled { get; }

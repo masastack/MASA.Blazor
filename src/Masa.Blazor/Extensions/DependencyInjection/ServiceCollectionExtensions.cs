@@ -2,15 +2,11 @@
 using Masa.Blazor.Components.Drawflow;
 using Masa.Blazor.Components.ErrorHandler;
 using Masa.Blazor.Components.Input;
-using Masa.Blazor.Components.Pdfjs;
 using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
-using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.JSModules;
 using Masa.Blazor.Mixins.Activatable;
-using Masa.Blazor.Popup;
-using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -80,11 +76,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<InternalHttpClient>();
         services.TryAddScoped<EChartsJSModule>();
         services.TryAddScoped<MonacoEditorJSModule>();
-        services.TryAddScoped<MarkdownItJSModule>();
-        services.TryAddScoped<GridstackJSModule>();
         services.TryAddScoped<BaiduMapJSModule>();
-        services.TryAddScoped<SwiperJsModule>();
-        services.TryAddScoped<XgplayerJSModule>();
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
@@ -96,10 +88,6 @@ public static class ServiceCollectionExtensions
         services.TryAddTransient<TransitionJSModule>();
         services.TryAddTransient<OutsideClickJSModule>();
         services.TryAddScoped<ScrollStrategyJSModule>();
-        services.TryAddScoped<PdfMobileViewerJSModule>();
-
-        services.TryAddScoped<IPageStackNavControllerFactory, PageStackNavControllerFactory>();
-        services.TryAddScoped(s => s.GetRequiredService<IPageStackNavControllerFactory>().Create(string.Empty));
 
         return new MasaBlazorBuilder(services);
     }

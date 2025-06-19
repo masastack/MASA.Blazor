@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Text.Json;
 
 namespace Masa.Blazor;
@@ -10,9 +9,6 @@ public class MECharts : Container, IEChartsJsCallbacks
 
     [Inject]
     protected EChartsJSModule Module { get; set; } = null!;
-
-    [Inject] 
-    private MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -36,7 +32,7 @@ public class MECharts : Container, IEChartsJsCallbacks
     public Action<EChartsInitOptions>? InitOptions { get; set; }
 
     [Parameter]
-    public object Option { get; set; } = new { };
+    public object? Option { get; set; }
 
     [Parameter]
     public bool Light { get; set; }
@@ -74,14 +70,14 @@ public class MECharts : Container, IEChartsJsCallbacks
     [Parameter]
     public EventCallback<EChartsEventArgs> OnContextMenu { get; set; }
 
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
     [Parameter]
     public bool IncludeFunctionsInOption { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")]
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")]
     public bool Loading { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.9.0")]
+    public object? LoadingOptions { get; set; }
 
     private static readonly Regex s_functionRegex
         = new(@"""\s*function\s?\([a-zA-Z][a-zA-Z0-9,\s]*\)\s?\{((?<BR>\{)|(?<-BR>\})|[^{}]*)+\}\s*""", RegexOptions.IgnoreCase);
@@ -113,11 +109,6 @@ public class MECharts : Container, IEChartsJsCallbacks
             if (Light)
             {
                 return "light";
-            }
-
-            if (CascadingIsDark)
-            {
-                return "dark";
             }
 
             return null;
@@ -160,12 +151,21 @@ public class MECharts : Container, IEChartsJsCallbacks
 
     private object GetDefaultLoadingOption()
     {
-        var onSurface = ComputedTheme == "dark"
-            ? MasaBlazor.Theme.Themes.Dark.OnSurface
-            : MasaBlazor.Theme.Themes.Light.OnSurface;
-        var color = ColorTranslator.FromHtml(onSurface);
-        var maskColor = $"rgba({color.R}, {color.G}, {color.B}, 0.32)";
-        return new { maskColor };
+        if (LoadingOptions is not null)
+        {
+            return LoadingOptions;
+        }
+
+        var isDark = ComputedTheme == "dark";
+
+        var maskColor = isDark ? " rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.8)";
+        var textColor = isDark ? "rgba(255, 255, 255, 0.87)" : "rgba(0, 0, 0, 0.87)";
+
+        return new
+        {
+            textColor,
+            maskColor
+        };
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -224,7 +224,7 @@ public class MECharts : Container, IEChartsJsCallbacks
     {
         if (_echarts == null) return;
 
-        option ??= Option;
+        option ??= Option ?? new { };
 
         if (IncludeFunctionsInOption && IsAnyFunction(option, out var optionJson))
         {

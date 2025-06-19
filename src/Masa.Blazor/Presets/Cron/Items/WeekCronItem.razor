@@ -5,8 +5,9 @@
 
 @code {
 
-    public WeekCronItem() : base(PeriodTypes.Week)
+    public WeekCronItem()
     {
+        Period = PeriodTypes.Week;
     }
 
     protected override RenderFragment RadiosContent() => __builder =>

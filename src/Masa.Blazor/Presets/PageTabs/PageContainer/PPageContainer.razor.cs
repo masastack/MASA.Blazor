@@ -23,7 +23,7 @@ public partial class PPageContainer : PatternPathComponentBase
     /// The content of the matched path would be cached in the DOM.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.0.2")]
+    [MasaApiParameter(ReleasedIn = "v1.0.2")]
     public IEnumerable<string> IncludePatterns { get; set; } = Array.Empty<string>();
 
     /// <summary>
@@ -46,6 +46,7 @@ public partial class PPageContainer : PatternPathComponentBase
 
     private readonly Block _block = new("p-page-container");
 
+    private bool _eventBound;
     private string? _previousPath;
     private PatternPath? _currentPatternPath;
 
@@ -59,6 +60,8 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         base.OnInitialized();
 
+        BindEvents(ContainerPageTabs);
+
         UpdateCacheRegexes();
 
         var patternPath = GetCurrentPatternPath();
@@ -70,13 +73,6 @@ public partial class PPageContainer : PatternPathComponentBase
             _previousPath = patternPath.AbsolutePath;
         }
 
-        if (ContainerPageTabs != null)
-        {
-            ContainerPageTabs.TabClosed += PageTabsOnTabClosed;
-            ContainerPageTabs.TabReload += PageTabsOnTabReload;
-            ContainerPageTabs.TabsUpdated += PageTabsOnTabsUpdated;
-        }
-
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
     }
 
@@ -84,7 +80,22 @@ public partial class PPageContainer : PatternPathComponentBase
     {
         base.OnParametersSet();
 
+        BindEvents(PageTabs);
+
         UpdateCacheRegexes();
+    }
+
+    private void BindEvents(PPageTabs? component)
+    {
+        if (_eventBound || component is null)
+        {
+            return;
+        }
+        
+        _eventBound = true;
+        component.TabClosed += PageTabsOnTabClosed;
+        component.TabReload += PageTabsOnTabReload;
+        component.TabsUpdated += PageTabsOnTabsUpdated;
     }
 
     private void UpdateCacheRegexes()
@@ -109,20 +120,6 @@ public partial class PPageContainer : PatternPathComponentBase
         yield return "p-page-container";
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender)
-        {
-            if (PageTabs == null) return;
-
-            PageTabs.TabClosed += PageTabsOnTabClosed;
-            PageTabs.TabReload += PageTabsOnTabReload;
-            PageTabs.TabsUpdated += PageTabsOnTabsUpdated;
-        }
-    }
-
     private void PageTabsOnTabClosed(object? sender, PatternPath e)
     {
         InvokeAsync(() =>
@@ -137,8 +134,11 @@ public partial class PPageContainer : PatternPathComponentBase
         InvokeAsync(() =>
         {
             _patternPaths.Remove(e.Pattern);
-            StateHasChanged();
-            _patternPaths.Put(e.Pattern, e);
+            NextTick(() =>
+            {
+                _patternPaths.Put(e.Pattern, e);
+                StateHasChanged();
+            });
             StateHasChanged();
         });
     }

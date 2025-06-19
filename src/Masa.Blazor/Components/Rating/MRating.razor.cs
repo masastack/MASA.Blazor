@@ -2,13 +2,12 @@
 
 namespace Masa.Blazor;
 
-public partial class MRating : MasaComponentBase
+public partial class MRating
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
     [Parameter]
-    [MasaApiParameter("accent")]
-    public string BackgroundColor { get; set; } = "accent";
+    public string? BackgroundColor { get; set; }
 
     [Parameter]
     [MasaApiParameter("primary")]
@@ -67,30 +66,6 @@ public partial class MRating : MasaComponentBase
 
     [Parameter] [MasaApiParameter(5)] public StringNumber Length { get; set; } = 5;
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private bool _running;
     private double _value;
     private double _hoverIndex = -1;
@@ -107,29 +82,16 @@ public partial class MRating : MasaComponentBase
         MouseMove
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     private static Block _block = new("m-rating");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
+    private HashSet<long[]> _eventIdsGroup = [];
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return _modifierBuilder
             .Add(Readonly, Dense)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 
@@ -143,13 +105,15 @@ public partial class MRating : MasaComponentBase
             {
                 if (v.ForwardRef.Current.TryGetSelector(out var selector))
                 {
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseenter",
+                    var mouseenterEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseenter",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseEnter), false);
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseleave",
+                    var mouseleaveEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mouseleave",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseLeave), false);
-                    _ = Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mousemove",
+                    var mousemoveEventId = await Js.AddHtmlElementEventListener<ExMouseEventArgs>(selector, "mousemove",
                         e => HandleOnExMouseEventAsync(e, k, MouseType.MouseMove), false,
                         new EventListenerExtras(0, 16));
+                    
+                    _eventIdsGroup.Add([mouseenterEventId, mouseleaveEventId, mousemoveEventId]);
                 }
             }
         }
@@ -285,13 +249,11 @@ public partial class MRating : MasaComponentBase
 
     protected override ValueTask DisposeAsyncCore()
     {
-        foreach (var (k, v) in _cachedItems)
+        foreach (var eventIds in _eventIdsGroup)
         {
-            if (v.ForwardRef.Current.TryGetSelector(out var selector))
+            foreach (var t in eventIds)
             {
-                _ = Js.RemoveHtmlElementEventListener(selector, "mouseenter");
-                _ = Js.RemoveHtmlElementEventListener(selector, "mouseleave");
-                _ = Js.RemoveHtmlElementEventListener(selector, "mousemove");
+                _ = Js.RemoveHtmlElementEventListener(t);
             }
         }
 

@@ -3,7 +3,7 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor
 {
-    public partial class MIcon : MasaComponentBase
+    public partial class MIcon : ThemeComponentBase
     {
         [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -29,30 +29,6 @@ namespace Masa.Blazor
         [Parameter] [MasaApiParameter("i")] public string? Tag { get; set; } = "i";
 
         [Parameter] public Dictionary<string, object>? SvgAttributes { get; set; }
-
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         [Parameter] public string? Color { get; set; }
 
@@ -111,6 +87,7 @@ namespace Masa.Blazor
         };
 
         private bool _clickEventRegistered;
+        private long _clickEventId;
 
         private string? _iconCss;
         private bool _transitionValue;
@@ -209,9 +186,6 @@ namespace Masa.Blazor
             return (defaultAliases.ContentFormatter?.Invoke(icon), defaultAliases.CssFormatter?.Invoke(icon));
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
         public string? GetSize()
         {
             var sizes = new Dictionary<string, bool>()
@@ -244,13 +218,6 @@ namespace Masa.Blazor
         {
             base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-
-#endif
             if (OnClick.HasDelegate)
             {
                 Tag = "button";
@@ -306,7 +273,7 @@ namespace Masa.Blazor
                 .Add(Left)
                 .Add(Disabled)
                 .Add(Right)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .AddTextColor(Color)
                 .AddClass(_iconCss, ComputedIcon is { IsSvg: false })
                 .Build();
@@ -330,7 +297,7 @@ namespace Masa.Blazor
             {
                 _clickEventRegistered = true;
 
-                await Js.AddHtmlElementEventListener<MouseEventArgs>(Ref, "click",
+                _clickEventId = await Js.AddHtmlElementEventListener<MouseEventArgs>(Ref, "click",
                     HandleOnClick, false,
                     new EventListenerExtras
                     {
@@ -348,6 +315,17 @@ namespace Masa.Blazor
         public static bool IsSvgPath(string str)
         {
             return _reg1.Match(str).Success && _reg2.Match(str).Success && str.Length > 4;
+        }
+
+        protected override ValueTask DisposeAsyncCore()
+        {
+            if (_clickEventId != 0)
+            {
+                _clickEventRegistered = false;
+                _ = Js.RemoveHtmlElementEventListener(_clickEventId);
+            }
+
+            return base.DisposeAsyncCore();
         }
     }
 }

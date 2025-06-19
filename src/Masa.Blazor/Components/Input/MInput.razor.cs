@@ -3,14 +3,12 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInput, IInput
+public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInput, IInput
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
     [CascadingParameter] protected MInputsFilter? InputsFilter { get; set; }
     
-    [CascadingParameter(Name = "AppIsDark")] protected bool AppIsDark { get; set; }
-
     [Parameter][MasaApiParameter("primary")] public string? Color { get; set; } = "primary";
 
     [Parameter] public string? BackgroundColor { get; set; }
@@ -92,30 +90,6 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
     [Parameter] public EventCallback<MouseEventArgs> OnPrependClick { get; set; }
 
     [Parameter] public EventCallback<MouseEventArgs> OnAppendClick { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public virtual bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     protected bool HasMouseDown { get; set; }
 
@@ -264,12 +238,16 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         {
             if (Required)
             {
-                var rules = new List<Func<TValue, StringBoolean>>()
-                    { v => s_defaultRequiredRule(v) ? true : RequiredMessage };
-                return Rules is null ? rules : rules.Concat(Rules);
+                yield return v => s_defaultRequiredRule(v) ? true : RequiredMessage;
             }
 
-            return Rules ?? Enumerable.Empty<Func<TValue, StringBoolean>>();
+            if (Rules is not null)
+            {
+                foreach (var rule in Rules)
+                {
+                    yield return rule;
+                }
+            }
         }
     }
 
@@ -296,7 +274,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
             .Add("is-loading", Loading != null && Loading != false)
             .Add(IsReadonly)
             .Add(Dense)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .AddTextColor(ValidationState)
             .Build();
     }
@@ -312,10 +290,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         return styleList.Length > 0 ? string.Join("; ", styleList).Trim(' ') : null;
     }
 
-    protected virtual IEnumerable<string> BuildControlStyle()
-    {
-        return Enumerable.Empty<string>();
-    }
+    protected virtual IEnumerable<string> BuildControlStyle() => [];
 
     protected async Task TryInvokeFieldChangeOfInputsFilter(bool isClear = false)
     {
@@ -327,13 +302,7 @@ public partial class MInput<TValue> : MasaComponentBase, IThemeable, IFilterInpu
         await InputsFilter.NotifyFieldChange(ValueIdentifier?.FieldName, isClear);
     }
 
-    public void ResetFilter()
-    {
-        Reset();
-    }
+    public void ResetFilter() => Reset();
 
-    public void SetFormLabel(string input)
-    {
-        _formLabel = input;
-    }
+    public void SetFormLabel(string input) => _formLabel = input;
 }

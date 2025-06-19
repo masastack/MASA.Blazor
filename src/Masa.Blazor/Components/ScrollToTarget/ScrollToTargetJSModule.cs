@@ -1,11 +1,8 @@
 ﻿namespace Masa.Blazor.Components.ScrollToTarget;
 
-public class ScrollToTargetJSModule : JSModule
+public class ScrollToTargetJSModule(IJSRuntime js)
+    : JSModule(js, $"./_content/Masa.Blazor/js/{JSManifest.ScrollToTargetIndexJs}")
 {
-    public ScrollToTargetJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/components/scroll-to-target/index.js")
-    {
-    }
-
     public async ValueTask<ScrollToTargetJSObjectReference> InitAsync(
         DotNetObjectReference<ScrollToTargetJSInteropHandle> interopHandle,
         IntersectionObserverInit options

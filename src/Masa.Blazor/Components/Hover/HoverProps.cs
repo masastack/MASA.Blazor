@@ -1,11 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public class HoverProps : ActivatorProps
+public class HoverProps(bool hover, Dictionary<string, object> attrs) : ActivatorProps(attrs)
 {
-    public HoverProps(bool hover, Dictionary<string, object> attrs) : base(attrs)
-    {
-        Hover = hover;
-    }
-
-    public bool Hover { get; internal set; }
+    public bool Hover { get; internal set; } = hover;
 }

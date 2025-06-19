@@ -18,16 +18,16 @@
     else
     {
         <div class="github-issues github-issues--loaded rounded">
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+{Labels}")">
                 <MIcon Class="emphasize1-color mr-1" Size="16">mdi-plus</MIcon>
                 <span>Issues</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:open+is:issue+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-alert-circle-outline</MIcon>
                 <span>@_openCount</span>&nbsp;
                 <span>Open</span>
             </a>
-            <a class="d-flex" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{Labels}")">
+            <a class="d-flex primary--text" target=_blank href="@($"https://github.com/masastack/MASA.Blazor/issues?q=is:issue+is:closed+{Labels}")">
                 <MIcon Class="mr-1" Size="16">mdi-check</MIcon>
                 <span>@_closeCount</span>&nbsp;
                 <span>Closed</span>
@@ -117,6 +117,7 @@
         await InvokeAsync(StateHasChanged);
 
         _componentNames.Clear();
+        lastSegment = lastSegment.TrimEnd('/');
 
         if (pageToApi.TryGetValue(lastSegment, out var components))
         {
@@ -127,7 +128,7 @@
             _componentNames.Add("component/" + lastSegment.ToPascal().TrimEnd('s'));
         }
 
-        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", new[] { string.Join(',', _componentNames) }, lastSegment);
+        (_openCount, _closeCount) = await GithubService.SearchIssuesAsync("masastack", "MASA.Blazor", [string.Join(',', _componentNames)], lastSegment);
 
         _searching = false;
         await InvokeAsync(StateHasChanged);

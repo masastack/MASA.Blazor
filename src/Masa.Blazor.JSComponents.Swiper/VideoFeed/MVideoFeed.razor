@@ -1,0 +1,31 @@
+﻿@namespace Masa.Blazor
+@using Masa.Blazor.Components.VideoFeed
+@inherits MasaComponentBase
+
+<div class="@_blockBuilder"
+     style="--m-video-feed-width: @Width; --m-video-feed-height: @Height;">
+    @if (Videos.Count > 0)
+    {
+        <MSwiper Index="@_index"
+                 IndexChanged="@IndexChanged"
+                 Width="@Width"
+                 Height="@Height"
+                 Vertical
+                 Virtual
+                 @onclick="OnClick"
+                 @ref="_swiper"
+                 Debug>
+            @foreach (var item in Videos)
+            {
+                <MSwiperSlide>
+                    <MRichVideo Data="@item"
+                                @bind-Muted="@_muted"
+                                InternalFullscreenMode="@InternalFullscreenMode"
+                                OnFullscreen="@HandleOnFullscreen"
+                                OnCloseFullscreen="@HandleOnCloseFullscreen"
+                                ActionsContent="@ActionsContent"/>
+                </MSwiperSlide>
+            }
+        </MSwiper>
+    }
+</div>

@@ -78,6 +78,8 @@
       }
     },
     "pageTabs": {
+      "pinTab": "固定标签页",
+      "unpinTab": "取消固定标签页",
       "reloadTab": "重新加载",
       "closeTabsToTheLeft": "关闭左侧",
       "closeTabsToTheRight": "关闭右侧",

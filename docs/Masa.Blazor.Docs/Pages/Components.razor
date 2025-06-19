@@ -1,5 +1,6 @@
 ﻿@page "/blazor/components/{page}/{tab?}/{api?}"
 @page "/blazor/labs/{page}/{tab?}/{api?}"
+@page "/blazor/mobiles/{page}/{tab?}/{api?}"
 
 <MContainer Class="pa-4 pa-sm-6 pa-md-8"
             Fluid
@@ -17,13 +18,13 @@
 
         @if (!IsAllComponentsPage)
         {
-            <MTabs Value="IsApiTab.ToString()" Color="primary" Class="default-tabs m-bar--underline m-tabs-l mb-9">
+            <MTabs Value="IsApiTab.ToString()" Color="primary" BackgroundColor="transparent" Class="default-tabs m-bar--underline mb-9">
                 <MTab Value="@("False")" OnClick="@(() => NavigateToTab(""))">@I18n.T("demo")</MTab>
                 <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
             </MTabs>
         }
 
-        <MTabsItems Value="IsApiTab.ToString()" Style="background-color: unset; overflow: unset;">
+        <MTabsItems Touchless Value="IsApiTab.ToString()" Style="background-color: unset; overflow: unset;">
             <MTabItem Value="@("False")" Transition="" Eager>
                 @if (_md == null)
                 {

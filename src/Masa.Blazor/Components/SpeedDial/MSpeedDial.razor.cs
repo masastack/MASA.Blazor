@@ -39,9 +39,9 @@ public partial class MSpeedDial : MBootable
         watcher.Watch<bool>(nameof(OpenOnHover), () => ResetPopupEvents(true));
     }
 
-    protected override async Task WhenIsActiveUpdating(bool value)
+    protected override async Task OnActiveUpdatingAsync(bool active)
     {
-        await base.WhenIsActiveUpdating(value);
+        await base.OnActiveUpdatingAsync(active);
 
         if (OutsideClickJSModule is { Initialized: false } && ContentElement.TryGetSelector(out var selector))
         {

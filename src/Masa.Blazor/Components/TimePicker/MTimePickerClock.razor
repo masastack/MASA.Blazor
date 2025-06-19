@@ -1,16 +1,18 @@
 ﻿@namespace Masa.Blazor.Components.TimePicker
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <div class="@GetClass()"
-         @onmousedown="@HandleOnMouseDownAsync"
+         @onmousedown="@OnMouseDown"
          @onmousedown:preventDefault
-         @onmouseup="@HandleOnMouseUpAsync"
+         @onmouseup="@OnMouseUp"
          @onmouseup:stopPropagation
-         @onmouseleave="@HandleOnMouseLeaveAsync"
-         @onmousemove="@HandleOnDragMoveAsync"
+         @onmouseleave="@OnMouseLeave"
+         @onmousemove="@OnDragMove"
          @onmousemove:preventDefault
+         @ontouchend="@OnMouseUp"
+         @ontouchend:stopPropagation
          @ref="Ref">
         <div class="@_block.Element("inner")" @ref="InnerClockElement">
             @GenHand()
@@ -28,7 +30,7 @@
 
     private RenderFragment GenHand() => __builder =>
     {
-        var color = Value != null ? Color ?? "accent" : "";
+        var color = Value != null ? Color : "";
         var scale = $"scaleY({HandScale(DisplayedValue)})";
         var angle = Rotate + DegreesPerUnit * (DisplayedValue - Min);
         <div class="@_handModifierBuilder.Add("inner", IsInner(Value)).AddBackgroundColor(color)"
@@ -38,7 +40,7 @@
 
     private RenderFragment GenItem(int value) => __builder =>
     {
-        var color = value == Value ? Color ?? "accent" : "";
+        var color = value == Value ? Color : "";
         var (x, y) = GetPosition(value);
         <span class="@_itemModifierBuilder.Add("active", value == DisplayedValue).Add("disabled", Disabled || !IsAllowed(value)).AddBackgroundColor(color)"
               style="@(StyleBuilder.Create().Add("left", $"{50 + x * 50}%").Add("top", $"{50 + y * 50}%").AddBackgroundColor(color))">

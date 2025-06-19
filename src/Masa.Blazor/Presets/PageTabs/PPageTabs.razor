@@ -44,7 +44,7 @@
                     @tabTitle
                 </span>
 
-                @if ((tabOptions == null) || tabOptions.Closeable)
+                @if (tabOptions?.ShowCloseBtn is not false)
                 {
                     <MButton Icon
                              Class="@_tabBlock.Element("close").Name"
@@ -65,22 +65,23 @@
                PositionY="@_positionY"
                CloseOnContentClick>
             <MList Dense>
-                @if (_contextmenuPath is { IsCloseable: true })
-                {
-                    <MListItem OnClick="HandleOnCloseTabOnMenu">@CloseTabText</MListItem>
-                }
-
+                <MListItem OnClick="@ToggleFixed">@(ContextmenuFixed ? UnpinTabText : PinTabText)</MListItem>
                 @if (TabReload != null)
                 {
-                    <MListItem OnClick="HandleOnReloadTab">@ReloadTabText</MListItem>
+                    <MListItem OnClick="@HandleOnReloadTab">@ReloadTabText</MListItem>
                 }
-
-                <MListItem OnClick="HandleOnCloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
-                <MListItem OnClick="HandleOnCloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
-                <MListItem OnClick="HandleOnCloseOtherTabs">@CloseOtherTabsText</MListItem>
+                
+                <MDivider />
+                @if (_contextmenuPath is { IsCloseable: true })
+                {
+                    <MListItem OnClick="@HandleOnCloseTabOnMenu">@CloseTabText</MListItem>
+                }
+                <MListItem OnClick="@HandleOnCloseTabsToTheLeft">@CloseTabsToTheLeftText</MListItem>
+                <MListItem OnClick="@HandleOnCloseTabsToTheRight">@CloseTabsToTheRightText</MListItem>
+                <MListItem OnClick="@HandleOnCloseOtherTabs">@CloseOtherTabsText</MListItem>
             </MList>
         </MMenu>
-    </MTabs>
 
+    </MTabs>
     @ChildContent
 </CascadingValue>

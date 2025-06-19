@@ -121,13 +121,15 @@ public partial class MTimePicker : MasaComponentBase
         return val.ToString().PadLeft(2, '0');
     }
 
-    private async Task HandleOnInputAsync(int value)
+    private async Task HandleOnInputAsync((int, SelectingTime) args)
     {
-        if (Selecting == SelectingTime.Hour)
+        var (value, selecting) = args;
+
+        if (selecting == SelectingTime.Hour)
         {
             InputHour = IsAmPm ? TimeHelper.Convert12To24(value, Period) : value;
         }
-        else if (Selecting == SelectingTime.Minute)
+        else if (selecting == SelectingTime.Minute)
         {
             InputMinute = value;
         }
@@ -144,10 +146,7 @@ public partial class MTimePicker : MasaComponentBase
         var value = GenValue();
         if (value != null)
         {
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(value);
-            }
+            await ValueChanged.InvokeAsync(value);
         }
     }
 

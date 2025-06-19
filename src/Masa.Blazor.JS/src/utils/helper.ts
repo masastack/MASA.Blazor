@@ -215,8 +215,12 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function getActivator(selector: string): HTMLElement | null {
-  if (selector.startsWith(activator_parent_prefix)) {
+function is$ParentSelector(selector: string) {
+  return selector.startsWith(activator_parent_prefix);
+}
+
+export function get$ParentElement(selector: string): HTMLElement | null {
+  if (is$ParentSelector(selector)) {
     const parentSelector = selector.replace(activator_parent_prefix, "");
     const parentElement = document.querySelector(parentSelector)?.parentElement;
     if (!parentElement) {
@@ -229,7 +233,16 @@ export function getActivator(selector: string): HTMLElement | null {
     }
 
     return parentElement;
-  } else {
-    return document.querySelector(selector);
   }
+
+  return null
+}
+
+export function getActivator(selector: string): HTMLElement | null {
+  const parentElement = get$ParentElement(selector);
+  return parentElement || document.querySelector(selector);
+}
+
+export function isWindow(element: any | Window): element is Window {
+  return element === window
 }

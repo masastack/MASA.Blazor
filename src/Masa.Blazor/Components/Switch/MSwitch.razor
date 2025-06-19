@@ -16,7 +16,7 @@
         var trackStyle = GetStyleBuilder().AddBackgroundColor(ComputedTrackColor).Build();
 
         <div class="@ControlWrapper.Name">
-            <div class="@_trackModifierBuilder.AddTextColor(CurrentColor).AddBackgroundColor(ComputedTrackColor).AddTheme(IsDark, IndependentTheme)"
+            <div class="@_trackModifierBuilder.AddTextColor(CurrentColor).AddBackgroundColor(ComputedTrackColor).AddTheme(ComputedTheme)"
                  style="@trackStyle">
             </div>
 
@@ -40,7 +40,7 @@
 
         @GenInput("checkbox")
 
-        <div class="@_thumbModifierBuilder.AddTextColor(CurrentColor).AddTheme(IsDark, IndependentTheme)"
+        <div class="@_thumbModifierBuilder.AddTextColor(CurrentColor).AddTheme(ComputedTheme)"
              style="@thumbStyle">
             @*TODO: FabTransition*@
             @RenderFragments.GenProgressCircular(Loading, CurrentColor, 16, 2)

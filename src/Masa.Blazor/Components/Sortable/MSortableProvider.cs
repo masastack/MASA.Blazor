@@ -5,7 +5,7 @@ public class MSortableProvider<TItem> : MSortableProviderBase<TItem>
     [Parameter] public string? Container { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.7.3")]
+    [MasaApiParameter(ReleasedIn = "v1.7.3")]
     public ElementReference ContainerRef { get; set; }
 
     [Parameter] public RenderFragment<SortableItemContext<TItem>>? ItemContent { get; set; }

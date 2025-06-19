@@ -2,18 +2,14 @@
 
 namespace Masa.Blazor;
 
-public partial class MOtpInput : MasaComponentBase, IThemeable
+public partial class MOtpInput : ThemeComponentBase, IThemeable
 {
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     [CascadingParameter] public MForm? Form { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     [Parameter] public string? Color { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public bool AutoFocus { get; set; }
 
     [Parameter] public int Length { get; set; } = 6;
@@ -38,31 +34,6 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     [Parameter] public EventCallback<string> OnInput { get; set; }
 
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     private DotNetObjectReference<Invoker<OtpJsResult>>? _handle;
 
     private int _prevLength;
@@ -85,13 +56,6 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     {
         await base.OnParametersSetAsync();
 
-#if NET8_0_OR_GREATER
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-
-#endif
         if (_prevLength != Length)
         {
             _prevLength = Length;
@@ -171,7 +135,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
     {
         yield return _block.Name;
         yield return CssClassUtils.GetTextColor(Color);
-        yield return CssClassUtils.GetTheme(IsDark, IndependentTheme);
+        yield return CssClassUtils.GetTheme(ComputedTheme);
     }
 
     protected override IEnumerable<string> BuildComponentStyle()
@@ -181,7 +145,7 @@ public partial class MOtpInput : MasaComponentBase, IThemeable
 
     private string GetContentClass()
     {
-        var inputClasses = _inputModifierBuilder.Add(IsFocused).Add(IsDisabled).AddTheme(IsDark, IndependentTheme);
+        var inputClasses = _inputModifierBuilder.Add(IsFocused).Add(IsDisabled).AddTheme(ComputedTheme);
 
         StringBuilder stringBuilder = new();
         stringBuilder.Append(inputClasses);

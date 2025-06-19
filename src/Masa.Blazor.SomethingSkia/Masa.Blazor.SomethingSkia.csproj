@@ -4,7 +4,11 @@
         <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <PackageTags>blazor;masa;masa.blazor;masa blazor</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
+        <Company>masastack</Company>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,11 +21,11 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">

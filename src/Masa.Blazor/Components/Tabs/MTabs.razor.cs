@@ -3,15 +3,13 @@ using Masa.Blazor.JSModules;
 
 namespace Masa.Blazor
 {
-    public partial class MTabs : MasaComponentBase, IThemeable
+    public partial class MTabs
     {
         [Inject] protected MasaBlazor MasaBlazor { get; set; } = null!;
 
         [Inject] private IntersectJSModule IntersectJSModule { get; set; } = null!;
 
         [Inject] protected IResizeJSModule ResizeJSModule { get; set; } = null!;
-
-        [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
         [Parameter] public string? ActiveClass { get; set; }
 
@@ -61,9 +59,6 @@ namespace Masa.Blazor
 
         [Parameter] public bool Routable { get; set; }
 
-        [Parameter] public bool Dark { get; set; }
-
-        [Parameter] public bool Light { get; set; }
         private int _registeredTabItemsIndex;
         private CancellationTokenSource? _callSliderCts;
         private ElementReference _sliderWrapperRef;
@@ -75,24 +70,6 @@ namespace Masa.Blazor
 
         protected (StringNumber height, StringNumber left, StringNumber right, StringNumber top, StringNumber width)
             Slider { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return CascadingIsDark;
-            }
-        }
 
         protected bool RTL => MasaBlazor.RTL;
 
@@ -121,21 +98,6 @@ namespace Masa.Blazor
             }
         }
 
-        private bool IndependentTheme =>
-            (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            } 
-        }
-#endif
-
         private static Block _block = new("m-tabs");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -149,7 +111,7 @@ namespace Masa.Blazor
                 .Add(IconsAndText)
                 .Add(Right)
                 .Add(Vertical)
-                .AddTheme(IsDark, IndependentTheme)
+                .AddTheme(ComputedTheme)
                 .Build();
         }
 
@@ -198,7 +160,7 @@ namespace Masa.Blazor
         {
             if (HideSlider || _isFirstRender) return;
 
-            var item = Instance?.Items.FirstOrDefault(item => item.Value == Value);
+            var item = Instance?.Items.FirstOrDefault(item => item.InternalIsActive);
             await Js.InvokeVoidAsync(
                 JsInteropConstants.UpdateTabSlider,
                 _sliderWrapperRef,

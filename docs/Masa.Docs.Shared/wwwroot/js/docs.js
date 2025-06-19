@@ -12,7 +12,10 @@ window.scrollToElement = function (hash, offset) {
 
 window.updateHash = function (hash) {
   if (!hash) return
-  history.replaceState({}, "", window.location.pathname + hash)
+  // window.location.hash = hash; // this will cause the page to scroll to the element, we don't want that
+  const url = new URL(window.location.href);
+  url.hash = hash;
+  history.replaceState({}, "", url.href)
 }
 
 window.backTop = function () {
@@ -119,14 +122,6 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
   }
   docsearch(option);
 };
-
-window.switchTheme = function (dotNetHelper,dark,x,y) {
-  document.documentElement.style.setProperty('--x', x + 'px')
-  document.documentElement.style.setProperty('--y', y + 'px')
-  document.startViewTransition(() => {
-    dotNetHelper.invokeMethodAsync('ToggleTheme',dark);
-  });
-}
 
 window.isDarkPreferColor = function() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches

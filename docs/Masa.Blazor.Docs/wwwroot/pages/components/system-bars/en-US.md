@@ -44,12 +44,6 @@ You can use the `LightsOut` property to reduce the opacity of the **MSystemBar**
 
 <masa-example file="Examples.components.system_bars.LightOut"></masa-example>
 
-#### Themes
-
-You can apply `Dark` or `Light` theme variables to **MSystemBar**.
-
-<masa-example file="Examples.components.system_bars.Theme"></masa-example>
-
 #### Window
 
 System bar with window controls and status information.

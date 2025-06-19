@@ -350,12 +350,12 @@ public class MAppBar : MToolbar, IScrollable
 
     private static Block _block = new("m-app-bar");
     private ModifierBuilder _blockModifierBuilder = _block.CreateModifierBuilder();
+    private long _scrollEventId;
 
     protected override IEnumerable<string> BuildComponentClass()
     {
         return base.BuildComponentClass().Concat(
-            new[]
-            {
+            [
                 _blockModifierBuilder
                     .Add("clipped", ClippedLeft || ClippedRight)
                     .Add(ClippedLeft)
@@ -369,7 +369,7 @@ public class MAppBar : MToolbar, IScrollable
                     .Add(ShrinkOnScroll)
                     .AddClass("app--sized", _sized)
                     .Build()
-            }
+            ]
         );
     }
 
@@ -396,7 +396,7 @@ public class MAppBar : MToolbar, IScrollable
 
     private void UpdateApplication()
     {
-        if (!App) return;
+        if (!App || IsDisposed) return;
 
         var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
 
@@ -422,7 +422,7 @@ public class MAppBar : MToolbar, IScrollable
 
             StateHasChanged();
 
-            await Js.AddHtmlElementEventListener(
+            _scrollEventId = await Js.AddHtmlElementEventListener(
                 ScrollTarget,
                 "scroll",
                 async () =>
@@ -433,8 +433,7 @@ public class MAppBar : MToolbar, IScrollable
 
                     StateHasChanged();
                 },
-                false,
-                new EventListenerExtras(key: Ref.Id));
+                false);
         }
     }
 
@@ -465,26 +464,15 @@ public class MAppBar : MToolbar, IScrollable
         }
 
         if (!Bottom)
-            MasaBlazor!.Application.Top = 0;
+            MasaBlazor.Application.Top = 0;
         else
-            MasaBlazor!.Application.Bottom = 0;
+            MasaBlazor.Application.Bottom = 0;
     }
 
     protected override async ValueTask DisposeAsyncCore()
     {
-        try
-        {
-            await Js.RemoveHtmlElementEventListener(ScrollTarget, "scroll", key: Ref.Id);
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
-
-        if (MasaBlazor == null) return;
-
         RemoveApplication();
-
         MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+        await Js.RemoveHtmlElementEventListener(_scrollEventId);
     }
 }

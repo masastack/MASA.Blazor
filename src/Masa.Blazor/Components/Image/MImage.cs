@@ -154,18 +154,10 @@ public partial class MImage : MResponsive, IThemeable
         }
     }
 
-    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-#if NET8_0_OR_GREATER
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-#endif
         _currentSrc = Src;
     }
 
@@ -178,7 +170,7 @@ public partial class MImage : MResponsive, IThemeable
             new[]
             {
                 _block.Name,
-                CssClassUtils.GetTheme(IsDark, IndependentTheme)
+                CssClassUtils.GetTheme(ComputedTheme)
             });
     }
 

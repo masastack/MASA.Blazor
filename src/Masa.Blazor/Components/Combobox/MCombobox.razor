@@ -1,0 +1,47 @@
+﻿@namespace Masa.Blazor
+@typeparam TItem
+@typeparam TValue
+@using Masa.Blazor.Components.Select
+@inherits MAutocomplete<TItem, string, TValue>
+
+@((RenderFragment)base.BuildRenderTree)
+
+@code {
+
+    internal override RenderFragment GenChipSelection(SelectedItem<TItem> item, int index, bool selected) => __builder =>
+    {
+        var isDisabled = GetDisabled(item);
+        var isInteractive = !isDisabled && IsInteractive;
+
+        <MChip Close="@(DeletableChips && isInteractive)"
+               Disabled="@isDisabled"
+               Class="m-chip--select"
+               Small="@SmallChips"
+               IsActive="@selected"
+               OnClick="@OnClick"
+               OnClickStopPropagation
+               OnCloseClick="@(() => OnChipInput(item))"
+               @ondblclick="OnDblClick"
+               tabindex="-1">
+            @GetText(item)
+        </MChip>
+
+        void OnClick()
+        {
+            if (!isInteractive)
+            {
+                return;
+            }
+
+            SelectedIndex = index;
+        }
+
+        void OnDblClick()
+        {
+            _editingIndex = index;
+            InternalSearch = GetText(item);
+            SelectedIndex = -1;
+        }
+    };
+
+}

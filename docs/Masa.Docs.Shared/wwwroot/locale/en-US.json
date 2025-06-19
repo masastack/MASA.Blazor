@@ -13,7 +13,7 @@
   "upgrade-guide": "Upgrade guide",
   "contributing": "Contributing",
   "styles-and-animations": "Styles and animations",
-  "ui-components": "Components",
+  "ui-components": "UI Components",
   "features": "Features",
   "border-radius": "Border radius",
   "color": "Colors",
@@ -55,12 +55,13 @@
     "new": "NEW",
     "update": "UPDATE",
     "breaking-change": "BC",
-    "deprecated": "DEPRECATED"
+    "deprecated": "DEPRECATED",
+    "labs": "LAB"
   },
   "tag": {
     "preset": "Preset",
     "service": "Service",
-    "js-proxy": "JS proxy"
+    "js-proxy": "JS Wrapper"
   },
   "v1-banner": {
     "content": "Your are viewing the documentation for {0}. It is recommended to upgrade if you are using an older version!",
@@ -163,6 +164,7 @@
   "dividers": "Dividers",
   "drawers": "Drawers",
   "drawflow": "Drawflow",
+  "driverjs": "Tour",
   "echarts": "ECharts",
   "editors": "Editors",
   "error-handler": "Error handler",
@@ -171,6 +173,7 @@
   "footers": "Footers",
   "form-inputs-and-controls": "Form inputs and controls",
   "autocompletes": "Autocompletes",
+  "combobox": "Combobox",
   "cascaders": "Cascaders",
   "checkboxes": "Checkboxes",
   "file-inputs": "File inputs",
@@ -212,7 +215,7 @@
   "markdowns": "Markdowns",
   "markdown-parsers": "Markdown parsers",
   "menus": "Menus",
-  "mobiles": "Mobiles",
+  "mobiles": "Mobile components",
   "mobile-cascader": "Mobile cascader",
   "mobile-date-pickers": "Mobile date pickers",
   "mobile-date-time-pickers": "Mobile date time pickers",
@@ -256,8 +259,10 @@
   "data-tables": "Data tables",
   "simple-tables": "Simple tables",
   "tabs": "Tabs",
+  "theme-providers": "Theme providers",
   "timelines": "Timelines",
   "toggles": "Toggles",
+  "empty-states": "Empty state",
   "enqueued-snackbars": "Enqueued snackbars",
   "tooltips": "Tooltips",
   "treeview": "Treeview",
@@ -288,6 +293,7 @@
   "not-supported": "Not supported",
   "toggle-theme": "Toggle theme",
   "github": "Github",
+  "star-me": "Star me on Github",
   "gitee": "Gitee",
   "settings": "Settings",
   "wireframes": "Wireframes",
@@ -295,6 +301,9 @@
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
   "all": "All components",
+  "activator": "Activator",
+  "rendering": "Rendering",
+  "two-way-binding": "Two-way binding",
   "basic-concepts": "Basic concepts",
   "best-practices": "Best practices",
   "faq": "FAQ",
@@ -370,6 +379,7 @@
     "dividers": "The Dividers component is used to separate sections of lists or layouts",
     "drawers": "Drawers",
     "drawflow": "A simple flow component",
+    "driverjs": "A tour component based on driver.js",
     "echarts": "ECharts",
     "editor": "Rich text editor based on Quill encapsulation",
     "error-handler": "The ErrorHandler component is used to handle exception information when the blazor component data is loaded and rendered",
@@ -389,7 +399,7 @@
     "switches": "The Switches component provides users the ability to choose between two distinct values",
     "textareas": "Textareas components are used for collecting large amounts of textual data",
     "text-fields": "Text fields components are used for collecting user provided information",
-    "grids": "The grid is used to create specific layouts within an application’s content",
+    "grids": "The grid is used to create specific layouts within an application's content",
     "gridstack": "Build interactive dashboards in minutes",
     "button-groups": "The ButtonGroups component is a simple wrapper for MItemGroup built specifically to work with MButton",
     "chip-groups": "The ChipGroups supercharges the MChip component by providing groupable functionality",
@@ -444,6 +454,7 @@
     "data-tables": "The DataTables component is used for displaying tabular data",
     "simple-tables": "The SimpleTables component is a simple wrapper component around the <table> element",
     "tabs": "The Tabs component is used for hiding content behind a selectable item",
+    "theme-providers": "Allows you to style a section of your application in a different theme from the default",
     "timelines": "Timelines is very useful for displaying chronological information",
     "toast": "The component is used to convey important information to the user through the use contextual types icons and color",
     "tooltips": "The Tooltips component is useful for conveying information when a user hovers over an element",
@@ -508,7 +519,7 @@
   "trouble-shooting": "Trouble Shooting",
   "access-guide": "Access Guide",
   "feature": {
-    "released-on": "Released on {0}",
+    "released-on": "Released in {0}",
     "updated-in": "Updated in {0}"
   },
   "notifications": {
@@ -538,5 +549,23 @@
       "data-table": "add support for cell ellipsis and custom cell content in `Headers`.",
       "list-item": "add sub-component parameters, includes `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` and `AppendIcon`."
     }
-  }
+  },
+  "latest-build": "Latest doc build",
+  "latest-release": "Latest release",
+  "component-type": {
+    "containment": "Containment",
+    "navigation": "Navigation",
+    "form": "Form",
+    "dataDisplay": "Data Display",
+    "selection": "Selection",
+    "feedback": "Feedback",
+    "imagesAndIcons": "Images and Icons",
+    "pickers": "Pickers",
+    "providers": "Providers",
+    "services": "Services",
+    "misc": "Miscellaneous"
+  },
+  "nav-component-group-by-type": "Components grouped by type",
+  "nav-component-group-by-type-desc": "Group the components in the left navigation by type"
 }
+

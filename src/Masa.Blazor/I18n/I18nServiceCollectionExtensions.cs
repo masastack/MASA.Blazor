@@ -34,33 +34,34 @@ public static class I18nServiceCollectionExtensions
         if (Directory.Exists(localeDirectory))
         {
             AddI18nFromPath(localeDirectory, encoding);
-        }
-        else
-        {
-            var assemblyPath = AppContext.BaseDirectory;
-            var i18nPath = Path.Combine(assemblyPath, localeDirectory);
-            if (Directory.Exists(i18nPath))
-            {
-                AddI18nFromPath(i18nPath, encoding);
-            }
-            else if (localeDirectory.StartsWith("wwwroot"))
-            {
-                var wwwrootPath = Path.Combine(Path.Combine(assemblyPath, "wwwroot"));
-                if (Directory.Exists(wwwrootPath))
-                {
-                    var i18nDirectory = localeDirectory.Split('/').Last();
-                    i18nPath = Directory.GetDirectories(wwwrootPath, i18nDirectory, SearchOption.AllDirectories).FirstOrDefault();
-                    if (i18nPath is not null)
-                    {
-                        AddI18nFromPath(i18nPath, encoding);
-                    }
-                    else throw new Exception($"Can't find path：{localeDirectory}");
-                }
-            }
-            else throw new Exception($"Can't find path：{localeDirectory}");
+            return builder;
         }
 
-        return builder;
+        var assemblyPath = AppContext.BaseDirectory;
+        var i18nPath = Path.Combine(assemblyPath, localeDirectory);
+        if (Directory.Exists(i18nPath))
+        {
+            AddI18nFromPath(i18nPath, encoding);
+            return builder;
+        }
+
+        if (localeDirectory.StartsWith("wwwroot"))
+        {
+            var wwwrootPath = Path.Combine(Path.Combine(assemblyPath, "wwwroot"));
+            if (Directory.Exists(wwwrootPath))
+            {
+                var i18nDirectory = localeDirectory.Split('/').Last();
+                i18nPath = Directory.GetDirectories(wwwrootPath, i18nDirectory, SearchOption.AllDirectories)
+                    .FirstOrDefault();
+                if (i18nPath is not null)
+                {
+                    AddI18nFromPath(i18nPath, encoding);
+                    return builder;
+                }
+            }
+        }
+
+        throw new InvalidOperationException($"Can't find path：{localeDirectory}");
     }
 
     public static async Task<IMasaBlazorBuilder> AddI18nForWasmAsync(this IMasaBlazorBuilder builder, string localesDirectoryApi,

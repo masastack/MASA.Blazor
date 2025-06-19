@@ -1,10 +1,13 @@
 {
   "events": {
     "PageClosed": "当堆栈页面关闭时触发",
-    "TabChanged": "当选项卡更改时触发，页面入栈或出栈时不会触发"
+    "TabChanged": "当选项卡更改时触发，页面入栈或出栈时不会触发",
+    "TabRefreshRequested": "请求刷新事件",
+    "RequestTabBadgeUpdate": "请求更新选项卡徽章",
+    "RequestTabBadgeClear": "请求清除选项卡徽章"
   },
   "methods": {
-    "Push": "将新页面推送到页面堆栈",
+    "Push": "将新页面推送到页面堆栈；第二个参数是可选的，用于删除栈顶的页面",
     "Pop": "在页面堆栈中后退一步",
     "goBack": "在页面堆栈中后退指定步数",
     "goBackAndReplace": "在页面堆栈中后退指定步数，然后调用Replace方法",

@@ -8,14 +8,11 @@
 
             <MItem Context="ItemContext" Value=size>
                 <MHover Context="HoverContext">
-                    <div 
-                        @attributes="HoverContext.Attrs"
-                        class="@((ItemContext.Active || HoverContext.Hover) ? "text--primary":"text--secondary") ma-3 text-center"
-                        style="cursor: pointer"
-                        @onclick="ItemContext.Toggle"
-                    >
-
-                        <MIcon Color="@(((ItemContext.Active || HoverContext.Hover) ? "grey darken-4":"grey lighten-1"))" Class="pa-1 mb-1">
+                    <div @attributes="HoverContext.Attrs"
+                         class="ma-3 text-center"
+                         style="cursor: pointer"
+                         @onclick="ItemContext.Toggle">
+                        <MIcon Color="@(ItemContext.Active || HoverContext.Hover ? "accent" : "")" Class="pa-1 mb-1">
                             @icon
                         </MIcon>
 
@@ -31,7 +28,7 @@
     </div>
 
     <MCard Class="d-flex align-center justify-center pa-4 mx-auto" MaxWidth=550 MinHeight=76 Outlined>
-        <div class="@("text-"+_model)">
+        <div class="@("text-" + _model)">
             Example Heading
         </div>
     </MCard>
@@ -41,6 +38,7 @@
 @code {
 
     StringNumber _model = "caption";
+
     string[][] _sizes = new string[][]
     {
         new string[]
@@ -55,7 +53,7 @@
         {
             "mdi-laptop", "md", "body-1"
         },
-         new string[]
+        new string[]
         {
             "mdi-monitor", "lg", "h6"
         },
@@ -81,4 +79,5 @@
 
         return $".{string.Join("-", type)}";
     }
+
 }

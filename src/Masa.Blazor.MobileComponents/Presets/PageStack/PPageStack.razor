@@ -1,0 +1,32 @@
+﻿@namespace Masa.Blazor.Presets
+@using Masa.Blazor.Presets.PageStack
+@inherits MasaComponentBase
+@inject NavigationManager NavigationManager
+
+<PPageStackContainer Id="@Id"
+                     Class="@GetClass()"
+                     Style="@GetStyle()"
+                     TabRules="@TabRules"
+                     OnActiveTabUpdate="@OnActiveTabUpdate"
+                     @attributes="@Attributes">
+    @ChildContent
+</PPageStackContainer>
+
+<CascadingValue Value="this" IsFixed>
+    @for (var i = 0; i < Pages.Count; i++)
+    {
+        var index = i;
+        var pageData = Pages.ElementAt(index);
+        var isTop = i == Pages.Count - 1;
+        var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(pageData.AbsolutePath, StringComparison.OrdinalIgnoreCase);
+
+        <PPageStackItem AppBarVisible="@AppBarAlwaysVisible"
+                        DisableUnderlaySlide="@DisableUnderlaySlide"
+                        Data="pageData"
+                        CanRender="@canRender"
+                        OnGoBack="@HandleOnPrevious"
+                        @key="@pageData.Id">
+            @ChildContent
+        </PPageStackItem>
+    }
+</CascadingValue>

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Components.DatePicker;
 
-public partial class MDatePickerTable<TValue> : MasaComponentBase
+public partial class MDatePickerTable<TValue> : ThemeComponentBase
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -32,14 +32,14 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
 
     [Parameter] public EventCallback<DateOnly> OnInput { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnDateClick { get; set; }
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public EventCallback<DateOnly> OnDateClick { get; set; }
 
     /// <summary>
     /// The input parameter is the first day of the month
     /// </summary>
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public EventCallback<DateOnly> OnMonthClick { get; set; }
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public EventCallback<DateOnly> OnMonthClick { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedOn = "v1.6.0")] public CultureInfo Locale { get; set; } = null!;
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.6.0")] public CultureInfo Locale { get; set; } = null!;
 
     [Parameter] public CalendarWeekRule CalendarWeekRule { get; set; }
 
@@ -48,30 +48,6 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
     {
         get => GetValue<DateOnly>();
         set => SetValue(value);
-    }
-
-    [Parameter] public bool Dark { get; set; }
-
-    [Parameter] public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
     }
 
     public int DisplayedMonth => TableDate.Month - 1;
@@ -137,26 +113,11 @@ public partial class MDatePickerTable<TValue> : MasaComponentBase
             .Watch<DateOnly>(nameof(TableDate), (newVal, oldVal) => { IsReversing = newVal < oldVal; });
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (MasaBlazor.IsSsr && !IndependentTheme)
-            {
-                CascadingIsDark = MasaBlazor.Theme.Dark;
-            }
-        }
-#endif
-
     protected static Block Block = new("m-date-picker-table");
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
 
     protected override IEnumerable<string> BuildComponentClass()
     {
-        yield return _modifierBuilder.Add(Disabled).AddTheme(IsDark, IndependentTheme).Build();
+        yield return _modifierBuilder.Add(Disabled).AddTheme(ComputedTheme).Build();
     }
 }

@@ -125,6 +125,7 @@ public class FormInputLabelAutoGenerator : IComponent, IDisposable
 
     public void Dispose()
     {
+        I18n.CultureChanged -= I18nOnCultureChanged;
         Form.OnValidatableChanged -= OnValidatableChanged;
     }
 }

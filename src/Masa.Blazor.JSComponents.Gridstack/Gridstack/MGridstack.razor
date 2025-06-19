@@ -1,0 +1,27 @@
+@namespace Masa.Blazor
+@inherits MasaComponentBase
+@typeparam TItem
+
+<div class="@GetClass()"
+     style="@GetStyle()"
+     @ref="Ref">
+    @foreach (var (item, options) in _itemOptions)
+    {
+        <div class="grid-stack-item"
+             gs-w="@options.W"
+             gs-h="@options.H"
+             gs-x="@options.XAttr"
+             gs-y="@options.YAttr"
+             gs-id="@options.Id"
+             gs-locked="@options.LockedAttr"
+             gs-no-resize="@options.NoResizeAttr"
+             gs-no-move="@options.NoMoveAttr"
+             gs-size-to-content="@options.SizeToContentAttr"
+             @key="@options.Id">
+            <div class="@_itemBlock.AppendClasses("grid-stack-item-content", ItemClass)"
+                 style="@ItemStyle">
+                @ItemContent(item)
+            </div>
+        </div>
+    }
+</div>

@@ -27,11 +27,11 @@ public static class CssStyleUtils
         return height != null ? $"height: {height.ToUnit()};" : null;
     }
 
-    public static string? GetWidth(StringNumber? width)
+    public static string? GetWidth(StringNumber? width, string? key = "width")
     {
-        return width != null ? $"width: {width.ToUnit()};" : null;
+        return width != null ? $"{key}: {width.ToUnit()};" : null;
     }
-
+    
     private static bool IsCssColor(string color)
     {
         return color.StartsWith("#") || color.StartsWith("rgb") || color.StartsWith("hsl");

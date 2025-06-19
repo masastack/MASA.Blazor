@@ -1,8 +1,8 @@
 ﻿@namespace Masa.Blazor.Components.DatePicker
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 @typeparam TValue
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     @*TODO: onwheel event*@
     <div class="@GetClass()"
          style="@GetStyle()">
@@ -27,7 +27,7 @@
         var isAllowed = IsDateAllowed(date, Min, Max, AllowedDates);
         var isSelected = IsSelected(date) && isAllowed;
         var isCurrent = IsCurrent(date);
-        var color = (isSelected || isCurrent) ? (Color ?? "accent") : "";
+        var color = (isSelected || isCurrent) ? Color : "";
         cssBuilder.Add("m-btn");
         if (isSelected)
         {
@@ -50,7 +50,7 @@
         cssBuilder.Add("m-btn--rounded", isFloating);
         cssBuilder.Add("m-btn--disabled", !isAllowed || Disabled);
         cssBuilder.Add("m-btn--outlined", isCurrent && !isSelected);
-        cssBuilder.Add(CssClassUtils.GetTheme(IsDark, IndependentTheme));
+        cssBuilder.Add(CssClassUtils.GetTheme(ComputedTheme));
 
         <button class="@cssBuilder.ToString()"
                 style="@styleBuilder.ToString()"

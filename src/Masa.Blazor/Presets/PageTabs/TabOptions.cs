@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class TabOptions
+public class TabOptions(bool closeable = true)
 {
     public string? Title { get; set; }
 
@@ -12,12 +12,11 @@ public class TabOptions
 
     public string? TitleStyle { get; set; }
 
-    public bool Closeable { get; set; } = true;
+    public bool Closeable { get; set; } = closeable;
 
-    public TabOptions(bool closeable = true)
-    {
-        Closeable = closeable;
-    }
+    internal bool Fixed { get; set; }
+
+    internal bool ShowCloseBtn => Closeable && !Fixed;
 
     public TabOptions(string? title, bool closeable = true) : this(closeable)
     {

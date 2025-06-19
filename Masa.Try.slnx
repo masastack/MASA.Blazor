@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Component/">
+    <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  </Folder>
+  <Folder Name="/Try/">
+    <Project Path="src/Masa.Try.Server/Masa.Try.Server.csproj" />
+    <Project Path="src/Masa.Try.Shared/Masa.Try.Shared.csproj" />
+    <Project Path="src/Masa.Try.WebAssembly/Masa.Try.WebAssembly.csproj" />
+  </Folder>
+</Solution>

@@ -65,6 +65,16 @@ public class MMarkdown : Container
         await CreateMarkdownAsync();
     }
 
+    protected override IEnumerable<string?> BuildComponentClass()
+    {
+        // Returning the default "vditor" class ensures it remains applied
+        yield return "vditor";
+        if (Options != null && Options.TryGetValue("theme", out var theme) && theme is "dark")
+        {
+            yield return "vditor--dark";
+        }
+    }
+
     public async Task CreateMarkdownAsync()
     {
         _objRef = DotNetObjectReference.Create(this);

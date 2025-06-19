@@ -8,12 +8,12 @@
 #if NET6_0
 public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback
 #else
-public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback, IAsyncDisposable
+public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideClickJsCallback
     where TNumeric : struct, IComparable<TNumeric>
 #endif
 {
     [Inject] public MasaBlazor MasaBlazor { get; set; } = null!;
-
+    
     [Inject] private OutsideClickJSModule OutsideClickJSModule { get; set; } = null!;
 
     [Parameter] public bool Vertical { get; set; }
@@ -32,7 +32,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     [Parameter] public string? TrackFillColor { get; set; }
 
-    [Parameter] [MasaApiParameter(2, ReleasedOn = "v1.7.0")] public double TrackSize { get; set; } = 2;
+    [Parameter] [MasaApiParameter(2, ReleasedIn = "v1.7.0")] public double TrackSize { get; set; } = 2;
 
     [Parameter] [MasaApiParameter(2)] public double TickSize { get; set; } = 2;
 
@@ -45,19 +45,25 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
     [MasaApiParameter(Ignored = true)] public override EventCallback<MouseEventArgs> OnMouseUp { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.1.1")]
+    [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public EventCallback<TValue> OnStart { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.1.1")]
+    [MasaApiParameter(ReleasedIn = "v1.1.1")]
     public EventCallback<TValue> OnEnd { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public bool Rtl { get; set; }
+
+    protected bool ComputedRtl => IsDirtyParameter(nameof(Rtl)) ? Rtl : MasaBlazor.RTL;
 
     protected virtual double GetRoundedValue(int index)
     {
         return RoundValue(DoubleInternalValue);
     }
 
-    public RenderFragment<int> ComputedThumbLabelContent
+    private RenderFragment<int> ComputedThumbLabelContent
     {
         get
         {
@@ -184,7 +190,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    public string ComputedThumbColor
+    public string? ComputedThumbColor
     {
         get
         {
@@ -253,7 +259,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    public virtual async Task HandleOnSliderClickAsync(MouseEventArgs args)
+    protected virtual async Task HandleOnSliderClickAsync(MouseEventArgs args)
     {
         if (NoClick)
         {
@@ -262,17 +268,19 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
 
         await ThumbElement.FocusAsync();
-        await HandleOnMouseMoveAsync(args);
+        await HandleOnMouseMoveAsync(args, null);
     }
 
-    public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
-        => await HandleOnSliderStartSwiping(args.Target!, args.Touches[0].ClientX, args.Touches[0].ClientY);
+    internal virtual async Task HandleOnTouchStartAsync(SliderTouchEventArgs args)
+        => await HandleOnSliderStartSwiping(args.TouchEventArgs.Target!, args.TouchEventArgs.Touches[0].ClientX, args.TouchEventArgs.Touches[0].ClientY);
 
-    public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
-        => await HandleOnSliderStartSwiping(args.Target!, args.ClientX, args.ClientY);
+    internal virtual async Task HandleOnSliderMouseDownAsync(SliderMouseEventArgs args)
+        => await HandleOnSliderStartSwiping(args.MouseEventArgs.Target!, args.MouseEventArgs.ClientX, args.MouseEventArgs.ClientY);
 
-    protected async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
+    private async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
     {
+        _ = OnStart.InvokeAsync(InternalValue);
+
         _oldValue = InternalValue;
         IsActive = true;
 
@@ -296,16 +304,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
                 return InvokeStateHasChangedAsync();
             }, 300, _mouseCancellationTokenSource.Token);
         }
-
-        await OnStart.InvokeAsync(InternalValue);
     }
 
-    public async Task HandleOnSliderEndSwiping()
+    internal async Task HandleOnSliderEndSwiping(SliderEventArgs args)
     {
         _mouseCancellationTokenSource?.Cancel();
         ThumbPressed = false;
 
-        await OnEnd.InvokeAsync(InternalValue);
+        _ = OnEnd.InvokeAsync(InternalValue);
 
         if (!EqualityComparer<TValue>.Default.Equals(_oldValue, InternalValue))
         {
@@ -326,14 +332,14 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         StateHasChanged();
     }
 
-    public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
+    internal virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args, BoundingClientRect? trackRect)
     {
         if (args.Type == "mousemove")
         {
             ThumbPressed = true;
         }
 
-        var val = await ParseMouseMoveAsync(args);
+        var val = await ParseMouseMoveAsync(args, trackRect);
 
         await SetInternalValueAsync(val);
 
@@ -343,9 +349,9 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         }
     }
 
-    protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
+    protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args, BoundingClientRect? trackRect)
     {
-        var rect = await Js.GetBoundingClientRectAsync(TrackElement);
+        var rect = trackRect ?? await Js.GetBoundingClientRectAsync(TrackElement);
 
         var tractStart = Vertical ? rect.Top : rect.Left;
         var trackLength = Vertical ? rect.Height : rect.Width;
@@ -358,7 +364,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
             clickPos = 1 - clickPos;
         }
 
-        if (MasaBlazor.RTL)
+        if (ComputedRtl)
         {
             clickPos = 1 - clickPos;
         }
@@ -400,28 +406,25 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         return IsFocused;
     }
 
-    private bool IndependentTheme =>
-        (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
-
-    protected static readonly Block Block = new("m-slider");
+    private static readonly Block Block = new("m-slider");
     private ModifierBuilder _modifierBuilder = Block.CreateModifierBuilder();
     private static readonly Block _inputBlock = new("m-input__slider");
     private readonly ModifierBuilder _inputModifierBuilder = _inputBlock.CreateModifierBuilder();
     private readonly ModifierBuilder _thumbContainerModifierBuilder = Block.Element("thumb-container").CreateModifierBuilder();
     private readonly ModifierBuilder _tickModifierBuilder = Block.Element("tick").CreateModifierBuilder();
     private readonly ModifierBuilder _ticksContainerModifierBuilder = Block.Element("ticks-container").CreateModifierBuilder();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        MasaBlazor.RTLChanged += MasaBlazorOnRTLChanged;
+    }
+
+    private void MasaBlazorOnRTLChanged(object? sender, EventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
 
     protected override IEnumerable<string> BuildComponentClass()
     {
@@ -433,36 +436,21 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         );
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        base.OnAfterRender(firstRender);
-
-        if (firstRender)
-        {
-            MasaBlazor.OnRTLChange += OnRTLChange;
-        }
-    }
-
-    private void OnRTLChange(bool rtl)
-    {
-        InvokeStateHasChanged();
-    }
-
-    public virtual async Task HandleOnFocusAsync(int index, FocusEventArgs args)
+    protected virtual async Task HandleOnFocusAsync(int index, FocusEventArgs args)
     {
         IsFocused = true;
 
         await OnFocus.InvokeAsync(args);
     }
 
-    public virtual async Task HandleOnBlurAsync(int index, FocusEventArgs args)
+    protected virtual async Task HandleOnBlurAsync(int index, FocusEventArgs args)
     {
         IsFocused = false;
 
         await OnBlur.InvokeAsync(args);
     }
 
-    public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+    protected virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
         if (!IsInteractive)
         {
@@ -513,7 +501,7 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
         var steps = Max - Min / step;
         if (directionCodes.Contains(args.Key))
         {
-            var increase = MasaBlazor.RTL
+            var increase = ComputedRtl
                 ? new[] { KeyCodes.ArrowLeft, KeyCodes.ArrowUp }
                 : new[] { KeyCodes.ArrowRight, KeyCodes.ArrowUp };
             var direction = increase.Contains(args.Key) ? 1 : -1;
@@ -546,6 +534,8 @@ public partial class MSliderBase<TValue, TNumeric> : MInput<TValue>, IOutsideCli
 
     protected override async ValueTask DisposeAsyncCore()
     {
+        MasaBlazor.RTLChanged -= MasaBlazorOnRTLChanged;
+
         await Js.InvokeVoidAsync(JsInteropConstants.UnregisterSliderEvents, SliderElement, _id);
 
         _interopHandleReference?.Dispose();

@@ -60,21 +60,21 @@ public partial class MCard : MSheet, IRoutable
     /// The title to display in the card, same as using <see cref="MCardTitle"/>.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Title { get; set; }
 
     /// <summary>
     /// The subtitle to display in the card, same as using <see cref="MCardSubtitle"/>.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Subtitle { get; set; }
 
     /// <summary>
     /// The text to display in the card, same as using <see cref="MCardText"/>.
     /// </summary>
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.5.0")]
+    [MasaApiParameter(ReleasedIn = "v1.5.0")]
     public string? Text { get; set; }
 
     public bool Exact { get; }
@@ -92,7 +92,11 @@ public partial class MCard : MSheet, IRoutable
         (Tag, Attributes) = _router.GenerateRouteLink();
 
         Attributes["ripple"] = Ripple && IsClickable;
-        Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, args => InvokeCallbackAsync(OnClick, args));
+
+        if (OnClick.HasDelegate)
+        {
+            Attributes["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, e => OnClick.InvokeAsync(e));
+        }
     }
 
     private static Block _block = new("m-card");

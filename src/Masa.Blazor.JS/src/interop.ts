@@ -140,9 +140,12 @@ export function getBoundingClientRect(elOrString, attach = "body") {
   return result;
 }
 
-var htmlElementEventListenerConfigs: { [prop: string]: HtmlElementEventListenerConfig[] } = {}
+var htmlElementEventListenerId = 1;
+var htmlElementEventListenerConfigs: { [id: number]: HtmlElementEventListenerConfig[] } = {}
 
 type HtmlElementEventListenerConfig = {
+  el?: HTMLElement | Window;
+  type?: string;
   listener?: (args: any) => void;
   options?: any;
   handle?: DotNet.DotNetObject;
@@ -153,7 +156,7 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
   type: string,
   invoker: DotNet.DotNetObject,
   options?: boolean | AddEventListenerOptions,
-  extras?: Partial<Pick<Event, "stopPropagation" | "preventDefault">> & { relatedTarget?: string, throttle?: number, debounce?: number, key?: string }) {
+  extras?: Partial<Pick<Event, "stopPropagation" | "preventDefault">> & { relatedTarget?: string, throttle?: number, debounce?: number }) {
   let htmlElement: HTMLElement | Window
 
   if (selector == "window") {
@@ -166,10 +169,10 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   if (!htmlElement) {
     // throw new Error("Unable to find the element.");
-    return false;
+    return 0;
   }
 
-  var key = extras?.key || `${selector}:${type}`;
+  var key = htmlElementEventListenerId;
 
   //save for remove
   const config: HtmlElementEventListenerConfig = {};
@@ -229,6 +232,8 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   config.options = options;
   config.handle = invoker
+  config.el = htmlElement;
+  config.type = type;
 
   if (htmlElementEventListenerConfigs[key]) {
     htmlElementEventListenerConfigs[key].push(config);
@@ -238,31 +243,18 @@ export function addHtmlElementEventListener<K extends keyof HTMLElementTagNameMa
 
   htmlElement.addEventListener(type, config.listener, config.options);
 
-  return true;
+  return htmlElementEventListenerId++;
 }
 
-export function removeHtmlElementEventListener(selector, type, k?: string) {
-  let htmlElement: any
-
-  if (selector == "window") {
-    htmlElement = window;
-  } else if (selector == "document") {
-    htmlElement = document.documentElement;
-  } else {
-    htmlElement = document.querySelector(selector);
-  }
-
-  var k = k || `${selector}:${type}`;
-
-  var configs = htmlElementEventListenerConfigs[k];
-
+export function removeHtmlElementEventListener(eventId: number) {
+  var configs = htmlElementEventListenerConfigs[eventId];
   if (configs) {
     configs.forEach(item => {
       item.handle.dispose();
-      htmlElement?.removeEventListener(type, item.listener, item.options);
+      item.el.removeEventListener(item.type, item.listener, item.options);
     });
 
-    htmlElementEventListenerConfigs[k] = []
+    delete htmlElementEventListenerConfigs[eventId]
   }
 }
 
@@ -437,13 +429,16 @@ export function scrollTo(target, options: ScrollToOptions) {
       behavior: options.behavior
     }
     dom.scrollTo(o)
+  } else if (dom === window) {
+    window.scrollTo(options);
   }
 }
 
 export function scrollToTarget(
   target: string,
   container: string = null,
-  offset: number = 0
+  offset: number = 0,
+  behavior: ScrollBehavior = "smooth"
 ) {
   const targetEl: HTMLElement = document.querySelector(target);
   if (targetEl) {
@@ -458,7 +453,7 @@ export function scrollToTarget(
       : document.documentElement
     containerEl.scrollTo({
       top: top - offset,
-      behavior: "smooth",
+      behavior: behavior
     });
   }
 }
@@ -801,27 +796,17 @@ export function getImageDimensions(src: string) {
   })
 }
 
-export function enablePreventDefaultForEvent(element: any, event: string, condition?: any) {
+export function preventDefaultForSpecificKeys(
+  element: any,
+  keyCodes: string[]
+) {
   const dom = getDom(element);
   if (!dom) return;
-  if (event === 'keydown') {
-    dom.addEventListener(event, (e: KeyboardEvent) => {
-      if (Array.isArray(condition)) {
-        var codes = condition as string[];
-        if (codes.includes(e.code)) {
-          e.preventDefault();
-        }
-      } else {
-        e.preventDefault();
-      }
-    })
-  } else {
-    dom.addEventListener(event, e => {
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
-    })
-  }
+  dom.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (keyCodes.includes(e.code)) {
+      e.preventDefault();
+    }
+  });
 }
 
 export function getBoundingClientRects(selector) {
@@ -1109,7 +1094,12 @@ function measure(el: HTMLElement, isDefaultAttach) {
     rect.top = parseInt(style.marginTop!)
   }
 
-  return rect
+  const maxHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  return {
+    ...rect,
+    maxHeight,
+  };
 }
 
 function getRoundedBoundedClientRect(el: Element) {
@@ -1287,37 +1277,6 @@ export function getElementTranslateY(element) {
   const translateY = transform.slice(7, transform.length - 1).split(', ')[5];
 
   return Number(translateY);
-}
-
-function isWindow(element: any | Window): element is Window {
-  return element === window
-}
-
-export function checkIfThresholdIsExceededWhenScrolling(el: Element, parent: any, threshold: number) {
-  if (!el || !parent) return
-
-  let parentElement: HTMLElement | Window
-
-  if (parent == "window") {
-    parentElement = window;
-  } else if (parent == "document") {
-    parentElement = document.documentElement;
-  } else {
-    parentElement = document.querySelector(parent);
-  }
-
-  if (!parentElement) {
-    console.warn('[MInfiniteScroll] failed to get parent element with selector:', parent);
-    return;
-  }
-
-  const rect = el.getBoundingClientRect();
-  const elementTop = rect.top;
-  const current = isWindow(parentElement)
-    ? window.innerHeight
-    : parentElement.getBoundingClientRect().bottom
-
-  return (current >= elementTop - threshold)
 }
 
 export function get_top_domain() {
@@ -1644,7 +1603,7 @@ export function updateTabSlider(
   }
 
   if (!tab) {
-    console.warn('[MTab] the element of tab to be activated is not found')
+    sliderWrapper.style.cssText = "";
     return;
   }
 
@@ -1724,4 +1683,8 @@ export function prepareSticky(containerElOrString: string, root: HTMLElement, of
   function isNumberValid(n: number) {
     return n !== undefined && n !== null;
   }
+}
+
+export function toggleMourningMode(mourning: boolean) {
+  document.documentElement.classList.toggle('m-mourning-mode', mourning);
 }

@@ -9,11 +9,17 @@ type State = {
 export function useTouch(
   elOrString: HTMLElement | string,
   dotNetObject: DotNet.DotNetObject,
-  state: State
+  state: State,
+  previousPageId: number = -1
 ) {
   const el = getElement(elOrString);
 
   if (!el) return;
+
+  const underlaySlideEl =
+    previousPageId > -1
+      ? getElement("[page-stack-id='" + previousPageId + "'] .m-page-stack-item")
+      : getElement(".m-page-stack");
 
   window.addEventListener("touchstart", onTouchstart, { passive: true });
   window.addEventListener("touchmove", onTouchmove, { passive: false });
@@ -89,7 +95,7 @@ export function useTouch(
     }
   }
 
-  function onTouchmove(e: TouchEvent) {
+  async function onTouchmove(e: TouchEvent) {
     if (!isActiveElement(e)) return;
 
     const touchX = e.changedTouches[0].clientX;
@@ -183,6 +189,11 @@ export function useTouch(
 
       el.style.setProperty("transform", transform);
       el.style.setProperty("transition", "none");
+
+      if (underlaySlideEl) {
+        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', `${dragProgress.toFixed(2)}`);
+        underlaySlideEl.style.setProperty('transition', 'none');
+      }
     } else {
       if (state.isActive) {
         el.style.removeProperty("transform");
@@ -191,6 +202,14 @@ export function useTouch(
       }
 
       el.style.removeProperty("transition");
+
+      if (underlaySlideEl) {
+        underlaySlideEl.style.setProperty('--m-page-stack-item-progress', state.isActive ? "1" : "0");
+        underlaySlideEl.style.removeProperty('transition');
+        setTimeout(() => {
+          underlaySlideEl.style.removeProperty('--m-page-stack-item-progress');
+        }, 300);
+      }
     }
   };
 

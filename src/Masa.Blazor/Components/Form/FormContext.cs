@@ -7,51 +7,53 @@ public class FormContext
 {
     public FormContext(MForm form)
     {
-        Form = form;
+        _form = form;
     }
 
     public FormContext(EditContext editContext, MForm form)
     {
         EditContext = editContext;
-        Form = form;
+        _form = form;
     }
+
+    private readonly MForm _form;
 
     public EditContext? EditContext { get; }
 
-    private MForm Form { get; }
+    public bool Validate() => _form.Validate();
 
-    public bool Validate() => Form.Validate();
+    public bool Validate(FieldIdentifier fieldIdentifier) => _form.Validate(fieldIdentifier);
 
-    public bool Validate(FieldIdentifier fieldIdentifier) => Form.Validate(fieldIdentifier);
+    public bool Validate(IValidatable validatable) => _form.Validate(validatable);
 
-    public bool Validate(IValidatable validatable) => Form.Validate(validatable);
+    public bool Validate(out List<FieldValidationResult> results) => _form.Validate(out results);
 
-    public void Reset() => Form.Reset();
+    public void Reset() => _form.Reset();
 
-    public void Reset(FieldIdentifier fieldIdentifier) => Form.Reset(fieldIdentifier);
+    public void Reset(FieldIdentifier fieldIdentifier) => _form.Reset(fieldIdentifier);
 
-    public void Reset(IValidatable validatable) => Form.Reset(validatable);
+    public void Reset(IValidatable validatable) => _form.Reset(validatable);
 
-    public void ResetValidation() => Form.ResetValidation();
+    public void ResetValidation() => _form.ResetValidation();
 
-    public void ResetValidation(FieldIdentifier fieldIdentifier) => Form.ResetValidation(fieldIdentifier);
+    public void ResetValidation(FieldIdentifier fieldIdentifier) => _form.ResetValidation(fieldIdentifier);
 
-    public void ResetValidation(IValidatable validatable) => Form.ResetValidation(validatable);
+    public void ResetValidation(IValidatable validatable) => _form.ResetValidation(validatable);
 
-    public bool IsValid => Form.Value;
-
-    /// <summary>
-    /// parse form validation result,if parse failed throw exception
-    /// </summary>
-    /// <param name="validationResult"></param>
-    public void ParseFormValidation(string validationResult) => Form.ParseFormValidation(validationResult);
+    public bool IsValid => _form.Value;
 
     /// <summary>
-    /// parse form validation result,if parse failed return false
+    /// parse form validation result, if parse failed throw exception
     /// </summary>
     /// <param name="validationResult"></param>
-    public bool TryParseFormValidation(string validationResult) => Form.TryParseFormValidation(validationResult);
+    public void ParseFormValidation(string validationResult) => _form.ParseFormValidation(validationResult);
+
+    /// <summary>
+    /// parse form validation result, if parse failed return false
+    /// </summary>
+    /// <param name="validationResult"></param>
+    public bool TryParseFormValidation(string validationResult) => _form.TryParseFormValidation(validationResult);
 
     public void ParseFormValidation(IEnumerable<ValidationResult> validationResults) =>
-        Form.ParseFormValidation(validationResults);
+        _form.ParseFormValidation(validationResults);
 }

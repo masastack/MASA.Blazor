@@ -1,7 +1,7 @@
 ﻿@attribute [JSCustomElement]
 
 <MSheet Class="@($"overflow-hidden {Class}")"
-        Dark="Dark"
+        Theme="@Theme"
         Outlined="@Outlined"
         Rounded="true"
         Width="@Width"
@@ -17,9 +17,6 @@
     public string? Class { get; set; }
 
     [Parameter]
-    public bool Dark { get; set; }
-
-    [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
@@ -33,6 +30,9 @@
 
     [Parameter]
     public StringNumber? MinWidth { get; set; }
+
+    [Parameter]
+    public string? Theme { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; } = new();

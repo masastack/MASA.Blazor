@@ -44,6 +44,11 @@ public partial class MMain : MasaComponentBase
 
     private void OnApplicationPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (IsDisposed)
+        {
+            return;
+        }
+        
         if (_applicationProperties.Contains(e.PropertyName))
         {
             _sized = true;

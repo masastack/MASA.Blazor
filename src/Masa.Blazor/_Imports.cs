@@ -20,3 +20,4 @@ global using Microsoft.AspNetCore.Components.Forms;
 global using Masa.Blazor.Mixins;
 global using Masa.Blazor.Helpers;
 global using Masa.Blazor.JSInterop;
+global using Masa.Blazor.SourceGenerated;

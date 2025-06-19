@@ -2,6 +2,7 @@
   "props": {
     "fallbackUri": "在堆栈页时，点击左上角的返回按钮后如果没有上一页则跳转的页面",
     "name": "PageStackNavController 的唯一名称。仅当你的应用中有多个堆栈组件时才需要设置",
-    "tabbedPatterns": "一组表示是底部标签栏的页面的正则表达式，用于区别堆栈页的页面",
+    "tabRules": "设置所有标签页的规则。`Pattern`接受一个匹配URL的正则表达式；`Persistent`表示是否缓存当前标签页状态；`Self`在当路由存在参数匹配时可启用",
+    "appBarAlwaysVisible": "堆栈中的每个页面默认都会有一个应用栏。如果设置为 `false`，则只有包含 [PStackPageBar](/blazor/mobiles/page-stack#pstackpagebar) 组件的页面才会有应用栏。"
   }
 }

@@ -6,10 +6,6 @@ namespace Masa.Docs.Shared.Shared;
 
 public partial class BaseLayout
 {
-    private static readonly Project s_emptyProject = new("MASA Stack",
-        "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
-        "https://github.com/masastack");
-
     private bool? _showSettings;
     private bool? _showMobileMenuList;
     private bool _hideAppBarNavIcon;
@@ -18,6 +14,7 @@ public partial class BaseLayout
     private Project? _projectInfo;
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
+    private Config? _config;
 
     internal Action? OnAppBarNavIconClick { get; set; }
 
@@ -36,6 +33,7 @@ public partial class BaseLayout
             await InitTheme();
             await InitRTL();
             await InitLang();
+            await InitConfig();
 
             _projectMap = await DocService.ReadProjectMapAsync();
 
@@ -58,27 +56,24 @@ public partial class BaseLayout
     {
         var themeStr = await LocalStorage.GetItemAsync("masablazor@theme");
 
-        switch (themeStr)
+        if (themeStr == "system")
         {
-            case "light" when MasaBlazor.Theme.Dark:
-            case "dark" when !MasaBlazor.Theme.Dark:
-                MasaBlazor.ToggleTheme();
-                break;
-            case "system" or null:
-                try
+            try
+            {
+                var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
+                if (MasaBlazor.Theme.DefaultTheme != (darkPrefer ? "dark" : "light"))
                 {
-                    var darkPrefer = await JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
-                    if (darkPrefer != MasaBlazor.Theme.Dark)
-                    {
-                        MasaBlazor.ToggleTheme();
-                    }
+                    MasaBlazor.ToggleTheme();
                 }
-                catch (JSException)
-                {
-                    // ignored
-                }
-
-                break;
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(themeStr))
+        {
+            MasaBlazor.SetTheme(themeStr);
         }
     }
 
@@ -90,6 +85,11 @@ public partial class BaseLayout
             _culture = new CultureInfo(langStr);
             I18n.SetCulture(_culture);
         }
+    }
+
+    private async Task InitConfig()
+    {
+        _config = await LocalStorage.GetItemAsync<Config>("masablazor@config");
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -106,10 +106,13 @@ public partial class BaseLayout
 
     private void UpdateProjectInfo()
     {
-        if (!(_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)))
-        {
-            _projectInfo = s_emptyProject;
-        }
+        if (_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)) return;
+
+        _projectInfo = new Project(
+            "MASA Stack",
+            null,
+            "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
+            "https://github.com/masastack");
     }
 
     private void OnCultureChanged(string cultureName)

@@ -3,11 +3,9 @@ using StyleBuilder = Masa.Blazor.Core.StyleBuilder;
 
 namespace Masa.Blazor;
 
-public partial class MDigitalClock<TValue> : MasaComponentBase
+public partial class MDigitalClock<TValue> : ThemeComponentBase
 {
     [Inject] protected IntersectJSModule IntersectJSModule { get; set; } = null!;
-
-    [CascadingParameter(Name = "IsDark")] public bool CascadingIsDark { get; set; }
 
     /// <summary>
     /// Allowed hours, only works when <see cref="MultiSection"/> is true.
@@ -34,7 +32,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     public OneOf<Func<TimeOnly, bool>, List<TimeOnly>> AllowedTimes { get; set; }
 
     [Parameter]
-    [MasaApiParameter(ReleasedOn = "v1.8.0")]
+    [MasaApiParameter(ReleasedIn = "v1.8.0")]
     public bool HideDisallowedTimes { get; set; }
 
     [Parameter] public string? Color { get; set; }
@@ -103,10 +101,6 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
         set => SetValue(value);
     }
 
-    [Parameter] public bool Light { get; set; }
-
-    [Parameter] public bool Dark { get; set; }
-
     [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
     private static Block Block = new("m-digital-clock");
@@ -126,24 +120,6 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
     private TimeSpan? _previousStep;
 
     private TimePeriod _timePeriod;
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
 
     /// <summary>
     /// 24-hour format
@@ -253,7 +229,7 @@ public partial class MDigitalClock<TValue> : MasaComponentBase
             .Add(Disabled, Readonly, MultiSection)
             .Add(Format)
             .Add("use-seconds", ComputedUseSeconds)
-            .AddTheme(IsDark)
+            .AddTheme(ComputedTheme)
             .AddClass("m-sheet")
             .Build();
     }

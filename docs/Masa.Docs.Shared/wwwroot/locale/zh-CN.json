@@ -13,7 +13,7 @@
   "made-with-masa-blazor": "使用 MASA Blazor 制作的项目",
   "installation": "安装",
   "styles-and-animations": "样式和动画",
-  "ui-components": "组件",
+  "ui-components": "UI 组件",
   "js-modules": "JavaScript模块",
   "intersection-observer": "交叉观察者",
   "labs": "实验室",
@@ -44,6 +44,8 @@
   "ssr": "服务端渲染",
   "direction": "双向性",
   "layouts": "布局",
+  "two-way-binding": "双向绑定",
+  "rendering": "渲染",
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
@@ -52,12 +54,13 @@
     "new": "新增",
     "update": "更新",
     "breaking-change": "破坏更新",
-    "deprecated": "弃用"
+    "deprecated": "弃用",
+    "labs": "实验"
   },
   "tag": {
     "preset": "预置",
     "service": "服务",
-    "js-proxy": "JS代理"
+    "js-proxy": "基于JS封装"
   },
   "v1-banner": {
     "content": "您正在查看{0}的文档。如果您正在使用旧的版本，建议升级。",
@@ -166,6 +169,7 @@
   "dividers": "Dividers（分隔线）",
   "drawers": "Drawers（抽屉）",
   "drawflow": "Drawflow（流程）",
+  "driverjs": "Tour（引导）",
   "echarts": "ECharts（图表）",
   "editors": "Editors（富文本编辑器）",
   "error-handler": "Error handler（异常处理）",
@@ -174,6 +178,7 @@
   "footers": "Footers（页脚）",
   "form-inputs-and-controls": "Form inputs and controls（表单和控制）",
   "autocompletes": "Autocompletes（自动补全）",
+  "combobox": "Combobox（组合选择框）",
   "cascaders": "Cascaders（级联菜单）",
   "checkboxes": "Checkboxes（复选框）",
   "file-inputs": "File inputs（文件上传）",
@@ -209,7 +214,7 @@
   "markdowns": "Markdowns（Markdown编辑器）",
   "markdown-parsers": "Markdown parsers（Markdown解析器）",
   "menus": "Menus（菜单）",
-  "mobiles": "Mobiles（移动端）",
+  "mobiles": "移动端组件",
   "mobile-cascader": "Mobile cascader（移动端级联）",
   "mobile-date-pickers": "Mobile date pickers（移动端日期选择器）",
   "mobile-date-time-pickers": "Mobile date time pickers（移动端日期时间选择器）",
@@ -252,8 +257,10 @@
   "data-tables": "Data tables（数据表格）",
   "simple-tables": "Simple tables（简单表格）",
   "tabs": "Tabs（选项卡）",
+  "theme-providers": "Theme providers（主题提供程序）",
   "timelines": "Timelines（时间轴）",
   "toggles": "Toggles（切换）",
+  "empty-states": "Empty state（空状态）",
   "enqueued-snackbars": "Enqueued snackbars（消息队列）",
   "tooltips": "Tooltips（工具提示）",
   "treeview": "Treeview（树形视图）",
@@ -284,6 +291,7 @@
   "not-supported": "不支持",
   "toggle-theme": "切换主题",
   "github": "Github",
+  "star-me": "每颗 Star 都会变成更新的动力 ⚡",
   "gitee": "Gitee",
   "settings": "设置",
   "wireframes": "预置布局",
@@ -291,7 +299,7 @@
   "product.stack": "MASA Stack",
   "product.framework": "MASA Framework",
   "all": "所有组件",
-  "concepts": "基础概念",
+  "activator": "触发器",
   "overview": "概述",
   "building-blocks": "构建块",
   "observability": "可观测性",
@@ -482,6 +490,7 @@
     "dividers": "用于分隔列表或布局的各个部分",
     "drawers": "drawers（抽屉）",
     "drawflow": "一个基于流程组件",
+    "driverjs": "Tour 是一个基于 Driver.js 的引导组件",
     "echarts": "echarts 图标",
     "editor": "基于Quill封装的富文本编辑器",
     "error-handler": "用来处理blazor组件数据加载和render时的异常信息",
@@ -556,6 +565,7 @@
     "data-tables": "DataTables 组件用于显示表格数据",
     "simple-tables": "SimpleTables 组件是 table 元素的简单封装组件",
     "tabs": "Tabs 组件用于将内容隐藏在可选择的项目后面",
+    "theme-providers": "允许您以与默认主题不同的主题来设计应用程序的一部分",
     "timelines": "Timelines 对于显示时间顺序信息非常有用",
     "toast": "该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息",
     "tooltips": "当用户悬停在元素上时， Tooltips 组件可用于传递信息",
@@ -628,5 +638,22 @@
       "data-table": "新增对单元格省略号和自定义单元格内容在 `Headers` 中的支持。",
       "list-item": "新增子组件参数，包括 `Title`, `Subtitle`, `PrependAvatar`, `PrependIcon`, `AppendAvatar` 和 `AppendIcon`。"
     }
-  }
+  },
+  "latest-build": "文档构建版本",
+  "latest-release": "最新发行版",
+  "component-type": {
+    "containment": "容器组件",
+    "navigation": "导航式组件",
+    "form": "表单输入和控制",
+    "dataDisplay": "数据展示",
+    "selection": "选择组件",
+    "feedback": "反馈式组件",
+    "imagesAndIcons": "图像和图标组件",
+    "pickers": "选择器组件",
+    "providers": "提供程序组件",
+    "services": "服务",
+    "misc": "其他"
+  },
+  "nav-component-group-by-type": "组件按类型分类",
+  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分类"
 }

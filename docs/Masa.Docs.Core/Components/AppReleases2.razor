@@ -20,8 +20,8 @@
                        Items="@_releases"
                        Dark
                        TItem="Release"
-                       TItemValue="int"
-                       TValue="int?"
+                       TItemValue="long"
+                       TValue="long?"
                        ItemValue="r => r.Id"
                        ItemText="r => r.Name"
                        Class="mb-4"
@@ -111,7 +111,7 @@ else
     public bool IsIntro { get; set; }
 
     private bool _loading = true;
-    private int? _search;
+    private long? _search;
     private Release? _selected;
 
     private List<Release> _releases = new();

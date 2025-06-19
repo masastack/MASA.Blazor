@@ -80,6 +80,10 @@
     "MDescriptions",
     "MDescriptionsItem"
   ],
+  "driverjs": [
+    "MDriverJS",
+    "MDriverJSStep" 
+  ],
   "echarts": [
     "MECharts"
   ],
@@ -141,13 +145,17 @@
   ],
   "page-stack": [
     "PPageStack",
-    "PStackPageBarInit",
+    "PPageStackTab",
+    "PStackPageBar",
     "PageStackNavController"
   ],
   "page-tabs": [
     "PPageTabs",
     "PPageContainer",
     "PPageProvider"
+  ],
+  "pdf-mobile-viewer": [
+    "MPdfMobileViewer"
   ],
   "popup-service": [
     "IPopupService"

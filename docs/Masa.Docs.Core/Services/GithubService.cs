@@ -1,122 +1,154 @@
 ﻿using System.Collections.Concurrent;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Octokit;
 
 namespace Masa.Docs.Core.Services;
 
-public class GithubService
+public class GithubService(ExpiryLocalStorage localStorage, ILogger<GithubService> logger)
 {
-    private readonly IMemoryCache _memoryCache;
     private readonly ConcurrentDictionary<string, GitHubClient> _cache = new();
-
-    public GithubService(IMemoryCache memoryCache)
-    {
-        _memoryCache = memoryCache;
-    }
+    private IReadOnlyList<Release> _allReleases = [];
 
     private GitHubClient CreateClient(string owner, string repo)
     {
         var key = $"{owner}-{repo}";
 
-        var client = _cache.GetOrAdd(key, new GitHubClient(new ProductHeaderValue(key)));
+        var client = _cache.GetOrAdd(key, new GitHubClient(new ProductHeaderValue(key))
+        {
+            Credentials = new Credentials("docs_token_read_only", AuthenticationType.Bearer)
+        });
 
         return client;
     }
 
-    public async Task<(int open, int close)> SearchIssuesAsync(string owner, string repo, string term)
+    public record IssueCount(int Open, int Closed);
+
+    public record LatestBuild(string? Sha, string? Version);
+
+    public async Task<IssueCount> SearchIssuesAsync(string owner, string repo, IEnumerable<string> labels,
+        string cacheKey)
     {
-        var issueCount = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__searchIssues_{term}", async entry =>
+        var key = repo + "__issueCount__" + cacheKey;
+
+        var issueCount = await localStorage.GetExpiryItemAsync<IssueCount>(key);
+        if (issueCount != null)
         {
-            var request = new SearchIssuesRequest(term);
-            request.Repos.Add(owner, repo);
-            request.In = new[] { IssueInQualifier.Title };
-            request.Type = IssueTypeQualifier.Issue;
+            return issueCount;
+        }
 
-            var client = CreateClient(owner, repo);
+        var request = new SearchIssuesRequest();
+        request.Repos.Add(owner, repo);
+        request.Type = IssueTypeQualifier.Issue;
+        request.Labels = labels;
 
-            var open = 0;
-            var closed = 0;
+        var client = CreateClient(owner, repo);
 
-            try
-            {
-                var result = await client.Search.SearchIssues(request);
+        var open = 0;
+        var closed = 0;
 
-                if (!result.IncompleteResults)
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
-
-                    open = result.Items.Count(item => item.State == ItemState.Open);
-                    closed = result.Items.Count(item => item.State == ItemState.Closed);
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-
-            return (open, closed);
-        });
-
-        return issueCount;
-    }
-    
-    public async Task<(int open, int close)> SearchIssuesAsync(string owner, string repo, IEnumerable<string> labels, string cacheKey)
-    {
-        var issueCount = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__searchIssues_{cacheKey}", async entry =>
+        try
         {
-            var request = new SearchIssuesRequest();
-            request.Repos.Add(owner, repo);
-            request.Type = IssueTypeQualifier.Issue;
-            request.Labels = labels;
+            var result = await client.Search.SearchIssues(request);
 
-            var client = CreateClient(owner, repo);
-
-            var open = 0;
-            var closed = 0;
-
-            try
+            if (!result.IncompleteResults)
             {
-                var result = await client.Search.SearchIssues(request);
-
-                if (!result.IncompleteResults)
-                {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
-
-                    open = result.Items.Count(item => item.State == ItemState.Open);
-                    closed = result.Items.Count(item => item.State == ItemState.Closed);
-                }
+                open = result.Items.Count(item => item.State == ItemState.Open);
+                closed = result.Items.Count(item => item.State == ItemState.Closed);
             }
-            catch
-            {
-                // ignored
-            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error fetching issue count");
+        }
 
-            return (open, closed);
-        });
-
-        return issueCount;
+        issueCount = new IssueCount(open, closed);
+        await localStorage.SetExpiryItemAsync(key, issueCount, TimeSpan.FromDays(1));
+        return new IssueCount(open, closed);
     }
 
     public async Task<IReadOnlyList<Release>> FetchReleasesAsync(string owner, string repo)
     {
-        var releases = await _memoryCache.GetOrCreateAsync($"{owner}-{repo}__releases", async entry =>
+        if (_allReleases.Count == 0)
         {
-            IReadOnlyList<Release>? result = null;
-
+            var client = CreateClient(owner, repo);
             try
             {
-                var client = CreateClient(owner, repo);
-                result = await client.Repository.Release.GetAll(owner, repo);
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+                var releases = await client.Repository.Release.GetAll(owner, repo);
+                if (releases.Count > 0)
+                {
+                    _allReleases = releases;
+                }
             }
-            catch
+            catch (Exception e)
             {
-                // ignored
+                logger.LogError(e, "Error fetching releases");
             }
+        }
 
-            return result;
-        });
-
-        return releases ?? new List<Release>();
+        return _allReleases;
     }
+
+    public async Task<LatestBuild?> GetLatestBuildAsync(string owner, string repo)
+    {
+        var key = repo + "__latestBuild";
+
+        var latestBuild = await localStorage.GetExpiryItemAsync<LatestBuild>(key);
+        if (latestBuild != null)
+        {
+            return latestBuild;
+        }
+
+        try
+        {
+            var client = CreateClient(owner, repo);
+
+            var releaseResponse = await client.Repository.Release.GetLatest(owner, repo);
+            if (releaseResponse is null) return null;
+            var release = releaseResponse.TagName;
+            
+            var runsResponse = await client.Actions.Workflows.Runs.ListByWorkflow(owner, repo,
+                ".github/workflows/wasm-prd.yml",
+                new WorkflowRunsRequest
+                {
+                    Status = CheckRunStatusFilter.Success
+                });
+
+            var latest = runsResponse.WorkflowRuns.FirstOrDefault();
+            if (latest == null) return null;
+            var commitSha = latest.HeadSha;
+
+            latestBuild = new LatestBuild(commitSha, release);
+            await localStorage.SetExpiryItemAsync(key, latestBuild, TimeSpan.FromHours(1));
+            return latestBuild;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error fetching latest build");
+            return null;
+        }
+    }
+
+    public async ValueTask<int> GetStarCountAsync(string owner, string repo)
+    {
+        var key = repo + "__starCount";
+        var starCount = await localStorage.GetExpiryItemAsync<int?>(key);
+        if (starCount.HasValue)
+        {
+            return starCount.Value;
+        }
+
+        try
+        {
+            var client = CreateClient(owner, repo);
+            var repository = await client.Repository.Get(owner, repo);
+            starCount = repository.StargazersCount;
+            await localStorage.SetExpiryItemAsync(key, starCount, TimeSpan.FromHours(1));
+            return starCount.Value;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error fetching star count");
+            return 0;
+        }
+}
 }

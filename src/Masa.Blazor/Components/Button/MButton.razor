@@ -2,7 +2,7 @@
 @using Masa.Blazor.Components.ItemGroup
 @inherits MRoutableGroupItem<MItemGroupBase>
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     @if (Key is not null)
     {
         <KeyTransitionElement
@@ -13,6 +13,8 @@
             Value="@Key"
             id="@Id"
             ReferenceCaptureAction="reference => Ref = reference"
+            __internal_stopPropagation_onclick="@OnClickStopPropagation"
+            __internal_preventDefault_onclick="@OnClickPreventDefault"
             @attributes="Attributes">
             @GenContent()
         </KeyTransitionElement>
@@ -27,6 +29,8 @@
             Value="@(Show ?? true)"
             id="@Id"
             ReferenceCaptureAction="reference => Ref = reference"
+            __internal_stopPropagation_onclick="@OnClickStopPropagation"
+            __internal_preventDefault_onclick="@OnClickPreventDefault"
             @attributes="Attributes">
             @GenContent()
         </ShowTransitionElement>

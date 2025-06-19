@@ -1,11 +1,11 @@
 ﻿@namespace Masa.Blazor
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 @attribute [CascadingTypeParameter(nameof(TValue))]
 @using BemIt.Extensions
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
 @typeparam TValue
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <CascadingValue Value="IsDisabled" Name="Input_IsDisabled">
         <div class="@GetClass()"
              style="@GetStyle()"

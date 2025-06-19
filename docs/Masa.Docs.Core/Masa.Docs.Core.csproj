@@ -17,10 +17,11 @@
     <PackageReference Include="YamlDotNet" Version="12.0.2" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
-    <PackageReference Include="Octokit" Version="8.1.1" />
+    <PackageReference Include="Octokit" Version="14.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.MarkdownIt\Masa.Blazor.JSComponents.MarkdownIt.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.SomethingSkia\Masa.Blazor.SomethingSkia.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>

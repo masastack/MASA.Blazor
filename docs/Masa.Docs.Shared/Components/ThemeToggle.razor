@@ -1,48 +1,166 @@
 ﻿@inject MasaBlazor MasaBlazor
 @inject LocalStorage LocalStorage
 @inject IJSRuntime JSRuntime
-@implements IDisposable
+@inject I18n I18n
 
-<MToggle Value="@MasaBlazor.Theme.Dark" DataOn="@("mdi-weather-night")" DataOff="@("mdi-weather-sunny")">
-    <AppTooltipButton Icon="@context.Data"
-                      Path="toggle-theme"
-                      Class="mr-2 ml-2"
-                      OnClick="@SwitchTheme">
-    </AppTooltipButton>
-</MToggle>
+<MButton Icon>
+    <MBadge Value="_badge" Color="green" Dot>
+        <MIcon>mdi-theme-light-dark</MIcon>
+    </MBadge>
+    <MDialog Activator="parent"
+             MaxWidth="1000">
+        <MCard Title="@I18n.T("theme")"
+               Subtitle="Customize your documentation experience with light and dark themes, as well as a combination of both named.">
+            <MDivider/>
+            <MList>
+                <MListItemGroup Class="px-6 pb-5"
+                                Color="primary"
+                                Mandatory
+                                @bind-Value="@_theme"
+                                @bind-Value:after="OnChange">
+                    <MRow NoGutters>
+                        <MCol Cols="12" Md="6">
+                            <MRow Dense>
+                                <MCol Cols="12">
+                                    <MSubheader>Standard</MSubheader>
+                                    <MListItem PrependIcon="mdi-weather-sunny" Title="Light"
+                                               Subtitle="A standard light theme."
+                                               Slim Value="@("light")">
+                                    </MListItem>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MListItem PrependIcon="mdi-weather-night" Title="Dark"
+                                               Subtitle="A standard dark theme."
+                                               Slim
+                                               Value="@("dark")">
+                                    </MListItem>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MListItem PrependIcon="mdi-desktop-classic" Title="System"
+                                               Subtitle="A theme based on the system preference." Slim
+                                               Value="@("system")">
+                                    </MListItem>
+                                </MCol>
+                            </MRow>
+                        </MCol>
+                        <MCol Cols="12" Md="6">
+                            <MRow Dense>
+                                <MCol Cols="12">
+                                    <MSubheader>Releases</MSubheader>
+                                    <MListItem PrependIcon="$masaStack" Title="MASA Light"
+                                               Subtitle="A light theme based on the MASA design." Slim
+                                               Value="@("masa-light")">
+                                    </MListItem>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MListItem PrependIcon="$masaStack" Title="MASA Dark"
+                                               Subtitle="A dark theme based on the MASA design." Slim
+                                               Value="@("masa-dark")">
+                                    </MListItem>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MListItem PrependIcon="mdi-leaf-circle-outline"
+                                               Slim Value="@("greenery")">
+                                        <MListItemContent>
+                                            <MListItemTitle>
+                                                Greenery
+                                            </MListItemTitle>
+                                            <MListItemSubtitle>
+                                                A light theme from
+                                                <AppLink
+                                                    Href="https://m3.material.io/styles/color/system/how-the-system-works#3cfa9a7f-7d8c-45b0-9b6b-7dee16d858d6"
+                                                    Content="material.io"
+                                                    StopPropagation/>
+                                                .
+                                            </MListItemSubtitle>
+                                        </MListItemContent>
+                                    </MListItem>
+                                </MCol>
+                                <MCol Cols="12">
+                                    <MListItem PrependIcon="mdi-leaf-circle"
+                                               Slim Value="@("camel")"
+                                               ThreeLine>
+                                        <MListItemContent>
+                                            <MListItemTitle>
+                                                Camel
+                                            </MListItemTitle>
+                                            <MListItemSubtitle>
+                                                A theme built using the
+                                                <AppLink
+                                                    Href="https://www.figma.com/community/plugin/1034969338659738588/material-theme-builder"
+                                                    Content="Material Theme Builder"
+                                                    StopPropagation/>
+                                                based on the source color
+                                                #C97D4C.
+                                            </MListItemSubtitle>
+                                        </MListItemContent>
+                                    </MListItem>
+                                </MCol>
+                            </MRow>
+                        </MCol>
+                    </MRow>
+                </MListItemGroup>
+            </MList>
+        </MCard>
+    </MDialog>
+</MButton>
 
 @code {
 
-    private DotNetObjectReference<ThemeToggle>? _objRef;
+    private StringNumber? _theme;
+    private bool _badge = true;
 
-    protected override void OnInitialized()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _objRef = DotNetObjectReference.Create(this);
-    }
+        await base.OnAfterRenderAsync(firstRender);
 
-    public void SwitchTheme(MouseEventArgs e)
-    {
-        _ = JSRuntime.InvokeVoidAsync("switchTheme", _objRef, !MasaBlazor.Theme.Dark, e.ClientX, e.ClientY);
-    }
-
-    [JSInvokable]
-    public void ToggleTheme(bool dark)
-    {
-        if (dark == MasaBlazor.Theme.Dark)
+        if (firstRender)
         {
-            return;
+            _theme = await GetThemeFromLocalStorage() ?? "system";
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnChange()
+    {
+        var option = _theme.ToString();
+
+        if (option == "system")
+        {
+            try
+            {
+                var preferDark = await IsDarkPreferColor();
+                var targetTheme = preferDark ? "dark" : "light";
+                if (MasaBlazor.Theme.DefaultTheme != targetTheme)
+                {
+                    ToggleThemeInternal(targetTheme);
+                }
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
+        }
+        else
+        {
+            if (MasaBlazor.Theme.DefaultTheme == option)
+            {
+                return;
+            }
+
+            ToggleThemeInternal(option);
         }
 
-        MasaBlazor.ToggleTheme();
+        _ = UpdateThemeInLocalStorage(option);
 
-        _ = LocalStorage.SetItemAsync("masablazor@theme", dark ? "dark" : "light");
-
-        _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", dark);
+        void ToggleThemeInternal(string theme)
+        {
+            MasaBlazor.SetTheme(theme);
+            _ = JSRuntime.TryInvokeVoidAsync("updateThemeOfElementsFromMarkdown", theme);
+        }
     }
 
-    public void Dispose()
-    {
-        _objRef?.Dispose();
-    }
-
+    private Task<string?> GetThemeFromLocalStorage() => LocalStorage.GetItemAsync("masablazor@theme");
+    private ValueTask<bool> IsDarkPreferColor() => JSRuntime.InvokeAsync<bool>("isDarkPreferColor");
+    private Task UpdateThemeInLocalStorage(string value) => LocalStorage.SetItemAsync("masablazor@theme", value);
 }

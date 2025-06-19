@@ -1,7 +1,6 @@
 ﻿@layout BaseLayout
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
-@inject NavigationManager NavigationManager
 @using Masa.Blazor.Extensions
 
 <NavDrawer @bind-Value="_showDrawer"
@@ -37,6 +36,7 @@
 
     private bool? _showDrawer;
     private bool _showBackTop;
+    private long _scrollEventId;
 
     private int Offset => AppService.AppBarHeight + 12;
 
@@ -55,7 +55,7 @@
 
         if (firstRender)
         {
-            await Js.AddHtmlElementEventListener("window", "scroll", OnScroll, false, new EventListenerExtras(0, 100));
+            _scrollEventId = await Js.AddHtmlElementEventListener("window", "scroll", OnScroll, false, new EventListenerExtras(0, 100));
         }
     }
 
@@ -78,9 +78,9 @@
     {
         try
         {
-            await Js.RemoveHtmlElementEventListener("window", "scroll");
+            await Js.RemoveHtmlElementEventListener(_scrollEventId);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // ignored
         }

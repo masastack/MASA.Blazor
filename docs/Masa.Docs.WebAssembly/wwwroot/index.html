@@ -4,14 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="keywords" content="Masa.Blazor,Masa Blazor,Blazor,Blazor组件库,dotnet,Material Design,数闪,组件库,webassembly,wasm" />
-    <meta name="description" content="遵循 Material Design 设计规范的 Blazor 组件库。Provide standard blazor component library based on the interaction ability of material design" />
-    <title>MASA Blazor</title>
+    <meta name="keywords" content="Masa文档, Masa Stack, Masa Framework, Masa Blazor, Masa.Blazor, Blazor, Blazor Component, Blazor 组件库, Material Design, 数闪" />
+    <title>MASA Docs</title>
     <base href="/" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,w_512">
     <link href="css/app.css" rel="stylesheet" />
-    <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
+    <link href="_content/Masa.Blazor/css/masa-blazor.min.css?version=" rel="stylesheet">
     <link href="Masa.Docs.WebAssembly.styles.css" rel="stylesheet" />
     <link href="https://cdn.masastack.com/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
@@ -23,15 +22,16 @@
     <link href="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/docsearch/v3/docsearch.css" rel="stylesheet">
-    <link href="https://cdn.masastack.com/npm/gridstack.js/7.2.1/gridstack.min.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/gridstack.js/12.2.1/gridstack.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/drawflow/0.0.59/drawflow.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.2.0/swiper-bundle.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/xgplayer/3.0.11/xgplayer.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/pdfjs-dist/4.5.136/web/pdf_viewer.min.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/prism/prism-material-dark-for-masa.css" rel="stylesheet">
     <link href="_content/Masa.Docs.Shared/prism/prism-line-highlight.min.css" rel="stylesheet">
-    <link href="_content/Masa.Docs.Shared/css/docs.css" rel="stylesheet">
-    <link href="_content/Masa.Docs.Shared/css/docs--sm-and-down.css" rel="stylesheet" media="(max-width: 960px)">
+    <link href="_content/Masa.Docs.Shared/css/docs.css?version=" rel="stylesheet">
+    <link href="_content/Masa.Docs.Shared/css/docs--sm-and-down.css?version=" rel="stylesheet" media="(max-width: 960px)">
+    <link href="_content/Masa.Blazor.JSComponents.DriverJS/driver.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -71,6 +71,48 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://docs.masastack.com",
+            "name": "MASA Docs",
+            "alternateName": "MASA Stack, MASA Framework, MASA Blazor",
+            "description": "MASA Docs is a documentation site for MASA Stack, MASA Framework, and MASA Blazor."
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "MASA 文档",
+            "url": "https://docs.masastack.com",
+            "description": "MASA 文档提供了关于 MASA Stack、MASA Framework 和 MASA Blazor 的详细信息和指南。",
+            "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "MASA Stack",
+                        "item": "https://docs.masastack.com/stack/masa-stack-1.0/introduce"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "MASA Framework",
+                        "item": "https://docs.masastack.com/framework/concepts/overview"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "MASA Blazor",
+                        "item": "https://docs.masastack.com/blazor/introduction/why-masa-blazor"
+                    }
+                ]
+            }
+        }
+    </script>
     <script>
         const dark = localStorage.getItem("masablazor@theme");
         if (((!dark || dark === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches) || dark === "dark") {
@@ -83,6 +125,7 @@
     <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-it-emoji.min.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-parser.js"></script>
+    <script src="https://cdn.masastack.com/npm/gridstack.js/12.2.1/gridstack-all.min.js"></script>
     <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
     <script src="_content/Masa.Docs.Shared/echarts/theme/vintage.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill.js"></script>

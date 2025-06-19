@@ -1,13 +1,13 @@
 ﻿@namespace Masa.Blazor
 @using Masa.Blazor.Components.Pagination
 @using StyleBuilder = Masa.Blazor.Core.StyleBuilder
-@inherits MasaComponentBase
+@inherits ThemeComponentBase
 
-<CascadingValue Value="IsDark" Name="IsDark">
+<CascadingValue Value="ComputedTheme" Name="MasaBlazorCascadingTheme">
     <nav id="@Id" @ref="Ref" class="@Class" style="@Style"
          role="navigation"
          @attributes="@Attributes">
-        <ul class="@_modifierBuilder.Add(Circle).Add(Disabled).AddTheme(IsDark, IndependentTheme)">
+        <ul class="@_modifierBuilder.Add(Circle).Add(Disabled).AddTheme(ComputedTheme)">
             @GenPaginationIcon(PaginationIconType.First)
 
             @if (_internalMiniVariant)

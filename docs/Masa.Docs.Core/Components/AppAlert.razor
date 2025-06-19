@@ -1,6 +1,6 @@
 ﻿@attribute [JSCustomElement]
 
-<MAlert Type="@AlertType" Border="@AlertBorder" Text>
+<MAlert Type="@AlertType" Border="@AlertBorder" Text Theme="@Theme">
     <MMarkdownIt Source="@Content" NoWrapper Scope="desc"></MMarkdownIt>
 </MAlert>
 
@@ -14,6 +14,9 @@
 
     [Parameter]
     public string? Border { get; set; } = "left";
+
+    [Parameter]
+    public string? Theme { get; set; }
 
     private AlertTypes AlertType => Type switch
     {

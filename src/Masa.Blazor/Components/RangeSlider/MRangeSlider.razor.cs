@@ -52,7 +52,7 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
         return RoundValue(DoubleInternalValues[index]);
     }
 
-    public override async Task HandleOnSliderClickAsync(MouseEventArgs args)
+    protected override async Task HandleOnSliderClickAsync(MouseEventArgs args)
     {
         if (!IsActive)
         {
@@ -62,7 +62,7 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
                 return;
             }
 
-            var value = await ParseMouseMoveAsync(args);
+            var value = await ParseMouseMoveAsync(args, null);
 
             await ReevaluateSelectedAsync(value);
 
@@ -72,9 +72,9 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
 
     private double _value = 0;
 
-    public override async Task HandleOnMouseMoveAsync(MouseEventArgs args)
+    internal override async Task HandleOnMouseMoveAsync(MouseEventArgs args, BoundingClientRect? trackRect)
     {
-        _value = await ParseMouseMoveAsync(args);
+        _value = await ParseMouseMoveAsync(args, trackRect);
 
         if (args.Type == "mousemove")
         {
@@ -118,7 +118,7 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
             InternalValueChangeType.InternalOperation);
     }
 
-    public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+    protected override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
     {
         if (ActiveThumb == null)
         {
@@ -134,17 +134,22 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
         await SetInternalValueAsync(value.AsT2);
     }
 
-    public override async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
+    internal override async Task HandleOnTouchStartAsync(SliderTouchEventArgs args)
     {
-        var value = await ParseMouseMoveAsync(new MouseEventArgs()
-            { ClientX = args.Touches[0].ClientX, ClientY = args.Touches[0].ClientY });
+        var value = await ParseMouseMoveAsync(
+            new MouseEventArgs
+            {
+                ClientX = args.TouchEventArgs.Touches[0].ClientX,
+                ClientY = args.TouchEventArgs.Touches[0].ClientY
+            },
+            null);
         await ReevaluateSelectedAsync(value);
         await base.HandleOnTouchStartAsync(args);
     }
 
-    public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
+    internal override async Task HandleOnSliderMouseDownAsync(SliderMouseEventArgs args)
     {
-        var value = await ParseMouseMoveAsync(args);
+        var value = await ParseMouseMoveAsync(args.MouseEventArgs, args.TrackRect);
         await ReevaluateSelectedAsync(value);
         await base.HandleOnSliderMouseDownAsync(args);
     }
@@ -166,14 +171,14 @@ public partial class MRangeSlider<TValue> : MSliderBase<IList<TValue>, TValue> w
         return 1;
     }
 
-    public override Task HandleOnFocusAsync(int index, FocusEventArgs args)
+    protected override Task HandleOnFocusAsync(int index, FocusEventArgs args)
     {
         ActiveThumb = index;
         _value = DoubleInternalValue;
         return base.HandleOnFocusAsync(index,args);
     }
 
-    public override Task HandleOnBlurAsync(int index, FocusEventArgs args)
+    protected override Task HandleOnBlurAsync(int index, FocusEventArgs args)
     {
         _value = DoubleInternalValue;
         ActiveThumb = null;

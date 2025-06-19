@@ -1,3 +1,5 @@
+import { TouchStoredHandlers } from "./components/window/touch";
+
 export {};
 
 declare global {
@@ -182,6 +184,9 @@ declare global {
       showTimer?: number;
       showTimerCommit?: (() => void) | null;
     };
+    _touchHandlers: {
+      [id: number]: TouchStoredHandlers
+    }
   }
 
   interface TransitionEvent {
@@ -196,6 +201,14 @@ declare global {
     elementReferenceId?: string;
     selector?: string;
     class?: string;
+  }
+
+  interface EventTarget {
+    _blazorEvents_1?: {
+      handlers: {
+        [key: string]: any
+      }
+    }
   }
 
   namespace DotNet {

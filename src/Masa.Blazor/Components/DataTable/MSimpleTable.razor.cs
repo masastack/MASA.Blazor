@@ -1,8 +1,6 @@
-﻿using Element = Masa.Blazor.JSInterop.Element;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public partial class MSimpleTable : MasaComponentBase
+public partial class MSimpleTable : ThemeComponentBase
 {
     [Inject]
     private MasaBlazor MasaBlazor { get; set; } = null!;
@@ -34,33 +32,6 @@ public partial class MSimpleTable : MasaComponentBase
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    [Parameter]
-    public bool Dark { get; set; }
-
-    [Parameter]
-    public bool Light { get; set; }
-
-    [CascadingParameter(Name = "IsDark")]
-    public bool CascadingIsDark { get; set; }
-
-    public bool IsDark
-    {
-        get
-        {
-            if (Dark)
-            {
-                return true;
-            }
-
-            if (Light)
-            {
-                return false;
-            }
-
-            return CascadingIsDark;
-        }
-    }
-
     private int _scrollState;
     private int _prevScrollState;
 
@@ -69,20 +40,6 @@ public partial class MSimpleTable : MasaComponentBase
     protected override bool AfterHandleEventShouldRender() => false;
 
     public ElementReference WrapperElement { get; private set; }
-
-    private bool IndependentTheme => (IsDirtyParameter(nameof(Dark)) && Dark) || (IsDirtyParameter(nameof(Light)) && Light);
-
-#if NET8_0_OR_GREATER
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (MasaBlazor.IsSsr && !IndependentTheme)
-        {
-            CascadingIsDark = MasaBlazor.Theme.Dark;
-        }
-    }
-#endif
 
     private static Block _block = new("m-data-table");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
@@ -95,7 +52,7 @@ public partial class MSimpleTable : MasaComponentBase
             .Add(FixedHeader)
             .Add("has-top", TopContent != null)
             .Add("has-bottom", BottomContent != null)
-            .AddTheme(IsDark, IndependentTheme)
+            .AddTheme(ComputedTheme)
             .Build();
     }
 

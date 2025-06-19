@@ -5,6 +5,11 @@ public class MActivatable : MActivatableBase, IActivatable
     [Parameter]
     public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
 
+    /// <summary>
+    /// a flag to sync the active state to js
+    /// </summary>
+    private bool _syncActiveStateToJS = false;
+
     protected RenderFragment? ComputedActivatorContent
     {
         get
@@ -19,19 +24,42 @@ public class MActivatable : MActivatableBase, IActivatable
         }
     }
 
+    protected virtual bool ShouldUpdateActiveInJS => ActivatorContent is not null || !string.IsNullOrWhiteSpace(Activator);
+
     RenderFragment? IActivatable.ComputedActivatorContent => ComputedActivatorContent;
 
     bool IActivatable.IsActive => IsActive;
 
     protected override void RunDirectly(bool val)
     {
-        if (ActivatorContent is null)
+        if (!IsBooted && val)
         {
-            _ = SetActive(val);
+            // the js-interop is not ready,
+            // so we need to sync the active state to js
+            // at the time of first render
+            _syncActiveStateToJS = true;
+            _ = SetActive(true);
+            return;
+        }
+
+        if (ShouldUpdateActiveInJS)
+        {
+            UpdateActiveInJS(val);
         }
         else
         {
-            base.RunDirectly(val);
+            _ = SetActive(val);
         }
+    }
+
+    protected override Task OnActiveUpdatedAsync(bool firstActive, bool active)
+    {
+        if (firstActive && _syncActiveStateToJS)
+        {
+            _syncActiveStateToJS = false;
+            UpdateActiveInJS(active);
+        }
+
+        return Task.CompletedTask;
     }
 }
