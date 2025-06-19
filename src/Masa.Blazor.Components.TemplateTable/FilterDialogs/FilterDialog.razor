@@ -130,6 +130,9 @@
 
     [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
+    /// <summary>
+    /// Use this to filter out hidden columns when selecting columns.
+    /// </summary>
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
 
     [Parameter] public View? ActiveView { get; set; }
