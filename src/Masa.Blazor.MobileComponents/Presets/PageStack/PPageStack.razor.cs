@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Blazor.Presets;
 
-public partial class PPageStack: MasaComponentBase
+public partial class PPageStack : MasaComponentBase
 {
     [Inject] private IPageStackNavControllerFactory PageStackNavControllerFactory { get; set; } = null!;
 
@@ -81,7 +81,7 @@ public partial class PPageStack: MasaComponentBase
     private long _lastOnPreviousClickTimestamp;
 
     private TabRecord? _activeTab;
-    
+
     /// <summary>
     /// Stores the scroll positions of each persistent tab.
     /// </summary>
@@ -93,6 +93,11 @@ public partial class PPageStack: MasaComponentBase
     private IJSObjectReference? _module;
     private DotNetObjectReference<PPageStack>? _dotNetObjectReference;
     private int _dotnetObjectId;
+
+    /// <summary>
+    /// Indicates whether to emit the underlay slide effect.
+    /// </summary>
+    private bool _emitUnderlaySlide;
 
     protected override void OnInitialized()
     {
@@ -148,7 +153,7 @@ public partial class PPageStack: MasaComponentBase
     {
         yield return "m-page-stack";
 
-        if (Pages.Count > 0 && Pages.ElementAt(0).Stacked)
+        if (Pages.Count > 0 && Pages.ElementAt(0).Stacked && _emitUnderlaySlide)
         {
             yield return "m-page-stack--has-pages";
         }
@@ -306,6 +311,7 @@ public partial class PPageStack: MasaComponentBase
             {
                 await Task.Delay(DelayForPageClosingAnimation);
             }
+
             InternalReplaceHandler(e.ReplaceUri, e.State);
         }
     }
@@ -403,14 +409,14 @@ public partial class PPageStack: MasaComponentBase
 
         _lastOnPreviousClickTimestamp = now;
     }
- 
+
     private void OnActiveTabUpdate(TabRecord activeTabId)
     {
         _activeTab = activeTabId;
 
         if (_scrollPositions.TryGetValue(_activeTab.Id, out var pageYOffset))
         {
-           _ = Js.ScrollTo(pageYOffset, 0, ScrollBehavior.Auto);
+            _ = Js.ScrollTo(pageYOffset, 0, ScrollBehavior.Auto);
         }
     }
 
@@ -473,11 +479,38 @@ public partial class PPageStack: MasaComponentBase
 
     private void BlockScroll()
     {
+        Task.Run(async () =>
+        {
+            try
+            {
+                // The rendering of the stack page has a cost,
+                // which may cause the tab page to move first and the stack page to move later.
+                // Here we delay 48 milliseconds to ensure that the stack page is rendered
+                // before triggering the sliding animation.
+                // 48 milliseconds is an empirical value,
+                // as long as it is within 300 milliseconds of the stack page rendering.
+                await Task.Delay(48);
+
+                if (!IsDisposed)
+                {
+                    _emitUnderlaySlide = true;
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                Console.Error.WriteLine($"Error in BlockScroll: {ex}");
+            }
+        });
+        
         _module?.InvokeVoidAsync("blockScroll").ConfigureAwait(false);
     }
 
     private void UnblockScroll()
     {
+        _emitUnderlaySlide = false;
+
         _module?.InvokeVoidAsync("unblockScroll").ConfigureAwait(false);
     }
 
