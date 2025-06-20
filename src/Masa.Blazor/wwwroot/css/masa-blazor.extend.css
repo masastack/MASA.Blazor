@@ -1441,6 +1441,7 @@
 
 .m-page-stack-item {
     overflow: hidden;
+    box-shadow: -10px 0 15px -7px rgba(0, 0, 0, .2);
 }
 
 .m-page-stack-item--inactive:not(.m-page-stack-item--disable-underlay-slide) {
