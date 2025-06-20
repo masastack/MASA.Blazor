@@ -147,7 +147,7 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
   
       private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
       {
-          if (_pullToRefresh is null)
+          if (_pullRefresh is null)
           {
               return;
           }
