@@ -481,15 +481,27 @@ public partial class PPageStack : MasaComponentBase
     {
         Task.Run(async () =>
         {
-            // The rendering of the stack page has a cost,
-            // which may cause the tab page to move first and the stack page to move later.
-            // Here we delay 48 milliseconds to ensure that the stack page is rendered
-            // before triggering the sliding animation.
-            // 48 milliseconds is an empirical value,
-            // as long as it is within 300 milliseconds of the stack page rendering.
-            await Task.Delay(48);
-            _emitUnderlaySlide = true;
-            await InvokeAsync(StateHasChanged);
+            try
+            {
+                // The rendering of the stack page has a cost,
+                // which may cause the tab page to move first and the stack page to move later.
+                // Here we delay 48 milliseconds to ensure that the stack page is rendered
+                // before triggering the sliding animation.
+                // 48 milliseconds is an empirical value,
+                // as long as it is within 300 milliseconds of the stack page rendering.
+                await Task.Delay(48);
+
+                if (!IsDisposed)
+                {
+                    _emitUnderlaySlide = true;
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                Console.Error.WriteLine($"Error in BlockScroll: {ex}");
+            }
         });
         
         _module?.InvokeVoidAsync("blockScroll").ConfigureAwait(false);
